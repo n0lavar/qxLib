@@ -1,0 +1,54 @@
+//============================================================================
+//
+//!\file                            rbo.h
+//
+//!\brief       Contains rbo class
+//!\details     ~
+//
+//!\author      Khrapov
+//!\date        20.01.2020
+//!\copyright   (c) Nick Khrapov, 2020. All right reserved.
+//
+//============================================================================
+#pragma once
+
+#include <iBuffer.h>
+#include <typedefs.h>
+
+namespace qx::gl
+{
+
+//============================================================================
+//
+//!\class                            rbo
+//
+//!\brief   Render buffer object class
+//!\details ~
+//
+//!\author  Khrapov
+//!\date    20.01.2020
+//
+//============================================================================
+class rbo : iBuffer
+{
+public:
+            rbo                     (void) { }
+
+    void    Init                    (GLsizei    nWidth,
+                                     GLsizei    nHeight);
+
+    virtual void    Generate        (void)          override;
+    virtual void    Delete          (void)          override;
+    virtual void    Bind            (void) const    override;
+    virtual void    Unbind          (void) const    override;
+    virtual GLuint  GetBufferName   (void) const    override;
+
+private:
+    GLuint m_nBuffer = UINT_EMPTY_VALUE;
+};
+
+inline GLuint rbo::GetBufferName(void) const { return m_nBuffer; }
+
+}
+
+#include <rbo.inl>
