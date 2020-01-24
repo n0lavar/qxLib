@@ -13,13 +13,16 @@
 #pragma once
 #include <logger.h>
 
-#if ENABLE_ASSERTS
+#if ENABLE_DEBUG_BREAK
 
     #if defined(_WIN32)
         #define DEBUG_BREAK __debugbreak()
     #elif defined(_LINUX)
         #define DEBUG_BREAK if (detect_debugger() == 1) raise(SIGTRAP)
     #elif defined(ANDROID)
+        #define DEBUG_BREAK assert(0)
+    #else
+        #define DEBUG_BREAK EMPTY_MACRO
     #endif
 
 #else
@@ -28,21 +31,29 @@
 
 #endif
 
+#if ENABLE_ASSERTS
 
-#define ASSERT(statement)                                   \
-do {                                                        \
-    if (!(statement))                                       \
-    {                                                       \
-        _TR_ASSERT(STRINGIFY(statement), "");               \
-        DEBUG_BREAK;                                        \
-    }                                                       \
-} while (false)
+    #define ASSERT(statement)                                   \
+    do {                                                        \
+        if (!(statement))                                       \
+        {                                                       \
+            _TR_ASSERT(STRINGIFY(statement), "");               \
+            DEBUG_BREAK;                                        \
+        }                                                       \
+    } while (false)
 
-#define ASSERT_MSG(statement, msg, ...)                     \
-do {                                                        \
-    if (!(statement))                                       \
-    {                                                       \
-        _TR_ASSERT(STRINGIFY(statement), msg, __VA_ARGS__); \
-        DEBUG_BREAK;                                        \
-    }                                                       \
-} while (false)
+    #define ASSERT_MSG(statement, msg, ...)                     \
+    do {                                                        \
+        if (!(statement))                                       \
+        {                                                       \
+            _TR_ASSERT(STRINGIFY(statement), msg, __VA_ARGS__); \
+            DEBUG_BREAK;                                        \
+        }                                                       \
+    } while (false)
+
+#else
+
+    #define ASSERT      EMPTY_MACRO
+    #define ASSERT_MSG  EMPTY_MACRO
+
+#endif

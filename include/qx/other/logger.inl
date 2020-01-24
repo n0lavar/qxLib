@@ -29,13 +29,13 @@ namespace qx
 //!\date   10.01.2020
 //==============================================================================
 template<class ... Args>
-inline void logger::ProcessOutput(LogLevel    eLogLevel,
-                                   cstr        pszFormat, 
-                                   cstr        pszTime, 
-                                   cstr        pszFile, 
-                                   cstr        pszFunction,
-                                   int         nLine, 
-                                   Args...     args)
+inline void logger::ProcessOutput(level    eLogLevel,
+                                  cstr     pszFormat, 
+                                  cstr     pszTime, 
+                                  cstr     pszFile, 
+                                  cstr     pszFunction,
+                                  int      nLine, 
+                                  Args...  args)
 {
     TraceUnitInfo* pUnitInfo = nullptr;
     if (auto it = m_RegisteredUnits.find(pszFunction); it != m_RegisteredUnits.cend())
@@ -93,9 +93,9 @@ inline void logger::ProcessOutput(LogLevel    eLogLevel,
             const char* pszColor = nullptr;
             switch (eLogLevel)
             {
-            case LogLevel::all:     pszColor = ANSI_COLOR_RESET;    break;
-            case LogLevel::errors:  pszColor = ANSI_COLOR_YELLOW;   break;
-            case LogLevel::asserts: pszColor = ANSI_COLOR_RED;      break;
+            case level::all:     pszColor = ANSI_COLOR_RESET;    break;
+            case level::errors:  pszColor = ANSI_COLOR_YELLOW;   break;
+            case level::asserts: pszColor = ANSI_COLOR_RED;      break;
             }
 
             OutputToConsole(sMsg, pszColor);
@@ -115,7 +115,7 @@ inline void logger::ProcessOutput(LogLevel    eLogLevel,
 //==============================================================================
 inline void logger::RegisterUnit(cstr pszUnitName, const TraceUnitInfo& unit)
 {
-    if (m_eLogPolicy == LogPolicy::clear_then_uppend)
+    if (m_eLogPolicy == policy::clear_then_uppend)
         std::ofstream ofs(unit.sLogFileName, std::ofstream::out | std::ofstream::trunc); //-V808
                                                                                          // clear file
     if(!unit.sLogFileName.empty())
@@ -142,7 +142,7 @@ inline void logger::DeregisterUnit(cstr pszUnitName)
 //!\author Khrapov
 //!\date   11.01.2020
 //==============================================================================
-inline void logger::SetLogPolicy(LogPolicy eLogPolicy)
+inline void logger::SetLogPolicy(policy eLogPolicy)
 {
     m_eLogPolicy = eLogPolicy;
 }
@@ -192,12 +192,12 @@ inline void logger::OutputToFile(const qx::string& sText, const qx::string& sFil
 
         switch (m_eLogPolicy)
         {
-        case LogPolicy::folder_time:
+        case policy::folder_time:
             sPath = "logs/" + m_sSessionTime;
             break;
 
-        case LogPolicy::append:
-        case LogPolicy::clear_then_uppend:
+        case policy::append:
+        case policy::clear_then_uppend:
         default:
             sPath = "logs/";
             break;
@@ -241,7 +241,7 @@ inline void logger::OutputToConsole(const qx::string& sText, cstr pszAnsiiColor)
 //==============================================================================
 inline void logger::OnCreate(void)
 {
-    RegisterUnit("default", { "log.txt", LogLevel::all, LogLevel::all });
+    RegisterUnit("default", { "log.txt", level::all, level::all });
 }
 
 //==============================================================================

@@ -90,20 +90,6 @@ size_t object_pool<T>::Emplace(Args&&... args)
 }
 
 //============================================================================
-//!\fn                     object_pool<T>::Get
-//
-//!\brief  Get object by given id
-//!\param  id - object's id
-//!\author Khrapov
-//!\date   7.08.2019
-//============================================================================
-template<class T>
-T & object_pool<T>::Get(size_t id)
-{
-    return m_Pool[m_Indexes[id]];
-}
-
-//============================================================================
 //!\fn                      object_pool<T>::Delete
 //
 //!\brief  Delete element by given id
@@ -159,7 +145,8 @@ void object_pool<T>::clear(void)
     m_Pool      .clear();
     m_Indexes   .clear();
     m_Ids       .clear();
-    m_nFirstFreeObjInd = 0;
+    m_nFirstFreeObjInd  = 0;
+    m_nIncreaceSizeStep = 0;
 }
 
 //============================================================================
@@ -170,35 +157,9 @@ void object_pool<T>::clear(void)
 //!\date   27.07.2019
 //============================================================================
 template<class T>
-size_t object_pool<T>::size(void)
+size_t object_pool<T>::size(void) const
 {
     return m_nFirstFreeObjInd;
-}
-
-//============================================================================
-//!\fn                      object_pool<T>::begin
-//
-//!\brief  Get begin iterator
-//!\author Khrapov
-//!\date   27.07.2019
-//============================================================================
-template <class T>
-object_pool<T>::iterator<T> object_pool<T>::begin()
-{
-    return iterator<T>(&m_Pool, 0);
-}
-
-//============================================================================
-//!\fn                       object_pool<T>::end
-//
-//!\brief  Get end iterator
-//!\author Khrapov
-//!\date   27.07.2019
-//============================================================================
-template <class T>
-object_pool<T>::iterator<T> object_pool<T>::end()
-{
-    return iterator<T>(&m_Pool, size());
 }
 
 //============================================================================
@@ -220,6 +181,33 @@ size_t object_pool<T>::GetId(size_t ind)
     }
     ASSERT(0);
     return -1;
+}
+
+//============================================================================
+//!\fn                     object_pool<T>::data
+//
+//!\brief  Stub method, non-trivial container
+//!\author Khrapov
+//!\date   24.01.2020
+//============================================================================
+template<class T>
+typename object_pool<T>::pointer object_pool<T>::data(void)
+{
+    return nullptr;
+}
+
+//============================================================================
+//!\fn                     object_pool<T>::operator[]
+//
+//!\brief  Get object by given id
+//!\param  id - object's id
+//!\author Khrapov
+//!\date   7.08.2019
+//============================================================================
+template<class T>
+typename object_pool<T>::reference object_pool<T>::operator[](size_type  ind)                                                    \
+{
+    return m_Pool[m_Indexes[ind]];
 }
 
 }

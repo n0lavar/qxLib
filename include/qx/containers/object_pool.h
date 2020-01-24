@@ -11,7 +11,7 @@
 //
 //============================================================================
 #pragma once
-#include <iterator.h>
+#include <container.h>
 #include <vector>
 
 namespace qx
@@ -40,7 +40,17 @@ namespace qx
 template <class T>
 class object_pool
 {
-    template <class T> using iterator = iterator<std::vector<T>, T>;
+public:
+
+    using value_type        = typename T;
+    using pointer           = typename T*;
+    using const_pointer     = typename const T*;
+    using reference         = typename T&;
+    using const_reference   = typename const T&;
+    using difference_type   = typename std::ptrdiff_t;
+    using size_type         = typename size_t;
+
+    IMPL_CONTAINER(object_pool)
 
 public:
                                 object_pool (size_t                 startSize   = 0,
@@ -48,14 +58,8 @@ public:
 
     template<class ... Args>
     size_t                      Emplace     (Args&&...              args);
-    T                         & Get         (size_t                 id);
     void                        Delete      (size_t                 id);
     const std::vector<size_t> & GetIdsArray (void);
-
-    void                        clear       (void);
-    size_t                      size        (void);
-    iterator<T>                 begin       (void);
-    iterator<T>                 end         (void);
 
 private:
     size_t                      GetId       (size_t ind);

@@ -39,9 +39,9 @@ constexpr cstr ANSI_COLOR_MAGENTA_BOLD     = "\033[1;35m";
 constexpr cstr ANSI_COLOR_CYAN             = "\033[0;36m";
 constexpr cstr ANSI_COLOR_CYAN_BOLD        = "\033[1;36m";
 
-#define TRACE(format, ...)            qx::logger::getInstance().ProcessOutput(qx::logger::LogLevel::all,     "[I][%s][%s::%s(%d)] "           format " \n", qx::logger::getInstance().GetTimeStr(), __SHORT_FILE__, __FUNCTION__, __LINE__, __VA_ARGS__)
-#define TR_ERROR(format, ...)         qx::logger::getInstance().ProcessOutput(qx::logger::LogLevel::errors,  "[E][%s][%s::%s(%d)] "           format " \n", qx::logger::getInstance().GetTimeStr(), __SHORT_FILE__, __FUNCTION__, __LINE__, __VA_ARGS__)
-#define _TR_ASSERT(expr, format, ...) qx::logger::getInstance().ProcessOutput(qx::logger::LogLevel::asserts, "[A][%s][%s::%s(%d)][" expr "] " format " \n", qx::logger::getInstance().GetTimeStr(), __SHORT_FILE__, __FUNCTION__, __LINE__, __VA_ARGS__)
+#define TRACE(format, ...)            qx::logger::getInstance().ProcessOutput(qx::logger::level::all,     "[I][%s][%s::%s(%d)] "           format " \n", qx::logger::getInstance().GetTimeStr(), __SHORT_FILE__, __FUNCTION__, __LINE__, __VA_ARGS__)
+#define TR_ERROR(format, ...)         qx::logger::getInstance().ProcessOutput(qx::logger::level::errors,  "[E][%s][%s::%s(%d)] "           format " \n", qx::logger::getInstance().GetTimeStr(), __SHORT_FILE__, __FUNCTION__, __LINE__, __VA_ARGS__)
+#define _TR_ASSERT(expr, format, ...) qx::logger::getInstance().ProcessOutput(qx::logger::level::asserts, "[A][%s][%s::%s(%d)][" expr "] " format " \n", qx::logger::getInstance().GetTimeStr(), __SHORT_FILE__, __FUNCTION__, __LINE__, __VA_ARGS__)
 
 //==============================================================================
 //
@@ -67,7 +67,7 @@ class logger
 public:
 
     //!< Log files policy
-    enum class LogPolicy
+    enum class policy
     {
         first = 0,
         append,             //!< append all
@@ -77,7 +77,7 @@ public:
     };
 
     //!< Log level
-    enum class LogLevel
+    enum class level
     {
         first = 0,
         all,        // TRACE + TR_ERROR + _TR_ASSERT
@@ -95,18 +95,17 @@ public:
     //==============================================================================
     struct TraceUnitInfo
     {
-        string      sLogFileName;
-        LogLevel    eConsoleLevel   = LogLevel::all;
-        LogLevel    eFileLevel      = LogLevel::all;
+        string  sLogFileName;
+        level   eConsoleLevel   = level::all;
+        level   eFileLevel      = level::all;
     };
 
     using TraceUnitInfoMap = std::unordered_map<string, TraceUnitInfo>;
 
 public:
 
-
     template<class ... Args>
-    void ProcessOutput      (LogLevel               eLogLevel,
+    void ProcessOutput      (level                  eLogLevel,
                              cstr                   pszFormat,
                              cstr                   pszTime,
                              cstr                   pszFile,
@@ -118,11 +117,12 @@ public:
                              const TraceUnitInfo  & unit);
     void DeregisterUnit     (cstr                   pszUnitName);
 
-    void SetLogPolicy       (LogPolicy              eLogPolicy);
+    void SetLogPolicy       (policy                 eLogPolicy);
 
     cstr GetTimeStr         (void);
 
 private:
+
     void OutputToFile       (const qx::string     & sText,
                              const qx::string     & sFileName);
     void OutputToConsole    (const qx::string     & sText,
@@ -132,7 +132,8 @@ private:
     void OnTerminate        (void);
 
 private:
-    LogPolicy           m_eLogPolicy        = LogPolicy::append;
+
+    policy              m_eLogPolicy        = policy::append;
     string              m_sSessionTime      = string(GetTimeStr()) + "/";
     TraceUnitInfoMap    m_RegisteredUnits;
 };

@@ -98,6 +98,7 @@ class basic_string
     using vector = std::vector<basic_string>;
 
 public:
+
     using value_type        = typename Traits::value_type;
     using pointer           = typename Traits::pointer;
     using const_pointer     = typename Traits::const_pointer;

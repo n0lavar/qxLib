@@ -32,8 +32,8 @@ namespace qx::gl
 class ubo : public buffer_base
 {
 public:
-            ubo            (void) { }
-            ubo            (GLsizeiptr szUBO,
+            ubo             (void) { }
+            ubo             (GLsizeiptr szUBO,
                              GLuint     nBindingPoint);
     void    Init            (GLsizeiptr szUBO,
                              GLuint     nBindingPoint);
