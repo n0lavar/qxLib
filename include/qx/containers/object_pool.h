@@ -42,13 +42,13 @@ class object_pool
 {
 public:
 
-    using value_type        = typename T;
-    using pointer           = typename T*;
-    using const_pointer     = typename const T*;
-    using reference         = typename T&;
-    using const_reference   = typename const T&;
-    using difference_type   = typename std::ptrdiff_t;
-    using size_type         = typename size_t;
+    using value_type        = T;
+    using pointer           = T*;
+    using const_pointer     = const T*;
+    using reference         = T&;
+    using const_reference   = const T&;
+    using difference_type   = std::ptrdiff_t;
+    using size_type         = size_t;
 
     IMPL_CONTAINER(object_pool)
 

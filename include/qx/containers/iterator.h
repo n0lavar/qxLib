@@ -22,7 +22,7 @@ namespace qx
 //
 //!\brief   Iterator type
 //!\details Use it for range-based loops and std algorithms
-//          C have to provide operator[] and size_type
+//          C have to provide operator[]
 //
 //!\author  Khrapov
 //!\date    27.07.2019
@@ -35,7 +35,7 @@ class iterator
     using pointer           = T*;
     using reference         = T&;
     using difference_type   = std::ptrdiff_t;
-    using size_type         = typename C::size_type;
+    using size_type         = std::size_t;
 
 public:
                     iterator   (void)              :   m_pCollection(nullptr), m_nIndex(0) { }

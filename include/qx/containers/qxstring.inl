@@ -432,7 +432,9 @@ basic_string<T, Traits> basic_string<T, Traits>::substr(size_type begin, size_ty
 //!\date   30.10.2019
 //============================================================================
 template<typename T, class Traits>
-typename basic_string<T, Traits>::size_type basic_string<T, Traits>::find_last_of(value_type ch, size_type pos, size_type count) const
+typename basic_string<T, Traits>::size_type basic_string<T, Traits>::find_last_of(value_type ch, 
+                                                                                  size_type  pos, 
+                                                                                  size_type  count) const
 {
     if (pos == npos)
         pos = size();
@@ -480,7 +482,8 @@ std::vector<basic_string<T, Traits>> qx::basic_string<T, Traits>::split(const ba
 //!\date   30.10.2019
 //============================================================================
 template<typename T, class Traits>
-std::vector<basic_string<T, Traits>> qx::basic_string<T, Traits>::split(const basic_string & text, const basic_string & sep)
+std::vector<basic_string<T, Traits>> qx::basic_string<T, Traits>::split(const basic_string & text, 
+                                                                        const basic_string & sep)
 {
     return text.split(sep);
 }
@@ -531,17 +534,17 @@ void basic_string<T, Traits>::apply_case(eCaseType ct)
 {
     switch (ct) //-V719
     {
-    case qx::E_CT_LOWER:
+    case eCaseType::lower:
         std::for_each(begin(), end(), [] (value_type& ch) { ch = Traits::ttolower(ch); });
         break;
 
-    case qx::E_CT_UPPER:
+    case eCaseType::upper:
         std::for_each(begin(), end(), [] (value_type& ch) { ch = Traits::ttoupper(ch); });
         break;
 
-    case qx::E_CT_ALL_CAPITALIZED:
-    case qx::E_CT_SENTENCE:
-    case qx::E_CT_RANDOM:
+    case eCaseType::all_capitalized:
+    case eCaseType::sentence:
+    case eCaseType::random:
         ASSERT(0);  // write code
         break;
     }

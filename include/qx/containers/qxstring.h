@@ -72,14 +72,14 @@ struct char_traits<char>
 };
 
 //!< case types for .apply_case()
-enum eCaseType
+enum class eCaseType
 {
-    E_CT_ORIGINAL = 0,
-    E_CT_LOWER,
-    E_CT_UPPER,
-    E_CT_ALL_CAPITALIZED,
-    E_CT_SENTENCE,
-    E_CT_RANDOM
+    original = 0,
+    lower,
+    upper,
+    all_capitalized,
+    sentence,
+    random
 };
 
 //============================================================================
