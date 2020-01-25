@@ -80,9 +80,9 @@ public:
     enum class level
     {
         first = 0,
-        all,        // TRACE + TR_ERROR + _TR_ASSERT
-        errors,     // TRACE + TR_ERROR
-        asserts,    // TRACE
+        all,        // _TR_ASSERT + TR_ERROR + TRACE
+        errors,     // _TR_ASSERT + TR_ERROR
+        asserts,    // _TR_ASSERT
         none,       // disable
         last
     };
