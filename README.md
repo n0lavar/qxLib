@@ -39,6 +39,13 @@ Dependencies:
   + _useful_funcs_. 
   + _useful_macros_. 
   
+## Todos:
+  + tests
+  + basic algorithms
+  + basic data structures
+  + renderer: interface, scene node, scene graph, cullings
+  + Protected value: defence from cheat engine, artmoney etc
+  
 ## License
 
 qxLib is available under the GNU General Public License v3.0. See LICENSE.txt.
@@ -46,5 +53,5 @@ qxLib is available under the GNU General Public License v3.0. See LICENSE.txt.
 
 ## Authors
 
-Libosmium was mainly written and is maintained by Nick Khrapov
+qxLib was mainly written and is maintained by Nick Khrapov
 (nick.khrapov@gmail.com). See the git commit log for other authors.
