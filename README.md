@@ -45,6 +45,7 @@ Dependencies:
   + basic data structures
   + renderer: interface, scene node, scene graph, cullings
   + Protected value: defence from cheat engine, artmoney etc
+  + gl classes improvements
   
 ## License
 
