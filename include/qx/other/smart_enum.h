@@ -4,8 +4,7 @@
 //
 //!\brief       Smart enum macro definition
 //!\details     Smart macro allows you to use ToString(), FromString() and increment
-//              functions. "namespace name" is used to make possible
-//              same names of enum values in one scope.
+//              functions. 
 //              Note that the numbering of objects begins with first_elem + 1
 //
 //!\author      Khrapov
@@ -20,37 +19,35 @@
 #include <qxstring.h>
 
 #define SMART_ENUM(name, first_elem, ...)                                                                               \
-    namespace name                                                                                                      \
+    enum class name                                                                                                     \
     {                                                                                                                   \
-        enum name##_t                                                                                                   \
-        {                                                                                                               \
-            first      = first_elem,                                                                                    \
-            defaut_val = first,                                                                                         \
-            __VA_ARGS__,                                                                                                \
-            last                                                                                                        \
-        };                                                                                                              \
-    }                                                                                                                   \
+        none = first_elem - 1,                                                                                          \
+        first,                                                                                                          \
+        __VA_ARGS__,                                                                                                    \
+        last,                                                                                                           \
+        count = last,                                                                                                   \
+    };                                                                                                                  \
                                                                                                                         \
-    const char* ToString(name::name##_t value, cstr defaultStr = "default");                                            \
+    const char* ToString(name value, cstr defaultStr = "default");                                                      \
     namespace smart_enum_detail                                                                                         \
     {                                                                                                                   \
         static const std::vector<qx::string> name##ToStringMap = qx::string::split(qx::string(#__VA_ARGS__), ',');      \
-        inline std::unordered_map<qx::string, name::name##_t> name##ToFromStringMap()                                   \
+        inline std::unordered_map<qx::string, name> name##ToFromStringMap()                                             \
         {                                                                                                               \
-            std::vector<name::name##_t> args;                                                                           \
-            for (int i = name::first + 1; i < name::last; i++)                                                          \
-                args.push_back(static_cast<name::name##_t>(i));                                                         \
+            std::vector<name> args;                                                                                     \
+            for (int i = static_cast<int>(name::first) + 1; i < static_cast<int>(name::last); i++)                      \
+                args.push_back(static_cast<name>(i));                                                                   \
                                                                                                                         \
-            std::unordered_map<qx::string, name::name##_t> m;                                                           \
+            std::unordered_map<qx::string, name> m;                                                                     \
             for(size_t i = 0; i < args.size(); i++)                                                                     \
                 m[ToString(args[i])] = args[i];                                                                         \
                                                                                                                         \
             return m;                                                                                                   \
         };                                                                                                              \
-        static const std::unordered_map<qx::string, name::name##_t> name##FromStringMap = name##ToFromStringMap();      \
+        static const std::unordered_map<qx::string, name> name##FromStringMap = name##ToFromStringMap();                \
     }                                                                                                                   \
                                                                                                                         \
-    inline const char* ToString(name::name##_t value, cstr defaultStr)                                                  \
+    inline const char* ToString(name value, cstr defaultStr)                                                            \
     {                                                                                                                   \
         size_t ind = static_cast<size_t>(value) - static_cast<size_t>(name::first) - 1u;                                \
         return ind < smart_enum_detail::name##ToStringMap.size()                                                        \
@@ -58,7 +55,7 @@
             : defaultStr;                                                                                               \
     };                                                                                                                  \
                                                                                                                         \
-    inline name::name##_t FromString(cstr value, name::name##_t defaultValue = name::name##_t::defaut_val)              \
+    inline name FromString(cstr value, name defaultValue = name::none)                                                  \
     {                                                                                                                   \
         auto   it  = smart_enum_detail::name##FromStringMap.find(qx::string(value));                                    \
         return it == smart_enum_detail::name##FromStringMap.end() ? defaultValue : it->second;                          \
@@ -68,16 +65,16 @@
     /* note that these operators are defined in enum scope */                                                           \
                                                                                                                         \
     /* postfix */                                                                                                       \
-    inline name::name##_t operator++ (name::name##_t & d)                                                               \
+    inline name operator++ (name & d)                                                                                   \
     {                                                                                                                   \
-        d = static_cast<name::name##_t>((static_cast<int>(d) + 1) % (name::last + 1));                                  \
+        d = static_cast<name>((static_cast<int>(d) + 1) % (static_cast<int>(name::last) + 1));                          \
         return d;                                                                                                       \
     }                                                                                                                   \
                                                                                                                         \
     /* prefix */                                                                                                        \
-    inline name::name##_t operator++ (name::name##_t & d, int)                                                          \
+    inline name operator++ (name & d, int)                                                                              \
     {                                                                                                                   \
-        name::name##_t tmp(d);                                                                                          \
+        name tmp(d);                                                                                                    \
         ++d;                                                                                                            \
         return tmp;                                                                                                     \
     }
