@@ -31,7 +31,7 @@ namespace qx::gl
 class ssbo : public buffer_base
 {
 public:
-                        ssbo            (void) { }
+                        ssbo            (void) = default;
                         ssbo            (GLuint             nBindingPoint, 
                                          GLsizeiptr         nSize, 
                                          const void       * pData = NULL);

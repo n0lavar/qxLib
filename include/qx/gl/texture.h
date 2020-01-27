@@ -32,7 +32,7 @@ namespace qx::gl
 class texture : iBuffer
 {
 public:
-                    texture         (void) { };
+                    texture         (void) = default;
             void    Init            (GLenum         target,
                                      GLint          level,
                                      GLint          internalformat,

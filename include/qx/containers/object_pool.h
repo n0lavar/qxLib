@@ -53,6 +53,7 @@ public:
     IMPL_CONTAINER(object_pool)
 
 public:
+                                object_pool (void) = default;
                                 object_pool (size_t                 startSize   = 0,
                                              size_t                 incSize     = 10);
 

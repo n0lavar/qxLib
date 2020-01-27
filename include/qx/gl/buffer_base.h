@@ -33,7 +33,7 @@ namespace qx::gl
 class buffer_base : iBuffer
 {
 public:
-                        buffer_base         (void) { }
+                        buffer_base         (void) = default;
     virtual             ~buffer_base        (void);
     virtual void        Generate            (void)          override;
     virtual void        Delete              (void)          override;

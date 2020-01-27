@@ -36,7 +36,7 @@ namespace qx::gl
 class fbo : iBuffer
 {
 public:
-                    fbo             (void) { }
+                    fbo             (void) = default;
 
             void    Init            (const GLchar    * pszVertShaderCode,
                                      const GLchar    * pszFragShaderCode,

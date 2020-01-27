@@ -41,7 +41,7 @@ template<typename T>
 class ssbo_arrayed : protected ssbo
 {
 public:
-            ssbo_arrayed    (void) { }
+            ssbo_arrayed    (void) = default;
             ssbo_arrayed    (GLuint             nBindingPoint,
                              size_t             nMaxObjects);
 

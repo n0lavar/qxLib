@@ -112,7 +112,7 @@ public:
     IMPL_CONTAINER(basic_string)
 
 public:
-                            basic_string (void) { }
+                            basic_string (void) = default;
                             basic_string (const_pointer          pSource,
                                           size_type              nSymbols);
                             basic_string (basic_string        && str)    noexcept { std::swap(m_pData, str.m_pData);                            };

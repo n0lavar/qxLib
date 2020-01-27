@@ -32,7 +32,7 @@ namespace qx::gl
 class rbo : iBuffer
 {
 public:
-            rbo                     (void) { }
+            rbo                     (void) = default;
 
     void    Init                    (GLsizei    nWidth,
                                      GLsizei    nHeight);

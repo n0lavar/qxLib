@@ -53,7 +53,7 @@
 
 #else
 
-    #define ASSERT      EMPTY_MACRO
-    #define ASSERT_MSG  EMPTY_MACRO
+    #define ASSERT(statement)       EMPTY_MACRO
+    #define ASSERT_MSG(statement)   EMPTY_MACRO
 
 #endif

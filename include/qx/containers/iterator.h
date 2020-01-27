@@ -38,8 +38,8 @@ class iterator
     using size_type         = std::size_t;
 
 public:
-                    iterator   (void)              :   m_pCollection(nullptr), m_nIndex(0) { }
-                    iterator   (C* c, size_type i) :   m_pCollection(c),       m_nIndex(i) { }
+                    iterator   (void) = default;
+                    iterator   (C* c, size_type i) : m_pCollection(c), m_nIndex(i) { }
 
     // Default Copy/Move are fine.
     // Default Destructor is fine.
@@ -76,8 +76,8 @@ public:
     bool            operator==  (const iterator & r)    const   { return m_nIndex == r.m_nIndex;            }
 
 private:
-    size_type       m_nIndex;
-    C             * m_pCollection;
+    size_type       m_nIndex        = 0u;
+    C             * m_pCollection   = nullptr;
 };
 
 }

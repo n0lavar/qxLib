@@ -32,7 +32,7 @@ namespace qx::gl
 class vao : iBuffer
 {
 public:
-                    vao                     (void) { }
+                    vao                     (void) = default;
                     ~vao                    (void);
 
     virtual void    Generate                (void)          override;

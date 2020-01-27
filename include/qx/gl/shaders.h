@@ -14,7 +14,6 @@
 
 #include <glew.h>
 #include <noncopyble.h>
-#include <typedefs.h>
 #include <useful_macros.h>
 
 namespace qx::gl
@@ -33,6 +32,7 @@ namespace qx::gl
 class shader_base : noncopyble
 {
 public:
+                    shader_base     (void) = default;
                     shader_base     (const GLchar * pszShaderCode,
                                      GLenum         eShaderType);
     virtual        ~shader_base     (void);
