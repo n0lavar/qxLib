@@ -14,7 +14,7 @@
 //============================================================================
 #pragma once
 
-#include <vector>
+#include <optional>
 #include <unordered_map>
 #include <qxstring.h>
 
@@ -28,10 +28,14 @@
         count = last,                                                                                                   \
     };                                                                                                                  \
                                                                                                                         \
-    const char* ToString(name value, cstr defaultStr = "default");                                                      \
+    std::optional<const char*> ToString(name value);                                                                    \
+                                                                                                                        \
+    template<typename T>                                                                                                \
+    std::optional<T> FromString(cstr value);                                                                            \
+                                                                                                                        \
     namespace smart_enum_detail                                                                                         \
     {                                                                                                                   \
-        static const std::vector<qx::string> name##ToStringMap = qx::string::split(qx::string(#__VA_ARGS__), ',');      \
+        static const std::vector<qx::string> name##ToStringMap = qx::string::split(qx::string(#__VA_ARGS__), ", ");     \
         inline std::unordered_map<qx::string, name> name##ToFromStringMap()                                             \
         {                                                                                                               \
             std::vector<name> args;                                                                                     \
@@ -40,25 +44,28 @@
                                                                                                                         \
             std::unordered_map<qx::string, name> m;                                                                     \
             for(size_t i = 0; i < args.size(); i++)                                                                     \
-                m[ToString(args[i])] = args[i];                                                                         \
+                m[ToString(args[i]).value()] = args[i];                                                                 \
                                                                                                                         \
             return m;                                                                                                   \
         };                                                                                                              \
         static const std::unordered_map<qx::string, name> name##FromStringMap = name##ToFromStringMap();                \
     }                                                                                                                   \
                                                                                                                         \
-    inline const char* ToString(name value, cstr defaultStr)                                                            \
+    inline std::optional<const char*> ToString(name value)                                                              \
     {                                                                                                                   \
         size_t ind = static_cast<size_t>(value) - static_cast<size_t>(name::first) - 1u;                                \
         return ind < smart_enum_detail::name##ToStringMap.size()                                                        \
-            ? smart_enum_detail::name##ToStringMap[ind].data()                                                          \
-            : defaultStr;                                                                                               \
+            ? std::optional<const char*>(smart_enum_detail::name##ToStringMap[ind].data())                              \
+            : std::nullopt;                                                                                             \
     };                                                                                                                  \
                                                                                                                         \
-    inline name FromString(cstr value, name defaultValue = name::none)                                                  \
+    template<>                                                                                                          \
+    inline std::optional<name> FromString(cstr value)                                                                   \
     {                                                                                                                   \
         auto   it  = smart_enum_detail::name##FromStringMap.find(qx::string(value));                                    \
-        return it == smart_enum_detail::name##FromStringMap.end() ? defaultValue : it->second;                          \
+        return it != smart_enum_detail::name##FromStringMap.end()                                                       \
+            ? std::optional<name>(it->second)                                                                           \
+            : std::nullopt;                                                                                             \
     }                                                                                                                   \
                                                                                                                         \
     /* also returns "last" value as end flag */                                                                         \
