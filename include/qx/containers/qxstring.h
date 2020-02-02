@@ -13,6 +13,7 @@
 #pragma once
 
 #include <functional>
+#include <array>
 #include <vector>
 #include <cctype>
 #include <cstring>
