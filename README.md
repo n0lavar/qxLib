@@ -41,6 +41,10 @@ Dependencies:
   + _functional_ functional algorithms
     + _linear_interpolation_
     + _bilinear_inletpolation_
+    + _integrate_rectangle_rule_
+    + _integrate_trapezoid_rule_
+    + _integrate_adaptive_midpoint_
+    + _integrate_monte_carlo_
   
 + __other__. 
   + _asserter_. Multiplatform ASSERT() and ASSERT_MSG() macros.
