@@ -545,7 +545,7 @@ void basic_string<T, Traits>::apply_case(eCaseType ct)
     case eCaseType::all_capitalized:
     case eCaseType::sentence:
     case eCaseType::random:
-        ASSERT(0);  // write code
+        //ASSERT(0);  // write code
         break;
     }
 }
@@ -808,7 +808,7 @@ const SStrData<Traits>* basic_string<T, Traits>::GetStrData(void) const
 template<typename T, class Traits>
 bool basic_string<T, Traits>::Resize(size_type nSymbols, size_type nAlign, bool bReserve)
 {
-    Traits::size_type nSizeToAllocate = nAlign
+    typename Traits::size_type nSizeToAllocate = nAlign
         ? AlignSize<Traits>(nSymbols + 1, nAlign)
         : nSymbols + 1;
 

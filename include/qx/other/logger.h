@@ -12,15 +12,16 @@
 //============================================================================
 #pragma once
 
-#include <singleton.h>
-#include <qxstring.h>
-#include <useful_macros.h>
-#include <useful_funcs.h>
+#include <qx/other/singleton.h>
+#include <qx/containers/qxstring.h>
+#include <qx/other/useful_macros.h>
+#include <qx/other/typedefs.h>
 
 #include <ctime>
 #include <fstream>
 #include <iostream>
 #include <filesystem>
+#include <unordered_map>
 
 namespace qx
 {
@@ -140,4 +141,4 @@ private:
 
 }
 
-#include <logger.inl>
+#include <qx/other/logger.inl>

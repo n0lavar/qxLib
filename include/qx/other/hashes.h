@@ -11,7 +11,7 @@
 //
 //============================================================================
 #pragma once
-#include <typedefs.h>
+#include <qx/other/typedefs.h>
 #include <cstring>
 
 namespace qx::hash
@@ -22,4 +22,4 @@ namespace qx::hash
     }
 }
 
-#include <hashes.inl>
+#include <qx/other/hashes.inl>

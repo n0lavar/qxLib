@@ -24,7 +24,7 @@ namespace qx
 //!\date   27.07.2019
 //============================================================================
 template<class T>
-object_pool<T>::object_pool(size_t startSize, size_t incSize)
+object_pool<T>::object_pool(size_type startSize, size_type incSize)
               : m_nIncreaceSizeStep(incSize)
 {
     m_Pool      .resize(startSize);
@@ -36,8 +36,7 @@ object_pool<T>::object_pool(size_t startSize, size_t incSize)
 //!\fn              object_pool<T>::Emplace<...Args>
 //
 //!\brief    Add element to the pool
-//!\details  due to the fact that OGL calls occur in the RenderComponent
-//           object's destructor, we need to avoid this call by simply
+//!\details  we need to avoid destructor call by simply
 //           replacing all arguments into the object.
 //           new(&m_Pool[m_nFirstFreeObjInd]) T(args...)    // no destructor call
 //           m_Pool[m_nFirstFreeObjInd] = T(args...);       // destructor call
@@ -49,9 +48,9 @@ object_pool<T>::object_pool(size_t startSize, size_t incSize)
 //============================================================================
 template<class T>
 template<class ... Args>
-size_t object_pool<T>::Emplace(Args&&... args)
+typename object_pool<T>::size_type object_pool<T>::Emplace(Args&&... args)
 {
-    size_t nFreeInd = UINT_EMPTY_VALUE;
+    size_type nFreeInd = UINT_EMPTY_VALUE;
 
     // checks pool border
     if (m_nFirstFreeObjInd < m_Pool.size())
@@ -59,7 +58,7 @@ size_t object_pool<T>::Emplace(Args&&... args)
         // find free index
         auto itFreeInd = std::find_if(m_Indexes.begin(),
                                       m_Indexes.end(),
-                                      [] (size_t val) { return val == UINT_EMPTY_VALUE; });
+                                      [] (size_type val) { return val == UINT_EMPTY_VALUE; });
 
         DCHECK (itFreeInd != m_Indexes.end())
         {
@@ -97,7 +96,7 @@ size_t object_pool<T>::Emplace(Args&&... args)
 //!\date   27.07.2019
 //============================================================================
 template<class T>
-void object_pool<T>::Delete(size_t id)
+void object_pool<T>::Delete(size_type id)
 {
     DCHECK(id < m_Indexes.size() && m_Indexes[id] != UINT_EMPTY_VALUE)
     {
@@ -127,7 +126,7 @@ void object_pool<T>::Delete(size_t id)
 //!\date   25.08.2019
 //============================================================================
 template<class T>
-const std::vector<size_t>& object_pool<T>::GetIdsArray(void)
+const std::vector<typename object_pool<T>::size_type>& object_pool<T>::GetIdsArray(void)
 {
     return m_Ids;
 }
@@ -157,7 +156,7 @@ void object_pool<T>::clear(void)
 //!\date   27.07.2019
 //============================================================================
 template<class T>
-size_t object_pool<T>::size(void) const
+typename object_pool<T>::size_type object_pool<T>::size(void) const
 {
     return m_nFirstFreeObjInd;
 }
@@ -170,9 +169,9 @@ size_t object_pool<T>::size(void) const
 //!\date   11.08.2019
 //============================================================================
 template<class T>
-size_t object_pool<T>::GetId(size_t ind)
+typename object_pool<T>::size_type object_pool<T>::GetId(size_type ind)
 {
-    for (size_t i = 0; i < m_Indexes.size(); i++)
+    for (size_type i = 0; i < m_Indexes.size(); i++)
     {
         if (m_Indexes[i] == ind)
         {

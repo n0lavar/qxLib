@@ -11,7 +11,7 @@
 //
 //============================================================================
 #pragma once
-#include <logger.h>
+#include <qx/other/logger.h>
 
 #if ENABLE_DEBUG_BREAK
 
@@ -53,7 +53,7 @@
 
 #else
 
-    #define ASSERT(statement)       EMPTY_MACRO
-    #define ASSERT_MSG(statement)   EMPTY_MACRO
+    #define ASSERT(statement)                   EMPTY_MACRO
+    #define ASSERT_MSG(statement, msg, ...)     EMPTY_MACRO
 
 #endif

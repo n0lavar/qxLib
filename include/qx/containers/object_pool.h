@@ -13,6 +13,7 @@
 #pragma once
 #include <container.h>
 #include <vector>
+#include <useful_macros.h>
 
 namespace qx
 {
@@ -53,25 +54,25 @@ public:
     IMPL_CONTAINER(object_pool)
 
 public:
-                                object_pool (void) = default;
-                                object_pool (size_t                 startSize   = 0,
-                                             size_t                 incSize     = 10);
+                                object_pool (void) { };
+                                object_pool (size_type              startSize   = 0,
+                                             size_type              incSize     = 10);
 
     template<class ... Args>
-    size_t                      Emplace     (Args&&...              args);
-    void                        Delete      (size_t                 id);
-    const std::vector<size_t> & GetIdsArray (void);
+    size_type                   Emplace     (Args&&...              args);
+    void                        Delete      (size_type              id);
+    const std::vector<size_type> & GetIdsArray (void);
 
 private:
-    size_t                      GetId       (size_t ind);
+    size_t                      GetId       (size_type              ind);
 
 private:
-    std::vector<T>      m_Pool;
-    std::vector<size_t> m_Indexes;
-    std::vector<size_t> m_Ids;
+    std::vector<T>          m_Pool;
+    std::vector<size_type>  m_Indexes;
+    std::vector<size_type>  m_Ids;
 
-    size_t              m_nFirstFreeObjInd  = 0;
-    size_t              m_nIncreaceSizeStep = 0;
+    size_type               m_nFirstFreeObjInd  = 0;
+    size_type               m_nIncreaceSizeStep = 0;
 };
 
 }

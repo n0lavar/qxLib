@@ -11,9 +11,11 @@
 //
 //============================================================================
 #pragma once
-#include <typedefs.h>
+
 #include <cstddef>
-#include <asserter.h>
+
+#include <qx/other/typedefs.h>
+#include <qx/other/asserter.h>
 
 /*
     Placeholder for disabled macros

@@ -12,9 +12,9 @@
 //============================================================================
 #pragma once
 
-#include <container.h>
-#include <hashes.h>
-#include <useful_funcs.h>
+#include <qx/containers/container.h>
+#include <qx/other/hashes.h>
+#include <qx/other/useful_funcs.h>
 
 #include <functional>
 #include <vector>
@@ -305,4 +305,4 @@ namespace std
     };
 }
 
-#include <qxstring.inl>
+#include <qx/containers/qxstring.inl>
