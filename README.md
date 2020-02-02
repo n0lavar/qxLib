@@ -44,6 +44,7 @@ Dependencies:
   
 + __other__. 
   + _asserter_. Multiplatform ASSERT() and ASSERT_MSG() macros.
+  + _benchmark_ Simple benchmark tool based on <chrono>
   + _hashes_. Hashes implementations.
   + _logger_. Logging system. Provides console and file output, enabling and disabling logging for custom files and functions.
   + _noncopyble_. Base class for noncopyble objects.
