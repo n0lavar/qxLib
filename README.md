@@ -3,6 +3,7 @@ OpenGL header-only support library for making your own engine
 
 Dependencies:
 + C++17
++ glm for gl module and some algorithms
 + glew if you want to use gl module
 
 ## Directories
@@ -27,6 +28,19 @@ Dependencies:
   + _shader_
   + _shader_program_
   + ...
+  
++ __agl__. Basic algorithms
+  + _numerical_ numerical algorithms
+    + _gcd_ Greatest common divisor
+    + _lcm_ Least common multiple
+    + _pow_ optimized power algorithm for integral powers (1.7-2.33 times faster then std::pow)
+    + _maxpot_ Max power of two in integer
+    + _find_prime_factors_ Find all prime factors of number
+    + _find_primes_ Find all primes between 2 and max_number
+    + _is_prime_ Is number prime with some probability
+  + _functional_ functional algorithms
+    + _linear_interpolation_
+    + _bilinear_inletpolation_
   
 + __other__. 
   + _asserter_. Multiplatform ASSERT() and ASSERT_MSG() macros.
