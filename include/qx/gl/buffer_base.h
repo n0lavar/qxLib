@@ -12,9 +12,9 @@
 //============================================================================
 #pragma once
 
-#include <iBuffer.h>
-#include <useful_macros.h>
-#include <typedefs.h>
+#include <qx/other/useful_macros.h>
+#include <qx/other/typedefs.h>
+#include <qx/gl/iBuffer.h>
 
 namespace qx::gl
 {
@@ -64,4 +64,4 @@ inline GLuint buffer_base::GetBufferName(void) const { return m_nBuffer; }
 
 }
 
-#include <buffer_base.inl>
+#include <qx/gl/buffer_base.inl>

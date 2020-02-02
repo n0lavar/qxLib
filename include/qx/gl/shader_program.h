@@ -14,12 +14,11 @@
 
 #include <glew.h>
 #include <gtc/type_ptr.hpp>
-#include <memory>
 #include <vector>
 
-#include <noncopyble.h>
-#include <useful_macros.h>
-#include <shaders.h>
+#include <qx/other/noncopyble.h>
+#include <qx/other/useful_macros.h>
+#include <qx/gl/shaders.h>
 
 namespace qx::gl
 {
@@ -68,4 +67,4 @@ private:
 
 using TPtrShaderProgram = std::shared_ptr<qx::gl::shader_program>;
 
-#include <shader_program.inl>
+#include <qx/gl/shader_program.inl>

@@ -12,8 +12,8 @@
 //============================================================================
 #pragma once
 
-#include <iBuffer.h>
-#include <typedefs.h>
+#include <qx/other/typedefs.h>
+#include <qx/gl/iBuffer.h>
 
 namespace qx::gl
 {
@@ -59,4 +59,4 @@ inline GLuint vao::GetBufferName(void) const { return m_nVAO; }
 
 }
 
-#include <vao.inl>
+#include <qx/gl/vao.inl>

@@ -11,9 +11,11 @@
 //
 //============================================================================
 #pragma once
-#include <container.h>
+
 #include <vector>
-#include <useful_macros.h>
+
+#include <qx/containers/container.h>
+#include <qx/other/useful_macros.h>
 
 namespace qx
 {
@@ -77,4 +79,4 @@ private:
 
 }
 
-#include <object_pool.inl>
+#include <qx/containers/object_pool.inl>

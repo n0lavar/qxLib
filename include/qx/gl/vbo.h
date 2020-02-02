@@ -12,7 +12,7 @@
 //============================================================================
 #pragma once
 
-#include <buffer_base.h>
+#include <qx/gl/buffer_base.h>
 
 namespace qx::gl
 {

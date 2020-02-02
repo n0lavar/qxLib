@@ -16,7 +16,8 @@
 
 #include <optional>
 #include <unordered_map>
-#include <qxstring.h>
+
+#include <qx/containers/qxstring.h>
 
 #define SMART_ENUM(name, first_elem, ...)                                                                               \
     enum class name                                                                                                     \

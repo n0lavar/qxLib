@@ -12,12 +12,12 @@
 //============================================================================
 #pragma once
 
-#include <shader_program.h>
-#include <vao.h>
-#include <vbo.h>
-#include <rbo.h>
-#include <texture.h>
-#include <shaders.h>
+#include <qx/gl/shader_program.h>
+#include <qx/gl/vao.h>
+#include <qx/gl/vbo.h>
+#include <qx/gl/rbo.h>
+#include <qx/gl/texture.h>
+#include <qx/gl/shaders.h>
 
 namespace qx::gl
 {
@@ -70,4 +70,4 @@ inline GLuint fbo::GetBufferName(void) const { return m_nBuffer; }
 
 }
 
-#include <fbo.inl>
+#include <qx/gl/fbo.inl>

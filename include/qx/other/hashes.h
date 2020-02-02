@@ -11,8 +11,10 @@
 //
 //============================================================================
 #pragma once
-#include <qx/other/typedefs.h>
+
 #include <cstring>
+
+#include <qx/other/typedefs.h>
 
 namespace qx::hash
 {

@@ -11,6 +11,7 @@
 //
 //============================================================================
 #pragma once
+
 #include <qx/other/logger.h>
 
 #if ENABLE_DEBUG_BREAK

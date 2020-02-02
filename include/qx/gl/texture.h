@@ -12,8 +12,8 @@
 //============================================================================
 #pragma once
 
-#include <iBuffer.h>
-#include <typedefs.h>
+#include <qx/other/typedefs.h>
+#include <qx/gl/iBuffer.h>
 
 namespace qx::gl
 {
@@ -63,4 +63,4 @@ inline GLuint texture::GetBufferName(void) const { return m_nTexture; }
 
 }
 
-#include <texture.inl>
+#include <qx/gl/texture.inl>

@@ -12,7 +12,7 @@
 //============================================================================
 #pragma once
 
-#include <ebo.h>
-#include <fbo.h>
-#include <ssbo_arrayed.h>
-#include <ubo.h>
+#include <qx/gl/ebo.h>
+#include <qx/gl/fbo.h>
+#include <qx/gl/ssbo_arrayed.h>
+#include <qx/gl/ubo.h>

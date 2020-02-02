@@ -12,12 +12,12 @@
 //============================================================================
 #pragma once
 
-#include <qx/other/asserter.h>
-
 #include <initializer_list>
 #include <algorithm>
 #include <glm.hpp>
 #include <gtc/epsilon.hpp>
+
+#include <qx/other/asserter.h>
 
 //============================================================================
 //!\fn                          SAFE_DELETE<T>

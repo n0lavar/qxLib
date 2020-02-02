@@ -13,8 +13,9 @@
 #pragma once
 
 #include <glew.h>
-#include <noncopyble.h>
-#include <useful_macros.h>
+
+#include <qx/other/noncopyble.h>
+#include <qx/other/useful_macros.h>
 
 namespace qx::gl
 {
@@ -106,4 +107,4 @@ public:
 
 }
 
-#include <shaders.inl>
+#include <qx/gl/shaders.inl>

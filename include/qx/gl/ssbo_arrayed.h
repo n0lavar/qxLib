@@ -12,7 +12,7 @@
 //============================================================================
 #pragma once
 
-#include <ssbo.h>
+#include <qx/gl/ssbo.h>
 
 namespace qx::gl
 {
@@ -63,4 +63,4 @@ template<typename T> inline size_t ssbo_arrayed<T>::GetUsedSize(void) const { re
 
 }
 
-#include <ssbo_arrayed.inl>
+#include <qx/gl/ssbo_arrayed.inl>
