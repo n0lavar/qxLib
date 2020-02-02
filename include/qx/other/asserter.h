@@ -14,6 +14,16 @@
 
 #include <qx/other/logger.h>
 
+
+#ifndef ENABLE_ASSERTS
+    #define ENABLE_ASSERTS _DEBUG
+#endif // !ENABLE_ASSERTS
+
+#ifndef ENABLE_DEBUG_BREAK
+    #define ENABLE_DEBUG_BREAK _DEBUG
+#endif // !ENABLE_DEBUG_BREAK
+
+
 #if ENABLE_DEBUG_BREAK
 
     #if defined(_WIN32)
@@ -31,6 +41,7 @@
     #define DEBUG_BREAK EMPTY_MACRO
 
 #endif
+
 
 #if ENABLE_ASSERTS
 

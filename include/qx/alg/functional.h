@@ -12,6 +12,9 @@
 //============================================================================
 #pragma once
 
+#include <functional>
+#include <random>
+
 #include <glm.hpp>
 #include <gtc/epsilon.hpp>
 
@@ -61,6 +64,164 @@ inline double bilinear_inletpolation(glm::dvec3 p0, glm::dvec3 p1, glm::dvec3 p2
     glm::dvec2 temp0 = { p0.y, linear_interpolation({ p0.x, p0.z }, { p1.x, p1.z }, p.x) };
     glm::dvec2 temp1 = { p2.y, linear_interpolation({ p2.x, p2.z }, { p3.x, p3.z }, p.x) };
     return linear_interpolation(temp0, temp1, p.y);
+}
+
+using function2d = std::function<double(double)>;
+
+//============================================================================
+//!\fn                     integrate_rectangle_rule
+//
+//!\brief  Interate using rectangle rule
+//!\param  func                - target function
+//!\param  x0                  - left border
+//!\param  x1                  - right border
+//!\param  num_intervals_per_1 - number of intervals per dx = 1
+//!\retval                     - approximate integral
+//!\author Khrapov
+//!\date   2.02.2020
+//============================================================================
+double integrate_rectangle_rule(const function2d& func,
+                                double x0,
+                                double x1,
+                                size_t num_intervals_per_1 = 10)
+{
+    size_t num_intervals = static_cast<size_t>(std::ceil(num_intervals_per_1 * (x1 - x0)));
+    double dx = (x1 - x0) / num_intervals;
+    double total_area = 0.0;
+    double x = x0;
+
+    for (size_t i = 0; i < num_intervals; i++)
+    {
+        total_area += dx * func(x);
+        x += dx;
+    }
+
+    return total_area;
+}
+
+//============================================================================
+//!\fn                     integrate_trapezoid_rule
+//
+//!\brief  Interate using trapezoid rule
+//!\param  func                - target function
+//!\param  x0                  - left border
+//!\param  x1                  - right border
+//!\param  num_intervals_per_1 - number of intervals per dx = 1
+//!\retval                     - approximate integral
+//!\author Khrapov
+//!\date   2.02.2020
+//============================================================================
+double integrate_trapezoid_rule(const function2d& func,
+                                double x0,
+                                double x1,
+                                size_t num_intervals_per_1 = 10)
+{
+    size_t num_intervals = static_cast<size_t>(std::ceil(num_intervals_per_1 * (x1 - x0)));
+    double dx = (x1 - x0) / num_intervals;
+    double total_area = 0.0;
+    double x = x0;
+
+    for (size_t i = 0; i < num_intervals; i++)
+    {
+        total_area += dx * (func(x) + func(x + dx)) / 2;
+        x += dx;
+    }
+
+    return total_area;
+}
+
+//============================================================================
+//!\fn                   integrate_adaptive_midpoint
+//
+//!\brief  Interate using adaptive midpoint
+//!\param  func                - target function
+//!\param  x0                  - left border
+//!\param  x1                  - right border
+//!\param  max_slice_error     - max error per one slice
+//!\param  num_intervals_per_1 - number of intervals per dx = 1
+//!\retval                     - approximate integral
+//!\author Khrapov
+//!\date   2.02.2020
+//============================================================================
+double integrate_adaptive_midpoint(const function2d& func,
+                                   double x0,
+                                   double x1,
+                                   double max_slice_error,
+                                   size_t num_intervals_per_1 = 10)
+{
+    size_t num_intervals = static_cast<size_t>(std::ceil(num_intervals_per_1 * (x1 - x0)));
+    double dx = (x1 - x0) / num_intervals;
+    double total = 0.0;
+    double total_area = 0.0;
+    double x = x0;
+
+    constexpr size_t MAX_RECURSION = 1000;
+    size_t current_recursion = 0;
+    std::function<double(const function2d&, double, double, double)> slice_area
+        = [&slice_area, &current_recursion] (const function2d& func, double x0, double x1, double max_slice_error) -> double
+    {
+        current_recursion++;
+        double y0 = func(x0);
+        double y1 = func(x1);
+        double xm = (x0 + x1) / 2;
+        double ym = func(xm);
+
+        double area12 = (x1 - x0) * (y0 + y1) / 2.0;
+        double area1m = (xm - x0) * (y0 + ym) / 2.0;
+        double aream2 = (x1 - xm) * (ym + y1) / 2.0;
+        double area1m2 = area1m + aream2;
+
+        double error = (area1m2 - area12) / area12;
+
+        if (current_recursion > MAX_RECURSION || std::abs(error) < max_slice_error)
+            return area1m2;
+        else
+            return slice_area(func, x0, xm, max_slice_error) + slice_area(func, xm, x1, max_slice_error);
+    };
+
+    for (size_t i = 0; i < num_intervals; i++)
+    {
+        total_area += slice_area(func, x, x + dx, max_slice_error);
+        x += dx;
+    }
+
+    return total_area;
+}
+
+//============================================================================
+//!\fn                      integrate_monte_carlo
+//
+//!\brief  Interate using probabilistic algorithm Monte Carlo
+//!\param  funcIsInside   - func that returns true if point is inside shape
+//!\param  x0             - x left area coord
+//!\param  y0             - y left area coord
+//!\param  x1             - x right area coord
+//!\param  y1             - y right area coord
+//!\param  points_per_1sq - points per 1 sqare (more is better)
+//!\retval                - approximate integral
+//!\author Khrapov
+//!\date   2.02.2020
+//============================================================================
+double integrate_monte_carlo(const std::function<bool(double, double)>& funcIsInside,
+                             double x0,
+                             double y0,
+                             double x1,
+                             double y1,
+                             size_t points_per_1sq = 1000)
+{
+    double area = std::abs(x1 - x0) * std::abs(y1 - y0);
+    size_t total_points = static_cast<size_t>(std::ceil(area * points_per_1sq));
+    size_t points_inside = 0;
+
+    std::default_random_engine generator(static_cast<unsigned int>(std::time(0)));
+    std::uniform_real_distribution<double> x_dist(x0, x1);
+    std::uniform_real_distribution<double> y_dist(y0, y1);
+
+    for (size_t i = 0; i < total_points; i++)
+        if (funcIsInside(x_dist(generator), y_dist(generator)))
+            points_inside++;
+
+    return (static_cast<double>(points_inside) / total_points)* area;
 }
 
 }
