@@ -139,6 +139,7 @@ inline double integrate_trapezoid_rule(const function2d& func,
 //!\param  x1                  - right border
 //!\param  max_slice_error     - max error per one slice
 //!\param  num_intervals_per_1 - number of intervals per dx = 1
+//!\param  max_recursion       - max recursion depth
 //!\retval                     - approximate integral
 //!\author Khrapov
 //!\date   2.02.2020
@@ -147,7 +148,8 @@ inline double integrate_adaptive_midpoint(const function2d& func,
                                           double            x0,
                                           double            x1,
                                           double            max_slice_error,
-                                          size_t            num_intervals_per_1 = 10)
+                                          size_t            num_intervals_per_1 = 10,
+                                          size_t            max_recursion = 300)
 {
     size_t num_intervals = static_cast<size_t>(std::ceil(num_intervals_per_1 * (x1 - x0)));
     double dx = (x1 - x0) / num_intervals;
@@ -155,13 +157,13 @@ inline double integrate_adaptive_midpoint(const function2d& func,
     double total_area = 0.0;
     double x = x0;
 
-    constexpr size_t MAX_RECURSION = 300;
     std::function<double(const function2d&, double, double, double, size_t)> slice_area
-        = [&slice_area] (const function2d& func, 
-                         double x0, 
-                         double x1, 
-                         double max_slice_error,
-                         size_t recursionLevel) -> double
+        = [&slice_area, &max_recursion] 
+        (const function2d& func,
+         double x0, 
+         double x1, 
+         double max_slice_error,
+         size_t recursionLevel) -> double
     {
         recursionLevel++;
         double y0 = func(x0);
@@ -176,7 +178,7 @@ inline double integrate_adaptive_midpoint(const function2d& func,
 
         double error = (area1m2 - area12) / area12;
 
-        if (recursionLevel > MAX_RECURSION || std::abs(error) < max_slice_error)
+        if (recursionLevel > max_recursion || std::abs(error) < max_slice_error)
             return area1m2;
         else
             return slice_area(func, x0, xm, max_slice_error, recursionLevel) + slice_area(func, xm, x1, max_slice_error, recursionLevel);
@@ -228,4 +230,41 @@ inline double integrate_monte_carlo(const std::function<bool(double, double)>& f
     return (static_cast<double>(points_inside) / total_points)* area;
 }
 
+//============================================================================
+//!\fn                     find_zero_newtons_method
+//
+//!\brief  Find root of the equation using Newtons method
+//!\param  f              - function
+//!\param  dfdx           - derivative
+//!\param  initial_guess  - initial root guess
+//!\param  max_error      - max error to stop searching
+//!\param  max_iterations - max iterations number (sometimes alg breaks)
+//!\retval                - approximate root
+//!\author Khrapov
+//!\date   4.02.2020
+//============================================================================
+inline double find_zero_newtons_method(const function2d&    f,
+                                       const function2d&    dfdx,
+                                       double               initial_guess,
+                                       double               max_error       = 0.01,
+                                       size_t               max_iterations  = 500)
+{
+    double x = initial_guess;
+
+    for (size_t i = 0; i < max_iterations; i++)
+    {
+        double y = f(x);
+
+        if (std::abs(y) < max_error)
+            break;
+
+        x -= y / dfdx(x);
+    }
+
+    return x;
 }
+
+
+}
+
+
