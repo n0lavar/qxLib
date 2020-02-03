@@ -80,10 +80,10 @@ using function2d = std::function<double(double)>;
 //!\author Khrapov
 //!\date   2.02.2020
 //============================================================================
-double integrate_rectangle_rule(const function2d& func,
-                                double x0,
-                                double x1,
-                                size_t num_intervals_per_1 = 10)
+inline double integrate_rectangle_rule(const function2d&    func,
+                                       double               x0,
+                                       double               x1,
+                                       size_t               num_intervals_per_1 = 10)
 {
     size_t num_intervals = static_cast<size_t>(std::ceil(num_intervals_per_1 * (x1 - x0)));
     double dx = (x1 - x0) / num_intervals;
@@ -111,10 +111,10 @@ double integrate_rectangle_rule(const function2d& func,
 //!\author Khrapov
 //!\date   2.02.2020
 //============================================================================
-double integrate_trapezoid_rule(const function2d& func,
-                                double x0,
-                                double x1,
-                                size_t num_intervals_per_1 = 10)
+inline double integrate_trapezoid_rule(const function2d& func,
+                                       double            x0,
+                                       double            x1,
+                                       size_t            num_intervals_per_1 = 10)
 {
     size_t num_intervals = static_cast<size_t>(std::ceil(num_intervals_per_1 * (x1 - x0)));
     double dx = (x1 - x0) / num_intervals;
@@ -143,11 +143,11 @@ double integrate_trapezoid_rule(const function2d& func,
 //!\author Khrapov
 //!\date   2.02.2020
 //============================================================================
-double integrate_adaptive_midpoint(const function2d& func,
-                                   double x0,
-                                   double x1,
-                                   double max_slice_error,
-                                   size_t num_intervals_per_1 = 10)
+inline double integrate_adaptive_midpoint(const function2d& func,
+                                          double            x0,
+                                          double            x1,
+                                          double            max_slice_error,
+                                          size_t            num_intervals_per_1 = 10)
 {
     size_t num_intervals = static_cast<size_t>(std::ceil(num_intervals_per_1 * (x1 - x0)));
     double dx = (x1 - x0) / num_intervals;
@@ -155,12 +155,15 @@ double integrate_adaptive_midpoint(const function2d& func,
     double total_area = 0.0;
     double x = x0;
 
-    constexpr size_t MAX_RECURSION = 1000;
-    size_t current_recursion = 0;
-    std::function<double(const function2d&, double, double, double)> slice_area
-        = [&slice_area, &current_recursion] (const function2d& func, double x0, double x1, double max_slice_error) -> double
+    constexpr size_t MAX_RECURSION = 300;
+    std::function<double(const function2d&, double, double, double, size_t)> slice_area
+        = [&slice_area] (const function2d& func, 
+                         double x0, 
+                         double x1, 
+                         double max_slice_error,
+                         size_t recursionLevel) -> double
     {
-        current_recursion++;
+        recursionLevel++;
         double y0 = func(x0);
         double y1 = func(x1);
         double xm = (x0 + x1) / 2;
@@ -173,15 +176,16 @@ double integrate_adaptive_midpoint(const function2d& func,
 
         double error = (area1m2 - area12) / area12;
 
-        if (current_recursion > MAX_RECURSION || std::abs(error) < max_slice_error)
+        if (recursionLevel > MAX_RECURSION || std::abs(error) < max_slice_error)
             return area1m2;
         else
-            return slice_area(func, x0, xm, max_slice_error) + slice_area(func, xm, x1, max_slice_error);
+            return slice_area(func, x0, xm, max_slice_error, recursionLevel) + slice_area(func, xm, x1, max_slice_error, recursionLevel);
     };
 
     for (size_t i = 0; i < num_intervals; i++)
     {
-        total_area += slice_area(func, x, x + dx, max_slice_error);
+        size_t recursionLevel = 0;
+        total_area += slice_area(func, x, x + dx, max_slice_error, recursionLevel);
         x += dx;
     }
 
@@ -202,12 +206,12 @@ double integrate_adaptive_midpoint(const function2d& func,
 //!\author Khrapov
 //!\date   2.02.2020
 //============================================================================
-double integrate_monte_carlo(const std::function<bool(double, double)>& funcIsInside,
-                             double x0,
-                             double y0,
-                             double x1,
-                             double y1,
-                             size_t points_per_1sq = 1000)
+inline double integrate_monte_carlo(const std::function<bool(double, double)>& funcIsInside,
+                                    double                                     x0,
+                                    double                                     y0,
+                                    double                                     x1,
+                                    double                                     y1,
+                                    size_t                                     points_per_1sq = 1000)
 {
     double area = std::abs(x1 - x0) * std::abs(y1 - y0);
     size_t total_points = static_cast<size_t>(std::ceil(area * points_per_1sq));
