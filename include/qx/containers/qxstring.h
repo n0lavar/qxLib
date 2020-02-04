@@ -120,8 +120,8 @@ public:
                             basic_string (const basic_string   & str)             : basic_string(str.m_pData)                        {          };
                             basic_string (value_type             ch)              : basic_string(&ch, 1)                             {          };
                             basic_string (const_pointer          pSource)         : basic_string(pSource, Traits::tstrlen(pSource))  {          };
-                            basic_string (value_type             ch,
-                                          size_type              nSymbols);
+                            basic_string (size_type              nSymbols,
+                                          value_type             ch);
 
     virtual                ~basic_string (void)                                   { clear();                                                    };
 

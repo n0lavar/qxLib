@@ -40,13 +40,13 @@ basic_string<T, Traits>::basic_string(const_pointer pSource, size_type nSymbols)
 //!\fn               basic_string<T, Traits>::basic_string
 //
 //!\brief  basic_string object constructor
-//!\param  ch       - char
 //!\param  nSymbols - num of symbols of char
+//!\param  ch       - char
 //!\author Khrapov
 //!\date   29.10.2019
 //============================================================================
 template<typename T, class Traits>
-basic_string<T, Traits>::basic_string(value_type ch, size_type nSymbols)
+basic_string<T, Traits>::basic_string(size_type nSymbols, value_type ch)
 {
     if (Resize(nSymbols, Traits::talign()))
         for (size_type i = 0; i < size(); i++)
