@@ -199,29 +199,25 @@ inline double integrate_adaptive_midpoint(const function2d& func,
 //
 //!\brief  Interate using probabilistic algorithm Monte Carlo
 //!\param  funcIsInside   - func that returns true if point is inside shape
-//!\param  x0             - x left area coord
-//!\param  y0             - y left area coord
-//!\param  x1             - x right area coord
-//!\param  y1             - y right area coord
+//!\param  pos0           - left down corner coords
+//!\param  pos1           - right up corner coords
 //!\param  points_per_1sq - points per 1 sqare (more is better)
 //!\retval                - approximate integral
 //!\author Khrapov
 //!\date   2.02.2020
 //============================================================================
 inline double integrate_monte_carlo(const std::function<bool(double, double)>& funcIsInside,
-                                    double                                     x0,
-                                    double                                     y0,
-                                    double                                     x1,
-                                    double                                     y1,
+                                    glm::dvec2                                 pos0,
+                                    glm::dvec2                                 pos1,
                                     size_t                                     points_per_1sq = 1000)
 {
-    double area = std::abs(x1 - x0) * std::abs(y1 - y0);
+    double area = std::abs(pos1.x - pos0.x) * std::abs(pos1.y - pos0.y);
     size_t total_points = static_cast<size_t>(std::ceil(area * points_per_1sq));
     size_t points_inside = 0;
 
     std::default_random_engine generator(static_cast<unsigned int>(std::time(0)));
-    std::uniform_real_distribution<double> x_dist(x0, x1);
-    std::uniform_real_distribution<double> y_dist(y0, y1);
+    std::uniform_real_distribution<double> x_dist(pos0.x, pos1.x);
+    std::uniform_real_distribution<double> y_dist(pos0.y, pos1.y);
 
     for (size_t i = 0; i < total_points; i++)
         if (funcIsInside(x_dist(generator), y_dist(generator)))
