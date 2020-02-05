@@ -15,8 +15,8 @@
 #include <functional>
 #include <random>
 
-#include <glm.hpp>
-#include <gtc/epsilon.hpp>
+#include <glm/glm.hpp>
+#include <glm/gtc/epsilon.hpp>
 
 #include <qx/other/asserter.h>
 

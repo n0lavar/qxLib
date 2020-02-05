@@ -13,7 +13,7 @@
 #pragma once
 
 #include <glew.h>
-#include <gtc/type_ptr.hpp>
+#include <glm/gtc/type_ptr.hpp>
 #include <vector>
 
 #include <qx/other/noncopyble.h>
