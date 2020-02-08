@@ -13,6 +13,7 @@ Dependencies:
   + _object_pool_. Contains a collection of reusable objects. When the pool is initialized, it immediately creates the entire collection of objects (allocating one consecutive chunk of memory) and initializes them all with the “not used” state. When you need a new object, you request it from the pool. It searches for an accessible object, initializes it with the value "used" and returns. When the object is no longer needed, it returns to the "unused" state again. In this way, objects can be freely created and deleted without having to allocate memory or other resources.
   + _string_. Lite string with sizeof() == 1. Supports .format(), to(type()), split(), delete_line_breaks(), apply_case() and other useful methods.
   + _container_. Macro with common container methods. 
+  + _list_se_. Single ended list
   + ...
 
 + __gl__. Class wrappers for OpenGL entities.
@@ -61,7 +62,7 @@ Dependencies:
 ## Todos:
   + tests
   + basic algorithms
-  + basic data structures
+  + basic data structures (~~list_se~~-, list_de, list_cycle, list_multi, list_skip, list_xor, ...)
   + renderer: interface, scene node, scene graph, cullings
   + Protected value: defence from cheat engine, artmoney etc
   + gl classes improvements
