@@ -15,15 +15,6 @@
 #include <initializer_list>
 #include <memory>
 
-/*
-    list_se
-    list_de
-    list_cycle
-    list_multi
-    list_skip
-    list_xor
-*/
-
 //============================================================================
 //
 //!\struct                     list_se_node<T>
