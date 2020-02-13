@@ -92,10 +92,10 @@ double pow(T number, I power)
     bool bNegativePower = power < 0;
     power = static_cast<I>(std::abs(static_cast<long long>(power)));
 
-    double result = 1.f;
+    double result = 1.0;
     switch (power)
     {
-    case 0: result = 1.0;                                   break;
+    case 0:                                                 break;
     case 1: result = static_cast<double>(number);           break;
     case 2: result = static_cast<double>(number) * number;  break;
     default:

@@ -115,7 +115,7 @@ inline void list_se<T>::insert(iterator where, const_pointer what, size_t number
     {
         iterator it = begin();
         while (it != end() && it.m_pNode->pNext != where.m_pNode)
-            it++;
+            ++it;
 
         if (it != end())
             insert_after(it, what, number);
@@ -160,7 +160,7 @@ inline void list_se<T>::insert_after(iterator where, const_pointer what, size_t 
     for (size_t i = 0; i < number; i++)
     {
         insert_after(where, *(what + i));
-        where++;
+        ++where;
     }
 }
 
@@ -181,7 +181,7 @@ inline void list_se<T>::erase(iterator where, size_t number)
     {
         iterator it = begin();
         while (it != end() && it.m_pNode->pNext != where.m_pNode)
-            it++;
+            ++it;
 
         if (it != end())
             erase_after(it, number);
@@ -207,13 +207,13 @@ template<class T>
 inline void list_se<T>::erase_after(iterator where, size_t number)
 {
     iterator current = where;
-    current++;
+    ++current;
 
     iterator temp;
     for (size_t i = 0; i < number && current != end(); i++)
     {
         temp = current;
-        temp++;
+        ++temp;
         delete current.m_pNode;
         current = temp;
         m_nSize--;
@@ -329,7 +329,7 @@ inline void list_se<T>::emplace(iterator where, Args&& ...args)
     {
         iterator it = begin();
         while (it != end() && it.m_pNode->pNext != where.m_pNode)
-            it++;
+            ++it;
 
         if (it != end())
             emplace_after(it, std::forward<Args>(args)...);
@@ -409,6 +409,6 @@ inline void list_se<T>::clear(void)
     }
 
     m_pFirstNode = nullptr;
-    m_pLastNode = nullptr;
-    m_nSize = 0;
+    m_pLastNode  = nullptr;
+    m_nSize      = 0;
 }

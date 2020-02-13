@@ -23,8 +23,6 @@
 namespace qx::gl
 {
 
-class shader_base;
-
 //============================================================================
 //
 //!\class                      shader_program

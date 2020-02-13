@@ -149,7 +149,7 @@ inline double integrate_adaptive_midpoint(const function2d& func,
                                           double            x1,
                                           double            max_slice_error,
                                           size_t            num_intervals_per_1 = 10,
-                                          size_t            max_recursion = 300)
+                                          size_t            max_recursion       = 300)
 {
     size_t num_intervals = static_cast<size_t>(std::ceil(num_intervals_per_1 * (x1 - x0)));
     double dx = (x1 - x0) / num_intervals;

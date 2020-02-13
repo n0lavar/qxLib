@@ -14,7 +14,7 @@
 
 //============================================================================
 //
-//!\macro                      SINGLETON
+//!\macro                   _SINGLETON_IMPL
 //
 //!\brief       Simple Meyer's singletone
 //!\details     use SINGLETON(yourClass) in the beginning of your class

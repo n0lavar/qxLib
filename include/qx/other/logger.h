@@ -23,6 +23,10 @@
 #include <qx/other/useful_macros.h>
 #include <qx/other/typedefs.h>
 
+#ifndef ENABLE_DETAIL_TRACE_INFO
+    #define ENABLE_DETAIL_TRACE_INFO _DEBUG
+#endif
+
 namespace qx
 {
 
