@@ -13,75 +13,87 @@
 #pragma once
 
 #include <qx/other/useful_funcs.h>
+#include <qx/containers/container.h>
 
 template<class T>
 class vector2d
 {
 public:
 
+    using value_type        = T;
+    using pointer           = T*;
+    using const_pointer     = const T*;
+    using reference         = T&;
+    using const_reference   = const T&;
+    using difference_type   = std::ptrdiff_t;
+    using size_type         = size_t;
+
+    // help class to provide correct vector2d[][] 
     class row
     {
-        row()           = delete;
-        row(const row&) = delete;
-        row(row&&)      = delete;
+                    row         (void)          = delete;
+                    row         (const row&)    = delete;
+                    row         (row&&)         = delete;
+
+        const row&  operator=   (const row&)    = delete;
+        const row&  operator=   (row&&)         = delete;
 
     public:
-        T&       operator[] (size_t x)          { return *(&m_First + x); }
-        const T& operator[] (size_t x) const    { return *(&m_First + x); }
+        T&          operator[]  (size_t x)       { return *(&m_First + x); }
+        const T&    operator[]  (size_t x) const { return *(&m_First + x); }
 
     private:
         T m_First;
     };
 
+    IMPL_CONTAINER(vector2d)
+
 public:
 
-                vector2d    (void) { };
-                vector2d    (vector2d&&         other) noexcept { assign(std::move(other);      }
-                vector2d    (const vector2d&    other)          { assign(other);                }
-                vector2d    (size_t             rows, 
-                             size_t             cols,
-                             const T          * pData = nullptr){ assign(rows, cols, pData);    }
-                vector2d    (size_t             rows, 
-                             size_t             cols,
-                             const T          & data)           { assign(rows, cols, data);     }
+                    vector2d    (void) { };
+                    vector2d    (vector2d&&         other) noexcept { assign(std::move(other));     }
+                    vector2d    (const vector2d&    other)          { assign(other);                }
+                    vector2d    (size_type          rows,
+                                 size_type          cols,
+                                 const_pointer      pData = nullptr){ assign(rows, cols, pData);    }
+                    vector2d    (size_type          rows,
+                                 size_type          cols,
+                                 const_reference    data)           { assign(rows, cols, data);     }
 
-                ~vector2d   (void)                              { clear();                      }
+                    ~vector2d   (void)                              { clear();                      }
 
-    void        assign      (vector2d&&         other) noexcept;
-    void        assign      (const vector2d&    other);
-    void        assign      (size_t             rows,
-                             size_t             cols,
-                             const T          * pData = nullptr);
-    void        assign      (size_t             rows,
-                             size_t             cols,
-                             const T          & data);
+    void            assign      (vector2d&&         other) noexcept;
+    void            assign      (const vector2d&    other);
+    void            assign      (size_type          rows,
+                                 size_type          cols,
+                                 const_pointer      pData = nullptr);
+    void            assign      (size_type          rows,
+                                 size_type          cols,
+                                 const_reference    data);
 
+    bool            resize      (size_type          rows, 
+                                 size_type          cols);
+    bool            resize      (size_type          rows);
+    void            fill        (const_reference    elem);
+    row&            operator[]  (size_type          nRow);
+    const row&      operator[]  (size_type          nRow) const;
+    const_reference get         (size_type          nRow,
+                                 size_type          nCol) const;
 
-    bool        resize      (size_t             rows, 
-                             size_t             cols);
-    void        fill        (const T&           elem);
-    row&        operator[]  (size_t             nRow);
-    const row&  operator[]  (size_t             nRow) const;
-    const T&    get         (size_t             nRow,
-                             size_t             nCol) const;
+    void            set         (size_type          nRow,
+                                 size_type          nCol,
+                                 const_reference    data);
 
-    void        clear       (void);
-    void        set         (size_t             nRow,
-                             size_t             nCol,
-                             const T          & data);
-
-    size_t      cols        (void) const { return m_nCols;              }
-    size_t      rows        (void) const { return m_nRows;              }
-    size_t      size_x      (void) const { return rows();               }
-    size_t      size_y      (void) const { return cols();               }
-    size_t      size        (void) const { return size_x() * size_y();  }
-    bool        empty       (void) const { return size() == 0;          }
+    size_type       cols        (void) const { return m_nCols;              }
+    size_type       rows        (void) const { return m_nRows;              }
+    size_type       size_x      (void) const { return rows();               }
+    size_type       size_y      (void) const { return cols();               }
 
 private:
 
-    T*      m_pData     = nullptr;
-    size_t  m_nRows     = 0;
-    size_t  m_nCols     = 0;
+    pointer     m_pData     = nullptr;
+    size_type   m_nRows     = 0;
+    size_type   m_nCols     = 0;
 };
 
 #if 1
@@ -101,18 +113,55 @@ void test_vector2d()
         }
         printf("\n");
     }
+    printf("\n");
 
     for (size_t i = 0; i < v1.size_x(); i++)
     {
         for (size_t j = 0; j < v1.size_y(); j++)
         {
-            v1[i][j] = i * j;
+            v1[i][j] = (int)(i * j);
             printf("%d ", v1[i][j]);
         }
         printf("\n");
     }
+    printf("\n");
+
+    v1.at(0);
+    v1.data();
+
+    for (auto it = v1.begin(); it != v1.end(); ++it)
+    {
+        (*it)++;
+    }
+
+    for (size_t i = 0; i < v1.size_x(); i++)
+    {
+        for (size_t j = 0; j < v1.size_y(); j++)
+        {
+            printf("%d ", v1[i][j]);
+        }
+        printf("\n");
+    }
+    printf("\n");
+
+
+    for (auto& val : v1)
+    {
+        val *= 2;
+    }
+
+    for (size_t i = 0; i < v1.size_x(); i++)
+    {
+        for (size_t j = 0; j < v1.size_y(); j++)
+        {
+            printf("%d ", v1[i][j]);
+        }
+        printf("\n");
+    }
+    printf("\n");
+
 }
 
-#include <qx/containers/continuous_vector.inl>
-
 #endif
+
+#include <qx/containers/continuous_vector.inl>

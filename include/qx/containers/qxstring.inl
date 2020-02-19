@@ -712,6 +712,20 @@ typename basic_string<T, Traits>::reference basic_string<T, Traits>::operator[](
 }
 
 //============================================================================
+//!\fn                   basic_string<T, Traits>::at
+//
+//!\param  ind - char index
+//!\retval     - char value
+//!\author Khrapov
+//!\date   19.10.2019
+//============================================================================
+template<typename T, class Traits>
+typename basic_string<T, Traits>::reference basic_string<T, Traits>::at(size_type ind)
+{ 
+    return operator[](ind); 
+}
+
+//============================================================================
 //!\fn                  basic_string<T, Traits>::clear
 //
 //!\brief  Clear string
@@ -752,16 +766,15 @@ typename basic_string<T, Traits>::size_type basic_string<T, Traits>::size(void) 
 //!\date   28.10.2019
 //============================================================================
 template<typename T, class Traits>
-typename basic_string<T, Traits>::const_pointer basic_string<T, Traits>::data(void) const
-{
-    return m_pData;
-}
-template<typename T, class Traits>
 typename basic_string<T, Traits>::pointer basic_string<T, Traits>::data(void)
 {
     return m_pData;
 }
-
+template<typename T, class Traits>
+typename basic_string<T, Traits>::const_pointer basic_string<T, Traits>::data(void) const
+{
+    return m_pData;
+}
 //============================================================================
 //!\fn                basic_string<T, Traits>::GetStrData
 //

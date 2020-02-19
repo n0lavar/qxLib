@@ -43,7 +43,7 @@ struct char_traits<char>
 {
     using value_type        = char;
     using pointer           = char*;
-    using const_pointer     = const char * const;
+    using const_pointer     = const char*;
     using reference         = char&;
     using const_reference   = const char&;
     using difference_type   = std::ptrdiff_t;
@@ -116,14 +116,14 @@ public:
                             basic_string (void) = default;
                             basic_string (const_pointer          pSource,
                                           size_type              nSymbols);
-                            basic_string (basic_string        && str)    noexcept { std::swap(m_pData, str.m_pData);                            };
-                            basic_string (const basic_string   & str)             : basic_string(str.m_pData)                        {          };
-                            basic_string (value_type             ch)              : basic_string(&ch, 1)                             {          };
-                            basic_string (const_pointer          pSource)         : basic_string(pSource, Traits::tstrlen(pSource))  {          };
+                            basic_string (basic_string        && str)    noexcept { std::swap(m_pData, str.m_pData);                            }
+                            basic_string (const basic_string   & str)             : basic_string(str.m_pData)                        {          }
+                            basic_string (value_type             ch)              : basic_string(&ch, 1)                             {          }
+                            basic_string (const_pointer          pSource)         : basic_string(pSource, Traits::tstrlen(pSource))  {          }
                             basic_string (size_type              nSymbols,
                                           value_type             ch);
 
-    virtual                ~basic_string (void)                                   { clear();                                                    };
+    virtual                ~basic_string (void)                                   { clear();                                                    }
 
     const   basic_string &  operator=    (basic_string        && str)    noexcept;
     const   basic_string &  operator=    (const basic_string   & str);
@@ -199,26 +199,29 @@ public:
     std::optional<double>   to           (double)                                       const;
     std::optional<long double> to        (long double)                                  const;
 
-    const   basic_string &  operator+=   (const basic_string   & str)             { Append(str.data(), str.size());             return *this;   };
-    const   basic_string &  operator+=   (value_type             ch)              { Append(&ch, 1);                             return *this;   };
-    const   basic_string &  operator+=   (const_pointer          pSource)         { Append(pSource, Traits::tstrlen(pSource));  return *this;   };
+    const   basic_string &  operator+=   (const basic_string   & str)             { Append(str.data(), str.size());             return *this;   }
+    const   basic_string &  operator+=   (value_type             ch)              { Append(&ch, 1);                             return *this;   }
+    const   basic_string &  operator+=   (const_pointer          pSource)         { Append(pSource, Traits::tstrlen(pSource));  return *this;   }
 
-    bool                    operator==   (const basic_string   & str)       const { return !Compare(str.data());                                };
-    bool                    operator==   (value_type             ch)        const { return !Compare(&ch, 1);                                    };
-    bool                    operator==   (const_pointer          pSource)   const { return !Compare(pSource);                                   };
+    bool                    operator==   (const basic_string   & str)       const { return !Compare(str.data());                                }
+    bool                    operator==   (value_type             ch)        const { return !Compare(&ch, 1);                                    }
+    bool                    operator==   (const_pointer          pSource)   const { return !Compare(pSource);                                   }
 
-    bool                    operator!=   (const basic_string   & str)       const { return !operator==(str);                                    };
-    bool                    operator!=   (value_type             ch)        const { return !operator==(ch);                                     };
-    bool                    operator!=   (const_pointer          pSource)   const { return !operator==(pSource);                                };
+    bool                    operator!=   (const basic_string   & str)       const { return !operator==(str);                                    }
+    bool                    operator!=   (value_type             ch)        const { return !operator==(ch);                                     }
+    bool                    operator!=   (const_pointer          pSource)   const { return !operator==(pSource);                                }
 
-    operator const char*() const { return m_pData;  }
+    reference               operator[]   (size_type              ind);
+    const_reference         operator[]   (size_type              ind)       const { return operator[](ind);                                     }
+
+                            operator const char*()                          const { return data();                                              }
 
 #if defined(__has_include) && __has_include(<string>)
-                           basic_string (const std::string & str)       : basic_string(str.data(), static_cast<size_type>(str.size()))   {      };
-    const   basic_string & operator=    (const std::string & str)       { Assign(str.data(), static_cast<size_type>(str.size())); return *this; };
-    const   basic_string & operator+=   (const std::string & str)       { Append(str.data(), static_cast<size_type>(str.size())); return *this; };
-    bool                   operator==   (const std::string & str) const { return !Compare(str.data());                                          };
-    bool                   operator!=   (const std::string & str) const { return !operator==(str);                                              };
+                           basic_string (const std::string & str)       : basic_string(str.data(), static_cast<size_type>(str.size()))   {      }
+    const   basic_string & operator=    (const std::string & str)       { Assign(str.data(), static_cast<size_type>(str.size())); return *this; }
+    const   basic_string & operator+=   (const std::string & str)       { Append(str.data(), static_cast<size_type>(str.size())); return *this; }
+    bool                   operator==   (const std::string & str) const { return !Compare(str.data());                                          }
+    bool                   operator!=   (const std::string & str) const { return !operator==(str);                                              }
 #endif
 
 private:

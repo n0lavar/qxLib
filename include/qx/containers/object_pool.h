@@ -64,6 +64,9 @@ public:
     size_type                   Emplace     (Args&&...              args);
     void                        Delete      (size_type              id);
     const std::vector<size_type> & GetIdsArray (void);
+    reference                   operator[]  (size_type              ind);
+    const_reference             operator[]  (size_type              ind)    const { return operator[](ind); }
+
 
 private:
     size_t                      GetId       (size_type              ind);

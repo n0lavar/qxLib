@@ -194,7 +194,11 @@ typename object_pool<T>::pointer object_pool<T>::data(void)
 {
     return nullptr;
 }
-
+template<class T>
+typename object_pool<T>::const_pointer object_pool<T>::data(void) const
+{
+    return nullptr;
+}
 //============================================================================
 //!\fn                     object_pool<T>::operator[]
 //
@@ -208,5 +212,20 @@ typename object_pool<T>::reference object_pool<T>::operator[](size_type  ind)
 {
     return m_Pool[m_Indexes[ind]];
 }
+
+//============================================================================
+//!\fn                        object_pool<T>::at
+//
+//!\brief  Get object by given id
+//!\param  id - object's id
+//!\author Khrapov
+//!\date   7.08.2019
+//============================================================================
+template<class T>
+typename object_pool<T>::reference object_pool<T>::at(size_type ind)
+{ 
+    return operator[](ind); 
+}
+
 
 }

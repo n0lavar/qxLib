@@ -23,7 +23,7 @@ namespace qx
 //
 //!\brief   Iterator type
 //!\details Use it for range-based loops and std algorithms
-//          C have to provide operator[]
+//          C have to provide at(size_t)
 //
 //!\author  Khrapov
 //!\date    27.07.2019
@@ -45,12 +45,12 @@ public:
     // Default Copy/Move are fine.
     // Default Destructor is fine.
 
-    reference       operator*   (void)                          { return (*m_pCollection)[m_nIndex];        }
-    const reference operator*   (void)                  const   { return (*m_pCollection)[m_nIndex];        }
-    pointer         operator->  (void)                          { return &((*m_pCollection)[m_nIndex]);     }
-    const pointer   operator->  (void)                  const   { return &((*m_pCollection)[m_nIndex]);     }
-    reference       operator[]  (size_type m)                   { return (*m_pCollection)[m_nIndex + m];    }
-    const reference operator[]  (size_type m)           const   { return (*m_pCollection)[m_nIndex + m];    }
+    reference       operator*   (void)                          { return (*m_pCollection).at(m_nIndex);     }
+    const reference operator*   (void)                  const   { return (*m_pCollection).at(m_nIndex);     }
+    pointer         operator->  (void)                          { return &((*m_pCollection).at(m_nIndex));  }
+    const pointer   operator->  (void)                  const   { return &((*m_pCollection).at(m_nIndex));  }
+    reference       operator[]  (size_type m)                   { return (*m_pCollection).at(m_nIndex + m); }
+    const reference operator[]  (size_type m)           const   { return (*m_pCollection).at(m_nIndex + m); }
 
 
     iterator      & operator++  (void)                          { ++m_nIndex; return *this;                 }
