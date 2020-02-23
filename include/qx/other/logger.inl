@@ -1,6 +1,6 @@
 //============================================================================
 //
-//!\file                          trace.inl
+//!\file                          logger.inl
 //
 //!\brief       Console tracing and creating of logs
 //!\details     ~

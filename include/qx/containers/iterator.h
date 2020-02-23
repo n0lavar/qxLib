@@ -12,14 +12,14 @@
 //============================================================================
 #pragma once
 
-#include <cstddef>
+#include <xutility>
 
 namespace qx
 {
 
 //============================================================================
 //
-//!\class                     iterator<T, C>
+//!\class                     iterator<C>
 //
 //!\brief   Iterator type
 //!\details Use it for range-based loops and std algorithms
@@ -29,14 +29,17 @@ namespace qx
 //!\date    27.07.2019
 //
 //============================================================================
-template <class C, class T>
+template <class C>
 class iterator
 {
-    using value_type        = T;
-    using pointer           = T*;
-    using reference         = T&;
-    using difference_type   = std::ptrdiff_t;
-    using size_type         = std::size_t;
+public:
+
+    using value_type        = typename C::value_type;
+    using pointer           = typename C::pointer;
+    using reference         = typename C::reference;
+    using difference_type   = typename C::difference_type;
+    using size_type         = typename C::size_type;
+    using iterator_category = typename std::forward_iterator_tag;
 
 public:
                     iterator   (void) = default;
@@ -75,6 +78,8 @@ public:
     bool            operator>=  (iterator const & r)    const   { return m_nIndex >= r.m_nIndex;            }
     bool            operator!=  (const iterator & r)    const   { return m_nIndex != r.m_nIndex;            }
     bool            operator==  (const iterator & r)    const   { return m_nIndex == r.m_nIndex;            }
+
+    operator void*              (void)                          { return &(m_pCollection.at(m_nIndex));     }
 
 private:
     size_type       m_nIndex        = 0u;

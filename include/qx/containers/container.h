@@ -16,8 +16,8 @@
 
 #define IMPL_CONTAINER(container)                                                                               \
                                                                                                                 \
-    using iterator       = qx::iterator<container, value_type>;                                                 \
-    using const_iterator = qx::iterator<const container, const value_type>;                                     \
+    using iterator       = qx::iterator<container>;                                                             \
+    using const_iterator = qx::iterator<const container>;                                                       \
                                                                                                                 \
     iterator            begin           (void)                      { return iterator(this, 0);             }   \
     iterator            end             (void)                      { return iterator(this, size());        }   \

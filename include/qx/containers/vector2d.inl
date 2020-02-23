@@ -1,9 +1,8 @@
-#include "continuous_vector.h"
 //============================================================================
 //
-//!\file                    continuous_vector.inl
+//!\file                        vector2d.inl
 //
-//!\brief       
+//!\brief       Contains vector2d class class
 //!\details     ~
 //
 //!\author      Khrapov
@@ -12,33 +11,36 @@
 //
 //============================================================================
 
+namespace qx
+{
+
 //============================================================================
 //!\fn                       vector2d<T>::assign
 //
-//!\brief  
-//!\param  other - 
-//!\retval       - 
+//!\brief  Assign by moving other vector
+//!\param  other - other vector
 //!\author Khrapov
 //!\date   19.02.2020
 //============================================================================
 template<class T>
-void vector2d<T>::assign(vector2d&& other) noexcept
+inline void vector2d<T>::assign(vector2d&& other) noexcept
 {
     std::swap(m_pData, other.m_pData);
     std::swap(m_nRows, other.m_nRows);
     std::swap(m_nCols, other.m_nCols);
+    std::swap(m_nAllocatedSize, other.m_nAllocatedSize);
 }
 
 //============================================================================
 //!\fn                       vector2d<T>::assign
 //
-//!\brief  
-//!\param  other - 
+//!\brief  Assign by copying another vector
+//!\param  other - another vector
 //!\author Khrapov
 //!\date   19.02.2020
 //============================================================================
 template<class T>
-void vector2d<T>::assign(const vector2d& other)
+inline void vector2d<T>::assign(const vector2d& other)
 {
     assign(other.rows(), other.cols(), other.m_pData);
 }
@@ -46,32 +48,33 @@ void vector2d<T>::assign(const vector2d& other)
 //============================================================================
 //!\fn                         vector2d<T>::assign
 //
-//!\brief  
-//!\param  rows  - 
-//!\param  cols  - 
-//!\param  pData - 
-//!\author Khrapov
-//!\date   19.02.2020
+//!\brief   Assign by size and data pointer
+//!\details Data is being copyed from pData with size rows * cols
+//!\param   rows  - num of rows in new vector
+//!\param   cols  - num of cols in new vector
+//!\param   pData - data to copy, may be nullptr
+//!\author  Khrapov
+//!\date    19.02.2020
 //============================================================================
 template<class T>
-void vector2d<T>::assign(size_type rows, size_type cols, const_pointer pData)
+inline void vector2d<T>::assign(size_type rows, size_type cols, const_pointer pData)
 {
     if (resize(rows, cols) && pData)
-        memcpy(m_pData, pData, rows * cols);
+        std::memcpy(m_pData, pData, rows * cols * sizeof(T));
 }
 
 //============================================================================
 //!\fn                       vector2d<T>::assign
 //
-//!\brief  
-//!\param  rows - 
-//!\param  cols - 
-//!\param  data - 
+//!\brief  Assign by size and fill element
+//!\param  rows - num of rows in new vector
+//!\param  cols - num of cols in new vector
+//!\param  data - element to fill in every vector cell
 //!\author Khrapov
 //!\date   19.02.2020
 //============================================================================
 template<class T>
-void vector2d<T>::assign(size_type rows, size_type cols, const_reference data)
+inline void vector2d<T>::assign(size_type rows, size_type cols, const_reference data)
 {
     if (resize(rows, cols))
         fill(data);
@@ -80,112 +83,123 @@ void vector2d<T>::assign(size_type rows, size_type cols, const_reference data)
 //============================================================================
 //!\fn                       vector2d<T>::resize
 //
-//!\brief  
-//!\param  rows - 
-//!\param  cols - 
-//!\retval      - 
-//!\author Khrapov
-//!\date   19.02.2020
+//!\brief   Resize vector
+//!\details If new size is bigger, new elements are not constructed
+//          If new size is smalled, truncated elements are destructed
+//          If ols cols != new cols, elements are moving from one col to another
+//!\param   rows - num of rows in new vector
+//!\param   cols - num of cols in new vector
+//!\retval       - true if resized successfully
+//!\author  Khrapov
+//!\date    19.02.2020
 //============================================================================
 template<class T>
-bool vector2d<T>::resize(size_type rows, size_type cols)
+inline bool vector2d<T>::resize(size_type rows, size_type cols)
 {
     bool bRet = false;
 
     if (rows > 0 && cols > 0)
     {
-        if (cols != m_nCols)
+        size_type nBytesRequired = rows * cols * sizeof(T);
+
+        if (nBytesRequired > m_nAllocatedSize)
         {
-            clear();
+            void* pMem = std::realloc(m_pData, nBytesRequired);
 
-            m_pData = new T[rows * cols];
-            m_nRows = rows;
-            m_nCols = cols;
-
-            bRet = true;
+            if (pMem)
+            {
+                m_pData = static_cast<T*>(pMem);
+                m_nAllocatedSize = nBytesRequired;
+                bRet = true;
+            }
         }
         else
-            bRet = resize(rows);
+            bRet = true;
+
+        if (bRet)
+        {
+            clear_elements(iterator(this, rows * cols), 
+                           iterator(this, m_nRows * m_nCols));
+
+            m_nRows = rows;
+            m_nCols = cols;
+        }
     }
 
     return bRet;
 }
 
 //============================================================================
-//!\fn                       vector2d<T>::resize
+//!\fn                        vector2d<T>::free
 //
-//!\brief  
-//!\param  rows - 
-//!\retval      - 
+//!\brief  Clear string and free memory
 //!\author Khrapov
-//!\date   20.02.2020
+//!\date   21.02.2020
 //============================================================================
 template<class T>
-bool vector2d<T>::resize(size_type rows)
+inline void vector2d<T>::free(void)
 {
-    return false;
+    clear(); 
+    std::free(m_pData);
 }
 
 //============================================================================
 //!\fn                        vector2d<T>::fill
 //
-//!\brief  
-//!\param  elem - 
+//!\brief  Fill vector with element
+//!\param  elem - element for filling
+//!\todo   optimize. for some reason vector<vector> is 3 times better
 //!\author Khrapov
 //!\date   19.02.2020
 //============================================================================
 template<class T>
-void vector2d<T>::fill(const_reference elem)
+inline void vector2d<T>::fill(const_reference elem) noexcept
 {
-    for (size_type i = 0; i < size_x(); i++)
-        for (size_type j = 0; j < size_y(); j++)
-            (*this)[i][j] = elem;
+    std::fill(begin(), end(), elem);
 }
 
 //============================================================================
 //!\fn                     vector2d<T>::operator[]
 //
-//!\brief  
-//!\param  nRow - 
-//!\retval      - 
+//!\brief  Get row
+//!\param  nRow - row number
+//!\retval      - row
 //!\author Khrapov
 //!\date   19.02.2020
 //============================================================================
 template<class T>
-typename vector2d<T>::row& vector2d<T>::operator[](size_type nRow)
+inline typename vector2d<T>::pointer vector2d<T>::operator[](size_type nRow) noexcept
 {
-    size_type nInd = nRow *= m_nCols;
-    ASSERT(nInd < m_nRows * m_nCols);
-    return *reinterpret_cast<row*>(m_pData + nInd);
+    return m_pData + nRow * m_nCols;
 }
 
 //============================================================================
 //!\fn                     vector2d<T>::operator[]
 //
-//!\brief  
-//!\param  nRow - 
-//!\retval      - 
+//!\brief  Get row
+//!\param  nRow - row number
+//!\retval      - const row
 //!\author Khrapov
 //!\date   19.02.2020
 //============================================================================
 template<class T>
-const typename vector2d<T>::row& vector2d<T>::operator[](size_type nRow) const
+inline typename vector2d<T>::const_pointer vector2d<T>::operator[](size_type nRow) const noexcept
 {
-    return operator[](nRow);
+    return m_pData + nRow * m_nCols;
 }
 
 //============================================================================
 //!\fn                         vector2d<T>::get
 //
-//!\brief  
-//!\param  nRow - 
-//!\param  nCol - 
-//!\retval      - 
+//!\brief  Get element
+//!\param  nRow - row number
+//!\param  nCol - col number
+//!\retval      - element
 //!\author Khrapov
 //!\date   19.02.2020
 //============================================================================
 template<class T>
-const T& vector2d<T>::get(size_type nRow, size_type nCol) const
+inline const T& vector2d<T>::get(size_type nRow, size_type nCol) const noexcept
 {
     return (*this)[nRow][nCol];
 }
@@ -193,14 +207,16 @@ const T& vector2d<T>::get(size_type nRow, size_type nCol) const
 //============================================================================
 //!\fn                        vector2d<T>::clear
 //
-//!\brief  
+//!\brief  Clear vector (do not free memory)
 //!\author Khrapov
 //!\date   19.02.2020
 //============================================================================
 template<class T>
-void vector2d<T>::clear(void)
+inline void vector2d<T>::clear(void)
 {
-    SAFE_DELETE(m_pData);
+    if (m_pData)
+        clear_elements(begin(), end());
+
     m_nRows = 0;
     m_nCols = 0;
 }
@@ -208,15 +224,15 @@ void vector2d<T>::clear(void)
 //============================================================================
 //!\fn                         vector2d<T>::set
 //
-//!\brief  
-//!\param  nRow - 
-//!\param  nCol - 
-//!\param  data - 
+//!\brief  Set elemtnt
+//!\param  nRow - row number
+//!\param  nCol - col number
+//!\param  data - element
 //!\author Khrapov
 //!\date   19.02.2020
 //============================================================================
 template<class T>
-void vector2d<T>::set(size_type nRow, size_type nCol, const_reference data)
+inline void vector2d<T>::set(size_type nRow, size_type nCol, const_reference data) noexcept
 {
     (*this)[nRow][nCol] = data;
 }
@@ -231,7 +247,7 @@ void vector2d<T>::set(size_type nRow, size_type nCol, const_reference data)
 //!\date   19.02.2020
 //============================================================================
 template<class T>
-typename vector2d<T>::reference vector2d<T>::at(size_type ind)
+inline typename vector2d<T>::reference vector2d<T>::at(size_type ind)
 { 
     return m_pData[ind]; 
 }
@@ -245,7 +261,7 @@ typename vector2d<T>::reference vector2d<T>::at(size_type ind)
 //!\date   19.02.2020
 //============================================================================
 template<class T>
-typename vector2d<T>::size_type vector2d<T>::size(void) const
+inline typename vector2d<T>::size_type vector2d<T>::size(void) const
 { 
     return size_x() * size_y(); 
 }
@@ -253,18 +269,39 @@ typename vector2d<T>::size_type vector2d<T>::size(void) const
 //============================================================================
 //!\fn                        vector2d<T>::data
 //
-//!\brief  
-//!\retval  - 
+//!\brief  Get first element pointer
+//!\retval  - first element pointer
 //!\author Khrapov
 //!\date   19.02.2020
 //============================================================================
 template<class T>
-typename vector2d<T>::pointer vector2d<T>::data()
+inline typename vector2d<T>::pointer vector2d<T>::data()
 {
     return m_pData;
 }
 template<class T>
-typename vector2d<T>::const_pointer vector2d<T>::data() const
+inline typename vector2d<T>::const_pointer vector2d<T>::data() const
 {
     return m_pData;
+}
+
+//============================================================================
+//!\fn                   vector2d<T>::clear_elements
+//
+//!\brief  Destruct elements
+//!\param  start - start element iterator
+//!\param  end   - end element iterator
+//!\author Khrapov
+//!\date   21.02.2020
+//============================================================================
+template<class T>
+inline void vector2d<T>::clear_elements(iterator start, iterator end)
+{
+    if constexpr (!std::is_fundamental<T>::value)
+    {
+        for (auto it = start; it < end; ++it)
+            static_cast<value_type>((*it)).~T();
+    }
+}
+
 }

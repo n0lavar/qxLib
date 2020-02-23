@@ -15,12 +15,12 @@ set (QXLIB_FILES_CONTAINERS
     include/qx/containers/qxstring.h
     include/qx/containers/container.h
     include/qx/containers/list_se.h
-    include/qx/containers/continuous_vector.h
+    include/qx/containers/vector2d.h
     
     include/qx/containers/object_pool.inl
     include/qx/containers/qxstring.inl
     include/qx/containers/list_se.inl
-    include/qx/containers/continuous_vector.inl
+    include/qx/containers/vector2d.inl
 )
 
 source_group ("containers" FILES ${QXLIB_FILES_CONTAINERS})

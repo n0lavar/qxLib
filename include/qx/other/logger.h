@@ -1,6 +1,6 @@
 //============================================================================
 //
-//!\file                           trace.h
+//!\file                           logger.h
 //
 //!\brief       Tracing and logging
 //!\details     ~
@@ -20,7 +20,6 @@
 
 #include <qx/other/singleton.h>
 #include <qx/containers/qxstring.h>
-#include <qx/other/useful_macros.h>
 #include <qx/other/typedefs.h>
 
 #ifndef ENABLE_DETAIL_TRACE_INFO

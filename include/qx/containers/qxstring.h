@@ -21,7 +21,6 @@
 
 #include <qx/containers/container.h>
 #include <qx/other/hashes.h>
-#include <qx/other/useful_funcs.h>
 
 namespace qx
 {
@@ -83,7 +82,7 @@ enum class eCaseType
     random
 };
 
-//============================================================================
+//============================================================================z
 //
 //!\class                        cStringType
 //
