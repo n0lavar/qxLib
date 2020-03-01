@@ -69,10 +69,14 @@ public:
                                  size_type          cols,
                                  const_reference    data);
 
-    bool            resize      (size_type          rows, 
+    bool            reserve     (size_type          nElements);
+    bool            resize      (size_type          rows,
                                  size_type          cols);
+    bool            resize      (size_type          rows, 
+                                 size_type          cols,
+                                 const_reference    data);
     void            free        (void);
-    void            fill        (const_reference    elem)       noexcept;
+    void            fill        (const_reference    elem);
     pointer         operator[]  (size_type          nRow)       noexcept;
     const_pointer   operator[]  (size_type          nRow) const noexcept;
     const_reference get         (size_type          nRow,
@@ -86,11 +90,6 @@ public:
     size_type       cols        (void) const noexcept { return m_nCols;  }
     size_type       size_x      (void) const noexcept { return m_nRows;  }
     size_type       size_y      (void) const noexcept { return m_nCols;  }
-
-private:
-
-    void            clear_elements(iterator start,
-                                   iterator end);
 
 private:
 

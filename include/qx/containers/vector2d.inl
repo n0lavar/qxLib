@@ -1,3 +1,4 @@
+#include "vector2d.h"
 //============================================================================
 //
 //!\file                        vector2d.inl
@@ -81,14 +82,39 @@ inline void vector2d<T>::assign(size_type rows, size_type cols, const_reference 
 }
 
 //============================================================================
+//!\fn                       vector2d<T>::reserve
+//
+//!\brief   Reserve vector size
+//!\param   nElements - num elements
+//!\retval            - true if reserved successfully
+//!\author  Khrapov
+//!\date    19.02.2020
+//============================================================================
+template<class T>
+inline bool vector2d<T>::reserve(size_type nElements)
+{
+    bool bRet = false;
+
+    if (nElements > m_nAllocatedSize)
+    {
+        void* pMem = std::realloc(m_pData, nElements * sizeof(T));
+        if (pMem)
+        {
+            m_pData = static_cast<T*>(pMem);
+            m_nAllocatedSize = nElements;
+            bRet = true;
+        }
+    }
+
+    return bRet;
+}
+
+//============================================================================
 //!\fn                       vector2d<T>::resize
 //
 //!\brief   Resize vector
-//!\details If new size is bigger, new elements are not constructed
-//          If new size is smalled, truncated elements are destructed
-//          If ols cols != new cols, elements are moving from one col to another
-//!\param   rows - num of rows in new vector
-//!\param   cols - num of cols in new vector
+//!\param   rows - num of rows
+//!\param   cols - num of cols
 //!\retval       - true if resized successfully
 //!\author  Khrapov
 //!\date    19.02.2020
@@ -100,31 +126,48 @@ inline bool vector2d<T>::resize(size_type rows, size_type cols)
 
     if (rows > 0 && cols > 0)
     {
-        size_type nBytesRequired = rows * cols * sizeof(T);
+        size_type nSizeRequired = rows * cols;
 
-        if (nBytesRequired > m_nAllocatedSize)
-        {
-            void* pMem = std::realloc(m_pData, nBytesRequired);
-
-            if (pMem)
-            {
-                m_pData = static_cast<T*>(pMem);
-                m_nAllocatedSize = nBytesRequired;
-                bRet = true;
-            }
-        }
+        if (nSizeRequired > m_nAllocatedSize)
+            bRet = reserve(nSizeRequired);
         else
             bRet = true;
 
         if (bRet)
         {
-            clear_elements(iterator(this, rows * cols), 
-                           iterator(this, m_nRows * m_nCols));
+            auto itFirst = iterator(this, rows * cols);
+            auto itLast  = iterator(this, m_nRows * m_nCols);
+            detail::destruct<T>(itFirst, itLast);
 
             m_nRows = rows;
             m_nCols = cols;
         }
     }
+
+    return bRet;
+}
+
+//============================================================================
+//!\fn                       vector2d<T>::resize
+//
+//!\brief   Resize vector
+//!\details If new size is bigger, new elements are not constructed
+//          If new size is smalled, truncated elements are destructed
+//          If ols cols != new cols, elements are moving from one col to another
+//!\param   rows - num of rows in new vector
+//!\param   cols - num of cols in new vector
+//!\param   data - data to fill
+//!\retval       - true if resized successfully
+//!\author  Khrapov
+//!\date    19.02.2020
+//============================================================================
+template<class T>
+inline bool vector2d<T>::resize(size_type rows, size_type cols, const_reference data)
+{
+    bool bRet = resize(rows, cols);
+
+    if (bRet)
+        std::fill(begin(), end(), data);
 
     return bRet;
 }
@@ -153,7 +196,7 @@ inline void vector2d<T>::free(void)
 //!\date   19.02.2020
 //============================================================================
 template<class T>
-inline void vector2d<T>::fill(const_reference elem) noexcept
+inline void vector2d<T>::fill(const_reference elem)
 {
     std::fill(begin(), end(), elem);
 }
@@ -205,23 +248,6 @@ inline const T& vector2d<T>::get(size_type nRow, size_type nCol) const noexcept
 }
 
 //============================================================================
-//!\fn                        vector2d<T>::clear
-//
-//!\brief  Clear vector (do not free memory)
-//!\author Khrapov
-//!\date   19.02.2020
-//============================================================================
-template<class T>
-inline void vector2d<T>::clear(void)
-{
-    if (m_pData)
-        clear_elements(begin(), end());
-
-    m_nRows = 0;
-    m_nCols = 0;
-}
-
-//============================================================================
 //!\fn                         vector2d<T>::set
 //
 //!\brief  Set elemtnt
@@ -235,21 +261,6 @@ template<class T>
 inline void vector2d<T>::set(size_type nRow, size_type nCol, const_reference data) noexcept
 {
     (*this)[nRow][nCol] = data;
-}
-
-//============================================================================
-//!\fn                         vector2d<T>::at
-//
-//!\brief  Get element at ind pos
-//!\param  ind - pos
-//!\retval     - element
-//!\author Khrapov
-//!\date   19.02.2020
-//============================================================================
-template<class T>
-inline typename vector2d<T>::reference vector2d<T>::at(size_type ind)
-{ 
-    return m_pData[ind]; 
 }
 
 //============================================================================
@@ -286,22 +297,35 @@ inline typename vector2d<T>::const_pointer vector2d<T>::data() const
 }
 
 //============================================================================
-//!\fn                   vector2d<T>::clear_elements
+//!\fn                         vector2d<T>::at
 //
-//!\brief  Destruct elements
-//!\param  start - start element iterator
-//!\param  end   - end element iterator
+//!\brief  Get element at ind pos
+//!\param  ind - pos
+//!\retval     - element
 //!\author Khrapov
-//!\date   21.02.2020
+//!\date   19.02.2020
 //============================================================================
 template<class T>
-inline void vector2d<T>::clear_elements(iterator start, iterator end)
+inline typename vector2d<T>::reference vector2d<T>::at(size_type ind)
+{ 
+    return m_pData[ind]; 
+}
+
+//============================================================================
+//!\fn                        vector2d<T>::clear
+//
+//!\brief  Clear vector (do not free memory)
+//!\author Khrapov
+//!\date   19.02.2020
+//============================================================================
+template<class T>
+inline void vector2d<T>::clear(void)
 {
-    if constexpr (!std::is_fundamental<T>::value)
-    {
-        for (auto it = start; it < end; ++it)
-            static_cast<value_type>((*it)).~T();
-    }
+    if (m_pData)
+        detail::destruct<T>(begin(), end());
+
+    m_nRows = 0;
+    m_nCols = 0;
 }
 
 }
