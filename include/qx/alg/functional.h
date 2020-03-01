@@ -20,7 +20,7 @@
 
 #include <qx/other/asserter.h>
 
-namespace qx::alg
+namespace qx
 {
 
 //============================================================================

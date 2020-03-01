@@ -20,7 +20,7 @@
 #include <ctime>
 #include <cmath>
 
-namespace qx::alg
+namespace qx
 { 
 
 //============================================================================
