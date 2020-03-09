@@ -68,6 +68,7 @@ source_group ("gl" FILES ${QXLIB_FILES_GL})
 set (QXLIB_FILES_ALG
     include/qx/alg/numerical.h
     include/qx/alg/functional.h
+    include/qx/alg/sort.h
 )
 
 source_group ("alg" FILES ${QXLIB_FILES_ALG})
@@ -75,7 +76,6 @@ source_group ("alg" FILES ${QXLIB_FILES_ALG})
 # ================================================================
 # Other
 set (QXLIB_FILES_OTHER
-    include/qx/other/asserter.h
     include/qx/other/singleton.h
     include/qx/other/logger.h
     include/qx/other/useful_macros.h
@@ -105,7 +105,20 @@ set (QXLIB_ALL_SOURCES
 IF(QX_DEBUG)
     SET(QXLIB_ALL_SOURCES 
         "${QXLIB_ALL_SOURCES}"
-        "${CMAKE_SOURCE_DIR}/src/main.cpp"
+        "${CMAKE_SOURCE_DIR}/test/main.cpp"
+        "${CMAKE_SOURCE_DIR}/test/config.h"
+
+        "${CMAKE_SOURCE_DIR}/test/test_sort.cpp"
+
+        "${CMAKE_SOURCE_DIR}/bench/bench_sort.h"
+    )
+
+    find_package (GTEST REQUIRED)
+
+    include_directories(
+        ${GTEST_INCLUDE_DIR}
+        "${CMAKE_SOURCE_DIR}/test/"
+        "${CMAKE_SOURCE_DIR}/bench/"
     )
 ENDIF(QX_DEBUG)
 
@@ -128,6 +141,12 @@ set_target_properties(qxLib PROPERTIES LINKER_LANGUAGE CXX)
 
 target_compile_options(qxLib PRIVATE
     $<$<COMPILE_LANGUAGE:CXX>:/std:c++17>
-    $<$<CONFIG:Debug>:/MTd /Od /Ob0 /Z7 /RTC1 /DDEBUG /D_DEBUG /DEBUG>
+    $<$<CONFIG:Debug>:/MTd /Od /Ob0 /Z7 /RTC1 /DDEBUG /D_DEBUG /DEBUG /bigobj>
     $<$<CONFIG:Release>:/MT /O2 /Ob2 /DNDEBUG>
 )
+
+IF(QX_DEBUG)
+    target_link_libraries (qxLib
+        ${GTEST_LIBRARIES}
+    )
+ENDIF(QX_DEBUG)

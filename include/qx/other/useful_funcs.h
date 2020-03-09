@@ -15,7 +15,7 @@
 #include <initializer_list>
 #include <algorithm>
 
-#include <qx/other/asserter.h>
+#include <qx/other/typedefs.h>
 
 //============================================================================
 //!\fn                          SAFE_DELETE<T>

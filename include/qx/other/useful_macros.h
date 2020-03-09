@@ -15,7 +15,6 @@
 #include <cstddef>
 
 #include <qx/other/typedefs.h>
-#include <qx/other/asserter.h>
 
 /*
     Placeholder for disabled macros
@@ -178,5 +177,74 @@ namespace detail
         FOO(SINGLE_ARGUMENT(std::map<int, int>), map_var);
 */
 #define SINGLE_ARGUMENT(...) __VA_ARGS__
+
+//============================================================================
+
+/*
+    ASSERT and ASSERT_MSG macros
+    use ENABLE_ASSERTS, ENABLE_DEBUG_BREAK, PROCESS_ASSERT macros to configure behavior
+*/
+
+#ifndef ENABLE_ASSERTS
+    #define ENABLE_ASSERTS _DEBUG
+#endif // !ENABLE_ASSERTS
+
+#ifndef ENABLE_DEBUG_BREAK
+    #define ENABLE_DEBUG_BREAK _DEBUG
+#endif // !ENABLE_DEBUG_BREAK
+
+#ifndef PROCESS_ASSERT
+    #define PROCESS_ASSERT(statement) EMPTY_MACRO
+#endif
+
+#ifndef PROCESS_ASSERT_MSG
+    #define PROCESS_ASSERT_MSG(statement, msg, ...) EMPTY_MACRO
+#endif
+
+#if ENABLE_DEBUG_BREAK
+
+    #if defined(_WIN32)
+        #define DEBUG_BREAK __debugbreak()
+    #elif defined(_LINUX)
+        #define DEBUG_BREAK if (detect_debugger() == 1) raise(SIGTRAP)
+    #elif defined(ANDROID)
+        #define DEBUG_BREAK assert(0)
+    #else
+        #define DEBUG_BREAK EMPTY_MACRO
+    #endif
+
+#else
+
+    #define DEBUG_BREAK EMPTY_MACRO
+
+#endif
+
+
+#if ENABLE_ASSERTS
+
+    #define ASSERT(statement)                               \
+    do {                                                    \
+        if (!(statement))                                   \
+        {                                                   \
+            PROCESS_ASSERT(statement);                      \
+            DEBUG_BREAK;                                    \
+        }                                                   \
+    } while (false)
+
+    #define ASSERT_MSG(statement, msg, ...)                 \
+    do {                                                    \
+        if (!(statement))                                   \
+        {                                                   \
+            PROCESS_ASSERT_MSG(statement, msg, __VA_ARGS__);\
+            DEBUG_BREAK;                                    \
+        }                                                   \
+    } while (false)
+
+#else
+
+    #define ASSERT(statement)                   EMPTY_MACRO
+    #define ASSERT_MSG(statement, msg, ...)     EMPTY_MACRO
+
+#endif
 
 //============================================================================

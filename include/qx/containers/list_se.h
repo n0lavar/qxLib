@@ -14,6 +14,9 @@
 
 #include <initializer_list>
 
+namespace qx
+{
+
 //============================================================================
 //
 //!\struct                     list_se_node<T>
@@ -166,5 +169,10 @@ private:
     list_se_node<T>*    m_pLastNode     = nullptr;
     size_t              m_nSize         = 0;
 };
+
+template<class T>
+using list = list_se<T>;
+
+}
 
 #include <qx/containers/list_se.inl>

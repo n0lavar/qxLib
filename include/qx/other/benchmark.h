@@ -35,6 +35,11 @@ class benchmark
     using time_duration = std::chrono::nanoseconds;
 
 public:
+    benchmark(void)
+    {
+        Start();
+    }
+
     void Start(void)
     {
         m_Start = clock::now();
