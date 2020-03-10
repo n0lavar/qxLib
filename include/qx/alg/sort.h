@@ -26,7 +26,7 @@ constexpr size_t SORT_COUNTING_MAX_BUFFER_SIZE = 100000;
 //!\fn                     sort_required<RandomIt>
 //
 //!\brief       Check if sort really needed
-//!\property    O(n)
+//!\property    O(1)
 //!\param       begin - begin iterator
 //!\param       end   - end iterator
 //!\retval            - false if [begin, end) already sorted
@@ -147,7 +147,7 @@ inline void sort_bubble(Container& cont, Compare compare = Compare())
 //
 //!\brief       Adjust heap
 //!\property    O(log(N))
-//!\param       left    - whole heap root RandomIt
+//!\param       left     - whole heap root RandomIt
 //!\param       heapSize - whole heap size for out of range check
 //!\param       position - current root position
 //!\author      Khrapov

@@ -11,9 +11,21 @@
 //
 //============================================================================
 
+
+
 namespace qx
 {
 
+//============================================================================
+//!\fn                        AlignSize<Traits>
+//
+//!\brief  Align size to upper bound
+//!\param  nSize  - current size    (ex. 30)
+//!\param  nAlign - alignment       (ex. 16)
+//!\retval        - result size     (ex. 32)
+//!\author Khrapov
+//!\date   10.03.2020
+//============================================================================
 template<class Traits>
 inline typename Traits::size_type AlignSize(typename Traits::size_type nSize,
                                             typename Traits::size_type nAlign)
@@ -31,7 +43,7 @@ inline typename Traits::size_type AlignSize(typename Traits::size_type nSize,
 //!\date   19.10.2019
 //============================================================================
 template<typename T, class Traits>
-basic_string<T, Traits>::basic_string(const_pointer pSource, size_type nSymbols)
+inline basic_string<T, Traits>::basic_string(const_pointer pSource, size_type nSymbols)
 {
     Assign(pSource, nSymbols);
 }
@@ -46,7 +58,7 @@ basic_string<T, Traits>::basic_string(const_pointer pSource, size_type nSymbols)
 //!\date   29.10.2019
 //============================================================================
 template<typename T, class Traits>
-basic_string<T, Traits>::basic_string(size_type nSymbols, value_type ch)
+inline basic_string<T, Traits>::basic_string(size_type nSymbols, value_type ch)
 {
     if (Resize(nSymbols, Traits::talign()))
         for (size_type i = 0; i < size(); i++)
@@ -61,7 +73,7 @@ basic_string<T, Traits>::basic_string(size_type nSymbols, value_type ch)
 //!\date   19.10.2019
 //============================================================================
 template<typename T, class Traits>
-const basic_string<T, Traits> & basic_string<T, Traits>::operator=(basic_string<T, Traits> && str) noexcept
+inline const basic_string<T, Traits> & basic_string<T, Traits>::operator=(basic_string<T, Traits> && str) noexcept
 {
     if (this != &str)
         std::swap(m_pData, str.m_pData);
@@ -77,7 +89,7 @@ const basic_string<T, Traits> & basic_string<T, Traits>::operator=(basic_string<
 //!\date   19.10.2019
 //============================================================================
 template<typename T, class Traits>
-const basic_string<T, Traits> & basic_string<T, Traits>::operator=(const basic_string<T, Traits> & str)
+inline const basic_string<T, Traits> & basic_string<T, Traits>::operator=(const basic_string<T, Traits> & str)
 {
     if (this != &str)
         Assign(str.m_pData, str.size());
@@ -93,7 +105,7 @@ const basic_string<T, Traits> & basic_string<T, Traits>::operator=(const basic_s
 //!\date   19.10.2019
 //============================================================================
 template<typename T, class Traits>
-const basic_string<T, Traits> & basic_string<T, Traits>::operator=(value_type ch)
+inline const basic_string<T, Traits> & basic_string<T, Traits>::operator=(value_type ch)
 {
     Assign(&ch, 1);
     return *this;
@@ -107,7 +119,7 @@ const basic_string<T, Traits> & basic_string<T, Traits>::operator=(value_type ch
 //!\date   19.10.2019
 //============================================================================
 template<typename T, class Traits>
-const basic_string<T, Traits> & basic_string<T, Traits>::operator=(const_pointer pSource)
+inline const basic_string<T, Traits> & basic_string<T, Traits>::operator=(const_pointer pSource)
 {
     if (m_pData != pSource)
         Assign(pSource, Traits::tstrlen(pSource));
@@ -126,7 +138,7 @@ const basic_string<T, Traits> & basic_string<T, Traits>::operator=(const_pointer
 //============================================================================
 template<typename T, class Traits>
 template<class ...Args>
-void basic_string<T, Traits>::format(const_pointer pStr, Args ...args)
+inline void basic_string<T, Traits>::format(const_pointer pStr, Args ...args)
 {
     size_type length = Traits::tsnprintf(nullptr, 0, pStr, args...);
     if (length > 0 && Resize(length, Traits::talign()))
@@ -145,7 +157,7 @@ void basic_string<T, Traits>::format(const_pointer pStr, Args ...args)
 //============================================================================
 template<typename T, class Traits>
 template<class ...Args>
-basic_string<T, Traits> basic_string<T, Traits>::sformat(const_pointer pStr, Args ...args)
+inline basic_string<T, Traits> basic_string<T, Traits>::sformat(const_pointer pStr, Args ...args)
 {
     basic_string str;
     str.format(pStr, args...);
@@ -160,7 +172,7 @@ basic_string<T, Traits> basic_string<T, Traits>::sformat(const_pointer pStr, Arg
 //!\date   29.10.2019
 //============================================================================
 template<typename T, class Traits>
-typename basic_string<T, Traits>::size_type basic_string<T, Traits>::capacity(void) const
+inline typename basic_string<T, Traits>::size_type basic_string<T, Traits>::capacity(void) const
 {
     auto pData = GetStrData();
     return pData ? pData->nAllocatedSize : 0;
@@ -176,7 +188,7 @@ typename basic_string<T, Traits>::size_type basic_string<T, Traits>::capacity(vo
 //!\date   29.10.2019
 //============================================================================
 template<typename T, class Traits>
-typename basic_string<T, Traits>::size_type basic_string<T, Traits>::reserve(size_type nCapacity)
+inline typename basic_string<T, Traits>::size_type basic_string<T, Traits>::reserve(size_type nCapacity)
 {
     if (nCapacity > size())
         Resize(nCapacity, Traits::talign(), true);
@@ -191,7 +203,7 @@ typename basic_string<T, Traits>::size_type basic_string<T, Traits>::reserve(siz
 //!\date   29.10.2019
 //============================================================================
 template<typename T, class Traits>
-void basic_string<T, Traits>::fit(void)
+inline void basic_string<T, Traits>::fit(void)
 {
     auto pData = GetStrData();
     if (pData && pData->nAllocatedSize > pData->nSize)
@@ -208,7 +220,7 @@ void basic_string<T, Traits>::fit(void)
 //!\date   30.10.2019
 //============================================================================
 template<typename T, class Traits>
-void basic_string<T, Traits>::erase(iterator first, iterator last)
+inline void basic_string<T, Traits>::erase(iterator first, iterator last)
 {
     size_type nStartSize = size();
 
@@ -227,7 +239,7 @@ void basic_string<T, Traits>::erase(iterator first, iterator last)
 //!\date   30.10.2019
 //============================================================================
 template<typename T, class Traits>
-void basic_string<T, Traits>::erase(iterator it)
+inline void basic_string<T, Traits>::erase(iterator it)
 {
     erase(it, it + 1);
 }
@@ -241,7 +253,7 @@ void basic_string<T, Traits>::erase(iterator it)
 //!\date   30.10.2019
 //============================================================================
 template<typename T, class Traits>
-void basic_string<T, Traits>::erase(size_type pos)
+inline void basic_string<T, Traits>::erase(size_type pos)
 {
     erase(iterator(pos), iterator(pos + 1));
 }
@@ -256,7 +268,7 @@ void basic_string<T, Traits>::erase(size_type pos)
 //!\date   30.10.2019
 //============================================================================
 template<typename T, class Traits>
-void basic_string<T, Traits>::erase(size_type ind_first, size_type nSymbols)
+inline void basic_string<T, Traits>::erase(size_type ind_first, size_type nSymbols)
 {
     erase(iterator(this, ind_first), iterator(this, static_cast<size_t>(ind_first) + nSymbols));
 }
@@ -272,7 +284,7 @@ void basic_string<T, Traits>::erase(size_type ind_first, size_type nSymbols)
 //!\date   30.10.2019
 //============================================================================
 template<typename T, class Traits>
-void basic_string<T, Traits>::insert(const_iterator from_first, const_iterator from_last, iterator to_first)
+inline void basic_string<T, Traits>::insert(const_iterator from_first, const_iterator from_last, iterator to_first)
 {
     insert(to_first - begin(), from_first.operator->(), from_last - from_first);
 }
@@ -287,7 +299,7 @@ void basic_string<T, Traits>::insert(const_iterator from_first, const_iterator f
 //!\date   30.10.2019
 //============================================================================
 template<typename T, class Traits>
-void basic_string<T, Traits>::insert(iterator to, const_pointer pSourse)
+inline void basic_string<T, Traits>::insert(iterator to, const_pointer pSourse)
 {
     insert(to - begin(), pSourse, Traits::tstrlen(pSourse));
 }
@@ -303,7 +315,7 @@ void basic_string<T, Traits>::insert(iterator to, const_pointer pSourse)
 //!\date   30.10.2019
 //============================================================================
 template<typename T, class Traits>
-void basic_string<T, Traits>::insert(iterator to, const_pointer pSourse, size_type nSymbols)
+inline void basic_string<T, Traits>::insert(iterator to, const_pointer pSourse, size_type nSymbols)
 {
     insert(to - begin(), pSourse, nSymbols);
 }
@@ -318,7 +330,7 @@ void basic_string<T, Traits>::insert(iterator to, const_pointer pSourse, size_ty
 //!\date   30.10.2019
 //============================================================================
 template<typename T, class Traits>
-void basic_string<T, Traits>::insert(size_type to_ind, const_pointer pSourse)
+inline void basic_string<T, Traits>::insert(size_type to_ind, const_pointer pSourse)
 {
     insert(to_ind, pSourse, Traits::tstrlen(pSourse));
 }
@@ -334,7 +346,7 @@ void basic_string<T, Traits>::insert(size_type to_ind, const_pointer pSourse)
 //!\date   30.10.2019
 //============================================================================
 template<typename T, class Traits>
-void basic_string<T, Traits>::insert(size_type to_ind, const_pointer pSourse, size_type nSymbols)
+inline void basic_string<T, Traits>::insert(size_type to_ind, const_pointer pSourse, size_type nSymbols)
 {
     size_type nStartSymbols = size();
     Resize(nStartSymbols + nSymbols, Traits::talign());
@@ -355,9 +367,9 @@ void basic_string<T, Traits>::insert(size_type to_ind, const_pointer pSourse, si
 //!\date   30.10.2019
 //============================================================================
 template<typename T, class Traits>
-typename basic_string<T, Traits>::size_type basic_string<T, Traits>::find(const_pointer pWhat,
-                                                                          size_type     indBegin,
-                                                                          size_type     indEnd) const
+inline typename basic_string<T, Traits>::size_type basic_string<T, Traits>::find(const_pointer pWhat,
+                                                                                 size_type     indBegin,
+                                                                                 size_type     indEnd) const
 {
     size_type nSize = size();
     size_type nSizeWhat = Traits::tstrlen(pWhat);
@@ -394,9 +406,9 @@ typename basic_string<T, Traits>::size_type basic_string<T, Traits>::find(const_
 //!\date   30.10.2019
 //============================================================================
 template<typename T, class Traits>
-typename basic_string<T, Traits>::size_type basic_string<T, Traits>::find(value_type    ch,
-                                                                          size_type     indBegin,
-                                                                          size_type     indEnd) const
+inline typename basic_string<T, Traits>::size_type basic_string<T, Traits>::find(value_type    ch,
+                                                                                 size_type     indBegin,
+                                                                                 size_type     indEnd) const
 {
     basic_string str(ch);
     return find(str.data(), indBegin, indEnd);
@@ -413,7 +425,7 @@ typename basic_string<T, Traits>::size_type basic_string<T, Traits>::find(value_
 //!\date   31.10.2019
 //============================================================================
 template<typename T, class Traits>
-basic_string<T, Traits> basic_string<T, Traits>::substr(size_type begin, size_type strLen) const
+inline basic_string<T, Traits> basic_string<T, Traits>::substr(size_type begin, size_type strLen) const
 {
     basic_string str(m_pData + begin, (strLen != npos ? strLen : size() - begin));
     return std::move(str);
@@ -431,9 +443,9 @@ basic_string<T, Traits> basic_string<T, Traits>::substr(size_type begin, size_ty
 //!\date   30.10.2019
 //============================================================================
 template<typename T, class Traits>
-typename basic_string<T, Traits>::size_type basic_string<T, Traits>::find_last_of(value_type ch, 
-                                                                                  size_type  pos, 
-                                                                                  size_type  count) const
+inline typename basic_string<T, Traits>::size_type basic_string<T, Traits>::find_last_of(value_type ch,
+                                                                                         size_type  pos, 
+                                                                                         size_type  count) const
 {
     if (pos == npos)
         pos = size();
@@ -455,7 +467,7 @@ typename basic_string<T, Traits>::size_type basic_string<T, Traits>::find_last_o
 //!\date   30.10.2019
 //============================================================================
 template<typename T, class Traits>
-std::vector<basic_string<T, Traits>> qx::basic_string<T, Traits>::split(const basic_string & sep) const
+inline std::vector<basic_string<T, Traits>> qx::basic_string<T, Traits>::split(const basic_string & sep) const
 {
     std::vector<qx::string> tokens;
 
@@ -481,8 +493,8 @@ std::vector<basic_string<T, Traits>> qx::basic_string<T, Traits>::split(const ba
 //!\date   30.10.2019
 //============================================================================
 template<typename T, class Traits>
-std::vector<basic_string<T, Traits>> qx::basic_string<T, Traits>::split(const basic_string & text, 
-                                                                        const basic_string & sep)
+inline std::vector<basic_string<T, Traits>> qx::basic_string<T, Traits>::split(const basic_string & text,
+                                                                               const basic_string & sep)
 {
     return text.split(sep);
 }
@@ -495,7 +507,7 @@ std::vector<basic_string<T, Traits>> qx::basic_string<T, Traits>::split(const ba
 //!\date   30.12.2019
 //============================================================================
 template<typename T, class Traits>
-void qx::basic_string<T, Traits>::delete_line_breaks(void)
+inline void qx::basic_string<T, Traits>::delete_line_breaks(void)
 {
     constexpr std::array toRemove { '\r', '\n' };
     for (auto it = begin(); it < end(); ++it)
@@ -513,7 +525,7 @@ void qx::basic_string<T, Traits>::delete_line_breaks(void)
 //!\date   30.12.2019
 //============================================================================
 template<typename T, class Traits>
-basic_string<T, Traits> basic_string<T, Traits>::delete_line_breaks(const_pointer pSourse)
+inline basic_string<T, Traits> basic_string<T, Traits>::delete_line_breaks(const_pointer pSourse)
 {
     basic_string str(pSourse);
     str.delete_line_breaks();
@@ -529,7 +541,7 @@ basic_string<T, Traits> basic_string<T, Traits>::delete_line_breaks(const_pointe
 //!\date   31.10.2019
 //============================================================================
 template<typename T, class Traits>
-void basic_string<T, Traits>::apply_case(eCaseType ct)
+inline void basic_string<T, Traits>::apply_case(eCaseType ct)
 {
     switch (ct) //-V719
     {
@@ -552,17 +564,17 @@ void basic_string<T, Traits>::apply_case(eCaseType ct)
 //============================================================================
 //!\fn              basic_string<T, Traits>::to
 //
-//!\brief  Try convert string into param type
-//!\param  fake param to specializate convert type
-//         to avoid function template partial specialization
-//         usage: 
-//         int number = str.to(int()).value_or(0);
-//!\param  base - expected number base (0, 2-36)
+//!\brief    Try convert string into param type
+//!\param    fake param to specializate convert type
+//           to avoid function template partial specialization
+//           usage: 
+//           int number = str.to(int()).value_or(0);
+//!\param    base - expected number base (0, 2-36)
 //!\retval - converted value if successful
 //           nullopt if range error
 //           0 if no convertion is possible
-//!\author Khrapov
-//!\date   31.10.2019
+//!\author   Khrapov
+//!\date     31.10.2019
 //============================================================================
 
 template<typename T, class Traits>
@@ -706,7 +718,7 @@ inline std::optional<long double> qx::basic_string<T, Traits>::to(long double) c
 //!\date   19.10.2019
 //============================================================================
 template<typename T, class Traits>
-typename basic_string<T, Traits>::reference basic_string<T, Traits>::operator[](size_type ind)
+inline typename basic_string<T, Traits>::reference basic_string<T, Traits>::operator[](size_type ind)
 {
     return m_pData[ind];
 }
@@ -720,7 +732,7 @@ typename basic_string<T, Traits>::reference basic_string<T, Traits>::operator[](
 //!\date   19.10.2019
 //============================================================================
 template<typename T, class Traits>
-typename basic_string<T, Traits>::reference basic_string<T, Traits>::at(size_type ind)
+inline typename basic_string<T, Traits>::reference basic_string<T, Traits>::at(size_type ind)
 { 
     return operator[](ind); 
 }
@@ -733,7 +745,7 @@ typename basic_string<T, Traits>::reference basic_string<T, Traits>::at(size_typ
 //!\date   19.10.2019
 //============================================================================
 template<typename T, class Traits>
-void basic_string<T, Traits>::clear(void)
+inline void basic_string<T, Traits>::clear(void)
 {
     if (m_pData)
     {
@@ -750,7 +762,7 @@ void basic_string<T, Traits>::clear(void)
 //!\date   19.10.2019
 //============================================================================
 template<typename T, class Traits>
-typename basic_string<T, Traits>::size_type basic_string<T, Traits>::size(void) const
+inline typename basic_string<T, Traits>::size_type basic_string<T, Traits>::size(void) const
 {
     const auto pData = GetStrData();
     return pData
@@ -766,12 +778,12 @@ typename basic_string<T, Traits>::size_type basic_string<T, Traits>::size(void) 
 //!\date   28.10.2019
 //============================================================================
 template<typename T, class Traits>
-typename basic_string<T, Traits>::pointer basic_string<T, Traits>::data(void)
+inline typename basic_string<T, Traits>::pointer basic_string<T, Traits>::data(void)
 {
     return m_pData;
 }
 template<typename T, class Traits>
-typename basic_string<T, Traits>::const_pointer basic_string<T, Traits>::data(void) const
+inline typename basic_string<T, Traits>::const_pointer basic_string<T, Traits>::data(void) const
 {
     return m_pData;
 }
@@ -783,7 +795,7 @@ typename basic_string<T, Traits>::const_pointer basic_string<T, Traits>::data(vo
 //!\date   27.10.2019
 //============================================================================
 template<typename T, class Traits>
-SStrData<Traits> * basic_string<T, Traits>::GetStrData(void)
+inline SStrData<Traits> * basic_string<T, Traits>::GetStrData(void)
 {
     return m_pData
         ? reinterpret_cast<SStrData<Traits>*>(reinterpret_cast<mem_t>(m_pData) - SStrData<Traits>::structSize())
@@ -798,7 +810,7 @@ SStrData<Traits> * basic_string<T, Traits>::GetStrData(void)
 //!\date   27.10.2019
 //============================================================================
 template<typename T, class Traits>
-const SStrData<Traits>* basic_string<T, Traits>::GetStrData(void) const
+inline const SStrData<Traits>* basic_string<T, Traits>::GetStrData(void) const
 {
     return m_pData
         ? reinterpret_cast<const SStrData<Traits>*>(reinterpret_cast<mem_t>(m_pData) - SStrData<Traits>::structSize())
@@ -818,7 +830,7 @@ const SStrData<Traits>* basic_string<T, Traits>::GetStrData(void) const
 //!\date   29.10.2019
 //============================================================================
 template<typename T, class Traits>
-bool basic_string<T, Traits>::Resize(size_type nSymbols, size_type nAlign, bool bReserve)
+inline bool basic_string<T, Traits>::Resize(size_type nSymbols, size_type nAlign, bool bReserve)
 {
     typename Traits::size_type nSizeToAllocate = nAlign
         ? AlignSize<Traits>(nSymbols + 1, nAlign)
@@ -860,7 +872,7 @@ bool basic_string<T, Traits>::Resize(size_type nSymbols, size_type nAlign, bool 
 //!\date   27.10.2019
 //============================================================================
 template<typename T, class Traits>
-void basic_string<T, Traits>::Assign(const_pointer pSource, size_type nSymbols)
+inline void basic_string<T, Traits>::Assign(const_pointer pSource, size_type nSymbols)
 {
     if (Resize(nSymbols, Traits::talign()))
         memcpy(m_pData, pSource, nSymbols);
@@ -876,7 +888,7 @@ void basic_string<T, Traits>::Assign(const_pointer pSource, size_type nSymbols)
 //!\date   27.10.2019
 //============================================================================
 template<typename T, class Traits>
-void basic_string<T, Traits>::Append(cstr pSource, size_type nSymbols)
+inline void basic_string<T, Traits>::Append(cstr pSource, size_type nSymbols)
 {
     size_type nCurrentSymbls = size();
     if (Resize(nCurrentSymbls + nSymbols, Traits::talign()))
@@ -896,7 +908,7 @@ void basic_string<T, Traits>::Append(cstr pSource, size_type nSymbols)
 //!\date   28.10.2019
 //============================================================================
 template<typename T, class Traits>
-int basic_string<T, Traits>::Compare(cstr pStr, size_type nSymbols) const
+inline int basic_string<T, Traits>::Compare(cstr pStr, size_type nSymbols) const
 {
     if (nSymbols)
         return Traits::tstrncmp(m_pData, pStr, nSymbols);
