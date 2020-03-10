@@ -1,4 +1,7 @@
 @echo off
 cls 
-RD /S /Q %~dp0build
-cmake ./build
+rd /S /Q %~dp0build
+md %~dp0build
+cd build
+cmake ..
+cd ..
