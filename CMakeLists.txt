@@ -105,10 +105,11 @@ set (QXLIB_ALL_SOURCES
 IF(QX_DEBUG)
     SET(QXLIB_ALL_SOURCES 
         "${QXLIB_ALL_SOURCES}"
-        "${CMAKE_SOURCE_DIR}/test/main.cpp"
-        "${CMAKE_SOURCE_DIR}/test/config.h"
+        "${CMAKE_SOURCE_DIR}/tests/main.cpp"
+        "${CMAKE_SOURCE_DIR}/tests/config.h"
 
-        "${CMAKE_SOURCE_DIR}/test/test_sort.cpp"
+        "${CMAKE_SOURCE_DIR}/tests/test_sort.cpp"
+        "${CMAKE_SOURCE_DIR}/tests/test_numerical.cpp"
 
         "${CMAKE_SOURCE_DIR}/bench/bench_sort.h"
     )
@@ -117,7 +118,7 @@ IF(QX_DEBUG)
 
     include_directories(
         ${GTEST_INCLUDE_DIR}
-        "${CMAKE_SOURCE_DIR}/test/"
+        "${CMAKE_SOURCE_DIR}/tests/"
         "${CMAKE_SOURCE_DIR}/bench/"
     )
 ENDIF(QX_DEBUG)

@@ -24,7 +24,7 @@ namespace qx
 { 
 
 //============================================================================
-//!\fn                              gcd<I>
+//!\fn                              gcd
 //
 //!\brief    Greatest common divisor
 //!\details  Euclid's algorithm
@@ -32,39 +32,44 @@ namespace qx
 //!\property O(log(second))
 //!\param    first  - first num
 //!\param    second - second num
-//!\retval          - greatest common divisor
+//!\retval          - greatest common divisor if first and second > 0, otherwise 0
 //!\author   Khrapov
 //!\date     1.02.2020
 //============================================================================
-template<typename I>
-I gcd(I first, I second)
+int gcd(int first, int second)
 {
-    static_assert(std::is_integral<I>::value, "Integral required");
+    if (first == 0 || second == 0)
+        return 0;
 
     while (second != 0)
     {
-        I remainder = first % second;
+        int remainder = first % second;
         first = second;
         second = remainder;
     }
 
-    return first;
+    return std::abs(first);
 }
 
 //============================================================================
-//!\fn                              lcm<I>
+//!\fn                              lcm
 //
 //!\brief    Least common multiple
 //!\property O(log(second))
 //!\param    first  - first num
 //!\param    second - second num
-//!\retval        - least common multiple
+//!\retval          - least common multiple if first and second > 0, otherwise 0
 //!\author Khrapov
 //!\date   1.02.2020
 //============================================================================
-template<typename I>
-I lcm(I first, I second)
+int lcm(int first, int second)
 {
+    if (first == 0 || second == 0)
+        return 0;
+
+    first  = std::abs(first);
+    second = std::abs(second);
+
     return first / gcd(first, second) * second;
 }
 
@@ -83,14 +88,13 @@ I lcm(I first, I second)
 //!\author   Khrapov
 //!\date     1.02.2020
 //============================================================================
-template<typename T, typename I>
-double pow(T number, I power)
+template<typename T>
+double pow(T number, int power)
 {
-    static_assert(std::is_integral<T>::value || std::is_floating_point<T>::value, "Integral or floating point required");
-    static_assert(std::is_integral<I>::value, "Integral required");
+    static_assert(std::is_integral_v<T> || std::is_floating_point_v<T>, "Integral or floating point required");
 
     bool bNegativePower = power < 0;
-    power = static_cast<I>(std::abs(static_cast<long long>(power)));
+    power = std::abs(power);
 
     double result = 1.0;
     switch (power)
@@ -99,13 +103,13 @@ double pow(T number, I power)
     case 1: result = static_cast<double>(number);           break;
     case 2: result = static_cast<double>(number) * number;  break;
     default:
-        std::bitset<std::numeric_limits<I>::digits> powerBitset(power);
-        std::array<double, std::numeric_limits<I>::digits> powers;
+        std::bitset<std::numeric_limits<int>::digits> powerBitset(power);
+        std::array<double, std::numeric_limits<int>::digits> powers;
 
         powers[0] = static_cast<double>(number);
 
-        I curPower = I(1);
-        I curIndex = I(1);
+        int curPower = 1;
+        int curIndex = 1;
 
         while (curPower < power)
         {
@@ -133,21 +137,24 @@ double pow(T number, I power)
 //!\author Khrapov
 //!\date   1.02.2020
 //============================================================================
-template<typename UI>
-UI maxpot(UI number)
+template<typename I>
+I maxpot(I number)
 {
-    static_assert(std::is_unsigned<UI>::value, "Unsigned integral required");
+    static_assert(std::is_integral_v<I>, "Integral required");
 
-    UI rv = 0;
+    if (number == I(0))
+        return I(0);
 
-    while (number)
-        rv |= number >>= 1;
+    std::bitset<std::numeric_limits<I>::digits> powers(std::abs(number));
+    I pow = std::numeric_limits<I>::digits - 1;
+    while (!powers.test(pow))
+        pow--;
 
-    return ++rv;
+    return pow;
 }
 
 //============================================================================
-//!\fn                     find_prime_factors<UI>
+//!\fn                     find_prime_factors<I>
 //
 //!\brief    Find all prime factors
 //!\property O(sqrt(number))
@@ -156,41 +163,47 @@ UI maxpot(UI number)
 //!\author   Khrapov
 //!\date     1.02.2020
 //============================================================================
-template<typename UI>
-std::vector<UI> find_prime_factors(UI number)
+template<typename I>
+std::vector<I> find_prime_factors(I number)
 {
-    static_assert(std::is_unsigned<UI>::value, "Unsigned integral required");
+    static_assert(std::is_integral_v<I>, "Integral required");
 
-    std::vector<UI> factors;
-    
-    while (number % 2 == 0)
-    {
-        factors.push_back(2);
-        number /= 2;
-    }
+    std::vector<I> factors;
 
-    UI i = 3u;
-    UI max_factor = static_cast<UI>(std::sqrt(number));
-    while (i <= max_factor)
-    {
-        while (number % i == 0)
-        {
-            factors.push_back(i);
-            number /= i;
-            max_factor = static_cast<UI>(std::sqrt(number));
-        }
-
-        i += 2;
-    }
+    if (number < 0)
+        number = -number;
 
     if (number > 1)
-        factors.push_back(number);
+    {
+        while (number % 2 == 0)
+        {
+            factors.push_back(2);
+            number /= 2;
+        }
+
+        I i = 3u;
+        I max_factor = static_cast<I>(std::sqrt(number));
+        while (i <= max_factor)
+        {
+            while (number % i == 0)
+            {
+                factors.push_back(i);
+                number /= i;
+                max_factor = static_cast<I>(std::sqrt(number));
+            }
+
+            i += 2;
+        }
+
+        if (number > 1)
+            factors.push_back(number);
+    }
 
     return factors;
 }
 
 //============================================================================
-//!\fn                         find_primes<UI>
+//!\fn                         find_primes<I>
 //
 //!\brief    Find all primes between 2 and max_number
 //!\details  Sieve of Eratosthenes
@@ -200,21 +213,21 @@ std::vector<UI> find_prime_factors(UI number)
 //!\author   Khrapov
 //!\date     1.02.2020
 //============================================================================
-template<typename UI>
-std::vector<UI> find_primes(UI max_number)
+template<typename I>
+std::vector<I> find_primes(I max_number)
 {
-    static_assert(std::is_unsigned<UI>::value, "Unsigned integral required");
+    static_assert(std::is_integral_v<I>, "Integral required");
 
     std::vector<bool> isComposite(static_cast<size_t>(max_number) + 1, false);
 
-    for (size_t i = 4; i < max_number; i += 2)
+    for (size_t i = 4; i < static_cast<size_t>(max_number) + 1; i += 2)
         isComposite[i] = true;
 
-    UI next_prime = 3u;
-    UI stop_at = static_cast<UI>(std::sqrt(max_number));
+    I next_prime = 3;
+    I stop_at = static_cast<I>(std::sqrt(max_number + 1));
     while (next_prime <= stop_at)
     {
-        for (UI i = next_prime * 2; i < max_number; i += next_prime)
+        for (I i = next_prime * 2; i < max_number + 1; i += next_prime)
             isComposite[i] = true;
 
         next_prime += 2;
@@ -223,9 +236,10 @@ std::vector<UI> find_primes(UI max_number)
             next_prime += 2;
     }
 
-    std::vector<UI> primes;
+    std::vector<I> primes;
     primes.reserve(max_number / 2); // approximate size
-    for (UI i = 2; i < max_number; i++)
+
+    for (I i = 2; i < max_number + 1; i++)
         if (!isComposite[i])
             primes.push_back(i);
 
@@ -246,7 +260,7 @@ std::vector<UI> find_primes(UI max_number)
 //============================================================================
 bool is_prime(size_t number)
 {
-    return find_prime_factors(number).size() == 1;
+    return find_prime_factors(static_cast<int>(number)).size() == 1;
 }
 
 //============================================================================
@@ -275,7 +289,7 @@ bool is_prime(size_t number, double probability)
     for (size_t i = 0; i < num_tests; i++)
     {
         size_t randomNumber = num_dist(generator);
-        if (static_cast<size_t>(pow(randomNumber, number - 1)) % number != 1)
+        if (static_cast<size_t>(pow(randomNumber, static_cast<int>(number - 1))) % number != 1)
             return false;
     }
 

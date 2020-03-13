@@ -85,33 +85,6 @@
 
 //============================================================================
 
-/*
-    Short assert and if (no need to double condition)
-    CHECK  is checking always and can be used with else
-    DCHECK is primary for debug and checks that has to be disabled in release
-*/
-
-#define CHECK(condition)                                    \
-ASSERT(condition);                                          \
-if (condition)
-
-#if (ENABLE_DCHECK)
-
-    #define DCHECK(condition)                               \
-    ASSERT(condition);                                      \
-    if (!(condition))                                       \
-    {                                                       \
-    }                                                       \
-    else
-
-#else
-
-    #define DCHECK(condition) EMPTY_MACRO;
-
-#endif
-
-//============================================================================
-
 #ifdef _WIN64
     #define PATH_SEPARATOR '\\'
 #else
@@ -248,3 +221,31 @@ namespace detail
 #endif
 
 //============================================================================
+
+/*
+    Short assert and if (no need to double condition)
+    CHECK  is checking always and can be used with else
+    DCHECK is primary for debug and checks that has to be disabled in release
+*/
+
+#define CHECK(condition)                                    \
+ASSERT(condition);                                          \
+if (condition)
+
+#if (ENABLE_DCHECK)
+
+    #define DCHECK(condition)                               \
+    ASSERT(condition);                                      \
+    if (!(condition))                                       \
+    {                                                       \
+    }                                                       \
+    else
+
+#else
+
+    #define DCHECK(condition) EMPTY_MACRO;
+
+#endif
+
+//============================================================================
+
