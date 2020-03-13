@@ -36,7 +36,7 @@ namespace qx
 //!\author   Khrapov
 //!\date     1.02.2020
 //============================================================================
-int gcd(int first, int second)
+inline int gcd(int first, int second)
 {
     if (first == 0 || second == 0)
         return 0;
@@ -62,7 +62,7 @@ int gcd(int first, int second)
 //!\author Khrapov
 //!\date   1.02.2020
 //============================================================================
-int lcm(int first, int second)
+inline int lcm(int first, int second)
 {
     if (first == 0 || second == 0)
         return 0;
@@ -89,7 +89,7 @@ int lcm(int first, int second)
 //!\date     1.02.2020
 //============================================================================
 template<typename T>
-double pow(T number, int power)
+inline double pow(T number, int power)
 {
     static_assert(std::is_integral_v<T> || std::is_floating_point_v<T>, "Integral or floating point required");
 
@@ -118,7 +118,7 @@ double pow(T number, int power)
             curIndex++;
         }
 
-        for (size_t i = 0; i < curIndex; i++)
+        for (int i = 0; i < curIndex; i++)
             if (powerBitset.test(i))
                 result *= powers[i];
 
@@ -138,7 +138,7 @@ double pow(T number, int power)
 //!\date   1.02.2020
 //============================================================================
 template<typename I>
-I maxpot(I number)
+inline I maxpot(I number)
 {
     static_assert(std::is_integral_v<I>, "Integral required");
 
@@ -164,7 +164,7 @@ I maxpot(I number)
 //!\date     1.02.2020
 //============================================================================
 template<typename I>
-std::vector<I> find_prime_factors(I number)
+inline std::vector<I> find_prime_factors(I number)
 {
     static_assert(std::is_integral_v<I>, "Integral required");
 
@@ -214,7 +214,7 @@ std::vector<I> find_prime_factors(I number)
 //!\date     1.02.2020
 //============================================================================
 template<typename I>
-std::vector<I> find_primes(I max_number)
+inline std::vector<I> find_primes(I max_number)
 {
     static_assert(std::is_integral_v<I>, "Integral required");
 
@@ -258,7 +258,7 @@ std::vector<I> find_primes(I max_number)
 //!\author   Khrapov
 //!\date     2.02.2020
 //============================================================================
-bool is_prime(size_t number)
+inline bool is_prime(size_t number)
 {
     return find_prime_factors(static_cast<int>(number)).size() == 1;
 }
@@ -273,7 +273,7 @@ bool is_prime(size_t number)
 //!\author Khrapov
 //!\date   2.02.2020
 //============================================================================
-bool is_prime(size_t number, double probability)
+inline bool is_prime(size_t number, double probability)
 {
     if (probability < 0)
         probability = -probability;
