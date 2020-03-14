@@ -91,7 +91,7 @@
     #define PATH_SEPARATOR '/'
 #endif
 
-namespace detail
+namespace qx::detail
 {
     constexpr cstr past_last_slash(cstr str, cstr last_slash)
     {
@@ -112,7 +112,7 @@ namespace detail
     Cuts full absolute path to the file name only
     ex: C:\folder1\foler2\file.cpp  =>  file.cpp
 */
-#define __SHORT_FILE__ detail::past_last_slash(__FILE__)
+#define __SHORT_FILE__ qx::detail::past_last_slash(__FILE__)
 
 //============================================================================
 
@@ -130,7 +130,7 @@ namespace detail
 
 //============================================================================
 
-namespace detail
+namespace qx::detail
 {
     template<typename ...Args>
     constexpr std::size_t va_count(Args&...) { return sizeof...(Args); }
@@ -139,7 +139,7 @@ namespace detail
 /*
     Variadic argument count
 */
-#define VA_COUNT(...) detail::va_count(__VA_ARGS__)
+#define VA_COUNT(...) qx::detail::va_count(__VA_ARGS__)
 
 //============================================================================
 
@@ -171,7 +171,7 @@ namespace detail
 #endif
 
 #ifndef PROCESS_ASSERT_MSG
-    #define PROCESS_ASSERT_MSG(statement, msg, ...) EMPTY_MACRO
+    #define PROCESS_ASSERT_MSG(statement, msg, ...) PROCESS_ASSERT(statement)
 #endif
 
 #if ENABLE_DEBUG_BREAK

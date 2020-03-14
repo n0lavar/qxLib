@@ -110,6 +110,7 @@ IF(QX_DEBUG)
 
         "${CMAKE_SOURCE_DIR}/tests/test_sort.cpp"
         "${CMAKE_SOURCE_DIR}/tests/test_numerical.cpp"
+        "${CMAKE_SOURCE_DIR}/tests/test_functional.cpp"
 
         "${CMAKE_SOURCE_DIR}/bench/bench_sort.h"
     )

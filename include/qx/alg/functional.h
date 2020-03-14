@@ -24,6 +24,8 @@
 namespace qx
 {
 
+using function2d = std::function<double(double)>;
+
 //============================================================================
 //!\fn                       linear_interpolation
 //
@@ -37,6 +39,7 @@ namespace qx
 //============================================================================
 inline double linear_interpolation(glm::dvec2 p0, glm::dvec2 p1, double x)
 {
+    ASSERT_MSG(glm::epsilonNotEqual(p1.x, p0.x, DBL_EPSILON), "two x are equal, result is nan");
     return p0.y + (p1.y - p0.y) * (x - p0.x) / (p1.x - p0.x);
 }
 
@@ -56,18 +59,15 @@ inline double linear_interpolation(glm::dvec2 p0, glm::dvec2 p1, double x)
 //============================================================================
 inline double bilinear_inletpolation(glm::dvec3 p0, glm::dvec3 p1, glm::dvec3 p2, glm::dvec3 p3, glm::dvec2 p)
 {
-    // points must be as square
-    ASSERT(glm::epsilonEqual(p0.y, p1.y, DBL_EPSILON));
-    ASSERT(glm::epsilonEqual(p2.y, p3.y, DBL_EPSILON));
-    ASSERT(glm::epsilonEqual(p0.x, p3.x, DBL_EPSILON));
-    ASSERT(glm::epsilonEqual(p1.x, p2.x, DBL_EPSILON));
+    ASSERT_MSG(glm::epsilonEqual(p0.y, p1.y, DBL_EPSILON), "points must be as square");
+    ASSERT_MSG(glm::epsilonEqual(p2.y, p3.y, DBL_EPSILON), "points must be as square");
+    ASSERT_MSG(glm::epsilonEqual(p0.x, p3.x, DBL_EPSILON), "points must be as square");
+    ASSERT_MSG(glm::epsilonEqual(p1.x, p2.x, DBL_EPSILON), "points must be as square");
 
     glm::dvec2 temp0 = { p0.y, linear_interpolation({ p0.x, p0.z }, { p1.x, p1.z }, p.x) };
     glm::dvec2 temp1 = { p2.y, linear_interpolation({ p2.x, p2.z }, { p3.x, p3.z }, p.x) };
     return linear_interpolation(temp0, temp1, p.y);
 }
-
-using function2d = std::function<double(double)>;
 
 //============================================================================
 //!\fn                     integrate_rectangle_rule
@@ -199,7 +199,10 @@ inline double integrate_adaptive_midpoint(const function2d& func,
 //!\fn                      integrate_monte_carlo
 //
 //!\brief  Interate using probabilistic algorithm Monte Carlo
-//!\param  funcIsInside   - func that returns true if point is inside shape
+//!\param  funcIsInside   - func that returns 
+//                          1 if point is inside shape with positive value
+//                          0 if point is not inside shape
+//                          -1 if point is inside shape with negative value
 //!\param  pos0           - left down corner coords
 //!\param  pos1           - right up corner coords
 //!\param  points_per_1sq - points per 1 sqare (more is better)
@@ -207,24 +210,29 @@ inline double integrate_adaptive_midpoint(const function2d& func,
 //!\author Khrapov
 //!\date   2.02.2020
 //============================================================================
-inline double integrate_monte_carlo(const std::function<bool(double, double)>& funcIsInside,
+inline double integrate_monte_carlo(const std::function<int(double, double)>&  funcIsInside,
                                     glm::dvec2                                 pos0,
                                     glm::dvec2                                 pos1,
                                     size_t                                     points_per_1sq = 1000)
 {
     double area = std::abs(pos1.x - pos0.x) * std::abs(pos1.y - pos0.y);
-    size_t total_points = static_cast<size_t>(std::ceil(area * points_per_1sq));
-    size_t points_inside = 0;
+    int total_points = static_cast<int>(std::ceil(area * points_per_1sq));
+    int points_inside = 0;
 
     std::default_random_engine generator(static_cast<unsigned int>(std::time(0)));
     std::uniform_real_distribution<double> x_dist(pos0.x, pos1.x);
     std::uniform_real_distribution<double> y_dist(pos0.y, pos1.y);
 
-    for (size_t i = 0; i < total_points; i++)
-        if (funcIsInside(x_dist(generator), y_dist(generator)))
+    for (int i = 0; i < total_points; i++)
+    {
+        int f = funcIsInside(x_dist(generator), y_dist(generator));
+        if (f > 0)
             points_inside++;
+        else if (f < 0)
+            points_inside--;
+    }
 
-    return (static_cast<double>(points_inside) / total_points)* area;
+    return (static_cast<double>(points_inside) / total_points) * area;
 }
 
 //============================================================================
@@ -243,8 +251,8 @@ inline double integrate_monte_carlo(const std::function<bool(double, double)>& f
 inline double find_zero_newtons_method(const function2d&    f,
                                        const function2d&    dfdx,
                                        double               initial_guess,
-                                       double               max_error       = 0.01,
-                                       size_t               max_iterations  = 500)
+                                       double               max_error       = 0.0001,
+                                       size_t               max_iterations  = 10000)
 {
     double x = initial_guess;
 
@@ -261,7 +269,4 @@ inline double find_zero_newtons_method(const function2d&    f,
     return x;
 }
 
-
 }
-
-
