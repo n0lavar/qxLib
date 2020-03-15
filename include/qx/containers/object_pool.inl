@@ -33,7 +33,7 @@ object_pool<T>::object_pool(size_type startSize, size_type incSize)
 }
 
 //============================================================================
-//!\fn              object_pool<T>::Emplace<...Args>
+//!\fn              object_pool<T>::emplace_back<...Args>
 //
 //!\brief    Add element to the pool
 //!\details  we need to avoid destructor call by simply
@@ -48,7 +48,7 @@ object_pool<T>::object_pool(size_type startSize, size_type incSize)
 //============================================================================
 template<class T>
 template<class ... Args>
-typename object_pool<T>::size_type object_pool<T>::Emplace(Args&&... args)
+[[nodiscard]] typename object_pool<T>::size_type object_pool<T>::emplace_back(Args&&... args)
 {
     size_type nFreeInd = UINT_EMPTY_VALUE;
 
@@ -89,14 +89,14 @@ typename object_pool<T>::size_type object_pool<T>::Emplace(Args&&... args)
 }
 
 //============================================================================
-//!\fn                      object_pool<T>::Delete
+//!\fn                      object_pool<T>::erase
 //
-//!\brief  Delete element by given id
+//!\brief  erase element by given id
 //!\author Khrapov
 //!\date   27.07.2019
 //============================================================================
 template<class T>
-void object_pool<T>::Delete(size_type id)
+void object_pool<T>::erase(size_type id)
 {
     DCHECK(id < m_Indexes.size() && m_Indexes[id] != UINT_EMPTY_VALUE)
     {
@@ -119,14 +119,14 @@ void object_pool<T>::Delete(size_type id)
 }
 
 //============================================================================
-//!\fn                   object_pool<T>::GetIdsArray
+//!\fn                   object_pool<T>::get_ids_array
 //
 //!\brief  Get array of existing id's
 //!\author Khrapov
 //!\date   25.08.2019
 //============================================================================
 template<class T>
-const std::vector<typename object_pool<T>::size_type>& object_pool<T>::GetIdsArray(void)
+const std::vector<typename object_pool<T>::size_type>& object_pool<T>::get_ids_array(void)
 {
     return m_Ids;
 }
@@ -172,12 +172,9 @@ template<class T>
 typename object_pool<T>::size_type object_pool<T>::GetId(size_type ind)
 {
     for (size_type i = 0; i < m_Indexes.size(); i++)
-    {
         if (m_Indexes[i] == ind)
-        {
             return i;
-        }
-    }
+
     ASSERT(0);
     return -1;
 }

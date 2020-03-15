@@ -118,7 +118,7 @@ inline double pow(T number, int power)
             curIndex++;
         }
 
-        for (int i = 0; i < curIndex; i++)
+        for (size_t i = 0; i < static_cast<size_t>(curIndex); i++)
             if (powerBitset.test(i))
                 result *= powers[i];
 
@@ -220,7 +220,8 @@ inline std::vector<I> find_primes(I max_number)
 
     std::vector<bool> isComposite(static_cast<size_t>(max_number) + 1, false);
 
-    for (size_t i = 4; i < static_cast<size_t>(max_number) + 1; i += 2)
+    constexpr size_t first_composite_power_of_two = 4;
+    for (size_t i = first_composite_power_of_two; i < static_cast<size_t>(max_number) + 1; i += 2)
         isComposite[i] = true;
 
     I next_prime = 3;
@@ -278,7 +279,7 @@ inline bool is_prime(size_t number, double probability)
     if (probability < 0)
         probability = -probability;
 
-    if (probability >= 1 || probability == 0)
+    if (probability >= 1 || std::fabs(probability) <= DBL_EPSILON)
         return is_prime(number);
 
     constexpr double log_2 = 0.30102999566; // std::log(2)

@@ -86,8 +86,8 @@ inline double integrate_rectangle_rule(const function2d&    func,
                                        double               x1,
                                        size_t               num_intervals_per_1 = 10)
 {
-    size_t num_intervals = static_cast<size_t>(std::ceil(num_intervals_per_1 * (x1 - x0)));
-    double dx = (x1 - x0) / num_intervals;
+    size_t num_intervals = static_cast<size_t>(std::ceil((x1 - x0) * static_cast<double>(num_intervals_per_1)));
+    double dx = (x1 - x0) / static_cast<double>(num_intervals);
     double total_area = 0.0;
     double x = x0;
 
@@ -117,8 +117,8 @@ inline double integrate_trapezoid_rule(const function2d& func,
                                        double            x1,
                                        size_t            num_intervals_per_1 = 10)
 {
-    size_t num_intervals = static_cast<size_t>(std::ceil(num_intervals_per_1 * (x1 - x0)));
-    double dx = (x1 - x0) / num_intervals;
+    size_t num_intervals = static_cast<size_t>(std::ceil(static_cast<double>(num_intervals_per_1) * (x1 - x0)));
+    double dx = (x1 - x0) / static_cast<double>(num_intervals);
     double total_area = 0.0;
     double x = x0;
 
@@ -152,8 +152,8 @@ inline double integrate_adaptive_midpoint(const function2d& func,
                                           size_t            num_intervals_per_1 = 10,
                                           size_t            max_recursion       = 300)
 {
-    size_t num_intervals = static_cast<size_t>(std::ceil(num_intervals_per_1 * (x1 - x0)));
-    double dx = (x1 - x0) / num_intervals;
+    size_t num_intervals = static_cast<size_t>(std::ceil(static_cast<double>(num_intervals_per_1) * (x1 - x0)));
+    double dx = (x1 - x0) / static_cast<double>(num_intervals);
     double total = 0.0;
     double total_area = 0.0;
     double x = x0;
@@ -216,7 +216,7 @@ inline double integrate_monte_carlo(const std::function<int(double, double)>&  f
                                     size_t                                     points_per_1sq = 1000)
 {
     double area = std::abs(pos1.x - pos0.x) * std::abs(pos1.y - pos0.y);
-    int total_points = static_cast<int>(std::ceil(area * points_per_1sq));
+    int total_points = static_cast<int>(std::ceil(area * static_cast<double>(points_per_1sq)));
     int points_inside = 0;
 
     std::default_random_engine generator(static_cast<unsigned int>(std::time(0)));

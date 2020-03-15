@@ -12,7 +12,7 @@
 //============================================================================
 #pragma once
 
-#include <qx/containers/iterator.h>
+#include <qx/containers/iterator.h>         //
 
 #define IMPL_CONTAINER(container)                                                                               \
                                                                                                                 \
@@ -46,7 +46,7 @@ namespace qx::detail
 //!\date   29.02.2020
 //============================================================================
 template<class T, class iterator>
-inline void destruct(iterator start, iterator end)
+inline void destruct(iterator start, iterator end = start++)
 {
     if constexpr (std::is_compound<T>::value)
     {

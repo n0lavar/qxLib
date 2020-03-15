@@ -56,20 +56,20 @@ public:
     IMPL_CONTAINER(object_pool)
 
 public:
-                                object_pool (void) { };
-                                object_pool (size_type              startSize   = 0,
-                                             size_type              incSize     = 10);
-
+                                    object_pool     (size_type          startSize   = 0,
+                                                     size_type          incSize     = 10);
+                            
     template<class ... Args>
-    size_type                   Emplace     (Args&&...              args);
-    void                        Delete      (size_type              id);
-    const std::vector<size_type> & GetIdsArray (void);
-    reference                   operator[]  (size_type              ind);
-    const_reference             operator[]  (size_type              ind)    const { return operator[](ind); }
-
+    [[nodiscard]] size_type         emplace_back    (Args&&...          args);
+    [[nodiscard]] size_type         push_back       (const_reference    data)           { return emplace_back(data);    }
+    void                            erase           (size_type          id);
+    const std::vector<size_type>  & get_ids_array   (void);  
+    reference                       operator[]      (size_type          ind);
+    const_reference                 operator[]      (size_type          ind)    const   { return operator[](ind);       }
+    size_t                          capacity        (void)                      const   { return m_Pool.capacity();     }
 
 private:
-    size_t                      GetId       (size_type              ind);
+    size_t                          GetId           (size_type          ind);
 
 private:
     std::vector<T>          m_Pool;
