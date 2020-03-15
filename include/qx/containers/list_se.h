@@ -19,63 +19,6 @@ namespace qx
 
 //============================================================================
 //
-//!\struct                     list_se_node<T>
-//!\author  Khrapov
-//!\date    7.02.2020
-//============================================================================
-template<class T>
-struct list_se_node
-{
-    list_se_node() { }
-
-    template<class ...Args>
-    list_se_node(Args&& ...args) : value(std::forward<Args>(args)...) { }
-
-
-    T             value = T();
-    list_se_node* pNext = nullptr;
-};
-
-
-//============================================================================
-//
-//!\class                 list_se_iterator<Node, T>
-//
-//!\brief   Single ended list iterator
-//!\details ~
-//
-//!\author  Khrapov
-//!\date    7.02.2020
-//
-//============================================================================
-template<class Node, class T>
-class list_se_iterator
-{
-    template<class T> 
-    friend class list_se;
-
-public:
-    using pointer       = T*;
-    using reference     = T&;
-    using iterator      = list_se_iterator;
-
-    list_se_iterator(void) { };
-    list_se_iterator(Node* pNode) : m_pNode(pNode) { }
-
-    reference operator*   (void)                     { return m_pNode->value;                   }
-    pointer   operator->  (void)                     { return &m_pNode->value;                  }
-    bool      operator!=  (const iterator & r) const { return m_pNode != r.m_pNode;             }
-    bool      operator==  (const iterator & r) const { return m_pNode == r.m_pNode;             }
-    iterator& operator++  (void)    { m_pNode = m_pNode->pNext; return *this;                   }
-    iterator  operator++  (int)     { iterator i(m_pNode); m_pNode = m_pNode->pNext; return i;  }
-
-private:
-    Node* m_pNode = nullptr;
-};
-
-
-//============================================================================
-//
 //!\class                         list_se<T>
 //
 //!\brief   Single ended list class
@@ -88,7 +31,46 @@ private:
 template<class T>
 class list_se
 {
+    template<class T>
+    struct list_se_node
+    {
+        list_se_node() { }
+
+        template<class ...Args>
+        list_se_node(Args&& ...args) : value(std::forward<Args>(args)...) { }
+
+
+        T             value = T();
+        list_se_node* pNext = nullptr;
+    };
+
+    template<class Node, class T>
+    class list_se_iterator
+    {
+        template<class T> 
+        friend class list_se;
+
+    public:
+        using pointer       = T*;
+        using reference     = T&;
+        using iterator      = list_se_iterator;
+
+        list_se_iterator(void) { };
+        list_se_iterator(Node* pNode) : m_pNode(pNode) { }
+
+        reference operator*   (void)                     { return m_pNode->value;                   }
+        pointer   operator->  (void)                     { return &m_pNode->value;                  }
+        bool      operator!=  (const iterator & r) const { return m_pNode != r.m_pNode;             }
+        bool      operator==  (const iterator & r) const { return m_pNode == r.m_pNode;             }
+        iterator& operator++  (void)    { m_pNode = m_pNode->pNext; return *this;                   }
+        iterator  operator++  (int)     { iterator i(m_pNode); m_pNode = m_pNode->pNext; return i;  }
+
+    private:
+        Node* m_pNode = nullptr;
+    };
+
 public:
+
     using value_type        = typename T;
     using pointer           = typename T*;
     using const_pointer     = typename const T*;

@@ -172,6 +172,7 @@ inline void list_se<T>::insert_after(iterator where, const_pointer what, size_t 
 //!\brief    Erase elements from list
 //!\property O(size() + number)
 //!\param    where  - iterator, where erasing starts
+//                    using "where" after erasing is UB
 //!\param    number - number of elements to erase
 //!\author   Khrapov
 //!\date     8.02.2020
@@ -201,6 +202,7 @@ inline void list_se<T>::erase(iterator where, size_t number)
 //!\brief    Erase elements from list
 //!\property O(number)
 //!\param    where  - iterator, after witch erasing starts
+//                    using "where" after erasing is ok
 //!\param    number - number of elements to erase
 //!\author   Khrapov
 //!\date     8.02.2020

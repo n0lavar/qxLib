@@ -2,7 +2,7 @@
 //
 //!\file                     test_functional.cpp
 //
-//!\brief       test functional functions
+//!\brief       test functional algorithms
 //!\details     ~
 //
 //!\author      Khrapov

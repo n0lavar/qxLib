@@ -14,10 +14,7 @@
 
 #define QX_TEST_SORT 0
 #define QX_TEST_NUMERICAL 0
-#define QX_TEST_FUNCTIONAL 1
+#define QX_TEST_FUNCTIONAL 0
+#define QX_TEST_LIST_SE 1
 
 #define QX_BENCH_SORT 0
-
-#include <qx/other/logger.h>
-#define PROCESS_ASSERT(statement) _TR_ASSERT(STRINGIFY(statement), "")
-#define PROCESS_ASSERT_MSG(statement, msg, ...) _TR_ASSERT(STRINGIFY(statement), msg, # __VA_ARGS__)
