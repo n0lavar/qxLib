@@ -17,19 +17,23 @@
 #endif
 
 #ifndef QX_TEST_NUMERICAL
-    #define QX_TEST_NUMERICAL 0
+    #define QX_TEST_NUMERICAL 1
 #endif
 
 #ifndef QX_TEST_FUNCTIONAL
-    #define QX_TEST_FUNCTIONAL 0
+    #define QX_TEST_FUNCTIONAL 1
 #endif
 
 #ifndef QX_TEST_LIST_SE
-    #define QX_TEST_LIST_SE 0
+    #define QX_TEST_LIST_SE 1
 #endif
 
 #ifndef QX_TEST_OBJECT_POOL
     #define QX_TEST_OBJECT_POOL 1
+#endif
+
+#ifndef QX_TEST_STRING
+    #define QX_TEST_STRING 1
 #endif
 
 

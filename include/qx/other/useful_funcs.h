@@ -55,13 +55,13 @@ namespace qx
 //!\date   3.11.2019
 //============================================================================
 template<typename L, typename R, typename V>
-inline bool between(L left, R right, V value)
+inline constexpr bool between(L left, R right, V value)
 {
     return (value - left) <= (right - left);
 }
 
 template<typename E>
-inline bool between_enum(E left, E right, E value)
+inline constexpr bool between_enum(E left, E right, E value)
 {
     i64 l = static_cast<i64>(left);
     i64 r = static_cast<i64>(right);
@@ -79,7 +79,7 @@ inline bool between_enum(E left, E right, E value)
 //!\date   3.11.2019
 //============================================================================
 template<typename V, typename T>
-inline void step_to(V& val, const T& to)
+inline constexpr void step_to(V& val, const T& to)
 {
     if (val < to)
         val++;

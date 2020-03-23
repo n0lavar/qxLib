@@ -12,14 +12,15 @@ set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake/modules/")
 set (QXLIB_FILES_CONTAINERS
     include/qx/containers/iterator.h
     include/qx/containers/object_pool.h
-    include/qx/containers/qxstring.h
+    include/qx/containers/string.h
+    include/qx/containers/string_traits.h
     include/qx/containers/container.h
     include/qx/containers/list_se.h
     include/qx/containers/vector2d.h
     include/qx/containers/triangular_vector.h
     
     include/qx/containers/object_pool.inl
-    include/qx/containers/qxstring.inl
+    include/qx/containers/string.inl
     include/qx/containers/list_se.inl
     include/qx/containers/vector2d.inl
     include/qx/containers/triangular_vector.inl
@@ -85,12 +86,21 @@ set (QXLIB_FILES_OTHER
     include/qx/other/hashes.h
     include/qx/other/noncopyble.h
     include/qx/other/benchmark.h
+    include/qx/other/random.h
     
     include/qx/other/logger.inl
     include/qx/other/hashes.inl
 )
 
 source_group ("other" FILES ${QXLIB_FILES_OTHER})
+
+# ================================================================
+# Temp
+set (QXLIB_FILES_TEMP
+    include/qx/temp/type_traits.h
+)
+
+source_group ("temp" FILES ${QXLIB_FILES_TEMP})
 
 # ================================================================
 # All
@@ -100,6 +110,7 @@ set (QXLIB_ALL_SOURCES
     ${QXLIB_FILES_GL}
     ${QXLIB_FILES_OTHER}
     ${QXLIB_FILES_ALG}
+    ${QXLIB_FILES_TEMP}
 )
 
 IF(QX_DEBUG)
@@ -113,6 +124,7 @@ IF(QX_DEBUG)
         "${CMAKE_SOURCE_DIR}/tests/test_functional.cpp"
         "${CMAKE_SOURCE_DIR}/tests/test_list_se.cpp"
         "${CMAKE_SOURCE_DIR}/tests/test_object_pool.cpp"
+        "${CMAKE_SOURCE_DIR}/tests/test_string.cpp"
         
         "${CMAKE_SOURCE_DIR}/bench/bench_sort.h"
     )

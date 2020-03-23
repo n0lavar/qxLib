@@ -19,7 +19,7 @@
 #include <unordered_map>
 
 #include <qx/other/singleton.h>
-#include <qx/containers/qxstring.h>
+#include <qx/containers/string.h>
 #include <qx/other/typedefs.h>
 
 #ifndef ENABLE_DETAIL_TRACE_INFO

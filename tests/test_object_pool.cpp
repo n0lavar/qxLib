@@ -12,6 +12,8 @@
 //============================================================================
 #include <config.h>
 
+//V_EXCLUDE_PATH *test_object_pool.cpp
+
 #if QX_TEST_OBJECT_POOL
 
 #include <qx/containers/object_pool.h>
@@ -35,8 +37,8 @@ TEST(object_pool, testing)
                 && m_l2 == other.m_l2;
         }
 
-        int m_n1 = 0;
-        int m_n2 = 1;
+        int  m_n1 = 0;
+        int  m_n2 = 1;
         long m_l1 = 2;
         long m_l2 = 3;
     };

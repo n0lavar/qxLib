@@ -191,11 +191,6 @@ typename object_pool<T>::pointer object_pool<T>::data(void)
 {
     return nullptr;
 }
-template<class T>
-typename object_pool<T>::const_pointer object_pool<T>::data(void) const
-{
-    return nullptr;
-}
 //============================================================================
 //!\fn                     object_pool<T>::operator[]
 //
