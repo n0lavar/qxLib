@@ -1,71 +1,11 @@
 # qxLib
-OpenGL header-only support library for making your own engine
+
+a few useful things I developed while studying
 
 Dependencies:
 + C++17
 + glm for gl module and some algorithms
 + glew if you want to use gl module
-
-## Directories
-
-+ __containers__. Expansion of standard stl containers.
-  + _iterator_. Lite and simple iterator implementation.
-  + _object_pool_. Contains a collection of reusable objects. When the pool is initialized, it immediately creates the entire collection of objects (allocating one consecutive chunk of memory) and initializes them all with the “not used” state. When you need a new object, you request it from the pool. It searches for an accessible object, initializes it with the value "used" and returns. When the object is no longer needed, it returns to the "unused" state again. In this way, objects can be freely created and deleted without having to allocate memory or other resources.
-  + _string_. Lite string with sizeof() == 1. Supports .format(), to(type()), split(), delete_line_breaks(), apply_case() and other useful methods.
-  + _container_. Macro with common container methods. 
-  + _list_se_. Single ended list
-  + ...
-
-+ __gl__. Class wrappers for OpenGL entities.
-  + _buffer_base_
-  + _ebo_
-  + _fbo_
-  + _rbo_
-  + _ssbo_
-  + _ssbo_arrayed_
-  + _ubo_
-  + _vao_
-  + _texture_
-  + _shader_
-  + _shader_program_
-  + ...
-  
-+ __agl__. Basic algorithms
-  + _numerical_ numerical algorithms
-    + _gcd_ Greatest common divisor
-    + _lcm_ Least common multiple
-    + _pow_ optimized power algorithm for integral powers (1.7-2.33 times faster then std::pow)
-    + _maxpot_ Max power of two in integer
-    + _find_prime_factors_ Find all prime factors of number
-    + _find_primes_ Find all primes between 2 and max_number
-    + _is_prime_ Is number prime with some probability
-  + _functional_ functional algorithms
-    + _linear_interpolation_
-    + _bilinear_inletpolation_
-    + _integrate_rectangle_rule_
-    + _integrate_trapezoid_rule_
-    + _integrate_adaptive_midpoint_
-    + _integrate_monte_carlo_
-  
-+ __other__. 
-  + _asserter_. Multiplatform ASSERT() and ASSERT_MSG() macros.
-  + _benchmark_ Simple benchmark tool based on std::chrono
-  + _hashes_. Hashes implementations.
-  + _logger_. Logging system. Provides console and file output, enabling and disabling logging for custom files and functions.
-  + _noncopyble_. Base class for noncopyble objects.
-  + _singleton_. Mayers singletone macro.
-  + _smart_enum_. Smart enum macro. Provides ToString(), FromString(), increment operations.
-  + _typedefs_. Types defines.
-  + _useful_funcs_. 
-  + _useful_macros_. 
-  
-## Todos:
-  + tests
-  + basic algorithms
-  + basic data structures (~~list_se~~-, list_de, list_cycle, list_multi, list_skip, list_xor, ...)
-  + renderer: interface, scene node, scene graph, cullings
-  + Protected value: defence from cheat engine, artmoney etc
-  + gl classes improvements
   
 ## License
 
