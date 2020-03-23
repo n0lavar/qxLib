@@ -37,28 +37,3 @@
     reference               at              (size_type  ind);           /* implement */                                         \
     const_reference         at              (size_type  ind)    const   { return const_cast<container*>(this)->at(ind);     }   \
     void                    clear           (void);                     /* implement */
-
-
-namespace qx::detail
-{
-
-//============================================================================
-//!\fn                   destruct<T, iterator>
-//
-//!\brief  Call destructors
-//!\param  start - start iterator
-//!\param  end   - end iterator
-//!\author Khrapov
-//!\date   29.02.2020
-//============================================================================
-template<class T, class iterator>
-inline void destruct(iterator start, iterator end = start++)
-{
-    if constexpr (std::is_compound<T>::value)
-    {
-        for (auto it = start; it < end; ++it)
-            static_cast<T>((*it)).~T();
-    }
-}
-
-}

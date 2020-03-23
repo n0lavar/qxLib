@@ -100,4 +100,39 @@ inline constexpr T pi()
     return static_cast<T>(3.14159265358979323846264338327950288);
 }
 
+//============================================================================
+//!\fn                     align_size<T, size_type>
+//
+//!\brief  Align size to upper bound
+//!\param  nSize  - current size    (ex. 30)
+//!\param  nAlign - alignment       (ex. 16)
+//!\retval        - result size     (ex. 32)
+//!\author Khrapov
+//!\date   10.03.2020
+//============================================================================
+template<class T, typename size_type>
+inline size_type align_size(size_type nSize, size_type nAlign)
+{
+    return ((nSize + nAlign) - (nSize + nAlign) % nAlign) * sizeof(T);
+}
+
+//============================================================================
+//!\fn                   destruct<T, iterator>
+//
+//!\brief  Call destructors
+//!\param  start - start iterator
+//!\param  end   - end iterator
+//!\author Khrapov
+//!\date   29.02.2020
+//============================================================================
+template<class T, class iterator>
+inline void destruct(iterator start, iterator end = start++)
+{
+    if constexpr (std::is_compound<T>::value)
+    {
+        for (auto it = start; it < end; ++it)
+            static_cast<T>((*it)).~T();
+    }
+}
+
 }

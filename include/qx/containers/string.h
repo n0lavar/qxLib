@@ -1,6 +1,6 @@
 //============================================================================
 //
-//!\file                          qxstring.h
+//!\file                          string.h
 //
 //!\brief       Lite string impl
 //!\details     ~
@@ -14,7 +14,6 @@
 
 #define _SILENCE_CXX17_CODECVT_HEADER_DEPRECATION_WARNING
 
-#include <functional>
 #include <array>
 #include <vector>
 #include <optional>
@@ -63,6 +62,7 @@ public:
     using const_reference   = typename Traits::const_reference;
     using difference_type   = typename Traits::difference_type;
     using size_type         = typename Traits::size_type;
+    using std_string_type   = typename Traits::std_string_type;
 
     static constexpr size_type npos = UINT_EMPTY_VALUE;
 
@@ -78,6 +78,7 @@ public:
                             basic_string (const_pointer          pSource)         { assign(pSource);                           }
                             basic_string (size_type              nSymbols,
                                           value_type             ch)              { assign(nSymbols, ch);                      }
+                            basic_string (const std_string_type& str)             { assign(str.data(), static_cast<size_type>(str.size())); }
     template<class FwdIt>   basic_string (FwdIt                  first, 
                                           FwdIt                  last)            { assign(first, last);                       }
 
@@ -100,6 +101,7 @@ public:
     const   basic_string &  operator=    (const basic_string   & str);
     const   basic_string &  operator=    (value_type             ch);
     const   basic_string &  operator=    (const_pointer          pSource);
+    const   basic_string &  operator=    (const std_string_type& str);
 
     template<class ... Args>
     void                    format       (const_pointer          pStr,
@@ -187,31 +189,22 @@ public:
     const   basic_string &  operator+=   (const basic_string   & str)             { Append(str.data(), str.size());             return *this;   }
     const   basic_string &  operator+=   (value_type             ch)              { Append(&ch, 1);                             return *this;   }
     const   basic_string &  operator+=   (const_pointer          pSource)         { Append(pSource, Traits::tstrlen(pSource));  return *this;   }
+    const   basic_string &  operator+=   (const std_string_type & str)            { Append(str.data(), static_cast<size_type>(str.size())); return *this; }
 
     bool                    operator==   (const basic_string   & str)       const { return !Compare(str.data());                                }
     bool                    operator==   (value_type             ch)        const { return !Compare(&ch, 1);                                    }
     bool                    operator==   (const_pointer          pSource)   const { return !Compare(pSource);                                   }
+    bool                    operator==   (const std_string_type& str)       const { return !Compare(str.data());                                }
 
     bool                    operator!=   (const basic_string   & str)       const { return !operator==(str);                                    }
     bool                    operator!=   (value_type             ch)        const { return !operator==(ch);                                     }
     bool                    operator!=   (const_pointer          pSource)   const { return !operator==(pSource);                                }
+    bool                    operator!=   (const std_string_type& str)       const { return !operator==(str);                                    }
 
     reference               operator[]   (size_type              ind);
     const_reference         operator[]   (size_type              ind)       const { return operator[](ind);                                     }
 
                             operator const_pointer(void)                    const { return data();                                              }
-
-#if __has_include(<string>)
-
-    using std_string_type = typename Traits::std_string_type;
-
-                           basic_string (const std_string_type & str)       : basic_string(str.data(), static_cast<size_type>(str.size()))   {      }
-    const   basic_string & operator=    (const std_string_type & str)       { assign(str.data(), static_cast<size_type>(str.size())); return *this; }
-    const   basic_string & operator+=   (const std_string_type & str)       { Append(str.data(), static_cast<size_type>(str.size())); return *this; }
-    bool                   operator==   (const std_string_type & str) const { return !Compare(str.data());                                          }
-    bool                   operator!=   (const std_string_type & str) const { return !operator==(str);                                              }
-
-#endif
 
 private:
     SStrData<Traits>          * GetStrData      (void);
@@ -223,7 +216,6 @@ private:
                                                  size_type              nSymbols);
     int                         Compare         (const_pointer          pStr,
                                                  size_type              nSymbols = 0)           const;
-
 private:
     pointer m_pData = nullptr;
 };
@@ -245,14 +237,10 @@ template<class UT> basic_string<UT> operator+ (basic_string<UT>&&               
 template<class UT> basic_string<UT> operator+ (typename UT::value_type              lhs, const basic_string<UT>&                rhs) _STR_OP_PLUS_BODY
 template<class UT> basic_string<UT> operator+ (typename UT::value_type              lhs, basic_string<UT>&&                     rhs) _STR_OP_PLUS_BODY
                                                                                                                                           
-#if __has_include(<string>)     
-
 template<class UT> basic_string<UT> operator+ (const basic_string<UT>&              lhs, typename const UT::std_string_type&    rhs) _STR_OP_PLUS_BODY
 template<class UT> basic_string<UT> operator+ (basic_string<UT>&&                   lhs, typename const UT::std_string_type&    rhs) _STR_OP_PLUS_BODY
 template<class UT> basic_string<UT> operator+ (typename const UT::std_string_type&  lhs, const basic_string<UT>&                rhs) _STR_OP_PLUS_BODY
 template<class UT> basic_string<UT> operator+ (typename const UT::std_string_type&  lhs, basic_string<UT>&&                     rhs) _STR_OP_PLUS_BODY
-
-#endif
 
 //============================================================================
 //

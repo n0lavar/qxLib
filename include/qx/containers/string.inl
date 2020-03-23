@@ -1,6 +1,6 @@
 //============================================================================
 //
-//!\file                         qxstring.inl
+//!\file                         string.inl
 //
 //!\brief       Lite string impl
 //!\details     ~
@@ -13,23 +13,6 @@
 
 namespace qx
 {
-
-//============================================================================
-//!\fn                        AlignSize<Traits>
-//
-//!\brief  Align size to upper bound
-//!\param  nSize  - current size    (ex. 30)
-//!\param  nAlign - alignment       (ex. 16)
-//!\retval        - result size     (ex. 32)
-//!\author Khrapov
-//!\date   10.03.2020
-//============================================================================
-template<class Traits>
-inline typename Traits::size_type AlignSize(typename Traits::size_type nSize,
-                                            typename Traits::size_type nAlign)
-{
-    return ((nSize + nAlign) - (nSize + nAlign) % nAlign) * sizeof(Traits::value_type);
-}
 
 //============================================================================
 //!\fn                  basic_string<Traits>::assign
@@ -123,6 +106,20 @@ inline const basic_string<Traits> & basic_string<Traits>::operator=(const_pointe
     if (m_pData != pSource)
         assign(pSource, Traits::tstrlen(pSource));
 
+    return *this;
+}
+
+//============================================================================
+//!\fn                 basic_string<Traits>::operator=
+//
+//!\param  str - std string
+//!\author Khrapov
+//!\date   24.03.2020
+//============================================================================
+template<class Traits>
+inline const basic_string<Traits>& basic_string<Traits>::operator=(const std_string_type& str)
+{
+    assign(str.data(), static_cast<size_type>(str.size())); 
     return *this;
 }
 
@@ -900,7 +897,7 @@ template<class Traits>
 inline bool basic_string<Traits>::Resize(size_type nSymbols, size_type nAlign, bool bReserve)
 {
     typename Traits::size_type nSizeToAllocate = nAlign
-        ? AlignSize<Traits>(nSymbols + 1, nAlign)
+        ? qx::align_size<Traits::value_type>(nSymbols + 1, nAlign)
         : nSymbols + 1;
 
     SStrData<Traits>* pStrData = GetStrData();

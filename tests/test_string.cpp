@@ -19,12 +19,24 @@
 #include <qx/containers/string.h>
 #include <gtest/gtest.h>
 
+//============================================================================
+//
+//!\class                 TestQxString<StringTraits>
+//
+//!\brief   Test class for qx::string and qx::wstring
+//!\details ~
+//
+//!\author  Khrapov
+//!\date    24.03.2020
+//
+//============================================================================
 template <typename StringTraits>
 class TestQxString : public ::testing::Test
 {
 protected:
     using StringType = qx::basic_string<StringTraits>;
 };
+
 
 using Implementations = ::testing::Types
 <

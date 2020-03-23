@@ -136,7 +136,7 @@ inline bool vector2d<T>::resize(size_type rows, size_type cols)
         {
             auto itFirst = iterator(this, rows * cols);
             auto itLast  = iterator(this, m_nRows * m_nCols);
-            detail::destruct<T>(itFirst, itLast);
+            destruct<T>(itFirst, itLast);
 
             m_nRows = rows;
             m_nCols = cols;

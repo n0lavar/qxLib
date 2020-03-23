@@ -43,10 +43,7 @@ struct char_traits<char>
     using const_reference   = const char&;
     using difference_type   = std::ptrdiff_t;
     using size_type         = size_t;
-
-#if __has_include(<string>)
     using std_string_type   = std::string;
-#endif
 
     static value_type teol (void)                          
     { 
@@ -111,10 +108,7 @@ struct char_traits<wchar_t>
     using const_reference   = const wchar_t&;
     using difference_type   = std::ptrdiff_t;
     using size_type         = size_t;
-
-#if __has_include(<string>)
     using std_string_type   = std::wstring;
-#endif
 
     static value_type teol (void)                          
     { 
@@ -169,31 +163,31 @@ namespace qx::detail
 {
 
 template<typename value_type>
-const value_type* ChooseCVT_S(const char* c, const wchar_t* w);
+const value_type* ChooseStrPrefix(const char* c, const wchar_t* w);
 
 template<>
-const char* ChooseCVT_S<char>(const char* c, const wchar_t* w)
+const char* ChooseStrPrefix<char>(const char* c, const wchar_t* w)
 {
     return c;
 }
 
 template<>
-const wchar_t* ChooseCVT_S<wchar_t>(const char* c, const wchar_t* w)
+const wchar_t* ChooseStrPrefix<wchar_t>(const char* c, const wchar_t* w)
 {
     return w;
 }
 
 template<typename C>
-C ChooseCVT_C(char c, wchar_t w);
+C ChooseCharPrefix(char c, wchar_t w);
 
 template<>
-char ChooseCVT_C<char>(char c, wchar_t w)
+char ChooseCharPrefix<char>(char c, wchar_t w)
 {
     return c;
 }
 
 template<>
-wchar_t ChooseCVT_C<wchar_t>(char c, wchar_t w)
+wchar_t ChooseCharPrefix<wchar_t>(char c, wchar_t w)
 {
     return w;
 }
@@ -201,5 +195,7 @@ wchar_t ChooseCVT_C<wchar_t>(char c, wchar_t w)
 }
 
 // chose witch of prefixes add to string : L or none
-#define STR_PREFIX(value_type, str) qx::detail::ChooseCVT_S<value_type>(str, TOWSTRING(str))
-#define CHAR_PREFIX(value_type, ch) qx::detail::ChooseCVT_C<value_type>(ch, TOWSTRING(ch))
+#define STR_PREFIX(value_type, str) qx::detail::ChooseStrPrefix<value_type>(str, TOWSTRING(str))
+
+// chose witch of prefixes add to char : L or none
+#define CHAR_PREFIX(value_type, ch) qx::detail::ChooseCharPrefix<value_type>(ch, TOWSTRING(ch))

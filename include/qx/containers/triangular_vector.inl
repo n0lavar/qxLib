@@ -113,7 +113,7 @@ inline bool triangular_vector<T>::resize(size_type nSideSize)
         m_nSize = getVectorSize(nSideSize);
 
         auto itLast = iterator(this, m_nSize);
-        detail::destruct<T>(itFirst, itLast);
+        destruct<T>(itFirst, itLast);
 
         bRet = true;
     }
