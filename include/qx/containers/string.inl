@@ -33,7 +33,7 @@ inline void basic_string<Traits>::assign(const_pointer pSource, size_type nSymbo
 //============================================================================
 //!\fn               basic_string<Traits>::assign
 //
-//!\brief  Assign bi filling
+//!\brief  Assign by filling
 //!\param  nSymbols - num of symbols of char
 //!\param  ch       - char
 //!\author Khrapov
@@ -776,6 +776,120 @@ inline typename std::enable_if<std::is_floating_point_v<To>,
     }
 
     return static_cast<To>(nRet);
+}
+
+//============================================================================
+//!\fn                 basic_string<Traits>::from<From>
+//
+//!\brief  Construct string from custom type
+//!\param  data      - data of type From
+//!\param  pszFormat - format string if default is not enough
+//!\author Khrapov
+//!\date   24.03.2020
+//============================================================================
+template<class Traits>
+template<typename From>
+inline void basic_string<Traits>::from(const From& data, const_pointer pszFormat)
+{
+    if (!pszFormat)
+    {
+        if constexpr (std::is_same_v<From, char>)
+        {
+            pszFormat = STR_PREFIX(Traits::value_type, "%hhd");
+        }
+        else if constexpr (std::is_same_v<From, unsigned char>)
+        {
+            pszFormat = STR_PREFIX(Traits::value_type, "%hhu");
+        }
+        else if constexpr (std::is_same_v<From, short>)
+        {
+            pszFormat = STR_PREFIX(Traits::value_type, "%hd");
+        }
+        else if constexpr (std::is_same_v<From, unsigned short>)
+        {
+            pszFormat = STR_PREFIX(Traits::value_type, "%hu");
+        }
+        else if constexpr (std::is_same_v<From, int>)
+        {
+            pszFormat = STR_PREFIX(Traits::value_type, "%d");
+        }
+        else if constexpr (std::is_same_v<From, unsigned int>)
+        {
+            pszFormat = STR_PREFIX(Traits::value_type, "%u");
+        }
+        else if constexpr (std::is_same_v<From, long>)
+        {
+            pszFormat = STR_PREFIX(Traits::value_type, "%ld");
+        }
+        else if constexpr (std::is_same_v<From, unsigned long>)
+        {
+            pszFormat = STR_PREFIX(Traits::value_type, "%lu");
+        }
+        else if constexpr (std::is_same_v<From, long long>)
+        {
+            pszFormat = STR_PREFIX(Traits::value_type, "%lld");
+        }
+        else if constexpr (std::is_same_v<From, unsigned long long>)
+        {
+            pszFormat = STR_PREFIX(Traits::value_type, "%llu");
+        }
+        else if constexpr (std::is_same_v<From, float>)
+        {
+            pszFormat = STR_PREFIX(Traits::value_type, "%f");
+        }
+        else if constexpr (std::is_same_v<From, double>)
+        {
+            pszFormat = STR_PREFIX(Traits::value_type, "%lf");
+        }
+        else if constexpr (std::is_same_v<From, long double>)
+        {
+            pszFormat = STR_PREFIX(Traits::value_type, "%llf");
+        }
+        else if constexpr (std::is_pointer_v<From>)
+        {
+            pszFormat = data == nullptr
+                ? STR_PREFIX(Traits::value_type, "%p")
+                : STR_PREFIX(Traits::value_type, "0x%p");
+        }
+        else if constexpr (std::is_same_v<From, bool>)
+        {
+            pszFormat = data 
+                ? STR_PREFIX(Traits::value_type, "true")
+                : STR_PREFIX(Traits::value_type, "false");
+        }
+    }
+
+    if (pszFormat)
+    {
+        size_type nLen = static_cast<size_type>(Traits::tsnprintf(nullptr, 0, pszFormat, data));
+        if (Resize(nLen))
+            Traits::tsnprintf(m_pData, nLen + 1, pszFormat, data);
+    }
+    else
+    {
+        sstream_type ss;
+        ss << data;
+        assign(ss.str());
+    }
+}
+
+//============================================================================
+//!\fn                basic_string<Traits>::sfrom<From>
+//
+//!\brief  Construct string from custom type and get it
+//!\param  data      - data of type From
+//!\param  pszFormat - format string if default is not enough
+//!\retval           - constructed string
+//!\author Khrapov
+//!\date   24.03.2020
+//============================================================================
+template<class Traits>
+template<typename From>
+inline basic_string<Traits> basic_string<Traits>::sfrom(const From& data, const_pointer pszFormat)
+{
+    basic_string str;
+    str.from(data, pszFormat);
+    return std::move(str);
 }
 
 //============================================================================

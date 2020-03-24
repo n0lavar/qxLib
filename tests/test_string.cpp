@@ -17,6 +17,7 @@
 #if QX_TEST_STRING
 
 #include <qx/containers/string.h>
+#include <unordered_map>
 #include <gtest/gtest.h>
 
 //============================================================================
@@ -116,6 +117,12 @@ TYPED_TEST(TestQxString, construct)
     EXPECT_STREQ(str10.data(), STR_PREFIX(TypeParam::value_type, "arorua"));
     EXPECT_FALSE(str10.empty());
     EXPECT_EQ(str10.size(), 6);
+
+    // from std string
+    StringType str11(TypeParam::std_string_type(STR_PREFIX(TypeParam::value_type, "Hello world")));
+    EXPECT_STREQ(str11.data(), STR_PREFIX(TypeParam::value_type, "Hello world"));
+    EXPECT_FALSE(str11.empty());
+    EXPECT_EQ(str11.size(), 11);
 }
 
 TYPED_TEST(TestQxString, assign)
@@ -193,6 +200,13 @@ TYPED_TEST(TestQxString, assign)
     EXPECT_STREQ(str10.data(), STR_PREFIX(TypeParam::value_type, "arorua"));
     EXPECT_FALSE(str10.empty());
     EXPECT_EQ(str10.size(), 6);
+
+    // from std string
+    StringType str11;
+    str11.assign(TypeParam::std_string_type(STR_PREFIX(TypeParam::value_type, "Hello world")));
+    EXPECT_STREQ(str11.data(), STR_PREFIX(TypeParam::value_type, "Hello world"));
+    EXPECT_FALSE(str11.empty());
+    EXPECT_EQ(str11.size(), 11);
 }
 
 TYPED_TEST(TestQxString, operator_assign)
@@ -664,6 +678,87 @@ TYPED_TEST(TestQxString, operator_plus)
     EXPECT_STREQ(str.data(), STR_PREFIX(TypeParam::value_type, "word_std word_ref "));
     str = stdStr + StringType(STR_PREFIX(TypeParam::value_type, "word_move "));
     EXPECT_STREQ(str.data(), STR_PREFIX(TypeParam::value_type, "word_std word_move "));
+}
+
+TYPED_TEST(TestQxString, hashes)
+{
+    std::unordered_map<StringType, int> map;
+    EXPECT_EQ(map.size(), 0);
+
+    map[StringType(STR_PREFIX(TypeParam::value_type, "Hello world"))] = 0;
+    EXPECT_EQ(map.size(), 1);
+    EXPECT_EQ(map[STR_PREFIX(TypeParam::value_type, "Hello world")], 0);
+}
+
+TYPED_TEST(TestQxString, at)
+{
+    StringType str(STR_PREFIX(TypeParam::value_type, "Hello world!"));
+    EXPECT_EQ(str[0], CHAR_PREFIX(TypeParam::value_type, 'H'));
+    EXPECT_EQ(str[2], CHAR_PREFIX(TypeParam::value_type, 'l'));
+    EXPECT_EQ(str[6], CHAR_PREFIX(TypeParam::value_type, 'w'));
+    EXPECT_EQ(str[11], CHAR_PREFIX(TypeParam::value_type, '!'));
+    EXPECT_EQ(str.back(), CHAR_PREFIX(TypeParam::value_type, '!'));
+    EXPECT_EQ(str.front(), CHAR_PREFIX(TypeParam::value_type, 'H'));
+}
+
+TYPED_TEST(TestQxString, from)
+{
+    StringType str;
+
+    str.from(char(10));
+    EXPECT_STREQ(str.data(), STR_PREFIX(TypeParam::value_type, "10"));
+
+    str.from(unsigned char(20));
+    EXPECT_STREQ(str.data(), STR_PREFIX(TypeParam::value_type, "20"));
+
+    str.from(short(30));
+    EXPECT_STREQ(str.data(), STR_PREFIX(TypeParam::value_type, "30"));
+
+    str.from(unsigned short(40));
+    EXPECT_STREQ(str.data(), STR_PREFIX(TypeParam::value_type, "40"));
+
+    str.from(50);
+    EXPECT_STREQ(str.data(), STR_PREFIX(TypeParam::value_type, "50"));
+
+    str.from(60u);
+    EXPECT_STREQ(str.data(), STR_PREFIX(TypeParam::value_type, "60"));
+
+    str.from(70l);
+    EXPECT_STREQ(str.data(), STR_PREFIX(TypeParam::value_type, "70"));
+
+    str.from(80ul);
+    EXPECT_STREQ(str.data(), STR_PREFIX(TypeParam::value_type, "80"));
+
+    str.from(90ll);
+    EXPECT_STREQ(str.data(), STR_PREFIX(TypeParam::value_type, "90"));
+
+    str.from(100ull);
+    EXPECT_STREQ(str.data(), STR_PREFIX(TypeParam::value_type, "100"));
+
+    str.from(110.f);
+    EXPECT_STREQ(str.data(), STR_PREFIX(TypeParam::value_type, "110.000000"));
+
+    str.from(120.0);
+    EXPECT_STREQ(str.data(), STR_PREFIX(TypeParam::value_type, "120.000000"));
+
+    str.from(long double(130.0));
+    EXPECT_STREQ(str.data(), STR_PREFIX(TypeParam::value_type, "130.000000"));
+
+    str.from(nullptr);
+    EXPECT_STREQ(str.data(), STR_PREFIX(TypeParam::value_type, "nullptr"));
+
+    str.from((void*)0x000000000028FF44);
+    EXPECT_STREQ(str.data(), STR_PREFIX(TypeParam::value_type, "0x000000000028FF44"));
+
+    str.from(true);
+    EXPECT_STREQ(str.data(), STR_PREFIX(TypeParam::value_type, "true"));
+
+    str.from(false);
+    EXPECT_STREQ(str.data(), STR_PREFIX(TypeParam::value_type, "false"));
+
+    // std strings have operator<<
+    str.from(TypeParam::std_string_type(STR_PREFIX(TypeParam::value_type, "some string")));
+    EXPECT_STREQ(str.data(), STR_PREFIX(TypeParam::value_type, "some string"));
 }
 
 #endif

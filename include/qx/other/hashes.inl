@@ -15,7 +15,7 @@ namespace qx::hash::str
 {
 
 //============================================================================
-//!\fn                     qx::hash::str::Murmur32
+//!\fn                  qx::hash::str::Murmur32<Char>
 //
 //!\brief   Murmur hash
 //!\details https://en.wikipedia.org/wiki/MurmurHash
@@ -28,10 +28,11 @@ namespace qx::hash::str
 //!\author Khrapov
 //!\date   8.01.2020
 //============================================================================
-inline u32 Murmur32(const char* key, size_t len, u32 seed)
+template<typename Char>
+inline u32 Murmur32(const Char* key, size_t len, u32 seed)
 {
     if (len == 0)
-        len = std::strlen(key);
+        len = qx::char_traits<Char>::tstrlen(key);
 
     u32 h = seed;
     if (len > 3)

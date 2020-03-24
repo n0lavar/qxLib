@@ -12,15 +12,15 @@
 //============================================================================
 #pragma once
 
-#include <cstring>
-
 #include <qx/other/typedefs.h>
+#include <qx/containers/string_traits.h>
 
 namespace qx::hash
 {
     namespace str
     {
-        u32 Murmur32(const char* key, size_t len, u32 seed);
+        template<typename Char>
+        u32 Murmur32(const Char* key, size_t len, u32 seed);
     }
 }
 

@@ -15,11 +15,12 @@
 #include <cwctype>
 #include <codecvt>
 #include <cctype>
+#include <sstream>
 
 #include <qx/other/useful_funcs.h>
 
-#define _TOWSTRING(x) L##x
-#define TOWSTRING(x) _TOWSTRING(x)
+#define _QX_TO_WSTRING(x) L##x
+#define QX_TO_WSTRING(x) _QX_TO_WSTRING(x)
 
 namespace qx
 {
@@ -44,6 +45,7 @@ struct char_traits<char>
     using difference_type   = std::ptrdiff_t;
     using size_type         = size_t;
     using std_string_type   = std::string;
+    using sstream_type      = std::stringstream;
 
     static value_type teol (void)                          
     { 
@@ -109,6 +111,7 @@ struct char_traits<wchar_t>
     using difference_type   = std::ptrdiff_t;
     using size_type         = size_t;
     using std_string_type   = std::wstring;
+    using sstream_type      = std::wstringstream;
 
     static value_type teol (void)                          
     { 
@@ -163,31 +166,31 @@ namespace qx::detail
 {
 
 template<typename value_type>
-const value_type* ChooseStrPrefix(const char* c, const wchar_t* w);
+constexpr const value_type * const ChooseStrPrefix(const char * const c, const wchar_t * const w);
 
 template<>
-const char* ChooseStrPrefix<char>(const char* c, const wchar_t* w)
+constexpr const char * const ChooseStrPrefix<char>(const char * const c, const wchar_t * const w)
 {
     return c;
 }
 
 template<>
-const wchar_t* ChooseStrPrefix<wchar_t>(const char* c, const wchar_t* w)
+constexpr const wchar_t * const ChooseStrPrefix<wchar_t>(const char * const c, const wchar_t * const w)
 {
     return w;
 }
 
-template<typename C>
-C ChooseCharPrefix(char c, wchar_t w);
+template<typename value_type>
+constexpr value_type ChooseCharPrefix(char c, wchar_t w);
 
 template<>
-char ChooseCharPrefix<char>(char c, wchar_t w)
+constexpr char ChooseCharPrefix<char>(char c, wchar_t w)
 {
     return c;
 }
 
 template<>
-wchar_t ChooseCharPrefix<wchar_t>(char c, wchar_t w)
+constexpr wchar_t ChooseCharPrefix<wchar_t>(char c, wchar_t w)
 {
     return w;
 }
@@ -195,7 +198,7 @@ wchar_t ChooseCharPrefix<wchar_t>(char c, wchar_t w)
 }
 
 // chose witch of prefixes add to string : L or none
-#define STR_PREFIX(value_type, str) qx::detail::ChooseStrPrefix<value_type>(str, TOWSTRING(str))
+#define STR_PREFIX(value_type, str) qx::detail::ChooseStrPrefix<value_type>(str, QX_TO_WSTRING(str))
 
 // chose witch of prefixes add to char : L or none
-#define CHAR_PREFIX(value_type, ch) qx::detail::ChooseCharPrefix<value_type>(ch, TOWSTRING(ch))
+#define CHAR_PREFIX(value_type, ch) qx::detail::ChooseCharPrefix<value_type>(ch, QX_TO_WSTRING(ch))

@@ -22,7 +22,6 @@
 #include <qx/other/hashes.h>
 #include <qx/other/random.h>
 #include <qx/temp/type_traits.h>
-#include <qx/containers/string_traits.h>
 
 namespace qx
 {
@@ -63,6 +62,7 @@ public:
     using difference_type   = typename Traits::difference_type;
     using size_type         = typename Traits::size_type;
     using std_string_type   = typename Traits::std_string_type;
+    using sstream_type      = typename Traits::sstream_type;
 
     static constexpr size_type npos = UINT_EMPTY_VALUE;
 
@@ -78,7 +78,7 @@ public:
                             basic_string (const_pointer          pSource)         { assign(pSource);                           }
                             basic_string (size_type              nSymbols,
                                           value_type             ch)              { assign(nSymbols, ch);                      }
-                            basic_string (const std_string_type& str)             { assign(str.data(), static_cast<size_type>(str.size())); }
+                            basic_string (const std_string_type& str)             { assign(str);                               }
     template<class FwdIt>   basic_string (FwdIt                  first, 
                                           FwdIt                  last)            { assign(first, last);                       }
 
@@ -90,10 +90,10 @@ public:
     void                    assign       (const_pointer          pSource)         { assign(pSource, Traits::tstrlen(pSource)); }
     void                    assign       (size_type              nSymbols,
                                           value_type             ch);
+    void                    assign       (const std_string_type& str)             { assign(str.data(), static_cast<size_type>(str.size())); }
     template<class FwdIt>
     void                    assign       (FwdIt                  first,
                                           FwdIt                  last);
-
 
     virtual                ~basic_string (void)                                   { clear(); }
 
@@ -166,12 +166,16 @@ public:
                                           size_type              count      = npos)     const;
 
     vector                  split        (const_pointer          pSep,
-                                          size_type              nSepLen = npos)        const;
+                                          size_type              nSepLen    = npos)     const;
     vector                  split        (const value_type       sep)                   const;
     vector                  split        (const basic_string   & sep)                   const;
     
     void                    apply_case   (eCaseType              ct);
 
+    value_type              front        (void)                                         const { return at(0);           }
+    value_type              back         (void)                                         const { return at(size() - 1);  }
+    size_type               length       (void)                                         const { return size();          }
+    const_pointer           c_str        (void)                                         const { return data();          }
 
     template<typename To>
     typename std::enable_if<std::is_signed_v<To> && !std::is_unsigned_v<To> && !std::is_floating_point_v<To>,
@@ -185,6 +189,12 @@ public:
     typename std::enable_if<std::is_floating_point_v<To>,
         std::optional<To>>::type to();
 
+    template<typename From>
+    void                    from         (const From&            data, 
+                                          const_pointer          pszFormat = nullptr);
+    template<typename From>
+    static  basic_string    sfrom        (const From&            data, 
+                                          const_pointer          pszFormat = nullptr);
 
     const   basic_string &  operator+=   (const basic_string   & str)             { Append(str.data(), str.size());             return *this;   }
     const   basic_string &  operator+=   (value_type             ch)              { Append(&ch, 1);                             return *this;   }
@@ -203,8 +213,6 @@ public:
 
     reference               operator[]   (size_type              ind);
     const_reference         operator[]   (size_type              ind)       const { return operator[](ind);                                     }
-
-                            operator const_pointer(void)                    const { return data();                                              }
 
 private:
     SStrData<Traits>          * GetStrData      (void);
@@ -276,13 +284,33 @@ namespace std
     };
 
     template<>
+    struct hash<qx::wstring>
+    {
+        u32 operator()(const qx::wstring& str) const
+        {
+            return qx::hash::str::Murmur32(str.data(), str.size(), 62548);
+        }
+    };
+
+#ifndef QX_DISABLE_C_STRINGS_HASHES
+    template<>
     struct hash<const char*>
     {
         u32 operator()(const char* psz) const
         {
-            return qx::hash::str::Murmur32(psz, 0, 652148);
+            return qx::hash::str::Murmur32(psz, 0, 45084);
         }
     };
+
+    template<>
+    struct hash<const wchar_t*>
+    {
+        u32 operator()(const wchar_t* psz) const
+        {
+            return qx::hash::str::Murmur32(psz, 0, 1059);
+        }
+    };
+#endif
 }
 
 #include <qx/containers/string.inl>
