@@ -38,6 +38,7 @@ class iterator
     friend class const_iterator<C>;
 
 public:
+    using value_type        = typename C::value_type;
     using pointer           = typename C::pointer;
     using reference         = typename C::reference;
     using difference_type   = typename C::difference_type;
@@ -95,6 +96,7 @@ template <class C>
 class const_iterator
 {
 public:
+    using value_type        = typename C::value_type;
     using pointer           = typename C::const_pointer;
     using reference         = typename C::const_reference;
     using difference_type   = typename C::difference_type;
@@ -159,6 +161,7 @@ class reverse_iterator
     friend class const_reverse_iterator<C>;
 
 public:
+    using value_type        = typename C::value_type;
     using pointer           = typename C::pointer;
     using reference         = typename C::reference;
     using difference_type   = typename C::difference_type;
@@ -217,6 +220,7 @@ template <class C>
 class const_reverse_iterator
 {
 public:
+    using value_type        = typename C::value_type;
     using pointer           = typename C::const_pointer;
     using reference         = typename C::const_reference;
     using difference_type   = typename C::difference_type;

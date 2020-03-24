@@ -43,8 +43,7 @@ template<class Traits>
 inline void basic_string<Traits>::assign(size_type nSymbols, value_type ch)
 {
     if (Resize(nSymbols, Traits::talign()))
-        for (size_type i = 0; i < size(); i++)
-            m_pData[i] = ch;
+        std::fill(begin(), end(), ch);
 }
 
 //============================================================================
@@ -861,9 +860,7 @@ inline void basic_string<Traits>::from(const From& data, const_pointer pszFormat
 
     if (pszFormat)
     {
-        size_type nLen = static_cast<size_type>(Traits::tsnprintf(nullptr, 0, pszFormat, data));
-        if (Resize(nLen))
-            Traits::tsnprintf(m_pData, nLen + 1, pszFormat, data);
+        format(pszFormat, data);
     }
     else
     {
