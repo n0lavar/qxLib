@@ -96,8 +96,7 @@ inline bool vector2d<T>::reserve(size_type nElements)
 
     if (nElements > m_nAllocatedSize)
     {
-        void* pMem = std::realloc(m_pData, nElements * sizeof(T));
-        if (pMem)
+        if (void* pMem = std::realloc(m_pData, nElements * sizeof(T)))
         {
             m_pData = static_cast<T*>(pMem);
             m_nAllocatedSize = nElements;
@@ -136,7 +135,7 @@ inline bool vector2d<T>::resize(size_type rows, size_type cols)
         {
             auto itFirst = iterator(this, rows * cols);
             auto itLast  = iterator(this, m_nRows * m_nCols);
-            destruct<T>(itFirst, itLast);
+            destruct(itFirst, itLast);
 
             m_nRows = rows;
             m_nCols = cols;
@@ -166,7 +165,7 @@ inline bool vector2d<T>::resize(size_type rows, size_type cols, const_reference 
     bool bRet = resize(rows, cols);
 
     if (bRet)
-        std::fill(begin(), end(), data);
+        fill(data);
 
     return bRet;
 }
@@ -183,6 +182,8 @@ inline void vector2d<T>::free(void)
 {
     clear(); 
     std::free(m_pData);
+    m_pData = nullptr;
+    m_nAllocatedSize = 0;
 }
 
 //============================================================================
@@ -289,11 +290,6 @@ inline typename vector2d<T>::pointer vector2d<T>::data()
 {
     return m_pData;
 }
-template<class T>
-inline typename vector2d<T>::const_pointer vector2d<T>::data() const
-{
-    return m_pData;
-}
 
 //============================================================================
 //!\fn                         vector2d<T>::at
@@ -321,7 +317,7 @@ template<class T>
 inline void vector2d<T>::clear(void)
 {
     if (m_pData)
-        detail::destruct<T>(begin(), end());
+        qx::destruct(begin(), end());
 
     m_nRows = 0;
     m_nCols = 0;

@@ -59,8 +59,8 @@ public:
 
                         ~triangular_vector  (void)                                  { free();                                   }
 
-    const this_type&    operator=           (this_type&&         other) noexcept    { assign(std::move(other)); return *this;   }
-    const this_type&    operator=           (const this_type&    other)             { assign(other); return *this;              }
+    const this_type&    operator=           (this_type&&        other) noexcept     { assign(std::move(other)); return *this;   }
+    const this_type&    operator=           (const this_type&   other)              { assign(other); return *this;              }
 
     void                assign              (this_type&&        other)          noexcept;
     void                assign              (const this_type&   other);

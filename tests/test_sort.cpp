@@ -175,8 +175,8 @@ using Implementations = ::testing::Types
     TestQxSort_greater_10_elements_small_signed_range,
     TestQxSort_less_1000_elements_small_signed_range,
     TestQxSort_greater_1000_elements_small_signed_range,
-    TestQxSort_less_100000_elements_small_signed_range,
-    TestQxSort_greater_100000_elements_small_signed_range,
+    //TestQxSort_less_100000_elements_small_signed_range,
+    //TestQxSort_greater_100000_elements_small_signed_range,
 
     TestQxSort_less_0_elements_medium_signed_range,
     TestQxSort_greater_0_elements_medium_signed_range,
@@ -186,8 +186,8 @@ using Implementations = ::testing::Types
     TestQxSort_greater_10_elements_medium_signed_range,
     TestQxSort_less_1000_elements_medium_signed_range,
     TestQxSort_greater_1000_elements_medium_signed_range,
-    TestQxSort_less_100000_elements_medium_signed_range,
-    TestQxSort_greater_100000_elements_medium_signed_range,
+    //TestQxSort_less_100000_elements_medium_signed_range,
+    //TestQxSort_greater_100000_elements_medium_signed_range,
 
     TestQxSort_less_0_elements_big_signed_range,
     TestQxSort_greater_0_elements_big_signed_range,
@@ -197,8 +197,8 @@ using Implementations = ::testing::Types
     TestQxSort_greater_10_elements_big_signed_range,
     TestQxSort_less_1000_elements_big_signed_range,
     TestQxSort_greater_1000_elements_big_signed_range,
-    TestQxSort_less_100000_elements_big_signed_range,
-    TestQxSort_greater_100000_elements_big_signed_range,
+    //TestQxSort_less_100000_elements_big_signed_range,
+    //TestQxSort_greater_100000_elements_big_signed_range,
 
     TestQxSort_less_0_elements_small_unsigned_range,
     TestQxSort_greater_0_elements_small_unsigned_range,
@@ -208,8 +208,8 @@ using Implementations = ::testing::Types
     TestQxSort_greater_10_elements_small_unsigned_range,
     TestQxSort_less_1000_elements_small_unsigned_range,
     TestQxSort_greater_1000_elements_small_unsigned_range,
-    TestQxSort_less_100000_elements_small_unsigned_range,
-    TestQxSort_greater_100000_elements_small_unsigned_range,
+    //TestQxSort_less_100000_elements_small_unsigned_range,
+    //TestQxSort_greater_100000_elements_small_unsigned_range,
 
     TestQxSort_less_0_elements_medium_unsigned_range,
     TestQxSort_greater_0_elements_medium_unsigned_range,
@@ -219,8 +219,8 @@ using Implementations = ::testing::Types
     TestQxSort_greater_10_elements_medium_unsigned_range,
     TestQxSort_less_1000_elements_medium_unsigned_range,
     TestQxSort_greater_1000_elements_medium_unsigned_range,
-    TestQxSort_less_100000_elements_medium_unsigned_range,
-    TestQxSort_greater_100000_elements_medium_unsigned_range,
+    //TestQxSort_less_100000_elements_medium_unsigned_range,
+    //TestQxSort_greater_100000_elements_medium_unsigned_range,
 
     TestQxSort_less_0_elements_big_unsigned_range,
     TestQxSort_greater_0_elements_big_unsigned_range,
@@ -229,9 +229,9 @@ using Implementations = ::testing::Types
     TestQxSort_less_10_elements_big_unsigned_range,
     TestQxSort_greater_10_elements_big_unsigned_range,
     TestQxSort_less_1000_elements_big_unsigned_range,
-    TestQxSort_greater_1000_elements_big_unsigned_range,
-    TestQxSort_less_100000_elements_big_unsigned_range,
-    TestQxSort_greater_100000_elements_big_unsigned_range
+    TestQxSort_greater_1000_elements_big_unsigned_range
+    //TestQxSort_less_100000_elements_big_unsigned_range,
+    //TestQxSort_greater_100000_elements_big_unsigned_range
 >;
 
 

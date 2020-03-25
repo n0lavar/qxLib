@@ -13,6 +13,7 @@
 #pragma once
 
 #include <qx/containers/container.h>
+#include <qx/other/useful_funcs.h>
 
 namespace qx
 {
@@ -45,7 +46,7 @@ public:
 
 public:
 
-                    vector2d    (void) { };
+                    vector2d    (void) = default;
                     vector2d    (vector2d&&         other) noexcept { assign(std::move(other));     }
                     vector2d    (const vector2d&    other)          { assign(other);                }
                     vector2d    (size_type          rows,
@@ -75,7 +76,6 @@ public:
     bool            resize      (size_type          rows, 
                                  size_type          cols,
                                  const_reference    data);
-    void            free        (void);
     void            fill        (const_reference    elem);
     pointer         operator[]  (size_type          nRow)       noexcept;
     const_pointer   operator[]  (size_type          nRow) const noexcept;
@@ -86,10 +86,15 @@ public:
                                  size_type          nCol,
                                  const_reference    data)       noexcept;
 
-    size_type       rows        (void) const noexcept { return m_nRows;  }
-    size_type       cols        (void) const noexcept { return m_nCols;  }
-    size_type       size_x      (void) const noexcept { return m_nRows;  }
-    size_type       size_y      (void) const noexcept { return m_nCols;  }
+    size_type       rows        (void) const noexcept { return m_nRows;             }
+    size_type       cols        (void) const noexcept { return m_nCols;             }
+    size_type       size_x      (void) const noexcept { return m_nRows;             }
+    size_type       size_y      (void) const noexcept { return m_nCols;             }
+    size_type       capacity    (void) const noexcept { return m_nAllocatedSize;    }
+
+private:
+
+    void            free        (void);
 
 private:
 

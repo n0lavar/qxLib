@@ -597,7 +597,8 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::find_last_
 //!\date   21.03.2020
 //============================================================================
 template<class Traits>
-inline typename qx::basic_string<Traits>::vector basic_string<Traits>::split(const_pointer pSep, size_type nSepLen) const
+inline typename qx::basic_string<Traits>::vector basic_string<Traits>::split(const_pointer pSep, 
+                                                                             size_type     nSepLen) const
 {
     vector tokens;
 
@@ -927,11 +928,8 @@ inline typename basic_string<Traits>::reference basic_string<Traits>::at(size_ty
 template<class Traits>
 inline void basic_string<Traits>::clear(void)
 {
-    if (m_pData)
-    {
-        std::free(GetStrData());
-        m_pData = nullptr;
-    }
+    std::free(GetStrData());
+    m_pData = nullptr;
 }
 
 //============================================================================

@@ -117,7 +117,7 @@ inline size_type align_size(size_type nSize, size_type nAlign)
 }
 
 //============================================================================
-//!\fn                   destruct<T, iterator>
+//!\fn                   destruct<iterator>
 //
 //!\brief  Call destructors
 //!\param  start - start iterator
@@ -125,9 +125,10 @@ inline size_type align_size(size_type nSize, size_type nAlign)
 //!\author Khrapov
 //!\date   29.02.2020
 //============================================================================
-template<class T, class iterator>
+template<class iterator>
 inline void destruct(iterator start, iterator end = start++)
 {
+    using T = typename iterator::value_type;
     if constexpr (std::is_compound<T>::value)
     {
         for (auto it = start; it < end; ++it)

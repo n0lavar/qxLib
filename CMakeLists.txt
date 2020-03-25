@@ -125,6 +125,7 @@ IF(QX_DEBUG)
         "${CMAKE_SOURCE_DIR}/tests/test_list_se.cpp"
         "${CMAKE_SOURCE_DIR}/tests/test_object_pool.cpp"
         "${CMAKE_SOURCE_DIR}/tests/test_string.cpp"
+        "${CMAKE_SOURCE_DIR}/tests/test_vector2d.cpp"
         
         "${CMAKE_SOURCE_DIR}/bench/bench_sort.h"
     )
