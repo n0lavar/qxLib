@@ -13,6 +13,7 @@
 #pragma once
 
 #include <qx/containers/container.h>
+#include <qx/other/useful_funcs.h>
 
 namespace qx
 {
@@ -50,7 +51,7 @@ public:
 
 public:
 
-                        triangular_vector   (void);
+                        triangular_vector   (void) = default;
                         triangular_vector   (this_type&&        other) noexcept     { assign(std::move(other));                 }
                         triangular_vector   (const this_type&   other)              { assign(other);                            }
                         triangular_vector   (size_type          nSideSize)          { resize(nSideSize);                        }
@@ -72,7 +73,6 @@ public:
     bool                resize              (size_type          nSideSize,
                                              const_reference    data);
 
-    void                free                (void);
     void                fill                (const_reference    data);
     const_reference     get                 (size_type          nRow,
                                              size_type          nCol)   const   noexcept;
@@ -81,9 +81,11 @@ public:
                                              size_type          nCol,
                                              const_reference    data)           noexcept;
 
-    size_type           size_side           (void)                      const   noexcept { return m_nSideSize;  }
+    size_type           size_side           (void)                      const   noexcept { return m_nSideSize;      }
+    size_type           capacity            (void)                      const   noexcept { return m_nAllocatedSize; }
 
 private:
+    void                free                (void);
     size_type           getIndex            (size_type          nRow,
                                              size_type          nCol)   const   noexcept;
     size_type           getVectorSize       (size_type          nSideSize) const noexcept;

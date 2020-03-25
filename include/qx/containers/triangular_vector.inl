@@ -42,7 +42,8 @@ inline void triangular_vector<T>::assign(this_type&& other) noexcept
 template<class T>
 inline void triangular_vector<T>::assign(const this_type& other)
 {
-    reserve(other.size_side());
+    if (resize(other.size_side()))
+        std::memcpy(m_pData, other.m_pData, size() * sizeof(T));
 }
 
 //============================================================================
@@ -77,8 +78,7 @@ inline bool triangular_vector<T>::reserve(size_type nSideSize)
     size_type nNewElements = getVectorSize(nSideSize);
     if (nNewElements > m_nAllocatedSize)
     {
-        void* pMem = std::realloc(m_pData, nNewElements * sizeof(T));
-        if (pMem)
+        if (void* pMem = std::realloc(m_pData, nNewElements * sizeof(T)))
         {
             m_pData = static_cast<T*>(pMem);
             m_nAllocatedSize = nNewElements;
@@ -113,7 +113,7 @@ inline bool triangular_vector<T>::resize(size_type nSideSize)
         m_nSize = getVectorSize(nSideSize);
 
         auto itLast = iterator(this, m_nSize);
-        destruct<T>(itFirst, itLast);
+        destruct(itFirst, itLast);
 
         bRet = true;
     }
@@ -137,7 +137,7 @@ inline bool triangular_vector<T>::resize(size_type nSideSize, const_reference da
     bool bRet = resize(nSideSize);
 
     if (bRet)
-        std::fill(begin(), end(), data);
+        fill(data);
 
     return bRet;
 }
@@ -263,11 +263,6 @@ inline typename triangular_vector<T>::pointer triangular_vector<T>::data()
 {
     return m_pData;
 }
-template<class T>
-inline typename triangular_vector<T>::const_pointer triangular_vector<T>::data() const
-{
-    return m_pData;
-}
 
 //============================================================================
 //!\fn                     triangular_vector<T>::at
@@ -295,7 +290,7 @@ template<class T>
 inline void triangular_vector<T>::clear(void)
 {
     if (m_pData)
-        detail::destruct<T>(begin(), end());
+        destruct(begin(), end());
 
     m_nSideSize = 0;
     m_nSize = 0;

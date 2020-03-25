@@ -13,7 +13,7 @@
 #pragma once
 
 #ifndef QX_TEST_SORT
-    #define QX_TEST_SORT 1
+    #define QX_TEST_SORT 0
 #endif
 
 #ifndef QX_TEST_NUMERICAL
@@ -39,6 +39,12 @@
 #ifndef QX_TEST_VECTOR2D
     #define QX_TEST_VECTOR2D 1
 #endif
+
+#ifndef QX_TEST_TRIANGULAR_VECTOR
+    #define QX_TEST_TRIANGULAR_VECTOR 1
+#endif
+
+
 
 #ifndef QX_BENCH_SORT
     #define QX_BENCH_SORT 0
