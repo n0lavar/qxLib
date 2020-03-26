@@ -116,8 +116,8 @@ inline void logger::ProcessOutput(level    eLogLevel,
 inline void logger::RegisterUnit(cstr pszUnitName, const TraceUnitInfo& unit)
 {
     if (m_eLogPolicy == policy::clear_then_uppend)
-        std::ofstream ofs(unit.sLogFileName, std::ofstream::out | std::ofstream::trunc); //-V808
-                                                                                         // clear file
+        std::ofstream ofs(unit.sLogFileName.data(), std::ofstream::out | std::ofstream::trunc); //-V808
+                                                                                                // clear file
     if(!unit.sLogFileName.empty())
         m_RegisteredUnits[pszUnitName] = unit;
 }
@@ -204,8 +204,8 @@ inline void logger::OutputToFile(const qx::string& sText, const qx::string& sFil
         }
 
         std::filesystem::create_directories(sPath.data());
-        ofs.open(sPath + sFileName, std::ios::out | std::ios::app);
-        ofs << sText;
+        ofs.open((sPath + sFileName).data(), std::ios::out | std::ios::app);
+        ofs << sText.data();
         ofs.close();
     }
     catch (const std::system_error& e)
@@ -255,7 +255,7 @@ inline void logger::OnTerminate(void)
 {
     for (const auto& u : m_RegisteredUnits)
     {
-        std::ofstream ofs(u.second.sLogFileName, std::ios::out | std::ios::app);
+        std::ofstream ofs(u.second.sLogFileName.data(), std::ios::out | std::ios::app);
         ofs << std::endl << std::endl << std::endl;
     }
 }

@@ -44,6 +44,11 @@
     #define QX_TEST_TRIANGULAR_VECTOR 1
 #endif
 
+#ifndef QX_TEST_SMART_ENUM
+    #define QX_TEST_SMART_ENUM 1
+#endif
+
+
 
 
 #ifndef QX_BENCH_SORT

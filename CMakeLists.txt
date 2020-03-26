@@ -127,6 +127,7 @@ IF(QX_DEBUG)
         "${CMAKE_SOURCE_DIR}/tests/test_string.cpp"
         "${CMAKE_SOURCE_DIR}/tests/test_vector2d.cpp"
         "${CMAKE_SOURCE_DIR}/tests/test_triangular_vector.cpp"
+        "${CMAKE_SOURCE_DIR}/tests/test_smart_enum.cpp"
         
         "${CMAKE_SOURCE_DIR}/bench/bench_sort.h"
     )
