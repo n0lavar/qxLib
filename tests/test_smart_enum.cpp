@@ -25,17 +25,6 @@ SMART_ENUM(colors_header, -3,
     yellow
 )
 
-SMART_ENUM_H(colors_cpp, -3,
-    red,
-    black,
-    green,
-    white,
-    yellow
-)
-
-SMART_ENUM_CPP(colors_cpp)
-
-
 template <typename Enum>
 class TestQxSmartEnum : public ::testing::Test
 {
@@ -46,8 +35,7 @@ protected:
 
 using Implementations = ::testing::Types
 <
-    colors_header,
-    colors_cpp
+    colors_header
 >;
 
 TYPED_TEST_SUITE(TestQxSmartEnum, Implementations);
