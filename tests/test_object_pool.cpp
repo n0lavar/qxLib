@@ -58,21 +58,25 @@ TEST(object_pool, testing)
     size_t ind1 = pool.emplace_back(1, 1, 1, 1);
     EXPECT_EQ(pool.size(), 1);
     EXPECT_EQ(pool.capacity(), 5);
+    EXPECT_EQ(pool[ind1], TestStruct(1, 1, 1, 1));
     EXPECT_FALSE(pool.empty());
 
     size_t ind2 = pool.emplace_back(2, 2, 2, 1);
     EXPECT_EQ(pool.size(), 2);
     EXPECT_EQ(pool.capacity(), 5);
+    EXPECT_EQ(pool[ind2], TestStruct(2, 2, 2, 1));
     EXPECT_FALSE(pool.empty());
 
     size_t ind3 = pool.emplace_back(3, 3, 3, 1);
     EXPECT_EQ(pool.size(), 3);
     EXPECT_EQ(pool.capacity(), 5);
+    EXPECT_EQ(pool[ind3], TestStruct(3, 3, 3, 1));
     EXPECT_FALSE(pool.empty());
 
     size_t ind4 = pool.emplace_back(4, 4, 4, 1);
     EXPECT_EQ(pool.size(), 4);
     EXPECT_EQ(pool.capacity(), 5);
+    EXPECT_EQ(pool[ind4], TestStruct(4, 4, 4, 1));
     EXPECT_FALSE(pool.empty());
 
 //--------------------------------- push_pack --------------------------------
@@ -80,21 +84,25 @@ TEST(object_pool, testing)
     size_t ind5 = pool.push_back({ 5, 5, 5, 1 });
     EXPECT_EQ(pool.size(), 5);
     EXPECT_EQ(pool.capacity(), 5);
+    EXPECT_EQ(pool[ind5], TestStruct(5, 5, 5, 1));
     EXPECT_FALSE(pool.empty());
 
     size_t ind6 = pool.push_back({ 6, 6, 6, 1 });
     EXPECT_EQ(pool.size(), 6);
     EXPECT_EQ(pool.capacity(), 8);
+    EXPECT_EQ(pool[ind6], TestStruct(6, 6, 6, 1));
     EXPECT_FALSE(pool.empty());
 
     size_t ind7 = pool.push_back({ 7, 7, 7, 1 });
     EXPECT_EQ(pool.size(), 7);
     EXPECT_EQ(pool.capacity(), 8);
+    EXPECT_EQ(pool[ind7], TestStruct(7, 7, 7, 1));
     EXPECT_FALSE(pool.empty());
 
     size_t ind8 = pool.push_back({ 8, 8, 8, 1 });
     EXPECT_EQ(pool.size(), 8);
     EXPECT_EQ(pool.capacity(), 8);
+    EXPECT_EQ(pool[ind8], TestStruct(8, 8, 8, 1));
     EXPECT_FALSE(pool.empty());
 
 //----------------------------------- erase ----------------------------------
