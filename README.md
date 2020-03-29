@@ -1,5 +1,7 @@
 # qxLib
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/280d5ebbe0604e80ab69fbfe30da2a28)](https://app.codacy.com/manual/n0lavar/qxLib?utm_source=github.com&utm_medium=referral&utm_content=n0lavar/qxLib&utm_campaign=Badge_Grade_Settings)
+
 a few useful things I developed while studying
 
 Dependencies:
