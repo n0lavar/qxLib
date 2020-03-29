@@ -76,10 +76,10 @@ inline void list_se<T>::assign(init_list init)
 //!\date     8.02.2020
 //============================================================================
 template<class T>
-inline void list_se<T>::assign(size_t count, const_reference value)
+inline void list_se<T>::assign(size_type count, const_reference value)
 {
     clear();
-    for (size_t i = 0; i < count; i++)
+    for (size_type i = 0; i < count; i++)
         push_back(value);
 }
 
@@ -111,7 +111,7 @@ inline void list_se<T>::insert(iterator where, const_reference what)
 //!\date     8.02.2020
 //============================================================================
 template<class T>
-inline void list_se<T>::insert(iterator where, const_pointer what, size_t number)
+inline void list_se<T>::insert(iterator where, const_pointer what, size_type number)
 {
     if (where != begin())
     {
@@ -124,7 +124,7 @@ inline void list_se<T>::insert(iterator where, const_pointer what, size_t number
     }
     else
     {
-        for (size_t i = 0; i < number; i++)
+        for (size_type i = 0; i < number; i++)
             push_front(what);
     }
 }
@@ -157,9 +157,9 @@ inline void list_se<T>::insert_after(iterator where, const_reference what)
 //!\date     8.02.2020
 //============================================================================
 template<class T>
-inline void list_se<T>::insert_after(iterator where, const_pointer what, size_t number)
+inline void list_se<T>::insert_after(iterator where, const_pointer what, size_type number)
 {
-    for (size_t i = 0; i < number; i++)
+    for (size_type i = 0; i < number; i++)
     {
         insert_after(where, *(what + i));
         ++where;
@@ -178,7 +178,7 @@ inline void list_se<T>::insert_after(iterator where, const_pointer what, size_t 
 //!\date     8.02.2020
 //============================================================================
 template<class T>
-inline void list_se<T>::erase(iterator where, size_t number)
+inline void list_se<T>::erase(iterator where, size_type number)
 {
     if (where != begin())
     {
@@ -191,7 +191,7 @@ inline void list_se<T>::erase(iterator where, size_t number)
     }
     else
     {
-        for (size_t i = 0; i < number; i++)
+        for (size_type i = 0; i < number; i++)
             pop_front();
     }
 }
@@ -208,13 +208,13 @@ inline void list_se<T>::erase(iterator where, size_t number)
 //!\date     8.02.2020
 //============================================================================
 template<class T>
-inline void list_se<T>::erase_after(iterator where, size_t number)
+inline void list_se<T>::erase_after(iterator where, size_type number)
 {
     iterator current = where;
     ++current;
 
     iterator temp;
-    for (size_t i = 0; i < number && current != end(); i++)
+    for (size_type i = 0; i < number && current != end(); i++)
     {
         temp = current;
         ++temp;
@@ -284,7 +284,7 @@ inline void list_se<T>::pop_back(void)
 template<class T>
 inline void list_se<T>::pop_front(void)
 {
-    list_se_node<T>* temp = m_pFirstNode;
+    list_se_node* temp = m_pFirstNode;
     m_pFirstNode = m_pFirstNode->pNext;
     delete temp;
     m_nSize--;
@@ -306,7 +306,7 @@ template<class T>
 template<class ...Args>
 inline void list_se<T>::emplace_front(Args&& ...args)
 {
-    list_se_node<T>* pNode = new list_se_node<T>(std::forward<Args>(args)...);
+    list_se_node* pNode = new list_se_node(std::forward<Args>(args)...);
     pNode->pNext = m_pFirstNode;
     m_pFirstNode = pNode;
     if (!m_pLastNode)
@@ -358,7 +358,7 @@ template<class T>
 template<class ...Args>
 inline void list_se<T>::emplace_after(iterator where, Args&& ...args)
 {
-    list_se_node<T>* pNode = new list_se_node<T>(std::forward<Args>(args)...);
+    list_se_node* pNode = new list_se_node(std::forward<Args>(args)...);
     pNode->pNext = where.m_pNode->pNext;
     where.m_pNode->pNext = pNode;
     m_nSize++;
@@ -380,7 +380,7 @@ template<class T>
 template<class ...Args>
 inline void list_se<T>::emplace_back(Args&& ...args)
 {
-    list_se_node<T>* pNode = new list_se_node<T>(std::forward<Args>(args)...);
+    list_se_node* pNode = new list_se_node(std::forward<Args>(args)...);
 
     if (m_pLastNode)
         m_pLastNode->pNext = pNode;
@@ -402,8 +402,8 @@ inline void list_se<T>::emplace_back(Args&& ...args)
 template<class T>
 inline void list_se<T>::clear(void)
 {
-    list_se_node<T>* pCurrent = nullptr;
-    list_se_node<T>* pNext = m_pFirstNode;
+    list_se_node* pCurrent = nullptr;
+    list_se_node* pNext = m_pFirstNode;
 
     while (pNext)
     {

@@ -12,7 +12,7 @@
 //============================================================================
 #pragma once
 
-#include <xutility>
+#include <iterator>
 
 namespace qx
 {
@@ -49,9 +49,9 @@ public:
     constexpr                 iterator    (void) = default;
     constexpr                 iterator    (C* c, size_type i) : m_pCollection(c), m_nIndex(i) { }
 
-    constexpr [[nodiscard]] reference operator*  (void)                     { return (*m_pCollection).at(m_nIndex);     }
-    constexpr [[nodiscard]] pointer   operator-> (void)                     { return &((*m_pCollection).at(m_nIndex));  }
-    constexpr [[nodiscard]] reference operator[] (size_type m)              { return (*m_pCollection).at(m_nIndex + m); }
+    [[nodiscard]] constexpr reference operator*  (void)                     { return (*m_pCollection).at(m_nIndex);     }
+    [[nodiscard]] constexpr pointer   operator-> (void)                     { return &((*m_pCollection).at(m_nIndex));  }
+    [[nodiscard]] constexpr reference operator[] (size_type m)              { return (*m_pCollection).at(m_nIndex + m); }
                                                                                                                         
     constexpr iterator              & operator++ (void)                     { ++m_nIndex; return *this;                 }
     constexpr iterator              & operator-- (void)                     { --m_nIndex; return *this;                 }
@@ -73,7 +73,7 @@ public:
     constexpr bool                    operator!= (const iterator & r) const { return m_nIndex != r.m_nIndex;            }
     constexpr bool                    operator== (const iterator & r) const { return m_nIndex == r.m_nIndex;            }
 
-    constexpr operator void*                     (void)                     { return &(m_pCollection.at(m_nIndex));     }
+    constexpr operator void*                     (void)                     { return &((*m_pCollection).at(m_nIndex));  }
 
 private:
     size_type   m_nIndex        = 0u;
@@ -108,9 +108,9 @@ public:
     constexpr                 const_iterator  (const C* c, size_type i) : m_pCollection(c), m_nIndex(i) { }
     constexpr                 const_iterator  (const iterator<C>& it)   : m_pCollection(it.m_pCollection), m_nIndex(it.m_nIndex) { }
 
-    constexpr [[nodiscard]] reference operator*   (void)                           { return (*m_pCollection).at(m_nIndex);          }
-    constexpr [[nodiscard]] pointer   operator->  (void)                           { return &((*m_pCollection).at(m_nIndex));       }
-    constexpr [[nodiscard]] reference operator[]  (size_type m)                    { return (*m_pCollection).at(m_nIndex + m);      }
+    [[nodiscard]] constexpr reference operator*   (void)                           { return (*m_pCollection).at(m_nIndex);          }
+    [[nodiscard]] constexpr pointer   operator->  (void)                           { return &((*m_pCollection).at(m_nIndex));       }
+    [[nodiscard]] constexpr reference operator[]  (size_type m)                    { return (*m_pCollection).at(m_nIndex + m);      }
                                                                                                                                     
     constexpr const_iterator        & operator++  (void)                           { ++m_nIndex; return *this;                      }
     constexpr const_iterator        & operator--  (void)                           { --m_nIndex; return *this;                      }
@@ -132,7 +132,7 @@ public:
     constexpr bool                    operator!=  (const const_iterator & r) const { return m_nIndex != r.m_nIndex;                 }
     constexpr bool                    operator==  (const const_iterator & r) const { return m_nIndex == r.m_nIndex;                 }
 
-    constexpr operator const void*                (void)                     const { return &(m_pCollection.at(m_nIndex));          }
+    constexpr operator const void*                (void)                     const { return &((*m_pCollection).at(m_nIndex));       }
 
 private:
     size_type   m_nIndex        = 0u;
@@ -172,9 +172,9 @@ public:
     constexpr                 reverse_iterator    (void) = default;
     constexpr                 reverse_iterator    (C* c, size_type i) : m_pCollection(c), m_nIndex(i) { }
 
-    constexpr [[nodiscard]] reference operator*   (void)                             { return (*m_pCollection).at(m_nIndex);            }
-    constexpr [[nodiscard]] pointer   operator->  (void)                             { return &((*m_pCollection).at(m_nIndex));         }
-    constexpr [[nodiscard]] reference operator[]  (size_type m)                      { return (*m_pCollection).at(m_nIndex + m);        }
+    [[nodiscard]] constexpr reference operator*   (void)                             { return (*m_pCollection).at(m_nIndex);            }
+    [[nodiscard]] constexpr pointer   operator->  (void)                             { return &((*m_pCollection).at(m_nIndex));         }
+    [[nodiscard]] constexpr reference operator[]  (size_type m)                      { return (*m_pCollection).at(m_nIndex + m);        }
                                                                                                                                         
     constexpr reverse_iterator      & operator++  (void)                             { --m_nIndex; return *this;                        }
     constexpr reverse_iterator      & operator--  (void)                             { ++m_nIndex; return *this;                        }
@@ -197,7 +197,7 @@ public:
     constexpr bool                    operator!=  (const reverse_iterator & r) const { return m_nIndex + 1 != r.m_nIndex + 1;           }
     constexpr bool                    operator==  (const reverse_iterator & r) const { return m_nIndex + 1 == r.m_nIndex + 1;           }
 
-    constexpr operator void*                      (void)                             { return &(m_pCollection.at(m_nIndex));            }
+    constexpr operator void*                      (void)                             { return &((*m_pCollection).at(m_nIndex));         }
 
 private:
     size_type   m_nIndex        = 0u;
@@ -232,9 +232,9 @@ public:
     constexpr                 const_reverse_iterator  (const C* c, size_type i)       : m_pCollection(c), m_nIndex(i) { }
     constexpr                 const_reverse_iterator  (const reverse_iterator<C>& it) : m_pCollection(it.m_pCollection), m_nIndex(it.m_nIndex) { }
 
-    constexpr [[nodiscard]] reference operator*   (void)                                   { return (*m_pCollection).at(m_nIndex);                  }
-    constexpr [[nodiscard]] pointer   operator->  (void)                                   { return &((*m_pCollection).at(m_nIndex));               }
-    constexpr [[nodiscard]] reference operator[]  (size_type m)                            { return (*m_pCollection).at(m_nIndex + m);              }
+    [[nodiscard]] constexpr reference operator*   (void)                                   { return (*m_pCollection).at(m_nIndex);                  }
+    [[nodiscard]] constexpr pointer   operator->  (void)                                   { return &((*m_pCollection).at(m_nIndex));               }
+    [[nodiscard]] constexpr reference operator[]  (size_type m)                            { return (*m_pCollection).at(m_nIndex + m);              }
                                                                                            
     constexpr const_reverse_iterator& operator++  (void)                                   { --m_nIndex; return *this;                              }
     constexpr const_reverse_iterator& operator--  (void)                                   { ++m_nIndex; return *this;                              }
@@ -257,7 +257,7 @@ public:
     constexpr bool                    operator!=  (const const_reverse_iterator & r) const { return m_nIndex + 1 != r.m_nIndex + 1;                 }
     constexpr bool                    operator==  (const const_reverse_iterator & r) const { return m_nIndex + 1 == r.m_nIndex + 1;                 }
                                                                                                                                                     
-    constexpr operator const void*                (void)                             const { return &(m_pCollection.at(m_nIndex));                  }
+    constexpr operator const void*                (void)                             const { return &((*m_pCollection).at(m_nIndex));               }
 
 private:
     size_type   m_nIndex        = 0u;

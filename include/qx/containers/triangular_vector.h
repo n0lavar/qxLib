@@ -12,6 +12,8 @@
 //============================================================================
 #pragma once
 
+#include <cstring>
+
 #include <qx/containers/container.h>
 #include <qx/other/useful_funcs.h>
 

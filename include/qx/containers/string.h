@@ -123,9 +123,9 @@ public:
     void                    erase        (size_type              ind_first,
                                           size_type              nSymbols);
 
-    template<class ... Args>
+    template<class ... Args, class = typename std::enable_if<are_same_v<typename Traits::value_type, Args...>>::type>
     void                    erase_all_of (Args...                args);
-    template<class FwdIt, typename = typename std::enable_if<is_iterator<FwdIt>::value>::type>
+    template<class FwdIt, class = typename std::enable_if<!std::is_same_v<typename Traits::value_type, FwdIt>>::type>
     void                    erase_all_of (FwdIt                  first,
                                           FwdIt                  last);
     void                    erase_line_breaks(void);
@@ -133,7 +133,7 @@ public:
 
     void                    insert       (iterator               to_first,
                                           const_iterator         from_first,
-                                          const_iterator         from_last = from_first++);
+                                          const_iterator         from_last);
     void                    insert       (iterator               to,
                                           const_pointer          pSourse);
     void                    insert       (iterator               to,
@@ -245,10 +245,10 @@ template<class UT> basic_string<UT> operator+ (basic_string<UT>&&               
 template<class UT> basic_string<UT> operator+ (typename UT::value_type              lhs, const basic_string<UT>&                rhs) _STR_OP_PLUS_BODY
 template<class UT> basic_string<UT> operator+ (typename UT::value_type              lhs, basic_string<UT>&&                     rhs) _STR_OP_PLUS_BODY
                                                                                                                                           
-template<class UT> basic_string<UT> operator+ (const basic_string<UT>&              lhs, typename const UT::std_string_type&    rhs) _STR_OP_PLUS_BODY
-template<class UT> basic_string<UT> operator+ (basic_string<UT>&&                   lhs, typename const UT::std_string_type&    rhs) _STR_OP_PLUS_BODY
-template<class UT> basic_string<UT> operator+ (typename const UT::std_string_type&  lhs, const basic_string<UT>&                rhs) _STR_OP_PLUS_BODY
-template<class UT> basic_string<UT> operator+ (typename const UT::std_string_type&  lhs, basic_string<UT>&&                     rhs) _STR_OP_PLUS_BODY
+template<class UT> basic_string<UT> operator+ (const basic_string<UT>&              lhs, const typename UT::std_string_type&    rhs) _STR_OP_PLUS_BODY
+template<class UT> basic_string<UT> operator+ (basic_string<UT>&&                   lhs, const typename UT::std_string_type&    rhs) _STR_OP_PLUS_BODY
+template<class UT> basic_string<UT> operator+ (const typename UT::std_string_type&  lhs, const basic_string<UT>&                rhs) _STR_OP_PLUS_BODY
+template<class UT> basic_string<UT> operator+ (const typename UT::std_string_type&  lhs, basic_string<UT>&&                     rhs) _STR_OP_PLUS_BODY
 
 //============================================================================
 //

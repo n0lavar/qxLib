@@ -24,10 +24,18 @@ find_package_handle_standard_args(GTEST DEFAULT_MSG GTEST_INCLUDE_DIR)
 if(GTEST_FOUND)
 	set(GTEST_INCLUDE_DIRS "${GTEST_INCLUDE_DIR}")
     message(STATUS "GTEST_INCLUDE_DIR = ${GTEST_INCLUDE_DIR}")
+    
+    if (WIN32)
+        set(GTEST_LIBRARIES
+            optimized   "${GTEST_INCLUDE_DIR}/../../build/lib/Release/gtest.lib"
+            debug       "${GTEST_INCLUDE_DIR}/../../build/lib/Debug/gtestd.lib"
+        )    
+    else ()
+        set(GTEST_LIBRARIES
+            optimized   "/usr/local/lib/libgtest.a"
+            debug       "/usr/local/lib/libgtestd.a"
+        )    
+    endif()
 
-    set(GTEST_LIBRARIES
-        optimized   "${GTEST_INCLUDE_DIR}/../../build/lib/Release/gtest.lib"
-        debug       "${GTEST_INCLUDE_DIR}/../../build/lib/Debug/gtestd.lib"
-    )
 
 endif(GTEST_FOUND)

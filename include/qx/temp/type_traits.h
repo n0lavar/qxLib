@@ -49,8 +49,7 @@ namespace detail
         using value_t = std::true_type;
         using type = Op<Args...>;
     };
-
-}   
+}
 
 template <template<class...> class Op, class... Args>
 using is_detected = typename detail::detector<nonesuch, void, Op, Args...>::value_t;
@@ -74,10 +73,31 @@ struct is_iterator
     static constexpr bool value = false;
 };
 
+// check if T is iterator (all iterators must contain iterator_category def
+// important! some iterators are implemented as value_type* (see libstdc++ and std::array)
+// in this case check will fail
 template<typename T>
 struct is_iterator<T, typename std::enable_if<is_detected<iterator_category, T>::value>::type>
 {
     static constexpr bool value = true;
 };
+
+template< class T >
+constexpr bool is_iterator_v = is_iterator<T>::value;
+
+//--------------------------------- are_same ---------------------------------
+
+template <typename ...>
+struct are_same : std::true_type { };
+
+template <typename S, typename T, typename ... Ts>
+struct are_same <S, T, Ts...> : std::false_type { };
+
+// check if all of variadic arguments are same type
+template <typename T, typename ... Ts>
+struct are_same <T, T, Ts...> : are_same<T, Ts...> { };
+
+template <typename ... Ts>
+inline constexpr bool are_same_v = are_same<Ts...>::value;
 
 }

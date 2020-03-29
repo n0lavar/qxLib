@@ -71,7 +71,7 @@ TEST(list_se, testing)
 
     qx::list_se<int> list4(10, 7);
     EXPECT_EQ(list4.size(), 10);
-    EXPECT_TRUE(std::all_of(list4.begin(), list4.end(), [] (int v) { return v == 7; }));
+    EXPECT_TRUE(std::all_of(list4.cbegin(), list4.cend(), [] (int v) { return v == 7; }));
 
 //----------------------------------- clear ----------------------------------
 

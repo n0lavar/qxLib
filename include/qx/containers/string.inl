@@ -292,7 +292,7 @@ inline void basic_string<Traits>::erase(size_type ind_first, size_type nSymbols)
 }
 
 //============================================================================
-//!\fn           basic_string<Traits>::erase_all_of<...Args>
+//!\fn           basic_string<Traits>::erase_all_of<...Args, >
 //
 //!\brief  Erase all chars container including from string
 //!\param  ...args - symbols to erase
@@ -300,10 +300,10 @@ inline void basic_string<Traits>::erase(size_type ind_first, size_type nSymbols)
 //!\date   22.03.2020
 //============================================================================
 template<class Traits>
-template<class ... Args>
+template<class ... Args, class>
 inline void basic_string<Traits>::erase_all_of(Args... args)
 {
-    std::array toRemove { args... };
+    std::array<typename Traits::value_type, sizeof...(args)> toRemove { args... };
     erase_all_of(toRemove.begin(), toRemove.end());
 }
 
@@ -317,7 +317,7 @@ inline void basic_string<Traits>::erase_all_of(Args... args)
 //!\date   22.03.2020
 //============================================================================
 template<class Traits>
-template<class FwdIt, typename>
+template<class FwdIt, class>
 inline void basic_string<Traits>::erase_all_of(FwdIt first, FwdIt last)
 {
     for (auto it = begin(); it < end(); ++it)
@@ -341,7 +341,8 @@ inline void basic_string<Traits>::erase_all_of(FwdIt first, FwdIt last)
 template<class Traits>
 inline void qx::basic_string<Traits>::erase_line_breaks(void)
 {
-    erase_all_of('\r', '\n');
+    erase_all_of(CHAR_PREFIX(typename Traits::value_type, '\r'), 
+                 CHAR_PREFIX(typename Traits::value_type, '\n'));
 }
 
 //============================================================================
@@ -791,77 +792,82 @@ template<class Traits>
 template<typename From>
 inline void basic_string<Traits>::from(const From& data, const_pointer pszFormat)
 {
-    if (!pszFormat)
+    if constexpr (std::is_pod_v<From> 
+                  || std::is_pointer_v<From> 
+                  || std::is_same_v<From, std::nullptr_t>)
     {
-        if constexpr (std::is_same_v<From, char>)
+        if (!pszFormat)
         {
-            pszFormat = STR_PREFIX(Traits::value_type, "%hhd");
+            if constexpr (std::is_same_v<From, char>)
+            {
+                pszFormat = STR_PREFIX(typename Traits::value_type, "%hhd");
+            }
+            else if constexpr (std::is_same_v<From, unsigned char>)
+            {
+                pszFormat = STR_PREFIX(typename Traits::value_type, "%hhu");
+            }
+            else if constexpr (std::is_same_v<From, short>)
+            {
+                pszFormat = STR_PREFIX(typename Traits::value_type, "%hd");
+            }
+            else if constexpr (std::is_same_v<From, unsigned short>)
+            {
+                pszFormat = STR_PREFIX(typename Traits::value_type, "%hu");
+            }
+            else if constexpr (std::is_same_v<From, int>)
+            {
+                pszFormat = STR_PREFIX(typename Traits::value_type, "%d");
+            }
+            else if constexpr (std::is_same_v<From, unsigned int>)
+            {
+                pszFormat = STR_PREFIX(typename Traits::value_type, "%u");
+            }
+            else if constexpr (std::is_same_v<From, long>)
+            {
+                pszFormat = STR_PREFIX(typename Traits::value_type, "%ld");
+            }
+            else if constexpr (std::is_same_v<From, unsigned long>)
+            {
+                pszFormat = STR_PREFIX(typename Traits::value_type, "%lu");
+            }
+            else if constexpr (std::is_same_v<From, long long>)
+            {
+                pszFormat = STR_PREFIX(typename Traits::value_type, "%lld");
+            }
+            else if constexpr (std::is_same_v<From, unsigned long long>)
+            {
+                pszFormat = STR_PREFIX(typename Traits::value_type, "%llu");
+            }
+            else if constexpr (std::is_same_v<From, float>)
+            {
+                pszFormat = STR_PREFIX(typename Traits::value_type, "%f");
+            }
+            else if constexpr (std::is_same_v<From, double>)
+            {
+                pszFormat = STR_PREFIX(typename Traits::value_type, "%lf");
+            }
+            else if constexpr (std::is_same_v<From, long double>)
+            {
+                pszFormat = STR_PREFIX(typename Traits::value_type, "%llf");
+            }
+            else if constexpr (std::is_pointer_v<From>)
+            {
+                pszFormat = STR_PREFIX(typename Traits::value_type, "0x%p");
+            }
+            else if constexpr (std::is_same_v <From, std::nullptr_t>)
+            {
+                pszFormat = STR_PREFIX(typename Traits::value_type, "nullptr");
+            }
+            else if constexpr (std::is_same_v<From, bool>)
+            {
+                pszFormat = data
+                    ? STR_PREFIX(typename Traits::value_type, "true")
+                    : STR_PREFIX(typename Traits::value_type, "false");
+            }
         }
-        else if constexpr (std::is_same_v<From, unsigned char>)
-        {
-            pszFormat = STR_PREFIX(Traits::value_type, "%hhu");
-        }
-        else if constexpr (std::is_same_v<From, short>)
-        {
-            pszFormat = STR_PREFIX(Traits::value_type, "%hd");
-        }
-        else if constexpr (std::is_same_v<From, unsigned short>)
-        {
-            pszFormat = STR_PREFIX(Traits::value_type, "%hu");
-        }
-        else if constexpr (std::is_same_v<From, int>)
-        {
-            pszFormat = STR_PREFIX(Traits::value_type, "%d");
-        }
-        else if constexpr (std::is_same_v<From, unsigned int>)
-        {
-            pszFormat = STR_PREFIX(Traits::value_type, "%u");
-        }
-        else if constexpr (std::is_same_v<From, long>)
-        {
-            pszFormat = STR_PREFIX(Traits::value_type, "%ld");
-        }
-        else if constexpr (std::is_same_v<From, unsigned long>)
-        {
-            pszFormat = STR_PREFIX(Traits::value_type, "%lu");
-        }
-        else if constexpr (std::is_same_v<From, long long>)
-        {
-            pszFormat = STR_PREFIX(Traits::value_type, "%lld");
-        }
-        else if constexpr (std::is_same_v<From, unsigned long long>)
-        {
-            pszFormat = STR_PREFIX(Traits::value_type, "%llu");
-        }
-        else if constexpr (std::is_same_v<From, float>)
-        {
-            pszFormat = STR_PREFIX(Traits::value_type, "%f");
-        }
-        else if constexpr (std::is_same_v<From, double>)
-        {
-            pszFormat = STR_PREFIX(Traits::value_type, "%lf");
-        }
-        else if constexpr (std::is_same_v<From, long double>)
-        {
-            pszFormat = STR_PREFIX(Traits::value_type, "%llf");
-        }
-        else if constexpr (std::is_pointer_v<From>)
-        {
-            pszFormat = data == nullptr
-                ? STR_PREFIX(Traits::value_type, "%p")
-                : STR_PREFIX(Traits::value_type, "0x%p");
-        }
-        else if constexpr (std::is_same_v<From, bool>)
-        {
-            pszFormat = data 
-                ? STR_PREFIX(Traits::value_type, "true")
-                : STR_PREFIX(Traits::value_type, "false");
-        }
-    }
 
-    if (pszFormat)
-    {
-        format(pszFormat, data);
+        if (pszFormat)
+            format(pszFormat, data);
     }
     else
     {
@@ -1006,7 +1012,7 @@ template<class Traits>
 inline bool basic_string<Traits>::Resize(size_type nSymbols, size_type nAlign, bool bReserve)
 {
     typename Traits::size_type nSizeToAllocate = nAlign
-        ? qx::align_size<Traits::value_type>(nSymbols + 1, nAlign)
+        ? qx::align_size<typename Traits::value_type>(nSymbols + 1, nAlign)
         : nSymbols + 1;
 
     SStrData<Traits>* pStrData = GetStrData();

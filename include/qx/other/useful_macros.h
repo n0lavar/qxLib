@@ -149,7 +149,7 @@ namespace qx::detail
     ex: #define FOO(type, name) type name
         FOO(SINGLE_ARGUMENT(std::map<int, int>), map_var);
 */
-#define SINGLE_ARGUMENT(...) __VA_ARGS__
+#define SINGLE_ARGUMENT(...) (__VA_ARGS__)
 
 //============================================================================
 

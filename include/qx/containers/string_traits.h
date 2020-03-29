@@ -13,14 +13,10 @@
 #pragma once
 
 #include <cwctype>
-#include <codecvt>
-#include <cctype>
 #include <sstream>
+#include <cstring>
 
 #include <qx/other/useful_funcs.h>
-
-#define _QX_TO_WSTRING(x) L##x
-#define QX_TO_WSTRING(x) _QX_TO_WSTRING(x)
 
 namespace qx
 {
@@ -196,6 +192,9 @@ constexpr wchar_t ChooseCharPrefix<wchar_t>(char c, wchar_t w)
 }
 
 }
+
+#define _QX_TO_WSTRING(x) L##x
+#define QX_TO_WSTRING(x) _QX_TO_WSTRING(x)
 
 // chose witch of prefixes add to string : L or none
 #define STR_PREFIX(value_type, str) qx::detail::ChooseStrPrefix<value_type>(str, QX_TO_WSTRING(str))

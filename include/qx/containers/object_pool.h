@@ -13,6 +13,7 @@
 #pragma once
 
 #include <vector>
+#include <algorithm>
 
 #include <qx/containers/container.h>
 #include <qx/other/useful_macros.h>
@@ -51,7 +52,7 @@ public:
     using reference         = T&;
     using const_reference   = const T&;
     using difference_type   = std::ptrdiff_t;
-    using size_type         = size_t;
+    using size_type         = std::size_t;
 
     IMPL_CONTAINER(object_pool)
 

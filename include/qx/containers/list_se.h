@@ -13,6 +13,8 @@
 #pragma once
 
 #include <initializer_list>
+#include <utility>
+#include <iterator>
 
 namespace qx
 {
@@ -31,7 +33,6 @@ namespace qx
 template<class T>
 class list_se
 {
-    template<class T>
     struct list_se_node
     {
         list_se_node() { }
@@ -43,19 +44,26 @@ class list_se
         list_se_node* pNext = nullptr;
     };
 
-    template<class Node, class T>
-    class list_se_iterator
+public:
+
+    class const_iterator;
+
+    class iterator
     {
-        template<class T> 
         friend class list_se;
+        friend class const_iterator;
 
     public:
-        using pointer       = T*;
-        using reference     = T&;
-        using iterator      = list_se_iterator;
 
-        list_se_iterator(void) { };
-        list_se_iterator(Node* pNode) : m_pNode(pNode) { }
+        using value_type        = T;
+        using pointer           = T*;
+        using reference         = T&;
+        using difference_type   = std::ptrdiff_t;
+        using size_type         = std::size_t;
+        using iterator_category = std::forward_iterator_tag;
+
+        iterator        (void) = default;
+        iterator        (list_se_node* pNode) : m_pNode(pNode) { }
 
         reference operator*   (void)                     { return m_pNode->value;                   }
         pointer   operator->  (void)                     { return &m_pNode->value;                  }
@@ -65,20 +73,43 @@ class list_se
         iterator  operator++  (int)     { iterator i(m_pNode); m_pNode = m_pNode->pNext; return i;  }
 
     private:
-        Node* m_pNode = nullptr;
+        list_se_node* m_pNode = nullptr;
     };
 
-public:
+    class const_iterator
+    {
+        friend class list_se;
 
-    using value_type        = typename T;
-    using pointer           = typename T*;
-    using const_pointer     = typename const T*;
-    using reference         = typename T&;
-    using const_reference   = typename const T&;
-    using size_type         = typename size_t;
-    using iterator          = typename list_se_iterator<list_se_node<T>, T>;
-    using const_iterator    = typename list_se_iterator<const list_se_node<T>, const T>;
-    using init_list         = typename const std::initializer_list<T>&;
+    public:
+        using value_type        = const T;
+        using pointer           = const T*;
+        using reference         = const T&;
+        using difference_type   = std::ptrdiff_t;
+        using size_type         = std::size_t;
+        using iterator_category = std::forward_iterator_tag;
+
+        const_iterator  (void) = default;
+        const_iterator  (const list_se_node* pNode) : m_pNode(pNode) { }
+        const_iterator  (const iterator& it) : m_pNode(it.m_pNote)   { }
+
+        reference       operator*   (void)                          { return m_pNode->value;                  }
+        pointer         operator->  (void)                          { return &m_pNode->value;                 }
+        bool            operator!=  (const const_iterator& r) const { return m_pNode != r.m_pNode;            }
+        bool            operator==  (const const_iterator& r) const { return m_pNode == r.m_pNode;            }
+        const_iterator& operator++  (void)  { m_pNode = m_pNode->pNext; return *this;                         }
+        const_iterator  operator++  (int)   { const_iterator i(m_pNode); m_pNode = m_pNode->pNext; return i;  }
+
+    private:
+        const list_se_node* m_pNode = nullptr;
+    };
+
+    using value_type        = T;
+    using pointer           = T*;
+    using const_pointer     = const T*;
+    using reference         = T&;
+    using const_reference   = const T&;
+    using size_type         = std::size_t;
+    using init_list         = const std::initializer_list<T>&;
 
 public:
 
@@ -86,7 +117,7 @@ public:
                         list_se         (const list_se&     list)   { assign(list);                     }
                         list_se         (list_se&&          list) noexcept { assign(std::move(list));   }
                         list_se         (init_list          init)   { assign(init);                     }
-                        list_se         (size_t             count,
+                        list_se         (size_type          count,
                                          const_reference    value)  { assign(count, value);             }
                         ~list_se        (void)                      { clear();                          }
 
@@ -97,23 +128,23 @@ public:
     void                assign          (const list_se&     list);
     void                assign          (list_se&&          list) noexcept;
     void                assign          (init_list          init);
-    void                assign          (size_t             count,
+    void                assign          (size_type          count,
                                          const_reference    value);
 
     void                insert          (iterator           where,
                                          const_reference    what);
     void                insert          (iterator           where,
                                          const_pointer      what,
-                                         size_t             number = 1);
+                                         size_type          number = 1);
     void                insert_after    (iterator           where,
                                          const_reference    what);
     void                insert_after    (iterator           where,
                                          const_pointer      what,
-                                         size_t             number = 1);
+                                         size_type          number = 1);
     void                erase           (iterator           where,
-                                         size_t             number = 1);
+                                         size_type          number = 1);
     void                erase_after     (iterator           where,
-                                         size_t             number = 1);
+                                         size_type          number = 1);
 
     template<class ... Args>
     void                emplace_front   (Args&&...          args);
@@ -132,7 +163,7 @@ public:
 
     void                clear           (void);
 
-    size_t              size            (void)  const   { return m_nSize;                       }
+    size_type           size            (void)  const   { return m_nSize;                       }
     bool                empty           (void)  const   { return size() == 0;                   }
     iterator            begin           (void)          { return iterator(m_pFirstNode);        }
     const_iterator      begin           (void)  const   { return const_iterator(m_pFirstNode);  }
@@ -146,9 +177,9 @@ public:
     const_reference     back            (void)  const   { return m_pLastNode->value;            }
 
 private:
-    list_se_node<T>*    m_pFirstNode    = nullptr;
-    list_se_node<T>*    m_pLastNode     = nullptr;
-    size_t              m_nSize         = 0;
+    list_se_node*       m_pFirstNode    = nullptr;
+    list_se_node*       m_pLastNode     = nullptr;
+    size_type           m_nSize         = 0;
 };
 
 template<class T>

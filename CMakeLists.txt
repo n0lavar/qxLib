@@ -132,8 +132,13 @@ IF(QX_DEBUG)
         "${CMAKE_SOURCE_DIR}/bench/bench_sort.h"
     )
 
-    find_package (GTEST REQUIRED)
-
+    find_package(GTEST REQUIRED)
+    find_package(Threads REQUIRED)
+    
+    if(NOT MSVC)
+        set(PThreadLib -pthread)
+    endif()
+    
     include_directories(
         ${GTEST_INCLUDE_DIR}
         "${CMAKE_SOURCE_DIR}/tests/"
@@ -156,16 +161,32 @@ include_directories(
 
 add_executable(qxLib ${QXLIB_ALL_SOURCES})
 
-set_target_properties(qxLib PROPERTIES LINKER_LANGUAGE CXX)
-
-target_compile_options(qxLib PRIVATE
-    $<$<COMPILE_LANGUAGE:CXX>:/std:c++17>
-    $<$<CONFIG:Debug>:/MTd /Od /Ob0 /Z7 /RTC1 /DDEBUG /D_DEBUG /DEBUG /bigobj>
-    $<$<CONFIG:Release>:/MT /O2 /Ob2 /DNDEBUG>
+target_compile_features(qxLib PRIVATE 
+    cxx_std_17
 )
+
+set_target_properties(qxLib PROPERTIES 
+    LINKER_LANGUAGE CXX
+)
+
+if (CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
+
+elseif (CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
+
+elseif (CMAKE_CXX_COMPILER_ID STREQUAL "Intel")
+
+elseif (CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
+    target_compile_options(qxLib PRIVATE
+        $<$<COMPILE_LANGUAGE:CXX>:/std:c++17>
+        $<$<CONFIG:Debug>:/MTd /Od /Ob0 /Z7 /RTC1 /DDEBUG /D_DEBUG /DEBUG /bigobj>
+        $<$<CONFIG:Release>:/MT /O2 /Ob2 /DNDEBUG>
+    )
+endif()
+
 
 IF(QX_DEBUG)
     target_link_libraries (qxLib
+        ${PThreadLib}
         ${GTEST_LIBRARIES}
     )
 ENDIF(QX_DEBUG)

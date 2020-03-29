@@ -25,70 +25,54 @@ SMART_ENUM(colors_header, -3,
     yellow
 )
 
-template <typename Enum>
-class TestQxSmartEnum : public ::testing::Test
+TEST(TestQxSmartEnum, test)
 {
-protected:
-    using current_enum = Enum;
-};
-
-
-using Implementations = ::testing::Types
-<
-    colors_header
->;
-
-TYPED_TEST_SUITE(TestQxSmartEnum, Implementations);
-
-
-TYPED_TEST(TestQxSmartEnum, test)
-{
-    EXPECT_STREQ(current_enum::s_to_string(current_enum::red),     "red");
-    EXPECT_STREQ(current_enum::s_to_string(current_enum::black),   "black");
-    EXPECT_STREQ(current_enum::s_to_string(current_enum::green),   "green");
-    EXPECT_STREQ(current_enum::s_to_string(current_enum::white),   "white");
-    EXPECT_STREQ(current_enum::s_to_string(current_enum::yellow),  "yellow");
+    EXPECT_STREQ(colors_header::s_to_string(colors_header::red),     "red");
+    EXPECT_STREQ(colors_header::s_to_string(colors_header::black),   "black");
+    EXPECT_STREQ(colors_header::s_to_string(colors_header::green),   "green");
+    EXPECT_STREQ(colors_header::s_to_string(colors_header::white),   "white");
+    EXPECT_STREQ(colors_header::s_to_string(colors_header::yellow),  "yellow");
 
     {
-        auto optional = current_enum::s_from_string("red");
+        auto optional = colors_header::s_from_string("red");
         EXPECT_TRUE(optional.has_value());
-        EXPECT_EQ(optional.value(), current_enum::red);
+        EXPECT_EQ(optional.value(), colors_header::red);
     }
 
     {
-        auto optional = current_enum::s_from_string("black");
+        auto optional = colors_header::s_from_string("black");
         EXPECT_TRUE(optional.has_value());
-        EXPECT_EQ(optional.value(), current_enum::black);
+        EXPECT_EQ(optional.value(), colors_header::black);
     }
 
     {
-        auto optional = current_enum::s_from_string("green");
+        auto optional = colors_header::s_from_string("green");
         EXPECT_TRUE(optional.has_value());
-        EXPECT_EQ(optional.value(), current_enum::green);
+        EXPECT_EQ(optional.value(), colors_header::green);
     }
 
     {
-        auto optional = current_enum::s_from_string("white");
+        auto optional = colors_header::s_from_string("white");
         EXPECT_TRUE(optional.has_value());
-        EXPECT_EQ(optional.value(), current_enum::white);
+        EXPECT_EQ(optional.value(), colors_header::white);
     }
 
     {
-        auto optional = current_enum::s_from_string("yellow");
+        auto optional = colors_header::s_from_string("yellow");
         EXPECT_TRUE(optional.has_value());
-        EXPECT_EQ(optional.value(), current_enum::yellow);
+        EXPECT_EQ(optional.value(), colors_header::yellow);
     }
 
     {
-        auto optional = current_enum::s_from_string("trash");
+        auto optional = colors_header::s_from_string("trash");
         EXPECT_FALSE(optional.has_value());
     }
 
-    current_enum color = current_enum::black;
-    EXPECT_EQ(color++, current_enum::black);
-    EXPECT_EQ(color, current_enum::green);
-    EXPECT_EQ(++color, current_enum::white);
-    EXPECT_EQ(color, current_enum::white);
+    colors_header color = colors_header::black;
+    EXPECT_EQ(color++, colors_header::black);
+    EXPECT_EQ(color, colors_header::green);
+    EXPECT_EQ(++color, colors_header::white);
+    EXPECT_EQ(color, colors_header::white);
 }
 
 #endif

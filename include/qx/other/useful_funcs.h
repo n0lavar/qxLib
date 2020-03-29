@@ -126,7 +126,7 @@ inline size_type align_size(size_type nSize, size_type nAlign)
 //!\date   29.02.2020
 //============================================================================
 template<class iterator>
-inline void destruct(iterator start, iterator end = start++)
+inline void destruct(iterator start, iterator end)
 {
     using T = typename iterator::value_type;
     if constexpr (std::is_compound<T>::value)
