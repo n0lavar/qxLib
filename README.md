@@ -2,6 +2,8 @@
 
 a few useful things I developed while studying
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/ab3175ce6af6453284f8a639306a6935)](https://www.codacy.com/manual/n0lavar/qxLib?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=n0lavar/qxLib&amp;utm_campaign=Badge_Grade)
+
 Dependencies:
 + C++17
 + glm for gl module and some algorithms
