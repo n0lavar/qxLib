@@ -79,6 +79,11 @@ TYPED_TEST(TestQxSmartEnum, test)
         EXPECT_EQ(optional.value(), current_enum::yellow);
     }
 
+    {
+        auto optional = current_enum::s_from_string("trash");
+        EXPECT_FALSE(optional.has_value());
+    }
+
     current_enum color = current_enum::black;
     EXPECT_EQ(color++, current_enum::black);
     EXPECT_EQ(color, current_enum::green);

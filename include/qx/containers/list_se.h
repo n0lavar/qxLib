@@ -39,7 +39,6 @@ class list_se
         template<class ...Args>
         list_se_node(Args&& ...args) : value(std::forward<Args>(args)...) { }
 
-
         T             value = T();
         list_se_node* pNext = nullptr;
     };

@@ -25,7 +25,7 @@ class name                                                                      
 public:                                                                                                     \
     enum e                                                                                                  \
     {                                                                                                       \
-        none = first_elem - 1,                                                                              \
+        none = (first_elem) - 1,                                                                            \
         first,                                                                                              \
         __VA_ARGS__,                                                                                        \
         last,                                                                                               \
@@ -72,7 +72,6 @@ public:                                                                         
     }                                                                                                       \
                                                                                                             \
     /* also returns "last" value as end flag */                                                             \
-    /* note that these operators are defined in enum scope */                                               \
                                                                                                             \
     /* postfix */                                                                                           \
     e operator++ ()                                                                                         \
@@ -103,7 +102,7 @@ private:                                                                        
         for (size_t i = 0; i < args.size(); i++)                                                            \
             m[s_to_string(args[i])] = args[i];                                                              \
                                                                                                             \
-        return m;                                                                                           \
+        return std::move(m);                                                                                \
     };                                                                                                      \
                                                                                                             \
     static std::vector<qx::string> fill_enum_to_string(void)                                                \
