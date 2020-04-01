@@ -113,7 +113,8 @@ set (QXLIB_ALL_SOURCES
     ${QXLIB_FILES_TEMP}
 )
 
-IF(QX_DEBUG)
+if(QX_DEBUG)
+
     SET(QXLIB_ALL_SOURCES 
         "${QXLIB_ALL_SOURCES}"
         "${CMAKE_SOURCE_DIR}/tests/main.cpp"
@@ -144,7 +145,8 @@ IF(QX_DEBUG)
         "${CMAKE_SOURCE_DIR}/tests/"
         "${CMAKE_SOURCE_DIR}/bench/"
     )
-ENDIF(QX_DEBUG)
+    
+endif(QX_DEBUG)
 
 
 # ================================================================
@@ -184,9 +186,17 @@ elseif (CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
 endif()
 
 
-IF(QX_DEBUG)
-    target_link_libraries (qxLib
+if(QX_DEBUG)
+
+    target_compile_options(qxLib PRIVATE
+        -O0        # no optimization
+        -g         # generate debug info
+        --coverage # sets all required flags
+    )
+
+    target_link_libraries (qxLib --coverage
         ${PThreadLib}
         ${GTEST_LIBRARIES}
     )
-ENDIF(QX_DEBUG)
+        
+endif(QX_DEBUG)
