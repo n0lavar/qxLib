@@ -8,13 +8,13 @@ compiler:
 
 os:
   - linux
-  - osx
+#  - osx
   
 arch:
   - amd64
-  - ppc64le
-  - s390x
-  - arm64
+#  - ppc64le
+#  - s390x
+#  - arm64
   
 env:
   - BUILD_CONFIGURATION=Debug
@@ -83,8 +83,8 @@ before_script:
 script:
   - mkdir build
   - cd build
-  - cmake .. -DQX_DEBUG=TRUE -DCMAKE_BUILD_TYPE=$BUILD_CONFIGURATION
+  - cmake .. -DQX_DEBUG=TRUE -DCODE_COVERAGE=ON -DCMAKE_BUILD_TYPE=$BUILD_CONFIGURATION
   - make -j8
   
 after_success:
-    - codecov -t 8b6ee192-ea16-410c-a4cf-0635a67d4850 -X gcov
+  - bash <(curl -s https://codecov.io/bash)
