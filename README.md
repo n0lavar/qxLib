@@ -2,7 +2,9 @@
 
 a few useful things I developed while studying
 
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/ab3175ce6af6453284f8a639306a6935)](https://www.codacy.com/manual/n0lavar/qxLib?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=n0lavar/qxLib&amp;utm_campaign=Badge_Grade)
+Linux / OSX<br>g++ / clang<br>amd64 / ppc64le / s390x / arm64  | Win (MVSC) | code quality
+--- | --- | ---
+[![Build Status](https://travis-ci.com/n0lavar/qxLib.svg?branch=master)](https://travis-ci.com/n0lavar/qxLib) | ? | [![Codacy Badge](https://api.codacy.com/project/badge/Grade/ab3175ce6af6453284f8a639306a6935)](https://www.codacy.com/manual/n0lavar/qxLib?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=n0lavar/qxLib&amp;utm_campaign=Badge_Grade)
 
 Dependencies:
 + C++17
