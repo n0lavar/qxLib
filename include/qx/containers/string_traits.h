@@ -15,6 +15,7 @@
 #include <cwctype>
 #include <sstream>
 #include <cstring>
+#include <cctype>
 
 #include <qx/other/useful_funcs.h>
 

@@ -1,0 +1,46 @@
+image: Visual Studio 2017   # на этом VM-образе установлены все Visual Studio с 2008 по 2015
+
+init:
+  - git config --global core.autocrlf input
+
+clone_folder: c:\projects\qxLib
+shallow_clone: true
+
+matrix:
+  fast_finish: false
+
+platform:
+  - x64
+
+configuration:
+  - Debug
+  - Release
+
+environment:
+  matrix:
+    - TOOLCHAIN: msvc15
+
+install:
+
+build_script:
+  - cd ..
+  
+  # install glm
+  - git clone https://github.com/g-truc/glm.git
+  
+  # install gtest
+  - git clone https://github.com/google/googletest.git
+  - cd googletest
+  - mkdir build
+  - cd build
+  - cmake .. %CMAKE_CONFIGURE_FLAGS%
+  - cmake --build . %CMAKE_BUILD_FLAGS%
+  - cd ..
+  - cd ..
+  
+  # install qxLib
+  - cd qxLib
+  - mkdir build
+  - cd build
+  - cmake .. -DQX_DEBUG=TRUE %CMAKE_CONFIGURE_FLAGS%
+  - cmake --build . %CMAKE_BUILD_FLAGS%
