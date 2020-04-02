@@ -153,9 +153,9 @@ template<class Traits>
 template<class ...Args>
 inline void basic_string<Traits>::format(const_pointer pStr, Args ...args)
 {
-    size_type length = Traits::tsnprintf(nullptr, 0, pStr, args...);
+    int length = Traits::tsnprintf(nullptr, 0, pStr, args...);
     if (length > 0 && Resize(length, Traits::talign()))
-        Traits::tsnprintf(m_pData, static_cast<size_t>(length + 1), pStr, args...);
+        Traits::tsnprintf(m_pData, static_cast<size_t>(length) + 1, pStr, args...);
 }
 
 //============================================================================
@@ -348,7 +348,7 @@ inline void qx::basic_string<Traits>::erase_line_breaks(void)
 //============================================================================
 //!\fn                  basic_string<Traits>::insert
 //
-//!\brief  Insert substrung
+//!\brief  Insert substring
 //!\param  to_first   - first targer string char iterator
 //!\param  from_first - first substr char iterator
 //!\param  from_last  - second substr char iterator (excluding)
@@ -364,7 +364,7 @@ inline void basic_string<Traits>::insert(iterator to_first, const_iterator from_
 //============================================================================
 //!\fn                  basic_string<Traits>::insert
 //
-//!\brief  Insert substrung
+//!\brief  Insert substring
 //!\param  to      - first targer string char iterator
 //!\param  pSourse - zero terminated sourse string
 //!\author Khrapov
@@ -379,7 +379,7 @@ inline void basic_string<Traits>::insert(iterator to, const_pointer pSourse)
 //============================================================================
 //!\fn                  basic_string<Traits>::insert
 //
-//!\brief  Insert substrung
+//!\brief  Insert substring
 //!\param  to       - first targer string char iterator
 //!\param  pSourse  - sourse string
 //!\param  nSymbols - number of chars in sourse string
@@ -395,7 +395,7 @@ inline void basic_string<Traits>::insert(iterator to, const_pointer pSourse, siz
 //============================================================================
 //!\fn                  basic_string<Traits>::insert
 //
-//!\brief  Insert substrung
+//!\brief  Insert substring
 //!\param  to_ind  - first targer string char index
 //!\param  pSourse - zero terminated sourse string
 //!\author Khrapov
@@ -410,7 +410,7 @@ inline void basic_string<Traits>::insert(size_type to_ind, const_pointer pSourse
 //============================================================================
 //!\fn                  basic_string<Traits>::insert
 //
-//!\brief  Insert substrung
+//!\brief  Insert substring
 //!\param  to_ind   - first targer string char index
 //!\param  pSourse  - sourse string
 //!\param  nSymbols - number of symbols to insert
@@ -423,7 +423,7 @@ inline void basic_string<Traits>::insert(size_type to_ind, const_pointer pSourse
     size_type nStartSymbols = size();
     if (Resize(nStartSymbols + nSymbols, Traits::talign()))
     {
-        std::memcpy(m_pData + to_ind + nSymbols, m_pData + to_ind, (nStartSymbols - to_ind) * sizeof(value_type));
+        std::memmove(m_pData + to_ind + nSymbols, m_pData + to_ind, (nStartSymbols - to_ind) * sizeof(value_type));
         std::memcpy(m_pData + to_ind, pSourse, nSymbols * sizeof(value_type));
     }
 }
@@ -848,7 +848,7 @@ inline void basic_string<Traits>::from(const From& data, const_pointer pszFormat
             }
             else if constexpr (std::is_same_v<From, long double>)
             {
-                pszFormat = STR_PREFIX(typename Traits::value_type, "%llf");
+                pszFormat = STR_PREFIX(typename Traits::value_type, "%Lf");
             }
             else if constexpr (std::is_pointer_v<From>)
             {

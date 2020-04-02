@@ -8,13 +8,13 @@ compiler:
 
 os:
   - linux
-#  - osx
+  - osx
   
 arch:
   - amd64
-#  - ppc64le
-#  - s390x
-#  - arm64
+  - ppc64le
+  - s390x
+  - arm64
   
 env:
   - BUILD_CONFIGURATION=Debug
@@ -82,11 +82,12 @@ before_script:
 script:
   - mkdir build
   - cd build
-  - cmake .. -DQX_DEBUG=TRUE -DCMAKE_BUILD_TYPE=$BUILD_CONFIGURATION
-  - make -j8
+  - cmake .. -DCMAKE_BUILD_TYPE=$BUILD_CONFIGURATION
+  - cmake --build .
+  - ctest --output-on-failure
   - cd ..
-  - chmod +x get_code_cov.sh
-  - sudo ./get_code_cov.sh
-  
-after_success:
-  - bash <(curl -s https://codecov.io/bash)
+#  - chmod +x get_code_cov.sh
+#  - sudo ./get_code_cov.sh
+#  
+#after_success:
+#  - bash <(curl -s https://codecov.io/bash)

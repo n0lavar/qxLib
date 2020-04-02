@@ -765,7 +765,11 @@ TYPED_TEST(TestQxString, from)
     EXPECT_STREQ(str.data(), STR("nullptr"));
 
     str.from((void*)0x000000000028FF44);
-    EXPECT_STREQ(str.data(), STR("0x000000000028FF44"));
+    bool bFormatCase1 = TypeParam::tstrcmp(str.data(), STR("0x000000000028FF44"));
+    bool bFormatCase2 = TypeParam::tstrcmp(str.data(), STR("0x000000000028ff44"));
+    bool bFormatCase3 = TypeParam::tstrcmp(str.data(), STR("0x0x28ff44"));
+    bool bFormatCase4 = TypeParam::tstrcmp(str.data(), STR("0x0x28FF44"));
+    EXPECT_TRUE(bFormatCase1 || bFormatCase2 || bFormatCase3 || bFormatCase4);
 
     str.from(true);
     EXPECT_STREQ(str.data(), STR("true"));

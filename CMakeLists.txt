@@ -1,3 +1,27 @@
+function(SET_TARGET_OPTIONS TARGET_)
+
+    if (${CMAKE_CXX_COMPILER_ID} STREQUAL Clang)
+    elseif (${CMAKE_CXX_COMPILER_ID} STREQUAL GNU)
+    elseif (${CMAKE_CXX_COMPILER_ID} STREQUAL Intel)
+    elseif (${CMAKE_CXX_COMPILER_ID} STREQUAL MSVC)
+        target_compile_options(${TARGET_} PRIVATE
+            $<$<COMPILE_LANGUAGE:CXX>:/std:c++17>
+            $<$<CONFIG:Debug>:/MTd /Od /Ob0 /Z7 /RTC1 /DDEBUG /D_DEBUG /DEBUG /bigobj>
+            $<$<CONFIG:Release>:/MT /O2 /Ob2 /DNDEBUG>
+        )
+    endif()
+    
+    target_compile_features(${TARGET_} PRIVATE 
+        cxx_std_17
+    )
+    
+    set_target_properties(${TARGET_} PROPERTIES 
+        LINKER_LANGUAGE CXX
+    )
+    
+endfunction()
+
+
 # ================================================================
 #                           qxLib
 # ================================================================
@@ -6,6 +30,8 @@ cmake_minimum_required(VERSION 3.8)
 project(qxLib)
 set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake/modules/")
+
+
 
 # ================================================================
 # Containers
@@ -27,6 +53,8 @@ set (QXLIB_FILES_CONTAINERS
 )
 
 source_group ("containers" FILES ${QXLIB_FILES_CONTAINERS})
+
+
 
 # ================================================================
 # OpenGL
@@ -63,6 +91,8 @@ set (QXLIB_FILES_GL
 
 source_group ("gl" FILES ${QXLIB_FILES_GL})
 
+
+
 # ================================================================
 # Algorithms
 
@@ -94,6 +124,8 @@ set (QXLIB_FILES_OTHER
 
 source_group ("other" FILES ${QXLIB_FILES_OTHER})
 
+
+
 # ================================================================
 # Temp
 set (QXLIB_FILES_TEMP
@@ -101,6 +133,8 @@ set (QXLIB_FILES_TEMP
 )
 
 source_group ("temp" FILES ${QXLIB_FILES_TEMP})
+
+
 
 # ================================================================
 # All
@@ -111,92 +145,47 @@ set (QXLIB_ALL_SOURCES
     ${QXLIB_FILES_OTHER}
     ${QXLIB_FILES_ALG}
     ${QXLIB_FILES_TEMP}
+    "${CMAKE_SOURCE_DIR}/tests/config.h"        
+    "${CMAKE_SOURCE_DIR}/bench/bench_sort.h"
+    "${CMAKE_SOURCE_DIR}/src/main.cpp"
 )
 
-if(QX_DEBUG)
+find_package(GTEST REQUIRED)
+find_package(Threads REQUIRED)
+find_package(GLEW)
+find_package(GLM)
 
-    SET(QXLIB_ALL_SOURCES 
-        "${QXLIB_ALL_SOURCES}"
-        "${CMAKE_SOURCE_DIR}/tests/main.cpp"
-        "${CMAKE_SOURCE_DIR}/tests/config.h"
+if(NOT MSVC)
+    set(PThreadLib -pthread)
+endif()
 
-        "${CMAKE_SOURCE_DIR}/tests/test_sort.cpp"
-        "${CMAKE_SOURCE_DIR}/tests/test_numerical.cpp"
-        "${CMAKE_SOURCE_DIR}/tests/test_functional.cpp"
-        "${CMAKE_SOURCE_DIR}/tests/test_list_se.cpp"
-        "${CMAKE_SOURCE_DIR}/tests/test_object_pool.cpp"
-        "${CMAKE_SOURCE_DIR}/tests/test_string.cpp"
-        "${CMAKE_SOURCE_DIR}/tests/test_vector2d.cpp"
-        "${CMAKE_SOURCE_DIR}/tests/test_triangular_vector.cpp"
-        "${CMAKE_SOURCE_DIR}/tests/test_smart_enum.cpp"
-        
-        "${CMAKE_SOURCE_DIR}/bench/bench_sort.h"
-    )
-
-    find_package(GTEST REQUIRED)
-    find_package(Threads REQUIRED)
-    
-    if(NOT MSVC)
-        set(PThreadLib -pthread)
-    endif()
-    
-    include_directories(
-        ${GTEST_INCLUDE_DIR}
-        "${CMAKE_SOURCE_DIR}/tests/"
-        "${CMAKE_SOURCE_DIR}/bench/"
-    )
-    
-endif(QX_DEBUG)
-
+include_directories(
+    ${GTEST_INCLUDE_DIR}
+    ${GLEW_INCLUDE_DIRS}
+    ${GLM_INCLUDE_DIRS}
+    "${CMAKE_SOURCE_DIR}/include/"
+    "${CMAKE_SOURCE_DIR}/tests/"
+    "${CMAKE_SOURCE_DIR}/bench/"
+)
 
 # ================================================================
 # Setup Engine
 
-find_package (GLEW)
-find_package (GLM)
-
-include_directories(
-    ${GLEW_INCLUDE_DIRS}
-    ${GLM_INCLUDE_DIRS}
-    "${CMAKE_SOURCE_DIR}/include/"
-)
-
 add_executable(qxLib ${QXLIB_ALL_SOURCES})
-
-target_compile_features(qxLib PRIVATE 
-    cxx_std_17
-)
-
-set_target_properties(qxLib PROPERTIES 
-    LINKER_LANGUAGE CXX
-)
-
-if (CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
-
-elseif (CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
-
-elseif (CMAKE_CXX_COMPILER_ID STREQUAL "Intel")
-
-elseif (CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
-    target_compile_options(qxLib PRIVATE
-        $<$<COMPILE_LANGUAGE:CXX>:/std:c++17>
-        $<$<CONFIG:Debug>:/MTd /Od /Ob0 /Z7 /RTC1 /DDEBUG /D_DEBUG /DEBUG /bigobj>
-        $<$<CONFIG:Release>:/MT /O2 /Ob2 /DNDEBUG>
-    )
-endif()
+SET_TARGET_OPTIONS(qxLib)
 
 
-if(QX_DEBUG)
+enable_testing()
 
-    target_compile_options(qxLib PRIVATE
-        -O0        # no optimization
-        -g         # generate debug info
-        --coverage # sets all required flags
-    )
+file(GLOB TEST_SRC_FILES ${PROJECT_SOURCE_DIR}/tests/*.cpp)
 
-    target_link_libraries (qxLib --coverage
-        ${PThreadLib}
-        ${GTEST_LIBRARIES}
-    )
-        
-endif(QX_DEBUG)
+# from list of files we'll create tests test_name.cpp -> test_name
+foreach(_test_file ${TEST_SRC_FILES})
+    if(NOT ${_test_file} STREQUAL ${PROJECT_SOURCE_DIR}/tests/main.cpp)
+        get_filename_component(_test_name ${_test_file} NAME_WE)
+        add_executable(${_test_name} ${_test_file} "${PROJECT_SOURCE_DIR}/tests/main.cpp")
+        SET_TARGET_OPTIONS(${_test_name})
+        target_link_libraries(${_test_name} ${GTEST_LIBRARIES} ${PThreadLib})
+        add_test(${_test_name} ${_test_name})
+    endif()
+endforeach()

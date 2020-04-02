@@ -42,5 +42,6 @@ build_script:
   - cd qxLib
   - mkdir build
   - cd build
-  - cmake .. -DQX_DEBUG=TRUE %CMAKE_CONFIGURE_FLAGS%
+  - cmake .. %CMAKE_CONFIGURE_FLAGS%
   - cmake --build . %CMAKE_BUILD_FLAGS%
+  - ctest --output-on-failure

@@ -16,6 +16,7 @@
 #include <sstream>
 #include <cstring>
 #include <cctype>
+#include <cstdarg>
 
 #include <qx/other/useful_funcs.h>
 
@@ -150,11 +151,41 @@ struct char_traits<wchar_t>
     {
         return std::wcsncmp(pFirst, pSecond, nCount);
     }
+
+    // MVSC's std::swprintf returns required size if nullptr and 0 passed as pDest and nBuffer,
+    // while other compilers returns -1
+#ifdef _MSC_VER
     template<class ... Args>
     static int tsnprintf(pointer pDest, size_type nBuffer, const_pointer pFormat, Args ... args)
     {
         return std::swprintf(pDest, nBuffer, pFormat, args...);
     }
+#else
+    static int tsnprintf(pointer pDest, size_type nBuffer, const_pointer pFormat, ...)
+    {
+        int size = -1;
+
+        va_list va;
+        va_start(va, pFormat);
+        if (nBuffer <= 0)
+        {
+            // opening a dummy file to /dev/null and printing to that file to retrieve the required size
+            FILE* pDummyFile = std::fopen("/dev/null", "w");
+            if (pDummyFile)
+            {
+                size = std::vfwprintf(pDummyFile, pFormat, va);
+                std::fclose(pDummyFile);
+            }
+        }
+        else
+        {
+            size = std::vswprintf(pDest, nBuffer, pFormat, va);
+        }
+        va_end(va);
+
+        return size;
+    }
+#endif
 };
 
 }
