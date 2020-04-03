@@ -1,20 +1,20 @@
+# ================================================================
+#                           qxLib
+# ================================================================
+
+cmake_minimum_required(VERSION 3.16)
+project(qxLib)
+set_property(GLOBAL PROPERTY USE_FOLDERS ON)
+set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake/modules/")
+
 function(SET_TARGET_OPTIONS TARGET_)
 
     if (${CMAKE_CXX_COMPILER_ID} STREQUAL Clang)
-    elseif (${CMAKE_CXX_COMPILER_ID} STREQUAL GNU)
-    
-        target_compile_options(${TARGET_} PRIVATE
-            -fprofile-arcs -ftest-coverage
-        )
-        target_link_options(qxEngine PRIVATE
-            -lgcov --coverage
-        )
-        
+    elseif (${CMAKE_CXX_COMPILER_ID} STREQUAL GNU)    
     elseif (${CMAKE_CXX_COMPILER_ID} STREQUAL Intel)
     elseif (${CMAKE_CXX_COMPILER_ID} STREQUAL MSVC)
     
         target_compile_options(${TARGET_} PRIVATE
-            $<$<COMPILE_LANGUAGE:CXX>:/std:c++17>
             $<$<CONFIG:Debug>:/MTd /Od /Ob0 /Z7 /RTC1 /DDEBUG /D_DEBUG /DEBUG /bigobj>
             $<$<CONFIG:Release>:/MT /O2 /Ob2 /DNDEBUG>
         )
@@ -24,24 +24,14 @@ function(SET_TARGET_OPTIONS TARGET_)
     target_compile_features(${TARGET_} PRIVATE 
         cxx_std_17
     )
-    
     set_target_properties(${TARGET_} PROPERTIES 
         LINKER_LANGUAGE CXX
     )
+    target_link_libraries(${TARGET_} PRIVATE
+        ${GTEST_LIBRARIES}
+    )
     
 endfunction()
-
-
-# ================================================================
-#                           qxLib
-# ================================================================
-
-cmake_minimum_required(VERSION 3.8)
-project(qxLib)
-set_property(GLOBAL PROPERTY USE_FOLDERS ON)
-set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake/modules/")
-
-
 
 # ================================================================
 # Containers
@@ -165,10 +155,6 @@ find_package(Threads REQUIRED)
 find_package(GLEW)
 find_package(GLM)
 
-if(NOT MSVC)
-    set(PThreadLib -pthread)
-endif()
-
 include_directories(
     ${GTEST_INCLUDE_DIR}
     ${GLEW_INCLUDE_DIRS}
@@ -181,21 +167,35 @@ include_directories(
 # ================================================================
 # Setup Engine
 
-add_executable(qxLib ${QXLIB_ALL_SOURCES})
-SET_TARGET_OPTIONS(qxLib)
+add_library(qxLib ${QXLIB_ALL_SOURCES})
 
+option(CODE_COVERAGE "Enable coverage reporting" OFF)
+if(CODE_COVERAGE AND CMAKE_CXX_COMPILER_ID MATCHES "GNU")
 
-enable_testing()
+    target_compile_options(qxLib PRIVATE
+        -g -O0 --coverage
+    )
 
-file(GLOB TEST_SRC_FILES ${PROJECT_SOURCE_DIR}/tests/*.cpp)
+    target_link_options(qxLib PRIVATE 
+        --coverage
+    )
+    target_link_libraries(qxLib PRIVATE
+        -pthread 
+    )
+    
+    enable_testing()
 
-# from list of files we'll create tests test_name.cpp -> test_name
-foreach(_test_file ${TEST_SRC_FILES})
-    if(NOT ${_test_file} STREQUAL ${PROJECT_SOURCE_DIR}/tests/main.cpp)
-        get_filename_component(_test_name ${_test_file} NAME_WE)
-        add_executable(${_test_name} ${_test_file} "${PROJECT_SOURCE_DIR}/tests/main.cpp")
-        SET_TARGET_OPTIONS(${_test_name})
-        target_link_libraries(${_test_name} ${GTEST_LIBRARIES} ${PThreadLib})
-        add_test(${_test_name} ${_test_name})
-    endif()
-endforeach()
+    file(GLOB TEST_SRC_FILES ${PROJECT_SOURCE_DIR}/tests/*.cpp)
+
+    # from list of files we'll create tests test_name.cpp -> test_name
+    foreach(_test_file ${TEST_SRC_FILES})
+        if(NOT ${_test_file} STREQUAL ${PROJECT_SOURCE_DIR}/tests/main.cpp)
+            get_filename_component(_test_name ${_test_file} NAME_WE)
+            add_executable(${_test_name} ${_test_file} "${PROJECT_SOURCE_DIR}/tests/main.cpp")
+            SET_TARGET_OPTIONS(${_test_name})
+            target_link_libraries(${_test_name} PRIVATE qxLib)
+            add_test(${_test_name} ${_test_name})
+        endif()
+    endforeach()
+    
+endif()

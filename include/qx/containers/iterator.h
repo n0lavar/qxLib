@@ -43,7 +43,7 @@ public:
     using reference         = typename C::reference;
     using difference_type   = typename C::difference_type;
     using size_type         = typename C::size_type;
-    using iterator_category = typename std::random_access_iterator_tag;
+    using iterator_category = std::random_access_iterator_tag;
 
 public:
     constexpr                 iterator    (void) = default;
@@ -101,7 +101,7 @@ public:
     using reference         = typename C::const_reference;
     using difference_type   = typename C::difference_type;
     using size_type         = typename C::size_type;
-    using iterator_category = typename std::random_access_iterator_tag;
+    using iterator_category = std::random_access_iterator_tag;
 
 public:
     constexpr                 const_iterator  (void) = default;
@@ -166,7 +166,7 @@ public:
     using reference         = typename C::reference;
     using difference_type   = typename C::difference_type;
     using size_type         = typename C::size_type;
-    using iterator_category = typename std::random_access_iterator_tag;
+    using iterator_category = std::random_access_iterator_tag;
 
 public:
     constexpr                 reverse_iterator    (void) = default;
@@ -225,7 +225,7 @@ public:
     using reference         = typename C::const_reference;
     using difference_type   = typename C::difference_type;
     using size_type         = typename C::size_type;
-    using iterator_category = typename std::random_access_iterator_tag;
+    using iterator_category = std::random_access_iterator_tag;
 
 public:
     constexpr                 const_reverse_iterator  (void) = default;
