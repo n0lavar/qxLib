@@ -852,7 +852,11 @@ inline void basic_string<Traits>::from(const From& data, const_pointer pszFormat
             }
             else if constexpr (std::is_pointer_v<From>)
             {
+#ifdef _MSC_VER
                 pszFormat = STR_PREFIX(typename Traits::value_type, "0x%p");
+#else
+                pszFormat = STR_PREFIX(typename Traits::value_type, "%p");
+#endif
             }
             else if constexpr (std::is_same_v <From, std::nullptr_t>)
             {

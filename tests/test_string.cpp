@@ -764,12 +764,14 @@ TYPED_TEST(TestQxString, from)
     str.from(nullptr);
     EXPECT_STREQ(str.data(), STR("nullptr"));
 
-    str.from((void*)0x000000000028FF44);
-    bool bFormatCase1 = TypeParam::tstrcmp(str.data(), STR("0x000000000028FF44"));
-    bool bFormatCase2 = TypeParam::tstrcmp(str.data(), STR("0x000000000028ff44"));
-    bool bFormatCase3 = TypeParam::tstrcmp(str.data(), STR("0x0x28ff44"));
-    bool bFormatCase4 = TypeParam::tstrcmp(str.data(), STR("0x0x28FF44"));
+    str.from((void*)0x000000004128FF44);
+    bool bFormatCase1 = (0 == TypeParam::tstrcmp(str.data(), STR("0x000000004128FF44")));
+    bool bFormatCase2 = (0 == TypeParam::tstrcmp(str.data(), STR("0x000000004128ff44")));
+    bool bFormatCase3 = (0 == TypeParam::tstrcmp(str.data(), STR("0x4128ff44")));
+    bool bFormatCase4 = (0 == TypeParam::tstrcmp(str.data(), STR("0x4128FF44")));
     EXPECT_TRUE(bFormatCase1 || bFormatCase2 || bFormatCase3 || bFormatCase4);
+    if (!(bFormatCase1 || bFormatCase2 || bFormatCase3 || bFormatCase4))
+        EXPECT_STREQ(str.data(), STR("string to check str.data()"));
 
     str.from(true);
     EXPECT_STREQ(str.data(), STR("true"));

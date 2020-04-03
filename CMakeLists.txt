@@ -2,13 +2,23 @@ function(SET_TARGET_OPTIONS TARGET_)
 
     if (${CMAKE_CXX_COMPILER_ID} STREQUAL Clang)
     elseif (${CMAKE_CXX_COMPILER_ID} STREQUAL GNU)
+    
+        target_compile_options(${TARGET_} PRIVATE
+            -fprofile-arcs -ftest-coverage
+        )
+        target_link_options(qxEngine PRIVATE
+            -lgcov --coverage
+        )
+        
     elseif (${CMAKE_CXX_COMPILER_ID} STREQUAL Intel)
     elseif (${CMAKE_CXX_COMPILER_ID} STREQUAL MSVC)
+    
         target_compile_options(${TARGET_} PRIVATE
             $<$<COMPILE_LANGUAGE:CXX>:/std:c++17>
             $<$<CONFIG:Debug>:/MTd /Od /Ob0 /Z7 /RTC1 /DDEBUG /D_DEBUG /DEBUG /bigobj>
             $<$<CONFIG:Release>:/MT /O2 /Ob2 /DNDEBUG>
         )
+        
     endif()
     
     target_compile_features(${TARGET_} PRIVATE 
