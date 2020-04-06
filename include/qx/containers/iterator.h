@@ -46,8 +46,8 @@ public:
     using iterator_category = std::random_access_iterator_tag;
 
 public:
-    constexpr                 iterator    (void) = default;
-    constexpr                 iterator    (C* c, size_type i) : m_pCollection(c), m_nIndex(i) { }
+    constexpr iterator (void) = default;
+    constexpr iterator (C* c, size_type i) : m_pCollection(c), m_nIndex(i) { }
 
     [[nodiscard]] constexpr reference operator*  (void)                     { return (*m_pCollection).at(m_nIndex);     }
     [[nodiscard]] constexpr pointer   operator-> (void)                     { return &((*m_pCollection).at(m_nIndex));  }
@@ -104,9 +104,9 @@ public:
     using iterator_category = std::random_access_iterator_tag;
 
 public:
-    constexpr                 const_iterator  (void) = default;
-    constexpr                 const_iterator  (const C* c, size_type i) : m_pCollection(c), m_nIndex(i) { }
-    constexpr                 const_iterator  (const iterator<C>& it)   : m_pCollection(it.m_pCollection), m_nIndex(it.m_nIndex) { }
+    constexpr const_iterator (void) = default;
+    constexpr const_iterator (const C* c, size_type i) : m_pCollection(c), m_nIndex(i) { }
+    constexpr const_iterator (const iterator<C>& it)   : m_pCollection(it.m_pCollection), m_nIndex(it.m_nIndex) { }
 
     [[nodiscard]] constexpr reference operator*   (void)                           { return (*m_pCollection).at(m_nIndex);          }
     [[nodiscard]] constexpr pointer   operator->  (void)                           { return &((*m_pCollection).at(m_nIndex));       }
@@ -169,8 +169,8 @@ public:
     using iterator_category = std::random_access_iterator_tag;
 
 public:
-    constexpr                 reverse_iterator    (void) = default;
-    constexpr                 reverse_iterator    (C* c, size_type i) : m_pCollection(c), m_nIndex(i) { }
+    constexpr reverse_iterator (void) = default;
+    constexpr reverse_iterator (C* c, size_type i) : m_pCollection(c), m_nIndex(i) { }
 
     [[nodiscard]] constexpr reference operator*   (void)                             { return (*m_pCollection).at(m_nIndex);            }
     [[nodiscard]] constexpr pointer   operator->  (void)                             { return &((*m_pCollection).at(m_nIndex));         }
@@ -228,9 +228,9 @@ public:
     using iterator_category = std::random_access_iterator_tag;
 
 public:
-    constexpr                 const_reverse_iterator  (void) = default;
-    constexpr                 const_reverse_iterator  (const C* c, size_type i)       : m_pCollection(c), m_nIndex(i) { }
-    constexpr                 const_reverse_iterator  (const reverse_iterator<C>& it) : m_pCollection(it.m_pCollection), m_nIndex(it.m_nIndex) { }
+    constexpr const_reverse_iterator (void) = default;
+    constexpr const_reverse_iterator (const C* c, size_type i)       : m_pCollection(c), m_nIndex(i) { }
+    constexpr const_reverse_iterator (const reverse_iterator<C>& it) : m_pCollection(it.m_pCollection), m_nIndex(it.m_nIndex) { }
 
     [[nodiscard]] constexpr reference operator*   (void)                                   { return (*m_pCollection).at(m_nIndex);                  }
     [[nodiscard]] constexpr pointer   operator->  (void)                                   { return &((*m_pCollection).at(m_nIndex));               }

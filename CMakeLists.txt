@@ -7,31 +7,8 @@ project(qxLib)
 set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake/modules/")
 
-function(SET_TARGET_OPTIONS TARGET_)
+include(cmake/platform_options.cmake)
 
-    if (${CMAKE_CXX_COMPILER_ID} STREQUAL Clang)
-    elseif (${CMAKE_CXX_COMPILER_ID} STREQUAL GNU)    
-    elseif (${CMAKE_CXX_COMPILER_ID} STREQUAL Intel)
-    elseif (${CMAKE_CXX_COMPILER_ID} STREQUAL MSVC)
-    
-        target_compile_options(${TARGET_} PRIVATE
-            $<$<CONFIG:Debug>:/MTd /Od /Ob0 /Z7 /RTC1 /DDEBUG /D_DEBUG /DEBUG /bigobj>
-            $<$<CONFIG:Release>:/MT /O2 /Ob2 /DNDEBUG>
-        )
-        
-    endif()
-    
-    target_compile_features(${TARGET_} PRIVATE 
-        cxx_std_17
-    )
-    set_target_properties(${TARGET_} PROPERTIES 
-        LINKER_LANGUAGE CXX
-    )
-    target_link_libraries(${TARGET_} PRIVATE
-        ${GTEST_LIBRARIES}
-    )
-    
-endfunction()
 
 # ================================================================
 # Containers
@@ -165,37 +142,26 @@ include_directories(
 )
 
 # ================================================================
-# Setup Engine
+# Setup
 
 add_library(qxLib ${QXLIB_ALL_SOURCES})
+SET_TARGET_OPTIONS(qxLib)
 
-option(CODE_COVERAGE "Enable coverage reporting" OFF)
-if(CODE_COVERAGE AND CMAKE_CXX_COMPILER_ID MATCHES "GNU")
 
-    target_compile_options(qxLib PRIVATE
-        -g -O0 --coverage
-    )
+# ================================================================
+# add tests
 
-    target_link_options(qxLib PRIVATE 
-        --coverage
-    )
-    target_link_libraries(qxLib PRIVATE
-        -pthread 
-    )
+enable_testing()
+
+file(GLOB TEST_SRC_FILES ${PROJECT_SOURCE_DIR}/tests/*.cpp)
+
+# from list of files we'll create tests test_name.cpp -> test_name
+foreach(_test_file ${TEST_SRC_FILES})
+    if(NOT ${_test_file} STREQUAL ${PROJECT_SOURCE_DIR}/tests/main.cpp)
+        get_filename_component(_test_name ${_test_file} NAME_WE)
+        add_executable(${_test_name} ${_test_file} "${PROJECT_SOURCE_DIR}/tests/main.cpp")
+        SET_TARGET_OPTIONS(${_test_name})
+        add_test(${_test_name} ${_test_name})
+    endif()
+endforeach()
     
-    enable_testing()
-
-    file(GLOB TEST_SRC_FILES ${PROJECT_SOURCE_DIR}/tests/*.cpp)
-
-    # from list of files we'll create tests test_name.cpp -> test_name
-    foreach(_test_file ${TEST_SRC_FILES})
-        if(NOT ${_test_file} STREQUAL ${PROJECT_SOURCE_DIR}/tests/main.cpp)
-            get_filename_component(_test_name ${_test_file} NAME_WE)
-            add_executable(${_test_name} ${_test_file} "${PROJECT_SOURCE_DIR}/tests/main.cpp")
-            SET_TARGET_OPTIONS(${_test_name})
-            target_link_libraries(${_test_name} PRIVATE qxLib)
-            add_test(${_test_name} ${_test_name})
-        endif()
-    endforeach()
-    
-endif()

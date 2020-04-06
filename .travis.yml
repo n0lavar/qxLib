@@ -4,11 +4,11 @@ osx_image: xcode10.3
 
 compiler:
   - gcc
-#  - clang
+  - clang
 
 os:
   - linux
-#  - osx
+  - osx
   
 arch:
   - amd64
@@ -28,8 +28,8 @@ addons:
     - sourceline: 'ppa:ubuntu-toolchain-r/test'
     packages:
     - clang-9
-    - gcc-9
-    - g++-9
+    - gcc-8
+    - g++-8 # lcov supports 8 version only
     - libglm-dev
   homebrew:
     packages:
@@ -43,12 +43,13 @@ install:
   - if [ "$TRAVIS_OS_NAME" = "osx" ]; then
       export PATH="$(brew --prefix llvm)/bin:$PATH";
     fi
+    
   # /usr/bin/gcc points to an older compiler on both Linux and macOS.
   - if [ "$CXX" = "g++" ]; then 
-      export CXX="g++-9" CC="gcc-9"; 
+      export CXX="g++-8" CC="gcc-8"; 
     fi
   # /usr/bin/clang points to an older compiler on both Linux and macOS.
-  #
+
   # Homebrew's llvm package doesn't ship a versioned clang++ binary, so the values
   # below don't work on macOS. Fortunately, the path change above makes the
   # default values (clang and clang++) resolve to the correct compiler on macOS.
@@ -61,6 +62,7 @@ install:
   - echo ${CC}
   - echo ${CXX}
   - ${CXX} --version
+  - gcov-8 --version
   
 before_script:  
   # set c++17
@@ -90,34 +92,34 @@ before_script:
 script:
   
   # build with test info
-  - sudo ls -a -l
   - mkdir build
   - cd build
-  - /../cmake/bin/cmake .. -DCMAKE_BUILD_TYPE=$BUILD_CONFIGURATION -DCODE_COVERAGE=ON
-  #- /../cmake/bin/cmake --build . -j $(nproc)
-  - /../cmake/bin/cmake --build . --target qxLib
-  - sudo ls -a -l
+  - /../cmake/bin/cmake .. -DCMAKE_BUILD_TYPE=$BUILD_CONFIGURATION
+  - /../cmake/bin/cmake --build .
   
   # run tests
-  #- ctest --output-on-failure -j $(nproc)
-  - sudo ls -a -l
-
-  - cd ..
-  
-  # generate test reports
-  - sudo ls -a -l
-  - for x in tests/*.cpp; do
-      if [ "$x" != "tests/main.cpp" ]; then
-        gcov $x;
-      fi
-    done
-  - sudo ls -a -l
+  - ctest --output-on-failure -j $(nproc)
 
 after_success:
-  - if [ "$TRAVIS_OS_NAME" = "linux" ]; then
+  - |
+    if [ "$TRAVIS_OS_NAME" = "linux" ]; then
       if [ "$TRAVIS_COMPILER" = "gcc" ]; then
-        if [ "$BUILD_CONFIGURATION" = "Release" ]; then
-          bash <(curl -s https://codecov.io/bash);
+        if [ "$BUILD_CONFIGURATION" = "Debug" ]; then
+          
+          # copy all required files from subdirectories
+          find . -name \*.gcda -exec cp {} . \;
+          find . -name \*.gcno -exec cp {} . \;
+          find . -name \*.o    -exec cp {} . \;          
+          
+          # install lcov manually
+          sudo wget https://github.com/linux-test-project/lcov/releases/download/v1.14/lcov-1.14.tar.gz
+          tar xf lcov-1.14.tar.gz
+          ./lcov-1.14/bin/lcov --gcov-tool gcov-8 --directory . --capture --output-file coverage.info
+          
+          # generate coverage report
+          bash <(curl -s https://codecov.io/bash) -X gcov
+          
         fi
       fi
     fi
+    
