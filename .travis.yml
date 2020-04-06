@@ -33,7 +33,7 @@ addons:
     - libglm-dev
   homebrew:
     packages:
-    - llvm@9
+    - llvm@8
     - glm
     update: true
     
