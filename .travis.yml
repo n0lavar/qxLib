@@ -1,7 +1,11 @@
-language: cpp
-dist: bionic
-osx_image: xcode10.3
-
+language:   cpp
+dist:       bionic
+osx_image:  xcode10.3
+notifications:
+  email:
+    on_success: never  # default: change
+    on_failure: always # default: always
+  
 compiler:
   - gcc
   - clang
@@ -33,7 +37,7 @@ addons:
     - libglm-dev
   homebrew:
     packages:
-    - llvm@8
+    - llvm@9
     - glm
     update: true
     
@@ -45,8 +49,10 @@ install:
     fi
     
   # /usr/bin/gcc points to an older compiler on both Linux and macOS.
-  - if [ "$CXX" = "g++" ]; then 
-      export CXX="g++-8" CC="gcc-8"; 
+  - if [ "$TRAVIS_OS_NAME" = "linux" ]; then
+      if [ "$CXX" = "g++" ]; then 
+        export CXX="g++-8" CC="gcc-8"; 
+      fi
     fi
   # /usr/bin/clang points to an older compiler on both Linux and macOS.
 
@@ -62,7 +68,6 @@ install:
   - echo ${CC}
   - echo ${CXX}
   - ${CXX} --version
-  - gcov-8 --version
   
 before_script:  
   # set c++17
@@ -70,21 +75,25 @@ before_script:
   
   # install cmake 3.17 manually
   - if [ "$TRAVIS_OS_NAME" = "linux" ]; then
-      package_name=cmake-3.17.0-Linux-x86_64;
+      cmake_package_name=cmake-3.17.0-Linux-x86_64;
     else
-      package_name=cmake-3.17.0-Darwin-x86_64;
-    fi
-  - wget https://github.com/Kitware/CMake/releases/download/v3.17.0/$package_name.sh
-  - sudo mkdir /cmake
-  - sudo sh $package_name.sh --prefix=/cmake --skip-license
-  - /cmake/bin/cmake --version
-
-  # install gtest manually 
+      cmake_package_name=cmake-3.17.0-Darwin-x86_64;
+    fi  
+  - wget https://github.com/Kitware/CMake/releases/download/v3.17.0/$cmake_package_name.tar.gz
+  - tar xf $cmake_package_name.tar.gz
+  - if [ "$TRAVIS_OS_NAME" = "linux" ]; then
+      export PATH="`pwd`/$cmake_package_name/bin:$PATH";
+    else
+      export PATH="`pwd`/$cmake_package_name/CMake.app/Contents/bin:$PATH";
+    fi  
+  - cmake --version
+  
+  # install gtest 1.10 manually 
   - sudo wget https://github.com/google/googletest/archive/release-1.10.0.tar.gz
   - tar xf release-1.10.0.tar.gz
   - cd googletest-release-1.10.0
-  - /../cmake/bin/cmake . -DCMAKE_BUILD_TYPE=$BUILD_CONFIGURATION
-  - /../cmake/bin/cmake --build .
+  - cmake . -DCMAKE_BUILD_TYPE=$BUILD_CONFIGURATION
+  - cmake --build .
   - sudo cp -a googletest/include/gtest /usr/local/include
   - sudo cp -a lib/*.a /usr/local/lib/
   - cd ..  
@@ -94,8 +103,8 @@ script:
   # build with test info
   - mkdir build
   - cd build
-  - /../cmake/bin/cmake .. -DCMAKE_BUILD_TYPE=$BUILD_CONFIGURATION
-  - /../cmake/bin/cmake --build .
+  - cmake .. -DCMAKE_BUILD_TYPE=$BUILD_CONFIGURATION
+  - cmake --build .
   
   # run tests
   - ctest --output-on-failure -j $(nproc)
@@ -111,7 +120,7 @@ after_success:
           find . -name \*.gcno -exec cp {} . \;
           find . -name \*.o    -exec cp {} . \;          
           
-          # install lcov manually
+          # install lcov 1.14 manually 
           sudo wget https://github.com/linux-test-project/lcov/releases/download/v1.14/lcov-1.14.tar.gz
           tar xf lcov-1.14.tar.gz
           ./lcov-1.14/bin/lcov --gcov-tool gcov-8 --directory . --capture --output-file coverage.info
