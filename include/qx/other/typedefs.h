@@ -14,7 +14,6 @@
 
 #include <stdint.h>
 
-using cstr  = const char * const;
 using mem_t = char*;                //!< 1 byte for pointer arithmetic
 
 using u8    = uint8_t;              //!<                           0 .. 255

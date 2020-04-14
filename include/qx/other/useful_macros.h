@@ -93,7 +93,7 @@
 
 namespace qx::detail
 {
-    constexpr cstr past_last_slash(cstr str, cstr last_slash)
+    constexpr const char * past_last_slash(const char* str, const char* last_slash)
     {
         return *str == '\0'
                 ? last_slash
@@ -102,7 +102,7 @@ namespace qx::detail
                     : past_last_slash(str + 1, last_slash);
     }
 
-    constexpr cstr past_last_slash(cstr str)
+    constexpr const char* past_last_slash(const char* str)
     {
         return past_last_slash(str, str);
     }
