@@ -23,17 +23,14 @@
 namespace qx
 {
 
-template <class T>
-struct char_traits;
-
 //============================================================================
 //
-//!\struct                      char_traits<char>
+//!\struct                      wchar_traits<>
 //!\author  Khrapov
 //!\date    30.10.2019
 //============================================================================
-template <>
-struct char_traits<char>
+template <size_t Align>
+struct char_traits
 {
     using value_type        = char;
     using pointer           = char*;
@@ -51,7 +48,7 @@ struct char_traits<char>
     }
     static size_type talign (void)                          
     { 
-        return 16;                                              
+        return static_cast<size_type>(Align);
     }
     static size_type tstrlen (const_pointer pStr)           
     { 
@@ -94,12 +91,12 @@ struct char_traits<char>
 
 //============================================================================
 //
-//!\struct                   char_traits<wchar_t>
+//!\struct                   wchar_traits<>
 //!\author  Khrapov
 //!\date    24.03.2020
 //============================================================================
-template <>
-struct char_traits<wchar_t>
+template <size_t Align>
+struct wchar_traits
 {
     using value_type        = wchar_t;
     using pointer           = wchar_t*;
@@ -117,7 +114,7 @@ struct char_traits<wchar_t>
     }
     static size_type talign (void)                          
     { 
-        return 16;                                              
+        return static_cast<size_type>(Align);
     }
     static size_type tstrlen (const_pointer pStr)           
     { 

@@ -19,6 +19,7 @@
 #include <optional>
 
 #include <qx/containers/container.h>
+#include <qx/containers/string_traits.h>
 #include <qx/other/hashes.h>
 #include <qx/other/random.h>
 #include <qx/temp/type_traits.h>
@@ -267,8 +268,10 @@ struct SStrData
         { return sizeof(SStrData) + offsetof(SStrData, nAllocatedSize); }
 };
 
-using string  = basic_string<qx::char_traits<char>>;
-using wstring = basic_string<qx::char_traits<wchar_t>>;
+using string    = basic_string<qx::char_traits<16>>;    // char sequence with 16 alignment
+using wstring   = basic_string<qx::wchar_traits<16>>;   // wchar_t sequence with 16 alignment
+using pstring   = basic_string<qx::char_traits<1>>;     // char sequence without alignment (precise)
+using wpstring  = basic_string<qx::wchar_traits<1>>;    // wchar_t sequence without alignment (precise)
 
 }
 
@@ -292,13 +295,31 @@ namespace std
         }
     };
 
+    template<>
+    struct hash<qx::pstring>
+    {
+        u32 operator()(const qx::pstring& str) const
+        {
+            return qx::hash::str::Murmur32(str.data(), str.size(), 78524);
+        }
+    };
+
+    template<>
+    struct hash<qx::wpstring>
+    {
+        u32 operator()(const qx::wpstring& str) const
+        {
+            return qx::hash::str::Murmur32(str.data(), str.size(), 108540);
+        }
+    };
+
 #ifndef QX_DISABLE_C_STRINGS_HASHES
     template<>
     struct hash<const char*>
     {
         u32 operator()(const char* psz) const
         {
-            return qx::hash::str::Murmur32(psz, 0, 45084);
+            return qx::hash::str::Murmur32(psz, std::strlen(psz), 22457);
         }
     };
 
@@ -307,7 +328,7 @@ namespace std
     {
         u32 operator()(const wchar_t* psz) const
         {
-            return qx::hash::str::Murmur32(psz, 0, 1059);
+            return qx::hash::str::Murmur32(psz, std::wcslen(psz), 1059);
         }
     };
 #endif

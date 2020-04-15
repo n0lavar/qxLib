@@ -22,7 +22,7 @@ namespace qx::hash::str
 //          https://softwareengineering.stackexchange.com/questions/49550/which-hashing-algorithm-is-best-for-uniqueness-and-speed
 //
 //!\param   key  - key value, string for hashing
-//!\param   len  - string length. 0 if string is zero-terminated
+//!\param   len  - string length
 //!\param   seed - seed for hashing
 //!\retval       - 32bit unsigned value
 //!\author Khrapov
@@ -31,9 +31,6 @@ namespace qx::hash::str
 template<typename Char>
 inline u32 Murmur32(const Char* key, size_t len, u32 seed)
 {
-    if (len == 0)
-        len = qx::char_traits<Char>::tstrlen(key);
-
     u32 h = seed;
     if (len > 3)
     {

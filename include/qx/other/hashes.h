@@ -13,7 +13,6 @@
 #pragma once
 
 #include <qx/other/typedefs.h>
-#include <qx/containers/string_traits.h>
 
 namespace qx::hash
 {

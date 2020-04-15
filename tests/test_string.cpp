@@ -44,23 +44,13 @@ class TestQxString : public ::testing::Test
 
 using Implementations = ::testing::Types
 <
-    qx::char_traits<char>,
-    qx::char_traits<wchar_t>
+    qx::char_traits<16>,
+    qx::wchar_traits<16>,
+    qx::char_traits<1>,
+    qx::wchar_traits<1>
 >;
 
-class CharNames
-{
-public:
-    template <typename T>
-    static std::string GetName(int)
-    {
-        if (std::is_same<T, qx::char_traits<char>>())    return "char";
-        if (std::is_same<T, qx::char_traits<wchar_t>>()) return "wchar_t";
-        return "unknown";
-    }
-};
-
-TYPED_TEST_SUITE(TestQxString, Implementations, CharNames);
+TYPED_TEST_SUITE(TestQxString, Implementations);
 
 TYPED_TEST(TestQxString, construct)
 {
