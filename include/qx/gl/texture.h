@@ -33,6 +33,7 @@ class texture : iBuffer
 {
 public:
                     texture         (void) = default;
+                    ~texture        (void);
             void    Init            (GLenum         target,
                                      GLint          level,
                                      GLint          internalformat,
@@ -48,18 +49,23 @@ public:
     virtual void    Unbind          (void) const    override;
     virtual GLuint  GetBufferName   (void) const    override;
 
-            void    Render          (void) const;
+            GLsizei GetWidth        (void) const;
+            GLsizei GetHeight       (void) const;
 
     template<typename T>
             void    SetParameter    (GLenum         target,
                                      T              value);
 
 private:
-    GLuint m_nTexture       = UINT_EMPTY_VALUE;
-    GLenum m_eTextureType   = GL_TEXTURE_2D;
+    GLuint  m_nTexture      = UINT_EMPTY_VALUE;
+    GLenum  m_eTextureType  = GL_TEXTURE_2D;
+    GLsizei m_nWidth        = 0;
+    GLsizei m_nHeight       = 0;
 };
 
-inline GLuint texture::GetBufferName(void) const { return m_nTexture; }
+inline GLuint   texture::GetBufferName  (void) const { return m_nTexture;   }
+inline GLsizei  texture::GetWidth       (void) const { return m_nWidth;     }
+inline GLsizei  texture::GetHeight      (void) const { return m_nHeight;    }
 
 }
 

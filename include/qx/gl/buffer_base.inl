@@ -115,7 +115,6 @@ inline void buffer_base::Update(GLsizeiptr nSize, const void* pData, GLenum eUsa
     MemBarrier();
     Bind();
     glBufferData(GetBufferType(), nSize, pData, eUsage);
-    // Unbind();
 }
 
 //============================================================================
@@ -133,7 +132,6 @@ inline void buffer_base::UpdatePart(GLintptr nOffset, GLsizeiptr nSize, const vo
     MemBarrier();
     Bind();
     glBufferSubData(GetBufferType(), nOffset, nSize, pData);
-    // Unbind();
 }
 
 }

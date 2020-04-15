@@ -1,3 +1,4 @@
+#include "texture.h"
 //============================================================================
 //
 //!\file                         texture.inl
@@ -13,6 +14,18 @@
 
 namespace qx::gl
 {
+
+//============================================================================
+//!\fn                        texture::~texture
+//
+//!\brief  texture object destructor
+//!\author Khrapov
+//!\date   15.04.2020
+//============================================================================
+inline texture::~texture(void)
+{
+    Delete();
+}
 
 //============================================================================
 //!\fn                          texture::Init
@@ -39,11 +52,13 @@ inline void texture::Init(GLenum        target,
                           GLenum        type, 
                           const void  * data)
 {
-    m_eTextureType = target;
     Generate();
     Bind();
     glTexImage2D(target, level, internalformat, width, height, 0, format, type, data);
-    // Unbind();
+
+    m_eTextureType  = target;
+    m_nWidth        = width;
+    m_nHeight       = height;
 }
 
 //============================================================================
@@ -69,7 +84,12 @@ inline void texture::Generate(void)
 inline void texture::Delete(void)
 {
     if (m_nTexture != UINT_EMPTY_VALUE)
+    {
+        // also sets m_nTexture to 0
         glDeleteTextures(1, &m_nTexture);
+        m_nWidth  = 0;
+        m_nHeight = 0;
+    }
 }
 
 //============================================================================
@@ -94,21 +114,6 @@ inline void texture::Bind(void) const
 inline void texture::Unbind(void) const
 {
     glBindTexture(m_eTextureType, 0);
-}
-
-//============================================================================
-//!\fn                         texture::Unbind
-//
-//!\brief  Render texture
-//!\author Khrapov
-//!\date   23.01.2020
-//============================================================================
-inline void texture::Render(void) const
-{
-    glActiveTexture(GL_TEXTURE0);
-    Bind();
-    glDrawArrays(GL_TRIANGLES, 0, 6);
-    // Unbind();
 }
 
 template<>
