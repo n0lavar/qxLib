@@ -155,7 +155,7 @@ inline void basic_string<Traits>::format(const_pointer pStr, Args ...args)
 {
     int length = Traits::tsnprintf(nullptr, 0, pStr, args...);
     if (length > 0 && Resize(length, Traits::talign()))
-        Traits::tsnprintf(m_pData, static_cast<size_t>(length) + 1, pStr, args...);
+        Traits::tsnprintf(m_pData, static_cast<size_type>(length) + 1, pStr, args...);
 }
 
 //============================================================================

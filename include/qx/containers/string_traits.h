@@ -194,31 +194,31 @@ namespace qx::detail
 {
 
 template<typename value_type>
-constexpr const value_type * const ChooseStrPrefix(const char * const c, const wchar_t * const w);
+constexpr const value_type * const ChooseStrPrefix(const char * const, const wchar_t * const);
 
 template<>
-constexpr const char * const ChooseStrPrefix<char>(const char * const c, const wchar_t * const w)
+constexpr const char * const ChooseStrPrefix<char>(const char * const c, const wchar_t * const)
 {
     return c;
 }
 
 template<>
-constexpr const wchar_t * const ChooseStrPrefix<wchar_t>(const char * const c, const wchar_t * const w)
+constexpr const wchar_t * const ChooseStrPrefix<wchar_t>(const char * const, const wchar_t * const w)
 {
     return w;
 }
 
 template<typename value_type>
-constexpr value_type ChooseCharPrefix(char c, wchar_t w);
+constexpr value_type ChooseCharPrefix(char, wchar_t);
 
 template<>
-constexpr char ChooseCharPrefix<char>(char c, wchar_t w)
+constexpr char ChooseCharPrefix<char>(char c, wchar_t)
 {
     return c;
 }
 
 template<>
-constexpr wchar_t ChooseCharPrefix<wchar_t>(char c, wchar_t w)
+constexpr wchar_t ChooseCharPrefix<wchar_t>(char, wchar_t w)
 {
     return w;
 }
