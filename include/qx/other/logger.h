@@ -29,19 +29,19 @@
 namespace qx
 {
 
-constexpr cstr ANSI_COLOR_RESET            = "\033[0m";
-constexpr cstr ANSI_COLOR_RED              = "\033[0;31m";
-constexpr cstr ANSI_COLOR_RED_BOLD         = "\033[1;31m";
-constexpr cstr ANSI_COLOR_GREEN            = "\033[0;32m";
-constexpr cstr ANSI_COLOR_GREEN_BOLD       = "\033[1;32m";
-constexpr cstr ANSI_COLOR_YELLOW           = "\033[0;33m";
-constexpr cstr ANSI_COLOR_YELLOW_BOLD      = "\033[01;33m";
-constexpr cstr ANSI_COLOR_BLUE             = "\033[0;34m";
-constexpr cstr ANSI_COLOR_BLUE_BOLD        = "\033[1;34m";
-constexpr cstr ANSI_COLOR_MAGENTA          = "\033[0;35m";
-constexpr cstr ANSI_COLOR_MAGENTA_BOLD     = "\033[1;35m";
-constexpr cstr ANSI_COLOR_CYAN             = "\033[0;36m";
-constexpr cstr ANSI_COLOR_CYAN_BOLD        = "\033[1;36m";
+constexpr const char* ANSI_COLOR_RESET          = "\033[0m";
+constexpr const char* ANSI_COLOR_RED            = "\033[0;31m";
+constexpr const char* ANSI_COLOR_RED_BOLD       = "\033[1;31m";
+constexpr const char* ANSI_COLOR_GREEN          = "\033[0;32m";
+constexpr const char* ANSI_COLOR_GREEN_BOLD     = "\033[1;32m";
+constexpr const char* ANSI_COLOR_YELLOW         = "\033[0;33m";
+constexpr const char* ANSI_COLOR_YELLOW_BOLD    = "\033[01;33m";
+constexpr const char* ANSI_COLOR_BLUE           = "\033[0;34m";
+constexpr const char* ANSI_COLOR_BLUE_BOLD      = "\033[1;34m";
+constexpr const char* ANSI_COLOR_MAGENTA        = "\033[0;35m";
+constexpr const char* ANSI_COLOR_MAGENTA_BOLD   = "\033[1;35m";
+constexpr const char* ANSI_COLOR_CYAN           = "\033[0;36m";
+constexpr const char* ANSI_COLOR_CYAN_BOLD      = "\033[1;36m";
 
 #define TRACE(format, ...)            qx::logger::getInstance().ProcessOutput(qx::logger::level::all,     "[I][%s][%s::%s(%d)] "           format " \n", qx::logger::getInstance().GetTimeStr(), __SHORT_FILE__, __FUNCTION__, __LINE__, __VA_ARGS__)
 #define TR_ERROR(format, ...)         qx::logger::getInstance().ProcessOutput(qx::logger::level::errors,  "[E][%s][%s::%s(%d)] "           format " \n", qx::logger::getInstance().GetTimeStr(), __SHORT_FILE__, __FUNCTION__, __LINE__, __VA_ARGS__)
@@ -64,8 +64,8 @@ class logger
 
     struct sAutoPrintfColor
     {
-        sAutoPrintfColor(cstr color) { printf("%s", color);            }
-        ~sAutoPrintfColor(void)      { printf("%s", ANSI_COLOR_RESET); }
+        sAutoPrintfColor (const char* color) { printf("%s", color);            }
+        ~sAutoPrintfColor(void)              { printf("%s", ANSI_COLOR_RESET); }
     };
 
 public:
@@ -110,27 +110,27 @@ public:
 
     template<class ... Args>
     void ProcessOutput      (level                  eLogLevel,
-                             cstr                   pszFormat,
-                             cstr                   pszTime,
-                             cstr                   pszFile,
-                             cstr                   pszFunction,
+                             const char           * pszFormat,
+                             const char           * pszTime,
+                             const char           * pszFile,
+                             const char           * pszFunction,
                              int                    nLine,
                              Args...                args);
 
-    void RegisterUnit       (cstr                   pszUnitName,
+    void RegisterUnit       (const char           * pszUnitName,
                              const TraceUnitInfo  & unit);
-    void DeregisterUnit     (cstr                   pszUnitName);
+    void DeregisterUnit     (const char           * pszUnitName);
 
     void SetLogPolicy       (policy                 eLogPolicy);
 
-    cstr GetTimeStr         (void);
+    const char* GetTimeStr  (void);
 
 private:
 
     void OutputToFile       (const qx::string     & sText,
                              const qx::string     & sFileName);
     void OutputToConsole    (const qx::string     & sText,
-                             cstr                   pszAnsiiColor);
+                             const char           * pszAnsiiColor);
 
     void OnCreate           (void);
     void OnTerminate        (void);

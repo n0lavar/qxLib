@@ -29,13 +29,13 @@ namespace qx
 //!\date   10.01.2020
 //==============================================================================
 template<class ... Args>
-inline void logger::ProcessOutput(level    eLogLevel,
-                                  cstr     pszFormat, 
-                                  cstr     pszTime, 
-                                  cstr     pszFile, 
-                                  cstr     pszFunction,
-                                  int      nLine, 
-                                  Args...  args)
+inline void logger::ProcessOutput(level         eLogLevel,
+                                  const char  * pszFormat, 
+                                  const char  * pszTime, 
+                                  const char  * pszFile, 
+                                  const char  * pszFunction,
+                                  int           nLine, 
+                                  Args...       args)
 {
     TraceUnitInfo* pUnitInfo = nullptr;
     if (auto it = m_RegisteredUnits.find(pszFunction); it != m_RegisteredUnits.cend())
@@ -113,7 +113,7 @@ inline void logger::ProcessOutput(level    eLogLevel,
 //!\author Khrapov
 //!\date   10.01.2020
 //==============================================================================
-inline void logger::RegisterUnit(cstr pszUnitName, const TraceUnitInfo& unit)
+inline void logger::RegisterUnit(const char* pszUnitName, const TraceUnitInfo& unit)
 {
     if (m_eLogPolicy == policy::clear_then_uppend)
         std::ofstream ofs(unit.sLogFileName.data(), std::ofstream::out | std::ofstream::trunc); //-V808
@@ -130,7 +130,7 @@ inline void logger::RegisterUnit(cstr pszUnitName, const TraceUnitInfo& unit)
 //!\author Khrapov
 //!\date   11.01.2020
 //==============================================================================
-inline void logger::DeregisterUnit(cstr pszUnitName)
+inline void logger::DeregisterUnit(const char* pszUnitName)
 {
     m_RegisteredUnits.erase(pszUnitName);
 }
@@ -154,7 +154,7 @@ inline void logger::SetLogPolicy(policy eLogPolicy)
 //!\author Khrapov
 //!\date   4.09.2019
 //============================================================================
-inline cstr logger::GetTimeStr(void)
+inline const char* logger::GetTimeStr(void)
 {
     static qx::string ret(20, '\0');
 
@@ -226,7 +226,7 @@ inline void logger::OutputToFile(const qx::string& sText, const qx::string& sFil
 //!\author Khrapov
 //!\date   10.01.2020
 //==============================================================================
-inline void logger::OutputToConsole(const qx::string& sText, cstr pszAnsiiColor)
+inline void logger::OutputToConsole(const qx::string& sText, const char* pszAnsiiColor)
 {
     sAutoPrintfColor apc(pszAnsiiColor);
     printf("%s", sText.data());

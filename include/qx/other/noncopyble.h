@@ -31,8 +31,8 @@ class noncopyble
 protected:
                         noncopyble  (void)                  = default;
                         ~noncopyble (void)                  = default;
-                        noncopyble  (noncopyble&&)          = default;
-          noncopyble&   operator=   (noncopyble&&)          = default;
+                        noncopyble  (noncopyble&&) noexcept = default;
+          noncopyble&   operator=   (noncopyble&&) noexcept = default;
 
                         noncopyble  (const noncopyble&)     = delete;
     const noncopyble&   operator=   (const noncopyble&)     = delete;

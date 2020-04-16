@@ -116,6 +116,18 @@ inline void texture::Unbind(void) const
     glBindTexture(m_eTextureType, 0);
 }
 
+//============================================================================
+//!\fn                     texture::GenerateMipmap
+//
+//!\brief  Generate mipmap for texture
+//!\author Khrapov
+//!\date   15.04.2020
+//============================================================================
+inline void texture::GenerateMipmap(void)
+{
+    glGenerateMipmap(m_eTextureType);
+}
+
 template<>
 inline void texture::SetParameter(GLenum target, GLfloat value)
 {

@@ -14,6 +14,8 @@
 
 #include <glew.h>
 
+#include <qx/other/noncopyble.h>
+
 namespace qx::gl
 {
 
@@ -28,8 +30,9 @@ namespace qx::gl
 //!\date    22.01.2020
 //
 //============================================================================
-class iBuffer
+class iBuffer : public noncopyble
 {
+public:
     virtual void    Generate        (void)          = 0;
     virtual void    Delete          (void)          = 0;
     virtual void    Bind            (void) const    = 0;

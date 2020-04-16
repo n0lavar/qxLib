@@ -29,10 +29,11 @@ namespace qx::gl
 //!\date    23.01.2020
 //
 //============================================================================
-class texture : iBuffer
+class texture : public iBuffer
 {
 public:
-                    texture         (void) = default;
+    NONCOPYBLE_DEFAULTS(texture)
+
                     ~texture        (void);
             void    Init            (GLenum         target,
                                      GLint          level,
@@ -48,6 +49,8 @@ public:
     virtual void    Bind            (void) const    override;
     virtual void    Unbind          (void) const    override;
     virtual GLuint  GetBufferName   (void) const    override;
+
+            void    GenerateMipmap  (void);
 
             GLsizei GetWidth        (void) const;
             GLsizei GetHeight       (void) const;
