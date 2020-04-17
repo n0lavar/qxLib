@@ -228,7 +228,7 @@ inline void logger::OutputToFile(const qx::string& sText, const qx::string& sFil
 //==============================================================================
 inline void logger::OutputToConsole(const qx::string& sText, const char* pszAnsiiColor)
 {
-    sAutoPrintfColor apc(pszAnsiiColor);
+    SAutoPrintfColor apc(pszAnsiiColor);
     printf("%s", sText.data());
 }
 

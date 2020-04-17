@@ -32,8 +32,6 @@ namespace qx::gl
 class texture : public iBuffer
 {
 public:
-    NONCOPYBLE_DEFAULTS(texture)
-
                     ~texture        (void);
             void    Init            (GLenum         target,
                                      GLint          level,

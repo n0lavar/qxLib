@@ -62,10 +62,10 @@ class logger
 {
     SINGLETON_CD(logger, OnCreate();, OnTerminate(););
 
-    struct sAutoPrintfColor
+    struct SAutoPrintfColor
     {
-        sAutoPrintfColor (const char* color) { printf("%s", color);            }
-        ~sAutoPrintfColor(void)              { printf("%s", ANSI_COLOR_RESET); }
+        SAutoPrintfColor (const char* color) { printf("%s", color);            }
+        ~SAutoPrintfColor(void)              { printf("%s", ANSI_COLOR_RESET); }
     };
 
 public:

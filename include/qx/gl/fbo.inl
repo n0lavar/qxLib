@@ -166,11 +166,10 @@ inline void fbo::EndFrame(void)
     m_FBOShaderProgram.Use();
     m_QuadVAO.Bind();
 
-    m_TextureColorbuffer.Render();
-
-    m_QuadVAO.Unbind();
+    glActiveTexture(GL_TEXTURE0);
+    m_TextureColorbuffer.Bind();
+    glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 }
-
 
 //============================================================================
 //!\fn                         fbo::AttachRBO
