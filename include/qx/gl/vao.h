@@ -29,9 +29,12 @@ namespace qx::gl
 //!\date    19.01.2020
 //
 //============================================================================
-class vao : iBuffer
+class vao : IBuffer
 {
 public:
+
+    QX_NONCOPYBLE(vao)
+
                     vao                     (void) = default;
                     ~vao                    (void);
 

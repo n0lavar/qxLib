@@ -1,8 +1,8 @@
 //============================================================================
 //
-//!\file                          iBuffer.h
+//!\file                          IBuffer.h
 //
-//!\brief       Contains iBuffer class
+//!\brief       Contains IBuffer class
 //!\details     ~
 //
 //!\author      Khrapov
@@ -13,7 +13,6 @@
 #pragma once
 
 #include <glew.h>
-
 #include <qx/other/noncopyble.h>
 
 namespace qx::gl
@@ -21,7 +20,7 @@ namespace qx::gl
 
 //============================================================================
 //
-//!\class                          iBuffer
+//!\class                          IBuffer
 //
 //!\brief   OpenGL buffer interface
 //!\details ~
@@ -30,7 +29,7 @@ namespace qx::gl
 //!\date    22.01.2020
 //
 //============================================================================
-class iBuffer : public noncopyble
+class IBuffer
 {
 public:
     virtual void    Generate        (void)          = 0;

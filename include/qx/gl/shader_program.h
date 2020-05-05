@@ -1,6 +1,6 @@
 //============================================================================
 //
-//!\file                      ÒShaderProgramm.h
+//!\file                      shader_program.h
 //
 //!\brief       Contains shader_program class
 //!\details     ~
@@ -15,6 +15,7 @@
 #include <glew.h>
 #include <glm/gtc/type_ptr.hpp>
 #include <vector>
+#include <memory>
 
 #include <qx/other/noncopyble.h>
 #include <qx/other/useful_macros.h>
@@ -34,12 +35,16 @@ namespace qx::gl
 //!\date    16.01.2020
 //
 //============================================================================
-class shader_program : noncopyble
+class shader_program
 {
 public:
-            shader_program  (void);
+
+    QX_NONCOPYBLE(shader_program)
+
+            shader_program  (void) = default;
            ~shader_program  (void);
 
+    void    Init            (void);
     void    AttachShader    (shader_base      * pShader);
     void    Link            (void);
     void    Use             (void);
@@ -57,7 +62,7 @@ public:
                              const T          & value);
 
 private:
-    GLuint              m_nProgram          = -1;
+    GLuint              m_nProgram          = UINT_EMPTY_VALUE;
     std::vector<GLuint> m_AttachedShaders;
 };
 

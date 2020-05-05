@@ -30,10 +30,9 @@ namespace qx::gl
 //!\date    19.01.2020
 //
 //============================================================================
-class buffer_base : iBuffer
+class buffer_base : IBuffer
 {
 public:
-                        buffer_base         (void) = default;
     virtual             ~buffer_base        (void);
     virtual void        Generate            (void)          override;
     virtual void        Delete              (void)          override;
@@ -50,9 +49,9 @@ public:
                                              const void   * pData);
 
 protected:
+
     virtual GLenum      GetBufferType       (void) const = 0;
     virtual GLbitfield  GetBarrierBit       (void) const = 0;
-
     virtual GLuint      GetBufferName       (void) const    override;
 
 private:

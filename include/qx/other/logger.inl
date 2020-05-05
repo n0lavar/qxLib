@@ -54,7 +54,7 @@ inline void logger::ProcessOutput(level         eLogLevel,
         static qx::string sFunction;
 
         // delete long and ugly lambda name from debug
-        if (cstr pLambdaStr = std::strstr(pszFunction, "{ctor}::<lambda_"); pLambdaStr != nullptr)
+        if (const char* pLambdaStr = std::strstr(pszFunction, "{ctor}::<lambda_"); pLambdaStr != nullptr)
         {
             constexpr int LAMBDA_NAME_SIZE = 62;
 

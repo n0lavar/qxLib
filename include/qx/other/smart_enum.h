@@ -5,7 +5,6 @@
 //!\brief       Smart enum macro definition
 //!\details     Smart macro allows you to use to_string(), from_string() 
 //              and increment functions. 
-//              Note that the numbering of objects begins with first_elem + 1
 //
 //!\author      Khrapov
 //!\date        16.10.2019
@@ -37,6 +36,7 @@ public:                                                                         
                                                                                                             \
     bool operator==(const name& other) const { return m_eValue == other.m_eValue;   }                       \
     bool operator==(const e&    other) const { return m_eValue == other;            }                       \
+         operator e(void)              const { return m_eValue;                     }                       \
                                                                                                             \
     static const char* s_to_string(e value)                                                                 \
     {                                                                                                       \
@@ -71,9 +71,8 @@ public:                                                                         
             return false;                                                                                   \
     }                                                                                                       \
                                                                                                             \
-    /* also returns "last" value as end flag */                                                             \
-                                                                                                            \
     /* postfix */                                                                                           \
+    /* also returns "last" value as end flag */                                                             \
     e operator++ ()                                                                                         \
     {                                                                                                       \
         m_eValue = static_cast<e>((static_cast<int>(m_eValue) + 1) % (static_cast<int>(name::last) + 1));   \

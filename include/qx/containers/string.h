@@ -312,26 +312,6 @@ namespace std
             return qx::hash::str::Murmur32(str.data(), str.size(), 108540);
         }
     };
-
-#ifndef QX_DISABLE_C_STRINGS_HASHES
-    template<>
-    struct hash<const char*>
-    {
-        u32 operator()(const char* psz) const
-        {
-            return qx::hash::str::Murmur32(psz, std::strlen(psz), 22457);
-        }
-    };
-
-    template<>
-    struct hash<const wchar_t*>
-    {
-        u32 operator()(const wchar_t* psz) const
-        {
-            return qx::hash::str::Murmur32(psz, std::wcslen(psz), 1059);
-        }
-    };
-#endif
 }
 
 #include <qx/containers/string.inl>

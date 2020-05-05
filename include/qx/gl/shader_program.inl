@@ -1,6 +1,6 @@
 //============================================================================
 //
-//!\file                     ÒShaderProgramm.inl
+//!\file                     shader_program.inl
 //
 //!\brief       Contains shader_program class
 //!\details     ~
@@ -15,18 +15,6 @@ namespace qx::gl
 {
 
 //============================================================================
-//!\fn                 shader_program::shader_program
-//
-//!\brief  shader_program object constructor
-//!\author Khrapov
-//!\date   16.01.2020
-//============================================================================
-inline shader_program::shader_program()
-{
-    m_nProgram = glCreateProgram();
-}
-
-//============================================================================
 //!\fn                shader_program::~shader_program
 //
 //!\brief  shader_program object destructor
@@ -35,7 +23,20 @@ inline shader_program::shader_program()
 //============================================================================
 inline shader_program::~shader_program(void)
 {
-    glDeleteProgram(m_nProgram);
+    if (m_nProgram != UINT_EMPTY_VALUE)
+        glDeleteProgram(m_nProgram);
+}
+
+//============================================================================
+//!\fn                     shader_program::Init
+//
+//!\brief  Init shader program
+//!\author Khrapov
+//!\date   18.04.2020
+//============================================================================
+inline void shader_program::Init(void)
+{
+    m_nProgram = glCreateProgram();
 }
 
 //============================================================================
@@ -71,7 +72,7 @@ inline void shader_program::Link(void)
     }
     else
     {
-        for(GLuint nShader : m_AttachedShaders)
+        for (GLuint nShader : m_AttachedShaders)
             glDeleteShader(nShader);
 
         m_AttachedShaders.clear();
@@ -125,7 +126,9 @@ inline GLint shader_program::GetParameter(GLenum eParameter)
 template<typename T>
 inline void shader_program::SetUniform(const GLchar * name, const T & value)
 {
-    SetUniform(glGetUniformLocation(m_nProgram, name), value);
+    auto nLocation = glGetUniformLocation(m_nProgram, name);
+    ASSERT_MSG(nLocation >= 0, "Cant find uniform \"%s\" in program %u", name, m_nProgram);
+    SetUniform(nLocation, value);
 }
 
 template<>

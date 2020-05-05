@@ -29,9 +29,13 @@ namespace qx::gl
 //!\date    23.01.2020
 //
 //============================================================================
-class texture : public iBuffer
+class texture : public IBuffer
 {
 public:
+
+    QX_NONCOPYBLE(texture)
+
+                    texture         (void) = default;
                     ~texture        (void);
             void    Init            (GLenum         target,
                                      GLint          level,

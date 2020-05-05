@@ -29,9 +29,12 @@ namespace qx::gl
 //!\date    20.01.2020
 //
 //============================================================================
-class rbo : iBuffer
+class rbo : IBuffer
 {
 public:
+
+    QX_NONCOPYBLE(rbo)
+
             rbo                     (void) = default;
 
     void    Init                    (GLsizei    nWidth,

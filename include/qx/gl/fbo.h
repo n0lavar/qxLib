@@ -33,10 +33,14 @@ namespace qx::gl
 //!\date    20.01.2020
 //
 //============================================================================
-class fbo : iBuffer
+class fbo : IBuffer
 {
 public:
+
+    QX_NONCOPYBLE(fbo)
+
                     fbo             (void) = default;
+                    ~fbo            (void);
 
             void    Init            (const GLchar    * pszVertShaderCode,
                                      const GLchar    * pszFragShaderCode,

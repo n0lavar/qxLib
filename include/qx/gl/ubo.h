@@ -32,6 +32,9 @@ namespace qx::gl
 class ubo : public buffer_base
 {
 public:
+
+    QX_NONCOPYBLE(ubo)
+
             ubo             (void) = default;
             ubo             (GLsizeiptr szUBO,
                              GLuint     nBindingPoint);

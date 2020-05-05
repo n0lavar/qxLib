@@ -30,9 +30,12 @@ namespace qx::gl
 //!\date    17.06.2019
 //
 //============================================================================
-class shader_base : noncopyble
+class shader_base
 {
 public:
+
+    QX_NONCOPYBLE(shader_base)
+
                     shader_base     (void) = default;
                     shader_base     (const GLchar * pszShaderCode,
                                      GLenum         eShaderType);

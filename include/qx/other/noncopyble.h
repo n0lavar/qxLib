@@ -12,30 +12,8 @@
 //============================================================================
 #pragma once
 
-namespace qx
-{
-
-//============================================================================
-//
-//!\class                       noncopyble
-//
-//!\brief   Forbid object copy and move
-//!\details Used for pretty all opengl classes
-//
-//!\author  Khrapov
-//!\date    16.01.2020
-//
-//============================================================================
-class noncopyble
-{
-protected:
-                        noncopyble  (void)                  = default;
-                        ~noncopyble (void)                  = default;
-                        noncopyble  (noncopyble&&) noexcept = default;
-          noncopyble&   operator=   (noncopyble&&) noexcept = default;
-
-                        noncopyble  (const noncopyble&)     = delete;
-    const noncopyble&   operator=   (const noncopyble&)     = delete;
-};
-
-}
+#define QX_NONCOPYBLE(name)                         \
+        name        (name&&) noexcept   = default;  \
+name&   operator=   (name&&) noexcept   = default;  \
+        name        (const name&)       = delete;   \
+name&   operator=   (const name&)       = delete;

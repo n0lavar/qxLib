@@ -30,7 +30,14 @@ namespace qx::gl
 //============================================================================
 class vbo : public buffer_base
 {
+public:
+
+    QX_NONCOPYBLE(vbo)
+
+                        vbo          (void) = default;
+
 protected:
+
     virtual GLenum      GetBufferType(void) const override { return GL_ARRAY_BUFFER; }
     virtual GLbitfield  GetBarrierBit(void) const override { return GL_VERTEX_ATTRIB_ARRAY_BARRIER_BIT; }
 };

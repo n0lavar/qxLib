@@ -28,6 +28,18 @@ constexpr float quadVertices[] =
 };
 
 //============================================================================
+//!\fn                           fbo::~fbo
+//
+//!\brief  fbo object destructor
+//!\author Khrapov
+//!\date   19.01.2020
+//============================================================================
+inline fbo::~fbo(void)
+{
+    Delete();
+}
+
+//============================================================================
 //!\fn                            fbo::Init
 //
 //!\brief  Init FBO
@@ -39,9 +51,9 @@ constexpr float quadVertices[] =
 //!\date   20.01.2020
 //============================================================================
 inline void fbo::Init(const GLchar*   pszVertShaderCode,
-                       const GLchar*   pszFragShaderCode, 
-                       GLsizei         nWidth, 
-                       GLsizei         nHeight)
+                      const GLchar*   pszFragShaderCode, 
+                      GLsizei         nWidth, 
+                      GLsizei         nHeight)
 {
     // screen quad VAO
     m_QuadVAO.Generate();
@@ -59,6 +71,8 @@ inline void fbo::Init(const GLchar*   pszVertShaderCode,
 
     shader_vert shaderVertFramebuffer(pszVertShaderCode);
     shader_frag shaderFragFramebuffer(pszFragShaderCode);
+
+    m_FBOShaderProgram.Init();
     m_FBOShaderProgram.AttachShader(&shaderVertFramebuffer);
     m_FBOShaderProgram.AttachShader(&shaderFragFramebuffer);
     m_FBOShaderProgram.Link();
@@ -159,7 +173,7 @@ inline void fbo::StartFrame(void)
 inline void fbo::EndFrame(void)
 {
     glDisable(GL_DEPTH_TEST);
-    glBindFramebuffer(GL_FRAMEBUFFER, 0);
+    Unbind();
     glClearColor(1.0f, 1.0f, 0.0f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT);
 
@@ -168,7 +182,7 @@ inline void fbo::EndFrame(void)
 
     glActiveTexture(GL_TEXTURE0);
     m_TextureColorbuffer.Bind();
-    glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+    glDrawArrays(GL_TRIANGLES, 0, 6);
 }
 
 //============================================================================
