@@ -27,7 +27,7 @@ template<class Traits>
 inline void basic_string<Traits>::assign(const_pointer pSource, size_type nSymbols)
 {
     if (Resize(nSymbols, Traits::talign()))
-        std::memcpy(m_pData, pSource, nSymbols * sizeof(value_type));
+        std::memmove(m_pData, pSource, nSymbols * sizeof(value_type));
 }
 
 //============================================================================
@@ -143,26 +143,26 @@ inline void basic_string<Traits>::assign(FwdIt first, FwdIt last)
 //============================================================================
 //!\fn             basic_string<Traits>::format<...Args>
 //
-//!\brief  Format string
-//!\param  pStr    - format pattern
+//!\brief  Format string. Using this str as pFormat is UB
+//!\param  pFormat - format pattern
 //!\param  ...args - arguments
 //!\author Khrapov
 //!\date   29.10.2019
 //============================================================================
 template<class Traits>
 template<class ...Args>
-inline void basic_string<Traits>::format(const_pointer pStr, Args ...args)
+inline void basic_string<Traits>::format(const_pointer pFormat, Args ...args)
 {
-    int length = Traits::tsnprintf(nullptr, 0, pStr, args...);
+    int length = Traits::tsnprintf(nullptr, 0, pFormat, args...);
     if (length > 0 && Resize(length, Traits::talign()))
-        Traits::tsnprintf(m_pData, static_cast<size_type>(length) + 1, pStr, args...);
+        Traits::tsnprintf(m_pData, static_cast<size_type>(length) + 1, pFormat, args...);
 }
 
 //============================================================================
 //!\fn             basic_string<Traits>::sformat<...Args>
 //
 //!\brief  Static format string
-//!\param  pStr    - format pattern
+//!\param  pFormat - format pattern
 //!\param  ...args - arguments
 //!\retval         - result string
 //!\author Khrapov
@@ -170,10 +170,10 @@ inline void basic_string<Traits>::format(const_pointer pStr, Args ...args)
 //============================================================================
 template<class Traits>
 template<class ...Args>
-inline basic_string<Traits> basic_string<Traits>::sformat(const_pointer pStr, Args ...args)
+inline basic_string<Traits> basic_string<Traits>::sformat(const_pointer pFormat, Args ...args)
 {
     basic_string str;
-    str.format(pStr, args...);
+    str.format(pFormat, args...);
     return std::move(str);
 }
 
@@ -206,7 +206,7 @@ template<class Traits>
 inline typename basic_string<Traits>::size_type basic_string<Traits>::reserve(size_type nCapacity)
 {
     if (nCapacity > size())
-        Resize(nCapacity, Traits::talign(), true);
+        Resize(nCapacity, Traits::talign(), eResizeType::reserve);
 
     return capacity();
 }
@@ -222,7 +222,7 @@ inline void basic_string<Traits>::fit(void)
 {
     auto pData = GetStrData();
     if (pData && pData->nAllocatedSize > pData->nSize)
-        Resize(pData->nSize);
+        Resize(pData->nSize, 0, eResizeType::fit);
 }
 
 //============================================================================
@@ -1007,39 +1007,45 @@ inline const SStrData<Traits>* basic_string<Traits>::GetStrData(void) const
 //         If new size is smaller, string will be truncated
 //!\param  nSymbols - new size
 //!\param  nAlign   - align (if 16 then size 13->16 16->16 18->32)
-//!\param  bReserve - reserve (don't change size and don't add null terminator to the end)
+//!\param  eType    - resize type
 //!\retval          - true if memory alloc is succesful
 //!\author Khrapov
 //!\date   29.10.2019
 //============================================================================
 template<class Traits>
-inline bool basic_string<Traits>::Resize(size_type nSymbols, size_type nAlign, bool bReserve)
+inline bool basic_string<Traits>::Resize(size_type nSymbols, size_type nAlign, eResizeType eType)
 {
     typename Traits::size_type nSizeToAllocate = nAlign
         ? qx::align_size<typename Traits::value_type>(nSymbols + 1, nAlign)
         : nSymbols + 1;
 
     SStrData<Traits>* pStrData = GetStrData();
+    bool bEmptyAtStart = !pStrData;
 
-    // increase or decrease size
-    void* pNewBlock = std::realloc(pStrData, SStrData<Traits>::structSize() + nSizeToAllocate * sizeof(value_type));
-    if (pNewBlock)
+    if (eType == eResizeType::fit                       // need to decrease size
+        || bEmptyAtStart                                // string empty
+        || nSizeToAllocate > pStrData->nAllocatedSize)  // need to increase size
     {
-        pStrData = reinterpret_cast<SStrData<Traits>*>(pNewBlock);
-        pStrData->nAllocatedSize = nSizeToAllocate;
+        // increase or decrease size
+        void* pNewBlock = std::realloc(pStrData, SStrData<Traits>::structSize() + nSizeToAllocate * sizeof(value_type));
+        if (pNewBlock)
+        {
+            pStrData = reinterpret_cast<SStrData<Traits>*>(pNewBlock);
+            pStrData->nAllocatedSize = nSizeToAllocate;
 
-        if (!bReserve)
-            pStrData->nSize = nSymbols;
-        else if (!m_pData)
-            pStrData->nSize = 0;
-
-        m_pData = reinterpret_cast<pointer>(reinterpret_cast<mem_t>(pNewBlock) + SStrData<Traits>::structSize());
+            m_pData = reinterpret_cast<pointer>(reinterpret_cast<mem_t>(pNewBlock) + SStrData<Traits>::structSize());
+        }
+        else
+            return false;
     }
-    else
-        return false;
 
-    if (!bReserve)
+    if (eType == eResizeType::common)
+    {
         m_pData[nSymbols] = Traits::teol();
+        pStrData->nSize = nSymbols;
+    }
+    else if (bEmptyAtStart)
+        pStrData->nSize = 0;
 
     return true;
 }

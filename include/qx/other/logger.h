@@ -43,9 +43,32 @@ constexpr const char* ANSI_COLOR_MAGENTA_BOLD   = "\033[1;35m";
 constexpr const char* ANSI_COLOR_CYAN           = "\033[0;36m";
 constexpr const char* ANSI_COLOR_CYAN_BOLD      = "\033[1;36m";
 
-#define TRACE(format, ...)            qx::logger::getInstance().ProcessOutput(qx::logger::level::all,     "[I][%s][%s::%s(%d)] "           format " \n", qx::logger::getInstance().GetTimeStr(), __SHORT_FILE__, __FUNCTION__, __LINE__, __VA_ARGS__)
-#define TR_ERROR(format, ...)         qx::logger::getInstance().ProcessOutput(qx::logger::level::errors,  "[E][%s][%s::%s(%d)] "           format " \n", qx::logger::getInstance().GetTimeStr(), __SHORT_FILE__, __FUNCTION__, __LINE__, __VA_ARGS__)
-#define _TR_ASSERT(expr, format, ...) qx::logger::getInstance().ProcessOutput(qx::logger::level::asserts, "[A][%s][%s::%s(%d)][" expr "] " format " \n", qx::logger::getInstance().GetTimeStr(), __SHORT_FILE__, __FUNCTION__, __LINE__, __VA_ARGS__)
+#define TRACE(format, ...) qx::logger::getInstance().ProcessOutput(             \
+    qx::logger::level::all,                                                     \
+    format,                                                                     \
+    nullptr,                                                                    \
+    __SHORT_FILE__,                                                             \
+    __FUNCTION__,                                                               \
+    __LINE__,                                                                   \
+    __VA_ARGS__)
+
+#define TR_ERROR(format, ...) qx::logger::getInstance().ProcessOutput(          \
+    qx::logger::level::errors,                                                  \
+    format,                                                                     \
+    nullptr,                                                                    \
+    __SHORT_FILE__,                                                             \
+    __FUNCTION__,                                                               \
+    __LINE__,                                                                   \
+    __VA_ARGS__)
+
+#define _TR_ASSERT(expr, format, ...) qx::logger::getInstance().ProcessOutput(  \
+    qx::logger::level::asserts,                                                 \
+    format,                                                                     \
+    expr,                                                                       \
+    __SHORT_FILE__,                                                             \
+    __FUNCTION__,                                                               \
+    __LINE__,                                                                   \
+    __VA_ARGS__)
 
 //==============================================================================
 //
@@ -111,7 +134,7 @@ public:
     template<class ... Args>
     void ProcessOutput      (level                  eLogLevel,
                              const char           * pszFormat,
-                             const char           * pszTime,
+                             const char           * pszAssertExpression,
                              const char           * pszFile,
                              const char           * pszFunction,
                              int                    nLine,

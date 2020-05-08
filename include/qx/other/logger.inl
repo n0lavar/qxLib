@@ -18,20 +18,20 @@ namespace qx
 //!\fn                        Log::ProcessOutput<...Args>
 //
 //!\brief  Process tracings
-//!\param  eLogLevel   - log level
-//!\param  pszFormat   - format string
-//!\param  pszTime     - time string
-//!\param  pszFile     - file name string
-//!\param  pszFunction - function name string
-//!\param  nLine       - code line number
-//!\param  ...args     - additional args for format
+//!\param  eLogLevel            - log level
+//!\param  pszFormat            - format string
+//!\param  pszAssertExpression  - assert expr or nullptr
+//!\param  pszFile              - file name string
+//!\param  pszFunction          - function name string
+//!\param  nLine                - code line number
+//!\param  ...args              - additional args for format
 //!\author Khrapov
 //!\date   10.01.2020
 //==============================================================================
 template<class ... Args>
 inline void logger::ProcessOutput(level         eLogLevel,
                                   const char  * pszFormat, 
-                                  const char  * pszTime, 
+                                  const char  * pszAssertExpression,
                                   const char  * pszFile, 
                                   const char  * pszFunction,
                                   int           nLine, 
@@ -47,12 +47,10 @@ inline void logger::ProcessOutput(level         eLogLevel,
 
     if (pUnitInfo && (eLogLevel >= pUnitInfo->eFileLevel || eLogLevel >= pUnitInfo->eConsoleLevel))
     {
-        static qx::string sMsg;
-
 #if ENABLE_DETAIL_TRACE_INFO
 
         static qx::string sFunction;
-
+        sFunction = "";
         // delete long and ugly lambda name from debug
         if (const char* pLambdaStr = std::strstr(pszFunction, "{ctor}::<lambda_"); pLambdaStr != nullptr)
         {
@@ -63,14 +61,51 @@ inline void logger::ProcessOutput(level         eLogLevel,
             sFunction.insert(pLambdaStr - pszFunction, "lambda");
         }
 
-        sMsg.format(pszFormat,
-                    pszTime, 
-                    pszFile, 
-                    sFunction.empty() ? pszFunction : sFunction.data(), 
-                    nLine, 
-                    args...);
+        static qx::string sFormat;
+        switch (eLogLevel)
+        {
+        case qx::logger::level::all:
+            sFormat = "[I][%s][%s::%s(%d)] ";
+            break;
 
-        sFunction.clear();
+        case qx::logger::level::errors:
+            sFormat = "[E][%s][%s::%s(%d)] ";
+            break;
+
+        case qx::logger::level::asserts:
+            sFormat = "[A][%s][%s::%s(%d)][%s] ";
+            break;
+
+        default:
+            sFormat = "";
+            break;
+        }
+
+        sFormat += pszFormat;
+
+        // assume pszAssertExpression != nullptr as method must be used in macros only
+        static qx::string sMsg;
+        if (eLogLevel != qx::logger::level::asserts)
+        {
+            sMsg.format(sFormat.data(),
+                        GetTimeStr(),
+                        pszFile,
+                        sFunction.empty() ? pszFunction : sFunction.data(),
+                        nLine,
+                        args...);
+        }
+        else
+        {
+            sMsg.format(sFormat.data(),
+                        GetTimeStr(),
+                        pszFile,
+                        sFunction.empty() ? pszFunction : sFunction.data(),
+                        nLine,
+                        pszAssertExpression,
+                        args...);
+        }
+
+        sMsg += '\n';
 
 #else
 
@@ -156,12 +191,12 @@ inline void logger::SetLogPolicy(policy eLogPolicy)
 //============================================================================
 inline const char* logger::GetTimeStr(void)
 {
-    static qx::string ret(20, '\0');
+    static qx::string ret(19, '\0');
 
     std::time_t t = time(0);
     std::tm now;
     localtime_s(&now, &t);
-    ret.format("%02d-%02d-%04d_%02d-%02d-%02d\0", 
+    ret.format("%02d-%02d-%04d_%02d-%02d-%02d", 
                now.tm_mday, 
                now.tm_mon, 
                now.tm_year + 1900,

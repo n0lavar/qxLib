@@ -53,6 +53,13 @@ class basic_string
 {
     using vector = std::vector<basic_string>;
 
+    enum class eResizeType
+    {
+        common,
+        reserve,
+        fit
+    };
+
 public:
 
     using value_type        = typename Traits::value_type;
@@ -220,7 +227,7 @@ private:
     const SStrData<Traits>    * GetStrData      (void)                                          const;
     bool                        Resize          (size_type              nSymbols,
                                                  size_type              nAlign          = 0,
-                                                 bool                   bReserve        = false);
+                                                 eResizeType            eType           = eResizeType::common);
     void                        Append          (const_pointer          pSource,
                                                  size_type              nSymbols);
     int                         Compare         (const_pointer          pStr,
