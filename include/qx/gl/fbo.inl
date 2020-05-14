@@ -160,7 +160,7 @@ inline void fbo::StartFrame(void)
     Bind();
     glEnable(GL_DEPTH_TEST);
     glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
 }
 
 //============================================================================
@@ -174,8 +174,6 @@ inline void fbo::EndFrame(void)
 {
     glDisable(GL_DEPTH_TEST);
     Unbind();
-    glClearColor(1.0f, 1.0f, 0.0f, 1.0f);
-    glClear(GL_COLOR_BUFFER_BIT);
 
     m_FBOShaderProgram.Use();
     m_QuadVAO.Bind();

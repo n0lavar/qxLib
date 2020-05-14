@@ -47,21 +47,9 @@ inline void logger::ProcessOutput(level         eLogLevel,
 
     if (pUnitInfo && (eLogLevel >= pUnitInfo->eFileLevel || eLogLevel >= pUnitInfo->eConsoleLevel))
     {
-#if ENABLE_DETAIL_TRACE_INFO
-
-        static qx::string sFunction;
-        sFunction = "";
-        // delete long and ugly lambda name from debug
-        if (const char* pLambdaStr = std::strstr(pszFunction, "{ctor}::<lambda_"); pLambdaStr != nullptr)
-        {
-            constexpr int LAMBDA_NAME_SIZE = 62;
-
-            sFunction = pszFunction;
-            sFunction.erase(pLambdaStr - pszFunction, LAMBDA_NAME_SIZE);
-            sFunction.insert(pLambdaStr - pszFunction, "lambda");
-        }
-
         static qx::string sFormat;
+        static qx::string sMsg;
+
         switch (eLogLevel)
         {
         case qx::logger::level::all:
@@ -83,8 +71,21 @@ inline void logger::ProcessOutput(level         eLogLevel,
 
         sFormat += pszFormat;
 
+#if ENABLE_DETAIL_TRACE_INFO
+
+        static qx::string sFunction;
+        sFunction = "";
+        // delete long and ugly lambda name from debug
+        if (const char* pLambdaStr = std::strstr(pszFunction, "{ctor}::<lambda_"); pLambdaStr != nullptr)
+        {
+            constexpr int LAMBDA_NAME_SIZE = 62;
+
+            sFunction = pszFunction;
+            sFunction.erase(pLambdaStr - pszFunction, LAMBDA_NAME_SIZE);
+            sFunction.insert(pLambdaStr - pszFunction, "lambda");
+        }
+
         // assume pszAssertExpression != nullptr as method must be used in macros only
-        static qx::string sMsg;
         if (eLogLevel != qx::logger::level::asserts)
         {
             sMsg.format(sFormat.data(),
@@ -105,20 +106,22 @@ inline void logger::ProcessOutput(level         eLogLevel,
                         args...);
         }
 
-        sMsg += '\n';
-
 #else
 
-        sMsg.format(pszFormat,
-                    pszTime,
-                    "",
-                    "",
-                    0,
-                    args...); 
+        sMsg.format(sFormat.data(),
+                    GetTimeStr(),
+                    pszFile,
+                    pszFunction,
+                    nLine,
+                    pszAssertExpression,
+                    args...);
 
-        sMsg.erase(sMsg.find("[::(0)]"), 7);
+        if (auto it = sMsg.find("[::(0)]"); it != sMsg.end())
+            sMsg.erase(it, 7);
 
 #endif
+
+        sMsg += '\n';
 
         if (eLogLevel >= pUnitInfo->eFileLevel)
             OutputToFile(sMsg, pUnitInfo->sLogFileName);
