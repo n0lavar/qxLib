@@ -116,7 +116,7 @@ inline void logger::ProcessOutput(level         eLogLevel,
                     pszAssertExpression,
                     args...);
 
-        if (auto it = sMsg.find("[::(0)]"); it != sMsg.end())
+        if (auto it = sMsg.find("[::(0)]"); it != qx::string::npos)
             sMsg.erase(it, 7);
 
 #endif
