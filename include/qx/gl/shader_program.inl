@@ -122,15 +122,6 @@ inline GLint shader_program::GetParameter(GLenum eParameter)
     return nRet;
 }
 
-
-template<typename T>
-inline void shader_program::SetUniform(const GLchar * name, const T & value)
-{
-    auto nLocation = glGetUniformLocation(m_nProgram, name);
-    ASSERT_MSG(nLocation >= 0, "Cant find uniform \"%s\" in program %u", name, m_nProgram);
-    SetUniform(nLocation, value);
-}
-
 template<>
 inline void shader_program::SetUniform(GLint nUniformLocation, const GLfloat & value)
 {
@@ -183,6 +174,14 @@ template<>
 inline void shader_program::SetUniform(GLint nUniformLocation, const glm::mat4 & value)
 {
     glUniformMatrix4fv(nUniformLocation, 1, GL_FALSE, glm::value_ptr(value));
+}
+
+template<typename T>
+inline void shader_program::SetUniform(const GLchar* name, const T& value)
+{
+    GLint nLocation = glGetUniformLocation(m_nProgram, name);
+    ASSERT_MSG(nLocation >= 0, "Cant find uniform \"%s\" in program %u", name, m_nProgram);
+    SetUniform(nLocation, value);
 }
 
 }
