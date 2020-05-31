@@ -112,7 +112,6 @@ inline void buffer_base::MemBarrier()
 //============================================================================
 inline void buffer_base::Update(GLsizeiptr nSize, const void* pData, GLenum eUsage)
 {
-    MemBarrier();
     Bind();
     glBufferData(GetBufferType(), nSize, pData, eUsage);
 }
@@ -129,7 +128,6 @@ inline void buffer_base::Update(GLsizeiptr nSize, const void* pData, GLenum eUsa
 //============================================================================
 inline void buffer_base::UpdatePart(GLintptr nOffset, GLsizeiptr nSize, const void* pData)
 {
-    MemBarrier();
     Bind();
     glBufferSubData(GetBufferType(), nOffset, nSize, pData);
 }

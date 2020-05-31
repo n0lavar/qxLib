@@ -27,40 +27,6 @@ inline texture::~texture(void)
 }
 
 //============================================================================
-//!\fn                          texture::Init
-//
-//!\brief   Specify a two-dimensional texture image
-//!\details https://www.khronos.org/registry/OpenGL-Refpages/gl4/html/glTexImage2D.xhtml
-//!\param   target         - target texture 
-//!\param   level          - level-of-detail number.
-//!\param   internalformat - number of color components in the texture
-//!\param   width          - width of the texture image
-//!\param   height         - height of the texture image
-//!\param   format         - format of the pixel data
-//!\param   type           - data type of the pixel data
-//!\param   data           - pointer to the image data in memory
-//!\author Khrapov
-//!\date   23.01.2020
-//============================================================================
-inline void texture::Init(GLenum        target, 
-                          GLint         level, 
-                          GLint         internalformat, 
-                          GLsizei       width, 
-                          GLsizei       height, 
-                          GLenum        format,
-                          GLenum        type, 
-                          const void  * data)
-{
-    Generate();
-    Bind();
-    glTexImage2D(target, level, internalformat, width, height, 0, format, type, data);
-
-    m_eTextureType  = target;
-    m_nWidth        = width;
-    m_nHeight       = height;
-}
-
-//============================================================================
 //!\fn                        texture::Generate
 //
 //!\brief  Generate texture
@@ -86,8 +52,6 @@ inline void texture::Delete(void)
     {
         // also sets m_nTexture to 0
         glDeleteTextures(1, &m_nTexture);
-        m_nWidth  = 0;
-        m_nHeight = 0;
     }
 }
 
@@ -100,7 +64,7 @@ inline void texture::Delete(void)
 //============================================================================
 inline void texture::Bind(void) const
 {
-    glBindTexture(m_eTextureType, m_nTexture);
+    glBindTexture(m_eTextureTarget, m_nTexture);
 }
 
 //============================================================================
@@ -112,7 +76,56 @@ inline void texture::Bind(void) const
 //============================================================================
 inline void texture::Unbind(void) const
 {
-    glBindTexture(m_eTextureType, 0);
+    glBindTexture(m_eTextureTarget, 0);
+}
+
+//============================================================================
+//!\fn                         texture::SetTarget
+//
+//!\brief  Set texture target
+//!\param  eTarget - target texture 
+//!\author Khrapov
+//!\date   23.01.2020
+//============================================================================
+inline void texture::SetTarget(GLenum eTarget)
+{
+    m_eTextureTarget = eTarget;
+}
+
+//============================================================================
+//!\fn                          texture::Specify2DTexImage
+//
+//!\brief   Specify a two-dimensional texture image
+//!\details https://www.khronos.org/registry/OpenGL-Refpages/gl4/html/glTexImage2D.xhtml
+//!\param   level          - level-of-detail number.
+//!\param   internalformat - number of color components in the texture
+//!\param   width          - width of the texture image
+//!\param   height         - height of the texture image
+//!\param   format         - format of the pixel data
+//!\param   type           - data type of the pixel data
+//!\param   pData          - pointer to the image data in memory
+//!\param   eTarget        - non-default target. -1 value will use m_eTextureTarget
+//!\author Khrapov
+//!\date   23.01.2020
+//============================================================================
+inline void texture::Specify2DTexImage(GLint         level, 
+                                       GLint         internalformat, 
+                                       GLsizei       width, 
+                                       GLsizei       height, 
+                                       GLenum        format,
+                                       GLenum        type, 
+                                       const void  * pData,
+                                       GLenum        eTarget)
+{
+    glTexImage2D(eTarget != -1 ? eTarget : m_eTextureTarget, 
+                 level,
+                 internalformat,
+                 width,
+                 height,
+                 0,
+                 format,
+                 type,
+                 pData);
 }
 
 //============================================================================
@@ -124,7 +137,7 @@ inline void texture::Unbind(void) const
 //============================================================================
 inline void texture::GenerateMipmap(void)
 {
-    glGenerateMipmap(m_eTextureType);
+    glGenerateMipmap(m_eTextureTarget);
 }
 
 template<>

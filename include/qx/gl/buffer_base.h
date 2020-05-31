@@ -33,6 +33,7 @@ namespace qx::gl
 class buffer_base : IBuffer
 {
 public:
+
     virtual             ~buffer_base        (void);
     virtual void        Generate            (void)          override;
     virtual void        Delete              (void)          override;
@@ -55,6 +56,7 @@ protected:
     virtual GLuint      GetBufferName       (void) const    override;
 
 private:
+
     GLuint m_nBuffer = UINT_EMPTY_VALUE;
 };
 

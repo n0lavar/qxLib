@@ -47,6 +47,7 @@ public:
     virtual GLuint  GetBufferName   (void) const    override;
 
 private:
+
     GLuint m_nBuffer = UINT_EMPTY_VALUE;
 };
 

@@ -35,42 +35,37 @@ public:
 
     QX_NONCOPYBLE(texture)
 
-                    texture         (void) = default;
-                    ~texture        (void);
-            void    Init            (GLenum         target,
-                                     GLint          level,
-                                     GLint          internalformat,
-                                     GLsizei        width,
-                                     GLsizei        height,
-                                     GLenum         format,
-                                     GLenum         type,
-                                     const void   * data    = nullptr);
+                    texture             (void) = default;
+                    ~texture            (void);
 
-    virtual void    Generate        (void)          override;
-    virtual void    Delete          (void)          override;
-    virtual void    Bind            (void) const    override;
-    virtual void    Unbind          (void) const    override;
-    virtual GLuint  GetBufferName   (void) const    override;
+    virtual void    Generate            (void)          override;
+    virtual void    Delete              (void)          override;
+    virtual void    Bind                (void) const    override;
+    virtual void    Unbind              (void) const    override;
+    virtual GLuint  GetBufferName       (void) const    override;
 
-            void    GenerateMipmap  (void);
-
-            GLsizei GetWidth        (void) const;
-            GLsizei GetHeight       (void) const;
+            void    SetTarget           (GLenum         eTarget);
+            void    Specify2DTexImage   (GLint          level,
+                                         GLint          internalformat,
+                                         GLsizei        width,
+                                         GLsizei        height,
+                                         GLenum         format,
+                                         GLenum         type,
+                                         const void*    pData   = nullptr,
+                                         GLenum         eTarget = -1);
+            void    GenerateMipmap      (void);
 
     template<typename T>
             void    SetParameter    (GLenum         target,
                                      T              value);
 
 private:
-    GLuint  m_nTexture      = UINT_EMPTY_VALUE;
-    GLenum  m_eTextureType  = GL_TEXTURE_2D;
-    GLsizei m_nWidth        = 0;
-    GLsizei m_nHeight       = 0;
+
+    GLuint  m_nTexture          = UINT_EMPTY_VALUE;
+    GLenum  m_eTextureTarget    = GL_TEXTURE_2D;
 };
 
 inline GLuint   texture::GetBufferName  (void) const { return m_nTexture;   }
-inline GLsizei  texture::GetWidth       (void) const { return m_nWidth;     }
-inline GLsizei  texture::GetHeight      (void) const { return m_nHeight;    }
 
 }
 

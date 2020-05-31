@@ -42,6 +42,7 @@ public:
                              GLuint     nBindingPoint);
 
 protected:
+
     virtual GLenum      GetBufferType   (void) const override { return GL_UNIFORM_BUFFER;       }
     virtual GLbitfield  GetBarrierBit   (void) const override { return GL_UNIFORM_BARRIER_BIT;  }   // not shure
 };

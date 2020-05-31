@@ -85,7 +85,9 @@ inline void fbo::Init(const GLchar*   pszVertShaderCode,
     Bind();
 
     // create a color attachment texture
-    m_TextureColorbuffer.Init(GL_TEXTURE_2D, 0, GL_RGB, nWidth, nHeight, GL_RGB, GL_UNSIGNED_BYTE);
+    m_TextureColorbuffer.Generate();
+    m_TextureColorbuffer.Bind();
+    m_TextureColorbuffer.Specify2DTexImage(0, GL_RGB, nWidth, nHeight, GL_RGB, GL_UNSIGNED_BYTE);
     m_TextureColorbuffer.SetParameter(GL_TEXTURE_MIN_FILTER, GL_LINEAR);
     m_TextureColorbuffer.SetParameter(GL_TEXTURE_MAG_FILTER, GL_LINEAR);
     AttachTexture(m_TextureColorbuffer);

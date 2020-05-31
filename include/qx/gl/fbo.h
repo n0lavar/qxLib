@@ -61,6 +61,7 @@ private:
             void    AttachTexture   (const texture& texture);
 
 private:
+
     shader_program  m_FBOShaderProgram;
     vao             m_QuadVAO;
     vbo             m_QuadVBO;
