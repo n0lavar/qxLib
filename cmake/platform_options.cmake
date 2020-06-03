@@ -25,6 +25,8 @@ function(set_qxlib_target_options TARGET_)
         target_compile_options(${TARGET_} PRIVATE
             $<$<CONFIG:Debug>:/MTd /Od /Ob0 /Z7 /RTC1 /DDEBUG /D_DEBUG /DEBUG /bigobj>
             $<$<CONFIG:Release>:/MT /O2 /Ob2 /DNDEBUG>
+            $<$<CONFIG:RelWithDebInfo>:/MT>
+            $<$<CONFIG:MinSizeRel>:/MT>
         )
         
     endif()

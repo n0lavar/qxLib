@@ -1,6 +1,7 @@
 set(_GTEST_HEADER_SEARCH_DIRS
     "${EXTERNAL_FOLDER}/googletest/googletest/include"
     "${CMAKE_SOURCE_DIR}/../../external/googletest/googletest/include"
+    "${CMAKE_SOURCE_DIR}/../googletest/googletest/include"
     
     "/usr/include"
     "/usr/local/include"

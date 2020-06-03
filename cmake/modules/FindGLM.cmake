@@ -1,6 +1,7 @@
 set(_glm_HEADER_SEARCH_DIRS
     "${EXTERNAL_FOLDER}/glm"
     "${CMAKE_SOURCE_DIR}/../../external/glm"
+    "${CMAKE_SOURCE_DIR}/../glm"
     
     "/usr/include"
     "/usr/local/include"
