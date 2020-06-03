@@ -1,5 +1,11 @@
 set(_GTEST_HEADER_SEARCH_DIRS
-    "${CMAKE_SOURCE_DIR}/../googletest/googletest/include"
+    "${EXTERNAL_FOLDER}/googletest/googletest/include"
+    "${CMAKE_SOURCE_DIR}/../../external/googletest/googletest/include"
+    
+    "/usr/include"
+    "/usr/local/include"
+    "${CMAKE_SOURCE_DIR}/includes"
+    "C:/Program Files (x86)/googletest" 
 )
 
 # check environment variable

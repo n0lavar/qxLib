@@ -1,8 +1,10 @@
 set(_glew_HEADER_SEARCH_DIRS
+    "${EXTERNAL_FOLDER}/glew/include/GL/"
+    "${CMAKE_SOURCE_DIR}/../../external/glew/include/GL/"
+    
     "/usr/include"
     "/usr/local/include"
     "${CMAKE_SOURCE_DIR}/includes"
-    "${CMAKE_SOURCE_DIR}/../glew/include/GL/"
     "C:/Program Files (x86)/glew" 
 )
 

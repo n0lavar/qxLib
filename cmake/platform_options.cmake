@@ -1,5 +1,5 @@
 
-function(SET_TARGET_OPTIONS TARGET_)
+function(set_qxlib_target_options TARGET_)
 
     if (${CMAKE_CXX_COMPILER_ID} STREQUAL Clang)
     
