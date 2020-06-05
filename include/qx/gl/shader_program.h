@@ -46,7 +46,7 @@ public:
 
     void    Init            (void);
     void    AttachShader    (shader_base      * pShader);
-    void    Link            (void);
+    bool    Link            (void);
     void    Use             (void);
     void    DispatchCompute (GLuint             nGroupsX,
                              GLuint             nGroupsY,

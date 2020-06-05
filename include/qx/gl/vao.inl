@@ -119,11 +119,11 @@ inline void vao::DisableVertexArrtibArray(GLuint nIndex)
 //!\date   19.01.2020
 //============================================================================
 inline void vao::VertexAttribPointer(GLuint       nIndex,
-                                      GLint        nSize, 
-                                      GLenum       eType, 
-                                      GLboolean    bNormalized, 
-                                      GLsizei      nStride, 
-                                      size_t       nOffset)
+                                     GLint        nSize, 
+                                     GLenum       eType, 
+                                     GLboolean    bNormalized, 
+                                     GLsizei      nStride, 
+                                     size_t       nOffset)
 {
     glVertexAttribPointer(nIndex, nSize, eType, bNormalized, nStride, (GLvoid*)(nOffset));
 }

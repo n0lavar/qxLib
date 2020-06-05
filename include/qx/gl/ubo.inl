@@ -18,12 +18,12 @@ namespace qx::gl
 //!\fn                          ubo::ubo
 //
 //!\brief  ubo object constructor
-//!\param  szUBO         - buffer size
 //!\param  nBindingPoint - buffer binding point from the shader
+//!\param  szUBO         - buffer size
 //!\author Khrapov
 //!\date   9.01.2020
 //============================================================================
-inline ubo::ubo(GLsizeiptr szUBO, GLuint nBindingPoint)
+inline ubo::ubo(GLuint nBindingPoint, GLsizeiptr szUBO)
 {
     Init(szUBO, nBindingPoint);
 }
@@ -32,16 +32,31 @@ inline ubo::ubo(GLsizeiptr szUBO, GLuint nBindingPoint)
 //!\fn                          ubo::Init
 //
 //!\brief  Init UBO
-//!\param  szUBO         - buffer size
 //!\param  nBindingPoint - buffer binding point from the shader
+//!\param  szUBO         - buffer size
 //!\author Khrapov
 //!\date   9.01.2020
 //============================================================================
-inline void ubo::Init(GLsizeiptr szUBO, GLuint nBindingPoint)
+inline void ubo::Init(GLuint nBindingPoint, GLsizeiptr szUBO)
 {
     Generate();
     Update(szUBO, NULL, GL_STREAM_DRAW);
     BindBase(nBindingPoint);
+}
+
+//============================================================================
+//!\fn                       ubo::GetMaxSize
+//
+//!\brief  Get max UBO size with current GPU
+//!\retval max UBO size with current GPU
+//!\author Khrapov
+//!\date   9.01.2020
+//============================================================================
+inline GLint ubo::GetMaxSize(void)
+{
+    GLint ret;
+    glGetIntegerv(GL_MAX_UNIFORM_BLOCK_SIZE, &ret);
+    return ret;
 }
 
 }

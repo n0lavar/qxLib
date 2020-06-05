@@ -60,11 +60,12 @@ inline void shader_program::AttachShader(shader_base* pShader)
 //!\author Khrapov
 //!\date   16.01.2020
 //============================================================================
-inline void shader_program::Link(void)
+inline bool shader_program::Link(void)
 {
     glLinkProgram(m_nProgram);
+    GLint bSuccess = GetParameter(GL_LINK_STATUS);
 
-    if (GLint bSuccess = GetParameter(GL_LINK_STATUS); !bSuccess)
+    if (!bSuccess)
     {
         GLchar infoLog[512];
         glGetProgramInfoLog(m_nProgram, 512, NULL, infoLog);
@@ -77,6 +78,8 @@ inline void shader_program::Link(void)
 
         m_AttachedShaders.clear();
     }
+
+    return bSuccess;
 }
 
 //============================================================================

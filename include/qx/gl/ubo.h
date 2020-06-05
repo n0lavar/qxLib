@@ -36,10 +36,12 @@ public:
     QX_NONCOPYBLE(ubo)
 
             ubo             (void) = default;
-            ubo             (GLsizeiptr szUBO,
-                             GLuint     nBindingPoint);
-    void    Init            (GLsizeiptr szUBO,
-                             GLuint     nBindingPoint);
+            ubo             (GLuint     nBindingPoint,
+                             GLsizeiptr szUBO);
+    void    Init            (GLuint     nBindingPoint,
+                             GLsizeiptr szUBO);
+
+    GLint   GetMaxSize      (void);
 
 protected:
 
