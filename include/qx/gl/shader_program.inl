@@ -1,4 +1,4 @@
-//============================================================================
+//==============================================================================
 //
 //!\file                     shader_program.inl
 //
@@ -9,57 +9,57 @@
 //!\date        16.01.2020
 //!\copyright   (c) Nick Khrapov, 2020. All right reserved.
 //
-//============================================================================
+//==============================================================================
 
 namespace qx::gl
 {
 
-//============================================================================
+//==============================================================================
 //!\fn                shader_program::~shader_program
 //
 //!\brief  shader_program object destructor
 //!\author Khrapov
 //!\date   16.01.2020
-//============================================================================
+//==============================================================================
 inline shader_program::~shader_program(void)
 {
     if (m_nProgram != UINT_EMPTY_VALUE)
         glDeleteProgram(m_nProgram);
 }
 
-//============================================================================
+//==============================================================================
 //!\fn                     shader_program::Init
 //
 //!\brief  Init shader program
 //!\author Khrapov
 //!\date   18.04.2020
-//============================================================================
+//==============================================================================
 inline void shader_program::Init(void)
 {
     m_nProgram = glCreateProgram();
 }
 
-//============================================================================
+//==============================================================================
 //!\fn                  shader_program::AttachShader
 //
 //!\brief  Attach shader to the program
 //!\param  pShader - shader object pointer
 //!\author Khrapov
 //!\date   16.01.2020
-//============================================================================
+//==============================================================================
 inline void shader_program::AttachShader(shader_base* pShader)
 {
     glAttachShader(m_nProgram, pShader->GetID());
     m_AttachedShaders.push_back(pShader->GetID());
 }
 
-//============================================================================
+//==============================================================================
 //!\fn                  shader_program::Link
 //
 //!\brief  Link attached shaders
 //!\author Khrapov
 //!\date   16.01.2020
-//============================================================================
+//==============================================================================
 inline bool shader_program::Link(void)
 {
     glLinkProgram(m_nProgram);
@@ -82,19 +82,19 @@ inline bool shader_program::Link(void)
     return bSuccess;
 }
 
-//============================================================================
+//==============================================================================
 //!\fn                       shader_program::Use
 //
 //!\brief  Use shader program
 //!\author Khrapov
 //!\date   16.01.2020
-//============================================================================
+//==============================================================================
 inline void shader_program::Use(void)
 {
     glUseProgram(m_nProgram);
 }
 
-//============================================================================
+//==============================================================================
 //!\fn                 shader_program::DispatchCompute
 //
 //!\brief  Dispatch program compute
@@ -103,13 +103,13 @@ inline void shader_program::Use(void)
 //!\param  nGroupsZ - The number of work groups to be launched in the Z dimension
 //!\author Khrapov
 //!\date   17.01.2020
-//============================================================================
+//==============================================================================
 inline void shader_program::DispatchCompute(GLuint nGroupsX, GLuint nGroupsY, GLuint nGroupsZ)
 {
     glDispatchCompute(nGroupsX, nGroupsY, nGroupsZ);
 }
 
-//============================================================================
+//==============================================================================
 //!\fn                   shader_program::GetParameter
 //
 //!\brief  Get shader program parameter
@@ -117,7 +117,7 @@ inline void shader_program::DispatchCompute(GLuint nGroupsX, GLuint nGroupsY, GL
 //         \see https://www.khronos.org/registry/OpenGL-Refpages/gl4/html/glGetProgram.xhtml
 //!\author Khrapov
 //!\date   17.01.2020
-//============================================================================
+//==============================================================================
 inline GLint shader_program::GetParameter(GLenum eParameter)
 {
     GLint nRet = -1;

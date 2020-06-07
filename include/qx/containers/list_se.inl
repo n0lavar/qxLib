@@ -1,4 +1,4 @@
-//============================================================================
+//==============================================================================
 //
 //!\file                         list_se.inl
 //
@@ -9,12 +9,12 @@
 //!\date        5.02.2020
 //!\copyright   (c) Nick Khrapov, 2020. All right reserved.
 //
-//============================================================================
+//==============================================================================
 
 namespace qx
 {
 
-//============================================================================
+//==============================================================================
 //!\fn                        list_se<T>::assign
 //
 //!\brief    Assign by copying all nodes from another list
@@ -22,7 +22,7 @@ namespace qx
 //!\param    list - another list
 //!\author   Khrapov
 //!\date     8.02.2020
-//============================================================================
+//==============================================================================
 template<class T>
 inline void list_se<T>::assign(const list_se& list)
 {
@@ -31,7 +31,7 @@ inline void list_se<T>::assign(const list_se& list)
         push_back(elem);
 }
 
-//============================================================================
+//==============================================================================
 //!\fn                        list_se<T>::assign
 //
 //!\brief    Assign by moving from other list
@@ -39,7 +39,7 @@ inline void list_se<T>::assign(const list_se& list)
 //!\param    list - other list
 //!\author   Khrapov
 //!\date     8.02.2020
-//============================================================================
+//==============================================================================
 template<class T>
 inline void list_se<T>::assign(list_se&& list) noexcept
 {
@@ -48,7 +48,7 @@ inline void list_se<T>::assign(list_se&& list) noexcept
     std::swap(m_nSize,      list.m_nSize);
 }
 
-//============================================================================
+//==============================================================================
 //!\fn                        list_se<T>::assign
 //
 //!\brief    Assign by copying from std::initializer_list
@@ -56,7 +56,7 @@ inline void list_se<T>::assign(list_se&& list) noexcept
 //!\param    init - std::initializer_list
 //!\author   Khrapov
 //!\date     8.02.2020
-//============================================================================
+//==============================================================================
 template<class T>
 inline void list_se<T>::assign(init_list init)
 {
@@ -65,7 +65,7 @@ inline void list_se<T>::assign(init_list init)
         push_back(elem);
 }
 
-//============================================================================
+//==============================================================================
 //!\fn                        list_se<T>::assign
 //
 //!\brief    Assign by filling with 'count' elemtnts of 'value'
@@ -74,7 +74,7 @@ inline void list_se<T>::assign(init_list init)
 //!\param    value - element to fill
 //!\author   Khrapov
 //!\date     8.02.2020
-//============================================================================
+//==============================================================================
 template<class T>
 inline void list_se<T>::assign(size_type count, const_reference value)
 {
@@ -83,7 +83,7 @@ inline void list_se<T>::assign(size_type count, const_reference value)
         push_back(value);
 }
 
-//============================================================================
+//==============================================================================
 //!\fn                        list_se<T>::insert
 //
 //!\brief    Insert element in list
@@ -92,14 +92,14 @@ inline void list_se<T>::assign(size_type count, const_reference value)
 //!\param    what  - element
 //!\author   Khrapov
 //!\date     8.02.2020
-//============================================================================
+//==============================================================================
 template<class T>
 inline void list_se<T>::insert(iterator where, const_reference what)
 {
     emplace(where, what);
 }
 
-//============================================================================
+//==============================================================================
 //!\fn                        list_se<T>::insert
 //
 //!\brief    Insert number of elements in list
@@ -109,7 +109,7 @@ inline void list_se<T>::insert(iterator where, const_reference what)
 //!\param    number - number of elements
 //!\author   Khrapov
 //!\date     8.02.2020
-//============================================================================
+//==============================================================================
 template<class T>
 inline void list_se<T>::insert(iterator where, const_pointer what, size_type number)
 {
@@ -129,7 +129,7 @@ inline void list_se<T>::insert(iterator where, const_pointer what, size_type num
     }
 }
 
-//============================================================================
+//==============================================================================
 //!\fn                     list_se<T>::insert_after
 //
 //!\brief    Insert elemtnt after 'where' iterator
@@ -138,14 +138,14 @@ inline void list_se<T>::insert(iterator where, const_pointer what, size_type num
 //!\param    what  - new element
 //!\author   Khrapov
 //!\date     8.02.2020
-//============================================================================
+//==============================================================================
 template<class T>
 inline void list_se<T>::insert_after(iterator where, const_reference what)
 {
     emplace_after(where, what);
 }
 
-//============================================================================
+//==============================================================================
 //!\fn                     list_se<T>::insert_after
 //
 //!\brief    Insert elemtnts after 'where' iterator
@@ -155,7 +155,7 @@ inline void list_se<T>::insert_after(iterator where, const_reference what)
 //!\param    number - number of elements
 //!\author   Khrapov
 //!\date     8.02.2020
-//============================================================================
+//==============================================================================
 template<class T>
 inline void list_se<T>::insert_after(iterator where, const_pointer what, size_type number)
 {
@@ -166,7 +166,7 @@ inline void list_se<T>::insert_after(iterator where, const_pointer what, size_ty
     }
 }
 
-//============================================================================
+//==============================================================================
 //!\fn                        list_se<T>::erase
 //
 //!\brief    Erase elements from list
@@ -176,7 +176,7 @@ inline void list_se<T>::insert_after(iterator where, const_pointer what, size_ty
 //!\param    number - number of elements to erase
 //!\author   Khrapov
 //!\date     8.02.2020
-//============================================================================
+//==============================================================================
 template<class T>
 inline void list_se<T>::erase(iterator where, size_type number)
 {
@@ -196,7 +196,7 @@ inline void list_se<T>::erase(iterator where, size_type number)
     }
 }
 
-//============================================================================
+//==============================================================================
 //!\fn                     list_se<T>::erase_after
 //
 //!\brief    Erase elements from list
@@ -206,7 +206,7 @@ inline void list_se<T>::erase(iterator where, size_type number)
 //!\param    number - number of elements to erase
 //!\author   Khrapov
 //!\date     8.02.2020
-//============================================================================
+//==============================================================================
 template<class T>
 inline void list_se<T>::erase_after(iterator where, size_type number)
 {
@@ -229,7 +229,7 @@ inline void list_se<T>::erase_after(iterator where, size_type number)
         m_pLastNode = where.m_pNode;
 }
 
-//============================================================================
+//==============================================================================
 //!\fn                      list_se<T>::push_back
 //
 //!\brief    Push back element
@@ -237,14 +237,14 @@ inline void list_se<T>::erase_after(iterator where, size_type number)
 //!\param    what - new element
 //!\author   Khrapov
 //!\date     8.02.2020
-//============================================================================
+//==============================================================================
 template<class T>
 inline void list_se<T>::push_back(const_reference what)
 {
     emplace_back(what);
 }
 
-//============================================================================
+//==============================================================================
 //!\fn                      list_se<T>::push_front
 //
 //!\brief    Push front element
@@ -252,35 +252,35 @@ inline void list_se<T>::push_back(const_reference what)
 //!\param    what - new element
 //!\author   Khrapov
 //!\date     8.02.2020
-//============================================================================
+//==============================================================================
 template<class T>
 inline void list_se<T>::push_front(const_reference what)
 {
     emplace_front(what);
 }
 
-//============================================================================
+//==============================================================================
 //!\fn                       list_se<T>::pop_back
 //
 //!\brief    Pop back element
 //!\property O(size())
 //!\author   Khrapov
 //!\date     8.02.2020
-//============================================================================
+//==============================================================================
 template<class T>
 inline void list_se<T>::pop_back(void)
 {
     erase(m_pLastNode);
 }
 
-//============================================================================
+//==============================================================================
 //!\fn                      list_se<T>::pop_front
 //
 //!\brief    Pop front element
 //!\property O(1)
 //!\author   Khrapov
 //!\date     8.02.2020
-//============================================================================
+//==============================================================================
 template<class T>
 inline void list_se<T>::pop_front(void)
 {
@@ -293,7 +293,7 @@ inline void list_se<T>::pop_front(void)
         m_pLastNode = nullptr;
 }
 
-//============================================================================
+//==============================================================================
 //!\fn                list_se<T>::emplace_front<...Args>
 //
 //!\brief    Construct and insert element at the front
@@ -301,7 +301,7 @@ inline void list_se<T>::pop_front(void)
 //!\param    ...args - arguments to construct T
 //!\author   Khrapov
 //!\date     8.02.2020
-//============================================================================
+//==============================================================================
 template<class T>
 template<class ...Args>
 inline void list_se<T>::emplace_front(Args&& ...args)
@@ -315,7 +315,7 @@ inline void list_se<T>::emplace_front(Args&& ...args)
     m_nSize++;
 }
 
-//============================================================================
+//==============================================================================
 //!\fn                   list_se<T>::emplace<...Args>
 //
 //!\brief    Construct and insert element
@@ -324,7 +324,7 @@ inline void list_se<T>::emplace_front(Args&& ...args)
 //!\param    ...args - arguments to construct T
 //!\author   Khrapov
 //!\date     8.02.2020
-//============================================================================
+//==============================================================================
 template<class T>
 template<class ...Args>
 inline void list_se<T>::emplace(iterator where, Args&& ...args)
@@ -344,7 +344,7 @@ inline void list_se<T>::emplace(iterator where, Args&& ...args)
     }
 }
 
-//============================================================================
+//==============================================================================
 //!\fn                list_se<T>::emplace_after<...Args>
 //
 //!\brief    Construct and insert element
@@ -353,7 +353,7 @@ inline void list_se<T>::emplace(iterator where, Args&& ...args)
 //!\param    ...args - arguments to construct T
 //!\author   Khrapov
 //!\date     8.02.2020
-//============================================================================
+//==============================================================================
 template<class T>
 template<class ...Args>
 inline void list_se<T>::emplace_after(iterator where, Args&& ...args)
@@ -367,7 +367,7 @@ inline void list_se<T>::emplace_after(iterator where, Args&& ...args)
         m_pLastNode = pNode;
 }
 
-//============================================================================
+//==============================================================================
 //!\fn                list_se<T>::emplace_back<...Args>
 //
 //!\brief    Construct and insert element at the end
@@ -375,7 +375,7 @@ inline void list_se<T>::emplace_after(iterator where, Args&& ...args)
 //!\param    ...args - arguments to construct T
 //!\author   Khrapov
 //!\date     8.02.2020
-//============================================================================
+//==============================================================================
 template<class T>
 template<class ...Args>
 inline void list_se<T>::emplace_back(Args&& ...args)
@@ -391,14 +391,14 @@ inline void list_se<T>::emplace_back(Args&& ...args)
     m_nSize++;
 }
 
-//============================================================================
+//==============================================================================
 //!\fn                        list_se<T>::clear
 //
 //!\brief    Clear list
 //!\property O(size())
 //!\author   Khrapov
 //!\date     8.02.2020
-//============================================================================
+//==============================================================================
 template<class T>
 inline void list_se<T>::clear(void)
 {

@@ -1,4 +1,4 @@
-//============================================================================
+//==============================================================================
 //
 //!\file                        useful_funcs.h
 //
@@ -9,7 +9,7 @@
 //!\date        1.11.2019
 //!\copyright   (c) Nick Khrapov, 2019. All right reserved.
 //
-//============================================================================
+//==============================================================================
 #pragma once
 
 #include <initializer_list>
@@ -17,7 +17,7 @@
 
 #include <qx/other/typedefs.h>
 
-//============================================================================
+//==============================================================================
 //!\fn                          SAFE_DELETE<T>
 //
 //!\brief  safe pointer deleting
@@ -25,7 +25,7 @@
 //!\param  bArray - true if need to use delete[]
 //!\author Khrapov
 //!\date   17.06.2019
-//============================================================================
+//==============================================================================
 template<typename T>
 inline void SAFE_DELETE(T*& ptr, bool bArray = false)
 {
@@ -43,7 +43,7 @@ inline void SAFE_DELETE(T*& ptr, bool bArray = false)
 namespace qx
 {
 
-//============================================================================
+//==============================================================================
 //!\fn                         between<L, R, V>
 //
 //!\brief  Checks if value is between left and right
@@ -53,7 +53,7 @@ namespace qx
 //!\retval       - true if so
 //!\author Khrapov
 //!\date   3.11.2019
-//============================================================================
+//==============================================================================
 template<typename L, typename R, typename V>
 inline constexpr bool between(L left, R right, V value)
 {
@@ -69,7 +69,7 @@ inline constexpr bool between_enum(E left, E right, E value)
     return between(l, r, v);
 }
 
-//============================================================================
+//==============================================================================
 //!\fn                          step_to<V, T>
 //
 //!\brief  Do step to some value
@@ -77,7 +77,7 @@ inline constexpr bool between_enum(E left, E right, E value)
 //!\param  to  - value to check
 //!\author Khrapov
 //!\date   3.11.2019
-//============================================================================
+//==============================================================================
 template<typename V, typename T>
 inline constexpr void step_to(V& val, const T& to)
 {
@@ -87,20 +87,20 @@ inline constexpr void step_to(V& val, const T& to)
         val--;
 }
 
-//============================================================================
+//==============================================================================
 //!\fn                                pi
 //
 //!\brief  Get pi
 //!\author Khrapov
 //!\date   16.11.2019
-//============================================================================
+//==============================================================================
 template <typename T = float>
 inline constexpr T pi()
 {
     return static_cast<T>(3.14159265358979323846264338327950288);
 }
 
-//============================================================================
+//==============================================================================
 //!\fn                     align_size<T, size_type>
 //
 //!\brief  Align size to upper bound
@@ -109,14 +109,14 @@ inline constexpr T pi()
 //!\retval        - result size     (ex. 32)
 //!\author Khrapov
 //!\date   10.03.2020
-//============================================================================
+//==============================================================================
 template<class T, typename size_type>
 inline size_type align_size(size_type nSize, size_type nAlign)
 {
     return ((nSize + nAlign) - (nSize + nAlign) % nAlign) * sizeof(T);
 }
 
-//============================================================================
+//==============================================================================
 //!\fn                   destruct<iterator>
 //
 //!\brief  Call destructors
@@ -124,7 +124,7 @@ inline size_type align_size(size_type nSize, size_type nAlign)
 //!\param  end   - end iterator
 //!\author Khrapov
 //!\date   29.02.2020
-//============================================================================
+//==============================================================================
 template<class iterator>
 inline void destruct(iterator start, iterator end)
 {

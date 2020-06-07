@@ -1,4 +1,4 @@
-//============================================================================
+//==============================================================================
 //
 //!\file                          string.h
 //
@@ -9,7 +9,7 @@
 //!\date        4.09.2019
 //!\copyright   (c) Nick Khrapov, 2019. All right reserved.
 //
-//============================================================================
+//==============================================================================
 #pragma once
 
 #define _SILENCE_CXX17_CODECVT_HEADER_DEPRECATION_WARNING
@@ -38,7 +38,7 @@ enum class eCaseType
     random,
 };
 
-//============================================================================z
+//==============================================================================z
 //
 //!\class                        basic_string
 //
@@ -47,7 +47,7 @@ enum class eCaseType
 //!\author  Khrapov
 //!\date    20.10.2019
 //
-//============================================================================
+//==============================================================================
 template<class Traits>
 class basic_string
 {
@@ -258,12 +258,12 @@ template<class UT> basic_string<UT> operator+ (basic_string<UT>&&               
 template<class UT> basic_string<UT> operator+ (const typename UT::std_string_type&  lhs, const basic_string<UT>&                rhs) _STR_OP_PLUS_BODY
 template<class UT> basic_string<UT> operator+ (const typename UT::std_string_type&  lhs, basic_string<UT>&&                     rhs) _STR_OP_PLUS_BODY
 
-//============================================================================
+//==============================================================================
 //
 //!\struct                   SStrData<Traits>
 //!\author  Khrapov
 //!\date    27.10.2019
-//============================================================================
+//==============================================================================
 template<class Traits>
 struct SStrData
 {

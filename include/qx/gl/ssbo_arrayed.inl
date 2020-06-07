@@ -1,4 +1,4 @@
-//============================================================================
+//==============================================================================
 //
 //!\file                      ssbo_arrayed.inl
 //
@@ -9,7 +9,7 @@
 //!\date        18.01.2020
 //!\copyright   (c) Nick Khrapov, 2020. All right reserved.
 //
-//============================================================================
+//==============================================================================
 
 namespace qx::gl
 {
@@ -17,7 +17,7 @@ namespace qx::gl
 constexpr GLuint SSBO_HEADER_SIZE = 32;
 static_assert(SSBO_HEADER_SIZE % 16 == 0);
 
-//============================================================================
+//==============================================================================
 //!\fn                         ssbo_arrayed<T>::ssbo_arrayed
 //
 //!\brief  ssbo_arrayed object constructor
@@ -25,14 +25,14 @@ static_assert(SSBO_HEADER_SIZE % 16 == 0);
 //!\param  nMaxObjects   - num of objects in the buffer
 //!\author Khrapov
 //!\date   9.01.2020
-//============================================================================
+//==============================================================================
 template<typename T>
 ssbo_arrayed<T>::ssbo_arrayed(GLuint nBindingPoint, size_t nMaxObjects)
 {
     Init(nBindingPoint, nMaxObjects);
 }
 
-//============================================================================
+//==============================================================================
 //!\fn                          ssbo_arrayed<T>::Init
 //
 //!\brief  Init SSBO
@@ -40,7 +40,7 @@ ssbo_arrayed<T>::ssbo_arrayed(GLuint nBindingPoint, size_t nMaxObjects)
 //!\param  nMaxObjects   - num of objects in the buffer
 //!\author Khrapov
 //!\date   9.01.2020
-//============================================================================
+//==============================================================================
 template<typename T>
 void ssbo_arrayed<T>::Init(GLuint nBindingPoint, size_t nMaxObjects)
 {
@@ -52,7 +52,7 @@ void ssbo_arrayed<T>::Init(GLuint nBindingPoint, size_t nMaxObjects)
     UpdatePart(0, SSBO_HEADER_SIZE, &m_ArrayFirstFree);
 }
 
-//============================================================================
+//==============================================================================
 //!\fn                       ssbo_arrayed<T>::AddElement
 //
 //!\brief  Add element to SSBO vector
@@ -60,7 +60,7 @@ void ssbo_arrayed<T>::Init(GLuint nBindingPoint, size_t nMaxObjects)
 //!\retval       - object index if succesfull, otherwise UINT_EMPTY_VALUE
 //!\author Khrapov
 //!\date   12.01.2020
-//============================================================================
+//==============================================================================
 template<typename T>
 size_t ssbo_arrayed<T>::AddElement(const T * pData)
 {
@@ -80,7 +80,7 @@ size_t ssbo_arrayed<T>::AddElement(const T * pData)
     return nRet;
 }
 
-//============================================================================
+//==============================================================================
 //!\fn                       ssbo_arrayed<T>::UpdateElem
 //
 //!\brief  Update information in SSBO
@@ -88,7 +88,7 @@ size_t ssbo_arrayed<T>::AddElement(const T * pData)
 //!\param  pData    - data pointer
 //!\author Khrapov
 //!\date   9.01.2020
-//============================================================================
+//==============================================================================
 template<typename T>
 void ssbo_arrayed<T>::UpdateElem(size_t nIndex, const T * pData)
 {
@@ -97,14 +97,14 @@ void ssbo_arrayed<T>::UpdateElem(size_t nIndex, const T * pData)
                pData);
 }
 
-//============================================================================
+//==============================================================================
 //!\fn                       ssbo_arrayed<T>::RemoveElem
 //
 //!\brief  Remove element brom SSBO array
 //!\param  nIndex - element index
 //!\author Khrapov
 //!\date   9.01.2020
-//============================================================================
+//==============================================================================
 template<typename T>
 void ssbo_arrayed<T>::RemoveElem(size_t nIndex)
 {
@@ -127,14 +127,14 @@ void ssbo_arrayed<T>::RemoveElem(size_t nIndex)
     }
 }
 
-//============================================================================
+//==============================================================================
 //!\fn                        ssbo_arrayed<T>::SetIndex
 //
 //!\brief  Set array index
 //!\param  nIndex - index
 //!\author Khrapov
 //!\date   18.01.2020
-//============================================================================
+//==============================================================================
 template<typename T>
 void ssbo_arrayed<T>::SetIndex(size_t nIndex)
 {

@@ -1,4 +1,4 @@
-//============================================================================
+//==============================================================================
 //
 //!\file                         bench_sort.h
 //
@@ -9,7 +9,7 @@
 //!\date        9.03.2020
 //!\copyright   (c) Nick Khrapov, 2020. All right reserved.
 //
-//============================================================================
+//==============================================================================
 #pragma once
 
 #include <qx/alg/sort.h>
@@ -18,7 +18,7 @@
 
 using _b_vec = std::vector<i64>;
 
-//============================================================================
+//==============================================================================
 //!\fn                         bench_func<Func>
 //
 //!\brief  Run function benchmark
@@ -27,7 +27,7 @@ using _b_vec = std::vector<i64>;
 //!\retval         - execution time (sec)
 //!\author Khrapov
 //!\date   10.03.2020
-//============================================================================
+//==============================================================================
 template<typename Func>
 inline double bench_func(_b_vec& sorting, const Func& func)
 {
@@ -36,7 +36,7 @@ inline double bench_func(_b_vec& sorting, const Func& func)
     return bench.End();
 }
 
-//============================================================================
+//==============================================================================
 //!\fn                        bench_sort_n<Func>
 //
 //!\brief  Run function benchmark n times and calc avarage time
@@ -46,7 +46,7 @@ inline double bench_func(_b_vec& sorting, const Func& func)
 //!\retval                - avarage execution time
 //!\author Khrapov
 //!\date   10.03.2020
-//============================================================================
+//==============================================================================
 template<typename Func>
 inline double bench_sort_n(const _b_vec& unsorted, const Func& func, const size_t num_iterations)
 {
@@ -61,7 +61,7 @@ inline double bench_sort_n(const _b_vec& unsorted, const Func& func, const size_
     return fTotal / static_cast<double>(num_iterations);
 }
 
-//============================================================================
+//==============================================================================
 //!\fn                           bench_sort_v
 //
 //!\brief  Run function benchmark with different sort functions and print results
@@ -71,7 +71,7 @@ inline double bench_sort_n(const _b_vec& unsorted, const Func& func, const size_
 //!\param  num_iterations - number of iterations. figher is more precisely
 //!\author Khrapov
 //!\date   10.03.2020
-//============================================================================
+//==============================================================================
 inline void bench_sort_v(i64 min_element, i64 max_element, size_t vector_size, size_t num_iterations)
 {
     std::default_random_engine generator(static_cast<unsigned>(time(0)));
@@ -91,13 +91,13 @@ inline void bench_sort_v(i64 min_element, i64 max_element, size_t vector_size, s
     printf("\n");
 }
 
-//============================================================================
+//==============================================================================
 //!\fn                            bench_sort
 //
 //!\brief  Run sort functions benchmark and print results
 //!\author Khrapov
 //!\date   10.03.2020
-//============================================================================
+//==============================================================================
 inline void bench_sort()
 {
     printf("std::sort                 "

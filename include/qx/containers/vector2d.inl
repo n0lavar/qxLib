@@ -1,4 +1,4 @@
-//============================================================================
+//==============================================================================
 //
 //!\file                        vector2d.inl
 //
@@ -9,19 +9,19 @@
 //!\date        17.02.2020
 //!\copyright   (c) Nick Khrapov, 2020. All right reserved.
 //
-//============================================================================
+//==============================================================================
 
 namespace qx
 {
 
-//============================================================================
+//==============================================================================
 //!\fn                       vector2d<T>::assign
 //
 //!\brief  Assign by moving other vector
 //!\param  other - other vector
 //!\author Khrapov
 //!\date   19.02.2020
-//============================================================================
+//==============================================================================
 template<class T>
 inline void vector2d<T>::assign(vector2d&& other) noexcept
 {
@@ -31,21 +31,21 @@ inline void vector2d<T>::assign(vector2d&& other) noexcept
     std::swap(m_nAllocatedSize, other.m_nAllocatedSize);
 }
 
-//============================================================================
+//==============================================================================
 //!\fn                       vector2d<T>::assign
 //
 //!\brief  Assign by copying another vector
 //!\param  other - another vector
 //!\author Khrapov
 //!\date   19.02.2020
-//============================================================================
+//==============================================================================
 template<class T>
 inline void vector2d<T>::assign(const vector2d& other)
 {
     assign(other.rows(), other.cols(), other.m_pData);
 }
 
-//============================================================================
+//==============================================================================
 //!\fn                         vector2d<T>::assign
 //
 //!\brief   Assign by size and data pointer
@@ -55,7 +55,7 @@ inline void vector2d<T>::assign(const vector2d& other)
 //!\param   pData - data to copy, may be nullptr
 //!\author  Khrapov
 //!\date    19.02.2020
-//============================================================================
+//==============================================================================
 template<class T>
 inline void vector2d<T>::assign(size_type rows, size_type cols, const_pointer pData)
 {
@@ -63,7 +63,7 @@ inline void vector2d<T>::assign(size_type rows, size_type cols, const_pointer pD
         std::memcpy(m_pData, pData, rows * cols * sizeof(T));
 }
 
-//============================================================================
+//==============================================================================
 //!\fn                       vector2d<T>::assign
 //
 //!\brief  Assign by size and fill element
@@ -72,7 +72,7 @@ inline void vector2d<T>::assign(size_type rows, size_type cols, const_pointer pD
 //!\param  data - element to fill in every vector cell
 //!\author Khrapov
 //!\date   19.02.2020
-//============================================================================
+//==============================================================================
 template<class T>
 inline void vector2d<T>::assign(size_type rows, size_type cols, const_reference data)
 {
@@ -80,7 +80,7 @@ inline void vector2d<T>::assign(size_type rows, size_type cols, const_reference 
         fill(data);
 }
 
-//============================================================================
+//==============================================================================
 //!\fn                       vector2d<T>::reserve
 //
 //!\brief   Reserve vector size
@@ -88,7 +88,7 @@ inline void vector2d<T>::assign(size_type rows, size_type cols, const_reference 
 //!\retval            - true if reserved successfully
 //!\author  Khrapov
 //!\date    19.02.2020
-//============================================================================
+//==============================================================================
 template<class T>
 inline bool vector2d<T>::reserve(size_type nElements)
 {
@@ -107,7 +107,7 @@ inline bool vector2d<T>::reserve(size_type nElements)
     return bRet;
 }
 
-//============================================================================
+//==============================================================================
 //!\fn                       vector2d<T>::resize
 //
 //!\brief   Resize vector
@@ -116,7 +116,7 @@ inline bool vector2d<T>::reserve(size_type nElements)
 //!\retval       - true if resized successfully
 //!\author  Khrapov
 //!\date    19.02.2020
-//============================================================================
+//==============================================================================
 template<class T>
 inline bool vector2d<T>::resize(size_type rows, size_type cols)
 {
@@ -145,7 +145,7 @@ inline bool vector2d<T>::resize(size_type rows, size_type cols)
     return bRet;
 }
 
-//============================================================================
+//==============================================================================
 //!\fn                       vector2d<T>::resize
 //
 //!\brief   Resize vector
@@ -158,7 +158,7 @@ inline bool vector2d<T>::resize(size_type rows, size_type cols)
 //!\retval       - true if resized successfully
 //!\author  Khrapov
 //!\date    19.02.2020
-//============================================================================
+//==============================================================================
 template<class T>
 inline bool vector2d<T>::resize(size_type rows, size_type cols, const_reference data)
 {
@@ -170,13 +170,13 @@ inline bool vector2d<T>::resize(size_type rows, size_type cols, const_reference 
     return bRet;
 }
 
-//============================================================================
+//==============================================================================
 //!\fn                        vector2d<T>::free
 //
 //!\brief  Clear string and free memory
 //!\author Khrapov
 //!\date   21.02.2020
-//============================================================================
+//==============================================================================
 template<class T>
 inline void vector2d<T>::free(void)
 {
@@ -186,7 +186,7 @@ inline void vector2d<T>::free(void)
     m_nAllocatedSize = 0;
 }
 
-//============================================================================
+//==============================================================================
 //!\fn                        vector2d<T>::fill
 //
 //!\brief  Fill vector with element
@@ -194,14 +194,14 @@ inline void vector2d<T>::free(void)
 //!\todo   optimize. for some reason vector<vector> is 3 times better
 //!\author Khrapov
 //!\date   19.02.2020
-//============================================================================
+//==============================================================================
 template<class T>
 inline void vector2d<T>::fill(const_reference elem)
 {
     std::fill(begin(), end(), elem);
 }
 
-//============================================================================
+//==============================================================================
 //!\fn                     vector2d<T>::operator[]
 //
 //!\brief  Get row
@@ -209,14 +209,14 @@ inline void vector2d<T>::fill(const_reference elem)
 //!\retval      - row
 //!\author Khrapov
 //!\date   19.02.2020
-//============================================================================
+//==============================================================================
 template<class T>
 inline typename vector2d<T>::pointer vector2d<T>::operator[](size_type nRow) noexcept
 {
     return m_pData + nRow * m_nCols;
 }
 
-//============================================================================
+//==============================================================================
 //!\fn                     vector2d<T>::operator[]
 //
 //!\brief  Get row
@@ -224,14 +224,14 @@ inline typename vector2d<T>::pointer vector2d<T>::operator[](size_type nRow) noe
 //!\retval      - const row
 //!\author Khrapov
 //!\date   19.02.2020
-//============================================================================
+//==============================================================================
 template<class T>
 inline typename vector2d<T>::const_pointer vector2d<T>::operator[](size_type nRow) const noexcept
 {
     return m_pData + nRow * m_nCols;
 }
 
-//============================================================================
+//==============================================================================
 //!\fn                         vector2d<T>::get
 //
 //!\brief  Get element
@@ -240,14 +240,14 @@ inline typename vector2d<T>::const_pointer vector2d<T>::operator[](size_type nRo
 //!\retval      - element
 //!\author Khrapov
 //!\date   19.02.2020
-//============================================================================
+//==============================================================================
 template<class T>
 inline const T& vector2d<T>::get(size_type nRow, size_type nCol) const noexcept
 {
     return (*this)[nRow][nCol];
 }
 
-//============================================================================
+//==============================================================================
 //!\fn                         vector2d<T>::set
 //
 //!\brief  Set elemtnt
@@ -256,42 +256,42 @@ inline const T& vector2d<T>::get(size_type nRow, size_type nCol) const noexcept
 //!\param  data - element
 //!\author Khrapov
 //!\date   19.02.2020
-//============================================================================
+//==============================================================================
 template<class T>
 inline void vector2d<T>::set(size_type nRow, size_type nCol, const_reference data) noexcept
 {
     (*this)[nRow][nCol] = data;
 }
 
-//============================================================================
+//==============================================================================
 //!\fn                        vector2d<T>::size
 //
 //!\brief  Get number of elements in whole vector2d
 //!\retval  - num of elements (cols * rows)
 //!\author Khrapov
 //!\date   19.02.2020
-//============================================================================
+//==============================================================================
 template<class T>
 inline typename vector2d<T>::size_type vector2d<T>::size(void) const
 { 
     return size_x() * size_y(); 
 }
 
-//============================================================================
+//==============================================================================
 //!\fn                        vector2d<T>::data
 //
 //!\brief  Get first element pointer
 //!\retval  - first element pointer
 //!\author Khrapov
 //!\date   19.02.2020
-//============================================================================
+//==============================================================================
 template<class T>
 inline typename vector2d<T>::pointer vector2d<T>::data()
 {
     return m_pData;
 }
 
-//============================================================================
+//==============================================================================
 //!\fn                         vector2d<T>::at
 //
 //!\brief  Get element at ind pos
@@ -299,20 +299,20 @@ inline typename vector2d<T>::pointer vector2d<T>::data()
 //!\retval     - element
 //!\author Khrapov
 //!\date   19.02.2020
-//============================================================================
+//==============================================================================
 template<class T>
 inline typename vector2d<T>::reference vector2d<T>::at(size_type ind)
 { 
     return m_pData[ind]; 
 }
 
-//============================================================================
+//==============================================================================
 //!\fn                        vector2d<T>::clear
 //
 //!\brief  Clear vector (do not free memory)
 //!\author Khrapov
 //!\date   19.02.2020
-//============================================================================
+//==============================================================================
 template<class T>
 inline void vector2d<T>::clear(void)
 {

@@ -1,4 +1,4 @@
-//============================================================================
+//==============================================================================
 //
 //!\file                         numerical.h
 //
@@ -9,7 +9,7 @@
 //!\date        1.02.2020
 //!\copyright   (c) Nick Khrapov, 2020. All right reserved.
 //
-//============================================================================
+//==============================================================================
 #pragma once
 
 #include <bitset>
@@ -23,7 +23,7 @@
 namespace qx
 { 
 
-//============================================================================
+//==============================================================================
 //!\fn                              gcd
 //
 //!\brief    Greatest common divisor
@@ -35,7 +35,7 @@ namespace qx
 //!\retval          - greatest common divisor if first and second > 0, otherwise 0
 //!\author   Khrapov
 //!\date     1.02.2020
-//============================================================================
+//==============================================================================
 inline int gcd(int first, int second)
 {
     if (first == 0 || second == 0)
@@ -51,7 +51,7 @@ inline int gcd(int first, int second)
     return std::abs(first);
 }
 
-//============================================================================
+//==============================================================================
 //!\fn                              lcm
 //
 //!\brief    Least common multiple
@@ -61,7 +61,7 @@ inline int gcd(int first, int second)
 //!\retval          - least common multiple if first and second > 0, otherwise 0
 //!\author Khrapov
 //!\date   1.02.2020
-//============================================================================
+//==============================================================================
 inline int lcm(int first, int second)
 {
     if (first == 0 || second == 0)
@@ -73,7 +73,7 @@ inline int lcm(int first, int second)
     return first / gcd(first, second) * second;
 }
 
-//============================================================================
+//==============================================================================
 //!\fn                            pow<T, I>
 //
 //!\brief    Power function for integer power
@@ -87,7 +87,7 @@ inline int lcm(int first, int second)
 //!\retval          - number ^ power
 //!\author   Khrapov
 //!\date     1.02.2020
-//============================================================================
+//==============================================================================
 template<typename T>
 inline double pow(T number, int power)
 {
@@ -128,7 +128,7 @@ inline double pow(T number, int power)
     return bNegativePower ? 1.0 / result : result;
 }
 
-//============================================================================
+//==============================================================================
 //!\fn                            maxpot<I>
 //
 //!\brief  Max power of two in integer
@@ -136,7 +136,7 @@ inline double pow(T number, int power)
 //!\retval        - max power of two in number
 //!\author Khrapov
 //!\date   1.02.2020
-//============================================================================
+//==============================================================================
 template<typename I>
 inline I maxpot(I number)
 {
@@ -153,7 +153,7 @@ inline I maxpot(I number)
     return pow;
 }
 
-//============================================================================
+//==============================================================================
 //!\fn                     find_prime_factors<I>
 //
 //!\brief    Find all prime factors
@@ -162,7 +162,7 @@ inline I maxpot(I number)
 //!\retval          - all prime factors vector
 //!\author   Khrapov
 //!\date     1.02.2020
-//============================================================================
+//==============================================================================
 template<typename I>
 inline std::vector<I> find_prime_factors(I number)
 {
@@ -202,7 +202,7 @@ inline std::vector<I> find_prime_factors(I number)
     return factors;
 }
 
-//============================================================================
+//==============================================================================
 //!\fn                         find_primes<I>
 //
 //!\brief    Find all primes between 2 and max_number
@@ -212,7 +212,7 @@ inline std::vector<I> find_prime_factors(I number)
 //!\retval              - all primes vector
 //!\author   Khrapov
 //!\date     1.02.2020
-//============================================================================
+//==============================================================================
 template<typename I>
 inline std::vector<I> find_primes(I max_number)
 {
@@ -248,7 +248,7 @@ inline std::vector<I> find_primes(I max_number)
     return primes;
 }
 
-//============================================================================
+//==============================================================================
 //!\fn                             is_prime
 //
 //!\brief    Is number prime
@@ -258,13 +258,13 @@ inline std::vector<I> find_primes(I max_number)
 //!\retval          - true if prime
 //!\author   Khrapov
 //!\date     2.02.2020
-//============================================================================
+//==============================================================================
 inline bool is_prime(size_t number)
 {
     return find_prime_factors(static_cast<int>(number)).size() == 1;
 }
 
-//============================================================================
+//==============================================================================
 //!\fn                             is_prime
 //
 //!\brief  Is number prime with some probability
@@ -273,7 +273,7 @@ inline bool is_prime(size_t number)
 //!\retval             - true is number is prime with some probability
 //!\author Khrapov
 //!\date   2.02.2020
-//============================================================================
+//==============================================================================
 inline bool is_prime(size_t number, double probability)
 {
     if (probability < 0)

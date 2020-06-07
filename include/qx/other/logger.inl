@@ -1,4 +1,4 @@
-//============================================================================
+//==============================================================================
 //
 //!\file                          logger.inl
 //
@@ -9,12 +9,12 @@
 //!\date        17.06.2019
 //!\copyright   (c) Nick Khrapov, 2019. All right reserved.
 //
-//============================================================================
+//==============================================================================
 
 namespace qx
 {
 
-//==============================================================================
+//================================================================================
 //!\fn                        Log::ProcessOutput<...Args>
 //
 //!\brief  Process tracings
@@ -27,7 +27,7 @@ namespace qx
 //!\param  ...args              - additional args for format
 //!\author Khrapov
 //!\date   10.01.2020
-//==============================================================================
+//================================================================================
 template<class ... Args>
 inline void logger::ProcessOutput(level         eLogLevel,
                                   const char  * pszFormat, 
@@ -141,7 +141,7 @@ inline void logger::ProcessOutput(level         eLogLevel,
     }
 }
 
-//==============================================================================
+//================================================================================
 //!\fn                       logger::RegisterUnit
 //
 //!\brief  Register file or function for tracing
@@ -150,7 +150,7 @@ inline void logger::ProcessOutput(level         eLogLevel,
 //!\param  unit        - unit info
 //!\author Khrapov
 //!\date   10.01.2020
-//==============================================================================
+//================================================================================
 inline void logger::RegisterUnit(const char* pszUnitName, const TraceUnitInfo& unit)
 {
     if (m_eLogPolicy == policy::clear_then_uppend)
@@ -160,38 +160,38 @@ inline void logger::RegisterUnit(const char* pszUnitName, const TraceUnitInfo& u
         m_RegisteredUnits[pszUnitName] = unit;
 }
 
-//==============================================================================
+//================================================================================
 //!\fn                      logger::DeregisterUnit
 //
 //!\brief  Deregister unit
 //!\param  pszUnitName - unit name
 //!\author Khrapov
 //!\date   11.01.2020
-//==============================================================================
+//================================================================================
 inline void logger::DeregisterUnit(const char* pszUnitName)
 {
     m_RegisteredUnits.erase(pszUnitName);
 }
 
-//==============================================================================
+//================================================================================
 //!\fn                       logger::SetLogPolicy
 //
 //!\brief  Set log policy
 //!\author Khrapov
 //!\date   11.01.2020
-//==============================================================================
+//================================================================================
 inline void logger::SetLogPolicy(policy eLogPolicy)
 {
     m_eLogPolicy = eLogPolicy;
 }
 
-//============================================================================
+//==============================================================================
 //!\fn                       logger::GetTimeStr
 //
 //!\brief  Get time c string
 //!\author Khrapov
 //!\date   4.09.2019
-//============================================================================
+//==============================================================================
 inline const char* logger::GetTimeStr(void)
 {
     static qx::string ret(19, '\0');
@@ -210,7 +210,7 @@ inline const char* logger::GetTimeStr(void)
     return ret.data();
 }
 
-//==============================================================================
+//================================================================================
 //!\fn                       logger::OutputToFile
 //
 //!\brief  Output log string to file
@@ -218,7 +218,7 @@ inline const char* logger::GetTimeStr(void)
 //!\param  sFileName - file name string
 //!\author Khrapov
 //!\date   10.01.2020
-//==============================================================================
+//================================================================================
 inline void logger::OutputToFile(const qx::string& sText, const qx::string& sFileName)
 {
     std::ofstream ofs;
@@ -255,7 +255,7 @@ inline void logger::OutputToFile(const qx::string& sText, const qx::string& sFil
     }
 }
 
-//==============================================================================
+//================================================================================
 //!\fn                      logger::OutputToConsole
 //
 //!\brief  Output log string to console
@@ -263,32 +263,32 @@ inline void logger::OutputToFile(const qx::string& sText, const qx::string& sFil
 //!\param  pszAnsiiColor - text color
 //!\author Khrapov
 //!\date   10.01.2020
-//==============================================================================
+//================================================================================
 inline void logger::OutputToConsole(const qx::string& sText, const char* pszAnsiiColor)
 {
     SAutoPrintfColor apc(pszAnsiiColor);
     printf("%s", sText.data());
 }
 
-//==============================================================================
+//================================================================================
 //!\fn                         logger::OnCreate
 //
 //!\brief  On create singleton
 //!\author Khrapov
 //!\date   11.01.2020
-//==============================================================================
+//================================================================================
 inline void logger::OnCreate(void)
 {
     RegisterUnit("default", { "log.txt", level::all, level::all });
 }
 
-//==============================================================================
+//================================================================================
 //!\fn                        logger::OnTerminate
 //
 //!\brief  On terminate singleton
 //!\author Khrapov
 //!\date   11.01.2020
-//==============================================================================
+//================================================================================
 inline void logger::OnTerminate(void)
 {
     for (const auto& u : m_RegisteredUnits)

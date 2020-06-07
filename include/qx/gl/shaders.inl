@@ -1,4 +1,4 @@
-//============================================================================
+//==============================================================================
 //
 //!\file                         shaders.inl
 //
@@ -9,31 +9,31 @@
 //!\date        17.06.2019
 //!\copyright   (c) Nick Khrapov, 2019. All right reserved.
 //
-//============================================================================
+//==============================================================================
 
 namespace qx::gl
 {
 
-//============================================================================
+//==============================================================================
 //!\fn                         shader_base::shader_base
 //
 //!\brief  shader_base object constructor
 //!\param  pszShaderCode - string with shader code
 //!\author Khrapov
 //!\date   16.01.2020
-//============================================================================
+//==============================================================================
 inline shader_base::shader_base(const GLchar* pszShaderCode,  GLenum eShaderType)
 {
     Init(pszShaderCode, eShaderType);
 }
 
-//============================================================================
+//==============================================================================
 //!\fn                        shader_base::~shader_base
 //
 //!\brief  shader_base object destructor
 //!\author Khrapov
 //!\date   17.06.2019
-//============================================================================
+//==============================================================================
 inline shader_base::~shader_base()
 {
     // shader deleted in shader_program::Link
@@ -47,14 +47,14 @@ inline shader_base::~shader_base()
     }
 }
 
-//============================================================================
+//==============================================================================
 //!\fn                          shader_base::Init
 //
 //!\brief  Init (compile) shader
 //!\param  pszShaderCode - string with shader code
 //!\author Khrapov
 //!\date   16.01.2020
-//============================================================================
+//==============================================================================
 inline void shader_base::Init(const GLchar* pszShaderCode, GLenum eShaderType)
 {
     // Compile
@@ -71,7 +71,7 @@ inline void shader_base::Init(const GLchar* pszShaderCode, GLenum eShaderType)
     }
 }
 
-//============================================================================
+//==============================================================================
 //!\fn                      shader_base::GetParameter
 //
 //!\brief  Get shader parameter
@@ -79,7 +79,7 @@ inline void shader_base::Init(const GLchar* pszShaderCode, GLenum eShaderType)
 //         \see https://www.khronos.org/registry/OpenGL-Refpages/gl4/html/glGetProgram.xhtml
 //!\author Khrapov
 //!\date   16.01.2020
-//============================================================================
+//==============================================================================
 inline GLint shader_base::GetParameter(GLenum eParameter) const
 {
     GLint nRet = UINT_EMPTY_VALUE;

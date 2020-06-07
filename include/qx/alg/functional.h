@@ -1,4 +1,4 @@
-//============================================================================
+//==============================================================================
 //
 //!\file                         functional.h
 //
@@ -9,7 +9,7 @@
 //!\date        2.02.2020
 //!\copyright   (c) Nick Khrapov, 2020. All right reserved.
 //
-//============================================================================
+//==============================================================================
 #pragma once
 
 #include <functional>
@@ -26,7 +26,7 @@ namespace qx
 
 using function2d = std::function<double(double)>;
 
-//============================================================================
+//==============================================================================
 //!\fn                       linear_interpolation
 //
 //!\brief  Linear interpolation algorithm
@@ -36,14 +36,14 @@ using function2d = std::function<double(double)>;
 //!\retval    - ~f(x)
 //!\author Khrapov
 //!\date   10.11.2019
-//============================================================================
+//==============================================================================
 inline double linear_interpolation(glm::dvec2 p0, glm::dvec2 p1, double x)
 {
     ASSERT_MSG(glm::epsilonNotEqual(p1.x, p0.x, DBL_EPSILON), "two x are equal, result is nan");
     return p0.y + (p1.y - p0.y) * (x - p0.x) / (p1.x - p0.x);
 }
 
-//============================================================================
+//==============================================================================
 //!\fn                      bilinear_inletpolation
 //
 //!\brief  Bilinear interpolation algorithm. Points are clockwise or counterclock-wise
@@ -56,7 +56,7 @@ inline double linear_interpolation(glm::dvec2 p0, glm::dvec2 p1, double x)
 //!\retval    - ~f(p.x, p.y)
 //!\author Khrapov
 //!\date   10.11.2019
-//============================================================================
+//==============================================================================
 inline double bilinear_inletpolation(glm::dvec3 p0, glm::dvec3 p1, glm::dvec3 p2, glm::dvec3 p3, glm::dvec2 p)
 {
     ASSERT_MSG(glm::epsilonEqual(p0.y, p1.y, DBL_EPSILON), "points must be as square");
@@ -69,7 +69,7 @@ inline double bilinear_inletpolation(glm::dvec3 p0, glm::dvec3 p1, glm::dvec3 p2
     return linear_interpolation(temp0, temp1, p.y);
 }
 
-//============================================================================
+//==============================================================================
 //!\fn                     integrate_rectangle_rule
 //
 //!\brief  Interate using rectangle rule
@@ -80,7 +80,7 @@ inline double bilinear_inletpolation(glm::dvec3 p0, glm::dvec3 p1, glm::dvec3 p2
 //!\retval                     - approximate integral
 //!\author Khrapov
 //!\date   2.02.2020
-//============================================================================
+//==============================================================================
 inline double integrate_rectangle_rule(const function2d&    func,
                                        double               x0,
                                        double               x1,
@@ -100,7 +100,7 @@ inline double integrate_rectangle_rule(const function2d&    func,
     return total_area;
 }
 
-//============================================================================
+//==============================================================================
 //!\fn                     integrate_trapezoid_rule
 //
 //!\brief  Interate using trapezoid rule
@@ -111,7 +111,7 @@ inline double integrate_rectangle_rule(const function2d&    func,
 //!\retval                     - approximate integral
 //!\author Khrapov
 //!\date   2.02.2020
-//============================================================================
+//==============================================================================
 inline double integrate_trapezoid_rule(const function2d& func,
                                        double            x0,
                                        double            x1,
@@ -131,7 +131,7 @@ inline double integrate_trapezoid_rule(const function2d& func,
     return total_area;
 }
 
-//============================================================================
+//==============================================================================
 //!\fn                   integrate_adaptive_midpoint
 //
 //!\brief  Interate using adaptive midpoint
@@ -144,7 +144,7 @@ inline double integrate_trapezoid_rule(const function2d& func,
 //!\retval                     - approximate integral
 //!\author Khrapov
 //!\date   2.02.2020
-//============================================================================
+//==============================================================================
 inline double integrate_adaptive_midpoint(const function2d& func,
                                           double            x0,
                                           double            x1,
@@ -195,7 +195,7 @@ inline double integrate_adaptive_midpoint(const function2d& func,
     return total_area;
 }
 
-//============================================================================
+//==============================================================================
 //!\fn                      integrate_monte_carlo
 //
 //!\brief  Interate using probabilistic algorithm Monte Carlo
@@ -209,7 +209,7 @@ inline double integrate_adaptive_midpoint(const function2d& func,
 //!\retval                - approximate integral
 //!\author Khrapov
 //!\date   2.02.2020
-//============================================================================
+//==============================================================================
 inline double integrate_monte_carlo(const std::function<int(double, double)>&  funcIsInside,
                                     glm::dvec2                                 pos0,
                                     glm::dvec2                                 pos1,
@@ -235,7 +235,7 @@ inline double integrate_monte_carlo(const std::function<int(double, double)>&  f
     return (static_cast<double>(points_inside) / total_points) * area;
 }
 
-//============================================================================
+//==============================================================================
 //!\fn                     find_zero_newtons_method
 //
 //!\brief  Find root of the equation using Newtons method
@@ -247,7 +247,7 @@ inline double integrate_monte_carlo(const std::function<int(double, double)>&  f
 //!\retval                - approximate root
 //!\author Khrapov
 //!\date   4.02.2020
-//============================================================================
+//==============================================================================
 inline double find_zero_newtons_method(const function2d&    f,
                                        const function2d&    dfdx,
                                        double               initial_guess,

@@ -1,4 +1,4 @@
-//============================================================================
+//==============================================================================
 //
 //!\file                            sort.h
 //
@@ -9,7 +9,7 @@
 //!\date        1.03.2020
 //!\copyright   (c) Nick Khrapov, 2020. All mid reserved.
 //
-//============================================================================
+//==============================================================================
 #pragma once
 
 #include <qx/other/typedefs.h>
@@ -22,7 +22,7 @@ namespace qx
 
 constexpr size_t SORT_COUNTING_MAX_BUFFER_SIZE = 100000;
 
-//============================================================================
+//==============================================================================
 //!\fn                     sort_required<RandomIt>
 //
 //!\brief       Check if sort really needed
@@ -32,7 +32,7 @@ constexpr size_t SORT_COUNTING_MAX_BUFFER_SIZE = 100000;
 //!\retval            - false if [begin, end) already sorted
 //!\author      Khrapov
 //!\date        9.03.2020
-//============================================================================
+//==============================================================================
 template <typename RandomIt, typename Compare = std::less<>>
 inline bool sort_required(RandomIt begin, RandomIt end, Compare compare = Compare())
 {
@@ -51,7 +51,7 @@ inline bool sort_required(RandomIt begin, RandomIt end, Compare compare = Compar
 #endif
 }
 
-//============================================================================
+//==============================================================================
 //!\fn                     sort_insertion<RandomIt>
 //
 //!\brief       Insertion sort
@@ -59,7 +59,7 @@ inline bool sort_required(RandomIt begin, RandomIt end, Compare compare = Compar
 //!\property    O(n^2)
 //!\author      Khrapov
 //!\date        1.03.2020
-//============================================================================
+//==============================================================================
 template <typename RandomIt, typename Compare = std::less<>>
 inline void sort_insertion(RandomIt begin, RandomIt end, Compare compare = Compare())
 {
@@ -76,7 +76,7 @@ inline void sort_insertion(Container& cont, Compare compare = Compare())
     sort_insertion(cont.begin(), cont.end(), compare);
 }
 
-//============================================================================
+//==============================================================================
 //!\fn                     sort_selection<RandomIt>
 //
 //!\brief       Selection sort
@@ -84,7 +84,7 @@ inline void sort_insertion(Container& cont, Compare compare = Compare())
 //!\property    O(n^2)
 //!\author      Khrapov
 //!\date        1.03.2020
-//============================================================================
+//==============================================================================
 template <typename RandomIt, typename Compare = std::less<>>
 inline void sort_selection(RandomIt begin, RandomIt end, Compare compare = Compare())
 {
@@ -107,7 +107,7 @@ inline void sort_selection(Container& cont, Compare compare = Compare())
     sort_selection(cont.begin(), cont.end(), compare);
 }
 
-//============================================================================
+//==============================================================================
 //!\fn                      sort_bubble<RandomIt>
 //
 //!\brief       Bubble sort
@@ -115,7 +115,7 @@ inline void sort_selection(Container& cont, Compare compare = Compare())
 //!\property    O(n^2)
 //!\author      Khrapov
 //!\date        1.03.2020
-//============================================================================
+//==============================================================================
 template <typename RandomIt, typename Compare = std::less<>>
 inline void sort_bubble(RandomIt begin, RandomIt end, Compare compare = Compare())
 {
@@ -142,7 +142,7 @@ inline void sort_bubble(Container& cont, Compare compare = Compare())
     sort_bubble(cont.begin(), cont.end(), compare);
 }
 
-//============================================================================
+//==============================================================================
 //!\fn                      adjust_heap<RandomIt>
 //
 //!\brief       Adjust heap
@@ -152,7 +152,7 @@ inline void sort_bubble(Container& cont, Compare compare = Compare())
 //!\param       position - current root position
 //!\author      Khrapov
 //!\date        2.03.2020
-//============================================================================
+//==============================================================================
 template <typename RandomIt, typename Compare>
 inline void adjust_heap(RandomIt begin, size_t heapSize, size_t position, Compare compare = Compare())
 {
@@ -173,13 +173,13 @@ inline void adjust_heap(RandomIt begin, size_t heapSize, size_t position, Compar
     }
 }
 
-//============================================================================
+//==============================================================================
 //!\fn                       make_heap<RandomIt>
 //
 //!\brief  Make heap at range
 //!\author Khrapov
 //!\date   2.03.2020
-//============================================================================
+//==============================================================================
 template <typename RandomIt, typename Compare>
 inline void make_heap(RandomIt begin, RandomIt end, Compare compare = Compare())
 {
@@ -188,7 +188,7 @@ inline void make_heap(RandomIt begin, RandomIt end, Compare compare = Compare())
         adjust_heap(begin, max, static_cast<size_t>(i), compare);
 }
 
-//============================================================================
+//==============================================================================
 //!\fn                       sort_heap<RandomIt>
 //
 //!\brief       heap sort
@@ -196,7 +196,7 @@ inline void make_heap(RandomIt begin, RandomIt end, Compare compare = Compare())
 //!\property    O(nlog(N))
 //!\author      Khrapov
 //!\date        2.03.2020
-//============================================================================
+//==============================================================================
 template <typename RandomIt, typename Compare = std::less<>>
 inline void sort_heap(RandomIt begin, RandomIt end, Compare compare = Compare())
 {
@@ -219,7 +219,7 @@ inline void sort_heap(Container& cont, Compare compare = Compare())
     qx::sort_heap(cont.begin(), cont.end(), compare);
 }
 
-//============================================================================
+//==============================================================================
 //!\fn               sort_quick_hoare<RandomIt, Compare>
 //
 //!\brief       quick sort based on Hoare partitioning
@@ -227,7 +227,7 @@ inline void sort_heap(Container& cont, Compare compare = Compare())
 //!\property    O(nlog(N))
 //!\author      Khrapov
 //!\date        4.03.2020
-//============================================================================
+//==============================================================================
 template <typename RandomIt, typename Compare = std::less<>>
 inline void sort_quick_hoare(RandomIt begin, RandomIt end, Compare compare = Compare())
 {
@@ -263,7 +263,7 @@ inline void sort_quick_hoare(Container& cont, Compare compare = Compare())
     sort_quick_hoare(cont.begin(), cont.end(), compare);
 }
 
-//============================================================================
+//==============================================================================
 //!\fn             sort_quick_three_way<RandomIt, Compare>
 //
 //!\brief       quick sort based on three-way partitioning
@@ -271,7 +271,7 @@ inline void sort_quick_hoare(Container& cont, Compare compare = Compare())
 //!\property    O(nlog(N))
 //!\author      Khrapov
 //!\date        4.03.2020
-//============================================================================
+//==============================================================================
 template <typename RandomIt, typename Compare = std::less<>>
 inline void sort_quick_three_way(RandomIt begin, RandomIt end, Compare compare = Compare())
 {
@@ -355,7 +355,7 @@ inline void sort_quick_three_way(Container& cont, Compare compare = Compare())
     sort_quick_three_way(cont.begin(), cont.end(), compare);
 }
 
-//============================================================================
+//==============================================================================
 //!\fn             sort_quick_dual_pivot<RandomIt, Compare>
 //
 //!\brief       quick sort based on dual-pivot partitioning
@@ -363,7 +363,7 @@ inline void sort_quick_three_way(Container& cont, Compare compare = Compare())
 //!\property    O(nlog(N))
 //!\author      Khrapov
 //!\date        4.03.2020
-//============================================================================
+//==============================================================================
 template <typename RandomIt, typename Compare = std::less<>>
 inline void sort_quick_dual_pivot(RandomIt begin, RandomIt end, Compare compare = Compare())
 {
@@ -471,14 +471,14 @@ inline void sort_quick_dual_pivot(Container& cont, Compare compare = Compare())
     sort_quick_dual_pivot(cont.begin(), cont.end(), compare);
 }
 
-//============================================================================
+//==============================================================================
 //!\fn                     merge<RandomIt, Compare>
 //
 //!\brief       merge with temp vector
 //!\property    O(N), O(N) memory
 //!\author      Khrapov
 //!\date        4.03.2020
-//============================================================================
+//==============================================================================
 template <typename RandomIt, typename Compare = std::less<>>
 inline void merge
     (RandomIt                                     begin,
@@ -523,7 +523,7 @@ inline void merge
         *it = preallocatedBuffer[it - begin];
 }
 
-//============================================================================
+//==============================================================================
 //!\fn                  sort_merge<RandomIt, Compare>
 //
 //!\brief       merge sort based on merge with temp vector
@@ -531,7 +531,7 @@ inline void merge
 //!\property    O(nlog(N)), O(N) memory
 //!\author      Khrapov
 //!\date        4.03.2020
-//============================================================================
+//==============================================================================
 template <typename RandomIt, typename Compare = std::less<>>
 inline void sort_merge
     (RandomIt                                    begin,
@@ -564,7 +564,7 @@ inline void sort_merge
 }
 
 
-//============================================================================
+//==============================================================================
 //!\fn                 sort_counting<RandomIt, Compare>
 //
 //!\brief       counting sort for integral values
@@ -573,7 +573,7 @@ inline void sort_merge
 //!\retval      true if sorted, false if required buffer size is greather then max
 //!\author      Khrapov
 //!\date        4.03.2020
-//============================================================================
+//==============================================================================
 template <typename RandomIt, typename Compare = std::less<>>
 [[nodiscard]] inline bool sort_counting
     (RandomIt       begin, 
@@ -627,13 +627,13 @@ template <typename Container, typename Compare = std::less<>>
 }
 
 #if 0
-//============================================================================
+//==============================================================================
 //!\fn                  sort_bucket<RandomIt, Compare>
 //
 //!\brief  bucket sort
 //!\author Khrapov
 //!\date   4.03.2020
-//============================================================================
+//==============================================================================
 template <typename RandomIt, typename Compare = std::less<>>
 void sort_bucket(RandomIt begin, RandomIt end, Compare compare = Compare())
 {
@@ -690,13 +690,13 @@ void sort_bucket(Container& cont, Compare compare = Compare())
 }
 #endif
 
-//============================================================================
+//==============================================================================
 //!\fn                     sort<RandomIt, Compare>
 //
 //!\brief  Sort by the most suitable algorithm
 //!\author Khrapov
 //!\date   4.03.2020
-//============================================================================
+//==============================================================================
 template<typename RandomIt, typename Compare = std::less<>>
 inline void sort(RandomIt begin, RandomIt end, Compare compare = Compare())
 {
