@@ -22,9 +22,10 @@ namespace qx::gl
 //!\author Khrapov
 //!\date   16.01.2020
 //==============================================================================
-inline shader_base::shader_base(const GLchar* pszShaderCode,  GLenum eShaderType)
+template <GLenum ShaderType>
+inline shader_base<ShaderType>::shader_base(const GLchar* pszShaderCode)
 {
-    Init(pszShaderCode, eShaderType);
+    Init(pszShaderCode);
 }
 
 //==============================================================================
@@ -34,7 +35,8 @@ inline shader_base::shader_base(const GLchar* pszShaderCode,  GLenum eShaderType
 //!\author Khrapov
 //!\date   17.06.2019
 //==============================================================================
-inline shader_base::~shader_base()
+template <GLenum ShaderType>
+inline shader_base<ShaderType>::~shader_base()
 {
     // shader deleted in shader_program::Link
     if (m_nShader != UINT_EMPTY_VALUE && GetParameter(GL_DELETE_STATUS) != GL_TRUE)
@@ -55,10 +57,11 @@ inline shader_base::~shader_base()
 //!\author Khrapov
 //!\date   16.01.2020
 //==============================================================================
-inline void shader_base::Init(const GLchar* pszShaderCode, GLenum eShaderType)
+template <GLenum ShaderType>
+inline void shader_base<ShaderType>::Init(const GLchar* pszShaderCode)
 {
     // Compile
-    m_nShader = glCreateShader(eShaderType);
+    m_nShader = glCreateShader(ShaderType);
     glShaderSource(m_nShader, 1, &pszShaderCode, NULL);
     glCompileShader(m_nShader);
 
@@ -80,7 +83,8 @@ inline void shader_base::Init(const GLchar* pszShaderCode, GLenum eShaderType)
 //!\author Khrapov
 //!\date   16.01.2020
 //==============================================================================
-inline GLint shader_base::GetParameter(GLenum eParameter) const
+template <GLenum ShaderType>
+inline GLint shader_base<ShaderType>::GetParameter(GLenum eParameter) const
 {
     GLint nRet = UINT_EMPTY_VALUE;
     glGetShaderiv(m_nShader, eParameter, &nRet);

@@ -45,9 +45,12 @@ public:
            ~shader_program  (void);
 
     void    Init            (void);
-    void    AttachShader    (shader_base      * pShader);
+
+    template <GLenum ShaderType>
+    void    AttachShader    (shader_base<ShaderType>* pShader);
     bool    Link            (void);
     void    Use             (void);
+    void    Unuse           (void);
     void    DispatchCompute (GLuint             nGroupsX,
                              GLuint             nGroupsY,
                              GLuint             nGroupsZ);

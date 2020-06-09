@@ -718,7 +718,7 @@ inline void sort(RandomIt begin, RandomIt end, Compare compare = Compare())
 template <typename Container, typename Compare = std::less<>>
 inline void sort(Container& cont, Compare compare = Compare())
 {
-    sort(cont.begin(), cont.end(), compare);
+    qx::sort(cont.begin(), cont.end(), compare);
 }
 
 }

@@ -43,42 +43,55 @@ inline fbo::~fbo(void)
 //!\fn                            fbo::Init
 //
 //!\brief  Init FBO
-//!\param  pszVertShaderCode - vertex shader code
-//!\param  pszFragShaderCode - fragment shader code
 //!\param  nWidth            - FBO width
 //!\param  nHeight           - FBO height
+//!\param  pszVertShaderCode - vertex shader code
+//!\param  pszFragShaderCode - fragment shader code
+//!\param  bMultisampled     - use multisampled fbo
 //!\author Khrapov
 //!\date   20.01.2020
 //==============================================================================
-inline void fbo::Init(const GLchar*   pszVertShaderCode,
-                      const GLchar*   pszFragShaderCode, 
-                      GLsizei         nWidth, 
-                      GLsizei         nHeight)
+inline void fbo::Init(GLsizei         nWidth, 
+                      GLsizei         nHeight,
+                      const GLchar*   pszVertShaderCode,
+                      const GLchar*   pszFragShaderCode,
+                      bool            bMultisampled)
 {
-    // screen quad VAO
-    m_QuadVAO.Generate();
-    m_QuadVBO.Generate();
+    m_bMultisampled = bMultisampled;
 
-    m_QuadVAO.Bind();
+    if (pszVertShaderCode && pszFragShaderCode)
+    {
+        // screen quad VAO
+        m_QuadVAO.Generate();
+        m_QuadVBO.Generate();
 
-    m_QuadVBO.Update(sizeof(quadVertices), &quadVertices, GL_STATIC_DRAW);
+        m_QuadVAO.Bind();
 
-    m_QuadVAO.EnableVertexArrtibArray(0);
-    m_QuadVAO.VertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 4 * sizeof(float), 0);
+        m_QuadVBO.Update(sizeof(quadVertices), &quadVertices, GL_STATIC_DRAW);
 
-    m_QuadVAO.EnableVertexArrtibArray(1);
-    m_QuadVAO.VertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 4 * sizeof(float), 2 * sizeof(float));
+        m_QuadVAO.EnableVertexArrtibArray(0);
+        m_QuadVAO.VertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 4 * sizeof(float), 0);
 
-    shader_vert shaderVertFramebuffer(pszVertShaderCode);
-    shader_frag shaderFragFramebuffer(pszFragShaderCode);
+        m_QuadVAO.EnableVertexArrtibArray(1);
+        m_QuadVAO.VertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 4 * sizeof(float), 2 * sizeof(float));
 
-    m_FBOShaderProgram.Init();
-    m_FBOShaderProgram.AttachShader(&shaderVertFramebuffer);
-    m_FBOShaderProgram.AttachShader(&shaderFragFramebuffer);
-    m_FBOShaderProgram.Link();
+        m_FBOShaderProgram.Init();
 
-    m_FBOShaderProgram.Use();
-    m_FBOShaderProgram.SetUniform("screenTexture", 0);
+        shader_vert shaderVertFramebuffer;
+        shader_frag shaderFragFramebuffer;
+
+        shaderVertFramebuffer.Init(pszVertShaderCode);
+        shaderFragFramebuffer.Init(pszFragShaderCode);
+
+        m_FBOShaderProgram.AttachShader(&shaderVertFramebuffer);
+        m_FBOShaderProgram.AttachShader(&shaderFragFramebuffer);
+
+        m_FBOShaderProgram.Link();
+
+        m_FBOShaderProgram.Use();
+        m_FBOShaderProgram.SetUniform("screenTexture", 0);
+        m_FBOShaderProgram.Unuse();
+    }
 
     // generate framebuffer
     Generate();
@@ -86,17 +99,90 @@ inline void fbo::Init(const GLchar*   pszVertShaderCode,
 
     // create a color attachment texture
     m_TextureColorbuffer.Generate();
+    m_TextureColorbuffer.SetTarget(m_bMultisampled ? GL_TEXTURE_2D_MULTISAMPLE : GL_TEXTURE_2D);
     m_TextureColorbuffer.Bind();
-    m_TextureColorbuffer.Specify2DTexImage(0, GL_RGB, nWidth, nHeight, GL_RGB, GL_UNSIGNED_BYTE);
-    m_TextureColorbuffer.SetParameter(GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-    m_TextureColorbuffer.SetParameter(GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+
+    if (!m_bMultisampled)
+    {
+        m_TextureColorbuffer.Specify2DTexImage(0, GL_RGB, nWidth, nHeight, GL_RGB, GL_UNSIGNED_BYTE);
+        m_TextureColorbuffer.SetParameter(GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+        m_TextureColorbuffer.SetParameter(GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+    }
+    else
+    {
+        m_TextureColorbuffer.Specify2DMultisample(4, GL_RGB, nWidth, nHeight, true);
+    }
+    m_TextureColorbuffer.Unbind();
+
     AttachTexture(m_TextureColorbuffer);
 
-    m_RBO.Init(nWidth, nHeight);
+    m_RBO.Init(nWidth, nHeight, m_bMultisampled);
     AttachRBO(m_RBO);
 
     // check framebuffer status
-    ASSERT(glCheckFramebufferStatus(GL_FRAMEBUFFER) == GL_FRAMEBUFFER_COMPLETE);
+    if (auto eStatus = glCheckFramebufferStatus(GL_FRAMEBUFFER); eStatus != GL_FRAMEBUFFER_COMPLETE)
+    {
+        char const * pszErrorMsg = nullptr;
+        switch (eStatus)
+        {
+        case GL_FRAMEBUFFER_UNDEFINED:                      
+            pszErrorMsg = "The specified framebuffer is the default read or draw"
+                "framebuffer, but the default framebuffer does not exist."; 
+            break;
+
+        case GL_FRAMEBUFFER_INCOMPLETE_ATTACHMENT:          
+            pszErrorMsg = "Any of the framebuffer attachment points "
+                "are framebuffer incomplete."; 
+            break;
+
+        case GL_FRAMEBUFFER_INCOMPLETE_MISSING_ATTACHMENT:  
+            pszErrorMsg = "The framebuffer does not have at least one "
+                "image attached to it."; 
+            break;
+
+        case GL_FRAMEBUFFER_INCOMPLETE_DRAW_BUFFER:         
+            pszErrorMsg = "The value of GL_FRAMEBUFFER_ATTACHMENT_OBJECT_TYPE is GL_NONE "
+                "for any color attachment point(s) named by GL_DRAW_BUFFERi."; 
+            break;
+
+        case GL_FRAMEBUFFER_INCOMPLETE_READ_BUFFER:         
+            pszErrorMsg = "GL_READ_BUFFER is not GL_NONE and the value of "
+                "GL_FRAMEBUFFER_ATTACHMENT_OBJECT_TYPE is GL_NONE "
+                "for the color attachment point named by GL_READ_BUFFER."; 
+            break;
+
+        case GL_FRAMEBUFFER_UNSUPPORTED:                    
+            pszErrorMsg = "The combination of internal formats of the attached "
+                "images violates an implementation - dependent set of restrictions."; 
+            break;
+
+        case GL_FRAMEBUFFER_INCOMPLETE_MULTISAMPLE:         
+            pszErrorMsg = "The value of GL_RENDERBUFFER_SAMPLES is not the "
+                "same for all attached renderbuffers; if the value of "
+                "GL_TEXTURE_SAMPLES is the not same for all attached textures; "
+                "or , if the attached images are a mix of renderbuffersand textures, "
+                "the value of GL_RENDERBUFFER_SAMPLES does not match the value "
+                "of GL_TEXTURE_SAMPLES. Also returned if the value "
+                "of GL_TEXTURE_FIXED_SAMPLE_LOCATIONS is not the same for all "
+                "attached textures; or , if the attached images are a mix "
+                "of renderbuffersand textures, the value of "
+                "GL_TEXTURE_FIXED_SAMPLE_LOCATIONS is not GL_TRUE for all attached textures."; 
+            break;
+
+        case GL_FRAMEBUFFER_INCOMPLETE_LAYER_TARGETS:       
+            pszErrorMsg = "Any framebuffer attachment is layered, and any "
+                "populated attachment is not layered, or if all populated "
+                "color attachments are not from textures of the same target."; 
+            break;
+
+        default:
+            pszErrorMsg = "Unknown error";
+            break;
+        }
+
+        ASSERT_MSG(0, "Framebuffer status is not complete: Status: %d, Error: %s", 
+                   eStatus, pszErrorMsg);
+    }
 
     // drop framebuffer
     Unbind();
@@ -151,38 +237,35 @@ inline void fbo::Unbind(void) const
 }
 
 //==============================================================================
-//!\fn                         fbo::StartFrame
-//
-//!\brief  Start frame rendering
-//!\author Khrapov
-//!\date   20.01.2020
-//==============================================================================
-inline void fbo::StartFrame(void)
-{
-    Bind();
-    glEnable(GL_DEPTH_TEST);
-    glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
-}
-
-//==============================================================================
-//!\fn                          fbo::EndFrame
+//!\fn                        fbo::DrawFboQuad
 //
 //!\brief  End frame rendering
 //!\author Khrapov
 //!\date   20.01.2020
 //==============================================================================
-inline void fbo::EndFrame(void)
+inline void fbo::DrawFboQuad(void)
 {
-    glDisable(GL_DEPTH_TEST);
-    Unbind();
-
     m_FBOShaderProgram.Use();
     m_QuadVAO.Bind();
 
     glActiveTexture(GL_TEXTURE0);
     m_TextureColorbuffer.Bind();
     glDrawArrays(GL_TRIANGLES, 0, 6);
+
+    m_FBOShaderProgram.Unuse();
+}
+
+//==============================================================================
+//!\fn                            fbo::Bind
+//
+//!\brief  Bind buffer with target
+//!\param  target - Target
+//!\author Khrapov
+//!\date   20.01.2020
+//==============================================================================
+inline void fbo::Bind(GLenum target)
+{
+    glBindFramebuffer(target, m_nBuffer);
 }
 
 //==============================================================================
@@ -195,7 +278,10 @@ inline void fbo::EndFrame(void)
 //==============================================================================
 inline void fbo::AttachRBO(const rbo& rbo)
 {
-    glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_STENCIL_ATTACHMENT, GL_RENDERBUFFER, rbo.GetBufferName());
+    glFramebufferRenderbuffer(GL_FRAMEBUFFER, 
+                              GL_DEPTH_STENCIL_ATTACHMENT, 
+                              GL_RENDERBUFFER, 
+                              rbo.GetBufferName());
 }
 
 //==============================================================================
@@ -208,7 +294,11 @@ inline void fbo::AttachRBO(const rbo& rbo)
 //==============================================================================
 inline void fbo::AttachTexture(const texture& texture)
 {
-    glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, texture.GetBufferName(), 0);
+    glFramebufferTexture2D(GL_FRAMEBUFFER, 
+                           GL_COLOR_ATTACHMENT0, 
+                           m_bMultisampled ? GL_TEXTURE_2D_MULTISAMPLE : GL_TEXTURE_2D,
+                           texture.GetBufferName(), 
+                           0);
 }
 
 }

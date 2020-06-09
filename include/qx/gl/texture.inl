@@ -129,6 +129,26 @@ inline void texture::Specify2DTexImage(GLint         level,
 }
 
 //==============================================================================
+//!\fn                        texture::Specify2DMultisample
+//
+//!\brief  Establish parameters of a multisample texture's image
+//!\param  nSamples              - level-of-detail number.
+//!\param  eInternalformat       - number of color components in the texture
+//!\param  nWidth                - width of the texture image
+//!\param  nHeight               - height of the texture image
+//!\param  bFixedsamplelocations - format of the pixel data
+//!\author Khrapov
+//!\date   23.01.2020
+//==============================================================================
+inline void texture::Specify2DMultisample(GLsizei        nSamples,
+                                          GLenum         eInternalformat,
+                                          GLsizei        nWidth,
+                                          GLsizei        nHeight,
+                                          GLboolean      bFixedsamplelocations)
+{
+    glTexImage2DMultisample(m_eTextureTarget, nSamples, GL_RGB, nWidth, nHeight, GL_TRUE);
+}
+//==============================================================================
 //!\fn                     texture::GenerateMipmap
 //
 //!\brief  Generate mipmap for texture

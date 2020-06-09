@@ -30,83 +30,33 @@ namespace qx::gl
 //!\date    17.06.2019
 //
 //==============================================================================
+template <GLenum ShaderType>
 class shader_base
 {
 public:
 
     QX_NONCOPYBLE(shader_base)
 
-                    shader_base     (void) = default;
-                    shader_base     (const GLchar * pszShaderCode,
-                                     GLenum         eShaderType);
-    virtual        ~shader_base     (void);
+            shader_base     (void) = default;
+            shader_base     (const GLchar * pszShaderCode);
+            ~shader_base    (void);
 
-            void    Init            (const GLchar * pszShaderCode,
-                                     GLenum         eShaderType);
-            GLuint  GetID           (void)                          const;
-            GLint   GetParameter    (GLenum         eParameter)     const;
-
-    virtual GLenum  GetShaderType   (void)                          const = 0;
+    void    Init            (const GLchar * pszShaderCode);
+    GLuint  GetID           (void)                          const;
+    GLint   GetParameter    (GLenum         eParameter)     const;
     
 private:
+
     GLuint m_nShader = UINT_EMPTY_VALUE;
 };
 
-inline GLuint shader_base::GetID(void) const { return m_nShader; }
+template <GLenum ShaderType>
+inline GLuint shader_base<ShaderType>::GetID(void) const { return m_nShader; }
 
-//==============================================================================
-//
-//!\class                        shader_vert
-//
-//!\brief   Vertex shader class
-//!\details ~
-//
-//!\author  Khrapov
-//!\date    17.01.2020
-//
-//==============================================================================
-class shader_vert : public shader_base
-{
-public:
-    shader_vert(const GLchar* pszShaderText) : shader_base(pszShaderText, GetShaderType()) { }
-    virtual GLenum GetShaderType(void) const override { return GL_VERTEX_SHADER; };
-};
-
-//==============================================================================
-//
-//!\class                        shader_frag
-//
-//!\brief   Fragment shader class
-//!\details ~
-//
-//!\author  Khrapov
-//!\date    17.01.2020
-//
-//==============================================================================
-class shader_frag : public shader_base
-{
-public:
-    shader_frag(const GLchar* pszShaderText) : shader_base(pszShaderText, GetShaderType()) { }
-    virtual GLenum GetShaderType(void) const override { return GL_FRAGMENT_SHADER; };
-};
-
-//==============================================================================
-//
-//!\class                        shader_comp
-//
-//!\brief   Compute shader class
-//!\details ~
-//
-//!\author  Khrapov
-//!\date    17.01.2020
-//
-//==============================================================================
-class shader_comp : public shader_base
-{
-public:
-    shader_comp(const GLchar* pszShaderText) : shader_base(pszShaderText, GetShaderType()) { }
-    virtual GLenum GetShaderType(void) const override { return GL_COMPUTE_SHADER; };
-};
+using shader_vert = shader_base<GL_VERTEX_SHADER>;
+using shader_frag = shader_base<GL_FRAGMENT_SHADER>;
+using shader_comp = shader_base<GL_COMPUTE_SHADER>;
+using shader_geom = shader_base<GL_GEOMETRY_SHADER_ARB>;
 
 }
 

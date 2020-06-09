@@ -38,7 +38,8 @@ public:
             rbo                     (void) = default;
 
     void    Init                    (GLsizei    nWidth,
-                                     GLsizei    nHeight);
+                                     GLsizei    nHeight,
+                                     bool       bMultisampled = false);
 
     virtual void    Generate        (void)          override;
     virtual void    Delete          (void)          override;

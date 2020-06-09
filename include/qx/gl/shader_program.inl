@@ -47,7 +47,8 @@ inline void shader_program::Init(void)
 //!\author Khrapov
 //!\date   16.01.2020
 //==============================================================================
-inline void shader_program::AttachShader(shader_base* pShader)
+template <GLenum ShaderType>
+inline void shader_program::AttachShader(shader_base<ShaderType>* pShader)
 {
     glAttachShader(m_nProgram, pShader->GetID());
     m_AttachedShaders.push_back(pShader->GetID());
@@ -92,6 +93,18 @@ inline bool shader_program::Link(void)
 inline void shader_program::Use(void)
 {
     glUseProgram(m_nProgram);
+}
+
+//==============================================================================
+//!\fn                       shader_program::Use
+//
+//!\brief  Drop current shader
+//!\author Khrapov
+//!\date   16.01.2020
+//==============================================================================
+inline void shader_program::Unuse(void)
+{
+    glUseProgram(0);
 }
 
 //==============================================================================

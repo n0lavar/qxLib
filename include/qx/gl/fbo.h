@@ -42,10 +42,11 @@ public:
                     fbo             (void) = default;
                     ~fbo            (void);
 
-            void    Init            (const GLchar    * pszVertShaderCode,
-                                     const GLchar    * pszFragShaderCode,
-                                     GLsizei           nWidth,
-                                     GLsizei           nHeight);
+            void    Init            (GLsizei            nWidth,
+                                     GLsizei            nHeight,
+                                     const GLchar     * pszVertShaderCode   = nullptr,
+                                     const GLchar     * pszFragShaderCode   = nullptr,
+                                     bool               bMultisampled       = false);
 
     virtual void    Generate        (void)          override;
     virtual void    Delete          (void)          override;
@@ -53,8 +54,9 @@ public:
     virtual void    Unbind          (void) const    override;
     virtual GLuint  GetBufferName   (void) const    override;
 
-            void    StartFrame      (void);
-            void    EndFrame        (void);
+            void    DrawFboQuad     (void);
+
+            void    Bind            (GLenum target);
 
 private:
             void    AttachRBO       (const rbo    & rbo);
@@ -67,6 +69,7 @@ private:
     vbo             m_QuadVBO;
     rbo             m_RBO;
     texture         m_TextureColorbuffer;
+    bool            m_bMultisampled         = false;
 
     GLuint          m_nBuffer               = UINT_EMPTY_VALUE;
 };

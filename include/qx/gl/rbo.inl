@@ -23,14 +23,19 @@ namespace qx::gl
 //!\author Khrapov
 //!\date   20.01.2020
 //==============================================================================
-inline void rbo::Init(GLsizei nWidth, GLsizei nHeight)
+inline void rbo::Init(GLsizei nWidth, GLsizei nHeight, bool bMultisampled)
 {
     // create a renderbuffer object for depth and stencil attachment
     Generate();
     Bind();
 
     // use a single renderbuffer object for both a depth AND stencil buffer.
-    glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH24_STENCIL8, nWidth, nHeight);
+    if (bMultisampled)
+        glRenderbufferStorageMultisample(GL_RENDERBUFFER, 4, GL_DEPTH24_STENCIL8, nWidth, nHeight);
+    else
+        glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH24_STENCIL8, nWidth, nHeight);
+
+    Unbind();
 }
 
 //==============================================================================

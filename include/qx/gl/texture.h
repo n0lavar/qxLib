@@ -53,6 +53,11 @@ public:
                                          GLenum         type,
                                          const void*    pData   = nullptr,
                                          GLenum         eTarget = -1);
+            void    Specify2DMultisample(GLsizei        nSamples,
+  	                                     GLenum         eInternalformat,
+  	                                     GLsizei        nWidth,
+  	                                     GLsizei        nHeight,
+  	                                     GLboolean      bFixedsamplelocations);
             void    GenerateMipmap      (void);
 
     template<typename T>
