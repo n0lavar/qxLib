@@ -46,7 +46,7 @@ public:
                                      GLsizei            nHeight,
                                      const GLchar     * pszVertShaderCode   = nullptr,
                                      const GLchar     * pszFragShaderCode   = nullptr,
-                                     bool               bMultisampled       = false);
+                                     size_t             nMultisamples       = 0);
 
     virtual void    Generate        (void)          override;
     virtual void    Delete          (void)          override;
@@ -69,7 +69,7 @@ private:
     vbo             m_QuadVBO;
     rbo             m_RBO;
     texture         m_TextureColorbuffer;
-    bool            m_bMultisampled         = false;
+    size_t          m_nMultisamples         = 0;    // 0 - no multisampling
 
     GLuint          m_nBuffer               = UINT_EMPTY_VALUE;
 };

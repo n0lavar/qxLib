@@ -47,17 +47,17 @@ inline fbo::~fbo(void)
 //!\param  nHeight           - FBO height
 //!\param  pszVertShaderCode - vertex shader code
 //!\param  pszFragShaderCode - fragment shader code
-//!\param  bMultisampled     - use multisampled fbo
+//!\param  nMultisamples     - samples number, 0 - disable
 //!\author Khrapov
 //!\date   20.01.2020
 //==============================================================================
-inline void fbo::Init(GLsizei         nWidth, 
-                      GLsizei         nHeight,
-                      const GLchar*   pszVertShaderCode,
-                      const GLchar*   pszFragShaderCode,
-                      bool            bMultisampled)
+inline void fbo::Init(GLsizei       nWidth, 
+                      GLsizei       nHeight,
+                      const GLchar* pszVertShaderCode,
+                      const GLchar* pszFragShaderCode,
+                      size_t        nMultisamples)
 {
-    m_bMultisampled = bMultisampled;
+    m_nMultisamples = nMultisamples;
 
     if (pszVertShaderCode && pszFragShaderCode)
     {
@@ -99,10 +99,10 @@ inline void fbo::Init(GLsizei         nWidth,
 
     // create a color attachment texture
     m_TextureColorbuffer.Generate();
-    m_TextureColorbuffer.SetTarget(m_bMultisampled ? GL_TEXTURE_2D_MULTISAMPLE : GL_TEXTURE_2D);
+    m_TextureColorbuffer.SetTarget(m_nMultisamples ? GL_TEXTURE_2D_MULTISAMPLE : GL_TEXTURE_2D);
     m_TextureColorbuffer.Bind();
 
-    if (!m_bMultisampled)
+    if (!m_nMultisamples || m_nMultisamples % 2 != 0)
     {
         m_TextureColorbuffer.Specify2DTexImage(0, GL_RGB, nWidth, nHeight, GL_RGB, GL_UNSIGNED_BYTE);
         m_TextureColorbuffer.SetParameter(GL_TEXTURE_MIN_FILTER, GL_LINEAR);
@@ -110,13 +110,13 @@ inline void fbo::Init(GLsizei         nWidth,
     }
     else
     {
-        m_TextureColorbuffer.Specify2DMultisample(4, GL_RGB, nWidth, nHeight, true);
+        m_TextureColorbuffer.Specify2DMultisample(m_nMultisamples, GL_RGB, nWidth, nHeight, true);
     }
     m_TextureColorbuffer.Unbind();
 
     AttachTexture(m_TextureColorbuffer);
 
-    m_RBO.Init(nWidth, nHeight, m_bMultisampled);
+    m_RBO.Init(nWidth, nHeight, nMultisamples);
     AttachRBO(m_RBO);
 
     // check framebuffer status
@@ -296,7 +296,7 @@ inline void fbo::AttachTexture(const texture& texture)
 {
     glFramebufferTexture2D(GL_FRAMEBUFFER, 
                            GL_COLOR_ATTACHMENT0, 
-                           m_bMultisampled ? GL_TEXTURE_2D_MULTISAMPLE : GL_TEXTURE_2D,
+                           m_nMultisamples ? GL_TEXTURE_2D_MULTISAMPLE : GL_TEXTURE_2D,
                            texture.GetBufferName(), 
                            0);
 }

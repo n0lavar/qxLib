@@ -18,22 +18,31 @@ namespace qx::gl
 //!\fn                            rbo::Init
 //
 //!\brief  Init RBO with width and height
-//!\param  nWidth  - width
-//!\param  nHeight - height
+//!\param  nWidth        - width
+//!\param  nHeight       - height
+//!\param  nMultisamples - samples number, 0 - disable
 //!\author Khrapov
 //!\date   20.01.2020
 //==============================================================================
-inline void rbo::Init(GLsizei nWidth, GLsizei nHeight, bool bMultisampled)
+inline void rbo::Init(GLsizei nWidth, GLsizei nHeight, size_t nMultisamples)
 {
     // create a renderbuffer object for depth and stencil attachment
     Generate();
     Bind();
 
-    // use a single renderbuffer object for both a depth AND stencil buffer.
-    if (bMultisampled)
-        glRenderbufferStorageMultisample(GL_RENDERBUFFER, 4, GL_DEPTH24_STENCIL8, nWidth, nHeight);
+    // use a single renderbuffer object for both a depth and stencil buffer.
+    if (nMultisamples)
+    {
+        glRenderbufferStorageMultisample(GL_RENDERBUFFER, 
+                                         nMultisamples, 
+                                         GL_DEPTH24_STENCIL8, 
+                                         nWidth, 
+                                         nHeight);
+    }
     else
+    {
         glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH24_STENCIL8, nWidth, nHeight);
+    }
 
     Unbind();
 }
