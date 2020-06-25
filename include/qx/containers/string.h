@@ -31,7 +31,7 @@ template<class Traits>
 struct SStrData;
 
 //!< case types for .apply_case()
-enum class eCaseType
+enum class ECaseType
 {
     lower,
     upper,
@@ -53,7 +53,7 @@ class basic_string
 {
     using vector = std::vector<basic_string>;
 
-    enum class eResizeType
+    enum class EResizeType
     {
         common,
         reserve,
@@ -178,7 +178,7 @@ public:
     vector                  split        (const value_type       sep)                   const;
     vector                  split        (const basic_string   & sep)                   const;
     
-    void                    apply_case   (eCaseType              ct);
+    void                    apply_case   (ECaseType              ct);
 
     value_type              front        (void)                                         const { return at(0);           }
     value_type              back         (void)                                         const { return at(size() - 1);  }
@@ -223,15 +223,15 @@ public:
     const_reference         operator[]   (size_type              ind)       const { return operator[](ind);                                     }
 
 private:
-    SStrData<Traits>          * GetStrData      (void);
-    const SStrData<Traits>    * GetStrData      (void)                                          const;
-    bool                        Resize          (size_type              nSymbols,
-                                                 size_type              nAlign          = 0,
-                                                 eResizeType            eType           = eResizeType::common);
-    void                        Append          (const_pointer          pSource,
-                                                 size_type              nSymbols);
-    int                         Compare         (const_pointer          pStr,
-                                                 size_type              nSymbols = 0)           const;
+    SStrData<Traits>      * GetStrData   (void);
+    const SStrData<Traits>* GetStrData   (void)                                                     const;
+    bool                    Resize       (size_type              nSymbols,
+                                          size_type              nAlign     = 0,
+                                          EResizeType            eType      = EResizeType::common);
+    void                    Append       (const_pointer          pSource,
+                                          size_type              nSymbols);
+    int                     Compare      (const_pointer          pStr,
+                                          size_type              nSymbols   = 0)                    const;
 private:
     pointer m_pData = nullptr;
 };

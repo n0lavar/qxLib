@@ -523,17 +523,17 @@ TYPED_TEST(TestQxString, apply_case)
     StringTypeTn str(STR("maNy diffeRent words placEd Here. yoU can test,iT. really"));
 
     StringTypeTn str0(str);
-    str0.apply_case(qx::eCaseType::lower);
+    str0.apply_case(qx::ECaseType::lower);
     EXPECT_EQ(str0.size(), str.size());
     EXPECT_STREQ(str0.data(), STR("many different words placed here. you can test,it. really"));
 
     StringTypeTn str1(str);
-    str1.apply_case(qx::eCaseType::upper);
+    str1.apply_case(qx::ECaseType::upper);
     EXPECT_EQ(str1.size(), str.size());
     EXPECT_STREQ(str1.data(), STR("MANY DIFFERENT WORDS PLACED HERE. YOU CAN TEST,IT. REALLY"));
 
     StringTypeTn str2(str);
-    str2.apply_case(qx::eCaseType::random);
+    str2.apply_case(qx::ECaseType::random);
     EXPECT_EQ(str2.size(), str.size());
 }
 

@@ -136,7 +136,7 @@ template<class FwdIt>
 inline void basic_string<Traits>::assign(FwdIt first, FwdIt last)
 {
     clear();
-    for (FwdIt it = first; it != last; it++)
+    for (FwdIt it = first; it != last; ++it)
         push_back(*it);
 }
 
@@ -206,7 +206,7 @@ template<class Traits>
 inline typename basic_string<Traits>::size_type basic_string<Traits>::reserve(size_type nCapacity)
 {
     if (nCapacity > size())
-        Resize(nCapacity, Traits::talign(), eResizeType::reserve);
+        Resize(nCapacity, Traits::talign(), EResizeType::reserve);
 
     return capacity();
 }
@@ -222,7 +222,7 @@ inline void basic_string<Traits>::fit(void)
 {
     auto pData = GetStrData();
     if (pData && pData->nAllocatedSize > pData->nSize)
-        Resize(pData->nSize, 0, eResizeType::fit);
+        Resize(pData->nSize, 0, EResizeType::fit);
 }
 
 //==============================================================================
@@ -661,28 +661,28 @@ inline typename qx::basic_string<Traits>::vector qx::basic_string<Traits>::split
 //!\fn              basic_string<Traits>::apply_case
 //
 //!\brief  Apply case type to the whole string
-//!\param  ct - case type \see eCaseType
+//!\param  ct - case type \see ECaseType
 //!\author Khrapov
 //!\date   31.10.2019
 //==============================================================================
 template<class Traits>
-inline void basic_string<Traits>::apply_case(eCaseType ct)
+inline void basic_string<Traits>::apply_case(ECaseType ct)
 {
     switch (ct)
     {
-    case eCaseType::lower:
+    case ECaseType::lower:
         for (value_type& ch : *this)
             ch = Traits::ttolower(ch);
 
         break;
 
-    case eCaseType::upper:
+    case ECaseType::upper:
         for (value_type& ch : *this)
             ch = Traits::ttoupper(ch);
 
         break;
 
-    case eCaseType::random:
+    case ECaseType::random:
         for (value_type& ch : *this)
         {
             ch = qx::random(0, 1)
@@ -1013,7 +1013,7 @@ inline const SStrData<Traits>* basic_string<Traits>::GetStrData(void) const
 //!\date   29.10.2019
 //==============================================================================
 template<class Traits>
-inline bool basic_string<Traits>::Resize(size_type nSymbols, size_type nAlign, eResizeType eType)
+inline bool basic_string<Traits>::Resize(size_type nSymbols, size_type nAlign, EResizeType eType)
 {
     typename Traits::size_type nSizeToAllocate = nAlign
         ? qx::align_size<typename Traits::value_type>(nSymbols + 1, nAlign)
@@ -1022,7 +1022,7 @@ inline bool basic_string<Traits>::Resize(size_type nSymbols, size_type nAlign, e
     SStrData<Traits>* pStrData = GetStrData();
     bool bEmptyAtStart = !pStrData;
 
-    if (eType == eResizeType::fit                       // need to decrease size
+    if (eType == EResizeType::fit                       // need to decrease size
         || bEmptyAtStart                                // string empty
         || nSizeToAllocate > pStrData->nAllocatedSize)  // need to increase size
     {
@@ -1039,7 +1039,7 @@ inline bool basic_string<Traits>::Resize(size_type nSymbols, size_type nAlign, e
             return false;
     }
 
-    if (eType == eResizeType::common)
+    if (eType == EResizeType::common)
     {
         m_pData[nSymbols] = Traits::teol();
         pStrData->nSize = nSymbols;

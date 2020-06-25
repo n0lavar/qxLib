@@ -130,19 +130,6 @@ namespace qx::detail
 
 //==============================================================================
 
-namespace qx::detail
-{
-    template<typename ...Args>
-    constexpr std::size_t va_count(Args&...) { return sizeof...(Args); }
-}
-
-/*
-    Variadic argument count
-*/
-#define VA_COUNT(...) qx::detail::va_count(__VA_ARGS__)
-
-//==============================================================================
-
 /*
     Let macro param containing commas work fine
 
@@ -160,11 +147,11 @@ namespace qx::detail
 
 #ifndef ENABLE_ASSERTS
     #define ENABLE_ASSERTS _DEBUG
-#endif // !ENABLE_ASSERTS
+#endif
 
 #ifndef ENABLE_DEBUG_BREAK
     #define ENABLE_DEBUG_BREAK _DEBUG
-#endif // !ENABLE_DEBUG_BREAK
+#endif
 
 #ifndef PROCESS_ASSERT
     #define PROCESS_ASSERT(statement) EMPTY_MACRO
@@ -249,3 +236,10 @@ if (condition)
 
 //==============================================================================
 
+/*
+    Stub for not implemented yet code lines
+*/
+
+#define ASSERT_NOT_IMPL ASSERT_MSG(0, "Implementation isn't ready")
+
+//==============================================================================
