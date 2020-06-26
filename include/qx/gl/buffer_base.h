@@ -14,7 +14,7 @@
 
 #include <qx/other/useful_macros.h>
 #include <qx/other/typedefs.h>
-#include <qx/gl/iBuffer.h>
+#include <qx/gl/ibuffer.h>
 
 namespace qx::gl
 {

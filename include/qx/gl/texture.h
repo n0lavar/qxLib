@@ -13,7 +13,7 @@
 #pragma once
 
 #include <qx/other/typedefs.h>
-#include <qx/gl/iBuffer.h>
+#include <qx/gl/ibuffer.h>
 
 namespace qx::gl
 {

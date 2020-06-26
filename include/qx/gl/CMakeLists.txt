@@ -1,6 +1,6 @@
 
 set(FOLDER_FILES
-    ${CMAKE_CURRENT_SOURCE_DIR}/qxgl.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/ibuffer.h
 
     ${CMAKE_CURRENT_SOURCE_DIR}/buffer_base.h
     ${CMAKE_CURRENT_SOURCE_DIR}/ubo.h
@@ -11,7 +11,6 @@ set(FOLDER_FILES
     ${CMAKE_CURRENT_SOURCE_DIR}/ebo.h
     ${CMAKE_CURRENT_SOURCE_DIR}/fbo.h
     ${CMAKE_CURRENT_SOURCE_DIR}/rbo.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/iBuffer.h
     ${CMAKE_CURRENT_SOURCE_DIR}/shader_program.h
     ${CMAKE_CURRENT_SOURCE_DIR}/shaders.h
     ${CMAKE_CURRENT_SOURCE_DIR}/texture.h
