@@ -1,6 +1,6 @@
 //==============================================================================
 //
-//!\file                          IBuffer.h
+//!\file                          ibuffer.h
 //
 //!\brief       Contains IBuffer class
 //!\details     ~
