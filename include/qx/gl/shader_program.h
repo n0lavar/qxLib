@@ -17,8 +17,6 @@
 #include <vector>
 #include <memory>
 
-#include <qx/other/noncopyble.h>
-#include <qx/other/useful_macros.h>
 #include <qx/gl/shaders.h>
 
 namespace qx::gl

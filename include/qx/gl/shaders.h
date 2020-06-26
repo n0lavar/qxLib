@@ -14,7 +14,6 @@
 
 #include <glew.h>
 
-#include <qx/other/noncopyble.h>
 #include <qx/other/useful_macros.h>
 
 namespace qx::gl

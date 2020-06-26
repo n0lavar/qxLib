@@ -243,3 +243,15 @@ if (condition)
 #define ASSERT_NOT_IMPL ASSERT_MSG(0, "Implementation isn't ready")
 
 //==============================================================================
+
+/*
+    Define class as non-copyble
+*/
+
+#define QX_NONCOPYBLE(name)                         \
+        name        (name&&) noexcept   = default;  \
+name&   operator=   (name&&) noexcept   = default;  \
+        name        (const name&)       = delete;   \
+name&   operator=   (const name&)       = delete;
+
+//==============================================================================

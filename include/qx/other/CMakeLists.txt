@@ -7,7 +7,6 @@ set(FOLDER_FILES
     ${CMAKE_CURRENT_SOURCE_DIR}/typedefs.h
     ${CMAKE_CURRENT_SOURCE_DIR}/smart_enum.h
     ${CMAKE_CURRENT_SOURCE_DIR}/hashes.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/noncopyble.h
     ${CMAKE_CURRENT_SOURCE_DIR}/benchmark.h
     ${CMAKE_CURRENT_SOURCE_DIR}/random.h
     
