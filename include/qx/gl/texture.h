@@ -43,6 +43,8 @@ public:
     virtual void    Bind                (void) const    override;
     virtual void    Unbind              (void) const    override;
     virtual GLuint  GetBufferName       (void) const    override;
+            GLsizei GetWidth            (void) const;
+            GLsizei GetHeight           (void) const;
 
             void    SetTarget           (GLenum         eTarget);
             void    Specify2DTexImage   (GLint          level,
@@ -61,16 +63,20 @@ public:
             void    GenerateMipmap      (void);
 
     template<typename T>
-            void    SetParameter    (GLenum         target,
-                                     T              value);
+            void    SetParameter        (GLenum         target,
+                                         T              value);
 
 private:
 
     GLuint  m_nTexture          = UINT_EMPTY_VALUE;
     GLenum  m_eTextureTarget    = GL_TEXTURE_2D;
+    GLsizei m_nWidth            = 0;
+    GLsizei m_nHeight           = 0;
 };
 
-inline GLuint   texture::GetBufferName  (void) const { return m_nTexture;   }
+inline GLuint  texture::GetBufferName (void) const { return m_nTexture; }
+inline GLsizei texture::GetWidth      (void) const { return m_nWidth;   }
+inline GLsizei texture::GetHeight     (void) const { return m_nHeight;  }
 
 }
 

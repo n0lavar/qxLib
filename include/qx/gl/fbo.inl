@@ -107,16 +107,18 @@ inline void fbo::AttachRBO(const rbo& rbo)
 //!\fn                         fbo::AttachTexture
 //
 //!\brief  Attach texture th FRO
-//!\param  texture   - fbo texture
-//!\param  texTarget - type of texture is expected in the texture parameter
+//!\param  attachment - attachment point of the framebuffer
+//!\param  texTarget  - type of texture is expected in the texture parameter
+//!\param  texture    - fbo texture
 //!\author Khrapov
 //!\date   20.01.2020
 //==============================================================================
-inline void fbo::AttachTexture(const texture& texture,
-                               GLenum         texTarget)
+inline void fbo::AttachTexture(GLenum          attachment,
+                               GLenum          texTarget,
+                               const texture & texture)
 {
     glFramebufferTexture2D(GL_FRAMEBUFFER, 
-                           GL_COLOR_ATTACHMENT0, 
+                           attachment,
                            texTarget,
                            texture.GetBufferName(), 
                            0);
@@ -204,7 +206,6 @@ inline void fbo::CheckStatus(void) const
                    eStatus, 
                    pszErrorMsg);
     }
-
 }
 
 }

@@ -126,6 +126,9 @@ inline void texture::Specify2DTexImage(GLint         level,
                  format,
                  type,
                  pData);
+
+    m_nWidth  = width;
+    m_nHeight = height;
 }
 
 //==============================================================================
@@ -147,6 +150,9 @@ inline void texture::Specify2DMultisample(GLsizei        nSamples,
                                           GLboolean      bFixedsamplelocations)
 {
     glTexImage2DMultisample(m_eTextureTarget, nSamples, GL_RGB, nWidth, nHeight, GL_TRUE);
+
+    m_nWidth  = nWidth;
+    m_nHeight = nHeight;
 }
 //==============================================================================
 //!\fn                     texture::GenerateMipmap
