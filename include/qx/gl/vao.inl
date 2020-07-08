@@ -48,7 +48,10 @@ inline void vao::Generate(void)
 inline void vao::Delete(void)
 {
     if (m_nVAO != UINT_EMPTY_VALUE)
+    {
         glDeleteVertexArrays(1, &m_nVAO);
+        m_nVAO = UINT_EMPTY_VALUE;
+    }
 }
 
 //==============================================================================

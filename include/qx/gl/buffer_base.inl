@@ -48,7 +48,10 @@ inline void buffer_base::Generate()
 inline void buffer_base::Delete()
 {
     if (m_nBuffer != UINT_EMPTY_VALUE)
+    {
         glDeleteBuffers(1, &m_nBuffer);
+        m_nBuffer = UINT_EMPTY_VALUE;
+    }
 }
 
 //==============================================================================
@@ -112,7 +115,6 @@ inline void buffer_base::MemBarrier()
 //==============================================================================
 inline void buffer_base::Update(GLsizeiptr nSize, const void* pData, GLenum eUsage)
 {
-    Bind();
     glBufferData(GetBufferType(), nSize, pData, eUsage);
 }
 
@@ -128,7 +130,6 @@ inline void buffer_base::Update(GLsizeiptr nSize, const void* pData, GLenum eUsa
 //==============================================================================
 inline void buffer_base::UpdatePart(GLintptr nOffset, GLsizeiptr nSize, const void* pData)
 {
-    Bind();
     glBufferSubData(GetBufferType(), nOffset, nSize, pData);
 }
 

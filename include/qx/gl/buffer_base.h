@@ -39,6 +39,9 @@ public:
     virtual void        Delete              (void)          override;
     virtual void        Bind                (void) const    override;
     virtual void        Unbind              (void) const    override;
+    virtual GLuint      GetBufferName       (void) const    override;
+    virtual bool        IsGenerated         (void) const    override;
+
     virtual void        BindBase            (GLuint         nIndex);
     virtual void        MemBarrier          (void);
 
@@ -53,7 +56,6 @@ protected:
 
     virtual GLenum      GetBufferType       (void) const = 0;
     virtual GLbitfield  GetBarrierBit       (void) const = 0;
-    virtual GLuint      GetBufferName       (void) const    override;
 
 private:
 
@@ -61,7 +63,8 @@ private:
 };
 
 
-inline GLuint buffer_base::GetBufferName(void) const { return m_nBuffer; }
+inline GLuint buffer_base::GetBufferName (void) const { return m_nBuffer; }
+inline bool   buffer_base::IsGenerated   (void) const { return m_nBuffer != UINT_EMPTY_VALUE; }
 
 }
 

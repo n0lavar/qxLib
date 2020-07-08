@@ -46,8 +46,8 @@ inline void ssbo::Init(GLuint nBindingPoint, GLsizeiptr nSize, const void * pDat
     {
         Delete();
 
-        // Create SSBO
         Generate();
+        Bind();
         Update(nSize, pData, GL_STATIC_DRAW);
         BindBase(nBindingPoint);
     }

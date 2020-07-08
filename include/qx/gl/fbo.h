@@ -43,6 +43,7 @@ public:
     virtual void            Bind            (void)                          const    override;
     virtual void            Unbind          (void)                          const    override;
     virtual GLuint          GetBufferName   (void)                          const    override;
+    virtual bool            IsGenerated     (void)                          const    override;
 
             void            Bind            (GLenum             target);
             void            AttachRBO       (const rbo        & rbo);
@@ -63,6 +64,7 @@ private:
 };
 
 inline GLuint                   fbo::GetBufferName  (void) const { return m_nBuffer; }
+inline bool                     fbo::IsGenerated    (void) const { return m_nBuffer != UINT_EMPTY_VALUE; };
 inline qx::gl::texture        & fbo::GetTextureRef  (void)       { return m_Texture; }
 inline const qx::gl::texture  & fbo::GetTexture     (void) const { return m_Texture; }
 

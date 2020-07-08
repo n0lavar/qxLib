@@ -43,6 +43,8 @@ public:
     virtual void    Bind                (void) const    override;
     virtual void    Unbind              (void) const    override;
     virtual GLuint  GetBufferName       (void) const    override;
+    virtual bool    IsGenerated         (void) const    override;
+
             GLsizei GetWidth            (void) const;
             GLsizei GetHeight           (void) const;
 
@@ -75,6 +77,7 @@ private:
 };
 
 inline GLuint  texture::GetBufferName (void) const { return m_nTexture; }
+inline bool    texture::IsGenerated   (void) const { return m_nTexture != UINT_EMPTY_VALUE; };
 inline GLsizei texture::GetWidth      (void) const { return m_nWidth;   }
 inline GLsizei texture::GetHeight     (void) const { return m_nHeight;  }
 

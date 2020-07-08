@@ -40,6 +40,7 @@ inline ubo::ubo(GLuint nBindingPoint, GLsizeiptr szUBO)
 inline void ubo::Init(GLuint nBindingPoint, GLsizeiptr szUBO)
 {
     Generate();
+    Bind();
     Update(szUBO, NULL, GL_STREAM_DRAW);
     BindBase(nBindingPoint);
 }

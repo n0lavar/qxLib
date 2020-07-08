@@ -68,7 +68,11 @@ inline void rbo::Generate(void)
 //==============================================================================
 inline void rbo::Delete(void)
 {
-    glDeleteRenderbuffers(1, &m_nBuffer);
+    if (m_nBuffer != UINT_EMPTY_VALUE)
+    {
+        glDeleteRenderbuffers(1, &m_nBuffer);
+        m_nBuffer = UINT_EMPTY_VALUE;
+    }
 }
 
 //==============================================================================

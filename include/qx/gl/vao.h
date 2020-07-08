@@ -43,6 +43,7 @@ public:
     virtual void    Bind                    (void) const    override;
     virtual void    Unbind                  (void) const    override;
     virtual GLuint  GetBufferName           (void) const    override;
+    virtual bool    IsGenerated             (void) const    override;
 
     void            EnableVertexArrtibArray (GLuint         nIndex);
     void            DisableVertexArrtibArray(GLuint         nIndex);
@@ -58,7 +59,8 @@ private:
     GLuint m_nVAO = UINT_EMPTY_VALUE;
 };
 
-inline GLuint vao::GetBufferName(void) const { return m_nVAO; }
+inline GLuint vao::GetBufferName (void) const { return m_nVAO; }
+inline bool   vao::IsGenerated   (void) const { return m_nVAO != UINT_EMPTY_VALUE; };
 
 }
 

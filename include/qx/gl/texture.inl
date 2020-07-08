@@ -50,8 +50,8 @@ inline void texture::Delete(void)
 {
     if (m_nTexture != UINT_EMPTY_VALUE)
     {
-        // also sets m_nTexture to 0
         glDeleteTextures(1, &m_nTexture);
+        m_nTexture = UINT_EMPTY_VALUE;
     }
 }
 

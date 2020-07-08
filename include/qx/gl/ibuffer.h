@@ -37,6 +37,7 @@ public:
     virtual void    Bind            (void) const    = 0;
     virtual void    Unbind          (void) const    = 0;
     virtual GLuint  GetBufferName   (void) const    = 0;
+    virtual bool    IsGenerated     (void) const    = 0;
 };
 
 }

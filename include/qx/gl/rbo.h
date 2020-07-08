@@ -46,13 +46,15 @@ public:
     virtual void    Bind            (void) const    override;
     virtual void    Unbind          (void) const    override;
     virtual GLuint  GetBufferName   (void) const    override;
+    virtual bool    IsGenerated     (void) const    override;
 
 private:
 
     GLuint m_nBuffer = UINT_EMPTY_VALUE;
 };
 
-inline GLuint rbo::GetBufferName(void) const { return m_nBuffer; }
+inline GLuint rbo::GetBufferName (void) const { return m_nBuffer; }
+inline bool   rbo::IsGenerated   (void) const { return m_nBuffer != UINT_EMPTY_VALUE; };
 
 }
 

@@ -47,7 +47,11 @@ inline void fbo::Generate(void)
 //==============================================================================
 inline void fbo::Delete(void)
 {
-    glDeleteFramebuffers(1, &m_nBuffer);
+    if (m_nBuffer != UINT_EMPTY_VALUE)
+    {
+        glDeleteFramebuffers(1, &m_nBuffer);
+        m_nBuffer = UINT_EMPTY_VALUE;
+    }
 }
 
 //==============================================================================
