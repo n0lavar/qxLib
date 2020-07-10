@@ -2,7 +2,7 @@
 //
 //!\file                            fbo.h
 //
-//!\brief       Contains fbo class
+//!\brief       Frame buffer object classes: fbo and copyble_fbo
 //!\details     ~
 //
 //!\author      Khrapov
@@ -15,28 +15,28 @@
 #include <qx/gl/rbo.h>
 #include <qx/gl/texture.h>
 
-namespace qx::gl
+namespace qx
 {
 
 //==============================================================================
 //
-//!\class                            fbo
+//!\class                      base_fbo<COPYBLE>
 //
-//!\brief   Frame buffer object class
+//!\brief   Base FBO class. Use fbo or copyble_fbo
 //!\details ~
 //
 //!\author  Khrapov
-//!\date    20.01.2020
+//!\date    10.07.2020
 //
 //==============================================================================
-class fbo : public IBuffer
+template<bool COPYBLE>
+class base_fbo : public IBuffer
 {
 public:
 
-    QX_NONCOPYBLE(fbo)
+    friend class base_fbo;
 
-                            fbo             (void) = default;
-    virtual                 ~fbo            (void);
+    virtual                 ~base_fbo       (void);
 
     virtual void            Generate        (void)                                   override;
     virtual void            Delete          (void)                                   override;
@@ -46,27 +46,35 @@ public:
     virtual bool            IsGenerated     (void)                          const    override;
 
             void            Bind            (GLenum             target);
-            void            AttachRBO       (const rbo        & rbo);
+
+    template<bool COPYBLE_RBO>
+            void            AttachRBO       (const base_rbo<COPYBLE_RBO>& rbo);
+
+    template<bool COPYBLE_TEXTURE>
             void            AttachTexture   (GLenum             attachment,
                                              GLenum             texTarget,
-                                             const texture    & texture);
+                                             const base_texture<COPYBLE_TEXTURE>& texture);
             void            CheckStatus     (void)                          const;
-    const qx::gl::texture & GetTexture      (void)                          const;
 
 protected:
 
-    qx::gl::texture       & GetTextureRef   (void);
+    template<class Derived>
+            void            Assign          (const Derived    & other);
 
 private:
 
-    GLuint          m_nBuffer   = UINT_EMPTY_VALUE;
-    qx::gl::texture m_Texture;
+    GLuint  m_nBuffer   = UINT_EMPTY_VALUE;
 };
 
-inline GLuint                   fbo::GetBufferName  (void) const { return m_nBuffer; }
-inline bool                     fbo::IsGenerated    (void) const { return m_nBuffer != UINT_EMPTY_VALUE; };
-inline qx::gl::texture        & fbo::GetTextureRef  (void)       { return m_Texture; }
-inline const qx::gl::texture  & fbo::GetTexture     (void) const { return m_Texture; }
+template<bool COPYBLE>
+inline GLuint base_fbo<COPYBLE>::GetBufferName (void) const { return m_nBuffer; }
+template<bool COPYBLE>
+inline bool  base_fbo<COPYBLE>::IsGenerated (void) const { return m_nBuffer != UINT_EMPTY_VALUE; };
+template<bool COPYBLE>
+template<class Derived>
+inline void  base_fbo<COPYBLE>::Assign(const Derived& other) { m_nBuffer = other.m_nBuffer; }
+
+QX_DEFINE_BUFFER_CLASSES(fbo)
 
 }
 

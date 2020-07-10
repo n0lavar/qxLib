@@ -2,7 +2,7 @@
 //
 //!\file                          texture.h
 //
-//!\brief       
+//!\brief       OpenGL textures classes: texture and copyble_texture
 //!\details     ~
 //
 //!\author      Khrapov
@@ -15,28 +15,29 @@
 #include <qx/other/typedefs.h>
 #include <qx/gl/ibuffer.h>
 
-namespace qx::gl
+namespace qx
 {
 
 //==============================================================================
 //
-//!\class                          texture
+//!\class                    base_texture<COPYBLE>
 //
-//!\brief   OpenGL texture
+//!\brief   Base texture class. Use texture or copyble_texture
 //!\details ~
 //
 //!\author  Khrapov
-//!\date    23.01.2020
+//!\date    10.07.2020
 //
 //==============================================================================
-class texture : public IBuffer
+template<bool COPYBLE>
+class base_texture : public IBuffer
 {
 public:
 
-    QX_NONCOPYBLE(texture)
+    friend class base_texture;
 
-                    texture             (void) = default;
-                    ~texture            (void);
+                    base_texture        (void) = default;
+    virtual         ~base_texture       (void);
 
     virtual void    Generate            (void)          override;
     virtual void    Delete              (void)          override;
@@ -64,9 +65,21 @@ public:
   	                                     GLboolean      bFixedsamplelocations);
             void    GenerateMipmap      (void);
 
-    template<typename T>
             void    SetParameter        (GLenum         target,
-                                         T              value);
+                                         GLfloat        value);
+            void    SetParameter        (GLenum         target,
+                                         GLint          value);
+            void    SetParameter        (GLenum         target,
+                                         const GLfloat* value);
+            void    SetParameter        (GLenum         target,
+                                         const GLint  * value);
+            void    SetParameter        (GLenum         target,
+                                         const GLuint * value);
+
+protected:
+
+    template<class Derived>
+            void    Assign              (const Derived& other);
 
 private:
 
@@ -76,10 +89,16 @@ private:
     GLsizei m_nHeight           = 0;
 };
 
-inline GLuint  texture::GetBufferName (void) const { return m_nTexture; }
-inline bool    texture::IsGenerated   (void) const { return m_nTexture != UINT_EMPTY_VALUE; };
-inline GLsizei texture::GetWidth      (void) const { return m_nWidth;   }
-inline GLsizei texture::GetHeight     (void) const { return m_nHeight;  }
+template<bool COPYBLE>
+inline GLuint  base_texture<COPYBLE>::GetBufferName (void) const { return m_nTexture; }
+template<bool COPYBLE>
+inline bool    base_texture<COPYBLE>::IsGenerated   (void) const { return m_nTexture != UINT_EMPTY_VALUE; };
+template<bool COPYBLE>
+inline GLsizei base_texture<COPYBLE>::GetWidth      (void) const { return m_nWidth;   }
+template<bool COPYBLE>
+inline GLsizei base_texture<COPYBLE>::GetHeight     (void) const { return m_nHeight;  }
+
+QX_DEFINE_BUFFER_CLASSES(texture)
 
 }
 

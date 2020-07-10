@@ -2,7 +2,7 @@
 //
 //!\file                         texture.inl
 //
-//!\brief       
+//!\brief       OpenGL textures classes: texture and copyble_texture
 //!\details     ~
 //
 //!\author      Khrapov
@@ -11,89 +11,98 @@
 //
 //==============================================================================
 
-namespace qx::gl
+namespace qx
 {
 
 //==============================================================================
-//!\fn                        texture::~texture
+//!\fn                base_texture<COPYBLE>::~base_texture
 //
-//!\brief  texture object destructor
+//!\brief  base_texture object destructor
 //!\author Khrapov
-//!\date   15.04.2020
+//!\date   10.07.2020
 //==============================================================================
-inline texture::~texture(void)
+template<bool COPYBLE>
+inline base_texture<COPYBLE>::~base_texture(void)
 {
     Delete();
 }
 
 //==============================================================================
-//!\fn                        texture::Generate
+//!\fn                  base_texture<COPYBLE>::Generate
 //
 //!\brief  Generate texture
 //!\author Khrapov
 //!\date   23.01.2020
 //==============================================================================
-inline void texture::Generate(void)
+template<bool COPYBLE>
+inline void base_texture<COPYBLE>::Generate(void)
 {
     if (m_nTexture == UINT_EMPTY_VALUE)
         glGenTextures(1, &m_nTexture);
 }
 
 //==============================================================================
-//!\fn                         texture::Delete
+//!\fn                   base_texture<COPYBLE>::Delete
 //
 //!\brief  Delete texture
 //!\author Khrapov
 //!\date   23.01.2020
 //==============================================================================
-inline void texture::Delete(void)
+template<bool COPYBLE>
+inline void base_texture<COPYBLE>::Delete(void)
 {
-    if (m_nTexture != UINT_EMPTY_VALUE)
+    if constexpr (!COPYBLE)
     {
-        glDeleteTextures(1, &m_nTexture);
-        m_nTexture = UINT_EMPTY_VALUE;
+        if (m_nTexture != UINT_EMPTY_VALUE)
+        {
+            glDeleteTextures(1, &m_nTexture);
+            m_nTexture = UINT_EMPTY_VALUE;
+        }
     }
 }
 
 //==============================================================================
-//!\fn                         texture::Bind
+//!\fn                    base_texture<COPYBLE>::Bind
 //
 //!\brief  Bind texture
 //!\author Khrapov
 //!\date   23.01.2020
 //==============================================================================
-inline void texture::Bind(void) const
+template<bool COPYBLE>
+inline void base_texture<COPYBLE>::Bind(void) const
 {
     glBindTexture(m_eTextureTarget, m_nTexture);
 }
 
 //==============================================================================
-//!\fn                         texture::Unbind
+//!\fn                   base_texture<COPYBLE>::Unbind
 //
 //!\brief  Unbind texture
 //!\author Khrapov
 //!\date   23.01.2020
 //==============================================================================
-inline void texture::Unbind(void) const
+template<bool COPYBLE>
+inline void base_texture<COPYBLE>::Unbind(void) const
 {
     glBindTexture(m_eTextureTarget, 0);
 }
 
 //==============================================================================
-//!\fn                         texture::SetTarget
+//!\fn                  base_texture<COPYBLE>::SetTarget
 //
 //!\brief  Set texture target
 //!\param  eTarget - target texture 
 //!\author Khrapov
 //!\date   23.01.2020
 //==============================================================================
-inline void texture::SetTarget(GLenum eTarget)
+template<bool COPYBLE>
+inline void base_texture<COPYBLE>::SetTarget(GLenum eTarget)
 {
     m_eTextureTarget = eTarget;
 }
 
 //==============================================================================
-//!\fn                          texture::Specify2DTexImage
+//!\fn              base_texture<COPYBLE>::Specify2DTexImage
 //
 //!\brief   Specify a two-dimensional texture image
 //!\details https://www.khronos.org/registry/OpenGL-Refpages/gl4/html/glTexImage2D.xhtml
@@ -105,17 +114,19 @@ inline void texture::SetTarget(GLenum eTarget)
 //!\param   type           - data type of the pixel data
 //!\param   pData          - pointer to the image data in memory
 //!\param   eTarget        - non-default target. -1 value will use m_eTextureTarget
-//!\author Khrapov
-//!\date   23.01.2020
+//!\author  Khrapov
+//!\date    23.01.2020
 //==============================================================================
-inline void texture::Specify2DTexImage(GLint         level, 
-                                       GLint         internalformat, 
-                                       GLsizei       width, 
-                                       GLsizei       height, 
-                                       GLenum        format,
-                                       GLenum        type, 
-                                       const void  * pData,
-                                       GLenum        eTarget)
+template<bool COPYBLE>
+inline void base_texture<COPYBLE>::Specify2DTexImage(
+    GLint         level,
+    GLint         internalformat, 
+    GLsizei       width, 
+    GLsizei       height, 
+    GLenum        format,
+    GLenum        type, 
+    const void  * pData,
+    GLenum        eTarget)
 {
     glTexImage2D(eTarget != -1 ? eTarget : m_eTextureTarget, 
                  level,
@@ -132,7 +143,7 @@ inline void texture::Specify2DTexImage(GLint         level,
 }
 
 //==============================================================================
-//!\fn                        texture::Specify2DMultisample
+//!\fn            base_texture<COPYBLE>::Specify2DMultisample
 //
 //!\brief  Establish parameters of a multisample texture's image
 //!\param  nSamples              - level-of-detail number.
@@ -143,57 +154,79 @@ inline void texture::Specify2DTexImage(GLint         level,
 //!\author Khrapov
 //!\date   23.01.2020
 //==============================================================================
-inline void texture::Specify2DMultisample(GLsizei        nSamples,
-                                          GLenum         eInternalformat,
-                                          GLsizei        nWidth,
-                                          GLsizei        nHeight,
-                                          GLboolean      bFixedsamplelocations)
+template<bool COPYBLE>
+inline void base_texture<COPYBLE>::Specify2DMultisample(
+    GLsizei        nSamples,
+    GLenum         eInternalformat,
+    GLsizei        nWidth,
+    GLsizei        nHeight,
+    GLboolean      bFixedsamplelocations)
 {
     glTexImage2DMultisample(m_eTextureTarget, nSamples, GL_RGB, nWidth, nHeight, GL_TRUE);
 
     m_nWidth  = nWidth;
     m_nHeight = nHeight;
 }
+
 //==============================================================================
-//!\fn                     texture::GenerateMipmap
+//!\fn               base_texture<COPYBLE>::GenerateMipmap
 //
 //!\brief  Generate mipmap for texture
 //!\author Khrapov
 //!\date   15.04.2020
 //==============================================================================
-inline void texture::GenerateMipmap(void)
+template<bool COPYBLE>
+inline void base_texture<COPYBLE>::GenerateMipmap(void)
 {
     glGenerateMipmap(m_eTextureTarget);
 }
 
-template<>
-inline void texture::SetParameter(GLenum target, GLfloat value)
+template<bool COPYBLE>
+inline void base_texture<COPYBLE>::SetParameter(GLenum target, GLfloat value)
 {
     glTextureParameterf(m_nTexture, target, value);
 }
 
-template<>
-inline void texture::SetParameter(GLenum target, GLint value)
+template<bool COPYBLE>
+inline void base_texture<COPYBLE>::SetParameter(GLenum target, GLint value)
 {
     glTextureParameteri(m_nTexture, target, value);
 }
 
-template<>
-inline void texture::SetParameter(GLenum target, const GLfloat* value)
+template<bool COPYBLE>
+inline void base_texture<COPYBLE>::SetParameter(GLenum target, const GLfloat* value)
 {
     glTextureParameterfv(m_nTexture, target, value);
 }
 
-template<>
-inline void texture::SetParameter(GLenum target, const GLint* value)
+template<bool COPYBLE>
+inline void base_texture<COPYBLE>::SetParameter(GLenum target, const GLint* value)
 {
     glTextureParameterIiv(m_nTexture, target, value);
 }
 
-template<>
-inline void texture::SetParameter(GLenum target, const GLuint* value)
+template<bool COPYBLE>
+inline void base_texture<COPYBLE>::SetParameter(GLenum target, const GLuint* value)
 {
     glTextureParameterIuiv(m_nTexture, target, value);
+}
+
+//==============================================================================
+//!\fn               base_texture<COPYBLE>::Assign<COPYBLE>
+//
+//!\brief  Assing by derived class
+//!\param  other - derived class instance
+//!\author Khrapov
+//!\date   10.07.2020
+//==============================================================================
+template<bool COPYBLE>
+template<class Derived>
+void base_texture<COPYBLE>::Assign(const Derived& other)
+{
+    m_nTexture       = other.m_nTexture;
+    m_eTextureTarget = other.m_eTextureTarget;
+    m_nWidth         = other.m_nWidth;
+    m_nHeight        = other.m_nHeight;
 }
 
 }

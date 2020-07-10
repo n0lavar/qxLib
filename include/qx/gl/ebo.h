@@ -2,7 +2,7 @@
 //
 //!\file                            ebo.h
 //
-//!\brief       
+//!\brief       Elemnt buffer object classes: ebo and copyble_ebo
 //!\details     ~
 //
 //!\author      Khrapov
@@ -14,32 +14,29 @@
 
 #include <qx/gl/buffer_base.h>
 
-namespace qx::gl
+namespace qx
 {
 
 //==============================================================================
 //
-//!\class                            ebo
+//!\class                      base_ebo<COPYBLE>
 //
-//!\brief   
+//!\brief   Base EBO class. Use ebo or copyble_ebo
 //!\details ~
 //
 //!\author  Khrapov
-//!\date    19.01.2020
+//!\date    10.07.2020
 //
 //==============================================================================
-class ebo : public buffer_base
+template<bool COPYBLE>
+class base_ebo : public buffer_base<COPYBLE>
 {
-public:
-
-    QX_NONCOPYBLE(ebo)
-
-                        ebo          (void) = default;
-
 protected:
 
     virtual GLenum      GetBufferType(void) const override { return GL_ELEMENT_ARRAY_BUFFER; }
     virtual GLbitfield  GetBarrierBit(void) const override { return GL_ELEMENT_ARRAY_BARRIER_BIT; }
 };
+
+QX_DEFINE_BUFFER_CLASSES(ebo)
 
 }

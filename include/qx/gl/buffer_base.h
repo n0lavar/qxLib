@@ -12,27 +12,29 @@
 //==============================================================================
 #pragma once
 
-#include <qx/other/useful_macros.h>
 #include <qx/other/typedefs.h>
 #include <qx/gl/ibuffer.h>
 
-namespace qx::gl
+namespace qx
 {
 
 //==============================================================================
 //
-//!\class                     buffer_base
+//!\class                     buffer_base<COPYBLE>
 //
 //!\brief   Base OpenGL buffer object class
 //!\details ~
 //
 //!\author  Khrapov
-//!\date    19.01.2020
+//!\date    10.07.2020
 //
 //==============================================================================
+template<bool COPYBLE>
 class buffer_base : IBuffer
 {
 public:
+
+    friend class buffer_base;
 
     virtual             ~buffer_base        (void);
     virtual void        Generate            (void)          override;
@@ -54,6 +56,8 @@ public:
 
 protected:
 
+    template<class Derived>
+            void        Assign              (const Derived& other) { m_nBuffer = other.m_nBuffer; }
     virtual GLenum      GetBufferType       (void) const = 0;
     virtual GLbitfield  GetBarrierBit       (void) const = 0;
 
@@ -62,9 +66,10 @@ private:
     GLuint m_nBuffer = UINT_EMPTY_VALUE;
 };
 
-
-inline GLuint buffer_base::GetBufferName (void) const { return m_nBuffer; }
-inline bool   buffer_base::IsGenerated   (void) const { return m_nBuffer != UINT_EMPTY_VALUE; }
+template<bool COPYBLE>
+inline GLuint buffer_base<COPYBLE>::GetBufferName (void) const { return m_nBuffer; }
+template<bool COPYBLE>
+inline bool   buffer_base<COPYBLE>::IsGenerated   (void) const { return m_nBuffer != UINT_EMPTY_VALUE; }
 
 }
 

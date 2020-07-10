@@ -2,7 +2,7 @@
 //
 //!\file                          ssbo.inl
 //
-//!\brief       
+//!\brief       Shader storage buffer object classes: ssbo and copyble_ssbo
 //!\details     ~
 //
 //!\author      Khrapov
@@ -11,26 +11,11 @@
 //
 //==============================================================================
 
-namespace qx::gl
+namespace qx
 {
 
 //==============================================================================
-//!\fn                           ssbo::ssbo
-//
-//!\brief  ssbo object constructor
-//!\param  nBindingPoint - shader binding point
-//!\param  nSize         - data size
-//!\param  pData         - data pointer
-//!\author Khrapov
-//!\date   18.01.2020
-//==============================================================================
-inline ssbo::ssbo(GLuint nBindingPoint, GLsizeiptr nSize, const void * pData)
-{
-    Init(nBindingPoint, nSize, pData);
-}
-
-//==============================================================================
-//!\fn                           ssbo::Init
+//!\fn                      base_ssbo<COPYBLE>::Init
 //
 //!\brief  Init SSBO
 //!\param  nBindingPoint - shader binding point
@@ -39,7 +24,8 @@ inline ssbo::ssbo(GLuint nBindingPoint, GLsizeiptr nSize, const void * pData)
 //!\author Khrapov
 //!\date   18.01.2020
 //==============================================================================
-inline void ssbo::Init(GLuint nBindingPoint, GLsizeiptr nSize, const void * pData)
+template<bool COPYBLE>
+inline void base_ssbo<COPYBLE>::Init(GLuint nBindingPoint, GLsizeiptr nSize, const void * pData)
 {
     // minimum possible size to allocate
     CHECK(nSize >= GL_BUFFER_DATA_SIZE)

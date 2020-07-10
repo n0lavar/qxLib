@@ -2,7 +2,7 @@
 //
 //!\file                        ubo.inl
 //
-//!\brief       Uniform buffer object class
+//!\brief       Uniform buffer object classes: ubo and copyble_ubo
 //!\details     ~
 //
 //!\author      Khrapov
@@ -11,25 +11,11 @@
 //
 //==============================================================================
 
-namespace qx::gl
+namespace qx
 {
 
 //==============================================================================
-//!\fn                          ubo::ubo
-//
-//!\brief  ubo object constructor
-//!\param  nBindingPoint - buffer binding point from the shader
-//!\param  szUBO         - buffer size
-//!\author Khrapov
-//!\date   9.01.2020
-//==============================================================================
-inline ubo::ubo(GLuint nBindingPoint, GLsizeiptr szUBO)
-{
-    Init(szUBO, nBindingPoint);
-}
-
-//==============================================================================
-//!\fn                          ubo::Init
+//!\fn                      base_ubo<COPYBLE>::Init
 //
 //!\brief  Init UBO
 //!\param  nBindingPoint - buffer binding point from the shader
@@ -37,7 +23,8 @@ inline ubo::ubo(GLuint nBindingPoint, GLsizeiptr szUBO)
 //!\author Khrapov
 //!\date   9.01.2020
 //==============================================================================
-inline void ubo::Init(GLuint nBindingPoint, GLsizeiptr szUBO)
+template<bool COPYBLE>
+inline void base_ubo<COPYBLE>::Init(GLuint nBindingPoint, GLsizeiptr szUBO)
 {
     Generate();
     Bind();
@@ -46,14 +33,15 @@ inline void ubo::Init(GLuint nBindingPoint, GLsizeiptr szUBO)
 }
 
 //==============================================================================
-//!\fn                       ubo::GetMaxSize
+//!\fn                   base_ubo<COPYBLE>::GetMaxSize
 //
 //!\brief  Get max UBO size with current GPU
 //!\retval max UBO size with current GPU
 //!\author Khrapov
 //!\date   9.01.2020
 //==============================================================================
-inline GLint ubo::GetMaxSize(void)
+template<bool COPYBLE>
+inline GLint base_ubo<COPYBLE>::GetMaxSize(void)
 {
     GLint ret;
     glGetIntegerv(GL_MAX_UNIFORM_BLOCK_SIZE, &ret);

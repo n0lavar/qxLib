@@ -2,7 +2,7 @@
 //
 //!\file                           rbo.inl
 //
-//!\brief       Contains rbo class
+//!\brief       Render buffer object classes: rbo and copyble_rbo
 //!\details     ~
 //
 //!\author      Khrapov
@@ -11,11 +11,11 @@
 //
 //==============================================================================
 
-namespace qx::gl
+namespace qx
 {
 
 //==============================================================================
-//!\fn                            rbo::Init
+//!\fn                      base_rbo<COPYBLE>::Init
 //
 //!\brief  Init RBO with width and height
 //!\param  nWidth        - width
@@ -24,7 +24,8 @@ namespace qx::gl
 //!\author Khrapov
 //!\date   20.01.2020
 //==============================================================================
-inline void rbo::Init(GLsizei nWidth, GLsizei nHeight, size_t nMultisamples)
+template<bool COPYBLE>
+inline void base_rbo<COPYBLE>::Init(GLsizei nWidth, GLsizei nHeight, size_t nMultisamples)
 {
     // create a renderbuffer object for depth and stencil attachment
     Generate();
@@ -48,53 +49,60 @@ inline void rbo::Init(GLsizei nWidth, GLsizei nHeight, size_t nMultisamples)
 }
 
 //==============================================================================
-//!\fn                          rbo::Generate
+//!\fn                    base_rbo<COPYBLE>::Generate
 //
 //!\brief  Generate buffer
 //!\author Khrapov
 //!\date   20.01.2020
 //==============================================================================
-inline void rbo::Generate(void)
+template<bool COPYBLE>
+inline void base_rbo<COPYBLE>::Generate(void)
 {
     glGenRenderbuffers(1, &m_nBuffer);
 }
 
 //==============================================================================
-//!\fn                           rbo::Delete
+//!\fn                     base_rbo<COPYBLE>::Delete
 //
 //!\brief  Delete buffer
 //!\author Khrapov
 //!\date   20.01.2020
 //==============================================================================
-inline void rbo::Delete(void)
+template<bool COPYBLE>
+inline void base_rbo<COPYBLE>::Delete(void)
 {
-    if (m_nBuffer != UINT_EMPTY_VALUE)
+    if constexpr (!COPYBLE)
     {
-        glDeleteRenderbuffers(1, &m_nBuffer);
-        m_nBuffer = UINT_EMPTY_VALUE;
+        if (m_nBuffer != UINT_EMPTY_VALUE)
+        {
+            glDeleteRenderbuffers(1, &m_nBuffer);
+            m_nBuffer = UINT_EMPTY_VALUE;
+        }
     }
 }
 
 //==============================================================================
-//!\fn                            rbo::Bind
+//!\fn                      base_rbo<COPYBLE>::Bind
 //
 //!\brief  Bind buffer
 //!\author Khrapov
 //!\date   20.01.2020
 //==============================================================================
-inline void rbo::Bind(void) const
+template<bool COPYBLE>
+inline void base_rbo<COPYBLE>::Bind(void) const
 {
     glBindRenderbuffer(GL_RENDERBUFFER, m_nBuffer);
 }
 
 //==============================================================================
-//!\fn                           rbo::Unbind
+//!\fn                     base_rbo<COPYBLE>::Unbind
 //
 //!\brief  Unbind buffer
 //!\author Khrapov
 //!\date   20.01.2020
 //==============================================================================
-inline void rbo::Unbind(void) const
+template<bool COPYBLE>
+inline void base_rbo<COPYBLE>::Unbind(void) const
 {
     glBindRenderbuffer(GL_RENDERBUFFER, 0);
 }

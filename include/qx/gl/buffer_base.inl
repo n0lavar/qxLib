@@ -11,100 +11,110 @@
 //
 //==============================================================================
 
-namespace qx::gl
+namespace qx
 {
 
 //==============================================================================
-//!\fn              buffer_base::~buffer_base
+//!\fn                 buffer_base<COPYBLE>::~buffer_base
 //
 //!\brief  buffer_base object destructor
 //!\author Khrapov
 //!\date   19.01.2020
 //==============================================================================
-inline buffer_base::~buffer_base(void)
+template<bool COPYBLE>
+inline buffer_base<COPYBLE>::~buffer_base(void)
 {
     Delete();
 }
 
 //==============================================================================
-//!\fn                   buffer_base::Generate
+//!\fn                   buffer_base<COPYBLE>::Generate
 //
 //!\brief  Generate buffer object name
 //!\author Khrapov
 //!\date   19.01.2020
 //==============================================================================
-inline void buffer_base::Generate()
+template<bool COPYBLE>
+inline void buffer_base<COPYBLE>::Generate()
 {
     glGenBuffers(1, &m_nBuffer);
 }
 
 //==============================================================================
-//!\fn                    buffer_base::Delete
+//!\fn                    buffer_base<COPYBLE>::Delete
 //
 //!\brief  Delete named buffer object
 //!\author Khrapov
 //!\date   19.01.2020
 //==============================================================================
-inline void buffer_base::Delete()
+template<bool COPYBLE>
+inline void buffer_base<COPYBLE>::Delete()
 {
-    if (m_nBuffer != UINT_EMPTY_VALUE)
+    if constexpr (!COPYBLE)
     {
-        glDeleteBuffers(1, &m_nBuffer);
-        m_nBuffer = UINT_EMPTY_VALUE;
+        if (m_nBuffer != UINT_EMPTY_VALUE)
+        {
+            glDeleteBuffers(1, &m_nBuffer);
+            m_nBuffer = UINT_EMPTY_VALUE;
+        }
     }
 }
 
 //==============================================================================
-//!\fn                     buffer_base::Bind
+//!\fn                     buffer_base<COPYBLE>::Bind
 //
 //!\brief  Bind a named buffer object
 //!\author Khrapov
 //!\date   19.01.2020
 //==============================================================================
-inline void buffer_base::Bind() const
+template<bool COPYBLE>
+inline void buffer_base<COPYBLE>::Bind() const
 {
     glBindBuffer(GetBufferType(), m_nBuffer);
 }
 
 //==============================================================================
-//!\fn                    buffer_base::Unbind
+//!\fn                    buffer_base<COPYBLE>::Unbind
 //
 //!\brief  Unbind a named buffer object
 //!\author Khrapov
 //!\date   19.01.2020
 //==============================================================================
-inline void buffer_base::Unbind() const
+template<bool COPYBLE>
+inline void buffer_base<COPYBLE>::Unbind() const
 {
     glBindBuffer(GetBufferType(), 0);
 }
 
 //==============================================================================
-//!\fn                   buffer_base::BindBase
+//!\fn                   buffer_base<COPYBLE>::BindBase
 //
 //!\brief  Bind a buffer object to an indexed buffer target from shader
 //!\param  nIndex - index
 //!\author Khrapov
 //!\date   19.01.2020
 //==============================================================================
-inline void buffer_base::BindBase(GLuint nIndex)
+template<bool COPYBLE>
+inline void buffer_base<COPYBLE>::BindBase(GLuint nIndex)
 {
     glBindBufferBase(GetBufferType(), nIndex, m_nBuffer);
 }
 
 //==============================================================================
-//!\fn                  buffer_base::MemBarrier
+//!\fn                  buffer_base<COPYBLE>::MemBarrier
 //
 //!\brief  Defines a barrier ordering memory transactions
 //!\author Khrapov
 //!\date   19.01.2020
 //==============================================================================
-inline void buffer_base::MemBarrier()
+template<bool COPYBLE>
+inline void buffer_base<COPYBLE>::MemBarrier()
 {
     glMemoryBarrier(GetBarrierBit());
 }
 
 //==============================================================================
-//!\fn                    buffer_base::Update
+//!\fn                    buffer_base<COPYBLE>::Update
 //
 //!\brief  Update the whole buffer
 //!\param  nSize  - data size
@@ -113,13 +123,14 @@ inline void buffer_base::MemBarrier()
 //!\author Khrapov
 //!\date   19.01.2020
 //==============================================================================
-inline void buffer_base::Update(GLsizeiptr nSize, const void* pData, GLenum eUsage)
+template<bool COPYBLE>
+inline void buffer_base<COPYBLE>::Update(GLsizeiptr nSize, const void* pData, GLenum eUsage)
 {
     glBufferData(GetBufferType(), nSize, pData, eUsage);
 }
 
 //==============================================================================
-//!\fn                  buffer_base::UpdatePart
+//!\fn                  buffer_base<COPYBLE>::UpdatePart
 //
 //!\brief  Update buffer part
 //!\param  nOffset - offset from the buffer beginning
@@ -128,7 +139,8 @@ inline void buffer_base::Update(GLsizeiptr nSize, const void* pData, GLenum eUsa
 //!\author Khrapov
 //!\date   19.01.2020
 //==============================================================================
-inline void buffer_base::UpdatePart(GLintptr nOffset, GLsizeiptr nSize, const void* pData)
+template<bool COPYBLE>
+inline void buffer_base<COPYBLE>::UpdatePart(GLintptr nOffset, GLsizeiptr nSize, const void* pData)
 {
     glBufferSubData(GetBufferType(), nOffset, nSize, pData);
 }

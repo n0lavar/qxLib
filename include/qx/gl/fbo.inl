@@ -2,7 +2,7 @@
 //
 //!\file                           fbo.inl
 //
-//!\brief       Contains fbo class
+//!\brief       Frame buffer object classes: fbo and copyble_fbo
 //!\details     ~
 //
 //!\author      Khrapov
@@ -11,95 +11,106 @@
 //
 //==============================================================================
 
-namespace qx::gl
+namespace qx
 {
 
 //==============================================================================
-//!\fn                           fbo::~fbo
+//!\fn                    base_fbo<COPYBLE>::~base_fbo
 //
-//!\brief  fbo object destructor
+//!\brief  base_fbo object destructor
 //!\author Khrapov
-//!\date   19.01.2020
+//!\date   10.07.2020
 //==============================================================================
-inline fbo::~fbo(void)
+template<bool COPYBLE>
+inline base_fbo<COPYBLE>::~base_fbo(void)
 {
     Delete();
 }
 
 //==============================================================================
-//!\fn                          fbo::Generate
+//!\fn                    base_fbo<COPYBLE>::Generate
 //
 //!\brief  Generate buffer
 //!\author Khrapov
 //!\date   20.01.2020
 //==============================================================================
-inline void fbo::Generate(void)
+template<bool COPYBLE>
+inline void base_fbo<COPYBLE>::Generate(void)
 {
     glGenFramebuffers(1, &m_nBuffer);
 }
 
 //==============================================================================
-//!\fn                           fbo::Delete
+//!\fn                     base_fbo<COPYBLE>::Delete
 //
 //!\brief  Delete buffer
 //!\author Khrapov
 //!\date   20.01.2020
 //==============================================================================
-inline void fbo::Delete(void)
+template<bool COPYBLE>
+inline void base_fbo<COPYBLE>::Delete(void)
 {
-    if (m_nBuffer != UINT_EMPTY_VALUE)
+    if constexpr (!COPYBLE)
     {
-        glDeleteFramebuffers(1, &m_nBuffer);
-        m_nBuffer = UINT_EMPTY_VALUE;
+        if (m_nBuffer != UINT_EMPTY_VALUE)
+        {
+            glDeleteFramebuffers(1, &m_nBuffer);
+            m_nBuffer = UINT_EMPTY_VALUE;
+        }
     }
 }
 
 //==============================================================================
-//!\fn                            fbo::Bind
+//!\fn                      base_fbo<COPYBLE>::Bind
 //
 //!\brief  Bind buffer
 //!\author Khrapov
 //!\date   20.01.2020
 //==============================================================================
-inline void fbo::Bind(void) const
+template<bool COPYBLE>
+inline void base_fbo<COPYBLE>::Bind(void) const
 {
     glBindFramebuffer(GL_FRAMEBUFFER, m_nBuffer);
 }
 
 //==============================================================================
-//!\fn                           fbo::Unbind
+//!\fn                     base_fbo<COPYBLE>::Unbind
 //
 //!\brief  Unbind buffer
 //!\author Khrapov
 //!\date   20.01.2020
 //==============================================================================
-inline void fbo::Unbind(void) const
+template<bool COPYBLE>
+inline void base_fbo<COPYBLE>::Unbind(void) const
 {
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
 }
 
 //==============================================================================
-//!\fn                            fbo::Bind
+//!\fn                      base_fbo<COPYBLE>::Bind
 //
 //!\brief  Bind buffer with target
 //!\param  target - Target
 //!\author Khrapov
 //!\date   20.01.2020
 //==============================================================================
-inline void fbo::Bind(GLenum target)
+template<bool COPYBLE>
+inline void base_fbo<COPYBLE>::Bind(GLenum target)
 {
     glBindFramebuffer(target, m_nBuffer);
 }
 
 //==============================================================================
-//!\fn                         fbo::AttachRBO
+//!\fn             base_fbo<COPYBLE>::AttachRBO<COPYBLE_RBO>
 //
 //!\brief  Attach RBO th FRO
 //!\param  rbo - render buffer object
 //!\author Khrapov
 //!\date   20.01.2020
 //==============================================================================
-inline void fbo::AttachRBO(const rbo& rbo)
+template<bool COPYBLE>
+template<bool COPYBLE_RBO>
+inline void base_fbo<COPYBLE>::AttachRBO(const base_rbo<COPYBLE_RBO>& rbo)
 {
     glFramebufferRenderbuffer(GL_FRAMEBUFFER, 
                               GL_DEPTH_STENCIL_ATTACHMENT, 
@@ -108,7 +119,7 @@ inline void fbo::AttachRBO(const rbo& rbo)
 }
 
 //==============================================================================
-//!\fn                         fbo::AttachTexture
+//!\fn         base_fbo<COPYBLE>::AttachTexture<COPYBLE_TEXTURE>
 //
 //!\brief  Attach texture th FRO
 //!\param  attachment - attachment point of the framebuffer
@@ -117,9 +128,12 @@ inline void fbo::AttachRBO(const rbo& rbo)
 //!\author Khrapov
 //!\date   20.01.2020
 //==============================================================================
-inline void fbo::AttachTexture(GLenum          attachment,
-                               GLenum          texTarget,
-                               const texture & texture)
+template<bool COPYBLE>
+template<bool COPYBLE_TEXTURE>
+inline void base_fbo<COPYBLE>::AttachTexture(
+    GLenum                               attachment,
+    GLenum                               texTarget,
+    const base_texture<COPYBLE_TEXTURE>& texture)
 {
     glFramebufferTexture2D(GL_FRAMEBUFFER, 
                            attachment,
@@ -129,13 +143,14 @@ inline void fbo::AttachTexture(GLenum          attachment,
 }
 
 //==============================================================================
-//!\fn                          fbo::CheckStatus
+//!\fn                   base_fbo<COPYBLE>::CheckStatus
 //
 //!\brief  Check framebuffer status
 //!\author Khrapov
 //!\date   26.06.2020
 //==============================================================================
-inline void fbo::CheckStatus(void) const
+template<bool COPYBLE>
+inline void base_fbo<COPYBLE>::CheckStatus(void) const
 {
     if (auto eStatus = glCheckFramebufferStatus(GL_FRAMEBUFFER); eStatus != GL_FRAMEBUFFER_COMPLETE)
     {
@@ -213,4 +228,3 @@ inline void fbo::CheckStatus(void) const
 }
 
 }
-

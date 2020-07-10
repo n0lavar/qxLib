@@ -2,7 +2,7 @@
 //
 //!\file                           ssbo.h
 //
-//!\brief       Contains ssbo class
+//!\brief       Shader storage buffer object classes: ssbo and copyble_ssbo
 //!\details     ~
 //
 //!\author      Khrapov
@@ -14,35 +14,37 @@
 
 #include <qx/gl/buffer_base.h>
 
-namespace qx::gl
+namespace qx
 {
 
 //==============================================================================
 //
-//!\class                           ssbo
+//!\class                   base_ssbo<COPYBLE>
 //
-//!\brief   Shader Storage Buffer Object class
+//!\brief   Base SSBO class. Use rbo or copyble_rbo
 //!\details ~
 //
 //!\author  Khrapov
 //!\date    18.01.2020
 //
 //==============================================================================
-class ssbo : public buffer_base
+template<bool COPYBLE>
+class base_ssbo : public buffer_base<COPYBLE>
 {
 public:
-                        ssbo            (void) = default;
-                        ssbo            (GLuint             nBindingPoint, 
-                                         GLsizeiptr         nSize, 
-                                         const void       * pData = NULL);
+                        
+                        base_ssbo       (void) = default;
     virtual void        Init            (GLuint             nBindingPoint, 
                                          GLsizeiptr         nSize, 
-                                         const void       * pData = NULL);
+                                         const void       * pData = nullptr);
 
 protected:
+
     virtual GLenum      GetBufferType   (void) const override { return GL_SHADER_STORAGE_BUFFER;        }
     virtual GLbitfield  GetBarrierBit   (void) const override { return GL_SHADER_STORAGE_BARRIER_BIT;   }
 };
+
+QX_DEFINE_BUFFER_CLASSES(ssbo)
 
 }
 

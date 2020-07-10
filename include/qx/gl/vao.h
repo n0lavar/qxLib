@@ -2,7 +2,7 @@
 //
 //!\file                            vao.h
 //
-//!\brief       Contains vao class
+//!\brief       Vertex array object classes: vao and copyble_vao
 //!\details     ~
 //
 //!\author      Khrapov
@@ -15,28 +15,29 @@
 #include <qx/other/typedefs.h>
 #include <qx/gl/ibuffer.h>
 
-namespace qx::gl
+namespace qx
 {
 
 //==============================================================================
 //
-//!\class                            vao
+//!\class                      base_vao<COPYBLE>
 //
-//!\brief   Vertex arrays object class
+//!\brief   Base VAO class. Use vao or copyble_vao
 //!\details ~
 //
 //!\author  Khrapov
 //!\date    19.01.2020
 //
 //==============================================================================
-class vao : IBuffer
+template<bool COPYBLE>
+class base_vao : IBuffer
 {
 public:
 
-    QX_NONCOPYBLE(vao)
+    friend class base_vao;
 
-                    vao                     (void) = default;
-                    ~vao                    (void);
+                    base_vao                (void) = default;
+    virtual         ~base_vao               (void);
 
     virtual void    Generate                (void)          override;
     virtual void    Delete                  (void)          override;
@@ -45,22 +46,30 @@ public:
     virtual GLuint  GetBufferName           (void) const    override;
     virtual bool    IsGenerated             (void) const    override;
 
-    void            EnableVertexArrtibArray (GLuint         nIndex);
-    void            DisableVertexArrtibArray(GLuint         nIndex);
-
-    void            VertexAttribPointer     (GLuint         nIndex,
+            void    EnableVertexArrtibArray (GLuint         nIndex);
+            void    DisableVertexArrtibArray(GLuint         nIndex);
+                    
+            void    VertexAttribPointer     (GLuint         nIndex,
                                              GLint          nSize,
                                              GLenum         eType,
                                              GLboolean      bNormalized,
                                              GLsizei        nStride,
                                              size_t         nOffset);
 
+            template<class Derived>
+            void    Assign                  (const Derived& other) { m_nVAO = other.m_nVAO; }
+
 private:
+
     GLuint m_nVAO = UINT_EMPTY_VALUE;
 };
 
-inline GLuint vao::GetBufferName (void) const { return m_nVAO; }
-inline bool   vao::IsGenerated   (void) const { return m_nVAO != UINT_EMPTY_VALUE; };
+template<bool COPYBLE>
+inline GLuint base_vao<COPYBLE>::GetBufferName (void) const { return m_nVAO; }
+template<bool COPYBLE>
+inline bool   base_vao<COPYBLE>::IsGenerated   (void) const { return m_nVAO != UINT_EMPTY_VALUE; };
+
+QX_DEFINE_BUFFER_CLASSES(vao)
 
 }
 

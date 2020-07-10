@@ -16,7 +16,7 @@
 
 #include <qx/other/useful_macros.h>
 
-namespace qx::gl
+namespace qx
 {
 
 //==============================================================================

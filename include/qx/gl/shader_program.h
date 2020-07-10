@@ -19,7 +19,7 @@
 
 #include <qx/gl/shaders.h>
 
-namespace qx::gl
+namespace qx
 {
 
 //==============================================================================
@@ -69,6 +69,6 @@ private:
 
 }
 
-using TPtrShaderProgram = std::shared_ptr<qx::gl::shader_program>;
+using TPtrShaderProgram = std::shared_ptr<qx::shader_program>;
 
 #include <qx/gl/shader_program.inl>
