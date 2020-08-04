@@ -51,8 +51,11 @@ public:
             void            AttachRBO       (const base_rbo<COPYBLE_RBO>& rbo);
 
     template<bool COPYBLE_TEXTURE>
-            void            AttachTexture   (GLenum             attachment,
+            void            AttachTexture2D (GLenum             attachment,
                                              GLenum             texTarget,
+                                             const base_texture<COPYBLE_TEXTURE>& texture);
+    template<bool COPYBLE_TEXTURE>
+            void            AttachTexture   (GLenum             attachment,
                                              const base_texture<COPYBLE_TEXTURE>& texture);
             void            CheckStatus     (void)                          const;
 

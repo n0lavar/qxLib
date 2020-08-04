@@ -119,9 +119,9 @@ inline void base_fbo<COPYBLE>::AttachRBO(const base_rbo<COPYBLE_RBO>& rbo)
 }
 
 //==============================================================================
-//!\fn         base_fbo<COPYBLE>::AttachTexture<COPYBLE_TEXTURE>
+//!\fn        base_fbo<COPYBLE>::AttachTexture2D<COPYBLE_TEXTURE>
 //
-//!\brief  Attach texture th FRO
+//!\brief  Attache a single face of a specific MIP level to FBO
 //!\param  attachment - attachment point of the framebuffer
 //!\param  texTarget  - type of texture is expected in the texture parameter
 //!\param  texture    - fbo texture
@@ -130,7 +130,7 @@ inline void base_fbo<COPYBLE>::AttachRBO(const base_rbo<COPYBLE_RBO>& rbo)
 //==============================================================================
 template<bool COPYBLE>
 template<bool COPYBLE_TEXTURE>
-inline void base_fbo<COPYBLE>::AttachTexture(
+inline void base_fbo<COPYBLE>::AttachTexture2D(
     GLenum                               attachment,
     GLenum                               texTarget,
     const base_texture<COPYBLE_TEXTURE>& texture)
@@ -140,6 +140,28 @@ inline void base_fbo<COPYBLE>::AttachTexture(
                            texTarget,
                            texture.GetBufferName(), 
                            0);
+}
+
+//==============================================================================
+//!\fn         base_fbo<COPYBLE>::AttachTexture<COPYBLE_TEXTURE>
+//
+//!\brief  Attache all cube map faces of a specific MIP level 
+//         as an array of images (layered framebuffer)
+//!\param  attachment - attachment point of the framebuffer
+//!\param  texture    - fbo texture
+//!\author Khrapov
+//!\date   20.01.2020
+//==============================================================================
+template<bool COPYBLE>
+template<bool COPYBLE_TEXTURE>
+inline void base_fbo<COPYBLE>::AttachTexture(
+    GLenum                               attachment,
+    const base_texture<COPYBLE_TEXTURE>& texture)
+{
+    glFramebufferTexture(GL_FRAMEBUFFER, 
+                         attachment,
+                         texture.GetBufferName(), 
+                         0);
 }
 
 //==============================================================================

@@ -60,18 +60,23 @@ inline shader_base<ShaderType>::~shader_base()
 template <GLenum ShaderType>
 inline void shader_base<ShaderType>::Init(const GLchar* pszShaderCode)
 {
-    // Compile
-    m_nShader = glCreateShader(ShaderType);
-    glShaderSource(m_nShader, 1, &pszShaderCode, NULL);
-    glCompileShader(m_nShader);
-
-    // Print compile errors if any
-    if (GLint bSuccess = GetParameter(GL_COMPILE_STATUS); !bSuccess)
+    if (pszShaderCode)
     {
-        GLchar infoLog[512];
-        glGetShaderInfoLog(m_nShader, 512, NULL, infoLog);
-        ASSERT_MSG(0, "Shader %d compilation failed: %s", m_nShader, infoLog);
+        // Compile
+        m_nShader = glCreateShader(ShaderType);
+        glShaderSource(m_nShader, 1, &pszShaderCode, NULL);
+        glCompileShader(m_nShader);
+
+        // Print compile errors if any
+        if (GLint bSuccess = GetParameter(GL_COMPILE_STATUS); !bSuccess)
+        {
+            GLchar infoLog[512];
+            glGetShaderInfoLog(m_nShader, 512, NULL, infoLog);
+            ASSERT_MSG(0, "Shader %d compilation failed: %s", m_nShader, infoLog);
+        }
     }
+    else
+        ASSERT_MSG(0, "Nullptr passed as shader text pointer");
 }
 
 //==============================================================================

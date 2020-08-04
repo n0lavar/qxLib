@@ -187,6 +187,12 @@ inline void shader_program::SetUniform(GLint nUniformLocation, const glm::ivec4 
 }
 
 template<>
+inline void shader_program::SetUniform(GLint nUniformLocation, const bool& value)
+{
+    SetUniform(nUniformLocation, value ? GL_TRUE : GL_FALSE);
+}
+
+template<>
 inline void shader_program::SetUniform(GLint nUniformLocation, const glm::mat4 & value)
 {
     glUniformMatrix4fv(nUniformLocation, 1, GL_FALSE, glm::value_ptr(value));

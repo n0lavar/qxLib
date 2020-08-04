@@ -48,7 +48,6 @@ public:
 
             void    EnableVertexArrtibArray (GLuint         nIndex);
             void    DisableVertexArrtibArray(GLuint         nIndex);
-                    
             void    VertexAttribPointer     (GLuint         nIndex,
                                              GLint          nSize,
                                              GLenum         eType,
@@ -56,7 +55,9 @@ public:
                                              GLsizei        nStride,
                                              size_t         nOffset);
 
-            template<class Derived>
+protected:
+
+    template<class Derived>
             void    Assign                  (const Derived& other) { m_nVAO = other.m_nVAO; }
 
 private:
