@@ -131,11 +131,143 @@ inline void shader_program::DispatchCompute(GLuint nGroupsX, GLuint nGroupsY, GL
 //!\author Khrapov
 //!\date   17.01.2020
 //==============================================================================
-inline GLint shader_program::GetParameter(GLenum eParameter)
+inline GLint shader_program::GetParameter(GLenum eParameter) const
 {
     GLint nRet = -1;
     glGetProgramiv(m_nProgram, eParameter, &nRet);
     return nRet;
+}
+
+template<>
+inline void shader_program::SetUniform(GLint nUniformLocation, const GLfloat* pValue, GLsizei nCount)
+{
+    glUniform1fv(nUniformLocation, nCount, pValue);
+}
+
+template<>
+inline void shader_program::SetUniform(GLint nUniformLocation, const glm::vec2* pValue, GLsizei nCount)
+{
+    glUniform2fv(nUniformLocation, nCount, glm::value_ptr(*pValue));
+}
+
+template<>
+inline void shader_program::SetUniform(GLint nUniformLocation, const glm::vec3* pValue, GLsizei nCount)
+{
+    glUniform3fv(nUniformLocation, nCount, glm::value_ptr(*pValue));
+}
+
+template<>
+inline void shader_program::SetUniform(GLint nUniformLocation, const glm::vec4* pValue, GLsizei nCount)
+{
+    glUniform4fv(nUniformLocation, nCount, glm::value_ptr(*pValue));
+}
+
+template<>
+inline void shader_program::SetUniform(GLint nUniformLocation, const GLint* pValue, GLsizei nCount)
+{
+    glUniform1iv(nUniformLocation, nCount, pValue);
+}
+
+template<>
+inline void shader_program::SetUniform(GLint nUniformLocation, const glm::ivec2* pValue, GLsizei nCount)
+{
+    glUniform2iv(nUniformLocation, nCount, glm::value_ptr(*pValue));
+}
+
+template<>
+inline void shader_program::SetUniform(GLint nUniformLocation, const glm::ivec3* pValue, GLsizei nCount)
+{
+    glUniform3iv(nUniformLocation, nCount, glm::value_ptr(*pValue));
+}
+
+template<>
+inline void shader_program::SetUniform(GLint nUniformLocation, const glm::ivec4* pValue, GLsizei nCount)
+{
+    glUniform4iv(nUniformLocation, nCount, glm::value_ptr(*pValue));
+}
+
+template<>
+inline void shader_program::SetUniform(GLint nUniformLocation, const GLuint* pValue, GLsizei nCount)
+{
+    glUniform1uiv(nUniformLocation, nCount, pValue);
+}
+
+template<>
+inline void shader_program::SetUniform(GLint nUniformLocation, const glm::uvec2* pValue, GLsizei nCount)
+{
+    glUniform2uiv(nUniformLocation, nCount, glm::value_ptr(*pValue));
+}
+
+template<>
+inline void shader_program::SetUniform(GLint nUniformLocation, const glm::uvec3* pValue, GLsizei nCount)
+{
+    glUniform3uiv(nUniformLocation, nCount, glm::value_ptr(*pValue));
+}
+
+template<>
+inline void shader_program::SetUniform(GLint nUniformLocation, const glm::uvec4* pValue, GLsizei nCount)
+{
+    glUniform4uiv(nUniformLocation, nCount, glm::value_ptr(*pValue));
+}
+
+template<>
+inline void shader_program::SetUniform(GLint nUniformLocation, const glm::mat2* pValue, GLsizei nCount)
+{
+    glUniformMatrix2fv(nUniformLocation, nCount, GL_FALSE, glm::value_ptr(*pValue));
+}
+
+template<>
+inline void shader_program::SetUniform(GLint nUniformLocation, const glm::mat3* pValue, GLsizei nCount)
+{
+    glUniformMatrix3fv(nUniformLocation, nCount, GL_FALSE, glm::value_ptr(*pValue));
+}
+
+template<>
+inline void shader_program::SetUniform(GLint nUniformLocation, const glm::mat4* pValue, GLsizei nCount)
+{
+    glUniformMatrix4fv(nUniformLocation, nCount, GL_FALSE, glm::value_ptr(*pValue));
+}
+
+template<>
+inline void shader_program::SetUniform(GLint nUniformLocation, const glm::mat2x3* pValue, GLsizei nCount)
+{
+    glUniformMatrix2x3fv(nUniformLocation, nCount, GL_FALSE, glm::value_ptr(*pValue));
+}
+
+template<>
+inline void shader_program::SetUniform(GLint nUniformLocation, const glm::mat3x2* pValue, GLsizei nCount)
+{
+    glUniformMatrix3x2fv(nUniformLocation, nCount, GL_FALSE, glm::value_ptr(*pValue));
+}
+
+template<>
+inline void shader_program::SetUniform(GLint nUniformLocation, const glm::mat2x4* pValue, GLsizei nCount)
+{
+    glUniformMatrix2x4fv(nUniformLocation, nCount, GL_FALSE, glm::value_ptr(*pValue));
+}
+
+template<>
+inline void shader_program::SetUniform(GLint nUniformLocation, const glm::mat4x2* pValue, GLsizei nCount)
+{
+    glUniformMatrix4x2fv(nUniformLocation, nCount, GL_FALSE, glm::value_ptr(*pValue));
+}
+
+template<>
+inline void shader_program::SetUniform(GLint nUniformLocation, const glm::mat3x4* pValue, GLsizei nCount)
+{
+    glUniformMatrix3x4fv(nUniformLocation, nCount, GL_FALSE, glm::value_ptr(*pValue));
+}
+
+template<>
+inline void shader_program::SetUniform(GLint nUniformLocation, const glm::mat4x3* pValue, GLsizei nCount)
+{
+    glUniformMatrix4x3fv(nUniformLocation, nCount, GL_FALSE, glm::value_ptr(*pValue));
+}
+
+template<typename T>
+inline void shader_program::SetUniform(const GLchar* name, const T* pValue, GLsizei nCount)
+{
+    SetUniform(GetUniformLocation(name), pValue, nCount);
 }
 
 template<>
@@ -192,18 +324,32 @@ inline void shader_program::SetUniform(GLint nUniformLocation, const bool& value
     SetUniform(nUniformLocation, value ? GL_TRUE : GL_FALSE);
 }
 
-template<>
-inline void shader_program::SetUniform(GLint nUniformLocation, const glm::mat4 & value)
+template<typename T>
+inline void shader_program::SetUniform(GLint nUniformLocation, const T& value)
 {
-    glUniformMatrix4fv(nUniformLocation, 1, GL_FALSE, glm::value_ptr(value));
+    SetUniform(nUniformLocation, &value, 1);
 }
 
 template<typename T>
 inline void shader_program::SetUniform(const GLchar* name, const T& value)
 {
+    SetUniform(GetUniformLocation(name), value);
+}
+
+//==============================================================================
+//!\fn                shader_program::GetUniformLocation
+//
+//!\brief   Get uniform location based on it's name
+//!\param   name - uniform string name
+//!\retval       - location number
+//!\author Khrapov
+//!\date   05.08.2020
+//==============================================================================
+inline GLint shader_program::GetUniformLocation(const GLchar* name) const
+{
     GLint nLocation = glGetUniformLocation(m_nProgram, name);
     ASSERT_MSG(nLocation >= 0, "Cant find uniform \"%s\" in program %u", name, m_nProgram);
-    SetUniform(nLocation, value);
+    return nLocation;
 }
 
 }

@@ -30,6 +30,7 @@ inline void base_ubo<COPYBLE>::Init(GLuint nBindingPoint, GLsizeiptr szUBO)
     Bind();
     Update(szUBO, NULL, GL_STREAM_DRAW);
     BindBase(nBindingPoint);
+    Unbind();
 }
 
 //==============================================================================

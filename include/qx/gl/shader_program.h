@@ -39,30 +39,45 @@ public:
 
     QX_NONCOPYBLE(shader_program)
 
-            shader_program  (void) = default;
-           ~shader_program  (void);
+            shader_program      (void) = default;
+           ~shader_program      (void);
 
-    void    Init            (void);
+    void    Init                (void);
 
     template <GLenum ShaderType>
-    void    AttachShader    (shader_base<ShaderType>* pShader);
-    bool    Link            (void);
-    void    Use             (void);
-    void    Unuse           (void);
-    void    DispatchCompute (GLuint             nGroupsX,
-                             GLuint             nGroupsY,
-                             GLuint             nGroupsZ);
-    GLint   GetParameter    (GLenum             eParameter);
+    void    AttachShader        (shader_base<ShaderType>* pShader);
+    bool    Link                (void);
+    void    Use                 (void);
+    void    Unuse               (void);
+    void    DispatchCompute     (GLuint             nGroupsX,
+                                 GLuint             nGroupsY,
+                                 GLuint             nGroupsZ);
+    GLint   GetParameter        (GLenum             eParameter) const;
+
+    
+    template<typename T>
+    void    SetUniform          (GLint              nUniformLocation,
+                                 const T          * pValue,
+                                 GLsizei            nCount);
+    template<typename T>
+    void    SetUniform          (const GLchar     * name,
+                                 const T          * pValue,
+                                 GLsizei            nCount);
 
     template<typename T>
-    void    SetUniform      (const GLchar     * name,
-                             const T          & value);
+    void    SetUniform          (GLint              nUniformLocation,
+                                 const T          & value);
 
     template<typename T>
-    void    SetUniform      (GLint              nUniformLocation,
-                             const T          & value);
+    void    SetUniform          (const GLchar     * name,
+                                 const T          & value);
+
+protected:
+
+    GLint   GetUniformLocation  (const GLchar     * name) const;
 
 private:
+
     GLuint              m_nProgram          = UINT_EMPTY_VALUE;
     std::vector<GLuint> m_AttachedShaders;
 };

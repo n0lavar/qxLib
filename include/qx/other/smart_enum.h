@@ -24,8 +24,8 @@ class name                                                                      
 public:                                                                                                     \
     enum e                                                                                                  \
     {                                                                                                       \
-        none = (first_elem) - 1,                                                                            \
-        first,                                                                                              \
+        first = (first_elem),                                                                               \
+        none  = (first_elem) - 1,                                                                           \
         __VA_ARGS__,                                                                                        \
         last,                                                                                               \
         count = last,                                                                                       \
