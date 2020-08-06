@@ -27,12 +27,14 @@ SMART_ENUM(colors_header, -3,
 
 TEST(TestQxSmartEnum, test)
 {
+    // to_string
     EXPECT_STREQ(colors_header::s_to_string(colors_header::red),     "red");
     EXPECT_STREQ(colors_header::s_to_string(colors_header::black),   "black");
     EXPECT_STREQ(colors_header::s_to_string(colors_header::green),   "green");
     EXPECT_STREQ(colors_header::s_to_string(colors_header::white),   "white");
     EXPECT_STREQ(colors_header::s_to_string(colors_header::yellow),  "yellow");
 
+    // from_string
     {
         auto optional = colors_header::s_from_string("red");
         EXPECT_TRUE(optional.has_value());
@@ -73,6 +75,37 @@ TEST(TestQxSmartEnum, test)
     EXPECT_EQ(color, colors_header::green);
     EXPECT_EQ(++color, colors_header::white);
     EXPECT_EQ(color, colors_header::white);
+
+    // operator++
+    color = colors_header::red;
+    EXPECT_EQ(++color, colors_header::black);
+    EXPECT_EQ(++color, colors_header::green);
+    EXPECT_EQ(++color, colors_header::white);
+    EXPECT_EQ(++color, colors_header::yellow);
+    EXPECT_EQ(++color, colors_header::last);
+    EXPECT_EQ(++color, colors_header::red);
+
+    // operator==
+    EXPECT_EQ(colors_header::none,      colors_header::none);
+    EXPECT_EQ(colors_header::first,     colors_header::first);
+    EXPECT_EQ(colors_header::first,     colors_header::red);
+    EXPECT_EQ(colors_header::red,       colors_header::red);
+    EXPECT_EQ(colors_header::black,     colors_header::black);
+    EXPECT_EQ(colors_header::green,     colors_header::green);
+    EXPECT_EQ(colors_header::white,     colors_header::white);
+    EXPECT_EQ(colors_header::yellow,    colors_header::yellow);
+    EXPECT_EQ(colors_header::last,      colors_header::last);
+    EXPECT_EQ(colors_header::count,     colors_header::count);
+    EXPECT_EQ(colors_header::count,     colors_header::last);
+
+    // operator!=
+    EXPECT_NE(colors_header::none,      colors_header::first);
+    EXPECT_NE(colors_header::red,       colors_header::black);
+    EXPECT_NE(colors_header::black,     colors_header::green);
+    EXPECT_NE(colors_header::green,     colors_header::white);
+    EXPECT_NE(colors_header::white,     colors_header::yellow);
+    EXPECT_NE(colors_header::yellow,    colors_header::last);
+    EXPECT_NE(colors_header::last,      colors_header::none);
 }
 
 #endif

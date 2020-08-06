@@ -22,6 +22,7 @@
 class name                                                                                                  \
 {                                                                                                           \
 public:                                                                                                     \
+    /* todo: enum class and using enum (C++ 20) */                                                          \
     enum e                                                                                                  \
     {                                                                                                       \
         first = (first_elem),                                                                               \
@@ -34,14 +35,16 @@ public:                                                                         
     name(void) = default;                                                                                   \
     name(e value) : m_eValue(value) { }                                                                     \
                                                                                                             \
-    bool operator==(const name& other) const { return m_eValue == other.m_eValue;   }                       \
-    bool operator==(const e&    other) const { return m_eValue == other;            }                       \
-         operator e(void)              const { return m_eValue;                     }                       \
+    bool operator==(const name& other) const { return m_eValue == other.m_eValue;       }                   \
+    bool operator==(const e&    other) const { return m_eValue == other;                }                   \
+    bool operator!=(const name& other) const { return !operator==(other.m_eValue);      }                   \
+    bool operator!=(const e&    other) const { return !operator==(other);               }                   \
+         operator e(void)              const { return m_eValue;                         }                   \
                                                                                                             \
     static const char* s_to_string(e value)                                                                 \
     {                                                                                                       \
         static const std::vector<qx::pstring> enum_to_string = fill_enum_to_string();                       \
-        size_t ind = static_cast<size_t>(value - name::first);                                              \
+        size_t ind = static_cast<size_t>(value) - static_cast<size_t>(e::first);                            \
         return enum_to_string[ind].data();                                                                  \
     };                                                                                                      \
                                                                                                             \
@@ -75,7 +78,11 @@ public:                                                                         
     /* also returns "last" value as end flag */                                                             \
     e operator++ ()                                                                                         \
     {                                                                                                       \
-        m_eValue = static_cast<e>((static_cast<int>(m_eValue) + 1) % (static_cast<int>(name::last) + 1));   \
+        if (static_cast<int>(m_eValue) < static_cast<int>(e::last))                                         \
+            m_eValue = static_cast<e>((static_cast<int>(m_eValue) + 1));                                    \
+        else                                                                                                \
+            m_eValue = e::first;                                                                            \
+                                                                                                            \
         return m_eValue;                                                                                    \
     }                                                                                                       \
                                                                                                             \
@@ -89,12 +96,12 @@ public:                                                                         
                                                                                                             \
 private:                                                                                                    \
                                                                                                             \
-    e m_eValue = none;                                                                                      \
+    e m_eValue = e::none;                                                                                   \
                                                                                                             \
     static std::unordered_map<qx::pstring, e> fill_string_to_enum()                                         \
     {                                                                                                       \
         std::vector<e> args;                                                                                \
-        for (int i = static_cast<int>(name::first); i < static_cast<int>(name::last); i++)                  \
+        for (int i = static_cast<int>(e::first); i < static_cast<int>(e::last); i++)                        \
             args.push_back(static_cast<e>(i));                                                              \
                                                                                                             \
         std::unordered_map<qx::pstring, e> m;                                                               \
