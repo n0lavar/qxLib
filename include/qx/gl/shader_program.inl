@@ -108,21 +108,6 @@ inline void shader_program::Unuse(void)
 }
 
 //==============================================================================
-//!\fn                 shader_program::DispatchCompute
-//
-//!\brief  Dispatch program compute
-//!\param  nGroupsX - The number of work groups to be launched in the X dimension
-//!\param  nGroupsY - The number of work groups to be launched in the Y dimension
-//!\param  nGroupsZ - The number of work groups to be launched in the Z dimension
-//!\author Khrapov
-//!\date   17.01.2020
-//==============================================================================
-inline void shader_program::DispatchCompute(GLuint nGroupsX, GLuint nGroupsY, GLuint nGroupsZ)
-{
-    glDispatchCompute(nGroupsX, nGroupsY, nGroupsZ);
-}
-
-//==============================================================================
 //!\fn                   shader_program::GetParameter
 //
 //!\brief  Get shader program parameter
@@ -265,9 +250,9 @@ inline void shader_program::SetUniform(GLint nUniformLocation, const glm::mat4x3
 }
 
 template<typename T>
-inline void shader_program::SetUniform(const GLchar* name, const T* pValue, GLsizei nCount)
+inline void shader_program::SetUniform(const GLchar* pszName, const T* pValue, GLsizei nCount)
 {
-    SetUniform(GetUniformLocation(name), pValue, nCount);
+    SetUniform(GetUniformLocation(pszName), pValue, nCount);
 }
 
 template<>
@@ -331,9 +316,9 @@ inline void shader_program::SetUniform(GLint nUniformLocation, const T& value)
 }
 
 template<typename T>
-inline void shader_program::SetUniform(const GLchar* name, const T& value)
+inline void shader_program::SetUniform(const GLchar* pszName, const T& value)
 {
-    SetUniform(GetUniformLocation(name), value);
+    SetUniform(GetUniformLocation(pszName), value);
 }
 
 //==============================================================================
@@ -345,11 +330,55 @@ inline void shader_program::SetUniform(const GLchar* name, const T& value)
 //!\author Khrapov
 //!\date   05.08.2020
 //==============================================================================
-inline GLint shader_program::GetUniformLocation(const GLchar* name) const
+inline GLint shader_program::GetUniformLocation(const GLchar* pszName) const
 {
-    GLint nLocation = glGetUniformLocation(m_nProgram, name);
-    ASSERT_MSG(nLocation >= 0, "Cant find uniform \"%s\" in program %u", name, m_nProgram);
+    GLint nLocation = glGetUniformLocation(m_nProgram, pszName);
+    ASSERT_MSG(nLocation >= 0, "Cant find uniform \"%s\" in program %u", pszName, m_nProgram);
     return nLocation;
+}
+
+//==============================================================================
+//!\fn                  shader_program::AddInclude
+//
+//!\brief   Add include string
+//!\details ARB_shading_language_include is required for this function
+//          calling of this function must be before shader's compilation
+//          usage example:
+//
+//          #version 440 core
+//          #extension GL_ARB_shading_language_include : require
+//          #include "/header.h"
+//
+//!\param   pszName      - name that you will #include in shader (should be with leading '/')
+//!\param   nNameLength  - name length
+//!\param   pszText      - text that will be placed in shader instead of #include
+//!\param   nTextLength  - text length
+//!\author  Khrapov
+//!\date    06.08.2020
+//==============================================================================
+inline void shader_program::AddInclude(const char* pszName,
+                                       GLint       nNameLength,
+                                       const char* pszText,
+                                       GLint       nTextLength)
+{
+    bool bGlslIncludeSupported = GLEW_ARB_shading_language_include;
+    CHECK(bGlslIncludeSupported)
+        glNamedStringARB(GL_SHADER_INCLUDE_ARB, nNameLength, pszName, nTextLength, pszText);
+}
+
+//==============================================================================
+//!\fn                 shader_program::DispatchCompute
+//
+//!\brief  Dispatch program compute
+//!\param  nGroupsX - The number of work groups to be launched in the X dimension
+//!\param  nGroupsY - The number of work groups to be launched in the Y dimension
+//!\param  nGroupsZ - The number of work groups to be launched in the Z dimension
+//!\author Khrapov
+//!\date   17.01.2020
+//==============================================================================
+inline void shader_program::DispatchCompute(GLuint nGroupsX, GLuint nGroupsY, GLuint nGroupsZ)
+{
+    glDispatchCompute(nGroupsX, nGroupsY, nGroupsZ);
 }
 
 }

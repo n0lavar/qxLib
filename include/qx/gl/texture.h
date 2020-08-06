@@ -100,6 +100,9 @@ inline GLsizei base_texture<COPYBLE>::GetHeight     (void) const { return m_nHei
 
 QX_DEFINE_BUFFER_CLASSES(texture)
 
+using ptr_texture = std::unique_ptr<texture>;
+
 }
+
 
 #include <qx/gl/texture.inl>
