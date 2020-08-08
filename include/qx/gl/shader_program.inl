@@ -51,7 +51,6 @@ template <GLenum ShaderType>
 inline void shader_program::AttachShader(shader_base<ShaderType>* pShader)
 {
     glAttachShader(m_nProgram, pShader->GetID());
-    m_AttachedShaders.push_back(pShader->GetID());
 }
 
 //==============================================================================
@@ -71,13 +70,6 @@ inline bool shader_program::Link(void)
         GLchar infoLog[512];
         glGetProgramInfoLog(m_nProgram, 512, NULL, infoLog);
         ASSERT_MSG(0, "Shader linking failed: %s", infoLog);
-    }
-    else
-    {
-        for (GLuint nShader : m_AttachedShaders)
-            glDeleteShader(nShader);
-
-        m_AttachedShaders.clear();
     }
 
     return bSuccess;

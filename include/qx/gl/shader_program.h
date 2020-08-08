@@ -14,7 +14,6 @@
 
 #include <glew.h>
 #include <glm/gtc/type_ptr.hpp>
-#include <vector>
 #include <memory>
 
 #include <qx/gl/shaders.h>
@@ -81,7 +80,6 @@ protected:
 private:
 
     GLuint              m_nProgram          = UINT_EMPTY_VALUE;
-    std::vector<GLuint> m_AttachedShaders;
 };
 
 }

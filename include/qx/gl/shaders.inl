@@ -40,13 +40,7 @@ inline shader_base<ShaderType>::~shader_base()
 {
     // shader deleted in shader_program::Link
     if (m_nShader != UINT_EMPTY_VALUE && GetParameter(GL_DELETE_STATUS) != GL_TRUE)
-    {
-        ASSERT_MSG(0, "Shader memory is being freed in destructor. "
-                      "Shader has been compiled, but has not been attached to "
-                      "the program or program has not been linked.");
-
         glDeleteShader(m_nShader);
-    }
 }
 
 //==============================================================================

@@ -53,9 +53,11 @@ template <GLenum ShaderType>
 inline GLuint shader_base<ShaderType>::GetID(void) const { return m_nShader; }
 
 using shader_vert = shader_base<GL_VERTEX_SHADER>;
+using shader_tesc = shader_base<GL_TESS_CONTROL_SHADER>;
+using shader_tese = shader_base<GL_TESS_EVALUATION_SHADER>;
+using shader_geom = shader_base<GL_GEOMETRY_SHADER>;
 using shader_frag = shader_base<GL_FRAGMENT_SHADER>;
 using shader_comp = shader_base<GL_COMPUTE_SHADER>;
-using shader_geom = shader_base<GL_GEOMETRY_SHADER_ARB>;
 
 }
 
