@@ -14,7 +14,6 @@
 
 #include <glew.h>
 #include <glm/gtc/type_ptr.hpp>
-#include <memory>
 
 #include <qx/gl/shaders.h>
 
@@ -79,11 +78,9 @@ protected:
 
 private:
 
-    GLuint              m_nProgram          = UINT_EMPTY_VALUE;
+    GLuint m_nProgram = UINT_EMPTY_VALUE;
 };
 
 }
-
-using TPtrShaderProgram = std::shared_ptr<qx::shader_program>;
 
 #include <qx/gl/shader_program.inl>
