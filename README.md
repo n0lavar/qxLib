@@ -1,7 +1,7 @@
 # qxLib
 [![Build Status](https://travis-ci.com/n0lavar/qxLib.svg?branch=master)](https://travis-ci.com/n0lavar/qxLib) [![Build status](https://ci.appveyor.com/api/projects/status/y4nmc4evl4x1wslg?svg=true)](https://ci.appveyor.com/project/n0lavar/qxlib) [![Codacy Badge](https://api.codacy.com/project/badge/Grade/ab3175ce6af6453284f8a639306a6935)](https://www.codacy.com/manual/n0lavar/qxLib?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=n0lavar/qxLib&amp;utm_campaign=Badge_Grade)[![codecov](https://codecov.io/gh/n0lavar/qxLib/branch/master/graph/badge.svg)](https://codecov.io/gh/n0lavar/qxLib)
 
-A few useful things I developed while studying:
+A few useful things for developing your own game engine with OpenGL:
 + RAII for OpenGL stuff
 + non-standart containers (like triangular vector or vector2d) or more practical containers (like string with "from", "to", "format" etc methods)
 + some algorithms implementations
