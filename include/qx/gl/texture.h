@@ -15,6 +15,8 @@
 #include <qx/other/typedefs.h>
 #include <qx/gl/ibuffer.h>
 
+#include <memory>
+
 namespace qx
 {
 

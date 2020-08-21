@@ -16,6 +16,10 @@
 
 #include <qx/other/useful_macros.h>
 
+#if !defined(QX_SHADER_INFO_LOG_SIZE)
+    #define QX_SHADER_INFO_LOG_SIZE 512
+#endif
+
 namespace qx
 {
 

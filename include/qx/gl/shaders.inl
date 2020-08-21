@@ -64,9 +64,9 @@ inline void shader_base<ShaderType>::Init(const GLchar* pszShaderCode)
         // Print compile errors if any
         if (GLint bSuccess = GetParameter(GL_COMPILE_STATUS); !bSuccess)
         {
-            GLchar infoLog[512];
-            glGetShaderInfoLog(m_nShader, 512, NULL, infoLog);
-            ASSERT_MSG(0, "Shader %d compilation failed: %s", m_nShader, infoLog);
+            GLchar infoLog[QX_SHADER_INFO_LOG_SIZE];
+            glGetShaderInfoLog(m_nShader, QX_SHADER_INFO_LOG_SIZE, NULL, infoLog);
+            ASSERT_MSG(0, "Shader %d compilation failed:\n%s", m_nShader, infoLog);
         }
     }
     else

@@ -325,7 +325,11 @@ inline void shader_program::SetUniform(const GLchar* pszName, const T& value)
 inline GLint shader_program::GetUniformLocation(const GLchar* pszName) const
 {
     GLint nLocation = glGetUniformLocation(m_nProgram, pszName);
+
+#if !QX_DISABLE_UNKNOWN_UNIFORM_ASSERT
     ASSERT_MSG(nLocation >= 0, "Cant find uniform \"%s\" in program %u", pszName, m_nProgram);
+#endif
+
     return nLocation;
 }
 
