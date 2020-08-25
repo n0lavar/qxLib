@@ -23,7 +23,7 @@ source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR}/include/qx FILES ${ALL_SOURCES})
 
 
 # ================================================================
-# All
+# All 
 
 set (QXLIB_ALL_SOURCES
     ${ALL_SOURCES}

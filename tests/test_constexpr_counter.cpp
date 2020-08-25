@@ -61,10 +61,10 @@ STATIC_ASSERT_EQ(e0, 5);
 STATIC_ASSERT_EQ(e1, 8);
 STATIC_ASSERT_EQ(e2, 11);
 
-using counter_F_2_m1 = qx::constexpr_counter<struct TagF, 2, -3>;
-constexpr int f0 = counter_F_2_m1::next();
-constexpr int f1 = counter_F_2_m1::next();
-constexpr int f2 = counter_F_2_m1::next();
+using counter_F_2_m3 = qx::constexpr_counter<struct TagF, 2, -3>;
+constexpr int f0 = counter_F_2_m3::next();
+constexpr int f1 = counter_F_2_m3::next();
+constexpr int f2 = counter_F_2_m3::next();
 STATIC_ASSERT_EQ(f0, 2);
 STATIC_ASSERT_EQ(f1, -1);
 STATIC_ASSERT_EQ(f2, -4);
