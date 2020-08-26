@@ -14,6 +14,7 @@
 #include <memory>
 #include <gtest/gtest.h>
 
+#define IS_CONSTEXPR(a) static_assert((a) || !(a));
 
 class CClass1
 {
@@ -89,29 +90,46 @@ class CDerived2_32 : public CDerived2_3
 
 TEST(rtti, class_id)
 {
-    std::shared_ptr<CDerived1_3> pA3 = std::make_shared<CDerived1_3>();
+    std::shared_ptr<CDerived1_21> p1 = std::make_shared<CDerived1_21>();
 
-    switch (static_cast<CBase1*>(pA3.get())->get_class_id())
+    EXPECT_TRUE(static_cast<CBase1*>(p1.get())->get_class_id()      == qx::get_class_id<CDerived1_21>());
+    EXPECT_TRUE(static_cast<CDerived1_2*>(p1.get())->get_class_id() == qx::get_class_id<CDerived1_21>());
+    EXPECT_TRUE(p1->get_class_id()                                  == qx::get_class_id<CDerived1_21>());
+
+    static_assert(qx::get_class_id<CClass1>() == -1);
+    static_assert(qx::get_class_id<CClass2>() == -1);
+
+    std::set<int> ids;
+    auto CheckId = [&ids] (int id)
     {
-    case qx::get_class_id<CBase1>():
-        ADD_FAILURE();
-        break;
+        EXPECT_GE(id, 0) << "existing id must be greater or equal then 0";
+        auto ret = ids.insert(id);
+        EXPECT_TRUE(ret.second) << "existing id must be unique";
+    };
 
-    case qx::get_class_id<CDerived1_1>():
-        ADD_FAILURE();
-        break;
+    CheckId(qx::get_class_id<CDerived1_1>());
+    CheckId(qx::get_class_id<CDerived1_2>());
+    CheckId(qx::get_class_id<CDerived1_21>());
+    CheckId(qx::get_class_id<CDerived1_22>());
+    CheckId(qx::get_class_id<CDerived1_3>());
 
-    case qx::get_class_id<CDerived1_2>():
-        ADD_FAILURE();
-        break;
+    CheckId(qx::get_class_id<CDerived2_1>());
+    CheckId(qx::get_class_id<CDerived2_2>());
+    CheckId(qx::get_class_id<CDerived2_3>());
+    CheckId(qx::get_class_id<CDerived2_31>());
+    CheckId(qx::get_class_id<CDerived2_32>());
 
-    case qx::get_class_id<CDerived1_3>():
-        break;
+    IS_CONSTEXPR(qx::get_class_id<CDerived1_1>());
+    IS_CONSTEXPR(qx::get_class_id<CDerived1_2>());
+    IS_CONSTEXPR(qx::get_class_id<CDerived1_21>());
+    IS_CONSTEXPR(qx::get_class_id<CDerived1_22>());
+    IS_CONSTEXPR(qx::get_class_id<CDerived1_3>());
 
-    default:
-        ADD_FAILURE();
-        break;
-    }
+    IS_CONSTEXPR(qx::get_class_id<CDerived2_1>());
+    IS_CONSTEXPR(qx::get_class_id<CDerived2_2>());
+    IS_CONSTEXPR(qx::get_class_id<CDerived2_3>());
+    IS_CONSTEXPR(qx::get_class_id<CDerived2_31>());
+    IS_CONSTEXPR(qx::get_class_id<CDerived2_32>());
 }
 
 TEST(rtti, is_derived_from)
