@@ -49,6 +49,10 @@ using class_counter = constexpr_counter<struct class_counter_tag>;
 // qx::is_derived<class_1>::from<class_1>():
 //                              returns constexpr true if class_1 derived from class_1
 //
+// pObject->is_derived_from<base>(): 
+//                              replacement for if (auto pBase = dynamic_cast<base*>(pObject))
+//                              returns true if class of pObject is derived from base type of pObject is base
+//
 // name::BaseClass              base class
 // name::SuperClass             super blass
 // name::ThisClass              this class
@@ -62,7 +66,15 @@ public:                                                                     \
     using BaseClass  = base;                                                \
     using ThisClass  = base;                                                \
                                                                             \
-    template<class T> friend constexpr int qx::get_class_id(void);          \
+    template<class RTTI_TYPE>                                               \
+    friend constexpr int qx::get_class_id(void);                            \
+                                                                            \
+    template <typename RTTI_TYPE>                                           \
+    bool is_derived_from() const noexcept                                   \
+    {                                                                       \
+        return is_base_id(qx::get_class_id<RTTI_TYPE>()) ||                 \
+               qx::get_class_id<RTTI_TYPE>() == get_class_id();             \
+    }                                                                       \
                                                                             \
     virtual int get_class_id(void) const noexcept                           \
     {                                                                       \
@@ -111,7 +123,8 @@ public:                                                                     \
     using BaseClass  = SuperClass::BaseClass;                               \
     using ThisClass  = derived;                                             \
                                                                             \
-    template<class T> friend constexpr int qx::get_class_id(void);          \
+    template<class RTTI_TYPE>                                               \
+    friend constexpr int qx::get_class_id(void);                            \
                                                                             \
     virtual int get_class_id (void) const noexcept override                 \
     {                                                                       \
