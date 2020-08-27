@@ -50,6 +50,16 @@ class CDerived1_22 : public CDerived1_2
     QX_RTTI_CLASS_DERIVED(CDerived1_22, CDerived1_2)
 }
 
+class CDerived1_221 : public CDerived1_22
+{
+    QX_RTTI_CLASS_DERIVED(CDerived1_221, CDerived1_22)
+}
+
+class CDerived1_222 : public CDerived1_22
+{
+    QX_RTTI_CLASS_DERIVED(CDerived1_222, CDerived1_22)
+}
+
 class CDerived1_3 : public CBase1
 {
     QX_RTTI_CLASS_DERIVED(CDerived1_3, CBase1)
@@ -111,6 +121,8 @@ TEST(rtti, class_id)
     CheckId(qx::get_class_id<CDerived1_2>());
     CheckId(qx::get_class_id<CDerived1_21>());
     CheckId(qx::get_class_id<CDerived1_22>());
+    CheckId(qx::get_class_id<CDerived1_221>());
+    CheckId(qx::get_class_id<CDerived1_222>());
     CheckId(qx::get_class_id<CDerived1_3>());
 
     CheckId(qx::get_class_id<CDerived2_1>());
@@ -123,6 +135,8 @@ TEST(rtti, class_id)
     IS_CONSTEXPR(qx::get_class_id<CDerived1_2>());
     IS_CONSTEXPR(qx::get_class_id<CDerived1_21>());
     IS_CONSTEXPR(qx::get_class_id<CDerived1_22>());
+    IS_CONSTEXPR(qx::get_class_id<CDerived1_221>());
+    IS_CONSTEXPR(qx::get_class_id<CDerived1_222>());
     IS_CONSTEXPR(qx::get_class_id<CDerived1_3>());
 
     IS_CONSTEXPR(qx::get_class_id<CDerived2_1>());
@@ -139,111 +153,141 @@ TEST(rtti, is_derived_from)
     std::shared_ptr<CDerived1_2>    p1_2    = std::make_shared<CDerived1_2>();
     std::shared_ptr<CDerived1_21>   p1_21   = std::make_shared<CDerived1_21>();
     std::shared_ptr<CDerived1_22>   p1_22   = std::make_shared<CDerived1_22>();
+    std::shared_ptr<CDerived1_221>  p1_221  = std::make_shared<CDerived1_221>();
+    std::shared_ptr<CDerived1_222>  p1_222  = std::make_shared<CDerived1_222>();
     std::shared_ptr<CDerived1_3>    p1_3    = std::make_shared<CDerived1_3>();
 
 
 
-    EXPECT_TRUE (p1   ->is_derived_from<CBase1>());
-    EXPECT_TRUE (p1_1 ->is_derived_from<CBase1>());
-    EXPECT_TRUE (p1_2 ->is_derived_from<CBase1>());
-    EXPECT_TRUE (p1_21->is_derived_from<CBase1>());
-    EXPECT_TRUE (p1_22->is_derived_from<CBase1>());
-    EXPECT_TRUE (p1_3 ->is_derived_from<CBase1>());
+    EXPECT_TRUE (p1     ->is_derived_from<CBase1>());
+    EXPECT_TRUE (p1_1   ->is_derived_from<CBase1>());
+    EXPECT_TRUE (p1_2   ->is_derived_from<CBase1>());
+    EXPECT_TRUE (p1_21  ->is_derived_from<CBase1>());
+    EXPECT_TRUE (p1_22  ->is_derived_from<CBase1>());
+    EXPECT_TRUE (p1_221 ->is_derived_from<CBase1>());
+    EXPECT_TRUE (p1_222 ->is_derived_from<CBase1>());
+    EXPECT_TRUE (p1_3   ->is_derived_from<CBase1>());
 
-    EXPECT_FALSE(p1   ->is_derived_from<CDerived1_1>());
-    EXPECT_TRUE (p1_1 ->is_derived_from<CDerived1_1>());
-    EXPECT_FALSE(p1_2 ->is_derived_from<CDerived1_1>());
-    EXPECT_FALSE(p1_21->is_derived_from<CDerived1_1>());
-    EXPECT_FALSE(p1_22->is_derived_from<CDerived1_1>());
-    EXPECT_FALSE(p1_3 ->is_derived_from<CDerived1_1>());
+    EXPECT_FALSE(p1     ->is_derived_from<CDerived1_1>());
+    EXPECT_TRUE (p1_1   ->is_derived_from<CDerived1_1>());
+    EXPECT_FALSE(p1_2   ->is_derived_from<CDerived1_1>());
+    EXPECT_FALSE(p1_21  ->is_derived_from<CDerived1_1>());
+    EXPECT_FALSE(p1_22  ->is_derived_from<CDerived1_1>());
+    EXPECT_FALSE(p1_221 ->is_derived_from<CDerived1_1>());
+    EXPECT_FALSE(p1_222 ->is_derived_from<CDerived1_1>());
+    EXPECT_FALSE(p1_3   ->is_derived_from<CDerived1_1>());
 
-    EXPECT_FALSE(p1   ->is_derived_from<CDerived1_2>());
-    EXPECT_FALSE(p1_1 ->is_derived_from<CDerived1_2>());
-    EXPECT_TRUE (p1_2 ->is_derived_from<CDerived1_2>());
-    EXPECT_TRUE (p1_21->is_derived_from<CDerived1_2>());
-    EXPECT_TRUE (p1_22->is_derived_from<CDerived1_2>());
-    EXPECT_FALSE(p1_3 ->is_derived_from<CDerived1_2>());
+    EXPECT_FALSE(p1     ->is_derived_from<CDerived1_2>());
+    EXPECT_FALSE(p1_1   ->is_derived_from<CDerived1_2>());
+    EXPECT_TRUE (p1_2   ->is_derived_from<CDerived1_2>());
+    EXPECT_TRUE (p1_21  ->is_derived_from<CDerived1_2>());
+    EXPECT_TRUE (p1_22  ->is_derived_from<CDerived1_2>());
+    EXPECT_TRUE (p1_221 ->is_derived_from<CDerived1_2>());
+    EXPECT_TRUE (p1_222 ->is_derived_from<CDerived1_2>());
+    EXPECT_FALSE(p1_3   ->is_derived_from<CDerived1_2>());
 
-    EXPECT_FALSE(p1   ->is_derived_from<CDerived1_21>());
-    EXPECT_FALSE(p1_1 ->is_derived_from<CDerived1_21>());
-    EXPECT_FALSE(p1_2 ->is_derived_from<CDerived1_21>());
-    EXPECT_TRUE (p1_21->is_derived_from<CDerived1_21>());
-    EXPECT_FALSE(p1_22->is_derived_from<CDerived1_21>());
-    EXPECT_FALSE(p1_3 ->is_derived_from<CDerived1_21>());
+    EXPECT_FALSE(p1     ->is_derived_from<CDerived1_21>());
+    EXPECT_FALSE(p1_1   ->is_derived_from<CDerived1_21>());
+    EXPECT_FALSE(p1_2   ->is_derived_from<CDerived1_21>());
+    EXPECT_TRUE (p1_21  ->is_derived_from<CDerived1_21>());
+    EXPECT_FALSE(p1_22  ->is_derived_from<CDerived1_21>());
+    EXPECT_FALSE(p1_221 ->is_derived_from<CDerived1_21>());
+    EXPECT_FALSE(p1_222 ->is_derived_from<CDerived1_21>());
+    EXPECT_FALSE(p1_3   ->is_derived_from<CDerived1_21>());
 
-    EXPECT_FALSE(p1   ->is_derived_from<CDerived1_22>());
-    EXPECT_FALSE(p1_1 ->is_derived_from<CDerived1_22>());
-    EXPECT_FALSE(p1_2 ->is_derived_from<CDerived1_22>());
-    EXPECT_FALSE(p1_21->is_derived_from<CDerived1_22>());
-    EXPECT_TRUE (p1_22->is_derived_from<CDerived1_22>());
-    EXPECT_FALSE(p1_3 ->is_derived_from<CDerived1_22>());
+    EXPECT_FALSE(p1     ->is_derived_from<CDerived1_22>());
+    EXPECT_FALSE(p1_1   ->is_derived_from<CDerived1_22>());
+    EXPECT_FALSE(p1_2   ->is_derived_from<CDerived1_22>());
+    EXPECT_FALSE(p1_21  ->is_derived_from<CDerived1_22>());
+    EXPECT_TRUE (p1_22  ->is_derived_from<CDerived1_22>());
+    EXPECT_TRUE (p1_221 ->is_derived_from<CDerived1_22>());
+    EXPECT_TRUE (p1_222 ->is_derived_from<CDerived1_22>());
+    EXPECT_FALSE(p1_3   ->is_derived_from<CDerived1_22>());
 
-    EXPECT_FALSE(p1   ->is_derived_from<CDerived1_3>());
-    EXPECT_FALSE(p1_1 ->is_derived_from<CDerived1_3>());
-    EXPECT_FALSE(p1_2 ->is_derived_from<CDerived1_3>());
-    EXPECT_FALSE(p1_21->is_derived_from<CDerived1_3>());
-    EXPECT_FALSE(p1_22->is_derived_from<CDerived1_3>());
-    EXPECT_TRUE (p1_3 ->is_derived_from<CDerived1_3>());
-
-
-
-    EXPECT_FALSE(p1   ->is_derived_from<CBase2>());
-    EXPECT_FALSE(p1_1 ->is_derived_from<CBase2>());
-    EXPECT_FALSE(p1_2 ->is_derived_from<CBase2>());
-    EXPECT_FALSE(p1_21->is_derived_from<CBase2>());
-    EXPECT_FALSE(p1_22->is_derived_from<CBase2>());
-    EXPECT_FALSE(p1_3 ->is_derived_from<CBase2>());
-
-    EXPECT_FALSE(p1   ->is_derived_from<CDerived2_1>());
-    EXPECT_FALSE(p1_1 ->is_derived_from<CDerived2_1>());
-    EXPECT_FALSE(p1_2 ->is_derived_from<CDerived2_1>());
-    EXPECT_FALSE(p1_21->is_derived_from<CDerived2_1>());
-    EXPECT_FALSE(p1_22->is_derived_from<CDerived2_1>());
-    EXPECT_FALSE(p1_3 ->is_derived_from<CDerived2_1>());
-
-    EXPECT_FALSE(p1   ->is_derived_from<CDerived2_2>());
-    EXPECT_FALSE(p1_1 ->is_derived_from<CDerived2_2>());
-    EXPECT_FALSE(p1_2 ->is_derived_from<CDerived2_2>());
-    EXPECT_FALSE(p1_21->is_derived_from<CDerived2_2>());
-    EXPECT_FALSE(p1_22->is_derived_from<CDerived2_2>());
-    EXPECT_FALSE(p1_3 ->is_derived_from<CDerived2_2>());
-
-    EXPECT_FALSE(p1   ->is_derived_from<CDerived2_3>());
-    EXPECT_FALSE(p1_1 ->is_derived_from<CDerived2_3>());
-    EXPECT_FALSE(p1_2 ->is_derived_from<CDerived2_3>());
-    EXPECT_FALSE(p1_21->is_derived_from<CDerived2_3>());
-    EXPECT_FALSE(p1_22->is_derived_from<CDerived2_3>());
-    EXPECT_FALSE(p1_3 ->is_derived_from<CDerived2_3>());
-
-    EXPECT_FALSE(p1   ->is_derived_from<CDerived2_31>());
-    EXPECT_FALSE(p1_1 ->is_derived_from<CDerived2_31>());
-    EXPECT_FALSE(p1_2 ->is_derived_from<CDerived2_31>());
-    EXPECT_FALSE(p1_21->is_derived_from<CDerived2_31>());
-    EXPECT_FALSE(p1_22->is_derived_from<CDerived2_31>());
-    EXPECT_FALSE(p1_3 ->is_derived_from<CDerived2_31>());
-
-    EXPECT_FALSE(p1   ->is_derived_from<CDerived2_32>());
-    EXPECT_FALSE(p1_1 ->is_derived_from<CDerived2_32>());
-    EXPECT_FALSE(p1_2 ->is_derived_from<CDerived2_32>());
-    EXPECT_FALSE(p1_21->is_derived_from<CDerived2_32>());
-    EXPECT_FALSE(p1_22->is_derived_from<CDerived2_32>());
-    EXPECT_FALSE(p1_3 ->is_derived_from<CDerived2_32>());
+    EXPECT_FALSE(p1     ->is_derived_from<CDerived1_3>());
+    EXPECT_FALSE(p1_1   ->is_derived_from<CDerived1_3>());
+    EXPECT_FALSE(p1_2   ->is_derived_from<CDerived1_3>());
+    EXPECT_FALSE(p1_21  ->is_derived_from<CDerived1_3>());
+    EXPECT_FALSE(p1_22  ->is_derived_from<CDerived1_3>());
+    EXPECT_FALSE(p1_221 ->is_derived_from<CDerived1_3>());
+    EXPECT_FALSE(p1_222 ->is_derived_from<CDerived1_3>());
+    EXPECT_TRUE (p1_3   ->is_derived_from<CDerived1_3>());
 
 
 
-    EXPECT_FALSE(p1   ->is_derived_from<CClass1>());
-    EXPECT_FALSE(p1_1 ->is_derived_from<CClass1>());
-    EXPECT_FALSE(p1_2 ->is_derived_from<CClass1>());
-    EXPECT_FALSE(p1_21->is_derived_from<CClass1>());
-    EXPECT_FALSE(p1_22->is_derived_from<CClass1>());
-    EXPECT_FALSE(p1_3 ->is_derived_from<CClass1>());
+    EXPECT_FALSE(p1     ->is_derived_from<CBase2>());
+    EXPECT_FALSE(p1_1   ->is_derived_from<CBase2>());
+    EXPECT_FALSE(p1_2   ->is_derived_from<CBase2>());
+    EXPECT_FALSE(p1_21  ->is_derived_from<CBase2>());
+    EXPECT_FALSE(p1_22  ->is_derived_from<CBase2>());
+    EXPECT_FALSE(p1_221 ->is_derived_from<CBase2>());
+    EXPECT_FALSE(p1_222 ->is_derived_from<CBase2>());
+    EXPECT_FALSE(p1_3   ->is_derived_from<CBase2>());
 
-    EXPECT_FALSE(p1   ->is_derived_from<CClass2>());
-    EXPECT_FALSE(p1_1 ->is_derived_from<CClass2>());
-    EXPECT_FALSE(p1_2 ->is_derived_from<CClass2>());
-    EXPECT_FALSE(p1_21->is_derived_from<CClass2>());
-    EXPECT_FALSE(p1_22->is_derived_from<CClass2>());
-    EXPECT_FALSE(p1_3 ->is_derived_from<CClass2>());
+    EXPECT_FALSE(p1     ->is_derived_from<CDerived2_1>());
+    EXPECT_FALSE(p1_1   ->is_derived_from<CDerived2_1>());
+    EXPECT_FALSE(p1_2   ->is_derived_from<CDerived2_1>());
+    EXPECT_FALSE(p1_21  ->is_derived_from<CDerived2_1>());
+    EXPECT_FALSE(p1_22  ->is_derived_from<CDerived2_1>());
+    EXPECT_FALSE(p1_221 ->is_derived_from<CDerived2_1>());
+    EXPECT_FALSE(p1_222 ->is_derived_from<CDerived2_1>());
+    EXPECT_FALSE(p1_3   ->is_derived_from<CDerived2_1>());
+
+    EXPECT_FALSE(p1     ->is_derived_from<CDerived2_2>());
+    EXPECT_FALSE(p1_1   ->is_derived_from<CDerived2_2>());
+    EXPECT_FALSE(p1_2   ->is_derived_from<CDerived2_2>());
+    EXPECT_FALSE(p1_21  ->is_derived_from<CDerived2_2>());
+    EXPECT_FALSE(p1_22  ->is_derived_from<CDerived2_2>());
+    EXPECT_FALSE(p1_221 ->is_derived_from<CDerived2_2>());
+    EXPECT_FALSE(p1_222 ->is_derived_from<CDerived2_2>());
+    EXPECT_FALSE(p1_3   ->is_derived_from<CDerived2_2>());
+
+    EXPECT_FALSE(p1     ->is_derived_from<CDerived2_3>());
+    EXPECT_FALSE(p1_1   ->is_derived_from<CDerived2_3>());
+    EXPECT_FALSE(p1_2   ->is_derived_from<CDerived2_3>());
+    EXPECT_FALSE(p1_21  ->is_derived_from<CDerived2_3>());
+    EXPECT_FALSE(p1_22  ->is_derived_from<CDerived2_3>());
+    EXPECT_FALSE(p1_221 ->is_derived_from<CDerived2_3>());
+    EXPECT_FALSE(p1_222 ->is_derived_from<CDerived2_3>());
+    EXPECT_FALSE(p1_3   ->is_derived_from<CDerived2_3>());
+
+    EXPECT_FALSE(p1     ->is_derived_from<CDerived2_31>());
+    EXPECT_FALSE(p1_1   ->is_derived_from<CDerived2_31>());
+    EXPECT_FALSE(p1_2   ->is_derived_from<CDerived2_31>());
+    EXPECT_FALSE(p1_21  ->is_derived_from<CDerived2_31>());
+    EXPECT_FALSE(p1_22  ->is_derived_from<CDerived2_31>());
+    EXPECT_FALSE(p1_221 ->is_derived_from<CDerived2_31>());
+    EXPECT_FALSE(p1_222 ->is_derived_from<CDerived2_31>());
+    EXPECT_FALSE(p1_3   ->is_derived_from<CDerived2_31>());
+
+    EXPECT_FALSE(p1     ->is_derived_from<CDerived2_32>());
+    EXPECT_FALSE(p1_1   ->is_derived_from<CDerived2_32>());
+    EXPECT_FALSE(p1_2   ->is_derived_from<CDerived2_32>());
+    EXPECT_FALSE(p1_21  ->is_derived_from<CDerived2_32>());
+    EXPECT_FALSE(p1_22  ->is_derived_from<CDerived2_32>());
+    EXPECT_FALSE(p1_221 ->is_derived_from<CDerived2_32>());
+    EXPECT_FALSE(p1_222 ->is_derived_from<CDerived2_32>());
+    EXPECT_FALSE(p1_3   ->is_derived_from<CDerived2_32>());
+
+
+
+    EXPECT_FALSE(p1     ->is_derived_from<CClass1>());
+    EXPECT_FALSE(p1_1   ->is_derived_from<CClass1>());
+    EXPECT_FALSE(p1_2   ->is_derived_from<CClass1>());
+    EXPECT_FALSE(p1_21  ->is_derived_from<CClass1>());
+    EXPECT_FALSE(p1_22  ->is_derived_from<CClass1>());
+    EXPECT_FALSE(p1_221 ->is_derived_from<CClass1>());
+    EXPECT_FALSE(p1_222 ->is_derived_from<CClass1>());
+    EXPECT_FALSE(p1_3   ->is_derived_from<CClass1>());
+
+    EXPECT_FALSE(p1     ->is_derived_from<CClass2>());
+    EXPECT_FALSE(p1_1   ->is_derived_from<CClass2>());
+    EXPECT_FALSE(p1_2   ->is_derived_from<CClass2>());
+    EXPECT_FALSE(p1_21  ->is_derived_from<CClass2>());
+    EXPECT_FALSE(p1_22  ->is_derived_from<CClass2>());
+    EXPECT_FALSE(p1_221 ->is_derived_from<CClass2>());
+    EXPECT_FALSE(p1_222 ->is_derived_from<CClass2>());
+    EXPECT_FALSE(p1_3   ->is_derived_from<CClass2>());
 
 
 

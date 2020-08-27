@@ -76,10 +76,7 @@ public:                                                                     \
                qx::get_class_id<RTTI_TYPE>() == get_class_id();             \
     }                                                                       \
                                                                             \
-    virtual int get_class_id(void) const noexcept                           \
-    {                                                                       \
-        return s_ClassId;                                                   \
-    }                                                                       \
+    virtual int get_class_id(void) const noexcept;                          \
                                                                             \
 protected:                                                                  \
                                                                             \
@@ -112,6 +109,11 @@ namespace qx                                                                \
 inline bool base::is_base_id(int base_id) const noexcept                    \
 {                                                                           \
     return base_id == qx::get_class_id<base>();                             \
+}                                                                           \
+                                                                            \
+inline int base::get_class_id(void) const noexcept                          \
+{                                                                           \
+    return qx::get_class_id<base>();                                        \
                                                                             \
 
 // define this macro in the end of each derived class
@@ -126,10 +128,7 @@ public:                                                                     \
     template<class RTTI_TYPE>                                               \
     friend constexpr int qx::get_class_id(void);                            \
                                                                             \
-    virtual int get_class_id (void) const noexcept override                 \
-    {                                                                       \
-        return s_ClassId;                                                   \
-    }                                                                       \
+    virtual int get_class_id (void) const noexcept override;                \
                                                                             \
 protected:                                                                  \
                                                                             \
@@ -150,4 +149,9 @@ namespace qx                                                                \
     inline constexpr int get_class_id<derived>(void)                        \
     {                                                                       \
         return derived::s_ClassId;                                          \
-    }
+    }                                                                       \
+}                                                                           \
+                                                                            \
+inline int derived::get_class_id(void) const noexcept                       \
+{                                                                           \
+    return qx::get_class_id<derived>();                                     \
