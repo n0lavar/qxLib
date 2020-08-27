@@ -58,13 +58,13 @@ using class_counter = constexpr_counter<struct class_counter_tag>;
 // name::ThisClass              this class
 
 // define this macro in the end of the base class
-#define QX_RTTI_CLASS_BASE(base)                                            \
+#define QX_RTTI_CLASS_BASE(thisClass)                                       \
                                                                             \
 public:                                                                     \
                                                                             \
-    using SuperClass = base;                                                \
-    using BaseClass  = base;                                                \
-    using ThisClass  = base;                                                \
+    using SuperClass = thisClass;                                           \
+    using BaseClass  = thisClass;                                           \
+    using ThisClass  = thisClass;                                           \
                                                                             \
     template<class RTTI_TYPE>                                               \
     friend constexpr int qx::get_class_id(void);                            \
@@ -90,40 +90,40 @@ private:                                                                    \
 namespace qx                                                                \
 {                                                                           \
     template<>                                                              \
-    inline constexpr int get_class_id<base>(void)                           \
+    inline constexpr int get_class_id<thisClass>(void)                      \
     {                                                                       \
-        return base::s_ClassId;                                             \
+        return thisClass::s_ClassId;                                        \
     }                                                                       \
                                                                             \
     template <>                                                             \
-    struct is_derived<base>                                                 \
+    struct is_derived<thisClass>                                            \
     {                                                                       \
         template <typename Y>                                               \
         static constexpr bool from() noexcept                               \
         {                                                                   \
-            return qx::get_class_id<base>() == qx::get_class_id<Y>();       \
+            return qx::get_class_id<thisClass>() == qx::get_class_id<Y>();  \
         }                                                                   \
     };                                                                      \
 }                                                                           \
                                                                             \
-inline bool base::is_base_id(int base_id) const noexcept                    \
+inline bool thisClass::is_base_id(int base_id) const noexcept               \
 {                                                                           \
-    return base_id == qx::get_class_id<base>();                             \
+    return base_id == qx::get_class_id<thisClass>();                        \
 }                                                                           \
                                                                             \
-inline int base::get_class_id(void) const noexcept                          \
+inline int thisClass::get_class_id(void) const noexcept                     \
 {                                                                           \
-    return qx::get_class_id<base>();                                        \
+    return qx::get_class_id<thisClass>();                                   \
                                                                             \
 
 // define this macro in the end of each derived class
-#define QX_RTTI_CLASS_DERIVED(derived, super)                               \
+#define QX_RTTI_CLASS_DERIVED(thisClass, superClass)                        \
                                                                             \
 public:                                                                     \
                                                                             \
-    using SuperClass = super;                                               \
+    using SuperClass = superClass;                                          \
     using BaseClass  = SuperClass::BaseClass;                               \
-    using ThisClass  = derived;                                             \
+    using ThisClass  = thisClass;                                           \
                                                                             \
     template<class RTTI_TYPE>                                               \
     friend constexpr int qx::get_class_id(void);                            \
@@ -146,12 +146,12 @@ private:                                                                    \
 namespace qx                                                                \
 {                                                                           \
     template<>                                                              \
-    inline constexpr int get_class_id<derived>(void)                        \
+    inline constexpr int get_class_id<thisClass>(void)                      \
     {                                                                       \
-        return derived::s_ClassId;                                          \
+        return thisClass::s_ClassId;                                        \
     }                                                                       \
 }                                                                           \
                                                                             \
-inline int derived::get_class_id(void) const noexcept                       \
+inline int thisClass::get_class_id(void) const noexcept                     \
 {                                                                           \
-    return qx::get_class_id<derived>();                                     \
+    return qx::get_class_id<thisClass>();                                   \
