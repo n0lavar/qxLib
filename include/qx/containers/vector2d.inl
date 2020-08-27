@@ -42,7 +42,8 @@ inline void vector2d<T>::assign(vector2d&& other) noexcept
 template<class T>
 inline void vector2d<T>::assign(const vector2d& other)
 {
-    assign(other.rows(), other.cols(), other.m_pData);
+    if (other.m_pData != m_pData)
+        assign(other.rows(), other.cols(), other.m_pData);
 }
 
 //==============================================================================
@@ -198,7 +199,8 @@ inline void vector2d<T>::free(void)
 template<class T>
 inline void vector2d<T>::fill(const_reference elem)
 {
-    std::fill(begin(), end(), elem);
+    value_type temp = elem;
+    std::fill(begin(), end(), temp);
 }
 
 //==============================================================================

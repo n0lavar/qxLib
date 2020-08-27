@@ -94,9 +94,9 @@ public:
     void                    assign       (const_pointer          pSource,
                                           size_type              nSymbols);
     void                    assign       (basic_string        && str)    noexcept { std::swap(m_pData, str.m_pData);           }
-    void                    assign       (const basic_string   & str)             { assign(str.m_pData);                       }
+    void                    assign       (const basic_string   & str);
     void                    assign       (value_type             ch)              { assign(&ch, 1);                            }
-    void                    assign       (const_pointer          pSource)         { assign(pSource, Traits::tstrlen(pSource)); }
+    void                    assign       (const_pointer          pSource);
     void                    assign       (size_type              nSymbols,
                                           value_type             ch);
     void                    assign       (const std_string_type& str)             { assign(str.data(), static_cast<size_type>(str.size())); }

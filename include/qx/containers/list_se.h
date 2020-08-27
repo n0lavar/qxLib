@@ -180,6 +180,7 @@ public:
     const_reference     back            (void)  const   { return m_pLastNode->value;            }
 
 private:
+
     list_se_node*       m_pFirstNode    = nullptr;
     list_se_node*       m_pLastNode     = nullptr;
     size_type           m_nSize         = 0;

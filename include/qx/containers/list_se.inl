@@ -26,9 +26,12 @@ namespace qx
 template<class T>
 inline void list_se<T>::assign(const list_se& list)
 {
-    clear();
-    for (auto& elem : list)
-        push_back(elem);
+    if (list.cbegin() != cbegin())
+    {
+        clear();
+        for (auto& elem : list)
+            push_back(elem);
+    }
 }
 
 //==============================================================================

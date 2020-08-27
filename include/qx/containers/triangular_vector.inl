@@ -42,7 +42,7 @@ inline void triangular_vector<T>::assign(this_type&& other) noexcept
 template<class T>
 inline void triangular_vector<T>::assign(const this_type& other)
 {
-    if (resize(other.size_side()))
+    if (other.m_pData != m_pData && resize(other.size_side()))
         std::memcpy(m_pData, other.m_pData, size() * sizeof(T));
 }
 
@@ -169,7 +169,8 @@ inline void triangular_vector<T>::free(void)
 template<class T>
 inline void triangular_vector<T>::fill(const_reference data)
 {
-    std::fill(begin(), end(), data);
+    value_type temp = data;
+    std::fill(begin(), end(), temp);
 }
 
 //==============================================================================

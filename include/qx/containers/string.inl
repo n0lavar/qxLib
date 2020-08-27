@@ -31,6 +31,38 @@ inline void basic_string<Traits>::assign(const_pointer pSource, size_type nSymbo
 }
 
 //==============================================================================
+//!\fn                    basic_string<Traits>::assign
+//
+//!\brief  Assign by another string
+//!\param  str - string
+//!\author Khrapov
+//!\date   27.08.2020
+//==============================================================================
+template<class Traits>
+inline void basic_string<Traits>::assign(const basic_string& str)
+{
+    if (str.data() != data())
+        assign(str.m_pData);
+}
+
+//==============================================================================
+//!\fn                    basic_string<Traits>::assign
+//
+//!\brief  Assign by const pointer
+//!\param  pSource - const pointer
+//!\author Khrapov
+//!\date   27.08.2020
+//==============================================================================
+template<class Traits>
+inline void basic_string<Traits>::assign(const_pointer pSource)
+{
+    if (pSource != data())
+        assign(pSource, Traits::tstrlen(pSource));
+}
+
+
+
+//==============================================================================
 //!\fn               basic_string<Traits>::assign
 //
 //!\brief  Assign by filling
