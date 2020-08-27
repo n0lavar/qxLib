@@ -56,7 +56,7 @@ public:
     template<typename T>                                      
     void        SetUniform          (const GLchar             * pszName,
                                      const T                  * pValue,
-                                     GLsizei                    nCount);
+                                     size_t                     nCount);
     template<typename T>                                      
     void        SetUniform          (GLint                      nUniformLocation,
                                      const T                  & value);
