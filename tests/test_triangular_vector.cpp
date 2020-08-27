@@ -127,6 +127,14 @@ TEST(TestQxTriangularVector, size)
     EXPECT_EQ(vec1.size(), 0);
     EXPECT_EQ(vec1.size_side(), 0);
     EXPECT_EQ(vec1.capacity(), 28);
+    EXPECT_TRUE(vec1.data());
+
+    vec1.free();
+    EXPECT_TRUE(vec1.empty());
+    EXPECT_EQ(vec1.size(), 0);
+    EXPECT_EQ(vec1.size_side(), 0);
+    EXPECT_EQ(vec1.capacity(), 0);
+    EXPECT_FALSE(vec1.data());
 }
 
 TEST(TestQxTriangularVector, access)

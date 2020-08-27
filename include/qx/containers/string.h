@@ -77,6 +77,7 @@ public:
     IMPL_CONTAINER(basic_string)
 
 public:
+
                             basic_string (void) = default;
                             basic_string (const_pointer          pSource,
                                           size_type              nSymbols)        { assign(pSource, nSymbols);                 }
@@ -103,7 +104,7 @@ public:
     void                    assign       (FwdIt                  first,
                                           FwdIt                  last);
 
-    virtual                ~basic_string (void)                                   { clear(); }
+    virtual                ~basic_string (void)                                   { free(); }
 
     const   basic_string &  operator=    (basic_string        && str)    noexcept;
     const   basic_string &  operator=    (const basic_string   & str);
@@ -121,8 +122,8 @@ public:
     size_type               capacity     (void)                                         const;
 
     size_type               reserve      (size_type              nCapacity);
-
     void                    fit          (void);
+    void                    free         (void);
 
     void                    erase        (iterator               first,
                                           iterator               last);
@@ -223,6 +224,7 @@ public:
     const_reference         operator[]   (size_type              ind)       const { return operator[](ind);                                     }
 
 private:
+
     SStrData<Traits>      * GetStrData   (void);
     const SStrData<Traits>* GetStrData   (void)                                                     const;
     bool                    Resize       (size_type              nSymbols,
@@ -233,6 +235,7 @@ private:
     int                     Compare      (const_pointer          pStr,
                                           size_type              nSymbols   = 0)                    const;
 private:
+
     pointer m_pData = nullptr;
 };
 

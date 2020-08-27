@@ -154,6 +154,8 @@ inline void triangular_vector<T>::free(void)
 {
     clear();
     std::free(m_pData);
+    m_pData = nullptr;
+    m_nAllocatedSize = 0;
 }
 
 //==============================================================================
@@ -293,7 +295,7 @@ inline void triangular_vector<T>::clear(void)
         destruct(begin(), end());
 
     m_nSideSize = 0;
-    m_nSize = 0;
+    m_nSize     = 0;
 }
 
 }

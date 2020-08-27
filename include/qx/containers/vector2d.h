@@ -94,8 +94,6 @@ public:
     size_type       size_y      (void) const noexcept { return m_nCols;             }
     size_type       capacity    (void) const noexcept { return m_nAllocatedSize;    }
 
-private:
-
     void            free        (void);
 
 private:

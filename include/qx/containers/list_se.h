@@ -35,7 +35,7 @@ class list_se
 {
     struct list_se_node
     {
-        list_se_node() { }
+        list_se_node() = default;
 
         template<class ...Args>
         list_se_node(Args&& ...args) : value(std::forward<Args>(args)...) { }
@@ -62,8 +62,8 @@ public:
         using size_type         = std::size_t;
         using iterator_category = std::forward_iterator_tag;
 
-        iterator        (void) = default;
-        iterator        (list_se_node* pNode) : m_pNode(pNode) { }
+                  iterator    (void) = default;
+                  iterator    (list_se_node* pNode) : m_pNode(pNode) { }
 
         reference operator*   (void)                     { return m_pNode->value;                   }
         pointer   operator->  (void)                     { return &m_pNode->value;                  }
@@ -73,6 +73,7 @@ public:
         iterator  operator++  (int)     { iterator i(m_pNode); m_pNode = m_pNode->pNext; return i;  }
 
     private:
+
         list_se_node* m_pNode = nullptr;
     };
 
@@ -81,6 +82,7 @@ public:
         friend class list_se;
 
     public:
+
         using value_type        = const T;
         using pointer           = const T*;
         using reference         = const T&;
@@ -88,18 +90,19 @@ public:
         using size_type         = std::size_t;
         using iterator_category = std::forward_iterator_tag;
 
-        const_iterator  (void) = default;
-        const_iterator  (const list_se_node* pNode) : m_pNode(pNode) { }
-        const_iterator  (const iterator& it) : m_pNode(it.m_pNote)   { }
+                        const_iterator  (void) = default;
+                        const_iterator  (const list_se_node* pNode) : m_pNode(pNode) { }
+                        const_iterator  (const iterator& it) : m_pNode(it.m_pNote)   { }
 
-        reference       operator*   (void)                          { return m_pNode->value;                  }
-        pointer         operator->  (void)                          { return &m_pNode->value;                 }
-        bool            operator!=  (const const_iterator& r) const { return m_pNode != r.m_pNode;            }
-        bool            operator==  (const const_iterator& r) const { return m_pNode == r.m_pNode;            }
-        const_iterator& operator++  (void)  { m_pNode = m_pNode->pNext; return *this;                         }
-        const_iterator  operator++  (int)   { const_iterator i(m_pNode); m_pNode = m_pNode->pNext; return i;  }
+        reference       operator*       (void)                          { return m_pNode->value;                  }
+        pointer         operator->      (void)                          { return &m_pNode->value;                 }
+        bool            operator!=      (const const_iterator& r) const { return m_pNode != r.m_pNode;            }
+        bool            operator==      (const const_iterator& r) const { return m_pNode == r.m_pNode;            }
+        const_iterator& operator++      (void)  { m_pNode = m_pNode->pNext; return *this;                         }
+        const_iterator  operator++      (int)   { const_iterator i(m_pNode); m_pNode = m_pNode->pNext; return i;  }
 
     private:
+
         const list_se_node* m_pNode = nullptr;
     };
 

@@ -85,9 +85,10 @@ public:
 
     size_type           size_side           (void)                      const   noexcept { return m_nSideSize;      }
     size_type           capacity            (void)                      const   noexcept { return m_nAllocatedSize; }
+    void                free                (void);
 
 private:
-    void                free                (void);
+
     size_type           getIndex            (size_type          nRow,
                                              size_type          nCol)   const   noexcept;
     size_type           getVectorSize       (size_type          nSideSize) const noexcept;

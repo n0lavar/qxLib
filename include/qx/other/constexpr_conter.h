@@ -68,7 +68,6 @@ public:
 template <typename T, int I>
 struct Tag
 {
-
     constexpr int value() const noexcept
     {
         return I;

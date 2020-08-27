@@ -226,6 +226,20 @@ inline void basic_string<Traits>::fit(void)
 }
 
 //==============================================================================
+//!\fn                     basic_string<Traits>::free
+//
+//!\brief  Clear string and free allocated memory
+//!\author Khrapov
+//!\date   27.08.2020
+//==============================================================================
+template<class Traits>
+inline void basic_string<Traits>::free(void)
+{
+    std::free(GetStrData());
+    m_pData = nullptr;
+}
+
+//==============================================================================
 //!\fn                  basic_string<Traits>::erase
 //
 //!\brief  Erase substrung
@@ -938,8 +952,7 @@ inline typename basic_string<Traits>::reference basic_string<Traits>::at(size_ty
 template<class Traits>
 inline void basic_string<Traits>::clear(void)
 {
-    std::free(GetStrData());
-    m_pData = nullptr;
+    assign(STR_PREFIX(typename Traits::value_type, ""));
 }
 
 //==============================================================================

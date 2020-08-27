@@ -159,12 +159,23 @@ TEST(TestQxVector2d, size)
 
     vec1.clear();
     EXPECT_TRUE(vec1.empty());
+    EXPECT_TRUE(vec1.data());
     EXPECT_EQ(vec1.size(), 0);
     EXPECT_EQ(vec1.size_x(), 0);
     EXPECT_EQ(vec1.size_y(), 0);
     EXPECT_EQ(vec1.rows(), 0);
     EXPECT_EQ(vec1.cols(), 0);
     EXPECT_EQ(vec1.capacity(), 25);
+
+    vec1.free();
+    EXPECT_TRUE(vec1.empty());
+    EXPECT_FALSE(vec1.data());
+    EXPECT_EQ(vec1.size(), 0);
+    EXPECT_EQ(vec1.size_x(), 0);
+    EXPECT_EQ(vec1.size_y(), 0);
+    EXPECT_EQ(vec1.rows(), 0);
+    EXPECT_EQ(vec1.cols(), 0);
+    EXPECT_EQ(vec1.capacity(), 0);
 }
 
 TEST(TestQxVector2d, access)
@@ -205,7 +216,6 @@ TEST(TestQxVector2d, access)
 
     check(vec1);
 
-    vec1.clear();
     vec1.resize(4, 3);
     for (size_t i = 0; i < vec1.rows(); i++)
         for (size_t j = 0; j < vec1.cols(); j++)

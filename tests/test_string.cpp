@@ -237,6 +237,12 @@ TYPED_TEST(TestQxString, operator_assign)
     str.clear();
     EXPECT_TRUE(str.empty());
     EXPECT_EQ(str.size(), 0);
+    EXPECT_TRUE(str.data());
+
+    str.free();
+    EXPECT_TRUE(str.empty());
+    EXPECT_EQ(str.size(), 0);
+    EXPECT_FALSE(str.data());
 
     str = std::move(tmpStr);
     EXPECT_STREQ(str.data(), STR("Hello world"));
