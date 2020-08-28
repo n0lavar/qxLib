@@ -242,9 +242,9 @@ inline void shader_program::SetUniform(GLint nUniformLocation, const glm::mat4x3
 }
 
 template<typename T>
-inline void shader_program::SetUniform(const GLchar* pszName, const T* pValue, size_t nCount)
+inline void shader_program::SetUniform(const GLchar* pszName, const T* pValue, GLsizei nCount)
 {
-    SetUniform(GetUniformLocation(pszName), pValue, static_cast<GLsizei>(nCount));
+    SetUniform(GetUniformLocation(pszName), pValue, nCount);
 }
 
 template<>

@@ -36,8 +36,8 @@ public:
 
     friend class base_rbo;
 
-    void    Init                    (size_t     nWidth,
-                                     size_t     nHeight,
+    void    Init                    (GLsizei    nWidth,
+                                     GLsizei    nHeight,
                                      size_t     nMultisamples = 0);
 
     virtual void    Generate        (void)          override;
