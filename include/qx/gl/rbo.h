@@ -38,7 +38,7 @@ public:
 
     void    Init                    (GLsizei    nWidth,
                                      GLsizei    nHeight,
-                                     size_t     nMultisamples = 0);
+                                     GLsizei    nMultisamples = 0);
 
     virtual void    Generate        (void)          override;
     virtual void    Delete          (void)          override;
