@@ -25,7 +25,7 @@ namespace qx
 
 //==============================================================================
 //
-//!\struct                      wchar_traits<>
+//!\struct                      char_traits<>
 //!\author  Khrapov
 //!\date    30.10.2019
 //==============================================================================
@@ -42,31 +42,31 @@ struct char_traits
     using std_string_type   = std::string;
     using sstream_type      = std::stringstream;
 
-    static value_type teol (void)                          
+    static constexpr value_type teol(void)                          
     { 
         return '\0';                                            
     }
-    static size_type talign (void)                          
+    static constexpr size_type talign(void)
     { 
         return static_cast<size_type>(Align);
     }
-    static size_type tstrlen (const_pointer pStr)           
+    static size_type tstrlen(const_pointer pStr)           
     { 
         return static_cast<size_type>(std::strlen(pStr));       
     }
-    static value_type ttolower (value_type ch)             
+    static value_type ttolower(value_type ch)             
     { 
         return std::tolower(ch);                                
     }
-    static value_type ttoupper (value_type ch)             
+    static value_type ttoupper(value_type ch)             
     { 
         return std::toupper(ch);                                
     }
-    static i64 ttolli (const_pointer pStr, pointer* pEnd, int base) 
+    static i64 ttolli(const_pointer pStr, pointer* pEnd, int base) 
     { 
         return std::strtoll(pStr, pEnd, base); 
     }
-    static u64 ttoull (const_pointer pStr, pointer* pEnd, int base) 
+    static u64 ttoull(const_pointer pStr, pointer* pEnd, int base) 
     { 
         return std::strtoull(pStr, pEnd, base); 
     }
@@ -108,11 +108,11 @@ struct wchar_traits
     using std_string_type   = std::wstring;
     using sstream_type      = std::wstringstream;
 
-    static value_type teol (void)                          
+    static constexpr value_type teol(void)
     { 
         return L'\0';                                            
     }
-    static size_type talign (void)                          
+    static constexpr size_type talign(void)
     { 
         return static_cast<size_type>(Align);
     }

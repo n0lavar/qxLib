@@ -38,6 +38,7 @@ class iterator
     friend class const_iterator<C>;
 
 public:
+
     using value_type        = typename C::value_type;
     using pointer           = typename C::pointer;
     using reference         = typename C::reference;
@@ -46,6 +47,7 @@ public:
     using iterator_category = std::random_access_iterator_tag;
 
 public:
+
     constexpr iterator (void) = default;
     constexpr iterator (C* c, size_type i) : m_pCollection(c), m_nIndex(i) { }
 
@@ -76,6 +78,7 @@ public:
     constexpr operator void*                     (void)                     { return &((*m_pCollection).at(m_nIndex));  }
 
 private:
+
     size_type   m_nIndex        = 0u;
     C*          m_pCollection   = nullptr;
 };
@@ -96,6 +99,7 @@ template <class C>
 class const_iterator
 {
 public:
+
     using value_type        = typename C::value_type;
     using pointer           = typename C::const_pointer;
     using reference         = typename C::const_reference;
@@ -104,6 +108,7 @@ public:
     using iterator_category = std::random_access_iterator_tag;
 
 public:
+
     constexpr const_iterator (void) = default;
     constexpr const_iterator (const C* c, size_type i) : m_pCollection(c), m_nIndex(i) { }
     constexpr const_iterator (const iterator<C>& it)   : m_pCollection(it.m_pCollection), m_nIndex(it.m_nIndex) { }
@@ -135,6 +140,7 @@ public:
     constexpr operator const void*                (void)                     const { return &((*m_pCollection).at(m_nIndex));       }
 
 private:
+
     size_type   m_nIndex        = 0u;
     const C*    m_pCollection   = nullptr;
 };
@@ -161,6 +167,7 @@ class reverse_iterator
     friend class const_reverse_iterator<C>;
 
 public:
+
     using value_type        = typename C::value_type;
     using pointer           = typename C::pointer;
     using reference         = typename C::reference;
@@ -169,6 +176,7 @@ public:
     using iterator_category = std::random_access_iterator_tag;
 
 public:
+
     constexpr reverse_iterator (void) = default;
     constexpr reverse_iterator (C* c, size_type i) : m_pCollection(c), m_nIndex(i) { }
 
@@ -200,6 +208,7 @@ public:
     constexpr operator void*                      (void)                             { return &((*m_pCollection).at(m_nIndex));         }
 
 private:
+
     size_type   m_nIndex        = 0u;
     C*          m_pCollection   = nullptr;
 };
@@ -220,6 +229,7 @@ template <class C>
 class const_reverse_iterator
 {
 public:
+
     using value_type        = typename C::value_type;
     using pointer           = typename C::const_pointer;
     using reference         = typename C::const_reference;
@@ -228,6 +238,7 @@ public:
     using iterator_category = std::random_access_iterator_tag;
 
 public:
+
     constexpr const_reverse_iterator (void) = default;
     constexpr const_reverse_iterator (const C* c, size_type i)       : m_pCollection(c), m_nIndex(i) { }
     constexpr const_reverse_iterator (const reverse_iterator<C>& it) : m_pCollection(it.m_pCollection), m_nIndex(it.m_nIndex) { }
@@ -260,6 +271,7 @@ public:
     constexpr operator const void*                (void)                             const { return &((*m_pCollection).at(m_nIndex));               }
 
 private:
+
     size_type   m_nIndex        = 0u;
     const C*    m_pCollection   = nullptr;
 };

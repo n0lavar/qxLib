@@ -104,13 +104,13 @@ public:
     void                    assign       (FwdIt                  first,
                                           FwdIt                  last);
 
-    virtual                ~basic_string (void)                                   { free(); }
+    virtual                ~basic_string (void)                                   { free();                                     }
 
-    const   basic_string &  operator=    (basic_string        && str)    noexcept;
-    const   basic_string &  operator=    (const basic_string   & str);
-    const   basic_string &  operator=    (value_type             ch);
-    const   basic_string &  operator=    (const_pointer          pSource);
-    const   basic_string &  operator=    (const std_string_type& str);
+    const   basic_string &  operator=    (basic_string        && str)    noexcept { assign(std::move(str)); return *this;       }
+    const   basic_string &  operator=    (const basic_string   & str)             { assign(str);            return *this;       }
+    const   basic_string &  operator=    (value_type             ch)              { assign(ch);             return *this;       }
+    const   basic_string &  operator=    (const_pointer          pSource)         { assign(pSource);        return *this;       }
+    const   basic_string &  operator=    (const std_string_type& str)             { assign(str);            return *this;       }
 
     template<class ... Args>
     void                    format       (const_pointer          pStr,

@@ -17,29 +17,6 @@
 
 #include <qx/other/typedefs.h>
 
-//==============================================================================
-//!\fn                          SAFE_DELETE<T>
-//
-//!\brief  safe pointer deleting
-//!\param  ptr    - pointer to delete
-//!\param  bArray - true if need to use delete[]
-//!\author Khrapov
-//!\date   17.06.2019
-//==============================================================================
-template<typename T>
-inline void SAFE_DELETE(T*& ptr, bool bArray = false)
-{
-    if (ptr)
-    {
-        if (!bArray)
-            delete ptr;
-        else
-            delete[] ptr;
-
-        ptr = nullptr;
-    }
-}
-
 namespace qx
 {
 
@@ -129,7 +106,7 @@ template<class iterator>
 inline void destruct(iterator start, iterator end)
 {
     using T = typename iterator::value_type;
-    if constexpr (std::is_compound<T>::value)
+    if constexpr (std::is_compound_v<T>)
     {
         for (auto it = start; it < end; ++it)
             static_cast<T>((*it)).~T();

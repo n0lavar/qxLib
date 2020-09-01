@@ -35,6 +35,7 @@ class benchmark
     using time_duration = std::chrono::nanoseconds;
 
 public:
+
     benchmark(void)
     {
         Start();
@@ -57,6 +58,7 @@ public:
     }
 
 private:
+
     time_point      m_Start;
     time_duration   m_LastDuration;
 };

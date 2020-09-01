@@ -36,7 +36,7 @@ public:
 
     friend class base_rbo;
 
-    void    Init                    (GLsizei    nWidth,
+            void    Init            (GLsizei    nWidth,
                                      GLsizei    nHeight,
                                      GLsizei    nMultisamples = 0);
 

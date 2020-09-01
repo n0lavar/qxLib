@@ -29,7 +29,7 @@ set (QXLIB_ALL_SOURCES
     ${ALL_SOURCES}
     "${CMAKE_CURRENT_LIST_DIR}/tests/config.h"        
     "${CMAKE_CURRENT_LIST_DIR}/bench/bench_sort.h"
-    "${CMAKE_CURRENT_LIST_DIR}/src/main.cpp"
+    "${CMAKE_CURRENT_LIST_DIR}/include/qx/dummy_main.cpp"
 )
 
 find_package(GTEST REQUIRED)

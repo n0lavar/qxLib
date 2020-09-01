@@ -25,9 +25,9 @@ namespace qx
 template<class T>
 inline void triangular_vector<T>::assign(this_type&& other) noexcept
 {
-    std::swap(m_pData, other.m_pData);
-    std::swap(m_nSideSize, other.m_nSideSize);
-    std::swap(m_nSize, other.m_nSize);
+    std::swap(m_pData,          other.m_pData);
+    std::swap(m_nSideSize,      other.m_nSideSize);
+    std::swap(m_nSize,          other.m_nSize);
     std::swap(m_nAllocatedSize, other.m_nAllocatedSize);
 }
 

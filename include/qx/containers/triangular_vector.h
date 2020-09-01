@@ -63,7 +63,7 @@ public:
                         ~triangular_vector  (void)                                  { free();                                   }
 
     const this_type&    operator=           (this_type&&        other) noexcept     { assign(std::move(other)); return *this;   }
-    const this_type&    operator=           (const this_type&   other)              { assign(other); return *this;              }
+    const this_type&    operator=           (const this_type&   other)              { assign(other);            return *this;   }
 
     void                assign              (this_type&&        other)          noexcept;
     void                assign              (const this_type&   other);
@@ -94,6 +94,7 @@ private:
     size_type           getVectorSize       (size_type          nSideSize) const noexcept;
 
 private:
+
     pointer     m_pData             = nullptr;
     size_type   m_nSideSize         = 0;
     size_type   m_nSize             = 0;

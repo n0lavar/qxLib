@@ -60,8 +60,6 @@ inline void basic_string<Traits>::assign(const_pointer pSource)
         assign(pSource, Traits::tstrlen(pSource));
 }
 
-
-
 //==============================================================================
 //!\fn               basic_string<Traits>::assign
 //
@@ -76,82 +74,6 @@ inline void basic_string<Traits>::assign(size_type nSymbols, value_type ch)
 {
     if (Resize(nSymbols, Traits::talign()))
         std::fill(begin(), end(), ch);
-}
-
-//==============================================================================
-//!\fn                basic_string<Traits>::operator=
-//
-//!\param  str - source string
-//!\author Khrapov
-//!\date   19.10.2019
-//==============================================================================
-template<class Traits>
-inline const basic_string<Traits> & basic_string<Traits>::operator=(basic_string<Traits> && str) noexcept
-{
-    if (this != &str)
-        std::swap(m_pData, str.m_pData);
-
-    return *this;
-}
-
-//==============================================================================
-//!\fn                basic_string<Traits>::operator=
-//
-//!\param  str - source string
-//!\author Khrapov
-//!\date   19.10.2019
-//==============================================================================
-template<class Traits>
-inline const basic_string<Traits> & basic_string<Traits>::operator=(const basic_string<Traits> & str)
-{
-    if (this != &str)
-        assign(str.m_pData, str.size());
-
-    return *this;
-}
-
-//==============================================================================
-//!\fn                basic_string<Traits>::operator=
-//
-//!\param  ch - char to init
-//!\author Khrapov
-//!\date   19.10.2019
-//==============================================================================
-template<class Traits>
-inline const basic_string<Traits> & basic_string<Traits>::operator=(value_type ch)
-{
-    assign(&ch, 1);
-    return *this;
-}
-
-//==============================================================================
-//!\fn                basic_string<Traits>::operator=
-//
-//!\param  pSource - source string pointer
-//!\author Khrapov
-//!\date   19.10.2019
-//==============================================================================
-template<class Traits>
-inline const basic_string<Traits> & basic_string<Traits>::operator=(const_pointer pSource)
-{
-    if (m_pData != pSource)
-        assign(pSource, Traits::tstrlen(pSource));
-
-    return *this;
-}
-
-//==============================================================================
-//!\fn                 basic_string<Traits>::operator=
-//
-//!\param  str - std string
-//!\author Khrapov
-//!\date   24.03.2020
-//==============================================================================
-template<class Traits>
-inline const basic_string<Traits>& basic_string<Traits>::operator=(const std_string_type& str)
-{
-    assign(str.data(), static_cast<size_type>(str.size())); 
-    return *this;
 }
 
 //==============================================================================
@@ -237,7 +159,7 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::capacity(v
 template<class Traits>
 inline typename basic_string<Traits>::size_type basic_string<Traits>::reserve(size_type nCapacity)
 {
-    if (nCapacity > size())
+    if (nCapacity > capacity())
         Resize(nCapacity, Traits::talign(), EResizeType::reserve);
 
     return capacity();
@@ -350,7 +272,7 @@ template<class ... Args, class>
 inline void basic_string<Traits>::erase_all_of(Args... args)
 {
     std::array<typename Traits::value_type, sizeof...(args)> toRemove { args... };
-    erase_all_of(toRemove.begin(), toRemove.end());
+    erase_all_of(toRemove.cbegin(), toRemove.cend());
 }
 
 //==============================================================================
@@ -378,14 +300,14 @@ inline void basic_string<Traits>::erase_all_of(FwdIt first, FwdIt last)
 }
 
 //==============================================================================
-//!\fn          qx::basic_string<Traits>::erase_line_breaks
+//!\fn            basic_string<Traits>::erase_line_breaks
 //
 //!\brief  Erase \r and \n symbols from the string
 //!\author Khrapov
 //!\date   30.12.2019
 //==============================================================================
 template<class Traits>
-inline void qx::basic_string<Traits>::erase_line_breaks(void)
+inline void basic_string<Traits>::erase_line_breaks(void)
 {
     erase_all_of(CHAR_PREFIX(typename Traits::value_type, '\r'), 
                  CHAR_PREFIX(typename Traits::value_type, '\n'));
@@ -532,7 +454,7 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::find(const
         if (!Traits::tstrncmp(pWhat, pCurrentChar, nSizeWhat))
             return static_cast<size_type>(pCurrentChar - m_pData);
         else
-            qx::step_to(pCurrentChar, pEnd);
+            step_to(pCurrentChar, pEnd);
     } while (pCurrentChar != pEnd);
 
     return npos;
@@ -565,7 +487,7 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::find(value
         if (*pCurrentChar == ch)
             return static_cast<size_type>(pCurrentChar - m_pData);
         else
-            qx::step_to(pCurrentChar, pEnd);
+            step_to(pCurrentChar, pEnd);
     } while (pCurrentChar != pEnd);
 
     return npos;
@@ -644,8 +566,8 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::find_last_
 //!\date   21.03.2020
 //==============================================================================
 template<class Traits>
-inline typename qx::basic_string<Traits>::vector basic_string<Traits>::split(const_pointer pSep, 
-                                                                             size_type     nSepLen) const
+inline typename basic_string<Traits>::vector basic_string<Traits>::split(const_pointer pSep, 
+                                                                         size_type     nSepLen) const
 {
     vector tokens;
 
@@ -653,7 +575,7 @@ inline typename qx::basic_string<Traits>::vector basic_string<Traits>::split(con
         nSepLen = Traits::tstrlen(pSep);
 
     size_type start = 0, end = 0;
-    while ((end = find(pSep, start)) != qx::string::npos)
+    while ((end = find(pSep, start)) != npos)
     {
         tokens.push_back(substr(start, end - start));
         start = end + nSepLen;
@@ -673,12 +595,12 @@ inline typename qx::basic_string<Traits>::vector basic_string<Traits>::split(con
 //!\date   21.03.2020
 //==============================================================================
 template<class Traits>
-inline typename qx::basic_string<Traits>::vector basic_string<Traits>::split(const value_type sep) const
+inline typename basic_string<Traits>::vector basic_string<Traits>::split(const value_type sep) const
 {
     vector tokens;
 
     size_type start = 0, end = 0;
-    while ((end = find(sep, start)) != qx::string::npos)
+    while ((end = find(sep, start)) != npos)
     {
         tokens.push_back(substr(start, end - start));
         start = end + 1;
@@ -698,7 +620,7 @@ inline typename qx::basic_string<Traits>::vector basic_string<Traits>::split(con
 //!\date   30.10.2019
 //==============================================================================
 template<class Traits>
-inline typename qx::basic_string<Traits>::vector qx::basic_string<Traits>::split(const basic_string & sep) const
+inline typename basic_string<Traits>::vector basic_string<Traits>::split(const basic_string & sep) const
 {
     return std::move(split(sep.data(), sep.size()));
 }
@@ -731,7 +653,7 @@ inline void basic_string<Traits>::apply_case(ECaseType ct)
     case ECaseType::random:
         for (value_type& ch : *this)
         {
-            ch = qx::random(0, 1)
+            ch = random(0, 1)
                 ? Traits::ttoupper(ch)
                 : Traits::ttolower(ch);
         }
@@ -1061,7 +983,7 @@ template<class Traits>
 inline bool basic_string<Traits>::Resize(size_type nSymbols, size_type nAlign, EResizeType eType)
 {
     typename Traits::size_type nSizeToAllocate = nAlign
-        ? qx::align_size<typename Traits::value_type>(nSymbols + 1, nAlign)
+        ? align_size<typename Traits::value_type>(nSymbols + 1, nAlign)
         : nSymbols + 1;
 
     SStrData<Traits>* pStrData = GetStrData();

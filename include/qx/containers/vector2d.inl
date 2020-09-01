@@ -25,9 +25,9 @@ namespace qx
 template<class T>
 inline void vector2d<T>::assign(vector2d&& other) noexcept
 {
-    std::swap(m_pData, other.m_pData);
-    std::swap(m_nRows, other.m_nRows);
-    std::swap(m_nCols, other.m_nCols);
+    std::swap(m_pData,          other.m_pData);
+    std::swap(m_nRows,          other.m_nRows);
+    std::swap(m_nCols,          other.m_nCols);
     std::swap(m_nAllocatedSize, other.m_nAllocatedSize);
 }
 
