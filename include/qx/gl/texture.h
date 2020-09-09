@@ -22,7 +22,7 @@ namespace qx
 
 //==============================================================================
 //
-//!\class                    base_texture<COPYBLE>
+//!\class                  qx::base_texture<COPYBLE>
 //
 //!\brief   Base texture class. Use texture or copyble_texture
 //!\details ~
@@ -61,10 +61,10 @@ public:
                                          const void*    pData   = nullptr,
                                          GLenum         eTarget = -1);
             void    Specify2DMultisample(GLsizei        nSamples,
-  	                                     GLenum         eInternalformat,
-  	                                     GLsizei        nWidth,
-  	                                     GLsizei        nHeight,
-  	                                     GLboolean      bFixedsamplelocations);
+                                           GLenum         eInternalformat,
+                                           GLsizei        nWidth,
+                                           GLsizei        nHeight,
+                                           GLboolean      bFixedsamplelocations);
             void    GenerateMipmap      (void);
 
             void    SetParameter        (GLenum         target,

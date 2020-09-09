@@ -4,7 +4,7 @@
 //
 //!\brief       Using QX_RTTI_CLASS_BASE and QX_RTTI_CLASS_DERIVED macros
 //              will let you to use RTTI advantages without enabling RTTI in compiler's flags
-//!\details     common logic is taken from 
+//!\details     common logic is taken from
 //              https://github.com/qualab/xakep-RTTI (Vladimir Kerimov, qualab)
 //
 //!\author      Khrapov
@@ -42,14 +42,14 @@ using class_counter = constexpr_counter<struct class_counter_tag>;
 
 // defining this macros in required classes allows to use:
 //
-// qx::get_class_id<name>():    returns constexpr unique id of each class, 
+// qx::get_class_id<name>():    returns constexpr unique id of each class,
 //                              you can use it in "switch" or "if" with object->get_class_id()
 //                              returns -1 if class is not registrated
 //
 // qx::is_derived<class_1>::from<class_1>():
 //                              returns constexpr true if class_1 derived from class_1
 //
-// pObject->is_derived_from<base>(): 
+// pObject->is_derived_from<base>():
 //                              replacement for if (auto pBase = dynamic_cast<base*>(pObject))
 //                              returns true if class of pObject is derived from base type of pObject is base
 //

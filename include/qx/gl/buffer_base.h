@@ -20,7 +20,7 @@ namespace qx
 
 //==============================================================================
 //
-//!\class                     buffer_base<COPYBLE>
+//!\class                   qx::buffer_base<COPYBLE>
 //
 //!\brief   Base OpenGL buffer object class
 //!\details ~

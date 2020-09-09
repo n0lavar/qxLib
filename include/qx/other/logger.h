@@ -72,7 +72,7 @@ constexpr const char* ANSI_COLOR_CYAN_BOLD      = "\033[1;36m";
 
 //================================================================================
 //
-//!\class                           logger
+//!\class                         qx::logger
 //
 //!\brief   Logger singleton
 //!\details ~

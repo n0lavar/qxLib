@@ -23,12 +23,11 @@ source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR}/include/qx FILES ${ALL_SOURCES})
 
 
 # ================================================================
-# All 
+# All
 
 set (QXLIB_ALL_SOURCES
     ${ALL_SOURCES}
-    "${CMAKE_CURRENT_LIST_DIR}/tests/config.h"        
-    "${CMAKE_CURRENT_LIST_DIR}/bench/bench_sort.h"
+    "${CMAKE_CURRENT_LIST_DIR}/tests/config.h"
     "${CMAKE_CURRENT_LIST_DIR}/include/qx/dummy_main.cpp"
 )
 
@@ -43,7 +42,6 @@ include_directories(
     ${GLM_INCLUDE_DIRS}
     "${CMAKE_CURRENT_LIST_DIR}/include/"
     "${CMAKE_CURRENT_LIST_DIR}/tests/"
-    "${CMAKE_CURRENT_LIST_DIR}/bench/"
 )
 
 # ================================================================

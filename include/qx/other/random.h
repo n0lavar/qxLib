@@ -20,7 +20,7 @@ namespace qx
 {
 
 //==============================================================================
-//!\fn                           random<T>
+//!\fn                         qx::random<T>
 //
 //!\brief  Get random generated integral value [min, max]
 //!\param  min - min uniform distribution value (including)
@@ -38,7 +38,7 @@ typename std::enable_if<std::is_integral_v<T>, T>::type random (T min, T max)
 }
 
 //==============================================================================
-//!\fn                           random<T>
+//!\fn                         qx::random<T>
 //
 //!\brief  Get random generated real value [min, max]
 //!\param  min - min uniform distribution value (including)

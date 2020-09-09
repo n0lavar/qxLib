@@ -3,8 +3,8 @@
 //!\file                         smart_enum.h
 //
 //!\brief       Smart enum macro definition
-//!\details     Smart macro allows you to use to_string(), from_string() 
-//              and increment functions. 
+//!\details     Smart macro allows you to use to_string(), from_string()
+//              and increment functions.
 //
 //!\author      Khrapov
 //!\date        16.10.2019

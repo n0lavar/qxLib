@@ -15,7 +15,7 @@ namespace qx
 {
 
 //==============================================================================
-//!\fn                base_texture<COPYBLE>::~base_texture
+//!\fn              qx::base_texture<COPYBLE>::~base_texture
 //
 //!\brief  base_texture object destructor
 //!\author Khrapov
@@ -28,7 +28,7 @@ inline base_texture<COPYBLE>::~base_texture(void)
 }
 
 //==============================================================================
-//!\fn                  base_texture<COPYBLE>::Generate
+//!\fn                qx::base_texture<COPYBLE>::Generate
 //
 //!\brief  Generate texture
 //!\author Khrapov
@@ -42,7 +42,7 @@ inline void base_texture<COPYBLE>::Generate(void)
 }
 
 //==============================================================================
-//!\fn                   base_texture<COPYBLE>::Delete
+//!\fn                 qx::base_texture<COPYBLE>::Delete
 //
 //!\brief  Delete texture
 //!\author Khrapov
@@ -62,7 +62,7 @@ inline void base_texture<COPYBLE>::Delete(void)
 }
 
 //==============================================================================
-//!\fn                    base_texture<COPYBLE>::Bind
+//!\fn                  qx::base_texture<COPYBLE>::Bind
 //
 //!\brief  Bind texture
 //!\author Khrapov
@@ -75,7 +75,7 @@ inline void base_texture<COPYBLE>::Bind(void) const
 }
 
 //==============================================================================
-//!\fn                   base_texture<COPYBLE>::Unbind
+//!\fn                 qx::base_texture<COPYBLE>::Unbind
 //
 //!\brief  Unbind texture
 //!\author Khrapov
@@ -88,10 +88,10 @@ inline void base_texture<COPYBLE>::Unbind(void) const
 }
 
 //==============================================================================
-//!\fn                  base_texture<COPYBLE>::SetTarget
+//!\fn                qx::base_texture<COPYBLE>::SetTarget
 //
 //!\brief  Set texture target
-//!\param  eTarget - target texture 
+//!\param  eTarget - target texture
 //!\author Khrapov
 //!\date   23.01.2020
 //==============================================================================
@@ -102,7 +102,7 @@ inline void base_texture<COPYBLE>::SetTarget(GLenum eTarget)
 }
 
 //==============================================================================
-//!\fn              base_texture<COPYBLE>::Specify2DTexImage
+//!\fn            qx::base_texture<COPYBLE>::Specify2DTexImage
 //
 //!\brief   Specify a two-dimensional texture image
 //!\details https://www.khronos.org/registry/OpenGL-Refpages/gl4/html/glTexImage2D.xhtml
@@ -120,15 +120,15 @@ inline void base_texture<COPYBLE>::SetTarget(GLenum eTarget)
 template<bool COPYBLE>
 inline void base_texture<COPYBLE>::Specify2DTexImage(
     GLint         level,
-    GLint         internalformat, 
-    GLsizei       width, 
-    GLsizei       height, 
+    GLint         internalformat,
+    GLsizei       width,
+    GLsizei       height,
     GLenum        format,
-    GLenum        type, 
+    GLenum        type,
     const void  * pData,
     GLenum        eTarget)
 {
-    glTexImage2D(eTarget != -1 ? eTarget : m_eTextureTarget, 
+    glTexImage2D(eTarget != -1 ? eTarget : m_eTextureTarget,
                  level,
                  internalformat,
                  width,
@@ -143,7 +143,7 @@ inline void base_texture<COPYBLE>::Specify2DTexImage(
 }
 
 //==============================================================================
-//!\fn            base_texture<COPYBLE>::Specify2DMultisample
+//!\fn          qx::base_texture<COPYBLE>::Specify2DMultisample
 //
 //!\brief  Establish parameters of a multisample texture's image
 //!\param  nSamples              - level-of-detail number.
@@ -169,7 +169,7 @@ inline void base_texture<COPYBLE>::Specify2DMultisample(
 }
 
 //==============================================================================
-//!\fn               base_texture<COPYBLE>::GenerateMipmap
+//!\fn             qx::base_texture<COPYBLE>::GenerateMipmap
 //
 //!\brief  Generate mipmap for texture
 //!\author Khrapov
@@ -212,7 +212,7 @@ inline void base_texture<COPYBLE>::SetParameter(GLenum target, const GLuint* val
 }
 
 //==============================================================================
-//!\fn               base_texture<COPYBLE>::Assign<COPYBLE>
+//!\fn             qx::base_texture<COPYBLE>::Assign<COPYBLE>
 //
 //!\brief  Assing by derived class
 //!\param  other - derived class instance

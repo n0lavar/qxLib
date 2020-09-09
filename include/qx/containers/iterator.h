@@ -22,7 +22,7 @@ class const_iterator;
 
 //==============================================================================
 //
-//!\class                     iterator<C>
+//!\class                   qx::iterator<C>
 //
 //!\brief   Non-const iterator type
 //!\details Use it for range-based loops and std algorithms
@@ -54,18 +54,18 @@ public:
     [[nodiscard]] constexpr reference operator*  (void)                     { return (*m_pCollection).at(m_nIndex);     }
     [[nodiscard]] constexpr pointer   operator-> (void)                     { return &((*m_pCollection).at(m_nIndex));  }
     [[nodiscard]] constexpr reference operator[] (size_type m)              { return (*m_pCollection).at(m_nIndex + m); }
-                                                                                                                        
+
     constexpr iterator              & operator++ (void)                     { ++m_nIndex; return *this;                 }
     constexpr iterator              & operator-- (void)                     { --m_nIndex; return *this;                 }
     constexpr iterator                operator++ (int)                      { iterator r(*this); ++m_nIndex; return r;  }
     constexpr iterator                operator-- (int)                      { iterator r(*this); --m_nIndex; return r;  }
-                                                                                                                        
+
     constexpr iterator              & operator+= (size_type n)              { m_nIndex += n; return *this;              }
     constexpr iterator              & operator-= (size_type n)              { m_nIndex -= n; return *this;              }
-                                                                                                                        
+
     constexpr iterator                operator+  (size_type n)        const { iterator r(*this); return r += n;         }
     constexpr iterator                operator-  (size_type n)        const { iterator r(*this); return r -= n;         }
-                                                                                                                        
+
     constexpr difference_type         operator-  (iterator  const& r) const { return m_nIndex - r.m_nIndex;             }
 
     constexpr bool                    operator<  (iterator const & r) const { return m_nIndex <  r.m_nIndex;            }
@@ -85,7 +85,7 @@ private:
 
 //==============================================================================
 //
-//!\class                 const_iterator<C>
+//!\class               qx::const_iterator<C>
 //
 //!\brief   Const iterator type
 //!\details Use it for range-based loops and std algorithms
@@ -116,18 +116,18 @@ public:
     [[nodiscard]] constexpr reference operator*   (void)                           { return (*m_pCollection).at(m_nIndex);          }
     [[nodiscard]] constexpr pointer   operator->  (void)                           { return &((*m_pCollection).at(m_nIndex));       }
     [[nodiscard]] constexpr reference operator[]  (size_type m)                    { return (*m_pCollection).at(m_nIndex + m);      }
-                                                                                                                                    
+
     constexpr const_iterator        & operator++  (void)                           { ++m_nIndex; return *this;                      }
     constexpr const_iterator        & operator--  (void)                           { --m_nIndex; return *this;                      }
     constexpr const_iterator          operator++  (int)                            { const_iterator r(*this); ++m_nIndex; return r; }
     constexpr const_iterator          operator--  (int)                            { const_iterator r(*this); --m_nIndex; return r; }
-                                                                                                                                    
+
     constexpr const_iterator        & operator+=  (size_type n)                    { m_nIndex += n; return *this;                   }
     constexpr const_iterator        & operator-=  (size_type n)                    { m_nIndex -= n; return *this;                   }
-                                                                                                                                    
+
     constexpr const_iterator          operator+   (size_type n)              const { const_iterator r(*this); return r += n;        }
     constexpr const_iterator          operator-   (size_type n)              const { const_iterator r(*this); return r -= n;        }
-                                                                                                                                    
+
     constexpr difference_type         operator-   (const_iterator  const& r) const { return m_nIndex - r.m_nIndex;                  }
 
     constexpr bool                    operator<   (const_iterator const & r) const { return m_nIndex <  r.m_nIndex;                 }
@@ -151,7 +151,7 @@ class const_reverse_iterator;
 
 //==============================================================================
 //
-//!\class                     reverse_iterator<C>
+//!\class                   qx::reverse_iterator<C>
 //
 //!\brief   Non-const reverse iterator type
 //!\details Use it for range-based loops and std algorithms
@@ -183,18 +183,18 @@ public:
     [[nodiscard]] constexpr reference operator*   (void)                             { return (*m_pCollection).at(m_nIndex);            }
     [[nodiscard]] constexpr pointer   operator->  (void)                             { return &((*m_pCollection).at(m_nIndex));         }
     [[nodiscard]] constexpr reference operator[]  (size_type m)                      { return (*m_pCollection).at(m_nIndex + m);        }
-                                                                                                                                        
+
     constexpr reverse_iterator      & operator++  (void)                             { --m_nIndex; return *this;                        }
     constexpr reverse_iterator      & operator--  (void)                             { ++m_nIndex; return *this;                        }
     constexpr reverse_iterator        operator++  (int)                              { reverse_iterator r(*this); --m_nIndex; return r; }
     constexpr reverse_iterator        operator--  (int)                              { reverse_iterator r(*this); ++m_nIndex; return r; }
-                                                                                     
+
     constexpr reverse_iterator      & operator+=  (size_type n)                      { m_nIndex -= n; return *this;                     }
     constexpr reverse_iterator      & operator-=  (size_type n)                      { m_nIndex += n; return *this;                     }
-                                                                                     
+
     constexpr reverse_iterator        operator+   (size_type n)                const { reverse_iterator r(*this); return r -= n;        }
     constexpr reverse_iterator        operator-   (size_type n)                const { reverse_iterator r(*this); return r += n;        }
-                                                                                     
+
     constexpr difference_type         operator-   (reverse_iterator const& r)  const { return r.m_nIndex - m_nIndex;                    }
 
     // + 1 is necessary, as `m_nIndex = -1 (aka size_type::max)` may be used as end (past-the-last) element
@@ -215,7 +215,7 @@ private:
 
 //==============================================================================
 //
-//!\class                 const_reverse_iterator<C>
+//!\class               qx::const_reverse_iterator<C>
 //
 //!\brief   Const reverse iterator type
 //!\details Use it for range-based loops and std algorithms
@@ -246,18 +246,18 @@ public:
     [[nodiscard]] constexpr reference operator*   (void)                                   { return (*m_pCollection).at(m_nIndex);                  }
     [[nodiscard]] constexpr pointer   operator->  (void)                                   { return &((*m_pCollection).at(m_nIndex));               }
     [[nodiscard]] constexpr reference operator[]  (size_type m)                            { return (*m_pCollection).at(m_nIndex + m);              }
-                                                                                           
+
     constexpr const_reverse_iterator& operator++  (void)                                   { --m_nIndex; return *this;                              }
     constexpr const_reverse_iterator& operator--  (void)                                   { ++m_nIndex; return *this;                              }
     constexpr const_reverse_iterator  operator++  (int)                                    { const_reverse_iterator r(*this); --m_nIndex; return r; }
     constexpr const_reverse_iterator  operator--  (int)                                    { const_reverse_iterator r(*this); ++m_nIndex; return r; }
-                                                                                           
+
     constexpr const_reverse_iterator& operator+=  (size_type n)                            { m_nIndex -= n; return *this;                           }
     constexpr const_reverse_iterator& operator-=  (size_type n)                            { m_nIndex += n; return *this;                           }
-                                                                                           
+
     constexpr const_reverse_iterator  operator+   (size_type n)                      const { const_reverse_iterator r(*this); return r -= n;        }
     constexpr const_reverse_iterator  operator-   (size_type n)                      const { const_reverse_iterator r(*this); return r += n;        }
-                                                                                           
+
     constexpr difference_type         operator-   (const_reverse_iterator const& r)  const { return r.m_nIndex - m_nIndex;                          }
 
     // + 1 is necessary, as `m_nIndex = -1 (aka size_type::max)` may be used as end (past-the-last) element
@@ -267,7 +267,7 @@ public:
     constexpr bool                    operator>=  (const_reverse_iterator const & r) const { return m_nIndex + 1 <= r.m_nIndex + 1;                 }
     constexpr bool                    operator!=  (const const_reverse_iterator & r) const { return m_nIndex + 1 != r.m_nIndex + 1;                 }
     constexpr bool                    operator==  (const const_reverse_iterator & r) const { return m_nIndex + 1 == r.m_nIndex + 1;                 }
-                                                                                                                                                    
+
     constexpr operator const void*                (void)                             const { return &((*m_pCollection).at(m_nIndex));               }
 
 private:

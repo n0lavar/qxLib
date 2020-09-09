@@ -15,7 +15,7 @@ namespace qx
 {
 
 //==============================================================================
-//!\fn                shader_program::~shader_program
+//!\fn              qx::shader_program::~shader_program
 //
 //!\brief  shader_program object destructor
 //!\author Khrapov
@@ -28,7 +28,7 @@ inline shader_program::~shader_program(void)
 }
 
 //==============================================================================
-//!\fn                     shader_program::Init
+//!\fn                   qx::shader_program::Init
 //
 //!\brief  Init shader program
 //!\author Khrapov
@@ -40,7 +40,7 @@ inline void shader_program::Init(void)
 }
 
 //==============================================================================
-//!\fn                  shader_program::AttachShader
+//!\fn                qx::shader_program::AttachShader
 //
 //!\brief  Attach shader to the program
 //!\param  pShader - shader object pointer
@@ -54,7 +54,7 @@ inline void shader_program::AttachShader(shader_base<ShaderType>* pShader)
 }
 
 //==============================================================================
-//!\fn                  shader_program::Link
+//!\fn                qx::shader_program::Link
 //
 //!\brief  Link attached shaders
 //!\author Khrapov
@@ -76,7 +76,7 @@ inline bool shader_program::Link(void)
 }
 
 //==============================================================================
-//!\fn                       shader_program::Use
+//!\fn                     qx::shader_program::Use
 //
 //!\brief  Use shader program
 //!\author Khrapov
@@ -88,7 +88,7 @@ inline void shader_program::Use(void)
 }
 
 //==============================================================================
-//!\fn                       shader_program::Use
+//!\fn                     qx::shader_program::Use
 //
 //!\brief  Drop current shader
 //!\author Khrapov
@@ -100,7 +100,7 @@ inline void shader_program::Unuse(void)
 }
 
 //==============================================================================
-//!\fn                   shader_program::GetParameter
+//!\fn                 qx::shader_program::GetParameter
 //
 //!\brief  Get shader program parameter
 //!\param  eParameter - shader program parameter.
@@ -314,7 +314,7 @@ inline void shader_program::SetUniform(const GLchar* pszName, const T& value)
 }
 
 //==============================================================================
-//!\fn                shader_program::GetUniformLocation
+//!\fn              qx::shader_program::GetUniformLocation
 //
 //!\brief   Get uniform location based on it's name
 //!\param   name - uniform string name
@@ -334,7 +334,7 @@ inline GLint shader_program::GetUniformLocation(const GLchar* pszName) const
 }
 
 //==============================================================================
-//!\fn                  shader_program::AddInclude
+//!\fn                qx::shader_program::AddInclude
 //
 //!\brief   Add include string
 //!\details ARB_shading_language_include is required for this function
@@ -363,7 +363,7 @@ inline void shader_program::AddInclude(const char* pszName,
 }
 
 //==============================================================================
-//!\fn                 shader_program::DispatchCompute
+//!\fn               qx::shader_program::DispatchCompute
 //
 //!\brief  Dispatch program compute
 //!\param  nGroupsX - The number of work groups to be launched in the X dimension

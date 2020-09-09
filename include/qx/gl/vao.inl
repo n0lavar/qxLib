@@ -15,7 +15,7 @@ namespace qx
 {
 
 //==============================================================================
-//!\fn                    base_vao<COPYBLE>::~base_vao
+//!\fn                  qx::base_vao<COPYBLE>::~base_vao
 //
 //!\brief  vao object destructor
 //!\author Khrapov
@@ -28,7 +28,7 @@ inline base_vao<COPYBLE>::~base_vao(void)
 }
 
 //==============================================================================
-//!\fn                    base_vao<COPYBLE>::Generate
+//!\fn                  qx::base_vao<COPYBLE>::Generate
 //
 //!\brief  Generate VAO. Expensive operation.
 //!\author Khrapov
@@ -41,7 +41,7 @@ inline void base_vao<COPYBLE>::Generate(void)
 }
 
 //==============================================================================
-//!\fn                     base_vao<COPYBLE>::Delete
+//!\fn                   qx::base_vao<COPYBLE>::Delete
 //
 //!\brief  Delete VAO
 //!\author Khrapov
@@ -61,7 +61,7 @@ inline void base_vao<COPYBLE>::Delete(void)
 }
 
 //==============================================================================
-//!\fn                      base_vao<COPYBLE>::Bind
+//!\fn                    qx::base_vao<COPYBLE>::Bind
 //
 //!\brief  Bind VAO
 //!\author Khrapov
@@ -74,7 +74,7 @@ inline void base_vao<COPYBLE>::Bind(void) const
 }
 
 //==============================================================================
-//!\fn                     base_vao<COPYBLE>::Unbind
+//!\fn                   qx::base_vao<COPYBLE>::Unbind
 //
 //!\brief  Unbind VAO
 //!\author Khrapov
@@ -87,7 +87,7 @@ inline void base_vao<COPYBLE>::Unbind(void) const
 }
 
 //==============================================================================
-//!\fn             base_vao<COPYBLE>::EnableVertexArrtibArray
+//!\fn           qx::base_vao<COPYBLE>::EnableVertexArrtibArray
 //
 //!\brief  Enable a generic vertex attribute array
 //!\param  nIndex - array index in VAO
@@ -101,7 +101,7 @@ inline void base_vao<COPYBLE>::EnableVertexArrtibArray(GLuint nIndex)
 }
 
 //==============================================================================
-//!\fn            base_vao<COPYBLE>::DisableVertexArrtibArray
+//!\fn          qx::base_vao<COPYBLE>::DisableVertexArrtibArray
 //
 //!\brief  Disable a generic vertex attribute array
 //!\param  nIndex - array index in VAO
@@ -115,21 +115,21 @@ inline void base_vao<COPYBLE>::DisableVertexArrtibArray(GLuint nIndex)
 }
 
 //==============================================================================
-//!\fn               base_vao<COPYBLE>::VertexAttribPointer
+//!\fn             qx::base_vao<COPYBLE>::VertexAttribPointer
 //
 //!\brief  Define an array of generic vertex attribute data
 //!\param  nIndex      - index of the generic vertex attribute to be modified
-//!\param  nSize       - number of components per generic vertex attribute. 
+//!\param  nSize       - number of components per generic vertex attribute.
 //                       Must be 1, 2, 3, 4
 //!\param  eType       - data type of each component in the array
-//!\param  bNormalized - specifies whether fixed-point data values should be 
+//!\param  bNormalized - specifies whether fixed-point data values should be
 //                       normalized or converted directly as fixed-point values
 //!\param  nStride     - byte offset between consecutive generic vertex attributes
-//!\param  pData       - a offset of the first component of the first generic 
-//                       vertex attribute in the array in the data store of 
+//!\param  pData       - a offset of the first component of the first generic
+//                       vertex attribute in the array in the data store of
 //                       the buffer currently bound to the GL_ARRAY_BUFFER target
-//!\param  nOffset     - offset of the first component of the first generic 
-//                       vertex attribute in the array in the data store of 
+//!\param  nOffset     - offset of the first component of the first generic
+//                       vertex attribute in the array in the data store of
 //                       the buffer currently bound to the GL_ARRAY_BUFFER target
 //!\author Khrapov
 //!\date   19.01.2020
@@ -137,10 +137,10 @@ inline void base_vao<COPYBLE>::DisableVertexArrtibArray(GLuint nIndex)
 template<bool COPYBLE>
 inline void base_vao<COPYBLE>::VertexAttribPointer(
     GLuint       nIndex,
-    GLint        nSize, 
-    GLenum       eType, 
-    GLboolean    bNormalized, 
-    GLsizei      nStride, 
+    GLint        nSize,
+    GLenum       eType,
+    GLboolean    bNormalized,
+    GLsizei      nStride,
     size_t       nOffset)
 {
     glVertexAttribPointer(nIndex, nSize, eType, bNormalized, nStride, (GLvoid*)(nOffset));

@@ -15,7 +15,7 @@ namespace qx
 {
 
 //==============================================================================
-//!\fn                 buffer_base<COPYBLE>::~buffer_base
+//!\fn               qx::buffer_base<COPYBLE>::~buffer_base
 //
 //!\brief  buffer_base object destructor
 //!\author Khrapov
@@ -28,7 +28,7 @@ inline buffer_base<COPYBLE>::~buffer_base(void)
 }
 
 //==============================================================================
-//!\fn                   buffer_base<COPYBLE>::Generate
+//!\fn                 qx::buffer_base<COPYBLE>::Generate
 //
 //!\brief  Generate buffer object name
 //!\author Khrapov
@@ -41,7 +41,7 @@ inline void buffer_base<COPYBLE>::Generate()
 }
 
 //==============================================================================
-//!\fn                    buffer_base<COPYBLE>::Delete
+//!\fn                  qx::buffer_base<COPYBLE>::Delete
 //
 //!\brief  Delete named buffer object
 //!\author Khrapov
@@ -61,7 +61,7 @@ inline void buffer_base<COPYBLE>::Delete()
 }
 
 //==============================================================================
-//!\fn                     buffer_base<COPYBLE>::Bind
+//!\fn                   qx::buffer_base<COPYBLE>::Bind
 //
 //!\brief  Bind a named buffer object
 //!\author Khrapov
@@ -74,7 +74,7 @@ inline void buffer_base<COPYBLE>::Bind() const
 }
 
 //==============================================================================
-//!\fn                    buffer_base<COPYBLE>::Unbind
+//!\fn                  qx::buffer_base<COPYBLE>::Unbind
 //
 //!\brief  Unbind a named buffer object
 //!\author Khrapov
@@ -87,7 +87,7 @@ inline void buffer_base<COPYBLE>::Unbind() const
 }
 
 //==============================================================================
-//!\fn                   buffer_base<COPYBLE>::BindBase
+//!\fn                 qx::buffer_base<COPYBLE>::BindBase
 //
 //!\brief  Bind a buffer object to an indexed buffer target from shader
 //!\param  nIndex - index
@@ -101,7 +101,7 @@ inline void buffer_base<COPYBLE>::BindBase(GLuint nIndex)
 }
 
 //==============================================================================
-//!\fn                  buffer_base<COPYBLE>::MemBarrier
+//!\fn                qx::buffer_base<COPYBLE>::MemBarrier
 //
 //!\brief  Defines a barrier ordering memory transactions
 //!\author Khrapov
@@ -114,7 +114,7 @@ inline void buffer_base<COPYBLE>::MemBarrier()
 }
 
 //==============================================================================
-//!\fn                    buffer_base<COPYBLE>::Update
+//!\fn                  qx::buffer_base<COPYBLE>::Update
 //
 //!\brief  Update the whole buffer
 //!\param  nSize  - data size
@@ -130,7 +130,7 @@ inline void buffer_base<COPYBLE>::Update(GLsizeiptr nSize, const void* pData, GL
 }
 
 //==============================================================================
-//!\fn                  buffer_base<COPYBLE>::UpdatePart
+//!\fn                qx::buffer_base<COPYBLE>::UpdatePart
 //
 //!\brief  Update buffer part
 //!\param  nOffset - offset from the buffer beginning

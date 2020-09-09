@@ -20,7 +20,7 @@ namespace qx
 
 //==============================================================================
 //
-//!\class                      base_vao<COPYBLE>
+//!\class                    qx::base_vao<COPYBLE>
 //
 //!\brief   Base VAO class. Use vao or copyble_vao
 //!\details ~

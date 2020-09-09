@@ -19,7 +19,7 @@ namespace qx
 
 //==============================================================================
 //
-//!\class                      base_vbo<COPYBLE>
+//!\class                    qx::base_vbo<COPYBLE>
 //
 //!\brief   Base VBO class. Use vbo or copyble_vbo
 //!\details ~

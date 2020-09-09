@@ -20,7 +20,7 @@ namespace qx
 
 //==============================================================================
 //
-//!\class                      base_fbo<COPYBLE>
+//!\class                    qx::base_fbo<COPYBLE>
 //
 //!\brief   Base FBO class. Use fbo or copyble_fbo
 //!\details ~

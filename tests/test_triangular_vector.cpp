@@ -2,7 +2,7 @@
 //
 //!\file                  test_triangular_vector.cpp
 //
-//!\brief       
+//!\brief       tests for qx::triangular_vector
 //!\details     ~
 //
 //!\author      Khrapov

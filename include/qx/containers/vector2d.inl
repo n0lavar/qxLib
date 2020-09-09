@@ -15,7 +15,7 @@ namespace qx
 {
 
 //==============================================================================
-//!\fn                       vector2d<T>::assign
+//!\fn                     qx::vector2d<T>::assign
 //
 //!\brief  Assign by moving other vector
 //!\param  other - other vector
@@ -32,7 +32,7 @@ inline void vector2d<T>::assign(vector2d&& other) noexcept
 }
 
 //==============================================================================
-//!\fn                       vector2d<T>::assign
+//!\fn                     qx::vector2d<T>::assign
 //
 //!\brief  Assign by copying another vector
 //!\param  other - another vector
@@ -47,7 +47,7 @@ inline void vector2d<T>::assign(const vector2d& other)
 }
 
 //==============================================================================
-//!\fn                         vector2d<T>::assign
+//!\fn                       qx::vector2d<T>::assign
 //
 //!\brief   Assign by size and data pointer
 //!\details Data is being copyed from pData with size rows * cols
@@ -65,7 +65,7 @@ inline void vector2d<T>::assign(size_type rows, size_type cols, const_pointer pD
 }
 
 //==============================================================================
-//!\fn                       vector2d<T>::assign
+//!\fn                     qx::vector2d<T>::assign
 //
 //!\brief  Assign by size and fill element
 //!\param  rows - num of rows in new vector
@@ -82,7 +82,7 @@ inline void vector2d<T>::assign(size_type rows, size_type cols, const_reference 
 }
 
 //==============================================================================
-//!\fn                       vector2d<T>::reserve
+//!\fn                     qx::vector2d<T>::reserve
 //
 //!\brief   Reserve vector size
 //!\param   nElements - num elements
@@ -109,7 +109,7 @@ inline bool vector2d<T>::reserve(size_type nElements)
 }
 
 //==============================================================================
-//!\fn                       vector2d<T>::resize
+//!\fn                     qx::vector2d<T>::resize
 //
 //!\brief   Resize vector
 //!\param   rows - num of rows
@@ -147,7 +147,7 @@ inline bool vector2d<T>::resize(size_type rows, size_type cols)
 }
 
 //==============================================================================
-//!\fn                       vector2d<T>::resize
+//!\fn                     qx::vector2d<T>::resize
 //
 //!\brief   Resize vector
 //!\details If new size is bigger, new elements are not constructed
@@ -172,7 +172,7 @@ inline bool vector2d<T>::resize(size_type rows, size_type cols, const_reference 
 }
 
 //==============================================================================
-//!\fn                        vector2d<T>::free
+//!\fn                      qx::vector2d<T>::free
 //
 //!\brief  Clear string and free memory
 //!\author Khrapov
@@ -181,14 +181,14 @@ inline bool vector2d<T>::resize(size_type rows, size_type cols, const_reference 
 template<class T>
 inline void vector2d<T>::free(void)
 {
-    clear(); 
+    clear();
     std::free(m_pData);
     m_pData = nullptr;
     m_nAllocatedSize = 0;
 }
 
 //==============================================================================
-//!\fn                        vector2d<T>::fill
+//!\fn                      qx::vector2d<T>::fill
 //
 //!\brief  Fill vector with element
 //!\param  elem - element for filling
@@ -204,7 +204,7 @@ inline void vector2d<T>::fill(const_reference elem)
 }
 
 //==============================================================================
-//!\fn                     vector2d<T>::operator[]
+//!\fn                   qx::vector2d<T>::operator[]
 //
 //!\brief  Get row
 //!\param  nRow - row number
@@ -219,7 +219,7 @@ inline typename vector2d<T>::pointer vector2d<T>::operator[](size_type nRow) noe
 }
 
 //==============================================================================
-//!\fn                     vector2d<T>::operator[]
+//!\fn                   qx::vector2d<T>::operator[]
 //
 //!\brief  Get row
 //!\param  nRow - row number
@@ -234,7 +234,7 @@ inline typename vector2d<T>::const_pointer vector2d<T>::operator[](size_type nRo
 }
 
 //==============================================================================
-//!\fn                         vector2d<T>::get
+//!\fn                       qx::vector2d<T>::get
 //
 //!\brief  Get element
 //!\param  nRow - row number
@@ -250,7 +250,7 @@ inline const T& vector2d<T>::get(size_type nRow, size_type nCol) const noexcept
 }
 
 //==============================================================================
-//!\fn                         vector2d<T>::set
+//!\fn                       qx::vector2d<T>::set
 //
 //!\brief  Set elemtnt
 //!\param  nRow - row number
@@ -266,7 +266,7 @@ inline void vector2d<T>::set(size_type nRow, size_type nCol, const_reference dat
 }
 
 //==============================================================================
-//!\fn                        vector2d<T>::size
+//!\fn                      qx::vector2d<T>::size
 //
 //!\brief  Get number of elements in whole vector2d
 //!\retval  - num of elements (cols * rows)
@@ -275,12 +275,12 @@ inline void vector2d<T>::set(size_type nRow, size_type nCol, const_reference dat
 //==============================================================================
 template<class T>
 inline typename vector2d<T>::size_type vector2d<T>::size(void) const
-{ 
-    return size_x() * size_y(); 
+{
+    return size_x() * size_y();
 }
 
 //==============================================================================
-//!\fn                        vector2d<T>::data
+//!\fn                      qx::vector2d<T>::data
 //
 //!\brief  Get first element pointer
 //!\retval  - first element pointer
@@ -294,7 +294,7 @@ inline typename vector2d<T>::pointer vector2d<T>::data()
 }
 
 //==============================================================================
-//!\fn                         vector2d<T>::at
+//!\fn                       qx::vector2d<T>::at
 //
 //!\brief  Get element at ind pos
 //!\param  ind - pos
@@ -304,12 +304,12 @@ inline typename vector2d<T>::pointer vector2d<T>::data()
 //==============================================================================
 template<class T>
 inline typename vector2d<T>::reference vector2d<T>::at(size_type ind)
-{ 
-    return m_pData[ind]; 
+{
+    return m_pData[ind];
 }
 
 //==============================================================================
-//!\fn                        vector2d<T>::clear
+//!\fn                      qx::vector2d<T>::clear
 //
 //!\brief  Clear vector (do not free memory)
 //!\author Khrapov
@@ -319,7 +319,7 @@ template<class T>
 inline void vector2d<T>::clear(void)
 {
     if (m_pData)
-        qx::destruct(begin(), end());
+        destruct(begin(), end());
 
     m_nRows = 0;
     m_nCols = 0;

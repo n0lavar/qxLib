@@ -15,7 +15,7 @@ namespace qx
 {
 
 //==============================================================================
-//!\fn                         shader_base::shader_base
+//!\fn                       qx::shader_base::shader_base
 //
 //!\brief  shader_base object constructor
 //!\param  pszShaderCode - string with shader code
@@ -29,7 +29,7 @@ inline shader_base<ShaderType>::shader_base(const GLchar* pszShaderCode)
 }
 
 //==============================================================================
-//!\fn                        shader_base::~shader_base
+//!\fn                      qx::shader_base::~shader_base
 //
 //!\brief  shader_base object destructor
 //!\author Khrapov
@@ -38,13 +38,11 @@ inline shader_base<ShaderType>::shader_base(const GLchar* pszShaderCode)
 template <GLenum ShaderType>
 inline shader_base<ShaderType>::~shader_base()
 {
-    // shader deleted in shader_program::Link
-    if (m_nShader != UINT_EMPTY_VALUE && GetParameter(GL_DELETE_STATUS) != GL_TRUE)
-        glDeleteShader(m_nShader);
+    glDeleteShader(m_nShader);
 }
 
 //==============================================================================
-//!\fn                          shader_base::Init
+//!\fn                        qx::shader_base::Init
 //
 //!\brief  Init (compile) shader
 //!\param  pszShaderCode - string with shader code
@@ -74,7 +72,7 @@ inline void shader_base<ShaderType>::Init(const GLchar* pszShaderCode)
 }
 
 //==============================================================================
-//!\fn                      shader_base::GetParameter
+//!\fn                    qx::shader_base::GetParameter
 //
 //!\brief  Get shader parameter
 //!\param  eParameter - shader parameter.

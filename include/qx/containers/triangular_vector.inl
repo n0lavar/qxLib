@@ -15,7 +15,7 @@ namespace qx
 {
 
 //==============================================================================
-//!\fn                   triangular_vector<T>::assign
+//!\fn                 qx::triangular_vector<T>::assign
 //
 //!\brief  Assigns new contents to the vector, moving from other vector
 //!\param  other - other vector
@@ -32,7 +32,7 @@ inline void triangular_vector<T>::assign(this_type&& other) noexcept
 }
 
 //==============================================================================
-//!\fn                   triangular_vector<T>::assign
+//!\fn                 qx::triangular_vector<T>::assign
 //
 //!\brief  Assigns new contents to the vector, copying from other vector
 //!\param  other - other vector
@@ -47,7 +47,7 @@ inline void triangular_vector<T>::assign(const this_type& other)
 }
 
 //==============================================================================
-//!\fn                   triangular_vector<T>::assign
+//!\fn                 qx::triangular_vector<T>::assign
 //
 //!\brief  Assigns new contents to the vector, creating new vector with size size and filling value
 //!\param  nSideSize - triangular vector side size
@@ -62,7 +62,7 @@ inline void triangular_vector<T>::assign(size_type nSideSize, const_reference da
 }
 
 //==============================================================================
-//!\fn                  triangular_vector<T>::reserve
+//!\fn                qx::triangular_vector<T>::reserve
 //
 //!\brief  Reserve memory for vector
 //!\param  nSideSize - triangular vector side size
@@ -92,7 +92,7 @@ inline bool triangular_vector<T>::reserve(size_type nSideSize)
 }
 
 //==============================================================================
-//!\fn                   triangular_vector<T>::resize
+//!\fn                 qx::triangular_vector<T>::resize
 //
 //!\brief  Resize triangular vector without filling with new value
 //!\param  nSideSize - triangular vector side size
@@ -122,7 +122,7 @@ inline bool triangular_vector<T>::resize(size_type nSideSize)
 }
 
 //==============================================================================
-//!\fn                   triangular_vector<T>::resize
+//!\fn                 qx::triangular_vector<T>::resize
 //
 //!\brief  Resize triangular vector with filling with new value
 //!\param  nSideSize - triangular vector side size
@@ -143,7 +143,7 @@ inline bool triangular_vector<T>::resize(size_type nSideSize, const_reference da
 }
 
 //==============================================================================
-//!\fn                    triangular_vector<T>::free
+//!\fn                  qx::triangular_vector<T>::free
 //
 //!\brief  Clear vector and free memory
 //!\author Khrapov
@@ -159,7 +159,7 @@ inline void triangular_vector<T>::free(void)
 }
 
 //==============================================================================
-//!\fn                    triangular_vector<T>::fill
+//!\fn                  qx::triangular_vector<T>::fill
 //
 //!\brief  Fill vector with value
 //!\param  data - value to fill
@@ -174,7 +174,7 @@ inline void triangular_vector<T>::fill(const_reference data)
 }
 
 //==============================================================================
-//!\fn                    triangular_vector<T>::get
+//!\fn                  qx::triangular_vector<T>::get
 //
 //!\brief  Get value on position
 //!\param  nRow - row num
@@ -190,7 +190,7 @@ inline typename triangular_vector<T>::const_reference triangular_vector<T>::get(
 }
 
 //==============================================================================
-//!\fn                    triangular_vector<T>::set
+//!\fn                  qx::triangular_vector<T>::set
 //
 //!\brief  Set value on position
 //!\param  nRow - row num
@@ -206,7 +206,7 @@ inline void triangular_vector<T>::set(size_type nRow, size_type nCol, const_refe
 }
 
 //==============================================================================
-//!\fn                  triangular_vector<T>::getIndex
+//!\fn                qx::triangular_vector<T>::getIndex
 //
 //!\brief  Convert row and column numbers to continuous vector index
 //!\param  nRow - row number
@@ -225,9 +225,9 @@ inline typename triangular_vector<T>::size_type triangular_vector<T>::getIndex(s
 }
 
 //==============================================================================
-//!\fn               triangular_vector<T>::getVectorSize
+//!\fn             qx::triangular_vector<T>::getVectorSize
 //
-//!\brief  Get continuous vector size 
+//!\brief  Get continuous vector size
 //!\param  nSideSize - triangular vector side size
 //!\retval           - continuous vector size
 //!\author Khrapov
@@ -240,7 +240,7 @@ inline typename triangular_vector<T>::size_type triangular_vector<T>::getVectorS
 }
 
 //==============================================================================
-//!\fn                    triangular_vector<T>::size
+//!\fn                  qx::triangular_vector<T>::size
 //
 //!\brief  Get triangular vector size
 //!\retval  - number of elements in triangular vector (without duplication)
@@ -254,7 +254,7 @@ inline typename triangular_vector<T>::size_type triangular_vector<T>::size(void)
 }
 
 //==============================================================================
-//!\fn                    triangular_vector<T>::data
+//!\fn                  qx::triangular_vector<T>::data
 //
 //!\brief  Get raw data pointer
 //!\retval  - data pointer
@@ -268,9 +268,9 @@ inline typename triangular_vector<T>::pointer triangular_vector<T>::data()
 }
 
 //==============================================================================
-//!\fn                     triangular_vector<T>::at
+//!\fn                   qx::triangular_vector<T>::at
 //
-//!\brief  Get element in continuous vector at index 
+//!\brief  Get element in continuous vector at index
 //!\param  ind - continuous vector index
 //!\retval     - value
 //!\author Khrapov
@@ -283,7 +283,7 @@ inline typename triangular_vector<T>::reference triangular_vector<T>::at(size_ty
 }
 
 //==============================================================================
-//!\fn                   triangular_vector<T>::clear
+//!\fn                 qx::triangular_vector<T>::clear
 //
 //!\brief  Clear triangular vector
 //!\author Khrapov

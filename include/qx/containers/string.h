@@ -40,7 +40,7 @@ enum class ECaseType
 
 //==============================================================================z
 //
-//!\class                        basic_string
+//!\class                      qx::basic_string
 //
 //!\brief   Lite string class
 //
@@ -88,7 +88,7 @@ public:
                             basic_string (size_type              nSymbols,
                                           value_type             ch)              { assign(nSymbols, ch);                      }
                             basic_string (const std_string_type& str)             { assign(str);                               }
-    template<class FwdIt>   basic_string (FwdIt                  first, 
+    template<class FwdIt>   basic_string (FwdIt                  first,
                                           FwdIt                  last)            { assign(first, last);                       }
 
     void                    assign       (const_pointer          pSource,
@@ -178,7 +178,7 @@ public:
                                           size_type              nSepLen    = npos)     const;
     vector                  split        (const value_type       sep)                   const;
     vector                  split        (const basic_string   & sep)                   const;
-    
+
     void                    apply_case   (ECaseType              ct);
 
     value_type              front        (void)                                         const { return at(0);           }
@@ -199,10 +199,10 @@ public:
         std::optional<To>>::type to();
 
     template<typename From>
-    void                    from         (const From&            data, 
+    void                    from         (const From&            data,
                                           const_pointer          pszFormat = nullptr);
     template<typename From>
-    static  basic_string    sfrom        (const From&            data, 
+    static  basic_string    sfrom        (const From&            data,
                                           const_pointer          pszFormat = nullptr);
 
     const   basic_string &  operator+=   (const basic_string   & str)             { Append(str.data(), str.size());             return *this;   }
@@ -245,17 +245,17 @@ template<class UT> basic_string<UT> operator+ (const basic_string<UT>&          
 template<class UT> basic_string<UT> operator+ (basic_string<UT>&&                   lhs, basic_string<UT>&&                     rhs) _STR_OP_PLUS_BODY
 template<class UT> basic_string<UT> operator+ (basic_string<UT>&&                   lhs, const basic_string<UT>&                rhs) _STR_OP_PLUS_BODY
 template<class UT> basic_string<UT> operator+ (const basic_string<UT>&              lhs, basic_string<UT>&&                     rhs) _STR_OP_PLUS_BODY
-                                                                                                                                
+
 template<class UT> basic_string<UT> operator+ (const basic_string<UT>&              lhs, typename UT::const_pointer             rhs) _STR_OP_PLUS_BODY
 template<class UT> basic_string<UT> operator+ (basic_string<UT>&&                   lhs, typename UT::const_pointer             rhs) _STR_OP_PLUS_BODY
 template<class UT> basic_string<UT> operator+ (typename UT::const_pointer           lhs, const basic_string<UT>&                rhs) _STR_OP_PLUS_BODY
 template<class UT> basic_string<UT> operator+ (typename UT::const_pointer           lhs, basic_string<UT>&&                     rhs) _STR_OP_PLUS_BODY
-                                                                                                                                
+
 template<class UT> basic_string<UT> operator+ (const basic_string<UT>&              lhs, typename UT::value_type                rhs) _STR_OP_PLUS_BODY
 template<class UT> basic_string<UT> operator+ (basic_string<UT>&&                   lhs, typename UT::value_type                rhs) _STR_OP_PLUS_BODY
 template<class UT> basic_string<UT> operator+ (typename UT::value_type              lhs, const basic_string<UT>&                rhs) _STR_OP_PLUS_BODY
 template<class UT> basic_string<UT> operator+ (typename UT::value_type              lhs, basic_string<UT>&&                     rhs) _STR_OP_PLUS_BODY
-                                                                                                                                          
+
 template<class UT> basic_string<UT> operator+ (const basic_string<UT>&              lhs, const typename UT::std_string_type&    rhs) _STR_OP_PLUS_BODY
 template<class UT> basic_string<UT> operator+ (basic_string<UT>&&                   lhs, const typename UT::std_string_type&    rhs) _STR_OP_PLUS_BODY
 template<class UT> basic_string<UT> operator+ (const typename UT::std_string_type&  lhs, const basic_string<UT>&                rhs) _STR_OP_PLUS_BODY
@@ -263,7 +263,7 @@ template<class UT> basic_string<UT> operator+ (const typename UT::std_string_typ
 
 //==============================================================================
 //
-//!\struct                   SStrData<Traits>
+//!\struct                 qx::SStrData<Traits>
 //!\author  Khrapov
 //!\date    27.10.2019
 //==============================================================================

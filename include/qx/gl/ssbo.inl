@@ -15,7 +15,7 @@ namespace qx
 {
 
 //==============================================================================
-//!\fn                      base_ssbo<COPYBLE>::Init
+//!\fn                    qx::base_ssbo<COPYBLE>::Init
 //
 //!\brief  Init SSBO
 //!\param  nBindingPoint - shader binding point

@@ -19,7 +19,7 @@ namespace qx
 
 //==============================================================================
 //
-//!\class                      base_ubo<COPYBLE>
+//!\class                    qx::base_ubo<COPYBLE>
 //
 //!\brief   Base UBO class. Use ubo or copyble_ubo
 //!\details UBO can be used to share uniforms between different shader programs,

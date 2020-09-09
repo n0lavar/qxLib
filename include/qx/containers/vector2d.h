@@ -22,7 +22,7 @@ namespace qx
 
 //==============================================================================
 //
-//!\class                        vector2d<T>
+//!\class                      qx::vector2d<T>
 //
 //!\brief   Continuous 2d vector
 //!\details Stores in memory like one big array and makes container cache friendly
@@ -75,7 +75,7 @@ public:
     bool            reserve     (size_type          nElements);
     bool            resize      (size_type          rows,
                                  size_type          cols);
-    bool            resize      (size_type          rows, 
+    bool            resize      (size_type          rows,
                                  size_type          cols,
                                  const_reference    data);
     void            fill        (const_reference    elem);

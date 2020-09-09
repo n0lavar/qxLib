@@ -1,8 +1,8 @@
 //==============================================================================
 //
-//!\file                           useful.h
+//!\file                      useful_macros.h
 //
-//!\brief       Useful functions and macros
+//!\brief       Useful macros
 //!\details     ~
 //
 //!\author      Khrapov
@@ -39,7 +39,7 @@
         {
             void mem1() { }
         }
-    
+
         DEFINE_HAS_MEMBER(mem1);
         constexpr bool b1 = HAS_MEMBER(Class1, mem1); // true
         constexpr bool b2 = HAS_MEMBER(Class1, mem2); // false

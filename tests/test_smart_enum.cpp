@@ -2,7 +2,7 @@
 //
 //!\file                     test_smart_enum.cpp
 //
-//!\brief       
+//!\brief       Contains tests for SMART_ENUM macro
 //!\details     ~
 //
 //!\author      Khrapov

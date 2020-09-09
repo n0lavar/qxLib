@@ -14,7 +14,7 @@
 #include <memory>
 #include <gtest/gtest.h>
 
- //V_EXCLUDE_PATH *test_rtti.cpp 
+//V_EXCLUDE_PATH *test_rtti.cpp
 
 #define IS_CONSTEXPR(a) static_assert((a) || !(a));
 

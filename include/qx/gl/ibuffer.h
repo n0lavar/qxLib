@@ -17,9 +17,9 @@
 /*
     define "name" and "copyble_name" buffer classes
 
-    since we want to use the advantages of RAII to encapsulate OpenGL generate and delete functions, 
-    and we want to create copies of the buffer to be inserted into the render queue, 
-    we need two different classes: the regular one, which controls the lifetime of the object and cannot be copied, 
+    since we want to use the advantages of RAII to encapsulate OpenGL generate and delete functions,
+    and we want to create copies of the buffer to be inserted into the render queue,
+    we need two different classes: the regular one, which controls the lifetime of the object and cannot be copied,
     and the copies class with an empty Delete method
 
     "name" is storage non-copyble class with enabled Delete() method (and destructor),
@@ -56,7 +56,7 @@ namespace qx
 
 //==============================================================================
 //
-//!\class                          IBuffer
+//!\class                        qx::IBuffer
 //
 //!\brief   OpenGL buffer interface
 //!\details ~

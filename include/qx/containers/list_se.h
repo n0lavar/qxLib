@@ -21,7 +21,7 @@ namespace qx
 
 //==============================================================================
 //
-//!\class                         list_se<T>
+//!\class                       qx::list_se<T>
 //
 //!\brief   Single ended list class
 //!\details ~
@@ -152,10 +152,10 @@ public:
     template<class ... Args>
     void                emplace_front   (Args&&...          args);
     template<class ... Args>
-    void                emplace         (iterator           where, 
+    void                emplace         (iterator           where,
                                          Args&&...          args);
     template<class ... Args>
-    void                emplace_after   (iterator           where, 
+    void                emplace_after   (iterator           where,
                                          Args&&...          args);
     template<class ... Args>
     void                emplace_back    (Args&&...          args);

@@ -2,7 +2,7 @@
 //
 //!\file                      test_vector2d.cpp
 //
-//!\brief       
+//!\brief       tests for qx::vector2d
 //!\details     ~
 //
 //!\author      Khrapov

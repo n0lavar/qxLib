@@ -22,7 +22,7 @@ namespace qx
 
 //==============================================================================
 //
-//!\class                    triangular_vector<T>
+//!\class                  qx::triangular_vector<T>
 //
 //!\brief   Triangular vector class. Only elements with nRow >= nCols are stored.
 //!\details data storage example:
@@ -57,7 +57,7 @@ public:
                         triangular_vector   (this_type&&        other) noexcept     { assign(std::move(other));                 }
                         triangular_vector   (const this_type&   other)              { assign(other);                            }
                         triangular_vector   (size_type          nSideSize)          { resize(nSideSize);                        }
-                        triangular_vector   (size_type          nSideSize, 
+                        triangular_vector   (size_type          nSideSize,
                                              const_reference    data)               { assign(nSideSize, data);                  }
 
                         ~triangular_vector  (void)                                  { free();                                   }
@@ -67,7 +67,7 @@ public:
 
     void                assign              (this_type&&        other)          noexcept;
     void                assign              (const this_type&   other);
-    void                assign              (size_type          nSideSize, 
+    void                assign              (size_type          nSideSize,
                                              const_reference    data);
 
     bool                reserve             (size_type          nSideSize);

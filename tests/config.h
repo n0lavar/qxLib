@@ -13,7 +13,7 @@
 #pragma once
 
 #ifndef QX_TEST_SORT
-    #define QX_TEST_SORT 0
+    #define QX_TEST_SORT 1
 #endif
 
 #ifndef QX_TEST_NUMERICAL
@@ -46,11 +46,4 @@
 
 #ifndef QX_TEST_SMART_ENUM
     #define QX_TEST_SMART_ENUM 1
-#endif
-
-
-
-
-#ifndef QX_BENCH_SORT
-    #define QX_BENCH_SORT 0
 #endif

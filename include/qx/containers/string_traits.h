@@ -25,9 +25,9 @@ namespace qx
 
 //==============================================================================
 //
-//!\struct                      char_traits<>
+//!\struct                   qx::char_traits<Align>
 //!\author  Khrapov
-//!\date    30.10.2019
+//!\date    30.10.2020
 //==============================================================================
 template <size_t Align>
 struct char_traits
@@ -42,56 +42,56 @@ struct char_traits
     using std_string_type   = std::string;
     using sstream_type      = std::stringstream;
 
-    static constexpr value_type teol(void)                          
-    { 
-        return '\0';                                            
+    static constexpr value_type teol(void)
+    {
+        return '\0';
     }
     static constexpr size_type talign(void)
-    { 
+    {
         return static_cast<size_type>(Align);
     }
-    static size_type tstrlen(const_pointer pStr)           
-    { 
-        return static_cast<size_type>(std::strlen(pStr));       
+    static size_type tstrlen(const_pointer pStr)
+    {
+        return static_cast<size_type>(std::strlen(pStr));
     }
-    static value_type ttolower(value_type ch)             
-    { 
-        return std::tolower(ch);                                
+    static value_type ttolower(value_type ch)
+    {
+        return std::tolower(ch);
     }
-    static value_type ttoupper(value_type ch)             
-    { 
-        return std::toupper(ch);                                
+    static value_type ttoupper(value_type ch)
+    {
+        return std::toupper(ch);
     }
-    static i64 ttolli(const_pointer pStr, pointer* pEnd, int base) 
-    { 
-        return std::strtoll(pStr, pEnd, base); 
+    static i64 ttolli(const_pointer pStr, pointer* pEnd, int base)
+    {
+        return std::strtoll(pStr, pEnd, base);
     }
-    static u64 ttoull(const_pointer pStr, pointer* pEnd, int base) 
-    { 
-        return std::strtoull(pStr, pEnd, base); 
+    static u64 ttoull(const_pointer pStr, pointer* pEnd, int base)
+    {
+        return std::strtoull(pStr, pEnd, base);
     }
-    static long double ttold(const_pointer pStr, pointer* pEnd)           
-    { 
-        return std::strtold (pStr, pEnd);       
+    static long double ttold(const_pointer pStr, pointer* pEnd)
+    {
+        return std::strtold (pStr, pEnd);
     }
-    static int tstrcmp(const_pointer pFirst, const_pointer pSecond)        
-    { 
-        return std::strcmp(pFirst, pSecond);                    
+    static int tstrcmp(const_pointer pFirst, const_pointer pSecond)
+    {
+        return std::strcmp(pFirst, pSecond);
     }
-    static int tstrncmp(const_pointer  pFirst, const_pointer  pSecond, size_type nCount)         
-    { 
-        return std::strncmp(pFirst, pSecond, nCount);           
+    static int tstrncmp(const_pointer  pFirst, const_pointer  pSecond, size_type nCount)
+    {
+        return std::strncmp(pFirst, pSecond, nCount);
     }
     template<class ... Args>
-    static int tsnprintf(pointer pDest, size_type nBuffer, const_pointer pFormat, Args ... args)           
-    { 
-        return std::snprintf(pDest, nBuffer, pFormat, args...); 
+    static int tsnprintf(pointer pDest, size_type nBuffer, const_pointer pFormat, Args ... args)
+    {
+        return std::snprintf(pDest, nBuffer, pFormat, args...);
     }
 };
 
 //==============================================================================
 //
-//!\struct                   wchar_traits<>
+//!\struct                  qx::wchar_traits<Align>
 //!\author  Khrapov
 //!\date    24.03.2020
 //==============================================================================
@@ -109,20 +109,20 @@ struct wchar_traits
     using sstream_type      = std::wstringstream;
 
     static constexpr value_type teol(void)
-    { 
-        return L'\0';                                            
+    {
+        return L'\0';
     }
     static constexpr size_type talign(void)
-    { 
+    {
         return static_cast<size_type>(Align);
     }
-    static size_type tstrlen (const_pointer pStr)           
-    { 
+    static size_type tstrlen (const_pointer pStr)
+    {
         return static_cast<size_type>(std::wcslen(pStr));
     }
-    static value_type ttolower (value_type ch)             
-    { 
-        return std::towlower(ch);                                
+    static value_type ttolower (value_type ch)
+    {
+        return std::towlower(ch);
     }
     static value_type ttoupper(value_type ch)
     {

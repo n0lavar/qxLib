@@ -2,7 +2,7 @@
 //
 //!\file                         container.h
 //
-//!\brief       Container
+//!\brief       Contains macro for sequence containers with common functions
 //!\details     ~
 //
 //!\author      Khrapov
@@ -37,3 +37,4 @@
     reference               at              (size_type  ind);           /* implement */                                         \
     const_reference         at              (size_type  ind)    const   { return const_cast<container*>(this)->at(ind);     }   \
     void                    clear           (void);                     /* implement */
+ 

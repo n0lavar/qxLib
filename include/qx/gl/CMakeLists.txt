@@ -13,7 +13,7 @@ set(FOLDER_FILES
     ${CMAKE_CURRENT_SOURCE_DIR}/shader_program.h
     ${CMAKE_CURRENT_SOURCE_DIR}/shaders.h
     ${CMAKE_CURRENT_SOURCE_DIR}/texture.h
-    
+
     ${CMAKE_CURRENT_SOURCE_DIR}/buffer_base.inl
     ${CMAKE_CURRENT_SOURCE_DIR}/ubo.inl
     ${CMAKE_CURRENT_SOURCE_DIR}/ssbo.inl
@@ -23,7 +23,6 @@ set(FOLDER_FILES
     ${CMAKE_CURRENT_SOURCE_DIR}/shader_program.inl
     ${CMAKE_CURRENT_SOURCE_DIR}/shaders.inl
     ${CMAKE_CURRENT_SOURCE_DIR}/texture.inl
-
 )
 
 append_sources("${FOLDER_FILES}")

@@ -116,7 +116,7 @@ struct Next
 
 //==============================================================================
 //
-//!\class             constexpr_counter<Tag, Start, Step>
+//!\class           qx::constexpr_counter<Tag, Start, Step>
 //
 //!\brief   constexpr counter. use unique tag for different instances
 //!\details modyfied version of Anthony Williams constexpr counter

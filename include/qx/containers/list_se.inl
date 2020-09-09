@@ -15,7 +15,7 @@ namespace qx
 {
 
 //==============================================================================
-//!\fn                        list_se<T>::assign
+//!\fn                      qx::list_se<T>::assign
 //
 //!\brief    Assign by copying all nodes from another list
 //!\property O(list.size())
@@ -35,7 +35,7 @@ inline void list_se<T>::assign(const list_se& list)
 }
 
 //==============================================================================
-//!\fn                        list_se<T>::assign
+//!\fn                      qx::list_se<T>::assign
 //
 //!\brief    Assign by moving from other list
 //!\property O(1)
@@ -52,7 +52,7 @@ inline void list_se<T>::assign(list_se&& list) noexcept
 }
 
 //==============================================================================
-//!\fn                        list_se<T>::assign
+//!\fn                      qx::list_se<T>::assign
 //
 //!\brief    Assign by copying from std::initializer_list
 //!\property O(init.size())
@@ -69,7 +69,7 @@ inline void list_se<T>::assign(init_list init)
 }
 
 //==============================================================================
-//!\fn                        list_se<T>::assign
+//!\fn                      qx::list_se<T>::assign
 //
 //!\brief    Assign by filling with 'count' elemtnts of 'value'
 //!\property O(count)
@@ -87,7 +87,7 @@ inline void list_se<T>::assign(size_type count, const_reference value)
 }
 
 //==============================================================================
-//!\fn                        list_se<T>::insert
+//!\fn                      qx::list_se<T>::insert
 //
 //!\brief    Insert element in list
 //!\property O(size())
@@ -103,7 +103,7 @@ inline void list_se<T>::insert(iterator where, const_reference what)
 }
 
 //==============================================================================
-//!\fn                        list_se<T>::insert
+//!\fn                      qx::list_se<T>::insert
 //
 //!\brief    Insert number of elements in list
 //!\property O(size() + number)
@@ -133,11 +133,11 @@ inline void list_se<T>::insert(iterator where, const_pointer what, size_type num
 }
 
 //==============================================================================
-//!\fn                     list_se<T>::insert_after
+//!\fn                   qx::list_se<T>::insert_after
 //
 //!\brief    Insert elemtnt after 'where' iterator
 //!\property O(1)
-//!\param    where - iterator after which a new element will be inserted 
+//!\param    where - iterator after which a new element will be inserted
 //!\param    what  - new element
 //!\author   Khrapov
 //!\date     8.02.2020
@@ -149,11 +149,11 @@ inline void list_se<T>::insert_after(iterator where, const_reference what)
 }
 
 //==============================================================================
-//!\fn                     list_se<T>::insert_after
+//!\fn                   qx::list_se<T>::insert_after
 //
 //!\brief    Insert elemtnts after 'where' iterator
 //!\property O(number)
-//!\param    where  - iterator after which a new elements will be inserted 
+//!\param    where  - iterator after which a new elements will be inserted
 //!\param    what   - new element
 //!\param    number - number of elements
 //!\author   Khrapov
@@ -170,7 +170,7 @@ inline void list_se<T>::insert_after(iterator where, const_pointer what, size_ty
 }
 
 //==============================================================================
-//!\fn                        list_se<T>::erase
+//!\fn                      qx::list_se<T>::erase
 //
 //!\brief    Erase elements from list
 //!\property O(size() + number)
@@ -200,7 +200,7 @@ inline void list_se<T>::erase(iterator where, size_type number)
 }
 
 //==============================================================================
-//!\fn                     list_se<T>::erase_after
+//!\fn                   qx::list_se<T>::erase_after
 //
 //!\brief    Erase elements from list
 //!\property O(number)
@@ -233,7 +233,7 @@ inline void list_se<T>::erase_after(iterator where, size_type number)
 }
 
 //==============================================================================
-//!\fn                      list_se<T>::push_back
+//!\fn                    qx::list_se<T>::push_back
 //
 //!\brief    Push back element
 //!\property O(size())
@@ -248,7 +248,7 @@ inline void list_se<T>::push_back(const_reference what)
 }
 
 //==============================================================================
-//!\fn                      list_se<T>::push_front
+//!\fn                    qx::list_se<T>::push_front
 //
 //!\brief    Push front element
 //!\property O(1)
@@ -263,7 +263,7 @@ inline void list_se<T>::push_front(const_reference what)
 }
 
 //==============================================================================
-//!\fn                       list_se<T>::pop_back
+//!\fn                     qx::list_se<T>::pop_back
 //
 //!\brief    Pop back element
 //!\property O(size())
@@ -277,7 +277,7 @@ inline void list_se<T>::pop_back(void)
 }
 
 //==============================================================================
-//!\fn                      list_se<T>::pop_front
+//!\fn                    qx::list_se<T>::pop_front
 //
 //!\brief    Pop front element
 //!\property O(1)
@@ -297,7 +297,7 @@ inline void list_se<T>::pop_front(void)
 }
 
 //==============================================================================
-//!\fn                list_se<T>::emplace_front<...Args>
+//!\fn              qx::list_se<T>::emplace_front<...Args>
 //
 //!\brief    Construct and insert element at the front
 //!\property O(1)
@@ -319,7 +319,7 @@ inline void list_se<T>::emplace_front(Args&& ...args)
 }
 
 //==============================================================================
-//!\fn                   list_se<T>::emplace<...Args>
+//!\fn                 qx::list_se<T>::emplace<...Args>
 //
 //!\brief    Construct and insert element
 //!\property O(size())
@@ -348,7 +348,7 @@ inline void list_se<T>::emplace(iterator where, Args&& ...args)
 }
 
 //==============================================================================
-//!\fn                list_se<T>::emplace_after<...Args>
+//!\fn              qx::list_se<T>::emplace_after<...Args>
 //
 //!\brief    Construct and insert element
 //!\property O(1)
@@ -371,7 +371,7 @@ inline void list_se<T>::emplace_after(iterator where, Args&& ...args)
 }
 
 //==============================================================================
-//!\fn                list_se<T>::emplace_back<...Args>
+//!\fn              qx::list_se<T>::emplace_back<...Args>
 //
 //!\brief    Construct and insert element at the end
 //!\property O(size())
@@ -395,7 +395,7 @@ inline void list_se<T>::emplace_back(Args&& ...args)
 }
 
 //==============================================================================
-//!\fn                        list_se<T>::clear
+//!\fn                      qx::list_se<T>::clear
 //
 //!\brief    Clear list
 //!\property O(size())

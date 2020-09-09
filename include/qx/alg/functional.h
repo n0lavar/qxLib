@@ -2,7 +2,7 @@
 //
 //!\file                         functional.h
 //
-//!\brief       
+//!\brief       Algorithms for math functions
 //!\details     ~
 //
 //!\author      Khrapov
@@ -27,7 +27,7 @@ namespace qx
 using function2d = std::function<double(double)>;
 
 //==============================================================================
-//!\fn                       linear_interpolation
+//!\fn                     qx::linear_interpolation
 //
 //!\brief  Linear interpolation algorithm
 //!\param  p0 - point 0 (x - coord, y - f(x))
@@ -44,7 +44,7 @@ inline double linear_interpolation(glm::dvec2 p0, glm::dvec2 p1, double x)
 }
 
 //==============================================================================
-//!\fn                      bilinear_inletpolation
+//!\fn                    qx::bilinear_inletpolation
 //
 //!\brief  Bilinear interpolation algorithm. Points are clockwise or counterclock-wise
 //!\param  p0 - point 0 (x, y - coords, z - f(x, y))
@@ -70,7 +70,7 @@ inline double bilinear_inletpolation(glm::dvec3 p0, glm::dvec3 p1, glm::dvec3 p2
 }
 
 //==============================================================================
-//!\fn                     integrate_rectangle_rule
+//!\fn                   qx::integrate_rectangle_rule
 //
 //!\brief  Interate using rectangle rule
 //!\param  func                - target function
@@ -101,7 +101,7 @@ inline double integrate_rectangle_rule(const function2d&    func,
 }
 
 //==============================================================================
-//!\fn                     integrate_trapezoid_rule
+//!\fn                   qx::integrate_trapezoid_rule
 //
 //!\brief  Interate using trapezoid rule
 //!\param  func                - target function
@@ -132,7 +132,7 @@ inline double integrate_trapezoid_rule(const function2d& func,
 }
 
 //==============================================================================
-//!\fn                   integrate_adaptive_midpoint
+//!\fn                 qx::integrate_adaptive_midpoint
 //
 //!\brief  Interate using adaptive midpoint
 //!\param  func                - target function
@@ -159,10 +159,10 @@ inline double integrate_adaptive_midpoint(const function2d& func,
     double x = x0;
 
     std::function<double(const function2d&, double, double, double, size_t)> slice_area
-        = [&slice_area, &max_recursion] 
+        = [&slice_area, &max_recursion]
         (const function2d& func,
-         double x0, 
-         double x1, 
+         double x0,
+         double x1,
          double max_slice_error,
          size_t recursionLevel) -> double
     {
@@ -196,10 +196,10 @@ inline double integrate_adaptive_midpoint(const function2d& func,
 }
 
 //==============================================================================
-//!\fn                      integrate_monte_carlo
+//!\fn                    qx::integrate_monte_carlo
 //
 //!\brief  Interate using probabilistic algorithm Monte Carlo
-//!\param  funcIsInside   - func that returns 
+//!\param  funcIsInside   - func that returns
 //                          1 if point is inside shape with positive value
 //                          0 if point is not inside shape
 //                          -1 if point is inside shape with negative value
@@ -236,7 +236,7 @@ inline double integrate_monte_carlo(const std::function<int(double, double)>&  f
 }
 
 //==============================================================================
-//!\fn                     find_zero_newtons_method
+//!\fn                   qx::find_zero_newtons_method
 //
 //!\brief  Find root of the equation using Newtons method
 //!\param  f              - function

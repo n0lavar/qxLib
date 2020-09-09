@@ -15,7 +15,7 @@ namespace qx
 {
 
 //==============================================================================
-//!\fn                      base_rbo<COPYBLE>::Init
+//!\fn                    qx::base_rbo<COPYBLE>::Init
 //
 //!\brief  Init RBO with width and height
 //!\param  nWidth        - width
@@ -35,18 +35,18 @@ inline void base_rbo<COPYBLE>::Init(GLsizei nWidth, GLsizei nHeight, GLsizei nMu
     if (nMultisamples > 0)
     {
         glRenderbufferStorageMultisample(
-            GL_RENDERBUFFER, 
-            nMultisamples, 
-            GL_DEPTH24_STENCIL8, 
-            nWidth, 
+            GL_RENDERBUFFER,
+            nMultisamples,
+            GL_DEPTH24_STENCIL8,
+            nWidth,
             nHeight);
     }
     else
     {
         glRenderbufferStorage(
-            GL_RENDERBUFFER, 
-            GL_DEPTH24_STENCIL8, 
-            nWidth, 
+            GL_RENDERBUFFER,
+            GL_DEPTH24_STENCIL8,
+            nWidth,
             nHeight);
     }
 
@@ -54,7 +54,7 @@ inline void base_rbo<COPYBLE>::Init(GLsizei nWidth, GLsizei nHeight, GLsizei nMu
 }
 
 //==============================================================================
-//!\fn                    base_rbo<COPYBLE>::Generate
+//!\fn                  qx::base_rbo<COPYBLE>::Generate
 //
 //!\brief  Generate buffer
 //!\author Khrapov
@@ -67,7 +67,7 @@ inline void base_rbo<COPYBLE>::Generate(void)
 }
 
 //==============================================================================
-//!\fn                     base_rbo<COPYBLE>::Delete
+//!\fn                   qx::base_rbo<COPYBLE>::Delete
 //
 //!\brief  Delete buffer
 //!\author Khrapov
@@ -87,7 +87,7 @@ inline void base_rbo<COPYBLE>::Delete(void)
 }
 
 //==============================================================================
-//!\fn                      base_rbo<COPYBLE>::Bind
+//!\fn                    qx::base_rbo<COPYBLE>::Bind
 //
 //!\brief  Bind buffer
 //!\author Khrapov
@@ -100,7 +100,7 @@ inline void base_rbo<COPYBLE>::Bind(void) const
 }
 
 //==============================================================================
-//!\fn                     base_rbo<COPYBLE>::Unbind
+//!\fn                   qx::base_rbo<COPYBLE>::Unbind
 //
 //!\brief  Unbind buffer
 //!\author Khrapov

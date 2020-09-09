@@ -19,7 +19,7 @@ namespace qx
 
 //==============================================================================
 //
-//!\class                         benchmark
+//!\class                       qx::benchmark
 //
 //!\brief   Benchmark class
 //!\details ~

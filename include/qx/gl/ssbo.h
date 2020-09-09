@@ -19,7 +19,7 @@ namespace qx
 
 //==============================================================================
 //
-//!\class                   base_ssbo<COPYBLE>
+//!\class                 qx::base_ssbo<COPYBLE>
 //
 //!\brief   Base SSBO class. Use rbo or copyble_rbo
 //!\details ~
@@ -32,10 +32,10 @@ template<bool COPYBLE>
 class base_ssbo : public buffer_base<COPYBLE>
 {
 public:
-                        
+
                         base_ssbo       (void) = default;
-    virtual void        Init            (GLuint             nBindingPoint, 
-                                         GLsizeiptr         nSize, 
+    virtual void        Init            (GLuint             nBindingPoint,
+                                         GLsizeiptr         nSize,
                                          const void       * pData = nullptr);
 
 protected:

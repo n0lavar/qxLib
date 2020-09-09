@@ -2,7 +2,7 @@
 //
 //!\file                        useful_funcs.h
 //
-//!\brief
+//!\brief       Different useful functions
 //!\details     ~
 //
 //!\author      Khrapov
@@ -21,7 +21,7 @@ namespace qx
 {
 
 //==============================================================================
-//!\fn                         between<L, R, V>
+//!\fn                       qx::between<L, R, V>
 //
 //!\brief  Checks if value is between left and right
 //!\param  left  - left value
@@ -47,7 +47,7 @@ inline constexpr bool between_enum(E left, E right, E value)
 }
 
 //==============================================================================
-//!\fn                          step_to<V, T>
+//!\fn                        qx::step_to<V, T>
 //
 //!\brief  Do step to some value
 //!\param  val - value
@@ -65,7 +65,7 @@ inline constexpr void step_to(V& val, const T& to)
 }
 
 //==============================================================================
-//!\fn                                pi
+//!\fn                              qx::pi
 //
 //!\brief  Get pi
 //!\author Khrapov
@@ -78,7 +78,7 @@ inline constexpr T pi()
 }
 
 //==============================================================================
-//!\fn                     align_size<T, size_type>
+//!\fn                   qx::align_size<T, size_type>
 //
 //!\brief  Align size to upper bound
 //!\param  nSize  - current size    (ex. 30)
@@ -94,7 +94,7 @@ inline size_type align_size(size_type nSize, size_type nAlign)
 }
 
 //==============================================================================
-//!\fn                   destruct<iterator>
+//!\fn                      qx::destruct<iterator>
 //
 //!\brief  Call destructors
 //!\param  start - start iterator

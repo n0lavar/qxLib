@@ -13,10 +13,10 @@
 #include <qx/other/constexpr_conter.h>
 #include <qx/other/useful_macros.h>
 
- //V_EXCLUDE_PATH *test_constexpr_counter.cpp 
+ //V_EXCLUDE_PATH *test_constexpr_counter.cpp
 
 // shows constexpr A and B in error msg
-template<int A, int B> 
+template<int A, int B>
 struct StaticAssert
 {
     static_assert(A == B, "Values are not equal");

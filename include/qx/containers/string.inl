@@ -15,7 +15,7 @@ namespace qx
 {
 
 //==============================================================================
-//!\fn                  basic_string<Traits>::assign
+//!\fn                qx::basic_string<Traits>::assign
 //
 //!\brief  Assign string
 //!\param  pSource  - source string pointer
@@ -31,7 +31,7 @@ inline void basic_string<Traits>::assign(const_pointer pSource, size_type nSymbo
 }
 
 //==============================================================================
-//!\fn                    basic_string<Traits>::assign
+//!\fn                  qx::basic_string<Traits>::assign
 //
 //!\brief  Assign by another string
 //!\param  str - string
@@ -46,7 +46,7 @@ inline void basic_string<Traits>::assign(const basic_string& str)
 }
 
 //==============================================================================
-//!\fn                    basic_string<Traits>::assign
+//!\fn                  qx::basic_string<Traits>::assign
 //
 //!\brief  Assign by const pointer
 //!\param  pSource - const pointer
@@ -61,7 +61,7 @@ inline void basic_string<Traits>::assign(const_pointer pSource)
 }
 
 //==============================================================================
-//!\fn               basic_string<Traits>::assign
+//!\fn             qx::basic_string<Traits>::assign
 //
 //!\brief  Assign by filling
 //!\param  nSymbols - num of symbols of char
@@ -77,7 +77,7 @@ inline void basic_string<Traits>::assign(size_type nSymbols, value_type ch)
 }
 
 //==============================================================================
-//!\fn               basic_string<Traits>::assign<FwdIt>
+//!\fn             qx::basic_string<Traits>::assign<FwdIt>
 //
 //!\brief  Assign by iterators
 //!\param  first - first iterator of source
@@ -95,7 +95,7 @@ inline void basic_string<Traits>::assign(FwdIt first, FwdIt last)
 }
 
 //==============================================================================
-//!\fn             basic_string<Traits>::format<...Args>
+//!\fn           qx::basic_string<Traits>::format<...Args>
 //
 //!\brief  Format string. Using this str as pFormat is UB
 //!\param  pFormat - format pattern
@@ -113,7 +113,7 @@ inline void basic_string<Traits>::format(const_pointer pFormat, Args ...args)
 }
 
 //==============================================================================
-//!\fn             basic_string<Traits>::sformat<...Args>
+//!\fn           qx::basic_string<Traits>::sformat<...Args>
 //
 //!\brief  Static format string
 //!\param  pFormat - format pattern
@@ -132,7 +132,7 @@ inline basic_string<Traits> basic_string<Traits>::sformat(const_pointer pFormat,
 }
 
 //==============================================================================
-//!\fn                 basic_string<Traits>::capacity
+//!\fn               qx::basic_string<Traits>::capacity
 //
 //!\brief  Get allocated memory size (including null terminator)
 //!\author Khrapov
@@ -142,13 +142,13 @@ template<class Traits>
 inline typename basic_string<Traits>::size_type basic_string<Traits>::capacity(void) const
 {
     auto pData = GetStrData();
-    return pData 
-        ? pData->nAllocatedSize 
+    return pData
+        ? pData->nAllocatedSize
         : 0;
 }
 
 //==============================================================================
-//!\fn                 basic_string<Traits>::reserve
+//!\fn               qx::basic_string<Traits>::reserve
 //
 //!\brief  Reserve memory for the string
 //!\param  nCapacity - new capacity
@@ -165,7 +165,7 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::reserve(si
     return capacity();
 }
 //==============================================================================
-//!\fn                   basic_string<Traits>::fit
+//!\fn                 qx::basic_string<Traits>::fit
 //
 //!\brief  Fit allocated size to string's actual size
 //!\author Khrapov
@@ -180,7 +180,7 @@ inline void basic_string<Traits>::fit(void)
 }
 
 //==============================================================================
-//!\fn                     basic_string<Traits>::free
+//!\fn                   qx::basic_string<Traits>::free
 //
 //!\brief  Clear string and free allocated memory
 //!\author Khrapov
@@ -194,7 +194,7 @@ inline void basic_string<Traits>::free(void)
 }
 
 //==============================================================================
-//!\fn                  basic_string<Traits>::erase
+//!\fn                qx::basic_string<Traits>::erase
 //
 //!\brief  Erase substrung
 //!\param  first - first substr char iterator
@@ -217,7 +217,7 @@ inline void basic_string<Traits>::erase(iterator first, iterator last)
 }
 
 //==============================================================================
-//!\fn                  basic_string<Traits>::erase
+//!\fn                qx::basic_string<Traits>::erase
 //
 //!\brief  Erase char
 //!\param  it - char iterator
@@ -231,7 +231,7 @@ inline void basic_string<Traits>::erase(iterator it)
 }
 
 //==============================================================================
-//!\fn                  basic_string<Traits>::erase
+//!\fn                qx::basic_string<Traits>::erase
 //
 //!\brief  Erase char
 //!\param  pos - char position
@@ -245,7 +245,7 @@ inline void basic_string<Traits>::erase(size_type pos)
 }
 
 //==============================================================================
-//!\fn                  basic_string<Traits>::erase
+//!\fn                qx::basic_string<Traits>::erase
 //
 //!\brief  Erase substrung
 //!\param  ind_first - first substr char index
@@ -260,7 +260,7 @@ inline void basic_string<Traits>::erase(size_type ind_first, size_type nSymbols)
 }
 
 //==============================================================================
-//!\fn           basic_string<Traits>::erase_all_of<...Args, >
+//!\fn         qx::basic_string<Traits>::erase_all_of<...Args, >
 //
 //!\brief  Erase all chars container including from string
 //!\param  ...args - symbols to erase
@@ -276,7 +276,7 @@ inline void basic_string<Traits>::erase_all_of(Args... args)
 }
 
 //==============================================================================
-//!\fn           basic_string<Traits>::erase_all_of<FwdIt, >
+//!\fn         qx::basic_string<Traits>::erase_all_of<FwdIt, >
 //
 //!\brief  Erase all chars container including from string
 //!\param  first - symbols to erase begin iterator
@@ -300,7 +300,7 @@ inline void basic_string<Traits>::erase_all_of(FwdIt first, FwdIt last)
 }
 
 //==============================================================================
-//!\fn            basic_string<Traits>::erase_line_breaks
+//!\fn          qx::basic_string<Traits>::erase_line_breaks
 //
 //!\brief  Erase \r and \n symbols from the string
 //!\author Khrapov
@@ -309,12 +309,12 @@ inline void basic_string<Traits>::erase_all_of(FwdIt first, FwdIt last)
 template<class Traits>
 inline void basic_string<Traits>::erase_line_breaks(void)
 {
-    erase_all_of(CHAR_PREFIX(typename Traits::value_type, '\r'), 
+    erase_all_of(CHAR_PREFIX(typename Traits::value_type, '\r'),
                  CHAR_PREFIX(typename Traits::value_type, '\n'));
 }
 
 //==============================================================================
-//!\fn                  basic_string<Traits>::insert
+//!\fn                qx::basic_string<Traits>::insert
 //
 //!\brief  Insert substring
 //!\param  to_first   - first targer string char iterator
@@ -330,7 +330,7 @@ inline void basic_string<Traits>::insert(iterator to_first, const_iterator from_
 }
 
 //==============================================================================
-//!\fn                  basic_string<Traits>::insert
+//!\fn                qx::basic_string<Traits>::insert
 //
 //!\brief  Insert substring
 //!\param  to      - first targer string char iterator
@@ -345,7 +345,7 @@ inline void basic_string<Traits>::insert(iterator to, const_pointer pSourse)
 }
 
 //==============================================================================
-//!\fn                  basic_string<Traits>::insert
+//!\fn                qx::basic_string<Traits>::insert
 //
 //!\brief  Insert substring
 //!\param  to       - first targer string char iterator
@@ -361,7 +361,7 @@ inline void basic_string<Traits>::insert(iterator to, const_pointer pSourse, siz
 }
 
 //==============================================================================
-//!\fn                  basic_string<Traits>::insert
+//!\fn                qx::basic_string<Traits>::insert
 //
 //!\brief  Insert substring
 //!\param  to_ind  - first targer string char index
@@ -376,7 +376,7 @@ inline void basic_string<Traits>::insert(size_type to_ind, const_pointer pSourse
 }
 
 //==============================================================================
-//!\fn                  basic_string<Traits>::insert
+//!\fn                qx::basic_string<Traits>::insert
 //
 //!\brief  Insert substring
 //!\param  to_ind   - first targer string char index
@@ -397,9 +397,9 @@ inline void basic_string<Traits>::insert(size_type to_ind, const_pointer pSourse
 }
 
 //==============================================================================
-//!\fn                 basic_string<Traits>::push_back
+//!\fn               qx::basic_string<Traits>::push_back
 //
-//!\brief  Push char to the end 
+//!\brief  Push char to the end
 //!\param  ch - char
 //!\author Khrapov
 //!\date   21.03.2020
@@ -411,7 +411,7 @@ inline void basic_string<Traits>::push_back(value_type ch)
 }
 
 //==============================================================================
-//!\fn                 basic_string<Traits>::push_front
+//!\fn               qx::basic_string<Traits>::push_front
 //
 //!\brief  Push char to the front
 //!\param  ch - char
@@ -425,7 +425,7 @@ inline void basic_string<Traits>::push_front(value_type ch)
 }
 
 //==============================================================================
-//!\fn                  basic_string<Traits>::find
+//!\fn                qx::basic_string<Traits>::find
 //
 //!\brief  Find first match
 //!\param  pWhat    - c-string to find
@@ -461,7 +461,7 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::find(const
 }
 
 //==============================================================================
-//!\fn                  basic_string<Traits>::find
+//!\fn                qx::basic_string<Traits>::find
 //
 //!\brief  Find first match
 //!\param  ch       - char to find
@@ -494,7 +494,7 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::find(value
 }
 
 //==============================================================================
-//!\fn                  basic_string<Traits>::find
+//!\fn                qx::basic_string<Traits>::find
 //
 //!\brief  Find first match
 //!\param  str      - string to find
@@ -505,15 +505,15 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::find(value
 //!\date   30.10.2019
 //==============================================================================
 template<class Traits>
-inline typename basic_string<Traits>::size_type basic_string<Traits>::find(const basic_string& str, 
-                                                                           size_type           indBegin, 
+inline typename basic_string<Traits>::size_type basic_string<Traits>::find(const basic_string& str,
+                                                                           size_type           indBegin,
                                                                            size_type           indEnd) const
 {
     return find(str.data(), indBegin, indEnd);
 }
 
 //==============================================================================
-//!\fn              basic_string<Traits>::substr
+//!\fn            qx::basic_string<Traits>::substr
 //
 //!\brief  Find substring
 //!\param  begin - start index
@@ -530,7 +530,7 @@ inline basic_string<Traits> basic_string<Traits>::substr(size_type begin, size_t
 }
 
 //==============================================================================
-//!\fn                  basic_string<Traits>::find_last_of
+//!\fn                qx::basic_string<Traits>::find_last_of
 //
 //!\brief  Find last position of catacter
 //!\param  ch    - char to find
@@ -542,7 +542,7 @@ inline basic_string<Traits> basic_string<Traits>::substr(size_type begin, size_t
 //==============================================================================
 template<class Traits>
 inline typename basic_string<Traits>::size_type basic_string<Traits>::find_last_of(value_type ch,
-                                                                                   size_type  pos, 
+                                                                                   size_type  pos,
                                                                                    size_type  count) const
 {
     if (pos == npos)
@@ -556,7 +556,7 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::find_last_
 }
 
 //==============================================================================
-//!\fn                   basic_string<Traits>::split
+//!\fn                 qx::basic_string<Traits>::split
 //
 //!\brief  Split string by separator
 //!\param  pSep    - separator string
@@ -566,7 +566,7 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::find_last_
 //!\date   21.03.2020
 //==============================================================================
 template<class Traits>
-inline typename basic_string<Traits>::vector basic_string<Traits>::split(const_pointer pSep, 
+inline typename basic_string<Traits>::vector basic_string<Traits>::split(const_pointer pSep,
                                                                          size_type     nSepLen) const
 {
     vector tokens;
@@ -586,7 +586,7 @@ inline typename basic_string<Traits>::vector basic_string<Traits>::split(const_p
 }
 
 //==============================================================================
-//!\fn                   basic_string<Traits>::split
+//!\fn                 qx::basic_string<Traits>::split
 //
 //!\brief  Split string by separator
 //!\param  sep - char separator
@@ -611,7 +611,7 @@ inline typename basic_string<Traits>::vector basic_string<Traits>::split(const v
 }
 
 //==============================================================================
-//!\fn                  basic_string<Traits>::split
+//!\fn                qx::basic_string<Traits>::split
 //
 //!\brief  Split string by separator
 //!\param  sep   - char to find
@@ -626,7 +626,7 @@ inline typename basic_string<Traits>::vector basic_string<Traits>::split(const b
 }
 
 //==============================================================================
-//!\fn              basic_string<Traits>::apply_case
+//!\fn            qx::basic_string<Traits>::apply_case
 //
 //!\brief  Apply case type to the whole string
 //!\param  ct - case type \see ECaseType
@@ -662,7 +662,7 @@ inline void basic_string<Traits>::apply_case(ECaseType ct)
 }
 
 //==============================================================================
-//!\fn                   basic_string<Traits>::to<To>
+//!\fn                 qx::basic_string<Traits>::to<To>
 //
 //!\brief  Convert to integral signed type
 //!\param  base - base of the interpreted integer value (0, 2-36)
@@ -691,7 +691,7 @@ inline typename std::enable_if<std::is_signed_v<To> && !std::is_unsigned_v<To> &
 }
 
 //==============================================================================
-//!\fn                   basic_string<Traits>::to<To>
+//!\fn                 qx::basic_string<Traits>::to<To>
 //
 //!\brief  Convert to integral unsigned type
 //!\param  base - base of the interpreted integer value (0, 2-36)
@@ -720,7 +720,7 @@ inline typename std::enable_if<!std::is_signed_v<To> && std::is_unsigned_v<To> &
 }
 
 //==============================================================================
-//!\fn                   basic_string<Traits>::to<To>
+//!\fn                 qx::basic_string<Traits>::to<To>
 //
 //!\brief  Convert to floating point type
 //!\retval  - value or nullopt
@@ -748,7 +748,7 @@ inline typename std::enable_if<std::is_floating_point_v<To>,
 }
 
 //==============================================================================
-//!\fn                 basic_string<Traits>::from<From>
+//!\fn               qx::basic_string<Traits>::from<From>
 //
 //!\brief  Construct string from custom type
 //!\param  data      - data of type From
@@ -760,8 +760,8 @@ template<class Traits>
 template<typename From>
 inline void basic_string<Traits>::from(const From& data, const_pointer pszFormat)
 {
-    if constexpr (std::is_pod_v<From> 
-                  || std::is_pointer_v<From> 
+    if constexpr (std::is_pod_v<From>
+                  || std::is_pointer_v<From>
                   || std::is_same_v<From, std::nullptr_t>)
     {
         if (!pszFormat)
@@ -850,7 +850,7 @@ inline void basic_string<Traits>::from(const From& data, const_pointer pszFormat
 }
 
 //==============================================================================
-//!\fn                basic_string<Traits>::sfrom<From>
+//!\fn              qx::basic_string<Traits>::sfrom<From>
 //
 //!\brief  Construct string from custom type and get it
 //!\param  data      - data of type From
@@ -869,7 +869,7 @@ inline basic_string<Traits> basic_string<Traits>::sfrom(const From& data, const_
 }
 
 //==============================================================================
-//!\fn                basic_string<Traits>::operator[]
+//!\fn              qx::basic_string<Traits>::operator[]
 //
 //!\param  ind - char index
 //!\retval     - char value
@@ -883,7 +883,7 @@ inline typename basic_string<Traits>::reference basic_string<Traits>::operator[]
 }
 
 //==============================================================================
-//!\fn                   basic_string<Traits>::at
+//!\fn                 qx::basic_string<Traits>::at
 //
 //!\param  ind - char index
 //!\retval     - char value
@@ -892,12 +892,12 @@ inline typename basic_string<Traits>::reference basic_string<Traits>::operator[]
 //==============================================================================
 template<class Traits>
 inline typename basic_string<Traits>::reference basic_string<Traits>::at(size_type ind)
-{ 
-    return operator[](ind); 
+{
+    return operator[](ind);
 }
 
 //==============================================================================
-//!\fn                  basic_string<Traits>::clear
+//!\fn                qx::basic_string<Traits>::clear
 //
 //!\brief  Clear string
 //!\author Khrapov
@@ -910,7 +910,7 @@ inline void basic_string<Traits>::clear(void)
 }
 
 //==============================================================================
-//!\fn                   basic_string<Traits>::size
+//!\fn                 qx::basic_string<Traits>::size
 //
 //!\brief  Get string size (excluding null terminator)
 //!\author Khrapov
@@ -926,7 +926,7 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::size(void)
 }
 
 //==============================================================================
-//!\fn                   basic_string<Traits>::data
+//!\fn                 qx::basic_string<Traits>::data
 //
 //!\brief  Get c-string
 //!\author Khrapov
@@ -938,7 +938,7 @@ inline typename basic_string<Traits>::pointer basic_string<Traits>::data(void)
     return m_pData;
 }
 //==============================================================================
-//!\fn                basic_string<Traits>::GetStrData
+//!\fn              qx::basic_string<Traits>::GetStrData
 //
 //!\brief  Get string info struct
 //!\author Khrapov
@@ -953,7 +953,7 @@ inline SStrData<Traits> * basic_string<Traits>::GetStrData(void)
 }
 
 //==============================================================================
-//!\fn                basic_string<Traits>::GetStrData
+//!\fn              qx::basic_string<Traits>::GetStrData
 //
 //!\brief  Get string info struct
 //!\author Khrapov
@@ -968,7 +968,7 @@ inline const SStrData<Traits>* basic_string<Traits>::GetStrData(void) const
 }
 
 //==============================================================================
-//!\fn                  basic_string<Traits>::Resize
+//!\fn                qx::basic_string<Traits>::Resize
 //
 //!\brief  Resize string.
 //         If new size is smaller, string will be truncated
@@ -1018,7 +1018,7 @@ inline bool basic_string<Traits>::Resize(size_type nSymbols, size_type nAlign, E
 }
 
 //==============================================================================
-//!\fn                  basic_string<Traits>::Append
+//!\fn                qx::basic_string<Traits>::Append
 //
 //!\brief  Append string to the current
 //!\param  pSource  - source string
@@ -1035,7 +1035,7 @@ inline void basic_string<Traits>::Append(const_pointer pSource, size_type nSymbo
 }
 
 //==============================================================================
-//!\fn                 basic_string<Traits>::Compare
+//!\fn               qx::basic_string<Traits>::Compare
 //
 //!\brief  Performs a binary comparison of the characters
 //!\param  pStr     - string to compare

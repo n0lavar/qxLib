@@ -20,7 +20,7 @@ namespace qx
 
 //==============================================================================
 //
-//!\class                      base_rbo<COPYBLE>
+//!\class                    qx::base_rbo<COPYBLE>
 //
 //!\brief   Base RBO class. Use rbo or copyble_rbo
 //!\details ~

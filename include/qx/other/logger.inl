@@ -15,7 +15,7 @@ namespace qx
 {
 
 //================================================================================
-//!\fn                        Log::ProcessOutput<...Args>
+//!\fn                    qx::logger::ProcessOutput<...Args>
 //
 //!\brief  Process tracings
 //!\param  eLogLevel            - log level
@@ -30,11 +30,11 @@ namespace qx
 //================================================================================
 template<class ... Args>
 inline void logger::ProcessOutput(level         eLogLevel,
-                                  const char  * pszFormat, 
+                                  const char  * pszFormat,
                                   const char  * pszAssertExpression,
-                                  const char  * pszFile, 
+                                  const char  * pszFile,
                                   const char  * pszFunction,
-                                  int           nLine, 
+                                  int           nLine,
                                   Args...       args)
 {
     TraceUnitInfo* pUnitInfo = nullptr;
@@ -142,7 +142,7 @@ inline void logger::ProcessOutput(level         eLogLevel,
 }
 
 //================================================================================
-//!\fn                       logger::RegisterUnit
+//!\fn                     qx::logger::RegisterUnit
 //
 //!\brief  Register file or function for tracing
 //         Register unit with name "default" to update default tracing settings
@@ -161,7 +161,7 @@ inline void logger::RegisterUnit(const char* pszUnitName, const TraceUnitInfo& u
 }
 
 //================================================================================
-//!\fn                      logger::DeregisterUnit
+//!\fn                    qx::logger::DeregisterUnit
 //
 //!\brief  Deregister unit
 //!\param  pszUnitName - unit name
@@ -174,7 +174,7 @@ inline void logger::DeregisterUnit(const char* pszUnitName)
 }
 
 //================================================================================
-//!\fn                       logger::SetLogPolicy
+//!\fn                     qx::logger::SetLogPolicy
 //
 //!\brief  Set log policy
 //!\author Khrapov
@@ -186,7 +186,7 @@ inline void logger::SetLogPolicy(policy eLogPolicy)
 }
 
 //==============================================================================
-//!\fn                       logger::GetTimeStr
+//!\fn                     qx::logger::GetTimeStr
 //
 //!\brief  Get time c string
 //!\author Khrapov
@@ -199,19 +199,19 @@ inline const char* logger::GetTimeStr(void)
     std::time_t t = time(0);
     std::tm now;
     localtime_s(&now, &t);
-    ret.format("%02d-%02d-%04d_%02d-%02d-%02d", 
-               now.tm_mday, 
-               now.tm_mon, 
+    ret.format("%02d-%02d-%04d_%02d-%02d-%02d",
+               now.tm_mday,
+               now.tm_mon,
                now.tm_year + 1900,
-               now.tm_hour, 
-               now.tm_min, 
+               now.tm_hour,
+               now.tm_min,
                now.tm_sec);
 
     return ret.data();
 }
 
 //================================================================================
-//!\fn                       logger::OutputToFile
+//!\fn                     qx::logger::OutputToFile
 //
 //!\brief  Output log string to file
 //!\param  sText     - log string text
@@ -248,15 +248,15 @@ inline void logger::OutputToFile(const qx::string& sText, const qx::string& sFil
     }
     catch (const std::system_error& e)
     {
-        std::cerr 
-            << "OutputToFile error: file " << sFileName.data() 
+        std::cerr
+            << "OutputToFile error: file " << sFileName.data()
             << ", error " << e.code().value()
             << ", msg " << e.what() << std::endl;
     }
 }
 
 //================================================================================
-//!\fn                      logger::OutputToConsole
+//!\fn                    qx::logger::OutputToConsole
 //
 //!\brief  Output log string to console
 //!\param  sText         - log string text
@@ -271,7 +271,7 @@ inline void logger::OutputToConsole(const qx::string& sText, const char* pszAnsi
 }
 
 //================================================================================
-//!\fn                         logger::OnCreate
+//!\fn                       qx::logger::OnCreate
 //
 //!\brief  On create singleton
 //!\author Khrapov
@@ -283,7 +283,7 @@ inline void logger::OnCreate(void)
 }
 
 //================================================================================
-//!\fn                        logger::OnTerminate
+//!\fn                      qx::logger::OnTerminate
 //
 //!\brief  On terminate singleton
 //!\author Khrapov

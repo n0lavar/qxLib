@@ -19,7 +19,7 @@ namespace qx
 
 //==============================================================================
 //
-//!\class                      base_ebo<COPYBLE>
+//!\class                    qx::base_ebo<COPYBLE>
 //
 //!\brief   Base EBO class. Use ebo or copyble_ebo
 //!\details ~

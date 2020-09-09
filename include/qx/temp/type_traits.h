@@ -2,7 +2,7 @@
 //
 //!\file                        type_traits.h
 //
-//!\brief       
+//!\brief       Detectors templates
 //!\details     ~
 //
 //!\author      Khrapov

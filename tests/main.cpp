@@ -2,7 +2,7 @@
 //
 //!\file                           main.cpp
 //
-//!\brief       
+//!\brief       Entry point for test
 //!\details     ~
 //
 //!\author      Khrapov
@@ -13,16 +13,8 @@
 #include <config.h>
 #include <gtest/gtest.h>
 
-#if QX_BENCH_SORT
-    #include <bench_sort.h>
-#endif
-
 int main(int argc, char** argv)
 {
-#if QX_BENCH_SORT
-    bench_sort();
-#endif
-
     testing::InitGoogleTest(&argc, argv);
     return RUN_ALL_TESTS();
 }

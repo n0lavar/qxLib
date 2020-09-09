@@ -25,7 +25,7 @@ namespace qx
 
 //==============================================================================
 //
-//!\class                          shader_base
+//!\class                        qx::shader_base
 //
 //!\brief   OpenGL base shader
 //
@@ -47,7 +47,7 @@ public:
     void    Init            (const GLchar * pszShaderCode);
     GLuint  GetID           (void)                          const;
     GLint   GetParameter    (GLenum         eParameter)     const;
-    
+
 private:
 
     GLuint m_nShader = UINT_EMPTY_VALUE;

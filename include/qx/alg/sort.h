@@ -2,7 +2,7 @@
 //
 //!\file                            sort.h
 //
-//!\brief       
+//!\brief       Sorting algorithms
 //!\details     ~
 //
 //!\author      Khrapov
@@ -23,40 +23,35 @@ namespace qx
 constexpr size_t SORT_COUNTING_MAX_BUFFER_SIZE = 100000;
 
 //==============================================================================
-//!\fn                     sort_required<RandomIt>
+//!\fn                qx::sort_required<RandomIt, Compare>
 //
 //!\brief       Check if sort really needed
 //!\property    O(1)
-//!\param       begin - begin iterator
-//!\param       end   - end iterator
-//!\retval            - false if [begin, end) already sorted
-//!\author      Khrapov
-//!\date        9.03.2020
+//!\param       begin   - begin iterator
+//!\param       end     - end iterator
+//!\param       compare - comparison function
+//!\retval              - false if [begin, end) already sorted
+//!\author Khrapov
+//!\date   9.09.2020
 //==============================================================================
 template <typename RandomIt, typename Compare = std::less<>>
 inline bool sort_required(RandomIt begin, RandomIt end, Compare compare = Compare())
 {
     if (end - begin < 2)
         return false;
-#if 1
     else
         return true;
-#else
-    // decreases performance
-    for (RandomIt prev = begin, curr = begin + 1; curr < end; prev = curr, ++curr)
-        if (compare(*curr, *prev))
-            return true;
-
-    return false;
-#endif
 }
 
 //==============================================================================
-//!\fn                     sort_insertion<RandomIt>
+//!\fn               qx::sort_insertion<RandomIt, Compare>
 //
 //!\brief       Insertion sort
 //!\details     stable
 //!\property    O(n^2)
+//!\param       begin   - begin iterator
+//!\param       end     - end iterator
+//!\param       compare - comparison function
 //!\author      Khrapov
 //!\date        1.03.2020
 //==============================================================================
@@ -77,11 +72,14 @@ inline void sort_insertion(Container& cont, Compare compare = Compare())
 }
 
 //==============================================================================
-//!\fn                     sort_selection<RandomIt>
+//!\fn               qx::sort_selection<RandomIt, Compare>
 //
 //!\brief       Selection sort
 //!\details     unstable
 //!\property    O(n^2)
+//!\param       begin   - begin iterator
+//!\param       end     - end iterator
+//!\param       compare - comparison function
 //!\author      Khrapov
 //!\date        1.03.2020
 //==============================================================================
@@ -108,11 +106,14 @@ inline void sort_selection(Container& cont, Compare compare = Compare())
 }
 
 //==============================================================================
-//!\fn                      sort_bubble<RandomIt>
+//!\fn                 qx::sort_bubble<RandomIt, Compare>
 //
 //!\brief       Bubble sort
 //!\details     stable
 //!\property    O(n^2)
+//!\param       begin   - begin iterator
+//!\param       end     - end iterator
+//!\param       compare - comparison function
 //!\author      Khrapov
 //!\date        1.03.2020
 //==============================================================================
@@ -143,13 +144,14 @@ inline void sort_bubble(Container& cont, Compare compare = Compare())
 }
 
 //==============================================================================
-//!\fn                      adjust_heap<RandomIt>
+//!\fn                 qx::adjust_heap<RandomIt, Compare>
 //
 //!\brief       Adjust heap
 //!\property    O(log(N))
-//!\param       left     - whole heap root RandomIt
+//!\param       begin    - whole heap root RandomIt
 //!\param       heapSize - whole heap size for out of range check
 //!\param       position - current root position
+//!\param       compare  - comparison function
 //!\author      Khrapov
 //!\date        2.03.2020
 //==============================================================================
@@ -174,9 +176,12 @@ inline void adjust_heap(RandomIt begin, size_t heapSize, size_t position, Compar
 }
 
 //==============================================================================
-//!\fn                       make_heap<RandomIt>
+//!\fn                  qx::make_heap<RandomIt, Compare>
 //
 //!\brief  Make heap at range
+//!\param  begin   - begin iterator
+//!\param  end     - end iterator
+//!\param  compare - comparison function
 //!\author Khrapov
 //!\date   2.03.2020
 //==============================================================================
@@ -189,11 +194,14 @@ inline void make_heap(RandomIt begin, RandomIt end, Compare compare = Compare())
 }
 
 //==============================================================================
-//!\fn                       sort_heap<RandomIt>
+//!\fn                  qx::sort_heap<RandomIt, Compare>
 //
 //!\brief       heap sort
 //!\details     unstable
 //!\property    O(nlog(N))
+//!\param       begin   - begin iterator
+//!\param       end     - end iterator
+//!\param       compare - comparison function
 //!\author      Khrapov
 //!\date        2.03.2020
 //==============================================================================
@@ -220,11 +228,14 @@ inline void sort_heap(Container& cont, Compare compare = Compare())
 }
 
 //==============================================================================
-//!\fn               sort_quick_hoare<RandomIt, Compare>
+//!\fn              qx::sort_quick_hoare<RandomIt, Compare>
 //
 //!\brief       quick sort based on Hoare partitioning
 //!\details     unstable
 //!\property    O(nlog(N))
+//!\param       begin   - begin iterator
+//!\param       end     - end iterator
+//!\param       compare - comparison function
 //!\author      Khrapov
 //!\date        4.03.2020
 //==============================================================================
@@ -264,11 +275,14 @@ inline void sort_quick_hoare(Container& cont, Compare compare = Compare())
 }
 
 //==============================================================================
-//!\fn             sort_quick_three_way<RandomIt, Compare>
+//!\fn            qx::sort_quick_three_way<RandomIt, Compare>
 //
 //!\brief       quick sort based on three-way partitioning
 //!\details     unstable
 //!\property    O(nlog(N))
+//!\param       begin   - begin iterator
+//!\param       end     - end iterator
+//!\param       compare - comparison function
 //!\author      Khrapov
 //!\date        4.03.2020
 //==============================================================================
@@ -356,11 +370,14 @@ inline void sort_quick_three_way(Container& cont, Compare compare = Compare())
 }
 
 //==============================================================================
-//!\fn             sort_quick_dual_pivot<RandomIt, Compare>
+//!\fn            qx::sort_quick_dual_pivot<RandomIt, Compare>
 //
 //!\brief       quick sort based on dual-pivot partitioning
 //!\details     unstable
 //!\property    O(nlog(N))
+//!\param       begin   - begin iterator
+//!\param       end     - end iterator
+//!\param       compare - comparison function
 //!\author      Khrapov
 //!\date        4.03.2020
 //==============================================================================
@@ -436,7 +453,7 @@ inline void sort_quick_dual_pivot(RandomIt begin, RandomIt end, Compare compare 
 
             while (compare(*(begin + less), pivot1))
                 less++;
-       
+
             i64 k = less;
             while (k <= greater)
             {
@@ -459,7 +476,7 @@ inline void sort_quick_dual_pivot(RandomIt begin, RandomIt end, Compare compare 
 
             std::iter_swap(begin + less - 1,    begin + left);
             std::iter_swap(begin + greater + 1, begin + right);
-       
+
             sort_quick_dual_pivot(begin, begin + less - 1, compare);
             sort_quick_dual_pivot(begin + greater + 2, end, compare);
         }
@@ -472,17 +489,22 @@ inline void sort_quick_dual_pivot(Container& cont, Compare compare = Compare())
 }
 
 //==============================================================================
-//!\fn                     merge<RandomIt, Compare>
+//!\fn                    qx::merge<RandomIt, Compare>
 //
 //!\brief       merge with temp vector
 //!\property    O(N), O(N) memory
+//!\author      Khrapov
+//!\param       begin               - begin iterator
+//!\param       end                 - end iterator
+//!\param       compare             - comparison function
+//!\param       preallocatedBuffer  - preallocated buffer. default value will allocate a new one
 //!\author      Khrapov
 //!\date        4.03.2020
 //==============================================================================
 template <typename RandomIt, typename Compare = std::less<>>
 inline void merge
     (RandomIt                                     begin,
-     RandomIt                                     end, 
+     RandomIt                                     end,
      Compare                                      compare             = Compare(),
      std::vector<typename RandomIt::value_type> & preallocatedBuffer  = std::vector<typename RandomIt::value_type>())
 {
@@ -524,19 +546,23 @@ inline void merge
 }
 
 //==============================================================================
-//!\fn                  sort_merge<RandomIt, Compare>
+//!\fn                 qx::sort_merge<RandomIt, Compare>
 //
 //!\brief       merge sort based on merge with temp vector
 //!\details     stable
 //!\property    O(nlog(N)), O(N) memory
+//!\param       begin               - begin iterator
+//!\param       end                 - end iterator
+//!\param       compare             - comparison function
+//!\param       preallocatedBuffer  - preallocated buffer. default value will allocate a new one
 //!\author      Khrapov
 //!\date        4.03.2020
 //==============================================================================
 template <typename RandomIt, typename Compare = std::less<>>
 inline void sort_merge
     (RandomIt                                    begin,
-     RandomIt                                    end, 
-     Compare                                     compare             = Compare(), 
+     RandomIt                                    end,
+     Compare                                     compare             = Compare(),
      std::vector<typename RandomIt::value_type>& preallocatedBuffer  = std::vector<typename RandomIt::value_type>())
 {
     if (!sort_required(begin, end, compare))
@@ -557,31 +583,34 @@ inline void sort_merge
 template <typename Container, typename Compare = std::less<>>
 inline void sort_merge
     (Container&                                      cont,
-     Compare                                         compare = Compare(), 
+     Compare                                         compare = Compare(),
      std::vector<typename Container::value_type>&    preallocatedBuffer = std::vector<typename Container::value_type>())
 {
     sort_merge(cont.begin(), cont.end(), compare, preallocatedBuffer);
 }
 
-
 //==============================================================================
-//!\fn                 sort_counting<RandomIt, Compare>
+//!\fn                qx::sort_counting<RandomIt, Compare>
 //
 //!\brief       counting sort for integral values
 //!\details     effective if M is relatively small compared to N (elements are in short range)
 //!\property    O(M + 2 * N), O(M) memory, where M = max - min + 1
+//!\param       begin           - begin iterator
+//!\param       end             - end iterator
+//!\param       compare         - comparison function
+//!\param       nMaxBufferSize  - max buffer size. if required size is bigger than this value, sorting will fail
 //!\retval      true if sorted, false if required buffer size is greather then max
 //!\author      Khrapov
 //!\date        4.03.2020
 //==============================================================================
 template <typename RandomIt, typename Compare = std::less<>>
 [[nodiscard]] inline bool sort_counting
-    (RandomIt       begin, 
-     RandomIt       end, 
-     Compare        compare         = Compare(), 
+    (RandomIt       begin,
+     RandomIt       end,
+     Compare        compare         = Compare(),
      size_t         nMaxBufferSize  = SORT_COUNTING_MAX_BUFFER_SIZE)
 {
-    static_assert(std::is_integral_v<RandomIt::value_type>, 
+    static_assert(std::is_integral_v<RandomIt::value_type>,
                   "Intergral type required for counting sort");
 
     if (end - begin < 2)
@@ -619,81 +648,20 @@ template <typename RandomIt, typename Compare = std::less<>>
 }
 template <typename Container, typename Compare = std::less<>>
 [[nodiscard]] inline bool sort_counting
-    (Container& cont, 
-     Compare    compare         = Compare(), 
+    (Container& cont,
+     Compare    compare         = Compare(),
      size_t     nMaxBufferSize  = SORT_COUNTING_MAX_BUFFER_SIZE)
 {
     return sort_counting(cont.begin(), cont.end(), compare, nMaxBufferSize);
 }
 
-#if 0
 //==============================================================================
-//!\fn                  sort_bucket<RandomIt, Compare>
-//
-//!\brief  bucket sort
-//!\author Khrapov
-//!\date   4.03.2020
-//==============================================================================
-template <typename RandomIt, typename Compare = std::less<>>
-void sort_bucket(RandomIt begin, RandomIt end, Compare compare = Compare())
-{
-    using value_type = typename RandomIt::value_type;
-    
-    static_assert(std::is_arithmetic_v<value_type>,
-                  "Intergral or floating point type required for bucket sort");
-    
-    auto minmax = std::minmax_element(begin, end);
-    value_type min   = *minmax.first;
-    value_type max   = *minmax.second;
-    value_type range = max - min;
-
-    constexpr size_t NUM_BUCKETS = 10;
-    std::array<std::vector<value_type>, NUM_BUCKETS> buckets;
-
-    for (RandomIt it = begin; it != end; ++it)
-    {
-        size_t nBucket = std::min(static_cast<size_t>((static_cast<double>(*it) - min) / range * NUM_BUCKETS), NUM_BUCKETS - 1);
-        buckets[nBucket].push_back(*it);
-    }
-
-    for (size_t i = 0, size = buckets.size(); i < size; i++)
-    {
-        size_t nElements = buckets[i].size();
-        if (nElements > 0)
-        {
-            //if (nElements < 10)
-                qx::sort(buckets[i].begin(), buckets[i].end(), compare);
-            //else
-            //    sort_bucket(buckets[i].begin(), buckets[i].end(), compare);
-        }
-
-    }
-
-    RandomIt it = begin;
-    if constexpr (compare(0, 1))
-    {
-        for (size_t i = 0; i < buckets.size(); i++)
-            for (size_t j = 0; j < buckets[i].size(); j++)
-                *it++ = buckets[i][j];
-    }
-    else
-    {
-        for (size_t i = buckets.size(); i > 0; i--)
-            for (size_t j = 0; j < buckets[i - 1].size(); j++)
-                *it++ = buckets[i - 1][j];
-    }
-}
-template <typename Container, typename Compare = std::less<>>
-void sort_bucket(Container& cont, Compare compare = Compare())
-{
-    sort_bucket(cont.begin(), cont.end(), compare);
-}
-#endif
-
-//==============================================================================
-//!\fn                     sort<RandomIt, Compare>
+//!\fn                    qx::sort<RandomIt, Compare>
 //
 //!\brief  Sort by the most suitable algorithm
+//!\param  begin   - begin iterator
+//!\param  end     - end iterator
+//!\param  compare - comparison function
 //!\author Khrapov
 //!\date   4.03.2020
 //==============================================================================

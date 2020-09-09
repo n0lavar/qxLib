@@ -22,7 +22,7 @@ namespace qx
 
 //==============================================================================
 //
-//!\class                      shader_program
+//!\class                    qx::shader_program
 //
 //!\brief   Shader programm class
 //!\details ~
@@ -42,25 +42,25 @@ public:
 
     void        Init                (void);
 
-    template <GLenum ShaderType>    
+    template <GLenum ShaderType>
     void        AttachShader        (shader_base<ShaderType>  * pShader);
     bool        Link                (void);
     void        Use                 (void);
     void        Unuse               (void);
     GLint       GetParameter        (GLenum                     eParameter) const;
 
-    template<typename T>                                      
+    template<typename T>
     void        SetUniform          (GLint                      nUniformLocation,
                                      const T                  * pValue,
                                      GLsizei                    nCount);
-    template<typename T>                                      
+    template<typename T>
     void        SetUniform          (const GLchar             * pszName,
                                      const T                  * pValue,
                                      GLsizei                    nCount);
-    template<typename T>                                      
+    template<typename T>
     void        SetUniform          (GLint                      nUniformLocation,
                                      const T                  & value);
-    template<typename T>                                      
+    template<typename T>
     void        SetUniform          (const GLchar             * pszName,
                                      const T                  & value);
 

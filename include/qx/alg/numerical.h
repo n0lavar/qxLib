@@ -2,7 +2,7 @@
 //
 //!\file                         numerical.h
 //
-//!\brief       numerical algorithms
+//!\brief       Numerical algorithms
 //!\details     ~
 //
 //!\author      Khrapov
@@ -21,10 +21,10 @@
 #include <cmath>
 
 namespace qx
-{ 
+{
 
 //==============================================================================
-//!\fn                              gcd
+//!\fn                            qx::gcd
 //
 //!\brief    Greatest common divisor
 //!\details  Euclid's algorithm
@@ -52,7 +52,7 @@ inline int gcd(int first, int second)
 }
 
 //==============================================================================
-//!\fn                              lcm
+//!\fn                            qx::lcm
 //
 //!\brief    Least common multiple
 //!\property O(log(second))
@@ -74,13 +74,13 @@ inline int lcm(int first, int second)
 }
 
 //==============================================================================
-//!\fn                            pow<T, I>
+//!\fn                             qx::pow<T>
 //
 //!\brief    Power function for integer power
 //!\details  about 2.22 times (positive powers)
 //                 1.7  times (positive and negative powers)
 //                 2.33 times (negative powers)
-//                 faster then std::pow 
+//                 faster then std::pow
 //!\property O(log(power))
 //!\param    number - integral of floating point value
 //!\param    power  - integral power
@@ -129,7 +129,7 @@ inline double pow(T number, int power)
 }
 
 //==============================================================================
-//!\fn                            maxpot<I>
+//!\fn                          qx::maxpot<I>
 //
 //!\brief  Max power of two in integer
 //!\param  number - number
@@ -154,7 +154,7 @@ inline I maxpot(I number)
 }
 
 //==============================================================================
-//!\fn                     find_prime_factors<I>
+//!\fn                   qx::find_prime_factors<I>
 //
 //!\brief    Find all prime factors
 //!\property O(sqrt(number))
@@ -203,7 +203,7 @@ inline std::vector<I> find_prime_factors(I number)
 }
 
 //==============================================================================
-//!\fn                         find_primes<I>
+//!\fn                       qx::find_primes<I>
 //
 //!\brief    Find all primes between 2 and max_number
 //!\details  Sieve of Eratosthenes
@@ -249,7 +249,7 @@ inline std::vector<I> find_primes(I max_number)
 }
 
 //==============================================================================
-//!\fn                             is_prime
+//!\fn                           qx::is_prime
 //
 //!\brief    Is number prime
 //!\details  1.0 probability, high computational complexity
@@ -265,7 +265,7 @@ inline bool is_prime(size_t number)
 }
 
 //==============================================================================
-//!\fn                             is_prime
+//!\fn                           qx::is_prime
 //
 //!\brief  Is number prime with some probability
 //!\param  number      - number
