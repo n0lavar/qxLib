@@ -16,7 +16,14 @@
 
 #include <qx/alg/sort.h>
 #include <random>
+#include <array>
+#include <limits>
 #include <gtest/gtest.h>
+
+#undef INT_MAX
+#undef INT_MIN
+constexpr int INT_MAX = std::numeric_limits<int>::max();
+constexpr int INT_MIN = std::numeric_limits<int>::min();
 
 //==============================================================================
 //
@@ -56,8 +63,8 @@ class TestQxSort : public ::testing::Test
 protected:
 
     /* init protected members here */
-    TestQxSort() 
-    { 
+    TestQxSort()
+    {
         std::default_random_engine generator(static_cast<unsigned>(time(0)));
         std::uniform_int_distribution<int64_t> fillDistribution(Traits::min_element(), Traits::max_element());
 
@@ -70,14 +77,14 @@ protected:
     }
 
     /* called before every test */
-    void SetUp() 
-    { 
+    void SetUp()
+    {
         m_SortedTest = m_Unsorted;
     }
 
     /* called after every test */
-    void TearDown() 
-    { 
+    void TearDown()
+    {
         ASSERT_EQ(m_SortedStd, m_SortedTest);
     }
 
@@ -237,95 +244,95 @@ using Implementations = ::testing::Types
 
 TYPED_TEST_SUITE(TestQxSort, Implementations);
 
-                                                                                            
+
 TYPED_TEST(TestQxSort, sort_insertion_it)
 {
-    qx::sort_insertion(m_SortedTest.begin(), m_SortedTest.end(), TypeParam::compare());
+    qx::sort_insertion(TestFixture::m_SortedTest.begin(), TestFixture::m_SortedTest.end(), TypeParam::compare());
 }
 TYPED_TEST(TestQxSort, sort_insertion)
 {
-    qx::sort_insertion(m_SortedTest, TypeParam::compare());
+    qx::sort_insertion(TestFixture::m_SortedTest, TypeParam::compare());
 }
 TYPED_TEST(TestQxSort, sort_selection_it)
 {
-    qx::sort_selection(m_SortedTest.begin(), m_SortedTest.end(), TypeParam::compare());
+    qx::sort_selection(TestFixture::m_SortedTest.begin(), TestFixture::m_SortedTest.end(), TypeParam::compare());
 }
 TYPED_TEST(TestQxSort, sort_selection)
 {
-    qx::sort_selection(m_SortedTest, TypeParam::compare());
+    qx::sort_selection(TestFixture::m_SortedTest, TypeParam::compare());
 }
 TYPED_TEST(TestQxSort, sort_bubble_it)
 {
-    qx::sort_bubble(m_SortedTest.begin(), m_SortedTest.end(), TypeParam::compare());
+    qx::sort_bubble(TestFixture::m_SortedTest.begin(), TestFixture::m_SortedTest.end(), TypeParam::compare());
 }
 TYPED_TEST(TestQxSort, sort_bubble)
 {
-    qx::sort_bubble(m_SortedTest, TypeParam::compare());
+    qx::sort_bubble(TestFixture::m_SortedTest, TypeParam::compare());
 }
 TYPED_TEST(TestQxSort, sort_heap_it)
 {
-    qx::sort_heap(m_SortedTest.begin(), m_SortedTest.end(), TypeParam::compare());
+    qx::sort_heap(TestFixture::m_SortedTest.begin(), TestFixture::m_SortedTest.end(), TypeParam::compare());
 }
 TYPED_TEST(TestQxSort, sort_heap)
 {
-    qx::sort_heap(m_SortedTest, TypeParam::compare());
+    qx::sort_heap(TestFixture::m_SortedTest, TypeParam::compare());
 }
 TYPED_TEST(TestQxSort, sort_quick_hoare_it)
 {
-    qx::sort_quick_hoare(m_SortedTest.begin(), m_SortedTest.end(), TypeParam::compare());
+    qx::sort_quick_hoare(TestFixture::m_SortedTest.begin(), TestFixture::m_SortedTest.end(), TypeParam::compare());
 }
 TYPED_TEST(TestQxSort, sort_quick_hoare)
 {
-    qx::sort_quick_hoare(m_SortedTest, TypeParam::compare());
+    qx::sort_quick_hoare(TestFixture::m_SortedTest, TypeParam::compare());
 }
 TYPED_TEST(TestQxSort, sort_quick_three_way_it)
 {
-    qx::sort_quick_three_way(m_SortedTest.begin(), m_SortedTest.end(), TypeParam::compare());
+    qx::sort_quick_three_way(TestFixture::m_SortedTest.begin(), TestFixture::m_SortedTest.end(), TypeParam::compare());
 }
 TYPED_TEST(TestQxSort, sort_quick_three_way)
 {
-    qx::sort_quick_three_way(m_SortedTest, TypeParam::compare());
+    qx::sort_quick_three_way(TestFixture::m_SortedTest, TypeParam::compare());
 }
 TYPED_TEST(TestQxSort, sort_quick_dual_pivot_it)
 {
-    qx::sort_quick_dual_pivot(m_SortedTest.begin(), m_SortedTest.end(), TypeParam::compare());
+    qx::sort_quick_dual_pivot(TestFixture::m_SortedTest.begin(), TestFixture::m_SortedTest.end(), TypeParam::compare());
 }
 TYPED_TEST(TestQxSort, sort_quick_dual_pivot)
 {
-    qx::sort_quick_dual_pivot(m_SortedTest, TypeParam::compare());
+    qx::sort_quick_dual_pivot(TestFixture::m_SortedTest, TypeParam::compare());
 }
 TYPED_TEST(TestQxSort, sort_merge_it)
 {
-    qx::sort_merge(m_SortedTest.begin(), m_SortedTest.end(), TypeParam::compare());
+    qx::sort_merge(TestFixture::m_SortedTest.begin(), TestFixture::m_SortedTest.end(), TypeParam::compare());
 }
 TYPED_TEST(TestQxSort, sort_merge)
 {
-    qx::sort_merge(m_SortedTest, TypeParam::compare());
+    qx::sort_merge(TestFixture::m_SortedTest, TypeParam::compare());
 }
 TYPED_TEST(TestQxSort, sort_counting_it)
 {
-    bool bSucc = qx::sort_counting(m_SortedTest.begin(), m_SortedTest.end(), TypeParam::compare());
+    bool bSucc = qx::sort_counting(TestFixture::m_SortedTest.begin(), TestFixture::m_SortedTest.end(), TypeParam::compare());
     if constexpr (TypeParam::max_element() - TypeParam::min_element() + 1 > qx::SORT_COUNTING_MAX_BUFFER_SIZE)
     {
         if (!bSucc)
         {
             /* too mush memory required. let test pass */
             bSucc = true;
-            m_SortedTest = m_SortedStd;
+            TestFixture::m_SortedTest = TestFixture::m_SortedStd;
         }
     }
     ASSERT_TRUE(bSucc);
 }
 TYPED_TEST(TestQxSort, sort_counting)
 {
-    bool bSucc = qx::sort_counting(m_SortedTest, TypeParam::compare());
+    bool bSucc = qx::sort_counting(TestFixture::m_SortedTest, TypeParam::compare());
     if constexpr (TypeParam::max_element() - TypeParam::min_element() + 1 > qx::SORT_COUNTING_MAX_BUFFER_SIZE)
     {
         if (!bSucc)
         {
             /* too mush memory required. let test pass */
             bSucc = true;
-            m_SortedTest = m_SortedStd;
+            TestFixture::m_SortedTest = TestFixture::m_SortedStd;
         }
     }
     ASSERT_TRUE(bSucc);

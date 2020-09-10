@@ -15,12 +15,18 @@
 #include <qx/other/typedefs.h>
 
 #include <vector>
-#include <array>
+#include <algorithm>
+#include <functional>
+#include <qx/temp/type_traits.h>
 
 namespace qx
 {
 
 constexpr size_t SORT_COUNTING_MAX_BUFFER_SIZE = 100000;
+
+// vector of iterator value
+template<class It>
+using vector_of_values = std::vector<iterator_value_t<It>>;
 
 //==============================================================================
 //!\fn                qx::sort_required<RandomIt, Compare>
@@ -503,27 +509,32 @@ inline void sort_quick_dual_pivot(Container& cont, Compare compare = Compare())
 //==============================================================================
 template <typename RandomIt, typename Compare = std::less<>>
 inline void merge
-    (RandomIt                                     begin,
-     RandomIt                                     end,
-     Compare                                      compare             = Compare(),
-     std::vector<typename RandomIt::value_type> & preallocatedBuffer  = std::vector<typename RandomIt::value_type>())
+    (RandomIt                       begin,
+     RandomIt                       end,
+     Compare                        compare             = Compare(),
+     vector_of_values<RandomIt>   * pPreallocatedBuffer = nullptr)
 {
     i64 ind1 = 0;
     i64 ind2 = 0;
     RandomIt mid = begin + (end - begin) / 2;
-    preallocatedBuffer.resize(end - begin);
+
+    bool bCreateBuffer = !pPreallocatedBuffer;
+    if (bCreateBuffer)
+        pPreallocatedBuffer = new vector_of_values<RandomIt>;
+
+    pPreallocatedBuffer->resize(end - begin);
 
     // merge
     while ((begin + ind1 < mid) && (mid + ind2 < end))
     {
         if (compare(*(begin + ind1), *(mid + ind2)))
         {
-            preallocatedBuffer[ind1 + ind2] = *(begin + ind1);
+            (*pPreallocatedBuffer)[ind1 + ind2] = *(begin + ind1);
             ind1++;
         }
         else
         {
-            preallocatedBuffer[ind1 + ind2] = *(mid + ind2);
+            (*pPreallocatedBuffer)[ind1 + ind2] = *(mid + ind2);
             ind2++;
         }
     }
@@ -531,18 +542,21 @@ inline void merge
     // append tails
     while (begin + ind1 < mid)
     {
-        preallocatedBuffer[ind1 + ind2] = *(begin + ind1);
+        (*pPreallocatedBuffer)[ind1 + ind2] = *(begin + ind1);
         ind1++;
     }
     while (mid + ind2 < end)
     {
-        preallocatedBuffer[ind1 + ind2] = *(mid + ind2);
+        (*pPreallocatedBuffer)[ind1 + ind2] = *(mid + ind2);
         ind2++;
     }
 
     // copy to source
     for (auto it = begin; it < end; ++it)
-        *it = preallocatedBuffer[it - begin];
+        *it = (*pPreallocatedBuffer)[it - begin];
+
+    if (bCreateBuffer)
+        delete pPreallocatedBuffer;
 }
 
 //==============================================================================
@@ -554,39 +568,43 @@ inline void merge
 //!\param       begin               - begin iterator
 //!\param       end                 - end iterator
 //!\param       compare             - comparison function
-//!\param       preallocatedBuffer  - preallocated buffer. default value will allocate a new one
+//!\param       pPreallocatedBuffer - preallocated buffer. default value will allocate a new one
 //!\author      Khrapov
 //!\date        4.03.2020
 //==============================================================================
 template <typename RandomIt, typename Compare = std::less<>>
 inline void sort_merge
-    (RandomIt                                    begin,
-     RandomIt                                    end,
-     Compare                                     compare             = Compare(),
-     std::vector<typename RandomIt::value_type>& preallocatedBuffer  = std::vector<typename RandomIt::value_type>())
+    (RandomIt                       begin,
+     RandomIt                       end,
+     Compare                        compare             = Compare(),
+     vector_of_values<RandomIt>   * pPreallocatedBuffer = nullptr)
 {
     if (!sort_required(begin, end, compare))
         return;
 
-    i64 len = end - begin;
-    if (len > 1)
-    {
-        // preallocate max required size and use same vector
-        // has no effect in reqursive calls
-        preallocatedBuffer.reserve(len);
+    bool bCreateBuffer = !pPreallocatedBuffer;
+    if (bCreateBuffer)
+        pPreallocatedBuffer = new vector_of_values<RandomIt>;
 
-        sort_merge(begin, begin + len / 2, compare, preallocatedBuffer);
-        sort_merge(begin + len / 2, end, compare, preallocatedBuffer);
-        merge(begin, end, compare, preallocatedBuffer);
-    }
+    // preallocate max required size and use same vector
+    // has no effect in reqursive calls
+    auto len = end - begin;
+    pPreallocatedBuffer->reserve(len);
+
+    sort_merge(begin, begin + len / 2, compare, pPreallocatedBuffer);
+    sort_merge(begin + len / 2, end, compare, pPreallocatedBuffer);
+    merge(begin, end, compare, pPreallocatedBuffer);
+
+    if (bCreateBuffer)
+        delete pPreallocatedBuffer;
 }
 template <typename Container, typename Compare = std::less<>>
 inline void sort_merge
     (Container&                                      cont,
-     Compare                                         compare = Compare(),
-     std::vector<typename Container::value_type>&    preallocatedBuffer = std::vector<typename Container::value_type>())
+     Compare                                         compare             = Compare(),
+     vector_of_values<typename Container::iterator>* pPreallocatedBuffer = nullptr)
 {
-    sort_merge(cont.begin(), cont.end(), compare, preallocatedBuffer);
+    sort_merge(cont.begin(), cont.end(), compare, pPreallocatedBuffer);
 }
 
 //==============================================================================
@@ -610,15 +628,15 @@ template <typename RandomIt, typename Compare = std::less<>>
      Compare        compare         = Compare(),
      size_t         nMaxBufferSize  = SORT_COUNTING_MAX_BUFFER_SIZE)
 {
-    static_assert(std::is_integral_v<RandomIt::value_type>,
+    static_assert(std::is_integral_v<iterator_value_t<RandomIt>>,
                   "Intergral type required for counting sort");
 
     if (end - begin < 2)
         return true;
 
     auto minmax = std::minmax_element(begin, end);
-    typename RandomIt::value_type min = *minmax.first;
-    typename RandomIt::value_type max = *minmax.second;
+    auto min = *minmax.first;
+    auto max = *minmax.second;
 
     size_t nSizeRequired = static_cast<size_t>(max) - min + 1;
     if (nSizeRequired <= nMaxBufferSize)
@@ -671,7 +689,7 @@ inline void sort(RandomIt begin, RandomIt end, Compare compare = Compare())
     bool bSorted = false;
 
     // if sort_counting is available
-    if constexpr (std::is_integral_v<RandomIt::value_type>)
+    if constexpr (std::is_integral_v<iterator_value_t<RandomIt>>)
     {
         // with small container size quick is faster
         if (end - begin > 1000)
