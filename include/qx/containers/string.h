@@ -20,7 +20,6 @@
 
 #include <qx/containers/container.h>
 #include <qx/containers/string_traits.h>
-#include <qx/other/random.h>
 #include <qx/other/type_traits.h>
 
 namespace qx
@@ -34,7 +33,6 @@ enum class ECaseType
 {
     lower,
     upper,
-    random,
 };
 
 //==============================================================================z

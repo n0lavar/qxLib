@@ -537,10 +537,6 @@ TYPED_TEST(TestQxString, apply_case)
     str1.apply_case(qx::ECaseType::upper);
     EXPECT_EQ(str1.size(), str.size());
     EXPECT_STREQ(str1.data(), STR("MANY DIFFERENT WORDS PLACED HERE. YOU CAN TEST,IT. REALLY"));
-
-    StringTypeTn str2(str);
-    str2.apply_case(qx::ECaseType::random);
-    EXPECT_EQ(str2.size(), str.size());
 }
 
 TYPED_TEST(TestQxString, to)

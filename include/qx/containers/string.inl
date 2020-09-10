@@ -649,15 +649,6 @@ inline void basic_string<Traits>::apply_case(ECaseType ct)
             ch = Traits::ttoupper(ch);
 
         break;
-
-    case ECaseType::random:
-        for (value_type& ch : *this)
-        {
-            ch = random(0, 1)
-                ? Traits::ttoupper(ch)
-                : Traits::ttolower(ch);
-        }
-        break;
     }
 }
 
