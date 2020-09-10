@@ -20,7 +20,6 @@
 
 #include <qx/containers/container.h>
 #include <qx/containers/string_traits.h>
-#include <qx/other/hashes.h>
 #include <qx/other/random.h>
 #include <qx/other/type_traits.h>
 
@@ -292,7 +291,7 @@ namespace std
     {
         u32 operator()(const qx::string& str) const
         {
-            return qx::hash::str::Murmur32(str.data(), str.size(), 342451);
+            return qx::detail::murmur_32_hash(str.data(), str.size(), 342451);
         }
     };
 
@@ -301,7 +300,7 @@ namespace std
     {
         u32 operator()(const qx::wstring& str) const
         {
-            return qx::hash::str::Murmur32(str.data(), str.size(), 62548);
+            return qx::detail::murmur_32_hash(str.data(), str.size(), 62548);
         }
     };
 
@@ -310,7 +309,7 @@ namespace std
     {
         u32 operator()(const qx::pstring& str) const
         {
-            return qx::hash::str::Murmur32(str.data(), str.size(), 78524);
+            return qx::detail::murmur_32_hash(str.data(), str.size(), 78524);
         }
     };
 
@@ -319,7 +318,7 @@ namespace std
     {
         u32 operator()(const qx::wpstring& str) const
         {
-            return qx::hash::str::Murmur32(str.data(), str.size(), 108540);
+            return qx::detail::murmur_32_hash(str.data(), str.size(), 108540);
         }
     };
 }
