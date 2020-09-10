@@ -17,7 +17,7 @@
 #include <vector>
 #include <algorithm>
 #include <functional>
-#include <qx/temp/type_traits.h>
+#include <qx/other/type_traits.h>
 
 namespace qx
 {

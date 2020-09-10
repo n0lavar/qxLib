@@ -22,7 +22,7 @@
 #include <qx/containers/string_traits.h>
 #include <qx/other/hashes.h>
 #include <qx/other/random.h>
-#include <qx/temp/type_traits.h>
+#include <qx/other/type_traits.h>
 
 namespace qx
 {
