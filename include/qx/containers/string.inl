@@ -757,75 +757,20 @@ inline void basic_string<Traits>::from(const From& data, const_pointer pszFormat
     {
         if (!pszFormat)
         {
-            if constexpr (std::is_same_v<From, char>)
+            pszFormat = GetFormatSpecifier<From>();
+
+            if (!pszFormat)
             {
-                pszFormat = STR_PREFIX(typename Traits::value_type, "%hhd");
-            }
-            else if constexpr (std::is_same_v<From, unsigned char>)
-            {
-                pszFormat = STR_PREFIX(typename Traits::value_type, "%hhu");
-            }
-            else if constexpr (std::is_same_v<From, short>)
-            {
-                pszFormat = STR_PREFIX(typename Traits::value_type, "%hd");
-            }
-            else if constexpr (std::is_same_v<From, unsigned short>)
-            {
-                pszFormat = STR_PREFIX(typename Traits::value_type, "%hu");
-            }
-            else if constexpr (std::is_same_v<From, int>)
-            {
-                pszFormat = STR_PREFIX(typename Traits::value_type, "%d");
-            }
-            else if constexpr (std::is_same_v<From, unsigned int>)
-            {
-                pszFormat = STR_PREFIX(typename Traits::value_type, "%u");
-            }
-            else if constexpr (std::is_same_v<From, long>)
-            {
-                pszFormat = STR_PREFIX(typename Traits::value_type, "%ld");
-            }
-            else if constexpr (std::is_same_v<From, unsigned long>)
-            {
-                pszFormat = STR_PREFIX(typename Traits::value_type, "%lu");
-            }
-            else if constexpr (std::is_same_v<From, long long>)
-            {
-                pszFormat = STR_PREFIX(typename Traits::value_type, "%lld");
-            }
-            else if constexpr (std::is_same_v<From, unsigned long long>)
-            {
-                pszFormat = STR_PREFIX(typename Traits::value_type, "%llu");
-            }
-            else if constexpr (std::is_same_v<From, float>)
-            {
-                pszFormat = STR_PREFIX(typename Traits::value_type, "%f");
-            }
-            else if constexpr (std::is_same_v<From, double>)
-            {
-                pszFormat = STR_PREFIX(typename Traits::value_type, "%lf");
-            }
-            else if constexpr (std::is_same_v<From, long double>)
-            {
-                pszFormat = STR_PREFIX(typename Traits::value_type, "%Lf");
-            }
-            else if constexpr (std::is_pointer_v<From>)
-            {
-#ifdef _MSC_VER
-                pszFormat = STR_PREFIX(typename Traits::value_type, "0x%p");
-#else
-                pszFormat = STR_PREFIX(typename Traits::value_type, "%p");
-#endif
-            }
-            else if constexpr (std::is_same_v <From, std::nullptr_t>)
-            {
-                pszFormat = STR_PREFIX(typename Traits::value_type, "nullptr");
-            }
-            else if constexpr (std::is_same_v<From, bool>)
-            {
-                pszFormat = data
-                    ? STR_PREFIX(typename Traits::value_type, "true")
-                    : STR_PREFIX(typename Traits::value_type, "false");
+                if constexpr (std::is_same_v <From, std::nullptr_t>)
+                {
+                    pszFormat = STR_PREFIX(typename Traits::value_type, "nullptr");
+                }
+                else if constexpr (std::is_same_v<From, bool>)
+                {
+                    pszFormat = data
+                        ? STR_PREFIX(typename Traits::value_type, "true")
+                        : STR_PREFIX(typename Traits::value_type, "false");
+                }
             }
         }
 
@@ -857,6 +802,84 @@ inline basic_string<Traits> basic_string<Traits>::sfrom(const From& data, const_
     basic_string str;
     str.from(data, pszFormat);
     return std::move(str);
+}
+
+//==============================================================================
+//!\fn          qx::basic_string<Traits>::GetFormatSpecifier<T>
+//
+//!\brief  Get format specifier for type
+//!\retval  - format specifier or nullptr if type is not supported
+//!\author Khrapov
+//!\date   11.09.2020
+//==============================================================================
+template<class Traits>
+template<typename T>
+inline constexpr typename basic_string<Traits>::const_pointer basic_string<Traits>::GetFormatSpecifier(void)
+{
+    const_pointer pszFormat = nullptr;
+
+    if constexpr (std::is_same_v<T, char>)
+    {
+        pszFormat = STR_PREFIX(typename Traits::value_type, "%hhd");
+    }
+    else if constexpr (std::is_same_v<T, unsigned char>)
+    {
+        pszFormat = STR_PREFIX(typename Traits::value_type, "%hhu");
+    }
+    else if constexpr (std::is_same_v<T, short>)
+    {
+        pszFormat = STR_PREFIX(typename Traits::value_type, "%hd");
+    }
+    else if constexpr (std::is_same_v<T, unsigned short>)
+    {
+        pszFormat = STR_PREFIX(typename Traits::value_type, "%hu");
+    }
+    else if constexpr (std::is_same_v<T, int>)
+    {
+        pszFormat = STR_PREFIX(typename Traits::value_type, "%d");
+    }
+    else if constexpr (std::is_same_v<T, unsigned int>)
+    {
+        pszFormat = STR_PREFIX(typename Traits::value_type, "%u");
+    }
+    else if constexpr (std::is_same_v<T, long>)
+    {
+        pszFormat = STR_PREFIX(typename Traits::value_type, "%ld");
+    }
+    else if constexpr (std::is_same_v<T, unsigned long>)
+    {
+        pszFormat = STR_PREFIX(typename Traits::value_type, "%lu");
+    }
+    else if constexpr (std::is_same_v<T, long long>)
+    {
+        pszFormat = STR_PREFIX(typename Traits::value_type, "%lld");
+    }
+    else if constexpr (std::is_same_v<T, unsigned long long>)
+    {
+        pszFormat = STR_PREFIX(typename Traits::value_type, "%llu");
+    }
+    else if constexpr (std::is_same_v<T, float>)
+    {
+        pszFormat = STR_PREFIX(typename Traits::value_type, "%f");
+    }
+    else if constexpr (std::is_same_v<T, double>)
+    {
+        pszFormat = STR_PREFIX(typename Traits::value_type, "%lf");
+    }
+    else if constexpr (std::is_same_v<T, long double>)
+    {
+        pszFormat = STR_PREFIX(typename Traits::value_type, "%Lf");
+    }
+    else if constexpr (std::is_pointer_v<T>)
+    {
+#ifdef _MSC_VER
+        pszFormat = STR_PREFIX(typename Traits::value_type, "0x%p");
+#else
+        pszFormat = STR_PREFIX(typename Traits::value_type, "%p");
+#endif
+    }
+
+    return pszFormat;
 }
 
 //==============================================================================

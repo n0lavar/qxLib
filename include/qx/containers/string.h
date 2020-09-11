@@ -231,6 +231,10 @@ private:
                                           size_type              nSymbols);
     int                     Compare      (const_pointer          pStr,
                                           size_type              nSymbols   = 0)                    const;
+
+    template<typename T>
+    static constexpr const_pointer GetFormatSpecifier(void);
+
 private:
 
     pointer m_pData = nullptr;
