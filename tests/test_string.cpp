@@ -539,6 +539,21 @@ TYPED_TEST(TestQxString, apply_case)
     EXPECT_STREQ(str1.data(), STR("MANY DIFFERENT WORDS PLACED HERE. YOU CAN TEST,IT. REALLY"));
 }
 
+// type and operator>> overloading for basic_string::to
+struct SNotPod
+{
+    SNotPod() = default;
+    SNotPod(int n) : nData(n) { }
+    int nData = 42;
+};
+
+template<typename TChar>
+std::basic_istream<TChar, std::char_traits<TChar>>& operator>> (std::basic_istream<TChar, std::char_traits<TChar>>& is, SNotPod& obj)
+{
+    obj = SNotPod(128);
+    return is;
+}
+
 TYPED_TEST(TestQxString, to)
 {
     // clang requires to use 'template' keyword to treat 'to' as a dependent template name
@@ -587,6 +602,49 @@ TYPED_TEST(TestQxString, to)
         EXPECT_FLOAT_EQ(n1.value(), -50.f);
 
         auto n2 = str.template to<unsigned>();
+        EXPECT_TRUE(n2.has_value());
+        EXPECT_EQ(n2.value(), 4294967246);
+    }
+
+    {
+        StringTypeTn str(STR("nullptr"));
+
+        auto n0 = str.template to<std::nullptr_t>();
+        EXPECT_TRUE(n0.has_value());
+        EXPECT_EQ(n0.value(), nullptr);
+
+        auto n1 = str.template to<float>();
+        EXPECT_FALSE(n1.has_value());
+
+        auto n2 = str.template to<unsigned>();
+        EXPECT_FALSE(n2.has_value());
+    }
+
+    {
+        StringTypeTn str(STR("true"));
+
+        auto n0 = str.template to<bool>();
+        EXPECT_TRUE(n0.has_value());
+        EXPECT_EQ(n0.value(), true);
+
+        auto n1 = str.template to<float>();
+        EXPECT_FALSE(n1.has_value());
+
+        auto n2 = str.template to<unsigned>();
+        EXPECT_FALSE(n2.has_value());
+    }
+
+    {
+        StringTypeTn str(STR("false"));
+
+        auto n0 = str.template to<bool>();
+        EXPECT_TRUE(n0.has_value());
+        EXPECT_EQ(n0.value(), false);
+
+        auto n1 = str.template to<float>();
+        EXPECT_FALSE(n1.has_value());
+
+        auto n2 = str.template to<unsigned>();
         EXPECT_FALSE(n2.has_value());
     }
 
@@ -602,6 +660,21 @@ TYPED_TEST(TestQxString, to)
         auto n2 = str.template to<unsigned>();
         EXPECT_FALSE(n2.has_value());
     }
+
+    {
+        StringTypeTn str(STR("nomatterwhat"));
+
+        auto n0 = str.template to<SNotPod>();
+        EXPECT_TRUE(n0.has_value());
+        EXPECT_EQ(n0.value().nData, 128);
+
+        auto n1 = str.template to<float>();
+        EXPECT_FALSE(n1.has_value());
+
+        auto n2 = str.template to<unsigned>();
+        EXPECT_FALSE(n2.has_value());
+    }
+
 }
 
 TYPED_TEST(TestQxString, operator_plus_equal)

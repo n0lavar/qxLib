@@ -1,3 +1,4 @@
+#include "string.h"
 //==============================================================================
 //
 //!\file                         string.inl
@@ -41,7 +42,7 @@ inline void basic_string<Traits>::assign(const_pointer pSource, size_type nSymbo
 template<class Traits>
 inline void basic_string<Traits>::assign(const basic_string& str)
 {
-    if (str.data() != data())
+    if (str.m_pData != m_pData)
         assign(str.m_pData);
 }
 
@@ -56,7 +57,7 @@ inline void basic_string<Traits>::assign(const basic_string& str)
 template<class Traits>
 inline void basic_string<Traits>::assign(const_pointer pSource)
 {
-    if (pSource != data())
+    if (pSource != m_pData)
         assign(pSource, Traits::tstrlen(pSource));
 }
 
@@ -509,7 +510,7 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::find(const
                                                                            size_type           indBegin,
                                                                            size_type           indEnd) const
 {
-    return find(str.data(), indBegin, indEnd);
+    return find(str.m_pData, indBegin, indEnd);
 }
 
 //==============================================================================
@@ -622,7 +623,7 @@ inline typename basic_string<Traits>::vector basic_string<Traits>::split(const v
 template<class Traits>
 inline typename basic_string<Traits>::vector basic_string<Traits>::split(const basic_string & sep) const
 {
-    return std::move(split(sep.data(), sep.size()));
+    return std::move(split(sep.m_pData, sep.size()));
 }
 
 //==============================================================================
@@ -653,89 +654,52 @@ inline void basic_string<Traits>::apply_case(ECaseType ct)
 }
 
 //==============================================================================
-//!\fn                 qx::basic_string<Traits>::to<To>
+//!\fn                  qx::basic_string<Traits>::to<To>
 //
-//!\brief  Convert to integral signed type
-//!\param  base - base of the interpreted integer value (0, 2-36)
-//!\retval      - value or nullopt
+//!\brief  Convert string to specified type
+//!\retval  - value if succeeded or nullopt
 //!\author Khrapov
-//!\date   22.03.2020
+//!\date   11.09.2020
 //==============================================================================
-template<typename Traits>
+template<class Traits>
 template<typename To>
-inline typename std::enable_if<std::is_signed_v<To> && !std::is_unsigned_v<To> && !std::is_floating_point_v<To>,
-    std::optional<To>>::type basic_string<Traits>::to(int base)
+inline std::optional<To> basic_string<Traits>::to(void) const
 {
-    errno = 0;
-    pointer pEnd = nullptr;
-    i64 nRet = Traits::ttolli(m_pData, &pEnd, base);
+    std::optional<To> optResult = std::nullopt;
 
-    if (errno != 0
-        || pEnd == m_pData
-        || nRet < std::numeric_limits<To>::min()
-        || nRet > std::numeric_limits<To>::max())
+    if constexpr (std::is_pod_v<To>
+               || std::is_pointer_v<To>
+               || std::is_same_v<To, std::nullptr_t>)
     {
-        return std::nullopt;
+        if constexpr (std::is_same_v<To, std::nullptr_t>)
+        {
+            if (Compare(STR_PREFIX(typename Traits::value_type, "nullptr")) == 0)
+                optResult = nullptr;
+        }
+        else if constexpr (std::is_same_v<To, bool>)
+        {
+            if (Compare(STR_PREFIX(typename Traits::value_type, "true")) == 0)
+                optResult = true;
+            else if (Compare(STR_PREFIX(typename Traits::value_type, "false")) == 0)
+                optResult = false;
+        }
+        else if (auto pszFormat = GetFormatSpecifier<To>())
+        {
+            To result;
+            int nConvertedArgs = Traits::tssscanf(m_pData, pszFormat, &result);
+            if (nConvertedArgs == 1)
+                optResult = result;
+        }
+    }
+    else
+    {
+        To result;
+        sstream_type ss(m_pData);
+        ss >> result;
+        optResult = result;
     }
 
-    return static_cast<To>(nRet);
-}
-
-//==============================================================================
-//!\fn                 qx::basic_string<Traits>::to<To>
-//
-//!\brief  Convert to integral unsigned type
-//!\param  base - base of the interpreted integer value (0, 2-36)
-//!\retval      - value or nullopt
-//!\author Khrapov
-//!\date   22.03.2020
-//==============================================================================
-template<typename Traits>
-template<typename To>
-inline typename std::enable_if<!std::is_signed_v<To> && std::is_unsigned_v<To> && !std::is_floating_point_v<To>,
-    std::optional<To>>::type basic_string<Traits>::to(int base)
-{
-    errno = 0;
-    pointer pEnd = nullptr;
-    u64 nRet = Traits::ttoull(m_pData, &pEnd, base);
-
-    if (errno != 0
-        || pEnd == m_pData
-        || nRet < std::numeric_limits<To>::min()
-        || nRet > std::numeric_limits<To>::max())
-    {
-        return std::nullopt;
-    }
-
-    return static_cast<To>(nRet);
-}
-
-//==============================================================================
-//!\fn                 qx::basic_string<Traits>::to<To>
-//
-//!\brief  Convert to floating point type
-//!\retval  - value or nullopt
-//!\author Khrapov
-//!\date   22.03.2020
-//==============================================================================
-template<typename Traits>
-template<typename To>
-inline typename std::enable_if<std::is_floating_point_v<To>,
-    std::optional<To>>::type basic_string<Traits>::to()
-{
-    errno = 0;
-    pointer pEnd = nullptr;
-    long double nRet = Traits::ttold(m_pData, &pEnd);
-
-    if (errno != 0
-        || pEnd == m_pData
-        || nRet < -std::numeric_limits<To>::max()
-        || nRet >  std::numeric_limits<To>::max())
-    {
-        return std::nullopt;
-    }
-
-    return static_cast<To>(nRet);
+    return optResult;
 }
 
 //==============================================================================
@@ -752,26 +716,23 @@ template<typename From>
 inline void basic_string<Traits>::from(const From& data, const_pointer pszFormat)
 {
     if constexpr (std::is_pod_v<From>
-                  || std::is_pointer_v<From>
-                  || std::is_same_v<From, std::nullptr_t>)
+               || std::is_pointer_v<From>
+               || std::is_same_v<From, std::nullptr_t>)
     {
         if (!pszFormat)
         {
-            pszFormat = GetFormatSpecifier<From>();
-
-            if (!pszFormat)
+            if constexpr (std::is_same_v <From, std::nullptr_t>)
             {
-                if constexpr (std::is_same_v <From, std::nullptr_t>)
-                {
-                    pszFormat = STR_PREFIX(typename Traits::value_type, "nullptr");
-                }
-                else if constexpr (std::is_same_v<From, bool>)
-                {
-                    pszFormat = data
-                        ? STR_PREFIX(typename Traits::value_type, "true")
-                        : STR_PREFIX(typename Traits::value_type, "false");
-                }
+                pszFormat = STR_PREFIX(typename Traits::value_type, "nullptr");
             }
+            else if constexpr (std::is_same_v<From, bool>)
+            {
+                pszFormat = data
+                    ? STR_PREFIX(typename Traits::value_type, "true")
+                    : STR_PREFIX(typename Traits::value_type, "false");
+            }
+            else
+                pszFormat = GetFormatSpecifier<From>();
         }
 
         if (pszFormat)

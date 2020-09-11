@@ -50,9 +50,9 @@ struct char_traits
     {
         return static_cast<size_type>(Align);
     }
-    static size_type tstrlen(const_pointer pStr)
+    static size_type tstrlen(const_pointer pszStr)
     {
-        return static_cast<size_type>(std::strlen(pStr));
+        return static_cast<size_type>(std::strlen(pszStr));
     }
     static value_type ttolower(value_type ch)
     {
@@ -62,30 +62,23 @@ struct char_traits
     {
         return std::toupper(ch);
     }
-    static i64 ttolli(const_pointer pStr, pointer* pEnd, int base)
+    static int tstrcmp(const_pointer pszFirst, const_pointer pszSecond)
     {
-        return std::strtoll(pStr, pEnd, base);
+        return std::strcmp(pszFirst, pszSecond);
     }
-    static u64 ttoull(const_pointer pStr, pointer* pEnd, int base)
+    static int tstrncmp(const_pointer pszFirst, const_pointer pszSecond, size_type nCount)
     {
-        return std::strtoull(pStr, pEnd, base);
-    }
-    static long double ttold(const_pointer pStr, pointer* pEnd)
-    {
-        return std::strtold (pStr, pEnd);
-    }
-    static int tstrcmp(const_pointer pFirst, const_pointer pSecond)
-    {
-        return std::strcmp(pFirst, pSecond);
-    }
-    static int tstrncmp(const_pointer  pFirst, const_pointer  pSecond, size_type nCount)
-    {
-        return std::strncmp(pFirst, pSecond, nCount);
+        return std::strncmp(pszFirst, pszSecond, nCount);
     }
     template<class ... Args>
-    static int tsnprintf(pointer pDest, size_type nBuffer, const_pointer pFormat, Args ... args)
+    static int tsnprintf(pointer pszDest, size_type nBuffer, const_pointer pszFormat, Args ... args)
     {
-        return std::snprintf(pDest, nBuffer, pFormat, args...);
+        return std::snprintf(pszDest, nBuffer, pszFormat, args...);
+    }
+    template<class ... Args>
+    static int tssscanf(const_pointer pszString, const_pointer pszFormat, Args ... args)
+    {
+        return std::sscanf(pszString, pszFormat, args...);
     }
 };
 
@@ -116,11 +109,11 @@ struct wchar_traits
     {
         return static_cast<size_type>(Align);
     }
-    static size_type tstrlen (const_pointer pStr)
+    static size_type tstrlen(const_pointer pszStr)
     {
-        return static_cast<size_type>(std::wcslen(pStr));
+        return static_cast<size_type>(std::wcslen(pszStr));
     }
-    static value_type ttolower (value_type ch)
+    static value_type ttolower(value_type ch)
     {
         return std::towlower(ch);
     }
@@ -128,61 +121,53 @@ struct wchar_traits
     {
         return std::towupper(ch);
     }
-    static i64 ttolli(const_pointer pStr, pointer* pEnd, int base)
+    static int tstrcmp(const_pointer pszFirst, const_pointer pszSecond)
     {
-        return std::wcstoll(pStr, pEnd, base);
+        return std::wcscmp(pszFirst, pszSecond);
     }
-    static u64 ttoull(const_pointer pStr, pointer* pEnd, int base)
+    static int tstrncmp(const_pointer pszFirst, const_pointer pszSecond, size_type nCount)
     {
-        return std::wcstoull(pStr, pEnd, base);
+        return std::wcsncmp(pszFirst, pszSecond, nCount);
     }
-    static long double ttold(const_pointer pStr, pointer* pEnd)
-    {
-        return std::wcstod(pStr, pEnd);
-    }
-    static int tstrcmp(const_pointer pFirst, const_pointer pSecond)
-    {
-        return std::wcscmp(pFirst, pSecond);
-    }
-    static int tstrncmp(const_pointer  pFirst, const_pointer  pSecond, size_type nCount)
-    {
-        return std::wcsncmp(pFirst, pSecond, nCount);
-    }
-
     // MVSC's std::swprintf returns required size if nullptr and 0 passed as pDest and nBuffer,
     // while other compilers returns -1
 #ifdef _MSC_VER
     template<class ... Args>
-    static int tsnprintf(pointer pDest, size_type nBuffer, const_pointer pFormat, Args ... args)
+    static int tsnprintf(pointer pszDest, size_type nBuffer, const_pointer pszFormat, Args ... args)
     {
-        return std::swprintf(pDest, nBuffer, pFormat, args...);
+        return std::swprintf(pszDest, nBuffer, pszFormat, args...);
     }
 #else
-    static int tsnprintf(pointer pDest, size_type nBuffer, const_pointer pFormat, ...)
+    static int tsnprintf(pointer pszDest, size_type nBuffer, const_pointer pszFormat, ...)
     {
         int size = -1;
 
         va_list va;
-        va_start(va, pFormat);
+        va_start(va, pszFormat);
         if (nBuffer <= 0)
         {
             // opening a dummy file to /dev/null and printing to that file to retrieve the required size
             FILE* pDummyFile = std::fopen("/dev/null", "w");
             if (pDummyFile)
             {
-                size = std::vfwprintf(pDummyFile, pFormat, va);
+                size = std::vfwprintf(pDummyFile, pszFormat, va);
                 std::fclose(pDummyFile);
             }
         }
         else
         {
-            size = std::vswprintf(pDest, nBuffer, pFormat, va);
+            size = std::vswprintf(pszDest, nBuffer, pszFormat, va);
         }
         va_end(va);
 
         return size;
     }
 #endif
+    template<class ... Args>
+    static int tssscanf(const_pointer pszString, const_pointer pszFormat, Args ... args)
+    {
+        return std::swscanf(pszString, pszFormat, args...);
+    }
 };
 
 }

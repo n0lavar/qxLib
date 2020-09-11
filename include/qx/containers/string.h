@@ -184,16 +184,7 @@ public:
     const_pointer           c_str        (void)                                         const { return data();          }
 
     template<typename To>
-    typename std::enable_if<std::is_signed_v<To> && !std::is_unsigned_v<To> && !std::is_floating_point_v<To>,
-        std::optional<To>>::type to(int base = 0);
-
-    template<typename To>
-    typename std::enable_if<!std::is_signed_v<To> && std::is_unsigned_v<To> && !std::is_floating_point_v<To>,
-        std::optional<To>>::type to(int base = 0);
-
-    template<typename To>
-    typename std::enable_if<std::is_floating_point_v<To>,
-        std::optional<To>>::type to();
+    std::optional<To>       to           (void)                                         const;
 
     template<typename From>
     void                    from         (const From&            data,
