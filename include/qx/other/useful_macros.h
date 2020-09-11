@@ -117,20 +117,6 @@ namespace qx::detail
 //==============================================================================
 
 /*
-    C-style array size
-*/
-#define ARRAY_SIZE(arr) (sizeof(arr) / sizeof(arr[0]))
-
-//==============================================================================
-
-/*
-    C-style array bounds check
-*/
-#define IN_BOUNDS_ARR(arr, ind) (((ind) >= 0) && ((ind) < ARRAY_SIZE(arr)))
-
-//==============================================================================
-
-/*
     Let macro param containing commas work fine
 
     ex: #define FOO(type, name) type name
@@ -214,6 +200,10 @@ namespace qx::detail
     CHECK  is checking always and can be used with else
     DCHECK is primary for debug and checks that has to be disabled in release
 */
+
+#ifndef ENABLE_DCHECK
+    #define ENABLE_DCHECK _DEBUG
+#endif
 
 #define CHECK(condition)                                    \
 ASSERT(condition);                                          \

@@ -88,7 +88,7 @@ inline constexpr T pi()
 //!\date   10.03.2020
 //==============================================================================
 template<class T, typename size_type>
-inline size_type align_size(size_type nSize, size_type nAlign)
+inline constexpr size_type align_size(size_type nSize, size_type nAlign)
 {
     return ((nSize + nAlign) - (nSize + nAlign) % nAlign) * sizeof(T);
 }
