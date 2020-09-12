@@ -36,7 +36,7 @@ struct is_derived
     }
 };
 
-using class_counter = constexpr_counter<struct class_counter_tag, -1, 1>;
+using class_counter = constexpr_counter<struct class_counter_tag, -1>;
 
 }
 
