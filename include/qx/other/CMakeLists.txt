@@ -8,10 +8,13 @@ set(FOLDER_FILES
     ${CMAKE_CURRENT_SOURCE_DIR}/smart_enum.h
     ${CMAKE_CURRENT_SOURCE_DIR}/benchmark.h
     ${CMAKE_CURRENT_SOURCE_DIR}/random.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/constexpr_conter.h
     ${CMAKE_CURRENT_SOURCE_DIR}/rtti.h
     ${CMAKE_CURRENT_SOURCE_DIR}/type_traits.h
-
+    ${CMAKE_CURRENT_SOURCE_DIR}/constexpr_flag.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/constexpr_sequence.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/constexpr_random.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/constexpr_funcs.h
+ 
     ${CMAKE_CURRENT_SOURCE_DIR}/logger.inl
 )
 

@@ -31,7 +31,7 @@ using vector_of_values = std::vector<iterator_value_t<It>>;
 //==============================================================================
 //!\fn                qx::sort_required<RandomIt, Compare>
 //
-//!\brief       Check if sort really needed
+//!\brief       check if sort really needed
 //!\property    O(1)
 //!\param       begin   - begin iterator
 //!\param       end     - end iterator

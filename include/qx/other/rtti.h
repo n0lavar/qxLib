@@ -14,7 +14,7 @@
 //==============================================================================
 #pragma once
 
-#include <qx/other/constexpr_conter.h>
+#include <qx/other/constexpr_sequence.h>
 
 namespace qx
 {
@@ -36,7 +36,7 @@ struct is_derived
     }
 };
 
-using class_counter = constexpr_counter<struct class_counter_tag, -1>;
+using class_counter = constexpr_counter<struct class_counter_tag, int, -1>;
 
 }
 

@@ -182,7 +182,7 @@ namespace qx::detail
 //!\details https://en.wikipedia.org/wiki/MurmurHash
 //          https://softwareengineering.stackexchange.com/questions/49550/which-hashing-algorithm-is-best-for-uniqueness-and-speed
 //
-//!\param   key  - key value, string for hashing
+//!\param   key  - key value, string for hashing (char must be 1, 2 or 4 bytes long)
 //!\param   len  - string length
 //!\param   seed - seed for hashing
 //!\retval       - 32bit unsigned value
@@ -190,7 +190,7 @@ namespace qx::detail
 //!\date    10.09.2020
 //==============================================================================
 template<typename Char>
-inline u32 murmur_32_hash(const Char* key, size_t len, u32 seed)
+inline constexpr u32 murmur_32_hash(const Char* key, size_t len, u32 seed)
 {
     u32 h = seed;
     if (len > 3)
@@ -198,8 +198,30 @@ inline u32 murmur_32_hash(const Char* key, size_t len, u32 seed)
         size_t i = len >> 2;
         do
         {
-            u32 k;
-            memcpy(&k, key, sizeof(u32));
+            u32 k = 0;
+
+            // constexpr version of std::memcpy(&k, key, sizeof(u32));
+            if constexpr (sizeof(Char) == sizeof(u32))
+            {
+                k += *(key + 0);
+            }
+            else if constexpr (sizeof(Char) == sizeof(u16))
+            {
+                k += *(key + 0);
+                k <<= sizeof(u16);
+                k += *(key + 1);
+            }
+            else
+            {
+                k += *(key + 0);
+                k <<= sizeof(u8);
+                k += *(key + 1);
+                k <<= sizeof(u8);
+                k += *(key + 2);
+                k <<= sizeof(u8);
+                k += *(key + 3);
+            }
+
             key += sizeof(u32);
             k *= 0xcc9e2d51;
             k = (k << 15) | (k >> 17);

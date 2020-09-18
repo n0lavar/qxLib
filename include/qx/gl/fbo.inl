@@ -167,7 +167,7 @@ inline void base_fbo<COPYBLE>::AttachTexture(
 //==============================================================================
 //!\fn                 qx::base_fbo<COPYBLE>::CheckStatus
 //
-//!\brief  Check framebuffer status
+//!\brief  check framebuffer status
 //!\author Khrapov
 //!\date   26.06.2020
 //==============================================================================
