@@ -2,7 +2,7 @@
 //
 //!\file                       constexpr_random.h
 //
-//!\brief
+//!\brief       contains constexpr_random and the corresponding functions
 //!\details     ~
 //
 //!\author      Khrapov
@@ -13,24 +13,43 @@
 #pragma once
 
 #include <qx/other/typedefs.h>
-#include <qx/containers/string_traits.h>
 #include <qx/other/constexpr_sequence.h>
 
 namespace qx
 {
 
+//==============================================================================
+//!\fn         qx::linear_congruential_generator<MOD, MULT, INC>
+//
+//!\brief  an algorithm that yields a sequence of pseudo-randomized numbers
+//         calculated with a discontinuous piecewise linear equation
+//!\param  nPrev - prev value of secuence
+//!\retval       - next value of secuence
+//!\author Khrapov
+//!\date   21.09.2020
+//==============================================================================
 template<u32 MOD, u32 MULT, u32 INC>
 constexpr u32 linear_congruential_generator(u32 nPrev)
 {
     return (MULT * nPrev + INC) % MOD;
 }
 
+//==============================================================================
+//!\fn         qx::uniform_distribution<MIN, MAX, MOD, MULT, INC>
+//
+//!\brief  linear_congruential_generator limited to MIN and MAX
+//!\param  nPrev - prev value of secuence
+//!\retval       - next value of secuence
+//!\author Khrapov
+//!\date   21.09.2020
+//==============================================================================
 template<u32 MIN, u32 MAX, u32 MOD, u32 MULT, u32 INC>
 constexpr u32 uniform_distribution(u32 nPrev)
 {
     return MIN + linear_congruential_generator<MOD, MULT, INC>(nPrev) % MAX;
 }
 
+// returns preudo random number of uniform distrubution with each next() call
 template<typename Tag, u32 SEED, u32 MIN, u32 MAX, u32 MOD = 2147483648, u32 MULT = 1103515245, u32 INC = 12345>
 using constexpr_random = constexpr_sequence<
     Tag,

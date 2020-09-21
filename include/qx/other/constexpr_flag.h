@@ -29,6 +29,8 @@ namespace qx
 template <typename Tag, typename T = bool, T Start = false, T End = true>
 class constexpr_flag
 {
+private:
+
     struct Dummy
     {
         friend constexpr void adl_flag(Dummy) noexcept;

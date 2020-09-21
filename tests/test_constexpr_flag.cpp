@@ -12,6 +12,8 @@
 //==============================================================================
 #include <qx/other/constexpr_flag.h>
 
+ //V_EXCLUDE_PATH *test_constexpr_flag.cpp
+
 using Flag1 = qx::constexpr_flag<class FtagTag1>;
 static_assert(Flag1::test()         == false);
 static_assert(Flag1::test_and_set() == false);

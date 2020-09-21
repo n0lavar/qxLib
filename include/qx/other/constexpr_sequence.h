@@ -38,64 +38,56 @@ namespace qx
 template <class Tag, typename T, T Start, T Func(T)>
 class constexpr_sequence
 {
+private:
 
-template <T N>
-struct StepTag;
-
-template<T NextValue, bool Equal /* = false */>
-struct CheckerEqual
-{
-    template<T SequenceVal = CheckerWrapper<NextValue>{}.value()>
-    static constexpr T value(void) noexcept
-    {
-        return SequenceVal;
-    }
-};
-
-template<T NextValue>
-struct CheckerEqual<NextValue, /* bool Equal = */ true>
+template <T nIndex>
+struct Element
 {
     static constexpr T value(void) noexcept
     {
-        return NextValue;
+        T _value = Start;
+
+        for (std::size_t i = 0; i < nIndex; i++)
+            _value = Func(_value);
+
+        return _value;
     }
 };
 
-template<T CurrentValue, bool WasSetted /* = false */>
+template<std::size_t nCurrent, bool bWasSetted /* = false */>
 struct CheckerSetter
 {
-    static constexpr T value(void) noexcept
+    static constexpr std::size_t index(void) noexcept
     {
-        return CurrentValue;
+        return nCurrent;
     }
 };
 
-template<T CurrentValue>
-struct CheckerSetter<CurrentValue, /* bool WasSetted = */ true>
-{
-    template<T NextValue   = Func(CurrentValue),
-             T SequenceVal = CheckerEqual<NextValue, CurrentValue == NextValue>{}.value()>
-    static constexpr T value(void) noexcept
-    {
-        return SequenceVal;
-    }
-};
-
-template<T N>
+template<T nCurrent>
 struct CheckerWrapper
 {
-    template<bool WasSetted     = constexpr_flag<StepTag<N>>{}.test(),
-             T    SequenceVal   = CheckerSetter<N, WasSetted>{}.value()>
-    static constexpr T value(void) noexcept
+    template<bool        bWasSetted = constexpr_flag<Element<nCurrent>>{}.test(),
+             std::size_t nNext      = CheckerSetter<nCurrent, bWasSetted>{}.index()>
+    static constexpr std::size_t index(void) noexcept
     {
-        return SequenceVal;
+        return nNext;
+    }
+};
+
+template<std::size_t nCurrent>
+struct CheckerSetter<nCurrent, /* bool bWasSetted = */ true>
+{
+    template<std::size_t nNext = CheckerWrapper<nCurrent + 1>{}.index()>
+    static constexpr std::size_t index(void) noexcept
+    {
+        return nNext;
     }
 };
 
 public:
 
 //==============================================================================
-//!\fn       qx::constexpr_sequence<Tag, T, Start, Func>::value<N>
+//!\fn   qx::constexpr_sequence<Tag, T, Start, Func>::value<nIndex, value>
 //
 //!\brief   Get current sequence value
 //!\details As function works through generating new template instance each time,
@@ -106,14 +98,15 @@ public:
 //!\author  Khrapov
 //!\date   12.09.2020
 //==============================================================================
-template <T N = CheckerWrapper<Start>{}.value()>
+template <std::size_t nIndex = CheckerWrapper<0>{}.index(),
+          T           _value = Element<nIndex>{}.value()>
 static constexpr T value(void) noexcept
 {
-    return N;
+    return _value;
 }
 
 //==============================================================================
-//!\fn      qx::constexpr_sequence<Tag, T, Start, Func>::next<N, B>
+//!\fn qx::constexpr_sequence<Tag, T, Start, Func>::next<nIndex, value, bStub>
 //
 //!\brief   Change value by Func and return new value
 //!\details As function works through generating new template instance each time,
@@ -124,11 +117,12 @@ static constexpr T value(void) noexcept
 //!\author  Khrapov
 //!\date    12.09.2020
 //==============================================================================
-template <T    N    = CheckerWrapper<Start>{}.value(),
-          bool Stub = constexpr_flag<StepTag<N>>{}.test_and_set()>
+template <std::size_t nIndex = CheckerWrapper<0>{}.index(),
+          T           _value = Element<nIndex>{}.value(),
+          bool        bStub  = constexpr_flag<Element<nIndex>>{}.test_and_set()>
 static constexpr T next(void) noexcept
 {
-    return Func(N);
+    return Func(_value);
 }
 
 };

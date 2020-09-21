@@ -2,7 +2,7 @@
 //
 //!\file                       constexpr_funcs.h
 //
-//!\brief
+//!\brief       Constexpr functions implementations
 //!\details     ~
 //
 //!\author      Khrapov
@@ -11,6 +11,8 @@
 //
 //==============================================================================
 #pragma once
+
+#include <qx/containers/string_traits.h>
 
 namespace qx
 {
@@ -28,9 +30,9 @@ constexpr T multiply(T val)
 }
 
 template<typename TChar>
-constexpr size_t strlen(const TChar* psz)
+constexpr std::size_t strlen(const TChar* psz)
 {
-    size_t nLen = 0;
+    std::size_t nLen = 0;
     while (psz && *psz != CHAR_PREFIX(TChar, '\0'))
     {
         psz++;
