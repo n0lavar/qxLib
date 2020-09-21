@@ -19,7 +19,7 @@
 #include <optional>
 
 #include <qx/containers/container.h>
-#include <qx/containers/string_traits.h>
+#include <qx/other/constexpr_random.h>
 #include <qx/other/type_traits.h>
 
 namespace qx
@@ -275,6 +275,11 @@ using wstring   = basic_string<qx::wchar_traits<16>>;   // wchar_t sequence with
 using pstring   = basic_string<qx::char_traits<1>>;     // char sequence without alignment (precise)
 using wpstring  = basic_string<qx::wchar_traits<1>>;    // wchar_t sequence without alignment (precise)
 
+namespace detail
+{
+    using random_string_hash = constexpr_random<class random_string_hash_tag, QX_UNIQUE_SEED>;
+}
+
 }
 
 namespace std
@@ -284,7 +289,9 @@ namespace std
     {
         u32 operator()(const qx::string& str) const
         {
-            return qx::detail::murmur_32_hash(str.data(), str.size(), 342451);
+            return qx::detail::murmur_32_hash(str.data(),
+                                              str.size(),
+                                              qx::detail::random_string_hash::next());
         }
     };
 
@@ -293,7 +300,9 @@ namespace std
     {
         u32 operator()(const qx::wstring& str) const
         {
-            return qx::detail::murmur_32_hash(str.data(), str.size(), 62548);
+            return qx::detail::murmur_32_hash(str.data(),
+                                              str.size(),
+                                              qx::detail::random_string_hash::next());
         }
     };
 
@@ -302,7 +311,9 @@ namespace std
     {
         u32 operator()(const qx::pstring& str) const
         {
-            return qx::detail::murmur_32_hash(str.data(), str.size(), 78524);
+            return qx::detail::murmur_32_hash(str.data(),
+                                              str.size(),
+                                              qx::detail::random_string_hash::next());
         }
     };
 
@@ -311,7 +322,9 @@ namespace std
     {
         u32 operator()(const qx::wpstring& str) const
         {
-            return qx::detail::murmur_32_hash(str.data(), str.size(), 108540);
+            return qx::detail::murmur_32_hash(str.data(),
+                                              str.size(),
+                                              qx::detail::random_string_hash::next());
         }
     };
 }
