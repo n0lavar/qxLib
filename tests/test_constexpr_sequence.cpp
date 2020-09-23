@@ -10,7 +10,7 @@
 //!\copyright   (c) Nick Khrapov, 2020. All right reserved.
 //
 //==============================================================================
-#include <qx/other/constexpr_sequence.h>
+#include <qx/meta/constexpr_sequence.h>
 #include <qx/other/useful_macros.h>
 
  //V_EXCLUDE_PATH *test_constexpr_counter.cpp

@@ -12,8 +12,8 @@
 //==============================================================================
 #pragma once
 
-#include <qx/other/constexpr_flag.h>
-#include <qx/other/constexpr_funcs.h>
+#include <qx/meta/constexpr_flag.h>
+#include <qx/meta/constexpr_funcs.h>
 
 namespace qx
 {

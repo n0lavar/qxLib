@@ -14,7 +14,7 @@
 //==============================================================================
 #pragma once
 
-#include <qx/other/constexpr_sequence.h>
+#include <qx/meta/constexpr_sequence.h>
 
 namespace qx
 {

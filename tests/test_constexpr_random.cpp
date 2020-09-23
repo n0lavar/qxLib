@@ -2,7 +2,7 @@
 //
 //!\file                   test_constexpr_random.cpp
 //
-//!\brief
+//!\brief       Tests for constexpr_random class
 //!\details     ~
 //
 //!\author      Khrapov
@@ -10,7 +10,7 @@
 //!\copyright   (c) Nick Khrapov, 2020. All right reserved.
 //
 //==============================================================================
-#include <qx/other/constexpr_random.h>
+#include <qx/meta/constexpr_random.h>
 #include <qx/other/useful_macros.h>
 #include <array>
 

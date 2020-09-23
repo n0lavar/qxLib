@@ -10,7 +10,7 @@
 //!\copyright   (c) Nick Khrapov, 2020. All right reserved.
 //
 //==============================================================================
-#include <qx/other/constexpr_flag.h>
+#include <qx/meta/constexpr_flag.h>
 
  //V_EXCLUDE_PATH *test_constexpr_flag.cpp
 

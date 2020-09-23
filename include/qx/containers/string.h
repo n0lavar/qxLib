@@ -17,7 +17,7 @@
 #include <optional>
 
 #include <qx/containers/container.h>
-#include <qx/other/constexpr_random.h>
+#include <qx/meta/constexpr_random.h>
 #include <qx/other/type_traits.h>
 
 namespace qx
