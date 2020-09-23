@@ -12,6 +12,8 @@
 //==============================================================================
 #include <config.h>
 
+//V_EXCLUDE_PATH *test_functional.cpp
+
 #if QX_TEST_FUNCTIONAL
 
 #include <qx/alg/functional.h>

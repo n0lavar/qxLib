@@ -28,10 +28,6 @@
     #define QX_TEST_LIST_SE 1
 #endif
 
-#ifndef QX_TEST_OBJECT_POOL
-    #define QX_TEST_OBJECT_POOL 1
-#endif
-
 #ifndef QX_TEST_STRING
     #define QX_TEST_STRING 1
 #endif
@@ -46,4 +42,8 @@
 
 #ifndef QX_TEST_SMART_ENUM
     #define QX_TEST_SMART_ENUM 1
+#endif
+
+#ifndef QX_TEST_RTTI
+    #define QX_TEST_RTTI 1
 #endif

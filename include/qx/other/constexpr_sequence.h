@@ -14,7 +14,6 @@
 
 #include <qx/other/constexpr_flag.h>
 #include <qx/other/constexpr_funcs.h>
-#include <qx/other/type_traits.h>
 
 namespace qx
 {

@@ -1,4 +1,3 @@
-#include "string.h"
 //==============================================================================
 //
 //!\file                         string.inl
@@ -680,7 +679,7 @@ inline std::optional<To> basic_string<Traits>::to(void) const
         {
             if (Compare(STR_PREFIX(typename Traits::value_type, "true")) == 0)
                 optResult = true;
-            else if (Compare(STR_PREFIX(typename Traits::value_type, "false")) == 0)
+            else
                 optResult = false;
         }
         else if (auto pszFormat = GetFormatSpecifier<To>())

@@ -30,37 +30,37 @@ namespace qx
 //==============================================================================
 class benchmark
 {
+public:
+
     using clock         = std::chrono::steady_clock;
     using time_point    = clock::time_point;
-    using time_duration = std::chrono::nanoseconds;
-
-public:
+    using duration      = std::chrono::nanoseconds;
 
     benchmark(void)
     {
-        Start();
+        start();
     }
 
-    void Start(void)
+    void start(void)
     {
         m_Start = clock::now();
     }
 
-    double End(void)
+    double end(void)
     {
         m_LastDuration = clock::now() - m_Start;
-        return Last();
+        return last();
     }
 
-    double Last(void)
+    double last(void)
     {
         return m_LastDuration.count() / 1e9;
     }
 
 private:
 
-    time_point      m_Start;
-    time_duration   m_LastDuration;
+    time_point  m_Start;
+    duration    m_LastDuration;
 };
 
 }

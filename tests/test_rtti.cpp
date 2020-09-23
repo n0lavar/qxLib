@@ -10,11 +10,15 @@
 //!\copyright   (c) Nick Khrapov, 2020. All right reserved.
 //
 //==============================================================================
+#include <config.h>
+
+//V_EXCLUDE_PATH *test_rtti.cpp
+
+#if QX_TEST_RTTI
+
 #include <qx/other/rtti.h>
 #include <memory>
 #include <gtest/gtest.h>
-
-//V_EXCLUDE_PATH *test_rtti.cpp
 
 #define IS_CONSTEXPR(a) static_assert((a) || !(a));
 
@@ -368,3 +372,5 @@ TEST(rtti, usings)
     static_assert(std::is_same_v<CDerived2_31::ThisClass, CDerived2_31>);
     static_assert(std::is_same_v<CDerived2_32::ThisClass, CDerived2_32>);
 }
+
+#endif
