@@ -18,6 +18,7 @@
 
 #include <qx/containers/container.h>
 #include <qx/meta/constexpr_random.h>
+#include <qx/containers/string_traits.h>
 #include <qx/other/type_traits.h>
 
 namespace qx
@@ -127,9 +128,9 @@ public:
     void                    erase        (size_type              ind_first,
                                           size_type              nSymbols);
 
-    template<class ... Args, class = typename std::enable_if<are_same_v<typename Traits::value_type, Args...>>::type>
+    template<class ... Args, class = typename std::enable_if_t<are_same_v<typename Traits::value_type, Args...>>>
     void                    erase_all_of (Args...                args);
-    template<class FwdIt, class = typename std::enable_if<!std::is_same_v<typename Traits::value_type, FwdIt>>::type>
+    template<class FwdIt, class = typename std::enable_if_t<!std::is_same_v<typename Traits::value_type, FwdIt>>>
     void                    erase_all_of (FwdIt                  first,
                                           FwdIt                  last);
     void                    erase_line_breaks(void);

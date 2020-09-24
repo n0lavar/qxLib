@@ -37,9 +37,8 @@ constexpr int INT_MIN = std::numeric_limits<int>::min();
 //
 //==============================================================================
 template <typename Compare, int64_t minElement, int64_t maxElement, size_t arraySize>
-class TestTraits
+struct TestTraits
 {
-public:
     static constexpr Compare compare()     { return Compare();  }
     static constexpr int64_t min_element() { return minElement; }
     static constexpr int64_t max_element() { return maxElement; }

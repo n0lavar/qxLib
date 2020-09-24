@@ -254,43 +254,4 @@ inline constexpr u32 murmur_32_hash(const Char* key, size_t len, u32 seed)
     return h;
 }
 
-template<typename value_type>
-constexpr const value_type * const ChooseStrPrefix(const char * const, const wchar_t * const);
-
-template<>
-constexpr const char * const ChooseStrPrefix<char>(const char * const c, const wchar_t * const)
-{
-    return c;
 }
-
-template<>
-constexpr const wchar_t * const ChooseStrPrefix<wchar_t>(const char * const, const wchar_t * const w)
-{
-    return w;
-}
-
-template<typename value_type>
-constexpr value_type ChooseCharPrefix(char, wchar_t);
-
-template<>
-constexpr char ChooseCharPrefix<char>(char c, wchar_t)
-{
-    return c;
-}
-
-template<>
-constexpr wchar_t ChooseCharPrefix<wchar_t>(char, wchar_t w)
-{
-    return w;
-}
-
-}
-
-#define _QX_TO_WSTRING(x) L##x
-#define QX_TO_WSTRING(x) _QX_TO_WSTRING(x)
-
-// chose witch of prefixes add to string : L or none
-#define STR_PREFIX(value_type, str) qx::detail::ChooseStrPrefix<value_type>(str, QX_TO_WSTRING(str))
-
-// chose witch of prefixes add to char : L or none
-#define CHAR_PREFIX(value_type, ch) qx::detail::ChooseCharPrefix<value_type>(ch, QX_TO_WSTRING(ch))

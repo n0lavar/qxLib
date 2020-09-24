@@ -309,8 +309,8 @@ inline void basic_string<Traits>::erase_all_of(FwdIt first, FwdIt last)
 template<class Traits>
 inline void basic_string<Traits>::erase_line_breaks(void)
 {
-    erase_all_of(CHAR_PREFIX(typename Traits::value_type, '\r'),
-                 CHAR_PREFIX(typename Traits::value_type, '\n'));
+    erase_all_of(QX_CHAR_PREFIX(typename Traits::value_type, '\r'),
+                 QX_CHAR_PREFIX(typename Traits::value_type, '\n'));
 }
 
 //==============================================================================
@@ -446,7 +446,7 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::find(const
     if (indEnd == npos)
         indEnd = size();
 
-    pointer       pCurrentChar = m_pData + indBegin;
+    const_pointer pCurrentChar = m_pData + indBegin;
     const_pointer pEnd         = m_pData + indEnd;
 
     do
@@ -454,7 +454,7 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::find(const
         if (!Traits::tstrncmp(pWhat, pCurrentChar, nSizeWhat))
             return static_cast<size_type>(pCurrentChar - m_pData);
         else
-            step_to(pCurrentChar, pEnd);
+            pCurrentChar = step_to(pCurrentChar, pEnd);
     } while (pCurrentChar != pEnd);
 
     return npos;
@@ -479,7 +479,7 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::find(value
     if (indEnd == npos)
         indEnd = size();
 
-    pointer       pCurrentChar = m_pData + indBegin;
+    const_pointer pCurrentChar = m_pData + indBegin;
     const_pointer pEnd         = m_pData + indEnd;
 
     do
@@ -487,7 +487,7 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::find(value
         if (*pCurrentChar == ch)
             return static_cast<size_type>(pCurrentChar - m_pData);
         else
-            step_to(pCurrentChar, pEnd);
+            pCurrentChar = step_to(pCurrentChar, pEnd);
     } while (pCurrentChar != pEnd);
 
     return npos;
@@ -672,12 +672,12 @@ inline std::optional<To> basic_string<Traits>::to(void) const
     {
         if constexpr (std::is_same_v<To, std::nullptr_t>)
         {
-            if (Compare(STR_PREFIX(typename Traits::value_type, "nullptr")) == 0)
+            if (Compare(QX_STR_PREFIX(typename Traits::value_type, "nullptr")) == 0)
                 optResult = nullptr;
         }
         else if constexpr (std::is_same_v<To, bool>)
         {
-            if (Compare(STR_PREFIX(typename Traits::value_type, "true")) == 0)
+            if (Compare(QX_STR_PREFIX(typename Traits::value_type, "true")) == 0)
                 optResult = true;
             else
                 optResult = false;
@@ -722,13 +722,13 @@ inline void basic_string<Traits>::from(const From& data, const_pointer pszFormat
         {
             if constexpr (std::is_same_v <From, std::nullptr_t>)
             {
-                pszFormat = STR_PREFIX(typename Traits::value_type, "nullptr");
+                pszFormat = QX_STR_PREFIX(typename Traits::value_type, "nullptr");
             }
             else if constexpr (std::is_same_v<From, bool>)
             {
                 pszFormat = data
-                    ? STR_PREFIX(typename Traits::value_type, "true")
-                    : STR_PREFIX(typename Traits::value_type, "false");
+                    ? QX_STR_PREFIX(typename Traits::value_type, "true")
+                    : QX_STR_PREFIX(typename Traits::value_type, "false");
             }
             else
                 pszFormat = GetFormatSpecifier<From>();
@@ -780,62 +780,62 @@ inline constexpr typename basic_string<Traits>::const_pointer basic_string<Trait
 
     if constexpr (std::is_same_v<T, char>)
     {
-        pszFormat = STR_PREFIX(typename Traits::value_type, "%hhd");
+        pszFormat = QX_STR_PREFIX(typename Traits::value_type, "%hhd");
     }
     else if constexpr (std::is_same_v<T, unsigned char>)
     {
-        pszFormat = STR_PREFIX(typename Traits::value_type, "%hhu");
+        pszFormat = QX_STR_PREFIX(typename Traits::value_type, "%hhu");
     }
     else if constexpr (std::is_same_v<T, short>)
     {
-        pszFormat = STR_PREFIX(typename Traits::value_type, "%hd");
+        pszFormat = QX_STR_PREFIX(typename Traits::value_type, "%hd");
     }
     else if constexpr (std::is_same_v<T, unsigned short>)
     {
-        pszFormat = STR_PREFIX(typename Traits::value_type, "%hu");
+        pszFormat = QX_STR_PREFIX(typename Traits::value_type, "%hu");
     }
     else if constexpr (std::is_same_v<T, int>)
     {
-        pszFormat = STR_PREFIX(typename Traits::value_type, "%d");
+        pszFormat = QX_STR_PREFIX(typename Traits::value_type, "%d");
     }
     else if constexpr (std::is_same_v<T, unsigned int>)
     {
-        pszFormat = STR_PREFIX(typename Traits::value_type, "%u");
+        pszFormat = QX_STR_PREFIX(typename Traits::value_type, "%u");
     }
     else if constexpr (std::is_same_v<T, long>)
     {
-        pszFormat = STR_PREFIX(typename Traits::value_type, "%ld");
+        pszFormat = QX_STR_PREFIX(typename Traits::value_type, "%ld");
     }
     else if constexpr (std::is_same_v<T, unsigned long>)
     {
-        pszFormat = STR_PREFIX(typename Traits::value_type, "%lu");
+        pszFormat = QX_STR_PREFIX(typename Traits::value_type, "%lu");
     }
     else if constexpr (std::is_same_v<T, long long>)
     {
-        pszFormat = STR_PREFIX(typename Traits::value_type, "%lld");
+        pszFormat = QX_STR_PREFIX(typename Traits::value_type, "%lld");
     }
     else if constexpr (std::is_same_v<T, unsigned long long>)
     {
-        pszFormat = STR_PREFIX(typename Traits::value_type, "%llu");
+        pszFormat = QX_STR_PREFIX(typename Traits::value_type, "%llu");
     }
     else if constexpr (std::is_same_v<T, float>)
     {
-        pszFormat = STR_PREFIX(typename Traits::value_type, "%f");
+        pszFormat = QX_STR_PREFIX(typename Traits::value_type, "%f");
     }
     else if constexpr (std::is_same_v<T, double>)
     {
-        pszFormat = STR_PREFIX(typename Traits::value_type, "%lf");
+        pszFormat = QX_STR_PREFIX(typename Traits::value_type, "%lf");
     }
     else if constexpr (std::is_same_v<T, long double>)
     {
-        pszFormat = STR_PREFIX(typename Traits::value_type, "%Lf");
+        pszFormat = QX_STR_PREFIX(typename Traits::value_type, "%Lf");
     }
     else if constexpr (std::is_pointer_v<T>)
     {
 #ifdef _MSC_VER
-        pszFormat = STR_PREFIX(typename Traits::value_type, "0x%p");
+        pszFormat = QX_STR_PREFIX(typename Traits::value_type, "0x%p");
 #else
-        pszFormat = STR_PREFIX(typename Traits::value_type, "%p");
+        pszFormat = QX_STR_PREFIX(typename Traits::value_type, "%p");
 #endif
     }
 
@@ -880,7 +880,7 @@ inline typename basic_string<Traits>::reference basic_string<Traits>::at(size_ty
 template<class Traits>
 inline void basic_string<Traits>::clear(void)
 {
-    assign(STR_PREFIX(typename Traits::value_type, ""));
+    assign(QX_STR_PREFIX(typename Traits::value_type, ""));
 }
 
 //==============================================================================
@@ -956,8 +956,13 @@ inline const SStrData<Traits>* basic_string<Traits>::GetStrData(void) const
 template<class Traits>
 inline bool basic_string<Traits>::Resize(size_type nSymbols, size_type nAlign, EResizeType eType)
 {
+    auto align_size = [](size_type nSize, size_type nAlign) -> size_type
+    {
+        return ((nSize + nAlign) - (nSize + nAlign) % nAlign) * sizeof(typename Traits::value_type);
+    };
+
     typename Traits::size_type nSizeToAllocate = nAlign
-        ? align_size<typename Traits::value_type>(nSymbols + 1, nAlign)
+        ? align_size(nSymbols + 1, nAlign)
         : nSymbols + 1;
 
     SStrData<Traits>* pStrData = GetStrData();

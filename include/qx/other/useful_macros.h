@@ -245,3 +245,85 @@ name&   operator=   (name&&) noexcept   = default;  \
 name&   operator=   (const name&)       = delete;
 
 //==============================================================================
+
+namespace qx::detail
+{
+    template<auto A, auto B>
+    struct StaticAssertEqueal
+    {
+        static_assert(A == B, "Values are not equal");
+    };
+}
+
+/*
+    Shows A and B in error msg
+*/
+#define QX_STATIC_ASSERT_EQ(a, b) qx::detail::StaticAssertEqueal<(a), (b)> LINE_NAME(static_assert_equal_);
+
+//==============================================================================
+
+namespace qx::detail
+{
+    template<auto L, auto V, auto R>
+    struct StaticAssertBetween
+    {
+        static_assert(static_cast<size_t>(V - L) <= (R - L), "V is not between R and L");
+    };
+}
+
+/*
+    Shows L, V and R in error msg
+*/
+#define QX_STATIC_ASSERT_BETWEEN(L, V, R) qx::detail::StaticAssertBetween<(L), (V), (R)> LINE_NAME(static_assert_between_);
+
+//==============================================================================
+
+namespace qx::detail
+{
+
+template<typename value_type>
+constexpr const value_type* const ChooseStrPrefix(const char* const, const wchar_t* const);
+
+template<>
+constexpr const char* const ChooseStrPrefix<char>(const char* const c, const wchar_t* const)
+{
+    return c;
+}
+
+template<>
+constexpr const wchar_t* const ChooseStrPrefix<wchar_t>(const char* const, const wchar_t* const w)
+{
+    return w;
+}
+
+template<typename value_type>
+constexpr value_type ChooseCharPrefix(char, wchar_t);
+
+template<>
+constexpr char ChooseCharPrefix<char>(char c, wchar_t)
+{
+    return c;
+}
+
+template<>
+constexpr wchar_t ChooseCharPrefix<wchar_t>(char, wchar_t w)
+{
+    return w;
+}
+
+}
+
+#define _QX_TO_WSTRING(x) L##x
+#define QX_TO_WSTRING(x) _QX_TO_WSTRING(x)
+
+/*
+    chose witch of prefixes add to string : L or none
+*/
+#define QX_STR_PREFIX(value_type, str) qx::detail::ChooseStrPrefix<value_type>(str, QX_TO_WSTRING(str))
+
+/*
+    chose witch of prefixes add to char : L or none
+*/
+#define QX_CHAR_PREFIX(value_type, ch) qx::detail::ChooseCharPrefix<value_type>(ch, QX_TO_WSTRING(ch))
+
+//==============================================================================

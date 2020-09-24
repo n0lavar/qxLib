@@ -126,10 +126,27 @@ static constexpr T next(void) noexcept
 
 };
 
+namespace detail
+{
+
+template<typename T, T INC>
+inline constexpr T increase(T val)
+{
+    return val + INC;
+}
+
+template<typename T, T MULT>
+inline constexpr T multiply(T val)
+{
+    return val * MULT;
+}
+
+}
+
 template<typename Tag = struct CounterTag, typename T = int, T Start = 0, T Inc = 1>
-using constexpr_counter = constexpr_sequence<Tag, T, Start, increase<T, Inc>>;
+using constexpr_counter = constexpr_sequence<Tag, T, Start, detail::increase<T, Inc>>;
 
 template<typename Tag = struct MultiplierTag, typename T = int, T Start = 1, T Mult = 2>
-using constexpr_multiplier = constexpr_sequence<Tag, T, Start, multiply<T, Mult>>;
+using constexpr_multiplier = constexpr_sequence<Tag, T, Start, detail::multiply<T, Mult>>;
 
 }

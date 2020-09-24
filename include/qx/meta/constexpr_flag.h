@@ -20,7 +20,7 @@ namespace qx
 //!\class               qx::constexpr_flag<Tag, T, Start, End>
 //
 //!\brief   constexpr_flag class
-//!\details Returns "Start" at the beginning(test), "End" with test_and_set and "End" after
+//!\details Returns "Start" at the beginning(test), "Start" with test_and_set and "End" after
 //
 //!\author  Khrapov
 //!\date    14.09.2020

@@ -39,8 +39,8 @@ class TestQxString : public ::testing::Test
 #define StringTypeTn typename qx::basic_string<TypeParam>
 #define StringType qx::basic_string<TypeParam>
 #define ValueType typename TypeParam::value_type
-#define STR(str) STR_PREFIX(ValueType, str)
-#define CH(str) CHAR_PREFIX(ValueType, str)
+#define STR(str) QX_STR_PREFIX(ValueType, str)
+#define CH(str) QX_CHAR_PREFIX(ValueType, str)
 
 using Implementations = ::testing::Types
 <
