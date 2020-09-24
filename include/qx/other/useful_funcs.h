@@ -15,6 +15,7 @@
 #include <initializer_list>
 #include <algorithm>
 #include <cmath>
+#include <functional>
 
 #include <qx/meta/constexpr_funcs.h>
 #include <qx/other/typedefs.h>

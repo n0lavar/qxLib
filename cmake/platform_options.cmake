@@ -1,54 +1,65 @@
 
 function(set_qx_target_defines _target)
+    
+    if (${CMAKE_CXX_COMPILER_ID} STREQUAL Clang 
+        OR ${CMAKE_CXX_COMPILER_ID} STREQUAL GNU
+        OR ${CMAKE_CXX_COMPILER_ID} STREQUAL AppleClang
+    )
+        set (DEFINE_PREFIX "-D")
+    elseif (${CMAKE_CXX_COMPILER_ID} STREQUAL MSVC)
+        set (DEFINE_PREFIX "/D")
+    endif()
+
     target_compile_options(${_target} PRIVATE
         $<$<CONFIG:Debug>:          
-            /DQX_DEBUG=1 
-            /DQX_RELEASE=0 
-            /DQX_RELWITHDEBINFO=0 
-            /DQX_MINSIZEREL=0 
-            /DQX_DEBUG_BUILD=1 
-            /DQX_RELEASE_BUILD=0>
+            ${DEFINE_PREFIX}QX_DEBUG=1 
+            ${DEFINE_PREFIX}QX_RELEASE=0 
+            ${DEFINE_PREFIX}QX_RELWITHDEBINFO=0 
+            ${DEFINE_PREFIX}QX_MINSIZEREL=0 
+            ${DEFINE_PREFIX}QX_DEBUG_BUILD=1 
+            ${DEFINE_PREFIX}QX_RELEASE_BUILD=0>
             
         $<$<CONFIG:Release>:        
-            /DQX_DEBUG=0 
-            /DQX_RELEASE=1 
-            /DQX_RELWITHDEBINFO=0 
-            /DQX_MINSIZEREL=0 
-            /DQX_DEBUG_BUILD=0 
-            /DQX_RELEASE_BUILD=1>
+            ${DEFINE_PREFIX}QX_DEBUG=0 
+            ${DEFINE_PREFIX}QX_RELEASE=1 
+            ${DEFINE_PREFIX}QX_RELWITHDEBINFO=0 
+            ${DEFINE_PREFIX}QX_MINSIZEREL=0 
+            ${DEFINE_PREFIX}QX_DEBUG_BUILD=0 
+            ${DEFINE_PREFIX}QX_RELEASE_BUILD=1>
             
         $<$<CONFIG:RelWithDebInfo>: 
-            /DQX_DEBUG=0 
-            /DQX_RELEASE=0 
-            /DQX_RELWITHDEBINFO=1 
-            /DQX_MINSIZEREL=0 
-            /DQX_DEBUG_BUILD=1 
-            /DQX_RELEASE_BUILD=0>
+            ${DEFINE_PREFIX}QX_DEBUG=0 
+            ${DEFINE_PREFIX}QX_RELEASE=0 
+            ${DEFINE_PREFIX}QX_RELWITHDEBINFO=1 
+            ${DEFINE_PREFIX}QX_MINSIZEREL=0 
+            ${DEFINE_PREFIX}QX_DEBUG_BUILD=1 
+            ${DEFINE_PREFIX}QX_RELEASE_BUILD=0>
             
         $<$<CONFIG:MinSizeRel>:     
-            /DQX_DEBUG=0 
-            /DQX_RELEASE=0 
-            /DQX_RELWITHDEBINFO=0 
-            /DQX_MINSIZEREL=1 
-            /DQX_DEBUG_BUILD=0 
-            /DQX_RELEASE_BUILD=1>
+            ${DEFINE_PREFIX}QX_DEBUG=0 
+            ${DEFINE_PREFIX}QX_RELEASE=0 
+            ${DEFINE_PREFIX}QX_RELWITHDEBINFO=0 
+            ${DEFINE_PREFIX}QX_MINSIZEREL=1 
+            ${DEFINE_PREFIX}QX_DEBUG_BUILD=0 
+            ${DEFINE_PREFIX}QX_RELEASE_BUILD=1>
             
             
         $<$<PLATFORM_ID:Windows>:
-            /DQX_WIN=1
-            /DQX_MACOS=0
-            /DQX_LINUX=0>
+            ${DEFINE_PREFIX}QX_WIN=1
+            ${DEFINE_PREFIX}QX_MACOS=0
+            ${DEFINE_PREFIX}QX_LINUX=0>
             
         $<$<PLATFORM_ID:Darwin>:
-            /DQX_WIN=0
-            /DQX_MACOS=1
-            /DQX_LINUX=0>
+            ${DEFINE_PREFIX}QX_WIN=0
+            ${DEFINE_PREFIX}QX_MACOS=1
+            ${DEFINE_PREFIX}QX_LINUX=0>
             
         $<$<PLATFORM_ID:Linux>:
-            /DQX_WIN=0
-            /DQX_MACOS=0
-            /DQX_LINUX=1>
+            ${DEFINE_PREFIX}QX_WIN=0
+            ${DEFINE_PREFIX}QX_MACOS=0
+            ${DEFINE_PREFIX}QX_LINUX=1>
     )
+    
 endfunction()
 
 function(set_qxlib_target_options _target)
@@ -73,7 +84,6 @@ function(set_qxlib_target_options _target)
             -pthread
         )
     
-    elseif (${CMAKE_CXX_COMPILER_ID} STREQUAL Intel)
     elseif (${CMAKE_CXX_COMPILER_ID} STREQUAL MSVC)
     
         target_compile_options(${_target} PRIVATE

@@ -14,6 +14,7 @@
 #pragma once
 
 #include <qx/other/useful_macros.h>
+#include <limits>
 
 namespace qx::meta
 {

@@ -12,6 +12,7 @@
 //==============================================================================
 #include <qx/other/useful_funcs.h>
 #include <qx/other/useful_macros.h>
+#include <qx/containers/container.h>
 #include <gtest/gtest.h>
 
  //V_EXCLUDE_PATH *test_useful_funcs.cpp
@@ -103,21 +104,19 @@ QX_STATIC_ASSERT_EQ(qx::step_to(9, 5), 8);
 
 struct DestructChecker
 {
-     DestructChecker() : value(1) { };
-    ~DestructChecker() { value = 2; }
+     DestructChecker() { counter++; }
+    ~DestructChecker() { counter--; }
 
-    int value = 0;
+    static int counter;
 };
+
+int DestructChecker::counter = 0;
 
 TEST(useful_funcs, destruct)
 {
-    std::vector<DestructChecker> v(3);
-    ASSERT_EQ(v[0].value, 1);
-    ASSERT_EQ(v[1].value, 1);
-    ASSERT_EQ(v[2].value, 1);
+    static std::vector<DestructChecker> v(3);
+    ASSERT_EQ(DestructChecker::counter, 3);
 
     qx::destruct(v.begin(), v.end() - 1);
-    ASSERT_EQ(v[0].value, 2);
-    ASSERT_EQ(v[1].value, 2);
-    ASSERT_EQ(v[2].value, 1);
+    ASSERT_EQ(DestructChecker::counter, 1);
 }

@@ -34,34 +34,6 @@
 //==============================================================================
 
 /*
-    SFINAE class member existance check
-    ex: class Class1
-        {
-            void mem1() { }
-        }
-
-        DEFINE_HAS_MEMBER(mem1);
-        constexpr bool b1 = HAS_MEMBER(Class1, mem1); // true
-        constexpr bool b2 = HAS_MEMBER(Class1, mem2); // false
-*/
-
-#define DEFINE_HAS_MEMBER(member_name)                                         \
-    template <typename T>                                                      \
-    class has_member_##member_name                                             \
-    {                                                                          \
-        typedef char yes_type;                                                 \
-        typedef long no_type;                                                  \
-        template <typename U> static yes_type test(decltype(&U::member_name)); \
-        template <typename U> static no_type  test(...);                       \
-    public:                                                                    \
-        static constexpr bool value = sizeof(test<T>(0)) == sizeof(yes_type);  \
-    }
-
-#define HAS_MEMBER(class_, member_name)  has_member_##member_name<class_>::value
-
-//==============================================================================
-
-/*
     Fast C#-like getters and setters
 */
 
