@@ -14,6 +14,9 @@
 #include <qx/other/useful_macros.h>
 #include <gtest/gtest.h>
 
+ //V_EXCLUDE_PATH *test_useful_funcs.cpp
+
+
 //--------------------------------- qx::between --------------------------------
 
 // unscoped enum

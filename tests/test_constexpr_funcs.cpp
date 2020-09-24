@@ -40,3 +40,13 @@ QX_STATIC_ASSERT_EQ(qx::meta::abs(-1),  1)
 QX_STATIC_ASSERT_EQ(qx::meta::abs(-2),  2)
 QX_STATIC_ASSERT_EQ(qx::meta::abs(-3),  3)
 QX_STATIC_ASSERT_EQ(qx::meta::abs(-4),  4)
+
+
+
+//--------------------------- qx::meta::epsilon_equal --------------------------
+
+static_assert( qx::meta::epsilon_equal(0.5, 0.41, 0.1));
+static_assert( qx::meta::epsilon_equal(0.5, 0.45, 0.1));
+static_assert( qx::meta::epsilon_equal(0.5, 0.48, 0.1));
+static_assert( qx::meta::epsilon_equal(0.5, 0.49, 0.1));
+static_assert(!qx::meta::epsilon_equal(0.5, 0.39, 0.1));
