@@ -19,6 +19,7 @@
 
 #include <qx/meta/constexpr_funcs.h>
 #include <qx/other/typedefs.h>
+#include <qx/other/config.h>
 
 namespace qx
 {

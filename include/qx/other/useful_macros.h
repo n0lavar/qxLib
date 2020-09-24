@@ -15,6 +15,7 @@
 #include <cstddef>
 
 #include <qx/other/typedefs.h>
+#include <qx/other/config.h>
 
 /*
     Placeholder for disabled macros
@@ -57,7 +58,7 @@
 
 //==============================================================================
 
-#ifdef _WIN64
+#ifdef QX_WIN
     #define PATH_SEPARATOR '\\'
 #else
     #define PATH_SEPARATOR '/'

@@ -42,22 +42,6 @@ function(set_qx_target_defines _target)
             ${DEFINE_PREFIX}QX_MINSIZEREL=1 
             ${DEFINE_PREFIX}QX_DEBUG_BUILD=0 
             ${DEFINE_PREFIX}QX_RELEASE_BUILD=1>
-            
-            
-        $<$<PLATFORM_ID:Windows>:
-            ${DEFINE_PREFIX}QX_WIN=1
-            ${DEFINE_PREFIX}QX_MACOS=0
-            ${DEFINE_PREFIX}QX_LINUX=0>
-            
-        $<$<PLATFORM_ID:Darwin>:
-            ${DEFINE_PREFIX}QX_WIN=0
-            ${DEFINE_PREFIX}QX_MACOS=1
-            ${DEFINE_PREFIX}QX_LINUX=0>
-            
-        $<$<PLATFORM_ID:Linux>:
-            ${DEFINE_PREFIX}QX_WIN=0
-            ${DEFINE_PREFIX}QX_MACOS=0
-            ${DEFINE_PREFIX}QX_LINUX=1>
     )
     
 endfunction()

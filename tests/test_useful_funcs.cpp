@@ -114,7 +114,7 @@ int DestructChecker::counter = 0;
 
 TEST(useful_funcs, destruct)
 {
-    static std::vector<DestructChecker> v(3);
+    std::vector<DestructChecker> v(3);
     ASSERT_EQ(DestructChecker::counter, 3);
 
     qx::destruct(v.begin(), v.end() - 1);
