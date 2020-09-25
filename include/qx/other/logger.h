@@ -21,9 +21,10 @@
 #include <qx/other/singleton.h>
 #include <qx/containers/string.h>
 #include <qx/other/typedefs.h>
+#include <qx/other/config.h>
 
 #ifndef ENABLE_DETAIL_TRACE_INFO
-    #define ENABLE_DETAIL_TRACE_INFO _DEBUG
+    #define ENABLE_DETAIL_TRACE_INFO QX_DEBUG
 #endif
 
 namespace qx
@@ -47,7 +48,7 @@ constexpr const char* ANSI_COLOR_CYAN_BOLD      = "\033[1;36m";
     qx::logger::level::all,                                                     \
     format,                                                                     \
     nullptr,                                                                    \
-    __SHORT_FILE__,                                                             \
+    QX_SHORT_FILE,                                                              \
     __FUNCTION__,                                                               \
     __LINE__,                                                                   \
     __VA_ARGS__)
@@ -56,7 +57,7 @@ constexpr const char* ANSI_COLOR_CYAN_BOLD      = "\033[1;36m";
     qx::logger::level::errors,                                                  \
     format,                                                                     \
     nullptr,                                                                    \
-    __SHORT_FILE__,                                                             \
+    QX_SHORT_FILE,                                                              \
     __FUNCTION__,                                                               \
     __LINE__,                                                                   \
     __VA_ARGS__)
@@ -65,7 +66,7 @@ constexpr const char* ANSI_COLOR_CYAN_BOLD      = "\033[1;36m";
     qx::logger::level::asserts,                                                 \
     format,                                                                     \
     expr,                                                                       \
-    __SHORT_FILE__,                                                             \
+    QX_SHORT_FILE,                                                              \
     __FUNCTION__,                                                               \
     __LINE__,                                                                   \
     __VA_ARGS__)

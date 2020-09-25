@@ -358,7 +358,7 @@ inline void shader_program::AddInclude(const char* pszName,
                                        GLint       nTextLength)
 {
     bool bGlslIncludeSupported = GLEW_ARB_shading_language_include;
-    CHECK(bGlslIncludeSupported)
+    QX_CHECK(bGlslIncludeSupported)
         glNamedStringARB(GL_SHADER_INCLUDE_ARB, nNameLength, pszName, nTextLength, pszText);
 }
 

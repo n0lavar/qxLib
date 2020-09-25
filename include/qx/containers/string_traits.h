@@ -18,7 +18,7 @@
 #include <cctype>
 #include <cstdarg>
 
-#include <qx/other/useful_funcs.h>
+#include <qx/other/useful_macros.h>
 
 namespace qx
 {

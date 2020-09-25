@@ -1,54 +1,5 @@
 
-function(set_qx_target_defines _target)
-    
-    if (${CMAKE_CXX_COMPILER_ID} STREQUAL Clang 
-        OR ${CMAKE_CXX_COMPILER_ID} STREQUAL GNU
-        OR ${CMAKE_CXX_COMPILER_ID} STREQUAL AppleClang
-    )
-        set (DEFINE_PREFIX "-D")
-    elseif (${CMAKE_CXX_COMPILER_ID} STREQUAL MSVC)
-        set (DEFINE_PREFIX "/D")
-    endif()
-
-    target_compile_options(${_target} PRIVATE
-        $<$<CONFIG:Debug>:          
-            ${DEFINE_PREFIX}QX_DEBUG=1 
-            ${DEFINE_PREFIX}QX_RELEASE=0 
-            ${DEFINE_PREFIX}QX_RELWITHDEBINFO=0 
-            ${DEFINE_PREFIX}QX_MINSIZEREL=0 
-            ${DEFINE_PREFIX}QX_DEBUG_BUILD=1 
-            ${DEFINE_PREFIX}QX_RELEASE_BUILD=0>
-            
-        $<$<CONFIG:Release>:        
-            ${DEFINE_PREFIX}QX_DEBUG=0 
-            ${DEFINE_PREFIX}QX_RELEASE=1 
-            ${DEFINE_PREFIX}QX_RELWITHDEBINFO=0 
-            ${DEFINE_PREFIX}QX_MINSIZEREL=0 
-            ${DEFINE_PREFIX}QX_DEBUG_BUILD=0 
-            ${DEFINE_PREFIX}QX_RELEASE_BUILD=1>
-            
-        $<$<CONFIG:RelWithDebInfo>: 
-            ${DEFINE_PREFIX}QX_DEBUG=0 
-            ${DEFINE_PREFIX}QX_RELEASE=0 
-            ${DEFINE_PREFIX}QX_RELWITHDEBINFO=1 
-            ${DEFINE_PREFIX}QX_MINSIZEREL=0 
-            ${DEFINE_PREFIX}QX_DEBUG_BUILD=1 
-            ${DEFINE_PREFIX}QX_RELEASE_BUILD=0>
-            
-        $<$<CONFIG:MinSizeRel>:     
-            ${DEFINE_PREFIX}QX_DEBUG=0 
-            ${DEFINE_PREFIX}QX_RELEASE=0 
-            ${DEFINE_PREFIX}QX_RELWITHDEBINFO=0 
-            ${DEFINE_PREFIX}QX_MINSIZEREL=1 
-            ${DEFINE_PREFIX}QX_DEBUG_BUILD=0 
-            ${DEFINE_PREFIX}QX_RELEASE_BUILD=1>
-    )
-    
-endfunction()
-
 function(set_qxlib_target_options _target)
-
-    set_qx_target_defines(${_target})
 
     if (${CMAKE_CXX_COMPILER_ID} STREQUAL Clang)
     

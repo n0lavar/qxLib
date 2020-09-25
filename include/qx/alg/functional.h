@@ -12,7 +12,6 @@
 //==============================================================================
 #pragma once
 
-#include <functional>
 #include <random>
 #include <ctime>
 
@@ -39,7 +38,7 @@ using function2d = std::function<double(double)>;
 //==============================================================================
 inline double linear_interpolation(glm::dvec2 p0, glm::dvec2 p1, double x)
 {
-    ASSERT_MSG(glm::epsilonNotEqual(p1.x, p0.x, DBL_EPSILON), "two x are equal, result is nan");
+    QX_ASSERT_MSG(glm::epsilonNotEqual(p1.x, p0.x, DBL_EPSILON), "two x are equal, result is nan");
     return p0.y + (p1.y - p0.y) * (x - p0.x) / (p1.x - p0.x);
 }
 
@@ -59,10 +58,10 @@ inline double linear_interpolation(glm::dvec2 p0, glm::dvec2 p1, double x)
 //==============================================================================
 inline double bilinear_inletpolation(glm::dvec3 p0, glm::dvec3 p1, glm::dvec3 p2, glm::dvec3 p3, glm::dvec2 p)
 {
-    ASSERT_MSG(glm::epsilonEqual(p0.y, p1.y, DBL_EPSILON), "points must be as square");
-    ASSERT_MSG(glm::epsilonEqual(p2.y, p3.y, DBL_EPSILON), "points must be as square");
-    ASSERT_MSG(glm::epsilonEqual(p0.x, p3.x, DBL_EPSILON), "points must be as square");
-    ASSERT_MSG(glm::epsilonEqual(p1.x, p2.x, DBL_EPSILON), "points must be as square");
+    QX_ASSERT_MSG(glm::epsilonEqual(p0.y, p1.y, DBL_EPSILON), "points must be as square");
+    QX_ASSERT_MSG(glm::epsilonEqual(p2.y, p3.y, DBL_EPSILON), "points must be as square");
+    QX_ASSERT_MSG(glm::epsilonEqual(p0.x, p3.x, DBL_EPSILON), "points must be as square");
+    QX_ASSERT_MSG(glm::epsilonEqual(p1.x, p2.x, DBL_EPSILON), "points must be as square");
 
     glm::dvec2 temp0 = { p0.y, linear_interpolation({ p0.x, p0.z }, { p1.x, p1.z }, p.x) };
     glm::dvec2 temp1 = { p2.y, linear_interpolation({ p2.x, p2.z }, { p3.x, p3.z }, p.x) };

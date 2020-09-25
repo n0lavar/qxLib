@@ -10,7 +10,6 @@
 //!\copyright   (c) Nick Khrapov, 2020. All right reserved.
 //
 //==============================================================================
-#include <qx/other/useful_funcs.h>
 #include <qx/other/useful_macros.h>
 #include <qx/containers/container.h>
 #include <gtest/gtest.h>

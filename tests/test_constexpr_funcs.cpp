@@ -17,29 +17,49 @@
 
 //------------------------------ qx::meta::strlen ------------------------------
 
-QX_STATIC_ASSERT_EQ(qx::meta::strlen(""),           0)
-QX_STATIC_ASSERT_EQ(qx::meta::strlen("1"),          1)
-QX_STATIC_ASSERT_EQ(qx::meta::strlen("12"),         2)
-QX_STATIC_ASSERT_EQ(qx::meta::strlen("123"),        3)
-QX_STATIC_ASSERT_EQ(qx::meta::strlen("1234"),       4)
-QX_STATIC_ASSERT_EQ(qx::meta::strlen("12345"),      5)
-QX_STATIC_ASSERT_EQ(qx::meta::strlen("123456"),     6)
-QX_STATIC_ASSERT_EQ(qx::meta::strlen("1234567"),    7)
-QX_STATIC_ASSERT_EQ(qx::meta::strlen("12345678"),   8)
-QX_STATIC_ASSERT_EQ(qx::meta::strlen("123456789"),  9)
+QX_STATIC_ASSERT_EQ(qx::meta::strlen(""),           0);
+QX_STATIC_ASSERT_EQ(qx::meta::strlen("1"),          1);
+QX_STATIC_ASSERT_EQ(qx::meta::strlen("12"),         2);
+QX_STATIC_ASSERT_EQ(qx::meta::strlen("123"),        3);
+QX_STATIC_ASSERT_EQ(qx::meta::strlen("1234"),       4);
+QX_STATIC_ASSERT_EQ(qx::meta::strlen("12345"),      5);
+QX_STATIC_ASSERT_EQ(qx::meta::strlen("123456"),     6);
+QX_STATIC_ASSERT_EQ(qx::meta::strlen("1234567"),    7);
+QX_STATIC_ASSERT_EQ(qx::meta::strlen("12345678"),   8);
+QX_STATIC_ASSERT_EQ(qx::meta::strlen("123456789"),  9);
+
+
+
+//------------------------------ qx::meta::strcmp ------------------------------
+
+QX_STATIC_ASSERT_EQ(qx::meta::strcmp("", ""),               0);
+QX_STATIC_ASSERT_EQ(qx::meta::strcmp("string", "string"),   0);
+QX_STATIC_ASSERT_EQ(qx::meta::strcmp("0", "0"),             0);
+QX_STATIC_ASSERT_EQ(qx::meta::strcmp(",,,", ",,,"),         0);
+QX_STATIC_ASSERT_EQ(qx::meta::strcmp("\"\"\"", "\"\"\""),   0);
+
+QX_STATIC_ASSERT_LT(qx::meta::strcmp("0", "1"),             0);
+QX_STATIC_ASSERT_LT(qx::meta::strcmp("00", "11"),           0);
+QX_STATIC_ASSERT_LT(qx::meta::strcmp("000", "1"),           0);
+QX_STATIC_ASSERT_LT(qx::meta::strcmp("0", "111"),           0);
+
+QX_STATIC_ASSERT_GT(qx::meta::strcmp("1", "0"),             0);
+QX_STATIC_ASSERT_GT(qx::meta::strcmp("11", "00"),           0);
+QX_STATIC_ASSERT_GT(qx::meta::strcmp("111", "0"),           0);
+QX_STATIC_ASSERT_GT(qx::meta::strcmp("1", "000"),           0);
 
 
 
 //-------------------------------- qx::meta::abs -------------------------------
 
-QX_STATIC_ASSERT_EQ(qx::meta::abs(1),   1)
-QX_STATIC_ASSERT_EQ(qx::meta::abs(2),   2)
-QX_STATIC_ASSERT_EQ(qx::meta::abs(3),   3)
-QX_STATIC_ASSERT_EQ(qx::meta::abs(4),   4)
-QX_STATIC_ASSERT_EQ(qx::meta::abs(-1),  1)
-QX_STATIC_ASSERT_EQ(qx::meta::abs(-2),  2)
-QX_STATIC_ASSERT_EQ(qx::meta::abs(-3),  3)
-QX_STATIC_ASSERT_EQ(qx::meta::abs(-4),  4)
+QX_STATIC_ASSERT_EQ(qx::meta::abs(1),   1);
+QX_STATIC_ASSERT_EQ(qx::meta::abs(2),   2);
+QX_STATIC_ASSERT_EQ(qx::meta::abs(3),   3);
+QX_STATIC_ASSERT_EQ(qx::meta::abs(4),   4);
+QX_STATIC_ASSERT_EQ(qx::meta::abs(-1),  1);
+QX_STATIC_ASSERT_EQ(qx::meta::abs(-2),  2);
+QX_STATIC_ASSERT_EQ(qx::meta::abs(-3),  3);
+QX_STATIC_ASSERT_EQ(qx::meta::abs(-4),  4);
 
 
 

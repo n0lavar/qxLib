@@ -19,57 +19,57 @@
 
 //---------------------------- qx::detail::increase ----------------------------
 
-QX_STATIC_ASSERT_EQ(SINGLE_ARGUMENT(qx::detail::increase<int, 0>(1)), 1)
-QX_STATIC_ASSERT_EQ(SINGLE_ARGUMENT(qx::detail::increase<int, 0>(2)), 2)
-QX_STATIC_ASSERT_EQ(SINGLE_ARGUMENT(qx::detail::increase<int, 0>(3)), 3)
-QX_STATIC_ASSERT_EQ(SINGLE_ARGUMENT(qx::detail::increase<int, 0>(4)), 4)
-QX_STATIC_ASSERT_EQ(SINGLE_ARGUMENT(qx::detail::increase<int, 0>(5)), 5)
+QX_STATIC_ASSERT_EQ(QX_SINGLE_ARGUMENT(qx::detail::increase<int, 0>(1)), 1);
+QX_STATIC_ASSERT_EQ(QX_SINGLE_ARGUMENT(qx::detail::increase<int, 0>(2)), 2);
+QX_STATIC_ASSERT_EQ(QX_SINGLE_ARGUMENT(qx::detail::increase<int, 0>(3)), 3);
+QX_STATIC_ASSERT_EQ(QX_SINGLE_ARGUMENT(qx::detail::increase<int, 0>(4)), 4);
+QX_STATIC_ASSERT_EQ(QX_SINGLE_ARGUMENT(qx::detail::increase<int, 0>(5)), 5);
 
-QX_STATIC_ASSERT_EQ(SINGLE_ARGUMENT(qx::detail::increase<int, 1>(1)), 2)
-QX_STATIC_ASSERT_EQ(SINGLE_ARGUMENT(qx::detail::increase<int, 1>(2)), 3)
-QX_STATIC_ASSERT_EQ(SINGLE_ARGUMENT(qx::detail::increase<int, 1>(3)), 4)
-QX_STATIC_ASSERT_EQ(SINGLE_ARGUMENT(qx::detail::increase<int, 1>(4)), 5)
-QX_STATIC_ASSERT_EQ(SINGLE_ARGUMENT(qx::detail::increase<int, 1>(5)), 6)
+QX_STATIC_ASSERT_EQ(QX_SINGLE_ARGUMENT(qx::detail::increase<int, 1>(1)), 2);
+QX_STATIC_ASSERT_EQ(QX_SINGLE_ARGUMENT(qx::detail::increase<int, 1>(2)), 3);
+QX_STATIC_ASSERT_EQ(QX_SINGLE_ARGUMENT(qx::detail::increase<int, 1>(3)), 4);
+QX_STATIC_ASSERT_EQ(QX_SINGLE_ARGUMENT(qx::detail::increase<int, 1>(4)), 5);
+QX_STATIC_ASSERT_EQ(QX_SINGLE_ARGUMENT(qx::detail::increase<int, 1>(5)), 6);
 
-QX_STATIC_ASSERT_EQ(SINGLE_ARGUMENT(qx::detail::increase<int, 2>(1)), 3)
-QX_STATIC_ASSERT_EQ(SINGLE_ARGUMENT(qx::detail::increase<int, 2>(2)), 4)
-QX_STATIC_ASSERT_EQ(SINGLE_ARGUMENT(qx::detail::increase<int, 2>(3)), 5)
-QX_STATIC_ASSERT_EQ(SINGLE_ARGUMENT(qx::detail::increase<int, 2>(4)), 6)
-QX_STATIC_ASSERT_EQ(SINGLE_ARGUMENT(qx::detail::increase<int, 2>(5)), 7)
+QX_STATIC_ASSERT_EQ(QX_SINGLE_ARGUMENT(qx::detail::increase<int, 2>(1)), 3);
+QX_STATIC_ASSERT_EQ(QX_SINGLE_ARGUMENT(qx::detail::increase<int, 2>(2)), 4);
+QX_STATIC_ASSERT_EQ(QX_SINGLE_ARGUMENT(qx::detail::increase<int, 2>(3)), 5);
+QX_STATIC_ASSERT_EQ(QX_SINGLE_ARGUMENT(qx::detail::increase<int, 2>(4)), 6);
+QX_STATIC_ASSERT_EQ(QX_SINGLE_ARGUMENT(qx::detail::increase<int, 2>(5)), 7);
 
-QX_STATIC_ASSERT_EQ(SINGLE_ARGUMENT(qx::detail::increase<int, 3>(1)), 4)
-QX_STATIC_ASSERT_EQ(SINGLE_ARGUMENT(qx::detail::increase<int, 3>(2)), 5)
-QX_STATIC_ASSERT_EQ(SINGLE_ARGUMENT(qx::detail::increase<int, 3>(3)), 6)
-QX_STATIC_ASSERT_EQ(SINGLE_ARGUMENT(qx::detail::increase<int, 3>(4)), 7)
-QX_STATIC_ASSERT_EQ(SINGLE_ARGUMENT(qx::detail::increase<int, 3>(5)), 8)
+QX_STATIC_ASSERT_EQ(QX_SINGLE_ARGUMENT(qx::detail::increase<int, 3>(1)), 4);
+QX_STATIC_ASSERT_EQ(QX_SINGLE_ARGUMENT(qx::detail::increase<int, 3>(2)), 5);
+QX_STATIC_ASSERT_EQ(QX_SINGLE_ARGUMENT(qx::detail::increase<int, 3>(3)), 6);
+QX_STATIC_ASSERT_EQ(QX_SINGLE_ARGUMENT(qx::detail::increase<int, 3>(4)), 7);
+QX_STATIC_ASSERT_EQ(QX_SINGLE_ARGUMENT(qx::detail::increase<int, 3>(5)), 8);
 
 
 
 //---------------------------- qx::detail::multiply ----------------------------
 
-QX_STATIC_ASSERT_EQ(SINGLE_ARGUMENT(qx::detail::multiply<int, 1>(1)), 1)
-QX_STATIC_ASSERT_EQ(SINGLE_ARGUMENT(qx::detail::multiply<int, 1>(2)), 2)
-QX_STATIC_ASSERT_EQ(SINGLE_ARGUMENT(qx::detail::multiply<int, 1>(3)), 3)
-QX_STATIC_ASSERT_EQ(SINGLE_ARGUMENT(qx::detail::multiply<int, 1>(4)), 4)
-QX_STATIC_ASSERT_EQ(SINGLE_ARGUMENT(qx::detail::multiply<int, 1>(5)), 5)
+QX_STATIC_ASSERT_EQ(QX_SINGLE_ARGUMENT(qx::detail::multiply<int, 1>(1)), 1);
+QX_STATIC_ASSERT_EQ(QX_SINGLE_ARGUMENT(qx::detail::multiply<int, 1>(2)), 2);
+QX_STATIC_ASSERT_EQ(QX_SINGLE_ARGUMENT(qx::detail::multiply<int, 1>(3)), 3);
+QX_STATIC_ASSERT_EQ(QX_SINGLE_ARGUMENT(qx::detail::multiply<int, 1>(4)), 4);
+QX_STATIC_ASSERT_EQ(QX_SINGLE_ARGUMENT(qx::detail::multiply<int, 1>(5)), 5);
 
-QX_STATIC_ASSERT_EQ(SINGLE_ARGUMENT(qx::detail::multiply<int, 2>(1)), 2)
-QX_STATIC_ASSERT_EQ(SINGLE_ARGUMENT(qx::detail::multiply<int, 2>(2)), 4)
-QX_STATIC_ASSERT_EQ(SINGLE_ARGUMENT(qx::detail::multiply<int, 2>(3)), 6)
-QX_STATIC_ASSERT_EQ(SINGLE_ARGUMENT(qx::detail::multiply<int, 2>(4)), 8)
-QX_STATIC_ASSERT_EQ(SINGLE_ARGUMENT(qx::detail::multiply<int, 2>(5)), 10)
+QX_STATIC_ASSERT_EQ(QX_SINGLE_ARGUMENT(qx::detail::multiply<int, 2>(1)), 2);
+QX_STATIC_ASSERT_EQ(QX_SINGLE_ARGUMENT(qx::detail::multiply<int, 2>(2)), 4);
+QX_STATIC_ASSERT_EQ(QX_SINGLE_ARGUMENT(qx::detail::multiply<int, 2>(3)), 6);
+QX_STATIC_ASSERT_EQ(QX_SINGLE_ARGUMENT(qx::detail::multiply<int, 2>(4)), 8);
+QX_STATIC_ASSERT_EQ(QX_SINGLE_ARGUMENT(qx::detail::multiply<int, 2>(5)), 10);
 
-QX_STATIC_ASSERT_EQ(SINGLE_ARGUMENT(qx::detail::multiply<int, 3>(1)), 3)
-QX_STATIC_ASSERT_EQ(SINGLE_ARGUMENT(qx::detail::multiply<int, 3>(2)), 6)
-QX_STATIC_ASSERT_EQ(SINGLE_ARGUMENT(qx::detail::multiply<int, 3>(3)), 9)
-QX_STATIC_ASSERT_EQ(SINGLE_ARGUMENT(qx::detail::multiply<int, 3>(4)), 12)
-QX_STATIC_ASSERT_EQ(SINGLE_ARGUMENT(qx::detail::multiply<int, 3>(5)), 15)
+QX_STATIC_ASSERT_EQ(QX_SINGLE_ARGUMENT(qx::detail::multiply<int, 3>(1)), 3);
+QX_STATIC_ASSERT_EQ(QX_SINGLE_ARGUMENT(qx::detail::multiply<int, 3>(2)), 6);
+QX_STATIC_ASSERT_EQ(QX_SINGLE_ARGUMENT(qx::detail::multiply<int, 3>(3)), 9);
+QX_STATIC_ASSERT_EQ(QX_SINGLE_ARGUMENT(qx::detail::multiply<int, 3>(4)), 12);
+QX_STATIC_ASSERT_EQ(QX_SINGLE_ARGUMENT(qx::detail::multiply<int, 3>(5)), 15);
 
-QX_STATIC_ASSERT_EQ(SINGLE_ARGUMENT(qx::detail::multiply<int, 0>(1)), 0)
-QX_STATIC_ASSERT_EQ(SINGLE_ARGUMENT(qx::detail::multiply<int, 0>(2)), 0)
-QX_STATIC_ASSERT_EQ(SINGLE_ARGUMENT(qx::detail::multiply<int, 0>(3)), 0)
-QX_STATIC_ASSERT_EQ(SINGLE_ARGUMENT(qx::detail::multiply<int, 0>(4)), 0)
-QX_STATIC_ASSERT_EQ(SINGLE_ARGUMENT(qx::detail::multiply<int, 0>(5)), 0)
+QX_STATIC_ASSERT_EQ(QX_SINGLE_ARGUMENT(qx::detail::multiply<int, 0>(1)), 0);
+QX_STATIC_ASSERT_EQ(QX_SINGLE_ARGUMENT(qx::detail::multiply<int, 0>(2)), 0);
+QX_STATIC_ASSERT_EQ(QX_SINGLE_ARGUMENT(qx::detail::multiply<int, 0>(3)), 0);
+QX_STATIC_ASSERT_EQ(QX_SINGLE_ARGUMENT(qx::detail::multiply<int, 0>(4)), 0);
+QX_STATIC_ASSERT_EQ(QX_SINGLE_ARGUMENT(qx::detail::multiply<int, 0>(5)), 0);
 
 
 

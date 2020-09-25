@@ -12,7 +12,7 @@
 //==============================================================================
 #pragma once
 
-#ifdef _WIN64
+#if defined(_WIN64) || defined(_WIN32)
     #define QX_WIN 1
 #else
     #define QX_WIN 0
@@ -28,4 +28,12 @@
     #define QX_LINUX 1
 #else
     #define QX_LINUX 0
+#endif
+
+#if _DEBUG
+    #define QX_DEBUG 1
+    #define QX_RELEASE 0
+#else
+    #define QX_DEBUG 0
+    #define QX_RELEASE 1
 #endif

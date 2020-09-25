@@ -15,4 +15,4 @@ set(FOLDER_FILES
     ${CMAKE_CURRENT_SOURCE_DIR}/logger.inl
 )
 
-append_sources("${FOLDER_FILES}") 
+append_sources("${FOLDER_FILES}")
