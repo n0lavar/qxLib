@@ -131,9 +131,9 @@ inline void logger::ProcessOutput(level         eLogLevel,
             const char* pszColor = nullptr;
             switch (eLogLevel)
             {
-            case level::all:     pszColor = ANSI_COLOR_RESET;    break;
-            case level::errors:  pszColor = ANSI_COLOR_YELLOW;   break;
-            case level::asserts: pszColor = ANSI_COLOR_RED;      break;
+            case level::all:     pszColor = SAutoPrintfColor::ANSI_COLOR_RESET;  break;
+            case level::errors:  pszColor = SAutoPrintfColor::ANSI_COLOR_YELLOW; break;
+            case level::asserts: pszColor = SAutoPrintfColor::ANSI_COLOR_RED;    break;
             }
 
             OutputToConsole(sMsg, pszColor);

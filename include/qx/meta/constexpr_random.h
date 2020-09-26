@@ -53,12 +53,12 @@ constexpr u32 uniform_distribution(u32 nPrev)
 // returns preudo random number of uniform distrubution with each next() call
 template<
     typename Tag,
-    u32 SEED,
+    u32 SEED    = 0u,
     u32 MIN     = std::numeric_limits<u32>::min(),
     u32 MAX     = std::numeric_limits<u32>::max(),
-    u32 MOD     = 2147483648,
-    u32 MULT    = 1103515245,
-    u32 INC     = 12345
+    u32 MOD     = 2147483648u,
+    u32 MULT    = 1103515245u,
+    u32 INC     = 12345u
 >
 using constexpr_random = constexpr_sequence<
     Tag,
@@ -70,4 +70,7 @@ using constexpr_random = constexpr_sequence<
 }
 
 // creates unique u32 seed for current: file, date, time (seconds) and line number
-#define QX_UNIQUE_SEED (qx::detail::murmur_32_hash(__FILE__ __DATE__ __TIME__, qx::meta::strlen(__FILE__ __DATE__ __TIME__), 42) + __LINE__)
+#define QX_UNIQUE_SEED (qx::detail::murmur_32_hash(__FILE__ __DATE__ __TIME__,                      \
+                                                   qx::meta::strlen(__FILE__ __DATE__ __TIME__),    \
+                                                   42)                                              \
+                                                        + __LINE__)

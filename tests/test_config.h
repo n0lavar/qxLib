@@ -71,3 +71,7 @@
 #ifndef QX_TEST_USEFUL_MACROS
     #define QX_TEST_USEFUL_MACROS 1
 #endif
+
+#ifndef QX_TEST_SINGLETON
+    #define QX_TEST_SINGLETON 1
+#endif

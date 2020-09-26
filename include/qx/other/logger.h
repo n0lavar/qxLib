@@ -30,21 +30,7 @@
 namespace qx
 {
 
-constexpr const char* ANSI_COLOR_RESET          = "\033[0m";
-constexpr const char* ANSI_COLOR_RED            = "\033[0;31m";
-constexpr const char* ANSI_COLOR_RED_BOLD       = "\033[1;31m";
-constexpr const char* ANSI_COLOR_GREEN          = "\033[0;32m";
-constexpr const char* ANSI_COLOR_GREEN_BOLD     = "\033[1;32m";
-constexpr const char* ANSI_COLOR_YELLOW         = "\033[0;33m";
-constexpr const char* ANSI_COLOR_YELLOW_BOLD    = "\033[01;33m";
-constexpr const char* ANSI_COLOR_BLUE           = "\033[0;34m";
-constexpr const char* ANSI_COLOR_BLUE_BOLD      = "\033[1;34m";
-constexpr const char* ANSI_COLOR_MAGENTA        = "\033[0;35m";
-constexpr const char* ANSI_COLOR_MAGENTA_BOLD   = "\033[1;35m";
-constexpr const char* ANSI_COLOR_CYAN           = "\033[0;36m";
-constexpr const char* ANSI_COLOR_CYAN_BOLD      = "\033[1;36m";
-
-#define TRACE(format, ...) qx::logger::getInstance().ProcessOutput(             \
+#define TRACE(format, ...) qx::logger::get_instance().ProcessOutput(            \
     qx::logger::level::all,                                                     \
     format,                                                                     \
     nullptr,                                                                    \
@@ -53,7 +39,7 @@ constexpr const char* ANSI_COLOR_CYAN_BOLD      = "\033[1;36m";
     __LINE__,                                                                   \
     __VA_ARGS__)
 
-#define TR_ERROR(format, ...) qx::logger::getInstance().ProcessOutput(          \
+#define TR_ERROR(format, ...) qx::logger::get_instance().ProcessOutput(         \
     qx::logger::level::errors,                                                  \
     format,                                                                     \
     nullptr,                                                                    \
@@ -62,7 +48,7 @@ constexpr const char* ANSI_COLOR_CYAN_BOLD      = "\033[1;36m";
     __LINE__,                                                                   \
     __VA_ARGS__)
 
-#define _TR_ASSERT(expr, format, ...) qx::logger::getInstance().ProcessOutput(  \
+#define _TR_ASSERT(expr, format, ...) qx::logger::get_instance().ProcessOutput( \
     qx::logger::level::asserts,                                                 \
     format,                                                                     \
     expr,                                                                       \
@@ -84,10 +70,24 @@ constexpr const char* ANSI_COLOR_CYAN_BOLD      = "\033[1;36m";
 //================================================================================
 class logger
 {
-    SINGLETON_CD(logger, OnCreate();, OnTerminate(););
+    QX_SINGLETON_CD(logger, OnCreate();, OnTerminate(););
 
     struct SAutoPrintfColor
     {
+        static constexpr const char* ANSI_COLOR_RESET          = "\033[0m";
+        static constexpr const char* ANSI_COLOR_RED            = "\033[0;31m";
+        static constexpr const char* ANSI_COLOR_RED_BOLD       = "\033[1;31m";
+        static constexpr const char* ANSI_COLOR_GREEN          = "\033[0;32m";
+        static constexpr const char* ANSI_COLOR_GREEN_BOLD     = "\033[1;32m";
+        static constexpr const char* ANSI_COLOR_YELLOW         = "\033[0;33m";
+        static constexpr const char* ANSI_COLOR_YELLOW_BOLD    = "\033[01;33m";
+        static constexpr const char* ANSI_COLOR_BLUE           = "\033[0;34m";
+        static constexpr const char* ANSI_COLOR_BLUE_BOLD      = "\033[1;34m";
+        static constexpr const char* ANSI_COLOR_MAGENTA        = "\033[0;35m";
+        static constexpr const char* ANSI_COLOR_MAGENTA_BOLD   = "\033[1;35m";
+        static constexpr const char* ANSI_COLOR_CYAN           = "\033[0;36m";
+        static constexpr const char* ANSI_COLOR_CYAN_BOLD      = "\033[1;36m";
+
         SAutoPrintfColor (const char* color) { printf("%s", color);            }
         ~SAutoPrintfColor(void)              { printf("%s", ANSI_COLOR_RESET); }
     };
