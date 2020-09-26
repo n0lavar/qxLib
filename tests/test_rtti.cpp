@@ -2,7 +2,7 @@
 //
 //!\file                          test_rtti.cpp
 //
-//!\brief       Contains tests for qx RTTI
+//!\brief       Tests for qx RTTI
 //!\details     ~
 //
 //!\author      Khrapov
@@ -10,7 +10,7 @@
 //!\copyright   (c) Nick Khrapov, 2020. All right reserved.
 //
 //==============================================================================
-#include <config.h>
+#include <test_config.h>
 
 //V_EXCLUDE_PATH *test_rtti.cpp
 
@@ -19,6 +19,7 @@
 #include <qx/other/rtti.h>
 #include <memory>
 #include <gtest/gtest.h>
+
 
 #define IS_CONSTEXPR(a) static_assert((a) || !(a));
 

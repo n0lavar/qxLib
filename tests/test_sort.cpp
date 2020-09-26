@@ -2,7 +2,7 @@
 //
 //!\file                        test_sort.cpp
 //
-//!\brief       test sort algorithms
+//!\brief       Tests for sort algorithms
 //!\details     ~
 //
 //!\author      Khrapov
@@ -10,7 +10,9 @@
 //!\copyright   (c) Nick Khrapov, 2020. All right reserved.
 //
 //==============================================================================
-#include <config.h>
+#include <test_config.h>
+
+//V_EXCLUDE_PATH *test_sort.cpp
 
 #if QX_TEST_SORT
 
@@ -19,6 +21,7 @@
 #include <array>
 #include <limits>
 #include <gtest/gtest.h>
+
 
 #undef INT_MAX
 #undef INT_MIN

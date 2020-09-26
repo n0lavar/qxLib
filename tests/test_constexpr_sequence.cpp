@@ -2,7 +2,7 @@
 //
 //!\file                  test_constexpr_sequence.cpp
 //
-//!\brief       Tests for constexpr_counter class
+//!\brief       Tests for qx::constexpr_sequence class
 //!\details     ~
 //
 //!\author      Khrapov
@@ -10,11 +10,14 @@
 //!\copyright   (c) Nick Khrapov, 2020. All right reserved.
 //
 //==============================================================================
+#include <test_config.h>
+
+//V_EXCLUDE_PATH *test_constexpr_sequence.cpp
+
+#if QX_TEST_CONSTEXPR_SEQUENCE
+
 #include <qx/meta/constexpr_sequence.h>
 #include <qx/other/useful_macros.h>
-
- //V_EXCLUDE_PATH *test_constexpr_counter.cpp
-
 
 
 //---------------------------- qx::detail::increase ----------------------------
@@ -137,3 +140,5 @@ QX_STATIC_ASSERT_EQ(counter_G_0_0::next(),  0);
 QX_STATIC_ASSERT_EQ(counter_G_0_0::value(), 0);
 QX_STATIC_ASSERT_EQ(counter_G_0_0::value(), 0);
 QX_STATIC_ASSERT_EQ(counter_G_0_0::value(), 0);
+
+#endif

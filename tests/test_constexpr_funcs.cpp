@@ -10,9 +10,14 @@
 //!\copyright   (c) Nick Khrapov, 2020. All right reserved.
 //
 //==============================================================================
+#include <test_config.h>
+
+//V_EXCLUDE_PATH *test_constexpr_funcs.cpp
+
+#if QX_TEST_CONSTEXPR_FUNCS
+
 #include <qx/meta/constexpr_funcs.h>
 #include <qx/other/useful_macros.h>
-
 
 
 //------------------------------ qx::meta::strlen ------------------------------
@@ -70,3 +75,5 @@ static_assert( qx::meta::epsilon_equal(0.5, 0.45, 0.1));
 static_assert( qx::meta::epsilon_equal(0.5, 0.48, 0.1));
 static_assert( qx::meta::epsilon_equal(0.5, 0.49, 0.1));
 static_assert(!qx::meta::epsilon_equal(0.5, 0.39, 0.1));
+
+#endif

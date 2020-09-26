@@ -2,7 +2,7 @@
 //
 //!\file                  test_triangular_vector.cpp
 //
-//!\brief       tests for qx::triangular_vector
+//!\brief       Tests for qx::triangular_vector
 //!\details     ~
 //
 //!\author      Khrapov
@@ -10,7 +10,7 @@
 //!\copyright   (c) Nick Khrapov, 2020. All right reserved.
 //
 //==============================================================================
-#include <config.h>
+#include <test_config.h>
 
 //V_EXCLUDE_PATH *test_triangular_vector.cpp
 
@@ -19,6 +19,7 @@
 #include <qx/containers/triangular_vector.h>
 #include <gtest/gtest.h>
 #include <algorithm>
+
 
 TEST(TestQxTriangularVector, constructing)
 {

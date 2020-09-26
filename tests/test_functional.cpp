@@ -2,7 +2,7 @@
 //
 //!\file                     test_functional.cpp
 //
-//!\brief       test functional algorithms
+//!\brief       Tests for functional algorithms
 //!\details     ~
 //
 //!\author      Khrapov
@@ -10,7 +10,7 @@
 //!\copyright   (c) Nick Khrapov, 2020. All right reserved.
 //
 //==============================================================================
-#include <config.h>
+#include <test_config.h>
 
 //V_EXCLUDE_PATH *test_functional.cpp
 
@@ -18,6 +18,7 @@
 
 #include <qx/alg/functional.h>
 #include <gtest/gtest.h>
+
 
 TEST(functional, linear_interpolation)
 {

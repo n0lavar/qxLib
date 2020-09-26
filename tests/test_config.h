@@ -47,3 +47,27 @@
 #ifndef QX_TEST_RTTI
     #define QX_TEST_RTTI 1
 #endif
+
+#ifndef QX_TEST_CONSTEXPR_SEQUENCE
+    #define QX_TEST_CONSTEXPR_SEQUENCE 1
+#endif
+
+#ifndef QX_TEST_CONSTEXPR_RANDOM
+    #define QX_TEST_CONSTEXPR_RANDOM 1
+#endif
+
+#ifndef QX_TEST_CONSTEXPR_FUNCS
+    #define QX_TEST_CONSTEXPR_FUNCS 1
+#endif
+
+#ifndef QX_TEST_CONSTEXPR_FLAG
+    #define QX_TEST_CONSTEXPR_FLAG 1
+#endif
+
+#ifndef QX_TEST_USEFUL_FUNCS
+    #define QX_TEST_USEFUL_FUNCS 1
+#endif
+
+#ifndef QX_TEST_USEFUL_MACROS
+    #define QX_TEST_USEFUL_MACROS 1
+#endif

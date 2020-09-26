@@ -2,7 +2,7 @@
 //
 //!\file                      test_numerical.cpp
 //
-//!\brief       test numerical algorithms
+//!\brief       Tests for numerical algorithms
 //!\details     ~
 //
 //!\author      Khrapov
@@ -10,7 +10,7 @@
 //!\copyright   (c) Nick Khrapov, 2020. All right reserved.
 //
 //==============================================================================
-#include <config.h>
+#include <test_config.h>
 
 //V_EXCLUDE_PATH *test_numerical.cpp
 
@@ -19,6 +19,7 @@
 #include <gtest/gtest.h>
 #include <qx/alg/numerical.h>
 #include <qx/other/useful_macros.h>
+
 
 TEST(numerical, gcd)
 {

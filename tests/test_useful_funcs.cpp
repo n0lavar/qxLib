@@ -10,11 +10,15 @@
 //!\copyright   (c) Nick Khrapov, 2020. All right reserved.
 //
 //==============================================================================
+#include <test_config.h>
+
+ //V_EXCLUDE_PATH *test_useful_funcs.cpp
+
+#if QX_TEST_USEFUL_FUNCS
+
 #include <qx/other/useful_macros.h>
 #include <qx/containers/container.h>
 #include <gtest/gtest.h>
-
- //V_EXCLUDE_PATH *test_useful_funcs.cpp
 
 
 //--------------------------------- qx::between --------------------------------
@@ -119,3 +123,5 @@ TEST(useful_funcs, destruct)
     qx::destruct(v.begin(), v.end() - 1);
     ASSERT_EQ(DestructChecker::counter, 1);
 }
+
+#endif

@@ -2,7 +2,7 @@
 //
 //!\file                   test_constexpr_random.cpp
 //
-//!\brief       Tests for constexpr_random class
+//!\brief       Tests for qx::constexpr_random class
 //!\details     ~
 //
 //!\author      Khrapov
@@ -10,13 +10,19 @@
 //!\copyright   (c) Nick Khrapov, 2020. All right reserved.
 //
 //==============================================================================
+#include <test_config.h>
+
+//V_EXCLUDE_PATH *test_constexpr_random.cpp
+
+#if QX_TEST_CONSTEXPR_RANDOM
+
 #include <qx/meta/constexpr_random.h>
 #include <qx/other/useful_macros.h>
 #include <array>
 
- //V_EXCLUDE_PATH *test_constexpr_random.cpp
 
-using random_check_duplicate = qx::constexpr_random<class TagA, 0, 0, 100>;
+constexpr u32 CONST_SEED = 0u;
+using random_check_duplicate = qx::constexpr_random<class TagA, CONST_SEED, 0, 100>;
 QX_STATIC_ASSERT_EQ(random_check_duplicate::next(), 45);
 QX_STATIC_ASSERT_EQ(random_check_duplicate::next(), 66);
 QX_STATIC_ASSERT_EQ(random_check_duplicate::next(), 31);
@@ -128,3 +134,5 @@ QX_STATIC_ASSERT_BETWEEN(left, random1::next(), right);
 QX_STATIC_ASSERT_BETWEEN(left, random1::next(), right);
 QX_STATIC_ASSERT_BETWEEN(left, random1::next(), right);
 QX_STATIC_ASSERT_BETWEEN(left, random1::next(), right);
+
+#endif

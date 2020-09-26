@@ -2,7 +2,7 @@
 //
 //!\file                    test_constexpr_flag.cpp
 //
-//!\brief       Test constexpr_flag class
+//!\brief       Tests for qx::constexpr_flag class
 //!\details     ~
 //
 //!\author      Khrapov
@@ -10,10 +10,15 @@
 //!\copyright   (c) Nick Khrapov, 2020. All right reserved.
 //
 //==============================================================================
+#include <test_config.h>
+
+ //V_EXCLUDE_PATH *test_constexpr_flag.cpp
+
+#if QX_TEST_CONSTEXPR_FLAG
+
 #include <qx/meta/constexpr_flag.h>
 #include <qx/other/useful_macros.h>
 
- //V_EXCLUDE_PATH *test_constexpr_flag.cpp
 
 using Flag1 = qx::constexpr_flag<class FtagTag1>;
 QX_STATIC_ASSERT_EQ(Flag1::test(),         false);
@@ -43,3 +48,5 @@ using Flag5 = qx::constexpr_flag<class FtagTag5, int, 33, -11>;
 QX_STATIC_ASSERT_EQ(Flag5::test(),         33);
 QX_STATIC_ASSERT_EQ(Flag5::test_and_set(), 33);
 QX_STATIC_ASSERT_EQ(Flag5::test(),         -11);
+
+#endif

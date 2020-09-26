@@ -2,7 +2,7 @@
 //
 //!\file                      test_vector2d.cpp
 //
-//!\brief       tests for qx::vector2d
+//!\brief       Tests for qx::vector2d
 //!\details     ~
 //
 //!\author      Khrapov
@@ -10,7 +10,7 @@
 //!\copyright   (c) Nick Khrapov, 2020. All right reserved.
 //
 //==============================================================================
-#include <config.h>
+#include <test_config.h>
 
 //V_EXCLUDE_PATH *test_vector2d.cpp
 
@@ -19,6 +19,7 @@
 #include <qx/containers/vector2d.h>
 #include <gtest/gtest.h>
 #include <array>
+
 
 TEST(TestQxVector2d, constructing)
 {

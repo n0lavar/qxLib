@@ -2,7 +2,7 @@
 //
 //!\file                       test_list_se.cpp
 //
-//!\brief       test single ended list qx::list_se
+//!\brief       Tests for qx::list_se
 //!\details     ~
 //
 //!\author      Khrapov
@@ -10,7 +10,7 @@
 //!\copyright   (c) Nick Khrapov, 2020. All right reserved.
 //
 //==============================================================================
-#include <config.h>
+#include <test_config.h>
 
 //V_EXCLUDE_PATH *test_list_se.cpp
 
@@ -20,6 +20,7 @@
 #include <gtest/gtest.h>
 #include <algorithm>
 #include <string>
+
 
 TEST(list_se, testing)
 {

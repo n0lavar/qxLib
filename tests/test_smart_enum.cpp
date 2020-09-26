@@ -2,7 +2,7 @@
 //
 //!\file                     test_smart_enum.cpp
 //
-//!\brief       Contains tests for SMART_ENUM macro
+//!\brief       Tests for SMART_ENUM macro
 //!\details     ~
 //
 //!\author      Khrapov
@@ -10,12 +10,15 @@
 //!\copyright   (c) Nick Khrapov, 2020. All right reserved.
 //
 //==============================================================================
-#include <config.h>
+#include <test_config.h>
+
+//V_EXCLUDE_PATH *test_smart_enum.cpp
 
 #if QX_TEST_SMART_ENUM
 
 #include <qx/other/smart_enum.h>
 #include <gtest/gtest.h>
+
 
 SMART_ENUM(colors_header, -3,
     red,

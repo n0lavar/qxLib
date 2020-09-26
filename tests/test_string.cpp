@@ -2,7 +2,7 @@
 //
 //!\file                       test_string.cpp
 //
-//!\brief       test qx::string
+//!\brief       Tests for qx::basic_string
 //!\details     ~
 //
 //!\author      Khrapov
@@ -10,7 +10,7 @@
 //!\copyright   (c) Nick Khrapov, 2020. All right reserved.
 //
 //==============================================================================
-#include <config.h>
+#include <test_config.h>
 
 //V_EXCLUDE_PATH *test_string.cpp
 
@@ -19,6 +19,7 @@
 #include <qx/containers/string.h>
 #include <unordered_map>
 #include <gtest/gtest.h>
+
 
 //==============================================================================
 //

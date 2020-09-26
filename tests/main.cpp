@@ -2,7 +2,7 @@
 //
 //!\file                           main.cpp
 //
-//!\brief       Entry point for test
+//!\brief       Entry point for tests
 //!\details     ~
 //
 //!\author      Khrapov
@@ -10,7 +10,6 @@
 //!\copyright   (c) Nick Khrapov, 2020. All right reserved.
 //
 //==============================================================================
-#include <config.h>
 #include <gtest/gtest.h>
 
 int main(int argc, char** argv)

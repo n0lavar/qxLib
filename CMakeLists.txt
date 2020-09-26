@@ -28,7 +28,7 @@ source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR}/include/qx FILES ${ALL_SOURCES})
 
 set (QXLIB_ALL_SOURCES
     ${ALL_SOURCES}
-    "${CMAKE_CURRENT_LIST_DIR}/tests/config.h"
+    "${CMAKE_CURRENT_LIST_DIR}/tests/test_config.h"
     "${CMAKE_CURRENT_LIST_DIR}/include/qx/dummy_main.cpp"
 )
 
