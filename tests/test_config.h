@@ -75,3 +75,7 @@
 #ifndef QX_TEST_SINGLETON
     #define QX_TEST_SINGLETON 1
 #endif
+
+#ifndef QX_TEST_TYPEDEFS
+    #define QX_TEST_TYPEDEFS 1
+#endif
