@@ -32,14 +32,9 @@ class benchmark
 {
 public:
 
-    using clock         = std::chrono::steady_clock;
-    using time_point    = clock::time_point;
-    using duration      = std::chrono::nanoseconds;
-
-    benchmark(void)
-    {
-        start();
-    }
+    using clock      = std::chrono::steady_clock;
+    using time_point = clock::time_point;
+    using duration   = std::chrono::nanoseconds;
 
     void start(void)
     {

@@ -87,3 +87,7 @@
 #ifndef QX_TEST_RANDOM
     #define QX_TEST_RANDOM 1
 #endif
+
+#ifndef QX_TEST_BENCHMARK
+    #define QX_TEST_BENCHMARK 1
+#endif
