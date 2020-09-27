@@ -30,7 +30,7 @@ namespace qx
 //!\date   22.03.2020
 //==============================================================================
 template<class T>
-typename std::enable_if<std::is_integral_v<T>, T>::type random (T min, T max)
+typename std::enable_if_t<std::is_integral_v<T>, T> random(T min, T max)
 {
     static std::default_random_engine generator(static_cast<unsigned>(std::time(nullptr)));
     std::uniform_int_distribution<T> distribution(min, max);
@@ -48,7 +48,7 @@ typename std::enable_if<std::is_integral_v<T>, T>::type random (T min, T max)
 //!\date   22.03.2020
 //==============================================================================
 template<class T>
-typename std::enable_if<std::is_floating_point_v<T>, T>::type random(T min, T max)
+typename std::enable_if_t<std::is_floating_point_v<T>, T> random(T min, T max)
 {
     static std::default_random_engine generator(static_cast<unsigned>(std::time(nullptr)));
     std::uniform_real_distribution<T> distribution(min, max);

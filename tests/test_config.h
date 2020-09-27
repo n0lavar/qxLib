@@ -83,3 +83,7 @@
 #ifndef QX_TEST_TYPE_TRAITS
     #define QX_TEST_TYPE_TRAITS 1
 #endif
+
+#ifndef QX_TEST_RANDOM
+    #define QX_TEST_RANDOM 1
+#endif
