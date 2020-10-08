@@ -108,8 +108,8 @@ TYPED_TEST_SUITE(TestLogger, Implementations);
 
 #define TEST_LOGGER                                     \
     TRACE("Start test");                                \
-    TRACE("%f", 1.f);                 \
-    TRACE_ERROR("%f %d %s", 1.f, 2, "three");           \
+    TRACE("%f", 1.f);                                   \
+    TRACE_ERROR("%f %d", 1.f, 2);                       \
     TRACE_ASSERT(false, "%f %d %s", 1.f, 2, "three");   \
     TRACE("End test\n");
 
