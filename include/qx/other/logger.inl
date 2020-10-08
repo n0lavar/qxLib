@@ -175,17 +175,17 @@ inline void logger::set_logs_folder(const char* pszFolder)
 //==============================================================================
 inline const char* logger::get_time_str(void)
 {
-    std::time_t t = time(0);
-    std::tm now;
-    localtime_s(&now, &t);
+    std::time_t t = std::time(nullptr);
+    std::tm* now = std::localtime(&t);
+
     m_sTime.format(
         "%02d-%02d-%04d_%02d-%02d-%02d",
-        now.tm_mday,
-        now.tm_mon,
-        now.tm_year + 1900,
-        now.tm_hour,
-        now.tm_min,
-        now.tm_sec);
+        now->tm_mday,
+        now->tm_mon,
+        now->tm_year + 1900,
+        now->tm_hour,
+        now->tm_min,
+        now->tm_sec);
 
     return m_sTime.data();
 }
