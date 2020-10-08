@@ -21,14 +21,14 @@
 
 class CTestSingleton
 {
-    QX_SINGLETON_CDP(CTestSingleton, OnCreate();, OnTerminate();, ProcessGetter();)
+    QX_SINGLETON_CDP(CTestSingleton, on_create();, on_terminate();, ProcessGetter();)
 
-    void OnCreate(void)
+    void on_create(void)
     {
         m_bCreated = true;
     }
 
-    void OnTerminate(void)
+    void on_terminate(void)
     {
         m_bCreated = false;
     }

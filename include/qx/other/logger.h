@@ -20,48 +20,68 @@
 
 #include <qx/other/singleton.h>
 #include <qx/containers/string.h>
-#include <qx/other/typedefs.h>
 #include <qx/other/config.h>
 
-#ifndef ENABLE_DETAIL_TRACE_INFO
-    #define ENABLE_DETAIL_TRACE_INFO QX_DEBUG
+#ifndef QX_ENABLE_DETAIL_TRACE_INFO
+    #define QX_ENABLE_DETAIL_TRACE_INFO QX_DEBUG
 #endif
+
+#define QX_TRACE_FROM(loggerInstanse, format, ...)              \
+    loggerInstanse.process_output(                              \
+        qx::logger::level::all,                                 \
+        format,                                                 \
+        nullptr,                                                \
+        QX_SHORT_FILE,                                          \
+        __FUNCTION__,                                           \
+        __LINE__,                                               \
+        nullptr,                                                \
+        __VA_ARGS__)
+
+#define QX_TRACE_ERROR_FROM(loggerInstanse, format, ...)        \
+    loggerInstanse.process_output(                              \
+        qx::logger::level::errors,                              \
+        format,                                                 \
+        nullptr,                                                \
+        QX_SHORT_FILE,                                          \
+        __FUNCTION__,                                           \
+        __LINE__,                                               \
+        qx::logger::auto_terminal_color::yellow,                \
+        __VA_ARGS__)
+
+#define QX_TRACE_ASSERT_FROM(loggerInstanse, expr, format, ...) \
+    loggerInstanse.process_output(                              \
+        qx::logger::level::asserts,                             \
+        format,                                                 \
+        expr,                                                   \
+        QX_SHORT_FILE,                                          \
+        __FUNCTION__,                                           \
+        __LINE__,                                               \
+        qx::logger::auto_terminal_color::red,                   \
+        __VA_ARGS__)
+
+
+// redefine theese macros in your own header with renaming only or using you instance of logger
+
+// common info
+#define QX_TRACE(format, ...)                                   \
+    QX_TRACE_FROM(qx::logger_singleton::get_instance(), format, __VA_ARGS__)
+
+// error info
+#define QX_TRACE_ERROR(format, ...)                             \
+    QX_TRACE_ERROR_FROM(qx::logger_singleton::get_instance(), format, __VA_ARGS__)
+
+// assertion failed info
+#define QX_TRACE_ASSERT(expr, format, ...)                      \
+    QX_TRACE_ASSERT_FROM(qx::logger_singleton::get_instance(), expr, format, __VA_ARGS__)
 
 namespace qx
 {
-
-#define TRACE(format, ...) qx::logger::get_instance().ProcessOutput(            \
-    qx::logger::level::all,                                                     \
-    format,                                                                     \
-    nullptr,                                                                    \
-    QX_SHORT_FILE,                                                              \
-    __FUNCTION__,                                                               \
-    __LINE__,                                                                   \
-    __VA_ARGS__)
-
-#define TR_ERROR(format, ...) qx::logger::get_instance().ProcessOutput(         \
-    qx::logger::level::errors,                                                  \
-    format,                                                                     \
-    nullptr,                                                                    \
-    QX_SHORT_FILE,                                                              \
-    __FUNCTION__,                                                               \
-    __LINE__,                                                                   \
-    __VA_ARGS__)
-
-#define _TR_ASSERT(expr, format, ...) qx::logger::get_instance().ProcessOutput( \
-    qx::logger::level::asserts,                                                 \
-    format,                                                                     \
-    expr,                                                                       \
-    QX_SHORT_FILE,                                                              \
-    __FUNCTION__,                                                               \
-    __LINE__,                                                                   \
-    __VA_ARGS__)
 
 //================================================================================
 //
 //!\class                         qx::logger
 //
-//!\brief   Logger singleton
+//!\brief   Logger class
 //!\details ~
 //
 //!\author  Khrapov
@@ -70,29 +90,27 @@ namespace qx
 //================================================================================
 class logger
 {
-    QX_SINGLETON_CD(logger, OnCreate();, OnTerminate(););
-
-    struct SAutoPrintfColor
-    {
-        static constexpr const char* ANSI_COLOR_RESET          = "\033[0m";
-        static constexpr const char* ANSI_COLOR_RED            = "\033[0;31m";
-        static constexpr const char* ANSI_COLOR_RED_BOLD       = "\033[1;31m";
-        static constexpr const char* ANSI_COLOR_GREEN          = "\033[0;32m";
-        static constexpr const char* ANSI_COLOR_GREEN_BOLD     = "\033[1;32m";
-        static constexpr const char* ANSI_COLOR_YELLOW         = "\033[0;33m";
-        static constexpr const char* ANSI_COLOR_YELLOW_BOLD    = "\033[01;33m";
-        static constexpr const char* ANSI_COLOR_BLUE           = "\033[0;34m";
-        static constexpr const char* ANSI_COLOR_BLUE_BOLD      = "\033[1;34m";
-        static constexpr const char* ANSI_COLOR_MAGENTA        = "\033[0;35m";
-        static constexpr const char* ANSI_COLOR_MAGENTA_BOLD   = "\033[1;35m";
-        static constexpr const char* ANSI_COLOR_CYAN           = "\033[0;36m";
-        static constexpr const char* ANSI_COLOR_CYAN_BOLD      = "\033[1;36m";
-
-        SAutoPrintfColor (const char* color) { printf("%s", color);            }
-        ~SAutoPrintfColor(void)              { printf("%s", ANSI_COLOR_RESET); }
-    };
-
 public:
+
+    struct auto_terminal_color
+    {
+        static constexpr const char* reset          = "\033[0m";
+        static constexpr const char* red            = "\033[0;31m";
+        static constexpr const char* red_bold       = "\033[1;31m";
+        static constexpr const char* green          = "\033[0;32m";
+        static constexpr const char* green_bold     = "\033[1;32m";
+        static constexpr const char* yellow         = "\033[0;33m";
+        static constexpr const char* yellow_bold    = "\033[01;33m";
+        static constexpr const char* blue           = "\033[0;34m";
+        static constexpr const char* blue_bold      = "\033[1;34m";
+        static constexpr const char* magenta        = "\033[0;35m";
+        static constexpr const char* magenta_bold   = "\033[1;35m";
+        static constexpr const char* cyan           = "\033[0;36m";
+        static constexpr const char* cyan_bold      = "\033[1;36m";
+
+        auto_terminal_color (const char* color) { std::cout << color; }
+        ~auto_terminal_color(void)              { std::cout << reset; }
+    };
 
     //!< Log files policy
     enum class policy
@@ -132,38 +150,72 @@ public:
 
 public:
 
+         logger                     (void);
+         ~logger                    (void);
+
     template<class ... Args>
-    void ProcessOutput      (level                  eLogLevel,
-                             const char           * pszFormat,
-                             const char           * pszAssertExpression,
-                             const char           * pszFile,
-                             const char           * pszFunction,
-                             int                    nLine,
-                             Args...                args);
+    void process_output             (level                  eLogLevel,
+                                     const char           * pszFormat,
+                                     const char           * pszAssertExpression,
+                                     const char           * pszFile,
+                                     const char           * pszFunction,
+                                     int                    nLine,
+                                     const char           * pszColor,
+                                     Args...                args);
 
-    void RegisterUnit       (const char           * pszUnitName,
-                             const TraceUnitInfo  & unit);
-    void DeregisterUnit     (const char           * pszUnitName);
+    void register_unit              (const char           * pszUnitName,
+                                     const TraceUnitInfo  & unit);
+    void deregister_unit            (const char           * pszUnitName);
 
-    void SetLogPolicy       (policy                 eLogPolicy);
+    void set_log_policy             (policy                 eLogPolicy);
+    void set_logs_folder            (const char           * pszFolder);
+    void set_using_colors           (bool                   bUsingColors);
+    void set_keep_template_params   (bool                   bKeepTemplateParams);
+    void set_keep_lambda_id         (bool                   bKeepLambdaId);
 
-    const char* GetTimeStr  (void);
+protected:
 
-private:
-
-    void OutputToFile       (const qx::string     & sText,
-                             const qx::string     & sFileName);
-    void OutputToConsole    (const qx::string     & sText,
-                             const char           * pszAnsiiColor);
-
-    void OnCreate           (void);
-    void OnTerminate        (void);
+    void on_create                  (void);
+    void on_terminate               (void);
 
 private:
 
-    policy              m_eLogPolicy        = policy::append;
-    string              m_sSessionTime      = string(GetTimeStr()) + "/";
+    const char* get_time_str        (void);
+
+    void output_to_file             (const string         & sText,
+                                     const string         & sFileName);
+    void output_to_cout             (const string         & sText,
+                                     const char           * pszAnsiiColor);
+
+private:
+
+    // buffers to decrease number of allocations
+    string              m_sTime                 = "";
+    string              m_sFormat               = "";
+    string              m_sMsg                  = "";
+    string              m_sFunction             = "";
+    string              m_sPath                 = "";
+
+    policy              m_eLogPolicy            = policy::append;
+    string              m_sSessionTime          = string(get_time_str()) + '/';
+    string              m_sFolder               = "";
+    bool                m_bUsingColors          = false;
+    bool                m_bKeepTemplateParams   = false;
+    bool                m_bKeepLambdaId         = false;
     TraceUnitInfoMap    m_RegisteredUnits;
+};
+
+inline      logger::logger                   (void)                            { on_create();                                 }
+inline      logger::~logger                  (void)                            { on_terminate();                              }
+inline void logger::deregister_unit          (const char* pszUnitName)         { m_RegisteredUnits.erase(pszUnitName);        }
+inline void logger::set_log_policy           (policy      eLogPolicy)          { m_eLogPolicy = eLogPolicy;                   }
+inline void logger::set_using_colors         (bool        bUsingColors)        { m_bUsingColors = bUsingColors;               }
+inline void logger::set_keep_template_params (bool        bKeepTemplateParams) { m_bKeepTemplateParams = bKeepTemplateParams; }
+inline void logger::set_keep_lambda_id       (bool        bKeepLambdaId)       { m_bKeepLambdaId = bKeepLambdaId;             }
+
+class logger_singleton : public logger
+{
+    QX_SINGLETON_CD(logger_singleton, on_create();, on_terminate(););
 };
 
 }

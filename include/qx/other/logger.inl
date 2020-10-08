@@ -15,7 +15,7 @@ namespace qx
 {
 
 //================================================================================
-//!\fn                    qx::logger::ProcessOutput<...Args>
+//!\fn                    qx::logger::process_output<...Args>
 //
 //!\brief  Process tracings
 //!\param  eLogLevel            - log level
@@ -24,18 +24,21 @@ namespace qx
 //!\param  pszFile              - file name string
 //!\param  pszFunction          - function name string
 //!\param  nLine                - code line number
+//!\param  pszColor             - ansi color string
 //!\param  ...args              - additional args for format
 //!\author Khrapov
 //!\date   10.01.2020
 //================================================================================
 template<class ... Args>
-inline void logger::ProcessOutput(level         eLogLevel,
-                                  const char  * pszFormat,
-                                  const char  * pszAssertExpression,
-                                  const char  * pszFile,
-                                  const char  * pszFunction,
-                                  int           nLine,
-                                  Args...       args)
+inline void logger::process_output(
+    level         eLogLevel,
+    const char  * pszFormat,
+    const char  * pszAssertExpression,
+    const char  * pszFile,
+    const char  * pszFunction,
+    int           nLine,
+    const char  * pszColor,
+    Args...       args)
 {
     TraceUnitInfo* pUnitInfo = nullptr;
     if (auto it = m_RegisteredUnits.find(pszFunction); it != m_RegisteredUnits.cend())
@@ -47,102 +50,96 @@ inline void logger::ProcessOutput(level         eLogLevel,
 
     if (pUnitInfo && (eLogLevel >= pUnitInfo->eFileLevel || eLogLevel >= pUnitInfo->eConsoleLevel))
     {
-        static qx::string sFormat;
-        static qx::string sMsg;
+        m_sFormat.clear();
 
         switch (eLogLevel)
         {
         case qx::logger::level::all:
-            sFormat = "[I][%s][%s::%s(%d)] ";
+            m_sFormat = "[I][%s][%s::%s(%d)] ";
             break;
 
         case qx::logger::level::errors:
-            sFormat = "[E][%s][%s::%s(%d)] ";
+            m_sFormat = "[E][%s][%s::%s(%d)] ";
             break;
 
         case qx::logger::level::asserts:
-            sFormat = "[A][%s][%s::%s(%d)][%s] ";
+            m_sFormat = "[A][%s][%s::%s(%d)][%s] ";
             break;
 
         default:
-            sFormat = "";
+            m_sFormat = "";
             break;
         }
 
-        sFormat += pszFormat;
+        m_sFormat += pszFormat;
 
-#if ENABLE_DETAIL_TRACE_INFO
+#if QX_ENABLE_DETAIL_TRACE_INFO
 
-        static qx::string sFunction;
-        sFunction = "";
+        m_sFunction.clear();
+
         // delete long and ugly lambda name from debug
         if (const char* pLambdaStr = std::strstr(pszFunction, "{ctor}::<lambda_"); pLambdaStr != nullptr)
         {
             constexpr int LAMBDA_NAME_SIZE = 62;
 
-            sFunction = pszFunction;
-            sFunction.erase(pLambdaStr - pszFunction, LAMBDA_NAME_SIZE);
-            sFunction.insert(pLambdaStr - pszFunction, "lambda");
+            m_sFunction = pszFunction;
+            m_sFunction.erase(pLambdaStr - pszFunction, LAMBDA_NAME_SIZE);
+            m_sFunction.insert(pLambdaStr - pszFunction, "lambda");
         }
+
+        m_sMsg.clear();
 
         // assume pszAssertExpression != nullptr as method must be used in macros only
         if (eLogLevel != qx::logger::level::asserts)
         {
-            sMsg.format(sFormat.data(),
-                        GetTimeStr(),
-                        pszFile,
-                        sFunction.empty() ? pszFunction : sFunction.data(),
-                        nLine,
-                        args...);
+            m_sMsg.format(
+                m_sFormat.data(),
+                get_time_str(),
+                pszFile,
+                m_sFunction.empty() ? pszFunction : m_sFunction.data(),
+                nLine,
+                args...);
         }
         else
         {
-            sMsg.format(sFormat.data(),
-                        GetTimeStr(),
-                        pszFile,
-                        sFunction.empty() ? pszFunction : sFunction.data(),
-                        nLine,
-                        pszAssertExpression,
-                        args...);
+            m_sMsg.format(
+                m_sFormat.data(),
+                get_time_str(),
+                pszFile,
+                m_sFunction.empty() ? pszFunction : m_sFunction.data(),
+                nLine,
+                pszAssertExpression,
+                args...);
         }
 
 #else
 
-        sMsg.format(sFormat.data(),
-                    GetTimeStr(),
-                    pszFile,
-                    pszFunction,
-                    nLine,
-                    pszAssertExpression,
-                    args...);
+        m_sMsg.format(
+            m_sFormat.data(),
+            get_time_str(),
+            pszFile,
+            pszFunction,
+            nLine,
+            pszAssertExpression,
+            args...);
 
-        if (auto it = sMsg.find("[::(0)]"); it != qx::string::npos)
-            sMsg.erase(it, 7);
+        if (auto it = m_sMsg.find("[::(0)]"); it != string::npos)
+            m_sMsg.erase(it, 7);
 
 #endif
 
-        sMsg += '\n';
+        m_sMsg += '\n';
 
         if (eLogLevel >= pUnitInfo->eFileLevel)
-            OutputToFile(sMsg, pUnitInfo->sLogFileName);
+            output_to_file(m_sMsg, pUnitInfo->sLogFileName);
 
         if (eLogLevel >= pUnitInfo->eConsoleLevel)
-        {
-            const char* pszColor = nullptr;
-            switch (eLogLevel)
-            {
-            case level::all:     pszColor = SAutoPrintfColor::ANSI_COLOR_RESET;  break;
-            case level::errors:  pszColor = SAutoPrintfColor::ANSI_COLOR_YELLOW; break;
-            case level::asserts: pszColor = SAutoPrintfColor::ANSI_COLOR_RED;    break;
-            }
-
-            OutputToConsole(sMsg, pszColor);
-        }
+            output_to_cout(m_sMsg, pszColor);
     }
 }
 
 //================================================================================
-//!\fn                     qx::logger::RegisterUnit
+//!\fn                     qx::logger::register_unit
 //
 //!\brief  Register file or function for tracing
 //         Register unit with name "default" to update default tracing settings
@@ -151,67 +148,50 @@ inline void logger::ProcessOutput(level         eLogLevel,
 //!\author Khrapov
 //!\date   10.01.2020
 //================================================================================
-inline void logger::RegisterUnit(const char* pszUnitName, const TraceUnitInfo& unit)
+inline void logger::register_unit(const char* pszUnitName, const TraceUnitInfo& unit)
 {
-    if (m_eLogPolicy == policy::clear_then_uppend)
-        std::ofstream ofs(unit.sLogFileName.data(), std::ofstream::out | std::ofstream::trunc); //-V808
-                                                                                                // clear file
-    if(!unit.sLogFileName.empty())
+    if (!unit.sLogFileName.empty())
+    {
+        if (m_eLogPolicy == policy::clear_then_uppend)
+            std::ofstream ofs(unit.sLogFileName.data(), std::ofstream::out | std::ofstream::trunc); //-V808
+                                                                                                    // clear file
         m_RegisteredUnits[pszUnitName] = unit;
+    }
 }
 
-//================================================================================
-//!\fn                    qx::logger::DeregisterUnit
-//
-//!\brief  Deregister unit
-//!\param  pszUnitName - unit name
-//!\author Khrapov
-//!\date   11.01.2020
-//================================================================================
-inline void logger::DeregisterUnit(const char* pszUnitName)
+inline void logger::set_logs_folder(const char* pszFolder)
 {
-    m_RegisteredUnits.erase(pszUnitName);
-}
-
-//================================================================================
-//!\fn                     qx::logger::SetLogPolicy
-//
-//!\brief  Set log policy
-//!\author Khrapov
-//!\date   11.01.2020
-//================================================================================
-inline void logger::SetLogPolicy(policy eLogPolicy)
-{
-    m_eLogPolicy = eLogPolicy;
+    m_sFolder = pszFolder;
+    if (!m_sFolder.empty() && !m_sFolder.ends_with('/'))
+        m_sFolder += '/';
 }
 
 //==============================================================================
-//!\fn                     qx::logger::GetTimeStr
+//!\fn                     qx::logger::get_time_str
 //
 //!\brief  Get time c string
 //!\author Khrapov
 //!\date   4.09.2019
 //==============================================================================
-inline const char* logger::GetTimeStr(void)
+inline const char* logger::get_time_str(void)
 {
-    static qx::string ret(19, '\0');
-
     std::time_t t = time(0);
     std::tm now;
     localtime_s(&now, &t);
-    ret.format("%02d-%02d-%04d_%02d-%02d-%02d",
-               now.tm_mday,
-               now.tm_mon,
-               now.tm_year + 1900,
-               now.tm_hour,
-               now.tm_min,
-               now.tm_sec);
+    m_sTime.format(
+        "%02d-%02d-%04d_%02d-%02d-%02d",
+        now.tm_mday,
+        now.tm_mon,
+        now.tm_year + 1900,
+        now.tm_hour,
+        now.tm_min,
+        now.tm_sec);
 
-    return ret.data();
+    return m_sTime.data();
 }
 
 //================================================================================
-//!\fn                     qx::logger::OutputToFile
+//!\fn                     qx::logger::output_to_file
 //
 //!\brief  Output log string to file
 //!\param  sText     - log string text
@@ -219,44 +199,46 @@ inline const char* logger::GetTimeStr(void)
 //!\author Khrapov
 //!\date   10.01.2020
 //================================================================================
-inline void logger::OutputToFile(const qx::string& sText, const qx::string& sFileName)
+inline void logger::output_to_file(const string& sText, const string& sFileName)
 {
     std::ofstream ofs;
     ofs.exceptions(std::ofstream::failbit | std::ofstream::badbit);
+    m_sPath.clear();
 
     try
     {
-        qx::string sPath;
-
         switch (m_eLogPolicy)
         {
         case policy::folder_time:
-            sPath = "logs/" + m_sSessionTime;
+            m_sPath = m_sFolder + m_sSessionTime;
             break;
 
         case policy::append:
         case policy::clear_then_uppend:
         default:
-            sPath = "logs/";
+            m_sPath = m_sFolder;
             break;
         }
 
-        std::filesystem::create_directories(sPath.data());
-        ofs.open((sPath + sFileName).data(), std::ios::out | std::ios::app);
+        if (!m_sFolder.empty())
+            std::filesystem::create_directories(m_sPath.data());
+
+        m_sPath += sFileName;
+        ofs.open(m_sPath.data(), std::ofstream::app);
         ofs << sText.data();
         ofs.close();
     }
     catch (const std::system_error& e)
     {
         std::cerr
-            << "OutputToFile error: file " << sFileName.data()
+            << "output_to_file error: file " << sFileName.data()
             << ", error " << e.code().value()
             << ", msg " << e.what() << std::endl;
     }
 }
 
 //================================================================================
-//!\fn                    qx::logger::OutputToConsole
+//!\fn                    qx::logger::output_to_cout
 //
 //!\brief  Output log string to console
 //!\param  sText         - log string text
@@ -264,36 +246,41 @@ inline void logger::OutputToFile(const qx::string& sText, const qx::string& sFil
 //!\author Khrapov
 //!\date   10.01.2020
 //================================================================================
-inline void logger::OutputToConsole(const qx::string& sText, const char* pszAnsiiColor)
+inline void logger::output_to_cout(const string& sText, const char* pszAnsiiColor)
 {
-    SAutoPrintfColor apc(pszAnsiiColor);
-    printf("%s", sText.data());
+    if (pszAnsiiColor && m_bUsingColors)
+    {
+        auto_terminal_color atc(pszAnsiiColor);
+        std::cout << sText;
+    }
+    else
+        std::cout << sText;
 }
 
 //================================================================================
-//!\fn                       qx::logger::OnCreate
+//!\fn                       qx::logger::on_create
 //
-//!\brief  On create singleton
+//!\brief  On create logger
 //!\author Khrapov
 //!\date   11.01.2020
 //================================================================================
-inline void logger::OnCreate(void)
+inline void logger::on_create(void)
 {
-    RegisterUnit("default", { "log.txt", level::all, level::all });
+    register_unit("default", { "default.log", level::all, level::all });
 }
 
 //================================================================================
-//!\fn                      qx::logger::OnTerminate
+//!\fn                      qx::logger::on_terminate
 //
-//!\brief  On terminate singleton
+//!\brief  On terminate logger
 //!\author Khrapov
 //!\date   11.01.2020
 //================================================================================
-inline void logger::OnTerminate(void)
+inline void logger::on_terminate(void)
 {
     for (const auto& u : m_RegisteredUnits)
     {
-        std::ofstream ofs(u.second.sLogFileName.data(), std::ios::out | std::ios::app);
+        std::ofstream ofs(u.second.sLogFileName.data(), std::ofstream::app);
         ofs << std::endl << std::endl << std::endl;
     }
 }
