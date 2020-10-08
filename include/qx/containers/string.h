@@ -189,6 +189,12 @@ public:
     bool                    ends_with    (const basic_string   & str)                   const { return ends_with(str.data(), str.size()); }
     bool                    ends_with    (const std_string_type& str)                   const { return ends_with(str.data(), str.size()); }
 
+    bool                    starts_with  (value_type             ch)                    const;
+    bool                    starts_with  (const_pointer          pszStr,
+                                          size_type              nSepLen    = npos)     const;
+    bool                    starts_with  (const basic_string   & str)                   const { return starts_with(str.data(), str.size()); }
+    bool                    starts_with  (const std_string_type& str)                   const { return starts_with(str.data(), str.size()); }
+
     template<typename To>
     std::optional<To>       to           (void)                                         const;
 

@@ -698,6 +698,50 @@ inline bool basic_string<Traits>::ends_with(const_pointer pszStr, size_type nSep
 }
 
 //==============================================================================
+//!\fn            qx::basic_string<Traits>::starts_with
+//
+//!\brief  Check if current string starts with char
+//!\param  ch - char for comparison
+//!\retval - true if starts with char
+//!\author Khrapov
+//!\date   08.10.2020
+//==============================================================================
+template<class Traits>
+inline bool basic_string<Traits>::starts_with(value_type ch) const
+{
+    if (!empty())
+        return at(0) == ch;
+    else
+        return false;
+}
+
+//==============================================================================
+//!\fn            qx::basic_string<Traits>::starts_with
+//
+//!\brief  Check if current string starts with string
+//!\param  pszStr  - const pointer to string
+//!\param  nSepLen - string length
+//!\retval         - true if starts with string
+//!\author Khrapov
+//!\date   08.10.2020
+//==============================================================================
+template<class Traits>
+inline bool basic_string<Traits>::starts_with(const_pointer pszStr, size_type nSepLen) const
+{
+    size_type nSize = size();
+    if (nSize > 0)
+    {
+        if (nSepLen == npos)
+            nSepLen = Traits::tstrlen(pszStr);
+
+        if (nSepLen <= nSize)
+            return Traits::tstrncmp(m_pData, pszStr, nSepLen) == 0;
+    }
+
+    return false;
+}
+
+//==============================================================================
 //!\fn                  qx::basic_string<Traits>::to<To>
 //
 //!\brief  Convert string to specified type

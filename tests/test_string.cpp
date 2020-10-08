@@ -870,7 +870,6 @@ TYPED_TEST(TestQxString, ends_with)
     EXPECT_TRUE(str.ends_with(STR("456789")));
     EXPECT_TRUE(str.ends_with(STR("3456789")));
     EXPECT_TRUE(str.ends_with(STR("23456789")));
-    EXPECT_TRUE(str.ends_with(STR("23456789")));
     EXPECT_TRUE(str.ends_with(STR("123456789")));
     EXPECT_TRUE(str.ends_with(STR("0123456789")));
 
@@ -887,7 +886,6 @@ TYPED_TEST(TestQxString, ends_with)
     EXPECT_TRUE(str.ends_with(typename StringType::std_string_type(STR("56789"))));
     EXPECT_TRUE(str.ends_with(typename StringType::std_string_type(STR("456789"))));
     EXPECT_TRUE(str.ends_with(typename StringType::std_string_type(STR("3456789"))));
-    EXPECT_TRUE(str.ends_with(typename StringType::std_string_type(STR("23456789"))));
     EXPECT_TRUE(str.ends_with(typename StringType::std_string_type(STR("23456789"))));
     EXPECT_TRUE(str.ends_with(typename StringType::std_string_type(STR("123456789"))));
     EXPECT_TRUE(str.ends_with(typename StringType::std_string_type(STR("0123456789"))));
@@ -906,7 +904,6 @@ TYPED_TEST(TestQxString, ends_with)
     EXPECT_TRUE(str.ends_with(StringTypeTn(STR("456789"))));
     EXPECT_TRUE(str.ends_with(StringTypeTn(STR("3456789"))));
     EXPECT_TRUE(str.ends_with(StringTypeTn(STR("23456789"))));
-    EXPECT_TRUE(str.ends_with(StringTypeTn(STR("23456789"))));
     EXPECT_TRUE(str.ends_with(StringTypeTn(STR("123456789"))));
     EXPECT_TRUE(str.ends_with(StringTypeTn(STR("0123456789"))));
 
@@ -914,5 +911,68 @@ TYPED_TEST(TestQxString, ends_with)
     EXPECT_FALSE(str.ends_with(StringTypeTn(STR("11"))));
     EXPECT_FALSE(str.ends_with(StringTypeTn(STR("trash"))));
 }
+
+TYPED_TEST(TestQxString, starts_with)
+{
+    StringTypeTn str(STR("0123456789"));
+
+    // char
+    EXPECT_TRUE(str.starts_with(CH('0')));
+    EXPECT_FALSE(str.starts_with(CH('7')));
+    EXPECT_FALSE(str.starts_with(CH('2')));
+    EXPECT_FALSE(str.starts_with(CH(';')));
+
+    // const_pointer
+    EXPECT_TRUE(str.starts_with(STR("")));
+    EXPECT_TRUE(str.starts_with(STR("0")));
+    EXPECT_TRUE(str.starts_with(STR("01")));
+    EXPECT_TRUE(str.starts_with(STR("012")));
+    EXPECT_TRUE(str.starts_with(STR("0123")));
+    EXPECT_TRUE(str.starts_with(STR("01234")));
+    EXPECT_TRUE(str.starts_with(STR("012345")));
+    EXPECT_TRUE(str.starts_with(STR("0123456")));
+    EXPECT_TRUE(str.starts_with(STR("01234567")));
+    EXPECT_TRUE(str.starts_with(STR("012345678")));
+    EXPECT_TRUE(str.starts_with(STR("0123456789")));
+
+    EXPECT_FALSE(str.starts_with(STR(" 0123456789")));
+    EXPECT_FALSE(str.starts_with(STR("11")));
+    EXPECT_FALSE(str.starts_with(STR("trash")));
+
+    // std::basic_string
+    EXPECT_TRUE(str.starts_with(typename StringType::std_string_type(STR(""))));
+    EXPECT_TRUE(str.starts_with(typename StringType::std_string_type(STR("0"))));
+    EXPECT_TRUE(str.starts_with(typename StringType::std_string_type(STR("01"))));
+    EXPECT_TRUE(str.starts_with(typename StringType::std_string_type(STR("012"))));
+    EXPECT_TRUE(str.starts_with(typename StringType::std_string_type(STR("0123"))));
+    EXPECT_TRUE(str.starts_with(typename StringType::std_string_type(STR("01234"))));
+    EXPECT_TRUE(str.starts_with(typename StringType::std_string_type(STR("012345"))));
+    EXPECT_TRUE(str.starts_with(typename StringType::std_string_type(STR("0123456"))));
+    EXPECT_TRUE(str.starts_with(typename StringType::std_string_type(STR("01234567"))));
+    EXPECT_TRUE(str.starts_with(typename StringType::std_string_type(STR("012345678"))));
+    EXPECT_TRUE(str.starts_with(typename StringType::std_string_type(STR("0123456789"))));
+
+    EXPECT_FALSE(str.starts_with(typename StringType::std_string_type(STR(" 0123456789"))));
+    EXPECT_FALSE(str.starts_with(typename StringType::std_string_type(STR("11"))));
+    EXPECT_FALSE(str.starts_with(typename StringType::std_string_type(STR("trash"))));
+
+    // qx::basic_string
+    EXPECT_TRUE(str.starts_with(StringTypeTn(STR(""))));
+    EXPECT_TRUE(str.starts_with(StringTypeTn(STR("0"))));
+    EXPECT_TRUE(str.starts_with(StringTypeTn(STR("01"))));
+    EXPECT_TRUE(str.starts_with(StringTypeTn(STR("012"))));
+    EXPECT_TRUE(str.starts_with(StringTypeTn(STR("0123"))));
+    EXPECT_TRUE(str.starts_with(StringTypeTn(STR("01234"))));
+    EXPECT_TRUE(str.starts_with(StringTypeTn(STR("012345"))));
+    EXPECT_TRUE(str.starts_with(StringTypeTn(STR("0123456"))));
+    EXPECT_TRUE(str.starts_with(StringTypeTn(STR("01234567"))));
+    EXPECT_TRUE(str.starts_with(StringTypeTn(STR("012345678"))));
+    EXPECT_TRUE(str.starts_with(StringTypeTn(STR("0123456789"))));
+
+    EXPECT_FALSE(str.starts_with(StringTypeTn(STR(" 0123456789"))));
+    EXPECT_FALSE(str.starts_with(StringTypeTn(STR("11"))));
+    EXPECT_FALSE(str.starts_with(StringTypeTn(STR("trash"))));
+}
+
 
 #endif
