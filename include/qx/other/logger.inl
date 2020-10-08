@@ -225,13 +225,13 @@ inline void logger::output_to_file(const string& sText, const string& sFileName)
 
         m_sPath += sFileName;
         ofs.open(m_sPath.data(), std::ofstream::app);
-        ofs << sText.data();
+        ofs << sText;
         ofs.close();
     }
     catch (const std::system_error& e)
     {
         std::cerr
-            << "output_to_file error: file " << sFileName.data()
+            << "output_to_file error: file " << sFileName
             << ", error " << e.code().value()
             << ", msg " << e.what() << std::endl;
     }
