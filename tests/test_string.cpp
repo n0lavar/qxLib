@@ -125,7 +125,7 @@ TYPED_TEST(TestQxString, construct)
     EXPECT_EQ(str10.size(), 6);
 
     // from std string
-    StringTypeTn str11(typename TypeParam::std_string_type(STR("Hello world")));
+    StringTypeTn str11(typename StringType::std_string_type(STR("Hello world")));
     EXPECT_STREQ(str11.data(), STR("Hello world"));
     EXPECT_FALSE(str11.empty());
     EXPECT_EQ(str11.size(), 11);
@@ -209,7 +209,7 @@ TYPED_TEST(TestQxString, assign)
 
     // from std string
     StringTypeTn str11;
-    str11.assign(typename TypeParam::std_string_type(STR("Hello world")));
+    str11.assign(typename StringType::std_string_type(STR("Hello world")));
     EXPECT_STREQ(str11.data(), STR("Hello world"));
     EXPECT_FALSE(str11.empty());
     EXPECT_EQ(str11.size(), 11);
@@ -252,7 +252,7 @@ TYPED_TEST(TestQxString, operator_assign)
     EXPECT_TRUE(tmpStr.empty());
     EXPECT_EQ(tmpStr.size(), 0);
 
-    str = typename TypeParam::std_string_type(STR("Hello world"));
+    str = typename StringType::std_string_type(STR("Hello world"));
     EXPECT_STREQ(str.data(), STR("Hello world"));
     EXPECT_FALSE(str.empty());
     EXPECT_EQ(str.size(), 11);
@@ -683,7 +683,7 @@ TYPED_TEST(TestQxString, operator_plus_equal)
     StringTypeTn str(STR("word0 "));
     str += StringTypeTn(STR("word1 "));
     str += STR("word2 ");
-    str += typename TypeParam::std_string_type(STR("word3"));
+    str += typename StringType::std_string_type(STR("word3"));
     str += CH('!');
 
     EXPECT_STREQ(str.data(), STR("word0 word1 word2 word3!"));
@@ -695,11 +695,11 @@ TYPED_TEST(TestQxString, operator_equal)
     EXPECT_TRUE(str == StringTypeTn(STR("e")));
     EXPECT_TRUE(str == CH('e'));
     EXPECT_TRUE(str == STR("e"));
-    EXPECT_TRUE(str == typename TypeParam::std_string_type(STR("e")));
+    EXPECT_TRUE(str == typename StringType::std_string_type(STR("e")));
     EXPECT_FALSE(str == StringTypeTn(STR("r")));
     EXPECT_FALSE(str == CH('r'));
     EXPECT_FALSE(str == STR("r"));
-    EXPECT_FALSE(str == typename TypeParam::std_string_type(STR("r")));
+    EXPECT_FALSE(str == typename StringType::std_string_type(STR("r")));
 }
 
 TYPED_TEST(TestQxString, operator_braces)
@@ -752,7 +752,7 @@ TYPED_TEST(TestQxString, operator_plus)
     str = ch + StringTypeTn(STR("word_move "));
     EXPECT_STREQ(str.data(), STR("wword_move "));
 
-    typename TypeParam::std_string_type stdStr(STR("word_std "));
+    typename StringType::std_string_type stdStr(STR("word_std "));
     str = refStr + stdStr;
     EXPECT_STREQ(str.data(), STR("word_ref word_std "));
     str = StringTypeTn(STR("word_move ")) + stdStr;
@@ -846,8 +846,73 @@ TYPED_TEST(TestQxString, from)
     EXPECT_STREQ(str.data(), STR("false"));
 
     // std strings have operator<<
-    str.from(typename TypeParam::std_string_type(STR("some string")));
+    str.from(typename StringType::std_string_type(STR("some string")));
     EXPECT_STREQ(str.data(), STR("some string"));
+}
+
+TYPED_TEST(TestQxString, ends_with)
+{
+    StringTypeTn str(STR("0123456789"));
+
+    // char
+    EXPECT_TRUE(str.ends_with(CH('9')));
+    EXPECT_FALSE(str.ends_with(CH('7')));
+    EXPECT_FALSE(str.ends_with(CH('2')));
+    EXPECT_FALSE(str.ends_with(CH(';')));
+
+    // const_pointer
+    EXPECT_TRUE(str.ends_with(STR("")));
+    EXPECT_TRUE(str.ends_with(STR("9")));
+    EXPECT_TRUE(str.ends_with(STR("89")));
+    EXPECT_TRUE(str.ends_with(STR("789")));
+    EXPECT_TRUE(str.ends_with(STR("6789")));
+    EXPECT_TRUE(str.ends_with(STR("56789")));
+    EXPECT_TRUE(str.ends_with(STR("456789")));
+    EXPECT_TRUE(str.ends_with(STR("3456789")));
+    EXPECT_TRUE(str.ends_with(STR("23456789")));
+    EXPECT_TRUE(str.ends_with(STR("23456789")));
+    EXPECT_TRUE(str.ends_with(STR("123456789")));
+    EXPECT_TRUE(str.ends_with(STR("0123456789")));
+
+    EXPECT_FALSE(str.ends_with(STR(" 0123456789")));
+    EXPECT_FALSE(str.ends_with(STR("11")));
+    EXPECT_FALSE(str.ends_with(STR("trash")));
+
+    // std::basic_string
+    EXPECT_TRUE(str.ends_with(typename StringType::std_string_type(STR(""))));
+    EXPECT_TRUE(str.ends_with(typename StringType::std_string_type(STR("9"))));
+    EXPECT_TRUE(str.ends_with(typename StringType::std_string_type(STR("89"))));
+    EXPECT_TRUE(str.ends_with(typename StringType::std_string_type(STR("789"))));
+    EXPECT_TRUE(str.ends_with(typename StringType::std_string_type(STR("6789"))));
+    EXPECT_TRUE(str.ends_with(typename StringType::std_string_type(STR("56789"))));
+    EXPECT_TRUE(str.ends_with(typename StringType::std_string_type(STR("456789"))));
+    EXPECT_TRUE(str.ends_with(typename StringType::std_string_type(STR("3456789"))));
+    EXPECT_TRUE(str.ends_with(typename StringType::std_string_type(STR("23456789"))));
+    EXPECT_TRUE(str.ends_with(typename StringType::std_string_type(STR("23456789"))));
+    EXPECT_TRUE(str.ends_with(typename StringType::std_string_type(STR("123456789"))));
+    EXPECT_TRUE(str.ends_with(typename StringType::std_string_type(STR("0123456789"))));
+
+    EXPECT_FALSE(str.ends_with(typename StringType::std_string_type(STR(" 0123456789"))));
+    EXPECT_FALSE(str.ends_with(typename StringType::std_string_type(STR("11"))));
+    EXPECT_FALSE(str.ends_with(typename StringType::std_string_type(STR("trash"))));
+
+    // qx::basic_string
+    EXPECT_TRUE(str.ends_with(StringTypeTn(STR(""))));
+    EXPECT_TRUE(str.ends_with(StringTypeTn(STR("9"))));
+    EXPECT_TRUE(str.ends_with(StringTypeTn(STR("89"))));
+    EXPECT_TRUE(str.ends_with(StringTypeTn(STR("789"))));
+    EXPECT_TRUE(str.ends_with(StringTypeTn(STR("6789"))));
+    EXPECT_TRUE(str.ends_with(StringTypeTn(STR("56789"))));
+    EXPECT_TRUE(str.ends_with(StringTypeTn(STR("456789"))));
+    EXPECT_TRUE(str.ends_with(StringTypeTn(STR("3456789"))));
+    EXPECT_TRUE(str.ends_with(StringTypeTn(STR("23456789"))));
+    EXPECT_TRUE(str.ends_with(StringTypeTn(STR("23456789"))));
+    EXPECT_TRUE(str.ends_with(StringTypeTn(STR("123456789"))));
+    EXPECT_TRUE(str.ends_with(StringTypeTn(STR("0123456789"))));
+
+    EXPECT_FALSE(str.ends_with(StringTypeTn(STR(" 0123456789"))));
+    EXPECT_FALSE(str.ends_with(StringTypeTn(STR("11"))));
+    EXPECT_FALSE(str.ends_with(StringTypeTn(STR("trash"))));
 }
 
 #endif

@@ -15,6 +15,7 @@
 #include <array>
 #include <vector>
 #include <optional>
+#include <iostream>
 
 #include <qx/containers/container.h>
 #include <qx/meta/constexpr_random.h>
@@ -65,8 +66,8 @@ public:
     using const_reference   = typename Traits::const_reference;
     using difference_type   = typename Traits::difference_type;
     using size_type         = typename Traits::size_type;
-    using std_string_type   = typename Traits::std_string_type;
-    using sstream_type      = typename Traits::sstream_type;
+    using std_string_type   = typename std::basic_string<value_type, std::char_traits<value_type>, std::allocator<value_type>>;
+    using sstream_type      = typename std::basic_stringstream<value_type, std::char_traits<value_type>, std::allocator<value_type>>;
 
     static constexpr size_type npos = UINT_EMPTY_VALUE;
 
@@ -182,6 +183,12 @@ public:
     size_type               length       (void)                                         const { return size();          }
     const_pointer           c_str        (void)                                         const { return data();          }
 
+    bool                    ends_with    (value_type             ch)                    const;
+    bool                    ends_with    (const_pointer          pszStr,
+                                          size_type              nSepLen    = npos)     const;
+    bool                    ends_with    (const basic_string   & str)                   const { return ends_with(str.data(), str.size()); }
+    bool                    ends_with    (const std_string_type& str)                   const { return ends_with(str.data(), str.size()); }
+
     template<typename To>
     std::optional<To>       to           (void)                                         const;
 
@@ -247,10 +254,10 @@ template<class UT> basic_string<UT> operator+ (basic_string<UT>&&               
 template<class UT> basic_string<UT> operator+ (typename UT::value_type              lhs, const basic_string<UT>&                rhs) _STR_OP_PLUS_BODY
 template<class UT> basic_string<UT> operator+ (typename UT::value_type              lhs, basic_string<UT>&&                     rhs) _STR_OP_PLUS_BODY
 
-template<class UT> basic_string<UT> operator+ (const basic_string<UT>&              lhs, const typename UT::std_string_type&    rhs) _STR_OP_PLUS_BODY
-template<class UT> basic_string<UT> operator+ (basic_string<UT>&&                   lhs, const typename UT::std_string_type&    rhs) _STR_OP_PLUS_BODY
-template<class UT> basic_string<UT> operator+ (const typename UT::std_string_type&  lhs, const basic_string<UT>&                rhs) _STR_OP_PLUS_BODY
-template<class UT> basic_string<UT> operator+ (const typename UT::std_string_type&  lhs, basic_string<UT>&&                     rhs) _STR_OP_PLUS_BODY
+template<class UT> basic_string<UT> operator+ (const basic_string<UT>& lhs, const typename basic_string<UT>::std_string_type&   rhs) _STR_OP_PLUS_BODY
+template<class UT> basic_string<UT> operator+ (basic_string<UT>&&      lhs, const typename basic_string<UT>::std_string_type&   rhs) _STR_OP_PLUS_BODY
+template<class UT> basic_string<UT> operator+ (const typename basic_string<UT>::std_string_type&  lhs, const basic_string<UT>&  rhs) _STR_OP_PLUS_BODY
+template<class UT> basic_string<UT> operator+ (const typename basic_string<UT>::std_string_type&  lhs, basic_string<UT>&&       rhs) _STR_OP_PLUS_BODY
 
 //==============================================================================
 //
@@ -280,6 +287,8 @@ namespace detail
 }
 
 }
+
+//-------------------------- hashes for strings types --------------------------
 
 namespace std
 {
@@ -326,6 +335,28 @@ namespace std
                                               qx::detail::random_string_hash::next());
         }
     };
+}
+
+//----------------------- istream / ostream overloading ----------------------
+
+template<class Traits>
+using _ostream = std::basic_ostream<typename Traits::value_type, std::char_traits<typename Traits::value_type>>;
+
+template<class Traits>
+using _istream = std::basic_istream<typename Traits::value_type, std::char_traits<typename Traits::value_type>>;
+
+template<class Traits>
+_ostream<Traits>& operator<<(_ostream<Traits>& os, const qx::basic_string<Traits>& str)
+{
+    os << str.data();
+    return os;
+}
+
+template<class Traits>
+_istream<Traits>& operator>>(_istream<Traits>& is, qx::basic_string<Traits>& str)
+{
+    is >> str.data();
+    return is;
 }
 
 #include <qx/containers/string.inl>

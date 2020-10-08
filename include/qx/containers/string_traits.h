@@ -39,8 +39,6 @@ struct char_traits
     using const_reference   = const char&;
     using difference_type   = std::ptrdiff_t;
     using size_type         = size_t;
-    using std_string_type   = std::string;
-    using sstream_type      = std::stringstream;
 
     static constexpr value_type teol(void)
     {
@@ -98,8 +96,6 @@ struct wchar_traits
     using const_reference   = const wchar_t&;
     using difference_type   = std::ptrdiff_t;
     using size_type         = size_t;
-    using std_string_type   = std::wstring;
-    using sstream_type      = std::wstringstream;
 
     static constexpr value_type teol(void)
     {

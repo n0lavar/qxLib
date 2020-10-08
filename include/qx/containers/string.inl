@@ -653,6 +653,51 @@ inline void basic_string<Traits>::apply_case(ECaseType ct)
 }
 
 //==============================================================================
+//!\fn            qx::basic_string<Traits>::ends_with
+//
+//!\brief  Check if current string ends with char
+//!\param  ch - char for comparison
+//!\retval - true if ends with char
+//!\author Khrapov
+//!\date   08.10.2020
+//==============================================================================
+template<class Traits>
+inline bool basic_string<Traits>::ends_with(value_type ch) const
+{
+    size_type nSize = size();
+    if (nSize > 0)
+        return at(nSize - 1) == ch;
+    else
+        return false;
+}
+
+//==============================================================================
+//!\fn            qx::basic_string<Traits>::ends_with
+//
+//!\brief  Check if current string ends with string
+//!\param  pszStr  - const pointer to string
+//!\param  nSepLen - string length
+//!\retval         - true if ends with string
+//!\author Khrapov
+//!\date   08.10.2020
+//==============================================================================
+template<class Traits>
+inline bool basic_string<Traits>::ends_with(const_pointer pszStr, size_type nSepLen) const
+{
+    size_type nSize = size();
+    if (nSize > 0)
+    {
+        if (nSepLen == npos)
+            nSepLen = Traits::tstrlen(pszStr);
+
+        if (nSepLen <= nSize)
+            return Traits::tstrncmp(m_pData + nSize - nSepLen, pszStr, nSepLen) == 0;
+    }
+
+    return false;
+}
+
+//==============================================================================
 //!\fn                  qx::basic_string<Traits>::to<To>
 //
 //!\brief  Convert string to specified type
