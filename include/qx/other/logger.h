@@ -35,7 +35,7 @@
         __FUNCTION__,                                           \
         __LINE__,                                               \
         nullptr,                                                \
-        __VA_ARGS__)
+        ## __VA_ARGS__)
 
 #define QX_TRACE_ERROR_FROM(loggerInstanse, format, ...)        \
     loggerInstanse.process_output(                              \
@@ -46,7 +46,7 @@
         __FUNCTION__,                                           \
         __LINE__,                                               \
         qx::logger::auto_terminal_color::yellow,                \
-        __VA_ARGS__)
+        ## __VA_ARGS__)
 
 #define QX_TRACE_ASSERT_FROM(loggerInstanse, expr, format, ...) \
     loggerInstanse.process_output(                              \
@@ -57,22 +57,22 @@
         __FUNCTION__,                                           \
         __LINE__,                                               \
         qx::logger::auto_terminal_color::red,                   \
-        __VA_ARGS__)
+        ## __VA_ARGS__)
 
 
 // redefine theese macros in your own header with renaming only or using you instance of logger
 
 // common info
 #define QX_TRACE(format, ...)                                   \
-    QX_TRACE_FROM(qx::logger_singleton::get_instance(), format, __VA_ARGS__)
+    QX_TRACE_FROM(qx::logger_singleton::get_instance(), format, ## __VA_ARGS__)
 
 // error info
 #define QX_TRACE_ERROR(format, ...)                             \
-    QX_TRACE_ERROR_FROM(qx::logger_singleton::get_instance(), format, __VA_ARGS__)
+    QX_TRACE_ERROR_FROM(qx::logger_singleton::get_instance(), format, ## __VA_ARGS__)
 
 // assertion failed info
 #define QX_TRACE_ASSERT(expr, format, ...)                      \
-    QX_TRACE_ASSERT_FROM(qx::logger_singleton::get_instance(), expr, format, __VA_ARGS__)
+    QX_TRACE_ASSERT_FROM(qx::logger_singleton::get_instance(), expr, format, ## __VA_ARGS__)
 
 namespace qx
 {

@@ -138,22 +138,22 @@ namespace qx::detail
 
 #if QX_ENABLE_ASSERTS
 
-    #define QX_ASSERT(statement)                                \
-    do {                                                        \
-        if (!(statement))                                       \
-        {                                                       \
-            QX_PROCESS_ASSERT(statement);                       \
-            QX_DEBUG_BREAK;                                     \
-        }                                                       \
+    #define QX_ASSERT(statement)                                    \
+    do {                                                            \
+        if (!(statement))                                           \
+        {                                                           \
+            QX_PROCESS_ASSERT(statement);                           \
+            QX_DEBUG_BREAK;                                         \
+        }                                                           \
     } while (false)
 
-    #define QX_ASSERT_MSG(statement, msg, ...)                  \
-    do {                                                        \
-        if (!(statement))                                       \
-        {                                                       \
-            QX_PROCESS_ASSERT_MSG(statement, msg, __VA_ARGS__); \
-            QX_DEBUG_BREAK;                                     \
-        }                                                       \
+    #define QX_ASSERT_MSG(statement, msg, ...)                      \
+    do {                                                            \
+        if (!(statement))                                           \
+        {                                                           \
+            QX_PROCESS_ASSERT_MSG(statement, msg, ## __VA_ARGS__);  \
+            QX_DEBUG_BREAK;                                         \
+        }                                                           \
     } while (false)
 
 #else

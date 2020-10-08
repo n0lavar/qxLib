@@ -19,9 +19,9 @@
 #include <qx/other/logger.h>
 #include <gtest/gtest.h>
 
-#define TRACE(format, ...)              QX_TRACE_FROM(myLogger, format, __VA_ARGS__)
-#define TRACE_ERROR(format, ...)        QX_TRACE_ERROR_FROM(myLogger, format, __VA_ARGS__)
-#define TRACE_ASSERT(expr, format, ...) QX_TRACE_ASSERT_FROM(myLogger, expr, format, __VA_ARGS__)
+#define TRACE(format, ...)              QX_TRACE_FROM(myLogger, format, ## __VA_ARGS__)
+#define TRACE_ERROR(format, ...)        QX_TRACE_ERROR_FROM(myLogger, format, ## __VA_ARGS__)
+#define TRACE_ASSERT(expr, format, ...) QX_TRACE_ASSERT_FROM(myLogger, expr, format, ## __VA_ARGS__)
 
 
 template <
