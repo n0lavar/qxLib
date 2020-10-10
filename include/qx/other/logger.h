@@ -52,7 +52,7 @@
     loggerInstanse.process_output(                              \
         qx::logger::level::asserts,                             \
         format,                                                 \
-        expr,                                                   \
+        # expr,                                                 \
         QX_SHORT_FILE,                                          \
         __FUNCTION__,                                           \
         __LINE__,                                               \

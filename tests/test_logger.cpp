@@ -21,7 +21,7 @@
 
 #define TRACE(format, ...)              QX_TRACE_FROM(myLogger, format, ## __VA_ARGS__)
 #define TRACE_ERROR(format, ...)        QX_TRACE_ERROR_FROM(myLogger, format, ## __VA_ARGS__)
-#define TRACE_ASSERT(expr, format, ...) QX_TRACE_ASSERT_FROM(myLogger, #expr, format, ## __VA_ARGS__)
+#define TRACE_ASSERT(expr, format, ...) QX_TRACE_ASSERT_FROM(myLogger, expr, format, ## __VA_ARGS__)
 
 
 template <
@@ -108,9 +108,32 @@ TYPED_TEST_SUITE(TestLogger, Implementations);
 
 #define TEST_LOGGER                                     \
     TRACE("Start test");                                \
+                                                        \
     TRACE("%f", 1.f);                                   \
+    TRACE("%f %d", 1.f, 1);                             \
+    TRACE("%f %d", 1.f, 2);                             \
+    TRACE("%f %d", 1.f, 3);                             \
+    TRACE("%f %d", 1.f, 4);                             \
+    TRACE("%f %d", 1.f, 5);                             \
+                                                        \
+    TRACE_ERROR("%f %d", 1.f, 1);                       \
     TRACE_ERROR("%f %d", 1.f, 2);                       \
+    TRACE_ERROR("%f %d", 1.f, 3);                       \
+    TRACE_ERROR("%f %d", 1.f, 4);                       \
+    TRACE_ERROR("%f %d", 1.f, 5);                       \
+                                                        \
+    TRACE_ASSERT(false, "%f %d", 1.f, 1);                       \
+    TRACE_ASSERT(false, "%f %d", 1.f, 2);                       \
+    TRACE_ASSERT(false, "%f %d", 1.f, 3);                       \
+    TRACE_ASSERT(false, "%f %d", 1.f, 4);                       \
+    TRACE_ASSERT(false, "%f %d", 1.f, 5);                       \
+                                                        \
+    TRACE_ASSERT(false, "%f %d %s", 1.f, 1, "three");   \
     TRACE_ASSERT(false, "%f %d %s", 1.f, 2, "three");   \
+    TRACE_ASSERT(false, "%f %d %s", 1.f, 3, "three");   \
+    TRACE_ASSERT(false, "%f %d %s", 1.f, 4, "three");   \
+    TRACE_ASSERT(false, "%f %d %s", 1.f, 5, "three");   \
+                                                        \
     TRACE("End test\n");
 
 void TestLoggerFunction(qx::logger& myLogger)

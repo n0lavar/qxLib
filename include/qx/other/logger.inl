@@ -73,9 +73,9 @@ inline void logger::process_output(
 
         m_sFormat += pszFormat;
 
-#if QX_ENABLE_DETAIL_TRACE_INFO
-
         m_sFunction.clear();
+
+#if _MSC_VER
 
         // delete long and ugly lambda name from debug
         if (const char* pLambdaStr = std::strstr(pszFunction, "{ctor}::<lambda_"); pLambdaStr != nullptr)
@@ -87,7 +87,28 @@ inline void logger::process_output(
             m_sFunction.insert(pLambdaStr - pszFunction, "lambda");
         }
 
-        m_sMsg.clear();
+#endif
+
+#if QX_ENABLE_DETAIL_TRACE_INFO
+
+        // delete long and ugly lambda name from debug
+        if (const char* pLambdaStr = std::strstr(pszFunction, "{ctor}::<lambda_"); pLambdaStr != nullptr)
+        {
+            constexpr int LAMBDA_NAME_SIZE = 62;
+
+            m_sFunction = pszFunction;
+            m_sFunction.erase(pLambdaStr - pszFunction, LAMBDA_NAME_SIZE);
+            m_sFunction.insert(pLambdaStr - pszFunction, "lambda");
+        }
+
+#endif
+
+#if 0
+
+        if (auto it = m_sMsg.find("[::(0)]"); it != string::npos)
+            m_sMsg.erase(it, 7);
+
+#endif
 
         // assume pszAssertExpression != nullptr as method must be used in macros only
         if (eLogLevel != qx::logger::level::asserts)
@@ -111,22 +132,6 @@ inline void logger::process_output(
                 pszAssertExpression,
                 args...);
         }
-
-#else
-
-        m_sMsg.format(
-            m_sFormat.data(),
-            get_time_str(),
-            pszFile,
-            pszFunction,
-            nLine,
-            pszAssertExpression,
-            args...);
-
-        if (auto it = m_sMsg.find("[::(0)]"); it != string::npos)
-            m_sMsg.erase(it, 7);
-
-#endif
 
         m_sMsg += '\n';
 
