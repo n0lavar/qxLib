@@ -54,7 +54,7 @@ inline void logger::process_output(
 
         switch (eLogLevel)
         {
-        case qx::logger::level::all:
+        case qx::logger::level::info:
             m_sFormat = "[I][%s][%s::%s(%d)] ";
             break;
 
@@ -266,7 +266,7 @@ inline void logger::output_to_cout(const string& sText, const char* pszAnsiiColo
 //================================================================================
 inline void logger::on_create(void)
 {
-    register_unit("default", { "default.log", level::all, level::all });
+    register_unit("default", { "default.log", level::info, level::info });
 }
 
 //================================================================================

@@ -270,6 +270,28 @@ TYPED_TEST(TestQxString, format)
     EXPECT_STREQ(str1.data(), STR("The half of 75 is 37.500000"));
     EXPECT_FALSE(str0.empty());
     EXPECT_EQ(str1.size(), 27);
+
+    StringTypeTn str2;
+
+    str2.format(STR("%f"), 1.f);
+    EXPECT_STREQ(str2.data(), STR("1.000000"));
+    EXPECT_FALSE(str2.empty());
+    EXPECT_EQ(str2.size(), 8);
+
+    str2.format(STR("%f %d"), 1.f, 2);
+    EXPECT_STREQ(str2.data(), STR("1.000000 2"));
+    EXPECT_FALSE(str2.empty());
+    EXPECT_EQ(str2.size(), 10);
+
+    str2.format(STR("%f %d %s"), 1.f, 2, STR("three"));
+    EXPECT_STREQ(str2.data(), STR("1.000000 2 three"));
+    EXPECT_FALSE(str2.empty());
+    EXPECT_EQ(str2.size(), 16);
+
+    str2.format(STR("%f %d %s %u"), 1.f, 2, STR("three"), 4u);
+    EXPECT_STREQ(str2.data(), STR("1.000000 2 three 4"));
+    EXPECT_FALSE(str2.empty());
+    EXPECT_EQ(str2.size(), 18);
 }
 
 TYPED_TEST(TestQxString, size)

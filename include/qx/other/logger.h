@@ -28,7 +28,7 @@
 
 #define QX_TRACE_FROM(loggerInstanse, format, ...)              \
     loggerInstanse.process_output(                              \
-        qx::logger::level::all,                                 \
+        qx::logger::level::info,                                \
         format,                                                 \
         nullptr,                                                \
         QX_SHORT_FILE,                                          \
@@ -115,22 +115,18 @@ public:
     //!< Log files policy
     enum class policy
     {
-        first = 0,
         append,             //!< append all
         clear_then_uppend,  //!< clear file at start, then append
         folder_time,        //!< create new folder with time name
-        last
     };
 
     //!< Log level
     enum class level
     {
-        first = 0,
-        all,        // _TR_ASSERT + TR_ERROR + TRACE
+        info,       // _TR_ASSERT + TR_ERROR + TRACE
         errors,     // _TR_ASSERT + TR_ERROR
         asserts,    // _TR_ASSERT
         none,       // disable
-        last
     };
 
     //================================================================================
@@ -142,8 +138,8 @@ public:
     struct TraceUnitInfo
     {
         string  sLogFileName;
-        level   eConsoleLevel   = level::all;
-        level   eFileLevel      = level::all;
+        level   eConsoleLevel   = level::info;
+        level   eFileLevel      = level::info;
     };
 
     using TraceUnitInfoMap = std::unordered_map<string, TraceUnitInfo>;
