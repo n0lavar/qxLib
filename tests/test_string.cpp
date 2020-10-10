@@ -293,7 +293,7 @@ TYPED_TEST(TestQxString, format)
     EXPECT_EQ(str2.size(), 10);
 
     format += STR("%f %d ");
-    format += get_string_format_specifier<TypeParam::value_type>();
+    format += get_string_format_specifier<typename TypeParam::value_type>();
     str2.format(format.data(), 1.f, 2, STR("three"));
     EXPECT_STREQ(str2.data(), STR("1.000000 2 three"));
     EXPECT_FALSE(str2.empty());
