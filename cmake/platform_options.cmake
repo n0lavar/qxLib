@@ -3,7 +3,7 @@ function(set_qxlib_target_options _target)
 
     if (${CMAKE_CXX_COMPILER_ID} STREQUAL Clang)
     
-        target_link_options(${_target} PRIVATE
+        target_compile_options(${_target} PRIVATE
             -lc++fs
         )
         target_link_libraries(${_target} PRIVATE
@@ -13,10 +13,10 @@ function(set_qxlib_target_options _target)
     elseif (${CMAKE_CXX_COMPILER_ID} STREQUAL GNU)    
         
         target_compile_options(${_target} PRIVATE
+			-lstdc++fs
             $<$<CONFIG:Debug>:--coverage -O0 -g>
         )
         target_link_options(${_target} PRIVATE 
-			-lstdc++fs
             $<$<CONFIG:Debug>:--coverage>
         )
         target_link_libraries(${_target} PRIVATE
