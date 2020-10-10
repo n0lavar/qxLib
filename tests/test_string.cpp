@@ -20,6 +20,14 @@
 #include <unordered_map>
 #include <gtest/gtest.h>
 
+template<typename Char>
+inline constexpr auto get_string_format_specifier(void)
+{
+    if constexpr (std::is_same_v<Char, char>)
+        return "%s";
+    else if constexpr (std::is_same_v<Char, wchar_t>)
+        return L"%ls";
+}
 
 //==============================================================================
 //
@@ -272,6 +280,7 @@ TYPED_TEST(TestQxString, format)
     EXPECT_EQ(str1.size(), 27);
 
     StringTypeTn str2;
+    StringTypeTn format;
 
     str2.format(STR("%f"), 1.f);
     EXPECT_STREQ(str2.data(), STR("1.000000"));
@@ -283,12 +292,15 @@ TYPED_TEST(TestQxString, format)
     EXPECT_FALSE(str2.empty());
     EXPECT_EQ(str2.size(), 10);
 
-    str2.format(STR("%f %d %s"), 1.f, 2, STR("three"));
+    format += STR("%f %d ");
+    format += get_string_format_specifier<TypeParam::value_type>();
+    str2.format(format.data(), 1.f, 2, STR("three"));
     EXPECT_STREQ(str2.data(), STR("1.000000 2 three"));
     EXPECT_FALSE(str2.empty());
     EXPECT_EQ(str2.size(), 16);
 
-    str2.format(STR("%f %d %s %u"), 1.f, 2, STR("three"), 4u);
+    format += STR(" %u");
+    str2.format(format.data(), 1.f, 2, STR("three"), 4u);
     EXPECT_STREQ(str2.data(), STR("1.000000 2 three 4"));
     EXPECT_FALSE(str2.empty());
     EXPECT_EQ(str2.size(), 18);
