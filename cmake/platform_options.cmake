@@ -4,7 +4,8 @@ function(set_qxlib_target_options _target)
     if (${CMAKE_CXX_COMPILER_ID} STREQUAL Clang)
     
         target_link_libraries(${_target} PRIVATE
-            -pthread -lc++fs
+            -pthread 
+			-lstdc++fs
         )
         
     elseif (${CMAKE_CXX_COMPILER_ID} STREQUAL GNU)    
@@ -13,7 +14,8 @@ function(set_qxlib_target_options _target)
             $<$<CONFIG:Debug>:--coverage>
         )
         target_link_libraries(${_target} PRIVATE
-            -pthread -lstdc++fs
+            -pthread 
+			-lstdc++fs
         )
     
     elseif (${CMAKE_CXX_COMPILER_ID} STREQUAL MSVC)
