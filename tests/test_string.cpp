@@ -1008,5 +1008,62 @@ TYPED_TEST(TestQxString, starts_with)
     EXPECT_FALSE(str.starts_with(StringTypeTn(STR("trash"))));
 }
 
+TYPED_TEST(TestQxString, operator_stream_out)
+{
+    StringTypeTn::sstream_type      stream;
+    StringTypeTn                    in_string(STR("  0 one      two 3 .\t>>\n;;"));
+    StringTypeTn::std_string_type   out_string;
+    stream << in_string;
+
+    stream >> out_string;
+    EXPECT_STREQ(out_string.data(), STR("0"));
+
+    stream >> out_string;
+    EXPECT_STREQ(out_string.data(), STR("one"));
+
+    stream >> out_string;
+    EXPECT_STREQ(out_string.data(), STR("two"));
+
+    stream >> out_string;
+    EXPECT_STREQ(out_string.data(), STR("3"));
+
+    stream >> out_string;
+    EXPECT_STREQ(out_string.data(), STR("."));
+
+    stream >> out_string;
+    EXPECT_STREQ(out_string.data(), STR(">>"));
+
+    stream >> out_string;
+    EXPECT_STREQ(out_string.data(), STR(";;"));
+}
+
+TYPED_TEST(TestQxString, operator_stream_in)
+{
+    StringTypeTn::sstream_type      stream;
+    StringTypeTn::std_string_type   in_string(STR("  0 one      two 3 .\t>>\n;;"));
+    StringTypeTn                    out_string;
+    stream << in_string;
+
+    stream >> out_string; // to empty
+    EXPECT_STREQ(out_string.data(), STR("0"));
+
+    stream >> out_string;
+    EXPECT_STREQ(out_string.data(), STR("one"));
+
+    stream >> out_string;
+    EXPECT_STREQ(out_string.data(), STR("two"));
+
+    stream >> out_string;
+    EXPECT_STREQ(out_string.data(), STR("3"));
+
+    stream >> out_string;
+    EXPECT_STREQ(out_string.data(), STR("."));
+
+    stream >> out_string;
+    EXPECT_STREQ(out_string.data(), STR(">>"));
+
+    stream >> out_string;
+    EXPECT_STREQ(out_string.data(), STR(";;"));
+}
 
 #endif

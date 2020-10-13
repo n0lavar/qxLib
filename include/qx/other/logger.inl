@@ -40,15 +40,15 @@ inline void logger::process_output(
     const char  * pszColor,
     Args...       args)
 {
-    TraceUnitInfo* pUnitInfo = nullptr;
+    SRuntimeTraceUnitInfo* pUnitInfo = nullptr;
     if (auto it = m_RegisteredUnits.find(pszFunction); it != m_RegisteredUnits.cend())
         pUnitInfo = &(it->second);
     else if (auto it = m_RegisteredUnits.find(pszFile); it != m_RegisteredUnits.cend())
         pUnitInfo = &(it->second);
-    else if (auto it = m_RegisteredUnits.find("default"); it != m_RegisteredUnits.cend())
+    else if (auto it = m_RegisteredUnits.find(DEFAULT_UNIT); it != m_RegisteredUnits.cend())
         pUnitInfo = &(it->second);
 
-    if (pUnitInfo && (eLogLevel >= pUnitInfo->eFileLevel || eLogLevel >= pUnitInfo->eConsoleLevel))
+    if (pUnitInfo && (eLogLevel >= pUnitInfo->traceUnitInfo.eFileLevel || eLogLevel >= pUnitInfo->traceUnitInfo.eConsoleLevel))
     {
         m_sFormat.clear();
 
@@ -73,51 +73,14 @@ inline void logger::process_output(
 
         m_sFormat += pszFormat;
 
-        m_sFunction.clear();
-
-#if _MSC_VER
-
-        // delete long and ugly lambda name from debug
-        if (const char* pLambdaStr = std::strstr(pszFunction, "{ctor}::<lambda_"); pLambdaStr != nullptr)
-        {
-            constexpr int LAMBDA_NAME_SIZE = 62;
-
-            m_sFunction = pszFunction;
-            m_sFunction.erase(pLambdaStr - pszFunction, LAMBDA_NAME_SIZE);
-            m_sFunction.insert(pLambdaStr - pszFunction, "lambda");
-        }
-
-#endif
-
-#if QX_ENABLE_DETAIL_TRACE_INFO
-
-        // delete long and ugly lambda name from debug
-        if (const char* pLambdaStr = std::strstr(pszFunction, "{ctor}::<lambda_"); pLambdaStr != nullptr)
-        {
-            constexpr int LAMBDA_NAME_SIZE = 62;
-
-            m_sFunction = pszFunction;
-            m_sFunction.erase(pLambdaStr - pszFunction, LAMBDA_NAME_SIZE);
-            m_sFunction.insert(pLambdaStr - pszFunction, "lambda");
-        }
-
-#endif
-
-#if 0
-
-        if (auto it = m_sMsg.find("[::(0)]"); it != string::npos)
-            m_sMsg.erase(it, 7);
-
-#endif
-
-        // assume pszAssertExpression != nullptr as method must be used in macros only
+        // assume all psz != nullptr as method must be used in macros only
         if (eLogLevel != qx::logger::level::asserts)
         {
             m_sMsg.format(
                 m_sFormat.data(),
                 get_time_str(),
                 pszFile,
-                m_sFunction.empty() ? pszFunction : m_sFunction.data(),
+                pszFunction,
                 nLine,
                 args...);
         }
@@ -127,7 +90,7 @@ inline void logger::process_output(
                 m_sFormat.data(),
                 get_time_str(),
                 pszFile,
-                m_sFunction.empty() ? pszFunction : m_sFunction.data(),
+                pszFunction,
                 nLine,
                 pszAssertExpression,
                 args...);
@@ -135,11 +98,16 @@ inline void logger::process_output(
 
         m_sMsg += '\n';
 
-        if (eLogLevel >= pUnitInfo->eFileLevel)
-            output_to_file(m_sMsg, pUnitInfo->sLogFileName);
+        if (eLogLevel >= pUnitInfo->traceUnitInfo.eFileLevel
+            && output_to_file(m_sMsg, pUnitInfo->traceUnitInfo.sLogFileName))
+        {
+            pUnitInfo->bWroteToFile = true;
+        }
 
-        if (eLogLevel >= pUnitInfo->eConsoleLevel)
+        if (eLogLevel >= pUnitInfo->traceUnitInfo.eConsoleLevel)
+        {
             output_to_cout(m_sMsg, pszColor);
+        }
     }
 }
 
@@ -153,17 +121,25 @@ inline void logger::process_output(
 //!\author Khrapov
 //!\date   10.01.2020
 //================================================================================
-inline void logger::register_unit(const char* pszUnitName, const TraceUnitInfo& unit)
+inline void logger::register_unit(const char* pszUnitName, const STraceUnitInfo& unit)
 {
     if (!unit.sLogFileName.empty())
     {
         if (m_eLogPolicy == policy::clear_then_uppend)
             std::ofstream ofs(unit.sLogFileName.data(), std::ofstream::out | std::ofstream::trunc); //-V808
                                                                                                     // clear file
-        m_RegisteredUnits[pszUnitName] = unit;
+        m_RegisteredUnits[pszUnitName] = { unit };
     }
 }
 
+//================================================================================
+//!\fn                     qx::logger::set_logs_folder
+//
+//!\brief  Set logs root folder
+//!\param  pszFolder - log folder
+//!\author Khrapov
+//!\date   10.01.2020
+//================================================================================
 inline void logger::set_logs_folder(const char* pszFolder)
 {
     m_sFolder = pszFolder;
@@ -201,11 +177,13 @@ inline const char* logger::get_time_str(void)
 //!\brief  Output log string to file
 //!\param  sText     - log string text
 //!\param  sFileName - file name string
+//!\retval           - true if successful
 //!\author Khrapov
 //!\date   10.01.2020
 //================================================================================
-inline void logger::output_to_file(const string& sText, const string& sFileName)
+inline bool logger::output_to_file(const string& sText, const string& sFileName)
 {
+    bool bRet = true;
     std::ofstream ofs;
     ofs.exceptions(std::ofstream::failbit | std::ofstream::badbit);
     m_sPath.clear();
@@ -235,11 +213,14 @@ inline void logger::output_to_file(const string& sText, const string& sFileName)
     }
     catch (const std::system_error& e)
     {
+        bRet = false;
         std::cerr
             << "output_to_file error: file " << sFileName
             << ", error " << e.code().value()
             << ", msg " << e.what() << std::endl;
     }
+
+    return bRet;
 }
 
 //================================================================================
@@ -271,7 +252,7 @@ inline void logger::output_to_cout(const string& sText, const char* pszAnsiiColo
 //================================================================================
 inline void logger::on_create(void)
 {
-    register_unit("default", { "default.log", level::info, level::info });
+    register_unit(DEFAULT_UNIT, { DEFAULT_FILE, level::info, level::info });
 }
 
 //================================================================================
@@ -285,8 +266,11 @@ inline void logger::on_terminate(void)
 {
     for (const auto& u : m_RegisteredUnits)
     {
-        std::ofstream ofs(u.second.sLogFileName.data(), std::ofstream::app);
-        ofs << std::endl << std::endl << std::endl;
+        if (u.second.bWroteToFile)
+        {
+            std::ofstream ofs(u.second.traceUnitInfo.sLogFileName.data(), std::ofstream::app);
+            ofs << std::endl << std::endl << std::endl;
+        }
     }
 }
 

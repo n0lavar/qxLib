@@ -119,12 +119,13 @@ namespace qx::detail
 
 #if QX_ENABLE_DEBUG_BREAK
 
-    #if QX_WIN
+    #if QX_MSVC
         #define QX_DEBUG_BREAK __debugbreak()
-    #elif QX_LINUX
-        #define QX_DEBUG_BREAK if (detect_debugger() == 1) raise(SIGTRAP)
-    #elif defined(ANDROID)
-        #define QX_DEBUG_BREAK assert(0)
+    #elif QX_CLANG
+        #define QX_DEBUG_BREAK __builtin_debugtrap()
+    #elif QX_GNU
+        #include <signal.h>
+        #define QX_DEBUG_BREAK raise(SIGTRAP)
     #else
         #define QX_DEBUG_BREAK QX_EMPTY_MACRO
     #endif

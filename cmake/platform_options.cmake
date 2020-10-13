@@ -8,8 +8,8 @@ function(set_qxlib_target_options _target)
 			-lstdc++fs
         )
         target_compile_options(${_target} PRIVATE
-            $<$<CONFIG:Debug>:-D _DEBUG 1>
-            $<$<CONFIG:Release>:-D _DEBUG 0>
+            $<$<CONFIG:Debug>:-D_DEBUG=1>
+            $<$<CONFIG:Release>:-D_DEBUG=0>
         )
         
     elseif (${CMAKE_CXX_COMPILER_ID} STREQUAL GNU)    
@@ -22,8 +22,15 @@ function(set_qxlib_target_options _target)
 			-lstdc++fs
         )
         target_compile_options(${_target} PRIVATE
-            $<$<CONFIG:Debug>:-D _DEBUG 1>
-            $<$<CONFIG:Release>:-D _DEBUG 0>
+            $<$<CONFIG:Debug>:-D_DEBUG=1>
+            $<$<CONFIG:Release>:-D_DEBUG=0>
+        )
+		
+	elseif(${CMAKE_CXX_COMPILER_ID} STREQUAL AppleClang)
+	
+		target_compile_options(${_target} PRIVATE
+            $<$<CONFIG:Debug>:-D_DEBUG=1>
+            $<$<CONFIG:Release>:-D_DEBUG=0>
         )
     
     elseif (${CMAKE_CXX_COMPILER_ID} STREQUAL MSVC)
