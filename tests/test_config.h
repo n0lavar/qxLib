@@ -91,3 +91,7 @@
 #ifndef QX_TEST_BENCHMARK
     #define QX_TEST_BENCHMARK 1
 #endif
+
+#ifndef QX_TEST_LOGGER
+    #define QX_TEST_LOGGER 1
+#endif

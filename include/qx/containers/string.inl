@@ -26,7 +26,7 @@ namespace qx
 template<class Traits>
 inline void basic_string<Traits>::assign(const_pointer pSource, size_type nSymbols)
 {
-    if (Resize(nSymbols, Traits::talign()))
+    if (resize(nSymbols, Traits::talign()))
         std::memmove(m_pData, pSource, nSymbols * sizeof(value_type));
 }
 
@@ -72,7 +72,7 @@ inline void basic_string<Traits>::assign(const_pointer pSource)
 template<class Traits>
 inline void basic_string<Traits>::assign(size_type nSymbols, value_type ch)
 {
-    if (Resize(nSymbols, Traits::talign()))
+    if (resize(nSymbols, Traits::talign()))
         std::fill(begin(), end(), ch);
 }
 
@@ -108,7 +108,7 @@ template<class ...Args>
 inline void basic_string<Traits>::format(const_pointer pFormat, Args ...args)
 {
     int length = Traits::tsnprintf(nullptr, 0, pFormat, args...);
-    if (length > 0 && Resize(length, Traits::talign()))
+    if (length > 0 && resize(length, Traits::talign()))
         Traits::tsnprintf(m_pData, static_cast<size_type>(length) + 1, pFormat, args...);
 }
 
@@ -141,7 +141,7 @@ inline basic_string<Traits> basic_string<Traits>::sformat(const_pointer pFormat,
 template<class Traits>
 inline typename basic_string<Traits>::size_type basic_string<Traits>::capacity(void) const
 {
-    auto pData = GetStrData();
+    auto pData = get_str_data();
     return pData
         ? pData->nAllocatedSize
         : 0;
@@ -160,7 +160,7 @@ template<class Traits>
 inline typename basic_string<Traits>::size_type basic_string<Traits>::reserve(size_type nCapacity)
 {
     if (nCapacity > capacity())
-        Resize(nCapacity, Traits::talign(), EResizeType::reserve);
+        resize(nCapacity, Traits::talign(), EResizeType::reserve);
 
     return capacity();
 }
@@ -174,9 +174,9 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::reserve(si
 template<class Traits>
 inline void basic_string<Traits>::fit(void)
 {
-    auto pData = GetStrData();
+    auto pData = get_str_data();
     if (pData && pData->nAllocatedSize > pData->nSize)
-        Resize(pData->nSize, 0, EResizeType::fit);
+        resize(pData->nSize, 0, EResizeType::fit);
 }
 
 //==============================================================================
@@ -189,7 +189,7 @@ inline void basic_string<Traits>::fit(void)
 template<class Traits>
 inline void basic_string<Traits>::free(void)
 {
-    std::free(GetStrData());
+    std::free(get_str_data());
     m_pData = nullptr;
 }
 
@@ -212,7 +212,7 @@ inline void basic_string<Traits>::erase(iterator first, iterator last)
         if (size_type nSymbolsToCopy = last != end() ? Traits::tstrlen(last.operator->()) : 0; nSymbolsToCopy > 0)
             std::memcpy(first.operator->(), last.operator->(), nSymbolsToCopy * sizeof(value_type));
 
-        Resize(static_cast<size_type>(nStartSize - (last - first)), Traits::talign());
+        resize(static_cast<size_type>(nStartSize - (last - first)), Traits::talign());
     }
 }
 
@@ -389,7 +389,7 @@ template<class Traits>
 inline void basic_string<Traits>::insert(size_type to_ind, const_pointer pSourse, size_type nSymbols)
 {
     size_type nStartSymbols = size();
-    if (Resize(nStartSymbols + nSymbols, Traits::talign()))
+    if (resize(nStartSymbols + nSymbols, Traits::talign()))
     {
         std::memmove(m_pData + to_ind + nSymbols, m_pData + to_ind, (nStartSymbols - to_ind) * sizeof(value_type));
         std::memcpy(m_pData + to_ind, pSourse, nSymbols * sizeof(value_type));
@@ -761,17 +761,17 @@ inline std::optional<To> basic_string<Traits>::to(void) const
     {
         if constexpr (std::is_same_v<To, std::nullptr_t>)
         {
-            if (Compare(QX_STR_PREFIX(typename Traits::value_type, "nullptr")) == 0)
+            if (compare(QX_STR_PREFIX(typename Traits::value_type, "nullptr")) == 0)
                 optResult = nullptr;
         }
         else if constexpr (std::is_same_v<To, bool>)
         {
-            if (Compare(QX_STR_PREFIX(typename Traits::value_type, "true")) == 0)
+            if (compare(QX_STR_PREFIX(typename Traits::value_type, "true")) == 0)
                 optResult = true;
             else
                 optResult = false;
         }
-        else if (auto pszFormat = GetFormatSpecifier<To>())
+        else if (auto pszFormat = get_format_specifier<To>())
         {
             To result;
             int nConvertedArgs = Traits::tssscanf(m_pData, pszFormat, &result);
@@ -820,7 +820,7 @@ inline void basic_string<Traits>::from(const From& data, const_pointer pszFormat
                     : QX_STR_PREFIX(typename Traits::value_type, "false");
             }
             else
-                pszFormat = GetFormatSpecifier<From>();
+                pszFormat = get_format_specifier<From>();
         }
 
         if (pszFormat)
@@ -854,7 +854,7 @@ inline basic_string<Traits> basic_string<Traits>::sfrom(const From& data, const_
 }
 
 //==============================================================================
-//!\fn          qx::basic_string<Traits>::GetFormatSpecifier<T>
+//!\fn          qx::basic_string<Traits>::get_format_specifier<T>
 //
 //!\brief  Get format specifier for type
 //!\retval  - format specifier or nullptr if type is not supported
@@ -863,7 +863,7 @@ inline basic_string<Traits> basic_string<Traits>::sfrom(const From& data, const_
 //==============================================================================
 template<class Traits>
 template<typename T>
-inline constexpr typename basic_string<Traits>::const_pointer basic_string<Traits>::GetFormatSpecifier(void)
+inline constexpr typename basic_string<Traits>::const_pointer basic_string<Traits>::get_format_specifier(void)
 {
     const_pointer pszFormat = nullptr;
 
@@ -921,7 +921,7 @@ inline constexpr typename basic_string<Traits>::const_pointer basic_string<Trait
     }
     else if constexpr (std::is_pointer_v<T>)
     {
-#ifdef _MSC_VER
+#if QX_MSVC
         pszFormat = QX_STR_PREFIX(typename Traits::value_type, "0x%p");
 #else
         pszFormat = QX_STR_PREFIX(typename Traits::value_type, "%p");
@@ -982,7 +982,7 @@ inline void basic_string<Traits>::clear(void)
 template<class Traits>
 inline typename basic_string<Traits>::size_type basic_string<Traits>::size(void) const
 {
-    const auto pData = GetStrData();
+    const auto pData = get_str_data();
     return pData
         ? pData->nSize
         : 0;
@@ -1001,37 +1001,37 @@ inline typename basic_string<Traits>::pointer basic_string<Traits>::data(void)
     return m_pData;
 }
 //==============================================================================
-//!\fn              qx::basic_string<Traits>::GetStrData
+//!\fn              qx::basic_string<Traits>::get_str_data
 //
 //!\brief  Get string info struct
 //!\author Khrapov
 //!\date   27.10.2019
 //==============================================================================
 template<class Traits>
-inline SStrData<Traits> * basic_string<Traits>::GetStrData(void)
+inline str_data<Traits> * basic_string<Traits>::get_str_data(void)
 {
     return m_pData
-        ? reinterpret_cast<SStrData<Traits>*>(reinterpret_cast<mem_t>(m_pData) - SStrData<Traits>::structSize())
+        ? reinterpret_cast<str_data<Traits>*>(reinterpret_cast<mem_t>(m_pData) - str_data<Traits>::struct_size())
         : nullptr;
 }
 
 //==============================================================================
-//!\fn              qx::basic_string<Traits>::GetStrData
+//!\fn              qx::basic_string<Traits>::get_str_data
 //
 //!\brief  Get string info struct
 //!\author Khrapov
 //!\date   27.10.2019
 //==============================================================================
 template<class Traits>
-inline const SStrData<Traits>* basic_string<Traits>::GetStrData(void) const
+inline const str_data<Traits>* basic_string<Traits>::get_str_data(void) const
 {
     return m_pData
-        ? reinterpret_cast<const SStrData<Traits>*>(reinterpret_cast<mem_t>(m_pData) - SStrData<Traits>::structSize())
+        ? reinterpret_cast<const str_data<Traits>*>(reinterpret_cast<mem_t>(m_pData) - str_data<Traits>::struct_size())
         : nullptr;
 }
 
 //==============================================================================
-//!\fn                qx::basic_string<Traits>::Resize
+//!\fn                qx::basic_string<Traits>::resize
 //
 //!\brief  Resize string.
 //         If new size is smaller, string will be truncated
@@ -1043,7 +1043,7 @@ inline const SStrData<Traits>* basic_string<Traits>::GetStrData(void) const
 //!\date   29.10.2019
 //==============================================================================
 template<class Traits>
-inline bool basic_string<Traits>::Resize(size_type nSymbols, size_type nAlign, EResizeType eType)
+inline bool basic_string<Traits>::resize(size_type nSymbols, size_type nAlign, EResizeType eType)
 {
     auto align_size = [](size_type nSize, size_type nAlign) -> size_type
     {
@@ -1054,7 +1054,7 @@ inline bool basic_string<Traits>::Resize(size_type nSymbols, size_type nAlign, E
         ? align_size(nSymbols + 1, nAlign)
         : nSymbols + 1;
 
-    SStrData<Traits>* pStrData = GetStrData();
+    str_data<Traits>* pStrData = get_str_data();
     bool bEmptyAtStart = !pStrData;
 
     if (eType == EResizeType::fit                       // need to decrease size
@@ -1062,13 +1062,13 @@ inline bool basic_string<Traits>::Resize(size_type nSymbols, size_type nAlign, E
         || nSizeToAllocate > pStrData->nAllocatedSize)  // need to increase size
     {
         // increase or decrease size
-        void* pNewBlock = std::realloc(pStrData, SStrData<Traits>::structSize() + nSizeToAllocate * sizeof(value_type));
+        void* pNewBlock = std::realloc(pStrData, str_data<Traits>::struct_size() + nSizeToAllocate * sizeof(value_type));
         if (pNewBlock)
         {
-            pStrData = reinterpret_cast<SStrData<Traits>*>(pNewBlock);
+            pStrData = reinterpret_cast<str_data<Traits>*>(pNewBlock);
             pStrData->nAllocatedSize = nSizeToAllocate;
 
-            m_pData = reinterpret_cast<pointer>(reinterpret_cast<mem_t>(pNewBlock) + SStrData<Traits>::structSize());
+            m_pData = reinterpret_cast<pointer>(reinterpret_cast<mem_t>(pNewBlock) + str_data<Traits>::struct_size());
         }
         else
             return false;
@@ -1086,7 +1086,7 @@ inline bool basic_string<Traits>::Resize(size_type nSymbols, size_type nAlign, E
 }
 
 //==============================================================================
-//!\fn                qx::basic_string<Traits>::Append
+//!\fn                qx::basic_string<Traits>::append
 //
 //!\brief  Append string to the current
 //!\param  pSource  - source string
@@ -1095,15 +1095,15 @@ inline bool basic_string<Traits>::Resize(size_type nSymbols, size_type nAlign, E
 //!\date   27.10.2019
 //==============================================================================
 template<class Traits>
-inline void basic_string<Traits>::Append(const_pointer pSource, size_type nSymbols)
+inline void basic_string<Traits>::append(const_pointer pSource, size_type nSymbols)
 {
     size_type nCurrentSymbls = size();
-    if (Resize(nCurrentSymbls + nSymbols, Traits::talign()))
+    if (resize(nCurrentSymbls + nSymbols, Traits::talign()))
         std::memcpy(m_pData + nCurrentSymbls, pSource, nSymbols * sizeof(value_type));
 }
 
 //==============================================================================
-//!\fn               qx::basic_string<Traits>::Compare
+//!\fn               qx::basic_string<Traits>::compare
 //
 //!\brief  Performs a binary comparison of the characters
 //!\param  pStr     - string to compare
@@ -1115,7 +1115,7 @@ inline void basic_string<Traits>::Append(const_pointer pSource, size_type nSymbo
 //!\date   28.10.2019
 //==============================================================================
 template<class Traits>
-inline int basic_string<Traits>::Compare(const_pointer pStr, size_type nSymbols) const
+inline int basic_string<Traits>::compare(const_pointer pStr, size_type nSymbols) const
 {
     if (nSymbols)
         return Traits::tstrncmp(m_pData, pStr, nSymbols);
@@ -1123,4 +1123,118 @@ inline int basic_string<Traits>::Compare(const_pointer pStr, size_type nSymbols)
         return Traits::tstrcmp(m_pData, pStr);
 }
 
+}
+
+
+
+//-------------------------- hashes for strings types --------------------------
+
+namespace std
+{
+    template<>
+    struct hash<qx::string>
+    {
+        u32 operator()(const qx::string& str) const
+        {
+            return qx::detail::murmur_32_hash(str.data(),
+                                              str.size(),
+                                              qx::detail::random_string_hash::next());
+        }
+    };
+
+    template<>
+    struct hash<qx::wstring>
+    {
+        u32 operator()(const qx::wstring& str) const
+        {
+            return qx::detail::murmur_32_hash(str.data(),
+                                              str.size(),
+                                              qx::detail::random_string_hash::next());
+        }
+    };
+
+    template<>
+    struct hash<qx::pstring>
+    {
+        u32 operator()(const qx::pstring& str) const
+        {
+            return qx::detail::murmur_32_hash(str.data(),
+                                              str.size(),
+                                              qx::detail::random_string_hash::next());
+        }
+    };
+
+    template<>
+    struct hash<qx::wpstring>
+    {
+        u32 operator()(const qx::wpstring& str) const
+        {
+            return qx::detail::murmur_32_hash(str.data(),
+                                              str.size(),
+                                              qx::detail::random_string_hash::next());
+        }
+    };
+}
+
+
+
+//----------------------- istream / ostream overloading ----------------------
+
+template<class Traits>
+qx::detail::ostream<Traits>& operator<<(qx::detail::ostream<Traits>& os, const qx::basic_string<Traits>& str)
+{
+    os << str.data();
+    return os;
+}
+
+template<class Traits>
+qx::detail::istream<Traits>& operator>>(qx::detail::istream<Traits>& is, qx::basic_string<Traits>& str)
+{
+    typename qx::detail::istream<Traits>::iostate ret_bit = qx::detail::istream<Traits>::goodbit;
+    auto TryPushBack = [&str, &is, &ret_bit](typename qx::basic_string<Traits>::value_type ch) -> bool
+    {
+        typename qx::basic_string<Traits>::size_type nCurrentSize = str.size();
+        if (str.resize(nCurrentSize + 1, Traits::talign()))
+        {
+            str[nCurrentSize] = ch;
+            return true;
+        }
+        else
+        {
+            is.unget();
+            ret_bit |= qx::detail::istream<Traits>::failbit;
+            return false;
+        }
+    };
+
+    str.clear();
+    typename qx::basic_string<Traits>::value_type ch;
+
+    // skip all space symbols and add first symbol is any
+    while (is.get(ch))
+    {
+        if (!Traits::tisspace(ch))
+        {
+            TryPushBack(ch);
+            break;
+        }
+    }
+
+    // add other symbols until space symbol
+    while (is.get(ch))
+    {
+        if (!Traits::tisspace(ch))
+        {
+            if (!TryPushBack(ch))
+                break;
+        }
+        else
+        {
+            is.unget();
+            break;
+        }
+    }
+
+    is.setstate(ret_bit);
+    return is;
 }

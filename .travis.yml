@@ -1,6 +1,6 @@
 language:   cpp
 dist:       bionic
-osx_image:  xcode10.3
+osx_image:  xcode12.2
 notifications:
   email:
     on_success: never  # default: change

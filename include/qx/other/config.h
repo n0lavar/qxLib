@@ -12,6 +12,7 @@
 //==============================================================================
 #pragma once
 
+//---------------------------------- platform ----------------------------------
 
 #if defined(_WIN64) || defined(_WIN32)
     #define QX_WIN 1
@@ -31,6 +32,27 @@
     #define QX_LINUX 0
 #endif
 
+//---------------------------------- compiler ----------------------------------
+
+#ifdef _MSC_VER
+    #define QX_MSVC 1
+#else
+    #define QX_MSVC 0
+#endif
+
+#ifdef __clang__
+    #define QX_CLANG 1
+#else
+    #define QX_CLANG 0
+#endif
+
+#ifdef __GNUG__
+    #define QX_GNU 1
+#else
+    #define QX_GNU 0
+#endif
+
+//------------------------------------ build -----------------------------------
 
 #if _DEBUG
     #define QX_DEBUG 1

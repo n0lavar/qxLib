@@ -19,14 +19,43 @@
 
 #include <qx/containers/container.h>
 #include <qx/meta/constexpr_random.h>
-#include <qx/containers/string_traits.h>
 #include <qx/other/type_traits.h>
 
 namespace qx
 {
 
 template<class Traits>
-struct SStrData;
+struct str_data
+{
+    typename Traits::size_type nSize          = 0;
+    typename Traits::size_type nAllocatedSize = 0;
+
+    // note: https://www.viva64.com/ru/w/v119/
+    static constexpr typename Traits::size_type struct_size(void)
+    {
+        return sizeof(str_data) + offsetof(str_data, nAllocatedSize);
+    }
+};
+
+template<class Traits>
+class basic_string;
+
+namespace detail
+{
+    template<class Traits>
+    using ostream = std::basic_ostream<typename Traits::value_type, std::char_traits<typename Traits::value_type>>;
+
+    template<class Traits>
+    using istream = std::basic_istream<typename Traits::value_type, std::char_traits<typename Traits::value_type>>;
+}
+
+}
+
+template<class Traits>
+qx::detail::istream<Traits>& operator>>(qx::detail::istream<Traits>& is, qx::basic_string<Traits>& str);
+
+namespace qx
+{
 
 //!< case types for .apply_case()
 enum class ECaseType
@@ -56,6 +85,9 @@ class basic_string
         reserve,
         fit
     };
+
+    template<class _Traits>
+    friend detail::istream<_Traits>& ::operator>>(qx::detail::istream<_Traits>& is, qx::basic_string<_Traits>& str);
 
 public:
 
@@ -205,15 +237,15 @@ public:
     static  basic_string    sfrom        (const From&            data,
                                           const_pointer          pszFormat = nullptr);
 
-    const   basic_string &  operator+=   (const basic_string   & str)             { Append(str.data(), str.size());             return *this;   }
-    const   basic_string &  operator+=   (value_type             ch)              { Append(&ch, 1);                             return *this;   }
-    const   basic_string &  operator+=   (const_pointer          pSource)         { Append(pSource, Traits::tstrlen(pSource));  return *this;   }
-    const   basic_string &  operator+=   (const std_string_type & str)            { Append(str.data(), static_cast<size_type>(str.size())); return *this; }
+    const   basic_string &  operator+=   (const basic_string   & str)             { append(str.data(), str.size());             return *this;   }
+    const   basic_string &  operator+=   (value_type             ch)              { append(&ch, 1);                             return *this;   }
+    const   basic_string &  operator+=   (const_pointer          pSource)         { append(pSource, Traits::tstrlen(pSource));  return *this;   }
+    const   basic_string &  operator+=   (const std_string_type & str)            { append(str.data(), static_cast<size_type>(str.size())); return *this; }
 
-    bool                    operator==   (const basic_string   & str)       const { return !Compare(str.data());                                }
-    bool                    operator==   (value_type             ch)        const { return !Compare(&ch, 1);                                    }
-    bool                    operator==   (const_pointer          pSource)   const { return !Compare(pSource);                                   }
-    bool                    operator==   (const std_string_type& str)       const { return !Compare(str.data());                                }
+    bool                    operator==   (const basic_string   & str)       const { return !compare(str.data());                                }
+    bool                    operator==   (value_type             ch)        const { return !compare(&ch, 1);                                    }
+    bool                    operator==   (const_pointer          pSource)   const { return !compare(pSource);                                   }
+    bool                    operator==   (const std_string_type& str)       const { return !compare(str.data());                                }
 
     bool                    operator!=   (const basic_string   & str)       const { return !operator==(str);                                    }
     bool                    operator!=   (value_type             ch)        const { return !operator==(ch);                                     }
@@ -225,18 +257,18 @@ public:
 
 private:
 
-    SStrData<Traits>      * GetStrData   (void);
-    const SStrData<Traits>* GetStrData   (void)                                                     const;
-    bool                    Resize       (size_type              nSymbols,
-                                          size_type              nAlign     = 0,
+    str_data<Traits>      * get_str_data (void);
+    const str_data<Traits>* get_str_data (void)                                                     const;
+    bool                    resize       (size_type              nSymbols,
+                                          size_type              nAlign,
                                           EResizeType            eType      = EResizeType::common);
-    void                    Append       (const_pointer          pSource,
+    void                    append       (const_pointer          pSource,
                                           size_type              nSymbols);
-    int                     Compare      (const_pointer          pStr,
+    int                     compare      (const_pointer          pStr,
                                           size_type              nSymbols   = 0)                    const;
 
     template<typename T>
-    static constexpr const_pointer GetFormatSpecifier(void);
+    static constexpr const_pointer get_format_specifier(void);
 
 private:
 
@@ -265,22 +297,6 @@ template<class UT> basic_string<UT> operator+ (basic_string<UT>&&      lhs, cons
 template<class UT> basic_string<UT> operator+ (const typename basic_string<UT>::std_string_type&  lhs, const basic_string<UT>&  rhs) _STR_OP_PLUS_BODY
 template<class UT> basic_string<UT> operator+ (const typename basic_string<UT>::std_string_type&  lhs, basic_string<UT>&&       rhs) _STR_OP_PLUS_BODY
 
-//==============================================================================
-//
-//!\struct                 qx::SStrData<Traits>
-//!\author  Khrapov
-//!\date    27.10.2019
-//==============================================================================
-template<class Traits>
-struct SStrData
-{
-    typename Traits::size_type   nSize           = 0;
-    typename Traits::size_type   nAllocatedSize  = 0;
-
-    // note: https://www.viva64.com/ru/w/v119/
-    static typename Traits::size_type structSize(void)
-        { return sizeof(SStrData) + offsetof(SStrData, nAllocatedSize); }
-};
 
 using string    = basic_string<qx::char_traits<16>>;    // char sequence with 16 alignment
 using wstring   = basic_string<qx::wchar_traits<16>>;   // wchar_t sequence with 16 alignment
@@ -292,77 +308,6 @@ namespace detail
     using random_string_hash = constexpr_random<class random_string_hash_tag, QX_UNIQUE_SEED>;
 }
 
-}
-
-//-------------------------- hashes for strings types --------------------------
-
-namespace std
-{
-    template<>
-    struct hash<qx::string>
-    {
-        u32 operator()(const qx::string& str) const
-        {
-            return qx::detail::murmur_32_hash(str.data(),
-                                              str.size(),
-                                              qx::detail::random_string_hash::next());
-        }
-    };
-
-    template<>
-    struct hash<qx::wstring>
-    {
-        u32 operator()(const qx::wstring& str) const
-        {
-            return qx::detail::murmur_32_hash(str.data(),
-                                              str.size(),
-                                              qx::detail::random_string_hash::next());
-        }
-    };
-
-    template<>
-    struct hash<qx::pstring>
-    {
-        u32 operator()(const qx::pstring& str) const
-        {
-            return qx::detail::murmur_32_hash(str.data(),
-                                              str.size(),
-                                              qx::detail::random_string_hash::next());
-        }
-    };
-
-    template<>
-    struct hash<qx::wpstring>
-    {
-        u32 operator()(const qx::wpstring& str) const
-        {
-            return qx::detail::murmur_32_hash(str.data(),
-                                              str.size(),
-                                              qx::detail::random_string_hash::next());
-        }
-    };
-}
-
-//----------------------- istream / ostream overloading ----------------------
-
-template<class Traits>
-using _ostream = std::basic_ostream<typename Traits::value_type, std::char_traits<typename Traits::value_type>>;
-
-template<class Traits>
-using _istream = std::basic_istream<typename Traits::value_type, std::char_traits<typename Traits::value_type>>;
-
-template<class Traits>
-_ostream<Traits>& operator<<(_ostream<Traits>& os, const qx::basic_string<Traits>& str)
-{
-    os << str.data();
-    return os;
-}
-
-template<class Traits>
-_istream<Traits>& operator>>(_istream<Traits>& is, qx::basic_string<Traits>& str)
-{
-    is >> str.data();
-    return is;
 }
 
 #include <qx/containers/string.inl>

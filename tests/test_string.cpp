@@ -20,6 +20,14 @@
 #include <unordered_map>
 #include <gtest/gtest.h>
 
+template<typename Char>
+inline constexpr auto get_string_format_specifier(void)
+{
+    if constexpr (std::is_same_v<Char, char>)
+        return "%s";
+    else if constexpr (std::is_same_v<Char, wchar_t>)
+        return L"%ls";
+}
 
 //==============================================================================
 //
@@ -270,6 +278,32 @@ TYPED_TEST(TestQxString, format)
     EXPECT_STREQ(str1.data(), STR("The half of 75 is 37.500000"));
     EXPECT_FALSE(str0.empty());
     EXPECT_EQ(str1.size(), 27);
+
+    StringTypeTn str2;
+    StringTypeTn format;
+
+    str2.format(STR("%f"), 1.f);
+    EXPECT_STREQ(str2.data(), STR("1.000000"));
+    EXPECT_FALSE(str2.empty());
+    EXPECT_EQ(str2.size(), 8);
+
+    str2.format(STR("%f %d"), 1.f, 2);
+    EXPECT_STREQ(str2.data(), STR("1.000000 2"));
+    EXPECT_FALSE(str2.empty());
+    EXPECT_EQ(str2.size(), 10);
+
+    format += STR("%f %d ");
+    format += get_string_format_specifier<typename TypeParam::value_type>();
+    str2.format(format.data(), 1.f, 2, STR("three"));
+    EXPECT_STREQ(str2.data(), STR("1.000000 2 three"));
+    EXPECT_FALSE(str2.empty());
+    EXPECT_EQ(str2.size(), 16);
+
+    format += STR(" %u");
+    str2.format(format.data(), 1.f, 2, STR("three"), 4u);
+    EXPECT_STREQ(str2.data(), STR("1.000000 2 three 4"));
+    EXPECT_FALSE(str2.empty());
+    EXPECT_EQ(str2.size(), 18);
 }
 
 TYPED_TEST(TestQxString, size)
@@ -974,5 +1008,62 @@ TYPED_TEST(TestQxString, starts_with)
     EXPECT_FALSE(str.starts_with(StringTypeTn(STR("trash"))));
 }
 
+TYPED_TEST(TestQxString, operator_stream_out)
+{
+    StringTypeTn::sstream_type      stream;
+    StringTypeTn                    in_string(STR("  0 one      two 3 .\t>>\n;;"));
+    StringTypeTn::std_string_type   out_string;
+    stream << in_string;
+
+    stream >> out_string;
+    EXPECT_STREQ(out_string.data(), STR("0"));
+
+    stream >> out_string;
+    EXPECT_STREQ(out_string.data(), STR("one"));
+
+    stream >> out_string;
+    EXPECT_STREQ(out_string.data(), STR("two"));
+
+    stream >> out_string;
+    EXPECT_STREQ(out_string.data(), STR("3"));
+
+    stream >> out_string;
+    EXPECT_STREQ(out_string.data(), STR("."));
+
+    stream >> out_string;
+    EXPECT_STREQ(out_string.data(), STR(">>"));
+
+    stream >> out_string;
+    EXPECT_STREQ(out_string.data(), STR(";;"));
+}
+
+TYPED_TEST(TestQxString, operator_stream_in)
+{
+    StringTypeTn::sstream_type      stream;
+    StringTypeTn::std_string_type   in_string(STR("  0 one      two 3 .\t>>\n;;"));
+    StringTypeTn                    out_string;
+    stream << in_string;
+
+    stream >> out_string; // to empty
+    EXPECT_STREQ(out_string.data(), STR("0"));
+
+    stream >> out_string;
+    EXPECT_STREQ(out_string.data(), STR("one"));
+
+    stream >> out_string;
+    EXPECT_STREQ(out_string.data(), STR("two"));
+
+    stream >> out_string;
+    EXPECT_STREQ(out_string.data(), STR("3"));
+
+    stream >> out_string;
+    EXPECT_STREQ(out_string.data(), STR("."));
+
+    stream >> out_string;
+    EXPECT_STREQ(out_string.data(), STR(">>"));
+
+    stream >> out_string;
+    EXPECT_STREQ(out_string.data(), STR(";;"));
+}
 
 #endif

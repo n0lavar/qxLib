@@ -69,4 +69,3 @@ foreach(_test_file ${TEST_SRC_FILES})
         set_target_properties (${_test_name} PROPERTIES FOLDER qxLibTests)
     endif()
 endforeach()
-    

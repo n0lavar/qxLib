@@ -44,6 +44,10 @@ struct char_traits
     {
         return '\0';
     }
+    static constexpr bool tisspace(value_type ch)
+    {
+        return std::isspace(static_cast<int>(ch));
+    }
     static constexpr size_type talign(void)
     {
         return static_cast<size_type>(Align);
@@ -101,6 +105,10 @@ struct wchar_traits
     {
         return L'\0';
     }
+    static constexpr bool tisspace(value_type ch)
+    {
+        return std::iswspace(static_cast<wint_t>(ch));
+    }
     static constexpr size_type talign(void)
     {
         return static_cast<size_type>(Align);
@@ -127,7 +135,7 @@ struct wchar_traits
     }
     // MVSC's std::swprintf returns required size if nullptr and 0 passed as pDest and nBuffer,
     // while other compilers returns -1
-#ifdef _MSC_VER
+#if QX_MSVC
     template<class ... Args>
     static int tsnprintf(pointer pszDest, size_type nBuffer, const_pointer pszFormat, Args ... args)
     {

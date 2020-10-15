@@ -119,12 +119,13 @@ namespace qx::detail
 
 #if QX_ENABLE_DEBUG_BREAK
 
-    #if QX_WIN
+    #if QX_MSVC
         #define QX_DEBUG_BREAK __debugbreak()
-    #elif QX_LINUX
-        #define QX_DEBUG_BREAK if (detect_debugger() == 1) raise(SIGTRAP)
-    #elif defined(ANDROID)
-        #define QX_DEBUG_BREAK assert(0)
+    #elif QX_CLANG
+        #define QX_DEBUG_BREAK __builtin_debugtrap()
+    #elif QX_GNU
+        #include <signal.h>
+        #define QX_DEBUG_BREAK raise(SIGTRAP)
     #else
         #define QX_DEBUG_BREAK QX_EMPTY_MACRO
     #endif
@@ -138,22 +139,22 @@ namespace qx::detail
 
 #if QX_ENABLE_ASSERTS
 
-    #define QX_ASSERT(statement)                                \
-    do {                                                        \
-        if (!(statement))                                       \
-        {                                                       \
-            QX_PROCESS_ASSERT(statement);                       \
-            QX_DEBUG_BREAK;                                     \
-        }                                                       \
+    #define QX_ASSERT(statement)                                    \
+    do {                                                            \
+        if (!(statement))                                           \
+        {                                                           \
+            QX_PROCESS_ASSERT(statement);                           \
+            QX_DEBUG_BREAK;                                         \
+        }                                                           \
     } while (false)
 
-    #define QX_ASSERT_MSG(statement, msg, ...)                  \
-    do {                                                        \
-        if (!(statement))                                       \
-        {                                                       \
-            QX_PROCESS_ASSERT_MSG(statement, msg, __VA_ARGS__); \
-            QX_DEBUG_BREAK;                                     \
-        }                                                       \
+    #define QX_ASSERT_MSG(statement, msg, ...)                      \
+    do {                                                            \
+        if (!(statement))                                           \
+        {                                                           \
+            QX_PROCESS_ASSERT_MSG(statement, msg, ## __VA_ARGS__);  \
+            QX_DEBUG_BREAK;                                         \
+        }                                                           \
     } while (false)
 
 #else
