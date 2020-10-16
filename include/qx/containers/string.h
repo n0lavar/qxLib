@@ -18,6 +18,7 @@
 #include <iostream>
 
 #include <qx/containers/container.h>
+#include <qx/containers/string_traits.h>
 #include <qx/meta/constexpr_random.h>
 #include <qx/other/type_traits.h>
 

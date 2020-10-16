@@ -10,6 +10,9 @@
 //!\copyright   (c) Nick Khrapov, 2020. All right reserved.
 //
 //==============================================================================
+
+//V_EXCLUDE_PATH *main.cpp
+
 #include <gtest/gtest.h>
 
 int main(int argc, char** argv)

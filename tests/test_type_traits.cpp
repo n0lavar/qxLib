@@ -12,7 +12,7 @@
 //==============================================================================
 #include <test_config.h>
 
-//V_EXCLUDE_PATH *test_typedefs.cpp
+//V_EXCLUDE_PATH *test_type_traits.cpp
 
 #if QX_TEST_TYPE_TRAITS
 

@@ -13,7 +13,7 @@
 #pragma once
 
 #include <qx/other/typedefs.h>
-#include <qx/containers/string_traits.h>
+#include <qx/containers/string_utils.h>
 #include <qx/meta/constexpr_sequence.h>
 
 namespace qx
@@ -70,7 +70,7 @@ using constexpr_random = constexpr_sequence<
 }
 
 // creates unique u32 seed for current: file, date, time (seconds) and line number
-#define QX_UNIQUE_SEED (qx::detail::murmur_32_hash(__FILE__ __DATE__ __TIME__,                      \
-                                                   qx::meta::strlen(__FILE__ __DATE__ __TIME__),    \
-                                                   42)                                              \
-                                                        + __LINE__)
+#define QX_UNIQUE_SEED (qx::murmur_32_hash(__FILE__ __DATE__ __TIME__,                      \
+                                           qx::meta::strlen(__FILE__ __DATE__ __TIME__),    \
+                                           42)                                              \
+                                            + __LINE__)

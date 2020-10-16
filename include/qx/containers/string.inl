@@ -1136,9 +1136,9 @@ namespace std
     {
         u32 operator()(const qx::string& str) const
         {
-            return qx::detail::murmur_32_hash(str.data(),
-                                              str.size(),
-                                              qx::detail::random_string_hash::next());
+            return qx::murmur_32_hash(str.data(),
+                                      str.size(),
+                                      qx::detail::random_string_hash::next());
         }
     };
 
@@ -1147,9 +1147,9 @@ namespace std
     {
         u32 operator()(const qx::wstring& str) const
         {
-            return qx::detail::murmur_32_hash(str.data(),
-                                              str.size(),
-                                              qx::detail::random_string_hash::next());
+            return qx::murmur_32_hash(str.data(),
+                                      str.size(),
+                                      qx::detail::random_string_hash::next());
         }
     };
 
@@ -1158,9 +1158,9 @@ namespace std
     {
         u32 operator()(const qx::pstring& str) const
         {
-            return qx::detail::murmur_32_hash(str.data(),
-                                              str.size(),
-                                              qx::detail::random_string_hash::next());
+            return qx::murmur_32_hash(str.data(),
+                                      str.size(),
+                                      qx::detail::random_string_hash::next());
         }
     };
 
@@ -1169,9 +1169,9 @@ namespace std
     {
         u32 operator()(const qx::wpstring& str) const
         {
-            return qx::detail::murmur_32_hash(str.data(),
-                                              str.size(),
-                                              qx::detail::random_string_hash::next());
+            return qx::murmur_32_hash(str.data(),
+                                      str.size(),
+                                      qx::detail::random_string_hash::next());
         }
     };
 }

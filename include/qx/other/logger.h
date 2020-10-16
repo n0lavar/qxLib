@@ -134,14 +134,6 @@ public:
         level   eFileLevel      = level::info;
     };
 
-    struct SRuntimeTraceUnitInfo
-    {
-        STraceUnitInfo traceUnitInfo;
-        bool bWroteToFile = false;
-    };
-
-    using TraceUnitInfoMap = std::unordered_map<string, SRuntimeTraceUnitInfo>;
-
 public:
 
                 logger             (void);
@@ -171,6 +163,15 @@ protected:
     void        on_terminate        (void);
 
 private:
+
+    struct SRuntimeTraceUnitInfo
+    {
+        STraceUnitInfo traceUnitInfo;
+        bool bWroteToFile = false;
+    };
+
+    using TraceUnitInfoMap = std::unordered_map<string, SRuntimeTraceUnitInfo>;
+
 
     const char* get_time_str        (void);
     bool        output_to_file      (const string         & sText,
