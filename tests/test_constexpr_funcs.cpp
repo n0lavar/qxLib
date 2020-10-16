@@ -17,7 +17,7 @@
 #if QX_TEST_CONSTEXPR_FUNCS
 
 #include <qx/meta/constexpr_funcs.h>
-#include <qx/other/useful_macros.h>
+#include <qx/useful_macros.h>
 
 
 //------------------------------ qx::meta::strlen ------------------------------

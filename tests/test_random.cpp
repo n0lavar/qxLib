@@ -16,8 +16,8 @@
 
 #if QX_TEST_RANDOM
 
-#include <qx/other/random.h>
-#include <qx/other/useful_funcs.h>
+#include <qx/random.h>
+#include <qx/useful_funcs.h>
 #include <gtest/gtest.h>
 
 template<typename T>

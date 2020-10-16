@@ -12,8 +12,8 @@
 //==============================================================================
 #pragma once
 
-#include <qx/other/typedefs.h>
-#include <qx/other/useful_funcs.h>
+#include <qx/typedefs.h>
+#include <qx/useful_funcs.h>
 
 /*
     Placeholder for disabled macros

@@ -17,8 +17,8 @@
 #if QX_TEST_TYPEDEFS
 
 #include <limits>
-#include <qx/other/typedefs.h>
-#include <qx/other/useful_macros.h>
+#include <qx/typedefs.h>
+#include <qx/useful_macros.h>
 
 static_assert(sizeof(u8)  == 1);
 static_assert(sizeof(u16) == 2);

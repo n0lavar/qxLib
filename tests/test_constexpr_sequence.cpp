@@ -17,7 +17,7 @@
 #if QX_TEST_CONSTEXPR_SEQUENCE
 
 #include <qx/meta/constexpr_sequence.h>
-#include <qx/other/useful_macros.h>
+#include <qx/useful_macros.h>
 
 
 //---------------------------- qx::detail::increase ----------------------------

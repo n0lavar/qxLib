@@ -17,7 +17,7 @@
 #if QX_TEST_CONSTEXPR_RANDOM
 
 #include <qx/meta/constexpr_random.h>
-#include <qx/other/useful_macros.h>
+#include <qx/useful_macros.h>
 #include <array>
 
 

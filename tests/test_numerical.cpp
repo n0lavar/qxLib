@@ -18,7 +18,7 @@
 
 #include <gtest/gtest.h>
 #include <qx/alg/numerical.h>
-#include <qx/other/useful_macros.h>
+#include <qx/useful_macros.h>
 
 
 TEST(numerical, gcd)

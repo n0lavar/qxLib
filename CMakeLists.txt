@@ -18,8 +18,8 @@ add_subdirectory(include/qx/alg)
 add_subdirectory(include/qx/containers)
 add_subdirectory(include/qx/gl)
 add_subdirectory(include/qx/meta)
-add_subdirectory(include/qx/other)
 add_subdirectory(include/qx/temp)
+add_subdirectory(include/qx)
 source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR}/include/qx FILES ${ALL_SOURCES})
 
 
@@ -28,8 +28,6 @@ source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR}/include/qx FILES ${ALL_SOURCES})
 
 set (QXLIB_ALL_SOURCES
     ${ALL_SOURCES}
-    "${CMAKE_CURRENT_LIST_DIR}/tests/test_config.h"
-    "${CMAKE_CURRENT_LIST_DIR}/include/qx/dummy_main.cpp"
 )
 
 find_package(GTEST REQUIRED)

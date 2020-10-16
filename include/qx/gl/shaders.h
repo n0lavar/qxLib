@@ -14,7 +14,7 @@
 
 #include <glew.h>
 
-#include <qx/other/useful_macros.h>
+#include <qx/useful_macros.h>
 
 #if !defined(QX_SHADER_INFO_LOG_SIZE)
     #define QX_SHADER_INFO_LOG_SIZE 512

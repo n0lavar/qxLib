@@ -12,9 +12,9 @@
 //==============================================================================
 #pragma once
 
-#include <qx/other/typedefs.h>
 #include <qx/containers/string_utils.h>
 #include <qx/meta/constexpr_sequence.h>
+#include <qx/typedefs.h>
 
 namespace qx
 {

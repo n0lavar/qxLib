@@ -18,7 +18,7 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/epsilon.hpp>
 
-#include <qx/other/useful_macros.h>
+#include <qx/useful_macros.h>
 
 namespace qx
 {

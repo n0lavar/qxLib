@@ -16,7 +16,7 @@
 
 #if QX_TEST_RTTI
 
-#include <qx/other/rtti.h>
+#include <qx/rtti.h>
 #include <memory>
 #include <gtest/gtest.h>
 

@@ -12,7 +12,7 @@
 //==============================================================================
 #pragma once
 
-#include <qx/other/typedefs.h>
+#include <qx/typedefs.h>
 
 namespace qx
 {

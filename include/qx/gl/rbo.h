@@ -12,8 +12,8 @@
 //==============================================================================
 #pragma once
 
-#include <qx/other/typedefs.h>
 #include <qx/gl/ibuffer.h>
+#include <qx/typedefs.h>
 
 namespace qx
 {

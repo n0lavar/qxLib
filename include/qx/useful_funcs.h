@@ -18,8 +18,8 @@
 #include <functional>
 
 #include <qx/meta/constexpr_funcs.h>
-#include <qx/other/typedefs.h>
-#include <qx/other/config.h>
+#include <qx/typedefs.h>
+#include <qx/config.h>
 
 namespace qx
 {

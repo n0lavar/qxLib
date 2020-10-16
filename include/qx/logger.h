@@ -18,8 +18,8 @@
 #include <filesystem>
 #include <unordered_map>
 
-#include <qx/other/singleton.h>
 #include <qx/containers/string.h>
+#include <qx/singleton.h>
 
 #define QX_TRACE_FROM(loggerInstanse, format, ...)              \
     loggerInstanse.process_output(                              \
@@ -207,4 +207,4 @@ class logger_singleton : public logger
 
 }
 
-#include <qx/other/logger.inl>
+#include <qx/logger.inl>

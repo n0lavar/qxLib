@@ -16,7 +16,7 @@
 
 #if QX_TEST_USEFUL_MACROS
 
-#include <qx/other/useful_macros.h>
+#include <qx/useful_macros.h>
 #include <gtest/gtest.h>
 #include <map>
 

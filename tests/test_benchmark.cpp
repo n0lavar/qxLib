@@ -16,10 +16,10 @@
 
 #if QX_TEST_BENCHMARK
 
-#include <qx/other/benchmark.h>
 #include <thread>
 #include <cmath>
 #include <gtest/gtest.h>
+#include <qx/benchmark.h>
 
 TEST(benchmark, benchmark)
 {

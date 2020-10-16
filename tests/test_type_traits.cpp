@@ -16,7 +16,7 @@
 
 #if QX_TEST_TYPE_TRAITS
 
-#include <qx/other/type_traits.h>
+#include <qx/type_traits.h>
 #include <map>
 #include <unordered_map>
 #include <set>

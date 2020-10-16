@@ -16,8 +16,8 @@
 
 #if QX_TEST_USEFUL_FUNCS
 
-#include <qx/other/useful_macros.h>
 #include <qx/containers/container.h>
+#include <qx/useful_macros.h>
 #include <gtest/gtest.h>
 
 

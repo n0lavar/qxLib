@@ -12,7 +12,8 @@
 //==============================================================================
 #pragma once
 
-#include <stdint.h>
+#include <cstdint>
+#include <cstddef>
 
 using mem_t = char*;        //!< 1/2 bytes for pointer arithmetic
 

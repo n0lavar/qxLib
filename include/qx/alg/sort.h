@@ -12,12 +12,12 @@
 //==============================================================================
 #pragma once
 
-#include <qx/other/typedefs.h>
+#include <qx/typedefs.h>
 
 #include <vector>
 #include <algorithm>
 #include <functional>
-#include <qx/other/type_traits.h>
+#include <qx/type_traits.h>
 
 namespace qx
 {

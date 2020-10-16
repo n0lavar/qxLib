@@ -16,7 +16,7 @@
 
 #if QX_TEST_SMART_ENUM
 
-#include <qx/other/smart_enum.h>
+#include <qx/smart_enum.h>
 #include <gtest/gtest.h>
 
 

@@ -16,7 +16,7 @@
 
 #if QX_TEST_LOGGER
 
-#include <qx/other/logger.h>
+#include <qx/logger.h>
 #include <gtest/gtest.h>
 #include <regex>
 

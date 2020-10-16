@@ -13,6 +13,7 @@ set(FOLDER_FILES
     ${CMAKE_CURRENT_SOURCE_DIR}/config.h
 
     ${CMAKE_CURRENT_SOURCE_DIR}/logger.inl
+    ${CMAKE_CURRENT_SOURCE_DIR}/dummy_main.cpp
 )
 
 append_sources("${FOLDER_FILES}")

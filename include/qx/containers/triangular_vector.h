@@ -15,7 +15,7 @@
 #include <cstring>
 
 #include <qx/containers/container.h>
-#include <qx/other/useful_funcs.h>
+#include <qx/useful_funcs.h>
 
 namespace qx
 {
