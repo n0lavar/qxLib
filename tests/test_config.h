@@ -95,3 +95,7 @@
 #ifndef QX_TEST_LOGGER
     #define QX_TEST_LOGGER 1
 #endif
+
+#ifndef QX_TEST_THREAD_WORKER
+    #define QX_TEST_THREAD_WORKER 1
+#endif
