@@ -12,13 +12,13 @@
 //==============================================================================
 #pragma once
 
+#include <qx/useful_macros.h>
+
 #include <cwctype>
 #include <sstream>
 #include <cstring>
 #include <cctype>
 #include <cstdarg>
-
-#include <qx/useful_macros.h>
 
 namespace qx
 {

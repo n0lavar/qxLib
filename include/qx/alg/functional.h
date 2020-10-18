@@ -12,13 +12,13 @@
 //==============================================================================
 #pragma once
 
-#include <random>
-#include <ctime>
+#include <qx/useful_macros.h>
 
 #include <glm/glm.hpp>
 #include <glm/gtc/epsilon.hpp>
 
-#include <qx/useful_macros.h>
+#include <random>
+#include <ctime>
 
 namespace qx
 {

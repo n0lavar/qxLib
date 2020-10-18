@@ -12,10 +12,10 @@
 //==============================================================================
 #pragma once
 
+#include <qx/gl/shaders.h>
+
 #include <glew.h>
 #include <glm/gtc/type_ptr.hpp>
-
-#include <qx/gl/shaders.h>
 
 namespace qx
 {

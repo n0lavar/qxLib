@@ -12,10 +12,10 @@
 //==============================================================================
 #pragma once
 
-#include <cstring>
-
 #include <qx/containers/container.h>
 #include <qx/useful_funcs.h>
+
+#include <cstring>
 
 namespace qx
 {

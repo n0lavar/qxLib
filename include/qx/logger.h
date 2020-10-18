@@ -12,14 +12,14 @@
 //==============================================================================
 #pragma once
 
+#include <qx/containers/string.h>
+#include <qx/singleton.h>
+
 #include <ctime>
 #include <fstream>
 #include <iostream>
 #include <filesystem>
 #include <unordered_map>
-
-#include <qx/containers/string.h>
-#include <qx/singleton.h>
 
 #define QX_TRACE_FROM(loggerInstanse, format, ...)              \
     loggerInstanse.process_output(                              \

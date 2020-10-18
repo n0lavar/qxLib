@@ -12,14 +12,14 @@
 //==============================================================================
 #pragma once
 
+#include <qx/meta/constexpr_funcs.h>
+#include <qx/typedefs.h>
+#include <qx/config.h>
+
 #include <initializer_list>
 #include <algorithm>
 #include <cmath>
 #include <functional>
-
-#include <qx/meta/constexpr_funcs.h>
-#include <qx/typedefs.h>
-#include <qx/config.h>
 
 namespace qx
 {

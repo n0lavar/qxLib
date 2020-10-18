@@ -12,15 +12,15 @@
 //==============================================================================
 #pragma once
 
-#include <array>
-#include <vector>
-#include <optional>
-#include <iostream>
-
 #include <qx/containers/container.h>
 #include <qx/containers/string_traits.h>
 #include <qx/meta/constexpr_random.h>
 #include <qx/type_traits.h>
+
+#include <array>
+#include <vector>
+#include <optional>
+#include <iostream>
 
 namespace qx
 {

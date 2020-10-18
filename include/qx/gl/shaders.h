@@ -12,9 +12,9 @@
 //==============================================================================
 #pragma once
 
-#include <glew.h>
-
 #include <qx/useful_macros.h>
+
+#include <glew.h>
 
 #if !defined(QX_SHADER_INFO_LOG_SIZE)
     #define QX_SHADER_INFO_LOG_SIZE 512
