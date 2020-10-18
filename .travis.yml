@@ -126,7 +126,7 @@ after_success:
           ./lcov-1.14/bin/lcov --gcov-tool gcov-8 --directory . --capture --output-file coverage.info
           
           # generate coverage report
-          bash <(curl -s https://codecov.io/bash) -X gcov -e ".*googletest.*"
+          bash <(curl -s https://codecov.io/bash) -X gcov
           
         fi
       fi
