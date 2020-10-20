@@ -21,6 +21,7 @@
 #include <vector>
 #include <optional>
 #include <iostream>
+#include <string_view>
 
 namespace qx
 {
@@ -48,6 +49,8 @@ namespace detail
 
     template<class Traits>
     using istream = std::basic_istream<typename Traits::value_type, std::char_traits<typename Traits::value_type>>;
+
+    using random_string_hash = constexpr_random<class random_string_hash_tag, QX_UNIQUE_SEED>;
 }
 
 }
@@ -110,22 +113,22 @@ public:
 
                             basic_string (void) = default;
                             basic_string (const_pointer          pSource,
-                                          size_type              nSymbols)        { assign(pSource, nSymbols);                 }
-                            basic_string (basic_string        && str)    noexcept { assign(std::move(str));                    }
-                            basic_string (const basic_string   & str)             { assign(str);                               }
-                            basic_string (value_type             ch)              { assign(ch);                                }
-                            basic_string (const_pointer          pSource)         { assign(pSource);                           }
+                                          size_type              nSymbols)        { assign(pSource, nSymbols); }
+                            basic_string (basic_string        && str)    noexcept { assign(std::move(str)); }
+                            basic_string (const basic_string   & str)             { assign(str); }
+                            basic_string (value_type             ch)              { assign(ch); }
+                            basic_string (const_pointer          pSource)         { assign(pSource); }
                             basic_string (size_type              nSymbols,
-                                          value_type             ch)              { assign(nSymbols, ch);                      }
-                            basic_string (const std_string_type& str)             { assign(str);                               }
+                                          value_type             ch)              { assign(nSymbols, ch); }
+                            basic_string (const std_string_type& str)             { assign(str); }
     template<class FwdIt>   basic_string (FwdIt                  first,
-                                          FwdIt                  last)            { assign(first, last);                       }
+                                          FwdIt                  last)            { assign(first, last); }
 
     void                    assign       (const_pointer          pSource,
                                           size_type              nSymbols);
-    void                    assign       (basic_string        && str)    noexcept { std::swap(m_pData, str.m_pData);           }
+    void                    assign       (basic_string        && str)    noexcept { std::swap(m_pData, str.m_pData); }
     void                    assign       (const basic_string   & str);
-    void                    assign       (value_type             ch)              { assign(&ch, 1);                            }
+    void                    assign       (value_type             ch)              { assign(&ch, 1); }
     void                    assign       (const_pointer          pSource);
     void                    assign       (size_type              nSymbols,
                                           value_type             ch);
@@ -134,13 +137,13 @@ public:
     void                    assign       (FwdIt                  first,
                                           FwdIt                  last);
 
-    virtual                ~basic_string (void)                                   { free();                                     }
+    virtual                ~basic_string (void)                                   { free(); }
 
-    const   basic_string &  operator=    (basic_string        && str)    noexcept { assign(std::move(str)); return *this;       }
-    const   basic_string &  operator=    (const basic_string   & str)             { assign(str);            return *this;       }
-    const   basic_string &  operator=    (value_type             ch)              { assign(ch);             return *this;       }
-    const   basic_string &  operator=    (const_pointer          pSource)         { assign(pSource);        return *this;       }
-    const   basic_string &  operator=    (const std_string_type& str)             { assign(str);            return *this;       }
+    const   basic_string &  operator=    (basic_string        && str)    noexcept { assign(std::move(str)); return *this; }
+    const   basic_string &  operator=    (const basic_string   & str)             { assign(str);            return *this; }
+    const   basic_string &  operator=    (value_type             ch)              { assign(ch);             return *this; }
+    const   basic_string &  operator=    (const_pointer          pSource)         { assign(pSource);        return *this; }
+    const   basic_string &  operator=    (const std_string_type& str)             { assign(str);            return *this; }
 
     template<class ... Args>
     void                    format       (const_pointer          pStr,
@@ -157,10 +160,10 @@ public:
 
     void                    erase        (iterator               first,
                                           iterator               last);
-    void                    erase        (iterator               it);
-    void                    erase        (size_type              pos);
+    void                    erase        (iterator               it)        { erase(it, it + 1); };
+    void                    erase        (size_type              pos)       { erase(iterator(this, pos), iterator(this, pos + 1)); }
     void                    erase        (size_type              ind_first,
-                                          size_type              nSymbols);
+                                          size_type              nSymbols)  { erase(iterator(this, ind_first), iterator(this, ind_first + nSymbols)); }
 
     template<class ... Args, class = typename std::enable_if_t<are_same_v<typename Traits::value_type, Args...>>>
     void                    erase_all_of (Args...                args);
@@ -170,66 +173,66 @@ public:
     void                    erase_line_breaks(void);
 
 
+    void                    insert       (size_type              to_ind,
+                                          const_pointer          pSourse,
+                                          size_type              nSymbols);
     void                    insert       (iterator               to_first,
                                           const_iterator         from_first,
-                                          const_iterator         from_last);
+                                          const_iterator         from_last) { insert(to_first - begin(), from_first.operator->(), from_last - from_first); }
     void                    insert       (iterator               to,
-                                          const_pointer          pSourse);
+                                          const_pointer          pSourse)   { insert(to - begin(), pSourse, Traits::tstrlen(pSourse)); }
     void                    insert       (iterator               to,
                                           const_pointer          pSourse,
-                                          size_type              nSymbols);
+                                          size_type              nSymbols)  { insert(to - begin(), pSourse, nSymbols); }
     void                    insert       (size_type              to_ind,
-                                          const_pointer          pSourse);
-    void                    insert       (size_type              to_ind,
-                                          const_pointer          pSourse,
-                                          size_type              nSymbols);
+                                          const_pointer          pSourse)   { insert(to_ind, pSourse, Traits::tstrlen(pSourse)); }
 
-    void                    push_back    (value_type             ch);
-    void                    push_front   (value_type             ch);
+    void                    push_back    (value_type             ch)        { insert(size(), &ch, 1); }
+    void                    push_front   (value_type             ch)        { insert(0, &ch, 1); }
 
     size_type               find         (const_pointer          pWhat,
                                           size_type              indBegin   = 0,
-                                          size_type              indEnd     = npos)     const;
+                                          size_type              indEnd     = npos) const;
     size_type               find         (value_type             ch,
                                           size_type              indBegin   = 0,
-                                          size_type              indEnd     = npos)     const;
+                                          size_type              indEnd     = npos) const;
     size_type               find         (const basic_string   & str,
                                           size_type              indBegin   = 0,
-                                          size_type              indEnd     = npos)     const;
+                                          size_type              indEnd     = npos) const { return find(str.m_pData, indBegin, indEnd); }
 
     basic_string            substr       (size_type              begin,
-                                          size_type              strLen     = npos)     const;
+                                          size_type              strLen     = npos) const;
 
     size_type               find_last_of (value_type             ch,
                                           size_type              pos        = npos,
-                                          size_type              count      = npos)     const;
+                                          size_type              count      = npos) const;
 
     vector                  split        (const_pointer          pSep,
-                                          size_type              nSepLen    = npos)     const;
-    vector                  split        (const value_type       sep)                   const;
-    vector                  split        (const basic_string   & sep)                   const;
+                                          size_type              nSepLen    = npos) const;
+    vector                  split        (const value_type       sep)               const;
+    vector                  split        (const basic_string   & sep)               const { return split(sep.m_pData, sep.size()); }
 
     void                    apply_case   (ECaseType              ct);
 
-    value_type              front        (void)                                         const { return at(0);           }
-    value_type              back         (void)                                         const { return at(size() - 1);  }
-    size_type               length       (void)                                         const { return size();          }
-    const_pointer           c_str        (void)                                         const { return data();          }
+    value_type              front        (void)                                     const { return at(0); }
+    value_type              back         (void)                                     const { return at(size() - 1); }
+    size_type               length       (void)                                     const { return size(); }
+    const_pointer           c_str        (void)                                     const { return data(); }
 
-    bool                    ends_with    (value_type             ch)                    const;
+    bool                    ends_with    (value_type             ch)                const;
     bool                    ends_with    (const_pointer          pszStr,
-                                          size_type              nSepLen    = npos)     const;
-    bool                    ends_with    (const basic_string   & str)                   const { return ends_with(str.data(), str.size()); }
-    bool                    ends_with    (const std_string_type& str)                   const { return ends_with(str.data(), str.size()); }
+                                          size_type              nSepLen    = npos) const;
+    bool                    ends_with    (const basic_string   & str)               const { return ends_with(str.data(), str.size()); }
+    bool                    ends_with    (const std_string_type& str)               const { return ends_with(str.data(), str.size()); }
 
-    bool                    starts_with  (value_type             ch)                    const;
+    bool                    starts_with  (value_type             ch)                const;
     bool                    starts_with  (const_pointer          pszStr,
-                                          size_type              nSepLen    = npos)     const;
-    bool                    starts_with  (const basic_string   & str)                   const { return starts_with(str.data(), str.size()); }
-    bool                    starts_with  (const std_string_type& str)                   const { return starts_with(str.data(), str.size()); }
+                                          size_type              nSepLen    = npos) const;
+    bool                    starts_with  (const basic_string   & str)               const { return starts_with(str.data(), str.size()); }
+    bool                    starts_with  (const std_string_type& str)               const { return starts_with(str.data(), str.size()); }
 
     template<typename To>
-    std::optional<To>       to           (void)                                         const;
+    std::optional<To>       to           (void)                                     const;
 
     template<typename From>
     void                    from         (const From&            data,
@@ -238,23 +241,28 @@ public:
     static  basic_string    sfrom        (const From&            data,
                                           const_pointer          pszFormat = nullptr);
 
-    const   basic_string &  operator+=   (const basic_string   & str)             { append(str.data(), str.size());             return *this;   }
-    const   basic_string &  operator+=   (value_type             ch)              { append(&ch, 1);                             return *this;   }
-    const   basic_string &  operator+=   (const_pointer          pSource)         { append(pSource, Traits::tstrlen(pSource));  return *this;   }
+    const   basic_string &  operator+=   (const basic_string   & str)             { append(str.data(), str.size());                         return *this; }
+    const   basic_string &  operator+=   (value_type             ch)              { append(&ch, 1);                                         return *this; }
+    const   basic_string &  operator+=   (const_pointer          pSource)         { append(pSource, Traits::tstrlen(pSource));              return *this; }
     const   basic_string &  operator+=   (const std_string_type & str)            { append(str.data(), static_cast<size_type>(str.size())); return *this; }
 
-    bool                    operator==   (const basic_string   & str)       const { return !compare(str.data());                                }
-    bool                    operator==   (value_type             ch)        const { return !compare(&ch, 1);                                    }
-    bool                    operator==   (const_pointer          pSource)   const { return !compare(pSource);                                   }
-    bool                    operator==   (const std_string_type& str)       const { return !compare(str.data());                                }
+    bool                    operator==   (const basic_string   & str)       const { return !compare(str.data()); }
+    bool                    operator==   (value_type             ch)        const { return !compare(&ch, 1); }
+    bool                    operator==   (const_pointer          pSource)   const { return !compare(pSource); }
+    bool                    operator==   (const std_string_type& str)       const { return !compare(str.data()); }
 
-    bool                    operator!=   (const basic_string   & str)       const { return !operator==(str);                                    }
-    bool                    operator!=   (value_type             ch)        const { return !operator==(ch);                                     }
-    bool                    operator!=   (const_pointer          pSource)   const { return !operator==(pSource);                                }
-    bool                    operator!=   (const std_string_type& str)       const { return !operator==(str);                                    }
+    bool                    operator!=   (const basic_string   & str)       const { return !operator==(str); }
+    bool                    operator!=   (value_type             ch)        const { return !operator==(ch); }
+    bool                    operator!=   (const_pointer          pSource)   const { return !operator==(pSource); }
+    bool                    operator!=   (const std_string_type& str)       const { return !operator==(str); }
 
-    reference               operator[]   (size_type              ind);
-    const_reference         operator[]   (size_type              ind)       const { return operator[](ind);                                     }
+    reference               operator[]   (size_type              ind)             { return m_pData[ind]; }
+    const_reference         operator[]   (size_type              ind)       const { return operator[](ind); }
+
+    operator std::basic_string_view<value_type, std::char_traits<value_type>>() const noexcept
+    {
+        return std::basic_string_view<value_type, std::char_traits<value_type>>(data(), size());
+    }
 
 private:
 
@@ -299,15 +307,8 @@ template<class UT> basic_string<UT> operator+ (const typename basic_string<UT>::
 template<class UT> basic_string<UT> operator+ (const typename basic_string<UT>::std_string_type&  lhs, basic_string<UT>&&       rhs) _STR_OP_PLUS_BODY
 
 
-using string    = basic_string<qx::char_traits<16>>;    // char sequence with 16 alignment
-using wstring   = basic_string<qx::wchar_traits<16>>;   // wchar_t sequence with 16 alignment
-using pstring   = basic_string<qx::char_traits<1>>;     // char sequence without alignment (precise)
-using wpstring  = basic_string<qx::wchar_traits<1>>;    // wchar_t sequence without alignment (precise)
-
-namespace detail
-{
-    using random_string_hash = constexpr_random<class random_string_hash_tag, QX_UNIQUE_SEED>;
-}
+using string    = basic_string<qx::char_traits<char>>;
+using wstring   = basic_string<qx::char_traits<wchar_t>>;
 
 }
 

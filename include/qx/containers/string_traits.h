@@ -23,14 +23,17 @@
 namespace qx
 {
 
+template<typename value_type>
+struct char_traits;
+
 //==============================================================================
 //
-//!\struct                   qx::char_traits<Align>
+//!\struct                   qx::char_traits<char>
 //!\author  Khrapov
 //!\date    30.10.2020
 //==============================================================================
-template <size_t Align>
-struct char_traits
+template<>
+struct char_traits<char>
 {
     using value_type        = char;
     using pointer           = char*;
@@ -44,13 +47,13 @@ struct char_traits
     {
         return '\0';
     }
-    static constexpr bool tisspace(value_type ch)
+    static bool tisspace(value_type ch)
     {
         return std::isspace(static_cast<int>(ch));
     }
     static constexpr size_type talign(void)
     {
-        return static_cast<size_type>(Align);
+        return static_cast<size_type>(16);
     }
     static size_type tstrlen(const_pointer pszStr)
     {
@@ -86,12 +89,12 @@ struct char_traits
 
 //==============================================================================
 //
-//!\struct                  qx::wchar_traits<Align>
+//!\struct                  qx::char_traits<wchar_t>
 //!\author  Khrapov
 //!\date    24.03.2020
 //==============================================================================
-template <size_t Align>
-struct wchar_traits
+template<>
+struct char_traits<wchar_t>
 {
     using value_type        = wchar_t;
     using pointer           = wchar_t*;
@@ -105,13 +108,13 @@ struct wchar_traits
     {
         return L'\0';
     }
-    static constexpr bool tisspace(value_type ch)
+    static bool tisspace(value_type ch)
     {
         return std::iswspace(static_cast<wint_t>(ch));
     }
     static constexpr size_type talign(void)
     {
-        return static_cast<size_type>(Align);
+        return static_cast<size_type>(16);
     }
     static size_type tstrlen(const_pointer pszStr)
     {

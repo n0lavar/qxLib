@@ -53,10 +53,8 @@ class TestQxString : public ::testing::Test
 
 using Implementations = ::testing::Types
 <
-    qx::char_traits<16>,
-    qx::wchar_traits<16>,
-    qx::char_traits<1>,
-    qx::wchar_traits<1>
+    qx::char_traits<char>,
+    qx::char_traits<wchar_t>
 >;
 
 TYPED_TEST_SUITE(TestQxString, Implementations);
@@ -1064,6 +1062,13 @@ TYPED_TEST(TestQxString, operator_stream_in)
 
     stream >> out_string;
     EXPECT_STREQ(out_string.data(), STR(";;"));
+}
+
+TYPED_TEST(TestQxString, string_view)
+{
+    StringTypeTn qx_str = STR("qx_str");
+    std::basic_string_view<ValueType, std::char_traits<ValueType>> view1(qx_str);
+    std::basic_string_view<ValueType, std::char_traits<ValueType>> view2 = qx_str;
 }
 
 #endif

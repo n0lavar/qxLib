@@ -43,7 +43,7 @@ public:                                                                         
                                                                                                             \
     static const char* s_to_string(e value)                                                                 \
     {                                                                                                       \
-        static const std::vector<qx::pstring> enum_to_string = fill_enum_to_string();                       \
+        static const std::vector<qx::string> enum_to_string = fill_enum_to_string();                        \
         size_t ind = static_cast<size_t>(value) - static_cast<size_t>(e::first);                            \
         return enum_to_string[ind].data();                                                                  \
     };                                                                                                      \
@@ -55,8 +55,8 @@ public:                                                                         
                                                                                                             \
     static std::optional<e> s_from_string(const char* value)                                                \
     {                                                                                                       \
-        static const std::unordered_map<qx::pstring, e> string_to_enum = fill_string_to_enum();             \
-        auto   it  = string_to_enum.find(qx::pstring(value));                                               \
+        static const std::unordered_map<qx::string, e> string_to_enum = fill_string_to_enum();              \
+        auto   it  = string_to_enum.find(qx::string(value));                                                \
         return it != string_to_enum.end()                                                                   \
             ? std::optional<e>(it->second)                                                                  \
             : std::nullopt;                                                                                 \
@@ -98,21 +98,21 @@ private:                                                                        
                                                                                                             \
     e m_eValue = e::none;                                                                                   \
                                                                                                             \
-    static std::unordered_map<qx::pstring, e> fill_string_to_enum()                                         \
+    static std::unordered_map<qx::string, e> fill_string_to_enum()                                          \
     {                                                                                                       \
         std::vector<e> args;                                                                                \
         for (int i = static_cast<int>(e::first); i < static_cast<int>(e::last); i++)                        \
             args.push_back(static_cast<e>(i));                                                              \
                                                                                                             \
-        std::unordered_map<qx::pstring, e> m;                                                               \
+        std::unordered_map<qx::string, e> m;                                                                \
         for (size_t i = 0; i < args.size(); i++)                                                            \
             m[s_to_string(args[i])] = args[i];                                                              \
                                                                                                             \
         return std::move(m);                                                                                \
     };                                                                                                      \
                                                                                                             \
-    static std::vector<qx::pstring> fill_enum_to_string(void)                                               \
+    static std::vector<qx::string> fill_enum_to_string(void)                                                \
     {                                                                                                       \
-        return std::move(qx::pstring(#__VA_ARGS__).split(", "));                                            \
+        return std::move(qx::string(#__VA_ARGS__).split(", "));                                             \
     }                                                                                                       \
 };

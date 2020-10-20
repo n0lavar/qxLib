@@ -217,49 +217,6 @@ inline void basic_string<Traits>::erase(iterator first, iterator last)
 }
 
 //==============================================================================
-//!\fn                qx::basic_string<Traits>::erase
-//
-//!\brief  Erase char
-//!\param  it - char iterator
-//!\author Khrapov
-//!\date   30.10.2019
-//==============================================================================
-template<class Traits>
-inline void basic_string<Traits>::erase(iterator it)
-{
-    erase(it, it + 1);
-}
-
-//==============================================================================
-//!\fn                qx::basic_string<Traits>::erase
-//
-//!\brief  Erase char
-//!\param  pos - char position
-//!\author Khrapov
-//!\date   30.10.2019
-//==============================================================================
-template<class Traits>
-inline void basic_string<Traits>::erase(size_type pos)
-{
-    erase(iterator(this, pos), iterator(this, pos + 1));
-}
-
-//==============================================================================
-//!\fn                qx::basic_string<Traits>::erase
-//
-//!\brief  Erase substrung
-//!\param  ind_first - first substr char index
-//!\param  nSymbols  - num symbols to erase
-//!\author Khrapov
-//!\date   30.10.2019
-//==============================================================================
-template<class Traits>
-inline void basic_string<Traits>::erase(size_type ind_first, size_type nSymbols)
-{
-    erase(iterator(this, ind_first), iterator(this, static_cast<size_t>(ind_first) + nSymbols));
-}
-
-//==============================================================================
 //!\fn         qx::basic_string<Traits>::erase_all_of<...Args, >
 //
 //!\brief  Erase all chars container including from string
@@ -317,68 +274,6 @@ inline void basic_string<Traits>::erase_line_breaks(void)
 //!\fn                qx::basic_string<Traits>::insert
 //
 //!\brief  Insert substring
-//!\param  to_first   - first targer string char iterator
-//!\param  from_first - first substr char iterator
-//!\param  from_last  - second substr char iterator (excluding)
-//!\author Khrapov
-//!\date   30.10.2019
-//==============================================================================
-template<class Traits>
-inline void basic_string<Traits>::insert(iterator to_first, const_iterator from_first, const_iterator from_last)
-{
-    insert(to_first - begin(), from_first.operator->(), from_last - from_first);
-}
-
-//==============================================================================
-//!\fn                qx::basic_string<Traits>::insert
-//
-//!\brief  Insert substring
-//!\param  to      - first targer string char iterator
-//!\param  pSourse - zero terminated sourse string
-//!\author Khrapov
-//!\date   30.10.2019
-//==============================================================================
-template<class Traits>
-inline void basic_string<Traits>::insert(iterator to, const_pointer pSourse)
-{
-    insert(to - begin(), pSourse, Traits::tstrlen(pSourse));
-}
-
-//==============================================================================
-//!\fn                qx::basic_string<Traits>::insert
-//
-//!\brief  Insert substring
-//!\param  to       - first targer string char iterator
-//!\param  pSourse  - sourse string
-//!\param  nSymbols - number of chars in sourse string
-//!\author Khrapov
-//!\date   30.10.2019
-//==============================================================================
-template<class Traits>
-inline void basic_string<Traits>::insert(iterator to, const_pointer pSourse, size_type nSymbols)
-{
-    insert(to - begin(), pSourse, nSymbols);
-}
-
-//==============================================================================
-//!\fn                qx::basic_string<Traits>::insert
-//
-//!\brief  Insert substring
-//!\param  to_ind  - first targer string char index
-//!\param  pSourse - zero terminated sourse string
-//!\author Khrapov
-//!\date   30.10.2019
-//==============================================================================
-template<class Traits>
-inline void basic_string<Traits>::insert(size_type to_ind, const_pointer pSourse)
-{
-    insert(to_ind, pSourse, Traits::tstrlen(pSourse));
-}
-
-//==============================================================================
-//!\fn                qx::basic_string<Traits>::insert
-//
-//!\brief  Insert substring
 //!\param  to_ind   - first targer string char index
 //!\param  pSourse  - sourse string
 //!\param  nSymbols - number of symbols to insert
@@ -394,34 +289,6 @@ inline void basic_string<Traits>::insert(size_type to_ind, const_pointer pSourse
         std::memmove(m_pData + to_ind + nSymbols, m_pData + to_ind, (nStartSymbols - to_ind) * sizeof(value_type));
         std::memcpy(m_pData + to_ind, pSourse, nSymbols * sizeof(value_type));
     }
-}
-
-//==============================================================================
-//!\fn               qx::basic_string<Traits>::push_back
-//
-//!\brief  Push char to the end
-//!\param  ch - char
-//!\author Khrapov
-//!\date   21.03.2020
-//==============================================================================
-template<class Traits>
-inline void basic_string<Traits>::push_back(value_type ch)
-{
-    insert(size(), &ch, 1);
-}
-
-//==============================================================================
-//!\fn               qx::basic_string<Traits>::push_front
-//
-//!\brief  Push char to the front
-//!\param  ch - char
-//!\author Khrapov
-//!\date   21.03.2020
-//==============================================================================
-template<class Traits>
-inline void basic_string<Traits>::push_front(value_type ch)
-{
-    insert(0, &ch, 1);
 }
 
 //==============================================================================
@@ -491,25 +358,6 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::find(value
     } while (pCurrentChar != pEnd);
 
     return npos;
-}
-
-//==============================================================================
-//!\fn                qx::basic_string<Traits>::find
-//
-//!\brief  Find first match
-//!\param  str      - string to find
-//!\param  indBegin - start searching index
-//!\param  indEnd   - end searching index (-1 - to the end)
-//!\retval          - substring index
-//!\author Khrapov
-//!\date   30.10.2019
-//==============================================================================
-template<class Traits>
-inline typename basic_string<Traits>::size_type basic_string<Traits>::find(const basic_string& str,
-                                                                           size_type           indBegin,
-                                                                           size_type           indEnd) const
-{
-    return find(str.m_pData, indBegin, indEnd);
 }
 
 //==============================================================================
@@ -608,21 +456,6 @@ inline typename basic_string<Traits>::vector basic_string<Traits>::split(const v
     tokens.push_back(substr(start));
 
     return std::move(tokens);
-}
-
-//==============================================================================
-//!\fn                qx::basic_string<Traits>::split
-//
-//!\brief  Split string by separator
-//!\param  sep   - char to find
-//!\retval       - vector of strings
-//!\author Khrapov
-//!\date   30.10.2019
-//==============================================================================
-template<class Traits>
-inline typename basic_string<Traits>::vector basic_string<Traits>::split(const basic_string & sep) const
-{
-    return std::move(split(sep.m_pData, sep.size()));
 }
 
 //==============================================================================
@@ -932,20 +765,6 @@ inline constexpr typename basic_string<Traits>::const_pointer basic_string<Trait
 }
 
 //==============================================================================
-//!\fn              qx::basic_string<Traits>::operator[]
-//
-//!\param  ind - char index
-//!\retval     - char value
-//!\author Khrapov
-//!\date   19.10.2019
-//==============================================================================
-template<class Traits>
-inline typename basic_string<Traits>::reference basic_string<Traits>::operator[](size_type ind)
-{
-    return m_pData[ind];
-}
-
-//==============================================================================
 //!\fn                 qx::basic_string<Traits>::at
 //
 //!\param  ind - char index
@@ -1146,28 +965,6 @@ namespace std
     struct hash<qx::wstring>
     {
         u32 operator()(const qx::wstring& str) const
-        {
-            return qx::murmur_32_hash(str.data(),
-                                      str.size(),
-                                      qx::detail::random_string_hash::next());
-        }
-    };
-
-    template<>
-    struct hash<qx::pstring>
-    {
-        u32 operator()(const qx::pstring& str) const
-        {
-            return qx::murmur_32_hash(str.data(),
-                                      str.size(),
-                                      qx::detail::random_string_hash::next());
-        }
-    };
-
-    template<>
-    struct hash<qx::wpstring>
-    {
-        u32 operator()(const qx::wpstring& str) const
         {
             return qx::murmur_32_hash(str.data(),
                                       str.size(),
