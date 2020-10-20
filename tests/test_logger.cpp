@@ -213,7 +213,7 @@ TYPED_TEST_SUITE(TestLogger, Implementations);
         traceFile,                                                  \
         __FUNCTION__,                                               \
         __LINE__,                                                   \
-        nullptr,                                                    \
+        std::string_view(),                                         \
         ## __VA_ARGS__)
 
 #define TRACE_ERROR(traceFile, format, ...)                         \

@@ -24,21 +24,21 @@ namespace qx
 //!\param  pszFile              - file name string
 //!\param  pszFunction          - function name string
 //!\param  nLine                - code line number
-//!\param  pszColor             - ansi color string
+//!\param  svColor              - ascii color string
 //!\param  ...args              - additional args for format
 //!\author Khrapov
 //!\date   10.01.2020
 //================================================================================
 template<class ... Args>
 inline void logger::process_output(
-    level         eLogLevel,
-    const char  * pszFormat,
-    const char  * pszAssertExpression,
-    const char  * pszFile,
-    const char  * pszFunction,
-    int           nLine,
-    const char  * pszColor,
-    Args...       args)
+    level               eLogLevel,
+    const char        * pszFormat,
+    const char        * pszAssertExpression,
+    const char        * pszFile,
+    const char        * pszFunction,
+    int                 nLine,
+    std::string_view    svColor,
+    Args...             args)
 {
     SRuntimeTraceUnitInfo* pUnitInfo = nullptr;
     if (auto it = m_RegisteredUnits.find(pszFunction); it != m_RegisteredUnits.cend())
@@ -106,7 +106,7 @@ inline void logger::process_output(
 
         if (eLogLevel >= pUnitInfo->traceUnitInfo.eConsoleLevel)
         {
-            output_to_cout(m_sMsg, pszColor);
+            output_to_cout(m_sMsg, svColor);
         }
     }
 }
@@ -227,16 +227,16 @@ inline bool logger::output_to_file(const string& sText, const string& sFileName)
 //!\fn                    qx::logger::output_to_cout
 //
 //!\brief  Output log string to console
-//!\param  sText         - log string text
-//!\param  pszAnsiiColor - text color
+//!\param  sText        - log string text
+//!\param  svAsciiColor - text color
 //!\author Khrapov
 //!\date   10.01.2020
 //================================================================================
-inline void logger::output_to_cout(const string& sText, const char* pszAnsiiColor)
+inline void logger::output_to_cout(const string& sText, std::string_view svAsciiColor)
 {
-    if (pszAnsiiColor && m_bUsingColors)
+    if (!svAsciiColor.empty() && m_bUsingColors)
     {
-        auto_terminal_color atc(pszAnsiiColor);
+        auto_terminal_color atc(svAsciiColor);
         std::cout << sText;
     }
     else

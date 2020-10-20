@@ -16,6 +16,8 @@
 
 #include <qx/meta/constexpr_sequence.h>
 
+#include <string_view>
+
 namespace qx
 {
 
@@ -85,12 +87,12 @@ public:                                                                     \
                qx::get_class_id<RTTI_TYPE>() == get_class_id();             \
     }                                                                       \
                                                                             \
-    static constexpr const char* get_class_name_static(void) noexcept       \
+    static constexpr std::string_view get_class_name_static(void) noexcept  \
     {                                                                       \
         return QX_RTTI_CLASS_NAME(thisClass);                               \
     }                                                                       \
                                                                             \
-    virtual const char* get_class_name(void) const noexcept                 \
+    virtual std::string_view get_class_name(void) const noexcept            \
     {                                                                       \
         return get_class_name_static();                                     \
     }                                                                       \
@@ -149,12 +151,12 @@ public:                                                                     \
                                                                             \
     virtual int get_class_id (void) const noexcept override;                \
                                                                             \
-    static constexpr const char* get_class_name_static(void) noexcept       \
+    static constexpr std::string_view get_class_name_static(void) noexcept  \
     {                                                                       \
         return QX_RTTI_CLASS_NAME(thisClass);                               \
     }                                                                       \
                                                                             \
-    virtual const char* get_class_name(void) const noexcept override        \
+    virtual std::string_view get_class_name(void) const noexcept override   \
     {                                                                       \
         return get_class_name_static();                                     \
     }                                                                       \

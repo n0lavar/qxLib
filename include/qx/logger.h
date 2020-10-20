@@ -29,7 +29,7 @@
         QX_SHORT_FILE,                                          \
         __FUNCTION__,                                           \
         __LINE__,                                               \
-        nullptr,                                                \
+        std::string_view(),                                     \
         ## __VA_ARGS__)
 
 #define QX_TRACE_ERROR_FROM(loggerInstanse, format, ...)        \
@@ -92,22 +92,22 @@ public:
 
     struct auto_terminal_color
     {
-        static constexpr const char* reset          = "\033[0m";
-        static constexpr const char* red            = "\033[0;31m";
-        static constexpr const char* red_bold       = "\033[1;31m";
-        static constexpr const char* green          = "\033[0;32m";
-        static constexpr const char* green_bold     = "\033[1;32m";
-        static constexpr const char* yellow         = "\033[0;33m";
-        static constexpr const char* yellow_bold    = "\033[01;33m";
-        static constexpr const char* blue           = "\033[0;34m";
-        static constexpr const char* blue_bold      = "\033[1;34m";
-        static constexpr const char* magenta        = "\033[0;35m";
-        static constexpr const char* magenta_bold   = "\033[1;35m";
-        static constexpr const char* cyan           = "\033[0;36m";
-        static constexpr const char* cyan_bold      = "\033[1;36m";
+        static constexpr std::string_view reset         = "\033[0m";
+        static constexpr std::string_view red           = "\033[0;31m";
+        static constexpr std::string_view red_bold      = "\033[1;31m";
+        static constexpr std::string_view green         = "\033[0;32m";
+        static constexpr std::string_view green_bold    = "\033[1;32m";
+        static constexpr std::string_view yellow        = "\033[0;33m";
+        static constexpr std::string_view yellow_bold   = "\033[01;33m";
+        static constexpr std::string_view blue          = "\033[0;34m";
+        static constexpr std::string_view blue_bold     = "\033[1;34m";
+        static constexpr std::string_view magenta       = "\033[0;35m";
+        static constexpr std::string_view magenta_bold  = "\033[1;35m";
+        static constexpr std::string_view cyan          = "\033[0;36m";
+        static constexpr std::string_view cyan_bold     = "\033[1;36m";
 
-        auto_terminal_color (const char* color) { std::cout << color; }
-        ~auto_terminal_color(void)              { std::cout << reset; }
+        auto_terminal_color (std::string_view color) { std::cout << color; }
+        ~auto_terminal_color(void)                   { std::cout << reset; }
     };
 
     //!< Log files policy
@@ -146,7 +146,7 @@ public:
                                     const char           * pszFile,
                                     const char           * pszFunction,
                                     int                    nLine,
-                                    const char           * pszColor,
+                                    std::string_view       svColor,
                                     Args...                args);
 
     void        register_unit      (const char           * pszUnitName,
@@ -177,7 +177,7 @@ private:
     bool        output_to_file      (const string         & sText,
                                      const string         & sFileName);
     void        output_to_cout      (const string         & sText,
-                                     const char           * pszAnsiiColor);
+                                     std::string_view       svAsciiColor);
 
 private:
 
