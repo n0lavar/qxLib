@@ -96,4 +96,38 @@ inline constexpr u32 murmur_32_hash(const Char* key, size_t len, u32 seed)
     return h;
 }
 
+//==============================================================================
+//!\fn                  qx::iter_strcmp<FwdIt1, FwdIt2>
+//
+//!\brief  Compares string 1 with string 2
+//!\param  itBegin1 - string 1 begin iterator
+//!\param  itEnd1   - string 1 end iterator
+//!\param  itBegin2 - string 2 begin iterator
+//!\param  itEnd2   - string 2 end iterator
+//!\retval          - < 0 the first character that does not match has a lower value in str 1 than in str 2
+//                      0 the contents of both strings are equal
+//                    > 0 the first character that does not match has a greater value in str 1 than in str 2
+//!\date   23.10.2020
+//==============================================================================
+template<class FwdIt1, class FwdIt2>
+inline int iter_strcmp(FwdIt1 itBegin1, FwdIt1 itEnd1, FwdIt2 itBegin2, FwdIt2 itEnd2)
+{
+    int nRet = 0;
+
+    if (itBegin1 != itEnd1 && itBegin2 != itEnd2)
+    {
+        auto it1 = itBegin1;
+        auto it2 = itBegin2;
+        while (it2 != itEnd2 && (*it1 == *it2))
+        {
+            it2++;
+            it1++;
+        }
+        nRet = *it1 - (it2 == itEnd2 ? *it1 : *it2);
+    }
+
+    return nRet;
+}
+
+
 }

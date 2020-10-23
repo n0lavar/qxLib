@@ -734,6 +734,19 @@ TYPED_TEST(TestQxString, operator_equal)
     EXPECT_FALSE(str == typename StringType::std_string_type(STR("r")));
 }
 
+TYPED_TEST(TestQxString, operator_not_equal)
+{
+    StringTypeTn str(STR("e"));
+    EXPECT_FALSE(str != StringTypeTn(STR("e")));
+    EXPECT_FALSE(str != CH('e'));
+    EXPECT_FALSE(str != STR("e"));
+    EXPECT_FALSE(str != typename StringType::std_string_type(STR("e")));
+    EXPECT_TRUE(str != StringTypeTn(STR("r")));
+    EXPECT_TRUE(str != CH('r'));
+    EXPECT_TRUE(str != STR("r"));
+    EXPECT_TRUE(str != typename StringType::std_string_type(STR("r")));
+}
+
 TYPED_TEST(TestQxString, operator_braces)
 {
     StringTypeTn str = STR("Hello world");

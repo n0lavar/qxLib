@@ -120,9 +120,10 @@ public:
                             basic_string (const_pointer          pSource)         { assign(pSource); }
                             basic_string (size_type              nSymbols,
                                           value_type             ch)              { assign(nSymbols, ch); }
-                            basic_string (const std_string_type& str)             { assign(str); }
     template<class FwdIt>   basic_string (FwdIt                  first,
                                           FwdIt                  last)            { assign(first, last); }
+    template<class String, class = typename std::enable_if_t<std::is_class_v<String>>>
+                            basic_string (const String         & str)             { assign(str.cbegin(), str.cend()); }
 
     void                    assign       (const_pointer          pSource,
                                           size_type              nSymbols);
@@ -132,18 +133,20 @@ public:
     void                    assign       (const_pointer          pSource);
     void                    assign       (size_type              nSymbols,
                                           value_type             ch);
-    void                    assign       (const std_string_type& str)             { assign(str.data(), static_cast<size_type>(str.size())); }
     template<class FwdIt>
     void                    assign       (FwdIt                  first,
                                           FwdIt                  last);
+    template<class String, class = typename std::enable_if_t<std::is_class_v<String>>>
+    void                    assign       (const String         & str)             { assign(str.cbegin(), str.cend()); }
 
     virtual                ~basic_string (void)                                   { free(); }
 
-    const   basic_string &  operator=    (basic_string        && str)    noexcept { assign(std::move(str)); return *this; }
-    const   basic_string &  operator=    (const basic_string   & str)             { assign(str);            return *this; }
-    const   basic_string &  operator=    (value_type             ch)              { assign(ch);             return *this; }
-    const   basic_string &  operator=    (const_pointer          pSource)         { assign(pSource);        return *this; }
-    const   basic_string &  operator=    (const std_string_type& str)             { assign(str);            return *this; }
+    const   basic_string &  operator=    (basic_string        && str)    noexcept { assign(std::move(str));             return *this; }
+    const   basic_string &  operator=    (const basic_string   & str)             { assign(str);                        return *this; }
+    const   basic_string &  operator=    (value_type             ch)              { assign(ch);                         return *this; }
+    const   basic_string &  operator=    (const_pointer          pSource)         { assign(pSource);                    return *this; }
+    template<class String, class = typename std::enable_if_t<std::is_class_v<String>>>
+    const   basic_string &  operator=    (const String         & str)             { assign(str.cbegin(), str.cend());   return *this; }
 
     template<class ... Args>
     void                    format       (const_pointer          pStr,
@@ -219,17 +222,25 @@ public:
     size_type               length       (void)                                     const { return size(); }
     const_pointer           c_str        (void)                                     const { return data(); }
 
-    bool                    ends_with    (value_type             ch)                const;
-    bool                    ends_with    (const_pointer          pszStr,
-                                          size_type              nSepLen    = npos) const;
-    bool                    ends_with    (const basic_string   & str)               const { return ends_with(str.data(), str.size()); }
-    bool                    ends_with    (const std_string_type& str)               const { return ends_with(str.data(), str.size()); }
-
     bool                    starts_with  (value_type             ch)                const;
     bool                    starts_with  (const_pointer          pszStr,
-                                          size_type              nSepLen    = npos) const;
+                                          size_type              nStrSize   = npos) const;
+    template<class FwdIt>
+    bool                    starts_with  (FwdIt                  itBegin,
+                                          FwdIt                  itEnd)             const;
     bool                    starts_with  (const basic_string   & str)               const { return starts_with(str.data(), str.size()); }
-    bool                    starts_with  (const std_string_type& str)               const { return starts_with(str.data(), str.size()); }
+    template<class String, class = typename std::enable_if_t<std::is_class_v<String>>>
+    bool                    starts_with  (const String         & str)               const { return starts_with(str.cbegin(), str.cend()); }
+
+    bool                    ends_with    (value_type             ch)                const;
+    bool                    ends_with    (const_pointer          pszStr,
+                                          size_type              nStrSize   = npos) const;
+    template<class FwdIt>
+    bool                    ends_with    (FwdIt                  itBegin,
+                                          FwdIt                  itEnd)             const;
+    bool                    ends_with    (const basic_string   & str)               const { return ends_with(str.data(), str.size()); }
+    template<class String, class = typename std::enable_if_t<std::is_class_v<String>>>
+    bool                    ends_with    (const String         & str)               const { return ends_with(str.cbegin(), str.cend()); }
 
     template<typename To>
     std::optional<To>       to           (void)                                     const;
@@ -241,20 +252,23 @@ public:
     static  basic_string    sfrom        (const From&            data,
                                           const_pointer          pszFormat = nullptr);
 
-    const   basic_string &  operator+=   (const basic_string   & str)             { append(str.data(), str.size());                         return *this; }
-    const   basic_string &  operator+=   (value_type             ch)              { append(&ch, 1);                                         return *this; }
-    const   basic_string &  operator+=   (const_pointer          pSource)         { append(pSource, Traits::tstrlen(pSource));              return *this; }
-    const   basic_string &  operator+=   (const std_string_type & str)            { append(str.data(), static_cast<size_type>(str.size())); return *this; }
+    const   basic_string &  operator+=   (const basic_string   & str)             { append(str.data(), str.size());             return *this; }
+    const   basic_string &  operator+=   (value_type             ch)              { append(&ch, 1);                             return *this; }
+    const   basic_string &  operator+=   (const_pointer          pSource)         { append(pSource, Traits::tstrlen(pSource));  return *this; }
+    template<class String, class = typename std::enable_if_t<std::is_class_v<String>>>
+    const   basic_string &  operator+=   (const String         & str)            { append(str.cbegin(), str.cend());            return *this; }
 
     bool                    operator==   (const basic_string   & str)       const { return !compare(str.data()); }
     bool                    operator==   (value_type             ch)        const { return !compare(&ch, 1); }
     bool                    operator==   (const_pointer          pSource)   const { return !compare(pSource); }
-    bool                    operator==   (const std_string_type& str)       const { return !compare(str.data()); }
+    template<class String, class = typename std::enable_if_t<std::is_class_v<String>>>
+    bool                    operator==   (const String         & str)       const { return iter_strcmp(cbegin(), cend(), str.cbegin(), str.cend()) == 0; }
 
     bool                    operator!=   (const basic_string   & str)       const { return !operator==(str); }
     bool                    operator!=   (value_type             ch)        const { return !operator==(ch); }
     bool                    operator!=   (const_pointer          pSource)   const { return !operator==(pSource); }
-    bool                    operator!=   (const std_string_type& str)       const { return !operator==(str); }
+    template<class String, class = typename std::enable_if_t<std::is_class_v<String>>>
+    bool                    operator!=   (const String         & str)       const { return !operator==(str); }
 
     reference               operator[]   (size_type              ind)             { return m_pData[ind]; }
     const_reference         operator[]   (size_type              ind)       const { return operator[](ind); }
@@ -273,6 +287,9 @@ private:
                                           EResizeType            eType      = EResizeType::common);
     void                    append       (const_pointer          pSource,
                                           size_type              nSymbols);
+    template<class FwdIt>
+    void                    append       (FwdIt                  itBegin,
+                                          FwdIt                  itEnd);
     int                     compare      (const_pointer          pStr,
                                           size_type              nSymbols   = 0)                    const;
 

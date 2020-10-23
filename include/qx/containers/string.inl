@@ -486,6 +486,67 @@ inline void basic_string<Traits>::apply_case(ECaseType ct)
 }
 
 //==============================================================================
+//!\fn            qx::basic_string<Traits>::starts_with
+//
+//!\brief  Check if current string starts with char
+//!\param  ch - char for comparison
+//!\retval - true if starts with char
+//!\author Khrapov
+//!\date   08.10.2020
+//==============================================================================
+template<class Traits>
+inline bool basic_string<Traits>::starts_with(value_type ch) const
+{
+    if (!empty())
+        return at(0) == ch;
+    else
+        return false;
+}
+
+//==============================================================================
+//!\fn            qx::basic_string<Traits>::starts_with
+//
+//!\brief  Check if current string starts with string
+//!\param  pszStr   - const pointer to string
+//!\param  nStrSize - string length
+//!\retval          - true if starts with string
+//!\author Khrapov
+//!\date   08.10.2020
+//==============================================================================
+template<class Traits>
+inline bool basic_string<Traits>::starts_with(const_pointer pszStr, size_type nStrSize) const
+{
+    if (size_type nThisSize = size(); nThisSize > 0)
+    {
+        if (nStrSize == npos)
+            nStrSize = Traits::tstrlen(pszStr);
+
+        if (nStrSize <= nThisSize)
+            return Traits::tstrncmp(m_pData, pszStr, nStrSize) == 0;
+    }
+
+    return false;
+}
+
+//==============================================================================
+//!\fn            qx::basic_string<Traits>::starts_with<FwdIt>
+//
+//!\brief  Check if current string starts with string
+//!\param  itBegin - string begin iterator
+//!\param  itEnd   - string end iterator
+//!\retval         - true if starts with string
+//!\author Khrapov
+//!\date   23.10.2020
+//==============================================================================
+template<class Traits>
+template<class FwdIt>
+inline bool basic_string<Traits>::starts_with(FwdIt itBegin, FwdIt itEnd) const
+{
+    auto nStrSize = std::distance(itBegin, itEnd);
+    return iter_strcmp(cbegin(), cbegin() + nStrSize, itBegin, itEnd) == 0;
+}
+
+//==============================================================================
 //!\fn            qx::basic_string<Traits>::ends_with
 //
 //!\brief  Check if current string ends with char
@@ -508,71 +569,46 @@ inline bool basic_string<Traits>::ends_with(value_type ch) const
 //!\fn            qx::basic_string<Traits>::ends_with
 //
 //!\brief  Check if current string ends with string
-//!\param  pszStr  - const pointer to string
-//!\param  nSepLen - string length
+//!\param  pszStr   - const pointer to string
+//!\param  nStrSize - string length
+//!\retval          - true if ends with string
+//!\author Khrapov
+//!\date   08.10.2020
+//==============================================================================
+template<class Traits>
+inline bool basic_string<Traits>::ends_with(const_pointer pszStr, size_type nStrSize) const
+{
+
+    if (size_type nThisSize = size(); nThisSize > 0)
+    {
+        if (nStrSize == npos)
+            nStrSize = Traits::tstrlen(pszStr);
+
+        if (nStrSize <= nThisSize)
+            return Traits::tstrncmp(m_pData + nThisSize - nStrSize, pszStr, nStrSize) == 0;
+    }
+
+    return false;
+}
+
+//==============================================================================
+//!\fn               basic_string<Traits>::ends_with<FwdIt>
+//
+//!\brief  Check if current string ends with string
+//!\param  itBegin - string begin iterator
+//!\param  itEnd   - string end iterator
 //!\retval         - true if ends with string
 //!\author Khrapov
-//!\date   08.10.2020
+//!\date   23.10.2020
 //==============================================================================
 template<class Traits>
-inline bool basic_string<Traits>::ends_with(const_pointer pszStr, size_type nSepLen) const
+template<class FwdIt>
+inline bool basic_string<Traits>::ends_with(FwdIt itBegin, FwdIt itEnd) const
 {
-    size_type nSize = size();
-    if (nSize > 0)
-    {
-        if (nSepLen == npos)
-            nSepLen = Traits::tstrlen(pszStr);
-
-        if (nSepLen <= nSize)
-            return Traits::tstrncmp(m_pData + nSize - nSepLen, pszStr, nSepLen) == 0;
-    }
-
-    return false;
+    auto nStrSize = std::distance(itBegin, itEnd);
+    return iter_strcmp(cend() - nStrSize, cend(), itBegin, itEnd) == 0;
 }
 
-//==============================================================================
-//!\fn            qx::basic_string<Traits>::starts_with
-//
-//!\brief  Check if current string starts with char
-//!\param  ch - char for comparison
-//!\retval - true if starts with char
-//!\author Khrapov
-//!\date   08.10.2020
-//==============================================================================
-template<class Traits>
-inline bool basic_string<Traits>::starts_with(value_type ch) const
-{
-    if (!empty())
-        return at(0) == ch;
-    else
-        return false;
-}
-
-//==============================================================================
-//!\fn            qx::basic_string<Traits>::starts_with
-//
-//!\brief  Check if current string starts with string
-//!\param  pszStr  - const pointer to string
-//!\param  nSepLen - string length
-//!\retval         - true if starts with string
-//!\author Khrapov
-//!\date   08.10.2020
-//==============================================================================
-template<class Traits>
-inline bool basic_string<Traits>::starts_with(const_pointer pszStr, size_type nSepLen) const
-{
-    size_type nSize = size();
-    if (nSize > 0)
-    {
-        if (nSepLen == npos)
-            nSepLen = Traits::tstrlen(pszStr);
-
-        if (nSepLen <= nSize)
-            return Traits::tstrncmp(m_pData, pszStr, nSepLen) == 0;
-    }
-
-    return false;
-}
 
 //==============================================================================
 //!\fn                  qx::basic_string<Traits>::to<To>
@@ -919,6 +955,14 @@ inline void basic_string<Traits>::append(const_pointer pSource, size_type nSymbo
     size_type nCurrentSymbls = size();
     if (resize(nCurrentSymbls + nSymbols, Traits::talign()))
         std::memcpy(m_pData + nCurrentSymbls, pSource, nSymbols * sizeof(value_type));
+}
+
+template<class Traits>
+template<class FwdIt>
+inline void basic_string<Traits>::append(FwdIt itBegin, FwdIt itEnd)
+{
+    for (auto it = itBegin; it != itEnd; it++)
+        push_back(*it);
 }
 
 //==============================================================================
