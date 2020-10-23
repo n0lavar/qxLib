@@ -45,11 +45,13 @@ class TestQxString : public ::testing::Test
 {
 };
 
-#define StringTypeTn typename qx::basic_string<TypeParam>
-#define StringType qx::basic_string<TypeParam>
-#define ValueType typename TypeParam::value_type
-#define STR(str) QX_STR_PREFIX(ValueType, str)
-#define CH(str) QX_CHAR_PREFIX(ValueType, str)
+#define ValueType       typename TypeParam::value_type
+#define StringTypeTn    typename qx::basic_string<TypeParam>
+#define StringType      qx::basic_string<TypeParam>
+#define StdString       typename std::basic_string<ValueType, std::char_traits<ValueType>, std::allocator<ValueType>>
+#define StdStringArg    QX_SINGLE_ARGUMENT(typename std::basic_string<ValueType, std::char_traits<ValueType>, std::allocator<ValueType>>)
+#define STR(str)        QX_STR_PREFIX(ValueType, str)
+#define CH(str)         QX_CHAR_PREFIX(ValueType, str)
 
 using Implementations = ::testing::Types
 <
@@ -131,7 +133,7 @@ TYPED_TEST(TestQxString, construct)
     EXPECT_EQ(str10.size(), 6);
 
     // from std string
-    StringTypeTn str11(typename StringType::std_string_type(STR("Hello world")));
+    StringTypeTn str11(StdString(STR("Hello world")));
     EXPECT_STREQ(str11.data(), STR("Hello world"));
     EXPECT_FALSE(str11.empty());
     EXPECT_EQ(str11.size(), 11);
@@ -215,7 +217,7 @@ TYPED_TEST(TestQxString, assign)
 
     // from std string
     StringTypeTn str11;
-    str11.assign(typename StringType::std_string_type(STR("Hello world")));
+    str11.assign(StdString(STR("Hello world")));
     EXPECT_STREQ(str11.data(), STR("Hello world"));
     EXPECT_FALSE(str11.empty());
     EXPECT_EQ(str11.size(), 11);
@@ -258,7 +260,7 @@ TYPED_TEST(TestQxString, operator_assign)
     EXPECT_TRUE(tmpStr.empty());
     EXPECT_EQ(tmpStr.size(), 0);
 
-    str = typename StringType::std_string_type(STR("Hello world"));
+    str = StdString(STR("Hello world"));
     EXPECT_STREQ(str.data(), STR("Hello world"));
     EXPECT_FALSE(str.empty());
     EXPECT_EQ(str.size(), 11);
@@ -715,7 +717,7 @@ TYPED_TEST(TestQxString, operator_plus_equal)
     StringTypeTn str(STR("word0 "));
     str += StringTypeTn(STR("word1 "));
     str += STR("word2 ");
-    str += typename StringType::std_string_type(STR("word3"));
+    str += StdString(STR("word3"));
     str += CH('!');
 
     EXPECT_STREQ(str.data(), STR("word0 word1 word2 word3!"));
@@ -727,11 +729,11 @@ TYPED_TEST(TestQxString, operator_equal)
     EXPECT_TRUE(str == StringTypeTn(STR("e")));
     EXPECT_TRUE(str == CH('e'));
     EXPECT_TRUE(str == STR("e"));
-    EXPECT_TRUE(str == typename StringType::std_string_type(STR("e")));
+    EXPECT_TRUE(str == StdStringArg(STR("e")));
     EXPECT_FALSE(str == StringTypeTn(STR("r")));
     EXPECT_FALSE(str == CH('r'));
     EXPECT_FALSE(str == STR("r"));
-    EXPECT_FALSE(str == typename StringType::std_string_type(STR("r")));
+    EXPECT_FALSE(str == StdStringArg(STR("r")));
 }
 
 TYPED_TEST(TestQxString, operator_not_equal)
@@ -740,11 +742,11 @@ TYPED_TEST(TestQxString, operator_not_equal)
     EXPECT_FALSE(str != StringTypeTn(STR("e")));
     EXPECT_FALSE(str != CH('e'));
     EXPECT_FALSE(str != STR("e"));
-    EXPECT_FALSE(str != typename StringType::std_string_type(STR("e")));
+    EXPECT_FALSE(str != StdStringArg(STR("e")));
     EXPECT_TRUE(str != StringTypeTn(STR("r")));
     EXPECT_TRUE(str != CH('r'));
     EXPECT_TRUE(str != STR("r"));
-    EXPECT_TRUE(str != typename StringType::std_string_type(STR("r")));
+    EXPECT_TRUE(str != StdStringArg(STR("r")));
 }
 
 TYPED_TEST(TestQxString, operator_braces)
@@ -797,7 +799,7 @@ TYPED_TEST(TestQxString, operator_plus)
     str = ch + StringTypeTn(STR("word_move "));
     EXPECT_STREQ(str.data(), STR("wword_move "));
 
-    typename StringType::std_string_type stdStr(STR("word_std "));
+    StdString stdStr(STR("word_std "));
     str = refStr + stdStr;
     EXPECT_STREQ(str.data(), STR("word_ref word_std "));
     str = StringTypeTn(STR("word_move ")) + stdStr;
@@ -891,7 +893,7 @@ TYPED_TEST(TestQxString, from)
     EXPECT_STREQ(str.data(), STR("false"));
 
     // std strings have operator<<
-    str.from(typename StringType::std_string_type(STR("some string")));
+    str.from(StdString(STR("some string")));
     EXPECT_STREQ(str.data(), STR("some string"));
 }
 
@@ -923,21 +925,21 @@ TYPED_TEST(TestQxString, ends_with)
     EXPECT_FALSE(str.ends_with(STR("trash")));
 
     // std::basic_string
-    EXPECT_TRUE(str.ends_with(typename StringType::std_string_type(STR(""))));
-    EXPECT_TRUE(str.ends_with(typename StringType::std_string_type(STR("9"))));
-    EXPECT_TRUE(str.ends_with(typename StringType::std_string_type(STR("89"))));
-    EXPECT_TRUE(str.ends_with(typename StringType::std_string_type(STR("789"))));
-    EXPECT_TRUE(str.ends_with(typename StringType::std_string_type(STR("6789"))));
-    EXPECT_TRUE(str.ends_with(typename StringType::std_string_type(STR("56789"))));
-    EXPECT_TRUE(str.ends_with(typename StringType::std_string_type(STR("456789"))));
-    EXPECT_TRUE(str.ends_with(typename StringType::std_string_type(STR("3456789"))));
-    EXPECT_TRUE(str.ends_with(typename StringType::std_string_type(STR("23456789"))));
-    EXPECT_TRUE(str.ends_with(typename StringType::std_string_type(STR("123456789"))));
-    EXPECT_TRUE(str.ends_with(typename StringType::std_string_type(STR("0123456789"))));
+    EXPECT_TRUE(str.ends_with(StdStringArg(STR(""))));
+    EXPECT_TRUE(str.ends_with(StdStringArg(STR("9"))));
+    EXPECT_TRUE(str.ends_with(StdStringArg(STR("89"))));
+    EXPECT_TRUE(str.ends_with(StdStringArg(STR("789"))));
+    EXPECT_TRUE(str.ends_with(StdStringArg(STR("6789"))));
+    EXPECT_TRUE(str.ends_with(StdStringArg(STR("56789"))));
+    EXPECT_TRUE(str.ends_with(StdStringArg(STR("456789"))));
+    EXPECT_TRUE(str.ends_with(StdStringArg(STR("3456789"))));
+    EXPECT_TRUE(str.ends_with(StdStringArg(STR("23456789"))));
+    EXPECT_TRUE(str.ends_with(StdStringArg(STR("123456789"))));
+    EXPECT_TRUE(str.ends_with(StdStringArg(STR("0123456789"))));
 
-    EXPECT_FALSE(str.ends_with(typename StringType::std_string_type(STR(" 0123456789"))));
-    EXPECT_FALSE(str.ends_with(typename StringType::std_string_type(STR("11"))));
-    EXPECT_FALSE(str.ends_with(typename StringType::std_string_type(STR("trash"))));
+    EXPECT_FALSE(str.ends_with(StdStringArg(STR(" 0123456789"))));
+    EXPECT_FALSE(str.ends_with(StdStringArg(STR("11"))));
+    EXPECT_FALSE(str.ends_with(StdStringArg(STR("trash"))));
 
     // qx::basic_string
     EXPECT_TRUE(str.ends_with(StringTypeTn(STR(""))));
@@ -985,21 +987,21 @@ TYPED_TEST(TestQxString, starts_with)
     EXPECT_FALSE(str.starts_with(STR("trash")));
 
     // std::basic_string
-    EXPECT_TRUE(str.starts_with(typename StringType::std_string_type(STR(""))));
-    EXPECT_TRUE(str.starts_with(typename StringType::std_string_type(STR("0"))));
-    EXPECT_TRUE(str.starts_with(typename StringType::std_string_type(STR("01"))));
-    EXPECT_TRUE(str.starts_with(typename StringType::std_string_type(STR("012"))));
-    EXPECT_TRUE(str.starts_with(typename StringType::std_string_type(STR("0123"))));
-    EXPECT_TRUE(str.starts_with(typename StringType::std_string_type(STR("01234"))));
-    EXPECT_TRUE(str.starts_with(typename StringType::std_string_type(STR("012345"))));
-    EXPECT_TRUE(str.starts_with(typename StringType::std_string_type(STR("0123456"))));
-    EXPECT_TRUE(str.starts_with(typename StringType::std_string_type(STR("01234567"))));
-    EXPECT_TRUE(str.starts_with(typename StringType::std_string_type(STR("012345678"))));
-    EXPECT_TRUE(str.starts_with(typename StringType::std_string_type(STR("0123456789"))));
+    EXPECT_TRUE(str.starts_with(StdStringArg(STR(""))));
+    EXPECT_TRUE(str.starts_with(StdStringArg(STR("0"))));
+    EXPECT_TRUE(str.starts_with(StdStringArg(STR("01"))));
+    EXPECT_TRUE(str.starts_with(StdStringArg(STR("012"))));
+    EXPECT_TRUE(str.starts_with(StdStringArg(STR("0123"))));
+    EXPECT_TRUE(str.starts_with(StdStringArg(STR("01234"))));
+    EXPECT_TRUE(str.starts_with(StdStringArg(STR("012345"))));
+    EXPECT_TRUE(str.starts_with(StdStringArg(STR("0123456"))));
+    EXPECT_TRUE(str.starts_with(StdStringArg(STR("01234567"))));
+    EXPECT_TRUE(str.starts_with(StdStringArg(STR("012345678"))));
+    EXPECT_TRUE(str.starts_with(StdStringArg(STR("0123456789"))));
 
-    EXPECT_FALSE(str.starts_with(typename StringType::std_string_type(STR(" 0123456789"))));
-    EXPECT_FALSE(str.starts_with(typename StringType::std_string_type(STR("11"))));
-    EXPECT_FALSE(str.starts_with(typename StringType::std_string_type(STR("trash"))));
+    EXPECT_FALSE(str.starts_with(StdStringArg(STR(" 0123456789"))));
+    EXPECT_FALSE(str.starts_with(StdStringArg(STR("11"))));
+    EXPECT_FALSE(str.starts_with(StdStringArg(STR("trash"))));
 
     // qx::basic_string
     EXPECT_TRUE(str.starts_with(StringTypeTn(STR(""))));
@@ -1021,9 +1023,9 @@ TYPED_TEST(TestQxString, starts_with)
 
 TYPED_TEST(TestQxString, operator_stream_out)
 {
-    StringTypeTn::sstream_type      stream;
-    StringTypeTn                    in_string(STR("  0 one      two 3 .\t>>\n;;"));
-    StringTypeTn::std_string_type   out_string;
+    StringTypeTn::sstream_type  stream;
+    StringTypeTn                in_string(STR("  0 one      two 3 .\t>>\n;;"));
+    StdString                   out_string;
     stream << in_string;
 
     stream >> out_string;
@@ -1050,9 +1052,9 @@ TYPED_TEST(TestQxString, operator_stream_out)
 
 TYPED_TEST(TestQxString, operator_stream_in)
 {
-    StringTypeTn::sstream_type      stream;
-    StringTypeTn::std_string_type   in_string(STR("  0 one      two 3 .\t>>\n;;"));
-    StringTypeTn                    out_string;
+    StringTypeTn::sstream_type  stream;
+    StdString                   in_string(STR("  0 one      two 3 .\t>>\n;;"));
+    StringTypeTn                out_string;
     stream << in_string;
 
     stream >> out_string; // to empty

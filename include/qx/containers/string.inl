@@ -957,11 +957,20 @@ inline void basic_string<Traits>::append(const_pointer pSource, size_type nSymbo
         std::memcpy(m_pData + nCurrentSymbls, pSource, nSymbols * sizeof(value_type));
 }
 
+//==============================================================================
+//!\fn                basic_string<Traits>::append<FwdIt>
+//
+//!\brief  Append string to the current
+//!\param  itBegin - other string begin iterator
+//!\param  itEnd   - other end begin iterator
+//!\author Khrapov
+//!\date   23.10.2020
+//==============================================================================
 template<class Traits>
 template<class FwdIt>
 inline void basic_string<Traits>::append(FwdIt itBegin, FwdIt itEnd)
 {
-    for (auto it = itBegin; it != itEnd; it++)
+    for (auto it = itBegin; it != itEnd; ++it)
         push_back(*it);
 }
 

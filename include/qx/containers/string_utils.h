@@ -120,14 +120,13 @@ inline int iter_strcmp(FwdIt1 itBegin1, FwdIt1 itEnd1, FwdIt2 itBegin2, FwdIt2 i
         auto it2 = itBegin2;
         while (it2 != itEnd2 && (*it1 == *it2))
         {
-            it2++;
-            it1++;
+            ++it2;
+            ++it1;
         }
         nRet = *it1 - (it2 == itEnd2 ? *it1 : *it2);
     }
 
     return nRet;
 }
-
 
 }
