@@ -15,6 +15,20 @@ namespace qx
 {
 
 //==============================================================================
+//!\fn                   thread_worker::~thread_worker
+//
+//!\brief  thread_worker object destructor
+//!\author Khrapov
+//!\date   26.10.2020
+//==============================================================================
+inline thread_worker::~thread_worker()
+{
+    if (m_bTerminateOnDestructor.load(std::memory_order_acquire))
+        thread_terminate(true);
+}
+
+
+//==============================================================================
 //!\fn                  qx::thread_worker::thread_start
 //
 //!\brief  Create and start thread
@@ -75,9 +89,25 @@ inline void thread_worker::thread_terminate(bool bWait)
 //==============================================================================
 inline void thread_worker::thread_wait_termination()
 {
-    std::lock_guard lock(m_TerminationMutex);
+    std::lock_guard lock(m_mtxTermination);
     if (m_Thread.joinable())
         m_Thread.join();
+}
+
+//==============================================================================
+//!\fn         thread_worker::thread_set_terminate_in_destructor
+//
+//!\brief   Set "tesminate in destructor" flag
+//!\details You may want to disable terminate in destructor if you want
+//          to destruct your own objects before thread termination.
+//          Don't forget to call thread_terminate() in your destructor
+//!\param   bTerminate - true if need to terminate in destructor
+//!\author  Khrapov
+//!\date    26.10.2020
+//==============================================================================
+inline void thread_worker::thread_set_terminate_in_destructor(bool bTerminate)
+{
+    m_bTerminateOnDestructor.store(bTerminate, std::memory_order_release);
 }
 
 }

@@ -40,71 +40,25 @@ inline void logger::process_output(
     std::string_view    svColor,
     Args...             args)
 {
-    SRuntimeTraceUnitInfo* pUnitInfo = nullptr;
-    if (auto it = m_RegisteredUnits.find(pszFunction); it != m_RegisteredUnits.cend())
-        pUnitInfo = &(it->second);
-    else if (auto it = m_RegisteredUnits.find(pszFile); it != m_RegisteredUnits.cend())
-        pUnitInfo = &(it->second);
-    else if (auto it = m_RegisteredUnits.find(DEFAULT_UNIT); it != m_RegisteredUnits.cend())
-        pUnitInfo = &(it->second);
-
-    if (pUnitInfo && (eLogLevel >= pUnitInfo->traceUnitInfo.eFileLevel || eLogLevel >= pUnitInfo->traceUnitInfo.eConsoleLevel))
+    if (auto pUnitInfo = get_unit_info(eLogLevel, pszFormat, pszAssertExpression, pszFile, pszFunction))
     {
-        m_sFormat.clear();
+        format_line(
+            m_sMsg,
+            m_sFormat,
+            eLogLevel,
+            pszFormat,
+            pszAssertExpression,
+            pszFile, pszFunction,
+            nLine,
+            args...);
 
-        switch (eLogLevel)
+        if (eLogLevel >= pUnitInfo->GetTraceUnitInfo().eFileLevel
+            && output_to_file(m_sMsg, pUnitInfo->GetTraceUnitInfo().sLogFileName))
         {
-        case qx::logger::level::info:
-            m_sFormat = "[I][%s][%s::%s(%d)] ";
-            break;
-
-        case qx::logger::level::errors:
-            m_sFormat = "[E][%s][%s::%s(%d)] ";
-            break;
-
-        case qx::logger::level::asserts:
-            m_sFormat = "[A][%s][%s::%s(%d)][%s] ";
-            break;
-
-        default:
-            m_sFormat = "";
-            break;
+            pUnitInfo->SetWroteToFile();
         }
 
-        m_sFormat += pszFormat;
-
-        // assume all psz != nullptr as method must be used in macros only
-        if (eLogLevel != qx::logger::level::asserts)
-        {
-            m_sMsg.format(
-                m_sFormat.data(),
-                get_time_str(),
-                pszFile,
-                pszFunction,
-                nLine,
-                args...);
-        }
-        else
-        {
-            m_sMsg.format(
-                m_sFormat.data(),
-                get_time_str(),
-                pszFile,
-                pszFunction,
-                nLine,
-                pszAssertExpression,
-                args...);
-        }
-
-        m_sMsg += '\n';
-
-        if (eLogLevel >= pUnitInfo->traceUnitInfo.eFileLevel
-            && output_to_file(m_sMsg, pUnitInfo->traceUnitInfo.sLogFileName))
-        {
-            pUnitInfo->bWroteToFile = true;
-        }
-
-        if (eLogLevel >= pUnitInfo->traceUnitInfo.eConsoleLevel)
+        if (eLogLevel >= pUnitInfo->GetTraceUnitInfo().eConsoleLevel)
         {
             output_to_cout(m_sMsg, svColor);
         }
@@ -116,19 +70,19 @@ inline void logger::process_output(
 //
 //!\brief  Register file or function for tracing
 //         Register unit with name "default" to update default tracing settings
-//!\param  pszUnitName - file or function name of "default"
-//!\param  unit        - unit info
+//!\param  svUnitName - file or function name of "default"
+//!\param  unit       - unit info
 //!\author Khrapov
 //!\date   10.01.2020
 //================================================================================
-inline void logger::register_unit(const char* pszUnitName, const STraceUnitInfo& unit)
+inline void logger::register_unit(std::string_view svUnitName, const unit_info& unit)
 {
     if (!unit.sLogFileName.empty())
     {
         if (m_eLogPolicy == policy::clear_then_uppend)
             std::ofstream ofs(unit.sLogFileName.data(), std::ofstream::out | std::ofstream::trunc); //-V808
                                                                                                     // clear file
-        m_RegisteredUnits[pszUnitName] = { unit };
+        m_RegisteredUnits.emplace(svUnitName, unit);
     }
 }
 
@@ -145,6 +99,116 @@ inline void logger::set_logs_folder(const char* pszFolder)
     m_sFolder = pszFolder;
     if (!m_sFolder.empty() && !m_sFolder.ends_with('/'))
         m_sFolder += '/';
+}
+
+//==============================================================================
+//!\fn                    logger::format_line<...Args>
+//
+//!\brief  Format logger line
+//!\param  sMsg                 - output msg
+//!\param  sFormat              - buffer for formatting
+//!\param  eLogLevel            - log level
+//!\param  pszFormat            - format string
+//!\param  pszAssertExpression  - assert expr or nullptr
+//!\param  pszFile              - file name string
+//!\param  pszFunction          - function name string
+//!\param  nLine                - code line number
+//!\param  ...args              - additional args for format
+//!\author Khrapov
+//!\date   22.10.2020
+//==============================================================================
+template<class ...Args>
+inline void logger::format_line(
+    string        & sMsg,
+    string        & sFormat,
+    level           eLogLevel,
+    const char    * pszFormat,
+    const char    * pszAssertExpression,
+    const char    * pszFile,
+    const char    * pszFunction,
+    int             nLine,
+    Args...         args)
+{
+    switch (eLogLevel)
+    {
+    case qx::logger::level::info:
+        sFormat = "[I][%s][%s::%s(%d)] ";
+        break;
+
+    case qx::logger::level::errors:
+        sFormat = "[E][%s][%s::%s(%d)] ";
+        break;
+
+    case qx::logger::level::asserts:
+        sFormat = "[A][%s][%s::%s(%d)][%s] ";
+        break;
+
+    default:
+        sFormat = "";
+        break;
+    }
+
+    sFormat += pszFormat;
+
+    // assume all psz != nullptr as method must be used in macros only
+    if (eLogLevel != qx::logger::level::asserts)
+    {
+        sMsg.format(
+            sFormat.data(),
+            get_time_str(),
+            pszFile,
+            pszFunction,
+            nLine,
+            args...);
+    }
+    else
+    {
+        sMsg.format(
+            sFormat.data(),
+            get_time_str(),
+            pszFile,
+            pszFunction,
+            nLine,
+            pszAssertExpression,
+            args...);
+    }
+
+    sMsg += '\n';
+}
+
+//==============================================================================
+//!\fn                       logger::get_unit_info
+//
+//!\brief  Get unit info
+//!\param  eLogLevel            - log level
+//!\param  pszFormat            - format string
+//!\param  pszAssertExpression  - assert expr or nullptr
+//!\param  pszFile              - file name string
+//!\param  pszFunction          - function name string
+//!\retval                      - unit info pointer
+//                                if exists and file or console level is matches
+//!\author Khrapov
+//!\date   23.10.2020
+//==============================================================================
+inline logger::runtime_unit_info* logger::get_unit_info(
+    level       eLogLevel,
+    const char* pszFormat,
+    const char* pszAssertExpression,
+    const char* pszFile,
+    const char* pszFunction)
+{
+    runtime_unit_info* pUnitInfo = nullptr;
+    if (auto it = m_RegisteredUnits.find(pszFunction); it != m_RegisteredUnits.end())
+        pUnitInfo = &(it->second);
+    else if (auto it = m_RegisteredUnits.find(pszFile); it != m_RegisteredUnits.end())
+        pUnitInfo = &(it->second);
+    else if (auto it = m_RegisteredUnits.find(DEFAULT_UNIT); it != m_RegisteredUnits.end())
+        pUnitInfo = &(it->second);
+
+    if (pUnitInfo && (eLogLevel >= pUnitInfo->GetTraceUnitInfo().eFileLevel || eLogLevel >= pUnitInfo->GetTraceUnitInfo().eConsoleLevel))
+        return pUnitInfo;
+    else
+        return nullptr;
 }
 
 //==============================================================================
@@ -264,12 +328,13 @@ inline void logger::on_create(void)
 //================================================================================
 inline void logger::on_terminate(void)
 {
-    for (const auto& u : m_RegisteredUnits)
+    for (auto& u : m_RegisteredUnits)
     {
-        if (u.second.bWroteToFile)
+        if (u.second.GetWroteToFile())
         {
-            std::ofstream ofs(u.second.traceUnitInfo.sLogFileName.data(), std::ofstream::app);
+            std::ofstream ofs(u.second.GetTraceUnitInfo().sLogFileName.data(), std::ofstream::app);
             ofs << std::endl << std::endl << std::endl;
+            u.second.SetWroteToFile(false);
         }
     }
 }

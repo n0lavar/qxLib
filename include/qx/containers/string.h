@@ -122,7 +122,7 @@ public:
     template<class FwdIt>   basic_string (FwdIt                  first,
                                           FwdIt                  last)            { assign(first, last); }
     template<class String, class = typename std::enable_if_t<std::is_class_v<String>>>
-                            basic_string (const String         & str)             { assign(str.cbegin(), str.cend()); }
+                            basic_string (const String         & str)             { assign(str); }
 
     void                    assign       (const_pointer          pSource,
                                           size_type              nSymbols);
@@ -140,12 +140,12 @@ public:
 
     virtual                ~basic_string (void)                                   { free(); }
 
-    const   basic_string &  operator=    (basic_string        && str)    noexcept { assign(std::move(str));             return *this; }
-    const   basic_string &  operator=    (const basic_string   & str)             { assign(str);                        return *this; }
-    const   basic_string &  operator=    (value_type             ch)              { assign(ch);                         return *this; }
-    const   basic_string &  operator=    (const_pointer          pSource)         { assign(pSource);                    return *this; }
+    const   basic_string &  operator=    (basic_string        && str)    noexcept { assign(std::move(str)); return *this; }
+    const   basic_string &  operator=    (const basic_string   & str)             { assign(str);            return *this; }
+    const   basic_string &  operator=    (value_type             ch)              { assign(ch);             return *this; }
+    const   basic_string &  operator=    (const_pointer          pSource)         { assign(pSource);        return *this; }
     template<class String, class = typename std::enable_if_t<std::is_class_v<String>>>
-    const   basic_string &  operator=    (const String         & str)             { assign(str.cbegin(), str.cend());   return *this; }
+    const   basic_string &  operator=    (const String         & str)             { assign(str);            return *this; }
 
     template<class ... Args>
     void                    format       (const_pointer          pStr,

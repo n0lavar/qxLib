@@ -16,7 +16,7 @@
 
 #if QX_TEST_LOGGER
 
-#include <qx/logger.h>
+#include <qx/logger_worker.h>
 #include <gtest/gtest.h>
 #include <regex>
 
@@ -96,13 +96,22 @@ protected:
     /* called before every test */
     void SetUp()
     {
-        std::error_code ec;
-        std::filesystem::remove(m_sLogFilePath.data(), ec);
+        std::filesystem::remove(m_sLogFilePath.data());
 
-        m_Logger = qx::logger();
-        m_Logger.set_logs_folder(Traits::GetLogsFolder());
-        m_Logger.deregister_unit("default");
-        m_Logger.register_unit(Traits::GetUnit(), { Traits::GetLogsFile(), qx::logger::level::none, qx::logger::level::info });
+        m_pLogger = std::make_unique<qx::logger>();
+        m_pLogger->set_logs_folder(Traits::GetLogsFolder());
+        m_pLogger->deregister_unit("default");
+        m_pLogger->register_unit(Traits::GetUnit(), { Traits::GetLogsFile(), qx::logger::level::none, qx::logger::level::info });
+
+        std::unique_ptr<qx::logger> pLogger = std::make_unique<qx::logger>();
+        pLogger->set_logs_folder(Traits::GetLogsFolder());
+        pLogger->deregister_unit("default");
+        pLogger->register_unit(Traits::GetUnit(), { Traits::GetLogsFile(), qx::logger::level::none, qx::logger::level::info });
+        m_pLoggerWorker = std::make_unique<qx::logger_worker>(std::move(pLogger));
+        m_pLoggerWorker->set_check_period(std::chrono::minutes(1));
+        m_pLoggerWorker->set_check_period(std::chrono::seconds(1));
+        m_pLoggerWorker->set_check_period(std::chrono::microseconds(1));
+        m_pLoggerWorker->set_check_period(std::chrono::microseconds(500));
     }
 
     /* called after every test */
@@ -198,9 +207,10 @@ protected:
 
 protected:
 
-    qx::logger      m_Logger;
-    bool            m_bFunction     = false;
-    qx::string      m_sLogFilePath;
+    std::unique_ptr<qx::logger>         m_pLogger;
+    std::unique_ptr<qx::logger_worker>  m_pLoggerWorker;
+    bool                                m_bFunction     = false;
+    qx::string                          m_sLogFilePath;
 };
 
 TYPED_TEST_SUITE(TestLogger, Implementations);
@@ -268,31 +278,68 @@ TYPED_TEST_SUITE(TestLogger, Implementations);
                                                                     \
     TRACE(traceFile, "End test\n");
 
+//----------------------------------- logger -----------------------------------
+
 void TestLoggerFunction(qx::logger& myLogger, const char* pszTraceFile)
 {
     TEST_LOGGER(pszTraceFile)
 }
 
-TYPED_TEST(TestLogger, function)
+TYPED_TEST(TestLogger, logger_function)
 {
-    TestLoggerFunction(TestFixture::m_Logger, TypeParam::GetTraceFile());
+    TestLoggerFunction(*TestFixture::m_pLogger, TypeParam::GetTraceFile());
     TestFixture::m_bFunction = true;
 }
 
-TYPED_TEST(TestLogger, method)
+TYPED_TEST(TestLogger, logger_method)
 {
-    auto& myLogger = TestFixture::m_Logger;
+    auto& myLogger = *TestFixture::m_pLogger;
     TEST_LOGGER(TypeParam::GetTraceFile())
 }
 
-TYPED_TEST(TestLogger, lambda)
+TYPED_TEST(TestLogger, logger_lambda)
 {
     auto TestLoggerLambda = [](auto& myLogger)
     {
         TEST_LOGGER(TypeParam::GetTraceFile())
     };
 
-    TestLoggerLambda(TestFixture::m_Logger);
+    TestLoggerLambda(*TestFixture::m_pLogger);
 }
+
+//-------------------------------- logger_worker -------------------------------
+
+void TestLoggerFunction(qx::logger_worker& myLogger, const char* pszTraceFile)
+{
+    TEST_LOGGER(pszTraceFile)
+}
+
+TYPED_TEST(TestLogger, logger_worker_function)
+{
+    TestFixture::m_pLoggerWorker->thread_start();
+    TestLoggerFunction(*TestFixture::m_pLoggerWorker.get(), TypeParam::GetTraceFile());
+    TestFixture::m_bFunction = true;
+    TestFixture::m_pLoggerWorker->thread_terminate();
+}
+
+TYPED_TEST(TestLogger, logger_worker_method)
+{
+    TestFixture::m_pLoggerWorker->thread_start();
+    auto& myLogger = *TestFixture::m_pLoggerWorker.get();
+    TEST_LOGGER(TypeParam::GetTraceFile())
+        TestFixture::m_pLoggerWorker->thread_terminate();
+}
+
+TYPED_TEST(TestLogger, logger_worker_lambda)
+{
+    TestFixture::m_pLoggerWorker->thread_start();
+    auto TestLoggerWorkerLambda = [](auto& myLogger)
+    {
+        TEST_LOGGER(TypeParam::GetTraceFile())
+    };
+    TestLoggerWorkerLambda(*TestFixture::m_pLoggerWorker.get());
+    TestFixture::m_pLoggerWorker->thread_terminate();
+}
+
 
 #endif
