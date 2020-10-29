@@ -23,7 +23,7 @@ namespace qx
 //!\author Khrapov
 //!\date   24.10.2020
 //==============================================================================
-inline logger_worker::logger_worker(std::unique_ptr<qx::logger> pLogger)
+inline logger_worker::logger_worker(std::unique_ptr<logger> pLogger)
     : m_pLogger(std::move(pLogger))
 {
     thread_set_terminate_in_destructor(true);
@@ -57,6 +57,7 @@ inline void logger_worker::set_check_period(Duration duration)
 {
     m_CheckPeriod = std::chrono::duration_cast<std::chrono::milliseconds>(duration);
 }
+
 //==============================================================================
 //!\fn             qx::logger_worker::process_output<...Args>
 //
