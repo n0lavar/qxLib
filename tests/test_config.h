@@ -99,3 +99,7 @@
 #ifndef QX_TEST_THREAD_WORKER
     #define QX_TEST_THREAD_WORKER 1
 #endif
+
+#ifndef QX_TEST_ASSERT
+    #define QX_TEST_ASSERT 1
+#endif

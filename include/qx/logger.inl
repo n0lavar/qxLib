@@ -248,40 +248,35 @@ inline const char* logger::get_time_str(void)
 inline bool logger::output_to_file(const string& sText, const string& sFileName)
 {
     bool bRet = true;
-    std::ofstream ofs;
-    ofs.exceptions(std::ofstream::failbit | std::ofstream::badbit);
-    m_sPath.clear();
 
-    try
+    switch (m_eLogPolicy)
     {
-        switch (m_eLogPolicy)
-        {
-        case policy::folder_time:
-            m_sPath = m_sFolder + m_sSessionTime;
-            break;
+    case policy::folder_time:
+        m_sPath = m_sFolder + m_sSessionTime;
+        break;
 
-        case policy::append:
-        case policy::clear_then_uppend:
-        default:
-            m_sPath = m_sFolder;
-            break;
-        }
+    case policy::append:
+    case policy::clear_then_uppend:
+    default:
+        m_sPath = m_sFolder;
+        break;
+    }
 
-        if (!m_sFolder.empty())
-            std::filesystem::create_directories(m_sPath.data());
+    if (!m_sFolder.empty())
+        std::filesystem::create_directories(m_sPath.data());
 
-        m_sPath += sFileName;
-        ofs.open(m_sPath.data(), std::ofstream::app);
+    m_sPath += sFileName;
+    std::ofstream ofs(m_sPath.data(), std::ofstream::app);
+
+    if (ofs)
+    {
         ofs << sText;
         ofs.close();
     }
-    catch (const std::system_error& e)
+    else
     {
         bRet = false;
-        std::cerr
-            << "output_to_file error: file " << sFileName
-            << ", error " << e.code().value()
-            << ", msg " << e.what() << std::endl;
+        std::cerr << "output_to_file error: file " << sFileName;
     }
 
     return bRet;

@@ -13,6 +13,7 @@
 #pragma once
 
 #include <qx/useful_macros.h>
+#include <qx/assert.h>
 
 #include <glm/glm.hpp>
 #include <glm/gtc/epsilon.hpp>

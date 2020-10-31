@@ -1,0 +1,128 @@
+//==============================================================================
+//
+//!\file                        test_assert.cpp
+//
+//!\brief       Tests for assert macros
+//!\details     ~
+//
+//!\author      Khrapov
+//!\date        29.10.2020
+//!\copyright   (c) Nick Khrapov, 2020. All right reserved.
+//
+//==============================================================================
+#include <test_config.h>
+
+//V_EXCLUDE_PATH *test_assert.cpp
+
+#if QX_TEST_ASSERT
+
+#define QX_ENABLE_ASSERTS 1
+#define QX_ENABLE_DEBUG_BREAK 1
+
+#include <gtest/gtest.h>
+#include <qx/assert.h>
+
+void Foo()
+{
+}
+
+// we will check only compilation
+
+TEST(qx_assert, assert_macro)
+{
+    QX_ASSERT(false);
+
+    if (false)
+        QX_ASSERT(false);
+
+    if (false)
+        QX_ASSERT(false);
+    else
+        Foo();
+
+    if (false)
+        Foo();
+    else
+        QX_ASSERT(false);
+
+    if (false)
+    {
+        QX_ASSERT(false);
+        Foo();
+    }
+
+    if (false)
+        Foo();
+    else
+    {
+        QX_ASSERT(false);
+        Foo();
+    }
+}
+
+
+TEST(qx_assert, assert_mgs_macro)
+{
+    QX_ASSERT_MSG(false, "msg");
+
+    if (false)
+        QX_ASSERT_MSG(false, "msg");
+
+    if (false)
+        QX_ASSERT_MSG(false, "msg");
+    else
+        Foo();
+
+    if (false)
+        Foo();
+    else
+        QX_ASSERT_MSG(false, "msg");
+
+    if (false)
+    {
+        QX_ASSERT_MSG(false, "msg");
+        Foo();
+    }
+
+    if (false)
+        Foo();
+    else
+    {
+        QX_ASSERT_MSG(false, "msg");
+        Foo();
+    }
+}
+
+TEST(qx_assert, assert_not_impl_macro)
+{
+    QX_ASSERT_NOT_IMPL;
+
+    if (false)
+        QX_ASSERT_NOT_IMPL;
+
+    if (false)
+        QX_ASSERT_NOT_IMPL;
+    else
+        Foo();
+
+    if (false)
+        Foo();
+    else
+        QX_ASSERT_NOT_IMPL;
+
+    if (false)
+    {
+        QX_ASSERT_NOT_IMPL;
+        Foo();
+    }
+
+    if (false)
+        Foo();
+    else
+    {
+        QX_ASSERT_NOT_IMPL;
+        Foo();
+    }
+}
+
+#endif
