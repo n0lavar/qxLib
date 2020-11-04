@@ -95,25 +95,25 @@ inline void basic_string<Traits>::assign(FwdIt first, FwdIt last)
 }
 
 //==============================================================================
-//!\fn           qx::basic_string<Traits>::format<...Args>
+//!\fn               qx::basic_string<Traits>::format
 //
-//!\brief  Format string. Using this str as pFormat is UB
-//!\param  pFormat - format pattern
-//!\param  ...args - arguments
+//!\brief  Format string
+//!\param  pszFormat - format pattern. this str as pszFormat is UB
+//!\param  ...       - arguments
 //!\author Khrapov
 //!\date   29.10.2019
 //==============================================================================
 template<class Traits>
-template<class ...Args>
-inline void basic_string<Traits>::format(const_pointer pFormat, Args ...args)
+inline void basic_string<Traits>::format(const_pointer pszFormat, ...)
 {
-    int length = Traits::tsnprintf(nullptr, 0, pFormat, args...);
-    if (length > 0 && resize(length, Traits::talign()))
-        Traits::tsnprintf(m_pData, static_cast<size_type>(length) + 1, pFormat, args...);
+    va_list args;
+    va_start(args, pszFormat);
+    vformat(pszFormat, args);
+    va_end(args);
 }
 
 //==============================================================================
-//!\fn           qx::basic_string<Traits>::sformat<...Args>
+//!\fn          qx::basic_string<Traits>::format_static<...Args>
 //
 //!\brief  Static format string
 //!\param  pFormat - format pattern
@@ -124,11 +124,28 @@ inline void basic_string<Traits>::format(const_pointer pFormat, Args ...args)
 //==============================================================================
 template<class Traits>
 template<class ...Args>
-inline basic_string<Traits> basic_string<Traits>::sformat(const_pointer pFormat, Args ...args)
+inline basic_string<Traits> basic_string<Traits>::format_static(const_pointer pszFormat, Args ...args)
 {
     basic_string str;
-    str.format(pFormat, args...);
+    str.format(pszFormat, args...);
     return std::move(str);
+}
+
+//==============================================================================
+//!\fn                   basic_string<Traits>::vformat
+//
+//!\brief  Format string with given va_args
+//!\param  pszFormat - format pattern. this str as pszFormat is UB
+//!\param  args      - args pack
+//!\author Khrapov
+//!\date   5.11.2020
+//==============================================================================
+template<class Traits>
+inline void basic_string<Traits>::vformat(const_pointer pszFormat, va_list args)
+{
+    int length = Traits::tvsnprintf(nullptr, 0, pszFormat, args);
+    if (length > 0 && resize(length, Traits::talign()))
+        Traits::tvsnprintf(m_pData, static_cast<size_type>(length) + 1, pszFormat, args);
 }
 
 //==============================================================================
@@ -917,8 +934,7 @@ inline bool basic_string<Traits>::resize(size_type nSymbols, size_type nAlign, E
         || nSizeToAllocate > pStrData->nAllocatedSize)  // need to increase size
     {
         // increase or decrease size
-        void* pNewBlock = std::realloc(pStrData, str_data<Traits>::struct_size() + nSizeToAllocate * sizeof(value_type));
-        if (pNewBlock)
+        if (void* pNewBlock = std::realloc(pStrData, str_data<Traits>::struct_size() + nSizeToAllocate * sizeof(value_type)))
         {
             pStrData = reinterpret_cast<str_data<Traits>*>(pNewBlock);
             pStrData->nAllocatedSize = nSizeToAllocate;

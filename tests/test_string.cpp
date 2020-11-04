@@ -274,7 +274,7 @@ TYPED_TEST(TestQxString, format)
     EXPECT_FALSE(str0.empty());
     EXPECT_EQ(str0.size(), 27);
 
-    StringTypeTn str1 = StringType::sformat(STR("The half of %d is %f"), 75, 75.f / 2);
+    StringTypeTn str1 = StringType::format_static(STR("The half of %d is %f"), 75, 75.f / 2);
     EXPECT_STREQ(str1.data(), STR("The half of 75 is 37.500000"));
     EXPECT_FALSE(str0.empty());
     EXPECT_EQ(str1.size(), 27);

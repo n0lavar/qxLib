@@ -147,11 +147,13 @@ public:
     template<class String, class = typename std::enable_if_t<std::is_class_v<String>>>
     const   basic_string &  operator=    (const String         & str)             { assign(str);            return *this; }
 
+    void                    format       (const_pointer          pszFormat,
+                                          ...);
+    void                    vformat      (const_pointer          pszFormat,
+                                          va_list                args);
+
     template<class ... Args>
-    void                    format       (const_pointer          pStr,
-                                          Args...                args);
-    template<class ... Args>
-    static basic_string     sformat      (const_pointer          pStr,
+    static basic_string     format_static(const_pointer          pszFormat,
                                           Args...                args);
 
     size_type               capacity     (void)                                         const;

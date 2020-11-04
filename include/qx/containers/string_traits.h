@@ -75,10 +75,9 @@ struct char_traits<char>
     {
         return std::strncmp(pszFirst, pszSecond, nCount);
     }
-    template<class ... Args>
-    static int tsnprintf(pointer pszDest, size_type nBuffer, const_pointer pszFormat, Args ... args)
+    static int tvsnprintf(pointer pszDest, size_type nBuffer, const_pointer pszFormat, va_list args)
     {
-        return std::snprintf(pszDest, nBuffer, pszFormat, args...);
+        return std::vsnprintf(pszDest, nBuffer, pszFormat, args);
     }
     template<class ... Args>
     static int tssscanf(const_pointer pszString, const_pointer pszFormat, Args ... args)
@@ -136,36 +135,32 @@ struct char_traits<wchar_t>
     {
         return std::wcsncmp(pszFirst, pszSecond, nCount);
     }
-    // MVSC's std::swprintf returns required size if nullptr and 0 passed as pDest and nBuffer,
-    // while other compilers returns -1
+// MVSC's std::swprintf returns required size if nullptr and 0 passed as pDest and nBuffer,
+// while other compilers returns -1
 #if QX_MSVC
-    template<class ... Args>
-    static int tsnprintf(pointer pszDest, size_type nBuffer, const_pointer pszFormat, Args ... args)
+    static int tvsnprintf(pointer pszDest, size_type nBuffer, const_pointer pszFormat, va_list args)
     {
-        return std::swprintf(pszDest, nBuffer, pszFormat, args...);
+        return std::vswprintf(pszDest, nBuffer, pszFormat, args);
     }
 #else
-    static int tsnprintf(pointer pszDest, size_type nBuffer, const_pointer pszFormat, ...)
+    static int tvsnprintf(pointer pszDest, size_type nBuffer, const_pointer pszFormat, va_list args)
     {
         int size = -1;
 
-        va_list va;
-        va_start(va, pszFormat);
         if (nBuffer <= 0)
         {
             // opening a dummy file to /dev/null and printing to that file to retrieve the required size
             FILE* pDummyFile = std::fopen("/dev/null", "w");
             if (pDummyFile)
             {
-                size = std::vfwprintf(pDummyFile, pszFormat, va);
+                size = std::vfwprintf(pDummyFile, pszFormat, args);
                 std::fclose(pDummyFile);
             }
         }
         else
         {
-            size = std::vswprintf(pszDest, nBuffer, pszFormat, va);
+            size = std::vswprintf(pszDest, nBuffer, pszFormat, args);
         }
-        va_end(va);
 
         return size;
     }
