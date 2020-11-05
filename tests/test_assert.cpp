@@ -26,10 +26,12 @@ void Foo()
 {
 }
 
-// we will check only compilation
-
 TEST(qx_assert, assert_macro)
 {
+    // we only want to check compilation
+    // and dont want out test to be failed in SIGTRAP
+    return;
+
     QX_ASSERT(false);
 
     if (false)
@@ -63,6 +65,10 @@ TEST(qx_assert, assert_macro)
 
 TEST(qx_assert, assert_mgs_macro)
 {
+    // we only want to check compilation
+    // and dont want out test to be failed in SIGTRAP
+    return;
+
     QX_ASSERT_MSG(false, "msg");
 
     if (false)
@@ -95,6 +101,10 @@ TEST(qx_assert, assert_mgs_macro)
 
 TEST(qx_assert, assert_not_impl_macro)
 {
+    // we only want to check compilation
+    // and dont want out test to be failed in SIGTRAP
+    return;
+
     QX_ASSERT_NOT_IMPL;
 
     if (false)
