@@ -33,7 +33,7 @@ build_script:
   - cd googletest
   - mkdir build
   - cd build
-  - cmake .. %CMAKE_CONFIGURE_FLAGS%
+  - cmake .. %CMAKE_CONFIGURE_FLAGS%  -DCMAKE_CXX_FLAGS=-DGENERATE_TESTS=1
   - cmake --build . %CMAKE_BUILD_FLAGS%
   - cd ..
   - cd ..
