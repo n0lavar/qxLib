@@ -42,6 +42,6 @@ build_script:
   - cd qxLib
   - mkdir build
   - cd build
-  - cmake .. %CMAKE_CONFIGURE_FLAGS%
-  - cmake --build . %CMAKE_BUILD_FLAGS% -DCMAKE_CXX_FLAGS=-DGENERATE_TESTS=1
+  - cmake -DGENERATE_TESTS=1 .. %CMAKE_CONFIGURE_FLAGS%
+  - cmake --build . %CMAKE_BUILD_FLAGS%
   - ctest --output-on-failure
