@@ -8,28 +8,28 @@ set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_CURRENT_LIST_DIR}/cmake/modules/")
 include(cmake/platform_options.cmake)
 
-if (NOT DEFINED ALL_SOURCES)
-    include(cmake/append_sources.cmake)
-endif()
 
-# qxEngine
-clear_sources_vars()
-add_subdirectory(include/qx/alg)
-add_subdirectory(include/qx/containers)
-add_subdirectory(include/qx/gl)
-add_subdirectory(include/qx/meta)
-add_subdirectory(include/qx/temp)
-add_subdirectory(include/qx)
-source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR}/include/qx FILES ${ALL_SOURCES})
+# ================================================================
+# Options
 
 option(GENERATE_TESTS "Generate tests projects? Enabling this requires gtest" OFF)
 
-# ================================================================
-# All
 
-set (QXLIB_ALL_SOURCES
-    ${ALL_SOURCES}
+# ================================================================
+# Collect sources
+
+file(GLOB_RECURSE FILES_HEADERS ${CMAKE_CURRENT_SOURCE_DIR}/include/qx/*.h)
+file(GLOB_RECURSE FILES_SOURCES ${CMAKE_CURRENT_SOURCE_DIR}/include/qx/*.cpp)
+file(GLOB_RECURSE FILES_INLINES ${CMAKE_CURRENT_SOURCE_DIR}/include/qx/*.inl)
+
+source_group(
+    TREE ${CMAKE_CURRENT_SOURCE_DIR}/include/qx
+    FILES ${FILES_HEADERS} ${FILES_SOURCES} ${FILES_INLINES}
 )
+
+
+# ================================================================
+# Setup
 
 find_package(GTEST REQUIRED)
 find_package(Threads REQUIRED)
@@ -44,10 +44,7 @@ include_directories(
     "${CMAKE_CURRENT_LIST_DIR}/tests/"
 )
 
-# ================================================================
-# Setup
-
-add_library(qxLib ${QXLIB_ALL_SOURCES})
+add_library(qxLib ${FILES_HEADERS} ${FILES_SOURCES} ${FILES_INLINES})
 set_qxlib_target_options(qxLib)
 
 
