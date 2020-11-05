@@ -26,6 +26,7 @@
         qx::logger::level::info,                                \
         format,                                                 \
         nullptr,                                                \
+        nullptr,                                                \
         QX_SHORT_FILE,                                          \
         __FUNCTION__,                                           \
         __LINE__,                                               \
@@ -36,6 +37,7 @@
     loggerInstanse.process_output(                              \
         qx::logger::level::errors,                              \
         format,                                                 \
+        nullptr,                                                \
         nullptr,                                                \
         QX_SHORT_FILE,                                          \
         __FUNCTION__,                                           \
@@ -48,6 +50,7 @@
         qx::logger::level::asserts,                             \
         format,                                                 \
         # expr,                                                 \
+        nullptr,                                                \
         QX_SHORT_FILE,                                          \
         __FUNCTION__,                                           \
         __LINE__,                                               \
@@ -55,7 +58,7 @@
         ## __VA_ARGS__)
 
 
-// redefine theese macros in your own header with renaming only or using you instance of logger
+// redefine theese macros in your own header with renaming only or using your instance of logger
 
 // common info
 #define QX_TRACE(format, ...)                                   \
@@ -88,9 +91,6 @@ class logger_worker;
 class logger
 {
     friend class logger_worker;
-
-    static constexpr std::string_view DEFAULT_UNIT = "default";
-    static constexpr std::string_view DEFAULT_FILE = "default.log";
 
 public:
 
@@ -133,61 +133,97 @@ public:
 
     struct unit_info
     {
-        string  sLogFileName;
-        level   eConsoleLevel   = level::info;
-        level   eFileLevel      = level::info;
+        using format_func = std::function<
+            void(
+                string    & sMsg,               // output message
+                string    & sFormat,            // buffer for formatting
+                level       eLogLevel,          // log level
+                const char* pszFormat,          // format string
+                const char* pszAssertExpression,// assert expr or nullptr
+                const char* pszTag,             // trasing tag or nullptr
+                const char* pszFile,            // file name string
+                const char* pszFunction,        // function name string
+                int         nLine,              // code line number
+                va_list     args                // additional args for format
+            )
+        >;
+
+        string      sLogFileName;
+        level       eConsoleLevel   = level::info;
+        level       eFileLevel      = level::info;
+        format_func formatFunc      = logger::format_line;  // function for formatting this unit
+
+        unit_info() = default;
+        unit_info(
+            string      _sLogFileName,
+            level       _eConsoleLevel  = level::info,
+            level       _eFileLevel     = level::info,
+            format_func _formatFunc     = logger::format_line)
+            : sLogFileName  (_sLogFileName)
+            , eConsoleLevel (_eConsoleLevel)
+            , eFileLevel    (_eFileLevel)
+            , formatFunc    (_formatFunc)
+        {
+        }
     };
 
     class runtime_unit_info
     {
     public:
+
         runtime_unit_info(const unit_info& u)
             : m_TraceUnitInfo(u)
         {
         }
 
-        const unit_info& GetTraceUnitInfo() const
+        const unit_info& get_trace_unit_info() const
         {
             return m_TraceUnitInfo;
         }
 
-        bool GetWroteToFile() const
+        bool is_wrote_to_file() const
         {
             return m_bWroteToFile;
         }
 
-        void SetWroteToFile(bool bWrote = true)
+        void set_wrote_to_file(bool bWrote = true)
         {
             m_bWroteToFile = bWrote;
         }
 
     private:
+
         unit_info m_TraceUnitInfo;
         bool m_bWroteToFile = false;
     };
 
+    static constexpr std::string_view DEFAULT_UNIT = "default";
+    static constexpr std::string_view DEFAULT_FILE = "default.log";
+
 public:
 
-                logger             (void);
-                ~logger            (void);
+                logger              (void);
+                ~logger             (void);
 
-    template<class ... Args>
-    void        process_output     (level                   eLogLevel,
-                                    const char            * pszFormat,
-                                    const char            * pszAssertExpression,
-                                    const char            * pszFile,
-                                    const char            * pszFunction,
-                                    int                     nLine,
-                                    std::string_view        svColor,
-                                    Args...                 args);
+    void        process_output      (level              eLogLevel,
+                                     const char       * pszFormat,
+                                     const char       * pszAssertExpression,
+                                     const char       * pszTag,
+                                     const char       * pszFile,
+                                     const char       * pszFunction,
+                                     int                nLine,
+                                     std::string_view   svColor,
+                                     ...);
 
-    void        register_unit      (std::string_view        svUnitName,
-                                    const unit_info       & unit);
-    void        deregister_unit    (std::string_view        svUnitName);
+    void        register_unit       (std::string_view   svUnitName,
+                                     const unit_info  & unit);
+    void        deregister_unit     (std::string_view   svUnitName);
 
-    void        set_log_policy     (policy                  eLogPolicy);
-    void        set_logs_folder    (const char            * pszFolder);
-    void        set_using_colors   (bool                    bUsingColors);
+    void        set_log_policy      (policy             eLogPolicy);
+    void        set_logs_folder     (const char       * pszFolder);
+    void        set_using_colors    (bool               bUsingColors);
+
+    static void format_time_string (string            & sTime);
 
 protected:
 
@@ -196,30 +232,30 @@ protected:
 
 private:
 
-    using TraceUnitInfoMap = std::unordered_map<string, runtime_unit_info>;
+    using trace_unit_info_map = std::unordered_map<u32, runtime_unit_info>;
 
-    template<class ... Args>
-    void        format_line        (string                & sMsg,
-                                    string                & sFormat,
-                                    level                   eLogLevel,
-                                    const char            * pszFormat,
-                                    const char            * pszAssertExpression,
-                                    const char            * pszFile,
-                                    const char            * pszFunction,
-                                    int                     nLine,
-                                    Args...                 args);
+    static void format_line        (string            & sMsg,
+                                    string            & sFormat,
+                                    level               eLogLevel,
+                                    const char        * pszFormat,
+                                    const char        * pszAssertExpression,
+                                    const char        * pszTag,
+                                    const char        * pszFile,
+                                    const char        * pszFunction,
+                                    int                 nLine,
+                                    va_list             args);
 
-    runtime_unit_info* get_unit_info(level                  eLogLevel,
-                                    const char            * pszFormat,
-                                    const char            * pszAssertExpression,
-                                    const char            * pszFile,
-                                    const char            * pszFunction);
+    runtime_unit_info* get_unit_info(level              eLogLevel,
+                                    const char        * pszFormat,
+                                    const char        * pszAssertExpression,
+                                    const char        * pszTag,
+                                    const char        * pszFile,
+                                    const char        * pszFunction);
 
-    const char* get_time_str        (void);
-    bool        output_to_file      (const string         & sText,
-                                     const string         & sFileName);
-    void        output_to_cout      (const string         & sText,
-                                     std::string_view       svAsciiColor);
+    bool        output_to_file      (const string     & sText,
+                                     const string     & sFileName);
+    void        output_to_cout      (const string     & sText,
+                                     std::string_view   svAsciiColor);
 
 private:
 
@@ -230,15 +266,14 @@ private:
     string              m_sPath             = "";
 
     policy              m_eLogPolicy        = policy::append;
-    string              m_sSessionTime      = string(get_time_str()) + '/';
+    string              m_sSessionTime      = "";
     string              m_sFolder           = "";
     bool                m_bUsingColors      = false;
-    TraceUnitInfoMap    m_RegisteredUnits;
+    trace_unit_info_map m_RegisteredUnits;
 };
 
 inline      logger::logger           (void)                           { on_create(); }
 inline      logger::~logger          (void)                           { on_terminate(); }
-inline void logger::deregister_unit  (std::string_view  svUnitName)   { m_RegisteredUnits.erase(svUnitName); }
 inline void logger::set_log_policy   (policy            eLogPolicy)   { m_eLogPolicy = eLogPolicy; }
 inline void logger::set_using_colors (bool              bUsingColors) { m_bUsingColors = bUsingColors; }
 

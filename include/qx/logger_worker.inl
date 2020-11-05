@@ -59,66 +59,81 @@ inline void logger_worker::set_check_period(Duration duration)
 }
 
 //==============================================================================
-//!\fn             qx::logger_worker::process_output<...Args>
+//!\fn                 qx::logger_worker::process_output
 //
 //!\brief  Process tracings
 //!\param  eLogLevel            - log level
 //!\param  pszFormat            - format string
 //!\param  pszAssertExpression  - assert expr or nullptr
+//!\param  pszTag               - tracing tag or nullptr
 //!\param  pszFile              - file name string
 //!\param  pszFunction          - function name string
 //!\param  nLine                - code line number
 //!\param  svColor              - ascii color string
-//!\param  ...args              - additional args for format
+//!\param  ...                  - additional args for format
 //!\author Khrapov
 //!\date   24.10.2020
 //==============================================================================
-template<class ...Args>
 inline void logger_worker::process_output(
     logger::level       eLogLevel,
     const char        * pszFormat,
     const char        * pszAssertExpression,
+    const char        * pszTag,
     const char        * pszFile,
     const char        * pszFunction,
     int                 nLine,
     std::string_view    svColor,
-    Args...             args)
+    ...)
 {
     // check is thread safe as nobody can't edit units
     if (auto pUnitInfo = m_pLogger->get_unit_info(
         eLogLevel,
         pszFormat,
         pszAssertExpression,
+        pszTag,
         pszFile,
         pszFunction))
     {
         thread_local string sMsg;
         thread_local string sFormat;
 
-        m_pLogger->format_line(
-            sMsg,
-            sFormat,
-            eLogLevel,
-            pszFormat,
-            pszAssertExpression,
-            pszFile,
-            pszFunction,
-            nLine,
-            args...);
+        auto& traceUnitInfo = pUnitInfo->get_trace_unit_info();
 
-        auto& info = pUnitInfo->GetTraceUnitInfo();
+        va_list args;
+        va_start(args, svColor);
+        sMsg.clear();
 
-        if (eLogLevel >= info.eFileLevel)
+        if (auto formatFunc = traceUnitInfo.formatFunc; formatFunc)
         {
-            std::lock_guard lock(m_mtxFileLogsQueue);
-            m_FileLogsQueue[info.sLogFileName] += sMsg;
-            pUnitInfo->SetWroteToFile();
+            formatFunc(
+                sMsg,
+                sFormat,
+                eLogLevel,
+                pszFormat,
+                pszAssertExpression,
+                pszTag,
+                pszFile,
+                pszFunction,
+                nLine,
+                args);
         }
 
-        if (eLogLevel >= info.eConsoleLevel)
+        va_end(args);
+
+        if (!sMsg.empty())
         {
-            std::lock_guard lock(m_mtxConsoleLogsQueue);
-            m_ConsoleLogsQueue.push({ std::move(sMsg), svColor });
+            if (eLogLevel >= traceUnitInfo.eFileLevel)
+            {
+                std::lock_guard lock(m_mtxFileLogsQueue);
+                m_FileLogsQueue[traceUnitInfo.sLogFileName] += sMsg;
+                pUnitInfo->set_wrote_to_file();
+            }
+
+            if (eLogLevel >= traceUnitInfo.eConsoleLevel)
+            {
+                std::lock_guard lock(m_mtxConsoleLogsQueue);
+                m_ConsoleLogsQueue.push({ std::move(sMsg), svColor });
+            }
         }
     }
 }

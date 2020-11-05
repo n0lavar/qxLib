@@ -2,7 +2,7 @@
 //
 //!\file                         string_utils.h
 //
-//!\brief
+//!\brief       String functions
 //!\details     ~
 //
 //!\author      Khrapov
@@ -32,7 +32,7 @@ namespace qx
 //!\date    10.09.2020
 //==============================================================================
 template<typename Char>
-inline constexpr u32 murmur_32_hash(const Char* key, size_t len, u32 seed)
+inline constexpr u32 murmur_32_hash(const Char* key, size_t len, u32 seed = 42)
 {
     u32 h = seed;
     if (len > 3)

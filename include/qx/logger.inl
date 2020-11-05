@@ -15,52 +15,69 @@ namespace qx
 {
 
 //================================================================================
-//!\fn                    qx::logger::process_output<...Args>
+//!\fn                        qx::logger::process_output
 //
 //!\brief  Process tracings
 //!\param  eLogLevel            - log level
 //!\param  pszFormat            - format string
 //!\param  pszAssertExpression  - assert expr or nullptr
+//!\param  pszTag               - trasing tag
 //!\param  pszFile              - file name string
 //!\param  pszFunction          - function name string
 //!\param  nLine                - code line number
 //!\param  svColor              - ascii color string
-//!\param  ...args              - additional args for format
+//!\param  ...                  - additional args for format
 //!\author Khrapov
 //!\date   10.01.2020
 //================================================================================
-template<class ... Args>
 inline void logger::process_output(
     level               eLogLevel,
     const char        * pszFormat,
     const char        * pszAssertExpression,
+    const char        * pszTag,
     const char        * pszFile,
     const char        * pszFunction,
     int                 nLine,
     std::string_view    svColor,
-    Args...             args)
+    ...)
 {
-    if (auto pUnitInfo = get_unit_info(eLogLevel, pszFormat, pszAssertExpression, pszFile, pszFunction))
+    if (auto pUnitInfo = get_unit_info(eLogLevel, pszFormat, pszAssertExpression, pszTag, pszFile, pszFunction))
     {
-        format_line(
-            m_sMsg,
-            m_sFormat,
-            eLogLevel,
-            pszFormat,
-            pszAssertExpression,
-            pszFile, pszFunction,
-            nLine,
-            args...);
+        auto& traceUnitInfo = pUnitInfo->get_trace_unit_info();
 
-        if (eLogLevel >= pUnitInfo->GetTraceUnitInfo().eFileLevel
-            && output_to_file(m_sMsg, pUnitInfo->GetTraceUnitInfo().sLogFileName))
+        va_list args;
+        va_start(args, svColor);
+        m_sMsg.clear();
+
+        if (auto formatFunc = traceUnitInfo.formatFunc; formatFunc)
         {
-            pUnitInfo->SetWroteToFile();
+            formatFunc(
+                m_sMsg,
+                m_sFormat,
+                eLogLevel,
+                pszFormat,
+                pszAssertExpression,
+                pszTag,
+                pszFile,
+                pszFunction,
+                nLine,
+                args);
         }
 
-        if (eLogLevel >= pUnitInfo->GetTraceUnitInfo().eConsoleLevel)
+        va_end(args);
+
+        if (!m_sMsg.empty())
         {
-            output_to_cout(m_sMsg, svColor);
+            if (eLogLevel >= traceUnitInfo.eFileLevel
+                && output_to_file(m_sMsg, traceUnitInfo.sLogFileName))
+            {
+                pUnitInfo->set_wrote_to_file();
+            }
+
+            if (eLogLevel >= traceUnitInfo.eConsoleLevel)
+            {
+                output_to_cout(m_sMsg, svColor);
+            }
         }
     }
 }
@@ -68,22 +85,38 @@ inline void logger::process_output(
 //================================================================================
 //!\fn                     qx::logger::register_unit
 //
-//!\brief  Register file or function for tracing
+//!\brief  Register tag, file or function for tracing
 //         Register unit with name "default" to update default tracing settings
-//!\param  svUnitName - file or function name of "default"
+//!\param  svUnitName - tag, file or function name
 //!\param  unit       - unit info
 //!\author Khrapov
 //!\date   10.01.2020
 //================================================================================
 inline void logger::register_unit(std::string_view svUnitName, const unit_info& unit)
 {
-    if (!unit.sLogFileName.empty())
+    if (!unit.sLogFileName.empty() && !svUnitName.empty())
     {
         if (m_eLogPolicy == policy::clear_then_uppend)
             std::ofstream ofs(unit.sLogFileName.data(), std::ofstream::out | std::ofstream::trunc); //-V808
                                                                                                     // clear file
-        m_RegisteredUnits.emplace(svUnitName, unit);
+
+        u32 nHash = murmur_32_hash(svUnitName.data(), svUnitName.size());
+        m_RegisteredUnits.emplace(nHash, unit);
     }
+}
+
+//==============================================================================
+//!\fn                      logger::deregister_unit
+//
+//!\brief  Deregister tag, file or function for tracing
+//!\param  svUnitName - tag, file or function name
+//!\author Khrapov
+//!\date   4.11.2020
+//==============================================================================
+inline void logger::deregister_unit(std::string_view svUnitName)
+{
+    u32 nHash = murmur_32_hash(svUnitName.data(), svUnitName.size());
+    m_RegisteredUnits.erase(nHash);
 }
 
 //================================================================================
@@ -102,7 +135,30 @@ inline void logger::set_logs_folder(const char* pszFolder)
 }
 
 //==============================================================================
-//!\fn                    logger::format_line<...Args>
+//!\fn                       qx::format_time_string
+//
+//!\brief  Get time c string
+//!\param  sTime - output string with time
+//!\author Khrapov
+//!\date   5.11.2020
+//==============================================================================
+inline void logger::format_time_string(string& sTime)
+{
+    std::time_t t = std::time(nullptr);
+    std::tm* now = std::localtime(&t);
+
+    sTime.format(
+        "%02d-%02d-%04d_%02d-%02d-%02d",
+        now->tm_mday,
+        now->tm_mon,
+        now->tm_year + 1900,
+        now->tm_hour,
+        now->tm_min,
+        now->tm_sec);
+}
+
+//==============================================================================
+//!\fn                        logger::format_line
 //
 //!\brief  Format logger line
 //!\param  sMsg                 - output msg
@@ -110,37 +166,42 @@ inline void logger::set_logs_folder(const char* pszFolder)
 //!\param  eLogLevel            - log level
 //!\param  pszFormat            - format string
 //!\param  pszAssertExpression  - assert expr or nullptr
+//!\param  pszTag               - trasing tag or nullptr
 //!\param  pszFile              - file name string
 //!\param  pszFunction          - function name string
 //!\param  nLine                - code line number
-//!\param  ...args              - additional args for format
+//!\param  ...                  - additional args for format
 //!\author Khrapov
 //!\date   22.10.2020
 //==============================================================================
-template<class ...Args>
 inline void logger::format_line(
     string        & sMsg,
     string        & sFormat,
     level           eLogLevel,
     const char    * pszFormat,
     const char    * pszAssertExpression,
+    const char    * pszTag,
     const char    * pszFile,
     const char    * pszFunction,
     int             nLine,
-    Args...         args)
+    va_list         args)
 {
+    sMsg.vformat(pszFormat, args);
+
+    format_time_string(sFormat);
+
     switch (eLogLevel)
     {
     case qx::logger::level::info:
-        sFormat = "[I][%s][%s::%s(%d)] ";
+        sFormat = "[I][" + sFormat + "][%s::%s(%d)] ";
         break;
 
     case qx::logger::level::errors:
-        sFormat = "[E][%s][%s::%s(%d)] ";
+        sFormat = "[E][" + sFormat + "][%s::%s(%d)] ";
         break;
 
     case qx::logger::level::asserts:
-        sFormat = "[A][%s][%s::%s(%d)][%s] ";
+        sFormat = "[A][" + sFormat + "][%s::%s(%d)][%s] ";
         break;
 
     default:
@@ -148,29 +209,25 @@ inline void logger::format_line(
         break;
     }
 
-    sFormat += pszFormat;
+    sFormat += sMsg;
 
     // assume all psz != nullptr as method must be used in macros only
     if (eLogLevel != qx::logger::level::asserts)
     {
         sMsg.format(
             sFormat.data(),
-            get_time_str(),
             pszFile,
             pszFunction,
-            nLine,
-            args...);
+            nLine);
     }
     else
     {
         sMsg.format(
             sFormat.data(),
-            get_time_str(),
             pszFile,
             pszFunction,
             nLine,
-            pszAssertExpression,
-            args...);
+            pszAssertExpression);
     }
 
     sMsg += '\n';
@@ -183,6 +240,7 @@ inline void logger::format_line(
 //!\param  eLogLevel            - log level
 //!\param  pszFormat            - format string
 //!\param  pszAssertExpression  - assert expr or nullptr
+//!\param  pszTag               - trasing tag or nullptr
 //!\param  pszFile              - file name string
 //!\param  pszFunction          - function name string
 //!\retval                      - unit info pointer
@@ -194,45 +252,39 @@ inline logger::runtime_unit_info* logger::get_unit_info(
     level       eLogLevel,
     const char* pszFormat,
     const char* pszAssertExpression,
+    const char* pszTag,
     const char* pszFile,
     const char* pszFunction)
 {
+    auto find_unit = [this](std::string_view svUnit)
+    {
+        u32 nHash = murmur_32_hash(svUnit.data(), svUnit.size());
+        return m_RegisteredUnits.find(nHash);
+    };
+
     runtime_unit_info* pUnitInfo = nullptr;
-    if (auto it = m_RegisteredUnits.find(pszFunction); it != m_RegisteredUnits.end())
+
+    auto it = m_RegisteredUnits.end();
+
+    if (pszTag)
+        it = find_unit(pszTag);
+
+    if (it != m_RegisteredUnits.end())
         pUnitInfo = &(it->second);
-    else if (auto it = m_RegisteredUnits.find(pszFile); it != m_RegisteredUnits.end())
+    else if (it = find_unit(pszFile); it != m_RegisteredUnits.end())
         pUnitInfo = &(it->second);
-    else if (auto it = m_RegisteredUnits.find(DEFAULT_UNIT); it != m_RegisteredUnits.end())
+    else if (it = find_unit(pszFunction); it != m_RegisteredUnits.end())
+        pUnitInfo = &(it->second);
+    else if (it = find_unit(DEFAULT_UNIT); it != m_RegisteredUnits.end())
         pUnitInfo = &(it->second);
 
-    if (pUnitInfo && (eLogLevel >= pUnitInfo->GetTraceUnitInfo().eFileLevel || eLogLevel >= pUnitInfo->GetTraceUnitInfo().eConsoleLevel))
+    if (pUnitInfo && (eLogLevel >= pUnitInfo->get_trace_unit_info().eFileLevel
+                   || eLogLevel >= pUnitInfo->get_trace_unit_info().eConsoleLevel))
+    {
         return pUnitInfo;
+    }
     else
         return nullptr;
-}
-
-//==============================================================================
-//!\fn                     qx::logger::get_time_str
-//
-//!\brief  Get time c string
-//!\author Khrapov
-//!\date   4.09.2019
-//==============================================================================
-inline const char* logger::get_time_str(void)
-{
-    std::time_t t = std::time(nullptr);
-    std::tm* now = std::localtime(&t);
-
-    m_sTime.format(
-        "%02d-%02d-%04d_%02d-%02d-%02d",
-        now->tm_mday,
-        now->tm_mon,
-        now->tm_year + 1900,
-        now->tm_hour,
-        now->tm_min,
-        now->tm_sec);
-
-    return m_sTime.data();
 }
 
 //================================================================================
@@ -311,6 +363,8 @@ inline void logger::output_to_cout(const string& sText, std::string_view svAscii
 //================================================================================
 inline void logger::on_create(void)
 {
+    format_time_string(m_sTime);
+    m_sSessionTime = m_sTime + '/';
     register_unit(DEFAULT_UNIT, { DEFAULT_FILE, level::info, level::info });
 }
 
@@ -325,11 +379,14 @@ inline void logger::on_terminate(void)
 {
     for (auto& u : m_RegisteredUnits)
     {
-        if (u.second.GetWroteToFile())
+        if (u.second.is_wrote_to_file())
         {
-            std::ofstream ofs(u.second.GetTraceUnitInfo().sLogFileName.data(), std::ofstream::app);
-            ofs << std::endl << std::endl << std::endl;
-            u.second.SetWroteToFile(false);
+            std::ofstream ofs(u.second.get_trace_unit_info().sLogFileName.data(), std::ofstream::app);
+            if (ofs)
+            {
+                ofs << std::endl << std::endl << std::endl;
+                u.second.set_wrote_to_file(false);
+            }
         }
     }
 }

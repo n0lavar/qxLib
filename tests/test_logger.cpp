@@ -24,7 +24,8 @@ template <
     const char sLogsFolder[],
     const char sLogsFile[],
     const char sUnit[],
-    const char sTraceFile[]
+    const char sTraceFile[],
+    const char sTag[]
 >
 struct LoggerTraits
 {
@@ -32,6 +33,7 @@ struct LoggerTraits
     constexpr static auto GetLogsFile()   { return sLogsFile;   }
     constexpr static auto GetUnit()       { return sUnit;       }
     constexpr static auto GetTraceFile()  { return sTraceFile;  }
+    constexpr static const char* GetTag() { return qx::meta::strlen(sTag) == 0 ? nullptr : sTag; }
 };
 
 constexpr const char LOGS_FOLDER_ROOT[]  = "";
@@ -48,19 +50,25 @@ constexpr const char TRACE_FILE_H[]      = "file.h";
 constexpr const char TRACE_FILE_CPP[]    = "file.cpp";
 constexpr const char TRACE_FILE_INL[]    = "file.inl";
 
+constexpr const char TRACE_TAG_NULLPTR[] = "";
+constexpr const char TRACE_TAG_TAG1[]    = "tag1";
+constexpr const char TRACE_TAG_TAG2[]    = "tag2";
 
 using Implementations = ::testing::Types
 <
-    LoggerTraits<LOGS_FOLDER_ROOT, LOGS_FILE_DEFAULT, UNIT_DEFAULT, TRACE_FILE_H>,
+    LoggerTraits<LOGS_FOLDER_ROOT, LOGS_FILE_DEFAULT, UNIT_DEFAULT, TRACE_FILE_H, TRACE_TAG_NULLPTR>,
 
-    LoggerTraits<LOGS_FOLDER_ROOT, LOGS_FILE_DEFAULT, UNIT_FILE,    TRACE_FILE_H>,
-    LoggerTraits<LOGS_FOLDER_ROOT, LOGS_FILE_DEFAULT, UNIT_FUNC,    TRACE_FILE_H>,
+    LoggerTraits<LOGS_FOLDER_ROOT, LOGS_FILE_DEFAULT, UNIT_FILE,    TRACE_FILE_H, TRACE_TAG_NULLPTR>,
+    LoggerTraits<LOGS_FOLDER_ROOT, LOGS_FILE_DEFAULT, UNIT_FUNC,    TRACE_FILE_H, TRACE_TAG_NULLPTR>,
 
-    LoggerTraits<LOGS_FOLDER_LOGS, LOGS_FILE_DEFAULT, UNIT_DEFAULT, TRACE_FILE_H>,
-    LoggerTraits<LOGS_FOLDER_KEKW, LOGS_FILE_DEFAULT, UNIT_DEFAULT, TRACE_FILE_H>,
+    LoggerTraits<LOGS_FOLDER_LOGS, LOGS_FILE_DEFAULT, UNIT_DEFAULT, TRACE_FILE_H, TRACE_TAG_NULLPTR>,
+    LoggerTraits<LOGS_FOLDER_KEKW, LOGS_FILE_DEFAULT, UNIT_DEFAULT, TRACE_FILE_H, TRACE_TAG_NULLPTR>,
 
-    LoggerTraits<LOGS_FOLDER_ROOT, LOGS_FILE_DEFAULT, UNIT_DEFAULT, TRACE_FILE_CPP>,
-    LoggerTraits<LOGS_FOLDER_ROOT, LOGS_FILE_DEFAULT, UNIT_DEFAULT, TRACE_FILE_INL>
+    LoggerTraits<LOGS_FOLDER_ROOT, LOGS_FILE_DEFAULT, UNIT_DEFAULT, TRACE_FILE_CPP, TRACE_TAG_NULLPTR>,
+    LoggerTraits<LOGS_FOLDER_ROOT, LOGS_FILE_DEFAULT, UNIT_DEFAULT, TRACE_FILE_INL, TRACE_TAG_NULLPTR>,
+
+    LoggerTraits<LOGS_FOLDER_ROOT, LOGS_FILE_DEFAULT, UNIT_DEFAULT, TRACE_FILE_H, TRACE_TAG_TAG1>,
+    LoggerTraits<LOGS_FOLDER_ROOT, LOGS_FILE_DEFAULT, UNIT_DEFAULT, TRACE_FILE_H, TRACE_TAG_TAG2>
 >;
 
 
@@ -98,15 +106,47 @@ protected:
     {
         std::filesystem::remove(m_sLogFilePath.data());
 
+        auto configure_logger = [](std::unique_ptr<qx::logger>& pLogger)
+        {
+            pLogger->set_logs_folder(Traits::GetLogsFolder());
+            pLogger->deregister_unit("default");
+            pLogger->register_unit(
+                Traits::GetUnit(),
+                { Traits::GetLogsFile(), qx::logger::level::none, qx::logger::level::info });
+
+            if constexpr (Traits::GetTag() && qx::meta::strcmp(TRACE_TAG_TAG1, Traits::GetTag()) == 0)
+            {
+                pLogger->register_unit(
+                    Traits::GetTag(),
+                    {
+                        Traits::GetLogsFile(),
+                        qx::logger::level::none,
+                        qx::logger::level::info,
+                        [](qx::string         & sMsg,
+                           qx::string         & sFormat,
+                           qx::logger::level    eLogLevel,
+                           const char         * pszFormat,
+                           const char         * pszAssertExpression,
+                           const char         * pszTag,
+                           const char         * pszFile,
+                           const char         * pszFunction,
+                           int                  nLine,
+                           va_list              args)
+                        {
+                            sMsg.vformat(pszFormat, args);
+                            qx::logger::format_time_string(sFormat);
+                            sMsg = qx::string("[I][") + sFormat + "][" + pszTag + "] " + sMsg + '\n';
+                        }
+                    }
+                );
+            }
+        };
+
         m_pLogger = std::make_unique<qx::logger>();
-        m_pLogger->set_logs_folder(Traits::GetLogsFolder());
-        m_pLogger->deregister_unit("default");
-        m_pLogger->register_unit(Traits::GetUnit(), { Traits::GetLogsFile(), qx::logger::level::none, qx::logger::level::info });
+        configure_logger(m_pLogger);
 
         std::unique_ptr<qx::logger> pLogger = std::make_unique<qx::logger>();
-        pLogger->set_logs_folder(Traits::GetLogsFolder());
-        pLogger->deregister_unit("default");
-        pLogger->register_unit(Traits::GetUnit(), { Traits::GetLogsFile(), qx::logger::level::none, qx::logger::level::info });
+        configure_logger(pLogger);
         m_pLoggerWorker = std::make_unique<qx::logger_worker>(std::move(pLogger));
         m_pLoggerWorker->set_check_period(std::chrono::minutes(1));
         m_pLoggerWorker->set_check_period(std::chrono::seconds(1));
@@ -133,18 +173,36 @@ protected:
             constexpr const char* pszInfo   = "\\[I\\]";
             constexpr const char* pszError  = "\\[E\\]";
             constexpr const char* pszAssert = "\\[A\\]";
+            constexpr const char* pszDate   = "\\[\\d{2}-\\d{2}-\\d{4}_";
+            constexpr const char* pszTime   = "\\d{2}-\\d{2}-\\d{2}\\]";
 
-            auto CheckString = [
+            auto CheckRegex = [
+                &regex,
+                &match
+            ]
+                (const qx::string& sMatch, const std::string& sText)
+            {
+                regex = std::regex(sMatch.data());
+                EXPECT_TRUE(std::regex_search(sText, match, regex))
+                    << "regex:           " << sMatch.data() << std::endl
+                    << "line:            " << sText.data() << std::endl
+                    << "logs folder:     " << Traits::GetLogsFolder() << std::endl
+                    << "logs file:       " << Traits::GetLogsFile() << std::endl
+                    << "logs unit:       " << Traits::GetUnit() << std::endl
+                    << "logs trace file: " << Traits::GetTraceFile();
+            };
+
+            auto CheckStringCommon = [
                 &sFormat,
                 &sFile,
-                &regex,
                 &ifs,
                 &sLine,
-                &match]
+                &CheckRegex,
+                &pszDate,
+                &pszTime
+            ]
                 (const char* pszStringStarting, const char* pszStringEnding)
             {
-                constexpr const char* pszDate = "\\[\\d{2}-\\d{2}-\\d{4}_";
-                constexpr const char* pszTime = "\\d{2}-\\d{2}-\\d{2}\\]";
                 sFile.format("\\[%s::", Traits::GetTraceFile());
                 constexpr const char* pszFunc = "(.*?)"; // compiler-dependent
                 constexpr const char* pszLine = "\\(\\d+\\)\\]";
@@ -159,40 +217,80 @@ protected:
                     pszLine,
                     pszStringEnding);
 
-                regex = std::regex(sFormat.data());
                 ifs.getline(sLine.data(), sLine.size());
-                EXPECT_TRUE(std::regex_search(sLine, match, regex))
-                    << "regex:           " << sFormat.data()            << std::endl
-                    << "line:            " << sLine.data()              << std::endl
-                    << "logs folder:     " << Traits::GetLogsFolder()   << std::endl
-                    << "logs file:       " << Traits::GetLogsFile()     << std::endl
-                    << "logs unit:       " << Traits::GetUnit()         << std::endl
-                    << "logs trace file: " << Traits::GetTraceFile();
+                CheckRegex(sFormat, sLine);
             };
 
-            CheckString(pszInfo,    " Start test");
-            CheckString(pszInfo,    " 1.000000");
-            CheckString(pszInfo,    " 1.000000 1");
-            CheckString(pszInfo,    " 1.000000 2");
-            CheckString(pszInfo,    " 1.000000 3");
-            CheckString(pszInfo,    " 1.000000 4");
-            CheckString(pszInfo,    " 1.000000 5");
-            CheckString(pszError,   " 1.000000 1");
-            CheckString(pszError,   " 1.000000 2");
-            CheckString(pszError,   " 1.000000 3");
-            CheckString(pszError,   " 1.000000 4");
-            CheckString(pszError,   " 1.000000 5");
-            CheckString(pszAssert,  "\\[false\\] 1.000000 1");
-            CheckString(pszAssert,  "\\[false\\] 1.000000 2");
-            CheckString(pszAssert,  "\\[false\\] 1.000000 3");
-            CheckString(pszAssert,  "\\[false\\] 1.000000 4");
-            CheckString(pszAssert,  "\\[false\\] 1.000000 5");
-            CheckString(pszAssert,  "\\[false\\] 1.000000 1 three");
-            CheckString(pszAssert,  "\\[false\\] 1.000000 2 three");
-            CheckString(pszAssert,  "\\[false\\] 1.000000 3 three");
-            CheckString(pszAssert,  "\\[false\\] 1.000000 4 three");
-            CheckString(pszAssert,  "\\[false\\] 1.000000 5 three");
-            CheckString(pszInfo,    " End test");
+            auto CheckStringTag = [
+                &sFormat,
+                &ifs,
+                &sLine,
+                &CheckRegex,
+                &pszInfo,
+                &pszDate,
+                &pszTime
+            ]
+                (const char* pszStringEnding)
+            {
+                sFormat.format(
+                    "%s%s%s\\[%s\\]%s",
+                    pszInfo,
+                    pszDate,
+                    pszTime,
+                    Traits::GetTag(),
+                    pszStringEnding);
+
+                ifs.getline(sLine.data(), sLine.size());
+                CheckRegex(sFormat, sLine);
+            };
+
+            CheckStringCommon(pszInfo,    " Start test");
+
+            CheckStringCommon(pszInfo,    " 1.000000");
+            CheckStringCommon(pszInfo,    " 1.000000 1");
+            CheckStringCommon(pszInfo,    " 1.000000 2");
+            CheckStringCommon(pszInfo,    " 1.000000 3");
+            CheckStringCommon(pszInfo,    " 1.000000 4");
+            CheckStringCommon(pszInfo,    " 1.000000 5");
+
+            CheckStringCommon(pszError,   " 1.000000 1");
+            CheckStringCommon(pszError,   " 1.000000 2");
+            CheckStringCommon(pszError,   " 1.000000 3");
+            CheckStringCommon(pszError,   " 1.000000 4");
+            CheckStringCommon(pszError,   " 1.000000 5");
+
+            CheckStringCommon(pszAssert,  "\\[false\\] 1.000000 1");
+            CheckStringCommon(pszAssert,  "\\[false\\] 1.000000 2");
+            CheckStringCommon(pszAssert,  "\\[false\\] 1.000000 3");
+            CheckStringCommon(pszAssert,  "\\[false\\] 1.000000 4");
+            CheckStringCommon(pszAssert,  "\\[false\\] 1.000000 5");
+
+            CheckStringCommon(pszAssert,  "\\[false\\] 1.000000 1 three");
+            CheckStringCommon(pszAssert,  "\\[false\\] 1.000000 2 three");
+            CheckStringCommon(pszAssert,  "\\[false\\] 1.000000 3 three");
+            CheckStringCommon(pszAssert,  "\\[false\\] 1.000000 4 three");
+            CheckStringCommon(pszAssert,  "\\[false\\] 1.000000 5 three");
+
+            if constexpr (Traits::GetTag() && qx::meta::strcmp(TRACE_TAG_TAG1, Traits::GetTag()) == 0)
+            {
+                CheckStringTag(" 1.000000");
+                CheckStringTag(" 1.000000 1");
+                CheckStringTag(" 1.000000 2");
+                CheckStringTag(" 1.000000 3");
+                CheckStringTag(" 1.000000 4");
+                CheckStringTag(" 1.000000 5");
+            }
+            else
+            {
+                CheckStringCommon(pszInfo, " 1.000000");
+                CheckStringCommon(pszInfo, " 1.000000 1");
+                CheckStringCommon(pszInfo, " 1.000000 2");
+                CheckStringCommon(pszInfo, " 1.000000 3");
+                CheckStringCommon(pszInfo, " 1.000000 4");
+                CheckStringCommon(pszInfo, " 1.000000 5");
+            }
+
+            CheckStringCommon(pszInfo,    " End test");
 
             ifs.close();
 
@@ -220,6 +318,19 @@ TYPED_TEST_SUITE(TestLogger, Implementations);
         qx::logger::level::info,                                    \
         format,                                                     \
         nullptr,                                                    \
+        nullptr,                                                    \
+        traceFile,                                                  \
+        __FUNCTION__,                                               \
+        __LINE__,                                                   \
+        std::string_view(),                                         \
+        ## __VA_ARGS__)
+
+#define TRACE_TAG(traceFile, tag, format, ...)                      \
+    myLogger.process_output(                                        \
+        qx::logger::level::info,                                    \
+        format,                                                     \
+        nullptr,                                                    \
+        tag,                                                        \
         traceFile,                                                  \
         __FUNCTION__,                                               \
         __LINE__,                                                   \
@@ -230,6 +341,7 @@ TYPED_TEST_SUITE(TestLogger, Implementations);
     myLogger.process_output(                                        \
         qx::logger::level::errors,                                  \
         format,                                                     \
+        nullptr,                                                    \
         nullptr,                                                    \
         traceFile,                                                  \
         __FUNCTION__,                                               \
@@ -242,13 +354,14 @@ TYPED_TEST_SUITE(TestLogger, Implementations);
         qx::logger::level::asserts,                                 \
         format,                                                     \
         # expr,                                                     \
+        nullptr,                                                    \
         traceFile,                                                  \
         __FUNCTION__,                                               \
         __LINE__,                                                   \
         qx::logger::auto_terminal_color::red,                       \
         ## __VA_ARGS__)
 
-#define TEST_LOGGER(traceFile)                                      \
+#define TEST_LOGGER(traceFile, tag)                                 \
     TRACE(traceFile, "Start test");                                 \
                                                                     \
     TRACE(traceFile, "%f", 1.f);                                    \
@@ -276,32 +389,42 @@ TYPED_TEST_SUITE(TestLogger, Implementations);
     TRACE_ASSERT(traceFile, false, "%f %d %s", 1.f, 4, "three");    \
     TRACE_ASSERT(traceFile, false, "%f %d %s", 1.f, 5, "three");    \
                                                                     \
+    TRACE_TAG(traceFile, tag, "%f", 1.f);                           \
+    TRACE_TAG(traceFile, tag, "%f %d", 1.f, 1);                     \
+    TRACE_TAG(traceFile, tag, "%f %d", 1.f, 2);                     \
+    TRACE_TAG(traceFile, tag, "%f %d", 1.f, 3);                     \
+    TRACE_TAG(traceFile, tag, "%f %d", 1.f, 4);                     \
+    TRACE_TAG(traceFile, tag, "%f %d", 1.f, 5);                     \
+                                                                    \
     TRACE(traceFile, "End test\n");
 
 //----------------------------------- logger -----------------------------------
 
-void TestLoggerFunction(qx::logger& myLogger, const char* pszTraceFile)
+void TestLoggerFunction(
+    qx::logger& myLogger,
+    const char* pszTraceFile,
+    const char* pszTag)
 {
-    TEST_LOGGER(pszTraceFile)
+    TEST_LOGGER(pszTraceFile, pszTag)
 }
 
 TYPED_TEST(TestLogger, logger_function)
 {
-    TestLoggerFunction(*TestFixture::m_pLogger, TypeParam::GetTraceFile());
+    TestLoggerFunction(*TestFixture::m_pLogger, TypeParam::GetTraceFile(), TypeParam::GetTag());
     TestFixture::m_bFunction = true;
 }
 
 TYPED_TEST(TestLogger, logger_method)
 {
     auto& myLogger = *TestFixture::m_pLogger;
-    TEST_LOGGER(TypeParam::GetTraceFile())
+    TEST_LOGGER(TypeParam::GetTraceFile(), TypeParam::GetTag())
 }
 
 TYPED_TEST(TestLogger, logger_lambda)
 {
     auto TestLoggerLambda = [](auto& myLogger)
     {
-        TEST_LOGGER(TypeParam::GetTraceFile())
+        TEST_LOGGER(TypeParam::GetTraceFile(), TypeParam::GetTag())
     };
 
     TestLoggerLambda(*TestFixture::m_pLogger);
@@ -309,15 +432,18 @@ TYPED_TEST(TestLogger, logger_lambda)
 
 //-------------------------------- logger_worker -------------------------------
 
-void TestLoggerFunction(qx::logger_worker& myLogger, const char* pszTraceFile)
+void TestLoggerFunction(
+    qx::logger_worker& myLogger,
+    const char       * pszTraceFile,
+    const char       * pszTag)
 {
-    TEST_LOGGER(pszTraceFile)
+    TEST_LOGGER(pszTraceFile, pszTag)
 }
 
 TYPED_TEST(TestLogger, logger_worker_function)
 {
     TestFixture::m_pLoggerWorker->thread_start();
-    TestLoggerFunction(*TestFixture::m_pLoggerWorker.get(), TypeParam::GetTraceFile());
+    TestLoggerFunction(*TestFixture::m_pLoggerWorker.get(), TypeParam::GetTraceFile(), TypeParam::GetTag());
     TestFixture::m_bFunction = true;
     TestFixture::m_pLoggerWorker->thread_terminate();
 }
@@ -326,8 +452,8 @@ TYPED_TEST(TestLogger, logger_worker_method)
 {
     TestFixture::m_pLoggerWorker->thread_start();
     auto& myLogger = *TestFixture::m_pLoggerWorker.get();
-    TEST_LOGGER(TypeParam::GetTraceFile())
-        TestFixture::m_pLoggerWorker->thread_terminate();
+    TEST_LOGGER(TypeParam::GetTraceFile(), TypeParam::GetTag())
+    TestFixture::m_pLoggerWorker->thread_terminate();
 }
 
 TYPED_TEST(TestLogger, logger_worker_lambda)
@@ -335,7 +461,7 @@ TYPED_TEST(TestLogger, logger_worker_lambda)
     TestFixture::m_pLoggerWorker->thread_start();
     auto TestLoggerWorkerLambda = [](auto& myLogger)
     {
-        TEST_LOGGER(TypeParam::GetTraceFile())
+        TEST_LOGGER(TypeParam::GetTraceFile(), TypeParam::GetTag())
     };
     TestLoggerWorkerLambda(*TestFixture::m_pLoggerWorker.get());
     TestFixture::m_pLoggerWorker->thread_terminate();

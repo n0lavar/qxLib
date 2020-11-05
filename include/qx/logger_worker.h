@@ -46,15 +46,15 @@ public:
     template <typename Duration>
     void            set_check_period    (Duration               duration);
 
-    template<class ... Args>
     void            process_output      (logger::level          eLogLevel,
                                          const char           * pszFormat,
                                          const char           * pszAssertExpression,
+                                         const char           * pszTag,
                                          const char           * pszFile,
                                          const char           * pszFunction,
                                          int                    nLine,
                                          std::string_view       svColor,
-                                         Args...                args);
+                                         ...);
 
 private:
 
