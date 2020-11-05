@@ -103,7 +103,7 @@ script:
   # build with test info
   - mkdir build
   - cd build
-  - cmake .. -DCMAKE_BUILD_TYPE=$BUILD_CONFIGURATION
+  - cmake .. -DCMAKE_BUILD_TYPE=$BUILD_CONFIGURATION -DCMAKE_CXX_FLAGS=-DGENERATE_TESTS=1
   - cmake --build .
   
   # run tests
