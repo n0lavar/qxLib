@@ -43,5 +43,5 @@ build_script:
   - mkdir build
   - cd build
   - cmake .. %CMAKE_CONFIGURE_FLAGS%
-  - cmake --build -DCMAKE_CXX_FLAGS=-DGENERATE_TESTS=1 . %CMAKE_BUILD_FLAGS%
+  - cmake --build . %CMAKE_BUILD_FLAGS% -DCMAKE_CXX_FLAGS=-DGENERATE_TESTS=1
   - ctest --output-on-failure
