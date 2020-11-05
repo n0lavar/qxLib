@@ -143,7 +143,11 @@ inline basic_string<Traits> basic_string<Traits>::format_static(const_pointer ps
 template<class Traits>
 inline void basic_string<Traits>::vformat(const_pointer pszFormat, va_list args)
 {
-    int length = Traits::tvsnprintf(nullptr, 0, pszFormat, args);
+    va_list args_copy;
+    va_copy(args_copy, args);
+    int length = Traits::tvsnprintf(nullptr, 0, pszFormat, args_copy);
+    va_end(args_copy);
+
     if (length > 0 && resize(length, Traits::talign()))
         Traits::tvsnprintf(m_pData, static_cast<size_type>(length) + 1, pszFormat, args);
 }

@@ -109,7 +109,7 @@ protected:
         auto configure_logger = [](std::unique_ptr<qx::logger>& pLogger)
         {
             pLogger->set_logs_folder(Traits::GetLogsFolder());
-            pLogger->deregister_unit("default");
+            pLogger->deregister_unit(qx::logger::DEFAULT_UNIT);
             pLogger->register_unit(
                 Traits::GetUnit(),
                 { Traits::GetLogsFile(), qx::logger::level::none, qx::logger::level::info });
