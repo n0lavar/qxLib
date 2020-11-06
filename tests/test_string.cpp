@@ -248,9 +248,12 @@ TYPED_TEST(TestQxString, operator_assign)
     EXPECT_EQ(str.size(), 0);
     EXPECT_TRUE(str.data());
 
+    str = tmpStr;
+
     str.free();
     EXPECT_TRUE(str.empty());
     EXPECT_EQ(str.size(), 0);
+    EXPECT_EQ(str.capacity(), 0);
     EXPECT_FALSE(str.data());
 
     str = std::move(tmpStr);

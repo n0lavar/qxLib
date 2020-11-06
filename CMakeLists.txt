@@ -49,7 +49,7 @@ set_qxlib_target_options(qxLib)
 
 
 # ================================================================
-# add tests
+# Add tests
 
 if (${GENERATE_TESTS})
     enable_testing()

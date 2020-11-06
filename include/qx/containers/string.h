@@ -2,7 +2,7 @@
 //
 //!\file                          string.h
 //
-//!\brief       Lite string impl
+//!\brief       String impl
 //!\details     ~
 //
 //!\author      Khrapov
@@ -25,19 +25,6 @@
 
 namespace qx
 {
-
-template<class Traits>
-struct str_data
-{
-    typename Traits::size_type nSize          = 0;
-    typename Traits::size_type nAllocatedSize = 0;
-
-    // note: https://www.viva64.com/ru/w/v119/
-    static constexpr typename Traits::size_type struct_size(void)
-    {
-        return sizeof(str_data) + offsetof(str_data, nAllocatedSize);
-    }
-};
 
 template<class Traits>
 class basic_string;
@@ -72,7 +59,7 @@ enum class ECaseType
 //
 //!\class                      qx::basic_string
 //
-//!\brief   Lite string class
+//!\brief   String class
 //
 //!\author  Khrapov
 //!\date    20.10.2019
@@ -126,7 +113,7 @@ public:
 
     void                    assign       (const_pointer          pSource,
                                           size_type              nSymbols);
-    void                    assign       (basic_string        && str)    noexcept { std::swap(m_pData, str.m_pData); }
+    void                    assign       (basic_string        && str)    noexcept;
     void                    assign       (const basic_string   & str);
     void                    assign       (value_type             ch)              { assign(&ch, 1); }
     void                    assign       (const_pointer          pSource);
@@ -138,7 +125,7 @@ public:
     template<class String, class = typename std::enable_if_t<std::is_class_v<String>>>
     void                    assign       (const String         & str)             { assign(str.cbegin(), str.cend()); }
 
-    virtual                ~basic_string (void)                                   { free(); }
+                           ~basic_string (void)                                   { free(); }
 
     const   basic_string &  operator=    (basic_string        && str)    noexcept { assign(std::move(str)); return *this; }
     const   basic_string &  operator=    (const basic_string   & str)             { assign(str);            return *this; }
@@ -281,8 +268,6 @@ public:
 
 private:
 
-    str_data<Traits>      * get_str_data (void);
-    const str_data<Traits>* get_str_data (void)                                                     const;
     bool                    resize       (size_type              nSymbols,
                                           size_type              nAlign,
                                           EResizeType            eType      = EResizeType::common);
@@ -299,7 +284,9 @@ private:
 
 private:
 
-    pointer m_pData = nullptr;
+    size_type   m_nSize             = 0;
+    size_type   m_nAllocatedSize    = 0;
+    pointer     m_pData             = nullptr;
 };
 
 #define _STR_OP_PLUS_BODY { basic_string<UT> str(std::move(lhs)); str += rhs; return std::move(str); }
