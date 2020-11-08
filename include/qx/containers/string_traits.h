@@ -53,7 +53,11 @@ struct char_traits<char>
     }
     static constexpr size_type talign(void)
     {
-        return static_cast<size_type>(16);
+        return 16;
+    }
+    static constexpr size_type tsmallstringsize(void)
+    {
+        return 16;
     }
     static size_type tstrlen(const_pointer pszStr)
     {
@@ -113,7 +117,11 @@ struct char_traits<wchar_t>
     }
     static constexpr size_type talign(void)
     {
-        return static_cast<size_type>(16);
+        return 8;
+    }
+    static constexpr size_type tsmallstringsize(void)
+    {
+        return 8;
     }
     static size_type tstrlen(const_pointer pszStr)
     {

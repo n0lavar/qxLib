@@ -14,10 +14,10 @@
 
 #include <qx/containers/container.h>
 #include <qx/containers/string_traits.h>
+#include <qx/containers/string_data.h>
 #include <qx/meta/constexpr_random.h>
 #include <qx/type_traits.h>
 
-#include <array>
 #include <vector>
 #include <optional>
 #include <iostream>
@@ -49,7 +49,7 @@ namespace qx
 {
 
 //!< case types for .apply_case()
-enum class ECaseType
+enum class case_type
 {
     lower,
     upper,
@@ -69,13 +69,6 @@ template<class Traits>
 class basic_string
 {
     using vector = std::vector<basic_string>;
-
-    enum class EResizeType
-    {
-        common,
-        reserve,
-        fit
-    };
 
     template<class _Traits>
     friend detail::istream<_Traits>& ::operator>>(qx::detail::istream<_Traits>& is, qx::basic_string<_Traits>& str);
@@ -189,7 +182,7 @@ public:
                                           size_type              indEnd     = npos) const;
     size_type               find         (const basic_string   & str,
                                           size_type              indBegin   = 0,
-                                          size_type              indEnd     = npos) const { return find(str.m_pData, indBegin, indEnd); }
+                                          size_type              indEnd     = npos) const { return find(str.data(), indBegin, indEnd); }
 
     basic_string            substr       (size_type              begin,
                                           size_type              strLen     = npos) const;
@@ -201,9 +194,9 @@ public:
     vector                  split        (const_pointer          pSep,
                                           size_type              nSepLen    = npos) const;
     vector                  split        (const value_type       sep)               const;
-    vector                  split        (const basic_string   & sep)               const { return split(sep.m_pData, sep.size()); }
+    vector                  split        (const basic_string   & sep)               const { return split(sep.data(), sep.size()); }
 
-    void                    apply_case   (ECaseType              ct);
+    void                    apply_case   (case_type              ct);
 
     value_type              front        (void)                                     const { return at(0); }
     value_type              back         (void)                                     const { return at(size() - 1); }
@@ -258,8 +251,8 @@ public:
     template<class String, class = typename std::enable_if_t<std::is_class_v<String>>>
     bool                    operator!=   (const String         & str)       const { return !operator==(str); }
 
-    reference               operator[]   (size_type              ind)             { return m_pData[ind]; }
-    const_reference         operator[]   (size_type              ind)       const { return operator[](ind); }
+    reference               operator[]   (size_type              ind)             { return at(ind); }
+    const_reference         operator[]   (size_type              ind)       const { return at(ind); }
 
     operator std::basic_string_view<value_type, std::char_traits<value_type>>() const noexcept
     {
@@ -270,50 +263,60 @@ private:
 
     bool                    resize       (size_type              nSymbols,
                                           size_type              nAlign,
-                                          EResizeType            eType      = EResizeType::common);
+                                          string_resize_type     eType      = string_resize_type::common);
     void                    append       (const_pointer          pSource,
                                           size_type              nSymbols);
     template<class FwdIt>
     void                    append       (FwdIt                  itBegin,
                                           FwdIt                  itEnd);
     int                     compare      (const_pointer          pStr,
-                                          size_type              nSymbols   = 0)                    const;
+                                          size_type              nSymbols   = 0) const;
 
     template<typename T>
     static constexpr const_pointer get_format_specifier(void);
 
 private:
 
-    size_type   m_nSize             = 0;
-    size_type   m_nAllocatedSize    = 0;
-    pointer     m_pData             = nullptr;
+    string_data<Traits> m_Data;
 };
 
 #define _STR_OP_PLUS_BODY { basic_string<UT> str(std::move(lhs)); str += rhs; return std::move(str); }
 
-template<class UT> basic_string<UT> operator+ (const basic_string<UT>   & lhs, const basic_string<UT>   & rhs) _STR_OP_PLUS_BODY
-template<class UT> basic_string<UT> operator+ (basic_string<UT>        && lhs, basic_string<UT>        && rhs) _STR_OP_PLUS_BODY
-template<class UT> basic_string<UT> operator+ (basic_string<UT>        && lhs, const basic_string<UT>   & rhs) _STR_OP_PLUS_BODY
-template<class UT> basic_string<UT> operator+ (const basic_string<UT>   & lhs, basic_string<UT>        && rhs) _STR_OP_PLUS_BODY
+template<class UT>
+basic_string<UT> operator+ (const basic_string<UT>   & lhs, const basic_string<UT>   & rhs) _STR_OP_PLUS_BODY
+template<class UT>
+basic_string<UT> operator+ (basic_string<UT>        && lhs, basic_string<UT>        && rhs) _STR_OP_PLUS_BODY
+template<class UT>
+basic_string<UT> operator+ (basic_string<UT>        && lhs, const basic_string<UT>   & rhs) _STR_OP_PLUS_BODY
+template<class UT>
+basic_string<UT> operator+ (const basic_string<UT>   & lhs, basic_string<UT>        && rhs) _STR_OP_PLUS_BODY
 
-template<class UT> basic_string<UT> operator+ (const basic_string<UT>   & lhs, typename UT::const_pointer rhs) _STR_OP_PLUS_BODY
-template<class UT> basic_string<UT> operator+ (basic_string<UT>        && lhs, typename UT::const_pointer rhs) _STR_OP_PLUS_BODY
-template<class UT> basic_string<UT> operator+ (typename UT::const_pointer lhs, const basic_string<UT>   & rhs) _STR_OP_PLUS_BODY
-template<class UT> basic_string<UT> operator+ (typename UT::const_pointer lhs, basic_string<UT>        && rhs) _STR_OP_PLUS_BODY
+template<class UT>
+basic_string<UT> operator+ (const basic_string<UT>   & lhs, typename UT::const_pointer rhs) _STR_OP_PLUS_BODY
+template<class UT>
+basic_string<UT> operator+ (basic_string<UT>        && lhs, typename UT::const_pointer rhs) _STR_OP_PLUS_BODY
+template<class UT>
+basic_string<UT> operator+ (typename UT::const_pointer lhs, const basic_string<UT>   & rhs) _STR_OP_PLUS_BODY
+template<class UT>
+basic_string<UT> operator+ (typename UT::const_pointer lhs, basic_string<UT>        && rhs) _STR_OP_PLUS_BODY
 
-template<class UT> basic_string<UT> operator+ (const basic_string<UT>   & lhs, typename UT::value_type    rhs) _STR_OP_PLUS_BODY
-template<class UT> basic_string<UT> operator+ (basic_string<UT>        && lhs, typename UT::value_type    rhs) _STR_OP_PLUS_BODY
-template<class UT> basic_string<UT> operator+ (typename UT::value_type    lhs, const basic_string<UT>   & rhs) _STR_OP_PLUS_BODY
-template<class UT> basic_string<UT> operator+ (typename UT::value_type    lhs, basic_string<UT>        && rhs) _STR_OP_PLUS_BODY
+template<class UT>
+basic_string<UT> operator+ (const basic_string<UT>   & lhs, typename UT::value_type    rhs) _STR_OP_PLUS_BODY
+template<class UT>
+basic_string<UT> operator+ (basic_string<UT>        && lhs, typename UT::value_type    rhs) _STR_OP_PLUS_BODY
+template<class UT>
+basic_string<UT> operator+ (typename UT::value_type    lhs, const basic_string<UT>   & rhs) _STR_OP_PLUS_BODY
+template<class UT>
+basic_string<UT> operator+ (typename UT::value_type    lhs, basic_string<UT>        && rhs) _STR_OP_PLUS_BODY
 
 template<class UT, class String, class = typename std::enable_if_t<std::is_class_v<String>>>
-basic_string<UT>                    operator+ (const basic_string<UT>   & lhs, const String             & rhs) _STR_OP_PLUS_BODY
+basic_string<UT> operator+ (const basic_string<UT>   & lhs, const String             & rhs) _STR_OP_PLUS_BODY
 template<class UT, class String, class = typename std::enable_if_t<std::is_class_v<String>>>
-basic_string<UT>                    operator+ (basic_string<UT>        && lhs, const String             & rhs) _STR_OP_PLUS_BODY
+basic_string<UT> operator+ (basic_string<UT>        && lhs, const String             & rhs) _STR_OP_PLUS_BODY
 template<class UT, class String, class = typename std::enable_if_t<std::is_class_v<String>>>
-basic_string<UT>                    operator+ (const String             & lhs, const basic_string<UT>   & rhs) _STR_OP_PLUS_BODY
+basic_string<UT> operator+ (const String             & lhs, const basic_string<UT>   & rhs) _STR_OP_PLUS_BODY
 template<class UT, class String, class = typename std::enable_if_t<std::is_class_v<String>>>
-basic_string<UT>                    operator+ (const String             & lhs, basic_string<UT>        && rhs) _STR_OP_PLUS_BODY
+basic_string<UT> operator+ (const String             & lhs, basic_string<UT>        && rhs) _STR_OP_PLUS_BODY
 
 
 using string    = basic_string<qx::char_traits<char>>;

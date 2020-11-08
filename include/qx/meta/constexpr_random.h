@@ -12,7 +12,6 @@
 //==============================================================================
 #pragma once
 
-#include <qx/containers/string_utils.h>
 #include <qx/meta/constexpr_sequence.h>
 #include <qx/typedefs.h>
 

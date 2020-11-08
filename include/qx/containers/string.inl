@@ -27,7 +27,7 @@ template<class Traits>
 inline void basic_string<Traits>::assign(const_pointer pSource, size_type nSymbols)
 {
     if (resize(nSymbols, Traits::talign()))
-        std::memmove(m_pData, pSource, nSymbols * sizeof(value_type));
+        std::memmove(data(), pSource, nSymbols * sizeof(value_type));
 }
 
 //==============================================================================
@@ -41,8 +41,8 @@ inline void basic_string<Traits>::assign(const_pointer pSource, size_type nSymbo
 template<class Traits>
 inline void basic_string<Traits>::assign(const basic_string& str)
 {
-    if (str.m_pData != m_pData)
-        assign(str.m_pData);
+    if (str.data() != data())
+        assign(str.data());
 }
 
 //==============================================================================
@@ -56,7 +56,7 @@ inline void basic_string<Traits>::assign(const basic_string& str)
 template<class Traits>
 inline void basic_string<Traits>::assign(const_pointer pSource)
 {
-    if (pSource != m_pData)
+    if (pSource != data())
         assign(pSource, Traits::tstrlen(pSource));
 }
 
@@ -87,9 +87,7 @@ inline void basic_string<Traits>::assign(size_type nSymbols, value_type ch)
 template<class Traits>
 inline void basic_string<Traits>::assign(basic_string&& str) noexcept
 {
-    std::swap(m_pData, str.m_pData);
-    std::swap(m_nSize, str.m_nSize);
-    std::swap(m_nAllocatedSize, str.m_nAllocatedSize);
+    std::swap(m_Data, str.m_Data);
 }
 
 //==============================================================================
@@ -165,7 +163,7 @@ inline void basic_string<Traits>::vformat(const_pointer pszFormat, va_list args)
     va_end(args_copy);
 
     if (length > 0 && resize(length, Traits::talign()))
-        Traits::tvsnprintf(m_pData, static_cast<size_type>(length) + 1, pszFormat, args);
+        Traits::tvsnprintf(data(), static_cast<size_type>(length) + 1, pszFormat, args);
 }
 
 //==============================================================================
@@ -178,7 +176,7 @@ inline void basic_string<Traits>::vformat(const_pointer pszFormat, va_list args)
 template<class Traits>
 inline typename basic_string<Traits>::size_type basic_string<Traits>::capacity(void) const
 {
-    return m_nAllocatedSize;
+    return m_Data.capacity();
 }
 
 //==============================================================================
@@ -194,7 +192,7 @@ template<class Traits>
 inline typename basic_string<Traits>::size_type basic_string<Traits>::reserve(size_type nCapacity)
 {
     if (nCapacity > capacity())
-        resize(nCapacity, Traits::talign(), EResizeType::reserve);
+        resize(nCapacity, Traits::talign(), string_resize_type::reserve);
 
     return capacity();
 }
@@ -208,8 +206,8 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::reserve(si
 template<class Traits>
 inline void basic_string<Traits>::fit(void)
 {
-    if (m_nAllocatedSize > m_nSize)
-        resize(m_nSize, 0, EResizeType::fit);
+    if (!m_Data.is_small() && capacity() > size())
+        resize(size(), 0, string_resize_type::fit);
 }
 
 //==============================================================================
@@ -222,10 +220,7 @@ inline void basic_string<Traits>::fit(void)
 template<class Traits>
 inline void basic_string<Traits>::free(void)
 {
-    std::free(m_pData);
-    m_pData = nullptr;
-    m_nSize = 0;
-    m_nAllocatedSize = 0;
+    m_Data.free();
 }
 
 //==============================================================================
@@ -321,8 +316,8 @@ inline void basic_string<Traits>::insert(size_type to_ind, const_pointer pSourse
     size_type nStartSymbols = size();
     if (resize(nStartSymbols + nSymbols, Traits::talign()))
     {
-        std::memmove(m_pData + to_ind + nSymbols, m_pData + to_ind, (nStartSymbols - to_ind) * sizeof(value_type));
-        std::memcpy(m_pData + to_ind, pSourse, nSymbols * sizeof(value_type));
+        std::memmove(data() + to_ind + nSymbols, data() + to_ind, (nStartSymbols - to_ind) * sizeof(value_type));
+        std::memcpy(data() + to_ind, pSourse, nSymbols * sizeof(value_type));
     }
 }
 
@@ -348,13 +343,13 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::find(const
     if (indEnd == npos)
         indEnd = size();
 
-    const_pointer pCurrentChar = m_pData + indBegin;
-    const_pointer pEnd         = m_pData + indEnd;
+    const_pointer pCurrentChar = data() + indBegin;
+    const_pointer pEnd         = data() + indEnd;
 
     do
     {
         if (!Traits::tstrncmp(pWhat, pCurrentChar, nSizeWhat))
-            return static_cast<size_type>(pCurrentChar - m_pData);
+            return static_cast<size_type>(pCurrentChar - data());
         else
             pCurrentChar = step_to(pCurrentChar, pEnd);
     } while (pCurrentChar != pEnd);
@@ -381,13 +376,13 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::find(value
     if (indEnd == npos)
         indEnd = size();
 
-    const_pointer pCurrentChar = m_pData + indBegin;
-    const_pointer pEnd         = m_pData + indEnd;
+    const_pointer pCurrentChar = data() + indBegin;
+    const_pointer pEnd         = data() + indEnd;
 
     do
     {
         if (*pCurrentChar == ch)
-            return static_cast<size_type>(pCurrentChar - m_pData);
+            return static_cast<size_type>(pCurrentChar - data());
         else
             pCurrentChar = step_to(pCurrentChar, pEnd);
     } while (pCurrentChar != pEnd);
@@ -408,7 +403,7 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::find(value
 template<class Traits>
 inline basic_string<Traits> basic_string<Traits>::substr(size_type begin, size_type strLen) const
 {
-    basic_string str(m_pData + begin, (strLen != npos ? strLen : size() - begin));
+    basic_string str(data() + begin, (strLen != npos ? strLen : size() - begin));
     return std::move(str);
 }
 
@@ -497,22 +492,22 @@ inline typename basic_string<Traits>::vector basic_string<Traits>::split(const v
 //!\fn            qx::basic_string<Traits>::apply_case
 //
 //!\brief  Apply case type to the whole string
-//!\param  ct - case type \see ECaseType
+//!\param  ct - case type \see case_type
 //!\author Khrapov
 //!\date   31.10.2019
 //==============================================================================
 template<class Traits>
-inline void basic_string<Traits>::apply_case(ECaseType ct)
+inline void basic_string<Traits>::apply_case(case_type ct)
 {
     switch (ct)
     {
-    case ECaseType::lower:
+    case case_type::lower:
         for (value_type& ch : *this)
             ch = Traits::ttolower(ch);
 
         break;
 
-    case ECaseType::upper:
+    case case_type::upper:
         for (value_type& ch : *this)
             ch = Traits::ttoupper(ch);
 
@@ -557,7 +552,7 @@ inline bool basic_string<Traits>::starts_with(const_pointer pszStr, size_type nS
             nStrSize = Traits::tstrlen(pszStr);
 
         if (nStrSize <= nThisSize)
-            return Traits::tstrncmp(m_pData, pszStr, nStrSize) == 0;
+            return Traits::tstrncmp(data(), pszStr, nStrSize) == 0;
     }
 
     return false;
@@ -620,7 +615,7 @@ inline bool basic_string<Traits>::ends_with(const_pointer pszStr, size_type nStr
             nStrSize = Traits::tstrlen(pszStr);
 
         if (nStrSize <= nThisSize)
-            return Traits::tstrncmp(m_pData + nThisSize - nStrSize, pszStr, nStrSize) == 0;
+            return Traits::tstrncmp(data() + nThisSize - nStrSize, pszStr, nStrSize) == 0;
     }
 
     return false;
@@ -678,7 +673,7 @@ inline std::optional<To> basic_string<Traits>::to(void) const
         else if (auto pszFormat = get_format_specifier<To>())
         {
             To result;
-            int nConvertedArgs = Traits::tssscanf(m_pData, pszFormat, &result);
+            int nConvertedArgs = Traits::tssscanf(data(), pszFormat, &result);
             if (nConvertedArgs == 1)
                 optResult = result;
         }
@@ -686,7 +681,7 @@ inline std::optional<To> basic_string<Traits>::to(void) const
     else
     {
         To result;
-        sstream_type ss(m_pData);
+        sstream_type ss(data());
         ss >> result;
         optResult = result;
     }
@@ -846,7 +841,7 @@ inline constexpr typename basic_string<Traits>::const_pointer basic_string<Trait
 template<class Traits>
 inline typename basic_string<Traits>::reference basic_string<Traits>::at(size_type ind)
 {
-    return operator[](ind);
+    return data()[ind];
 }
 
 //==============================================================================
@@ -872,7 +867,7 @@ inline void basic_string<Traits>::clear(void)
 template<class Traits>
 inline typename basic_string<Traits>::size_type basic_string<Traits>::size(void) const
 {
-    return m_nSize;
+    return m_Data.size();
 }
 
 //==============================================================================
@@ -885,7 +880,7 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::size(void)
 template<class Traits>
 inline typename basic_string<Traits>::pointer basic_string<Traits>::data(void)
 {
-    return m_pData;
+    return m_Data.data();
 }
 
 //==============================================================================
@@ -901,38 +896,14 @@ inline typename basic_string<Traits>::pointer basic_string<Traits>::data(void)
 //!\date   29.10.2019
 //==============================================================================
 template<class Traits>
-inline bool basic_string<Traits>::resize(size_type nSymbols, size_type nAlign, EResizeType eType)
+inline bool basic_string<Traits>::resize(size_type nSymbols, size_type nAlign, string_resize_type eType)
 {
-    auto align_size = [](size_type nSize, size_type nAlign) -> size_type
-    {
-        return ((nSize + nAlign) - (nSize + nAlign) % nAlign) * sizeof(typename Traits::value_type);
-    };
+    bool bRet = m_Data.resize(nSymbols, nAlign, eType);
 
-    typename Traits::size_type nSizeToAllocate = nAlign
-        ? align_size(nSymbols + 1, nAlign)
-        : nSymbols + 1;
+    if (bRet && eType == string_resize_type::common)
+        at(nSymbols) = Traits::teol();
 
-    if (eType == EResizeType::fit                       // need to decrease size
-        || m_nSize == 0                                 // string empty
-        || nSizeToAllocate > m_nAllocatedSize)          // need to increase size
-    {
-        // increase or decrease size
-        if (void* pNewBlock = std::realloc(m_pData, nSizeToAllocate * sizeof(value_type)))
-        {
-            m_nAllocatedSize = nSizeToAllocate;
-            m_pData = static_cast<typename Traits::value_type*>(pNewBlock);
-        }
-        else
-            return false;
-    }
-
-    if (eType == EResizeType::common)
-    {
-        m_pData[nSymbols] = Traits::teol();
-        m_nSize = nSymbols;
-    }
-
-    return true;
+    return bRet;
 }
 
 //==============================================================================
@@ -949,7 +920,7 @@ inline void basic_string<Traits>::append(const_pointer pSource, size_type nSymbo
 {
     size_type nCurrentSymbls = size();
     if (resize(nCurrentSymbls + nSymbols, Traits::talign()))
-        std::memcpy(m_pData + nCurrentSymbls, pSource, nSymbols * sizeof(value_type));
+        std::memcpy(data() + nCurrentSymbls, pSource, nSymbols * sizeof(value_type));
 }
 
 //==============================================================================
@@ -985,9 +956,9 @@ template<class Traits>
 inline int basic_string<Traits>::compare(const_pointer pStr, size_type nSymbols) const
 {
     if (nSymbols)
-        return Traits::tstrncmp(m_pData, pStr, nSymbols);
+        return Traits::tstrncmp(data(), pStr, nSymbols);
     else
-        return Traits::tstrcmp(m_pData, pStr);
+        return Traits::tstrcmp(data(), pStr);
 }
 
 }

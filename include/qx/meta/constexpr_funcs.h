@@ -13,6 +13,8 @@
 //==============================================================================
 #pragma once
 
+#include <qx/containers/string_utils.h>
+
 #include <limits>
 
 namespace qx::meta
@@ -27,10 +29,11 @@ namespace qx::meta
 //!\author Khrapov
 //!\date   24.09.2020
 //==============================================================================
-inline constexpr std::size_t strlen(const char* psz)
+template<typename TChar>
+inline constexpr std::size_t strlen(const TChar* psz)
 {
     std::size_t nLen = 0;
-    while (psz && *psz != '\0')
+    while (psz && *psz != QX_CHAR_PREFIX(TChar, '\0'))
     {
         psz++;
         nLen++;
