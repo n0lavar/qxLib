@@ -61,6 +61,11 @@ using Implementations = ::testing::Types
 
 TYPED_TEST_SUITE(TestQxString, Implementations);
 
+TYPED_TEST(TestQxString, class_size)
+{
+    QX_STATIC_ASSERT_EQ(sizeof(StringType), 32);
+}
+
 TYPED_TEST(TestQxString, construct)
 {
     // empty
@@ -252,7 +257,7 @@ TYPED_TEST(TestQxString, operator_assign)
     str.free();
     EXPECT_TRUE(str.empty());
     EXPECT_EQ(str.size(), 0);
-    EXPECT_EQ(str.capacity(), TypeParam::tsmallstringsize());
+    EXPECT_EQ(str.capacity(), TypeParam::small_string_size());
 
     str = std::move(tmpStr);
     EXPECT_STREQ(str.data(), STR("Hello world"));
@@ -312,13 +317,13 @@ TYPED_TEST(TestQxString, size)
     StringTypeTn str0;
     EXPECT_TRUE(str0.empty());
     EXPECT_EQ(str0.size(), 0);
-    EXPECT_EQ(str0.capacity(), TypeParam::tsmallstringsize());
+    EXPECT_EQ(str0.capacity(), TypeParam::small_string_size());
 
     typename TypeParam::size_type nCapacity = str0.reserve(20);
     EXPECT_EQ(str0.size(), 0);
     EXPECT_TRUE(str0.empty());
     EXPECT_TRUE(nCapacity > 0);
-    EXPECT_EQ(nCapacity % TypeParam::talign(), 0);
+    EXPECT_EQ(nCapacity % TypeParam::align(), 0);
 
     str0 = STR("some short sentence");
     EXPECT_TRUE(str0.size() > 0);
@@ -330,7 +335,7 @@ TYPED_TEST(TestQxString, size)
     EXPECT_TRUE(str0.capacity() > nCapacity);
     nCapacity = str0.capacity();
     EXPECT_TRUE(str0.size() <= nCapacity);
-    EXPECT_EQ(nCapacity % TypeParam::talign(), 0);
+    EXPECT_EQ(nCapacity % TypeParam::align(), 0);
 
     typename TypeParam::size_type nNewCapacity = str0.reserve(10);
     EXPECT_EQ(nNewCapacity, nCapacity);
@@ -734,6 +739,12 @@ TYPED_TEST(TestQxString, operator_equal)
     EXPECT_FALSE(str == CH('r'));
     EXPECT_FALSE(str == STR("r"));
     EXPECT_FALSE(str == StdStringArg(STR("r")));
+
+    StringTypeTn str2(STR("word"));
+    EXPECT_TRUE(str2 == STR("word"));
+    EXPECT_FALSE(str2 == STR("dowr"));
+    EXPECT_FALSE(str2 == STR("wor"));
+    EXPECT_FALSE(str2 == STR("word1"));
 }
 
 TYPED_TEST(TestQxString, operator_not_equal)
@@ -747,6 +758,12 @@ TYPED_TEST(TestQxString, operator_not_equal)
     EXPECT_TRUE(str != CH('r'));
     EXPECT_TRUE(str != STR("r"));
     EXPECT_TRUE(str != StdStringArg(STR("r")));
+
+    StringTypeTn str2(STR("word"));
+    EXPECT_FALSE(str2 != STR("word"));
+    EXPECT_TRUE(str2 != STR("dowr"));
+    EXPECT_TRUE(str2 != STR("wor"));
+    EXPECT_TRUE(str2 != STR("word1"));
 }
 
 TYPED_TEST(TestQxString, operator_braces)
@@ -878,13 +895,11 @@ TYPED_TEST(TestQxString, from)
     EXPECT_STREQ(str.data(), STR("nullptr"));
 
     str.from((void*)0x000000004128FF44);
-    bool bFormatCase1 = (0 == TypeParam::tstrcmp(str.data(), STR("0x000000004128FF44")));
-    bool bFormatCase2 = (0 == TypeParam::tstrcmp(str.data(), STR("0x000000004128ff44")));
-    bool bFormatCase3 = (0 == TypeParam::tstrcmp(str.data(), STR("0x4128ff44")));
-    bool bFormatCase4 = (0 == TypeParam::tstrcmp(str.data(), STR("0x4128FF44")));
+    bool bFormatCase1 = str == STR("0x000000004128FF44");
+    bool bFormatCase2 = str == STR("0x000000004128ff44");
+    bool bFormatCase3 = str == STR("0x4128ff44");
+    bool bFormatCase4 = str == STR("0x4128FF44");
     EXPECT_TRUE(bFormatCase1 || bFormatCase2 || bFormatCase3 || bFormatCase4);
-    if (!(bFormatCase1 || bFormatCase2 || bFormatCase3 || bFormatCase4))
-        EXPECT_STREQ(str.data(), STR("string to check str.data()"));
 
     str.from(true);
     EXPECT_STREQ(str.data(), STR("true"));
@@ -1104,12 +1119,12 @@ TYPED_TEST(TestQxString, small_string_optimization)
     {
         StringTypeTn str = pszSmallString1;
         EXPECT_EQ(str.size(), nSmallStrSize1);
-        EXPECT_EQ(str.capacity() % TypeParam::tsmallstringsize(), 0);
+        EXPECT_EQ(str.capacity() % TypeParam::small_string_size(), 0);
         EXPECT_STREQ(str.data(), pszSmallString1);
 
         str = pszSmallString2;
         EXPECT_EQ(str.size(), nSmallStrSize2);
-        EXPECT_EQ(str.capacity() % TypeParam::tsmallstringsize(), 0);
+        EXPECT_EQ(str.capacity() % TypeParam::small_string_size(), 0);
         EXPECT_STREQ(str.data(), pszSmallString2);
     }
 
@@ -1117,12 +1132,12 @@ TYPED_TEST(TestQxString, small_string_optimization)
     {
         StringTypeTn str = pszSmallString1;
         EXPECT_EQ(str.size(), nSmallStrSize1);
-        EXPECT_EQ(str.capacity() % TypeParam::tsmallstringsize(), 0);
+        EXPECT_EQ(str.capacity() % TypeParam::small_string_size(), 0);
         EXPECT_STREQ(str.data(), pszSmallString1);
 
         str = pszBigString1;
         EXPECT_EQ(str.size(), nBigStrSize1);
-        EXPECT_EQ(str.capacity() % TypeParam::tsmallstringsize(), 0);
+        EXPECT_EQ(str.capacity() % TypeParam::small_string_size(), 0);
         EXPECT_STREQ(str.data(), pszBigString1);
     }
 
@@ -1130,12 +1145,12 @@ TYPED_TEST(TestQxString, small_string_optimization)
     {
         StringTypeTn str = pszBigString1;
         EXPECT_EQ(str.size(), nBigStrSize1);
-        EXPECT_EQ(str.capacity() % TypeParam::tsmallstringsize(), 0);
+        EXPECT_EQ(str.capacity() % TypeParam::small_string_size(), 0);
         EXPECT_STREQ(str.data(), pszBigString1);
 
         str = pszBigString2;
         EXPECT_EQ(str.size(), nBigStrSize2);
-        EXPECT_EQ(str.capacity() % TypeParam::tsmallstringsize(), 0);
+        EXPECT_EQ(str.capacity() % TypeParam::small_string_size(), 0);
         EXPECT_STREQ(str.data(), pszBigString2);
     }
 
@@ -1143,12 +1158,12 @@ TYPED_TEST(TestQxString, small_string_optimization)
     {
         StringTypeTn str = pszBigString1;
         EXPECT_EQ(str.size(), nBigStrSize1);
-        EXPECT_EQ(str.capacity() % TypeParam::tsmallstringsize(), 0);
+        EXPECT_EQ(str.capacity() % TypeParam::small_string_size(), 0);
         EXPECT_STREQ(str.data(), pszBigString1);
 
         str = pszSmallString1;
         EXPECT_EQ(str.size(), nSmallStrSize1);
-        EXPECT_EQ(str.capacity() % TypeParam::tsmallstringsize(), 0);
+        EXPECT_EQ(str.capacity() % TypeParam::small_string_size(), 0);
         EXPECT_STREQ(str.data(), pszSmallString1);
     }
 
@@ -1156,17 +1171,17 @@ TYPED_TEST(TestQxString, small_string_optimization)
     {
         StringTypeTn str = pszBigString1;
         EXPECT_EQ(str.size(), nBigStrSize1);
-        EXPECT_EQ(str.capacity() % TypeParam::tsmallstringsize(), 0);
+        EXPECT_EQ(str.capacity() % TypeParam::small_string_size(), 0);
         EXPECT_STREQ(str.data(), pszBigString1);
 
         str = pszSmallString1;
         EXPECT_EQ(str.size(), nSmallStrSize1);
-        EXPECT_EQ(str.capacity() % TypeParam::tsmallstringsize(), 0);
+        EXPECT_EQ(str.capacity() % TypeParam::small_string_size(), 0);
         EXPECT_STREQ(str.data(), pszSmallString1);
 
         str.fit();
         EXPECT_EQ(str.size(), nSmallStrSize1);
-        EXPECT_EQ(str.capacity(), TypeParam::tsmallstringsize());
+        EXPECT_EQ(str.capacity(), TypeParam::small_string_size());
         EXPECT_STREQ(str.data(), pszSmallString1);
     }
 }

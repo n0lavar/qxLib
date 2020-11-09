@@ -164,12 +164,12 @@ public:
                                           const_iterator         from_first,
                                           const_iterator         from_last) { insert(to_first - begin(), from_first.operator->(), from_last - from_first); }
     void                    insert       (iterator               to,
-                                          const_pointer          pSourse)   { insert(to - begin(), pSourse, Traits::tstrlen(pSourse)); }
+                                          const_pointer          pSourse)   { insert(to - begin(), pSourse, Traits::length(pSourse)); }
     void                    insert       (iterator               to,
                                           const_pointer          pSourse,
                                           size_type              nSymbols)  { insert(to - begin(), pSourse, nSymbols); }
     void                    insert       (size_type              to_ind,
-                                          const_pointer          pSourse)   { insert(to_ind, pSourse, Traits::tstrlen(pSourse)); }
+                                          const_pointer          pSourse)   { insert(to_ind, pSourse, Traits::length(pSourse)); }
 
     void                    push_back    (value_type             ch)        { insert(size(), &ch, 1); }
     void                    push_front   (value_type             ch)        { insert(0, &ch, 1); }
@@ -235,7 +235,7 @@ public:
 
     const   basic_string &  operator+=   (const basic_string   & str)             { append(str.data(), str.size());             return *this; }
     const   basic_string &  operator+=   (value_type             ch)              { append(&ch, 1);                             return *this; }
-    const   basic_string &  operator+=   (const_pointer          pSource)         { append(pSource, Traits::tstrlen(pSource));  return *this; }
+    const   basic_string &  operator+=   (const_pointer          pSource)         { append(pSource, Traits::length(pSource));   return *this; }
     template<class String, class = typename std::enable_if_t<std::is_class_v<String>>>
     const   basic_string &  operator+=   (const String         & str)            { append(str.cbegin(), str.cend());            return *this; }
 

@@ -71,8 +71,8 @@ bool string_data<Traits>::resize(size_type nSymbols, size_type nAlign, string_re
         ? nAlign * ((nSymbols + 1) / nAlign + 1)
         : nSymbols + 1;
 
-    if (eType == string_resize_type::fit                       // need to decrease size
-        || size() == 0                                  // string empty
+    if (eType == string_resize_type::fit                // need to decrease size
+        || size() == 0                                  // string is empty
         || nSymbolsToAllocate > capacity())             // need to increase size
     {
         buffer      buff;

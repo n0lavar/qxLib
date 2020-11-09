@@ -129,40 +129,42 @@ inline int iter_strcmp(FwdIt1 itBegin1, FwdIt1 itEnd1, FwdIt2 itBegin2, FwdIt2 i
     return nRet;
 }
 
-//==============================================================================
-
 namespace detail
 {
     template<typename value_type>
-    constexpr const value_type* const ChooseStrPrefix(const char* const, const wchar_t* const);
+    constexpr const value_type* const choose_str_prefix(const char* const, const wchar_t* const);
 
     template<>
-    constexpr const char* const ChooseStrPrefix<char>(const char* const c, const wchar_t* const)
+    constexpr const char* const choose_str_prefix<char>(const char* const c, const wchar_t* const)
     {
         return c;
     }
 
     template<>
-    constexpr const wchar_t* const ChooseStrPrefix<wchar_t>(const char* const, const wchar_t* const w)
+    constexpr const wchar_t* const choose_str_prefix<wchar_t>(const char* const, const wchar_t* const w)
     {
         return w;
     }
 
     template<typename value_type>
-    constexpr value_type ChooseCharPrefix(char, wchar_t);
+    constexpr value_type choose_char_prefix(char, wchar_t);
 
     template<>
-    constexpr char ChooseCharPrefix<char>(char c, wchar_t)
+    constexpr char choose_char_prefix<char>(char c, wchar_t)
     {
         return c;
     }
 
     template<>
-    constexpr wchar_t ChooseCharPrefix<wchar_t>(char, wchar_t w)
+    constexpr wchar_t choose_char_prefix<wchar_t>(char, wchar_t w)
     {
         return w;
     }
 }
+
+}
+
+//==============================================================================
 
 #define _QX_TO_WSTRING(x) L##x
 #define QX_TO_WSTRING(x) _QX_TO_WSTRING(x)
@@ -170,12 +172,12 @@ namespace detail
 /*
     chose witch of prefixes add to string : L or none
 */
-#define QX_STR_PREFIX(value_type, str) qx::detail::ChooseStrPrefix<value_type>(str, QX_TO_WSTRING(str))
+#define QX_STR_PREFIX(value_type, str) qx::detail::choose_str_prefix<value_type>(str, QX_TO_WSTRING(str))
 
 /*
     chose witch of prefixes add to char : L or none
 */
-#define QX_CHAR_PREFIX(value_type, ch) qx::detail::ChooseCharPrefix<value_type>(ch, QX_TO_WSTRING(ch))
+#define QX_CHAR_PREFIX(value_type, ch) qx::detail::choose_char_prefix<value_type>(ch, QX_TO_WSTRING(ch))
 
 //==============================================================================
 
@@ -189,4 +191,4 @@ namespace detail
 #define QX_STATIC_ASSERT_STR_GT(a, b) static_assert(qx::meta::strcmp((a), (b)) >  0)
 #define QX_STATIC_ASSERT_STR_GE(a, b) static_assert(qx::meta::strcmp((a), (b)) >= 0)
 
-}
+//==============================================================================

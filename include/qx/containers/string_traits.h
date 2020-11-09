@@ -43,48 +43,44 @@ struct char_traits<char>
     using difference_type   = std::ptrdiff_t;
     using size_type         = size_t;
 
-    static constexpr value_type teol(void)
+    static constexpr size_type align(void)
     {
-        return '\0';
+        return 16;
     }
-    static bool tisspace(value_type ch)
+    static constexpr size_type small_string_size(void)
+    {
+        return 16;
+    }
+    static bool is_space(value_type ch)
     {
         return std::isspace(static_cast<int>(ch));
     }
-    static constexpr size_type talign(void)
-    {
-        return 16;
-    }
-    static constexpr size_type tsmallstringsize(void)
-    {
-        return 16;
-    }
-    static size_type tstrlen(const_pointer pszStr)
+    static size_type length(const_pointer pszStr)
     {
         return static_cast<size_type>(std::strlen(pszStr));
     }
-    static value_type ttolower(value_type ch)
+    static value_type to_lower(value_type ch)
     {
         return std::tolower(ch);
     }
-    static value_type ttoupper(value_type ch)
+    static value_type to_upper(value_type ch)
     {
         return std::toupper(ch);
     }
-    static int tstrcmp(const_pointer pszFirst, const_pointer pszSecond)
+    static int compare(const_pointer pszFirst, const_pointer pszSecond)
     {
         return std::strcmp(pszFirst, pszSecond);
     }
-    static int tstrncmp(const_pointer pszFirst, const_pointer pszSecond, size_type nCount)
+    static int compare_n(const_pointer pszFirst, const_pointer pszSecond, size_type nCount)
     {
         return std::strncmp(pszFirst, pszSecond, nCount);
     }
-    static int tvsnprintf(pointer pszDest, size_type nBuffer, const_pointer pszFormat, va_list args)
+    static int vsnprintf(pointer pszDest, size_type nBuffer, const_pointer pszFormat, va_list args)
     {
         return std::vsnprintf(pszDest, nBuffer, pszFormat, args);
     }
     template<class ... Args>
-    static int tssscanf(const_pointer pszString, const_pointer pszFormat, Args ... args)
+    static int sscanf(const_pointer pszString, const_pointer pszFormat, Args ... args)
     {
         return std::sscanf(pszString, pszFormat, args...);
     }
@@ -107,51 +103,47 @@ struct char_traits<wchar_t>
     using difference_type   = std::ptrdiff_t;
     using size_type         = size_t;
 
-    static constexpr value_type teol(void)
+    static constexpr size_type align(void)
     {
-        return L'\0';
+        return 8;
     }
-    static bool tisspace(value_type ch)
+    static constexpr size_type small_string_size(void)
+    {
+        return 8;
+    }
+    static bool is_space(value_type ch)
     {
         return std::iswspace(static_cast<wint_t>(ch));
     }
-    static constexpr size_type talign(void)
-    {
-        return 8;
-    }
-    static constexpr size_type tsmallstringsize(void)
-    {
-        return 8;
-    }
-    static size_type tstrlen(const_pointer pszStr)
+    static size_type length(const_pointer pszStr)
     {
         return static_cast<size_type>(std::wcslen(pszStr));
     }
-    static value_type ttolower(value_type ch)
+    static value_type to_lower(value_type ch)
     {
         return std::towlower(ch);
     }
-    static value_type ttoupper(value_type ch)
+    static value_type to_upper(value_type ch)
     {
         return std::towupper(ch);
     }
-    static int tstrcmp(const_pointer pszFirst, const_pointer pszSecond)
+    static int compare(const_pointer pszFirst, const_pointer pszSecond)
     {
         return std::wcscmp(pszFirst, pszSecond);
     }
-    static int tstrncmp(const_pointer pszFirst, const_pointer pszSecond, size_type nCount)
+    static int compare_n(const_pointer pszFirst, const_pointer pszSecond, size_type nCount)
     {
         return std::wcsncmp(pszFirst, pszSecond, nCount);
     }
 // MVSC's std::swprintf returns required size if nullptr and 0 passed as pDest and nBuffer,
 // while other compilers returns -1
 #if QX_MSVC
-    static int tvsnprintf(pointer pszDest, size_type nBuffer, const_pointer pszFormat, va_list args)
+    static int vsnprintf(pointer pszDest, size_type nBuffer, const_pointer pszFormat, va_list args)
     {
         return std::vswprintf(pszDest, nBuffer, pszFormat, args);
     }
 #else
-    static int tvsnprintf(pointer pszDest, size_type nBuffer, const_pointer pszFormat, va_list args)
+    static int vsnprintf(pointer pszDest, size_type nBuffer, const_pointer pszFormat, va_list args)
     {
         int size = -1;
 
@@ -174,7 +166,7 @@ struct char_traits<wchar_t>
     }
 #endif
     template<class ... Args>
-    static int tssscanf(const_pointer pszString, const_pointer pszFormat, Args ... args)
+    static int sscanf(const_pointer pszString, const_pointer pszFormat, Args ... args)
     {
         return std::swscanf(pszString, pszFormat, args...);
     }
