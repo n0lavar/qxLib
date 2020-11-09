@@ -49,7 +49,7 @@ struct char_traits<char>
     }
     static constexpr size_type small_string_size(void)
     {
-        return 16;
+        return 48;
     }
     static bool is_space(value_type ch)
     {
@@ -109,7 +109,13 @@ struct char_traits<wchar_t>
     }
     static constexpr size_type small_string_size(void)
     {
-        return 8;
+// MSVC:     sizeof(wchar_t) == 2
+// GNU/Linux sizeof(wchar_t) == 4
+#if QX_MSVC
+        return 24;
+#else
+        return 12;
+#endif
     }
     static bool is_space(value_type ch)
     {

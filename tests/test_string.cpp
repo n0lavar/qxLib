@@ -63,7 +63,7 @@ TYPED_TEST_SUITE(TestQxString, Implementations);
 
 TYPED_TEST(TestQxString, class_size)
 {
-    QX_STATIC_ASSERT_EQ(sizeof(StringType), 32);
+    QX_STATIC_ASSERT_EQ(sizeof(StringType), 64);
 }
 
 TYPED_TEST(TestQxString, construct)
@@ -330,9 +330,9 @@ TYPED_TEST(TestQxString, size)
     EXPECT_TRUE(str0.capacity() > 0);
     EXPECT_TRUE(str0.size() <= str0.capacity());
 
-    str0 = STR("some long long long long long sentence");
-    EXPECT_EQ(str0.size(), 38);
-    EXPECT_TRUE(str0.capacity() > nCapacity);
+    str0 = STR("some long long long long long long long long long sentence");
+    EXPECT_EQ(str0.size(), 58);
+    EXPECT_TRUE(str0.capacity() >= nCapacity);
     nCapacity = str0.capacity();
     EXPECT_TRUE(str0.size() <= nCapacity);
     EXPECT_EQ(nCapacity % TypeParam::align(), 0);
@@ -341,7 +341,7 @@ TYPED_TEST(TestQxString, size)
     EXPECT_EQ(nNewCapacity, nCapacity);
 
     str0.fit();
-    EXPECT_EQ(str0.size(), 38);
+    EXPECT_EQ(str0.size(), 58);
     EXPECT_EQ(str0.size() + 1, str0.capacity());
     EXPECT_TRUE(str0.capacity() < nNewCapacity);
 }
