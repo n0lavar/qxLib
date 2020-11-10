@@ -141,16 +141,13 @@ struct char_traits<wchar_t>
     {
         return std::wcsncmp(pszFirst, pszSecond, nCount);
     }
+    static int vsnprintf(pointer pszDest, size_type nBuffer, const_pointer pszFormat, va_list args)
+    {
 // MVSC's std::swprintf returns required size if nullptr and 0 passed as pDest and nBuffer,
 // while other compilers returns -1
 #if QX_MSVC
-    static int vsnprintf(pointer pszDest, size_type nBuffer, const_pointer pszFormat, va_list args)
-    {
         return std::vswprintf(pszDest, nBuffer, pszFormat, args);
-    }
 #else
-    static int vsnprintf(pointer pszDest, size_type nBuffer, const_pointer pszFormat, va_list args)
-    {
         int size = -1;
 
         if (nBuffer <= 0)
@@ -169,8 +166,8 @@ struct char_traits<wchar_t>
         }
 
         return size;
-    }
 #endif
+    }
     template<class ... Args>
     static int sscanf(const_pointer pszString, const_pointer pszFormat, Args ... args)
     {
