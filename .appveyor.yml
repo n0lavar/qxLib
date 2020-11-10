@@ -1,4 +1,4 @@
-image: Visual Studio 2017   # на этом VM-образе установлены все Visual Studio с 2008 по 2015
+image: Visual Studio 2019
 
 init:
   - git config --global core.autocrlf input
@@ -11,16 +11,11 @@ matrix:
 
 platform:
   - x64
+  - x86
 
 configuration:
   - Debug
   - Release
-
-environment:
-  matrix:
-    - TOOLCHAIN: msvc15
-
-install:
 
 build_script:
   - cd ..
