@@ -66,13 +66,13 @@ protected:
 
 private:
 
-    GLuint  m_nBuffer   = UINT_EMPTY_VALUE;
+    GLuint  m_nBuffer   = std::numeric_limits<GLuint>::max();
 };
 
 template<bool COPYBLE>
 inline GLuint base_fbo<COPYBLE>::GetBufferName (void) const { return m_nBuffer; }
 template<bool COPYBLE>
-inline bool  base_fbo<COPYBLE>::IsGenerated (void) const { return m_nBuffer != UINT_EMPTY_VALUE; };
+inline bool  base_fbo<COPYBLE>::IsGenerated (void) const { return m_nBuffer != std::numeric_limits<GLuint>::max(); };
 template<bool COPYBLE>
 template<class Derived>
 inline void  base_fbo<COPYBLE>::Assign(const Derived& other) { m_nBuffer = other.m_nBuffer; }

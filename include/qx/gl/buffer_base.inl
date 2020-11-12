@@ -52,10 +52,10 @@ inline void buffer_base<COPYBLE>::Delete()
 {
     if constexpr (!COPYBLE)
     {
-        if (m_nBuffer != UINT_EMPTY_VALUE)
+        if (m_nBuffer != std::numeric_limits<GLuint>::max())
         {
             glDeleteBuffers(1, &m_nBuffer);
-            m_nBuffer = UINT_EMPTY_VALUE;
+            m_nBuffer = std::numeric_limits<GLuint>::max();
         }
     }
 }

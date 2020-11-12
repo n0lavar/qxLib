@@ -83,7 +83,7 @@ inline void shader_base<ShaderType>::Init(const GLchar* pszShaderCode)
 template <GLenum ShaderType>
 inline GLint shader_base<ShaderType>::GetParameter(GLenum eParameter) const
 {
-    GLint nRet = UINT_EMPTY_VALUE;
+    GLint nRet = -1;
     glGetShaderiv(m_nShader, eParameter, &nRet);
     return nRet;
 }

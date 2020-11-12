@@ -78,10 +78,10 @@ inline void base_rbo<COPYBLE>::Delete(void)
 {
     if constexpr (!COPYBLE)
     {
-        if (m_nBuffer != UINT_EMPTY_VALUE)
+        if (m_nBuffer != std::numeric_limits<GLuint>::max())
         {
             glDeleteRenderbuffers(1, &m_nBuffer);
-            m_nBuffer = UINT_EMPTY_VALUE;
+            m_nBuffer = std::numeric_limits<GLuint>::max();
         }
     }
 }

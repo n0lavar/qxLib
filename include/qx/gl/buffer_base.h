@@ -63,13 +63,13 @@ protected:
 
 private:
 
-    GLuint m_nBuffer = UINT_EMPTY_VALUE;
+    GLuint m_nBuffer = std::numeric_limits<GLuint>::max();
 };
 
 template<bool COPYBLE>
 inline GLuint buffer_base<COPYBLE>::GetBufferName (void) const { return m_nBuffer; }
 template<bool COPYBLE>
-inline bool   buffer_base<COPYBLE>::IsGenerated   (void) const { return m_nBuffer != UINT_EMPTY_VALUE; }
+inline bool   buffer_base<COPYBLE>::IsGenerated   (void) const { return m_nBuffer != std::numeric_limits<GLuint>::max(); }
 
 }
 

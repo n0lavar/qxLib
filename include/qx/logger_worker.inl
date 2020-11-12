@@ -74,7 +74,7 @@ inline void logger_worker::set_check_period(Duration duration)
 //!\author Khrapov
 //!\date   24.10.2020
 //==============================================================================
-void logger_worker::process_output(
+inline void logger_worker::process_output(
     logger::level       eLogLevel,
     const char        * pszFormat,
     const char        * pszAssertExpression,

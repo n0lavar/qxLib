@@ -78,7 +78,7 @@ protected:
 
 private:
 
-    GLuint m_nProgram = UINT_EMPTY_VALUE;
+    GLuint m_nProgram = std::numeric_limits<GLuint>::max();
 };
 
 }

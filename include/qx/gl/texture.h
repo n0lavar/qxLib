@@ -85,7 +85,7 @@ protected:
 
 private:
 
-    GLuint  m_nTexture          = UINT_EMPTY_VALUE;
+    GLuint  m_nTexture          = std::numeric_limits<GLuint>::max();
     GLenum  m_eTextureTarget    = GL_TEXTURE_2D;
     GLsizei m_nWidth            = 0;
     GLsizei m_nHeight           = 0;
@@ -94,7 +94,7 @@ private:
 template<bool COPYBLE>
 inline GLuint  base_texture<COPYBLE>::GetBufferName (void) const { return m_nTexture; }
 template<bool COPYBLE>
-inline bool    base_texture<COPYBLE>::IsGenerated   (void) const { return m_nTexture != UINT_EMPTY_VALUE; };
+inline bool    base_texture<COPYBLE>::IsGenerated   (void) const { return m_nTexture != std::numeric_limits<GLuint>::max(); };
 template<bool COPYBLE>
 inline GLsizei base_texture<COPYBLE>::GetWidth      (void) const { return m_nWidth;   }
 template<bool COPYBLE>

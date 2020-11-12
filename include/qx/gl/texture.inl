@@ -37,7 +37,7 @@ inline base_texture<COPYBLE>::~base_texture(void)
 template<bool COPYBLE>
 inline void base_texture<COPYBLE>::Generate(void)
 {
-    if (m_nTexture == UINT_EMPTY_VALUE)
+    if (m_nTexture == std::numeric_limits<GLuint>::max())
         glGenTextures(1, &m_nTexture);
 }
 
@@ -53,10 +53,10 @@ inline void base_texture<COPYBLE>::Delete(void)
 {
     if constexpr (!COPYBLE)
     {
-        if (m_nTexture != UINT_EMPTY_VALUE)
+        if (m_nTexture != std::numeric_limits<GLuint>::max())
         {
             glDeleteTextures(1, &m_nTexture);
-            m_nTexture = UINT_EMPTY_VALUE;
+            m_nTexture = std::numeric_limits<GLuint>::max();
         }
     }
 }

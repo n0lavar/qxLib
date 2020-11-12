@@ -50,7 +50,7 @@ public:
 
 private:
 
-    GLuint m_nShader = UINT_EMPTY_VALUE;
+    GLuint m_nShader = std::numeric_limits<GLuint>::max();
 };
 
 template <GLenum ShaderType>

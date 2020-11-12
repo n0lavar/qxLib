@@ -52,10 +52,10 @@ inline void base_vao<COPYBLE>::Delete(void)
 {
     if constexpr (!COPYBLE)
     {
-        if (m_nVAO != UINT_EMPTY_VALUE)
+        if (m_nVAO != std::numeric_limits<GLuint>::max())
         {
             glDeleteVertexArrays(1, &m_nVAO);
-            m_nVAO = UINT_EMPTY_VALUE;
+            m_nVAO = std::numeric_limits<GLuint>::max();
         }
     }
 }

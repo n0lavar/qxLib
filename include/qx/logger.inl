@@ -30,7 +30,7 @@ namespace qx
 //!\author Khrapov
 //!\date   10.01.2020
 //================================================================================
-void logger::process_output(
+inline void logger::process_output(
     level               eLogLevel,
     const char        * pszFormat,
     const char        * pszAssertExpression,
@@ -172,7 +172,7 @@ inline void logger::format_time_string(string& sTime)
 //!\param  pszFile              - file name string
 //!\param  pszFunction          - function name string
 //!\param  nLine                - code line number
-//!\param  ...                  - additional args for format
+//!\param  args                 - additional args for format
 //!\author Khrapov
 //!\date   22.10.2020
 //==============================================================================

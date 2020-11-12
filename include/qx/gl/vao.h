@@ -62,13 +62,13 @@ protected:
 
 private:
 
-    GLuint m_nVAO = UINT_EMPTY_VALUE;
+    GLuint m_nVAO = std::numeric_limits<GLuint>::max();
 };
 
 template<bool COPYBLE>
 inline GLuint base_vao<COPYBLE>::GetBufferName (void) const { return m_nVAO; }
 template<bool COPYBLE>
-inline bool   base_vao<COPYBLE>::IsGenerated   (void) const { return m_nVAO != UINT_EMPTY_VALUE; };
+inline bool   base_vao<COPYBLE>::IsGenerated   (void) const { return m_nVAO != std::numeric_limits<GLuint>::max(); };
 
 QX_DEFINE_BUFFER_CLASSES(vao)
 

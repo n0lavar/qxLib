@@ -23,7 +23,7 @@ namespace qx
 //==============================================================================
 inline shader_program::~shader_program(void)
 {
-    if (m_nProgram != UINT_EMPTY_VALUE)
+    if (m_nProgram != std::numeric_limits<GLuint>::max())
         glDeleteProgram(m_nProgram);
 }
 
