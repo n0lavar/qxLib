@@ -319,7 +319,7 @@ public:
     {
         return (*m_pCollection).at(m_nIndex);
     }
-    [[nodiscard]] constexpr pointer   operator->(void)
+    [[nodiscard]] constexpr pointer operator->(void)
     {
         return &((*m_pCollection).at(m_nIndex));
     }

@@ -167,7 +167,7 @@ inline void adjust_heap(
     size_t   position,
     Compare  compare = Compare())
 {
-    using iter_diff = typename RandomIt::difference_type;
+    using iter_diff = decltype(RandomIt() - RandomIt());
 
     while (position < heapSize)
     {
@@ -532,7 +532,7 @@ inline void merge
      Compare                        compare             = Compare(),
      vector_of_values<RandomIt>   * pPreallocatedBuffer = nullptr)
 {
-    using iter_diff = typename RandomIt::difference_type;
+    using iter_diff = decltype(RandomIt() - RandomIt());
 
     u64 ind1 = 0;
     u64 ind2 = 0;
