@@ -14,6 +14,7 @@
 
 #include <qx/containers/string.h>
 #include <qx/singleton.h>
+#include <qx/suppress_warnings.h>
 
 #include <ctime>
 #include <fstream>
@@ -155,10 +156,10 @@ public:
 
         unit_info() = default;
         unit_info(
-            string      _sLogFileName,
-            level       _eConsoleLevel  = level::info,
-            level       _eFileLevel     = level::info,
-            format_func _formatFunc     = logger::format_line)
+            const string      & _sLogFileName,
+            level               _eConsoleLevel  = level::info,
+            level               _eFileLevel     = level::info,
+            const format_func & _formatFunc     = logger::format_line)
             : sLogFileName  (_sLogFileName)
             , eConsoleLevel (_eConsoleLevel)
             , eFileLevel    (_eFileLevel)
@@ -246,8 +247,6 @@ private:
                                     va_list             args);
 
     runtime_unit_info* get_unit_info(level              eLogLevel,
-                                    const char        * pszFormat,
-                                    const char        * pszAssertExpression,
                                     const char        * pszTag,
                                     const char        * pszFile,
                                     const char        * pszFunction);

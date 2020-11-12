@@ -17,7 +17,6 @@
 #if QX_TEST_LOGGER
 
 #include <qx/logger_worker.h>
-#include <gtest/gtest.h>
 #include <regex>
 
 template <
@@ -124,13 +123,13 @@ protected:
                         qx::logger::level::info,
                         [](qx::string         & sMsg,
                            qx::string         & sFormat,
-                           qx::logger::level    eLogLevel,
+                           qx::logger::level,
                            const char         * pszFormat,
-                           const char         * pszAssertExpression,
+                           const char         *,
                            const char         * pszTag,
-                           const char         * pszFile,
-                           const char         * pszFunction,
-                           int                  nLine,
+                           const char         *,
+                           const char         *,
+                           int,
                            va_list              args)
                         {
                             sMsg.vformat(pszFormat, args);
@@ -217,7 +216,7 @@ protected:
                     pszLine,
                     pszStringEnding);
 
-                ifs.getline(sLine.data(), sLine.size());
+                ifs.getline(sLine.data(), static_cast<std::streamsize>(sLine.size()));
                 CheckRegex(sFormat, sLine);
             };
 
@@ -240,7 +239,7 @@ protected:
                     Traits::GetTag(),
                     pszStringEnding);
 
-                ifs.getline(sLine.data(), sLine.size());
+                ifs.getline(sLine.data(), static_cast<std::streamsize>(sLine.size()));
                 CheckRegex(sFormat, sLine);
             };
 

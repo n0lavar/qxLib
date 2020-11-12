@@ -14,6 +14,7 @@
 
 #include <cstdint>
 #include <cstddef>
+#include <limits>
 
 using mem_t = char*;        //!< 1/2 bytes for pointer arithmetic
 
@@ -26,6 +27,3 @@ using i8    = int8_t;       //!< - 128 .. 127
 using i16   = int16_t;      //!< – 32 768 .. 32 767
 using i32   = int32_t;      //!< − 2 147 483 648 .. 2 147 483 647
 using i64   = int64_t;      //!< − 9 223 372 036 854 775 808 .. 9 223 372 036 854 775 807
-
-// not using constexpr for compatibility with u8 - u64 types
-#define UINT_EMPTY_VALUE (-1)

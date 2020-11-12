@@ -17,7 +17,6 @@
 #if QX_TEST_LIST_SE
 
 #include <qx/containers/list_se.h>
-#include <gtest/gtest.h>
 #include <algorithm>
 #include <string>
 

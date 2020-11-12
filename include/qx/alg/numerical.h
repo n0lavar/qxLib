@@ -93,27 +93,27 @@ inline double pow(T number, int power)
 {
     static_assert(std::is_integral_v<T> || std::is_floating_point_v<T>, "Integral or floating point required");
 
-    bool bNegativePower = power < 0;
-    power = std::abs(power);
+    bool   bNegativePower = power < 0;
+    size_t nPositivePower = static_cast<size_t>(std::abs(power));
 
     double result = 1.0;
-    switch (power)
+    switch (nPositivePower)
     {
     case 0:                                                 break;
     case 1: result = static_cast<double>(number);           break;
-    case 2: result = static_cast<double>(number) * number;  break;
+    case 2: result = static_cast<double>(number * number);  break;
     default:
-        std::bitset<std::numeric_limits<int>::digits> powerBitset(power);
+        std::bitset<std::numeric_limits<int>::digits> powerBitset(nPositivePower);
         std::array<double, std::numeric_limits<int>::digits> powers;
 
         powers[0] = static_cast<double>(number);
 
-        int curPower = 1;
-        int curIndex = 1;
+        size_t curPower = 1;
+        size_t curIndex = 1;
 
-        while (curPower < power)
+        while (curPower < nPositivePower)
         {
-            powers[curIndex] = powers[static_cast<size_t>(curIndex) - 1] * powers[static_cast<size_t>(curIndex) - 1];
+            powers[curIndex] = powers[curIndex - 1] * powers[curIndex - 1];
             curPower *= 2;
             curIndex++;
         }
@@ -145,9 +145,9 @@ inline I maxpot(I number)
     if (number == I(0))
         return I(0);
 
-    std::bitset<std::numeric_limits<I>::digits> powers(std::abs(number));
-    I pow = std::numeric_limits<I>::digits - 1;
-    while (!powers.test(pow))
+    std::bitset<std::numeric_limits<I>::digits> powers(static_cast<size_t>(std::abs(number)));
+    I pow = static_cast<I>(std::numeric_limits<I>::digits - 1);
+    while (!powers.test(static_cast<size_t>(pow)))
         pow--;
 
     return pow;
@@ -229,19 +229,19 @@ inline std::vector<I> find_primes(I max_number)
     while (next_prime <= stop_at)
     {
         for (I i = next_prime * 2; i < max_number + 1; i += next_prime)
-            isComposite[i] = true;
+            isComposite[static_cast<size_t>(i)] = true;
 
         next_prime += 2;
 
-        while (next_prime <= max_number && isComposite[next_prime])
+        while (next_prime <= max_number && isComposite[static_cast<size_t>(next_prime)])
             next_prime += 2;
     }
 
     std::vector<I> primes;
-    primes.reserve(max_number / 2); // approximate size
+    primes.reserve(static_cast<size_t>(max_number / 2)); // approximate size
 
     for (I i = 2; i < max_number + 1; i++)
-        if (!isComposite[i])
+        if (!isComposite[static_cast<size_t>(i)])
             primes.push_back(i);
 
     primes.shrink_to_fit();

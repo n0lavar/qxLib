@@ -74,7 +74,7 @@ inline void logger_worker::set_check_period(Duration duration)
 //!\author Khrapov
 //!\date   24.10.2020
 //==============================================================================
-inline void logger_worker::process_output(
+void logger_worker::process_output(
     logger::level       eLogLevel,
     const char        * pszFormat,
     const char        * pszAssertExpression,
@@ -88,8 +88,6 @@ inline void logger_worker::process_output(
     // check is thread safe as nobody can't edit units
     if (auto pUnitInfo = m_pLogger->get_unit_info(
         eLogLevel,
-        pszFormat,
-        pszAssertExpression,
         pszTag,
         pszFile,
         pszFunction))

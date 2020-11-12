@@ -17,7 +17,6 @@
 #if QX_TEST_FUNCTIONAL
 
 #include <qx/alg/functional.h>
-#include <gtest/gtest.h>
 
 
 TEST(functional, linear_interpolation)

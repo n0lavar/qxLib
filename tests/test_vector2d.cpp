@@ -17,7 +17,6 @@
 #if QX_TEST_VECTOR2D
 
 #include <qx/containers/vector2d.h>
-#include <gtest/gtest.h>
 #include <array>
 
 

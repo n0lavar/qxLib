@@ -29,19 +29,18 @@ template<class It>
 using vector_of_values = std::vector<iterator_value_t<It>>;
 
 //==============================================================================
-//!\fn                qx::sort_required<RandomIt, Compare>
+//!\fn                   qx::sort_required<RandomIt>
 //
 //!\brief       check if sort really needed
 //!\property    O(1)
 //!\param       begin   - begin iterator
 //!\param       end     - end iterator
-//!\param       compare - comparison function
 //!\retval              - false if [begin, end) already sorted
 //!\author Khrapov
 //!\date   9.09.2020
 //==============================================================================
-template <typename RandomIt, typename Compare = std::less<>>
-inline bool sort_required(RandomIt begin, RandomIt end, Compare compare = Compare())
+template <typename RandomIt>
+inline bool sort_required(RandomIt begin, RandomIt end)
 {
     if (end - begin < 2)
         return false;
@@ -64,7 +63,7 @@ inline bool sort_required(RandomIt begin, RandomIt end, Compare compare = Compar
 template <typename RandomIt, typename Compare = std::less<>>
 inline void sort_insertion(RandomIt begin, RandomIt end, Compare compare = Compare())
 {
-    if (!sort_required(begin, end, compare))
+    if (!sort_required(begin, end))
         return;
 
     for (RandomIt i = begin + 1; i != end; ++i) //-V756
@@ -92,7 +91,7 @@ inline void sort_insertion(Container& cont, Compare compare = Compare())
 template <typename RandomIt, typename Compare = std::less<>>
 inline void sort_selection(RandomIt begin, RandomIt end, Compare compare = Compare())
 {
-    if (!sort_required(begin, end, compare))
+    if (!sort_required(begin, end))
         return;
 
     for (RandomIt i = begin; i != end; ++i)
@@ -126,7 +125,7 @@ inline void sort_selection(Container& cont, Compare compare = Compare())
 template <typename RandomIt, typename Compare = std::less<>>
 inline void sort_bubble(RandomIt begin, RandomIt end, Compare compare = Compare())
 {
-    if (!sort_required(begin, end, compare))
+    if (!sort_required(begin, end))
         return;
 
     bool bSorted = false;
@@ -162,20 +161,39 @@ inline void sort_bubble(Container& cont, Compare compare = Compare())
 //!\date        2.03.2020
 //==============================================================================
 template <typename RandomIt, typename Compare>
-inline void adjust_heap(RandomIt begin, size_t heapSize, size_t position, Compare compare = Compare())
+inline void adjust_heap(
+    RandomIt begin,
+    size_t   heapSize,
+    size_t   position,
+    Compare  compare = Compare())
 {
+    using iter_diff = typename RandomIt::difference_type;
+
     while (position < heapSize)
     {
         size_t childpos = position * 2 + 1;
         if (childpos < heapSize)
         {
-            if ((childpos + 1 < heapSize) && compare(*(begin + childpos), *(begin + childpos + 1)))
+            if ((childpos + 1 < heapSize)
+                && compare(
+                    *(begin + static_cast<iter_diff>(childpos)),
+                    *(begin + static_cast<iter_diff>(childpos) + 1)))
+            {
                 childpos += 1;
+            }
 
-            if (compare(*(begin + childpos), *(begin + position)))
+            if (compare(
+                *(begin + static_cast<iter_diff>(childpos)),
+                *(begin + static_cast<iter_diff>(position))))
+            {
                 return;
+            }
             else
-                std::iter_swap(begin + position, begin + childpos);
+            {
+                std::iter_swap(
+                    begin + static_cast<iter_diff>(position),
+                    begin + static_cast<iter_diff>(childpos));
+            }
         }
         position = childpos;
     }
@@ -194,9 +212,9 @@ inline void adjust_heap(RandomIt begin, size_t heapSize, size_t position, Compar
 template <typename RandomIt, typename Compare>
 inline void make_heap(RandomIt begin, RandomIt end, Compare compare = Compare())
 {
-    size_t max = end - begin;
+    auto max = end - begin;
     for (int i = static_cast<int>(max) / 2; i >= 0; i--)
-        adjust_heap(begin, max, static_cast<size_t>(i), compare);
+        adjust_heap(begin, static_cast<size_t>(max), static_cast<size_t>(i), compare);
 }
 
 //==============================================================================
@@ -214,16 +232,16 @@ inline void make_heap(RandomIt begin, RandomIt end, Compare compare = Compare())
 template <typename RandomIt, typename Compare = std::less<>>
 inline void sort_heap(RandomIt begin, RandomIt end, Compare compare = Compare())
 {
-    if (!sort_required(begin, end, compare))
+    if (!sort_required(begin, end))
         return;
 
     qx::make_heap(begin, end, compare);
 
-    size_t lastPosition = end - begin - 1;
+    auto lastPosition = end - begin - 1;
     while (lastPosition > 0)
     {
         std::iter_swap(begin, begin + lastPosition);
-        adjust_heap(begin, lastPosition, 0, compare);
+        adjust_heap(begin, static_cast<size_t>(lastPosition), 0u, compare);
         lastPosition--;
     }
 }
@@ -248,7 +266,7 @@ inline void sort_heap(Container& cont, Compare compare = Compare())
 template <typename RandomIt, typename Compare = std::less<>>
 inline void sort_quick_hoare(RandomIt begin, RandomIt end, Compare compare = Compare())
 {
-    if (!sort_required(begin, end, compare))
+    if (!sort_required(begin, end))
         return;
 
     i64 right = (end - begin) - 1;
@@ -295,7 +313,7 @@ inline void sort_quick_hoare(Container& cont, Compare compare = Compare())
 template <typename RandomIt, typename Compare = std::less<>>
 inline void sort_quick_three_way(RandomIt begin, RandomIt end, Compare compare = Compare())
 {
-    if (!sort_required(begin, end, compare))
+    if (!sort_required(begin, end))
         return;
 
     i64 right = (end - begin) - 1;
@@ -390,7 +408,7 @@ inline void sort_quick_three_way(Container& cont, Compare compare = Compare())
 template <typename RandomIt, typename Compare = std::less<>>
 inline void sort_quick_dual_pivot(RandomIt begin, RandomIt end, Compare compare = Compare())
 {
-    if (!sort_required(begin, end, compare))
+    if (!sort_required(begin, end))
         return;
 
     i64 right = (end - begin) - 1;
@@ -514,46 +532,52 @@ inline void merge
      Compare                        compare             = Compare(),
      vector_of_values<RandomIt>   * pPreallocatedBuffer = nullptr)
 {
-    i64 ind1 = 0;
-    i64 ind2 = 0;
+    using iter_diff = typename RandomIt::difference_type;
+
+    u64 ind1 = 0;
+    u64 ind2 = 0;
     RandomIt mid = begin + (end - begin) / 2;
 
     bool bCreateBuffer = !pPreallocatedBuffer;
     if (bCreateBuffer)
         pPreallocatedBuffer = new vector_of_values<RandomIt>;
 
-    pPreallocatedBuffer->resize(end - begin);
+    pPreallocatedBuffer->resize(static_cast<size_t>(end - begin));
 
     // merge
-    while ((begin + ind1 < mid) && (mid + ind2 < end))
+    while ((begin + static_cast<iter_diff>(ind1) < mid)
+        && (mid + static_cast<iter_diff>(ind2) < end))
     {
-        if (compare(*(begin + ind1), *(mid + ind2)))
+        if (compare(
+            *(begin + static_cast<iter_diff>(ind1)),
+            *(mid + static_cast<iter_diff>(ind2))))
         {
-            (*pPreallocatedBuffer)[ind1 + ind2] = *(begin + ind1);
+            (*pPreallocatedBuffer)[ind1 + ind2] = *(begin + static_cast<iter_diff>(ind1));
             ind1++;
         }
         else
         {
-            (*pPreallocatedBuffer)[ind1 + ind2] = *(mid + ind2);
+            (*pPreallocatedBuffer)[ind1 + ind2] = *(mid + static_cast<iter_diff>(ind2));
             ind2++;
         }
     }
 
     // append tails
-    while (begin + ind1 < mid)
+    while (begin + static_cast<iter_diff>(ind1) < mid)
     {
-        (*pPreallocatedBuffer)[ind1 + ind2] = *(begin + ind1);
+        (*pPreallocatedBuffer)[ind1 + ind2] = *(begin + static_cast<iter_diff>(ind1));
         ind1++;
     }
-    while (mid + ind2 < end)
+
+    while (mid + static_cast<iter_diff>(ind2) < end)
     {
-        (*pPreallocatedBuffer)[ind1 + ind2] = *(mid + ind2);
+        (*pPreallocatedBuffer)[ind1 + ind2] = *(mid + static_cast<iter_diff>(ind2));
         ind2++;
     }
 
     // copy to source
     for (auto it = begin; it < end; ++it)
-        *it = (*pPreallocatedBuffer)[it - begin];
+        *it = (*pPreallocatedBuffer)[static_cast<size_t>(it - begin)];
 
     if (bCreateBuffer)
         delete pPreallocatedBuffer;
@@ -579,7 +603,7 @@ inline void sort_merge
      Compare                        compare             = Compare(),
      vector_of_values<RandomIt>   * pPreallocatedBuffer = nullptr)
 {
-    if (!sort_required(begin, end, compare))
+    if (!sort_required(begin, end))
         return;
 
     bool bCreateBuffer = !pPreallocatedBuffer;
@@ -589,7 +613,7 @@ inline void sort_merge
     // preallocate max required size and use same vector
     // has no effect in reqursive calls
     auto len = end - begin;
-    pPreallocatedBuffer->reserve(len);
+    pPreallocatedBuffer->reserve(static_cast<size_t>(len));
 
     sort_merge(begin, begin + len / 2, compare, pPreallocatedBuffer);
     sort_merge(begin + len / 2, end, compare, pPreallocatedBuffer);

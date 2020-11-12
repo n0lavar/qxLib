@@ -22,16 +22,16 @@
 
 //------------------------------ qx::meta::strlen ------------------------------
 
-QX_STATIC_ASSERT_EQ(qx::meta::strlen(""),           0);
-QX_STATIC_ASSERT_EQ(qx::meta::strlen("1"),          1);
-QX_STATIC_ASSERT_EQ(qx::meta::strlen("12"),         2);
-QX_STATIC_ASSERT_EQ(qx::meta::strlen("123"),        3);
-QX_STATIC_ASSERT_EQ(qx::meta::strlen("1234"),       4);
-QX_STATIC_ASSERT_EQ(qx::meta::strlen("12345"),      5);
-QX_STATIC_ASSERT_EQ(qx::meta::strlen("123456"),     6);
-QX_STATIC_ASSERT_EQ(qx::meta::strlen("1234567"),    7);
-QX_STATIC_ASSERT_EQ(qx::meta::strlen("12345678"),   8);
-QX_STATIC_ASSERT_EQ(qx::meta::strlen("123456789"),  9);
+QX_STATIC_ASSERT_EQ(qx::meta::strlen(""),           0u);
+QX_STATIC_ASSERT_EQ(qx::meta::strlen("1"),          1u);
+QX_STATIC_ASSERT_EQ(qx::meta::strlen("12"),         2u);
+QX_STATIC_ASSERT_EQ(qx::meta::strlen("123"),        3u);
+QX_STATIC_ASSERT_EQ(qx::meta::strlen("1234"),       4u);
+QX_STATIC_ASSERT_EQ(qx::meta::strlen("12345"),      5u);
+QX_STATIC_ASSERT_EQ(qx::meta::strlen("123456"),     6u);
+QX_STATIC_ASSERT_EQ(qx::meta::strlen("1234567"),    7u);
+QX_STATIC_ASSERT_EQ(qx::meta::strlen("12345678"),   8u);
+QX_STATIC_ASSERT_EQ(qx::meta::strlen("123456789"),  9u);
 
 
 

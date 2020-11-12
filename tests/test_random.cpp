@@ -18,7 +18,6 @@
 
 #include <qx/random.h>
 #include <qx/useful_funcs.h>
-#include <gtest/gtest.h>
 
 template<typename T>
 void TestRandom(T min, T max, size_t nIterations)

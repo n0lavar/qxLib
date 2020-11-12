@@ -80,6 +80,8 @@ public:                                                                     \
     template<class RTTI_TYPE>                                               \
     friend constexpr int qx::get_class_id(void);                            \
                                                                             \
+    virtual ~thisClass() = default;                                         \
+                                                                            \
     template <typename RTTI_TYPE>                                           \
     bool is_derived_from() const noexcept                                   \
     {                                                                       \

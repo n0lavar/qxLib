@@ -30,7 +30,7 @@ namespace qx
 //!\author Khrapov
 //!\date   10.01.2020
 //================================================================================
-inline void logger::process_output(
+void logger::process_output(
     level               eLogLevel,
     const char        * pszFormat,
     const char        * pszAssertExpression,
@@ -41,7 +41,7 @@ inline void logger::process_output(
     std::string_view    svColor,
     ...)
 {
-    if (auto pUnitInfo = get_unit_info(eLogLevel, pszFormat, pszAssertExpression, pszTag, pszFile, pszFunction))
+    if (auto pUnitInfo = get_unit_info(eLogLevel, pszTag, pszFile, pszFunction))
     {
         auto& traceUnitInfo = pUnitInfo->get_trace_unit_info();
 
@@ -145,7 +145,9 @@ inline void logger::set_logs_folder(const char* pszFolder)
 inline void logger::format_time_string(string& sTime)
 {
     std::time_t t = std::time(nullptr);
+    QX_PUSH_SUPPRESS_MSVC_WARNINGS(4996)
     std::tm* now = std::localtime(&t);
+    QX_POP_SUPPRESS_WARNINGS
 
     sTime.format(
         "%02d-%02d-%04d_%02d-%02d-%02d",
@@ -180,7 +182,7 @@ inline void logger::format_line(
     level           eLogLevel,
     const char    * pszFormat,
     const char    * pszAssertExpression,
-    const char    * pszTag,
+    const char    * /* pszTag */,
     const char    * pszFile,
     const char    * pszFunction,
     int             nLine,
@@ -238,8 +240,6 @@ inline void logger::format_line(
 //
 //!\brief  Get unit info
 //!\param  eLogLevel            - log level
-//!\param  pszFormat            - format string
-//!\param  pszAssertExpression  - assert expr or nullptr
 //!\param  pszTag               - trasing tag or nullptr
 //!\param  pszFile              - file name string
 //!\param  pszFunction          - function name string
@@ -250,8 +250,6 @@ inline void logger::format_line(
 //==============================================================================
 inline logger::runtime_unit_info* logger::get_unit_info(
     level       eLogLevel,
-    const char* pszFormat,
-    const char* pszAssertExpression,
     const char* pszTag,
     const char* pszFile,
     const char* pszFunction)

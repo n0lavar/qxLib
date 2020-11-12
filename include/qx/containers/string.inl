@@ -15,6 +15,136 @@ namespace qx
 {
 
 //==============================================================================
+//!\fn                 basic_string<Traits>::basic_string
+//
+//!\brief  basic_string object constructor
+//!\param  pSource  - source string pointer
+//!\param  nSymbols - source string size
+//!\author Khrapov
+//!\date   13.11.2020
+//==============================================================================
+template<class Traits>
+inline basic_string<Traits>::basic_string(const_pointer pSource, size_type nSymbols)
+{
+    assign(pSource, nSymbols);
+}
+
+//==============================================================================
+//!\fn                 basic_string<Traits>::basic_string
+//
+//!\brief  basic_string object constructor
+//!\param  str - another string
+//!\author Khrapov
+//!\date   13.11.2020
+//==============================================================================
+template<class Traits>
+inline basic_string<Traits>::basic_string(basic_string&& str) noexcept
+{
+    assign(std::move(str));
+}
+
+//==============================================================================
+//!\fn                 basic_string<Traits>::basic_string
+//
+//!\brief  basic_string object constructor
+//!\param  str - another string
+//!\author Khrapov
+//!\date   13.11.2020
+//==============================================================================
+template<class Traits>
+inline basic_string<Traits>::basic_string(const basic_string& str)
+{
+    assign(str);
+}
+
+//==============================================================================
+//!\fn                 basic_string<Traits>::basic_string
+//
+//!\brief  basic_string object constructor
+//!\param  ch - char
+//!\author Khrapov
+//!\date   13.11.2020
+//==============================================================================
+template<class Traits>
+inline basic_string<Traits>::basic_string(value_type ch)
+{
+    assign(ch);
+}
+
+//==============================================================================
+//!\fn                 basic_string<Traits>::basic_string
+//
+//!\brief  basic_string object constructor
+//!\param  pSource - const pointer
+//!\author Khrapov
+//!\date   13.11.2020
+//==============================================================================
+template<class Traits>
+inline basic_string<Traits>::basic_string(const_pointer pSource)
+{
+    assign(pSource);
+}
+
+//==============================================================================
+//!\fn                 basic_string<Traits>::basic_string
+//
+//!\brief  basic_string object constructor
+//!\param  nSymbols - num of symbols of char
+//!\param  ch       - char
+//!\author Khrapov
+//!\date   13.11.2020
+//==============================================================================
+template<class Traits>
+inline basic_string<Traits>::basic_string(size_type nSymbols, value_type ch)
+{
+    assign(nSymbols, ch);
+}
+
+//==============================================================================
+//!\fn             basic_string<Traits>::basic_string<FwdIt>
+//
+//!\brief  basic_string object constructor
+//!\param  first - first iterator of source
+//!\param  last  - last iterator of source
+//!\author Khrapov
+//!\date   13.11.2020
+//==============================================================================
+template<class Traits>
+template<class FwdIt>
+inline basic_string<Traits>::basic_string(FwdIt first, FwdIt last)
+{
+    assign(first, last);
+}
+
+//==============================================================================
+//!\fn            basic_string<Traits>::basic_string<String, >
+//
+//!\brief  basic_string object constructor
+//!\param  str - char container
+//!\author Khrapov
+//!\date   13.11.2020
+//==============================================================================
+template<class Traits>
+template<class String, class>
+inline basic_string<Traits>::basic_string (const String & str)
+{
+    assign(str);
+}
+
+//==============================================================================
+//!\fn                basic_string<Traits>::~basic_string
+//
+//!\brief  basic_string object destructor
+//!\author Khrapov
+//!\date   13.11.2020
+//==============================================================================
+template<class Traits>
+inline basic_string<Traits>::~basic_string(void)
+{
+    free();
+}
+
+//==============================================================================
 //!\fn                qx::basic_string<Traits>::assign
 //
 //!\brief  Assign string
@@ -43,6 +173,20 @@ inline void basic_string<Traits>::assign(const basic_string& str)
 {
     if (str.data() != data())
         assign(str.data());
+}
+
+//==============================================================================
+//!\fn                    basic_string<Traits>::assign
+//
+//!\brief  Assign by single char
+//!\param  ch - char
+//!\author Khrapov
+//!\date   13.11.2020
+//==============================================================================
+template<class Traits>
+inline void basic_string<Traits>::assign(value_type ch)
+{
+    assign(&ch, 1);
 }
 
 //==============================================================================
@@ -109,6 +253,21 @@ inline void basic_string<Traits>::assign(FwdIt first, FwdIt last)
 }
 
 //==============================================================================
+//!\fn               basic_string<Traits>::assign<String, >
+//
+//!\brief  Assign by char container
+//!\param  str - char container
+//!\author Khrapov
+//!\date   13.11.2020
+//==============================================================================
+template<class Traits>
+template<class String, class>
+inline void basic_string<Traits>::assign(const String& str)
+{
+    assign(str.cbegin(), str.cend());
+}
+
+//==============================================================================
 //!\fn               qx::basic_string<Traits>::format
 //
 //!\brief  Format string
@@ -118,7 +277,7 @@ inline void basic_string<Traits>::assign(FwdIt first, FwdIt last)
 //!\date   29.10.2019
 //==============================================================================
 template<class Traits>
-inline void basic_string<Traits>::format(const_pointer pszFormat, ...)
+void basic_string<Traits>::format(const_pointer pszFormat, ...)
 {
     va_list args;
     va_start(args, pszFormat);
@@ -138,7 +297,9 @@ inline void basic_string<Traits>::format(const_pointer pszFormat, ...)
 //==============================================================================
 template<class Traits>
 template<class ...Args>
-inline basic_string<Traits> basic_string<Traits>::format_static(const_pointer pszFormat, Args ...args)
+inline basic_string<Traits> basic_string<Traits>::format_static(
+    const_pointer pszFormat,
+    Args...       args)
 {
     basic_string str;
     str.format(pszFormat, args...);
@@ -162,7 +323,7 @@ inline void basic_string<Traits>::vformat(const_pointer pszFormat, va_list args)
     int length = Traits::vsnprintf(nullptr, 0, pszFormat, args_copy);
     va_end(args_copy);
 
-    if (length > 0 && resize(length, Traits::align()))
+    if (length > 0 && resize(static_cast<size_type>(length), Traits::align()))
         Traits::vsnprintf(data(), static_cast<size_type>(length) + 1, pszFormat, args);
 }
 
@@ -238,14 +399,64 @@ inline void basic_string<Traits>::erase(iterator first, iterator last)
     if (first < last)
     {
         size_type nStartSize = size();
+        size_type nSymbolsToCopy = last != end()
+            ? Traits::length(last.operator->())
+            : 0;
 
-        if (size_type nSymbolsToCopy = last != end() ? Traits::length(last.operator->()) : 0; nSymbolsToCopy > 0)
-            std::memcpy(first.operator->(), last.operator->(), nSymbolsToCopy * sizeof(value_type));
+        if (nSymbolsToCopy > 0)
+        {
+            std::memcpy(
+                first.operator->(),
+                last.operator->(),
+                nSymbolsToCopy * sizeof(value_type));
+        }
 
         resize(static_cast<size_type>(nStartSize - (last - first)), Traits::align());
     }
 }
 
+//==============================================================================
+//!\fn                    basic_string<Traits>::erase
+//
+//!\brief  Erase on iterator
+//!\param  it - iterator
+//!\author Khrapov
+//!\date   13.11.2020
+//==============================================================================
+template<class Traits>
+inline void basic_string<Traits>::erase(iterator it)
+{
+    erase(it, it + 1);
+}
+
+//==============================================================================
+//!\fn                    basic_string<Traits>::erase
+//
+//!\brief  Erase on position
+//!\param  pos - position
+//!\author Khrapov
+//!\date   13.11.2020
+//==============================================================================
+template<class Traits>
+inline void basic_string<Traits>::erase(size_type pos)
+{
+    erase(iterator(this, pos), iterator(this, pos + 1));
+}
+
+//==============================================================================
+//!\fn                    basic_string<Traits>::erase
+//
+//!\brief  Erase substring
+//!\param  ind_first - start position
+//!\param  nSymbols  - number of symbols
+//!\author Khrapov
+//!\date   13.11.2020
+//==============================================================================
+template<class Traits>
+inline void basic_string<Traits>::erase(size_type ind_first, size_type nSymbols)
+{
+    erase(iterator(this, ind_first), iterator(this, ind_first + nSymbols));
+}
 //==============================================================================
 //!\fn         qx::basic_string<Traits>::erase_all_of<...Args, >
 //
@@ -258,7 +469,7 @@ template<class Traits>
 template<class ... Args, class>
 inline void basic_string<Traits>::erase_all_of(Args... args)
 {
-    std::array toRemove { args... };
+    std::array<typename Traits::value_type, sizeof...(args)> toRemove { args... };
     erase_all_of(toRemove.cbegin(), toRemove.cend());
 }
 
@@ -282,7 +493,7 @@ inline void basic_string<Traits>::erase_all_of(FwdIt first, FwdIt last)
             ++it;
 
         erase(firstSeqIt, it);
-        it -= it - firstSeqIt; //-V765
+        it -= static_cast<size_t>(it - firstSeqIt);
     }
 }
 
@@ -304,21 +515,136 @@ inline void basic_string<Traits>::erase_line_breaks(void)
 //!\fn                qx::basic_string<Traits>::insert
 //
 //!\brief  Insert substring
-//!\param  to_ind   - first targer string char index
+//!\param  to_ind   - first char index
 //!\param  pSourse  - sourse string
 //!\param  nSymbols - number of symbols to insert
 //!\author Khrapov
 //!\date   30.10.2019
 //==============================================================================
 template<class Traits>
-inline void basic_string<Traits>::insert(size_type to_ind, const_pointer pSourse, size_type nSymbols)
+inline void basic_string<Traits>::insert(
+    size_type     to_ind,
+    const_pointer pSourse,
+    size_type     nSymbols)
 {
     size_type nStartSymbols = size();
     if (resize(nStartSymbols + nSymbols, Traits::align()))
     {
-        std::memmove(data() + to_ind + nSymbols, data() + to_ind, (nStartSymbols - to_ind) * sizeof(value_type));
+        std::memmove(
+            data() + to_ind + nSymbols,
+            data() + to_ind,
+            (nStartSymbols - to_ind) * sizeof(value_type));
+
         std::memcpy(data() + to_ind, pSourse, nSymbols * sizeof(value_type));
     }
+}
+
+//==============================================================================
+//!\fn                    basic_string<Traits>::insert
+//
+//!\brief  Insert substring
+//!\param  to_first   - target string inserting iterator
+//!\param  from_first - source string first iterator
+//!\param  from_last  - source string last iterator
+//!\author Khrapov
+//!\date   13.11.2020
+//==============================================================================
+template<class Traits>
+inline void basic_string<Traits>::insert(
+    iterator       to_first,
+    const_iterator from_first,
+    const_iterator from_last)
+{
+    insert(
+        static_cast<size_type>(to_first - begin()),
+        from_first.operator->(),
+        static_cast<size_type>(from_last - from_first));
+}
+
+//==============================================================================
+//!\fn                    basic_string<Traits>::insert
+//
+//!\brief  Insert substring
+//!\param  to      - first char iterator
+//!\param  pSourse - source string
+//!\author Khrapov
+//!\date   13.11.2020
+//==============================================================================
+template<class Traits>
+inline void basic_string<Traits>::insert(iterator to, const_pointer pSourse)
+{
+    insert(
+        static_cast<size_type>(to - begin()),
+        pSourse,
+        Traits::length(pSourse));
+}
+
+//==============================================================================
+//!\fn                    basic_string<Traits>::insert
+//
+//!\brief  Insert substring
+//!\param  to       - first char index
+//!\param  pSourse  - source string
+//!\param  nSymbols - number of chars in source string
+//!\author Khrapov
+//!\date   13.11.2020
+//==============================================================================
+template<class Traits>
+inline void basic_string<Traits>::insert(
+    iterator        to,
+    const_pointer   pSourse,
+    size_type       nSymbols)
+{
+    insert(
+        static_cast<size_type>(to - begin()),
+        pSourse,
+        nSymbols);
+}
+
+//==============================================================================
+//!\fn                    basic_string<Traits>::insert
+//
+//!\brief  Insert substring
+//!\param  to      - first char index
+//!\param  pSourse - source string
+//!\author Khrapov
+//!\date   13.11.2020
+//==============================================================================
+template<class Traits>
+inline void basic_string<Traits>::insert(size_type to_ind, const_pointer pSourse)
+{
+    insert(
+        to_ind,
+        pSourse,
+        Traits::length(pSourse));
+}
+
+//==============================================================================
+//!\fn                  basic_string<Traits>::push_back
+//
+//!\brief  Insert char in the end of the string
+//!\param  ch - char
+//!\author Khrapov
+//!\date   13.11.2020
+//==============================================================================
+template<class Traits>
+inline void basic_string<Traits>::push_back(value_type ch)
+{
+    insert(size(), &ch, 1);
+}
+
+//==============================================================================
+//!\fn                  basic_string<Traits>::push_front
+//
+//!\brief  Insert char in the beginning of the string
+//!\param  ch - char
+//!\author Khrapov
+//!\date   13.11.2020
+//==============================================================================
+template<class Traits>
+inline void basic_string<Traits>::push_front(value_type ch)
+{
+    insert(0, &ch, 1);
 }
 
 //==============================================================================
@@ -334,9 +660,10 @@ inline void basic_string<Traits>::insert(size_type to_ind, const_pointer pSourse
 //!\date   30.10.2019
 //==============================================================================
 template<class Traits>
-inline typename basic_string<Traits>::size_type basic_string<Traits>::find(const_pointer pWhat,
-                                                                           size_type     indBegin,
-                                                                           size_type     indEnd) const
+inline typename basic_string<Traits>::size_type basic_string<Traits>::find(
+    const_pointer pWhat,
+    size_type     indBegin,
+    size_type     indEnd) const
 {
     size_type nSizeWhat = Traits::length(pWhat);
 
@@ -364,14 +691,15 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::find(const
 //!\param  ch       - char to find
 //!\param  indBegin - start searching index
 //!\param  indEnd   - end searching index (-1 - to the end)
-//!\retval          - substring index
+//!\retval          - substring index or npos if not found
 //!\author Khrapov
 //!\date   30.10.2019
 //==============================================================================
 template<class Traits>
-inline typename basic_string<Traits>::size_type basic_string<Traits>::find(value_type    ch,
-                                                                           size_type     indBegin,
-                                                                           size_type     indEnd) const
+inline typename basic_string<Traits>::size_type basic_string<Traits>::find(
+    value_type    ch,
+    size_type     indBegin,
+    size_type     indEnd) const
 {
     if (indEnd == npos)
         indEnd = size();
@@ -391,6 +719,26 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::find(value
 }
 
 //==============================================================================
+//!\fn                     basic_string<Traits>::find
+//
+//!\brief  Find substring
+//!\param  str      - string to find
+//!\param  indBegin - start searching index
+//!\param  indEnd   - end searching index
+//!\retval          - substring index or npos if not found
+//!\author Khrapov
+//!\date   13.11.2020
+//==============================================================================
+template<class Traits>
+inline typename basic_string<Traits>::size_type basic_string<Traits>::find(
+    const basic_string& str,
+    size_type           indBegin,
+    size_type           indEnd) const
+{
+    return find(str.data(), indBegin, indEnd);
+}
+
+//==============================================================================
 //!\fn            qx::basic_string<Traits>::substr
 //
 //!\brief  Find substring
@@ -401,7 +749,9 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::find(value
 //!\date   31.10.2019
 //==============================================================================
 template<class Traits>
-inline basic_string<Traits> basic_string<Traits>::substr(size_type begin, size_type strLen) const
+inline basic_string<Traits> basic_string<Traits>::substr(
+    size_type begin,
+    size_type strLen) const
 {
     basic_string str(data() + begin, (strLen != npos ? strLen : size() - begin));
     return std::move(str);
@@ -419,9 +769,10 @@ inline basic_string<Traits> basic_string<Traits>::substr(size_type begin, size_t
 //!\date   30.10.2019
 //==============================================================================
 template<class Traits>
-inline typename basic_string<Traits>::size_type basic_string<Traits>::find_last_of(value_type ch,
-                                                                                   size_type  pos,
-                                                                                   size_type  count) const
+inline typename basic_string<Traits>::size_type basic_string<Traits>::find_last_of(
+    value_type ch,
+    size_type  pos,
+    size_type  count) const
 {
     if (pos == npos)
         pos = size();
@@ -444,8 +795,9 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::find_last_
 //!\date   21.03.2020
 //==============================================================================
 template<class Traits>
-inline typename basic_string<Traits>::vector basic_string<Traits>::split(const_pointer pSep,
-                                                                         size_type     nSepLen) const
+inline typename basic_string<Traits>::vector basic_string<Traits>::split(
+    const_pointer pSep,
+    size_type     nSepLen) const
 {
     vector tokens;
 
@@ -473,7 +825,8 @@ inline typename basic_string<Traits>::vector basic_string<Traits>::split(const_p
 //!\date   21.03.2020
 //==============================================================================
 template<class Traits>
-inline typename basic_string<Traits>::vector basic_string<Traits>::split(const value_type sep) const
+inline typename basic_string<Traits>::vector basic_string<Traits>::split(
+    const value_type sep) const
 {
     vector tokens;
 
@@ -486,6 +839,22 @@ inline typename basic_string<Traits>::vector basic_string<Traits>::split(const v
     tokens.push_back(substr(start));
 
     return std::move(tokens);
+}
+
+//==============================================================================
+//!\fn                    basic_string<Traits>::split
+//
+//!\brief  Split string by separator
+//!\param  sep - separator string
+//!\retval     - vector of strings
+//!\author Khrapov
+//!\date   13.11.2020
+//==============================================================================
+template<class Traits>
+inline typename basic_string<Traits>::vector basic_string<Traits>::split(
+    const basic_string& sep) const
+{
+    return split(sep.data(), sep.size());
 }
 
 //==============================================================================
@@ -513,6 +882,62 @@ inline void basic_string<Traits>::apply_case(case_type ct)
 
         break;
     }
+}
+
+//==============================================================================
+//!\fn                    basic_string<Traits>::front
+//
+//!\brief  Get first char of the string
+//!\retval  - first char of the string
+//!\author Khrapov
+//!\date   13.11.2020
+//==============================================================================
+template<class Traits>
+inline typename basic_string<Traits>::value_type basic_string<Traits>::front(void) const
+{
+    return at(0);
+}
+
+//==============================================================================
+//!\fn                     basic_string<Traits>::back
+//
+//!\brief  Get last char of the string
+//!\retval  - last char of the string
+//!\author Khrapov
+//!\date   13.11.2020
+//==============================================================================
+template<class Traits>
+inline typename basic_string<Traits>::value_type basic_string<Traits>::back(void) const
+{
+    return at(size() - 1);
+}
+
+//==============================================================================
+//!\fn                    basic_string<Traits>::length
+//
+//!\brief  Get string length
+//!\retval  - string length
+//!\author Khrapov
+//!\date   13.11.2020
+//==============================================================================
+template<class Traits>
+inline typename basic_string<Traits>::size_type basic_string<Traits>::length(void) const
+{
+    return size();
+}
+
+//==============================================================================
+//!\fn                    basic_string<Traits>::c_str
+//
+//!\brief  Get pointer to string zero terminated
+//!\retval  - pointer to string zero terminated
+//!\author Khrapov
+//!\date   13.11.2020
+//==============================================================================
+template<class Traits>
+inline typename basic_string<Traits>::const_pointer basic_string<Traits>::c_str(void) const
+{
+    return data();
 }
 
 //==============================================================================
@@ -544,7 +969,9 @@ inline bool basic_string<Traits>::starts_with(value_type ch) const
 //!\date   08.10.2020
 //==============================================================================
 template<class Traits>
-inline bool basic_string<Traits>::starts_with(const_pointer pszStr, size_type nStrSize) const
+inline bool basic_string<Traits>::starts_with(
+    const_pointer pszStr,
+    size_type     nStrSize) const
 {
     if (size_type nThisSize = size(); nThisSize > 0)
     {
@@ -573,7 +1000,42 @@ template<class FwdIt>
 inline bool basic_string<Traits>::starts_with(FwdIt itBegin, FwdIt itEnd) const
 {
     auto nStrSize = std::distance(itBegin, itEnd);
-    return iter_strcmp(cbegin(), cbegin() + nStrSize, itBegin, itEnd) == 0;
+    return iter_strcmp(
+        cbegin(),
+        cbegin() + static_cast<size_type>(nStrSize),
+        itBegin,
+        itEnd) == 0;
+}
+
+//==============================================================================
+//!\fn                 basic_string<Traits>::starts_with
+//
+//!\brief  Check if current string starts with string
+//!\param  str - string to check
+//!\retval     - true if starts with string
+//!\author Khrapov
+//!\date   13.11.2020
+//==============================================================================
+template<class Traits>
+inline bool basic_string<Traits>::starts_with(const basic_string& str) const
+{
+    return starts_with(str.data(), str.size());
+}
+
+//==============================================================================
+//!\fn            basic_string<Traits>::starts_with<String, >
+//
+//!\brief  Check if current string starts with string
+//!\param  str - string container to check
+//!\retval     - true if starts with string
+//!\author Khrapov
+//!\date   13.11.2020
+//==============================================================================
+template<class Traits>
+template<class String, class>
+inline bool basic_string<Traits>::starts_with(const String& str) const
+{
+    return starts_with(str.cbegin(), str.cend());
 }
 
 //==============================================================================
@@ -606,7 +1068,9 @@ inline bool basic_string<Traits>::ends_with(value_type ch) const
 //!\date   08.10.2020
 //==============================================================================
 template<class Traits>
-inline bool basic_string<Traits>::ends_with(const_pointer pszStr, size_type nStrSize) const
+inline bool basic_string<Traits>::ends_with(
+    const_pointer pszStr,
+    size_type     nStrSize) const
 {
 
     if (size_type nThisSize = size(); nThisSize > 0)
@@ -636,9 +1100,43 @@ template<class FwdIt>
 inline bool basic_string<Traits>::ends_with(FwdIt itBegin, FwdIt itEnd) const
 {
     auto nStrSize = std::distance(itBegin, itEnd);
-    return iter_strcmp(cend() - nStrSize, cend(), itBegin, itEnd) == 0;
+    return iter_strcmp(
+        cend() - static_cast<size_type>(nStrSize),
+        cend(),
+        itBegin,
+        itEnd) == 0;
 }
 
+//==============================================================================
+//!\fn                  basic_string<Traits>::ends_with
+//
+//!\brief  Check if current string ends with string
+//!\param  str - string to check
+//!\retval     - true if starts with string
+//!\author Khrapov
+//!\date   13.11.2020
+//==============================================================================
+template<class Traits>
+inline bool basic_string<Traits>::ends_with(const basic_string& str) const
+{
+    return ends_with(str.data(), str.size());
+}
+
+//==============================================================================
+//!\fn             basic_string<Traits>::ends_with<String, >
+//
+//!\brief  Check if current string ends with string
+//!\param  str - string container to check
+//!\retval     - true if starts with string
+//!\author Khrapov
+//!\date   13.11.2020
+//==============================================================================
+template<class Traits>
+template<class String, class>
+inline bool basic_string<Traits>::ends_with(const String& str) const
+{
+    return ends_with(str.cbegin(), str.cend());
+}
 
 //==============================================================================
 //!\fn                  qx::basic_string<Traits>::to<To>
@@ -745,11 +1243,129 @@ inline void basic_string<Traits>::from(const From& data, const_pointer pszFormat
 //==============================================================================
 template<class Traits>
 template<typename From>
-inline basic_string<Traits> basic_string<Traits>::sfrom(const From& data, const_pointer pszFormat)
+inline basic_string<Traits> basic_string<Traits>::sfrom(
+    const From&   data,
+    const_pointer pszFormat)
 {
     basic_string str;
     str.from(data, pszFormat);
     return std::move(str);
+}
+
+template<class Traits>
+inline const basic_string<Traits>& basic_string<Traits>::operator=(basic_string&& str) noexcept
+{
+    assign(std::move(str));
+    return *this;
+}
+template<class Traits>
+inline const basic_string<Traits>& basic_string<Traits>::operator=(const basic_string& str)
+{
+    assign(str);
+    return *this;
+}
+template<class Traits>
+inline const basic_string<Traits>& basic_string<Traits>::operator=(value_type ch)
+{
+    assign(ch);
+    return *this;
+}
+template<class Traits>
+inline const basic_string<Traits>& basic_string<Traits>::operator=(const_pointer pSource)
+{
+    assign(pSource);
+    return *this;
+}
+template<class Traits>
+template<class String, class>
+inline const basic_string<Traits>& basic_string<Traits>::operator=(const String& str)
+{
+    assign(str);
+    return *this;
+}
+template<class Traits>
+inline const basic_string<Traits>& basic_string<Traits>::operator+=(const basic_string& str)
+{
+    append(str.data(), str.size());
+    return *this;
+}
+template<class Traits>
+inline const basic_string<Traits>& basic_string<Traits>::operator+=(value_type ch)
+{
+    append(&ch, 1);
+    return *this;
+}
+template<class Traits>
+inline const basic_string<Traits>& basic_string<Traits>::operator+=(const_pointer pSource)
+{
+    append(pSource, Traits::length(pSource));
+    return *this;
+}
+template<class Traits>
+template<class String, class>
+inline const basic_string<Traits>& basic_string<Traits>::operator+=(const String& str)
+{
+    append(str.cbegin(), str.cend());
+    return *this;
+}
+template<class Traits>
+inline bool basic_string<Traits>::operator==(const basic_string& str) const
+{
+    return !compare(str.data());
+}
+template<class Traits>
+inline bool basic_string<Traits>::operator==(value_type ch) const
+{
+    return !compare(&ch, 1);
+}
+template<class Traits>
+inline bool basic_string<Traits>::operator==(const_pointer pSource) const
+{
+    return !compare(pSource);
+}
+template<class Traits>
+template<class String, class>
+inline bool basic_string<Traits>::operator==(const String& str) const
+{
+    return iter_strcmp(cbegin(), cend(), str.cbegin(), str.cend()) == 0;
+}
+template<class Traits>
+inline bool basic_string<Traits>::operator!=(const basic_string& str) const
+{
+    return !operator==(str);
+}
+template<class Traits>
+inline bool basic_string<Traits>::operator!=(value_type ch) const
+{
+    return !operator==(ch);
+}
+template<class Traits>
+inline bool basic_string<Traits>::operator!=(const_pointer pSource) const
+{
+    return !operator==(pSource);
+}
+template<class Traits>
+template<class String, class>
+inline bool basic_string<Traits>::operator!=(const String& str) const
+{
+    return !operator==(str);
+}
+template<class Traits>
+inline typename basic_string<Traits>::reference basic_string<Traits>::operator[](size_type ind)
+{
+    return at(ind);
+}
+template<class Traits>
+inline typename basic_string<Traits>::const_reference basic_string<Traits>::operator[](size_type ind) const
+{
+    return at(ind);
+}
+template<class Traits>
+inline basic_string<Traits>::operator std::basic_string_view<
+    typename basic_string<Traits>::value_type,
+    std::char_traits<typename basic_string<Traits>::value_type>>() const noexcept
+{
+    return std::basic_string_view<value_type, std::char_traits<value_type>>(data(), size());
 }
 
 //==============================================================================
@@ -896,7 +1512,10 @@ inline typename basic_string<Traits>::pointer basic_string<Traits>::data(void)
 //!\date   29.10.2019
 //==============================================================================
 template<class Traits>
-inline bool basic_string<Traits>::resize(size_type nSymbols, size_type nAlign, string_resize_type eType)
+inline bool basic_string<Traits>::resize(
+    size_type           nSymbols,
+    size_type           nAlign,
+    string_resize_type  eType)
 {
     bool bRet = m_Data.resize(nSymbols, nAlign, eType);
 

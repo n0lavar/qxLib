@@ -20,7 +20,6 @@
 #include <random>
 #include <array>
 #include <limits>
-#include <gtest/gtest.h>
 
 
 #undef INT_MAX

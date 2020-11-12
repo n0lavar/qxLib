@@ -18,7 +18,6 @@
 
 #include <qx/containers/container.h>
 #include <qx/useful_macros.h>
-#include <gtest/gtest.h>
 
 
 //--------------------------------- qx::between --------------------------------

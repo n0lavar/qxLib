@@ -19,7 +19,6 @@
 #include <qx/rtti.h>
 #include <qx/useful_macros.h>
 #include <memory>
-#include <gtest/gtest.h>
 
 
 #define IS_CONSTEXPR(a) static_assert((a) || !(a));

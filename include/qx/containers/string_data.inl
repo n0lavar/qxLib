@@ -92,7 +92,7 @@ bool string_data<Traits>::resize(size_type nSymbols, size_type nAlign, string_re
         }
         else
         {
-            size_type nStartSize;
+            size_type nStartSize = 0;
             if (bSmallAtStart)
             {
                 buff = m_Buffer;

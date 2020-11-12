@@ -36,7 +36,16 @@ function(set_qxlib_target_options _target)
     elseif (${CMAKE_CXX_COMPILER_ID} STREQUAL MSVC)
     
         target_compile_options(${_target} PRIVATE
-            /EHsc
+            /EHsc /Wall /WX
+            /wd4514 # 'function' : unreferenced inline function has been removed
+            /wd5045 # Compiler will insert Spectre mitigation for memory load if /Qspectre switch specified
+            /wd4820 # 'bytes' bytes padding added after construct 'member_name'
+            /wd4625 # 'type': move assignment operator was implicitly defined as deleted
+            /wd4626 # 'derived class' : assignment operator was implicitly defined as deleted because a base class assignment operator is inaccessible or deleted
+            /wd5026 # 'type': move constructor was implicitly defined as deleted
+            /wd5027 # 'type': move assignment operator was implicitly defined as deleted
+            /wd4061 # enumerator 'identifier' in switch of enum 'enumeration' is not explicitly handled by a case label
+            
             $<$<CONFIG:Debug>:/MTd /Od /Ob0 /Zi /RTC1 /DDEBUG /D_DEBUG /bigobj>
             $<$<CONFIG:Release>:/MT /O2 /Ob2 /DNDEBUG>
             $<$<CONFIG:RelWithDebInfo>:/MT>

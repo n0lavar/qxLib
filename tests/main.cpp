@@ -13,7 +13,11 @@
 
 //V_EXCLUDE_PATH *main.cpp
 
+#include <qx/suppress_warnings.h>
+
+QX_PUSH_SUPPRESS_ALL_WARNINGS
 #include <gtest/gtest.h>
+QX_POP_SUPPRESS_WARNINGS
 
 int main(int argc, char** argv)
 {

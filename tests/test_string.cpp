@@ -18,7 +18,6 @@
 
 #include <qx/containers/string.h>
 #include <unordered_map>
-#include <gtest/gtest.h>
 
 template<typename Char>
 inline constexpr auto get_string_format_specifier(void)
@@ -63,7 +62,7 @@ TYPED_TEST_SUITE(TestQxString, Implementations);
 
 TYPED_TEST(TestQxString, class_size)
 {
-    QX_STATIC_ASSERT_EQ(sizeof(StringType), 64);
+    QX_STATIC_ASSERT_EQ(sizeof(StringType), 64u);
 }
 
 TYPED_TEST(TestQxString, construct)
@@ -559,7 +558,7 @@ TYPED_TEST(TestQxString, erase_all_of)
     EXPECT_STREQ(str3.data(), STR("bbbd"));
 
     StringTypeTn str4(STR("aaaaabbbcccccd"));
-    std::array toErase { CH('c'), CH('a') };
+    std::array<ValueType, 2> toErase { CH('c'), CH('a') };
     str4.erase_all_of(toErase.begin(), toErase.end());
     EXPECT_EQ(str4.size(), 4);
     EXPECT_STREQ(str4.data(), STR("bbbd"));

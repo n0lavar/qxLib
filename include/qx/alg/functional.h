@@ -15,8 +15,10 @@
 #include <qx/useful_macros.h>
 #include <qx/assert.h>
 
+QX_PUSH_SUPPRESS_ALL_WARNINGS
 #include <glm/glm.hpp>
 #include <glm/gtc/epsilon.hpp>
+QX_POP_SUPPRESS_WARNINGS
 
 #include <random>
 #include <ctime>
@@ -37,7 +39,7 @@ using function2d = std::function<double(double)>;
 //!\author Khrapov
 //!\date   10.11.2019
 //==============================================================================
-inline double linear_interpolation(glm::dvec2 p0, glm::dvec2 p1, double x)
+inline double linear_interpolation(const glm::dvec2& p0, const glm::dvec2& p1, double x)
 {
     QX_ASSERT_MSG(glm::epsilonNotEqual(p1.x, p0.x, DBL_EPSILON), "two x are equal, result is nan");
     return p0.y + (p1.y - p0.y) * (x - p0.x) / (p1.x - p0.x);
@@ -57,7 +59,12 @@ inline double linear_interpolation(glm::dvec2 p0, glm::dvec2 p1, double x)
 //!\author Khrapov
 //!\date   10.11.2019
 //==============================================================================
-inline double bilinear_inletpolation(glm::dvec3 p0, glm::dvec3 p1, glm::dvec3 p2, glm::dvec3 p3, glm::dvec2 p)
+inline double bilinear_inletpolation(
+    const glm::dvec3& p0,
+    const glm::dvec3& p1,
+    const glm::dvec3& p2,
+    const glm::dvec3& p3,
+    const glm::dvec2& p)
 {
     QX_ASSERT_MSG(glm::epsilonEqual(p0.y, p1.y, DBL_EPSILON), "points must be as square");
     QX_ASSERT_MSG(glm::epsilonEqual(p2.y, p3.y, DBL_EPSILON), "points must be as square");
@@ -154,7 +161,6 @@ inline double integrate_adaptive_midpoint(const function2d& func,
 {
     size_t num_intervals = static_cast<size_t>(std::ceil(static_cast<double>(num_intervals_per_1) * (x1 - x0)));
     double dx = (x1 - x0) / static_cast<double>(num_intervals);
-    double total = 0.0;
     double total_area = 0.0;
     double x = x0;
 

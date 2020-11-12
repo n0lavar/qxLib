@@ -17,7 +17,6 @@
 #if QX_TEST_THREAD_WORKER
 
 #include <qx/thread_worker.h>
-#include <gtest/gtest.h>
 #include <memory>
 #include <cmath>
 
@@ -97,7 +96,7 @@ protected:
         EXPECT_EQ(m_pWorker->thread_get_state(), pi_worker::thread_state::inactive);
 
         if (!m_bTerminated)
-            EXPECT_FLOAT_EQ(m_fCurrentPi, PI_RESULT);
+            EXPECT_DOUBLE_EQ(m_fCurrentPi, PI_RESULT);
     }
 
 protected:

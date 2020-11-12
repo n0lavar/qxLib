@@ -49,7 +49,7 @@ public:
 
     double last(void)
     {
-        return m_LastDuration.count() / 1e9;
+        return static_cast<double>(m_LastDuration.count()) / 1e9;
     }
 
 private:

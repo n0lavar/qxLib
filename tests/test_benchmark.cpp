@@ -18,7 +18,6 @@
 
 #include <thread>
 #include <cmath>
-#include <gtest/gtest.h>
 #include <qx/benchmark.h>
 
 TEST(benchmark, benchmark)

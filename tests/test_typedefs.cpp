@@ -29,9 +29,4 @@ static_assert(sizeof(i16) == 2);
 static_assert(sizeof(i32) == 4);
 static_assert(sizeof(i64) == 8);
 
-QX_STATIC_ASSERT_EQ(static_cast<u8>(UINT_EMPTY_VALUE),  std::numeric_limits<u8>::max());
-QX_STATIC_ASSERT_EQ(static_cast<u16>(UINT_EMPTY_VALUE), std::numeric_limits<u16>::max());
-QX_STATIC_ASSERT_EQ(static_cast<u32>(UINT_EMPTY_VALUE), std::numeric_limits<u32>::max());
-QX_STATIC_ASSERT_EQ(static_cast<u64>(UINT_EMPTY_VALUE), std::numeric_limits<u64>::max());
-
 #endif

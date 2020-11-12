@@ -16,7 +16,6 @@
 
 #if QX_TEST_NUMERICAL
 
-#include <gtest/gtest.h>
 #include <qx/alg/numerical.h>
 #include <qx/useful_macros.h>
 

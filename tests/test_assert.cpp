@@ -19,8 +19,9 @@
 #define QX_ENABLE_ASSERTS 1
 #define QX_ENABLE_DEBUG_BREAK 1
 
-#include <gtest/gtest.h>
 #include <qx/assert.h>
+
+QX_PUSH_SUPPRESS_MSVC_WARNINGS(4702)
 
 void Foo()
 {
@@ -134,5 +135,7 @@ TEST(qx_assert, assert_not_impl_macro)
         Foo();
     }
 }
+
+QX_POP_SUPPRESS_WARNINGS
 
 #endif

@@ -15,6 +15,7 @@
 #include <qx/meta/constexpr_funcs.h>
 #include <qx/typedefs.h>
 #include <qx/config.h>
+#include <qx/suppress_warnings.h>
 
 #include <initializer_list>
 #include <algorithm>
@@ -36,15 +37,13 @@ namespace qx
 //!\date   3.11.2019
 //==============================================================================
 template<typename T, typename Compare = std::less_equal<>>
-inline constexpr bool between(T left, T value, T right, Compare compare = Compare())
+inline constexpr bool between(T left, T value, T right, Compare compare)
 {
-#if QX_WIN
     // trick to determine if an integer is between two integers (inclusive)
     // with only one comparison/branch
     // https://stackoverflow.com/a/17095534/8021662
-    #pragma warning(push, 0)
-    #pragma warning(disable: 4018)
-#endif
+    QX_PUSH_SUPPRESS_MSVC_WARNINGS(4018 4388)
+
     if constexpr (std::is_enum_v<T>)
     {
         i64 l = static_cast<i64>(left);
@@ -54,11 +53,8 @@ inline constexpr bool between(T left, T value, T right, Compare compare = Compar
     }
     else if constexpr (std::is_integral_v<T> && std::is_same_v<Compare, std::less_equal<>>)
     {
-        return compare(static_cast<std::size_t>(value - left), (right - left));
+        return compare(static_cast<size_t>(value - left), (right - left));
     }
-#if QX_WIN
-    #pragma warning(pop)
-#endif
     else if constexpr (std::is_floating_point_v<T> && std::is_same_v<Compare, std::less_equal<>>)
     {
         return (left  < value || qx::meta::epsilon_equal(left,  value))
@@ -68,6 +64,16 @@ inline constexpr bool between(T left, T value, T right, Compare compare = Compar
     {
         return compare(left, value) && compare(value, right);
     }
+
+    QX_POP_SUPPRESS_WARNINGS
+}
+// overloading for disabling 4388 warning with Compare instantiation
+template<typename T, typename Compare = std::less_equal<>>
+inline constexpr bool between(T left, T value, T right)
+{
+    QX_PUSH_SUPPRESS_MSVC_WARNINGS(4388)
+    return between(left, value, right, Compare());
+    QX_POP_SUPPRESS_WARNINGS
 }
 
 //==============================================================================
