@@ -233,7 +233,7 @@ protected:
 
 private:
 
-    using trace_unit_info_map = std::unordered_map<u32, runtime_unit_info>;
+    using trace_unit_info_map = std::unordered_map<string_hash, runtime_unit_info>;
 
     static void format_line        (string            & sMsg,
                                     string            & sFormat,

@@ -100,8 +100,7 @@ inline void logger::register_unit(std::string_view svUnitName, const unit_info& 
             std::ofstream ofs(unit.sLogFileName.data(), std::ofstream::out | std::ofstream::trunc); //-V808
                                                                                                     // clear file
 
-        u32 nHash = murmur_32_hash(svUnitName.data(), svUnitName.size());
-        m_RegisteredUnits.emplace(nHash, unit);
+        m_RegisteredUnits.emplace(string_hash(svUnitName), unit);
     }
 }
 
@@ -115,8 +114,7 @@ inline void logger::register_unit(std::string_view svUnitName, const unit_info& 
 //==============================================================================
 inline void logger::deregister_unit(std::string_view svUnitName)
 {
-    u32 nHash = murmur_32_hash(svUnitName.data(), svUnitName.size());
-    m_RegisteredUnits.erase(nHash);
+    m_RegisteredUnits.erase(svUnitName);
 }
 
 //================================================================================
@@ -256,8 +254,7 @@ inline logger::runtime_unit_info* logger::get_unit_info(
 {
     auto find_unit = [this](std::string_view svUnit)
     {
-        u32 nHash = murmur_32_hash(svUnit.data(), svUnit.size());
-        return m_RegisteredUnits.find(nHash);
+        return m_RegisteredUnits.find(svUnit);
     };
 
     runtime_unit_info* pUnitInfo = nullptr;

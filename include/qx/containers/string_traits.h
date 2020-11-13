@@ -51,6 +51,10 @@ struct char_traits<char>
     {
         return 48;
     }
+    static constexpr u32 hash_seed(void)
+    {
+        return 5712564;
+    }
     static bool is_space(value_type ch)
     {
         return std::isspace(static_cast<int>(ch)) != 0;
@@ -118,6 +122,10 @@ struct char_traits<wchar_t>
 #else
         return 12;
 #endif
+    }
+    static constexpr u32 hash_seed(void)
+    {
+        return 985214;
     }
     static bool is_space(value_type ch)
     {

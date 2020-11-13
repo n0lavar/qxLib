@@ -55,7 +55,7 @@ public:                                                                         
                                                                                                             \
     static std::optional<e> s_from_string(const char* value)                                                \
     {                                                                                                       \
-        static const std::unordered_map<qx::string, e> string_to_enum = fill_string_to_enum();              \
+        static const std::unordered_map<qx::string_hash, e> string_to_enum = fill_string_to_enum();         \
         auto   it  = string_to_enum.find(qx::string(value));                                                \
         return it != string_to_enum.end()                                                                   \
             ? std::optional<e>(it->second)                                                                  \
@@ -98,15 +98,15 @@ private:                                                                        
                                                                                                             \
     e m_eValue = e::none;                                                                                   \
                                                                                                             \
-    static std::unordered_map<qx::string, e> fill_string_to_enum()                                          \
+    static std::unordered_map<qx::string_hash, e> fill_string_to_enum()                                     \
     {                                                                                                       \
         std::vector<e> args;                                                                                \
         for (int i = static_cast<int>(e::first); i < static_cast<int>(e::last); i++)                        \
             args.push_back(static_cast<e>(i));                                                              \
                                                                                                             \
-        std::unordered_map<qx::string, e> m;                                                                \
+        std::unordered_map<qx::string_hash, e> m;                                                           \
         for (size_t i = 0; i < args.size(); i++)                                                            \
-            m[s_to_string(args[i])] = args[i];                                                              \
+            m[qx::string_hash(s_to_string(args[i]))] = args[i];                                             \
                                                                                                             \
         return std::move(m);                                                                                \
     };                                                                                                      \

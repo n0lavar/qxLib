@@ -13,7 +13,7 @@
 #pragma once
 
 #include <qx/containers/container.h>
-#include <qx/containers/string_traits.h>
+#include <qx/containers/string_hash.h>
 #include <qx/containers/string_data.h>
 #include <qx/meta/constexpr_random.h>
 #include <qx/type_traits.h>
