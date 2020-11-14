@@ -104,7 +104,7 @@ script:
   - mkdir build
   - cd build
   - cmake -DGENERATE_TESTS=1 .. -DCMAKE_BUILD_TYPE=$BUILD_CONFIGURATION
-  - cmake --build .
+  - cmake --build . -j $(nproc)
   
   # run tests
   - ctest --output-on-failure -j $(nproc)

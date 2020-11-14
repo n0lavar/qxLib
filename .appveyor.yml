@@ -38,5 +38,5 @@ build_script:
   - mkdir build
   - cd build
   - cmake -DGENERATE_TESTS=1 .. %CMAKE_CONFIGURE_FLAGS%
-  - cmake --build . %CMAKE_BUILD_FLAGS%
-  - ctest --output-on-failure
+  - cmake --build . %CMAKE_BUILD_FLAGS% -j %NUMBER_OF_PROCESSORS%
+  - ctest --output-on-failure -j %NUMBER_OF_PROCESSORS%
