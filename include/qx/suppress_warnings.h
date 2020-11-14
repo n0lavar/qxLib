@@ -2,7 +2,7 @@
 //
 //!\file                       suppress_warnings.h
 //
-//!\brief
+//!\brief       Supress warnings macros
 //!\details     ~
 //
 //!\author      Khrapov

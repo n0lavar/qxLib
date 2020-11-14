@@ -2,7 +2,7 @@
 //
 //!\file                     test_smart_enum.cpp
 //
-//!\brief       Tests for SMART_ENUM macro
+//!\brief       Tests for QX_SMART_ENUM macro
 //!\details     ~
 //
 //!\author      Khrapov
@@ -19,7 +19,7 @@
 #include <qx/smart_enum.h>
 
 
-SMART_ENUM(colors_header, -3,
+QX_SMART_ENUM(colors_header, -3,
     red,
     black,
     green,
@@ -38,38 +38,38 @@ TEST(TestQxSmartEnum, test)
 
     // from_string
     {
-        auto optional = colors_header::s_from_string("red");
-        EXPECT_TRUE(optional.has_value());
-        EXPECT_EQ(optional.value(), colors_header::red);
+        auto val = colors_header::s_from_string("red");
+        EXPECT_TRUE(val != colors_header::none);
+        EXPECT_EQ(val, colors_header::red);
     }
 
     {
-        auto optional = colors_header::s_from_string("black");
-        EXPECT_TRUE(optional.has_value());
-        EXPECT_EQ(optional.value(), colors_header::black);
+        auto val = colors_header::s_from_string("black");
+        EXPECT_TRUE(val != colors_header::none);
+        EXPECT_EQ(val, colors_header::black);
     }
 
     {
-        auto optional = colors_header::s_from_string("green");
-        EXPECT_TRUE(optional.has_value());
-        EXPECT_EQ(optional.value(), colors_header::green);
+        auto val = colors_header::s_from_string("green");
+        EXPECT_TRUE(val != colors_header::none);
+        EXPECT_EQ(val, colors_header::green);
     }
 
     {
-        auto optional = colors_header::s_from_string("white");
-        EXPECT_TRUE(optional.has_value());
-        EXPECT_EQ(optional.value(), colors_header::white);
+        auto val = colors_header::s_from_string("white");
+        EXPECT_TRUE(val != colors_header::none);
+        EXPECT_EQ(val, colors_header::white);
     }
 
     {
-        auto optional = colors_header::s_from_string("yellow");
-        EXPECT_TRUE(optional.has_value());
-        EXPECT_EQ(optional.value(), colors_header::yellow);
+        auto val = colors_header::s_from_string("yellow");
+        EXPECT_TRUE(val != colors_header::none);
+        EXPECT_EQ(val, colors_header::yellow);
     }
 
     {
-        auto optional = colors_header::s_from_string("trash");
-        EXPECT_FALSE(optional.has_value());
+        auto val = colors_header::s_from_string("trash");
+        EXPECT_FALSE(val != colors_header::none);
     }
 
     colors_header color = colors_header::black;
