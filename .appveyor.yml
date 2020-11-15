@@ -28,8 +28,8 @@ build_script:
   - cd googletest
   - mkdir build
   - cd build
-  - cmake .. %CMAKE_CONFIGURE_FLAGS%
-  - cmake --build . %CMAKE_BUILD_FLAGS%
+  - cmake ..
+  - cmake --build . -j %NUMBER_OF_PROCESSORS%
   - cd ..
   - cd ..
   
@@ -37,6 +37,6 @@ build_script:
   - cd qxLib
   - mkdir build
   - cd build
-  - cmake -DGENERATE_TESTS=1 .. %CMAKE_CONFIGURE_FLAGS%
-  - cmake --build . %CMAKE_BUILD_FLAGS% -j %NUMBER_OF_PROCESSORS%
+  - cmake -DGENERATE_TESTS=1 ..
+  - cmake --build . -j %NUMBER_OF_PROCESSORS%
   - ctest --output-on-failure -j %NUMBER_OF_PROCESSORS%
