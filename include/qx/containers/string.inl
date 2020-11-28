@@ -358,17 +358,17 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::reserve(si
     return capacity();
 }
 //==============================================================================
-//!\fn                 qx::basic_string<Traits>::fit
+//!\fn            qx::basic_string<Traits>::shrink_to_fit
 //
 //!\brief  Fit allocated size to string's actual size
 //!\author Khrapov
 //!\date   29.10.2019
 //==============================================================================
 template<class Traits>
-inline void basic_string<Traits>::fit(void)
+inline void basic_string<Traits>::shrink_to_fit(void)
 {
     if (!m_Data.is_small() && capacity() > size())
-        resize(size(), 0, string_resize_type::fit);
+        resize(size(), 0, string_resize_type::shrink_to_fit);
 }
 
 //==============================================================================
@@ -1252,6 +1252,8 @@ inline basic_string<Traits> basic_string<Traits>::sfrom(
     return std::move(str);
 }
 
+//---------------------------------- operator= ---------------------------------
+
 template<class Traits>
 inline const basic_string<Traits>& basic_string<Traits>::operator=(basic_string&& str) noexcept
 {
@@ -1283,6 +1285,9 @@ inline const basic_string<Traits>& basic_string<Traits>::operator=(const String&
     assign(str);
     return *this;
 }
+
+//--------------------------------- operator+= ---------------------------------
+
 template<class Traits>
 inline const basic_string<Traits>& basic_string<Traits>::operator+=(const basic_string& str)
 {
@@ -1308,58 +1313,166 @@ inline const basic_string<Traits>& basic_string<Traits>::operator+=(const String
     append(str.cbegin(), str.cend());
     return *this;
 }
+
+//--------------------------------- operator== ---------------------------------
+
 template<class Traits>
-inline bool basic_string<Traits>::operator==(const basic_string& str) const
+inline bool basic_string<Traits>::operator==(const basic_string& str) const noexcept
 {
-    return !compare(str.data());
+    return compare(str.data()) == 0;
 }
 template<class Traits>
-inline bool basic_string<Traits>::operator==(value_type ch) const
+inline bool basic_string<Traits>::operator==(value_type ch) const noexcept
 {
-    return !compare(&ch, 1);
+    return compare(&ch, 1) == 0;
 }
 template<class Traits>
-inline bool basic_string<Traits>::operator==(const_pointer pSource) const
+inline bool basic_string<Traits>::operator==(const_pointer pSource) const noexcept
 {
-    return !compare(pSource);
+    return compare(pSource) == 0;
 }
 template<class Traits>
 template<class String, class>
-inline bool basic_string<Traits>::operator==(const String& str) const
+inline bool basic_string<Traits>::operator==(const String& str) const noexcept
 {
     return iter_strcmp(cbegin(), cend(), str.cbegin(), str.cend()) == 0;
 }
+
+//--------------------------------- operator!= ---------------------------------
+
 template<class Traits>
-inline bool basic_string<Traits>::operator!=(const basic_string& str) const
+inline bool basic_string<Traits>::operator!=(const basic_string& str) const noexcept
 {
-    return !operator==(str);
+    return compare(str.data()) != 0;
 }
 template<class Traits>
-inline bool basic_string<Traits>::operator!=(value_type ch) const
+inline bool basic_string<Traits>::operator!=(value_type ch) const noexcept
 {
-    return !operator==(ch);
+    return compare(&ch, 1) != 0;
 }
 template<class Traits>
-inline bool basic_string<Traits>::operator!=(const_pointer pSource) const
+inline bool basic_string<Traits>::operator!=(const_pointer pSource) const noexcept
 {
-    return !operator==(pSource);
+    return compare(pSource) != 0;
 }
 template<class Traits>
 template<class String, class>
-inline bool basic_string<Traits>::operator!=(const String& str) const
+inline bool basic_string<Traits>::operator!=(const String& str) const noexcept
 {
-    return !operator==(str);
+    return iter_strcmp(cbegin(), cend(), str.cbegin(), str.cend()) != 0;
+}
+
+//---------------------------------- operator< ---------------------------------
+
+template<class Traits>
+inline bool basic_string<Traits>::operator<(const basic_string& str) const noexcept
+{
+    return compare(str.data()) < 0;
 }
 template<class Traits>
-inline typename basic_string<Traits>::reference basic_string<Traits>::operator[](size_type ind)
+inline bool basic_string<Traits>::operator<(value_type ch) const noexcept
+{
+    return compare(&ch, 1) < 0;
+}
+template<class Traits>
+inline bool basic_string<Traits>::operator<(const_pointer pSource) const noexcept
+{
+    return compare(pSource) < 0;
+}
+template<class Traits>
+template<class String, class>
+inline bool basic_string<Traits>::operator<(const String& str) const noexcept
+{
+    return iter_strcmp(cbegin(), cend(), str.cbegin(), str.cend()) < 0;
+}
+
+//--------------------------------- operator<= ---------------------------------
+
+template<class Traits>
+inline bool basic_string<Traits>::operator<=(const basic_string& str) const noexcept
+{
+    return compare(str.data()) <= 0;
+}
+template<class Traits>
+inline bool basic_string<Traits>::operator<=(value_type ch) const noexcept
+{
+    return compare(&ch, 1) <= 0;
+}
+template<class Traits>
+inline bool basic_string<Traits>::operator<=(const_pointer pSource) const noexcept
+{
+    return compare(pSource) <= 0;
+}
+template<class Traits>
+template<class String, class>
+inline bool basic_string<Traits>::operator<=(const String& str) const noexcept
+{
+    return iter_strcmp(cbegin(), cend(), str.cbegin(), str.cend()) <= 0;
+}
+
+//---------------------------------- operator> ---------------------------------
+
+template<class Traits>
+inline bool basic_string<Traits>::operator>(const basic_string& str) const noexcept
+{
+    return compare(str.data()) > 0;
+}
+template<class Traits>
+inline bool basic_string<Traits>::operator>(value_type ch) const noexcept
+{
+    return compare(&ch, 1) > 0;
+}
+template<class Traits>
+inline bool basic_string<Traits>::operator>(const_pointer pSource) const noexcept
+{
+    return compare(pSource) > 0;
+}
+template<class Traits>
+template<class String, class>
+inline bool basic_string<Traits>::operator>(const String& str) const noexcept
+{
+    return iter_strcmp(cbegin(), cend(), str.cbegin(), str.cend()) > 0;
+}
+
+//--------------------------------- operator>= ---------------------------------
+
+template<class Traits>
+inline bool basic_string<Traits>::operator>=(const basic_string& str) const noexcept
+{
+    return compare(str.data()) >= 0;
+}
+template<class Traits>
+inline bool basic_string<Traits>::operator>=(value_type ch) const noexcept
+{
+    return compare(&ch, 1) >= 0;
+}
+template<class Traits>
+inline bool basic_string<Traits>::operator>=(const_pointer pSource) const noexcept
+{
+    return compare(pSource) >= 0;
+}
+template<class Traits>
+template<class String, class>
+inline bool basic_string<Traits>::operator>=(const String& str) const noexcept
+{
+    return iter_strcmp(cbegin(), cend(), str.cbegin(), str.cend()) >= 0;
+}
+
+//--------------------------------- operator[] ---------------------------------
+
+template<class Traits>
+inline typename basic_string<Traits>::reference basic_string<Traits>::operator[](size_type ind) noexcept
 {
     return at(ind);
 }
 template<class Traits>
-inline typename basic_string<Traits>::const_reference basic_string<Traits>::operator[](size_type ind) const
+inline typename basic_string<Traits>::const_reference basic_string<Traits>::operator[](size_type ind) const noexcept
 {
     return at(ind);
 }
+
+//----------------------- operator std::basic_string_view ----------------------
+
 template<class Traits>
 inline basic_string<Traits>::operator std::basic_string_view<
     typename basic_string<Traits>::value_type,
@@ -1626,7 +1739,7 @@ template<class Traits>
 qx::detail::istream<Traits>& operator>>(qx::detail::istream<Traits>& is, qx::basic_string<Traits>& str)
 {
     typename qx::detail::istream<Traits>::iostate ret_bit = qx::detail::istream<Traits>::goodbit;
-    auto TryPushBack = [&str, &is, &ret_bit](typename qx::basic_string<Traits>::value_type ch) -> bool
+    auto try_push_back = [&str, &is, &ret_bit](typename qx::basic_string<Traits>::value_type ch) -> bool
     {
         typename qx::basic_string<Traits>::size_type nCurrentSize = str.size();
         if (str.resize(nCurrentSize + 1, Traits::align()))
@@ -1650,7 +1763,7 @@ qx::detail::istream<Traits>& operator>>(qx::detail::istream<Traits>& is, qx::bas
     {
         if (!Traits::is_space(ch))
         {
-            TryPushBack(ch);
+            try_push_back(ch);
             break;
         }
     }
@@ -1660,7 +1773,7 @@ qx::detail::istream<Traits>& operator>>(qx::detail::istream<Traits>& is, qx::bas
     {
         if (!Traits::is_space(ch))
         {
-            if (!TryPushBack(ch))
+            if (!try_push_back(ch))
                 break;
         }
         else

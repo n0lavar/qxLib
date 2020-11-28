@@ -339,7 +339,7 @@ TYPED_TEST(TestQxString, size)
     typename TypeParam::size_type nNewCapacity = str0.reserve(10);
     EXPECT_EQ(nNewCapacity, nCapacity);
 
-    str0.fit();
+    str0.shrink_to_fit();
     EXPECT_EQ(str0.size(), 58);
     EXPECT_EQ(str0.size() + 1, str0.capacity());
     EXPECT_TRUE(str0.capacity() < nNewCapacity);
@@ -765,6 +765,90 @@ TYPED_TEST(TestQxString, operator_not_equal)
     EXPECT_TRUE(str2 != STR("word1"));
 }
 
+TYPED_TEST(TestQxString, operator_less)
+{
+    StringTypeTn str(STR("5"));
+
+    EXPECT_FALSE(str < StringTypeTn(STR("4")));
+    EXPECT_FALSE(str < StringTypeTn(STR("5")));
+    EXPECT_TRUE(str < StringTypeTn(STR("6")));
+
+    EXPECT_FALSE(str < CH('4'));
+    EXPECT_FALSE(str < CH('5'));
+    EXPECT_TRUE(str < CH('6'));
+
+    EXPECT_FALSE(str < STR("4"));
+    EXPECT_FALSE(str < STR("5"));
+    EXPECT_TRUE(str < STR("6"));
+
+    EXPECT_FALSE(str < StdStringArg(STR("4")));
+    EXPECT_FALSE(str < StdStringArg(STR("5")));
+    EXPECT_TRUE(str < StdStringArg(STR("6")));
+}
+
+TYPED_TEST(TestQxString, operator_less_equal)
+{
+    StringTypeTn str(STR("5"));
+
+    EXPECT_FALSE(str <= StringTypeTn(STR("4")));
+    EXPECT_TRUE(str <= StringTypeTn(STR("5")));
+    EXPECT_TRUE(str <= StringTypeTn(STR("6")));
+
+    EXPECT_FALSE(str <= CH('4'));
+    EXPECT_TRUE(str <= CH('5'));
+    EXPECT_TRUE(str <= CH('6'));
+
+    EXPECT_FALSE(str <= STR("4"));
+    EXPECT_TRUE(str <= STR("5"));
+    EXPECT_TRUE(str <= STR("6"));
+
+    EXPECT_FALSE(str <= StdStringArg(STR("4")));
+    EXPECT_TRUE(str <= StdStringArg(STR("5")));
+    EXPECT_TRUE(str <= StdStringArg(STR("6")));
+}
+
+TYPED_TEST(TestQxString, operator_greater)
+{
+    StringTypeTn str(STR("5"));
+
+    EXPECT_TRUE(str > StringTypeTn(STR("4")));
+    EXPECT_FALSE(str > StringTypeTn(STR("5")));
+    EXPECT_FALSE(str > StringTypeTn(STR("6")));
+
+    EXPECT_TRUE(str > CH('4'));
+    EXPECT_FALSE(str > CH('5'));
+    EXPECT_FALSE(str > CH('6'));
+
+    EXPECT_TRUE(str > STR("4"));
+    EXPECT_FALSE(str > STR("5"));
+    EXPECT_FALSE(str > STR("6"));
+
+    EXPECT_TRUE(str > StdStringArg(STR("4")));
+    EXPECT_FALSE(str > StdStringArg(STR("5")));
+    EXPECT_FALSE(str > StdStringArg(STR("6")));
+}
+
+TYPED_TEST(TestQxString, operator_greater_equal)
+{
+    StringTypeTn str(STR("5"));
+
+    EXPECT_TRUE(str >= StringTypeTn(STR("4")));
+    EXPECT_TRUE(str >= StringTypeTn(STR("5")));
+    EXPECT_FALSE(str >= StringTypeTn(STR("6")));
+
+    EXPECT_TRUE(str >= CH('4'));
+    EXPECT_TRUE(str >= CH('5'));
+    EXPECT_FALSE(str >= CH('6'));
+
+    EXPECT_TRUE(str >= STR("4"));
+    EXPECT_TRUE(str >= STR("5"));
+    EXPECT_FALSE(str >= STR("6"));
+
+    EXPECT_TRUE(str >= StdStringArg(STR("4")));
+    EXPECT_TRUE(str >= StdStringArg(STR("5")));
+    EXPECT_FALSE(str >= StdStringArg(STR("6")));
+}
+
 TYPED_TEST(TestQxString, operator_braces)
 {
     StringTypeTn str = STR("Hello world");
@@ -1178,7 +1262,7 @@ TYPED_TEST(TestQxString, small_string_optimization)
         EXPECT_EQ(str.capacity() % TypeParam::small_string_size(), 0);
         EXPECT_STREQ(str.data(), pszSmallString1);
 
-        str.fit();
+        str.shrink_to_fit();
         EXPECT_EQ(str.size(), nSmallStrSize1);
         EXPECT_EQ(str.capacity(), TypeParam::small_string_size());
         EXPECT_STREQ(str.data(), pszSmallString1);

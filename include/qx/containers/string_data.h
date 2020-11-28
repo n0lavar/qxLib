@@ -21,7 +21,7 @@ enum class string_resize_type
 {
     common,
     reserve,
-    fit
+    shrink_to_fit
 };
 
 //==============================================================================

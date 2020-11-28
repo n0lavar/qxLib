@@ -148,7 +148,7 @@ public:
     size_type               capacity     (void)                                     const;
 
     size_type               reserve      (size_type              nCapacity);
-    void                    fit          (void);
+    void                    shrink_to_fit(void);
     void                    free         (void);
 
     void                    erase        (iterator               first,
@@ -242,7 +242,7 @@ public:
     static  basic_string    sfrom        (const From&            data,
                                           const_pointer          pszFormat = nullptr);
 
-    const   basic_string &  operator=    (basic_string        && str)                       noexcept;
+    const   basic_string &  operator=    (basic_string        && str)                     noexcept;
     const   basic_string &  operator=    (const basic_string   & str);
     const   basic_string &  operator=    (value_type             ch);
     const   basic_string &  operator=    (const_pointer          pSource);
@@ -255,22 +255,46 @@ public:
     template<class String, class = typename std::enable_if_t<std::is_class_v<String>>>
     const   basic_string &  operator+=   (const String         & str);
 
-    bool                    operator==   (const basic_string   & str)               const;
-    bool                    operator==   (value_type             ch)                const;
-    bool                    operator==   (const_pointer          pSource)           const;
+    bool                    operator==   (const basic_string   & str)               const noexcept;
+    bool                    operator==   (value_type             ch)                const noexcept;
+    bool                    operator==   (const_pointer          pSource)           const noexcept;
     template<class String, class = typename std::enable_if_t<std::is_class_v<String>>>
-    bool                    operator==   (const String         & str)               const;
+    bool                    operator==   (const String         & str)               const noexcept;
 
-    bool                    operator!=   (const basic_string   & str)               const;
-    bool                    operator!=   (value_type             ch)                const;
-    bool                    operator!=   (const_pointer          pSource)           const;
+    bool                    operator!=   (const basic_string   & str)               const noexcept;
+    bool                    operator!=   (value_type             ch)                const noexcept;
+    bool                    operator!=   (const_pointer          pSource)           const noexcept;
     template<class String, class = typename std::enable_if_t<std::is_class_v<String>>>
-    bool                    operator!=   (const String         & str)               const;
+    bool                    operator!=   (const String         & str)               const noexcept;
 
-    reference               operator[]   (size_type              ind);
-    const_reference         operator[]   (size_type              ind)               const;
+    bool                    operator<    (const basic_string   & str)               const noexcept;
+    bool                    operator<    (value_type             ch)                const noexcept;
+    bool                    operator<    (const_pointer          pSource)           const noexcept;
+    template<class String, class = typename std::enable_if_t<std::is_class_v<String>>>
+    bool                    operator<    (const String         & str)               const noexcept;
 
-    operator std::basic_string_view<value_type, std::char_traits<value_type>>()     const   noexcept;
+    bool                    operator<=   (const basic_string   & str)               const noexcept;
+    bool                    operator<=   (value_type             ch)                const noexcept;
+    bool                    operator<=   (const_pointer          pSource)           const noexcept;
+    template<class String, class = typename std::enable_if_t<std::is_class_v<String>>>
+    bool                    operator<=   (const String         & str)               const noexcept;
+
+    bool                    operator>    (const basic_string   & str)               const noexcept;
+    bool                    operator>    (value_type             ch)                const noexcept;
+    bool                    operator>    (const_pointer          pSource)           const noexcept;
+    template<class String, class = typename std::enable_if_t<std::is_class_v<String>>>
+    bool                    operator>    (const String         & str)               const noexcept;
+
+    bool                    operator>=   (const basic_string   & str)               const noexcept;
+    bool                    operator>=   (value_type             ch)                const noexcept;
+    bool                    operator>=   (const_pointer          pSource)           const noexcept;
+    template<class String, class = typename std::enable_if_t<std::is_class_v<String>>>
+    bool                    operator>=   (const String         & str)               const noexcept;
+
+    reference               operator[]   (size_type              ind)                     noexcept;
+    const_reference         operator[]   (size_type              ind)               const noexcept;
+
+    operator std::basic_string_view<value_type, std::char_traits<value_type>>()     const noexcept;
 
 private:
 
