@@ -69,7 +69,7 @@ inline bool shader_program::Link(void)
     {
         GLchar infoLog[512];
         glGetProgramInfoLog(m_nProgram, 512, NULL, infoLog);
-        QX_ASSERT_MSG(0, "Shader linking failed: %s", infoLog);
+        QX_ASSERT_MSG(0, "Shader linking failed: \n%s", infoLog);
     }
 
     return bSuccess;
