@@ -45,7 +45,7 @@ public:
 
     template <typename Duration>
     void            set_check_period    (Duration               duration);
-
+    void            flush               (void);
     void            process_output      (logger::level          eLogLevel,
                                          const char           * pszFormat,
                                          const char           * pszAssertExpression,
@@ -66,6 +66,8 @@ private:
             void    process_file        (void);
 
 private:
+
+    std::atomic_flag                    m_bFlushing;
 
     std::unique_ptr<logger>             m_pLogger;
     std::chrono::milliseconds           m_CheckPeriod = std::chrono::milliseconds(500);

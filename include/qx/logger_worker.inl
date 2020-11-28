@@ -30,7 +30,7 @@ inline logger_worker::logger_worker(std::unique_ptr<logger> pLogger)
 }
 
 //==============================================================================
-//!\fn                   logger_worker::~logger_worker
+//!\fn                 qx::logger_worker::~logger_worker
 //
 //!\brief  logger_worker object destructor
 //!\author Khrapov
@@ -56,6 +56,23 @@ template<typename Duration>
 inline void logger_worker::set_check_period(Duration duration)
 {
     m_CheckPeriod = std::chrono::duration_cast<std::chrono::milliseconds>(duration);
+}
+
+//==============================================================================
+//!\fn                      qx::logger_worker::flush
+//
+//!\brief  Flush logs
+//!\author Khrapov
+//!\date   22.11.2020
+//==============================================================================
+inline void qx::logger_worker::flush(void)
+{
+    if (!m_bFlushing.test_and_set())
+    {
+        process_console();
+        process_file();
+        m_bFlushing.clear();
+    }
 }
 
 //==============================================================================
@@ -167,8 +184,7 @@ inline void logger_worker::thread_run(void)
     while (!thread_is_terminating())
     {
         auto StartTime = std::chrono::steady_clock::now();
-        process_console();
-        process_file();
+        flush();
         std::this_thread::sleep_until(StartTime + m_CheckPeriod);
     }
 }
