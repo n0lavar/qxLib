@@ -32,7 +32,7 @@ namespace qx
 //!\date    10.09.2020
 //==============================================================================
 template<typename Char>
-inline constexpr u32 murmur_32_hash(const Char* key, size_t len, u32 seed = 42)
+constexpr u32 murmur_32_hash(const Char* key, size_t len, u32 seed = 42)
 {
     u32 h = seed;
     if (len > 3)
@@ -110,7 +110,7 @@ inline constexpr u32 murmur_32_hash(const Char* key, size_t len, u32 seed = 42)
 //!\date   23.10.2020
 //==============================================================================
 template<class FwdIt1, class FwdIt2>
-inline int iter_strcmp(FwdIt1 itBegin1, FwdIt1 itEnd1, FwdIt2 itBegin2, FwdIt2 itEnd2)
+constexpr int iter_strcmp(FwdIt1 itBegin1, FwdIt1 itEnd1, FwdIt2 itBegin2, FwdIt2 itEnd2)
 {
     int nRet = 0;
 

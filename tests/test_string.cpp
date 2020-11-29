@@ -447,24 +447,29 @@ TYPED_TEST(TestQxString, insert)
 TYPED_TEST(TestQxString, find)
 {
     StringTypeTn str(STR("for string for words and for searching"));
-    auto test = [str] (auto toSearch)
+
+    auto test = [str] (auto... toSearch)
     {
-        typename TypeParam::size_type pos0 = str.find(toSearch);
+        typename TypeParam::size_type pos0 = str.find(toSearch...);
         EXPECT_EQ(pos0, 0);
 
-        typename TypeParam::size_type pos1 = str.find(toSearch, 15);
+        typename TypeParam::size_type pos1 = str.find(toSearch..., 15);
         EXPECT_EQ(pos1, 25);
 
-        typename TypeParam::size_type pos2 = str.find(toSearch, 4, 14);
+        typename TypeParam::size_type pos2 = str.find(toSearch..., 4, 14);
         EXPECT_EQ(pos2, 11);
 
-        typename TypeParam::size_type pos3 = str.find(toSearch, 30);
+        typename TypeParam::size_type pos3 = str.find(toSearch..., 30);
         EXPECT_EQ(pos3, StringType::npos);
     };
 
     test(STR("for"));
     test(StringTypeTn(STR("for")));
     test(CH('f'));
+
+    auto sStdStr = StdString(STR("for"));
+    test(sStdStr);
+    test(sStdStr.cbegin(), sStdStr.cend());
 }
 
 TYPED_TEST(TestQxString, substr)
@@ -1117,6 +1122,30 @@ TYPED_TEST(TestQxString, starts_with)
     EXPECT_FALSE(str.starts_with(StringTypeTn(STR(" 0123456789"))));
     EXPECT_FALSE(str.starts_with(StringTypeTn(STR("11"))));
     EXPECT_FALSE(str.starts_with(StringTypeTn(STR("trash"))));
+}
+
+TYPED_TEST(TestQxString, contains)
+{
+    StringTypeTn str(STR("for string for words and for searching"));
+
+
+    EXPECT_TRUE(str.contains(STR("for")));
+    EXPECT_TRUE(str.contains(StringTypeTn(STR("for"))));
+    EXPECT_TRUE(str.contains(CH('f')));
+
+    auto sStdStr1 = StdString(STR("for"));
+    EXPECT_TRUE(str.contains(sStdStr1));
+    EXPECT_TRUE(str.contains(sStdStr1.cbegin(), sStdStr1.cend()));
+
+
+    EXPECT_FALSE(str.contains(STR("lel")));
+    EXPECT_FALSE(str.contains(StringTypeTn(STR("lel"))));
+    EXPECT_FALSE(str.contains(CH('l')));
+
+    auto sStdStr2 = StdString(STR("lel"));
+    EXPECT_FALSE(str.contains(sStdStr2));
+    EXPECT_FALSE(str.contains(sStdStr2.cbegin(), sStdStr2.cend()));
+
 }
 
 TYPED_TEST(TestQxString, operator_stream_out)

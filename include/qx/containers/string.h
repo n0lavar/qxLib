@@ -192,6 +192,15 @@ public:
     size_type               find         (const basic_string   & str,
                                           size_type              indBegin   = 0,
                                           size_type              indEnd     = npos) const;
+    template<class FwdIt>
+    size_type               find         (FwdIt                  itWhatBegin,
+                                          FwdIt                  itWhatEnd,
+                                          size_type              indBegin   = 0,
+                                          size_type              indEnd     = npos) const;
+    template<class String, class = typename std::enable_if_t<std::is_class_v<String>>>
+    size_type               find         (String                 sWhat,
+                                          size_type              indBegin   = 0,
+                                          size_type              indEnd     = npos) const;
 
     basic_string            substr       (size_type              begin,
                                           size_type              strLen     = npos) const;
@@ -231,6 +240,16 @@ public:
     bool                    ends_with    (const basic_string   & str)               const;
     template<class String, class = typename std::enable_if_t<std::is_class_v<String>>>
     bool                    ends_with    (const String         & str)               const;
+
+    bool                    contains     (value_type             ch)                const;
+    bool                    contains     (const_pointer          pszStr,
+                                          size_type              nStrSize   = npos) const;
+    template<class FwdIt>
+    bool                    contains     (FwdIt                  itBegin,
+                                          FwdIt                  itEnd)             const;
+    bool                    contains     (const basic_string   & str)               const;
+    template<class String, class = typename std::enable_if_t<std::is_class_v<String>>>
+    bool                    contains     (const String         & str)               const;
 
     template<typename To>
     std::optional<To>       to           (void)                                     const;

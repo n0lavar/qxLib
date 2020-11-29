@@ -739,6 +739,73 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::find(
 }
 
 //==============================================================================
+//!\fn                 basic_string<Traits>::find<FwdIt>
+//
+//!\brief  Find substring
+//!\param  itWhatBegin - substring begin iterator
+//!\param  itWhatEnd   - substring end iterator
+//!\param  indBegin    - start searching index
+//!\param  indEnd      - end searching index
+//!\retval             - substring index or npos if not found
+//!\author Khrapov
+//!\date   30.11.2020
+//==============================================================================
+template<class Traits>
+template<class FwdIt>
+inline typename basic_string<Traits>::size_type basic_string<Traits>::find(
+    FwdIt       itWhatBegin,
+    FwdIt       itWhatEnd,
+    size_type   indBegin,
+    size_type   indEnd) const
+{
+    if (indEnd == npos)
+        indEnd = size();
+
+    const_pointer pStart = data();
+    const_pointer pCurrentChar = pStart + indBegin;
+    const_pointer pEnd = pStart + indEnd;
+
+    do
+    {
+        if (!iter_strcmp(
+            const_iterator(this, static_cast<size_type>(pCurrentChar - pStart)),
+            const_iterator(this, static_cast<size_type>(pEnd - pStart)),
+            itWhatBegin,
+            itWhatEnd))
+        {
+            return static_cast<size_type>(pCurrentChar - pStart);
+        }
+        else
+        {
+            pCurrentChar = step_to(pCurrentChar, pEnd);
+        }
+    } while (pCurrentChar != pEnd);
+
+    return npos;
+}
+
+//==============================================================================
+//!\fn                basic_string<Traits>::find<String, >
+//
+//!\brief
+//!\param  sWhat    - substring
+//!\param  indBegin - start searching index
+//!\param  indEnd   - end searching index
+//!\retval          - substring index or npos if not found
+//!\author Khrapov
+//!\date   30.11.2020
+//==============================================================================
+template<class Traits>
+template<class String, class>
+inline typename basic_string<Traits>::size_type basic_string<Traits>::find(
+    String    sWhat,
+    size_type indBegin,
+    size_type indEnd) const
+{
+    return find(sWhat.cbegin(), sWhat.cend(), indBegin, indEnd);
+}
+
+//==============================================================================
 //!\fn            qx::basic_string<Traits>::substr
 //
 //!\brief  Find substring
@@ -1136,6 +1203,85 @@ template<class String, class>
 inline bool basic_string<Traits>::ends_with(const String& str) const
 {
     return ends_with(str.cbegin(), str.cend());
+}
+
+//==============================================================================
+//!\fn                   basic_string<Traits>::contains
+//
+//!\brief  Check if string contains char. Equal to find != npos
+//!\param  ch - char to check
+//!\retval    - true if this string contains substring, otherwise false
+//!\author Khrapov
+//!\date   30.11.2020
+//==============================================================================
+template<class Traits>
+inline bool basic_string<Traits>::contains(value_type ch) const
+{
+    return find(ch) != npos;
+}
+
+//==============================================================================
+//!\fn                   basic_string<Traits>::contains
+//
+//!\brief  Check if string contains substring. Equal to find != npos
+//!\param  pszStr   - substring to check
+//!\param  nStrSize - substring size
+//!\retval          - true if this string contains substring, otherwise false
+//!\author Khrapov
+//!\date   30.11.2020
+//==============================================================================
+template<class Traits>
+inline bool basic_string<Traits>::contains(const_pointer pszStr, size_type nStrSize) const
+{
+    return find(pszStr, nStrSize) != npos;
+}
+
+//==============================================================================
+//!\fn                   basic_string<Traits>::contains
+//
+//!\brief  Check if string contains substring. Equal to find != npos
+//!\param  str - string to check
+//!\retval     - true if this string contains substring, otherwise false
+//!\author Khrapov
+//!\date   30.11.2020
+//==============================================================================
+template<class Traits>
+inline bool basic_string<Traits>::contains(const basic_string& str) const
+{
+    return find(str) != npos;
+}
+
+//==============================================================================
+//!\fn               basic_string<Traits>::contains<FwdIt>
+//
+//!\brief  Check if string contains substring. Equal to find != npos
+//!\param  itBegin - substring begin iterator
+//!\param  itEnd   - substring end iterator
+//!\retval         - true if this string contains substring, otherwise false
+//!\author Khrapov
+//!\date   30.11.2020
+//==============================================================================
+template<class Traits>
+template<class FwdIt>
+inline bool basic_string<Traits>::contains(FwdIt itBegin, FwdIt itEnd) const
+{
+    return find(itBegin, itEnd) != npos;
+}
+
+//==============================================================================
+//!\fn              basic_string<Traits>::contains<String, >
+//
+//!\brief  Check if string contains substring. Equal to find != npos
+//!\param  str - string to check
+//!\retval     - true if this string contains substring, otherwise false
+//!\author Khrapov
+//!\date   30.11.2020
+//==============================================================================
+template<class Traits>
+template<class String, class>
+inline bool basic_string<Traits>::contains(const String& str) const
+{
+    return find(str) != npos;
 }
 
 //==============================================================================
