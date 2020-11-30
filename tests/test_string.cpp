@@ -509,7 +509,6 @@ TYPED_TEST(TestQxString, find_last_of)
 TYPED_TEST(TestQxString, split)
 {
     StringTypeTn str1(STR("many different words placed here"));
-    StringTypeTn str2(STR("some, long, long, long, long, long, sentence"));
 
     auto words1 = str1.split(CH(' '));
     EXPECT_EQ(words1.size(), 5);
@@ -519,52 +518,43 @@ TYPED_TEST(TestQxString, split)
     EXPECT_STREQ(words1[3].data(), STR("placed"));
     EXPECT_STREQ(words1[4].data(), STR("here"));
 
-    auto words2 = str2.split(STR(", "));
-    EXPECT_EQ(words2.size(), 7);
-    EXPECT_STREQ(words2[0].data(), STR("some"));
-    EXPECT_STREQ(words2[1].data(), STR("long"));
-    EXPECT_STREQ(words2[2].data(), STR("long"));
-    EXPECT_STREQ(words2[3].data(), STR("long"));
-    EXPECT_STREQ(words2[4].data(), STR("long"));
-    EXPECT_STREQ(words2[5].data(), STR("long"));
-    EXPECT_STREQ(words2[6].data(), STR("sentence"));
+    auto check_comma_split = [](auto... splitter)
+    {
+        StringTypeTn str(STR("some, long, long, long, long, long, sentence"));
+        auto words = str.split(splitter...);
+        EXPECT_EQ(words.size(), 7);
+        EXPECT_STREQ(words[0].data(), STR("some"));
+        EXPECT_STREQ(words[1].data(), STR("long"));
+        EXPECT_STREQ(words[2].data(), STR("long"));
+        EXPECT_STREQ(words[3].data(), STR("long"));
+        EXPECT_STREQ(words[4].data(), STR("long"));
+        EXPECT_STREQ(words[5].data(), STR("long"));
+        EXPECT_STREQ(words[6].data(), STR("sentence"));
+    };
 
-    auto words3 = str2.split(StringTypeTn(STR(", ")));
-    EXPECT_EQ(words3.size(), 7);
-    EXPECT_STREQ(words3[0].data(), STR("some"));
-    EXPECT_STREQ(words3[1].data(), STR("long"));
-    EXPECT_STREQ(words3[2].data(), STR("long"));
-    EXPECT_STREQ(words3[3].data(), STR("long"));
-    EXPECT_STREQ(words3[4].data(), STR("long"));
-    EXPECT_STREQ(words3[5].data(), STR("long"));
-    EXPECT_STREQ(words3[6].data(), STR("sentence"));
+    check_comma_split(STR(", "));
+    check_comma_split(StringTypeTn(STR(", ")));
+
+    auto sStdString = StdString(STR(", "));
+    check_comma_split(sStdString.cbegin(), sStdString.cend());
+    check_comma_split(sStdString);
 }
 
 TYPED_TEST(TestQxString, erase_all_of)
 {
-    StringTypeTn str0(STR("multi\nline\nstring"));
-    str0.erase_line_breaks();
-    EXPECT_EQ(str0.size(), 15);
-    EXPECT_STREQ(str0.data(), STR("multilinestring"));
-
-    StringTypeTn str1(STR("multi\n\rline\n\rstring"));
-    str1.erase_line_breaks();
-    EXPECT_EQ(str1.size(), 15);
-    EXPECT_STREQ(str1.data(), STR("multilinestring"));
-
     StringTypeTn str2(STR("aaaaabbbcccccd"));
-    str2.erase_all_of(CH('c'));
+    str2.remove_all_of(CH('c'));
     EXPECT_EQ(str2.size(), 9);
     EXPECT_STREQ(str2.data(), STR("aaaaabbbd"));
 
     StringTypeTn str3(STR("aaaaabbbcccccd"));
-    str3.erase_all_of(CH('c'), CH('a'));
+    str3.remove_all_of(CH('c'), CH('a'));
     EXPECT_EQ(str3.size(), 4);
     EXPECT_STREQ(str3.data(), STR("bbbd"));
 
     StringTypeTn str4(STR("aaaaabbbcccccd"));
     std::array<ValueType, 2> toErase { CH('c'), CH('a') };
-    str4.erase_all_of(toErase.begin(), toErase.end());
+    str4.remove_all_of(toErase.begin(), toErase.end());
     EXPECT_EQ(str4.size(), 4);
     EXPECT_STREQ(str4.data(), STR("bbbd"));
 }

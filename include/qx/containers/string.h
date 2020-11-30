@@ -107,32 +107,32 @@ public:
 public:
 
                             basic_string (void) = default;
-                            basic_string (const_pointer          pSource,
-                                          size_type              nSymbols);
-                            basic_string (basic_string        && str)                       noexcept;
-                            basic_string (const basic_string   & str);
-                            basic_string (value_type             ch);
-                            basic_string (const_pointer          pSource);
+                            basic_string (value_type             chSymbol);
                             basic_string (size_type              nSymbols,
-                                          value_type             ch);
-    template<class FwdIt>   basic_string (FwdIt                  first,
-                                          FwdIt                  last);
+                                          value_type             chSymbol);
+                            basic_string (const_pointer          pszSource,
+                                          size_type              nSymbols);
+                            basic_string (const_pointer          pszSource);
+                            basic_string (basic_string        && sAnother)                  noexcept;
+                            basic_string (const basic_string   & sAnother);
+    template<class FwdIt>   basic_string (FwdIt                  itFirst,
+                                          FwdIt                  itLast);
     template<class String, class = typename std::enable_if_t<std::is_class_v<String>>>
-                            basic_string (const String         & str);
+                            basic_string (const String         & sAnother);
 
                             ~basic_string(void);
 
-    void                    assign       (const_pointer          pSource,
-                                          size_type              nSymbols);
-    void                    assign       (basic_string        && str)                       noexcept;
-    void                    assign       (const basic_string   & str);
-    void                    assign       (value_type             ch);
-    void                    assign       (const_pointer          pSource);
+    void                    assign       (value_type             chSymbol);
     void                    assign       (size_type              nSymbols,
-                                          value_type             ch);
+                                          value_type             chSymbol);
+    void                    assign       (const_pointer          pszSource,
+                                          size_type              nSymbols);
+    void                    assign       (const_pointer          pszSource);
+    void                    assign       (basic_string        && sAnother)                  noexcept;
+    void                    assign       (const basic_string   & sAnother);
     template<class FwdIt>
-    void                    assign       (FwdIt                  first,
-                                          FwdIt                  last);
+    void                    assign       (FwdIt                  itFirst,
+                                          FwdIt                  itLast);
     template<class String, class = typename std::enable_if_t<std::is_class_v<String>>>
     void                    assign       (const String         & str);
 
@@ -140,116 +140,24 @@ public:
                                           ...);
     void                    vformat      (const_pointer          pszFormat,
                                           va_list                args);
-
     template<class ... Args>
     static basic_string     format_static(const_pointer          pszFormat,
                                           Args...                args);
-
-    size_type               capacity     (void)                                     const;
 
     size_type               reserve      (size_type              nCapacity);
     void                    shrink_to_fit(void);
     void                    free         (void);
 
-    void                    erase        (iterator               first,
-                                          iterator               last);
-    void                    erase        (iterator               it);
-    void                    erase        (size_type              pos);
-    void                    erase        (size_type              ind_first,
-                                          size_type              nSymbols);
+    basic_string            substr       (size_type              nPos,
+                                          size_type              nSymbols   = npos) const;
 
-    template<class ... Args, class = typename std::enable_if_t<are_same_v<typename Traits::value_type, Args...>>>
-    void                    erase_all_of (Args...                args);
-    template<class FwdIt, class = typename std::enable_if_t<!std::is_same_v<typename Traits::value_type, FwdIt>>>
-    void                    erase_all_of (FwdIt                  first,
-                                          FwdIt                  last);
-    void                    erase_line_breaks(void);
-
-
-    void                    insert       (size_type              to_ind,
-                                          const_pointer          pSourse,
-                                          size_type              nSymbols);
-    void                    insert       (iterator               to_first,
-                                          const_iterator         from_first,
-                                          const_iterator         from_last);
-    void                    insert       (iterator               to,
-                                          const_pointer          pSourse);
-    void                    insert       (iterator               to,
-                                          const_pointer          pSourse,
-                                          size_type              nSymbols);
-    void                    insert       (size_type              to_ind,
-                                          const_pointer          pSourse);
-
-    void                    push_back    (value_type             ch);
-    void                    push_front   (value_type             ch);
-
-    size_type               find         (const_pointer          pWhat,
-                                          size_type              indBegin   = 0,
-                                          size_type              indEnd     = npos) const;
-    size_type               find         (value_type             ch,
-                                          size_type              indBegin   = 0,
-                                          size_type              indEnd     = npos) const;
-    size_type               find         (const basic_string   & str,
-                                          size_type              indBegin   = 0,
-                                          size_type              indEnd     = npos) const;
-    template<class FwdIt>
-    size_type               find         (FwdIt                  itWhatBegin,
-                                          FwdIt                  itWhatEnd,
-                                          size_type              indBegin   = 0,
-                                          size_type              indEnd     = npos) const;
-    template<class String, class = typename std::enable_if_t<std::is_class_v<String>>>
-    size_type               find         (String                 sWhat,
-                                          size_type              indBegin   = 0,
-                                          size_type              indEnd     = npos) const;
-
-    basic_string            substr       (size_type              begin,
-                                          size_type              strLen     = npos) const;
-
-    size_type               find_last_of (value_type             ch,
-                                          size_type              pos        = npos,
-                                          size_type              count      = npos) const;
-
-    vector                  split        (const_pointer          pSep,
-                                          size_type              nSepLen    = npos) const;
-    vector                  split        (const value_type       sep)               const;
-    vector                  split        (const basic_string   & sep)               const;
-
-    void                    apply_case   (case_type              ct);
+    void                    apply_case   (case_type              eCaseType);
 
     value_type              front        (void)                                     const;
     value_type              back         (void)                                     const;
     size_type               length       (void)                                     const;
     const_pointer           c_str        (void)                                     const;
-
-    bool                    starts_with  (value_type             ch)                const;
-    bool                    starts_with  (const_pointer          pszStr,
-                                          size_type              nStrSize   = npos) const;
-    template<class FwdIt>
-    bool                    starts_with  (FwdIt                  itBegin,
-                                          FwdIt                  itEnd)             const;
-    bool                    starts_with  (const basic_string   & str)               const;
-    template<class String, class = typename std::enable_if_t<std::is_class_v<String>>>
-    bool                    starts_with  (const String         & str)               const;
-
-    bool                    ends_with    (value_type             ch)                const;
-    bool                    ends_with    (const_pointer          pszStr,
-                                          size_type              nStrSize   = npos) const;
-    template<class FwdIt>
-    bool                    ends_with    (FwdIt                  itBegin,
-                                          FwdIt                  itEnd)             const;
-    bool                    ends_with    (const basic_string   & str)               const;
-    template<class String, class = typename std::enable_if_t<std::is_class_v<String>>>
-    bool                    ends_with    (const String         & str)               const;
-
-    bool                    contains     (value_type             ch)                const;
-    bool                    contains     (const_pointer          pszStr,
-                                          size_type              nStrSize   = npos) const;
-    template<class FwdIt>
-    bool                    contains     (FwdIt                  itBegin,
-                                          FwdIt                  itEnd)             const;
-    bool                    contains     (const basic_string   & str)               const;
-    template<class String, class = typename std::enable_if_t<std::is_class_v<String>>>
-    bool                    contains     (const String         & str)               const;
+    size_type               capacity     (void)                                     const;
 
     template<typename To>
     std::optional<To>       to           (void)                                     const;
@@ -261,57 +169,146 @@ public:
     static  basic_string    sfrom        (const From&            data,
                                           const_pointer          pszFormat = nullptr);
 
-    const   basic_string &  operator=    (basic_string        && str)                     noexcept;
-    const   basic_string &  operator=    (const basic_string   & str);
-    const   basic_string &  operator=    (value_type             ch);
-    const   basic_string &  operator=    (const_pointer          pSource);
-    template<class String, class = typename std::enable_if_t<std::is_class_v<String>>>
-    const   basic_string &  operator=    (const String         & str);
+    void                    erase        (iterator               itFirst,
+                                          iterator               itLast);
+    void                    erase        (iterator               itPos);
+    void                    erase        (size_type              nPos);
+    void                    erase        (size_type              nPos,
+                                          size_type              nSymbols);
 
-    const   basic_string &  operator+=   (const basic_string   & str);
-    const   basic_string &  operator+=   (value_type             ch);
-    const   basic_string &  operator+=   (const_pointer          pSource);
-    template<class String, class = typename std::enable_if_t<std::is_class_v<String>>>
-    const   basic_string &  operator+=   (const String         & str);
+    template<class ... Args, class = typename std::enable_if_t<are_same_v<typename Traits::value_type, Args...>>>
+    void                    remove_all_of(Args...                args);
+    template<class FwdIt, class = typename std::enable_if_t<!std::is_same_v<typename Traits::value_type, FwdIt>>>
+    void                    remove_all_of(FwdIt                  itFirst,
+                                          FwdIt                  itLast);
 
-    bool                    operator==   (const basic_string   & str)               const noexcept;
-    bool                    operator==   (value_type             ch)                const noexcept;
-    bool                    operator==   (const_pointer          pSource)           const noexcept;
-    template<class String, class = typename std::enable_if_t<std::is_class_v<String>>>
-    bool                    operator==   (const String         & str)               const noexcept;
+    void                    insert       (size_type              nPos,
+                                          const_pointer          pszSourse,
+                                          size_type              nSymbols   = npos);
+    void                    insert       (iterator               itToFirst,
+                                          const_iterator         itFromFirst,
+                                          const_iterator         itFromLast);
+    void                    insert       (iterator               itPos,
+                                          const_pointer          pszSourse,
+                                          size_type              nSymbols   = npos);
 
-    bool                    operator!=   (const basic_string   & str)               const noexcept;
-    bool                    operator!=   (value_type             ch)                const noexcept;
-    bool                    operator!=   (const_pointer          pSource)           const noexcept;
-    template<class String, class = typename std::enable_if_t<std::is_class_v<String>>>
-    bool                    operator!=   (const String         & str)               const noexcept;
+    void                    push_back    (value_type             chSymbol);
+    void                    push_front   (value_type             chSymbol);
 
-    bool                    operator<    (const basic_string   & str)               const noexcept;
-    bool                    operator<    (value_type             ch)                const noexcept;
-    bool                    operator<    (const_pointer          pSource)           const noexcept;
+    size_type               find         (value_type             chSymbol,
+                                          size_type              nBegin     = 0,
+                                          size_type              nEnd       = npos) const;
+    size_type               find         (const_pointer          pszWhat,
+                                          size_type              nBegin     = 0,
+                                          size_type              nEnd       = npos) const;
+    size_type               find         (const basic_string   & sWhat,
+                                          size_type              nBegin     = 0,
+                                          size_type              nEnd       = npos) const;
+    template<class FwdIt>
+    size_type               find         (FwdIt                  itWhatBegin,
+                                          FwdIt                  itWhatEnd,
+                                          size_type              nBegin     = 0,
+                                          size_type              nEnd       = npos) const;
     template<class String, class = typename std::enable_if_t<std::is_class_v<String>>>
-    bool                    operator<    (const String         & str)               const noexcept;
+    size_type               find         (String                 sWhat,
+                                          size_type              nBegin     = 0,
+                                          size_type              nEnd       = npos) const;
 
-    bool                    operator<=   (const basic_string   & str)               const noexcept;
-    bool                    operator<=   (value_type             ch)                const noexcept;
-    bool                    operator<=   (const_pointer          pSource)           const noexcept;
+    size_type               find_last_of (value_type             chSymbol,
+                                          size_type              nPos       = npos,
+                                          size_type              nSymbols   = npos) const;
+
+    vector                  split        (const value_type       chSeparator)       const;
+    vector                  split        (const_pointer          pszSeparator,
+                                          size_type              nSepLen    = npos) const;
+    vector                  split        (const basic_string   & sSeparator)        const;
+    template<class FwdIt>
+    vector                  split        (FwdIt                  itSepFirst,
+                                          FwdIt                  itSepLast)         const;
     template<class String, class = typename std::enable_if_t<std::is_class_v<String>>>
-    bool                    operator<=   (const String         & str)               const noexcept;
+    vector                  split        (const String         & sSeparator)        const;
 
-    bool                    operator>    (const basic_string   & str)               const noexcept;
-    bool                    operator>    (value_type             ch)                const noexcept;
-    bool                    operator>    (const_pointer          pSource)           const noexcept;
+    bool                    starts_with  (value_type             chSymbol)          const;
+    bool                    starts_with  (const_pointer          pszStr,
+                                          size_type              nStrSize   = npos) const;
+    bool                    starts_with  (const basic_string   & sStr)              const;
+    template<class FwdIt>
+    bool                    starts_with  (FwdIt                  itBegin,
+                                          FwdIt                  itEnd)             const;
     template<class String, class = typename std::enable_if_t<std::is_class_v<String>>>
-    bool                    operator>    (const String         & str)               const noexcept;
+    bool                    starts_with  (const String         & sStr)              const;
 
-    bool                    operator>=   (const basic_string   & str)               const noexcept;
-    bool                    operator>=   (value_type             ch)                const noexcept;
-    bool                    operator>=   (const_pointer          pSource)           const noexcept;
+    bool                    ends_with    (value_type             chSymbol)          const;
+    bool                    ends_with    (const_pointer          pszStr,
+                                          size_type              nStrSize   = npos) const;
+    bool                    ends_with    (const basic_string   & sStr)              const;
+    template<class FwdIt>
+    bool                    ends_with    (FwdIt                  itBegin,
+                                          FwdIt                  itEnd)             const;
     template<class String, class = typename std::enable_if_t<std::is_class_v<String>>>
-    bool                    operator>=   (const String         & str)               const noexcept;
+    bool                    ends_with    (const String         & sStr)              const;
 
-    reference               operator[]   (size_type              ind)                     noexcept;
-    const_reference         operator[]   (size_type              ind)               const noexcept;
+    bool                    contains     (value_type             chSymbol)          const;
+    bool                    contains     (const_pointer          pszStr,
+                                          size_type              nStrSize   = npos) const;
+    bool                    contains     (const basic_string   & sStr)              const;
+    template<class FwdIt>
+    bool                    contains     (FwdIt                  itBegin,
+                                          FwdIt                  itEnd)             const;
+    template<class String, class = typename std::enable_if_t<std::is_class_v<String>>>
+    bool                    contains     (const String         & sStr)              const;
+
+    const   basic_string &  operator=    (value_type             chSymbol);
+    const   basic_string &  operator=    (const_pointer          pszSource);
+    const   basic_string &  operator=    (basic_string        && sStr)                    noexcept;
+    const   basic_string &  operator=    (const basic_string   & sStr);
+    template<class String, class = typename std::enable_if_t<std::is_class_v<String>>>
+    const   basic_string &  operator=    (const String         & sStr);
+
+    const   basic_string &  operator+=   (value_type             chSymbol);
+    const   basic_string &  operator+=   (const_pointer          pszSource);
+    const   basic_string &  operator+=   (const basic_string   & sStr);
+    template<class String, class = typename std::enable_if_t<std::is_class_v<String>>>
+    const   basic_string &  operator+=   (const String         & sStr);
+
+    bool                    operator==   (value_type             chSymbol)          const noexcept;
+    bool                    operator==   (const_pointer          pszSource)         const noexcept;
+    bool                    operator==   (const basic_string   & sStr)              const noexcept;
+    template<class String, class = typename std::enable_if_t<std::is_class_v<String>>>
+    bool                    operator==   (const String         & sStr)              const noexcept;
+
+    bool                    operator!=   (value_type             chSymbol)          const noexcept;
+    bool                    operator!=   (const_pointer          pszSource)         const noexcept;
+    bool                    operator!=   (const basic_string   & sStr)              const noexcept;
+    template<class String, class = typename std::enable_if_t<std::is_class_v<String>>>
+    bool                    operator!=   (const String         & sStr)              const noexcept;
+
+    bool                    operator<    (value_type             chSymbol)          const noexcept;
+    bool                    operator<    (const_pointer          pszSource)         const noexcept;
+    bool                    operator<    (const basic_string   & sStr)              const noexcept;
+    template<class String, class = typename std::enable_if_t<std::is_class_v<String>>>
+    bool                    operator<    (const String         & sStr)              const noexcept;
+
+    bool                    operator<=   (value_type             chSymbol)          const noexcept;
+    bool                    operator<=   (const_pointer          pszSource)         const noexcept;
+    bool                    operator<=   (const basic_string   & sStr)              const noexcept;
+    template<class String, class = typename std::enable_if_t<std::is_class_v<String>>>
+    bool                    operator<=   (const String         & sStr)              const noexcept;
+
+    bool                    operator>    (value_type             chSymbol)          const noexcept;
+    bool                    operator>    (const_pointer          pszSource)         const noexcept;
+    bool                    operator>    (const basic_string   & sStr)              const noexcept;
+    template<class String, class = typename std::enable_if_t<std::is_class_v<String>>>
+    bool                    operator>    (const String         & sStr)              const noexcept;
+
+    bool                    operator>=   (value_type             chSymbol)          const noexcept;
+    bool                    operator>=   (const_pointer          pszSource)         const noexcept;
+    bool                    operator>=   (const basic_string   & sStr)              const noexcept;
+    template<class String, class = typename std::enable_if_t<std::is_class_v<String>>>
+    bool                    operator>=   (const String         & sStr)              const noexcept;
+
+    reference               operator[]   (size_type              nSymbol)                 noexcept;
+    const_reference         operator[]   (size_type              nSymbol)           const noexcept;
 
     operator std::basic_string_view<value_type, std::char_traits<value_type>>()     const noexcept;
 
