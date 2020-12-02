@@ -540,7 +540,179 @@ TYPED_TEST(TestQxString, split)
     check_comma_split(sStdString);
 }
 
-TYPED_TEST(TestQxString, erase_all_of)
+TYPED_TEST(TestQxString, remove)
+{
+    constexpr auto STRING = STR("000110000222345666");
+
+    // value_type
+    {
+        StringTypeTn str = STRING;
+
+        auto ret1 = str.remove(CH('1'));
+        EXPECT_EQ(ret1, 3);
+        EXPECT_STREQ(str.data(), STR("00010000222345666"));
+
+        auto ret2 = str.remove(CH('0'));
+        EXPECT_EQ(ret2, 0);
+        EXPECT_STREQ(str.data(), STR("0010000222345666"));
+
+        auto ret4 = str.remove(CH('4'));
+        EXPECT_EQ(ret4, 11);
+        EXPECT_STREQ(str.data(), STR("001000022235666"));
+
+        auto ret5 = str.remove(CH('7'));
+        EXPECT_EQ(ret5, StringType::npos);
+        EXPECT_STREQ(str.data(), STR("001000022235666"));
+
+        auto ret6 = str.remove(CH('0'), 2);
+        EXPECT_EQ(ret6, 3);
+        EXPECT_STREQ(str.data(), STR("00100022235666"));
+
+        auto ret7 = str.remove(CH('3'), 6, 10);
+        EXPECT_EQ(ret7, 9);
+        EXPECT_STREQ(str.data(), STR("0010002225666"));
+
+        auto ret8 = str.remove(CH('0'), 6, 10);
+        EXPECT_EQ(ret8, StringType::npos);
+        EXPECT_STREQ(str.data(), STR("0010002225666"));
+    }
+
+    auto check_remove = [STRING](
+        auto& str,
+        auto expected_ret,
+        auto expected_str,
+        auto... remove_args)
+    {
+        auto ret = str.remove(remove_args...);
+        EXPECT_EQ(ret, expected_ret);
+        EXPECT_STREQ(str.data(), expected_str);
+    };
+
+    auto check_remove_type = [&check_remove, STRING](auto type_var)
+    {
+        using type = decltype(type_var);
+        StringTypeTn str = STRING;
+
+        check_remove(
+            str,
+            5,
+            STR("00011222345666"),
+            type(STR("0000")));
+
+        check_remove(
+            str,
+            9,
+            STR("0001122235666"),
+            type(STR("4")));
+
+        check_remove(
+            str,
+            StringType::npos,
+            STR("0001122235666"),
+            type(STR("7")));
+
+        check_remove(
+            str,
+            1,
+            STR("01122235666"),
+            type(STR("00")),
+            static_cast<StringType::size_type>(1));
+
+        check_remove(
+            str,
+            StringType::npos,
+            STR("01122235666"),
+            type(STR("6")),
+            static_cast<StringType::size_type>(2),
+            static_cast<StringType::size_type>(6));
+    };
+
+    check_remove_type(STRING);
+    check_remove_type(StringTypeTn());
+    check_remove_type(StdString());
+}
+
+TYPED_TEST(TestQxString, remove_all)
+{
+    constexpr auto STRING = STR("000011112222333987");
+
+    {
+        StringTypeTn str = STRING;
+        StringType::size_type nOccurrences = 0;
+
+        nOccurrences = str.remove_all('0');
+        EXPECT_EQ(nOccurrences, 4);
+        EXPECT_STREQ(str.data(), STR("11112222333987"));
+
+        nOccurrences = str.remove_all('9', 0, 5);
+        EXPECT_EQ(nOccurrences, 0);
+        EXPECT_STREQ(str.data(), STR("11112222333987"));
+
+        nOccurrences = str.remove_all('2', 5, 9);
+        EXPECT_EQ(nOccurrences, 3);
+        EXPECT_STREQ(str.data(), STR("11112333987"));
+
+        nOccurrences = str.remove_all('7', 9);
+        EXPECT_EQ(nOccurrences, 1);
+        EXPECT_STREQ(str.data(), STR("1111233398"));
+    }
+
+    auto check_remove_all = [STRING](
+        auto& str,
+        auto expected_ret,
+        auto expected_str,
+        auto... remove_args)
+    {
+        auto ret = str.remove_all(remove_args...);
+        EXPECT_EQ(ret, expected_ret);
+        EXPECT_STREQ(str.data(), expected_str);
+    };
+
+    auto check_remove_all_type = [&check_remove_all, STRING](auto type_var)
+    {
+        using type = decltype(type_var);
+        StringTypeTn str = STRING;
+
+        check_remove_all(
+            str,
+            0,
+            STR("000011112222333987"),
+            type(STR("00000")));
+
+        check_remove_all(
+            str,
+            2,
+            STR("11112222333987"),
+            type(STR("00")));
+
+        check_remove_all(
+            str,
+            4,
+            STR("2222333987"),
+            type(STR("1")));
+
+        check_remove_all(
+            str,
+            1,
+            STR("22333987"),
+            type(STR("22")),
+            static_cast<StringType::size_type>(2));
+
+        check_remove_all(
+            str,
+            0,
+            STR("22333987"),
+            type(STR("22")),
+            static_cast<StringType::size_type>(2),
+            static_cast<StringType::size_type>(5));
+    };
+
+    check_remove_all_type(STRING);
+    check_remove_all_type(StringTypeTn());
+    check_remove_all_type(StdString());
+}
+
+TYPED_TEST(TestQxString, remove_all_of)
 {
     StringTypeTn str2(STR("aaaaabbbcccccd"));
     str2.remove_all_of(CH('c'));
@@ -551,12 +723,6 @@ TYPED_TEST(TestQxString, erase_all_of)
     str3.remove_all_of(CH('c'), CH('a'));
     EXPECT_EQ(str3.size(), 4);
     EXPECT_STREQ(str3.data(), STR("bbbd"));
-
-    StringTypeTn str4(STR("aaaaabbbcccccd"));
-    std::array<ValueType, 2> toErase { CH('c'), CH('a') };
-    str4.remove_all_of(toErase.begin(), toErase.end());
-    EXPECT_EQ(str4.size(), 4);
-    EXPECT_STREQ(str4.data(), STR("bbbd"));
 }
 
 TYPED_TEST(TestQxString, apply_case)

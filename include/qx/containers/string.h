@@ -88,6 +88,7 @@ class basic_string
 
 public:
 
+    using traits_type       = Traits;
     using value_type        = typename Traits::value_type;
     using pointer           = typename Traits::pointer;
     using const_pointer     = typename Traits::const_pointer;
@@ -176,12 +177,6 @@ public:
     void                    erase        (size_type              nPos,
                                           size_type              nSymbols);
 
-    template<class ... Args, class = typename std::enable_if_t<are_same_v<typename Traits::value_type, Args...>>>
-    void                    remove_all_of(Args...                args);
-    template<class FwdIt, class = typename std::enable_if_t<!std::is_same_v<typename Traits::value_type, FwdIt>>>
-    void                    remove_all_of(FwdIt                  itFirst,
-                                          FwdIt                  itLast);
-
     void                    insert       (size_type              nPos,
                                           const_pointer          pszSourse,
                                           size_type              nSymbols   = npos);
@@ -200,7 +195,8 @@ public:
                                           size_type              nEnd       = npos) const;
     size_type               find         (const_pointer          pszWhat,
                                           size_type              nBegin     = 0,
-                                          size_type              nEnd       = npos) const;
+                                          size_type              nEnd       = npos,
+                                          size_type              nWhatSize  = npos) const;
     size_type               find         (const basic_string   & sWhat,
                                           size_type              nBegin     = 0,
                                           size_type              nEnd       = npos) const;
@@ -217,6 +213,49 @@ public:
     size_type               find_last_of (value_type             chSymbol,
                                           size_type              nPos       = npos,
                                           size_type              nSymbols   = npos) const;
+
+    size_type               remove       (value_type             chSymbol,
+                                          size_type              nBegin     = 0,
+                                          size_type              nEnd       = npos);
+    size_type               remove       (const_pointer          pszStr,
+                                          size_type              nBegin     = 0,
+                                          size_type              nEnd       = npos,
+                                          size_type              nStrSize   = npos);
+    size_type               remove       (const basic_string   & sStr,
+                                          size_type              nBegin     = 0,
+                                          size_type              nEnd       = npos);
+    template<class FwdIt>
+    size_type               remove       (FwdIt                  itBegin,
+                                          FwdIt                  itEnd,
+                                          size_type              nBegin     = 0,
+                                          size_type              nEnd       = npos);
+    template<class String, class = typename std::enable_if_t<std::is_class_v<String>>>
+    size_type               remove       (const String         & sStr,
+                                          size_type              nBegin     = 0,
+                                          size_type              nEnd       = npos);
+
+    size_type               remove_all   (value_type             chSymbol,
+                                          size_type              nBegin     = 0,
+                                          size_type              nEnd       = npos);
+    size_type               remove_all   (const_pointer          pszStr,
+                                          size_type              nBegin     = 0,
+                                          size_type              nEnd       = npos,
+                                          size_type              nStrSize   = npos);
+    size_type               remove_all   (const basic_string   & sStr,
+                                          size_type              nBegin     = 0,
+                                          size_type              nEnd       = npos);
+    template<class FwdIt>
+    size_type               remove_all   (FwdIt                  itFirst,
+                                          FwdIt                  itLast,
+                                          size_type              nBegin     = 0,
+                                          size_type              nEnd       = npos);
+    template<class String, class = typename std::enable_if_t<std::is_class_v<String>>>
+    size_type               remove_all   (const String         & sStr,
+                                          size_type              nBegin     = 0,
+                                          size_type              nEnd       = npos);
+
+    template<class ... Args>
+    void                    remove_all_of(Args...                args);
 
     vector                  split        (const value_type       chSeparator)       const;
     vector                  split        (const_pointer          pszSeparator,

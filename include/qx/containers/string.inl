@@ -374,7 +374,7 @@ inline void basic_string<Traits>::free(void)
 //==============================================================================
 //!\fn            qx::basic_string<Traits>::substr
 //
-//!\brief  Find substring
+//!\brief  Get substring
 //!\param  nPos     - start index
 //!\param  nSymbols - string size (npos - to the end)
 //!\retval          - substring
@@ -673,45 +673,6 @@ inline void basic_string<Traits>::erase(size_type nPos, size_type nSymbols)
 {
     erase(iterator(this, nPos), iterator(this, nPos + nSymbols));
 }
-//==============================================================================
-//!\fn         qx::basic_string<Traits>::remove_all_of<...Args, >
-//
-//!\brief  Remove all chars container including from string
-//!\param  ...args - symbols to remove
-//!\author Khrapov
-//!\date   22.03.2020
-//==============================================================================
-template<class Traits>
-template<class ... Args, class>
-inline void basic_string<Traits>::remove_all_of(Args... args)
-{
-    std::array<typename Traits::value_type, sizeof...(args)> to_remove { args... };
-    remove_all_of(to_remove.cbegin(), to_remove.cend());
-}
-
-//==============================================================================
-//!\fn         qx::basic_string<Traits>::remove_all_of<FwdIt, >
-//
-//!\brief  Remove all chars container including from string
-//!\param  itFirst - symbols to erase begin iterator
-//!\param  itLast  - symbols to erase end iterator
-//!\author Khrapov
-//!\date   22.03.2020
-//==============================================================================
-template<class Traits>
-template<class FwdIt, class>
-inline void basic_string<Traits>::remove_all_of(FwdIt itFirst, FwdIt itLast)
-{
-    for (auto it = begin(); it < end(); ++it)
-    {
-        auto firstSeqIt = it;
-        while (std::any_of(itFirst, itLast, [&it] (value_type ch) { return ch == *it; }))
-            ++it;
-
-        erase(firstSeqIt, it);
-        it -= static_cast<size_t>(it - firstSeqIt);
-    }
-}
 
 //==============================================================================
 //!\fn                qx::basic_string<Traits>::insert
@@ -853,11 +814,12 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::find(
 //!\fn                qx::basic_string<Traits>::find
 //
 //!\brief  Find first match
-//!\param  pszWhat - c-string to find
-//!\param  nBegin  - start searching index
-//!\param  nEnd    - end searching index (-1 - to the end).
+//!\param  pszWhat   - c-string to find
+//!\param  nBegin    - start searching index
+//!\param  nEnd      - end searching index (-1 - to the end).
+//!\param  nWhatSize - c-string length
 //         if nEnd < nBegin, seach backward
-//!\retval          - substring index
+//!\retval           - substring index
 //!\author Khrapov
 //!\date   30.10.2019
 //==============================================================================
@@ -865,9 +827,12 @@ template<class Traits>
 inline typename basic_string<Traits>::size_type basic_string<Traits>::find(
     const_pointer pszWhat,
     size_type     nBegin,
-    size_type     nEnd) const
+    size_type     nEnd,
+    size_type     nWhatSize) const
 {
-    size_type nSizeWhat = Traits::length(pszWhat);
+    size_type nLocalWhatSize = nWhatSize != npos
+        ? nWhatSize
+        : Traits::length(pszWhat);
 
     if (nEnd == npos)
         nEnd = size();
@@ -877,7 +842,7 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::find(
 
     do
     {
-        if (!Traits::compare_n(pszWhat, pCurrentChar, nSizeWhat))
+        if (!Traits::compare_n(pszWhat, pCurrentChar, nLocalWhatSize))
             return static_cast<size_type>(pCurrentChar - data());
         else
             pCurrentChar = step_to(pCurrentChar, pEnd);
@@ -903,7 +868,7 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::find(
     size_type           nBegin,
     size_type           nEnd) const
 {
-    return find(sWhat.data(), nBegin, nEnd);
+    return find(sWhat.data(), nBegin, nEnd, sWhat.size());
 }
 
 //==============================================================================
@@ -1000,6 +965,286 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::find_last_
 }
 
 //==============================================================================
+//!\fn                   qx::basic_string<Traits>::remove
+//
+//!\brief  Remove the first occurrence of a substring in a string
+//!\param  chSymbol - char to remove
+//!\param  nBegin   - start searching index
+//!\param  nEnd     - end searching index
+//!\retval          - position where the first occurrence was or npos
+//!\author Khrapov
+//!\date   02.12.2020
+//==============================================================================
+template<class Traits>
+inline typename basic_string<Traits>::size_type basic_string<Traits>::remove(
+    value_type chSymbol,
+    size_type  nBegin,
+    size_type  nEnd)
+{
+    size_type nPos = find(chSymbol, nBegin, nEnd);
+
+    if (nPos != npos)
+        erase(nPos, 1);
+
+    return nPos;
+}
+
+//==============================================================================
+//!\fn                   qx::basic_string<Traits>::remove
+//
+//!\brief  Remove the first occurrence of a substring in a string
+//!\param  pszStr - c-string to remove
+//!\param  nBegin - start searching index
+//!\param  nEnd   - end searching index
+//!\param  nEnd   - c-string size
+//!\retval        - position where the first occurrence was or npos
+//!\author Khrapov
+//!\date   02.12.2020
+//==============================================================================
+template<class Traits>
+inline typename basic_string<Traits>::size_type basic_string<Traits>::remove(
+    const_pointer pszStr,
+    size_type     nBegin,
+    size_type     nEnd,
+    size_type     nStrSize)
+{
+    size_type nLocalStrSize = nStrSize != npos
+        ? nStrSize
+        : Traits::length(pszStr);
+
+    size_type nPos = find(pszStr, nBegin, nEnd, nLocalStrSize);
+
+    if (nPos != npos)
+        erase(nPos, nLocalStrSize);
+
+    return nPos;
+}
+
+//==============================================================================
+//!\fn                   qx::basic_string<Traits>::remove
+//
+//!\brief  Remove the first occurrence of a substring in a string
+//!\param  sStr   - string to remove
+//!\param  nBegin - start searching index
+//!\param  nEnd   - end searching index
+//!\retval        - position where the first occurrence was or npos
+//!\author Khrapov
+//!\date   02.12.2020
+//==============================================================================
+template<class Traits>
+inline typename basic_string<Traits>::size_type basic_string<Traits>::remove(
+    const basic_string& sStr,
+    size_type           nBegin,
+    size_type           nEnd)
+{
+    size_type nPos = find(sStr, nBegin, nEnd);
+
+    if (nPos != npos)
+        erase(nPos, sStr.size());
+
+    return nPos;
+}
+
+//==============================================================================
+//!\fn               qx::basic_string<Traits>::remove<FwdIt>
+//
+//!\brief  Remove the first occurrence of a substring in a string
+//!\param  itBegin - string begin iterator
+//!\param  itEnd   - string end iterator
+//!\param  nBegin  - start searching index
+//!\param  nEnd    - end searching index
+//!\retval         - position where the first occurrence was or npos
+//!\author Khrapov
+//!\date   02.12.2020
+//==============================================================================
+template<class Traits>
+template<class FwdIt>
+inline typename basic_string<Traits>::size_type basic_string<Traits>::remove(
+    FwdIt     itBegin,
+    FwdIt     itEnd,
+    size_type nBegin,
+    size_type nEnd)
+{
+    size_type nPos = find(itBegin, itEnd, nBegin, nEnd);
+
+    if (nPos != npos)
+        erase(nPos, static_cast<size_type>(std::distance(itBegin, itEnd)));
+
+    return nPos;
+}
+
+//==============================================================================
+//!\fn              qx::basic_string<Traits>::remove<String, >
+//
+//!\brief  Remove the first occurrence of a substring in a string
+//!\param  sStr   - string to remove
+//!\param  nBegin - start searching index
+//!\param  nEnd   - end searching index
+//!\retval        - position where the first occurrence was or npos
+//!\author Khrapov
+//!\date   02.12.2020
+//==============================================================================
+template<class Traits>
+template<class String, class>
+inline typename basic_string<Traits>::size_type basic_string<Traits>::remove(
+    const String& sStr,
+    size_type     nBegin,
+    size_type     nEnd)
+{
+    return remove(sStr.cbegin(), sStr.cend(), nBegin, nEnd);
+}
+
+//==============================================================================
+//!\fn                   qx::basic_string<Traits>::remove
+//
+//!\brief  Remove all occurrences of a substring in a string
+//!\param  chSymbol - char to remove
+//!\param  nBegin   - start searching index
+//!\param  nEnd     - end searching index
+//!\retval          - number of deleted occurrences
+//!\author Khrapov
+//!\date   02.12.2020
+//==============================================================================
+template<class Traits>
+inline typename basic_string<Traits>::size_type basic_string<Traits>::remove_all(
+    value_type chSymbol,
+    size_type  nBegin,
+    size_type  nEnd)
+{
+    size_type nOccurrences = 0;
+    size_type nLastOccurrencePos = nBegin;
+
+    do
+    {
+        nOccurrences++;
+        nLastOccurrencePos = remove(chSymbol, nLastOccurrencePos, nEnd);
+    } while (nLastOccurrencePos != npos);
+
+    return nOccurrences - 1;
+}
+
+//==============================================================================
+//!\fn                   qx::basic_string<Traits>::remove
+//
+//!\brief  Remove all occurrences of a substring in a string
+//!\param  pszStr - c-string to remove
+//!\param  nBegin - start searching index
+//!\param  nEnd   - end searching index
+//!\param  nEnd   - c-string size
+//!\retval        - number of deleted occurrences
+//!\author Khrapov
+//!\date   02.12.2020
+//==============================================================================
+template<class Traits>
+inline typename basic_string<Traits>::size_type basic_string<Traits>::remove_all(
+    const_pointer pszStr,
+    size_type     nBegin,
+    size_type     nEnd,
+    size_type     nStrSize)
+{
+    size_type nOccurrences = 0;
+    size_type nLastOccurrencePos = nBegin;
+
+    do
+    {
+        nOccurrences++;
+        nLastOccurrencePos = remove(pszStr, nLastOccurrencePos, nEnd, nStrSize);
+    } while (nLastOccurrencePos != npos);
+
+    return nOccurrences - 1;
+}
+
+//==============================================================================
+//!\fn                   qx::basic_string<Traits>::remove
+//
+//!\brief  Remove all occurrences of a substring in a string
+//!\param  sStr   - string to remove
+//!\param  nBegin - start searching index
+//!\param  nEnd   - end searching index
+//!\retval        - number of deleted occurrences
+//!\author Khrapov
+//!\date   02.12.2020
+//==============================================================================
+template<class Traits>
+inline typename basic_string<Traits>::size_type basic_string<Traits>::remove_all(
+    const basic_string& sStr,
+    size_type           nBegin,
+    size_type           nEnd)
+{
+    return remove_all(sStr.data(), nBegin, nEnd, sStr.size());
+}
+
+//==============================================================================
+//!\fn               qx::basic_string<Traits>::remove<FwdIt>
+//
+//!\brief  Remove all occurrences of a substring in a string
+//!\param  itBegin - string begin iterator
+//!\param  itEnd   - string end iterator
+//!\param  nBegin  - start searching index
+//!\param  nEnd    - end searching index
+//!\retval         - number of deleted occurrences
+//!\author Khrapov
+//!\date   02.12.2020
+//==============================================================================
+template<class Traits>
+template<class FwdIt>
+inline typename basic_string<Traits>::size_type basic_string<Traits>::remove_all(
+    FwdIt     itFirst,
+    FwdIt     itLast,
+    size_type nBegin,
+    size_type nEnd)
+{
+    size_type nOccurrences = 0;
+    size_type nLastOccurrencePos = nBegin;
+
+    do
+    {
+        nOccurrences++;
+        nLastOccurrencePos = remove(itFirst, itLast, nLastOccurrencePos, nEnd);
+    } while (nLastOccurrencePos != npos);
+
+    return nOccurrences - 1;
+}
+
+//==============================================================================
+//!\fn              qx::basic_string<Traits>::remove<String, >
+//
+//!\brief  Remove all occurrences of a substring in a string
+//!\param  sStr   - string to remove
+//!\param  nBegin - start searching index
+//!\param  nEnd   - end searching index
+//!\retval        - number of deleted occurrences
+//!\author Khrapov
+//!\date   02.12.2020
+//==============================================================================
+template<class Traits>
+template<class String, class>
+inline typename basic_string<Traits>::size_type basic_string<Traits>::remove_all(
+    const String& sStr,
+    size_type     nBegin,
+    size_type     nEnd)
+{
+    return remove_all(sStr.cbegin(), sStr.cend(), nBegin, nEnd);
+}
+
+//==============================================================================
+//!\fn         qx::basic_string<Traits>::remove_all_of<...Args>
+//
+//!\brief  Remove all chars container including from string
+//!\param  ...args - symbols to remove
+//!\author Khrapov
+//!\date   22.03.2020
+//==============================================================================
+template<class Traits>
+template<class ... Args>
+inline void basic_string<Traits>::remove_all_of(Args... args)
+{
+    std::array<typename Traits::value_type, sizeof...(args)> to_remove { args... };
+    for (const auto& val : to_remove)
+        remove_all(val);
+}
+
+//==============================================================================
 //!\fn                 qx::basic_string<Traits>::split
 //
 //!\brief  Split string by separator
@@ -1048,7 +1293,7 @@ inline typename basic_string<Traits>::vector basic_string<Traits>::split(
 
     size_type start = 0;
     size_type end   = 0;
-    while ((end = find(pszSeparator, start)) != npos)
+    while ((end = find(pszSeparator, start, npos, nSepLen)) != npos)
     {
         tokens.push_back(substr(start, end - start));
         start = end + nSepLen;
@@ -1348,7 +1593,7 @@ inline bool basic_string<Traits>::contains(value_type chSymbol) const
 template<class Traits>
 inline bool basic_string<Traits>::contains(const_pointer pszStr, size_type nStrSize) const
 {
-    return find(pszStr, nStrSize) != npos;
+    return find(pszStr, 0, npos, nStrSize) != npos;
 }
 
 //==============================================================================
