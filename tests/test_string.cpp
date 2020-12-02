@@ -712,19 +712,6 @@ TYPED_TEST(TestQxString, remove_all)
     check_remove_all_type(StdString());
 }
 
-TYPED_TEST(TestQxString, remove_all_of)
-{
-    StringTypeTn str2(STR("aaaaabbbcccccd"));
-    str2.remove_all_of(CH('c'));
-    EXPECT_EQ(str2.size(), 9);
-    EXPECT_STREQ(str2.data(), STR("aaaaabbbd"));
-
-    StringTypeTn str3(STR("aaaaabbbcccccd"));
-    str3.remove_all_of(CH('c'), CH('a'));
-    EXPECT_EQ(str3.size(), 4);
-    EXPECT_STREQ(str3.data(), STR("bbbd"));
-}
-
 TYPED_TEST(TestQxString, apply_case)
 {
     StringTypeTn str(STR("maNy diffeRent words placEd Here. yoU can test,iT. really"));

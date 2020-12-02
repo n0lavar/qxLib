@@ -254,9 +254,6 @@ public:
                                           size_type              nBegin     = 0,
                                           size_type              nEnd       = npos);
 
-    template<class ... Args>
-    void                    remove_all_of(Args...                args);
-
     vector                  split        (const value_type       chSeparator)       const;
     vector                  split        (const_pointer          pszSeparator,
                                           size_type              nSepLen    = npos) const;

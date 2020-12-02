@@ -1228,23 +1228,6 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::remove_all
 }
 
 //==============================================================================
-//!\fn         qx::basic_string<Traits>::remove_all_of<...Args>
-//
-//!\brief  Remove all chars container including from string
-//!\param  ...args - symbols to remove
-//!\author Khrapov
-//!\date   22.03.2020
-//==============================================================================
-template<class Traits>
-template<class ... Args>
-inline void basic_string<Traits>::remove_all_of(Args... args)
-{
-    std::array<typename Traits::value_type, sizeof...(args)> to_remove { args... };
-    for (const auto& val : to_remove)
-        remove_all(val);
-}
-
-//==============================================================================
 //!\fn                 qx::basic_string<Traits>::split
 //
 //!\brief  Split string by separator
