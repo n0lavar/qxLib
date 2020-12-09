@@ -37,8 +37,33 @@ struct is_iterator<T, typename std::enable_if_t<is_detected<iterator_category, T
     static constexpr bool value = true;
 };
 
-template< class T >
+template<class T>
 constexpr bool is_iterator_v = is_iterator<T>::value;
+
+
+
+//------------------------- is_random_access_iterator_v ------------------------
+
+template<typename T, typename = void>
+struct is_random_access_iterator
+{
+    static constexpr bool value = false;
+};
+
+template<typename T>
+struct is_random_access_iterator<
+    T,
+    typename std::enable_if_t<
+        is_iterator_v<T>
+        && std::is_same_v<iterator_category<T>, std::random_access_iterator_tag>
+    >
+>
+{
+    static constexpr bool value = true;
+};
+
+template<class T>
+constexpr bool is_random_access_iterator_v = is_random_access_iterator<T>::value;
 
 
 

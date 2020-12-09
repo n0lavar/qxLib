@@ -45,6 +45,32 @@ static_assert(qx::is_iterator_v<std::forward_list<int>::iterator>);
 static_assert(qx::is_iterator_v<std::deque<int>::iterator>);
 static_assert(qx::is_iterator_v<std::vector<int>::iterator>);
 
+static_assert(!qx::is_iterator_v<int>);
+static_assert(!qx::is_iterator_v<void>);
+static_assert(!qx::is_iterator_v<std::vector<int>>);
+
+
+
+//------------------------- is_random_access_iterator_v ------------------------
+
+static_assert(!qx::is_random_access_iterator_v<std::map<int, int>::iterator>);
+static_assert(!qx::is_random_access_iterator_v<std::unordered_map<int, int>::iterator>);
+static_assert(!qx::is_random_access_iterator_v<std::multimap<int, int>::iterator>);
+static_assert(!qx::is_random_access_iterator_v<std::unordered_multimap<int, int>::iterator>);
+static_assert(!qx::is_random_access_iterator_v<std::set<int>::iterator>);
+static_assert(!qx::is_random_access_iterator_v<std::unordered_set<int>::iterator>);
+static_assert(!qx::is_random_access_iterator_v<std::multiset<int>::iterator>);
+static_assert(!qx::is_random_access_iterator_v<std::unordered_multiset<int>::iterator>);
+static_assert( qx::is_random_access_iterator_v<std::string::iterator>);
+static_assert(!qx::is_random_access_iterator_v<std::list<int>::iterator>);
+static_assert(!qx::is_random_access_iterator_v<std::forward_list<int>::iterator>);
+static_assert( qx::is_random_access_iterator_v<std::deque<int>::iterator>);
+static_assert( qx::is_random_access_iterator_v<std::vector<int>::iterator>);
+
+static_assert(!qx::is_random_access_iterator_v<int>);
+static_assert(!qx::is_random_access_iterator_v<void>);
+static_assert(!qx::is_random_access_iterator_v<std::vector<int>>);
+
 
 
 //--------------------------------- are_same ---------------------------------
