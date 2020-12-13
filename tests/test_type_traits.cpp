@@ -119,4 +119,17 @@ static_assert(qx::is_specialization_exist_v<C<int>>);
 static_assert(qx::is_specialization_exist_v<C<float>>);
 static_assert(!qx::is_specialization_exist_v<C<long>>);
 
+
+
+//---------------------------- is_specialization_of ----------------------------
+
+using vec_int   = std::vector<int>;
+using vec_float = std::vector<float>;
+
+static_assert( qx::is_specialization_of<vec_int, std::vector>());
+static_assert( qx::is_specialization_of<vec_float, std::vector>());
+static_assert(!qx::is_specialization_of<vec_int, std::list>());
+static_assert(!qx::is_specialization_of<vec_int, std::list>());
+static_assert(!qx::is_specialization_of<float, std::list>());
+
 #endif

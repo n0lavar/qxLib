@@ -115,6 +115,8 @@ struct iterator_value<T, typename std::enable_if_t<std::is_pointer_v<T>>>
 template<class T>
 using iterator_value_t = typename iterator_value<T>::type;
 
+
+
 //--------------------------- is_specialization_exist --------------------------
 
 namespace detail
@@ -131,5 +133,19 @@ using is_specialization_exist = decltype(detail::is_specialization_exist_impl(st
 
 template <class T>
 inline constexpr bool is_specialization_exist_v = is_specialization_exist<T>::value;
+
+
+
+//---------------------------- is_specialization_of ----------------------------
+
+template<typename Test, template<typename...> class Ref>
+struct is_specialization_of : std::false_type
+{
+};
+
+template<template<typename...> class Ref, typename... Args>
+struct is_specialization_of<Ref<Args...>, Ref> : std::true_type
+{
+};
 
 }
