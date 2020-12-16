@@ -678,6 +678,21 @@ inline void basic_string<Traits>::erase(size_type nPos, size_type nSymbols)
 //!\fn                qx::basic_string<Traits>::insert
 //
 //!\brief  Insert substring
+//!\param  nPos     - first char index
+//!\param  chSymbol - symbol to insert
+//!\author Khrapov
+//!\date   30.10.2019
+//==============================================================================
+template<class Traits>
+inline void basic_string<Traits>::insert(size_type nPos, value_type chSymbol)
+{
+    insert(nPos, &chSymbol, 1);
+}
+
+//==============================================================================
+//!\fn                qx::basic_string<Traits>::insert
+//
+//!\brief  Insert substring
 //!\param  nPos      - first char index
 //!\param  pszSourse - sourse string
 //!\param  nSymbols  - number of symbols to insert
@@ -691,7 +706,9 @@ inline void basic_string<Traits>::insert(
     size_type     nSymbols)
 {
     size_type nStartSymbols = size();
-    size_type nSizeSource = nSymbols == npos ? Traits::length(pszSourse) : nSymbols;
+    size_type nSizeSource = nSymbols == npos
+        ? Traits::length(pszSourse)
+        : nSymbols;
 
     if (resize(nStartSymbols + nSizeSource, Traits::align()))
     {
@@ -705,47 +722,173 @@ inline void basic_string<Traits>::insert(
 }
 
 //==============================================================================
-//!\fn                    basic_string<Traits>::insert
+//!\fn                qx::basic_string<Traits>::insert
 //
 //!\brief  Insert substring
-//!\param  itToFirst   - target string inserting iterator
-//!\param  itFromFirst - source string first iterator
-//!\param  itFromLast  - source string last iterator
+//!\param  nPos  - first char index
+//!\param  sWhat - sourse string
 //!\author Khrapov
-//!\date   13.11.2020
+//!\date   30.10.2019
 //==============================================================================
 template<class Traits>
 inline void basic_string<Traits>::insert(
-    iterator       itToFirst,
-    const_iterator itFromFirst,
-    const_iterator itFromLast)
+    size_type           nPos,
+    const basic_string& sWhat)
 {
-    insert(
-        static_cast<size_type>(itToFirst - begin()),
-        itFromFirst.operator->(),
-        static_cast<size_type>(itFromLast - itFromFirst));
+    insert(nPos, sWhat.data(), sWhat.size());
+}
+
+//==============================================================================
+//!\fn                qx::basic_string<Traits>::insert
+//
+//!\brief  Insert substring
+//!\param  nPos        - first char index
+//!\param  itWhatBegin - sourse first iterator
+//!\param  itWhatEnd   - sourse last iterator
+//!\author Khrapov
+//!\date   30.10.2019
+//==============================================================================
+template<class Traits>
+template<class FwdIt>
+inline void basic_string<Traits>::insert(
+    size_type   nPos,
+    FwdIt       itWhatBegin,
+    FwdIt       itWhatEnd)
+{
+    if constexpr (is_random_access_iterator_v<FwdIt>)
+    {
+        insert(
+            nPos,
+            itWhatBegin.operator->(),
+            static_cast<size_type>(itWhatEnd - itWhatBegin));
+    }
+    else
+    {
+        size_type nWhatSize = 0;
+        for (auto it = itWhatBegin; it != itWhatEnd; ++it)
+            nWhatSize++;
+
+        size_type nStartSymbols = size();
+        if (resize(nStartSymbols + nWhatSize, Traits::align()))
+        {
+            std::memmove(
+                data() + nPos + nWhatSize,
+                data() + nPos,
+                (nStartSymbols - nPos) * sizeof(value_type));
+
+            size_type nWhatPos = 0;
+            for (auto it = itWhatBegin; it != itWhatEnd; ++it)
+            {
+                at(nPos + nWhatPos) = *it;
+                nWhatPos++;
+            }
+        }
+    }
+}
+
+//==============================================================================
+//!\fn                qx::basic_string<Traits>::insert
+//
+//!\brief  Insert substring
+//!\param  nPos  - first char index
+//!\param  sWhat - sourse string
+//!\author Khrapov
+//!\date   30.10.2019
+//==============================================================================
+template<class Traits>
+template<class String, class>
+inline void basic_string<Traits>::insert(size_type nPos, String sWhat)
+{
+    insert(static_cast<size_type>(nPos), sWhat.cbegin(), sWhat.cend());
+}
+
+//==============================================================================
+//!\fn                qx::basic_string<Traits>::insert
+//
+//!\brief  Insert substring
+//!\param  itPos    - first char iterator
+//!\param  chSymbol - symbol to insert
+//!\author Khrapov
+//!\date   30.10.2019
+//==============================================================================
+template<class Traits>
+inline void basic_string<Traits>::insert(
+    const_iterator  itPos,
+    value_type      chSymbol)
+{
+    insert(static_cast<size_type>(itPos - cbegin()), chSymbol);
+}
+
+//==============================================================================
+//!\fn                qx::basic_string<Traits>::insert
+//
+//!\brief  Insert substring
+//!\param  itPos     - first char iterator
+//!\param  pszSourse - sourse string
+//!\param  nSymbols  - number of symbols to insert
+//!\author Khrapov
+//!\date   30.10.2019
+//==============================================================================
+template<class Traits>
+inline void basic_string<Traits>::insert(
+    const_iterator  itPos,
+    const_pointer   pszWhat,
+    size_type       nSymbols)
+{
+    insert(static_cast<size_type>(itPos - cbegin()), pszWhat, nSymbols);
+}
+
+//==============================================================================
+//!\fn                qx::basic_string<Traits>::insert
+//
+//!\brief  Insert substring
+//!\param  itPos - first char iterator
+//!\param  sWhat - sourse string
+//!\author Khrapov
+//!\date   30.10.2019
+//==============================================================================
+template<class Traits>
+inline void basic_string<Traits>::insert(
+    const_iterator      itPos,
+    const basic_string& sWhat)
+{
+    insert(static_cast<size_type>(itPos - cbegin()), sWhat.data(), sWhat.size());
 }
 
 //==============================================================================
 //!\fn                    basic_string<Traits>::insert
 //
 //!\brief  Insert substring
-//!\param  itPos     - first char index
-//!\param  pszSourse - source string
-//!\param  nSymbols  - number of chars in source string
+//!\param  itPos       - first char iterator
+//!\param  itWhatBegin - source string first iterator
+//!\param  itWhatEnd   - source string last iterator
 //!\author Khrapov
 //!\date   13.11.2020
 //==============================================================================
 template<class Traits>
+template<class FwdIt>
 inline void basic_string<Traits>::insert(
-    iterator        itPos,
-    const_pointer   pszSourse,
-    size_type       nSymbols)
+    const_iterator  itPos,
+    FwdIt           itWhatBegin,
+    FwdIt           itWhatEnd)
 {
-    insert(
-        static_cast<size_type>(itPos - begin()),
-        pszSourse,
-        nSymbols == npos ? Traits::length(pszSourse) : nSymbols);
+    insert(static_cast<size_type>(itPos - begin()), itWhatBegin, itWhatEnd);
+}
+
+//==============================================================================
+//!\fn                qx::basic_string<Traits>::insert
+//
+//!\brief  Insert substring
+//!\param  itPos - first char iterator
+//!\param  sWhat - sourse string
+//!\author Khrapov
+//!\date   30.10.2019
+//==============================================================================
+template<class Traits>
+template<class String, class>
+inline void basic_string<Traits>::insert(const_iterator itPos, String sWhat)
+{
+    insert(static_cast<size_type>(itPos - begin()), sWhat.cbegin(), sWhat.cend());
 }
 
 //==============================================================================
@@ -1225,6 +1368,33 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::remove_all
     size_type     nEnd)
 {
     return remove_all(sStr.cbegin(), sStr.cend(), nBegin, nEnd);
+}
+
+//==============================================================================
+//!\fn              qx::basic_string<Traits>::replace<replace>
+//
+//!\brief  Replace first occurence of sFind with sReplace
+//!\param  sFind    - string to find and replase
+//!\param  sReplace - string to replace with
+//!\param  nBegin   - start searching index
+//!\param  nEnd     - end searching index
+//!\retval          - pos of finded occurence or npos
+//!\author Khrapov
+//!\date   02.12.2020
+//==============================================================================
+template<class Traits>
+template<class T1, class T2>
+inline typename basic_string<Traits>::size_type basic_string<Traits>::replace(
+    T1        sFind,
+    T2        sReplace,
+    size_type nBegin,
+    size_type nEnd)
+{
+    size_type nPos = remove(sFind, nBegin, nEnd);
+    if (nPos != npos)
+        insert(nPos, sReplace);
+
+    return nPos;
 }
 
 //==============================================================================

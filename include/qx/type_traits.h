@@ -75,13 +75,13 @@ struct are_same : std::true_type
 };
 
 template <typename S, typename T, typename ... Ts>
-struct are_same <S, T, Ts...> : std::false_type
+struct are_same<S, T, Ts...> : std::false_type
 {
 };
 
 // check if all of variadic arguments are same type
 template <typename T, typename ... Ts>
-struct are_same <T, T, Ts...> : are_same<T, Ts...>
+struct are_same<T, T, Ts...> : are_same<T, Ts...>
 {
 };
 

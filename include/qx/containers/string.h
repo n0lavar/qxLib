@@ -96,10 +96,7 @@ public:
     using const_reference   = typename Traits::const_reference;
     using difference_type   = typename Traits::difference_type;
     using size_type         = typename Traits::size_type;
-    using sstream_type      = typename std::basic_stringstream<
-        value_type, std::char_traits<value_type>,
-        std::allocator<value_type>
-    >;
+    using sstream_type      = typename std::basic_stringstream<value_type>;
 
     static constexpr size_type npos = std::numeric_limits<size_type>::max();
 
@@ -178,14 +175,34 @@ public:
                                           size_type              nSymbols);
 
     void                    insert       (size_type              nPos,
-                                          const_pointer          pszSourse,
+                                          value_type             chSymbol);
+    void                    insert       (size_type              nPos,
+                                          const_pointer          pszWhat,
                                           size_type              nSymbols   = npos);
-    void                    insert       (iterator               itToFirst,
-                                          const_iterator         itFromFirst,
-                                          const_iterator         itFromLast);
-    void                    insert       (iterator               itPos,
-                                          const_pointer          pszSourse,
+    void                    insert       (size_type              nPos,
+                                          const basic_string   & sWhat);
+    template<class FwdIt>
+    void                    insert       (size_type              nPos,
+                                          FwdIt                  itWhatBegin,
+                                          FwdIt                  itWhatEnd);
+    template<class String, class = typename std::enable_if_t<std::is_class_v<String>>>
+    void                    insert       (size_type              nPos,
+                                          String                 sWhat);
+
+    void                    insert       (const_iterator         itPos,
+                                          value_type             chSymbol);
+    void                    insert       (const_iterator         itPos,
+                                          const_pointer          pszWhat,
                                           size_type              nSymbols   = npos);
+    void                    insert       (const_iterator         itPos,
+                                          const basic_string   & sWhat);
+    template<class FwdIt>
+    void                    insert       (const_iterator         itPos,
+                                          FwdIt                  itWhatBegin,
+                                          FwdIt                  itWhatEnd);
+    template<class String, class = typename std::enable_if_t<std::is_class_v<String>>>
+    void                    insert       (const_iterator         itPos,
+                                          String                 sWhat);
 
     void                    push_back    (value_type             chSymbol);
     void                    push_front   (value_type             chSymbol);
@@ -251,6 +268,12 @@ public:
                                           size_type              nEnd       = npos);
     template<class String, class = typename std::enable_if_t<std::is_class_v<String>>>
     size_type               remove_all   (const String         & sStr,
+                                          size_type              nBegin     = 0,
+                                          size_type              nEnd       = npos);
+
+    template<class T1, class T2>
+    size_type               replace      (T1                     sFind,
+                                          T2                     sReplace,
                                           size_type              nBegin     = 0,
                                           size_type              nEnd       = npos);
 

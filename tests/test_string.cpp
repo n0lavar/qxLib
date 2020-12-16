@@ -18,6 +18,7 @@
 
 #include <qx/containers/string.h>
 #include <unordered_map>
+#include <list>
 
 template<typename Char>
 inline constexpr auto get_string_format_specifier(void)
@@ -45,6 +46,7 @@ class TestQxString : public ::testing::Test
 };
 
 #define ValueType       typename TypeParam::value_type
+#define ConstPointer    typename TypeParam::const_pointer
 #define StringTypeTn    typename qx::basic_string<TypeParam>
 #define StringType      qx::basic_string<TypeParam>
 #define StdString       typename std::basic_string<ValueType, std::char_traits<ValueType>, std::allocator<ValueType>>
@@ -406,42 +408,87 @@ TYPED_TEST(TestQxString, erase)
     EXPECT_STREQ(erasingStr.data(), STR("can some of"));
 }
 
+template<typename Arg>
+auto insert = [](auto& str, auto pos, auto pszStr)
+{
+    using TChar = std::remove_const_t<std::remove_pointer_t<decltype(pszStr)>>;
+
+    if constexpr (qx::is_random_access_iterator_v<Arg>)
+    {
+        // random access iterator
+        std::basic_string<TChar> iter_str = pszStr;
+        str.insert(pos, iter_str.begin(), iter_str.end());
+    }
+    else if constexpr (qx::is_specialization_of<Arg, std::list>::value)
+    {
+        // forward iterator
+        std::list<TChar> iter_str;
+        while (*pszStr != '\0')
+        {
+            iter_str.push_back(*pszStr);
+            pszStr++;
+        }
+
+        str.insert(pos, iter_str.cbegin(), iter_str.cend());
+    }
+    else
+    {
+        // other types
+        str.insert(pos, Arg(pszStr));
+    }
+};
+
 TYPED_TEST(TestQxString, insert)
 {
-    StringTypeTn sourceStr = STR("can you ");
-    auto pSource1 = STR("can ");
-    auto pSource2 = STR("some ");
-    auto pSource3 = STR(" here! really");
-    auto pSource4 = STR("nice niiiice");
+    StringTypeTn str;
+    str.reserve(100);   // cbegin() must be valid
 
-    StringTypeTn insertingStr = STR("insert words");
-    insertingStr.insert(insertingStr.begin(), sourceStr.begin() + 4, sourceStr.begin() + 8);
-    EXPECT_EQ(insertingStr.size(), 16);
-    EXPECT_STREQ(insertingStr.data(), STR("you insert words"));
+    {
+        str = STR("0123456789");
 
-    insertingStr.insert(insertingStr.begin() + 4, pSource1);
-    EXPECT_EQ(insertingStr.size(), 20);
-    EXPECT_STREQ(insertingStr.data(), STR("you can insert words"));
+        str.insert(0, CH(';'));
+        EXPECT_EQ(str.size(), 11);
+        EXPECT_STREQ(str.data(), STR(";0123456789"));
 
-    insertingStr.insert(15, pSource2);
-    EXPECT_EQ(insertingStr.size(), 25);
-    EXPECT_STREQ(insertingStr.data(), STR("you can insert some words"));
+        str.insert(6, CH('!'));
+        EXPECT_EQ(str.size(), 12);
+        EXPECT_STREQ(str.data(), STR(";01234!56789"));
 
-    insertingStr.insert(25, pSource3, 5);
-    EXPECT_EQ(insertingStr.size(), 30);
-    EXPECT_STREQ(insertingStr.data(), STR("you can insert some words here"));
+        str.insert(12, CH('&'));
+        EXPECT_EQ(str.size(), 13);
+        EXPECT_STREQ(str.data(), STR(";01234!56789&"));
+    }
 
-    insertingStr.insert(insertingStr.begin() + 20, pSource4, 5);
-    EXPECT_EQ(insertingStr.size(), 35);
-    EXPECT_STREQ(insertingStr.data(), STR("you can insert some nice words here"));
+    auto test_continuous = [&str](auto type_var, auto start)
+    {
+        using type = decltype(type_var);
 
-    insertingStr.push_back('\"');
-    EXPECT_EQ(insertingStr.size(), 36);
-    EXPECT_STREQ(insertingStr.data(), STR("you can insert some nice words here\""));
+        str = STR("be careful with that butter knife");
 
-    insertingStr.push_front('\"');
-    EXPECT_EQ(insertingStr.size(), 37);
-    EXPECT_STREQ(insertingStr.data(), STR("\"you can insert some nice words here\""));
+        insert<type>(str, start + 0u, STR("you "));
+        EXPECT_EQ(str.size(), 37);
+        EXPECT_STREQ(str.data(), STR("you be careful with that butter knife"));
+
+        insert<type>(str, start + 25u, STR("big "));
+        EXPECT_EQ(str.size(), 41);
+        EXPECT_STREQ(str.data(), STR("you be careful with that big butter knife"));
+
+        insert<type>(str, start + 41u, STR(", mate!"));
+        EXPECT_EQ(str.size(), 48);
+        EXPECT_STREQ(str.data(), STR("you be careful with that big butter knife, mate!"));
+    };
+
+    test_continuous(StringType(), 0u);
+    test_continuous(StdString(), 0u);
+    test_continuous(STR(""), 0u);
+    test_continuous(StringTypeTn::iterator(), 0u);
+    test_continuous(std::list<ValueType>(), 0u);
+
+    test_continuous(StringType(), str.cbegin());
+    test_continuous(StdString(), str.cbegin());
+    test_continuous(STR(""), str.cbegin());
+    test_continuous(StringTypeTn::iterator(), str.cbegin());
+    test_continuous(std::list<ValueType>(), str.cbegin());
 }
 
 TYPED_TEST(TestQxString, find)
@@ -1439,6 +1486,60 @@ TYPED_TEST(TestQxString, small_string_optimization)
         EXPECT_EQ(str.capacity(), TypeParam::small_string_size());
         EXPECT_STREQ(str.data(), pszSmallString1);
     }
+}
+
+TYPED_TEST(TestQxString, replase)
+{
+    auto test_replace = [](auto type_find_var, auto type_replace_var)
+    {
+        using type_find = decltype(type_find_var);
+        using type_replace = decltype(type_replace_var);
+
+        StringTypeTn str;
+        auto pszStartStr = STR("Let me help you with your baggage");
+
+        str = pszStartStr;
+        str.replace(type_find(STR("you")), type_replace(STR("12345")));
+        EXPECT_STREQ(str.data(), STR("Let me help 12345 with your baggage"));
+        EXPECT_EQ(str.size(), 35);
+
+        str = pszStartStr;
+        str.replace(type_find(STR("you")), type_replace(STR("123")));
+        EXPECT_STREQ(str.data(), STR("Let me help 123 with your baggage"));
+        EXPECT_EQ(str.size(), 33);
+
+        str = pszStartStr;
+        str.replace(type_find(STR("you")), type_replace(STR("12")));
+        EXPECT_STREQ(str.data(), STR("Let me help 12 with your baggage"));
+        EXPECT_EQ(str.size(), 32);
+
+        str = pszStartStr;
+        str.replace(type_find(STR("you")), type_replace(STR("12")), 16);
+        EXPECT_STREQ(str.data(), STR("Let me help you with 12r baggage"));
+        EXPECT_EQ(str.size(), 32);
+
+        str = pszStartStr;
+        str.replace(type_find(STR("you")), type_replace(STR("12")), 26);
+        EXPECT_STREQ(str.data(), STR("Let me help you with your baggage"));
+        EXPECT_EQ(str.size(), 33);
+
+        str = pszStartStr;
+        str.replace(type_find(STR("you")), type_replace(STR("12")), 0, 10);
+        EXPECT_STREQ(str.data(), STR("Let me help you with your baggage"));
+        EXPECT_EQ(str.size(), 33);
+    };
+
+    test_replace(STR(""), STR(""));
+    test_replace(STR(""), StringTypeTn());
+    test_replace(STR(""), StdString());
+
+    test_replace(StringTypeTn(), STR(""));
+    test_replace(StringTypeTn(), StringTypeTn());
+    test_replace(StringTypeTn(), StdString());
+
+    test_replace(StdString(), STR(""));
+    test_replace(StdString(), StringTypeTn());
+    test_replace(StdString(), StdString());
 }
 
 #endif
