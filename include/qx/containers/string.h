@@ -174,34 +174,34 @@ public:
     void                    erase        (size_type              nPos,
                                           size_type              nSymbols);
 
-    void                    insert       (size_type              nPos,
+    size_type               insert       (size_type              nPos,
                                           value_type             chSymbol);
-    void                    insert       (size_type              nPos,
+    size_type               insert       (size_type              nPos,
                                           const_pointer          pszWhat,
                                           size_type              nSymbols   = npos);
-    void                    insert       (size_type              nPos,
+    size_type               insert       (size_type              nPos,
                                           const basic_string   & sWhat);
     template<class FwdIt>
-    void                    insert       (size_type              nPos,
+    size_type               insert       (size_type              nPos,
                                           FwdIt                  itWhatBegin,
                                           FwdIt                  itWhatEnd);
     template<class String, class = typename std::enable_if_t<std::is_class_v<String>>>
-    void                    insert       (size_type              nPos,
+    size_type               insert       (size_type              nPos,
                                           String                 sWhat);
 
-    void                    insert       (const_iterator         itPos,
+    size_type               insert       (const_iterator         itPos,
                                           value_type             chSymbol);
-    void                    insert       (const_iterator         itPos,
+    size_type               insert       (const_iterator         itPos,
                                           const_pointer          pszWhat,
                                           size_type              nSymbols   = npos);
-    void                    insert       (const_iterator         itPos,
+    size_type               insert       (const_iterator         itPos,
                                           const basic_string   & sWhat);
     template<class FwdIt>
-    void                    insert       (const_iterator         itPos,
+    size_type               insert       (const_iterator         itPos,
                                           FwdIt                  itWhatBegin,
                                           FwdIt                  itWhatEnd);
     template<class String, class = typename std::enable_if_t<std::is_class_v<String>>>
-    void                    insert       (const_iterator         itPos,
+    size_type               insert       (const_iterator         itPos,
                                           String                 sWhat);
 
     void                    push_back    (value_type             chSymbol);
@@ -273,6 +273,12 @@ public:
 
     template<class T1, class T2>
     size_type               replace      (T1                     sFind,
+                                          T2                     sReplace,
+                                          size_type              nBegin     = 0,
+                                          size_type              nEnd       = npos);
+
+    template<class T1, class T2>
+    size_type               replace_all  (T1                     sFind,
                                           T2                     sReplace,
                                           size_type              nBegin     = 0,
                                           size_type              nEnd       = npos);

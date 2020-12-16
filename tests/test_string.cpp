@@ -417,7 +417,7 @@ auto insert = [](auto& str, auto pos, auto pszStr)
     {
         // random access iterator
         std::basic_string<TChar> iter_str = pszStr;
-        str.insert(pos, iter_str.begin(), iter_str.end());
+        return str.insert(pos, iter_str.begin(), iter_str.end());
     }
     else if constexpr (qx::is_specialization_of<Arg, std::list>::value)
     {
@@ -429,12 +429,12 @@ auto insert = [](auto& str, auto pos, auto pszStr)
             pszStr++;
         }
 
-        str.insert(pos, iter_str.cbegin(), iter_str.cend());
+        return str.insert(pos, iter_str.cbegin(), iter_str.cend());
     }
     else
     {
         // other types
-        str.insert(pos, Arg(pszStr));
+        return str.insert(pos, Arg(pszStr));
     }
 };
 
@@ -446,15 +446,15 @@ TYPED_TEST(TestQxString, insert)
     {
         str = STR("0123456789");
 
-        str.insert(0, CH(';'));
+        EXPECT_EQ(str.insert(0, CH(';')), 1);
         EXPECT_EQ(str.size(), 11);
         EXPECT_STREQ(str.data(), STR(";0123456789"));
 
-        str.insert(6, CH('!'));
+        EXPECT_EQ(str.insert(6, CH('!')), 7);
         EXPECT_EQ(str.size(), 12);
         EXPECT_STREQ(str.data(), STR(";01234!56789"));
 
-        str.insert(12, CH('&'));
+        EXPECT_EQ(str.insert(12, CH('&')), 13);
         EXPECT_EQ(str.size(), 13);
         EXPECT_STREQ(str.data(), STR(";01234!56789&"));
     }
@@ -465,15 +465,15 @@ TYPED_TEST(TestQxString, insert)
 
         str = STR("be careful with that butter knife");
 
-        insert<type>(str, start + 0u, STR("you "));
+        EXPECT_EQ(insert<type>(str, start + 0u, STR("you ")), 4);
         EXPECT_EQ(str.size(), 37);
         EXPECT_STREQ(str.data(), STR("you be careful with that butter knife"));
 
-        insert<type>(str, start + 25u, STR("big "));
+        EXPECT_EQ(insert<type>(str, start + 25u, STR("big ")), 29);
         EXPECT_EQ(str.size(), 41);
         EXPECT_STREQ(str.data(), STR("you be careful with that big butter knife"));
 
-        insert<type>(str, start + 41u, STR(", mate!"));
+        EXPECT_EQ(insert<type>(str, start + 41u, STR(", mate!")), 48);
         EXPECT_EQ(str.size(), 48);
         EXPECT_STREQ(str.data(), STR("you be careful with that big butter knife, mate!"));
     };
@@ -1499,32 +1499,32 @@ TYPED_TEST(TestQxString, replase)
         auto pszStartStr = STR("Let me help you with your baggage");
 
         str = pszStartStr;
-        str.replace(type_find(STR("you")), type_replace(STR("12345")));
+        EXPECT_EQ(str.replace(type_find(STR("you")), type_replace(STR("12345"))), 17);
         EXPECT_STREQ(str.data(), STR("Let me help 12345 with your baggage"));
         EXPECT_EQ(str.size(), 35);
 
         str = pszStartStr;
-        str.replace(type_find(STR("you")), type_replace(STR("123")));
+        EXPECT_EQ(str.replace(type_find(STR("you")), type_replace(STR("123"))), 15);
         EXPECT_STREQ(str.data(), STR("Let me help 123 with your baggage"));
         EXPECT_EQ(str.size(), 33);
 
         str = pszStartStr;
-        str.replace(type_find(STR("you")), type_replace(STR("12")));
+        EXPECT_EQ(str.replace(type_find(STR("you")), type_replace(STR("12"))), 14);
         EXPECT_STREQ(str.data(), STR("Let me help 12 with your baggage"));
         EXPECT_EQ(str.size(), 32);
 
         str = pszStartStr;
-        str.replace(type_find(STR("you")), type_replace(STR("12")), 16);
+        EXPECT_EQ(str.replace(type_find(STR("you")), type_replace(STR("12")), 16), 23);
         EXPECT_STREQ(str.data(), STR("Let me help you with 12r baggage"));
         EXPECT_EQ(str.size(), 32);
 
         str = pszStartStr;
-        str.replace(type_find(STR("you")), type_replace(STR("12")), 26);
+        EXPECT_EQ(str.replace(type_find(STR("you")), type_replace(STR("12")), 26), StringType::npos);
         EXPECT_STREQ(str.data(), STR("Let me help you with your baggage"));
         EXPECT_EQ(str.size(), 33);
 
         str = pszStartStr;
-        str.replace(type_find(STR("you")), type_replace(STR("12")), 0, 10);
+        EXPECT_EQ(str.replace(type_find(STR("you")), type_replace(STR("12")), 0, 10), StringType::npos);
         EXPECT_STREQ(str.data(), STR("Let me help you with your baggage"));
         EXPECT_EQ(str.size(), 33);
     };
@@ -1540,6 +1540,60 @@ TYPED_TEST(TestQxString, replase)
     test_replace(StdString(), STR(""));
     test_replace(StdString(), StringTypeTn());
     test_replace(StdString(), StdString());
+}
+
+TYPED_TEST(TestQxString, replase_all)
+{
+    auto test_replace_all = [](auto type_find_var, auto type_replace_var)
+    {
+        using type_find = decltype(type_find_var);
+        using type_replace = decltype(type_replace_var);
+
+        StringTypeTn str;
+        auto pszStartStr = STR("aa bb cc aaa bbb ccc dddd");
+
+        str = pszStartStr;
+        EXPECT_EQ(str.replace_all(type_find(STR("aa")), type_replace(STR("bb"))), 2);
+        EXPECT_STREQ(str.data(), STR("bb bb cc bba bbb ccc dddd"));
+        EXPECT_EQ(str.size(), 25);
+
+        str = pszStartStr;
+        EXPECT_EQ(str.replace_all(type_find(STR("aa")), type_replace(STR("bb")), 4), 1);
+        EXPECT_STREQ(str.data(), STR("aa bb cc bba bbb ccc dddd"));
+        EXPECT_EQ(str.size(), 25);
+
+        str = pszStartStr;
+        EXPECT_EQ(str.replace_all(type_find(STR("fff")), type_replace(STR("bb"))), 0);
+        EXPECT_STREQ(str.data(), STR("aa bb cc aaa bbb ccc dddd"));
+        EXPECT_EQ(str.size(), 25);
+
+        str = pszStartStr;
+        EXPECT_EQ(str.replace_all(type_find(STR("aaa")), type_replace(STR("bbb"))), 1);
+        EXPECT_STREQ(str.data(), STR("aa bb cc bbb bbb ccc dddd"));
+        EXPECT_EQ(str.size(), 25);
+
+        str = pszStartStr;
+        EXPECT_EQ(str.replace_all(type_find(STR("aaa")), type_replace(STR("bbb"))), 1);
+        EXPECT_STREQ(str.data(), STR("aa bb cc bbb bbb ccc dddd"));
+        EXPECT_EQ(str.size(), 25);
+
+        str = pszStartStr;
+        EXPECT_EQ(str.replace_all(type_find(STR("a")), type_replace(STR("b"))), 5);
+        EXPECT_STREQ(str.data(), STR("bb bb cc bbb bbb ccc dddd"));
+        EXPECT_EQ(str.size(), 25);
+    };
+
+    test_replace_all(STR(""), STR(""));
+    test_replace_all(STR(""), StringTypeTn());
+    test_replace_all(STR(""), StdString());
+
+    test_replace_all(StringTypeTn(), STR(""));
+    test_replace_all(StringTypeTn(), StringTypeTn());
+    test_replace_all(StringTypeTn(), StdString());
+
+    test_replace_all(StdString(), STR(""));
+    test_replace_all(StdString(), StringTypeTn());
+    test_replace_all(StdString(), StdString());
 }
 
 #endif

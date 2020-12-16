@@ -680,13 +680,16 @@ inline void basic_string<Traits>::erase(size_type nPos, size_type nSymbols)
 //!\brief  Insert substring
 //!\param  nPos     - first char index
 //!\param  chSymbol - symbol to insert
+//!\retval           - pos of char after last char of inserted string or npos
 //!\author Khrapov
 //!\date   30.10.2019
 //==============================================================================
 template<class Traits>
-inline void basic_string<Traits>::insert(size_type nPos, value_type chSymbol)
+inline typename basic_string<Traits>::size_type basic_string<Traits>::insert(
+    size_type  nPos,
+    value_type chSymbol)
 {
-    insert(nPos, &chSymbol, 1);
+    return insert(nPos, &chSymbol, 1);
 }
 
 //==============================================================================
@@ -696,11 +699,12 @@ inline void basic_string<Traits>::insert(size_type nPos, value_type chSymbol)
 //!\param  nPos      - first char index
 //!\param  pszSourse - sourse string
 //!\param  nSymbols  - number of symbols to insert
+//!\retval           - pos of char after last char of inserted string or npos
 //!\author Khrapov
 //!\date   30.10.2019
 //==============================================================================
 template<class Traits>
-inline void basic_string<Traits>::insert(
+inline typename basic_string<Traits>::size_type basic_string<Traits>::insert(
     size_type     nPos,
     const_pointer pszSourse,
     size_type     nSymbols)
@@ -710,15 +714,22 @@ inline void basic_string<Traits>::insert(
         ? Traits::length(pszSourse)
         : nSymbols;
 
-    if (resize(nStartSymbols + nSizeSource, Traits::align()))
+    if (nSizeSource > 0 && resize(nStartSymbols + nSizeSource, Traits::align()))
     {
         std::memmove(
             data() + nPos + nSizeSource,
             data() + nPos,
             (nStartSymbols - nPos) * sizeof(value_type));
 
-        std::memcpy(data() + nPos, pszSourse, nSizeSource * sizeof(value_type));
+        std::memcpy(
+            data() + nPos,
+            pszSourse,
+            nSizeSource * sizeof(value_type));
+
+        return nPos + nSizeSource;
     }
+    else
+        return npos;
 }
 
 //==============================================================================
@@ -727,15 +738,16 @@ inline void basic_string<Traits>::insert(
 //!\brief  Insert substring
 //!\param  nPos  - first char index
 //!\param  sWhat - sourse string
+//!\retval       - pos of char after last char of inserted string or npos
 //!\author Khrapov
 //!\date   30.10.2019
 //==============================================================================
 template<class Traits>
-inline void basic_string<Traits>::insert(
+inline typename basic_string<Traits>::size_type basic_string<Traits>::insert(
     size_type           nPos,
     const basic_string& sWhat)
 {
-    insert(nPos, sWhat.data(), sWhat.size());
+    return insert(nPos, sWhat.data(), sWhat.size());
 }
 
 //==============================================================================
@@ -745,19 +757,20 @@ inline void basic_string<Traits>::insert(
 //!\param  nPos        - first char index
 //!\param  itWhatBegin - sourse first iterator
 //!\param  itWhatEnd   - sourse last iterator
+//!\retval             - pos of char after last char of inserted string or npos
 //!\author Khrapov
 //!\date   30.10.2019
 //==============================================================================
 template<class Traits>
 template<class FwdIt>
-inline void basic_string<Traits>::insert(
+inline typename basic_string<Traits>::size_type basic_string<Traits>::insert(
     size_type   nPos,
     FwdIt       itWhatBegin,
     FwdIt       itWhatEnd)
 {
     if constexpr (is_random_access_iterator_v<FwdIt>)
     {
-        insert(
+        return insert(
             nPos,
             itWhatBegin.operator->(),
             static_cast<size_type>(itWhatEnd - itWhatBegin));
@@ -769,7 +782,7 @@ inline void basic_string<Traits>::insert(
             nWhatSize++;
 
         size_type nStartSymbols = size();
-        if (resize(nStartSymbols + nWhatSize, Traits::align()))
+        if (nWhatSize > 0 && resize(nStartSymbols + nWhatSize, Traits::align()))
         {
             std::memmove(
                 data() + nPos + nWhatSize,
@@ -782,7 +795,11 @@ inline void basic_string<Traits>::insert(
                 at(nPos + nWhatPos) = *it;
                 nWhatPos++;
             }
+
+            return nPos + nWhatSize;
         }
+        else
+            return npos;
     }
 }
 
@@ -792,14 +809,17 @@ inline void basic_string<Traits>::insert(
 //!\brief  Insert substring
 //!\param  nPos  - first char index
 //!\param  sWhat - sourse string
+//!\retval       - pos of char after last char of inserted string or npos
 //!\author Khrapov
 //!\date   30.10.2019
 //==============================================================================
 template<class Traits>
 template<class String, class>
-inline void basic_string<Traits>::insert(size_type nPos, String sWhat)
+inline typename basic_string<Traits>::size_type basic_string<Traits>::insert(
+    size_type nPos,
+    String    sWhat)
 {
-    insert(static_cast<size_type>(nPos), sWhat.cbegin(), sWhat.cend());
+    return insert(static_cast<size_type>(nPos), sWhat.cbegin(), sWhat.cend());
 }
 
 //==============================================================================
@@ -808,15 +828,16 @@ inline void basic_string<Traits>::insert(size_type nPos, String sWhat)
 //!\brief  Insert substring
 //!\param  itPos    - first char iterator
 //!\param  chSymbol - symbol to insert
+//!\retval          - pos of char after last char of inserted string or npos
 //!\author Khrapov
 //!\date   30.10.2019
 //==============================================================================
 template<class Traits>
-inline void basic_string<Traits>::insert(
+inline typename basic_string<Traits>::size_type basic_string<Traits>::insert(
     const_iterator  itPos,
     value_type      chSymbol)
 {
-    insert(static_cast<size_type>(itPos - cbegin()), chSymbol);
+    return insert(static_cast<size_type>(itPos - cbegin()), chSymbol);
 }
 
 //==============================================================================
@@ -826,16 +847,17 @@ inline void basic_string<Traits>::insert(
 //!\param  itPos     - first char iterator
 //!\param  pszSourse - sourse string
 //!\param  nSymbols  - number of symbols to insert
+//!\retval           - pos of char after last char of inserted string or npos
 //!\author Khrapov
 //!\date   30.10.2019
 //==============================================================================
 template<class Traits>
-inline void basic_string<Traits>::insert(
+inline typename basic_string<Traits>::size_type basic_string<Traits>::insert(
     const_iterator  itPos,
     const_pointer   pszWhat,
     size_type       nSymbols)
 {
-    insert(static_cast<size_type>(itPos - cbegin()), pszWhat, nSymbols);
+    return insert(static_cast<size_type>(itPos - cbegin()), pszWhat, nSymbols);
 }
 
 //==============================================================================
@@ -844,15 +866,19 @@ inline void basic_string<Traits>::insert(
 //!\brief  Insert substring
 //!\param  itPos - first char iterator
 //!\param  sWhat - sourse string
+//!\retval       - pos of char after last char of inserted string or npos
 //!\author Khrapov
 //!\date   30.10.2019
 //==============================================================================
 template<class Traits>
-inline void basic_string<Traits>::insert(
+inline typename basic_string<Traits>::size_type basic_string<Traits>::insert(
     const_iterator      itPos,
     const basic_string& sWhat)
 {
-    insert(static_cast<size_type>(itPos - cbegin()), sWhat.data(), sWhat.size());
+    return insert(
+        static_cast<size_type>(itPos - cbegin()),
+        sWhat.data(),
+        sWhat.size());
 }
 
 //==============================================================================
@@ -862,17 +888,21 @@ inline void basic_string<Traits>::insert(
 //!\param  itPos       - first char iterator
 //!\param  itWhatBegin - source string first iterator
 //!\param  itWhatEnd   - source string last iterator
+//!\retval             - pos of char after last char of inserted string or npos
 //!\author Khrapov
 //!\date   13.11.2020
 //==============================================================================
 template<class Traits>
 template<class FwdIt>
-inline void basic_string<Traits>::insert(
+inline typename basic_string<Traits>::size_type basic_string<Traits>::insert(
     const_iterator  itPos,
     FwdIt           itWhatBegin,
     FwdIt           itWhatEnd)
 {
-    insert(static_cast<size_type>(itPos - begin()), itWhatBegin, itWhatEnd);
+    return insert(
+        static_cast<size_type>(itPos - begin()),
+        itWhatBegin,
+        itWhatEnd);
 }
 
 //==============================================================================
@@ -881,14 +911,20 @@ inline void basic_string<Traits>::insert(
 //!\brief  Insert substring
 //!\param  itPos - first char iterator
 //!\param  sWhat - sourse string
+//!\retval       - pos of char after last char of inserted string or npos
 //!\author Khrapov
 //!\date   30.10.2019
 //==============================================================================
 template<class Traits>
 template<class String, class>
-inline void basic_string<Traits>::insert(const_iterator itPos, String sWhat)
+inline typename basic_string<Traits>::size_type basic_string<Traits>::insert(
+    const_iterator itPos,
+    String         sWhat)
 {
-    insert(static_cast<size_type>(itPos - begin()), sWhat.cbegin(), sWhat.cend());
+    return insert(
+        static_cast<size_type>(itPos - begin()),
+        sWhat.cbegin(),
+        sWhat.cend());
 }
 
 //==============================================================================
@@ -1378,7 +1414,7 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::remove_all
 //!\param  sReplace - string to replace with
 //!\param  nBegin   - start searching index
 //!\param  nEnd     - end searching index
-//!\retval          - pos of finded occurence or npos
+//!\retval          - pos of char after last char of replaced string or npos
 //!\author Khrapov
 //!\date   02.12.2020
 //==============================================================================
@@ -1392,9 +1428,42 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::replace(
 {
     size_type nPos = remove(sFind, nBegin, nEnd);
     if (nPos != npos)
-        insert(nPos, sReplace);
+        return insert(nPos, sReplace);
+    else
+        return npos;
+}
 
-    return nPos;
+//==============================================================================
+//!\fn            qx::basic_string<Traits>::replace_all<replace>
+//
+//!\brief  Replace all occurences of sFind with sReplace
+//!\param  sFind    - string to find and replase
+//!\param  sReplace - string to replace with
+//!\param  nBegin   - start searching index
+//!\param  nEnd     - end searching index
+//!\retval          - number of replaced occurences
+//!\author Khrapov
+//!\date   02.12.2020
+//==============================================================================
+template<class Traits>
+template<class T1, class T2>
+inline typename basic_string<Traits>::size_type basic_string<Traits>::replace_all(
+    T1 sFind,
+    T2 sReplace,
+    size_type nBegin,
+    size_type nEnd)
+{
+    size_type nOccurences = 0;
+    size_type nPos = nBegin;
+
+    do
+    {
+        nPos = replace(sFind, sReplace, nPos, nEnd);
+        if (nPos != npos)
+            nOccurences++;
+    } while (nPos != npos);
+
+    return nOccurences;
 }
 
 //==============================================================================
