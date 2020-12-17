@@ -1596,4 +1596,39 @@ TYPED_TEST(TestQxString, replase_all)
     test_replace_all(StdString(), StdString());
 }
 
+TYPED_TEST(TestQxString, remove_prefix)
+{
+    auto pszStr = STR("12345");
+    StringTypeTn str;
+
+    str = pszStr;
+    EXPECT_TRUE(str.remove_prefix(CH('1')));
+    EXPECT_STREQ(str.data(), STR("2345"));
+    EXPECT_EQ(str.size(), 4);
+
+    str = pszStr;
+    EXPECT_FALSE(str.remove_prefix(CH('2')));
+    EXPECT_STREQ(str.data(), STR("12345"));
+    EXPECT_EQ(str.size(), 5);
+
+    auto test_remove_prefix = [&str, pszStr](auto type_var)
+    {
+        using type = decltype(type_var);
+
+        str = pszStr;
+        EXPECT_TRUE(str.remove_prefix(type(STR("12"))));
+        EXPECT_STREQ(str.data(), STR("345"));
+        EXPECT_EQ(str.size(), 3);
+
+        str = pszStr;
+        EXPECT_FALSE(str.remove_prefix(type(STR("21"))));
+        EXPECT_STREQ(str.data(), STR("12345"));
+        EXPECT_EQ(str.size(), 5);
+    };
+
+    test_remove_prefix(STR(""));
+    test_remove_prefix(StringTypeTn());
+    test_remove_prefix(StdString());
+}
+
 #endif

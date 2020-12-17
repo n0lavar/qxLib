@@ -1,3 +1,4 @@
+#include "string.h"
 //==============================================================================
 //
 //!\file                         string.inl
@@ -1172,11 +1173,11 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::remove(
 //!\fn                   qx::basic_string<Traits>::remove
 //
 //!\brief  Remove the first occurrence of a substring in a string
-//!\param  pszStr - c-string to remove
-//!\param  nBegin - start searching index
-//!\param  nEnd   - end searching index
-//!\param  nEnd   - c-string size
-//!\retval        - position where the first occurrence was or npos
+//!\param  pszStr   - c-string to remove
+//!\param  nBegin   - start searching index
+//!\param  nEnd     - end searching index
+//!\param  nStrSize - c-string size
+//!\retval          - position where the first occurrence was or npos
 //!\author Khrapov
 //!\date   02.12.2020
 //==============================================================================
@@ -1271,6 +1272,91 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::remove(
     size_type     nEnd)
 {
     return remove(sStr.cbegin(), sStr.cend(), nBegin, nEnd);
+}
+
+//==============================================================================
+//!\fn          qx::basic_string<Traits>::remove_prefix<String, >
+//
+//!\brief  Remove string prefix if matches
+//!\param  chSymbol - char to remove
+//!\retval          - true if removed
+//!\author Khrapov
+//!\date   02.12.2020
+//==============================================================================
+template<class Traits>
+inline bool basic_string<Traits>::remove_prefix(value_type chSymbol)
+{
+    return remove(chSymbol, 0u, 1u) != npos;
+}
+
+//==============================================================================
+//!\fn          qx::basic_string<Traits>::remove_prefix<String, >
+//
+//!\brief  Remove string prefix if matches
+//!\param  pszStr   - c-string to remove
+//!\param  nStrSize - c-string size
+//!\retval          - true if removed
+//!\author Khrapov
+//!\date   02.12.2020
+//==============================================================================
+template<class Traits>
+inline bool basic_string<Traits>::remove_prefix(
+    const_pointer pszStr,
+    size_type     nStrSize)
+{
+    return remove(pszStr, 0u, nStrSize, nStrSize) != npos;
+}
+
+//==============================================================================
+//!\fn          qx::basic_string<Traits>::remove_prefix<String, >
+//
+//!\brief  Remove string prefix if matches
+//!\param  sStr   - string to remove
+//!\retval        - true if removed
+//!\author Khrapov
+//!\date   02.12.2020
+//==============================================================================
+template<class Traits>
+inline bool basic_string<Traits>::remove_prefix(const basic_string& sStr)
+{
+    return remove(sStr, 0u, sStr.size()) != npos;
+}
+
+//==============================================================================
+//!\fn          qx::basic_string<Traits>::remove_prefix<String, >
+//
+//!\brief  Remove string prefix if matches
+//!\param  itBegin - string to remove begin iterator
+//!\param  itEnd   - string to remove end iterator
+//!\retval         - true if removed
+//!\author Khrapov
+//!\date   02.12.2020
+//==============================================================================
+template<class Traits>
+template<class FwdIt>
+inline bool basic_string<Traits>::remove_prefix(FwdIt itBegin, FwdIt itEnd)
+{
+    return remove(
+        itBegin,
+        itEnd,
+        0u,
+        static_cast<size_type>(std::distance(itBegin, itEnd))) != npos;
+}
+
+//==============================================================================
+//!\fn          qx::basic_string<Traits>::remove_prefix<String, >
+//
+//!\brief  Remove string prefix if matches
+//!\param  sStr   - string to remove
+//!\retval        - true if removed
+//!\author Khrapov
+//!\date   02.12.2020
+//==============================================================================
+template<class Traits>
+template<class String, class>
+inline bool basic_string<Traits>::remove_prefix(const String& sStr)
+{
+    return remove_prefix(sStr.cbegin(), sStr.cend());
 }
 
 //==============================================================================

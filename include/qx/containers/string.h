@@ -251,6 +251,16 @@ public:
                                           size_type              nBegin     = 0,
                                           size_type              nEnd       = npos);
 
+    bool                    remove_prefix(value_type             chSymbol);
+    bool                    remove_prefix(const_pointer          pszStr,
+                                               size_type              nStrSize   = npos);
+    bool                    remove_prefix(const basic_string   & sStr);
+    template<class FwdIt>
+    bool                    remove_prefix(FwdIt                  itBegin,
+                                          FwdIt                  itEnd);
+    template<class String, class = typename std::enable_if_t<std::is_class_v<String>>>
+    bool                    remove_prefix(const String         & sStr);
+
     size_type               remove_all   (value_type             chSymbol,
                                           size_type              nBegin     = 0,
                                           size_type              nEnd       = npos);
