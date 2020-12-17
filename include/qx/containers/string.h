@@ -156,6 +156,7 @@ public:
     size_type               length       (void)                                     const;
     const_pointer           c_str        (void)                                     const;
     size_type               capacity     (void)                                     const;
+    static constexpr size_type max_size  (void);
 
     template<typename To>
     std::optional<To>       to           (void)                                     const;

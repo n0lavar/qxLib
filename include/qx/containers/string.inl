@@ -488,6 +488,21 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::capacity(v
 }
 
 //==============================================================================
+//!\fn               qx::basic_string<Traits>::max_size
+//
+//!\brief  Get the theoretical maximum of string max size
+//!\author Khrapov
+//!\date   17.12.2020
+//==============================================================================
+template<class Traits>
+constexpr typename basic_string<Traits>::size_type basic_string<Traits>::max_size(void)
+{
+    return std::numeric_limits<size_type>::max()
+        - 1     // npos reserved
+        - 1;    // null terminator
+}
+
+//==============================================================================
 //!\fn                  qx::basic_string<Traits>::to<To>
 //
 //!\brief  Convert string to specified type

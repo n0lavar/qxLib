@@ -1666,5 +1666,9 @@ TYPED_TEST(TestQxString, remove_suffix)
     test_remove_suffix(StdString());
 }
 
+TYPED_TEST(TestQxString, max_size)
+{
+    static_assert(StringType::max_size() == 18'446'744'073'709'551'613);
+}
 
 #endif
