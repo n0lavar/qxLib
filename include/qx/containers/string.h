@@ -261,6 +261,16 @@ public:
     template<class String, class = typename std::enable_if_t<std::is_class_v<String>>>
     bool                    remove_prefix(const String         & sStr);
 
+    bool                    remove_suffix(value_type             chSymbol);
+    bool                    remove_suffix(const_pointer          pszStr,
+                                               size_type              nStrSize   = npos);
+    bool                    remove_suffix(const basic_string   & sStr);
+    template<class FwdIt>
+    bool                    remove_suffix(FwdIt                  itBegin,
+                                          FwdIt                  itEnd);
+    template<class String, class = typename std::enable_if_t<std::is_class_v<String>>>
+    bool                    remove_suffix(const String         & sStr);
+
     size_type               remove_all   (value_type             chSymbol,
                                           size_type              nBegin     = 0,
                                           size_type              nEnd       = npos);

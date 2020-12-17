@@ -1275,7 +1275,7 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::remove(
 }
 
 //==============================================================================
-//!\fn          qx::basic_string<Traits>::remove_prefix<String, >
+//!\fn               qx::basic_string<Traits>::remove_prefix
 //
 //!\brief  Remove string prefix if matches
 //!\param  chSymbol - char to remove
@@ -1290,7 +1290,7 @@ inline bool basic_string<Traits>::remove_prefix(value_type chSymbol)
 }
 
 //==============================================================================
-//!\fn          qx::basic_string<Traits>::remove_prefix<String, >
+//!\fn               qx::basic_string<Traits>::remove_prefix
 //
 //!\brief  Remove string prefix if matches
 //!\param  pszStr   - c-string to remove
@@ -1308,7 +1308,7 @@ inline bool basic_string<Traits>::remove_prefix(
 }
 
 //==============================================================================
-//!\fn          qx::basic_string<Traits>::remove_prefix<String, >
+//!\fn               qx::basic_string<Traits>::remove_prefix
 //
 //!\brief  Remove string prefix if matches
 //!\param  sStr   - string to remove
@@ -1323,7 +1323,7 @@ inline bool basic_string<Traits>::remove_prefix(const basic_string& sStr)
 }
 
 //==============================================================================
-//!\fn          qx::basic_string<Traits>::remove_prefix<String, >
+//!\fn          qx::basic_string<Traits>::remove_prefix<Traits>
 //
 //!\brief  Remove string prefix if matches
 //!\param  itBegin - string to remove begin iterator
@@ -1357,6 +1357,103 @@ template<class String, class>
 inline bool basic_string<Traits>::remove_prefix(const String& sStr)
 {
     return remove_prefix(sStr.cbegin(), sStr.cend());
+}
+
+//==============================================================================
+//!\fn               qx::basic_string<Traits>::remove_suffix
+//
+//!\brief  Remove string suffix if matches
+//!\param  chSymbol - char to remove
+//!\retval          - true if removed
+//!\author Khrapov
+//!\date   02.12.2020
+//==============================================================================
+template<class Traits>
+inline bool basic_string<Traits>::remove_suffix(value_type chSymbol)
+{
+    size_type nSize = size();
+    return remove(
+        chSymbol,
+        nSize - 1,
+        nSize) != npos;
+}
+
+//==============================================================================
+//!\fn               qx::basic_string<Traits>::remove_suffix
+//
+//!\brief  Remove string suffix if matches
+//!\param  pszStr   - c-string to remove
+//!\param  nStrSize - c-string size
+//!\retval          - true if removed
+//!\author Khrapov
+//!\date   02.12.2020
+//==============================================================================
+template<class Traits>
+inline bool basic_string<Traits>::remove_suffix(const_pointer pszStr, size_type nStrSize)
+{
+    size_type nSize = size();
+    size_type nLocalStrSize = nStrSize != npos
+        ? nStrSize
+        : Traits::length(pszStr);
+
+    return remove(
+        pszStr,
+        nSize - nLocalStrSize,
+        nSize,
+        nLocalStrSize) != npos;
+}
+
+//==============================================================================
+//!\fn               qx::basic_string<Traits>::remove_suffix
+//
+//!\brief  Remove string suffix if matches
+//!\param  sStr   - string to remove
+//!\retval        - true if removed
+//!\author Khrapov
+//!\date   02.12.2020
+//==============================================================================
+template<class Traits>
+inline bool basic_string<Traits>::remove_suffix(const basic_string& sStr)
+{
+    return remove_suffix(sStr.data(), sStr.size());
+}
+
+//==============================================================================
+//!\fn          qx::basic_string<Traits>::remove_suffix<Traits>
+//
+//!\brief  Remove string suffix if matches
+//!\param  itBegin - string to remove begin iterator
+//!\param  itEnd   - string to remove end iterator
+//!\retval         - true if removed
+//!\author Khrapov
+//!\date   02.12.2020
+//==============================================================================
+template<class Traits>
+template<class FwdIt>
+inline bool basic_string<Traits>::remove_suffix(FwdIt itBegin, FwdIt itEnd)
+{
+    size_type nSize = size();
+    return remove(
+        itBegin,
+        itEnd,
+        nSize - static_cast<size_type>(std::distance(itBegin, itEnd)),
+        nSize) != npos;
+}
+
+//==============================================================================
+//!\fn          qx::basic_string<Traits>::remove_suffix<String, >
+//
+//!\brief  Remove string suffix if matches
+//!\param  sStr   - string to remove
+//!\retval        - true if removed
+//!\author Khrapov
+//!\date   02.12.2020
+//==============================================================================
+template<class Traits>
+template<class String, class>
+inline bool basic_string<Traits>::remove_suffix(const String& sStr)
+{
+    return remove_suffix(sStr.cbegin(), sStr.cend());
 }
 
 //==============================================================================
