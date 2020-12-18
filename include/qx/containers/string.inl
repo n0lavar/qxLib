@@ -1,4 +1,3 @@
-#include "string.h"
 //==============================================================================
 //
 //!\file                         string.inl
@@ -688,6 +687,38 @@ template<class Traits>
 inline void basic_string<Traits>::erase(size_type nPos, size_type nSymbols)
 {
     erase(iterator(this, nPos), iterator(this, nPos + nSymbols));
+}
+
+//==============================================================================
+//!\fn                   basic_string<Traits>::pop_back
+//
+//!\brief  Erase last char and return it
+//!\retval - last char
+//!\author Khrapov
+//!\date   18.12.2020
+//==============================================================================
+template<class Traits>
+inline typename basic_string<Traits>::value_type basic_string<Traits>::pop_back(void)
+{
+    value_type chRet = back();
+    erase(size() - 1);
+    return chRet;
+}
+
+//==============================================================================
+//!\fn                   basic_string<Traits>::pop_front
+//
+//!\brief  Erase first char and return it
+//!\retval - first char
+//!\author Khrapov
+//!\date   18.12.2020
+//==============================================================================
+template<class Traits>
+inline typename basic_string<Traits>::value_type basic_string<Traits>::pop_front(void)
+{
+    value_type chRet = front();
+    erase(0);
+    return chRet;
 }
 
 //==============================================================================

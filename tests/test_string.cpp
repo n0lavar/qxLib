@@ -1671,4 +1671,31 @@ TYPED_TEST(TestQxString, max_size)
     static_assert(StringType::max_size() == 18'446'744'073'709'551'613);
 }
 
+TYPED_TEST(TestQxString, pop_back)
+{
+    StringTypeTn str;
+
+    str = STR("12345");
+    EXPECT_EQ(str.pop_back(), CH('5'));
+    EXPECT_STREQ(str.data(), STR("1234"));
+
+    str = STR("1");
+    EXPECT_EQ(str.pop_back(), CH('1'));
+    EXPECT_STREQ(str.data(), STR(""));
+}
+
+TYPED_TEST(TestQxString, pop_front)
+{
+    StringTypeTn str;
+
+    str = STR("12345");
+    EXPECT_EQ(str.pop_front(), CH('1'));
+    EXPECT_STREQ(str.data(), STR("2345"));
+
+    str = STR("1");
+    EXPECT_EQ(str.pop_front(), CH('1'));
+    EXPECT_STREQ(str.data(), STR(""));
+}
+
+
 #endif

@@ -175,6 +175,9 @@ public:
     void                    erase        (size_type              nPos,
                                           size_type              nSymbols);
 
+    value_type              pop_back     (void);
+    value_type              pop_front    (void);
+
     size_type               insert       (size_type              nPos,
                                           value_type             chSymbol);
     size_type               insert       (size_type              nPos,
