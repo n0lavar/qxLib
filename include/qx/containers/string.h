@@ -100,6 +100,9 @@ public:
 
     static constexpr size_type npos = std::numeric_limits<size_type>::max();
 
+    template<class String>
+    using enable_if_string_t = typename std::enable_if_t<std::is_class_v<String>>;
+
     IMPL_CONTAINER(basic_string)
 
 public:
@@ -115,7 +118,7 @@ public:
                             basic_string (const basic_string   & sAnother);
     template<class FwdIt>   basic_string (FwdIt                  itFirst,
                                           FwdIt                  itLast);
-    template<class String, class = typename std::enable_if_t<std::is_class_v<String>>>
+    template<class String, class = enable_if_string_t<String>>
                             basic_string (const String         & sAnother);
 
                             ~basic_string(void);
@@ -131,7 +134,7 @@ public:
     template<class FwdIt>
     void                    assign       (FwdIt                  itFirst,
                                           FwdIt                  itLast);
-    template<class String, class = typename std::enable_if_t<std::is_class_v<String>>>
+    template<class String, class = enable_if_string_t<String>>
     void                    assign       (const String         & str);
 
     void                    format       (const_pointer          pszFormat,
@@ -189,7 +192,7 @@ public:
     size_type               insert       (size_type              nPos,
                                           FwdIt                  itWhatBegin,
                                           FwdIt                  itWhatEnd);
-    template<class String, class = typename std::enable_if_t<std::is_class_v<String>>>
+    template<class String, class = enable_if_string_t<String>>
     size_type               insert       (size_type              nPos,
                                           String                 sWhat);
 
@@ -204,7 +207,7 @@ public:
     size_type               insert       (const_iterator         itPos,
                                           FwdIt                  itWhatBegin,
                                           FwdIt                  itWhatEnd);
-    template<class String, class = typename std::enable_if_t<std::is_class_v<String>>>
+    template<class String, class = enable_if_string_t<String>>
     size_type               insert       (const_iterator         itPos,
                                           String                 sWhat);
 
@@ -226,7 +229,7 @@ public:
                                           FwdIt                  itWhatEnd,
                                           size_type              nBegin     = 0,
                                           size_type              nEnd       = npos) const;
-    template<class String, class = typename std::enable_if_t<std::is_class_v<String>>>
+    template<class String, class = enable_if_string_t<String>>
     size_type               find         (String                 sWhat,
                                           size_type              nBegin     = 0,
                                           size_type              nEnd       = npos) const;
@@ -250,7 +253,7 @@ public:
                                           FwdIt                  itEnd,
                                           size_type              nBegin     = 0,
                                           size_type              nEnd       = npos);
-    template<class String, class = typename std::enable_if_t<std::is_class_v<String>>>
+    template<class String, class = enable_if_string_t<String>>
     size_type               remove       (const String         & sStr,
                                           size_type              nBegin     = 0,
                                           size_type              nEnd       = npos);
@@ -262,7 +265,7 @@ public:
     template<class FwdIt>
     bool                    remove_prefix(FwdIt                  itBegin,
                                           FwdIt                  itEnd);
-    template<class String, class = typename std::enable_if_t<std::is_class_v<String>>>
+    template<class String, class = enable_if_string_t<String>>
     bool                    remove_prefix(const String         & sStr);
 
     bool                    remove_suffix(value_type             chSymbol);
@@ -272,7 +275,7 @@ public:
     template<class FwdIt>
     bool                    remove_suffix(FwdIt                  itBegin,
                                           FwdIt                  itEnd);
-    template<class String, class = typename std::enable_if_t<std::is_class_v<String>>>
+    template<class String, class = enable_if_string_t<String>>
     bool                    remove_suffix(const String         & sStr);
 
     size_type               remove_all   (value_type             chSymbol,
@@ -290,7 +293,7 @@ public:
                                           FwdIt                  itLast,
                                           size_type              nBegin     = 0,
                                           size_type              nEnd       = npos);
-    template<class String, class = typename std::enable_if_t<std::is_class_v<String>>>
+    template<class String, class = enable_if_string_t<String>>
     size_type               remove_all   (const String         & sStr,
                                           size_type              nBegin     = 0,
                                           size_type              nEnd       = npos);
@@ -314,7 +317,7 @@ public:
     template<class FwdIt>
     vector                  split        (FwdIt                  itSepFirst,
                                           FwdIt                  itSepLast)         const;
-    template<class String, class = typename std::enable_if_t<std::is_class_v<String>>>
+    template<class String, class = enable_if_string_t<String>>
     vector                  split        (const String         & sSeparator)        const;
 
     bool                    starts_with  (value_type             chSymbol)          const;
@@ -324,7 +327,7 @@ public:
     template<class FwdIt>
     bool                    starts_with  (FwdIt                  itBegin,
                                           FwdIt                  itEnd)             const;
-    template<class String, class = typename std::enable_if_t<std::is_class_v<String>>>
+    template<class String, class = enable_if_string_t<String>>
     bool                    starts_with  (const String         & sStr)              const;
 
     bool                    ends_with    (value_type             chSymbol)          const;
@@ -334,7 +337,7 @@ public:
     template<class FwdIt>
     bool                    ends_with    (FwdIt                  itBegin,
                                           FwdIt                  itEnd)             const;
-    template<class String, class = typename std::enable_if_t<std::is_class_v<String>>>
+    template<class String, class = enable_if_string_t<String>>
     bool                    ends_with    (const String         & sStr)              const;
 
     bool                    contains     (value_type             chSymbol)          const;
@@ -344,56 +347,56 @@ public:
     template<class FwdIt>
     bool                    contains     (FwdIt                  itBegin,
                                           FwdIt                  itEnd)             const;
-    template<class String, class = typename std::enable_if_t<std::is_class_v<String>>>
+    template<class String, class = enable_if_string_t<String>>
     bool                    contains     (const String         & sStr)              const;
 
     const   basic_string &  operator=    (value_type             chSymbol);
     const   basic_string &  operator=    (const_pointer          pszSource);
     const   basic_string &  operator=    (basic_string        && sStr)                    noexcept;
     const   basic_string &  operator=    (const basic_string   & sStr);
-    template<class String, class = typename std::enable_if_t<std::is_class_v<String>>>
+    template<class String, class = enable_if_string_t<String>>
     const   basic_string &  operator=    (const String         & sStr);
 
     const   basic_string &  operator+=   (value_type             chSymbol);
     const   basic_string &  operator+=   (const_pointer          pszSource);
     const   basic_string &  operator+=   (const basic_string   & sStr);
-    template<class String, class = typename std::enable_if_t<std::is_class_v<String>>>
+    template<class String, class = enable_if_string_t<String>>
     const   basic_string &  operator+=   (const String         & sStr);
 
     bool                    operator==   (value_type             chSymbol)          const noexcept;
     bool                    operator==   (const_pointer          pszSource)         const noexcept;
     bool                    operator==   (const basic_string   & sStr)              const noexcept;
-    template<class String, class = typename std::enable_if_t<std::is_class_v<String>>>
+    template<class String, class = enable_if_string_t<String>>
     bool                    operator==   (const String         & sStr)              const noexcept;
 
     bool                    operator!=   (value_type             chSymbol)          const noexcept;
     bool                    operator!=   (const_pointer          pszSource)         const noexcept;
     bool                    operator!=   (const basic_string   & sStr)              const noexcept;
-    template<class String, class = typename std::enable_if_t<std::is_class_v<String>>>
+    template<class String, class = enable_if_string_t<String>>
     bool                    operator!=   (const String         & sStr)              const noexcept;
 
     bool                    operator<    (value_type             chSymbol)          const noexcept;
     bool                    operator<    (const_pointer          pszSource)         const noexcept;
     bool                    operator<    (const basic_string   & sStr)              const noexcept;
-    template<class String, class = typename std::enable_if_t<std::is_class_v<String>>>
+    template<class String, class = enable_if_string_t<String>>
     bool                    operator<    (const String         & sStr)              const noexcept;
 
     bool                    operator<=   (value_type             chSymbol)          const noexcept;
     bool                    operator<=   (const_pointer          pszSource)         const noexcept;
     bool                    operator<=   (const basic_string   & sStr)              const noexcept;
-    template<class String, class = typename std::enable_if_t<std::is_class_v<String>>>
+    template<class String, class = enable_if_string_t<String>>
     bool                    operator<=   (const String         & sStr)              const noexcept;
 
     bool                    operator>    (value_type             chSymbol)          const noexcept;
     bool                    operator>    (const_pointer          pszSource)         const noexcept;
     bool                    operator>    (const basic_string   & sStr)              const noexcept;
-    template<class String, class = typename std::enable_if_t<std::is_class_v<String>>>
+    template<class String, class = enable_if_string_t<String>>
     bool                    operator>    (const String         & sStr)              const noexcept;
 
     bool                    operator>=   (value_type             chSymbol)          const noexcept;
     bool                    operator>=   (const_pointer          pszSource)         const noexcept;
     bool                    operator>=   (const basic_string   & sStr)              const noexcept;
-    template<class String, class = typename std::enable_if_t<std::is_class_v<String>>>
+    template<class String, class = enable_if_string_t<String>>
     bool                    operator>=   (const String         & sStr)              const noexcept;
 
     reference               operator[]   (size_type              nSymbol)                 noexcept;
@@ -451,13 +454,13 @@ basic_string<UT> operator+ (typename UT::value_type    lhs, const basic_string<U
 template<class UT>
 basic_string<UT> operator+ (typename UT::value_type    lhs, basic_string<UT>        && rhs) _QX_STR_OP_PLUS_BODY
 
-template<class UT, class String, class = typename std::enable_if_t<std::is_class_v<String>>>
+template<class UT, class String, class = basic_string<UT>::enable_if_string_t<String>>
 basic_string<UT> operator+ (const basic_string<UT>   & lhs, const String             & rhs) _QX_STR_OP_PLUS_BODY
-template<class UT, class String, class = typename std::enable_if_t<std::is_class_v<String>>>
+template<class UT, class String, class = basic_string<UT>::enable_if_string_t<String>>
 basic_string<UT> operator+ (basic_string<UT>        && lhs, const String             & rhs) _QX_STR_OP_PLUS_BODY
-template<class UT, class String, class = typename std::enable_if_t<std::is_class_v<String>>>
+template<class UT, class String, class = basic_string<UT>::enable_if_string_t<String>>
 basic_string<UT> operator+ (const String             & lhs, const basic_string<UT>   & rhs) _QX_STR_OP_PLUS_BODY
-template<class UT, class String, class = typename std::enable_if_t<std::is_class_v<String>>>
+template<class UT, class String, class = basic_string<UT>::enable_if_string_t<String>>
 basic_string<UT> operator+ (const String             & lhs, basic_string<UT>        && rhs) _QX_STR_OP_PLUS_BODY
 
 
