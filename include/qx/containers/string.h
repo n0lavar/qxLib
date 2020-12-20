@@ -136,7 +136,7 @@ public:
     void                    vformat      (const_pointer          pszFormat,
                                           va_list                args);
     template<class ... Args>
-    static basic_string     format_static(const_pointer          pszFormat,
+    static basic_string     sformat      (const_pointer          pszFormat,
                                           Args...                args);
 
     size_type               reserve      (size_type              nCapacity);

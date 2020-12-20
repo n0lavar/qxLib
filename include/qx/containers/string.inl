@@ -286,7 +286,7 @@ void basic_string<Traits>::format(const_pointer pszFormat, ...)
 }
 
 //==============================================================================
-//!\fn          qx::basic_string<Traits>::format_static<...Args>
+//!\fn             qx::basic_string<Traits>::sformat<...Args>
 //
 //!\brief  Static format string
 //!\param  pFormat - format pattern
@@ -297,7 +297,7 @@ void basic_string<Traits>::format(const_pointer pszFormat, ...)
 //==============================================================================
 template<class Traits>
 template<class ...Args>
-inline basic_string<Traits> basic_string<Traits>::format_static(
+inline basic_string<Traits> basic_string<Traits>::sformat(
     const_pointer pszFormat,
     Args...       args)
 {
