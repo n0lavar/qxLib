@@ -2552,7 +2552,7 @@ namespace std
         {
             return qx::murmur_32_hash(str.data(),
                                       str.size(),
-                                      qx::detail::random_string_hash::next());
+                                      qx::string::traits_type::hash_seed());
         }
     };
 
@@ -2563,7 +2563,7 @@ namespace std
         {
             return qx::murmur_32_hash(str.data(),
                                       str.size(),
-                                      qx::detail::random_string_hash::next());
+                                      qx::wstring::traits_type::hash_seed());
         }
     };
 }

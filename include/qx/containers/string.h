@@ -15,7 +15,6 @@
 #include <qx/containers/container.h>
 #include <qx/containers/string_hash.h>
 #include <qx/containers/string_data.h>
-#include <qx/meta/constexpr_random.h>
 #include <qx/type_traits.h>
 
 #include <vector>
@@ -41,11 +40,6 @@ namespace detail
     using istream = std::basic_istream<
         typename Traits::value_type,
         std::char_traits<typename Traits::value_type>
-    >;
-
-    using random_string_hash = constexpr_random<
-        class random_string_hash_tag,
-        QX_UNIQUE_SEED
     >;
 }
 
@@ -260,7 +254,7 @@ public:
 
     bool                    remove_prefix(value_type             chSymbol);
     bool                    remove_prefix(const_pointer          pszStr,
-                                               size_type              nStrSize   = npos);
+                                          size_type              nStrSize   = npos);
     bool                    remove_prefix(const basic_string   & sStr);
     template<class FwdIt>
     bool                    remove_prefix(FwdIt                  itBegin,
@@ -270,7 +264,7 @@ public:
 
     bool                    remove_suffix(value_type             chSymbol);
     bool                    remove_suffix(const_pointer          pszStr,
-                                               size_type              nStrSize   = npos);
+                                          size_type              nStrSize   = npos);
     bool                    remove_suffix(const basic_string   & sStr);
     template<class FwdIt>
     bool                    remove_suffix(FwdIt                  itBegin,
