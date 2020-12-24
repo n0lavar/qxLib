@@ -1697,5 +1697,205 @@ TYPED_TEST(TestQxString, pop_front)
     EXPECT_STREQ(str.data(), STR(""));
 }
 
+TYPED_TEST(TestQxString, trim_left)
+{
+    StringTypeTn str;
+
+    // empty
+    str = STR(" \t\n\r 12345");
+    EXPECT_EQ(str.trim_left(), 5);
+    EXPECT_STREQ(str.data(), STR("12345"));
+    EXPECT_EQ(str.size(), 5);
+
+    str = STR(" \t\n\r");
+    EXPECT_EQ(str.trim_left(), 4);
+    EXPECT_STREQ(str.data(), STR(""));
+    EXPECT_EQ(str.size(), 0);
+
+    // char
+    str = STR("1112345");
+    EXPECT_EQ(str.trim_left(CH('1')), 3);
+    EXPECT_STREQ(str.data(), STR("2345"));
+    EXPECT_EQ(str.size(), 4);
+
+    str = STR("    ");
+    EXPECT_EQ(str.trim_left(CH(' ')), 4);
+    EXPECT_STREQ(str.data(), STR(""));
+    EXPECT_EQ(str.size(), 0);
+
+    // const_pointer
+    str = STR("1112345");
+    EXPECT_EQ(str.trim_left(STR("12")), 4);
+    EXPECT_STREQ(str.data(), STR("345"));
+    EXPECT_EQ(str.size(), 3);
+
+    str = STR("1112345");
+    EXPECT_EQ(str.trim_left(STR("12"), 1), 3);
+    EXPECT_STREQ(str.data(), STR("2345"));
+    EXPECT_EQ(str.size(), 4);
+
+    str = STR("    \t");
+    EXPECT_EQ(str.trim_left(STR(" \t")), 5);
+    EXPECT_STREQ(str.data(), STR(""));
+    EXPECT_EQ(str.size(), 0);
+
+    // qx::string
+    str = STR("1112345");
+    EXPECT_EQ(str.trim_left(StringTypeTn(STR("12"))), 4);
+    EXPECT_STREQ(str.data(), STR("345"));
+    EXPECT_EQ(str.size(), 3);
+
+    // iterators
+    StdString sStdTrim = STR("12");
+    str = STR("1112345");
+    EXPECT_EQ(str.trim_left(sStdTrim.cbegin(), sStdTrim.cend()), 4);
+    EXPECT_STREQ(str.data(), STR("345"));
+    EXPECT_EQ(str.size(), 3);
+
+    // string
+    str = STR("1112345");
+    EXPECT_EQ(str.trim_left(sStdTrim), 4);
+    EXPECT_STREQ(str.data(), STR("345"));
+    EXPECT_EQ(str.size(), 3);
+
+    str = STR("    \t");
+    EXPECT_EQ(str.trim_left(StdString(STR(" \t"))), 5);
+    EXPECT_STREQ(str.data(), STR(""));
+    EXPECT_EQ(str.size(), 0);
+}
+
+TYPED_TEST(TestQxString, trim_right)
+{
+    StringTypeTn str;
+
+    // empty
+    str = STR("12345 \t\n\r ");
+    EXPECT_EQ(str.trim_right(), 5);
+    EXPECT_STREQ(str.data(), STR("12345"));
+    EXPECT_EQ(str.size(), 5);
+
+    str = STR(" \t\n\r");
+    EXPECT_EQ(str.trim_right(), 4);
+    EXPECT_STREQ(str.data(), STR(""));
+    EXPECT_EQ(str.size(), 0);
+
+    // char
+    str = STR("12345555");
+    EXPECT_EQ(str.trim_right(CH('5')), 4);
+    EXPECT_STREQ(str.data(), STR("1234"));
+    EXPECT_EQ(str.size(), 4);
+
+    str = STR("    ");
+    EXPECT_EQ(str.trim_right(CH(' ')), 4);
+    EXPECT_STREQ(str.data(), STR(""));
+    EXPECT_EQ(str.size(), 0);
+
+    // const_pointer
+    str = STR("12345555");
+    EXPECT_EQ(str.trim_right(STR("45")), 5);
+    EXPECT_STREQ(str.data(), STR("123"));
+    EXPECT_EQ(str.size(), 3);
+
+    str = STR("12345555");
+    EXPECT_EQ(str.trim_right(STR("54"), 1), 4);
+    EXPECT_STREQ(str.data(), STR("1234"));
+    EXPECT_EQ(str.size(), 4);
+
+    str = STR("    \t");
+    EXPECT_EQ(str.trim_right(STR(" \t")), 5);
+    EXPECT_STREQ(str.data(), STR(""));
+    EXPECT_EQ(str.size(), 0);
+
+    // qx::string
+    str = STR("12345555");
+    EXPECT_EQ(str.trim_right(StringTypeTn(STR("54"))), 5);
+    EXPECT_STREQ(str.data(), STR("123"));
+    EXPECT_EQ(str.size(), 3);
+
+    // iterators
+    StdString sStdTrim = STR("45");
+    str = STR("12345555");
+    EXPECT_EQ(str.trim_right(sStdTrim.cbegin(), sStdTrim.cend()), 5);
+    EXPECT_STREQ(str.data(), STR("123"));
+    EXPECT_EQ(str.size(), 3);
+
+    // string
+    str = STR("12345555");
+    EXPECT_EQ(str.trim_right(sStdTrim), 5);
+    EXPECT_STREQ(str.data(), STR("123"));
+    EXPECT_EQ(str.size(), 3);
+
+    str = STR("    \t");
+    EXPECT_EQ(str.trim_right(StdString(STR(" \t"))), 5);
+    EXPECT_STREQ(str.data(), STR(""));
+    EXPECT_EQ(str.size(), 0);
+}
+
+TYPED_TEST(TestQxString, trim)
+{
+    StringTypeTn str;
+
+    // empty
+    str = STR("     12345 \t\n\r ");
+    EXPECT_EQ(str.trim(), 10);
+    EXPECT_STREQ(str.data(), STR("12345"));
+    EXPECT_EQ(str.size(), 5);
+
+    str = STR(" \t\n\r");
+    EXPECT_EQ(str.trim(), 4);
+    EXPECT_STREQ(str.data(), STR(""));
+    EXPECT_EQ(str.size(), 0);
+
+    // char
+    str = STR("12345555");
+    EXPECT_EQ(str.trim(CH('5')), 4);
+    EXPECT_STREQ(str.data(), STR("1234"));
+    EXPECT_EQ(str.size(), 4);
+
+    str = STR("    ");
+    EXPECT_EQ(str.trim(CH(' ')), 4);
+    EXPECT_STREQ(str.data(), STR(""));
+    EXPECT_EQ(str.size(), 0);
+
+    // const_pointer
+    str = STR("12345555");
+    EXPECT_EQ(str.trim(STR("145")), 6);
+    EXPECT_STREQ(str.data(), STR("23"));
+    EXPECT_EQ(str.size(), 2);
+
+    str = STR("12345555");
+    EXPECT_EQ(str.trim(STR("54"), 1), 4);
+    EXPECT_STREQ(str.data(), STR("1234"));
+    EXPECT_EQ(str.size(), 4);
+
+    str = STR("    \t");
+    EXPECT_EQ(str.trim(STR(" \t")), 5);
+    EXPECT_STREQ(str.data(), STR(""));
+    EXPECT_EQ(str.size(), 0);
+
+    // qx::string
+    str = STR("12345555");
+    EXPECT_EQ(str.trim(StringTypeTn(STR("154"))), 6);
+    EXPECT_STREQ(str.data(), STR("23"));
+    EXPECT_EQ(str.size(), 2);
+
+    // iterators
+    StdString sStdTrim = STR("145");
+    str = STR("12345555");
+    EXPECT_EQ(str.trim(sStdTrim.cbegin(), sStdTrim.cend()), 6);
+    EXPECT_STREQ(str.data(), STR("23"));
+    EXPECT_EQ(str.size(), 2);
+
+    // string
+    str = STR("12345555");
+    EXPECT_EQ(str.trim(sStdTrim), 6);
+    EXPECT_STREQ(str.data(), STR("23"));
+    EXPECT_EQ(str.size(), 2);
+
+    str = STR("    \t");
+    EXPECT_EQ(str.trim(StdString(STR(" \t"))), 5);
+    EXPECT_STREQ(str.data(), STR(""));
+    EXPECT_EQ(str.size(), 0);
+}
 
 #endif

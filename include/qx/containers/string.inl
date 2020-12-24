@@ -616,112 +616,6 @@ inline basic_string<Traits> basic_string<Traits>::sfrom(
 }
 
 //==============================================================================
-//!\fn                qx::basic_string<Traits>::erase
-//
-//!\brief  Erase substrung
-//!\param  itFirst - first substr char iterator
-//!\param  itLast  - last substr char iterator (excluded)
-//!\author Khrapov
-//!\date   30.10.2019
-//==============================================================================
-template<class Traits>
-inline void basic_string<Traits>::erase(iterator itFirst, iterator itLast)
-{
-    if (itFirst < itLast)
-    {
-        size_type nStartSize = size();
-        size_type nSymbolsToCopy = itLast != end()
-            ? Traits::length(itLast.operator->())
-            : 0;
-
-        if (nSymbolsToCopy > 0)
-        {
-            std::memcpy(
-                itFirst.operator->(),
-                itLast.operator->(),
-                nSymbolsToCopy * sizeof(value_type));
-        }
-
-        resize(static_cast<size_type>(nStartSize - (itLast - itFirst)), Traits::align());
-    }
-}
-
-//==============================================================================
-//!\fn                    basic_string<Traits>::erase
-//
-//!\brief  Erase on iterator
-//!\param  itPos - iterator
-//!\author Khrapov
-//!\date   13.11.2020
-//==============================================================================
-template<class Traits>
-inline void basic_string<Traits>::erase(iterator itPos)
-{
-    erase(itPos, itPos + 1);
-}
-
-//==============================================================================
-//!\fn                    basic_string<Traits>::erase
-//
-//!\brief  Erase on position
-//!\param  nPos - position
-//!\author Khrapov
-//!\date   13.11.2020
-//==============================================================================
-template<class Traits>
-inline void basic_string<Traits>::erase(size_type nPos)
-{
-    erase(iterator(this, nPos), iterator(this, nPos + 1));
-}
-
-//==============================================================================
-//!\fn                    basic_string<Traits>::erase
-//
-//!\brief  Erase substring
-//!\param  nPos     - start position
-//!\param  nSymbols - number of symbols
-//!\author Khrapov
-//!\date   13.11.2020
-//==============================================================================
-template<class Traits>
-inline void basic_string<Traits>::erase(size_type nPos, size_type nSymbols)
-{
-    erase(iterator(this, nPos), iterator(this, nPos + nSymbols));
-}
-
-//==============================================================================
-//!\fn                   basic_string<Traits>::pop_back
-//
-//!\brief  Erase last char and return it
-//!\retval - last char
-//!\author Khrapov
-//!\date   18.12.2020
-//==============================================================================
-template<class Traits>
-inline typename basic_string<Traits>::value_type basic_string<Traits>::pop_back(void)
-{
-    value_type chRet = back();
-    erase(size() - 1);
-    return chRet;
-}
-
-//==============================================================================
-//!\fn                   basic_string<Traits>::pop_front
-//
-//!\brief  Erase first char and return it
-//!\retval - first char
-//!\author Khrapov
-//!\date   18.12.2020
-//==============================================================================
-template<class Traits>
-inline typename basic_string<Traits>::value_type basic_string<Traits>::pop_front(void)
-{
-    value_type chRet = front();
-    erase(0);
-    return chRet;
-}
-
-//==============================================================================
 //!\fn                qx::basic_string<Traits>::insert
 //
 //!\brief  Insert substring
@@ -1003,191 +897,520 @@ inline void basic_string<Traits>::push_front(value_type chSymbol)
 }
 
 //==============================================================================
-//!\fn                qx::basic_string<Traits>::find
+//!\fn                qx::basic_string<Traits>::erase
 //
-//!\brief  Find first match
-//!\param  chSymbol - char to find
-//!\param  nBegin   - start searching index
-//!\param  nEnd     - end searching index (-1 - to the end)
-//!\retval          - substring index or npos if not found
+//!\brief  Erase substrung
+//!\param  itFirst - first substr char iterator
+//!\param  itLast  - last substr char iterator (excluded)
 //!\author Khrapov
 //!\date   30.10.2019
 //==============================================================================
 template<class Traits>
-inline typename basic_string<Traits>::size_type basic_string<Traits>::find(
-    value_type    chSymbol,
-    size_type     nBegin,
-    size_type     nEnd) const
+inline void basic_string<Traits>::erase(iterator itFirst, iterator itLast)
 {
-    if (nEnd == npos)
-        nEnd = size();
-
-    const_pointer pCurrentChar = data() + nBegin;
-    const_pointer pEnd         = data() + nEnd;
-
-    do
+    if (itFirst < itLast)
     {
-        if (*pCurrentChar == chSymbol)
-            return static_cast<size_type>(pCurrentChar - data());
-        else
-            pCurrentChar = step_to(pCurrentChar, pEnd);
-    } while (pCurrentChar != pEnd);
+        size_type nStartSize = size();
+        size_type nSymbolsToCopy = itLast != end()
+            ? Traits::length(itLast.operator->())
+            : 0;
 
-    return npos;
+        if (nSymbolsToCopy > 0)
+        {
+            std::memcpy(
+                itFirst.operator->(),
+                itLast.operator->(),
+                nSymbolsToCopy * sizeof(value_type));
+        }
+
+        resize(static_cast<size_type>(nStartSize - (itLast - itFirst)), Traits::align());
+    }
 }
 
 //==============================================================================
-//!\fn                qx::basic_string<Traits>::find
+//!\fn                    basic_string<Traits>::erase
 //
-//!\brief  Find first match
-//!\param  pszWhat   - c-string to find
-//!\param  nBegin    - start searching index
-//!\param  nEnd      - end searching index (-1 - to the end).
-//!\param  nWhatSize - c-string length
-//         if nEnd < nBegin, seach backward
-//!\retval           - substring index
-//!\author Khrapov
-//!\date   30.10.2019
-//==============================================================================
-template<class Traits>
-inline typename basic_string<Traits>::size_type basic_string<Traits>::find(
-    const_pointer pszWhat,
-    size_type     nBegin,
-    size_type     nEnd,
-    size_type     nWhatSize) const
-{
-    size_type nLocalWhatSize = nWhatSize != npos
-        ? nWhatSize
-        : Traits::length(pszWhat);
-
-    if (nEnd == npos)
-        nEnd = size();
-
-    const_pointer pCurrentChar = data() + nBegin;
-    const_pointer pEnd         = data() + nEnd;
-
-    do
-    {
-        if (!Traits::compare_n(pszWhat, pCurrentChar, nLocalWhatSize))
-            return static_cast<size_type>(pCurrentChar - data());
-        else
-            pCurrentChar = step_to(pCurrentChar, pEnd);
-    } while (pCurrentChar != pEnd);
-
-    return npos;
-}
-
-//==============================================================================
-//!\fn                     basic_string<Traits>::find
-//
-//!\brief  Find substring
-//!\param  sWhat    - string to find
-//!\param  nBegin   - start searching index
-//!\param  nEnd     - end searching index
-//!\retval          - substring index or npos if not found
+//!\brief  Erase on iterator
+//!\param  itPos - iterator
 //!\author Khrapov
 //!\date   13.11.2020
 //==============================================================================
 template<class Traits>
-inline typename basic_string<Traits>::size_type basic_string<Traits>::find(
-    const basic_string& sWhat,
-    size_type           nBegin,
-    size_type           nEnd) const
+inline void basic_string<Traits>::erase(iterator itPos)
 {
-    return find(sWhat.data(), nBegin, nEnd, sWhat.size());
+    erase(itPos, itPos + 1);
 }
 
 //==============================================================================
-//!\fn                 basic_string<Traits>::find<FwdIt>
+//!\fn                    basic_string<Traits>::erase
 //
-//!\brief  Find substring
-//!\param  itWhatBegin - substring begin iterator
-//!\param  itWhatEnd   - substring end iterator
-//!\param  nBegin      - start searching index
-//!\param  nEnd        - end searching index
-//!\retval             - substring index or npos if not found
+//!\brief  Erase on position
+//!\param  nPos - position
 //!\author Khrapov
-//!\date   30.11.2020
+//!\date   13.11.2020
+//==============================================================================
+template<class Traits>
+inline void basic_string<Traits>::erase(size_type nPos)
+{
+    erase(iterator(this, nPos), iterator(this, nPos + 1));
+}
+
+//==============================================================================
+//!\fn                    basic_string<Traits>::erase
+//
+//!\brief  Erase substring
+//!\param  nPos     - start position
+//!\param  nSymbols - number of symbols
+//!\author Khrapov
+//!\date   13.11.2020
+//==============================================================================
+template<class Traits>
+inline void basic_string<Traits>::erase(size_type nPos, size_type nSymbols)
+{
+    erase(iterator(this, nPos), iterator(this, nPos + nSymbols));
+}
+
+//==============================================================================
+//!\fn                   basic_string<Traits>::pop_back
+//
+//!\brief  Erase last char and return it
+//!\retval - last char
+//!\author Khrapov
+//!\date   18.12.2020
+//==============================================================================
+template<class Traits>
+inline typename basic_string<Traits>::value_type basic_string<Traits>::pop_back(void)
+{
+    value_type chRet = back();
+    erase(size() - 1);
+    return chRet;
+}
+
+//==============================================================================
+//!\fn                   basic_string<Traits>::pop_front
+//
+//!\brief  Erase first char and return it
+//!\retval - first char
+//!\author Khrapov
+//!\date   18.12.2020
+//==============================================================================
+template<class Traits>
+inline typename basic_string<Traits>::value_type basic_string<Traits>::pop_front(void)
+{
+    value_type chRet = front();
+    erase(0);
+    return chRet;
+}
+
+//==============================================================================
+//!\fn                basic_string<Traits>::trim_left
+//
+//!\brief  Trim the string to the left (whitespace characters)
+//!\retval - number of deleted symbols
+//!\author Khrapov
+//!\date   24.12.2020
+//==============================================================================
+template<class Traits>
+inline typename basic_string<Traits>::size_type basic_string<Traits>::trim_left(void)
+{
+    return trim_left_common([](value_type ch) { return Traits::is_space(ch); });
+}
+
+//==============================================================================
+//!\fn                basic_string<Traits>::trim_left
+//
+//!\brief  Trim the string to the left
+//!\param  chSymbol - symbol to delete
+//!\retval          - number of deleted symbols
+//!\author Khrapov
+//!\date   24.12.2020
+//==============================================================================
+template<class Traits>
+inline typename basic_string<Traits>::size_type basic_string<Traits>::trim_left(
+    value_type chSymbol)
+{
+    return trim_left_common([chSymbol](value_type ch) { return ch == chSymbol; });
+}
+
+//==============================================================================
+//!\fn                basic_string<Traits>::trim_left
+//
+//!\brief  Trim the string to the left
+//!\param  pszStr - string with symbols to delete
+//!\retval        - number of deleted symbols
+//!\author Khrapov
+//!\date   24.12.2020
+//==============================================================================
+template<class Traits>
+inline typename basic_string<Traits>::size_type basic_string<Traits>::trim_left(
+    const_pointer pszStr)
+{
+    return trim_left_common([pszStr](value_type ch)
+        {
+            for (size_type j = 0; pszStr[j] != QX_CHAR_PREFIX(value_type, '\0'); j++)
+                if (pszStr[j] == ch)
+                    return true;
+
+            return false;
+        });
+}
+
+//==============================================================================
+//!\fn                basic_string<Traits>::trim_left
+//
+//!\brief  Trim the string to the left
+//!\param  pszStr   - string with symbols to delete
+//!\param  nStrSize - string size
+//!\retval          - number of deleted symbols
+//!\author Khrapov
+//!\date   24.12.2020
+//==============================================================================
+template<class Traits>
+inline typename basic_string<Traits>::size_type basic_string<Traits>::trim_left(
+    const_pointer pszStr,
+    size_type     nStrSize)
+{
+    return trim_left_common([pszStr, nStrSize](value_type ch)
+        {
+            for (size_type j = 0; j < nStrSize; j++)
+                if (pszStr[j] == ch)
+                    return true;
+
+            return false;
+        });
+}
+
+//==============================================================================
+//!\fn                basic_string<Traits>::trim_left
+//
+//!\brief  Trim the string to the left
+//!\param  sStr - string with symbols to delete
+//!\retval      - number of deleted symbols
+//!\author Khrapov
+//!\date   24.12.2020
+//==============================================================================
+template<class Traits>
+inline typename basic_string<Traits>::size_type basic_string<Traits>::trim_left(
+    const basic_string& sStr)
+{
+    return trim_left(sStr.data(), sStr.size());
+}
+
+//==============================================================================
+//!\fn             basic_string<Traits>::trim_left<FwdIt>
+//
+//!\brief  Trim the string to the left
+//!\param  itBegin - begin it of string with symbols to delete
+//!\param  itEnd   - begin it of string with symbols to delete
+//!\retval         - number of deleted symbols
+//!\author Khrapov
+//!\date   24.12.2020
 //==============================================================================
 template<class Traits>
 template<class FwdIt>
-inline typename basic_string<Traits>::size_type basic_string<Traits>::find(
-    FwdIt       itWhatBegin,
-    FwdIt       itWhatEnd,
-    size_type   nBegin,
-    size_type   nEnd) const
+inline typename basic_string<Traits>::size_type basic_string<Traits>::trim_left(
+    FwdIt itBegin,
+    FwdIt itEnd)
 {
-    if (nEnd == npos)
-        nEnd = size();
-
-    const_pointer pStart = data();
-    const_pointer pCurrentChar = pStart + nBegin;
-    const_pointer pEnd = pStart + nEnd;
-
-    do
-    {
-        if (!iter_strcmp(
-                const_iterator(this, static_cast<size_type>(pCurrentChar - pStart)),
-                const_iterator(this, static_cast<size_type>(pEnd - pStart)),
-                itWhatBegin,
-                itWhatEnd))
+    return trim_left_common([itBegin, itEnd](auto ch)
         {
-            return static_cast<size_type>(pCurrentChar - pStart);
-        }
-        else
-        {
-            pCurrentChar = step_to(pCurrentChar, pEnd);
-        }
-    } while (pCurrentChar != pEnd);
+            for (auto it = itBegin; it != itEnd; ++it)
+                if (*it == ch)
+                    return true;
 
-    return npos;
+            return false;
+        });
 }
 
 //==============================================================================
-//!\fn                basic_string<Traits>::find<String, >
+//!\fn           basic_string<Traits>::trim_left<String, >
 //
-//!\brief  Find substring
-//!\param  sWhat  - substring
-//!\param  nBegin - start searching index
-//!\param  nEnd   - end searching index
-//!\retval        - substring index or npos if not found
+//!\brief  Trim the string to the left
+//!\param  sStr - string with symbols to delete
+//!\retval      - number of deleted symbols
 //!\author Khrapov
-//!\date   30.11.2020
+//!\date   24.12.2020
 //==============================================================================
 template<class Traits>
 template<class String, class>
-inline typename basic_string<Traits>::size_type basic_string<Traits>::find(
-    String    sWhat,
-    size_type nBegin,
-    size_type nEnd) const
+inline typename basic_string<Traits>::size_type basic_string<Traits>::trim_left(
+    const String& sStr)
 {
-    return find(sWhat.cbegin(), sWhat.cend(), nBegin, nEnd);
+    return trim_left(sStr.cbegin(), sStr.cend());
 }
 
 //==============================================================================
-//!\fn                qx::basic_string<Traits>::find_last_of
+//!\fn                basic_string<Traits>::trim_right
 //
-//!\brief  Find last position of catacter
-//!\param  chSymbol - char to find
-//!\param  nPos     - start searching index (from the end). npos - from the very end
-//!\param  nSymbols - number of symbols to check (npos - to the beginning)
-//!\retval          - symbol index or npos
+//!\brief  Trim the string to the right (whitespace characters)
+//!\retval - number of deleted symbols
 //!\author Khrapov
-//!\date   30.10.2019
+//!\date   24.12.2020
 //==============================================================================
 template<class Traits>
-inline typename basic_string<Traits>::size_type basic_string<Traits>::find_last_of(
-    value_type chSymbol,
-    size_type  nPos,
-    size_type  nSymbols) const
+inline typename basic_string<Traits>::size_type basic_string<Traits>::trim_right(void)
 {
-    if (nPos == npos)
-        nPos = size();
+    return trim_right_common([](value_type ch) { return Traits::is_space(ch); });
+}
 
-    if (nSymbols == npos)
-        nSymbols = size();
+//==============================================================================
+//!\fn                basic_string<Traits>::trim_right
+//
+//!\brief  Trim the string to the right
+//!\param  chSymbol - symbol to delete
+//!\retval          - number of deleted symbols
+//!\author Khrapov
+//!\date   24.12.2020
+//==============================================================================
+template<class Traits>
+inline typename basic_string<Traits>::size_type basic_string<Traits>::trim_right(
+    value_type chSymbol)
+{
+    return trim_right_common([chSymbol](value_type ch) { return ch == chSymbol; });
+}
 
-    return find(chSymbol, nPos, nPos - nSymbols);
+//==============================================================================
+//!\fn                basic_string<Traits>::trim_right
+//
+//!\brief  Trim the string to the right
+//!\param  pszStr - string with symbols to delete
+//!\retval        - number of deleted symbols
+//!\author Khrapov
+//!\date   24.12.2020
+//==============================================================================
+template<class Traits>
+inline typename basic_string<Traits>::size_type basic_string<Traits>::trim_right(
+    const_pointer pszStr)
+{
+    return trim_right_common([pszStr](value_type ch)
+        {
+            for (size_type j = 0; pszStr[j] != QX_CHAR_PREFIX(value_type, '\0'); j++)
+                if (pszStr[j] == ch)
+                    return true;
+
+            return false;
+        });
+}
+
+//==============================================================================
+//!\fn                basic_string<Traits>::trim_right
+//
+//!\brief  Trim the string to the right
+//!\param  pszStr   - string with symbols to delete
+//!\param  nStrSize - string size
+//!\retval          - number of deleted symbols
+//!\author Khrapov
+//!\date   24.12.2020
+//==============================================================================
+template<class Traits>
+inline typename basic_string<Traits>::size_type basic_string<Traits>::trim_right(
+    const_pointer pszStr,
+    size_type     nStrSize)
+{
+    return trim_right_common([pszStr, nStrSize](value_type ch)
+        {
+            for (size_type j = 0; j < nStrSize; j++)
+                if (pszStr[j] == ch)
+                    return true;
+
+            return false;
+        });
+}
+
+//==============================================================================
+//!\fn                basic_string<Traits>::trim_right
+//
+//!\brief  Trim the string to the right
+//!\param  sStr - string with symbols to delete
+//!\retval      - number of deleted symbols
+//!\author Khrapov
+//!\date   24.12.2020
+//==============================================================================
+template<class Traits>
+inline typename basic_string<Traits>::size_type basic_string<Traits>::trim_right(
+    const basic_string& sStr)
+{
+    return trim_right(sStr.data(), sStr.size());
+}
+
+//==============================================================================
+//!\fn             basic_string<Traits>::trim_right<FwdIt>
+//
+//!\brief  Trim the string to the right
+//!\param  itBegin - begin it of string with symbols to delete
+//!\param  itEnd   - begin it of string with symbols to delete
+//!\retval         - number of deleted symbols
+//!\author Khrapov
+//!\date   24.12.2020
+//==============================================================================
+template<class Traits>
+template<class FwdIt>
+inline typename basic_string<Traits>::size_type basic_string<Traits>::trim_right(
+    FwdIt itBegin,
+    FwdIt itEnd)
+{
+    return trim_right_common([itBegin, itEnd](auto ch)
+        {
+            for (auto it = itBegin; it != itEnd; ++it)
+                if (*it == ch)
+                    return true;
+
+            return false;
+        });
+}
+
+//==============================================================================
+//!\fn           basic_string<Traits>::trim_right<String, >
+//
+//!\brief  Trim the string to the right
+//!\param  sStr - string with symbols to delete
+//!\retval      - number of deleted symbols
+//!\author Khrapov
+//!\date   24.12.2020
+//==============================================================================
+template<class Traits>
+template<class String, class>
+inline typename basic_string<Traits>::size_type basic_string<Traits>::trim_right(
+    const String& sStr)
+{
+    return trim_right(sStr.cbegin(), sStr.cend());
+}
+
+//==============================================================================
+//!\fn                   basic_string<Traits>::trim
+//
+//!\brief  Trim the string to the both sides (whitespace characters)
+//!\retval - number of deleted symbols
+//!\author Khrapov
+//!\date   24.12.2020
+//==============================================================================
+template<class Traits>
+inline typename basic_string<Traits>::size_type basic_string<Traits>::trim(void)
+{
+    return trim_common([](value_type ch) { return Traits::is_space(ch); });
+}
+
+//==============================================================================
+//!\fn                   basic_string<Traits>::trim
+//
+//!\brief  Trim the string to the both sides
+//!\param  chSymbol - symbol to delete
+//!\retval          - number of deleted symbols
+//!\author Khrapov
+//!\date   24.12.2020
+//==============================================================================
+template<class Traits>
+inline typename basic_string<Traits>::size_type basic_string<Traits>::trim(
+    value_type chSymbol)
+{
+    return trim_common([chSymbol](value_type ch) { return ch == chSymbol; });
+}
+
+//==============================================================================
+//!\fn                   basic_string<Traits>::trim
+//
+//!\brief  Trim the string to the both sides
+//!\param  pszStr - string with symbols to delete
+//!\retval        - number of deleted symbols
+//!\author Khrapov
+//!\date   24.12.2020
+//==============================================================================
+template<class Traits>
+inline typename basic_string<Traits>::size_type basic_string<Traits>::trim(
+    const_pointer pszStr)
+{
+    return trim_common([pszStr](value_type ch)
+        {
+            for (size_type j = 0; pszStr[j] != QX_CHAR_PREFIX(value_type, '\0'); j++)
+                if (pszStr[j] == ch)
+                    return true;
+
+            return false;
+        });
+}
+
+//==============================================================================
+//!\fn                   basic_string<Traits>::trim
+//
+//!\brief  Trim the string to the both sides
+//!\param  pszStr   - string with symbols to delete
+//!\param  nStrSize - string size
+//!\retval          - number of deleted symbols
+//!\author Khrapov
+//!\date   24.12.2020
+//==============================================================================
+template<class Traits>
+inline typename basic_string<Traits>::size_type basic_string<Traits>::trim(
+    const_pointer pszStr,
+    size_type     nStrSize)
+{
+    return trim_common([pszStr, nStrSize](value_type ch)
+        {
+            for (size_type j = 0; j < nStrSize; j++)
+                if (pszStr[j] == ch)
+                    return true;
+
+            return false;
+        });
+}
+
+//==============================================================================
+//!\fn                   basic_string<Traits>::trim
+//
+//!\brief  Trim the string to the both sides
+//!\param  sStr - string with symbols to delete
+//!\retval      - number of deleted symbols
+//!\author Khrapov
+//!\date   24.12.2020
+//==============================================================================
+template<class Traits>
+inline typename basic_string<Traits>::size_type basic_string<Traits>::trim(
+    const basic_string& sStr)
+{
+    return trim(sStr.data(), sStr.size());
+}
+
+//==============================================================================
+//!\fn                basic_string<Traits>::trim<FwdIt>
+//
+//!\brief  Trim the string to the both sides
+//!\param  itBegin - begin it of string with symbols to delete
+//!\param  itEnd   - begin it of string with symbols to delete
+//!\retval         - number of deleted symbols
+//!\author Khrapov
+//!\date   24.12.2020
+//==============================================================================
+template<class Traits>
+template<class FwdIt>
+inline typename basic_string<Traits>::size_type basic_string<Traits>::trim(
+    FwdIt itBegin,
+    FwdIt itEnd)
+{
+    return trim_common([itBegin, itEnd](auto ch)
+        {
+            for (auto it = itBegin; it != itEnd; ++it)
+                if (*it == ch)
+                    return true;
+
+            return false;
+        });
+}
+
+//==============================================================================
+//!\fn              basic_string<Traits>::trim<String, >
+//
+//!\brief  Trim the string to the both sides
+//!\param  sStr - string with symbols to delete
+//!\retval      - number of deleted symbols
+//!\author Khrapov
+//!\date   24.12.2020
+//==============================================================================
+template<class Traits>
+template<class String, class>
+inline typename basic_string<Traits>::size_type basic_string<Traits>::trim(
+    const String& sStr)
+{
+    return trim(sStr.cbegin(), sStr.cend());
 }
 
 //==============================================================================
@@ -1693,6 +1916,194 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::replace_al
     } while (nPos != npos);
 
     return nOccurences;
+}
+
+//==============================================================================
+//!\fn                qx::basic_string<Traits>::find
+//
+//!\brief  Find first match
+//!\param  chSymbol - char to find
+//!\param  nBegin   - start searching index
+//!\param  nEnd     - end searching index (-1 - to the end)
+//!\retval          - substring index or npos if not found
+//!\author Khrapov
+//!\date   30.10.2019
+//==============================================================================
+template<class Traits>
+inline typename basic_string<Traits>::size_type basic_string<Traits>::find(
+    value_type    chSymbol,
+    size_type     nBegin,
+    size_type     nEnd) const
+{
+    if (nEnd == npos)
+        nEnd = size();
+
+    const_pointer pCurrentChar = data() + nBegin;
+    const_pointer pEnd         = data() + nEnd;
+
+    do
+    {
+        if (*pCurrentChar == chSymbol)
+            return static_cast<size_type>(pCurrentChar - data());
+        else
+            pCurrentChar = step_to(pCurrentChar, pEnd);
+    } while (pCurrentChar != pEnd);
+
+    return npos;
+}
+
+//==============================================================================
+//!\fn                qx::basic_string<Traits>::find
+//
+//!\brief  Find first match
+//!\param  pszWhat   - c-string to find
+//!\param  nBegin    - start searching index
+//!\param  nEnd      - end searching index (-1 - to the end).
+//!\param  nWhatSize - c-string length
+//         if nEnd < nBegin, seach backward
+//!\retval           - substring index
+//!\author Khrapov
+//!\date   30.10.2019
+//==============================================================================
+template<class Traits>
+inline typename basic_string<Traits>::size_type basic_string<Traits>::find(
+    const_pointer pszWhat,
+    size_type     nBegin,
+    size_type     nEnd,
+    size_type     nWhatSize) const
+{
+    size_type nLocalWhatSize = nWhatSize != npos
+        ? nWhatSize
+        : Traits::length(pszWhat);
+
+    if (nEnd == npos)
+        nEnd = size();
+
+    const_pointer pCurrentChar = data() + nBegin;
+    const_pointer pEnd         = data() + nEnd;
+
+    do
+    {
+        if (!Traits::compare_n(pszWhat, pCurrentChar, nLocalWhatSize))
+            return static_cast<size_type>(pCurrentChar - data());
+        else
+            pCurrentChar = step_to(pCurrentChar, pEnd);
+    } while (pCurrentChar != pEnd);
+
+    return npos;
+}
+
+//==============================================================================
+//!\fn                     basic_string<Traits>::find
+//
+//!\brief  Find substring
+//!\param  sWhat    - string to find
+//!\param  nBegin   - start searching index
+//!\param  nEnd     - end searching index
+//!\retval          - substring index or npos if not found
+//!\author Khrapov
+//!\date   13.11.2020
+//==============================================================================
+template<class Traits>
+inline typename basic_string<Traits>::size_type basic_string<Traits>::find(
+    const basic_string& sWhat,
+    size_type           nBegin,
+    size_type           nEnd) const
+{
+    return find(sWhat.data(), nBegin, nEnd, sWhat.size());
+}
+
+//==============================================================================
+//!\fn                 basic_string<Traits>::find<FwdIt>
+//
+//!\brief  Find substring
+//!\param  itWhatBegin - substring begin iterator
+//!\param  itWhatEnd   - substring end iterator
+//!\param  nBegin      - start searching index
+//!\param  nEnd        - end searching index
+//!\retval             - substring index or npos if not found
+//!\author Khrapov
+//!\date   30.11.2020
+//==============================================================================
+template<class Traits>
+template<class FwdIt>
+inline typename basic_string<Traits>::size_type basic_string<Traits>::find(
+    FwdIt       itWhatBegin,
+    FwdIt       itWhatEnd,
+    size_type   nBegin,
+    size_type   nEnd) const
+{
+    if (nEnd == npos)
+        nEnd = size();
+
+    const_pointer pStart = data();
+    const_pointer pCurrentChar = pStart + nBegin;
+    const_pointer pEnd = pStart + nEnd;
+
+    do
+    {
+        if (!iter_strcmp(
+                const_iterator(this, static_cast<size_type>(pCurrentChar - pStart)),
+                const_iterator(this, static_cast<size_type>(pEnd - pStart)),
+                itWhatBegin,
+                itWhatEnd))
+        {
+            return static_cast<size_type>(pCurrentChar - pStart);
+        }
+        else
+        {
+            pCurrentChar = step_to(pCurrentChar, pEnd);
+        }
+    } while (pCurrentChar != pEnd);
+
+    return npos;
+}
+
+//==============================================================================
+//!\fn                basic_string<Traits>::find<String, >
+//
+//!\brief  Find substring
+//!\param  sWhat  - substring
+//!\param  nBegin - start searching index
+//!\param  nEnd   - end searching index
+//!\retval        - substring index or npos if not found
+//!\author Khrapov
+//!\date   30.11.2020
+//==============================================================================
+template<class Traits>
+template<class String, class>
+inline typename basic_string<Traits>::size_type basic_string<Traits>::find(
+    String    sWhat,
+    size_type nBegin,
+    size_type nEnd) const
+{
+    return find(sWhat.cbegin(), sWhat.cend(), nBegin, nEnd);
+}
+
+//==============================================================================
+//!\fn                qx::basic_string<Traits>::find_last_of
+//
+//!\brief  Find last position of catacter
+//!\param  chSymbol - char to find
+//!\param  nPos     - start searching index (from the end). npos - from the very end
+//!\param  nSymbols - number of symbols to check (npos - to the beginning)
+//!\retval          - symbol index or npos
+//!\author Khrapov
+//!\date   30.10.2019
+//==============================================================================
+template<class Traits>
+inline typename basic_string<Traits>::size_type basic_string<Traits>::find_last_of(
+    value_type chSymbol,
+    size_type  nPos,
+    size_type  nSymbols) const
+{
+    if (nPos == npos)
+        nPos = size();
+
+    if (nSymbols == npos)
+        nSymbols = size();
+
+    return find(chSymbol, nPos, nPos - nSymbols);
 }
 
 //==============================================================================
@@ -2401,6 +2812,98 @@ inline constexpr typename basic_string<Traits>::const_pointer basic_string<Trait
     }
 
     return pszFormat;
+}
+
+//==============================================================================
+//!\fn            qx::basic_string<Traits>::trim_left_common
+//
+//!\brief  Common algorithm for trimming string to the left
+//!\param  searcher - function that returns true if symbol has to be deleted
+//!\retval          - number of deleted symbols
+//!\author Khrapov
+//!\date   02.12.2020
+//==============================================================================
+template<class Traits>
+template<class Searcher>
+inline typename basic_string<Traits>::size_type basic_string<Traits>::trim_left_common(
+    const Searcher& searcher)
+{
+    size_type nSymbols = 0;
+
+    for (size_type i = 0; i < size(); i++)
+    {
+        if (searcher(at(i)))
+            nSymbols++;
+        else
+            break;
+    }
+
+    erase(0, nSymbols);
+    return nSymbols;
+}
+
+//==============================================================================
+//!\fn            qx::basic_string<Traits>::trim_right_common
+//
+//!\brief  Common algorithm for trimming string to the right
+//!\param  searcher - function that returns true if symbol has to be deleted
+//!\retval          - number of deleted symbols
+//!\author Khrapov
+//!\date   02.12.2020
+//==============================================================================
+template<class Traits>
+template<class Searcher>
+inline typename basic_string<Traits>::size_type basic_string<Traits>::trim_right_common(
+    const Searcher& searcher)
+{
+    size_type nSymbols = 0;
+    size_type nSize = size();
+
+    for (size_type i = nSize - 1; i != std::numeric_limits<size_type>::max(); i--)
+    {
+        if (searcher(at(i)))
+            nSymbols++;
+        else
+            break;
+    }
+
+    erase(nSize - nSymbols, nSymbols);
+    return nSymbols;
+}
+
+//==============================================================================
+//!\fn                qx::basic_string<Traits>::trim_common
+//
+//!\brief  Common algorithm for trimming string to the both sides
+//!\param  searcher - function that returns true if symbol has to be deleted
+//!\retval          - number of deleted symbols
+//!\author Khrapov
+//!\date   02.12.2020
+//==============================================================================
+template<class Traits>
+template<class Searcher>
+inline typename basic_string<Traits>::size_type basic_string<Traits>::trim_common(
+    const Searcher& searcher)
+{
+    size_type nSize     = size();
+    size_type nStartPos = 0;
+    size_type nEndPos   = nSize;
+
+    while (nStartPos < nSize && searcher(at(nStartPos)))
+        nStartPos++;
+
+    while (nEndPos > nStartPos && searcher(at(nEndPos - 1)))
+        nEndPos--;
+
+    size_type nNewSize = nEndPos - nStartPos;
+
+    std::memmove(
+        data(),
+        data() + nStartPos,
+        nNewSize * sizeof(value_type));
+
+    resize(nNewSize, Traits::align());
+    return nSize - nNewSize;
 }
 
 //==============================================================================

@@ -165,16 +165,6 @@ public:
     static  basic_string    sfrom        (const From&            data,
                                           const_pointer          pszFormat = nullptr);
 
-    void                    erase        (iterator               itFirst,
-                                          iterator               itLast);
-    void                    erase        (iterator               itPos);
-    void                    erase        (size_type              nPos);
-    void                    erase        (size_type              nPos,
-                                          size_type              nSymbols);
-
-    value_type              pop_back     (void);
-    value_type              pop_front    (void);
-
     size_type               insert       (size_type              nPos,
                                           value_type             chSymbol);
     size_type               insert       (size_type              nPos,
@@ -208,29 +198,51 @@ public:
     void                    push_back    (value_type             chSymbol);
     void                    push_front   (value_type             chSymbol);
 
-    size_type               find         (value_type             chSymbol,
-                                          size_type              nBegin     = 0,
-                                          size_type              nEnd       = npos) const;
-    size_type               find         (const_pointer          pszWhat,
-                                          size_type              nBegin     = 0,
-                                          size_type              nEnd       = npos,
-                                          size_type              nWhatSize  = npos) const;
-    size_type               find         (const basic_string   & sWhat,
-                                          size_type              nBegin     = 0,
-                                          size_type              nEnd       = npos) const;
-    template<class FwdIt>
-    size_type               find         (FwdIt                  itWhatBegin,
-                                          FwdIt                  itWhatEnd,
-                                          size_type              nBegin     = 0,
-                                          size_type              nEnd       = npos) const;
-    template<class String, class = enable_if_string_t<String>>
-    size_type               find         (String                 sWhat,
-                                          size_type              nBegin     = 0,
-                                          size_type              nEnd       = npos) const;
+    void                    erase        (iterator               itFirst,
+                                          iterator               itLast);
+    void                    erase        (iterator               itPos);
+    void                    erase        (size_type              nPos);
+    void                    erase        (size_type              nPos,
+                                          size_type              nSymbols);
 
-    size_type               find_last_of (value_type             chSymbol,
-                                          size_type              nPos       = npos,
-                                          size_type              nSymbols   = npos) const;
+    value_type              pop_back     (void);
+    value_type              pop_front    (void);
+
+    size_type               trim_left    (void);
+    size_type               trim_left    (value_type             chSymbol);
+    size_type               trim_left    (const_pointer          pszStr);
+    size_type               trim_left    (const_pointer          pszStr,
+                                          size_type              nStrSize);
+    size_type               trim_left    (const basic_string   & sStr);
+    template<class FwdIt>
+    size_type               trim_left    (FwdIt                  itBegin,
+                                          FwdIt                  itEnd);
+    template<class String, class = enable_if_string_t<String>>
+    size_type               trim_left    (const String         & sStr);
+
+    size_type               trim_right   (void);
+    size_type               trim_right   (value_type             chSymbol);
+    size_type               trim_right   (const_pointer          pszStr);
+    size_type               trim_right   (const_pointer          pszStr,
+                                          size_type              nStrSize);
+    size_type               trim_right   (const basic_string   & sStr);
+    template<class FwdIt>
+    size_type               trim_right   (FwdIt                  itBegin,
+                                          FwdIt                  itEnd);
+    template<class String, class = enable_if_string_t<String>>
+    size_type               trim_right   (const String         & sStr);
+
+    size_type               trim         (void);
+    size_type               trim         (value_type             chSymbol);
+    size_type               trim         (const_pointer          pszStr);
+    size_type               trim         (const_pointer          pszStr,
+                                          size_type              nStrSize);
+    size_type               trim         (const basic_string   & sStr);
+    template<class FwdIt>
+    size_type               trim         (FwdIt                  itBegin,
+                                          FwdIt                  itEnd);
+    template<class String, class = enable_if_string_t<String>>
+    size_type               trim         (const String         & sStr);
 
     size_type               remove       (value_type             chSymbol,
                                           size_type              nBegin     = 0,
@@ -303,6 +315,30 @@ public:
                                           T2                     sReplace,
                                           size_type              nBegin     = 0,
                                           size_type              nEnd       = npos);
+
+    size_type               find         (value_type             chSymbol,
+                                          size_type              nBegin     = 0,
+                                          size_type              nEnd       = npos) const;
+    size_type               find         (const_pointer          pszWhat,
+                                          size_type              nBegin     = 0,
+                                          size_type              nEnd       = npos,
+                                          size_type              nWhatSize  = npos) const;
+    size_type               find         (const basic_string   & sWhat,
+                                          size_type              nBegin     = 0,
+                                          size_type              nEnd       = npos) const;
+    template<class FwdIt>
+    size_type               find         (FwdIt                  itWhatBegin,
+                                          FwdIt                  itWhatEnd,
+                                          size_type              nBegin     = 0,
+                                          size_type              nEnd       = npos) const;
+    template<class String, class = enable_if_string_t<String>>
+    size_type               find         (String                 sWhat,
+                                          size_type              nBegin     = 0,
+                                          size_type              nEnd       = npos) const;
+
+    size_type               find_last_of (value_type             chSymbol,
+                                          size_type              nPos       = npos,
+                                          size_type              nSymbols   = npos) const;
 
     vector                  split        (const value_type       chSeparator)       const;
     vector                  split        (const_pointer          pszSeparator,
@@ -410,6 +446,15 @@ private:
                                           FwdIt                  itEnd);
     int                     compare      (const_pointer          pStr,
                                           size_type              nSymbols   = 0)    const;
+
+    template<class Searcher>
+    size_type               trim_left_common(const Searcher    & searcher);
+
+    template<class Searcher>
+    size_type               trim_right_common(const Searcher   & searcher);
+
+    template<class Searcher>
+    size_type               trim_common  (const Searcher       & searcher);
 
     template<typename T>
     static constexpr const_pointer get_format_specifier(void);
