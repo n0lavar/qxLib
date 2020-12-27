@@ -1,0 +1,112 @@
+name: ubuntu
+on: push
+
+jobs:
+  ubuntu:
+  
+    strategy:
+      matrix:
+        build_type: [Debug, Release]
+        compiler: [clang++-11, g++-10]
+        
+    env:
+      CXX: ${{ matrix.compiler }}
+      
+    runs-on: 
+      ubuntu-latest
+      
+      
+    steps:
+      
+    - name: Configuring clang
+      shell: bash
+      if: matrix.compiler == 'clang++-11'
+      run: |
+        wget -O - https://apt.llvm.org/llvm-snapshot.gpg.key|sudo apt-key add -
+        sudo add-apt-repository 'deb http://apt.llvm.org/bionic/ llvm-toolchain-bionic-11 main' -y
+        sudo apt-get update -q
+        sudo apt-get install clang-11 lldb-11 lld-11
+
+
+    - name: Configuring gcc
+      shell: bash
+      if: matrix.compiler == 'g++-10'
+      run: |
+        sudo add-apt-repository ppa:ubuntu-toolchain-r/ppa
+        sudo apt update
+        sudo apt install g++-10
+        
+        
+    - name: Install cmake 3.17 manually
+      shell: bash
+      run: |
+        if [ "$RUNNER_OS" = "Linux" ]; then
+          cmake_package_name=cmake-3.17.0-Linux-x86_64;
+        elif [ "$RUNNER_OS" = "macOS" ]; then
+          cmake_package_name=cmake-3.17.0-Darwin-x86_64;
+        fi  
+
+        wget https://github.com/Kitware/CMake/releases/download/v3.17.0/$cmake_package_name.tar.gz
+        tar xf $cmake_package_name.tar.gz
+        
+        if [ "$RUNNER_OS" = "Linux" ]; then
+          export PATH="`pwd`/$cmake_package_name/bin:$PATH";
+        elif [ "$RUNNER_OS" = "macOS" ]; then
+          export PATH="`pwd`/$cmake_package_name/CMake.app/Contents/bin:$PATH";
+        fi  
+      
+      
+    - name: Install dependencies
+      shell: bash
+      run: |
+        # gtest 1.10
+        sudo wget https://github.com/google/googletest/archive/release-1.10.0.tar.gz
+        tar xf release-1.10.0.tar.gz
+        cd googletest-release-1.10.0
+        cmake . -DCMAKE_BUILD_TYPE=${{ matrix.build_type }}
+        cmake --build . -j $(nproc)
+        sudo cp -a googletest/include/gtest /usr/local/include
+        sudo cp -a lib/*.a /usr/local/lib/
+        cd ..  
+        rm -r googletest-release-1.10.0
+        rm release-1.10.0.tar.gz
+        
+        # glm
+        sudo apt-get install libglm-dev
+      
+      
+    - name: Build
+      shell: bash
+      run: |
+        git clone https://github.com/n0lavar/qxLib.git
+        cd qxLib
+        mkdir build
+        cd build
+        cmake -DGENERATE_TESTS=1 .. -DCMAKE_BUILD_TYPE=${{ matrix.build_type }}
+        cmake --build . -j $(nproc)
+      
+      
+    - name: Run tests
+      shell: bash
+      working-directory: qxLib/build
+      run: |
+        ctest --output-on-failure -j $(nproc)
+      
+      
+    - name: Calc code coverage
+      shell: bash
+      working-directory: qxLib/build
+      if: matrix.os == 'ubuntu-latest' && matrix.compiler == 'g++-10' && matrix.build_type == 'Debug'
+      run: |
+        # copy all required files from subdirectories
+        find . -name \*.gcda -exec cp {} . \;
+        find . -name \*.gcno -exec cp {} . \;
+        find . -name \*.o  -exec cp {} . \;      
+        
+        # install lcov 1.15 manually 
+        sudo wget https://github.com/linux-test-project/lcov/releases/download/v1.15/lcov-1.15.tar.gz
+        tar xf lcov-1.15.tar.gz
+        ./lcov-1.15/bin/lcov --gcov-tool gcov-10 --directory . --capture --output-file coverage.info
+        
+        # generate coverage report
+        bash <(curl -s https://codecov.io/bash) -X gcov

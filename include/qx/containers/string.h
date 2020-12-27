@@ -493,13 +493,13 @@ basic_string<UT> operator+ (typename UT::value_type    lhs, const basic_string<U
 template<class UT>
 basic_string<UT> operator+ (typename UT::value_type    lhs, basic_string<UT>        && rhs) _QX_STR_OP_PLUS_BODY
 
-template<class UT, class String, class = basic_string<UT>::enable_if_string_t<String>>
+template<class UT, class String, class = typename basic_string<UT>::template enable_if_string_t<String>>
 basic_string<UT> operator+ (const basic_string<UT>   & lhs, const String             & rhs) _QX_STR_OP_PLUS_BODY
-template<class UT, class String, class = basic_string<UT>::enable_if_string_t<String>>
+template<class UT, class String, class = typename basic_string<UT>::template enable_if_string_t<String>>
 basic_string<UT> operator+ (basic_string<UT>        && lhs, const String             & rhs) _QX_STR_OP_PLUS_BODY
-template<class UT, class String, class = basic_string<UT>::enable_if_string_t<String>>
+template<class UT, class String, class = typename basic_string<UT>::template enable_if_string_t<String>>
 basic_string<UT> operator+ (const String             & lhs, const basic_string<UT>   & rhs) _QX_STR_OP_PLUS_BODY
-template<class UT, class String, class = basic_string<UT>::enable_if_string_t<String>>
+template<class UT, class String, class = typename basic_string<UT>::template enable_if_string_t<String>>
 basic_string<UT> operator+ (const String             & lhs, basic_string<UT>        && rhs) _QX_STR_OP_PLUS_BODY
 
 

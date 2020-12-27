@@ -1,0 +1,22 @@
+name: ubuntu_clang_release
+
+on: push
+
+jobs:
+  ubuntu_clang_release:
+    runs-on: ubuntu-latest
+    env:
+      CXX: clang++-11
+
+    steps:
+      - uses: actions/checkout@v2
+      - uses: ./.github/actions/configure_clang
+      - uses: ./.github/actions/install_cmake
+      - uses: ./.github/actions/install_dependencies
+        with:
+          build_type: Release
+      - uses: ./.github/actions/build
+        with:
+          build_type: Release
+      - uses: ./.github/actions/run_tests
+      

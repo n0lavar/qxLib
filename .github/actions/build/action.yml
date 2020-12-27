@@ -1,0 +1,19 @@
+name: Build
+inputs:
+  build_type:
+    required: true
+
+runs:
+  using: composite
+  steps:
+    - name: Build
+      shell: bash
+      run: |
+        echo "build_type: ${{ inputs.build_type }}" 
+
+        git clone https://github.com/n0lavar/qxLib.git
+        cd qxLib
+        mkdir build
+        cd build
+        cmake -DGENERATE_TESTS=1 .. -DCMAKE_BUILD_TYPE=${{ inputs.build_type }}
+        cmake --build . -j $(nproc)

@@ -1,0 +1,10 @@
+name: Run tests
+
+runs:
+  using: composite
+  steps:
+    - name: Run tests
+      shell: bash
+      working-directory: qxLib/build
+      run: |
+        ctest --output-on-failure -j $(nproc)

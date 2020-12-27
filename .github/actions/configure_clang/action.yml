@@ -1,0 +1,12 @@
+name: Configure clang
+
+runs:
+  using: composite
+  steps:
+    - name: Configure clang
+      shell: bash
+      run: |
+        wget -O - https://apt.llvm.org/llvm-snapshot.gpg.key|sudo apt-key add -
+        sudo add-apt-repository 'deb http://apt.llvm.org/bionic/ llvm-toolchain-bionic-11 main' -y
+        sudo apt-get update -q
+        sudo apt-get install clang-11 lldb-11 lld-11

@@ -1,0 +1,21 @@
+name: Calc code coverage
+
+runs:
+  using: composite
+  steps:
+    - name: Calc code coverage
+      shell: bash
+      working-directory: qxLib/build
+      run: |
+        # copy all required files from subdirectories
+        find . -name \*.gcda -exec cp {} . \;
+        find . -name \*.gcno -exec cp {} . \;
+        find . -name \*.o  -exec cp {} . \;      
+        
+        # install lcov 1.15 manually 
+        sudo wget https://github.com/linux-test-project/lcov/releases/download/v1.15/lcov-1.15.tar.gz
+        tar xf lcov-1.15.tar.gz
+        ./lcov-1.15/bin/lcov --gcov-tool gcov-10 --directory . --capture --output-file coverage.info
+        
+        # generate coverage report
+        bash <(curl -s https://codecov.io/bash) -X gcov

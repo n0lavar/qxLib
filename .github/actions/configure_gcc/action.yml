@@ -1,0 +1,11 @@
+name: Configure gcc
+
+runs:
+  using: composite
+  steps:
+    - name: Configure gcc
+      shell: bash
+      run: |
+        sudo add-apt-repository ppa:ubuntu-toolchain-r/ppa
+        sudo apt update
+        sudo apt install g++-10

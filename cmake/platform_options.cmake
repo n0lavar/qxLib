@@ -14,9 +14,14 @@ function(set_qxlib_target_options _target)
         
     elseif (${CMAKE_CXX_COMPILER_ID} STREQUAL GNU)    
         
+        # coverage 
         target_link_options(${_target} PRIVATE 
             $<$<CONFIG:Debug>:--coverage>
         )
+        target_compile_options(${_target} PRIVATE
+            $<$<CONFIG:Debug>:--coverage>
+        )
+        
         target_link_libraries(${_target} PRIVATE
             -pthread 
 			-lstdc++fs

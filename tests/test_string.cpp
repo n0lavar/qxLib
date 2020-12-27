@@ -663,15 +663,15 @@ TYPED_TEST(TestQxString, remove)
             1,
             STR("01122235666"),
             type(STR("00")),
-            static_cast<StringType::size_type>(1));
+            static_cast<StringTypeTn::size_type>(1));
 
         check_remove(
             str,
             StringType::npos,
             STR("01122235666"),
             type(STR("6")),
-            static_cast<StringType::size_type>(2),
-            static_cast<StringType::size_type>(6));
+            static_cast<StringTypeTn::size_type>(2),
+            static_cast<StringTypeTn::size_type>(6));
     };
 
     check_remove_type(STRING);
@@ -685,7 +685,7 @@ TYPED_TEST(TestQxString, remove_all)
 
     {
         StringTypeTn str = STRING;
-        StringType::size_type nOccurrences = 0;
+        StringTypeTn::size_type nOccurrences = 0;
 
         nOccurrences = str.remove_all('0');
         EXPECT_EQ(nOccurrences, 4);
@@ -743,15 +743,15 @@ TYPED_TEST(TestQxString, remove_all)
             1,
             STR("22333987"),
             type(STR("22")),
-            static_cast<StringType::size_type>(2));
+            static_cast<StringTypeTn::size_type>(2));
 
         check_remove_all(
             str,
             0,
             STR("22333987"),
             type(STR("22")),
-            static_cast<StringType::size_type>(2),
-            static_cast<StringType::size_type>(5));
+            static_cast<StringTypeTn::size_type>(2),
+            static_cast<StringTypeTn::size_type>(5));
     };
 
     check_remove_all_type(STRING);
@@ -1668,7 +1668,7 @@ TYPED_TEST(TestQxString, remove_suffix)
 
 TYPED_TEST(TestQxString, max_size)
 {
-    static_assert(StringType::max_size() == 18'446'744'073'709'551'613);
+    static_assert(StringType::max_size() == 18'446'744'073'709'551'613u);
 }
 
 TYPED_TEST(TestQxString, pop_back)
