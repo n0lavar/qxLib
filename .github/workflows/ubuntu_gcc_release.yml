@@ -19,5 +19,4 @@ jobs:
         with:
           build_type: Release
       - uses: ./.github/actions/run_tests
-      - uses: ./.github/actions/calc_code_coverage
       
