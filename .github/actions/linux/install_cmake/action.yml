@@ -6,6 +6,8 @@ runs:
     - name: Install cmake 3.17
       shell: bash
       run: |
+        cmake --version
+              
         if [ "$RUNNER_OS" = "Linux" ]; then
           cmake_package_name=cmake-3.17.0-Linux-x86_64;
         elif [ "$RUNNER_OS" = "macOS" ]; then
