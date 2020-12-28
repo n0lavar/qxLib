@@ -17,7 +17,7 @@ runs:
         cd googletest
         mkdir build
         cd build
-        cmake .. -DCMAKE_BUILD_TYPE=${{ inputs.build_type }}
-        cmake --build . -j %NUMBER_OF_PROCESSORS%
+        cmake ..
+        cmake --build .  --config ${{ inputs.build_type }} -j %NUMBER_OF_PROCESSORS%
         cd ..
         cd ..

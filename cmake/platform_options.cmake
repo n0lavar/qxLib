@@ -5,7 +5,7 @@ function(set_qxlib_target_options _target)
     
         target_link_libraries(${_target} PRIVATE
             -pthread 
-			-lstdc++fs
+            -lstdc++fs
         )
         target_compile_options(${_target} PRIVATE
             $<$<CONFIG:Debug>:-D_DEBUG=1>

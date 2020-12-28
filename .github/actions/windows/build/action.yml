@@ -13,5 +13,5 @@ runs:
         cd qxLib
         mkdir build
         cd build
-        cmake -DGENERATE_TESTS=1 .. -DCMAKE_BUILD_TYPE=${{ inputs.build_type }}
-        cmake --build . -j %NUMBER_OF_PROCESSORS%
+        cmake -DGENERATE_TESTS=1 ..
+        cmake --build .  --config ${{ inputs.build_type }} -j %NUMBER_OF_PROCESSORS%
