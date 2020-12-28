@@ -86,7 +86,7 @@ struct are_same<T, T, Ts...> : are_same<T, Ts...>
 };
 
 template <typename ... Ts>
-inline constexpr bool are_same_v = are_same<Ts...>::value;
+constexpr bool are_same_v = are_same<Ts...>::value;
 
 
 
@@ -132,7 +132,7 @@ template <class T>
 using is_specialization_exist = decltype(detail::is_specialization_exist_impl(std::declval<T*>()));
 
 template <class T>
-inline constexpr bool is_specialization_exist_v = is_specialization_exist<T>::value;
+constexpr bool is_specialization_exist_v = is_specialization_exist<T>::value;
 
 
 

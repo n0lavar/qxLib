@@ -69,7 +69,7 @@ inline constexpr bool between(T left, T value, T right, Compare compare)
 }
 // overloading for disabling 4388 warning with Compare instantiation
 template<typename T, typename Compare = std::less_equal<>>
-inline constexpr bool between(T left, T value, T right)
+constexpr bool between(T left, T value, T right)
 {
     QX_PUSH_SUPPRESS_MSVC_WARNINGS(4388)
     return between(left, value, right, Compare());
@@ -86,7 +86,7 @@ inline constexpr bool between(T left, T value, T right)
 //!\date   3.11.2019
 //==============================================================================
 template<typename T>
-inline constexpr T step_to(T val, T to)
+constexpr T step_to(T val, T to)
 {
     if (val < to)
         return ++val;
@@ -104,7 +104,7 @@ inline constexpr T step_to(T val, T to)
 //!\date   16.11.2019
 //==============================================================================
 template <typename T = float>
-inline constexpr T pi()
+constexpr T pi()
 {
     return static_cast<T>(3.14159265358979323846264338327950288);
 }

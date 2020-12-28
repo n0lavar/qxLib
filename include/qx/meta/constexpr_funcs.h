@@ -30,7 +30,7 @@ namespace qx::meta
 //!\date   24.09.2020
 //==============================================================================
 template<typename TChar>
-inline constexpr std::size_t strlen(const TChar* psz)
+constexpr std::size_t strlen(const TChar* psz)
 {
     std::size_t nLen = 0;
     while (psz && *psz != QX_CHAR_PREFIX(TChar, '\0'))
@@ -56,7 +56,7 @@ inline constexpr std::size_t strlen(const TChar* psz)
 //!\date   25.09.2020
 //==============================================================================
 template<typename TChar>
-inline constexpr int strcmp(const TChar* pszLeft, const TChar* pszRight)
+constexpr int strcmp(const TChar* pszLeft, const TChar* pszRight)
 {
     while (*pszLeft && (*pszLeft == *pszRight))
     {
@@ -76,7 +76,7 @@ inline constexpr int strcmp(const TChar* pszLeft, const TChar* pszRight)
 //!\date   24.09.2020
 //==============================================================================
 template<typename T>
-inline constexpr T abs(T value)
+constexpr T abs(T value)
 {
     return value < 0 ? -value : value;
 }
@@ -93,7 +93,7 @@ inline constexpr T abs(T value)
 //!\date   24.09.2020
 //==============================================================================
 template<typename T>
-inline constexpr bool epsilon_equal(T left, T right, T eps = std::numeric_limits<T>::epsilon())
+constexpr bool epsilon_equal(T left, T right, T eps = std::numeric_limits<T>::epsilon())
 {
     return qx::meta::abs(left - right) < eps;
 };

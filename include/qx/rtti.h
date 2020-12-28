@@ -22,7 +22,7 @@ namespace qx
 {
 
 template<class C>
-inline constexpr int get_class_id(void)
+constexpr int get_class_id(void)
 {
     return -1;
 }
@@ -113,7 +113,7 @@ private:                                                                    \
 namespace qx                                                                \
 {                                                                           \
     template<>                                                              \
-    inline constexpr int get_class_id<thisClass>(void)                      \
+    constexpr int get_class_id<thisClass>(void)                             \
     {                                                                       \
         return thisClass::s_ClassId;                                        \
     }                                                                       \
@@ -179,7 +179,7 @@ private:                                                                    \
 namespace qx                                                                \
 {                                                                           \
     template<>                                                              \
-    inline constexpr int get_class_id<thisClass>(void)                      \
+    constexpr int get_class_id<thisClass>(void)                             \
     {                                                                       \
         return thisClass::s_ClassId;                                        \
     }                                                                       \

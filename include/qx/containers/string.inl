@@ -2746,7 +2746,7 @@ inline basic_string<Traits>::operator std::basic_string_view<
 //==============================================================================
 template<class Traits>
 template<typename T>
-inline constexpr typename basic_string<Traits>::const_pointer basic_string<Traits>::get_format_specifier(void)
+constexpr typename basic_string<Traits>::const_pointer basic_string<Traits>::get_format_specifier(void)
 {
     const_pointer pszFormat = nullptr;
 

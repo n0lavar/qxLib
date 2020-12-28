@@ -130,13 +130,13 @@ namespace detail
 {
 
 template<typename T, T INC>
-inline constexpr T increase(T val)
+constexpr T increase(T val)
 {
     return val + INC;
 }
 
 template<typename T, T MULT>
-inline constexpr T multiply(T val)
+constexpr T multiply(T val)
 {
     return val * MULT;
 }
