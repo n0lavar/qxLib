@@ -16,5 +16,6 @@ jobs:
       - uses: ./.github/actions/linux/build
         with:
           build_type: Debug
-      - uses: ./.github/actions/linux/run_tests
-      
+      - uses: ./.github/actions/run_tests
+        with:
+          number_of_processors: $(nproc)

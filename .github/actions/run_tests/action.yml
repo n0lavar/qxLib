@@ -1,4 +1,7 @@
 name: Run tests
+inputs:
+  number_of_processors:
+    required: true
 
 runs:
   using: composite
@@ -7,4 +10,4 @@ runs:
       shell: bash
       working-directory: qxLib/build
       run: |
-        ctest --output-on-failure -j $(nproc)
+        ctest --output-on-failure -j ${{ inputs.number_of_processors }}
