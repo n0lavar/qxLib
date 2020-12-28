@@ -22,4 +22,8 @@ runs:
         rm release-1.10.0.tar.gz
         
         # glm
-        sudo apt-get install libglm-dev
+        if [ "$RUNNER_OS" = "Linux" ]; then
+          sudo apt-get install libglm-dev;
+        elif [ "$RUNNER_OS" = "macOS" ]; then
+          brew install glm;
+        fi  
