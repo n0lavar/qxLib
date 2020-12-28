@@ -8,8 +8,7 @@ function(set_qxlib_target_options _target)
             -lstdc++fs
         )
         target_compile_options(${_target} PRIVATE
-            $<$<CONFIG:Debug>:-D_DEBUG=1>
-            $<$<CONFIG:Release>:-D_DEBUG=0>
+            $<$<CONFIG:Debug>:-D_DEBUG>
         )
         
     elseif (${CMAKE_CXX_COMPILER_ID} STREQUAL GNU)    
@@ -27,15 +26,13 @@ function(set_qxlib_target_options _target)
 			-lstdc++fs
         )
         target_compile_options(${_target} PRIVATE
-            $<$<CONFIG:Debug>:-D_DEBUG=1>
-            $<$<CONFIG:Release>:-D_DEBUG=0>
+            $<$<CONFIG:Debug>:-D_DEBUG>
         )
 		
 	elseif(${CMAKE_CXX_COMPILER_ID} STREQUAL AppleClang)
 	
 		target_compile_options(${_target} PRIVATE
-            $<$<CONFIG:Debug>:-D_DEBUG=1>
-            $<$<CONFIG:Release>:-D_DEBUG=0>
+            $<$<CONFIG:Debug>:-D_DEBUG>
         )
     
     elseif (${CMAKE_CXX_COMPILER_ID} STREQUAL MSVC)
@@ -47,6 +44,7 @@ function(set_qxlib_target_options _target)
             /wd4625 # 'type': move assignment operator was implicitly defined as deleted
             /wd4626 # 'derived class' : assignment operator was implicitly defined as deleted because a base class assignment operator is inaccessible or deleted
             /wd4710 # 'function' : function not inlined
+            /wd4711 # 'function' selected for inline expansion. Inlining is performed at the compiler's discretion
             /wd4820 # 'bytes' bytes padding added after construct 'member_name'
             /wd5026 # 'type': move constructor was implicitly defined as deleted
             /wd5027 # 'type': move assignment operator was implicitly defined as deleted

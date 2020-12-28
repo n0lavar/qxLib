@@ -54,7 +54,7 @@
 
 //------------------------------------ build -----------------------------------
 
-#if _DEBUG
+#ifdef _DEBUG
     #define QX_DEBUG 1
     #define QX_RELEASE 0
 #else
