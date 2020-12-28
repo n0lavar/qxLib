@@ -10,13 +10,13 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-      - uses: ./.github/actions/configure_gcc
-      - uses: ./.github/actions/install_cmake
-      - uses: ./.github/actions/install_dependencies
+      - uses: ./.github/actions/linux/configure_gcc
+      - uses: ./.github/actions/linux/install_cmake
+      - uses: ./.github/actions/linux/install_dependencies
         with:
           build_type: Release
-      - uses: ./.github/actions/build
+      - uses: ./.github/actions/linux/build
         with:
           build_type: Release
-      - uses: ./.github/actions/run_tests
+      - uses: ./.github/actions/linux/run_tests
       
