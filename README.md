@@ -21,7 +21,7 @@ A few useful things for developing your own game engine with OpenGL:
   + ubo
   + vao
 + containers:
-  + string with extended interface (format, apply_case, to<T>, from<T>, trim_left, trim_right, trim, remove, remove_prefix, remove_suffix, remove_all, replace, replace_all, split, contains)
+  + string with extended interface (format, apply_case, to\<T\>, from\<T\>, trim_left, trim_right, trim, remove, remove_prefix, remove_suffix, remove_all, replace, replace_all, split, contains)
   + vector2d class of cache friendly two dimentional vector
   + triangular_vector class where only elements with nRow >= nCols are stored
 + constexpr classes:
@@ -30,6 +30,10 @@ A few useful things for developing your own game engine with OpenGL:
   + constexpr_funcs (some std algorithms with constexpr qualifier)
   + constexpr_random (returns new pseudorandom value with each "next()" calling)
 + thread_worker
++ asserts
+  + QX_DEBUG_BREAK (breaks debugging)
+  + QX_ASSERT (breaks debugging depending on condition)
+  + QX_ASSERT_MSG (breaks debugging depending on condition with specific message)
 + logger
   + registering units: function, method, file or tag
   + enabling and disabling logging to file for each unit
