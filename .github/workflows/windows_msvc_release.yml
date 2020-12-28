@@ -1,0 +1,17 @@
+name: windows_msvc_release
+
+on: push
+
+jobs:
+  windows_msvc_release:
+    runs-on: windows-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - uses: ./.github/actions/windows/install_dependencies
+        with:
+          build_type: Release
+      - uses: ./.github/actions/windows/build
+        with:
+          build_type: Release
+      - uses: ./.github/actions/windows/run_tests

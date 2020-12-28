@@ -1,0 +1,23 @@
+name: Install dependencies
+inputs:
+  build_type:
+    required: true
+
+runs:
+  using: composite        
+  steps:
+    - name: Install dependencies
+      shell: cmd
+      run: |
+        # install glm
+        git clone https://github.com/g-truc/glm.git
+        
+        # install gtest
+        git clone https://github.com/google/googletest.git
+        cd googletest
+        mkdir build
+        cd build
+        cmake .. -DCMAKE_BUILD_TYPE=${{ inputs.build_type }}
+        cmake --build . -j %NUMBER_OF_PROCESSORS%
+        cd ..
+        cd ..

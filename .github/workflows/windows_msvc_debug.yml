@@ -1,0 +1,17 @@
+name: windows_msvc_debug
+
+on: push
+
+jobs:
+  windows_msvc_debug:
+    runs-on: windows-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - uses: ./.github/actions/windows/install_dependencies
+        with:
+          build_type: Debug
+      - uses: ./.github/actions/windows/build
+        with:
+          build_type: Debug
+      - uses: ./.github/actions/windows/run_tests
