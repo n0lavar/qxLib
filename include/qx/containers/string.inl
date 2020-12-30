@@ -1,4 +1,3 @@
-#include "string.h"
 //==============================================================================
 //
 //!\file                         string.inl
@@ -287,6 +286,27 @@ void basic_string<Traits>::format(const_pointer pszFormat, ...)
 }
 
 //==============================================================================
+//!\fn                   basic_string<Traits>::vformat
+//
+//!\brief  Format string with given va_args
+//!\param  pszFormat - format pattern. this str as pszFormat is UB
+//!\param  args      - args pack
+//!\author Khrapov
+//!\date   5.11.2020
+//==============================================================================
+template<class Traits>
+inline void basic_string<Traits>::vformat(const_pointer pszFormat, va_list args)
+{
+    va_list args_copy;
+    va_copy(args_copy, args);
+    int length = Traits::vsnprintf(nullptr, 0, pszFormat, args_copy);
+    va_end(args_copy);
+
+    if (length > 0 && resize(static_cast<size_type>(length), Traits::align()))
+        Traits::vsnprintf(data(), static_cast<size_type>(length) + 1, pszFormat, args);
+}
+
+//==============================================================================
 //!\fn             qx::basic_string<Traits>::sformat<...Args>
 //
 //!\brief  Static format string
@@ -308,24 +328,43 @@ inline basic_string<Traits> basic_string<Traits>::sformat(
 }
 
 //==============================================================================
-//!\fn                   basic_string<Traits>::vformat
+//!\fn           qx::basic_string<Traits>::append_format
 //
-//!\brief  Format string with given va_args
+//!\brief  Format string and uppend to the current string
+//!\param  pszFormat - format pattern. this str as pszFormat is UB
+//!\param  ...       - arguments
+//!\author Khrapov
+//!\date   31.12.2020
+//==============================================================================
+template<class Traits>
+inline void basic_string<Traits>::append_format(const_pointer pszFormat, ...)
+{
+    va_list args;
+    va_start(args, pszFormat);
+    append_vformat(pszFormat, args);
+    va_end(args);
+}
+
+//==============================================================================
+//!\fn               basic_string<Traits>::append_vformat
+//
+//!\brief  Format string and uppend to the current string
 //!\param  pszFormat - format pattern. this str as pszFormat is UB
 //!\param  args      - args pack
 //!\author Khrapov
-//!\date   5.11.2020
+//!\date   31.12.2020
 //==============================================================================
 template<class Traits>
-inline void basic_string<Traits>::vformat(const_pointer pszFormat, va_list args)
+inline void basic_string<Traits>::append_vformat(const_pointer pszFormat, va_list args)
 {
     va_list args_copy;
     va_copy(args_copy, args);
     int length = Traits::vsnprintf(nullptr, 0, pszFormat, args_copy);
     va_end(args_copy);
 
-    if (length > 0 && resize(static_cast<size_type>(length), Traits::align()))
-        Traits::vsnprintf(data(), static_cast<size_type>(length) + 1, pszFormat, args);
+    size_type nSize = size();
+    if (length > 0 && resize(nSize + static_cast<size_type>(length), Traits::align()))
+        Traits::vsnprintf(data() + nSize, static_cast<size_type>(length) + 1, pszFormat, args);
 }
 
 //==============================================================================

@@ -1962,4 +1962,21 @@ TYPED_TEST(TestQxString, append)
     test_append_type(StdString(STR("")));
 }
 
+TYPED_TEST(TestQxString, append_format)
+{
+    StringTypeTn str;
+
+    str.append_format(STR("%d"), 99);
+    EXPECT_STREQ(str.data(), STR("99"));
+    EXPECT_EQ(str.size(), 2);
+
+    str.append_format(STR(" %f"), 0.f);
+    EXPECT_STREQ(str.data(), STR("99 0.000000"));
+    EXPECT_EQ(str.size(), 11);
+
+    str.append_format(STR("%f"), 2.f);
+    EXPECT_STREQ(str.data(), STR("99 0.0000002.000000"));
+    EXPECT_EQ(str.size(), 19);
+}
+
 #endif

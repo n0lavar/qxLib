@@ -138,6 +138,10 @@ public:
     template<class ... Args>
     static basic_string     sformat      (const_pointer          pszFormat,
                                           Args...                args);
+    void                    append_format(const_pointer          pszFormat,
+                                          ...);
+    void                    append_vformat(const_pointer         pszFormat,
+                                          va_list                args);
 
     size_type               reserve      (size_type              nCapacity);
     void                    shrink_to_fit(void);
