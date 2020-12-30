@@ -165,6 +165,16 @@ public:
     static  basic_string    sfrom        (const From&            data,
                                           const_pointer          pszFormat = nullptr);
 
+    void                    append       (value_type             chSymbol);
+    void                    append       (const_pointer          pszStr,
+                                          size_type              nStrSize   = npos);
+    void                    append       (const basic_string   & sStr);
+    template<class FwdIt>
+    void                    append       (FwdIt                  itBegin,
+                                          FwdIt                  itEnd);
+    template<class String, class = enable_if_string_t<String>>
+    void                    append       (const String         & sStr);
+
     size_type               insert       (size_type              nPos,
                                           value_type             chSymbol);
     size_type               insert       (size_type              nPos,
@@ -316,6 +326,16 @@ public:
                                           size_type              nBegin     = 0,
                                           size_type              nEnd       = npos);
 
+    int                     compare      (value_type             chSymbol)          const;
+    int                     compare      (const_pointer          pszStr,
+                                          size_type              nStrSize   = npos) const;
+    int                     compare      (const basic_string   & sStr)              const;
+    template<class FwdIt>
+    int                     compare      (FwdIt                  itBegin,
+                                          FwdIt                  itEnd)             const;
+    template<class String, class = enable_if_string_t<String>>
+    int                     compare      (const String         & sStr)              const;
+
     size_type               find         (value_type             chSymbol,
                                           size_type              nBegin     = 0,
                                           size_type              nEnd       = npos) const;
@@ -439,13 +459,6 @@ private:
     bool                    resize       (size_type              nSymbols,
                                           size_type              nAlign,
                                           string_resize_type     eType      = string_resize_type::common);
-    void                    append       (const_pointer          pSource,
-                                          size_type              nSymbols);
-    template<class FwdIt>
-    void                    append       (FwdIt                  itBegin,
-                                          FwdIt                  itEnd);
-    int                     compare      (const_pointer          pStr,
-                                          size_type              nSymbols   = 0)    const;
 
     template<class Searcher>
     size_type               trim_left_common(const Searcher    & searcher);

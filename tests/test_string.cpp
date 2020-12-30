@@ -1898,4 +1898,68 @@ TYPED_TEST(TestQxString, trim)
     EXPECT_EQ(str.size(), 0);
 }
 
+TYPED_TEST(TestQxString, compare)
+{
+    StringTypeTn str(CH('5'));
+
+    EXPECT_GT(str.compare(CH('4')), 0);
+    EXPECT_EQ(str.compare(CH('5')), 0);
+    EXPECT_LT(str.compare(CH('6')), 0);
+
+    auto test_compare_type = [](auto type_var)
+    {
+        using type = decltype(type_var);
+
+        StringTypeTn str(STR("555"));
+
+        EXPECT_GT(str.compare(type(STR("444"))), 0);
+        EXPECT_EQ(str.compare(type(STR("555"))), 0);
+        EXPECT_LT(str.compare(type(STR("666"))), 0);
+    };
+
+    test_compare_type(STR(""));
+    test_compare_type(StringTypeTn(STR("")));
+    test_compare_type(StdString(STR("")));
+}
+
+TYPED_TEST(TestQxString, append)
+{
+    StringTypeTn str;
+
+    str.append(CH('1'));
+    EXPECT_STREQ(str.data(), STR("1"));
+    EXPECT_EQ(str.size(), 1);
+
+    str.append(CH('2'));
+    EXPECT_STREQ(str.data(), STR("12"));
+    EXPECT_EQ(str.size(), 2);
+
+    str.append(CH('3'));
+    EXPECT_STREQ(str.data(), STR("123"));
+    EXPECT_EQ(str.size(), 3);
+
+    auto test_append_type = [](auto type_var)
+    {
+        using type = decltype(type_var);
+
+        StringTypeTn str;
+
+        str.append(type(STR("12")));
+        EXPECT_STREQ(str.data(), STR("12"));
+        EXPECT_EQ(str.size(), 2);
+
+        str.append(type(STR("34")));
+        EXPECT_STREQ(str.data(), STR("1234"));
+        EXPECT_EQ(str.size(), 4);
+
+        str.append(type(STR("56")));
+        EXPECT_STREQ(str.data(), STR("123456"));
+        EXPECT_EQ(str.size(), 6);
+    };
+
+    test_append_type(STR(""));
+    test_append_type(StringTypeTn(STR("")));
+    test_append_type(StdString(STR("")));
+}
+
 #endif

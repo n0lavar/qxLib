@@ -1,3 +1,4 @@
+#include "string.h"
 //==============================================================================
 //
 //!\file                         string.inl
@@ -613,6 +614,87 @@ inline basic_string<Traits> basic_string<Traits>::sfrom(
     basic_string str;
     str.from(data, pszFormat);
     return std::move(str);
+}
+
+//==============================================================================
+//!\fn                qx::basic_string<Traits>::append
+//
+//!\brief  Append char to the current
+//!\param  chSymbol - char to append
+//!\author Khrapov
+//!\date   31.12.2020
+//==============================================================================
+template<class Traits>
+inline void basic_string<Traits>::append(value_type chSymbol)
+{
+    append(&chSymbol, 1);
+}
+
+//==============================================================================
+//!\fn                qx::basic_string<Traits>::append
+//
+//!\brief  Append string to the current
+//!\param  pszStr   - source string
+//!\param  nSymbols - source string size
+//!\author Khrapov
+//!\date   27.10.2019
+//==============================================================================
+template<class Traits>
+inline void basic_string<Traits>::append(const_pointer pszStr, size_type nSymbols)
+{
+    size_type nCurrentSymbls = size();
+    size_type nSizeSource = nSymbols == npos
+        ? Traits::length(pszStr)
+        : nSymbols;
+
+    if (resize(nCurrentSymbls + nSizeSource, Traits::align()))
+        std::memcpy(data() + nCurrentSymbls, pszStr, nSizeSource * sizeof(value_type));
+}
+
+//==============================================================================
+//!\fn                qx::basic_string<Traits>::append
+//
+//!\brief  Append string to the current
+//!\param  sStr - source string
+//!\author Khrapov
+//!\date   31.12.2020
+//==============================================================================
+template<class Traits>
+inline void basic_string<Traits>::append(const basic_string& sStr)
+{
+    append(sStr.data(), sStr.size());
+}
+
+//==============================================================================
+//!\fn                basic_string<Traits>::append<FwdIt>
+//
+//!\brief  Append string to the current
+//!\param  itBegin - other string begin iterator
+//!\param  itEnd   - other end begin iterator
+//!\author Khrapov
+//!\date   23.10.2020
+//==============================================================================
+template<class Traits>
+template<class FwdIt>
+inline void basic_string<Traits>::append(FwdIt itBegin, FwdIt itEnd)
+{
+    for (auto it = itBegin; it != itEnd; ++it)
+        push_back(*it);
+}
+
+//==============================================================================
+//!\fn                qx::basic_string<Traits>::append
+//
+//!\brief  Append string to the current
+//!\param  sStr - source string
+//!\author Khrapov
+//!\date   31.12.2020
+//==============================================================================
+template<class Traits>
+template<class String, class>
+inline void basic_string<Traits>::append(const String& sStr)
+{
+    append(sStr.cbegin(), sStr.cend());
 }
 
 //==============================================================================
@@ -1919,6 +2001,98 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::replace_al
 }
 
 //==============================================================================
+//!\fn               qx::basic_string<Traits>::compare
+//
+//!\brief  Performs a binary comparison of the characters
+//!\param  chSymbol - symbol to compare
+//!\retval          -   < 0 the first character that does not match has a lower value in this than in chSymbol
+//                        0 the contents of both strings are equal
+//                      > 0 the first character that does not match has a greater value in this than in chSymbol
+//!\author Khrapov
+//!\date   30.12.2020
+//==============================================================================
+template<class Traits>
+inline int basic_string<Traits>::compare(value_type chSymbol) const
+{
+    return compare(&chSymbol, 1);
+}
+
+//==============================================================================
+//!\fn               qx::basic_string<Traits>::compare
+//
+//!\brief  Performs a binary comparison of the characters
+//!\param  pStr     - string to compare
+//!\param  nSymbols - number of symbols to compare (0 - string is zero terminated)
+//!\retval          -   < 0 the first character that does not match has a lower value in this than in pStr
+//                        0 the contents of both strings are equal
+//                      > 0 the first character that does not match has a greater value in this than in pStr
+//!\author Khrapov
+//!\date   28.10.2019
+//==============================================================================
+template<class Traits>
+inline int basic_string<Traits>::compare(const_pointer pStr, size_type nSymbols) const
+{
+    if (nSymbols > 0)
+        return Traits::compare_n(data(), pStr, nSymbols);
+    else
+        return Traits::compare(data(), pStr);
+}
+
+//==============================================================================
+//!\fn               qx::basic_string<Traits>::compare
+//
+//!\brief  Performs a binary comparison of the characters
+//!\param  sStr     - string to compare
+//!\retval          -   < 0 the first character that does not match has a lower value in this than in sStr
+//                        0 the contents of both strings are equal
+//                      > 0 the first character that does not match has a greater value in this than in sStr
+//!\author Khrapov
+//!\date   30.12.2020
+//==============================================================================
+template<class Traits>
+inline int basic_string<Traits>::compare(const basic_string& sStr) const
+{
+    return compare(sStr.data(), sStr.size());
+}
+
+//==============================================================================
+//!\fn           qx::basic_string<Traits>::compare<FwdIt>
+//
+//!\brief  Performs a binary comparison of the characters
+//!\param  itBegin  - string to compare begin iterator
+//!\param  itEnd    - string to compare end iterator
+//!\retval          -   < 0 the first character that does not match has a lower value in this than in [itBegin, itEnd]
+//                        0 the contents of both strings are equal
+//                      > 0 the first character that does not match has a greater value in this than in [itBegin, itEnd]
+//!\author Khrapov
+//!\date   30.12.2020
+//==============================================================================
+template<class Traits>
+template<class FwdIt>
+inline int basic_string<Traits>::compare(FwdIt itBegin, FwdIt itEnd) const
+{
+    return iter_strcmp(cbegin(), cend(), itBegin, itEnd);
+}
+
+//==============================================================================
+//!\fn          qx::basic_string<Traits>::compare<Stringm >
+//
+//!\brief  Performs a binary comparison of the characters
+//!\param  sStr     - string to compare
+//!\retval          -   < 0 the first character that does not match has a lower value in this than in sStr
+//                        0 the contents of both strings are equal
+//                      > 0 the first character that does not match has a greater value in this than in sStr
+//!\author Khrapov
+//!\date   30.12.2020
+//==============================================================================
+template<class Traits>
+template<class String, class>
+inline int basic_string<Traits>::compare(const String& sStr) const
+{
+    return compare(sStr.cbegin(), sStr.cend());
+}
+
+//==============================================================================
 //!\fn                qx::basic_string<Traits>::find
 //
 //!\brief  Find first match
@@ -2983,61 +3157,6 @@ inline bool basic_string<Traits>::resize(
         at(nSymbols) = QX_CHAR_PREFIX(typename Traits::value_type, '\0');
 
     return bRet;
-}
-
-//==============================================================================
-//!\fn                qx::basic_string<Traits>::append
-//
-//!\brief  Append string to the current
-//!\param  pSource  - source string
-//!\param  nSymbols - source string size
-//!\author Khrapov
-//!\date   27.10.2019
-//==============================================================================
-template<class Traits>
-inline void basic_string<Traits>::append(const_pointer pSource, size_type nSymbols)
-{
-    size_type nCurrentSymbls = size();
-    if (resize(nCurrentSymbls + nSymbols, Traits::align()))
-        std::memcpy(data() + nCurrentSymbls, pSource, nSymbols * sizeof(value_type));
-}
-
-//==============================================================================
-//!\fn                basic_string<Traits>::append<FwdIt>
-//
-//!\brief  Append string to the current
-//!\param  itBegin - other string begin iterator
-//!\param  itEnd   - other end begin iterator
-//!\author Khrapov
-//!\date   23.10.2020
-//==============================================================================
-template<class Traits>
-template<class FwdIt>
-inline void basic_string<Traits>::append(FwdIt itBegin, FwdIt itEnd)
-{
-    for (auto it = itBegin; it != itEnd; ++it)
-        push_back(*it);
-}
-
-//==============================================================================
-//!\fn               qx::basic_string<Traits>::compare
-//
-//!\brief  Performs a binary comparison of the characters
-//!\param  pStr     - string to compare
-//!\param  nSymbols - number of symbols to compare (0 - string is zero terminated)
-//!\retval          -   < 0 the first character that does not match has a lower value in this than in pStr
-//                        0 the contents of both strings are equal
-//                      > 0 the first character that does not match has a greater value in this than in pStr
-//!\author Khrapov
-//!\date   28.10.2019
-//==============================================================================
-template<class Traits>
-inline int basic_string<Traits>::compare(const_pointer pStr, size_type nSymbols) const
-{
-    if (nSymbols > 0)
-        return Traits::compare_n(data(), pStr, nSymbols);
-    else
-        return Traits::compare(data(), pStr);
 }
 
 }
