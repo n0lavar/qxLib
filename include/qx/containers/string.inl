@@ -591,6 +591,34 @@ inline std::optional<To> basic_string<Traits>::to(void) const
 }
 
 //==============================================================================
+//!\fn                  qx::basic_string<Traits>::copy
+//
+//!\brief  Copies a substring [nPos, nPos + nCount) to character string pointed to by pDest
+//!\param  pDest     - pointer to the destination character string
+//!\param  nCount    - length of the substring
+//!\param  nPos      - position of the first character to include
+//!\retval pszFormat - number of characters copied
+//!\author Khrapov
+//!\date   31.12.2020
+//==============================================================================
+template<class Traits>
+inline typename basic_string<Traits>::size_type basic_string<Traits>::copy(
+    pointer   pDest,
+    size_type nCount,
+    size_type nPos) const
+{
+    size_type nCharsToCopy = 0;
+
+    if (pDest && nCount > 0 && nPos < size())
+    {
+        nCharsToCopy = std::min(nPos + nCount, size()) - nPos;
+        std::memcpy(pDest, data() + nPos, nCharsToCopy * sizeof(value_type));
+    }
+
+    return nCharsToCopy;
+}
+
+//==============================================================================
 //!\fn               qx::basic_string<Traits>::from<From>
 //
 //!\brief  Construct string from custom type

@@ -1979,4 +1979,18 @@ TYPED_TEST(TestQxString, append_format)
     EXPECT_EQ(str.size(), 19);
 }
 
+TYPED_TEST(TestQxString, copy)
+{
+    std::vector<ValueType> buffer(10);
+    StringTypeTn str(STR("0123456789"));
+
+    EXPECT_EQ(str.copy(buffer.data(), 2), 2);
+    buffer[2] = CH('\0');
+    EXPECT_STREQ(buffer.data(), STR("01"));
+
+    EXPECT_EQ(str.copy(buffer.data(), 5, 7), 3);
+    buffer[3] = CH('\0');
+    EXPECT_STREQ(buffer.data(), STR("789"));
+}
+
 #endif

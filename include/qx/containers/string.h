@@ -161,13 +161,16 @@ public:
 
     template<typename To>
     std::optional<To>       to           (void)                                     const;
+    size_type               copy         (pointer                pDest,
+                                          size_type              nCount,
+                                          size_type              nPos       = 0)    const;
 
     template<typename From>
     void                    from         (const From&            data,
-                                          const_pointer          pszFormat = nullptr);
+                                          const_pointer          pszFormat  = nullptr);
     template<typename From>
     static  basic_string    sfrom        (const From&            data,
-                                          const_pointer          pszFormat = nullptr);
+                                          const_pointer          pszFormat  = nullptr);
 
     void                    append       (value_type             chSymbol);
     void                    append       (const_pointer          pszStr,
