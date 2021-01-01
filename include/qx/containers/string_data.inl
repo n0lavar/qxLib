@@ -23,7 +23,7 @@ namespace qx
 //!\date   8.11.2020
 //==============================================================================
 template <class Traits>
-typename string_data<Traits>::pointer string_data<Traits>::data()
+typename string_data<Traits>::pointer string_data<Traits>::data() noexcept
 {
     if (is_small())
         return m_Buffer.data();
@@ -39,7 +39,7 @@ typename string_data<Traits>::pointer string_data<Traits>::data()
 //!\date   8.11.2020
 //==============================================================================
 template <class Traits>
-void string_data<Traits>::free()
+void string_data<Traits>::free() noexcept
 {
     if (!is_small())
     {
@@ -63,7 +63,10 @@ void string_data<Traits>::free()
 //!\date   8.11.2020
 //==============================================================================
 template <class Traits>
-bool string_data<Traits>::resize(size_type nSymbols, size_type nAlign, string_resize_type eType)
+bool string_data<Traits>::resize(
+    size_type          nSymbols,
+    size_type          nAlign,
+    string_resize_type eType) noexcept
 {
     bool bRet = true;
 
@@ -127,7 +130,8 @@ bool string_data<Traits>::resize(size_type nSymbols, size_type nAlign, string_re
 //!\date   8.11.2020
 //==============================================================================
 template <class Traits>
-typename string_data<Traits>::size_type string_data<Traits>::capacity() const
+typename string_data<Traits>::size_type string_data<Traits>::capacity(
+    void) const noexcept
 {
     if (is_small())
         return m_Buffer.size();

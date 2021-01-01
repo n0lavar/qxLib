@@ -37,20 +37,20 @@ public:
     using const_pointer = typename Traits::const_pointer;
     using size_type     = typename Traits::size_type;
 
-    constexpr basic_string_hash(void) = default;
+    constexpr basic_string_hash(void) noexcept = default;
 
-    constexpr basic_string_hash(const_pointer pszString, size_type nSize)
+    constexpr basic_string_hash(const_pointer pszString, size_type nSize) noexcept
         : m_nHash(murmur_32_hash(pszString, nSize, Traits::hash_seed()))
     {
     }
 
-    constexpr basic_string_hash(const_pointer pszString)
+    constexpr basic_string_hash(const_pointer pszString) noexcept
         : m_nHash(murmur_32_hash(pszString, Traits::length(pszString), Traits::hash_seed()))
     {
     }
 
     template <class String, class = std::enable_if_t<std::is_class_v<String>>>
-    constexpr basic_string_hash(const String& sString)
+    constexpr basic_string_hash(const String& sString) noexcept
         : m_nHash(murmur_32_hash(sString.data(), sString.size(), Traits::hash_seed()))
     {
     }

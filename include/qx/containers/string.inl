@@ -23,7 +23,7 @@ namespace qx
 //!\date   13.11.2020
 //==============================================================================
 template<class Traits>
-inline basic_string<Traits>::basic_string(value_type chSymbol)
+inline basic_string<Traits>::basic_string(value_type chSymbol) noexcept
 {
     assign(chSymbol);
 }
@@ -38,7 +38,7 @@ inline basic_string<Traits>::basic_string(value_type chSymbol)
 //!\date   13.11.2020
 //==============================================================================
 template<class Traits>
-inline basic_string<Traits>::basic_string(size_type nSymbols, value_type chSymbol)
+inline basic_string<Traits>::basic_string(size_type nSymbols, value_type chSymbol) noexcept
 {
     assign(nSymbols, chSymbol);
 }
@@ -53,7 +53,9 @@ inline basic_string<Traits>::basic_string(size_type nSymbols, value_type chSymbo
 //!\date   13.11.2020
 //==============================================================================
 template<class Traits>
-inline basic_string<Traits>::basic_string(const_pointer pszSource, size_type nSymbols)
+inline basic_string<Traits>::basic_string(
+    const_pointer pszSource,
+    size_type     nSymbols) noexcept
 {
     assign(pszSource, nSymbols);
 }
@@ -67,7 +69,7 @@ inline basic_string<Traits>::basic_string(const_pointer pszSource, size_type nSy
 //!\date   13.11.2020
 //==============================================================================
 template<class Traits>
-inline basic_string<Traits>::basic_string(const_pointer pszSource)
+inline basic_string<Traits>::basic_string(const_pointer pszSource) noexcept
 {
     assign(pszSource);
 }
@@ -95,7 +97,7 @@ inline basic_string<Traits>::basic_string(basic_string&& sAnother) noexcept
 //!\date   13.11.2020
 //==============================================================================
 template<class Traits>
-inline basic_string<Traits>::basic_string(const basic_string& sAnother)
+inline basic_string<Traits>::basic_string(const basic_string& sAnother) noexcept
 {
     assign(sAnother);
 }
@@ -111,7 +113,7 @@ inline basic_string<Traits>::basic_string(const basic_string& sAnother)
 //==============================================================================
 template<class Traits>
 template<class FwdIt>
-inline basic_string<Traits>::basic_string(FwdIt itFirst, FwdIt itLast)
+inline basic_string<Traits>::basic_string(FwdIt itFirst, FwdIt itLast) noexcept
 {
     assign(itFirst, itLast);
 }
@@ -126,7 +128,7 @@ inline basic_string<Traits>::basic_string(FwdIt itFirst, FwdIt itLast)
 //==============================================================================
 template<class Traits>
 template<class String, class>
-inline basic_string<Traits>::basic_string (const String & sAnother)
+inline basic_string<Traits>::basic_string (const String & sAnother) noexcept
 {
     assign(sAnother);
 }
@@ -139,7 +141,7 @@ inline basic_string<Traits>::basic_string (const String & sAnother)
 //!\date   13.11.2020
 //==============================================================================
 template<class Traits>
-inline basic_string<Traits>::~basic_string(void)
+inline basic_string<Traits>::~basic_string(void) noexcept
 {
     free();
 }
@@ -153,7 +155,7 @@ inline basic_string<Traits>::~basic_string(void)
 //!\date   13.11.2020
 //==============================================================================
 template<class Traits>
-inline void basic_string<Traits>::assign(value_type chSymbol)
+inline void basic_string<Traits>::assign(value_type chSymbol) noexcept
 {
     assign(&chSymbol, 1);
 }
@@ -168,7 +170,9 @@ inline void basic_string<Traits>::assign(value_type chSymbol)
 //!\date   29.10.2019
 //==============================================================================
 template<class Traits>
-inline void basic_string<Traits>::assign(size_type nSymbols, value_type chSymbol)
+inline void basic_string<Traits>::assign(
+    size_type  nSymbols,
+    value_type chSymbol) noexcept
 {
     if (resize(nSymbols, Traits::align()))
         std::fill(begin(), end(), chSymbol);
@@ -184,7 +188,9 @@ inline void basic_string<Traits>::assign(size_type nSymbols, value_type chSymbol
 //!\date   27.10.2019
 //==============================================================================
 template<class Traits>
-inline void basic_string<Traits>::assign(const_pointer pszSource, size_type nSymbols)
+inline void basic_string<Traits>::assign(
+    const_pointer pszSource,
+    size_type     nSymbols) noexcept
 {
     if (resize(nSymbols, Traits::align()))
         std::memmove(data(), pszSource, nSymbols * sizeof(value_type));
@@ -199,7 +205,7 @@ inline void basic_string<Traits>::assign(const_pointer pszSource, size_type nSym
 //!\date   27.08.2020
 //==============================================================================
 template<class Traits>
-inline void basic_string<Traits>::assign(const_pointer pszSource)
+inline void basic_string<Traits>::assign(const_pointer pszSource) noexcept
 {
     if (pszSource != data())
         assign(pszSource, Traits::length(pszSource));
@@ -214,7 +220,7 @@ inline void basic_string<Traits>::assign(const_pointer pszSource)
 //!\date   27.08.2020
 //==============================================================================
 template<class Traits>
-inline void basic_string<Traits>::assign(const basic_string& sAnother)
+inline void basic_string<Traits>::assign(const basic_string& sAnother) noexcept
 {
     if (sAnother.data() != data())
         assign(sAnother.data());
@@ -245,7 +251,7 @@ inline void basic_string<Traits>::assign(basic_string&& sAnother) noexcept
 //==============================================================================
 template<class Traits>
 template<class FwdIt>
-inline void basic_string<Traits>::assign(FwdIt itFirst, FwdIt itLast)
+inline void basic_string<Traits>::assign(FwdIt itFirst, FwdIt itLast) noexcept
 {
     clear();
     for (FwdIt it = itFirst; it != itLast; ++it)
@@ -262,7 +268,7 @@ inline void basic_string<Traits>::assign(FwdIt itFirst, FwdIt itLast)
 //==============================================================================
 template<class Traits>
 template<class String, class>
-inline void basic_string<Traits>::assign(const String& sAnother)
+inline void basic_string<Traits>::assign(const String& sAnother) noexcept
 {
     assign(sAnother.cbegin(), sAnother.cend());
 }
@@ -277,7 +283,7 @@ inline void basic_string<Traits>::assign(const String& sAnother)
 //!\date   29.10.2019
 //==============================================================================
 template<class Traits>
-void basic_string<Traits>::format(const_pointer pszFormat, ...)
+void basic_string<Traits>::format(const_pointer pszFormat, ...) noexcept
 {
     va_list args;
     va_start(args, pszFormat);
@@ -295,7 +301,9 @@ void basic_string<Traits>::format(const_pointer pszFormat, ...)
 //!\date   5.11.2020
 //==============================================================================
 template<class Traits>
-inline void basic_string<Traits>::vformat(const_pointer pszFormat, va_list args)
+inline void basic_string<Traits>::vformat(
+    const_pointer pszFormat,
+    va_list       args) noexcept
 {
     va_list args_copy;
     va_copy(args_copy, args);
@@ -320,7 +328,7 @@ template<class Traits>
 template<class ...Args>
 inline basic_string<Traits> basic_string<Traits>::sformat(
     const_pointer pszFormat,
-    Args...       args)
+    Args...       args) noexcept
 {
     basic_string str;
     str.format(pszFormat, args...);
@@ -337,7 +345,9 @@ inline basic_string<Traits> basic_string<Traits>::sformat(
 //!\date   31.12.2020
 //==============================================================================
 template<class Traits>
-inline void basic_string<Traits>::append_format(const_pointer pszFormat, ...)
+inline void basic_string<Traits>::append_format(
+    const_pointer pszFormat,
+    ...) noexcept
 {
     va_list args;
     va_start(args, pszFormat);
@@ -355,7 +365,9 @@ inline void basic_string<Traits>::append_format(const_pointer pszFormat, ...)
 //!\date   31.12.2020
 //==============================================================================
 template<class Traits>
-inline void basic_string<Traits>::append_vformat(const_pointer pszFormat, va_list args)
+inline void basic_string<Traits>::append_vformat(
+    const_pointer pszFormat,
+    va_list       args) noexcept
 {
     va_list args_copy;
     va_copy(args_copy, args);
@@ -391,7 +403,8 @@ inline void basic_string<Traits>::swap(basic_string& sOther) noexcept
 //!\date   29.10.2019
 //==============================================================================
 template<class Traits>
-inline typename basic_string<Traits>::size_type basic_string<Traits>::reserve(size_type nCapacity)
+inline typename basic_string<Traits>::size_type basic_string<Traits>::reserve(
+    size_type nCapacity) noexcept
 {
     if (nCapacity > capacity())
         resize(nCapacity, Traits::align(), string_resize_type::reserve);
@@ -406,7 +419,7 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::reserve(si
 //!\date   29.10.2019
 //==============================================================================
 template<class Traits>
-inline void basic_string<Traits>::shrink_to_fit(void)
+inline void basic_string<Traits>::shrink_to_fit(void) noexcept
 {
     if (!m_Data.is_small() && capacity() > size())
         resize(size(), 0, string_resize_type::shrink_to_fit);
@@ -420,7 +433,7 @@ inline void basic_string<Traits>::shrink_to_fit(void)
 //!\date   27.08.2020
 //==============================================================================
 template<class Traits>
-inline void basic_string<Traits>::free(void)
+inline void basic_string<Traits>::free(void) noexcept
 {
     m_Data.free();
 }
@@ -438,7 +451,7 @@ inline void basic_string<Traits>::free(void)
 template<class Traits>
 inline basic_string<Traits> basic_string<Traits>::substr(
     size_type nPos,
-    size_type nSymbols) const
+    size_type nSymbols) const noexcept
 {
     basic_string str(data() + nPos, (nSymbols != npos ? nSymbols : size() - nPos));
     return std::move(str);
@@ -453,7 +466,7 @@ inline basic_string<Traits> basic_string<Traits>::substr(
 //!\date   31.10.2019
 //==============================================================================
 template<class Traits>
-inline void basic_string<Traits>::apply_case(case_type eCaseType)
+inline void basic_string<Traits>::apply_case(case_type eCaseType) noexcept
 {
     switch (eCaseType)
     {
@@ -480,7 +493,8 @@ inline void basic_string<Traits>::apply_case(case_type eCaseType)
 //!\date   13.11.2020
 //==============================================================================
 template<class Traits>
-inline typename basic_string<Traits>::value_type basic_string<Traits>::front(void) const
+inline typename basic_string<Traits>::value_type basic_string<Traits>::front(
+    void) const noexcept
 {
     return at(0);
 }
@@ -494,7 +508,8 @@ inline typename basic_string<Traits>::value_type basic_string<Traits>::front(voi
 //!\date   13.11.2020
 //==============================================================================
 template<class Traits>
-inline typename basic_string<Traits>::value_type basic_string<Traits>::back(void) const
+inline typename basic_string<Traits>::value_type basic_string<Traits>::back(
+    void) const noexcept
 {
     return at(size() - 1);
 }
@@ -508,7 +523,8 @@ inline typename basic_string<Traits>::value_type basic_string<Traits>::back(void
 //!\date   13.11.2020
 //==============================================================================
 template<class Traits>
-inline typename basic_string<Traits>::size_type basic_string<Traits>::length(void) const
+inline typename basic_string<Traits>::size_type basic_string<Traits>::length(
+    void) const noexcept
 {
     return size();
 }
@@ -522,7 +538,8 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::length(voi
 //!\date   13.11.2020
 //==============================================================================
 template<class Traits>
-inline typename basic_string<Traits>::const_pointer basic_string<Traits>::c_str(void) const
+inline typename basic_string<Traits>::const_pointer basic_string<Traits>::c_str(
+    void) const noexcept
 {
     return data();
 }
@@ -535,7 +552,8 @@ inline typename basic_string<Traits>::const_pointer basic_string<Traits>::c_str(
 //!\date   29.10.2019
 //==============================================================================
 template<class Traits>
-inline typename basic_string<Traits>::size_type basic_string<Traits>::capacity(void) const
+inline typename basic_string<Traits>::size_type basic_string<Traits>::capacity(
+    void) const noexcept
 {
     return m_Data.capacity();
 }
@@ -548,7 +566,8 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::capacity(v
 //!\date   17.12.2020
 //==============================================================================
 template<class Traits>
-constexpr typename basic_string<Traits>::size_type basic_string<Traits>::max_size(void)
+constexpr typename basic_string<Traits>::size_type basic_string<Traits>::max_size(
+    void) noexcept
 {
     return std::numeric_limits<size_type>::max()
         - 1     // npos reserved
@@ -565,7 +584,7 @@ constexpr typename basic_string<Traits>::size_type basic_string<Traits>::max_siz
 //==============================================================================
 template<class Traits>
 template<typename To>
-inline std::optional<To> basic_string<Traits>::to(void) const
+inline std::optional<To> basic_string<Traits>::to(void) const noexcept
 {
     std::optional<To> optResult = std::nullopt;
 
@@ -619,7 +638,7 @@ template<class Traits>
 inline typename basic_string<Traits>::size_type basic_string<Traits>::copy(
     pointer   pDest,
     size_type nCount,
-    size_type nPos) const
+    size_type nPos) const noexcept
 {
     size_type nCharsToCopy = 0;
 
@@ -635,15 +654,18 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::copy(
 //==============================================================================
 //!\fn               qx::basic_string<Traits>::from<From>
 //
-//!\brief  Construct string from custom type
-//!\param  data      - data of type From
-//!\param  pszFormat - format string if default is not enough
-//!\author Khrapov
-//!\date   24.03.2020
+//!\brief   Construct string from custom type
+//!\details overloaded operator<< of data types have to be noexcept
+//!\param   data      - data of type From
+//!\param   pszFormat - format string if default is not enough
+//!\author  Khrapov
+//!\date    24.03.2020
 //==============================================================================
 template<class Traits>
 template<typename From>
-inline void basic_string<Traits>::from(const From& data, const_pointer pszFormat)
+inline void basic_string<Traits>::from(
+    const From  & data,
+    const_pointer pszFormat) noexcept
 {
     if constexpr (std::is_pod_v<From>
                || std::is_pointer_v<From>
@@ -690,7 +712,7 @@ template<class Traits>
 template<typename From>
 inline basic_string<Traits> basic_string<Traits>::sfrom(
     const From&   data,
-    const_pointer pszFormat)
+    const_pointer pszFormat) noexcept
 {
     basic_string str;
     str.from(data, pszFormat);
@@ -706,7 +728,7 @@ inline basic_string<Traits> basic_string<Traits>::sfrom(
 //!\date   31.12.2020
 //==============================================================================
 template<class Traits>
-inline void basic_string<Traits>::append(value_type chSymbol)
+inline void basic_string<Traits>::append(value_type chSymbol) noexcept
 {
     append(&chSymbol, 1);
 }
@@ -721,7 +743,9 @@ inline void basic_string<Traits>::append(value_type chSymbol)
 //!\date   27.10.2019
 //==============================================================================
 template<class Traits>
-inline void basic_string<Traits>::append(const_pointer pszStr, size_type nSymbols)
+inline void basic_string<Traits>::append(
+    const_pointer pszStr,
+    size_type     nSymbols) noexcept
 {
     size_type nCurrentSymbls = size();
     size_type nSizeSource = nSymbols == npos
@@ -741,7 +765,7 @@ inline void basic_string<Traits>::append(const_pointer pszStr, size_type nSymbol
 //!\date   31.12.2020
 //==============================================================================
 template<class Traits>
-inline void basic_string<Traits>::append(const basic_string& sStr)
+inline void basic_string<Traits>::append(const basic_string& sStr) noexcept
 {
     append(sStr.data(), sStr.size());
 }
@@ -757,7 +781,7 @@ inline void basic_string<Traits>::append(const basic_string& sStr)
 //==============================================================================
 template<class Traits>
 template<class FwdIt>
-inline void basic_string<Traits>::append(FwdIt itBegin, FwdIt itEnd)
+inline void basic_string<Traits>::append(FwdIt itBegin, FwdIt itEnd) noexcept
 {
     for (auto it = itBegin; it != itEnd; ++it)
         push_back(*it);
@@ -773,7 +797,7 @@ inline void basic_string<Traits>::append(FwdIt itBegin, FwdIt itEnd)
 //==============================================================================
 template<class Traits>
 template<class String, class>
-inline void basic_string<Traits>::append(const String& sStr)
+inline void basic_string<Traits>::append(const String& sStr) noexcept
 {
     append(sStr.cbegin(), sStr.cend());
 }
@@ -791,7 +815,7 @@ inline void basic_string<Traits>::append(const String& sStr)
 template<class Traits>
 inline typename basic_string<Traits>::size_type basic_string<Traits>::insert(
     size_type  nPos,
-    value_type chSymbol)
+    value_type chSymbol) noexcept
 {
     return insert(nPos, &chSymbol, 1);
 }
@@ -811,7 +835,7 @@ template<class Traits>
 inline typename basic_string<Traits>::size_type basic_string<Traits>::insert(
     size_type     nPos,
     const_pointer pszSourse,
-    size_type     nSymbols)
+    size_type     nSymbols) noexcept
 {
     size_type nStartSymbols = size();
     size_type nSizeSource = nSymbols == npos
@@ -849,7 +873,7 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::insert(
 template<class Traits>
 inline typename basic_string<Traits>::size_type basic_string<Traits>::insert(
     size_type           nPos,
-    const basic_string& sWhat)
+    const basic_string& sWhat) noexcept
 {
     return insert(nPos, sWhat.data(), sWhat.size());
 }
@@ -870,7 +894,7 @@ template<class FwdIt>
 inline typename basic_string<Traits>::size_type basic_string<Traits>::insert(
     size_type   nPos,
     FwdIt       itWhatBegin,
-    FwdIt       itWhatEnd)
+    FwdIt       itWhatEnd) noexcept
 {
     if constexpr (is_random_access_iterator_v<FwdIt>)
     {
@@ -921,7 +945,7 @@ template<class Traits>
 template<class String, class>
 inline typename basic_string<Traits>::size_type basic_string<Traits>::insert(
     size_type nPos,
-    String    sWhat)
+    String    sWhat) noexcept
 {
     return insert(static_cast<size_type>(nPos), sWhat.cbegin(), sWhat.cend());
 }
@@ -939,7 +963,7 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::insert(
 template<class Traits>
 inline typename basic_string<Traits>::size_type basic_string<Traits>::insert(
     const_iterator  itPos,
-    value_type      chSymbol)
+    value_type      chSymbol) noexcept
 {
     return insert(static_cast<size_type>(itPos - cbegin()), chSymbol);
 }
@@ -959,7 +983,7 @@ template<class Traits>
 inline typename basic_string<Traits>::size_type basic_string<Traits>::insert(
     const_iterator  itPos,
     const_pointer   pszWhat,
-    size_type       nSymbols)
+    size_type       nSymbols) noexcept
 {
     return insert(static_cast<size_type>(itPos - cbegin()), pszWhat, nSymbols);
 }
@@ -977,7 +1001,7 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::insert(
 template<class Traits>
 inline typename basic_string<Traits>::size_type basic_string<Traits>::insert(
     const_iterator      itPos,
-    const basic_string& sWhat)
+    const basic_string& sWhat) noexcept
 {
     return insert(
         static_cast<size_type>(itPos - cbegin()),
@@ -1001,7 +1025,7 @@ template<class FwdIt>
 inline typename basic_string<Traits>::size_type basic_string<Traits>::insert(
     const_iterator  itPos,
     FwdIt           itWhatBegin,
-    FwdIt           itWhatEnd)
+    FwdIt           itWhatEnd) noexcept
 {
     return insert(
         static_cast<size_type>(itPos - begin()),
@@ -1023,7 +1047,7 @@ template<class Traits>
 template<class String, class>
 inline typename basic_string<Traits>::size_type basic_string<Traits>::insert(
     const_iterator itPos,
-    String         sWhat)
+    String         sWhat) noexcept
 {
     return insert(
         static_cast<size_type>(itPos - begin()),
@@ -1040,7 +1064,7 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::insert(
 //!\date   13.11.2020
 //==============================================================================
 template<class Traits>
-inline void basic_string<Traits>::push_back(value_type chSymbol)
+inline void basic_string<Traits>::push_back(value_type chSymbol) noexcept
 {
     insert(size(), &chSymbol, 1);
 }
@@ -1054,7 +1078,7 @@ inline void basic_string<Traits>::push_back(value_type chSymbol)
 //!\date   13.11.2020
 //==============================================================================
 template<class Traits>
-inline void basic_string<Traits>::push_front(value_type chSymbol)
+inline void basic_string<Traits>::push_front(value_type chSymbol) noexcept
 {
     insert(0, &chSymbol, 1);
 }
@@ -1069,7 +1093,9 @@ inline void basic_string<Traits>::push_front(value_type chSymbol)
 //!\date   30.10.2019
 //==============================================================================
 template<class Traits>
-inline void basic_string<Traits>::erase(iterator itFirst, iterator itLast)
+inline void basic_string<Traits>::erase(
+    iterator itFirst,
+    iterator itLast) noexcept
 {
     if (itFirst < itLast)
     {
@@ -1099,7 +1125,7 @@ inline void basic_string<Traits>::erase(iterator itFirst, iterator itLast)
 //!\date   13.11.2020
 //==============================================================================
 template<class Traits>
-inline void basic_string<Traits>::erase(iterator itPos)
+inline void basic_string<Traits>::erase(iterator itPos) noexcept
 {
     erase(itPos, itPos + 1);
 }
@@ -1113,7 +1139,7 @@ inline void basic_string<Traits>::erase(iterator itPos)
 //!\date   13.11.2020
 //==============================================================================
 template<class Traits>
-inline void basic_string<Traits>::erase(size_type nPos)
+inline void basic_string<Traits>::erase(size_type nPos) noexcept
 {
     erase(iterator(this, nPos), iterator(this, nPos + 1));
 }
@@ -1128,7 +1154,9 @@ inline void basic_string<Traits>::erase(size_type nPos)
 //!\date   13.11.2020
 //==============================================================================
 template<class Traits>
-inline void basic_string<Traits>::erase(size_type nPos, size_type nSymbols)
+inline void basic_string<Traits>::erase(
+    size_type nPos,
+    size_type nSymbols) noexcept
 {
     erase(iterator(this, nPos), iterator(this, nPos + nSymbols));
 }
@@ -1142,7 +1170,8 @@ inline void basic_string<Traits>::erase(size_type nPos, size_type nSymbols)
 //!\date   18.12.2020
 //==============================================================================
 template<class Traits>
-inline typename basic_string<Traits>::value_type basic_string<Traits>::pop_back(void)
+inline typename basic_string<Traits>::value_type basic_string<Traits>::pop_back(
+    void) noexcept
 {
     value_type chRet = back();
     erase(size() - 1);
@@ -1158,7 +1187,8 @@ inline typename basic_string<Traits>::value_type basic_string<Traits>::pop_back(
 //!\date   18.12.2020
 //==============================================================================
 template<class Traits>
-inline typename basic_string<Traits>::value_type basic_string<Traits>::pop_front(void)
+inline typename basic_string<Traits>::value_type basic_string<Traits>::pop_front(
+    void) noexcept
 {
     value_type chRet = front();
     erase(0);
@@ -1174,7 +1204,8 @@ inline typename basic_string<Traits>::value_type basic_string<Traits>::pop_front
 //!\date   24.12.2020
 //==============================================================================
 template<class Traits>
-inline typename basic_string<Traits>::size_type basic_string<Traits>::trim_left(void)
+inline typename basic_string<Traits>::size_type basic_string<Traits>::trim_left(
+    void) noexcept
 {
     return trim_left_common([](value_type ch) { return Traits::is_space(ch); });
 }
@@ -1190,7 +1221,7 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::trim_left(
 //==============================================================================
 template<class Traits>
 inline typename basic_string<Traits>::size_type basic_string<Traits>::trim_left(
-    value_type chSymbol)
+    value_type chSymbol) noexcept
 {
     return trim_left_common([chSymbol](value_type ch) { return ch == chSymbol; });
 }
@@ -1206,7 +1237,7 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::trim_left(
 //==============================================================================
 template<class Traits>
 inline typename basic_string<Traits>::size_type basic_string<Traits>::trim_left(
-    const_pointer pszStr)
+    const_pointer pszStr) noexcept
 {
     return trim_left_common([pszStr](value_type ch)
         {
@@ -1231,7 +1262,7 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::trim_left(
 template<class Traits>
 inline typename basic_string<Traits>::size_type basic_string<Traits>::trim_left(
     const_pointer pszStr,
-    size_type     nStrSize)
+    size_type     nStrSize) noexcept
 {
     return trim_left_common([pszStr, nStrSize](value_type ch)
         {
@@ -1254,7 +1285,7 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::trim_left(
 //==============================================================================
 template<class Traits>
 inline typename basic_string<Traits>::size_type basic_string<Traits>::trim_left(
-    const basic_string& sStr)
+    const basic_string& sStr) noexcept
 {
     return trim_left(sStr.data(), sStr.size());
 }
@@ -1273,7 +1304,7 @@ template<class Traits>
 template<class FwdIt>
 inline typename basic_string<Traits>::size_type basic_string<Traits>::trim_left(
     FwdIt itBegin,
-    FwdIt itEnd)
+    FwdIt itEnd) noexcept
 {
     return trim_left_common([itBegin, itEnd](auto ch)
         {
@@ -1297,7 +1328,7 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::trim_left(
 template<class Traits>
 template<class String, class>
 inline typename basic_string<Traits>::size_type basic_string<Traits>::trim_left(
-    const String& sStr)
+    const String& sStr) noexcept
 {
     return trim_left(sStr.cbegin(), sStr.cend());
 }
@@ -1311,7 +1342,8 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::trim_left(
 //!\date   24.12.2020
 //==============================================================================
 template<class Traits>
-inline typename basic_string<Traits>::size_type basic_string<Traits>::trim_right(void)
+inline typename basic_string<Traits>::size_type basic_string<Traits>::trim_right(
+    void) noexcept
 {
     return trim_right_common([](value_type ch) { return Traits::is_space(ch); });
 }
@@ -1327,7 +1359,7 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::trim_right
 //==============================================================================
 template<class Traits>
 inline typename basic_string<Traits>::size_type basic_string<Traits>::trim_right(
-    value_type chSymbol)
+    value_type chSymbol) noexcept
 {
     return trim_right_common([chSymbol](value_type ch) { return ch == chSymbol; });
 }
@@ -1343,7 +1375,7 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::trim_right
 //==============================================================================
 template<class Traits>
 inline typename basic_string<Traits>::size_type basic_string<Traits>::trim_right(
-    const_pointer pszStr)
+    const_pointer pszStr) noexcept
 {
     return trim_right_common([pszStr](value_type ch)
         {
@@ -1368,7 +1400,7 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::trim_right
 template<class Traits>
 inline typename basic_string<Traits>::size_type basic_string<Traits>::trim_right(
     const_pointer pszStr,
-    size_type     nStrSize)
+    size_type     nStrSize) noexcept
 {
     return trim_right_common([pszStr, nStrSize](value_type ch)
         {
@@ -1391,7 +1423,7 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::trim_right
 //==============================================================================
 template<class Traits>
 inline typename basic_string<Traits>::size_type basic_string<Traits>::trim_right(
-    const basic_string& sStr)
+    const basic_string& sStr) noexcept
 {
     return trim_right(sStr.data(), sStr.size());
 }
@@ -1410,7 +1442,7 @@ template<class Traits>
 template<class FwdIt>
 inline typename basic_string<Traits>::size_type basic_string<Traits>::trim_right(
     FwdIt itBegin,
-    FwdIt itEnd)
+    FwdIt itEnd) noexcept
 {
     return trim_right_common([itBegin, itEnd](auto ch)
         {
@@ -1434,7 +1466,7 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::trim_right
 template<class Traits>
 template<class String, class>
 inline typename basic_string<Traits>::size_type basic_string<Traits>::trim_right(
-    const String& sStr)
+    const String& sStr) noexcept
 {
     return trim_right(sStr.cbegin(), sStr.cend());
 }
@@ -1448,7 +1480,8 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::trim_right
 //!\date   24.12.2020
 //==============================================================================
 template<class Traits>
-inline typename basic_string<Traits>::size_type basic_string<Traits>::trim(void)
+inline typename basic_string<Traits>::size_type basic_string<Traits>::trim(
+    void) noexcept
 {
     return trim_common([](value_type ch) { return Traits::is_space(ch); });
 }
@@ -1464,7 +1497,7 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::trim(void)
 //==============================================================================
 template<class Traits>
 inline typename basic_string<Traits>::size_type basic_string<Traits>::trim(
-    value_type chSymbol)
+    value_type chSymbol) noexcept
 {
     return trim_common([chSymbol](value_type ch) { return ch == chSymbol; });
 }
@@ -1480,7 +1513,7 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::trim(
 //==============================================================================
 template<class Traits>
 inline typename basic_string<Traits>::size_type basic_string<Traits>::trim(
-    const_pointer pszStr)
+    const_pointer pszStr) noexcept
 {
     return trim_common([pszStr](value_type ch)
         {
@@ -1505,7 +1538,7 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::trim(
 template<class Traits>
 inline typename basic_string<Traits>::size_type basic_string<Traits>::trim(
     const_pointer pszStr,
-    size_type     nStrSize)
+    size_type     nStrSize) noexcept
 {
     return trim_common([pszStr, nStrSize](value_type ch)
         {
@@ -1528,7 +1561,7 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::trim(
 //==============================================================================
 template<class Traits>
 inline typename basic_string<Traits>::size_type basic_string<Traits>::trim(
-    const basic_string& sStr)
+    const basic_string& sStr) noexcept
 {
     return trim(sStr.data(), sStr.size());
 }
@@ -1547,7 +1580,7 @@ template<class Traits>
 template<class FwdIt>
 inline typename basic_string<Traits>::size_type basic_string<Traits>::trim(
     FwdIt itBegin,
-    FwdIt itEnd)
+    FwdIt itEnd) noexcept
 {
     return trim_common([itBegin, itEnd](auto ch)
         {
@@ -1571,7 +1604,7 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::trim(
 template<class Traits>
 template<class String, class>
 inline typename basic_string<Traits>::size_type basic_string<Traits>::trim(
-    const String& sStr)
+    const String& sStr) noexcept
 {
     return trim(sStr.cbegin(), sStr.cend());
 }
@@ -1591,7 +1624,7 @@ template<class Traits>
 inline typename basic_string<Traits>::size_type basic_string<Traits>::remove(
     value_type chSymbol,
     size_type  nBegin,
-    size_type  nEnd)
+    size_type  nEnd) noexcept
 {
     size_type nPos = find(chSymbol, nBegin, nEnd);
 
@@ -1618,7 +1651,7 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::remove(
     const_pointer pszStr,
     size_type     nBegin,
     size_type     nEnd,
-    size_type     nStrSize)
+    size_type     nStrSize) noexcept
 {
     size_type nLocalStrSize = nStrSize != npos
         ? nStrSize
@@ -1647,7 +1680,7 @@ template<class Traits>
 inline typename basic_string<Traits>::size_type basic_string<Traits>::remove(
     const basic_string& sStr,
     size_type           nBegin,
-    size_type           nEnd)
+    size_type           nEnd) noexcept
 {
     size_type nPos = find(sStr, nBegin, nEnd);
 
@@ -1675,7 +1708,7 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::remove(
     FwdIt     itBegin,
     FwdIt     itEnd,
     size_type nBegin,
-    size_type nEnd)
+    size_type nEnd) noexcept
 {
     size_type nPos = find(itBegin, itEnd, nBegin, nEnd);
 
@@ -1701,7 +1734,7 @@ template<class String, class>
 inline typename basic_string<Traits>::size_type basic_string<Traits>::remove(
     const String& sStr,
     size_type     nBegin,
-    size_type     nEnd)
+    size_type     nEnd) noexcept
 {
     return remove(sStr.cbegin(), sStr.cend(), nBegin, nEnd);
 }
@@ -1716,7 +1749,7 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::remove(
 //!\date   02.12.2020
 //==============================================================================
 template<class Traits>
-inline bool basic_string<Traits>::remove_prefix(value_type chSymbol)
+inline bool basic_string<Traits>::remove_prefix(value_type chSymbol) noexcept
 {
     return remove(chSymbol, 0u, 1u) != npos;
 }
@@ -1734,7 +1767,7 @@ inline bool basic_string<Traits>::remove_prefix(value_type chSymbol)
 template<class Traits>
 inline bool basic_string<Traits>::remove_prefix(
     const_pointer pszStr,
-    size_type     nStrSize)
+    size_type     nStrSize) noexcept
 {
     return remove(pszStr, 0u, nStrSize, nStrSize) != npos;
 }
@@ -1749,7 +1782,8 @@ inline bool basic_string<Traits>::remove_prefix(
 //!\date   02.12.2020
 //==============================================================================
 template<class Traits>
-inline bool basic_string<Traits>::remove_prefix(const basic_string& sStr)
+inline bool basic_string<Traits>::remove_prefix(
+    const basic_string& sStr) noexcept
 {
     return remove(sStr, 0u, sStr.size()) != npos;
 }
@@ -1766,7 +1800,9 @@ inline bool basic_string<Traits>::remove_prefix(const basic_string& sStr)
 //==============================================================================
 template<class Traits>
 template<class FwdIt>
-inline bool basic_string<Traits>::remove_prefix(FwdIt itBegin, FwdIt itEnd)
+inline bool basic_string<Traits>::remove_prefix(
+    FwdIt itBegin,
+    FwdIt itEnd) noexcept
 {
     return remove(
         itBegin,
@@ -1786,7 +1822,7 @@ inline bool basic_string<Traits>::remove_prefix(FwdIt itBegin, FwdIt itEnd)
 //==============================================================================
 template<class Traits>
 template<class String, class>
-inline bool basic_string<Traits>::remove_prefix(const String& sStr)
+inline bool basic_string<Traits>::remove_prefix(const String& sStr) noexcept
 {
     return remove_prefix(sStr.cbegin(), sStr.cend());
 }
@@ -1801,7 +1837,7 @@ inline bool basic_string<Traits>::remove_prefix(const String& sStr)
 //!\date   02.12.2020
 //==============================================================================
 template<class Traits>
-inline bool basic_string<Traits>::remove_suffix(value_type chSymbol)
+inline bool basic_string<Traits>::remove_suffix(value_type chSymbol) noexcept
 {
     size_type nSize = size();
     return remove(
@@ -1821,7 +1857,9 @@ inline bool basic_string<Traits>::remove_suffix(value_type chSymbol)
 //!\date   02.12.2020
 //==============================================================================
 template<class Traits>
-inline bool basic_string<Traits>::remove_suffix(const_pointer pszStr, size_type nStrSize)
+inline bool basic_string<Traits>::remove_suffix(
+    const_pointer pszStr,
+    size_type     nStrSize) noexcept
 {
     size_type nSize = size();
     size_type nLocalStrSize = nStrSize != npos
@@ -1845,7 +1883,8 @@ inline bool basic_string<Traits>::remove_suffix(const_pointer pszStr, size_type 
 //!\date   02.12.2020
 //==============================================================================
 template<class Traits>
-inline bool basic_string<Traits>::remove_suffix(const basic_string& sStr)
+inline bool basic_string<Traits>::remove_suffix(
+    const basic_string& sStr) noexcept
 {
     return remove_suffix(sStr.data(), sStr.size());
 }
@@ -1862,7 +1901,9 @@ inline bool basic_string<Traits>::remove_suffix(const basic_string& sStr)
 //==============================================================================
 template<class Traits>
 template<class FwdIt>
-inline bool basic_string<Traits>::remove_suffix(FwdIt itBegin, FwdIt itEnd)
+inline bool basic_string<Traits>::remove_suffix(
+    FwdIt itBegin,
+    FwdIt itEnd) noexcept
 {
     size_type nSize = size();
     return remove(
@@ -1883,7 +1924,7 @@ inline bool basic_string<Traits>::remove_suffix(FwdIt itBegin, FwdIt itEnd)
 //==============================================================================
 template<class Traits>
 template<class String, class>
-inline bool basic_string<Traits>::remove_suffix(const String& sStr)
+inline bool basic_string<Traits>::remove_suffix(const String& sStr) noexcept
 {
     return remove_suffix(sStr.cbegin(), sStr.cend());
 }
@@ -1903,7 +1944,7 @@ template<class Traits>
 inline typename basic_string<Traits>::size_type basic_string<Traits>::remove_all(
     value_type chSymbol,
     size_type  nBegin,
-    size_type  nEnd)
+    size_type  nEnd) noexcept
 {
     size_type nOccurrences = 0;
     size_type nLastOccurrencePos = nBegin;
@@ -1934,7 +1975,7 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::remove_all
     const_pointer pszStr,
     size_type     nBegin,
     size_type     nEnd,
-    size_type     nStrSize)
+    size_type     nStrSize) noexcept
 {
     size_type nOccurrences = 0;
     size_type nLastOccurrencePos = nBegin;
@@ -1963,7 +2004,7 @@ template<class Traits>
 inline typename basic_string<Traits>::size_type basic_string<Traits>::remove_all(
     const basic_string& sStr,
     size_type           nBegin,
-    size_type           nEnd)
+    size_type           nEnd) noexcept
 {
     return remove_all(sStr.data(), nBegin, nEnd, sStr.size());
 }
@@ -1986,7 +2027,7 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::remove_all
     FwdIt     itFirst,
     FwdIt     itLast,
     size_type nBegin,
-    size_type nEnd)
+    size_type nEnd) noexcept
 {
     size_type nOccurrences = 0;
     size_type nLastOccurrencePos = nBegin;
@@ -2016,7 +2057,7 @@ template<class String, class>
 inline typename basic_string<Traits>::size_type basic_string<Traits>::remove_all(
     const String& sStr,
     size_type     nBegin,
-    size_type     nEnd)
+    size_type     nEnd) noexcept
 {
     return remove_all(sStr.cbegin(), sStr.cend(), nBegin, nEnd);
 }
@@ -2039,7 +2080,7 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::replace(
     T1        sFind,
     T2        sReplace,
     size_type nBegin,
-    size_type nEnd)
+    size_type nEnd) noexcept
 {
     size_type nPos = remove(sFind, nBegin, nEnd);
     if (nPos != npos)
@@ -2063,10 +2104,10 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::replace(
 template<class Traits>
 template<class T1, class T2>
 inline typename basic_string<Traits>::size_type basic_string<Traits>::replace_all(
-    T1 sFind,
-    T2 sReplace,
+    T1        sFind,
+    T2        sReplace,
     size_type nBegin,
-    size_type nEnd)
+    size_type nEnd) noexcept
 {
     size_type nOccurences = 0;
     size_type nPos = nBegin;
@@ -2093,7 +2134,7 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::replace_al
 //!\date   30.12.2020
 //==============================================================================
 template<class Traits>
-inline int basic_string<Traits>::compare(value_type chSymbol) const
+inline int basic_string<Traits>::compare(value_type chSymbol) const noexcept
 {
     return compare(&chSymbol, 1);
 }
@@ -2111,7 +2152,9 @@ inline int basic_string<Traits>::compare(value_type chSymbol) const
 //!\date   28.10.2019
 //==============================================================================
 template<class Traits>
-inline int basic_string<Traits>::compare(const_pointer pStr, size_type nSymbols) const
+inline int basic_string<Traits>::compare(
+    const_pointer pStr,
+    size_type     nSymbols) const noexcept
 {
     if (nSymbols > 0)
         return Traits::compare_n(data(), pStr, nSymbols);
@@ -2131,7 +2174,7 @@ inline int basic_string<Traits>::compare(const_pointer pStr, size_type nSymbols)
 //!\date   30.12.2020
 //==============================================================================
 template<class Traits>
-inline int basic_string<Traits>::compare(const basic_string& sStr) const
+inline int basic_string<Traits>::compare(const basic_string& sStr) const noexcept
 {
     return compare(sStr.data(), sStr.size());
 }
@@ -2150,7 +2193,9 @@ inline int basic_string<Traits>::compare(const basic_string& sStr) const
 //==============================================================================
 template<class Traits>
 template<class FwdIt>
-inline int basic_string<Traits>::compare(FwdIt itBegin, FwdIt itEnd) const
+inline int basic_string<Traits>::compare(
+    FwdIt itBegin,
+    FwdIt itEnd) const noexcept
 {
     return iter_strcmp(cbegin(), cend(), itBegin, itEnd);
 }
@@ -2168,7 +2213,7 @@ inline int basic_string<Traits>::compare(FwdIt itBegin, FwdIt itEnd) const
 //==============================================================================
 template<class Traits>
 template<class String, class>
-inline int basic_string<Traits>::compare(const String& sStr) const
+inline int basic_string<Traits>::compare(const String& sStr) const noexcept
 {
     return compare(sStr.cbegin(), sStr.cend());
 }
@@ -2188,7 +2233,7 @@ template<class Traits>
 inline typename basic_string<Traits>::size_type basic_string<Traits>::find(
     value_type    chSymbol,
     size_type     nBegin,
-    size_type     nEnd) const
+    size_type     nEnd) const noexcept
 {
     if (nEnd == npos)
         nEnd = size();
@@ -2225,7 +2270,7 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::find(
     const_pointer pszWhat,
     size_type     nBegin,
     size_type     nEnd,
-    size_type     nWhatSize) const
+    size_type     nWhatSize) const noexcept
 {
     size_type nLocalWhatSize = nWhatSize != npos
         ? nWhatSize
@@ -2263,7 +2308,7 @@ template<class Traits>
 inline typename basic_string<Traits>::size_type basic_string<Traits>::find(
     const basic_string& sWhat,
     size_type           nBegin,
-    size_type           nEnd) const
+    size_type           nEnd) const noexcept
 {
     return find(sWhat.data(), nBegin, nEnd, sWhat.size());
 }
@@ -2286,7 +2331,7 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::find(
     FwdIt       itWhatBegin,
     FwdIt       itWhatEnd,
     size_type   nBegin,
-    size_type   nEnd) const
+    size_type   nEnd) const noexcept
 {
     if (nEnd == npos)
         nEnd = size();
@@ -2330,7 +2375,7 @@ template<class String, class>
 inline typename basic_string<Traits>::size_type basic_string<Traits>::find(
     String    sWhat,
     size_type nBegin,
-    size_type nEnd) const
+    size_type nEnd) const noexcept
 {
     return find(sWhat.cbegin(), sWhat.cend(), nBegin, nEnd);
 }
@@ -2350,7 +2395,7 @@ template<class Traits>
 inline typename basic_string<Traits>::size_type basic_string<Traits>::find_last_of(
     value_type chSymbol,
     size_type  nPos,
-    size_type  nSymbols) const
+    size_type  nSymbols) const noexcept
 {
     if (nPos == npos)
         nPos = size();
@@ -2372,7 +2417,7 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::find_last_
 //==============================================================================
 template<class Traits>
 inline typename basic_string<Traits>::vector basic_string<Traits>::split(
-    const value_type chSeparator) const
+    const value_type chSeparator) const noexcept
 {
     vector tokens;
 
@@ -2401,7 +2446,7 @@ inline typename basic_string<Traits>::vector basic_string<Traits>::split(
 template<class Traits>
 inline typename basic_string<Traits>::vector basic_string<Traits>::split(
     const_pointer pszSeparator,
-    size_type     nSepLen) const
+    size_type     nSepLen) const noexcept
 {
     vector tokens;
 
@@ -2431,7 +2476,7 @@ inline typename basic_string<Traits>::vector basic_string<Traits>::split(
 //==============================================================================
 template<class Traits>
 inline typename basic_string<Traits>::vector basic_string<Traits>::split(
-    const basic_string& sSeparator) const
+    const basic_string& sSeparator) const noexcept
 {
     return split(sSeparator.data(), sSeparator.size());
 }
@@ -2450,7 +2495,7 @@ template<class Traits>
 template<class FwdIt>
 inline typename basic_string<Traits>::vector basic_string<Traits>::split(
     FwdIt itSepFirst,
-    FwdIt itSepLast) const
+    FwdIt itSepLast) const noexcept
 {
     vector tokens;
 
@@ -2480,7 +2525,7 @@ inline typename basic_string<Traits>::vector basic_string<Traits>::split(
 template<class Traits>
 template<class String, class>
 inline typename basic_string<Traits>::vector basic_string<Traits>::split(
-    const String& sSeparator) const
+    const String& sSeparator) const noexcept
 {
     return split(sSeparator.cbegin(), sSeparator.cend());
 }
@@ -2495,7 +2540,7 @@ inline typename basic_string<Traits>::vector basic_string<Traits>::split(
 //!\date   08.10.2020
 //==============================================================================
 template<class Traits>
-inline bool basic_string<Traits>::starts_with(value_type chSymbol) const
+inline bool basic_string<Traits>::starts_with(value_type chSymbol) const noexcept
 {
     if (!empty())
         return at(0) == chSymbol;
@@ -2516,7 +2561,7 @@ inline bool basic_string<Traits>::starts_with(value_type chSymbol) const
 template<class Traits>
 inline bool basic_string<Traits>::starts_with(
     const_pointer pszStr,
-    size_type     nStrSize) const
+    size_type     nStrSize) const noexcept
 {
     if (size_type nThisSize = size(); nThisSize > 0)
     {
@@ -2540,7 +2585,8 @@ inline bool basic_string<Traits>::starts_with(
 //!\date   13.11.2020
 //==============================================================================
 template<class Traits>
-inline bool basic_string<Traits>::starts_with(const basic_string& sStr) const
+inline bool basic_string<Traits>::starts_with(
+    const basic_string& sStr) const noexcept
 {
     return starts_with(sStr.data(), sStr.size());
 }
@@ -2557,7 +2603,9 @@ inline bool basic_string<Traits>::starts_with(const basic_string& sStr) const
 //==============================================================================
 template<class Traits>
 template<class FwdIt>
-inline bool basic_string<Traits>::starts_with(FwdIt itBegin, FwdIt itEnd) const
+inline bool basic_string<Traits>::starts_with(
+    FwdIt itBegin,
+    FwdIt itEnd) const noexcept
 {
     auto nStrSize = std::distance(itBegin, itEnd);
     return iter_strcmp(
@@ -2578,7 +2626,7 @@ inline bool basic_string<Traits>::starts_with(FwdIt itBegin, FwdIt itEnd) const
 //==============================================================================
 template<class Traits>
 template<class String, class>
-inline bool basic_string<Traits>::starts_with(const String& sStr) const
+inline bool basic_string<Traits>::starts_with(const String& sStr) const noexcept
 {
     return starts_with(sStr.cbegin(), sStr.cend());
 }
@@ -2593,7 +2641,7 @@ inline bool basic_string<Traits>::starts_with(const String& sStr) const
 //!\date   08.10.2020
 //==============================================================================
 template<class Traits>
-inline bool basic_string<Traits>::ends_with(value_type chSymbol) const
+inline bool basic_string<Traits>::ends_with(value_type chSymbol) const noexcept
 {
     size_type nSize = size();
     if (nSize > 0)
@@ -2615,7 +2663,7 @@ inline bool basic_string<Traits>::ends_with(value_type chSymbol) const
 template<class Traits>
 inline bool basic_string<Traits>::ends_with(
     const_pointer pszStr,
-    size_type     nStrSize) const
+    size_type     nStrSize) const noexcept
 {
 
     if (size_type nThisSize = size(); nThisSize > 0)
@@ -2640,7 +2688,8 @@ inline bool basic_string<Traits>::ends_with(
 //!\date   13.11.2020
 //==============================================================================
 template<class Traits>
-inline bool basic_string<Traits>::ends_with(const basic_string& sStr) const
+inline bool basic_string<Traits>::ends_with(
+    const basic_string& sStr) const noexcept
 {
     return ends_with(sStr.data(), sStr.size());
 }
@@ -2657,7 +2706,9 @@ inline bool basic_string<Traits>::ends_with(const basic_string& sStr) const
 //==============================================================================
 template<class Traits>
 template<class FwdIt>
-inline bool basic_string<Traits>::ends_with(FwdIt itBegin, FwdIt itEnd) const
+inline bool basic_string<Traits>::ends_with(
+    FwdIt itBegin,
+    FwdIt itEnd) const noexcept
 {
     return iter_strcmp(
         cend() - static_cast<size_type>(std::distance(itBegin, itEnd)),
@@ -2677,7 +2728,7 @@ inline bool basic_string<Traits>::ends_with(FwdIt itBegin, FwdIt itEnd) const
 //==============================================================================
 template<class Traits>
 template<class String, class>
-inline bool basic_string<Traits>::ends_with(const String& sStr) const
+inline bool basic_string<Traits>::ends_with(const String& sStr) const noexcept
 {
     return ends_with(sStr.cbegin(), sStr.cend());
 }
@@ -2692,7 +2743,7 @@ inline bool basic_string<Traits>::ends_with(const String& sStr) const
 //!\date   30.11.2020
 //==============================================================================
 template<class Traits>
-inline bool basic_string<Traits>::contains(value_type chSymbol) const
+inline bool basic_string<Traits>::contains(value_type chSymbol) const noexcept
 {
     return find(chSymbol) != npos;
 }
@@ -2708,7 +2759,9 @@ inline bool basic_string<Traits>::contains(value_type chSymbol) const
 //!\date   30.11.2020
 //==============================================================================
 template<class Traits>
-inline bool basic_string<Traits>::contains(const_pointer pszStr, size_type nStrSize) const
+inline bool basic_string<Traits>::contains(
+    const_pointer pszStr,
+    size_type nStrSize) const noexcept
 {
     return find(pszStr, 0, npos, nStrSize) != npos;
 }
@@ -2723,7 +2776,8 @@ inline bool basic_string<Traits>::contains(const_pointer pszStr, size_type nStrS
 //!\date   30.11.2020
 //==============================================================================
 template<class Traits>
-inline bool basic_string<Traits>::contains(const basic_string& sStr) const
+inline bool basic_string<Traits>::contains(
+    const basic_string& sStr) const noexcept
 {
     return find(sStr) != npos;
 }
@@ -2740,7 +2794,9 @@ inline bool basic_string<Traits>::contains(const basic_string& sStr) const
 //==============================================================================
 template<class Traits>
 template<class FwdIt>
-inline bool basic_string<Traits>::contains(FwdIt itBegin, FwdIt itEnd) const
+inline bool basic_string<Traits>::contains(
+    FwdIt itBegin,
+    FwdIt itEnd) const noexcept
 {
     return find(itBegin, itEnd) != npos;
 }
@@ -2756,7 +2812,7 @@ inline bool basic_string<Traits>::contains(FwdIt itBegin, FwdIt itEnd) const
 //==============================================================================
 template<class Traits>
 template<class String, class>
-inline bool basic_string<Traits>::contains(const String& sStr) const
+inline bool basic_string<Traits>::contains(const String& sStr) const noexcept
 {
     return find(sStr) != npos;
 }
@@ -2765,32 +2821,37 @@ inline bool basic_string<Traits>::contains(const String& sStr) const
 //---------------------------------- operator= ---------------------------------
 
 template<class Traits>
-inline const basic_string<Traits>& basic_string<Traits>::operator=(value_type chSymbol)
+inline const basic_string<Traits>& basic_string<Traits>::operator=(
+    value_type chSymbol) noexcept
 {
     assign(chSymbol);
     return *this;
 }
 template<class Traits>
-inline const basic_string<Traits>& basic_string<Traits>::operator=(const_pointer pszSource)
+inline const basic_string<Traits>& basic_string<Traits>::operator=(
+    const_pointer pszSource) noexcept
 {
     assign(pszSource);
     return *this;
 }
 template<class Traits>
-inline const basic_string<Traits>& basic_string<Traits>::operator=(basic_string&& sStr) noexcept
+inline const basic_string<Traits>& basic_string<Traits>::operator=(
+    basic_string&& sStr) noexcept
 {
     assign(std::move(sStr));
     return *this;
 }
 template<class Traits>
-inline const basic_string<Traits>& basic_string<Traits>::operator=(const basic_string& sStr)
+inline const basic_string<Traits>& basic_string<Traits>::operator=(
+    const basic_string& sStr) noexcept
 {
     assign(sStr);
     return *this;
 }
 template<class Traits>
 template<class String, class>
-inline const basic_string<Traits>& basic_string<Traits>::operator=(const String& sStr)
+inline const basic_string<Traits>& basic_string<Traits>::operator=(
+    const String& sStr) noexcept
 {
     assign(sStr);
     return *this;
@@ -2799,26 +2860,30 @@ inline const basic_string<Traits>& basic_string<Traits>::operator=(const String&
 //--------------------------------- operator+= ---------------------------------
 
 template<class Traits>
-inline const basic_string<Traits>& basic_string<Traits>::operator+=(value_type chSymbol)
+inline const basic_string<Traits>& basic_string<Traits>::operator+=(
+    value_type chSymbol) noexcept
 {
     append(&chSymbol, 1);
     return *this;
 }
 template<class Traits>
-inline const basic_string<Traits>& basic_string<Traits>::operator+=(const_pointer pszSource)
+inline const basic_string<Traits>& basic_string<Traits>::operator+=(
+    const_pointer pszSource) noexcept
 {
     append(pszSource, Traits::length(pszSource));
     return *this;
 }
 template<class Traits>
-inline const basic_string<Traits>& basic_string<Traits>::operator+=(const basic_string& sStr)
+inline const basic_string<Traits>& basic_string<Traits>::operator+=(
+    const basic_string& sStr) noexcept
 {
     append(sStr.data(), sStr.size());
     return *this;
 }
 template<class Traits>
 template<class String, class>
-inline const basic_string<Traits>& basic_string<Traits>::operator+=(const String& sStr)
+inline const basic_string<Traits>& basic_string<Traits>::operator+=(
+    const String& sStr) noexcept
 {
     append(sStr.cbegin(), sStr.cend());
     return *this;
@@ -2827,23 +2892,27 @@ inline const basic_string<Traits>& basic_string<Traits>::operator+=(const String
 //--------------------------------- operator== ---------------------------------
 
 template<class Traits>
-inline bool basic_string<Traits>::operator==(value_type chSymbol) const noexcept
+inline bool basic_string<Traits>::operator==(
+    value_type chSymbol) const noexcept
 {
     return compare(&chSymbol, 1) == 0;
 }
 template<class Traits>
-inline bool basic_string<Traits>::operator==(const_pointer pszSource) const noexcept
+inline bool basic_string<Traits>::operator==(
+    const_pointer pszSource) const noexcept
 {
     return compare(pszSource) == 0;
 }
 template<class Traits>
-inline bool basic_string<Traits>::operator==(const basic_string& sStr) const noexcept
+inline bool basic_string<Traits>::operator==(
+    const basic_string& sStr) const noexcept
 {
     return compare(sStr.data()) == 0;
 }
 template<class Traits>
 template<class String, class>
-inline bool basic_string<Traits>::operator==(const String& sStr) const noexcept
+inline bool basic_string<Traits>::operator==(
+    const String& sStr) const noexcept
 {
     return iter_strcmp(cbegin(), cend(), sStr.cbegin(), sStr.cend()) == 0;
 }
@@ -2851,23 +2920,27 @@ inline bool basic_string<Traits>::operator==(const String& sStr) const noexcept
 //--------------------------------- operator!= ---------------------------------
 
 template<class Traits>
-inline bool basic_string<Traits>::operator!=(value_type chSymbol) const noexcept
+inline bool basic_string<Traits>::operator!=(
+    value_type chSymbol) const noexcept
 {
     return compare(&chSymbol, 1) != 0;
 }
 template<class Traits>
-inline bool basic_string<Traits>::operator!=(const_pointer pszSource) const noexcept
+inline bool basic_string<Traits>::operator!=(
+    const_pointer pszSource) const noexcept
 {
     return compare(pszSource) != 0;
 }
 template<class Traits>
-inline bool basic_string<Traits>::operator!=(const basic_string& sStr) const noexcept
+inline bool basic_string<Traits>::operator!=(
+    const basic_string& sStr) const noexcept
 {
     return compare(sStr.data()) != 0;
 }
 template<class Traits>
 template<class String, class>
-inline bool basic_string<Traits>::operator!=(const String& sStr) const noexcept
+inline bool basic_string<Traits>::operator!=(
+    const String& sStr) const noexcept
 {
     return iter_strcmp(cbegin(), cend(), sStr.cbegin(), sStr.cend()) != 0;
 }
@@ -2875,23 +2948,27 @@ inline bool basic_string<Traits>::operator!=(const String& sStr) const noexcept
 //---------------------------------- operator< ---------------------------------
 
 template<class Traits>
-inline bool basic_string<Traits>::operator<(value_type chSymbol) const noexcept
+inline bool basic_string<Traits>::operator<(
+    value_type chSymbol) const noexcept
 {
     return compare(&chSymbol, 1) < 0;
 }
 template<class Traits>
-inline bool basic_string<Traits>::operator<(const_pointer pszSource) const noexcept
+inline bool basic_string<Traits>::operator<(
+    const_pointer pszSource) const noexcept
 {
     return compare(pszSource) < 0;
 }
 template<class Traits>
-inline bool basic_string<Traits>::operator<(const basic_string& sStr) const noexcept
+inline bool basic_string<Traits>::operator<(
+    const basic_string& sStr) const noexcept
 {
     return compare(sStr.data()) < 0;
 }
 template<class Traits>
 template<class String, class>
-inline bool basic_string<Traits>::operator<(const String& sStr) const noexcept
+inline bool basic_string<Traits>::operator<(
+    const String& sStr) const noexcept
 {
     return iter_strcmp(cbegin(), cend(), sStr.cbegin(), sStr.cend()) < 0;
 }
@@ -2899,23 +2976,27 @@ inline bool basic_string<Traits>::operator<(const String& sStr) const noexcept
 //--------------------------------- operator<= ---------------------------------
 
 template<class Traits>
-inline bool basic_string<Traits>::operator<=(value_type chSymbol) const noexcept
+inline bool basic_string<Traits>::operator<=(
+    value_type chSymbol) const noexcept
 {
     return compare(&chSymbol, 1) <= 0;
 }
 template<class Traits>
-inline bool basic_string<Traits>::operator<=(const_pointer pszSource) const noexcept
+inline bool basic_string<Traits>::operator<=(
+    const_pointer pszSource) const noexcept
 {
     return compare(pszSource) <= 0;
 }
 template<class Traits>
-inline bool basic_string<Traits>::operator<=(const basic_string& sStr) const noexcept
+inline bool basic_string<Traits>::operator<=(
+    const basic_string& sStr) const noexcept
 {
     return compare(sStr.data()) <= 0;
 }
 template<class Traits>
 template<class String, class>
-inline bool basic_string<Traits>::operator<=(const String& sStr) const noexcept
+inline bool basic_string<Traits>::operator<=(
+    const String& sStr) const noexcept
 {
     return iter_strcmp(cbegin(), cend(), sStr.cbegin(), sStr.cend()) <= 0;
 }
@@ -2923,23 +3004,27 @@ inline bool basic_string<Traits>::operator<=(const String& sStr) const noexcept
 //---------------------------------- operator> ---------------------------------
 
 template<class Traits>
-inline bool basic_string<Traits>::operator>(value_type chSymbol) const noexcept
+inline bool basic_string<Traits>::operator>(
+    value_type chSymbol) const noexcept
 {
     return compare(&chSymbol, 1) > 0;
 }
 template<class Traits>
-inline bool basic_string<Traits>::operator>(const_pointer pszSource) const noexcept
+inline bool basic_string<Traits>::operator>(
+    const_pointer pszSource) const noexcept
 {
     return compare(pszSource) > 0;
 }
 template<class Traits>
-inline bool basic_string<Traits>::operator>(const basic_string& sStr) const noexcept
+inline bool basic_string<Traits>::operator>(
+    const basic_string& sStr) const noexcept
 {
     return compare(sStr.data()) > 0;
 }
 template<class Traits>
 template<class String, class>
-inline bool basic_string<Traits>::operator>(const String& sStr) const noexcept
+inline bool basic_string<Traits>::operator>(
+    const String& sStr) const noexcept
 {
     return iter_strcmp(cbegin(), cend(), sStr.cbegin(), sStr.cend()) > 0;
 }
@@ -2947,23 +3032,27 @@ inline bool basic_string<Traits>::operator>(const String& sStr) const noexcept
 //--------------------------------- operator>= ---------------------------------
 
 template<class Traits>
-inline bool basic_string<Traits>::operator>=(value_type chSymbol) const noexcept
+inline bool basic_string<Traits>::operator>=(
+    value_type chSymbol) const noexcept
 {
     return compare(&chSymbol, 1) >= 0;
 }
 template<class Traits>
-inline bool basic_string<Traits>::operator>=(const_pointer pszSource) const noexcept
+inline bool basic_string<Traits>::operator>=(
+    const_pointer pszSource) const noexcept
 {
     return compare(pszSource) >= 0;
 }
 template<class Traits>
-inline bool basic_string<Traits>::operator>=(const basic_string& sStr) const noexcept
+inline bool basic_string<Traits>::operator>=(
+    const basic_string& sStr) const noexcept
 {
     return compare(sStr.data()) >= 0;
 }
 template<class Traits>
 template<class String, class>
-inline bool basic_string<Traits>::operator>=(const String& sStr) const noexcept
+inline bool basic_string<Traits>::operator>=(
+    const String& sStr) const noexcept
 {
     return iter_strcmp(cbegin(), cend(), sStr.cbegin(), sStr.cend()) >= 0;
 }
@@ -2971,12 +3060,14 @@ inline bool basic_string<Traits>::operator>=(const String& sStr) const noexcept
 //--------------------------------- operator[] ---------------------------------
 
 template<class Traits>
-inline typename basic_string<Traits>::reference basic_string<Traits>::operator[](size_type nSymbol) noexcept
+inline typename basic_string<Traits>::reference basic_string<Traits>::operator[](
+    size_type nSymbol) noexcept
 {
     return at(nSymbol);
 }
 template<class Traits>
-inline typename basic_string<Traits>::const_reference basic_string<Traits>::operator[](size_type nSymbol) const noexcept
+inline typename basic_string<Traits>::const_reference basic_string<Traits>::operator[](
+    size_type nSymbol) const noexcept
 {
     return at(nSymbol);
 }
@@ -3001,7 +3092,8 @@ inline basic_string<Traits>::operator std::basic_string_view<
 //==============================================================================
 template<class Traits>
 template<typename T>
-constexpr typename basic_string<Traits>::const_pointer basic_string<Traits>::get_format_specifier(void)
+constexpr typename basic_string<Traits>::const_pointer basic_string<Traits>::get_format_specifier(
+    void) noexcept
 {
     const_pointer pszFormat = nullptr;
 
@@ -3081,7 +3173,7 @@ constexpr typename basic_string<Traits>::const_pointer basic_string<Traits>::get
 template<class Traits>
 template<class Searcher>
 inline typename basic_string<Traits>::size_type basic_string<Traits>::trim_left_common(
-    const Searcher& searcher)
+    const Searcher& searcher) noexcept
 {
     size_type nSymbols = 0;
 
@@ -3109,7 +3201,7 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::trim_left_
 template<class Traits>
 template<class Searcher>
 inline typename basic_string<Traits>::size_type basic_string<Traits>::trim_right_common(
-    const Searcher& searcher)
+    const Searcher& searcher) noexcept
 {
     size_type nSymbols = 0;
     size_type nSize = size();
@@ -3138,7 +3230,7 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::trim_right
 template<class Traits>
 template<class Searcher>
 inline typename basic_string<Traits>::size_type basic_string<Traits>::trim_common(
-    const Searcher& searcher)
+    const Searcher& searcher) noexcept
 {
     size_type nSize     = size();
     size_type nStartPos = 0;
@@ -3170,7 +3262,8 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::trim_commo
 //!\date   19.10.2019
 //==============================================================================
 template<class Traits>
-inline typename basic_string<Traits>::reference basic_string<Traits>::at(size_type ind)
+inline typename basic_string<Traits>::reference basic_string<Traits>::at(
+    size_type ind) noexcept
 {
     return data()[ind];
 }
@@ -3183,7 +3276,7 @@ inline typename basic_string<Traits>::reference basic_string<Traits>::at(size_ty
 //!\date   19.10.2019
 //==============================================================================
 template<class Traits>
-inline void basic_string<Traits>::clear(void)
+inline void basic_string<Traits>::clear(void) noexcept
 {
     assign(QX_STR_PREFIX(typename Traits::value_type, ""));
 }
@@ -3196,7 +3289,8 @@ inline void basic_string<Traits>::clear(void)
 //!\date   19.10.2019
 //==============================================================================
 template<class Traits>
-inline typename basic_string<Traits>::size_type basic_string<Traits>::size(void) const
+inline typename basic_string<Traits>::size_type basic_string<Traits>::size(
+    void) const noexcept
 {
     return m_Data.size();
 }
@@ -3209,7 +3303,8 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::size(void)
 //!\date   28.10.2019
 //==============================================================================
 template<class Traits>
-inline typename basic_string<Traits>::pointer basic_string<Traits>::data(void)
+inline typename basic_string<Traits>::pointer basic_string<Traits>::data(
+    void) noexcept
 {
     return m_Data.data();
 }
@@ -3230,7 +3325,7 @@ template<class Traits>
 inline bool basic_string<Traits>::resize(
     size_type           nSymbols,
     size_type           nAlign,
-    string_resize_type  eType)
+    string_resize_type  eType) noexcept
 {
     bool bRet = m_Data.resize(nSymbols, nAlign, eType);
 
@@ -3251,7 +3346,7 @@ namespace std
     template<class Traits>
     struct hash<qx::basic_string<Traits>>
     {
-        u32 operator()(const qx::basic_string<Traits>& str) const
+        u32 operator()(const qx::basic_string<Traits>& str) const noexcept
         {
             return qx::murmur_32_hash(str.data(),
                                       str.size(),
@@ -3278,14 +3373,18 @@ namespace std
 //----------------------- istream / ostream overloading ----------------------
 
 template<class Traits>
-qx::detail::ostream<Traits>& operator<<(qx::detail::ostream<Traits>& os, const qx::basic_string<Traits>& str)
+qx::detail::ostream<Traits>& operator<<(
+    qx::detail::ostream<Traits>   & os,
+    const qx::basic_string<Traits>& str)
 {
     os << str.data();
     return os;
 }
 
 template<class Traits>
-qx::detail::istream<Traits>& operator>>(qx::detail::istream<Traits>& is, qx::basic_string<Traits>& str)
+qx::detail::istream<Traits>& operator>>(
+    qx::detail::istream<Traits>& is,
+    qx::basic_string<Traits>   & str)
 {
     typename qx::detail::istream<Traits>::iostate ret_bit = qx::detail::istream<Traits>::goodbit;
     auto try_push_back = [&str, &is, &ret_bit](typename qx::basic_string<Traits>::value_type ch) -> bool

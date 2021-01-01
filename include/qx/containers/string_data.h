@@ -45,15 +45,15 @@ class string_data
 
 public:
 
-    pointer     data        (void);
-    void        free        (void);
+    pointer     data        (void) noexcept;
+    void        free        (void) noexcept;
     bool        resize      (size_type          nSymbols,
                              size_type          nAlign,
-                             string_resize_type eType);
+                             string_resize_type eType) noexcept;
 
-    size_type   size        (void) const    { return m_nSize; }
-    size_type   capacity    (void) const;
-    bool        is_small    (void) const    { return m_nAllocatedSize == 0; }
+    size_type   size        (void) const noexcept { return m_nSize; }
+    size_type   capacity    (void) const noexcept;
+    bool        is_small    (void) const noexcept { return m_nAllocatedSize == 0; }
 
 private:
 

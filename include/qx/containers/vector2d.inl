@@ -274,7 +274,7 @@ inline void vector2d<T>::set(size_type nRow, size_type nCol, const_reference dat
 //!\date   19.02.2020
 //==============================================================================
 template<class T>
-inline typename vector2d<T>::size_type vector2d<T>::size(void) const
+inline typename vector2d<T>::size_type vector2d<T>::size(void) const noexcept
 {
     return size_x() * size_y();
 }
@@ -288,7 +288,7 @@ inline typename vector2d<T>::size_type vector2d<T>::size(void) const
 //!\date   19.02.2020
 //==============================================================================
 template<class T>
-inline typename vector2d<T>::pointer vector2d<T>::data()
+inline typename vector2d<T>::pointer vector2d<T>::data(void) noexcept
 {
     return m_pData;
 }
@@ -303,7 +303,7 @@ inline typename vector2d<T>::pointer vector2d<T>::data()
 //!\date   19.02.2020
 //==============================================================================
 template<class T>
-inline typename vector2d<T>::reference vector2d<T>::at(size_type ind)
+inline typename vector2d<T>::reference vector2d<T>::at(size_type ind) noexcept
 {
     return m_pData[ind];
 }
@@ -316,7 +316,7 @@ inline typename vector2d<T>::reference vector2d<T>::at(size_type ind)
 //!\date   19.02.2020
 //==============================================================================
 template<class T>
-inline void vector2d<T>::clear(void)
+inline void vector2d<T>::clear(void) noexcept
 {
     if (m_pData)
         destruct(begin(), end());

@@ -248,7 +248,8 @@ inline typename triangular_vector<T>::size_type triangular_vector<T>::getVectorS
 //!\date   1.03.2020
 //==============================================================================
 template<class T>
-inline typename triangular_vector<T>::size_type triangular_vector<T>::size(void) const
+inline typename triangular_vector<T>::size_type triangular_vector<T>::size(
+    void) const noexcept
 {
     return m_nSize;
 }
@@ -262,7 +263,8 @@ inline typename triangular_vector<T>::size_type triangular_vector<T>::size(void)
 //!\date   1.03.2020
 //==============================================================================
 template<class T>
-inline typename triangular_vector<T>::pointer triangular_vector<T>::data()
+inline typename triangular_vector<T>::pointer triangular_vector<T>::data(
+    void) noexcept
 {
     return m_pData;
 }
@@ -277,7 +279,8 @@ inline typename triangular_vector<T>::pointer triangular_vector<T>::data()
 //!\date   1.03.2020
 //==============================================================================
 template<class T>
-inline typename triangular_vector<T>::reference triangular_vector<T>::at(size_type ind)
+inline typename triangular_vector<T>::reference triangular_vector<T>::at(
+    size_type ind) noexcept
 {
     return m_pData[ind];
 }
@@ -290,7 +293,7 @@ inline typename triangular_vector<T>::reference triangular_vector<T>::at(size_ty
 //!\date   1.03.2020
 //==============================================================================
 template<class T>
-inline void triangular_vector<T>::clear(void)
+inline void triangular_vector<T>::clear(void) noexcept
 {
     if (m_pData)
         destruct(begin(), end());

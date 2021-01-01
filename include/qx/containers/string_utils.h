@@ -32,7 +32,7 @@ namespace qx
 //!\date    10.09.2020
 //==============================================================================
 template<typename Char>
-constexpr u32 murmur_32_hash(const Char* key, size_t len, u32 seed = 42)
+constexpr u32 murmur_32_hash(const Char* key, size_t len, u32 seed = 42) noexcept
 {
     u32 h = seed;
     if (len > 3)
@@ -110,7 +110,11 @@ constexpr u32 murmur_32_hash(const Char* key, size_t len, u32 seed = 42)
 //!\date   23.10.2020
 //==============================================================================
 template<class FwdIt1, class FwdIt2>
-constexpr int iter_strcmp(FwdIt1 itBegin1, FwdIt1 itEnd1, FwdIt2 itBegin2, FwdIt2 itEnd2)
+constexpr int iter_strcmp(
+    FwdIt1 itBegin1,
+    FwdIt1 itEnd1,
+    FwdIt2 itBegin2,
+    FwdIt2 itEnd2) noexcept
 {
     int nRet = 0;
 
@@ -132,31 +136,31 @@ constexpr int iter_strcmp(FwdIt1 itBegin1, FwdIt1 itEnd1, FwdIt2 itBegin2, FwdIt
 namespace detail
 {
     template<typename value_type>
-    constexpr const value_type* const choose_str_prefix(const char* const, const wchar_t* const);
+    constexpr const value_type* const choose_str_prefix(const char* const, const wchar_t* const) noexcept;
 
     template<>
-    constexpr const char* const choose_str_prefix<char>(const char* const c, const wchar_t* const)
+    constexpr const char* const choose_str_prefix<char>(const char* const c, const wchar_t* const) noexcept
     {
         return c;
     }
 
     template<>
-    constexpr const wchar_t* const choose_str_prefix<wchar_t>(const char* const, const wchar_t* const w)
+    constexpr const wchar_t* const choose_str_prefix<wchar_t>(const char* const, const wchar_t* const w) noexcept
     {
         return w;
     }
 
     template<typename value_type>
-    constexpr value_type choose_char_prefix(char, wchar_t);
+    constexpr value_type choose_char_prefix(char, wchar_t) noexcept;
 
     template<>
-    constexpr char choose_char_prefix<char>(char c, wchar_t)
+    constexpr char choose_char_prefix<char>(char c, wchar_t) noexcept
     {
         return c;
     }
 
     template<>
-    constexpr wchar_t choose_char_prefix<wchar_t>(char, wchar_t w)
+    constexpr wchar_t choose_char_prefix<wchar_t>(char, wchar_t w) noexcept
     {
         return w;
     }

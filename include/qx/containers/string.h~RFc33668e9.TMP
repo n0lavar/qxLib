@@ -101,7 +101,7 @@ public:
 
 public:
 
-                            basic_string (void) noexcept = default;
+                            basic_string (void) = default;
                             basic_string (value_type             chSymbol)                  noexcept;
                             basic_string (size_type              nSymbols,
                                           value_type             chSymbol)                  noexcept;
@@ -115,7 +115,7 @@ public:
     template<class String, class = enable_if_string_t<String>>
                             basic_string (const String         & sAnother)                  noexcept;
 
-                            ~basic_string(void)                                             noexcept;
+                            ~basic_string(void);
 
     void                    assign       (value_type             chSymbol)                  noexcept;
     void                    assign       (size_type              nSymbols,
@@ -467,7 +467,7 @@ private:
 
     bool                    resize       (size_type              nSymbols,
                                           size_type              nAlign,
-                                          string_resize_type     eType = string_resize_type::common) noexcept;
+                                          string_resize_type     eType      = string_resize_type::common) noexcept;
 
     template<class Searcher>
     size_type               trim_left_common(const Searcher    & searcher)                  noexcept;
@@ -489,40 +489,40 @@ private:
 #define _QX_STR_OP_PLUS_BODY { basic_string<UT> str(std::move(lhs)); str += rhs; return std::move(str); }
 
 template<class UT>
-basic_string<UT> operator+ (const basic_string<UT>   & lhs, const basic_string<UT>   & rhs) noexcept _QX_STR_OP_PLUS_BODY
+basic_string<UT> operator+ (const basic_string<UT>   & lhs, const basic_string<UT>   & rhs) _QX_STR_OP_PLUS_BODY
 template<class UT>
-basic_string<UT> operator+ (basic_string<UT>        && lhs, basic_string<UT>        && rhs) noexcept _QX_STR_OP_PLUS_BODY
+basic_string<UT> operator+ (basic_string<UT>        && lhs, basic_string<UT>        && rhs) _QX_STR_OP_PLUS_BODY
 template<class UT>
-basic_string<UT> operator+ (basic_string<UT>        && lhs, const basic_string<UT>   & rhs) noexcept _QX_STR_OP_PLUS_BODY
+basic_string<UT> operator+ (basic_string<UT>        && lhs, const basic_string<UT>   & rhs) _QX_STR_OP_PLUS_BODY
 template<class UT>
-basic_string<UT> operator+ (const basic_string<UT>   & lhs, basic_string<UT>        && rhs) noexcept _QX_STR_OP_PLUS_BODY
+basic_string<UT> operator+ (const basic_string<UT>   & lhs, basic_string<UT>        && rhs) _QX_STR_OP_PLUS_BODY
 
 template<class UT>
-basic_string<UT> operator+ (const basic_string<UT>   & lhs, typename UT::const_pointer rhs) noexcept _QX_STR_OP_PLUS_BODY
+basic_string<UT> operator+ (const basic_string<UT>   & lhs, typename UT::const_pointer rhs) _QX_STR_OP_PLUS_BODY
 template<class UT>
-basic_string<UT> operator+ (basic_string<UT>        && lhs, typename UT::const_pointer rhs) noexcept _QX_STR_OP_PLUS_BODY
+basic_string<UT> operator+ (basic_string<UT>        && lhs, typename UT::const_pointer rhs) _QX_STR_OP_PLUS_BODY
 template<class UT>
-basic_string<UT> operator+ (typename UT::const_pointer lhs, const basic_string<UT>   & rhs) noexcept _QX_STR_OP_PLUS_BODY
+basic_string<UT> operator+ (typename UT::const_pointer lhs, const basic_string<UT>   & rhs) _QX_STR_OP_PLUS_BODY
 template<class UT>
-basic_string<UT> operator+ (typename UT::const_pointer lhs, basic_string<UT>        && rhs) noexcept _QX_STR_OP_PLUS_BODY
+basic_string<UT> operator+ (typename UT::const_pointer lhs, basic_string<UT>        && rhs) _QX_STR_OP_PLUS_BODY
 
 template<class UT>
-basic_string<UT> operator+ (const basic_string<UT>   & lhs, typename UT::value_type    rhs) noexcept _QX_STR_OP_PLUS_BODY
+basic_string<UT> operator+ (const basic_string<UT>   & lhs, typename UT::value_type    rhs) _QX_STR_OP_PLUS_BODY
 template<class UT>
-basic_string<UT> operator+ (basic_string<UT>        && lhs, typename UT::value_type    rhs) noexcept _QX_STR_OP_PLUS_BODY
+basic_string<UT> operator+ (basic_string<UT>        && lhs, typename UT::value_type    rhs) _QX_STR_OP_PLUS_BODY
 template<class UT>
 basic_string<UT> operator+ (typename UT::value_type    lhs, const basic_string<UT>   & rhs) _QX_STR_OP_PLUS_BODY
 template<class UT>
-basic_string<UT> operator+ (typename UT::value_type    lhs, basic_string<UT>        && rhs) noexcept _QX_STR_OP_PLUS_BODY
+basic_string<UT> operator+ (typename UT::value_type    lhs, basic_string<UT>        && rhs) _QX_STR_OP_PLUS_BODY
 
 template<class UT, class String, class = typename basic_string<UT>::template enable_if_string_t<String>>
-basic_string<UT> operator+ (const basic_string<UT>   & lhs, const String             & rhs) noexcept _QX_STR_OP_PLUS_BODY
+basic_string<UT> operator+ (const basic_string<UT>   & lhs, const String             & rhs) _QX_STR_OP_PLUS_BODY
 template<class UT, class String, class = typename basic_string<UT>::template enable_if_string_t<String>>
-basic_string<UT> operator+ (basic_string<UT>        && lhs, const String             & rhs) noexcept _QX_STR_OP_PLUS_BODY
+basic_string<UT> operator+ (basic_string<UT>        && lhs, const String             & rhs) _QX_STR_OP_PLUS_BODY
 template<class UT, class String, class = typename basic_string<UT>::template enable_if_string_t<String>>
-basic_string<UT> operator+ (const String             & lhs, const basic_string<UT>   & rhs) noexcept _QX_STR_OP_PLUS_BODY
+basic_string<UT> operator+ (const String             & lhs, const basic_string<UT>   & rhs) _QX_STR_OP_PLUS_BODY
 template<class UT, class String, class = typename basic_string<UT>::template enable_if_string_t<String>>
-basic_string<UT> operator+ (const String             & lhs, basic_string<UT>        && rhs) noexcept _QX_STR_OP_PLUS_BODY
+basic_string<UT> operator+ (const String             & lhs, basic_string<UT>        && rhs) _QX_STR_OP_PLUS_BODY
 
 
 using string    = basic_string<qx::char_traits<char>>;
