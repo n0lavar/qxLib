@@ -1991,6 +1991,28 @@ TYPED_TEST(TestQxString, copy)
     EXPECT_EQ(str.copy(buffer.data(), 5, 7), 3);
     buffer[3] = CH('\0');
     EXPECT_STREQ(buffer.data(), STR("789"));
+
+    EXPECT_EQ(str.copy(buffer.data(), 5, 11), 0);
+    EXPECT_STREQ(buffer.data(), STR("789"));
+
+    EXPECT_EQ(str.copy(buffer.data(), 0, 5), 0);
+    EXPECT_STREQ(buffer.data(), STR("789"));
+
+    EXPECT_EQ(str.copy(nullptr, 2, 5), 0);
+}
+
+TYPED_TEST(TestQxString, swap)
+{
+    StringTypeTn str1(STR("str1"));
+    StringTypeTn str2(STR("str2"));
+
+    str1.swap(str2);
+    EXPECT_STREQ(str1.data(), STR("str2"));
+    EXPECT_STREQ(str2.data(), STR("str1"));
+
+    std::swap(str1, str2);
+    EXPECT_STREQ(str1.data(), STR("str1"));
+    EXPECT_STREQ(str2.data(), STR("str2"));
 }
 
 #endif

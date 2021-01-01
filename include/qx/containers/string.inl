@@ -368,6 +368,20 @@ inline void basic_string<Traits>::append_vformat(const_pointer pszFormat, va_lis
 }
 
 //==============================================================================
+//!\fn                    basic_string<Traits>::swap
+//
+//!\brief  Swap this str and other
+//!\param  sOther - other str
+//!\author Khrapov
+//!\date   1.01.2021
+//==============================================================================
+template<class Traits>
+inline void basic_string<Traits>::swap(basic_string& sOther) noexcept
+{
+    std::swap(m_Data, sOther.m_Data);
+}
+
+//==============================================================================
 //!\fn               qx::basic_string<Traits>::reserve
 //
 //!\brief  Reserve memory for the string
@@ -3230,31 +3244,33 @@ inline bool basic_string<Traits>::resize(
 
 
 
-//-------------------------- hashes for strings types --------------------------
+//------------------------------------ hash ------------------------------------
 
 namespace std
 {
-    template<>
-    struct hash<qx::string>
+    template<class Traits>
+    struct hash<qx::basic_string<Traits>>
     {
-        u32 operator()(const qx::string& str) const
+        u32 operator()(const qx::basic_string<Traits>& str) const
         {
             return qx::murmur_32_hash(str.data(),
                                       str.size(),
-                                      qx::string::traits_type::hash_seed());
+                                      Traits::hash_seed());
         }
     };
+}
 
-    template<>
-    struct hash<qx::wstring>
+
+
+//------------------------------------ swap ------------------------------------
+
+namespace std
+{
+    template<class Traits>
+    void swap(qx::basic_string<Traits>& lhs, qx::basic_string<Traits>& rhs) noexcept
     {
-        u32 operator()(const qx::wstring& str) const
-        {
-            return qx::murmur_32_hash(str.data(),
-                                      str.size(),
-                                      qx::wstring::traits_type::hash_seed());
-        }
-    };
+        lhs.swap(rhs);
+    }
 }
 
 

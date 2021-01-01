@@ -143,6 +143,8 @@ public:
     void                    append_vformat(const_pointer         pszFormat,
                                           va_list                args);
 
+    void                    swap         (basic_string         & sOther)                    noexcept;
+
     size_type               reserve      (size_type              nCapacity);
     void                    shrink_to_fit(void);
     void                    free         (void);
@@ -166,10 +168,10 @@ public:
                                           size_type              nPos       = 0)    const;
 
     template<typename From>
-    void                    from         (const From&            data,
+    void                    from         (const From           & data,
                                           const_pointer          pszFormat  = nullptr);
     template<typename From>
-    static  basic_string    sfrom        (const From&            data,
+    static  basic_string    sfrom        (const From           & data,
                                           const_pointer          pszFormat  = nullptr);
 
     void                    append       (value_type             chSymbol);
@@ -409,7 +411,7 @@ public:
 
     const   basic_string &  operator=    (value_type             chSymbol);
     const   basic_string &  operator=    (const_pointer          pszSource);
-    const   basic_string &  operator=    (basic_string        && sStr)                    noexcept;
+    const   basic_string &  operator=    (basic_string        && sStr)                      noexcept;
     const   basic_string &  operator=    (const basic_string   & sStr);
     template<class String, class = enable_if_string_t<String>>
     const   basic_string &  operator=    (const String         & sStr);
@@ -420,46 +422,46 @@ public:
     template<class String, class = enable_if_string_t<String>>
     const   basic_string &  operator+=   (const String         & sStr);
 
-    bool                    operator==   (value_type             chSymbol)          const noexcept;
-    bool                    operator==   (const_pointer          pszSource)         const noexcept;
-    bool                    operator==   (const basic_string   & sStr)              const noexcept;
+    bool                    operator==   (value_type             chSymbol)          const   noexcept;
+    bool                    operator==   (const_pointer          pszSource)         const   noexcept;
+    bool                    operator==   (const basic_string   & sStr)              const   noexcept;
     template<class String, class = enable_if_string_t<String>>
-    bool                    operator==   (const String         & sStr)              const noexcept;
+    bool                    operator==   (const String         & sStr)              const   noexcept;
 
-    bool                    operator!=   (value_type             chSymbol)          const noexcept;
-    bool                    operator!=   (const_pointer          pszSource)         const noexcept;
-    bool                    operator!=   (const basic_string   & sStr)              const noexcept;
+    bool                    operator!=   (value_type             chSymbol)          const   noexcept;
+    bool                    operator!=   (const_pointer          pszSource)         const   noexcept;
+    bool                    operator!=   (const basic_string   & sStr)              const   noexcept;
     template<class String, class = enable_if_string_t<String>>
-    bool                    operator!=   (const String         & sStr)              const noexcept;
+    bool                    operator!=   (const String         & sStr)              const   noexcept;
 
-    bool                    operator<    (value_type             chSymbol)          const noexcept;
-    bool                    operator<    (const_pointer          pszSource)         const noexcept;
-    bool                    operator<    (const basic_string   & sStr)              const noexcept;
+    bool                    operator<    (value_type             chSymbol)          const   noexcept;
+    bool                    operator<    (const_pointer          pszSource)         const   noexcept;
+    bool                    operator<    (const basic_string   & sStr)              const   noexcept;
     template<class String, class = enable_if_string_t<String>>
-    bool                    operator<    (const String         & sStr)              const noexcept;
+    bool                    operator<    (const String         & sStr)              const   noexcept;
 
-    bool                    operator<=   (value_type             chSymbol)          const noexcept;
-    bool                    operator<=   (const_pointer          pszSource)         const noexcept;
-    bool                    operator<=   (const basic_string   & sStr)              const noexcept;
+    bool                    operator<=   (value_type             chSymbol)          const   noexcept;
+    bool                    operator<=   (const_pointer          pszSource)         const   noexcept;
+    bool                    operator<=   (const basic_string   & sStr)              const   noexcept;
     template<class String, class = enable_if_string_t<String>>
-    bool                    operator<=   (const String         & sStr)              const noexcept;
+    bool                    operator<=   (const String         & sStr)              const   noexcept;
 
-    bool                    operator>    (value_type             chSymbol)          const noexcept;
-    bool                    operator>    (const_pointer          pszSource)         const noexcept;
-    bool                    operator>    (const basic_string   & sStr)              const noexcept;
+    bool                    operator>    (value_type             chSymbol)          const   noexcept;
+    bool                    operator>    (const_pointer          pszSource)         const   noexcept;
+    bool                    operator>    (const basic_string   & sStr)              const   noexcept;
     template<class String, class = enable_if_string_t<String>>
-    bool                    operator>    (const String         & sStr)              const noexcept;
+    bool                    operator>    (const String         & sStr)              const   noexcept;
 
-    bool                    operator>=   (value_type             chSymbol)          const noexcept;
-    bool                    operator>=   (const_pointer          pszSource)         const noexcept;
-    bool                    operator>=   (const basic_string   & sStr)              const noexcept;
+    bool                    operator>=   (value_type             chSymbol)          const   noexcept;
+    bool                    operator>=   (const_pointer          pszSource)         const   noexcept;
+    bool                    operator>=   (const basic_string   & sStr)              const   noexcept;
     template<class String, class = enable_if_string_t<String>>
-    bool                    operator>=   (const String         & sStr)              const noexcept;
+    bool                    operator>=   (const String         & sStr)              const   noexcept;
 
-    reference               operator[]   (size_type              nSymbol)                 noexcept;
-    const_reference         operator[]   (size_type              nSymbol)           const noexcept;
+    reference               operator[]   (size_type              nSymbol)                   noexcept;
+    const_reference         operator[]   (size_type              nSymbol)           const   noexcept;
 
-    operator std::basic_string_view<value_type, std::char_traits<value_type>>()     const noexcept;
+    operator std::basic_string_view<value_type, std::char_traits<value_type>>()     const   noexcept;
 
 private:
 
