@@ -495,6 +495,18 @@ TYPED_TEST(TestQxString, find)
 {
     StringTypeTn str(STR("for string for words and for searching"));
 
+    typename TypeParam::size_type pos0 = str.find(STR("for"));
+    EXPECT_EQ(pos0, 0);
+
+    typename TypeParam::size_type pos1 = str.find(STR("for"), 15);
+    EXPECT_EQ(pos1, 25);
+
+    typename TypeParam::size_type pos2 = str.find(STR("for"), 4, StringType::npos, 14);
+    EXPECT_EQ(pos2, 11);
+
+    typename TypeParam::size_type pos3 = str.find(STR("for"), 30);
+    EXPECT_EQ(pos3, StringType::npos);
+
     auto test = [str] (auto... toSearch)
     {
         typename TypeParam::size_type pos0 = str.find(toSearch...);
@@ -510,7 +522,6 @@ TYPED_TEST(TestQxString, find)
         EXPECT_EQ(pos3, StringType::npos);
     };
 
-    test(STR("for"));
     test(StringTypeTn(STR("for")));
     test(CH('f'));
 

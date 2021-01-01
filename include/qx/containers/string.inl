@@ -1657,7 +1657,7 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::remove(
         ? nStrSize
         : Traits::length(pszStr);
 
-    size_type nPos = find(pszStr, nBegin, nEnd, nLocalStrSize);
+    size_type nPos = find(pszStr, nBegin, nLocalStrSize, nEnd);
 
     if (nPos != npos)
         erase(nPos, nLocalStrSize);
@@ -2258,8 +2258,8 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::find(
 //!\brief  Find first match
 //!\param  pszWhat   - c-string to find
 //!\param  nBegin    - start searching index
-//!\param  nEnd      - end searching index (-1 - to the end).
 //!\param  nWhatSize - c-string length
+//!\param  nEnd      - end searching index (-1 - to the end).
 //         if nEnd < nBegin, seach backward
 //!\retval           - substring index
 //!\author Khrapov
@@ -2269,8 +2269,8 @@ template<class Traits>
 inline typename basic_string<Traits>::size_type basic_string<Traits>::find(
     const_pointer pszWhat,
     size_type     nBegin,
-    size_type     nEnd,
-    size_type     nWhatSize) const noexcept
+    size_type     nWhatSize,
+    size_type     nEnd) const noexcept
 {
     size_type nLocalWhatSize = nWhatSize != npos
         ? nWhatSize
@@ -2310,7 +2310,7 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::find(
     size_type           nBegin,
     size_type           nEnd) const noexcept
 {
-    return find(sWhat.data(), nBegin, nEnd, sWhat.size());
+    return find(sWhat.data(), nBegin, sWhat.size(), nEnd);
 }
 
 //==============================================================================
@@ -2455,7 +2455,7 @@ inline typename basic_string<Traits>::vector basic_string<Traits>::split(
 
     size_type start = 0;
     size_type end   = 0;
-    while ((end = find(pszSeparator, start, npos, nSepLen)) != npos)
+    while ((end = find(pszSeparator, start, nSepLen, npos)) != npos)
     {
         tokens.push_back(substr(start, end - start));
         start = end + nSepLen;
@@ -2763,7 +2763,7 @@ inline bool basic_string<Traits>::contains(
     const_pointer pszStr,
     size_type nStrSize) const noexcept
 {
-    return find(pszStr, 0, npos, nStrSize) != npos;
+    return find(pszStr, 0, nStrSize) != npos;
 }
 
 //==============================================================================

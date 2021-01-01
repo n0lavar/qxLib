@@ -350,8 +350,8 @@ public:
                                           size_type              nEnd       = npos) const   noexcept;
     size_type               find         (const_pointer          pszWhat,
                                           size_type              nBegin     = 0,
-                                          size_type              nEnd       = npos,
-                                          size_type              nWhatSize  = npos) const   noexcept;
+                                          size_type              nWhatSize  = npos,
+                                          size_type              nEnd       = npos) const   noexcept;
     size_type               find         (const basic_string   & sWhat,
                                           size_type              nBegin     = 0,
                                           size_type              nEnd       = npos) const   noexcept;
@@ -511,7 +511,7 @@ basic_string<UT> operator+ (const basic_string<UT>   & lhs, typename UT::value_t
 template<class UT>
 basic_string<UT> operator+ (basic_string<UT>        && lhs, typename UT::value_type    rhs) noexcept _QX_STR_OP_PLUS_BODY
 template<class UT>
-basic_string<UT> operator+ (typename UT::value_type    lhs, const basic_string<UT>   & rhs) _QX_STR_OP_PLUS_BODY
+basic_string<UT> operator+ (typename UT::value_type    lhs, const basic_string<UT>   & rhs) noexcept _QX_STR_OP_PLUS_BODY
 template<class UT>
 basic_string<UT> operator+ (typename UT::value_type    lhs, basic_string<UT>        && rhs) noexcept _QX_STR_OP_PLUS_BODY
 
