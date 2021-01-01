@@ -365,6 +365,26 @@ public:
                                           size_type              nBegin     = 0,
                                           size_type              nEnd       = npos) const   noexcept;
 
+    size_type               rfind        (value_type             chSymbol,
+                                          size_type              nBegin     = npos,
+                                          size_type              nEnd       = 0)    const   noexcept;
+    size_type               rfind        (const_pointer          pszWhat,
+                                          size_type              nBegin     = npos,
+                                          size_type              nWhatSize  = npos,
+                                          size_type              nEnd       = 0)    const   noexcept;
+    size_type               rfind        (const basic_string   & sWhat,
+                                          size_type              nBegin     = npos,
+                                          size_type              nEnd       = 0)    const   noexcept;
+    template<class FwdIt>
+    size_type               rfind        (FwdIt                  itWhatBegin,
+                                          FwdIt                  itWhatEnd,
+                                          size_type              nBegin     = npos,
+                                          size_type              nEnd       = 0)    const   noexcept;
+    template<class String, class = enable_if_string_t<String>>
+    size_type               rfind        (String                 sWhat,
+                                          size_type              nBegin     = npos,
+                                          size_type              nEnd       = 0)    const   noexcept;
+
     size_type               find_last_of (value_type             chSymbol,
                                           size_type              nPos       = npos,
                                           size_type              nSymbols   = npos) const   noexcept;

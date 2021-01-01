@@ -2221,10 +2221,10 @@ inline int basic_string<Traits>::compare(const String& sStr) const noexcept
 //==============================================================================
 //!\fn                qx::basic_string<Traits>::find
 //
-//!\brief  Find first match
+//!\brief  Find substring
 //!\param  chSymbol - char to find
 //!\param  nBegin   - start searching index
-//!\param  nEnd     - end searching index (-1 - to the end)
+//!\param  nEnd     - end searching index (npos - to the end)
 //!\retval          - substring index or npos if not found
 //!\author Khrapov
 //!\date   30.10.2019
@@ -2255,11 +2255,11 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::find(
 //==============================================================================
 //!\fn                qx::basic_string<Traits>::find
 //
-//!\brief  Find first match
+//!\brief  Find substring
 //!\param  pszWhat   - c-string to find
 //!\param  nBegin    - start searching index
 //!\param  nWhatSize - c-string length
-//!\param  nEnd      - end searching index (-1 - to the end).
+//!\param  nEnd      - end searching index (npos - to the end).
 //         if nEnd < nBegin, seach backward
 //!\retval           - substring index
 //!\author Khrapov
@@ -2362,7 +2362,7 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::find(
 //==============================================================================
 //!\fn                basic_string<Traits>::find<String, >
 //
-//!\brief  Find substring
+//!\brief  Find substring (reverse direction)
 //!\param  sWhat  - substring
 //!\param  nBegin - start searching index
 //!\param  nEnd   - end searching index
@@ -2377,6 +2377,132 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::find(
     size_type nBegin,
     size_type nEnd) const noexcept
 {
+    return find(sWhat.cbegin(), sWhat.cend(), nBegin, nEnd);
+}
+
+//==============================================================================
+//!\fn                qx::basic_string<Traits>::rfind
+//
+//!\brief  Find substring (reverse direction)
+//!\param  chSymbol - char to find
+//!\param  nBegin   - start searching index
+//!\param  nEnd     - end searching index
+//!                   (if nBegin < end, result is equivalent of find(...))
+//!\retval          - substring index or npos if not found
+//!\author Khrapov
+//!\date   1.01.2021
+//==============================================================================
+template<class Traits>
+inline typename basic_string<Traits>::size_type basic_string<Traits>::rfind(
+    value_type    chSymbol,
+    size_type     nBegin,
+    size_type     nEnd) const noexcept
+{
+    if (nBegin == npos)
+        nBegin = size();
+
+    return find(chSymbol, nBegin, nEnd);
+}
+
+//==============================================================================
+//!\fn                qx::basic_string<Traits>::rfind
+//
+//!\brief  Find substring (reverse direction)
+//!\param  pszWhat   - c-string to find
+//!\param  nBegin    - start searching index
+//!\param  nWhatSize - c-string length
+//!\param  nEnd      - end searching index
+//!                    (if nBegin < end, result is equivalent of find(...))
+//!\retval           - substring index
+//!\author Khrapov
+//!\date   1.01.2021
+//==============================================================================
+template<class Traits>
+inline typename basic_string<Traits>::size_type basic_string<Traits>::rfind(
+    const_pointer pszWhat,
+    size_type     nBegin,
+    size_type     nWhatSize,
+    size_type     nEnd) const noexcept
+{
+    if (nBegin == npos)
+        nBegin = size();
+
+    return find(pszWhat, nBegin, nWhatSize, nEnd);
+}
+
+//==============================================================================
+//!\fn                     basic_string<Traits>::rfind
+//
+//!\brief  Find substring (reverse direction)
+//!\param  sWhat    - string to find
+//!\param  nBegin   - start searching index
+//!\param  nEnd     - end searching index
+//!                   (if nBegin < end, result is equivalent of find(...))
+//!\retval          - substring index or npos if not found
+//!\author Khrapov
+//!\date   1.01.2021
+//==============================================================================
+template<class Traits>
+inline typename basic_string<Traits>::size_type basic_string<Traits>::rfind(
+    const basic_string& sWhat,
+    size_type           nBegin,
+    size_type           nEnd) const noexcept
+{
+    if (nBegin == npos)
+        nBegin = size();
+
+    return find(sWhat.data(), nBegin, sWhat.size(), nEnd);
+}
+
+//==============================================================================
+//!\fn                 basic_string<Traits>::rfind<FwdIt>
+//
+//!\brief  Find substring (reverse direction)
+//!\param  itWhatBegin - substring begin iterator
+//!\param  itWhatEnd   - substring end iterator
+//!\param  nBegin      - start searching index
+//!\param  nEnd        - end searching index
+//!                      (if nBegin < end, result is equivalent of find(...))
+//!\retval             - substring index or npos if not found
+//!\author Khrapov
+//!\date   1.01.2021
+//==============================================================================
+template<class Traits>
+template<class FwdIt>
+inline typename basic_string<Traits>::size_type basic_string<Traits>::rfind(
+    FwdIt       itWhatBegin,
+    FwdIt       itWhatEnd,
+    size_type   nBegin,
+    size_type   nEnd) const noexcept
+{
+    if (nBegin == npos)
+        nBegin = size();
+
+    return find(itWhatBegin, itWhatEnd, nBegin, nEnd);
+}
+
+//==============================================================================
+//!\fn                basic_string<Traits>::rfind<String, >
+//
+//!\brief  Find substring (reverse direction)
+//!\param  sWhat  - substring
+//!\param  nBegin - start searching index
+//!\param  nEnd   - end searching index
+//!                 (if nBegin < end, result is equivalent of find(...))
+//!\retval        - substring index or npos if not found
+//!\author Khrapov
+//!\date   1.01.2021
+//==============================================================================
+template<class Traits>
+template<class String, class>
+inline typename basic_string<Traits>::size_type basic_string<Traits>::rfind(
+    String    sWhat,
+    size_type nBegin,
+    size_type nEnd) const noexcept
+{
+    if (nBegin == npos)
+        nBegin = size();
+
     return find(sWhat.cbegin(), sWhat.cend(), nBegin, nEnd);
 }
 

@@ -495,31 +495,19 @@ TYPED_TEST(TestQxString, find)
 {
     StringTypeTn str(STR("for string for words and for searching"));
 
-    typename TypeParam::size_type pos0 = str.find(STR("for"));
-    EXPECT_EQ(pos0, 0);
-
-    typename TypeParam::size_type pos1 = str.find(STR("for"), 15);
-    EXPECT_EQ(pos1, 25);
-
-    typename TypeParam::size_type pos2 = str.find(STR("for"), 4, StringType::npos, 14);
-    EXPECT_EQ(pos2, 11);
-
-    typename TypeParam::size_type pos3 = str.find(STR("for"), 30);
-    EXPECT_EQ(pos3, StringType::npos);
+    EXPECT_EQ(str.find(STR("for")), 0);
+    EXPECT_EQ(str.find(STR("for"), 15), 25);
+    EXPECT_EQ(str.find(STR("for"), 4, StringType::npos, 14), 11);
+    EXPECT_EQ(str.find(STR("for"), 30), StringType::npos);
+    EXPECT_EQ(str.find(STR("kek")), StringType::npos);
 
     auto test = [str] (auto... toSearch)
     {
-        typename TypeParam::size_type pos0 = str.find(toSearch...);
-        EXPECT_EQ(pos0, 0);
-
-        typename TypeParam::size_type pos1 = str.find(toSearch..., 15);
-        EXPECT_EQ(pos1, 25);
-
-        typename TypeParam::size_type pos2 = str.find(toSearch..., 4, 14);
-        EXPECT_EQ(pos2, 11);
-
-        typename TypeParam::size_type pos3 = str.find(toSearch..., 30);
-        EXPECT_EQ(pos3, StringType::npos);
+        EXPECT_EQ(str.find(toSearch...), 0);
+        EXPECT_EQ(str.find(toSearch..., 15), 25);
+        EXPECT_EQ(str.find(toSearch..., 4, 14), 11);
+        EXPECT_EQ(str.find(toSearch..., 30), StringType::npos);
+        EXPECT_EQ(str.find(STR("kek")), StringType::npos);
     };
 
     test(StringTypeTn(STR("for")));
@@ -2025,5 +2013,33 @@ TYPED_TEST(TestQxString, swap)
     EXPECT_STREQ(str1.data(), STR("str1"));
     EXPECT_STREQ(str2.data(), STR("str2"));
 }
+
+TYPED_TEST(TestQxString, rfind)
+{
+    StringTypeTn str(STR("for string for words and for searching"));
+
+    EXPECT_EQ(str.rfind(STR("for")), 25);
+    EXPECT_EQ(str.rfind(STR("for"), 15), 11);
+    EXPECT_EQ(str.rfind(STR("for"), 29, StringType::npos, 20), 25);
+    EXPECT_EQ(str.rfind(STR("for"), 0), 0);
+    EXPECT_EQ(str.rfind(STR("kek")), StringType::npos);
+
+    auto test = [str](auto... toSearch)
+    {
+        EXPECT_EQ(str.rfind(toSearch...), 25);
+        EXPECT_EQ(str.rfind(toSearch..., 15), 11);
+        EXPECT_EQ(str.rfind(toSearch..., 29, 20), 25);
+        EXPECT_EQ(str.rfind(toSearch..., 0), 0);
+        EXPECT_EQ(str.rfind(STR("kek")), StringType::npos);
+    };
+
+    test(StringTypeTn(STR("for")));
+    test(CH('f'));
+
+    auto sStdStr = StdString(STR("for"));
+    test(sStdStr);
+    test(sStdStr.cbegin(), sStdStr.cend());
+}
+
 
 #endif
