@@ -77,26 +77,6 @@ constexpr bool between(T left, T value, T right)
 }
 
 //==============================================================================
-//!\fn                         qx::step_to<T>
-//
-//!\brief  Do step to some value
-//!\param  val - value
-//!\param  to  - value to check
-//!\author Khrapov
-//!\date   3.11.2019
-//==============================================================================
-template<typename T>
-constexpr T step_to(T val, T to)
-{
-    if (val < to)
-        return ++val;
-    else if (val > to)
-        return --val;
-    else
-        return val;
-}
-
-//==============================================================================
 //!\fn                              qx::pi
 //
 //!\brief  Get pi

@@ -501,7 +501,7 @@ TYPED_TEST(TestQxString, find)
     EXPECT_EQ(str.find(STR("for"), 30), StringType::npos);
     EXPECT_EQ(str.find(STR("kek")), StringType::npos);
 
-    auto test = [str] (auto... toSearch)
+    auto test = [&str] (auto... toSearch)
     {
         EXPECT_EQ(str.find(toSearch...), 0);
         EXPECT_EQ(str.find(toSearch..., 15), 25);
@@ -546,10 +546,33 @@ TYPED_TEST(TestQxString, substr)
 TYPED_TEST(TestQxString, find_last_of)
 {
     StringTypeTn str(STR("many different words placed here"));
+
     EXPECT_EQ(str.find_last_of(CH('e')), 31);
     EXPECT_EQ(str.find_last_of(CH('d')), 26);
     EXPECT_EQ(str.find_last_of(CH('p')), 21);
     EXPECT_EQ(str.find_last_of(CH(' ')), 27);
+    EXPECT_EQ(str.find_last_of(CH('x')), StringType::npos);
+
+    EXPECT_EQ(str.find_last_of(STR("kek"), StringType::npos, 3), 31);
+    EXPECT_EQ(str.find_last_of(STR("abc"), StringType::npos, 3), 24);
+    EXPECT_EQ(str.find_last_of(STR("ecc"), StringType::npos, 3), 31);
+    EXPECT_EQ(str.find_last_of(STR("x"), StringType::npos, 1), StringType::npos);
+    EXPECT_EQ(str.find_last_of(STR("m"), StringType::npos, 1), 0);
+
+    auto test = [&str](auto type_var)
+    {
+        using type = decltype(type_var);
+
+        EXPECT_EQ(str.find_last_of(type(STR("kek"))), 31);
+        EXPECT_EQ(str.find_last_of(type(STR("abc"))), 24);
+        EXPECT_EQ(str.find_last_of(type(STR("ecc"))), 31);
+        EXPECT_EQ(str.find_last_of(type(STR("x"))), StringType::npos);
+        EXPECT_EQ(str.find_last_of(type(STR("m"))), 0);
+    };
+
+    test(StringTypeTn());
+    test(STR(""));
+    test(StdString());
 }
 
 TYPED_TEST(TestQxString, split)

@@ -87,21 +87,6 @@ static_assert(!qx::between(0.0,  1.2, 1.0));
 
 
 
-//--------------------------------- qx::step_to --------------------------------
-
-QX_STATIC_ASSERT_EQ(qx::step_to(0, 5), 1);
-QX_STATIC_ASSERT_EQ(qx::step_to(1, 5), 2);
-QX_STATIC_ASSERT_EQ(qx::step_to(2, 5), 3);
-QX_STATIC_ASSERT_EQ(qx::step_to(3, 5), 4);
-QX_STATIC_ASSERT_EQ(qx::step_to(4, 5), 5);
-QX_STATIC_ASSERT_EQ(qx::step_to(5, 5), 5);
-QX_STATIC_ASSERT_EQ(qx::step_to(6, 5), 5);
-QX_STATIC_ASSERT_EQ(qx::step_to(7, 5), 6);
-QX_STATIC_ASSERT_EQ(qx::step_to(8, 5), 7);
-QX_STATIC_ASSERT_EQ(qx::step_to(9, 5), 8);
-
-
-
 //-------------------------------- qx::destruct --------------------------------
 
 struct DestructChecker

@@ -386,8 +386,21 @@ public:
                                           size_type              nEnd       = 0)    const   noexcept;
 
     size_type               find_last_of (value_type             chSymbol,
-                                          size_type              nPos       = npos,
-                                          size_type              nSymbols   = npos) const   noexcept;
+                                          size_type              nPos       = 0)    const   noexcept;
+    size_type               find_last_of (const_pointer          pszWhat,
+                                          size_type              nPos,
+                                          size_type              nWhatSize)         const   noexcept;
+    size_type               find_last_of (const_pointer          pszWhat,
+                                          size_type              nPos       = 0)    const   noexcept;
+    size_type               find_last_of (const basic_string   & sWhat,
+                                          size_type              nPos       = 0)    const   noexcept;
+    template<class FwdIt>
+    size_type               find_last_of (FwdIt                  itWhatBegin,
+                                          FwdIt                  itWhatEnd,
+                                          size_type              nPos       = 0)    const   noexcept;
+    template<class String, class = enable_if_string_t<String>>
+    size_type               find_last_of (String                 sWhat,
+                                          size_type              nPos       = 0)    const   noexcept;
 
     vector                  split        (const value_type       chSeparator)       const   noexcept;
     vector                  split        (const_pointer          pszSeparator,
@@ -488,7 +501,6 @@ private:
     bool                    resize       (size_type              nSymbols,
                                           size_type              nAlign,
                                           string_resize_type     eType = string_resize_type::common) noexcept;
-
     template<class Searcher>
     size_type               trim_left_common(const Searcher    & searcher)                  noexcept;
 
@@ -498,6 +510,14 @@ private:
     template<class Searcher>
     size_type               trim_common  (const Searcher       & searcher)                  noexcept;
 
+    template<class Comparator>
+    size_type               find_common  (size_type              nBegin,
+                                          size_type              nEnd,
+                                          const Comparator     & comparator)        const   noexcept;
+    template<class Comparator>
+    size_type               rfind_common (size_type              nBegin,
+                                          size_type              nEnd,
+                                          const Comparator     & comparator)        const   noexcept;
     template<typename T>
     static constexpr const_pointer get_format_specifier(void)                               noexcept;
 

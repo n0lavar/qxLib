@@ -1,3 +1,4 @@
+#include "string.h"
 //==============================================================================
 //
 //!\file                         string.inl
@@ -374,7 +375,7 @@ inline void basic_string<Traits>::append_vformat(
     int length = Traits::vsnprintf(nullptr, 0, pszFormat, args_copy);
     va_end(args_copy);
 
-    size_type nSize = size();
+    const size_type nSize = size();
     if (length > 0 && resize(nSize + static_cast<size_type>(length), Traits::align()))
         Traits::vsnprintf(data() + nSize, static_cast<size_type>(length) + 1, pszFormat, args);
 }
@@ -747,13 +748,13 @@ inline void basic_string<Traits>::append(
     const_pointer pszStr,
     size_type     nSymbols) noexcept
 {
-    size_type nCurrentSymbls = size();
-    size_type nSizeSource = nSymbols == npos
+    const size_type nSize = size();
+    const size_type nSizeSource = nSymbols == npos
         ? Traits::length(pszStr)
         : nSymbols;
 
-    if (resize(nCurrentSymbls + nSizeSource, Traits::align()))
-        std::memcpy(data() + nCurrentSymbls, pszStr, nSizeSource * sizeof(value_type));
+    if (resize(nSize + nSizeSource, Traits::align()))
+        std::memcpy(data() + nSize, pszStr, nSizeSource * sizeof(value_type));
 }
 
 //==============================================================================
@@ -837,17 +838,17 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::insert(
     const_pointer pszSourse,
     size_type     nSymbols) noexcept
 {
-    size_type nStartSymbols = size();
-    size_type nSizeSource = nSymbols == npos
+    const size_type nSize = size();
+    const size_type nSizeSource = nSymbols == npos
         ? Traits::length(pszSourse)
         : nSymbols;
 
-    if (nSizeSource > 0 && resize(nStartSymbols + nSizeSource, Traits::align()))
+    if (nSizeSource > 0 && resize(nSize + nSizeSource, Traits::align()))
     {
         std::memmove(
             data() + nPos + nSizeSource,
             data() + nPos,
-            (nStartSymbols - nPos) * sizeof(value_type));
+            (nSize - nPos) * sizeof(value_type));
 
         std::memcpy(
             data() + nPos,
@@ -1839,7 +1840,7 @@ inline bool basic_string<Traits>::remove_prefix(const String& sStr) noexcept
 template<class Traits>
 inline bool basic_string<Traits>::remove_suffix(value_type chSymbol) noexcept
 {
-    size_type nSize = size();
+    const size_type nSize = size();
     return remove(
         chSymbol,
         nSize - 1,
@@ -1861,8 +1862,8 @@ inline bool basic_string<Traits>::remove_suffix(
     const_pointer pszStr,
     size_type     nStrSize) noexcept
 {
-    size_type nSize = size();
-    size_type nLocalStrSize = nStrSize != npos
+    const size_type nSize = size();
+    const size_type nLocalStrSize = nStrSize != npos
         ? nStrSize
         : Traits::length(pszStr);
 
@@ -1905,7 +1906,7 @@ inline bool basic_string<Traits>::remove_suffix(
     FwdIt itBegin,
     FwdIt itEnd) noexcept
 {
-    size_type nSize = size();
+    const size_type nSize = size();
     return remove(
         itBegin,
         itEnd,
@@ -2235,21 +2236,13 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::find(
     size_type     nBegin,
     size_type     nEnd) const noexcept
 {
-    if (nEnd == npos)
-        nEnd = size();
-
-    const_pointer pCurrentChar = data() + nBegin;
-    const_pointer pEnd         = data() + nEnd;
-
-    do
-    {
-        if (*pCurrentChar == chSymbol)
-            return static_cast<size_type>(pCurrentChar - data());
-        else
-            pCurrentChar = step_to(pCurrentChar, pEnd);
-    } while (pCurrentChar != pEnd);
-
-    return npos;
+    return find_common(
+        nBegin,
+        nEnd,
+        [chSymbol](const_pointer pCurrentChar)
+        {
+            return *pCurrentChar == chSymbol;
+        });
 }
 
 //==============================================================================
@@ -2260,7 +2253,6 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::find(
 //!\param  nBegin    - start searching index
 //!\param  nWhatSize - c-string length
 //!\param  nEnd      - end searching index (npos - to the end).
-//         if nEnd < nBegin, seach backward
 //!\retval           - substring index
 //!\author Khrapov
 //!\date   30.10.2019
@@ -2276,21 +2268,13 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::find(
         ? nWhatSize
         : Traits::length(pszWhat);
 
-    if (nEnd == npos)
-        nEnd = size();
-
-    const_pointer pCurrentChar = data() + nBegin;
-    const_pointer pEnd         = data() + nEnd;
-
-    do
-    {
-        if (!Traits::compare_n(pszWhat, pCurrentChar, nLocalWhatSize))
-            return static_cast<size_type>(pCurrentChar - data());
-        else
-            pCurrentChar = step_to(pCurrentChar, pEnd);
-    } while (pCurrentChar != pEnd);
-
-    return npos;
+    return find_common(
+        nBegin,
+        nEnd,
+        [pszWhat, nLocalWhatSize](const_pointer pCurrentChar)
+        {
+            return !Traits::compare_n(pszWhat, pCurrentChar, nLocalWhatSize);
+        });
 }
 
 //==============================================================================
@@ -2333,30 +2317,17 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::find(
     size_type   nBegin,
     size_type   nEnd) const noexcept
 {
-    if (nEnd == npos)
-        nEnd = size();
-
-    const_pointer pStart = data();
-    const_pointer pCurrentChar = pStart + nBegin;
-    const_pointer pEnd = pStart + nEnd;
-
-    do
-    {
-        if (!iter_strcmp(
-                const_iterator(this, static_cast<size_type>(pCurrentChar - pStart)),
-                const_iterator(this, static_cast<size_type>(pEnd - pStart)),
+    return find_common(
+        nBegin,
+        nEnd,
+        [this, itWhatBegin, itWhatEnd, nEnd](const_pointer pCurrentChar)
+        {
+            return !iter_strcmp(
+                const_iterator(this, static_cast<size_type>(pCurrentChar - data())),
+                const_iterator(this, static_cast<size_type>(nEnd)),
                 itWhatBegin,
-                itWhatEnd))
-        {
-            return static_cast<size_type>(pCurrentChar - pStart);
-        }
-        else
-        {
-            pCurrentChar = step_to(pCurrentChar, pEnd);
-        }
-    } while (pCurrentChar != pEnd);
-
-    return npos;
+                itWhatEnd);
+        });
 }
 
 //==============================================================================
@@ -2398,10 +2369,13 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::rfind(
     size_type     nBegin,
     size_type     nEnd) const noexcept
 {
-    if (nBegin == npos)
-        nBegin = size();
-
-    return find(chSymbol, nBegin, nEnd);
+    return rfind_common(
+        nBegin,
+        nEnd,
+        [chSymbol](const_pointer pCurrentChar)
+        {
+            return *pCurrentChar == chSymbol;
+        });
 }
 
 //==============================================================================
@@ -2424,10 +2398,17 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::rfind(
     size_type     nWhatSize,
     size_type     nEnd) const noexcept
 {
-    if (nBegin == npos)
-        nBegin = size();
+    size_type nLocalWhatSize = nWhatSize != npos
+        ? nWhatSize
+        : Traits::length(pszWhat);
 
-    return find(pszWhat, nBegin, nWhatSize, nEnd);
+    return rfind_common(
+        nBegin,
+        nEnd,
+        [pszWhat, nLocalWhatSize](const_pointer pCurrentChar)
+        {
+            return !Traits::compare_n(pszWhat, pCurrentChar, nLocalWhatSize);
+        });
 }
 
 //==============================================================================
@@ -2448,10 +2429,7 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::rfind(
     size_type           nBegin,
     size_type           nEnd) const noexcept
 {
-    if (nBegin == npos)
-        nBegin = size();
-
-    return find(sWhat.data(), nBegin, sWhat.size(), nEnd);
+    return rfind(sWhat.data(), nBegin, sWhat.size(), nEnd);
 }
 
 //==============================================================================
@@ -2475,10 +2453,17 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::rfind(
     size_type   nBegin,
     size_type   nEnd) const noexcept
 {
-    if (nBegin == npos)
-        nBegin = size();
-
-    return find(itWhatBegin, itWhatEnd, nBegin, nEnd);
+    return rfind_common(
+        nBegin,
+        nEnd,
+        [this, itWhatBegin, itWhatEnd, nEnd](const_pointer pCurrentChar)
+        {
+            return !iter_strcmp(
+                const_iterator(this, static_cast<size_type>(pCurrentChar - data())),
+                const_iterator(this, static_cast<size_type>(nEnd)),
+                itWhatBegin,
+                itWhatEnd);
+        });
 }
 
 //==============================================================================
@@ -2500,19 +2485,15 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::rfind(
     size_type nBegin,
     size_type nEnd) const noexcept
 {
-    if (nBegin == npos)
-        nBegin = size();
-
-    return find(sWhat.cbegin(), sWhat.cend(), nBegin, nEnd);
+    return rfind(sWhat.cbegin(), sWhat.cend(), nBegin, nEnd);
 }
 
 //==============================================================================
 //!\fn                qx::basic_string<Traits>::find_last_of
 //
-//!\brief  Find last position of catacter
+//!\brief  Find last position of character
 //!\param  chSymbol - char to find
-//!\param  nPos     - start searching index (from the end). npos - from the very end
-//!\param  nSymbols - number of symbols to check (npos - to the beginning)
+//!\param  nPos     - position at which the search is to finish
 //!\retval          - symbol index or npos
 //!\author Khrapov
 //!\date   30.10.2019
@@ -2520,16 +2501,152 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::rfind(
 template<class Traits>
 inline typename basic_string<Traits>::size_type basic_string<Traits>::find_last_of(
     value_type chSymbol,
-    size_type  nPos,
-    size_type  nSymbols) const noexcept
+    size_type  nPos) const noexcept
 {
-    if (nPos == npos)
-        nPos = size();
+    return rfind(chSymbol, npos, nPos);
+}
 
-    if (nSymbols == npos)
-        nSymbols = size();
+//==============================================================================
+//!\fn                qx::basic_string<Traits>::find_last_of
+//
+//!\brief  Finds the last character equal to one of characters in the given character sequence
+//!\param  pszWhat   - string identifying characters to search for
+//!\param  nPos      - position at which the search is to finish
+//!\param  nWhatSize - length of character string identifying characters to search for
+//!\retval           - symbol index or npos
+//!\author Khrapov
+//!\date   2.01.2021
+//==============================================================================
+template<class Traits>
+inline typename basic_string<Traits>::size_type basic_string<Traits>::find_last_of(
+    const_pointer pszWhat,
+    size_type     nPos,
+    size_type     nWhatSize) const noexcept
+{
+    const size_type nSize = size();
+    size_type nLast = npos;
 
-    return find(chSymbol, nPos, nPos - nSymbols);
+    for (size_type nChar = 0; nChar < nWhatSize && nLast != nSize - 1; nChar++)
+    {
+        size_type nCharLastPos = find_last_of(pszWhat[nChar], nPos);
+        if (nCharLastPos != npos)
+        {
+            if (nLast != npos)
+                nLast = std::max(nCharLastPos, nLast);
+            else
+                nLast = nCharLastPos;
+        }
+    }
+
+    return nLast;
+}
+
+//==============================================================================
+//!\fn                qx::basic_string<Traits>::find_last_of
+//
+//!\brief  Finds the last character equal to one of characters in the given character sequence
+//!\param  pszWhat   - null terminated string identifying characters to search for
+//!\param  nPos      - position at which the search is to finish
+//!\retval           - symbol index or npos
+//!\author Khrapov
+//!\date   2.01.2021
+//==============================================================================
+template<class Traits>
+inline typename basic_string<Traits>::size_type basic_string<Traits>::find_last_of(
+    const_pointer pszWhat,
+    size_type     nPos) const noexcept
+{
+    const size_type nSize = size();
+    size_type nLast = npos;
+
+    for (size_type nChar = 0;
+        pszWhat[nChar] != QX_CHAR_PREFIX(value_type, '\0') && nLast != nSize - 1;
+        nChar++)
+    {
+        size_type nCharLastPos = find_last_of(pszWhat[nChar], nPos);
+        if (nCharLastPos != npos)
+        {
+            if (nLast != npos)
+                nLast = std::max(nCharLastPos, nLast);
+            else
+                nLast = nCharLastPos;
+        }
+    }
+
+    return nLast;
+}
+
+//==============================================================================
+//!\fn                qx::basic_string<Traits>::find_last_of
+//
+//!\brief  Finds the last character equal to one of characters in the given character sequence
+//!\param  sWhat - string identifying characters to search for
+//!\param  nPos  - position at which the search is to finish
+//!\retval       - symbol index or npos
+//!\author Khrapov
+//!\date   2.01.2021
+//==============================================================================
+template<class Traits>
+inline typename basic_string<Traits>::size_type basic_string<Traits>::find_last_of(
+    const basic_string& sWhat,
+    size_type           nPos) const noexcept
+{
+    return find_last_of(sWhat.data(), nPos, sWhat.size());
+}
+
+//==============================================================================
+//!\fn            qx::basic_string<Traits>::find_last_of<FwdIt>
+//
+//!\brief  Finds the last character equal to one of characters in the given character sequence
+//!\param  itWhatBegin - begin it of string identifying characters to search for
+//!\param  itWhatEnd   - end it of string identifying characters to search for
+//!\param  nPos        - position at which the search is to finish
+//!\retval             - symbol index or npos
+//!\author Khrapov
+//!\date   2.01.2021
+//==============================================================================
+template<class Traits>
+template<class FwdIt>
+inline typename basic_string<Traits>::size_type basic_string<Traits>::find_last_of(
+    FwdIt     itWhatBegin,
+    FwdIt     itWhatEnd,
+    size_type nPos) const noexcept
+{
+    const size_type nSize = size();
+    size_type nLast = npos;
+
+    for (auto it = itWhatBegin; it != itWhatEnd && nLast != nSize - 1; ++it)
+    {
+        size_type nCharLastPos = find_last_of(*it, nPos);
+        if (nCharLastPos != npos)
+        {
+            if (nLast != npos)
+                nLast = std::max(nCharLastPos, nLast);
+            else
+                nLast = nCharLastPos;
+        }
+    }
+
+    return nLast;
+}
+
+//==============================================================================
+//!\fn           qx::basic_string<Traits>::find_last_of<String, >
+//
+//!\brief  Finds the last character equal to one of characters in the given character sequence
+//!\param  sWhat - string identifying characters to search for
+//!\param  nPos  - position at which the search is to finish
+//!\retval       - symbol index or npos
+//!\author Khrapov
+//!\date   2.01.2021
+//==============================================================================
+template<class Traits>
+template<class String, class>
+inline typename basic_string<Traits>::size_type basic_string<Traits>::find_last_of(
+    String    sWhat,
+    size_type nPos) const noexcept
+{
+    return find_last_of(sWhat.cbegin(), sWhat.cend(), nPos);
 }
 
 //==============================================================================
@@ -2769,7 +2886,7 @@ inline bool basic_string<Traits>::starts_with(const String& sStr) const noexcept
 template<class Traits>
 inline bool basic_string<Traits>::ends_with(value_type chSymbol) const noexcept
 {
-    size_type nSize = size();
+    const size_type nSize = size();
     if (nSize > 0)
         return at(nSize - 1) == chSymbol;
     else
@@ -3288,7 +3405,7 @@ constexpr typename basic_string<Traits>::const_pointer basic_string<Traits>::get
 }
 
 //==============================================================================
-//!\fn            qx::basic_string<Traits>::trim_left_common
+//!\fn         qx::basic_string<Traits>::trim_left_common<Searcher>
 //
 //!\brief  Common algorithm for trimming string to the left
 //!\param  searcher - function that returns true if symbol has to be deleted
@@ -3316,7 +3433,7 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::trim_left_
 }
 
 //==============================================================================
-//!\fn            qx::basic_string<Traits>::trim_right_common
+//!\fn         qx::basic_string<Traits>::trim_right_common<Searcher>
 //
 //!\brief  Common algorithm for trimming string to the right
 //!\param  searcher - function that returns true if symbol has to be deleted
@@ -3345,7 +3462,7 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::trim_right
 }
 
 //==============================================================================
-//!\fn                qx::basic_string<Traits>::trim_common
+//!\fn           qx::basic_string<Traits>::trim_common<Searcher>
 //
 //!\brief  Common algorithm for trimming string to the both sides
 //!\param  searcher - function that returns true if symbol has to be deleted
@@ -3358,9 +3475,9 @@ template<class Searcher>
 inline typename basic_string<Traits>::size_type basic_string<Traits>::trim_common(
     const Searcher& searcher) noexcept
 {
-    size_type nSize     = size();
+    const size_type nSize = size();
     size_type nStartPos = 0;
-    size_type nEndPos   = nSize;
+    size_type nEndPos = nSize;
 
     while (nStartPos < nSize && searcher(at(nStartPos)))
         nStartPos++;
@@ -3377,6 +3494,78 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::trim_commo
 
     resize(nNewSize, Traits::align());
     return nSize - nNewSize;
+}
+
+//==============================================================================
+//!\fn           qx::basic_string<Traits>::find_common<Comparator>
+//
+//!\brief  Common algorithm for finding substring
+//!\param  nBegin     - start searching index
+//!\param  nEnd       - end searching index (npos - to the end)
+//!\param  comparator - comparator function
+//!\retval            - substring index or npos if not found
+//!\author Khrapov
+//!\date   02.12.2020
+//==============================================================================
+template<class Traits>
+template<class Comparator>
+inline typename basic_string<Traits>::size_type basic_string<Traits>::find_common(
+    size_type         nBegin,
+    size_type         nEnd,
+    const Comparator& comparator) const noexcept
+{
+    if (nEnd == npos)
+        nEnd = size();
+
+    const_pointer pData = data();
+    const_pointer pCurrentChar = pData + nBegin;
+    const_pointer pEnd = pData + nEnd;
+
+    while (pCurrentChar < pEnd)
+    {
+        if (comparator(pCurrentChar))
+            return static_cast<size_type>(pCurrentChar - pData);
+        else
+            pCurrentChar++;
+    }
+
+    return npos;
+}
+
+//==============================================================================
+//!\fn           qx::basic_string<Traits>::rfind_common<Comparator>
+//
+//!\brief  Common algorithm for finding substring
+//!\param  nBegin     - start searching index
+//!\param  nEnd       - end searching index
+//!\param  comparator - comparator function
+//!\retval            - substring index or npos if not found
+//!\author Khrapov
+//!\date   02.12.2020
+//==============================================================================
+template<class Traits>
+template<class Comparator>
+inline typename basic_string<Traits>::size_type basic_string<Traits>::rfind_common(
+    size_type         nBegin,
+    size_type         nEnd,
+    const Comparator& comparator) const noexcept
+{
+    if (nBegin == npos)
+        nBegin = size() - 1;
+
+    const_pointer pData = data();
+    const_pointer pCurrentChar = pData + nBegin;
+    const_pointer pEnd = pData + nEnd;
+
+    while (pCurrentChar >= pEnd)
+    {
+        if (comparator(pCurrentChar))
+            return static_cast<size_type>(pCurrentChar - pData);
+        else
+            pCurrentChar--;
+    }
+
+    return npos;
 }
 
 //==============================================================================
