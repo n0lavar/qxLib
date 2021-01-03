@@ -386,21 +386,21 @@ public:
                                           size_type              nEnd       = 0)    const   noexcept;
 
     size_type               find_first_of(value_type             chSymbol,
-                                          size_type              nPos       = npos) const   noexcept;
+                                          size_type              nBedin     = npos) const   noexcept;
     size_type               find_first_of(const_pointer          pszWhat,
-                                          size_type              nPos,
+                                          size_type              nBedin,
                                           size_type              nWhatSize)         const   noexcept;
     size_type               find_first_of(const_pointer          pszWhat,
-                                          size_type              nPos       = npos) const   noexcept;
+                                          size_type              nBedin     = npos) const   noexcept;
     size_type               find_first_of(const basic_string   & sWhat,
-                                          size_type              nPos       = npos) const   noexcept;
+                                          size_type              nBedin     = npos) const   noexcept;
     template<class FwdIt>
     size_type               find_first_of(FwdIt                  itWhatBegin,
                                           FwdIt                  itWhatEnd,
-                                          size_type              nPos       = npos) const   noexcept;
+                                          size_type              nBedin     = npos) const   noexcept;
     template<class String, class = enable_if_string_t<String>>
     size_type               find_first_of(String                 sWhat,
-                                          size_type              nPos       = npos) const   noexcept;
+                                          size_type              nBedin     = npos) const   noexcept;
 
     size_type               find_last_of (value_type             chSymbol,
                                           size_type              nPos       = 0)    const   noexcept;
@@ -536,10 +536,10 @@ private:
                                           size_type              nEnd,
                                           const Comparator     & comparator)        const   noexcept;
     template<class CharGetter>
-    size_type               _find_last_of(size_type              nPos,
+    size_type               _find_first_of(size_type             nBedin,
                                           const CharGetter     & char_getter)       const   noexcept;
     template<class CharGetter>
-    size_type               _find_first_of(size_type             nPos,
+    size_type               _find_last_of(size_type              nEnd,
                                           const CharGetter     & char_getter)       const   noexcept;
     template<typename T>
     static constexpr const_pointer get_format_specifier(void)                               noexcept;

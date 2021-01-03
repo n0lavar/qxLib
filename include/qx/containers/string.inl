@@ -2492,7 +2492,7 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::rfind(
 //
 //!\brief  Find first position of character
 //!\param  chSymbol - char to find
-//!\param  nPos     - position at which the search is to finish
+//!\param  nBedin   - position at which the search is to begin
 //!\retval          - symbol index or npos
 //!\author Khrapov
 //!\date   30.10.2019
@@ -2500,9 +2500,9 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::rfind(
 template<class Traits>
 inline typename basic_string<Traits>::size_type basic_string<Traits>::find_first_of(
     value_type chSymbol,
-    size_type  nPos) const noexcept
+    size_type  nBedin) const noexcept
 {
-    return find(chSymbol, 0, nPos);
+    return find(chSymbol, nBedin);
 }
 
 //==============================================================================
@@ -2510,7 +2510,7 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::find_first
 //
 //!\brief  Finds the first character equal to one of characters in the given character sequence
 //!\param  pszWhat   - string identifying characters to search for
-//!\param  nPos      - position at which the search is to finish
+//!\param  nBedin    - position at which the search is to begin
 //!\param  nWhatSize - length of character string identifying characters to search for
 //!\retval           - symbol index or npos
 //!\author Khrapov
@@ -2519,12 +2519,12 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::find_first
 template<class Traits>
 inline typename basic_string<Traits>::size_type basic_string<Traits>::find_first_of(
     const_pointer pszWhat,
-    size_type     nPos,
+    size_type     nBedin,
     size_type     nWhatSize) const noexcept
 {
     size_type nChar = 0;
     return _find_first_of(
-        nPos,
+        nBedin,
         [&nChar, pszWhat, nWhatSize]()
         {
             std::optional<value_type> ret = std::nullopt;
@@ -2542,7 +2542,7 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::find_first
 //
 //!\brief  Finds the first character equal to one of characters in the given character sequence
 //!\param  pszWhat   - null terminated string identifying characters to search for
-//!\param  nPos      - position at which the search is to finish
+//!\param  nBedin    - position at which the search is to begin
 //!\retval           - symbol index or npos
 //!\author Khrapov
 //!\date   2.01.2021
@@ -2550,11 +2550,11 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::find_first
 template<class Traits>
 inline typename basic_string<Traits>::size_type basic_string<Traits>::find_first_of(
     const_pointer pszWhat,
-    size_type     nPos) const noexcept
+    size_type     nBedin) const noexcept
 {
     size_type nChar = 0;
     return _find_first_of(
-        nPos,
+        nBedin,
         [&nChar, pszWhat]()
         {
             std::optional<value_type> ret = std::nullopt;
@@ -2571,18 +2571,18 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::find_first
 //!\fn                qx::basic_string<Traits>::find_first_of
 //
 //!\brief  Finds the first character equal to one of characters in the given character sequence
-//!\param  sWhat - string identifying characters to search for
-//!\param  nPos  - position at which the search is to finish
-//!\retval       - symbol index or npos
+//!\param  sWhat  - string identifying characters to search for
+//!\param  nBedin - position at which the search is to begin
+//!\retval        - symbol index or npos
 //!\author Khrapov
 //!\date   2.01.2021
 //==============================================================================
 template<class Traits>
 inline typename basic_string<Traits>::size_type basic_string<Traits>::find_first_of(
     const basic_string& sWhat,
-    size_type           nPos) const noexcept
+    size_type           nBedin) const noexcept
 {
-    return find_first_of(sWhat.data(), nPos, sWhat.size());
+    return find_first_of(sWhat.data(), nBedin, sWhat.size());
 }
 
 //==============================================================================
@@ -2591,7 +2591,7 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::find_first
 //!\brief  Finds the first character equal to one of characters in the given character sequence
 //!\param  itWhatBegin - begin it of string identifying characters to search for
 //!\param  itWhatEnd   - end it of string identifying characters to search for
-//!\param  nPos        - position at which the search is to finish
+//!\param  nBedin      - position at which the search is to begin
 //!\retval             - symbol index or npos
 //!\author Khrapov
 //!\date   2.01.2021
@@ -2601,11 +2601,11 @@ template<class FwdIt>
 inline typename basic_string<Traits>::size_type basic_string<Traits>::find_first_of(
     FwdIt     itWhatBegin,
     FwdIt     itWhatEnd,
-    size_type nPos) const noexcept
+    size_type nBedin) const noexcept
 {
     FwdIt it = itWhatBegin;
     return _find_first_of(
-        nPos,
+        nBedin,
         [&it, itWhatEnd]()
         {
             std::optional<value_type> ret = std::nullopt;
@@ -2622,9 +2622,9 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::find_first
 //!\fn           qx::basic_string<Traits>::find_first_of<String, >
 //
 //!\brief  Finds the first character equal to one of characters in the given character sequence
-//!\param  sWhat - string identifying characters to search for
-//!\param  nPos  - position at which the search is to finish
-//!\retval       - symbol index or npos
+//!\param  sWhat  - string identifying characters to search for
+//!\param  nBedin - position at which the search is to begin
+//!\retval        - symbol index or npos
 //!\author Khrapov
 //!\date   2.01.2021
 //==============================================================================
@@ -2632,9 +2632,9 @@ template<class Traits>
 template<class String, class>
 inline typename basic_string<Traits>::size_type basic_string<Traits>::find_first_of(
     String    sWhat,
-    size_type nPos) const noexcept
+    size_type nBedin) const noexcept
 {
-    return find_first_of(sWhat.cbegin(), sWhat.cend(), nPos);
+    return find_first_of(sWhat.cbegin(), sWhat.cend(), nBedin);
 }
 
 //==============================================================================
@@ -2642,7 +2642,7 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::find_first
 //
 //!\brief  Find last position of character
 //!\param  chSymbol - char to find
-//!\param  nPos     - position at which the search is to finish
+//!\param  nEnd     - position at which the search is to finish
 //!\retval          - symbol index or npos
 //!\author Khrapov
 //!\date   30.10.2019
@@ -2650,9 +2650,9 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::find_first
 template<class Traits>
 inline typename basic_string<Traits>::size_type basic_string<Traits>::find_last_of(
     value_type chSymbol,
-    size_type  nPos) const noexcept
+    size_type  nEnd) const noexcept
 {
-    return rfind(chSymbol, npos, nPos);
+    return rfind(chSymbol, npos, nEnd);
 }
 
 //==============================================================================
@@ -2660,7 +2660,7 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::find_last_
 //
 //!\brief  Finds the last character equal to one of characters in the given character sequence
 //!\param  pszWhat   - string identifying characters to search for
-//!\param  nPos      - position at which the search is to finish
+//!\param  nEnd      - position at which the search is to finish
 //!\param  nWhatSize - length of character string identifying characters to search for
 //!\retval           - symbol index or npos
 //!\author Khrapov
@@ -2669,12 +2669,12 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::find_last_
 template<class Traits>
 inline typename basic_string<Traits>::size_type basic_string<Traits>::find_last_of(
     const_pointer pszWhat,
-    size_type     nPos,
+    size_type     nEnd,
     size_type     nWhatSize) const noexcept
 {
     size_type nChar = 0;
     return _find_last_of(
-        nPos,
+        nEnd,
         [&nChar, pszWhat, nWhatSize]()
         {
             std::optional<value_type> ret = std::nullopt;
@@ -2692,7 +2692,7 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::find_last_
 //
 //!\brief  Finds the last character equal to one of characters in the given character sequence
 //!\param  pszWhat   - null terminated string identifying characters to search for
-//!\param  nPos      - position at which the search is to finish
+//!\param  nEnd      - position at which the search is to finish
 //!\retval           - symbol index or npos
 //!\author Khrapov
 //!\date   2.01.2021
@@ -2700,11 +2700,11 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::find_last_
 template<class Traits>
 inline typename basic_string<Traits>::size_type basic_string<Traits>::find_last_of(
     const_pointer pszWhat,
-    size_type     nPos) const noexcept
+    size_type     nEnd) const noexcept
 {
     size_type nChar = 0;
     return _find_last_of(
-        nPos,
+        nEnd,
         [&nChar, pszWhat]()
         {
             std::optional<value_type> ret = std::nullopt;
@@ -2722,7 +2722,7 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::find_last_
 //
 //!\brief  Finds the last character equal to one of characters in the given character sequence
 //!\param  sWhat - string identifying characters to search for
-//!\param  nPos  - position at which the search is to finish
+//!\param  nEnd  - position at which the search is to finish
 //!\retval       - symbol index or npos
 //!\author Khrapov
 //!\date   2.01.2021
@@ -2730,9 +2730,9 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::find_last_
 template<class Traits>
 inline typename basic_string<Traits>::size_type basic_string<Traits>::find_last_of(
     const basic_string& sWhat,
-    size_type           nPos) const noexcept
+    size_type           nEnd) const noexcept
 {
-    return find_last_of(sWhat.data(), nPos, sWhat.size());
+    return find_last_of(sWhat.data(), nEnd, sWhat.size());
 }
 
 //==============================================================================
@@ -2741,7 +2741,7 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::find_last_
 //!\brief  Finds the last character equal to one of characters in the given character sequence
 //!\param  itWhatBegin - begin it of string identifying characters to search for
 //!\param  itWhatEnd   - end it of string identifying characters to search for
-//!\param  nPos        - position at which the search is to finish
+//!\param  nEnd        - position at which the search is to finish
 //!\retval             - symbol index or npos
 //!\author Khrapov
 //!\date   2.01.2021
@@ -2751,11 +2751,11 @@ template<class FwdIt>
 inline typename basic_string<Traits>::size_type basic_string<Traits>::find_last_of(
     FwdIt     itWhatBegin,
     FwdIt     itWhatEnd,
-    size_type nPos) const noexcept
+    size_type nEnd) const noexcept
 {
     FwdIt it = itWhatBegin;
     return _find_last_of(
-        nPos,
+        nEnd,
         [&it, itWhatEnd]()
         {
             std::optional<value_type> ret = std::nullopt;
@@ -2773,7 +2773,7 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::find_last_
 //
 //!\brief  Finds the last character equal to one of characters in the given character sequence
 //!\param  sWhat - string identifying characters to search for
-//!\param  nPos  - position at which the search is to finish
+//!\param  nEnd  - position at which the search is to finish
 //!\retval       - symbol index or npos
 //!\author Khrapov
 //!\date   2.01.2021
@@ -2782,9 +2782,9 @@ template<class Traits>
 template<class String, class>
 inline typename basic_string<Traits>::size_type basic_string<Traits>::find_last_of(
     String    sWhat,
-    size_type nPos) const noexcept
+    size_type nEnd) const noexcept
 {
-    return find_last_of(sWhat.cbegin(), sWhat.cend(), nPos);
+    return find_last_of(sWhat.cbegin(), sWhat.cend(), nEnd);
 }
 
 //==============================================================================
@@ -3707,47 +3707,10 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::_rfind(
 }
 
 //==============================================================================
-//!\fn          qx::basic_string<Traits>::_find_last_of<Comparator>
-//
-//!\brief  Common algorithm for find_last_of
-//!\param  nPos        - position at which the search is to finish
-//!\param  char_getter - function that returns new char till "of" string end
-//!\retval             - symbol index or npos
-//!\author Khrapov
-//!\date   02.12.2020
-//==============================================================================
-template<class Traits>
-template<class CharGetter>
-inline typename basic_string<Traits>::size_type basic_string<Traits>::_find_last_of(
-    size_type         nPos,
-    const CharGetter& char_getter) const noexcept
-{
-    const size_type nSize = size();
-    size_type nLast = npos;
-
-    auto chCurrent = char_getter();
-    while (nLast != nSize - 1 && chCurrent.has_value())
-    {
-        size_type nCharLastPos = find_last_of(chCurrent.value(), nPos);
-        if (nCharLastPos != npos)
-        {
-            if (nLast != npos)
-                nLast = std::max(nCharLastPos, nLast);
-            else
-                nLast = nCharLastPos;
-        }
-
-        chCurrent = char_getter();
-    }
-
-    return nLast;
-}
-
-//==============================================================================
 //!\fn          qx::basic_string<Traits>::_find_first_of<Comparator>
 //
 //!\brief  Common algorithm for find_first_of
-//!\param  nPos        - position at which the search is to finish
+//!\param  nBedin      - position at which the search is to begin
 //!\param  char_getter - function that returns new char till "of" string end
 //!\retval             - symbol index or npos
 //!\author Khrapov
@@ -3756,7 +3719,7 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::_find_last
 template<class Traits>
 template<class CharGetter>
 inline typename basic_string<Traits>::size_type basic_string<Traits>::_find_first_of(
-    size_type         nPos,
+    size_type         nBedin,
     const CharGetter& char_getter) const noexcept
 {
     size_type nFirst = npos;
@@ -3764,7 +3727,7 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::_find_firs
     auto chCurrent = char_getter();
     while (nFirst != 0 && chCurrent.has_value())
     {
-        size_type nCharFirstPos = find_first_of(chCurrent.value(), nPos);
+        size_type nCharFirstPos = find_first_of(chCurrent.value(), nBedin);
         if (nCharFirstPos != npos)
         {
             if (nFirst != npos)
@@ -3777,6 +3740,43 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::_find_firs
     }
 
     return nFirst;
+}
+
+//==============================================================================
+//!\fn          qx::basic_string<Traits>::_find_last_of<Comparator>
+//
+//!\brief  Common algorithm for find_last_of
+//!\param  nEnd        - position at which the search is to finish
+//!\param  char_getter - function that returns new char till "of" string end
+//!\retval             - symbol index or npos
+//!\author Khrapov
+//!\date   02.12.2020
+//==============================================================================
+template<class Traits>
+template<class CharGetter>
+inline typename basic_string<Traits>::size_type basic_string<Traits>::_find_last_of(
+    size_type         nEnd,
+    const CharGetter& char_getter) const noexcept
+{
+    const size_type nSize = size();
+    size_type nLast = npos;
+
+    auto chCurrent = char_getter();
+    while (nLast != nSize - 1 && chCurrent.has_value())
+    {
+        size_type nCharLastPos = find_last_of(chCurrent.value(), nEnd);
+        if (nCharLastPos != npos)
+        {
+            if (nLast != npos)
+                nLast = std::max(nCharLastPos, nLast);
+            else
+                nLast = nCharLastPos;
+        }
+
+        chCurrent = char_getter();
+    }
+
+    return nLast;
 }
 
 //==============================================================================
