@@ -543,6 +543,38 @@ TYPED_TEST(TestQxString, substr)
     EXPECT_STREQ(str4.data(), STR("here"));
 }
 
+TYPED_TEST(TestQxString, find_first_of)
+{
+    StringTypeTn str(STR("many different words placed here"));
+
+    EXPECT_EQ(str.find_first_of(CH('m')), 0);
+    EXPECT_EQ(str.find_first_of(CH('a')), 1);
+    EXPECT_EQ(str.find_first_of(CH('n')), 2);
+    EXPECT_EQ(str.find_first_of(CH(' ')), 4);
+    EXPECT_EQ(str.find_first_of(CH('x')), StringType::npos);
+
+    EXPECT_EQ(str.find_first_of(STR("kek"), StringType::npos, 3), 9);
+    EXPECT_EQ(str.find_first_of(STR("abc"), StringType::npos, 3), 1);
+    EXPECT_EQ(str.find_first_of(STR("ecc"), StringType::npos, 3), 9);
+    EXPECT_EQ(str.find_first_of(STR("x"), StringType::npos, 1), StringType::npos);
+    EXPECT_EQ(str.find_first_of(STR("m"), StringType::npos, 1), 0);
+
+    auto test = [&str](auto type_var)
+    {
+        using type = decltype(type_var);
+
+        EXPECT_EQ(str.find_first_of(type(STR("kek"))), 9);
+        EXPECT_EQ(str.find_first_of(type(STR("abc"))), 1);
+        EXPECT_EQ(str.find_first_of(type(STR("ecc"))), 9);
+        EXPECT_EQ(str.find_first_of(type(STR("x"))), StringType::npos);
+        EXPECT_EQ(str.find_first_of(type(STR("m"))), 0);
+    };
+
+    test(StringTypeTn());
+    test(STR(""));
+    test(StdString());
+}
+
 TYPED_TEST(TestQxString, find_last_of)
 {
     StringTypeTn str(STR("many different words placed here"));

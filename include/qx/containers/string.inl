@@ -1,3 +1,4 @@
+#include "string.h"
 //==============================================================================
 //
 //!\file                         string.inl
@@ -2472,7 +2473,6 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::rfind(
 //!\param  sWhat  - substring
 //!\param  nBegin - start searching index
 //!\param  nEnd   - end searching index
-//!                 (if nBegin < end, result is equivalent of find(...))
 //!\retval        - substring index or npos if not found
 //!\author Khrapov
 //!\date   1.01.2021
@@ -2485,6 +2485,156 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::rfind(
     size_type nEnd) const noexcept
 {
     return rfind(sWhat.cbegin(), sWhat.cend(), nBegin, nEnd);
+}
+
+//==============================================================================
+//!\fn                qx::basic_string<Traits>::find_first_of
+//
+//!\brief  Find first position of character
+//!\param  chSymbol - char to find
+//!\param  nPos     - position at which the search is to finish
+//!\retval          - symbol index or npos
+//!\author Khrapov
+//!\date   30.10.2019
+//==============================================================================
+template<class Traits>
+inline typename basic_string<Traits>::size_type basic_string<Traits>::find_first_of(
+    value_type chSymbol,
+    size_type  nPos) const noexcept
+{
+    return find(chSymbol, 0, nPos);
+}
+
+//==============================================================================
+//!\fn                qx::basic_string<Traits>::find_first_of
+//
+//!\brief  Finds the first character equal to one of characters in the given character sequence
+//!\param  pszWhat   - string identifying characters to search for
+//!\param  nPos      - position at which the search is to finish
+//!\param  nWhatSize - length of character string identifying characters to search for
+//!\retval           - symbol index or npos
+//!\author Khrapov
+//!\date   2.01.2021
+//==============================================================================
+template<class Traits>
+inline typename basic_string<Traits>::size_type basic_string<Traits>::find_first_of(
+    const_pointer pszWhat,
+    size_type     nPos,
+    size_type     nWhatSize) const noexcept
+{
+    size_type nChar = 0;
+    return _find_first_of(
+        nPos,
+        [&nChar, pszWhat, nWhatSize]()
+        {
+            std::optional<value_type> ret = std::nullopt;
+            if (nChar < nWhatSize)
+            {
+                ret = pszWhat[nChar];
+                nChar++;
+            }
+            return ret;
+        });
+}
+
+//==============================================================================
+//!\fn                qx::basic_string<Traits>::find_first_of
+//
+//!\brief  Finds the first character equal to one of characters in the given character sequence
+//!\param  pszWhat   - null terminated string identifying characters to search for
+//!\param  nPos      - position at which the search is to finish
+//!\retval           - symbol index or npos
+//!\author Khrapov
+//!\date   2.01.2021
+//==============================================================================
+template<class Traits>
+inline typename basic_string<Traits>::size_type basic_string<Traits>::find_first_of(
+    const_pointer pszWhat,
+    size_type     nPos) const noexcept
+{
+    size_type nChar = 0;
+    return _find_first_of(
+        nPos,
+        [&nChar, pszWhat]()
+        {
+            std::optional<value_type> ret = std::nullopt;
+            if (pszWhat[nChar] != QX_CHAR_PREFIX(value_type, '\0'))
+            {
+                ret = pszWhat[nChar];
+                nChar++;
+            }
+            return ret;
+        });
+}
+
+//==============================================================================
+//!\fn                qx::basic_string<Traits>::find_first_of
+//
+//!\brief  Finds the first character equal to one of characters in the given character sequence
+//!\param  sWhat - string identifying characters to search for
+//!\param  nPos  - position at which the search is to finish
+//!\retval       - symbol index or npos
+//!\author Khrapov
+//!\date   2.01.2021
+//==============================================================================
+template<class Traits>
+inline typename basic_string<Traits>::size_type basic_string<Traits>::find_first_of(
+    const basic_string& sWhat,
+    size_type           nPos) const noexcept
+{
+    return find_first_of(sWhat.data(), nPos, sWhat.size());
+}
+
+//==============================================================================
+//!\fn            qx::basic_string<Traits>::find_first_of<FwdIt>
+//
+//!\brief  Finds the first character equal to one of characters in the given character sequence
+//!\param  itWhatBegin - begin it of string identifying characters to search for
+//!\param  itWhatEnd   - end it of string identifying characters to search for
+//!\param  nPos        - position at which the search is to finish
+//!\retval             - symbol index or npos
+//!\author Khrapov
+//!\date   2.01.2021
+//==============================================================================
+template<class Traits>
+template<class FwdIt>
+inline typename basic_string<Traits>::size_type basic_string<Traits>::find_first_of(
+    FwdIt     itWhatBegin,
+    FwdIt     itWhatEnd,
+    size_type nPos) const noexcept
+{
+    FwdIt it = itWhatBegin;
+    return _find_first_of(
+        nPos,
+        [&it, itWhatEnd]()
+        {
+            std::optional<value_type> ret = std::nullopt;
+            if (it != itWhatEnd)
+            {
+                ret = *it;
+                ++it;
+            }
+            return ret;
+        });
+}
+
+//==============================================================================
+//!\fn           qx::basic_string<Traits>::find_first_of<String, >
+//
+//!\brief  Finds the first character equal to one of characters in the given character sequence
+//!\param  sWhat - string identifying characters to search for
+//!\param  nPos  - position at which the search is to finish
+//!\retval       - symbol index or npos
+//!\author Khrapov
+//!\date   2.01.2021
+//==============================================================================
+template<class Traits>
+template<class String, class>
+inline typename basic_string<Traits>::size_type basic_string<Traits>::find_first_of(
+    String    sWhat,
+    size_type nPos) const noexcept
+{
+    return find_first_of(sWhat.cbegin(), sWhat.cend(), nPos);
 }
 
 //==============================================================================
@@ -3591,6 +3741,42 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::_find_last
     }
 
     return nLast;
+}
+
+//==============================================================================
+//!\fn          qx::basic_string<Traits>::_find_first_of<Comparator>
+//
+//!\brief  Common algorithm for find_first_of
+//!\param  nPos        - position at which the search is to finish
+//!\param  char_getter - function that returns new char till "of" string end
+//!\retval             - symbol index or npos
+//!\author Khrapov
+//!\date   02.12.2020
+//==============================================================================
+template<class Traits>
+template<class CharGetter>
+inline typename basic_string<Traits>::size_type basic_string<Traits>::_find_first_of(
+    size_type         nPos,
+    const CharGetter& char_getter) const noexcept
+{
+    size_type nFirst = npos;
+
+    auto chCurrent = char_getter();
+    while (nFirst != 0 && chCurrent.has_value())
+    {
+        size_type nCharFirstPos = find_first_of(chCurrent.value(), nPos);
+        if (nCharFirstPos != npos)
+        {
+            if (nFirst != npos)
+                nFirst = std::min(nCharFirstPos, nFirst);
+            else
+                nFirst = nCharFirstPos;
+        }
+
+        chCurrent = char_getter();
+    }
+
+    return nFirst;
 }
 
 //==============================================================================
