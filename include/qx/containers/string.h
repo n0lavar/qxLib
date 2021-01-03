@@ -502,22 +502,25 @@ private:
                                           size_type              nAlign,
                                           string_resize_type     eType = string_resize_type::common) noexcept;
     template<class Searcher>
-    size_type               trim_left_common(const Searcher    & searcher)                  noexcept;
+    size_type               _trim_left   (const Searcher       & searcher)                  noexcept;
 
     template<class Searcher>
-    size_type               trim_right_common(const Searcher   & searcher)                  noexcept;
+    size_type               _trim_right  (const Searcher       & searcher)                  noexcept;
 
     template<class Searcher>
-    size_type               trim_common  (const Searcher       & searcher)                  noexcept;
+    size_type               _trim        (const Searcher       & searcher)                  noexcept;
 
     template<class Comparator>
-    size_type               find_common  (size_type              nBegin,
+    size_type               _find        (size_type              nBegin,
                                           size_type              nEnd,
                                           const Comparator     & comparator)        const   noexcept;
     template<class Comparator>
-    size_type               rfind_common (size_type              nBegin,
+    size_type               _rfind       (size_type              nBegin,
                                           size_type              nEnd,
                                           const Comparator     & comparator)        const   noexcept;
+    template<class CharGetter>
+    size_type               _find_last_of(size_type              nPos,
+                                          const CharGetter     & comparator)        const   noexcept;
     template<typename T>
     static constexpr const_pointer get_format_specifier(void)                               noexcept;
 

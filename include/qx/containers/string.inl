@@ -1,4 +1,3 @@
-#include "string.h"
 //==============================================================================
 //
 //!\file                         string.inl
@@ -1208,7 +1207,7 @@ template<class Traits>
 inline typename basic_string<Traits>::size_type basic_string<Traits>::trim_left(
     void) noexcept
 {
-    return trim_left_common([](value_type ch) { return Traits::is_space(ch); });
+    return _trim_left([](value_type ch) { return Traits::is_space(ch); });
 }
 
 //==============================================================================
@@ -1224,7 +1223,7 @@ template<class Traits>
 inline typename basic_string<Traits>::size_type basic_string<Traits>::trim_left(
     value_type chSymbol) noexcept
 {
-    return trim_left_common([chSymbol](value_type ch) { return ch == chSymbol; });
+    return _trim_left([chSymbol](value_type ch) { return ch == chSymbol; });
 }
 
 //==============================================================================
@@ -1240,7 +1239,7 @@ template<class Traits>
 inline typename basic_string<Traits>::size_type basic_string<Traits>::trim_left(
     const_pointer pszStr) noexcept
 {
-    return trim_left_common([pszStr](value_type ch)
+    return _trim_left([pszStr](value_type ch)
         {
             for (size_type j = 0; pszStr[j] != QX_CHAR_PREFIX(value_type, '\0'); j++)
                 if (pszStr[j] == ch)
@@ -1265,7 +1264,7 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::trim_left(
     const_pointer pszStr,
     size_type     nStrSize) noexcept
 {
-    return trim_left_common([pszStr, nStrSize](value_type ch)
+    return _trim_left([pszStr, nStrSize](value_type ch)
         {
             for (size_type j = 0; j < nStrSize; j++)
                 if (pszStr[j] == ch)
@@ -1307,7 +1306,7 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::trim_left(
     FwdIt itBegin,
     FwdIt itEnd) noexcept
 {
-    return trim_left_common([itBegin, itEnd](auto ch)
+    return _trim_left([itBegin, itEnd](auto ch)
         {
             for (auto it = itBegin; it != itEnd; ++it)
                 if (*it == ch)
@@ -1346,7 +1345,7 @@ template<class Traits>
 inline typename basic_string<Traits>::size_type basic_string<Traits>::trim_right(
     void) noexcept
 {
-    return trim_right_common([](value_type ch) { return Traits::is_space(ch); });
+    return _trim_right([](value_type ch) { return Traits::is_space(ch); });
 }
 
 //==============================================================================
@@ -1362,7 +1361,7 @@ template<class Traits>
 inline typename basic_string<Traits>::size_type basic_string<Traits>::trim_right(
     value_type chSymbol) noexcept
 {
-    return trim_right_common([chSymbol](value_type ch) { return ch == chSymbol; });
+    return _trim_right([chSymbol](value_type ch) { return ch == chSymbol; });
 }
 
 //==============================================================================
@@ -1378,7 +1377,7 @@ template<class Traits>
 inline typename basic_string<Traits>::size_type basic_string<Traits>::trim_right(
     const_pointer pszStr) noexcept
 {
-    return trim_right_common([pszStr](value_type ch)
+    return _trim_right([pszStr](value_type ch)
         {
             for (size_type j = 0; pszStr[j] != QX_CHAR_PREFIX(value_type, '\0'); j++)
                 if (pszStr[j] == ch)
@@ -1403,7 +1402,7 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::trim_right
     const_pointer pszStr,
     size_type     nStrSize) noexcept
 {
-    return trim_right_common([pszStr, nStrSize](value_type ch)
+    return _trim_right([pszStr, nStrSize](value_type ch)
         {
             for (size_type j = 0; j < nStrSize; j++)
                 if (pszStr[j] == ch)
@@ -1445,7 +1444,7 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::trim_right
     FwdIt itBegin,
     FwdIt itEnd) noexcept
 {
-    return trim_right_common([itBegin, itEnd](auto ch)
+    return _trim_right([itBegin, itEnd](auto ch)
         {
             for (auto it = itBegin; it != itEnd; ++it)
                 if (*it == ch)
@@ -1484,7 +1483,7 @@ template<class Traits>
 inline typename basic_string<Traits>::size_type basic_string<Traits>::trim(
     void) noexcept
 {
-    return trim_common([](value_type ch) { return Traits::is_space(ch); });
+    return _trim([](value_type ch) { return Traits::is_space(ch); });
 }
 
 //==============================================================================
@@ -1500,7 +1499,7 @@ template<class Traits>
 inline typename basic_string<Traits>::size_type basic_string<Traits>::trim(
     value_type chSymbol) noexcept
 {
-    return trim_common([chSymbol](value_type ch) { return ch == chSymbol; });
+    return _trim([chSymbol](value_type ch) { return ch == chSymbol; });
 }
 
 //==============================================================================
@@ -1516,7 +1515,7 @@ template<class Traits>
 inline typename basic_string<Traits>::size_type basic_string<Traits>::trim(
     const_pointer pszStr) noexcept
 {
-    return trim_common([pszStr](value_type ch)
+    return _trim([pszStr](value_type ch)
         {
             for (size_type j = 0; pszStr[j] != QX_CHAR_PREFIX(value_type, '\0'); j++)
                 if (pszStr[j] == ch)
@@ -1541,7 +1540,7 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::trim(
     const_pointer pszStr,
     size_type     nStrSize) noexcept
 {
-    return trim_common([pszStr, nStrSize](value_type ch)
+    return _trim([pszStr, nStrSize](value_type ch)
         {
             for (size_type j = 0; j < nStrSize; j++)
                 if (pszStr[j] == ch)
@@ -1583,7 +1582,7 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::trim(
     FwdIt itBegin,
     FwdIt itEnd) noexcept
 {
-    return trim_common([itBegin, itEnd](auto ch)
+    return _trim([itBegin, itEnd](auto ch)
         {
             for (auto it = itBegin; it != itEnd; ++it)
                 if (*it == ch)
@@ -2236,7 +2235,7 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::find(
     size_type     nBegin,
     size_type     nEnd) const noexcept
 {
-    return find_common(
+    return _find(
         nBegin,
         nEnd,
         [chSymbol](const_pointer pCurrentChar)
@@ -2268,7 +2267,7 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::find(
         ? nWhatSize
         : Traits::length(pszWhat);
 
-    return find_common(
+    return _find(
         nBegin,
         nEnd,
         [pszWhat, nLocalWhatSize](const_pointer pCurrentChar)
@@ -2317,7 +2316,7 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::find(
     size_type   nBegin,
     size_type   nEnd) const noexcept
 {
-    return find_common(
+    return _find(
         nBegin,
         nEnd,
         [this, itWhatBegin, itWhatEnd, nEnd](const_pointer pCurrentChar)
@@ -2369,7 +2368,7 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::rfind(
     size_type     nBegin,
     size_type     nEnd) const noexcept
 {
-    return rfind_common(
+    return _rfind(
         nBegin,
         nEnd,
         [chSymbol](const_pointer pCurrentChar)
@@ -2402,7 +2401,7 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::rfind(
         ? nWhatSize
         : Traits::length(pszWhat);
 
-    return rfind_common(
+    return _rfind(
         nBegin,
         nEnd,
         [pszWhat, nLocalWhatSize](const_pointer pCurrentChar)
@@ -2453,7 +2452,7 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::rfind(
     size_type   nBegin,
     size_type   nEnd) const noexcept
 {
-    return rfind_common(
+    return _rfind(
         nBegin,
         nEnd,
         [this, itWhatBegin, itWhatEnd, nEnd](const_pointer pCurrentChar)
@@ -2523,22 +2522,19 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::find_last_
     size_type     nPos,
     size_type     nWhatSize) const noexcept
 {
-    const size_type nSize = size();
-    size_type nLast = npos;
-
-    for (size_type nChar = 0; nChar < nWhatSize && nLast != nSize - 1; nChar++)
-    {
-        size_type nCharLastPos = find_last_of(pszWhat[nChar], nPos);
-        if (nCharLastPos != npos)
+    size_type nChar = 0;
+    return _find_last_of(
+        nPos,
+        [&nChar, pszWhat, nWhatSize]()
         {
-            if (nLast != npos)
-                nLast = std::max(nCharLastPos, nLast);
-            else
-                nLast = nCharLastPos;
-        }
-    }
-
-    return nLast;
+            std::optional<value_type> ret = std::nullopt;
+            if (nChar < nWhatSize)
+            {
+                ret = pszWhat[nChar];
+                nChar++;
+            }
+            return ret;
+        });
 }
 
 //==============================================================================
@@ -2556,24 +2552,19 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::find_last_
     const_pointer pszWhat,
     size_type     nPos) const noexcept
 {
-    const size_type nSize = size();
-    size_type nLast = npos;
-
-    for (size_type nChar = 0;
-        pszWhat[nChar] != QX_CHAR_PREFIX(value_type, '\0') && nLast != nSize - 1;
-        nChar++)
-    {
-        size_type nCharLastPos = find_last_of(pszWhat[nChar], nPos);
-        if (nCharLastPos != npos)
+    size_type nChar = 0;
+    return _find_last_of(
+        nPos,
+        [&nChar, pszWhat]()
         {
-            if (nLast != npos)
-                nLast = std::max(nCharLastPos, nLast);
-            else
-                nLast = nCharLastPos;
-        }
-    }
-
-    return nLast;
+            std::optional<value_type> ret = std::nullopt;
+            if (pszWhat[nChar] != QX_CHAR_PREFIX(value_type, '\0'))
+            {
+                ret = pszWhat[nChar];
+                nChar++;
+            }
+            return ret;
+        });
 }
 
 //==============================================================================
@@ -2612,22 +2603,19 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::find_last_
     FwdIt     itWhatEnd,
     size_type nPos) const noexcept
 {
-    const size_type nSize = size();
-    size_type nLast = npos;
-
-    for (auto it = itWhatBegin; it != itWhatEnd && nLast != nSize - 1; ++it)
-    {
-        size_type nCharLastPos = find_last_of(*it, nPos);
-        if (nCharLastPos != npos)
+    FwdIt it = itWhatBegin;
+    return _find_last_of(
+        nPos,
+        [&it, itWhatEnd]()
         {
-            if (nLast != npos)
-                nLast = std::max(nCharLastPos, nLast);
-            else
-                nLast = nCharLastPos;
-        }
-    }
-
-    return nLast;
+            std::optional<value_type> ret = std::nullopt;
+            if (it != itWhatEnd)
+            {
+                ret = *it;
+                ++it;
+            }
+            return ret;
+        });
 }
 
 //==============================================================================
@@ -3405,7 +3393,7 @@ constexpr typename basic_string<Traits>::const_pointer basic_string<Traits>::get
 }
 
 //==============================================================================
-//!\fn         qx::basic_string<Traits>::trim_left_common<Searcher>
+//!\fn            qx::basic_string<Traits>::_trim_left<Searcher>
 //
 //!\brief  Common algorithm for trimming string to the left
 //!\param  searcher - function that returns true if symbol has to be deleted
@@ -3415,7 +3403,7 @@ constexpr typename basic_string<Traits>::const_pointer basic_string<Traits>::get
 //==============================================================================
 template<class Traits>
 template<class Searcher>
-inline typename basic_string<Traits>::size_type basic_string<Traits>::trim_left_common(
+inline typename basic_string<Traits>::size_type basic_string<Traits>::_trim_left(
     const Searcher& searcher) noexcept
 {
     size_type nSymbols = 0;
@@ -3433,7 +3421,7 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::trim_left_
 }
 
 //==============================================================================
-//!\fn         qx::basic_string<Traits>::trim_right_common<Searcher>
+//!\fn            qx::basic_string<Traits>::_trim_right<Searcher>
 //
 //!\brief  Common algorithm for trimming string to the right
 //!\param  searcher - function that returns true if symbol has to be deleted
@@ -3443,7 +3431,7 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::trim_left_
 //==============================================================================
 template<class Traits>
 template<class Searcher>
-inline typename basic_string<Traits>::size_type basic_string<Traits>::trim_right_common(
+inline typename basic_string<Traits>::size_type basic_string<Traits>::_trim_right(
     const Searcher& searcher) noexcept
 {
     size_type nSymbols = 0;
@@ -3462,7 +3450,7 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::trim_right
 }
 
 //==============================================================================
-//!\fn           qx::basic_string<Traits>::trim_common<Searcher>
+//!\fn              qx::basic_string<Traits>::_trim<Searcher>
 //
 //!\brief  Common algorithm for trimming string to the both sides
 //!\param  searcher - function that returns true if symbol has to be deleted
@@ -3472,7 +3460,7 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::trim_right
 //==============================================================================
 template<class Traits>
 template<class Searcher>
-inline typename basic_string<Traits>::size_type basic_string<Traits>::trim_common(
+inline typename basic_string<Traits>::size_type basic_string<Traits>::_trim(
     const Searcher& searcher) noexcept
 {
     const size_type nSize = size();
@@ -3497,7 +3485,7 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::trim_commo
 }
 
 //==============================================================================
-//!\fn           qx::basic_string<Traits>::find_common<Comparator>
+//!\fn              qx::basic_string<Traits>::_find<Comparator>
 //
 //!\brief  Common algorithm for finding substring
 //!\param  nBegin     - start searching index
@@ -3509,7 +3497,7 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::trim_commo
 //==============================================================================
 template<class Traits>
 template<class Comparator>
-inline typename basic_string<Traits>::size_type basic_string<Traits>::find_common(
+inline typename basic_string<Traits>::size_type basic_string<Traits>::_find(
     size_type         nBegin,
     size_type         nEnd,
     const Comparator& comparator) const noexcept
@@ -3533,9 +3521,9 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::find_commo
 }
 
 //==============================================================================
-//!\fn           qx::basic_string<Traits>::rfind_common<Comparator>
+//!\fn              qx::basic_string<Traits>::_rfind<Comparator>
 //
-//!\brief  Common algorithm for finding substring
+//!\brief  Common algorithm for reverse finding substring
 //!\param  nBegin     - start searching index
 //!\param  nEnd       - end searching index
 //!\param  comparator - comparator function
@@ -3545,7 +3533,7 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::find_commo
 //==============================================================================
 template<class Traits>
 template<class Comparator>
-inline typename basic_string<Traits>::size_type basic_string<Traits>::rfind_common(
+inline typename basic_string<Traits>::size_type basic_string<Traits>::_rfind(
     size_type         nBegin,
     size_type         nEnd,
     const Comparator& comparator) const noexcept
@@ -3566,6 +3554,43 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::rfind_comm
     }
 
     return npos;
+}
+
+//==============================================================================
+//!\fn          qx::basic_string<Traits>::_find_last_of<Comparator>
+//
+//!\brief  Common algorithm for find_last_of
+//!\param  nPos        - position at which the search is to finish
+//!\param  char_getter - function that returns new char till "of" string end
+//!\retval             - symbol index or npos
+//!\author Khrapov
+//!\date   02.12.2020
+//==============================================================================
+template<class Traits>
+template<class CharGetter>
+inline typename basic_string<Traits>::size_type basic_string<Traits>::_find_last_of(
+    size_type         nPos,
+    const CharGetter& char_getter) const noexcept
+{
+    const size_type nSize = size();
+    size_type nLast = npos;
+
+    auto chCurrent = char_getter();
+    while (nLast != nSize - 1 && chCurrent.has_value())
+    {
+        size_type nCharLastPos = find_last_of(chCurrent.value(), nPos);
+        if (nCharLastPos != npos)
+        {
+            if (nLast != npos)
+                nLast = std::max(nCharLastPos, nLast);
+            else
+                nLast = nCharLastPos;
+        }
+
+        chCurrent = char_getter();
+    }
+
+    return nLast;
 }
 
 //==============================================================================
