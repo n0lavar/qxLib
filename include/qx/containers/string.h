@@ -386,38 +386,55 @@ public:
                                           size_type              nEnd       = 0)    const   noexcept;
 
     size_type               find_first_of(value_type             chSymbol,
-                                          size_type              nBedin     = npos) const   noexcept;
+                                          size_type              nBegin     = 0)    const   noexcept;
     size_type               find_first_of(const_pointer          pszWhat,
-                                          size_type              nBedin,
+                                          size_type              nBegin,
                                           size_type              nWhatSize)         const   noexcept;
     size_type               find_first_of(const_pointer          pszWhat,
-                                          size_type              nBedin     = npos) const   noexcept;
+                                          size_type              nBegin     = 0)    const   noexcept;
     size_type               find_first_of(const basic_string   & sWhat,
-                                          size_type              nBedin     = npos) const   noexcept;
+                                          size_type              nBegin     = 0)    const   noexcept;
     template<class FwdIt>
     size_type               find_first_of(FwdIt                  itWhatBegin,
                                           FwdIt                  itWhatEnd,
-                                          size_type              nBedin     = npos) const   noexcept;
+                                          size_type              nBegin     = 0)    const   noexcept;
     template<class String, class = enable_if_string_t<String>>
     size_type               find_first_of(String                 sWhat,
-                                          size_type              nBedin     = npos) const   noexcept;
+                                          size_type              nBegin     = 0)    const   noexcept;
 
     size_type               find_last_of (value_type             chSymbol,
-                                          size_type              nPos       = 0)    const   noexcept;
+                                          size_type              nEnd       = 0)    const   noexcept;
     size_type               find_last_of (const_pointer          pszWhat,
-                                          size_type              nPos,
+                                          size_type              nEnd,
                                           size_type              nWhatSize)         const   noexcept;
     size_type               find_last_of (const_pointer          pszWhat,
-                                          size_type              nPos       = 0)    const   noexcept;
+                                          size_type              nEnd       = 0)    const   noexcept;
     size_type               find_last_of (const basic_string   & sWhat,
-                                          size_type              nPos       = 0)    const   noexcept;
+                                          size_type              nEnd       = 0)    const   noexcept;
     template<class FwdIt>
     size_type               find_last_of (FwdIt                  itWhatBegin,
                                           FwdIt                  itWhatEnd,
-                                          size_type              nPos       = 0)    const   noexcept;
+                                          size_type              nEnd       = 0)    const   noexcept;
     template<class String, class = enable_if_string_t<String>>
     size_type               find_last_of (String                 sWhat,
-                                          size_type              nPos       = 0)    const   noexcept;
+                                          size_type              nEnd       = 0)    const   noexcept;
+
+    size_type               find_first_not_of(value_type         chSymbol,
+                                          size_type              nBegin     = 0)    const   noexcept;
+    size_type               find_first_not_of(const_pointer      pszWhat,
+                                          size_type              nBegin,
+                                          size_type              nWhatSize)         const   noexcept;
+    size_type               find_first_not_of(const_pointer      pszWhat,
+                                          size_type              nBegin     = 0)    const   noexcept;
+    size_type               find_first_not_of(const basic_string& sWhat,
+                                          size_type              nBegin     = 0)    const   noexcept;
+    template<class FwdIt>
+    size_type               find_first_not_of(FwdIt              itWhatBegin,
+                                          FwdIt                  itWhatEnd,
+                                          size_type              nBegin     = 0)    const   noexcept;
+    template<class String, class = enable_if_string_t<String>>
+    size_type               find_first_not_of(String             sWhat,
+                                          size_type              nBegin     = 0)    const   noexcept;
 
     vector                  split        (const value_type       chSeparator)       const   noexcept;
     vector                  split        (const_pointer          pszSeparator,
@@ -511,7 +528,7 @@ public:
     reference               operator[]   (size_type              nSymbol)                   noexcept;
     const_reference         operator[]   (size_type              nSymbol)           const   noexcept;
 
-    operator std::basic_string_view<value_type, std::char_traits<value_type>>()     const   noexcept;
+    operator std::basic_string_view<value_type>()                                   const   noexcept;
 
 private:
 
@@ -535,11 +552,11 @@ private:
     size_type               _rfind       (size_type              nBegin,
                                           size_type              nEnd,
                                           const Comparator     & comparator)        const   noexcept;
-    template<class CharGetter>
-    size_type               _find_first_of(size_type             nBedin,
+    template<class CharGetter, class CharFinder>
+    size_type               _find_first_of(const CharFinder    & char_finder,
                                           const CharGetter     & char_getter)       const   noexcept;
-    template<class CharGetter>
-    size_type               _find_last_of(size_type              nEnd,
+    template<class CharGetter, class CharFinder>
+    size_type               _find_last_of(const CharFinder     & char_finder,
                                           const CharGetter     & char_getter)       const   noexcept;
     template<typename T>
     static constexpr const_pointer get_format_specifier(void)                               noexcept;
