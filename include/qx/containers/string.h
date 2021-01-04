@@ -436,6 +436,23 @@ public:
     size_type               find_first_not_of(String             sWhat,
                                           size_type              nBegin     = 0)    const   noexcept;
 
+    size_type               find_last_not_of(value_type          chSymbol,
+                                          size_type              nEnd       = 0)    const   noexcept;
+    size_type               find_last_not_of(const_pointer       pszWhat,
+                                          size_type              nEnd,
+                                          size_type              nWhatSize)         const   noexcept;
+    size_type               find_last_not_of(const_pointer       pszWhat,
+                                          size_type              nEnd       = 0)    const   noexcept;
+    size_type               find_last_not_of(const basic_string& sWhat,
+                                          size_type              nEnd       = 0)    const   noexcept;
+    template<class FwdIt>
+    size_type               find_last_not_of(FwdIt               itWhatBegin,
+                                          FwdIt                  itWhatEnd,
+                                          size_type              nEnd       = 0)    const   noexcept;
+    template<class String, class = enable_if_string_t<String>>
+    size_type               find_last_not_of(String              sWhat,
+                                          size_type              nEnd       = 0)    const   noexcept;
+
     vector                  split        (const value_type       chSeparator)       const   noexcept;
     vector                  split        (const_pointer          pszSeparator,
                                           size_type              nSepLen    = npos) const   noexcept;
@@ -552,12 +569,26 @@ private:
     size_type               _rfind       (size_type              nBegin,
                                           size_type              nEnd,
                                           const Comparator     & comparator)        const   noexcept;
-    template<class CharGetter, class CharFinder>
-    size_type               _find_first_of(const CharFinder    & char_finder,
-                                          const CharGetter     & char_getter)       const   noexcept;
-    template<class CharGetter, class CharFinder>
-    size_type               _find_last_of(const CharFinder     & char_finder,
-                                          const CharGetter     & char_getter)       const   noexcept;
+    template<class Incrementer, class FwdIt>
+    size_type               _find_first_of(FwdIt                 itBegin,
+                                          FwdIt                  itEnd,
+                                          size_type              nBegin,
+                                          const Incrementer    & incrementer)       const   noexcept;
+    template<class Incrementer, class FwdIt>
+    size_type               _find_last_of(FwdIt                  itBegin,
+                                          FwdIt                  itEnd,
+                                          size_type              nEnd,
+                                          const Incrementer    & incrementer)       const   noexcept;
+    template<class Incrementer, class FwdIt>
+    size_type               _find_first_not_of(FwdIt             itBegin,
+                                          FwdIt                  itEnd,
+                                          size_type              nBegin,
+                                          const Incrementer    & incrementer)       const   noexcept;
+    template<class Incrementer, class FwdIt>
+    size_type               _find_last_not_of(FwdIt              itBegin,
+                                          FwdIt                  itEnd,
+                                          size_type              nEnd,
+                                          const Incrementer    & incrementer)       const   noexcept;
     template<typename T>
     static constexpr const_pointer get_format_specifier(void)                               noexcept;
 

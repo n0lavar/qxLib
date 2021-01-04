@@ -1207,7 +1207,10 @@ template<class Traits>
 inline typename basic_string<Traits>::size_type basic_string<Traits>::trim_left(
     void) noexcept
 {
-    return _trim_left([](value_type ch) { return Traits::is_space(ch); });
+    return _trim_left([](value_type ch)
+        {
+            return Traits::is_space(ch);
+        });
 }
 
 //==============================================================================
@@ -1223,7 +1226,10 @@ template<class Traits>
 inline typename basic_string<Traits>::size_type basic_string<Traits>::trim_left(
     value_type chSymbol) noexcept
 {
-    return _trim_left([chSymbol](value_type ch) { return ch == chSymbol; });
+    return _trim_left([chSymbol](value_type ch)
+        {
+            return ch == chSymbol;
+        });
 }
 
 //==============================================================================
@@ -1345,7 +1351,10 @@ template<class Traits>
 inline typename basic_string<Traits>::size_type basic_string<Traits>::trim_right(
     void) noexcept
 {
-    return _trim_right([](value_type ch) { return Traits::is_space(ch); });
+    return _trim_right([](value_type ch)
+        {
+            return Traits::is_space(ch);
+        });
 }
 
 //==============================================================================
@@ -1361,7 +1370,10 @@ template<class Traits>
 inline typename basic_string<Traits>::size_type basic_string<Traits>::trim_right(
     value_type chSymbol) noexcept
 {
-    return _trim_right([chSymbol](value_type ch) { return ch == chSymbol; });
+    return _trim_right([chSymbol](value_type ch)
+        {
+            return ch == chSymbol;
+        });
 }
 
 //==============================================================================
@@ -1483,7 +1495,10 @@ template<class Traits>
 inline typename basic_string<Traits>::size_type basic_string<Traits>::trim(
     void) noexcept
 {
-    return _trim([](value_type ch) { return Traits::is_space(ch); });
+    return _trim([](value_type ch)
+        {
+            return Traits::is_space(ch);
+        });
 }
 
 //==============================================================================
@@ -1751,7 +1766,10 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::remove(
 template<class Traits>
 inline bool basic_string<Traits>::remove_prefix(value_type chSymbol) noexcept
 {
-    return remove(chSymbol, 0u, 1u) != npos;
+    return remove(
+        chSymbol,
+        static_cast<size_type>(0),
+        static_cast<size_type>(1)) != npos;
 }
 
 //==============================================================================
@@ -1769,7 +1787,7 @@ inline bool basic_string<Traits>::remove_prefix(
     const_pointer pszStr,
     size_type     nStrSize) noexcept
 {
-    return remove(pszStr, 0u, nStrSize, nStrSize) != npos;
+    return remove(pszStr, static_cast<size_type>(0), nStrSize, nStrSize) != npos;
 }
 
 //==============================================================================
@@ -1785,7 +1803,7 @@ template<class Traits>
 inline bool basic_string<Traits>::remove_prefix(
     const basic_string& sStr) noexcept
 {
-    return remove(sStr, 0u, sStr.size()) != npos;
+    return remove(sStr, static_cast<size_type>(0), sStr.size()) != npos;
 }
 
 //==============================================================================
@@ -1807,7 +1825,7 @@ inline bool basic_string<Traits>::remove_prefix(
     return remove(
         itBegin,
         itEnd,
-        0u,
+        static_cast<size_type>(0),
         static_cast<size_type>(std::distance(itBegin, itEnd))) != npos;
 }
 
@@ -2521,21 +2539,13 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::find_first
     size_type     nBegin,
     size_type     nWhatSize) const noexcept
 {
-    size_type nChar = 0;
     return _find_first_of(
-        [this, nBegin](value_type ch)
+        pszWhat,
+        pszWhat + nWhatSize,
+        nBegin,
+        [](const_pointer pChar)
         {
-            return find_first_of(ch, nBegin);
-        },
-        [&nChar, pszWhat, nWhatSize]()
-        {
-            std::optional<value_type> ret = std::nullopt;
-            if (nChar < nWhatSize)
-            {
-                ret = pszWhat[nChar];
-                nChar++;
-            }
-            return ret;
+            return pChar + 1;
         });
 }
 
@@ -2554,21 +2564,15 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::find_first
     const_pointer pszWhat,
     size_type     nBegin) const noexcept
 {
-    size_type nChar = 0;
     return _find_first_of(
-        [this, nBegin](value_type ch)
+        pszWhat,
+        static_cast<const_pointer>(nullptr),
+        nBegin,
+        [](const_pointer pChar)
         {
-            return find_first_of(ch, nBegin);
-        },
-        [&nChar, pszWhat]()
-        {
-            std::optional<value_type> ret = std::nullopt;
-            if (pszWhat[nChar] != QX_CHAR_PREFIX(value_type, '\0'))
-            {
-                ret = pszWhat[nChar];
-                nChar++;
-            }
-            return ret;
+            return *(pChar + 1) != QX_CHAR_PREFIX(value_type, '\0')
+                ? pChar + 1
+                : nullptr;
         });
 }
 
@@ -2610,19 +2614,12 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::find_first
 {
     FwdIt it = itWhatBegin;
     return _find_first_of(
-        [this, nBegin](value_type ch)
+        itWhatBegin,
+        itWhatEnd,
+        nBegin,
+        [](FwdIt itChar)
         {
-            return find_first_of(ch, nBegin);
-        },
-        [&it, itWhatEnd]()
-        {
-            std::optional<value_type> ret = std::nullopt;
-            if (it != itWhatEnd)
-            {
-                ret = *it;
-                ++it;
-            }
-            return ret;
+            return ++itChar;
         });
 }
 
@@ -2680,21 +2677,13 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::find_last_
     size_type     nEnd,
     size_type     nWhatSize) const noexcept
 {
-    size_type nChar = 0;
     return _find_last_of(
-        [this, nEnd](value_type ch)
+        pszWhat,
+        pszWhat + nWhatSize,
+        nEnd,
+        [](const_pointer pChar)
         {
-            return find_last_of(ch, nEnd);
-        },
-        [&nChar, pszWhat, nWhatSize]()
-        {
-            std::optional<value_type> ret = std::nullopt;
-            if (nChar < nWhatSize)
-            {
-                ret = pszWhat[nChar];
-                nChar++;
-            }
-            return ret;
+            return pChar + 1;
         });
 }
 
@@ -2713,21 +2702,15 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::find_last_
     const_pointer pszWhat,
     size_type     nEnd) const noexcept
 {
-    size_type nChar = 0;
     return _find_last_of(
-        [this, nEnd](value_type ch)
+        pszWhat,
+        static_cast<const_pointer>(nullptr),
+        nEnd,
+        [](const_pointer pChar)
         {
-            return find_last_of(ch, nEnd);
-        },
-        [&nChar, pszWhat]()
-        {
-            std::optional<value_type> ret = std::nullopt;
-            if (pszWhat[nChar] != QX_CHAR_PREFIX(value_type, '\0'))
-            {
-                ret = pszWhat[nChar];
-                nChar++;
-            }
-            return ret;
+            return *(pChar + 1) != QX_CHAR_PREFIX(value_type, '\0')
+                ? pChar + 1
+                : nullptr;
         });
 }
 
@@ -2767,21 +2750,13 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::find_last_
     FwdIt     itWhatEnd,
     size_type nEnd) const noexcept
 {
-    FwdIt it = itWhatBegin;
     return _find_last_of(
-        [this, nEnd](value_type ch)
+        itWhatBegin,
+        itWhatEnd,
+        nEnd,
+        [](FwdIt itChar)
         {
-            return find_last_of(ch, nEnd);
-        },
-        [&it, itWhatEnd]()
-        {
-            std::optional<value_type> ret = std::nullopt;
-            if (it != itWhatEnd)
-            {
-                ret = *it;
-                ++it;
-            }
-            return ret;
+            return ++itChar;
         });
 }
 
@@ -2845,21 +2820,13 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::find_first
     size_type     nBegin,
     size_type     nWhatSize) const noexcept
 {
-    size_type nChar = 0;
-    return _find_first_of(
-        [this, nBegin](value_type ch)
+    return _find_first_not_of(
+        pszWhat,
+        pszWhat + nWhatSize,
+        nBegin,
+        [](const_pointer pChar)
         {
-            return find_first_not_of(ch, nBegin);
-        },
-        [&nChar, pszWhat, nWhatSize]()
-        {
-            std::optional<value_type> ret = std::nullopt;
-            if (nChar < nWhatSize)
-            {
-                ret = pszWhat[nChar];
-                nChar++;
-            }
-            return ret;
+            return pChar + 1;
         });
 }
 
@@ -2878,21 +2845,15 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::find_first
     const_pointer pszWhat,
     size_type     nBegin) const noexcept
 {
-    size_type nChar = 0;
-    return _find_first_of(
-        [this, nBegin](value_type ch)
+    return _find_first_not_of(
+        pszWhat,
+        static_cast<const_pointer>(nullptr),
+        nBegin,
+        [](const_pointer pChar)
         {
-            return find_first_not_of(ch, nBegin);
-        },
-        [&nChar, pszWhat]()
-        {
-            std::optional<value_type> ret = std::nullopt;
-            if (pszWhat[nChar] != QX_CHAR_PREFIX(value_type, '\0'))
-            {
-                ret = pszWhat[nChar];
-                nChar++;
-            }
-            return ret;
+            return *(pChar + 1) != QX_CHAR_PREFIX(value_type, '\0')
+                ? pChar + 1
+                : nullptr;
         });
 }
 
@@ -2932,21 +2893,13 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::find_first
     FwdIt     itWhatEnd,
     size_type nBegin) const noexcept
 {
-    FwdIt it = itWhatBegin;
-    return _find_first_of(
-        [this, nBegin](value_type ch)
+    return _find_first_not_of(
+        itWhatBegin,
+        itWhatEnd,
+        nBegin,
+        [](FwdIt itChar)
         {
-            return find_first_not_of(ch, nBegin);
-        },
-        [&it, itWhatEnd]()
-        {
-            std::optional<value_type> ret = std::nullopt;
-            if (it != itWhatEnd)
-            {
-                ret = *it;
-                ++it;
-            }
-            return ret;
+            return ++itChar;
         });
 }
 
@@ -2968,6 +2921,150 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::find_first
 {
     return find_first_not_of(sWhat.cbegin(), sWhat.cend(), nBegin);
 }
+
+//==============================================================================
+//!\fn              qx::basic_string<Traits>::find_last_not_of
+//
+//!\brief  Finds the last character not equal to chSymbol
+//!\param  chSymbol - char to find
+//!\param  nEnd     - position at which the search is to finish
+//!\retval          - symbol index or npos
+//!\author Khrapov
+//!\date   30.10.2019
+//==============================================================================
+template<class Traits>
+inline typename basic_string<Traits>::size_type basic_string<Traits>::find_last_not_of(
+    value_type chSymbol,
+    size_type  nEnd) const noexcept
+{
+    return _rfind(
+        npos,
+        nEnd,
+        [chSymbol](const_pointer pCurrentChar)
+        {
+            return *pCurrentChar != chSymbol;
+        });
+}
+
+//==============================================================================
+//!\fn              qx::basic_string<Traits>::find_last_not_of
+//
+//!\brief  Finds the last character equal to none of the characters in the given character sequence
+//!\param  pszWhat   - string identifying characters to search for
+//!\param  nEnd      - position at which the search is to finish
+//!\param  nWhatSize - length of character string identifying characters to search for
+//!\retval           - symbol index or npos
+//!\author Khrapov
+//!\date   2.01.2021
+//==============================================================================
+template<class Traits>
+inline typename basic_string<Traits>::size_type basic_string<Traits>::find_last_not_of(
+    const_pointer pszWhat,
+    size_type     nEnd,
+    size_type     nWhatSize) const noexcept
+{
+    return _find_last_not_of(
+        pszWhat,
+        pszWhat + nWhatSize,
+        nEnd,
+        [](const_pointer pChar)
+        {
+            return pChar + 1;
+        });
+}
+
+//==============================================================================
+//!\fn              qx::basic_string<Traits>::find_last_not_of
+//
+//!\brief  Finds the last character equal to none of the characters in the given character sequence
+//!\param  pszWhat   - null terminated string identifying characters to search for
+//!\param  nEnd      - position at which the search is to finish
+//!\retval           - symbol index or npos
+//!\author Khrapov
+//!\date   2.01.2021
+//==============================================================================
+template<class Traits>
+inline typename basic_string<Traits>::size_type basic_string<Traits>::find_last_not_of(
+    const_pointer pszWhat,
+    size_type     nEnd) const noexcept
+{
+    return _find_last_not_of(
+        pszWhat,
+        static_cast<const_pointer>(nullptr),
+        nEnd,
+        [](const_pointer pChar)
+        {
+            return *(pChar + 1) != QX_CHAR_PREFIX(value_type, '\0')
+                ? pChar + 1
+                : nullptr;
+        });
+}
+
+//==============================================================================
+//!\fn              qx::basic_string<Traits>::find_last_not_of
+//
+//!\brief  Finds the last character equal to none of the characters in the given character sequence
+//!\param  sWhat  - string identifying characters to search for
+//!\param  nEnd   - position at which the search is to finish
+//!\retval        - symbol index or npos
+//!\author Khrapov
+//!\date   2.01.2021
+//==============================================================================
+template<class Traits>
+inline typename basic_string<Traits>::size_type basic_string<Traits>::find_last_not_of(
+    const basic_string& sWhat,
+    size_type           nEnd) const noexcept
+{
+    return find_last_not_of(sWhat.data(), nEnd, sWhat.size());
+}
+
+//==============================================================================
+//!\fn          qx::basic_string<Traits>::find_last_not_of<FwdIt>
+//
+//!\brief  Finds the last character equal to none of the characters in the given character sequence
+//!\param  itWhatBegin - begin it of string identifying characters to search for
+//!\param  itWhatEnd   - end it of string identifying characters to search for
+//!\param  nEnd        - position at which the search is to finish
+//!\retval             - symbol index or npos
+//!\author Khrapov
+//!\date   2.01.2021
+//==============================================================================
+template<class Traits>
+template<class FwdIt>
+inline typename basic_string<Traits>::size_type basic_string<Traits>::find_last_not_of(
+    FwdIt     itWhatBegin,
+    FwdIt     itWhatEnd,
+    size_type nEnd) const noexcept
+{
+    return _find_last_not_of(
+        itWhatBegin,
+        itWhatEnd,
+        nEnd,
+        [](FwdIt itChar)
+        {
+            return ++itChar;
+        });
+}
+
+//==============================================================================
+//!\fn         qx::basic_string<Traits>::find_last_not_of<String, >
+//
+//!\brief  Finds the last character equal to none of the characters in the given character sequence
+//!\param  sWhat - string identifying characters to search for
+//!\param  nEnd  - position at which the search is to finish
+//!\retval       - symbol index or npos
+//!\author Khrapov
+//!\date   2.01.2021
+//==============================================================================
+template<class Traits>
+template<class String, class>
+inline typename basic_string<Traits>::size_type basic_string<Traits>::find_last_not_of(
+    String    sWhat,
+    size_type nEnd) const noexcept
+{
+    return find_last_not_of(sWhat.cbegin(), sWhat.cend(), nEnd);
+}
+
 
 //==============================================================================
 //!\fn                 qx::basic_string<Traits>::split
@@ -3888,76 +3985,125 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::_rfind(
 }
 
 //==============================================================================
-//!\fn          qx::basic_string<Traits>::_find_first_of<Comparator>
+//!\fn     qx::basic_string<Traits>::_find_first_of<Incrementer, FwdIt>
 //
 //!\brief  Common algorithm for find_first_of
-//!\param  char_finder - function that returns needed position depending on char
-//!\param  char_getter - function that returns new char till "of" string end
+//!\param  itBegin     - begin it of "of" string
+//!\param  itEnd       - end it of "of" string
+//!\param  nBegin      - position at which the search is to begin
+//!\param  incrementer - function that increments iterator and returns itEnd when string is over
 //!\retval             - symbol index or npos
 //!\author Khrapov
 //!\date   02.12.2020
 //==============================================================================
 template<class Traits>
-template<class CharGetter, class CharFinder>
+template<class Incrementer, class FwdIt>
 inline typename basic_string<Traits>::size_type basic_string<Traits>::_find_first_of(
-    const CharFinder& char_finder,
-    const CharGetter& char_getter) const noexcept
+    FwdIt              itBegin,
+    FwdIt              itEnd,
+    size_type          nBegin,
+    const Incrementer& incrementer) const noexcept
 {
-    size_type nFirst = npos;
+    for (size_type i = nBegin; i < size(); i++)
+        for (FwdIt it = itBegin; it != itEnd; it = incrementer(it))
+            if (*it == at(i))
+                return i;
 
-    auto chCurrent = char_getter();
-    while (nFirst != 0 && chCurrent.has_value())
-    {
-        size_type nCharFirstPos = char_finder(chCurrent.value());
-        if (nCharFirstPos != npos)
-        {
-            if (nFirst != npos)
-                nFirst = std::min(nCharFirstPos, nFirst);
-            else
-                nFirst = nCharFirstPos;
-        }
-
-        chCurrent = char_getter();
-    }
-
-    return nFirst;
+    return npos;
 }
 
 //==============================================================================
-//!\fn          qx::basic_string<Traits>::_find_last_of<Comparator>
+//!\fn      qx::basic_string<Traits>::_find_last_of<Incrementer, FwdIt>
 //
 //!\brief  Common algorithm for find_last_of
-//!\param  char_finder - function that returns needed position depending on char
-//!\param  char_getter - function that returns new char till "of" string end
+//!\param  itBegin     - begin it of "of" string
+//!\param  itEnd       - end it of "of" string
+//!\param  nEnd        - position at which the search is to finish
+//!\param  incrementer - function that increments iterator and returns itEnd when string is over
 //!\retval             - symbol index or npos
 //!\author Khrapov
 //!\date   02.12.2020
 //==============================================================================
 template<class Traits>
-template<class CharGetter, class CharFinder>
+template<class Incrementer, class FwdIt>
 inline typename basic_string<Traits>::size_type basic_string<Traits>::_find_last_of(
-    const CharFinder& char_finder,
-    const CharGetter& char_getter) const noexcept
+    FwdIt              itBegin,
+    FwdIt              itEnd,
+    size_type          nEnd,
+    const Incrementer& incrementer) const noexcept
 {
-    const size_type nSize = size();
-    size_type nLast = npos;
+    for (size_type i = size() - 1; i != nEnd - 1; i--)
+        for (FwdIt it = itBegin; it != itEnd; it = incrementer(it))
+            if (*it == at(i))
+                return i;
 
-    auto chCurrent = char_getter();
-    while (nLast != nSize - 1 && chCurrent.has_value())
+    return npos;
+}
+
+//==============================================================================
+//!\fn    qx::basic_string<Traits>::_find_first_not_of<Incrementer, FwdIt>
+//
+//!\brief  Common algorithm for find_first_not_of
+//!\param  itBegin     - begin it of "of" string
+//!\param  itEnd       - end it of "of" string
+//!\param  nBegin      - position at which the search is to begin
+//!\param  incrementer - function that increments iterator and returns itEnd when string is over
+//!\retval             - symbol index or npos
+//!\author Khrapov
+//!\date   02.12.2020
+//==============================================================================
+template<class Traits>
+template<class Incrementer, class FwdIt>
+inline typename basic_string<Traits>::size_type basic_string<Traits>::_find_first_not_of(
+    FwdIt              itBegin,
+    FwdIt              itEnd,
+    size_type          nBegin,
+    const Incrementer& incrementer) const noexcept
+{
+    for (size_type i = nBegin; i < size(); i++)
     {
-        size_type nCharLastPos = char_finder(chCurrent.value());
-        if (nCharLastPos != npos)
-        {
-            if (nLast != npos)
-                nLast = std::max(nCharLastPos, nLast);
-            else
-                nLast = nCharLastPos;
-        }
+        bool bFoundOneOf = false;
+        for (FwdIt it = itBegin; !bFoundOneOf && it != itEnd; it = incrementer(it))
+            bFoundOneOf |= *it == at(i);
 
-        chCurrent = char_getter();
+        if (!bFoundOneOf)
+            return i;
     }
 
-    return nLast;
+    return npos;
+}
+
+//==============================================================================
+//!\fn     qx::basic_string<Traits>::_find_last_not_of<Incrementer, FwdIt>
+//
+//!\brief  Common algorithm for find_last_not_of
+//!\param  itBegin     - begin it of "of" string
+//!\param  itEnd       - end it of "of" string
+//!\param  nEnd        - position at which the search is to finish
+//!\param  incrementer - function that increments iterator and returns itEnd when string is over
+//!\retval             - symbol index or npos
+//!\author Khrapov
+//!\date   02.12.2020
+//==============================================================================
+template<class Traits>
+template<class Incrementer, class FwdIt>
+inline typename basic_string<Traits>::size_type basic_string<Traits>::_find_last_not_of(
+    FwdIt              itBegin,
+    FwdIt              itEnd,
+    size_type          nEnd,
+    const Incrementer& incrementer) const noexcept
+{
+    for (size_type i = size() - 1; i != nEnd - 1; i--)
+    {
+        bool bFoundOneOf = false;
+        for (FwdIt it = itBegin; !bFoundOneOf && it != itEnd; it = incrementer(it))
+            bFoundOneOf |= *it == at(i);
+
+        if (!bFoundOneOf)
+            return i;
+    }
+
+    return npos;
 }
 
 //==============================================================================

@@ -553,11 +553,11 @@ TYPED_TEST(TestQxString, find_first_of)
     EXPECT_EQ(str.find_first_of(CH(' ')), 4);
     EXPECT_EQ(str.find_first_of(CH('x')), StringType::npos);
 
-    EXPECT_EQ(str.find_first_of(STR("kek"), StringType::npos, 3), 9);
-    EXPECT_EQ(str.find_first_of(STR("abc"), StringType::npos, 3), 1);
-    EXPECT_EQ(str.find_first_of(STR("ecc"), StringType::npos, 3), 9);
-    EXPECT_EQ(str.find_first_of(STR("x"), StringType::npos, 1), StringType::npos);
-    EXPECT_EQ(str.find_first_of(STR("m"), StringType::npos, 1), 0);
+    EXPECT_EQ(str.find_first_of(STR("kek"), 0, 3), 9);
+    EXPECT_EQ(str.find_first_of(STR("abc"), 0, 3), 1);
+    EXPECT_EQ(str.find_first_of(STR("ecc"), 0, 3), 9);
+    EXPECT_EQ(str.find_first_of(STR("x"), 0, 1), StringType::npos);
+    EXPECT_EQ(str.find_first_of(STR("m"), 0, 1), 0);
 
     auto test = [&str](auto type_var)
     {
@@ -609,29 +609,62 @@ TYPED_TEST(TestQxString, find_last_of)
 
 TYPED_TEST(TestQxString, find_first_not_of)
 {
-    StringTypeTn str(STR("many different words placed here"));
+    StringTypeTn str(STR("e many different words placed here"));
 
-    EXPECT_EQ(str.find_first_not_of(CH('m')), 1);
+    EXPECT_EQ(str.find_first_not_of(CH('e')), 1);
     EXPECT_EQ(str.find_first_not_of(CH('a')), 0);
     EXPECT_EQ(str.find_first_not_of(CH('n')), 0);
     EXPECT_EQ(str.find_first_not_of(CH(' ')), 0);
     EXPECT_EQ(str.find_first_not_of(CH('x')), 0);
 
-    EXPECT_EQ(str.find_first_not_of(STR("kek"), 0, 3), 0);
+    EXPECT_EQ(str.find_first_not_of(STR("kek"), 0, 3), 1);
     EXPECT_EQ(str.find_first_not_of(STR("abc"), 0, 3), 0);
-    EXPECT_EQ(str.find_first_not_of(STR("ecc"), 0, 3), 0);
+    EXPECT_EQ(str.find_first_not_of(STR("ecc"), 0, 3), 1);
     EXPECT_EQ(str.find_first_not_of(STR("x"), 0, 1), 0);
-    EXPECT_EQ(str.find_first_not_of(STR("m"), 0, 1), 1);
+    EXPECT_EQ(str.find_first_not_of(STR("m"), 0, 1), 0);
 
     auto test = [&str](auto type_var)
     {
         using type = decltype(type_var);
 
-        EXPECT_EQ(str.find_first_not_of(type(STR("kek"))), 0);
+        EXPECT_EQ(str.find_first_not_of(type(STR("kek"))), 1);
         EXPECT_EQ(str.find_first_not_of(type(STR("abc"))), 0);
-        EXPECT_EQ(str.find_first_not_of(type(STR("ecc"))), 0);
+        EXPECT_EQ(str.find_first_not_of(type(STR("ecc"))), 1);
         EXPECT_EQ(str.find_first_not_of(type(STR("x"))), 0);
-        EXPECT_EQ(str.find_first_not_of(type(STR("m"))), 1);
+        EXPECT_EQ(str.find_first_not_of(type(STR("m"))), 0);
+    };
+
+    test(StringTypeTn());
+    test(STR(""));
+    test(StdString());
+}
+
+TYPED_TEST(TestQxString, find_last_not_of)
+{
+    StringTypeTn str(STR("many different words placed here"));
+
+    EXPECT_EQ(str.find_last_not_of(CH('m')), 31);
+    EXPECT_EQ(str.find_last_not_of(CH('a')), 31);
+    EXPECT_EQ(str.find_last_not_of(CH('n')), 31);
+    EXPECT_EQ(str.find_last_not_of(CH(' ')), 31);
+    EXPECT_EQ(str.find_last_not_of(CH('x')), 31);
+    EXPECT_EQ(str.find_last_not_of(CH('e')), 30);
+
+    EXPECT_EQ(str.find_last_not_of(STR("kek"), 0, 3), 30);
+    EXPECT_EQ(str.find_last_not_of(STR("abc"), 0, 3), 31);
+    EXPECT_EQ(str.find_last_not_of(STR("ecr"), 0, 3), 28);
+    EXPECT_EQ(str.find_last_not_of(STR("x"), 0, 1), 31);
+    EXPECT_EQ(str.find_last_not_of(STR("m"), 0, 1), 31);
+
+    auto test = [&str](auto type_var)
+    {
+        using type = decltype(type_var);
+
+        EXPECT_EQ(str.find_last_not_of(type(STR("kek"))), 30);
+        EXPECT_EQ(str.find_last_not_of(type(STR("abc"))), 31);
+        EXPECT_EQ(str.find_last_not_of(type(STR("ecr"))), 28);
+        EXPECT_EQ(str.find_last_not_of(type(STR("x"))), 31);
+        EXPECT_EQ(str.find_last_not_of(type(STR("m"))), 31);
     };
 
     test(StringTypeTn());
