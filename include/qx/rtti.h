@@ -68,76 +68,79 @@ using class_counter = constexpr_counter<struct class_counter_tag, int, -1>;
 // name::SuperClass             super blass
 // name::ThisClass              this class
 
-// define this macro in the end of the base class
-#define QX_RTTI_CLASS_BASE(thisClass)                                       \
-                                                                            \
-public:                                                                     \
-                                                                            \
-    using SuperClass = thisClass;                                           \
-    using BaseClass  = thisClass;                                           \
-    using ThisClass  = thisClass;                                           \
-                                                                            \
-    template<class RTTI_TYPE>                                               \
-    friend constexpr int qx::get_class_id(void);                            \
-                                                                            \
-    virtual ~thisClass() = default;                                         \
-                                                                            \
-    template <typename RTTI_TYPE>                                           \
-    bool is_derived_from() const noexcept                                   \
-    {                                                                       \
-        return is_base_id(qx::get_class_id<RTTI_TYPE>()) ||                 \
-               qx::get_class_id<RTTI_TYPE>() == get_class_id();             \
-    }                                                                       \
-                                                                            \
-    static constexpr std::string_view get_class_name_static(void) noexcept  \
-    {                                                                       \
-        return QX_RTTI_CLASS_NAME(thisClass);                               \
-    }                                                                       \
-                                                                            \
-    virtual std::string_view get_class_name(void) const noexcept            \
-    {                                                                       \
-        return get_class_name_static();                                     \
-    }                                                                       \
-                                                                            \
-    virtual int get_class_id(void) const noexcept;                          \
-                                                                            \
-protected:                                                                  \
-                                                                            \
-    virtual bool is_base_id(int base_id) const noexcept;                    \
-                                                                            \
-private:                                                                    \
-                                                                            \
-    static constexpr int s_ClassId = qx::class_counter::next();             \
-};                                                                          \
-                                                                            \
-namespace qx                                                                \
-{                                                                           \
-    template<>                                                              \
-    constexpr int get_class_id<thisClass>(void)                             \
-    {                                                                       \
-        return thisClass::s_ClassId;                                        \
-    }                                                                       \
-                                                                            \
-    template <>                                                             \
-    struct is_derived<thisClass>                                            \
-    {                                                                       \
-        template <typename Y>                                               \
-        static constexpr bool from() noexcept                               \
-        {                                                                   \
-            return qx::get_class_id<thisClass>() == qx::get_class_id<Y>();  \
-        }                                                                   \
-    };                                                                      \
-}                                                                           \
-                                                                            \
-inline bool thisClass::is_base_id(int base_id) const noexcept               \
-{                                                                           \
-    return base_id == qx::get_class_id<thisClass>();                        \
-}                                                                           \
-                                                                            \
-inline int thisClass::get_class_id(void) const noexcept                     \
-{                                                                           \
-    return qx::get_class_id<thisClass>();                                   \
-                                                                            \
+namespace qx
+{
+
+class rtti_base
+{
+public:
+
+    using SuperClass = rtti_base;
+    using BaseClass  = rtti_base;
+    using ThisClass  = rtti_base;
+
+    template<class RTTI_TYPE>
+    friend constexpr int qx::get_class_id(void);
+
+    virtual ~rtti_base() = default;
+
+    template <typename RTTI_TYPE>
+    bool is_derived_from() const noexcept
+    {
+        return is_base_id(qx::get_class_id<RTTI_TYPE>()) ||
+               qx::get_class_id<RTTI_TYPE>() == get_class_id();
+    }
+
+    static constexpr std::string_view get_class_name_static(void) noexcept
+    {
+        return QX_RTTI_CLASS_NAME(rtti_base);
+    }
+
+    virtual std::string_view get_class_name(void) const noexcept
+    {
+        return get_class_name_static();
+    }
+
+    virtual int get_class_id(void) const noexcept;
+
+protected:
+
+    virtual bool is_base_id(int base_id) const noexcept;
+
+private:
+
+    static constexpr int s_ClassId = qx::class_counter::next();
+};
+
+template<>
+constexpr int get_class_id<rtti_base>(void)
+{
+    return rtti_base::s_ClassId;
+}
+
+template <>
+struct is_derived<rtti_base>
+{
+    template <typename Y>
+    static constexpr bool from() noexcept
+    {
+        return qx::get_class_id<rtti_base>() == qx::get_class_id<Y>();
+    }
+};
+
+inline bool rtti_base::is_base_id(int base_id) const noexcept
+{
+    return base_id == qx::get_class_id<rtti_base>();
+}
+
+inline int rtti_base::get_class_id(void) const noexcept
+{
+    return qx::get_class_id<rtti_base>();
+}
+
+}
+
+
 
 // define this macro in the end of each derived class
 #define QX_RTTI_CLASS_DERIVED(thisClass, superClass)                        \

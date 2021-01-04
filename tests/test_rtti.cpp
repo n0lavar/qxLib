@@ -32,9 +32,9 @@ class CClass2
 };
 
 
-class CBase1
+class CBase1 : public qx::rtti_base
 {
-    QX_RTTI_CLASS_BASE(CBase1)
+    QX_RTTI_CLASS_DERIVED(CBase1, qx::rtti_base)
 }
 
 class CDerived1_1 : public CBase1
@@ -73,9 +73,9 @@ class CDerived1_3 : public CBase1
 }
 
 
-class CBase2
+class CBase2 : public qx::rtti_base
 {
-    QX_RTTI_CLASS_BASE(CBase2)
+    QX_RTTI_CLASS_DERIVED(CBase2, qx::rtti_base)
 }
 
 class CDerived2_1 : public CBase2
@@ -168,17 +168,17 @@ static_assert(qx::get_class_id<CClass2>() == -1);
 
 //----------------------------------- usings -----------------------------------
 
-static_assert(std::is_same_v<CDerived1_1::BaseClass,  CBase1>);
-static_assert(std::is_same_v<CDerived1_2::BaseClass,  CBase1>);
-static_assert(std::is_same_v<CDerived1_21::BaseClass, CBase1>);
-static_assert(std::is_same_v<CDerived1_22::BaseClass, CBase1>);
-static_assert(std::is_same_v<CDerived1_3::BaseClass,  CBase1>);
+static_assert(std::is_same_v<CDerived1_1::BaseClass,  qx::rtti_base>);
+static_assert(std::is_same_v<CDerived1_2::BaseClass,  qx::rtti_base>);
+static_assert(std::is_same_v<CDerived1_21::BaseClass, qx::rtti_base>);
+static_assert(std::is_same_v<CDerived1_22::BaseClass, qx::rtti_base>);
+static_assert(std::is_same_v<CDerived1_3::BaseClass,  qx::rtti_base>);
 
-static_assert(std::is_same_v<CDerived2_1::BaseClass,  CBase2>);
-static_assert(std::is_same_v<CDerived2_2::BaseClass,  CBase2>);
-static_assert(std::is_same_v<CDerived2_3::BaseClass,  CBase2>);
-static_assert(std::is_same_v<CDerived2_31::BaseClass, CBase2>);
-static_assert(std::is_same_v<CDerived2_32::BaseClass, CBase2>);
+static_assert(std::is_same_v<CDerived2_1::BaseClass,  qx::rtti_base>);
+static_assert(std::is_same_v<CDerived2_2::BaseClass,  qx::rtti_base>);
+static_assert(std::is_same_v<CDerived2_3::BaseClass,  qx::rtti_base>);
+static_assert(std::is_same_v<CDerived2_31::BaseClass, qx::rtti_base>);
+static_assert(std::is_same_v<CDerived2_32::BaseClass, qx::rtti_base>);
 
 static_assert(std::is_same_v<CDerived1_1::SuperClass,  CBase1>);
 static_assert(std::is_same_v<CDerived1_2::SuperClass,  CBase1>);
