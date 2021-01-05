@@ -13,6 +13,7 @@
 #pragma once
 
 #include <qx/typedefs.h>
+#include <qx/config.h>
 
 namespace qx
 {
@@ -196,3 +197,85 @@ namespace detail
 #define QX_STATIC_ASSERT_STR_GE(a, b) static_assert(qx::meta::strcmp((a), (b)) >= 0)
 
 //==============================================================================
+
+namespace qx
+{
+
+//==============================================================================
+//!\fn                qx::get_format_specifier<value_type, T>
+//
+//!\brief  Get format specifier for type
+//!\retval  - format specifier or nullptr if type is not supported
+//!\author Khrapov
+//!\date   11.09.2020
+//==============================================================================
+template<typename value_type, typename T>
+constexpr auto get_format_specifier(void) noexcept
+{
+    const value_type* pszFormat = nullptr;
+
+    if constexpr (std::is_same_v<T, char>)
+    {
+        pszFormat = QX_STR_PREFIX(value_type, "%hhd");
+    }
+    else if constexpr (std::is_same_v<T, unsigned char>)
+    {
+        pszFormat = QX_STR_PREFIX(value_type, "%hhu");
+    }
+    else if constexpr (std::is_same_v<T, short>)
+    {
+        pszFormat = QX_STR_PREFIX(value_type, "%hd");
+    }
+    else if constexpr (std::is_same_v<T, unsigned short>)
+    {
+        pszFormat = QX_STR_PREFIX(value_type, "%hu");
+    }
+    else if constexpr (std::is_same_v<T, int>)
+    {
+        pszFormat = QX_STR_PREFIX(value_type, "%d");
+    }
+    else if constexpr (std::is_same_v<T, unsigned int>)
+    {
+        pszFormat = QX_STR_PREFIX(value_type, "%u");
+    }
+    else if constexpr (std::is_same_v<T, long>)
+    {
+        pszFormat = QX_STR_PREFIX(value_type, "%ld");
+    }
+    else if constexpr (std::is_same_v<T, unsigned long>)
+    {
+        pszFormat = QX_STR_PREFIX(value_type, "%lu");
+    }
+    else if constexpr (std::is_same_v<T, long long>)
+    {
+        pszFormat = QX_STR_PREFIX(value_type, "%lld");
+    }
+    else if constexpr (std::is_same_v<T, unsigned long long>)
+    {
+        pszFormat = QX_STR_PREFIX(value_type, "%llu");
+    }
+    else if constexpr (std::is_same_v<T, float>)
+    {
+        pszFormat = QX_STR_PREFIX(value_type, "%f");
+    }
+    else if constexpr (std::is_same_v<T, double>)
+    {
+        pszFormat = QX_STR_PREFIX(value_type, "%lf");
+    }
+    else if constexpr (std::is_same_v<T, long double>)
+    {
+        pszFormat = QX_STR_PREFIX(value_type, "%Lf");
+    }
+    else if constexpr (std::is_pointer_v<T>)
+    {
+#if QX_MSVC
+        pszFormat = QX_STR_PREFIX(value_type, "0x%p");
+#else
+        pszFormat = QX_STR_PREFIX(value_type, "%p");
+#endif
+    }
+
+    return pszFormat;
+}
+
+}

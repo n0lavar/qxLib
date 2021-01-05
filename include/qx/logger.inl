@@ -44,13 +44,13 @@ inline void logger::process_output(
     if (auto pUnitInfo = get_unit_info(eLogLevel, pszTag, pszFile, pszFunction))
     {
         auto& traceUnitInfo = pUnitInfo->get_trace_unit_info();
-
-        va_list args;
-        va_start(args, svColor);
         m_sMsg.clear();
 
         if (auto formatFunc = traceUnitInfo.formatFunc; formatFunc)
         {
+            va_list args;
+            va_start(args, svColor);
+
             formatFunc(
                 m_sMsg,
                 m_sFormat,
@@ -62,9 +62,9 @@ inline void logger::process_output(
                 pszFunction,
                 nLine,
                 args);
-        }
 
-        va_end(args);
+            va_end(args);
+        }
 
         if (!m_sMsg.empty())
         {
@@ -147,7 +147,7 @@ inline void logger::format_time_string(string& sTime)
     std::tm* now = std::localtime(&t);
     QX_POP_SUPPRESS_WARNINGS
 
-    sTime.format(
+    sTime.printf(
         "%02d-%02d-%04d_%02d-%02d-%02d",
         now->tm_mday,
         now->tm_mon,
@@ -186,7 +186,7 @@ inline void logger::format_line(
     int             nLine,
     va_list         args)
 {
-    sMsg.vformat(pszFormat, args);
+    sMsg.vprintf(pszFormat, args);
 
     format_time_string(sFormat);
 
@@ -214,7 +214,7 @@ inline void logger::format_line(
     // assume all psz != nullptr as method must be used in macros only
     if (eLogLevel != qx::logger::level::asserts)
     {
-        sMsg.format(
+        sMsg.printf(
             sFormat.data(),
             pszFile,
             pszFunction,
@@ -222,7 +222,7 @@ inline void logger::format_line(
     }
     else
     {
-        sMsg.format(
+        sMsg.printf(
             sFormat.data(),
             pszFile,
             pszFunction,

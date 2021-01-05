@@ -274,34 +274,34 @@ inline void basic_string<Traits>::assign(const String& sAnother) noexcept
 }
 
 //==============================================================================
-//!\fn               qx::basic_string<Traits>::format
+//!\fn               qx::basic_string<Traits>::printf
 //
-//!\brief  Format string
+//!\brief  Format string (c-style printf)
 //!\param  pszFormat - format pattern. this str as pszFormat is UB
 //!\param  ...       - arguments
 //!\author Khrapov
 //!\date   29.10.2019
 //==============================================================================
 template<class Traits>
-void basic_string<Traits>::format(const_pointer pszFormat, ...) noexcept
+void basic_string<Traits>::printf(const_pointer pszFormat, ...) noexcept
 {
     va_list args;
     va_start(args, pszFormat);
-    vformat(pszFormat, args);
+    this->vprintf(pszFormat, args);
     va_end(args);
 }
 
 //==============================================================================
-//!\fn                   basic_string<Traits>::vformat
+//!\fn                   basic_string<Traits>::vprintf
 //
-//!\brief  Format string with given va_args
+//!\brief  Format string with given va_args (c-style printf)
 //!\param  pszFormat - format pattern. this str as pszFormat is UB
 //!\param  args      - args pack
 //!\author Khrapov
 //!\date   5.11.2020
 //==============================================================================
 template<class Traits>
-inline void basic_string<Traits>::vformat(
+inline void basic_string<Traits>::vprintf(
     const_pointer pszFormat,
     va_list       args) noexcept
 {
@@ -315,9 +315,9 @@ inline void basic_string<Traits>::vformat(
 }
 
 //==============================================================================
-//!\fn             qx::basic_string<Traits>::sformat<...Args>
+//!\fn             qx::basic_string<Traits>::sprintf<...Args>
 //
-//!\brief  Static format string
+//!\brief  Static format string (c-style printf)
 //!\param  pFormat - format pattern
 //!\param  ...args - arguments
 //!\retval         - result string
@@ -326,46 +326,46 @@ inline void basic_string<Traits>::vformat(
 //==============================================================================
 template<class Traits>
 template<class ...Args>
-inline basic_string<Traits> basic_string<Traits>::sformat(
+inline basic_string<Traits> basic_string<Traits>::sprintf(
     const_pointer pszFormat,
     Args...       args) noexcept
 {
     basic_string str;
-    str.format(pszFormat, args...);
+    str.printf(pszFormat, args...);
     return std::move(str);
 }
 
 //==============================================================================
-//!\fn           qx::basic_string<Traits>::append_format
+//!\fn           qx::basic_string<Traits>::append_printf
 //
-//!\brief  Format string and uppend to the current string
+//!\brief  Format string (c-style printf) and uppend to the current string
 //!\param  pszFormat - format pattern. this str as pszFormat is UB
 //!\param  ...       - arguments
 //!\author Khrapov
 //!\date   31.12.2020
 //==============================================================================
 template<class Traits>
-inline void basic_string<Traits>::append_format(
+inline void basic_string<Traits>::append_printf(
     const_pointer pszFormat,
     ...) noexcept
 {
     va_list args;
     va_start(args, pszFormat);
-    append_vformat(pszFormat, args);
+    append_vprintf(pszFormat, args);
     va_end(args);
 }
 
 //==============================================================================
-//!\fn               basic_string<Traits>::append_vformat
+//!\fn               basic_string<Traits>::append_vprintf
 //
-//!\brief  Format string and uppend to the current string
+//!\brief  Format string (c-style printf) and uppend to the current string
 //!\param  pszFormat - format pattern. this str as pszFormat is UB
 //!\param  args      - args pack
 //!\author Khrapov
 //!\date   31.12.2020
 //==============================================================================
 template<class Traits>
-inline void basic_string<Traits>::append_vformat(
+inline void basic_string<Traits>::append_vprintf(
     const_pointer pszFormat,
     va_list       args) noexcept
 {
@@ -604,7 +604,7 @@ inline std::optional<To> basic_string<Traits>::to(void) const noexcept
             else
                 optResult = false;
         }
-        else if (auto pszFormat = get_format_specifier<To>())
+        else if (auto pszFormat = get_format_specifier<value_type, To>())
         {
             To result;
             int nConvertedArgs = Traits::sscanf(data(), pszFormat, &result);
@@ -684,11 +684,11 @@ inline void basic_string<Traits>::from(
                     : QX_STR_PREFIX(typename Traits::value_type, "false");
             }
             else
-                pszFormat = get_format_specifier<From>();
+                pszFormat = get_format_specifier<value_type, From>();
         }
 
         if (pszFormat)
-            format(pszFormat, data);
+            printf(pszFormat, data);
     }
     else
     {
@@ -3738,85 +3738,6 @@ inline basic_string<Traits>::operator std::basic_string_view<
     typename basic_string<Traits>::value_type>() const noexcept
 {
     return std::basic_string_view<value_type, std::char_traits<value_type>>(data(), size());
-}
-
-//==============================================================================
-//!\fn          qx::basic_string<Traits>::get_format_specifier<T>
-//
-//!\brief  Get format specifier for type
-//!\retval  - format specifier or nullptr if type is not supported
-//!\author Khrapov
-//!\date   11.09.2020
-//==============================================================================
-template<class Traits>
-template<typename T>
-constexpr typename basic_string<Traits>::const_pointer basic_string<Traits>::get_format_specifier(
-    void) noexcept
-{
-    const_pointer pszFormat = nullptr;
-
-    if constexpr (std::is_same_v<T, char>)
-    {
-        pszFormat = QX_STR_PREFIX(typename Traits::value_type, "%hhd");
-    }
-    else if constexpr (std::is_same_v<T, unsigned char>)
-    {
-        pszFormat = QX_STR_PREFIX(typename Traits::value_type, "%hhu");
-    }
-    else if constexpr (std::is_same_v<T, short>)
-    {
-        pszFormat = QX_STR_PREFIX(typename Traits::value_type, "%hd");
-    }
-    else if constexpr (std::is_same_v<T, unsigned short>)
-    {
-        pszFormat = QX_STR_PREFIX(typename Traits::value_type, "%hu");
-    }
-    else if constexpr (std::is_same_v<T, int>)
-    {
-        pszFormat = QX_STR_PREFIX(typename Traits::value_type, "%d");
-    }
-    else if constexpr (std::is_same_v<T, unsigned int>)
-    {
-        pszFormat = QX_STR_PREFIX(typename Traits::value_type, "%u");
-    }
-    else if constexpr (std::is_same_v<T, long>)
-    {
-        pszFormat = QX_STR_PREFIX(typename Traits::value_type, "%ld");
-    }
-    else if constexpr (std::is_same_v<T, unsigned long>)
-    {
-        pszFormat = QX_STR_PREFIX(typename Traits::value_type, "%lu");
-    }
-    else if constexpr (std::is_same_v<T, long long>)
-    {
-        pszFormat = QX_STR_PREFIX(typename Traits::value_type, "%lld");
-    }
-    else if constexpr (std::is_same_v<T, unsigned long long>)
-    {
-        pszFormat = QX_STR_PREFIX(typename Traits::value_type, "%llu");
-    }
-    else if constexpr (std::is_same_v<T, float>)
-    {
-        pszFormat = QX_STR_PREFIX(typename Traits::value_type, "%f");
-    }
-    else if constexpr (std::is_same_v<T, double>)
-    {
-        pszFormat = QX_STR_PREFIX(typename Traits::value_type, "%lf");
-    }
-    else if constexpr (std::is_same_v<T, long double>)
-    {
-        pszFormat = QX_STR_PREFIX(typename Traits::value_type, "%Lf");
-    }
-    else if constexpr (std::is_pointer_v<T>)
-    {
-#if QX_MSVC
-        pszFormat = QX_STR_PREFIX(typename Traits::value_type, "0x%p");
-#else
-        pszFormat = QX_STR_PREFIX(typename Traits::value_type, "%p");
-#endif
-    }
-
-    return pszFormat;
 }
 
 //==============================================================================

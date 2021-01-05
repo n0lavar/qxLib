@@ -131,16 +131,16 @@ public:
     template<class String, class = enable_if_string_t<String>>
     void                    assign       (const String         & str)                       noexcept;
 
-    void                    format       (const_pointer          pszFormat,
+    void                    printf       (const_pointer          pszFormat,
                                           ...)                                              noexcept;
-    void                    vformat      (const_pointer          pszFormat,
+    void                    vprintf      (const_pointer          pszFormat,
                                           va_list                args)                      noexcept;
     template<class ... Args>
-    static basic_string     sformat      (const_pointer          pszFormat,
+    static basic_string     sprintf      (const_pointer          pszFormat,
                                           Args...                args)                      noexcept;
-    void                    append_format(const_pointer          pszFormat,
+    void                    append_printf(const_pointer          pszFormat,
                                           ...)                                              noexcept;
-    void                    append_vformat(const_pointer         pszFormat,
+    void                    append_vprintf(const_pointer         pszFormat,
                                           va_list                args)                      noexcept;
 
     void                    swap         (basic_string         & sOther)                    noexcept;
@@ -589,8 +589,6 @@ private:
                                           FwdIt                  itEnd,
                                           size_type              nEnd,
                                           const Incrementer    & incrementer)       const   noexcept;
-    template<typename T>
-    static constexpr const_pointer get_format_specifier(void)                               noexcept;
 
 private:
 

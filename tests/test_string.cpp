@@ -276,12 +276,12 @@ TYPED_TEST(TestQxString, operator_assign)
 TYPED_TEST(TestQxString, format)
 {
     StringTypeTn str0;
-    str0.format(STR("The half of %d is %f"), 75, 75.f / 2);
+    str0.printf(STR("The half of %d is %f"), 75, 75.f / 2);
     EXPECT_STREQ(str0.data(), STR("The half of 75 is 37.500000"));
     EXPECT_FALSE(str0.empty());
     EXPECT_EQ(str0.size(), 27);
 
-    StringTypeTn str1 = StringType::sformat(STR("The half of %d is %f"), 75, 75.f / 2);
+    StringTypeTn str1 = StringType::sprintf(STR("The half of %d is %f"), 75, 75.f / 2);
     EXPECT_STREQ(str1.data(), STR("The half of 75 is 37.500000"));
     EXPECT_FALSE(str0.empty());
     EXPECT_EQ(str1.size(), 27);
@@ -289,25 +289,25 @@ TYPED_TEST(TestQxString, format)
     StringTypeTn str2;
     StringTypeTn format;
 
-    str2.format(STR("%f"), 1.f);
+    str2.printf(STR("%f"), 1.f);
     EXPECT_STREQ(str2.data(), STR("1.000000"));
     EXPECT_FALSE(str2.empty());
     EXPECT_EQ(str2.size(), 8);
 
-    str2.format(STR("%f %d"), 1.f, 2);
+    str2.printf(STR("%f %d"), 1.f, 2);
     EXPECT_STREQ(str2.data(), STR("1.000000 2"));
     EXPECT_FALSE(str2.empty());
     EXPECT_EQ(str2.size(), 10);
 
     format += STR("%f %d ");
     format += get_string_format_specifier<typename TypeParam::value_type>();
-    str2.format(format.data(), 1.f, 2, STR("three"));
+    str2.printf(format.data(), 1.f, 2, STR("three"));
     EXPECT_STREQ(str2.data(), STR("1.000000 2 three"));
     EXPECT_FALSE(str2.empty());
     EXPECT_EQ(str2.size(), 16);
 
     format += STR(" %u");
-    str2.format(format.data(), 1.f, 2, STR("three"), 4u);
+    str2.printf(format.data(), 1.f, 2, STR("three"), 4u);
     EXPECT_STREQ(str2.data(), STR("1.000000 2 three 4"));
     EXPECT_FALSE(str2.empty());
     EXPECT_EQ(str2.size(), 18);
@@ -2085,15 +2085,15 @@ TYPED_TEST(TestQxString, append_format)
 {
     StringTypeTn str;
 
-    str.append_format(STR("%d"), 99);
+    str.append_printf(STR("%d"), 99);
     EXPECT_STREQ(str.data(), STR("99"));
     EXPECT_EQ(str.size(), 2);
 
-    str.append_format(STR(" %f"), 0.f);
+    str.append_printf(STR(" %f"), 0.f);
     EXPECT_STREQ(str.data(), STR("99 0.000000"));
     EXPECT_EQ(str.size(), 11);
 
-    str.append_format(STR("%f"), 2.f);
+    str.append_printf(STR("%f"), 2.f);
     EXPECT_STREQ(str.data(), STR("99 0.0000002.000000"));
     EXPECT_EQ(str.size(), 19);
 }
