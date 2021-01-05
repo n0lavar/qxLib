@@ -120,7 +120,7 @@ protected:
 };
 
 template<>
-int get_class_id<rtti_base>(void) noexcept
+inline int get_class_id<rtti_base>(void) noexcept
 {
     return rtti_base::get_class_id_static();
 }
@@ -181,7 +181,7 @@ protected:                                                                  \
 namespace qx                                                                \
 {                                                                           \
     template<>                                                              \
-    int get_class_id<thisClass>(void) noexcept                              \
+    inline int get_class_id<thisClass>(void) noexcept                       \
     {                                                                       \
         return thisClass::get_class_id_static();                            \
     }
