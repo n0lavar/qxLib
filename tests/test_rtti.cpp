@@ -20,9 +20,6 @@
 #include <qx/useful_macros.h>
 #include <memory>
 
-
-#define IS_CONSTEXPR(a) static_assert((a) || !(a));
-
 class CClass1
 {
 };
@@ -104,68 +101,6 @@ class CDerived2_32 : public CDerived2_3
 }
 
 
-
-//--------------------------------- is_derived ---------------------------------
-
-static_assert( qx::is_derived<CDerived1_1> ::from<CBase1>());
-static_assert( qx::is_derived<CDerived1_2> ::from<CBase1>());
-static_assert( qx::is_derived<CDerived1_21>::from<CDerived1_2>());
-static_assert( qx::is_derived<CDerived1_22>::from<CDerived1_2>());
-static_assert( qx::is_derived<CDerived1_21>::from<CBase1>());
-static_assert( qx::is_derived<CDerived1_22>::from<CBase1>());
-static_assert( qx::is_derived<CDerived1_3> ::from<CBase1>());
-static_assert(!qx::is_derived<CDerived1_1> ::from<CClass1>());
-static_assert(!qx::is_derived<CDerived1_1> ::from<CClass2>());
-
-static_assert( qx::is_derived<CDerived2_1> ::from<CBase2>());
-static_assert( qx::is_derived<CDerived2_2> ::from<CBase2>());
-static_assert( qx::is_derived<CDerived2_3> ::from<CBase2>());
-static_assert( qx::is_derived<CDerived2_31>::from<CDerived2_3>());
-static_assert( qx::is_derived<CDerived2_32>::from<CDerived2_3>());
-static_assert( qx::is_derived<CDerived2_31>::from<CBase2>());
-static_assert( qx::is_derived<CDerived2_32>::from<CBase2>());
-static_assert(!qx::is_derived<CDerived2_1> ::from<CClass1>());
-static_assert(!qx::is_derived<CDerived2_1> ::from<CClass2>());
-
-static_assert(!qx::is_derived<CDerived1_1> ::from<CBase2>());
-static_assert(!qx::is_derived<CDerived1_2> ::from<CBase2>());
-static_assert(!qx::is_derived<CDerived1_21>::from<CDerived2_2>());
-static_assert(!qx::is_derived<CDerived1_22>::from<CDerived2_2>());
-static_assert(!qx::is_derived<CDerived1_21>::from<CBase2>());
-static_assert(!qx::is_derived<CDerived1_22>::from<CBase2>());
-static_assert(!qx::is_derived<CDerived1_3> ::from<CBase2>());
-
-static_assert(!qx::is_derived<CDerived2_1> ::from<CBase1>());
-static_assert(!qx::is_derived<CDerived2_2> ::from<CBase1>());
-static_assert(!qx::is_derived<CDerived2_3> ::from<CBase1>());
-static_assert(!qx::is_derived<CDerived2_31>::from<CDerived1_3>());
-static_assert(!qx::is_derived<CDerived2_32>::from<CDerived1_3>());
-static_assert(!qx::is_derived<CDerived2_31>::from<CBase1>());
-static_assert(!qx::is_derived<CDerived2_32>::from<CBase1>());
-
-
-
-//---------------------------------- class id ----------------------------------
-
-IS_CONSTEXPR(qx::get_class_id<CDerived1_1>());
-IS_CONSTEXPR(qx::get_class_id<CDerived1_2>());
-IS_CONSTEXPR(qx::get_class_id<CDerived1_21>());
-IS_CONSTEXPR(qx::get_class_id<CDerived1_22>());
-IS_CONSTEXPR(qx::get_class_id<CDerived1_221>());
-IS_CONSTEXPR(qx::get_class_id<CDerived1_222>());
-IS_CONSTEXPR(qx::get_class_id<CDerived1_3>());
-
-IS_CONSTEXPR(qx::get_class_id<CDerived2_1>());
-IS_CONSTEXPR(qx::get_class_id<CDerived2_2>());
-IS_CONSTEXPR(qx::get_class_id<CDerived2_3>());
-IS_CONSTEXPR(qx::get_class_id<CDerived2_31>());
-IS_CONSTEXPR(qx::get_class_id<CDerived2_32>());
-
-static_assert(qx::get_class_id<CClass1>() == -1);
-static_assert(qx::get_class_id<CClass2>() == -1);
-
-
-
 //----------------------------------- usings -----------------------------------
 
 static_assert(std::is_same_v<CDerived1_1::BaseClass,  qx::rtti_base>);
@@ -218,9 +153,50 @@ QX_STATIC_ASSERT_STR_EQ(CDerived1_222::get_class_name_static().data(), "CDerived
 QX_STATIC_ASSERT_STR_EQ(CDerived1_3::get_class_name_static().data(),   "CDerived1_3");
 
 
+TEST(rtti, is_derived)
+{
+    EXPECT_TRUE(qx::is_derived<CDerived1_1> ::from<CBase1>());
+    EXPECT_TRUE(qx::is_derived<CDerived1_2> ::from<CBase1>());
+    EXPECT_TRUE(qx::is_derived<CDerived1_21>::from<CDerived1_2>());
+    EXPECT_TRUE(qx::is_derived<CDerived1_22>::from<CDerived1_2>());
+    EXPECT_TRUE(qx::is_derived<CDerived1_21>::from<CBase1>());
+    EXPECT_TRUE(qx::is_derived<CDerived1_22>::from<CBase1>());
+    EXPECT_TRUE(qx::is_derived<CDerived1_3> ::from<CBase1>());
+    EXPECT_FALSE(qx::is_derived<CDerived1_1>::from<CClass1>());
+    EXPECT_FALSE(qx::is_derived<CDerived1_1>::from<CClass2>());
+
+    EXPECT_TRUE(qx::is_derived<CDerived2_1> ::from<CBase2>());
+    EXPECT_TRUE(qx::is_derived<CDerived2_2> ::from<CBase2>());
+    EXPECT_TRUE(qx::is_derived<CDerived2_3> ::from<CBase2>());
+    EXPECT_TRUE(qx::is_derived<CDerived2_31>::from<CDerived2_3>());
+    EXPECT_TRUE(qx::is_derived<CDerived2_32>::from<CDerived2_3>());
+    EXPECT_TRUE(qx::is_derived<CDerived2_31>::from<CBase2>());
+    EXPECT_TRUE(qx::is_derived<CDerived2_32>::from<CBase2>());
+    EXPECT_FALSE(qx::is_derived<CDerived2_1>::from<CClass1>());
+    EXPECT_FALSE(qx::is_derived<CDerived2_1>::from<CClass2>());
+
+    EXPECT_FALSE(qx::is_derived<CDerived1_1> ::from<CBase2>());
+    EXPECT_FALSE(qx::is_derived<CDerived1_2> ::from<CBase2>());
+    EXPECT_FALSE(qx::is_derived<CDerived1_21>::from<CDerived2_2>());
+    EXPECT_FALSE(qx::is_derived<CDerived1_22>::from<CDerived2_2>());
+    EXPECT_FALSE(qx::is_derived<CDerived1_21>::from<CBase2>());
+    EXPECT_FALSE(qx::is_derived<CDerived1_22>::from<CBase2>());
+    EXPECT_FALSE(qx::is_derived<CDerived1_3> ::from<CBase2>());
+
+    EXPECT_FALSE(qx::is_derived<CDerived2_1> ::from<CBase1>());
+    EXPECT_FALSE(qx::is_derived<CDerived2_2> ::from<CBase1>());
+    EXPECT_FALSE(qx::is_derived<CDerived2_3> ::from<CBase1>());
+    EXPECT_FALSE(qx::is_derived<CDerived2_31>::from<CDerived1_3>());
+    EXPECT_FALSE(qx::is_derived<CDerived2_32>::from<CDerived1_3>());
+    EXPECT_FALSE(qx::is_derived<CDerived2_31>::from<CBase1>());
+    EXPECT_FALSE(qx::is_derived<CDerived2_32>::from<CBase1>());
+}
 
 TEST(rtti, class_id)
 {
+    EXPECT_EQ(qx::get_class_id<CClass1>(), -1);
+    EXPECT_EQ(qx::get_class_id<CClass2>(), -1);
+
     std::shared_ptr<CDerived1_21> p1 = std::make_shared<CDerived1_21>();
 
     EXPECT_TRUE(static_cast<CBase1*>(p1.get())->get_class_id()      == qx::get_class_id<CDerived1_21>());

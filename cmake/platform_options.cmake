@@ -59,7 +59,7 @@ function(set_qxlib_target_options _target)
     endif()
         
     target_compile_features(${_target} PRIVATE 
-        cxx_std_17
+        cxx_std_20
     )
     
     set_target_properties(${_target} PROPERTIES 

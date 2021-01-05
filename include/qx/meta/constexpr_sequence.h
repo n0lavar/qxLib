@@ -12,8 +12,15 @@
 //==============================================================================
 #pragma once
 
+#include <qx/config.h>
+
+// https://stackoverflow.com/questions/65566935/
+// https://developercommunity.visualstudio.com/content/problem/1300886/possible-error-in-compiler-with-cpp20.html
+#define QX_CONSTEXPR_SEQUENCE_SUPPORTED !QX_MSVC
+
+#if QX_CONSTEXPR_SEQUENCE_SUPPORTED
+
 #include <qx/meta/constexpr_flag.h>
-#include <qx/meta/constexpr_funcs.h>
 
 namespace qx
 {
@@ -150,3 +157,5 @@ template<typename Tag = struct MultiplierTag, typename T = int, T Start = 1, T M
 using constexpr_multiplier = constexpr_sequence<Tag, T, Start, detail::multiply<T, Mult>>;
 
 }
+
+#endif

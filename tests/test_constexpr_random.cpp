@@ -17,6 +17,9 @@
 #if QX_TEST_CONSTEXPR_RANDOM
 
 #include <qx/meta/constexpr_random.h>
+
+#if QX_CONSTEXPR_SEQUENCE_SUPPORTED
+
 #include <qx/useful_macros.h>
 #include <array>
 
@@ -134,5 +137,7 @@ QX_STATIC_ASSERT_BETWEEN(left, random1::next(), right);
 QX_STATIC_ASSERT_BETWEEN(left, random1::next(), right);
 QX_STATIC_ASSERT_BETWEEN(left, random1::next(), right);
 QX_STATIC_ASSERT_BETWEEN(left, random1::next(), right);
+
+#endif
 
 #endif

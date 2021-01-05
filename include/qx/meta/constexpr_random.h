@@ -13,6 +13,9 @@
 #pragma once
 
 #include <qx/meta/constexpr_sequence.h>
+
+#if QX_CONSTEXPR_SEQUENCE_SUPPORTED
+
 #include <qx/typedefs.h>
 
 namespace qx
@@ -67,6 +70,8 @@ using constexpr_random = constexpr_sequence<
 >;
 
 }
+
+#endif
 
 // creates unique u32 seed for current: file, date, time (seconds) and line number
 #define QX_UNIQUE_SEED static_cast<u32>((qx::murmur_32_hash(__FILE__ __DATE__ __TIME__,     \

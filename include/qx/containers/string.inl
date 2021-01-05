@@ -588,7 +588,7 @@ inline std::optional<To> basic_string<Traits>::to(void) const noexcept
 {
     std::optional<To> optResult = std::nullopt;
 
-    if constexpr (std::is_pod_v<To>
+    if constexpr (std::is_trivial_v<To> && std::is_standard_layout_v<To>
                || std::is_pointer_v<To>
                || std::is_same_v<To, std::nullptr_t>)
     {
@@ -667,7 +667,7 @@ inline void basic_string<Traits>::from(
     const From  & data,
     const_pointer pszFormat) noexcept
 {
-    if constexpr (std::is_pod_v<From>
+    if constexpr (std::is_trivial_v<From> && std::is_standard_layout_v<From>
                || std::is_pointer_v<From>
                || std::is_same_v<From, std::nullptr_t>)
     {
@@ -3325,7 +3325,6 @@ inline bool basic_string<Traits>::ends_with(
     const_pointer pszStr,
     size_type     nStrSize) const noexcept
 {
-
     if (size_type nThisSize = size(); nThisSize > 0)
     {
         if (nStrSize == npos)
