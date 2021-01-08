@@ -16,7 +16,7 @@
 #include <cstddef>
 #include <limits>
 
-using mem_t = char*;        //!< 1/2 bytes for pointer arithmetic
+using mem_t = char*;        //!< 1 or 2 bytes for pointer arithmetic
 
 using u8    = uint8_t;      //!< 0 .. 255
 using u16   = uint16_t;     //!< 0 .. 65 535

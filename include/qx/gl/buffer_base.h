@@ -30,7 +30,7 @@ namespace qx
 //
 //==============================================================================
 template<bool COPYBLE>
-class buffer_base : IBuffer
+class buffer_base : public IBuffer
 {
 public:
 

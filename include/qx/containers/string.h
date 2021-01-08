@@ -131,16 +131,16 @@ public:
     template<class String, class = enable_if_string_t<String>>
     void                    assign       (const String         & str)                       noexcept;
 
-    void                    printf       (const_pointer          pszFormat,
+    void                    sprintf       (const_pointer          pszFormat,
                                           ...)                                              noexcept;
-    void                    vprintf      (const_pointer          pszFormat,
+    void                    vsprintf     (const_pointer          pszFormat,
                                           va_list                args)                      noexcept;
     template<class ... Args>
-    static basic_string     sprintf      (const_pointer          pszFormat,
+    static basic_string     static_sprintf(const_pointer         pszFormat,
                                           Args...                args)                      noexcept;
-    void                    append_printf(const_pointer          pszFormat,
+    void                    append_sprintf(const_pointer         pszFormat,
                                           ...)                                              noexcept;
-    void                    append_vprintf(const_pointer         pszFormat,
+    void                    append_vsprintf(const_pointer        pszFormat,
                                           va_list                args)                      noexcept;
 
     void                    swap         (basic_string         & sOther)                    noexcept;

@@ -132,7 +132,7 @@ protected:
                            int,
                            va_list              args)
                         {
-                            sMsg.vprintf(pszFormat, args);
+                            sMsg.vsprintf(pszFormat, args);
                             qx::logger::format_time_string(sFormat);
                             sMsg = qx::string("[I][") + sFormat + "][" + pszTag + "] " + sMsg + '\n';
                         }
@@ -202,11 +202,11 @@ protected:
             ]
                 (const char* pszStringStarting, const char* pszStringEnding)
             {
-                sFile.printf("\\[%s::", Traits::GetTraceFile());
+                sFile.sprintf("\\[%s::", Traits::GetTraceFile());
                 constexpr const char* pszFunc = "(.*?)"; // compiler-dependent
                 constexpr const char* pszLine = "\\(\\d+\\)\\]";
 
-                sFormat.printf(
+                sFormat.sprintf(
                     "%s%s%s%s%s%s%s",
                     pszStringStarting,
                     pszDate,
@@ -231,7 +231,7 @@ protected:
             ]
                 (const char* pszStringEnding)
             {
-                sFormat.printf(
+                sFormat.sprintf(
                     "%s%s%s\\[%s\\]%s",
                     pszInfo,
                     pszDate,

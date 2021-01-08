@@ -31,74 +31,74 @@ class CClass2
 
 class CBase1 : public qx::rtti_base
 {
-    QX_RTTI_CLASS_DERIVED(CBase1, qx::rtti_base)
-}
+    QX_RTTI_CLASS(CBase1, qx::rtti_base)
+};
 
 class CDerived1_1 : public CBase1
 {
-    QX_RTTI_CLASS_DERIVED(CDerived1_1, CBase1)
-}
+    QX_RTTI_CLASS(CDerived1_1, CBase1)
+};
 
 class CDerived1_2 : public CBase1
 {
-    QX_RTTI_CLASS_DERIVED(CDerived1_2, CBase1)
-}
+    QX_RTTI_CLASS(CDerived1_2, CBase1)
+};
 
 class CDerived1_21 : public CDerived1_2
 {
-    QX_RTTI_CLASS_DERIVED(CDerived1_21, CDerived1_2)
-}
+    QX_RTTI_CLASS(CDerived1_21, CDerived1_2)
+};
 
 class CDerived1_22 : public CDerived1_2
 {
-    QX_RTTI_CLASS_DERIVED(CDerived1_22, CDerived1_2)
-}
+    QX_RTTI_CLASS(CDerived1_22, CDerived1_2)
+};
 
 class CDerived1_221 : public CDerived1_22
 {
-    QX_RTTI_CLASS_DERIVED(CDerived1_221, CDerived1_22)
-}
+    QX_RTTI_CLASS(CDerived1_221, CDerived1_22)
+};
 
 class CDerived1_222 : public CDerived1_22
 {
-    QX_RTTI_CLASS_DERIVED(CDerived1_222, CDerived1_22)
-}
+    QX_RTTI_CLASS(CDerived1_222, CDerived1_22)
+};
 
 class CDerived1_3 : public CBase1
 {
-    QX_RTTI_CLASS_DERIVED(CDerived1_3, CBase1)
-}
+    QX_RTTI_CLASS(CDerived1_3, CBase1)
+};
 
 
 class CBase2 : public qx::rtti_base
 {
-    QX_RTTI_CLASS_DERIVED(CBase2, qx::rtti_base)
-}
+    QX_RTTI_CLASS(CBase2, qx::rtti_base)
+};
 
 class CDerived2_1 : public CBase2
 {
-    QX_RTTI_CLASS_DERIVED(CDerived2_1, CBase2)
-}
+    QX_RTTI_CLASS(CDerived2_1, CBase2)
+};
 
 class CDerived2_2 : public CBase2
 {
-    QX_RTTI_CLASS_DERIVED(CDerived2_2, CBase2)
-}
+    QX_RTTI_CLASS(CDerived2_2, CBase2)
+};
 
 class CDerived2_3 : public CBase2
 {
-    QX_RTTI_CLASS_DERIVED(CDerived2_3, CBase2)
-}
+    QX_RTTI_CLASS(CDerived2_3, CBase2)
+};
 
 class CDerived2_31 : public CDerived2_3
 {
-    QX_RTTI_CLASS_DERIVED(CDerived2_31, CDerived2_3)
-}
+    QX_RTTI_CLASS(CDerived2_31, CDerived2_3)
+};
 
 class CDerived2_32 : public CDerived2_3
 {
-    QX_RTTI_CLASS_DERIVED(CDerived2_32, CDerived2_3)
-}
+    QX_RTTI_CLASS(CDerived2_32, CDerived2_3)
+};
 
 
 //----------------------------------- usings -----------------------------------

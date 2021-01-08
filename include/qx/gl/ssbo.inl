@@ -32,13 +32,13 @@ inline void base_ssbo<COPYBLE>::Init(GLuint nBindingPoint, GLsizeiptr nSize, con
     CHECK(nSize >= GL_BUFFER_DATA_SIZE)
 #endif
     {
-        Delete();
+        this->Delete();
 
-        Generate();
-        Bind();
-        Update(nSize, pData, GL_STATIC_DRAW);
-        BindBase(nBindingPoint);
-        Unbind();
+        this->Generate();
+        this->Bind();
+        this->Update(nSize, pData, GL_STATIC_DRAW);
+        this->BindBase(nBindingPoint);
+        this->Unbind();
     }
 }
 

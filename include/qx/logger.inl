@@ -147,7 +147,7 @@ inline void logger::format_time_string(string& sTime)
     std::tm* now = std::localtime(&t);
     QX_POP_SUPPRESS_WARNINGS
 
-    sTime.printf(
+    sTime.sprintf(
         "%02d-%02d-%04d_%02d-%02d-%02d",
         now->tm_mday,
         now->tm_mon,
@@ -186,7 +186,7 @@ inline void logger::format_line(
     int             nLine,
     va_list         args)
 {
-    sMsg.vprintf(pszFormat, args);
+    sMsg.vsprintf(pszFormat, args);
 
     format_time_string(sFormat);
 
@@ -214,7 +214,7 @@ inline void logger::format_line(
     // assume all psz != nullptr as method must be used in macros only
     if (eLogLevel != qx::logger::level::asserts)
     {
-        sMsg.printf(
+        sMsg.sprintf(
             sFormat.data(),
             pszFile,
             pszFunction,
@@ -222,7 +222,7 @@ inline void logger::format_line(
     }
     else
     {
-        sMsg.printf(
+        sMsg.sprintf(
             sFormat.data(),
             pszFile,
             pszFunction,

@@ -274,7 +274,7 @@ inline void basic_string<Traits>::assign(const String& sAnother) noexcept
 }
 
 //==============================================================================
-//!\fn               qx::basic_string<Traits>::printf
+//!\fn               qx::basic_string<Traits>::sprintf
 //
 //!\brief  Format string (c-style printf)
 //!\param  pszFormat - format pattern. this str as pszFormat is UB
@@ -283,16 +283,16 @@ inline void basic_string<Traits>::assign(const String& sAnother) noexcept
 //!\date   29.10.2019
 //==============================================================================
 template<class Traits>
-void basic_string<Traits>::printf(const_pointer pszFormat, ...) noexcept
+void basic_string<Traits>::sprintf(const_pointer pszFormat, ...) noexcept
 {
     va_list args;
     va_start(args, pszFormat);
-    this->vprintf(pszFormat, args);
+    this->vsprintf(pszFormat, args);
     va_end(args);
 }
 
 //==============================================================================
-//!\fn                   basic_string<Traits>::vprintf
+//!\fn                   basic_string<Traits>::vsprintf
 //
 //!\brief  Format string with given va_args (c-style printf)
 //!\param  pszFormat - format pattern. this str as pszFormat is UB
@@ -301,7 +301,7 @@ void basic_string<Traits>::printf(const_pointer pszFormat, ...) noexcept
 //!\date   5.11.2020
 //==============================================================================
 template<class Traits>
-inline void basic_string<Traits>::vprintf(
+inline void basic_string<Traits>::vsprintf(
     const_pointer pszFormat,
     va_list       args) noexcept
 {
@@ -315,7 +315,7 @@ inline void basic_string<Traits>::vprintf(
 }
 
 //==============================================================================
-//!\fn             qx::basic_string<Traits>::sprintf<...Args>
+//!\fn           qx::basic_string<Traits>::static_sprintf<...Args>
 //
 //!\brief  Static format string (c-style printf)
 //!\param  pFormat - format pattern
@@ -326,17 +326,17 @@ inline void basic_string<Traits>::vprintf(
 //==============================================================================
 template<class Traits>
 template<class ...Args>
-inline basic_string<Traits> basic_string<Traits>::sprintf(
+inline basic_string<Traits> basic_string<Traits>::static_sprintf(
     const_pointer pszFormat,
     Args...       args) noexcept
 {
     basic_string str;
-    str.printf(pszFormat, args...);
+    str.sprintf(pszFormat, args...);
     return std::move(str);
 }
 
 //==============================================================================
-//!\fn           qx::basic_string<Traits>::append_printf
+//!\fn           qx::basic_string<Traits>::append_sprintf
 //
 //!\brief  Format string (c-style printf) and uppend to the current string
 //!\param  pszFormat - format pattern. this str as pszFormat is UB
@@ -345,18 +345,18 @@ inline basic_string<Traits> basic_string<Traits>::sprintf(
 //!\date   31.12.2020
 //==============================================================================
 template<class Traits>
-inline void basic_string<Traits>::append_printf(
+inline void basic_string<Traits>::append_sprintf(
     const_pointer pszFormat,
     ...) noexcept
 {
     va_list args;
     va_start(args, pszFormat);
-    append_vprintf(pszFormat, args);
+    append_vsprintf(pszFormat, args);
     va_end(args);
 }
 
 //==============================================================================
-//!\fn               basic_string<Traits>::append_vprintf
+//!\fn               basic_string<Traits>::append_vsprintf
 //
 //!\brief  Format string (c-style printf) and uppend to the current string
 //!\param  pszFormat - format pattern. this str as pszFormat is UB
@@ -365,7 +365,7 @@ inline void basic_string<Traits>::append_printf(
 //!\date   31.12.2020
 //==============================================================================
 template<class Traits>
-inline void basic_string<Traits>::append_vprintf(
+inline void basic_string<Traits>::append_vsprintf(
     const_pointer pszFormat,
     va_list       args) noexcept
 {
@@ -688,7 +688,7 @@ inline void basic_string<Traits>::from(
         }
 
         if (pszFormat)
-            printf(pszFormat, data);
+            sprintf(pszFormat, data);
     }
     else
     {

@@ -2,7 +2,7 @@
 //
 //!\file                            rtti.h
 //
-//!\brief       Using QX_RTTI_CLASS_BASE and QX_RTTI_CLASS_DERIVED macros
+//!\brief       Using QX_RTTI_CLASS_BASE and QX_RTTI_CLASS macros
 //              will let you to use RTTI advantages without enabling RTTI in compiler's flags
 //!\details     common logic is taken from
 //              https://github.com/qualab/xakep-RTTI (Vladimir Kerimov, qualab)
@@ -19,10 +19,23 @@
 namespace qx
 {
 
-template<class C>
-int get_class_id(void)
+namespace detail
 {
-    return -1;
+    template<typename T>
+    concept has_get_class_id_static = requires(T t) { T::get_class_id_static(); };
+}
+
+template<class C>
+inline int get_class_id(void) noexcept
+{
+    if constexpr (detail::has_get_class_id_static<C>)
+    {
+        return C::get_class_id_static();
+    }
+    else
+    {
+        return -1;
+    }
 }
 
 template <typename X>
@@ -31,8 +44,15 @@ struct is_derived
     template <typename Y>
     static bool from() noexcept
     {
-        return qx::get_class_id<X>() == qx::get_class_id<Y>() ||
-               is_derived<typename X::SuperClass>::template from<Y>();
+        if constexpr (detail::has_get_class_id_static<X> && detail::has_get_class_id_static<Y>)
+        {
+            return X::get_class_id_static() == Y::get_class_id_static() ||
+                is_derived<typename X::SuperClass>::template from<Y>();
+        }
+        else
+        {
+            return false;
+        }
     }
 };
 
@@ -42,31 +62,20 @@ struct is_derived
     #define QX_RTTI_CLASS_NAME(className) # className
 #endif
 
-// defining this macros in required classes allows to use:
-//
-// qx::get_class_id<name>():    returns unique id of each class,
-//                              you can use it in "switch" or "if" with object->get_class_id()
-//                              returns -1 if class is not registrated
-//
-// qx::get_class_name_static()  returns name of class, if enabled in QX_RTTI_CLASS_NAME
-//
-// qx::is_derived<class_1>::from<class_1>():
-//                              returns true if class_1 derived from class_1
-//
-// pObject->is_derived_from<base>():
-//                              replacement for if (auto pBase = dynamic_cast<base*>(pObject))
-//                              returns true if class of pObject is derived from base type of pObject is base
-//
-// pObject->get_class_name()    returns name of pObject class even if pObject is pointer of base class,
-//                              if enabled in QX_RTTI_CLASS_NAME
-//
-// name::BaseClass              base class
-// name::SuperClass             super blass
-// name::ThisClass              this class
-
 namespace qx
 {
 
+//==============================================================================
+//
+//!\class                        qx::rtti_base
+//
+//!\brief   Base class for rtti system
+//!\details ~
+//
+//!\author  Khrapov
+//!\date    7.01.2021
+//
+//==============================================================================
 class rtti_base
 {
 public:
@@ -94,15 +103,15 @@ public:
         return get_class_name_static();
     }
 
-    virtual int get_class_id(void) const noexcept
-    {
-        return get_class_id_static();
-    }
-
     static int get_class_id_static(void) noexcept
     {
         static int nId = get_next_id();
         return nId;
+    }
+
+    virtual int get_class_id(void) const noexcept
+    {
+        return get_class_id_static();
     }
 
 protected:
@@ -119,19 +128,16 @@ protected:
     }
 };
 
-template<>
-inline int get_class_id<rtti_base>(void) noexcept
-{
-    return rtti_base::get_class_id_static();
-}
-
 template <>
 struct is_derived<rtti_base>
 {
     template <typename Y>
     static bool from() noexcept
     {
-        return qx::get_class_id<rtti_base>() == qx::get_class_id<Y>();
+        if constexpr (detail::has_get_class_id_static<Y>)
+            return rtti_base::get_class_id_static() == Y::get_class_id_static();
+        else
+            return false;
     }
 };
 
@@ -140,7 +146,7 @@ struct is_derived<rtti_base>
 
 
 // define this macro in the end of each derived class
-#define QX_RTTI_CLASS_DERIVED(thisClass, superClass)                        \
+#define QX_RTTI_CLASS(thisClass, superClass)                                \
                                                                             \
 public:                                                                     \
                                                                             \
@@ -148,19 +154,14 @@ public:                                                                     \
     using BaseClass  = SuperClass::BaseClass;                               \
     using ThisClass  = thisClass;                                           \
                                                                             \
-    virtual int get_class_id (void) const noexcept override                 \
-    {                                                                       \
-        return get_class_id_static();                                       \
-    }                                                                       \
-                                                                            \
     static constexpr std::string_view get_class_name_static(void) noexcept  \
     {                                                                       \
         return QX_RTTI_CLASS_NAME(thisClass);                               \
     }                                                                       \
                                                                             \
-    virtual std::string_view get_class_name(void) const noexcept override   \
+    virtual int get_class_id(void) const noexcept override                  \
     {                                                                       \
-        return get_class_name_static();                                     \
+        return get_class_id_static();                                       \
     }                                                                       \
                                                                             \
     static int get_class_id_static(void) noexcept                           \
@@ -169,19 +170,15 @@ public:                                                                     \
         return nId;                                                         \
     }                                                                       \
                                                                             \
+    virtual std::string_view get_class_name(void) const noexcept override   \
+    {                                                                       \
+        return get_class_name_static();                                     \
+    }                                                                       \
+                                                                            \
 protected:                                                                  \
                                                                             \
     virtual bool is_base_id(int base_id) const noexcept override            \
     {                                                                       \
         return base_id == qx::get_class_id<SuperClass>() ||                 \
                SuperClass::is_base_id(base_id);                             \
-    }                                                                       \
-};                                                                          \
-                                                                            \
-namespace qx                                                                \
-{                                                                           \
-    template<>                                                              \
-    inline int get_class_id<thisClass>(void) noexcept                       \
-    {                                                                       \
-        return thisClass::get_class_id_static();                            \
     }

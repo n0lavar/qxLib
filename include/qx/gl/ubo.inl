@@ -26,11 +26,11 @@ namespace qx
 template<bool COPYBLE>
 inline void base_ubo<COPYBLE>::Init(GLuint nBindingPoint, GLsizeiptr szUBO)
 {
-    Generate();
-    Bind();
-    Update(szUBO, NULL, GL_STREAM_DRAW);
-    BindBase(nBindingPoint);
-    Unbind();
+    this->Generate();
+    this->Bind();
+    this->Update(szUBO, NULL, GL_STREAM_DRAW);
+    this->BindBase(nBindingPoint);
+    this->Unbind();
 }
 
 //==============================================================================
