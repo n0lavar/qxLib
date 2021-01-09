@@ -143,9 +143,6 @@ struct is_derived<rtti_base>
 
 }
 
-
-
-// define this macro in the end of each derived class
 #define QX_RTTI_CLASS(thisClass, superClass)                                \
                                                                             \
 public:                                                                     \

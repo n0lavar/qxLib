@@ -27,19 +27,13 @@ namespace qx
 template<bool COPYBLE>
 inline void base_ssbo<COPYBLE>::Init(GLuint nBindingPoint, GLsizeiptr nSize, const void * pData)
 {
-#if 0
-    // minimum possible size to allocate
-    CHECK(nSize >= GL_BUFFER_DATA_SIZE)
-#endif
-    {
-        this->Delete();
+    this->Delete();
 
-        this->Generate();
-        this->Bind();
-        this->Update(nSize, pData, GL_STATIC_DRAW);
-        this->BindBase(nBindingPoint);
-        this->Unbind();
-    }
+    this->Generate();
+    this->Bind();
+    this->Update(nSize, pData, GL_STATIC_DRAW);
+    this->BindBase(nBindingPoint);
+    this->Unbind();
 }
 
 }

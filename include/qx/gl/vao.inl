@@ -125,9 +125,6 @@ inline void base_vao<COPYBLE>::DisableVertexArrtibArray(GLuint nIndex)
 //!\param  bNormalized - specifies whether fixed-point data values should be
 //                       normalized or converted directly as fixed-point values
 //!\param  nStride     - byte offset between consecutive generic vertex attributes
-//!\param  pData       - a offset of the first component of the first generic
-//                       vertex attribute in the array in the data store of
-//                       the buffer currently bound to the GL_ARRAY_BUFFER target
 //!\param  nOffset     - offset of the first component of the first generic
 //                       vertex attribute in the array in the data store of
 //                       the buffer currently bound to the GL_ARRAY_BUFFER target

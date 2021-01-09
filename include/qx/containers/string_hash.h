@@ -72,19 +72,10 @@ using wstring_hash = basic_string_hash<char_traits<wchar_t>>;
 
 namespace std
 {
-    template<>
-    struct hash<qx::string_hash>
+    template<class Traits>
+    struct hash<qx::basic_string_hash<Traits>>
     {
-        u32 operator()(const qx::string_hash& hash) const
-        {
-            return hash;
-        }
-    };
-
-    template<>
-    struct hash<qx::wstring_hash>
-    {
-        u32 operator()(const qx::wstring_hash& hash) const
+        u32 operator()(const qx::basic_string_hash<Traits>& hash) const
         {
             return hash;
         }
