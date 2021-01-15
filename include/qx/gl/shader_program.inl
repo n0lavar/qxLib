@@ -15,52 +15,57 @@ namespace qx
 {
 
 //==============================================================================
-//!\fn              qx::shader_program::~shader_program
+//!\fn          qx::shader_program<COPYBLE>::~shader_program
 //
 //!\brief  shader_program object destructor
 //!\author Khrapov
 //!\date   16.01.2020
 //==============================================================================
-inline shader_program::~shader_program(void)
+template<bool COPYBLE>
+inline base_shader_program<COPYBLE>::~base_shader_program(void)
 {
-    if (m_nProgram != std::numeric_limits<GLuint>::max())
-        glDeleteProgram(m_nProgram);
+    if constexpr (COPYBLE)
+        if (m_nProgram != std::numeric_limits<GLuint>::max())
+            glDeleteProgram(m_nProgram);
 }
 
 //==============================================================================
-//!\fn                   qx::shader_program::Init
+//!\fn               qx::shader_program<COPYBLE>::Init
 //
 //!\brief  Init shader program
 //!\author Khrapov
 //!\date   18.04.2020
 //==============================================================================
-inline void shader_program::Init(void)
+template<bool COPYBLE>
+inline void base_shader_program<COPYBLE>::Init(void)
 {
     m_nProgram = glCreateProgram();
 }
 
 //==============================================================================
-//!\fn                qx::shader_program::AttachShader
+//!\fn         qx::shader_program<COPYBLE>::AttachShader<ShaderType>
 //
 //!\brief  Attach shader to the program
 //!\param  pShader - shader object pointer
 //!\author Khrapov
 //!\date   16.01.2020
 //==============================================================================
+template<bool COPYBLE>
 template <GLenum ShaderType>
-inline void shader_program::AttachShader(shader_base<ShaderType>* pShader)
+inline void base_shader_program<COPYBLE>::AttachShader(shader_base<ShaderType>* pShader)
 {
     glAttachShader(m_nProgram, pShader->GetID());
 }
 
 //==============================================================================
-//!\fn                qx::shader_program::Link
+//!\fn            qx::shader_program<COPYBLE>::Link
 //
 //!\brief  Link attached shaders
 //!\author Khrapov
 //!\date   16.01.2020
 //==============================================================================
-inline bool shader_program::Link(void)
+template<bool COPYBLE>
+inline bool base_shader_program<COPYBLE>::Link(void)
 {
     glLinkProgram(m_nProgram);
     GLint bSuccess = GetParameter(GL_LINK_STATUS);
@@ -76,31 +81,33 @@ inline bool shader_program::Link(void)
 }
 
 //==============================================================================
-//!\fn                     qx::shader_program::Use
+//!\fn                 qx::shader_program<COPYBLE>::Use
 //
 //!\brief  Use shader program
 //!\author Khrapov
 //!\date   16.01.2020
 //==============================================================================
-inline void shader_program::Use(void)
+template<bool COPYBLE>
+inline void base_shader_program<COPYBLE>::Use(void)
 {
     glUseProgram(m_nProgram);
 }
 
 //==============================================================================
-//!\fn                     qx::shader_program::Use
+//!\fn                 qx::shader_program<COPYBLE>::Use
 //
 //!\brief  Drop current shader
 //!\author Khrapov
 //!\date   16.01.2020
 //==============================================================================
-inline void shader_program::Unuse(void)
+template<bool COPYBLE>
+inline void base_shader_program<COPYBLE>::Unuse(void)
 {
     glUseProgram(0);
 }
 
 //==============================================================================
-//!\fn                 qx::shader_program::GetParameter
+//!\fn             qx::shader_program<COPYBLE>::GetParameter
 //
 //!\brief  Get shader program parameter
 //!\param  eParameter - shader program parameter.
@@ -108,207 +115,139 @@ inline void shader_program::Unuse(void)
 //!\author Khrapov
 //!\date   17.01.2020
 //==============================================================================
-inline GLint shader_program::GetParameter(GLenum eParameter) const
+template<bool COPYBLE>
+inline GLint base_shader_program<COPYBLE>::GetParameter(GLenum eParameter) const
 {
     GLint nRet = -1;
     glGetProgramiv(m_nProgram, eParameter, &nRet);
     return nRet;
 }
 
-template<>
-inline void shader_program::SetUniform(GLint nUniformLocation, const GLfloat* pValue, GLsizei nCount)
-{
-    glUniform1fv(nUniformLocation, nCount, pValue);
-}
-
-template<>
-inline void shader_program::SetUniform(GLint nUniformLocation, const glm::vec2* pValue, GLsizei nCount)
-{
-    glUniform2fv(nUniformLocation, nCount, glm::value_ptr(*pValue));
-}
-
-template<>
-inline void shader_program::SetUniform(GLint nUniformLocation, const glm::vec3* pValue, GLsizei nCount)
-{
-    glUniform3fv(nUniformLocation, nCount, glm::value_ptr(*pValue));
-}
-
-template<>
-inline void shader_program::SetUniform(GLint nUniformLocation, const glm::vec4* pValue, GLsizei nCount)
-{
-    glUniform4fv(nUniformLocation, nCount, glm::value_ptr(*pValue));
-}
-
-template<>
-inline void shader_program::SetUniform(GLint nUniformLocation, const GLint* pValue, GLsizei nCount)
-{
-    glUniform1iv(nUniformLocation, nCount, pValue);
-}
-
-template<>
-inline void shader_program::SetUniform(GLint nUniformLocation, const glm::ivec2* pValue, GLsizei nCount)
-{
-    glUniform2iv(nUniformLocation, nCount, glm::value_ptr(*pValue));
-}
-
-template<>
-inline void shader_program::SetUniform(GLint nUniformLocation, const glm::ivec3* pValue, GLsizei nCount)
-{
-    glUniform3iv(nUniformLocation, nCount, glm::value_ptr(*pValue));
-}
-
-template<>
-inline void shader_program::SetUniform(GLint nUniformLocation, const glm::ivec4* pValue, GLsizei nCount)
-{
-    glUniform4iv(nUniformLocation, nCount, glm::value_ptr(*pValue));
-}
-
-template<>
-inline void shader_program::SetUniform(GLint nUniformLocation, const GLuint* pValue, GLsizei nCount)
-{
-    glUniform1uiv(nUniformLocation, nCount, pValue);
-}
-
-template<>
-inline void shader_program::SetUniform(GLint nUniformLocation, const glm::uvec2* pValue, GLsizei nCount)
-{
-    glUniform2uiv(nUniformLocation, nCount, glm::value_ptr(*pValue));
-}
-
-template<>
-inline void shader_program::SetUniform(GLint nUniformLocation, const glm::uvec3* pValue, GLsizei nCount)
-{
-    glUniform3uiv(nUniformLocation, nCount, glm::value_ptr(*pValue));
-}
-
-template<>
-inline void shader_program::SetUniform(GLint nUniformLocation, const glm::uvec4* pValue, GLsizei nCount)
-{
-    glUniform4uiv(nUniformLocation, nCount, glm::value_ptr(*pValue));
-}
-
-template<>
-inline void shader_program::SetUniform(GLint nUniformLocation, const glm::mat2* pValue, GLsizei nCount)
-{
-    glUniformMatrix2fv(nUniformLocation, nCount, GL_FALSE, glm::value_ptr(*pValue));
-}
-
-template<>
-inline void shader_program::SetUniform(GLint nUniformLocation, const glm::mat3* pValue, GLsizei nCount)
-{
-    glUniformMatrix3fv(nUniformLocation, nCount, GL_FALSE, glm::value_ptr(*pValue));
-}
-
-template<>
-inline void shader_program::SetUniform(GLint nUniformLocation, const glm::mat4* pValue, GLsizei nCount)
-{
-    glUniformMatrix4fv(nUniformLocation, nCount, GL_FALSE, glm::value_ptr(*pValue));
-}
-
-template<>
-inline void shader_program::SetUniform(GLint nUniformLocation, const glm::mat2x3* pValue, GLsizei nCount)
-{
-    glUniformMatrix2x3fv(nUniformLocation, nCount, GL_FALSE, glm::value_ptr(*pValue));
-}
-
-template<>
-inline void shader_program::SetUniform(GLint nUniformLocation, const glm::mat3x2* pValue, GLsizei nCount)
-{
-    glUniformMatrix3x2fv(nUniformLocation, nCount, GL_FALSE, glm::value_ptr(*pValue));
-}
-
-template<>
-inline void shader_program::SetUniform(GLint nUniformLocation, const glm::mat2x4* pValue, GLsizei nCount)
-{
-    glUniformMatrix2x4fv(nUniformLocation, nCount, GL_FALSE, glm::value_ptr(*pValue));
-}
-
-template<>
-inline void shader_program::SetUniform(GLint nUniformLocation, const glm::mat4x2* pValue, GLsizei nCount)
-{
-    glUniformMatrix4x2fv(nUniformLocation, nCount, GL_FALSE, glm::value_ptr(*pValue));
-}
-
-template<>
-inline void shader_program::SetUniform(GLint nUniformLocation, const glm::mat3x4* pValue, GLsizei nCount)
-{
-    glUniformMatrix3x4fv(nUniformLocation, nCount, GL_FALSE, glm::value_ptr(*pValue));
-}
-
-template<>
-inline void shader_program::SetUniform(GLint nUniformLocation, const glm::mat4x3* pValue, GLsizei nCount)
-{
-    glUniformMatrix4x3fv(nUniformLocation, nCount, GL_FALSE, glm::value_ptr(*pValue));
-}
-
+//==============================================================================
+//!\fn             qx::shader_program<COPYBLE>::SetUniform<T>
+//
+//!\brief  Specify the value of a uniform variable
+//!\param  nUniformLocation - the location of the uniform variable to be modified.
+//!\param  pValue           - a pointer to an array of count values that will be used to update the specified uniform variable.
+//!\param  nCount           - number of values that are to be modified.
+//!\author Khrapov
+//!\date   15.01.2021
+//==============================================================================
+template<bool COPYBLE>
 template<typename T>
-inline void shader_program::SetUniform(const GLchar* pszName, const T* pValue, GLsizei nCount)
+inline void base_shader_program<COPYBLE>::SetUniform(GLint nUniformLocation, const T* pValue, GLsizei nCount)
+{
+    if constexpr (std::is_same_v<T, GLfloat>)
+        glUniform1fv(nUniformLocation, nCount, pValue);
+    else if constexpr (std::is_same_v<T, glm::vec2>)
+        glUniform2fv(nUniformLocation, nCount, glm::value_ptr(*pValue));
+    else if constexpr (std::is_same_v<T, glm::vec2>)
+        glUniform3fv(nUniformLocation, nCount, glm::value_ptr(*pValue));
+    else if constexpr (std::is_same_v<T, glm::vec3>)
+        glUniform4fv(nUniformLocation, nCount, glm::value_ptr(*pValue));
+    else if constexpr (std::is_same_v<T, GLint>)
+        glUniform1iv(nUniformLocation, nCount, pValue);
+    else if constexpr (std::is_same_v<T, glm::ivec2>)
+        glUniform2iv(nUniformLocation, nCount, glm::value_ptr(*pValue));
+    else if constexpr (std::is_same_v<T, glm::ivec3>)
+        glUniform3iv(nUniformLocation, nCount, glm::value_ptr(*pValue));
+    else if constexpr (std::is_same_v<T, glm::ivec4>)
+        glUniform4iv(nUniformLocation, nCount, glm::value_ptr(*pValue));
+    else if constexpr (std::is_same_v<T, GLuint>)
+        glUniform1uiv(nUniformLocation, nCount, pValue);
+    else if constexpr (std::is_same_v<T, glm::uvec2>)
+        glUniform2uiv(nUniformLocation, nCount, glm::value_ptr(*pValue));
+    else if constexpr (std::is_same_v<T, glm::uvec3>)
+        glUniform3uiv(nUniformLocation, nCount, glm::value_ptr(*pValue));
+    else if constexpr (std::is_same_v<T, glm::uvec4>)
+        glUniform4uiv(nUniformLocation, nCount, glm::value_ptr(*pValue));
+    else if constexpr (std::is_same_v<T, glm::mat2>)
+        glUniformMatrix2fv(nUniformLocation, nCount, GL_FALSE, glm::value_ptr(*pValue));
+    else if constexpr (std::is_same_v<T, glm::mat3>)
+        glUniformMatrix3fv(nUniformLocation, nCount, GL_FALSE, glm::value_ptr(*pValue));
+    else if constexpr (std::is_same_v<T, glm::mat4>)
+        glUniformMatrix4fv(nUniformLocation, nCount, GL_FALSE, glm::value_ptr(*pValue));
+    else if constexpr (std::is_same_v<T, glm::mat2x3>)
+        glUniformMatrix2x3fv(nUniformLocation, nCount, GL_FALSE, glm::value_ptr(*pValue));
+    else if constexpr (std::is_same_v<T, glm::mat3x2>)
+        glUniformMatrix3x2fv(nUniformLocation, nCount, GL_FALSE, glm::value_ptr(*pValue));
+    else if constexpr (std::is_same_v<T, glm::mat2x4>)
+        glUniformMatrix2x4fv(nUniformLocation, nCount, GL_FALSE, glm::value_ptr(*pValue));
+    else if constexpr (std::is_same_v<T, glm::mat4x2>)
+        glUniformMatrix4x2fv(nUniformLocation, nCount, GL_FALSE, glm::value_ptr(*pValue));
+    else if constexpr (std::is_same_v<T, glm::mat3x4>)
+        glUniformMatrix3x4fv(nUniformLocation, nCount, GL_FALSE, glm::value_ptr(*pValue));
+    else if constexpr (std::is_same_v<T, glm::mat4x3>)
+        glUniformMatrix4x3fv(nUniformLocation, nCount, GL_FALSE, glm::value_ptr(*pValue));
+    else
+        []<bool flag = false>() { static_assert(flag, "Uniform type is not supported"); }();
+}
+
+//==============================================================================
+//!\fn             qx::shader_program<COPYBLE>::SetUniform<T>
+//
+//!\brief  Specify the value of a uniform variable
+//!\param  pszName - the name of the uniform variable to be modified.
+//!\param  pValue  - a pointer to an array of count values that will be used to update the specified uniform variable.
+//!\param  nCount  - number of values that are to be modified.
+//!\author Khrapov
+//!\date   15.01.2021
+//==============================================================================
+template<bool COPYBLE>
+template<typename T>
+inline void base_shader_program<COPYBLE>::SetUniform(const GLchar* pszName, const T* pValue, GLsizei nCount)
 {
     SetUniform(GetUniformLocation(pszName), pValue, nCount);
 }
 
-template<>
-inline void shader_program::SetUniform(GLint nUniformLocation, const GLfloat & value)
-{
-    glUniform1f(nUniformLocation, value);
-}
-
-template<>
-inline void shader_program::SetUniform(GLint nUniformLocation, const glm::vec2 & value)
-{
-    glUniform2f(nUniformLocation, value.x, value.y);
-}
-
-template<>
-inline void shader_program::SetUniform(GLint nUniformLocation, const glm::vec3 & value)
-{
-    glUniform3f(nUniformLocation, value.x, value.y, value.z);
-}
-
-template<>
-inline void shader_program::SetUniform(GLint nUniformLocation, const glm::vec4 & value)
-{
-    glUniform4f(nUniformLocation, value.x, value.y, value.z, value.w);
-}
-
-template<>
-inline void shader_program::SetUniform(GLint nUniformLocation, const GLint & value)
-{
-    glUniform1i(nUniformLocation, value);
-}
-
-template<>
-inline void shader_program::SetUniform(GLint nUniformLocation, const glm::ivec2 & value)
-{
-    glUniform2i(nUniformLocation, value.x, value.y);
-}
-
-template<>
-inline void shader_program::SetUniform(GLint nUniformLocation, const glm::ivec3 & value)
-{
-    glUniform3i(nUniformLocation, value.x, value.y, value.z);
-}
-
-template<>
-inline void shader_program::SetUniform(GLint nUniformLocation, const glm::ivec4 & value)
-{
-    glUniform4i(nUniformLocation, value.x, value.y, value.z, value.w);
-}
-
-template<>
-inline void shader_program::SetUniform(GLint nUniformLocation, const bool& value)
-{
-    SetUniform(nUniformLocation, value ? GL_TRUE : GL_FALSE);
-}
-
+//==============================================================================
+//!\fn             qx::shader_program<COPYBLE>::SetUniform<T>
+//
+//!\brief  Specify the value of a uniform variable
+//!\param  nUniformLocation - the location of the uniform variable to be modified.
+//!\param  value            - the value of a uniform variable.
+//!\author Khrapov
+//!\date   15.01.2021
+//==============================================================================
+template<bool COPYBLE>
 template<typename T>
-inline void shader_program::SetUniform(GLint nUniformLocation, const T& value)
+inline void base_shader_program<COPYBLE>::SetUniform(GLint nUniformLocation, const T & value)
 {
-    SetUniform(nUniformLocation, &value, 1);
+    using type = std::remove_cvref_t<T>;
+    if constexpr (std::is_same_v<T, GLfloat>)
+        glUniform1f(nUniformLocation, value);
+    else if constexpr (std::is_same_v<T, glm::vec2>)
+        glUniform2f(nUniformLocation, value.x, value.y);
+    else if constexpr (std::is_same_v<T, glm::vec3>)
+        glUniform3f(nUniformLocation, value.x, value.y, value.z);
+    else if constexpr (std::is_same_v<T, glm::vec4>)
+        glUniform4f(nUniformLocation, value.x, value.y, value.z, value.w);
+    else if constexpr (std::is_same_v<T, GLint>)
+        glUniform1i(nUniformLocation, value);
+    else if constexpr (std::is_same_v<T, glm::ivec2>)
+        glUniform2i(nUniformLocation, value.x, value.y);
+    else if constexpr (std::is_same_v<T, glm::ivec3>)
+        glUniform3i(nUniformLocation, value.x, value.y, value.z);
+    else if constexpr (std::is_same_v<T, glm::ivec4>)
+        glUniform4i(nUniformLocation, value.x, value.y, value.z, value.w);
+    else if constexpr (std::is_same_v<T, bool>)
+        glUniform1i(nUniformLocation, value ? GL_TRUE : GL_FALSE);
+    else
+        SetUniform(nUniformLocation, &value, 1);
 }
 
+//==============================================================================
+//!\fn             qx::shader_program<COPYBLE>::SetUniform<T>
+//
+//!\brief  Specify the value of a uniform variable
+//!\param  pszName - the name of the uniform variable to be modified.
+//!\param  value   - the value of a uniform variable.
+//!\author Khrapov
+//!\date   15.01.2021
+//==============================================================================
+template<bool COPYBLE>
 template<typename T>
-inline void shader_program::SetUniform(const GLchar* pszName, const T& value)
+inline void base_shader_program<COPYBLE>::SetUniform(const GLchar* pszName, const T& value)
 {
     SetUniform(GetUniformLocation(pszName), value);
 }
@@ -322,7 +261,8 @@ inline void shader_program::SetUniform(const GLchar* pszName, const T& value)
 //!\author Khrapov
 //!\date   05.08.2020
 //==============================================================================
-inline GLint shader_program::GetUniformLocation(const GLchar* pszName) const
+template<bool COPYBLE>
+inline GLint base_shader_program<COPYBLE>::GetUniformLocation(const GLchar* pszName) const
 {
     GLint nLocation = glGetUniformLocation(m_nProgram, pszName);
 
@@ -352,10 +292,12 @@ inline GLint shader_program::GetUniformLocation(const GLchar* pszName) const
 //!\author  Khrapov
 //!\date    06.08.2020
 //==============================================================================
-inline void shader_program::AddInclude(const char* pszName,
-                                       GLint       nNameLength,
-                                       const char* pszText,
-                                       GLint       nTextLength)
+template<bool COPYBLE>
+inline void base_shader_program<COPYBLE>::AddInclude(
+    const char* pszName,
+    GLint       nNameLength,
+    const char* pszText,
+    GLint       nTextLength)
 {
     bool bGlslIncludeSupported = GLEW_ARB_shading_language_include;
     QX_CHECK(bGlslIncludeSupported)
@@ -372,7 +314,11 @@ inline void shader_program::AddInclude(const char* pszName,
 //!\author Khrapov
 //!\date   17.01.2020
 //==============================================================================
-inline void shader_program::DispatchCompute(GLuint nGroupsX, GLuint nGroupsY, GLuint nGroupsZ)
+template<bool COPYBLE>
+inline void base_shader_program<COPYBLE>::DispatchCompute(
+    GLuint nGroupsX,
+    GLuint nGroupsY,
+    GLuint nGroupsZ)
 {
     glDispatchCompute(nGroupsX, nGroupsY, nGroupsZ);
 }

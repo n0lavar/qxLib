@@ -31,7 +31,7 @@ inline void base_ssbo<COPYBLE>::Init(GLuint nBindingPoint, GLsizeiptr nSize, con
 
     this->Generate();
     this->Bind();
-    this->Update(nSize, pData, GL_STATIC_DRAW);
+    this->Update(nSize, pData, GL_DYNAMIC_DRAW);
     this->BindBase(nBindingPoint);
     this->Unbind();
 }

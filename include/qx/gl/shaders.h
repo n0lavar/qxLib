@@ -23,6 +23,16 @@
 namespace qx
 {
 
+enum class shader_type
+{
+    vert,   //!< vertex
+    tesc,   //!< tessellation control
+    tese,   //!< tessellation evaluation
+    geom,   //!< geometry
+    frag,   //!< fragment
+    comp    //!< compute
+};
+
 //==============================================================================
 //
 //!\class                        qx::shader_base

@@ -13,6 +13,7 @@
 #pragma once
 
 #include <qx/gl/ibuffer.h>
+#include <qx/gl/buffer_classes.h>
 #include <qx/typedefs.h>
 
 #include <memory>

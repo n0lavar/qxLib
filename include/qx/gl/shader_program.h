@@ -13,6 +13,7 @@
 #pragma once
 
 #include <qx/gl/shaders.h>
+#include <qx/gl/buffer_classes.h>
 
 #include <glew.h>
 #include <glm/gtc/type_ptr.hpp>
@@ -31,14 +32,17 @@ namespace qx
 //!\date    16.01.2020
 //
 //==============================================================================
-class shader_program
+template<bool COPYBLE>
+class base_shader_program
 {
 public:
 
-    QX_NONCOPYBLE(shader_program)
+    friend class base_shader_program;
 
-                shader_program      (void) = default;
-               ~shader_program      (void);
+    QX_NONCOPYBLE(base_shader_program)
+
+                base_shader_program (void) = default;
+               ~base_shader_program (void);
 
     void        Init                (void);
 
@@ -71,15 +75,19 @@ public:
     static void DispatchCompute     (GLuint                     nGroupsX,
                                      GLuint                     nGroupsY,
                                      GLuint                     nGroupsZ);
+    GLint       GetUniformLocation  (const GLchar             * pszName)    const;
 
 protected:
 
-    GLint       GetUniformLocation  (const GLchar             * pszName)    const;
+    template<class Derived>
+    void        Assign              (const Derived& other) { m_nProgram = other.m_nProgram; }
 
 private:
 
     GLuint m_nProgram = std::numeric_limits<GLuint>::max();
 };
+
+QX_DEFINE_BUFFER_CLASSES(shader_program)
 
 }
 
