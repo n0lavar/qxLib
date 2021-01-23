@@ -24,7 +24,7 @@ namespace qx
 template<bool COPYBLE>
 inline base_shader_program<COPYBLE>::~base_shader_program(void)
 {
-    if constexpr (COPYBLE)
+    if constexpr (!COPYBLE)
         if (m_nProgram != std::numeric_limits<GLuint>::max())
             glDeleteProgram(m_nProgram);
 }
@@ -141,9 +141,9 @@ inline void base_shader_program<COPYBLE>::SetUniform(GLint nUniformLocation, con
         glUniform1fv(nUniformLocation, nCount, pValue);
     else if constexpr (std::is_same_v<T, glm::vec2>)
         glUniform2fv(nUniformLocation, nCount, glm::value_ptr(*pValue));
-    else if constexpr (std::is_same_v<T, glm::vec2>)
-        glUniform3fv(nUniformLocation, nCount, glm::value_ptr(*pValue));
     else if constexpr (std::is_same_v<T, glm::vec3>)
+        glUniform3fv(nUniformLocation, nCount, glm::value_ptr(*pValue));
+    else if constexpr (std::is_same_v<T, glm::vec4>)
         glUniform4fv(nUniformLocation, nCount, glm::value_ptr(*pValue));
     else if constexpr (std::is_same_v<T, GLint>)
         glUniform1iv(nUniformLocation, nCount, pValue);

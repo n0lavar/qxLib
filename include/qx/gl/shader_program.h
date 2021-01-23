@@ -52,6 +52,7 @@ public:
     void        Use                 (void);
     void        Unuse               (void);
     GLint       GetParameter        (GLenum                     eParameter) const;
+    GLuint      GetBufferName       (void)                                  const;
 
     template<typename T>
     void        SetUniform          (GLint                      nUniformLocation,
@@ -77,6 +78,8 @@ public:
                                      GLuint                     nGroupsZ);
     GLint       GetUniformLocation  (const GLchar             * pszName)    const;
 
+    bool        operator==          (const base_shader_program& other) const { return m_nProgram == other.m_nProgram;  }
+
 protected:
 
     template<class Derived>
@@ -86,6 +89,9 @@ private:
 
     GLuint m_nProgram = std::numeric_limits<GLuint>::max();
 };
+
+template<bool COPYBLE>
+inline GLuint base_shader_program<COPYBLE>::GetBufferName(void) const { return m_nProgram; }
 
 QX_DEFINE_BUFFER_CLASSES(shader_program)
 

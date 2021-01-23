@@ -25,26 +25,26 @@
 
     "copyble_name" can be used as copy of "name" class, it won't be destructed
 */
-#define QX_DEFINE_BUFFER_CLASSES(name)                                                              \
-class name : public base_ ## name<false>                                                            \
-{                                                                                                   \
-public:                                                                                             \
-                        name                (void)                              = default;          \
-                        name                (name&&)                noexcept    = default;          \
-    name&               operator=           (name&&)                noexcept    = default;          \
-                        name                (const name&)                       = delete;           \
-    name&               operator=           (const name&)                       = delete;           \
-};                                                                                                  \
-                                                                                                    \
-class copyble_ ## name : public base_ ## name<true>                                                 \
-{                                                                                                   \
-public:                                                                                             \
-                        copyble_ ## name    (void)                              = default;          \
-                        copyble_ ## name    (copyble_ ## name&&)     noexcept   = default;          \
-    copyble_ ## name&   operator=           (copyble_ ## name&&)     noexcept   = default;          \
-                        copyble_ ## name    (const copyble_ ## name&)           = default;          \
-    copyble_ ## name&   operator=           (const copyble_ ## name&)           = default;          \
-                                                                                                    \
-                        copyble_ ## name    (const name& other) { Assign(other); }                  \
-    copyble_ ## name&   operator=           (const name& other) { Assign(other); return *this; }    \
+#define QX_DEFINE_BUFFER_CLASSES(name)              \
+class name : public base_ ## name<false>            \
+{                                                   \
+public:                                             \
+          name      (void)            = default;    \
+          name      (name&&) noexcept = default;    \
+    name& operator= (name&&) noexcept = default;    \
+          name      (const name&)     = delete;     \
+    name& operator= (const name&)     = delete;     \
+};                                                  \
+                                                    \
+class copyble_ ## name : public base_ ## name<true> \
+{                                                   \
+public:                                             \
+                      copyble_ ## name (void)                                   = default;                       \
+                      copyble_ ## name (copyble_ ## name&&)            noexcept = default;                       \
+    copyble_ ## name& operator=        (copyble_ ## name&&)            noexcept = default;                       \
+                      copyble_ ## name (const copyble_ ## name& other) noexcept { Assign(other); }               \
+    copyble_ ## name& operator=        (const copyble_ ## name& other) noexcept { Assign(other); return *this; } \
+                                                                                                                 \
+                      copyble_ ## name (const name& other)             noexcept { Assign(other); }               \
+    copyble_ ## name& operator=        (const name& other)             noexcept { Assign(other); return *this; } \
 };

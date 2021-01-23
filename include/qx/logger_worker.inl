@@ -111,15 +111,15 @@ inline void logger_worker::process_output(
     {
         thread_local string sMsg;
         thread_local string sFormat;
+        sMsg.clear();
 
         auto& traceUnitInfo = pUnitInfo->get_trace_unit_info();
 
-        va_list args;
-        va_start(args, svColor);
-        sMsg.clear();
-
         if (auto formatFunc = traceUnitInfo.formatFunc; formatFunc)
         {
+            va_list args;
+            va_start(args, svColor);
+
             formatFunc(
                 sMsg,
                 sFormat,
@@ -131,9 +131,9 @@ inline void logger_worker::process_output(
                 pszFunction,
                 nLine,
                 args);
-        }
 
-        va_end(args);
+            va_end(args);
+        }
 
         if (!sMsg.empty())
         {
