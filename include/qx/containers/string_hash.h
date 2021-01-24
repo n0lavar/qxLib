@@ -17,6 +17,18 @@
 namespace qx
 {
 
+namespace detail
+{
+    template<typename T>
+    concept has_zero_termonated_hash_func_overload = requires(
+        typename T::const_pointer pszString,
+        size_t                    nSeed)
+    {
+        T::hash_function(pszString, nSeed);
+    };
+
+}
+
 //==============================================================================
 //
 //!\class                qx::basic_string_hash<Traits>
@@ -40,33 +52,64 @@ public:
     constexpr basic_string_hash(void) noexcept = default;
 
     constexpr basic_string_hash(const_pointer pszString, size_type nSize) noexcept
-        : m_nHash(murmur_32_hash(pszString, nSize, Traits::hash_seed()))
+        : m_nHash(Traits::hash_function(pszString, Traits::hash_seed(), nSize))
     {
     }
 
     constexpr basic_string_hash(const_pointer pszString) noexcept
-        : m_nHash(murmur_32_hash(pszString, Traits::length(pszString), Traits::hash_seed()))
     {
+        if constexpr (detail::has_zero_termonated_hash_func_overload<Traits>)
+            m_nHash = Traits::hash_function(pszString, Traits::hash_seed());
+        else
+            m_nHash = Traits::hash_function(pszString, Traits::hash_seed(), Traits::length(pszString));
     }
 
     template <class String, class = std::enable_if_t<std::is_class_v<String>>>
     constexpr basic_string_hash(const String& sString) noexcept
-        : m_nHash(murmur_32_hash(sString.data(), sString.size(), Traits::hash_seed()))
+        : m_nHash(Traits::hash_function(sString.data(), Traits::hash_seed(), sString.size()))
     {
     }
 
-    constexpr operator u32() const noexcept
+    constexpr operator size_t() const noexcept
     {
         return m_nHash;
     }
 
 private:
 
-    u32 m_nHash = 0;
+    size_t m_nHash = 0;
 };
 
 using string_hash  = basic_string_hash<char_traits<char>>;
 using wstring_hash = basic_string_hash<char_traits<wchar_t>>;
+
+//==============================================================================
+//
+//!\struct          qx::fast_hash_string_traits<value_type>
+//!\author  Khrapov
+//!\date    25.01.2021
+//==============================================================================
+template<typename value_type>
+struct fast_hash_string_traits : public char_traits<value_type>
+{
+    static typename char_traits<value_type>::size_type hash_function(
+        typename char_traits<value_type>::const_pointer pszStr,
+        size_t nSeed,
+        typename char_traits<value_type>::size_type nLen) noexcept
+    {
+        return djb2a_hash(pszStr, static_cast<u32>(nSeed), nLen);
+    }
+
+    static typename char_traits<value_type>::size_type hash_function(
+        typename char_traits<value_type>::const_pointer pszStr,
+        size_t nSeed) noexcept
+    {
+        return djb2a_hash(pszStr, static_cast<u32>(nSeed));
+    }
+};
+
+using fast_string_hash  = basic_string_hash<fast_hash_string_traits<char>>;
+using fast_wstring_hash = basic_string_hash<fast_hash_string_traits<wchar_t>>;
 
 }
 
@@ -75,7 +118,7 @@ namespace std
     template<class Traits>
     struct hash<qx::basic_string_hash<Traits>>
     {
-        u32 operator()(const qx::basic_string_hash<Traits>& hash) const
+        size_t operator()(const qx::basic_string_hash<Traits>& hash) const
         {
             return hash;
         }

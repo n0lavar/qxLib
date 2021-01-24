@@ -4119,11 +4119,12 @@ namespace std
     template<class Traits>
     struct hash<qx::basic_string<Traits>>
     {
-        u32 operator()(const qx::basic_string<Traits>& str) const noexcept
+        size_t operator()(const qx::basic_string<Traits>& str) const noexcept
         {
-            return qx::murmur_32_hash(str.data(),
-                                      str.size(),
-                                      Traits::hash_seed());
+            return Traits::hash_function(
+                str.data(),
+                Traits::hash_seed(),
+                str.size());
         }
     };
 }

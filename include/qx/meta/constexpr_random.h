@@ -75,6 +75,6 @@ using constexpr_random = constexpr_sequence<
 
 // creates unique u32 seed for current: file, date, time (seconds) and line number
 #define QX_UNIQUE_SEED static_cast<u32>((qx::murmur_32_hash(__FILE__ __DATE__ __TIME__,     \
-                                           qx::meta::strlen(__FILE__ __DATE__ __TIME__),    \
-                                           42u)                                             \
+                                           42u,                                             \
+                                           qx::meta::strlen(__FILE__ __DATE__ __TIME__))    \
                                             + __LINE__))

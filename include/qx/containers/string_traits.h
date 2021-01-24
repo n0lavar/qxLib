@@ -23,6 +23,29 @@
 namespace qx
 {
 
+//==============================================================================
+//
+//!\struct                 qx::common_char_traits<T>
+//!\author  Khrapov
+//!\date    25.01.2021
+//==============================================================================
+template<typename T>
+struct common_char_traits
+{
+    using value_type        = T;
+    using pointer           = T*;
+    using const_pointer     = const T*;
+    using reference         = T&;
+    using const_reference   = const T&;
+    using difference_type   = std::ptrdiff_t;
+    using size_type         = size_t;
+
+    static size_type hash_function(const_pointer pszStr, size_t nSeed, size_type nLen) noexcept
+    {
+        return murmur_32_hash(pszStr, static_cast<u32>(nSeed), nLen);
+    }
+};
+
 template<typename value_type>
 struct char_traits;
 
@@ -33,16 +56,8 @@ struct char_traits;
 //!\date    30.10.2020
 //==============================================================================
 template<>
-struct char_traits<char>
+struct char_traits<char> : public common_char_traits<char>
 {
-    using value_type        = char;
-    using pointer           = char*;
-    using const_pointer     = const char*;
-    using reference         = char&;
-    using const_reference   = const char&;
-    using difference_type   = std::ptrdiff_t;
-    using size_type         = size_t;
-
     static constexpr size_type align(void) noexcept
     {
         return 16;
@@ -99,16 +114,8 @@ struct char_traits<char>
 //!\date    24.03.2020
 //==============================================================================
 template<>
-struct char_traits<wchar_t>
+struct char_traits<wchar_t> : public common_char_traits<wchar_t>
 {
-    using value_type        = wchar_t;
-    using pointer           = wchar_t*;
-    using const_pointer     = const wchar_t*;
-    using reference         = wchar_t&;
-    using const_reference   = const wchar_t&;
-    using difference_type   = std::ptrdiff_t;
-    using size_type         = size_t;
-
     static constexpr size_type align(void) noexcept
     {
         return 8;
