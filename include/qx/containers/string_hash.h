@@ -92,7 +92,7 @@ using wstring_hash = basic_string_hash<char_traits<wchar_t>>;
 template<typename value_type>
 struct fast_hash_string_traits : public char_traits<value_type>
 {
-    static typename char_traits<value_type>::size_type hash_function(
+    static constexpr typename char_traits<value_type>::size_type hash_function(
         typename char_traits<value_type>::const_pointer pszStr,
         size_t nSeed,
         typename char_traits<value_type>::size_type nLen) noexcept
@@ -100,7 +100,7 @@ struct fast_hash_string_traits : public char_traits<value_type>
         return djb2a_hash(pszStr, static_cast<u32>(nSeed), nLen);
     }
 
-    static typename char_traits<value_type>::size_type hash_function(
+    static constexpr typename char_traits<value_type>::size_type hash_function(
         typename char_traits<value_type>::const_pointer pszStr,
         size_t nSeed) noexcept
     {

@@ -40,7 +40,7 @@ struct common_char_traits
     using difference_type   = std::ptrdiff_t;
     using size_type         = size_t;
 
-    static size_type hash_function(const_pointer pszStr, size_t nSeed, size_type nLen) noexcept
+    static constexpr size_type hash_function(const_pointer pszStr, size_t nSeed, size_type nLen) noexcept
     {
         return murmur_32_hash(pszStr, static_cast<u32>(nSeed), nLen);
     }
