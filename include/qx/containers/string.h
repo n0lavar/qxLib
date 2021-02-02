@@ -131,7 +131,7 @@ public:
     template<class String, class = enable_if_string_t<String>>
     void                    assign       (const String         & str)                       noexcept;
 
-    void                    sprintf       (const_pointer          pszFormat,
+    void                    sprintf      (const_pointer          pszFormat,
                                           ...)                                              noexcept;
     void                    vsprintf     (const_pointer          pszFormat,
                                           va_list                args)                      noexcept;

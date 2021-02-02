@@ -128,15 +128,16 @@ inline void base_texture<COPYBLE>::Specify2DTexImage(
     const void  * pData,
     GLenum        eTarget)
 {
-    glTexImage2D(eTarget != -1 ? eTarget : m_eTextureTarget,
-                 level,
-                 internalformat,
-                 width,
-                 height,
-                 0,
-                 format,
-                 type,
-                 pData);
+    glTexImage2D(
+        eTarget != -1 ? eTarget : m_eTextureTarget,
+        level,
+        internalformat,
+        width,
+        height,
+        0,
+        format,
+        type,
+        pData);
 
     m_nWidth  = width;
     m_nHeight = height;
@@ -162,7 +163,13 @@ inline void base_texture<COPYBLE>::Specify2DMultisample(
     GLsizei        nHeight,
     GLboolean      bFixedsamplelocations)
 {
-    glTexImage2DMultisample(m_eTextureTarget, nSamples, GL_RGB, nWidth, nHeight, GL_TRUE);
+    glTexImage2DMultisample(
+        m_eTextureTarget,
+        nSamples,
+        GL_RGB,
+        nWidth,
+        nHeight,
+        GL_TRUE);
 
     m_nWidth  = nWidth;
     m_nHeight = nHeight;
