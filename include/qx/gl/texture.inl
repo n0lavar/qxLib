@@ -151,7 +151,11 @@ inline void base_texture<COPYBLE>::Specify2DTexImage(
 //!\param  eInternalformat       - number of color components in the texture
 //!\param  nWidth                - width of the texture image
 //!\param  nHeight               - height of the texture image
-//!\param  bFixedsamplelocations - format of the pixel data
+//!\param  bFixedSampleLocations - specifies whether the image will use identical
+//!                                sample locations and the same number of samples
+//!                                for all texels in the image, and the sample
+//!                                locations will not depend on the internal
+//!                                format or size of the image
 //!\author Khrapov
 //!\date   23.01.2020
 //==============================================================================
@@ -161,15 +165,15 @@ inline void base_texture<COPYBLE>::Specify2DMultisample(
     GLenum         eInternalformat,
     GLsizei        nWidth,
     GLsizei        nHeight,
-    GLboolean      bFixedsamplelocations)
+    GLboolean      bFixedSampleLocations)
 {
     glTexImage2DMultisample(
         m_eTextureTarget,
         nSamples,
-        GL_RGB,
+        eInternalformat,
         nWidth,
         nHeight,
-        GL_TRUE);
+        bFixedSampleLocations);
 
     m_nWidth  = nWidth;
     m_nHeight = nHeight;
