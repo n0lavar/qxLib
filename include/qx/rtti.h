@@ -14,7 +14,10 @@
 //==============================================================================
 #pragma once
 
+#include <qx/suppress_warnings.h>
+
 #include <string_view>
+#include <type_traits>
 
 namespace qx
 {
@@ -141,7 +144,44 @@ struct is_derived<rtti_base>
     }
 };
 
+//==============================================================================
+//!\fn                          qx::rtti_cast<Y>
+//
+//!\brief   Returns Y* if Y is inherited from pointer class, otherwise nullptr
+//!\details Pointer class should contain QX_RTTI_CLASS
+//!\param   pointer - unique, shader or raw pointer
+//!\retval          - Y* if Y is inherited from pointer class, otherwise nullptr
+//!\author  Khrapov
+//!\date    5.02.2021
+//==============================================================================
+template<typename Y>
+Y* rtti_cast(auto& pointer)
+{
+    QX_PUSH_SUPPRESS_MSVC_WARNINGS(4946)
+
+    if (pointer->is_derived_from<Y>())
+    {
+        if constexpr (std::is_pointer_v<std::remove_reference_t<decltype(pointer)>>)
+        {
+            return static_cast<Y*>(pointer);
+        }
+        else
+        {
+            // the class of this pointer is guaranteed to inherit from Y
+            // by is_derived_from(), reinterpret_cast is for successful compilation only
+            return reinterpret_cast<Y*>(pointer.get());
+        }
+    }
+    else
+    {
+        return nullptr;
+    }
+
+    QX_POP_SUPPRESS_WARNINGS
 }
+
+}
+
 
 #define QX_RTTI_CLASS(thisClass, superClass)                                \
                                                                             \

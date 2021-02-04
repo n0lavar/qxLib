@@ -100,6 +100,15 @@ class CDerived2_32 : public CDerived2_3
     QX_RTTI_CLASS(CDerived2_32, CDerived2_3)
 };
 
+const std::unique_ptr<CBase1>         p1      = std::make_unique<CBase1>();
+const std::unique_ptr<CDerived1_1>    p1_1    = std::make_unique<CDerived1_1>();
+const std::unique_ptr<CDerived1_2>    p1_2    = std::make_unique<CDerived1_2>();
+const std::unique_ptr<CDerived1_21>   p1_21   = std::make_unique<CDerived1_21>();
+const std::unique_ptr<CDerived1_22>   p1_22   = std::make_unique<CDerived1_22>();
+const std::unique_ptr<CDerived1_221>  p1_221  = std::make_unique<CDerived1_221>();
+const std::unique_ptr<CDerived1_222>  p1_222  = std::make_unique<CDerived1_222>();
+const std::unique_ptr<CDerived1_3>    p1_3    = std::make_unique<CDerived1_3>();
+
 
 //----------------------------------- usings -----------------------------------
 
@@ -197,11 +206,9 @@ TEST(rtti, class_id)
     EXPECT_EQ(qx::get_class_id<CClass1>(), -1);
     EXPECT_EQ(qx::get_class_id<CClass2>(), -1);
 
-    std::shared_ptr<CDerived1_21> p1 = std::make_shared<CDerived1_21>();
-
-    EXPECT_TRUE(static_cast<CBase1*>(p1.get())->get_class_id()      == qx::get_class_id<CDerived1_21>());
-    EXPECT_TRUE(static_cast<CDerived1_2*>(p1.get())->get_class_id() == qx::get_class_id<CDerived1_21>());
-    EXPECT_TRUE(p1->get_class_id()                                  == qx::get_class_id<CDerived1_21>());
+    EXPECT_TRUE(static_cast<CBase1*>(p1_21.get())->get_class_id()      == qx::get_class_id<CDerived1_21>());
+    EXPECT_TRUE(static_cast<CDerived1_2*>(p1_21.get())->get_class_id() == qx::get_class_id<CDerived1_21>());
+    EXPECT_TRUE(p1_21->get_class_id()                                  == qx::get_class_id<CDerived1_21>());
 
     std::set<int> ids;
     auto CheckId = [&ids] (int id)
@@ -228,17 +235,6 @@ TEST(rtti, class_id)
 
 TEST(rtti, is_derived_from)
 {
-    std::shared_ptr<CBase1>         p1      = std::make_shared<CBase1>();
-    std::shared_ptr<CDerived1_1>    p1_1    = std::make_shared<CDerived1_1>();
-    std::shared_ptr<CDerived1_2>    p1_2    = std::make_shared<CDerived1_2>();
-    std::shared_ptr<CDerived1_21>   p1_21   = std::make_shared<CDerived1_21>();
-    std::shared_ptr<CDerived1_22>   p1_22   = std::make_shared<CDerived1_22>();
-    std::shared_ptr<CDerived1_221>  p1_221  = std::make_shared<CDerived1_221>();
-    std::shared_ptr<CDerived1_222>  p1_222  = std::make_shared<CDerived1_222>();
-    std::shared_ptr<CDerived1_3>    p1_3    = std::make_shared<CDerived1_3>();
-
-
-
     EXPECT_TRUE (p1     ->is_derived_from<CBase1>());
     EXPECT_TRUE (p1_1   ->is_derived_from<CBase1>());
     EXPECT_TRUE (p1_2   ->is_derived_from<CBase1>());
@@ -372,24 +368,158 @@ TEST(rtti, is_derived_from)
 
 TEST(rtti, get_class_name)
 {
-    std::shared_ptr<CBase1>         p1      = std::make_shared<CBase1>();
-    std::shared_ptr<CDerived1_2>    p1_2    = std::make_shared<CDerived1_2>();
-    std::shared_ptr<CDerived1_22>   p1_21   = std::make_shared<CDerived1_22>();
-    std::shared_ptr<CDerived1_222>  p1_221  = std::make_shared<CDerived1_222>();
-
     EXPECT_STREQ(p1->get_class_name().data(),                                       "CBase1");
 
     EXPECT_STREQ(static_cast<CBase1*>(p1_2.get())->get_class_name().data(),         "CDerived1_2");
     EXPECT_STREQ(p1_2->get_class_name().data(),                                     "CDerived1_2");
 
-    EXPECT_STREQ(static_cast<CBase1*>(p1_21.get())->get_class_name().data(),        "CDerived1_22");
-    EXPECT_STREQ(static_cast<CDerived1_2*>(p1_21.get())->get_class_name().data(),   "CDerived1_22");
-    EXPECT_STREQ(p1_21->get_class_name().data(),                                    "CDerived1_22");
+    EXPECT_STREQ(static_cast<CBase1*>(p1_22.get())->get_class_name().data(),        "CDerived1_22");
+    EXPECT_STREQ(static_cast<CDerived1_2*>(p1_22.get())->get_class_name().data(),   "CDerived1_22");
+    EXPECT_STREQ(p1_22->get_class_name().data(),                                    "CDerived1_22");
 
-    EXPECT_STREQ(static_cast<CBase1*>(p1_221.get())->get_class_name().data(),       "CDerived1_222");
-    EXPECT_STREQ(static_cast<CDerived1_2*>(p1_221.get())->get_class_name().data(),  "CDerived1_222");
-    EXPECT_STREQ(static_cast<CDerived1_22*>(p1_221.get())->get_class_name().data(), "CDerived1_222");
-    EXPECT_STREQ(p1_221->get_class_name().data(),                                   "CDerived1_222");
+    EXPECT_STREQ(static_cast<CBase1*>(p1_222.get())->get_class_name().data(),       "CDerived1_222");
+    EXPECT_STREQ(static_cast<CDerived1_2*>(p1_222.get())->get_class_name().data(),  "CDerived1_222");
+    EXPECT_STREQ(static_cast<CDerived1_22*>(p1_222.get())->get_class_name().data(), "CDerived1_222");
+    EXPECT_STREQ(p1_222->get_class_name().data(),                                   "CDerived1_222");
+}
+
+TEST(rtti, rtti_cast)
+{
+    auto sharedPtr = std::make_shared<CBase1>();
+    auto rawPtr = sharedPtr.get();
+    EXPECT_TRUE(qx::rtti_cast<CBase1>(sharedPtr));
+    EXPECT_TRUE(qx::rtti_cast<CBase1>(rawPtr));
+
+
+    EXPECT_TRUE (qx::rtti_cast<CBase1>(p1     ));
+    EXPECT_TRUE (qx::rtti_cast<CBase1>(p1_1   ));
+    EXPECT_TRUE (qx::rtti_cast<CBase1>(p1_2   ));
+    EXPECT_TRUE (qx::rtti_cast<CBase1>(p1_21  ));
+    EXPECT_TRUE (qx::rtti_cast<CBase1>(p1_22  ));
+    EXPECT_TRUE (qx::rtti_cast<CBase1>(p1_221 ));
+    EXPECT_TRUE (qx::rtti_cast<CBase1>(p1_222 ));
+    EXPECT_TRUE (qx::rtti_cast<CBase1>(p1_3   ));
+
+    EXPECT_FALSE(qx::rtti_cast<CDerived1_1>(p1    ));
+    EXPECT_TRUE (qx::rtti_cast<CDerived1_1>(p1_1  ));
+    EXPECT_FALSE(qx::rtti_cast<CDerived1_1>(p1_2  ));
+    EXPECT_FALSE(qx::rtti_cast<CDerived1_1>(p1_21 ));
+    EXPECT_FALSE(qx::rtti_cast<CDerived1_1>(p1_22 ));
+    EXPECT_FALSE(qx::rtti_cast<CDerived1_1>(p1_221));
+    EXPECT_FALSE(qx::rtti_cast<CDerived1_1>(p1_222));
+    EXPECT_FALSE(qx::rtti_cast<CDerived1_1>(p1_3  ));
+
+    EXPECT_FALSE(qx::rtti_cast<CDerived1_2>(p1    ));
+    EXPECT_FALSE(qx::rtti_cast<CDerived1_2>(p1_1  ));
+    EXPECT_TRUE (qx::rtti_cast<CDerived1_2>(p1_2  ));
+    EXPECT_TRUE (qx::rtti_cast<CDerived1_2>(p1_21 ));
+    EXPECT_TRUE (qx::rtti_cast<CDerived1_2>(p1_22 ));
+    EXPECT_TRUE (qx::rtti_cast<CDerived1_2>(p1_221));
+    EXPECT_TRUE (qx::rtti_cast<CDerived1_2>(p1_222));
+    EXPECT_FALSE(qx::rtti_cast<CDerived1_2>(p1_3  ));
+
+    EXPECT_FALSE(qx::rtti_cast<CDerived1_21>(p1    ));
+    EXPECT_FALSE(qx::rtti_cast<CDerived1_21>(p1_1  ));
+    EXPECT_FALSE(qx::rtti_cast<CDerived1_21>(p1_2  ));
+    EXPECT_TRUE (qx::rtti_cast<CDerived1_21>(p1_21 ));
+    EXPECT_FALSE(qx::rtti_cast<CDerived1_21>(p1_22 ));
+    EXPECT_FALSE(qx::rtti_cast<CDerived1_21>(p1_221));
+    EXPECT_FALSE(qx::rtti_cast<CDerived1_21>(p1_222));
+    EXPECT_FALSE(qx::rtti_cast<CDerived1_21>(p1_3  ));
+
+    EXPECT_FALSE(qx::rtti_cast<CDerived1_22>(p1    ));
+    EXPECT_FALSE(qx::rtti_cast<CDerived1_22>(p1_1  ));
+    EXPECT_FALSE(qx::rtti_cast<CDerived1_22>(p1_2  ));
+    EXPECT_FALSE(qx::rtti_cast<CDerived1_22>(p1_21 ));
+    EXPECT_TRUE (qx::rtti_cast<CDerived1_22>(p1_22 ));
+    EXPECT_TRUE (qx::rtti_cast<CDerived1_22>(p1_221));
+    EXPECT_TRUE (qx::rtti_cast<CDerived1_22>(p1_222));
+    EXPECT_FALSE(qx::rtti_cast<CDerived1_22>(p1_3  ));
+
+    EXPECT_FALSE(qx::rtti_cast<CDerived1_3>(p1    ));
+    EXPECT_FALSE(qx::rtti_cast<CDerived1_3>(p1_1  ));
+    EXPECT_FALSE(qx::rtti_cast<CDerived1_3>(p1_2  ));
+    EXPECT_FALSE(qx::rtti_cast<CDerived1_3>(p1_21 ));
+    EXPECT_FALSE(qx::rtti_cast<CDerived1_3>(p1_22 ));
+    EXPECT_FALSE(qx::rtti_cast<CDerived1_3>(p1_221));
+    EXPECT_FALSE(qx::rtti_cast<CDerived1_3>(p1_222));
+    EXPECT_TRUE (qx::rtti_cast<CDerived1_3>(p1_3  ));
+
+
+
+    EXPECT_FALSE(qx::rtti_cast<CBase2>(p1     ));
+    EXPECT_FALSE(qx::rtti_cast<CBase2>(p1_1   ));
+    EXPECT_FALSE(qx::rtti_cast<CBase2>(p1_2   ));
+    EXPECT_FALSE(qx::rtti_cast<CBase2>(p1_21  ));
+    EXPECT_FALSE(qx::rtti_cast<CBase2>(p1_22  ));
+    EXPECT_FALSE(qx::rtti_cast<CBase2>(p1_221 ));
+    EXPECT_FALSE(qx::rtti_cast<CBase2>(p1_222 ));
+    EXPECT_FALSE(qx::rtti_cast<CBase2>(p1_3   ));
+
+    EXPECT_FALSE(qx::rtti_cast<CDerived2_1>(p1    ));
+    EXPECT_FALSE(qx::rtti_cast<CDerived2_1>(p1_1  ));
+    EXPECT_FALSE(qx::rtti_cast<CDerived2_1>(p1_2  ));
+    EXPECT_FALSE(qx::rtti_cast<CDerived2_1>(p1_21 ));
+    EXPECT_FALSE(qx::rtti_cast<CDerived2_1>(p1_22 ));
+    EXPECT_FALSE(qx::rtti_cast<CDerived2_1>(p1_221));
+    EXPECT_FALSE(qx::rtti_cast<CDerived2_1>(p1_222));
+    EXPECT_FALSE(qx::rtti_cast<CDerived2_1>(p1_3  ));
+
+    EXPECT_FALSE(qx::rtti_cast<CDerived2_2>(p1    ));
+    EXPECT_FALSE(qx::rtti_cast<CDerived2_2>(p1_1  ));
+    EXPECT_FALSE(qx::rtti_cast<CDerived2_2>(p1_2  ));
+    EXPECT_FALSE(qx::rtti_cast<CDerived2_2>(p1_21 ));
+    EXPECT_FALSE(qx::rtti_cast<CDerived2_2>(p1_22 ));
+    EXPECT_FALSE(qx::rtti_cast<CDerived2_2>(p1_221));
+    EXPECT_FALSE(qx::rtti_cast<CDerived2_2>(p1_222));
+    EXPECT_FALSE(qx::rtti_cast<CDerived2_2>(p1_3  ));
+
+    EXPECT_FALSE(qx::rtti_cast<CDerived2_3>(p1    ));
+    EXPECT_FALSE(qx::rtti_cast<CDerived2_3>(p1_1  ));
+    EXPECT_FALSE(qx::rtti_cast<CDerived2_3>(p1_2  ));
+    EXPECT_FALSE(qx::rtti_cast<CDerived2_3>(p1_21 ));
+    EXPECT_FALSE(qx::rtti_cast<CDerived2_3>(p1_22 ));
+    EXPECT_FALSE(qx::rtti_cast<CDerived2_3>(p1_221));
+    EXPECT_FALSE(qx::rtti_cast<CDerived2_3>(p1_222));
+    EXPECT_FALSE(qx::rtti_cast<CDerived2_3>(p1_3  ));
+
+    EXPECT_FALSE(qx::rtti_cast<CDerived2_31>(p1    ));
+    EXPECT_FALSE(qx::rtti_cast<CDerived2_31>(p1_1  ));
+    EXPECT_FALSE(qx::rtti_cast<CDerived2_31>(p1_2  ));
+    EXPECT_FALSE(qx::rtti_cast<CDerived2_31>(p1_21 ));
+    EXPECT_FALSE(qx::rtti_cast<CDerived2_31>(p1_22 ));
+    EXPECT_FALSE(qx::rtti_cast<CDerived2_31>(p1_221));
+    EXPECT_FALSE(qx::rtti_cast<CDerived2_31>(p1_222));
+    EXPECT_FALSE(qx::rtti_cast<CDerived2_31>(p1_3  ));
+
+    EXPECT_FALSE(qx::rtti_cast<CDerived2_32>(p1    ));
+    EXPECT_FALSE(qx::rtti_cast<CDerived2_32>(p1_1  ));
+    EXPECT_FALSE(qx::rtti_cast<CDerived2_32>(p1_2  ));
+    EXPECT_FALSE(qx::rtti_cast<CDerived2_32>(p1_21 ));
+    EXPECT_FALSE(qx::rtti_cast<CDerived2_32>(p1_22 ));
+    EXPECT_FALSE(qx::rtti_cast<CDerived2_32>(p1_221));
+    EXPECT_FALSE(qx::rtti_cast<CDerived2_32>(p1_222));
+    EXPECT_FALSE(qx::rtti_cast<CDerived2_32>(p1_3  ));
+
+
+
+    EXPECT_FALSE(qx::rtti_cast<CClass1>(p1    ));
+    EXPECT_FALSE(qx::rtti_cast<CClass1>(p1_1  ));
+    EXPECT_FALSE(qx::rtti_cast<CClass1>(p1_2  ));
+    EXPECT_FALSE(qx::rtti_cast<CClass1>(p1_21 ));
+    EXPECT_FALSE(qx::rtti_cast<CClass1>(p1_22 ));
+    EXPECT_FALSE(qx::rtti_cast<CClass1>(p1_221));
+    EXPECT_FALSE(qx::rtti_cast<CClass1>(p1_222));
+    EXPECT_FALSE(qx::rtti_cast<CClass1>(p1_3  ));
+
+    EXPECT_FALSE(qx::rtti_cast<CClass2>(p1    ));
+    EXPECT_FALSE(qx::rtti_cast<CClass2>(p1_1  ));
+    EXPECT_FALSE(qx::rtti_cast<CClass2>(p1_2  ));
+    EXPECT_FALSE(qx::rtti_cast<CClass2>(p1_21 ));
+    EXPECT_FALSE(qx::rtti_cast<CClass2>(p1_22 ));
+    EXPECT_FALSE(qx::rtti_cast<CClass2>(p1_221));
+    EXPECT_FALSE(qx::rtti_cast<CClass2>(p1_222));
+    EXPECT_FALSE(qx::rtti_cast<CClass2>(p1_3  ));
 }
 
 #endif
