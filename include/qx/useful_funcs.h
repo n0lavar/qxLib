@@ -21,6 +21,7 @@
 #include <algorithm>
 #include <cmath>
 #include <functional>
+#include <array>
 
 namespace qx
 {
@@ -107,6 +108,23 @@ inline void destruct(iterator start, iterator end)
         for (auto it = start; it < end; ++it)
             it->~T();
     }
+}
+
+//==============================================================================
+//!\fn                        qx::make_array<T, N>
+//
+//!\brief  Fill array with value in constructor
+//!\param  init_val - init value
+//!\retval          - filled array
+//!\author Khrapov
+//!\date   4.02.2021
+//==============================================================================
+template<typename T, size_t N>
+constexpr auto make_array(T init_val)
+{
+    std::array<T, N> ret;
+    ret.fill(init_val);
+    return ret;
 }
 
 }

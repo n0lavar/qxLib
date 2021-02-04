@@ -19,6 +19,7 @@
 #include <qx/containers/container.h>
 #include <qx/useful_macros.h>
 
+#include <algorithm>
 
 //--------------------------------- qx::between --------------------------------
 
@@ -107,5 +108,10 @@ TEST(useful_funcs, destruct)
     qx::destruct(v.begin(), v.end() - 1);
     ASSERT_EQ(DestructChecker::counter, 1);
 }
+
+//------------------------------- qx::make_array -------------------------------
+
+constexpr std::array<int, 5> TEST_ARRAY = qx::make_array<int, 5>(1);
+static_assert(std::all_of(TEST_ARRAY.cbegin(), TEST_ARRAY.cend(), [](int val) { return val == 1; }));
 
 #endif
