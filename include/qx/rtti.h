@@ -26,6 +26,9 @@ namespace detail
 {
     template<typename T>
     concept has_get_class_id_static = requires(T t) { T::get_class_id_static(); };
+
+    template<typename T, typename From>
+    concept has_is_derived_from = requires(T* t) { t->template is_derived_from<From>(); };
 }
 
 template<class C>
@@ -149,7 +152,7 @@ struct is_derived<rtti_base>
 //
 //!\brief   Returns Y* if Y is inherited from pointer class, otherwise nullptr
 //!\details Pointer class should contain QX_RTTI_CLASS
-//!\param   pointer - unique, shader or raw pointer
+//!\param   pointer - unique or shader pointer
 //!\retval          - Y* if Y is inherited from pointer class, otherwise nullptr
 //!\author  Khrapov
 //!\date    5.02.2021
@@ -159,23 +162,40 @@ Y* rtti_cast(auto& pointer)
 {
     QX_PUSH_SUPPRESS_MSVC_WARNINGS(4946)
 
-    if (pointer->is_derived_from<Y>())
-    {
-        if constexpr (std::is_pointer_v<std::remove_reference_t<decltype(pointer)>>)
-        {
-            return static_cast<Y*>(pointer);
-        }
-        else
-        {
-            // the class of this pointer is guaranteed to inherit from Y
-            // by is_derived_from(), reinterpret_cast is for successful compilation only
+    // the class of this pointer is guaranteed to inherit from Y
+    // by is_derived_from(), reinterpret_cast is for successful compilation only
+    using smart_pointer_t = typename std::remove_reference_t<decltype(pointer)>::element_type;
+    if constexpr (detail::has_is_derived_from<smart_pointer_t, Y>)
+        if (pointer && pointer->is_derived_from<Y>())
             return reinterpret_cast<Y*>(pointer.get());
-        }
-    }
-    else
-    {
-        return nullptr;
-    }
+
+    return nullptr;
+
+    QX_POP_SUPPRESS_WARNINGS
+}
+
+//==============================================================================
+//!\fn                         qx::rtti_cast<Y, X>
+//
+//!\brief   Returns Y* if Y is inherited from pointer class, otherwise nullptr
+//!\details Pointer class should contain QX_RTTI_CLASS
+//!\param   pointer - raw pointer
+//!\retval          - Y* if Y is inherited from pointer class, otherwise nullptr
+//!\author  Khrapov
+//!\date    5.02.2021
+//==============================================================================
+template<typename Y, typename X>
+Y* rtti_cast(X* pointer)
+{
+    QX_PUSH_SUPPRESS_MSVC_WARNINGS(4946)
+
+    // the class of this pointer is guaranteed to inherit from Y
+    // by is_derived_from(), reinterpret_cast is for successful compilation only
+    if constexpr (detail::has_is_derived_from<X, Y>)
+        if (pointer && pointer->is_derived_from<Y>())
+            return reinterpret_cast<Y*>(pointer);
+
+    return nullptr;
 
     QX_POP_SUPPRESS_WARNINGS
 }

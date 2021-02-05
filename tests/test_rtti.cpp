@@ -387,9 +387,14 @@ TEST(rtti, rtti_cast)
 {
     auto sharedPtr = std::make_shared<CBase1>();
     auto rawPtr = sharedPtr.get();
+    CClass1 c1;
+    CClass1* pc1 = nullptr;
+
     EXPECT_TRUE(qx::rtti_cast<CBase1>(sharedPtr));
     EXPECT_TRUE(qx::rtti_cast<CBase1>(rawPtr));
-
+    EXPECT_TRUE(qx::rtti_cast<CBase1>(sharedPtr.get()));
+    EXPECT_FALSE(qx::rtti_cast<CBase1>(&c1));
+    EXPECT_FALSE(qx::rtti_cast<CBase1>(pc1));
 
     EXPECT_TRUE (qx::rtti_cast<CBase1>(p1     ));
     EXPECT_TRUE (qx::rtti_cast<CBase1>(p1_1   ));
