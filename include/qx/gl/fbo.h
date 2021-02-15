@@ -45,18 +45,19 @@ public:
     virtual GLuint          GetBufferName   (void)                          const    override;
     virtual bool            IsGenerated     (void)                          const    override;
 
-            void            Bind            (GLenum             target);
+            void            SetTarget       (GLenum             target);
 
     template<bool COPYBLE_RBO>
             void            AttachRBO       (const base_rbo<COPYBLE_RBO>& rbo);
 
     template<bool COPYBLE_TEXTURE>
             void            AttachTexture2D (GLenum             attachment,
-                                             GLenum             texTarget,
-                                             const base_texture<COPYBLE_TEXTURE>& texture);
+                                             const base_texture<COPYBLE_TEXTURE>& texture,
+                                             GLint              nMipmapLevel = 0);
     template<bool COPYBLE_TEXTURE>
             void            AttachTexture   (GLenum             attachment,
-                                             const base_texture<COPYBLE_TEXTURE>& texture);
+                                             const base_texture<COPYBLE_TEXTURE>& texture,
+                                             GLint              nMipmapLevel = 0);
             void            CheckStatus     (void)                          const;
 
 protected:
@@ -67,6 +68,7 @@ protected:
 private:
 
     GLuint  m_nBuffer   = std::numeric_limits<GLuint>::max();
+    GLenum  m_nTarget   = GL_FRAMEBUFFER;
 };
 
 template<bool COPYBLE>

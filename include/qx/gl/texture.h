@@ -12,11 +12,10 @@
 //==============================================================================
 #pragma once
 
-#include <qx/gl/ibuffer.h>
-#include <qx/gl/buffer_classes.h>
-#include <qx/typedefs.h>
-
 #include <memory>
+#include <qx/typedefs.h>
+#include <qx/gl/buffer_classes.h>
+#include <qx/gl/ibuffer.h>
 
 namespace qx
 {
@@ -49,6 +48,7 @@ public:
     virtual GLuint  GetBufferName       (void) const    override;
     virtual bool    IsGenerated         (void) const    override;
 
+            GLenum  GetTarget           (void) const;
             GLsizei GetWidth            (void) const;
             GLsizei GetHeight           (void) const;
 
@@ -96,6 +96,8 @@ template<bool COPYBLE>
 inline GLuint  base_texture<COPYBLE>::GetBufferName (void) const { return m_nTexture; }
 template<bool COPYBLE>
 inline bool    base_texture<COPYBLE>::IsGenerated   (void) const { return m_nTexture != std::numeric_limits<GLuint>::max(); };
+template<bool COPYBLE>
+inline GLenum qx::base_texture<COPYBLE>::GetTarget  (void) const { return m_eTextureTarget; }
 template<bool COPYBLE>
 inline GLsizei base_texture<COPYBLE>::GetWidth      (void) const { return m_nWidth;   }
 template<bool COPYBLE>

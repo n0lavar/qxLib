@@ -70,7 +70,7 @@ inline void base_fbo<COPYBLE>::Delete(void)
 template<bool COPYBLE>
 inline void base_fbo<COPYBLE>::Bind(void) const
 {
-    glBindFramebuffer(GL_FRAMEBUFFER, m_nBuffer);
+    glBindFramebuffer(m_nTarget, m_nBuffer);
 }
 
 //==============================================================================
@@ -83,21 +83,21 @@ inline void base_fbo<COPYBLE>::Bind(void) const
 template<bool COPYBLE>
 inline void base_fbo<COPYBLE>::Unbind(void) const
 {
-    glBindFramebuffer(GL_FRAMEBUFFER, 0);
+    glBindFramebuffer(m_nTarget, 0);
 }
 
 //==============================================================================
-//!\fn                    qx::base_fbo<COPYBLE>::Bind
+//!\fn                  qx::base_fbo<COPYBLE>::SetTarget
 //
-//!\brief  Bind buffer with target
-//!\param  target - Target
+//!\brief  Set target type
+//!\param  target - GL_FRAMEBUFFER, GL_DRAW_FRAMEBUFFER or GL_READ_FRAMEBUFFER
 //!\author Khrapov
 //!\date   20.01.2020
 //==============================================================================
 template<bool COPYBLE>
-inline void base_fbo<COPYBLE>::Bind(GLenum target)
+inline void base_fbo<COPYBLE>::SetTarget(GLenum target)
 {
-    glBindFramebuffer(target, m_nBuffer);
+    m_nTarget = target;
 }
 
 //==============================================================================
@@ -112,19 +112,20 @@ template<bool COPYBLE>
 template<bool COPYBLE_RBO>
 inline void base_fbo<COPYBLE>::AttachRBO(const base_rbo<COPYBLE_RBO>& rbo)
 {
-    glFramebufferRenderbuffer(GL_FRAMEBUFFER,
-                              GL_DEPTH_STENCIL_ATTACHMENT,
-                              GL_RENDERBUFFER,
-                              rbo.GetBufferName());
+    glFramebufferRenderbuffer(
+        m_nTarget,
+        GL_DEPTH_STENCIL_ATTACHMENT,
+        GL_RENDERBUFFER,
+        rbo.GetBufferName());
 }
 
 //==============================================================================
 //!\fn      qx::base_fbo<COPYBLE>::AttachTexture2D<COPYBLE_TEXTURE>
 //
 //!\brief  Attache a single face of a specific MIP level to FBO
-//!\param  attachment - attachment point of the framebuffer
-//!\param  texTarget  - type of texture is expected in the texture parameter
-//!\param  texture    - fbo texture
+//!\param  attachment   - attachment point of the framebuffer
+//!\param  texture      - fbo texture
+//!\param  nMipmapLevel - mipmap level of texture
 //!\author Khrapov
 //!\date   20.01.2020
 //==============================================================================
@@ -132,23 +133,25 @@ template<bool COPYBLE>
 template<bool COPYBLE_TEXTURE>
 inline void base_fbo<COPYBLE>::AttachTexture2D(
     GLenum                               attachment,
-    GLenum                               texTarget,
-    const base_texture<COPYBLE_TEXTURE>& texture)
+    const base_texture<COPYBLE_TEXTURE>& texture,
+    GLint                                nMipmapLevel)
 {
-    glFramebufferTexture2D(GL_FRAMEBUFFER,
-                           attachment,
-                           texTarget,
-                           texture.GetBufferName(),
-                           0);
+    glFramebufferTexture2D(
+        m_nTarget,
+        attachment,
+        texture.GetTarget(),
+        texture.GetBufferName(),
+        nMipmapLevel);
 }
 
 //==============================================================================
-//!\fn       qx::base_fbo<COPYBLE>::AttachTexture<COPYBLE_TEXTURE>
+//!\fn       qx::base_fbo<COPYBLE>::AttachTexture2D<COPYBLE_TEXTURE>
 //
 //!\brief  Attache all cube map faces of a specific MIP level
 //         as an array of images (layered framebuffer)
-//!\param  attachment - attachment point of the framebuffer
-//!\param  texture    - fbo texture
+//!\param  attachment   - attachment point of the framebuffer
+//!\param  texture      - fbo texture
+//!\param  nMipmapLevel - mipmap level of texture
 //!\author Khrapov
 //!\date   20.01.2020
 //==============================================================================
@@ -156,12 +159,14 @@ template<bool COPYBLE>
 template<bool COPYBLE_TEXTURE>
 inline void base_fbo<COPYBLE>::AttachTexture(
     GLenum                               attachment,
-    const base_texture<COPYBLE_TEXTURE>& texture)
+    const base_texture<COPYBLE_TEXTURE>& texture,
+    GLint                                nMipmapLevel)
 {
-    glFramebufferTexture(GL_FRAMEBUFFER,
-                         attachment,
-                         texture.GetBufferName(),
-                         0);
+    glFramebufferTexture(
+        m_nTarget,
+        attachment,
+        texture.GetBufferName(),
+        nMipmapLevel);
 }
 
 //==============================================================================

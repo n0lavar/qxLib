@@ -12,11 +12,10 @@
 //==============================================================================
 #pragma once
 
-#include <qx/gl/shaders.h>
-#include <qx/gl/buffer_classes.h>
-
 #include <glew.h>
 #include <glm/gtc/type_ptr.hpp>
+#include <qx/gl/buffer_classes.h>
+#include <qx/gl/shaders.h>
 
 namespace qx
 {
@@ -49,8 +48,8 @@ public:
     template <GLenum ShaderType>
     void        AttachShader        (shader_base<ShaderType>  * pShader);
     bool        Link                (void);
-    void        Use                 (void);
-    void        Unuse               (void);
+    void        Use                 (void)                                  const;
+    void        Unuse               (void)                                  const;
     GLint       GetParameter        (GLenum                     eParameter) const;
     GLuint      GetBufferName       (void)                                  const;
 

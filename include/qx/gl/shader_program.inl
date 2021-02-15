@@ -88,7 +88,7 @@ inline bool base_shader_program<COPYBLE>::Link(void)
 //!\date   16.01.2020
 //==============================================================================
 template<bool COPYBLE>
-inline void base_shader_program<COPYBLE>::Use(void)
+inline void base_shader_program<COPYBLE>::Use(void) const
 {
     glUseProgram(m_nProgram);
 }
@@ -101,7 +101,7 @@ inline void base_shader_program<COPYBLE>::Use(void)
 //!\date   16.01.2020
 //==============================================================================
 template<bool COPYBLE>
-inline void base_shader_program<COPYBLE>::Unuse(void)
+inline void base_shader_program<COPYBLE>::Unuse(void) const
 {
     glUseProgram(0);
 }
