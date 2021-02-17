@@ -35,8 +35,6 @@ class base_ubo : public buffer_base<COPYBLE>
 public:
 
             base_ubo        (void) = default;
-    void    Init            (GLuint     nBindingPoint,
-                             GLsizeiptr szUBO);
 
     GLint   GetMaxSize      (void);
 

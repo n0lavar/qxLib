@@ -15,25 +15,6 @@ namespace qx
 {
 
 //==============================================================================
-//!\fn                    qx::base_ubo<COPYBLE>::Init
-//
-//!\brief  Init UBO
-//!\param  nBindingPoint - buffer binding point from the shader
-//!\param  szUBO         - buffer size
-//!\author Khrapov
-//!\date   9.01.2020
-//==============================================================================
-template<bool COPYBLE>
-inline void base_ubo<COPYBLE>::Init(GLuint nBindingPoint, GLsizeiptr szUBO)
-{
-    this->Generate();
-    this->Bind();
-    this->Update(szUBO, NULL, GL_STREAM_DRAW);
-    this->BindBase(nBindingPoint);
-    this->Unbind();
-}
-
-//==============================================================================
 //!\fn                 qx::base_ubo<COPYBLE>::GetMaxSize
 //
 //!\brief  Get max UBO size with current GPU
