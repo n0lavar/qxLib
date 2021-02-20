@@ -12,9 +12,9 @@
 //==============================================================================
 #pragma once
 
-#include <qx/gl/ibuffer.h>
-#include <qx/gl/buffer_classes.h>
 #include <qx/typedefs.h>
+#include <qx/gl/buffer_classes.h>
+#include <qx/gl/ibuffer.h>
 
 namespace qx
 {
@@ -45,7 +45,6 @@ public:
     virtual GLuint      GetBufferName       (void) const    override;
     virtual bool        IsGenerated         (void) const    override;
 
-    virtual void        BindBase            (GLuint         nIndex);
     virtual void        MemBarrier          (void);
 
     virtual void        Update              (GLsizeiptr     nSize,

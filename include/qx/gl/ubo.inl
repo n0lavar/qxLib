@@ -17,13 +17,13 @@ namespace qx
 //==============================================================================
 //!\fn                 qx::base_ubo<COPYBLE>::GetMaxSize
 //
-//!\brief  Get max UBO size with current GPU
-//!\retval max UBO size with current GPU
+//!\brief  Get max UBO size
+//!\retval max UBO size
 //!\author Khrapov
 //!\date   9.01.2020
 //==============================================================================
 template<bool COPYBLE>
-inline GLint base_ubo<COPYBLE>::GetMaxSize(void)
+inline GLint base_ubo<COPYBLE>::GetMaxSize(void) const
 {
     GLint ret;
     glGetIntegerv(GL_MAX_UNIFORM_BLOCK_SIZE, &ret);

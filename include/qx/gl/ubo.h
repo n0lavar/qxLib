@@ -12,7 +12,7 @@
 //==============================================================================
 #pragma once
 
-#include <qx/gl/buffer_base.h>
+#include <qx/gl/buffer_binding_point_base.h>
 
 namespace qx
 {
@@ -30,18 +30,22 @@ namespace qx
 //
 //==============================================================================
 template<bool COPYBLE>
-class base_ubo : public buffer_base<COPYBLE>
+class base_ubo : public buffer_binding_point_base<COPYBLE>
 {
 public:
 
             base_ubo        (void) = default;
 
-    GLint   GetMaxSize      (void);
+    GLint   GetMaxSize      (void)  const;
 
 protected:
 
     virtual GLenum      GetBufferType   (void) const override { return GL_UNIFORM_BUFFER;       }
     virtual GLbitfield  GetBarrierBit   (void) const override { return GL_UNIFORM_BARRIER_BIT;  }
+
+private:
+
+    GLuint m_nBindingPoint = std::numeric_limits<GLuint>::max();
 };
 
 QX_DEFINE_BUFFER_CLASSES(ubo)

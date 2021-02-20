@@ -12,7 +12,7 @@
 //==============================================================================
 #pragma once
 
-#include <qx/gl/buffer_base.h>
+#include <qx/gl/buffer_binding_point_base.h>
 
 namespace qx
 {
@@ -29,14 +29,13 @@ namespace qx
 //
 //==============================================================================
 template<bool COPYBLE>
-class base_ssbo : public buffer_base<COPYBLE>
+class base_ssbo : public buffer_binding_point_base<COPYBLE>
 {
 public:
 
-                        base_ssbo       (void) = default;
-    virtual void        Init            (GLuint             nBindingPoint,
-                                         GLsizeiptr         nSize,
-                                         const void       * pData = nullptr);
+                base_ssbo   (void) = default;
+
+        GLint   GetMaxSize  (void) const;
 
 protected:
 

@@ -15,25 +15,18 @@ namespace qx
 {
 
 //==============================================================================
-//!\fn                    qx::base_ssbo<COPYBLE>::Init
+//!\fn                 qx::base_ssbo<COPYBLE>::GetMaxSize
 //
-//!\brief  Init SSBO
-//!\param  nBindingPoint - shader binding point
-//!\param  nSize         - data size
-//!\param  pData         - data pointer
+//!\brief  Get max SSBO size
+//!\retval max SSBO size
 //!\author Khrapov
-//!\date   18.01.2020
+//!\date   9.01.2020
 //==============================================================================
-template<bool COPYBLE>
-inline void base_ssbo<COPYBLE>::Init(GLuint nBindingPoint, GLsizeiptr nSize, const void * pData)
+template <bool COPYBLE> inline GLint base_ssbo<COPYBLE>::GetMaxSize(void) const
 {
-    this->Delete();
-
-    this->Generate();
-    this->Bind();
-    this->Update(nSize, pData, GL_DYNAMIC_DRAW);
-    this->BindBase(nBindingPoint);
-    this->Unbind();
+    GLint ret;
+    glGetIntegerv(GL_MAX_SHADER_STORAGE_BLOCK_SIZE, &ret);
+    return ret;
 }
 
 }

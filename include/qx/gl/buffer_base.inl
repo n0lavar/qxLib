@@ -87,20 +87,6 @@ inline void buffer_base<COPYBLE>::Unbind() const
 }
 
 //==============================================================================
-//!\fn                 qx::buffer_base<COPYBLE>::BindBase
-//
-//!\brief  Bind a buffer object to an indexed buffer target from shader
-//!\param  nIndex - index
-//!\author Khrapov
-//!\date   19.01.2020
-//==============================================================================
-template<bool COPYBLE>
-inline void buffer_base<COPYBLE>::BindBase(GLuint nIndex)
-{
-    glBindBufferBase(GetBufferType(), nIndex, m_nBuffer);
-}
-
-//==============================================================================
 //!\fn                qx::buffer_base<COPYBLE>::MemBarrier
 //
 //!\brief  Defines a barrier ordering memory transactions
