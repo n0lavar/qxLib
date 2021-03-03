@@ -4,7 +4,7 @@ on: push
 
 jobs:
   ubuntu_clang_debug:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-18.04
     env:
       CXX: clang++-11
 
