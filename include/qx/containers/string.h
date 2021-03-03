@@ -12,15 +12,14 @@
 //==============================================================================
 #pragma once
 
-#include <qx/containers/container.h>
-#include <qx/containers/string_hash.h>
-#include <qx/containers/string_data.h>
-#include <qx/type_traits.h>
-
-#include <vector>
-#include <optional>
 #include <iostream>
+#include <optional>
 #include <string_view>
+#include <vector>
+#include <qx/type_traits.h>
+#include <qx/containers/container.h>
+#include <qx/containers/string_data.h>
+#include <qx/containers/string_hash.h>
 
 namespace qx
 {
@@ -60,6 +59,13 @@ enum class case_type
     upper,
 };
 
+template<typename T>
+concept string_convertable = requires(T t)
+{
+    t.cbegin();
+    t.cend();
+};
+
 //==============================================================================
 //
 //!\class                      qx::basic_string
@@ -94,9 +100,6 @@ public:
 
     static constexpr size_type npos = std::numeric_limits<size_type>::max();
 
-    template<class String>
-    using enable_if_string_t = typename std::enable_if_t<std::is_class_v<String>>;
-
     IMPL_CONTAINER(basic_string)
 
 public:
@@ -112,7 +115,7 @@ public:
                             basic_string (const basic_string   & sAnother)                  noexcept;
     template<class FwdIt>   basic_string (FwdIt                  itFirst,
                                           FwdIt                  itLast)                    noexcept;
-    template<class String, class = enable_if_string_t<String>>
+    template<string_convertable String>
                             basic_string (const String         & sAnother)                  noexcept;
 
                             ~basic_string(void)                                             noexcept;
@@ -128,7 +131,7 @@ public:
     template<class FwdIt>
     void                    assign       (FwdIt                  itFirst,
                                           FwdIt                  itLast)                    noexcept;
-    template<class String, class = enable_if_string_t<String>>
+    template<string_convertable String>
     void                    assign       (const String         & str)                       noexcept;
 
     void                    sprintf      (const_pointer          pszFormat,
@@ -181,7 +184,7 @@ public:
     template<class FwdIt>
     void                    append       (FwdIt                  itBegin,
                                           FwdIt                  itEnd)                     noexcept;
-    template<class String, class = enable_if_string_t<String>>
+    template<string_convertable String>
     void                    append       (const String         & sStr)                      noexcept;
 
     size_type               insert       (size_type              nPos,
@@ -195,7 +198,7 @@ public:
     size_type               insert       (size_type              nPos,
                                           FwdIt                  itWhatBegin,
                                           FwdIt                  itWhatEnd)                 noexcept;
-    template<class String, class = enable_if_string_t<String>>
+    template<string_convertable String>
     size_type               insert       (size_type              nPos,
                                           String                 sWhat)                     noexcept;
 
@@ -210,7 +213,7 @@ public:
     size_type               insert       (const_iterator         itPos,
                                           FwdIt                  itWhatBegin,
                                           FwdIt                  itWhatEnd)                 noexcept;
-    template<class String, class = enable_if_string_t<String>>
+    template<string_convertable String>
     size_type               insert       (const_iterator         itPos,
                                           String                 sWhat)                     noexcept;
 
@@ -236,7 +239,7 @@ public:
     template<class FwdIt>
     size_type               trim_left    (FwdIt                  itBegin,
                                           FwdIt                  itEnd)                     noexcept;
-    template<class String, class = enable_if_string_t<String>>
+    template<string_convertable String>
     size_type               trim_left    (const String         & sStr)                      noexcept;
 
     size_type               trim_right   (void)                                             noexcept;
@@ -248,7 +251,7 @@ public:
     template<class FwdIt>
     size_type               trim_right   (FwdIt                  itBegin,
                                           FwdIt                  itEnd)                     noexcept;
-    template<class String, class = enable_if_string_t<String>>
+    template<string_convertable String>
     size_type               trim_right   (const String         & sStr)                      noexcept;
 
     size_type               trim         (void)                                             noexcept;
@@ -260,7 +263,7 @@ public:
     template<class FwdIt>
     size_type               trim         (FwdIt                  itBegin,
                                           FwdIt                  itEnd)                     noexcept;
-    template<class String, class = enable_if_string_t<String>>
+    template<string_convertable String>
     size_type               trim         (const String         & sStr)                      noexcept;
 
     size_type               remove       (value_type             chSymbol,
@@ -278,7 +281,7 @@ public:
                                           FwdIt                  itEnd,
                                           size_type              nBegin     = 0,
                                           size_type              nEnd       = npos)         noexcept;
-    template<class String, class = enable_if_string_t<String>>
+    template<string_convertable String>
     size_type               remove       (const String         & sStr,
                                           size_type              nBegin     = 0,
                                           size_type              nEnd       = npos)         noexcept;
@@ -290,7 +293,7 @@ public:
     template<class FwdIt>
     bool                    remove_prefix(FwdIt                  itBegin,
                                           FwdIt                  itEnd)                     noexcept;
-    template<class String, class = enable_if_string_t<String>>
+    template<string_convertable String>
     bool                    remove_prefix(const String         & sStr)                      noexcept;
 
     bool                    remove_suffix(value_type             chSymbol)                  noexcept;
@@ -300,7 +303,7 @@ public:
     template<class FwdIt>
     bool                    remove_suffix(FwdIt                  itBegin,
                                           FwdIt                  itEnd)                     noexcept;
-    template<class String, class = enable_if_string_t<String>>
+    template<string_convertable String>
     bool                    remove_suffix(const String         & sStr)                      noexcept;
 
     size_type               remove_all   (value_type             chSymbol,
@@ -318,7 +321,7 @@ public:
                                           FwdIt                  itLast,
                                           size_type              nBegin     = 0,
                                           size_type              nEnd       = npos)         noexcept;
-    template<class String, class = enable_if_string_t<String>>
+    template<string_convertable String>
     size_type               remove_all   (const String         & sStr,
                                           size_type              nBegin     = 0,
                                           size_type              nEnd       = npos)         noexcept;
@@ -342,7 +345,7 @@ public:
     template<class FwdIt>
     int                     compare      (FwdIt                  itBegin,
                                           FwdIt                  itEnd)             const   noexcept;
-    template<class String, class = enable_if_string_t<String>>
+    template<string_convertable String>
     int                     compare      (const String         & sStr)              const   noexcept;
 
     size_type               find         (value_type             chSymbol,
@@ -360,7 +363,7 @@ public:
                                           FwdIt                  itWhatEnd,
                                           size_type              nBegin     = 0,
                                           size_type              nEnd       = npos) const   noexcept;
-    template<class String, class = enable_if_string_t<String>>
+    template<string_convertable String>
     size_type               find         (String                 sWhat,
                                           size_type              nBegin     = 0,
                                           size_type              nEnd       = npos) const   noexcept;
@@ -380,7 +383,7 @@ public:
                                           FwdIt                  itWhatEnd,
                                           size_type              nBegin     = npos,
                                           size_type              nEnd       = 0)    const   noexcept;
-    template<class String, class = enable_if_string_t<String>>
+    template<string_convertable String>
     size_type               rfind        (String                 sWhat,
                                           size_type              nBegin     = npos,
                                           size_type              nEnd       = 0)    const   noexcept;
@@ -398,7 +401,7 @@ public:
     size_type               find_first_of(FwdIt                  itWhatBegin,
                                           FwdIt                  itWhatEnd,
                                           size_type              nBegin     = 0)    const   noexcept;
-    template<class String, class = enable_if_string_t<String>>
+    template<string_convertable String>
     size_type               find_first_of(String                 sWhat,
                                           size_type              nBegin     = 0)    const   noexcept;
 
@@ -415,7 +418,7 @@ public:
     size_type               find_last_of (FwdIt                  itWhatBegin,
                                           FwdIt                  itWhatEnd,
                                           size_type              nEnd       = 0)    const   noexcept;
-    template<class String, class = enable_if_string_t<String>>
+    template<string_convertable String>
     size_type               find_last_of (String                 sWhat,
                                           size_type              nEnd       = 0)    const   noexcept;
 
@@ -432,7 +435,7 @@ public:
     size_type               find_first_not_of(FwdIt              itWhatBegin,
                                           FwdIt                  itWhatEnd,
                                           size_type              nBegin     = 0)    const   noexcept;
-    template<class String, class = enable_if_string_t<String>>
+    template<string_convertable String>
     size_type               find_first_not_of(String             sWhat,
                                           size_type              nBegin     = 0)    const   noexcept;
 
@@ -449,7 +452,7 @@ public:
     size_type               find_last_not_of(FwdIt               itWhatBegin,
                                           FwdIt                  itWhatEnd,
                                           size_type              nEnd       = 0)    const   noexcept;
-    template<class String, class = enable_if_string_t<String>>
+    template<string_convertable String>
     size_type               find_last_not_of(String              sWhat,
                                           size_type              nEnd       = 0)    const   noexcept;
 
@@ -460,7 +463,7 @@ public:
     template<class FwdIt>
     vector                  split        (FwdIt                  itSepFirst,
                                           FwdIt                  itSepLast)         const   noexcept;
-    template<class String, class = enable_if_string_t<String>>
+    template<string_convertable String>
     vector                  split        (const String         & sSeparator)        const   noexcept;
 
     bool                    starts_with  (value_type             chSymbol)          const   noexcept;
@@ -470,7 +473,7 @@ public:
     template<class FwdIt>
     bool                    starts_with  (FwdIt                  itBegin,
                                           FwdIt                  itEnd)             const   noexcept;
-    template<class String, class = enable_if_string_t<String>>
+    template<string_convertable String>
     bool                    starts_with  (const String         & sStr)              const   noexcept;
 
     bool                    ends_with    (value_type             chSymbol)          const   noexcept;
@@ -480,7 +483,7 @@ public:
     template<class FwdIt>
     bool                    ends_with    (FwdIt                  itBegin,
                                           FwdIt                  itEnd)             const   noexcept;
-    template<class String, class = enable_if_string_t<String>>
+    template<string_convertable String>
     bool                    ends_with    (const String         & sStr)              const   noexcept;
 
     bool                    contains     (value_type             chSymbol)          const   noexcept;
@@ -490,56 +493,56 @@ public:
     template<class FwdIt>
     bool                    contains     (FwdIt                  itBegin,
                                           FwdIt                  itEnd)             const   noexcept;
-    template<class String, class = enable_if_string_t<String>>
+    template<string_convertable String>
     bool                    contains     (const String         & sStr)              const   noexcept;
 
     const   basic_string &  operator=    (value_type             chSymbol)                  noexcept;
     const   basic_string &  operator=    (const_pointer          pszSource)                 noexcept;
     const   basic_string &  operator=    (basic_string        && sStr)                      noexcept;
     const   basic_string &  operator=    (const basic_string   & sStr)                      noexcept;
-    template<class String, class = enable_if_string_t<String>>
+    template<string_convertable String>
     const   basic_string &  operator=    (const String         & sStr)                      noexcept;
 
     const   basic_string &  operator+=   (value_type             chSymbol)                  noexcept;
     const   basic_string &  operator+=   (const_pointer          pszSource)                 noexcept;
     const   basic_string &  operator+=   (const basic_string   & sStr)                      noexcept;
-    template<class String, class = enable_if_string_t<String>>
+    template<string_convertable String>
     const   basic_string &  operator+=   (const String         & sStr)                      noexcept;
 
     bool                    operator==   (value_type             chSymbol)          const   noexcept;
     bool                    operator==   (const_pointer          pszSource)         const   noexcept;
     bool                    operator==   (const basic_string   & sStr)              const   noexcept;
-    template<class String, class = enable_if_string_t<String>>
+    template<string_convertable String>
     bool                    operator==   (const String         & sStr)              const   noexcept;
 
     bool                    operator!=   (value_type             chSymbol)          const   noexcept;
     bool                    operator!=   (const_pointer          pszSource)         const   noexcept;
     bool                    operator!=   (const basic_string   & sStr)              const   noexcept;
-    template<class String, class = enable_if_string_t<String>>
+    template<string_convertable String>
     bool                    operator!=   (const String         & sStr)              const   noexcept;
 
     bool                    operator<    (value_type             chSymbol)          const   noexcept;
     bool                    operator<    (const_pointer          pszSource)         const   noexcept;
     bool                    operator<    (const basic_string   & sStr)              const   noexcept;
-    template<class String, class = enable_if_string_t<String>>
+    template<string_convertable String>
     bool                    operator<    (const String         & sStr)              const   noexcept;
 
     bool                    operator<=   (value_type             chSymbol)          const   noexcept;
     bool                    operator<=   (const_pointer          pszSource)         const   noexcept;
     bool                    operator<=   (const basic_string   & sStr)              const   noexcept;
-    template<class String, class = enable_if_string_t<String>>
+    template<string_convertable String>
     bool                    operator<=   (const String         & sStr)              const   noexcept;
 
     bool                    operator>    (value_type             chSymbol)          const   noexcept;
     bool                    operator>    (const_pointer          pszSource)         const   noexcept;
     bool                    operator>    (const basic_string   & sStr)              const   noexcept;
-    template<class String, class = enable_if_string_t<String>>
+    template<string_convertable String>
     bool                    operator>    (const String         & sStr)              const   noexcept;
 
     bool                    operator>=   (value_type             chSymbol)          const   noexcept;
     bool                    operator>=   (const_pointer          pszSource)         const   noexcept;
     bool                    operator>=   (const basic_string   & sStr)              const   noexcept;
-    template<class String, class = enable_if_string_t<String>>
+    template<string_convertable String>
     bool                    operator>=   (const String         & sStr)              const   noexcept;
 
     reference               operator[]   (size_type              nSymbol)                   noexcept;
@@ -624,13 +627,13 @@ basic_string<UT> operator+ (typename UT::value_type    lhs, const basic_string<U
 template<class UT>
 basic_string<UT> operator+ (typename UT::value_type    lhs, basic_string<UT>        && rhs) noexcept _QX_STR_OP_PLUS_BODY
 
-template<class UT, class String, class = typename basic_string<UT>::template enable_if_string_t<String>>
+template<class UT, string_convertable String>
 basic_string<UT> operator+ (const basic_string<UT>   & lhs, const String             & rhs) noexcept _QX_STR_OP_PLUS_BODY
-template<class UT, class String, class = typename basic_string<UT>::template enable_if_string_t<String>>
+template<class UT, string_convertable String>
 basic_string<UT> operator+ (basic_string<UT>        && lhs, const String             & rhs) noexcept _QX_STR_OP_PLUS_BODY
-template<class UT, class String, class = typename basic_string<UT>::template enable_if_string_t<String>>
+template<class UT, string_convertable String>
 basic_string<UT> operator+ (const String             & lhs, const basic_string<UT>   & rhs) noexcept _QX_STR_OP_PLUS_BODY
-template<class UT, class String, class = typename basic_string<UT>::template enable_if_string_t<String>>
+template<class UT, string_convertable String>
 basic_string<UT> operator+ (const String             & lhs, basic_string<UT>        && rhs) noexcept _QX_STR_OP_PLUS_BODY
 
 

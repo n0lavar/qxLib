@@ -119,7 +119,7 @@ inline basic_string<Traits>::basic_string(FwdIt itFirst, FwdIt itLast) noexcept
 }
 
 //==============================================================================
-//!\fn            basic_string<Traits>::basic_string<String, >
+//!\fn             basic_string<Traits>::basic_string<String>
 //
 //!\brief  basic_string object constructor
 //!\param  sAnother - char container
@@ -127,8 +127,8 @@ inline basic_string<Traits>::basic_string(FwdIt itFirst, FwdIt itLast) noexcept
 //!\date   13.11.2020
 //==============================================================================
 template<class Traits>
-template<class String, class>
-inline basic_string<Traits>::basic_string (const String & sAnother) noexcept
+template<string_convertable String>
+inline basic_string<Traits>::basic_string(const String & sAnother) noexcept
 {
     assign(sAnother);
 }
@@ -259,7 +259,7 @@ inline void basic_string<Traits>::assign(FwdIt itFirst, FwdIt itLast) noexcept
 }
 
 //==============================================================================
-//!\fn               basic_string<Traits>::assign<String, >
+//!\fn                basic_string<Traits>::assign<String>
 //
 //!\brief  Assign by char container
 //!\param  sAnother - char container
@@ -267,7 +267,7 @@ inline void basic_string<Traits>::assign(FwdIt itFirst, FwdIt itLast) noexcept
 //!\date   13.11.2020
 //==============================================================================
 template<class Traits>
-template<class String, class>
+template<string_convertable String>
 inline void basic_string<Traits>::assign(const String& sAnother) noexcept
 {
     assign(sAnother.cbegin(), sAnother.cend());
@@ -788,7 +788,7 @@ inline void basic_string<Traits>::append(FwdIt itBegin, FwdIt itEnd) noexcept
 }
 
 //==============================================================================
-//!\fn                qx::basic_string<Traits>::append
+//!\fn             qx::basic_string<Traits>::append<String>
 //
 //!\brief  Append string to the current
 //!\param  sStr - source string
@@ -796,7 +796,7 @@ inline void basic_string<Traits>::append(FwdIt itBegin, FwdIt itEnd) noexcept
 //!\date   31.12.2020
 //==============================================================================
 template<class Traits>
-template<class String, class>
+template<string_convertable String>
 inline void basic_string<Traits>::append(const String& sStr) noexcept
 {
     append(sStr.cbegin(), sStr.cend());
@@ -932,7 +932,7 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::insert(
 }
 
 //==============================================================================
-//!\fn                qx::basic_string<Traits>::insert
+//!\fn              qx::basic_string<Traits>::insert<String>
 //
 //!\brief  Insert substring
 //!\param  nPos  - first char index
@@ -942,7 +942,7 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::insert(
 //!\date   30.10.2019
 //==============================================================================
 template<class Traits>
-template<class String, class>
+template<string_convertable String>
 inline typename basic_string<Traits>::size_type basic_string<Traits>::insert(
     size_type nPos,
     String    sWhat) noexcept
@@ -1034,7 +1034,7 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::insert(
 }
 
 //==============================================================================
-//!\fn                qx::basic_string<Traits>::insert
+//!\fn               qx::basic_string<Traits>::insert<String>
 //
 //!\brief  Insert substring
 //!\param  itPos - first char iterator
@@ -1044,7 +1044,7 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::insert(
 //!\date   30.10.2019
 //==============================================================================
 template<class Traits>
-template<class String, class>
+template<string_convertable String>
 inline typename basic_string<Traits>::size_type basic_string<Traits>::insert(
     const_iterator itPos,
     String         sWhat) noexcept
@@ -1323,7 +1323,7 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::trim_left(
 }
 
 //==============================================================================
-//!\fn           basic_string<Traits>::trim_left<String, >
+//!\fn              basic_string<Traits>::trim_left<String>
 //
 //!\brief  Trim the string to the left
 //!\param  sStr - string with symbols to delete
@@ -1332,7 +1332,7 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::trim_left(
 //!\date   24.12.2020
 //==============================================================================
 template<class Traits>
-template<class String, class>
+template<string_convertable String>
 inline typename basic_string<Traits>::size_type basic_string<Traits>::trim_left(
     const String& sStr) noexcept
 {
@@ -1467,7 +1467,7 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::trim_right
 }
 
 //==============================================================================
-//!\fn           basic_string<Traits>::trim_right<String, >
+//!\fn            basic_string<Traits>::trim_right<String>
 //
 //!\brief  Trim the string to the right
 //!\param  sStr - string with symbols to delete
@@ -1476,7 +1476,7 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::trim_right
 //!\date   24.12.2020
 //==============================================================================
 template<class Traits>
-template<class String, class>
+template<string_convertable String>
 inline typename basic_string<Traits>::size_type basic_string<Traits>::trim_right(
     const String& sStr) noexcept
 {
@@ -1608,7 +1608,7 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::trim(
 }
 
 //==============================================================================
-//!\fn              basic_string<Traits>::trim<String, >
+//!\fn                 basic_string<Traits>::trim<String>
 //
 //!\brief  Trim the string to the both sides
 //!\param  sStr - string with symbols to delete
@@ -1617,7 +1617,7 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::trim(
 //!\date   24.12.2020
 //==============================================================================
 template<class Traits>
-template<class String, class>
+template<string_convertable String>
 inline typename basic_string<Traits>::size_type basic_string<Traits>::trim(
     const String& sStr) noexcept
 {
@@ -1734,7 +1734,7 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::remove(
 }
 
 //==============================================================================
-//!\fn              qx::basic_string<Traits>::remove<String, >
+//!\fn               qx::basic_string<Traits>::remove<String>
 //
 //!\brief  Remove the first occurrence of a substring in a string
 //!\param  sStr   - string to remove
@@ -1745,7 +1745,7 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::remove(
 //!\date   02.12.2020
 //==============================================================================
 template<class Traits>
-template<class String, class>
+template<string_convertable String>
 inline typename basic_string<Traits>::size_type basic_string<Traits>::remove(
     const String& sStr,
     size_type     nBegin,
@@ -1830,7 +1830,7 @@ inline bool basic_string<Traits>::remove_prefix(
 }
 
 //==============================================================================
-//!\fn          qx::basic_string<Traits>::remove_prefix<String, >
+//!\fn            qx::basic_string<Traits>::remove_prefix<String>
 //
 //!\brief  Remove string prefix if matches
 //!\param  sStr   - string to remove
@@ -1839,7 +1839,7 @@ inline bool basic_string<Traits>::remove_prefix(
 //!\date   02.12.2020
 //==============================================================================
 template<class Traits>
-template<class String, class>
+template<string_convertable String>
 inline bool basic_string<Traits>::remove_prefix(const String& sStr) noexcept
 {
     return remove_prefix(sStr.cbegin(), sStr.cend());
@@ -1932,7 +1932,7 @@ inline bool basic_string<Traits>::remove_suffix(
 }
 
 //==============================================================================
-//!\fn          qx::basic_string<Traits>::remove_suffix<String, >
+//!\fn           qx::basic_string<Traits>::remove_suffix<String>
 //
 //!\brief  Remove string suffix if matches
 //!\param  sStr   - string to remove
@@ -1941,7 +1941,7 @@ inline bool basic_string<Traits>::remove_suffix(
 //!\date   02.12.2020
 //==============================================================================
 template<class Traits>
-template<class String, class>
+template<string_convertable String>
 inline bool basic_string<Traits>::remove_suffix(const String& sStr) noexcept
 {
     return remove_suffix(sStr.cbegin(), sStr.cend());
@@ -2060,7 +2060,7 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::remove_all
 }
 
 //==============================================================================
-//!\fn              qx::basic_string<Traits>::remove<String, >
+//!\fn               qx::basic_string<Traits>::remove<String>
 //
 //!\brief  Remove all occurrences of a substring in a string
 //!\param  sStr   - string to remove
@@ -2071,7 +2071,7 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::remove_all
 //!\date   02.12.2020
 //==============================================================================
 template<class Traits>
-template<class String, class>
+template<string_convertable String>
 inline typename basic_string<Traits>::size_type basic_string<Traits>::remove_all(
     const String& sStr,
     size_type     nBegin,
@@ -2145,9 +2145,11 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::replace_al
 //
 //!\brief  Performs a binary comparison of the characters
 //!\param  chSymbol - symbol to compare
-//!\retval          -   < 0 the first character that does not match has a lower value in this than in chSymbol
+//!\retval          -   < 0 the first character that does not match has
+//                          a lower value in this than in chSymbol
 //                        0 the contents of both strings are equal
-//                      > 0 the first character that does not match has a greater value in this than in chSymbol
+//                      > 0 the first character that does not match has
+//                          a greater value in this than in chSymbol
 //!\author Khrapov
 //!\date   30.12.2020
 //==============================================================================
@@ -2163,9 +2165,11 @@ inline int basic_string<Traits>::compare(value_type chSymbol) const noexcept
 //!\brief  Performs a binary comparison of the characters
 //!\param  pStr     - string to compare
 //!\param  nSymbols - number of symbols to compare (0 - string is zero terminated)
-//!\retval          -   < 0 the first character that does not match has a lower value in this than in pStr
+//!\retval          -   < 0 the first character that does not match has
+//                          a lower value in this than in chSymbol
 //                        0 the contents of both strings are equal
-//                      > 0 the first character that does not match has a greater value in this than in pStr
+//                      > 0 the first character that does not match has
+//                          a greater value in this than in chSymbol
 //!\author Khrapov
 //!\date   28.10.2019
 //==============================================================================
@@ -2203,9 +2207,11 @@ inline int basic_string<Traits>::compare(const basic_string& sStr) const noexcep
 //!\brief  Performs a binary comparison of the characters
 //!\param  itBegin  - string to compare begin iterator
 //!\param  itEnd    - string to compare end iterator
-//!\retval          -   < 0 the first character that does not match has a lower value in this than in [itBegin, itEnd]
+//!\retval          -   < 0 the first character that does not match has
+//                          a lower value in this than in chSymbol
 //                        0 the contents of both strings are equal
-//                      > 0 the first character that does not match has a greater value in this than in [itBegin, itEnd]
+//                      > 0 the first character that does not match has
+//                          a greater value in this than in chSymbol
 //!\author Khrapov
 //!\date   30.12.2020
 //==============================================================================
@@ -2219,18 +2225,20 @@ inline int basic_string<Traits>::compare(
 }
 
 //==============================================================================
-//!\fn          qx::basic_string<Traits>::compare<Stringm >
+//!\fn           qx::basic_string<Traits>::compare<String>
 //
 //!\brief  Performs a binary comparison of the characters
 //!\param  sStr     - string to compare
-//!\retval          -   < 0 the first character that does not match has a lower value in this than in sStr
+//!\retval          -   < 0 the first character that does not match has
+//                          a lower value in this than in chSymbol
 //                        0 the contents of both strings are equal
-//                      > 0 the first character that does not match has a greater value in this than in sStr
+//                      > 0 the first character that does not match has
+//                          a greater value in this than in chSymbol
 //!\author Khrapov
 //!\date   30.12.2020
 //==============================================================================
 template<class Traits>
-template<class String, class>
+template<string_convertable String>
 inline int basic_string<Traits>::compare(const String& sStr) const noexcept
 {
     return compare(sStr.cbegin(), sStr.cend());
@@ -2348,7 +2356,7 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::find(
 }
 
 //==============================================================================
-//!\fn                basic_string<Traits>::find<String, >
+//!\fn                 basic_string<Traits>::find<String>
 //
 //!\brief  Find substring (reverse direction)
 //!\param  sWhat  - substring
@@ -2359,7 +2367,7 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::find(
 //!\date   30.11.2020
 //==============================================================================
 template<class Traits>
-template<class String, class>
+template<string_convertable String>
 inline typename basic_string<Traits>::size_type basic_string<Traits>::find(
     String    sWhat,
     size_type nBegin,
@@ -2484,7 +2492,7 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::rfind(
 }
 
 //==============================================================================
-//!\fn                basic_string<Traits>::rfind<String, >
+//!\fn                 basic_string<Traits>::rfind<String>
 //
 //!\brief  Find substring (reverse direction)
 //!\param  sWhat  - substring
@@ -2495,7 +2503,7 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::rfind(
 //!\date   1.01.2021
 //==============================================================================
 template<class Traits>
-template<class String, class>
+template<string_convertable String>
 inline typename basic_string<Traits>::size_type basic_string<Traits>::rfind(
     String    sWhat,
     size_type nBegin,
@@ -2624,7 +2632,7 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::find_first
 }
 
 //==============================================================================
-//!\fn           qx::basic_string<Traits>::find_first_of<String, >
+//!\fn            qx::basic_string<Traits>::find_first_of<String>
 //
 //!\brief  Finds the first character equal to one of characters in the given character sequence
 //!\param  sWhat  - string identifying characters to search for
@@ -2634,7 +2642,7 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::find_first
 //!\date   2.01.2021
 //==============================================================================
 template<class Traits>
-template<class String, class>
+template<string_convertable String>
 inline typename basic_string<Traits>::size_type basic_string<Traits>::find_first_of(
     String    sWhat,
     size_type nBegin) const noexcept
@@ -2761,7 +2769,7 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::find_last_
 }
 
 //==============================================================================
-//!\fn           qx::basic_string<Traits>::find_last_of<String, >
+//!\fn            qx::basic_string<Traits>::find_last_of<String>
 //
 //!\brief  Finds the last character equal to one of characters in the given character sequence
 //!\param  sWhat - string identifying characters to search for
@@ -2771,7 +2779,7 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::find_last_
 //!\date   2.01.2021
 //==============================================================================
 template<class Traits>
-template<class String, class>
+template<string_convertable String>
 inline typename basic_string<Traits>::size_type basic_string<Traits>::find_last_of(
     String    sWhat,
     size_type nEnd) const noexcept
@@ -2904,7 +2912,7 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::find_first
 }
 
 //==============================================================================
-//!\fn         qx::basic_string<Traits>::find_first_not_of<String, >
+//!\fn          qx::basic_string<Traits>::find_first_not_of<String>
 //
 //!\brief  Finds the first character equal to none of the characters in the given character sequence
 //!\param  sWhat  - string identifying characters to search for
@@ -2914,7 +2922,7 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::find_first
 //!\date   2.01.2021
 //==============================================================================
 template<class Traits>
-template<class String, class>
+template<string_convertable String>
 inline typename basic_string<Traits>::size_type basic_string<Traits>::find_first_not_of(
     String    sWhat,
     size_type nBegin) const noexcept
@@ -3047,7 +3055,7 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::find_last_
 }
 
 //==============================================================================
-//!\fn         qx::basic_string<Traits>::find_last_not_of<String, >
+//!\fn          qx::basic_string<Traits>::find_last_not_of<String>
 //
 //!\brief  Finds the last character equal to none of the characters in the given character sequence
 //!\param  sWhat - string identifying characters to search for
@@ -3057,7 +3065,7 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::find_last_
 //!\date   2.01.2021
 //==============================================================================
 template<class Traits>
-template<class String, class>
+template<string_convertable String>
 inline typename basic_string<Traits>::size_type basic_string<Traits>::find_last_not_of(
     String    sWhat,
     size_type nEnd) const noexcept
@@ -3174,7 +3182,7 @@ inline typename basic_string<Traits>::vector basic_string<Traits>::split(
 }
 
 //==============================================================================
-//!\fn                    basic_string<Traits>::split
+//!\fn               basic_string<Traits>::split<String>
 //
 //!\brief  Split string by separator
 //!\param  sSeparator - separator string
@@ -3183,7 +3191,7 @@ inline typename basic_string<Traits>::vector basic_string<Traits>::split(
 //!\date   13.11.2020
 //==============================================================================
 template<class Traits>
-template<class String, class>
+template<string_convertable String>
 inline typename basic_string<Traits>::vector basic_string<Traits>::split(
     const String& sSeparator) const noexcept
 {
@@ -3276,7 +3284,7 @@ inline bool basic_string<Traits>::starts_with(
 }
 
 //==============================================================================
-//!\fn            basic_string<Traits>::starts_with<String, >
+//!\fn             basic_string<Traits>::starts_with<String>
 //
 //!\brief  Check if current string starts with string
 //!\param  sStr - string container to check
@@ -3285,7 +3293,7 @@ inline bool basic_string<Traits>::starts_with(
 //!\date   13.11.2020
 //==============================================================================
 template<class Traits>
-template<class String, class>
+template<string_convertable String>
 inline bool basic_string<Traits>::starts_with(const String& sStr) const noexcept
 {
     return starts_with(sStr.cbegin(), sStr.cend());
@@ -3377,7 +3385,7 @@ inline bool basic_string<Traits>::ends_with(
 }
 
 //==============================================================================
-//!\fn             basic_string<Traits>::ends_with<String, >
+//!\fn              basic_string<Traits>::ends_with<String>
 //
 //!\brief  Check if current string ends with string
 //!\param  sStr - string container to check
@@ -3386,7 +3394,7 @@ inline bool basic_string<Traits>::ends_with(
 //!\date   13.11.2020
 //==============================================================================
 template<class Traits>
-template<class String, class>
+template<string_convertable String>
 inline bool basic_string<Traits>::ends_with(const String& sStr) const noexcept
 {
     return ends_with(sStr.cbegin(), sStr.cend());
@@ -3461,7 +3469,7 @@ inline bool basic_string<Traits>::contains(
 }
 
 //==============================================================================
-//!\fn              basic_string<Traits>::contains<String, >
+//!\fn               basic_string<Traits>::contains<String>
 //
 //!\brief  Check if string contains substring. Equal to find != npos
 //!\param  sStr - string to check
@@ -3470,7 +3478,7 @@ inline bool basic_string<Traits>::contains(
 //!\date   30.11.2020
 //==============================================================================
 template<class Traits>
-template<class String, class>
+template<string_convertable String>
 inline bool basic_string<Traits>::contains(const String& sStr) const noexcept
 {
     return find(sStr) != npos;
@@ -3508,7 +3516,7 @@ inline const basic_string<Traits>& basic_string<Traits>::operator=(
     return *this;
 }
 template<class Traits>
-template<class String, class>
+template<string_convertable String>
 inline const basic_string<Traits>& basic_string<Traits>::operator=(
     const String& sStr) noexcept
 {
@@ -3540,7 +3548,7 @@ inline const basic_string<Traits>& basic_string<Traits>::operator+=(
     return *this;
 }
 template<class Traits>
-template<class String, class>
+template<string_convertable String>
 inline const basic_string<Traits>& basic_string<Traits>::operator+=(
     const String& sStr) noexcept
 {
@@ -3569,7 +3577,7 @@ inline bool basic_string<Traits>::operator==(
     return compare(sStr.data()) == 0;
 }
 template<class Traits>
-template<class String, class>
+template<string_convertable String>
 inline bool basic_string<Traits>::operator==(
     const String& sStr) const noexcept
 {
@@ -3597,7 +3605,7 @@ inline bool basic_string<Traits>::operator!=(
     return compare(sStr.data()) != 0;
 }
 template<class Traits>
-template<class String, class>
+template<string_convertable String>
 inline bool basic_string<Traits>::operator!=(
     const String& sStr) const noexcept
 {
@@ -3625,7 +3633,7 @@ inline bool basic_string<Traits>::operator<(
     return compare(sStr.data()) < 0;
 }
 template<class Traits>
-template<class String, class>
+template<string_convertable String>
 inline bool basic_string<Traits>::operator<(
     const String& sStr) const noexcept
 {
@@ -3653,7 +3661,7 @@ inline bool basic_string<Traits>::operator<=(
     return compare(sStr.data()) <= 0;
 }
 template<class Traits>
-template<class String, class>
+template<string_convertable String>
 inline bool basic_string<Traits>::operator<=(
     const String& sStr) const noexcept
 {
@@ -3681,7 +3689,7 @@ inline bool basic_string<Traits>::operator>(
     return compare(sStr.data()) > 0;
 }
 template<class Traits>
-template<class String, class>
+template<string_convertable String>
 inline bool basic_string<Traits>::operator>(
     const String& sStr) const noexcept
 {
@@ -3709,7 +3717,7 @@ inline bool basic_string<Traits>::operator>=(
     return compare(sStr.data()) >= 0;
 }
 template<class Traits>
-template<class String, class>
+template<string_convertable String>
 inline bool basic_string<Traits>::operator>=(
     const String& sStr) const noexcept
 {
