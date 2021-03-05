@@ -98,6 +98,14 @@ inline shared_proxy<Data, SynchronizationPrimitive>::~shared_proxy()
         unlock_synchronization_primitive(m_pSynchronizationPrimitive);
 }
 
+//==============================================================================
+//!\fn    shared_proxy<Data, SynchronizationPrimitive>::operator Data&
+//
+//!\brief  operator Data&
+//!\retval  - data reference
+//!\author Khrapov
+//!\date   5.03.2021
+//==============================================================================
 template <class Data, class SynchronizationPrimitive>
 inline shared_proxy<Data, SynchronizationPrimitive>::operator Data&(void) noexcept
 {
