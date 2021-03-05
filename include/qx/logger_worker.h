@@ -12,8 +12,9 @@
 //==============================================================================
 #pragma once
 
-#include <qx/thread_worker.h>
 #include <qx/logger.h>
+#include <qx/threads_shared.h>
+#include <qx/thread_worker.h>
 
 #include <memory>
 #include <queue>
@@ -67,16 +68,13 @@ private:
 
 private:
 
-    std::atomic_flag                    m_bFlushing;
+    std::atomic_flag            m_bFlushing;
 
-    std::unique_ptr<logger>             m_pLogger;
-    std::chrono::milliseconds           m_CheckPeriod = std::chrono::milliseconds(500);
+    std::unique_ptr<logger>     m_pLogger;
+    std::chrono::milliseconds   m_CheckPeriod = std::chrono::milliseconds(500);
 
-    std::queue<log_line>                m_ConsoleLogsQueue;
-    std::mutex                          m_mtxConsoleLogsQueue;
-
-    std::unordered_map<string, string>  m_FileLogsQueue;    // file name and text
-    std::mutex                          m_mtxFileLogsQueue;
+    threads_shared<std::queue<log_line>>                m_ConsoleLogsQueue;
+    threads_shared<std::unordered_map<string, string>>  m_FileLogsQueue;    // file name and text
 };
 
 }

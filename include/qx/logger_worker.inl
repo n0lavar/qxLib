@@ -139,16 +139,13 @@ inline void logger_worker::process_output(
         {
             if (eLogLevel >= traceUnitInfo.eFileLevel)
             {
-                std::lock_guard lock(m_mtxFileLogsQueue);
-                m_FileLogsQueue[traceUnitInfo.sLogFileName] += sMsg;
+                auto queue = m_FileLogsQueue.lock();
+                (*queue)[traceUnitInfo.sLogFileName] += sMsg;
                 pUnitInfo->set_wrote_to_file();
             }
 
             if (eLogLevel >= traceUnitInfo.eConsoleLevel)
-            {
-                std::lock_guard lock(m_mtxConsoleLogsQueue);
-                m_ConsoleLogsQueue.push({ std::move(sMsg), svColor });
-            }
+                m_ConsoleLogsQueue.lock()->push({ std::move(sMsg), svColor });
         }
     }
 }
@@ -216,15 +213,17 @@ inline void logger_worker::process_console(void)
 {
     auto get_log_line = [this]() -> log_line
     {
-        std::lock_guard lock(m_mtxConsoleLogsQueue);
-        auto log = m_ConsoleLogsQueue.front();
-        m_ConsoleLogsQueue.pop();
+        auto queue = m_ConsoleLogsQueue.lock();
+        auto log = queue->front();
+        queue->pop();
         return std::move(log);
     };
 
-    m_mtxConsoleLogsQueue.lock();
-    size_t nStartSize = m_ConsoleLogsQueue.size();
-    m_mtxConsoleLogsQueue.unlock();
+    size_t nStartSize = 0;
+    {
+        auto queue = m_ConsoleLogsQueue.lock();
+        nStartSize = queue->size();
+    }
 
     for (size_t i = 0; i < nStartSize; i++)
     {
@@ -242,24 +241,25 @@ inline void logger_worker::process_console(void)
 //==============================================================================
 inline void logger_worker::process_file(void)
 {
-    m_mtxFileLogsQueue.lock();
-
-    bool bEmpty = std::all_of(
-        m_FileLogsQueue.cbegin(),
-        m_FileLogsQueue.cend(),
-        [](const auto& pair) { return pair.second.empty(); });
-
-    m_mtxFileLogsQueue.unlock();
+    bool bEmpty = false;
+    {
+        auto queue = m_FileLogsQueue.lock();
+        bEmpty = std::all_of(
+            queue->cbegin(),
+            queue->cend(),
+            [](const auto& pair) { return pair.second.empty(); });
+    }
 
     if (!bEmpty)
     {
         std::unordered_map<string, string> logs;
 
-        m_mtxFileLogsQueue.lock();
-        logs = m_FileLogsQueue;
-        for (auto& [sFile, sText] : m_FileLogsQueue)
-            sText.clear();
-        m_mtxFileLogsQueue.unlock();
+        {
+            auto queue = m_FileLogsQueue.lock();
+            logs = *queue;
+            for (auto& [sFile, sText] : *queue)
+                sText.clear();
+        }
 
         for (auto& [sFile, sText] : logs)
             if (!sFile.empty() && !sText.empty())
