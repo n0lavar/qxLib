@@ -99,51 +99,63 @@ inline shared_proxy<Data, SynchronizationPrimitive>::~shared_proxy()
 }
 
 //==============================================================================
-//!\fn    shared_proxy<Data, SynchronizationPrimitive>::operator Data&
+//!\fn      shared_proxy<Data, SynchronizationPrimitive>::operator->
 //
-//!\brief  operator Data&
-//!\retval  - data reference
+//!\brief  operator->
+//!\retval  - data pointer
 //!\author Khrapov
-//!\date   5.03.2021
+//!\date   6.03.2021
 //==============================================================================
 template <class Data, class SynchronizationPrimitive>
-inline shared_proxy<Data, SynchronizationPrimitive>::operator Data&(void) noexcept
+inline Data* shared_proxy<Data, SynchronizationPrimitive>::operator->(
+    void) noexcept
+{
+    return m_pData;
+}
+
+//==============================================================================
+//!\fn      shared_proxy<Data, SynchronizationPrimitive>::operator->
+//
+//!\brief  const operator->
+//!\retval  - data const pointer
+//!\author Khrapov
+//!\date   6.03.2021
+//==============================================================================
+template <class Data, class SynchronizationPrimitive>
+inline const Data* shared_proxy<Data, SynchronizationPrimitive>::operator->(
+    void) const noexcept
+{
+    return m_pData;
+}
+
+//==============================================================================
+//!\fn      shared_proxy<Data, SynchronizationPrimitive>::operator*
+//
+//!\brief  operator*
+//!\retval  - data reference
+//!\author Khrapov
+//!\date   6.03.2021
+//==============================================================================
+template <class Data, class SynchronizationPrimitive>
+inline Data& shared_proxy<Data, SynchronizationPrimitive>::operator*(
+    void) noexcept
 {
     return *m_pData;
 }
 
 //==============================================================================
-//!\fn    qx::shared_proxy<Data, SynchronizationPrimitive>::operator=
+//!\fn      shared_proxy<Data, SynchronizationPrimitive>::operator*
 //
-//!\brief  Assign by data object
-//!\param  data - data object
-//!\retval      - this object reference
+//!\brief  const operator*
+//!\retval  - data const reference
 //!\author Khrapov
-//!\date   5.03.2021
+//!\date   6.03.2021
 //==============================================================================
 template <class Data, class SynchronizationPrimitive>
-inline shared_proxy<Data, SynchronizationPrimitive>&
-    shared_proxy<Data, SynchronizationPrimitive>::operator=(const Data& data)
+inline const Data& shared_proxy<Data, SynchronizationPrimitive>::operator*(
+    void) const noexcept
 {
-    *m_pData = data;
-    return *this;
-}
-
-//==============================================================================
-//!\fn    qx::shared_proxy<Data, SynchronizationPrimitive>::operator=
-//
-//!\brief  Assign by data object
-//!\param  data - data object
-//!\retval      - this object reference
-//!\author Khrapov
-//!\date   5.03.2021
-//==============================================================================
-template <class Data, class SynchronizationPrimitive>
-inline shared_proxy<Data, SynchronizationPrimitive>&
-    shared_proxy<Data, SynchronizationPrimitive>::operator=(Data&& data)
-{
-    *m_pData = std::move(data);
-    return *this;
+    return *m_pData;
 }
 
 

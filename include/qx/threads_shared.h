@@ -12,8 +12,9 @@
 //==============================================================================
 #pragma once
 
-#include <mutex>
 #include <qx/useful_macros.h>
+
+#include <mutex>
 
 namespace qx
 {
@@ -53,9 +54,10 @@ public:
     shared_proxy&   operator=       (const shared_proxy&)   = delete;
 
                     ~shared_proxy   (void);
-                    operator Data&  (void) noexcept;
-    shared_proxy  & operator=       (const Data   & data);
-    shared_proxy  & operator=       (Data        && data);
+    Data          * operator->      (void)          noexcept;
+    const Data    * operator->      (void) const    noexcept;
+    Data          & operator*       (void)          noexcept;
+    const Data    & operator*       (void) const    noexcept;
 
 private:
     SynchronizationPrimitive  * m_pSynchronizationPrimitive = nullptr;

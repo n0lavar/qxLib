@@ -79,10 +79,10 @@ TEST(threads_shared, construct)
             {
                 auto data = sharedData.lock();
                 std::cout << "thread_setting_0: locked\n";
-                data = TEST_DATA_0;
-                ASSERT_EQ(static_cast<STestStruct>(data), TEST_DATA_0);
+                *data = TEST_DATA_0;
+                ASSERT_EQ(*data, TEST_DATA_0);
                 std::this_thread::sleep_for(std::chrono::microseconds(distribution(generator)));
-                ASSERT_EQ(static_cast<STestStruct>(data), TEST_DATA_0);
+                ASSERT_EQ(*data, TEST_DATA_0);
             }
         }
     };
@@ -98,10 +98,10 @@ TEST(threads_shared, construct)
             {
                 auto data = sharedData.lock();
                 std::cout << "thread_setting_1: locked\n";
-                data = TEST_DATA_1;
-                ASSERT_EQ(static_cast<STestStruct>(data), TEST_DATA_1);
+                *data = TEST_DATA_1;
+                ASSERT_EQ(*data, TEST_DATA_1);
                 std::this_thread::sleep_for(std::chrono::microseconds(distribution(generator)));
-                ASSERT_EQ(static_cast<STestStruct>(data), TEST_DATA_1);
+                ASSERT_EQ(*data, TEST_DATA_1);
             }
         }
     };
@@ -119,10 +119,10 @@ TEST(threads_shared, construct)
                 if (pair.first)
                 {
                     std::cout << "thread_setting_2: locked\n";
-                    pair.second = TEST_DATA_2;
-                    ASSERT_EQ(static_cast<STestStruct>(pair.second), TEST_DATA_2);
+                    *pair.second = TEST_DATA_2;
+                    ASSERT_EQ(*pair.second, TEST_DATA_2);
                     std::this_thread::sleep_for(std::chrono::microseconds(distribution(generator)));
-                    ASSERT_EQ(static_cast<STestStruct>(pair.second), TEST_DATA_2);
+                    ASSERT_EQ(*pair.second, TEST_DATA_2);
                 }
                 else
                 {
