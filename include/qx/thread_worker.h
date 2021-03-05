@@ -12,9 +12,9 @@
 //==============================================================================
 #pragma once
 
-#include <thread>
 #include <atomic>
 #include <mutex>
+#include <thread>
 
 namespace qx
 {
@@ -77,7 +77,7 @@ inline void                        thread_worker::thread_on_started     ()      
 inline void                        thread_worker::thread_on_stopped     ()       { }
 inline thread_worker::thread_state thread_worker::thread_get_state      () const { return m_eThreadState.load(std::memory_order_acquire); }
 inline bool                        thread_worker::thread_is_terminating () const { return m_bThreadTerminating.load(std::memory_order_acquire); }
-inline bool                        thread_worker::thread_is_running     () const { return thread_get_state() != thread_worker::thread_state::inactive; }
+inline bool                        thread_worker::thread_is_running     () const { return thread_get_state() != thread_state::inactive; }
 inline std::thread::id             thread_worker::thread_get_id         () const { return m_Thread.get_id(); }
 
 }

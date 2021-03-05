@@ -110,3 +110,7 @@ QX_POP_SUPPRESS_WARNINGS
 #ifndef QX_TEST_ASSERT
     #define QX_TEST_ASSERT 1
 #endif
+
+#ifndef QX_TEST_THREADS_SHARED
+    #define QX_TEST_THREADS_SHARED 1
+#endif
