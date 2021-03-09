@@ -15,7 +15,7 @@
 #include <qx/rtti.h>
 
 #include <functional>
-#include <set>
+#include <vector>
 
 namespace qx
 {
@@ -92,7 +92,7 @@ public:
 
 private:
 
-    std::set<observer*> m_Observers;
+    std::vector<observer*> m_Observers;
 };
 
 //==============================================================================
@@ -120,7 +120,7 @@ public:
 
 private:
 
-    std::set<subject::token> m_Tokens;
+    std::vector<subject::token> m_Tokens;
 };
 
 }

@@ -116,8 +116,16 @@ inline bool subject::token::operator<(const token& other) const noexcept
 //==============================================================================
 inline subject::token subject::attach(observer * pObserver)
 {
-    m_Observers.insert(pObserver);
-    return token(this, pObserver);
+    if (std::find(
+        m_Observers.begin(),
+        m_Observers.end(),
+        pObserver) == m_Observers.end())
+    {
+        m_Observers.push_back(pObserver);
+        return token(this, pObserver);
+    }
+    else
+        return token();
 }
 
 //==============================================================================
@@ -130,7 +138,10 @@ inline subject::token subject::attach(observer * pObserver)
 //==============================================================================
 inline void subject::detach(observer * pObserver) noexcept
 {
-    m_Observers.erase(pObserver);
+    m_Observers.erase(std::remove(
+        m_Observers.begin(),
+        m_Observers.end(),
+        pObserver), m_Observers.end());
 }
 
 //==============================================================================
@@ -176,12 +187,21 @@ inline void subject::notify(const notify_func<TObserver>& func)
 //==============================================================================
 inline void observer::attach_to(subject * pSubject)
 {
-    auto _token = std::move(pSubject->attach(this));
-    const auto ret = m_Tokens.insert(std::move(_token));
-
-    // reattachment protection
-    if (!ret.second)
-        _token.reset();
+    auto subjectToken = std::move(pSubject->attach(this));
+    if (subjectToken.m_pObserver && subjectToken.m_pSubject)
+    {
+        if (std::find(
+            m_Tokens.begin(),
+            m_Tokens.end(),
+            subjectToken) == m_Tokens.end())
+        {
+            m_Tokens.push_back(std::move(subjectToken));
+        }
+        else
+        {
+            subjectToken.reset();
+        }
+    }
 }
 
 //==============================================================================
