@@ -2,7 +2,7 @@
 //
 //!\file                           observer.h
 //
-//!\brief       Contains qx::pSubject and qx::observer classes
+//!\brief       Contains qx::subject and qx::observer classes
 //!\details     ~
 //
 //!\author      Khrapov
@@ -69,7 +69,7 @@ private:
 //
 //!\class                      qx::base_subject
 //
-//!\brief   Base pSubject class
+//!\brief   Base subject class
 //!\details Allows to avoid template parameter for base logic
 //
 //!\author  Khrapov
@@ -111,7 +111,7 @@ private:
 
 //==============================================================================
 //
-//!\class                    qx::pSubject<TObserver>
+//!\class                    qx::subject<TObserver>
 //
 //!\brief   Class maintains a list of its dependents, called observers,
 //          and notifies them automatically of any state changes
@@ -184,9 +184,9 @@ public:
 //
 //!\class                           qx::observer
 //
-//!\brief   qx::pSubject class event observers
+//!\brief   qx::subject class event observers
 //!\details The lifetime of objects of this class must be less than the lifetime
-//          of the corresponding qx::pSubject object
+//          of the corresponding qx::subject object
 //
 //!\author  Khrapov
 //!\date    6.03.2021

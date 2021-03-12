@@ -2,7 +2,7 @@
 //
 //!\file                          observer.inl
 //
-//!\brief       Contains qx::pSubject and qx::observer classes
+//!\brief       Contains qx::subject and qx::observer classes
 //!\details     ~
 //
 //!\author      Khrapov
@@ -14,13 +14,13 @@
 namespace qx
 {
 
-//----------------------------- qx::pSubject::token -----------------------------
+//----------------------------- qx::subject::token -----------------------------
 
 //==============================================================================
 //!\fn                         qx::token::token
 //
 //!\brief  token object constructor
-//!\param  pSubject  - corresponding pSubject pointer
+//!\param  pSubject  - corresponding subject pointer
 //!\param  pObserver - corresponding observer pointer
 //!\author Khrapov
 //!\date   6.03.2021
@@ -34,7 +34,7 @@ inline token::token(base_subject* pSubject, observer* pObserver) noexcept
 //==============================================================================
 //!\fn                         qx::token::reset
 //
-//!\brief  Reset token. Token won't unsubscribe observer from pSubject in destructor
+//!\brief  Reset token. Token won't unsubscribe observer from subject in destructor
 //!\author Khrapov
 //!\date   6.03.2021
 //==============================================================================
@@ -103,14 +103,14 @@ inline bool token::operator==(const token& other) const noexcept
 
 
 
-//--------------------------------- qx::pSubject --------------------------------
+//--------------------------------- qx::subject --------------------------------
 
 //==============================================================================
-//!\fn                        qx::pSubject::attach
+//!\fn                        qx::subject::attach
 //
-//!\brief  Attach observer to this pSubject
+//!\brief  Attach observer to this subject
 //!\param  pObserver - observer pointer
-//!\retval           - token for autodetaching observer from this pSubject
+//!\retval           - token for autodetaching observer from this subject
 //!\author Khrapov
 //!\date   6.03.2021
 //==============================================================================
@@ -129,9 +129,9 @@ inline token base_subject::attach(observer * pObserver)
 }
 
 //==============================================================================
-//!\fn                        qx::pSubject::detach
+//!\fn                        qx::subject::detach
 //
-//!\brief  Detach observer from this pSubject
+//!\brief  Detach observer from this subject
 //!\param  pObserver - observer pointer
 //!\author Khrapov
 //!\date   6.03.2021
@@ -200,10 +200,10 @@ inline base_subject::~base_subject(void) noexcept
 }
 
 //==============================================================================
-//!\fn                   qx::pSubject::get_num_observers
+//!\fn                   qx::subject::get_num_observers
 //
-//!\brief  Get number of observers attached to this pSubject
-//!\retval  - number of observers attached to this pSubject
+//!\brief  Get number of observers attached to this subject
+//!\retval  - number of observers attached to this subject
 //!\author Khrapov
 //!\date   6.03.2021
 //==============================================================================
@@ -370,7 +370,7 @@ const TObserver& subject<TObserver>::const_base_iterator<TBaseIterator>::operato
 //!\fn                      qx::observer::attach_to
 //
 //!\brief  Attach this observer to subject
-//!\param  pSubject - pSubject pointer
+//!\param  pSubject - subject pointer
 //!\author Khrapov
 //!\date   6.03.2021
 //==============================================================================
@@ -396,8 +396,8 @@ inline void observer::attach_to(base_subject * pSubject)
 //==============================================================================
 //!\fn                     qx::observer::detach_from
 //
-//!\brief  Detach this observer from pSubject
-//!\param  pSubject - pSubject pointer
+//!\brief  Detach this observer from subject
+//!\param  pSubject - subject pointer
 //!\author Khrapov
 //!\date   6.03.2021
 //==============================================================================
