@@ -18,206 +18,314 @@
 
 #include <qx/observer.h>
 
+#include <memory>
 #include <string>
 
-class TestObserver1 : public qx::observer
-{
-    QX_RTTI_CLASS(TestObserver1, qx::observer)
-
-public:
-    static constexpr std::string_view OBSERVER = "TestObserver1: caught ";
-
-    void EventHandler11(std::string_view svSubjectName)
-    {
-        sLastMsg = std::string(OBSERVER) + "EventHandler11 " + std::string(svSubjectName);
-    }
-
-    void EventHandler12(std::string_view svSubjectName)
-    {
-        sLastMsg = std::string(OBSERVER) + "EventHandler12 " + std::string(svSubjectName);
-    }
-
-    std::string sLastMsg;
-};
-
-class TestObserver2 : public qx::observer
-{
-    QX_RTTI_CLASS(TestObserver2, qx::observer)
-
-public:
-
-    static constexpr std::string_view OBSERVER = "TestObserver2: caught ";
-
-    void EventHandler21(std::string_view svSubjectName)
-    {
-        sLastMsg = std::string(OBSERVER) + "EventHandler21 " + std::string(svSubjectName);
-    }
-
-    void EventHandler22(std::string_view svSubjectName)
-    {
-        sLastMsg = std::string(OBSERVER) + "EventHandler22 " + std::string(svSubjectName);
-    }
-
-    std::string sLastMsg;
-};
-
-class ISubjectForObserver1
-{
-public:
-    virtual ~ISubjectForObserver1() = 0 {}
-    virtual void EmitEvent11() = 0;
-    virtual void EmitEvent12() = 0;
-};
-
-class ISubjectForObserver2
-{
-public:
-    virtual ~ISubjectForObserver2() = 0 {}
-    virtual void EmitEvent21() = 0;
-    virtual void EmitEvent22() = 0;
-};
-
-class TestSubject1
-    : public qx::subject
-    , public ISubjectForObserver1
-    , public ISubjectForObserver2
+class TestObserver : public qx::observer
 {
 public:
 
-    static constexpr std::string_view SUBJECT = "from TestSubject1";
+    virtual int get_num_observer() const = 0;
 
-    virtual void EmitEvent11() override
+    void EventHandler1(std::string_view svSubjectName)
     {
-        notify<TestObserver1>([](auto* pObserver)
-        {
-            pObserver->EventHandler11(SUBJECT);
-        });
+        sLastMsg = std::string("TestObserver")
+            + std::to_string(get_num_observer())
+            + ": caught event 1 from "
+            + std::string(svSubjectName);
     }
 
-    virtual void EmitEvent12() override
+    void EventHandler2(std::string_view svSubjectName) const
     {
-        notify<TestObserver1>([](auto* pObserver)
-        {
-            pObserver->EventHandler12(SUBJECT);
-        });
+        sLastMsg = std::string("TestObserver")
+            + std::to_string(get_num_observer())
+            + ": caught event 2 from "
+            + std::string(svSubjectName);
     }
 
-    virtual void EmitEvent21() override
+    std::string_view GetLastMsg() const
     {
-        notify<TestObserver2>([](auto* pObserver)
-        {
-            pObserver->EventHandler21(SUBJECT);
-        });
+        return sLastMsg;
     }
 
-    virtual void EmitEvent22() override
+    void ClearLastMsg()
     {
-        notify<TestObserver2>([](auto* pObserver)
-        {
-            pObserver->EventHandler22(SUBJECT);
-        });
+        sLastMsg.clear();
+    }
+
+private:
+
+    mutable std::string sLastMsg;
+};
+
+class TestObserver1 : public TestObserver
+{
+    virtual int get_num_observer() const override
+    {
+        return 1;
     }
 };
 
-class TestSubject2
-    : public qx::subject
-    , public ISubjectForObserver2
+class TestObserver2 : public TestObserver
+{
+    virtual int get_num_observer() const override
+    {
+        return 2;
+    }
+};
 
+class TestObserver3 : public TestObserver
+{
+    virtual int get_num_observer() const override
+    {
+        return 3;
+    }
+};
+
+class TestSubject : public qx::subject<TestObserver>
 {
 public:
 
-    static constexpr std::string_view SUBJECT = "from TestSubject2";
+    static constexpr std::string_view SUBJECT = "TestSubject";
 
-    virtual void EmitEvent21() override
+    // non-const forward
+    std::vector<int> EmitEvent1Forward()
     {
-        notify<TestObserver2>([](auto* pObserver)
+        std::vector<int> ret;
+        for (auto it = begin(); it != end(); ++it)
         {
-            pObserver->EventHandler21(SUBJECT);
-        });
+            it->EventHandler1(SUBJECT);
+            ret.push_back(it->get_num_observer());
+        }
+        return ret;
     }
 
-    virtual void EmitEvent22() override
+    // non-const backward
+    std::vector<int> EmitEvent1Backward()
     {
-        notify<TestObserver2>([](auto* pObserver)
+        std::vector<int> ret;
+        for (auto it = rbegin(); it != rend(); ++it)
         {
-            pObserver->EventHandler22(SUBJECT);
-        });
+            it->EventHandler1(SUBJECT);
+            ret.push_back(it->get_num_observer());
+        }
+        return ret;
+    }
+
+    // const forward
+    std::vector<int> EmitEvent2Forward() const
+    {
+        std::vector<int> ret;
+        for (auto it = cbegin(); it != cend(); ++it)
+        {
+            it->EventHandler2(SUBJECT);
+            ret.push_back(it->get_num_observer());
+        }
+        return ret;
+    }
+
+    // const backward
+    std::vector<int> EmitEvent2Backward() const
+    {
+        std::vector<int> ret;
+        for (auto it = crbegin(); it != crend(); ++it)
+        {
+            it->EventHandler2(SUBJECT);
+            ret.push_back(it->get_num_observer());
+        }
+        return ret;
     }
 };
 
-
-TEST(observer, main)
+class TestObserverClass : public ::testing::Test
 {
-    TestSubject1 subject1;
-    EXPECT_EQ(subject1.get_num_observers(), 0);
+protected:
 
-    TestSubject2 subject2;
+    /* init protected members here */
+    TestObserverClass()
+    {
+    }
+
+    /* called before every test */
+    void SetUp() override
+    {
+        pSubject = std::make_unique<TestSubject>();
+        EXPECT_EQ(pSubject->get_num_observers(), 0);
+
+        pObserver1 = std::make_unique<TestObserver1>();
+        pObserver1->attach_to(pSubject.get());
+        EXPECT_EQ(pSubject->get_num_observers(), 1);
+
+        pObserver2 = std::make_unique<TestObserver2>();
+        pObserver2->attach_to(pSubject.get());
+        EXPECT_EQ(pSubject->get_num_observers(), 2);
+
+        pObserver3 = std::make_unique<TestObserver3>();
+        pObserver3->attach_to(pSubject.get());
+        EXPECT_EQ(pSubject->get_num_observers(), 3);
+    }
+
+    /* called after every test */
+    void TearDown() override
+    {
+    }
+
+protected:
+
+    std::unique_ptr<TestSubject> pSubject;
+    std::unique_ptr<TestObserver1> pObserver1;
+    std::unique_ptr<TestObserver2> pObserver2;
+    std::unique_ptr<TestObserver3> pObserver3;
+};
+
+TEST_F(TestObserverClass, events)
+{
+    auto check_observers = [this](int nEvent, auto funcEmit, std::vector<int> expect)
+    {
+        pObserver1->ClearLastMsg();
+        pObserver2->ClearLastMsg();
+        pObserver3->ClearLastMsg();
+
+        // check order
+        EXPECT_EQ(funcEmit(), expect);
+
+        // check msgs
+        EXPECT_STREQ(
+            pObserver1->GetLastMsg().data(),
+            std::string("TestObserver1: caught event " + std::to_string(nEvent) + " from TestSubject").data());
+
+        EXPECT_STREQ(
+            pObserver2->GetLastMsg().data(),
+            std::string("TestObserver2: caught event " + std::to_string(nEvent) + " from TestSubject").data());
+
+        EXPECT_STREQ(
+            pObserver3->GetLastMsg().data(),
+            std::string("TestObserver3: caught event " + std::to_string(nEvent) + " from TestSubject").data());
+    };
+
+    check_observers(1, [this](){ return pSubject->EmitEvent1Forward(); },  { 1, 2, 3 });
+    check_observers(1, [this](){ return pSubject->EmitEvent1Backward(); }, { 3, 2, 1 });
+    check_observers(2, [this](){ return pSubject->EmitEvent2Forward(); },  { 1, 2, 3 });
+    check_observers(2, [this](){ return pSubject->EmitEvent2Backward(); }, { 3, 2, 1 });
+}
+
+TEST_F(TestObserverClass, reattachment)
+{
+    EXPECT_EQ(pSubject->get_num_observers(), 3);
+
+    pObserver1->attach_to(pSubject.get());
+    EXPECT_EQ(pSubject->get_num_observers(), 3);
+
+    pObserver2->attach_to(pSubject.get());
+    EXPECT_EQ(pSubject->get_num_observers(), 3);
+
+    pObserver3->attach_to(pSubject.get());
+    EXPECT_EQ(pSubject->get_num_observers(), 3);
+}
+
+TEST_F(TestObserverClass, detaching)
+{
+    EXPECT_EQ(pSubject->get_num_observers(), 3);
+
+    pObserver1->detach_from(pSubject.get());
+    EXPECT_EQ(pSubject->get_num_observers(), 2);
+
+    pObserver2->detach_from(pSubject.get());
+    EXPECT_EQ(pSubject->get_num_observers(), 1);
+
+    pObserver3->detach_from(pSubject.get());
+    EXPECT_EQ(pSubject->get_num_observers(), 0);
+}
+
+TEST_F(TestObserverClass, detaching_all)
+{
+    EXPECT_EQ(pSubject->get_num_observers(), 3);
+
+    TestSubject subject2;
+    pObserver1->attach_to(&subject2);
+    pObserver2->attach_to(&subject2);
+    EXPECT_EQ(subject2.get_num_observers(), 2);
+
+    pObserver1->detach_from_all();
+    EXPECT_EQ(pSubject->get_num_observers(), 2);
+    EXPECT_EQ(subject2.get_num_observers(), 1);
+
+    pObserver2->detach_from_all();
+    EXPECT_EQ(pSubject->get_num_observers(), 1);
     EXPECT_EQ(subject2.get_num_observers(), 0);
+
+    pObserver3->detach_from_all();
+    EXPECT_EQ(pSubject->get_num_observers(), 0);
+    EXPECT_EQ(subject2.get_num_observers(), 0);
+}
+
+TEST_F(TestObserverClass, observer_destructing_auto_detaching)
+{
+    EXPECT_EQ(pSubject->get_num_observers(), 3);
+
+    {
+        TestObserver1 observer1;
+        observer1.attach_to(pSubject.get());
+        EXPECT_EQ(pSubject->get_num_observers(), 4);
+
+        TestObserver2 observer2;
+        observer2.attach_to(pSubject.get());
+        EXPECT_EQ(pSubject->get_num_observers(), 5);
+
+        TestObserver3 observer3;
+        observer3.attach_to(pSubject.get());
+        EXPECT_EQ(pSubject->get_num_observers(), 6);
+    }
+
+    EXPECT_EQ(pSubject->get_num_observers(), 3);
+}
+
+TEST_F(TestObserverClass, detaching_while_iterating)
+{
+    std::vector<int> nums;
 
     TestObserver1 observer1;
-    observer1.attach_to(&subject1);
-    EXPECT_EQ(subject1.get_num_observers(), 1);
-    EXPECT_EQ(subject2.get_num_observers(), 0);
+    observer1.attach_to(pSubject.get());
+    EXPECT_EQ(pSubject->get_num_observers(), 4);
 
+    TestObserver2 observer2;
+    observer2.attach_to(pSubject.get());
+    EXPECT_EQ(pSubject->get_num_observers(), 5);
+
+    // detach all observers with number 2
+    for (auto& observer : *pSubject)
     {
-        TestObserver2 observer2;
-        observer2.attach_to(&subject1);
-        EXPECT_EQ(subject1.get_num_observers(), 2);
-        EXPECT_EQ(subject2.get_num_observers(), 0);
-
-        observer2.attach_to(&subject2);
-        EXPECT_EQ(subject1.get_num_observers(), 2);
-        EXPECT_EQ(subject2.get_num_observers(), 1);
-
-        // check reattachment protection
-        observer2.attach_to(&subject2);
-        EXPECT_EQ(subject1.get_num_observers(), 2);
-        EXPECT_EQ(subject2.get_num_observers(), 1);
-
-        subject1.EmitEvent11();
-        EXPECT_STREQ(observer1.sLastMsg.data(), "TestObserver1: caught EventHandler11 from TestSubject1");
-        EXPECT_STREQ(observer2.sLastMsg.data(), "");
-        observer1.sLastMsg.clear();
-        observer2.sLastMsg.clear();
-
-        subject1.EmitEvent12();
-        EXPECT_STREQ(observer1.sLastMsg.data(), "TestObserver1: caught EventHandler12 from TestSubject1");
-        EXPECT_STREQ(observer2.sLastMsg.data(), "");
-        observer1.sLastMsg.clear();
-        observer2.sLastMsg.clear();
-
-        subject1.EmitEvent21();
-        EXPECT_STREQ(observer1.sLastMsg.data(), "");
-        EXPECT_STREQ(observer2.sLastMsg.data(), "TestObserver2: caught EventHandler21 from TestSubject1");
-        observer1.sLastMsg.clear();
-        observer2.sLastMsg.clear();
-
-        subject1.EmitEvent22();
-        EXPECT_STREQ(observer1.sLastMsg.data(), "");
-        EXPECT_STREQ(observer2.sLastMsg.data(), "TestObserver2: caught EventHandler22 from TestSubject1");
-        observer1.sLastMsg.clear();
-        observer2.sLastMsg.clear();
-
-        subject2.EmitEvent21();
-        EXPECT_STREQ(observer1.sLastMsg.data(), "");
-        EXPECT_STREQ(observer2.sLastMsg.data(), "TestObserver2: caught EventHandler21 from TestSubject2");
-        observer1.sLastMsg.clear();
-        observer2.sLastMsg.clear();
-
-        subject2.EmitEvent22();
-        EXPECT_STREQ(observer1.sLastMsg.data(), "");
-        EXPECT_STREQ(observer2.sLastMsg.data(), "TestObserver2: caught EventHandler22 from TestSubject2");
-        observer1.sLastMsg.clear();
-        observer2.sLastMsg.clear();
+        // number of observers are constant during iterating
+        // detached observers are replaced with nullptr
+        EXPECT_EQ(pSubject->get_num_observers(), 5);
+        nums.push_back(observer.get_num_observer());
+        if (nums.back() == 2)
+            observer.detach_from(pSubject.get());
     }
 
-    // check tokens detached observer2 from subjects
-    EXPECT_EQ(subject1.get_num_observers(), 1);
-    EXPECT_EQ(subject2.get_num_observers(), 0);
+    // with destructing of last iterator all nullptrs removed
+    EXPECT_EQ(pSubject->get_num_observers(), 3);
+    EXPECT_EQ(nums, std::vector<int>({ 1, 2, 3, 1, 2 }));
+}
 
-    observer1.detach_from(&subject1);
-    EXPECT_EQ(subject1.get_num_observers(), 0);
-    EXPECT_EQ(subject2.get_num_observers(), 0);
+TEST_F(TestObserverClass, subject_destructing_auto_detaching)
+{
+    {
+        TestSubject subject;
+
+        pObserver1->attach_to(&subject);
+        EXPECT_EQ(pObserver1->get_num_subjects_attached_to(), 2);
+
+        pObserver2->attach_to(&subject);
+        EXPECT_EQ(pObserver2->get_num_subjects_attached_to(), 2);
+
+        pObserver3->attach_to(&subject);
+        EXPECT_EQ(pObserver3->get_num_subjects_attached_to(), 2);
+    }
+
+    EXPECT_EQ(pObserver1->get_num_subjects_attached_to(), 1);
+    EXPECT_EQ(pObserver2->get_num_subjects_attached_to(), 1);
+    EXPECT_EQ(pObserver3->get_num_subjects_attached_to(), 1);
 }
 
 #endif

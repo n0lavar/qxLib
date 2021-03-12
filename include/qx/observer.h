@@ -2,7 +2,7 @@
 //
 //!\file                           observer.h
 //
-//!\brief       Contains qx::subject and qx::observer classes
+//!\brief       Contains qx::pSubject and qx::observer classes
 //!\details     ~
 //
 //!\author      Khrapov
@@ -12,115 +12,200 @@
 //==============================================================================
 #pragma once
 
-#include <qx/rtti.h>
+#include <qx/useful_macros.h>
 
-#include <functional>
+#include <algorithm>
 #include <vector>
 
 namespace qx
 {
 
 class observer;
-
-template<class TObserver>
-using notify_func = std::function<void(TObserver*)>;
+class base_subject;
 
 //==============================================================================
 //
-//!\class                           qx::subject
+//!\class                          qx::token
 //
-//!\brief   Class maintains a list of its dependents, called observers,
-//          and notifies them automatically of any state changes
-//          by calling notify<T>
-//!\details Tokens are used to automatically detach when the observer
+//!\details Tokens are used to automatically detach observer when the observer
 //          object is destroyed
+//!\details ~
 //
 //!\author  Khrapov
-//!\date    6.03.2021
+//!\date    10.03.2021
 //
 //==============================================================================
-class subject
+class token
+{
+    friend base_subject;
+    friend observer;
+
+private:
+
+            token       (base_subject * pSubject,
+                         observer     * pObserver)      noexcept;
+
+    void    reset       (void)                          noexcept;
+
+public:
+
+            token       (token&&        other)          noexcept;
+    token & operator=   (token&&        other)          noexcept;
+            token       (const token&)                  noexcept = delete;
+    token & operator=   (const token&)                  noexcept = delete;
+
+            token       (void)                          noexcept = default;
+            ~token      (void)                          noexcept;
+
+    bool    operator==  (const token  & other)  const   noexcept;
+
+private:
+
+    base_subject    * m_pSubject  = nullptr;
+    observer        * m_pObserver = nullptr;
+};
+
+//==============================================================================
+//
+//!\class                      qx::base_subject
+//
+//!\brief   Base pSubject class
+//!\details Allows to avoid template parameter for base logic
+//
+//!\author  Khrapov
+//!\date    10.03.2021
+//
+//==============================================================================
+class base_subject
 {
 public:
 
-    class token
-    {
-        friend subject;
-        friend observer;
+    using observers_container = std::vector<observer*>;
 
-    private:
-
-                token       (subject  * pSubject,
-                             observer * pObserver) noexcept;
-
-        void    reset       (void)          noexcept;
-
-    public:
-
-                token       (token&& other) noexcept;
-        token & operator=   (token&& other) noexcept;
-                token       (const token&)  noexcept = delete;
-        token & operator=   (const token&)  noexcept = delete;
-
-                token       (void)          noexcept = default;
-                ~token      (void)          noexcept;
-
-        bool    operator<   (const token& other) const noexcept;
-
-    private:
-
-        subject   * m_pSubject  = nullptr;
-        observer  * m_pObserver = nullptr;
-    };
-
+    template<typename TObserver>
+    friend class subject;
     friend token;
     friend observer;
 
 private:
 
-    token   attach  (observer * pObserver);
-    void    detach  (observer * pObserver) noexcept;
+    token   attach                  (observer * pObserver);
+    void    detach                  (observer * pObserver) noexcept;
+    void    on_iterator_destructed  (void)  noexcept;
+    void    on_iterator_constructed (void)  noexcept;
 
 public:
 
-    virtual ~subject(void) noexcept = default;
+    QX_NONCOPYBLE(base_subject)
 
-    template<class TObserver>
-    void    notify  (const notify_func<TObserver>& func);
+            base_subject        (void) = default;
+    virtual ~base_subject       (void) noexcept = 0;
 
     size_t  get_num_observers   (void) const noexcept;
 
 private:
 
-    std::vector<observer*> m_Observers;
+    observers_container m_Observers;
+    size_t              m_nIterators = 0;
+};
+
+//==============================================================================
+//
+//!\class                    qx::pSubject<TObserver>
+//
+//!\brief   Class maintains a list of its dependents, called observers,
+//          and notifies them automatically of any state changes
+//!\details ~
+//
+//!\author  Khrapov
+//!\date    6.03.2021
+//
+//==============================================================================
+template<class TObserver>
+class subject : public base_subject
+{
+    template<class TBaseIterator>
+    class base_iterator : public TBaseIterator
+    {
+    public:
+
+        base_iterator   (void) noexcept;
+        base_iterator   (const TBaseIterator  & other,
+                         subject              * pSubject)   noexcept;
+        base_iterator   (const base_iterator  & other)      noexcept;
+        base_iterator   (base_iterator&&)                   noexcept = default;
+        ~base_iterator  (void)                              noexcept;
+
+        TObserver * operator->  (void)  noexcept;
+        TObserver & operator*   (void)  noexcept;
+
+    private:
+
+        void        init        (void)  noexcept;
+
+    private:
+
+        subject* m_pSubject = nullptr;
+    };
+
+    template<class TBaseIterator>
+    class const_base_iterator : public TBaseIterator
+    {
+    public:
+
+        const TObserver* operator-> (void) const noexcept;
+        const TObserver& operator*  (void) const noexcept;
+    };
+
+public:
+
+    using iterator               = base_iterator<observers_container::iterator>;
+    using const_iterator         = const_base_iterator<observers_container::const_iterator>;
+    using reverse_iterator       = base_iterator<observers_container::reverse_iterator>;
+    using const_reverse_iterator = const_base_iterator<observers_container::const_reverse_iterator>;
+
+public:
+
+    auto begin   (void)       noexcept { return iterator(m_Observers.begin(), this); }
+    auto begin   (void) const noexcept { return const_iterator(m_Observers.cbegin()); }
+    auto cbegin  (void) const noexcept { return const_iterator(m_Observers.cbegin()); }
+    auto end     (void)       noexcept { return iterator(m_Observers.end(), this); }
+    auto end     (void) const noexcept { return const_iterator(m_Observers.cend()); }
+    auto cend    (void) const noexcept { return const_iterator(m_Observers.cend()); }
+    auto rbegin  (void)       noexcept { return reverse_iterator(m_Observers.rbegin(), this); }
+    auto rbegin  (void) const noexcept { return const_reverse_iterator(m_Observers.crbegin()); }
+    auto crbegin (void) const noexcept { return const_reverse_iterator(m_Observers.crbegin()); }
+    auto rend    (void)       noexcept { return reverse_iterator(m_Observers.rend(), this); }
+    auto rend    (void) const noexcept { return const_reverse_iterator(m_Observers.crend()); }
+    auto crend   (void) const noexcept { return const_reverse_iterator(m_Observers.crend()); }
 };
 
 //==============================================================================
 //
 //!\class                           qx::observer
 //
-//!\brief   qx::subject class event observers
+//!\brief   qx::pSubject class event observers
 //!\details The lifetime of objects of this class must be less than the lifetime
-//          of the corresponding qx::subject object
+//          of the corresponding qx::pSubject object
 //
 //!\author  Khrapov
 //!\date    6.03.2021
 //
 //==============================================================================
-class observer : public rtti_base
+class observer
 {
-    QX_RTTI_CLASS(observer, rtti_base)
-
 public:
 
-    virtual ~observer   (void) = 0 {}
+    virtual ~observer                       (void) = 0 {}
 
-    void attach_to      (subject* pSubject);
-    void detach_from    (subject* pSubject);
+    void    attach_to                       (base_subject * pSubject);
+    void    detach_from                     (base_subject * pSubject);
+    void    detach_from_all                 (void);
+    size_t  get_num_subjects_attached_to    (void) const;
 
 private:
 
-    std::vector<subject::token> m_Tokens;
+    std::vector<token> m_Tokens;
 };
 
 }

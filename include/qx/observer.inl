@@ -2,7 +2,7 @@
 //
 //!\file                          observer.inl
 //
-//!\brief       Contains qx::subject and qx::observer classes
+//!\brief       Contains qx::pSubject and qx::observer classes
 //!\details     ~
 //
 //!\author      Khrapov
@@ -14,52 +14,52 @@
 namespace qx
 {
 
-//----------------------------- qx::subject::token -----------------------------
+//----------------------------- qx::pSubject::token -----------------------------
 
 //==============================================================================
-//!\fn                     qx::subject::token::token
+//!\fn                         qx::token::token
 //
 //!\brief  token object constructor
-//!\param  pSubject  - corresponding subject pointer
+//!\param  pSubject  - corresponding pSubject pointer
 //!\param  pObserver - corresponding observer pointer
 //!\author Khrapov
 //!\date   6.03.2021
 //==============================================================================
-inline subject::token::token(subject* pSubject, observer* pObserver) noexcept
+inline token::token(base_subject* pSubject, observer* pObserver) noexcept
     : m_pSubject (pSubject)
     , m_pObserver(pObserver)
 {
 }
 
 //==============================================================================
-//!\fn                     qx::subject::token::reset
+//!\fn                         qx::token::reset
 //
-//!\brief  Reset token. Token won't unsubscribe observer from subject in destructor
+//!\brief  Reset token. Token won't unsubscribe observer from pSubject in destructor
 //!\author Khrapov
 //!\date   6.03.2021
 //==============================================================================
-inline void subject::token::reset(void) noexcept
+inline void token::reset(void) noexcept
 {
     m_pSubject  = nullptr;
     m_pObserver = nullptr;
 }
 
 //==============================================================================
-//!\fn                     qx::subject::token::token
+//!\fn                         qx::token::token
 //
 //!\brief  token object constructor
 //!\param  other - other token object
 //!\author Khrapov
 //!\date   6.03.2021
 //==============================================================================
-inline subject::token::token(token&& other) noexcept
+inline token::token(token&& other) noexcept
 {
     std::swap(m_pSubject,  other.m_pSubject);
     std::swap(m_pObserver, other.m_pObserver);
 }
 
 //==============================================================================
-//!\fn                   qx::subject::token::operator=
+//!\fn                       qx::token::operator=
 //
 //!\brief  Assign by other token object
 //!\param  other - other token object
@@ -67,7 +67,7 @@ inline subject::token::token(token&& other) noexcept
 //!\author Khrapov
 //!\date   6.03.2021
 //==============================================================================
-inline subject::token& subject::token::operator=(token&& other) noexcept
+inline token& token::operator=(token&& other) noexcept
 {
     std::swap(m_pSubject,  other.m_pSubject);
     std::swap(m_pObserver, other.m_pObserver);
@@ -75,46 +75,46 @@ inline subject::token& subject::token::operator=(token&& other) noexcept
 }
 
 //==============================================================================
-//!\fn                     qx::subject::token::~token
+//!\fn                         qx::token::~token
 //
 //!\brief  token object destructor
 //!\author Khrapov
 //!\date   6.03.2021
 //==============================================================================
-inline subject::token::~token() noexcept
+inline token::~token() noexcept
 {
     if (m_pSubject && m_pObserver)
         m_pSubject->detach(m_pObserver);
 }
 
 //==============================================================================
-//!\fn                   qx::subject::token::operator<
+//!\fn                       qx::token::operator==
 //
-//!\brief  operator<
+//!\brief  operator==
 //!\param  other - other token object
-//!\retval       - true if this less then other
+//!\retval       - true tokens are equal
 //!\author Khrapov
 //!\date   6.03.2021
 //==============================================================================
-inline bool subject::token::operator<(const token& other) const noexcept
+inline bool token::operator==(const token& other) const noexcept
 {
-    return m_pSubject < other.m_pSubject;
+    return m_pSubject == other.m_pSubject && m_pObserver == other.m_pObserver;
 }
 
 
 
-//--------------------------------- qx::subject --------------------------------
+//--------------------------------- qx::pSubject --------------------------------
 
 //==============================================================================
-//!\fn                        qx::subject::attach
+//!\fn                        qx::pSubject::attach
 //
-//!\brief  Attach observer to this subject
+//!\brief  Attach observer to this pSubject
 //!\param  pObserver - observer pointer
-//!\retval           - token for autodetaching observer from this subject
+//!\retval           - token for autodetaching observer from this pSubject
 //!\author Khrapov
 //!\date   6.03.2021
 //==============================================================================
-inline subject::token subject::attach(observer * pObserver)
+inline token base_subject::attach(observer * pObserver)
 {
     if (std::find(
         m_Observers.begin(),
@@ -129,48 +129,237 @@ inline subject::token subject::attach(observer * pObserver)
 }
 
 //==============================================================================
-//!\fn                        qx::subject::detach
+//!\fn                        qx::pSubject::detach
 //
-//!\brief  Detach observer from this subject
+//!\brief  Detach observer from this pSubject
 //!\param  pObserver - observer pointer
 //!\author Khrapov
 //!\date   6.03.2021
 //==============================================================================
-inline void subject::detach(observer * pObserver) noexcept
+inline void base_subject::detach(observer * pObserver) noexcept
 {
-    m_Observers.erase(std::remove(
-        m_Observers.begin(),
-        m_Observers.end(),
-        pObserver), m_Observers.end());
+    if (m_nIterators == 0)
+    {
+        m_Observers.erase(std::remove(
+            m_Observers.begin(),
+            m_Observers.end(),
+            pObserver), m_Observers.end());
+    }
+    else
+    {
+        std::replace(
+            m_Observers.begin(),
+            m_Observers.end(),
+            pObserver,
+            static_cast<observer*>(nullptr));
+    }
 }
 
 //==============================================================================
-//!\fn                   qx::subject::get_num_observers
+//!\fn              qx::base_subject::on_iterator_destructed
 //
-//!\brief  Get number of observers attached to this subject
-//!\retval  - number of observers attached to this subject
+//!\brief  Iterator destructing event handler
+//!\author Khrapov
+//!\date   11.03.2021
+//==============================================================================
+inline void base_subject::on_iterator_destructed(void) noexcept
+{
+    m_nIterators--;
+    if (m_nIterators == 0)
+    {
+        m_Observers.erase(std::remove(
+            m_Observers.begin(),
+            m_Observers.end(),
+            nullptr), m_Observers.end());
+    }
+}
+
+//==============================================================================
+//!\fn             qx::base_subject::on_iterator_constructed
+//
+//!\brief  Iterator constructing event handler
+//!\author Khrapov
+//!\date   11.03.2021
+//==============================================================================
+inline void base_subject::on_iterator_constructed(void) noexcept
+{
+    m_nIterators++;
+}
+
+//==============================================================================
+//!\fn                    base_subject::~base_subject
+//
+//!\brief  base_subject object destructor
+//!\author Khrapov
+//!\date   12.03.2021
+//==============================================================================
+inline base_subject::~base_subject(void) noexcept
+{
+    while (!m_Observers.empty())
+        m_Observers.back()->detach_from(this);
+}
+
+//==============================================================================
+//!\fn                   qx::pSubject::get_num_observers
+//
+//!\brief  Get number of observers attached to this pSubject
+//!\retval  - number of observers attached to this pSubject
 //!\author Khrapov
 //!\date   6.03.2021
 //==============================================================================
-inline size_t subject::get_num_observers(void) const noexcept
+inline size_t base_subject::get_num_observers(void) const noexcept
 {
     return m_Observers.size();
 }
 
+
+
+//------------------------------ subject iterators -----------------------------
+
 //==============================================================================
-//!\fn                   qx::subject::notify<TObserver>
+//!\fn  qx::subject<TObserver>::base_iterator<TBaseIterator>::base_iterator
 //
-//!\brief  Notify all observers of type TObserver
-//!\param  func - function for notifying
+//!\brief  base_iterator object constructor
 //!\author Khrapov
-//!\date   6.03.2021
+//!\date   12.03.2021
 //==============================================================================
 template<class TObserver>
-inline void subject::notify(const notify_func<TObserver>& func)
+template<class TBaseIterator>
+subject<TObserver>::base_iterator<TBaseIterator>::base_iterator(void) noexcept
+    : TBaseIterator()
 {
-    for (auto pAnyTypeObserver : m_Observers)
-        if (auto pRequiredType = rtti_cast<TObserver>(pAnyTypeObserver))
-             func(pRequiredType);
+}
+
+//==============================================================================
+//!\fn  qx::subject<TObserver>::base_iterator<TBaseIterator>::base_iterator
+//
+//!\brief  base_iterator object constructor
+//!\param  other    - base class iterator object
+//!\param  pSubject - subject class pointer
+//!\author Khrapov
+//!\date   12.03.2021
+//==============================================================================
+template<class TObserver>
+template<class TBaseIterator>
+subject<TObserver>::base_iterator<TBaseIterator>::base_iterator(
+    const TBaseIterator   & other,
+    subject               * pSubject) noexcept
+    : TBaseIterator (other)
+    , m_pSubject    (pSubject)
+{
+    init();
+}
+
+//==============================================================================
+//!\fn  qx::subject<TObserver>::base_iterator<TBaseIterator>::base_iterator
+//
+//!\brief  base_iterator object constructor
+//!\param  other - other object
+//!\author Khrapov
+//!\date   12.03.2021
+//==============================================================================
+template<class TObserver>
+template<class TBaseIterator>
+subject<TObserver>::base_iterator<TBaseIterator>::base_iterator(
+    const base_iterator& other) noexcept
+    : TBaseIterator (other)
+    , m_pSubject    (other.m_pSubject)
+{
+    init();
+}
+
+//==============================================================================
+//!\fn  qx::subject<TObserver>::base_iterator<TBaseIterator>::~base_iterator
+//
+//!\brief  base_iterator object destructor
+//!\author Khrapov
+//!\date   12.03.2021
+//==============================================================================
+template<class TObserver>
+template<class TBaseIterator>
+subject<TObserver>::base_iterator<TBaseIterator>::~base_iterator(
+    void) noexcept
+{
+    m_pSubject->on_iterator_destructed();
+}
+
+//==============================================================================
+//!\fn    qx::subject<TObserver>::base_iterator<TBaseIterator>::operator->
+//
+//!\brief  operator->
+//!\retval  - observer object pointer
+//!\author Khrapov
+//!\date   12.03.2021
+//==============================================================================
+template<class TObserver>
+template<class TBaseIterator>
+TObserver* subject<TObserver>::base_iterator<TBaseIterator>::operator->(
+    void) noexcept
+{
+    return static_cast<TObserver*>(*TBaseIterator::operator->());
+}
+
+//==============================================================================
+//!\fn    qx::subject<TObserver>::base_iterator<TBaseIterator>::operator*
+//
+//!\brief  operator*
+//!\retval  - observer object reference
+//!\author Khrapov
+//!\date   12.03.2021
+//==============================================================================
+template<class TObserver>
+template<class TBaseIterator>
+TObserver& subject<TObserver>::base_iterator<TBaseIterator>::operator*(
+    void) noexcept
+{
+    return static_cast<TObserver&>(*TBaseIterator::operator*());
+}
+
+//==============================================================================
+//!\fn       qx::subject<TObserver>::base_iterator<TBaseIterator>::init
+//
+//!\brief  Init iterator by calling subject callback
+//!\author Khrapov
+//!\date   12.03.2021
+//==============================================================================
+template<class TObserver>
+template<class TBaseIterator>
+void subject<TObserver>::base_iterator<TBaseIterator>::init(
+    void) noexcept
+{
+    m_pSubject->on_iterator_constructed();
+}
+
+//==============================================================================
+//!\fn qx::subject<TObserver>::const_base_iterator<TBaseIterator>::operator->
+//
+//!\brief  operator->
+//!\retval  - observer object const pointer
+//!\author Khrapov
+//!\date   12.03.2021
+//==============================================================================
+template<class TObserver>
+template<class TBaseIterator>
+const TObserver* subject<TObserver>::const_base_iterator<TBaseIterator>::operator->(
+    void) const noexcept
+{
+    return static_cast<const TObserver*>(*TBaseIterator::operator->());
+}
+
+//==============================================================================
+//!\fn qx::subject<TObserver>::const_base_iterator<TBaseIterator>::operator*
+//
+//!\brief  operator*
+//!\retval  - observer object const reference
+//!\author Khrapov
+//!\date   12.03.2021
+//==============================================================================
+template<class TObserver>
+template<class TBaseIterator>
+const TObserver& subject<TObserver>::const_base_iterator<TBaseIterator>::operator*(
+    void) const noexcept
+{
+    return static_cast<const TObserver&>(*TBaseIterator::operator*());
 }
 
 
@@ -181,11 +370,11 @@ inline void subject::notify(const notify_func<TObserver>& func)
 //!\fn                      qx::observer::attach_to
 //
 //!\brief  Attach this observer to subject
-//!\param  pSubject - subject pointer
+//!\param  pSubject - pSubject pointer
 //!\author Khrapov
 //!\date   6.03.2021
 //==============================================================================
-inline void observer::attach_to(subject * pSubject)
+inline void observer::attach_to(base_subject * pSubject)
 {
     auto subjectToken = std::move(pSubject->attach(this));
     if (subjectToken.m_pObserver && subjectToken.m_pSubject)
@@ -207,12 +396,12 @@ inline void observer::attach_to(subject * pSubject)
 //==============================================================================
 //!\fn                     qx::observer::detach_from
 //
-//!\brief  Detach this observer from subject
-//!\param  pSubject - subject pointer
+//!\brief  Detach this observer from pSubject
+//!\param  pSubject - pSubject pointer
 //!\author Khrapov
 //!\date   6.03.2021
 //==============================================================================
-inline void observer::detach_from(subject * pSubject)
+inline void observer::detach_from(base_subject * pSubject)
 {
     auto get_token_it = [this, pSubject]()
     {
@@ -228,6 +417,31 @@ inline void observer::detach_from(subject * pSubject)
         m_Tokens.erase(it);
         it = get_token_it();
     }
+}
+
+//==============================================================================
+//!\fn                     observer::detach_from_all
+//
+//!\brief  Detach observer from all subjects
+//!\author Khrapov
+//!\date   11.03.2021
+//==============================================================================
+inline void observer::detach_from_all(void)
+{
+    m_Tokens.clear();
+}
+
+//==============================================================================
+//!\fn             qx::observer::get_num_subjects_attached_to
+//
+//!\brief  Get number of subjects this observer is attached to
+//!\retval  - number of subjects this observer is attached to
+//!\author Khrapov
+//!\date   12.03.2021
+//==============================================================================
+inline size_t observer::get_num_subjects_attached_to(void) const
+{
+    return m_Tokens.size();
 }
 
 }
