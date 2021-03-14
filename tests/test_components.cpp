@@ -1,8 +1,8 @@
 //==============================================================================
 //
-//!\file                 test_components_container.cpp
+//!\file                       test_components.cpp
 //
-//!\brief       Tests for qx::components_container
+//!\brief       Tests for qx::components
 //!\details     ~
 //
 //!\author      Khrapov
@@ -12,11 +12,11 @@
 //==============================================================================
 #include <test_config.h>
 
-//V_EXCLUDE_PATH *test_components_container.cpp
+//V_EXCLUDE_PATH *test_components.cpp
 
-#if QX_TEST_COMPONENTS_CONTAINER
+#if QX_TEST_COMPONENTS
 
-#include <qx/containers/components_container.h>
+#include <qx/containers/components.h>
 
 #include <string>
 
@@ -92,9 +92,9 @@ private:
     std::string m_sTestData;
 };
 
-TEST(components_container, main)
+TEST(components, main)
 {
-    qx::components_container<BaseTestComponent> container;
+    qx::components<BaseTestComponent> container;
     EXPECT_EQ(container.size(), 0);
     EXPECT_TRUE(container.empty());
 
@@ -163,7 +163,7 @@ TEST(components_container, main)
         EXPECT_TRUE(it.GetConst());
 
     // extract
-    qx::components_container<BaseTestComponent>::component_ptr pTestComponentOwner
+    qx::components<BaseTestComponent>::pointer pTestComponentOwner
         = container.extract<TestComponent>();
 
     EXPECT_EQ(pTestComponentOwner.get(), pTestComponent);

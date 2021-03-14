@@ -12,14 +12,14 @@
 //==============================================================================
 #pragma once
 
-#include <qx/containers/string.h>
 #include <qx/singleton.h>
 #include <qx/suppress_warnings.h>
+#include <qx/containers/string.h>
 
 #include <ctime>
+#include <filesystem>
 #include <fstream>
 #include <iostream>
-#include <filesystem>
 #include <unordered_map>
 
 #define QX_TRACE_FROM(loggerInstanse, format, ...)              \
@@ -224,7 +224,7 @@ public:
     void        set_logs_folder     (const char       * pszFolder);
     void        set_using_colors    (bool               bUsingColors);
 
-    static void format_time_string (string            & sTime);
+    static void format_time_string  (string           & sTime);
 
 protected:
 

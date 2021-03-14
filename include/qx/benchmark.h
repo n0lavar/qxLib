@@ -47,7 +47,7 @@ public:
         return last();
     }
 
-    double last(void)
+    double last(void) const
     {
         return static_cast<double>(m_LastDuration.count()) / 1e9;
     }
@@ -55,7 +55,7 @@ public:
 private:
 
     time_point  m_Start;
-    duration    m_LastDuration;
+    duration    m_LastDuration  = duration(0);
 };
 
 }

@@ -1,8 +1,8 @@
 //==============================================================================
 //
-//!\file                     components_container.h
+//!\file                       components.h
 //
-//!\brief       Contains qx::components_container class
+//!\brief       Contains qx::components class
 //!\details     ~
 //
 //!\author      Khrapov
@@ -22,7 +22,7 @@ namespace qx
 
 //==============================================================================
 //
-//!\class           qx::components_container<TBaseComponent>
+//!\class                qx::components<TBaseComponent>
 //
 //!\brief   Container for components system
 //!\details ~
@@ -32,20 +32,17 @@ namespace qx
 //
 //==============================================================================
 template<class TBaseComponent>
-class components_container
+class components
 {
 public:
 
-    using component_ptr = std::unique_ptr<TBaseComponent>;
-    using components_container_type = std::unordered_multimap<
-        class_identificator,
-        component_ptr
-    >;
+    using pointer   = std::unique_ptr<TBaseComponent>;
+    using container = std::unordered_multimap<class_identificator, pointer>;
 
     // iterator wrapper to hide implementation detail ".second"
-    class iterator : public components_container_type::iterator
+    class iterator : public container::iterator
     {
-        using super_class = typename components_container_type::iterator;
+        using super_class = typename container::iterator;
 
     public:
 
@@ -60,9 +57,9 @@ public:
     };
 
     // const_iterator wrapper to hide implementation detail ".second"
-    class const_iterator : public components_container_type::const_iterator
+    class const_iterator : public container::const_iterator
     {
-        using super_class = typename components_container_type::const_iterator;
+        using super_class = typename container::const_iterator;
 
     public:
 
@@ -90,7 +87,7 @@ public:
     TBaseComponent* get_by_id(class_identificator id) const;
 
     template<class TKeyComponent>
-    TKeyComponent* add_to(component_ptr pComponent);
+    TKeyComponent* add_to(pointer pComponent);
 
     template<class TKeyComponent>
     auto get_all(void) const;
@@ -98,7 +95,7 @@ public:
     auto get_all_by_id(class_identificator id) const;
 
     template<class TKeyComponent>
-    component_ptr extract(void);
+    pointer extract(void);
 
     template<class TKeyComponent>
     bool remove(void);
@@ -122,9 +119,9 @@ public:
 
 private:
 
-    components_container_type m_Components;
+    container m_Components;
 };
 
 }
 
-#include <qx/containers/components_container.inl>
+#include <qx/containers/components.inl>

@@ -1,8 +1,8 @@
 //==============================================================================
 //
-//!\file                    components_container.inl
+//!\file                         components.inl
 //
-//!\brief       Contains qx::components_container class
+//!\brief       Contains qx::components class
 //!\details     ~
 //
 //!\author      Khrapov
@@ -15,7 +15,7 @@ namespace qx
 {
 
 //==============================================================================
-//!\fn qx::components_container<TBaseComponent>::add<TComponent, ...Args>
+//!\fn      qx::components<TBaseComponent>::add<TComponent, ...Args>
 //
 //!\brief  Add component by constructing in place
 //!\param  ...args - arguments for component constructing
@@ -25,14 +25,14 @@ namespace qx
 //==============================================================================
 template <class TBaseComponent>
 template <class TComponent, class... Args>
-inline TComponent* components_container<TBaseComponent>::add(Args&&... args)
+inline TComponent* components<TBaseComponent>::add(Args&&... args)
 {
     return add_to<TComponent>(std::make_unique<TComponent>(
         std::forward<Args>(args)...));
 }
 
 //==============================================================================
-//!\fn     qx::components_container<TBaseComponent>::add<TComponent>
+//!\fn           qx::components<TBaseComponent>::add<TComponent>
 //
 //!\brief  Add component
 //!\param  pComponent - component unique ptr
@@ -42,14 +42,14 @@ inline TComponent* components_container<TBaseComponent>::add(Args&&... args)
 //==============================================================================
 template <class TBaseComponent>
 template <class TComponent>
-inline TComponent* components_container<TBaseComponent>::add(
+inline TComponent* components<TBaseComponent>::add(
     std::unique_ptr<TComponent> pComponent)
 {
     return add_to<TComponent>(std::move(pComponent));
 }
 
 //==============================================================================
-//!\fn    qx::components_container<TBaseComponent>::get<TKeyComponent>
+//!\fn         qx::components<TBaseComponent>::get<TKeyComponent>
 //
 //!\brief  Get first component with "type" key
 //!\tparam TKeyComponent - the type-identifier that was used when adding
@@ -60,14 +60,14 @@ inline TComponent* components_container<TBaseComponent>::add(
 //==============================================================================
 template <class TBaseComponent>
 template <class TKeyComponent>
-inline TKeyComponent* components_container<TBaseComponent>::get(void) const
+inline TKeyComponent* components<TBaseComponent>::get(void) const
 {
     return static_cast<TKeyComponent*>(get_by_id(
         TKeyComponent::get_class_id_static()));
 }
 
 //==============================================================================
-//!\fn          components_container<TBaseComponent>::get_by_id
+//!\fn              components<TBaseComponent>::get_by_id
 //
 //!\brief  Get first component with "class_identificator" key
 //!\param  id - class id
@@ -76,7 +76,7 @@ inline TKeyComponent* components_container<TBaseComponent>::get(void) const
 //!\date   9.03.2021
 //==============================================================================
 template<class TBaseComponent>
-inline TBaseComponent * components_container<TBaseComponent>::get_by_id(
+inline TBaseComponent * components<TBaseComponent>::get_by_id(
     class_identificator id) const
 {
     auto it = m_Components.find(id);
@@ -86,7 +86,7 @@ inline TBaseComponent * components_container<TBaseComponent>::get_by_id(
 }
 
 //==============================================================================
-//!\fn  qx::components_container<TBaseComponent>::add_to<TKeyComponent>
+//!\fn         qx::components<TBaseComponent>::add_to<TKeyComponent>
 //
 //!\brief  Add component with type id
 //!\tparam TKeyComponent - the type-identifier that will be used when searching
@@ -98,8 +98,8 @@ inline TBaseComponent * components_container<TBaseComponent>::get_by_id(
 //==============================================================================
 template<class TBaseComponent>
 template<class TKeyComponent>
-inline TKeyComponent * components_container<TBaseComponent>::add_to(
-    component_ptr pComponent)
+inline TKeyComponent * components<TBaseComponent>::add_to(
+    pointer pComponent)
 {
     auto pRawComponent = pComponent.get();
     m_Components.emplace(
@@ -110,7 +110,7 @@ inline TKeyComponent * components_container<TBaseComponent>::add_to(
 }
 
 //==============================================================================
-//!\fn  qx::components_container<TBaseComponent>::get_all<TKeyComponent>
+//!\fn        qx::components<TBaseComponent>::get_all<TKeyComponent>
 //
 //!\brief  Get all components with "type" key
 //!\tparam TKeyComponent - the type-identifier that was used when adding
@@ -121,13 +121,13 @@ inline TKeyComponent * components_container<TBaseComponent>::add_to(
 //==============================================================================
 template <class TBaseComponent>
 template <class TKeyComponent>
-inline auto components_container<TBaseComponent>::get_all(void) const
+inline auto components<TBaseComponent>::get_all(void) const
 {
     return get_all_by_id(TKeyComponent::get_class_id_static());
 }
 
 //==============================================================================
-//!\fn      qx::components_container<TBaseComponent>::get_all_by_id
+//!\fn            qx::components<TBaseComponent>::get_all_by_id
 //
 //!\brief  Get all components with "class_identificator" key
 //!\param  id - class id
@@ -136,14 +136,14 @@ inline auto components_container<TBaseComponent>::get_all(void) const
 //!\date   9.03.2021
 //==============================================================================
 template<class TBaseComponent>
-inline auto qx::components_container<TBaseComponent>::get_all_by_id(
+inline auto qx::components<TBaseComponent>::get_all_by_id(
     class_identificator id) const
 {
     return m_Components.equal_range(id);
 }
 
 //==============================================================================
-//!\fn  qx::components_container<TBaseComponent>::extract<TKeyComponent>
+//!\fn         qx::components<TBaseComponent>::extract<TKeyComponent>
 //
 //!\brief  Extract component from container
 //!\tparam TKeyComponent - the type-identifier that was used when adding
@@ -154,8 +154,8 @@ inline auto qx::components_container<TBaseComponent>::get_all_by_id(
 //==============================================================================
 template <class TBaseComponent>
 template <class TKeyComponent>
-inline typename components_container<TBaseComponent>::component_ptr
-    components_container<TBaseComponent>::extract(void)
+inline typename components<TBaseComponent>::pointer
+    components<TBaseComponent>::extract(void)
 {
     if (auto it = m_Components.find(TKeyComponent::get_class_id_static());
         it != m_Components.end())
@@ -171,7 +171,7 @@ inline typename components_container<TBaseComponent>::component_ptr
 }
 
 //==============================================================================
-//!\fn  qx::components_container<TBaseComponent>::remove<TKeyComponent>
+//!\fn          qx::components<TBaseComponent>::remove<TKeyComponent>
 //
 //!\brief  Remove component from container
 //!\tparam TKeyComponent - the type-identifier that was used when adding
@@ -182,13 +182,13 @@ inline typename components_container<TBaseComponent>::component_ptr
 //==============================================================================
 template <class TBaseComponent>
 template <class TKeyComponent>
-inline bool components_container<TBaseComponent>::remove(void)
+inline bool components<TBaseComponent>::remove(void)
 {
     return extract<TKeyComponent>().get() != nullptr;
 }
 
 //==============================================================================
-//!\fn qx::components_container<TBaseComponent>::remove_all<TKeyComponent>
+//!\fn        qx::components<TBaseComponent>::remove_all<TKeyComponent>
 //
 //!\brief  Remove all components with "type" key from container
 //!\tparam TKeyComponent - the type-identifier that was used when adding
@@ -198,13 +198,13 @@ inline bool components_container<TBaseComponent>::remove(void)
 //==============================================================================
 template <class TBaseComponent>
 template <class TKeyComponent>
-inline void components_container<TBaseComponent>::remove_all(void)
+inline void components<TBaseComponent>::remove_all(void)
 {
     while (remove<TKeyComponent>());
 }
 
 //==============================================================================
-//!\fn qx::components_container<TBaseComponent>::contains<TKeyComponent>
+//!\fn      qx::components<TBaseComponent>::contains<TKeyComponent>
 //
 //!\brief  Is container contains value with "type" key
 //!\tparam TKeyComponent - the type-identifier that was used when adding
@@ -215,7 +215,7 @@ inline void components_container<TBaseComponent>::remove_all(void)
 //==============================================================================
 template<class TBaseComponent>
 template<class TKeyComponent>
-inline bool components_container<TBaseComponent>::contains(void) const
+inline bool components<TBaseComponent>::contains(void) const
 {
     return get<TKeyComponent>() != nullptr;
 }
