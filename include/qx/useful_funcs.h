@@ -13,15 +13,9 @@
 #pragma once
 
 #include <qx/meta/constexpr_funcs.h>
-#include <qx/typedefs.h>
-#include <qx/config.h>
-#include <qx/suppress_warnings.h>
 
-#include <initializer_list>
-#include <algorithm>
-#include <cmath>
-#include <functional>
 #include <array>
+#include <functional>
 
 namespace qx
 {
@@ -38,7 +32,7 @@ namespace qx
 //!\date   3.11.2019
 //==============================================================================
 template<typename T, typename Compare = std::less_equal<>>
-inline constexpr bool between(T left, T value, T right, Compare compare)
+constexpr bool between(T left, T value, T right, Compare compare)
 {
     // trick to determine if an integer is between two integers (inclusive)
     // with only one comparison/branch
@@ -119,7 +113,7 @@ inline void destruct(iterator start, iterator end)
 //!\author Khrapov
 //!\date   4.02.2021
 //==============================================================================
-template<typename T, size_t N>
+template<size_t N, typename T>
 constexpr auto make_array(T init_val)
 {
     std::array<T, N> ret;

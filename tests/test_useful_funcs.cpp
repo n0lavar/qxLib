@@ -16,8 +16,8 @@
 
 #if QX_TEST_USEFUL_FUNCS
 
-#include <qx/containers/container.h>
 #include <qx/useful_macros.h>
+#include <qx/containers/container.h>
 
 #include <algorithm>
 
@@ -111,7 +111,7 @@ TEST(useful_funcs, destruct)
 
 //------------------------------- qx::make_array -------------------------------
 
-constexpr std::array<int, 5> TEST_ARRAY = qx::make_array<int, 5>(1);
+constexpr std::array<int, 5> TEST_ARRAY = qx::make_array<5>(1);
 static_assert(std::all_of(TEST_ARRAY.cbegin(), TEST_ARRAY.cend(), [](int val) { return val == 1; }));
 
 #endif

@@ -16,12 +16,14 @@
 
 #if QX_TEST_STRING
 
+#include <qx/type_traits.h>
 #include <qx/containers/string.h>
-#include <unordered_map>
+
 #include <list>
+#include <unordered_map>
 
 template<typename Char>
-inline constexpr auto get_string_format_specifier(void)
+constexpr auto get_string_format_specifier(void)
 {
     if constexpr (std::is_same_v<Char, char>)
         return "%s";

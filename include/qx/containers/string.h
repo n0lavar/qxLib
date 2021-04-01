@@ -16,7 +16,6 @@
 #include <optional>
 #include <string_view>
 #include <vector>
-#include <qx/type_traits.h>
 #include <qx/containers/container.h>
 #include <qx/containers/string_data.h>
 #include <qx/containers/string_hash.h>
@@ -83,8 +82,8 @@ class basic_string
 
     template<class _Traits>
     friend detail::istream<_Traits>& ::operator>>(
-        qx::detail::istream<_Traits>& is,
-        qx::basic_string<_Traits>& str);
+        detail::istream<_Traits>& is,
+        basic_string<_Traits>& str);
 
 public:
 
@@ -96,7 +95,7 @@ public:
     using const_reference   = typename Traits::const_reference;
     using difference_type   = typename Traits::difference_type;
     using size_type         = typename Traits::size_type;
-    using sstream_type      = typename std::basic_stringstream<value_type>;
+    using sstream_type      = std::basic_stringstream<value_type>;
 
     static constexpr size_type npos = std::numeric_limits<size_type>::max();
 

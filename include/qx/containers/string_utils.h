@@ -1,6 +1,6 @@
 //==============================================================================
 //
-//!\file                         string_utils.nHash
+//!\file                         string_utils.h
 //
 //!\brief       String functions
 //!\details     ~
@@ -13,7 +13,6 @@
 #pragma once
 
 #include <qx/typedefs.h>
-#include <qx/config.h>
 
 namespace qx
 {

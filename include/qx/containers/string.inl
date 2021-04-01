@@ -338,7 +338,7 @@ inline basic_string<Traits> basic_string<Traits>::static_sprintf(
 //==============================================================================
 //!\fn           qx::basic_string<Traits>::append_sprintf
 //
-//!\brief  Format string (c-style printf) and uppend to the current string
+//!\brief  Format string (c-style printf) and append to the current string
 //!\param  pszFormat - format pattern. this str as pszFormat is UB
 //!\param  ...       - arguments
 //!\author Khrapov
@@ -358,7 +358,7 @@ inline void basic_string<Traits>::append_sprintf(
 //==============================================================================
 //!\fn               basic_string<Traits>::append_vsprintf
 //
-//!\brief  Format string (c-style printf) and uppend to the current string
+//!\brief  Format string (c-style printf) and append to the current string
 //!\param  pszFormat - format pattern. this str as pszFormat is UB
 //!\param  args      - args pack
 //!\author Khrapov
@@ -517,10 +517,11 @@ inline typename basic_string<Traits>::value_type basic_string<Traits>::back(
 //==============================================================================
 //!\fn                    basic_string<Traits>::length
 //
-//!\brief  Get string length
+//!\brief   Get string length
+//!\details Same as size()
 //!\retval  - string length
-//!\author Khrapov
-//!\date   13.11.2020
+//!\author  Khrapov
+//!\date    13.11.2020
 //==============================================================================
 template<class Traits>
 inline typename basic_string<Traits>::size_type basic_string<Traits>::length(
@@ -825,7 +826,7 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::insert(
 //
 //!\brief  Insert substring
 //!\param  nPos      - first char index
-//!\param  pszSourse - sourse string
+//!\param  pszSourse - source string
 //!\param  nSymbols  - number of symbols to insert
 //!\retval           - pos of char after last char of inserted string or npos
 //!\author Khrapov
@@ -865,7 +866,7 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::insert(
 //
 //!\brief  Insert substring
 //!\param  nPos  - first char index
-//!\param  sWhat - sourse string
+//!\param  sWhat - source string
 //!\retval       - pos of char after last char of inserted string or npos
 //!\author Khrapov
 //!\date   30.10.2019
@@ -883,8 +884,8 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::insert(
 //
 //!\brief  Insert substring
 //!\param  nPos        - first char index
-//!\param  itWhatBegin - sourse first iterator
-//!\param  itWhatEnd   - sourse last iterator
+//!\param  itWhatBegin - source first iterator
+//!\param  itWhatEnd   - source last iterator
 //!\retval             - pos of char after last char of inserted string or npos
 //!\author Khrapov
 //!\date   30.10.2019
@@ -907,7 +908,7 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::insert(
     {
         size_type nWhatSize = 0;
         for (auto it = itWhatBegin; it != itWhatEnd; ++it)
-            nWhatSize++;
+            ++nWhatSize;
 
         size_type nStartSymbols = size();
         if (nWhatSize > 0 && resize(nStartSymbols + nWhatSize, Traits::align()))
@@ -921,7 +922,7 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::insert(
             for (auto it = itWhatBegin; it != itWhatEnd; ++it)
             {
                 at(nPos + nWhatPos) = *it;
-                nWhatPos++;
+                ++nWhatPos;
             }
 
             return nPos + nWhatSize;
@@ -936,7 +937,7 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::insert(
 //
 //!\brief  Insert substring
 //!\param  nPos  - first char index
-//!\param  sWhat - sourse string
+//!\param  sWhat - source string
 //!\retval       - pos of char after last char of inserted string or npos
 //!\author Khrapov
 //!\date   30.10.2019
@@ -973,7 +974,7 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::insert(
 //
 //!\brief  Insert substring
 //!\param  itPos     - first char iterator
-//!\param  pszSourse - sourse string
+//!\param  pszSourse - source string
 //!\param  nSymbols  - number of symbols to insert
 //!\retval           - pos of char after last char of inserted string or npos
 //!\author Khrapov
@@ -993,7 +994,7 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::insert(
 //
 //!\brief  Insert substring
 //!\param  itPos - first char iterator
-//!\param  sWhat - sourse string
+//!\param  sWhat - source string
 //!\retval       - pos of char after last char of inserted string or npos
 //!\author Khrapov
 //!\date   30.10.2019
@@ -1038,7 +1039,7 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::insert(
 //
 //!\brief  Insert substring
 //!\param  itPos - first char iterator
-//!\param  sWhat - sourse string
+//!\param  sWhat - source string
 //!\retval       - pos of char after last char of inserted string or npos
 //!\author Khrapov
 //!\date   30.10.2019
@@ -1086,7 +1087,7 @@ inline void basic_string<Traits>::push_front(value_type chSymbol) noexcept
 //==============================================================================
 //!\fn                qx::basic_string<Traits>::erase
 //
-//!\brief  Erase substrung
+//!\brief  Erase substring
 //!\param  itFirst - first substr char iterator
 //!\param  itLast  - last substr char iterator (excluded)
 //!\author Khrapov
@@ -1247,7 +1248,7 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::trim_left(
 {
     return _trim_left([pszStr](value_type ch)
         {
-            for (size_type j = 0; pszStr[j] != QX_CHAR_PREFIX(value_type, '\0'); j++)
+            for (size_type j = 0; pszStr[j] != QX_CHAR_PREFIX(value_type, '\0'); ++j)
                 if (pszStr[j] == ch)
                     return true;
 
@@ -1272,7 +1273,7 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::trim_left(
 {
     return _trim_left([pszStr, nStrSize](value_type ch)
         {
-            for (size_type j = 0; j < nStrSize; j++)
+            for (size_type j = 0; j < nStrSize; ++j)
                 if (pszStr[j] == ch)
                     return true;
 
@@ -1416,7 +1417,7 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::trim_right
 {
     return _trim_right([pszStr, nStrSize](value_type ch)
         {
-            for (size_type j = 0; j < nStrSize; j++)
+            for (size_type j = 0; j < nStrSize; ++j)
                 if (pszStr[j] == ch)
                     return true;
 
@@ -1532,7 +1533,7 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::trim(
 {
     return _trim([pszStr](value_type ch)
         {
-            for (size_type j = 0; pszStr[j] != QX_CHAR_PREFIX(value_type, '\0'); j++)
+            for (size_type j = 0; pszStr[j] != QX_CHAR_PREFIX(value_type, '\0'); ++j)
                 if (pszStr[j] == ch)
                     return true;
 
@@ -1557,7 +1558,7 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::trim(
 {
     return _trim([pszStr, nStrSize](value_type ch)
         {
-            for (size_type j = 0; j < nStrSize; j++)
+            for (size_type j = 0; j < nStrSize; ++j)
                 if (pszStr[j] == ch)
                     return true;
 
@@ -1969,7 +1970,7 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::remove_all
 
     do
     {
-        nOccurrences++;
+        ++nOccurrences;
         nLastOccurrencePos = remove(chSymbol, nLastOccurrencePos, nEnd);
     } while (nLastOccurrencePos != npos);
 
@@ -2000,7 +2001,7 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::remove_all
 
     do
     {
-        nOccurrences++;
+        ++nOccurrences;
         nLastOccurrencePos = remove(pszStr, nLastOccurrencePos, nEnd, nStrSize);
     } while (nLastOccurrencePos != npos);
 
@@ -2052,7 +2053,7 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::remove_all
 
     do
     {
-        nOccurrences++;
+        ++nOccurrences;
         nLastOccurrencePos = remove(itFirst, itLast, nLastOccurrencePos, nEnd);
     } while (nLastOccurrencePos != npos);
 
@@ -2083,8 +2084,8 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::remove_all
 //==============================================================================
 //!\fn              qx::basic_string<Traits>::replace<replace>
 //
-//!\brief  Replace first occurence of sFind with sReplace
-//!\param  sFind    - string to find and replase
+//!\brief  Replace first occurrence of sFind with sReplace
+//!\param  sFind    - string to find and replace
 //!\param  sReplace - string to replace with
 //!\param  nBegin   - start searching index
 //!\param  nEnd     - end searching index
@@ -2110,12 +2111,12 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::replace(
 //==============================================================================
 //!\fn            qx::basic_string<Traits>::replace_all<replace>
 //
-//!\brief  Replace all occurences of sFind with sReplace
-//!\param  sFind    - string to find and replase
+//!\brief  Replace all occurrences of sFind with sReplace
+//!\param  sFind    - string to find and replace
 //!\param  sReplace - string to replace with
 //!\param  nBegin   - start searching index
 //!\param  nEnd     - end searching index
-//!\retval          - number of replaced occurences
+//!\retval          - number of replaced occurrences
 //!\author Khrapov
 //!\date   02.12.2020
 //==============================================================================
@@ -2189,9 +2190,11 @@ inline int basic_string<Traits>::compare(
 //
 //!\brief  Performs a binary comparison of the characters
 //!\param  sStr     - string to compare
-//!\retval          -   < 0 the first character that does not match has a lower value in this than in sStr
+//!\retval          -   < 0 the first character that does not match has
+//                          a lower value in this than in chSymbol
 //                        0 the contents of both strings are equal
-//                      > 0 the first character that does not match has a greater value in this than in sStr
+//                      > 0 the first character that does not match has
+//                          a greater value in this than in chSymbol
 //!\author Khrapov
 //!\date   30.12.2020
 //==============================================================================
@@ -3764,10 +3767,10 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::_trim_left
 {
     size_type nSymbols = 0;
 
-    for (size_type i = 0; i < size(); i++)
+    for (size_type i = 0; i < size(); ++i)
     {
         if (searcher(at(i)))
-            nSymbols++;
+            ++nSymbols;
         else
             break;
     }
@@ -3793,10 +3796,10 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::_trim_righ
     size_type nSymbols = 0;
     size_type nSize = size();
 
-    for (size_type i = nSize - 1; i != std::numeric_limits<size_type>::max(); i--)
+    for (size_type i = nSize - 1; i != std::numeric_limits<size_type>::max(); --i)
     {
         if (searcher(at(i)))
-            nSymbols++;
+            ++nSymbols;
         else
             break;
     }
@@ -3824,10 +3827,10 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::_trim(
     size_type nEndPos = nSize;
 
     while (nStartPos < nSize && searcher(at(nStartPos)))
-        nStartPos++;
+        ++nStartPos;
 
     while (nEndPos > nStartPos && searcher(at(nEndPos - 1)))
-        nEndPos--;
+        --nEndPos;
 
     size_type nNewSize = nEndPos - nStartPos;
 
@@ -3870,7 +3873,7 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::_find(
         if (comparator(pCurrentChar))
             return static_cast<size_type>(pCurrentChar - pData);
         else
-            pCurrentChar++;
+            ++pCurrentChar;
     }
 
     return npos;
@@ -3906,7 +3909,7 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::_rfind(
         if (comparator(pCurrentChar))
             return static_cast<size_type>(pCurrentChar - pData);
         else
-            pCurrentChar--;
+            --pCurrentChar;
     }
 
     return npos;
@@ -3932,7 +3935,7 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::_find_firs
     size_type          nBegin,
     const Incrementer& incrementer) const noexcept
 {
-    for (size_type i = nBegin; i < size(); i++)
+    for (size_type i = nBegin; i < size(); ++i)
         for (FwdIt it = itBegin; it != itEnd; it = incrementer(it))
             if (*it == at(i))
                 return i;
@@ -3960,7 +3963,7 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::_find_last
     size_type          nEnd,
     const Incrementer& incrementer) const noexcept
 {
-    for (size_type i = size() - 1; i != nEnd - 1; i--)
+    for (size_type i = size() - 1; i != nEnd - 1; --i)
         for (FwdIt it = itBegin; it != itEnd; it = incrementer(it))
             if (*it == at(i))
                 return i;
@@ -3988,7 +3991,7 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::_find_firs
     size_type          nBegin,
     const Incrementer& incrementer) const noexcept
 {
-    for (size_type i = nBegin; i < size(); i++)
+    for (size_type i = nBegin; i < size(); ++i)
     {
         bool bFoundOneOf = false;
         for (FwdIt it = itBegin; !bFoundOneOf && it != itEnd; it = incrementer(it))
@@ -4021,7 +4024,7 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::_find_last
     size_type          nEnd,
     const Incrementer& incrementer) const noexcept
 {
-    for (size_type i = size() - 1; i != nEnd - 1; i--)
+    for (size_type i = size() - 1; i != nEnd - 1; --i)
     {
         bool bFoundOneOf = false;
         for (FwdIt it = itBegin; !bFoundOneOf && it != itEnd; it = incrementer(it))
@@ -4108,7 +4111,7 @@ inline bool basic_string<Traits>::resize(
     size_type           nAlign,
     string_resize_type  eType) noexcept
 {
-    bool bRet = m_Data.resize(nSymbols, nAlign, eType);
+    const bool bRet = m_Data.resize(nSymbols, nAlign, eType);
 
     if (bRet && eType == string_resize_type::common)
         at(nSymbols) = QX_CHAR_PREFIX(typename Traits::value_type, '\0');
