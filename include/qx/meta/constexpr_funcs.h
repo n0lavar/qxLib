@@ -35,7 +35,7 @@ constexpr std::size_t strlen(const TChar* psz)
     std::size_t nLen = 0;
     while (psz && *psz != QX_CHAR_PREFIX(TChar, '\0'))
     {
-        psz++;
+        ++psz;
         nLen++;
     }
 
@@ -60,8 +60,8 @@ constexpr int strcmp(const TChar* pszLeft, const TChar* pszRight)
 {
     while (*pszLeft && (*pszLeft == *pszRight))
     {
-        pszLeft++;
-        pszRight++;
+        ++pszLeft;
+        ++pszRight;
     }
     return *pszLeft - *pszRight;
 }

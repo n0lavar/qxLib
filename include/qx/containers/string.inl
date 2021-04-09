@@ -674,7 +674,7 @@ inline void basic_string<Traits>::from(
     {
         if (!pszFormat)
         {
-            if constexpr (std::is_same_v <From, std::nullptr_t>)
+            if constexpr (std::is_same_v<From, std::nullptr_t>)
             {
                 pszFormat = QX_STR_PREFIX(typename Traits::value_type, "nullptr");
             }

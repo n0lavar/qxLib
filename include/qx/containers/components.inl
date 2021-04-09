@@ -136,7 +136,7 @@ inline auto components<TBaseComponent>::get_all(void) const
 //!\date   9.03.2021
 //==============================================================================
 template<class TBaseComponent>
-inline auto qx::components<TBaseComponent>::get_all_by_id(
+inline auto components<TBaseComponent>::get_all_by_id(
     class_identificator id) const
 {
     return m_Components.equal_range(id);

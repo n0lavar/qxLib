@@ -12,6 +12,7 @@
 //==============================================================================
 #pragma once
 
+#include <qx/suppress_warnings.h>
 #include <qx/meta/constexpr_funcs.h>
 
 #include <array>
@@ -72,19 +73,6 @@ constexpr bool between(T left, T value, T right)
 }
 
 //==============================================================================
-//!\fn                              qx::pi
-//
-//!\brief  Get pi
-//!\author Khrapov
-//!\date   16.11.2019
-//==============================================================================
-template <typename T = float>
-constexpr T pi()
-{
-    return static_cast<T>(3.14159265358979323846264338327950288);
-}
-
-//==============================================================================
 //!\fn                      qx::destruct<iterator>
 //
 //!\brief  Call destructors
@@ -99,7 +87,7 @@ inline void destruct(iterator start, iterator end)
     using T = typename iterator::value_type;
     if constexpr (std::is_compound_v<T>)
     {
-        for (auto it = start; it < end; ++it)
+        for (auto it = start; it != end; ++it)
             it->~T();
     }
 }
