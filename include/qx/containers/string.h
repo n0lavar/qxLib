@@ -636,8 +636,8 @@ template<class UT, string_convertable String>
 basic_string<UT> operator+ (const String             & lhs, basic_string<UT>        && rhs) noexcept _QX_STR_OP_PLUS_BODY
 
 
-using string    = basic_string<qx::char_traits<char>>;
-using wstring   = basic_string<qx::char_traits<wchar_t>>;
+using string  = basic_string<char_traits<char>>;
+using wstring = basic_string<char_traits<wchar_t>>;
 
 }
 

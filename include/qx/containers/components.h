@@ -106,12 +106,12 @@ public:
     template<class TKeyComponent>
     bool contains(void) const;
 
-    iterator       begin  (void)       noexcept { return iterator(m_Components.begin()); }
-    const_iterator begin  (void) const noexcept { return const_iterator(m_Components.begin()); }
-    const_iterator cbegin (void) const noexcept { return const_iterator(m_Components.cbegin()); }
-    iterator       end    (void)       noexcept { return iterator(m_Components.end()); }
-    const_iterator end    (void) const noexcept { return const_iterator(m_Components.end()); }
-    const_iterator cend   (void) const noexcept { return const_iterator(m_Components.cend()); }
+    auto begin (void)       noexcept { return iterator(m_Components.begin()); }
+    auto begin (void) const noexcept { return const_iterator(m_Components.begin()); }
+    auto cbegin(void) const noexcept { return const_iterator(m_Components.cbegin()); }
+    auto end   (void)       noexcept { return iterator(m_Components.end()); }
+    auto end   (void) const noexcept { return const_iterator(m_Components.end()); }
+    auto cend  (void) const noexcept { return const_iterator(m_Components.cend()); }
 
     auto size  (void) const noexcept { return m_Components.size(); }
     auto empty (void) const noexcept { return m_Components.empty(); }

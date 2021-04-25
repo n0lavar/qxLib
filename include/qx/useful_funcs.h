@@ -102,7 +102,7 @@ inline void destruct(iterator start, iterator end)
 //!\date   4.02.2021
 //==============================================================================
 template<size_t N, typename T>
-constexpr auto make_array(T init_val)
+constexpr auto make_array(T init_val = T())
 {
     std::array<T, N> ret;
     ret.fill(init_val);

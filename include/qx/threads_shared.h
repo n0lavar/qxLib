@@ -60,6 +60,7 @@ public:
     const Data    & operator*       (void) const    noexcept;
 
 private:
+
     SynchronizationPrimitive  * m_pSynchronizationPrimitive = nullptr;
     Data                      * m_pData                     = nullptr;
 };

@@ -55,7 +55,7 @@ constexpr u32 djb2a_hash(const Char* pszStr, u32 nSeed)
     u32 nHash = nSeed;
     Char ch;
 
-    while (ch = *pszStr++)
+    while (ch = *pszStr++) //-V559
         nHash = ((nHash << 5) + nHash) + ch;
 
     return nHash;

@@ -94,14 +94,14 @@ public:
 
 private:
 
-    static constexpr float clamp_value  (float          fValue)         noexcept;
-    static constexpr float dec_to_float (int            nValue)         noexcept;
+    static constexpr float clamp_value  (float      fValue)         noexcept;
+    static constexpr float dec_to_float (int        nValue)         noexcept;
 
-    constexpr void  assign_checked  (const glm::vec4  & other)          noexcept;
-    constexpr void  assign_r_checked(float              fValue)         noexcept;
-    constexpr void  assign_g_checked(float              fValue)         noexcept;
-    constexpr void  assign_b_checked(float              fValue)         noexcept;
-    constexpr void  assign_a_checked(float              fValue)         noexcept;
+    constexpr void  assign_checked  (const glm::vec4& other)        noexcept;
+    constexpr void  assign_r_checked(float          fValue)         noexcept;
+    constexpr void  assign_g_checked(float          fValue)         noexcept;
+    constexpr void  assign_b_checked(float          fValue)         noexcept;
+    constexpr void  assign_a_checked(float          fValue)         noexcept;
 
 private:
 
