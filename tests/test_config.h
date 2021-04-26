@@ -122,3 +122,7 @@ QX_POP_SUPPRESS_WARNINGS
 #ifndef QX_TEST_COMPONENTS
     #define QX_TEST_COMPONENTS 1
 #endif
+
+#ifndef QX_TEST_STATE
+    #define QX_TEST_STATE 1
+#endif
