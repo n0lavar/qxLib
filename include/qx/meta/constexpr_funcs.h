@@ -95,7 +95,41 @@ constexpr T abs(T value)
 template<typename T>
 constexpr bool epsilon_equal(T left, T right, T eps = std::numeric_limits<T>::epsilon())
 {
-    return qx::meta::abs(left - right) < eps;
-};
+    return meta::abs(left - right) < eps;
+}
+
+//==============================================================================
+//!\fn                  qx::meta::epsilon_less_equal<T>
+//
+//!\brief  Constexpr comparison function for a user defined epsilon values
+//!\param  left  - left value
+//!\param  right - right value
+//!\param  eps   - epsilon value
+//!\retval       - true if left < right or |left - right| < eps
+//!\author Khrapov
+//!\date   5.05.2021
+//==============================================================================
+template<typename T>
+constexpr bool epsilon_less_equal(T left, T right, T eps = std::numeric_limits<T>::epsilon())
+{
+    return left < right || epsilon_equal(left, right, eps);
+}
+
+//==============================================================================
+//!\fn                 qx::meta::epsilon_greater_equal<T>
+//
+//!\brief  Constexpr comparison function for a user defined epsilon values
+//!\param  left  - left value
+//!\param  right - right value
+//!\param  eps   - epsilon value
+//!\retval       - true if left > right or |left - right| < eps
+//!\author Khrapov
+//!\date   5.05.2021
+//==============================================================================
+template<typename T>
+constexpr bool epsilon_greater_equal(T left, T right, T eps = std::numeric_limits<T>::epsilon())
+{
+    return left > right || epsilon_equal(left, right, eps);
+}
 
 }

@@ -16,8 +16,8 @@
 
 #if QX_TEST_CONSTEXPR_FUNCS
 
-#include <qx/meta/constexpr_funcs.h>
 #include <qx/useful_macros.h>
+#include <qx/meta/constexpr_funcs.h>
 
 
 //------------------------------ qx::meta::strlen ------------------------------
@@ -75,5 +75,21 @@ static_assert( qx::meta::epsilon_equal(0.5, 0.45, 0.1));
 static_assert( qx::meta::epsilon_equal(0.5, 0.48, 0.1));
 static_assert( qx::meta::epsilon_equal(0.5, 0.49, 0.1));
 static_assert(!qx::meta::epsilon_equal(0.5, 0.39, 0.1));
+
+//------------------------ qx::meta::epsilon_less_equal ------------------------
+
+static_assert( qx::meta::epsilon_less_equal(0.5, 0.41, 0.1));
+static_assert( qx::meta::epsilon_less_equal(0.2, 0.45, 0.1));
+static_assert( qx::meta::epsilon_less_equal(0.0, 0.48, 0.1));
+static_assert(!qx::meta::epsilon_less_equal(0.5, 0.2,  0.1));
+static_assert(!qx::meta::epsilon_less_equal(0.5, 0.39, 0.1));
+
+//----------------------- qx::meta::epsilon_greater_equal ----------------------
+
+static_assert( qx::meta::epsilon_greater_equal(0.5, 0.41, 0.1));
+static_assert( qx::meta::epsilon_greater_equal(0.5, 0.45, 0.1));
+static_assert( qx::meta::epsilon_greater_equal(0.5, 0.3,  0.1));
+static_assert(!qx::meta::epsilon_greater_equal(0.2, 0.49, 0.1));
+static_assert(!qx::meta::epsilon_greater_equal(0.0, 0.39, 0.1));
 
 #endif

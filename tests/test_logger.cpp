@@ -16,8 +16,8 @@
 
 #if QX_TEST_LOGGER
 
-#include <qx/logger_worker.h>
 #include <regex>
+#include <qx/logger_worker.h>
 
 template <
     const char sLogsFolder[],
@@ -101,7 +101,7 @@ protected:
     }
 
     /* called before every test */
-    void SetUp()
+    virtual void SetUp() override
     {
         std::filesystem::remove(m_sLogFilePath.data());
 
@@ -154,7 +154,7 @@ protected:
     }
 
     /* called after every test */
-    void TearDown()
+    virtual void TearDown() override
     {
         if (std::strcmp(Traits::GetUnit(), UNIT_DEFAULT) == 0
          || std::strcmp(Traits::GetUnit(), UNIT_FILE) == 0 && std::strcmp(Traits::GetUnit(), Traits::GetTraceFile()) == 0

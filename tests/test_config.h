@@ -126,3 +126,15 @@ QX_POP_SUPPRESS_WARNINGS
 #ifndef QX_TEST_STATE
     #define QX_TEST_STATE 1
 #endif
+
+#ifndef QX_TEST_EASING_FUNCTIONS
+    #define QX_TEST_EASING_FUNCTIONS 1
+#endif
+
+#ifndef QX_TEST_EASING_ELEMENT
+    #define QX_TEST_EASING_ELEMENT 1
+#endif
+
+#ifndef QX_TEST_EASING_SEQUENCE
+    #define QX_TEST_EASING_SEQUENCE 1
+#endif

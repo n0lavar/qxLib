@@ -89,10 +89,10 @@ public:
 
 private:
 
-    token   attach                  (observer * pObserver);
-    void    detach                  (observer * pObserver) noexcept;
-    void    on_iterator_destructed  (void)  noexcept;
-    void    on_iterator_constructed (void)  noexcept;
+    [[nodiscard]] token attach                  (observer * pObserver);
+    void                detach                  (observer * pObserver) noexcept;
+    void                on_iterator_destructed  (void)  noexcept;
+    void                on_iterator_constructed (void)  noexcept;
 
 public:
 
@@ -185,8 +185,7 @@ public:
 //!\class                           qx::observer
 //
 //!\brief   qx::subject class event observers
-//!\details The lifetime of objects of this class must be less than the lifetime
-//          of the corresponding qx::subject object
+//!\details ~
 //
 //!\author  Khrapov
 //!\date    6.03.2021
