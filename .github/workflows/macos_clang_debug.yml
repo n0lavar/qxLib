@@ -5,6 +5,7 @@ on: push
 jobs:
   macos_clang_debug:
     runs-on: macos-latest
+    
     env:
       CXX: clang++
 
@@ -12,8 +13,8 @@ jobs:
       - uses: actions/checkout@v2
       - uses: ./.github/actions/linux/install_dependencies
         with:
-          build_type: Debug
+            build_type: Debug
       - uses: ./.github/actions/linux/build
         with:
-          build_type: Debug
+            build_type: Debug
       - uses: ./.github/actions/linux/run_tests

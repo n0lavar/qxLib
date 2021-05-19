@@ -5,6 +5,6 @@ runs:
   steps:
     - name: Run tests
       shell: bash
-      working-directory: qxLib/build
+      working-directory: build
       run: |
         ctest --output-on-failure -j $(nproc)

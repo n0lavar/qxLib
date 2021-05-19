@@ -5,6 +5,6 @@ runs:
   steps:
     - name: Run tests
       shell: cmd
-      working-directory: qxLib/build
+      working-directory: build
       run: |
         ctest --output-on-failure -j %NUMBER_OF_PROCESSORS%

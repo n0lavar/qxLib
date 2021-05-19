@@ -5,7 +5,7 @@ runs:
   steps:
     - name: Calc code coverage
       shell: bash
-      working-directory: qxLib/build
+      working-directory: build
       run: |
         # copy all required files from subdirectories
         find . -name \*.gcda -exec cp {} . \;
