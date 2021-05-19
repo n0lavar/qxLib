@@ -16,7 +16,6 @@
 
 #if QX_TEST_STRING
 
-#include <qx/type_traits.h>
 #include <qx/containers/string.h>
 
 #include <list>

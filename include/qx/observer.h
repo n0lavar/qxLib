@@ -153,6 +153,11 @@ class subject : public base_subject
     {
     public:
 
+        const_base_iterator(void)                               noexcept = default;
+        const_base_iterator(const const_base_iterator & other)  noexcept = default;
+        const_base_iterator(const_base_iterator&&)              noexcept = default;
+        const_base_iterator(const TBaseIterator       & other)  noexcept;
+
         const TObserver* operator-> (void) const noexcept;
         const TObserver& operator*  (void) const noexcept;
     };
@@ -166,18 +171,18 @@ public:
 
 public:
 
-    auto begin   (void)       noexcept { return iterator(m_Observers.begin(), this); }
-    auto begin   (void) const noexcept { return const_iterator(m_Observers.cbegin()); }
-    auto cbegin  (void) const noexcept { return const_iterator(m_Observers.cbegin()); }
-    auto end     (void)       noexcept { return iterator(m_Observers.end(), this); }
-    auto end     (void) const noexcept { return const_iterator(m_Observers.cend()); }
-    auto cend    (void) const noexcept { return const_iterator(m_Observers.cend()); }
-    auto rbegin  (void)       noexcept { return reverse_iterator(m_Observers.rbegin(), this); }
-    auto rbegin  (void) const noexcept { return const_reverse_iterator(m_Observers.crbegin()); }
-    auto crbegin (void) const noexcept { return const_reverse_iterator(m_Observers.crbegin()); }
-    auto rend    (void)       noexcept { return reverse_iterator(m_Observers.rend(), this); }
-    auto rend    (void) const noexcept { return const_reverse_iterator(m_Observers.crend()); }
-    auto crend   (void) const noexcept { return const_reverse_iterator(m_Observers.crend()); }
+    auto begin   (void)       { return iterator(m_Observers.begin(), this); }
+    auto begin   (void) const { return const_iterator(m_Observers.cbegin()); }
+    auto cbegin  (void) const { return const_iterator(m_Observers.cbegin()); }
+    auto end     (void)       { return iterator(m_Observers.end(), this); }
+    auto end     (void) const { return const_iterator(m_Observers.cend()); }
+    auto cend    (void) const { return const_iterator(m_Observers.cend()); }
+    auto rbegin  (void)       { return reverse_iterator(m_Observers.rbegin(), this); }
+    auto rbegin  (void) const { return const_reverse_iterator(m_Observers.crbegin()); }
+    auto crbegin (void) const { return const_reverse_iterator(m_Observers.crbegin()); }
+    auto rend    (void)       { return reverse_iterator(m_Observers.rend(), this); }
+    auto rend    (void) const { return const_reverse_iterator(m_Observers.crend()); }
+    auto crend   (void) const { return const_reverse_iterator(m_Observers.crend()); }
 };
 
 //==============================================================================
@@ -195,7 +200,7 @@ class observer
 {
 public:
 
-    virtual ~observer                       (void) = 0 {}
+    virtual ~observer                       (void) = 0;
 
     void    attach_to                       (base_subject * pSubject);
     void    detach_from                     (base_subject * pSubject);

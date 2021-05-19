@@ -18,162 +18,85 @@
 
 #include <qx/easing/easing_functions.h>
 
-template<typename T, T Func(T)>
-class EasingFunctionTraits
-{
-public:
-
-    using Type = T;
-
-    static T CallEasingFunc(T x)
-    {
-        return Func(x);
-    }
-};
-
-template<typename Traits>
+template<typename T>
 class TestEasingFunctions : public ::testing::Test
 {
+protected:
+
+    template<T Func(T)>
+    void TestFunc()
+    {
+        // x zero
+        EXPECT_TRUE(qx::meta::epsilon_equal(
+            Func(T(0.f)),
+            T(0.f),
+            qx::easing::eps<T>()));
+
+        // x one
+        EXPECT_TRUE(qx::meta::epsilon_equal(
+            Func(T(1.f)),
+            T(1.f),
+            qx::easing::eps<T>()));
+
+        // check there are no divides on zero and other calc errors
+        constexpr T step(0.001f);
+
+        volatile T sum_to_avoid_optimizing_out(0.f);
+        for (T x = 0.0;
+            qx::meta::epsilon_less_equal(x, T(1.f));
+            x += step)
+        {
+            sum_to_avoid_optimizing_out = sum_to_avoid_optimizing_out + Func(x);
+        }
+
+    }
 };
 
 using Implementations = ::testing::Types
 <
-    EasingFunctionTraits<float, qx::easing::linear_func>,
-    EasingFunctionTraits<float, qx::easing::step_func>,
-    EasingFunctionTraits<float, qx::easing::smooth_step_func>,
-    EasingFunctionTraits<float, qx::easing::smoother_step_func>,
-    EasingFunctionTraits<float, qx::easing::quadratic_in_func>,
-    EasingFunctionTraits<float, qx::easing::quadratic_out_func>,
-    EasingFunctionTraits<float, qx::easing::quadratic_in_out_func>,
-    EasingFunctionTraits<float, qx::easing::cubic_in_func>,
-    EasingFunctionTraits<float, qx::easing::cubic_out_func>,
-    EasingFunctionTraits<float, qx::easing::cubic_in_out_func>,
-    EasingFunctionTraits<float, qx::easing::quartic_in_func>,
-    EasingFunctionTraits<float, qx::easing::quartic_out_func>,
-    EasingFunctionTraits<float, qx::easing::quartic_in_out_func>,
-    EasingFunctionTraits<float, qx::easing::quintic_in_func>,
-    EasingFunctionTraits<float, qx::easing::quintic_out_func>,
-    EasingFunctionTraits<float, qx::easing::quintic_in_out_func>,
-    EasingFunctionTraits<float, qx::easing::sine_in_func>,
-    EasingFunctionTraits<float, qx::easing::sine_out_func>,
-    EasingFunctionTraits<float, qx::easing::sine_in_out_func>,
-    EasingFunctionTraits<float, qx::easing::circular_in_func>,
-    EasingFunctionTraits<float, qx::easing::circular_out_func>,
-    EasingFunctionTraits<float, qx::easing::circular_in_out_func>,
-    EasingFunctionTraits<float, qx::easing::exponential_in_func>,
-    EasingFunctionTraits<float, qx::easing::exponential_out_func>,
-    EasingFunctionTraits<float, qx::easing::exponential_in_out_func>,
-    EasingFunctionTraits<float, qx::easing::elastic_in_func>,
-    EasingFunctionTraits<float, qx::easing::elastic_out_func>,
-    EasingFunctionTraits<float, qx::easing::elastic_in_out_func>,
-    EasingFunctionTraits<float, qx::easing::back_in_func>,
-    EasingFunctionTraits<float, qx::easing::back_out_func>,
-    EasingFunctionTraits<float, qx::easing::back_in_out_func>,
-    EasingFunctionTraits<float, qx::easing::bounce_out_func>,
-    EasingFunctionTraits<float, qx::easing::bounce_in_func>,
-    EasingFunctionTraits<float, qx::easing::bounce_in_out_func>,
-
-    EasingFunctionTraits<double, qx::easing::linear_func>,
-    EasingFunctionTraits<double, qx::easing::step_func>,
-    EasingFunctionTraits<double, qx::easing::smooth_step_func>,
-    EasingFunctionTraits<double, qx::easing::smoother_step_func>,
-    EasingFunctionTraits<double, qx::easing::quadratic_in_func>,
-    EasingFunctionTraits<double, qx::easing::quadratic_out_func>,
-    EasingFunctionTraits<double, qx::easing::quadratic_in_out_func>,
-    EasingFunctionTraits<double, qx::easing::cubic_in_func>,
-    EasingFunctionTraits<double, qx::easing::cubic_out_func>,
-    EasingFunctionTraits<double, qx::easing::cubic_in_out_func>,
-    EasingFunctionTraits<double, qx::easing::quartic_in_func>,
-    EasingFunctionTraits<double, qx::easing::quartic_out_func>,
-    EasingFunctionTraits<double, qx::easing::quartic_in_out_func>,
-    EasingFunctionTraits<double, qx::easing::quintic_in_func>,
-    EasingFunctionTraits<double, qx::easing::quintic_out_func>,
-    EasingFunctionTraits<double, qx::easing::quintic_in_out_func>,
-    EasingFunctionTraits<double, qx::easing::sine_in_func>,
-    EasingFunctionTraits<double, qx::easing::sine_out_func>,
-    EasingFunctionTraits<double, qx::easing::sine_in_out_func>,
-    EasingFunctionTraits<double, qx::easing::circular_in_func>,
-    EasingFunctionTraits<double, qx::easing::circular_out_func>,
-    EasingFunctionTraits<double, qx::easing::circular_in_out_func>,
-    EasingFunctionTraits<double, qx::easing::exponential_in_func>,
-    EasingFunctionTraits<double, qx::easing::exponential_out_func>,
-    EasingFunctionTraits<double, qx::easing::exponential_in_out_func>,
-    EasingFunctionTraits<double, qx::easing::elastic_in_func>,
-    EasingFunctionTraits<double, qx::easing::elastic_out_func>,
-    EasingFunctionTraits<double, qx::easing::elastic_in_out_func>,
-    EasingFunctionTraits<double, qx::easing::back_in_func>,
-    EasingFunctionTraits<double, qx::easing::back_out_func>,
-    EasingFunctionTraits<double, qx::easing::back_in_out_func>,
-    EasingFunctionTraits<double, qx::easing::bounce_out_func>,
-    EasingFunctionTraits<double, qx::easing::bounce_in_func>,
-    EasingFunctionTraits<double, qx::easing::bounce_in_out_func>,
-
-    EasingFunctionTraits<long double, qx::easing::linear_func>,
-    EasingFunctionTraits<long double, qx::easing::step_func>,
-    EasingFunctionTraits<long double, qx::easing::smooth_step_func>,
-    EasingFunctionTraits<long double, qx::easing::smoother_step_func>,
-    EasingFunctionTraits<long double, qx::easing::quadratic_in_func>,
-    EasingFunctionTraits<long double, qx::easing::quadratic_out_func>,
-    EasingFunctionTraits<long double, qx::easing::quadratic_in_out_func>,
-    EasingFunctionTraits<long double, qx::easing::cubic_in_func>,
-    EasingFunctionTraits<long double, qx::easing::cubic_out_func>,
-    EasingFunctionTraits<long double, qx::easing::cubic_in_out_func>,
-    EasingFunctionTraits<long double, qx::easing::quartic_in_func>,
-    EasingFunctionTraits<long double, qx::easing::quartic_out_func>,
-    EasingFunctionTraits<long double, qx::easing::quartic_in_out_func>,
-    EasingFunctionTraits<long double, qx::easing::quintic_in_func>,
-    EasingFunctionTraits<long double, qx::easing::quintic_out_func>,
-    EasingFunctionTraits<long double, qx::easing::quintic_in_out_func>,
-    EasingFunctionTraits<long double, qx::easing::sine_in_func>,
-    EasingFunctionTraits<long double, qx::easing::sine_out_func>,
-    EasingFunctionTraits<long double, qx::easing::sine_in_out_func>,
-    EasingFunctionTraits<long double, qx::easing::circular_in_func>,
-    EasingFunctionTraits<long double, qx::easing::circular_out_func>,
-    EasingFunctionTraits<long double, qx::easing::circular_in_out_func>,
-    EasingFunctionTraits<long double, qx::easing::exponential_in_func>,
-    EasingFunctionTraits<long double, qx::easing::exponential_out_func>,
-    EasingFunctionTraits<long double, qx::easing::exponential_in_out_func>,
-    EasingFunctionTraits<long double, qx::easing::elastic_in_func>,
-    EasingFunctionTraits<long double, qx::easing::elastic_out_func>,
-    EasingFunctionTraits<long double, qx::easing::elastic_in_out_func>,
-    EasingFunctionTraits<long double, qx::easing::back_in_func>,
-    EasingFunctionTraits<long double, qx::easing::back_out_func>,
-    EasingFunctionTraits<long double, qx::easing::back_in_out_func>,
-    EasingFunctionTraits<long double, qx::easing::bounce_out_func>,
-    EasingFunctionTraits<long double, qx::easing::bounce_in_func>,
-    EasingFunctionTraits<long double, qx::easing::bounce_in_out_func>
+    float,
+    double,
+    long double
 >;
 
 TYPED_TEST_SUITE(TestEasingFunctions, Implementations);
 
-TYPED_TEST(TestEasingFunctions, x_zero)
+TYPED_TEST(TestEasingFunctions, common)
 {
-    EXPECT_TRUE(qx::meta::epsilon_equal(
-        TypeParam::CallEasingFunc(TypeParam::Type(0.f)),
-        TypeParam::Type(0.f),
-        qx::easing::eps<typename TypeParam::Type>()));
-}
-
-TYPED_TEST(TestEasingFunctions, x_one)
-{
-    EXPECT_TRUE(qx::meta::epsilon_equal(
-        TypeParam::CallEasingFunc(TypeParam::Type(1.f)),
-        TypeParam::Type(1.f),
-        qx::easing::eps<typename TypeParam::Type>()));
-}
-
-TYPED_TEST(TestEasingFunctions, try_calc)
-{
-    constexpr typename TypeParam::Type step(0.001f);
-
-    volatile typename TypeParam::Type sum_to_avoid_optimizing_out(0.f);
-    for (typename TypeParam::Type x = 0.0;
-        qx::meta::epsilon_less_equal(x, TypeParam::Type(1.f));
-        x += step)
-    {
-        // check there are no divides on zero and other calc errors
-        sum_to_avoid_optimizing_out = sum_to_avoid_optimizing_out + TypeParam::CallEasingFunc(x);
-    }
+    TestFixture::template TestFunc<qx::easing::linear_func>();
+    TestFixture::template TestFunc<qx::easing::step_func>();
+    TestFixture::template TestFunc<qx::easing::smooth_step_func>();
+    TestFixture::template TestFunc<qx::easing::smoother_step_func>();
+    TestFixture::template TestFunc<qx::easing::quadratic_in_func>();
+    TestFixture::template TestFunc<qx::easing::quadratic_out_func>();
+    TestFixture::template TestFunc<qx::easing::quadratic_in_out_func>();
+    TestFixture::template TestFunc<qx::easing::cubic_in_func>();
+    TestFixture::template TestFunc<qx::easing::cubic_out_func>();
+    TestFixture::template TestFunc<qx::easing::cubic_in_out_func>();
+    TestFixture::template TestFunc<qx::easing::quartic_in_func>();
+    TestFixture::template TestFunc<qx::easing::quartic_out_func>();
+    TestFixture::template TestFunc<qx::easing::quartic_in_out_func>();
+    TestFixture::template TestFunc<qx::easing::quintic_in_func>();
+    TestFixture::template TestFunc<qx::easing::quintic_out_func>();
+    TestFixture::template TestFunc<qx::easing::quintic_in_out_func>();
+    TestFixture::template TestFunc<qx::easing::sine_in_func>();
+    TestFixture::template TestFunc<qx::easing::sine_out_func>();
+    TestFixture::template TestFunc<qx::easing::sine_in_out_func>();
+    TestFixture::template TestFunc<qx::easing::circular_in_func>();
+    TestFixture::template TestFunc<qx::easing::circular_out_func>();
+    TestFixture::template TestFunc<qx::easing::circular_in_out_func>();
+    TestFixture::template TestFunc<qx::easing::exponential_in_func>();
+    TestFixture::template TestFunc<qx::easing::exponential_out_func>();
+    TestFixture::template TestFunc<qx::easing::exponential_in_out_func>();
+    TestFixture::template TestFunc<qx::easing::elastic_in_func>();
+    TestFixture::template TestFunc<qx::easing::elastic_out_func>();
+    TestFixture::template TestFunc<qx::easing::elastic_in_out_func>();
+    TestFixture::template TestFunc<qx::easing::back_in_func>();
+    TestFixture::template TestFunc<qx::easing::back_out_func>();
+    TestFixture::template TestFunc<qx::easing::back_in_out_func>();
+    TestFixture::template TestFunc<qx::easing::bounce_out_func>();
+    TestFixture::template TestFunc<qx::easing::bounce_in_func>();
+    TestFixture::template TestFunc<qx::easing::bounce_in_out_func>();
 }
 
 #endif

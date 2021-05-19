@@ -331,6 +331,22 @@ void subject<TObserver>::base_iterator<TBaseIterator>::init(
 }
 
 //==============================================================================
+//!\fn subject<TObserver>::const_base_iterator<TBaseIterator>::const_base_iterator
+//
+//!\brief  const_base_iterator object constructor
+//!\param  other - other iterator
+//!\author Khrapov
+//!\date   21.05.2021
+//==============================================================================
+template<class TObserver>
+template<class TBaseIterator>
+inline subject<TObserver>::const_base_iterator<TBaseIterator>::const_base_iterator(
+    const TBaseIterator& other) noexcept
+    : TBaseIterator(other)
+{
+}
+
+//==============================================================================
 //!\fn qx::subject<TObserver>::const_base_iterator<TBaseIterator>::operator->
 //
 //!\brief  operator->
@@ -365,6 +381,8 @@ const TObserver& subject<TObserver>::const_base_iterator<TBaseIterator>::operato
 
 
 //-------------------------------- qx::observer --------------------------------
+
+inline observer::~observer(void) = default;
 
 //==============================================================================
 //!\fn                      qx::observer::attach_to

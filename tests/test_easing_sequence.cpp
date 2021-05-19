@@ -18,7 +18,7 @@
 
 #include <qx/easing/easing_sequence.h>
 
-#define TYPE TypeParam::type
+#define TYPE typename TypeParam::type
 
 template<typename T>
 class TestEasingSequence : public ::testing::Test

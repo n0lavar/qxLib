@@ -26,10 +26,12 @@ class BaseTestComponent : public qx::rtti_base
 
 public:
 
-    ~BaseTestComponent() = 0 {}
+    ~BaseTestComponent() = 0;
     bool GetConst() const { return true; }
     bool GetNonConst() { return true; }
 };
+
+inline BaseTestComponent::~BaseTestComponent() = default;
 
 class TestComponent : public BaseTestComponent
 {
@@ -133,7 +135,7 @@ TEST(components, main)
 
     // get
     TestComponent* pTestComponent = container.get<TestComponent>();
-    EXPECT_EQ(pTestComponentAdd1, pTestComponent);
+    EXPECT_TRUE(pTestComponentAdd1 == pTestComponent || pTestComponentAdd2 == pTestComponent);
     EXPECT_EQ(pTestComponentAdd1->GetTestComponentData(), 'a');
     EXPECT_EQ(container.size(), 5);
 

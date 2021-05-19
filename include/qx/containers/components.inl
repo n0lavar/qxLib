@@ -52,6 +52,7 @@ inline TComponent* components<TBaseComponent>::add(
 //!\fn         qx::components<TBaseComponent>::get<TKeyComponent>
 //
 //!\brief  Get first component with "type" key
+//!\note   "founded first" is not "added first"
 //!\tparam TKeyComponent - the type-identifier that was used when adding
 //                         the component
 //!\retval               - component pointer or nullptr if not found
@@ -70,6 +71,7 @@ inline TKeyComponent* components<TBaseComponent>::get(void) const
 //!\fn              components<TBaseComponent>::get_by_id
 //
 //!\brief  Get first component with "class_identificator" key
+//!\note   "founded first" is not "added first"
 //!\param  id - class id
 //!\retval    - component pointer or nullptr if not found
 //!\author Khrapov

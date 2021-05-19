@@ -13,6 +13,7 @@
 #pragma once
 
 #include <array>
+#include <cstring>  // std::memmove
 
 namespace qx
 {

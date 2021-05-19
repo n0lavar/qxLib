@@ -12,13 +12,15 @@
 //==============================================================================
 #pragma once
 
+#include <qx/type_traits.h>
+#include <qx/containers/container.h>
+#include <qx/containers/string_data.h>
+#include <qx/containers/string_hash.h>
+
 #include <iostream>
 #include <optional>
 #include <string_view>
 #include <vector>
-#include <qx/containers/container.h>
-#include <qx/containers/string_data.h>
-#include <qx/containers/string_hash.h>
 
 namespace qx
 {
@@ -81,8 +83,8 @@ class basic_string
     using vector = std::vector<basic_string>;
 
     template<class _Traits>
-    friend detail::istream<_Traits>& ::operator>>(
-        detail::istream<_Traits>& is,
+    friend qx::detail::istream<_Traits>& ::operator>>(
+        qx::detail::istream<_Traits>& is,
         basic_string<_Traits>& str);
 
 public:

@@ -18,7 +18,7 @@
 
 #include <qx/easing/easing_element.h>
 
-#define TYPE TypeParam::type
+#define TYPE typename TypeParam::type
 
 template<typename T>
 class TestEasingElements : public ::testing::Test
@@ -31,7 +31,7 @@ protected:
     /* called before every test */
     virtual void SetUp() override
     {
-        m_Element = T(qx::easing::linear_func<typename T::type>, T::type(-1), T::type(2));
+        m_Element = T(qx::easing::linear_func<type>, type(-1), type(2));
     }
 
     void CheckNotStarted()

@@ -46,6 +46,14 @@ public:
 
     public:
 
+        iterator    (void)                      noexcept = default;
+        iterator    (const iterator   & other)  noexcept = default;
+        iterator    (iterator&&)                noexcept = default;
+        iterator    (const super_class& other)  noexcept
+            : super_class(other)
+        {
+        }
+
         auto* operator->(void) noexcept
         {
             return super_class::operator->()->second.get();
@@ -62,6 +70,14 @@ public:
         using super_class = typename container::const_iterator;
 
     public:
+
+        const_iterator  (void)                          noexcept = default;
+        const_iterator  (const const_iterator & other)  noexcept = default;
+        const_iterator  (const_iterator&&)              noexcept = default;
+        const_iterator  (const super_class    & other)  noexcept
+            : super_class(other)
+        {
+        }
 
         const auto* operator->(void) const noexcept
         {
@@ -106,12 +122,12 @@ public:
     template<class TKeyComponent>
     bool contains(void) const;
 
-    auto begin (void)       noexcept { return iterator(m_Components.begin()); }
-    auto begin (void) const noexcept { return const_iterator(m_Components.begin()); }
-    auto cbegin(void) const noexcept { return const_iterator(m_Components.cbegin()); }
-    auto end   (void)       noexcept { return iterator(m_Components.end()); }
-    auto end   (void) const noexcept { return const_iterator(m_Components.end()); }
-    auto cend  (void) const noexcept { return const_iterator(m_Components.cend()); }
+    auto begin (void)       { return iterator(m_Components.begin()); }
+    auto begin (void) const { return const_iterator(m_Components.begin()); }
+    auto cbegin(void) const { return const_iterator(m_Components.cbegin()); }
+    auto end   (void)       { return iterator(m_Components.end()); }
+    auto end   (void) const { return const_iterator(m_Components.end()); }
+    auto cend  (void) const { return const_iterator(m_Components.cend()); }
 
     auto size  (void) const noexcept { return m_Components.size(); }
     auto empty (void) const noexcept { return m_Components.empty(); }

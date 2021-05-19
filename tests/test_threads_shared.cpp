@@ -16,9 +16,11 @@
 
 #if QX_TEST_THREADS_SHARED
 
+#include <qx/threads_shared.h>
+
 #include <chrono>
 #include <random>
-#include <qx/threads_shared.h>
+#include <thread>
 
 struct STestStruct
 {
