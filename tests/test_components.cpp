@@ -26,6 +26,8 @@ class BaseTestComponent
 
 public:
 
+    virtual ~BaseTestComponent(void) = default;
+
     bool GetConst() const { return true; }
     bool GetNonConst() { return true; }
 };

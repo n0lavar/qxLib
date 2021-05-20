@@ -31,6 +31,10 @@ class CClass2
 class CRttiBase
 {
     QX_RTTI_BASE_CLASS(CRttiBase)
+
+public:
+
+    virtual ~CRttiBase(void) = default;
 };
 QX_RTTI_BASE_CLASS_IMPL(CRttiBase)
 
