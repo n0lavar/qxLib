@@ -20,18 +20,16 @@
 
 #include <string>
 
-class BaseTestComponent : public qx::rtti_base
+class BaseTestComponent
 {
-    QX_RTTI_CLASS(BaseTestComponent, qx::rtti_base)
+    QX_RTTI_BASE_CLASS(BaseTestComponent)
 
 public:
 
-    ~BaseTestComponent() = 0;
     bool GetConst() const { return true; }
     bool GetNonConst() { return true; }
 };
-
-inline BaseTestComponent::~BaseTestComponent() = default;
+QX_RTTI_BASE_CLASS_IMPL(BaseTestComponent)
 
 class TestComponent : public BaseTestComponent
 {

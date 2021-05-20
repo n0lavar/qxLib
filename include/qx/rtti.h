@@ -63,93 +63,8 @@ struct is_derived
 
 }
 
-#ifndef QX_RTTI_CLASS_NAME
-    #define QX_RTTI_CLASS_NAME(className) # className
-#endif
-
 namespace qx
 {
-
-//==============================================================================
-//
-//!\class                        qx::rtti_base
-//
-//!\brief   Base class for rtti system
-//!\details ~
-//
-//!\author  Khrapov
-//!\date    7.01.2021
-//
-//==============================================================================
-class rtti_base
-{
-public:
-
-    using SuperClass = rtti_base;
-    using BaseClass  = rtti_base;
-    using ThisClass  = rtti_base;
-
-    virtual ~rtti_base() noexcept = default;
-
-    template <typename RTTI_TYPE>
-    bool is_derived_from() const noexcept
-    {
-        return is_base_id(qx::get_class_id<RTTI_TYPE>()) ||
-               qx::get_class_id<RTTI_TYPE>() == get_class_id();
-    }
-
-    virtual bool is_derived_from_id(class_identificator id) const noexcept
-    {
-        return id == get_class_id_static();
-    }
-
-    static constexpr std::string_view get_class_name_static(void) noexcept
-    {
-        return QX_RTTI_CLASS_NAME(rtti_base);
-    }
-
-    virtual std::string_view get_class_name(void) const noexcept
-    {
-        return get_class_name_static();
-    }
-
-    static class_identificator get_class_id_static(void) noexcept
-    {
-        static class_identificator nId = get_next_id();
-        return nId;
-    }
-
-    virtual int get_class_id(void) const noexcept
-    {
-        return get_class_id_static();
-    }
-
-protected:
-
-    virtual bool is_base_id(class_identificator base_id) const noexcept
-    {
-        return base_id == get_class_id_static();
-    }
-
-    static class_identificator get_next_id(void) noexcept
-    {
-        static class_identificator nId = 0;
-        return nId++;
-    }
-};
-
-template <>
-struct is_derived<rtti_base>
-{
-    template <typename Y>
-    static bool from() noexcept
-    {
-        if constexpr (detail::has_get_class_id_static<Y>)
-            return rtti_base::get_class_id_static() == Y::get_class_id_static();
-        else
-            return false;
-    }
-};
 
 //==============================================================================
 //!\fn                          qx::rtti_cast<Y>
@@ -204,6 +119,80 @@ Y* rtti_cast(X* pointer)
     QX_POP_SUPPRESS_WARNINGS
 }
 
+}
+
+#ifndef QX_RTTI_CLASS_NAME
+    #define QX_RTTI_CLASS_NAME(className) # className
+#endif
+
+#define QX_RTTI_BASE_CLASS(thisClass)                                       \
+public:                                                                     \
+                                                                            \
+    using SuperClass = thisClass;                                           \
+    using BaseClass  = thisClass;                                           \
+    using ThisClass  = thisClass;                                           \
+                                                                            \
+    template <typename RTTI_TYPE>                                           \
+    bool is_derived_from() const noexcept                                   \
+    {                                                                       \
+        return is_base_id(qx::get_class_id<RTTI_TYPE>()) ||                 \
+               qx::get_class_id<RTTI_TYPE>() == get_class_id();             \
+    }                                                                       \
+                                                                            \
+    virtual bool is_derived_from_id(qx::class_identificator id) const noexcept \
+    {                                                                       \
+        return id == get_class_id_static();                                 \
+    }                                                                       \
+                                                                            \
+    static constexpr std::string_view get_class_name_static(void) noexcept  \
+    {                                                                       \
+        return QX_RTTI_CLASS_NAME(thisClass);                               \
+    }                                                                       \
+                                                                            \
+    virtual std::string_view get_class_name(void) const noexcept            \
+    {                                                                       \
+        return get_class_name_static();                                     \
+    }                                                                       \
+                                                                            \
+    static qx::class_identificator get_class_id_static(void) noexcept       \
+    {                                                                       \
+        static qx::class_identificator nId = get_next_id();                 \
+        return nId;                                                         \
+    }                                                                       \
+                                                                            \
+    virtual int get_class_id(void) const noexcept                           \
+    {                                                                       \
+        return get_class_id_static();                                       \
+    }                                                                       \
+                                                                            \
+protected:                                                                  \
+                                                                            \
+    virtual bool is_base_id(qx::class_identificator base_id) const noexcept \
+    {                                                                       \
+        return base_id == get_class_id_static();                            \
+    }                                                                       \
+                                                                            \
+    static qx::class_identificator get_next_id(void) noexcept               \
+    {                                                                       \
+        static qx::class_identificator nId = 0;                             \
+        return nId++;                                                       \
+    }
+
+#define QX_RTTI_BASE_CLASS_IMPL(rttiBaseClass)                              \
+namespace qx                                                                \
+{                                                                           \
+template <>                                                                 \
+struct is_derived<rttiBaseClass>                                            \
+{                                                                           \
+    template <typename Y>                                                   \
+    static bool from() noexcept                                             \
+    {                                                                       \
+        if constexpr (detail::has_get_class_id_static<Y>)                   \
+            return rttiBaseClass::get_class_id_static() == Y::get_class_id_static(); \
+        else                                                                \
+            return false;                                                   \
+    }                                                                       \
+};                                                                          \
 }
 
 
