@@ -43,7 +43,6 @@ A few useful things for developing your own game engine with OpenGL:
 + logger_worker (thread safe logger)
 + rtti (realization based on virtual functions, can be used without rtti compiler flag)
 + singleton (Meyer's singleton macro)
-+ smart_enum: (declare once and convert enum and string into each other)
 + type_traits:
   + is_iterator_v
   + is_random_access_iterator_v
