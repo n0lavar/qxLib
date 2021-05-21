@@ -12,7 +12,7 @@
 //==============================================================================
 #pragma once
 
-#include <qx/containers/iterator.h>
+#include <qx/patterns/iterator.h>
 
 #define IMPL_CONTAINER(container)                                                                                                       \
                                                                                                                                         \
