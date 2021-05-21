@@ -912,17 +912,17 @@ TYPED_TEST(TestQxString, remove_all)
     check_remove_all_type(StdString());
 }
 
-TYPED_TEST(TestQxString, apply_case)
+TYPED_TEST(TestQxString, cases)
 {
     StringTypeTn str(STR("maNy diffeRent words placEd Here. yoU can test,iT. really"));
 
     StringTypeTn str0(str);
-    str0.apply_case(qx::case_type::lower);
+    str0.to_lower();
     EXPECT_EQ(str0.size(), str.size());
     EXPECT_STREQ(str0.data(), STR("many different words placed here. you can test,it. really"));
 
     StringTypeTn str1(str);
-    str1.apply_case(qx::case_type::upper);
+    str1.to_upper();
     EXPECT_EQ(str1.size(), str.size());
     EXPECT_STREQ(str1.data(), STR("MANY DIFFERENT WORDS PLACED HERE. YOU CAN TEST,IT. REALLY"));
 }

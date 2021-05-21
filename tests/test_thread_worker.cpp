@@ -16,9 +16,10 @@
 
 #if QX_TEST_THREAD_WORKER
 
-#include <qx/thread_worker.h>
-#include <memory>
+#include <qx/thread/thread_worker.h>
+
 #include <cmath>
+#include <memory>
 
 constexpr size_t NUM_ITERATIONS = 1000000;
 constexpr double PI_RESULT = 3.141591653589774;

@@ -130,4 +130,4 @@ inline bool try_lock_synchronization_primitive(SynchronizationPrimitive* pSP)
 
 }
 
-#include <qx/threads_shared.inl>
+#include <qx/thread/threads_shared.inl>

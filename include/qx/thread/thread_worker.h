@@ -82,4 +82,4 @@ inline std::thread::id             thread_worker::thread_get_id         () const
 
 }
 
-#include <qx/thread_worker.inl>
+#include <qx/thread/thread_worker.inl>

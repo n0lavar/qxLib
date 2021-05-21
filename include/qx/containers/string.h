@@ -53,13 +53,6 @@ qx::detail::istream<Traits>& operator>>(
 namespace qx
 {
 
-//!< case types for .apply_case()
-enum class case_type
-{
-    lower,
-    upper,
-};
-
 template<typename T>
 concept string_convertable = requires(T t)
 {
@@ -156,7 +149,8 @@ public:
     basic_string            substr       (size_type              nPos,
                                           size_type              nSymbols   = npos) const   noexcept;
 
-    void                    apply_case   (case_type              eCaseType)                 noexcept;
+    void                    to_lower     (void)                                             noexcept;
+    void                    to_upper     (void)                                             noexcept;
 
     value_type              front        (void)                                     const   noexcept;
     value_type              back         (void)                                     const   noexcept;

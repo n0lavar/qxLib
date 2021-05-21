@@ -16,9 +16,10 @@
 
 #if QX_TEST_BENCHMARK
 
-#include <thread>
 #include <cmath>
-#include <qx/benchmark.h>
+#include <thread>
+
+#include <qx/stat/benchmark.h>
 
 TEST(benchmark, benchmark)
 {

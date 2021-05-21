@@ -458,30 +458,31 @@ inline basic_string<Traits> basic_string<Traits>::substr(
 }
 
 //==============================================================================
-//!\fn            qx::basic_string<Traits>::apply_case
+//!\fn                   basic_string<Traits>::to_lower
 //
-//!\brief  Apply case type to the whole string
-//!\param  eCaseType - case type \see case_type
+//!\brief   Converts string to lowercase
 //!\author Khrapov
-//!\date   31.10.2019
+//!\date   21.05.2021
 //==============================================================================
 template<class Traits>
-inline void basic_string<Traits>::apply_case(case_type eCaseType) noexcept
+inline void basic_string<Traits>::to_lower(void) noexcept
 {
-    switch (eCaseType)
-    {
-    case case_type::lower:
-        for (value_type& ch : *this)
-            ch = Traits::to_lower(ch);
+    for (value_type& ch : *this)
+        ch = Traits::to_lower(ch);
+}
 
-        break;
-
-    case case_type::upper:
-        for (value_type& ch : *this)
-            ch = Traits::to_upper(ch);
-
-        break;
-    }
+//==============================================================================
+//!\fn                   basic_string<Traits>::to_upper
+//
+//!\brief   Converts string to uppercase
+//!\author Khrapov
+//!\date   21.05.2021
+//==============================================================================
+template<class Traits>
+inline void basic_string<Traits>::to_upper(void) noexcept
+{
+    for (value_type& ch : *this)
+        ch = Traits::to_upper(ch);
 }
 
 //==============================================================================

@@ -13,8 +13,8 @@
 #pragma once
 
 #include <qx/logger.h>
-#include <qx/threads_shared.h>
-#include <qx/thread_worker.h>
+#include <qx/thread/threads_shared.h>
+#include <qx/thread/thread_worker.h>
 
 #include <memory>
 #include <queue>
