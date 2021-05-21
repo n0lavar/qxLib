@@ -214,4 +214,4 @@ private:
 
 }
 
-#include <qx/observer.inl>
+#include <qx/patterns/observer.inl>

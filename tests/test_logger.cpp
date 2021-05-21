@@ -16,8 +16,9 @@
 
 #if QX_TEST_LOGGER
 
+#include <qx/logger/logger_worker.h>
+
 #include <regex>
-#include <qx/logger_worker.h>
 
 template <
     const char sLogsFolder[],

@@ -16,7 +16,7 @@
 
 #if QX_TEST_SINGLETON
 
-#include <qx/singleton.h>
+#include <qx/patterns/singleton.h>
 
 class CTestSingleton
 {

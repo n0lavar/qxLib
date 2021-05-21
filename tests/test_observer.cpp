@@ -16,7 +16,7 @@
 
 #if QX_TEST_OBSERVER
 
-#include <qx/observer.h>
+#include <qx/patterns/observer.h>
 
 #include <memory>
 #include <string>

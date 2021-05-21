@@ -12,7 +12,7 @@
 //==============================================================================
 #pragma once
 
-#include <qx/singleton.h>
+#include <qx/patterns/singleton.h>
 #include <qx/suppress_warnings.h>
 #include <qx/containers/string.h>
 
@@ -283,4 +283,4 @@ class logger_singleton : public logger
 
 }
 
-#include <qx/logger.inl>
+#include <qx/logger/logger.inl>
