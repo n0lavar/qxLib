@@ -19,6 +19,7 @@
 #include <memory>
 #include <qx/rtti.h>
 #include <qx/useful_macros.h>
+#include <qx/containers/string_utils.h>
 
 class CClass1
 {

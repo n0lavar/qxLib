@@ -13,12 +13,13 @@
 #pragma once
 
 #include <qx/useful_macros.h>
+#include <qx/containers/string_utils.h>
 
-#include <cwctype>
-#include <sstream>
-#include <cstring>
 #include <cctype>
 #include <cstdarg>
+#include <cstring>
+#include <cwctype>
+#include <sstream>
 
 namespace qx
 {

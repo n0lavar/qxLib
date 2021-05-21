@@ -17,6 +17,8 @@
 #if QX_TEST_USEFUL_MACROS
 
 #include <qx/useful_macros.h>
+#include <qx/containers/string_utils.h>
+
 #include <map>
 
 
@@ -53,7 +55,7 @@ QX_STATIC_ASSERT_STR_EQ(pszName, "val");
 //-------------------------------- QX_LINE_NAME --------------------------------
 
 constexpr int QX_LINE_NAME(test) = 5;
-static_assert(test55 == 5);
+static_assert(test57 == 5);
 
 
 

@@ -17,7 +17,7 @@
 //==============================================================================
 #pragma once
 
-#include <qx/meta/constexpr_funcs.h>
+#include <qx/math.h>
 
 #include <cmath>
 #include <functional>
@@ -70,9 +70,9 @@ constexpr auto step = step_func<float>;
 template<typename T>
 inline T smooth_step_func(T x) noexcept
 {
-    if (meta::epsilon_less_equal(x, T(0.0f)))
+    if (epsilon_less_equal(x, T(0.0f)))
         return T(0.0f);
-    else if (meta::epsilon_greater_equal(x, T(1.0f)))
+    else if (epsilon_greater_equal(x, T(1.0f)))
         return T(1.0f);
     else
         return (T(3.0f) - T(2.0f) * x) * std::pow(x, T(2.0f));
@@ -84,9 +84,9 @@ constexpr auto smooth_step = smooth_step_func<float>;
 template<typename T>
 inline T smoother_step_func(T x) noexcept
 {
-    if (meta::epsilon_less_equal(x, T(0.0f)))
+    if (epsilon_less_equal(x, T(0.0f)))
         return T(0.0f);
-    else if (meta::epsilon_greater_equal(x, T(1.0f)))
+    else if (epsilon_greater_equal(x, T(1.0f)))
         return T(1.0f);
     else
         return std::pow(x, T(3.0f)) * (x * (x * T(6.0f) - T(15.0f)) + T(10.0f));

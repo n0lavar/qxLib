@@ -55,8 +55,8 @@ protected:
         EXPECT_FALSE(m_Sequence.is_paused());
         EXPECT_FALSE(m_Sequence.is_finished());
         EXPECT_FALSE(m_Sequence.is_looped());
-        EXPECT_TRUE(qx::meta::epsilon_equal(m_Sequence.get(), type(0.f)));
-        EXPECT_TRUE(qx::meta::epsilon_equal(m_Sequence.get_fraction(), type(0.f)));
+        EXPECT_TRUE(qx::epsilon_equal(m_Sequence.get(), type(0.f)));
+        EXPECT_TRUE(qx::epsilon_equal(m_Sequence.get_fraction(), type(0.f)));
     }
 
     void CheckStarted(type fExpectedValue, type fExpectedFraction, bool bExpectedLooped = false)
@@ -66,8 +66,8 @@ protected:
         EXPECT_FALSE(m_Sequence.is_paused());
         EXPECT_FALSE(m_Sequence.is_finished());
         EXPECT_EQ(m_Sequence.is_looped(), bExpectedLooped);
-        EXPECT_TRUE(qx::meta::epsilon_equal(m_Sequence.get(), fExpectedValue, eps));
-        EXPECT_TRUE(qx::meta::epsilon_equal(m_Sequence.get_fraction(), fExpectedFraction, eps));
+        EXPECT_TRUE(qx::epsilon_equal(m_Sequence.get(), fExpectedValue, eps));
+        EXPECT_TRUE(qx::epsilon_equal(m_Sequence.get_fraction(), fExpectedFraction, eps));
     }
 
     void CheckPaused(type fExpectedValue, type fExpectedFraction)
@@ -77,8 +77,8 @@ protected:
         EXPECT_TRUE(m_Sequence.is_paused());
         EXPECT_FALSE(m_Sequence.is_finished());
         EXPECT_FALSE(m_Sequence.is_looped());
-        EXPECT_TRUE(qx::meta::epsilon_equal(m_Sequence.get(), fExpectedValue, eps));
-        EXPECT_TRUE(qx::meta::epsilon_equal(m_Sequence.get_fraction(), fExpectedFraction, eps));
+        EXPECT_TRUE(qx::epsilon_equal(m_Sequence.get(), fExpectedValue, eps));
+        EXPECT_TRUE(qx::epsilon_equal(m_Sequence.get_fraction(), fExpectedFraction, eps));
     }
 
     void CheckFinished(type fExpectedValue)
@@ -88,8 +88,8 @@ protected:
         EXPECT_FALSE(m_Sequence.is_paused());
         EXPECT_TRUE(m_Sequence.is_finished());
         EXPECT_FALSE(m_Sequence.is_looped());
-        EXPECT_TRUE(qx::meta::epsilon_equal(m_Sequence.get(), fExpectedValue, eps));
-        EXPECT_TRUE(qx::meta::epsilon_equal(m_Sequence.get_fraction(), type(1.f)));
+        EXPECT_TRUE(qx::epsilon_equal(m_Sequence.get(), fExpectedValue, eps));
+        EXPECT_TRUE(qx::epsilon_equal(m_Sequence.get_fraction(), type(1.f)));
     }
 
 protected:
@@ -158,24 +158,24 @@ TYPED_TEST(TestEasingSequence, update_overflow)
 
 TYPED_TEST(TestEasingSequence, update_speed)
 {
-    EXPECT_TRUE(qx::meta::epsilon_equal(TestFixture::m_Sequence.get_speed(), TYPE(1.f)));
+    EXPECT_TRUE(qx::epsilon_equal(TestFixture::m_Sequence.get_speed(), TYPE(1.f)));
 
     TestFixture::AddDefaultElements();
-    EXPECT_TRUE(qx::meta::epsilon_equal(TestFixture::m_Sequence.get_speed(), TYPE(1.f)));
+    EXPECT_TRUE(qx::epsilon_equal(TestFixture::m_Sequence.get_speed(), TYPE(1.f)));
 
     TestFixture::m_Sequence.set_speed(TYPE(2.f));
-    EXPECT_TRUE(qx::meta::epsilon_equal(TestFixture::m_Sequence.get_speed(), TYPE(2.f)));
+    EXPECT_TRUE(qx::epsilon_equal(TestFixture::m_Sequence.get_speed(), TYPE(2.f)));
 
     TestFixture::m_Sequence.start();
-    EXPECT_TRUE(qx::meta::epsilon_equal(TestFixture::m_Sequence.get_speed(), TYPE(2.f)));
+    EXPECT_TRUE(qx::epsilon_equal(TestFixture::m_Sequence.get_speed(), TYPE(2.f)));
 
     TestFixture::m_Sequence.update(TYPE(0.7f));
     TestFixture::CheckStarted(TYPE(0.9f), TYPE(1.f / 3.f + 2.f / 15.f));
-    EXPECT_TRUE(qx::meta::epsilon_equal(TestFixture::m_Sequence.get_speed(), TYPE(2.f)));
+    EXPECT_TRUE(qx::epsilon_equal(TestFixture::m_Sequence.get_speed(), TYPE(2.f)));
 
     TestFixture::m_Sequence.update(TYPE(1.0f));
     TestFixture::CheckFinished(TYPE(0.5f));
-    EXPECT_TRUE(qx::meta::epsilon_equal(TestFixture::m_Sequence.get_speed(), TYPE(2.f)));
+    EXPECT_TRUE(qx::epsilon_equal(TestFixture::m_Sequence.get_speed(), TYPE(2.f)));
 }
 
 TYPED_TEST(TestEasingSequence, pause_resume)

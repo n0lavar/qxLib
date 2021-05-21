@@ -12,8 +12,9 @@
 //==============================================================================
 #pragma once
 
+#include <qx/math.h>
 #include <qx/suppress_warnings.h>
-#include <qx/meta/constexpr_funcs.h>
+#include <qx/typedefs.h>
 
 #include <array>
 #include <functional>
@@ -53,8 +54,8 @@ constexpr bool between(T left, T value, T right, Compare compare)
     }
     else if constexpr (std::is_floating_point_v<T> && std::is_same_v<Compare, std::less_equal<>>)
     {
-        return (left  < value || qx::meta::epsilon_equal(left,  value))
-            && (value < right || qx::meta::epsilon_equal(value, right));
+        return (left  < value || qx::epsilon_equal(left,  value))
+            && (value < right || qx::epsilon_equal(value, right));
     }
     else
     {

@@ -183,6 +183,52 @@ constexpr int iter_strcmp(
     return nRet;
 }
 
+//==============================================================================
+//!\fn                            qx::strlen
+//
+//!\brief  Constexpr string length
+//!\param  psz - poiter to string zero terminated
+//!\retval     - string length
+//!\author Khrapov
+//!\date   24.09.2020
+//==============================================================================
+template<typename TChar>
+constexpr std::size_t strlen(const TChar* psz)
+{
+    std::size_t nLen = 0;
+    while (psz && *psz != 0)
+    {
+        ++psz;
+        nLen++;
+    }
+
+    return nLen;
+}
+
+//==============================================================================
+//!\fn                         qx::strcmp<TChar>
+//
+//!\brief  Compare two strings
+//!\param  pszLeft  - first string
+//!\param  pszRight - second string
+//!\retval          -
+//  < 0 the first character that does not match has a lower value in ptr1 than in ptr2
+//    0 the contents of both strings are equal
+//  > 0 the first character that does not match has a greater value in ptr1 than in ptr2
+//!\author Khrapov
+//!\date   25.09.2020
+//==============================================================================
+template<typename TChar>
+constexpr int strcmp(const TChar* pszLeft, const TChar* pszRight)
+{
+    while (*pszLeft && (*pszLeft == *pszRight))
+    {
+        ++pszLeft;
+        ++pszRight;
+    }
+    return *pszLeft - *pszRight;
+}
+
 namespace detail
 {
     template<typename value_type>
@@ -238,12 +284,12 @@ namespace detail
 /*
     Static string comparisons
 */
-#define QX_STATIC_ASSERT_STR_EQ(a, b) static_assert(qx::meta::strcmp((a), (b)) == 0)
-#define QX_STATIC_ASSERT_STR_NE(a, b) static_assert(qx::meta::strcmp((a), (b)) != 0)
-#define QX_STATIC_ASSERT_STR_LT(a, b) static_assert(qx::meta::strcmp((a), (b)) <  0)
-#define QX_STATIC_ASSERT_STR_LE(a, b) static_assert(qx::meta::strcmp((a), (b)) <= 0)
-#define QX_STATIC_ASSERT_STR_GT(a, b) static_assert(qx::meta::strcmp((a), (b)) >  0)
-#define QX_STATIC_ASSERT_STR_GE(a, b) static_assert(qx::meta::strcmp((a), (b)) >= 0)
+#define QX_STATIC_ASSERT_STR_EQ(a, b) static_assert(qx::strcmp((a), (b)) == 0)
+#define QX_STATIC_ASSERT_STR_NE(a, b) static_assert(qx::strcmp((a), (b)) != 0)
+#define QX_STATIC_ASSERT_STR_LT(a, b) static_assert(qx::strcmp((a), (b)) <  0)
+#define QX_STATIC_ASSERT_STR_LE(a, b) static_assert(qx::strcmp((a), (b)) <= 0)
+#define QX_STATIC_ASSERT_STR_GT(a, b) static_assert(qx::strcmp((a), (b)) >  0)
+#define QX_STATIC_ASSERT_STR_GE(a, b) static_assert(qx::strcmp((a), (b)) >= 0)
 
 //==============================================================================
 

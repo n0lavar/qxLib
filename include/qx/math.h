@@ -1,69 +1,59 @@
 //==============================================================================
 //
-//!\file                       constexpr_funcs.h
+//!\file                            math.h
 //
-//!\brief       Constexpr functions implementations
-//!\details     Prefer using functions from the standard library
-//              if you don't need constexpr
+//!\brief       Math functions
+//!\details     ~
 //
 //!\author      Khrapov
-//!\date        12.09.2020
+//!\date        22.03.2020
 //!\copyright   (c) Nick Khrapov, 2020. All right reserved.
 //
 //==============================================================================
 #pragma once
 
-#include <qx/containers/string_utils.h>
-
+#include <ctime>
 #include <limits>
+#include <random>
+#include <type_traits>
 
-namespace qx::meta
+namespace qx
 {
 
 //==============================================================================
-//!\fn                         qx::meta::strlen
+//!\fn                         qx::random<T>
 //
-//!\brief  Constexpr string length
-//!\param  psz - poiter to string zero terminated
-//!\retval     - string length
+//!\brief  Get random generated integral value [min, max]
+//!\param  min - min uniform distribution value (including)
+//!\param  max - max uniform distribution value (including)
+//!\retval     - random generated integral value
 //!\author Khrapov
-//!\date   24.09.2020
+//!\date   22.03.2020
 //==============================================================================
-template<typename TChar>
-constexpr std::size_t strlen(const TChar* psz)
+template<class T>
+typename std::enable_if_t<std::is_integral_v<T>, T> random(T min, T max)
 {
-    std::size_t nLen = 0;
-    while (psz && *psz != QX_CHAR_PREFIX(TChar, '\0'))
-    {
-        ++psz;
-        nLen++;
-    }
-
-    return nLen;
+    static std::default_random_engine generator(static_cast<unsigned>(std::time(nullptr)));
+    std::uniform_int_distribution<T> distribution(min, max);
+    return distribution(generator);
 }
 
 //==============================================================================
-//!\fn                      qx::meta::strcmp<TChar>
+//!\fn                         qx::random<T>
 //
-//!\brief  Compare two strings
-//!\param  pszLeft  - first string
-//!\param  pszRight - second string
-//!\retval          -
-//  < 0 the first character that does not match has a lower value in ptr1 than in ptr2
-//    0 the contents of both strings are equal
-//  > 0 the first character that does not match has a greater value in ptr1 than in ptr2
+//!\brief  Get random generated real value [min, max]
+//!\param  min - min uniform distribution value (including)
+//!\param  max - max uniform distribution value (including)
+//!\retval     - random generated integral value
 //!\author Khrapov
-//!\date   25.09.2020
+//!\date   22.03.2020
 //==============================================================================
-template<typename TChar>
-constexpr int strcmp(const TChar* pszLeft, const TChar* pszRight)
+template<class T>
+typename std::enable_if_t<std::is_floating_point_v<T>, T> random(T min, T max)
 {
-    while (*pszLeft && (*pszLeft == *pszRight))
-    {
-        ++pszLeft;
-        ++pszRight;
-    }
-    return *pszLeft - *pszRight;
+    static std::default_random_engine generator(static_cast<unsigned>(std::time(nullptr)));
+    std::uniform_real_distribution<T> distribution(min, max);
+    return distribution(generator);
 }
 
 //==============================================================================
@@ -82,7 +72,7 @@ constexpr T abs(T value)
 }
 
 //==============================================================================
-//!\fn                     qx::meta::epsilon_equal<T>
+//!\fn                        qx::epsilon_equal<T>
 //
 //!\brief  Constexpr comparison function for a user defined epsilon values
 //!\param  left  - left value
@@ -95,11 +85,11 @@ constexpr T abs(T value)
 template<typename T>
 constexpr bool epsilon_equal(T left, T right, T eps = std::numeric_limits<T>::epsilon())
 {
-    return meta::abs(left - right) < eps;
+    return abs(left - right) < eps;
 }
 
 //==============================================================================
-//!\fn                  qx::meta::epsilon_less_equal<T>
+//!\fn                     qx::epsilon_less_equal<T>
 //
 //!\brief  Constexpr comparison function for a user defined epsilon values
 //!\param  left  - left value
@@ -116,7 +106,7 @@ constexpr bool epsilon_less_equal(T left, T right, T eps = std::numeric_limits<T
 }
 
 //==============================================================================
-//!\fn                 qx::meta::epsilon_greater_equal<T>
+//!\fn                    qx::epsilon_greater_equal<T>
 //
 //!\brief  Constexpr comparison function for a user defined epsilon values
 //!\param  left  - left value
@@ -131,5 +121,6 @@ constexpr bool epsilon_greater_equal(T left, T right, T eps = std::numeric_limit
 {
     return left > right || epsilon_equal(left, right, eps);
 }
+
 
 }

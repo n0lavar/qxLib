@@ -91,8 +91,8 @@ QX_POP_SUPPRESS_WARNINGS
     #define QX_TEST_TYPE_TRAITS 1
 #endif
 
-#ifndef QX_TEST_RANDOM
-    #define QX_TEST_RANDOM 1
+#ifndef QX_TEST_MATH
+    #define QX_TEST_MATH 1
 #endif
 
 #ifndef QX_TEST_BENCHMARK

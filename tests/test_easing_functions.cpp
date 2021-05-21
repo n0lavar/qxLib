@@ -27,13 +27,13 @@ protected:
     void TestFunc()
     {
         // x zero
-        EXPECT_TRUE(qx::meta::epsilon_equal(
+        EXPECT_TRUE(qx::epsilon_equal(
             Func(T(0.f)),
             T(0.f),
             qx::easing::eps<T>()));
 
         // x one
-        EXPECT_TRUE(qx::meta::epsilon_equal(
+        EXPECT_TRUE(qx::epsilon_equal(
             Func(T(1.f)),
             T(1.f),
             qx::easing::eps<T>()));
@@ -43,7 +43,7 @@ protected:
 
         volatile T sum_to_avoid_optimizing_out(0.f);
         for (T x = 0.0;
-            qx::meta::epsilon_less_equal(x, T(1.f));
+            qx::epsilon_less_equal(x, T(1.f));
             x += step)
         {
             sum_to_avoid_optimizing_out = sum_to_avoid_optimizing_out + Func(x);

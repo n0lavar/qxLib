@@ -32,7 +32,7 @@ struct LoggerTraits
     constexpr static auto GetLogsFile()   { return sLogsFile;   }
     constexpr static auto GetUnit()       { return sUnit;       }
     constexpr static auto GetTraceFile()  { return sTraceFile;  }
-    constexpr static const char* GetTag() { return qx::meta::strlen(sTag) == 0 ? nullptr : sTag; }
+    constexpr static const char* GetTag() { return qx::strlen(sTag) == 0 ? nullptr : sTag; }
 };
 
 constexpr const char LOGS_FOLDER_ROOT[]  = "";
@@ -113,7 +113,7 @@ protected:
                 Traits::GetUnit(),
                 { Traits::GetLogsFile(), qx::logger::level::none, qx::logger::level::info });
 
-            if constexpr (Traits::GetTag() && qx::meta::strcmp(TRACE_TAG_TAG1, Traits::GetTag()) == 0)
+            if constexpr (Traits::GetTag() && qx::strcmp(TRACE_TAG_TAG1, Traits::GetTag()) == 0)
             {
                 pLogger->register_unit(
                     Traits::GetTag(),
@@ -270,7 +270,7 @@ protected:
             CheckStringCommon(pszAssert,  "\\[false\\] 1.000000 4 three");
             CheckStringCommon(pszAssert,  "\\[false\\] 1.000000 5 three");
 
-            if constexpr (Traits::GetTag() && qx::meta::strcmp(TRACE_TAG_TAG1, Traits::GetTag()) == 0)
+            if constexpr (Traits::GetTag() && qx::strcmp(TRACE_TAG_TAG1, Traits::GetTag()) == 0)
             {
                 CheckStringTag(" 1.000000");
                 CheckStringTag(" 1.000000 1");
