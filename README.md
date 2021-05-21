@@ -27,7 +27,6 @@ A few useful things for developing your own game engine with OpenGL:
 + constexpr classes:
   + constexpr_flag (returns "Start" at the beginning(test), "Start" with test_and_set and "End" after)
   + constexpr_sequence (returns new value with each "next()" calling depending on given "Func")
-  + constexpr_funcs (some std algorithms with constexpr qualifier)
   + constexpr_random (returns new pseudorandom value with each "next()" calling)
 + thread_worker
 + asserts
