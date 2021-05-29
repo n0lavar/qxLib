@@ -31,7 +31,6 @@ public:
     bool GetConst() const { return true; }
     bool GetNonConst() { return true; }
 };
-QX_RTTI_BASE_CLASS_IMPL(BaseTestComponent)
 
 class TestComponent : public BaseTestComponent
 {

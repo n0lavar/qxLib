@@ -37,7 +37,6 @@ public:
 
     virtual ~CRttiBase(void) = default;
 };
-QX_RTTI_BASE_CLASS_IMPL(CRttiBase)
 
 class CBase1 : public CRttiBase
 {
@@ -171,45 +170,6 @@ QX_STATIC_ASSERT_STR_EQ(CDerived1_221::get_class_name_static().data(), "CDerived
 QX_STATIC_ASSERT_STR_EQ(CDerived1_222::get_class_name_static().data(), "CDerived1_222");
 QX_STATIC_ASSERT_STR_EQ(CDerived1_3::get_class_name_static().data(),   "CDerived1_3");
 
-
-TEST(rtti, is_derived)
-{
-    EXPECT_TRUE(qx::is_derived<CDerived1_1> ::from<CBase1>());
-    EXPECT_TRUE(qx::is_derived<CDerived1_2> ::from<CBase1>());
-    EXPECT_TRUE(qx::is_derived<CDerived1_21>::from<CDerived1_2>());
-    EXPECT_TRUE(qx::is_derived<CDerived1_22>::from<CDerived1_2>());
-    EXPECT_TRUE(qx::is_derived<CDerived1_21>::from<CBase1>());
-    EXPECT_TRUE(qx::is_derived<CDerived1_22>::from<CBase1>());
-    EXPECT_TRUE(qx::is_derived<CDerived1_3> ::from<CBase1>());
-    EXPECT_FALSE(qx::is_derived<CDerived1_1>::from<CClass1>());
-    EXPECT_FALSE(qx::is_derived<CDerived1_1>::from<CClass2>());
-
-    EXPECT_TRUE(qx::is_derived<CDerived2_1> ::from<CBase2>());
-    EXPECT_TRUE(qx::is_derived<CDerived2_2> ::from<CBase2>());
-    EXPECT_TRUE(qx::is_derived<CDerived2_3> ::from<CBase2>());
-    EXPECT_TRUE(qx::is_derived<CDerived2_31>::from<CDerived2_3>());
-    EXPECT_TRUE(qx::is_derived<CDerived2_32>::from<CDerived2_3>());
-    EXPECT_TRUE(qx::is_derived<CDerived2_31>::from<CBase2>());
-    EXPECT_TRUE(qx::is_derived<CDerived2_32>::from<CBase2>());
-    EXPECT_FALSE(qx::is_derived<CDerived2_1>::from<CClass1>());
-    EXPECT_FALSE(qx::is_derived<CDerived2_1>::from<CClass2>());
-
-    EXPECT_FALSE(qx::is_derived<CDerived1_1> ::from<CBase2>());
-    EXPECT_FALSE(qx::is_derived<CDerived1_2> ::from<CBase2>());
-    EXPECT_FALSE(qx::is_derived<CDerived1_21>::from<CDerived2_2>());
-    EXPECT_FALSE(qx::is_derived<CDerived1_22>::from<CDerived2_2>());
-    EXPECT_FALSE(qx::is_derived<CDerived1_21>::from<CBase2>());
-    EXPECT_FALSE(qx::is_derived<CDerived1_22>::from<CBase2>());
-    EXPECT_FALSE(qx::is_derived<CDerived1_3> ::from<CBase2>());
-
-    EXPECT_FALSE(qx::is_derived<CDerived2_1> ::from<CBase1>());
-    EXPECT_FALSE(qx::is_derived<CDerived2_2> ::from<CBase1>());
-    EXPECT_FALSE(qx::is_derived<CDerived2_3> ::from<CBase1>());
-    EXPECT_FALSE(qx::is_derived<CDerived2_31>::from<CDerived1_3>());
-    EXPECT_FALSE(qx::is_derived<CDerived2_32>::from<CDerived1_3>());
-    EXPECT_FALSE(qx::is_derived<CDerived2_31>::from<CBase1>());
-    EXPECT_FALSE(qx::is_derived<CDerived2_32>::from<CBase1>());
-}
 
 TEST(rtti, class_id)
 {

@@ -109,9 +109,8 @@ inline void logger_worker::process_output(
         pszFile,
         pszFunction))
     {
-        thread_local string sMsg;
         thread_local string sFormat;
-        sMsg.clear();
+        string sMsg;
 
         auto& traceUnitInfo = pUnitInfo->get_trace_unit_info();
 
@@ -219,12 +218,7 @@ inline void logger_worker::process_console(void)
         return std::move(log);
     };
 
-    size_t nStartSize = 0;
-    {
-        auto queue = m_ConsoleLogsQueue.lock();
-        nStartSize = queue->size();
-    }
-
+    const size_t nStartSize = m_ConsoleLogsQueue.lock()->size();
     for (size_t i = 0; i < nStartSize; i++)
     {
         auto opt_log_line = get_log_line();

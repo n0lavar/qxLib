@@ -43,24 +43,6 @@ inline class_identificator get_class_id(void) noexcept
     }
 }
 
-template <typename X>
-struct is_derived
-{
-    template <typename Y>
-    static bool from() noexcept
-    {
-        if constexpr (detail::has_get_class_id_static<X> && detail::has_get_class_id_static<Y>)
-        {
-            return X::get_class_id_static() == Y::get_class_id_static() ||
-                is_derived<typename X::SuperClass>::template from<Y>();
-        }
-        else
-        {
-            return false;
-        }
-    }
-};
-
 }
 
 namespace qx
@@ -177,23 +159,6 @@ protected:                                                                  \
         static qx::class_identificator nId = 0;                             \
         return nId++;                                                       \
     }
-
-#define QX_RTTI_BASE_CLASS_IMPL(rttiBaseClass)                              \
-namespace qx                                                                \
-{                                                                           \
-template <>                                                                 \
-struct is_derived<rttiBaseClass>                                            \
-{                                                                           \
-    template <typename Y>                                                   \
-    static bool from() noexcept                                             \
-    {                                                                       \
-        if constexpr (detail::has_get_class_id_static<Y>)                   \
-            return rttiBaseClass::get_class_id_static() == Y::get_class_id_static(); \
-        else                                                                \
-            return false;                                                   \
-    }                                                                       \
-};                                                                          \
-}
 
 
 #define QX_RTTI_CLASS(thisClass, superClass)                                \
