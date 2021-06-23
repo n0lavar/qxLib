@@ -111,7 +111,8 @@ TEST(useful_funcs, destruct)
 
 //------------------------------- qx::make_array -------------------------------
 
-constexpr std::array<int, 5> TEST_ARRAY = qx::make_array<5>(1);
-static_assert(std::all_of(TEST_ARRAY.cbegin(), TEST_ARRAY.cend(), [](int val) { return val == 1; }));
+constexpr auto TEST_ARRAY_1 = qx::make_array<5>(1);
+static_assert(std::all_of(TEST_ARRAY_1.cbegin(), TEST_ARRAY_1.cend(), [](int val) { return val == 1; }));
+static_assert(TEST_ARRAY_1.size() == 5);
 
 #endif

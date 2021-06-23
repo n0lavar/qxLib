@@ -777,7 +777,7 @@ TYPED_TEST(TestQxString, remove)
         EXPECT_STREQ(str.data(), STR("0010002225666"));
     }
 
-    auto check_remove = [STRING](
+    auto check_remove = [](
         auto& str,
         auto expected_ret,
         auto expected_str,
@@ -857,7 +857,7 @@ TYPED_TEST(TestQxString, remove_all)
         EXPECT_STREQ(str.data(), STR("1111233398"));
     }
 
-    auto check_remove_all = [STRING](
+    auto check_remove_all = [](
         auto& str,
         auto expected_ret,
         auto expected_str,
