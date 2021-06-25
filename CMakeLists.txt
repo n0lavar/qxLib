@@ -6,7 +6,8 @@ cmake_minimum_required(VERSION 3.16)
 project(qxLib)
 set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_CURRENT_LIST_DIR}/cmake/modules/")
-include(cmake/platform_options.cmake)
+include(cmake/set_qxlib_target_options.cmake)
+include(cmake/set_target_options.cmake)
 
 
 # ================================================================
@@ -45,6 +46,7 @@ include_directories(
 )
 
 add_library(qxLib ${FILES_HEADERS} ${FILES_SOURCES} ${FILES_INLINES})
+set_target_options(qxLib)
 set_qxlib_target_options(qxLib)
 
 
@@ -60,6 +62,7 @@ if (${GENERATE_TESTS})
         if(NOT ${_test_file} STREQUAL ${PROJECT_SOURCE_DIR}/tests/main.cpp)
             get_filename_component(_test_name ${_test_file} NAME_WE)
             add_executable("${_test_name}" ${_test_file} "${PROJECT_SOURCE_DIR}/tests/main.cpp")
+            set_target_options(${_test_name})
             set_qxlib_target_options(${_test_name})
             add_test(${_test_name} ${_test_name})
             set_target_properties (${_test_name} PROPERTIES FOLDER qxLibTests)

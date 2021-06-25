@@ -411,7 +411,7 @@ constexpr float color::clamp_value(float fValue) noexcept
 //==============================================================================
 constexpr float color::dec_to_float(int nValue) noexcept
 {
-    return nValue / 255.f;
+    return static_cast<float>(nValue) / 255.f;
 }
 
 //==============================================================================

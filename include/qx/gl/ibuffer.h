@@ -31,6 +31,9 @@ namespace qx
 class IBuffer
 {
 public:
+
+    virtual ~IBuffer(void) = default;
+
     virtual void    Generate        (void)          = 0;
     virtual void    Delete          (void)          = 0;
     virtual void    Bind            (void) const    = 0;

@@ -48,7 +48,7 @@ public:
 
     base_easing_element     (const base_easing_element&)        noexcept = default;
     base_easing_element     (base_easing_element&&)             noexcept = default;
-    base_easing_element     (easing::func<T>func,
+    base_easing_element     (const easing::func<T>& func,
                              T              fStart  = T(0.f),
                              T              fEnd    = T(1.f),
                              T              fSpeed  = T(1.f))   noexcept;

@@ -12,9 +12,9 @@
 //==============================================================================
 #pragma once
 
-#include <qx/gl/ibuffer.h>
-#include <qx/gl/buffer_classes.h>
 #include <qx/typedefs.h>
+#include <qx/gl/buffer_classes.h>
+#include <qx/gl/ibuffer.h>
 
 namespace qx
 {
@@ -47,9 +47,9 @@ public:
     virtual GLuint  GetBufferName           (void) const    override;
     virtual bool    IsGenerated             (void) const    override;
 
-            void    EnableVertexArrtibArray (GLuint         nIndex);
-            void    DisableVertexArrtibArray(GLuint         nIndex);
-            void    VertexAttribPointer     (GLuint         nIndex,
+            void    EnableVertexArrtibArray (size_t         nIndex);
+            void    DisableVertexArrtibArray(size_t         nIndex);
+            void    VertexAttribPointer     (size_t         nIndex,
                                              GLint          nSize,
                                              GLenum         eType,
                                              GLboolean      bNormalized,

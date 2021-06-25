@@ -25,7 +25,10 @@ namespace qx
 //!\date   20.01.2020
 //==============================================================================
 template<bool COPYBLE>
-inline void base_rbo<COPYBLE>::Init(GLsizei nWidth, GLsizei nHeight, GLsizei nMultisamples)
+inline void base_rbo<COPYBLE>::Init(
+    size_t nWidth,
+    size_t nHeight,
+    size_t nMultisamples)
 {
     // create a renderbuffer object for depth and stencil attachment
     Generate();
@@ -36,18 +39,18 @@ inline void base_rbo<COPYBLE>::Init(GLsizei nWidth, GLsizei nHeight, GLsizei nMu
     {
         glRenderbufferStorageMultisample(
             GL_RENDERBUFFER,
-            nMultisamples,
+            static_cast<GLsizei>(nMultisamples),
             GL_DEPTH24_STENCIL8,
-            nWidth,
-            nHeight);
+            static_cast<GLsizei>(nWidth),
+            static_cast<GLsizei>(nHeight));
     }
     else
     {
         glRenderbufferStorage(
             GL_RENDERBUFFER,
             GL_DEPTH24_STENCIL8,
-            nWidth,
-            nHeight);
+            static_cast<GLsizei>(nWidth),
+            static_cast<GLsizei>(nHeight));
     }
 
     Unbind();

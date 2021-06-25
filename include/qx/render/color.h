@@ -12,9 +12,14 @@
 //==============================================================================
 #pragma once
 
+#include <qx/suppress_warnings.h>
+
 #include <algorithm>
+
+QX_PUSH_SUPPRESS_ALL_WARNINGS
 #include <glm/vec3.hpp>
 #include <glm/vec4.hpp>
+QX_POP_SUPPRESS_WARNINGS
 
 namespace qx
 {

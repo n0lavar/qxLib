@@ -1,30 +1,14 @@
 
-function(set_qxlib_target_options _target)
+function(set_target_options _target)
 
-    if (${CMAKE_CXX_COMPILER_ID} STREQUAL Clang)
+    if(${CMAKE_CXX_COMPILER_ID} STREQUAL Clang)
     
-        target_link_libraries(${_target} PRIVATE
-            -pthread 
-            -lstdc++fs
-        )
         target_compile_options(${_target} PRIVATE
             $<$<CONFIG:Debug>:-D_DEBUG>
         )
         
-    elseif (${CMAKE_CXX_COMPILER_ID} STREQUAL GNU)    
+    elseif(${CMAKE_CXX_COMPILER_ID} STREQUAL GNU)    
         
-        # coverage 
-        target_link_options(${_target} PRIVATE 
-            $<$<CONFIG:Debug>:--coverage>
-        )
-        target_compile_options(${_target} PRIVATE
-            $<$<CONFIG:Debug>:--coverage>
-        )
-        
-        target_link_libraries(${_target} PRIVATE
-            -pthread 
-			-lstdc++fs
-        )
         target_compile_options(${_target} PRIVATE
             $<$<CONFIG:Debug>:-D_DEBUG>
         )
@@ -35,12 +19,16 @@ function(set_qxlib_target_options _target)
             $<$<CONFIG:Debug>:-D_DEBUG>
         )
     
-    elseif (${CMAKE_CXX_COMPILER_ID} STREQUAL MSVC)
+    elseif(${CMAKE_CXX_COMPILER_ID} STREQUAL MSVC)
     
         target_compile_options(${_target} PRIVATE
             /EHsc /Wall /WX
             /wd4061 # enumerator 'identifier' in switch of enum 'enumeration' is not explicitly handled by a case label
+            /wd4062 # enumerator 'identifier' in switch of enum 'enumeration' is not handled
+            /wd4100 # 'identifier' : unreferenced formal parameter
+            /wd4365 # 'action' : conversion from 'type_1' to 'type_2', signed/unsigned mismatch: MVSC headers warnings
             /wd4514 # 'function' : unreferenced inline function has been removed
+            /wd4623 # 'derived class' : default constructor was implicitly defined as deleted because a base class default constructor is inaccessible or deleted
             /wd4625 # 'type': move assignment operator was implicitly defined as deleted
             /wd4626 # 'derived class' : assignment operator was implicitly defined as deleted because a base class assignment operator is inaccessible or deleted
             /wd4710 # 'function' : function not inlined
@@ -50,11 +38,16 @@ function(set_qxlib_target_options _target)
             /wd5027 # 'type': move assignment operator was implicitly defined as deleted
             /wd5045 # Compiler will insert Spectre mitigation for memory load if /Qspectre switch specified
             
-            $<$<CONFIG:Debug>:/MTd /Od /Ob0 /Zi /RTC1 /DDEBUG /D_DEBUG /bigobj>
-            $<$<CONFIG:Release>:/MT /O2 /Ob2 /DNDEBUG>
-            $<$<CONFIG:RelWithDebInfo>:/MT>
-            $<$<CONFIG:MinSizeRel>:/MT>
+            $<$<CONFIG:Debug>:          /MTd /ZI /D_DEBUG >
+            $<$<CONFIG:Release>:        /MT /DNDEBUG>
+            $<$<CONFIG:RelWithDebInfo>: /MTd /D_DEBUG>
+            $<$<CONFIG:MinSizeRel>:     /MT /DNDEBUG>
         )
+        
+        target_link_options(${_target} PRIVATE 
+            $<$<CONFIG:Debug>: /INCREMENTAL>
+        )
+
         
     endif()
         
@@ -65,10 +58,6 @@ function(set_qxlib_target_options _target)
     set_target_properties(${_target} PROPERTIES 
         LINKER_LANGUAGE CXX
     )
-    
-    target_link_libraries(${_target} PRIVATE
-        ${GTEST_LIBRARIES}
-    )
-    
+        
 endfunction()
 

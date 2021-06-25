@@ -12,7 +12,6 @@
 //==============================================================================
 #pragma once
 
-#include <qx/typedefs.h>
 #include <qx/useful_funcs.h>
 
 /*

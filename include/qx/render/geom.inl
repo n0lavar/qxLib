@@ -236,20 +236,20 @@ inline geometry create_icosphere(float fRadius, size_t nDivides)
 
         for (size_t j = 0; j < end; j += 3)
         {
-            std::array<size_t, 3> indicesOuter;
-            std::array<size_t, 3> indicesEdge;
+            std::array<index_type, 3> indicesOuter;
+            std::array<index_type, 3> indicesEdge;
 
             for (size_t k = 0; k < 3; ++k)
             {
-                size_t k1 = (k + 1) % 3;
-                size_t e0 = prevLevelIndices[j + k];
-                size_t e1 = prevLevelIndices[j + k1];
+                const index_type k1 = (k + 1) % 3;
+                index_type e0 = prevLevelIndices[j + k];
+                index_type e1 = prevLevelIndices[j + k1];
                 indicesOuter[k] = e0;
 
                 if (e1 > e0)
                     std::swap(e0, e1);
 
-                const size_t nEdgeKey = e0 | e1 << 32;
+                const size_t nEdgeKey = e0 | e1 << 16;
 
                 if (auto it = edgeMap.find(nEdgeKey); it != edgeMap.end())
                 {
@@ -257,7 +257,7 @@ inline geometry create_icosphere(float fRadius, size_t nDivides)
                 }
                 else
                 {
-                    indicesEdge[k] = ret.geomVertices.size();
+                    indicesEdge[k] = static_cast<index_type>(ret.geomVertices.size());
                     edgeMap[nEdgeKey] = indicesEdge[k];
 
                     glm::vec3 newVertex

@@ -27,11 +27,11 @@ namespace qx
 //==============================================================================
 template<typename T>
 inline base_easing_element<T>::base_easing_element(
-    easing::func<T> func,
-    T               fStart,
-    T               fEnd,
-    T               fSpeed) noexcept
-    : m_EasingFunc  (std::move(func))
+    const easing::func<T> & func,
+    T                       fStart,
+    T                       fEnd,
+    T                       fSpeed) noexcept
+    : m_EasingFunc  (func)
     , m_fCurrentY   (fStart)
     , m_fStartY     (fStart)
     , m_fEndY       (fEnd)

@@ -95,9 +95,9 @@ inline void base_vao<COPYBLE>::Unbind(void) const
 //!\date   19.01.2020
 //==============================================================================
 template<bool COPYBLE>
-inline void base_vao<COPYBLE>::EnableVertexArrtibArray(GLuint nIndex)
+inline void base_vao<COPYBLE>::EnableVertexArrtibArray(size_t nIndex)
 {
-    glEnableVertexAttribArray(nIndex);
+    glEnableVertexAttribArray(static_cast<GLuint>(nIndex));
 }
 
 //==============================================================================
@@ -109,9 +109,9 @@ inline void base_vao<COPYBLE>::EnableVertexArrtibArray(GLuint nIndex)
 //!\date   19.01.2020
 //==============================================================================
 template<bool COPYBLE>
-inline void base_vao<COPYBLE>::DisableVertexArrtibArray(GLuint nIndex)
+inline void base_vao<COPYBLE>::DisableVertexArrtibArray(size_t nIndex)
 {
-    glDisableVertexAttribArray(nIndex);
+    glDisableVertexAttribArray(static_cast<GLuint>(nIndex));
 }
 
 //==============================================================================
@@ -133,14 +133,20 @@ inline void base_vao<COPYBLE>::DisableVertexArrtibArray(GLuint nIndex)
 //==============================================================================
 template<bool COPYBLE>
 inline void base_vao<COPYBLE>::VertexAttribPointer(
-    GLuint       nIndex,
+    size_t       nIndex,
     GLint        nSize,
     GLenum       eType,
     GLboolean    bNormalized,
     GLsizei      nStride,
     size_t       nOffset)
 {
-    glVertexAttribPointer(nIndex, nSize, eType, bNormalized, nStride, (GLvoid*)(nOffset));
+    glVertexAttribPointer(
+        static_cast<GLuint>(nIndex),
+        nSize,
+        eType,
+        bNormalized,
+        nStride,
+        reinterpret_cast<GLvoid*>(nOffset));
 }
 
 }

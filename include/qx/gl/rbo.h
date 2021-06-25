@@ -12,9 +12,9 @@
 //==============================================================================
 #pragma once
 
-#include <qx/gl/ibuffer.h>
-#include <qx/gl/buffer_classes.h>
 #include <qx/typedefs.h>
+#include <qx/gl/buffer_classes.h>
+#include <qx/gl/ibuffer.h>
 
 namespace qx
 {
@@ -37,9 +37,9 @@ public:
 
     friend class base_rbo;
 
-            void    Init            (GLsizei    nWidth,
-                                     GLsizei    nHeight,
-                                     GLsizei    nMultisamples = 0);
+            void    Init            (size_t     nWidth,
+                                     size_t     nHeight,
+                                     size_t     nMultisamples = 0);
 
     virtual void    Generate        (void)          override;
     virtual void    Delete          (void)          override;

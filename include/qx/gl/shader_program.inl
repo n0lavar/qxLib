@@ -68,16 +68,16 @@ template<bool COPYBLE>
 inline bool base_shader_program<COPYBLE>::Link(void)
 {
     glLinkProgram(m_nProgram);
-    GLint bSuccess = GetParameter(GL_LINK_STATUS);
+    const GLint bSuccess = GetParameter(GL_LINK_STATUS);
 
-    if (!bSuccess)
+    if (bSuccess != GL_TRUE)
     {
         GLchar infoLog[512];
-        glGetProgramInfoLog(m_nProgram, 512, NULL, infoLog);
+        glGetProgramInfoLog(m_nProgram, 512, nullptr, infoLog);
         QX_ASSERT_MSG(0, "Shader linking failed: \n%s", infoLog);
     }
 
-    return bSuccess;
+    return bSuccess == GL_TRUE;
 }
 
 //==============================================================================
