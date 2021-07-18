@@ -61,18 +61,12 @@ namespace qx
 template<typename Y>
 Y* rtti_cast(auto& pointer)
 {
-    QX_PUSH_SUPPRESS_MSVC_WARNINGS(4946)
-
-    // the class of this pointer is guaranteed to inherit from Y
-    // by is_derived_from(), reinterpret_cast is for successful compilation only
     using smart_pointer_t = typename std::remove_reference_t<decltype(pointer)>::element_type;
     if constexpr (detail::has_is_derived_from<smart_pointer_t, Y>)
         if (pointer && pointer->template is_derived_from<Y>())
-            return reinterpret_cast<Y*>(pointer.get());
+            return static_cast<Y*>(pointer.get());
 
     return nullptr;
-
-    QX_POP_SUPPRESS_WARNINGS
 }
 
 //==============================================================================
@@ -88,17 +82,11 @@ Y* rtti_cast(auto& pointer)
 template<typename Y, typename X>
 Y* rtti_cast(X* pointer)
 {
-    QX_PUSH_SUPPRESS_MSVC_WARNINGS(4946)
-
-    // the class of this pointer is guaranteed to inherit from Y
-    // by is_derived_from(), reinterpret_cast is for successful compilation only
     if constexpr (detail::has_is_derived_from<X, Y>)
         if (pointer && pointer->template is_derived_from<Y>())
-            return reinterpret_cast<Y*>(pointer);
+            return static_cast<Y*>(pointer);
 
     return nullptr;
-
-    QX_POP_SUPPRESS_WARNINGS
 }
 
 }

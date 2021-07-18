@@ -38,13 +38,14 @@ function(set_target_options _target)
             /wd5027 # 'type': move assignment operator was implicitly defined as deleted
             /wd5045 # Compiler will insert Spectre mitigation for memory load if /Qspectre switch specified
             
-            $<$<CONFIG:Debug>:          /MTd /ZI /D_DEBUG >
+            $<$<CONFIG:Debug>:          /MTd /ZI /D_DEBUG>
             $<$<CONFIG:Release>:        /MT /DNDEBUG>
-            $<$<CONFIG:RelWithDebInfo>: /MTd /D_DEBUG>
+            $<$<CONFIG:RelWithDebInfo>: /MTd /ZI /D_DEBUG>
             $<$<CONFIG:MinSizeRel>:     /MT /DNDEBUG>
         )
         
         target_link_options(${_target} PRIVATE 
+            $<$<CONFIG:Release>: /NODEFAULTLIB:LIBCMTD>
             $<$<CONFIG:Debug>: /INCREMENTAL>
         )
 

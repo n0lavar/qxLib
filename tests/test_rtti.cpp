@@ -386,124 +386,26 @@ TEST(rtti, rtti_cast)
 
     EXPECT_FALSE(qx::rtti_cast<CDerived1_1>(p1    ));
     EXPECT_TRUE (qx::rtti_cast<CDerived1_1>(p1_1  ));
-    EXPECT_FALSE(qx::rtti_cast<CDerived1_1>(p1_2  ));
-    EXPECT_FALSE(qx::rtti_cast<CDerived1_1>(p1_21 ));
-    EXPECT_FALSE(qx::rtti_cast<CDerived1_1>(p1_22 ));
-    EXPECT_FALSE(qx::rtti_cast<CDerived1_1>(p1_221));
-    EXPECT_FALSE(qx::rtti_cast<CDerived1_1>(p1_222));
-    EXPECT_FALSE(qx::rtti_cast<CDerived1_1>(p1_3  ));
 
     EXPECT_FALSE(qx::rtti_cast<CDerived1_2>(p1    ));
-    EXPECT_FALSE(qx::rtti_cast<CDerived1_2>(p1_1  ));
     EXPECT_TRUE (qx::rtti_cast<CDerived1_2>(p1_2  ));
     EXPECT_TRUE (qx::rtti_cast<CDerived1_2>(p1_21 ));
     EXPECT_TRUE (qx::rtti_cast<CDerived1_2>(p1_22 ));
     EXPECT_TRUE (qx::rtti_cast<CDerived1_2>(p1_221));
     EXPECT_TRUE (qx::rtti_cast<CDerived1_2>(p1_222));
-    EXPECT_FALSE(qx::rtti_cast<CDerived1_2>(p1_3  ));
 
     EXPECT_FALSE(qx::rtti_cast<CDerived1_21>(p1    ));
-    EXPECT_FALSE(qx::rtti_cast<CDerived1_21>(p1_1  ));
     EXPECT_FALSE(qx::rtti_cast<CDerived1_21>(p1_2  ));
     EXPECT_TRUE (qx::rtti_cast<CDerived1_21>(p1_21 ));
-    EXPECT_FALSE(qx::rtti_cast<CDerived1_21>(p1_22 ));
-    EXPECT_FALSE(qx::rtti_cast<CDerived1_21>(p1_221));
-    EXPECT_FALSE(qx::rtti_cast<CDerived1_21>(p1_222));
-    EXPECT_FALSE(qx::rtti_cast<CDerived1_21>(p1_3  ));
 
     EXPECT_FALSE(qx::rtti_cast<CDerived1_22>(p1    ));
-    EXPECT_FALSE(qx::rtti_cast<CDerived1_22>(p1_1  ));
     EXPECT_FALSE(qx::rtti_cast<CDerived1_22>(p1_2  ));
-    EXPECT_FALSE(qx::rtti_cast<CDerived1_22>(p1_21 ));
     EXPECT_TRUE (qx::rtti_cast<CDerived1_22>(p1_22 ));
     EXPECT_TRUE (qx::rtti_cast<CDerived1_22>(p1_221));
     EXPECT_TRUE (qx::rtti_cast<CDerived1_22>(p1_222));
-    EXPECT_FALSE(qx::rtti_cast<CDerived1_22>(p1_3  ));
 
     EXPECT_FALSE(qx::rtti_cast<CDerived1_3>(p1    ));
-    EXPECT_FALSE(qx::rtti_cast<CDerived1_3>(p1_1  ));
-    EXPECT_FALSE(qx::rtti_cast<CDerived1_3>(p1_2  ));
-    EXPECT_FALSE(qx::rtti_cast<CDerived1_3>(p1_21 ));
-    EXPECT_FALSE(qx::rtti_cast<CDerived1_3>(p1_22 ));
-    EXPECT_FALSE(qx::rtti_cast<CDerived1_3>(p1_221));
-    EXPECT_FALSE(qx::rtti_cast<CDerived1_3>(p1_222));
     EXPECT_TRUE (qx::rtti_cast<CDerived1_3>(p1_3  ));
-
-
-
-    EXPECT_FALSE(qx::rtti_cast<CBase2>(p1     ));
-    EXPECT_FALSE(qx::rtti_cast<CBase2>(p1_1   ));
-    EXPECT_FALSE(qx::rtti_cast<CBase2>(p1_2   ));
-    EXPECT_FALSE(qx::rtti_cast<CBase2>(p1_21  ));
-    EXPECT_FALSE(qx::rtti_cast<CBase2>(p1_22  ));
-    EXPECT_FALSE(qx::rtti_cast<CBase2>(p1_221 ));
-    EXPECT_FALSE(qx::rtti_cast<CBase2>(p1_222 ));
-    EXPECT_FALSE(qx::rtti_cast<CBase2>(p1_3   ));
-
-    EXPECT_FALSE(qx::rtti_cast<CDerived2_1>(p1    ));
-    EXPECT_FALSE(qx::rtti_cast<CDerived2_1>(p1_1  ));
-    EXPECT_FALSE(qx::rtti_cast<CDerived2_1>(p1_2  ));
-    EXPECT_FALSE(qx::rtti_cast<CDerived2_1>(p1_21 ));
-    EXPECT_FALSE(qx::rtti_cast<CDerived2_1>(p1_22 ));
-    EXPECT_FALSE(qx::rtti_cast<CDerived2_1>(p1_221));
-    EXPECT_FALSE(qx::rtti_cast<CDerived2_1>(p1_222));
-    EXPECT_FALSE(qx::rtti_cast<CDerived2_1>(p1_3  ));
-
-    EXPECT_FALSE(qx::rtti_cast<CDerived2_2>(p1    ));
-    EXPECT_FALSE(qx::rtti_cast<CDerived2_2>(p1_1  ));
-    EXPECT_FALSE(qx::rtti_cast<CDerived2_2>(p1_2  ));
-    EXPECT_FALSE(qx::rtti_cast<CDerived2_2>(p1_21 ));
-    EXPECT_FALSE(qx::rtti_cast<CDerived2_2>(p1_22 ));
-    EXPECT_FALSE(qx::rtti_cast<CDerived2_2>(p1_221));
-    EXPECT_FALSE(qx::rtti_cast<CDerived2_2>(p1_222));
-    EXPECT_FALSE(qx::rtti_cast<CDerived2_2>(p1_3  ));
-
-    EXPECT_FALSE(qx::rtti_cast<CDerived2_3>(p1    ));
-    EXPECT_FALSE(qx::rtti_cast<CDerived2_3>(p1_1  ));
-    EXPECT_FALSE(qx::rtti_cast<CDerived2_3>(p1_2  ));
-    EXPECT_FALSE(qx::rtti_cast<CDerived2_3>(p1_21 ));
-    EXPECT_FALSE(qx::rtti_cast<CDerived2_3>(p1_22 ));
-    EXPECT_FALSE(qx::rtti_cast<CDerived2_3>(p1_221));
-    EXPECT_FALSE(qx::rtti_cast<CDerived2_3>(p1_222));
-    EXPECT_FALSE(qx::rtti_cast<CDerived2_3>(p1_3  ));
-
-    EXPECT_FALSE(qx::rtti_cast<CDerived2_31>(p1    ));
-    EXPECT_FALSE(qx::rtti_cast<CDerived2_31>(p1_1  ));
-    EXPECT_FALSE(qx::rtti_cast<CDerived2_31>(p1_2  ));
-    EXPECT_FALSE(qx::rtti_cast<CDerived2_31>(p1_21 ));
-    EXPECT_FALSE(qx::rtti_cast<CDerived2_31>(p1_22 ));
-    EXPECT_FALSE(qx::rtti_cast<CDerived2_31>(p1_221));
-    EXPECT_FALSE(qx::rtti_cast<CDerived2_31>(p1_222));
-    EXPECT_FALSE(qx::rtti_cast<CDerived2_31>(p1_3  ));
-
-    EXPECT_FALSE(qx::rtti_cast<CDerived2_32>(p1    ));
-    EXPECT_FALSE(qx::rtti_cast<CDerived2_32>(p1_1  ));
-    EXPECT_FALSE(qx::rtti_cast<CDerived2_32>(p1_2  ));
-    EXPECT_FALSE(qx::rtti_cast<CDerived2_32>(p1_21 ));
-    EXPECT_FALSE(qx::rtti_cast<CDerived2_32>(p1_22 ));
-    EXPECT_FALSE(qx::rtti_cast<CDerived2_32>(p1_221));
-    EXPECT_FALSE(qx::rtti_cast<CDerived2_32>(p1_222));
-    EXPECT_FALSE(qx::rtti_cast<CDerived2_32>(p1_3  ));
-
-
-
-    EXPECT_FALSE(qx::rtti_cast<CClass1>(p1    ));
-    EXPECT_FALSE(qx::rtti_cast<CClass1>(p1_1  ));
-    EXPECT_FALSE(qx::rtti_cast<CClass1>(p1_2  ));
-    EXPECT_FALSE(qx::rtti_cast<CClass1>(p1_21 ));
-    EXPECT_FALSE(qx::rtti_cast<CClass1>(p1_22 ));
-    EXPECT_FALSE(qx::rtti_cast<CClass1>(p1_221));
-    EXPECT_FALSE(qx::rtti_cast<CClass1>(p1_222));
-    EXPECT_FALSE(qx::rtti_cast<CClass1>(p1_3  ));
-
-    EXPECT_FALSE(qx::rtti_cast<CClass2>(p1    ));
-    EXPECT_FALSE(qx::rtti_cast<CClass2>(p1_1  ));
-    EXPECT_FALSE(qx::rtti_cast<CClass2>(p1_2  ));
-    EXPECT_FALSE(qx::rtti_cast<CClass2>(p1_21 ));
-    EXPECT_FALSE(qx::rtti_cast<CClass2>(p1_22 ));
-    EXPECT_FALSE(qx::rtti_cast<CClass2>(p1_221));
-    EXPECT_FALSE(qx::rtti_cast<CClass2>(p1_222));
-    EXPECT_FALSE(qx::rtti_cast<CClass2>(p1_3  ));
 }
 
 #endif
