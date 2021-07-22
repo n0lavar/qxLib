@@ -38,7 +38,8 @@ public:
 
     friend class base_shader_program;
 
-    QX_NONCOPYBLE(base_shader_program)
+    QX_NONCOPYABLE(base_shader_program)
+    QX_MOVABLE(base_shader_program)
 
                 base_shader_program (void) = default;
                ~base_shader_program (void);

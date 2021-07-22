@@ -96,13 +96,47 @@ namespace qx::detail
 //==============================================================================
 
 /*
-    Define class as non-copyble
+    Define class as default copyable
 */
-#define QX_NONCOPYBLE(name)                         \
-        name        (name&&) noexcept   = default;  \
-name&   operator=   (name&&) noexcept   = default;  \
-        name        (const name&)       = delete;   \
-name&   operator=   (const name&)       = delete;
+#define QX_COPYABLE(name)                               \
+            name        (const name&)       = default;  \
+    name&   operator=   (const name&)       = default;
+
+/*
+    Define class as default movable
+*/
+#define QX_MOVABLE(name)                                \
+            name        (name&&) noexcept   = default;  \
+    name&   operator=   (name&&) noexcept   = default;
+
+/*
+    Define class as default copyable and movable
+*/
+#define QX_COPYMOVABLE(name)                            \
+    QX_COPYABLE(name)                                   \
+    QX_MOVABLE(name)
+
+/*
+    Define class as non copyable
+*/
+#define QX_NONCOPYABLE(name)                            \
+            name        (const name&)       = delete;   \
+    name&   operator=   (const name&)       = delete;
+
+/*
+    Define class as non movable
+*/
+#define QX_NONMOVABLE(name)                             \
+            name        (name&&) noexcept   = delete;   \
+    name&   operator=   (name&&) noexcept   = delete;
+
+/*
+    Define class as non copyable and non movable
+*/
+#define QX_NONCOPYMOVABLE(name)                         \
+    QX_NONCOPYABLE(name)                                \
+    QX_NONMOVABLE(name)
+
 
 //==============================================================================
 

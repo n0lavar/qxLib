@@ -48,7 +48,8 @@ class shader_base
 {
 public:
 
-    QX_NONCOPYBLE(shader_base)
+    QX_NONCOPYABLE(shader_base)
+    QX_MOVABLE(shader_base)
 
             shader_base     (void) = default;
             shader_base     (const GLchar * pszShaderCode);

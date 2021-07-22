@@ -15,6 +15,7 @@
 #include <qx/useful_macros.h>
 
 #include <mutex>
+#include <optional>
 
 namespace qx
 {
@@ -48,16 +49,17 @@ private:
 
 public:
 
-                    shared_proxy    (shared_proxy&& other) noexcept;
-    shared_proxy&   operator=       (shared_proxy&& other) noexcept;
-                    shared_proxy    (const shared_proxy&)   = delete;
-    shared_proxy&   operator=       (const shared_proxy&)   = delete;
+    QX_NONCOPYABLE(shared_proxy)
+
+                    shared_proxy    (shared_proxy&& other)  noexcept;
+    shared_proxy&   operator=       (shared_proxy&& other)  noexcept;
 
                     ~shared_proxy   (void);
-    Data          * operator->      (void)          noexcept;
-    const Data    * operator->      (void) const    noexcept;
-    Data          & operator*       (void)          noexcept;
-    const Data    & operator*       (void) const    noexcept;
+
+    [[nodiscard]] Data        * operator->  (void)          noexcept;
+    [[nodiscard]] const Data  * operator->  (void) const    noexcept;
+    [[nodiscard]] Data        & operator*   (void)          noexcept;
+    [[nodiscard]] const Data  & operator*   (void) const    noexcept;
 
 private:
 
@@ -87,27 +89,28 @@ class threads_shared
 
         synchronization_primitive_raii      (void);
         ~synchronization_primitive_raii     (void);
-        SynchronizationPrimitive& get_object(void) noexcept;
+        SynchronizationPrimitive* get_object(void)  noexcept;
 
     private:
 
-        SynchronizationPrimitive sp = SynchronizationPrimitive();
+        SynchronizationPrimitive sp;
     };
 
 public:
 
     using proxy = shared_proxy<Data, SynchronizationPrimitive>;
 
-    QX_NONCOPYBLE(threads_shared)
+    QX_NONCOPYMOVABLE(threads_shared)
 
-                            threads_shared  (void);
-                            ~threads_shared (void);
-    proxy                   lock            (void);
-    std::pair<bool, proxy>  try_lock        (void);
+    template<class... Args>             threads_shared  (Args&&... args);
+                                        ~threads_shared (void);
+    [[nodiscard]] proxy                 lock            (void);
+    [[nodiscard]] std::optional<proxy>  try_lock        (void);
+
 private:
 
-    synchronization_primitive_raii  m_SynchronizationPrimitive;
-    Data                            m_Data  = Data();
+    synchronization_primitive_raii  m_SynchronizationPrimitiveRAII;
+    Data                            m_Data;
 };
 
 template<class SynchronizationPrimitive>

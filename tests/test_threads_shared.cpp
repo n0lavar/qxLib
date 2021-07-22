@@ -19,22 +19,36 @@
 #include <qx/thread/threads_shared.h>
 
 #include <chrono>
+#include <list>
 #include <random>
 #include <thread>
 
 struct STestStruct
 {
-    int     _int    = 0;
-    float   _float  = 0.f;
-    bool    _bool   = false;
-    size_t  _size   = 0u;
+    int     intData         = 0;
+    float   floatData       = 0.f;
+    bool    boolData        = false;
+    size_t  unsignedData    = 0u;
+
+    constexpr STestStruct(void) = default;
+    constexpr STestStruct(
+        int             _intData,
+        float           _floatData,
+        bool            _boolData,
+        size_t          _unsignedData)
+        : intData       (_intData)
+        , floatData     (_floatData)
+        , boolData      (_boolData)
+        , unsignedData  (_unsignedData)
+    {
+    }
 
     bool operator==(const STestStruct& other) const
     {
-        return _int == other._int
-            && _float == other._float
-            && _bool == other._bool
-            && _size == other._size;
+        return intData      == other.intData
+            && floatData    == other.floatData
+            && boolData     == other.boolData
+            && unsignedData == other.unsignedData;
     }
 };
 
@@ -66,9 +80,14 @@ constexpr size_t NUM_ITERATIONS = 20;
 constexpr size_t MIN_MS_WAIT    = 100;
 constexpr size_t MAX_MS_WAIT    = 500;
 
-TEST(threads_shared, construct)
+TEST(threads_shared, main)
 {
-    qx::threads_shared<STestStruct> sharedData;
+    qx::threads_shared<STestStruct> sharedData(2, 2.f, true, 2u);
+
+    {
+        auto data = sharedData.lock();
+        ASSERT_EQ(*data, TEST_DATA_2);
+    }
 
     std::thread thread_setting_0
     {
@@ -117,14 +136,16 @@ TEST(threads_shared, construct)
 
             for (size_t i = 0; i < NUM_ITERATIONS; ++i)
             {
-                auto pair = sharedData.try_lock();
-                if (pair.first)
+                auto optionalProxy = sharedData.try_lock();
+                if (optionalProxy.has_value())
                 {
+                    auto& proxy = optionalProxy.value();
+
                     std::cout << "thread_setting_2: locked\n";
-                    *pair.second = TEST_DATA_2;
-                    ASSERT_EQ(*pair.second, TEST_DATA_2);
+                    *proxy = TEST_DATA_2;
+                    ASSERT_EQ(*proxy, TEST_DATA_2);
                     std::this_thread::sleep_for(std::chrono::microseconds(distribution(generator)));
-                    ASSERT_EQ(*pair.second, TEST_DATA_2);
+                    ASSERT_EQ(*proxy, TEST_DATA_2);
                 }
                 else
                 {
@@ -141,4 +162,8 @@ TEST(threads_shared, construct)
     thread_setting_2.join();
 }
 
+TEST(threads_shared, list)
+{
+    std::list<qx::threads_shared<int>> list;
+}
 #endif

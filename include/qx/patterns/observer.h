@@ -96,10 +96,11 @@ private:
 
 public:
 
-    QX_NONCOPYBLE(base_subject)
+    QX_NONCOPYABLE(base_subject)
+    QX_MOVABLE(base_subject)
 
-            base_subject        (void) = default;
-    virtual ~base_subject       (void) noexcept = 0;
+            base_subject        (void)                  = default;
+    virtual ~base_subject       (void)      noexcept    = 0;
 
     size_t  get_num_observers   (void) const noexcept;
 

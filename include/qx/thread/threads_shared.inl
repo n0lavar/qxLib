@@ -202,10 +202,10 @@ inline threads_shared<Data, SynchronizationPrimitive>
 //!\date   5.03.2021
 //==============================================================================
 template <class Data, class SynchronizationPrimitive>
-inline SynchronizationPrimitive& threads_shared<Data, SynchronizationPrimitive>
+inline SynchronizationPrimitive* threads_shared<Data, SynchronizationPrimitive>
     ::synchronization_primitive_raii::get_object(void) noexcept
 {
-    return sp;
+    return &sp;
 }
 
 
@@ -220,11 +220,13 @@ inline SynchronizationPrimitive& threads_shared<Data, SynchronizationPrimitive>
 //!\date   5.03.2021
 //==============================================================================
 template<class Data, class SynchronizationPrimitive>
-inline threads_shared<Data, SynchronizationPrimitive>::threads_shared()
+template<class ... Args>
+inline threads_shared<Data, SynchronizationPrimitive>::threads_shared(Args&&... args)
+    : m_Data(std::forward<Args>(args)...)
 {
     // unlock the state that was locked in
     // synchronization_primitive_raii::synchronization_primitive_raii()
-    unlock_synchronization_primitive(&m_SynchronizationPrimitive.get_object());
+    unlock_synchronization_primitive(m_SynchronizationPrimitiveRAII.get_object());
 }
 
 //==============================================================================
@@ -240,7 +242,7 @@ inline threads_shared<Data, SynchronizationPrimitive>::~threads_shared()
     // wait for the rest of the threads to finish working
     // unlocking will be carried out in
     // synchronization_primitive_raii::~synchronization_primitive_raii()
-    lock_synchronization_primitive(&m_SynchronizationPrimitive.get_object());
+    lock_synchronization_primitive(m_SynchronizationPrimitiveRAII.get_object());
 }
 
 //==============================================================================
@@ -257,7 +259,7 @@ template<class Data, class SynchronizationPrimitive>
 inline typename threads_shared<Data, SynchronizationPrimitive>::proxy
     threads_shared<Data, SynchronizationPrimitive>::lock()
 {
-    return proxy(&m_Data, &m_SynchronizationPrimitive.get_object(), false);
+    return proxy(&m_Data, m_SynchronizationPrimitiveRAII.get_object(), false);
 }
 
 //==============================================================================
@@ -272,11 +274,14 @@ inline typename threads_shared<Data, SynchronizationPrimitive>::proxy
 //!\date   5.03.2021
 //==============================================================================
 template <class Data, class SynchronizationPrimitive>
-inline std::pair<bool, typename threads_shared<Data, SynchronizationPrimitive>::proxy>
+inline std::optional<typename threads_shared<Data, SynchronizationPrimitive>::proxy>
     threads_shared<Data, SynchronizationPrimitive>::try_lock(void)
 {
-    auto object = proxy(&m_Data, &m_SynchronizationPrimitive.get_object(), true);
-    return { object.m_pSynchronizationPrimitive && object.m_pData, std::move(object) };
+    auto object = proxy(&m_Data, m_SynchronizationPrimitiveRAII.get_object(), true);
+    if (object.m_pSynchronizationPrimitive && object.m_pData)
+        return { std::move(object) };
+    else
+        return std::nullopt;
 }
 
 }
