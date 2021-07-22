@@ -164,6 +164,25 @@ TEST(threads_shared, main)
 
 TEST(threads_shared, list)
 {
-    std::list<qx::threads_shared<int>> list;
+    // check compilation
+    std::list<qx::threads_shared<STestStruct>> list;
+    list.emplace_back(2, 2.f, true, 2u);
+
+    {
+        auto data = list.back().lock();
+        ASSERT_EQ(*data, TEST_DATA_2);
+    }
 }
+
+TEST(threads_shared, recursive_mutex)
+{
+    // check compilation
+    qx::threads_shared<STestStruct, std::recursive_mutex> sharedData(2, 2.f, true, 2u);
+
+    {
+        auto data = sharedData.lock();
+        ASSERT_EQ(*data, TEST_DATA_2);
+    }
+}
+
 #endif
