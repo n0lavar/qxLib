@@ -114,7 +114,7 @@ inline void base_fbo<COPYBLE>::AttachRBO(const base_rbo<COPYBLE_RBO>& rbo)
 {
     glFramebufferRenderbuffer(
         m_nTarget,
-        GL_DEPTH_STENCIL_ATTACHMENT,
+        rbo.GetAttachmentType(),
         GL_RENDERBUFFER,
         rbo.GetBufferName());
 }

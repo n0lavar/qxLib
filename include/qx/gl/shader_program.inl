@@ -264,7 +264,7 @@ inline void base_shader_program<COPYBLE>::SetUniform(const GLchar* pszName, cons
 template<bool COPYBLE>
 inline GLint base_shader_program<COPYBLE>::GetUniformLocation(const GLchar* pszName) const
 {
-    GLint nLocation = glGetUniformLocation(m_nProgram, pszName);
+    const GLint nLocation = glGetUniformLocation(m_nProgram, pszName);
 
 #if !QX_DISABLE_UNKNOWN_UNIFORM_ASSERT
     QX_ASSERT_MSG(nLocation >= 0, "Cant find uniform \"%s\" in program %u", pszName, m_nProgram);

@@ -18,9 +18,11 @@ namespace qx
 //!\fn                    qx::base_rbo<COPYBLE>::Init
 //
 //!\brief  Init RBO with width and height
-//!\param  nWidth        - width
-//!\param  nHeight       - height
-//!\param  nMultisamples - samples number, 0 - disable
+//!\param  nWidth          - width
+//!\param  nHeight         - height
+//!\param  eInternalFormat - internal format used for images
+//!\param  eAttachment     - attachment point of the framebuffer
+//!\param  nMultisamples   - samples number, 0 - disable
 //!\author Khrapov
 //!\date   20.01.2020
 //==============================================================================
@@ -28,11 +30,14 @@ template<bool COPYBLE>
 inline void base_rbo<COPYBLE>::Init(
     size_t nWidth,
     size_t nHeight,
+    GLenum eInternalFormat,
+    GLenum eAttachment,
     size_t nMultisamples)
 {
-    // create a renderbuffer object for depth and stencil attachment
-    Generate();
-    Bind();
+    m_nWidth          = nWidth;
+    m_nHeight         = nHeight;
+    m_eInternalFormat = eInternalFormat;
+    m_eAttachmentType = eAttachment;
 
     // use a single renderbuffer object for both a depth and stencil buffer.
     if (nMultisamples > 0)
@@ -40,7 +45,7 @@ inline void base_rbo<COPYBLE>::Init(
         glRenderbufferStorageMultisample(
             GL_RENDERBUFFER,
             static_cast<GLsizei>(nMultisamples),
-            GL_DEPTH24_STENCIL8,
+            eInternalFormat,
             static_cast<GLsizei>(nWidth),
             static_cast<GLsizei>(nHeight));
     }
@@ -48,12 +53,10 @@ inline void base_rbo<COPYBLE>::Init(
     {
         glRenderbufferStorage(
             GL_RENDERBUFFER,
-            GL_DEPTH24_STENCIL8,
+            eInternalFormat,
             static_cast<GLsizei>(nWidth),
             static_cast<GLsizei>(nHeight));
     }
-
-    Unbind();
 }
 
 //==============================================================================

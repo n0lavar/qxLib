@@ -93,15 +93,30 @@ private:
 };
 
 template<bool COPYBLE>
-inline GLuint  base_texture<COPYBLE>::GetBufferName (void) const { return m_nTexture; }
+inline GLuint base_texture<COPYBLE>::GetBufferName(void) const
+{
+    return m_nTexture;
+}
 template<bool COPYBLE>
-inline bool    base_texture<COPYBLE>::IsGenerated   (void) const { return m_nTexture != std::numeric_limits<GLuint>::max(); };
+inline bool base_texture<COPYBLE>::IsGenerated(void) const
+{
+    return m_nTexture != std::numeric_limits<GLuint>::max();
+};
 template<bool COPYBLE>
-inline GLenum qx::base_texture<COPYBLE>::GetTarget  (void) const { return m_eTextureTarget; }
+inline GLenum base_texture<COPYBLE>::GetTarget(void) const
+{
+    return m_eTextureTarget;
+}
 template<bool COPYBLE>
-inline GLsizei base_texture<COPYBLE>::GetWidth      (void) const { return m_nWidth;   }
+inline GLsizei base_texture<COPYBLE>::GetWidth(void) const
+{
+    return m_nWidth;
+}
 template<bool COPYBLE>
-inline GLsizei base_texture<COPYBLE>::GetHeight     (void) const { return m_nHeight;  }
+inline GLsizei base_texture<COPYBLE>::GetHeight(void) const
+{
+    return m_nHeight;
+}
 
 QX_DEFINE_BUFFER_CLASSES(texture)
 
