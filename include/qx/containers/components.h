@@ -16,6 +16,7 @@
 
 #include <memory>
 #include <unordered_map>
+#include <vector>
 
 namespace qx
 {
@@ -25,7 +26,8 @@ namespace qx
 //!\class                qx::components<TBaseComponent>
 //
 //!\brief   Container for components system
-//!\details ~
+//!\details Stores components and allows them to be accessed by template argument
+//          Iterators allows to access components in the order in which they are added
 //
 //!\author  Khrapov
 //!\date    9.03.2021
@@ -36,56 +38,53 @@ class components
 {
 public:
 
-    using pointer   = std::unique_ptr<TBaseComponent>;
-    using container = std::unordered_multimap<class_identificator, pointer>;
+    using pointer         = std::unique_ptr<TBaseComponent>;
+    using container       = std::unordered_multimap<class_identificator, pointer>;
+    using order_container = std::vector<TBaseComponent*>;
 
-    // iterator wrapper to hide implementation detail ".second"
-    class iterator : public container::iterator
+    template<class TSuperClass>
+    class iterator : public TSuperClass
     {
-        using super_class = typename container::iterator;
-
     public:
 
         iterator    (void)                      noexcept = default;
-        iterator    (const iterator   & other)  noexcept = default;
+        iterator    (const iterator&)           noexcept = default;
         iterator    (iterator&&)                noexcept = default;
-        iterator    (const super_class& other)  noexcept
-            : super_class(other)
+        iterator    (const TSuperClass& other)  noexcept
+            : TSuperClass(other)
         {
         }
 
         auto* operator->(void) noexcept
         {
-            return super_class::operator->()->second.get();
+            return *TSuperClass::operator->();
         }
         auto& operator*(void) noexcept
         {
-            return *super_class::operator*().second.get();
+            return *TSuperClass::operator*();
         }
     };
 
-    // const_iterator wrapper to hide implementation detail ".second"
-    class const_iterator : public container::const_iterator
+    template<class TSuperClass>
+    class const_iterator : public TSuperClass
     {
-        using super_class = typename container::const_iterator;
-
     public:
 
         const_iterator  (void)                          noexcept = default;
-        const_iterator  (const const_iterator & other)  noexcept = default;
+        const_iterator  (const const_iterator&)         noexcept = default;
         const_iterator  (const_iterator&&)              noexcept = default;
-        const_iterator  (const super_class    & other)  noexcept
-            : super_class(other)
+        const_iterator  (const TSuperClass    & other)  noexcept
+            : TSuperClass(other)
         {
         }
 
         const auto* operator->(void) const noexcept
         {
-            return super_class::operator->()->second.get();
+            return *TSuperClass::operator->();
         }
         const auto& operator*(void) const noexcept
         {
-            return *super_class::operator*().second.get();
+            return *TSuperClass::operator*();
         }
     };
 
@@ -122,21 +121,107 @@ public:
     template<class TKeyComponent>
     bool contains(void) const;
 
-    auto begin (void)       { return iterator(m_Components.begin()); }
-    auto begin (void) const { return const_iterator(m_Components.begin()); }
-    auto cbegin(void) const { return const_iterator(m_Components.cbegin()); }
-    auto end   (void)       { return iterator(m_Components.end()); }
-    auto end   (void) const { return const_iterator(m_Components.end()); }
-    auto cend  (void) const { return const_iterator(m_Components.cend()); }
+    auto begin  (void)          noexcept;
+    auto end    (void)          noexcept;
 
-    auto size  (void) const noexcept { return m_Components.size(); }
-    auto empty (void) const noexcept { return m_Components.empty(); }
-    auto clear (void)       noexcept { return m_Components.clear(); }
+    auto begin  (void) const    noexcept;
+    auto end    (void) const    noexcept;
+
+    auto cbegin (void) const    noexcept;
+    auto cend   (void) const    noexcept;
+
+    auto rbegin (void)          noexcept;
+    auto rend   (void)          noexcept;
+
+    auto crbegin(void) const    noexcept;
+    auto crend  (void) const    noexcept;
+
+    auto size   (void) const    noexcept;
+    auto empty  (void) const    noexcept;
+    auto clear  (void)          noexcept;
 
 private:
 
-    container m_Components;
+    container       m_Components;
+    order_container m_InsertionOrderComponents;
 };
+
+template<class TBaseComponent>
+auto components<TBaseComponent>::begin(void) noexcept
+{
+    return iterator<typename order_container::iterator>(
+        m_InsertionOrderComponents.begin());
+}
+template<class TBaseComponent>
+auto components<TBaseComponent>::end(void) noexcept
+{
+    return iterator<typename order_container::iterator>(
+        m_InsertionOrderComponents.end());
+}
+template<class TBaseComponent>
+auto components<TBaseComponent>::begin(void) const noexcept
+{
+    return const_iterator<typename order_container::const_iterator>(
+        m_InsertionOrderComponents.begin());
+}
+template<class TBaseComponent>
+auto components<TBaseComponent>::end(void) const noexcept
+{
+    return const_iterator<typename order_container::const_iterator>(
+        m_InsertionOrderComponents.end());
+}
+template<class TBaseComponent>
+auto components<TBaseComponent>::cbegin(void) const noexcept
+{
+    return const_iterator<typename order_container::const_iterator>(
+        m_InsertionOrderComponents.cbegin());
+}
+template<class TBaseComponent>
+auto components<TBaseComponent>::cend(void) const noexcept
+{
+    return const_iterator<typename order_container::const_iterator>(
+        m_InsertionOrderComponents.cend());
+}
+template<class TBaseComponent>
+auto components<TBaseComponent>::rbegin(void) noexcept
+{
+    return iterator<typename order_container::reverse_iterator>(
+        m_InsertionOrderComponents.rbegin());
+}
+template<class TBaseComponent>
+auto components<TBaseComponent>::rend(void) noexcept
+{
+    return iterator<typename order_container::reverse_iterator>(
+        m_InsertionOrderComponents.rend());
+}
+template<class TBaseComponent>
+auto components<TBaseComponent>::crbegin(void) const noexcept
+{
+    return const_iterator<typename order_container::const_reverse_iterator>(
+        m_InsertionOrderComponents.crbegin());
+}
+template<class TBaseComponent>
+auto components<TBaseComponent>::crend(void) const noexcept
+{
+    return const_iterator<typename order_container::const_reverse_iterator>(
+        m_InsertionOrderComponents.crend());
+}
+template<class TBaseComponent>
+auto components<TBaseComponent>::size(void) const noexcept
+{
+    return m_Components.size();
+}
+template<class TBaseComponent>
+auto components<TBaseComponent>::empty(void) const noexcept
+{
+    return m_Components.empty();
+}
+template<class TBaseComponent>
+auto components<TBaseComponent>::clear(void) noexcept
+{
+    m_Components.clear();
+    m_InsertionOrderComponents.clear();
+}
 
 }
 

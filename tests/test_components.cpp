@@ -132,6 +132,19 @@ TEST(components, main)
     EXPECT_TRUE(pTestComponent3Add);
     EXPECT_EQ(container.size(), 5);
 
+    // order
+    EXPECT_EQ(pTestComponentAdd1, *(container.begin() + 0));
+    EXPECT_EQ(pTestComponentAdd2, *(container.begin() + 1));
+    EXPECT_EQ(pTestComponent1Add, *(container.begin() + 2));
+    EXPECT_EQ(pTestComponent2Add, *(container.begin() + 3));
+    EXPECT_EQ(pTestComponent3Add, *(container.begin() + 4));
+
+    EXPECT_EQ(pTestComponentAdd1, *(container.rbegin() + 4));
+    EXPECT_EQ(pTestComponentAdd2, *(container.rbegin() + 3));
+    EXPECT_EQ(pTestComponent1Add, *(container.rbegin() + 2));
+    EXPECT_EQ(pTestComponent2Add, *(container.rbegin() + 1));
+    EXPECT_EQ(pTestComponent3Add, *(container.rbegin() + 0));
+
     // get
     TestComponent* pTestComponent = container.get<TestComponent>();
     EXPECT_TRUE(pTestComponentAdd1 == pTestComponent || pTestComponentAdd2 == pTestComponent);
@@ -155,6 +168,12 @@ TEST(components, main)
         EXPECT_TRUE(it->GetNonConst());
 
     for (auto it = container.cbegin(); it != container.cend(); ++it)
+        EXPECT_TRUE(it->GetConst());
+
+    for (auto it = container.rbegin(); it != container.rend(); ++it)
+        EXPECT_TRUE(it->GetNonConst());
+
+    for (auto it = container.crbegin(); it != container.crend(); ++it)
         EXPECT_TRUE(it->GetConst());
 
     for (auto& it : container)

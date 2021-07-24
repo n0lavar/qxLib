@@ -104,9 +104,12 @@ inline TKeyComponent * components<TBaseComponent>::add_to(
     pointer pComponent)
 {
     auto pRawComponent = pComponent.get();
+
     m_Components.emplace(
         TKeyComponent::get_class_id_static(),
         std::move(pComponent));
+
+    m_InsertionOrderComponents.push_back(pRawComponent);
 
     return static_cast<TKeyComponent*>(pRawComponent);
 }
@@ -164,6 +167,17 @@ inline typename components<TBaseComponent>::pointer
     {
         auto pComponent = std::move(it->second);
         m_Components.erase(it);
+
+        m_InsertionOrderComponents.erase(
+            std::remove_if(
+                m_InsertionOrderComponents.begin(),
+                m_InsertionOrderComponents.end(),
+                [&pComponent](auto pVectorComponent)
+                {
+                    return pVectorComponent == pComponent.get();
+                }),
+            m_InsertionOrderComponents.end());
+
         return pComponent;
     }
     else
