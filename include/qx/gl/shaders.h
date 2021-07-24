@@ -13,12 +13,9 @@
 #pragma once
 
 #include <qx/useful_macros.h>
+#include <qx/containers/string.h>
 
 #include <glew.h>
-
-#if !defined(QX_SHADER_INFO_LOG_SIZE)
-    #define QX_SHADER_INFO_LOG_SIZE 512
-#endif
 
 namespace qx
 {
@@ -52,10 +49,12 @@ public:
     QX_MOVABLE(shader_base)
 
             shader_base     (void) = default;
-            shader_base     (const GLchar * pszShaderCode);
+            shader_base     (const GLchar * pszShaderCode,
+                             string       * pError = nullptr);
             ~shader_base    (void);
 
-    void    Init            (const GLchar * pszShaderCode);
+    void    Init            (const GLchar * pszShaderCode,
+                             string       * pError = nullptr);
     GLuint  GetID           (void)                          const;
     GLint   GetParameter    (GLenum         eParameter)     const;
 

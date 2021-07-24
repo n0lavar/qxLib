@@ -19,13 +19,16 @@ namespace qx
 //
 //!\brief  shader_base object constructor
 //!\param  pszShaderCode - string with shader code
+//!\param  pError        - error string pointer
 //!\author Khrapov
 //!\date   16.01.2020
 //==============================================================================
 template <GLenum ShaderType>
-inline shader_base<ShaderType>::shader_base(const GLchar* pszShaderCode)
+inline shader_base<ShaderType>::shader_base(
+    const GLchar  * pszShaderCode,
+    string        * pError)
 {
-    Init(pszShaderCode);
+    Init(pszShaderCode, pError);
 }
 
 //==============================================================================
@@ -46,29 +49,41 @@ inline shader_base<ShaderType>::~shader_base()
 //
 //!\brief  Init (compile) shader
 //!\param  pszShaderCode - string with shader code
+//!\param  pError        - error string pointer
 //!\author Khrapov
 //!\date   16.01.2020
 //==============================================================================
 template <GLenum ShaderType>
-inline void shader_base<ShaderType>::Init(const GLchar* pszShaderCode)
+inline void shader_base<ShaderType>::Init(
+    const GLchar  * pszShaderCode,
+    string        * pError)
 {
     if (pszShaderCode)
     {
         // Compile
         m_nShader = glCreateShader(ShaderType);
-        glShaderSource(m_nShader, 1, &pszShaderCode, NULL);
+        glShaderSource(m_nShader, 1, &pszShaderCode, nullptr);
         glCompileShader(m_nShader);
 
         // Print compile errors if any
-        if (GLint bSuccess = GetParameter(GL_COMPILE_STATUS); !bSuccess)
+        if (const GLint bSuccess = GetParameter(GL_COMPILE_STATUS); pError && !bSuccess)
         {
-            GLchar infoLog[QX_SHADER_INFO_LOG_SIZE];
-            glGetShaderInfoLog(m_nShader, QX_SHADER_INFO_LOG_SIZE, NULL, infoLog);
-            ASSERT_MSG(0, "Shader %d compilation failed:\n%s", m_nShader, infoLog);
+            GLsizei nErrorStringLength = 0;
+            glGetShaderiv(m_nShader, GL_INFO_LOG_LENGTH, &nErrorStringLength);
+
+            if (nErrorStringLength > 0)
+            {
+                pError->assign(nErrorStringLength, '\0');
+                glGetShaderInfoLog(
+                    m_nShader,
+                    nErrorStringLength,
+                    nullptr,
+                    pError->data());
+            }
         }
     }
-    else
-        ASSERT_MSG(0, "Nullptr passed as shader text pointer");
+    else if (pError)
+        *pError = "Nullptr passed as shader text pointer";
 }
 
 //==============================================================================

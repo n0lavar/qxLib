@@ -245,17 +245,19 @@ inline void base_shader_program::SetUniform(const GLchar* pszName, const T& valu
 //
 //!\brief   Get uniform location based on it's name
 //!\param   pszName - uniform string name
+//!\param   pError  - error string pointer
 //!\retval          - location number
 //!\author Khrapov
 //!\date   05.08.2020
 //==============================================================================
-inline GLint base_shader_program::GetUniformLocation(const GLchar* pszName) const
+inline GLint base_shader_program::GetUniformLocation(
+    const GLchar* pszName,
+    string      * pError) const
 {
     const GLint nLocation = glGetUniformLocation(m_nProgram, pszName);
 
-#if !QX_DISABLE_UNKNOWN_UNIFORM_ASSERT
-    QX_ASSERT_MSG(nLocation >= 0, "Cant find uniform \"%s\" in program %u", pszName, m_nProgram);
-#endif
+    if (nLocation < 0 && pError)
+        pError->sprintf("Cant find uniform \"%s\"", pszName);
 
     return nLocation;
 }
