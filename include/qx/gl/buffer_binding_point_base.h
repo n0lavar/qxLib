@@ -2,7 +2,7 @@
 //
 //!\file                  buffer_binding_point_base.h
 //
-//!\brief       Contains buffer_binding_point_base class
+//!\brief       Contains qx::buffer_binding_point_base class
 //!\details     ~
 //
 //!\author      Khrapov
@@ -19,7 +19,7 @@ namespace qx
 
 //==============================================================================
 //
-//!\class          qx::buffer_binding_point_base<COPYBLE>
+//!\class          qx::buffer_binding_point_base
 //
 //!\brief   Base class for buffers with binding points
 //!\details ~
@@ -29,12 +29,11 @@ namespace qx
 //
 //==============================================================================
 
-template <bool COPYBLE>
-class buffer_binding_point_base : public buffer_base<COPYBLE>
+class buffer_binding_point_base : public buffer_base
 {
 public:
 
-    virtual void    BindBase    (GLuint         nIndex);
+    virtual void    BindBase    (GLuint nIndex);
 };
 
 }

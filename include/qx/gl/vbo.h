@@ -2,7 +2,7 @@
 //
 //!\file                            vbo.h
 //
-//!\brief       Vertex buffer object classes: vbo and copyble_vbo
+//!\brief       Contains qx::base_vbo class
 //!\details     ~
 //
 //!\author      Khrapov
@@ -19,17 +19,16 @@ namespace qx
 
 //==============================================================================
 //
-//!\class                    qx::base_vbo<COPYBLE>
+//!\class                    qx::base_vbo
 //
-//!\brief   Base VBO class. Use vbo or copyble_vbo
+//!\brief   Base VBO class
 //!\details ~
 //
 //!\author  Khrapov
 //!\date    10.07.2020
 //
 //==============================================================================
-template<bool COPYBLE>
-class base_vbo : public buffer_base<COPYBLE>
+class base_vbo : public buffer_base
 {
 public:
 
@@ -37,10 +36,19 @@ public:
 
 protected:
 
-    virtual GLenum      GetBufferType(void) const override { return GL_ARRAY_BUFFER; }
-    virtual GLbitfield  GetBarrierBit(void) const override { return GL_VERTEX_ATTRIB_ARRAY_BARRIER_BIT; }
+    virtual GLenum      GetBufferType(void) const override;
+    virtual GLbitfield  GetBarrierBit(void) const override;
 };
 
-QX_DEFINE_BUFFER_CLASSES(vbo)
+inline GLenum base_vbo::GetBufferType(void) const
+{
+    return GL_ARRAY_BUFFER;
+}
+inline GLbitfield base_vbo::GetBarrierBit(void) const
+{
+    return GL_VERTEX_ATTRIB_ARRAY_BARRIER_BIT;
+}
+
+using vbo = base_vbo;
 
 }

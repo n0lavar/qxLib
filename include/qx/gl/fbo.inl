@@ -2,7 +2,7 @@
 //
 //!\file                           fbo.inl
 //
-//!\brief       Frame buffer object classes: fbo and copyble_fbo
+//!\brief       Contains qx::base_fbo class
 //!\details     ~
 //
 //!\author      Khrapov
@@ -15,102 +15,91 @@ namespace qx
 {
 
 //==============================================================================
-//!\fn                  qx::base_fbo<COPYBLE>::~base_fbo
+//!\fn                       qx::base_fbo::~base_fbo
 //
 //!\brief  base_fbo object destructor
 //!\author Khrapov
 //!\date   10.07.2020
 //==============================================================================
-template<bool COPYBLE>
-inline base_fbo<COPYBLE>::~base_fbo(void)
+inline base_fbo::~base_fbo(void)
 {
     Delete();
 }
 
 //==============================================================================
-//!\fn                  qx::base_fbo<COPYBLE>::Generate
+//!\fn                       qx::base_fbo::Generate
 //
 //!\brief  Generate buffer
 //!\author Khrapov
 //!\date   20.01.2020
 //==============================================================================
-template<bool COPYBLE>
-inline void base_fbo<COPYBLE>::Generate(void)
+inline void base_fbo::Generate(void)
 {
     glGenFramebuffers(1, &m_nBuffer);
 }
 
 //==============================================================================
-//!\fn                   qx::base_fbo<COPYBLE>::Delete
+//!\fn                        qx::base_fbo::Delete
 //
 //!\brief  Delete buffer
 //!\author Khrapov
 //!\date   20.01.2020
 //==============================================================================
-template<bool COPYBLE>
-inline void base_fbo<COPYBLE>::Delete(void)
+inline void base_fbo::Delete(void)
 {
-    if constexpr (!COPYBLE)
+    if (m_nBuffer != std::numeric_limits<GLuint>::max())
     {
-        if (m_nBuffer != std::numeric_limits<GLuint>::max())
-        {
-            glDeleteFramebuffers(1, &m_nBuffer);
-            m_nBuffer = std::numeric_limits<GLuint>::max();
-        }
+        glDeleteFramebuffers(1, &m_nBuffer);
+        m_nBuffer = std::numeric_limits<GLuint>::max();
     }
 }
 
 //==============================================================================
-//!\fn                    qx::base_fbo<COPYBLE>::Bind
+//!\fn                         qx::base_fbo::Bind
 //
 //!\brief  Bind buffer
 //!\author Khrapov
 //!\date   20.01.2020
 //==============================================================================
-template<bool COPYBLE>
-inline void base_fbo<COPYBLE>::Bind(void) const
+inline void base_fbo::Bind(void) const
 {
     glBindFramebuffer(m_nTarget, m_nBuffer);
 }
 
 //==============================================================================
-//!\fn                   qx::base_fbo<COPYBLE>::Unbind
+//!\fn                        qx::base_fbo::Unbind
 //
 //!\brief  Unbind buffer
 //!\author Khrapov
 //!\date   20.01.2020
 //==============================================================================
-template<bool COPYBLE>
-inline void base_fbo<COPYBLE>::Unbind(void) const
+inline void base_fbo::Unbind(void) const
 {
     glBindFramebuffer(m_nTarget, 0);
 }
 
 //==============================================================================
-//!\fn                  qx::base_fbo<COPYBLE>::SetTarget
+//!\fn                       qx::base_fbo::SetTarget
 //
 //!\brief  Set target type
 //!\param  target - GL_FRAMEBUFFER, GL_DRAW_FRAMEBUFFER or GL_READ_FRAMEBUFFER
 //!\author Khrapov
 //!\date   20.01.2020
 //==============================================================================
-template<bool COPYBLE>
-inline void base_fbo<COPYBLE>::SetTarget(GLenum target)
+inline void base_fbo::SetTarget(GLenum target)
 {
     m_nTarget = target;
 }
 
 //==============================================================================
-//!\fn           qx::base_fbo<COPYBLE>::AttachRBO<COPYBLE_RBO>
+//!\fn                     qx::base_fbo::AttachRBO
 //
 //!\brief  Attach RBO th FRO
 //!\param  rbo - render buffer object
 //!\author Khrapov
 //!\date   20.01.2020
 //==============================================================================
-template<bool COPYBLE>
-template<bool COPYBLE_RBO>
-inline void base_fbo<COPYBLE>::AttachRBO(const base_rbo<COPYBLE_RBO>& rbo)
+inline void base_fbo::AttachRBO(const base_rbo& rbo)
 {
     glFramebufferRenderbuffer(
         m_nTarget,
@@ -120,7 +109,7 @@ inline void base_fbo<COPYBLE>::AttachRBO(const base_rbo<COPYBLE_RBO>& rbo)
 }
 
 //==============================================================================
-//!\fn      qx::base_fbo<COPYBLE>::AttachTexture2D<COPYBLE_TEXTURE>
+//!\fn                     qx::base_fbo::AttachTexture2D
 //
 //!\brief  Attache a single face of a specific MIP level to FBO
 //!\param  attachment   - attachment point of the framebuffer
@@ -129,12 +118,10 @@ inline void base_fbo<COPYBLE>::AttachRBO(const base_rbo<COPYBLE_RBO>& rbo)
 //!\author Khrapov
 //!\date   20.01.2020
 //==============================================================================
-template<bool COPYBLE>
-template<bool COPYBLE_TEXTURE>
-inline void base_fbo<COPYBLE>::AttachTexture2D(
-    GLenum                               attachment,
-    const base_texture<COPYBLE_TEXTURE>& texture,
-    GLint                                nMipmapLevel)
+inline void base_fbo::AttachTexture2D(
+    GLenum              attachment,
+    const base_texture& texture,
+    GLint               nMipmapLevel)
 {
     glFramebufferTexture2D(
         m_nTarget,
@@ -145,7 +132,7 @@ inline void base_fbo<COPYBLE>::AttachTexture2D(
 }
 
 //==============================================================================
-//!\fn       qx::base_fbo<COPYBLE>::AttachTexture2D<COPYBLE_TEXTURE>
+//!\fn                  qx::base_fbo::AttachTexture2D
 //
 //!\brief  Attache all cube map faces of a specific MIP level
 //         as an array of images (layered framebuffer)
@@ -155,12 +142,10 @@ inline void base_fbo<COPYBLE>::AttachTexture2D(
 //!\author Khrapov
 //!\date   20.01.2020
 //==============================================================================
-template<bool COPYBLE>
-template<bool COPYBLE_TEXTURE>
-inline void base_fbo<COPYBLE>::AttachTexture(
-    GLenum                               attachment,
-    const base_texture<COPYBLE_TEXTURE>& texture,
-    GLint                                nMipmapLevel)
+inline void base_fbo::AttachTexture(
+    GLenum              attachment,
+    const base_texture& texture,
+    GLint               nMipmapLevel)
 {
     glFramebufferTexture(
         m_nTarget,
@@ -170,16 +155,16 @@ inline void base_fbo<COPYBLE>::AttachTexture(
 }
 
 //==============================================================================
-//!\fn                 qx::base_fbo<COPYBLE>::CheckStatus
+//!\fn                      qx::base_fbo::CheckStatus
 //
 //!\brief  check framebuffer status
 //!\author Khrapov
 //!\date   26.06.2020
 //==============================================================================
-template<bool COPYBLE>
-inline void base_fbo<COPYBLE>::CheckStatus(void) const
+inline void base_fbo::CheckStatus(void) const
 {
-    if (auto eStatus = glCheckFramebufferStatus(GL_FRAMEBUFFER); eStatus != GL_FRAMEBUFFER_COMPLETE)
+    if (const auto eStatus = glCheckFramebufferStatus(GL_FRAMEBUFFER);
+        eStatus != GL_FRAMEBUFFER_COMPLETE)
     {
         char const * pszErrorMsg = nullptr;
         switch (eStatus)

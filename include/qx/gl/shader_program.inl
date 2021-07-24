@@ -2,7 +2,7 @@
 //
 //!\file                     shader_program.inl
 //
-//!\brief       Contains shader_program class
+//!\brief       Contains qx::base_shader_program class
 //!\details     ~
 //
 //!\author      Khrapov
@@ -15,57 +15,52 @@ namespace qx
 {
 
 //==============================================================================
-//!\fn          qx::shader_program<COPYBLE>::~shader_program
+//!\fn               qx::shader_program::~shader_program
 //
 //!\brief  shader_program object destructor
 //!\author Khrapov
 //!\date   16.01.2020
 //==============================================================================
-template<bool COPYBLE>
-inline base_shader_program<COPYBLE>::~base_shader_program(void)
+inline base_shader_program::~base_shader_program(void)
 {
-    if constexpr (!COPYBLE)
-        if (m_nProgram != std::numeric_limits<GLuint>::max())
-            glDeleteProgram(m_nProgram);
+    if (m_nProgram != std::numeric_limits<GLuint>::max())
+        glDeleteProgram(m_nProgram);
 }
 
 //==============================================================================
-//!\fn               qx::shader_program<COPYBLE>::Init
+//!\fn                    qx::shader_program::Init
 //
 //!\brief  Init shader program
 //!\author Khrapov
 //!\date   18.04.2020
 //==============================================================================
-template<bool COPYBLE>
-inline void base_shader_program<COPYBLE>::Init(void)
+inline void base_shader_program::Init(void)
 {
     m_nProgram = glCreateProgram();
 }
 
 //==============================================================================
-//!\fn         qx::shader_program<COPYBLE>::AttachShader<ShaderType>
+//!\fn              qx::shader_program::AttachShader<ShaderType>
 //
 //!\brief  Attach shader to the program
 //!\param  pShader - shader object pointer
 //!\author Khrapov
 //!\date   16.01.2020
 //==============================================================================
-template<bool COPYBLE>
 template <GLenum ShaderType>
-inline void base_shader_program<COPYBLE>::AttachShader(shader_base<ShaderType>* pShader)
+inline void base_shader_program::AttachShader(shader_base<ShaderType>* pShader)
 {
     glAttachShader(m_nProgram, pShader->GetID());
 }
 
 //==============================================================================
-//!\fn            qx::shader_program<COPYBLE>::Link
+//!\fn                 qx::shader_program::Link
 //
 //!\brief  Link attached shaders
 //!\author Khrapov
 //!\date   16.01.2020
 //==============================================================================
-template<bool COPYBLE>
-inline bool base_shader_program<COPYBLE>::Link(void)
+inline bool base_shader_program::Link(void)
 {
     glLinkProgram(m_nProgram);
     const GLint bSuccess = GetParameter(GL_LINK_STATUS);
@@ -81,33 +76,31 @@ inline bool base_shader_program<COPYBLE>::Link(void)
 }
 
 //==============================================================================
-//!\fn                 qx::shader_program<COPYBLE>::Use
+//!\fn                      qx::shader_program::Use
 //
 //!\brief  Use shader program
 //!\author Khrapov
 //!\date   16.01.2020
 //==============================================================================
-template<bool COPYBLE>
-inline void base_shader_program<COPYBLE>::Use(void) const
+inline void base_shader_program::Use(void) const
 {
     glUseProgram(m_nProgram);
 }
 
 //==============================================================================
-//!\fn                 qx::shader_program<COPYBLE>::Use
+//!\fn                      qx::shader_program::Use
 //
 //!\brief  Drop current shader
 //!\author Khrapov
 //!\date   16.01.2020
 //==============================================================================
-template<bool COPYBLE>
-inline void base_shader_program<COPYBLE>::Unuse(void) const
+inline void base_shader_program::Unuse(void) const
 {
     glUseProgram(0);
 }
 
 //==============================================================================
-//!\fn             qx::shader_program<COPYBLE>::GetParameter
+//!\fn                  qx::shader_program::GetParameter
 //
 //!\brief  Get shader program parameter
 //!\param  eParameter - shader program parameter.
@@ -115,8 +108,7 @@ inline void base_shader_program<COPYBLE>::Unuse(void) const
 //!\author Khrapov
 //!\date   17.01.2020
 //==============================================================================
-template<bool COPYBLE>
-inline GLint base_shader_program<COPYBLE>::GetParameter(GLenum eParameter) const
+inline GLint base_shader_program::GetParameter(GLenum eParameter) const
 {
     GLint nRet = -1;
     glGetProgramiv(m_nProgram, eParameter, &nRet);
@@ -124,7 +116,7 @@ inline GLint base_shader_program<COPYBLE>::GetParameter(GLenum eParameter) const
 }
 
 //==============================================================================
-//!\fn             qx::shader_program<COPYBLE>::SetUniform<T>
+//!\fn                  qx::shader_program::SetUniform<T>
 //
 //!\brief  Specify the value of a uniform variable
 //!\param  nUniformLocation - the location of the uniform variable to be modified.
@@ -133,9 +125,8 @@ inline GLint base_shader_program<COPYBLE>::GetParameter(GLenum eParameter) const
 //!\author Khrapov
 //!\date   15.01.2021
 //==============================================================================
-template<bool COPYBLE>
 template<typename T>
-inline void base_shader_program<COPYBLE>::SetUniform(GLint nUniformLocation, const T* pValue, GLsizei nCount)
+inline void base_shader_program::SetUniform(GLint nUniformLocation, const T* pValue, GLsizei nCount)
 {
     if constexpr (std::is_same_v<T, GLfloat>)
         glUniform1fv(nUniformLocation, nCount, pValue);
@@ -184,7 +175,7 @@ inline void base_shader_program<COPYBLE>::SetUniform(GLint nUniformLocation, con
 }
 
 //==============================================================================
-//!\fn             qx::shader_program<COPYBLE>::SetUniform<T>
+//!\fn                  qx::shader_program::SetUniform<T>
 //
 //!\brief  Specify the value of a uniform variable
 //!\param  pszName - the name of the uniform variable to be modified.
@@ -193,15 +184,14 @@ inline void base_shader_program<COPYBLE>::SetUniform(GLint nUniformLocation, con
 //!\author Khrapov
 //!\date   15.01.2021
 //==============================================================================
-template<bool COPYBLE>
 template<typename T>
-inline void base_shader_program<COPYBLE>::SetUniform(const GLchar* pszName, const T* pValue, GLsizei nCount)
+inline void base_shader_program::SetUniform(const GLchar* pszName, const T* pValue, GLsizei nCount)
 {
     SetUniform(GetUniformLocation(pszName), pValue, nCount);
 }
 
 //==============================================================================
-//!\fn             qx::shader_program<COPYBLE>::SetUniform<T>
+//!\fn                  qx::shader_program::SetUniform<T>
 //
 //!\brief  Specify the value of a uniform variable
 //!\param  nUniformLocation - the location of the uniform variable to be modified.
@@ -209,9 +199,8 @@ inline void base_shader_program<COPYBLE>::SetUniform(const GLchar* pszName, cons
 //!\author Khrapov
 //!\date   15.01.2021
 //==============================================================================
-template<bool COPYBLE>
 template<typename T>
-inline void base_shader_program<COPYBLE>::SetUniform(GLint nUniformLocation, const T & value)
+inline void base_shader_program::SetUniform(GLint nUniformLocation, const T & value)
 {
     using type = std::remove_cvref_t<T>;
     if constexpr (std::is_same_v<T, GLfloat>)
@@ -237,7 +226,7 @@ inline void base_shader_program<COPYBLE>::SetUniform(GLint nUniformLocation, con
 }
 
 //==============================================================================
-//!\fn             qx::shader_program<COPYBLE>::SetUniform<T>
+//!\fn                  qx::shader_program::SetUniform<T>
 //
 //!\brief  Specify the value of a uniform variable
 //!\param  pszName - the name of the uniform variable to be modified.
@@ -245,24 +234,22 @@ inline void base_shader_program<COPYBLE>::SetUniform(GLint nUniformLocation, con
 //!\author Khrapov
 //!\date   15.01.2021
 //==============================================================================
-template<bool COPYBLE>
 template<typename T>
-inline void base_shader_program<COPYBLE>::SetUniform(const GLchar* pszName, const T& value)
+inline void base_shader_program::SetUniform(const GLchar* pszName, const T& value)
 {
     SetUniform(GetUniformLocation(pszName), value);
 }
 
 //==============================================================================
-//!\fn              qx::shader_program::GetUniformLocation
+//!\fn                   qx::shader_program::GetUniformLocation
 //
 //!\brief   Get uniform location based on it's name
-//!\param   name - uniform string name
-//!\retval       - location number
+//!\param   pszName - uniform string name
+//!\retval          - location number
 //!\author Khrapov
 //!\date   05.08.2020
 //==============================================================================
-template<bool COPYBLE>
-inline GLint base_shader_program<COPYBLE>::GetUniformLocation(const GLchar* pszName) const
+inline GLint base_shader_program::GetUniformLocation(const GLchar* pszName) const
 {
     const GLint nLocation = glGetUniformLocation(m_nProgram, pszName);
 
@@ -274,7 +261,7 @@ inline GLint base_shader_program<COPYBLE>::GetUniformLocation(const GLchar* pszN
 }
 
 //==============================================================================
-//!\fn                qx::shader_program::AddInclude
+//!\fn                     qx::shader_program::AddInclude
 //
 //!\brief   Add include string
 //!\details ARB_shading_language_include is required for this function
@@ -292,20 +279,19 @@ inline GLint base_shader_program<COPYBLE>::GetUniformLocation(const GLchar* pszN
 //!\author  Khrapov
 //!\date    06.08.2020
 //==============================================================================
-template<bool COPYBLE>
-inline void base_shader_program<COPYBLE>::AddInclude(
+inline void base_shader_program::AddInclude(
     const char* pszName,
     GLint       nNameLength,
     const char* pszText,
     GLint       nTextLength)
 {
-    bool bGlslIncludeSupported = GLEW_ARB_shading_language_include;
+    const bool bGlslIncludeSupported = GLEW_ARB_shading_language_include != 0;
     QX_CHECK(bGlslIncludeSupported)
         glNamedStringARB(GL_SHADER_INCLUDE_ARB, nNameLength, pszName, nTextLength, pszText);
 }
 
 //==============================================================================
-//!\fn               qx::shader_program::DispatchCompute
+//!\fn                    qx::shader_program::DispatchCompute
 //
 //!\brief  Dispatch program compute
 //!\param  nGroupsX - The number of work groups to be launched in the X dimension
@@ -314,8 +300,7 @@ inline void base_shader_program<COPYBLE>::AddInclude(
 //!\author Khrapov
 //!\date   17.01.2020
 //==============================================================================
-template<bool COPYBLE>
-inline void base_shader_program<COPYBLE>::DispatchCompute(
+inline void base_shader_program::DispatchCompute(
     GLuint nGroupsX,
     GLuint nGroupsY,
     GLuint nGroupsZ)

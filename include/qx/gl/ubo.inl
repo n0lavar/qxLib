@@ -2,7 +2,7 @@
 //
 //!\file                        ubo.inl
 //
-//!\brief       Uniform buffer object classes: ubo and copyble_ubo
+//!\brief       Contains qx::base_ubo class
 //!\details     ~
 //
 //!\author      Khrapov
@@ -15,15 +15,14 @@ namespace qx
 {
 
 //==============================================================================
-//!\fn                 qx::base_ubo<COPYBLE>::GetMaxSize
+//!\fn                      qx::base_ubo::GetMaxSize
 //
 //!\brief  Get max UBO size
 //!\retval max UBO size
 //!\author Khrapov
 //!\date   9.01.2020
 //==============================================================================
-template<bool COPYBLE>
-inline GLint base_ubo<COPYBLE>::GetMaxSize(void) const
+inline GLint base_ubo::GetMaxSize(void) const
 {
     GLint ret;
     glGetIntegerv(GL_MAX_UNIFORM_BLOCK_SIZE, &ret);

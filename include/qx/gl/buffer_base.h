@@ -13,7 +13,6 @@
 #pragma once
 
 #include <qx/typedefs.h>
-#include <qx/gl/buffer_classes.h>
 #include <qx/gl/ibuffer.h>
 
 namespace qx
@@ -21,7 +20,7 @@ namespace qx
 
 //==============================================================================
 //
-//!\class                   qx::buffer_base<COPYBLE>
+//!\class                   qx::buffer_base
 //
 //!\brief   Base OpenGL buffer object class
 //!\details ~
@@ -30,12 +29,9 @@ namespace qx
 //!\date    10.07.2020
 //
 //==============================================================================
-template<bool COPYBLE>
 class buffer_base : public IBuffer
 {
 public:
-
-    friend class buffer_base;
 
     virtual             ~buffer_base        (void);
     virtual void        Generate            (void)          override;
@@ -56,8 +52,6 @@ public:
 
 protected:
 
-    template<class Derived>
-            void        Assign              (const Derived& other) { m_nBuffer = other.m_nBuffer; }
     virtual GLenum      GetBufferType       (void) const = 0;
     virtual GLbitfield  GetBarrierBit       (void) const = 0;
 
@@ -66,10 +60,14 @@ private:
     GLuint m_nBuffer = std::numeric_limits<GLuint>::max();
 };
 
-template<bool COPYBLE>
-inline GLuint buffer_base<COPYBLE>::GetBufferName (void) const { return m_nBuffer; }
-template<bool COPYBLE>
-inline bool   buffer_base<COPYBLE>::IsGenerated   (void) const { return m_nBuffer != std::numeric_limits<GLuint>::max(); }
+inline GLuint buffer_base::GetBufferName(void) const
+{
+    return m_nBuffer;
+}
+inline bool buffer_base::IsGenerated(void) const
+{
+    return m_nBuffer != std::numeric_limits<GLuint>::max();
+}
 
 }
 

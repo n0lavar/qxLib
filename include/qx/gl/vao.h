@@ -2,7 +2,7 @@
 //
 //!\file                            vao.h
 //
-//!\brief       Vertex array object classes: vao and copyble_vao
+//!\brief       Contains qx::base_vao class
 //!\details     ~
 //
 //!\author      Khrapov
@@ -13,7 +13,6 @@
 #pragma once
 
 #include <qx/typedefs.h>
-#include <qx/gl/buffer_classes.h>
 #include <qx/gl/ibuffer.h>
 
 namespace qx
@@ -21,16 +20,15 @@ namespace qx
 
 //==============================================================================
 //
-//!\class                    qx::base_vao<COPYBLE>
+//!\class                    qx::base_vao
 //
-//!\brief   Base VAO class. Use vao or copyble_vao
+//!\brief   Base VAO class
 //!\details ~
 //
 //!\author  Khrapov
 //!\date    19.01.2020
 //
 //==============================================================================
-template<bool COPYBLE>
 class base_vao : IBuffer
 {
 public:
@@ -56,22 +54,21 @@ public:
                                              GLsizei        nStride,
                                              size_t         nOffset);
 
-protected:
-
-    template<class Derived>
-            void    Assign                  (const Derived& other) { m_nVAO = other.m_nVAO; }
-
 private:
 
     GLuint m_nVAO = std::numeric_limits<GLuint>::max();
 };
 
-template<bool COPYBLE>
-inline GLuint base_vao<COPYBLE>::GetBufferName (void) const { return m_nVAO; }
-template<bool COPYBLE>
-inline bool   base_vao<COPYBLE>::IsGenerated   (void) const { return m_nVAO != std::numeric_limits<GLuint>::max(); };
+inline GLuint base_vao::GetBufferName(void) const
+{
+    return m_nVAO;
+}
+inline bool base_vao::IsGenerated(void) const
+{
+    return m_nVAO != std::numeric_limits<GLuint>::max();
+};
 
-QX_DEFINE_BUFFER_CLASSES(vao)
+using vao = base_vao;
 
 }
 

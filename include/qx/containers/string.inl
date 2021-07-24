@@ -38,7 +38,9 @@ inline basic_string<Traits>::basic_string(value_type chSymbol) noexcept
 //!\date   13.11.2020
 //==============================================================================
 template<class Traits>
-inline basic_string<Traits>::basic_string(size_type nSymbols, value_type chSymbol) noexcept
+inline basic_string<Traits>::basic_string(
+    size_type  nSymbols,
+    value_type chSymbol) noexcept
 {
     assign(nSymbols, chSymbol);
 }
@@ -165,7 +167,7 @@ inline void basic_string<Traits>::assign(value_type chSymbol) noexcept
 //
 //!\brief  Assign by filling
 //!\param  nSymbols - num of symbols of char
-//!\param  ch       - char
+//!\param  chSymbol - char
 //!\author Khrapov
 //!\date   29.10.2019
 //==============================================================================

@@ -2,7 +2,7 @@
 //
 //!\file                           vao.inl
 //
-//!\brief       Vertex array object classes: vao and copyble_vao
+//!\brief       Contains qx::base_vao class
 //!\details     ~
 //
 //!\author      Khrapov
@@ -15,107 +15,97 @@ namespace qx
 {
 
 //==============================================================================
-//!\fn                  qx::base_vao<COPYBLE>::~base_vao
+//!\fn                       qx::base_vao::~base_vao
 //
 //!\brief  vao object destructor
 //!\author Khrapov
 //!\date   19.01.2020
 //==============================================================================
-template<bool COPYBLE>
-inline base_vao<COPYBLE>::~base_vao(void)
+inline base_vao::~base_vao(void)
 {
     Delete();
 }
 
 //==============================================================================
-//!\fn                  qx::base_vao<COPYBLE>::Generate
+//!\fn                       qx::base_vao::Generate
 //
 //!\brief  Generate VAO. Expensive operation.
 //!\author Khrapov
 //!\date   19.01.2020
 //==============================================================================
-template<bool COPYBLE>
-inline void base_vao<COPYBLE>::Generate(void)
+inline void base_vao::Generate(void)
 {
     glGenVertexArrays(1, &m_nVAO);
 }
 
 //==============================================================================
-//!\fn                   qx::base_vao<COPYBLE>::Delete
+//!\fn                        qx::base_vao::Delete
 //
 //!\brief  Delete VAO
 //!\author Khrapov
 //!\date   19.01.2020
 //==============================================================================
-template<bool COPYBLE>
-inline void base_vao<COPYBLE>::Delete(void)
+inline void base_vao::Delete(void)
 {
-    if constexpr (!COPYBLE)
+    if (m_nVAO != std::numeric_limits<GLuint>::max())
     {
-        if (m_nVAO != std::numeric_limits<GLuint>::max())
-        {
-            glDeleteVertexArrays(1, &m_nVAO);
-            m_nVAO = std::numeric_limits<GLuint>::max();
-        }
+        glDeleteVertexArrays(1, &m_nVAO);
+        m_nVAO = std::numeric_limits<GLuint>::max();
     }
 }
 
 //==============================================================================
-//!\fn                    qx::base_vao<COPYBLE>::Bind
+//!\fn                         qx::base_vao::Bind
 //
 //!\brief  Bind VAO
 //!\author Khrapov
 //!\date   19.01.2020
 //==============================================================================
-template<bool COPYBLE>
-inline void base_vao<COPYBLE>::Bind(void) const
+inline void base_vao::Bind(void) const
 {
     glBindVertexArray(m_nVAO);
 }
 
 //==============================================================================
-//!\fn                   qx::base_vao<COPYBLE>::Unbind
+//!\fn                        qx::base_vao::Unbind
 //
 //!\brief  Unbind VAO
 //!\author Khrapov
 //!\date   19.01.2020
 //==============================================================================
-template<bool COPYBLE>
-inline void base_vao<COPYBLE>::Unbind(void) const
+inline void base_vao::Unbind(void) const
 {
     glBindVertexArray(0);
 }
 
 //==============================================================================
-//!\fn           qx::base_vao<COPYBLE>::EnableVertexArrtibArray
+//!\fn                qx::base_vao::EnableVertexArrtibArray
 //
 //!\brief  Enable a generic vertex attribute array
 //!\param  nIndex - array index in VAO
 //!\author Khrapov
 //!\date   19.01.2020
 //==============================================================================
-template<bool COPYBLE>
-inline void base_vao<COPYBLE>::EnableVertexArrtibArray(size_t nIndex)
+inline void base_vao::EnableVertexArrtibArray(size_t nIndex)
 {
     glEnableVertexAttribArray(static_cast<GLuint>(nIndex));
 }
 
 //==============================================================================
-//!\fn          qx::base_vao<COPYBLE>::DisableVertexArrtibArray
+//!\fn               qx::base_vao::DisableVertexArrtibArray
 //
 //!\brief  Disable a generic vertex attribute array
 //!\param  nIndex - array index in VAO
 //!\author Khrapov
 //!\date   19.01.2020
 //==============================================================================
-template<bool COPYBLE>
-inline void base_vao<COPYBLE>::DisableVertexArrtibArray(size_t nIndex)
+inline void base_vao::DisableVertexArrtibArray(size_t nIndex)
 {
     glDisableVertexAttribArray(static_cast<GLuint>(nIndex));
 }
 
 //==============================================================================
-//!\fn             qx::base_vao<COPYBLE>::VertexAttribPointer
+//!\fn                  qx::base_vao::VertexAttribPointer
 //
 //!\brief  Define an array of generic vertex attribute data
 //!\param  nIndex      - index of the generic vertex attribute to be modified
@@ -131,8 +121,7 @@ inline void base_vao<COPYBLE>::DisableVertexArrtibArray(size_t nIndex)
 //!\author Khrapov
 //!\date   19.01.2020
 //==============================================================================
-template<bool COPYBLE>
-inline void base_vao<COPYBLE>::VertexAttribPointer(
+inline void base_vao::VertexAttribPointer(
     size_t       nIndex,
     GLint        nSize,
     GLenum       eType,

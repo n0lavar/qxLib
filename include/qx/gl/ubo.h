@@ -2,7 +2,7 @@
 //
 //!\file                       ubo.h
 //
-//!\brief       Uniform buffer object classes: ubo and copyble_ubo
+//!\brief       Contains qx::base_ubo class
 //!\details     ~
 //
 //!\author      Khrapov
@@ -19,9 +19,9 @@ namespace qx
 
 //==============================================================================
 //
-//!\class                    qx::base_ubo<COPYBLE>
+//!\class                    qx::base_ubo
 //
-//!\brief   Base UBO class. Use ubo or copyble_ubo
+//!\brief   Base UBO class
 //!\details UBO can be used to share uniforms between different shader programs,
 //          as well as quickly change between sets of uniforms for the same program object
 //
@@ -29,8 +29,7 @@ namespace qx
 //!\date    10.07.2020
 //
 //==============================================================================
-template<bool COPYBLE>
-class base_ubo : public buffer_binding_point_base<COPYBLE>
+class base_ubo : public buffer_binding_point_base
 {
 public:
 
@@ -40,15 +39,24 @@ public:
 
 protected:
 
-    virtual GLenum      GetBufferType   (void) const override { return GL_UNIFORM_BUFFER;       }
-    virtual GLbitfield  GetBarrierBit   (void) const override { return GL_UNIFORM_BARRIER_BIT;  }
+    virtual GLenum      GetBufferType   (void) const override;
+    virtual GLbitfield  GetBarrierBit   (void) const override;
 
 private:
 
     GLuint m_nBindingPoint = std::numeric_limits<GLuint>::max();
 };
 
-QX_DEFINE_BUFFER_CLASSES(ubo)
+inline GLenum base_ubo::GetBufferType(void) const
+{
+    return GL_UNIFORM_BUFFER;
+}
+inline GLbitfield base_ubo::GetBarrierBit(void) const
+{
+    return GL_UNIFORM_BARRIER_BIT;
+}
+
+using ubo = base_ubo;
 
 }
 

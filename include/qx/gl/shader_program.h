@@ -2,7 +2,7 @@
 //
 //!\file                      shader_program.h
 //
-//!\brief       Contains shader_program class
+//!\brief       Contains qx::base_shader_program class
 //!\details     ~
 //
 //!\author      Khrapov
@@ -14,7 +14,6 @@
 
 #include <glew.h>
 #include <glm/gtc/type_ptr.hpp>
-#include <qx/gl/buffer_classes.h>
 #include <qx/gl/shaders.h>
 
 namespace qx
@@ -22,21 +21,18 @@ namespace qx
 
 //==============================================================================
 //
-//!\class                    qx::shader_program
+//!\class                 qx::base_shader_program
 //
-//!\brief   Shader programm class
+//!\brief   Shader program class
 //!\details ~
 //
 //!\author  Khrapov
 //!\date    16.01.2020
 //
 //==============================================================================
-template<bool COPYBLE>
 class base_shader_program
 {
 public:
-
-    friend class base_shader_program;
 
     QX_NONCOPYABLE(base_shader_program)
     QX_MOVABLE(base_shader_program)
@@ -80,20 +76,17 @@ public:
 
     bool        operator==          (const base_shader_program& other) const { return m_nProgram == other.m_nProgram;  }
 
-protected:
-
-    template<class Derived>
-    void        Assign              (const Derived& other) { m_nProgram = other.m_nProgram; }
-
 private:
 
     GLuint m_nProgram = std::numeric_limits<GLuint>::max();
 };
 
-template<bool COPYBLE>
-inline GLuint base_shader_program<COPYBLE>::GetBufferName(void) const { return m_nProgram; }
+inline GLuint base_shader_program::GetBufferName(void) const
+{
+    return m_nProgram;
+}
 
-QX_DEFINE_BUFFER_CLASSES(shader_program)
+using shader_program = base_shader_program;
 
 }
 

@@ -2,7 +2,7 @@
 //
 //!\file                            rbo.h
 //
-//!\brief       Render buffer object classes: rbo and copyble_rbo
+//!\brief       Contains qx::base_rbo class
 //!\details     ~
 //
 //!\author      Khrapov
@@ -13,7 +13,6 @@
 #pragma once
 
 #include <qx/typedefs.h>
-#include <qx/gl/buffer_classes.h>
 #include <qx/gl/ibuffer.h>
 
 namespace qx
@@ -21,27 +20,26 @@ namespace qx
 
 //==============================================================================
 //
-//!\class                    qx::base_rbo<COPYBLE>
+//!\class                    qx::base_rbo
 //
-//!\brief   Base RBO class. Use rbo or copyble_rbo
+//!\brief   Base RBO class
 //!\details ~
 //
 //!\author  Khrapov
 //!\date    10.07.2020
 //
 //==============================================================================
-template<bool COPYBLE>
 class base_rbo : IBuffer
 {
 public:
-
-    friend class base_rbo;
 
             void    Init                (size_t     nWidth,
                                          size_t     nHeight,
                                          GLenum     eInternalFormat,
                                          GLenum     eAttachment,
                                          size_t     nMultisamples = 0);
+
+    virtual         ~base_rbo           (void);
 
     virtual void    Generate            (void)          override;
     virtual void    Delete              (void)          override;
@@ -55,11 +53,6 @@ public:
     GLenum          GetInternalFormat   (void) const;
     GLenum          GetAttachmentType   (void) const;
 
-protected:
-
-    template<class Derived>
-            void    Assign          (const Derived& other);
-
 private:
 
     GLuint m_nBuffer            = std::numeric_limits<GLuint>::max();
@@ -69,45 +62,32 @@ private:
     size_t m_nHeight            = 0;
 };
 
-template<bool COPYBLE>
-inline GLuint base_rbo<COPYBLE>::GetBufferName(void) const
+inline GLuint base_rbo::GetBufferName(void) const
 {
     return m_nBuffer;
 }
-template<bool COPYBLE>
-inline bool base_rbo<COPYBLE>::IsGenerated(void) const
+inline bool base_rbo::IsGenerated(void) const
 {
     return m_nBuffer != std::numeric_limits<GLuint>::max();
 }
-template<bool COPYBLE>
-template<class Derived>
-inline void base_rbo<COPYBLE>::Assign(const Derived& other)
-{
-    m_nBuffer = other.m_nBuffer;
-}
-template<bool COPYBLE>
-inline size_t base_rbo<COPYBLE>::GetWidth(void) const
+inline size_t base_rbo::GetWidth(void) const
 {
     return m_nWidth;
 }
-template<bool COPYBLE>
-inline size_t base_rbo<COPYBLE>::GetHeight(void) const
+inline size_t base_rbo::GetHeight(void) const
 {
     return m_nHeight;
 }
-template<bool COPYBLE>
-inline GLenum base_rbo<COPYBLE>::GetInternalFormat(void) const
+inline GLenum base_rbo::GetInternalFormat(void) const
 {
     return m_eInternalFormat;
 }
-
-template<bool COPYBLE>
-inline GLenum base_rbo<COPYBLE>::GetAttachmentType(void) const
+inline GLenum base_rbo::GetAttachmentType(void) const
 {
     return m_eAttachmentType;
 }
 
-QX_DEFINE_BUFFER_CLASSES(rbo)
+using rbo = base_rbo;
 
 }
 

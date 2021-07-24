@@ -2,7 +2,7 @@
 //
 //!\file                            fbo.h
 //
-//!\brief       Frame buffer object classes: fbo and copyble_fbo
+//!\brief       Contains qx::base_fbo class
 //!\details     ~
 //
 //!\author      Khrapov
@@ -20,16 +20,15 @@ namespace qx
 
 //==============================================================================
 //
-//!\class                    qx::base_fbo<COPYBLE>
+//!\class                    qx::base_fbo
 //
-//!\brief   Base FBO class. Use fbo or copyble_fbo
+//!\brief   Base FBO class
 //!\details ~
 //
 //!\author  Khrapov
 //!\date    10.07.2020
 //
 //==============================================================================
-template<bool COPYBLE>
 class base_fbo : public IBuffer
 {
 public:
@@ -45,25 +44,17 @@ public:
     virtual GLuint          GetBufferName   (void)                          const    override;
     virtual bool            IsGenerated     (void)                          const    override;
 
-            void            SetTarget       (GLenum             target);
+            void            SetTarget       (GLenum                 target);
 
-    template<bool COPYBLE_RBO>
-            void            AttachRBO       (const base_rbo<COPYBLE_RBO>& rbo);
+            void            AttachRBO       (const base_rbo       & rbo);
 
-    template<bool COPYBLE_TEXTURE>
-            void            AttachTexture2D (GLenum             attachment,
-                                             const base_texture<COPYBLE_TEXTURE>& texture,
-                                             GLint              nMipmapLevel = 0);
-    template<bool COPYBLE_TEXTURE>
-            void            AttachTexture   (GLenum             attachment,
-                                             const base_texture<COPYBLE_TEXTURE>& texture,
-                                             GLint              nMipmapLevel = 0);
+            void            AttachTexture2D (GLenum                 attachment,
+                                             const base_texture   & texture,
+                                             GLint                  nMipmapLevel = 0);
+            void            AttachTexture   (GLenum                 attachment,
+                                             const base_texture   & texture,
+                                             GLint                  nMipmapLevel = 0);
             void            CheckStatus     (void)                          const;
-
-protected:
-
-    template<class Derived>
-            void            Assign          (const Derived    & other);
 
 private:
 
@@ -71,15 +62,16 @@ private:
     GLenum  m_nTarget   = GL_FRAMEBUFFER;
 };
 
-template<bool COPYBLE>
-inline GLuint base_fbo<COPYBLE>::GetBufferName (void) const { return m_nBuffer; }
-template<bool COPYBLE>
-inline bool  base_fbo<COPYBLE>::IsGenerated (void) const { return m_nBuffer != std::numeric_limits<GLuint>::max(); };
-template<bool COPYBLE>
-template<class Derived>
-inline void  base_fbo<COPYBLE>::Assign(const Derived& other) { m_nBuffer = other.m_nBuffer; }
+inline GLuint base_fbo::GetBufferName(void) const
+{
+    return m_nBuffer;
+}
+inline bool base_fbo::IsGenerated(void) const
+{
+    return m_nBuffer != std::numeric_limits<GLuint>::max();
+}
 
-QX_DEFINE_BUFFER_CLASSES(fbo)
+using fbo = base_fbo;
 
 }
 

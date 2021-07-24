@@ -2,7 +2,7 @@
 //
 //!\file                 buffer_binding_point_base.inl
 //
-//!\brief       Contains buffer_binding_point_base class
+//!\brief       Contains qx::buffer_binding_point_base class
 //!\details     ~
 //
 //!\author      Khrapov
@@ -15,15 +15,14 @@ namespace qx
 {
 
 //==============================================================================
-//!\fn            qx::buffer_binding_point_base<COPYBLE>::BindBase
+//!\fn            qx::buffer_binding_point_base::BindBase
 //
 //!\brief  Bind a buffer object to an indexed buffer target from shader
 //!\param  nIndex - index
 //!\author Khrapov
 //!\date   19.01.2020
 //==============================================================================
-template<bool COPYBLE>
-inline void buffer_binding_point_base<COPYBLE>::BindBase(GLuint nIndex)
+inline void buffer_binding_point_base::BindBase(GLuint nIndex)
 {
     glBindBufferBase(
         this->GetBufferType(),

@@ -2,7 +2,7 @@
 //
 //!\file                          texture.h
 //
-//!\brief       OpenGL textures classes: texture and copyble_texture
+//!\brief       Contains qx::base_texture class
 //!\details     ~
 //
 //!\author      Khrapov
@@ -14,7 +14,6 @@
 
 #include <memory>
 #include <qx/typedefs.h>
-#include <qx/gl/buffer_classes.h>
 #include <qx/gl/ibuffer.h>
 
 namespace qx
@@ -22,21 +21,18 @@ namespace qx
 
 //==============================================================================
 //
-//!\class                  qx::base_texture<COPYBLE>
+//!\class                  qx::base_texture
 //
-//!\brief   Base texture class. Use texture or copyble_texture
+//!\brief   Base texture class
 //!\details ~
 //
 //!\author  Khrapov
 //!\date    10.07.2020
 //
 //==============================================================================
-template<bool COPYBLE>
 class base_texture : public IBuffer
 {
 public:
-
-    friend class base_texture;
 
                     base_texture        (void) = default;
     virtual         ~base_texture       (void);
@@ -49,23 +45,24 @@ public:
     virtual bool    IsGenerated         (void) const    override;
 
             GLenum  GetTarget           (void) const;
+            GLenum  GetInternalFormat   (void) const;
             GLsizei GetWidth            (void) const;
             GLsizei GetHeight           (void) const;
 
             void    SetTarget           (GLenum         eTarget);
-            void    Specify2DTexImage   (GLint          level,
-                                         GLint          internalformat,
-                                         GLsizei        width,
-                                         GLsizei        height,
-                                         GLenum         format,
-                                         GLenum         type,
+            void    Specify2DTexImage   (GLint          nLevel,
+                                         GLenum         eInternalFormat,
+                                         GLsizei        nWidth,
+                                         GLsizei        nHeight,
+                                         GLenum         eFormat,
+                                         GLenum         eType,
                                          const void*    pData   = nullptr,
                                          GLenum         eTarget = -1);
             void    Specify2DMultisample(GLsizei        nSamples,
-                                         GLenum         eInternalformat,
+                                         GLenum         eInternalFormat,
                                          GLsizei        nWidth,
                                          GLsizei        nHeight,
-                                         GLboolean      bFixedsamplelocations);
+                                         GLboolean      bFixedSampleLocations);
             void    GenerateMipmap      (void);
 
             void    SetParameter        (GLenum         target,
@@ -79,48 +76,41 @@ public:
             void    SetParameter        (GLenum         target,
                                          const GLuint * value);
 
-protected:
-
-    template<class Derived>
-            void    Assign              (const Derived& other);
-
 private:
 
     GLuint  m_nTexture          = std::numeric_limits<GLuint>::max();
     GLenum  m_eTextureTarget    = GL_TEXTURE_2D;
+    GLenum  m_eInternalFormat   = GL_RGBA;
     GLsizei m_nWidth            = 0;
     GLsizei m_nHeight           = 0;
 };
 
-template<bool COPYBLE>
-inline GLuint base_texture<COPYBLE>::GetBufferName(void) const
+inline GLuint base_texture::GetBufferName(void) const
 {
     return m_nTexture;
 }
-template<bool COPYBLE>
-inline bool base_texture<COPYBLE>::IsGenerated(void) const
+inline bool base_texture::IsGenerated(void) const
 {
     return m_nTexture != std::numeric_limits<GLuint>::max();
 };
-template<bool COPYBLE>
-inline GLenum base_texture<COPYBLE>::GetTarget(void) const
+inline GLenum base_texture::GetTarget(void) const
 {
     return m_eTextureTarget;
 }
-template<bool COPYBLE>
-inline GLsizei base_texture<COPYBLE>::GetWidth(void) const
+inline GLenum base_texture::GetInternalFormat(void) const
+{
+    return m_eInternalFormat;
+}
+inline GLsizei base_texture::GetWidth(void) const
 {
     return m_nWidth;
 }
-template<bool COPYBLE>
-inline GLsizei base_texture<COPYBLE>::GetHeight(void) const
+inline GLsizei base_texture::GetHeight(void) const
 {
     return m_nHeight;
 }
 
-QX_DEFINE_BUFFER_CLASSES(texture)
-
-using ptr_texture = std::unique_ptr<texture>;
+using texture = base_texture;
 
 }
 
