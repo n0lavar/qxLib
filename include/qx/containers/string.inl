@@ -2131,17 +2131,17 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::replace_al
     size_type nBegin,
     size_type nEnd) noexcept
 {
-    size_type nOccurences = 0;
+    size_type nOccurrences = 0;
     size_type nPos = nBegin;
 
     do
     {
         nPos = replace(sFind, sReplace, nPos, nEnd);
         if (nPos != npos)
-            nOccurences++;
+            ++nOccurrences;
     } while (nPos != npos);
 
-    return nOccurences;
+    return nOccurrences;
 }
 
 //==============================================================================

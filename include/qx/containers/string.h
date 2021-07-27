@@ -111,6 +111,7 @@ public:
                                           FwdIt                  itLast)                    noexcept;
     template<string_convertable String>
                             basic_string (const String         & sAnother)                  noexcept;
+                            basic_string (std::nullptr_t) = delete;
 
                             ~basic_string(void)                                             noexcept;
 

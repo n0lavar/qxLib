@@ -177,6 +177,9 @@ TYPED_TEST(TestQxString, construct)
     EXPECT_STREQ(str11.data(), STR("Hello world"));
     EXPECT_FALSE(str11.empty());
     EXPECT_EQ(str11.size(), 11);
+
+    // should not compile
+    //StringTypeTn str12(nullptr);
 }
 
 TYPED_TEST(TestQxString, assign)
