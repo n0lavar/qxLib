@@ -60,11 +60,11 @@ public:
     }
     [[nodiscard]] constexpr pointer operator->(void) noexcept
     {
-        return &((*m_pCollection).at(m_nIndex));
+        return &(*m_pCollection).at(m_nIndex);
     }
-    [[nodiscard]] constexpr reference operator[](size_type m) noexcept
+    [[nodiscard]] constexpr reference operator[](size_type i) noexcept
     {
-        return (*m_pCollection).at(m_nIndex + m);
+        return (*m_pCollection).at(m_nIndex + i);
     }
     constexpr iterator& operator++(void) noexcept
     {
@@ -76,13 +76,13 @@ public:
         --m_nIndex;
         return *this;
     }
-    constexpr iterator operator++(int) noexcept
+    [[nodiscard]] constexpr iterator operator++(int) noexcept
     {
         iterator r(*this);
         ++m_nIndex;
         return r;
     }
-    constexpr iterator operator--(int) noexcept
+    [[nodiscard]] constexpr iterator operator--(int) noexcept
     {
         iterator r(*this);
         --m_nIndex;
@@ -138,7 +138,7 @@ public:
     }
     constexpr operator void*(void) noexcept
     {
-        return &((*m_pCollection).at(m_nIndex));
+        return &(*m_pCollection).at(m_nIndex);
     }
 
 private:
@@ -190,7 +190,7 @@ public:
     }
     [[nodiscard]] constexpr pointer operator->(void) noexcept
     {
-        return &((*m_pCollection).at(m_nIndex));
+        return &(*m_pCollection).at(m_nIndex);
     }
     [[nodiscard]] constexpr reference operator[](size_type m) noexcept
     {
@@ -206,13 +206,13 @@ public:
         --m_nIndex;
         return *this;
     }
-    constexpr const_iterator operator++(int) noexcept
+    [[nodiscard]] constexpr const_iterator operator++(int) noexcept
     {
         const_iterator r(*this);
         ++m_nIndex;
         return r;
     }
-    constexpr const_iterator operator--(int) noexcept
+    [[nodiscard]] constexpr const_iterator operator--(int) noexcept
     {
         const_iterator r(*this);
         --m_nIndex;
@@ -268,7 +268,7 @@ public:
     }
     constexpr operator const void*(void) const noexcept
     {
-        return &((*m_pCollection).at(m_nIndex));
+        return &(*m_pCollection).at(m_nIndex);
     }
 
 private:
@@ -321,7 +321,7 @@ public:
     }
     [[nodiscard]] constexpr pointer operator->(void) noexcept
     {
-        return &((*m_pCollection).at(m_nIndex));
+        return &(*m_pCollection).at(m_nIndex);
     }
     [[nodiscard]] constexpr reference operator[](size_type m) noexcept
     {
@@ -337,13 +337,13 @@ public:
         ++m_nIndex;
         return *this;
     }
-    constexpr reverse_iterator operator++(int) noexcept
+    [[nodiscard]] constexpr reverse_iterator operator++(int) noexcept
     {
         reverse_iterator r(*this);
         --m_nIndex;
         return r;
     }
-    constexpr reverse_iterator operator--(int) noexcept
+    [[nodiscard]] constexpr reverse_iterator operator--(int) noexcept
     {
         reverse_iterator r(*this);
         ++m_nIndex;
@@ -401,7 +401,7 @@ public:
     }
     constexpr operator void*(void) noexcept
     {
-        return &((*m_pCollection).at(m_nIndex));
+        return &(*m_pCollection).at(m_nIndex);
     }
 
 private:
@@ -453,7 +453,7 @@ public:
     }
     [[nodiscard]] constexpr pointer operator->(void) noexcept
     {
-        return &((*m_pCollection).at(m_nIndex));
+        return &(*m_pCollection).at(m_nIndex);
     }
     [[nodiscard]] constexpr reference operator[](size_type m) noexcept
     {
@@ -469,13 +469,13 @@ public:
         ++m_nIndex;
         return *this;
     }
-    constexpr const_reverse_iterator operator++(int) noexcept
+    [[nodiscard]] constexpr const_reverse_iterator operator++(int) noexcept
     {
         const_reverse_iterator r(*this);
         --m_nIndex;
         return r;
     }
-    constexpr const_reverse_iterator operator--(int) noexcept
+    [[nodiscard]] constexpr const_reverse_iterator operator--(int) noexcept
     {
         const_reverse_iterator r(*this);
         ++m_nIndex;
@@ -533,7 +533,7 @@ public:
     }
     constexpr operator const void*(void) const noexcept
     {
-        return &((*m_pCollection).at(m_nIndex));
+        return &(*m_pCollection).at(m_nIndex);
     }
 
 private:
