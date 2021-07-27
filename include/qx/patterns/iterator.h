@@ -2,7 +2,7 @@
 //
 //!\file                         iterator.h
 //
-//!\brief       Contains iterator classes
+//!\brief       Contains random access iterator classes
 //!\details     ~
 //
 //!\author      Khrapov
@@ -24,7 +24,7 @@ class const_iterator;
 //
 //!\class                   qx::iterator<C>
 //
-//!\brief   Non-const iterator type
+//!\brief   Non-const random access iterator type
 //!\details Use it for range-based loops and std algorithms
 //          C have to provide at(size_t)
 //
@@ -151,7 +151,7 @@ private:
 //
 //!\class               qx::const_iterator<C>
 //
-//!\brief   Const iterator type
+//!\brief   Const random access iterator type
 //!\details Use it for range-based loops and std algorithms
 //          C have to provide at(size_t)
 //
@@ -285,7 +285,7 @@ class const_reverse_iterator;
 //
 //!\class                   qx::reverse_iterator<C>
 //
-//!\brief   Non-const reverse iterator type
+//!\brief   Non-const random access reverse iterator type
 //!\details Use it for range-based loops and std algorithms
 //          C have to provide at(size_t)
 //
@@ -414,7 +414,7 @@ private:
 //
 //!\class               qx::const_reverse_iterator<C>
 //
-//!\brief   Const reverse iterator type
+//!\brief   Const reverse random access iterator type
 //!\details Use it for range-based loops and std algorithms
 //          C have to provide at(size_t)
 //
