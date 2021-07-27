@@ -14,9 +14,9 @@
 
 #include <qx/typedefs.h>
 
-#include <vector>
 #include <algorithm>
 #include <functional>
+#include <vector>
 #include <qx/type_traits.h>
 
 namespace qx
@@ -94,14 +94,14 @@ inline void sort_selection(RandomIt begin, RandomIt end, Compare compare = Compa
     if (!sort_required(begin, end))
         return;
 
-    for (RandomIt i = begin; i != end; ++i)
+    for (RandomIt it = begin; it != end; ++it)
     {
-        RandomIt itr_min = i;
-        for (RandomIt j = i + 1; j != end; ++j)
-            if (compare(*j, *itr_min))
-                itr_min = j;
+        RandomIt itMin = it;
+        for (RandomIt j = it + 1; j != end; ++j)
+            if (compare(*j, *itMin))
+                itMin = j;
 
-        std::iter_swap(i, itr_min);
+        std::iter_swap(it, itMin);
     }
 }
 template <typename Container, typename Compare = std::less<>>
@@ -132,11 +132,11 @@ inline void sort_bubble(RandomIt begin, RandomIt end, Compare compare = Compare(
     while (!bSorted)
     {
         bSorted = true;
-        for (RandomIt i = begin, i_end = end - 1; i != i_end; ++i)
+        for (RandomIt it = begin, itEnd = end - 1; it != itEnd; ++it)
         {
-            if (compare(*(i + 1), *i))
+            if (compare(*(it + 1), *it))
             {
-                std::iter_swap(i, i + 1);
+                std::iter_swap(it, it + 1);
                 bSorted = false;
             }
         }
@@ -153,49 +153,49 @@ inline void sort_bubble(Container& cont, Compare compare = Compare())
 //
 //!\brief       Adjust heap
 //!\property    O(log(N))
-//!\param       begin    - whole heap root RandomIt
-//!\param       heapSize - whole heap size for out of range check
-//!\param       position - current root position
-//!\param       compare  - comparison function
+//!\param       begin     - whole heap root RandomIt
+//!\param       nHeapSize - whole heap size for out of range check
+//!\param       nPosition - current root nPosition
+//!\param       compare   - comparison function
 //!\author      Khrapov
 //!\date        2.03.2020
 //==============================================================================
 template <typename RandomIt, typename Compare>
 inline void adjust_heap(
     RandomIt begin,
-    size_t   heapSize,
-    size_t   position,
+    size_t   nHeapSize,
+    size_t   nPosition,
     Compare  compare = Compare())
 {
     using iter_diff = decltype(RandomIt() - RandomIt());
 
-    while (position < heapSize)
+    while (nPosition < nHeapSize)
     {
-        size_t childpos = position * 2 + 1;
-        if (childpos < heapSize)
+        size_t nChildPos = nPosition * 2 + 1;
+        if (nChildPos < nHeapSize)
         {
-            if ((childpos + 1 < heapSize)
+            if ((nChildPos + 1 < nHeapSize)
                 && compare(
-                    *(begin + static_cast<iter_diff>(childpos)),
-                    *(begin + static_cast<iter_diff>(childpos) + 1)))
+                    *(begin + static_cast<iter_diff>(nChildPos)),
+                    *(begin + static_cast<iter_diff>(nChildPos) + 1)))
             {
-                childpos += 1;
+                nChildPos += 1;
             }
 
             if (compare(
-                *(begin + static_cast<iter_diff>(childpos)),
-                *(begin + static_cast<iter_diff>(position))))
+                *(begin + static_cast<iter_diff>(nChildPos)),
+                *(begin + static_cast<iter_diff>(nPosition))))
             {
                 return;
             }
             else
             {
                 std::iter_swap(
-                    begin + static_cast<iter_diff>(position),
-                    begin + static_cast<iter_diff>(childpos));
+                    begin + static_cast<iter_diff>(nPosition),
+                    begin + static_cast<iter_diff>(nChildPos));
             }
         }
-        position = childpos;
+        nPosition = nChildPos;
     }
 }
 
@@ -213,7 +213,7 @@ template <typename RandomIt, typename Compare>
 inline void make_heap(RandomIt begin, RandomIt end, Compare compare = Compare())
 {
     auto max = end - begin;
-    for (int i = static_cast<int>(max) / 2; i >= 0; i--)
+    for (int i = static_cast<int>(max) / 2; i >= 0; --i)
         adjust_heap(begin, static_cast<size_t>(max), static_cast<size_t>(i), compare);
 }
 
@@ -237,12 +237,12 @@ inline void sort_heap(RandomIt begin, RandomIt end, Compare compare = Compare())
 
     qx::make_heap(begin, end, compare);
 
-    auto lastPosition = end - begin - 1;
-    while (lastPosition > 0)
+    auto nLastPosition = end - begin - 1;
+    while (nLastPosition > 0)
     {
-        std::iter_swap(begin, begin + lastPosition);
-        adjust_heap(begin, static_cast<size_t>(lastPosition), 0u, compare);
-        lastPosition--;
+        std::iter_swap(begin, begin + nLastPosition);
+        adjust_heap(begin, static_cast<size_t>(nLastPosition), 0u, compare);
+        --nLastPosition;
     }
 }
 template <typename Container, typename Compare = std::less<>>
@@ -269,27 +269,27 @@ inline void sort_quick_hoare(RandomIt begin, RandomIt end, Compare compare = Com
     if (!sort_required(begin, end))
         return;
 
-    i64 right = (end - begin) - 1;
-    i64 left  = 0;
+    i64 nRight = (end - begin) - 1;
+    i64 nLeft  = 0;
 
-    if (right > left)
+    if (nRight > nLeft)
     {
-        auto pivot = *(begin + left + (right - left) / 2);
+        auto nPivot = *(begin + nLeft + (nRight - nLeft) / 2);
 
-        while (left <= right)
+        while (nLeft <= nRight)
         {
-            while (compare(*(begin + left), pivot))
-                ++left;
+            while (compare(*(begin + nLeft), nPivot))
+                ++nLeft;
 
-            while (compare(pivot, *(begin + right)))
-                --right;
+            while (compare(nPivot, *(begin + nRight)))
+                --nRight;
 
-            if (left <= right)
-                std::iter_swap(begin + left++, begin + right--);
+            if (nLeft <= nRight)
+                std::iter_swap(begin + nLeft++, begin + nRight--);
         }
 
-        sort_quick_hoare(begin, begin + (right + 1), compare);
-        sort_quick_hoare(begin + left, end, compare);
+        sort_quick_hoare(begin, begin + (nRight + 1), compare);
+        sort_quick_hoare(begin + nLeft, end, compare);
     }
 }
 template <typename Container, typename Compare = std::less<>>
@@ -316,18 +316,18 @@ inline void sort_quick_three_way(RandomIt begin, RandomIt end, Compare compare =
     if (!sort_required(begin, end))
         return;
 
-    i64 right = (end - begin) - 1;
-    i64 left  = 0;
+    const i64 nRight = (end - begin) - 1;
+    i64 nLeft  = 0;
 
-    if (right > 0)
+    if (nRight > 0)
     {
-        auto pivot = *(begin + left + (right - left) / 2);
+        auto pivot = *(begin + nLeft + (nRight - nLeft) / 2);
 
-        i64 i = left;
-        i64 j = right;
+        i64 i = nLeft;
+        i64 j = nRight;
 
-        i64 index1 = left  - 1;
-        i64 index2 = right + 1;
+        i64 nIndex1 = nLeft  - 1;
+        i64 nIndex2 = nRight + 1;
 
         while (i <= j)
         {
@@ -343,27 +343,27 @@ inline void sort_quick_three_way(RandomIt begin, RandomIt end, Compare compare =
                 {
                     if (compare(*(begin + j), pivot))
                     {
-                        // left[i] != pivot and left[j] != pivot
+                        // nLeft[i] != nPivot and nLeft[j] != nPivot
                         std::swap(*(begin + i), *(begin + j));
                     }
                     else
                     {
-                        // left[i] != pivot and left[j] == pivot
+                        // nLeft[i] != nPivot and nLeft[j] == nPivot
                         std::swap(*(begin + i), *(begin + j));
-                        std::swap(*(begin + ++index1), *(begin + i));
+                        std::swap(*(begin + ++nIndex1), *(begin + i));
                     }
                 }
                 else if (compare(*(begin + j), pivot))
                 {
-                    // left[i] == pivot left[j] != pivot
+                    // nLeft[i] == nPivot nLeft[j] != nPivot
                     std::iter_swap(begin + i, begin + j);
-                    std::iter_swap(begin + j, begin + --index2);
+                    std::iter_swap(begin + j, begin + --nIndex2);
                 }
                 else
                 {
-                    // left[i] == pivot and left[j] == pivot
-                    std::iter_swap(begin + ++index1, begin + i);
-                    std::iter_swap(begin + j, begin + --index2);
+                    // nLeft[i] == nPivot and nLeft[j] == nPivot
+                    std::iter_swap(begin + ++nIndex1, begin + i);
+                    std::iter_swap(begin + j, begin + --nIndex2);
                 }
 
                 ++i;
@@ -372,15 +372,15 @@ inline void sort_quick_three_way(RandomIt begin, RandomIt end, Compare compare =
             else if (i == j)
             {
                 j = i - 1;
-                i++;
+                ++i;
                 break;
             }
         }
 
-        for (i64 k = left; k <= index1; k++)
+        for (i64 k = nLeft; k <= nIndex1; ++k)
             std::iter_swap(begin + k, begin + j--);
 
-        for (i64 k = right; k >= index2; k--)
+        for (i64 k = nRight; k >= nIndex2; --k)
             std::iter_swap(begin + i++, begin + k);
 
         sort_quick_three_way(begin, begin + (j + 1), compare);
@@ -411,98 +411,98 @@ inline void sort_quick_dual_pivot(RandomIt begin, RandomIt end, Compare compare 
     if (!sort_required(begin, end))
         return;
 
-    i64 right = (end - begin) - 1;
-    i64 left  = 0;
+    i64 nRight = (end - begin) - 1;
+    i64 nLeft  = 0;
 
-    if (right > left)
+    if (nRight > nLeft)
     {
-        std::iter_swap(begin + left + (right - left) / 3,  begin+ left);
-        std::iter_swap(begin + right - (right - left) / 3, begin+ right);
+        std::iter_swap(begin + nLeft + (nRight - nLeft) / 3,  begin+ nLeft);
+        std::iter_swap(begin + nRight - (nRight - nLeft) / 3, begin+ nRight);
 
-        if (compare(*(begin + right), *(begin + left)))
-            std::iter_swap(begin + left, begin + right);
+        if (compare(*(begin + nRight), *(begin + nLeft)))
+            std::iter_swap(begin + nLeft, begin + nRight);
 
-        if (right - left == 1)
+        if (nRight - nLeft == 1)
             return;
 
-        auto pivot1 = *(begin + left);
-        auto pivot2 = *(begin + right);
+        auto pivot1 = *(begin + nLeft);
+        auto pivot2 = *(begin + nRight);
 
         if (compare(pivot1, pivot2))
         {
-            i64 less    = left + 1;
-            i64 greater = right - 1;
+            i64 nLess    = nLeft + 1;
+            i64 nGreater = nRight - 1;
 
-            while (!compare(*(begin + greater), pivot2))
-                greater--;
+            while (!compare(*(begin + nGreater), pivot2))
+                --nGreater;
 
-            while (!compare(pivot1, *(begin + less)))
-                less++;
+            while (!compare(pivot1, *(begin + nLess)))
+                ++nLess;
 
-            i64 k = less;
-            while (k <= greater)
+            i64 k = nLess;
+            while (k <= nGreater)
             {
                 if (!compare(pivot1, *(begin + k)))
                 {
-                    std::iter_swap(begin + k, begin + less++);
+                    std::iter_swap(begin + k, begin + nLess++);
                 }
                 else if (!compare(*(begin + k), pivot2))
                 {
-                    std::iter_swap(begin + k, begin + greater--);
-                    while (!compare(*(begin + greater), pivot2))
-                        greater--;
+                    std::iter_swap(begin + k, begin + nGreater--);
+                    while (!compare(*(begin + nGreater), pivot2))
+                        --nGreater;
 
                     if (!compare(pivot1, *(begin + k)))
-                        std::iter_swap(begin + k, begin + less++);
+                        std::iter_swap(begin + k, begin + nLess++);
                 }
 
                 k++;
             }
 
-            std::iter_swap(begin + less - 1,    begin + left);
-            std::iter_swap(begin + greater + 1, begin + right);
+            std::iter_swap(begin + nLess - 1,    begin + nLeft);
+            std::iter_swap(begin + nGreater + 1, begin + nRight);
 
-            sort_quick_dual_pivot(begin, begin + less - 1, compare);
-            sort_quick_dual_pivot(begin + greater + 2, end, compare);
-            sort_quick_dual_pivot(begin + less, begin + greater + 1, compare);
+            sort_quick_dual_pivot(begin, begin + nLess - 1, compare);
+            sort_quick_dual_pivot(begin + nGreater + 2, end, compare);
+            sort_quick_dual_pivot(begin + nLess, begin + nGreater + 1, compare);
         }
         else
         {
             // pivot1 == pivot2
-            i64 less    = left + 1;
-            i64 greater = right - 1;
+            i64 nLess    = nLeft + 1;
+            i64 nGreater = nRight - 1;
 
-            while (compare(pivot1, *(begin + greater)))
-                greater--;
+            while (compare(pivot1, *(begin + nGreater)))
+                --nGreater;
 
-            while (compare(*(begin + less), pivot1))
-                less++;
+            while (compare(*(begin + nLess), pivot1))
+                ++nLess;
 
-            i64 k = less;
-            while (k <= greater)
+            i64 k = nLess;
+            while (k <= nGreater)
             {
                 if (compare(*(begin + k), pivot1))
                 {
-                    std::iter_swap(begin + k, begin + less++);
+                    std::iter_swap(begin + k, begin + nLess++);
                 }
                 else if (compare(pivot1, *(begin + k)))
                 {
-                    std::iter_swap(begin + k, begin + greater--);
-                    while (compare(pivot1, *(begin + greater)))
-                        greater--;
+                    std::iter_swap(begin + k, begin + nGreater--);
+                    while (compare(pivot1, *(begin + nGreater)))
+                        nGreater--;
 
                     if (compare(*(begin + k), pivot1))
-                        std::iter_swap(begin + k, begin + less++);
+                        std::iter_swap(begin + k, begin + nLess++);
                 }
 
                 k++;
             }
 
-            std::iter_swap(begin + less - 1,    begin + left);
-            std::iter_swap(begin + greater + 1, begin + right);
+            std::iter_swap(begin + nLess - 1,    begin + nLeft);
+            std::iter_swap(begin + nGreater + 1, begin + nRight);
 
-            sort_quick_dual_pivot(begin, begin + less - 1, compare);
-            sort_quick_dual_pivot(begin + greater + 2, end, compare);
+            sort_quick_dual_pivot(begin, begin + nLess - 1, compare);
+            sort_quick_dual_pivot(begin + nGreater + 2, end, compare);
         }
     }
 }
@@ -534,45 +534,45 @@ inline void merge
 {
     using iter_diff = decltype(RandomIt() - RandomIt());
 
-    u64 ind1 = 0;
-    u64 ind2 = 0;
+    u64 nInd1 = 0;
+    u64 nInd2 = 0;
     RandomIt mid = begin + (end - begin) / 2;
 
-    bool bCreateBuffer = !pPreallocatedBuffer;
+    const bool bCreateBuffer = !pPreallocatedBuffer;
     if (bCreateBuffer)
         pPreallocatedBuffer = new vector_of_values<RandomIt>;
 
     pPreallocatedBuffer->resize(static_cast<size_t>(end - begin));
 
     // merge
-    while ((begin + static_cast<iter_diff>(ind1) < mid)
-        && (mid + static_cast<iter_diff>(ind2) < end))
+    while ((begin + static_cast<iter_diff>(nInd1) < mid)
+        && (mid + static_cast<iter_diff>(nInd2) < end))
     {
         if (compare(
-            *(begin + static_cast<iter_diff>(ind1)),
-            *(mid + static_cast<iter_diff>(ind2))))
+            *(begin + static_cast<iter_diff>(nInd1)),
+            *(mid + static_cast<iter_diff>(nInd2))))
         {
-            (*pPreallocatedBuffer)[ind1 + ind2] = *(begin + static_cast<iter_diff>(ind1));
-            ind1++;
+            (*pPreallocatedBuffer)[nInd1 + nInd2] = *(begin + static_cast<iter_diff>(nInd1));
+            nInd1++;
         }
         else
         {
-            (*pPreallocatedBuffer)[ind1 + ind2] = *(mid + static_cast<iter_diff>(ind2));
-            ind2++;
+            (*pPreallocatedBuffer)[nInd1 + nInd2] = *(mid + static_cast<iter_diff>(nInd2));
+            nInd2++;
         }
     }
 
     // append tails
-    while (begin + static_cast<iter_diff>(ind1) < mid)
+    while (begin + static_cast<iter_diff>(nInd1) < mid)
     {
-        (*pPreallocatedBuffer)[ind1 + ind2] = *(begin + static_cast<iter_diff>(ind1));
-        ind1++;
+        (*pPreallocatedBuffer)[nInd1 + nInd2] = *(begin + static_cast<iter_diff>(nInd1));
+        nInd1++;
     }
 
-    while (mid + static_cast<iter_diff>(ind2) < end)
+    while (mid + static_cast<iter_diff>(nInd2) < end)
     {
-        (*pPreallocatedBuffer)[ind1 + ind2] = *(mid + static_cast<iter_diff>(ind2));
-        ind2++;
+        (*pPreallocatedBuffer)[nInd1 + nInd2] = *(mid + static_cast<iter_diff>(nInd2));
+        nInd2++;
     }
 
     // copy to source
@@ -606,17 +606,17 @@ inline void sort_merge
     if (!sort_required(begin, end))
         return;
 
-    bool bCreateBuffer = !pPreallocatedBuffer;
+    const bool bCreateBuffer = !pPreallocatedBuffer;
     if (bCreateBuffer)
         pPreallocatedBuffer = new vector_of_values<RandomIt>;
 
     // preallocate max required size and use same vector
     // has no effect in reqursive calls
-    auto len = end - begin;
-    pPreallocatedBuffer->reserve(static_cast<size_t>(len));
+    auto nLen = end - begin;
+    pPreallocatedBuffer->reserve(static_cast<size_t>(nLen));
 
-    sort_merge(begin, begin + len / 2, compare, pPreallocatedBuffer);
-    sort_merge(begin + len / 2, end, compare, pPreallocatedBuffer);
+    sort_merge(begin, begin + nLen / 2, compare, pPreallocatedBuffer);
+    sort_merge(begin + nLen / 2, end, compare, pPreallocatedBuffer);
     merge(begin, end, compare, pPreallocatedBuffer);
 
     if (bCreateBuffer)
@@ -653,33 +653,33 @@ template <typename RandomIt, typename Compare = std::less<>>
      size_t         nMaxBufferSize  = SORT_COUNTING_MAX_BUFFER_SIZE)
 {
     static_assert(std::is_integral_v<iterator_value_t<RandomIt>>,
-                  "Intergral type required for counting sort");
+                  "Integral type required for counting sort");
 
     if (end - begin < 2)
         return true;
 
-    auto minmax = std::minmax_element(begin, end);
-    auto min = *minmax.first;
-    auto max = *minmax.second;
+    auto minMax = std::minmax_element(begin, end);
+    auto min = *minMax.first;
+    auto max = *minMax.second;
 
-    size_t nSizeRequired = static_cast<size_t>(max) - min + 1;
+    const size_t nSizeRequired = static_cast<size_t>(max) - min + 1;
     if (nSizeRequired <= nMaxBufferSize)
     {
         std::vector<size_t> counts(nSizeRequired, 0);
 
         for (RandomIt it = begin; it < end; ++it)
-            counts[static_cast<size_t>(*it) - min]++;
+            ++counts[static_cast<size_t>(*it) - min];
 
         if constexpr (compare(0, 1))
         {
-            // less
-            for (size_t i = 0; i < nSizeRequired; i++)
+            // nLess
+            for (size_t i = 0; i < nSizeRequired; ++i)
                 begin = std::fill_n(begin, counts[i], min++);
         }
         else
         {
-            // greater
-            for (size_t i = 0; i < nSizeRequired; i++)
+            // nGreater
+            for (size_t i = 0; i < nSizeRequired; ++i)
                 begin = std::fill_n(begin, counts[nSizeRequired - i - 1], max--);
         }
 

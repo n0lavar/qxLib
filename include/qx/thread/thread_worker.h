@@ -73,12 +73,28 @@ private:
                                                                         // must check thread_is_terminating() and quit if needed
 };
 
-inline void                        thread_worker::thread_on_started     ()       { }
-inline void                        thread_worker::thread_on_stopped     ()       { }
-inline thread_worker::thread_state thread_worker::thread_get_state      () const { return m_eThreadState.load(std::memory_order_acquire); }
-inline bool                        thread_worker::thread_is_terminating () const { return m_bThreadTerminating.load(std::memory_order_acquire); }
-inline bool                        thread_worker::thread_is_running     () const { return thread_get_state() != thread_state::inactive; }
-inline std::thread::id             thread_worker::thread_get_id         () const { return m_Thread.get_id(); }
+inline void thread_worker::thread_on_started(void)
+{
+}
+inline void thread_worker::thread_on_stopped(void)
+{
+}
+inline thread_worker::thread_state thread_worker::thread_get_state(void) const
+{
+    return m_eThreadState.load(std::memory_order_acquire);
+}
+inline bool thread_worker::thread_is_terminating(void) const
+{
+    return m_bThreadTerminating.load(std::memory_order_acquire);
+}
+inline bool thread_worker::thread_is_running(void) const
+{
+    return thread_get_state() != thread_state::inactive;
+}
+inline std::thread::id thread_worker::thread_get_id(void) const
+{
+    return m_Thread.get_id();
+}
 
 }
 

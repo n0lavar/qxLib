@@ -16,10 +16,10 @@
 
 #if QX_TEST_SORT
 
-#include <qx/alg/sort.h>
-#include <random>
 #include <array>
 #include <limits>
+#include <random>
+#include <qx/alg/sort.h>
 
 
 #undef INT_MAX

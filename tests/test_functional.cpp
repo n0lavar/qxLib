@@ -41,50 +41,50 @@ TEST(functional, linear_interpolation)
 
 TEST(functional, bilinear_inletpolation)
 {
-    EXPECT_DOUBLE_EQ(qx::bilinear_inletpolation({ -1.0, -1.0,  0.0 },
+    EXPECT_DOUBLE_EQ(qx::bilinear_interpolation({ -1.0, -1.0,  0.0 },
                                                 {  1.0, -1.0,  0.0 },
                                                 {  1.0,  1.0,  0.0 },
                                                 { -1.0,  1.0,  0.0 },
                                                 {  0.0,  0.0 }),
                      0.0);
-    EXPECT_DOUBLE_EQ(qx::bilinear_inletpolation({ -1.0, -1.0,  0.0 },
+    EXPECT_DOUBLE_EQ(qx::bilinear_interpolation({ -1.0, -1.0,  0.0 },
                                                 {  1.0, -1.0,  0.0 },
                                                 {  1.0,  1.0,  0.0 },
                                                 { -1.0,  1.0,  0.0 },
                                                 {  1.0,  1.0 }),
                      0.0);
-    EXPECT_DOUBLE_EQ(qx::bilinear_inletpolation({ -1.0, -1.0,  0.0 },
+    EXPECT_DOUBLE_EQ(qx::bilinear_interpolation({ -1.0, -1.0,  0.0 },
                                                 {  1.0, -1.0,  0.0 },
                                                 {  1.0,  1.0,  0.0 },
                                                 { -1.0,  1.0,  0.0 },
                                                 { -1.0,  1.0 }),
                      0.0);
-    EXPECT_DOUBLE_EQ(qx::bilinear_inletpolation({ -1.0, -1.0,  0.0 },
+    EXPECT_DOUBLE_EQ(qx::bilinear_interpolation({ -1.0, -1.0,  0.0 },
                                                 {  1.0, -1.0,  0.0 },
                                                 {  1.0,  1.0,  0.0 },
                                                 { -1.0,  1.0,  0.0 },
                                                 {  0.0,  0.0 }),
                      0.0);
 
-    EXPECT_DOUBLE_EQ(qx::bilinear_inletpolation({ -1.0, -1.0, -1.0 },
+    EXPECT_DOUBLE_EQ(qx::bilinear_interpolation({ -1.0, -1.0, -1.0 },
                                                 {  1.0, -1.0, -1.0 },
                                                 {  1.0,  1.0,  1.0 },
                                                 { -1.0,  1.0,  1.0 },
                                                 {  0.0,  0.0 }),
                      0.0);
-    EXPECT_DOUBLE_EQ(qx::bilinear_inletpolation({ -1.0, -1.0, -1.0 },
+    EXPECT_DOUBLE_EQ(qx::bilinear_interpolation({ -1.0, -1.0, -1.0 },
                                                 {  1.0, -1.0, -1.0 },
                                                 {  1.0,  1.0,  1.0 },
                                                 { -1.0,  1.0,  1.0 },
                                                 {  1.0,  1.0 }),
                      1.0);
-    EXPECT_DOUBLE_EQ(qx::bilinear_inletpolation({ -1.0, -1.0, -1.0 },
+    EXPECT_DOUBLE_EQ(qx::bilinear_interpolation({ -1.0, -1.0, -1.0 },
                                                 {  1.0, -1.0, -1.0 },
                                                 {  1.0,  1.0,  1.0 },
                                                 { -1.0,  1.0,  1.0 },
                                                 {  0.5,  0.5 }),
                      0.5);
-    EXPECT_DOUBLE_EQ(qx::bilinear_inletpolation({ -1.0, -1.0, -1.0 },
+    EXPECT_DOUBLE_EQ(qx::bilinear_interpolation({ -1.0, -1.0, -1.0 },
                                                 {  1.0, -1.0, -1.0 },
                                                 {  1.0,  1.0,  1.0 },
                                                 { -1.0,  1.0,  1.0 },

@@ -64,7 +64,10 @@ private:
 };
 
 template <GLenum ShaderType>
-inline GLuint shader_base<ShaderType>::GetID(void) const { return m_nShader; }
+inline GLuint shader_base<ShaderType>::GetID(void) const
+{
+    return m_nShader;
+}
 
 using shader_vert = shader_base<GL_VERTEX_SHADER>;
 using shader_tesc = shader_base<GL_TESS_CONTROL_SHADER>;

@@ -12,9 +12,9 @@
 //==============================================================================
 #pragma once
 
-#include <qx/patterns/singleton.h>
 #include <qx/suppress_warnings.h>
 #include <qx/containers/string.h>
+#include <qx/patterns/singleton.h>
 
 #include <ctime>
 #include <filesystem>
@@ -271,10 +271,22 @@ private:
     trace_unit_info_map m_RegisteredUnits;
 };
 
-inline      logger::logger           (void)                           { on_create(); }
-inline      logger::~logger          (void)                           { on_terminate(); }
-inline void logger::set_log_policy   (policy            eLogPolicy)   { m_eLogPolicy = eLogPolicy; }
-inline void logger::set_using_colors (bool              bUsingColors) { m_bUsingColors = bUsingColors; }
+inline logger::logger(void)
+{
+    on_create();
+}
+inline logger::~logger(void)
+{
+    on_terminate();
+}
+inline void logger::set_log_policy(policy eLogPolicy)
+{
+    m_eLogPolicy = eLogPolicy;
+}
+inline void logger::set_using_colors(bool bUsingColors)
+{
+    m_bUsingColors = bUsingColors;
+}
 
 class logger_singleton : public logger
 {
