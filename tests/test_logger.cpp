@@ -16,7 +16,10 @@
 
 #if QX_TEST_LOGGER
 
-#include <qx/logger/logger_worker.h>
+#include <qx/logger/logger.h>
+
+#include <qx/logger/cout_logger_stream.h>
+#include <qx/logger/file_logger_stream.h>
 
 #include <regex>
 
@@ -29,46 +32,61 @@ template <
 >
 struct LoggerTraits
 {
-    constexpr static auto GetLogsFolder() { return sLogsFolder; }
-    constexpr static auto GetLogsFile()   { return sLogsFile;   }
-    constexpr static auto GetUnit()       { return sUnit;       }
-    constexpr static auto GetTraceFile()  { return sTraceFile;  }
-    constexpr static const char* GetTag() { return qx::strlen(sTag) == 0 ? nullptr : sTag; }
+    constexpr static std::string_view GetLogsFolder(void)
+    {
+        return sLogsFolder;
+    }
+    constexpr static std::string_view GetLogsFile(void)
+    {
+        return sLogsFile;
+    }
+    constexpr static std::string_view GetUnit(void)
+    {
+        return sUnit;
+    }
+    constexpr static std::string_view GetTraceFile(void)
+    {
+        return sTraceFile;
+    }
+    constexpr static std::string_view GetTag(void)
+    {
+        return sTag;
+    }
 };
 
-constexpr const char LOGS_FOLDER_ROOT[]  = "";
-constexpr const char LOGS_FOLDER_LOGS[]  = "logs";
-constexpr const char LOGS_FOLDER_KEKW[]  = "KEKW";
+constexpr char LOGS_FOLDER_ROOT[]  = "";
+constexpr char LOGS_FOLDER_LOGS[]  = "logs";
+constexpr char LOGS_FOLDER_KEKW[]  = "KEKW";
 
-constexpr const char LOGS_FILE_DEFAULT[] = "default.log";
+constexpr char LOGS_FILE_DEFAULT[] = "default.log";
 
-constexpr const char UNIT_DEFAULT[]      = "default";
-constexpr const char UNIT_FILE[]         = "file.h";
-constexpr const char UNIT_FUNC[]         = "TestLoggerFunction";
+constexpr char UNIT_DEFAULT[]      = "default";
+constexpr char UNIT_FILE[]         = "file.h";
+constexpr char UNIT_FUNC[]         = "TestLoggerFunction";
 
-constexpr const char TRACE_FILE_H[]      = "file.h";
-constexpr const char TRACE_FILE_CPP[]    = "file.cpp";
-constexpr const char TRACE_FILE_INL[]    = "file.inl";
+constexpr char TRACE_FILE_H[]      = "file.h";
+constexpr char TRACE_FILE_CPP[]    = "file.cpp";
+constexpr char TRACE_FILE_INL[]    = "file.inl";
 
-constexpr const char TRACE_TAG_NULLPTR[] = "";
-constexpr const char TRACE_TAG_TAG1[]    = "tag1";
-constexpr const char TRACE_TAG_TAG2[]    = "tag2";
+constexpr char TRACE_TAG_NULLPTR[] = "";
+constexpr char TRACE_TAG_TAG1[]    = "tag1";
+constexpr char TRACE_TAG_TAG2[]    = "tag2";
 
 using Implementations = ::testing::Types
 <
-    LoggerTraits<LOGS_FOLDER_ROOT, LOGS_FILE_DEFAULT, UNIT_DEFAULT, TRACE_FILE_H, TRACE_TAG_NULLPTR>,
+    LoggerTraits<LOGS_FOLDER_ROOT, LOGS_FILE_DEFAULT, UNIT_DEFAULT, TRACE_FILE_H, TRACE_TAG_NULLPTR>
 
-    LoggerTraits<LOGS_FOLDER_ROOT, LOGS_FILE_DEFAULT, UNIT_FILE,    TRACE_FILE_H, TRACE_TAG_NULLPTR>,
-    LoggerTraits<LOGS_FOLDER_ROOT, LOGS_FILE_DEFAULT, UNIT_FUNC,    TRACE_FILE_H, TRACE_TAG_NULLPTR>,
+    , LoggerTraits<LOGS_FOLDER_ROOT, LOGS_FILE_DEFAULT, UNIT_FILE,    TRACE_FILE_H, TRACE_TAG_NULLPTR>
+    , LoggerTraits<LOGS_FOLDER_ROOT, LOGS_FILE_DEFAULT, UNIT_FUNC,    TRACE_FILE_H, TRACE_TAG_NULLPTR>
 
-    LoggerTraits<LOGS_FOLDER_LOGS, LOGS_FILE_DEFAULT, UNIT_DEFAULT, TRACE_FILE_H, TRACE_TAG_NULLPTR>,
-    LoggerTraits<LOGS_FOLDER_KEKW, LOGS_FILE_DEFAULT, UNIT_DEFAULT, TRACE_FILE_H, TRACE_TAG_NULLPTR>,
+    , LoggerTraits<LOGS_FOLDER_LOGS, LOGS_FILE_DEFAULT, UNIT_DEFAULT, TRACE_FILE_H, TRACE_TAG_NULLPTR>
+    , LoggerTraits<LOGS_FOLDER_KEKW, LOGS_FILE_DEFAULT, UNIT_DEFAULT, TRACE_FILE_H, TRACE_TAG_NULLPTR>
 
-    LoggerTraits<LOGS_FOLDER_ROOT, LOGS_FILE_DEFAULT, UNIT_DEFAULT, TRACE_FILE_CPP, TRACE_TAG_NULLPTR>,
-    LoggerTraits<LOGS_FOLDER_ROOT, LOGS_FILE_DEFAULT, UNIT_DEFAULT, TRACE_FILE_INL, TRACE_TAG_NULLPTR>,
+    , LoggerTraits<LOGS_FOLDER_ROOT, LOGS_FILE_DEFAULT, UNIT_DEFAULT, TRACE_FILE_CPP, TRACE_TAG_NULLPTR>
+    , LoggerTraits<LOGS_FOLDER_ROOT, LOGS_FILE_DEFAULT, UNIT_DEFAULT, TRACE_FILE_INL, TRACE_TAG_NULLPTR>
 
-    LoggerTraits<LOGS_FOLDER_ROOT, LOGS_FILE_DEFAULT, UNIT_DEFAULT, TRACE_FILE_H, TRACE_TAG_TAG1>,
-    LoggerTraits<LOGS_FOLDER_ROOT, LOGS_FILE_DEFAULT, UNIT_DEFAULT, TRACE_FILE_H, TRACE_TAG_TAG2>
+    , LoggerTraits<LOGS_FOLDER_ROOT, LOGS_FILE_DEFAULT, UNIT_DEFAULT, TRACE_FILE_H, TRACE_TAG_TAG1>
+    , LoggerTraits<LOGS_FOLDER_ROOT, LOGS_FILE_DEFAULT, UNIT_DEFAULT, TRACE_FILE_H, TRACE_TAG_TAG2>
 >;
 
 
@@ -105,61 +123,57 @@ protected:
     virtual void SetUp() override
     {
         std::filesystem::remove(m_sLogFilePath.data());
-
-        auto configure_logger = [](std::unique_ptr<qx::logger>& pLogger)
-        {
-            pLogger->set_logs_folder(Traits::GetLogsFolder());
-            pLogger->deregister_unit(qx::logger::DEFAULT_UNIT);
-            pLogger->register_unit(
-                Traits::GetUnit(),
-                { Traits::GetLogsFile(), qx::logger::level::none, qx::logger::level::info });
-
-            if constexpr (Traits::GetTag() && qx::strcmp(TRACE_TAG_TAG1, Traits::GetTag()) == 0)
-            {
-                pLogger->register_unit(
-                    Traits::GetTag(),
-                    {
-                        Traits::GetLogsFile(),
-                        qx::logger::level::none,
-                        qx::logger::level::info,
-                        [](qx::string         & sMsg,
-                           qx::string         & sFormat,
-                           qx::logger::level,
-                           const char         * pszFormat,
-                           const char         *,
-                           const char         * pszTag,
-                           const char         *,
-                           const char         *,
-                           int,
-                           va_list              args)
-                        {
-                            sMsg.vsprintf(pszFormat, args);
-                            qx::logger::format_time_string(sFormat);
-                            sMsg = qx::string("[I][") + sFormat + "][" + pszTag + "] " + sMsg + '\n';
-                        }
-                    }
-                );
-            }
-        };
-
         m_pLogger = std::make_unique<qx::logger>();
-        configure_logger(m_pLogger);
 
-        std::unique_ptr<qx::logger> pLogger = std::make_unique<qx::logger>();
-        configure_logger(pLogger);
-        m_pLoggerWorker = std::make_unique<qx::logger_worker>(std::move(pLogger));
-        m_pLoggerWorker->set_check_period(std::chrono::minutes(1));
-        m_pLoggerWorker->set_check_period(std::chrono::seconds(1));
-        m_pLoggerWorker->set_check_period(std::chrono::microseconds(1));
-        m_pLoggerWorker->set_check_period(std::chrono::microseconds(500));
+        m_pConsoleLoggerStream = std::make_unique<qx::cout_logger_stream>();
+        m_pConsoleLoggerStream->deregister_unit(qx::base_logger_stream::DEFAULT_UNIT);
+        m_pConsoleLoggerStream->register_unit(
+            Traits::GetUnit(),
+            { qx::log_level::none });
+
+        m_pFileLoggerStream = std::make_unique<qx::file_logger_stream>();
+        m_pFileLoggerStream->set_logs_folder(Traits::GetLogsFolder());
+        m_pFileLoggerStream->deregister_unit(qx::base_logger_stream::DEFAULT_UNIT);
+        m_pFileLoggerStream->register_unit(Traits::GetUnit(), { qx::log_level::info });
+        m_pFileLoggerStream->register_file(Traits::GetUnit(), Traits::GetLogsFile());
+
+        if constexpr (Traits::GetTag() == TRACE_TAG_TAG1)
+        {
+            m_pFileLoggerStream->register_unit(
+                Traits::GetTag(),
+                {
+                    qx::log_level::info,
+                    [](qx::string         & sMsg,
+                       qx::string         & sFormat,
+                       qx::log_level,
+                       const char         * pszFormat,
+                       const char*,
+                       std::string_view     svTag,
+                       std::string_view,
+                       std::string_view,
+                       int,
+                       va_list              args)
+                    {
+                        sMsg.vsprintf(pszFormat, args);
+                        qx::base_logger_stream::format_time_string(sFormat);
+                        sMsg = qx::string("[I][") + sFormat + "][" + svTag + "] " + sMsg + '\n';
+                    }
+                }
+            );
+
+            m_pFileLoggerStream->register_file(Traits::GetTag(), Traits::GetLogsFile());
+        }
+
+        m_pConsoleLoggerStream->attach_to(m_pLogger.get());
+        m_pFileLoggerStream->attach_to(m_pLogger.get());
     }
 
     /* called after every test */
     virtual void TearDown() override
     {
-        if (std::strcmp(Traits::GetUnit(), UNIT_DEFAULT) == 0
-         || std::strcmp(Traits::GetUnit(), UNIT_FILE) == 0 && std::strcmp(Traits::GetUnit(), Traits::GetTraceFile()) == 0
-         || std::strcmp(Traits::GetUnit(), UNIT_FUNC) == 0 && m_bFunction)
+        if (Traits::GetUnit() == UNIT_DEFAULT
+         || Traits::GetUnit() == UNIT_FILE && Traits::GetUnit() == Traits::GetTraceFile()
+         || Traits::GetUnit() == UNIT_FUNC && m_bFunction)
         {
             ASSERT_TRUE(std::filesystem::exists(m_sLogFilePath.data()));
             std::ifstream ifs(m_sLogFilePath.data());
@@ -203,7 +217,7 @@ protected:
             ]
                 (const char* pszStringStarting, const char* pszStringEnding)
             {
-                sFile.sprintf("\\[%s::", Traits::GetTraceFile());
+                sFile.sprintf("\\[%s::", Traits::GetTraceFile().data());
                 constexpr const char* pszFunc = "(.*?)"; // compiler-dependent
                 constexpr const char* pszLine = "\\(\\d+\\)\\]";
 
@@ -237,7 +251,7 @@ protected:
                     pszInfo,
                     pszDate,
                     pszTime,
-                    Traits::GetTag(),
+                    Traits::GetTag().data(),
                     pszStringEnding);
 
                 ifs.getline(sLine.data(), static_cast<std::streamsize>(sLine.size()));
@@ -271,7 +285,7 @@ protected:
             CheckStringCommon(pszAssert,  "\\[false\\] 1.000000 4 three");
             CheckStringCommon(pszAssert,  "\\[false\\] 1.000000 5 three");
 
-            if constexpr (Traits::GetTag() && qx::strcmp(TRACE_TAG_TAG1, Traits::GetTag()) == 0)
+            if constexpr (TRACE_TAG_TAG1 == Traits::GetTag())
             {
                 CheckStringTag(" 1.000000");
                 CheckStringTag(" 1.000000 1");
@@ -305,60 +319,57 @@ protected:
 
 protected:
 
-    std::unique_ptr<qx::logger>         m_pLogger;
-    std::unique_ptr<qx::logger_worker>  m_pLoggerWorker;
-    bool                                m_bFunction     = false;
-    qx::string                          m_sLogFilePath;
+    std::unique_ptr<qx::logger>                 m_pLogger;
+    std::unique_ptr<qx::cout_logger_stream>  m_pConsoleLoggerStream;
+    std::unique_ptr<qx::file_logger_stream>     m_pFileLoggerStream;
+    bool                                        m_bFunction     = false;
+    qx::string                                  m_sLogFilePath;
 };
 
 TYPED_TEST_SUITE(TestLogger, Implementations);
 
 #define TRACE(traceFile, format, ...)                               \
-    myLogger.process_output(                                        \
-        qx::logger::level::info,                                    \
+    myLogger.output(                                                \
+        qx::log_level::info,                                        \
         format,                                                     \
         nullptr,                                                    \
-        nullptr,                                                    \
+        std::string_view(),                                         \
         traceFile,                                                  \
         __FUNCTION__,                                               \
         __LINE__,                                                   \
-        std::string_view(),                                         \
         ## __VA_ARGS__)
 
 #define TRACE_TAG(traceFile, tag, format, ...)                      \
-    myLogger.process_output(                                        \
-        qx::logger::level::info,                                    \
+    myLogger.output(                                                \
+        qx::log_level::info,                                        \
         format,                                                     \
         nullptr,                                                    \
         tag,                                                        \
         traceFile,                                                  \
         __FUNCTION__,                                               \
         __LINE__,                                                   \
-        std::string_view(),                                         \
         ## __VA_ARGS__)
 
 #define TRACE_ERROR(traceFile, format, ...)                         \
-    myLogger.process_output(                                        \
-        qx::logger::level::errors,                                  \
+    myLogger.output(                                                \
+        qx::log_level::errors,                                      \
         format,                                                     \
         nullptr,                                                    \
-        nullptr,                                                    \
+        std::string_view(),                                         \
         traceFile,                                                  \
         __FUNCTION__,                                               \
         __LINE__,                                                   \
-        qx::logger::auto_terminal_color::yellow,                    \
         ## __VA_ARGS__)
 
 #define TRACE_ASSERT(traceFile, expr, format, ...)                  \
-    myLogger.process_output(                                        \
-        qx::logger::level::asserts,                                 \
+    myLogger.output(                                                \
+        qx::log_level::asserts,                                     \
         format,                                                     \
         # expr,                                                     \
-        nullptr,                                                    \
+        std::string_view(),                                         \
         traceFile,                                                  \
         __FUNCTION__,                                               \
         __LINE__,                                                   \
-        qx::logger::auto_terminal_color::red,                       \
         ## __VA_ARGS__)
 
 #define TEST_LOGGER(traceFile, tag)                                 \
@@ -401,11 +412,11 @@ TYPED_TEST_SUITE(TestLogger, Implementations);
 //----------------------------------- logger -----------------------------------
 
 void TestLoggerFunction(
-    qx::logger& myLogger,
-    const char* pszTraceFile,
-    const char* pszTag)
+    qx::logger        & myLogger,
+    std::string_view    svTraceFile,
+    std::string_view    svTag)
 {
-    TEST_LOGGER(pszTraceFile, pszTag)
+    TEST_LOGGER(svTraceFile, svTag)
 }
 
 TYPED_TEST(TestLogger, logger_function)
@@ -429,43 +440,5 @@ TYPED_TEST(TestLogger, logger_lambda)
 
     TestLoggerLambda(*TestFixture::m_pLogger);
 }
-
-//-------------------------------- logger_worker -------------------------------
-
-void TestLoggerFunction(
-    qx::logger_worker& myLogger,
-    const char       * pszTraceFile,
-    const char       * pszTag)
-{
-    TEST_LOGGER(pszTraceFile, pszTag)
-}
-
-TYPED_TEST(TestLogger, logger_worker_function)
-{
-    TestFixture::m_pLoggerWorker->thread_start();
-    TestLoggerFunction(*TestFixture::m_pLoggerWorker.get(), TypeParam::GetTraceFile(), TypeParam::GetTag());
-    TestFixture::m_bFunction = true;
-    TestFixture::m_pLoggerWorker->thread_terminate();
-}
-
-TYPED_TEST(TestLogger, logger_worker_method)
-{
-    TestFixture::m_pLoggerWorker->thread_start();
-    auto& myLogger = *TestFixture::m_pLoggerWorker.get();
-    TEST_LOGGER(TypeParam::GetTraceFile(), TypeParam::GetTag())
-    TestFixture::m_pLoggerWorker->thread_terminate();
-}
-
-TYPED_TEST(TestLogger, logger_worker_lambda)
-{
-    TestFixture::m_pLoggerWorker->thread_start();
-    auto TestLoggerWorkerLambda = [](auto& myLogger)
-    {
-        TEST_LOGGER(TypeParam::GetTraceFile(), TypeParam::GetTag())
-    };
-    TestLoggerWorkerLambda(*TestFixture::m_pLoggerWorker.get());
-    TestFixture::m_pLoggerWorker->thread_terminate();
-}
-
 
 #endif
