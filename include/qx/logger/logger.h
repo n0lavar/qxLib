@@ -15,6 +15,7 @@
 #include <qx/logger/base_logger_stream.h>
 #include <qx/patterns/singleton.h>
 
+#include <memory>
 
 #define QX_TRACE_FROM(loggerInstance, format, ...)              \
     loggerInstance.output(                                      \
@@ -80,7 +81,7 @@ class logger_worker;
 //!\date    10.01.2020
 //
 //================================================================================
-class logger : public subject<base_logger_stream>
+class logger
 {
 public:
 
@@ -93,6 +94,13 @@ public:
         std::string_view   svFunction,
         int                nLine,
         ...);
+
+    void add_stream(
+        std::unique_ptr<base_logger_stream> pStream);
+
+private:
+
+    std::vector<std::unique_ptr<base_logger_stream>> m_Streams;
 };
 
 class logger_singleton : public logger

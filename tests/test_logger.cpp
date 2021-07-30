@@ -125,21 +125,21 @@ protected:
         std::filesystem::remove(m_sLogFilePath.data());
         m_pLogger = std::make_unique<qx::logger>();
 
-        m_pConsoleLoggerStream = std::make_unique<qx::cout_logger_stream>();
-        m_pConsoleLoggerStream->deregister_unit(qx::base_logger_stream::DEFAULT_UNIT);
-        m_pConsoleLoggerStream->register_unit(
+        auto pConsoleLoggerStream = std::make_unique<qx::cout_logger_stream>();
+        pConsoleLoggerStream->deregister_unit(qx::base_logger_stream::DEFAULT_UNIT);
+        pConsoleLoggerStream->register_unit(
             Traits::GetUnit(),
             { qx::log_level::none });
 
-        m_pFileLoggerStream = std::make_unique<qx::file_logger_stream>();
-        m_pFileLoggerStream->set_logs_folder(Traits::GetLogsFolder());
-        m_pFileLoggerStream->deregister_unit(qx::base_logger_stream::DEFAULT_UNIT);
-        m_pFileLoggerStream->register_unit(Traits::GetUnit(), { qx::log_level::info });
-        m_pFileLoggerStream->register_file(Traits::GetUnit(), Traits::GetLogsFile());
+        auto pFileLoggerStream = std::make_unique<qx::file_logger_stream>();
+        pFileLoggerStream->set_logs_folder(Traits::GetLogsFolder());
+        pFileLoggerStream->deregister_unit(qx::base_logger_stream::DEFAULT_UNIT);
+        pFileLoggerStream->register_unit(Traits::GetUnit(), { qx::log_level::info });
+        pFileLoggerStream->register_file(Traits::GetUnit(), Traits::GetLogsFile());
 
         if constexpr (Traits::GetTag() == TRACE_TAG_TAG1)
         {
-            m_pFileLoggerStream->register_unit(
+            pFileLoggerStream->register_unit(
                 Traits::GetTag(),
                 {
                     qx::log_level::info,
@@ -161,11 +161,11 @@ protected:
                 }
             );
 
-            m_pFileLoggerStream->register_file(Traits::GetTag(), Traits::GetLogsFile());
+            pFileLoggerStream->register_file(Traits::GetTag(), Traits::GetLogsFile());
         }
 
-        m_pConsoleLoggerStream->attach_to(m_pLogger.get());
-        m_pFileLoggerStream->attach_to(m_pLogger.get());
+        m_pLogger->add_stream(std::move(pConsoleLoggerStream));
+        m_pLogger->add_stream(std::move(pFileLoggerStream));
     }
 
     /* called after every test */
@@ -319,11 +319,9 @@ protected:
 
 protected:
 
-    std::unique_ptr<qx::logger>                 m_pLogger;
-    std::unique_ptr<qx::cout_logger_stream>  m_pConsoleLoggerStream;
-    std::unique_ptr<qx::file_logger_stream>     m_pFileLoggerStream;
-    bool                                        m_bFunction     = false;
-    qx::string                                  m_sLogFilePath;
+    std::unique_ptr<qx::logger> m_pLogger;
+    bool                        m_bFunction     = false;
+    qx::string                  m_sLogFilePath;
 };
 
 TYPED_TEST_SUITE(TestLogger, Implementations);

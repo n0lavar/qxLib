@@ -14,7 +14,6 @@
 
 #include <qx/suppress_warnings.h>
 #include <qx/containers/string.h>
-#include <qx/patterns/observer.h>
 
 #include <ctime>
 #include <optional>
@@ -82,7 +81,7 @@ struct log_unit
 //!\date    28.07.2021
 //
 //==============================================================================
-class base_logger_stream : public observer
+class base_logger_stream
 {
 public:
 
@@ -91,6 +90,7 @@ public:
 public:
 
     base_logger_stream(void);
+    virtual ~base_logger_stream(void) = default;
 
     virtual void process_output(
         std::string_view        svMessage,

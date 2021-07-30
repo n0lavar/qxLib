@@ -133,7 +133,7 @@ inline void file_logger_stream::register_file(
     std::string_view    svFileName,
     log_file_policy     eLogPolicy)
 {
-    if (!svUnitName.empty() &&!svFileName.empty())
+    if (!svUnitName.empty() && !svFileName.empty())
         m_Files[svUnitName] = { svFileName, eLogPolicy };
 }
 

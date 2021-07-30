@@ -42,9 +42,9 @@ inline void logger::output(
     va_list args;
     va_start(args, nLine);
 
-    for (auto& stream : *this)
+    for (auto& stream : m_Streams)
     {
-        stream.output(
+        stream->output(
             eLogLevel,
             pszFormat,
             pszAssertExpression,
@@ -56,6 +56,19 @@ inline void logger::output(
     }
 
     va_end(args);
+}
+
+//==============================================================================
+//!\fn                       qx::logger::add_stream
+//
+//!\brief  Add output stream to the logger
+//!\param  pStream - stream unique pointer
+//!\author Khrapov
+//!\date   30.07.2021
+//==============================================================================
+inline void logger::add_stream(std::unique_ptr<base_logger_stream> pStream)
+{
+    m_Streams.push_back(std::move(pStream));
 }
 
 }
