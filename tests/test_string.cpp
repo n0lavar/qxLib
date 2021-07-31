@@ -1660,13 +1660,36 @@ TYPED_TEST(TestQxString, small_string_optimization)
 
 TYPED_TEST(TestQxString, replase)
 {
-    auto test_replace = [](auto type_find_var, auto type_replace_var)
+    auto pszStartStr = STR("Let me help you with your baggage");
+    StringTypeTn str;
+
+    str = pszStartStr;
+    EXPECT_EQ(str.replace(CH('a'), CH('Z')), 28);
+    EXPECT_STREQ(str.data(), STR("Let me help you with your bZggage"));
+    EXPECT_EQ(str.size(), 33);
+
+    str = pszStartStr;
+    EXPECT_EQ(str.replace(CH('b'), STR("AA")), 28);
+    EXPECT_STREQ(str.data(), STR("Let me help you with your AAaggage"));
+    EXPECT_EQ(str.size(), 34);
+
+    str = pszStartStr;
+    EXPECT_EQ(str.replace(CH('L'), StringTypeTn(STR("BBB"))), 3);
+    EXPECT_STREQ(str.data(), STR("BBBet me help you with your baggage"));
+    EXPECT_EQ(str.size(), 35);
+
+    str = pszStartStr;
+    EXPECT_EQ(str.replace(CH('z'), StdString(STR("CCCC"))), StringType::npos);
+    EXPECT_STREQ(str.data(), STR("Let me help you with your baggage"));
+    EXPECT_EQ(str.size(), 33);
+
+
+
+    auto test_replace = [pszStartStr, &str](auto type_find_var, auto type_replace_var)
     {
         using type_find = decltype(type_find_var);
         using type_replace = decltype(type_replace_var);
 
-        StringTypeTn str;
-        auto pszStartStr = STR("Let me help you with your baggage");
 
         str = pszStartStr;
         EXPECT_EQ(str.replace(type_find(STR("you")), type_replace(STR("12345"))), 17);
