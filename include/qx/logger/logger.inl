@@ -42,7 +42,7 @@ inline void logger::output(
     va_list args;
     va_start(args, nLine);
 
-    for (auto& stream : m_Streams)
+    for (const auto& stream : m_Streams)
     {
         stream->output(
             eLogLevel,

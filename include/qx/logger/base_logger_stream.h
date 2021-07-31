@@ -16,7 +16,6 @@
 #include <qx/containers/string.h>
 
 #include <ctime>
-#include <optional>
 #include <unordered_map>
 
 namespace qx
@@ -46,9 +45,9 @@ struct log_unit_info
             log_level           eLogLevel,              // log level
             const char        * pszFormat,              // format string
             const char        * pszAssertExpression,    // assert expr or nullptr
-            std::string_view    svTag,                  // tracing tag or nullptr
-            std::string_view    svFile,                 // file name string
-            std::string_view    svFunction,             // function name string
+            std::string_view    svTag,                  // tracing tag
+            std::string_view    svFile,                 // file name
+            std::string_view    svFunction,             // function name
             int                 nLine,                  // code line number
             va_list             args                    // additional args for format
         )

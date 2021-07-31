@@ -68,8 +68,6 @@
 namespace qx
 {
 
-class logger_worker;
-
 //================================================================================
 //
 //!\class                         qx::logger
@@ -85,7 +83,7 @@ class logger
 {
 public:
 
-    void output (
+    void output(
         log_level          eLogLevel,
         const char       * pszFormat,
         const char       * pszAssertExpression,
