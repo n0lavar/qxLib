@@ -703,7 +703,7 @@ inline void basic_string<Traits>::from(
 }
 
 //==============================================================================
-//!\fn              qx::basic_string<Traits>::sfrom<From>
+//!\fn           qx::basic_string<Traits>::static_from<From>
 //
 //!\brief  Construct string from custom type and get it
 //!\param  data      - data of type From
@@ -714,7 +714,7 @@ inline void basic_string<Traits>::from(
 //==============================================================================
 template<class Traits>
 template<typename From>
-inline basic_string<Traits> basic_string<Traits>::sfrom(
+inline basic_string<Traits> basic_string<Traits>::static_from(
     const From&   data,
     const_pointer pszFormat) noexcept
 {

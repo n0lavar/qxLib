@@ -30,17 +30,19 @@ class basic_string;
 
 namespace detail
 {
-    template<class Traits>
-    using ostream = std::basic_ostream<
-        typename Traits::value_type,
-        std::char_traits<typename Traits::value_type>
-    >;
 
-    template<class Traits>
-    using istream = std::basic_istream<
-        typename Traits::value_type,
-        std::char_traits<typename Traits::value_type>
-    >;
+template<class Traits>
+using ostream = std::basic_ostream<
+    typename Traits::value_type,
+    std::char_traits<typename Traits::value_type>
+>;
+
+template<class Traits>
+using istream = std::basic_istream<
+    typename Traits::value_type,
+    std::char_traits<typename Traits::value_type>
+>;
+
 }
 
 }
@@ -170,7 +172,7 @@ public:
     void                    from         (const From           & data,
                                           const_pointer          pszFormat  = nullptr)      noexcept;
     template<typename From>
-    static  basic_string    sfrom        (const From           & data,
+    static  basic_string    static_from  (const From           & data,
                                           const_pointer          pszFormat  = nullptr)      noexcept;
 
     void                    append       (value_type             chSymbol)                  noexcept;

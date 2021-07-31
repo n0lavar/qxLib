@@ -1284,66 +1284,81 @@ TYPED_TEST(TestQxString, at)
 
 TYPED_TEST(TestQxString, from)
 {
-    StringTypeTn str;
+    auto test_from = [](auto fromFunc)
+    {
+        StringTypeTn str;
 
-    str.from((char)10);
-    EXPECT_STREQ(str.data(), STR("10"));
+        str = fromFunc(static_cast<char>(10));
+        EXPECT_STREQ(str.data(), STR("10"));
 
-    str.from((unsigned char)20);
-    EXPECT_STREQ(str.data(), STR("20"));
+        str = fromFunc(static_cast<unsigned char>(20));
+        EXPECT_STREQ(str.data(), STR("20"));
 
-    str.from((short)30);
-    EXPECT_STREQ(str.data(), STR("30"));
+        str = fromFunc(static_cast<short>(30));
+        EXPECT_STREQ(str.data(), STR("30"));
 
-    str.from((unsigned short)40);
-    EXPECT_STREQ(str.data(), STR("40"));
+        str = fromFunc(static_cast<unsigned short>(40));
+        EXPECT_STREQ(str.data(), STR("40"));
 
-    str.from(50);
-    EXPECT_STREQ(str.data(), STR("50"));
+        str = fromFunc(50);
+        EXPECT_STREQ(str.data(), STR("50"));
 
-    str.from(60u);
-    EXPECT_STREQ(str.data(), STR("60"));
+        str = fromFunc(60u);
+        EXPECT_STREQ(str.data(), STR("60"));
 
-    str.from(70l);
-    EXPECT_STREQ(str.data(), STR("70"));
+        str = fromFunc(70l);
+        EXPECT_STREQ(str.data(), STR("70"));
 
-    str.from(80ul);
-    EXPECT_STREQ(str.data(), STR("80"));
+        str = fromFunc(80ul);
+        EXPECT_STREQ(str.data(), STR("80"));
 
-    str.from(90ll);
-    EXPECT_STREQ(str.data(), STR("90"));
+        str = fromFunc(90ll);
+        EXPECT_STREQ(str.data(), STR("90"));
 
-    str.from(100ull);
-    EXPECT_STREQ(str.data(), STR("100"));
+        str = fromFunc(100ull);
+        EXPECT_STREQ(str.data(), STR("100"));
 
-    str.from(110.f);
-    EXPECT_STREQ(str.data(), STR("110.000000"));
+        str = fromFunc(110.f);
+        EXPECT_STREQ(str.data(), STR("110.000000"));
 
-    str.from(120.0);
-    EXPECT_STREQ(str.data(), STR("120.000000"));
+        str = fromFunc(120.0);
+        EXPECT_STREQ(str.data(), STR("120.000000"));
 
-    str.from((long double)130.0);
-    EXPECT_STREQ(str.data(), STR("130.000000"));
+        str = fromFunc(static_cast<long double>(130.0));
+        EXPECT_STREQ(str.data(), STR("130.000000"));
 
-    str.from(nullptr);
-    EXPECT_STREQ(str.data(), STR("nullptr"));
+        str = fromFunc(nullptr);
+        EXPECT_STREQ(str.data(), STR("nullptr"));
 
-    str.from((void*)0x000000004128FF44);
-    bool bFormatCase1 = str == STR("0x000000004128FF44");
-    bool bFormatCase2 = str == STR("0x000000004128ff44");
-    bool bFormatCase3 = str == STR("0x4128ff44");
-    bool bFormatCase4 = str == STR("0x4128FF44");
-    EXPECT_TRUE(bFormatCase1 || bFormatCase2 || bFormatCase3 || bFormatCase4);
+        str = fromFunc(reinterpret_cast<void*>(0x000000004128FF44));
+        const bool bFormatCase1 = str == STR("0x000000004128FF44");
+        const bool bFormatCase2 = str == STR("0x000000004128ff44");
+        const bool bFormatCase3 = str == STR("0x4128ff44");
+        const bool bFormatCase4 = str == STR("0x4128FF44");
+        EXPECT_TRUE(bFormatCase1 || bFormatCase2 || bFormatCase3 || bFormatCase4);
 
-    str.from(true);
-    EXPECT_STREQ(str.data(), STR("true"));
+        str = fromFunc(true);
+        EXPECT_STREQ(str.data(), STR("true"));
 
-    str.from(false);
-    EXPECT_STREQ(str.data(), STR("false"));
+        str = fromFunc(false);
+        EXPECT_STREQ(str.data(), STR("false"));
 
-    // std strings have operator<<
-    str.from(StdString(STR("some string")));
-    EXPECT_STREQ(str.data(), STR("some string"));
+        // std strings have operator<<
+        str = fromFunc(StdString(STR("some string")));
+        EXPECT_STREQ(str.data(), STR("some string"));
+    };
+
+    test_from([](const auto& data, typename TypeParam::const_pointer pszFormat = nullptr)
+        {
+            StringTypeTn str;
+            str.from(data, pszFormat);
+            return std::move(str);
+        });
+
+    test_from([](const auto& data, typename TypeParam::const_pointer pszFormat = nullptr)
+        {
+            return StringTypeTn::static_from(data, pszFormat);
+        });
 }
 
 TYPED_TEST(TestQxString, ends_with)
@@ -1491,7 +1506,6 @@ TYPED_TEST(TestQxString, contains)
     auto sStdStr2 = StdString(STR("lel"));
     EXPECT_FALSE(str.contains(sStdStr2));
     EXPECT_FALSE(str.contains(sStdStr2.cbegin(), sStdStr2.cend()));
-
 }
 
 TYPED_TEST(TestQxString, operator_stream_out)
