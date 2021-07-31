@@ -1357,7 +1357,7 @@ TYPED_TEST(TestQxString, from)
 
     test_from([](const auto& data, typename TypeParam::const_pointer pszFormat = nullptr)
         {
-            return StringTypeTn::static_from(data, pszFormat);
+            return StringType::static_from(data, pszFormat);
         });
 }
 
