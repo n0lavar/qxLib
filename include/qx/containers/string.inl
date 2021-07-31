@@ -451,12 +451,13 @@ inline void basic_string<Traits>::free(void) noexcept
 //!\date   31.10.2019
 //==============================================================================
 template<class Traits>
-inline basic_string<Traits> basic_string<Traits>::substr(
+inline typename basic_string<Traits>::string_view basic_string<Traits>::substr(
     size_type nPos,
     size_type nSymbols) const noexcept
 {
-    basic_string str(data() + nPos, (nSymbols != npos ? nSymbols : size() - nPos));
-    return std::move(str);
+    return string_view(
+        data() + nPos,
+        nSymbols != npos ? nSymbols : size() - nPos);
 }
 
 //==============================================================================

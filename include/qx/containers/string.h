@@ -75,8 +75,6 @@ concept string_convertable = requires(T t)
 template<class Traits>
 class basic_string
 {
-    using vector = std::vector<basic_string>;
-
     template<class _Traits>
     friend qx::detail::istream<_Traits>& ::operator>>(
         qx::detail::istream<_Traits>& is,
@@ -92,11 +90,16 @@ public:
     using const_reference   = typename Traits::const_reference;
     using difference_type   = typename Traits::difference_type;
     using size_type         = typename Traits::size_type;
+    using string_view       = std::basic_string_view<value_type>;
     using sstream_type      = std::basic_stringstream<value_type>;
 
     static constexpr size_type npos = std::numeric_limits<size_type>::max();
 
     IMPL_CONTAINER(basic_string)
+
+private:
+
+    using vector = std::vector<string_view>;
 
 public:
 
@@ -149,7 +152,7 @@ public:
     void                    shrink_to_fit(void)                                             noexcept;
     void                    free         (void)                                             noexcept;
 
-    basic_string            substr       (size_type              nPos,
+    string_view             substr       (size_type              nPos,
                                           size_type              nSymbols   = npos) const   noexcept;
 
     void                    to_lower     (void)                                             noexcept;
@@ -546,7 +549,7 @@ public:
     reference               operator[]   (size_type              nSymbol)                   noexcept;
     const_reference         operator[]   (size_type              nSymbol)           const   noexcept;
 
-    operator std::basic_string_view<value_type>()                                   const   noexcept;
+    operator string_view()                                   const   noexcept;
 
 private:
 

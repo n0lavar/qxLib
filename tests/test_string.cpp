@@ -559,25 +559,25 @@ TYPED_TEST(TestQxString, substr)
 {
     StringTypeTn str(STR("many different words placed here"));
 
-    StringTypeTn str0 = str.substr(0, 4);
-    EXPECT_EQ(str0.size(), 4);
-    EXPECT_STREQ(str0.data(), STR("many"));
+    auto svStr0 = str.substr(0, 4);
+    EXPECT_EQ(svStr0.size(), 4);
+    EXPECT_EQ(svStr0, StringTypeTn::string_view(STR("many")));
 
-    StringTypeTn str1 = str.substr(5, 9);
-    EXPECT_EQ(str1.size(), 9);
-    EXPECT_STREQ(str1.data(), STR("different"));
+    auto svStr1 = str.substr(5, 9);
+    EXPECT_EQ(svStr1.size(), 9);
+    EXPECT_EQ(svStr1, StringTypeTn::string_view(STR("different")));
 
-    StringTypeTn str2 = str.substr(15, 5);
-    EXPECT_EQ(str2.size(), 5);
-    EXPECT_STREQ(str2.data(), STR("words"));
+    auto svStr2 = str.substr(15, 5);
+    EXPECT_EQ(svStr2.size(), 5);
+    EXPECT_EQ(svStr2, StringTypeTn::string_view(STR("words")));
 
-    StringTypeTn str3 = str.substr(21, 6);
-    EXPECT_EQ(str3.size(), 6);
-    EXPECT_STREQ(str3.data(), STR("placed"));
+    auto svStr3 = str.substr(21, 6);
+    EXPECT_EQ(svStr3.size(), 6);
+    EXPECT_EQ(svStr3, StringTypeTn::string_view(STR("placed")));
 
-    StringTypeTn str4 = str.substr(28);
-    EXPECT_EQ(str4.size(), 4);
-    EXPECT_STREQ(str4.data(), STR("here"));
+    auto svStr4 = str.substr(28);
+    EXPECT_EQ(svStr4.size(), 4);
+    EXPECT_EQ(svStr4, StringTypeTn::string_view(STR("here")));
 }
 
 TYPED_TEST(TestQxString, find_first_of)
@@ -715,24 +715,24 @@ TYPED_TEST(TestQxString, split)
 
     auto words1 = str1.split(CH(' '));
     EXPECT_EQ(words1.size(), 5);
-    EXPECT_STREQ(words1[0].data(), STR("many"));
-    EXPECT_STREQ(words1[1].data(), STR("different"));
-    EXPECT_STREQ(words1[2].data(), STR("words"));
-    EXPECT_STREQ(words1[3].data(), STR("placed"));
-    EXPECT_STREQ(words1[4].data(), STR("here"));
+    EXPECT_EQ(words1[0], StringTypeTn::string_view(STR("many")));
+    EXPECT_EQ(words1[1], StringTypeTn::string_view(STR("different")));
+    EXPECT_EQ(words1[2], StringTypeTn::string_view(STR("words")));
+    EXPECT_EQ(words1[3], StringTypeTn::string_view(STR("placed")));
+    EXPECT_EQ(words1[4], StringTypeTn::string_view(STR("here")));
 
     auto check_comma_split = [](auto... splitter)
     {
         StringTypeTn str(STR("some, long, long, long, long, long, sentence"));
         auto words = str.split(splitter...);
         EXPECT_EQ(words.size(), 7);
-        EXPECT_STREQ(words[0].data(), STR("some"));
-        EXPECT_STREQ(words[1].data(), STR("long"));
-        EXPECT_STREQ(words[2].data(), STR("long"));
-        EXPECT_STREQ(words[3].data(), STR("long"));
-        EXPECT_STREQ(words[4].data(), STR("long"));
-        EXPECT_STREQ(words[5].data(), STR("long"));
-        EXPECT_STREQ(words[6].data(), STR("sentence"));
+        EXPECT_EQ(words[0], StringTypeTn::string_view(STR("some")));
+        EXPECT_EQ(words[1], StringTypeTn::string_view(STR("long")));
+        EXPECT_EQ(words[2], StringTypeTn::string_view(STR("long")));
+        EXPECT_EQ(words[3], StringTypeTn::string_view(STR("long")));
+        EXPECT_EQ(words[4], StringTypeTn::string_view(STR("long")));
+        EXPECT_EQ(words[5], StringTypeTn::string_view(STR("long")));
+        EXPECT_EQ(words[6], StringTypeTn::string_view(STR("sentence")));
     };
 
     check_comma_split(STR(", "));
