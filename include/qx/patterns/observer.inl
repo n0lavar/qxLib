@@ -14,60 +14,64 @@
 namespace qx
 {
 
-//----------------------------- qx::subject::token -----------------------------
+//------------------------- qx::subject::observer_token ------------------------
 
 //==============================================================================
-//!\fn                         qx::token::token
+//!\fn                    qx::observer_token::observer_token
 //
-//!\brief  token object constructor
+//!\brief  observer_token object constructor
 //!\param  pSubject  - corresponding subject pointer
 //!\param  pObserver - corresponding observer pointer
 //!\author Khrapov
 //!\date   6.03.2021
 //==============================================================================
-inline token::token(base_subject* pSubject, observer* pObserver) noexcept
+inline observer_token::observer_token(
+    base_subject* pSubject,
+    observer    * pObserver) noexcept
     : m_pSubject (pSubject)
     , m_pObserver(pObserver)
 {
 }
 
 //==============================================================================
-//!\fn                         qx::token::reset
+//!\fn                    qx::observer_token::reset
 //
-//!\brief  Reset token. Token won't unsubscribe observer from subject in destructor
-//!\author Khrapov
-//!\date   6.03.2021
+//!\brief   Reset observer_token
+//!\details Token won't unsubscribe observer from subject in destructor
+//!\author  Khrapov
+//!\date    6.03.2021
 //==============================================================================
-inline void token::reset(void) noexcept
+inline void observer_token::reset(void) noexcept
 {
     m_pSubject  = nullptr;
     m_pObserver = nullptr;
 }
 
 //==============================================================================
-//!\fn                         qx::token::token
+//!\fn                   qx::observer_token::observer_token
 //
-//!\brief  token object constructor
-//!\param  other - other token object
+//!\brief  observer_token object constructor
+//!\param  other - other observer_token object
 //!\author Khrapov
 //!\date   6.03.2021
 //==============================================================================
-inline token::token(token&& other) noexcept
+inline observer_token::observer_token(observer_token&& other) noexcept
 {
     std::swap(m_pSubject,  other.m_pSubject);
     std::swap(m_pObserver, other.m_pObserver);
 }
 
 //==============================================================================
-//!\fn                       qx::token::operator=
+//!\fn                  qx::observer_token::operator=
 //
-//!\brief  Assign by other token object
-//!\param  other - other token object
+//!\brief  Assign by other observer_token object
+//!\param  other - other observer_token object
 //!\retval       - this reference
 //!\author Khrapov
 //!\date   6.03.2021
 //==============================================================================
-inline token& token::operator=(token&& other) noexcept
+inline observer_token& observer_token::operator=(
+    observer_token&& other) noexcept
 {
     std::swap(m_pSubject,  other.m_pSubject);
     std::swap(m_pObserver, other.m_pObserver);
@@ -75,30 +79,44 @@ inline token& token::operator=(token&& other) noexcept
 }
 
 //==============================================================================
-//!\fn                         qx::token::~token
+//!\fn                    qx::observer_token::~observer_token
 //
-//!\brief  token object destructor
+//!\brief  observer_token object destructor
 //!\author Khrapov
 //!\date   6.03.2021
 //==============================================================================
-inline token::~token() noexcept
+inline observer_token::~observer_token() noexcept
 {
     if (m_pSubject && m_pObserver)
         m_pSubject->detach(m_pObserver);
 }
 
 //==============================================================================
-//!\fn                       qx::token::operator==
+//!\fn                  qx::observer_token::operator==
 //
 //!\brief  operator==
-//!\param  other - other token object
+//!\param  other - other observer_token object
 //!\retval       - true tokens are equal
 //!\author Khrapov
 //!\date   6.03.2021
 //==============================================================================
-inline bool token::operator==(const token& other) const noexcept
+inline bool observer_token::operator==(
+    const observer_token& other) const noexcept
 {
     return m_pSubject == other.m_pSubject && m_pObserver == other.m_pObserver;
+}
+
+//==============================================================================
+//!\fn                 qx::observer_token::operator bool
+//
+//!\brief  operator bool
+//!\retval  - true if observer_token is valid
+//!\author Khrapov
+//!\date   31.07.2021
+//==============================================================================
+inline observer_token::operator bool(void) const noexcept
+{
+    return m_pSubject && m_pObserver;
 }
 
 
@@ -110,11 +128,11 @@ inline bool token::operator==(const token& other) const noexcept
 //
 //!\brief  Attach observer to this subject
 //!\param  pObserver - observer pointer
-//!\retval           - token for autodetaching observer from this subject
+//!\retval           - observer_token for autodetaching observer from this subject
 //!\author Khrapov
 //!\date   6.03.2021
 //==============================================================================
-inline token base_subject::attach(observer * pObserver)
+inline observer_token base_subject::attach(observer * pObserver)
 {
     if (std::find(
         m_Observers.begin(),
@@ -122,10 +140,12 @@ inline token base_subject::attach(observer * pObserver)
         pObserver) == m_Observers.end())
     {
         m_Observers.push_back(pObserver);
-        return token(this, pObserver);
+        return observer_token(this, pObserver);
     }
     else
-        return token();
+    {
+        return observer_token();
+    }
 }
 
 //==============================================================================
@@ -394,8 +414,7 @@ inline observer::~observer(void) = default;
 //==============================================================================
 inline void observer::attach_to(base_subject * pSubject)
 {
-    auto subjectToken = std::move(pSubject->attach(this));
-    if (subjectToken.m_pObserver && subjectToken.m_pSubject)
+    if (auto subjectToken = pSubject->attach(this))
     {
         if (std::find(
             m_Tokens.begin(),

@@ -25,7 +25,7 @@ class base_subject;
 
 //==============================================================================
 //
-//!\class                          qx::token
+//!\class                     qx::observer_token
 //
 //!\details Tokens are used to automatically detach observer when the observer
 //          object is destroyed
@@ -35,29 +35,30 @@ class base_subject;
 //!\date    10.03.2021
 //
 //==============================================================================
-class token
+class observer_token
 {
     friend base_subject;
     friend observer;
 
 private:
 
-            token       (base_subject * pSubject,
-                         observer     * pObserver)      noexcept;
+                    observer_token  (base_subject * pSubject,
+                                     observer     * pObserver)              noexcept;
 
-    void    reset       (void)                          noexcept;
+    void            reset           (void)                                  noexcept;
 
 public:
 
-            token       (token&&        other)          noexcept;
-    token & operator=   (token&&        other)          noexcept;
-            token       (const token&)                  noexcept = delete;
-    token & operator=   (const token&)                  noexcept = delete;
+                    observer_token  (observer_token&&        other)         noexcept;
+    observer_token& operator=       (observer_token&&        other)         noexcept;
+                    observer_token  (const observer_token&)                 noexcept = delete;
+    observer_token& operator=       (const observer_token&)                 noexcept = delete;
 
-            token       (void)                          noexcept = default;
-            ~token      (void)                          noexcept;
+                    observer_token  (void)                                  noexcept = default;
+                    ~observer_token (void)                                  noexcept;
 
-    bool    operator==  (const token  & other)  const   noexcept;
+    bool            operator==      (const observer_token  & other) const   noexcept;
+    operator bool                   (void)                          const   noexcept;
 
 private:
 
@@ -84,12 +85,12 @@ public:
 
     template<typename TObserver>
     friend class subject;
-    friend token;
+    friend observer_token;
     friend observer;
 
 private:
 
-    [[nodiscard]] token attach                  (observer * pObserver);
+    [[nodiscard]] observer_token attach                  (observer * pObserver);
     void                detach                  (observer * pObserver) noexcept;
     void                on_iterator_destructed  (void)  noexcept;
     void                on_iterator_constructed (void)  noexcept;
@@ -210,7 +211,7 @@ public:
 
 private:
 
-    std::vector<token> m_Tokens;
+    std::vector<observer_token> m_Tokens;
 };
 
 }
