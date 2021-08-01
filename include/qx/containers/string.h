@@ -340,8 +340,9 @@ public:
                                           size_type              nEnd       = npos)         noexcept;
 
     int                     compare      (value_type             chSymbol)          const   noexcept;
+    int                     compare      (const_pointer          pszStr)            const   noexcept;
     int                     compare      (const_pointer          pszStr,
-                                          size_type              nStrSize   = npos) const   noexcept;
+                                          size_type              nStrSize)          const   noexcept;
     int                     compare      (const basic_string   & sStr)              const   noexcept;
     template<class FwdIt>
     int                     compare      (FwdIt                  itBegin,

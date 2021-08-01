@@ -2168,25 +2168,41 @@ inline int basic_string<Traits>::compare(value_type chSymbol) const noexcept
 //!\fn               qx::basic_string<Traits>::compare
 //
 //!\brief  Performs a binary comparison of the characters
-//!\param  pStr     - string to compare
+//!\param  pszStr - string to compare
+//!\retval        - < 0 the first character that does not match has
+//                      a lower value in this than in chSymbol
+//                    0 the contents of both strings are equal
+//                  > 0 the first character that does not match has
+//                      a greater value in this than in chSymbol
+//!\author Khrapov
+//!\date   28.10.2019
+//==============================================================================
+template<class Traits>
+inline int qx::basic_string<Traits>::compare(const_pointer pszStr) const noexcept
+{
+    return Traits::compare(data(), pszStr);
+}
+
+//==============================================================================
+//!\fn               qx::basic_string<Traits>::compare
+//
+//!\brief  Performs a binary comparison of the characters
+//!\param  pszStr   - string to compare
 //!\param  nSymbols - number of symbols to compare (0 - string is zero terminated)
-//!\retval          -   < 0 the first character that does not match has
-//                          a lower value in this than in chSymbol
-//                        0 the contents of both strings are equal
-//                      > 0 the first character that does not match has
-//                          a greater value in this than in chSymbol
+//!\retval          - < 0 the first character that does not match has
+//                        a lower value in this than in chSymbol
+//                      0 the contents of both strings are equal
+//                    > 0 the first character that does not match has
+//                        a greater value in this than in chSymbol
 //!\author Khrapov
 //!\date   28.10.2019
 //==============================================================================
 template<class Traits>
 inline int basic_string<Traits>::compare(
-    const_pointer pStr,
+    const_pointer pszStr,
     size_type     nSymbols) const noexcept
 {
-    if (nSymbols > 0)
-        return Traits::compare_n(data(), pStr, nSymbols);
-    else
-        return Traits::compare(data(), pStr);
+    return Traits::compare_n(data(), pszStr, nSymbols);
 }
 
 //==============================================================================
@@ -3569,7 +3585,7 @@ template<class Traits>
 inline bool basic_string<Traits>::operator==(
     value_type chSymbol) const noexcept
 {
-    return compare(&chSymbol, 1) == 0;
+    return size() == 1 && at(0) == chSymbol;
 }
 template<class Traits>
 inline bool basic_string<Traits>::operator==(
@@ -3581,7 +3597,7 @@ template<class Traits>
 inline bool basic_string<Traits>::operator==(
     const basic_string& sStr) const noexcept
 {
-    return compare(sStr.data()) == 0;
+    return size() == sStr.size() && compare(sStr.data(), sStr.size()) == 0;
 }
 template<class Traits>
 template<string_convertable String>
@@ -3597,26 +3613,26 @@ template<class Traits>
 inline bool basic_string<Traits>::operator!=(
     value_type chSymbol) const noexcept
 {
-    return compare(&chSymbol, 1) != 0;
+    return !operator==(chSymbol);
 }
 template<class Traits>
 inline bool basic_string<Traits>::operator!=(
     const_pointer pszSource) const noexcept
 {
-    return compare(pszSource) != 0;
+    return !operator==(pszSource);
 }
 template<class Traits>
 inline bool basic_string<Traits>::operator!=(
     const basic_string& sStr) const noexcept
 {
-    return compare(sStr.data()) != 0;
+    return !operator==(sStr);
 }
 template<class Traits>
 template<string_convertable String>
 inline bool basic_string<Traits>::operator!=(
     const String& sStr) const noexcept
 {
-    return iter_strcmp(cbegin(), cend(), sStr.cbegin(), sStr.cend()) != 0;
+    return !operator==(sStr);
 }
 
 //---------------------------------- operator< ---------------------------------
@@ -3637,7 +3653,7 @@ template<class Traits>
 inline bool basic_string<Traits>::operator<(
     const basic_string& sStr) const noexcept
 {
-    return compare(sStr.data()) < 0;
+    return compare(sStr.data(), sStr.size()) < 0;
 }
 template<class Traits>
 template<string_convertable String>
@@ -3665,7 +3681,7 @@ template<class Traits>
 inline bool basic_string<Traits>::operator<=(
     const basic_string& sStr) const noexcept
 {
-    return compare(sStr.data()) <= 0;
+    return compare(sStr.data(), sStr.size()) <= 0;
 }
 template<class Traits>
 template<string_convertable String>
@@ -3693,7 +3709,7 @@ template<class Traits>
 inline bool basic_string<Traits>::operator>(
     const basic_string& sStr) const noexcept
 {
-    return compare(sStr.data()) > 0;
+    return compare(sStr.data(), sStr.size()) > 0;
 }
 template<class Traits>
 template<string_convertable String>
@@ -3721,7 +3737,7 @@ template<class Traits>
 inline bool basic_string<Traits>::operator>=(
     const basic_string& sStr) const noexcept
 {
-    return compare(sStr.data()) >= 0;
+    return compare(sStr.data(), sStr.size()) >= 0;
 }
 template<class Traits>
 template<string_convertable String>
