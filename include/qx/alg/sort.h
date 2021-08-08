@@ -1,45 +1,39 @@
-//==============================================================================
-//
-//!\file                            sort.h
-//
-//!\brief       Sorting algorithms
-//!\details     ~
-//
-//!\author      Khrapov
-//!\date        1.03.2020
-//!\copyright   (c) Nick Khrapov, 2020. All mid reserved.
-//
-//==============================================================================
+/**
+
+    @file      sort.h
+    @brief     Sorting algorithms
+    @author    Khrapov
+    @date      1.03.2020
+    @copyright © Nick Khrapov, 2021. All right reserved.
+
+**/
 #pragma once
 
 #include <qx/typedefs.h>
 
+#include <qx/type_traits.h>
 #include <algorithm>
 #include <functional>
 #include <vector>
-#include <qx/type_traits.h>
 
 namespace qx
 {
 
 constexpr size_t SORT_COUNTING_MAX_BUFFER_SIZE = 100000;
 
-// vector of iterator value
+//!< vector of iterator value
 template<class It>
 using vector_of_values = std::vector<iterator_value_t<It>>;
 
-//==============================================================================
-//!\fn                   qx::sort_required<RandomIt>
-//
-//!\brief       check if sort really needed
-//!\property    O(1)
-//!\param       begin   - begin iterator
-//!\param       end     - end iterator
-//!\retval              - false if [begin, end) already sorted
-//!\author Khrapov
-//!\date   9.09.2020
-//==============================================================================
-template <typename RandomIt>
+/**
+    @brief    Check if sort really needed
+    @property O(1)
+    @tparam   RandomIt - random access iterator
+    @param    begin    - begin iterator 
+    @param    end      - end iterator 
+    @retval            - false if [begin, end) already sorted 
+**/
+template<typename RandomIt>
 inline bool sort_required(RandomIt begin, RandomIt end)
 {
     if (end - begin < 2)
@@ -48,20 +42,21 @@ inline bool sort_required(RandomIt begin, RandomIt end)
         return true;
 }
 
-//==============================================================================
-//!\fn               qx::sort_insertion<RandomIt, Compare>
-//
-//!\brief       Insertion sort
-//!\details     stable
-//!\property    O(n^2)
-//!\param       begin   - begin iterator
-//!\param       end     - end iterator
-//!\param       compare - comparison function
-//!\author      Khrapov
-//!\date        1.03.2020
-//==============================================================================
-template <typename RandomIt, typename Compare = std::less<>>
-inline void sort_insertion(RandomIt begin, RandomIt end, Compare compare = Compare())
+/**
+    @brief    Insertion sort
+    @details  Stable
+    @property O(N^2)
+    @tparam   RandomIt - random access iterator
+    @tparam   Compare  - function object type satisfying binary predicate requirements
+    @param    begin    - begin iterator 
+    @param    end      - end iterator 
+    @param    compare  - comparison function 
+**/
+template<typename RandomIt, typename Compare = std::less<>>
+inline void sort_insertion(
+    RandomIt begin,
+    RandomIt end,
+    Compare  compare = Compare())
 {
     if (!sort_required(begin, end))
         return;
@@ -70,26 +65,37 @@ inline void sort_insertion(RandomIt begin, RandomIt end, Compare compare = Compa
         for (RandomIt j = i; j != begin && compare(*j, *(j - 1)); --j)
             std::iter_swap(j - 1, j);
 }
-template <typename Container, typename Compare = std::less<>>
+
+/**
+    @brief    Insertion sort
+    @details  Stable
+    @property O(N^2)
+    @tparam   Container - container type
+    @tparam   Compare   - function object type satisfying binary predicate requirements
+    @param    cont      - container ref
+    @param    compare   - comparison function
+**/
+template<typename Container, typename Compare = std::less<>>
 inline void sort_insertion(Container& cont, Compare compare = Compare())
 {
     sort_insertion(cont.begin(), cont.end(), compare);
 }
 
-//==============================================================================
-//!\fn               qx::sort_selection<RandomIt, Compare>
-//
-//!\brief       Selection sort
-//!\details     unstable
-//!\property    O(n^2)
-//!\param       begin   - begin iterator
-//!\param       end     - end iterator
-//!\param       compare - comparison function
-//!\author      Khrapov
-//!\date        1.03.2020
-//==============================================================================
-template <typename RandomIt, typename Compare = std::less<>>
-inline void sort_selection(RandomIt begin, RandomIt end, Compare compare = Compare())
+/**
+    @brief    Selection sort
+    @details  Unstable
+    @property O(N^2)
+    @tparam   RandomIt - random access iterator
+    @tparam   Compare  - function object type satisfying binary predicate requirements
+    @param    begin    - begin iterator
+    @param    end      - end iterator
+    @param    compare  - comparison function
+**/
+template<typename RandomIt, typename Compare = std::less<>>
+inline void sort_selection(
+    RandomIt begin,
+    RandomIt end,
+    Compare  compare = Compare())
 {
     if (!sort_required(begin, end))
         return;
@@ -104,26 +110,37 @@ inline void sort_selection(RandomIt begin, RandomIt end, Compare compare = Compa
         std::iter_swap(it, itMin);
     }
 }
-template <typename Container, typename Compare = std::less<>>
+
+/**
+    @brief    Selection sort
+    @details  Unstable
+    @property O(N^2)
+    @tparam   Container - container type
+    @tparam   Compare   - function object type satisfying binary predicate requirements
+    @param    cont      - container ref
+    @param    compare   - comparison function
+**/
+template<typename Container, typename Compare = std::less<>>
 inline void sort_selection(Container& cont, Compare compare = Compare())
 {
     sort_selection(cont.begin(), cont.end(), compare);
 }
 
-//==============================================================================
-//!\fn                 qx::sort_bubble<RandomIt, Compare>
-//
-//!\brief       Bubble sort
-//!\details     stable
-//!\property    O(n^2)
-//!\param       begin   - begin iterator
-//!\param       end     - end iterator
-//!\param       compare - comparison function
-//!\author      Khrapov
-//!\date        1.03.2020
-//==============================================================================
-template <typename RandomIt, typename Compare = std::less<>>
-inline void sort_bubble(RandomIt begin, RandomIt end, Compare compare = Compare())
+/**
+    @brief    Bubble sort
+    @details  Stable
+    @property O(N^2)
+    @tparam   RandomIt - random access iterator
+    @tparam   Compare  - function object type satisfying binary predicate requirements
+    @param    begin    - begin iterator
+    @param    end      - end iterator
+    @param    compare  - comparison function
+**/
+template<typename RandomIt, typename Compare = std::less<>>
+inline void sort_bubble(
+    RandomIt begin,
+    RandomIt end,
+    Compare  compare = Compare())
 {
     if (!sort_required(begin, end))
         return;
@@ -142,25 +159,33 @@ inline void sort_bubble(RandomIt begin, RandomIt end, Compare compare = Compare(
         }
     }
 }
-template <typename Container, typename Compare = std::less<>>
+
+/**
+    @brief    Bubble sort
+    @details  Stable
+    @property O(N^2)
+    @tparam   Container - container type
+    @tparam   Compare   - function object type satisfying binary predicate requirements
+    @param    cont      - container ref
+    @param    compare   - comparison function
+**/
+template<typename Container, typename Compare = std::less<>>
 inline void sort_bubble(Container& cont, Compare compare = Compare())
 {
     sort_bubble(cont.begin(), cont.end(), compare);
 }
 
-//==============================================================================
-//!\fn                 qx::adjust_heap<RandomIt, Compare>
-//
-//!\brief       Adjust heap
-//!\property    O(log(N))
-//!\param       begin     - whole heap root RandomIt
-//!\param       nHeapSize - whole heap size for out of range check
-//!\param       nPosition - current root nPosition
-//!\param       compare   - comparison function
-//!\author      Khrapov
-//!\date        2.03.2020
-//==============================================================================
-template <typename RandomIt, typename Compare>
+/**
+    @brief    Adjust heap
+    @property O(log(N))
+    @tparam   RandomIt  - random access iterator
+    @tparam   Compare   - function object type satisfying binary predicate requirements
+    @param    begin     - whole heap root RandomIt
+    @param    nHeapSize - whole heap size for out of range check 
+    @param    nPosition - current root nPosition 
+    @param    compare   - comparison function 
+**/
+template<typename RandomIt, typename Compare>
 inline void adjust_heap(
     RandomIt begin,
     size_t   nHeapSize,
@@ -183,8 +208,8 @@ inline void adjust_heap(
             }
 
             if (compare(
-                *(begin + static_cast<iter_diff>(nChildPos)),
-                *(begin + static_cast<iter_diff>(nPosition))))
+                    *(begin + static_cast<iter_diff>(nChildPos)),
+                    *(begin + static_cast<iter_diff>(nPosition))))
             {
                 return;
             }
@@ -199,37 +224,39 @@ inline void adjust_heap(
     }
 }
 
-//==============================================================================
-//!\fn                  qx::make_heap<RandomIt, Compare>
-//
-//!\brief  Make heap at range
-//!\param  begin   - begin iterator
-//!\param  end     - end iterator
-//!\param  compare - comparison function
-//!\author Khrapov
-//!\date   2.03.2020
-//==============================================================================
-template <typename RandomIt, typename Compare>
+/**
+    @brief  Make heap at range
+    @tparam RandomIt - random access iterator
+    @tparam Compare  - function object type satisfying binary predicate requirements
+    @param  begin    - begin iterator
+    @param  end      - end iterator 
+    @param  compare  - comparison function 
+**/
+template<typename RandomIt, typename Compare>
 inline void make_heap(RandomIt begin, RandomIt end, Compare compare = Compare())
 {
     auto max = end - begin;
     for (int i = static_cast<int>(max) / 2; i >= 0; --i)
-        adjust_heap(begin, static_cast<size_t>(max), static_cast<size_t>(i), compare);
+    {
+        adjust_heap(
+            begin,
+            static_cast<size_t>(max),
+            static_cast<size_t>(i),
+            compare);
+    }
 }
 
-//==============================================================================
-//!\fn                  qx::sort_heap<RandomIt, Compare>
-//
-//!\brief       heap sort
-//!\details     unstable
-//!\property    O(nlog(N))
-//!\param       begin   - begin iterator
-//!\param       end     - end iterator
-//!\param       compare - comparison function
-//!\author      Khrapov
-//!\date        2.03.2020
-//==============================================================================
-template <typename RandomIt, typename Compare = std::less<>>
+/**
+    @brief    Heap sort
+    @details  Unstable
+    @property O(Nlog(N))
+    @tparam   RandomIt - random access iterator
+    @tparam   Compare  - function object type satisfying binary predicate requirements
+    @param    begin    - begin iterator
+    @param    end      - end iterator
+    @param    compare  - comparison function
+**/
+template<typename RandomIt, typename Compare = std::less<>>
 inline void sort_heap(RandomIt begin, RandomIt end, Compare compare = Compare())
 {
     if (!sort_required(begin, end))
@@ -245,26 +272,37 @@ inline void sort_heap(RandomIt begin, RandomIt end, Compare compare = Compare())
         --nLastPosition;
     }
 }
-template <typename Container, typename Compare = std::less<>>
+
+/**
+    @brief    Heap sort
+    @details  Unstable
+    @property O(Nlog(N))
+    @tparam   Container - container type
+    @tparam   Compare   - function object type satisfying binary predicate requirements
+    @param    cont      - container ref
+    @param    compare   - comparison function
+**/
+template<typename Container, typename Compare = std::less<>>
 inline void sort_heap(Container& cont, Compare compare = Compare())
 {
     qx::sort_heap(cont.begin(), cont.end(), compare);
 }
 
-//==============================================================================
-//!\fn              qx::sort_quick_hoare<RandomIt, Compare>
-//
-//!\brief       quick sort based on Hoare partitioning
-//!\details     unstable
-//!\property    O(nlog(N))
-//!\param       begin   - begin iterator
-//!\param       end     - end iterator
-//!\param       compare - comparison function
-//!\author      Khrapov
-//!\date        4.03.2020
-//==============================================================================
-template <typename RandomIt, typename Compare = std::less<>>
-inline void sort_quick_hoare(RandomIt begin, RandomIt end, Compare compare = Compare())
+/**
+    @brief    Quick sort based on Hoare partitioning
+    @details  Unstable
+    @property O(Nlog(N))
+    @tparam   RandomIt - random access iterator
+    @tparam   Compare  - function object type satisfying binary predicate requirements
+    @param    begin    - begin iterator
+    @param    end      - end iterator
+    @param    compare  - comparison function
+**/
+template<typename RandomIt, typename Compare = std::less<>>
+inline void sort_quick_hoare(
+    RandomIt begin,
+    RandomIt end,
+    Compare  compare = Compare())
 {
     if (!sort_required(begin, end))
         return;
@@ -292,32 +330,43 @@ inline void sort_quick_hoare(RandomIt begin, RandomIt end, Compare compare = Com
         sort_quick_hoare(begin + nLeft, end, compare);
     }
 }
-template <typename Container, typename Compare = std::less<>>
+
+/**
+    @brief    Quick sort based on Hoare partitioning
+    @details  Unstable
+    @property O(Nlog(N))
+    @tparam   Container - container type
+    @tparam   Compare   - function object type satisfying binary predicate requirements
+    @param    cont      - container ref
+    @param    compare   - comparison function
+**/
+template<typename Container, typename Compare = std::less<>>
 inline void sort_quick_hoare(Container& cont, Compare compare = Compare())
 {
     sort_quick_hoare(cont.begin(), cont.end(), compare);
 }
 
-//==============================================================================
-//!\fn            qx::sort_quick_three_way<RandomIt, Compare>
-//
-//!\brief       quick sort based on three-way partitioning
-//!\details     unstable
-//!\property    O(nlog(N))
-//!\param       begin   - begin iterator
-//!\param       end     - end iterator
-//!\param       compare - comparison function
-//!\author      Khrapov
-//!\date        4.03.2020
-//==============================================================================
-template <typename RandomIt, typename Compare = std::less<>>
-inline void sort_quick_three_way(RandomIt begin, RandomIt end, Compare compare = Compare())
+/**
+    @brief    Quick sort based on three-way partitioning
+    @details  Unstable
+    @property O(Nlog(N))
+    @tparam   RandomIt - random access iterator
+    @tparam   Compare  - function object type satisfying binary predicate requirements
+    @param    begin    - begin iterator
+    @param    end      - end iterator
+    @param    compare  - comparison function
+**/
+template<typename RandomIt, typename Compare = std::less<>>
+inline void sort_quick_three_way(
+    RandomIt begin,
+    RandomIt end,
+    Compare  compare = Compare())
 {
     if (!sort_required(begin, end))
         return;
 
     const i64 nRight = (end - begin) - 1;
-    i64 nLeft  = 0;
+    i64       nLeft  = 0;
 
     if (nRight > 0)
     {
@@ -326,7 +375,7 @@ inline void sort_quick_three_way(RandomIt begin, RandomIt end, Compare compare =
         i64 i = nLeft;
         i64 j = nRight;
 
-        i64 nIndex1 = nLeft  - 1;
+        i64 nIndex1 = nLeft - 1;
         i64 nIndex2 = nRight + 1;
 
         while (i <= j)
@@ -387,26 +436,37 @@ inline void sort_quick_three_way(RandomIt begin, RandomIt end, Compare compare =
         sort_quick_three_way(begin + i, end, compare);
     }
 }
-template <typename Container, typename Compare = std::less<>>
+
+/**
+    @brief    Quick sort based on three-way partitioning
+    @details  Unstable
+    @property O(Nlog(N))
+    @tparam   Container - container type
+    @tparam   Compare   - function object type satisfying binary predicate requirements
+    @param    cont      - container ref
+    @param    compare   - comparison function
+**/
+template<typename Container, typename Compare = std::less<>>
 inline void sort_quick_three_way(Container& cont, Compare compare = Compare())
 {
     sort_quick_three_way(cont.begin(), cont.end(), compare);
 }
 
-//==============================================================================
-//!\fn            qx::sort_quick_dual_pivot<RandomIt, Compare>
-//
-//!\brief       quick sort based on dual-pivot partitioning
-//!\details     unstable
-//!\property    O(nlog(N))
-//!\param       begin   - begin iterator
-//!\param       end     - end iterator
-//!\param       compare - comparison function
-//!\author      Khrapov
-//!\date        4.03.2020
-//==============================================================================
-template <typename RandomIt, typename Compare = std::less<>>
-inline void sort_quick_dual_pivot(RandomIt begin, RandomIt end, Compare compare = Compare())
+/**
+    @brief    Quick sort based on dual-pivot partitioning
+    @details  Unstable
+    @property O(Nlog(N))
+    @tparam   RandomIt - random access iterator
+    @tparam   Compare  - function object type satisfying binary predicate requirements
+    @param    begin    - begin iterator
+    @param    end      - end iterator
+    @param    compare  - comparison function
+**/
+template<typename RandomIt, typename Compare = std::less<>>
+inline void sort_quick_dual_pivot(
+    RandomIt begin,
+    RandomIt end,
+    Compare  compare = Compare())
 {
     if (!sort_required(begin, end))
         return;
@@ -416,8 +476,8 @@ inline void sort_quick_dual_pivot(RandomIt begin, RandomIt end, Compare compare 
 
     if (nRight > nLeft)
     {
-        std::iter_swap(begin + nLeft + (nRight - nLeft) / 3,  begin+ nLeft);
-        std::iter_swap(begin + nRight - (nRight - nLeft) / 3, begin+ nRight);
+        std::iter_swap(begin + nLeft + (nRight - nLeft) / 3, begin + nLeft);
+        std::iter_swap(begin + nRight - (nRight - nLeft) / 3, begin + nRight);
 
         if (compare(*(begin + nRight), *(begin + nLeft)))
             std::iter_swap(begin + nLeft, begin + nRight);
@@ -459,7 +519,7 @@ inline void sort_quick_dual_pivot(RandomIt begin, RandomIt end, Compare compare 
                 k++;
             }
 
-            std::iter_swap(begin + nLess - 1,    begin + nLeft);
+            std::iter_swap(begin + nLess - 1, begin + nLeft);
             std::iter_swap(begin + nGreater + 1, begin + nRight);
 
             sort_quick_dual_pivot(begin, begin + nLess - 1, compare);
@@ -489,7 +549,7 @@ inline void sort_quick_dual_pivot(RandomIt begin, RandomIt end, Compare compare 
                 {
                     std::iter_swap(begin + k, begin + nGreater--);
                     while (compare(pivot1, *(begin + nGreater)))
-                        nGreater--;
+                        --nGreater;
 
                     if (compare(*(begin + k), pivot1))
                         std::iter_swap(begin + k, begin + nLess++);
@@ -498,7 +558,7 @@ inline void sort_quick_dual_pivot(RandomIt begin, RandomIt end, Compare compare 
                 k++;
             }
 
-            std::iter_swap(begin + nLess - 1,    begin + nLeft);
+            std::iter_swap(begin + nLess - 1, begin + nLeft);
             std::iter_swap(begin + nGreater + 1, begin + nRight);
 
             sort_quick_dual_pivot(begin, begin + nLess - 1, compare);
@@ -506,37 +566,44 @@ inline void sort_quick_dual_pivot(RandomIt begin, RandomIt end, Compare compare 
         }
     }
 }
-template <typename Container, typename Compare = std::less<>>
+
+/**
+    @brief    Quick sort based on dual-pivot partitioning
+    @details  Unstable
+    @property O(Nlog(N))
+    @tparam   Container - container type
+    @tparam   Compare   - function object type satisfying binary predicate requirements
+    @param    cont      - container ref
+    @param    compare   - comparison function
+**/
+template<typename Container, typename Compare = std::less<>>
 inline void sort_quick_dual_pivot(Container& cont, Compare compare = Compare())
 {
     sort_quick_dual_pivot(cont.begin(), cont.end(), compare);
 }
 
-//==============================================================================
-//!\fn                    qx::merge<RandomIt, Compare>
-//
-//!\brief       merge with temp vector
-//!\property    O(N), O(N) memory
-//!\author      Khrapov
-//!\param       begin               - begin iterator
-//!\param       end                 - end iterator
-//!\param       compare             - comparison function
-//!\param       preallocatedBuffer  - preallocated buffer. default value will allocate a new one
-//!\author      Khrapov
-//!\date        4.03.2020
-//==============================================================================
-template <typename RandomIt, typename Compare = std::less<>>
-inline void merge
-    (RandomIt                       begin,
-     RandomIt                       end,
-     Compare                        compare             = Compare(),
-     vector_of_values<RandomIt>   * pPreallocatedBuffer = nullptr)
+/**
+    @brief    Merge with temp vector
+    @property O(N), O(N) memory
+    @tparam   RandomIt - random access iterator
+    @tparam   Compare  - function object type satisfying binary predicate requirements
+    @param    begin    - begin iterator
+    @param    end      - end iterator 
+    @param    compare  - comparison function 
+    @param    pPreallocatedBuffer - preallocated buffer. default value will allocate a new one 
+**/
+template<typename RandomIt, typename Compare = std::less<>>
+inline void merge(
+    RandomIt                    begin,
+    RandomIt                    end,
+    Compare                     compare             = Compare(),
+    vector_of_values<RandomIt>* pPreallocatedBuffer = nullptr)
 {
     using iter_diff = decltype(RandomIt() - RandomIt());
 
-    u64 nInd1 = 0;
-    u64 nInd2 = 0;
-    RandomIt mid = begin + (end - begin) / 2;
+    u64      nInd1 = 0;
+    u64      nInd2 = 0;
+    RandomIt mid   = begin + (end - begin) / 2;
 
     const bool bCreateBuffer = !pPreallocatedBuffer;
     if (bCreateBuffer)
@@ -546,18 +613,22 @@ inline void merge
 
     // merge
     while ((begin + static_cast<iter_diff>(nInd1) < mid)
-        && (mid + static_cast<iter_diff>(nInd2) < end))
+           && (mid + static_cast<iter_diff>(nInd2) < end))
     {
         if (compare(
-            *(begin + static_cast<iter_diff>(nInd1)),
-            *(mid + static_cast<iter_diff>(nInd2))))
+                *(begin + static_cast<iter_diff>(nInd1)),
+                *(mid + static_cast<iter_diff>(nInd2))))
         {
-            (*pPreallocatedBuffer)[nInd1 + nInd2] = *(begin + static_cast<iter_diff>(nInd1));
+            (*pPreallocatedBuffer)[nInd1 + nInd2] =
+                *(begin + static_cast<iter_diff>(nInd1));
+
             nInd1++;
         }
         else
         {
-            (*pPreallocatedBuffer)[nInd1 + nInd2] = *(mid + static_cast<iter_diff>(nInd2));
+            (*pPreallocatedBuffer)[nInd1 + nInd2] =
+                *(mid + static_cast<iter_diff>(nInd2));
+
             nInd2++;
         }
     }
@@ -565,13 +636,17 @@ inline void merge
     // append tails
     while (begin + static_cast<iter_diff>(nInd1) < mid)
     {
-        (*pPreallocatedBuffer)[nInd1 + nInd2] = *(begin + static_cast<iter_diff>(nInd1));
+        (*pPreallocatedBuffer)[nInd1 + nInd2] =
+            *(begin + static_cast<iter_diff>(nInd1));
+
         nInd1++;
     }
 
     while (mid + static_cast<iter_diff>(nInd2) < end)
     {
-        (*pPreallocatedBuffer)[nInd1 + nInd2] = *(mid + static_cast<iter_diff>(nInd2));
+        (*pPreallocatedBuffer)[nInd1 + nInd2] =
+            *(mid + static_cast<iter_diff>(nInd2));
+
         nInd2++;
     }
 
@@ -583,25 +658,23 @@ inline void merge
         delete pPreallocatedBuffer;
 }
 
-//==============================================================================
-//!\fn                 qx::sort_merge<RandomIt, Compare>
-//
-//!\brief       merge sort based on merge with temp vector
-//!\details     stable
-//!\property    O(nlog(N)), O(N) memory
-//!\param       begin               - begin iterator
-//!\param       end                 - end iterator
-//!\param       compare             - comparison function
-//!\param       pPreallocatedBuffer - preallocated buffer. default value will allocate a new one
-//!\author      Khrapov
-//!\date        4.03.2020
-//==============================================================================
-template <typename RandomIt, typename Compare = std::less<>>
-inline void sort_merge
-    (RandomIt                       begin,
-     RandomIt                       end,
-     Compare                        compare             = Compare(),
-     vector_of_values<RandomIt>   * pPreallocatedBuffer = nullptr)
+/**
+    @brief    Merge sort based on merge with temp vector
+    @details  Stable
+    @property O(Nlog(N)), O(N) memory
+    @tparam   RandomIt            - random access iterator
+    @tparam   Compare             - function object type satisfying binary predicate requirements
+    @param    begin               - begin iterator
+    @param    end                 - end iterator
+    @param    pPreallocatedBuffer - preallocated buffer. default value will allocate a new one
+    @param    compare             - comparison function
+**/
+template<typename RandomIt, typename Compare = std::less<>>
+inline void sort_merge(
+    RandomIt                    begin,
+    RandomIt                    end,
+    Compare                     compare             = Compare(),
+    vector_of_values<RandomIt>* pPreallocatedBuffer = nullptr)
 {
     if (!sort_required(begin, end))
         return;
@@ -622,45 +695,55 @@ inline void sort_merge
     if (bCreateBuffer)
         delete pPreallocatedBuffer;
 }
-template <typename Container, typename Compare = std::less<>>
-inline void sort_merge
-    (Container&                                      cont,
-     Compare                                         compare             = Compare(),
-     vector_of_values<typename Container::iterator>* pPreallocatedBuffer = nullptr)
+
+/**
+    @brief    Merge sort based on merge with temp vector
+    @details  Stable
+    @property O(Nlog(N)), O(N) memory
+    @tparam   Container - container type
+    @tparam   Compare   - function object type satisfying binary predicate requirements
+    @param    cont      - container ref
+    @param    compare   - comparison function
+    @param    pPreallocatedBuffer - preallocated buffer. default value will allocate a new one
+**/
+template<typename Container, typename Compare = std::less<>>
+inline void sort_merge(
+    Container&                                      cont,
+    Compare                                         compare = Compare(),
+    vector_of_values<typename Container::iterator>* pPreallocatedBuffer =
+        nullptr)
 {
     sort_merge(cont.begin(), cont.end(), compare, pPreallocatedBuffer);
 }
 
-//==============================================================================
-//!\fn                qx::sort_counting<RandomIt, Compare>
-//
-//!\brief       counting sort for integral values
-//!\details     effective if M is relatively small compared to N (elements are in short range)
-//!\property    O(M + 2 * N), O(M) memory, where M = max - min + 1
-//!\param       begin           - begin iterator
-//!\param       end             - end iterator
-//!\param       compare         - comparison function
-//!\param       nMaxBufferSize  - max buffer size. if required size is bigger than this value, sorting will fail
-//!\retval      true if sorted, false if required buffer size is greather then max
-//!\author      Khrapov
-//!\date        4.03.2020
-//==============================================================================
-template <typename RandomIt, typename Compare = std::less<>>
-[[nodiscard]] inline bool sort_counting
-    (RandomIt       begin,
-     RandomIt       end,
-     Compare        compare         = Compare(),
-     size_t         nMaxBufferSize  = SORT_COUNTING_MAX_BUFFER_SIZE)
+/**
+    @brief    Counting sort for integral values
+    @property O(M + 2 * N), O(M) memory, where M = max - min + 1
+    @tparam   RandomIt       - random access iterator
+    @tparam   Compare        - function object type satisfying binary predicate requirements
+    @param    begin          - begin iterator
+    @param    end            - end iterator
+    @param    compare        - comparison function
+    @param    nMaxBufferSize - max buffer size. if required size is bigger than this value, sorting will fail
+    @retval                  - true if sorted, false if required buffer size is greather then max
+**/
+template<typename RandomIt, typename Compare = std::less<>>
+[[nodiscard]] inline bool sort_counting(
+    RandomIt begin,
+    RandomIt end,
+    Compare  compare        = Compare(),
+    size_t   nMaxBufferSize = SORT_COUNTING_MAX_BUFFER_SIZE)
 {
-    static_assert(std::is_integral_v<iterator_value_t<RandomIt>>,
-                  "Integral type required for counting sort");
+    static_assert(
+        std::is_integral_v<iterator_value_t<RandomIt>>,
+        "Integral type required for counting sort");
 
     if (end - begin < 2)
         return true;
 
     auto minMax = std::minmax_element(begin, end);
-    auto min = *minMax.first;
-    auto max = *minMax.second;
+    auto min    = *minMax.first;
+    auto max    = *minMax.second;
 
     const size_t nSizeRequired = static_cast<size_t>(max) - min + 1;
     if (nSizeRequired <= nMaxBufferSize)
@@ -680,7 +763,8 @@ template <typename RandomIt, typename Compare = std::less<>>
         {
             // nGreater
             for (size_t i = 0; i < nSizeRequired; ++i)
-                begin = std::fill_n(begin, counts[nSizeRequired - i - 1], max--);
+                begin =
+                    std::fill_n(begin, counts[nSizeRequired - i - 1], max--);
         }
 
         return true;
@@ -688,25 +772,34 @@ template <typename RandomIt, typename Compare = std::less<>>
     else
         return false;
 }
-template <typename Container, typename Compare = std::less<>>
-[[nodiscard]] inline bool sort_counting
-    (Container& cont,
-     Compare    compare         = Compare(),
-     size_t     nMaxBufferSize  = SORT_COUNTING_MAX_BUFFER_SIZE)
+
+/**
+    @brief    Counting sort for integral values
+    @property O(M + 2 * N), O(M) memory, where M = max - min + 1
+    @tparam   Container - container type
+    @tparam   Compare   - function object type satisfying binary predicate requirements
+    @param    cont      - container ref
+    @param    compare   - comparison function
+    @param    nMaxBufferSize - max buffer size. if required size is bigger than this value, sorting will fail
+    @retval             - true if sorted, false if required buffer size is greather then max
+**/
+template<typename Container, typename Compare = std::less<>>
+[[nodiscard]] inline bool sort_counting(
+    Container& cont,
+    Compare    compare        = Compare(),
+    size_t     nMaxBufferSize = SORT_COUNTING_MAX_BUFFER_SIZE)
 {
     return sort_counting(cont.begin(), cont.end(), compare, nMaxBufferSize);
 }
 
-//==============================================================================
-//!\fn                    qx::sort<RandomIt, Compare>
-//
-//!\brief  Sort by the most suitable algorithm
-//!\param  begin   - begin iterator
-//!\param  end     - end iterator
-//!\param  compare - comparison function
-//!\author Khrapov
-//!\date   4.03.2020
-//==============================================================================
+/** 
+    @brief  Sort by the most suitable algorithm
+    @tparam RandomIt - random access iterator
+    @tparam Compare  - function object type satisfying binary predicate requirements
+    @param  begin    - begin iterator
+    @param  end      - end iterator
+    @param  compare  - comparison function
+**/
 template<typename RandomIt, typename Compare = std::less<>>
 inline void sort(RandomIt begin, RandomIt end, Compare compare = Compare())
 {
@@ -725,10 +818,18 @@ inline void sort(RandomIt begin, RandomIt end, Compare compare = Compare())
     if (!bSorted)
         sort_quick_dual_pivot(begin, end, compare);
 }
-template <typename Container, typename Compare = std::less<>>
+
+/**
+    @brief  Sort by the most suitable algorithm
+    @tparam Container - container type
+    @tparam Compare   - function object type satisfying binary predicate requirements
+    @param  cont      - container ref
+    @param  compare   - comparison function
+**/
+template<typename Container, typename Compare = std::less<>>
 inline void sort(Container& cont, Compare compare = Compare())
 {
     qx::sort(cont.begin(), cont.end(), compare);
 }
 
-}
+} // namespace qx
