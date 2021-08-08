@@ -1,15 +1,12 @@
-//==============================================================================
-//
-//!\file                         functional.h
-//
-//!\brief       Algorithms for math functions
-//!\details     ~
-//
-//!\author      Khrapov
-//!\date        2.02.2020
-//!\copyright   (c) Nick Khrapov, 2020. All right reserved.
-//
-//==============================================================================
+/**
+
+    @file      functional.h
+    @brief     Algorithms for math functions
+    @author    Khrapov
+    @date      2.02.2020
+    @copyright © Nick Khrapov, 2021. All right reserved.
+
+**/
 #pragma once
 
 #include <qx/assert.h>
@@ -28,40 +25,35 @@ namespace qx
 
 using function2d = std::function<double(double)>;
 
-//==============================================================================
-//!\fn                     qx::linear_interpolation
-//
-//!\brief  Linear interpolation algorithm
-//!\param  p0 - point 0 (x - coord, y - f(x))
-//!\param  p1 - point 1 (x - coord, y - f(x))
-//!\param  x  - point
-//!\retval    - ~f(x)
-//!\author Khrapov
-//!\date   10.11.2019
-//==============================================================================
+/**
+    @brief  Linear interpolation algorithm
+    @param  p0 - point 0 (x - coord, y - f(x))
+    @param  p1 - point 1 (x - coord, y - f(x))
+    @param  x  - point
+    @retval    - ~f(x)
+**/
 inline double linear_interpolation(
-    const glm::dvec2  & p0,
-    const glm::dvec2  & p1,
-    double              x)
+    const glm::dvec2& p0,
+    const glm::dvec2& p1,
+    double            x)
 {
-    QX_ASSERT_MSG(glm::epsilonNotEqual(p1.x, p0.x, DBL_EPSILON), "two x are equal, result is nan");
+    QX_ASSERT_MSG(
+        glm::epsilonNotEqual(p1.x, p0.x, DBL_EPSILON),
+        "two x are equal, result is nan");
+
     return p0.y + (p1.y - p0.y) * (x - p0.x) / (p1.x - p0.x);
 }
 
-//==============================================================================
-//!\fn                    qx::bilinear_interpolation
-//
-//!\brief  Bilinear interpolation algorithm. Points are clockwise or counterclock-wise
-//!\param  p0 - point 0 (x, y - coords, z - f(x, y))
-//!\param  p1 - point 1 (x, y - coords, z - f(x, y))
-//!\param  p2 - point 2 (x, y - coords, z - f(x, y))
-//!\param  p3 - point 3 (x, y - coords, z - f(x, y))
-//!\param  p  - point (x, y - coords).
-//              It can be out of points square, in this case algorithm called extrapolation
-//!\retval    - ~f(p.x, p.y)
-//!\author Khrapov
-//!\date   10.11.2019
-//==============================================================================
+/**
+    @brief  Bilinear interpolation algorithm. Points are clockwise or counterclock-wise
+    @param  p0 - point 0 (x, y - coords, z - f(x, y)) 
+    @param  p1 - point 1 (x, y - coords, z - f(x, y)) 
+    @param  p2 - point 2 (x, y - coords, z - f(x, y)) 
+    @param  p3 - point 3 (x, y - coords, z - f(x, y)) 
+    @param  p  - point (x, y - coords).
+                 It can be out of points square, in this case algorithm called extrapolation
+    @retval    - ~f(p.x, p.y) 
+**/
 inline double bilinear_interpolation(
     const glm::dvec3& p0,
     const glm::dvec3& p1,
@@ -69,50 +61,55 @@ inline double bilinear_interpolation(
     const glm::dvec3& p3,
     const glm::dvec2& p)
 {
-    QX_ASSERT_MSG(glm::epsilonEqual(p0.y, p1.y, DBL_EPSILON), "points must be as square");
-    QX_ASSERT_MSG(glm::epsilonEqual(p2.y, p3.y, DBL_EPSILON), "points must be as square");
-    QX_ASSERT_MSG(glm::epsilonEqual(p0.x, p3.x, DBL_EPSILON), "points must be as square");
-    QX_ASSERT_MSG(glm::epsilonEqual(p1.x, p2.x, DBL_EPSILON), "points must be as square");
+    QX_ASSERT_MSG(
+        glm::epsilonEqual(p0.y, p1.y, DBL_EPSILON),
+        "points must be as square");
 
-    const glm::dvec2 temp0
-    {
+    QX_ASSERT_MSG(
+        glm::epsilonEqual(p2.y, p3.y, DBL_EPSILON),
+        "points must be as square");
+
+    QX_ASSERT_MSG(
+        glm::epsilonEqual(p0.x, p3.x, DBL_EPSILON),
+        "points must be as square");
+
+    QX_ASSERT_MSG(
+        glm::epsilonEqual(p1.x, p2.x, DBL_EPSILON),
+        "points must be as square");
+
+    const glm::dvec2 temp0 {
         p0.y,
         linear_interpolation({ p0.x, p0.z }, { p1.x, p1.z }, p.x)
     };
 
-    const glm::dvec2 temp1
-    {
+    const glm::dvec2 temp1 {
         p2.y,
-        linear_interpolation({ p2.x, p2.z }, { p3.x, p3.z }, p.x) }
-    ;
+        linear_interpolation({ p2.x, p2.z }, { p3.x, p3.z }, p.x)
+    };
 
     return linear_interpolation(temp0, temp1, p.y);
 }
 
-//==============================================================================
-//!\fn                   qx::integrate_rectangle_rule
-//
-//!\brief  Integrate using rectangle rule
-//!\param  func           - target function
-//!\param  x0             - left border
-//!\param  x1             - right border
-//!\param  nIntervalsPer1 - number of intervals per dx = 1
-//!\retval                - approximate integral
-//!\author Khrapov
-//!\date   2.02.2020
-//==============================================================================
+/**
+    @brief  Integrate using rectangle rule
+    @param  func           - target function
+    @param  x0             - left border
+    @param  x1             - right border
+    @param  nIntervalsPer1 - number of intervals per dx = 1
+    @retval                - approximate integral
+**/
 inline double integrate_rectangle_rule(
-    const function2d  & func,
-    double              x0,
-    double              x1,
-    size_t              nIntervalsPer1 = 10)
+    const function2d& func,
+    double            x0,
+    double            x1,
+    size_t            nIntervalsPer1 = 10)
 {
-    const size_t nIntervals = static_cast<size_t>(std::ceil((x1 - x0)
-        * static_cast<double>(nIntervalsPer1)));
+    const size_t nIntervals = static_cast<size_t>(
+        std::ceil((x1 - x0) * static_cast<double>(nIntervalsPer1)));
 
-    const double dx = (x1 - x0) / static_cast<double>(nIntervals);
-    double fTotalArea = 0.0;
-    double x = x0;
+    const double dx         = (x1 - x0) / static_cast<double>(nIntervals);
+    double       fTotalArea = 0.0;
+    double       x          = x0;
 
     for (size_t i = 0; i < nIntervals; i++)
     {
@@ -123,30 +120,26 @@ inline double integrate_rectangle_rule(
     return fTotalArea;
 }
 
-//==============================================================================
-//!\fn                   qx::integrate_trapezoid_rule
-//
-//!\brief  Integrate using trapezoid rule
-//!\param  func           - target function
-//!\param  x0             - left border
-//!\param  x1             - right border
-//!\param  nIntervalsPer1 - number of intervals per dx = 1
-//!\retval                - approximate integral
-//!\author Khrapov
-//!\date   2.02.2020
-//==============================================================================
+/**
+    @brief  Integrate using trapezoid rule
+    @param  func           - target function 
+    @param  x0             - left border 
+    @param  x1             - right border 
+    @param  nIntervalsPer1 - number of intervals per dx = 1 
+    @retval                - approximate integral 
+**/
 inline double integrate_trapezoid_rule(
-    const function2d  & func,
-    double              x0,
-    double              x1,
-    size_t              nIntervalsPer1 = 10)
+    const function2d& func,
+    double            x0,
+    double            x1,
+    size_t            nIntervalsPer1 = 10)
 {
     const size_t nIntervals = static_cast<size_t>(
         std::ceil(static_cast<double>(nIntervalsPer1) * (x1 - x0)));
 
-    const double dx = (x1 - x0) / static_cast<double>(nIntervals);
-    double fTotalArea = 0.0;
-    double x = x0;
+    const double dx         = (x1 - x0) / static_cast<double>(nIntervals);
+    double       fTotalArea = 0.0;
+    double       x          = x0;
 
     for (size_t i = 0; i < nIntervals; i++)
     {
@@ -157,42 +150,38 @@ inline double integrate_trapezoid_rule(
     return fTotalArea;
 }
 
-//==============================================================================
-//!\fn                 qx::integrate_adaptive_midpoint
-//
-//!\brief  Integrate using adaptive midpoint
-//!\param  func           - target function
-//!\param  x0             - left border
-//!\param  x1             - right border
-//!\param  fMaxSliceError - max error per one slice
-//!\param  nIntervalsPer1 - number of intervals per dx = 1
-//!\param  nMaxRecursion  - max recursion depth
-//!\retval                - approximate integral
-//!\author Khrapov
-//!\date   2.02.2020
-//==============================================================================
+/**
+    @brief  Integrate using adaptive midpoint
+    @param  func           - target function 
+    @param  x0             - left border 
+    @param  x1             - right border 
+    @param  fMaxSliceError - max error per one slice 
+    @param  nIntervalsPer1 - number of intervals per dx = 1 
+    @param  nMaxRecursion  - max recursion depth 
+    @retval                - approximate integral 
+**/
 inline double integrate_adaptive_midpoint(
-    const function2d  & func,
-    double              x0,
-    double              x1,
-    double              fMaxSliceError,
-    size_t              nIntervalsPer1 = 10,
-    size_t              nMaxRecursion = 300)
+    const function2d& func,
+    double            x0,
+    double            x1,
+    double            fMaxSliceError,
+    size_t            nIntervalsPer1 = 10,
+    size_t            nMaxRecursion  = 300)
 {
     const size_t nIntervals = static_cast<size_t>(
         std::ceil(static_cast<double>(nIntervalsPer1) * (x1 - x0)));
 
-    const double dx = (x1 - x0) / static_cast<double>(nIntervals);
-    double fTotalArea = 0.0;
-    double x = x0;
+    const double dx         = (x1 - x0) / static_cast<double>(nIntervals);
+    double       fTotalArea = 0.0;
+    double       x          = x0;
 
-    std::function<double(const function2d&, double, double, double, size_t)> slice_area
-        = [&slice_area, &nMaxRecursion]
-        (const function2d& func,
-         double x0,
-         double x1,
-         double max_slice_error,
-         size_t recursionLevel) -> double
+    std::function<double(const function2d&, double, double, double, size_t)>
+        slice_area = [&slice_area, &nMaxRecursion](
+                         const function2d& func,
+                         double            x0,
+                         double            x1,
+                         double            max_slice_error,
+                         size_t            recursionLevel) -> double
     {
         recursionLevel++;
         const double y0 = func(x0);
@@ -200,61 +189,63 @@ inline double integrate_adaptive_midpoint(
         const double xm = (x0 + x1) / 2;
         const double ym = func(xm);
 
-        const double fArea12 = (x1 - x0) * (y0 + y1) / 2.0;
-        const double fArea1m = (xm - x0) * (y0 + ym) / 2.0;
-        const double fAream2 = (x1 - xm) * (ym + y1) / 2.0;
+        const double fArea12  = (x1 - x0) * (y0 + y1) / 2.0;
+        const double fArea1m  = (xm - x0) * (y0 + ym) / 2.0;
+        const double fAream2  = (x1 - xm) * (ym + y1) / 2.0;
         const double fArea1m2 = fArea1m + fAream2;
 
         const double fError = (fArea1m2 - fArea12) / fArea12;
 
-        if (recursionLevel > nMaxRecursion || std::abs(fError) < max_slice_error)
+        if (recursionLevel > nMaxRecursion
+            || std::abs(fError) < max_slice_error)
         {
             return fArea1m2;
         }
         else
         {
             return slice_area(func, x0, xm, max_slice_error, recursionLevel)
-                + slice_area(func, xm, x1, max_slice_error, recursionLevel);
+                   + slice_area(func, xm, x1, max_slice_error, recursionLevel);
         }
     };
 
     for (size_t i = 0; i < nIntervals; i++)
     {
         const size_t nRecursionLevel = 0;
-        fTotalArea += slice_area(func, x, x + dx, fMaxSliceError, nRecursionLevel);
+        fTotalArea +=
+            slice_area(func, x, x + dx, fMaxSliceError, nRecursionLevel);
+
         x += dx;
     }
 
     return fTotalArea;
 }
 
-//==============================================================================
-//!\fn                    qx::integrate_monte_carlo
-//
-//!\brief  Integrate using probabilistic algorithm Monte Carlo
-//!\param  funcIsInside        - func that returns
-//                               1 if point is inside shape with positive value
-//                               0 if point is not inside shape
-//                               -1 if point is inside shape with negative value
-//!\param  pos0                - left down corner coords
-//!\param  pos1                - right up corner coords
-//!\param  nPointsPerOneSquare - points per 1 square (more is better)
-//!\retval                     - approximate integral
-//!\author Khrapov
-//!\date   2.02.2020
-//==============================================================================
+/**
+    @brief  Integrate using probabilistic algorithm Monte Carlo
+    @param  funcIsInside        - func that returns
+                                  1 if point is inside shape with positive value
+                                  0 if point is not inside shape
+                                  -1 if point is inside shape with negative value
+    @param  pos0                - left down corner coords
+    @param  pos1                - right up corner coords
+    @param  nPointsPerOneSquare - points per 1 square (more is better)
+    @retval                     - approximate integral
+**/
 inline double integrate_monte_carlo(
-    const std::function<int(double, double)>  & funcIsInside,
-    glm::dvec2                                  pos0,
-    glm::dvec2                                  pos1,
-    size_t                                      nPointsPerOneSquare = 1000)
+    const std::function<int(double, double)>& funcIsInside,
+    glm::dvec2                                pos0,
+    glm::dvec2                                pos1,
+    size_t                                    nPointsPerOneSquare = 1000)
 {
     const double fArea = std::abs(pos1.x - pos0.x) * std::abs(pos1.y - pos0.y);
-    const int nTotalPoints = static_cast<int>(
+    const int    nTotalPoints = static_cast<int>(
         std::ceil(fArea * static_cast<double>(nPointsPerOneSquare)));
+
     int points_inside = 0;
 
-    std::default_random_engine generator(static_cast<unsigned int>(std::time(0)));
+    std::default_random_engine generator(
+        static_cast<unsigned int>(std::time(nullptr)));
+
     std::uniform_real_distribution<double> x_dist(pos0.x, pos1.x);
     std::uniform_real_distribution<double> y_dist(pos0.y, pos1.y);
 
@@ -270,25 +261,21 @@ inline double integrate_monte_carlo(
     return (static_cast<double>(points_inside) / nTotalPoints) * fArea;
 }
 
-//==============================================================================
-//!\fn                   qx::find_zero_newtons_method
-//
-//!\brief  Find root of the equation using Newtons method
-//!\param  f              - function
-//!\param  dfdx           - derivative
-//!\param  fInitialGuess  - initial root guess
-//!\param  fMaxError      - max error to stop searching
-//!\param  nMaxIterations - max iterations number (sometimes alg breaks)
-//!\retval                - approximate root
-//!\author Khrapov
-//!\date   4.02.2020
-//==============================================================================
+/**
+    @brief  Find root of the equation using Newtons method
+    @param  f              - function
+    @param  dfdx           - derivative
+    @param  fInitialGuess  - initial root guess
+    @param  fMaxError      - max error to stop searching
+    @param  nMaxIterations - max iterations number (sometimes alg breaks)
+    @retval                - approximate root
+**/
 inline double find_zero_newtons_method(
-    const function2d  & f,
-    const function2d  & dfdx,
-    double              fInitialGuess,
-    double              fMaxError       = 0.0001,
-    size_t              nMaxIterations  = 10000)
+    const function2d& f,
+    const function2d& dfdx,
+    double            fInitialGuess,
+    double            fMaxError      = 0.0001,
+    size_t            nMaxIterations = 10000)
 {
     double x = fInitialGuess;
 
@@ -305,4 +292,4 @@ inline double find_zero_newtons_method(
     return x;
 }
 
-}
+} // namespace qx
