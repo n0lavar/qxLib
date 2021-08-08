@@ -1,246 +1,236 @@
-//==============================================================================
-//
-//!\file                         numerical.h
-//
-//!\brief       Numerical algorithms
-//!\details     ~
-//
-//!\author      Khrapov
-//!\date        1.02.2020
-//!\copyright   (c) Nick Khrapov, 2020. All right reserved.
-//
-//==============================================================================
+/**
+
+    @file      numerical.h
+    @brief     Numerical algorithms
+    @author    Khrapov
+    @date      1.02.2020
+    @copyright © Nick Khrapov, 2021. All right reserved.
+
+**/
 #pragma once
 
-#include <bitset>
-#include <limits>
 #include <array>
-#include <vector>
-#include <random>
-#include <ctime>
+#include <bitset>
 #include <cmath>
+#include <ctime>
+#include <limits>
+#include <random>
+#include <vector>
 
 namespace qx
 {
 
-//==============================================================================
-//!\fn                            qx::gcd
-//
-//!\brief    Greatest common divisor
-//!\details  Euclid's algorithm
-//           based on fact gcd(A, B) == gcd(B, A mod B)
-//!\property O(log(second))
-//!\param    first  - first num
-//!\param    second - second num
-//!\retval          - greatest common divisor if first and second > 0, otherwise 0
-//!\author   Khrapov
-//!\date     1.02.2020
-//==============================================================================
-inline int gcd(int first, int second)
+/**
+    @brief    Greatest common divisor
+    @details  Euclid's algorithm
+              based on fact gcd(A, B) == gcd(B, A mod B)
+    @property O(log(second))
+    @param    nFirst  - first num
+    @param    nSecond - second num
+    @retval           - greatest common divisor if first and second > 0, otherwise 0
+**/
+inline int gcd(int nFirst, int nSecond)
 {
-    if (first == 0 || second == 0)
+    if (nFirst == 0 || nSecond == 0)
         return 0;
 
-    while (second != 0)
+    while (nSecond != 0)
     {
-        int remainder = first % second;
-        first = second;
-        second = remainder;
+        const int nRemainder = nFirst % nSecond;
+        nFirst               = nSecond;
+        nSecond              = nRemainder;
     }
 
-    return std::abs(first);
+    return std::abs(nFirst);
 }
 
-//==============================================================================
-//!\fn                            qx::lcm
-//
-//!\brief    Least common multiple
-//!\property O(log(second))
-//!\param    first  - first num
-//!\param    second - second num
-//!\retval          - least common multiple if first and second > 0, otherwise 0
-//!\author Khrapov
-//!\date   1.02.2020
-//==============================================================================
-inline int lcm(int first, int second)
+/**
+    @brief    Least common multiple
+    @property O(log(second))
+    @param    nFirst  - first num
+    @param    nSecond - second num
+    @retval           - least common multiple if first and second > 0, otherwise 0
+**/
+inline int lcm(int nFirst, int nSecond)
 {
-    if (first == 0 || second == 0)
+    if (nFirst == 0 || nSecond == 0)
         return 0;
 
-    first  = std::abs(first);
-    second = std::abs(second);
+    nFirst  = std::abs(nFirst);
+    nSecond = std::abs(nSecond);
 
-    return first / gcd(first, second) * second;
+    return nFirst / gcd(nFirst, nSecond) * nSecond;
 }
 
-//==============================================================================
-//!\fn                             qx::pow<T>
-//
-//!\brief    Power function for integer power
-//!\details  about 2.22 times (positive powers)
-//                 1.7  times (positive and negative powers)
-//                 2.33 times (negative powers)
-//                 faster then std::pow
-//!\property O(log(power))
-//!\param    number - integral of floating point value
-//!\param    power  - integral power
-//!\retval          - number ^ power
-//!\author   Khrapov
-//!\date     1.02.2020
-//==============================================================================
+/**
+    @brief    Power function for integer power
+    @details  About 2.22 times (positive powers)
+                    1.7  times (positive and negative powers)
+                    2.33 times (negative powers)
+                    faster then std::pow
+    @property O(log(power))
+    @tparam   T       - Integral or floating point type
+    @param    nNumber - integral of floating point value
+    @param    nPower  - integral power
+    @retval           - number ^ power
+**/
 template<typename T>
-inline double pow(T number, int power)
+inline double pow(T nNumber, int nPower)
 {
-    static_assert(std::is_integral_v<T> || std::is_floating_point_v<T>, "Integral or floating point required");
+    static_assert(
+        std::is_integral_v<T> || std::is_floating_point_v<T>,
+        "Integral or floating point required");
 
-    bool   bNegativePower = power < 0;
-    size_t nPositivePower = static_cast<size_t>(std::abs(power));
+    const bool   bNegativePower = nPower < 0;
+    const size_t nPositivePower = static_cast<size_t>(std::abs(nPower));
 
-    double result = 1.0;
+    double fResult = 1.0;
     switch (nPositivePower)
     {
-    case 0:                                                 break;
-    case 1: result = static_cast<double>(number);           break;
-    case 2: result = static_cast<double>(number * number);  break;
+    case 0: break;
+    case 1: fResult = static_cast<double>(nNumber); break;
+    case 2: fResult = static_cast<double>(nNumber * nNumber); break;
     default:
-        std::bitset<std::numeric_limits<int>::digits> powerBitset(nPositivePower);
+        const std::bitset<std::numeric_limits<int>::digits> powerBitSet(
+            nPositivePower);
+
         std::array<double, std::numeric_limits<int>::digits> powers;
 
-        powers[0] = static_cast<double>(number);
+        powers[0] = static_cast<double>(nNumber);
 
-        size_t curPower = 1;
-        size_t curIndex = 1;
+        size_t nCurPower = 1;
+        size_t nCurIndex = 1;
 
-        while (curPower < nPositivePower)
+        while (nCurPower < nPositivePower)
         {
-            powers[curIndex] = powers[curIndex - 1] * powers[curIndex - 1];
-            curPower *= 2;
-            curIndex++;
+            powers[nCurIndex] = powers[nCurIndex - 1] * powers[nCurIndex - 1];
+            nCurPower *= 2;
+            nCurIndex++;
         }
 
-        for (size_t i = 0; i < static_cast<size_t>(curIndex); i++)
-            if (powerBitset.test(i))
-                result *= powers[i];
+        for (size_t i = 0; i < static_cast<size_t>(nCurIndex); i++)
+            if (powerBitSet.test(i))
+                fResult *= powers[i];
 
         break;
     }
 
-    return bNegativePower ? 1.0 / result : result;
+    return bNegativePower ? 1.0 / fResult : fResult;
 }
 
-//==============================================================================
-//!\fn                          qx::maxpot<I>
-//
-//!\brief  Max power of two in integer
-//!\param  number - number
-//!\retval        - max power of two in number
-//!\author Khrapov
-//!\date   1.02.2020
-//==============================================================================
+/**
+    @brief  Max power of two in integer
+    @tparam I      - Integral type
+    @param  nValue - number
+    @retval        - max power of two in number
+**/
 template<typename I>
-inline I maxpot(I number)
+inline I maxpot(I nValue)
 {
     static_assert(std::is_integral_v<I>, "Integral required");
 
-    if (number == I(0))
+    if (nValue == I(0))
         return I(0);
 
-    std::bitset<std::numeric_limits<I>::digits> powers(static_cast<size_t>(std::abs(number)));
-    I pow = static_cast<I>(std::numeric_limits<I>::digits - 1);
-    while (!powers.test(static_cast<size_t>(pow)))
-        pow--;
+    std::bitset<std::numeric_limits<I>::digits> powers(
+        static_cast<size_t>(std::abs(nValue)));
 
-    return pow;
+    I nPow = static_cast<I>(std::numeric_limits<I>::digits - 1);
+    while (!powers.test(static_cast<size_t>(nPow)))
+        --nPow;
+
+    return nPow;
 }
 
-//==============================================================================
-//!\fn                   qx::find_prime_factors<I>
-//
-//!\brief    Find all prime factors
-//!\property O(sqrt(number))
-//!\param    number - number for search
-//!\retval          - all prime factors vector
-//!\author   Khrapov
-//!\date     1.02.2020
-//==============================================================================
+/**
+    @brief    Find all prime factors
+    @property O(sqrt(number))
+    @tparam   I      - Integral type
+    @param    nValue - number for search
+    @retval          - all prime factors vector
+**/
 template<typename I>
-inline std::vector<I> find_prime_factors(I number)
+inline std::vector<I> find_prime_factors(I nValue)
 {
     static_assert(std::is_integral_v<I>, "Integral required");
 
     std::vector<I> factors;
 
-    if (number < 0)
-        number = -number;
+    if (nValue < 0)
+        nValue = -nValue;
 
-    if (number > 1)
+    if (nValue > 1)
     {
-        while (number % 2 == 0)
+        while (nValue % 2 == 0)
         {
             factors.push_back(2);
-            number /= 2;
+            nValue /= 2;
         }
 
-        I i = 3u;
-        I max_factor = static_cast<I>(std::sqrt(number));
-        while (i <= max_factor)
+        I i          = 3u;
+        I nMaxFactor = static_cast<I>(std::sqrt(nValue));
+        while (i <= nMaxFactor)
         {
-            while (number % i == 0)
+            while (nValue % i == 0)
             {
                 factors.push_back(i);
-                number /= i;
-                max_factor = static_cast<I>(std::sqrt(number));
+                nValue /= i;
+                nMaxFactor = static_cast<I>(std::sqrt(nValue));
             }
 
             i += 2;
         }
 
-        if (number > 1)
-            factors.push_back(number);
+        if (nValue > 1)
+            factors.push_back(nValue);
     }
 
     return factors;
 }
 
-//==============================================================================
-//!\fn                       qx::find_primes<I>
-//
-//!\brief    Find all primes between 2 and max_number
-//!\details  Sieve of Eratosthenes
-//!\property O(max_number * log(log(number)))
-//!\param    max_number - max number for search
-//!\retval              - all primes vector
-//!\author   Khrapov
-//!\date     1.02.2020
-//==============================================================================
+/**
+    @brief    Find all primes between 2 and nMaxNumber
+    @details  Sieve of Eratosthenes
+    @property O(nMaxNumber * log(log(number)))
+    @tparam   I          - Integral type
+    @param    nMaxNumber - max number for search
+    @retval              - all primes vector
+**/
 template<typename I>
-inline std::vector<I> find_primes(I max_number)
+inline std::vector<I> find_primes(I nMaxNumber)
 {
     static_assert(std::is_integral_v<I>, "Integral required");
 
-    std::vector<bool> isComposite(static_cast<size_t>(max_number) + 1, false);
+    std::vector<bool> isComposite(static_cast<size_t>(nMaxNumber) + 1, false);
 
     constexpr size_t first_composite_power_of_two = 4;
-    for (size_t i = first_composite_power_of_two; i < static_cast<size_t>(max_number) + 1; i += 2)
-        isComposite[i] = true;
-
-    I next_prime = 3;
-    I stop_at = static_cast<I>(std::sqrt(max_number + 1));
-    while (next_prime <= stop_at)
+    for (size_t i = first_composite_power_of_two;
+         i < static_cast<size_t>(nMaxNumber) + 1;
+         i += 2)
     {
-        for (I i = next_prime * 2; i < max_number + 1; i += next_prime)
+        isComposite[i] = true;
+    }
+
+    I nNextPrime = 3;
+    I nStopAt    = static_cast<I>(std::sqrt(nMaxNumber + 1));
+    while (nNextPrime <= nStopAt)
+    {
+        for (I i = nNextPrime * 2; i < nMaxNumber + 1; i += nNextPrime)
             isComposite[static_cast<size_t>(i)] = true;
 
-        next_prime += 2;
+        nNextPrime += 2;
 
-        while (next_prime <= max_number && isComposite[static_cast<size_t>(next_prime)])
-            next_prime += 2;
+        while (nNextPrime <= nMaxNumber
+               && isComposite[static_cast<size_t>(nNextPrime)])
+        {
+            nNextPrime += 2;
+        }
     }
 
     std::vector<I> primes;
-    primes.reserve(static_cast<size_t>(max_number / 2)); // approximate size
+    primes.reserve(static_cast<size_t>(nMaxNumber / 2)); // approximate size
 
-    for (I i = 2; i < max_number + 1; i++)
+    for (I i = 2; i < nMaxNumber + 1; ++i)
         if (!isComposite[static_cast<size_t>(i)])
             primes.push_back(i);
 
@@ -248,53 +238,55 @@ inline std::vector<I> find_primes(I max_number)
     return primes;
 }
 
-//==============================================================================
-//!\fn                           qx::is_prime
-//
-//!\brief    Is number prime
-//!\details  1.0 probability, high computational complexity
-//!\property O(sqrt(number))
-//!\param    number - number
-//!\retval          - true if prime
-//!\author   Khrapov
-//!\date     2.02.2020
-//==============================================================================
-inline bool is_prime(size_t number)
+/**
+    @brief    Is number prime
+    @details  1.0 probability, high computational complexity
+    @property O(sqrt(number))
+    @param    nValue - number
+    @retval          - true if prime
+**/
+inline bool is_prime(size_t nValue)
 {
-    return find_prime_factors(static_cast<int>(number)).size() == 1;
+    return find_prime_factors(static_cast<int>(nValue)).size() == 1;
 }
 
-//==============================================================================
-//!\fn                           qx::is_prime
-//
-//!\brief  Is number prime with some probability
-//!\param  number      - number
-//!\param  probability - probability (0, 1]
-//!\retval             - true is number is prime with some probability
-//!\author Khrapov
-//!\date   2.02.2020
-//==============================================================================
-inline bool is_prime(size_t number, double probability)
+/**
+    @brief  Is number prime with some probability
+    @param  nValue       - number
+    @param  fProbability - probability (0, 1]
+    @retval              - true is number is prime with some probability
+**/
+inline bool is_prime(size_t nValue, double fProbability)
 {
-    if (probability < 0)
-        probability = -probability;
+    if (fProbability < 0)
+        fProbability = -fProbability;
 
-    if (probability >= 1 || std::fabs(probability) <= DBL_EPSILON)
-        return is_prime(number);
+    if (fProbability >= 1 || std::fabs(fProbability) <= DBL_EPSILON)
+        return is_prime(nValue);
 
-    constexpr double log_2 = 0.30102999566; // std::log(2)
-    size_t num_tests = static_cast<size_t>(std::ceil(std::log(1.0 / (1.0 - probability)) / log_2));
+    constexpr double fLog2 = 0.30102999566; // std::log(2)
 
-    std::default_random_engine generator(static_cast<unsigned int>(std::time(0)));
-    std::uniform_int_distribution<size_t> num_dist(2, number);
-    for (size_t i = 0; i < num_tests; i++)
+    const size_t nTests = static_cast<size_t>(
+        std::ceil(std::log(1.0 / (1.0 - fProbability)) / fLog2));
+
+    std::default_random_engine generator(
+        static_cast<unsigned int>(std::time(0)));
+
+    std::uniform_int_distribution<size_t> num_dist(2, nValue);
+
+    for (size_t i = 0; i < nTests; i++)
     {
-        size_t randomNumber = num_dist(generator);
-        if (static_cast<size_t>(pow(randomNumber, static_cast<int>(number - 1))) % number != 1)
+        const size_t nRandomNumber = num_dist(generator);
+        if (static_cast<size_t>(
+                pow(nRandomNumber, static_cast<int>(nValue - 1)))
+                % nValue
+            != 1)
+        {
             return false;
+        }
     }
 
     return true;
 }
 
-}
+} // namespace qx
