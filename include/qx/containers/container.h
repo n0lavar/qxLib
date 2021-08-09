@@ -63,25 +63,25 @@
         return const_reverse_iterator(this, static_cast<size_type>(-1));  \
     }                                                                     \
                                                                           \
-    size_type size(void) const noexcept; /* implement */                  \
+    /* implement */ size_type size(void) const noexcept;                  \
                                                                           \
     bool empty(void) const noexcept                                       \
     {                                                                     \
         return size() == 0;                                               \
     }                                                                     \
                                                                           \
-    pointer data(void) noexcept; /* implement */                          \
+    /* implement */ pointer data(void) noexcept;                          \
                                                                           \
     const_pointer data(void) const noexcept                               \
     {                                                                     \
         return const_cast<container*>(this)->data();                      \
     }                                                                     \
                                                                           \
-    reference at(size_type ind) noexcept; /* implement */                 \
+    /* implement */ reference at(size_type ind) noexcept;                 \
                                                                           \
     const_reference at(size_type ind) const noexcept                      \
     {                                                                     \
         return const_cast<container*>(this)->at(ind);                     \
     }                                                                     \
                                                                           \
-    void clear(void) noexcept; /* implement */
+    /* implement */ void clear(void) noexcept;

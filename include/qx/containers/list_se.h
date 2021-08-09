@@ -1,60 +1,76 @@
-//==============================================================================
-//
-//!\file                          list_se.h
-//
-//!\brief       Single ended list
-//!\details     ~
-//
-//!\author      Khrapov
-//!\date        4.02.2020
-//!\copyright   (c) Nick Khrapov, 2020. All right reserved.
-//
-//==============================================================================
+/**
+
+    @file      list_se.h
+    @brief     Contains qx::list class
+    @author    Khrapov
+    @date      4.02.2020
+    @copyright © Nick Khrapov, 2021. All right reserved.
+
+**/
 #pragma once
 
 #include <initializer_list>
-#include <utility>
 #include <iterator>
+#include <utility>
 
 namespace qx
 {
 
-//==============================================================================
-//
-//!\class                       qx::list_se<T>
-//
-//!\brief   Single ended list class
-//!\details ~
-//
-//!\author  Khrapov
-//!\date    4.02.2020
-//
-//==============================================================================
+/**
+
+    @class   qx::list_se<T>
+
+    @brief   Single ended list class
+    @details ~
+
+    @tparam  T - list element type
+    @author  Khrapov
+    @date    4.02.2020
+
+**/
 template<class T>
 class list_se
 {
+    /**
+        @struct qx::list_se<T>::list_se_node
+        @date   9.08.2021
+    **/
     struct list_se_node
     {
         list_se_node() = default;
 
-        template<class ...Args>
-        list_se_node(Args&& ...args) : value(std::forward<Args>(args)...) { }
+        /**
+            @brief  list_se_node object constructor
+            @tparam Args - type of variadic args for T construction
+            @param  args - variadic args for T construction
+        **/
+        template<class... Args>
+        list_se_node(Args&&... args);
 
         T             value = T();
         list_se_node* pNext = nullptr;
     };
 
 public:
-
     class const_iterator;
 
+    /**
+
+        @class   qx::list_se<T>::iterator
+
+        @brief   Non-const iterator for list
+        @details ~
+
+        @author  Khrapov
+        @date    9.08.2021
+
+    **/
     class iterator
     {
         friend class list_se;
         friend class const_iterator;
 
     public:
-
         using value_type        = T;
         using pointer           = T*;
         using reference         = T&;
@@ -62,18 +78,55 @@ public:
         using size_type         = std::size_t;
         using iterator_category = std::forward_iterator_tag;
 
-                  iterator    (void) = default;
-                  iterator    (list_se_node* pNode) : m_pNode(pNode) { }
+    public:
+        iterator(void) = default;
 
-        reference operator*   (void)                     { return m_pNode->value;                   }
-        pointer   operator->  (void)                     { return &m_pNode->value;                  }
-        bool      operator!=  (const iterator & r) const { return m_pNode != r.m_pNode;             }
-        bool      operator==  (const iterator & r) const { return m_pNode == r.m_pNode;             }
-        iterator& operator++  (void)    { m_pNode = m_pNode->pNext; return *this;                   }
-        iterator  operator++  (int)     { iterator i(m_pNode); m_pNode = m_pNode->pNext; return i;  }
+        /**
+            @brief iterator object constructor
+            @param pNode - list node pointer
+        **/
+        iterator(list_se_node* pNode);
+
+        /**
+            @brief  operator*
+            @retval object reference
+        **/
+        reference operator*(void);
+
+        /**
+            @brief  operator->
+            @retval object pointer
+        **/
+        pointer operator->(void);
+
+        /**
+            @brief  operator!=
+            @param  r - other iterator
+            @retval   - true, if objects are not equal
+        **/
+        bool operator!=(const iterator& r) const;
+
+        /**
+            @brief  operator==
+            @param  r - other iterator
+            @retval   - true, if objects are equal
+        **/
+        bool operator==(const iterator& r) const;
+
+        /**
+            @brief  operator++
+            @retval reference to incremented value
+        **/
+        iterator& operator++(void);
+
+        /**
+            @brief  operator++
+            @param   - stub param
+            @retval  - iterator to not incremented value
+        **/
+        iterator operator++(int);
 
     private:
-
         list_se_node* m_pNode = nullptr;
     };
 
@@ -82,7 +135,6 @@ public:
         friend class list_se;
 
     public:
-
         using value_type        = const T;
         using pointer           = const T*;
         using reference         = const T&;
@@ -90,105 +142,374 @@ public:
         using size_type         = std::size_t;
         using iterator_category = std::forward_iterator_tag;
 
-                        const_iterator  (void) = default;
-                        const_iterator  (const list_se_node* pNode) : m_pNode(pNode) { }
-                        const_iterator  (const iterator& it) : m_pNode(it.m_pNote)   { }
+    public:
+        const_iterator(void) = default;
 
-        reference       operator*       (void)                          { return m_pNode->value;                  }
-        pointer         operator->      (void)                          { return &m_pNode->value;                 }
-        bool            operator!=      (const const_iterator& r) const { return m_pNode != r.m_pNode;            }
-        bool            operator==      (const const_iterator& r) const { return m_pNode == r.m_pNode;            }
-        const_iterator& operator++      (void)  { m_pNode = m_pNode->pNext; return *this;                         }
-        const_iterator  operator++      (int)   { const_iterator i(m_pNode); m_pNode = m_pNode->pNext; return i;  }
+        /**
+            @brief const_iterator object constructor
+            @param pNode - list node pointer
+        **/
+        const_iterator(const list_se_node* pNode);
+
+        /**
+            @brief const_iterator object constructor
+            @param it - non-const iterator
+        **/
+        const_iterator(const iterator& it);
+
+        /**
+            @brief  operator*
+            @retval object reference
+        **/
+        reference operator*(void);
+
+        /**
+            @brief  operator->
+            @retval object pointer
+        **/
+        pointer operator->(void);
+
+        /**
+            @brief  operator!=
+            @param  r - other iterator
+            @retval   - true, if objects are not equal
+        **/
+        bool operator!=(const const_iterator& r) const;
+
+        /**
+            @brief  operator==
+            @param  r - other iterator
+            @retval   - true, if objects are equal
+        **/
+        bool operator==(const const_iterator& r) const;
+
+        /**
+            @brief  operator++
+            @retval reference to incremented value
+        **/
+        const_iterator& operator++(void);
+
+        /**
+            @brief  operator++
+            @param   - stub param
+            @retval  - iterator to not incremented value
+        **/
+        const_iterator operator++(int);
 
     private:
-
         const list_se_node* m_pNode = nullptr;
     };
 
-    using value_type        = T;
-    using pointer           = T*;
-    using const_pointer     = const T*;
-    using reference         = T&;
-    using const_reference   = const T&;
-    using size_type         = std::size_t;
-    using init_list         = const std::initializer_list<T>&;
+    using value_type      = T;
+    using pointer         = T*;
+    using const_pointer   = const T*;
+    using reference       = T&;
+    using const_reference = const T&;
+    using size_type       = std::size_t;
+    using init_list       = const std::initializer_list<T>&;
 
 public:
+    list_se(void) = default;
 
-                        list_se         (void) = default;
-                        list_se         (const list_se&     list)   { assign(list);                     }
-                        list_se         (list_se&&          list) noexcept { assign(std::move(list));   }
-                        list_se         (init_list          init)   { assign(init);                     }
-                        list_se         (size_type          count,
-                                         const_reference    value)  { assign(count, value);             }
-                        ~list_se        (void)                      { clear();                          }
+    /**
+        @brief list_se object constructor
+        @param list - other list ref
+    **/
+    list_se(const list_se& list);
 
-    const list_se&      operator=       (const list_se&     list)   { assign(list); return *this;       }
-    const list_se&      operator=       (list_se&&          list) noexcept { assign(std::move(list)); return *this; }
-    const list_se&      operator=       (init_list          init)   { assign(init); return *this;       }
+    /**
+        @brief  list_se object constructor
+        @param  list - other list
+    **/
+    list_se(list_se&& list) noexcept;
 
-    void                assign          (const list_se&     list);
-    void                assign          (list_se&&          list) noexcept;
-    void                assign          (init_list          init);
-    void                assign          (size_type          count,
-                                         const_reference    value);
+    /**
+        @brief list_se object constructor
+        @param init - initializer list
+    **/
+    list_se(init_list init);
 
-    void                insert          (iterator           where,
-                                         const_reference    what);
-    void                insert          (iterator           where,
-                                         const_pointer      what,
-                                         size_type          number = 1);
-    void                insert_after    (iterator           where,
-                                         const_reference    what);
-    void                insert_after    (iterator           where,
-                                         const_pointer      what,
-                                         size_type          number = 1);
-    void                erase           (iterator           where,
-                                         size_type          number = 1);
-    void                erase_after     (iterator           where,
-                                         size_type          number = 1);
+    /**
+        @brief list_se object constructor
+        @param nElements - number of objects
+        @param value     - value
+    **/
+    list_se(size_type nElements, const_reference value);
 
-    template<class ... Args>
-    void                emplace_front   (Args&&...          args);
-    template<class ... Args>
-    void                emplace         (iterator           where,
-                                         Args&&...          args);
-    template<class ... Args>
-    void                emplace_after   (iterator           where,
-                                         Args&&...          args);
-    template<class ... Args>
-    void                emplace_back    (Args&&...          args);
-    void                push_back       (const_reference    what);
-    void                push_front      (const_reference    what);
-    void                pop_back        (void);
-    void                pop_front       (void);
+    /**
+        @brief list_se object destructor
+    **/
+    ~list_se(void);
 
-    void                clear           (void);
+    /**
+        @brief  operator=
+        @param  list - other list ref
+        @retval      - this object reference
+    **/
+    const list_se& operator=(const list_se& list);
 
-    size_type           size            (void)  const   { return m_nSize;                       }
-    bool                empty           (void)  const   { return size() == 0;                   }
-    iterator            begin           (void)          { return iterator(m_pFirstNode);        }
-    const_iterator      begin           (void)  const   { return const_iterator(m_pFirstNode);  }
-    iterator            end             (void)          { return iterator(nullptr);             }
-    const_iterator      end             (void)  const   { return const_iterator(nullptr);       }
-    const_iterator      cbegin          (void)  const   { return const_iterator(m_pFirstNode);  }
-    const_iterator      cend            (void)  const   { return const_iterator(nullptr);       }
-    reference           front           (void)          { return m_pFirstNode->value;           }
-    reference           back            (void)          { return m_pLastNode->value;            }
-    const_reference     front           (void)  const   { return m_pFirstNode->value;           }
-    const_reference     back            (void)  const   { return m_pLastNode->value;            }
+    /**
+        @brief  operator=
+        @param  list - other list
+        @retval      - this object reference
+    **/
+    const list_se& operator=(list_se&& list) noexcept;
+
+    /**
+        @brief  operator=
+        @param  init - initializer list
+        @retval      - this object reference
+    **/
+    const list_se& operator=(init_list init);
+
+    /**
+        @brief    Assign by copying all nodes from another list
+        @property O(list.size())
+        @param    list - other list ref
+    **/
+    void assign(const list_se& list);
+
+    /**
+        @brief    Assign by moving from other list
+        @property O(1)
+        @param    list - other list
+    **/
+    void assign(list_se&& list) noexcept;
+
+    /**
+        @brief    Assign by copying from std::initializer_list
+        @property O(init.size())
+        @param    init - initializer list
+    **/
+    void assign(init_list init);
+
+    /**
+        @brief    Assign by filling with 'count' elements of 'value'
+        @property O(nElements)
+        @param    nElements - number of objects
+        @param    value     - value
+    **/
+    void assign(size_type nElements, const_reference value);
+
+    /**
+        @brief    Insert element in list
+        @property O(size())
+        @param    itWhere - iterator, where new elem will be placed
+        @param    what    - element
+    **/
+    void insert(iterator itWhere, const_reference what);
+
+    /**
+        @brief    Insert number of elements in list
+        @property O(size() + nElements)
+        @param    itWhere   - iterator, where new elems will be placed
+        @param    pWhat     - pointer to first element
+        @param    nElements - number of elements
+    **/
+    void insert(iterator itWhere, const_pointer pWhat, size_type nElements = 1);
+
+    /**
+        @brief    Insert element after 'where' iterator
+        @property O(1)
+        @param    itWhere - iterator after which a new element will be inserted
+        @param    what    - new element
+    **/
+    void insert_after(iterator itWhere, const_reference what);
+
+    /**
+        @brief    Insert elements after 'where' iterator
+        @property O(nElements)
+        @param    itWhere   - iterator after which a new elements will be inserted
+        @param    pWhat     - new element pointer
+        @param    nElements - number of elements
+    **/
+    void insert_after(
+        iterator      itWhere,
+        const_pointer pWhat,
+        size_type     nElements = 1);
+
+    /**
+        @brief    Erase elements from list
+        @property O(size() + nElements)
+        @param    itWhere   - iterator, where erasing starts
+                              using "where" after erasing is UB
+        @param    nElements - number of elements to erase
+    **/
+    void erase(iterator itWhere, size_type nElements = 1);
+
+    /**
+        @brief    Erase elements from list
+        @property O(nElements)
+        @param    itWhere   - iterator, where erasing starts
+                              using "where" after erasing is UB
+        @param    nElements - number of elements to erase
+    **/
+    void erase_after(iterator itWhere, size_type nElements = 1);
+
+    /**
+        @brief    Construct and insert element at the front
+        @property O(1)
+        @tparam   Args - type of variadic args for T construction
+        @param    args - arguments to construct T
+    **/
+    template<class... Args>
+    void emplace_front(Args&&... args);
+
+    /**
+        @brief    Construct and insert element
+        @property O(size())
+        @tparam   Args    - type of variadic args for T construction
+        @param    itWhere - iterator, where to insert
+        @param    args    - arguments to construct T
+    **/
+    template<class... Args>
+    void emplace(iterator itWhere, Args&&... args);
+
+    /**
+        @brief    Construct and insert element
+        @property O(1)
+        @tparam   Args    - type of variadic args for T construction
+        @param    itWhere - iterator, after witch inserting starts
+        @param    args    - arguments to construct T
+    **/
+    template<class... Args>
+    void emplace_after(iterator itWhere, Args&&... args);
+
+    /**
+        @brief    Construct and insert element at the end
+        @property O(size())
+        @tparam   Args - type of variadic args for T construction
+        @param    args - arguments to construct T
+    **/
+    template<class... Args>
+    void emplace_back(Args&&... args);
+
+    /**
+        @brief    Push back element
+        @property O(size())
+        @param    what - new element
+    **/
+    void push_back(const_reference what);
+
+    /**
+        @brief    Push front element
+        @property O(1)
+        @param    what - new element
+    **/
+    void push_front(const_reference what);
+
+    /**
+        @brief    Pop back element
+        @property O(size())
+    **/
+    void pop_back(void);
+
+    /**
+        @brief    Pop front element
+        @property O(1)
+    **/
+    void pop_front(void);
+
+    /**
+        @brief    Clear list
+        @property O(size())
+    **/
+    void clear(void);
+
+    /**
+        @brief    Get number of elements in list
+        @property O(1)
+        @retval   number of elements in list
+    **/
+    size_type size(void) const;
+
+    /**
+        @brief    If list empty
+        @property O(1)
+        @retval   true, if list is empty
+    **/
+    bool empty(void) const;
+
+    /**
+        @brief    Return iterator to beginning
+        @property O(1)
+        @retval   iterator to beginning
+    **/
+    iterator begin(void);
+
+    /**
+        @brief    Return iterator to beginning
+        @property O(1)
+        @retval   iterator to beginning
+    **/
+    const_iterator begin(void) const;
+
+    /**
+        @brief    Return iterator to end
+        @property O(1)
+        @retval   iterator to end
+    **/
+    iterator end(void);
+
+    /**
+        @brief    Return iterator to end
+        @property O(1)
+        @retval   iterator to end
+    **/
+    const_iterator end(void) const;
+
+    /**
+        @brief    Return const iterator to beginning
+        @property O(1)
+        @retval   const iterator to beginning
+    **/
+    const_iterator cbegin(void) const;
+
+    /**
+        @brief    Return const iterator to end
+        @property O(1)
+        @retval   const iterator to end
+    **/
+    const_iterator cend(void) const;
+
+    /**
+        @brief    Get first element reference
+        @property O(1)
+        @retval   first element reference
+    **/
+    reference front(void);
+
+    /**
+        @brief    Get last element reference
+        @property O(1)
+        @retval   last element reference
+    **/
+    reference back(void);
+
+    /**
+        @brief    Get first element const reference
+        @property O(1)
+        @retval   first element const reference
+    **/
+    const_reference front(void) const;
+
+    /**
+        @brief    Get last element const reference
+        @property O(1)
+        @retval   last element const reference
+    **/
+    const_reference back(void) const;
+
 
 private:
-
-    list_se_node*       m_pFirstNode    = nullptr;
-    list_se_node*       m_pLastNode     = nullptr;
-    size_type           m_nSize         = 0;
+    list_se_node* m_pFirstNode = nullptr;
+    list_se_node* m_pLastNode  = nullptr;
+    size_type     m_nSize      = 0;
 };
 
 template<class T>
 using list = list_se<T>;
 
-}
+} // namespace qx
 
 #include <qx/containers/list_se.inl>
