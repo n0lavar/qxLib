@@ -1,28 +1,17 @@
-//==============================================================================
-//
-//!\file                        string_data.inl
-//
-//!\brief       Contains string_data class
-//!\details     ~
-//
-//!\author      Khrapov
-//!\date        8.11.2020
-//!\copyright   (c) Nick Khrapov, 2020. All right reserved.
-//
-//==============================================================================
+/**
+
+    @file      string_data.inl
+    @brief     Contains qx::string_data class implementation
+    @author    Khrapov
+    @date      8.11.2020
+    @copyright © Nick Khrapov, 2021. All right reserved.
+
+**/
 
 namespace qx
 {
 
-//==============================================================================
-//!\fn                   qx::string_data<Traits>::data
-//
-//!\brief  Get string data: from buffer or from pointer
-//!\retval  - string pointer
-//!\author Khrapov
-//!\date   8.11.2020
-//==============================================================================
-template <class Traits>
+template<class Traits>
 typename string_data<Traits>::pointer string_data<Traits>::data() noexcept
 {
     if (is_small())
@@ -31,14 +20,7 @@ typename string_data<Traits>::pointer string_data<Traits>::data() noexcept
         return m_pData;
 }
 
-//==============================================================================
-//!\fn                   qx::string_data<Traits>::free
-//
-//!\brief  Free allocated memory
-//!\author Khrapov
-//!\date   8.11.2020
-//==============================================================================
-template <class Traits>
+template<class Traits>
 void string_data<Traits>::free() noexcept
 {
     if (!is_small())
@@ -51,18 +33,7 @@ void string_data<Traits>::free() noexcept
     m_nAllocatedSize = 0;
 }
 
-//==============================================================================
-//!\fn                  qx::string_data<Traits>::resize
-//
-//!\brief  Resize string data
-//!\param  nSymbols - new size
-//!\param  nAlign   - align (if 16 then size 13->16 16->16 18->32)
-//!\param  eType    - resize type
-//!\retval          - true if memory alloc is succesful
-//!\author Khrapov
-//!\date   8.11.2020
-//==============================================================================
-template <class Traits>
+template<class Traits>
 bool string_data<Traits>::resize(
     size_type          nSymbols,
     size_type          nAlign,
@@ -70,17 +41,16 @@ bool string_data<Traits>::resize(
 {
     bool bRet = true;
 
-    typename Traits::size_type nSymbolsToAllocate = nAlign > 0
-        ? nAlign * ((nSymbols + 1) / nAlign + 1)
-        : nSymbols + 1;
+    typename Traits::size_type nSymbolsToAllocate =
+        nAlign > 0 ? nAlign * ((nSymbols + 1) / nAlign + 1) : nSymbols + 1;
 
-    if (eType == string_resize_type::shrink_to_fit      // need to decrease size
-        || size() == 0                                  // string is empty
-        || nSymbolsToAllocate > capacity())             // need to increase size
+    if (eType == string_resize_type::shrink_to_fit // need to decrease size
+        || size() == 0                             // string is empty
+        || nSymbolsToAllocate > capacity())        // need to increase size
     {
-        buffer      buff;
-        bool        bSmallAtStart = is_small();
-        size_type   nNewSize = nSymbolsToAllocate * sizeof(value_type);
+        buffer    buff;
+        bool      bSmallAtStart = is_small();
+        size_type nNewSize      = nSymbolsToAllocate * sizeof(value_type);
 
         if (nSymbolsToAllocate <= m_Buffer.size())
         {
@@ -90,7 +60,7 @@ bool string_data<Traits>::resize(
                 std::memmove(buff.data(), m_pData, nNewSize);
                 free();
                 m_Buffer = buff;
-                m_nSize = nSymbolsToAllocate - 1;
+                m_nSize  = nSymbolsToAllocate - 1;
             }
         }
         else
@@ -98,11 +68,12 @@ bool string_data<Traits>::resize(
             size_type nStartSize = 0;
             if (bSmallAtStart)
             {
-                buff = m_Buffer;
+                buff       = m_Buffer;
                 nStartSize = size() * sizeof(value_type);
             }
 
-            if (void* pNewBlock = std::realloc(bSmallAtStart ? nullptr : m_pData, nNewSize))
+            if (void* pNewBlock =
+                    std::realloc(bSmallAtStart ? nullptr : m_pData, nNewSize))
             {
                 m_nAllocatedSize = nSymbolsToAllocate;
                 m_pData = static_cast<typename Traits::value_type*>(pNewBlock);
@@ -111,7 +82,9 @@ bool string_data<Traits>::resize(
                     std::memmove(m_pData, buff.data(), nStartSize);
             }
             else
+            {
                 bRet = false;
+            }
         }
     }
 
@@ -121,15 +94,14 @@ bool string_data<Traits>::resize(
     return bRet;
 }
 
-//==============================================================================
-//!\fn                 qx::string_data<Traits>::capacity
-//
-//!\brief  Get capacity of string
-//!\retval  - string capacity, can't be less than Traits::tsmallstringsize()
-//!\author Khrapov
-//!\date   8.11.2020
-//==============================================================================
-template <class Traits>
+template<class Traits>
+typename string_data<Traits>::size_type string_data<Traits>::size(
+    void) const noexcept
+{
+    return m_nSize;
+}
+
+template<class Traits>
 typename string_data<Traits>::size_type string_data<Traits>::capacity(
     void) const noexcept
 {
@@ -139,4 +111,10 @@ typename string_data<Traits>::size_type string_data<Traits>::capacity(
         return m_nAllocatedSize;
 }
 
+template<class Traits>
+bool string_data<Traits>::is_small(void) const noexcept
+{
+    return m_nAllocatedSize == 0;
 }
+
+} // namespace qx
