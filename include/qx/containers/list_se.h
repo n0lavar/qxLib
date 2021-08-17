@@ -89,13 +89,13 @@ public:
 
         /**
             @brief  operator*
-            @retval object reference
+            @retval - object reference
         **/
         reference operator*(void);
 
         /**
             @brief  operator->
-            @retval object pointer
+            @retval - object pointer
         **/
         pointer operator->(void);
 
@@ -115,7 +115,7 @@ public:
 
         /**
             @brief  operator++
-            @retval reference to incremented value
+            @retval - reference to incremented value
         **/
         iterator& operator++(void);
 
@@ -159,13 +159,13 @@ public:
 
         /**
             @brief  operator*
-            @retval object reference
+            @retval - object reference
         **/
         reference operator*(void);
 
         /**
             @brief  operator->
-            @retval object pointer
+            @retval - object pointer
         **/
         pointer operator->(void);
 
@@ -419,84 +419,84 @@ public:
     /**
         @brief    Get number of elements in list
         @property O(1)
-        @retval   number of elements in list
+        @retval   - number of elements in list
     **/
     size_type size(void) const;
 
     /**
         @brief    If list empty
         @property O(1)
-        @retval   true, if list is empty
+        @retval   - true, if list is empty
     **/
     bool empty(void) const;
 
     /**
         @brief    Return iterator to beginning
         @property O(1)
-        @retval   iterator to beginning
+        @retval   - iterator to beginning
     **/
     iterator begin(void);
 
     /**
         @brief    Return iterator to beginning
         @property O(1)
-        @retval   iterator to beginning
+        @retval   - iterator to beginning
     **/
     const_iterator begin(void) const;
 
     /**
         @brief    Return iterator to end
         @property O(1)
-        @retval   iterator to end
+        @retval   - iterator to end
     **/
     iterator end(void);
 
     /**
         @brief    Return iterator to end
         @property O(1)
-        @retval   iterator to end
+        @retval   - iterator to end
     **/
     const_iterator end(void) const;
 
     /**
         @brief    Return const iterator to beginning
         @property O(1)
-        @retval   const iterator to beginning
+        @retval   - const iterator to beginning
     **/
     const_iterator cbegin(void) const;
 
     /**
         @brief    Return const iterator to end
         @property O(1)
-        @retval   const iterator to end
+        @retval   - const iterator to end
     **/
     const_iterator cend(void) const;
 
     /**
         @brief    Get first element reference
         @property O(1)
-        @retval   first element reference
+        @retval   - first element reference
     **/
     reference front(void);
 
     /**
         @brief    Get last element reference
         @property O(1)
-        @retval   last element reference
+        @retval   - last element reference
     **/
     reference back(void);
 
     /**
         @brief    Get first element const reference
         @property O(1)
-        @retval   first element const reference
+        @retval   - first element const reference
     **/
     const_reference front(void) const;
 
     /**
         @brief    Get last element const reference
         @property O(1)
-        @retval   last element const reference
+        @retval   - last element const reference
     **/
     const_reference back(void) const;
 

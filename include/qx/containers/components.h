@@ -96,7 +96,7 @@ public:
         @brief  Add component
         @tparam TComponent - component type
         @param  pComponent - component unique pointer
-        @retval            - 
+        @retval            - component pointer
     **/
     template<class TComponent>
     TComponent* add(std::unique_ptr<TComponent> pComponent);
@@ -175,73 +175,73 @@ public:
 
     /**
         @brief  Return iterator to beginning
-        @retval iterator to beginning
+        @retval - iterator to beginning
     **/
     auto begin(void) noexcept;
 
     /**
         @brief  Return iterator to end
-        @retval iterator to end
+        @retval - iterator to end
     **/
     auto end(void) noexcept;
 
     /**
         @brief  Return iterator to beginning
-        @retval iterator to beginning
+        @retval - iterator to beginning
     **/
     auto begin(void) const noexcept;
 
     /**
         @brief  Return iterator to end
-        @retval iterator to end
+        @retval - iterator to end
     **/
     auto end(void) const noexcept;
 
     /**
         @brief  Return const iterator to beginning
-        @retval const iterator to beginning
+        @retval - const iterator to beginning
     **/
     auto cbegin(void) const noexcept;
 
     /**
         @brief  Return const iterator to end
-        @retval const iterator to end
+        @retval - const iterator to end
     **/
     auto cend(void) const noexcept;
 
     /**
         @brief  Return reverse iterator to reverse beginning
-        @retval reverse iterator to reverse beginning
+        @retval - reverse iterator to reverse beginning
     **/
     auto rbegin(void) noexcept;
 
     /**
         @brief  Return reverse iterator to reverse end
-        @retval reverse iterator to reverse end
+        @retval - reverse iterator to reverse end
     **/
     auto rend(void) noexcept;
 
     /**
         @brief  Return const reverse iterator to reverse beginning
-        @retval const reverse iterator to reverse beginning
+        @retval - const reverse iterator to reverse beginning
     **/
     auto crbegin(void) const noexcept;
 
     /**
         @brief  Return const reverse iterator to reverse end
-        @retval const reverse iterator to reverse end
+        @retval - const reverse iterator to reverse end
     **/
     auto crend(void) const noexcept;
 
     /**
         @brief  Get number of components in container
-        @retval number of components in container
+        @retval - number of components in container
     **/
     size_t size(void) const noexcept;
 
     /**
         @brief  Is component empty
-        @retval true if component empty
+        @retval - true if component empty
     **/
     bool empty(void) const noexcept;
 
