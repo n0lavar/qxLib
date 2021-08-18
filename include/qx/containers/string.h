@@ -50,13 +50,6 @@ qx::detail::istream<Traits>& operator>>(
 namespace qx
 {
 
-template<typename T>
-concept string_convertable = requires(T t)
-{
-    t.cbegin();
-    t.cend();
-};
-
 /**
 
     @class   qx::basic_string<Traits>
