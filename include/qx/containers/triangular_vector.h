@@ -1,15 +1,12 @@
-//==============================================================================
-//
-//!\file                      triangular_vector.h
-//
-//!\brief       Contains triangular_vector class
-//!\details     ~
-//
-//!\author      Khrapov
-//!\date        23.02.2020
-//!\copyright   (c) Nick Khrapov, 2020. All right reserved.
-//
-//==============================================================================
+/**
+
+    @file      triangular_vector.h
+    @brief     Contains qx::triangular_vector class
+    @author    Khrapov
+    @date      23.02.2020
+    @copyright © Nick Khrapov, 2021. All right reserved.
+
+**/
 #pragma once
 
 #include <qx/containers/container.h>
@@ -20,24 +17,25 @@
 namespace qx
 {
 
-//==============================================================================
-//
-//!\class                  qx::triangular_vector<T>
-//
-//!\brief   Triangular vector class. Only elements with nRow >= nCols are stored.
-//!\details data storage example:
-//              x 0 0 0     vec[r][c] = r >= c => vec[r][c]
-//              x x 0 0                 r < c  => vec[c][r]
-//              x x x 0
-//              x x x x
-//
-//!\author  Khrapov
-//!\date    23.02.2020
-//
-//==============================================================================
+/**
+
+    @class   qx::triangular_vector<T>
+
+    @brief   Triangular vector class
+    @details Only elements with nRow >= nCols are stored
+             data storage example:
+                 x 0 0 0     vec[r][c] = r >= c => vec[r][c]
+                 x x 0 0                 r < c  => vec[c][r]
+                 x x x 0
+                 x x x x
+                 
+    @tparam  T - value type
+    @author  Khrapov
+    @date    23.02.2020
+
+**/
 template<class T>
-class
-    triangular_vector //-V690 bug: PVS can't see "using this_type = triangular_vector"
+class triangular_vector
 {
 public:
     using value_type      = T;
@@ -47,71 +45,151 @@ public:
     using const_reference = const T&;
     using difference_type = std::ptrdiff_t;
     using size_type       = size_t;
-    using this_type       = triangular_vector;
 
     QX_IMPL_CONTAINER(triangular_vector)
 
 public:
     triangular_vector(void) = default;
-    triangular_vector(this_type&& other) noexcept
-    {
-        assign(std::move(other));
-    }
-    triangular_vector(const this_type& other)
-    {
-        assign(other);
-    }
-    triangular_vector(size_type nSideSize)
-    {
-        resize(nSideSize);
-    }
-    triangular_vector(size_type nSideSize, const_reference data)
-    {
-        assign(nSideSize, data);
-    }
 
-    ~triangular_vector(void)
-    {
-        free();
-    }
+    /**
+        @brief triangular_vector object constructor
+        @param other - triangular_vector rvalue ref
+    **/
+    triangular_vector(triangular_vector&& other) noexcept;
 
-    const this_type& operator=(this_type&& other) noexcept
-    {
-        assign(std::move(other));
-        return *this;
-    }
-    const this_type& operator=(const this_type& other)
-    {
-        assign(other);
-        return *this;
-    }
+    /**
+        @brief triangular_vector object constructor
+        @param other - other triangular_vector
+    **/
+    triangular_vector(const triangular_vector& other);
 
-    void assign(this_type&& other) noexcept;
-    void assign(const this_type& other);
+    /**
+        @brief triangular_vector object constructor
+        @param nSideSize - matrix side size
+    **/
+    triangular_vector(size_type nSideSize);
+
+    /**
+        @brief triangular_vector object constructor
+        @param nSideSize - matrix side size
+        @param data      - data to fill
+    **/
+    triangular_vector(size_type nSideSize, const_reference data);
+
+    /**
+        @brief triangular_vector object destructor
+    **/
+    ~triangular_vector(void);
+
+    /**
+        @brief  operator=
+        @param  other - triangular_vector rvalue ref
+        @retval       - this object reference
+    **/
+    const triangular_vector& operator=(triangular_vector&& other) noexcept;
+
+    /**
+        @brief  operator=
+        @param  other - other triangular_vector
+        @retval       - this object reference
+    **/
+    const triangular_vector& operator=(const triangular_vector& other);
+
+    /**
+        @brief Assigns new contents to the vector, moving from other vector
+        @param other - triangular_vector rvalue ref
+    **/
+    void assign(triangular_vector&& other) noexcept;
+
+    /**
+        @brief Assigns new contents to the vector, copying from other vector
+        @param other - other triangular_vector
+    **/
+    void assign(const triangular_vector& other);
+
+    /**
+        @brief Assigns new contents to the vector, creating new vector with size size and filling value
+        @param nSideSize - matrix side size
+        @param data      - data to fill
+    **/
     void assign(size_type nSideSize, const_reference data);
 
+    /**
+        @brief  Reserve memory for vector
+        @param  nSideSize - new matrix side size
+        @retval           - true if reserved
+    **/
     bool reserve(size_type nSideSize);
+
+    /**
+        @brief  Resize triangular vector without filling with new value
+        @param  nSideSize - new matrix side size
+        @retval           - true if resized
+    **/
     bool resize(size_type nSideSize);
+
+    /**
+        @brief  Resize triangular vector with filling with new value
+        @param  nSideSize - new matrix side size
+        @param  data      - data to fill
+        @retval           - true if resized
+    **/
     bool resize(size_type nSideSize, const_reference data);
 
-    void            fill(const_reference data);
+    /**
+        @brief Fill vector with value
+        @param data - value to fill
+    **/
+    void fill(const_reference data);
+
+    /**
+        @brief  Get value on position
+        @param  nRow - row num
+        @param  nCol - column num
+        @retval      - vector value
+    **/
     const_reference get(size_type nRow, size_type nCol) const noexcept;
 
+    /**
+        @brief Set value on position
+        @param nRow - row num 
+        @param nCol - column num 
+        @param data - value to set 
+    **/
     void set(size_type nRow, size_type nCol, const_reference data) noexcept;
 
-    size_type size_side(void) const noexcept
-    {
-        return m_nSideSize;
-    }
-    size_type capacity(void) const noexcept
-    {
-        return m_nAllocatedSize;
-    }
+    /**
+        @brief  Get matrix side size
+        @retval - matrix side size
+    **/
+    size_type size_side(void) const noexcept;
+
+    /**
+        @brief  Get capacity
+        @retval - capacity
+    **/
+    size_type capacity(void) const noexcept;
+
+    /**
+        @brief Clear vector and free memory
+    **/
     void free(void);
 
 private:
-    size_type getIndex(size_type nRow, size_type nCol) const noexcept;
-    size_type getVectorSize(size_type nSideSize) const noexcept;
+    /**
+        @brief  Convert row and column numbers to continuous vector index
+        @param  nRow - row number
+        @param  nCol - column number
+        @retval      - continuous vector index
+    **/
+    static size_type _get_index(size_type nRow, size_type nCol) noexcept;
+
+    /**
+        @brief  Get continuous vector size
+        @param  nSideSize - matrix side size
+        @retval           - continuous vector size
+    **/
+    static size_type _get_vector_size(size_type nSideSize) noexcept;
 
 private:
     pointer   m_pData          = nullptr;
