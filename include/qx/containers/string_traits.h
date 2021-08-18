@@ -1,19 +1,16 @@
-//==============================================================================
-//
-//!\file                       string_traits.h
-//
-//!\brief       Traits for qx::string
-//!\details     ~
-//
-//!\author      Khrapov
-//!\date        24.03.2020
-//!\copyright   (c) Nick Khrapov, 2020. All right reserved.
-//
-//==============================================================================
+/**
+
+    @file      string_traits.h
+    @brief     Contains traits for qx::string
+    @author    Khrapov
+    @date      24.03.2020
+    @copyright © Nick Khrapov, 2021. All right reserved.
+
+**/
 #pragma once
 
-#include <qx/useful_macros.h>
 #include <qx/containers/string_utils.h>
+#include <qx/useful_macros.h>
 
 #include <cctype>
 #include <cstdarg>
@@ -24,24 +21,26 @@
 namespace qx
 {
 
-//==============================================================================
-//
-//!\struct                 qx::common_char_traits<T>
-//!\author  Khrapov
-//!\date    25.01.2021
-//==============================================================================
+/**
+    @struct qx::common_char_traits<T>
+    @tparam T - char type
+    @date   25.01.2021
+**/
 template<typename T>
 struct common_char_traits
 {
-    using value_type        = T;
-    using pointer           = T*;
-    using const_pointer     = const T*;
-    using reference         = T&;
-    using const_reference   = const T&;
-    using difference_type   = std::ptrdiff_t;
-    using size_type         = size_t;
+    using value_type      = T;
+    using pointer         = T*;
+    using const_pointer   = const T*;
+    using reference       = T&;
+    using const_reference = const T&;
+    using difference_type = std::ptrdiff_t;
+    using size_type       = size_t;
 
-    static constexpr size_type hash_function(const_pointer pszStr, size_t nSeed, size_type nLen) noexcept
+    static constexpr size_type hash_function(
+        const_pointer pszStr,
+        size_t        nSeed,
+        size_type     nLen) noexcept
     {
         return murmur_32_hash(pszStr, static_cast<u32>(nSeed), nLen);
     }
@@ -50,12 +49,10 @@ struct common_char_traits
 template<typename value_type>
 struct char_traits;
 
-//==============================================================================
-//
-//!\struct                   qx::char_traits<char>
-//!\author  Khrapov
-//!\date    30.10.2020
-//==============================================================================
+/**
+    @struct qx::char_traits<char>
+    @date   30.10.2020
+**/
 template<>
 struct char_traits<char> : public common_char_traits<char>
 {
@@ -91,16 +88,26 @@ struct char_traits<char> : public common_char_traits<char>
     {
         return std::strcmp(pszFirst, pszSecond);
     }
-    static int compare_n(const_pointer pszFirst, const_pointer pszSecond, size_type nCount) noexcept
+    static int compare_n(
+        const_pointer pszFirst,
+        const_pointer pszSecond,
+        size_type     nCount) noexcept
     {
         return std::strncmp(pszFirst, pszSecond, nCount);
     }
-    static int vsnprintf(pointer pszDest, size_type nBuffer, const_pointer pszFormat, va_list args) noexcept
+    static int vsnprintf(
+        pointer       pszDest,
+        size_type     nBuffer,
+        const_pointer pszFormat,
+        va_list       args) noexcept
     {
         return std::vsnprintf(pszDest, nBuffer, pszFormat, args);
     }
-    template<class ... Args>
-    static int sscanf(const_pointer pszString, const_pointer pszFormat, Args ... args) noexcept
+    template<class... Args>
+    static int sscanf(
+        const_pointer pszString,
+        const_pointer pszFormat,
+        Args... args) noexcept
     {
         QX_PUSH_SUPPRESS_ALL_WARNINGS
         return std::sscanf(pszString, pszFormat, args...);
@@ -108,12 +115,10 @@ struct char_traits<char> : public common_char_traits<char>
     }
 };
 
-//==============================================================================
-//
-//!\struct                  qx::char_traits<wchar_t>
-//!\author  Khrapov
-//!\date    24.03.2020
-//==============================================================================
+/**
+    @struct qx::char_traits<wchar_t>
+    @date   24.03.2020
+**/
 template<>
 struct char_traits<wchar_t> : public common_char_traits<wchar_t>
 {
@@ -155,11 +160,18 @@ struct char_traits<wchar_t> : public common_char_traits<wchar_t>
     {
         return std::wcscmp(pszFirst, pszSecond);
     }
-    static int compare_n(const_pointer pszFirst, const_pointer pszSecond, size_type nCount) noexcept
+    static int compare_n(
+        const_pointer pszFirst,
+        const_pointer pszSecond,
+        size_type     nCount) noexcept
     {
         return std::wcsncmp(pszFirst, pszSecond, nCount);
     }
-    static int vsnprintf(pointer pszDest, size_type nBuffer, const_pointer pszFormat, va_list args) noexcept
+    static int vsnprintf(
+        pointer       pszDest,
+        size_type     nBuffer,
+        const_pointer pszFormat,
+        va_list       args) noexcept
     {
 // MVSC's std::swprintf returns required size if nullptr and 0 passed as pDest and nBuffer,
 // while other compilers returns -1
@@ -185,8 +197,11 @@ struct char_traits<wchar_t> : public common_char_traits<wchar_t>
         return size;
 #endif
     }
-    template<class ... Args>
-    static int sscanf(const_pointer pszString, const_pointer pszFormat, Args ... args) noexcept
+    template<class... Args>
+    static int sscanf(
+        const_pointer pszString,
+        const_pointer pszFormat,
+        Args... args) noexcept
     {
         QX_PUSH_SUPPRESS_ALL_WARNINGS
         return std::swscanf(pszString, pszFormat, args...);
@@ -194,4 +209,4 @@ struct char_traits<wchar_t> : public common_char_traits<wchar_t>
     }
 };
 
-}
+} // namespace qx
