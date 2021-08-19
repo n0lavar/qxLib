@@ -1,15 +1,12 @@
-//==============================================================================
-//
-//!\file                           logger.h
-//
-//!\brief       Tracing and logging
-//!\details     ~
-//
-//!\author      Khrapov
-//!\date        17.06.2019
-//!\copyright   (c) Nick Khrapov, 2019. All right reserved.
-//
-//==============================================================================
+/**
+
+    @file      logger.h
+    @brief     Contains qx::logger class
+    @author    Khrapov
+    @date      17.06.2019
+    @copyright © Nick Khrapov, 2021. All right reserved.
+
+**/
 #pragma once
 
 #include <qx/logger/base_logger_stream.h>
@@ -17,95 +14,163 @@
 
 #include <memory>
 
-#define QX_TRACE_FROM(loggerInstance, format, ...)              \
-    loggerInstance.output(                                      \
-        qx::log_level::info,                                    \
-        format,                                                 \
-        nullptr,                                                \
-        std::string_view(),                                     \
-        QX_SHORT_FILE,                                          \
-        __FUNCTION__,                                           \
-        __LINE__,                                               \
-        ## __VA_ARGS__)
+/**
+    @macro QX_TRACE_FROM
+    @brief Trace common info from instance
+    @param loggerInstance - logger instance 
+    @param format         - format string
+    @param __VA_ARGS__    - additional args for formatting
+**/
+#define QX_TRACE_FROM(loggerInstance, format, ...) \
+    loggerInstance.output(                         \
+        qx::log_level::info,                       \
+        format,                                    \
+        nullptr,                                   \
+        nullptr,                                   \
+        QX_SHORT_FILE,                             \
+        __FUNCTION__,                              \
+        __LINE__,                                  \
+        ##__VA_ARGS__)
 
-#define QX_TRACE_ERROR_FROM(loggerInstance, format, ...)        \
-    loggerInstance.output(                                      \
-        qx::log_level::errors,                                  \
-        format,                                                 \
-        nullptr,                                                \
-        std::string_view(),                                     \
-        QX_SHORT_FILE,                                          \
-        __FUNCTION__,                                           \
-        __LINE__,                                               \
-        ## __VA_ARGS__)
+/**
+    @macro QX_TRACE_ERROR_FROM
+    @brief Trace error from instance
+    @param loggerInstance - logger instance
+    @param format         - format string
+    @param __VA_ARGS__    - additional args for formatting
+**/
+#define QX_TRACE_ERROR_FROM(loggerInstance, format, ...) \
+    loggerInstance.output(                               \
+        qx::log_level::errors,                           \
+        format,                                          \
+        nullptr,                                         \
+        nullptr,                                         \
+        QX_SHORT_FILE,                                   \
+        __FUNCTION__,                                    \
+        __LINE__,                                        \
+        ##__VA_ARGS__)
 
+/**
+    @macro QX_TRACE_ASSERT_FROM
+    @brief Trace assert from instance
+    @param loggerInstance - logger instance
+    @param expr           - assert expression
+    @param format         - format string
+    @param __VA_ARGS__    - additional args for formatting
+**/
 #define QX_TRACE_ASSERT_FROM(loggerInstance, expr, format, ...) \
     loggerInstance.output(                                      \
         qx::log_level::asserts,                                 \
         format,                                                 \
-        # expr,                                                 \
-        std::string_view(),                                     \
+        #expr,                                                  \
+        nullptr,                                                \
         QX_SHORT_FILE,                                          \
         __FUNCTION__,                                           \
         __LINE__,                                               \
-        ## __VA_ARGS__)
+        ##__VA_ARGS__)
 
 
 // redefine these macros in your own header with renaming only or using your instance of logger
 
-// common info
-#define QX_TRACE(format, ...)                                   \
-    QX_TRACE_FROM(qx::logger_singleton::get_instance(), format, ## __VA_ARGS__)
+/**
+    @macro QX_TRACE
+    @brief Trace common info
+    @param format      - format string
+    @param __VA_ARGS__ - additional args for formatting
+**/
+#define QX_TRACE(format, ...) \
+    QX_TRACE_FROM(qx::logger_singleton::get_instance(), format, ##__VA_ARGS__)
 
-// error info
-#define QX_TRACE_ERROR(format, ...)                             \
-    QX_TRACE_ERROR_FROM(qx::logger_singleton::get_instance(), format, ## __VA_ARGS__)
+/**
+    @macro QX_TRACE_ERROR
+    @brief Trace error
+    @param format      - format string
+    @param __VA_ARGS__ - additional args for formatting
+**/
+#define QX_TRACE_ERROR(format, ...)           \
+    QX_TRACE_ERROR_FROM(                      \
+        qx::logger_singleton::get_instance(), \
+        format,                               \
+        ##__VA_ARGS__)
 
-// assertion failed info
-#define QX_TRACE_ASSERT(expr, format, ...)                      \
-    QX_TRACE_ASSERT_FROM(qx::logger_singleton::get_instance(), expr, format, ## __VA_ARGS__)
+/**
+    @macro QX_TRACE_ASSERT
+    @brief Trace assertion
+    @param expr        - assert expression
+    @param format      - format string
+    @param __VA_ARGS__ - additional args for formatting
+**/
+#define QX_TRACE_ASSERT(expr, format, ...)    \
+    QX_TRACE_ASSERT_FROM(                     \
+        qx::logger_singleton::get_instance(), \
+        expr,                                 \
+        format,                               \
+        ##__VA_ARGS__)
 
 namespace qx
 {
 
-//================================================================================
-//
-//!\class                         qx::logger
-//
-//!\brief   Logger class
-//!\details ~
-//
-//!\author  Khrapov
-//!\date    10.01.2020
-//
-//================================================================================
+/**
+
+    @class   qx::logger
+
+    @brief   Logger class
+    @details ~
+
+    @author  Khrapov
+    @date    10.01.2020
+
+**/
 class logger
 {
 public:
-
+    /**
+        @brief Process tracings
+        @param eLogLevel           - log level
+        @param pszFormat           - format string
+        @param pszAssertExpression - assert expr or nullptr
+        @param pszTag              - tracing tag
+        @param pszFile             - file name string
+        @param pszFunction         - function name string
+        @param nLine               - code line number
+        @param ...                 - additional args for format
+    **/
     void output(
-        log_level          eLogLevel,
-        const char       * pszFormat,
-        const char       * pszAssertExpression,
-        std::string_view   svTag,
-        std::string_view   svFile,
-        std::string_view   svFunction,
-        int                nLine,
+        log_level   eLogLevel,
+        const char* pszFormat,
+        const char* pszAssertExpression,
+        const char* pszTag,
+        const char* pszFile,
+        const char* pszFunction,
+        int         nLine,
         ...);
 
-    void add_stream(
-        std::unique_ptr<base_logger_stream> pStream);
+    /**
+        @brief Add output stream to the logger
+        @param pStream - stream unique pointer
+    **/
+    void add_stream(std::unique_ptr<base_logger_stream> pStream);
 
 private:
-
     std::vector<std::unique_ptr<base_logger_stream>> m_Streams;
 };
 
+/**
+
+    @class   qx::logger_singleton
+
+    @brief   Default logger instance
+    @details ~
+
+    @author  Khrapov
+    @date    19.08.2021
+
+**/
 class logger_singleton : public logger
 {
     QX_SINGLETON(logger_singleton);
 };
 
-}
+} // namespace qx
 
 #include <qx/logger/logger.inl>

@@ -1,42 +1,24 @@
-//==============================================================================
-//
-//!\file                          logger.inl
-//
-//!\brief       Console tracing and creating of logs
-//!\details     ~
-//
-//!\author      Khrapov
-//!\date        17.06.2019
-//!\copyright   (c) Nick Khrapov, 2019. All right reserved.
-//
-//==============================================================================
+/**
+
+    @file      logger.inl
+    @brief     Contains qx::logger class implementation
+    @author    Khrapov
+    @date      17.06.2019
+    @copyright © Nick Khrapov, 2021. All right reserved.
+
+**/
 
 namespace qx
 {
 
-//================================================================================
-//!\fn                            qx::logger::output
-//
-//!\brief  Process tracings
-//!\param  eLogLevel            - log level
-//!\param  pszFormat            - format string
-//!\param  pszAssertExpression  - assert expr or nullptr
-//!\param  svTag                - tracing tag
-//!\param  svFile               - file name string
-//!\param  svFunction           - function name string
-//!\param  nLine                - code line number
-//!\param  ...                  - additional args for format
-//!\author Khrapov
-//!\date   10.01.2020
-//================================================================================
 inline void logger::output(
-    log_level           eLogLevel,
-    const char        * pszFormat,
-    const char        * pszAssertExpression,
-    std::string_view    svTag,
-    std::string_view    svFile,
-    std::string_view    svFunction,
-    int                 nLine,
+    log_level   eLogLevel,
+    const char* pszFormat,
+    const char* pszAssertExpression,
+    const char* pszTag,
+    const char* pszFile,
+    const char* pszFunction,
+    int         nLine,
     ...)
 {
     va_list args;
@@ -48,9 +30,9 @@ inline void logger::output(
             eLogLevel,
             pszFormat,
             pszAssertExpression,
-            svTag,
-            svFile,
-            svFunction,
+            pszTag,
+            pszFile,
+            pszFunction,
             nLine,
             args);
     }
@@ -58,17 +40,9 @@ inline void logger::output(
     va_end(args);
 }
 
-//==============================================================================
-//!\fn                       qx::logger::add_stream
-//
-//!\brief  Add output stream to the logger
-//!\param  pStream - stream unique pointer
-//!\author Khrapov
-//!\date   30.07.2021
-//==============================================================================
 inline void logger::add_stream(std::unique_ptr<base_logger_stream> pStream)
 {
     m_Streams.push_back(std::move(pStream));
 }
 
-}
+} // namespace qx

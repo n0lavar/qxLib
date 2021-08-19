@@ -1,26 +1,16 @@
-//==============================================================================
-//
-//!\file                     file_logger_stream.inl
-//
-//!\brief       Contains qx::file_logger_stream class
-//!\details     ~
-//
-//!\author      Khrapov
-//!\date        30.07.2021
-//!\copyright   (c) Nick Khrapov, 2021. All right reserved.
-//
-//==============================================================================
+/**
+
+    @file      file_logger_stream.inl
+    @brief     Contains qx::file_logger_stream class implementation
+    @author    Khrapov
+    @date      30.07.2021
+    @copyright © Nick Khrapov, 2021. All right reserved.
+
+**/
 
 namespace qx
 {
 
-//==============================================================================
-//!\fn             qx::file_logger_stream::file_logger_stream
-//
-//!\brief  file_logger_stream object constructor
-//!\author Khrapov
-//!\date   30.07.2021
-//==============================================================================
 inline file_logger_stream::file_logger_stream(void)
 {
     string& sTime = get_time_buffer();
@@ -28,13 +18,6 @@ inline file_logger_stream::file_logger_stream(void)
     m_sSessionTime = sTime + '/';
 }
 
-//==============================================================================
-//!\fn          qx::file_logger_stream::~file_logger_stream
-//
-//!\brief  file_logger_stream object destructor
-//!\author Khrapov
-//!\date   30.07.2021
-//==============================================================================
 inline file_logger_stream::~file_logger_stream(void)
 {
     for (const auto& file : m_Files)
@@ -51,29 +34,21 @@ inline file_logger_stream::~file_logger_stream(void)
     }
 }
 
-//==============================================================================
-//!\fn               qx::file_logger_stream::process_output
-//
-//!\brief  Output to file
-//!\param  svMessage - message string
-//!\param  logUnit   - log unit info
-//!\author Khrapov
-//!\date   30.07.2021
-//==============================================================================
 inline void file_logger_stream::process_output(
-    std::string_view    svMessage,
-    log_unit            logUnit)
+    std::string_view svMessage,
+    log_unit         logUnit)
 {
     std::string_view        svFileName;
-    log_file_policy         eLogFilePolicy  = log_file_policy::append;
-    std::ios_base::openmode ofstreamMode    = std::ofstream::app;
+    log_file_policy         eLogFilePolicy = log_file_policy::append;
+    std::ios_base::openmode ofstreamMode   = std::ofstream::app;
 
     if (const auto it = m_Files.find(logUnit.svUnitName); it != m_Files.cend())
     {
-        svFileName      = it->second.sFileName;
-        eLogFilePolicy  = it->second.eLogPolicy;
+        svFileName     = it->second.sFileName;
+        eLogFilePolicy = it->second.eLogPolicy;
 
-        if (!it->second.bWroteToFile && eLogFilePolicy == log_file_policy::clear_then_uppend)
+        if (!it->second.bWroteToFile
+            && eLogFilePolicy == log_file_policy::clear_then_uppend)
             ofstreamMode = std::ofstream::out | std::ofstream::trunc;
 
         it->second.bWroteToFile = true;
@@ -102,14 +77,6 @@ inline void file_logger_stream::process_output(
     }
 }
 
-//==============================================================================
-//!\fn              qx::file_logger_stream::set_logs_folder
-//
-//!\brief  Set logs folder
-//!\param  svFolder - logs folder
-//!\author Khrapov
-//!\date   30.07.2021
-//==============================================================================
 inline void file_logger_stream::set_logs_folder(
     std::string_view svFolder) noexcept
 {
@@ -118,37 +85,18 @@ inline void file_logger_stream::set_logs_folder(
         m_sFolder += '/';
 }
 
-//==============================================================================
-//!\fn               qx::file_logger_stream::register_file
-//
-//!\brief  Register output to specific file for specific unit
-//!\param  svUnitName - unit name
-//!\param  svFileName - file name
-//!\param  eLogPolicy - log file policy
-//!\author Khrapov
-//!\date   30.07.2021
-//==============================================================================
 inline void file_logger_stream::register_file(
-    std::string_view    svUnitName,
-    std::string_view    svFileName,
-    log_file_policy     eLogPolicy)
+    std::string_view svUnitName,
+    std::string_view svFileName,
+    log_file_policy  eLogPolicy)
 {
     if (!svUnitName.empty() && !svFileName.empty())
         m_Files[svUnitName] = { svFileName, eLogPolicy };
 }
 
-//==============================================================================
-//!\fn              qx::file_logger_stream::fill_file_folder
-//
-//!\brief  Fill string with file folder path
-//!\param  eLogFilePolicy - file log policy
-//!\param  sFileFolder    - output string
-//!\author Khrapov
-//!\date   30.07.2021
-//==============================================================================
 inline void file_logger_stream::fill_file_folder(
-    log_file_policy     eLogFilePolicy,
-    string            & sFileFolder) const noexcept
+    log_file_policy eLogFilePolicy,
+    string&         sFileFolder) const noexcept
 {
     switch (eLogFilePolicy)
     {
@@ -158,10 +106,8 @@ inline void file_logger_stream::fill_file_folder(
 
     case log_file_policy::append:
     case log_file_policy::clear_then_uppend:
-    default:
-        sFileFolder = m_sFolder;
-        break;
+    default: sFileFolder = m_sFolder; break;
     }
 }
 
-}
+} // namespace qx
