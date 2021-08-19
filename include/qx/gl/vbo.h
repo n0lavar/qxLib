@@ -31,24 +31,14 @@ namespace qx
 class base_vbo : public buffer_base
 {
 public:
-
-                        base_vbo     (void) = default;
+    base_vbo(void) = default;
 
 protected:
-
-    virtual GLenum      GetBufferType(void) const override;
-    virtual GLbitfield  GetBarrierBit(void) const override;
+    QX_DECL_BUFFER_BASE
 };
-
-inline GLenum base_vbo::GetBufferType(void) const
-{
-    return GL_ARRAY_BUFFER;
-}
-inline GLbitfield base_vbo::GetBarrierBit(void) const
-{
-    return GL_VERTEX_ATTRIB_ARRAY_BARRIER_BIT;
-}
 
 using vbo = base_vbo;
 
-}
+} // namespace qx
+
+#include <qx/gl/vbo.inl>

@@ -1,51 +1,17 @@
-//==============================================================================
-//
-//!\file                           fbo.inl
-//
-//!\brief       Contains qx::base_fbo class
-//!\details     ~
-//
-//!\author      Khrapov
-//!\date        20.01.2020
-//!\copyright   (c) Nick Khrapov, 2020. All right reserved.
-//
-//==============================================================================
+/**
+
+    @file      fbo.inl
+    @brief     Contains qx::base_fbo class implementation
+    @author    Khrapov
+    @date      19.08.2021
+    @copyright © Nick Khrapov, 2021. All right reserved.
+
+**/
 
 namespace qx
 {
 
-//==============================================================================
-//!\fn                       qx::base_fbo::~base_fbo
-//
-//!\brief  base_fbo object destructor
-//!\author Khrapov
-//!\date   10.07.2020
-//==============================================================================
 inline base_fbo::~base_fbo(void)
-{
-    Delete();
-}
-
-//==============================================================================
-//!\fn                       qx::base_fbo::Generate
-//
-//!\brief  Generate buffer
-//!\author Khrapov
-//!\date   20.01.2020
-//==============================================================================
-inline void base_fbo::Generate(void)
-{
-    glGenFramebuffers(1, &m_nBuffer);
-}
-
-//==============================================================================
-//!\fn                        qx::base_fbo::Delete
-//
-//!\brief  Delete buffer
-//!\author Khrapov
-//!\date   20.01.2020
-//==============================================================================
-inline void base_fbo::Delete(void)
 {
     if (m_nBuffer != std::numeric_limits<GLuint>::max())
     {
@@ -54,51 +20,36 @@ inline void base_fbo::Delete(void)
     }
 }
 
-//==============================================================================
-//!\fn                         qx::base_fbo::Bind
-//
-//!\brief  Bind buffer
-//!\author Khrapov
-//!\date   20.01.2020
-//==============================================================================
+inline void base_fbo::Generate(void)
+{
+    glGenFramebuffers(1, &m_nBuffer);
+}
+
 inline void base_fbo::Bind(void) const
 {
     glBindFramebuffer(m_nTarget, m_nBuffer);
 }
 
-//==============================================================================
-//!\fn                        qx::base_fbo::Unbind
-//
-//!\brief  Unbind buffer
-//!\author Khrapov
-//!\date   20.01.2020
-//==============================================================================
 inline void base_fbo::Unbind(void) const
 {
     glBindFramebuffer(m_nTarget, 0);
 }
 
-//==============================================================================
-//!\fn                       qx::base_fbo::SetTarget
-//
-//!\brief  Set target type
-//!\param  target - GL_FRAMEBUFFER, GL_DRAW_FRAMEBUFFER or GL_READ_FRAMEBUFFER
-//!\author Khrapov
-//!\date   20.01.2020
-//==============================================================================
+inline GLuint base_fbo::GetBufferName(void) const
+{
+    return m_nBuffer;
+}
+
+inline bool base_fbo::IsGenerated(void) const
+{
+    return m_nBuffer != std::numeric_limits<GLuint>::max();
+}
+
 inline void base_fbo::SetTarget(GLenum target)
 {
     m_nTarget = target;
 }
 
-//==============================================================================
-//!\fn                     qx::base_fbo::AttachRBO
-//
-//!\brief  Attach RBO th FRO
-//!\param  rbo - render buffer object
-//!\author Khrapov
-//!\date   20.01.2020
-//==============================================================================
 inline void base_fbo::AttachRBO(const base_rbo& rbo)
 {
     glFramebufferRenderbuffer(
@@ -108,16 +59,6 @@ inline void base_fbo::AttachRBO(const base_rbo& rbo)
         rbo.GetBufferName());
 }
 
-//==============================================================================
-//!\fn                     qx::base_fbo::AttachTexture2D
-//
-//!\brief  Attache a single face of a specific MIP level to FBO
-//!\param  attachment   - attachment point of the framebuffer
-//!\param  texture      - fbo texture
-//!\param  nMipmapLevel - mipmap level of texture
-//!\author Khrapov
-//!\date   20.01.2020
-//==============================================================================
 inline void base_fbo::AttachTexture2D(
     GLenum              attachment,
     const base_texture& texture,
@@ -131,17 +72,6 @@ inline void base_fbo::AttachTexture2D(
         nMipmapLevel);
 }
 
-//==============================================================================
-//!\fn                  qx::base_fbo::AttachTexture2D
-//
-//!\brief  Attache all cube map faces of a specific MIP level
-//         as an array of images (layered framebuffer)
-//!\param  attachment   - attachment point of the framebuffer
-//!\param  texture      - fbo texture
-//!\param  nMipmapLevel - mipmap level of texture
-//!\author Khrapov
-//!\date   20.01.2020
-//==============================================================================
 inline void base_fbo::AttachTexture(
     GLenum              attachment,
     const base_texture& texture,
@@ -154,19 +84,12 @@ inline void base_fbo::AttachTexture(
         nMipmapLevel);
 }
 
-//==============================================================================
-//!\fn                      qx::base_fbo::CheckStatus
-//
-//!\brief  check framebuffer status
-//!\author Khrapov
-//!\date   26.06.2020
-//==============================================================================
 inline void base_fbo::CheckStatus(void) const
 {
     if (const auto eStatus = glCheckFramebufferStatus(GL_FRAMEBUFFER);
         eStatus != GL_FRAMEBUFFER_COMPLETE)
     {
-        char const * pszErrorMsg = nullptr;
+        char const* pszErrorMsg = nullptr;
         switch (eStatus)
         {
         case GL_FRAMEBUFFER_UNDEFINED:
@@ -203,7 +126,8 @@ inline void base_fbo::CheckStatus(void) const
         case GL_FRAMEBUFFER_UNSUPPORTED:
             pszErrorMsg =
                 "The combination of internal formats of the attached "
-                "images violates an implementation - dependent set of restrictions.";
+                "images violates an implementation - dependent set of "
+                "restrictions.";
             break;
 
         case GL_FRAMEBUFFER_INCOMPLETE_MULTISAMPLE:
@@ -211,13 +135,15 @@ inline void base_fbo::CheckStatus(void) const
                 "The value of GL_RENDERBUFFER_SAMPLES is not the "
                 "same for all attached renderbuffers; if the value of "
                 "GL_TEXTURE_SAMPLES is the not same for all attached textures; "
-                "or , if the attached images are a mix of renderbuffersand textures, "
+                "or , if the attached images are a mix of renderbuffersand "
+                "textures, "
                 "the value of GL_RENDERBUFFER_SAMPLES does not match the value "
                 "of GL_TEXTURE_SAMPLES. Also returned if the value "
                 "of GL_TEXTURE_FIXED_SAMPLE_LOCATIONS is not the same for all "
                 "attached textures; or , if the attached images are a mix "
                 "of renderbuffersand textures, the value of "
-                "GL_TEXTURE_FIXED_SAMPLE_LOCATIONS is not GL_TRUE for all attached textures.";
+                "GL_TEXTURE_FIXED_SAMPLE_LOCATIONS is not GL_TRUE for all "
+                "attached textures.";
             break;
 
         case GL_FRAMEBUFFER_INCOMPLETE_LAYER_TARGETS:
@@ -227,16 +153,15 @@ inline void base_fbo::CheckStatus(void) const
                 "color attachments are not from textures of the same target.";
             break;
 
-        default:
-            pszErrorMsg = "Unknown error";
-            break;
+        default: pszErrorMsg = "Unknown error"; break;
         }
 
-        ASSERT_MSG(0,
-                   "Framebuffer status is not complete: Status: %d, Error: %s",
-                   eStatus,
-                   pszErrorMsg);
+        ASSERT_MSG(
+            0,
+            "Framebuffer status is not complete: Status: %d, Error: %s",
+            eStatus,
+            pszErrorMsg);
     }
 }
 
-}
+} // namespace qx

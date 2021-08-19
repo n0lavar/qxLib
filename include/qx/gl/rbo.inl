@@ -1,37 +1,31 @@
-//==============================================================================
-//
-//!\file                           rbo.inl
-//
-//!\brief       Contains qx::base_rbo class
-//!\details     ~
-//
-//!\author      Khrapov
-//!\date        20.01.2020
-//!\copyright   (c) Nick Khrapov, 2020. All right reserved.
-//
-//==============================================================================
+/**
+
+    @file      rbo.inl
+    @brief     Contains qx::base_rbo class implementation
+    @author    Khrapov
+    @date      20.01.2020
+    @copyright © Nick Khrapov, 2021. All right reserved.
+
+**/
 
 namespace qx
 {
 
-//==============================================================================
-//!\fn                         qx::base_rbo::Init
-//
-//!\brief  Init RBO with width and height
-//!\param  nWidth          - width
-//!\param  nHeight         - height
-//!\param  eInternalFormat - internal format used for images
-//!\param  eAttachment     - attachment point of the framebuffer
-//!\param  nMultisamples   - samples number, 0 - disable
-//!\author Khrapov
-//!\date   20.01.2020
-//==============================================================================
+inline qx::base_rbo::~base_rbo(void)
+{
+    if (m_nBuffer != std::numeric_limits<GLuint>::max())
+    {
+        glDeleteRenderbuffers(1, &m_nBuffer);
+        m_nBuffer = std::numeric_limits<GLuint>::max();
+    }
+}
+
 inline void base_rbo::Init(
     size_t nWidth,
     size_t nHeight,
     GLenum eInternalFormat,
     GLenum eAttachment,
-    size_t nMultisamples)
+    size_t nMultiSamples)
 {
     m_nWidth          = nWidth;
     m_nHeight         = nHeight;
@@ -39,11 +33,11 @@ inline void base_rbo::Init(
     m_eAttachmentType = eAttachment;
 
     // use a single renderbuffer object for both a depth and stencil buffer.
-    if (nMultisamples > 0)
+    if (nMultiSamples > 0)
     {
         glRenderbufferStorageMultisample(
             GL_RENDERBUFFER,
-            static_cast<GLsizei>(nMultisamples),
+            static_cast<GLsizei>(nMultiSamples),
             eInternalFormat,
             static_cast<GLsizei>(nWidth),
             static_cast<GLsizei>(nHeight));
@@ -58,68 +52,50 @@ inline void base_rbo::Init(
     }
 }
 
-//==============================================================================
-//!\fn                        qx::base_rbo::Delete
-//
-//!\brief  Delete rbo
-//!\author Khrapov
-//!\date   24.07.2020
-//==============================================================================
-inline qx::base_rbo::~base_rbo(void)
-{
-    Delete();
-}
-
-//==============================================================================
-//!\fn                       qx::base_rbo::Generate
-//
-//!\brief  Generate buffer
-//!\author Khrapov
-//!\date   20.01.2020
-//==============================================================================
 inline void base_rbo::Generate(void)
 {
     glGenRenderbuffers(1, &m_nBuffer);
 }
 
-//==============================================================================
-//!\fn                        qx::base_rbo::Delete
-//
-//!\brief  Delete buffer
-//!\author Khrapov
-//!\date   20.01.2020
-//==============================================================================
-inline void base_rbo::Delete(void)
-{
-    if (m_nBuffer != std::numeric_limits<GLuint>::max())
-    {
-        glDeleteRenderbuffers(1, &m_nBuffer);
-        m_nBuffer = std::numeric_limits<GLuint>::max();
-    }
-}
-
-//==============================================================================
-//!\fn                         qx::base_rbo::Bind
-//
-//!\brief  Bind buffer
-//!\author Khrapov
-//!\date   20.01.2020
-//==============================================================================
 inline void base_rbo::Bind(void) const
 {
     glBindRenderbuffer(GL_RENDERBUFFER, m_nBuffer);
 }
 
-//==============================================================================
-//!\fn                        qx::base_rbo::Unbind
-//
-//!\brief  Unbind buffer
-//!\author Khrapov
-//!\date   20.01.2020
-//==============================================================================
 inline void base_rbo::Unbind(void) const
 {
     glBindRenderbuffer(GL_RENDERBUFFER, 0);
 }
 
+inline GLuint base_rbo::GetBufferName(void) const
+{
+    return m_nBuffer;
 }
+
+inline bool base_rbo::IsGenerated(void) const
+{
+    return m_nBuffer != std::numeric_limits<GLuint>::max();
+}
+
+inline size_t base_rbo::GetWidth(void) const
+{
+    return m_nWidth;
+}
+
+inline size_t base_rbo::GetHeight(void) const
+{
+    return m_nHeight;
+}
+
+inline GLenum base_rbo::GetInternalFormat(void) const
+{
+    return m_eInternalFormat;
+}
+
+inline GLenum base_rbo::GetAttachmentType(void) const
+{
+    return m_eAttachmentType;
+}
+
+
+} // namespace qx

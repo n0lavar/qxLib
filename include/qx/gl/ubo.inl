@@ -2,7 +2,7 @@
 //
 //!\file                        ubo.inl
 //
-//!\brief       Contains qx::base_ubo class
+//!\brief       Contains qx::base_ubo class implementation
 //!\details     ~
 //
 //!\author      Khrapov
@@ -14,14 +14,6 @@
 namespace qx
 {
 
-//==============================================================================
-//!\fn                      qx::base_ubo::GetMaxSize
-//
-//!\brief  Get max UBO size
-//!\retval max UBO size
-//!\author Khrapov
-//!\date   9.01.2020
-//==============================================================================
 inline GLint base_ubo::GetMaxSize(void) const
 {
     GLint ret;
@@ -29,4 +21,14 @@ inline GLint base_ubo::GetMaxSize(void) const
     return ret;
 }
 
+inline GLenum base_ubo::GetBufferType(void) const
+{
+    return GL_UNIFORM_BUFFER;
 }
+
+inline GLbitfield base_ubo::GetBarrierBit(void) const
+{
+    return GL_UNIFORM_BARRIER_BIT;
+}
+
+} // namespace qx

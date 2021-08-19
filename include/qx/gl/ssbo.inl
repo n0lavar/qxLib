@@ -2,7 +2,7 @@
 //
 //!\file                          ssbo.inl
 //
-//!\brief       Contains qx::base_ssbo class
+//!\brief       Contains qx::base_ssbo class implementation
 //!\details     ~
 //
 //!\author      Khrapov
@@ -14,14 +14,6 @@
 namespace qx
 {
 
-//==============================================================================
-//!\fn                      qx::base_ssbo::GetMaxSize
-//
-//!\brief  Get max SSBO size
-//!\retval max SSBO size
-//!\author Khrapov
-//!\date   9.01.2020
-//==============================================================================
 inline GLint base_ssbo::GetMaxSize(void) const
 {
     GLint ret;
@@ -29,4 +21,13 @@ inline GLint base_ssbo::GetMaxSize(void) const
     return ret;
 }
 
+inline GLenum base_ssbo::GetBufferType(void) const
+{
+    return GL_SHADER_STORAGE_BUFFER;
 }
+inline GLbitfield base_ssbo::GetBarrierBit(void) const
+{
+    return GL_SHADER_STORAGE_BARRIER_BIT;
+}
+
+} // namespace qx

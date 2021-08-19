@@ -1,15 +1,12 @@
-//==============================================================================
-//
-//!\file                            fbo.h
-//
-//!\brief       Contains qx::base_fbo class
-//!\details     ~
-//
-//!\author      Khrapov
-//!\date        20.01.2020
-//!\copyright   (c) Nick Khrapov, 2020. All right reserved.
-//
-//==============================================================================
+/**
+
+    @file      fbo.h
+    @brief     Contains qx::base_fbo class
+    @author    Khrapov
+    @date      20.01.2020
+    @copyright © Nick Khrapov, 2021. All right reserved.
+
+**/
 #pragma once
 
 #include <qx/gl/rbo.h>
@@ -18,61 +15,74 @@
 namespace qx
 {
 
-//==============================================================================
-//
-//!\class                    qx::base_fbo
-//
-//!\brief   Base FBO class
-//!\details ~
-//
-//!\author  Khrapov
-//!\date    10.07.2020
-//
-//==============================================================================
+/**
+
+    @class   qx::base_fbo
+
+    @brief   Base FBO class
+    @details ~
+
+    @author  Khrapov
+    @date    10.07.2020
+
+**/
 class base_fbo : public IBuffer
 {
 public:
+    /**
+        @brief base_fbo object destructor
+    **/
+    virtual ~base_fbo(void);
 
-    friend class base_fbo;
+    QX_DECL_IBUFFER
 
-    virtual                 ~base_fbo       (void);
+    /**
+        @brief Set target type
+        @param target - GL_FRAMEBUFFER, GL_DRAW_FRAMEBUFFER or GL_READ_FRAMEBUFFER
+    **/
+    void SetTarget(GLenum target);
 
-    virtual void            Generate        (void)                                   override;
-    virtual void            Delete          (void)                                   override;
-    virtual void            Bind            (void)                          const    override;
-    virtual void            Unbind          (void)                          const    override;
-    virtual GLuint          GetBufferName   (void)                          const    override;
-    virtual bool            IsGenerated     (void)                          const    override;
+    /**
+        @brief Attach RBO th FRO
+        @param rbo - render buffer object
+    **/
+    void AttachRBO(const base_rbo& rbo);
 
-            void            SetTarget       (GLenum                 target);
+    /**
+        @brief Attache a single face of a specific MIP level to FBO
+        @param attachment   - attachment point of the framebuffer
+        @param texture      - fbo texture
+        @param nMipmapLevel - mipmap level of texture
+    **/
+    void AttachTexture2D(
+        GLenum              attachment,
+        const base_texture& texture,
+        GLint               nMipmapLevel = 0);
 
-            void            AttachRBO       (const base_rbo       & rbo);
+    /**
+        @brief Attache all cube map faces of a specific MIP level
+               as an array of images (layered framebuffer)
+        @param attachment   - attachment point of the framebuffer
+        @param texture      - fbo texture
+        @param nMipmapLevel - mipmap level of texture
+    **/
+    void AttachTexture(
+        GLenum              attachment,
+        const base_texture& texture,
+        GLint               nMipmapLevel = 0);
 
-            void            AttachTexture2D (GLenum                 attachment,
-                                             const base_texture   & texture,
-                                             GLint                  nMipmapLevel = 0);
-            void            AttachTexture   (GLenum                 attachment,
-                                             const base_texture   & texture,
-                                             GLint                  nMipmapLevel = 0);
-            void            CheckStatus     (void)                          const;
+    /**
+        @brief Check framebuffer status
+    **/
+    void CheckStatus(void) const;
 
 private:
-
-    GLuint  m_nBuffer   = std::numeric_limits<GLuint>::max();
-    GLenum  m_nTarget   = GL_FRAMEBUFFER;
+    GLuint m_nBuffer = std::numeric_limits<GLuint>::max();
+    GLenum m_nTarget = GL_FRAMEBUFFER;
 };
-
-inline GLuint base_fbo::GetBufferName(void) const
-{
-    return m_nBuffer;
-}
-inline bool base_fbo::IsGenerated(void) const
-{
-    return m_nBuffer != std::numeric_limits<GLuint>::max();
-}
 
 using fbo = base_fbo;
 
-}
+} // namespace qx
 
 #include <qx/gl/fbo.inl>
