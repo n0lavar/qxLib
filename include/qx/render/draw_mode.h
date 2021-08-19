@@ -1,15 +1,12 @@
-//==============================================================================
-//
-//!\file                          draw_mode.h
-//
-//!\brief       Contains qx::draw_mode enum
-//!\details     ~
-//
-//!\author      Khrapov
-//!\date        9.04.2021
-//!\copyright   (c) Nick Khrapov, 2021. All right reserved.
-//
-//==============================================================================
+/**
+
+    @file      draw_mode.h
+    @brief     Contains qx::draw_mode enum
+    @author    Khrapov
+    @date      9.04.2021
+    @copyright © Nick Khrapov, 2021. All right reserved.
+
+**/
 #pragma once
 
 namespace qx
