@@ -1,15 +1,12 @@
-//==============================================================================
-//
-//!\file                         iterator.h
-//
-//!\brief       Contains random access iterator classes
-//!\details     ~
-//
-//!\author      Khrapov
-//!\date        27.07.2019
-//!\copyright   (c) Nick Khrapov, 2019. All right reserved.
-//
-//==============================================================================
+/**
+
+    @file      iterator.h
+    @brief     Contains random access iterator classes
+    @author    Khrapov
+    @date      27.07.2019
+    @copyright © Nick Khrapov, 2021. All right reserved.
+
+**/
 #pragma once
 
 #include <iterator>
@@ -17,28 +14,28 @@
 namespace qx
 {
 
-template <class C>
+template<class C>
 class const_iterator;
 
-//==============================================================================
-//
-//!\class                   qx::iterator<C>
-//
-//!\brief   Non-const random access iterator type
-//!\details Use it for range-based loops and std algorithms
-//          C have to provide at(size_t)
-//
-//!\author  Khrapov
-//!\date    27.07.2019
-//
-//==============================================================================
-template <class C>
+/**
+
+    @class   qx::iterator<C>
+
+    @brief   Non-const random access iterator type
+    @details Use it for range-based loops and std algorithms
+             C have to provide at(size_t)
+
+    @tparam  C - container type
+    @author  Khrapov
+    @date    27.07.2019
+
+**/
+template<class C>
 class iterator
 {
     friend class const_iterator<C>;
 
 public:
-
     using value_type        = typename C::value_type;
     using pointer           = typename C::pointer;
     using reference         = typename C::reference;
@@ -47,9 +44,8 @@ public:
     using iterator_category = std::random_access_iterator_tag;
 
 public:
-
-    constexpr iterator (void) noexcept = default;
-    constexpr iterator (C* c, size_type i) noexcept
+    constexpr iterator(void) noexcept = default;
+    constexpr iterator(C* c, size_type i) noexcept
         : m_nIndex(i)
         , m_pCollection(c)
     {
@@ -88,7 +84,7 @@ public:
         --m_nIndex;
         return r;
     }
-    constexpr iterator & operator+=(size_type n) noexcept
+    constexpr iterator& operator+=(size_type n) noexcept
     {
         m_nIndex += n;
         return *this;
@@ -108,31 +104,31 @@ public:
         iterator r(*this);
         return r -= n;
     }
-    constexpr difference_type operator-(iterator  const& r) const noexcept
+    constexpr difference_type operator-(iterator const& r) const noexcept
     {
         return static_cast<difference_type>(m_nIndex - r.m_nIndex);
     }
-    constexpr bool operator<(iterator const & r) const noexcept
+    constexpr bool operator<(iterator const& r) const noexcept
     {
         return m_nIndex < r.m_nIndex;
     }
-    constexpr bool operator<=(iterator const & r) const noexcept
+    constexpr bool operator<=(iterator const& r) const noexcept
     {
         return m_nIndex <= r.m_nIndex;
     }
-    constexpr bool operator>(iterator const & r) const noexcept
+    constexpr bool operator>(iterator const& r) const noexcept
     {
         return m_nIndex > r.m_nIndex;
     }
-    constexpr bool operator>=(iterator const & r) const noexcept
+    constexpr bool operator>=(iterator const& r) const noexcept
     {
         return m_nIndex >= r.m_nIndex;
     }
-    constexpr bool operator!=(const iterator & r) const noexcept
+    constexpr bool operator!=(const iterator& r) const noexcept
     {
         return m_nIndex != r.m_nIndex;
     }
-    constexpr bool operator==(const iterator & r) const noexcept
+    constexpr bool operator==(const iterator& r) const noexcept
     {
         return m_nIndex == r.m_nIndex;
     }
@@ -142,28 +138,27 @@ public:
     }
 
 private:
-
-    size_type   m_nIndex        = 0u;
-    C*          m_pCollection   = nullptr;
+    size_type m_nIndex      = 0u;
+    C*        m_pCollection = nullptr;
 };
 
-//==============================================================================
-//
-//!\class               qx::const_iterator<C>
-//
-//!\brief   Const random access iterator type
-//!\details Use it for range-based loops and std algorithms
-//          C have to provide at(size_t)
-//
-//!\author  Khrapov
-//!\date    19.03.2020
-//
-//==============================================================================
-template <class C>
+/**
+
+    @class   qx::const_iterator<C>
+
+    @brief   Const random access iterator type
+    @details Use it for range-based loops and std algorithms
+             C have to provide at(size_t)
+
+    @tparam  C - container type
+    @author  Khrapov
+    @date    27.07.2019
+
+**/
+template<class C>
 class const_iterator
 {
 public:
-
     using value_type        = typename C::value_type;
     using pointer           = typename C::const_pointer;
     using reference         = typename C::const_reference;
@@ -172,14 +167,13 @@ public:
     using iterator_category = std::random_access_iterator_tag;
 
 public:
-
-    constexpr const_iterator (void) noexcept = default;
-    constexpr const_iterator (const C* c, size_type i) noexcept
+    constexpr const_iterator(void) noexcept = default;
+    constexpr const_iterator(const C* c, size_type i) noexcept
         : m_nIndex(i)
         , m_pCollection(c)
     {
     }
-    constexpr const_iterator (const iterator<C>& it) noexcept
+    constexpr const_iterator(const iterator<C>& it) noexcept
         : m_nIndex(it.m_nIndex)
         , m_pCollection(it.m_pCollection)
     {
@@ -242,27 +236,27 @@ public:
     {
         return static_cast<difference_type>(m_nIndex - r.m_nIndex);
     }
-    constexpr bool operator<(const_iterator const & r) const noexcept
+    constexpr bool operator<(const_iterator const& r) const noexcept
     {
         return m_nIndex < r.m_nIndex;
     }
-    constexpr bool operator<=(const_iterator const & r) const noexcept
+    constexpr bool operator<=(const_iterator const& r) const noexcept
     {
         return m_nIndex <= r.m_nIndex;
     }
-    constexpr bool operator>(const_iterator const & r) const noexcept
+    constexpr bool operator>(const_iterator const& r) const noexcept
     {
         return m_nIndex > r.m_nIndex;
     }
-    constexpr bool operator>=(const_iterator const & r) const noexcept
+    constexpr bool operator>=(const_iterator const& r) const noexcept
     {
         return m_nIndex >= r.m_nIndex;
     }
-    constexpr bool operator!=(const const_iterator & r) const noexcept
+    constexpr bool operator!=(const const_iterator& r) const noexcept
     {
         return m_nIndex != r.m_nIndex;
     }
-    constexpr bool operator==(const const_iterator & r) const noexcept
+    constexpr bool operator==(const const_iterator& r) const noexcept
     {
         return m_nIndex == r.m_nIndex;
     }
@@ -272,34 +266,33 @@ public:
     }
 
 private:
-
-    size_type   m_nIndex        = 0u;
-    const C*    m_pCollection   = nullptr;
+    size_type m_nIndex      = 0u;
+    const C*  m_pCollection = nullptr;
 };
 
 
-template <class C>
+template<class C>
 class const_reverse_iterator;
 
-//==============================================================================
-//
-//!\class                   qx::reverse_iterator<C>
-//
-//!\brief   Non-const random access reverse iterator type
-//!\details Use it for range-based loops and std algorithms
-//          C have to provide at(size_t)
-//
-//!\author  Khrapov
-//!\date    27.07.2019
-//
-//==============================================================================
-template <class C>
+/**
+
+    @class   qx::reverse_iterator<C>
+
+    @brief   Non-const random access reverse iterator type
+    @details Use it for range-based loops and std algorithms
+             C have to provide at(size_t)
+
+    @tparam  C - container type
+    @author  Khrapov
+    @date    27.07.2019
+
+**/
+template<class C>
 class reverse_iterator
 {
     friend class const_reverse_iterator<C>;
 
 public:
-
     using value_type        = typename C::value_type;
     using pointer           = typename C::pointer;
     using reference         = typename C::reference;
@@ -308,9 +301,8 @@ public:
     using iterator_category = std::random_access_iterator_tag;
 
 public:
-
-    constexpr reverse_iterator (void) noexcept = default;
-    constexpr reverse_iterator (C* c, size_type i) noexcept
+    constexpr reverse_iterator(void) noexcept = default;
+    constexpr reverse_iterator(C* c, size_type i) noexcept
         : m_nIndex(i)
         , m_pCollection(c)
     {
@@ -369,33 +361,34 @@ public:
         reverse_iterator r(*this);
         return r += n;
     }
-    constexpr difference_type operator-(reverse_iterator const& r) const noexcept
+    constexpr difference_type operator-(
+        reverse_iterator const& r) const noexcept
     {
         return static_cast<difference_type>(r.m_nIndex - m_nIndex);
     }
     // + 1 is necessary, as `m_nIndex = -1 (aka size_type::max)`
     // may be used as end (past-the-last) element
-    constexpr bool operator<(reverse_iterator const & r) const noexcept
+    constexpr bool operator<(reverse_iterator const& r) const noexcept
     {
         return m_nIndex + 1 > r.m_nIndex + 1;
     }
-    constexpr bool operator<=(reverse_iterator const & r) const noexcept
+    constexpr bool operator<=(reverse_iterator const& r) const noexcept
     {
         return m_nIndex + 1 >= r.m_nIndex + 1;
     }
-    constexpr bool operator>(reverse_iterator const & r) const noexcept
+    constexpr bool operator>(reverse_iterator const& r) const noexcept
     {
         return m_nIndex + 1 < r.m_nIndex + 1;
     }
-    constexpr bool operator>=(reverse_iterator const & r) const noexcept
+    constexpr bool operator>=(reverse_iterator const& r) const noexcept
     {
         return m_nIndex + 1 <= r.m_nIndex + 1;
     }
-    constexpr bool operator!=(const reverse_iterator & r) const noexcept
+    constexpr bool operator!=(const reverse_iterator& r) const noexcept
     {
         return m_nIndex + 1 != r.m_nIndex + 1;
     }
-    constexpr bool operator==(const reverse_iterator & r) const noexcept
+    constexpr bool operator==(const reverse_iterator& r) const noexcept
     {
         return m_nIndex + 1 == r.m_nIndex + 1;
     }
@@ -405,28 +398,27 @@ public:
     }
 
 private:
-
-    size_type   m_nIndex        = 0u;
-    C*          m_pCollection   = nullptr;
+    size_type m_nIndex      = 0u;
+    C*        m_pCollection = nullptr;
 };
 
-//==============================================================================
-//
-//!\class               qx::const_reverse_iterator<C>
-//
-//!\brief   Const reverse random access iterator type
-//!\details Use it for range-based loops and std algorithms
-//          C have to provide at(size_t)
-//
-//!\author  Khrapov
-//!\date    19.03.2020
-//
-//==============================================================================
-template <class C>
+/**
+
+    @class   qx::const_reverse_iterator<C>
+
+    @brief   Const reverse random access iterator type
+    @details Use it for range-based loops and std algorithms
+             C have to provide at(size_t)
+
+    @tparam  C - container type
+    @author  Khrapov
+    @date    19.03.2020
+
+**/
+template<class C>
 class const_reverse_iterator
 {
 public:
-
     using value_type        = typename C::value_type;
     using pointer           = typename C::const_pointer;
     using reference         = typename C::const_reference;
@@ -435,14 +427,13 @@ public:
     using iterator_category = std::random_access_iterator_tag;
 
 public:
-
-    constexpr const_reverse_iterator (void) noexcept = default;
-    constexpr const_reverse_iterator (const C* c, size_type i) noexcept
+    constexpr const_reverse_iterator(void) noexcept = default;
+    constexpr const_reverse_iterator(const C* c, size_type i) noexcept
         : m_nIndex(i)
         , m_pCollection(c)
     {
     }
-    constexpr const_reverse_iterator (const reverse_iterator<C>& it) noexcept
+    constexpr const_reverse_iterator(const reverse_iterator<C>& it) noexcept
         : m_nIndex(it.m_nIndex)
         , m_pCollection(it.m_pCollection)
     {
@@ -501,33 +492,34 @@ public:
         const_reverse_iterator r(*this);
         return r += n;
     }
-    constexpr difference_type operator-(const_reverse_iterator const& r) const noexcept
+    constexpr difference_type operator-(
+        const_reverse_iterator const& r) const noexcept
     {
         return static_cast<difference_type>(r.m_nIndex - m_nIndex);
     }
     // + 1 is necessary, as `m_nIndex = -1 (aka size_type::max)`
     // may be used as end (past-the-last) element
-    constexpr bool operator<(const_reverse_iterator const & r) const noexcept
+    constexpr bool operator<(const_reverse_iterator const& r) const noexcept
     {
         return m_nIndex + 1 > r.m_nIndex + 1;
     }
-    constexpr bool operator<=(const_reverse_iterator const & r) const noexcept
+    constexpr bool operator<=(const_reverse_iterator const& r) const noexcept
     {
         return m_nIndex + 1 >= r.m_nIndex + 1;
     }
-    constexpr bool operator>(const_reverse_iterator const & r) const noexcept
+    constexpr bool operator>(const_reverse_iterator const& r) const noexcept
     {
         return m_nIndex + 1 < r.m_nIndex + 1;
     }
-    constexpr bool operator>=(const_reverse_iterator const & r) const noexcept
+    constexpr bool operator>=(const_reverse_iterator const& r) const noexcept
     {
         return m_nIndex + 1 <= r.m_nIndex + 1;
     }
-    constexpr bool operator!=(const const_reverse_iterator & r) const noexcept
+    constexpr bool operator!=(const const_reverse_iterator& r) const noexcept
     {
         return m_nIndex + 1 != r.m_nIndex + 1;
     }
-    constexpr bool operator==(const const_reverse_iterator & r) const noexcept
+    constexpr bool operator==(const const_reverse_iterator& r) const noexcept
     {
         return m_nIndex + 1 == r.m_nIndex + 1;
     }
@@ -537,9 +529,8 @@ public:
     }
 
 private:
-
-    size_type   m_nIndex        = 0u;
-    const C*    m_pCollection   = nullptr;
+    size_type m_nIndex      = 0u;
+    const C*  m_pCollection = nullptr;
 };
 
-}
+} // namespace qx

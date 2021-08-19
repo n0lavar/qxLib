@@ -88,9 +88,12 @@ public:
 
     static constexpr size_type npos = std::numeric_limits<size_type>::max();
 
-    QX_IMPL_CONTAINER(basic_string)
+    QX_IMPL_CONTAINER(basic_string);
 
 public:
+    /**
+        @brief basic_string object constructor
+    **/
     basic_string(void) noexcept = default;
 
     /**
