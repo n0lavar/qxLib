@@ -1,15 +1,12 @@
-//==============================================================================
-//
-//!\file                        useful_funcs.h
-//
-//!\brief       Different useful functions
-//!\details     ~
-//
-//!\author      Khrapov
-//!\date        1.11.2019
-//!\copyright   (c) Nick Khrapov, 2019. All right reserved.
-//
-//==============================================================================
+/**
+
+    @file      useful_funcs.h
+    @brief     Different useful functions
+    @author    Khrapov
+    @date      1.11.2019
+    @copyright © Nick Khrapov, 2021. All right reserved.
+
+**/
 #pragma once
 
 #include <qx/math.h>
@@ -22,17 +19,16 @@
 namespace qx
 {
 
-//==============================================================================
-//!\fn                      qx::between<T, Compare>
-//
-//!\brief  Checks if value is between left and right
-//!\param  left  - left value
-//!\param  right - right value
-//!\param  value - value
-//!\retval       - true if so
-//!\author Khrapov
-//!\date   3.11.2019
-//==============================================================================
+/**
+    @brief  Checks if value is between left and right
+    @tparam T       - value type
+    @tparam Compare - comparator type
+    @param  left    - left value
+    @param  value   - value
+    @param  right   - right value
+    @param  compare - comparator function
+    @retval         - true, left <= value <= right
+**/
 template<typename T, typename Compare = std::less_equal<>>
 constexpr bool between(T left, T value, T right, Compare compare)
 {
@@ -48,14 +44,17 @@ constexpr bool between(T left, T value, T right, Compare compare)
         i64 v = static_cast<i64>(value);
         return between(l, v, r, compare);
     }
-    else if constexpr (std::is_integral_v<T> && std::is_same_v<Compare, std::less_equal<>>)
+    else if constexpr (
+        std::is_integral_v<T> && std::is_same_v<Compare, std::less_equal<>>)
     {
         return compare(static_cast<size_t>(value - left), (right - left));
     }
-    else if constexpr (std::is_floating_point_v<T> && std::is_same_v<Compare, std::less_equal<>>)
+    else if constexpr (
+        std::is_floating_point_v<
+            T> && std::is_same_v<Compare, std::less_equal<>>)
     {
-        return (left  < value || qx::epsilon_equal(left,  value))
-            && (value < right || qx::epsilon_equal(value, right));
+        return (left < value || qx::epsilon_equal(left, value))
+               && (value < right || qx::epsilon_equal(value, right));
     }
     else
     {
@@ -64,7 +63,17 @@ constexpr bool between(T left, T value, T right, Compare compare)
 
     QX_POP_SUPPRESS_WARNINGS
 }
-// overloading for disabling 4388 warning with Compare instantiation
+
+/**
+    @brief   Checks if value is between left and right
+    @details Overloading for disabling 4388 warning with Compare instantiation
+    @tparam  T       - value type
+    @tparam  Compare - comparator type
+    @param   left    - left value
+    @param   value   - value
+    @param   right   - right value
+    @retval          - true, left <= value <= right
+**/
 template<typename T, typename Compare = std::less_equal<>>
 constexpr bool between(T left, T value, T right)
 {
@@ -73,15 +82,12 @@ constexpr bool between(T left, T value, T right)
     QX_POP_SUPPRESS_WARNINGS
 }
 
-//==============================================================================
-//!\fn                      qx::destruct<iterator>
-//
-//!\brief  Call destructors
-//!\param  start - start iterator
-//!\param  end   - end iterator
-//!\author Khrapov
-//!\date   29.02.2020
-//==============================================================================
+/**
+    @brief  Call destructors
+    @tparam iterator - iterator type
+    @param  start    - start iterator
+    @param  end      - end iterator
+**/
 template<class iterator>
 inline void destruct(iterator start, iterator end)
 {
@@ -93,15 +99,13 @@ inline void destruct(iterator start, iterator end)
     }
 }
 
-//==============================================================================
-//!\fn                        qx::make_array<T, N>
-//
-//!\brief  Fill array with value in constructor
-//!\param  init_val - init value
-//!\retval          - filled array
-//!\author Khrapov
-//!\date   4.02.2021
-//==============================================================================
+/**
+    @brief  Fill array with value in constructor
+    @tparam N        - number of elements in array
+    @tparam T        - array value type
+    @param  init_val - init value
+    @retval          - filled array
+**/
 template<size_t N, typename T>
 constexpr auto make_array(T init_val = T())
 {
@@ -110,4 +114,4 @@ constexpr auto make_array(T init_val = T())
     return ret;
 }
 
-}
+} // namespace qx

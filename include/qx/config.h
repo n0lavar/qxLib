@@ -1,15 +1,12 @@
-//==============================================================================
-//
-//!\file                            config.h
-//
-//!\brief       Config macros
-//!\details     ~
-//
-//!\author      Khrapov
-//!\date        25.09.2020
-//!\copyright   (c) Nick Khrapov, 2020. All right reserved.
-//
-//==============================================================================
+/**
+
+    @file      config.h
+    @brief     Config macros
+    @author    Khrapov
+    @date      25.09.2020
+    @copyright © Nick Khrapov, 2021. All right reserved.
+
+**/
 #pragma once
 
 //---------------------------------- platform ----------------------------------
@@ -55,9 +52,9 @@
 //------------------------------------ build -----------------------------------
 
 #ifdef _DEBUG
-    #define QX_DEBUG 1
+    #define QX_DEBUG   1
     #define QX_RELEASE 0
 #else
-    #define QX_DEBUG 0
+    #define QX_DEBUG   0
     #define QX_RELEASE 1
 #endif

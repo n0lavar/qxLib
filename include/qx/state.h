@@ -1,105 +1,103 @@
-//==============================================================================
-//
-//!\file                            state.h
-//
-//!\brief       Contains qx::state class
-//!\details     ~
-//
-//!\author      Khrapov
-//!\date        26.04.2021
-//!\copyright   (c) Nick Khrapov, 2021. All right reserved.
-//
-//==============================================================================
+/**
+
+    @file      state.h
+    @brief     Contains qx::state class
+    @author    Khrapov
+    @date      26.04.2021
+    @copyright © Nick Khrapov, 2021. All right reserved.
+
+**/
 #pragma once
+
+#include <qx/useful_macros.h>
 
 #include <limits>
 
 namespace qx
 {
 
-//==============================================================================
-//
-//!\struct                  qx::state_default_traits
-//!\author  Khrapov
-//!\date    27.04.2021
-//==============================================================================
+/**
+    @struct qx::state_default_traits
+    @date   27.04.2021
+**/
 struct state_default_traits
 {
-    using type = int;
+    using type                          = int;
     static constexpr type default_value = std::numeric_limits<int>::max();
 };
 
-//==============================================================================
-//
-//!\class                  qx::basic_state<Traits>
-//
-//!\brief   State abstraction class
-//!\details ~
-//
-//!\author  Khrapov
-//!\date    27.04.2021
-//
-//==============================================================================
+/**
+
+    @class   qx::basic_state<Traits>
+
+    @brief   State abstraction class
+    @details State is an entity that can be set to its default value
+
+    @tparam  Traits - state traits type \see qx::state_default_traits
+    @author  Khrapov
+    @date    27.04.2021
+
+**/
 template<class Traits>
 class basic_state
 {
     friend struct std::hash<basic_state<Traits>>;
 
 public:
-
-    using type = typename Traits::type;
+    using type                          = typename Traits::type;
     static constexpr type default_value = Traits::default_value;
 
-    basic_state(void)               = default;
-    basic_state(const basic_state&) = default;
-    basic_state(basic_state&&)      = default;
-    basic_state(const type& value)
-        : m_State(value)
-    {
-    }
+    QX_COPYMOVABLE(basic_state);
 
-    basic_state& operator=(const basic_state&)  = default;
-    basic_state& operator=(basic_state&&)       = default;
-    basic_state& operator=(const type& value)
-    {
-        m_State = value;
-        return *this;
-    }
+    /**
+        @brief basic_state object constructor
+    **/
+    basic_state(void) = default;
 
+    /**
+        @brief basic_state object constructor
+        @param value - start value
+    **/
+    basic_state(const type& value);
+
+    /**
+        @brief  operator=
+        @param  value - new state value
+        @retval       - this object reference
+    **/
+    basic_state& operator=(const type& value);
+
+    /**
+        @brief  operator==
+        @param   - other state
+        @retval  - true, if objects are equal
+    **/
     bool operator==(const basic_state&) const = default;
-    bool operator==(const type& value)  const
-    {
-        return m_State == value;
-    }
 
-    void reset(void)
-    {
-        m_State = default_value;
-    }
+    /**
+        @brief  operator==
+        @param  value - state value
+        @retval       - true, if objects are equal
+    **/
+    bool operator==(const type& value) const;
 
-    bool is_default(void) const
-    {
-        return m_State == default_value;
-    }
+    /**
+        @brief Reset current state to its default value
+    **/
+    void reset(void);
+
+    /**
+        @brief  Is current state default
+        @retval - true if default
+    **/
+    bool is_default(void) const;
 
 private:
-
     type m_State = default_value;
 };
 
 using state = basic_state<state_default_traits>;
 
-}
+} // namespace qx
 
-namespace std
-{
-    template <class Traits>
-    struct hash<qx::basic_state<Traits>>
-    {
-        size_t operator()(const qx::basic_state<Traits>& state) const noexcept
-        {
-            return std::hash<typename Traits::type>()(
-                state.m_State);
-        }
-    };
-}
+#include <qx/state.inl>
