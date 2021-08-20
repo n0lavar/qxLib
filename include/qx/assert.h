@@ -1,15 +1,12 @@
-//==============================================================================
-//
-//!\file                            assert.h
-//
-//!\brief       Assert macros
-//!\details     ~
-//
-//!\author      Khrapov
-//!\date        29.10.2020
-//!\copyright   (c) Nick Khrapov, 2020. All right reserved.
-//
-//==============================================================================
+/**
+
+    @file      assert.h
+    @brief     Assert macros
+    @author    Khrapov
+    @date      29.10.2020
+    @copyright © Nick Khrapov, 2021. All right reserved.
+
+**/
 #pragma once
 
 #include <qx/useful_macros.h>
@@ -32,7 +29,8 @@
 #endif
 
 #ifndef QX_PROCESS_ASSERT_MSG
-    #define QX_PROCESS_ASSERT_MSG(statement, msg, ...) QX_PROCESS_ASSERT(statement)
+    #define QX_PROCESS_ASSERT_MSG(statement, msg, ...) \
+        QX_PROCESS_ASSERT(statement)
 #endif
 
 #if QX_ENABLE_DEBUG_BREAK
@@ -57,28 +55,30 @@
 
 #if QX_ENABLE_ASSERTS
 
-    #define QX_ASSERT(statement)                                    \
-    do {                                                            \
-        if (!(statement))                                           \
-        {                                                           \
-            QX_PROCESS_ASSERT(statement);                           \
-            QX_DEBUG_BREAK;                                         \
-        }                                                           \
-    } while (false)
+    #define QX_ASSERT(statement)              \
+        do                                    \
+        {                                     \
+            if (!(statement))                 \
+            {                                 \
+                QX_PROCESS_ASSERT(statement); \
+                QX_DEBUG_BREAK;               \
+            }                                 \
+        } while (false)
 
-    #define QX_ASSERT_MSG(statement, msg, ...)                      \
-    do {                                                            \
-        if (!(statement))                                           \
-        {                                                           \
-            QX_PROCESS_ASSERT_MSG(statement, msg, ## __VA_ARGS__);  \
-            QX_DEBUG_BREAK;                                         \
-        }                                                           \
-    } while (false)
+    #define QX_ASSERT_MSG(statement, msg, ...)                        \
+        do                                                            \
+        {                                                             \
+            if (!(statement))                                         \
+            {                                                         \
+                QX_PROCESS_ASSERT_MSG(statement, msg, ##__VA_ARGS__); \
+                QX_DEBUG_BREAK;                                       \
+            }                                                         \
+        } while (false)
 
 #else
 
-    #define QX_ASSERT(statement)                QX_EMPTY_MACRO
-    #define QX_ASSERT_MSG(statement, msg, ...)  QX_EMPTY_MACRO
+    #define QX_ASSERT(statement)               QX_EMPTY_MACRO
+    #define QX_ASSERT_MSG(statement, msg, ...) QX_EMPTY_MACRO
 
 #endif
 
@@ -94,18 +94,18 @@
     #define QX_ENABLE_DCHECK QX_DEBUG
 #endif
 
-#define QX_CHECK(condition)                                 \
-            QX_ASSERT(condition);                           \
-            if (condition)
+#define QX_CHECK(condition) \
+    QX_ASSERT(condition);   \
+    if (condition)
 
 #if (QX_ENABLE_DCHECK)
 
-    #define QX_DCHECK(condition)                            \
-    QX_ASSERT(condition);                                   \
-    if (!(condition))                                       \
-    {                                                       \
-    }                                                       \
-    else
+    #define QX_DCHECK(condition) \
+        QX_ASSERT(condition);    \
+        if (!(condition))        \
+        {                        \
+        }                        \
+        else
 
 #else
 

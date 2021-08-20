@@ -1,15 +1,12 @@
-//==============================================================================
-//
-//!\file                        thread_worker.h
-//
-//!\brief       Contains thread worker class
-//!\details     ~
-//
-//!\author      Khrapov
-//!\date        17.10.2020
-//!\copyright   (c) Nick Khrapov, 2020. All right reserved.
-//
-//==============================================================================
+/**
+
+    @file      thread_worker.h
+    @brief     Contains qx::thread_worker class
+    @author    Khrapov
+    @date      17.10.2020
+    @copyright © Nick Khrapov, 2021. All right reserved.
+
+**/
 #pragma once
 
 #include <atomic>
@@ -19,22 +16,21 @@
 namespace qx
 {
 
-//================================================================================
-//
-//!\class                      qx::thread_worker
-//
-//!\brief   Thread worker class
-//!\details Inherit worker from this class, override thread_run() method
-//          with useful work and start the thread with thread_start()
-//
-//!\author  Khrapov
-//!\date    17.10.2020
-//
-//================================================================================
+/**
+
+    @class   qx::thread_worker
+
+    @brief   Thread worker class
+    @details Inherit worker from this class, override thread_run() method
+             with useful work and start the thread with thread_start()
+
+    @author  Khrapov
+    @date    17.10.2020
+
+**/
 class thread_worker
 {
 public:
-
     enum class thread_state
     {
         inactive,
@@ -44,58 +40,89 @@ public:
     };
 
 public:
+    /**
+        @brief thread_worker object destructor
+    **/
+    virtual ~thread_worker(void);
 
-    virtual                    ~thread_worker                       (void);
-            void                thread_start                        (bool   bWait = true);
-            void                thread_terminate                    (bool   bWait = true);
-            void                thread_wait_termination             (void);
+    /**
+        @brief Create and start thread
+        @param bWait - wait real thread starting
+    **/
+    void thread_start(bool bWait = true);
 
-            void                thread_set_terminate_in_destructor  (bool   bTerminate = true);
+    /**
+        @brief Terminate thread. thread_run() must check thread_is_terminating()
+               and quit if needed
+        @param bWait - wait for termination
+    **/
+    void thread_terminate(bool bWait = true);
 
-            bool                thread_is_terminating               (void) const;
-            bool                thread_is_running                   (void) const;
-            thread_state        thread_get_state                    (void) const;
-            std::thread::id     thread_get_id                       (void) const;
+    /**
+        @brief Wait for thread termination
+    **/
+    void thread_wait_termination(void);
+
+    /**
+        @brief   Set "terminate in destructor" flag
+        @details You may want to disable terminate in destructor if you want
+                 to destruct your own objects before thread termination.
+                 Don't forget to call thread_terminate() in your destructor
+        @param   bTerminate - true if need to terminate in destructor
+    **/
+    void thread_set_terminate_in_destructor(bool bTerminate = true);
+
+    /**
+        @brief  Is thread terminating
+        @retval - true if thread is terminating
+    **/
+    bool thread_is_terminating(void) const;
+
+    /**
+        @brief  Is thread running
+        @retval - true if thread is running
+    **/
+    bool thread_is_running(void) const;
+
+    /**
+        @brief  Get thread state
+        @retval - thread state
+    **/
+    thread_state thread_get_state(void) const;
+
+    /**
+        @brief  Get thread id
+        @retval - thread id
+    **/
+    std::thread::id thread_get_id(void) const;
 
 protected:
+    /**
+        @brief Thread started event
+    **/
+    virtual void thread_on_started(void);
 
-    virtual void                thread_on_started                   (void);
-    virtual void                thread_run                          (void) = 0;
-    virtual void                thread_on_stopped                   (void);
+    /**
+        @brief Thread work method
+    **/
+    virtual void thread_run(void) = 0;
+
+    /**
+        @brief Thread stopped event
+    **/
+    virtual void thread_on_stopped(void);
 
 private:
+    std::thread               m_Thread;
+    std::mutex                m_mtxTermination;
+    std::atomic<thread_state> m_eThreadState           = thread_state::inactive;
+    std::atomic_bool          m_bTerminateOnDestructor = true;
 
-    std::thread                 m_Thread;
-    std::mutex                  m_mtxTermination;
-    std::atomic<thread_state>   m_eThreadState              = thread_state::inactive;
-    std::atomic_bool            m_bTerminateOnDestructor    = true;
-    std::atomic_bool            m_bThreadTerminating        = false;    // flag to force thread to quit. thread_run()
-                                                                        // must check thread_is_terminating() and quit if needed
+    //!< flag to force thread to quit. thread_run()
+    //!< must check thread_is_terminating() and quit if needed
+    std::atomic_bool m_bThreadTerminating = false;
 };
 
-inline void thread_worker::thread_on_started(void)
-{
-}
-inline void thread_worker::thread_on_stopped(void)
-{
-}
-inline thread_worker::thread_state thread_worker::thread_get_state(void) const
-{
-    return m_eThreadState.load(std::memory_order_acquire);
-}
-inline bool thread_worker::thread_is_terminating(void) const
-{
-    return m_bThreadTerminating.load(std::memory_order_acquire);
-}
-inline bool thread_worker::thread_is_running(void) const
-{
-    return thread_get_state() != thread_state::inactive;
-}
-inline std::thread::id thread_worker::thread_get_id(void) const
-{
-    return m_Thread.get_id();
-}
-
-}
+} // namespace qx
 
 #include <qx/thread/thread_worker.inl>
