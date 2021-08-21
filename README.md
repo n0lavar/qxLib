@@ -11,10 +11,13 @@
 
 A few useful things for developing your own game engine
 
-Dependencies:
+## Dependencies:
 + C++20 (or C++17 at cpp17 branch - some features are not present)
 + glm for gl module and some algorithms
 + glew if you want to use gl module
+  
+## Documentation
+See [doxygen documentation](https://n0lavar.github.io/qxLib/files.html)
   
 ## License
 
