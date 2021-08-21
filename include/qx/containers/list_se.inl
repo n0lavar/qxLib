@@ -1,7 +1,6 @@
 /**
 
     @file      list_se.inl
-    @brief     Contains qx::list class implementation
     @author    Khrapov
     @date      5.02.2020
     @copyright © Nick Khrapov, 2021. All right reserved.

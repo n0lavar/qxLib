@@ -1,7 +1,6 @@
 /**
 
     @file      string_hash.inl
-    @brief     Contains qx::basic_string_hash class implementation
     @author    Khrapov
     @date      18.08.2021
     @copyright © Nick Khrapov, 2021. All right reserved.

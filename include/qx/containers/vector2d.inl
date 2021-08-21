@@ -1,7 +1,6 @@
 /**
 
     @file      vector2d.inl
-    @brief     Contains qx::vector2d class class implementation
     @author    Khrapov
     @date      17.02.2020
     @copyright © Nick Khrapov, 2021. All right reserved.

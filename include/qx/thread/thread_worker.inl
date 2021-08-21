@@ -1,7 +1,6 @@
 /**
 
     @file      thread_worker.inl
-    @brief     Contains qx::thread_worker class implementation
     @author    Khrapov
     @date      17.10.2020
     @copyright © Nick Khrapov, 2021. All right reserved.

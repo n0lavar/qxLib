@@ -1,7 +1,6 @@
 /**
 
     @file      threads_shared.inl
-    @brief     Contains qx::threads_shared class implementation
     @author    Khrapov
     @date      4.03.2021
     @copyright © Nick Khrapov, 2021. All right reserved.

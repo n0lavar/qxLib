@@ -1,7 +1,6 @@
 /**
 
     @file      ebo.inl
-    @brief     Contains qx::base_ebo class implementation
     @author    Khrapov
     @date      19.08.2021
     @copyright © Nick Khrapov, 2021. All right reserved.

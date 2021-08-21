@@ -1,7 +1,6 @@
 /**
 
     @file      state.inl
-    @brief     
     @author    Khrapov
     @date      20.08.2021
     @copyright © Nick Khrapov, 2021. All right reserved.

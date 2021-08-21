@@ -1,7 +1,6 @@
 /**
 
     @file      vbo.inl
-    @brief     Contains qx::base_vbo class implementation
     @author    Khrapov
     @date      19.08.2021
     @copyright © Nick Khrapov, 2021. All right reserved.

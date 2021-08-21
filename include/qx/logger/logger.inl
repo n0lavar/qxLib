@@ -1,7 +1,6 @@
 /**
 
     @file      logger.inl
-    @brief     Contains qx::logger class implementation
     @author    Khrapov
     @date      17.06.2019
     @copyright © Nick Khrapov, 2021. All right reserved.

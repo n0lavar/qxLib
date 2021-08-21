@@ -1,7 +1,6 @@
 /**
 
     @file      triangular_vector.inl
-    @brief     Contains qx::triangular_vector class implementation
     @author    Khrapov
     @date      23.02.2020
     @copyright © Nick Khrapov, 2021. All right reserved.

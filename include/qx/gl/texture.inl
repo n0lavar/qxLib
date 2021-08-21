@@ -1,7 +1,6 @@
 /**
 
     @file      texture.inl
-    @brief     Contains qx::base_texture class implementation
     @author    Khrapov
     @date      23.01.2020
     @copyright © Nick Khrapov, 2021. All right reserved.

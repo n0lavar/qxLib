@@ -1,7 +1,6 @@
 /**
 
     @file      observer.inl
-    @brief     Contains qx::subject and qx::observer classes implementation
     @author    Khrapov
     @date      6.03.2021
     @copyright © Nick Khrapov, 2021. All right reserved.

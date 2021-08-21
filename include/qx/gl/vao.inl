@@ -1,7 +1,6 @@
 /**
 
     @file      vao.inl
-    @brief     Contains qx::base_vao class implementation
     @author    Khrapov
     @date      19.01.2020
     @copyright © Nick Khrapov, 2021. All right reserved.

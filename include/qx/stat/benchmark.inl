@@ -1,7 +1,6 @@
 /**
 
     @file      benchmark.inl
-    @brief     Contains qx::benchmark class implementation
     @author    Khrapov
     @date      20.08.2021
     @copyright © Nick Khrapov, 2021. All right reserved.

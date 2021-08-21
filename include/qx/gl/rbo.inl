@@ -1,7 +1,6 @@
 /**
 
     @file      rbo.inl
-    @brief     Contains qx::base_rbo class implementation
     @author    Khrapov
     @date      20.01.2020
     @copyright © Nick Khrapov, 2021. All right reserved.
@@ -11,7 +10,7 @@
 namespace qx
 {
 
-inline qx::base_rbo::~base_rbo(void)
+inline base_rbo::~base_rbo(void)
 {
     if (m_nBuffer != std::numeric_limits<GLuint>::max())
     {

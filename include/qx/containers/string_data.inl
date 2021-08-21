@@ -1,7 +1,6 @@
 /**
 
     @file      string_data.inl
-    @brief     Contains qx::string_data class implementation
     @author    Khrapov
     @date      8.11.2020
     @copyright © Nick Khrapov, 2021. All right reserved.

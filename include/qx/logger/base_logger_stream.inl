@@ -1,7 +1,6 @@
 /**
 
     @file      base_logger_stream.inl
-    @brief     Contains qx::base_logger_stream class implementation
     @author    Khrapov
     @date      30.07.2021
     @copyright © Nick Khrapov, 2021. All right reserved.

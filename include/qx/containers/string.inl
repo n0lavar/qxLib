@@ -1,7 +1,6 @@
 /**
 
     @file      string.inl
-    @brief     Contains qx::string class implementation
     @author    Khrapov
     @date      4.09.2019
     @copyright © Nick Khrapov, 2021. All right reserved.

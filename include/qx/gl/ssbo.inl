@@ -1,15 +1,11 @@
-//==============================================================================
-//
-//!\file                          ssbo.inl
-//
-//!\brief       Contains qx::base_ssbo class implementation
-//!\details     ~
-//
-//!\author      Khrapov
-//!\date        18.01.2020
-//!\copyright   (c) Nick Khrapov, 2020. All right reserved.
-//
-//==============================================================================
+/**
+
+    @file      ssbo.inl
+    @author    Khrapov
+    @date      18.01.2020
+    @copyright © Nick Khrapov, 2021. All right reserved.
+
+**/
 
 namespace qx
 {

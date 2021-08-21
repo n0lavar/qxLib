@@ -1,7 +1,6 @@
 /**
 
     @file      color.inl
-    @brief     Contains qx::color class implementation
     @author    Khrapov
     @date      10.04.2021
     @copyright © Nick Khrapov, 2021. All right reserved.

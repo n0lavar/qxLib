@@ -1,7 +1,6 @@
 /**
 
     @file      components.inl
-    @brief     Contains qx::components class implementation
     @author    Khrapov
     @date      7.03.2021
     @copyright © Nick Khrapov, 2021. All right reserved.

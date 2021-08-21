@@ -1,7 +1,6 @@
 /**
 
     @file      shader_program.inl
-    @brief     Contains qx::base_shader_program class implementation
     @author    Khrapov
     @date      16.01.2020
     @copyright © Nick Khrapov, 2021. All right reserved.

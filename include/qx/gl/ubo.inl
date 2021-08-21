@@ -1,15 +1,11 @@
-//==============================================================================
-//
-//!\file                        ubo.inl
-//
-//!\brief       Contains qx::base_ubo class implementation
-//!\details     ~
-//
-//!\author      Khrapov
-//!\date        9.01.2020
-//!\copyright   (c) Nick Khrapov, 2020. All right reserved.
-//
-//==============================================================================
+/**
+
+    @file      ubo.inl
+    @author    Khrapov
+    @date      9.01.2020
+    @copyright © Nick Khrapov, 2021. All right reserved.
+
+**/
 
 namespace qx
 {
