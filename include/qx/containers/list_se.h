@@ -19,10 +19,8 @@ namespace qx
 /**
 
     @class   qx::list_se<T>
-
     @brief   Single ended list class
     @details ~
-
     @tparam  T - list element type
     @author  Khrapov
     @date    4.02.2020

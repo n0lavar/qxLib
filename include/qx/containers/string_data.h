@@ -25,10 +25,8 @@ enum class string_resize_type
 /**
 
     @class   qx::string_data<Traits>
-
     @brief   Represents string data
     @details Implements small string optimization
-
     @tparam  Traits - char traits. \see string_traits.h
     @author  Khrapov
     @date    8.11.2020

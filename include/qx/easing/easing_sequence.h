@@ -19,10 +19,8 @@ namespace qx
 /**
 
     @class   qx::base_easing_sequence<T>
-
     @brief   qx::base_easing_element queue
     @details ~
-
     @tparam  T - floating point ish value
     @author  Khrapov
     @date    04.05.2021

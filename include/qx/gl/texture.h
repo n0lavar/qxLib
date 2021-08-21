@@ -19,7 +19,6 @@ namespace qx
 /**
 
     @class   qx::base_texture
-
     @brief   Base texture class
     @details ~
 

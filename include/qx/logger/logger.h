@@ -113,7 +113,6 @@ namespace qx
 /**
 
     @class   qx::logger
-
     @brief   Logger class
     @details ~
 
@@ -158,7 +157,6 @@ private:
 /**
 
     @class   qx::logger_singleton
-
     @brief   Default logger instance
     @details ~
 

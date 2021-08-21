@@ -19,7 +19,6 @@ namespace qx
 /**
 
     @class   qx::cout_logger_stream
-
     @brief   Logger stream for std::cout output
     @details ~
 

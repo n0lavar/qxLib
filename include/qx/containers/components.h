@@ -21,11 +21,9 @@ namespace qx
 /**
 
     @class   qx::components<TBaseComponent>
-
     @brief   Container for components system
     @details Stores components and allows them to be accessed by template argument
              Iterators allows to access components in the order in which they are added
-
     @tparam  TBaseComponent - base component type
     @author  Khrapov
     @date    9.03.2021

@@ -23,7 +23,6 @@ class base_subject;
 /**
 
     @class   qx::observer_token
-
     @brief   Tokens are used to automatically detach observer when the observer
              object is destroyed
     @details ~
@@ -97,7 +96,6 @@ private:
 /**
 
     @class   qx::base_subject
-
     @brief   Base subject class
     @details Allows to avoid template parameter for base logic
 
@@ -167,11 +165,9 @@ private:
 /**
 
     @class   qx::subject<TObserver>
-
     @brief   Class maintains a list of its dependents, called observers,
              and notifies them automatically of any state changes
     @details ~
-
     @tparam  TObserver - observer type
     @author  Khrapov
     @date    6.03.2021
@@ -364,7 +360,6 @@ public:
 /**
 
     @class   qx::observer
-
     @brief   qx::subject class event observers
     @details ~
 

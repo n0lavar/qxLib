@@ -27,7 +27,6 @@ enum class log_file_policy
 /**
 
     @class   qx::file_logger_stream
-
     @brief   Logger stream for file output
     @details ~
 

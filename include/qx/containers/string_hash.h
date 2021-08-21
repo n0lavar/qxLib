@@ -37,10 +37,8 @@ concept string_convertable = requires(T t)
 /**
 
     @class   qx::basic_string_hash<Traits>
-
     @brief   String hash object
     @details ~
-
     @tparam  Traits - char traits. \see string_traits.h
     @author  Khrapov
     @date    13.11.2020

@@ -17,7 +17,6 @@ namespace qx
 /**
 
     @class   qx::base_vbo
-
     @brief   Base VBO class
     @details ~
 

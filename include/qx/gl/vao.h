@@ -18,7 +18,6 @@ namespace qx
 /**
 
     @class   qx::base_vao
-
     @brief   Base VAO class
     @details ~
 

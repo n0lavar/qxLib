@@ -25,14 +25,12 @@ namespace qx
 /**
 
     @class   qx::constexpr_sequence<Tag, T, Start, Func>
-
     @brief   Constexpr sequence. use unique tag for different instances
     @details Modified version of Anthony Williams constexpr counter
              https://stackoverflow.com/a/58200261/8021662
              \see examples in tests\test_constexpr_sequence.cpp
              \note that you can't vary other template parameters with same Tag
              prefer using "using my_sequence = qx::constexpr_sequence<...>"
-
     @tparam  Tag   - tag for unique instances
     @tparam  T     - value type
     @tparam  Start - start value

@@ -30,10 +30,8 @@ enum class shader_type
 /**
 
     @class   qx::shader_base<ShaderType>
-
     @brief   OpenGL base shader
     @details ~
-
     @tparam  ShaderType - 
     @author  Khrapov
     @date    17.06.2019

@@ -20,7 +20,6 @@ namespace qx
 /**
 
     @class   qx::base_shader_program
-
     @brief   Shader program class
     @details ~
 

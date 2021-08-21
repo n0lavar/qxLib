@@ -23,12 +23,10 @@ class threads_shared;
 /**
 
     @class   qx::shared_proxy<Data, SynchronizationPrimitive>
-
     @brief   A proxy class that provides access to an object stored in
              threads_shared and provides raii for synchronization primitives
     @details Locks synchronization primitive in constructor and unlocks
              in destructor
-
     @tparam  Data                     - data type
     @tparam  SynchronizationPrimitive - synchronization primitive type
     @author  Khrapov
@@ -107,11 +105,9 @@ private:
 /**
 
     @class   qx::threads_shared<Data, SynchronizationPrimitive>
-
     @brief   A class that provides thread-safe access to an object,
              including construction and destruction
     @details ~
-
     @tparam  Data                     - data type
     @tparam  SynchronizationPrimitive - synchronization primitive type
     @author  Khrapov

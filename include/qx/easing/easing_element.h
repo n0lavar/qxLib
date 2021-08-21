@@ -18,11 +18,9 @@ namespace qx
 /**
 
     @class   qx::base_easing_element<T>
-
     @brief   An updatable element representing the value of the easing function
              at a given time
     @details ~
-
     @tparam  T - floating point ish value
     @author  Khrapov
     @date    04.05.2021

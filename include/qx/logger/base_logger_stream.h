@@ -62,7 +62,6 @@ struct log_unit
 /**
 
     @class   qx::base_logger_stream
-
     @brief   Base class for logger streams
     @details ~
 

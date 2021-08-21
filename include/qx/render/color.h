@@ -25,7 +25,6 @@ namespace qx
 /**
 
     @class   qx::color
-
     @brief   RGBA color
     @details ~
 

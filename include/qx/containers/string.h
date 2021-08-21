@@ -53,13 +53,11 @@ namespace qx
 /**
 
     @class   qx::basic_string<Traits>
-
     @brief   String class
     @details A class containing a null-terminated character sequence.
              Supports small strings optimization, almost completely supports
              the std::string interface (except for some overloads),
              has many additional methods for convenient working with strings.
-
     @tparam  Traits - char traits. \see string_traits.h
     @author  Khrapov
     @date    20.10.2019

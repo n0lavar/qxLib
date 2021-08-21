@@ -17,7 +17,6 @@ namespace qx
 /**
 
     @class   qx::base_ssbo
-
     @brief   Base SSBO class
     @details ~
 
