@@ -15,7 +15,7 @@
 #include <memory>
 
 /**
-    @macro QX_TRACE_FROM
+    @def   QX_TRACE_FROM
     @brief Trace common info from instance
     @param loggerInstance - logger instance 
     @param format         - format string
@@ -33,7 +33,7 @@
         ##__VA_ARGS__)
 
 /**
-    @macro QX_TRACE_ERROR_FROM
+    @def   QX_TRACE_ERROR_FROM
     @brief Trace error from instance
     @param loggerInstance - logger instance
     @param format         - format string
@@ -51,7 +51,7 @@
         ##__VA_ARGS__)
 
 /**
-    @macro QX_TRACE_ASSERT_FROM
+    @def   QX_TRACE_ASSERT_FROM
     @brief Trace assert from instance
     @param loggerInstance - logger instance
     @param expr           - assert expression
@@ -73,7 +73,7 @@
 // redefine these macros in your own header with renaming only or using your instance of logger
 
 /**
-    @macro QX_TRACE
+    @def   QX_TRACE
     @brief Trace common info
     @param format      - format string
     @param __VA_ARGS__ - additional args for formatting
@@ -82,7 +82,7 @@
     QX_TRACE_FROM(qx::logger_singleton::get_instance(), format, ##__VA_ARGS__)
 
 /**
-    @macro QX_TRACE_ERROR
+    @def   QX_TRACE_ERROR
     @brief Trace error
     @param format      - format string
     @param __VA_ARGS__ - additional args for formatting
@@ -94,7 +94,7 @@
         ##__VA_ARGS__)
 
 /**
-    @macro QX_TRACE_ASSERT
+    @def   QX_TRACE_ASSERT
     @brief Trace assertion
     @param expr        - assert expression
     @param format      - format string

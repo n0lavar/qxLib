@@ -70,7 +70,7 @@ using constexpr_random = constexpr_sequence<
 #endif
 
 /**
-    @macro QX_UNIQUE_SEED
+    @def   QX_UNIQUE_SEED
     @brief Creates unique u32 seed for current: file, date, time (seconds) and line number
 **/
 #define QX_UNIQUE_SEED                               \

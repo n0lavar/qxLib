@@ -10,7 +10,7 @@
 #pragma once
 
 /**
-    @macro _QX_SINGLETON_IMPL
+    @def   _QX_SINGLETON_IMPL
     @brief Simple Meyer's singleton
     @param T              - your class type
     @param constructor    - constructor realization
@@ -36,14 +36,14 @@ public:                                                                \
 private:
 
 /**
-    @macro QX_SINGLETON
+    @def   QX_SINGLETON
     @brief Simple Meyer's singleton
     @param T - your class type
 **/
 #define QX_SINGLETON(T) _QX_SINGLETON_IMPL(T, = default, = default, )
 
 /**
-    @macro QX_SINGLETON_P
+    @def   QX_SINGLETON_P
     @brief Simple Meyer's singleton
     @param T              - your class type
     @param process_getter - getter processing realization
@@ -52,7 +52,7 @@ private:
     _QX_SINGLETON_IMPL(T, = default, = default, process_getter)
 
 /**
-    @macro QX_SINGLETON_C
+    @def   QX_SINGLETON_C
     @brief Simple Meyer's singleton
     @param T           - your class type
     @param constructor - constructor realization
@@ -61,7 +61,7 @@ private:
     _QX_SINGLETON_IMPL(T, { constructor }, = default, )
 
 /**
-    @macro QX_SINGLETON_CP
+    @def   QX_SINGLETON_CP
     @brief Simple Meyer's singleton
     @param T              - your class type
     @param constructor    - constructor realization
@@ -71,7 +71,7 @@ private:
     _QX_SINGLETON_IMPL(T, { constructor }, = default, process_getter)
 
 /**
-    @macro QX_SINGLETON_D
+    @def   QX_SINGLETON_D
     @brief Simple Meyer's singleton
     @param T          - your class type
     @param destructor - destructor realization
@@ -80,7 +80,7 @@ private:
     _QX_SINGLETON_IMPL(T, = default, { destructor }, )
 
 /**
-    @macro QX_SINGLETON_DP
+    @def   QX_SINGLETON_DP
     @brief Simple Meyer's singleton
     @param T              - your class type
     @param destructor     - destructor realization
@@ -90,7 +90,7 @@ private:
     _QX_SINGLETON_IMPL(T, = default, { destructor }, process_getter)
 
 /**
-    @macro QX_SINGLETON_CD
+    @def   QX_SINGLETON_CD
     @brief Simple Meyer's singleton
     @param T           - your class type
     @param constructor - constructor realization
@@ -100,7 +100,7 @@ private:
     _QX_SINGLETON_IMPL(T, { constructor }, { destructor }, )
 
 /**
-    @macro QX_SINGLETON_CDP
+    @def   QX_SINGLETON_CDP
     @brief Simple Meyer's singleton
     @param T              - your class type
     @param constructor    - constructor realization

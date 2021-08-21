@@ -244,14 +244,14 @@ constexpr wchar_t choose_char_prefix<wchar_t>(char, wchar_t w) noexcept
 #define _QX_TO_WSTRING(x) L##x
 
 /**
-    @macro QX_TO_WSTRING
+    @def   QX_TO_WSTRING
     @brief Convert char* to wchar_t*
     @param str - string to apply
 **/
 #define QX_TO_WSTRING(str) _QX_TO_WSTRING(str)
 
 /**
-    @macro QX_STR_PREFIX
+    @def   QX_STR_PREFIX
     @brief Chose witch of prefixes add to string : L or none
     @param value_type - char type
     @param str        - string to apply
@@ -260,7 +260,7 @@ constexpr wchar_t choose_char_prefix<wchar_t>(char, wchar_t w) noexcept
     qx::detail::choose_str_prefix<value_type>(str, QX_TO_WSTRING(str))
 
 /**
-    @macro QX_CHAR_PREFIX
+    @def   QX_CHAR_PREFIX
     @brief Chose witch of prefixes add to char : L or none
     @param value_type - char type
     @param ch         - string to apply

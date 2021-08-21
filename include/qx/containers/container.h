@@ -12,7 +12,7 @@
 #include <qx/patterns/iterator.h>
 
 /**
-    @macro QX_IMPL_CONTAINER
+    @def   QX_IMPL_CONTAINER
     @brief Macro for random access containers with common functions
     @param container - container type
 **/

@@ -12,14 +12,14 @@
 #include <qx/useful_funcs.h>
 
 /**
-    @macro   QX_EMPTY_MACRO
+    @def     QX_EMPTY_MACRO
     @brief   Placeholder for disabled macros
     @details Has no effect and work correctly with "if else"
 **/
 #define QX_EMPTY_MACRO ((void*)0)
 
 /**
-    @macro QX_STRINGIFY
+    @def   QX_STRINGIFY
     @brief Macro can be used to turn any text in your code into a string,
            but only the exact text between the parentheses
            There are no variable dereferencing or macro substitutions or any other sort of thing done.
@@ -28,7 +28,7 @@
 #define QX_STRINGIFY(name) #name
 
 /**
-    @macro QX_GETTER
+    @def   QX_GETTER
     @brief Fast C#-like getter
     @param type - value type
     @param name - value name
@@ -40,7 +40,7 @@
     }
 
 /**
-    @macro QX_GETTER_REF
+    @def   QX_GETTER_REF
     @brief Fast C#-like ref getter
     @param type - value type
     @param name - value name
@@ -52,7 +52,7 @@
     }
 
 /**
-    @macro QX_SETTER
+    @def   QX_SETTER
     @brief Fast C#-like setter
     @param type - value type
     @param name - value name
@@ -64,7 +64,7 @@
     }
 
 /**
-    @macro QX_LINE_NAME
+    @def   QX_LINE_NAME
     @brief Do magic! Creates a unique name using the line number
     @param prefix - name prefix
 **/
@@ -98,14 +98,14 @@ constexpr const char* last_slash(const char* str)
 } // namespace qx::detail
 
 /**
-    @macro QX_SHORT_FILE
+    @def   QX_SHORT_FILE
     @brief Cuts full absolute path to the file name only
            ex: "C:\folder1\foler2\file.h"  =>  "file.h"
 **/
 #define QX_SHORT_FILE qx::detail::last_slash(__FILE__)
 
 /**
-    @macro QX_SINGLE_ARGUMENT
+    @def   QX_SINGLE_ARGUMENT
     @brief Let macro param containing commas work fine
            "#define FOO(type, name) type name"
            FOO(QX_SINGLE_ARGUMENT(std::map<int, int>), map_var);
@@ -114,7 +114,7 @@ constexpr const char* last_slash(const char* str)
 #define QX_SINGLE_ARGUMENT(...) (__VA_ARGS__)
 
 /**
-    @macro QX_COPYABLE
+    @def   QX_COPYABLE
     @brief Define class as default copyable
     @param name - class name
 **/
@@ -123,7 +123,7 @@ constexpr const char* last_slash(const char* str)
     name& operator=(const name&) = default;
 
 /**
-    @macro QX_MOVABLE
+    @def   QX_MOVABLE
     @brief Define class as default movable
     @param name - class name
 **/
@@ -132,7 +132,7 @@ constexpr const char* last_slash(const char* str)
     name& operator=(name&&) noexcept = default;
 
 /**
-    @macro QX_COPYMOVABLE
+    @def   QX_COPYMOVABLE
     @brief Define class as default copyable and movable
     @param name - class name
 **/
@@ -141,7 +141,7 @@ constexpr const char* last_slash(const char* str)
     QX_MOVABLE(name)
 
 /**
-    @macro QX_NONCOPYABLE
+    @def   QX_NONCOPYABLE
     @brief Define class as non copyable
     @param name - class name
 **/
@@ -150,7 +150,7 @@ constexpr const char* last_slash(const char* str)
     name& operator=(const name&) = delete;
 
 /**
-    @macro QX_NONMOVABLE
+    @def   QX_NONMOVABLE
     @brief Define class as non movable
     @param name - class name
 **/
@@ -159,7 +159,7 @@ constexpr const char* last_slash(const char* str)
     name& operator=(name&&) noexcept = delete;
 
 /**
-    @macro QX_NONCOPYMOVABLE
+    @def   QX_NONCOPYMOVABLE
     @brief Define class as non copyable and non movable
     @param name - class name
 **/
@@ -254,7 +254,7 @@ struct StaticAssertBetween
 } // namespace qx::detail
 
 /**
-    @macro QX_STATIC_ASSERT_BETWEEN
+    @def   QX_STATIC_ASSERT_BETWEEN
     @brief Shows L, V and R in error msg
     @param L - left value
     @param V - value to check

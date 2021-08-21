@@ -100,7 +100,7 @@ Y* rtti_cast(X* pointer)
 #endif
 
 /**
-    @macro QX_RTTI_BASE_CLASS
+    @def   QX_RTTI_BASE_CLASS
     @brief Macro for your root class. All other classes must be inherited from
            thisClass to allow you to use RTTI functions
     @param thisClass - this class name
@@ -157,7 +157,7 @@ protected:                                                                     \
     }
 
 /**
-    @macro QX_RTTI_CLASS
+    @def   QX_RTTI_CLASS
     @brief Macro for every class inherited from class with QX_RTTI_BASE_CLASS macro
     @param thisClass  - this class name
     @param superClass - super class name (must implement QX_RTTI_CLASS or QX_RTTI_BASE_CLASS macro)
