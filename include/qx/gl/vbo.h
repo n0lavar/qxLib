@@ -1,15 +1,12 @@
-//==============================================================================
-//
-//!\file                            vbo.h
-//
-//!\brief       Contains qx::base_vbo class
-//!\details     ~
-//
-//!\author      Khrapov
-//!\date        19.01.2020
-//!\copyright   (c) Nick Khrapov, 2020. All right reserved.
-//
-//==============================================================================
+/**
+
+    @file      vbo.h
+    @brief     Contains qx::base_vbo class
+    @author    Khrapov
+    @date      19.01.2020
+    @copyright © Nick Khrapov, 2021. All right reserved.
+
+**/
 #pragma once
 
 #include <qx/gl/buffer_base.h>
@@ -17,17 +14,17 @@
 namespace qx
 {
 
-//==============================================================================
-//
-//!\class                    qx::base_vbo
-//
-//!\brief   Base VBO class
-//!\details ~
-//
-//!\author  Khrapov
-//!\date    10.07.2020
-//
-//==============================================================================
+/**
+
+    @class   qx::base_vbo
+
+    @brief   Base VBO class
+    @details ~
+
+    @author  Khrapov
+    @date    10.07.2020
+
+**/
 class base_vbo : public buffer_base
 {
 public:
