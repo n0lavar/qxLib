@@ -128,8 +128,9 @@ Macros</h2></td></tr>
 <tr class="memitem:a89dae3b1ae46f2dbe47cf0edf36be9c9"><td class="memItemLeft" align="right" valign="top"><a id="a89dae3b1ae46f2dbe47cf0edf36be9c9"></a>
 #define&#160;</td><td class="memItemRight" valign="bottom"><b>QX_PATH_SEPARATOR</b>&#160;&#160;&#160;'/'</td></tr>
 <tr class="separator:a89dae3b1ae46f2dbe47cf0edf36be9c9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae158b161fec70fada62391b9ffa7d502"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="useful__macros_8h.html#ae158b161fec70fada62391b9ffa7d502">QX_SHORT_FILE</a>&#160;&#160;&#160;qx::detail::last_slash(__FILE__)</td></tr>
-<tr class="memdesc:ae158b161fec70fada62391b9ffa7d502"><td class="mdescLeft">&#160;</td><td class="mdescRight">Cuts full absolute path to the file name only ex: "C:\folder1\foler2\file.h" =&gt; "file.h".  <a href="useful__macros_8h.html#ae158b161fec70fada62391b9ffa7d502">More...</a><br /></td></tr>
+<tr class="memitem:ae158b161fec70fada62391b9ffa7d502"><td class="memItemLeft" align="right" valign="top"><a id="ae158b161fec70fada62391b9ffa7d502"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="useful__macros_8h.html#ae158b161fec70fada62391b9ffa7d502">QX_SHORT_FILE</a>&#160;&#160;&#160;qx::detail::last_slash(__FILE__)</td></tr>
+<tr class="memdesc:ae158b161fec70fada62391b9ffa7d502"><td class="mdescLeft">&#160;</td><td class="mdescRight">Cuts full absolute path to the file name only ex: "C:\folder1\foler2\file.h" =&gt; "file.h". <br /></td></tr>
 <tr class="separator:ae158b161fec70fada62391b9ffa7d502"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8b36634eb91cfdc0b9d7ed59249f0853"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="useful__macros_8h.html#a8b36634eb91cfdc0b9d7ed59249f0853">QX_SINGLE_ARGUMENT</a>(...)&#160;&#160;&#160;(__VA_ARGS__)</td></tr>
 <tr class="memdesc:a8b36634eb91cfdc0b9d7ed59249f0853"><td class="mdescLeft">&#160;</td><td class="mdescRight">Let macro param containing commas work fine "#define FOO(type, name) type name" FOO(QX_SINGLE_ARGUMENT(std::map&lt;int, int&gt;), map_var);.  <a href="useful__macros_8h.html#a8b36634eb91cfdc0b9d7ed59249f0853">More...</a><br /></td></tr>
@@ -201,7 +202,7 @@ constexpr const char *&#160;</td><td class="memItemRight" valign="bottom"><b>qx:
 <div class="line">    name&amp; operator=(<span class="keyword">const</span> name&amp;) = <span class="keywordflow">default</span>;</div>
 </div><!-- fragment -->
 <p>Define class as default copyable. </p>
-<p>@macro QX_COPYABLE </p><dl class="params"><dt>Parameters</dt><dd>
+<dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">name</td><td>- class name </td></tr>
   </table>
@@ -232,7 +233,7 @@ constexpr const char *&#160;</td><td class="memItemRight" valign="bottom"><b>qx:
 <div class="ttc" id="auseful__macros_8h_html_ad8b86e20bfd805bba4008aadca8c8e3d"><div class="ttname"><a href="useful__macros_8h.html#ad8b86e20bfd805bba4008aadca8c8e3d">QX_COPYABLE</a></div><div class="ttdeci">#define QX_COPYABLE(name)</div><div class="ttdoc">Define class as default copyable.</div><div class="ttdef"><b>Definition:</b> <a href="useful__macros_8h_source.html#l00121">useful_macros.h:121</a></div></div>
 </div><!-- fragment -->
 <p>Define class as default copyable and movable. </p>
-<p>@macro QX_COPYMOVABLE </p><dl class="params"><dt>Parameters</dt><dd>
+<dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">name</td><td>- class name </td></tr>
   </table>
@@ -256,7 +257,6 @@ constexpr const char *&#160;</td><td class="memItemRight" valign="bottom"><b>qx:
 </div><div class="memdoc">
 
 <p>Placeholder for disabled macros. </p>
-<p>@macro QX_EMPTY_MACRO</p>
 <p>Has no effect and work correctly with "if else" </p>
 
 <p class="definition">Definition at line <a class="el" href="useful__macros_8h_source.html#l00019">19</a> of file <a class="el" href="useful__macros_8h_source.html">useful_macros.h</a>.</p>
@@ -294,7 +294,7 @@ constexpr const char *&#160;</td><td class="memItemRight" valign="bottom"><b>qx:
 <div class="line">    }</div>
 </div><!-- fragment -->
 <p>Fast C#-like getter. </p>
-<p>@macro QX_GETTER </p><dl class="params"><dt>Parameters</dt><dd>
+<dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">type</td><td>- value type </td></tr>
     <tr><td class="paramname">name</td><td>- value name </td></tr>
@@ -337,7 +337,7 @@ constexpr const char *&#160;</td><td class="memItemRight" valign="bottom"><b>qx:
 <div class="line">    }</div>
 </div><!-- fragment -->
 <p>Fast C#-like ref getter. </p>
-<p>@macro QX_GETTER_REF </p><dl class="params"><dt>Parameters</dt><dd>
+<dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">type</td><td>- value type </td></tr>
     <tr><td class="paramname">name</td><td>- value name </td></tr>
@@ -366,7 +366,7 @@ constexpr const char *&#160;</td><td class="memItemRight" valign="bottom"><b>qx:
 </div><div class="memdoc">
 
 <p>Do magic! Creates a unique name using the line number. </p>
-<p>@macro QX_LINE_NAME </p><dl class="params"><dt>Parameters</dt><dd>
+<dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">prefix</td><td>- name prefix </td></tr>
   </table>
@@ -396,7 +396,7 @@ constexpr const char *&#160;</td><td class="memItemRight" valign="bottom"><b>qx:
 <div class="line">    name&amp; operator=(name&amp;&amp;) noexcept = default;</div>
 </div><!-- fragment -->
 <p>Define class as default movable. </p>
-<p>@macro QX_MOVABLE </p><dl class="params"><dt>Parameters</dt><dd>
+<dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">name</td><td>- class name </td></tr>
   </table>
@@ -426,7 +426,7 @@ constexpr const char *&#160;</td><td class="memItemRight" valign="bottom"><b>qx:
 <div class="line">    name&amp; operator=(<span class="keyword">const</span> name&amp;) = <span class="keyword">delete</span>;</div>
 </div><!-- fragment -->
 <p>Define class as non copyable. </p>
-<p>@macro QX_NONCOPYABLE </p><dl class="params"><dt>Parameters</dt><dd>
+<dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">name</td><td>- class name </td></tr>
   </table>
@@ -457,7 +457,7 @@ constexpr const char *&#160;</td><td class="memItemRight" valign="bottom"><b>qx:
 <div class="ttc" id="auseful__macros_8h_html_a69d34c8ba6c4f5f30a1920c2d5f3f9f0"><div class="ttname"><a href="useful__macros_8h.html#a69d34c8ba6c4f5f30a1920c2d5f3f9f0">QX_NONCOPYABLE</a></div><div class="ttdeci">#define QX_NONCOPYABLE(name)</div><div class="ttdoc">Define class as non copyable.</div><div class="ttdef"><b>Definition:</b> <a href="useful__macros_8h_source.html#l00148">useful_macros.h:148</a></div></div>
 </div><!-- fragment -->
 <p>Define class as non copyable and non movable. </p>
-<p>@macro QX_NONCOPYMOVABLE </p><dl class="params"><dt>Parameters</dt><dd>
+<dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">name</td><td>- class name </td></tr>
   </table>
@@ -487,7 +487,7 @@ constexpr const char *&#160;</td><td class="memItemRight" valign="bottom"><b>qx:
 <div class="line">    name&amp; operator=(name&amp;&amp;) noexcept = delete;</div>
 </div><!-- fragment -->
 <p>Define class as non movable. </p>
-<p>@macro QX_NONMOVABLE </p><dl class="params"><dt>Parameters</dt><dd>
+<dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">name</td><td>- class name </td></tr>
   </table>
@@ -529,7 +529,7 @@ constexpr const char *&#160;</td><td class="memItemRight" valign="bottom"><b>qx:
 <div class="line">    }</div>
 </div><!-- fragment -->
 <p>Fast C#-like setter. </p>
-<p>@macro QX_SETTER </p><dl class="params"><dt>Parameters</dt><dd>
+<dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">type</td><td>- value type </td></tr>
     <tr><td class="paramname">name</td><td>- value name </td></tr>
@@ -538,25 +538,6 @@ constexpr const char *&#160;</td><td class="memItemRight" valign="bottom"><b>qx:
 </dl>
 
 <p class="definition">Definition at line <a class="el" href="useful__macros_8h_source.html#l00060">60</a> of file <a class="el" href="useful__macros_8h_source.html">useful_macros.h</a>.</p>
-
-</div>
-</div>
-<a id="ae158b161fec70fada62391b9ffa7d502"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae158b161fec70fada62391b9ffa7d502">&#9670;&nbsp;</a></span>QX_SHORT_FILE</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define QX_SHORT_FILE&#160;&#160;&#160;qx::detail::last_slash(__FILE__)</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Cuts full absolute path to the file name only ex: "C:\folder1\foler2\file.h" =&gt; "file.h". </p>
-<p>@macro QX_SHORT_FILE </p>
-
-<p class="definition">Definition at line <a class="el" href="useful__macros_8h_source.html#l00105">105</a> of file <a class="el" href="useful__macros_8h_source.html">useful_macros.h</a>.</p>
 
 </div>
 </div>
@@ -577,7 +558,7 @@ constexpr const char *&#160;</td><td class="memItemRight" valign="bottom"><b>qx:
 </div><div class="memdoc">
 
 <p>Let macro param containing commas work fine "#define FOO(type, name) type name" FOO(QX_SINGLE_ARGUMENT(std::map&lt;int, int&gt;), map_var);. </p>
-<p>@macro QX_SINGLE_ARGUMENT </p><dl class="params"><dt>Parameters</dt><dd>
+<dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">&lt;strong&gt;VA_ARGS&lt;/strong&gt;</td><td>- param containing commas </td></tr>
   </table>
@@ -625,7 +606,7 @@ constexpr const char *&#160;</td><td class="memItemRight" valign="bottom"><b>qx:
 <div class="ttc" id="auseful__macros_8h_html_a8f51bd935768d1845211352e225739ed"><div class="ttname"><a href="useful__macros_8h.html#a8f51bd935768d1845211352e225739ed">QX_LINE_NAME</a></div><div class="ttdeci">#define QX_LINE_NAME(prefix)</div><div class="ttdoc">Do magic! Creates a unique name using the line number.</div><div class="ttdef"><b>Definition:</b> <a href="useful__macros_8h_source.html#l00071">useful_macros.h:71</a></div></div>
 </div><!-- fragment -->
 <p>Shows L, V and R in error msg. </p>
-<p>@macro QX_STATIC_ASSERT_BETWEEN </p><dl class="params"><dt>Parameters</dt><dd>
+<dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">L</td><td>- left value </td></tr>
     <tr><td class="paramname">V</td><td>- value to check </td></tr>
@@ -848,7 +829,7 @@ constexpr const char *&#160;</td><td class="memItemRight" valign="bottom"><b>qx:
 </div><div class="memdoc">
 
 <p>Macro can be used to turn any text in your code into a string, but only the exact text between the parentheses There are no variable dereferencing or macro substitutions or any other sort of thing done. </p>
-<p>@macro QX_STRINGIFY </p><dl class="params"><dt>Parameters</dt><dd>
+<dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">name</td><td>- name to convert to the string </td></tr>
   </table>
