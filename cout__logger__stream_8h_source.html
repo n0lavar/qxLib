@@ -79,51 +79,51 @@ $(function() {
 <div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="keyword">namespace </span>qx</div>
 <div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;{</div>
 <div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160; </div>
-<div class="line"><a name="l00030"></a><span class="lineno"><a class="line" href="classqx_1_1cout__logger__stream.html">   30</a></span>&#160;<span class="keyword">class </span><a class="code" href="classqx_1_1cout__logger__stream.html">cout_logger_stream</a> : <span class="keyword">public</span> <a class="code" href="classqx_1_1base__logger__stream.html">base_logger_stream</a></div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;{</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    <span class="keyword">struct </span>auto_terminal_color</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    {</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;        <span class="keyword">static</span> constexpr std::string_view reset        = <span class="stringliteral">&quot;\033[0m&quot;</span>;</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;        <span class="keyword">static</span> constexpr std::string_view red          = <span class="stringliteral">&quot;\033[0;31m&quot;</span>;</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;        <span class="keyword">static</span> constexpr std::string_view red_bold     = <span class="stringliteral">&quot;\033[1;31m&quot;</span>;</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;        <span class="keyword">static</span> constexpr std::string_view green        = <span class="stringliteral">&quot;\033[0;32m&quot;</span>;</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;        <span class="keyword">static</span> constexpr std::string_view green_bold   = <span class="stringliteral">&quot;\033[1;32m&quot;</span>;</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;        <span class="keyword">static</span> constexpr std::string_view yellow       = <span class="stringliteral">&quot;\033[0;33m&quot;</span>;</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;        <span class="keyword">static</span> constexpr std::string_view yellow_bold  = <span class="stringliteral">&quot;\033[01;33m&quot;</span>;</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;        <span class="keyword">static</span> constexpr std::string_view blue         = <span class="stringliteral">&quot;\033[0;34m&quot;</span>;</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;        <span class="keyword">static</span> constexpr std::string_view blue_bold    = <span class="stringliteral">&quot;\033[1;34m&quot;</span>;</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;        <span class="keyword">static</span> constexpr std::string_view magenta      = <span class="stringliteral">&quot;\033[0;35m&quot;</span>;</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;        <span class="keyword">static</span> constexpr std::string_view magenta_bold = <span class="stringliteral">&quot;\033[1;35m&quot;</span>;</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;        <span class="keyword">static</span> constexpr std::string_view cyan         = <span class="stringliteral">&quot;\033[0;36m&quot;</span>;</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;        <span class="keyword">static</span> constexpr std::string_view cyan_bold    = <span class="stringliteral">&quot;\033[1;36m&quot;</span>;</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160; </div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;        auto_terminal_color(std::string_view <a class="code" href="classqx_1_1color.html">color</a>)</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;        {</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;            std::cout &lt;&lt; <a class="code" href="classqx_1_1color.html">color</a>;</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;        }</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;        ~auto_terminal_color(<span class="keywordtype">void</span>)</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;        {</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;            std::cout &lt;&lt; reset;</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;        }</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    };</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160; </div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classqx_1_1cout__logger__stream.html#aae5819799b3de16c21539de33463ae87">process_output</a>(std::string_view svMessage, <a class="code" href="structqx_1_1log__unit.html">log_unit</a> logUnit)</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;        <span class="keyword">override</span>;</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160; </div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classqx_1_1cout__logger__stream.html#aae380a8ac0a4667d36572fd75694305c">set_using_colors</a>(<span class="keywordtype">bool</span> bUsingColors) noexcept;</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160; </div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;    <span class="keywordtype">bool</span> m_bUsingColors = <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;};</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160; </div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;} <span class="comment">// namespace qx</span></div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160; </div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="cout__logger__stream_8inl.html">qx/logger/cout_logger_stream.inl</a>&gt;</span></div>
+<div class="line"><a name="l00029"></a><span class="lineno"><a class="line" href="classqx_1_1cout__logger__stream.html">   29</a></span>&#160;<span class="keyword">class </span><a class="code" href="classqx_1_1cout__logger__stream.html">cout_logger_stream</a> : <span class="keyword">public</span> <a class="code" href="classqx_1_1base__logger__stream.html">base_logger_stream</a></div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;{</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    <span class="keyword">struct </span>auto_terminal_color</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    {</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;        <span class="keyword">static</span> constexpr std::string_view reset        = <span class="stringliteral">&quot;\033[0m&quot;</span>;</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;        <span class="keyword">static</span> constexpr std::string_view red          = <span class="stringliteral">&quot;\033[0;31m&quot;</span>;</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;        <span class="keyword">static</span> constexpr std::string_view red_bold     = <span class="stringliteral">&quot;\033[1;31m&quot;</span>;</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;        <span class="keyword">static</span> constexpr std::string_view green        = <span class="stringliteral">&quot;\033[0;32m&quot;</span>;</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;        <span class="keyword">static</span> constexpr std::string_view green_bold   = <span class="stringliteral">&quot;\033[1;32m&quot;</span>;</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;        <span class="keyword">static</span> constexpr std::string_view yellow       = <span class="stringliteral">&quot;\033[0;33m&quot;</span>;</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;        <span class="keyword">static</span> constexpr std::string_view yellow_bold  = <span class="stringliteral">&quot;\033[01;33m&quot;</span>;</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;        <span class="keyword">static</span> constexpr std::string_view blue         = <span class="stringliteral">&quot;\033[0;34m&quot;</span>;</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;        <span class="keyword">static</span> constexpr std::string_view blue_bold    = <span class="stringliteral">&quot;\033[1;34m&quot;</span>;</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;        <span class="keyword">static</span> constexpr std::string_view magenta      = <span class="stringliteral">&quot;\033[0;35m&quot;</span>;</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;        <span class="keyword">static</span> constexpr std::string_view magenta_bold = <span class="stringliteral">&quot;\033[1;35m&quot;</span>;</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;        <span class="keyword">static</span> constexpr std::string_view cyan         = <span class="stringliteral">&quot;\033[0;36m&quot;</span>;</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;        <span class="keyword">static</span> constexpr std::string_view cyan_bold    = <span class="stringliteral">&quot;\033[1;36m&quot;</span>;</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160; </div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;        auto_terminal_color(std::string_view <a class="code" href="classqx_1_1color.html">color</a>)</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;        {</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;            std::cout &lt;&lt; <a class="code" href="classqx_1_1color.html">color</a>;</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;        }</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;        ~auto_terminal_color(<span class="keywordtype">void</span>)</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;        {</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;            std::cout &lt;&lt; reset;</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;        }</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    };</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160; </div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classqx_1_1cout__logger__stream.html#aae5819799b3de16c21539de33463ae87">process_output</a>(std::string_view svMessage, <a class="code" href="structqx_1_1log__unit.html">log_unit</a> logUnit)</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;        <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160; </div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classqx_1_1cout__logger__stream.html#aae380a8ac0a4667d36572fd75694305c">set_using_colors</a>(<span class="keywordtype">bool</span> bUsingColors) noexcept;</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160; </div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;    <span class="keywordtype">bool</span> m_bUsingColors = <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;};</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160; </div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;} <span class="comment">// namespace qx</span></div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160; </div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="cout__logger__stream_8inl.html">qx/logger/cout_logger_stream.inl</a>&gt;</span></div>
 <div class="ttc" id="abase__logger__stream_8h_html"><div class="ttname"><a href="base__logger__stream_8h.html">base_logger_stream.h</a></div><div class="ttdoc">Contains qx::base_logger_stream class.</div></div>
-<div class="ttc" id="aclassqx_1_1base__logger__stream_html"><div class="ttname"><a href="classqx_1_1base__logger__stream.html">qx::base_logger_stream</a></div><div class="ttdoc">Base class for logger streams.</div><div class="ttdef"><b>Definition:</b> <a href="base__logger__stream_8h_source.html#l00073">base_logger_stream.h:74</a></div></div>
-<div class="ttc" id="aclassqx_1_1color_html"><div class="ttname"><a href="classqx_1_1color.html">qx::color</a></div><div class="ttdoc">RGBA color.</div><div class="ttdef"><b>Definition:</b> <a href="color_8h_source.html#l00036">color.h:37</a></div></div>
-<div class="ttc" id="aclassqx_1_1cout__logger__stream_html"><div class="ttname"><a href="classqx_1_1cout__logger__stream.html">qx::cout_logger_stream</a></div><div class="ttdoc">Logger stream for std::cout output.</div><div class="ttdef"><b>Definition:</b> <a href="cout__logger__stream_8h_source.html#l00030">cout_logger_stream.h:31</a></div></div>
+<div class="ttc" id="aclassqx_1_1base__logger__stream_html"><div class="ttname"><a href="classqx_1_1base__logger__stream.html">qx::base_logger_stream</a></div><div class="ttdoc">Base class for logger streams.</div><div class="ttdef"><b>Definition:</b> <a href="base__logger__stream_8h_source.html#l00072">base_logger_stream.h:73</a></div></div>
+<div class="ttc" id="aclassqx_1_1color_html"><div class="ttname"><a href="classqx_1_1color.html">qx::color</a></div><div class="ttdoc">RGBA color.</div><div class="ttdef"><b>Definition:</b> <a href="color_8h_source.html#l00035">color.h:36</a></div></div>
+<div class="ttc" id="aclassqx_1_1cout__logger__stream_html"><div class="ttname"><a href="classqx_1_1cout__logger__stream.html">qx::cout_logger_stream</a></div><div class="ttdoc">Logger stream for std::cout output.</div><div class="ttdef"><b>Definition:</b> <a href="cout__logger__stream_8h_source.html#l00029">cout_logger_stream.h:30</a></div></div>
 <div class="ttc" id="aclassqx_1_1cout__logger__stream_html_aae380a8ac0a4667d36572fd75694305c"><div class="ttname"><a href="classqx_1_1cout__logger__stream.html#aae380a8ac0a4667d36572fd75694305c">qx::cout_logger_stream::set_using_colors</a></div><div class="ttdeci">void set_using_colors(bool bUsingColors) noexcept</div><div class="ttdoc">Set whether cout output should be colored.</div><div class="ttdef"><b>Definition:</b> <a href="cout__logger__stream_8inl_source.html#l00035">cout_logger_stream.inl:35</a></div></div>
 <div class="ttc" id="aclassqx_1_1cout__logger__stream_html_aae5819799b3de16c21539de33463ae87"><div class="ttname"><a href="classqx_1_1cout__logger__stream.html#aae5819799b3de16c21539de33463ae87">qx::cout_logger_stream::process_output</a></div><div class="ttdeci">virtual void process_output(std::string_view svMessage, log_unit logUnit) override</div><div class="ttdoc">Output to std::cout.</div><div class="ttdef"><b>Definition:</b> <a href="cout__logger__stream_8inl_source.html#l00013">cout_logger_stream.inl:13</a></div></div>
 <div class="ttc" id="acout__logger__stream_8inl_html"><div class="ttname"><a href="cout__logger__stream_8inl.html">cout_logger_stream.inl</a></div></div>

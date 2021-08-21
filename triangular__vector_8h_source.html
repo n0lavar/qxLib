@@ -80,77 +80,77 @@ $(function() {
 <div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="keyword">namespace </span>qx</div>
 <div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;{</div>
 <div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160; </div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> T&gt;</div>
-<div class="line"><a name="l00038"></a><span class="lineno"><a class="line" href="classqx_1_1triangular__vector.html">   38</a></span>&#160;<span class="keyword">class </span><a class="code" href="classqx_1_1triangular__vector.html">triangular_vector</a></div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;{</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    <span class="keyword">using</span> value_type      = T;</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    <span class="keyword">using</span> pointer         = T*;</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    <span class="keyword">using</span> const_pointer   = <span class="keyword">const</span> T*;</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    <span class="keyword">using</span> reference       = T&amp;;</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    <span class="keyword">using</span> const_reference = <span class="keyword">const</span> T&amp;;</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    <span class="keyword">using</span> difference_type = std::ptrdiff_t;</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    <span class="keyword">using</span> size_type       = size_t;</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160; </div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    <a class="code" href="container_8h.html#a985515265ddd8b328f88ebcdf8eaaefc">QX_IMPL_CONTAINER</a>(<a class="code" href="classqx_1_1triangular__vector.html">triangular_vector</a>)</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160; </div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    <a class="code" href="classqx_1_1triangular__vector.html">triangular_vector</a>(<span class="keywordtype">void</span>) = <span class="keywordflow">default</span>;</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160; </div>
-<div class="line"><a name="l00058"></a><span class="lineno"><a class="line" href="classqx_1_1triangular__vector.html#a2414bbf799a75f5bc68adc9c675c3ab6">   58</a></span>&#160;    <a class="code" href="classqx_1_1triangular__vector.html#a2414bbf799a75f5bc68adc9c675c3ab6">triangular_vector</a>(<a class="code" href="classqx_1_1triangular__vector.html">triangular_vector</a>&amp;&amp; other) noexcept;</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160; </div>
-<div class="line"><a name="l00064"></a><span class="lineno"><a class="line" href="classqx_1_1triangular__vector.html#a1403a005c238fcbf3d7b24efea7795c5">   64</a></span>&#160;    <a class="code" href="classqx_1_1triangular__vector.html#a1403a005c238fcbf3d7b24efea7795c5">triangular_vector</a>(<span class="keyword">const</span> <a class="code" href="classqx_1_1triangular__vector.html">triangular_vector</a>&amp; other);</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160; </div>
-<div class="line"><a name="l00070"></a><span class="lineno"><a class="line" href="classqx_1_1triangular__vector.html#af3afde700f315e790b7b089028f42aa4">   70</a></span>&#160;    <a class="code" href="classqx_1_1triangular__vector.html#af3afde700f315e790b7b089028f42aa4">triangular_vector</a>(size_type nSideSize);</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160; </div>
-<div class="line"><a name="l00077"></a><span class="lineno"><a class="line" href="classqx_1_1triangular__vector.html#a8165ac8bd99a19c66a8b4c13a149cc7a">   77</a></span>&#160;    <a class="code" href="classqx_1_1triangular__vector.html#a8165ac8bd99a19c66a8b4c13a149cc7a">triangular_vector</a>(size_type nSideSize, const_reference data);</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160; </div>
-<div class="line"><a name="l00082"></a><span class="lineno"><a class="line" href="classqx_1_1triangular__vector.html#a331579ee0045edeb136e29819be93204">   82</a></span>&#160;    <a class="code" href="classqx_1_1triangular__vector.html#a331579ee0045edeb136e29819be93204">~triangular_vector</a>(<span class="keywordtype">void</span>);</div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160; </div>
-<div class="line"><a name="l00089"></a><span class="lineno"><a class="line" href="classqx_1_1triangular__vector.html#a62acdd1948d5677fd4a071bb49dbc0ca">   89</a></span>&#160;    <span class="keyword">const</span> <a class="code" href="classqx_1_1triangular__vector.html">triangular_vector</a>&amp; <a class="code" href="classqx_1_1triangular__vector.html#a62acdd1948d5677fd4a071bb49dbc0ca">operator=</a>(<a class="code" href="classqx_1_1triangular__vector.html">triangular_vector</a>&amp;&amp; other) noexcept;</div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160; </div>
-<div class="line"><a name="l00096"></a><span class="lineno"><a class="line" href="classqx_1_1triangular__vector.html#a3fd7db1cf0e50399b41655275a12642a">   96</a></span>&#160;    <span class="keyword">const</span> <a class="code" href="classqx_1_1triangular__vector.html">triangular_vector</a>&amp; <a class="code" href="classqx_1_1triangular__vector.html#a3fd7db1cf0e50399b41655275a12642a">operator=</a>(<span class="keyword">const</span> <a class="code" href="classqx_1_1triangular__vector.html">triangular_vector</a>&amp; other);</div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160; </div>
-<div class="line"><a name="l00102"></a><span class="lineno"><a class="line" href="classqx_1_1triangular__vector.html#a3ef7f12650acbfdadf73a3f51fcad4d0">  102</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classqx_1_1triangular__vector.html#a3ef7f12650acbfdadf73a3f51fcad4d0">assign</a>(<a class="code" href="classqx_1_1triangular__vector.html">triangular_vector</a>&amp;&amp; other) noexcept;</div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160; </div>
-<div class="line"><a name="l00108"></a><span class="lineno"><a class="line" href="classqx_1_1triangular__vector.html#a06b0f631e0c9b87456bda5b431b80942">  108</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classqx_1_1triangular__vector.html#a06b0f631e0c9b87456bda5b431b80942">assign</a>(<span class="keyword">const</span> <a class="code" href="classqx_1_1triangular__vector.html">triangular_vector</a>&amp; other);</div>
-<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160; </div>
-<div class="line"><a name="l00115"></a><span class="lineno"><a class="line" href="classqx_1_1triangular__vector.html#aaca67df220f367764e3d001895ff2b33">  115</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classqx_1_1triangular__vector.html#aaca67df220f367764e3d001895ff2b33">assign</a>(size_type nSideSize, const_reference data);</div>
-<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160; </div>
-<div class="line"><a name="l00122"></a><span class="lineno"><a class="line" href="classqx_1_1triangular__vector.html#a4d94182e18f1ff43a0fa2b3c95ad2a41">  122</a></span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="classqx_1_1triangular__vector.html#a4d94182e18f1ff43a0fa2b3c95ad2a41">reserve</a>(size_type nSideSize);</div>
-<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160; </div>
-<div class="line"><a name="l00129"></a><span class="lineno"><a class="line" href="classqx_1_1triangular__vector.html#a352e7f0dda1e0fc0a5a5f8d2b765ed4c">  129</a></span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="classqx_1_1triangular__vector.html#a352e7f0dda1e0fc0a5a5f8d2b765ed4c">resize</a>(size_type nSideSize);</div>
-<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160; </div>
-<div class="line"><a name="l00137"></a><span class="lineno"><a class="line" href="classqx_1_1triangular__vector.html#a7bbe2d5cdc66b73e5d7680334f9d7a70">  137</a></span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="classqx_1_1triangular__vector.html#a7bbe2d5cdc66b73e5d7680334f9d7a70">resize</a>(size_type nSideSize, const_reference data);</div>
-<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160; </div>
-<div class="line"><a name="l00143"></a><span class="lineno"><a class="line" href="classqx_1_1triangular__vector.html#ac7bb753ff1def1f417f2949a6910a473">  143</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classqx_1_1triangular__vector.html#ac7bb753ff1def1f417f2949a6910a473">fill</a>(const_reference data);</div>
-<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160; </div>
-<div class="line"><a name="l00151"></a><span class="lineno"><a class="line" href="classqx_1_1triangular__vector.html#ab0f2a261027089c7959b14dcf3bb806e">  151</a></span>&#160;    const_reference <a class="code" href="classqx_1_1triangular__vector.html#ab0f2a261027089c7959b14dcf3bb806e">get</a>(size_type nRow, size_type nCol) <span class="keyword">const</span> noexcept;</div>
-<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160; </div>
-<div class="line"><a name="l00159"></a><span class="lineno"><a class="line" href="classqx_1_1triangular__vector.html#a58a93f536a189a462fd5d4799897d3ac">  159</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classqx_1_1triangular__vector.html#a58a93f536a189a462fd5d4799897d3ac">set</a>(size_type nRow, size_type nCol, const_reference data) noexcept;</div>
-<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160; </div>
-<div class="line"><a name="l00165"></a><span class="lineno"><a class="line" href="classqx_1_1triangular__vector.html#a6263d78febbf1aa554b141aed4a34b86">  165</a></span>&#160;    size_type <a class="code" href="classqx_1_1triangular__vector.html#a6263d78febbf1aa554b141aed4a34b86">size_side</a>(<span class="keywordtype">void</span>) <span class="keyword">const</span> noexcept;</div>
-<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160; </div>
-<div class="line"><a name="l00171"></a><span class="lineno"><a class="line" href="classqx_1_1triangular__vector.html#a4f69b4b4d8eaa4f935875cf119003feb">  171</a></span>&#160;    size_type <a class="code" href="classqx_1_1triangular__vector.html#a4f69b4b4d8eaa4f935875cf119003feb">capacity</a>(<span class="keywordtype">void</span>) <span class="keyword">const</span> noexcept;</div>
-<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160; </div>
-<div class="line"><a name="l00176"></a><span class="lineno"><a class="line" href="classqx_1_1triangular__vector.html#aaf89c08761615a0dbb1f88ea86c23827">  176</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classqx_1_1triangular__vector.html#aaf89c08761615a0dbb1f88ea86c23827">free</a>(<span class="keywordtype">void</span>);</div>
-<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160; </div>
-<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;    <span class="keyword">static</span> size_type _get_index(size_type nRow, size_type nCol) noexcept;</div>
-<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160; </div>
-<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;    <span class="keyword">static</span> size_type _get_vector_size(size_type nSideSize) noexcept;</div>
-<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160; </div>
-<div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;    pointer   m_pData          = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;    size_type m_nSideSize      = 0;</div>
-<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;    size_type m_nSize          = 0;</div>
-<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;    size_type m_nAllocatedSize = 0;</div>
-<div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160;};</div>
-<div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160; </div>
-<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160;} <span class="comment">// namespace qx</span></div>
-<div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160; </div>
-<div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="triangular__vector_8inl.html">qx/containers/triangular_vector.inl</a>&gt;</span></div>
-<div class="ttc" id="aclassqx_1_1triangular__vector_html"><div class="ttname"><a href="classqx_1_1triangular__vector.html">qx::triangular_vector</a></div><div class="ttdef"><b>Definition:</b> <a href="triangular__vector_8h_source.html#l00038">triangular_vector.h:39</a></div></div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> T&gt;</div>
+<div class="line"><a name="l00037"></a><span class="lineno"><a class="line" href="classqx_1_1triangular__vector.html">   37</a></span>&#160;<span class="keyword">class </span><a class="code" href="classqx_1_1triangular__vector.html">triangular_vector</a></div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;{</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    <span class="keyword">using</span> value_type      = T;</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    <span class="keyword">using</span> pointer         = T*;</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    <span class="keyword">using</span> const_pointer   = <span class="keyword">const</span> T*;</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    <span class="keyword">using</span> reference       = T&amp;;</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    <span class="keyword">using</span> const_reference = <span class="keyword">const</span> T&amp;;</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    <span class="keyword">using</span> difference_type = std::ptrdiff_t;</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    <span class="keyword">using</span> size_type       = size_t;</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160; </div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    <a class="code" href="container_8h.html#a985515265ddd8b328f88ebcdf8eaaefc">QX_IMPL_CONTAINER</a>(<a class="code" href="classqx_1_1triangular__vector.html">triangular_vector</a>)</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160; </div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    <a class="code" href="classqx_1_1triangular__vector.html">triangular_vector</a>(<span class="keywordtype">void</span>) = <span class="keywordflow">default</span>;</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160; </div>
+<div class="line"><a name="l00057"></a><span class="lineno"><a class="line" href="classqx_1_1triangular__vector.html#a2414bbf799a75f5bc68adc9c675c3ab6">   57</a></span>&#160;    <a class="code" href="classqx_1_1triangular__vector.html#a2414bbf799a75f5bc68adc9c675c3ab6">triangular_vector</a>(<a class="code" href="classqx_1_1triangular__vector.html">triangular_vector</a>&amp;&amp; other) noexcept;</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160; </div>
+<div class="line"><a name="l00063"></a><span class="lineno"><a class="line" href="classqx_1_1triangular__vector.html#a1403a005c238fcbf3d7b24efea7795c5">   63</a></span>&#160;    <a class="code" href="classqx_1_1triangular__vector.html#a1403a005c238fcbf3d7b24efea7795c5">triangular_vector</a>(<span class="keyword">const</span> <a class="code" href="classqx_1_1triangular__vector.html">triangular_vector</a>&amp; other);</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160; </div>
+<div class="line"><a name="l00069"></a><span class="lineno"><a class="line" href="classqx_1_1triangular__vector.html#af3afde700f315e790b7b089028f42aa4">   69</a></span>&#160;    <a class="code" href="classqx_1_1triangular__vector.html#af3afde700f315e790b7b089028f42aa4">triangular_vector</a>(size_type nSideSize);</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160; </div>
+<div class="line"><a name="l00076"></a><span class="lineno"><a class="line" href="classqx_1_1triangular__vector.html#a8165ac8bd99a19c66a8b4c13a149cc7a">   76</a></span>&#160;    <a class="code" href="classqx_1_1triangular__vector.html#a8165ac8bd99a19c66a8b4c13a149cc7a">triangular_vector</a>(size_type nSideSize, const_reference data);</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160; </div>
+<div class="line"><a name="l00081"></a><span class="lineno"><a class="line" href="classqx_1_1triangular__vector.html#a331579ee0045edeb136e29819be93204">   81</a></span>&#160;    <a class="code" href="classqx_1_1triangular__vector.html#a331579ee0045edeb136e29819be93204">~triangular_vector</a>(<span class="keywordtype">void</span>);</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160; </div>
+<div class="line"><a name="l00088"></a><span class="lineno"><a class="line" href="classqx_1_1triangular__vector.html#a62acdd1948d5677fd4a071bb49dbc0ca">   88</a></span>&#160;    <span class="keyword">const</span> <a class="code" href="classqx_1_1triangular__vector.html">triangular_vector</a>&amp; <a class="code" href="classqx_1_1triangular__vector.html#a62acdd1948d5677fd4a071bb49dbc0ca">operator=</a>(<a class="code" href="classqx_1_1triangular__vector.html">triangular_vector</a>&amp;&amp; other) noexcept;</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160; </div>
+<div class="line"><a name="l00095"></a><span class="lineno"><a class="line" href="classqx_1_1triangular__vector.html#a3fd7db1cf0e50399b41655275a12642a">   95</a></span>&#160;    <span class="keyword">const</span> <a class="code" href="classqx_1_1triangular__vector.html">triangular_vector</a>&amp; <a class="code" href="classqx_1_1triangular__vector.html#a3fd7db1cf0e50399b41655275a12642a">operator=</a>(<span class="keyword">const</span> <a class="code" href="classqx_1_1triangular__vector.html">triangular_vector</a>&amp; other);</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160; </div>
+<div class="line"><a name="l00101"></a><span class="lineno"><a class="line" href="classqx_1_1triangular__vector.html#a3ef7f12650acbfdadf73a3f51fcad4d0">  101</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classqx_1_1triangular__vector.html#a3ef7f12650acbfdadf73a3f51fcad4d0">assign</a>(<a class="code" href="classqx_1_1triangular__vector.html">triangular_vector</a>&amp;&amp; other) noexcept;</div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160; </div>
+<div class="line"><a name="l00107"></a><span class="lineno"><a class="line" href="classqx_1_1triangular__vector.html#a06b0f631e0c9b87456bda5b431b80942">  107</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classqx_1_1triangular__vector.html#a06b0f631e0c9b87456bda5b431b80942">assign</a>(<span class="keyword">const</span> <a class="code" href="classqx_1_1triangular__vector.html">triangular_vector</a>&amp; other);</div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160; </div>
+<div class="line"><a name="l00114"></a><span class="lineno"><a class="line" href="classqx_1_1triangular__vector.html#aaca67df220f367764e3d001895ff2b33">  114</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classqx_1_1triangular__vector.html#aaca67df220f367764e3d001895ff2b33">assign</a>(size_type nSideSize, const_reference data);</div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160; </div>
+<div class="line"><a name="l00121"></a><span class="lineno"><a class="line" href="classqx_1_1triangular__vector.html#a4d94182e18f1ff43a0fa2b3c95ad2a41">  121</a></span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="classqx_1_1triangular__vector.html#a4d94182e18f1ff43a0fa2b3c95ad2a41">reserve</a>(size_type nSideSize);</div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160; </div>
+<div class="line"><a name="l00128"></a><span class="lineno"><a class="line" href="classqx_1_1triangular__vector.html#a352e7f0dda1e0fc0a5a5f8d2b765ed4c">  128</a></span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="classqx_1_1triangular__vector.html#a352e7f0dda1e0fc0a5a5f8d2b765ed4c">resize</a>(size_type nSideSize);</div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160; </div>
+<div class="line"><a name="l00136"></a><span class="lineno"><a class="line" href="classqx_1_1triangular__vector.html#a7bbe2d5cdc66b73e5d7680334f9d7a70">  136</a></span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="classqx_1_1triangular__vector.html#a7bbe2d5cdc66b73e5d7680334f9d7a70">resize</a>(size_type nSideSize, const_reference data);</div>
+<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160; </div>
+<div class="line"><a name="l00142"></a><span class="lineno"><a class="line" href="classqx_1_1triangular__vector.html#ac7bb753ff1def1f417f2949a6910a473">  142</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classqx_1_1triangular__vector.html#ac7bb753ff1def1f417f2949a6910a473">fill</a>(const_reference data);</div>
+<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160; </div>
+<div class="line"><a name="l00150"></a><span class="lineno"><a class="line" href="classqx_1_1triangular__vector.html#ab0f2a261027089c7959b14dcf3bb806e">  150</a></span>&#160;    const_reference <a class="code" href="classqx_1_1triangular__vector.html#ab0f2a261027089c7959b14dcf3bb806e">get</a>(size_type nRow, size_type nCol) <span class="keyword">const</span> noexcept;</div>
+<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160; </div>
+<div class="line"><a name="l00158"></a><span class="lineno"><a class="line" href="classqx_1_1triangular__vector.html#a58a93f536a189a462fd5d4799897d3ac">  158</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classqx_1_1triangular__vector.html#a58a93f536a189a462fd5d4799897d3ac">set</a>(size_type nRow, size_type nCol, const_reference data) noexcept;</div>
+<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160; </div>
+<div class="line"><a name="l00164"></a><span class="lineno"><a class="line" href="classqx_1_1triangular__vector.html#a6263d78febbf1aa554b141aed4a34b86">  164</a></span>&#160;    size_type <a class="code" href="classqx_1_1triangular__vector.html#a6263d78febbf1aa554b141aed4a34b86">size_side</a>(<span class="keywordtype">void</span>) <span class="keyword">const</span> noexcept;</div>
+<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160; </div>
+<div class="line"><a name="l00170"></a><span class="lineno"><a class="line" href="classqx_1_1triangular__vector.html#a4f69b4b4d8eaa4f935875cf119003feb">  170</a></span>&#160;    size_type <a class="code" href="classqx_1_1triangular__vector.html#a4f69b4b4d8eaa4f935875cf119003feb">capacity</a>(<span class="keywordtype">void</span>) <span class="keyword">const</span> noexcept;</div>
+<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160; </div>
+<div class="line"><a name="l00175"></a><span class="lineno"><a class="line" href="classqx_1_1triangular__vector.html#aaf89c08761615a0dbb1f88ea86c23827">  175</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classqx_1_1triangular__vector.html#aaf89c08761615a0dbb1f88ea86c23827">free</a>(<span class="keywordtype">void</span>);</div>
+<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160; </div>
+<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;    <span class="keyword">static</span> size_type _get_index(size_type nRow, size_type nCol) noexcept;</div>
+<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160; </div>
+<div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;    <span class="keyword">static</span> size_type _get_vector_size(size_type nSideSize) noexcept;</div>
+<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160; </div>
+<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;    pointer   m_pData          = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;    size_type m_nSideSize      = 0;</div>
+<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;    size_type m_nSize          = 0;</div>
+<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;    size_type m_nAllocatedSize = 0;</div>
+<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;};</div>
+<div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160; </div>
+<div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160;} <span class="comment">// namespace qx</span></div>
+<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160; </div>
+<div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="triangular__vector_8inl.html">qx/containers/triangular_vector.inl</a>&gt;</span></div>
+<div class="ttc" id="aclassqx_1_1triangular__vector_html"><div class="ttname"><a href="classqx_1_1triangular__vector.html">qx::triangular_vector</a></div><div class="ttdef"><b>Definition:</b> <a href="triangular__vector_8h_source.html#l00037">triangular_vector.h:38</a></div></div>
 <div class="ttc" id="aclassqx_1_1triangular__vector_html_a06b0f631e0c9b87456bda5b431b80942"><div class="ttname"><a href="classqx_1_1triangular__vector.html#a06b0f631e0c9b87456bda5b431b80942">qx::triangular_vector::assign</a></div><div class="ttdeci">void assign(const triangular_vector &amp;other)</div><div class="ttdoc">Assigns new contents to the vector, copying from other vector.</div></div>
 <div class="ttc" id="aclassqx_1_1triangular__vector_html_a1403a005c238fcbf3d7b24efea7795c5"><div class="ttname"><a href="classqx_1_1triangular__vector.html#a1403a005c238fcbf3d7b24efea7795c5">qx::triangular_vector::triangular_vector</a></div><div class="ttdeci">triangular_vector(const triangular_vector &amp;other)</div><div class="ttdoc">triangular_vector object constructor</div></div>
 <div class="ttc" id="aclassqx_1_1triangular__vector_html_a2414bbf799a75f5bc68adc9c675c3ab6"><div class="ttname"><a href="classqx_1_1triangular__vector.html#a2414bbf799a75f5bc68adc9c675c3ab6">qx::triangular_vector::triangular_vector</a></div><div class="ttdeci">triangular_vector(triangular_vector &amp;&amp;other) noexcept</div><div class="ttdoc">triangular_vector object constructor</div></div>

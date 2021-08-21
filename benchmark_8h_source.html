@@ -77,29 +77,29 @@ $(function() {
 <div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="keyword">namespace </span>qx</div>
 <div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;{</div>
 <div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160; </div>
-<div class="line"><a name="l00028"></a><span class="lineno"><a class="line" href="classqx_1_1benchmark.html">   28</a></span>&#160;<span class="keyword">class </span><a class="code" href="classqx_1_1benchmark.html">benchmark</a></div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;{</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    <span class="keyword">using</span> clock      = std::chrono::steady_clock;</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    <span class="keyword">using</span> time_point = clock::time_point;</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    <span class="keyword">using</span> duration   = std::chrono::nanoseconds;</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160; </div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classqx_1_1benchmark.html#ab1eb2fbeef2dfd789ba6f8da32a8b888">start</a>(<span class="keywordtype">void</span>);</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160; </div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    <span class="keywordtype">double</span> <a class="code" href="classqx_1_1benchmark.html#ac0aac731bbbc33a4d56ce66844c80efe">end</a>(<span class="keywordtype">void</span>);</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160; </div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    <span class="keywordtype">double</span> <a class="code" href="classqx_1_1benchmark.html#aa5fe957b87126d8f900dae75f7e2beea">last</a>(<span class="keywordtype">void</span>) <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160; </div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    time_point m_Start;</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    duration   m_LastDuration = duration(0);</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;};</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160; </div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;} <span class="comment">// namespace qx</span></div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160; </div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="benchmark_8inl.html">qx/stat/benchmark.inl</a>&gt;</span></div>
+<div class="line"><a name="l00027"></a><span class="lineno"><a class="line" href="classqx_1_1benchmark.html">   27</a></span>&#160;<span class="keyword">class </span><a class="code" href="classqx_1_1benchmark.html">benchmark</a></div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;{</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    <span class="keyword">using</span> clock      = std::chrono::steady_clock;</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    <span class="keyword">using</span> time_point = clock::time_point;</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    <span class="keyword">using</span> duration   = std::chrono::nanoseconds;</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160; </div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classqx_1_1benchmark.html#ab1eb2fbeef2dfd789ba6f8da32a8b888">start</a>(<span class="keywordtype">void</span>);</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160; </div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    <span class="keywordtype">double</span> <a class="code" href="classqx_1_1benchmark.html#ac0aac731bbbc33a4d56ce66844c80efe">end</a>(<span class="keywordtype">void</span>);</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160; </div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    <span class="keywordtype">double</span> <a class="code" href="classqx_1_1benchmark.html#aa5fe957b87126d8f900dae75f7e2beea">last</a>(<span class="keywordtype">void</span>) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160; </div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    time_point m_Start;</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    duration   m_LastDuration = duration(0);</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;};</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160; </div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;} <span class="comment">// namespace qx</span></div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160; </div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="benchmark_8inl.html">qx/stat/benchmark.inl</a>&gt;</span></div>
 <div class="ttc" id="abenchmark_8inl_html"><div class="ttname"><a href="benchmark_8inl.html">benchmark.inl</a></div></div>
-<div class="ttc" id="aclassqx_1_1benchmark_html"><div class="ttname"><a href="classqx_1_1benchmark.html">qx::benchmark</a></div><div class="ttdoc">Benchmark class.</div><div class="ttdef"><b>Definition:</b> <a href="benchmark_8h_source.html#l00028">benchmark.h:29</a></div></div>
+<div class="ttc" id="aclassqx_1_1benchmark_html"><div class="ttname"><a href="classqx_1_1benchmark.html">qx::benchmark</a></div><div class="ttdoc">Benchmark class.</div><div class="ttdef"><b>Definition:</b> <a href="benchmark_8h_source.html#l00027">benchmark.h:28</a></div></div>
 <div class="ttc" id="aclassqx_1_1benchmark_html_aa5fe957b87126d8f900dae75f7e2beea"><div class="ttname"><a href="classqx_1_1benchmark.html#aa5fe957b87126d8f900dae75f7e2beea">qx::benchmark::last</a></div><div class="ttdeci">double last(void) const</div><div class="ttdoc">Get last benchmark time.</div><div class="ttdef"><b>Definition:</b> <a href="benchmark_8inl_source.html#l00024">benchmark.inl:24</a></div></div>
 <div class="ttc" id="aclassqx_1_1benchmark_html_ab1eb2fbeef2dfd789ba6f8da32a8b888"><div class="ttname"><a href="classqx_1_1benchmark.html#ab1eb2fbeef2dfd789ba6f8da32a8b888">qx::benchmark::start</a></div><div class="ttdeci">void start(void)</div><div class="ttdoc">Start benchmark.</div><div class="ttdef"><b>Definition:</b> <a href="benchmark_8inl_source.html#l00013">benchmark.inl:13</a></div></div>
 <div class="ttc" id="aclassqx_1_1benchmark_html_ac0aac731bbbc33a4d56ce66844c80efe"><div class="ttname"><a href="classqx_1_1benchmark.html#ac0aac731bbbc33a4d56ce66844c80efe">qx::benchmark::end</a></div><div class="ttdeci">double end(void)</div><div class="ttdoc">End benchmark.</div><div class="ttdef"><b>Definition:</b> <a href="benchmark_8inl_source.html#l00018">benchmark.inl:18</a></div></div>

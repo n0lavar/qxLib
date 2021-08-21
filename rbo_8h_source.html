@@ -78,43 +78,43 @@ $(function() {
 <div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="keyword">namespace </span>qx</div>
 <div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;{</div>
 <div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160; </div>
-<div class="line"><a name="l00029"></a><span class="lineno"><a class="line" href="classqx_1_1base__rbo.html">   29</a></span>&#160;<span class="keyword">class </span><a class="code" href="classqx_1_1base__rbo.html">base_rbo</a> : <a class="code" href="classqx_1_1_i_buffer.html">IBuffer</a></div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;{</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    <span class="keyword">virtual</span> <a class="code" href="classqx_1_1base__rbo.html#a6a9e652b73522c1c7724999d6fbfc18e">~base_rbo</a>(<span class="keywordtype">void</span>);</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160; </div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classqx_1_1base__rbo.html#a879c21b27002be0eeef9275c6252cfb7">Init</a>(</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;        <span class="keywordtype">size_t</span> nWidth,</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;        <span class="keywordtype">size_t</span> nHeight,</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;        GLenum eInternalFormat,</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;        GLenum eAttachment,</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;        <span class="keywordtype">size_t</span> nMultiSamples = 0);</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160; </div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    QX_DECL_IBUFFER</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160; </div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    <span class="keywordtype">size_t</span> <a class="code" href="classqx_1_1base__rbo.html#af43a286d89836bdb612cad71251d0ded">GetWidth</a>(<span class="keywordtype">void</span>) <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160; </div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    <span class="keywordtype">size_t</span> <a class="code" href="classqx_1_1base__rbo.html#ab10d7b6d9b6a897e39020f54a1641d9b">GetHeight</a>(<span class="keywordtype">void</span>) <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160; </div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;    GLenum <a class="code" href="classqx_1_1base__rbo.html#a5aa7603435765cecc705b6f24892e0fb">GetInternalFormat</a>(<span class="keywordtype">void</span>) <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160; </div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    GLenum <a class="code" href="classqx_1_1base__rbo.html#af98098f1caf6d6e2e09039391729aa0d">GetAttachmentType</a>(<span class="keywordtype">void</span>) <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160; </div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;    GLuint m_nBuffer         = std::numeric_limits&lt;GLuint&gt;::max();</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;    GLenum m_eInternalFormat = 0;</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;    GLenum m_eAttachmentType = 0;</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;    <span class="keywordtype">size_t</span> m_nWidth          = 0;</div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;    <span class="keywordtype">size_t</span> m_nHeight         = 0;</div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;};</div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160; </div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;<span class="keyword">using</span> <a class="code" href="classqx_1_1base__rbo.html">rbo</a> = <a class="code" href="classqx_1_1base__rbo.html">base_rbo</a>;</div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160; </div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;} <span class="comment">// namespace qx</span></div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160; </div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="rbo_8inl.html">qx/gl/rbo.inl</a>&gt;</span></div>
-<div class="ttc" id="aclassqx_1_1_i_buffer_html"><div class="ttname"><a href="classqx_1_1_i_buffer.html">qx::IBuffer</a></div><div class="ttdoc">OpenGL buffer interface.</div><div class="ttdef"><b>Definition:</b> <a href="ibuffer_8h_source.html#l00028">ibuffer.h:29</a></div></div>
-<div class="ttc" id="aclassqx_1_1base__rbo_html"><div class="ttname"><a href="classqx_1_1base__rbo.html">qx::base_rbo</a></div><div class="ttdoc">Base RBO class.</div><div class="ttdef"><b>Definition:</b> <a href="rbo_8h_source.html#l00029">rbo.h:30</a></div></div>
+<div class="line"><a name="l00028"></a><span class="lineno"><a class="line" href="classqx_1_1base__rbo.html">   28</a></span>&#160;<span class="keyword">class </span><a class="code" href="classqx_1_1base__rbo.html">base_rbo</a> : <a class="code" href="classqx_1_1_i_buffer.html">IBuffer</a></div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;{</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    <span class="keyword">virtual</span> <a class="code" href="classqx_1_1base__rbo.html#a6a9e652b73522c1c7724999d6fbfc18e">~base_rbo</a>(<span class="keywordtype">void</span>);</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160; </div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classqx_1_1base__rbo.html#a879c21b27002be0eeef9275c6252cfb7">Init</a>(</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;        <span class="keywordtype">size_t</span> nWidth,</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;        <span class="keywordtype">size_t</span> nHeight,</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;        GLenum eInternalFormat,</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;        GLenum eAttachment,</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;        <span class="keywordtype">size_t</span> nMultiSamples = 0);</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160; </div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    QX_DECL_IBUFFER</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160; </div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    <span class="keywordtype">size_t</span> <a class="code" href="classqx_1_1base__rbo.html#af43a286d89836bdb612cad71251d0ded">GetWidth</a>(<span class="keywordtype">void</span>) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160; </div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    <span class="keywordtype">size_t</span> <a class="code" href="classqx_1_1base__rbo.html#ab10d7b6d9b6a897e39020f54a1641d9b">GetHeight</a>(<span class="keywordtype">void</span>) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160; </div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    GLenum <a class="code" href="classqx_1_1base__rbo.html#a5aa7603435765cecc705b6f24892e0fb">GetInternalFormat</a>(<span class="keywordtype">void</span>) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160; </div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    GLenum <a class="code" href="classqx_1_1base__rbo.html#af98098f1caf6d6e2e09039391729aa0d">GetAttachmentType</a>(<span class="keywordtype">void</span>) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160; </div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;    GLuint m_nBuffer         = std::numeric_limits&lt;GLuint&gt;::max();</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;    GLenum m_eInternalFormat = 0;</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;    GLenum m_eAttachmentType = 0;</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;    <span class="keywordtype">size_t</span> m_nWidth          = 0;</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;    <span class="keywordtype">size_t</span> m_nHeight         = 0;</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;};</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160; </div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;<span class="keyword">using</span> <a class="code" href="classqx_1_1base__rbo.html">rbo</a> = <a class="code" href="classqx_1_1base__rbo.html">base_rbo</a>;</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160; </div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;} <span class="comment">// namespace qx</span></div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160; </div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="rbo_8inl.html">qx/gl/rbo.inl</a>&gt;</span></div>
+<div class="ttc" id="aclassqx_1_1_i_buffer_html"><div class="ttname"><a href="classqx_1_1_i_buffer.html">qx::IBuffer</a></div><div class="ttdoc">OpenGL buffer interface.</div><div class="ttdef"><b>Definition:</b> <a href="ibuffer_8h_source.html#l00027">ibuffer.h:28</a></div></div>
+<div class="ttc" id="aclassqx_1_1base__rbo_html"><div class="ttname"><a href="classqx_1_1base__rbo.html">qx::base_rbo</a></div><div class="ttdoc">Base RBO class.</div><div class="ttdef"><b>Definition:</b> <a href="rbo_8h_source.html#l00028">rbo.h:29</a></div></div>
 <div class="ttc" id="aclassqx_1_1base__rbo_html_a5aa7603435765cecc705b6f24892e0fb"><div class="ttname"><a href="classqx_1_1base__rbo.html#a5aa7603435765cecc705b6f24892e0fb">qx::base_rbo::GetInternalFormat</a></div><div class="ttdeci">GLenum GetInternalFormat(void) const</div><div class="ttdoc">Get texture internal format.</div><div class="ttdef"><b>Definition:</b> <a href="rbo_8inl_source.html#l00089">rbo.inl:89</a></div></div>
 <div class="ttc" id="aclassqx_1_1base__rbo_html_a6a9e652b73522c1c7724999d6fbfc18e"><div class="ttname"><a href="classqx_1_1base__rbo.html#a6a9e652b73522c1c7724999d6fbfc18e">qx::base_rbo::~base_rbo</a></div><div class="ttdeci">virtual ~base_rbo(void)</div><div class="ttdoc">base_rbo object destructor</div><div class="ttdef"><b>Definition:</b> <a href="rbo_8inl_source.html#l00013">rbo.inl:13</a></div></div>
 <div class="ttc" id="aclassqx_1_1base__rbo_html_a879c21b27002be0eeef9275c6252cfb7"><div class="ttname"><a href="classqx_1_1base__rbo.html#a879c21b27002be0eeef9275c6252cfb7">qx::base_rbo::Init</a></div><div class="ttdeci">void Init(size_t nWidth, size_t nHeight, GLenum eInternalFormat, GLenum eAttachment, size_t nMultiSamples=0)</div><div class="ttdoc">Init RBO with width and height.</div><div class="ttdef"><b>Definition:</b> <a href="rbo_8inl_source.html#l00022">rbo.inl:22</a></div></div>

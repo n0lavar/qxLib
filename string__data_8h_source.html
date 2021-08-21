@@ -85,45 +85,45 @@ $(function() {
 <div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    shrink_to_fit</div>
 <div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;};</div>
 <div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160; </div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> Traits&gt;</div>
-<div class="line"><a name="l00038"></a><span class="lineno"><a class="line" href="classqx_1_1string__data.html">   38</a></span>&#160;<span class="keyword">class </span><a class="code" href="classqx_1_1string__data.html">string_data</a></div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;{</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    <span class="keyword">using</span> value_type = <span class="keyword">typename</span> Traits::value_type;</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    <span class="keyword">using</span> pointer    = <span class="keyword">typename</span> Traits::pointer;</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    <span class="keyword">using</span> size_type  = <span class="keyword">typename</span> Traits::size_type;</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    <span class="keyword">using</span> buffer     = std::array&lt;value_type, Traits::small_string_size()&gt;;</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160; </div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00050"></a><span class="lineno"><a class="line" href="classqx_1_1string__data.html#a32e0fe6892bd8e8f846f03fc202a7089">   50</a></span>&#160;    pointer <a class="code" href="classqx_1_1string__data.html#a32e0fe6892bd8e8f846f03fc202a7089">data</a>(<span class="keywordtype">void</span>) noexcept;</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160; </div>
-<div class="line"><a name="l00055"></a><span class="lineno"><a class="line" href="classqx_1_1string__data.html#a0cf66375583f106ebf8e501b145338ca">   55</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classqx_1_1string__data.html#a0cf66375583f106ebf8e501b145338ca">free</a>(<span class="keywordtype">void</span>) noexcept;</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160; </div>
-<div class="line"><a name="l00064"></a><span class="lineno"><a class="line" href="classqx_1_1string__data.html#ab7460ff08ae3b0e33df7836f9ab154ee">   64</a></span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="classqx_1_1string__data.html#ab7460ff08ae3b0e33df7836f9ab154ee">resize</a>(</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;        size_type          nSymbols,</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;        size_type          nAlign,</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;        string_resize_type eType) noexcept;</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160; </div>
-<div class="line"><a name="l00073"></a><span class="lineno"><a class="line" href="classqx_1_1string__data.html#a7ea75eaff6ed242023ef227303e2eb60">   73</a></span>&#160;    size_type <a class="code" href="classqx_1_1string__data.html#a7ea75eaff6ed242023ef227303e2eb60">size</a>(<span class="keywordtype">void</span>) <span class="keyword">const</span> noexcept;</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160; </div>
-<div class="line"><a name="l00079"></a><span class="lineno"><a class="line" href="classqx_1_1string__data.html#a98cc362c82c040ebba18bba121e74af0">   79</a></span>&#160;    size_type <a class="code" href="classqx_1_1string__data.html#a98cc362c82c040ebba18bba121e74af0">capacity</a>(<span class="keywordtype">void</span>) <span class="keyword">const</span> noexcept;</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160; </div>
-<div class="line"><a name="l00085"></a><span class="lineno"><a class="line" href="classqx_1_1string__data.html#a932ec5da39fc4cc541b38e8d5aa33a5d">   85</a></span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="classqx_1_1string__data.html#a932ec5da39fc4cc541b38e8d5aa33a5d">is_small</a>(<span class="keywordtype">void</span>) <span class="keyword">const</span> noexcept;</div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160; </div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;    <span class="keyword">union</span></div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;    {</div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;        pointer m_pData = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;        buffer  m_Buffer;</div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;    };</div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160; </div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;    size_type m_nSize          = 0;</div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;    size_type m_nAllocatedSize = 0;</div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;};</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> Traits&gt;</div>
+<div class="line"><a name="l00036"></a><span class="lineno"><a class="line" href="classqx_1_1string__data.html">   36</a></span>&#160;<span class="keyword">class </span><a class="code" href="classqx_1_1string__data.html">string_data</a></div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;{</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    <span class="keyword">using</span> value_type = <span class="keyword">typename</span> Traits::value_type;</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    <span class="keyword">using</span> pointer    = <span class="keyword">typename</span> Traits::pointer;</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    <span class="keyword">using</span> size_type  = <span class="keyword">typename</span> Traits::size_type;</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    <span class="keyword">using</span> buffer     = std::array&lt;value_type, Traits::small_string_size()&gt;;</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160; </div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00048"></a><span class="lineno"><a class="line" href="classqx_1_1string__data.html#a32e0fe6892bd8e8f846f03fc202a7089">   48</a></span>&#160;    pointer <a class="code" href="classqx_1_1string__data.html#a32e0fe6892bd8e8f846f03fc202a7089">data</a>(<span class="keywordtype">void</span>) noexcept;</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160; </div>
+<div class="line"><a name="l00053"></a><span class="lineno"><a class="line" href="classqx_1_1string__data.html#a0cf66375583f106ebf8e501b145338ca">   53</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classqx_1_1string__data.html#a0cf66375583f106ebf8e501b145338ca">free</a>(<span class="keywordtype">void</span>) noexcept;</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160; </div>
+<div class="line"><a name="l00062"></a><span class="lineno"><a class="line" href="classqx_1_1string__data.html#ab7460ff08ae3b0e33df7836f9ab154ee">   62</a></span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="classqx_1_1string__data.html#ab7460ff08ae3b0e33df7836f9ab154ee">resize</a>(</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;        size_type          nSymbols,</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;        size_type          nAlign,</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;        string_resize_type eType) noexcept;</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160; </div>
+<div class="line"><a name="l00071"></a><span class="lineno"><a class="line" href="classqx_1_1string__data.html#a7ea75eaff6ed242023ef227303e2eb60">   71</a></span>&#160;    size_type <a class="code" href="classqx_1_1string__data.html#a7ea75eaff6ed242023ef227303e2eb60">size</a>(<span class="keywordtype">void</span>) <span class="keyword">const</span> noexcept;</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160; </div>
+<div class="line"><a name="l00077"></a><span class="lineno"><a class="line" href="classqx_1_1string__data.html#a98cc362c82c040ebba18bba121e74af0">   77</a></span>&#160;    size_type <a class="code" href="classqx_1_1string__data.html#a98cc362c82c040ebba18bba121e74af0">capacity</a>(<span class="keywordtype">void</span>) <span class="keyword">const</span> noexcept;</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160; </div>
+<div class="line"><a name="l00083"></a><span class="lineno"><a class="line" href="classqx_1_1string__data.html#a932ec5da39fc4cc541b38e8d5aa33a5d">   83</a></span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="classqx_1_1string__data.html#a932ec5da39fc4cc541b38e8d5aa33a5d">is_small</a>(<span class="keywordtype">void</span>) <span class="keyword">const</span> noexcept;</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160; </div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;    <span class="keyword">union</span></div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;    {</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;        pointer m_pData = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;        buffer  m_Buffer;</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;    };</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160; </div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;    size_type m_nSize          = 0;</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;    size_type m_nAllocatedSize = 0;</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;};</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160; </div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;} <span class="comment">// namespace qx</span></div>
 <div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160; </div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;} <span class="comment">// namespace qx</span></div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160; </div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="string__data_8inl.html">qx/containers/string_data.inl</a>&gt;</span></div>
-<div class="ttc" id="aclassqx_1_1string__data_html"><div class="ttname"><a href="classqx_1_1string__data.html">qx::string_data</a></div><div class="ttdef"><b>Definition:</b> <a href="string__data_8h_source.html#l00038">string_data.h:39</a></div></div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="string__data_8inl.html">qx/containers/string_data.inl</a>&gt;</span></div>
+<div class="ttc" id="aclassqx_1_1string__data_html"><div class="ttname"><a href="classqx_1_1string__data.html">qx::string_data</a></div><div class="ttdef"><b>Definition:</b> <a href="string__data_8h_source.html#l00036">string_data.h:37</a></div></div>
 <div class="ttc" id="aclassqx_1_1string__data_html_a0cf66375583f106ebf8e501b145338ca"><div class="ttname"><a href="classqx_1_1string__data.html#a0cf66375583f106ebf8e501b145338ca">qx::string_data::free</a></div><div class="ttdeci">void free(void) noexcept</div><div class="ttdoc">Free allocated memory.</div></div>
 <div class="ttc" id="aclassqx_1_1string__data_html_a32e0fe6892bd8e8f846f03fc202a7089"><div class="ttname"><a href="classqx_1_1string__data.html#a32e0fe6892bd8e8f846f03fc202a7089">qx::string_data::data</a></div><div class="ttdeci">pointer data(void) noexcept</div><div class="ttdoc">Get string data: from buffer or from pointer.</div></div>
 <div class="ttc" id="aclassqx_1_1string__data_html_a7ea75eaff6ed242023ef227303e2eb60"><div class="ttname"><a href="classqx_1_1string__data.html#a7ea75eaff6ed242023ef227303e2eb60">qx::string_data::size</a></div><div class="ttdeci">size_type size(void) const noexcept</div><div class="ttdoc">Get string length.</div></div>

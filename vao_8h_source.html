@@ -78,38 +78,38 @@ $(function() {
 <div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="keyword">namespace </span>qx</div>
 <div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;{</div>
 <div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160; </div>
-<div class="line"><a name="l00029"></a><span class="lineno"><a class="line" href="classqx_1_1base__vao.html">   29</a></span>&#160;<span class="keyword">class </span><a class="code" href="classqx_1_1base__vao.html">base_vao</a> : <a class="code" href="classqx_1_1_i_buffer.html">IBuffer</a></div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;{</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00035"></a><span class="lineno"><a class="line" href="classqx_1_1base__vao.html#a2b0454af9878e6c9ebaa8b62b66a5f93">   35</a></span>&#160;    <a class="code" href="classqx_1_1base__vao.html#a2b0454af9878e6c9ebaa8b62b66a5f93">base_vao</a>(<span class="keywordtype">void</span>) = <span class="keywordflow">default</span>;</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160; </div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    <span class="keyword">virtual</span> <a class="code" href="classqx_1_1base__vao.html#aecf2d4a43252082a6bd94619aebfbbde">~base_vao</a>(<span class="keywordtype">void</span>);</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160; </div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    QX_DECL_IBUFFER</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160; </div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classqx_1_1base__vao.html#a0a1ed6bf9d27863ef19573ecbf10568a">EnableVertexArrtibArray</a>(<span class="keywordtype">size_t</span> nIndex);</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160; </div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classqx_1_1base__vao.html#a72a3833997538c341c13b7a24bcd9c41">DisableVertexArrtibArray</a>(<span class="keywordtype">size_t</span> nIndex);</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160; </div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classqx_1_1base__vao.html#adc5fee3898596752c55eee59c251e6be">VertexAttribPointer</a>(</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;        <span class="keywordtype">size_t</span>    nIndex,</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;        GLint     nSize,</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;        GLenum    eType,</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;        GLboolean bNormalized,</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;        GLsizei   nStride,</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;        <span class="keywordtype">size_t</span>    nOffset);</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160; </div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;    GLuint m_nVAO = std::numeric_limits&lt;GLuint&gt;::max();</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;};</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160; </div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;<span class="keyword">using</span> <a class="code" href="classqx_1_1base__vao.html">vao</a> = <a class="code" href="classqx_1_1base__vao.html">base_vao</a>;</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160; </div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;} <span class="comment">// namespace qx</span></div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160; </div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="vao_8inl.html">qx/gl/vao.inl</a>&gt;</span></div>
-<div class="ttc" id="aclassqx_1_1_i_buffer_html"><div class="ttname"><a href="classqx_1_1_i_buffer.html">qx::IBuffer</a></div><div class="ttdoc">OpenGL buffer interface.</div><div class="ttdef"><b>Definition:</b> <a href="ibuffer_8h_source.html#l00028">ibuffer.h:29</a></div></div>
-<div class="ttc" id="aclassqx_1_1base__vao_html"><div class="ttname"><a href="classqx_1_1base__vao.html">qx::base_vao</a></div><div class="ttdoc">Base VAO class.</div><div class="ttdef"><b>Definition:</b> <a href="vao_8h_source.html#l00029">vao.h:30</a></div></div>
+<div class="line"><a name="l00028"></a><span class="lineno"><a class="line" href="classqx_1_1base__vao.html">   28</a></span>&#160;<span class="keyword">class </span><a class="code" href="classqx_1_1base__vao.html">base_vao</a> : <a class="code" href="classqx_1_1_i_buffer.html">IBuffer</a></div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;{</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00034"></a><span class="lineno"><a class="line" href="classqx_1_1base__vao.html#a2b0454af9878e6c9ebaa8b62b66a5f93">   34</a></span>&#160;    <a class="code" href="classqx_1_1base__vao.html#a2b0454af9878e6c9ebaa8b62b66a5f93">base_vao</a>(<span class="keywordtype">void</span>) = <span class="keywordflow">default</span>;</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160; </div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    <span class="keyword">virtual</span> <a class="code" href="classqx_1_1base__vao.html#aecf2d4a43252082a6bd94619aebfbbde">~base_vao</a>(<span class="keywordtype">void</span>);</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160; </div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    QX_DECL_IBUFFER</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160; </div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classqx_1_1base__vao.html#a0a1ed6bf9d27863ef19573ecbf10568a">EnableVertexArrtibArray</a>(<span class="keywordtype">size_t</span> nIndex);</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160; </div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classqx_1_1base__vao.html#a72a3833997538c341c13b7a24bcd9c41">DisableVertexArrtibArray</a>(<span class="keywordtype">size_t</span> nIndex);</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160; </div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classqx_1_1base__vao.html#adc5fee3898596752c55eee59c251e6be">VertexAttribPointer</a>(</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;        <span class="keywordtype">size_t</span>    nIndex,</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;        GLint     nSize,</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;        GLenum    eType,</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;        GLboolean bNormalized,</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;        GLsizei   nStride,</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;        <span class="keywordtype">size_t</span>    nOffset);</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160; </div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;    GLuint m_nVAO = std::numeric_limits&lt;GLuint&gt;::max();</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;};</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160; </div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;<span class="keyword">using</span> <a class="code" href="classqx_1_1base__vao.html">vao</a> = <a class="code" href="classqx_1_1base__vao.html">base_vao</a>;</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160; </div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;} <span class="comment">// namespace qx</span></div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160; </div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="vao_8inl.html">qx/gl/vao.inl</a>&gt;</span></div>
+<div class="ttc" id="aclassqx_1_1_i_buffer_html"><div class="ttname"><a href="classqx_1_1_i_buffer.html">qx::IBuffer</a></div><div class="ttdoc">OpenGL buffer interface.</div><div class="ttdef"><b>Definition:</b> <a href="ibuffer_8h_source.html#l00027">ibuffer.h:28</a></div></div>
+<div class="ttc" id="aclassqx_1_1base__vao_html"><div class="ttname"><a href="classqx_1_1base__vao.html">qx::base_vao</a></div><div class="ttdoc">Base VAO class.</div><div class="ttdef"><b>Definition:</b> <a href="vao_8h_source.html#l00028">vao.h:29</a></div></div>
 <div class="ttc" id="aclassqx_1_1base__vao_html_a0a1ed6bf9d27863ef19573ecbf10568a"><div class="ttname"><a href="classqx_1_1base__vao.html#a0a1ed6bf9d27863ef19573ecbf10568a">qx::base_vao::EnableVertexArrtibArray</a></div><div class="ttdeci">QX_DECL_IBUFFER void EnableVertexArrtibArray(size_t nIndex)</div><div class="ttdoc">Enable a generic vertex attribute array.</div><div class="ttdef"><b>Definition:</b> <a href="vao_8inl_source.html#l00047">vao.inl:47</a></div></div>
 <div class="ttc" id="aclassqx_1_1base__vao_html_a2b0454af9878e6c9ebaa8b62b66a5f93"><div class="ttname"><a href="classqx_1_1base__vao.html#a2b0454af9878e6c9ebaa8b62b66a5f93">qx::base_vao::base_vao</a></div><div class="ttdeci">base_vao(void)=default</div><div class="ttdoc">base_vao object constructor</div></div>
 <div class="ttc" id="aclassqx_1_1base__vao_html_a72a3833997538c341c13b7a24bcd9c41"><div class="ttname"><a href="classqx_1_1base__vao.html#a72a3833997538c341c13b7a24bcd9c41">qx::base_vao::DisableVertexArrtibArray</a></div><div class="ttdeci">void DisableVertexArrtibArray(size_t nIndex)</div><div class="ttdoc">Disable a generic vertex attribute array.</div><div class="ttdef"><b>Definition:</b> <a href="vao_8inl_source.html#l00052">vao.inl:52</a></div></div>

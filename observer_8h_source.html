@@ -83,188 +83,188 @@ $(function() {
 <div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="keyword">class </span>observer;</div>
 <div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="keyword">class </span>base_subject;</div>
 <div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160; </div>
-<div class="line"><a name="l00035"></a><span class="lineno"><a class="line" href="classqx_1_1observer__token.html">   35</a></span>&#160;<span class="keyword">class </span><a class="code" href="classqx_1_1observer__token.html">observer_token</a></div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;{</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    <span class="keyword">friend</span> <a class="code" href="classqx_1_1base__subject.html">base_subject</a>;</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    <span class="keyword">friend</span> <a class="code" href="classqx_1_1observer.html">observer</a>;</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160; </div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    QX_NONCOPYABLE(<a class="code" href="classqx_1_1observer__token.html">observer_token</a>);</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160; </div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    <a class="code" href="classqx_1_1observer__token.html#a6a4de5a917ee6d35a796c0862f5c86f9">observer_token</a>(<a class="code" href="classqx_1_1base__subject.html">base_subject</a>* pSubject, <a class="code" href="classqx_1_1observer.html">observer</a>* pObserver) noexcept;</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160; </div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    <span class="keywordtype">void</span> reset(<span class="keywordtype">void</span>) noexcept;</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160; </div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    <a class="code" href="classqx_1_1observer__token.html#a6a4de5a917ee6d35a796c0862f5c86f9">observer_token</a>(<a class="code" href="classqx_1_1observer__token.html">observer_token</a>&amp;&amp; other) noexcept;</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    <a class="code" href="classqx_1_1observer__token.html">observer_token</a>&amp; <a class="code" href="classqx_1_1observer__token.html#a28abb0f35cbbdcc9c0d4f0d7e0b03675">operator=</a>(<a class="code" href="classqx_1_1observer__token.html">observer_token</a>&amp;&amp; other) noexcept;</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160; </div>
-<div class="line"><a name="l00072"></a><span class="lineno"><a class="line" href="classqx_1_1observer__token.html#a6a4de5a917ee6d35a796c0862f5c86f9">   72</a></span>&#160;    <a class="code" href="classqx_1_1observer__token.html#a6a4de5a917ee6d35a796c0862f5c86f9">observer_token</a>(<span class="keywordtype">void</span>) noexcept = <span class="keywordflow">default</span>;</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160; </div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;    <a class="code" href="classqx_1_1observer__token.html#abf6fdc6a1fc31b642a3baf1b23361f6a">~observer_token</a>(<span class="keywordtype">void</span>) noexcept;</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160; </div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="classqx_1_1observer__token.html#a08e3c1891425f418ad804bc8f9235fd8">operator==</a>(<span class="keyword">const</span> <a class="code" href="classqx_1_1observer__token.html">observer_token</a>&amp; other) <span class="keyword">const</span> noexcept;</div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160; </div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;    <span class="keyword">operator</span> bool(<span class="keywordtype">void</span>) <span class="keyword">const</span> noexcept;</div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160; </div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;    <a class="code" href="classqx_1_1base__subject.html">base_subject</a>* m_pSubject  = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;    <a class="code" href="classqx_1_1observer.html">observer</a>*     m_pObserver = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;};</div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160; </div>
-<div class="line"><a name="l00108"></a><span class="lineno"><a class="line" href="classqx_1_1base__subject.html">  108</a></span>&#160;<span class="keyword">class </span><a class="code" href="classqx_1_1base__subject.html">base_subject</a></div>
-<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;{</div>
-<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;    <span class="keyword">using</span> observers_container = std::vector&lt;observer*&gt;;</div>
-<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160; </div>
-<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;    <span class="keyword">template</span>&lt;<span class="keyword">typename</span> TObserver&gt;</div>
-<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;    <span class="keyword">friend</span> <span class="keyword">class </span><a class="code" href="classqx_1_1subject.html">subject</a>;</div>
-<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;    <span class="keyword">friend</span> <a class="code" href="classqx_1_1observer__token.html">observer_token</a>;</div>
-<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;    <span class="keyword">friend</span> <a class="code" href="classqx_1_1observer.html">observer</a>;</div>
-<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160; </div>
-<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;    <a class="code" href="useful__macros_8h.html#a69d34c8ba6c4f5f30a1920c2d5f3f9f0">QX_NONCOPYABLE</a>(<a class="code" href="classqx_1_1base__subject.html">base_subject</a>);</div>
-<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;    <a class="code" href="useful__macros_8h.html#a142a312141cbb7a9f1d9f1fcdddcb927">QX_MOVABLE</a>(<a class="code" href="classqx_1_1base__subject.html">base_subject</a>);</div>
-<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160; </div>
-<div class="line"><a name="l00125"></a><span class="lineno"><a class="line" href="classqx_1_1base__subject.html#a51ad6345028e788998fe20980a7a43d6">  125</a></span>&#160;    <a class="code" href="classqx_1_1base__subject.html#a51ad6345028e788998fe20980a7a43d6">base_subject</a>(<span class="keywordtype">void</span>) = <span class="keywordflow">default</span>;</div>
-<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160; </div>
-<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;    <span class="keyword">virtual</span> <a class="code" href="classqx_1_1base__subject.html#a7ae56cb5b46ad0f3a2ae4c8b5bb8cbb8">~base_subject</a>(<span class="keywordtype">void</span>) noexcept = 0;</div>
-<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160; </div>
-<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;    <span class="keywordtype">size_t</span> <a class="code" href="classqx_1_1base__subject.html#a03572bbae3bb79a9cc2a429b81581896">get_num_observers</a>(<span class="keywordtype">void</span>) <span class="keyword">const</span> noexcept;</div>
-<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160; </div>
-<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;    [[nodiscard]] <a class="code" href="classqx_1_1observer__token.html">observer_token</a> attach(<a class="code" href="classqx_1_1observer.html">observer</a>* pObserver);</div>
-<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160; </div>
-<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;    <span class="keywordtype">void</span> detach(<a class="code" href="classqx_1_1observer.html">observer</a>* pObserver) noexcept;</div>
-<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160; </div>
-<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;    <span class="keywordtype">void</span> on_iterator_destructed(<span class="keywordtype">void</span>) noexcept;</div>
-<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160; </div>
-<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;    <span class="keywordtype">void</span> on_iterator_constructed(<span class="keywordtype">void</span>) noexcept;</div>
-<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160; </div>
-<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;    observers_container m_Observers;</div>
-<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;    <span class="keywordtype">size_t</span>              m_nIterators = 0;</div>
-<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;};</div>
-<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160; </div>
-<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> TObserver&gt;</div>
-<div class="line"><a name="l00181"></a><span class="lineno"><a class="line" href="classqx_1_1subject.html">  181</a></span>&#160;<span class="keyword">class </span><a class="code" href="classqx_1_1subject.html">subject</a> : <span class="keyword">public</span> <a class="code" href="classqx_1_1base__subject.html">base_subject</a></div>
-<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;{</div>
-<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;    <span class="keyword">template</span>&lt;<span class="keyword">class</span> TBaseIterator&gt;</div>
-<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;    <span class="keyword">class </span>base_iterator : <span class="keyword">public</span> TBaseIterator</div>
-<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;    {</div>
-<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;    <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;        base_iterator(<span class="keywordtype">void</span>) noexcept;</div>
-<div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160; </div>
-<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;        base_iterator(<span class="keyword">const</span> TBaseIterator&amp; other, <a class="code" href="classqx_1_1subject.html">subject</a>* pSubject) noexcept;</div>
-<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160; </div>
-<div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160;        base_iterator(<span class="keyword">const</span> base_iterator&amp; other) noexcept;</div>
-<div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160; </div>
-<div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160;        base_iterator(base_iterator&amp;&amp;) noexcept = <span class="keywordflow">default</span>;</div>
-<div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160; </div>
-<div class="line"><a name="l00214"></a><span class="lineno">  214</span>&#160;        ~base_iterator(<span class="keywordtype">void</span>) noexcept;</div>
-<div class="line"><a name="l00215"></a><span class="lineno">  215</span>&#160; </div>
-<div class="line"><a name="l00220"></a><span class="lineno">  220</span>&#160;        TObserver* operator-&gt;(<span class="keywordtype">void</span>) noexcept;</div>
-<div class="line"><a name="l00221"></a><span class="lineno">  221</span>&#160; </div>
-<div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160;        TObserver&amp; operator*(<span class="keywordtype">void</span>) noexcept;</div>
-<div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160; </div>
-<div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160;    <span class="keyword">private</span>:</div>
-<div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160;        <span class="keywordtype">void</span> init(<span class="keywordtype">void</span>) noexcept;</div>
+<div class="line"><a name="l00034"></a><span class="lineno"><a class="line" href="classqx_1_1observer__token.html">   34</a></span>&#160;<span class="keyword">class </span><a class="code" href="classqx_1_1observer__token.html">observer_token</a></div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;{</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    <span class="keyword">friend</span> <a class="code" href="classqx_1_1base__subject.html">base_subject</a>;</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    <span class="keyword">friend</span> <a class="code" href="classqx_1_1observer.html">observer</a>;</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160; </div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    QX_NONCOPYABLE(<a class="code" href="classqx_1_1observer__token.html">observer_token</a>);</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160; </div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    <a class="code" href="classqx_1_1observer__token.html#a6a4de5a917ee6d35a796c0862f5c86f9">observer_token</a>(<a class="code" href="classqx_1_1base__subject.html">base_subject</a>* pSubject, <a class="code" href="classqx_1_1observer.html">observer</a>* pObserver) noexcept;</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160; </div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    <span class="keywordtype">void</span> reset(<span class="keywordtype">void</span>) noexcept;</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160; </div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    <a class="code" href="classqx_1_1observer__token.html#a6a4de5a917ee6d35a796c0862f5c86f9">observer_token</a>(<a class="code" href="classqx_1_1observer__token.html">observer_token</a>&amp;&amp; other) noexcept;</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    <a class="code" href="classqx_1_1observer__token.html">observer_token</a>&amp; <a class="code" href="classqx_1_1observer__token.html#a28abb0f35cbbdcc9c0d4f0d7e0b03675">operator=</a>(<a class="code" href="classqx_1_1observer__token.html">observer_token</a>&amp;&amp; other) noexcept;</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160; </div>
+<div class="line"><a name="l00071"></a><span class="lineno"><a class="line" href="classqx_1_1observer__token.html#a6a4de5a917ee6d35a796c0862f5c86f9">   71</a></span>&#160;    <a class="code" href="classqx_1_1observer__token.html#a6a4de5a917ee6d35a796c0862f5c86f9">observer_token</a>(<span class="keywordtype">void</span>) noexcept = <span class="keywordflow">default</span>;</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160; </div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    <a class="code" href="classqx_1_1observer__token.html#abf6fdc6a1fc31b642a3baf1b23361f6a">~observer_token</a>(<span class="keywordtype">void</span>) noexcept;</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160; </div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="classqx_1_1observer__token.html#a08e3c1891425f418ad804bc8f9235fd8">operator==</a>(<span class="keyword">const</span> <a class="code" href="classqx_1_1observer__token.html">observer_token</a>&amp; other) <span class="keyword">const</span> noexcept;</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160; </div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;    <span class="keyword">operator</span> bool(<span class="keywordtype">void</span>) <span class="keyword">const</span> noexcept;</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160; </div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;    <a class="code" href="classqx_1_1base__subject.html">base_subject</a>* m_pSubject  = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;    <a class="code" href="classqx_1_1observer.html">observer</a>*     m_pObserver = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;};</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160; </div>
+<div class="line"><a name="l00106"></a><span class="lineno"><a class="line" href="classqx_1_1base__subject.html">  106</a></span>&#160;<span class="keyword">class </span><a class="code" href="classqx_1_1base__subject.html">base_subject</a></div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;{</div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;    <span class="keyword">using</span> observers_container = std::vector&lt;observer*&gt;;</div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160; </div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;    <span class="keyword">template</span>&lt;<span class="keyword">typename</span> TObserver&gt;</div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;    <span class="keyword">friend</span> <span class="keyword">class </span><a class="code" href="classqx_1_1subject.html">subject</a>;</div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;    <span class="keyword">friend</span> <a class="code" href="classqx_1_1observer__token.html">observer_token</a>;</div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;    <span class="keyword">friend</span> <a class="code" href="classqx_1_1observer.html">observer</a>;</div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160; </div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;    <a class="code" href="useful__macros_8h.html#a69d34c8ba6c4f5f30a1920c2d5f3f9f0">QX_NONCOPYABLE</a>(<a class="code" href="classqx_1_1base__subject.html">base_subject</a>);</div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;    <a class="code" href="useful__macros_8h.html#a142a312141cbb7a9f1d9f1fcdddcb927">QX_MOVABLE</a>(<a class="code" href="classqx_1_1base__subject.html">base_subject</a>);</div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160; </div>
+<div class="line"><a name="l00123"></a><span class="lineno"><a class="line" href="classqx_1_1base__subject.html#a51ad6345028e788998fe20980a7a43d6">  123</a></span>&#160;    <a class="code" href="classqx_1_1base__subject.html#a51ad6345028e788998fe20980a7a43d6">base_subject</a>(<span class="keywordtype">void</span>) = <span class="keywordflow">default</span>;</div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160; </div>
+<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;    <span class="keyword">virtual</span> <a class="code" href="classqx_1_1base__subject.html#a7ae56cb5b46ad0f3a2ae4c8b5bb8cbb8">~base_subject</a>(<span class="keywordtype">void</span>) noexcept = 0;</div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160; </div>
+<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;    <span class="keywordtype">size_t</span> <a class="code" href="classqx_1_1base__subject.html#a03572bbae3bb79a9cc2a429b81581896">get_num_observers</a>(<span class="keywordtype">void</span>) <span class="keyword">const</span> noexcept;</div>
+<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160; </div>
+<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;    [[nodiscard]] <a class="code" href="classqx_1_1observer__token.html">observer_token</a> attach(<a class="code" href="classqx_1_1observer.html">observer</a>* pObserver);</div>
+<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160; </div>
+<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;    <span class="keywordtype">void</span> detach(<a class="code" href="classqx_1_1observer.html">observer</a>* pObserver) noexcept;</div>
+<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160; </div>
+<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;    <span class="keywordtype">void</span> on_iterator_destructed(<span class="keywordtype">void</span>) noexcept;</div>
+<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160; </div>
+<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;    <span class="keywordtype">void</span> on_iterator_constructed(<span class="keywordtype">void</span>) noexcept;</div>
+<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160; </div>
+<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;    observers_container m_Observers;</div>
+<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;    <span class="keywordtype">size_t</span>              m_nIterators = 0;</div>
+<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;};</div>
+<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160; </div>
+<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> TObserver&gt;</div>
+<div class="line"><a name="l00177"></a><span class="lineno"><a class="line" href="classqx_1_1subject.html">  177</a></span>&#160;<span class="keyword">class </span><a class="code" href="classqx_1_1subject.html">subject</a> : <span class="keyword">public</span> <a class="code" href="classqx_1_1base__subject.html">base_subject</a></div>
+<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;{</div>
+<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;    <span class="keyword">template</span>&lt;<span class="keyword">class</span> TBaseIterator&gt;</div>
+<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;    <span class="keyword">class </span>base_iterator : <span class="keyword">public</span> TBaseIterator</div>
+<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;    {</div>
+<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;    <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;        base_iterator(<span class="keywordtype">void</span>) noexcept;</div>
+<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160; </div>
+<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;        base_iterator(<span class="keyword">const</span> TBaseIterator&amp; other, <a class="code" href="classqx_1_1subject.html">subject</a>* pSubject) noexcept;</div>
+<div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160; </div>
+<div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160;        base_iterator(<span class="keyword">const</span> base_iterator&amp; other) noexcept;</div>
+<div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160; </div>
+<div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;        base_iterator(base_iterator&amp;&amp;) noexcept = <span class="keywordflow">default</span>;</div>
+<div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160; </div>
+<div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160;        ~base_iterator(<span class="keywordtype">void</span>) noexcept;</div>
+<div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160; </div>
+<div class="line"><a name="l00216"></a><span class="lineno">  216</span>&#160;        TObserver* operator-&gt;(<span class="keywordtype">void</span>) noexcept;</div>
+<div class="line"><a name="l00217"></a><span class="lineno">  217</span>&#160; </div>
+<div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160;        TObserver&amp; operator*(<span class="keywordtype">void</span>) noexcept;</div>
+<div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160; </div>
+<div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160;    <span class="keyword">private</span>:</div>
+<div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160;        <span class="keywordtype">void</span> init(<span class="keywordtype">void</span>) noexcept;</div>
+<div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160; </div>
+<div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160;    <span class="keyword">private</span>:</div>
+<div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160;        <a class="code" href="classqx_1_1subject.html">subject</a>* m_pSubject = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160;    };</div>
 <div class="line"><a name="l00233"></a><span class="lineno">  233</span>&#160; </div>
-<div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160;    <span class="keyword">private</span>:</div>
-<div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160;        <a class="code" href="classqx_1_1subject.html">subject</a>* m_pSubject = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160;    };</div>
-<div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160; </div>
-<div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160;    <span class="keyword">template</span>&lt;<span class="keyword">class</span> TBaseIterator&gt;</div>
-<div class="line"><a name="l00239"></a><span class="lineno">  239</span>&#160;    <span class="keyword">class </span>const_base_iterator : <span class="keyword">public</span> TBaseIterator</div>
-<div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160;    {</div>
-<div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160;    <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160;        const_base_iterator(<span class="keywordtype">void</span>) noexcept = <span class="keywordflow">default</span>;</div>
-<div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160; </div>
-<div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160;        const_base_iterator(<span class="keyword">const</span> const_base_iterator&amp;) noexcept = <span class="keywordflow">default</span>;</div>
-<div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160; </div>
-<div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160;        const_base_iterator(const_base_iterator&amp;&amp;) noexcept = <span class="keywordflow">default</span>;</div>
-<div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160; </div>
-<div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160;        const_base_iterator(<span class="keyword">const</span> TBaseIterator&amp; other) noexcept;</div>
-<div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160; </div>
-<div class="line"><a name="l00269"></a><span class="lineno">  269</span>&#160;        <span class="keyword">const</span> TObserver* operator-&gt;(<span class="keywordtype">void</span>) <span class="keyword">const</span> noexcept;</div>
-<div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160; </div>
-<div class="line"><a name="l00275"></a><span class="lineno">  275</span>&#160;        <span class="keyword">const</span> TObserver&amp; operator*(<span class="keywordtype">void</span>) <span class="keyword">const</span> noexcept;</div>
-<div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160;    };</div>
-<div class="line"><a name="l00277"></a><span class="lineno">  277</span>&#160; </div>
-<div class="line"><a name="l00278"></a><span class="lineno">  278</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00279"></a><span class="lineno">  279</span>&#160;    <span class="keyword">using</span> iterator = base_iterator&lt;observers_container::iterator&gt;;</div>
-<div class="line"><a name="l00280"></a><span class="lineno">  280</span>&#160; </div>
-<div class="line"><a name="l00281"></a><span class="lineno">  281</span>&#160;    <span class="keyword">using</span> const_iterator =</div>
-<div class="line"><a name="l00282"></a><span class="lineno">  282</span>&#160;        const_base_iterator&lt;observers_container::const_iterator&gt;;</div>
-<div class="line"><a name="l00283"></a><span class="lineno">  283</span>&#160; </div>
-<div class="line"><a name="l00284"></a><span class="lineno">  284</span>&#160;    <span class="keyword">using</span> reverse_iterator =</div>
-<div class="line"><a name="l00285"></a><span class="lineno">  285</span>&#160;        base_iterator&lt;observers_container::reverse_iterator&gt;;</div>
-<div class="line"><a name="l00286"></a><span class="lineno">  286</span>&#160; </div>
-<div class="line"><a name="l00287"></a><span class="lineno">  287</span>&#160;    <span class="keyword">using</span> const_reverse_iterator =</div>
-<div class="line"><a name="l00288"></a><span class="lineno">  288</span>&#160;        const_base_iterator&lt;observers_container::const_reverse_iterator&gt;;</div>
-<div class="line"><a name="l00289"></a><span class="lineno">  289</span>&#160; </div>
-<div class="line"><a name="l00290"></a><span class="lineno">  290</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00295"></a><span class="lineno"><a class="line" href="classqx_1_1subject.html#af18d40e09b0ed64447317ee6d8104b87">  295</a></span>&#160;    iterator <a class="code" href="classqx_1_1subject.html#af18d40e09b0ed64447317ee6d8104b87">begin</a>(<span class="keywordtype">void</span>);</div>
-<div class="line"><a name="l00296"></a><span class="lineno">  296</span>&#160; </div>
-<div class="line"><a name="l00301"></a><span class="lineno"><a class="line" href="classqx_1_1subject.html#aa5783c8c39a18c90e20cd2d13e866061">  301</a></span>&#160;    const_iterator <a class="code" href="classqx_1_1subject.html#aa5783c8c39a18c90e20cd2d13e866061">begin</a>(<span class="keywordtype">void</span>) <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00302"></a><span class="lineno">  302</span>&#160; </div>
-<div class="line"><a name="l00307"></a><span class="lineno"><a class="line" href="classqx_1_1subject.html#a8181f8e350989e8f908d5bc088457e49">  307</a></span>&#160;    const_iterator <a class="code" href="classqx_1_1subject.html#a8181f8e350989e8f908d5bc088457e49">cbegin</a>(<span class="keywordtype">void</span>) <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00308"></a><span class="lineno">  308</span>&#160; </div>
-<div class="line"><a name="l00313"></a><span class="lineno"><a class="line" href="classqx_1_1subject.html#a567d03352edd07335dcbd5c0679c8821">  313</a></span>&#160;    iterator <a class="code" href="classqx_1_1subject.html#a567d03352edd07335dcbd5c0679c8821">end</a>(<span class="keywordtype">void</span>);</div>
-<div class="line"><a name="l00314"></a><span class="lineno">  314</span>&#160; </div>
-<div class="line"><a name="l00319"></a><span class="lineno"><a class="line" href="classqx_1_1subject.html#aeae002bf3100349edded8f0ff8c16ef0">  319</a></span>&#160;    const_iterator <a class="code" href="classqx_1_1subject.html#aeae002bf3100349edded8f0ff8c16ef0">end</a>(<span class="keywordtype">void</span>) <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00320"></a><span class="lineno">  320</span>&#160; </div>
-<div class="line"><a name="l00325"></a><span class="lineno"><a class="line" href="classqx_1_1subject.html#a69db7e121f4c53d372a6e648f2db1ee2">  325</a></span>&#160;    const_iterator <a class="code" href="classqx_1_1subject.html#a69db7e121f4c53d372a6e648f2db1ee2">cend</a>(<span class="keywordtype">void</span>) <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00326"></a><span class="lineno">  326</span>&#160; </div>
-<div class="line"><a name="l00331"></a><span class="lineno"><a class="line" href="classqx_1_1subject.html#a2cc2507111c167635454ad9e288127f9">  331</a></span>&#160;    reverse_iterator <a class="code" href="classqx_1_1subject.html#a2cc2507111c167635454ad9e288127f9">rbegin</a>(<span class="keywordtype">void</span>);</div>
-<div class="line"><a name="l00332"></a><span class="lineno">  332</span>&#160; </div>
-<div class="line"><a name="l00337"></a><span class="lineno"><a class="line" href="classqx_1_1subject.html#a911037d72c8fb0adf453e288327bb8c1">  337</a></span>&#160;    const_reverse_iterator <a class="code" href="classqx_1_1subject.html#a911037d72c8fb0adf453e288327bb8c1">rbegin</a>(<span class="keywordtype">void</span>) <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00338"></a><span class="lineno">  338</span>&#160; </div>
-<div class="line"><a name="l00343"></a><span class="lineno"><a class="line" href="classqx_1_1subject.html#a629df853644ae86d9a50e0bfdb2f1fde">  343</a></span>&#160;    const_reverse_iterator <a class="code" href="classqx_1_1subject.html#a629df853644ae86d9a50e0bfdb2f1fde">crbegin</a>(<span class="keywordtype">void</span>) <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00344"></a><span class="lineno">  344</span>&#160; </div>
-<div class="line"><a name="l00349"></a><span class="lineno"><a class="line" href="classqx_1_1subject.html#a33a210ba9c6c25023bedbf6ab98885db">  349</a></span>&#160;    reverse_iterator <a class="code" href="classqx_1_1subject.html#a33a210ba9c6c25023bedbf6ab98885db">rend</a>(<span class="keywordtype">void</span>);</div>
-<div class="line"><a name="l00350"></a><span class="lineno">  350</span>&#160; </div>
-<div class="line"><a name="l00355"></a><span class="lineno"><a class="line" href="classqx_1_1subject.html#a03ee22896db0d5acf82b0fbcd78300d4">  355</a></span>&#160;    const_reverse_iterator <a class="code" href="classqx_1_1subject.html#a03ee22896db0d5acf82b0fbcd78300d4">rend</a>(<span class="keywordtype">void</span>) <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00356"></a><span class="lineno">  356</span>&#160; </div>
-<div class="line"><a name="l00361"></a><span class="lineno"><a class="line" href="classqx_1_1subject.html#a3465797959fd7cce46bbf8587729abcf">  361</a></span>&#160;    const_reverse_iterator <a class="code" href="classqx_1_1subject.html#a3465797959fd7cce46bbf8587729abcf">crend</a>(<span class="keywordtype">void</span>) <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00362"></a><span class="lineno">  362</span>&#160;};</div>
-<div class="line"><a name="l00363"></a><span class="lineno">  363</span>&#160; </div>
-<div class="line"><a name="l00375"></a><span class="lineno"><a class="line" href="classqx_1_1observer.html">  375</a></span>&#160;<span class="keyword">class </span><a class="code" href="classqx_1_1observer.html">observer</a></div>
-<div class="line"><a name="l00376"></a><span class="lineno">  376</span>&#160;{</div>
-<div class="line"><a name="l00377"></a><span class="lineno">  377</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00381"></a><span class="lineno"><a class="line" href="classqx_1_1observer.html#a41c59ed126618c3cc13c90920cc49a54">  381</a></span>&#160;    <span class="keyword">virtual</span> <a class="code" href="classqx_1_1observer.html#a41c59ed126618c3cc13c90920cc49a54">~observer</a>(<span class="keywordtype">void</span>) = 0;</div>
-<div class="line"><a name="l00382"></a><span class="lineno">  382</span>&#160; </div>
-<div class="line"><a name="l00387"></a><span class="lineno">  387</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classqx_1_1observer.html#a4f6eee2b41f665bff4c167975e09f6ba">attach_to</a>(<a class="code" href="classqx_1_1base__subject.html">base_subject</a>* pSubject);</div>
-<div class="line"><a name="l00388"></a><span class="lineno">  388</span>&#160; </div>
-<div class="line"><a name="l00393"></a><span class="lineno">  393</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classqx_1_1observer.html#aab32606adeb8d5b00a259dcdc640c053">detach_from</a>(<a class="code" href="classqx_1_1base__subject.html">base_subject</a>* pSubject);</div>
+<div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160;    <span class="keyword">template</span>&lt;<span class="keyword">class</span> TBaseIterator&gt;</div>
+<div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160;    <span class="keyword">class </span>const_base_iterator : <span class="keyword">public</span> TBaseIterator</div>
+<div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160;    {</div>
+<div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;    <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160;        const_base_iterator(<span class="keywordtype">void</span>) noexcept = <span class="keywordflow">default</span>;</div>
+<div class="line"><a name="l00242"></a><span class="lineno">  242</span>&#160; </div>
+<div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160;        const_base_iterator(<span class="keyword">const</span> const_base_iterator&amp;) noexcept = <span class="keywordflow">default</span>;</div>
+<div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160; </div>
+<div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160;        const_base_iterator(const_base_iterator&amp;&amp;) noexcept = <span class="keywordflow">default</span>;</div>
+<div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160; </div>
+<div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160;        const_base_iterator(<span class="keyword">const</span> TBaseIterator&amp; other) noexcept;</div>
+<div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160; </div>
+<div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160;        <span class="keyword">const</span> TObserver* operator-&gt;(<span class="keywordtype">void</span>) <span class="keyword">const</span> noexcept;</div>
+<div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160; </div>
+<div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160;        <span class="keyword">const</span> TObserver&amp; operator*(<span class="keywordtype">void</span>) <span class="keyword">const</span> noexcept;</div>
+<div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160;    };</div>
+<div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160; </div>
+<div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00275"></a><span class="lineno">  275</span>&#160;    <span class="keyword">using</span> iterator = base_iterator&lt;observers_container::iterator&gt;;</div>
+<div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160; </div>
+<div class="line"><a name="l00277"></a><span class="lineno">  277</span>&#160;    <span class="keyword">using</span> const_iterator =</div>
+<div class="line"><a name="l00278"></a><span class="lineno">  278</span>&#160;        const_base_iterator&lt;observers_container::const_iterator&gt;;</div>
+<div class="line"><a name="l00279"></a><span class="lineno">  279</span>&#160; </div>
+<div class="line"><a name="l00280"></a><span class="lineno">  280</span>&#160;    <span class="keyword">using</span> reverse_iterator =</div>
+<div class="line"><a name="l00281"></a><span class="lineno">  281</span>&#160;        base_iterator&lt;observers_container::reverse_iterator&gt;;</div>
+<div class="line"><a name="l00282"></a><span class="lineno">  282</span>&#160; </div>
+<div class="line"><a name="l00283"></a><span class="lineno">  283</span>&#160;    <span class="keyword">using</span> const_reverse_iterator =</div>
+<div class="line"><a name="l00284"></a><span class="lineno">  284</span>&#160;        const_base_iterator&lt;observers_container::const_reverse_iterator&gt;;</div>
+<div class="line"><a name="l00285"></a><span class="lineno">  285</span>&#160; </div>
+<div class="line"><a name="l00286"></a><span class="lineno">  286</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00291"></a><span class="lineno"><a class="line" href="classqx_1_1subject.html#af18d40e09b0ed64447317ee6d8104b87">  291</a></span>&#160;    iterator <a class="code" href="classqx_1_1subject.html#af18d40e09b0ed64447317ee6d8104b87">begin</a>(<span class="keywordtype">void</span>);</div>
+<div class="line"><a name="l00292"></a><span class="lineno">  292</span>&#160; </div>
+<div class="line"><a name="l00297"></a><span class="lineno"><a class="line" href="classqx_1_1subject.html#aa5783c8c39a18c90e20cd2d13e866061">  297</a></span>&#160;    const_iterator <a class="code" href="classqx_1_1subject.html#aa5783c8c39a18c90e20cd2d13e866061">begin</a>(<span class="keywordtype">void</span>) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00298"></a><span class="lineno">  298</span>&#160; </div>
+<div class="line"><a name="l00303"></a><span class="lineno"><a class="line" href="classqx_1_1subject.html#a8181f8e350989e8f908d5bc088457e49">  303</a></span>&#160;    const_iterator <a class="code" href="classqx_1_1subject.html#a8181f8e350989e8f908d5bc088457e49">cbegin</a>(<span class="keywordtype">void</span>) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00304"></a><span class="lineno">  304</span>&#160; </div>
+<div class="line"><a name="l00309"></a><span class="lineno"><a class="line" href="classqx_1_1subject.html#a567d03352edd07335dcbd5c0679c8821">  309</a></span>&#160;    iterator <a class="code" href="classqx_1_1subject.html#a567d03352edd07335dcbd5c0679c8821">end</a>(<span class="keywordtype">void</span>);</div>
+<div class="line"><a name="l00310"></a><span class="lineno">  310</span>&#160; </div>
+<div class="line"><a name="l00315"></a><span class="lineno"><a class="line" href="classqx_1_1subject.html#aeae002bf3100349edded8f0ff8c16ef0">  315</a></span>&#160;    const_iterator <a class="code" href="classqx_1_1subject.html#aeae002bf3100349edded8f0ff8c16ef0">end</a>(<span class="keywordtype">void</span>) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00316"></a><span class="lineno">  316</span>&#160; </div>
+<div class="line"><a name="l00321"></a><span class="lineno"><a class="line" href="classqx_1_1subject.html#a69db7e121f4c53d372a6e648f2db1ee2">  321</a></span>&#160;    const_iterator <a class="code" href="classqx_1_1subject.html#a69db7e121f4c53d372a6e648f2db1ee2">cend</a>(<span class="keywordtype">void</span>) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00322"></a><span class="lineno">  322</span>&#160; </div>
+<div class="line"><a name="l00327"></a><span class="lineno"><a class="line" href="classqx_1_1subject.html#a2cc2507111c167635454ad9e288127f9">  327</a></span>&#160;    reverse_iterator <a class="code" href="classqx_1_1subject.html#a2cc2507111c167635454ad9e288127f9">rbegin</a>(<span class="keywordtype">void</span>);</div>
+<div class="line"><a name="l00328"></a><span class="lineno">  328</span>&#160; </div>
+<div class="line"><a name="l00333"></a><span class="lineno"><a class="line" href="classqx_1_1subject.html#a911037d72c8fb0adf453e288327bb8c1">  333</a></span>&#160;    const_reverse_iterator <a class="code" href="classqx_1_1subject.html#a911037d72c8fb0adf453e288327bb8c1">rbegin</a>(<span class="keywordtype">void</span>) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00334"></a><span class="lineno">  334</span>&#160; </div>
+<div class="line"><a name="l00339"></a><span class="lineno"><a class="line" href="classqx_1_1subject.html#a629df853644ae86d9a50e0bfdb2f1fde">  339</a></span>&#160;    const_reverse_iterator <a class="code" href="classqx_1_1subject.html#a629df853644ae86d9a50e0bfdb2f1fde">crbegin</a>(<span class="keywordtype">void</span>) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00340"></a><span class="lineno">  340</span>&#160; </div>
+<div class="line"><a name="l00345"></a><span class="lineno"><a class="line" href="classqx_1_1subject.html#a33a210ba9c6c25023bedbf6ab98885db">  345</a></span>&#160;    reverse_iterator <a class="code" href="classqx_1_1subject.html#a33a210ba9c6c25023bedbf6ab98885db">rend</a>(<span class="keywordtype">void</span>);</div>
+<div class="line"><a name="l00346"></a><span class="lineno">  346</span>&#160; </div>
+<div class="line"><a name="l00351"></a><span class="lineno"><a class="line" href="classqx_1_1subject.html#a03ee22896db0d5acf82b0fbcd78300d4">  351</a></span>&#160;    const_reverse_iterator <a class="code" href="classqx_1_1subject.html#a03ee22896db0d5acf82b0fbcd78300d4">rend</a>(<span class="keywordtype">void</span>) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00352"></a><span class="lineno">  352</span>&#160; </div>
+<div class="line"><a name="l00357"></a><span class="lineno"><a class="line" href="classqx_1_1subject.html#a3465797959fd7cce46bbf8587729abcf">  357</a></span>&#160;    const_reverse_iterator <a class="code" href="classqx_1_1subject.html#a3465797959fd7cce46bbf8587729abcf">crend</a>(<span class="keywordtype">void</span>) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00358"></a><span class="lineno">  358</span>&#160;};</div>
+<div class="line"><a name="l00359"></a><span class="lineno">  359</span>&#160; </div>
+<div class="line"><a name="l00370"></a><span class="lineno"><a class="line" href="classqx_1_1observer.html">  370</a></span>&#160;<span class="keyword">class </span><a class="code" href="classqx_1_1observer.html">observer</a></div>
+<div class="line"><a name="l00371"></a><span class="lineno">  371</span>&#160;{</div>
+<div class="line"><a name="l00372"></a><span class="lineno">  372</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00376"></a><span class="lineno"><a class="line" href="classqx_1_1observer.html#a41c59ed126618c3cc13c90920cc49a54">  376</a></span>&#160;    <span class="keyword">virtual</span> <a class="code" href="classqx_1_1observer.html#a41c59ed126618c3cc13c90920cc49a54">~observer</a>(<span class="keywordtype">void</span>) = 0;</div>
+<div class="line"><a name="l00377"></a><span class="lineno">  377</span>&#160; </div>
+<div class="line"><a name="l00382"></a><span class="lineno">  382</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classqx_1_1observer.html#a4f6eee2b41f665bff4c167975e09f6ba">attach_to</a>(<a class="code" href="classqx_1_1base__subject.html">base_subject</a>* pSubject);</div>
+<div class="line"><a name="l00383"></a><span class="lineno">  383</span>&#160; </div>
+<div class="line"><a name="l00388"></a><span class="lineno">  388</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classqx_1_1observer.html#aab32606adeb8d5b00a259dcdc640c053">detach_from</a>(<a class="code" href="classqx_1_1base__subject.html">base_subject</a>* pSubject);</div>
+<div class="line"><a name="l00389"></a><span class="lineno">  389</span>&#160; </div>
+<div class="line"><a name="l00393"></a><span class="lineno">  393</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classqx_1_1observer.html#a80b40d3e6cdc29e3de1631d7a953a494">detach_from_all</a>(<span class="keywordtype">void</span>);</div>
 <div class="line"><a name="l00394"></a><span class="lineno">  394</span>&#160; </div>
-<div class="line"><a name="l00398"></a><span class="lineno">  398</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classqx_1_1observer.html#a80b40d3e6cdc29e3de1631d7a953a494">detach_from_all</a>(<span class="keywordtype">void</span>);</div>
-<div class="line"><a name="l00399"></a><span class="lineno">  399</span>&#160; </div>
-<div class="line"><a name="l00404"></a><span class="lineno">  404</span>&#160;    <span class="keywordtype">size_t</span> <a class="code" href="classqx_1_1observer.html#ab9d07d2aacbe88f58642655591325127">get_num_subjects_attached_to</a>(<span class="keywordtype">void</span>) <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00405"></a><span class="lineno">  405</span>&#160; </div>
-<div class="line"><a name="l00406"></a><span class="lineno">  406</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00407"></a><span class="lineno">  407</span>&#160;    std::vector&lt;observer_token&gt; m_Tokens;</div>
-<div class="line"><a name="l00408"></a><span class="lineno">  408</span>&#160;};</div>
-<div class="line"><a name="l00409"></a><span class="lineno">  409</span>&#160; </div>
-<div class="line"><a name="l00410"></a><span class="lineno">  410</span>&#160;} <span class="comment">// namespace qx</span></div>
-<div class="line"><a name="l00411"></a><span class="lineno">  411</span>&#160; </div>
-<div class="line"><a name="l00412"></a><span class="lineno">  412</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="observer_8inl.html">qx/patterns/observer.inl</a>&gt;</span></div>
-<div class="ttc" id="aclassqx_1_1base__subject_html"><div class="ttname"><a href="classqx_1_1base__subject.html">qx::base_subject</a></div><div class="ttdoc">Base subject class.</div><div class="ttdef"><b>Definition:</b> <a href="observer_8h_source.html#l00108">observer.h:109</a></div></div>
+<div class="line"><a name="l00399"></a><span class="lineno">  399</span>&#160;    <span class="keywordtype">size_t</span> <a class="code" href="classqx_1_1observer.html#ab9d07d2aacbe88f58642655591325127">get_num_subjects_attached_to</a>(<span class="keywordtype">void</span>) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00400"></a><span class="lineno">  400</span>&#160; </div>
+<div class="line"><a name="l00401"></a><span class="lineno">  401</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00402"></a><span class="lineno">  402</span>&#160;    std::vector&lt;observer_token&gt; m_Tokens;</div>
+<div class="line"><a name="l00403"></a><span class="lineno">  403</span>&#160;};</div>
+<div class="line"><a name="l00404"></a><span class="lineno">  404</span>&#160; </div>
+<div class="line"><a name="l00405"></a><span class="lineno">  405</span>&#160;} <span class="comment">// namespace qx</span></div>
+<div class="line"><a name="l00406"></a><span class="lineno">  406</span>&#160; </div>
+<div class="line"><a name="l00407"></a><span class="lineno">  407</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="observer_8inl.html">qx/patterns/observer.inl</a>&gt;</span></div>
+<div class="ttc" id="aclassqx_1_1base__subject_html"><div class="ttname"><a href="classqx_1_1base__subject.html">qx::base_subject</a></div><div class="ttdoc">Base subject class.</div><div class="ttdef"><b>Definition:</b> <a href="observer_8h_source.html#l00106">observer.h:107</a></div></div>
 <div class="ttc" id="aclassqx_1_1base__subject_html_a03572bbae3bb79a9cc2a429b81581896"><div class="ttname"><a href="classqx_1_1base__subject.html#a03572bbae3bb79a9cc2a429b81581896">qx::base_subject::get_num_observers</a></div><div class="ttdeci">size_t get_num_observers(void) const noexcept</div><div class="ttdoc">Get number of observers attached to this subject.</div><div class="ttdef"><b>Definition:</b> <a href="observer_8inl_source.html#l00070">observer.inl:70</a></div></div>
 <div class="ttc" id="aclassqx_1_1base__subject_html_a51ad6345028e788998fe20980a7a43d6"><div class="ttname"><a href="classqx_1_1base__subject.html#a51ad6345028e788998fe20980a7a43d6">qx::base_subject::base_subject</a></div><div class="ttdeci">base_subject(void)=default</div><div class="ttdoc">base_subject object constructor</div></div>
 <div class="ttc" id="aclassqx_1_1base__subject_html_a7ae56cb5b46ad0f3a2ae4c8b5bb8cbb8"><div class="ttname"><a href="classqx_1_1base__subject.html#a7ae56cb5b46ad0f3a2ae4c8b5bb8cbb8">qx::base_subject::~base_subject</a></div><div class="ttdeci">virtual ~base_subject(void) noexcept=0</div><div class="ttdoc">base_subject object destructor</div><div class="ttdef"><b>Definition:</b> <a href="observer_8inl_source.html#l00064">observer.inl:64</a></div></div>
-<div class="ttc" id="aclassqx_1_1observer__token_html"><div class="ttname"><a href="classqx_1_1observer__token.html">qx::observer_token</a></div><div class="ttdoc">Tokens are used to automatically detach observer when the observer object is destroyed.</div><div class="ttdef"><b>Definition:</b> <a href="observer_8h_source.html#l00035">observer.h:36</a></div></div>
+<div class="ttc" id="aclassqx_1_1observer__token_html"><div class="ttname"><a href="classqx_1_1observer__token.html">qx::observer_token</a></div><div class="ttdoc">Tokens are used to automatically detach observer when the observer object is destroyed.</div><div class="ttdef"><b>Definition:</b> <a href="observer_8h_source.html#l00034">observer.h:35</a></div></div>
 <div class="ttc" id="aclassqx_1_1observer__token_html_a08e3c1891425f418ad804bc8f9235fd8"><div class="ttname"><a href="classqx_1_1observer__token.html#a08e3c1891425f418ad804bc8f9235fd8">qx::observer_token::operator==</a></div><div class="ttdeci">bool operator==(const observer_token &amp;other) const noexcept</div><div class="ttdoc">operator==</div><div class="ttdef"><b>Definition:</b> <a href="observer_8inl_source.html#l00049">observer.inl:49</a></div></div>
 <div class="ttc" id="aclassqx_1_1observer__token_html_a28abb0f35cbbdcc9c0d4f0d7e0b03675"><div class="ttname"><a href="classqx_1_1observer__token.html#a28abb0f35cbbdcc9c0d4f0d7e0b03675">qx::observer_token::operator=</a></div><div class="ttdeci">observer_token &amp; operator=(observer_token &amp;&amp;other) noexcept</div><div class="ttdoc">operator=</div><div class="ttdef"><b>Definition:</b> <a href="observer_8inl_source.html#l00035">observer.inl:35</a></div></div>
 <div class="ttc" id="aclassqx_1_1observer__token_html_a6a4de5a917ee6d35a796c0862f5c86f9"><div class="ttname"><a href="classqx_1_1observer__token.html#a6a4de5a917ee6d35a796c0862f5c86f9">qx::observer_token::observer_token</a></div><div class="ttdeci">observer_token(void) noexcept=default</div><div class="ttdoc">observer_token object constructor</div></div>
 <div class="ttc" id="aclassqx_1_1observer__token_html_abf6fdc6a1fc31b642a3baf1b23361f6a"><div class="ttname"><a href="classqx_1_1observer__token.html#abf6fdc6a1fc31b642a3baf1b23361f6a">qx::observer_token::~observer_token</a></div><div class="ttdeci">~observer_token(void) noexcept</div><div class="ttdoc">observer_token object destructor</div><div class="ttdef"><b>Definition:</b> <a href="observer_8inl_source.html#l00043">observer.inl:43</a></div></div>
-<div class="ttc" id="aclassqx_1_1observer_html"><div class="ttname"><a href="classqx_1_1observer.html">qx::observer</a></div><div class="ttdoc">qx::subject class event observers</div><div class="ttdef"><b>Definition:</b> <a href="observer_8h_source.html#l00375">observer.h:376</a></div></div>
+<div class="ttc" id="aclassqx_1_1observer_html"><div class="ttname"><a href="classqx_1_1observer.html">qx::observer</a></div><div class="ttdoc">qx::subject class event observers</div><div class="ttdef"><b>Definition:</b> <a href="observer_8h_source.html#l00370">observer.h:371</a></div></div>
 <div class="ttc" id="aclassqx_1_1observer_html_a41c59ed126618c3cc13c90920cc49a54"><div class="ttname"><a href="classqx_1_1observer.html#a41c59ed126618c3cc13c90920cc49a54">qx::observer::~observer</a></div><div class="ttdeci">virtual ~observer(void)=0</div><div class="ttdoc">observer object destructor</div></div>
 <div class="ttc" id="aclassqx_1_1observer_html_a4f6eee2b41f665bff4c167975e09f6ba"><div class="ttname"><a href="classqx_1_1observer.html#a4f6eee2b41f665bff4c167975e09f6ba">qx::observer::attach_to</a></div><div class="ttdeci">void attach_to(base_subject *pSubject)</div><div class="ttdoc">Attach this observer to subject.</div><div class="ttdef"><b>Definition:</b> <a href="observer_8inl_source.html#l00305">observer.inl:305</a></div></div>
 <div class="ttc" id="aclassqx_1_1observer_html_a80b40d3e6cdc29e3de1631d7a953a494"><div class="ttname"><a href="classqx_1_1observer.html#a80b40d3e6cdc29e3de1631d7a953a494">qx::observer::detach_from_all</a></div><div class="ttdeci">void detach_from_all(void)</div><div class="ttdoc">Detach observer from all subjects.</div><div class="ttdef"><b>Definition:</b> <a href="observer_8inl_source.html#l00342">observer.inl:342</a></div></div>
 <div class="ttc" id="aclassqx_1_1observer_html_aab32606adeb8d5b00a259dcdc640c053"><div class="ttname"><a href="classqx_1_1observer.html#aab32606adeb8d5b00a259dcdc640c053">qx::observer::detach_from</a></div><div class="ttdeci">void detach_from(base_subject *pSubject)</div><div class="ttdoc">Detach this observer from subject.</div><div class="ttdef"><b>Definition:</b> <a href="observer_8inl_source.html#l00321">observer.inl:321</a></div></div>
 <div class="ttc" id="aclassqx_1_1observer_html_ab9d07d2aacbe88f58642655591325127"><div class="ttname"><a href="classqx_1_1observer.html#ab9d07d2aacbe88f58642655591325127">qx::observer::get_num_subjects_attached_to</a></div><div class="ttdeci">size_t get_num_subjects_attached_to(void) const</div><div class="ttdoc">Get number of subjects this observer is attached to.</div><div class="ttdef"><b>Definition:</b> <a href="observer_8inl_source.html#l00347">observer.inl:347</a></div></div>
-<div class="ttc" id="aclassqx_1_1subject_html"><div class="ttname"><a href="classqx_1_1subject.html">qx::subject</a></div><div class="ttdef"><b>Definition:</b> <a href="observer_8h_source.html#l00181">observer.h:182</a></div></div>
+<div class="ttc" id="aclassqx_1_1subject_html"><div class="ttname"><a href="classqx_1_1subject.html">qx::subject</a></div><div class="ttdef"><b>Definition:</b> <a href="observer_8h_source.html#l00177">observer.h:178</a></div></div>
 <div class="ttc" id="aclassqx_1_1subject_html_a03ee22896db0d5acf82b0fbcd78300d4"><div class="ttname"><a href="classqx_1_1subject.html#a03ee22896db0d5acf82b0fbcd78300d4">qx::subject::rend</a></div><div class="ttdeci">const_reverse_iterator rend(void) const</div><div class="ttdoc">Return reverse iterator to reverse end.</div></div>
 <div class="ttc" id="aclassqx_1_1subject_html_a2cc2507111c167635454ad9e288127f9"><div class="ttname"><a href="classqx_1_1subject.html#a2cc2507111c167635454ad9e288127f9">qx::subject::rbegin</a></div><div class="ttdeci">reverse_iterator rbegin(void)</div><div class="ttdoc">Return reverse iterator to reverse beginning.</div></div>
 <div class="ttc" id="aclassqx_1_1subject_html_a33a210ba9c6c25023bedbf6ab98885db"><div class="ttname"><a href="classqx_1_1subject.html#a33a210ba9c6c25023bedbf6ab98885db">qx::subject::rend</a></div><div class="ttdeci">reverse_iterator rend(void)</div><div class="ttdoc">Return reverse iterator to reverse end.</div></div>
