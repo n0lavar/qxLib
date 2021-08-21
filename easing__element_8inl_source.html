@@ -70,146 +70,146 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 <a href="easing__element_8inl.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160; </div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespaceqx.html">qx</a></div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;{</div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160; </div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="keyword">inline</span> <a class="code" href="classqx_1_1base__easing__element.html#af5b7247938575b5affd2890f03f41be7">base_easing_element&lt;T&gt;::base_easing_element</a>(</div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;    <span class="keyword">const</span> easing::func&lt;T&gt;&amp; func,</div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;    T                      fStart,</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    T                      fEnd,</div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    T                      fSpeed) noexcept</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    : m_EasingFunc(func)</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    , m_fCurrentY(fStart)</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    , m_fStartY(fStart)</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    , m_fEndY(fEnd)</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;{</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    set_speed(fSpeed);</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;}</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160; </div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="classqx_1_1base__easing__element.html#a3a84e6715a5c5bfc96006b6d61ae4a55">base_easing_element&lt;T&gt;::start</a>(<span class="keywordtype">void</span>) noexcept</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;{</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    m_eStatus   = status::started;</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    m_fCurrentX = T(0.f);</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    m_fCurrentY = m_fStartY;</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;}</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160; </div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="classqx_1_1base__easing__element.html#a10de94d0d07ba13e4ceb52c126617f67">base_easing_element&lt;T&gt;::pause</a>(<span class="keywordtype">void</span>) noexcept</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;{</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    <span class="keywordflow">if</span> (m_eStatus == status::started)</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;        m_eStatus = status::paused;</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;}</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160; </div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="classqx_1_1base__easing__element.html#a29e38cd5472813a50fa9bd6a7e2dc214">base_easing_element&lt;T&gt;::resume</a>(<span class="keywordtype">void</span>) noexcept</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;{</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    <span class="keywordflow">if</span> (m_eStatus == status::paused)</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;        m_eStatus = status::started;</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;}</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160; </div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="classqx_1_1base__easing__element.html#a308aac63cc79d1f00f782825d6b75384">base_easing_element&lt;T&gt;::finish</a>(<span class="keywordtype">void</span>) noexcept</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;{</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    m_eStatus   = status::finished;</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    m_fCurrentX = T(1.f);</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    m_fCurrentY = m_fEndY;</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;}</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160; </div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;<span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="classqx_1_1base__easing__element.html#a8cfa0944c4d6d41b15a287ed0ff17ea4">base_easing_element&lt;T&gt;::reset</a>(<span class="keywordtype">void</span>) noexcept</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;{</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    m_eStatus   = status::not_started;</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    m_fCurrentX = T(0.f);</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    m_fCurrentY = m_fStartY;</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;}</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160; </div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;<span class="keyword">inline</span> T <a class="code" href="classqx_1_1base__easing__element.html#a569aa68d566c0551c81636eda22f8a9e">base_easing_element&lt;T&gt;::update</a>(T fDeltaTime) noexcept</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;{</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    T fRet = T(0.f);</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160; </div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;    <span class="keywordflow">if</span> (m_eStatus == status::started)</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    {</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;        m_fCurrentX = m_fCurrentX + fDeltaTime * m_fSpeed;</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160; </div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;        <span class="keywordflow">if</span> (m_fCurrentX &lt; T(1.f))</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;        {</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;            m_fCurrentY =</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;                m_fStartY + m_EasingFunc(m_fCurrentX) * (m_fEndY - m_fStartY);</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;        }</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;        <span class="keywordflow">else</span></div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;        {</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;            fRet = (m_fCurrentX - T(1.f)) / m_fSpeed;</div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;            finish();</div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;        }</div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;    }</div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;    <span class="keywordflow">else</span></div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;    {</div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;        fRet = fDeltaTime;</div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;    }</div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160; </div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;    <span class="keywordflow">return</span> fRet;</div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;}</div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160; </div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;<span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="classqx_1_1base__easing__element.html#a126a9fa0e6590463d447d310a31c51e9">base_easing_element&lt;T&gt;::set_speed</a>(T fSpeed) noexcept</div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;{</div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;    <span class="keywordflow">if</span> (fSpeed &gt; T(0.f))</div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;        m_fSpeed = fSpeed;</div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;}</div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160; </div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;<span class="keyword">inline</span> T <a class="code" href="classqx_1_1base__easing__element.html#a0b60992a95064ae3c5539f3c7c097549">base_easing_element&lt;T&gt;::get</a>(<span class="keywordtype">void</span>) <span class="keyword">const</span> noexcept</div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;{</div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;    <span class="keywordflow">return</span> m_fCurrentY;</div>
-<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;}</div>
-<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160; </div>
-<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;<span class="keyword">inline</span> T <a class="code" href="classqx_1_1base__easing__element.html#ac371be0413ac00cca245bf78e3b699a8">base_easing_element&lt;T&gt;::get_fraction</a>(<span class="keywordtype">void</span>) <span class="keyword">const</span> noexcept</div>
-<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;{</div>
-<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;    <span class="keywordflow">return</span> m_fCurrentX;</div>
-<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;}</div>
-<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160; </div>
-<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;<span class="keyword">inline</span> T <a class="code" href="classqx_1_1base__easing__element.html#acf283cc7496a567b000074abf9959b15">base_easing_element&lt;T&gt;::get_speed</a>(<span class="keywordtype">void</span>) <span class="keyword">const</span> noexcept</div>
-<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;{</div>
-<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;    <span class="keywordflow">return</span> m_fSpeed;</div>
-<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;}</div>
-<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160; </div>
-<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;<span class="keyword">inline</span> <span class="keyword">typename</span> base_easing_element&lt;T&gt;::status base_easing_element&lt;</div>
-<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;    T&gt;::get_status(<span class="keywordtype">void</span>) <span class="keyword">const</span> noexcept</div>
-<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;{</div>
-<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;    <span class="keywordflow">return</span> m_eStatus;</div>
-<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;}</div>
-<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160; </div>
-<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;<span class="keyword">inline</span> <span class="keywordtype">bool</span> <a class="code" href="classqx_1_1base__easing__element.html#aefccb3fe41659384bb62964518e2de91">base_easing_element&lt;T&gt;::is_not_started</a>(<span class="keywordtype">void</span>) <span class="keyword">const</span> noexcept</div>
-<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;{</div>
-<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;    <span class="keywordflow">return</span> m_eStatus == status::not_started;</div>
-<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;}</div>
-<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160; </div>
-<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;<span class="keyword">inline</span> <span class="keywordtype">bool</span> <a class="code" href="classqx_1_1base__easing__element.html#a047d2e874c58206a7e58597e52be353e">base_easing_element&lt;T&gt;::is_started</a>(<span class="keywordtype">void</span>) <span class="keyword">const</span> noexcept</div>
-<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;{</div>
-<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;    <span class="keywordflow">return</span> m_eStatus == status::started;</div>
-<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;}</div>
-<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160; </div>
-<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;<span class="keyword">inline</span> <span class="keywordtype">bool</span> <a class="code" href="classqx_1_1base__easing__element.html#acbf1043e22a893e25d2713d880e56776">base_easing_element&lt;T&gt;::is_paused</a>(<span class="keywordtype">void</span>) <span class="keyword">const</span> noexcept</div>
-<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;{</div>
-<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;    <span class="keywordflow">return</span> m_eStatus == status::paused;</div>
-<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;}</div>
-<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160; </div>
-<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;<span class="keyword">inline</span> <span class="keywordtype">bool</span> <a class="code" href="classqx_1_1base__easing__element.html#ab7a21d1eff5a47d37b9533257e377e81">base_easing_element&lt;T&gt;::is_finished</a>(<span class="keywordtype">void</span>) <span class="keyword">const</span> noexcept</div>
-<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;{</div>
-<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;    <span class="keywordflow">return</span> m_eStatus == status::finished;</div>
-<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;}</div>
-<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160; </div>
-<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;} <span class="comment">// namespace qx</span></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespaceqx.html">qx</a></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;{</div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160; </div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="keyword">inline</span> <a class="code" href="classqx_1_1base__easing__element.html#af5b7247938575b5affd2890f03f41be7">base_easing_element&lt;T&gt;::base_easing_element</a>(</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;    <span class="keyword">const</span> easing::func&lt;T&gt;&amp; func,</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;    T                      fStart,</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;    T                      fEnd,</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    T                      fSpeed) noexcept</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    : m_EasingFunc(func)</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    , m_fCurrentY(fStart)</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    , m_fStartY(fStart)</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    , m_fEndY(fEnd)</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;{</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    set_speed(fSpeed);</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;}</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160; </div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="classqx_1_1base__easing__element.html#a3a84e6715a5c5bfc96006b6d61ae4a55">base_easing_element&lt;T&gt;::start</a>(<span class="keywordtype">void</span>) noexcept</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;{</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    m_eStatus   = status::started;</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    m_fCurrentX = T(0.f);</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    m_fCurrentY = m_fStartY;</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;}</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160; </div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="classqx_1_1base__easing__element.html#a10de94d0d07ba13e4ceb52c126617f67">base_easing_element&lt;T&gt;::pause</a>(<span class="keywordtype">void</span>) noexcept</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;{</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    <span class="keywordflow">if</span> (m_eStatus == status::started)</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;        m_eStatus = status::paused;</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;}</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160; </div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="classqx_1_1base__easing__element.html#a29e38cd5472813a50fa9bd6a7e2dc214">base_easing_element&lt;T&gt;::resume</a>(<span class="keywordtype">void</span>) noexcept</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;{</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    <span class="keywordflow">if</span> (m_eStatus == status::paused)</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;        m_eStatus = status::started;</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;}</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160; </div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="classqx_1_1base__easing__element.html#a308aac63cc79d1f00f782825d6b75384">base_easing_element&lt;T&gt;::finish</a>(<span class="keywordtype">void</span>) noexcept</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;{</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    m_eStatus   = status::finished;</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    m_fCurrentX = T(1.f);</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    m_fCurrentY = m_fEndY;</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;}</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160; </div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;<span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="classqx_1_1base__easing__element.html#a8cfa0944c4d6d41b15a287ed0ff17ea4">base_easing_element&lt;T&gt;::reset</a>(<span class="keywordtype">void</span>) noexcept</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;{</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    m_eStatus   = status::not_started;</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    m_fCurrentX = T(0.f);</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    m_fCurrentY = m_fStartY;</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;}</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160; </div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;<span class="keyword">inline</span> T <a class="code" href="classqx_1_1base__easing__element.html#a569aa68d566c0551c81636eda22f8a9e">base_easing_element&lt;T&gt;::update</a>(T fDeltaTime) noexcept</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;{</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;    T fRet = T(0.f);</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160; </div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;    <span class="keywordflow">if</span> (m_eStatus == status::started)</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;    {</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;        m_fCurrentX = m_fCurrentX + fDeltaTime * m_fSpeed;</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160; </div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;        <span class="keywordflow">if</span> (m_fCurrentX &lt; T(1.f))</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;        {</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;            m_fCurrentY =</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;                m_fStartY + m_EasingFunc(m_fCurrentX) * (m_fEndY - m_fStartY);</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;        }</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;        <span class="keywordflow">else</span></div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;        {</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;            fRet = (m_fCurrentX - T(1.f)) / m_fSpeed;</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;            finish();</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;        }</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;    }</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;    <span class="keywordflow">else</span></div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;    {</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;        fRet = fDeltaTime;</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;    }</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160; </div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;    <span class="keywordflow">return</span> fRet;</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;}</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160; </div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;<span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="classqx_1_1base__easing__element.html#a126a9fa0e6590463d447d310a31c51e9">base_easing_element&lt;T&gt;::set_speed</a>(T fSpeed) noexcept</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;{</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;    <span class="keywordflow">if</span> (fSpeed &gt; T(0.f))</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;        m_fSpeed = fSpeed;</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;}</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160; </div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;<span class="keyword">inline</span> T <a class="code" href="classqx_1_1base__easing__element.html#a0b60992a95064ae3c5539f3c7c097549">base_easing_element&lt;T&gt;::get</a>(<span class="keywordtype">void</span>) <span class="keyword">const</span> noexcept</div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;{</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;    <span class="keywordflow">return</span> m_fCurrentY;</div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;}</div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160; </div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;<span class="keyword">inline</span> T <a class="code" href="classqx_1_1base__easing__element.html#ac371be0413ac00cca245bf78e3b699a8">base_easing_element&lt;T&gt;::get_fraction</a>(<span class="keywordtype">void</span>) <span class="keyword">const</span> noexcept</div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;{</div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;    <span class="keywordflow">return</span> m_fCurrentX;</div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;}</div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160; </div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;<span class="keyword">inline</span> T <a class="code" href="classqx_1_1base__easing__element.html#acf283cc7496a567b000074abf9959b15">base_easing_element&lt;T&gt;::get_speed</a>(<span class="keywordtype">void</span>) <span class="keyword">const</span> noexcept</div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;{</div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;    <span class="keywordflow">return</span> m_fSpeed;</div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;}</div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160; </div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;<span class="keyword">inline</span> <span class="keyword">typename</span> base_easing_element&lt;T&gt;::status base_easing_element&lt;</div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;    T&gt;::get_status(<span class="keywordtype">void</span>) <span class="keyword">const</span> noexcept</div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;{</div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;    <span class="keywordflow">return</span> m_eStatus;</div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;}</div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160; </div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;<span class="keyword">inline</span> <span class="keywordtype">bool</span> <a class="code" href="classqx_1_1base__easing__element.html#aefccb3fe41659384bb62964518e2de91">base_easing_element&lt;T&gt;::is_not_started</a>(<span class="keywordtype">void</span>) <span class="keyword">const</span> noexcept</div>
+<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;{</div>
+<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;    <span class="keywordflow">return</span> m_eStatus == status::not_started;</div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;}</div>
+<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160; </div>
+<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;<span class="keyword">inline</span> <span class="keywordtype">bool</span> <a class="code" href="classqx_1_1base__easing__element.html#a047d2e874c58206a7e58597e52be353e">base_easing_element&lt;T&gt;::is_started</a>(<span class="keywordtype">void</span>) <span class="keyword">const</span> noexcept</div>
+<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;{</div>
+<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;    <span class="keywordflow">return</span> m_eStatus == status::started;</div>
+<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;}</div>
+<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160; </div>
+<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;<span class="keyword">inline</span> <span class="keywordtype">bool</span> <a class="code" href="classqx_1_1base__easing__element.html#acbf1043e22a893e25d2713d880e56776">base_easing_element&lt;T&gt;::is_paused</a>(<span class="keywordtype">void</span>) <span class="keyword">const</span> noexcept</div>
+<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;{</div>
+<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;    <span class="keywordflow">return</span> m_eStatus == status::paused;</div>
+<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;}</div>
+<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160; </div>
+<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;<span class="keyword">inline</span> <span class="keywordtype">bool</span> <a class="code" href="classqx_1_1base__easing__element.html#ab7a21d1eff5a47d37b9533257e377e81">base_easing_element&lt;T&gt;::is_finished</a>(<span class="keywordtype">void</span>) <span class="keyword">const</span> noexcept</div>
+<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;{</div>
+<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;    <span class="keywordflow">return</span> m_eStatus == status::finished;</div>
+<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;}</div>
+<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160; </div>
+<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;} <span class="comment">// namespace qx</span></div>
 <div class="ttc" id="aclassqx_1_1base__easing__element_html_a047d2e874c58206a7e58597e52be353e"><div class="ttname"><a href="classqx_1_1base__easing__element.html#a047d2e874c58206a7e58597e52be353e">qx::base_easing_element::is_started</a></div><div class="ttdeci">bool is_started(void) const noexcept</div><div class="ttdoc">Check if element is started.</div></div>
 <div class="ttc" id="aclassqx_1_1base__easing__element_html_a0b60992a95064ae3c5539f3c7c097549"><div class="ttname"><a href="classqx_1_1base__easing__element.html#a0b60992a95064ae3c5539f3c7c097549">qx::base_easing_element::get</a></div><div class="ttdeci">T get(void) const noexcept</div><div class="ttdoc">Get current value of element.</div></div>
 <div class="ttc" id="aclassqx_1_1base__easing__element_html_a10de94d0d07ba13e4ceb52c126617f67"><div class="ttname"><a href="classqx_1_1base__easing__element.html#a10de94d0d07ba13e4ceb52c126617f67">qx::base_easing_element::pause</a></div><div class="ttdeci">void pause(void) noexcept</div><div class="ttdoc">Pause element if started.</div></div>
@@ -225,7 +225,7 @@ $(function() {
 <div class="ttc" id="aclassqx_1_1base__easing__element_html_acf283cc7496a567b000074abf9959b15"><div class="ttname"><a href="classqx_1_1base__easing__element.html#acf283cc7496a567b000074abf9959b15">qx::base_easing_element::get_speed</a></div><div class="ttdeci">T get_speed(void) const noexcept</div><div class="ttdoc">Get speed value.</div></div>
 <div class="ttc" id="aclassqx_1_1base__easing__element_html_aefccb3fe41659384bb62964518e2de91"><div class="ttname"><a href="classqx_1_1base__easing__element.html#aefccb3fe41659384bb62964518e2de91">qx::base_easing_element::is_not_started</a></div><div class="ttdeci">bool is_not_started(void) const noexcept</div><div class="ttdoc">Check if element is not started.</div></div>
 <div class="ttc" id="aclassqx_1_1base__easing__element_html_af5b7247938575b5affd2890f03f41be7"><div class="ttname"><a href="classqx_1_1base__easing__element.html#af5b7247938575b5affd2890f03f41be7">qx::base_easing_element::base_easing_element</a></div><div class="ttdeci">base_easing_element(const easing::func&lt; T &gt; &amp;func, T fStart=T(0.f), T fEnd=T(1.f), T fSpeed=T(1.f)) noexcept</div><div class="ttdoc">base_easing_element object constructor</div></div>
-<div class="ttc" id="anamespaceqx_html"><div class="ttname"><a href="namespaceqx.html">qx</a></div><div class="ttdoc">Contains qx::base_ssbo class implementation.</div><div class="ttdef"><b>Definition:</b> <a href="functional_8h_source.html#l00023">functional.h:24</a></div></div>
+<div class="ttc" id="anamespaceqx_html"><div class="ttname"><a href="namespaceqx.html">qx</a></div><div class="ttdoc">Contains qx::base_vbo class.</div><div class="ttdef"><b>Definition:</b> <a href="functional_8h_source.html#l00023">functional.h:24</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

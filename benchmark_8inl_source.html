@@ -70,30 +70,30 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 <a href="benchmark_8inl.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160; </div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespaceqx.html">qx</a></div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;{</div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160; </div>
-<div class="line"><a name="l00014"></a><span class="lineno"><a class="line" href="classqx_1_1benchmark.html#ab1eb2fbeef2dfd789ba6f8da32a8b888">   14</a></span>&#160;<span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="classqx_1_1benchmark.html#ab1eb2fbeef2dfd789ba6f8da32a8b888">benchmark::start</a>(<span class="keywordtype">void</span>)</div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;{</div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;    m_Start = clock::now();</div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;}</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160; </div>
-<div class="line"><a name="l00019"></a><span class="lineno"><a class="line" href="classqx_1_1benchmark.html#ac0aac731bbbc33a4d56ce66844c80efe">   19</a></span>&#160;<span class="keyword">inline</span> <span class="keywordtype">double</span> <a class="code" href="classqx_1_1benchmark.html#ac0aac731bbbc33a4d56ce66844c80efe">benchmark::end</a>(<span class="keywordtype">void</span>)</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;{</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    m_LastDuration = clock::now() - m_Start;</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="classqx_1_1benchmark.html#aa5fe957b87126d8f900dae75f7e2beea">last</a>();</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;}</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160; </div>
-<div class="line"><a name="l00025"></a><span class="lineno"><a class="line" href="classqx_1_1benchmark.html#aa5fe957b87126d8f900dae75f7e2beea">   25</a></span>&#160;<span class="keyword">inline</span> <span class="keywordtype">double</span> <a class="code" href="classqx_1_1benchmark.html#aa5fe957b87126d8f900dae75f7e2beea">benchmark::last</a>(<span class="keywordtype">void</span>)<span class="keyword"> const</span></div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="keyword"></span>{</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    <span class="keywordflow">return</span> <span class="keyword">static_cast&lt;</span><span class="keywordtype">double</span><span class="keyword">&gt;</span>(m_LastDuration.count()) / 1e9;</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;}</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160; </div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;} <span class="comment">// namespace qx</span></div>
-<div class="ttc" id="aclassqx_1_1benchmark_html_aa5fe957b87126d8f900dae75f7e2beea"><div class="ttname"><a href="classqx_1_1benchmark.html#aa5fe957b87126d8f900dae75f7e2beea">qx::benchmark::last</a></div><div class="ttdeci">double last(void) const</div><div class="ttdoc">Get last benchmark time.</div><div class="ttdef"><b>Definition:</b> <a href="benchmark_8inl_source.html#l00025">benchmark.inl:25</a></div></div>
-<div class="ttc" id="aclassqx_1_1benchmark_html_ab1eb2fbeef2dfd789ba6f8da32a8b888"><div class="ttname"><a href="classqx_1_1benchmark.html#ab1eb2fbeef2dfd789ba6f8da32a8b888">qx::benchmark::start</a></div><div class="ttdeci">void start(void)</div><div class="ttdoc">Start benchmark.</div><div class="ttdef"><b>Definition:</b> <a href="benchmark_8inl_source.html#l00014">benchmark.inl:14</a></div></div>
-<div class="ttc" id="aclassqx_1_1benchmark_html_ac0aac731bbbc33a4d56ce66844c80efe"><div class="ttname"><a href="classqx_1_1benchmark.html#ac0aac731bbbc33a4d56ce66844c80efe">qx::benchmark::end</a></div><div class="ttdeci">double end(void)</div><div class="ttdoc">End benchmark.</div><div class="ttdef"><b>Definition:</b> <a href="benchmark_8inl_source.html#l00019">benchmark.inl:19</a></div></div>
-<div class="ttc" id="anamespaceqx_html"><div class="ttname"><a href="namespaceqx.html">qx</a></div><div class="ttdoc">Contains qx::base_ssbo class implementation.</div><div class="ttdef"><b>Definition:</b> <a href="functional_8h_source.html#l00023">functional.h:24</a></div></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespaceqx.html">qx</a></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;{</div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160; </div>
+<div class="line"><a name="l00013"></a><span class="lineno"><a class="line" href="classqx_1_1benchmark.html#ab1eb2fbeef2dfd789ba6f8da32a8b888">   13</a></span>&#160;<span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="classqx_1_1benchmark.html#ab1eb2fbeef2dfd789ba6f8da32a8b888">benchmark::start</a>(<span class="keywordtype">void</span>)</div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;{</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;    m_Start = clock::now();</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;}</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160; </div>
+<div class="line"><a name="l00018"></a><span class="lineno"><a class="line" href="classqx_1_1benchmark.html#ac0aac731bbbc33a4d56ce66844c80efe">   18</a></span>&#160;<span class="keyword">inline</span> <span class="keywordtype">double</span> <a class="code" href="classqx_1_1benchmark.html#ac0aac731bbbc33a4d56ce66844c80efe">benchmark::end</a>(<span class="keywordtype">void</span>)</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;{</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    m_LastDuration = clock::now() - m_Start;</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="classqx_1_1benchmark.html#aa5fe957b87126d8f900dae75f7e2beea">last</a>();</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;}</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160; </div>
+<div class="line"><a name="l00024"></a><span class="lineno"><a class="line" href="classqx_1_1benchmark.html#aa5fe957b87126d8f900dae75f7e2beea">   24</a></span>&#160;<span class="keyword">inline</span> <span class="keywordtype">double</span> <a class="code" href="classqx_1_1benchmark.html#aa5fe957b87126d8f900dae75f7e2beea">benchmark::last</a>(<span class="keywordtype">void</span>)<span class="keyword"> const</span></div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="keyword"></span>{</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    <span class="keywordflow">return</span> <span class="keyword">static_cast&lt;</span><span class="keywordtype">double</span><span class="keyword">&gt;</span>(m_LastDuration.count()) / 1e9;</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;}</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160; </div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;} <span class="comment">// namespace qx</span></div>
+<div class="ttc" id="aclassqx_1_1benchmark_html_aa5fe957b87126d8f900dae75f7e2beea"><div class="ttname"><a href="classqx_1_1benchmark.html#aa5fe957b87126d8f900dae75f7e2beea">qx::benchmark::last</a></div><div class="ttdeci">double last(void) const</div><div class="ttdoc">Get last benchmark time.</div><div class="ttdef"><b>Definition:</b> <a href="benchmark_8inl_source.html#l00024">benchmark.inl:24</a></div></div>
+<div class="ttc" id="aclassqx_1_1benchmark_html_ab1eb2fbeef2dfd789ba6f8da32a8b888"><div class="ttname"><a href="classqx_1_1benchmark.html#ab1eb2fbeef2dfd789ba6f8da32a8b888">qx::benchmark::start</a></div><div class="ttdeci">void start(void)</div><div class="ttdoc">Start benchmark.</div><div class="ttdef"><b>Definition:</b> <a href="benchmark_8inl_source.html#l00013">benchmark.inl:13</a></div></div>
+<div class="ttc" id="aclassqx_1_1benchmark_html_ac0aac731bbbc33a4d56ce66844c80efe"><div class="ttname"><a href="classqx_1_1benchmark.html#ac0aac731bbbc33a4d56ce66844c80efe">qx::benchmark::end</a></div><div class="ttdeci">double end(void)</div><div class="ttdoc">End benchmark.</div><div class="ttdef"><b>Definition:</b> <a href="benchmark_8inl_source.html#l00018">benchmark.inl:18</a></div></div>
+<div class="ttc" id="anamespaceqx_html"><div class="ttname"><a href="namespaceqx.html">qx</a></div><div class="ttdoc">Contains qx::base_vbo class.</div><div class="ttdef"><b>Definition:</b> <a href="functional_8h_source.html#l00023">functional.h:24</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
