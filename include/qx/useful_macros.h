@@ -81,6 +81,7 @@
 
 namespace qx::detail
 {
+
 constexpr const char* last_slash(const char* str)
 {
     const char* pszLastSlash = str;
@@ -93,6 +94,7 @@ constexpr const char* last_slash(const char* str)
     }
     return pszLastSlash + 1;
 }
+
 } // namespace qx::detail
 
 /**

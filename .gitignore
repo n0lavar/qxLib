@@ -1,5 +1,7 @@
 build/*
 scripts/*
+html/*
+latex/*
 .TMP
 
 # Prerequisites
