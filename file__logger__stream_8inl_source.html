@@ -70,7 +70,7 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 <a href="file__logger__stream_8inl.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160; </div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespaceqx.html">qx</a></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="keyword">namespace </span>qx</div>
 <div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;{</div>
 <div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160; </div>
 <div class="line"><a name="l00013"></a><span class="lineno"><a class="line" href="classqx_1_1file__logger__stream.html#a8bf33c650a732093d01a13746cdf8e1e">   13</a></span>&#160;<span class="keyword">inline</span> <a class="code" href="classqx_1_1file__logger__stream.html#a8bf33c650a732093d01a13746cdf8e1e">file_logger_stream::file_logger_stream</a>(<span class="keywordtype">void</span>)</div>
@@ -101,7 +101,7 @@ $(function() {
 <div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    <a class="code" href="structqx_1_1log__unit.html">log_unit</a>         logUnit)</div>
 <div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;{</div>
 <div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    std::string_view        svFileName;</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    <a class="code" href="namespaceqx.html#aaab6d2d26ae57b1521451921e1273220">log_file_policy</a>         eLogFilePolicy = <a class="code" href="namespaceqx.html#aaab6d2d26ae57b1521451921e1273220a9516dfb15f51c7ee19a4d46b8c0dbe1d">log_file_policy::append</a>;</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    <a class="code" href="file__logger__stream_8h.html#aaab6d2d26ae57b1521451921e1273220">log_file_policy</a>         eLogFilePolicy = log_file_policy::append;</div>
 <div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    std::ios_base::openmode ofstreamMode   = std::ofstream::app;</div>
 <div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160; </div>
 <div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    <span class="keywordflow">if</span> (<span class="keyword">const</span> <span class="keyword">auto</span> it = m_Files.find(logUnit.svUnitName); it != m_Files.cend())</div>
@@ -110,7 +110,7 @@ $(function() {
 <div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;        eLogFilePolicy = it-&gt;second.eLogPolicy;</div>
 <div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160; </div>
 <div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;        <span class="keywordflow">if</span> (!it-&gt;second.bWroteToFile</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;            &amp;&amp; eLogFilePolicy == <a class="code" href="namespaceqx.html#aaab6d2d26ae57b1521451921e1273220a10c186e8b29856d1cc7242fce0cb487c">log_file_policy::clear_then_uppend</a>)</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;            &amp;&amp; eLogFilePolicy == log_file_policy::clear_then_uppend)</div>
 <div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;            ofstreamMode = std::ofstream::out | std::ofstream::trunc;</div>
 <div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160; </div>
 <div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;        it-&gt;second.bWroteToFile = <span class="keyword">true</span>;</div>
@@ -150,24 +150,24 @@ $(function() {
 <div class="line"><a name="l00087"></a><span class="lineno"><a class="line" href="classqx_1_1file__logger__stream.html#a99f07a37beb90614f37bbd404e76f940">   87</a></span>&#160;<span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="classqx_1_1file__logger__stream.html#a99f07a37beb90614f37bbd404e76f940">file_logger_stream::register_file</a>(</div>
 <div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;    std::string_view svUnitName,</div>
 <div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;    std::string_view svFileName,</div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;    <a class="code" href="namespaceqx.html#aaab6d2d26ae57b1521451921e1273220">log_file_policy</a>  eLogPolicy)</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;    <a class="code" href="file__logger__stream_8h.html#aaab6d2d26ae57b1521451921e1273220">log_file_policy</a>  eLogPolicy)</div>
 <div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;{</div>
 <div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;    <span class="keywordflow">if</span> (!svUnitName.empty() &amp;&amp; !svFileName.empty())</div>
 <div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;        m_Files[svUnitName] = { svFileName, eLogPolicy };</div>
 <div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;}</div>
 <div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160; </div>
 <div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;<span class="keyword">inline</span> <span class="keywordtype">void</span> file_logger_stream::fill_file_folder(</div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;    <a class="code" href="namespaceqx.html#aaab6d2d26ae57b1521451921e1273220">log_file_policy</a> eLogFilePolicy,</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;    <a class="code" href="file__logger__stream_8h.html#aaab6d2d26ae57b1521451921e1273220">log_file_policy</a> eLogFilePolicy,</div>
 <div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;    <span class="keywordtype">string</span>&amp;         sFileFolder) <span class="keyword">const</span> noexcept</div>
 <div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;{</div>
 <div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;    <span class="keywordflow">switch</span> (eLogFilePolicy)</div>
 <div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;    {</div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;    <span class="keywordflow">case</span> <a class="code" href="namespaceqx.html#aaab6d2d26ae57b1521451921e1273220ae72f74ae2df7352c6eab42af73af67a2">log_file_policy::folder_time</a>:</div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;    <span class="keywordflow">case</span> log_file_policy::folder_time:</div>
 <div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;        sFileFolder = m_sFolder + m_sSessionTime;</div>
 <div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;        <span class="keywordflow">break</span>;</div>
 <div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160; </div>
-<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;    <span class="keywordflow">case</span> <a class="code" href="namespaceqx.html#aaab6d2d26ae57b1521451921e1273220a9516dfb15f51c7ee19a4d46b8c0dbe1d">log_file_policy::append</a>:</div>
-<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;    <span class="keywordflow">case</span> <a class="code" href="namespaceqx.html#aaab6d2d26ae57b1521451921e1273220a10c186e8b29856d1cc7242fce0cb487c">log_file_policy::clear_then_uppend</a>:</div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;    <span class="keywordflow">case</span> log_file_policy::append:</div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;    <span class="keywordflow">case</span> log_file_policy::clear_then_uppend:</div>
 <div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;    <span class="keywordflow">default</span>: sFileFolder = m_sFolder; <span class="keywordflow">break</span>;</div>
 <div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;    }</div>
 <div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;}</div>
@@ -180,11 +180,7 @@ $(function() {
 <div class="ttc" id="aclassqx_1_1file__logger__stream_html_a99f07a37beb90614f37bbd404e76f940"><div class="ttname"><a href="classqx_1_1file__logger__stream.html#a99f07a37beb90614f37bbd404e76f940">qx::file_logger_stream::register_file</a></div><div class="ttdeci">void register_file(std::string_view svUnitName, std::string_view svFileName, log_file_policy eLogPolicy=log_file_policy::append)</div><div class="ttdoc">Register output to specific file for specific unit.</div><div class="ttdef"><b>Definition:</b> <a href="file__logger__stream_8inl_source.html#l00087">file_logger_stream.inl:87</a></div></div>
 <div class="ttc" id="aclassqx_1_1file__logger__stream_html_aa2a3eee3857ae0fb9dbbb78b13c84e31"><div class="ttname"><a href="classqx_1_1file__logger__stream.html#aa2a3eee3857ae0fb9dbbb78b13c84e31">qx::file_logger_stream::~file_logger_stream</a></div><div class="ttdeci">virtual ~file_logger_stream(void)</div><div class="ttdoc">file_logger_stream object destructor</div><div class="ttdef"><b>Definition:</b> <a href="file__logger__stream_8inl_source.html#l00020">file_logger_stream.inl:20</a></div></div>
 <div class="ttc" id="aclassqx_1_1file__logger__stream_html_ac5943323b162292441494be9a0a82c44"><div class="ttname"><a href="classqx_1_1file__logger__stream.html#ac5943323b162292441494be9a0a82c44">qx::file_logger_stream::process_output</a></div><div class="ttdeci">virtual void process_output(std::string_view svMessage, log_unit logUnit) override</div><div class="ttdoc">Output to file.</div><div class="ttdef"><b>Definition:</b> <a href="file__logger__stream_8inl_source.html#l00036">file_logger_stream.inl:36</a></div></div>
-<div class="ttc" id="anamespaceqx_html"><div class="ttname"><a href="namespaceqx.html">qx</a></div><div class="ttdoc">Contains qx::base_vbo class.</div><div class="ttdef"><b>Definition:</b> <a href="functional_8h_source.html#l00023">functional.h:24</a></div></div>
-<div class="ttc" id="anamespaceqx_html_aaab6d2d26ae57b1521451921e1273220"><div class="ttname"><a href="namespaceqx.html#aaab6d2d26ae57b1521451921e1273220">qx::log_file_policy</a></div><div class="ttdeci">log_file_policy</div><div class="ttdef"><b>Definition:</b> <a href="file__logger__stream_8h_source.html#l00020">file_logger_stream.h:21</a></div></div>
-<div class="ttc" id="anamespaceqx_html_aaab6d2d26ae57b1521451921e1273220a10c186e8b29856d1cc7242fce0cb487c"><div class="ttname"><a href="namespaceqx.html#aaab6d2d26ae57b1521451921e1273220a10c186e8b29856d1cc7242fce0cb487c">qx::log_file_policy::clear_then_uppend</a></div><div class="ttdeci">@ clear_then_uppend</div><div class="ttdoc">clear file at start, then append</div></div>
-<div class="ttc" id="anamespaceqx_html_aaab6d2d26ae57b1521451921e1273220a9516dfb15f51c7ee19a4d46b8c0dbe1d"><div class="ttname"><a href="namespaceqx.html#aaab6d2d26ae57b1521451921e1273220a9516dfb15f51c7ee19a4d46b8c0dbe1d">qx::log_file_policy::append</a></div><div class="ttdeci">@ append</div><div class="ttdoc">append all</div></div>
-<div class="ttc" id="anamespaceqx_html_aaab6d2d26ae57b1521451921e1273220ae72f74ae2df7352c6eab42af73af67a2"><div class="ttname"><a href="namespaceqx.html#aaab6d2d26ae57b1521451921e1273220ae72f74ae2df7352c6eab42af73af67a2">qx::log_file_policy::folder_time</a></div><div class="ttdeci">@ folder_time</div><div class="ttdoc">create new folder with time name</div></div>
+<div class="ttc" id="afile__logger__stream_8h_html_aaab6d2d26ae57b1521451921e1273220"><div class="ttname"><a href="file__logger__stream_8h.html#aaab6d2d26ae57b1521451921e1273220">qx::log_file_policy</a></div><div class="ttdeci">log_file_policy</div><div class="ttdef"><b>Definition:</b> <a href="file__logger__stream_8h_source.html#l00020">file_logger_stream.h:21</a></div></div>
 <div class="ttc" id="astructqx_1_1log__unit_html"><div class="ttname"><a href="structqx_1_1log__unit.html">qx::log_unit</a></div><div class="ttdef"><b>Definition:</b> <a href="base__logger__stream_8h_source.html#l00056">base_logger_stream.h:57</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->

@@ -70,7 +70,7 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 <a href="string__hash_8inl.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160; </div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespaceqx.html">qx</a></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="keyword">namespace </span>qx</div>
 <div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;{</div>
 <div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160; </div>
 <div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="comment">// ----------------------------- basic_string_hash -----------------------------</span></div>
@@ -129,7 +129,7 @@ $(function() {
 <div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;        <span class="keywordtype">size_t</span>                                          nSeed,</div>
 <div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;        <span class="keyword">typename</span> char_traits&lt;value_type&gt;::size_type     nLen) noexcept</div>
 <div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;{</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="namespaceqx.html#a772986a8e501ea57c6f1695c110f22ef">djb2a_hash</a>(sStr, <span class="keyword">static_cast&lt;</span><a class="code" href="typedefs_8h.html#a70c1fcc1a4e96af8f6580f708657cd41">u32</a><span class="keyword">&gt;</span>(nSeed), nLen);</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="string__utils_8h.html#a772986a8e501ea57c6f1695c110f22ef">djb2a_hash</a>(sStr, <span class="keyword">static_cast&lt;</span><a class="code" href="typedefs_8h.html#a70c1fcc1a4e96af8f6580f708657cd41">u32</a><span class="keyword">&gt;</span>(nSeed), nLen);</div>
 <div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;}</div>
 <div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160; </div>
 <div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> value_type&gt;</div>
@@ -139,7 +139,7 @@ $(function() {
 <div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;        <span class="keyword">typename</span> char_traits&lt;value_type&gt;::const_pointer pszStr,</div>
 <div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;        <span class="keywordtype">size_t</span>                                          nSeed) noexcept</div>
 <div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;{</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="namespaceqx.html#a772986a8e501ea57c6f1695c110f22ef">djb2a_hash</a>(pszStr, <span class="keyword">static_cast&lt;</span><a class="code" href="typedefs_8h.html#a70c1fcc1a4e96af8f6580f708657cd41">u32</a><span class="keyword">&gt;</span>(nSeed));</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="string__utils_8h.html#a772986a8e501ea57c6f1695c110f22ef">djb2a_hash</a>(pszStr, <span class="keyword">static_cast&lt;</span><a class="code" href="typedefs_8h.html#a70c1fcc1a4e96af8f6580f708657cd41">u32</a><span class="keyword">&gt;</span>(nSeed));</div>
 <div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;}</div>
 <div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160; </div>
 <div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;} <span class="comment">// namespace qx</span></div>
@@ -152,7 +152,7 @@ $(function() {
 <div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;{</div>
 <div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160; </div>
 <div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> Traits&gt;</div>
-<div class="line"><a name="l00092"></a><span class="lineno"><a class="line" href="structstd_1_1hash_3_01qx_1_1basic__string__hash_3_01_traits_01_4_01_4.html">   92</a></span>&#160;<span class="keyword">struct </span>hash&lt;<a class="code" href="namespaceqx.html">qx</a>::basic_string_hash&lt;Traits&gt;&gt;</div>
+<div class="line"><a name="l00092"></a><span class="lineno"><a class="line" href="structstd_1_1hash_3_01qx_1_1basic__string__hash_3_01_traits_01_4_01_4.html">   92</a></span>&#160;<span class="keyword">struct </span>hash&lt;qx::basic_string_hash&lt;Traits&gt;&gt;</div>
 <div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;{</div>
 <div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;    <span class="keywordtype">size_t</span> operator()(<span class="keyword">const</span> <a class="code" href="classqx_1_1basic__string__hash.html">qx::basic_string_hash&lt;Traits&gt;</a>&amp; hash)<span class="keyword"> const</span></div>
 <div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;<span class="keyword">    </span>{</div>
@@ -162,8 +162,7 @@ $(function() {
 <div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160; </div>
 <div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;} <span class="comment">// namespace std</span></div>
 <div class="ttc" id="aclassqx_1_1basic__string__hash_html"><div class="ttname"><a href="classqx_1_1basic__string__hash.html">qx::basic_string_hash</a></div><div class="ttdef"><b>Definition:</b> <a href="string__hash_8h_source.html#l00050">string_hash.h:51</a></div></div>
-<div class="ttc" id="anamespaceqx_html"><div class="ttname"><a href="namespaceqx.html">qx</a></div><div class="ttdoc">Contains qx::base_vbo class.</div><div class="ttdef"><b>Definition:</b> <a href="functional_8h_source.html#l00023">functional.h:24</a></div></div>
-<div class="ttc" id="anamespaceqx_html_a772986a8e501ea57c6f1695c110f22ef"><div class="ttname"><a href="namespaceqx.html#a772986a8e501ea57c6f1695c110f22ef">qx::djb2a_hash</a></div><div class="ttdeci">constexpr u32 djb2a_hash(const value_type *pStr, u32 nSeed, size_t nLen)</div><div class="ttdoc">djb2a hash</div><div class="ttdef"><b>Definition:</b> <a href="string__utils_8h_source.html#l00026">string_utils.h:26</a></div></div>
+<div class="ttc" id="astring__utils_8h_html_a772986a8e501ea57c6f1695c110f22ef"><div class="ttname"><a href="string__utils_8h.html#a772986a8e501ea57c6f1695c110f22ef">qx::djb2a_hash</a></div><div class="ttdeci">constexpr u32 djb2a_hash(const value_type *pStr, u32 nSeed, size_t nLen)</div><div class="ttdoc">djb2a hash</div><div class="ttdef"><b>Definition:</b> <a href="string__utils_8h_source.html#l00026">string_utils.h:26</a></div></div>
 <div class="ttc" id="atypedefs_8h_html_a70c1fcc1a4e96af8f6580f708657cd41"><div class="ttname"><a href="typedefs_8h.html#a70c1fcc1a4e96af8f6580f708657cd41">u32</a></div><div class="ttdeci">uint32_t u32</div><div class="ttdoc">0 .. 18 446 744 073 709 551 615</div><div class="ttdef"><b>Definition:</b> <a href="typedefs_8h_source.html#l00024">typedefs.h:25</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->

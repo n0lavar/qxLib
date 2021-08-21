@@ -79,10 +79,10 @@ $(function() {
 <div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="preprocessor">#include &lt;functional&gt;</span></div>
 <div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="preprocessor">#include &lt;vector&gt;</span></div>
 <div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160; </div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespaceqx.html">qx</a></div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="keyword">namespace </span>qx</div>
 <div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;{</div>
 <div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160; </div>
-<div class="line"><a name="l00022"></a><span class="lineno"><a class="line" href="namespaceqx.html#ab74b64170d1e3cc3b559a8a3cba7b224">   22</a></span>&#160;constexpr <span class="keywordtype">size_t</span> <a class="code" href="namespaceqx.html#ab74b64170d1e3cc3b559a8a3cba7b224">SORT_COUNTING_MAX_BUFFER_SIZE</a> = 100000;</div>
+<div class="line"><a name="l00022"></a><span class="lineno"><a class="line" href="sort_8h.html#ab74b64170d1e3cc3b559a8a3cba7b224">   22</a></span>&#160;constexpr <span class="keywordtype">size_t</span> <a class="code" href="sort_8h.html#ab74b64170d1e3cc3b559a8a3cba7b224">SORT_COUNTING_MAX_BUFFER_SIZE</a> = 100000;</div>
 <div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160; </div>
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> It&gt;</div>
 <div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="keyword">using</span> vector_of_values = std::vector&lt;iterator_value_t&lt;It&gt;&gt;;</div>
@@ -212,7 +212,7 @@ $(function() {
 <div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160;}</div>
 <div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160; </div>
 <div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> RandomIt, <span class="keyword">typename</span> Compare&gt;</div>
-<div class="line"><a name="l00236"></a><span class="lineno"><a class="line" href="namespaceqx.html#ab8aed768192e446d4c386d04be1cbc75">  236</a></span>&#160;<span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="namespaceqx.html#ab8aed768192e446d4c386d04be1cbc75">make_heap</a>(RandomIt begin, RandomIt end, Compare compare = Compare())</div>
+<div class="line"><a name="l00236"></a><span class="lineno"><a class="line" href="sort_8h.html#ab8aed768192e446d4c386d04be1cbc75">  236</a></span>&#160;<span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="sort_8h.html#ab8aed768192e446d4c386d04be1cbc75">make_heap</a>(RandomIt begin, RandomIt end, Compare compare = Compare())</div>
 <div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;{</div>
 <div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160;    <span class="keyword">auto</span> max = end - begin;</div>
 <div class="line"><a name="l00239"></a><span class="lineno">  239</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = <span class="keyword">static_cast&lt;</span><span class="keywordtype">int</span><span class="keyword">&gt;</span>(max) / 2; i &gt;= 0; --i)</div>
@@ -231,7 +231,7 @@ $(function() {
 <div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160;    <span class="keywordflow">if</span> (!sort_required(begin, end))</div>
 <div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160;        <span class="keywordflow">return</span>;</div>
 <div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160; </div>
-<div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160;    <a class="code" href="namespaceqx.html#ab8aed768192e446d4c386d04be1cbc75">qx::make_heap</a>(begin, end, compare);</div>
+<div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160;    qx::make_heap(begin, end, compare);</div>
 <div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160; </div>
 <div class="line"><a name="l00267"></a><span class="lineno">  267</span>&#160;    <span class="keyword">auto</span> nLastPosition = end - begin - 1;</div>
 <div class="line"><a name="l00268"></a><span class="lineno">  268</span>&#160;    <span class="keywordflow">while</span> (nLastPosition &gt; 0)</div>
@@ -593,7 +593,7 @@ $(function() {
 <div class="line"><a name="l00732"></a><span class="lineno">  732</span>&#160;    RandomIt begin,</div>
 <div class="line"><a name="l00733"></a><span class="lineno">  733</span>&#160;    RandomIt end,</div>
 <div class="line"><a name="l00734"></a><span class="lineno">  734</span>&#160;    Compare  compare        = Compare(),</div>
-<div class="line"><a name="l00735"></a><span class="lineno">  735</span>&#160;    <span class="keywordtype">size_t</span>   nMaxBufferSize = <a class="code" href="namespaceqx.html#ab74b64170d1e3cc3b559a8a3cba7b224">SORT_COUNTING_MAX_BUFFER_SIZE</a>)</div>
+<div class="line"><a name="l00735"></a><span class="lineno">  735</span>&#160;    <span class="keywordtype">size_t</span>   nMaxBufferSize = SORT_COUNTING_MAX_BUFFER_SIZE)</div>
 <div class="line"><a name="l00736"></a><span class="lineno">  736</span>&#160;{</div>
 <div class="line"><a name="l00737"></a><span class="lineno">  737</span>&#160;    static_assert(</div>
 <div class="line"><a name="l00738"></a><span class="lineno">  738</span>&#160;        std::is_integral_v&lt;iterator_value_t&lt;RandomIt&gt;&gt;,</div>
@@ -638,13 +638,13 @@ $(function() {
 <div class="line"><a name="l00787"></a><span class="lineno">  787</span>&#160;[[nodiscard]] <span class="keyword">inline</span> <span class="keywordtype">bool</span> sort_counting(</div>
 <div class="line"><a name="l00788"></a><span class="lineno">  788</span>&#160;    Container&amp; cont,</div>
 <div class="line"><a name="l00789"></a><span class="lineno">  789</span>&#160;    Compare    compare        = Compare(),</div>
-<div class="line"><a name="l00790"></a><span class="lineno">  790</span>&#160;    <span class="keywordtype">size_t</span>     nMaxBufferSize = <a class="code" href="namespaceqx.html#ab74b64170d1e3cc3b559a8a3cba7b224">SORT_COUNTING_MAX_BUFFER_SIZE</a>)</div>
+<div class="line"><a name="l00790"></a><span class="lineno">  790</span>&#160;    <span class="keywordtype">size_t</span>     nMaxBufferSize = SORT_COUNTING_MAX_BUFFER_SIZE)</div>
 <div class="line"><a name="l00791"></a><span class="lineno">  791</span>&#160;{</div>
 <div class="line"><a name="l00792"></a><span class="lineno">  792</span>&#160;    <span class="keywordflow">return</span> sort_counting(cont.begin(), cont.end(), compare, nMaxBufferSize);</div>
 <div class="line"><a name="l00793"></a><span class="lineno">  793</span>&#160;}</div>
 <div class="line"><a name="l00794"></a><span class="lineno">  794</span>&#160; </div>
 <div class="line"><a name="l00803"></a><span class="lineno">  803</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> RandomIt, <span class="keyword">typename</span> Compare = std::less&lt;&gt;&gt;</div>
-<div class="line"><a name="l00804"></a><span class="lineno"><a class="line" href="namespaceqx.html#afef53c7f1eb1da77ee42a5932a420182">  804</a></span>&#160;<span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="namespaceqx.html#afef53c7f1eb1da77ee42a5932a420182">sort</a>(RandomIt begin, RandomIt end, Compare compare = Compare())</div>
+<div class="line"><a name="l00804"></a><span class="lineno"><a class="line" href="sort_8h.html#afef53c7f1eb1da77ee42a5932a420182">  804</a></span>&#160;<span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="sort_8h.html#afef53c7f1eb1da77ee42a5932a420182">sort</a>(RandomIt begin, RandomIt end, Compare compare = Compare())</div>
 <div class="line"><a name="l00805"></a><span class="lineno">  805</span>&#160;{</div>
 <div class="line"><a name="l00806"></a><span class="lineno">  806</span>&#160;    <span class="keywordtype">bool</span> bSorted = <span class="keyword">false</span>;</div>
 <div class="line"><a name="l00807"></a><span class="lineno">  807</span>&#160; </div>
@@ -663,16 +663,15 @@ $(function() {
 <div class="line"><a name="l00820"></a><span class="lineno">  820</span>&#160;}</div>
 <div class="line"><a name="l00821"></a><span class="lineno">  821</span>&#160; </div>
 <div class="line"><a name="l00829"></a><span class="lineno">  829</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> Container, <span class="keyword">typename</span> Compare = std::less&lt;&gt;&gt;</div>
-<div class="line"><a name="l00830"></a><span class="lineno"><a class="line" href="namespaceqx.html#a5c2b60ab7713af45cf5effb608f260b4">  830</a></span>&#160;<span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="namespaceqx.html#afef53c7f1eb1da77ee42a5932a420182">sort</a>(Container&amp; cont, Compare compare = Compare())</div>
+<div class="line"><a name="l00830"></a><span class="lineno"><a class="line" href="sort_8h.html#a5c2b60ab7713af45cf5effb608f260b4">  830</a></span>&#160;<span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="sort_8h.html#afef53c7f1eb1da77ee42a5932a420182">sort</a>(Container&amp; cont, Compare compare = Compare())</div>
 <div class="line"><a name="l00831"></a><span class="lineno">  831</span>&#160;{</div>
-<div class="line"><a name="l00832"></a><span class="lineno">  832</span>&#160;    <a class="code" href="namespaceqx.html#afef53c7f1eb1da77ee42a5932a420182">qx::sort</a>(cont.begin(), cont.end(), compare);</div>
+<div class="line"><a name="l00832"></a><span class="lineno">  832</span>&#160;    <a class="code" href="sort_8h.html#afef53c7f1eb1da77ee42a5932a420182">qx::sort</a>(cont.begin(), cont.end(), compare);</div>
 <div class="line"><a name="l00833"></a><span class="lineno">  833</span>&#160;}</div>
 <div class="line"><a name="l00834"></a><span class="lineno">  834</span>&#160; </div>
 <div class="line"><a name="l00835"></a><span class="lineno">  835</span>&#160;} <span class="comment">// namespace qx</span></div>
-<div class="ttc" id="anamespaceqx_html"><div class="ttname"><a href="namespaceqx.html">qx</a></div><div class="ttdoc">Contains qx::base_vbo class.</div><div class="ttdef"><b>Definition:</b> <a href="functional_8h_source.html#l00023">functional.h:24</a></div></div>
-<div class="ttc" id="anamespaceqx_html_ab74b64170d1e3cc3b559a8a3cba7b224"><div class="ttname"><a href="namespaceqx.html#ab74b64170d1e3cc3b559a8a3cba7b224">qx::SORT_COUNTING_MAX_BUFFER_SIZE</a></div><div class="ttdeci">constexpr size_t SORT_COUNTING_MAX_BUFFER_SIZE</div><div class="ttdoc">vector of iterator value</div><div class="ttdef"><b>Definition:</b> <a href="sort_8h_source.html#l00022">sort.h:22</a></div></div>
-<div class="ttc" id="anamespaceqx_html_ab8aed768192e446d4c386d04be1cbc75"><div class="ttname"><a href="namespaceqx.html#ab8aed768192e446d4c386d04be1cbc75">qx::make_heap</a></div><div class="ttdeci">void make_heap(RandomIt begin, RandomIt end, Compare compare=Compare())</div><div class="ttdoc">Make heap at range.</div><div class="ttdef"><b>Definition:</b> <a href="sort_8h_source.html#l00236">sort.h:236</a></div></div>
-<div class="ttc" id="anamespaceqx_html_afef53c7f1eb1da77ee42a5932a420182"><div class="ttname"><a href="namespaceqx.html#afef53c7f1eb1da77ee42a5932a420182">qx::sort</a></div><div class="ttdeci">void sort(RandomIt begin, RandomIt end, Compare compare=Compare())</div><div class="ttdoc">Sort by the most suitable algorithm.</div><div class="ttdef"><b>Definition:</b> <a href="sort_8h_source.html#l00804">sort.h:804</a></div></div>
+<div class="ttc" id="asort_8h_html_ab74b64170d1e3cc3b559a8a3cba7b224"><div class="ttname"><a href="sort_8h.html#ab74b64170d1e3cc3b559a8a3cba7b224">qx::SORT_COUNTING_MAX_BUFFER_SIZE</a></div><div class="ttdeci">constexpr size_t SORT_COUNTING_MAX_BUFFER_SIZE</div><div class="ttdoc">vector of iterator value</div><div class="ttdef"><b>Definition:</b> <a href="sort_8h_source.html#l00022">sort.h:22</a></div></div>
+<div class="ttc" id="asort_8h_html_ab8aed768192e446d4c386d04be1cbc75"><div class="ttname"><a href="sort_8h.html#ab8aed768192e446d4c386d04be1cbc75">qx::make_heap</a></div><div class="ttdeci">void make_heap(RandomIt begin, RandomIt end, Compare compare=Compare())</div><div class="ttdoc">Make heap at range.</div><div class="ttdef"><b>Definition:</b> <a href="sort_8h_source.html#l00236">sort.h:236</a></div></div>
+<div class="ttc" id="asort_8h_html_afef53c7f1eb1da77ee42a5932a420182"><div class="ttname"><a href="sort_8h.html#afef53c7f1eb1da77ee42a5932a420182">qx::sort</a></div><div class="ttdeci">void sort(RandomIt begin, RandomIt end, Compare compare=Compare())</div><div class="ttdoc">Sort by the most suitable algorithm.</div><div class="ttdef"><b>Definition:</b> <a href="sort_8h_source.html#l00804">sort.h:804</a></div></div>
 <div class="ttc" id="atype__traits_8h_html"><div class="ttname"><a href="type__traits_8h.html">type_traits.h</a></div><div class="ttdoc">Type traits.</div></div>
 <div class="ttc" id="atypedefs_8h_html"><div class="ttname"><a href="typedefs_8h.html">typedefs.h</a></div><div class="ttdoc">Project typedefs.</div></div>
 <div class="ttc" id="atypedefs_8h_html_a1af9f95651e921615e75917a6dd1b574"><div class="ttname"><a href="typedefs_8h.html#a1af9f95651e921615e75917a6dd1b574">u64</a></div><div class="ttdeci">uint64_t u64</div><div class="ttdef"><b>Definition:</b> <a href="typedefs_8h_source.html#l00026">typedefs.h:28</a></div></div>

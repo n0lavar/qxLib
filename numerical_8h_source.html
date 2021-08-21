@@ -80,7 +80,7 @@ $(function() {
 <div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="preprocessor">#include &lt;random&gt;</span></div>
 <div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="preprocessor">#include &lt;vector&gt;</span></div>
 <div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160; </div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespaceqx.html">qx</a></div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="keyword">namespace </span>qx</div>
 <div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;{</div>
 <div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160; </div>
 <div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="keyword">inline</span> <span class="keywordtype">int</span> gcd(<span class="keywordtype">int</span> nFirst, <span class="keywordtype">int</span> nSecond)</div>
@@ -95,7 +95,7 @@ $(function() {
 <div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;        nSecond              = nRemainder;</div>
 <div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    }</div>
 <div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160; </div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="namespaceqx.html#ab465ef7b0d8760b14b3893514deeb8fd">std::abs</a>(nFirst);</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    <span class="keywordflow">return</span> std::abs(nFirst);</div>
 <div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;}</div>
 <div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160; </div>
 <div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;<span class="keyword">inline</span> <span class="keywordtype">int</span> lcm(<span class="keywordtype">int</span> nFirst, <span class="keywordtype">int</span> nSecond)</div>
@@ -103,8 +103,8 @@ $(function() {
 <div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    <span class="keywordflow">if</span> (nFirst == 0 || nSecond == 0)</div>
 <div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;        <span class="keywordflow">return</span> 0;</div>
 <div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160; </div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    nFirst  = <a class="code" href="namespaceqx.html#ab465ef7b0d8760b14b3893514deeb8fd">std::abs</a>(nFirst);</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    nSecond = <a class="code" href="namespaceqx.html#ab465ef7b0d8760b14b3893514deeb8fd">std::abs</a>(nSecond);</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    nFirst  = std::abs(nFirst);</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    nSecond = std::abs(nSecond);</div>
 <div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160; </div>
 <div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    <span class="keywordflow">return</span> nFirst / gcd(nFirst, nSecond) * nSecond;</div>
 <div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;}</div>
@@ -117,7 +117,7 @@ $(function() {
 <div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;        <span class="stringliteral">&quot;Integral or floating point required&quot;</span>);</div>
 <div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160; </div>
 <div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;    <span class="keyword">const</span> <span class="keywordtype">bool</span>   bNegativePower = nPower &lt; 0;</div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;    <span class="keyword">const</span> <span class="keywordtype">size_t</span> nPositivePower = <span class="keyword">static_cast&lt;</span><span class="keywordtype">size_t</span><span class="keyword">&gt;</span>(<a class="code" href="namespaceqx.html#ab465ef7b0d8760b14b3893514deeb8fd">std::abs</a>(nPower));</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;    <span class="keyword">const</span> <span class="keywordtype">size_t</span> nPositivePower = <span class="keyword">static_cast&lt;</span><span class="keywordtype">size_t</span><span class="keyword">&gt;</span>(std::abs(nPower));</div>
 <div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160; </div>
 <div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;    <span class="keywordtype">double</span> fResult = 1.0;</div>
 <div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;    <span class="keywordflow">switch</span> (nPositivePower)</div>
@@ -154,7 +154,7 @@ $(function() {
 <div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;}</div>
 <div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160; </div>
 <div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> I&gt;</div>
-<div class="line"><a name="l00128"></a><span class="lineno"><a class="line" href="namespaceqx.html#a558b28fe2075e7c4a244b55920b69df7">  128</a></span>&#160;<span class="keyword">inline</span> I <a class="code" href="namespaceqx.html#a558b28fe2075e7c4a244b55920b69df7">maxpot</a>(I nValue)</div>
+<div class="line"><a name="l00128"></a><span class="lineno"><a class="line" href="numerical_8h.html#a558b28fe2075e7c4a244b55920b69df7">  128</a></span>&#160;<span class="keyword">inline</span> I <a class="code" href="numerical_8h.html#a558b28fe2075e7c4a244b55920b69df7">maxpot</a>(I nValue)</div>
 <div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;{</div>
 <div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;    static_assert(std::is_integral_v&lt;I&gt;, <span class="stringliteral">&quot;Integral required&quot;</span>);</div>
 <div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160; </div>
@@ -162,7 +162,7 @@ $(function() {
 <div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;        <span class="keywordflow">return</span> I(0);</div>
 <div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160; </div>
 <div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;    std::bitset&lt;std::numeric_limits&lt;I&gt;::digits&gt; powers(</div>
-<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;        <span class="keyword">static_cast&lt;</span><span class="keywordtype">size_t</span><span class="keyword">&gt;</span>(<a class="code" href="namespaceqx.html#ab465ef7b0d8760b14b3893514deeb8fd">std::abs</a>(nValue)));</div>
+<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;        <span class="keyword">static_cast&lt;</span><span class="keywordtype">size_t</span><span class="keyword">&gt;</span>(std::abs(nValue)));</div>
 <div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160; </div>
 <div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;    I nPow = <span class="keyword">static_cast&lt;</span>I<span class="keyword">&gt;</span>(std::numeric_limits&lt;I&gt;::digits - 1);</div>
 <div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;    <span class="keywordflow">while</span> (!powers.test(<span class="keyword">static_cast&lt;</span><span class="keywordtype">size_t</span><span class="keyword">&gt;</span>(nPow)))</div>
@@ -257,7 +257,7 @@ $(function() {
 <div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160;    <span class="keywordflow">return</span> find_prime_factors(<span class="keyword">static_cast&lt;</span><span class="keywordtype">int</span><span class="keyword">&gt;</span>(nValue)).size() == 1;</div>
 <div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160;}</div>
 <div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160; </div>
-<div class="line"><a name="l00259"></a><span class="lineno"><a class="line" href="namespaceqx.html#a78654ada0326f9de3611df0dd6cfea86">  259</a></span>&#160;<span class="keyword">inline</span> <span class="keywordtype">bool</span> is_prime(<span class="keywordtype">size_t</span> nValue, <span class="keywordtype">double</span> fProbability)</div>
+<div class="line"><a name="l00259"></a><span class="lineno"><a class="line" href="numerical_8h.html#a78654ada0326f9de3611df0dd6cfea86">  259</a></span>&#160;<span class="keyword">inline</span> <span class="keywordtype">bool</span> is_prime(<span class="keywordtype">size_t</span> nValue, <span class="keywordtype">double</span> fProbability)</div>
 <div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160;{</div>
 <div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160;    <span class="keywordflow">if</span> (fProbability &lt; 0)</div>
 <div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160;        fProbability = -fProbability;</div>
@@ -291,9 +291,7 @@ $(function() {
 <div class="line"><a name="l00290"></a><span class="lineno">  290</span>&#160;}</div>
 <div class="line"><a name="l00291"></a><span class="lineno">  291</span>&#160; </div>
 <div class="line"><a name="l00292"></a><span class="lineno">  292</span>&#160;} <span class="comment">// namespace qx</span></div>
-<div class="ttc" id="anamespaceqx_html"><div class="ttname"><a href="namespaceqx.html">qx</a></div><div class="ttdoc">Contains qx::base_vbo class.</div><div class="ttdef"><b>Definition:</b> <a href="functional_8h_source.html#l00023">functional.h:24</a></div></div>
-<div class="ttc" id="anamespaceqx_html_a558b28fe2075e7c4a244b55920b69df7"><div class="ttname"><a href="namespaceqx.html#a558b28fe2075e7c4a244b55920b69df7">qx::maxpot</a></div><div class="ttdeci">I maxpot(I nValue)</div><div class="ttdoc">Max power of two in integer.</div><div class="ttdef"><b>Definition:</b> <a href="numerical_8h_source.html#l00128">numerical.h:128</a></div></div>
-<div class="ttc" id="anamespaceqx_html_ab465ef7b0d8760b14b3893514deeb8fd"><div class="ttname"><a href="namespaceqx.html#ab465ef7b0d8760b14b3893514deeb8fd">qx::abs</a></div><div class="ttdeci">constexpr T abs(T value)</div><div class="ttdoc">Constexpr absolute value.</div><div class="ttdef"><b>Definition:</b> <a href="math_8h_source.html#l00060">math.h:60</a></div></div>
+<div class="ttc" id="anumerical_8h_html_a558b28fe2075e7c4a244b55920b69df7"><div class="ttname"><a href="numerical_8h.html#a558b28fe2075e7c4a244b55920b69df7">qx::maxpot</a></div><div class="ttdeci">I maxpot(I nValue)</div><div class="ttdoc">Max power of two in integer.</div><div class="ttdef"><b>Definition:</b> <a href="numerical_8h_source.html#l00128">numerical.h:128</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

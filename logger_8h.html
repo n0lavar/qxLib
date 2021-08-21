@@ -67,7 +67,6 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#nested-classes">Classes</a> &#124;
-<a href="#namespaces">Namespaces</a> &#124;
 <a href="#define-members">Macros</a>  </div>
   <div class="headertitle">
 <div class="title">logger.h File Reference</div>  </div>
@@ -90,12 +89,6 @@ Classes</h2></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1logger__singleton.html">qx::logger_singleton</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default logger instance.  <a href="classqx_1_1logger__singleton.html#details">More...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="namespaces"></a>
-Namespaces</h2></td></tr>
-<tr class="memitem:namespaceqx"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceqx.html">qx</a></td></tr>
-<tr class="memdesc:namespaceqx"><td class="mdescLeft">&#160;</td><td class="mdescRight">Contains <a class="el" href="classqx_1_1base__vbo.html" title="Base VBO class.">qx::base_vbo</a> class. <br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
@@ -256,7 +249,7 @@ Macros</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <b>Value:</b><div class="fragment"><div class="line">    loggerInstance.output(                                      \</div>
-<div class="line">        <a class="code" href="namespaceqx.html#aeeb3d388b3fe9ff99ce7abcb70484d38a8e6a80a7d649a33b4b6ebe9eea7d3ba5">qx::log_level::asserts</a>,                                 \</div>
+<div class="line">        qx::log_level::asserts,                                 \</div>
 <div class="line">        format,                                                 \</div>
 <div class="line">        #expr,                                                  \</div>
 <div class="line">        <span class="keyword">nullptr</span>,                                                \</div>
@@ -264,7 +257,6 @@ Macros</h2></td></tr>
 <div class="line">        __FUNCTION__,                                           \</div>
 <div class="line">        __LINE__,                                               \</div>
 <div class="line">        ##__VA_ARGS__)</div>
-<div class="ttc" id="anamespaceqx_html_aeeb3d388b3fe9ff99ce7abcb70484d38a8e6a80a7d649a33b4b6ebe9eea7d3ba5"><div class="ttname"><a href="namespaceqx.html#aeeb3d388b3fe9ff99ce7abcb70484d38a8e6a80a7d649a33b4b6ebe9eea7d3ba5">qx::log_level::asserts</a></div><div class="ttdeci">@ asserts</div><div class="ttdoc">asserts</div></div>
 </div><!-- fragment -->
 <p>Trace assert from instance. </p>
 <p>@macro QX_TRACE_ASSERT_FROM </p><dl class="params"><dt>Parameters</dt><dd>
@@ -357,7 +349,7 @@ Macros</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <b>Value:</b><div class="fragment"><div class="line">    loggerInstance.output(                               \</div>
-<div class="line">        <a class="code" href="namespaceqx.html#aeeb3d388b3fe9ff99ce7abcb70484d38a07213a0161f52846ab198be103b5ab43">qx::log_level::errors</a>,                           \</div>
+<div class="line">        qx::log_level::errors,                           \</div>
 <div class="line">        format,                                          \</div>
 <div class="line">        <span class="keyword">nullptr</span>,                                         \</div>
 <div class="line">        <span class="keyword">nullptr</span>,                                         \</div>
@@ -365,7 +357,6 @@ Macros</h2></td></tr>
 <div class="line">        __FUNCTION__,                                    \</div>
 <div class="line">        __LINE__,                                        \</div>
 <div class="line">        ##__VA_ARGS__)</div>
-<div class="ttc" id="anamespaceqx_html_aeeb3d388b3fe9ff99ce7abcb70484d38a07213a0161f52846ab198be103b5ab43"><div class="ttname"><a href="namespaceqx.html#aeeb3d388b3fe9ff99ce7abcb70484d38a07213a0161f52846ab198be103b5ab43">qx::log_level::errors</a></div><div class="ttdeci">@ errors</div><div class="ttdoc">asserts + errors</div></div>
 </div><!-- fragment -->
 <p>Trace error from instance. </p>
 <p>@macro QX_TRACE_ERROR_FROM </p><dl class="params"><dt>Parameters</dt><dd>
@@ -413,7 +404,7 @@ Macros</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <b>Value:</b><div class="fragment"><div class="line">    loggerInstance.output(                         \</div>
-<div class="line">        <a class="code" href="namespaceqx.html#aeeb3d388b3fe9ff99ce7abcb70484d38acaf9b6b99962bf5c2264824231d7a40c">qx::log_level::info</a>,                       \</div>
+<div class="line">        qx::log_level::info,                       \</div>
 <div class="line">        format,                                    \</div>
 <div class="line">        <span class="keyword">nullptr</span>,                                   \</div>
 <div class="line">        <span class="keyword">nullptr</span>,                                   \</div>
@@ -421,7 +412,6 @@ Macros</h2></td></tr>
 <div class="line">        __FUNCTION__,                              \</div>
 <div class="line">        __LINE__,                                  \</div>
 <div class="line">        ##__VA_ARGS__)</div>
-<div class="ttc" id="anamespaceqx_html_aeeb3d388b3fe9ff99ce7abcb70484d38acaf9b6b99962bf5c2264824231d7a40c"><div class="ttname"><a href="namespaceqx.html#aeeb3d388b3fe9ff99ce7abcb70484d38acaf9b6b99962bf5c2264824231d7a40c">qx::log_level::info</a></div><div class="ttdeci">@ info</div><div class="ttdoc">asserts + errors + info</div></div>
 </div><!-- fragment -->
 <p>Trace common info from instance. </p>
 <p>@macro QX_TRACE_FROM </p><dl class="params"><dt>Parameters</dt><dd>

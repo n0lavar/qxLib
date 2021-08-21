@@ -67,7 +67,6 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#nested-classes">Classes</a> &#124;
-<a href="#namespaces">Namespaces</a> &#124;
 <a href="#typedef-members">Typedefs</a> &#124;
 <a href="#var-members">Variables</a>  </div>
   <div class="headertitle">
@@ -87,12 +86,6 @@ Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1basic__string__hash.html">qx::basic_string_hash&lt; Traits &gt;</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structqx_1_1fast__hash__string__traits.html">qx::fast_hash_string_traits&lt; value_type &gt;</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="namespaces"></a>
-Namespaces</h2></td></tr>
-<tr class="memitem:namespaceqx"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceqx.html">qx</a></td></tr>
-<tr class="memdesc:namespaceqx"><td class="mdescLeft">&#160;</td><td class="mdescRight">Contains <a class="el" href="classqx_1_1base__vbo.html" title="Base VBO class.">qx::base_vbo</a> class. <br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
@@ -147,6 +140,29 @@ template&lt;typename T &gt; </div>
 <div class="line">}</div>
 </div><!-- fragment -->
 <p class="definition">Definition at line <a class="el" href="string__hash_8h_source.html#l00021">21</a> of file <a class="el" href="string__hash_8h_source.html">string_hash.h</a>.</p>
+
+</div>
+</div>
+<a id="a5d088ccf68fe541375770d93868fd234"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5d088ccf68fe541375770d93868fd234">&#9670;&nbsp;</a></span>string_convertable</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">concept qx::string_convertable</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line">= requires(T t)</div>
+<div class="line">{</div>
+<div class="line">    t.cbegin();</div>
+<div class="line">    t.cend();</div>
+<div class="line">}</div>
+</div><!-- fragment -->
+<p class="definition">Definition at line <a class="el" href="string__hash_8h_source.html#l00031">31</a> of file <a class="el" href="string__hash_8h_source.html">string_hash.h</a>.</p>
 
 </div>
 </div>

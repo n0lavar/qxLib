@@ -67,7 +67,6 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#nested-classes">Classes</a> &#124;
-<a href="#namespaces">Namespaces</a> &#124;
 <a href="#typedef-members">Typedefs</a> &#124;
 <a href="#enum-members">Enumerations</a>  </div>
   <div class="headertitle">
@@ -87,12 +86,6 @@ $(function() {
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1shader__base.html">qx::shader_base&lt; ShaderType &gt;</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="namespaces"></a>
-Namespaces</h2></td></tr>
-<tr class="memitem:namespaceqx"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceqx.html">qx</a></td></tr>
-<tr class="memdesc:namespaceqx"><td class="mdescLeft">&#160;</td><td class="mdescRight">Contains <a class="el" href="classqx_1_1base__vbo.html" title="Base VBO class.">qx::base_vbo</a> class. <br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
@@ -118,14 +111,14 @@ using&#160;</td><td class="memItemRight" valign="bottom"><b>qx::shader_comp</b> 
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="enum-members"></a>
 Enumerations</h2></td></tr>
-<tr class="memitem:ae891b980e1f40a70e11e8bfc320d898e"><td class="memItemLeft" align="right" valign="top">enum class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceqx.html#ae891b980e1f40a70e11e8bfc320d898e">qx::shader_type</a> { <br />
-&#160;&#160;<a class="el" href="namespaceqx.html#ae891b980e1f40a70e11e8bfc320d898eac9b416167392c2b301810695b92efa12">qx::vert</a>
-, <a class="el" href="namespaceqx.html#ae891b980e1f40a70e11e8bfc320d898eaf765f7a0a169f4f6654ee72a84a9eb3d">qx::tesc</a>
-, <a class="el" href="namespaceqx.html#ae891b980e1f40a70e11e8bfc320d898eac9dd5982f1d65f6e6b58605105e1ba6c">qx::tese</a>
-, <a class="el" href="namespaceqx.html#ae891b980e1f40a70e11e8bfc320d898eadd992be5859bfc12e59d4c15b4c17cf8">qx::geom</a>
+<tr class="memitem:ae891b980e1f40a70e11e8bfc320d898e"><td class="memItemLeft" align="right" valign="top">enum class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="shaders_8h.html#ae891b980e1f40a70e11e8bfc320d898e">qx::shader_type</a> { <br />
+&#160;&#160;<a class="el" href="shaders_8h.html#ae891b980e1f40a70e11e8bfc320d898eac9b416167392c2b301810695b92efa12">vert</a>
+, <a class="el" href="shaders_8h.html#ae891b980e1f40a70e11e8bfc320d898eaf765f7a0a169f4f6654ee72a84a9eb3d">tesc</a>
+, <a class="el" href="shaders_8h.html#ae891b980e1f40a70e11e8bfc320d898eac9dd5982f1d65f6e6b58605105e1ba6c">tese</a>
+, <a class="el" href="shaders_8h.html#ae891b980e1f40a70e11e8bfc320d898eadd992be5859bfc12e59d4c15b4c17cf8">geom</a>
 , <br />
-&#160;&#160;<a class="el" href="namespaceqx.html#ae891b980e1f40a70e11e8bfc320d898ea43cf0c43c2b82750b67586fe559677a1">qx::frag</a>
-, <a class="el" href="namespaceqx.html#ae891b980e1f40a70e11e8bfc320d898ea005480c8a6a0357d17cff2e8eb7e060d">qx::comp</a>
+&#160;&#160;<a class="el" href="shaders_8h.html#ae891b980e1f40a70e11e8bfc320d898ea43cf0c43c2b82750b67586fe559677a1">frag</a>
+, <a class="el" href="shaders_8h.html#ae891b980e1f40a70e11e8bfc320d898ea005480c8a6a0357d17cff2e8eb7e060d">comp</a>
 <br />
  }</td></tr>
 <tr class="separator:ae891b980e1f40a70e11e8bfc320d898e"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -137,7 +130,46 @@ Enumerations</h2></td></tr>
 <dl class="section copyright"><dt>Copyright</dt><dd>© Nick Khrapov, 2021. All right reserved. </dd></dl>
 
 <p class="definition">Definition in file <a class="el" href="shaders_8h_source.html">shaders.h</a>.</p>
-</div></div><!-- contents -->
+</div><h2 class="groupheader">Enumeration Type Documentation</h2>
+<a id="ae891b980e1f40a70e11e8bfc320d898e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae891b980e1f40a70e11e8bfc320d898e">&#9670;&nbsp;</a></span>shader_type</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="shaders_8h.html#ae891b980e1f40a70e11e8bfc320d898e">qx::shader_type</a></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">strong</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<table class="fieldtable">
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="ae891b980e1f40a70e11e8bfc320d898eac9b416167392c2b301810695b92efa12"></a>vert&#160;</td><td class="fielddoc"><p>vertex </p>
+</td></tr>
+<tr><td class="fieldname"><a id="ae891b980e1f40a70e11e8bfc320d898eaf765f7a0a169f4f6654ee72a84a9eb3d"></a>tesc&#160;</td><td class="fielddoc"><p>tessellation control </p>
+</td></tr>
+<tr><td class="fieldname"><a id="ae891b980e1f40a70e11e8bfc320d898eac9dd5982f1d65f6e6b58605105e1ba6c"></a>tese&#160;</td><td class="fielddoc"><p>tessellation evaluation </p>
+</td></tr>
+<tr><td class="fieldname"><a id="ae891b980e1f40a70e11e8bfc320d898eadd992be5859bfc12e59d4c15b4c17cf8"></a>geom&#160;</td><td class="fielddoc"><p>geometry </p>
+</td></tr>
+<tr><td class="fieldname"><a id="ae891b980e1f40a70e11e8bfc320d898ea43cf0c43c2b82750b67586fe559677a1"></a>frag&#160;</td><td class="fielddoc"><p>fragment </p>
+</td></tr>
+<tr><td class="fieldname"><a id="ae891b980e1f40a70e11e8bfc320d898ea005480c8a6a0357d17cff2e8eb7e060d"></a>comp&#160;</td><td class="fielddoc"><p>compute </p>
+</td></tr>
+</table>
+
+<p class="definition">Definition at line <a class="el" href="shaders_8h_source.html#l00020">20</a> of file <a class="el" href="shaders_8h_source.html">shaders.h</a>.</p>
+
+</div>
+</div>
+</div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1

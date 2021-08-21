@@ -123,9 +123,9 @@ $(function() {
 <div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
 <div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;<span class="keyword">inline</span> T smooth_step_func(T x) noexcept</div>
 <div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;{</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    <span class="keywordflow">if</span> (<a class="code" href="namespaceqx.html#abc0bd064c0a27a488aabf1d2f2e2fcfa">epsilon_less_equal</a>(x, T(0.0f)))</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    <span class="keywordflow">if</span> (<a class="code" href="math_8h.html#abc0bd064c0a27a488aabf1d2f2e2fcfa">epsilon_less_equal</a>(x, T(0.0f)))</div>
 <div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;        <span class="keywordflow">return</span> T(0.0f);</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;    <span class="keywordflow">else</span> <span class="keywordflow">if</span> (<a class="code" href="namespaceqx.html#a2db6d38ad44aebd45809cb9a06774ffd">epsilon_greater_equal</a>(x, T(1.0f)))</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;    <span class="keywordflow">else</span> <span class="keywordflow">if</span> (<a class="code" href="math_8h.html#a2db6d38ad44aebd45809cb9a06774ffd">epsilon_greater_equal</a>(x, T(1.0f)))</div>
 <div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;        <span class="keywordflow">return</span> T(1.0f);</div>
 <div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;    <span class="keywordflow">else</span></div>
 <div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;        <span class="keywordflow">return</span> (T(3.0f) - T(2.0f) * x) * std::pow(x, T(2.0f));</div>
@@ -137,9 +137,9 @@ $(function() {
 <div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
 <div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;<span class="keyword">inline</span> T smoother_step_func(T x) noexcept</div>
 <div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;{</div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;    <span class="keywordflow">if</span> (<a class="code" href="namespaceqx.html#abc0bd064c0a27a488aabf1d2f2e2fcfa">epsilon_less_equal</a>(x, T(0.0f)))</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;    <span class="keywordflow">if</span> (<a class="code" href="math_8h.html#abc0bd064c0a27a488aabf1d2f2e2fcfa">epsilon_less_equal</a>(x, T(0.0f)))</div>
 <div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;        <span class="keywordflow">return</span> T(0.0f);</div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;    <span class="keywordflow">else</span> <span class="keywordflow">if</span> (<a class="code" href="namespaceqx.html#a2db6d38ad44aebd45809cb9a06774ffd">epsilon_greater_equal</a>(x, T(1.0f)))</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;    <span class="keywordflow">else</span> <span class="keywordflow">if</span> (<a class="code" href="math_8h.html#a2db6d38ad44aebd45809cb9a06774ffd">epsilon_greater_equal</a>(x, T(1.0f)))</div>
 <div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;        <span class="keywordflow">return</span> T(1.0f);</div>
 <div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;    <span class="keywordflow">else</span></div>
 <div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;        <span class="keywordflow">return</span> std::pow(x, T(3.0f)) * (x * (x * T(6.0f) - T(15.0f)) + T(10.0f));</div>
@@ -511,8 +511,8 @@ $(function() {
 <div class="line"><a name="l00454"></a><span class="lineno">  454</span>&#160; </div>
 <div class="line"><a name="l00455"></a><span class="lineno">  455</span>&#160;} <span class="comment">// namespace qx::easing</span></div>
 <div class="ttc" id="amath_8h_html"><div class="ttname"><a href="math_8h.html">math.h</a></div><div class="ttdoc">Math functions.</div></div>
-<div class="ttc" id="anamespaceqx_html_a2db6d38ad44aebd45809cb9a06774ffd"><div class="ttname"><a href="namespaceqx.html#a2db6d38ad44aebd45809cb9a06774ffd">qx::epsilon_greater_equal</a></div><div class="ttdeci">constexpr bool epsilon_greater_equal(T left, T right, T eps=std::numeric_limits&lt; T &gt;::epsilon())</div><div class="ttdoc">Constexpr comparison function for a user defined epsilon values.</div><div class="ttdef"><b>Definition:</b> <a href="math_8h_source.html#l00108">math.h:108</a></div></div>
-<div class="ttc" id="anamespaceqx_html_abc0bd064c0a27a488aabf1d2f2e2fcfa"><div class="ttname"><a href="namespaceqx.html#abc0bd064c0a27a488aabf1d2f2e2fcfa">qx::epsilon_less_equal</a></div><div class="ttdeci">constexpr bool epsilon_less_equal(T left, T right, T eps=std::numeric_limits&lt; T &gt;::epsilon())</div><div class="ttdoc">Constexpr comparison function for a user defined epsilon values.</div><div class="ttdef"><b>Definition:</b> <a href="math_8h_source.html#l00091">math.h:91</a></div></div>
+<div class="ttc" id="amath_8h_html_a2db6d38ad44aebd45809cb9a06774ffd"><div class="ttname"><a href="math_8h.html#a2db6d38ad44aebd45809cb9a06774ffd">qx::epsilon_greater_equal</a></div><div class="ttdeci">constexpr bool epsilon_greater_equal(T left, T right, T eps=std::numeric_limits&lt; T &gt;::epsilon())</div><div class="ttdoc">Constexpr comparison function for a user defined epsilon values.</div><div class="ttdef"><b>Definition:</b> <a href="math_8h_source.html#l00108">math.h:108</a></div></div>
+<div class="ttc" id="amath_8h_html_abc0bd064c0a27a488aabf1d2f2e2fcfa"><div class="ttname"><a href="math_8h.html#abc0bd064c0a27a488aabf1d2f2e2fcfa">qx::epsilon_less_equal</a></div><div class="ttdeci">constexpr bool epsilon_less_equal(T left, T right, T eps=std::numeric_limits&lt; T &gt;::epsilon())</div><div class="ttdoc">Constexpr comparison function for a user defined epsilon values.</div><div class="ttdef"><b>Definition:</b> <a href="math_8h_source.html#l00091">math.h:91</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

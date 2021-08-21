@@ -70,7 +70,7 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 <a href="vector2d_8inl.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160; </div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespaceqx.html">qx</a></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="keyword">namespace </span>qx</div>
 <div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;{</div>
 <div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160; </div>
 <div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> T&gt;</div>
@@ -197,7 +197,7 @@ $(function() {
 <div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;        {</div>
 <div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;            <span class="keyword">auto</span> itFirst = iterator(<span class="keyword">this</span>, rows * cols);</div>
 <div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;            <span class="keyword">auto</span> itLast  = iterator(<span class="keyword">this</span>, m_nRows * m_nCols);</div>
-<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;            <a class="code" href="namespaceqx.html#a567475c55a5a56c634d471de261b0428">destruct</a>(itFirst, itLast);</div>
+<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;            <a class="code" href="useful__funcs_8h.html#a567475c55a5a56c634d471de261b0428">destruct</a>(itFirst, itLast);</div>
 <div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160; </div>
 <div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;            m_nRows = rows;</div>
 <div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;            m_nCols = cols;</div>
@@ -320,7 +320,7 @@ $(function() {
 <div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160;<span class="keyword">inline</span> <span class="keywordtype">void</span> vector2d&lt;T&gt;::clear(<span class="keywordtype">void</span>) noexcept</div>
 <div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160;{</div>
 <div class="line"><a name="l00275"></a><span class="lineno">  275</span>&#160;    <span class="keywordflow">if</span> (m_pData)</div>
-<div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160;        <a class="code" href="namespaceqx.html#a567475c55a5a56c634d471de261b0428">destruct</a>(begin(), end());</div>
+<div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160;        <a class="code" href="useful__funcs_8h.html#a567475c55a5a56c634d471de261b0428">destruct</a>(begin(), end());</div>
 <div class="line"><a name="l00277"></a><span class="lineno">  277</span>&#160; </div>
 <div class="line"><a name="l00278"></a><span class="lineno">  278</span>&#160;    m_nRows = 0;</div>
 <div class="line"><a name="l00279"></a><span class="lineno">  279</span>&#160;    m_nCols = 0;</div>
@@ -342,8 +342,7 @@ $(function() {
 <div class="ttc" id="aclassqx_1_1vector2d_html_acefb6c4c19b453d566f6c65007b52585"><div class="ttname"><a href="classqx_1_1vector2d.html#acefb6c4c19b453d566f6c65007b52585">qx::vector2d::assign</a></div><div class="ttdeci">void assign(vector2d &amp;&amp;other) noexcept</div><div class="ttdoc">Assign by moving from other vector.</div></div>
 <div class="ttc" id="aclassqx_1_1vector2d_html_aff855c01fb0871d629eedfa14741a3e7"><div class="ttname"><a href="classqx_1_1vector2d.html#aff855c01fb0871d629eedfa14741a3e7">qx::vector2d::size_x</a></div><div class="ttdeci">size_type size_x(void) const noexcept</div><div class="ttdoc">Get num of rows in vector.</div></div>
 <div class="ttc" id="aclassqx_1_1vector2d_html_affc09e900989feaf34f8250d028ca173"><div class="ttname"><a href="classqx_1_1vector2d.html#affc09e900989feaf34f8250d028ca173">qx::vector2d::cols</a></div><div class="ttdeci">size_type cols(void) const noexcept</div><div class="ttdoc">Get num of cols in vector.</div></div>
-<div class="ttc" id="anamespaceqx_html"><div class="ttname"><a href="namespaceqx.html">qx</a></div><div class="ttdoc">Contains qx::base_vbo class.</div><div class="ttdef"><b>Definition:</b> <a href="functional_8h_source.html#l00023">functional.h:24</a></div></div>
-<div class="ttc" id="anamespaceqx_html_a567475c55a5a56c634d471de261b0428"><div class="ttname"><a href="namespaceqx.html#a567475c55a5a56c634d471de261b0428">qx::destruct</a></div><div class="ttdeci">void destruct(iterator start, iterator end)</div><div class="ttdoc">Call destructors.</div><div class="ttdef"><b>Definition:</b> <a href="useful__funcs_8h_source.html#l00092">useful_funcs.h:92</a></div></div>
+<div class="ttc" id="auseful__funcs_8h_html_a567475c55a5a56c634d471de261b0428"><div class="ttname"><a href="useful__funcs_8h.html#a567475c55a5a56c634d471de261b0428">qx::destruct</a></div><div class="ttdeci">void destruct(iterator start, iterator end)</div><div class="ttdoc">Call destructors.</div><div class="ttdef"><b>Definition:</b> <a href="useful__funcs_8h_source.html#l00092">useful_funcs.h:92</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

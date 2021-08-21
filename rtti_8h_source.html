@@ -74,7 +74,7 @@ $(function() {
 <div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160; </div>
 <div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="suppress__warnings_8h.html">qx/suppress_warnings.h</a>&gt;</span></div>
 <div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160; </div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespaceqx.html">qx</a></div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="keyword">namespace </span>qx</div>
 <div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;{</div>
 <div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160; </div>
 <div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="keyword">using</span> class_identificator = int;</div>
@@ -111,11 +111,11 @@ $(function() {
 <div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160; </div>
 <div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;} <span class="comment">// namespace qx</span></div>
 <div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160; </div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespaceqx.html">qx</a></div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;<span class="keyword">namespace </span>qx</div>
 <div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;{</div>
 <div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160; </div>
 <div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> Y&gt;</div>
-<div class="line"><a name="l00067"></a><span class="lineno"><a class="line" href="namespaceqx.html#a1af8d1c717e312349e5cd36f39cf16fa">   67</a></span>&#160;Y* <a class="code" href="namespaceqx.html#a1af8d1c717e312349e5cd36f39cf16fa">rtti_cast</a>(<span class="keyword">auto</span>&amp; pointer)</div>
+<div class="line"><a name="l00067"></a><span class="lineno"><a class="line" href="rtti_8h.html#a1af8d1c717e312349e5cd36f39cf16fa">   67</a></span>&#160;Y* <a class="code" href="rtti_8h.html#a1af8d1c717e312349e5cd36f39cf16fa">rtti_cast</a>(<span class="keyword">auto</span>&amp; pointer)</div>
 <div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;{</div>
 <div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    <span class="keyword">using</span> smart_pointer_t =</div>
 <div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;        <span class="keyword">typename</span> std::remove_reference_t&lt;decltype(pointer)&gt;::element_type;</div>
@@ -127,7 +127,7 @@ $(function() {
 <div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;}</div>
 <div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160; </div>
 <div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> Y, <span class="keyword">typename</span> X&gt;</div>
-<div class="line"><a name="l00087"></a><span class="lineno"><a class="line" href="namespaceqx.html#af902ef7984c2e7134318854e38c7fa46">   87</a></span>&#160;Y* <a class="code" href="namespaceqx.html#a1af8d1c717e312349e5cd36f39cf16fa">rtti_cast</a>(X* pointer)</div>
+<div class="line"><a name="l00087"></a><span class="lineno"><a class="line" href="rtti_8h.html#af902ef7984c2e7134318854e38c7fa46">   87</a></span>&#160;Y* <a class="code" href="rtti_8h.html#a1af8d1c717e312349e5cd36f39cf16fa">rtti_cast</a>(X* pointer)</div>
 <div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;{</div>
 <div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;    <span class="keywordflow">if</span> constexpr (detail::has_is_derived_from&lt;X, Y&gt;)</div>
 <div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;        <span class="keywordflow">if</span> (pointer &amp;&amp; pointer-&gt;template is_derived_from&lt;Y&gt;())</div>
@@ -235,8 +235,7 @@ $(function() {
 <div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;<span class="preprocessor">        return base_id == qx::get_class_id&lt;SuperClass&gt;()                       \</span></div>
 <div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;<span class="preprocessor">               || SuperClass::is_base_id(base_id);                             \</span></div>
 <div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160;<span class="preprocessor">    }</span></div>
-<div class="ttc" id="anamespaceqx_html"><div class="ttname"><a href="namespaceqx.html">qx</a></div><div class="ttdoc">Contains qx::base_vbo class.</div><div class="ttdef"><b>Definition:</b> <a href="functional_8h_source.html#l00023">functional.h:24</a></div></div>
-<div class="ttc" id="anamespaceqx_html_a1af8d1c717e312349e5cd36f39cf16fa"><div class="ttname"><a href="namespaceqx.html#a1af8d1c717e312349e5cd36f39cf16fa">qx::rtti_cast</a></div><div class="ttdeci">Y * rtti_cast(auto &amp;pointer)</div><div class="ttdoc">Returns Y* if Y is inherited from pointer class, otherwise nullptr.</div><div class="ttdef"><b>Definition:</b> <a href="rtti_8h_source.html#l00067">rtti.h:67</a></div></div>
+<div class="ttc" id="artti_8h_html_a1af8d1c717e312349e5cd36f39cf16fa"><div class="ttname"><a href="rtti_8h.html#a1af8d1c717e312349e5cd36f39cf16fa">qx::rtti_cast</a></div><div class="ttdeci">Y * rtti_cast(auto &amp;pointer)</div><div class="ttdoc">Returns Y* if Y is inherited from pointer class, otherwise nullptr.</div><div class="ttdef"><b>Definition:</b> <a href="rtti_8h_source.html#l00067">rtti.h:67</a></div></div>
 <div class="ttc" id="asuppress__warnings_8h_html"><div class="ttname"><a href="suppress__warnings_8h.html">suppress_warnings.h</a></div><div class="ttdoc">Suppress warnings macros.</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
