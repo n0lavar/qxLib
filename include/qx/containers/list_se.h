@@ -18,7 +18,7 @@ namespace qx
 
 /**
 
-    @class   qx::list_se<T>
+    @class   qx::list_se
     @brief   Single ended list class
     @details ~
     @tparam  T - list element type
@@ -30,7 +30,7 @@ template<class T>
 class list_se
 {
     /**
-        @struct qx::list_se<T>::list_se_node
+        @struct qx::list_se::list_se_node
         @date   9.08.2021
     **/
     struct list_se_node
@@ -54,7 +54,7 @@ public:
 
     /**
 
-        @class   qx::list_se<T>::iterator
+        @class   qx::list_se::iterator
 
         @brief   Non-const iterator for list
         @details ~

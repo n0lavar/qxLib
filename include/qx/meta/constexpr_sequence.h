@@ -24,7 +24,7 @@ namespace qx
 
 /**
 
-    @class   qx::constexpr_sequence<Tag, T, Start, Func>
+    @class   qx::constexpr_sequence
     @brief   Constexpr sequence. use unique tag for different instances
     @details Modified version of Anthony Williams constexpr counter
              https://stackoverflow.com/a/58200261/8021662

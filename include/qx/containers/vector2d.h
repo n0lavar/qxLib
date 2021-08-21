@@ -19,7 +19,7 @@ namespace qx
 
 /**
 
-    @class   qx::vector2d<T>
+    @class   qx::vector2d
     @brief   Continuous 2d vector
     @details Stores in memory like one big array and makes container cache friendly
     @tparam  T - value type

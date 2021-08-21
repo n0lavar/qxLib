@@ -52,7 +52,7 @@ namespace qx
 
 /**
 
-    @class   qx::basic_string<Traits>
+    @class   qx::basic_string
     @brief   String class
     @details A class containing a null-terminated character sequence.
              Supports small strings optimization, almost completely supports

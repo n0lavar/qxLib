@@ -140,11 +140,9 @@ public:
         #details ARB_shading_language_include is required for this function
                  calling of this function must be before shader's compilation
                  usage example:
-         
                  #version 440 core
                  #extension GL_ARB_shading_language_include : require
                  #include "/header.h"
-        
         @param pszName      - name that you will #include in shader (should be with leading '/') 
         @param nNameLength  - name length 
         @param pszText      - text that will be placed in shader instead of #include 

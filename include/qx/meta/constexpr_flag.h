@@ -14,7 +14,7 @@ namespace qx
 
 /**
 
-    @class   qx::constexpr_flag<Tag, T, Start, End>
+    @class   qx::constexpr_flag
     @brief   Constexpr flag class
     @details Returns "Start" at the beginning(test), "Start" with test_and_set and "End" after
     @tparam  Tag   - tag for unique instances 
@@ -37,7 +37,9 @@ private:
     template<T>
     struct Writer
     {
-        friend constexpr void adl_flag(Dummy) noexcept {}
+        friend constexpr void adl_flag(Dummy) noexcept
+        {
+        }
     };
 
     template<class Dummy, int = (adl_flag(Dummy {}), 0)>

@@ -164,7 +164,7 @@ private:
 
 /**
 
-    @class   qx::subject<TObserver>
+    @class   qx::subject
     @brief   Class maintains a list of its dependents, called observers,
              and notifies them automatically of any state changes
     @details ~

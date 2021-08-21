@@ -20,7 +20,7 @@ namespace qx
 
 /**
 
-    @class   qx::components<TBaseComponent>
+    @class   qx::components
     @brief   Container for components system
     @details Stores components and allows them to be accessed by template argument
              Iterators allows to access components in the order in which they are added
@@ -39,7 +39,7 @@ public:
 
     /**
 
-        @class   qx::components<TBaseComponent>::iterator<TSuperClass>
+        @class   qx::components::iterator
         @brief   Iterator to hide dereference implementation detail 
         @tparam  TSuperClass - super class type
         @author  Khrapov
@@ -60,7 +60,7 @@ public:
 
     /**
 
-        @class   qx::components<TBaseComponent>::const_iterator<TSuperClass>
+        @class   qx::components::const_iterator
         @brief   Const iterator to hide dereference implementation detail
         @tparam  TSuperClass - super class type
         @author  Khrapov

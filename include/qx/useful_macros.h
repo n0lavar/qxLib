@@ -100,14 +100,14 @@ constexpr const char* last_slash(const char* str)
 /**
     @macro QX_SHORT_FILE
     @brief Cuts full absolute path to the file name only
-           ex: C:\folder1\foler2\file.cpp  =>  file.cpp
+           ex: "C:\folder1\foler2\file.h"  =>  "file.h"
 **/
 #define QX_SHORT_FILE qx::detail::last_slash(__FILE__)
 
 /**
     @macro QX_SINGLE_ARGUMENT
     @brief Let macro param containing commas work fine
-           #define FOO(type, name) type name
+           "#define FOO(type, name) type name"
            FOO(QX_SINGLE_ARGUMENT(std::map<int, int>), map_var);
     @param __VA_ARGS__ - param containing commas
 **/

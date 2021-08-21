@@ -2,7 +2,7 @@
 
     @file      easing_functions.h
     @brief     File contains easing functions
-    #details   See https://doc.magnum.graphics/magnum/namespaceMagnum_1_1Animation_1_1Easing.html
+    @details   See https://doc.magnum.graphics/magnum/namespaceMagnum_1_1Animation_1_1Easing.html
                for details
                For all y = f(x):
                0.0 <= x <= 1.0

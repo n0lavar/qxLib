@@ -28,13 +28,13 @@ struct state_default_traits
 
 /**
 
-    @class   qx::basic_state<Traits>
+    @class   qx::basic_state
     @brief   State abstraction class
     @details State is an entity that can be set to its default value
     @tparam  Traits - state traits type \see qx::state_default_traits
     @author  Khrapov
     @date    27.04.2021
-
+    
 **/
 template<class Traits>
 class basic_state

@@ -29,7 +29,7 @@ enum class shader_type
 
 /**
 
-    @class   qx::shader_base<ShaderType>
+    @class   qx::shader_base
     @brief   OpenGL base shader
     @details ~
     @tparam  ShaderType - 

@@ -22,7 +22,7 @@ namespace qx
 {
 
 /**
-    @struct qx::common_char_traits<T>
+    @struct qx::common_char_traits
     @tparam T - char type
     @date   25.01.2021
 **/
@@ -50,7 +50,7 @@ template<typename value_type>
 struct char_traits;
 
 /**
-    @struct qx::char_traits<char>
+    @struct qx::char_traits
     @date   30.10.2020
 **/
 template<>
@@ -116,7 +116,7 @@ struct char_traits<char> : public common_char_traits<char>
 };
 
 /**
-    @struct qx::char_traits<wchar_t>
+    @struct qx::char_traits
     @date   24.03.2020
 **/
 template<>
