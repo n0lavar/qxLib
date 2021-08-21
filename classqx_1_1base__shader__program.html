@@ -140,7 +140,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
 <tr class="memitem:a92cd0d2a7f0bc7e399c65183e21eb6ea"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1base__shader__program.html#a92cd0d2a7f0bc7e399c65183e21eb6ea">AddInclude</a> (const char *pszName, GLint nNameLength, const char *pszText, GLint nTextLength)</td></tr>
-<tr class="memdesc:a92cd0d2a7f0bc7e399c65183e21eb6ea"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add include string #details ARB_shading_language_include is required for this function calling of this function must be before shader's compilation usage example:  <a href="classqx_1_1base__shader__program.html#a92cd0d2a7f0bc7e399c65183e21eb6ea">More...</a><br /></td></tr>
+<tr class="memdesc:a92cd0d2a7f0bc7e399c65183e21eb6ea"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add include string #details ARB_shading_language_include is required for this function calling of this function must be before shader's compilation usage example: #version 440 core #extension GL_ARB_shading_language_include : require #include "/header.h".  <a href="classqx_1_1base__shader__program.html#a92cd0d2a7f0bc7e399c65183e21eb6ea">More...</a><br /></td></tr>
 <tr class="separator:a92cd0d2a7f0bc7e399c65183e21eb6ea"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac1911aedf58864a1b99e9e9d82736db2"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1base__shader__program.html#ac1911aedf58864a1b99e9e9d82736db2">DispatchCompute</a> (GLuint nGroupsX, GLuint nGroupsY, GLuint nGroupsZ)</td></tr>
 <tr class="memdesc:ac1911aedf58864a1b99e9e9d82736db2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Dispatch program compute.  <a href="classqx_1_1base__shader__program.html#ac1911aedf58864a1b99e9e9d82736db2">More...</a><br /></td></tr>
@@ -200,8 +200,7 @@ Static Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Add include string #details ARB_shading_language_include is required for this function calling of this function must be before shader's compilation usage example: </p>
-<p>#version 440 core #extension GL_ARB_shading_language_include : require #include "/header.h"</p>
+<p>Add include string #details ARB_shading_language_include is required for this function calling of this function must be before shader's compilation usage example: #version 440 core #extension GL_ARB_shading_language_include : require #include "/header.h". </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">pszName</td><td>- name that you will #include in shader (should be with leading '/') </td></tr>

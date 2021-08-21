@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['reverse_5fiterator_607',['reverse_iterator',['../classqx_1_1reverse__iterator.html',1,'qx']]],
-  ['reverse_5fiterator_3c_20c_20_3e_608',['reverse_iterator&lt; C &gt;',['../classqx_1_1reverse__iterator_3_01_c_01_4.html',1,'']]]
+  ['reverse_5fiterator_571',['reverse_iterator',['../classqx_1_1reverse__iterator.html',1,'qx']]]
 ];

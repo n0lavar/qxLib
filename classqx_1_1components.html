@@ -74,12 +74,19 @@ $(function() {
 <div class="title">qx::components&lt; TBaseComponent &gt; Class Template Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>Container for components system.  
+ <a href="classqx_1_1components.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="components_8h_source.html">components.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1components_1_1const__iterator.html">const_iterator</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Const iterator to hide dereference implementation detail.  <a href="classqx_1_1components_1_1const__iterator.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1components_1_1iterator.html">iterator</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Iterator to hide dereference implementation detail.  <a href="classqx_1_1components_1_1iterator.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-types"></a>
@@ -96,25 +103,25 @@ using&#160;</td><td class="memItemRight" valign="bottom"><b>order_container</b> 
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a8bd543da286cda37edbcfb8ee44705d8"><td class="memTemplParams" colspan="2">template&lt;class TComponent , class... Args&gt; </td></tr>
-<tr class="memitem:a8bd543da286cda37edbcfb8ee44705d8"><td class="memTemplItemLeft" align="right" valign="top">TComponent *&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classqx_1_1components.html#a8bd543da286cda37edbcfb8ee44705d8">add</a> (Args &amp;&amp;... args)</td></tr>
-<tr class="memdesc:a8bd543da286cda37edbcfb8ee44705d8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add component by constructing in place.  <a href="classqx_1_1components.html#a8bd543da286cda37edbcfb8ee44705d8">More...</a><br /></td></tr>
-<tr class="separator:a8bd543da286cda37edbcfb8ee44705d8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a018aa33b210316bf8824258fd4829ab8"><td class="memTemplParams" colspan="2">template&lt;class TComponent &gt; </td></tr>
-<tr class="memitem:a018aa33b210316bf8824258fd4829ab8"><td class="memTemplItemLeft" align="right" valign="top">TComponent *&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classqx_1_1components.html#a018aa33b210316bf8824258fd4829ab8">add</a> (std::unique_ptr&lt; TComponent &gt; pComponent)</td></tr>
-<tr class="memdesc:a018aa33b210316bf8824258fd4829ab8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add component.  <a href="classqx_1_1components.html#a018aa33b210316bf8824258fd4829ab8">More...</a><br /></td></tr>
-<tr class="separator:a018aa33b210316bf8824258fd4829ab8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aeaeb5de8202a061928f821d8f01e8424"><td class="memTemplParams" colspan="2">template&lt;class TKeyComponent &gt; </td></tr>
-<tr class="memitem:aeaeb5de8202a061928f821d8f01e8424"><td class="memTemplItemLeft" align="right" valign="top">TKeyComponent *&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classqx_1_1components.html#aeaeb5de8202a061928f821d8f01e8424">get</a> (void) const</td></tr>
-<tr class="memdesc:aeaeb5de8202a061928f821d8f01e8424"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get first component with TKeyComponent key.  <a href="classqx_1_1components.html#aeaeb5de8202a061928f821d8f01e8424">More...</a><br /></td></tr>
-<tr class="separator:aeaeb5de8202a061928f821d8f01e8424"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a895e5455fabd5abfcb7201eaa068c097"><td class="memItemLeft" align="right" valign="top">TBaseComponent *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1components.html#a895e5455fabd5abfcb7201eaa068c097">get_by_id</a> (class_identificator id) const</td></tr>
-<tr class="memdesc:a895e5455fabd5abfcb7201eaa068c097"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get first component with "class_identificator" key.  <a href="classqx_1_1components.html#a895e5455fabd5abfcb7201eaa068c097">More...</a><br /></td></tr>
-<tr class="separator:a895e5455fabd5abfcb7201eaa068c097"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a176166bd36f539e80616a03e7efcc075"><td class="memTemplParams" colspan="2">template&lt;class TKeyComponent &gt; </td></tr>
-<tr class="memitem:a176166bd36f539e80616a03e7efcc075"><td class="memTemplItemLeft" align="right" valign="top">TKeyComponent *&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classqx_1_1components.html#a176166bd36f539e80616a03e7efcc075">add_to</a> (pointer pComponent)</td></tr>
-<tr class="memdesc:a176166bd36f539e80616a03e7efcc075"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add component with TKeyComponent id.  <a href="classqx_1_1components.html#a176166bd36f539e80616a03e7efcc075">More...</a><br /></td></tr>
-<tr class="separator:a176166bd36f539e80616a03e7efcc075"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae17469b30a968bd2d9cc50dc59fe4fb1"><td class="memTemplParams" colspan="2">template&lt;class TComponent , class... Args&gt; </td></tr>
+<tr class="memitem:ae17469b30a968bd2d9cc50dc59fe4fb1"><td class="memTemplItemLeft" align="right" valign="top">TComponent *&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classqx_1_1components.html#ae17469b30a968bd2d9cc50dc59fe4fb1">add</a> (Args &amp;&amp;... args)</td></tr>
+<tr class="memdesc:ae17469b30a968bd2d9cc50dc59fe4fb1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add component by constructing in place.  <a href="classqx_1_1components.html#ae17469b30a968bd2d9cc50dc59fe4fb1">More...</a><br /></td></tr>
+<tr class="separator:ae17469b30a968bd2d9cc50dc59fe4fb1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac4f33cdd7982e0ddff2d7572965d3966"><td class="memTemplParams" colspan="2">template&lt;class TComponent &gt; </td></tr>
+<tr class="memitem:ac4f33cdd7982e0ddff2d7572965d3966"><td class="memTemplItemLeft" align="right" valign="top">TComponent *&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classqx_1_1components.html#ac4f33cdd7982e0ddff2d7572965d3966">add</a> (std::unique_ptr&lt; TComponent &gt; pComponent)</td></tr>
+<tr class="memdesc:ac4f33cdd7982e0ddff2d7572965d3966"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add component.  <a href="classqx_1_1components.html#ac4f33cdd7982e0ddff2d7572965d3966">More...</a><br /></td></tr>
+<tr class="separator:ac4f33cdd7982e0ddff2d7572965d3966"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abb06029fc7cfba4283410b0b1b6341d7"><td class="memTemplParams" colspan="2">template&lt;class TKeyComponent &gt; </td></tr>
+<tr class="memitem:abb06029fc7cfba4283410b0b1b6341d7"><td class="memTemplItemLeft" align="right" valign="top">TKeyComponent *&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classqx_1_1components.html#abb06029fc7cfba4283410b0b1b6341d7">get</a> (void) const</td></tr>
+<tr class="memdesc:abb06029fc7cfba4283410b0b1b6341d7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get first component with TKeyComponent key.  <a href="classqx_1_1components.html#abb06029fc7cfba4283410b0b1b6341d7">More...</a><br /></td></tr>
+<tr class="separator:abb06029fc7cfba4283410b0b1b6341d7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac880b2fcc81d7430e47c7898718b9ebc"><td class="memItemLeft" align="right" valign="top">TBaseComponent *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1components.html#ac880b2fcc81d7430e47c7898718b9ebc">get_by_id</a> (class_identificator id) const</td></tr>
+<tr class="memdesc:ac880b2fcc81d7430e47c7898718b9ebc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get first component with "class_identificator" key.  <a href="classqx_1_1components.html#ac880b2fcc81d7430e47c7898718b9ebc">More...</a><br /></td></tr>
+<tr class="separator:ac880b2fcc81d7430e47c7898718b9ebc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a238096007f620ba20efa2a51e4c4f338"><td class="memTemplParams" colspan="2">template&lt;class TKeyComponent &gt; </td></tr>
+<tr class="memitem:a238096007f620ba20efa2a51e4c4f338"><td class="memTemplItemLeft" align="right" valign="top">TKeyComponent *&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classqx_1_1components.html#a238096007f620ba20efa2a51e4c4f338">add_to</a> (pointer pComponent)</td></tr>
+<tr class="memdesc:a238096007f620ba20efa2a51e4c4f338"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add component with TKeyComponent id.  <a href="classqx_1_1components.html#a238096007f620ba20efa2a51e4c4f338">More...</a><br /></td></tr>
+<tr class="separator:a238096007f620ba20efa2a51e4c4f338"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a35fa0e7197d7d28938306781af5b013e"><td class="memTemplParams" colspan="2">template&lt;class TKeyComponent &gt; </td></tr>
 <tr class="memitem:a35fa0e7197d7d28938306781af5b013e"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classqx_1_1components.html#a35fa0e7197d7d28938306781af5b013e">get_all</a> (void) const</td></tr>
 <tr class="memdesc:a35fa0e7197d7d28938306781af5b013e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get all components with TKeyComponent key.  <a href="classqx_1_1components.html#a35fa0e7197d7d28938306781af5b013e">More...</a><br /></td></tr>
@@ -122,10 +129,10 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:aa34a8ab44451774cde85389f173eb857"><td class="memItemLeft" align="right" valign="top">auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1components.html#aa34a8ab44451774cde85389f173eb857">get_all_by_id</a> (class_identificator id) const</td></tr>
 <tr class="memdesc:aa34a8ab44451774cde85389f173eb857"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get all components with "class_identificator" key.  <a href="classqx_1_1components.html#aa34a8ab44451774cde85389f173eb857">More...</a><br /></td></tr>
 <tr class="separator:aa34a8ab44451774cde85389f173eb857"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac8865e08a665fc238e5efb78e62ee23c"><td class="memTemplParams" colspan="2">template&lt;class TKeyComponent &gt; </td></tr>
-<tr class="memitem:ac8865e08a665fc238e5efb78e62ee23c"><td class="memTemplItemLeft" align="right" valign="top">pointer&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classqx_1_1components.html#ac8865e08a665fc238e5efb78e62ee23c">extract</a> (void)</td></tr>
-<tr class="memdesc:ac8865e08a665fc238e5efb78e62ee23c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Extract component from container.  <a href="classqx_1_1components.html#ac8865e08a665fc238e5efb78e62ee23c">More...</a><br /></td></tr>
-<tr class="separator:ac8865e08a665fc238e5efb78e62ee23c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af61cec445e6bd158b39c44ccacd90d3c"><td class="memTemplParams" colspan="2">template&lt;class TKeyComponent &gt; </td></tr>
+<tr class="memitem:af61cec445e6bd158b39c44ccacd90d3c"><td class="memTemplItemLeft" align="right" valign="top">pointer&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classqx_1_1components.html#af61cec445e6bd158b39c44ccacd90d3c">extract</a> (void)</td></tr>
+<tr class="memdesc:af61cec445e6bd158b39c44ccacd90d3c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Extract component from container.  <a href="classqx_1_1components.html#af61cec445e6bd158b39c44ccacd90d3c">More...</a><br /></td></tr>
+<tr class="separator:af61cec445e6bd158b39c44ccacd90d3c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a58bea73266fb5728a19d1cf7e3567238"><td class="memTemplParams" colspan="2">template&lt;class TKeyComponent &gt; </td></tr>
 <tr class="memitem:a58bea73266fb5728a19d1cf7e3567238"><td class="memTemplItemLeft" align="right" valign="top">bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classqx_1_1components.html#a58bea73266fb5728a19d1cf7e3567238">remove</a> (void)</td></tr>
 <tr class="memdesc:a58bea73266fb5728a19d1cf7e3567238"><td class="mdescLeft">&#160;</td><td class="mdescRight">Remove component from container.  <a href="classqx_1_1components.html#a58bea73266fb5728a19d1cf7e3567238">More...</a><br /></td></tr>
@@ -183,11 +190,20 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 <div class="textblock"><h3>template&lt;class TBaseComponent&gt;<br />
 class qx::components&lt; TBaseComponent &gt;</h3>
 
+<p>Container for components system. </p>
+<p>Stores components and allows them to be accessed by template argument Iterators allows to access components in the order in which they are added </p><dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">TBaseComponent</td><td>- base component type </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section author"><dt>Author</dt><dd>Khrapov </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>9.03.2021 </dd></dl>
 
 <p class="definition">Definition at line <a class="el" href="components_8h_source.html#l00033">33</a> of file <a class="el" href="components_8h_source.html">components.h</a>.</p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
-<a id="a8bd543da286cda37edbcfb8ee44705d8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8bd543da286cda37edbcfb8ee44705d8">&#9670;&nbsp;</a></span>add() <span class="overload">[1/2]</span></h2>
+<a id="ae17469b30a968bd2d9cc50dc59fe4fb1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae17469b30a968bd2d9cc50dc59fe4fb1">&#9670;&nbsp;</a></span>add() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -195,15 +211,23 @@ class qx::components&lt; TBaseComponent &gt;</h3>
 template&lt;class TBaseComponent &gt; </div>
 <div class="memtemplate">
 template&lt;class TComponent , class... Args&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">TComponent* <a class="el" href="classqx_1_1components.html">qx::components</a>&lt; TBaseComponent &gt;::add </td>
+          <td class="memname">TComponent * <a class="el" href="classqx_1_1components.html">qx::components</a>&lt; TBaseComponent &gt;::add </td>
           <td>(</td>
           <td class="paramtype">Args &amp;&amp;...&#160;</td>
           <td class="paramname"><em>args</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
 <p>Add component by constructing in place. </p>
@@ -227,10 +251,12 @@ template&lt;class TComponent , class... Args&gt; </div>
   </dd>
 </dl>
 
+<p class="definition">Definition at line <a class="el" href="components_8inl_source.html#l00063">63</a> of file <a class="el" href="components_8inl_source.html">components.inl</a>.</p>
+
 </div>
 </div>
-<a id="a018aa33b210316bf8824258fd4829ab8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a018aa33b210316bf8824258fd4829ab8">&#9670;&nbsp;</a></span>add() <span class="overload">[2/2]</span></h2>
+<a id="ac4f33cdd7982e0ddff2d7572965d3966"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac4f33cdd7982e0ddff2d7572965d3966">&#9670;&nbsp;</a></span>add() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -238,15 +264,23 @@ template&lt;class TComponent , class... Args&gt; </div>
 template&lt;class TBaseComponent &gt; </div>
 <div class="memtemplate">
 template&lt;class TComponent &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">TComponent* <a class="el" href="classqx_1_1components.html">qx::components</a>&lt; TBaseComponent &gt;::add </td>
+          <td class="memname">TComponent * <a class="el" href="classqx_1_1components.html">qx::components</a>&lt; TBaseComponent &gt;::add </td>
           <td>(</td>
           <td class="paramtype">std::unique_ptr&lt; TComponent &gt;&#160;</td>
           <td class="paramname"><em>pComponent</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
 <p>Add component. </p>
@@ -269,10 +303,12 @@ template&lt;class TComponent &gt; </div>
   </dd>
 </dl>
 
+<p class="definition">Definition at line <a class="el" href="components_8inl_source.html#l00071">71</a> of file <a class="el" href="components_8inl_source.html">components.inl</a>.</p>
+
 </div>
 </div>
-<a id="a176166bd36f539e80616a03e7efcc075"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a176166bd36f539e80616a03e7efcc075">&#9670;&nbsp;</a></span>add_to()</h2>
+<a id="a238096007f620ba20efa2a51e4c4f338"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a238096007f620ba20efa2a51e4c4f338">&#9670;&nbsp;</a></span>add_to()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -280,15 +316,23 @@ template&lt;class TComponent &gt; </div>
 template&lt;class TBaseComponent &gt; </div>
 <div class="memtemplate">
 template&lt;class TKeyComponent &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">TKeyComponent* <a class="el" href="classqx_1_1components.html">qx::components</a>&lt; TBaseComponent &gt;::add_to </td>
+          <td class="memname">TKeyComponent * <a class="el" href="classqx_1_1components.html">qx::components</a>&lt; TBaseComponent &gt;::add_to </td>
           <td>(</td>
           <td class="paramtype">pointer&#160;</td>
           <td class="paramname"><em>pComponent</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
 <p>Add component with TKeyComponent id. </p>
@@ -310,6 +354,8 @@ template&lt;class TKeyComponent &gt; </div>
   </table>
   </dd>
 </dl>
+
+<p class="definition">Definition at line <a class="el" href="components_8inl_source.html#l00095">95</a> of file <a class="el" href="components_8inl_source.html">components.inl</a>.</p>
 
 </div>
 </div>
@@ -347,6 +393,8 @@ template&lt;class TBaseComponent &gt; </div>
   </dd>
 </dl>
 
+<p class="definition">Definition at line <a class="el" href="components_8inl_source.html#l00188">188</a> of file <a class="el" href="components_8inl_source.html">components.inl</a>.</p>
+
 </div>
 </div>
 <a id="a982d333ccc72072cfbe6847e963f73c0"></a>
@@ -382,6 +430,8 @@ template&lt;class TBaseComponent &gt; </div>
   </table>
   </dd>
 </dl>
+
+<p class="definition">Definition at line <a class="el" href="components_8inl_source.html#l00174">174</a> of file <a class="el" href="components_8inl_source.html">components.inl</a>.</p>
 
 </div>
 </div>
@@ -419,6 +469,8 @@ template&lt;class TBaseComponent &gt; </div>
   </dd>
 </dl>
 
+<p class="definition">Definition at line <a class="el" href="components_8inl_source.html#l00202">202</a> of file <a class="el" href="components_8inl_source.html">components.inl</a>.</p>
+
 </div>
 </div>
 <a id="a6b83e12d1d9721817b67fa26b9460fe3"></a>
@@ -455,6 +507,8 @@ template&lt;class TBaseComponent &gt; </div>
   </dd>
 </dl>
 
+<p class="definition">Definition at line <a class="el" href="components_8inl_source.html#l00209">209</a> of file <a class="el" href="components_8inl_source.html">components.inl</a>.</p>
+
 </div>
 </div>
 <a id="a909fa711100461d2a96458861297949f"></a>
@@ -466,6 +520,9 @@ template&lt;class TBaseComponent &gt; </div>
 template&lt;class TBaseComponent &gt; </div>
 <div class="memtemplate">
 template&lt;class TKeyComponent &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">bool <a class="el" href="classqx_1_1components.html">qx::components</a>&lt; TBaseComponent &gt;::contains </td>
@@ -475,6 +532,11 @@ template&lt;class TKeyComponent &gt; </div>
           <td> const</td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
 <p>Is container contains value with TKeyComponent key. </p>
@@ -490,6 +552,8 @@ template&lt;class TKeyComponent &gt; </div>
   </table>
   </dd>
 </dl>
+
+<p class="definition">Definition at line <a class="el" href="components_8inl_source.html#l00168">168</a> of file <a class="el" href="components_8inl_source.html">components.inl</a>.</p>
 
 </div>
 </div>
@@ -527,6 +591,8 @@ template&lt;class TBaseComponent &gt; </div>
   </dd>
 </dl>
 
+<p class="definition">Definition at line <a class="el" href="components_8inl_source.html#l00230">230</a> of file <a class="el" href="components_8inl_source.html">components.inl</a>.</p>
+
 </div>
 </div>
 <a id="a2915a541abbe398565aa1713b4505993"></a>
@@ -562,6 +628,8 @@ template&lt;class TBaseComponent &gt; </div>
   </table>
   </dd>
 </dl>
+
+<p class="definition">Definition at line <a class="el" href="components_8inl_source.html#l00237">237</a> of file <a class="el" href="components_8inl_source.html">components.inl</a>.</p>
 
 </div>
 </div>
@@ -599,6 +667,8 @@ template&lt;class TBaseComponent &gt; </div>
   </dd>
 </dl>
 
+<p class="definition">Definition at line <a class="el" href="components_8inl_source.html#l00250">250</a> of file <a class="el" href="components_8inl_source.html">components.inl</a>.</p>
+
 </div>
 </div>
 <a id="a42cdd31b4456ff54a796446a3f340734"></a>
@@ -634,6 +704,8 @@ template&lt;class TBaseComponent &gt; </div>
   </table>
   </dd>
 </dl>
+
+<p class="definition">Definition at line <a class="el" href="components_8inl_source.html#l00195">195</a> of file <a class="el" href="components_8inl_source.html">components.inl</a>.</p>
 
 </div>
 </div>
@@ -671,10 +743,12 @@ template&lt;class TBaseComponent &gt; </div>
   </dd>
 </dl>
 
+<p class="definition">Definition at line <a class="el" href="components_8inl_source.html#l00181">181</a> of file <a class="el" href="components_8inl_source.html">components.inl</a>.</p>
+
 </div>
 </div>
-<a id="ac8865e08a665fc238e5efb78e62ee23c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac8865e08a665fc238e5efb78e62ee23c">&#9670;&nbsp;</a></span>extract()</h2>
+<a id="af61cec445e6bd158b39c44ccacd90d3c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af61cec445e6bd158b39c44ccacd90d3c">&#9670;&nbsp;</a></span>extract()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -682,15 +756,23 @@ template&lt;class TBaseComponent &gt; </div>
 template&lt;class TBaseComponent &gt; </div>
 <div class="memtemplate">
 template&lt;class TKeyComponent &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">pointer <a class="el" href="classqx_1_1components.html">qx::components</a>&lt; TBaseComponent &gt;::extract </td>
+          <td class="memname"><a class="el" href="classqx_1_1components.html">components</a>&lt; TBaseComponent &gt;::pointer <a class="el" href="classqx_1_1components.html">qx::components</a>&lt; TBaseComponent &gt;::extract </td>
           <td>(</td>
           <td class="paramtype">void&#160;</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
 <p>Extract component from container. </p>
@@ -707,10 +789,12 @@ template&lt;class TKeyComponent &gt; </div>
   </dd>
 </dl>
 
+<p class="definition">Definition at line <a class="el" href="components_8inl_source.html#l00125">125</a> of file <a class="el" href="components_8inl_source.html">components.inl</a>.</p>
+
 </div>
 </div>
-<a id="aeaeb5de8202a061928f821d8f01e8424"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aeaeb5de8202a061928f821d8f01e8424">&#9670;&nbsp;</a></span>get()</h2>
+<a id="abb06029fc7cfba4283410b0b1b6341d7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abb06029fc7cfba4283410b0b1b6341d7">&#9670;&nbsp;</a></span>get()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -718,15 +802,23 @@ template&lt;class TKeyComponent &gt; </div>
 template&lt;class TBaseComponent &gt; </div>
 <div class="memtemplate">
 template&lt;class TKeyComponent &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">TKeyComponent* <a class="el" href="classqx_1_1components.html">qx::components</a>&lt; TBaseComponent &gt;::get </td>
+          <td class="memname">TKeyComponent * <a class="el" href="classqx_1_1components.html">qx::components</a>&lt; TBaseComponent &gt;::get </td>
           <td>(</td>
           <td class="paramtype">void&#160;</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
 <p>Get first component with TKeyComponent key. </p>
@@ -744,6 +836,8 @@ template&lt;class TKeyComponent &gt; </div>
   </dd>
 </dl>
 
+<p class="definition">Definition at line <a class="el" href="components_8inl_source.html#l00079">79</a> of file <a class="el" href="components_8inl_source.html">components.inl</a>.</p>
+
 </div>
 </div>
 <a id="a35fa0e7197d7d28938306781af5b013e"></a>
@@ -755,6 +849,9 @@ template&lt;class TKeyComponent &gt; </div>
 template&lt;class TBaseComponent &gt; </div>
 <div class="memtemplate">
 template&lt;class TKeyComponent &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">auto <a class="el" href="classqx_1_1components.html">qx::components</a>&lt; TBaseComponent &gt;::get_all </td>
@@ -764,6 +861,11 @@ template&lt;class TKeyComponent &gt; </div>
           <td> const</td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
 <p>Get all components with TKeyComponent key. </p>
@@ -780,6 +882,8 @@ template&lt;class TKeyComponent &gt; </div>
   </dd>
 </dl>
 
+<p class="definition">Definition at line <a class="el" href="components_8inl_source.html#l00110">110</a> of file <a class="el" href="components_8inl_source.html">components.inl</a>.</p>
+
 </div>
 </div>
 <a id="aa34a8ab44451774cde85389f173eb857"></a>
@@ -789,6 +893,9 @@ template&lt;class TKeyComponent &gt; </div>
 <div class="memproto">
 <div class="memtemplate">
 template&lt;class TBaseComponent &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">auto <a class="el" href="classqx_1_1components.html">qx::components</a>&lt; TBaseComponent &gt;::get_all_by_id </td>
@@ -798,6 +905,11 @@ template&lt;class TBaseComponent &gt; </div>
           <td> const</td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
 <p>Get all components with "class_identificator" key. </p>
@@ -814,24 +926,34 @@ template&lt;class TBaseComponent &gt; </div>
   </dd>
 </dl>
 
+<p class="definition">Definition at line <a class="el" href="components_8inl_source.html#l00116">116</a> of file <a class="el" href="components_8inl_source.html">components.inl</a>.</p>
+
 </div>
 </div>
-<a id="a895e5455fabd5abfcb7201eaa068c097"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a895e5455fabd5abfcb7201eaa068c097">&#9670;&nbsp;</a></span>get_by_id()</h2>
+<a id="ac880b2fcc81d7430e47c7898718b9ebc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac880b2fcc81d7430e47c7898718b9ebc">&#9670;&nbsp;</a></span>get_by_id()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;class TBaseComponent &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">TBaseComponent* <a class="el" href="classqx_1_1components.html">qx::components</a>&lt; TBaseComponent &gt;::get_by_id </td>
+          <td class="memname">TBaseComponent * <a class="el" href="classqx_1_1components.html">qx::components</a>&lt; TBaseComponent &gt;::get_by_id </td>
           <td>(</td>
           <td class="paramtype">class_identificator&#160;</td>
           <td class="paramname"><em>id</em></td><td>)</td>
           <td> const</td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
 <p>Get first component with "class_identificator" key. </p>
@@ -848,6 +970,8 @@ template&lt;class TBaseComponent &gt; </div>
   </table>
   </dd>
 </dl>
+
+<p class="definition">Definition at line <a class="el" href="components_8inl_source.html#l00086">86</a> of file <a class="el" href="components_8inl_source.html">components.inl</a>.</p>
 
 </div>
 </div>
@@ -885,6 +1009,8 @@ template&lt;class TBaseComponent &gt; </div>
   </dd>
 </dl>
 
+<p class="definition">Definition at line <a class="el" href="components_8inl_source.html#l00216">216</a> of file <a class="el" href="components_8inl_source.html">components.inl</a>.</p>
+
 </div>
 </div>
 <a id="a58bea73266fb5728a19d1cf7e3567238"></a>
@@ -896,6 +1022,9 @@ template&lt;class TBaseComponent &gt; </div>
 template&lt;class TBaseComponent &gt; </div>
 <div class="memtemplate">
 template&lt;class TKeyComponent &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">bool <a class="el" href="classqx_1_1components.html">qx::components</a>&lt; TBaseComponent &gt;::remove </td>
@@ -905,6 +1034,11 @@ template&lt;class TKeyComponent &gt; </div>
           <td></td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
 <p>Remove component from container. </p>
@@ -921,6 +1055,8 @@ template&lt;class TKeyComponent &gt; </div>
   </dd>
 </dl>
 
+<p class="definition">Definition at line <a class="el" href="components_8inl_source.html#l00153">153</a> of file <a class="el" href="components_8inl_source.html">components.inl</a>.</p>
+
 </div>
 </div>
 <a id="ab963886034e1de4d3c280bcb5996b68c"></a>
@@ -932,6 +1068,9 @@ template&lt;class TKeyComponent &gt; </div>
 template&lt;class TBaseComponent &gt; </div>
 <div class="memtemplate">
 template&lt;class TKeyComponent &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">void <a class="el" href="classqx_1_1components.html">qx::components</a>&lt; TBaseComponent &gt;::remove_all </td>
@@ -941,6 +1080,11 @@ template&lt;class TKeyComponent &gt; </div>
           <td></td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
 <p>Remove all components with "type" key from container. </p>
@@ -950,6 +1094,8 @@ template&lt;class TKeyComponent &gt; </div>
   </table>
   </dd>
 </dl>
+
+<p class="definition">Definition at line <a class="el" href="components_8inl_source.html#l00160">160</a> of file <a class="el" href="components_8inl_source.html">components.inl</a>.</p>
 
 </div>
 </div>
@@ -987,6 +1133,8 @@ template&lt;class TBaseComponent &gt; </div>
   </dd>
 </dl>
 
+<p class="definition">Definition at line <a class="el" href="components_8inl_source.html#l00223">223</a> of file <a class="el" href="components_8inl_source.html">components.inl</a>.</p>
+
 </div>
 </div>
 <a id="ac63aa3dd77331953dcfc25ca7d420a3a"></a>
@@ -1023,10 +1171,13 @@ template&lt;class TBaseComponent &gt; </div>
   </dd>
 </dl>
 
+<p class="definition">Definition at line <a class="el" href="components_8inl_source.html#l00244">244</a> of file <a class="el" href="components_8inl_source.html">components.inl</a>.</p>
+
 </div>
 </div>
-<hr/>The documentation for this class was generated from the following file:<ul>
+<hr/>The documentation for this class was generated from the following files:<ul>
 <li>include/qx/containers/<a class="el" href="components_8h_source.html">components.h</a></li>
+<li>include/qx/containers/<a class="el" href="components_8inl_source.html">components.inl</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

@@ -74,7 +74,7 @@ $(function() {
 <div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;{</div>
 <div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160; </div>
 <div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="keyword">template</span>&lt;GLenum ShaderType&gt;</div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="keyword">inline</span> <a class="code" href="classqx_1_1shader__base.html#a40a8101702e6aae3adaa383d1f8bc0cb">shader_base&lt;ShaderType&gt;::shader_base</a>(</div>
+<div class="line"><a name="l00014"></a><span class="lineno"><a class="line" href="classqx_1_1shader__base.html#ab0e2046891b9d9f7ed262d98248c52c6">   14</a></span>&#160;<span class="keyword">inline</span> <a class="code" href="classqx_1_1shader__base.html#a40a8101702e6aae3adaa383d1f8bc0cb">shader_base&lt;ShaderType&gt;::shader_base</a>(</div>
 <div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;    <span class="keyword">const</span> GLchar* pszShaderCode,</div>
 <div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;    <span class="keywordtype">string</span>*       pError)</div>
 <div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;{</div>
@@ -82,13 +82,13 @@ $(function() {
 <div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;}</div>
 <div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160; </div>
 <div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="keyword">template</span>&lt;GLenum ShaderType&gt;</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="keyword">inline</span> <a class="code" href="classqx_1_1shader__base.html#a8dfcab9b44c545beb707a5970e369a50">shader_base&lt;ShaderType&gt;::~shader_base</a>()</div>
+<div class="line"><a name="l00022"></a><span class="lineno"><a class="line" href="classqx_1_1shader__base.html#a8dfcab9b44c545beb707a5970e369a50">   22</a></span>&#160;<span class="keyword">inline</span> <a class="code" href="classqx_1_1shader__base.html#a8dfcab9b44c545beb707a5970e369a50">shader_base&lt;ShaderType&gt;::~shader_base</a>()</div>
 <div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;{</div>
 <div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    glDeleteShader(m_nShader);</div>
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;}</div>
 <div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160; </div>
 <div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="keyword">template</span>&lt;GLenum ShaderType&gt;</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="classqx_1_1shader__base.html#ab229b3edf9609bea858ff50eb14e05f0">shader_base&lt;ShaderType&gt;::Init</a>(</div>
+<div class="line"><a name="l00028"></a><span class="lineno"><a class="line" href="classqx_1_1shader__base.html#ab229b3edf9609bea858ff50eb14e05f0">   28</a></span>&#160;<span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="classqx_1_1shader__base.html#ab229b3edf9609bea858ff50eb14e05f0">shader_base&lt;ShaderType&gt;::Init</a>(</div>
 <div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    <span class="keyword">const</span> GLchar* pszShaderCode,</div>
 <div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    <span class="keywordtype">string</span>*       pError)</div>
 <div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;{</div>
@@ -108,7 +108,7 @@ $(function() {
 <div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160; </div>
 <div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;            <span class="keywordflow">if</span> (nErrorStringLength &gt; 0)</div>
 <div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;            {</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;                pError-&gt;assign(nErrorStringLength, <span class="charliteral">&#39;\0&#39;</span>);</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;                pError-&gt;<a class="code" href="classqx_1_1basic__string.html#a91f0466740454279a165e144e8d5c41d">assign</a>(nErrorStringLength, <span class="charliteral">&#39;\0&#39;</span>);</div>
 <div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;                glGetShaderInfoLog(</div>
 <div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;                    m_nShader,</div>
 <div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;                    nErrorStringLength,</div>
@@ -125,13 +125,13 @@ $(function() {
 <div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160; </div>
 <div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160; </div>
 <div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;<span class="keyword">template</span>&lt;GLenum ShaderType&gt;</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;<span class="keyword">inline</span> GLuint <a class="code" href="classqx_1_1shader__base.html#a263142b66fdda3bcb86151fb47044a72">shader_base&lt;ShaderType&gt;::GetID</a>(<span class="keywordtype">void</span>)<span class="keyword"> const</span></div>
+<div class="line"><a name="l00065"></a><span class="lineno"><a class="line" href="classqx_1_1shader__base.html#a263142b66fdda3bcb86151fb47044a72">   65</a></span>&#160;<span class="keyword">inline</span> GLuint <a class="code" href="classqx_1_1shader__base.html#a263142b66fdda3bcb86151fb47044a72">shader_base&lt;ShaderType&gt;::GetID</a>(<span class="keywordtype">void</span>)<span class="keyword"> const</span></div>
 <div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;<span class="keyword"></span>{</div>
 <div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    <span class="keywordflow">return</span> m_nShader;</div>
 <div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;}</div>
 <div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160; </div>
 <div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;<span class="keyword">template</span>&lt;GLenum ShaderType&gt;</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;<span class="keyword">inline</span> GLint <a class="code" href="classqx_1_1shader__base.html#a2e87b997d73eed388b96f4ccc1a04fc2">shader_base&lt;ShaderType&gt;::GetParameter</a>(GLenum eParameter)<span class="keyword"> const</span></div>
+<div class="line"><a name="l00071"></a><span class="lineno"><a class="line" href="classqx_1_1shader__base.html#a2e87b997d73eed388b96f4ccc1a04fc2">   71</a></span>&#160;<span class="keyword">inline</span> GLint <a class="code" href="classqx_1_1shader__base.html#a2e87b997d73eed388b96f4ccc1a04fc2">shader_base&lt;ShaderType&gt;::GetParameter</a>(GLenum eParameter)<span class="keyword"> const</span></div>
 <div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;<span class="keyword"></span>{</div>
 <div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;    GLint nRet = -1;</div>
 <div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    glGetShaderiv(m_nShader, eParameter, &amp;nRet);</div>
@@ -139,11 +139,12 @@ $(function() {
 <div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;}</div>
 <div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160; </div>
 <div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;} <span class="comment">// namespace qx</span></div>
-<div class="ttc" id="aclassqx_1_1shader__base_html_a263142b66fdda3bcb86151fb47044a72"><div class="ttname"><a href="classqx_1_1shader__base.html#a263142b66fdda3bcb86151fb47044a72">qx::shader_base::GetID</a></div><div class="ttdeci">GLuint GetID(void) const</div><div class="ttdoc">Get shader name.</div></div>
-<div class="ttc" id="aclassqx_1_1shader__base_html_a2e87b997d73eed388b96f4ccc1a04fc2"><div class="ttname"><a href="classqx_1_1shader__base.html#a2e87b997d73eed388b96f4ccc1a04fc2">qx::shader_base::GetParameter</a></div><div class="ttdeci">GLint GetParameter(GLenum eParameter) const</div><div class="ttdoc">Get shader parameter.</div></div>
+<div class="ttc" id="aclassqx_1_1basic__string_html_a91f0466740454279a165e144e8d5c41d"><div class="ttname"><a href="classqx_1_1basic__string.html#a91f0466740454279a165e144e8d5c41d">qx::basic_string::assign</a></div><div class="ttdeci">void assign(value_type chSymbol) noexcept</div><div class="ttdoc">Assign by single char.</div><div class="ttdef"><b>Definition:</b> <a href="string_8inl_source.html#l00074">string.inl:74</a></div></div>
+<div class="ttc" id="aclassqx_1_1shader__base_html_a263142b66fdda3bcb86151fb47044a72"><div class="ttname"><a href="classqx_1_1shader__base.html#a263142b66fdda3bcb86151fb47044a72">qx::shader_base::GetID</a></div><div class="ttdeci">GLuint GetID(void) const</div><div class="ttdoc">Get shader name.</div><div class="ttdef"><b>Definition:</b> <a href="shaders_8inl_source.html#l00065">shaders.inl:65</a></div></div>
+<div class="ttc" id="aclassqx_1_1shader__base_html_a2e87b997d73eed388b96f4ccc1a04fc2"><div class="ttname"><a href="classqx_1_1shader__base.html#a2e87b997d73eed388b96f4ccc1a04fc2">qx::shader_base::GetParameter</a></div><div class="ttdeci">GLint GetParameter(GLenum eParameter) const</div><div class="ttdoc">Get shader parameter.</div><div class="ttdef"><b>Definition:</b> <a href="shaders_8inl_source.html#l00071">shaders.inl:71</a></div></div>
 <div class="ttc" id="aclassqx_1_1shader__base_html_a40a8101702e6aae3adaa383d1f8bc0cb"><div class="ttname"><a href="classqx_1_1shader__base.html#a40a8101702e6aae3adaa383d1f8bc0cb">qx::shader_base::shader_base</a></div><div class="ttdeci">shader_base(void)=default</div><div class="ttdoc">shader_base object constructor</div></div>
-<div class="ttc" id="aclassqx_1_1shader__base_html_a8dfcab9b44c545beb707a5970e369a50"><div class="ttname"><a href="classqx_1_1shader__base.html#a8dfcab9b44c545beb707a5970e369a50">qx::shader_base::~shader_base</a></div><div class="ttdeci">~shader_base(void)</div><div class="ttdoc">shader_base object destructor</div></div>
-<div class="ttc" id="aclassqx_1_1shader__base_html_ab229b3edf9609bea858ff50eb14e05f0"><div class="ttname"><a href="classqx_1_1shader__base.html#ab229b3edf9609bea858ff50eb14e05f0">qx::shader_base::Init</a></div><div class="ttdeci">void Init(const GLchar *pszShaderCode, string *pError=nullptr)</div><div class="ttdoc">Init (compile) shader.</div></div>
+<div class="ttc" id="aclassqx_1_1shader__base_html_a8dfcab9b44c545beb707a5970e369a50"><div class="ttname"><a href="classqx_1_1shader__base.html#a8dfcab9b44c545beb707a5970e369a50">qx::shader_base::~shader_base</a></div><div class="ttdeci">~shader_base(void)</div><div class="ttdoc">shader_base object destructor</div><div class="ttdef"><b>Definition:</b> <a href="shaders_8inl_source.html#l00022">shaders.inl:22</a></div></div>
+<div class="ttc" id="aclassqx_1_1shader__base_html_ab229b3edf9609bea858ff50eb14e05f0"><div class="ttname"><a href="classqx_1_1shader__base.html#ab229b3edf9609bea858ff50eb14e05f0">qx::shader_base::Init</a></div><div class="ttdeci">void Init(const GLchar *pszShaderCode, string *pError=nullptr)</div><div class="ttdoc">Init (compile) shader.</div><div class="ttdef"><b>Definition:</b> <a href="shaders_8inl_source.html#l00028">shaders.inl:28</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

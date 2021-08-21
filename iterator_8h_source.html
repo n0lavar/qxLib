@@ -210,7 +210,7 @@ $(function() {
 <div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;        , m_pCollection(c)</div>
 <div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;    {</div>
 <div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;    }</div>
-<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;    constexpr <a class="code" href="classqx_1_1const__iterator.html">const_iterator</a>(<span class="keyword">const</span> <a class="code" href="classqx_1_1iterator_3_01_c_01_4.html">iterator&lt;C&gt;</a>&amp; it) noexcept</div>
+<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;    constexpr <a class="code" href="classqx_1_1const__iterator.html">const_iterator</a>(<span class="keyword">const</span> <a class="code" href="classqx_1_1iterator.html">iterator&lt;C&gt;</a>&amp; it) noexcept</div>
 <div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;        : m_nIndex(it.m_nIndex)</div>
 <div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;        , m_pCollection(it.m_pCollection)</div>
 <div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;    {</div>
@@ -444,7 +444,7 @@ $(function() {
 <div class="line"><a name="l00425"></a><span class="lineno">  425</span>&#160;        , m_pCollection(c)</div>
 <div class="line"><a name="l00426"></a><span class="lineno">  426</span>&#160;    {</div>
 <div class="line"><a name="l00427"></a><span class="lineno">  427</span>&#160;    }</div>
-<div class="line"><a name="l00428"></a><span class="lineno">  428</span>&#160;    constexpr <a class="code" href="classqx_1_1const__reverse__iterator.html">const_reverse_iterator</a>(<span class="keyword">const</span> <a class="code" href="classqx_1_1reverse__iterator_3_01_c_01_4.html">reverse_iterator&lt;C&gt;</a>&amp; it) noexcept</div>
+<div class="line"><a name="l00428"></a><span class="lineno">  428</span>&#160;    constexpr <a class="code" href="classqx_1_1const__reverse__iterator.html">const_reverse_iterator</a>(<span class="keyword">const</span> <a class="code" href="classqx_1_1reverse__iterator.html">reverse_iterator&lt;C&gt;</a>&amp; it) noexcept</div>
 <div class="line"><a name="l00429"></a><span class="lineno">  429</span>&#160;        : m_nIndex(it.m_nIndex)</div>
 <div class="line"><a name="l00430"></a><span class="lineno">  430</span>&#160;        , m_pCollection(it.m_pCollection)</div>
 <div class="line"><a name="l00431"></a><span class="lineno">  431</span>&#160;    {</div>
@@ -545,12 +545,10 @@ $(function() {
 <div class="line"><a name="l00526"></a><span class="lineno">  526</span>&#160;};</div>
 <div class="line"><a name="l00527"></a><span class="lineno">  527</span>&#160; </div>
 <div class="line"><a name="l00528"></a><span class="lineno">  528</span>&#160;} <span class="comment">// namespace qx</span></div>
-<div class="ttc" id="aclassqx_1_1const__iterator_html"><div class="ttname"><a href="classqx_1_1const__iterator.html">qx::const_iterator</a></div><div class="ttdef"><b>Definition:</b> <a href="iterator_8h_source.html#l00155">iterator.h:156</a></div></div>
-<div class="ttc" id="aclassqx_1_1const__reverse__iterator_html"><div class="ttname"><a href="classqx_1_1const__reverse__iterator.html">qx::const_reverse_iterator</a></div><div class="ttdef"><b>Definition:</b> <a href="iterator_8h_source.html#l00411">iterator.h:412</a></div></div>
-<div class="ttc" id="aclassqx_1_1iterator_3_01_c_01_4_html"><div class="ttname"><a href="classqx_1_1iterator_3_01_c_01_4.html">iterator&lt; C &gt;</a></div><div class="ttdoc">Non-const random access iterator type.</div><div class="ttdef"><b>Definition:</b> <a href="iterator_8h_source.html#l00022">iterator.h:18</a></div></div>
-<div class="ttc" id="aclassqx_1_1iterator_html"><div class="ttname"><a href="classqx_1_1iterator.html">qx::iterator</a></div><div class="ttdef"><b>Definition:</b> <a href="iterator_8h_source.html#l00032">iterator.h:33</a></div></div>
-<div class="ttc" id="aclassqx_1_1reverse__iterator_3_01_c_01_4_html"><div class="ttname"><a href="classqx_1_1reverse__iterator_3_01_c_01_4.html">reverse_iterator&lt; C &gt;</a></div><div class="ttdoc">Non-const random access reverse iterator type.</div><div class="ttdef"><b>Definition:</b> <a href="iterator_8h_source.html#l00275">iterator.h:271</a></div></div>
-<div class="ttc" id="aclassqx_1_1reverse__iterator_html"><div class="ttname"><a href="classqx_1_1reverse__iterator.html">qx::reverse_iterator</a></div><div class="ttdef"><b>Definition:</b> <a href="iterator_8h_source.html#l00285">iterator.h:286</a></div></div>
+<div class="ttc" id="aclassqx_1_1const__iterator_html"><div class="ttname"><a href="classqx_1_1const__iterator.html">qx::const_iterator</a></div><div class="ttdoc">Const random access iterator type.</div><div class="ttdef"><b>Definition:</b> <a href="iterator_8h_source.html#l00155">iterator.h:156</a></div></div>
+<div class="ttc" id="aclassqx_1_1const__reverse__iterator_html"><div class="ttname"><a href="classqx_1_1const__reverse__iterator.html">qx::const_reverse_iterator</a></div><div class="ttdoc">Const reverse random access iterator type.</div><div class="ttdef"><b>Definition:</b> <a href="iterator_8h_source.html#l00411">iterator.h:412</a></div></div>
+<div class="ttc" id="aclassqx_1_1iterator_html"><div class="ttname"><a href="classqx_1_1iterator.html">qx::iterator</a></div><div class="ttdoc">Non-const random access iterator type.</div><div class="ttdef"><b>Definition:</b> <a href="iterator_8h_source.html#l00032">iterator.h:33</a></div></div>
+<div class="ttc" id="aclassqx_1_1reverse__iterator_html"><div class="ttname"><a href="classqx_1_1reverse__iterator.html">qx::reverse_iterator</a></div><div class="ttdoc">Non-const random access reverse iterator type.</div><div class="ttdef"><b>Definition:</b> <a href="iterator_8h_source.html#l00285">iterator.h:286</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
