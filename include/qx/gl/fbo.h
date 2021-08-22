@@ -17,7 +17,7 @@ namespace qx
 
 /**
 
-    @class   qx::base_fbo
+    @class   base_fbo
     @brief   Base FBO class
     @details ~
 

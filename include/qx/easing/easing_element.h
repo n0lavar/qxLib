@@ -17,7 +17,7 @@ namespace qx
 
 /**
 
-    @class   qx::base_easing_element
+    @class   base_easing_element
     @brief   An updatable element representing the value of the easing function
              at a given time
     @details ~

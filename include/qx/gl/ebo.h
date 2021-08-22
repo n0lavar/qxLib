@@ -16,7 +16,7 @@ namespace qx
 
 /**
 
-    @class   qx::base_ebo
+    @class   base_ebo
     @brief   Base EBO class
     @details ~
 

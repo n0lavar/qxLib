@@ -16,7 +16,7 @@ namespace qx
 
 /**
 
-    @class   qx::benchmark
+    @class   benchmark
     @brief   Benchmark class
     @details ~
 

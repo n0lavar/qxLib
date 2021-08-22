@@ -19,7 +19,7 @@
     @brief Trace common info from instance
     @param loggerInstance - logger instance 
     @param format         - format string
-    @param __VA_ARGS__    - additional args for formatting
+    @param ...            - additional args for formatting
 **/
 #define QX_TRACE_FROM(loggerInstance, format, ...) \
     loggerInstance.output(                         \
@@ -37,7 +37,7 @@
     @brief Trace error from instance
     @param loggerInstance - logger instance
     @param format         - format string
-    @param __VA_ARGS__    - additional args for formatting
+    @param ...            - additional args for formatting
 **/
 #define QX_TRACE_ERROR_FROM(loggerInstance, format, ...) \
     loggerInstance.output(                               \
@@ -56,7 +56,7 @@
     @param loggerInstance - logger instance
     @param expr           - assert expression
     @param format         - format string
-    @param __VA_ARGS__    - additional args for formatting
+    @param ...            - additional args for formatting
 **/
 #define QX_TRACE_ASSERT_FROM(loggerInstance, expr, format, ...) \
     loggerInstance.output(                                      \
@@ -75,8 +75,8 @@
 /**
     @def   QX_TRACE
     @brief Trace common info
-    @param format      - format string
-    @param __VA_ARGS__ - additional args for formatting
+    @param format - format string
+    @param ...    - additional args for formatting
 **/
 #define QX_TRACE(format, ...) \
     QX_TRACE_FROM(qx::logger_singleton::get_instance(), format, ##__VA_ARGS__)
@@ -84,8 +84,8 @@
 /**
     @def   QX_TRACE_ERROR
     @brief Trace error
-    @param format      - format string
-    @param __VA_ARGS__ - additional args for formatting
+    @param format - format string
+    @param ...    - additional args for formatting
 **/
 #define QX_TRACE_ERROR(format, ...)           \
     QX_TRACE_ERROR_FROM(                      \
@@ -96,9 +96,9 @@
 /**
     @def   QX_TRACE_ASSERT
     @brief Trace assertion
-    @param expr        - assert expression
-    @param format      - format string
-    @param __VA_ARGS__ - additional args for formatting
+    @param expr   - assert expression
+    @param format - format string
+    @param ...    - additional args for formatting
 **/
 #define QX_TRACE_ASSERT(expr, format, ...)    \
     QX_TRACE_ASSERT_FROM(                     \
@@ -112,7 +112,7 @@ namespace qx
 
 /**
 
-    @class   qx::logger
+    @class   logger
     @brief   Logger class
     @details ~
 
@@ -156,7 +156,7 @@ private:
 
 /**
 
-    @class   qx::logger_singleton
+    @class   logger_singleton
     @brief   Default logger instance
     @details ~
 

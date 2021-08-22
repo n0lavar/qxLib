@@ -18,7 +18,7 @@ namespace qx
 
 /**
 
-    @class   qx::thread_worker
+    @class   thread_worker
     @brief   Thread worker class
     @details Inherit worker from this class, override thread_run() method
              with useful work and start the thread with thread_start()

@@ -17,7 +17,7 @@ namespace qx
 
 /**
 
-    @class   qx::base_rbo
+    @class   base_rbo
     @brief   Base RBO class
     @details ~
 

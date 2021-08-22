@@ -16,7 +16,7 @@ namespace qx
 
 /**
 
-    @class   qx::IBuffer
+    @class   IBuffer
     @brief   OpenGL buffer interface
     @details ~
 

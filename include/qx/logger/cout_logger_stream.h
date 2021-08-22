@@ -18,7 +18,7 @@ namespace qx
 
 /**
 
-    @class   qx::cout_logger_stream
+    @class   cout_logger_stream
     @brief   Logger stream for std::cout output
     @details ~
 
@@ -29,7 +29,7 @@ namespace qx
 class cout_logger_stream : public base_logger_stream
 {
     /**
-        @struct qx::cout_logger_stream::auto_terminal_color
+        @struct cout_logger_stream::auto_terminal_color
         @date   19.08.2021
     **/
     struct auto_terminal_color

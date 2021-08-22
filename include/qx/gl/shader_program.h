@@ -19,7 +19,7 @@ namespace qx
 
 /**
 
-    @class   qx::base_shader_program
+    @class   base_shader_program
     @brief   Shader program class
     @details ~
 
@@ -137,7 +137,7 @@ public:
 
     /**
         @brief   Add include string
-        #details ARB_shading_language_include is required for this function
+        @details ARB_shading_language_include is required for this function
                  calling of this function must be before shader's compilation
                  usage example:
                  #version 440 core

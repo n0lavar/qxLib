@@ -52,7 +52,7 @@ inline std::vector<T> get_moving_average_exp_weights(size_t nEntries);
 
 /**
 
-    @class   qx::moving_average
+    @class   moving_average
     @brief   Moving average is the unweighted mean of the previous K entries
     @details \see https://tinyurl.com/d3nfcaca to compare weights filling funcs
              blue    - random numbers [-5, 5]

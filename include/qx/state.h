@@ -17,7 +17,7 @@ namespace qx
 {
 
 /**
-    @struct qx::state_default_traits
+    @struct state_default_traits
     @date   27.04.2021
 **/
 struct state_default_traits
@@ -28,7 +28,7 @@ struct state_default_traits
 
 /**
 
-    @class   qx::basic_state
+    @class   basic_state
     @brief   State abstraction class
     @details State is an entity that can be set to its default value
     @tparam  Traits - state traits type \see qx::state_default_traits

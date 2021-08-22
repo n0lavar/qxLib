@@ -16,7 +16,7 @@ namespace qx
 
 /**
 
-    @class   qx::buffer_binding_point_base
+    @class   buffer_binding_point_base
     @brief   Base class for buffers with binding points
     @details ~
 

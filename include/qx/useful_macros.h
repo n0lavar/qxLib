@@ -109,7 +109,7 @@ constexpr const char* last_slash(const char* str)
     @brief Let macro param containing commas work fine
            "#define FOO(type, name) type name"
            FOO(QX_SINGLE_ARGUMENT(std::map<int, int>), map_var);
-    @param __VA_ARGS__ - param containing commas
+    @param ... - param containing commas
 **/
 #define QX_SINGLE_ARGUMENT(...) (__VA_ARGS__)
 

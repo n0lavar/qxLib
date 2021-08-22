@@ -19,7 +19,7 @@ class const_iterator;
 
 /**
 
-    @class   qx::iterator
+    @class   iterator
     @brief   Non-const random access iterator type
     @details Use it for range-based loops and std algorithms
              C have to provide at(size_t)
@@ -142,7 +142,7 @@ private:
 
 /**
 
-    @class   qx::const_iterator
+    @class   const_iterator
     @brief   Const random access iterator type
     @details Use it for range-based loops and std algorithms
              C have to provide at(size_t)
@@ -272,7 +272,7 @@ class const_reverse_iterator;
 
 /**
 
-    @class   qx::reverse_iterator
+    @class   reverse_iterator
     @brief   Non-const random access reverse iterator type
     @details Use it for range-based loops and std algorithms
              C have to provide at(size_t)
@@ -398,7 +398,7 @@ private:
 
 /**
 
-    @class   qx::const_reverse_iterator
+    @class   const_reverse_iterator
     @brief   Const reverse random access iterator type
     @details Use it for range-based loops and std algorithms
              C have to provide at(size_t)

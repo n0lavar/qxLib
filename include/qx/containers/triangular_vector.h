@@ -19,7 +19,7 @@ namespace qx
 
 /**
 
-    @class   qx::triangular_vector
+    @class   triangular_vector
     @brief   Triangular vector class
     @details Only elements with nRow >= nCols are stored
              data storage example:

@@ -36,7 +36,7 @@ concept string_convertable = requires(T t)
 
 /**
 
-    @class   qx::basic_string_hash
+    @class   basic_string_hash
     @brief   String hash object
     @details ~
     @tparam  Traits - char traits. \see string_traits.h
@@ -90,7 +90,7 @@ using string_hash  = basic_string_hash<char_traits<char>>;
 using wstring_hash = basic_string_hash<char_traits<wchar_t>>;
 
 /**
-    @struct qx::fast_hash_string_traits
+    @struct fast_hash_string_traits
     @tparam value_type - char type
     @date   25.01.2021
 **/

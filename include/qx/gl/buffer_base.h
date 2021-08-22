@@ -17,7 +17,7 @@ namespace qx
 
 /**
 
-    @class   qx::buffer_base
+    @class   buffer_base
     @brief   Base OpenGL buffer object class
     @details ~
 

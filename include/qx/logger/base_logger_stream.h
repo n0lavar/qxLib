@@ -27,7 +27,7 @@ enum class log_level
 };
 
 /**
-    @struct qx::log_unit_info
+    @struct log_unit_info
     @date   28.07.2021
 **/
 struct log_unit_info
@@ -50,7 +50,7 @@ struct log_unit_info
 };
 
 /**
-    @struct qx::log_unit
+    @struct log_unit
     @date   30.07.2021
 **/
 struct log_unit
@@ -61,7 +61,7 @@ struct log_unit
 
 /**
 
-    @class   qx::base_logger_stream
+    @class   base_logger_stream
     @brief   Base class for logger streams
     @details ~
 

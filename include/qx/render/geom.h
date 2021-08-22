@@ -26,7 +26,7 @@ using vertices   = std::vector<glm::vec3>;
 using indices    = std::vector<index_type>;
 
 /**
-    @struct qx::geometry
+    @struct geometry
     @date   4.04.2021
 **/
 struct geometry

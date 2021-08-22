@@ -16,7 +16,7 @@ namespace qx
 
 /**
 
-    @class   qx::base_ubo
+    @class   base_ubo
     @brief   Base UBO class
     @details UBO can be used to share uniforms between different shader programs,
              as well as quickly change between sets of uniforms for

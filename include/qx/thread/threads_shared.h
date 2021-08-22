@@ -22,7 +22,7 @@ class threads_shared;
 
 /**
 
-    @class   qx::shared_proxy
+    @class   shared_proxy
     @brief   A proxy class that provides access to an object stored in
              threads_shared and provides raii for synchronization primitives
     @details Locks synchronization primitive in constructor and unlocks
@@ -104,7 +104,7 @@ private:
 
 /**
 
-    @class   qx::threads_shared
+    @class   threads_shared
     @brief   A class that provides thread-safe access to an object,
              including construction and destruction
     @details ~
@@ -119,7 +119,7 @@ class threads_shared
 {
     /**
 
-        @class   qx::threads_shared::synchronization_primitive_raii
+        @class   synchronization_primitive_raii
 
         @brief   class guaranties thread safe construction and destruction of threads_shared
         @details ~
