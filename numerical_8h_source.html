@@ -83,7 +83,7 @@ $(function() {
 <div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="keyword">namespace </span>qx</div>
 <div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;{</div>
 <div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160; </div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="keyword">inline</span> <span class="keywordtype">int</span> gcd(<span class="keywordtype">int</span> nFirst, <span class="keywordtype">int</span> nSecond)</div>
+<div class="line"><a name="l00032"></a><span class="lineno"><a class="line" href="numerical_8h.html#a417c129e77501e06c66f9574fc186bab">   32</a></span>&#160;<span class="keyword">inline</span> <span class="keywordtype">int</span> <a class="code" href="numerical_8h.html#a417c129e77501e06c66f9574fc186bab">gcd</a>(<span class="keywordtype">int</span> nFirst, <span class="keywordtype">int</span> nSecond)</div>
 <div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;{</div>
 <div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    <span class="keywordflow">if</span> (nFirst == 0 || nSecond == 0)</div>
 <div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;        <span class="keywordflow">return</span> 0;</div>
@@ -98,7 +98,7 @@ $(function() {
 <div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    <span class="keywordflow">return</span> std::abs(nFirst);</div>
 <div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;}</div>
 <div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160; </div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;<span class="keyword">inline</span> <span class="keywordtype">int</span> lcm(<span class="keywordtype">int</span> nFirst, <span class="keywordtype">int</span> nSecond)</div>
+<div class="line"><a name="l00054"></a><span class="lineno"><a class="line" href="numerical_8h.html#a56b88020cf301f6f8b9dbe523b5f667a">   54</a></span>&#160;<span class="keyword">inline</span> <span class="keywordtype">int</span> <a class="code" href="numerical_8h.html#a56b88020cf301f6f8b9dbe523b5f667a">lcm</a>(<span class="keywordtype">int</span> nFirst, <span class="keywordtype">int</span> nSecond)</div>
 <div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;{</div>
 <div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    <span class="keywordflow">if</span> (nFirst == 0 || nSecond == 0)</div>
 <div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;        <span class="keywordflow">return</span> 0;</div>
@@ -106,11 +106,11 @@ $(function() {
 <div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    nFirst  = std::abs(nFirst);</div>
 <div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    nSecond = std::abs(nSecond);</div>
 <div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160; </div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    <span class="keywordflow">return</span> nFirst / gcd(nFirst, nSecond) * nSecond;</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    <span class="keywordflow">return</span> nFirst / <a class="code" href="numerical_8h.html#a417c129e77501e06c66f9574fc186bab">gcd</a>(nFirst, nSecond) * nSecond;</div>
 <div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;}</div>
 <div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160; </div>
 <div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;<span class="keyword">inline</span> <span class="keywordtype">double</span> pow(T nNumber, <span class="keywordtype">int</span> nPower)</div>
+<div class="line"><a name="l00078"></a><span class="lineno"><a class="line" href="numerical_8h.html#a067253ab2ca1eebe6341415e897fca4b">   78</a></span>&#160;<span class="keyword">inline</span> <span class="keywordtype">double</span> <a class="code" href="numerical_8h.html#a067253ab2ca1eebe6341415e897fca4b">pow</a>(T nNumber, <span class="keywordtype">int</span> nPower)</div>
 <div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;{</div>
 <div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;    static_assert(</div>
 <div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;        std::is_integral_v&lt;T&gt; || std::is_floating_point_v&lt;T&gt;,</div>
@@ -172,7 +172,7 @@ $(function() {
 <div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;}</div>
 <div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160; </div>
 <div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> I&gt;</div>
-<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;<span class="keyword">inline</span> std::vector&lt;I&gt; find_prime_factors(I nValue)</div>
+<div class="line"><a name="l00153"></a><span class="lineno"><a class="line" href="numerical_8h.html#aab3f10fce9f921f99e04ab5407a38fc5">  153</a></span>&#160;<span class="keyword">inline</span> std::vector&lt;I&gt; <a class="code" href="numerical_8h.html#aab3f10fce9f921f99e04ab5407a38fc5">find_prime_factors</a>(I nValue)</div>
 <div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;{</div>
 <div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;    static_assert(std::is_integral_v&lt;I&gt;, <span class="stringliteral">&quot;Integral required&quot;</span>);</div>
 <div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160; </div>
@@ -211,7 +211,7 @@ $(function() {
 <div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;}</div>
 <div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160; </div>
 <div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> I&gt;</div>
-<div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160;<span class="keyword">inline</span> std::vector&lt;I&gt; find_primes(I nMaxNumber)</div>
+<div class="line"><a name="l00200"></a><span class="lineno"><a class="line" href="numerical_8h.html#a0ec4c5edc263dd60ba02a7ce9d973d29">  200</a></span>&#160;<span class="keyword">inline</span> std::vector&lt;I&gt; <a class="code" href="numerical_8h.html#a0ec4c5edc263dd60ba02a7ce9d973d29">find_primes</a>(I nMaxNumber)</div>
 <div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160;{</div>
 <div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160;    static_assert(std::is_integral_v&lt;I&gt;, <span class="stringliteral">&quot;Integral required&quot;</span>);</div>
 <div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160; </div>
@@ -252,18 +252,18 @@ $(function() {
 <div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160;    <span class="keywordflow">return</span> primes;</div>
 <div class="line"><a name="l00239"></a><span class="lineno">  239</span>&#160;}</div>
 <div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160; </div>
-<div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160;<span class="keyword">inline</span> <span class="keywordtype">bool</span> is_prime(<span class="keywordtype">size_t</span> nValue)</div>
+<div class="line"><a name="l00248"></a><span class="lineno"><a class="line" href="numerical_8h.html#a243df841a58008f0213397f4259ebf4c">  248</a></span>&#160;<span class="keyword">inline</span> <span class="keywordtype">bool</span> <a class="code" href="numerical_8h.html#a243df841a58008f0213397f4259ebf4c">is_prime</a>(<span class="keywordtype">size_t</span> nValue)</div>
 <div class="line"><a name="l00249"></a><span class="lineno">  249</span>&#160;{</div>
-<div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160;    <span class="keywordflow">return</span> find_prime_factors(<span class="keyword">static_cast&lt;</span><span class="keywordtype">int</span><span class="keyword">&gt;</span>(nValue)).size() == 1;</div>
+<div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="numerical_8h.html#aab3f10fce9f921f99e04ab5407a38fc5">find_prime_factors</a>(<span class="keyword">static_cast&lt;</span><span class="keywordtype">int</span><span class="keyword">&gt;</span>(nValue)).size() == 1;</div>
 <div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160;}</div>
 <div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160; </div>
-<div class="line"><a name="l00259"></a><span class="lineno"><a class="line" href="numerical_8h.html#a78654ada0326f9de3611df0dd6cfea86">  259</a></span>&#160;<span class="keyword">inline</span> <span class="keywordtype">bool</span> is_prime(<span class="keywordtype">size_t</span> nValue, <span class="keywordtype">double</span> fProbability)</div>
+<div class="line"><a name="l00259"></a><span class="lineno"><a class="line" href="numerical_8h.html#a78654ada0326f9de3611df0dd6cfea86">  259</a></span>&#160;<span class="keyword">inline</span> <span class="keywordtype">bool</span> <a class="code" href="numerical_8h.html#a243df841a58008f0213397f4259ebf4c">is_prime</a>(<span class="keywordtype">size_t</span> nValue, <span class="keywordtype">double</span> fProbability)</div>
 <div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160;{</div>
 <div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160;    <span class="keywordflow">if</span> (fProbability &lt; 0)</div>
 <div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160;        fProbability = -fProbability;</div>
 <div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160; </div>
 <div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160;    <span class="keywordflow">if</span> (fProbability &gt;= 1 || std::fabs(fProbability) &lt;= DBL_EPSILON)</div>
-<div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160;        <span class="keywordflow">return</span> is_prime(nValue);</div>
+<div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160;        <span class="keywordflow">return</span> <a class="code" href="numerical_8h.html#a243df841a58008f0213397f4259ebf4c">is_prime</a>(nValue);</div>
 <div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160; </div>
 <div class="line"><a name="l00267"></a><span class="lineno">  267</span>&#160;    constexpr <span class="keywordtype">double</span> fLog2 = 0.30102999566; <span class="comment">// std::log(2)</span></div>
 <div class="line"><a name="l00268"></a><span class="lineno">  268</span>&#160; </div>
@@ -279,7 +279,7 @@ $(function() {
 <div class="line"><a name="l00278"></a><span class="lineno">  278</span>&#160;    {</div>
 <div class="line"><a name="l00279"></a><span class="lineno">  279</span>&#160;        <span class="keyword">const</span> <span class="keywordtype">size_t</span> nRandomNumber = num_dist(generator);</div>
 <div class="line"><a name="l00280"></a><span class="lineno">  280</span>&#160;        <span class="keywordflow">if</span> (<span class="keyword">static_cast&lt;</span><span class="keywordtype">size_t</span><span class="keyword">&gt;</span>(</div>
-<div class="line"><a name="l00281"></a><span class="lineno">  281</span>&#160;                pow(nRandomNumber, <span class="keyword">static_cast&lt;</span><span class="keywordtype">int</span><span class="keyword">&gt;</span>(nValue - 1)))</div>
+<div class="line"><a name="l00281"></a><span class="lineno">  281</span>&#160;                <a class="code" href="numerical_8h.html#a067253ab2ca1eebe6341415e897fca4b">pow</a>(nRandomNumber, <span class="keyword">static_cast&lt;</span><span class="keywordtype">int</span><span class="keyword">&gt;</span>(nValue - 1)))</div>
 <div class="line"><a name="l00282"></a><span class="lineno">  282</span>&#160;                % nValue</div>
 <div class="line"><a name="l00283"></a><span class="lineno">  283</span>&#160;            != 1)</div>
 <div class="line"><a name="l00284"></a><span class="lineno">  284</span>&#160;        {</div>
@@ -291,7 +291,13 @@ $(function() {
 <div class="line"><a name="l00290"></a><span class="lineno">  290</span>&#160;}</div>
 <div class="line"><a name="l00291"></a><span class="lineno">  291</span>&#160; </div>
 <div class="line"><a name="l00292"></a><span class="lineno">  292</span>&#160;} <span class="comment">// namespace qx</span></div>
+<div class="ttc" id="anumerical_8h_html_a067253ab2ca1eebe6341415e897fca4b"><div class="ttname"><a href="numerical_8h.html#a067253ab2ca1eebe6341415e897fca4b">qx::pow</a></div><div class="ttdeci">double pow(T nNumber, int nPower)</div><div class="ttdoc">Power function for integer power.</div><div class="ttdef"><b>Definition:</b> <a href="numerical_8h_source.html#l00078">numerical.h:78</a></div></div>
+<div class="ttc" id="anumerical_8h_html_a0ec4c5edc263dd60ba02a7ce9d973d29"><div class="ttname"><a href="numerical_8h.html#a0ec4c5edc263dd60ba02a7ce9d973d29">qx::find_primes</a></div><div class="ttdeci">std::vector&lt; I &gt; find_primes(I nMaxNumber)</div><div class="ttdoc">Find all primes between 2 and nMaxNumber.</div><div class="ttdef"><b>Definition:</b> <a href="numerical_8h_source.html#l00200">numerical.h:200</a></div></div>
+<div class="ttc" id="anumerical_8h_html_a243df841a58008f0213397f4259ebf4c"><div class="ttname"><a href="numerical_8h.html#a243df841a58008f0213397f4259ebf4c">qx::is_prime</a></div><div class="ttdeci">bool is_prime(size_t nValue)</div><div class="ttdoc">Is number prime.</div><div class="ttdef"><b>Definition:</b> <a href="numerical_8h_source.html#l00248">numerical.h:248</a></div></div>
+<div class="ttc" id="anumerical_8h_html_a417c129e77501e06c66f9574fc186bab"><div class="ttname"><a href="numerical_8h.html#a417c129e77501e06c66f9574fc186bab">qx::gcd</a></div><div class="ttdeci">int gcd(int nFirst, int nSecond)</div><div class="ttdoc">Greatest common divisor.</div><div class="ttdef"><b>Definition:</b> <a href="numerical_8h_source.html#l00032">numerical.h:32</a></div></div>
 <div class="ttc" id="anumerical_8h_html_a558b28fe2075e7c4a244b55920b69df7"><div class="ttname"><a href="numerical_8h.html#a558b28fe2075e7c4a244b55920b69df7">qx::maxpot</a></div><div class="ttdeci">I maxpot(I nValue)</div><div class="ttdoc">Max power of two in integer.</div><div class="ttdef"><b>Definition:</b> <a href="numerical_8h_source.html#l00128">numerical.h:128</a></div></div>
+<div class="ttc" id="anumerical_8h_html_a56b88020cf301f6f8b9dbe523b5f667a"><div class="ttname"><a href="numerical_8h.html#a56b88020cf301f6f8b9dbe523b5f667a">qx::lcm</a></div><div class="ttdeci">int lcm(int nFirst, int nSecond)</div><div class="ttdoc">Least common multiple.</div><div class="ttdef"><b>Definition:</b> <a href="numerical_8h_source.html#l00054">numerical.h:54</a></div></div>
+<div class="ttc" id="anumerical_8h_html_aab3f10fce9f921f99e04ab5407a38fc5"><div class="ttname"><a href="numerical_8h.html#aab3f10fce9f921f99e04ab5407a38fc5">qx::find_prime_factors</a></div><div class="ttdeci">std::vector&lt; I &gt; find_prime_factors(I nValue)</div><div class="ttdoc">Find all prime factors.</div><div class="ttdef"><b>Definition:</b> <a href="numerical_8h_source.html#l00153">numerical.h:153</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

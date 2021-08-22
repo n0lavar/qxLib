@@ -79,70 +79,70 @@ $(function() {
 <div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="keyword">namespace </span>qx</div>
 <div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;{</div>
 <div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160; </div>
-<div class="line"><a name="l00029"></a><span class="lineno"><a class="line" href="classqx_1_1base__texture.html">   29</a></span>&#160;<span class="keyword">class </span><a class="code" href="classqx_1_1base__texture.html">base_texture</a> : <span class="keyword">public</span> <a class="code" href="classqx_1_1_i_buffer.html">IBuffer</a></div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;{</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00035"></a><span class="lineno"><a class="line" href="classqx_1_1base__texture.html#a7c4508b1ed4217e1b042642dec31710c">   35</a></span>&#160;    <a class="code" href="classqx_1_1base__texture.html#a7c4508b1ed4217e1b042642dec31710c">base_texture</a>(<span class="keywordtype">void</span>) = <span class="keywordflow">default</span>;</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160; </div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    <span class="keyword">virtual</span> <a class="code" href="classqx_1_1base__texture.html#a53c39bb5e2a0fbd2e7dd4fa5fcadf342">~base_texture</a>(<span class="keywordtype">void</span>);</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160; </div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    QX_DECL_IBUFFER</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160; </div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    GLenum <a class="code" href="classqx_1_1base__texture.html#aa14d9aface544dec9a10fd33b66868b3">GetTarget</a>(<span class="keywordtype">void</span>) <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160; </div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    GLenum <a class="code" href="classqx_1_1base__texture.html#a4868df3832307083ae98fd804bd3ac55">GetInternalFormat</a>(<span class="keywordtype">void</span>) <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160; </div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    GLsizei <a class="code" href="classqx_1_1base__texture.html#af2ae6b3f7a8ff83017be7dce99b98c21">GetWidth</a>(<span class="keywordtype">void</span>) <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160; </div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    GLsizei <a class="code" href="classqx_1_1base__texture.html#a906785daca1ec090fd673b1e887f5bef">GetHeight</a>(<span class="keywordtype">void</span>) <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160; </div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classqx_1_1base__texture.html#af9041b3e8abd09a57fab3f34d6b938df">SetTarget</a>(GLenum eTarget);</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160; </div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classqx_1_1base__texture.html#abbf20a27d20f59238ae5ed57c2a2d683">Specify2DTexImage</a>(</div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;        GLint       nLevel,</div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;        GLenum      eInternalFormat,</div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;        GLsizei     nWidth,</div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;        GLsizei     nHeight,</div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;        GLenum      eFormat,</div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;        GLenum      eType,</div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;        <span class="keyword">const</span> <span class="keywordtype">void</span>* pData   = <span class="keyword">nullptr</span>,</div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;        GLenum      eTarget = -1);</div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160; </div>
-<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classqx_1_1base__texture.html#ac0fe763b343787220b2288f4e19c0865">Specify2DMultisample</a>(</div>
-<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;        GLsizei   nSamples,</div>
-<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;        GLenum    eInternalFormat,</div>
-<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;        GLsizei   nWidth,</div>
-<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;        GLsizei   nHeight,</div>
-<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;        GLboolean bFixedSampleLocations);</div>
-<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160; </div>
-<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classqx_1_1base__texture.html#a3074e1035bc6caf5877ecc67de6244f7">GenerateMipmap</a>(<span class="keywordtype">void</span>);</div>
-<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160; </div>
-<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classqx_1_1base__texture.html#a4253b50c7b5d66fb6206bf86219a306e">SetParameter</a>(GLenum eName, GLfloat value);</div>
-<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160; </div>
-<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classqx_1_1base__texture.html#a4253b50c7b5d66fb6206bf86219a306e">SetParameter</a>(GLenum eName, GLint value);</div>
-<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160; </div>
-<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classqx_1_1base__texture.html#a4253b50c7b5d66fb6206bf86219a306e">SetParameter</a>(GLenum eName, <span class="keyword">const</span> GLfloat* value);</div>
-<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160; </div>
-<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classqx_1_1base__texture.html#a4253b50c7b5d66fb6206bf86219a306e">SetParameter</a>(GLenum eName, <span class="keyword">const</span> GLint* value);</div>
-<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160; </div>
-<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classqx_1_1base__texture.html#a4253b50c7b5d66fb6206bf86219a306e">SetParameter</a>(GLenum eName, <span class="keyword">const</span> GLuint* value);</div>
-<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160; </div>
-<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;    GLuint  m_nTexture        = std::numeric_limits&lt;GLuint&gt;::max();</div>
-<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;    GLenum  m_eTextureTarget  = GL_TEXTURE_2D;</div>
-<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;    GLenum  m_eInternalFormat = GL_RGBA;</div>
-<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;    GLsizei m_nWidth          = 0;</div>
-<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;    GLsizei m_nHeight         = 0;</div>
-<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;};</div>
-<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160; </div>
-<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;<span class="keyword">using</span> <a class="code" href="classqx_1_1base__texture.html">texture</a> = <a class="code" href="classqx_1_1base__texture.html">base_texture</a>;</div>
-<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160; </div>
-<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;} <span class="comment">// namespace qx</span></div>
+<div class="line"><a name="l00028"></a><span class="lineno"><a class="line" href="classqx_1_1base__texture.html">   28</a></span>&#160;<span class="keyword">class </span><a class="code" href="classqx_1_1base__texture.html">base_texture</a> : <span class="keyword">public</span> <a class="code" href="classqx_1_1_i_buffer.html">IBuffer</a></div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;{</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00034"></a><span class="lineno"><a class="line" href="classqx_1_1base__texture.html#a7c4508b1ed4217e1b042642dec31710c">   34</a></span>&#160;    <a class="code" href="classqx_1_1base__texture.html#a7c4508b1ed4217e1b042642dec31710c">base_texture</a>(<span class="keywordtype">void</span>) = <span class="keywordflow">default</span>;</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160; </div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    <span class="keyword">virtual</span> <a class="code" href="classqx_1_1base__texture.html#a53c39bb5e2a0fbd2e7dd4fa5fcadf342">~base_texture</a>(<span class="keywordtype">void</span>);</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160; </div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    QX_DECL_IBUFFER</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160; </div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    GLenum <a class="code" href="classqx_1_1base__texture.html#aa14d9aface544dec9a10fd33b66868b3">GetTarget</a>(<span class="keywordtype">void</span>) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160; </div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    GLenum <a class="code" href="classqx_1_1base__texture.html#a4868df3832307083ae98fd804bd3ac55">GetInternalFormat</a>(<span class="keywordtype">void</span>) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160; </div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    GLsizei <a class="code" href="classqx_1_1base__texture.html#af2ae6b3f7a8ff83017be7dce99b98c21">GetWidth</a>(<span class="keywordtype">void</span>) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160; </div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    GLsizei <a class="code" href="classqx_1_1base__texture.html#a906785daca1ec090fd673b1e887f5bef">GetHeight</a>(<span class="keywordtype">void</span>) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160; </div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classqx_1_1base__texture.html#af9041b3e8abd09a57fab3f34d6b938df">SetTarget</a>(GLenum eTarget);</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160; </div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classqx_1_1base__texture.html#abbf20a27d20f59238ae5ed57c2a2d683">Specify2DTexImage</a>(</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;        GLint       nLevel,</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;        GLenum      eInternalFormat,</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;        GLsizei     nWidth,</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;        GLsizei     nHeight,</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;        GLenum      eFormat,</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;        GLenum      eType,</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;        <span class="keyword">const</span> <span class="keywordtype">void</span>* pData   = <span class="keyword">nullptr</span>,</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;        GLenum      eTarget = -1);</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160; </div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classqx_1_1base__texture.html#ac0fe763b343787220b2288f4e19c0865">Specify2DMultisample</a>(</div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;        GLsizei   nSamples,</div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;        GLenum    eInternalFormat,</div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;        GLsizei   nWidth,</div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;        GLsizei   nHeight,</div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;        GLboolean bFixedSampleLocations);</div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160; </div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classqx_1_1base__texture.html#a3074e1035bc6caf5877ecc67de6244f7">GenerateMipmap</a>(<span class="keywordtype">void</span>);</div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160; </div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classqx_1_1base__texture.html#a4253b50c7b5d66fb6206bf86219a306e">SetParameter</a>(GLenum eName, GLfloat value);</div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160; </div>
+<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classqx_1_1base__texture.html#a4253b50c7b5d66fb6206bf86219a306e">SetParameter</a>(GLenum eName, GLint value);</div>
+<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160; </div>
+<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classqx_1_1base__texture.html#a4253b50c7b5d66fb6206bf86219a306e">SetParameter</a>(GLenum eName, <span class="keyword">const</span> GLfloat* value);</div>
+<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160; </div>
+<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classqx_1_1base__texture.html#a4253b50c7b5d66fb6206bf86219a306e">SetParameter</a>(GLenum eName, <span class="keyword">const</span> GLint* value);</div>
+<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160; </div>
+<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classqx_1_1base__texture.html#a4253b50c7b5d66fb6206bf86219a306e">SetParameter</a>(GLenum eName, <span class="keyword">const</span> GLuint* value);</div>
+<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160; </div>
+<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;    GLuint  m_nTexture        = std::numeric_limits&lt;GLuint&gt;::max();</div>
+<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;    GLenum  m_eTextureTarget  = GL_TEXTURE_2D;</div>
+<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;    GLenum  m_eInternalFormat = GL_RGBA;</div>
+<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;    GLsizei m_nWidth          = 0;</div>
+<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;    GLsizei m_nHeight         = 0;</div>
+<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;};</div>
+<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160; </div>
+<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;<span class="keyword">using</span> <a class="code" href="classqx_1_1base__texture.html">texture</a> = <a class="code" href="classqx_1_1base__texture.html">base_texture</a>;</div>
+<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160; </div>
+<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;} <span class="comment">// namespace qx</span></div>
+<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160; </div>
 <div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160; </div>
-<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160; </div>
-<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="texture_8inl.html">qx/gl/texture.inl</a>&gt;</span></div>
-<div class="ttc" id="aclassqx_1_1_i_buffer_html"><div class="ttname"><a href="classqx_1_1_i_buffer.html">qx::IBuffer</a></div><div class="ttdoc">OpenGL buffer interface.</div><div class="ttdef"><b>Definition:</b> <a href="ibuffer_8h_source.html#l00027">ibuffer.h:28</a></div></div>
-<div class="ttc" id="aclassqx_1_1base__texture_html"><div class="ttname"><a href="classqx_1_1base__texture.html">qx::base_texture</a></div><div class="ttdoc">Base texture class.</div><div class="ttdef"><b>Definition:</b> <a href="texture_8h_source.html#l00029">texture.h:30</a></div></div>
+<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="texture_8inl.html">qx/gl/texture.inl</a>&gt;</span></div>
+<div class="ttc" id="aclassqx_1_1_i_buffer_html"><div class="ttname"><a href="classqx_1_1_i_buffer.html">qx::IBuffer</a></div><div class="ttdoc">OpenGL buffer interface.</div><div class="ttdef"><b>Definition:</b> <a href="ibuffer_8h_source.html#l00026">ibuffer.h:27</a></div></div>
+<div class="ttc" id="aclassqx_1_1base__texture_html"><div class="ttname"><a href="classqx_1_1base__texture.html">qx::base_texture</a></div><div class="ttdoc">Base texture class.</div><div class="ttdef"><b>Definition:</b> <a href="texture_8h_source.html#l00028">texture.h:29</a></div></div>
 <div class="ttc" id="aclassqx_1_1base__texture_html_a3074e1035bc6caf5877ecc67de6244f7"><div class="ttname"><a href="classqx_1_1base__texture.html#a3074e1035bc6caf5877ecc67de6244f7">qx::base_texture::GenerateMipmap</a></div><div class="ttdeci">void GenerateMipmap(void)</div><div class="ttdoc">Generate mipmap for texture.</div><div class="ttdef"><b>Definition:</b> <a href="texture_8inl_source.html#l00119">texture.inl:119</a></div></div>
 <div class="ttc" id="aclassqx_1_1base__texture_html_a4253b50c7b5d66fb6206bf86219a306e"><div class="ttname"><a href="classqx_1_1base__texture.html#a4253b50c7b5d66fb6206bf86219a306e">qx::base_texture::SetParameter</a></div><div class="ttdeci">void SetParameter(GLenum eName, GLfloat value)</div><div class="ttdoc">Set texture parameter.</div><div class="ttdef"><b>Definition:</b> <a href="texture_8inl_source.html#l00124">texture.inl:124</a></div></div>
 <div class="ttc" id="aclassqx_1_1base__texture_html_a4868df3832307083ae98fd804bd3ac55"><div class="ttname"><a href="classqx_1_1base__texture.html#a4868df3832307083ae98fd804bd3ac55">qx::base_texture::GetInternalFormat</a></div><div class="ttdeci">GLenum GetInternalFormat(void) const</div><div class="ttdoc">Get texture internal format.</div><div class="ttdef"><b>Definition:</b> <a href="texture_8inl_source.html#l00053">texture.inl:53</a></div></div>
