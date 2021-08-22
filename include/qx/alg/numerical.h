@@ -21,13 +21,13 @@ namespace qx
 {
 
 /**
-    @brief    Greatest common divisor
-    @details  Euclid's algorithm
-              based on fact gcd(A, B) == gcd(B, A mod B)
-    @property O(log(second))
-    @param    nFirst  - first num
-    @param    nSecond - second num
-    @retval           - greatest common divisor if first and second > 0, otherwise 0
+    @brief      Greatest common divisor
+    @details    Euclid's algorithm
+                based on fact gcd(A, B) == gcd(B, A mod B)
+    @complexity O(log(second))
+    @param      nFirst  - first num
+    @param      nSecond - second num
+    @retval             - greatest common divisor if first and second > 0, otherwise 0
 **/
 inline int gcd(int nFirst, int nSecond)
 {
@@ -45,11 +45,11 @@ inline int gcd(int nFirst, int nSecond)
 }
 
 /**
-    @brief    Least common multiple
-    @property O(log(second))
-    @param    nFirst  - first num
-    @param    nSecond - second num
-    @retval           - least common multiple if first and second > 0, otherwise 0
+    @brief      Least common multiple
+    @complexity O(log(second))
+    @param      nFirst  - first num
+    @param      nSecond - second num
+    @retval             - least common multiple if first and second > 0, otherwise 0
 **/
 inline int lcm(int nFirst, int nSecond)
 {
@@ -63,16 +63,16 @@ inline int lcm(int nFirst, int nSecond)
 }
 
 /**
-    @brief    Power function for integer power
-    @details  About 2.22 times (positive powers)
-                    1.7  times (positive and negative powers)
-                    2.33 times (negative powers)
-                    faster then std::pow
-    @property O(log(power))
-    @tparam   T       - Integral or floating point type
-    @param    nNumber - integral of floating point value
-    @param    nPower  - integral power
-    @retval           - number ^ power
+    @brief      Power function for integer power
+    @details    About 2.22 times (positive powers)
+                      1.7  times (positive and negative powers)
+                      2.33 times (negative powers)
+                      faster then std::pow
+    @complexity O(log(power))
+    @tparam     T       - Integral or floating point type
+    @param      nNumber - integral of floating point value
+    @param      nPower  - integral power
+    @retval             - number ^ power
 **/
 template<typename T>
 inline double pow(T nNumber, int nPower)
@@ -143,11 +143,11 @@ inline I maxpot(I nValue)
 }
 
 /**
-    @brief    Find all prime factors
-    @property O(sqrt(number))
-    @tparam   I      - Integral type
-    @param    nValue - number for search
-    @retval          - all prime factors vector
+    @brief      Find all prime factors
+    @complexity O(sqrt(number))
+    @tparam     I      - Integral type
+    @param      nValue - number for search
+    @retval            - all prime factors vector
 **/
 template<typename I>
 inline std::vector<I> find_prime_factors(I nValue)
@@ -189,12 +189,12 @@ inline std::vector<I> find_prime_factors(I nValue)
 }
 
 /**
-    @brief    Find all primes between 2 and nMaxNumber
-    @details  Sieve of Eratosthenes
-    @property O(nMaxNumber * log(log(number)))
-    @tparam   I          - Integral type
-    @param    nMaxNumber - max number for search
-    @retval              - all primes vector
+    @brief      Find all primes between 2 and nMaxNumber
+    @details    Sieve of Eratosthenes
+    @complexity O(nMaxNumber * log(log(number)))
+    @tparam     I          - Integral type
+    @param      nMaxNumber - max number for search
+    @retval                - all primes vector
 **/
 template<typename I>
 inline std::vector<I> find_primes(I nMaxNumber)
@@ -239,11 +239,11 @@ inline std::vector<I> find_primes(I nMaxNumber)
 }
 
 /**
-    @brief    Is number prime
-    @details  1.0 probability, high computational complexity
-    @property O(sqrt(number))
-    @param    nValue - number
-    @retval          - true if prime
+    @brief      Is number prime
+    @details    1.0 probability, high computational complexity
+    @complexity O(sqrt(number))
+    @param      nValue - number
+    @retval            - true if prime
 **/
 inline bool is_prime(size_t nValue)
 {

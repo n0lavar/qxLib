@@ -26,12 +26,12 @@ template<class It>
 using vector_of_values = std::vector<iterator_value_t<It>>;
 
 /**
-    @brief    Check if sort really needed
-    @property O(1)
-    @tparam   RandomIt - random access iterator
-    @param    begin    - begin iterator 
-    @param    end      - end iterator 
-    @retval            - false if [begin, end) already sorted 
+    @brief      Check if sort really needed
+    @complexity O(1)
+    @tparam     RandomIt - random access iterator
+    @param      begin    - begin iterator 
+    @param      end      - end iterator 
+    @retval              - false if [begin, end) already sorted 
 **/
 template<typename RandomIt>
 inline bool sort_required(RandomIt begin, RandomIt end)
@@ -43,14 +43,14 @@ inline bool sort_required(RandomIt begin, RandomIt end)
 }
 
 /**
-    @brief    Insertion sort
-    @details  Stable
-    @property O(N^2)
-    @tparam   RandomIt - random access iterator
-    @tparam   Compare  - function object type satisfying binary predicate requirements
-    @param    begin    - begin iterator 
-    @param    end      - end iterator 
-    @param    compare  - comparison function 
+    @brief      Insertion sort
+    @details    Stable
+    @complexity O(N^2)
+    @tparam     RandomIt - random access iterator
+    @tparam     Compare  - function object type satisfying binary predicate requirements
+    @param      begin    - begin iterator 
+    @param      end      - end iterator 
+    @param      compare  - comparison function 
 **/
 template<typename RandomIt, typename Compare = std::less<>>
 inline void sort_insertion(
@@ -67,13 +67,13 @@ inline void sort_insertion(
 }
 
 /**
-    @brief    Insertion sort
-    @details  Stable
-    @property O(N^2)
-    @tparam   Container - container type
-    @tparam   Compare   - function object type satisfying binary predicate requirements
-    @param    cont      - container ref
-    @param    compare   - comparison function
+    @brief      Insertion sort
+    @details    Stable
+    @complexity O(N^2)
+    @tparam     Container - container type
+    @tparam     Compare   - function object type satisfying binary predicate requirements
+    @param      cont      - container ref
+    @param      compare   - comparison function
 **/
 template<typename Container, typename Compare = std::less<>>
 inline void sort_insertion(Container& cont, Compare compare = Compare())
@@ -82,14 +82,14 @@ inline void sort_insertion(Container& cont, Compare compare = Compare())
 }
 
 /**
-    @brief    Selection sort
-    @details  Unstable
-    @property O(N^2)
-    @tparam   RandomIt - random access iterator
-    @tparam   Compare  - function object type satisfying binary predicate requirements
-    @param    begin    - begin iterator
-    @param    end      - end iterator
-    @param    compare  - comparison function
+    @brief      Selection sort
+    @details    Unstable
+    @complexity O(N^2)
+    @tparam     RandomIt - random access iterator
+    @tparam     Compare  - function object type satisfying binary predicate requirements
+    @param      begin    - begin iterator
+    @param      end      - end iterator
+    @param      compare  - comparison function
 **/
 template<typename RandomIt, typename Compare = std::less<>>
 inline void sort_selection(
@@ -112,13 +112,13 @@ inline void sort_selection(
 }
 
 /**
-    @brief    Selection sort
-    @details  Unstable
-    @property O(N^2)
-    @tparam   Container - container type
-    @tparam   Compare   - function object type satisfying binary predicate requirements
-    @param    cont      - container ref
-    @param    compare   - comparison function
+    @brief      Selection sort
+    @details    Unstable
+    @complexity O(N^2)
+    @tparam     Container - container type
+    @tparam     Compare   - function object type satisfying binary predicate requirements
+    @param      cont      - container ref
+    @param      compare   - comparison function
 **/
 template<typename Container, typename Compare = std::less<>>
 inline void sort_selection(Container& cont, Compare compare = Compare())
@@ -127,14 +127,14 @@ inline void sort_selection(Container& cont, Compare compare = Compare())
 }
 
 /**
-    @brief    Bubble sort
-    @details  Stable
-    @property O(N^2)
-    @tparam   RandomIt - random access iterator
-    @tparam   Compare  - function object type satisfying binary predicate requirements
-    @param    begin    - begin iterator
-    @param    end      - end iterator
-    @param    compare  - comparison function
+    @brief      Bubble sort
+    @details    Stable
+    @complexity O(N^2)
+    @tparam     RandomIt - random access iterator
+    @tparam     Compare  - function object type satisfying binary predicate requirements
+    @param      begin    - begin iterator
+    @param      end      - end iterator
+    @param      compare  - comparison function
 **/
 template<typename RandomIt, typename Compare = std::less<>>
 inline void sort_bubble(
@@ -161,13 +161,13 @@ inline void sort_bubble(
 }
 
 /**
-    @brief    Bubble sort
-    @details  Stable
-    @property O(N^2)
-    @tparam   Container - container type
-    @tparam   Compare   - function object type satisfying binary predicate requirements
-    @param    cont      - container ref
-    @param    compare   - comparison function
+    @brief      Bubble sort
+    @details    Stable
+    @complexity O(N^2)
+    @tparam     Container - container type
+    @tparam     Compare   - function object type satisfying binary predicate requirements
+    @param      cont      - container ref
+    @param      compare   - comparison function
 **/
 template<typename Container, typename Compare = std::less<>>
 inline void sort_bubble(Container& cont, Compare compare = Compare())
@@ -176,14 +176,14 @@ inline void sort_bubble(Container& cont, Compare compare = Compare())
 }
 
 /**
-    @brief    Adjust heap
-    @property O(log(N))
-    @tparam   RandomIt  - random access iterator
-    @tparam   Compare   - function object type satisfying binary predicate requirements
-    @param    begin     - whole heap root RandomIt
-    @param    nHeapSize - whole heap size for out of range check 
-    @param    nPosition - current root nPosition 
-    @param    compare   - comparison function 
+    @brief      Adjust heap
+    @complexity O(log(N))
+    @tparam     RandomIt  - random access iterator
+    @tparam     Compare   - function object type satisfying binary predicate requirements
+    @param      begin     - whole heap root RandomIt
+    @param      nHeapSize - whole heap size for out of range check 
+    @param      nPosition - current root nPosition 
+    @param      compare   - comparison function 
 **/
 template<typename RandomIt, typename Compare>
 inline void adjust_heap(
@@ -247,14 +247,14 @@ inline void make_heap(RandomIt begin, RandomIt end, Compare compare = Compare())
 }
 
 /**
-    @brief    Heap sort
-    @details  Unstable
-    @property O(Nlog(N))
-    @tparam   RandomIt - random access iterator
-    @tparam   Compare  - function object type satisfying binary predicate requirements
-    @param    begin    - begin iterator
-    @param    end      - end iterator
-    @param    compare  - comparison function
+    @brief      Heap sort
+    @details    Unstable
+    @complexity O(Nlog(N))
+    @tparam     RandomIt - random access iterator
+    @tparam     Compare  - function object type satisfying binary predicate requirements
+    @param      begin    - begin iterator
+    @param      end      - end iterator
+    @param      compare  - comparison function
 **/
 template<typename RandomIt, typename Compare = std::less<>>
 inline void sort_heap(RandomIt begin, RandomIt end, Compare compare = Compare())
@@ -274,13 +274,13 @@ inline void sort_heap(RandomIt begin, RandomIt end, Compare compare = Compare())
 }
 
 /**
-    @brief    Heap sort
-    @details  Unstable
-    @property O(Nlog(N))
-    @tparam   Container - container type
-    @tparam   Compare   - function object type satisfying binary predicate requirements
-    @param    cont      - container ref
-    @param    compare   - comparison function
+    @brief      Heap sort
+    @details    Unstable
+    @complexity O(Nlog(N))
+    @tparam     Container - container type
+    @tparam     Compare   - function object type satisfying binary predicate requirements
+    @param      cont      - container ref
+    @param      compare   - comparison function
 **/
 template<typename Container, typename Compare = std::less<>>
 inline void sort_heap(Container& cont, Compare compare = Compare())
@@ -289,14 +289,14 @@ inline void sort_heap(Container& cont, Compare compare = Compare())
 }
 
 /**
-    @brief    Quick sort based on Hoare partitioning
-    @details  Unstable
-    @property O(Nlog(N))
-    @tparam   RandomIt - random access iterator
-    @tparam   Compare  - function object type satisfying binary predicate requirements
-    @param    begin    - begin iterator
-    @param    end      - end iterator
-    @param    compare  - comparison function
+    @brief      Quick sort based on Hoare partitioning
+    @details    Unstable
+    @complexity O(Nlog(N))
+    @tparam     RandomIt - random access iterator
+    @tparam     Compare  - function object type satisfying binary predicate requirements
+    @param      begin    - begin iterator
+    @param      end      - end iterator
+    @param      compare  - comparison function
 **/
 template<typename RandomIt, typename Compare = std::less<>>
 inline void sort_quick_hoare(
@@ -332,13 +332,13 @@ inline void sort_quick_hoare(
 }
 
 /**
-    @brief    Quick sort based on Hoare partitioning
-    @details  Unstable
-    @property O(Nlog(N))
-    @tparam   Container - container type
-    @tparam   Compare   - function object type satisfying binary predicate requirements
-    @param    cont      - container ref
-    @param    compare   - comparison function
+    @brief      Quick sort based on Hoare partitioning
+    @details    Unstable
+    @complexity O(Nlog(N))
+    @tparam     Container - container type
+    @tparam     Compare   - function object type satisfying binary predicate requirements
+    @param      cont      - container ref
+    @param      compare   - comparison function
 **/
 template<typename Container, typename Compare = std::less<>>
 inline void sort_quick_hoare(Container& cont, Compare compare = Compare())
@@ -347,14 +347,14 @@ inline void sort_quick_hoare(Container& cont, Compare compare = Compare())
 }
 
 /**
-    @brief    Quick sort based on three-way partitioning
-    @details  Unstable
-    @property O(Nlog(N))
-    @tparam   RandomIt - random access iterator
-    @tparam   Compare  - function object type satisfying binary predicate requirements
-    @param    begin    - begin iterator
-    @param    end      - end iterator
-    @param    compare  - comparison function
+    @brief      Quick sort based on three-way partitioning
+    @details    Unstable
+    @complexity O(Nlog(N))
+    @tparam     RandomIt - random access iterator
+    @tparam     Compare  - function object type satisfying binary predicate requirements
+    @param      begin    - begin iterator
+    @param      end      - end iterator
+    @param      compare  - comparison function
 **/
 template<typename RandomIt, typename Compare = std::less<>>
 inline void sort_quick_three_way(
@@ -438,13 +438,13 @@ inline void sort_quick_three_way(
 }
 
 /**
-    @brief    Quick sort based on three-way partitioning
-    @details  Unstable
-    @property O(Nlog(N))
-    @tparam   Container - container type
-    @tparam   Compare   - function object type satisfying binary predicate requirements
-    @param    cont      - container ref
-    @param    compare   - comparison function
+    @brief      Quick sort based on three-way partitioning
+    @details    Unstable
+    @complexity O(Nlog(N))
+    @tparam     Container - container type
+    @tparam     Compare   - function object type satisfying binary predicate requirements
+    @param      cont      - container ref
+    @param      compare   - comparison function
 **/
 template<typename Container, typename Compare = std::less<>>
 inline void sort_quick_three_way(Container& cont, Compare compare = Compare())
@@ -453,14 +453,14 @@ inline void sort_quick_three_way(Container& cont, Compare compare = Compare())
 }
 
 /**
-    @brief    Quick sort based on dual-pivot partitioning
-    @details  Unstable
-    @property O(Nlog(N))
-    @tparam   RandomIt - random access iterator
-    @tparam   Compare  - function object type satisfying binary predicate requirements
-    @param    begin    - begin iterator
-    @param    end      - end iterator
-    @param    compare  - comparison function
+    @brief      Quick sort based on dual-pivot partitioning
+    @details    Unstable
+    @complexity O(Nlog(N))
+    @tparam     RandomIt - random access iterator
+    @tparam     Compare  - function object type satisfying binary predicate requirements
+    @param      begin    - begin iterator
+    @param      end      - end iterator
+    @param      compare  - comparison function
 **/
 template<typename RandomIt, typename Compare = std::less<>>
 inline void sort_quick_dual_pivot(
@@ -568,13 +568,13 @@ inline void sort_quick_dual_pivot(
 }
 
 /**
-    @brief    Quick sort based on dual-pivot partitioning
-    @details  Unstable
-    @property O(Nlog(N))
-    @tparam   Container - container type
-    @tparam   Compare   - function object type satisfying binary predicate requirements
-    @param    cont      - container ref
-    @param    compare   - comparison function
+    @brief      Quick sort based on dual-pivot partitioning
+    @details    Unstable
+    @complexity O(Nlog(N))
+    @tparam     Container - container type
+    @tparam     Compare   - function object type satisfying binary predicate requirements
+    @param      cont      - container ref
+    @param      compare   - comparison function
 **/
 template<typename Container, typename Compare = std::less<>>
 inline void sort_quick_dual_pivot(Container& cont, Compare compare = Compare())
@@ -583,14 +583,14 @@ inline void sort_quick_dual_pivot(Container& cont, Compare compare = Compare())
 }
 
 /**
-    @brief    Merge with temp vector
-    @property O(N), O(N) memory
-    @tparam   RandomIt - random access iterator
-    @tparam   Compare  - function object type satisfying binary predicate requirements
-    @param    begin    - begin iterator
-    @param    end      - end iterator 
-    @param    compare  - comparison function 
-    @param    pPreallocatedBuffer - preallocated buffer. default value will allocate a new one 
+    @brief      Merge with temp vector
+    @complexity O(N), O(N) memory
+    @tparam     RandomIt - random access iterator
+    @tparam     Compare  - function object type satisfying binary predicate requirements
+    @param      begin    - begin iterator
+    @param      end      - end iterator 
+    @param      compare  - comparison function 
+    @param      pPreallocatedBuffer - preallocated buffer. default value will allocate a new one 
 **/
 template<typename RandomIt, typename Compare = std::less<>>
 inline void merge(
@@ -659,15 +659,15 @@ inline void merge(
 }
 
 /**
-    @brief    Merge sort based on merge with temp vector
-    @details  Stable
-    @property O(Nlog(N)), O(N) memory
-    @tparam   RandomIt            - random access iterator
-    @tparam   Compare             - function object type satisfying binary predicate requirements
-    @param    begin               - begin iterator
-    @param    end                 - end iterator
-    @param    pPreallocatedBuffer - preallocated buffer. default value will allocate a new one
-    @param    compare             - comparison function
+    @brief      Merge sort based on merge with temp vector
+    @details    Stable
+    @complexity O(Nlog(N)), O(N) memory
+    @tparam     RandomIt            - random access iterator
+    @tparam     Compare             - function object type satisfying binary predicate requirements
+    @param      begin               - begin iterator
+    @param      end                 - end iterator
+    @param      pPreallocatedBuffer - preallocated buffer. default value will allocate a new one
+    @param      compare             - comparison function
 **/
 template<typename RandomIt, typename Compare = std::less<>>
 inline void sort_merge(
@@ -697,14 +697,14 @@ inline void sort_merge(
 }
 
 /**
-    @brief    Merge sort based on merge with temp vector
-    @details  Stable
-    @property O(Nlog(N)), O(N) memory
-    @tparam   Container - container type
-    @tparam   Compare   - function object type satisfying binary predicate requirements
-    @param    cont      - container ref
-    @param    compare   - comparison function
-    @param    pPreallocatedBuffer - preallocated buffer. default value will allocate a new one
+    @brief      Merge sort based on merge with temp vector
+    @details    Stable
+    @complexity O(Nlog(N)), O(N) memory
+    @tparam     Container - container type
+    @tparam     Compare   - function object type satisfying binary predicate requirements
+    @param      cont      - container ref
+    @param      compare   - comparison function
+    @param      pPreallocatedBuffer - preallocated buffer. default value will allocate a new one
 **/
 template<typename Container, typename Compare = std::less<>>
 inline void sort_merge(
@@ -717,15 +717,15 @@ inline void sort_merge(
 }
 
 /**
-    @brief    Counting sort for integral values
-    @property O(M + 2 * N), O(M) memory, where M = max - min + 1
-    @tparam   RandomIt       - random access iterator
-    @tparam   Compare        - function object type satisfying binary predicate requirements
-    @param    begin          - begin iterator
-    @param    end            - end iterator
-    @param    compare        - comparison function
-    @param    nMaxBufferSize - max buffer size. if required size is bigger than this value, sorting will fail
-    @retval                  - true if sorted, false if required buffer size is greather then max
+    @brief      Counting sort for integral values
+    @complexity O(M + 2 * N), O(M) memory, where M = max - min + 1
+    @tparam     RandomIt       - random access iterator
+    @tparam     Compare        - function object type satisfying binary predicate requirements
+    @param      begin          - begin iterator
+    @param      end            - end iterator
+    @param      compare        - comparison function
+    @param      nMaxBufferSize - max buffer size. if required size is bigger than this value, sorting will fail
+    @retval                    - true if sorted, false if required buffer size is greather then max
 **/
 template<typename RandomIt, typename Compare = std::less<>>
 [[nodiscard]] inline bool sort_counting(
@@ -774,14 +774,14 @@ template<typename RandomIt, typename Compare = std::less<>>
 }
 
 /**
-    @brief    Counting sort for integral values
-    @property O(M + 2 * N), O(M) memory, where M = max - min + 1
-    @tparam   Container - container type
-    @tparam   Compare   - function object type satisfying binary predicate requirements
-    @param    cont      - container ref
-    @param    compare   - comparison function
-    @param    nMaxBufferSize - max buffer size. if required size is bigger than this value, sorting will fail
-    @retval             - true if sorted, false if required buffer size is greather then max
+    @brief      Counting sort for integral values
+    @complexity O(M + 2 * N), O(M) memory, where M = max - min + 1
+    @tparam     Container - container type
+    @tparam     Compare   - function object type satisfying binary predicate requirements
+    @param      cont      - container ref
+    @param      compare   - comparison function
+    @param      nMaxBufferSize - max buffer size. if required size is bigger than this value, sorting will fail
+    @retval               - true if sorted, false if required buffer size is greather then max
 **/
 template<typename Container, typename Compare = std::less<>>
 [[nodiscard]] inline bool sort_counting(

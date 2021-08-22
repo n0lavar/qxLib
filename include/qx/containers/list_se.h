@@ -259,65 +259,65 @@ public:
     const list_se& operator=(init_list init);
 
     /**
-        @brief    Assign by copying all nodes from another list
-        @property O(list.size())
-        @param    list - other list ref
+        @brief      Assign by copying all nodes from another list
+        @complexity O(list.size())
+        @param      list - other list ref
     **/
     void assign(const list_se& list);
 
     /**
-        @brief    Assign by moving from other list
-        @property O(1)
-        @param    list - other list
+        @brief      Assign by moving from other list
+        @complexity O(1)
+        @param      list - other list
     **/
     void assign(list_se&& list) noexcept;
 
     /**
-        @brief    Assign by copying from std::initializer_list
-        @property O(init.size())
-        @param    init - initializer list
+        @brief      Assign by copying from std::initializer_list
+        @complexity O(init.size())
+        @param      init - initializer list
     **/
     void assign(init_list init);
 
     /**
-        @brief    Assign by filling with 'count' elements of 'value'
-        @property O(nElements)
-        @param    nElements - number of objects
-        @param    value     - value
+        @brief      Assign by filling with 'count' elements of 'value'
+        @complexity O(nElements)
+        @param      nElements - number of objects
+        @param      value     - value
     **/
     void assign(size_type nElements, const_reference value);
 
     /**
-        @brief    Insert element in list
-        @property O(size())
-        @param    itWhere - iterator, where new elem will be placed
-        @param    what    - element
+        @brief      Insert element in list
+        @complexity O(size())
+        @param      itWhere - iterator, where new elem will be placed
+        @param      what    - element
     **/
     void insert(iterator itWhere, const_reference what);
 
     /**
-        @brief    Insert number of elements in list
-        @property O(size() + nElements)
-        @param    itWhere   - iterator, where new elems will be placed
-        @param    pWhat     - pointer to first element
-        @param    nElements - number of elements
+        @brief      Insert number of elements in list
+        @complexity O(size() + nElements)
+        @param      itWhere   - iterator, where new elems will be placed
+        @param      pWhat     - pointer to first element
+        @param      nElements - number of elements
     **/
     void insert(iterator itWhere, const_pointer pWhat, size_type nElements = 1);
 
     /**
-        @brief    Insert element after 'where' iterator
-        @property O(1)
-        @param    itWhere - iterator after which a new element will be inserted
-        @param    what    - new element
+        @brief      Insert element after 'where' iterator
+        @complexity O(1)
+        @param      itWhere - iterator after which a new element will be inserted
+        @param      what    - new element
     **/
     void insert_after(iterator itWhere, const_reference what);
 
     /**
-        @brief    Insert elements after 'where' iterator
-        @property O(nElements)
-        @param    itWhere   - iterator after which a new elements will be inserted
-        @param    pWhat     - new element pointer
-        @param    nElements - number of elements
+        @brief      Insert elements after 'where' iterator
+        @complexity O(nElements)
+        @param      itWhere   - iterator after which a new elements will be inserted
+        @param      pWhat     - new element pointer
+        @param      nElements - number of elements
     **/
     void insert_after(
         iterator      itWhere,
@@ -325,174 +325,174 @@ public:
         size_type     nElements = 1);
 
     /**
-        @brief    Erase elements from list
-        @property O(size() + nElements)
-        @param    itWhere   - iterator, where erasing starts
-                              using "where" after erasing is UB
-        @param    nElements - number of elements to erase
+        @brief      Erase elements from list
+        @complexity O(size() + nElements)
+        @param      itWhere   - iterator, where erasing starts
+                                using "where" after erasing is UB
+        @param      nElements - number of elements to erase
     **/
     void erase(iterator itWhere, size_type nElements = 1);
 
     /**
-        @brief    Erase elements from list
-        @property O(nElements)
-        @param    itWhere   - iterator, where erasing starts
-                              using "where" after erasing is UB
-        @param    nElements - number of elements to erase
+        @brief      Erase elements from list
+        @complexity O(nElements)
+        @param      itWhere   - iterator, where erasing starts
+                                using "where" after erasing is UB
+        @param      nElements - number of elements to erase
     **/
     void erase_after(iterator itWhere, size_type nElements = 1);
 
     /**
-        @brief    Construct and insert element at the front
-        @property O(1)
-        @tparam   Args - type of variadic args for T construction
-        @param    args - arguments to construct T
+        @brief      Construct and insert element at the front
+        @complexity O(1)
+        @tparam     Args - type of variadic args for T construction
+        @param      args - arguments to construct T
     **/
     template<class... Args>
     void emplace_front(Args&&... args);
 
     /**
-        @brief    Construct and insert element
-        @property O(size())
-        @tparam   Args    - type of variadic args for T construction
-        @param    itWhere - iterator, where to insert
-        @param    args    - arguments to construct T
+        @brief      Construct and insert element
+        @complexity O(size())
+        @tparam     Args    - type of variadic args for T construction
+        @param      itWhere - iterator, where to insert
+        @param      args    - arguments to construct T
     **/
     template<class... Args>
     void emplace(iterator itWhere, Args&&... args);
 
     /**
-        @brief    Construct and insert element
-        @property O(1)
-        @tparam   Args    - type of variadic args for T construction
-        @param    itWhere - iterator, after witch inserting starts
-        @param    args    - arguments to construct T
+        @brief      Construct and insert element
+        @complexity O(1)
+        @tparam     Args    - type of variadic args for T construction
+        @param      itWhere - iterator, after witch inserting starts
+        @param      args    - arguments to construct T
     **/
     template<class... Args>
     void emplace_after(iterator itWhere, Args&&... args);
 
     /**
-        @brief    Construct and insert element at the end
-        @property O(size())
-        @tparam   Args - type of variadic args for T construction
-        @param    args - arguments to construct T
+        @brief      Construct and insert element at the end
+        @complexity O(size())
+        @tparam     Args - type of variadic args for T construction
+        @param      args - arguments to construct T
     **/
     template<class... Args>
     void emplace_back(Args&&... args);
 
     /**
-        @brief    Push back element
-        @property O(size())
-        @param    what - new element
+        @brief      Push back element
+        @complexity O(size())
+        @param      what - new element
     **/
     void push_back(const_reference what);
 
     /**
-        @brief    Push front element
-        @property O(1)
-        @param    what - new element
+        @brief      Push front element
+        @complexity O(1)
+        @param      what - new element
     **/
     void push_front(const_reference what);
 
     /**
-        @brief    Pop back element
-        @property O(size())
+        @brief      Pop back element
+        @complexity O(size())
     **/
     void pop_back(void);
 
     /**
-        @brief    Pop front element
-        @property O(1)
+        @brief      Pop front element
+        @complexity O(1)
     **/
     void pop_front(void);
 
     /**
-        @brief    Clear list
-        @property O(size())
+        @brief      Clear list
+        @complexity O(size())
     **/
     void clear(void);
 
     /**
-        @brief    Get number of elements in list
-        @property O(1)
-        @retval   - number of elements in list
+        @brief      Get number of elements in list
+        @complexity O(1)
+        @retval     - number of elements in list
     **/
     size_type size(void) const;
 
     /**
-        @brief    If list empty
-        @property O(1)
-        @retval   - true, if list is empty
+        @brief      If list empty
+        @complexity O(1)
+        @retval     - true, if list is empty
     **/
     bool empty(void) const;
 
     /**
-        @brief    Return iterator to beginning
-        @property O(1)
-        @retval   - iterator to beginning
+        @brief      Return iterator to beginning
+        @complexity O(1)
+        @retval     - iterator to beginning
     **/
     iterator begin(void);
 
     /**
-        @brief    Return iterator to beginning
-        @property O(1)
-        @retval   - iterator to beginning
+        @brief      Return iterator to beginning
+        @complexity O(1)
+        @retval     - iterator to beginning
     **/
     const_iterator begin(void) const;
 
     /**
-        @brief    Return iterator to end
-        @property O(1)
-        @retval   - iterator to end
+        @brief      Return iterator to end
+        @complexity O(1)
+        @retval     - iterator to end
     **/
     iterator end(void);
 
     /**
-        @brief    Return iterator to end
-        @property O(1)
-        @retval   - iterator to end
+        @brief      Return iterator to end
+        @complexity O(1)
+        @retval     - iterator to end
     **/
     const_iterator end(void) const;
 
     /**
-        @brief    Return const iterator to beginning
-        @property O(1)
-        @retval   - const iterator to beginning
+        @brief      Return const iterator to beginning
+        @complexity O(1)
+        @retval     - const iterator to beginning
     **/
     const_iterator cbegin(void) const;
 
     /**
-        @brief    Return const iterator to end
-        @property O(1)
-        @retval   - const iterator to end
+        @brief      Return const iterator to end
+        @complexity O(1)
+        @retval     - const iterator to end
     **/
     const_iterator cend(void) const;
 
     /**
-        @brief    Get first element reference
-        @property O(1)
-        @retval   - first element reference
+        @brief      Get first element reference
+        @complexity O(1)
+        @retval     - first element reference
     **/
     reference front(void);
 
     /**
-        @brief    Get last element reference
-        @property O(1)
-        @retval   - last element reference
+        @brief      Get last element reference
+        @complexity O(1)
+        @retval     - last element reference
     **/
     reference back(void);
 
     /**
-        @brief    Get first element const reference
-        @property O(1)
-        @retval   - first element const reference
+        @brief      Get first element const reference
+        @complexity O(1)
+        @retval     - first element const reference
     **/
     const_reference front(void) const;
 
     /**
-        @brief    Get last element const reference
-        @property O(1)
-        @retval   - last element const reference
+        @brief      Get last element const reference
+        @complexity O(1)
+        @retval     - last element const reference
     **/
     const_reference back(void) const;
 
