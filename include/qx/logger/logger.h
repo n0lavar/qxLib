@@ -115,7 +115,6 @@ namespace qx
     @class   logger
     @brief   Logger class
     @details ~
-
     @author  Khrapov
     @date    10.01.2020
 
@@ -159,7 +158,6 @@ private:
     @class   logger_singleton
     @brief   Default logger instance
     @details ~
-
     @author  Khrapov
     @date    19.08.2021
 

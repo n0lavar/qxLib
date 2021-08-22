@@ -22,7 +22,6 @@ namespace qx
     @class   base_shader_program
     @brief   Shader program class
     @details ~
-
     @author  Khrapov
     @date    16.01.2020
 

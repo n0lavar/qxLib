@@ -27,7 +27,6 @@ namespace qx
     @class   color
     @brief   RGBA color
     @details ~
-
     @author  Khrapov
     @date    10.04.2021
 

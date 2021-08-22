@@ -27,7 +27,6 @@ namespace qx
                  x x 0 0                 r < c  => vec[c][r]
                  x x x 0
                  x x x x
-                 
     @tparam  T - value type
     @author  Khrapov
     @date    23.02.2020

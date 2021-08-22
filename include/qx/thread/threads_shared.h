@@ -120,10 +120,8 @@ class threads_shared
     /**
 
         @class   synchronization_primitive_raii
-
         @brief   class guaranties thread safe construction and destruction of threads_shared
         @details ~
-
         @author  Khrapov
         @date    20.08.2021
 

@@ -29,7 +29,6 @@ enum class log_file_policy
     @class   file_logger_stream
     @brief   Logger stream for file output
     @details ~
-
     @author  Khrapov
     @date    28.07.2021
 

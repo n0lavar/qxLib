@@ -59,7 +59,7 @@ inline std::vector<T> get_moving_average_exp_weights(size_t nEntries);
              green   - get_moving_average_simple_weights
              yellow  - get_moving_average_linear_weights
              red     - get_moving_average_exp_weights with ALPHA = 0.8f
-    @tparam  T - 
+    @tparam  T - floating point ish type
     @author  Khrapov
     @date    1.06.2021
 

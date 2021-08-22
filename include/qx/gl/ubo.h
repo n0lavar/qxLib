@@ -21,7 +21,6 @@ namespace qx
     @details UBO can be used to share uniforms between different shader programs,
              as well as quickly change between sets of uniforms for
              the same program object
-
     @author  Khrapov
     @date    10.07.2020
 

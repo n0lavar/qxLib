@@ -20,7 +20,6 @@ namespace qx
     @class   base_fbo
     @brief   Base FBO class
     @details ~
-
     @author  Khrapov
     @date    10.07.2020
 

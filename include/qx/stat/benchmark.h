@@ -19,7 +19,6 @@ namespace qx
     @class   benchmark
     @brief   Benchmark class
     @details ~
-
     @author  Khrapov
     @date    2.02.2020
 

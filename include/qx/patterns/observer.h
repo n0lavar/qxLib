@@ -26,7 +26,6 @@ class base_subject;
     @brief   Tokens are used to automatically detach observer when the observer
              object is destroyed
     @details ~
-
     @author  Khrapov
     @date    10.03.2021
 
@@ -98,7 +97,6 @@ private:
     @class   base_subject
     @brief   Base subject class
     @details Allows to avoid template parameter for base logic
-
     @author  Khrapov
     @date    10.03.2021
 
@@ -362,7 +360,6 @@ public:
     @class   observer
     @brief   qx::subject class event observers
     @details ~
-
     @author  Khrapov
     @date    6.03.2021
 

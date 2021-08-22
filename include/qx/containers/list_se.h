@@ -55,10 +55,8 @@ public:
     /**
 
         @class   iterator
-
         @brief   Non-const iterator for list
         @details ~
-
         @author  Khrapov
         @date    9.08.2021
 

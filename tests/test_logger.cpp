@@ -129,7 +129,7 @@ using Implementations = ::testing::Types<
     @class   TestLogger
     @brief   Test class for logger
     @details ~
-    @tparam  Traits - 
+    @tparam  Traits - test traits
     @author  Khrapov
     @date    6.10.2020
 
