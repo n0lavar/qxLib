@@ -116,7 +116,9 @@ inline void base_logger_stream::format_line(
 
     switch (eLogLevel)
     {
-    case log_level::info: sFormat = "[I][" + sFormat + "][%s::%s(%d)] "; break;
+    case log_level::info:
+        sFormat = "[I][" + sFormat + "][%s::%s(%d)] ";
+        break;
 
     case log_level::errors:
         sFormat = "[E][" + sFormat + "][%s::%s(%d)] ";
@@ -126,7 +128,9 @@ inline void base_logger_stream::format_line(
         sFormat = "[A][" + sFormat + "][%s::%s(%d)][%s] ";
         break;
 
-    default: sFormat = ""; break;
+    default:
+        sFormat = "";
+        break;
     }
 
     sFormat += sMsg;

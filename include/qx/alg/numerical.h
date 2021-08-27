@@ -87,9 +87,17 @@ inline double pow(T nNumber, int nPower)
     double fResult = 1.0;
     switch (nPositivePower)
     {
-    case 0: break;
-    case 1: fResult = static_cast<double>(nNumber); break;
-    case 2: fResult = static_cast<double>(nNumber * nNumber); break;
+    case 0:
+        break;
+
+    case 1:
+        fResult = static_cast<double>(nNumber);
+        break;
+
+    case 2:
+        fResult = static_cast<double>(nNumber * nNumber);
+        break;
+
     default:
         const std::bitset<std::numeric_limits<int>::digits> powerBitSet(
             nPositivePower);

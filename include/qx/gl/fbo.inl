@@ -152,7 +152,9 @@ inline void base_fbo::CheckStatus(void) const
                 "color attachments are not from textures of the same target.";
             break;
 
-        default: pszErrorMsg = "Unknown error"; break;
+        default:
+            pszErrorMsg = "Unknown error";
+            break;
         }
 
         ASSERT_MSG(

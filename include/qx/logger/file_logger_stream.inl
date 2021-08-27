@@ -105,7 +105,9 @@ inline void file_logger_stream::fill_file_folder(
 
     case log_file_policy::append:
     case log_file_policy::clear_then_uppend:
-    default: sFileFolder = m_sFolder; break;
+    default:
+        sFileFolder = m_sFolder;
+        break;
     }
 }
 
