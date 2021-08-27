@@ -1,15 +1,11 @@
-//==============================================================================
-//
-//!\file                      test_vector2d.cpp
-//
-//!\brief       Tests for qx::vector2d
-//!\details     ~
-//
-//!\author      Khrapov
-//!\date        25.03.2020
-//!\copyright   (c) Nick Khrapov, 2020. All right reserved.
-//
-//==============================================================================
+/**
+
+    @file      test_vector2d.cpp
+    @author    Khrapov
+    @date      25.03.2020
+    @copyright © Nick Khrapov, 2021. All right reserved.
+
+**/
 #include <test_config.h>
 
 //V_EXCLUDE_PATH *test_vector2d.cpp
@@ -21,10 +17,9 @@
 #include <algorithm>
 #include <array>
 
-
 TEST(TestQxVector2d, constructing)
 {
-    auto check_empty = [] (const qx::vector2d<int>& v)
+    auto check_empty = [](const qx::vector2d<int>& v)
     {
         EXPECT_TRUE(v.empty());
         EXPECT_EQ(v.size(), 0);
@@ -34,7 +29,7 @@ TEST(TestQxVector2d, constructing)
         EXPECT_EQ(v.cols(), 0);
     };
 
-    auto check_full = [] (const qx::vector2d<int>& v)
+    auto check_full = [](const qx::vector2d<int>& v)
     {
         EXPECT_FALSE(v.empty());
         EXPECT_EQ(v.size(), 20);
@@ -42,7 +37,13 @@ TEST(TestQxVector2d, constructing)
         EXPECT_EQ(v.size_y(), 4);
         EXPECT_EQ(v.rows(), 5);
         EXPECT_EQ(v.cols(), 4);
-        EXPECT_TRUE(std::all_of(v.cbegin(), v.cend(), [] (auto val) { return val == 2; }));
+        EXPECT_TRUE(std::all_of(
+            v.cbegin(),
+            v.cend(),
+            [](auto val)
+            {
+                return val == 2;
+            }));
     };
 
     {
@@ -182,7 +183,7 @@ TEST(TestQxVector2d, size)
 
 TEST(TestQxVector2d, access)
 {
-    auto check = [] (const qx::vector2d<int>& v)
+    auto check = [](const qx::vector2d<int>& v)
     {
         EXPECT_EQ(v[0][0], 0);
         EXPECT_EQ(v[0][1], 1);

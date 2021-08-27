@@ -37,6 +37,7 @@ function(set_target_options _target)
             /wd5026 # 'type': move constructor was implicitly defined as deleted
             /wd5027 # 'type': move assignment operator was implicitly defined as deleted
             /wd5045 # Compiler will insert Spectre mitigation for memory load if /Qspectre switch specified
+            /wd5246 # 'member': the initialization of a subobject should be wrapped in braces
             
             $<$<CONFIG:Debug>:          /MTd /ZI /D_DEBUG>
             $<$<CONFIG:Release>:        /MT /DNDEBUG>

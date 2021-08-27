@@ -1,15 +1,11 @@
-//==============================================================================
-//
-//!\file                  test_triangular_vector.cpp
-//
-//!\brief       Tests for qx::triangular_vector
-//!\details     ~
-//
-//!\author      Khrapov
-//!\date        26.03.2020
-//!\copyright   (c) Nick Khrapov, 2020. All right reserved.
-//
-//==============================================================================
+/**
+
+    @file      test_triangular_vector.cpp
+    @author    Khrapov
+    @date      26.03.2020
+    @copyright © Nick Khrapov, 2021. All right reserved.
+
+**/
 #include <test_config.h>
 
 //V_EXCLUDE_PATH *test_triangular_vector.cpp
@@ -22,19 +18,25 @@
 
 TEST(TestQxTriangularVector, constructing)
 {
-    auto check_empty = [] (const qx::triangular_vector<int>& v)
+    auto check_empty = [](const qx::triangular_vector<int>& v)
     {
         EXPECT_TRUE(v.empty());
         EXPECT_EQ(v.size(), 0);
         EXPECT_EQ(v.size_side(), 0);
     };
 
-    auto check_full = [] (const qx::triangular_vector<int>& v)
+    auto check_full = [](const qx::triangular_vector<int>& v)
     {
         EXPECT_FALSE(v.empty());
         EXPECT_EQ(v.size(), 15);
         EXPECT_EQ(v.size_side(), 5);
-        EXPECT_TRUE(std::all_of(v.cbegin(), v.cend(), [] (auto val) { return val == 2; }));
+        EXPECT_TRUE(std::all_of(
+            v.cbegin(),
+            v.cend(),
+            [](auto val)
+            {
+                return val == 2;
+            }));
     };
 
     {
@@ -161,6 +163,5 @@ TEST(TestQxTriangularVector, access)
     EXPECT_EQ(vec1.get(3, 2), 5);
     EXPECT_EQ(vec1.get(3, 3), 6);
 }
-
 
 #endif

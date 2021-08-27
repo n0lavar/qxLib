@@ -1,15 +1,11 @@
-//==============================================================================
-//
-//!\file                       test_observer.cpp
-//
-//!\brief       Tests for qx::observer
-//!\details     ~
-//
-//!\author      Khrapov
-//!\date        6.03.2021
-//!\copyright   (c) Nick Khrapov, 2021. All right reserved.
-//
-//==============================================================================
+/**
+
+    @file      test_observer.cpp
+    @author    Khrapov
+    @date      6.03.2021
+    @copyright © Nick Khrapov, 2021. All right reserved.
+
+**/
 #include <test_config.h>
 
 //V_EXCLUDE_PATH *test_observer.cpp
@@ -24,23 +20,20 @@
 class TestObserver : public qx::observer
 {
 public:
-
     virtual int get_num_observer() const = 0;
 
     void EventHandler1(std::string_view svSubjectName)
     {
         sLastMsg = std::string("TestObserver")
-            + std::to_string(get_num_observer())
-            + ": caught event 1 from "
-            + std::string(svSubjectName);
+                   + std::to_string(get_num_observer())
+                   + ": caught event 1 from " + std::string(svSubjectName);
     }
 
     void EventHandler2(std::string_view svSubjectName) const
     {
         sLastMsg = std::string("TestObserver")
-            + std::to_string(get_num_observer())
-            + ": caught event 2 from "
-            + std::string(svSubjectName);
+                   + std::to_string(get_num_observer())
+                   + ": caught event 2 from " + std::string(svSubjectName);
     }
 
     std::string_view GetLastMsg() const
@@ -54,7 +47,6 @@ public:
     }
 
 private:
-
     mutable std::string sLastMsg;
 };
 
@@ -85,7 +77,6 @@ class TestObserver3 : public TestObserver
 class TestSubject : public qx::subject<TestObserver>
 {
 public:
-
     static constexpr std::string_view SUBJECT = "TestSubject";
 
     // non-const forward
@@ -140,7 +131,6 @@ public:
 class TestObserverClass : public ::testing::Test
 {
 protected:
-
     /* init protected members here */
     TestObserverClass()
     {
@@ -171,8 +161,7 @@ protected:
     }
 
 protected:
-
-    std::unique_ptr<TestSubject> pSubject;
+    std::unique_ptr<TestSubject>   pSubject;
     std::unique_ptr<TestObserver1> pObserver1;
     std::unique_ptr<TestObserver2> pObserver2;
     std::unique_ptr<TestObserver3> pObserver3;
@@ -180,7 +169,8 @@ protected:
 
 TEST_F(TestObserverClass, events)
 {
-    auto check_observers = [this](int nEvent, auto funcEmit, std::vector<int> expect)
+    auto check_observers =
+        [this](int nEvent, auto funcEmit, std::vector<int> expect)
     {
         pObserver1->ClearLastMsg();
         pObserver2->ClearLastMsg();
@@ -192,21 +182,54 @@ TEST_F(TestObserverClass, events)
         // check msgs
         EXPECT_STREQ(
             pObserver1->GetLastMsg().data(),
-            std::string("TestObserver1: caught event " + std::to_string(nEvent) + " from TestSubject").data());
+            std::string(
+                "TestObserver1: caught event " + std::to_string(nEvent)
+                + " from TestSubject")
+                .data());
 
         EXPECT_STREQ(
             pObserver2->GetLastMsg().data(),
-            std::string("TestObserver2: caught event " + std::to_string(nEvent) + " from TestSubject").data());
+            std::string(
+                "TestObserver2: caught event " + std::to_string(nEvent)
+                + " from TestSubject")
+                .data());
 
         EXPECT_STREQ(
             pObserver3->GetLastMsg().data(),
-            std::string("TestObserver3: caught event " + std::to_string(nEvent) + " from TestSubject").data());
+            std::string(
+                "TestObserver3: caught event " + std::to_string(nEvent)
+                + " from TestSubject")
+                .data());
     };
 
-    check_observers(1, [this](){ return pSubject->EmitEvent1Forward(); },  { 1, 2, 3 });
-    check_observers(1, [this](){ return pSubject->EmitEvent1Backward(); }, { 3, 2, 1 });
-    check_observers(2, [this](){ return pSubject->EmitEvent2Forward(); },  { 1, 2, 3 });
-    check_observers(2, [this](){ return pSubject->EmitEvent2Backward(); }, { 3, 2, 1 });
+    check_observers(
+        1,
+        [this]()
+        {
+            return pSubject->EmitEvent1Forward();
+        },
+        { 1, 2, 3 });
+    check_observers(
+        1,
+        [this]()
+        {
+            return pSubject->EmitEvent1Backward();
+        },
+        { 3, 2, 1 });
+    check_observers(
+        2,
+        [this]()
+        {
+            return pSubject->EmitEvent2Forward();
+        },
+        { 1, 2, 3 });
+    check_observers(
+        2,
+        [this]()
+        {
+            return pSubject->EmitEvent2Backward();
+        },
+        { 3, 2, 1 });
 }
 
 TEST_F(TestObserverClass, reattachment)

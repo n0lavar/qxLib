@@ -1,15 +1,11 @@
-//==============================================================================
-//
-//!\file                       test_list_se.cpp
-//
-//!\brief       Tests for qx::list_se
-//!\details     ~
-//
-//!\author      Khrapov
-//!\date        14.03.2020
-//!\copyright   (c) Nick Khrapov, 2020. All right reserved.
-//
-//==============================================================================
+/**
+
+    @file      test_list_se.cpp
+    @author    Khrapov
+    @date      14.03.2020
+    @copyright © Nick Khrapov, 2021. All right reserved.
+
+**/
 #include <test_config.h>
 
 //V_EXCLUDE_PATH *test_list_se.cpp
@@ -23,14 +19,14 @@
 
 TEST(list_se, testing)
 {
-    auto check_list_empty = [] (const qx::list_se<int>& l)
+    auto check_list_empty = [](const qx::list_se<int>& l)
     {
         EXPECT_EQ(l.begin(), l.end());
         EXPECT_EQ(l.size(), 0);
         EXPECT_TRUE(l.empty());
     };
 
-    auto check_list_full = [] (const qx::list_se<int>& l)
+    auto check_list_full = [](const qx::list_se<int>& l)
     {
         EXPECT_EQ(l.size(), 5);
         EXPECT_EQ(l.front(), 0);
@@ -45,35 +41,41 @@ TEST(list_se, testing)
         EXPECT_EQ(*it++, 4);
     };
 
-//---------------------------- default constructor ---------------------------
+    // default constructor
 
     qx::list_se<int> list0;
     check_list_empty(list0);
 
-//----------------------- initializer_list constructor -----------------------
+    // initializer_list constructor
 
     qx::list_se<int> list1 { 0, 1, 2, 3, 4 };
     check_list_full(list1);
 
-//----------------------------- copy constructor -----------------------------
+    // copy constructor
 
     qx::list_se<int> list2(list1);
     check_list_full(list1);
     check_list_full(list2);
 
-//----------------------------- move constructor -----------------------------
+    // move constructor
 
     qx::list_se<int> list3(std::move(list1));
     check_list_empty(list1);
     check_list_full(list3);
 
-//----------------------------- fill constructor -----------------------------
+    // fill constructor
 
     qx::list_se<int> list4(10, 7);
     EXPECT_EQ(list4.size(), 10);
-    EXPECT_TRUE(std::all_of(list4.cbegin(), list4.cend(), [] (int v) { return v == 7; }));
+    EXPECT_TRUE(std::all_of(
+        list4.cbegin(),
+        list4.cend(),
+        [](int v)
+        {
+            return v == 7;
+        }));
 
-//----------------------------------- clear ----------------------------------
+    // clear
 
     list0.clear();
     list1.clear();
@@ -86,30 +88,36 @@ TEST(list_se, testing)
     check_list_empty(list3);
     check_list_empty(list4);
 
-//-------------------------- initializer_list assign -------------------------
+    // initializer_list assign
 
     list1.assign({ 0, 1, 2, 3, 4 });
     check_list_full(list1);
 
-//-------------------------------- copy assign -------------------------------
+    // copy assign
 
     list2.assign(list1);
     check_list_full(list1);
     check_list_full(list2);
 
-//-------------------------------- move assign -------------------------------
+    // move assign
 
     list3.assign(std::move(list1));
     check_list_empty(list1);
     check_list_full(list3);
 
-//-------------------------------- fill assign -------------------------------
+    // fill assign
 
     list4.assign(10, 7);
     EXPECT_EQ(list4.size(), 10);
-    EXPECT_TRUE(std::all_of(list4.begin(), list4.end(), [] (int v) { return v == 7; }));
+    EXPECT_TRUE(std::all_of(
+        list4.begin(),
+        list4.end(),
+        [](int v)
+        {
+            return v == 7;
+        }));
 
-//--------------------------- insert, insert_after ---------------------------
+    // insert, insert_after
 
     auto it = list4.begin();
 
@@ -151,7 +159,7 @@ TEST(list_se, testing)
     EXPECT_EQ(*it++, 7);
     EXPECT_EQ(*it++, 5);
 
-//---------------------------- erase, erase_after ----------------------------
+    // erase, erase_after
 
     it = list4.begin();
 
@@ -180,19 +188,25 @@ TEST(list_se, testing)
     list4.erase_after(itTemp);
 
     EXPECT_EQ(list4.size(), 10);
-    EXPECT_TRUE(std::all_of(list4.begin(), list4.end(), [] (int v) { return v == 7; }));
+    EXPECT_TRUE(std::all_of(
+        list4.begin(),
+        list4.end(),
+        [](int v)
+        {
+            return v == 7;
+        }));
 
-//--------------------------------- operator= --------------------------------
+    // operator=
 
     list4 = { 3, 2, 1 };
-    it = list4.begin();
+    it    = list4.begin();
     EXPECT_EQ(list4.size(), 3);
     EXPECT_EQ(*it++, 3);
     EXPECT_EQ(*it++, 2);
     EXPECT_EQ(*it++, 1);
 
     list4 = list3;
-    it = list4.begin();
+    it    = list4.begin();
     check_list_full(list4);
     check_list_full(list3);
 
@@ -203,7 +217,7 @@ TEST(list_se, testing)
     check_list_full(list4);
     check_list_empty(list3);
 
-//--------------------------- push_back, push_front --------------------------
+    // push_back, push_front
 
     list4.push_front(-1);
     list4.push_back(-2);
@@ -217,16 +231,16 @@ TEST(list_se, testing)
     EXPECT_EQ(*it++, 4);
     EXPECT_EQ(*it++, -2);
 
-//---------------------------- pop_back, pop_front ---------------------------
+    // pop_back, pop_front
 
     list4.pop_front();
     list4.pop_back();
     check_list_full(list4);
 
-//------------ emplace, emplace_front, emplace_back, emplace_after -----------
+    // emplace, emplace_front, emplace_back, emplace_after
 
     qx::list_se<std::string> list5 { "0", "1" };
-    EXPECT_STREQ(list5.begin()->c_str(),   "0");
+    EXPECT_STREQ(list5.begin()->c_str(), "0");
     EXPECT_STREQ((++list5.begin())->c_str(), "1");
 
     list5.emplace_front("2");

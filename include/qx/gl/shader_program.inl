@@ -257,20 +257,24 @@ inline GLint base_shader_program::GetUniformLocation(
     return nLocation;
 }
 
-inline void base_shader_program::AddInclude(
+inline bool base_shader_program::AddInclude(
     const char* pszName,
     GLint       nNameLength,
     const char* pszText,
     GLint       nTextLength)
 {
     const bool bGlslIncludeSupported = GLEW_ARB_shading_language_include != 0;
-    QX_CHECK(bGlslIncludeSupported);
-    glNamedStringARB(
-        GL_SHADER_INCLUDE_ARB,
-        nNameLength,
-        pszName,
-        nTextLength,
-        pszText);
+    if (bGlslIncludeSupported)
+    {
+        glNamedStringARB(
+            GL_SHADER_INCLUDE_ARB,
+            nNameLength,
+            pszName,
+            nTextLength,
+            pszText);
+    }
+
+    return bGlslIncludeSupported;
 }
 
 inline void base_shader_program::DispatchCompute(

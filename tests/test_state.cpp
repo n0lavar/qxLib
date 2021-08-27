@@ -1,15 +1,11 @@
-//==============================================================================
-//
-//!\file                         test_state.cpp
-//
-//!\brief       Tests for qx::state
-//!\details     ~
-//
-//!\author      Khrapov
-//!\date        27.04.2021
-//!\copyright   (c) Nick Khrapov, 2021. All right reserved.
-//
-//==============================================================================
+/**
+
+    @file      test_state.cpp
+    @author    Khrapov
+    @date      27.04.2021
+    @copyright © Nick Khrapov, 2021. All right reserved.
+
+**/
 #include <test_config.h>
 
 //V_EXCLUDE_PATH *test_state.cpp

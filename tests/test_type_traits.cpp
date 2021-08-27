@@ -1,31 +1,27 @@
-//==============================================================================
-//
-//!\file                      test_type_traits.cpp
-//
-//!\brief
-//!\details     ~
-//
-//!\author      Khrapov
-//!\date        26.09.2020
-//!\copyright   (c) Nick Khrapov, 2020. All right reserved.
-//
-//==============================================================================
+/**
+
+    @file      test_type_traits.cpp
+    @author    Khrapov
+    @date      26.09.2020
+    @copyright © Nick Khrapov, 2021. All right reserved.
+
+**/
 #include <test_config.h>
 
 //V_EXCLUDE_PATH *test_type_traits.cpp
 
 #if QX_TEST_TYPE_TRAITS
 
-    #include <qx/type_traits.h>
-    #include <deque>
-    #include <forward_list>
-    #include <list>
-    #include <map>
-    #include <set>
-    #include <string>
-    #include <unordered_map>
-    #include <unordered_set>
-    #include <vector>
+#include <qx/type_traits.h>
+#include <deque>
+#include <forward_list>
+#include <list>
+#include <map>
+#include <set>
+#include <string>
+#include <unordered_map>
+#include <unordered_set>
+#include <vector>
 
 
 

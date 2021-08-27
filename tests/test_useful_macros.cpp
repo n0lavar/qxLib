@@ -1,23 +1,19 @@
-//==============================================================================
-//
-//!\file                     test_useful_macros.cpp
-//
-//!\brief       Tests for macros from useful_macros.h
-//!\details     ~
-//
-//!\author      Khrapov
-//!\date        25.09.2020
-//!\copyright   (c) Nick Khrapov, 2020. All right reserved.
-//
-//==============================================================================
+/**
+
+    @file      test_useful_macros.cpp
+    @author    Khrapov
+    @date      25.09.2020
+    @copyright © Nick Khrapov, 2021. All right reserved.
+
+**/
 #include <test_config.h>
 
 //V_EXCLUDE_PATH *test_useful_macros.cpp
 
 #if QX_TEST_USEFUL_MACROS
 
-#include <qx/useful_macros.h>
 #include <qx/containers/string_utils.h>
+#include <qx/useful_macros.h>
 
 #include <map>
 
@@ -46,7 +42,7 @@ TEST(useful_macros, empty_macro)
 
 //-------------------------------- QX_STRINGIFY --------------------------------
 
-constexpr int val = 0;
+constexpr int  val     = 0;
 constexpr auto pszName = QX_STRINGIFY(val);
 QX_STATIC_ASSERT_STR_EQ(pszName, "val");
 
@@ -55,7 +51,7 @@ QX_STATIC_ASSERT_STR_EQ(pszName, "val");
 //-------------------------------- QX_LINE_NAME --------------------------------
 
 constexpr int QX_LINE_NAME(test) = 5;
-static_assert(test57 == 5);
+static_assert(test53 == 5);
 
 
 
@@ -151,7 +147,10 @@ constexpr const wchar_t* pwsz = QX_STR_PREFIX(wchar_t, "wstring");
 
 //------------------------------- QX_CHAR_PREFIX -------------------------------
 
-constexpr char    ch  = QX_CHAR_PREFIX(char,    'c');
+constexpr char ch = QX_CHAR_PREFIX(char, 'c');
+static_assert(ch == 'c');
+
 constexpr wchar_t wch = QX_CHAR_PREFIX(wchar_t, 'w');
+static_assert(wch == L'w');
 
 #endif

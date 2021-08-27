@@ -1,15 +1,11 @@
-//==============================================================================
-//
-//!\file                       test_singleton.cpp
-//
-//!\brief       Tests for singleton macro
-//!\details     ~
-//
-//!\author      Khrapov
-//!\date        26.09.2020
-//!\copyright   (c) Nick Khrapov, 2020. All right reserved.
-//
-//==============================================================================
+/**
+
+    @file      test_singleton.cpp
+    @author    Khrapov
+    @date      26.09.2020
+    @copyright © Nick Khrapov, 2021. All right reserved.
+
+**/
 #include <test_config.h>
 
 //V_EXCLUDE_PATH *test_singleton.cpp
@@ -20,7 +16,8 @@
 
 class CTestSingleton
 {
-    QX_SINGLETON_CDP(CTestSingleton, on_create();, on_terminate();, ProcessGetter();)
+    QX_SINGLETON_CDP(CTestSingleton, on_create();, on_terminate();
+                     , ProcessGetter();)
 
     void on_create(void)
     {
@@ -38,13 +35,19 @@ class CTestSingleton
     }
 
 public:
-
-    static int  get_counter(void) { return m_nCounter; }
-    static bool get_created(void) { return m_bCreated; }
-           void do_stuff   (void) { }
+    static int get_counter(void)
+    {
+        return m_nCounter;
+    }
+    static bool get_created(void)
+    {
+        return m_bCreated;
+    }
+    void do_stuff(void)
+    {
+    }
 
 private:
-
     static bool m_bCreated;
     static int  m_nCounter;
 };

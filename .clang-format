@@ -39,7 +39,7 @@ ExperimentalAutoDetectBinPacking: 'false'
 FixNamespaceComments: 'true'
 IncludeBlocks: Preserve
 IndentCaseLabels: 'false'
-IndentPPDirectives: BeforeHash
+IndentPPDirectives: None
 IndentWidth: '4'
 IndentWrappedFunctionNames: 'true'
 KeepEmptyLinesAtTheStartOfBlocks: 'true'
@@ -69,5 +69,7 @@ SpacesInParentheses: 'false'
 SpacesInSquareBrackets: 'false'
 TabWidth: '4'
 UseTab: Never
-
+IncludeCategories:
+  - Regex:           '.stdafx.h>'
+    Priority:        0
 ...

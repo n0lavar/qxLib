@@ -1,15 +1,11 @@
-//==============================================================================
-//
-//!\file                       test_string.cpp
-//
-//!\brief       Tests for qx::basic_string
-//!\details     ~
-//
-//!\author      Khrapov
-//!\date        15.03.2020
-//!\copyright   (c) Nick Khrapov, 2020. All right reserved.
-//
-//==============================================================================
+/**
+
+    @file      test_string.cpp
+    @author    Khrapov
+    @date      15.03.2020
+    @copyright © Nick Khrapov, 2021. All right reserved.
+
+**/
 #include <test_config.h>
 
 //V_EXCLUDE_PATH *test_string.cpp
@@ -63,38 +59,36 @@ QX_STATIC_ASSERT_GT(qx::strcmp("1", "000"), 0);
 
 
 
-//==============================================================================
-//
-//!\class                 TestQxString<StringTraits>
-//
-//!\brief   Test class for qx::string and qx::wstring
-//!\details ~
-//
-//!\author  Khrapov
-//!\date    24.03.2020
-//
-//==============================================================================
-template <typename StringTraits>
+template<typename StringTraits>
 class TestQxString : public ::testing::Test
 {
 };
 
-#define ValueType       typename TypeParam::value_type
-#define ConstPointer    typename TypeParam::const_pointer
-#define StringTypeTn    typename qx::basic_string<TypeParam>
-#define StringType      qx::basic_string<TypeParam>
-#define StdString       typename std::basic_string<ValueType, std::char_traits<ValueType>, std::allocator<ValueType>>
-#define StdStringArg    QX_SINGLE_ARGUMENT(typename std::basic_string<ValueType, std::char_traits<ValueType>, std::allocator<ValueType>>)
-#define STR(str)        QX_STR_PREFIX(ValueType, str)
-#define CH(str)         QX_CHAR_PREFIX(ValueType, str)
 
-using Implementations = ::testing::Types
-<
-    qx::char_traits<char>,
-    qx::char_traits<wchar_t>
->;
+#define ValueType    typename TypeParam::value_type
+#define ConstPointer typename TypeParam::const_pointer
+#define StringTypeTn typename qx::basic_string<TypeParam>
+#define StringType   qx::basic_string<TypeParam>
+#define StdString                    \
+    typename std::basic_string<      \
+        ValueType,                   \
+        std::char_traits<ValueType>, \
+        std::allocator<ValueType>>
+#define StdStringArg                                \
+    QX_SINGLE_ARGUMENT(typename std::basic_string<  \
+                       ValueType,                   \
+                       std::char_traits<ValueType>, \
+                       std::allocator<ValueType>>)
+#define STR(str) QX_STR_PREFIX(ValueType, str)
+#define CH(str)  QX_CHAR_PREFIX(ValueType, str)
+
+
+using Implementations =
+    ::testing::Types<qx::char_traits<char>, qx::char_traits<wchar_t>>;
 
 TYPED_TEST_SUITE(TestQxString, Implementations);
+
+
 
 TYPED_TEST(TestQxString, class_size)
 {
@@ -318,7 +312,8 @@ TYPED_TEST(TestQxString, format)
     EXPECT_FALSE(str0.empty());
     EXPECT_EQ(str0.size(), 27);
 
-    StringTypeTn str1 = StringType::static_sprintf(STR("The half of %d is %f"), 75, 75.f / 2);
+    StringTypeTn str1 =
+        StringType::static_sprintf(STR("The half of %d is %f"), 75, 75.f / 2);
     EXPECT_STREQ(str1.data(), STR("The half of 75 is 37.500000"));
     EXPECT_FALSE(str0.empty());
     EXPECT_EQ(str1.size(), 27);
@@ -478,7 +473,7 @@ auto insert = [](auto& str, auto pos, auto pszStr)
 TYPED_TEST(TestQxString, insert)
 {
     StringTypeTn str;
-    str.reserve(100);   // cbegin() must be valid
+    str.reserve(100); // cbegin() must be valid
 
     {
         str = STR("0123456789");
@@ -508,11 +503,15 @@ TYPED_TEST(TestQxString, insert)
 
         EXPECT_EQ(insert<type>(str, start + 25u, STR("big ")), 29);
         EXPECT_EQ(str.size(), 41);
-        EXPECT_STREQ(str.data(), STR("you be careful with that big butter knife"));
+        EXPECT_STREQ(
+            str.data(),
+            STR("you be careful with that big butter knife"));
 
         EXPECT_EQ(insert<type>(str, start + 41u, STR(", mate!")), 48);
         EXPECT_EQ(str.size(), 48);
-        EXPECT_STREQ(str.data(), STR("you be careful with that big butter knife, mate!"));
+        EXPECT_STREQ(
+            str.data(),
+            STR("you be careful with that big butter knife, mate!"));
     };
 
     test_continuous(StringType(), 0u);
@@ -538,7 +537,7 @@ TYPED_TEST(TestQxString, find)
     EXPECT_EQ(str.find(STR("for"), 30), StringType::npos);
     EXPECT_EQ(str.find(STR("kek")), StringType::npos);
 
-    auto test = [&str] (auto... toSearch)
+    auto test = [&str](auto... toSearch)
     {
         EXPECT_EQ(str.find(toSearch...), 0);
         EXPECT_EQ(str.find(toSearch..., 15), 25);
@@ -724,7 +723,7 @@ TYPED_TEST(TestQxString, split)
     auto check_comma_split = [](auto... splitter)
     {
         StringTypeTn str(STR("some, long, long, long, long, long, sentence"));
-        auto words = str.split(splitter...);
+        auto         words = str.split(splitter...);
         EXPECT_EQ(words.size(), 7);
         EXPECT_EQ(words[0], StringTypeTn::string_view(STR("some")));
         EXPECT_EQ(words[1], StringTypeTn::string_view(STR("long")));
@@ -780,11 +779,8 @@ TYPED_TEST(TestQxString, remove)
         EXPECT_STREQ(str.data(), STR("0010002225666"));
     }
 
-    auto check_remove = [](
-        auto& str,
-        auto expected_ret,
-        auto expected_str,
-        auto... remove_args)
+    auto check_remove =
+        [](auto& str, auto expected_ret, auto expected_str, auto... remove_args)
     {
         auto ret = str.remove(remove_args...);
         EXPECT_EQ(ret, expected_ret);
@@ -793,20 +789,12 @@ TYPED_TEST(TestQxString, remove)
 
     auto check_remove_type = [&check_remove, STRING](auto type_var)
     {
-        using type = decltype(type_var);
+        using type       = decltype(type_var);
         StringTypeTn str = STRING;
 
-        check_remove(
-            str,
-            5,
-            STR("00011222345666"),
-            type(STR("0000")));
+        check_remove(str, 5, STR("00011222345666"), type(STR("0000")));
 
-        check_remove(
-            str,
-            9,
-            STR("0001122235666"),
-            type(STR("4")));
+        check_remove(str, 9, STR("0001122235666"), type(STR("4")));
 
         check_remove(
             str,
@@ -840,7 +828,7 @@ TYPED_TEST(TestQxString, remove_all)
     constexpr auto STRING = STR("000011112222333987");
 
     {
-        StringTypeTn str = STRING;
+        StringTypeTn            str          = STRING;
         StringTypeTn::size_type nOccurrences = 0;
 
         nOccurrences = str.remove_all('0');
@@ -860,11 +848,8 @@ TYPED_TEST(TestQxString, remove_all)
         EXPECT_STREQ(str.data(), STR("1111233398"));
     }
 
-    auto check_remove_all = [](
-        auto& str,
-        auto expected_ret,
-        auto expected_str,
-        auto... remove_args)
+    auto check_remove_all =
+        [](auto& str, auto expected_ret, auto expected_str, auto... remove_args)
     {
         auto ret = str.remove_all(remove_args...);
         EXPECT_EQ(ret, expected_ret);
@@ -873,26 +858,14 @@ TYPED_TEST(TestQxString, remove_all)
 
     auto check_remove_all_type = [&check_remove_all, STRING](auto type_var)
     {
-        using type = decltype(type_var);
+        using type       = decltype(type_var);
         StringTypeTn str = STRING;
 
-        check_remove_all(
-            str,
-            0,
-            STR("000011112222333987"),
-            type(STR("00000")));
+        check_remove_all(str, 0, STR("000011112222333987"), type(STR("00000")));
 
-        check_remove_all(
-            str,
-            2,
-            STR("11112222333987"),
-            type(STR("00")));
+        check_remove_all(str, 2, STR("11112222333987"), type(STR("00")));
 
-        check_remove_all(
-            str,
-            4,
-            STR("2222333987"),
-            type(STR("1")));
+        check_remove_all(str, 4, STR("2222333987"), type(STR("1")));
 
         check_remove_all(
             str,
@@ -917,29 +890,38 @@ TYPED_TEST(TestQxString, remove_all)
 
 TYPED_TEST(TestQxString, cases)
 {
-    StringTypeTn str(STR("maNy diffeRent words placEd Here. yoU can test,iT. really"));
+    StringTypeTn str(
+        STR("maNy diffeRent words placEd Here. yoU can test,iT. really"));
 
     StringTypeTn str0(str);
     str0.to_lower();
     EXPECT_EQ(str0.size(), str.size());
-    EXPECT_STREQ(str0.data(), STR("many different words placed here. you can test,it. really"));
+    EXPECT_STREQ(
+        str0.data(),
+        STR("many different words placed here. you can test,it. really"));
 
     StringTypeTn str1(str);
     str1.to_upper();
     EXPECT_EQ(str1.size(), str.size());
-    EXPECT_STREQ(str1.data(), STR("MANY DIFFERENT WORDS PLACED HERE. YOU CAN TEST,IT. REALLY"));
+    EXPECT_STREQ(
+        str1.data(),
+        STR("MANY DIFFERENT WORDS PLACED HERE. YOU CAN TEST,IT. REALLY"));
 }
 
 // type and operator>> overloading for basic_string::to
 struct SNotPod
 {
     SNotPod() = default;
-    SNotPod(int n) : nData(n) { }
+    SNotPod(int n) : nData(n)
+    {
+    }
     int nData = 42;
 };
 
 template<typename TChar>
-std::basic_istream<TChar, std::char_traits<TChar>>& operator>> (std::basic_istream<TChar, std::char_traits<TChar>>& is, SNotPod& obj)
+std::basic_istream<TChar, std::char_traits<TChar>>& operator>>(
+    std::basic_istream<TChar, std::char_traits<TChar>>& is,
+    SNotPod&                                            obj)
 {
     obj = SNotPod(128);
     return is;
@@ -1231,7 +1213,7 @@ TYPED_TEST(TestQxString, operator_plus)
     EXPECT_STREQ(str.data(), STR("word_ref word_move "));
 
     typename TypeParam::const_pointer pStr = STR("word_const_ptr ");
-    str = refStr + pStr;
+    str                                    = refStr + pStr;
     EXPECT_STREQ(str.data(), STR("word_ref word_const_ptr "));
     str = StringTypeTn(STR("word_move ")) + pStr;
     EXPECT_STREQ(str.data(), STR("word_move word_const_ptr "));
@@ -1241,7 +1223,7 @@ TYPED_TEST(TestQxString, operator_plus)
     EXPECT_STREQ(str.data(), STR("word_const_ptr word_move "));
 
     ValueType ch = CH('w');
-    str = refStr + ch;
+    str          = refStr + ch;
     EXPECT_STREQ(str.data(), STR("word_ref w"));
     str = StringTypeTn(STR("word_move ")) + ch;
     EXPECT_STREQ(str.data(), STR("word_move w"));
@@ -1335,7 +1317,8 @@ TYPED_TEST(TestQxString, from)
         const bool bFormatCase2 = str == STR("0x000000004128ff44");
         const bool bFormatCase3 = str == STR("0x4128ff44");
         const bool bFormatCase4 = str == STR("0x4128FF44");
-        EXPECT_TRUE(bFormatCase1 || bFormatCase2 || bFormatCase3 || bFormatCase4);
+        EXPECT_TRUE(
+            bFormatCase1 || bFormatCase2 || bFormatCase3 || bFormatCase4);
 
         str = fromFunc(true);
         EXPECT_STREQ(str.data(), STR("true"));
@@ -1348,14 +1331,18 @@ TYPED_TEST(TestQxString, from)
         EXPECT_STREQ(str.data(), STR("some string"));
     };
 
-    test_from([](const auto& data, typename TypeParam::const_pointer pszFormat = nullptr)
+    test_from(
+        [](const auto&                       data,
+           typename TypeParam::const_pointer pszFormat = nullptr)
         {
             StringTypeTn str;
             str.from(data, pszFormat);
             return std::move(str);
         });
 
-    test_from([](const auto& data, typename TypeParam::const_pointer pszFormat = nullptr)
+    test_from(
+        [](const auto&                       data,
+           typename TypeParam::const_pointer pszFormat = nullptr)
         {
             return StringType::static_from(data, pszFormat);
         });
@@ -1510,9 +1497,9 @@ TYPED_TEST(TestQxString, contains)
 
 TYPED_TEST(TestQxString, operator_stream_out)
 {
-    StringTypeTn::sstream_type  stream;
-    StringTypeTn                in_string(STR("  0 one      two 3 .\t>>\n;;"));
-    StdString                   out_string;
+    StringTypeTn::sstream_type stream;
+    StringTypeTn               in_string(STR("  0 one      two 3 .\t>>\n;;"));
+    StdString                  out_string;
     stream << in_string;
 
     stream >> out_string;
@@ -1539,9 +1526,9 @@ TYPED_TEST(TestQxString, operator_stream_out)
 
 TYPED_TEST(TestQxString, operator_stream_in)
 {
-    StringTypeTn::sstream_type  stream;
-    StdString                   in_string(STR("  0 one      two 3 .\t>>\n;;"));
-    StringTypeTn                out_string;
+    StringTypeTn::sstream_type stream;
+    StdString                  in_string(STR("  0 one      two 3 .\t>>\n;;"));
+    StringTypeTn               out_string;
     stream << in_string;
 
     stream >> out_string; // to empty
@@ -1569,23 +1556,25 @@ TYPED_TEST(TestQxString, operator_stream_in)
 TYPED_TEST(TestQxString, string_view)
 {
     StringTypeTn qx_str = STR("qx_str");
-    std::basic_string_view<ValueType, std::char_traits<ValueType>> view1(qx_str);
-    std::basic_string_view<ValueType, std::char_traits<ValueType>> view2 = qx_str;
+    std::basic_string_view<ValueType, std::char_traits<ValueType>> view1(
+        qx_str);
+    std::basic_string_view<ValueType, std::char_traits<ValueType>> view2 =
+        qx_str;
 }
 
 TYPED_TEST(TestQxString, small_string_optimization)
 {
     constexpr auto pszSmallString1 = STR("small1");
-    constexpr auto nSmallStrSize1 = qx::strlen(pszSmallString1);
+    constexpr auto nSmallStrSize1  = qx::strlen(pszSmallString1);
 
     constexpr auto pszSmallString2 = STR("small2");
-    constexpr auto nSmallStrSize2 = qx::strlen(pszSmallString2);
+    constexpr auto nSmallStrSize2  = qx::strlen(pszSmallString2);
 
     constexpr auto pszBigString1 = STR("biiiiiiig string 1");
-    constexpr auto nBigStrSize1 = qx::strlen(pszBigString1);
+    constexpr auto nBigStrSize1  = qx::strlen(pszBigString1);
 
     constexpr auto pszBigString2 = STR("biiiiiiig string 2 ");
-    constexpr auto nBigStrSize2 = qx::strlen(pszBigString2);
+    constexpr auto nBigStrSize2  = qx::strlen(pszBigString2);
 
     // from small to small
     {
@@ -1660,7 +1649,7 @@ TYPED_TEST(TestQxString, small_string_optimization)
 
 TYPED_TEST(TestQxString, replase)
 {
-    auto pszStartStr = STR("Let me help you with your baggage");
+    auto         pszStartStr = STR("Let me help you with your baggage");
     StringTypeTn str;
 
     str = pszStartStr;
@@ -1685,39 +1674,52 @@ TYPED_TEST(TestQxString, replase)
 
 
 
-    auto test_replace = [pszStartStr, &str](auto type_find_var, auto type_replace_var)
+    auto test_replace =
+        [pszStartStr, &str](auto type_find_var, auto type_replace_var)
     {
-        using type_find = decltype(type_find_var);
+        using type_find    = decltype(type_find_var);
         using type_replace = decltype(type_replace_var);
 
 
         str = pszStartStr;
-        EXPECT_EQ(str.replace(type_find(STR("you")), type_replace(STR("12345"))), 17);
+        EXPECT_EQ(
+            str.replace(type_find(STR("you")), type_replace(STR("12345"))),
+            17);
         EXPECT_STREQ(str.data(), STR("Let me help 12345 with your baggage"));
         EXPECT_EQ(str.size(), 35);
 
         str = pszStartStr;
-        EXPECT_EQ(str.replace(type_find(STR("you")), type_replace(STR("123"))), 15);
+        EXPECT_EQ(
+            str.replace(type_find(STR("you")), type_replace(STR("123"))),
+            15);
         EXPECT_STREQ(str.data(), STR("Let me help 123 with your baggage"));
         EXPECT_EQ(str.size(), 33);
 
         str = pszStartStr;
-        EXPECT_EQ(str.replace(type_find(STR("you")), type_replace(STR("12"))), 14);
+        EXPECT_EQ(
+            str.replace(type_find(STR("you")), type_replace(STR("12"))),
+            14);
         EXPECT_STREQ(str.data(), STR("Let me help 12 with your baggage"));
         EXPECT_EQ(str.size(), 32);
 
         str = pszStartStr;
-        EXPECT_EQ(str.replace(type_find(STR("you")), type_replace(STR("12")), 16), 23);
+        EXPECT_EQ(
+            str.replace(type_find(STR("you")), type_replace(STR("12")), 16),
+            23);
         EXPECT_STREQ(str.data(), STR("Let me help you with 12r baggage"));
         EXPECT_EQ(str.size(), 32);
 
         str = pszStartStr;
-        EXPECT_EQ(str.replace(type_find(STR("you")), type_replace(STR("12")), 26), StringType::npos);
+        EXPECT_EQ(
+            str.replace(type_find(STR("you")), type_replace(STR("12")), 26),
+            StringType::npos);
         EXPECT_STREQ(str.data(), STR("Let me help you with your baggage"));
         EXPECT_EQ(str.size(), 33);
 
         str = pszStartStr;
-        EXPECT_EQ(str.replace(type_find(STR("you")), type_replace(STR("12")), 0, 10), StringType::npos);
+        EXPECT_EQ(
+            str.replace(type_find(STR("you")), type_replace(STR("12")), 0, 10),
+            StringType::npos);
         EXPECT_STREQ(str.data(), STR("Let me help you with your baggage"));
         EXPECT_EQ(str.size(), 33);
     };
@@ -1739,39 +1741,51 @@ TYPED_TEST(TestQxString, replase_all)
 {
     auto test_replace_all = [](auto type_find_var, auto type_replace_var)
     {
-        using type_find = decltype(type_find_var);
+        using type_find    = decltype(type_find_var);
         using type_replace = decltype(type_replace_var);
 
         StringTypeTn str;
-        auto pszStartStr = STR("aa bb cc aaa bbb ccc dddd");
+        auto         pszStartStr = STR("aa bb cc aaa bbb ccc dddd");
 
         str = pszStartStr;
-        EXPECT_EQ(str.replace_all(type_find(STR("aa")), type_replace(STR("bb"))), 2);
+        EXPECT_EQ(
+            str.replace_all(type_find(STR("aa")), type_replace(STR("bb"))),
+            2);
         EXPECT_STREQ(str.data(), STR("bb bb cc bba bbb ccc dddd"));
         EXPECT_EQ(str.size(), 25);
 
         str = pszStartStr;
-        EXPECT_EQ(str.replace_all(type_find(STR("aa")), type_replace(STR("bb")), 4), 1);
+        EXPECT_EQ(
+            str.replace_all(type_find(STR("aa")), type_replace(STR("bb")), 4),
+            1);
         EXPECT_STREQ(str.data(), STR("aa bb cc bba bbb ccc dddd"));
         EXPECT_EQ(str.size(), 25);
 
         str = pszStartStr;
-        EXPECT_EQ(str.replace_all(type_find(STR("fff")), type_replace(STR("bb"))), 0);
+        EXPECT_EQ(
+            str.replace_all(type_find(STR("fff")), type_replace(STR("bb"))),
+            0);
         EXPECT_STREQ(str.data(), STR("aa bb cc aaa bbb ccc dddd"));
         EXPECT_EQ(str.size(), 25);
 
         str = pszStartStr;
-        EXPECT_EQ(str.replace_all(type_find(STR("aaa")), type_replace(STR("bbb"))), 1);
+        EXPECT_EQ(
+            str.replace_all(type_find(STR("aaa")), type_replace(STR("bbb"))),
+            1);
         EXPECT_STREQ(str.data(), STR("aa bb cc bbb bbb ccc dddd"));
         EXPECT_EQ(str.size(), 25);
 
         str = pszStartStr;
-        EXPECT_EQ(str.replace_all(type_find(STR("aaa")), type_replace(STR("bbb"))), 1);
+        EXPECT_EQ(
+            str.replace_all(type_find(STR("aaa")), type_replace(STR("bbb"))),
+            1);
         EXPECT_STREQ(str.data(), STR("aa bb cc bbb bbb ccc dddd"));
         EXPECT_EQ(str.size(), 25);
 
         str = pszStartStr;
-        EXPECT_EQ(str.replace_all(type_find(STR("a")), type_replace(STR("b"))), 5);
+        EXPECT_EQ(
+            str.replace_all(type_find(STR("a")), type_replace(STR("b"))),
+            5);
         EXPECT_STREQ(str.data(), STR("bb bb cc bbb bbb ccc dddd"));
         EXPECT_EQ(str.size(), 25);
     };
@@ -1791,7 +1805,7 @@ TYPED_TEST(TestQxString, replase_all)
 
 TYPED_TEST(TestQxString, remove_prefix)
 {
-    auto pszStr = STR("12345");
+    auto         pszStr = STR("12345");
     StringTypeTn str;
 
     str = pszStr;
@@ -1826,7 +1840,7 @@ TYPED_TEST(TestQxString, remove_prefix)
 
 TYPED_TEST(TestQxString, remove_suffix)
 {
-    auto pszStr = STR("12345");
+    auto         pszStr = STR("12345");
     StringTypeTn str;
 
     str = pszStr;
@@ -1940,7 +1954,7 @@ TYPED_TEST(TestQxString, trim_left)
 
     // iterators
     StdString sStdTrim = STR("12");
-    str = STR("1112345");
+    str                = STR("1112345");
     EXPECT_EQ(str.trim_left(sStdTrim.cbegin(), sStdTrim.cend()), 4);
     EXPECT_STREQ(str.data(), STR("345"));
     EXPECT_EQ(str.size(), 3);
@@ -2007,7 +2021,7 @@ TYPED_TEST(TestQxString, trim_right)
 
     // iterators
     StdString sStdTrim = STR("45");
-    str = STR("12345555");
+    str                = STR("12345555");
     EXPECT_EQ(str.trim_right(sStdTrim.cbegin(), sStdTrim.cend()), 5);
     EXPECT_STREQ(str.data(), STR("123"));
     EXPECT_EQ(str.size(), 3);
@@ -2074,7 +2088,7 @@ TYPED_TEST(TestQxString, trim)
 
     // iterators
     StdString sStdTrim = STR("145");
-    str = STR("12345555");
+    str                = STR("12345555");
     EXPECT_EQ(str.trim(sStdTrim.cbegin(), sStdTrim.cend()), 6);
     EXPECT_STREQ(str.data(), STR("23"));
     EXPECT_EQ(str.size(), 2);
@@ -2175,7 +2189,7 @@ TYPED_TEST(TestQxString, append_format)
 TYPED_TEST(TestQxString, copy)
 {
     std::vector<ValueType> buffer(10);
-    StringTypeTn str(STR("0123456789"));
+    StringTypeTn           str(STR("0123456789"));
 
     EXPECT_EQ(str.copy(buffer.data(), 2), 2);
     buffer[2] = CH('\0');
@@ -2234,6 +2248,5 @@ TYPED_TEST(TestQxString, rfind)
     test(sStdStr);
     test(sStdStr.cbegin(), sStdStr.cend());
 }
-
 
 #endif

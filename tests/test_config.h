@@ -1,15 +1,12 @@
-//==============================================================================
-//
-//!\file                           config.h
-//
-//!\brief       configure testing
-//!\details     ~
-//
-//!\author      Khrapov
-//!\date        8.03.2020
-//!\copyright   (c) Nick Khrapov, 2020. All right reserved.
-//
-//==============================================================================
+/**
+
+    @file      test_config.h
+    @brief     Tests configuring
+    @author    Khrapov
+    @date      8.03.2020
+    @copyright © Nick Khrapov, 2021. All right reserved.
+
+**/
 #pragma once
 
 #include <qx/suppress_warnings.h>

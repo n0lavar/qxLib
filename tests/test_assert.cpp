@@ -1,22 +1,18 @@
-//==============================================================================
-//
-//!\file                        test_assert.cpp
-//
-//!\brief       Tests for assert macros
-//!\details     ~
-//
-//!\author      Khrapov
-//!\date        29.10.2020
-//!\copyright   (c) Nick Khrapov, 2020. All right reserved.
-//
-//==============================================================================
+/**
+
+    @file      test_assert.cpp
+    @author    Khrapov
+    @date      29.10.2020
+    @copyright © Nick Khrapov, 2021. All right reserved.
+
+**/
 #include <test_config.h>
 
 //V_EXCLUDE_PATH *test_assert.cpp
 
 #if QX_TEST_ASSERT
 
-#define QX_ENABLE_ASSERTS 1
+#define QX_ENABLE_ASSERTS     1
 #define QX_ENABLE_DEBUG_BREAK 1
 
 #include <qx/assert.h>

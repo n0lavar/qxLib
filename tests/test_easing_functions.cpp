@@ -1,15 +1,11 @@
-//==============================================================================
-//
-//!\file                   test_easing_functions.cpp
-//
-//!\brief       Tests for functions from qx::easing
-//!\details     ~
-//
-//!\author      Khrapov
-//!\date        11.05.2021
-//!\copyright   (c) Nick Khrapov, 2021. All right reserved.
-//
-//==============================================================================
+/**
+
+    @file      test_easing_functions.cpp
+    @author    Khrapov
+    @date      11.05.2021
+    @copyright © Nick Khrapov, 2021. All right reserved.
+
+**/
 #include <test_config.h>
 
 //V_EXCLUDE_PATH *test_easing_functions.cpp
@@ -22,42 +18,29 @@ template<typename T>
 class TestEasingFunctions : public ::testing::Test
 {
 protected:
-
     template<T Func(T)>
     void TestFunc()
     {
         // x zero
-        EXPECT_TRUE(qx::epsilon_equal(
-            Func(T(0.f)),
-            T(0.f),
-            qx::easing::eps<T>()));
+        EXPECT_TRUE(
+            qx::epsilon_equal(Func(T(0.f)), T(0.f), qx::easing::eps<T>()));
 
         // x one
-        EXPECT_TRUE(qx::epsilon_equal(
-            Func(T(1.f)),
-            T(1.f),
-            qx::easing::eps<T>()));
+        EXPECT_TRUE(
+            qx::epsilon_equal(Func(T(1.f)), T(1.f), qx::easing::eps<T>()));
 
         // check there are no divides on zero and other calc errors
         constexpr T step(0.001f);
 
         volatile T sum_to_avoid_optimizing_out(0.f);
-        for (T x = 0.0;
-            qx::epsilon_less_equal(x, T(1.f));
-            x += step)
+        for (T x = 0.0; qx::epsilon_less_equal(x, T(1.f)); x += step)
         {
             sum_to_avoid_optimizing_out = sum_to_avoid_optimizing_out + Func(x);
         }
-
     }
 };
 
-using Implementations = ::testing::Types
-<
-    float,
-    double,
-    long double
->;
+using Implementations = ::testing::Types<float, double, long double>;
 
 TYPED_TEST_SUITE(TestEasingFunctions, Implementations);
 

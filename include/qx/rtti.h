@@ -6,7 +6,6 @@
                will let you to use RTTI advantages without enabling RTTI in compiler's flags
                common logic is taken from
                https://github.com/qualab/xakep-RTTI (Vladimir Kerimov, qualab)
-               
     @author    Khrapov
     @date      24.08.2020
     @copyright © Nick Khrapov, 2021. All right reserved.

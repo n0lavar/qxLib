@@ -1,23 +1,19 @@
-//==============================================================================
-//
-//!\file                     test_useful_funcs.cpp
-//
-//!\brief       Tests for functions from useful_funcs.h
-//!\details     ~
-//
-//!\author      Khrapov
-//!\date        23.09.2020
-//!\copyright   (c) Nick Khrapov, 2020. All right reserved.
-//
-//==============================================================================
+/**
+
+    @file      test_useful_funcs.cpp
+    @author    Khrapov
+    @date      23.09.2020
+    @copyright © Nick Khrapov, 2021. All right reserved.
+
+**/
 #include <test_config.h>
 
- //V_EXCLUDE_PATH *test_useful_funcs.cpp
+//V_EXCLUDE_PATH *test_useful_funcs.cpp
 
 #if QX_TEST_USEFUL_FUNCS
 
-#include <qx/useful_macros.h>
 #include <qx/containers/container.h>
+#include <qx/useful_macros.h>
 
 #include <algorithm>
 
@@ -36,11 +32,11 @@ enum Enum
 };
 
 static_assert(!qx::between(E_1, E_0, E_5));
-static_assert( qx::between(E_1, E_1, E_5));
-static_assert( qx::between(E_1, E_2, E_5));
-static_assert( qx::between(E_1, E_3, E_5));
-static_assert( qx::between(E_1, E_4, E_5));
-static_assert( qx::between(E_1, E_5, E_5));
+static_assert(qx::between(E_1, E_1, E_5));
+static_assert(qx::between(E_1, E_2, E_5));
+static_assert(qx::between(E_1, E_3, E_5));
+static_assert(qx::between(E_1, E_4, E_5));
+static_assert(qx::between(E_1, E_5, E_5));
 static_assert(!qx::between(E_1, E_6, E_5));
 
 
@@ -57,34 +53,34 @@ enum class EnumClass
 };
 
 static_assert(!qx::between(EnumClass::e1, EnumClass::e0, EnumClass::e5));
-static_assert( qx::between(EnumClass::e1, EnumClass::e1, EnumClass::e5));
-static_assert( qx::between(EnumClass::e1, EnumClass::e2, EnumClass::e5));
-static_assert( qx::between(EnumClass::e1, EnumClass::e3, EnumClass::e5));
-static_assert( qx::between(EnumClass::e1, EnumClass::e4, EnumClass::e5));
-static_assert( qx::between(EnumClass::e1, EnumClass::e5, EnumClass::e5));
+static_assert(qx::between(EnumClass::e1, EnumClass::e1, EnumClass::e5));
+static_assert(qx::between(EnumClass::e1, EnumClass::e2, EnumClass::e5));
+static_assert(qx::between(EnumClass::e1, EnumClass::e3, EnumClass::e5));
+static_assert(qx::between(EnumClass::e1, EnumClass::e4, EnumClass::e5));
+static_assert(qx::between(EnumClass::e1, EnumClass::e5, EnumClass::e5));
 static_assert(!qx::between(EnumClass::e1, EnumClass::e6, EnumClass::e5));
 
 
 // integral
 static_assert(!qx::between(0, -1, 5));
-static_assert( qx::between(0, 0, 5));
-static_assert( qx::between(0, 1, 5));
-static_assert( qx::between(0, 2, 5));
-static_assert( qx::between(0, 3, 5));
-static_assert( qx::between(0, 4, 5));
-static_assert( qx::between(0, 5, 5));
+static_assert(qx::between(0, 0, 5));
+static_assert(qx::between(0, 1, 5));
+static_assert(qx::between(0, 2, 5));
+static_assert(qx::between(0, 3, 5));
+static_assert(qx::between(0, 4, 5));
+static_assert(qx::between(0, 5, 5));
 static_assert(!qx::between(0, 6, 5));
 
 
 // floating point
 static_assert(!qx::between(0.0, -0.2, 1.0));
-static_assert( qx::between(0.0,  0.0, 1.0));
-static_assert( qx::between(0.0,  0.2, 1.0));
-static_assert( qx::between(0.0,  0.4, 1.0));
-static_assert( qx::between(0.0,  0.6, 1.0));
-static_assert( qx::between(0.0,  0.8, 1.0));
-static_assert( qx::between(0.0,  1.0, 1.0));
-static_assert(!qx::between(0.0,  1.2, 1.0));
+static_assert(qx::between(0.0, 0.0, 1.0));
+static_assert(qx::between(0.0, 0.2, 1.0));
+static_assert(qx::between(0.0, 0.4, 1.0));
+static_assert(qx::between(0.0, 0.6, 1.0));
+static_assert(qx::between(0.0, 0.8, 1.0));
+static_assert(qx::between(0.0, 1.0, 1.0));
+static_assert(!qx::between(0.0, 1.2, 1.0));
 
 
 
@@ -92,8 +88,14 @@ static_assert(!qx::between(0.0,  1.2, 1.0));
 
 struct DestructChecker
 {
-     DestructChecker() { counter++; }
-    ~DestructChecker() { counter--; }
+    DestructChecker()
+    {
+        counter++;
+    }
+    ~DestructChecker()
+    {
+        counter--;
+    }
 
     static int counter;
 };
@@ -112,7 +114,13 @@ TEST(useful_funcs, destruct)
 //------------------------------- qx::make_array -------------------------------
 
 constexpr auto TEST_ARRAY_1 = qx::make_array<5>(1);
-static_assert(std::all_of(TEST_ARRAY_1.cbegin(), TEST_ARRAY_1.cend(), [](int val) { return val == 1; }));
+static_assert(std::all_of(
+    TEST_ARRAY_1.cbegin(),
+    TEST_ARRAY_1.cend(),
+    [](int val)
+    {
+        return val == 1;
+    }));
 static_assert(TEST_ARRAY_1.size() == 5);
 
 #endif

@@ -1,15 +1,11 @@
-//==============================================================================
-//
-//!\file                           main.cpp
-//
-//!\brief       Entry point for tests
-//!\details     ~
-//
-//!\author      Khrapov
-//!\date        8.03.2020
-//!\copyright   (c) Nick Khrapov, 2020. All right reserved.
-//
-//==============================================================================
+/**
+
+    @file      main.cpp
+    @author    Khrapov
+    @date      8.03.2020
+    @copyright © Nick Khrapov, 2021. All right reserved.
+
+**/
 
 //V_EXCLUDE_PATH *main.cpp
 

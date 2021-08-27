@@ -146,8 +146,9 @@ public:
         @param nNameLength  - name length 
         @param pszText      - text that will be placed in shader instead of #include 
         @param nTextLength  - text length 
+        @retval             - true if include extension is supported and successfully added
     **/
-    static void AddInclude(
+    static bool AddInclude(
         const char* pszName,
         GLint       nNameLength,
         const char* pszText,

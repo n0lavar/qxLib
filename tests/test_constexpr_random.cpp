@@ -1,15 +1,11 @@
-//==============================================================================
-//
-//!\file                   test_constexpr_random.cpp
-//
-//!\brief       Tests for qx::constexpr_random class
-//!\details     ~
-//
-//!\author      Khrapov
-//!\date        11.09.2020
-//!\copyright   (c) Nick Khrapov, 2020. All right reserved.
-//
-//==============================================================================
+/**
+
+    @file      test_constexpr_random.cpp
+    @author    Khrapov
+    @date      11.09.2020
+    @copyright © Nick Khrapov, 2021. All right reserved.
+
+**/
 #include <test_config.h>
 
 //V_EXCLUDE_PATH *test_constexpr_random.cpp
@@ -25,7 +21,8 @@
 
 
 constexpr u32 CONST_SEED = 0u;
-using random_check_duplicate = qx::constexpr_random<class TagA, CONST_SEED, 0u, 100u>;
+using random_check_duplicate =
+    qx::constexpr_random<class TagA, CONST_SEED, 0u, 100u>;
 QX_STATIC_ASSERT_EQ(random_check_duplicate::next(), 45u);
 QX_STATIC_ASSERT_EQ(random_check_duplicate::next(), 66u);
 QX_STATIC_ASSERT_EQ(random_check_duplicate::next(), 31u);
