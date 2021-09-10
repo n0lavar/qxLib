@@ -13,8 +13,10 @@
 #if QX_TEST_RTTI
 
 #include <qx/containers/string_utils.h>
-#include <qx/rtti.h>
+#include <qx/rtti/rtti.h>
+#include <qx/rtti/rtti_cast.h>
 #include <qx/useful_macros.h>
+
 #include <memory>
 
 class CClass1
@@ -26,82 +28,88 @@ class CClass2
 };
 
 class CRttiBase
+    : public qx::rtti_root<
+          CRttiBase,
+          qx::rtti_creator,
+          qx::rtti_naming_strategy_class_name>
 {
-    QX_RTTI_BASE_CLASS(CRttiBase)
-
-public:
-    virtual ~CRttiBase(void) = default;
+    QX_RTTI_CLASS(
+        CRttiBase,
+        QX_SINGLE_ARGUMENT(rtti_root<
+                           CRttiBase,
+                           qx::rtti_creator,
+                           qx::rtti_naming_strategy_class_name>));
 };
 
 class CBase1 : public CRttiBase
 {
-    QX_RTTI_CLASS(CBase1, CRttiBase)
+    QX_RTTI_CLASS(CBase1, CRttiBase);
 };
 
 class CDerived1_1 : public CBase1
 {
-    QX_RTTI_CLASS(CDerived1_1, CBase1)
+    QX_RTTI_CLASS(CDerived1_1, CBase1);
 };
 
 class CDerived1_2 : public CBase1
 {
-    QX_RTTI_CLASS(CDerived1_2, CBase1)
+    QX_RTTI_CLASS(CDerived1_2, CBase1);
 };
 
 class CDerived1_21 : public CDerived1_2
 {
-    QX_RTTI_CLASS(CDerived1_21, CDerived1_2)
+    QX_RTTI_CLASS(CDerived1_21, CDerived1_2);
 };
 
 class CDerived1_22 : public CDerived1_2
 {
-    QX_RTTI_CLASS(CDerived1_22, CDerived1_2)
+    QX_RTTI_CLASS(CDerived1_22, CDerived1_2);
 };
 
 class CDerived1_221 : public CDerived1_22
 {
-    QX_RTTI_CLASS(CDerived1_221, CDerived1_22)
+    QX_RTTI_CLASS(CDerived1_221, CDerived1_22);
 };
 
 class CDerived1_222 : public CDerived1_22
 {
-    QX_RTTI_CLASS(CDerived1_222, CDerived1_22)
+    QX_RTTI_CLASS(CDerived1_222, CDerived1_22);
 };
 
 class CDerived1_3 : public CBase1
 {
-    QX_RTTI_CLASS(CDerived1_3, CBase1)
+    QX_RTTI_CLASS(CDerived1_3, CBase1);
 };
 
 
 class CBase2 : public CRttiBase
 {
-    QX_RTTI_CLASS(CBase2, CRttiBase)
+    QX_RTTI_CLASS(CBase2, CRttiBase);
 };
 
 class CDerived2_1 : public CBase2
 {
-    QX_RTTI_CLASS(CDerived2_1, CBase2)
+    QX_RTTI_CLASS(CDerived2_1, CBase2);
 };
 
 class CDerived2_2 : public CBase2
 {
-    QX_RTTI_CLASS(CDerived2_2, CBase2)
+    QX_RTTI_CLASS(CDerived2_2, CBase2);
 };
 
 class CDerived2_3 : public CBase2
 {
-    QX_RTTI_CLASS(CDerived2_3, CBase2)
+    QX_RTTI_CLASS(CDerived2_3, CBase2);
 };
 
 class CDerived2_31 : public CDerived2_3
 {
-    QX_RTTI_CLASS(CDerived2_31, CDerived2_3)
+    QX_RTTI_CLASS(CDerived2_31, CDerived2_3);
 };
 
 class CDerived2_32 : public CDerived2_3
 {
-    QX_RTTI_CLASS(CDerived2_32, CDerived2_3)
+    QX_RTTI_CLASS(CDerived2_32, CDerived2_3);
 };
 
 const std::unique_ptr<CBase1>        p1     = std::make_unique<CBase1>();
@@ -179,6 +187,7 @@ QX_STATIC_ASSERT_STR_EQ(
     CDerived1_3::get_class_name_static().data(),
     "CDerived1_3");
 
+// ------------------------------------ RTTI -----------------------------------
 
 TEST(rtti, class_id)
 {
@@ -435,6 +444,128 @@ TEST(rtti, rtti_cast)
 
     EXPECT_FALSE(qx::rtti_cast<CDerived1_3>(p1));
     EXPECT_TRUE(qx::rtti_cast<CDerived1_3>(p1_3));
+}
+
+// -------------------- default constructor objects creation -------------------
+
+void CheckNullptrObjectCreation(auto id)
+{
+    const auto pObjectByName = qx::rtti_creator<CRttiBase>::create_object(id);
+    ASSERT_EQ(pObjectByName, nullptr);
+};
+
+template<class T>
+void CheckObjectCreation(std::string_view svExpectedClassName)
+{
+    const auto pObjectByName =
+        qx::rtti_creator<CRttiBase>::create_object(T::get_class_name_static());
+
+    ASSERT_EQ(pObjectByName->get_class_id(), T::get_class_id_static());
+
+    ASSERT_STREQ(
+        pObjectByName->get_class_name().data(),
+        svExpectedClassName.data());
+
+
+    const auto pObjectById =
+        qx::rtti_creator<CRttiBase>::create_object(T::get_class_id_static());
+
+    ASSERT_EQ(pObjectById->get_class_id(), T::get_class_id_static());
+
+    ASSERT_STREQ(
+        pObjectById->get_class_name().data(),
+        T::get_class_name_static().data());
+}
+
+TEST(rtti, create_object)
+{
+    CheckNullptrObjectCreation("CClass1");
+    CheckNullptrObjectCreation("CClass2");
+    CheckNullptrObjectCreation("int");
+    CheckNullptrObjectCreation(-1);
+
+    CheckObjectCreation<CDerived1_1>("CDerived1_1");
+    CheckObjectCreation<CDerived1_2>("CDerived1_2");
+    CheckObjectCreation<CDerived1_21>("CDerived1_21");
+    CheckObjectCreation<CDerived1_22>("CDerived1_22");
+    CheckObjectCreation<CDerived1_221>("CDerived1_221");
+    CheckObjectCreation<CDerived1_222>("CDerived1_222");
+    CheckObjectCreation<CDerived1_3>("CDerived1_3");
+    CheckObjectCreation<CDerived2_1>("CDerived2_1");
+    CheckObjectCreation<CDerived2_2>("CDerived2_2");
+    CheckObjectCreation<CDerived2_3>("CDerived2_3");
+    CheckObjectCreation<CDerived2_31>("CDerived2_31");
+    CheckObjectCreation<CDerived2_32>("CDerived2_32");
+}
+
+// ------------------ non-default constructor objects creation -----------------
+
+class CRttiNonDefaultConstructorBase
+    : public qx::rtti_root<
+          CRttiNonDefaultConstructorBase,
+          qx::rtti_creator,
+          qx::rtti_naming_strategy_class_name,
+          int>
+{
+    QX_RTTI_CLASS(
+        CRttiNonDefaultConstructorBase,
+        QX_SINGLE_ARGUMENT(qx::rtti_root<
+                           CRttiNonDefaultConstructorBase,
+                           qx::rtti_creator,
+                           qx::rtti_naming_strategy_class_name,
+                           int>));
+
+public:
+    CRttiNonDefaultConstructorBase(int nInt) : m_nBaseInt(nInt)
+    {
+    }
+
+    virtual int GetInt(void) const
+    {
+        return m_nBaseInt;
+    }
+
+private:
+    int m_nBaseInt = 0;
+};
+
+class CRttiNonDefaultConstructorDerived : public CRttiNonDefaultConstructorBase
+{
+    QX_RTTI_CLASS(
+        CRttiNonDefaultConstructorDerived,
+        CRttiNonDefaultConstructorBase);
+
+public:
+    CRttiNonDefaultConstructorDerived(int nInt)
+        : CRttiNonDefaultConstructorBase(nInt)
+        , m_nDerivedInt(nInt)
+    {
+    }
+
+    virtual int GetInt(void) const override
+    {
+        return m_nDerivedInt;
+    }
+
+private:
+    int m_nDerivedInt = 0;
+};
+
+TEST(rtti, non_default_constructor)
+{
+    const auto pBase =
+        CRttiNonDefaultConstructorBase::CreatorStrategy::create_object(
+            "CRttiNonDefaultConstructorBase",
+            1);
+
+    EXPECT_EQ(pBase->GetInt(), 1);
+
+    const auto pDerived =
+        CRttiNonDefaultConstructorBase::CreatorStrategy::create_object(
+            "CRttiNonDefaultConstructorDerived",
+            2);
+
+    EXPECT_EQ(pDerived->GetInt(), 2);
 }
 
 #endif

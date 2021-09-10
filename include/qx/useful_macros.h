@@ -74,9 +74,9 @@
 
 
 #if QX_WIN
-    #define QX_PATH_SEPARATOR '\\'
+#define QX_PATH_SEPARATOR '\\'
 #else
-    #define QX_PATH_SEPARATOR '/'
+#define QX_PATH_SEPARATOR '/'
 #endif
 
 namespace qx::detail
@@ -111,7 +111,7 @@ constexpr const char* last_slash(const char* str)
            FOO(QX_SINGLE_ARGUMENT(std::map<int, int>), map_var);
     @param ... - param containing commas
 **/
-#define QX_SINGLE_ARGUMENT(...) (__VA_ARGS__)
+#define QX_SINGLE_ARGUMENT(...) __VA_ARGS__
 
 /**
     @def   QX_COPYABLE

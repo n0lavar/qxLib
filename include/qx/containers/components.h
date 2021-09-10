@@ -9,7 +9,7 @@
 **/
 #pragma once
 
-#include <qx/rtti.h>
+#include <qx/rtti/rtti.h>
 
 #include <memory>
 #include <unordered_map>

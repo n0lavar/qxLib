@@ -16,9 +16,9 @@
 
 #include <string>
 
-class BaseTestComponent
+class BaseTestComponent : public qx::rtti_root<BaseTestComponent>
 {
-    QX_RTTI_BASE_CLASS(BaseTestComponent)
+    QX_RTTI_CLASS(BaseTestComponent, qx::rtti_root<BaseTestComponent>);
 
 public:
     virtual ~BaseTestComponent(void) = default;
