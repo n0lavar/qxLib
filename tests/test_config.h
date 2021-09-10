@@ -15,6 +15,7 @@ QX_PUSH_SUPPRESS_ALL_WARNINGS
 #include <gtest/gtest.h>
 QX_POP_SUPPRESS_WARNINGS
 
+// clang-format off
 
 #ifndef QX_TEST_SORT
     #define QX_TEST_SORT 1
@@ -131,7 +132,7 @@ QX_POP_SUPPRESS_WARNINGS
 #ifndef QX_TEST_EASING_ELEMENT
     #define QX_TEST_EASING_ELEMENT 1
 #endif
-
+ 
 #ifndef QX_TEST_EASING_SEQUENCE
     #define QX_TEST_EASING_SEQUENCE 1
 #endif
@@ -139,3 +140,13 @@ QX_POP_SUPPRESS_WARNINGS
 #ifndef QX_TEST_MOVING_AVERAGE
     #define QX_TEST_MOVING_AVERAGE 1
 #endif
+
+#ifndef QX_TEST_STRING_UTILS
+    #define QX_TEST_STRING_UTILS 1
+#endif
+
+#ifndef QX_TEST_STRING_LITERAL
+    #define QX_TEST_STRING_LITERAL 1
+#endif
+
+// clang-format on
