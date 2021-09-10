@@ -215,18 +215,20 @@ $(function() {
 <div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;                <span class="stringliteral">&quot;color attachments are not from textures of the same target.&quot;</span>;</div>
 <div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;            <span class="keywordflow">break</span>;</div>
 <div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160; </div>
-<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;        <span class="keywordflow">default</span>: pszErrorMsg = <span class="stringliteral">&quot;Unknown error&quot;</span>; <span class="keywordflow">break</span>;</div>
-<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;        }</div>
-<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160; </div>
-<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;        ASSERT_MSG(</div>
-<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;            0,</div>
-<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;            <span class="stringliteral">&quot;Framebuffer status is not complete: Status: %d, Error: %s&quot;</span>,</div>
-<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;            eStatus,</div>
-<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;            pszErrorMsg);</div>
-<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;    }</div>
-<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;}</div>
-<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160; </div>
-<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;} <span class="comment">// namespace qx</span></div>
+<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;        <span class="keywordflow">default</span>:</div>
+<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;            pszErrorMsg = <span class="stringliteral">&quot;Unknown error&quot;</span>;</div>
+<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;            <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;        }</div>
+<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160; </div>
+<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;        ASSERT_MSG(</div>
+<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;            0,</div>
+<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;            <span class="stringliteral">&quot;Framebuffer status is not complete: Status: %d, Error: %s&quot;</span>,</div>
+<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;            eStatus,</div>
+<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;            pszErrorMsg);</div>
+<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;    }</div>
+<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;}</div>
+<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160; </div>
+<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;} <span class="comment">// namespace qx</span></div>
 <div class="ttc" id="aclassqx_1_1_i_buffer_html_a2f271fd37af56e7b92c5ad1b23084f3d"><div class="ttname"><a href="classqx_1_1_i_buffer.html#a2f271fd37af56e7b92c5ad1b23084f3d">qx::IBuffer::Unbind</a></div><div class="ttdeci">virtual void Unbind(void) const =0</div><div class="ttdoc">Unbind a named buffer object.</div></div>
 <div class="ttc" id="aclassqx_1_1_i_buffer_html_a37d204318b19214bd647e94d1c925fb2"><div class="ttname"><a href="classqx_1_1_i_buffer.html#a37d204318b19214bd647e94d1c925fb2">qx::IBuffer::Generate</a></div><div class="ttdeci">virtual void Generate(void)=0</div><div class="ttdoc">Generate buffer object.</div></div>
 <div class="ttc" id="aclassqx_1_1_i_buffer_html_a7a9c81a7d42aef4f77e917e531b31355"><div class="ttname"><a href="classqx_1_1_i_buffer.html#a7a9c81a7d42aef4f77e917e531b31355">qx::IBuffer::GetBufferName</a></div><div class="ttdeci">virtual GLuint GetBufferName(void) const =0</div><div class="ttdoc">Get the object's name - the reference to the object.</div></div>
