@@ -64,10 +64,14 @@ QX_STATIC_ASSERT_STR_EQ(pszFileName, "test_useful_macros.cpp");
 
 //----------------------------- QX_SINGLE_ARGUMENT -----------------------------
 
+#define MACRO_WITH_2_ARGS(a, b) \
+    if (a != b)                 \
+        throw std::exception();
+
 TEST(useful_macros, single_argument)
 {
     // check compilation
-    ASSERT_EQ(QX_SINGLE_ARGUMENT(std::map<int, int>().size()), 0);
+    MACRO_WITH_2_ARGS(QX_SINGLE_ARGUMENT(std::map<int, int>().size()), 0);
 }
 
 
