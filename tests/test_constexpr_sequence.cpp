@@ -10,7 +10,7 @@
 
 //V_EXCLUDE_PATH *test_constexpr_sequence.cpp
 
-#if GTEST_SINGLE_ARGUMENT
+#if QX_TEST_CONSTEXPR_SEQUENCE
 
 #include <qx/meta/constexpr_sequence.h>
 
