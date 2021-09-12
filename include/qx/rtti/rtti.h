@@ -14,7 +14,7 @@
 **/
 #pragma once
 
-#include <qx/rtti/rtti_creator_strategy.h>
+#include <qx/rtti/class_identificator.h>
 #include <qx/rtti/rtti_naming_strategy.h>
 #include <qx/useful_macros.h>
 
@@ -57,26 +57,21 @@ inline class_identificator get_class_id(void) noexcept
     @details All other classes must be inherited from this class
              to allow you to use RTTI functions
     @tparam  _DerivedBase     - derived class type
-    @tparam  _CreatorStrategy - \see rtti_creator_strategy.h
     @tparam  _NamingStrategy  - \see rtti_naming_strategy.h
-    @tparam  Args             - arguments for derived class instance creation
     @author  Khrapov
     @date    10.09.2021
 
 **/
 template<
     class _DerivedBase,
-    template<class, class> class _CreatorStrategy = rtti_stub_creator,
     template<string_literal> class _NamingStrategy =
-        rtti_naming_strategy_class_name,
-    class... Args>
-class rtti_root : public _CreatorStrategy<_DerivedBase, Args...>
+        rtti_naming_strategy_class_name>
+class rtti_root
 {
 public:
-    using BaseClass       = _DerivedBase;
-    using SuperClass      = _DerivedBase;
-    using ThisClass       = _DerivedBase;
-    using CreatorStrategy = _CreatorStrategy<_DerivedBase, Args...>;
+    using BaseClass  = _DerivedBase;
+    using SuperClass = _DerivedBase;
+    using ThisClass  = _DerivedBase;
 
 public:
     template<typename RTTI_TYPE>
@@ -119,34 +114,14 @@ protected:
         return idBase == get_class_id_static();
     }
 
-    static bool _register_class(
-        typename CreatorStrategy::factory factory,
-        class_identificator               id,
-        std::string_view                  svName)
+    static class_identificator _get_next_id() noexcept
     {
-        if (factory && !svName.empty())
-            return CreatorStrategy::register_class(factory, id, svName);
-        else
-            return false;
-    }
-
-    static class_identificator _get_next_id()
-    {
-        static class_identificator nId = 1;
+        static class_identificator nId = get_class_id_static() + 1;
         return nId++;
     }
 
-    template<class Derived>
-    static std::unique_ptr<BaseClass> _create_object(Args&&... args)
-    {
-        if constexpr (std::is_constructible_v<Derived, Args...>)
-            return std::make_unique<Derived>(std::forward<Args>(args)...);
-        else
-            return nullptr;
-    }
-
     template<string_literal DerivedName>
-    static constexpr std::string_view _get_class_name_by_strategy()
+    static constexpr std::string_view _get_class_name_by_strategy() noexcept
     {
         return _NamingStrategy<DerivedName>::get_name();
     }
@@ -200,12 +175,6 @@ protected:                                                                     \
     {                                                                          \
         return base_id == qx::get_class_id<SuperClass>()                       \
                || SuperClass::_is_base_id(base_id);                            \
-    }                                                                          \
-                                                                               \
-private:                                                                       \
-    static inline bool m_bRegistered = _register_class(                        \
-        _create_object<ThisClass>,                                             \
-        get_class_id_static(),                                                 \
-        get_class_name_static());
+    }
 
 } // namespace qx

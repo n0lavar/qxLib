@@ -27,18 +27,9 @@ class CClass2
 {
 };
 
-class CRttiBase
-    : public qx::rtti_root<
-          CRttiBase,
-          qx::rtti_creator,
-          qx::rtti_naming_strategy_class_name>
+class CRttiBase : public qx::rtti_root<CRttiBase>
 {
-    QX_RTTI_CLASS(
-        CRttiBase,
-        QX_SINGLE_ARGUMENT(rtti_root<
-                           CRttiBase,
-                           qx::rtti_creator,
-                           qx::rtti_naming_strategy_class_name>));
+    QX_RTTI_CLASS(CRttiBase, rtti_root<CRttiBase>);
 };
 
 class CBase1 : public CRttiBase
@@ -444,128 +435,6 @@ TEST(rtti, rtti_cast)
 
     EXPECT_FALSE(qx::rtti_cast<CDerived1_3>(p1));
     EXPECT_TRUE(qx::rtti_cast<CDerived1_3>(p1_3));
-}
-
-// -------------------- default constructor objects creation -------------------
-
-void CheckNullptrObjectCreation(auto id)
-{
-    const auto pObjectByName = qx::rtti_creator<CRttiBase>::create_object(id);
-    ASSERT_EQ(pObjectByName, nullptr);
-};
-
-template<class T>
-void CheckObjectCreation(std::string_view svExpectedClassName)
-{
-    const auto pObjectByName =
-        qx::rtti_creator<CRttiBase>::create_object(T::get_class_name_static());
-
-    ASSERT_EQ(pObjectByName->get_class_id(), T::get_class_id_static());
-
-    ASSERT_STREQ(
-        pObjectByName->get_class_name().data(),
-        svExpectedClassName.data());
-
-
-    const auto pObjectById =
-        qx::rtti_creator<CRttiBase>::create_object(T::get_class_id_static());
-
-    ASSERT_EQ(pObjectById->get_class_id(), T::get_class_id_static());
-
-    ASSERT_STREQ(
-        pObjectById->get_class_name().data(),
-        T::get_class_name_static().data());
-}
-
-TEST(rtti, create_object)
-{
-    CheckNullptrObjectCreation("CClass1");
-    CheckNullptrObjectCreation("CClass2");
-    CheckNullptrObjectCreation("int");
-    CheckNullptrObjectCreation(-1);
-
-    CheckObjectCreation<CDerived1_1>("CDerived1_1");
-    CheckObjectCreation<CDerived1_2>("CDerived1_2");
-    CheckObjectCreation<CDerived1_21>("CDerived1_21");
-    CheckObjectCreation<CDerived1_22>("CDerived1_22");
-    CheckObjectCreation<CDerived1_221>("CDerived1_221");
-    CheckObjectCreation<CDerived1_222>("CDerived1_222");
-    CheckObjectCreation<CDerived1_3>("CDerived1_3");
-    CheckObjectCreation<CDerived2_1>("CDerived2_1");
-    CheckObjectCreation<CDerived2_2>("CDerived2_2");
-    CheckObjectCreation<CDerived2_3>("CDerived2_3");
-    CheckObjectCreation<CDerived2_31>("CDerived2_31");
-    CheckObjectCreation<CDerived2_32>("CDerived2_32");
-}
-
-// ------------------ non-default constructor objects creation -----------------
-
-class CRttiNonDefaultConstructorBase
-    : public qx::rtti_root<
-          CRttiNonDefaultConstructorBase,
-          qx::rtti_creator,
-          qx::rtti_naming_strategy_class_name,
-          int>
-{
-    QX_RTTI_CLASS(
-        CRttiNonDefaultConstructorBase,
-        QX_SINGLE_ARGUMENT(qx::rtti_root<
-                           CRttiNonDefaultConstructorBase,
-                           qx::rtti_creator,
-                           qx::rtti_naming_strategy_class_name,
-                           int>));
-
-public:
-    CRttiNonDefaultConstructorBase(int nInt) : m_nBaseInt(nInt)
-    {
-    }
-
-    virtual int GetInt(void) const
-    {
-        return m_nBaseInt;
-    }
-
-private:
-    int m_nBaseInt = 0;
-};
-
-class CRttiNonDefaultConstructorDerived : public CRttiNonDefaultConstructorBase
-{
-    QX_RTTI_CLASS(
-        CRttiNonDefaultConstructorDerived,
-        CRttiNonDefaultConstructorBase);
-
-public:
-    CRttiNonDefaultConstructorDerived(int nInt)
-        : CRttiNonDefaultConstructorBase(nInt)
-        , m_nDerivedInt(nInt)
-    {
-    }
-
-    virtual int GetInt(void) const override
-    {
-        return m_nDerivedInt;
-    }
-
-private:
-    int m_nDerivedInt = 0;
-};
-
-TEST(rtti, non_default_constructor)
-{
-    const auto pBase =
-        CRttiNonDefaultConstructorBase::CreatorStrategy::create_object(
-            "CRttiNonDefaultConstructorBase",
-            1);
-
-    EXPECT_EQ(pBase->GetInt(), 1);
-
-    const auto pDerived =
-        CRttiNonDefaultConstructorBase::CreatorStrategy::create_object(
-            "CRttiNonDefaultConstructorDerived",
-            2);
-
-    EXPECT_EQ(pDerived->GetInt(), 2);
 }
 
 #endif

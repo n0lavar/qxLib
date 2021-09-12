@@ -1,15 +1,17 @@
 /**
 
-    @file      rtti_creator_strategy.h
-    @brief     Contains creator strategies for qx::rtti_root class
-    @details   The creator strategy creates instances of classes derived from
-               qx::rtti_root
+    @file      reflection_creator.h
+    @brief     
+    @details   
     @author    Khrapov
     @date      9.09.2021
     @copyright © Nick Khrapov, 2021. All right reserved.
 
 **/
 #pragma once
+
+#include <qx/reflection/class_identificator.h>
+#include <qx/useful_macros.h>
 
 #include <functional>
 #include <map>
@@ -19,55 +21,14 @@
 namespace qx
 {
 
-using class_identificator = int;
-
 template<class BaseClass, class... Args>
-using rtti_class_factory = std::function<std::unique_ptr<BaseClass>(Args...)>;
+using reflection_class_factory =
+    std::function<std::unique_ptr<BaseClass>(Args...)>;
 
 /**
 
-    @class   rtti_stub_creator
-    @brief   Default creator for classes derived from qx::rtti_root
-    @details Does not register classes,
-             does not allocate memory,
-             and returns nullptr in factory methods
-    @tparam  BaseClass - base class type
-    @tparam  Args      - args for type creation
-    @author  Khrapov
-    @date    7.09.2021
-
-**/
-template<class BaseClass, class... Args>
-class rtti_stub_creator
-{
-public:
-    using factory = rtti_class_factory<BaseClass, Args...>;
-
-public:
-    [[nodiscard]] static std::unique_ptr<BaseClass> create_object(
-        class_identificator,
-        Args&&...)
-    {
-        return nullptr;
-    }
-
-    [[nodiscard]] static std::unique_ptr<BaseClass> create_object(
-        std::string_view,
-        Args&&...)
-    {
-        return nullptr;
-    }
-
-    static bool register_class(factory, class_identificator, std::string_view)
-    {
-        return false;
-    }
-};
-
-/**
-
-    @class   rtti_creator
-    @brief   Creator for classes derived from qx::rtti_root
+    @class   reflection_creator
+    @brief   
     @details Performs registration of classes inherited from BaseClass
              and creates their instances by their ID and name.
              Allocates memory.
@@ -78,10 +39,10 @@ public:
 
 **/
 template<class BaseClass, class... Args>
-class rtti_creator
+class reflection_creator
 {
 public:
-    using factory = rtti_class_factory<BaseClass, Args...>;
+    using factory = reflection_class_factory<BaseClass, Args...>;
 
 public:
     [[nodiscard]] static std::unique_ptr<BaseClass> create_object(
@@ -112,14 +73,39 @@ public:
         class_identificator id,
         std::string_view    svClassName)
     {
-        m_FactoriesById[id]            = factory;
-        m_FactoriesByName[svClassName] = factory;
-        return true;
+        if (factory && !svClassName.empty())
+        {
+            m_FactoriesById[id]            = factory;
+            m_FactoriesByName[svClassName] = factory;
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 
 private:
     static inline std::map<class_identificator, factory> m_FactoriesById;
     static inline std::map<std::string_view, factory>    m_FactoriesByName;
 };
+
+template<class BaseClass, class ThisClass, class... Args>
+static std::unique_ptr<BaseClass> _create_object(Args&&... args)
+{
+    if constexpr (std::is_constructible_v<ThisClass, Args...>)
+        return std::make_unique<ThisClass>(std::forward<Args>(args)...);
+    else
+        return nullptr;
+}
+
+#define QX_REGISTER_CREATOR(...)                                   \
+private:                                                           \
+    static inline bool QX_LINE_NAME(s_bRegistered) =               \
+        qx::reflection_creator<ThisClass>::register_class(         \
+            qx::_create_object<BaseClass, ThisClass, __VA_ARGS__>, \
+            get_class_id_static(),                                 \
+            get_class_name_static());
+
 
 } // namespace qx
