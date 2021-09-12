@@ -41,11 +41,11 @@ class TestQxString : public ::testing::Test
         ValueType,                   \
         std::char_traits<ValueType>, \
         std::allocator<ValueType>>
-#define StdStringArg                                \
-    QX_SINGLE_ARGUMENT(typename std::basic_string<  \
-                       ValueType,                   \
-                       std::char_traits<ValueType>, \
-                       std::allocator<ValueType>>)
+#define StdStringArg                                   \
+    GTEST_SINGLE_ARGUMENT(typename std::basic_string<  \
+                          ValueType,                   \
+                          std::char_traits<ValueType>, \
+                          std::allocator<ValueType>>)
 #define STR(str) QX_STR_PREFIX(ValueType, str)
 #define CH(str)  QX_CHAR_PREFIX(ValueType, str)
 

@@ -90,83 +90,85 @@ TEST(numerical, find_prime_factors)
 {
     ASSERT_EQ(
         qx::find_prime_factors(0),
-        QX_SINGLE_ARGUMENT(std::vector<int> {}));
+        GTEST_SINGLE_ARGUMENT(std::vector<int> {}));
     ASSERT_EQ(
         qx::find_prime_factors(1),
-        QX_SINGLE_ARGUMENT(std::vector<int> {}));
+        GTEST_SINGLE_ARGUMENT(std::vector<int> {}));
     ASSERT_EQ(
         qx::find_prime_factors(2),
-        QX_SINGLE_ARGUMENT(std::vector<int> { 2 }));
+        GTEST_SINGLE_ARGUMENT(std::vector<int> { 2 }));
     ASSERT_EQ(
         qx::find_prime_factors(-1),
-        QX_SINGLE_ARGUMENT(std::vector<int> {}));
+        GTEST_SINGLE_ARGUMENT(std::vector<int> {}));
     ASSERT_EQ(
         qx::find_prime_factors(-2),
-        QX_SINGLE_ARGUMENT(std::vector<int> { 2 }));
+        GTEST_SINGLE_ARGUMENT(std::vector<int> { 2 }));
     ASSERT_EQ(
         qx::find_prime_factors(6),
-        QX_SINGLE_ARGUMENT(std::vector<int> { 2, 3 }));
+        GTEST_SINGLE_ARGUMENT(std::vector<int> { 2, 3 }));
     ASSERT_EQ(
         qx::find_prime_factors(10),
-        QX_SINGLE_ARGUMENT(std::vector<int> { 2, 5 }));
+        GTEST_SINGLE_ARGUMENT(std::vector<int> { 2, 5 }));
     ASSERT_EQ(
         qx::find_prime_factors(144),
-        QX_SINGLE_ARGUMENT(std::vector<int> { 2, 2, 2, 2, 3, 3 }));
+        GTEST_SINGLE_ARGUMENT(std::vector<int> { 2, 2, 2, 2, 3, 3 }));
     ASSERT_EQ(
         qx::find_prime_factors(65),
-        QX_SINGLE_ARGUMENT(std::vector<int> { 5, 13 }));
+        GTEST_SINGLE_ARGUMENT(std::vector<int> { 5, 13 }));
     ASSERT_EQ(
         qx::find_prime_factors(88),
-        QX_SINGLE_ARGUMENT(std::vector<int> { 2, 2, 2, 11 }));
+        GTEST_SINGLE_ARGUMENT(std::vector<int> { 2, 2, 2, 11 }));
 }
 
 TEST(numerical, find_primes)
 {
-    ASSERT_EQ(qx::find_primes(0), QX_SINGLE_ARGUMENT(std::vector<int> {}));
-    ASSERT_EQ(qx::find_primes(1), QX_SINGLE_ARGUMENT(std::vector<int> {}));
-    ASSERT_EQ(qx::find_primes(2), QX_SINGLE_ARGUMENT(std::vector<int> { 2 }));
+    ASSERT_EQ(qx::find_primes(0), GTEST_SINGLE_ARGUMENT(std::vector<int> {}));
+    ASSERT_EQ(qx::find_primes(1), GTEST_SINGLE_ARGUMENT(std::vector<int> {}));
+    ASSERT_EQ(
+        qx::find_primes(2),
+        GTEST_SINGLE_ARGUMENT(std::vector<int> { 2 }));
     ASSERT_EQ(
         qx::find_primes(3),
-        QX_SINGLE_ARGUMENT(std::vector<int> { 2, 3 }));
+        GTEST_SINGLE_ARGUMENT(std::vector<int> { 2, 3 }));
     ASSERT_EQ(
         qx::find_primes(4),
-        QX_SINGLE_ARGUMENT(std::vector<int> { 2, 3 }));
+        GTEST_SINGLE_ARGUMENT(std::vector<int> { 2, 3 }));
     ASSERT_EQ(
         qx::find_primes(5),
-        QX_SINGLE_ARGUMENT(std::vector<int> { 2, 3, 5 }));
+        GTEST_SINGLE_ARGUMENT(std::vector<int> { 2, 3, 5 }));
     ASSERT_EQ(
         qx::find_primes(6),
-        QX_SINGLE_ARGUMENT(std::vector<int> { 2, 3, 5 }));
+        GTEST_SINGLE_ARGUMENT(std::vector<int> { 2, 3, 5 }));
     ASSERT_EQ(
         qx::find_primes(7),
-        QX_SINGLE_ARGUMENT(std::vector<int> { 2, 3, 5, 7 }));
+        GTEST_SINGLE_ARGUMENT(std::vector<int> { 2, 3, 5, 7 }));
     ASSERT_EQ(
         qx::find_primes(8),
-        QX_SINGLE_ARGUMENT(std::vector<int> { 2, 3, 5, 7 }));
+        GTEST_SINGLE_ARGUMENT(std::vector<int> { 2, 3, 5, 7 }));
     ASSERT_EQ(
         qx::find_primes(9),
-        QX_SINGLE_ARGUMENT(std::vector<int> { 2, 3, 5, 7 }));
+        GTEST_SINGLE_ARGUMENT(std::vector<int> { 2, 3, 5, 7 }));
     ASSERT_EQ(
         qx::find_primes(10),
-        QX_SINGLE_ARGUMENT(std::vector<int> { 2, 3, 5, 7 }));
+        GTEST_SINGLE_ARGUMENT(std::vector<int> { 2, 3, 5, 7 }));
     ASSERT_EQ(
         qx::find_primes(11),
-        QX_SINGLE_ARGUMENT(std::vector<int> { 2, 3, 5, 7, 11 }));
+        GTEST_SINGLE_ARGUMENT(std::vector<int> { 2, 3, 5, 7, 11 }));
     ASSERT_EQ(
         qx::find_primes(12),
-        QX_SINGLE_ARGUMENT(std::vector<int> { 2, 3, 5, 7, 11 }));
+        GTEST_SINGLE_ARGUMENT(std::vector<int> { 2, 3, 5, 7, 11 }));
     ASSERT_EQ(
         qx::find_primes(13),
-        QX_SINGLE_ARGUMENT(std::vector<int> { 2, 3, 5, 7, 11, 13 }));
+        GTEST_SINGLE_ARGUMENT(std::vector<int> { 2, 3, 5, 7, 11, 13 }));
     ASSERT_EQ(
         qx::find_primes(14),
-        QX_SINGLE_ARGUMENT(std::vector<int> { 2, 3, 5, 7, 11, 13 }));
+        GTEST_SINGLE_ARGUMENT(std::vector<int> { 2, 3, 5, 7, 11, 13 }));
     ASSERT_EQ(
         qx::find_primes(15),
-        QX_SINGLE_ARGUMENT(std::vector<int> { 2, 3, 5, 7, 11, 13 }));
+        GTEST_SINGLE_ARGUMENT(std::vector<int> { 2, 3, 5, 7, 11, 13 }));
     ASSERT_EQ(
         qx::find_primes(23),
-        QX_SINGLE_ARGUMENT(
+        GTEST_SINGLE_ARGUMENT(
             std::vector<int> { 2, 3, 5, 7, 11, 13, 17, 19, 23 }));
 }
 

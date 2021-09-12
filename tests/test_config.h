@@ -15,6 +15,8 @@ QX_PUSH_SUPPRESS_ALL_WARNINGS
 #include <gtest/gtest.h>
 QX_POP_SUPPRESS_WARNINGS
 
+#define GTEST_SINGLE_ARGUMENT(...) (__VA_ARGS__)
+
 // clang-format off
 
 #ifndef QX_TEST_SORT
