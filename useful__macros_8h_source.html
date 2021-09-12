@@ -102,9 +102,9 @@ $(function() {
 <div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160; </div>
 <div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160; </div>
 <div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;<span class="preprocessor">#if QX_WIN</span></div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;<span class="preprocessor">    #define QX_PATH_SEPARATOR &#39;\\&#39;</span></div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;<span class="preprocessor">#define QX_PATH_SEPARATOR &#39;\\&#39;</span></div>
 <div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;<span class="preprocessor">#else</span></div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;<span class="preprocessor">    #define QX_PATH_SEPARATOR &#39;/&#39;</span></div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;<span class="preprocessor">#define QX_PATH_SEPARATOR &#39;/&#39;</span></div>
 <div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;<span class="preprocessor">#endif</span></div>
 <div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160; </div>
 <div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;<span class="keyword">namespace </span>qx::detail</div>
@@ -127,7 +127,7 @@ $(function() {
 <div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160; </div>
 <div class="line"><a name="l00105"></a><span class="lineno"><a class="line" href="useful__macros_8h.html#ae158b161fec70fada62391b9ffa7d502">  105</a></span>&#160;<span class="preprocessor">#define QX_SHORT_FILE qx::detail::last_slash(__FILE__)</span></div>
 <div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160; </div>
-<div class="line"><a name="l00114"></a><span class="lineno"><a class="line" href="useful__macros_8h.html#a8b36634eb91cfdc0b9d7ed59249f0853">  114</a></span>&#160;<span class="preprocessor">#define QX_SINGLE_ARGUMENT(...) (__VA_ARGS__)</span></div>
+<div class="line"><a name="l00114"></a><span class="lineno"><a class="line" href="useful__macros_8h.html#a8b36634eb91cfdc0b9d7ed59249f0853">  114</a></span>&#160;<span class="preprocessor">#define QX_SINGLE_ARGUMENT(...) __VA_ARGS__</span></div>
 <div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160; </div>
 <div class="line"><a name="l00121"></a><span class="lineno"><a class="line" href="useful__macros_8h.html#ad8b86e20bfd805bba4008aadca8c8e3d">  121</a></span>&#160;<span class="preprocessor">#define QX_COPYABLE(name)        \</span></div>
 <div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;<span class="preprocessor">    name(const name&amp;) = default; \</span></div>
