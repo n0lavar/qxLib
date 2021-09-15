@@ -1884,13 +1884,11 @@ private:
         @brief   Resize string
         @details If new size is smaller, string will be truncated
         @param   nSymbols - new size
-        @param   nAlign   - align (if 16 then size 13->16 16->16 18->32)
         @param   eType    - resize type
         @retval           - true if memory alloc is successful
     **/
     bool _resize(
         size_type          nSymbols,
-        size_type          nAlign,
         string_resize_type eType = string_resize_type::common) noexcept;
 
     /**

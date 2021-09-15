@@ -81,7 +81,7 @@ inline void basic_string<Traits>::assign(
     size_type  nSymbols,
     value_type chSymbol) noexcept
 {
-    if (_resize(nSymbols, Traits::align()))
+    if (_resize(nSymbols))
         std::fill(begin(), end(), chSymbol);
 }
 
@@ -90,7 +90,7 @@ inline void basic_string<Traits>::assign(
     const_pointer pSource,
     size_type     nSymbols) noexcept
 {
-    if (_resize(nSymbols, Traits::align()))
+    if (_resize(nSymbols))
         std::memmove(data(), pSource, nSymbols * sizeof(value_type));
 }
 
@@ -144,16 +144,16 @@ inline void basic_string<Traits>::vsprintf(
     const_pointer pszFormat,
     va_list       args) noexcept
 {
-    va_list args_copy;
-    va_copy(args_copy, args);
-    int length = Traits::vsnprintf(nullptr, 0, pszFormat, args_copy);
-    va_end(args_copy);
+    va_list argsCopy;
+    va_copy(argsCopy, args);
+    int nLength = Traits::vsnprintf(nullptr, 0, pszFormat, argsCopy);
+    va_end(argsCopy);
 
-    if (length > 0 && _resize(static_cast<size_type>(length), Traits::align()))
+    if (nLength > 0 && _resize(static_cast<size_type>(nLength)))
     {
         Traits::vsnprintf(
             data(),
-            static_cast<size_type>(length) + 1,
+            static_cast<size_type>(nLength) + 1,
             pszFormat,
             args);
     }
@@ -165,9 +165,9 @@ inline basic_string<Traits> basic_string<Traits>::static_sprintf(
     const_pointer pszFormat,
     Args... args) noexcept
 {
-    basic_string str;
-    str.sprintf(pszFormat, args...);
-    return std::move(str);
+    basic_string sTemp;
+    sTemp.sprintf(pszFormat, args...);
+    return std::move(sTemp);
 }
 
 template<class Traits>
@@ -186,18 +186,17 @@ inline void basic_string<Traits>::append_vsprintf(
     const_pointer pszFormat,
     va_list       args) noexcept
 {
-    va_list args_copy;
-    va_copy(args_copy, args);
-    int length = Traits::vsnprintf(nullptr, 0, pszFormat, args_copy);
-    va_end(args_copy);
+    va_list argsCopy;
+    va_copy(argsCopy, args);
+    int nLength = Traits::vsnprintf(nullptr, 0, pszFormat, argsCopy);
+    va_end(argsCopy);
 
     const size_type nSize = size();
-    if (length > 0
-        && _resize(nSize + static_cast<size_type>(length), Traits::align()))
+    if (nLength > 0 && _resize(nSize + static_cast<size_type>(nLength)))
     {
         Traits::vsnprintf(
             data() + nSize,
-            static_cast<size_type>(length) + 1,
+            static_cast<size_type>(nLength) + 1,
             pszFormat,
             args);
     }
@@ -214,7 +213,7 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::reserve(
     size_type nCapacity) noexcept
 {
     if (nCapacity > capacity())
-        _resize(nCapacity, Traits::align(), string_resize_type::reserve);
+        _resize(nCapacity, string_resize_type::reserve);
 
     return capacity();
 }
@@ -223,7 +222,7 @@ template<class Traits>
 inline void basic_string<Traits>::shrink_to_fit(void) noexcept
 {
     if (!m_Data.is_small() && capacity() > size())
-        _resize(size(), 0, string_resize_type::shrink_to_fit);
+        _resize(size(), string_resize_type::shrink_to_fit);
 }
 
 template<class Traits>
@@ -413,9 +412,9 @@ inline basic_string<Traits> basic_string<Traits>::static_from(
     const From&   data,
     const_pointer pszFormat) noexcept
 {
-    basic_string str;
-    str.from(data, pszFormat);
-    return std::move(str);
+    basic_string sTemp;
+    sTemp.from(data, pszFormat);
+    return std::move(sTemp);
 }
 
 template<class Traits>
@@ -433,7 +432,7 @@ inline void basic_string<Traits>::append(
     const size_type nSizeSource =
         nSymbols == npos ? Traits::length(pszStr) : nSymbols;
 
-    if (_resize(nSize + nSizeSource, Traits::align()))
+    if (_resize(nSize + nSizeSource))
         std::memcpy(data() + nSize, pszStr, nSizeSource * sizeof(value_type));
 }
 
@@ -476,7 +475,7 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::insert(
     const size_type nSizeSource =
         nSymbols == npos ? Traits::length(pszWhat) : nSymbols;
 
-    if (nSizeSource > 0 && _resize(nSize + nSizeSource, Traits::align()))
+    if (nSizeSource > 0 && _resize(nSize + nSizeSource))
     {
         std::memmove(
             data() + nPos + nSizeSource,
@@ -514,8 +513,7 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::insert(
             ++nWhatSize;
 
         size_type nStartSymbols = size();
-        if (nWhatSize > 0
-            && _resize(nStartSymbols + nWhatSize, Traits::align()))
+        if (nWhatSize > 0 && _resize(nStartSymbols + nWhatSize))
         {
             std::memmove(
                 data() + nPos + nWhatSize,
@@ -639,9 +637,7 @@ inline void basic_string<Traits>::erase(
                 nSymbolsToCopy * sizeof(value_type));
         }
 
-        _resize(
-            static_cast<size_type>(nStartSize - (itLast - itFirst)),
-            Traits::align());
+        _resize(static_cast<size_type>(nStartSize - (itLast - itFirst)));
     }
 }
 
@@ -2193,10 +2189,12 @@ inline basic_string<Traits>::operator std::basic_string_view<
 template<class Traits>
 inline bool basic_string<Traits>::_resize(
     size_type          nSymbols,
-    size_type          nAlign,
     string_resize_type eType) noexcept
 {
-    const bool bRet = m_Data.resize(nSymbols, nAlign, eType);
+    const bool bRet = m_Data.resize(
+        nSymbols,
+        eType == string_resize_type::shrink_to_fit ? 0 : Traits::align(),
+        eType);
 
     if (bRet && eType == string_resize_type::common)
         at(nSymbols) = QX_CHAR_PREFIX(typename Traits::value_type, '\0');
@@ -2263,7 +2261,7 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::_trim(
 
     std::memmove(data(), data() + nStartPos, nNewSize * sizeof(value_type));
 
-    _resize(nNewSize, Traits::align());
+    _resize(nNewSize);
     return nSize - nNewSize;
 }
 
@@ -2613,7 +2611,7 @@ qx::detail::istream<Traits>& operator>>(
             typename qx::basic_string<Traits>::value_type ch) -> bool
     {
         typename qx::basic_string<Traits>::size_type nCurrentSize = str.size();
-        if (str._resize(nCurrentSize + 1, Traits::align()))
+        if (str._resize(nCurrentSize + 1))
         {
             str[nCurrentSize] = ch;
             return true;
