@@ -1791,16 +1791,16 @@ $(function() {
 <div class="line"><a name="l01728"></a><span class="lineno"> 1728</span>&#160;    <span class="keywordflow">if</span> (nSepLen == npos)</div>
 <div class="line"><a name="l01729"></a><span class="lineno"> 1729</span>&#160;        nSepLen = Traits::length(pszSeparator);</div>
 <div class="line"><a name="l01730"></a><span class="lineno"> 1730</span>&#160; </div>
-<div class="line"><a name="l01731"></a><span class="lineno"><a class="line" href="classqx_1_1basic__string.html#acd9dafa0b4a0da3db7f0a232249cfda8"> 1731</a></span>&#160;    size_type start = 0;</div>
-<div class="line"><a name="l01732"></a><span class="lineno"> 1732</span>&#160;    size_type end   = 0;</div>
-<div class="line"><a name="l01733"></a><span class="lineno"> 1733</span>&#160;    <span class="keywordflow">while</span> ((end = find(pszSeparator, start, nSepLen, npos)) != npos)</div>
+<div class="line"><a name="l01731"></a><span class="lineno"><a class="line" href="classqx_1_1basic__string.html#acd9dafa0b4a0da3db7f0a232249cfda8"> 1731</a></span>&#160;    size_type mStart = 0;</div>
+<div class="line"><a name="l01732"></a><span class="lineno"> 1732</span>&#160;    size_type nEnd   = 0;</div>
+<div class="line"><a name="l01733"></a><span class="lineno"> 1733</span>&#160;    <span class="keywordflow">while</span> ((nEnd = find(pszSeparator, mStart, nSepLen, npos)) != npos)</div>
 <div class="line"><a name="l01734"></a><span class="lineno"> 1734</span>&#160;    {</div>
-<div class="line"><a name="l01735"></a><span class="lineno"> 1735</span>&#160;        tokens.push_back(substr(start, end - start));</div>
-<div class="line"><a name="l01736"></a><span class="lineno"> 1736</span>&#160;        start = end + nSepLen;</div>
+<div class="line"><a name="l01735"></a><span class="lineno"> 1735</span>&#160;        tokens.push_back(substr(mStart, nEnd - mStart));</div>
+<div class="line"><a name="l01736"></a><span class="lineno"> 1736</span>&#160;        mStart = nEnd + nSepLen;</div>
 <div class="line"><a name="l01737"></a><span class="lineno"> 1737</span>&#160;    }</div>
-<div class="line"><a name="l01738"></a><span class="lineno"> 1738</span>&#160;    tokens.push_back(substr(start));</div>
+<div class="line"><a name="l01738"></a><span class="lineno"> 1738</span>&#160;    tokens.push_back(substr(mStart));</div>
 <div class="line"><a name="l01739"></a><span class="lineno"> 1739</span>&#160; </div>
-<div class="line"><a name="l01740"></a><span class="lineno"><a class="line" href="classqx_1_1basic__string.html#a07a3b92d8da7cfeabf27a954b4a734aa"> 1740</a></span>&#160;    <span class="keywordflow">return</span> std::move(tokens);</div>
+<div class="line"><a name="l01740"></a><span class="lineno"><a class="line" href="classqx_1_1basic__string.html#a07a3b92d8da7cfeabf27a954b4a734aa"> 1740</a></span>&#160;    <span class="keywordflow">return</span> tokens;</div>
 <div class="line"><a name="l01741"></a><span class="lineno"> 1741</span>&#160;}</div>
 <div class="line"><a name="l01742"></a><span class="lineno"> 1742</span>&#160; </div>
 <div class="line"><a name="l01743"></a><span class="lineno"> 1743</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> Traits&gt;</div>
@@ -1821,16 +1821,16 @@ $(function() {
 <div class="line"><a name="l01758"></a><span class="lineno"> 1758</span>&#160;    <span class="keyword">const</span> size_type nSepLen =</div>
 <div class="line"><a name="l01759"></a><span class="lineno"> 1759</span>&#160;        <span class="keyword">static_cast&lt;</span>size_type<span class="keyword">&gt;</span>(std::distance(itSepFirst, itSepLast));</div>
 <div class="line"><a name="l01760"></a><span class="lineno"> 1760</span>&#160; </div>
-<div class="line"><a name="l01761"></a><span class="lineno"><a class="line" href="classqx_1_1basic__string.html#a6f8c026e7e16fac605ee71d569b9eb71"> 1761</a></span>&#160;    size_type start = 0;</div>
-<div class="line"><a name="l01762"></a><span class="lineno"> 1762</span>&#160;    size_type end   = 0;</div>
-<div class="line"><a name="l01763"></a><span class="lineno"> 1763</span>&#160;    <span class="keywordflow">while</span> ((end = find(itSepFirst, itSepLast, start)) != npos)</div>
+<div class="line"><a name="l01761"></a><span class="lineno"><a class="line" href="classqx_1_1basic__string.html#a6f8c026e7e16fac605ee71d569b9eb71"> 1761</a></span>&#160;    size_type nStart = 0;</div>
+<div class="line"><a name="l01762"></a><span class="lineno"> 1762</span>&#160;    size_type nEnd   = 0;</div>
+<div class="line"><a name="l01763"></a><span class="lineno"> 1763</span>&#160;    <span class="keywordflow">while</span> ((nEnd = find(itSepFirst, itSepLast, nStart)) != npos)</div>
 <div class="line"><a name="l01764"></a><span class="lineno"> 1764</span>&#160;    {</div>
-<div class="line"><a name="l01765"></a><span class="lineno"> 1765</span>&#160;        tokens.push_back(substr(start, end - start));</div>
-<div class="line"><a name="l01766"></a><span class="lineno"> 1766</span>&#160;        start = end + nSepLen;</div>
+<div class="line"><a name="l01765"></a><span class="lineno"> 1765</span>&#160;        tokens.push_back(substr(nStart, nEnd - nStart));</div>
+<div class="line"><a name="l01766"></a><span class="lineno"> 1766</span>&#160;        nStart = nEnd + nSepLen;</div>
 <div class="line"><a name="l01767"></a><span class="lineno"> 1767</span>&#160;    }</div>
-<div class="line"><a name="l01768"></a><span class="lineno"> 1768</span>&#160;    tokens.push_back(substr(start));</div>
+<div class="line"><a name="l01768"></a><span class="lineno"> 1768</span>&#160;    tokens.push_back(substr(nStart));</div>
 <div class="line"><a name="l01769"></a><span class="lineno"> 1769</span>&#160; </div>
-<div class="line"><a name="l01770"></a><span class="lineno"><a class="line" href="classqx_1_1basic__string.html#ab5865b46dfd89298912aab303c2c5972"> 1770</a></span>&#160;    <span class="keywordflow">return</span> std::move(tokens);</div>
+<div class="line"><a name="l01770"></a><span class="lineno"><a class="line" href="classqx_1_1basic__string.html#ab5865b46dfd89298912aab303c2c5972"> 1770</a></span>&#160;    <span class="keywordflow">return</span> tokens;</div>
 <div class="line"><a name="l01771"></a><span class="lineno"> 1771</span>&#160;}</div>
 <div class="line"><a name="l01772"></a><span class="lineno"> 1772</span>&#160; </div>
 <div class="line"><a name="l01773"></a><span class="lineno"> 1773</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> Traits&gt;</div>
