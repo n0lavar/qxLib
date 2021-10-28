@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['navy_891',['navy',['../classqx_1_1color.html#ab9e1b1de887e5bd23bf947ece3c58b39',1,'qx::color']]],
-  ['next_892',['next',['../classqx_1_1constexpr__sequence.html#a91853479f9d72b05d5f06ed8a20e6e3d',1,'qx::constexpr_sequence']]]
+  ['navy_894',['navy',['../classqx_1_1color.html#ab9e1b1de887e5bd23bf947ece3c58b39',1,'qx::color']]],
+  ['next_895',['next',['../classqx_1_1constexpr__sequence.html#a91853479f9d72b05d5f06ed8a20e6e3d',1,'qx::constexpr_sequence']]]
 ];
