@@ -47,14 +47,14 @@ constexpr bool between(T left, T value, T right, Compare compare)
     else if constexpr (
         std::is_integral_v<T> && std::is_same_v<Compare, std::less_equal<>>)
     {
-        return compare(static_cast<size_t>(value - left), (right - left));
+        return compare(static_cast<size_t>(value - left), right - left);
     }
     else if constexpr (
         std::is_floating_point_v<
             T> && std::is_same_v<Compare, std::less_equal<>>)
     {
-        return (left < value || qx::epsilon_equal(left, value))
-               && (value < right || qx::epsilon_equal(value, right));
+        return qx::epsilon_less_equal(left, value)
+               && qx::epsilon_less_equal(value, right);
     }
     else
     {
@@ -112,6 +112,18 @@ constexpr auto make_array(T init_val = T())
     std::array<T, N> ret;
     ret.fill(init_val);
     return ret;
+}
+
+/**
+    @brief  Get the size of memory allocated for container elements
+    @tparam Container - container type
+    @param  container - container const ref
+    @retval           - the size of memory allocated for container elements
+**/
+template<class Container>
+constexpr size_t bytes_size(const Container& container)
+{
+    return container.size() * sizeof(Container::value_type);
 }
 
 } // namespace qx

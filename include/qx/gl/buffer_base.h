@@ -40,26 +40,26 @@ public:
     virtual void MemBarrier(void);
 
     /**
-        @brief Update the whole buffer
+        @brief Allocate memory for the buffer
         @param nSize  - data size
         @param pData  - data pointer
         @param eUsage - the expected usage pattern of the data store
     **/
-    virtual void Update(
+    virtual void Allocate(
         GLsizeiptr  nSize,
-        const void* pData,
+        const void* pData  = nullptr,
         GLenum      eUsage = GL_DYNAMIC_DRAW);
 
     /**
-        @brief Update buffer part
-        @param nOffset - offset from the buffer beginning
-        @param nSize   - data size
+        @brief Update buffer
         @param pData   - data pointer
+        @param nSize   - data size
+        @param nOffset - offset from the buffer beginning
     **/
-    virtual void UpdatePart(
-        GLintptr    nOffset,
+    virtual void Update(
+        const void* pData,
         GLsizeiptr  nSize,
-        const void* pData);
+        GLintptr    nOffset = 0);
 
 protected:
     /**

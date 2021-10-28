@@ -33,6 +33,16 @@
         return iterator(this, size());                                    \
     }                                                                     \
                                                                           \
+    const_iterator begin(void) const noexcept                             \
+    {                                                                     \
+        return const_iterator(this, 0);                                   \
+    }                                                                     \
+                                                                          \
+    const_iterator end(void) const noexcept                               \
+    {                                                                     \
+        return const_iterator(this, size());                              \
+    }                                                                     \
+                                                                          \
     const_iterator cbegin(void) const noexcept                            \
     {                                                                     \
         return const_iterator(this, 0);                                   \
@@ -59,6 +69,16 @@
     }                                                                     \
                                                                           \
     const_reverse_iterator crend(void) const noexcept                     \
+    {                                                                     \
+        return const_reverse_iterator(this, static_cast<size_type>(-1));  \
+    }                                                                     \
+                                                                          \
+    const_reverse_iterator rbegin(void) const noexcept                    \
+    {                                                                     \
+        return const_reverse_iterator(this, size() - 1);                  \
+    }                                                                     \
+                                                                          \
+    const_reverse_iterator rend(void) const noexcept                      \
     {                                                                     \
         return const_reverse_iterator(this, static_cast<size_type>(-1));  \
     }                                                                     \

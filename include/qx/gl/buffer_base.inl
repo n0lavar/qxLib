@@ -49,7 +49,7 @@ inline void buffer_base::MemBarrier()
     glMemoryBarrier(GetBarrierBit());
 }
 
-inline void buffer_base::Update(
+inline void buffer_base::Allocate(
     GLsizeiptr  nSize,
     const void* pData,
     GLenum      eUsage)
@@ -57,10 +57,10 @@ inline void buffer_base::Update(
     glBufferData(GetBufferType(), nSize, pData, eUsage);
 }
 
-inline void buffer_base::UpdatePart(
-    GLintptr    nOffset,
+inline void buffer_base::Update(
+    const void* pData,
     GLsizeiptr  nSize,
-    const void* pData)
+    GLintptr    nOffset)
 {
     glBufferSubData(GetBufferType(), nOffset, nSize, pData);
 }
