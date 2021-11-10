@@ -78,9 +78,11 @@ $(function() {
 <a href="#details">More...</a></p>
 <div class="textblock"><code>#include &lt;<a class="el" href="draw__mode_8h_source.html">qx/render/draw_mode.h</a>&gt;</code><br />
 <code>#include &lt;<a class="el" href="typedefs_8h_source.html">qx/typedefs.h</a>&gt;</code><br />
-<code>#include &lt;array&gt;</code><br />
 <code>#include &lt;glm/geometric.hpp&gt;</code><br />
 <code>#include &lt;glm/vec3.hpp&gt;</code><br />
+<code>#include &lt;array&gt;</code><br />
+<code>#include &lt;cmath&gt;</code><br />
+<code>#include &lt;numbers&gt;</code><br />
 <code>#include &lt;unordered_map&gt;</code><br />
 <code>#include &lt;vector&gt;</code><br />
 <code>#include &lt;<a class="el" href="geom_8inl_source.html">qx/render/geom.inl</a>&gt;</code><br />
@@ -130,6 +132,30 @@ Functions</h2></td></tr>
 <tr class="memitem:a400186cef6bd1c97bab9845b22d26bae"><td class="memItemLeft" align="right" valign="top">geometry&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="geom_8h.html#a400186cef6bd1c97bab9845b22d26bae">qx::create_icosphere_lines</a> (float fRadius, size_t nDivides)</td></tr>
 <tr class="memdesc:a400186cef6bd1c97bab9845b22d26bae"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create icosphere geometry for lines drawing.  <a href="geom_8h.html#a400186cef6bd1c97bab9845b22d26bae">More...</a><br /></td></tr>
 <tr class="separator:a400186cef6bd1c97bab9845b22d26bae"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af093b2b495cb81dec4eaa780ed3783dc"><td class="memItemLeft" align="right" valign="top">geometry&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="geom_8h.html#af093b2b495cb81dec4eaa780ed3783dc">qx::create_rect</a> (float fWidth, float fHeight)</td></tr>
+<tr class="memdesc:af093b2b495cb81dec4eaa780ed3783dc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create rectangle geometry.  <a href="geom_8h.html#af093b2b495cb81dec4eaa780ed3783dc">More...</a><br /></td></tr>
+<tr class="separator:af093b2b495cb81dec4eaa780ed3783dc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afdad071adf812984dab8ca69bc1ea7d4"><td class="memItemLeft" align="right" valign="top">geometry&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="geom_8h.html#afdad071adf812984dab8ca69bc1ea7d4">qx::create_rect_lines</a> (float fWidth, float fHeight)</td></tr>
+<tr class="memdesc:afdad071adf812984dab8ca69bc1ea7d4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create rectangle geometry for lines drawing.  <a href="geom_8h.html#afdad071adf812984dab8ca69bc1ea7d4">More...</a><br /></td></tr>
+<tr class="separator:afdad071adf812984dab8ca69bc1ea7d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a836fa40a7539e2ecb0e9e217a1801bc7"><td class="memItemLeft" align="right" valign="top">geometry&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="geom_8h.html#a836fa40a7539e2ecb0e9e217a1801bc7">qx::create_square</a> (float fSideLength)</td></tr>
+<tr class="memdesc:a836fa40a7539e2ecb0e9e217a1801bc7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create square geometry.  <a href="geom_8h.html#a836fa40a7539e2ecb0e9e217a1801bc7">More...</a><br /></td></tr>
+<tr class="separator:a836fa40a7539e2ecb0e9e217a1801bc7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2f47f3f09b8c22113af7e287ce6c996f"><td class="memItemLeft" align="right" valign="top">geometry&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="geom_8h.html#a2f47f3f09b8c22113af7e287ce6c996f">qx::create_square_lines</a> (float fSideLength)</td></tr>
+<tr class="memdesc:a2f47f3f09b8c22113af7e287ce6c996f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create square geometry for lines drawing.  <a href="geom_8h.html#a2f47f3f09b8c22113af7e287ce6c996f">More...</a><br /></td></tr>
+<tr class="separator:a2f47f3f09b8c22113af7e287ce6c996f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1d3988779e779a9954f49b474d7bc66f"><td class="memItemLeft" align="right" valign="top">geometry&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="geom_8h.html#a1d3988779e779a9954f49b474d7bc66f">qx::create_ellipse</a> (float fHorRadius, float fVertRadius, size_t nSides)</td></tr>
+<tr class="memdesc:a1d3988779e779a9954f49b474d7bc66f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create ellipse geometry.  <a href="geom_8h.html#a1d3988779e779a9954f49b474d7bc66f">More...</a><br /></td></tr>
+<tr class="separator:a1d3988779e779a9954f49b474d7bc66f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5f938bef9442b7139b31686a6b17ec80"><td class="memItemLeft" align="right" valign="top">geometry&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="geom_8h.html#a5f938bef9442b7139b31686a6b17ec80">qx::create_ellipse_lines</a> (float fHorRadius, float fVertRadius, size_t nSides)</td></tr>
+<tr class="memdesc:a5f938bef9442b7139b31686a6b17ec80"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create ellipse geometry for lines drawing.  <a href="geom_8h.html#a5f938bef9442b7139b31686a6b17ec80">More...</a><br /></td></tr>
+<tr class="separator:a5f938bef9442b7139b31686a6b17ec80"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abce1be1adaae488363bd738a845a1474"><td class="memItemLeft" align="right" valign="top">geometry&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="geom_8h.html#abce1be1adaae488363bd738a845a1474">qx::create_circle</a> (float fRadius, size_t nSides)</td></tr>
+<tr class="memdesc:abce1be1adaae488363bd738a845a1474"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create circle geometry for lines drawing.  <a href="geom_8h.html#abce1be1adaae488363bd738a845a1474">More...</a><br /></td></tr>
+<tr class="separator:abce1be1adaae488363bd738a845a1474"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1aea2eadb1f142d660217f8d29f4f5a3"><td class="memItemLeft" align="right" valign="top">geometry&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="geom_8h.html#a1aea2eadb1f142d660217f8d29f4f5a3">qx::create_circle_lines</a> (float fRadius, size_t nSides)</td></tr>
+<tr class="memdesc:a1aea2eadb1f142d660217f8d29f4f5a3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create circle geometry for lines drawing.  <a href="geom_8h.html#a1aea2eadb1f142d660217f8d29f4f5a3">More...</a><br /></td></tr>
+<tr class="separator:a1aea2eadb1f142d660217f8d29f4f5a3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Contains functions for creating primitives geometry. </p>
@@ -139,6 +165,112 @@ Functions</h2></td></tr>
 
 <p class="definition">Definition in file <a class="el" href="geom_8h_source.html">geom.h</a>.</p>
 </div><h2 class="groupheader">Function Documentation</h2>
+<a id="abce1be1adaae488363bd738a845a1474"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abce1be1adaae488363bd738a845a1474">&#9670;&nbsp;</a></span>create_circle()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">geometry qx::create_circle </td>
+          <td>(</td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>fRadius</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>nSides</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Create circle geometry for lines drawing. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">fRadius</td><td>- circle radius </td></tr>
+    <tr><td class="paramname">nSides</td><td>- number of lines in ellipse edge, must be &gt; 3 the greater value, the smoother еру edge </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Return values</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">-</td><td>circle geometry </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="geom_8inl_source.html#l00283">283</a> of file <a class="el" href="geom_8inl_source.html">geom.inl</a>.</p>
+
+</div>
+</div>
+<a id="a1aea2eadb1f142d660217f8d29f4f5a3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1aea2eadb1f142d660217f8d29f4f5a3">&#9670;&nbsp;</a></span>create_circle_lines()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">geometry qx::create_circle_lines </td>
+          <td>(</td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>fRadius</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>nSides</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Create circle geometry for lines drawing. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">fRadius</td><td>- circle radius </td></tr>
+    <tr><td class="paramname">nSides</td><td>- number of lines in ellipse edge, must be &gt; 3 the greater value, the smoother еру edge </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Return values</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">-</td><td>circle geometry </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="geom_8inl_source.html#l00288">288</a> of file <a class="el" href="geom_8inl_source.html">geom.inl</a>.</p>
+
+</div>
+</div>
 <a id="a8687b316462ffbe0a638ba54e9a70662"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a8687b316462ffbe0a638ba54e9a70662">&#9670;&nbsp;</a></span>create_cube()</h2>
 
@@ -177,7 +309,7 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="geom_8inl_source.html#l00071">71</a> of file <a class="el" href="geom_8inl_source.html">geom.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="geom_8inl_source.html#l00072">72</a> of file <a class="el" href="geom_8inl_source.html">geom.inl</a>.</p>
 
 </div>
 </div>
@@ -219,7 +351,127 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="geom_8inl_source.html#l00076">76</a> of file <a class="el" href="geom_8inl_source.html">geom.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="geom_8inl_source.html#l00077">77</a> of file <a class="el" href="geom_8inl_source.html">geom.inl</a>.</p>
+
+</div>
+</div>
+<a id="a1d3988779e779a9954f49b474d7bc66f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1d3988779e779a9954f49b474d7bc66f">&#9670;&nbsp;</a></span>create_ellipse()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">geometry qx::create_ellipse </td>
+          <td>(</td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>fHorRadius</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>fVertRadius</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>nSides</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Create ellipse geometry. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">fHorRadius</td><td>- ellipse horizontal radius </td></tr>
+    <tr><td class="paramname">fVertRadius</td><td>- ellipse vertical radius </td></tr>
+    <tr><td class="paramname">nSides</td><td>- number of lines in ellipse edge, must be &gt; 3 the greater value, the smoother еру edge </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Return values</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">-</td><td>ellipse geometry </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="geom_8inl_source.html#l00241">241</a> of file <a class="el" href="geom_8inl_source.html">geom.inl</a>.</p>
+
+</div>
+</div>
+<a id="a5f938bef9442b7139b31686a6b17ec80"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5f938bef9442b7139b31686a6b17ec80">&#9670;&nbsp;</a></span>create_ellipse_lines()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">geometry qx::create_ellipse_lines </td>
+          <td>(</td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>fHorRadius</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>fVertRadius</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>nSides</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Create ellipse geometry for lines drawing. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">fHorRadius</td><td>- ellipse horizontal radius </td></tr>
+    <tr><td class="paramname">fVertRadius</td><td>- ellipse vertical radius </td></tr>
+    <tr><td class="paramname">nSides</td><td>- number of lines in ellipse edge, must be &gt; 3 the greater value, the smoother еру edge </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Return values</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">-</td><td>ellipse geometry </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="geom_8inl_source.html#l00272">272</a> of file <a class="el" href="geom_8inl_source.html">geom.inl</a>.</p>
 
 </div>
 </div>
@@ -261,7 +513,7 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="geom_8inl_source.html#l00086">86</a> of file <a class="el" href="geom_8inl_source.html">geom.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="geom_8inl_source.html#l00087">87</a> of file <a class="el" href="geom_8inl_source.html">geom.inl</a>.</p>
 
 </div>
 </div>
@@ -303,7 +555,7 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="geom_8inl_source.html#l00112">112</a> of file <a class="el" href="geom_8inl_source.html">geom.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="geom_8inl_source.html#l00114">114</a> of file <a class="el" href="geom_8inl_source.html">geom.inl</a>.</p>
 
 </div>
 </div>
@@ -356,7 +608,7 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="geom_8inl_source.html#l00122">122</a> of file <a class="el" href="geom_8inl_source.html">geom.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="geom_8inl_source.html#l00124">124</a> of file <a class="el" href="geom_8inl_source.html">geom.inl</a>.</p>
 
 </div>
 </div>
@@ -409,7 +661,7 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="geom_8inl_source.html#l00197">197</a> of file <a class="el" href="geom_8inl_source.html">geom.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="geom_8inl_source.html#l00199">199</a> of file <a class="el" href="geom_8inl_source.html">geom.inl</a>.</p>
 
 </div>
 </div>
@@ -529,7 +781,197 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="geom_8inl_source.html#l00058">58</a> of file <a class="el" href="geom_8inl_source.html">geom.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="geom_8inl_source.html#l00059">59</a> of file <a class="el" href="geom_8inl_source.html">geom.inl</a>.</p>
+
+</div>
+</div>
+<a id="af093b2b495cb81dec4eaa780ed3783dc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af093b2b495cb81dec4eaa780ed3783dc">&#9670;&nbsp;</a></span>create_rect()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">geometry qx::create_rect </td>
+          <td>(</td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>fWidth</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>fHeight</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Create rectangle geometry. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">fWidth</td><td>- rectangle width </td></tr>
+    <tr><td class="paramname">fHeight</td><td>- rectangle height </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Return values</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">-</td><td>rectangle geometry </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="geom_8inl_source.html#l00209">209</a> of file <a class="el" href="geom_8inl_source.html">geom.inl</a>.</p>
+
+</div>
+</div>
+<a id="afdad071adf812984dab8ca69bc1ea7d4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afdad071adf812984dab8ca69bc1ea7d4">&#9670;&nbsp;</a></span>create_rect_lines()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">geometry qx::create_rect_lines </td>
+          <td>(</td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>fWidth</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>fHeight</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Create rectangle geometry for lines drawing. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">fWidth</td><td>- rectangle width </td></tr>
+    <tr><td class="paramname">fHeight</td><td>- rectangle height </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Return values</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">-</td><td>rectangle geometry </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="geom_8inl_source.html#l00223">223</a> of file <a class="el" href="geom_8inl_source.html">geom.inl</a>.</p>
+
+</div>
+</div>
+<a id="a836fa40a7539e2ecb0e9e217a1801bc7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a836fa40a7539e2ecb0e9e217a1801bc7">&#9670;&nbsp;</a></span>create_square()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">geometry qx::create_square </td>
+          <td>(</td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>fSideLength</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Create square geometry. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">fSideLength</td><td>- square side length </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Return values</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">-</td><td>square geometry </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="geom_8inl_source.html#l00231">231</a> of file <a class="el" href="geom_8inl_source.html">geom.inl</a>.</p>
+
+</div>
+</div>
+<a id="a2f47f3f09b8c22113af7e287ce6c996f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2f47f3f09b8c22113af7e287ce6c996f">&#9670;&nbsp;</a></span>create_square_lines()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">geometry qx::create_square_lines </td>
+          <td>(</td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>fSideLength</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Create square geometry for lines drawing. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">fSideLength</td><td>- square side length </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Return values</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">-</td><td>square geometry </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="geom_8inl_source.html#l00236">236</a> of file <a class="el" href="geom_8inl_source.html">geom.inl</a>.</p>
 
 </div>
 </div>

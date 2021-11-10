@@ -69,307 +69,314 @@ $(function() {
 <div class="title">color.inl</div>  </div>
 </div><!--header-->
 <div class="contents">
-<a href="color_8inl.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160; </div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="keyword">namespace </span>qx</div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;{</div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160; </div>
-<div class="line"><a name="l00013"></a><span class="lineno"><a class="line" href="classqx_1_1color.html#ac4b3d1b317dabde61609482c013ce297">   13</a></span>&#160;constexpr <a class="code" href="classqx_1_1color.html#a4ea0457c5713402decf56f006cdacf87">color::color</a>(</div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;    <span class="keywordtype">float</span> fRed,</div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;    <span class="keywordtype">float</span> fGreen,</div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;    <span class="keywordtype">float</span> fBlue,</div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;    <span class="keywordtype">float</span> fAlpha) noexcept</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;{</div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    assign_checked({ fRed, fGreen, fBlue, fAlpha });</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;}</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160; </div>
-<div class="line"><a name="l00022"></a><span class="lineno"><a class="line" href="classqx_1_1color.html#a0c75fab55e5c1754a2c46c3ab1521a39">   22</a></span>&#160;constexpr <a class="code" href="classqx_1_1color.html#a4ea0457c5713402decf56f006cdacf87">color::color</a>(<span class="keywordtype">int</span> nRed, <span class="keywordtype">int</span> nGreen, <span class="keywordtype">int</span> nBlue, <span class="keywordtype">int</span> nAlpha) noexcept</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    : <a class="code" href="classqx_1_1color.html">color</a>(</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;        dec_to_float(nRed),</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;        dec_to_float(nGreen),</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;        dec_to_float(nBlue),</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;        dec_to_float(nAlpha))</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;{</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;}</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160; </div>
-<div class="line"><a name="l00031"></a><span class="lineno"><a class="line" href="classqx_1_1color.html#a9d381432e472dcaa78daf65e708ba2ce">   31</a></span>&#160;constexpr <span class="keywordtype">float</span> <a class="code" href="classqx_1_1color.html#a9d381432e472dcaa78daf65e708ba2ce">color::r</a>(<span class="keywordtype">void</span>) <span class="keyword">const</span> noexcept</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;{</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    <span class="keywordflow">return</span> m_Color.x;</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;}</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160; </div>
-<div class="line"><a name="l00036"></a><span class="lineno"><a class="line" href="classqx_1_1color.html#afa7678d3200a1e5d3ecbb8c901d8bdf9">   36</a></span>&#160;constexpr <span class="keywordtype">float</span> <a class="code" href="classqx_1_1color.html#afa7678d3200a1e5d3ecbb8c901d8bdf9">color::g</a>(<span class="keywordtype">void</span>) <span class="keyword">const</span> noexcept</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;{</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    <span class="keywordflow">return</span> m_Color.y;</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;}</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160; </div>
-<div class="line"><a name="l00041"></a><span class="lineno"><a class="line" href="classqx_1_1color.html#a27edb7bbd1859f4be7c6950ff87561cb">   41</a></span>&#160;constexpr <span class="keywordtype">float</span> <a class="code" href="classqx_1_1color.html#a27edb7bbd1859f4be7c6950ff87561cb">color::b</a>(<span class="keywordtype">void</span>) <span class="keyword">const</span> noexcept</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;{</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    <span class="keywordflow">return</span> m_Color.z;</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;}</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160; </div>
-<div class="line"><a name="l00046"></a><span class="lineno"><a class="line" href="classqx_1_1color.html#aad6f66d079713eaed7271c5f957ca23d">   46</a></span>&#160;constexpr <span class="keywordtype">float</span> <a class="code" href="classqx_1_1color.html#aad6f66d079713eaed7271c5f957ca23d">color::a</a>(<span class="keywordtype">void</span>) <span class="keyword">const</span> noexcept</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;{</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    <span class="keywordflow">return</span> m_Color.w;</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;}</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160; </div>
-<div class="line"><a name="l00051"></a><span class="lineno"><a class="line" href="classqx_1_1color.html#a279f4eb6970448406a9e9af2fb72f4b0">   51</a></span>&#160;constexpr <span class="keyword">const</span> <span class="keywordtype">float</span>* <a class="code" href="classqx_1_1color.html#a279f4eb6970448406a9e9af2fb72f4b0">color::data</a>(<span class="keywordtype">void</span>) <span class="keyword">const</span> noexcept</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;{</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    <span class="keywordflow">return</span> &amp;(m_Color.x);</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;}</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160; </div>
-<div class="line"><a name="l00056"></a><span class="lineno"><a class="line" href="classqx_1_1color.html#ad2b012c258ee97b24736d5ad7f6bdb32">   56</a></span>&#160;constexpr <span class="keywordtype">bool</span> <a class="code" href="classqx_1_1color.html#ad2b012c258ee97b24736d5ad7f6bdb32">color::operator==</a>(<span class="keyword">const</span> <a class="code" href="classqx_1_1color.html">color</a>&amp; other) <span class="keyword">const</span> noexcept</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;{</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    <span class="keywordflow">return</span> m_Color == other.m_Color;</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;}</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160; </div>
-<div class="line"><a name="l00061"></a><span class="lineno"><a class="line" href="classqx_1_1color.html#a586418171e49eeb5b6e3c13cd08c89b2">   61</a></span>&#160;constexpr color::operator glm::vec3(<span class="keywordtype">void</span>) <span class="keyword">const</span> noexcept</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;{</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    <span class="keywordflow">return</span> m_Color;</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;}</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160; </div>
-<div class="line"><a name="l00066"></a><span class="lineno"><a class="line" href="classqx_1_1color.html#a76f7b51f0accbee80427d3b9fa68e148">   66</a></span>&#160;constexpr color::operator glm::vec4(<span class="keywordtype">void</span>) <span class="keyword">const</span> noexcept</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;{</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;    <span class="keywordflow">return</span> m_Color;</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;}</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160; </div>
-<div class="line"><a name="l00071"></a><span class="lineno"><a class="line" href="classqx_1_1color.html#aa4c7d1eca308c20717847e11c06f3ef2">   71</a></span>&#160;constexpr <span class="keywordtype">void</span> <a class="code" href="classqx_1_1color.html#aa4c7d1eca308c20717847e11c06f3ef2">color::update_r</a>(<span class="keywordtype">float</span> fDeltaValue) noexcept</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;{</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;    assign_r_checked(m_Color.x + fDeltaValue);</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;}</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160; </div>
-<div class="line"><a name="l00076"></a><span class="lineno"><a class="line" href="classqx_1_1color.html#a41ff4c6c5906c1d81ab47e212ff54df5">   76</a></span>&#160;constexpr <span class="keywordtype">void</span> <a class="code" href="classqx_1_1color.html#a41ff4c6c5906c1d81ab47e212ff54df5">color::update_g</a>(<span class="keywordtype">float</span> fDeltaValue) noexcept</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;{</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;    assign_g_checked(m_Color.y + fDeltaValue);</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;}</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160; </div>
-<div class="line"><a name="l00081"></a><span class="lineno"><a class="line" href="classqx_1_1color.html#a4f4cc04ad98f542c628585f45938d1c4">   81</a></span>&#160;constexpr <span class="keywordtype">void</span> <a class="code" href="classqx_1_1color.html#a4f4cc04ad98f542c628585f45938d1c4">color::update_b</a>(<span class="keywordtype">float</span> fDeltaValue) noexcept</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;{</div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;    assign_b_checked(m_Color.z + fDeltaValue);</div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;}</div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160; </div>
-<div class="line"><a name="l00086"></a><span class="lineno"><a class="line" href="classqx_1_1color.html#a12ef8da127f482e6d811ad7e6a0d77b9">   86</a></span>&#160;constexpr <span class="keywordtype">void</span> <a class="code" href="classqx_1_1color.html#a12ef8da127f482e6d811ad7e6a0d77b9">color::update_a</a>(<span class="keywordtype">float</span> fDeltaValue) noexcept</div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;{</div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;    assign_a_checked(m_Color.w + fDeltaValue);</div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;}</div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160; </div>
-<div class="line"><a name="l00091"></a><span class="lineno"><a class="line" href="classqx_1_1color.html#a120868dd6deb189aedd5ee9cc64e3fc5">   91</a></span>&#160;constexpr <span class="keywordtype">void</span> <a class="code" href="classqx_1_1color.html#a120868dd6deb189aedd5ee9cc64e3fc5">color::update_r_dec</a>(<span class="keywordtype">int</span> nDeltaValue) noexcept</div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;{</div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;    assign_r_checked(m_Color.x + dec_to_float(nDeltaValue));</div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;}</div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160; </div>
-<div class="line"><a name="l00096"></a><span class="lineno"><a class="line" href="classqx_1_1color.html#a84df8abff04d108a1336e0835a5575e7">   96</a></span>&#160;constexpr <span class="keywordtype">void</span> <a class="code" href="classqx_1_1color.html#a84df8abff04d108a1336e0835a5575e7">color::update_g_dec</a>(<span class="keywordtype">int</span> nDeltaValue) noexcept</div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;{</div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;    assign_g_checked(m_Color.y + dec_to_float(nDeltaValue));</div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;}</div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160; </div>
-<div class="line"><a name="l00101"></a><span class="lineno"><a class="line" href="classqx_1_1color.html#ae12acacca6b7690b8d862c1086d48694">  101</a></span>&#160;constexpr <span class="keywordtype">void</span> <a class="code" href="classqx_1_1color.html#ae12acacca6b7690b8d862c1086d48694">color::update_b_dec</a>(<span class="keywordtype">int</span> nDeltaValue) noexcept</div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;{</div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;    assign_b_checked(m_Color.z + dec_to_float(nDeltaValue));</div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;}</div>
-<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160; </div>
-<div class="line"><a name="l00106"></a><span class="lineno"><a class="line" href="classqx_1_1color.html#af6243d72e3c2fbaf4c082c99382264c1">  106</a></span>&#160;constexpr <span class="keywordtype">void</span> <a class="code" href="classqx_1_1color.html#af6243d72e3c2fbaf4c082c99382264c1">color::update_a_dec</a>(<span class="keywordtype">int</span> nDeltaValue) noexcept</div>
-<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;{</div>
-<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;    assign_a_checked(m_Color.w + dec_to_float(nDeltaValue));</div>
-<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;}</div>
-<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160; </div>
-<div class="line"><a name="l00111"></a><span class="lineno"><a class="line" href="classqx_1_1color.html#a8e7542125b7735869f14ece9976fcf73">  111</a></span>&#160;constexpr <span class="keywordtype">void</span> <a class="code" href="classqx_1_1color.html#a8e7542125b7735869f14ece9976fcf73">color::set_r</a>(<span class="keywordtype">float</span> fValue) noexcept</div>
-<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;{</div>
-<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;    assign_r_checked(fValue);</div>
-<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;}</div>
-<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160; </div>
-<div class="line"><a name="l00116"></a><span class="lineno"><a class="line" href="classqx_1_1color.html#a5de43d6c4a09d5c72dafd46add83dc24">  116</a></span>&#160;constexpr <span class="keywordtype">void</span> <a class="code" href="classqx_1_1color.html#a5de43d6c4a09d5c72dafd46add83dc24">color::set_g</a>(<span class="keywordtype">float</span> fValue) noexcept</div>
-<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;{</div>
-<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;    assign_g_checked(fValue);</div>
-<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;}</div>
-<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160; </div>
-<div class="line"><a name="l00121"></a><span class="lineno"><a class="line" href="classqx_1_1color.html#a64f7f76813ef54e95a0f34fe253f2776">  121</a></span>&#160;constexpr <span class="keywordtype">void</span> <a class="code" href="classqx_1_1color.html#a64f7f76813ef54e95a0f34fe253f2776">color::set_b</a>(<span class="keywordtype">float</span> fValue) noexcept</div>
-<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;{</div>
-<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;    assign_b_checked(fValue);</div>
-<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;}</div>
-<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160; </div>
-<div class="line"><a name="l00126"></a><span class="lineno"><a class="line" href="classqx_1_1color.html#af660c3bb84699b1318a5439797e02c6a">  126</a></span>&#160;constexpr <span class="keywordtype">void</span> <a class="code" href="classqx_1_1color.html#af660c3bb84699b1318a5439797e02c6a">color::set_a</a>(<span class="keywordtype">float</span> fValue) noexcept</div>
-<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;{</div>
-<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;    assign_a_checked(fValue);</div>
-<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;}</div>
-<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160; </div>
-<div class="line"><a name="l00131"></a><span class="lineno"><a class="line" href="classqx_1_1color.html#ae5bd9470fb833cf52390db9a7ce9961b">  131</a></span>&#160;constexpr <span class="keywordtype">void</span> <a class="code" href="classqx_1_1color.html#ae5bd9470fb833cf52390db9a7ce9961b">color::set_r_dec</a>(<span class="keywordtype">int</span> nValue) noexcept</div>
-<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;{</div>
-<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;    assign_r_checked(dec_to_float(nValue));</div>
-<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;}</div>
-<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160; </div>
-<div class="line"><a name="l00136"></a><span class="lineno"><a class="line" href="classqx_1_1color.html#aa9d5a8a12174458a8ef5c6f2d5f7fee7">  136</a></span>&#160;constexpr <span class="keywordtype">void</span> <a class="code" href="classqx_1_1color.html#aa9d5a8a12174458a8ef5c6f2d5f7fee7">color::set_g_dec</a>(<span class="keywordtype">int</span> nValue) noexcept</div>
-<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;{</div>
-<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;    assign_g_checked(dec_to_float(nValue));</div>
-<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;}</div>
-<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160; </div>
-<div class="line"><a name="l00141"></a><span class="lineno"><a class="line" href="classqx_1_1color.html#af4f0e74e19d728b46afa5915dd3cc6ec">  141</a></span>&#160;constexpr <span class="keywordtype">void</span> <a class="code" href="classqx_1_1color.html#af4f0e74e19d728b46afa5915dd3cc6ec">color::set_b_dec</a>(<span class="keywordtype">int</span> nValue) noexcept</div>
-<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;{</div>
-<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;    assign_b_checked(dec_to_float(nValue));</div>
-<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;}</div>
-<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160; </div>
-<div class="line"><a name="l00146"></a><span class="lineno"><a class="line" href="classqx_1_1color.html#afec98962905ed5a335354a5410cf6bb0">  146</a></span>&#160;constexpr <span class="keywordtype">void</span> <a class="code" href="classqx_1_1color.html#afec98962905ed5a335354a5410cf6bb0">color::set_a_dec</a>(<span class="keywordtype">int</span> nValue) noexcept</div>
-<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;{</div>
-<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;    assign_a_checked(dec_to_float(nValue));</div>
-<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;}</div>
-<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160; </div>
-<div class="line"><a name="l00151"></a><span class="lineno"><a class="line" href="classqx_1_1color.html#ace0b1e39053b9b367c443d12a95558ac">  151</a></span>&#160;constexpr <a class="code" href="classqx_1_1color.html">color</a> <a class="code" href="classqx_1_1color.html#ace0b1e39053b9b367c443d12a95558ac">color::aqua</a>(<span class="keywordtype">void</span>) noexcept</div>
-<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;{</div>
-<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="classqx_1_1color.html">color</a>(000, 255, 255);</div>
-<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;}</div>
-<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160; </div>
-<div class="line"><a name="l00156"></a><span class="lineno"><a class="line" href="classqx_1_1color.html#aa4942b55203d2fa1723174116251d86e">  156</a></span>&#160;constexpr <a class="code" href="classqx_1_1color.html">color</a> <a class="code" href="classqx_1_1color.html#aa4942b55203d2fa1723174116251d86e">color::black</a>(<span class="keywordtype">void</span>) noexcept</div>
-<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;{</div>
-<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="classqx_1_1color.html">color</a>(000, 000, 000);</div>
-<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;}</div>
-<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160; </div>
-<div class="line"><a name="l00161"></a><span class="lineno"><a class="line" href="classqx_1_1color.html#afd1263f609450b8291d72ff2415c5646">  161</a></span>&#160;constexpr <a class="code" href="classqx_1_1color.html">color</a> <a class="code" href="classqx_1_1color.html#afd1263f609450b8291d72ff2415c5646">color::blue</a>(<span class="keywordtype">void</span>) noexcept</div>
-<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;{</div>
-<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="classqx_1_1color.html">color</a>(000, 000, 255);</div>
-<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;}</div>
-<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160; </div>
-<div class="line"><a name="l00166"></a><span class="lineno"><a class="line" href="classqx_1_1color.html#a90f774f2f8b09f5783dc4ccf9257a391">  166</a></span>&#160;constexpr <a class="code" href="classqx_1_1color.html">color</a> <a class="code" href="classqx_1_1color.html#a90f774f2f8b09f5783dc4ccf9257a391">color::fuchsia</a>(<span class="keywordtype">void</span>) noexcept</div>
-<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;{</div>
-<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="classqx_1_1color.html">color</a>(255, 000, 255);</div>
-<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;}</div>
-<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160; </div>
-<div class="line"><a name="l00171"></a><span class="lineno"><a class="line" href="classqx_1_1color.html#a7ae18d4c36c758154f51b9e2701c515f">  171</a></span>&#160;constexpr <a class="code" href="classqx_1_1color.html">color</a> <a class="code" href="classqx_1_1color.html#a7ae18d4c36c758154f51b9e2701c515f">color::gray</a>(<span class="keywordtype">void</span>) noexcept</div>
-<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;{</div>
-<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="classqx_1_1color.html">color</a>(128, 128, 128);</div>
-<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;}</div>
-<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160; </div>
-<div class="line"><a name="l00176"></a><span class="lineno"><a class="line" href="classqx_1_1color.html#ae1c1d45330c9ee2e6efd65b109aea1e8">  176</a></span>&#160;constexpr <a class="code" href="classqx_1_1color.html">color</a> <a class="code" href="classqx_1_1color.html#ae1c1d45330c9ee2e6efd65b109aea1e8">color::green</a>(<span class="keywordtype">void</span>) noexcept</div>
-<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;{</div>
-<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="classqx_1_1color.html">color</a>(000, 128, 000);</div>
-<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;}</div>
-<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160; </div>
-<div class="line"><a name="l00181"></a><span class="lineno"><a class="line" href="classqx_1_1color.html#a1865ab379c4fec9269b8c31a75e7a31a">  181</a></span>&#160;constexpr <a class="code" href="classqx_1_1color.html">color</a> <a class="code" href="classqx_1_1color.html#a1865ab379c4fec9269b8c31a75e7a31a">color::lime</a>(<span class="keywordtype">void</span>) noexcept</div>
-<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;{</div>
-<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="classqx_1_1color.html">color</a>(000, 255, 000);</div>
-<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;}</div>
-<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160; </div>
-<div class="line"><a name="l00186"></a><span class="lineno"><a class="line" href="classqx_1_1color.html#ab12415ad03ae4f77a254faea8ca887ab">  186</a></span>&#160;constexpr <a class="code" href="classqx_1_1color.html">color</a> <a class="code" href="classqx_1_1color.html#ab12415ad03ae4f77a254faea8ca887ab">color::maroon</a>(<span class="keywordtype">void</span>) noexcept</div>
-<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;{</div>
-<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="classqx_1_1color.html">color</a>(128, 000, 000);</div>
-<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;}</div>
-<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160; </div>
-<div class="line"><a name="l00191"></a><span class="lineno"><a class="line" href="classqx_1_1color.html#ab9e1b1de887e5bd23bf947ece3c58b39">  191</a></span>&#160;constexpr <a class="code" href="classqx_1_1color.html">color</a> <a class="code" href="classqx_1_1color.html#ab9e1b1de887e5bd23bf947ece3c58b39">color::navy</a>(<span class="keywordtype">void</span>) noexcept</div>
-<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;{</div>
-<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="classqx_1_1color.html">color</a>(000, 000, 128);</div>
-<div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;}</div>
-<div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160; </div>
-<div class="line"><a name="l00196"></a><span class="lineno"><a class="line" href="classqx_1_1color.html#a21f5638ca7dbc0c7253dc28aedaed423">  196</a></span>&#160;constexpr <a class="code" href="classqx_1_1color.html">color</a> <a class="code" href="classqx_1_1color.html#a21f5638ca7dbc0c7253dc28aedaed423">color::olive</a>(<span class="keywordtype">void</span>) noexcept</div>
-<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;{</div>
-<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="classqx_1_1color.html">color</a>(128, 128, 000);</div>
-<div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160;}</div>
-<div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160; </div>
-<div class="line"><a name="l00201"></a><span class="lineno"><a class="line" href="classqx_1_1color.html#a99f65db62f7d4142936f2b33b37f0a4b">  201</a></span>&#160;constexpr <a class="code" href="classqx_1_1color.html">color</a> <a class="code" href="classqx_1_1color.html#a99f65db62f7d4142936f2b33b37f0a4b">color::purple</a>(<span class="keywordtype">void</span>) noexcept</div>
-<div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160;{</div>
-<div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="classqx_1_1color.html">color</a>(128, 000, 128);</div>
-<div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;}</div>
-<div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160; </div>
-<div class="line"><a name="l00206"></a><span class="lineno"><a class="line" href="classqx_1_1color.html#aed8f4fd86a8b170ae489273f155876e4">  206</a></span>&#160;constexpr <a class="code" href="classqx_1_1color.html">color</a> <a class="code" href="classqx_1_1color.html#aed8f4fd86a8b170ae489273f155876e4">color::red</a>(<span class="keywordtype">void</span>) noexcept</div>
-<div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160;{</div>
-<div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="classqx_1_1color.html">color</a>(255, 000, 000);</div>
-<div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160;}</div>
-<div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160; </div>
-<div class="line"><a name="l00211"></a><span class="lineno"><a class="line" href="classqx_1_1color.html#a3ee16f7f59b21b4672577541440a3432">  211</a></span>&#160;constexpr <a class="code" href="classqx_1_1color.html">color</a> <a class="code" href="classqx_1_1color.html#a3ee16f7f59b21b4672577541440a3432">color::silver</a>(<span class="keywordtype">void</span>) noexcept</div>
-<div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160;{</div>
-<div class="line"><a name="l00213"></a><span class="lineno">  213</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="classqx_1_1color.html">color</a>(192, 192, 192);</div>
-<div class="line"><a name="l00214"></a><span class="lineno">  214</span>&#160;}</div>
-<div class="line"><a name="l00215"></a><span class="lineno">  215</span>&#160; </div>
-<div class="line"><a name="l00216"></a><span class="lineno"><a class="line" href="classqx_1_1color.html#af9608766e5042f9063beddd2cc742b4c">  216</a></span>&#160;constexpr <a class="code" href="classqx_1_1color.html">color</a> <a class="code" href="classqx_1_1color.html#af9608766e5042f9063beddd2cc742b4c">color::teal</a>(<span class="keywordtype">void</span>) noexcept</div>
-<div class="line"><a name="l00217"></a><span class="lineno">  217</span>&#160;{</div>
-<div class="line"><a name="l00218"></a><span class="lineno">  218</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="classqx_1_1color.html">color</a>(000, 128, 128);</div>
-<div class="line"><a name="l00219"></a><span class="lineno">  219</span>&#160;}</div>
-<div class="line"><a name="l00220"></a><span class="lineno">  220</span>&#160; </div>
-<div class="line"><a name="l00221"></a><span class="lineno"><a class="line" href="classqx_1_1color.html#a234d53f4949c014de01c1fdeefd8a766">  221</a></span>&#160;constexpr <a class="code" href="classqx_1_1color.html">color</a> <a class="code" href="classqx_1_1color.html#a234d53f4949c014de01c1fdeefd8a766">color::white</a>(<span class="keywordtype">void</span>) noexcept</div>
-<div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160;{</div>
-<div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="classqx_1_1color.html">color</a>(255, 255, 255);</div>
-<div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160;}</div>
-<div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160; </div>
-<div class="line"><a name="l00226"></a><span class="lineno"><a class="line" href="classqx_1_1color.html#a0b1ab65c695cefb5b75fa3f8bdd31549">  226</a></span>&#160;constexpr <a class="code" href="classqx_1_1color.html">color</a> <a class="code" href="classqx_1_1color.html#a0b1ab65c695cefb5b75fa3f8bdd31549">color::yellow</a>(<span class="keywordtype">void</span>) noexcept</div>
-<div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160;{</div>
-<div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="classqx_1_1color.html">color</a>(255, 255, 000);</div>
-<div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160;}</div>
-<div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160; </div>
-<div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160;constexpr <span class="keywordtype">float</span> color::clamp_value(<span class="keywordtype">float</span> fValue) noexcept</div>
-<div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160;{</div>
-<div class="line"><a name="l00233"></a><span class="lineno">  233</span>&#160;    <span class="keywordflow">return</span> std::clamp(fValue, 0.f, 1.f);</div>
-<div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160;}</div>
-<div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160; </div>
-<div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160;constexpr <span class="keywordtype">float</span> color::dec_to_float(<span class="keywordtype">int</span> nValue) noexcept</div>
-<div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;{</div>
-<div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160;    <span class="keywordflow">return</span> <span class="keyword">static_cast&lt;</span><span class="keywordtype">float</span><span class="keyword">&gt;</span>(nValue) / 255.f;</div>
-<div class="line"><a name="l00239"></a><span class="lineno">  239</span>&#160;}</div>
-<div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160; </div>
-<div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160;constexpr <span class="keywordtype">void</span> color::assign_checked(<span class="keyword">const</span> glm::vec4&amp; other) noexcept</div>
-<div class="line"><a name="l00242"></a><span class="lineno">  242</span>&#160;{</div>
-<div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160;    assign_r_checked(other.x);</div>
-<div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160;    assign_g_checked(other.y);</div>
-<div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160;    assign_b_checked(other.z);</div>
-<div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160;    assign_a_checked(other.w);</div>
-<div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160;}</div>
-<div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160; </div>
-<div class="line"><a name="l00249"></a><span class="lineno">  249</span>&#160;constexpr <span class="keywordtype">void</span> color::assign_r_checked(<span class="keywordtype">float</span> fValue) noexcept</div>
-<div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160;{</div>
-<div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160;    m_Color.x = clamp_value(fValue);</div>
-<div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160;}</div>
-<div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160; </div>
-<div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160;constexpr <span class="keywordtype">void</span> color::assign_g_checked(<span class="keywordtype">float</span> fValue) noexcept</div>
-<div class="line"><a name="l00255"></a><span class="lineno">  255</span>&#160;{</div>
-<div class="line"><a name="l00256"></a><span class="lineno">  256</span>&#160;    m_Color.y = clamp_value(fValue);</div>
-<div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160;}</div>
-<div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160; </div>
-<div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160;constexpr <span class="keywordtype">void</span> color::assign_b_checked(<span class="keywordtype">float</span> fValue) noexcept</div>
-<div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160;{</div>
-<div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160;    m_Color.z = clamp_value(fValue);</div>
-<div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160;}</div>
-<div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160; </div>
-<div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160;constexpr <span class="keywordtype">void</span> color::assign_a_checked(<span class="keywordtype">float</span> fValue) noexcept</div>
-<div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160;{</div>
-<div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160;    m_Color.w = clamp_value(fValue);</div>
-<div class="line"><a name="l00267"></a><span class="lineno">  267</span>&#160;}</div>
-<div class="line"><a name="l00268"></a><span class="lineno">  268</span>&#160; </div>
-<div class="line"><a name="l00269"></a><span class="lineno">  269</span>&#160;} <span class="comment">// namespace qx</span></div>
+<a href="color_8inl.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="color_8h.html">color.h</a>&quot;</span></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="keyword">namespace </span>qx</div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;{</div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160; </div>
+<div class="line"><a name="l00014"></a><span class="lineno"><a class="line" href="classqx_1_1color.html#ac4b3d1b317dabde61609482c013ce297">   14</a></span>&#160;constexpr <a class="code" href="classqx_1_1color.html#a4ea0457c5713402decf56f006cdacf87">color::color</a>(</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;    <span class="keywordtype">float</span> fRed,</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;    <span class="keywordtype">float</span> fGreen,</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;    <span class="keywordtype">float</span> fBlue,</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    <span class="keywordtype">float</span> fAlpha) noexcept</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;{</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    assign_checked({ fRed, fGreen, fBlue, fAlpha });</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;}</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160; </div>
+<div class="line"><a name="l00023"></a><span class="lineno"><a class="line" href="classqx_1_1color.html#a0c75fab55e5c1754a2c46c3ab1521a39">   23</a></span>&#160;constexpr <a class="code" href="classqx_1_1color.html#a4ea0457c5713402decf56f006cdacf87">color::color</a>(<span class="keywordtype">int</span> nRed, <span class="keywordtype">int</span> nGreen, <span class="keywordtype">int</span> nBlue, <span class="keywordtype">int</span> nAlpha) noexcept</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    : <a class="code" href="classqx_1_1color.html">color</a>(</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;        dec_to_float(nRed),</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;        dec_to_float(nGreen),</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;        dec_to_float(nBlue),</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;        dec_to_float(nAlpha))</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;{</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;}</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160; </div>
+<div class="line"><a name="l00032"></a><span class="lineno"><a class="line" href="classqx_1_1color.html#a9d381432e472dcaa78daf65e708ba2ce">   32</a></span>&#160;constexpr <span class="keywordtype">float</span> <a class="code" href="classqx_1_1color.html#a9d381432e472dcaa78daf65e708ba2ce">color::r</a>(<span class="keywordtype">void</span>) <span class="keyword">const</span> noexcept</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;{</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    <span class="keywordflow">return</span> m_Color.x;</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;}</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160; </div>
+<div class="line"><a name="l00037"></a><span class="lineno"><a class="line" href="classqx_1_1color.html#afa7678d3200a1e5d3ecbb8c901d8bdf9">   37</a></span>&#160;constexpr <span class="keywordtype">float</span> <a class="code" href="classqx_1_1color.html#afa7678d3200a1e5d3ecbb8c901d8bdf9">color::g</a>(<span class="keywordtype">void</span>) <span class="keyword">const</span> noexcept</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;{</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    <span class="keywordflow">return</span> m_Color.y;</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;}</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160; </div>
+<div class="line"><a name="l00042"></a><span class="lineno"><a class="line" href="classqx_1_1color.html#a27edb7bbd1859f4be7c6950ff87561cb">   42</a></span>&#160;constexpr <span class="keywordtype">float</span> <a class="code" href="classqx_1_1color.html#a27edb7bbd1859f4be7c6950ff87561cb">color::b</a>(<span class="keywordtype">void</span>) <span class="keyword">const</span> noexcept</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;{</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    <span class="keywordflow">return</span> m_Color.z;</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;}</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160; </div>
+<div class="line"><a name="l00047"></a><span class="lineno"><a class="line" href="classqx_1_1color.html#aad6f66d079713eaed7271c5f957ca23d">   47</a></span>&#160;constexpr <span class="keywordtype">float</span> <a class="code" href="classqx_1_1color.html#aad6f66d079713eaed7271c5f957ca23d">color::a</a>(<span class="keywordtype">void</span>) <span class="keyword">const</span> noexcept</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;{</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    <span class="keywordflow">return</span> m_Color.w;</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;}</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160; </div>
+<div class="line"><a name="l00052"></a><span class="lineno"><a class="line" href="classqx_1_1color.html#a279f4eb6970448406a9e9af2fb72f4b0">   52</a></span>&#160;constexpr <span class="keyword">const</span> <span class="keywordtype">float</span>* <a class="code" href="classqx_1_1color.html#a279f4eb6970448406a9e9af2fb72f4b0">color::data</a>(<span class="keywordtype">void</span>) <span class="keyword">const</span> noexcept</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;{</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    <span class="keywordflow">return</span> &amp;(m_Color.x);</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;}</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160; </div>
+<div class="line"><a name="l00057"></a><span class="lineno"><a class="line" href="classqx_1_1color.html#ad2b012c258ee97b24736d5ad7f6bdb32">   57</a></span>&#160;constexpr <span class="keywordtype">bool</span> <a class="code" href="classqx_1_1color.html#ad2b012c258ee97b24736d5ad7f6bdb32">color::operator==</a>(<span class="keyword">const</span> <a class="code" href="classqx_1_1color.html">color</a>&amp; other) <span class="keyword">const</span> noexcept</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;{</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    <span class="keywordflow">return</span> m_Color == other.m_Color;</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;}</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160; </div>
+<div class="line"><a name="l00062"></a><span class="lineno"><a class="line" href="classqx_1_1color.html#a586418171e49eeb5b6e3c13cd08c89b2">   62</a></span>&#160;constexpr color::operator glm::vec3(<span class="keywordtype">void</span>) <span class="keyword">const</span> noexcept</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;{</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    <span class="keywordflow">return</span> m_Color;</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;}</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160; </div>
+<div class="line"><a name="l00067"></a><span class="lineno"><a class="line" href="classqx_1_1color.html#a76f7b51f0accbee80427d3b9fa68e148">   67</a></span>&#160;constexpr color::operator glm::vec4(<span class="keywordtype">void</span>) <span class="keyword">const</span> noexcept</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;{</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    <span class="keywordflow">return</span> m_Color;</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;}</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160; </div>
+<div class="line"><a name="l00072"></a><span class="lineno"><a class="line" href="classqx_1_1color.html#aa4c7d1eca308c20717847e11c06f3ef2">   72</a></span>&#160;constexpr <span class="keywordtype">void</span> <a class="code" href="classqx_1_1color.html#aa4c7d1eca308c20717847e11c06f3ef2">color::update_r</a>(<span class="keywordtype">float</span> fDeltaValue) noexcept</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;{</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    assign_r_checked(m_Color.x + fDeltaValue);</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;}</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160; </div>
+<div class="line"><a name="l00077"></a><span class="lineno"><a class="line" href="classqx_1_1color.html#a41ff4c6c5906c1d81ab47e212ff54df5">   77</a></span>&#160;constexpr <span class="keywordtype">void</span> <a class="code" href="classqx_1_1color.html#a41ff4c6c5906c1d81ab47e212ff54df5">color::update_g</a>(<span class="keywordtype">float</span> fDeltaValue) noexcept</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;{</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;    assign_g_checked(m_Color.y + fDeltaValue);</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;}</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160; </div>
+<div class="line"><a name="l00082"></a><span class="lineno"><a class="line" href="classqx_1_1color.html#a4f4cc04ad98f542c628585f45938d1c4">   82</a></span>&#160;constexpr <span class="keywordtype">void</span> <a class="code" href="classqx_1_1color.html#a4f4cc04ad98f542c628585f45938d1c4">color::update_b</a>(<span class="keywordtype">float</span> fDeltaValue) noexcept</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;{</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;    assign_b_checked(m_Color.z + fDeltaValue);</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;}</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160; </div>
+<div class="line"><a name="l00087"></a><span class="lineno"><a class="line" href="classqx_1_1color.html#a12ef8da127f482e6d811ad7e6a0d77b9">   87</a></span>&#160;constexpr <span class="keywordtype">void</span> <a class="code" href="classqx_1_1color.html#a12ef8da127f482e6d811ad7e6a0d77b9">color::update_a</a>(<span class="keywordtype">float</span> fDeltaValue) noexcept</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;{</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;    assign_a_checked(m_Color.w + fDeltaValue);</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;}</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160; </div>
+<div class="line"><a name="l00092"></a><span class="lineno"><a class="line" href="classqx_1_1color.html#a120868dd6deb189aedd5ee9cc64e3fc5">   92</a></span>&#160;constexpr <span class="keywordtype">void</span> <a class="code" href="classqx_1_1color.html#a120868dd6deb189aedd5ee9cc64e3fc5">color::update_r_dec</a>(<span class="keywordtype">int</span> nDeltaValue) noexcept</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;{</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;    assign_r_checked(m_Color.x + dec_to_float(nDeltaValue));</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;}</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160; </div>
+<div class="line"><a name="l00097"></a><span class="lineno"><a class="line" href="classqx_1_1color.html#a84df8abff04d108a1336e0835a5575e7">   97</a></span>&#160;constexpr <span class="keywordtype">void</span> <a class="code" href="classqx_1_1color.html#a84df8abff04d108a1336e0835a5575e7">color::update_g_dec</a>(<span class="keywordtype">int</span> nDeltaValue) noexcept</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;{</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;    assign_g_checked(m_Color.y + dec_to_float(nDeltaValue));</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;}</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160; </div>
+<div class="line"><a name="l00102"></a><span class="lineno"><a class="line" href="classqx_1_1color.html#ae12acacca6b7690b8d862c1086d48694">  102</a></span>&#160;constexpr <span class="keywordtype">void</span> <a class="code" href="classqx_1_1color.html#ae12acacca6b7690b8d862c1086d48694">color::update_b_dec</a>(<span class="keywordtype">int</span> nDeltaValue) noexcept</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;{</div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;    assign_b_checked(m_Color.z + dec_to_float(nDeltaValue));</div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;}</div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160; </div>
+<div class="line"><a name="l00107"></a><span class="lineno"><a class="line" href="classqx_1_1color.html#af6243d72e3c2fbaf4c082c99382264c1">  107</a></span>&#160;constexpr <span class="keywordtype">void</span> <a class="code" href="classqx_1_1color.html#af6243d72e3c2fbaf4c082c99382264c1">color::update_a_dec</a>(<span class="keywordtype">int</span> nDeltaValue) noexcept</div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;{</div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;    assign_a_checked(m_Color.w + dec_to_float(nDeltaValue));</div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;}</div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160; </div>
+<div class="line"><a name="l00112"></a><span class="lineno"><a class="line" href="classqx_1_1color.html#a8e7542125b7735869f14ece9976fcf73">  112</a></span>&#160;constexpr <span class="keywordtype">void</span> <a class="code" href="classqx_1_1color.html#a8e7542125b7735869f14ece9976fcf73">color::set_r</a>(<span class="keywordtype">float</span> fValue) noexcept</div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;{</div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;    assign_r_checked(fValue);</div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;}</div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160; </div>
+<div class="line"><a name="l00117"></a><span class="lineno"><a class="line" href="classqx_1_1color.html#a5de43d6c4a09d5c72dafd46add83dc24">  117</a></span>&#160;constexpr <span class="keywordtype">void</span> <a class="code" href="classqx_1_1color.html#a5de43d6c4a09d5c72dafd46add83dc24">color::set_g</a>(<span class="keywordtype">float</span> fValue) noexcept</div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;{</div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;    assign_g_checked(fValue);</div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;}</div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160; </div>
+<div class="line"><a name="l00122"></a><span class="lineno"><a class="line" href="classqx_1_1color.html#a64f7f76813ef54e95a0f34fe253f2776">  122</a></span>&#160;constexpr <span class="keywordtype">void</span> <a class="code" href="classqx_1_1color.html#a64f7f76813ef54e95a0f34fe253f2776">color::set_b</a>(<span class="keywordtype">float</span> fValue) noexcept</div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;{</div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;    assign_b_checked(fValue);</div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;}</div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160; </div>
+<div class="line"><a name="l00127"></a><span class="lineno"><a class="line" href="classqx_1_1color.html#af660c3bb84699b1318a5439797e02c6a">  127</a></span>&#160;constexpr <span class="keywordtype">void</span> <a class="code" href="classqx_1_1color.html#af660c3bb84699b1318a5439797e02c6a">color::set_a</a>(<span class="keywordtype">float</span> fValue) noexcept</div>
+<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;{</div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;    assign_a_checked(fValue);</div>
+<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;}</div>
+<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160; </div>
+<div class="line"><a name="l00132"></a><span class="lineno"><a class="line" href="classqx_1_1color.html#ae5bd9470fb833cf52390db9a7ce9961b">  132</a></span>&#160;constexpr <span class="keywordtype">void</span> <a class="code" href="classqx_1_1color.html#ae5bd9470fb833cf52390db9a7ce9961b">color::set_r_dec</a>(<span class="keywordtype">int</span> nValue) noexcept</div>
+<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;{</div>
+<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;    assign_r_checked(dec_to_float(nValue));</div>
+<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;}</div>
+<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160; </div>
+<div class="line"><a name="l00137"></a><span class="lineno"><a class="line" href="classqx_1_1color.html#aa9d5a8a12174458a8ef5c6f2d5f7fee7">  137</a></span>&#160;constexpr <span class="keywordtype">void</span> <a class="code" href="classqx_1_1color.html#aa9d5a8a12174458a8ef5c6f2d5f7fee7">color::set_g_dec</a>(<span class="keywordtype">int</span> nValue) noexcept</div>
+<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;{</div>
+<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;    assign_g_checked(dec_to_float(nValue));</div>
+<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;}</div>
+<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160; </div>
+<div class="line"><a name="l00142"></a><span class="lineno"><a class="line" href="classqx_1_1color.html#af4f0e74e19d728b46afa5915dd3cc6ec">  142</a></span>&#160;constexpr <span class="keywordtype">void</span> <a class="code" href="classqx_1_1color.html#af4f0e74e19d728b46afa5915dd3cc6ec">color::set_b_dec</a>(<span class="keywordtype">int</span> nValue) noexcept</div>
+<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;{</div>
+<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;    assign_b_checked(dec_to_float(nValue));</div>
+<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;}</div>
+<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160; </div>
+<div class="line"><a name="l00147"></a><span class="lineno"><a class="line" href="classqx_1_1color.html#afec98962905ed5a335354a5410cf6bb0">  147</a></span>&#160;constexpr <span class="keywordtype">void</span> <a class="code" href="classqx_1_1color.html#afec98962905ed5a335354a5410cf6bb0">color::set_a_dec</a>(<span class="keywordtype">int</span> nValue) noexcept</div>
+<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;{</div>
+<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;    assign_a_checked(dec_to_float(nValue));</div>
+<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;}</div>
+<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160; </div>
+<div class="line"><a name="l00152"></a><span class="lineno"><a class="line" href="classqx_1_1color.html#ace0b1e39053b9b367c443d12a95558ac">  152</a></span>&#160;constexpr <a class="code" href="classqx_1_1color.html">color</a> <a class="code" href="classqx_1_1color.html#ace0b1e39053b9b367c443d12a95558ac">color::aqua</a>(<span class="keywordtype">void</span>) noexcept</div>
+<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;{</div>
+<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="classqx_1_1color.html">color</a>(000, 255, 255);</div>
+<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;}</div>
+<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160; </div>
+<div class="line"><a name="l00157"></a><span class="lineno"><a class="line" href="classqx_1_1color.html#aa4942b55203d2fa1723174116251d86e">  157</a></span>&#160;constexpr <a class="code" href="classqx_1_1color.html">color</a> <a class="code" href="classqx_1_1color.html#aa4942b55203d2fa1723174116251d86e">color::black</a>(<span class="keywordtype">void</span>) noexcept</div>
+<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;{</div>
+<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="classqx_1_1color.html">color</a>(000, 000, 000);</div>
+<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;}</div>
+<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160; </div>
+<div class="line"><a name="l00162"></a><span class="lineno"><a class="line" href="classqx_1_1color.html#afd1263f609450b8291d72ff2415c5646">  162</a></span>&#160;constexpr <a class="code" href="classqx_1_1color.html">color</a> <a class="code" href="classqx_1_1color.html#afd1263f609450b8291d72ff2415c5646">color::blue</a>(<span class="keywordtype">void</span>) noexcept</div>
+<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;{</div>
+<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="classqx_1_1color.html">color</a>(000, 000, 255);</div>
+<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;}</div>
+<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160; </div>
+<div class="line"><a name="l00167"></a><span class="lineno"><a class="line" href="classqx_1_1color.html#a90f774f2f8b09f5783dc4ccf9257a391">  167</a></span>&#160;constexpr <a class="code" href="classqx_1_1color.html">color</a> <a class="code" href="classqx_1_1color.html#a90f774f2f8b09f5783dc4ccf9257a391">color::fuchsia</a>(<span class="keywordtype">void</span>) noexcept</div>
+<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;{</div>
+<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="classqx_1_1color.html">color</a>(255, 000, 255);</div>
+<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;}</div>
+<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160; </div>
+<div class="line"><a name="l00172"></a><span class="lineno"><a class="line" href="classqx_1_1color.html#a7ae18d4c36c758154f51b9e2701c515f">  172</a></span>&#160;constexpr <a class="code" href="classqx_1_1color.html">color</a> <a class="code" href="classqx_1_1color.html#a7ae18d4c36c758154f51b9e2701c515f">color::gray</a>(<span class="keywordtype">void</span>) noexcept</div>
+<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;{</div>
+<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="classqx_1_1color.html">color</a>(128, 128, 128);</div>
+<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;}</div>
+<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160; </div>
+<div class="line"><a name="l00177"></a><span class="lineno"><a class="line" href="classqx_1_1color.html#ae1c1d45330c9ee2e6efd65b109aea1e8">  177</a></span>&#160;constexpr <a class="code" href="classqx_1_1color.html">color</a> <a class="code" href="classqx_1_1color.html#ae1c1d45330c9ee2e6efd65b109aea1e8">color::green</a>(<span class="keywordtype">void</span>) noexcept</div>
+<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;{</div>
+<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="classqx_1_1color.html">color</a>(000, 128, 000);</div>
+<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;}</div>
+<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160; </div>
+<div class="line"><a name="l00182"></a><span class="lineno"><a class="line" href="classqx_1_1color.html#a1865ab379c4fec9269b8c31a75e7a31a">  182</a></span>&#160;constexpr <a class="code" href="classqx_1_1color.html">color</a> <a class="code" href="classqx_1_1color.html#a1865ab379c4fec9269b8c31a75e7a31a">color::lime</a>(<span class="keywordtype">void</span>) noexcept</div>
+<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;{</div>
+<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="classqx_1_1color.html">color</a>(000, 255, 000);</div>
+<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;}</div>
+<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160; </div>
+<div class="line"><a name="l00187"></a><span class="lineno"><a class="line" href="classqx_1_1color.html#ab12415ad03ae4f77a254faea8ca887ab">  187</a></span>&#160;constexpr <a class="code" href="classqx_1_1color.html">color</a> <a class="code" href="classqx_1_1color.html#ab12415ad03ae4f77a254faea8ca887ab">color::maroon</a>(<span class="keywordtype">void</span>) noexcept</div>
+<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;{</div>
+<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="classqx_1_1color.html">color</a>(128, 000, 000);</div>
+<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;}</div>
+<div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160; </div>
+<div class="line"><a name="l00192"></a><span class="lineno"><a class="line" href="classqx_1_1color.html#ab9e1b1de887e5bd23bf947ece3c58b39">  192</a></span>&#160;constexpr <a class="code" href="classqx_1_1color.html">color</a> <a class="code" href="classqx_1_1color.html#ab9e1b1de887e5bd23bf947ece3c58b39">color::navy</a>(<span class="keywordtype">void</span>) noexcept</div>
+<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;{</div>
+<div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="classqx_1_1color.html">color</a>(000, 000, 128);</div>
+<div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;}</div>
+<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160; </div>
+<div class="line"><a name="l00197"></a><span class="lineno"><a class="line" href="classqx_1_1color.html#a21f5638ca7dbc0c7253dc28aedaed423">  197</a></span>&#160;constexpr <a class="code" href="classqx_1_1color.html">color</a> <a class="code" href="classqx_1_1color.html#a21f5638ca7dbc0c7253dc28aedaed423">color::olive</a>(<span class="keywordtype">void</span>) noexcept</div>
+<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;{</div>
+<div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="classqx_1_1color.html">color</a>(128, 128, 000);</div>
+<div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160;}</div>
+<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160; </div>
+<div class="line"><a name="l00202"></a><span class="lineno"><a class="line" href="classqx_1_1color.html#a99f65db62f7d4142936f2b33b37f0a4b">  202</a></span>&#160;constexpr <a class="code" href="classqx_1_1color.html">color</a> <a class="code" href="classqx_1_1color.html#a99f65db62f7d4142936f2b33b37f0a4b">color::purple</a>(<span class="keywordtype">void</span>) noexcept</div>
+<div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160;{</div>
+<div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="classqx_1_1color.html">color</a>(128, 000, 128);</div>
+<div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;}</div>
+<div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160; </div>
+<div class="line"><a name="l00207"></a><span class="lineno"><a class="line" href="classqx_1_1color.html#aed8f4fd86a8b170ae489273f155876e4">  207</a></span>&#160;constexpr <a class="code" href="classqx_1_1color.html">color</a> <a class="code" href="classqx_1_1color.html#aed8f4fd86a8b170ae489273f155876e4">color::red</a>(<span class="keywordtype">void</span>) noexcept</div>
+<div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160;{</div>
+<div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="classqx_1_1color.html">color</a>(255, 000, 000);</div>
+<div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160;}</div>
+<div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160; </div>
+<div class="line"><a name="l00212"></a><span class="lineno"><a class="line" href="classqx_1_1color.html#a3ee16f7f59b21b4672577541440a3432">  212</a></span>&#160;constexpr <a class="code" href="classqx_1_1color.html">color</a> <a class="code" href="classqx_1_1color.html#a3ee16f7f59b21b4672577541440a3432">color::silver</a>(<span class="keywordtype">void</span>) noexcept</div>
+<div class="line"><a name="l00213"></a><span class="lineno">  213</span>&#160;{</div>
+<div class="line"><a name="l00214"></a><span class="lineno">  214</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="classqx_1_1color.html">color</a>(192, 192, 192);</div>
+<div class="line"><a name="l00215"></a><span class="lineno">  215</span>&#160;}</div>
+<div class="line"><a name="l00216"></a><span class="lineno">  216</span>&#160; </div>
+<div class="line"><a name="l00217"></a><span class="lineno"><a class="line" href="classqx_1_1color.html#af9608766e5042f9063beddd2cc742b4c">  217</a></span>&#160;constexpr <a class="code" href="classqx_1_1color.html">color</a> <a class="code" href="classqx_1_1color.html#af9608766e5042f9063beddd2cc742b4c">color::teal</a>(<span class="keywordtype">void</span>) noexcept</div>
+<div class="line"><a name="l00218"></a><span class="lineno">  218</span>&#160;{</div>
+<div class="line"><a name="l00219"></a><span class="lineno">  219</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="classqx_1_1color.html">color</a>(000, 128, 128);</div>
+<div class="line"><a name="l00220"></a><span class="lineno">  220</span>&#160;}</div>
+<div class="line"><a name="l00221"></a><span class="lineno">  221</span>&#160; </div>
+<div class="line"><a name="l00222"></a><span class="lineno"><a class="line" href="classqx_1_1color.html#a234d53f4949c014de01c1fdeefd8a766">  222</a></span>&#160;constexpr <a class="code" href="classqx_1_1color.html">color</a> <a class="code" href="classqx_1_1color.html#a234d53f4949c014de01c1fdeefd8a766">color::white</a>(<span class="keywordtype">void</span>) noexcept</div>
+<div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160;{</div>
+<div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="classqx_1_1color.html">color</a>(255, 255, 255);</div>
+<div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160;}</div>
+<div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160; </div>
+<div class="line"><a name="l00227"></a><span class="lineno"><a class="line" href="classqx_1_1color.html#a0b1ab65c695cefb5b75fa3f8bdd31549">  227</a></span>&#160;constexpr <a class="code" href="classqx_1_1color.html">color</a> <a class="code" href="classqx_1_1color.html#a0b1ab65c695cefb5b75fa3f8bdd31549">color::yellow</a>(<span class="keywordtype">void</span>) noexcept</div>
+<div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160;{</div>
+<div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="classqx_1_1color.html">color</a>(255, 255, 000);</div>
+<div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160;}</div>
+<div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160; </div>
+<div class="line"><a name="l00232"></a><span class="lineno"><a class="line" href="classqx_1_1color.html#a6649c4e58406dbad4c35f5725a87becd">  232</a></span>&#160;constexpr <a class="code" href="classqx_1_1color.html">color</a> <a class="code" href="classqx_1_1color.html#a6649c4e58406dbad4c35f5725a87becd">color::empty</a>(<span class="keywordtype">void</span>) noexcept</div>
+<div class="line"><a name="l00233"></a><span class="lineno">  233</span>&#160;{</div>
+<div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="classqx_1_1color.html">color</a>(0, 0, 0, 0);</div>
+<div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160;}</div>
+<div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160; </div>
+<div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;constexpr <span class="keywordtype">float</span> color::clamp_value(<span class="keywordtype">float</span> fValue) noexcept</div>
+<div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160;{</div>
+<div class="line"><a name="l00239"></a><span class="lineno">  239</span>&#160;    <span class="keywordflow">return</span> std::clamp(fValue, 0.f, 1.f);</div>
+<div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160;}</div>
+<div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160; </div>
+<div class="line"><a name="l00242"></a><span class="lineno">  242</span>&#160;constexpr <span class="keywordtype">float</span> color::dec_to_float(<span class="keywordtype">int</span> nValue) noexcept</div>
+<div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160;{</div>
+<div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160;    <span class="keywordflow">return</span> <span class="keyword">static_cast&lt;</span><span class="keywordtype">float</span><span class="keyword">&gt;</span>(nValue) / 255.f;</div>
+<div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160;}</div>
+<div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160; </div>
+<div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160;constexpr <span class="keywordtype">void</span> color::assign_checked(<span class="keyword">const</span> glm::vec4&amp; other) noexcept</div>
+<div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160;{</div>
+<div class="line"><a name="l00249"></a><span class="lineno">  249</span>&#160;    assign_r_checked(other.x);</div>
+<div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160;    assign_g_checked(other.y);</div>
+<div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160;    assign_b_checked(other.z);</div>
+<div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160;    assign_a_checked(other.w);</div>
+<div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160;}</div>
+<div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160; </div>
+<div class="line"><a name="l00255"></a><span class="lineno">  255</span>&#160;constexpr <span class="keywordtype">void</span> color::assign_r_checked(<span class="keywordtype">float</span> fValue) noexcept</div>
+<div class="line"><a name="l00256"></a><span class="lineno">  256</span>&#160;{</div>
+<div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160;    m_Color.x = clamp_value(fValue);</div>
+<div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160;}</div>
+<div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160; </div>
+<div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160;constexpr <span class="keywordtype">void</span> color::assign_g_checked(<span class="keywordtype">float</span> fValue) noexcept</div>
+<div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160;{</div>
+<div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160;    m_Color.y = clamp_value(fValue);</div>
+<div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160;}</div>
+<div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160; </div>
+<div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160;constexpr <span class="keywordtype">void</span> color::assign_b_checked(<span class="keywordtype">float</span> fValue) noexcept</div>
+<div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160;{</div>
+<div class="line"><a name="l00267"></a><span class="lineno">  267</span>&#160;    m_Color.z = clamp_value(fValue);</div>
+<div class="line"><a name="l00268"></a><span class="lineno">  268</span>&#160;}</div>
+<div class="line"><a name="l00269"></a><span class="lineno">  269</span>&#160; </div>
+<div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160;constexpr <span class="keywordtype">void</span> color::assign_a_checked(<span class="keywordtype">float</span> fValue) noexcept</div>
+<div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160;{</div>
+<div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160;    m_Color.w = clamp_value(fValue);</div>
+<div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160;}</div>
+<div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160; </div>
+<div class="line"><a name="l00275"></a><span class="lineno">  275</span>&#160;} <span class="comment">// namespace qx</span></div>
 <div class="ttc" id="aclassqx_1_1color_html"><div class="ttname"><a href="classqx_1_1color.html">qx::color</a></div><div class="ttdoc">RGBA color.</div><div class="ttdef"><b>Definition:</b> <a href="color_8h_source.html#l00034">color.h:35</a></div></div>
-<div class="ttc" id="aclassqx_1_1color_html_a0b1ab65c695cefb5b75fa3f8bdd31549"><div class="ttname"><a href="classqx_1_1color.html#a0b1ab65c695cefb5b75fa3f8bdd31549">qx::color::yellow</a></div><div class="ttdeci">static constexpr color yellow(void) noexcept</div><div class="ttdoc">Get yellow color.</div><div class="ttdef"><b>Definition:</b> <a href="color_8inl_source.html#l00226">color.inl:226</a></div></div>
-<div class="ttc" id="aclassqx_1_1color_html_a120868dd6deb189aedd5ee9cc64e3fc5"><div class="ttname"><a href="classqx_1_1color.html#a120868dd6deb189aedd5ee9cc64e3fc5">qx::color::update_r_dec</a></div><div class="ttdeci">constexpr void update_r_dec(int nDeltaValue) noexcept</div><div class="ttdoc">Add value to red component.</div><div class="ttdef"><b>Definition:</b> <a href="color_8inl_source.html#l00091">color.inl:91</a></div></div>
-<div class="ttc" id="aclassqx_1_1color_html_a12ef8da127f482e6d811ad7e6a0d77b9"><div class="ttname"><a href="classqx_1_1color.html#a12ef8da127f482e6d811ad7e6a0d77b9">qx::color::update_a</a></div><div class="ttdeci">constexpr void update_a(float fDeltaValue) noexcept</div><div class="ttdoc">Add value to alpha component.</div><div class="ttdef"><b>Definition:</b> <a href="color_8inl_source.html#l00086">color.inl:86</a></div></div>
-<div class="ttc" id="aclassqx_1_1color_html_a1865ab379c4fec9269b8c31a75e7a31a"><div class="ttname"><a href="classqx_1_1color.html#a1865ab379c4fec9269b8c31a75e7a31a">qx::color::lime</a></div><div class="ttdeci">static constexpr color lime(void) noexcept</div><div class="ttdoc">Get lime color.</div><div class="ttdef"><b>Definition:</b> <a href="color_8inl_source.html#l00181">color.inl:181</a></div></div>
-<div class="ttc" id="aclassqx_1_1color_html_a21f5638ca7dbc0c7253dc28aedaed423"><div class="ttname"><a href="classqx_1_1color.html#a21f5638ca7dbc0c7253dc28aedaed423">qx::color::olive</a></div><div class="ttdeci">static constexpr color olive(void) noexcept</div><div class="ttdoc">Get olive color.</div><div class="ttdef"><b>Definition:</b> <a href="color_8inl_source.html#l00196">color.inl:196</a></div></div>
-<div class="ttc" id="aclassqx_1_1color_html_a234d53f4949c014de01c1fdeefd8a766"><div class="ttname"><a href="classqx_1_1color.html#a234d53f4949c014de01c1fdeefd8a766">qx::color::white</a></div><div class="ttdeci">static constexpr color white(void) noexcept</div><div class="ttdoc">Get white color.</div><div class="ttdef"><b>Definition:</b> <a href="color_8inl_source.html#l00221">color.inl:221</a></div></div>
-<div class="ttc" id="aclassqx_1_1color_html_a279f4eb6970448406a9e9af2fb72f4b0"><div class="ttname"><a href="classqx_1_1color.html#a279f4eb6970448406a9e9af2fb72f4b0">qx::color::data</a></div><div class="ttdeci">constexpr const float * data(void) const noexcept</div><div class="ttdoc">Get pointer to the first component.</div><div class="ttdef"><b>Definition:</b> <a href="color_8inl_source.html#l00051">color.inl:51</a></div></div>
-<div class="ttc" id="aclassqx_1_1color_html_a27edb7bbd1859f4be7c6950ff87561cb"><div class="ttname"><a href="classqx_1_1color.html#a27edb7bbd1859f4be7c6950ff87561cb">qx::color::b</a></div><div class="ttdeci">constexpr float b(void) const noexcept</div><div class="ttdoc">Get blue component.</div><div class="ttdef"><b>Definition:</b> <a href="color_8inl_source.html#l00041">color.inl:41</a></div></div>
-<div class="ttc" id="aclassqx_1_1color_html_a3ee16f7f59b21b4672577541440a3432"><div class="ttname"><a href="classqx_1_1color.html#a3ee16f7f59b21b4672577541440a3432">qx::color::silver</a></div><div class="ttdeci">static constexpr color silver(void) noexcept</div><div class="ttdoc">Get silver color.</div><div class="ttdef"><b>Definition:</b> <a href="color_8inl_source.html#l00211">color.inl:211</a></div></div>
-<div class="ttc" id="aclassqx_1_1color_html_a41ff4c6c5906c1d81ab47e212ff54df5"><div class="ttname"><a href="classqx_1_1color.html#a41ff4c6c5906c1d81ab47e212ff54df5">qx::color::update_g</a></div><div class="ttdeci">constexpr void update_g(float fDeltaValue) noexcept</div><div class="ttdoc">Add value to green component.</div><div class="ttdef"><b>Definition:</b> <a href="color_8inl_source.html#l00076">color.inl:76</a></div></div>
+<div class="ttc" id="aclassqx_1_1color_html_a0b1ab65c695cefb5b75fa3f8bdd31549"><div class="ttname"><a href="classqx_1_1color.html#a0b1ab65c695cefb5b75fa3f8bdd31549">qx::color::yellow</a></div><div class="ttdeci">static constexpr color yellow(void) noexcept</div><div class="ttdoc">Get yellow color.</div><div class="ttdef"><b>Definition:</b> <a href="color_8inl_source.html#l00227">color.inl:227</a></div></div>
+<div class="ttc" id="aclassqx_1_1color_html_a120868dd6deb189aedd5ee9cc64e3fc5"><div class="ttname"><a href="classqx_1_1color.html#a120868dd6deb189aedd5ee9cc64e3fc5">qx::color::update_r_dec</a></div><div class="ttdeci">constexpr void update_r_dec(int nDeltaValue) noexcept</div><div class="ttdoc">Add value to red component.</div><div class="ttdef"><b>Definition:</b> <a href="color_8inl_source.html#l00092">color.inl:92</a></div></div>
+<div class="ttc" id="aclassqx_1_1color_html_a12ef8da127f482e6d811ad7e6a0d77b9"><div class="ttname"><a href="classqx_1_1color.html#a12ef8da127f482e6d811ad7e6a0d77b9">qx::color::update_a</a></div><div class="ttdeci">constexpr void update_a(float fDeltaValue) noexcept</div><div class="ttdoc">Add value to alpha component.</div><div class="ttdef"><b>Definition:</b> <a href="color_8inl_source.html#l00087">color.inl:87</a></div></div>
+<div class="ttc" id="aclassqx_1_1color_html_a1865ab379c4fec9269b8c31a75e7a31a"><div class="ttname"><a href="classqx_1_1color.html#a1865ab379c4fec9269b8c31a75e7a31a">qx::color::lime</a></div><div class="ttdeci">static constexpr color lime(void) noexcept</div><div class="ttdoc">Get lime color.</div><div class="ttdef"><b>Definition:</b> <a href="color_8inl_source.html#l00182">color.inl:182</a></div></div>
+<div class="ttc" id="aclassqx_1_1color_html_a21f5638ca7dbc0c7253dc28aedaed423"><div class="ttname"><a href="classqx_1_1color.html#a21f5638ca7dbc0c7253dc28aedaed423">qx::color::olive</a></div><div class="ttdeci">static constexpr color olive(void) noexcept</div><div class="ttdoc">Get olive color.</div><div class="ttdef"><b>Definition:</b> <a href="color_8inl_source.html#l00197">color.inl:197</a></div></div>
+<div class="ttc" id="aclassqx_1_1color_html_a234d53f4949c014de01c1fdeefd8a766"><div class="ttname"><a href="classqx_1_1color.html#a234d53f4949c014de01c1fdeefd8a766">qx::color::white</a></div><div class="ttdeci">static constexpr color white(void) noexcept</div><div class="ttdoc">Get white color.</div><div class="ttdef"><b>Definition:</b> <a href="color_8inl_source.html#l00222">color.inl:222</a></div></div>
+<div class="ttc" id="aclassqx_1_1color_html_a279f4eb6970448406a9e9af2fb72f4b0"><div class="ttname"><a href="classqx_1_1color.html#a279f4eb6970448406a9e9af2fb72f4b0">qx::color::data</a></div><div class="ttdeci">constexpr const float * data(void) const noexcept</div><div class="ttdoc">Get pointer to the first component.</div><div class="ttdef"><b>Definition:</b> <a href="color_8inl_source.html#l00052">color.inl:52</a></div></div>
+<div class="ttc" id="aclassqx_1_1color_html_a27edb7bbd1859f4be7c6950ff87561cb"><div class="ttname"><a href="classqx_1_1color.html#a27edb7bbd1859f4be7c6950ff87561cb">qx::color::b</a></div><div class="ttdeci">constexpr float b(void) const noexcept</div><div class="ttdoc">Get blue component.</div><div class="ttdef"><b>Definition:</b> <a href="color_8inl_source.html#l00042">color.inl:42</a></div></div>
+<div class="ttc" id="aclassqx_1_1color_html_a3ee16f7f59b21b4672577541440a3432"><div class="ttname"><a href="classqx_1_1color.html#a3ee16f7f59b21b4672577541440a3432">qx::color::silver</a></div><div class="ttdeci">static constexpr color silver(void) noexcept</div><div class="ttdoc">Get silver color.</div><div class="ttdef"><b>Definition:</b> <a href="color_8inl_source.html#l00212">color.inl:212</a></div></div>
+<div class="ttc" id="aclassqx_1_1color_html_a41ff4c6c5906c1d81ab47e212ff54df5"><div class="ttname"><a href="classqx_1_1color.html#a41ff4c6c5906c1d81ab47e212ff54df5">qx::color::update_g</a></div><div class="ttdeci">constexpr void update_g(float fDeltaValue) noexcept</div><div class="ttdoc">Add value to green component.</div><div class="ttdef"><b>Definition:</b> <a href="color_8inl_source.html#l00077">color.inl:77</a></div></div>
 <div class="ttc" id="aclassqx_1_1color_html_a4ea0457c5713402decf56f006cdacf87"><div class="ttname"><a href="classqx_1_1color.html#a4ea0457c5713402decf56f006cdacf87">qx::color::color</a></div><div class="ttdeci">constexpr color(void) noexcept=default</div><div class="ttdoc">color object constructor</div></div>
-<div class="ttc" id="aclassqx_1_1color_html_a4f4cc04ad98f542c628585f45938d1c4"><div class="ttname"><a href="classqx_1_1color.html#a4f4cc04ad98f542c628585f45938d1c4">qx::color::update_b</a></div><div class="ttdeci">constexpr void update_b(float fDeltaValue) noexcept</div><div class="ttdoc">Add value to blue component.</div><div class="ttdef"><b>Definition:</b> <a href="color_8inl_source.html#l00081">color.inl:81</a></div></div>
-<div class="ttc" id="aclassqx_1_1color_html_a5de43d6c4a09d5c72dafd46add83dc24"><div class="ttname"><a href="classqx_1_1color.html#a5de43d6c4a09d5c72dafd46add83dc24">qx::color::set_g</a></div><div class="ttdeci">constexpr void set_g(float fValue) noexcept</div><div class="ttdoc">Set new value of green component.</div><div class="ttdef"><b>Definition:</b> <a href="color_8inl_source.html#l00116">color.inl:116</a></div></div>
-<div class="ttc" id="aclassqx_1_1color_html_a64f7f76813ef54e95a0f34fe253f2776"><div class="ttname"><a href="classqx_1_1color.html#a64f7f76813ef54e95a0f34fe253f2776">qx::color::set_b</a></div><div class="ttdeci">constexpr void set_b(float fValue) noexcept</div><div class="ttdoc">Set new value of blue component.</div><div class="ttdef"><b>Definition:</b> <a href="color_8inl_source.html#l00121">color.inl:121</a></div></div>
-<div class="ttc" id="aclassqx_1_1color_html_a7ae18d4c36c758154f51b9e2701c515f"><div class="ttname"><a href="classqx_1_1color.html#a7ae18d4c36c758154f51b9e2701c515f">qx::color::gray</a></div><div class="ttdeci">static constexpr color gray(void) noexcept</div><div class="ttdoc">Get gray color.</div><div class="ttdef"><b>Definition:</b> <a href="color_8inl_source.html#l00171">color.inl:171</a></div></div>
-<div class="ttc" id="aclassqx_1_1color_html_a84df8abff04d108a1336e0835a5575e7"><div class="ttname"><a href="classqx_1_1color.html#a84df8abff04d108a1336e0835a5575e7">qx::color::update_g_dec</a></div><div class="ttdeci">constexpr void update_g_dec(int nDeltaValue) noexcept</div><div class="ttdoc">Add value to green component.</div><div class="ttdef"><b>Definition:</b> <a href="color_8inl_source.html#l00096">color.inl:96</a></div></div>
-<div class="ttc" id="aclassqx_1_1color_html_a8e7542125b7735869f14ece9976fcf73"><div class="ttname"><a href="classqx_1_1color.html#a8e7542125b7735869f14ece9976fcf73">qx::color::set_r</a></div><div class="ttdeci">constexpr void set_r(float fValue) noexcept</div><div class="ttdoc">Set new value of red component.</div><div class="ttdef"><b>Definition:</b> <a href="color_8inl_source.html#l00111">color.inl:111</a></div></div>
-<div class="ttc" id="aclassqx_1_1color_html_a90f774f2f8b09f5783dc4ccf9257a391"><div class="ttname"><a href="classqx_1_1color.html#a90f774f2f8b09f5783dc4ccf9257a391">qx::color::fuchsia</a></div><div class="ttdeci">static constexpr color fuchsia(void) noexcept</div><div class="ttdoc">Get fuchsia color.</div><div class="ttdef"><b>Definition:</b> <a href="color_8inl_source.html#l00166">color.inl:166</a></div></div>
-<div class="ttc" id="aclassqx_1_1color_html_a99f65db62f7d4142936f2b33b37f0a4b"><div class="ttname"><a href="classqx_1_1color.html#a99f65db62f7d4142936f2b33b37f0a4b">qx::color::purple</a></div><div class="ttdeci">static constexpr color purple(void) noexcept</div><div class="ttdoc">Get purple color.</div><div class="ttdef"><b>Definition:</b> <a href="color_8inl_source.html#l00201">color.inl:201</a></div></div>
-<div class="ttc" id="aclassqx_1_1color_html_a9d381432e472dcaa78daf65e708ba2ce"><div class="ttname"><a href="classqx_1_1color.html#a9d381432e472dcaa78daf65e708ba2ce">qx::color::r</a></div><div class="ttdeci">constexpr float r(void) const noexcept</div><div class="ttdoc">Get red component.</div><div class="ttdef"><b>Definition:</b> <a href="color_8inl_source.html#l00031">color.inl:31</a></div></div>
-<div class="ttc" id="aclassqx_1_1color_html_aa4942b55203d2fa1723174116251d86e"><div class="ttname"><a href="classqx_1_1color.html#aa4942b55203d2fa1723174116251d86e">qx::color::black</a></div><div class="ttdeci">static constexpr color black(void) noexcept</div><div class="ttdoc">Get black color.</div><div class="ttdef"><b>Definition:</b> <a href="color_8inl_source.html#l00156">color.inl:156</a></div></div>
-<div class="ttc" id="aclassqx_1_1color_html_aa4c7d1eca308c20717847e11c06f3ef2"><div class="ttname"><a href="classqx_1_1color.html#aa4c7d1eca308c20717847e11c06f3ef2">qx::color::update_r</a></div><div class="ttdeci">constexpr void update_r(float fDeltaValue) noexcept</div><div class="ttdoc">Add value to red component.</div><div class="ttdef"><b>Definition:</b> <a href="color_8inl_source.html#l00071">color.inl:71</a></div></div>
-<div class="ttc" id="aclassqx_1_1color_html_aa9d5a8a12174458a8ef5c6f2d5f7fee7"><div class="ttname"><a href="classqx_1_1color.html#aa9d5a8a12174458a8ef5c6f2d5f7fee7">qx::color::set_g_dec</a></div><div class="ttdeci">constexpr void set_g_dec(int nValue) noexcept</div><div class="ttdoc">Set new value of green component.</div><div class="ttdef"><b>Definition:</b> <a href="color_8inl_source.html#l00136">color.inl:136</a></div></div>
-<div class="ttc" id="aclassqx_1_1color_html_aad6f66d079713eaed7271c5f957ca23d"><div class="ttname"><a href="classqx_1_1color.html#aad6f66d079713eaed7271c5f957ca23d">qx::color::a</a></div><div class="ttdeci">constexpr float a(void) const noexcept</div><div class="ttdoc">Get alpha component.</div><div class="ttdef"><b>Definition:</b> <a href="color_8inl_source.html#l00046">color.inl:46</a></div></div>
-<div class="ttc" id="aclassqx_1_1color_html_ab12415ad03ae4f77a254faea8ca887ab"><div class="ttname"><a href="classqx_1_1color.html#ab12415ad03ae4f77a254faea8ca887ab">qx::color::maroon</a></div><div class="ttdeci">static constexpr color maroon(void) noexcept</div><div class="ttdoc">Get maroon color.</div><div class="ttdef"><b>Definition:</b> <a href="color_8inl_source.html#l00186">color.inl:186</a></div></div>
-<div class="ttc" id="aclassqx_1_1color_html_ab9e1b1de887e5bd23bf947ece3c58b39"><div class="ttname"><a href="classqx_1_1color.html#ab9e1b1de887e5bd23bf947ece3c58b39">qx::color::navy</a></div><div class="ttdeci">static constexpr color navy(void) noexcept</div><div class="ttdoc">Get navy color.</div><div class="ttdef"><b>Definition:</b> <a href="color_8inl_source.html#l00191">color.inl:191</a></div></div>
-<div class="ttc" id="aclassqx_1_1color_html_ace0b1e39053b9b367c443d12a95558ac"><div class="ttname"><a href="classqx_1_1color.html#ace0b1e39053b9b367c443d12a95558ac">qx::color::aqua</a></div><div class="ttdeci">static constexpr color aqua(void) noexcept</div><div class="ttdoc">Get aqua color.</div><div class="ttdef"><b>Definition:</b> <a href="color_8inl_source.html#l00151">color.inl:151</a></div></div>
-<div class="ttc" id="aclassqx_1_1color_html_ad2b012c258ee97b24736d5ad7f6bdb32"><div class="ttname"><a href="classqx_1_1color.html#ad2b012c258ee97b24736d5ad7f6bdb32">qx::color::operator==</a></div><div class="ttdeci">constexpr bool operator==(const color &amp;other) const noexcept</div><div class="ttdoc">operator==</div><div class="ttdef"><b>Definition:</b> <a href="color_8inl_source.html#l00056">color.inl:56</a></div></div>
-<div class="ttc" id="aclassqx_1_1color_html_ae12acacca6b7690b8d862c1086d48694"><div class="ttname"><a href="classqx_1_1color.html#ae12acacca6b7690b8d862c1086d48694">qx::color::update_b_dec</a></div><div class="ttdeci">constexpr void update_b_dec(int nDeltaValue) noexcept</div><div class="ttdoc">Add value to blue component.</div><div class="ttdef"><b>Definition:</b> <a href="color_8inl_source.html#l00101">color.inl:101</a></div></div>
-<div class="ttc" id="aclassqx_1_1color_html_ae1c1d45330c9ee2e6efd65b109aea1e8"><div class="ttname"><a href="classqx_1_1color.html#ae1c1d45330c9ee2e6efd65b109aea1e8">qx::color::green</a></div><div class="ttdeci">static constexpr color green(void) noexcept</div><div class="ttdoc">Get green color.</div><div class="ttdef"><b>Definition:</b> <a href="color_8inl_source.html#l00176">color.inl:176</a></div></div>
-<div class="ttc" id="aclassqx_1_1color_html_ae5bd9470fb833cf52390db9a7ce9961b"><div class="ttname"><a href="classqx_1_1color.html#ae5bd9470fb833cf52390db9a7ce9961b">qx::color::set_r_dec</a></div><div class="ttdeci">constexpr void set_r_dec(int nValue) noexcept</div><div class="ttdoc">Set new value of red component.</div><div class="ttdef"><b>Definition:</b> <a href="color_8inl_source.html#l00131">color.inl:131</a></div></div>
-<div class="ttc" id="aclassqx_1_1color_html_aed8f4fd86a8b170ae489273f155876e4"><div class="ttname"><a href="classqx_1_1color.html#aed8f4fd86a8b170ae489273f155876e4">qx::color::red</a></div><div class="ttdeci">static constexpr color red(void) noexcept</div><div class="ttdoc">Get red color.</div><div class="ttdef"><b>Definition:</b> <a href="color_8inl_source.html#l00206">color.inl:206</a></div></div>
-<div class="ttc" id="aclassqx_1_1color_html_af4f0e74e19d728b46afa5915dd3cc6ec"><div class="ttname"><a href="classqx_1_1color.html#af4f0e74e19d728b46afa5915dd3cc6ec">qx::color::set_b_dec</a></div><div class="ttdeci">constexpr void set_b_dec(int nValue) noexcept</div><div class="ttdoc">Set new value of blue component.</div><div class="ttdef"><b>Definition:</b> <a href="color_8inl_source.html#l00141">color.inl:141</a></div></div>
-<div class="ttc" id="aclassqx_1_1color_html_af6243d72e3c2fbaf4c082c99382264c1"><div class="ttname"><a href="classqx_1_1color.html#af6243d72e3c2fbaf4c082c99382264c1">qx::color::update_a_dec</a></div><div class="ttdeci">constexpr void update_a_dec(int nDeltaValue) noexcept</div><div class="ttdoc">Add value to alpha component.</div><div class="ttdef"><b>Definition:</b> <a href="color_8inl_source.html#l00106">color.inl:106</a></div></div>
-<div class="ttc" id="aclassqx_1_1color_html_af660c3bb84699b1318a5439797e02c6a"><div class="ttname"><a href="classqx_1_1color.html#af660c3bb84699b1318a5439797e02c6a">qx::color::set_a</a></div><div class="ttdeci">constexpr void set_a(float fValue) noexcept</div><div class="ttdoc">Set new value of alpha component.</div><div class="ttdef"><b>Definition:</b> <a href="color_8inl_source.html#l00126">color.inl:126</a></div></div>
-<div class="ttc" id="aclassqx_1_1color_html_af9608766e5042f9063beddd2cc742b4c"><div class="ttname"><a href="classqx_1_1color.html#af9608766e5042f9063beddd2cc742b4c">qx::color::teal</a></div><div class="ttdeci">static constexpr color teal(void) noexcept</div><div class="ttdoc">Get teal color.</div><div class="ttdef"><b>Definition:</b> <a href="color_8inl_source.html#l00216">color.inl:216</a></div></div>
-<div class="ttc" id="aclassqx_1_1color_html_afa7678d3200a1e5d3ecbb8c901d8bdf9"><div class="ttname"><a href="classqx_1_1color.html#afa7678d3200a1e5d3ecbb8c901d8bdf9">qx::color::g</a></div><div class="ttdeci">constexpr float g(void) const noexcept</div><div class="ttdoc">Get green component.</div><div class="ttdef"><b>Definition:</b> <a href="color_8inl_source.html#l00036">color.inl:36</a></div></div>
-<div class="ttc" id="aclassqx_1_1color_html_afd1263f609450b8291d72ff2415c5646"><div class="ttname"><a href="classqx_1_1color.html#afd1263f609450b8291d72ff2415c5646">qx::color::blue</a></div><div class="ttdeci">static constexpr color blue(void) noexcept</div><div class="ttdoc">Get blue color.</div><div class="ttdef"><b>Definition:</b> <a href="color_8inl_source.html#l00161">color.inl:161</a></div></div>
-<div class="ttc" id="aclassqx_1_1color_html_afec98962905ed5a335354a5410cf6bb0"><div class="ttname"><a href="classqx_1_1color.html#afec98962905ed5a335354a5410cf6bb0">qx::color::set_a_dec</a></div><div class="ttdeci">constexpr void set_a_dec(int nValue) noexcept</div><div class="ttdoc">Set new value of alpha component.</div><div class="ttdef"><b>Definition:</b> <a href="color_8inl_source.html#l00146">color.inl:146</a></div></div>
+<div class="ttc" id="aclassqx_1_1color_html_a4f4cc04ad98f542c628585f45938d1c4"><div class="ttname"><a href="classqx_1_1color.html#a4f4cc04ad98f542c628585f45938d1c4">qx::color::update_b</a></div><div class="ttdeci">constexpr void update_b(float fDeltaValue) noexcept</div><div class="ttdoc">Add value to blue component.</div><div class="ttdef"><b>Definition:</b> <a href="color_8inl_source.html#l00082">color.inl:82</a></div></div>
+<div class="ttc" id="aclassqx_1_1color_html_a5de43d6c4a09d5c72dafd46add83dc24"><div class="ttname"><a href="classqx_1_1color.html#a5de43d6c4a09d5c72dafd46add83dc24">qx::color::set_g</a></div><div class="ttdeci">constexpr void set_g(float fValue) noexcept</div><div class="ttdoc">Set new value of green component.</div><div class="ttdef"><b>Definition:</b> <a href="color_8inl_source.html#l00117">color.inl:117</a></div></div>
+<div class="ttc" id="aclassqx_1_1color_html_a64f7f76813ef54e95a0f34fe253f2776"><div class="ttname"><a href="classqx_1_1color.html#a64f7f76813ef54e95a0f34fe253f2776">qx::color::set_b</a></div><div class="ttdeci">constexpr void set_b(float fValue) noexcept</div><div class="ttdoc">Set new value of blue component.</div><div class="ttdef"><b>Definition:</b> <a href="color_8inl_source.html#l00122">color.inl:122</a></div></div>
+<div class="ttc" id="aclassqx_1_1color_html_a6649c4e58406dbad4c35f5725a87becd"><div class="ttname"><a href="classqx_1_1color.html#a6649c4e58406dbad4c35f5725a87becd">qx::color::empty</a></div><div class="ttdeci">static constexpr color empty(void) noexcept</div><div class="ttdoc">Get empty color (0, 0, 0, 0)</div><div class="ttdef"><b>Definition:</b> <a href="color_8inl_source.html#l00232">color.inl:232</a></div></div>
+<div class="ttc" id="aclassqx_1_1color_html_a7ae18d4c36c758154f51b9e2701c515f"><div class="ttname"><a href="classqx_1_1color.html#a7ae18d4c36c758154f51b9e2701c515f">qx::color::gray</a></div><div class="ttdeci">static constexpr color gray(void) noexcept</div><div class="ttdoc">Get gray color.</div><div class="ttdef"><b>Definition:</b> <a href="color_8inl_source.html#l00172">color.inl:172</a></div></div>
+<div class="ttc" id="aclassqx_1_1color_html_a84df8abff04d108a1336e0835a5575e7"><div class="ttname"><a href="classqx_1_1color.html#a84df8abff04d108a1336e0835a5575e7">qx::color::update_g_dec</a></div><div class="ttdeci">constexpr void update_g_dec(int nDeltaValue) noexcept</div><div class="ttdoc">Add value to green component.</div><div class="ttdef"><b>Definition:</b> <a href="color_8inl_source.html#l00097">color.inl:97</a></div></div>
+<div class="ttc" id="aclassqx_1_1color_html_a8e7542125b7735869f14ece9976fcf73"><div class="ttname"><a href="classqx_1_1color.html#a8e7542125b7735869f14ece9976fcf73">qx::color::set_r</a></div><div class="ttdeci">constexpr void set_r(float fValue) noexcept</div><div class="ttdoc">Set new value of red component.</div><div class="ttdef"><b>Definition:</b> <a href="color_8inl_source.html#l00112">color.inl:112</a></div></div>
+<div class="ttc" id="aclassqx_1_1color_html_a90f774f2f8b09f5783dc4ccf9257a391"><div class="ttname"><a href="classqx_1_1color.html#a90f774f2f8b09f5783dc4ccf9257a391">qx::color::fuchsia</a></div><div class="ttdeci">static constexpr color fuchsia(void) noexcept</div><div class="ttdoc">Get fuchsia color.</div><div class="ttdef"><b>Definition:</b> <a href="color_8inl_source.html#l00167">color.inl:167</a></div></div>
+<div class="ttc" id="aclassqx_1_1color_html_a99f65db62f7d4142936f2b33b37f0a4b"><div class="ttname"><a href="classqx_1_1color.html#a99f65db62f7d4142936f2b33b37f0a4b">qx::color::purple</a></div><div class="ttdeci">static constexpr color purple(void) noexcept</div><div class="ttdoc">Get purple color.</div><div class="ttdef"><b>Definition:</b> <a href="color_8inl_source.html#l00202">color.inl:202</a></div></div>
+<div class="ttc" id="aclassqx_1_1color_html_a9d381432e472dcaa78daf65e708ba2ce"><div class="ttname"><a href="classqx_1_1color.html#a9d381432e472dcaa78daf65e708ba2ce">qx::color::r</a></div><div class="ttdeci">constexpr float r(void) const noexcept</div><div class="ttdoc">Get red component.</div><div class="ttdef"><b>Definition:</b> <a href="color_8inl_source.html#l00032">color.inl:32</a></div></div>
+<div class="ttc" id="aclassqx_1_1color_html_aa4942b55203d2fa1723174116251d86e"><div class="ttname"><a href="classqx_1_1color.html#aa4942b55203d2fa1723174116251d86e">qx::color::black</a></div><div class="ttdeci">static constexpr color black(void) noexcept</div><div class="ttdoc">Get black color.</div><div class="ttdef"><b>Definition:</b> <a href="color_8inl_source.html#l00157">color.inl:157</a></div></div>
+<div class="ttc" id="aclassqx_1_1color_html_aa4c7d1eca308c20717847e11c06f3ef2"><div class="ttname"><a href="classqx_1_1color.html#aa4c7d1eca308c20717847e11c06f3ef2">qx::color::update_r</a></div><div class="ttdeci">constexpr void update_r(float fDeltaValue) noexcept</div><div class="ttdoc">Add value to red component.</div><div class="ttdef"><b>Definition:</b> <a href="color_8inl_source.html#l00072">color.inl:72</a></div></div>
+<div class="ttc" id="aclassqx_1_1color_html_aa9d5a8a12174458a8ef5c6f2d5f7fee7"><div class="ttname"><a href="classqx_1_1color.html#aa9d5a8a12174458a8ef5c6f2d5f7fee7">qx::color::set_g_dec</a></div><div class="ttdeci">constexpr void set_g_dec(int nValue) noexcept</div><div class="ttdoc">Set new value of green component.</div><div class="ttdef"><b>Definition:</b> <a href="color_8inl_source.html#l00137">color.inl:137</a></div></div>
+<div class="ttc" id="aclassqx_1_1color_html_aad6f66d079713eaed7271c5f957ca23d"><div class="ttname"><a href="classqx_1_1color.html#aad6f66d079713eaed7271c5f957ca23d">qx::color::a</a></div><div class="ttdeci">constexpr float a(void) const noexcept</div><div class="ttdoc">Get alpha component.</div><div class="ttdef"><b>Definition:</b> <a href="color_8inl_source.html#l00047">color.inl:47</a></div></div>
+<div class="ttc" id="aclassqx_1_1color_html_ab12415ad03ae4f77a254faea8ca887ab"><div class="ttname"><a href="classqx_1_1color.html#ab12415ad03ae4f77a254faea8ca887ab">qx::color::maroon</a></div><div class="ttdeci">static constexpr color maroon(void) noexcept</div><div class="ttdoc">Get maroon color.</div><div class="ttdef"><b>Definition:</b> <a href="color_8inl_source.html#l00187">color.inl:187</a></div></div>
+<div class="ttc" id="aclassqx_1_1color_html_ab9e1b1de887e5bd23bf947ece3c58b39"><div class="ttname"><a href="classqx_1_1color.html#ab9e1b1de887e5bd23bf947ece3c58b39">qx::color::navy</a></div><div class="ttdeci">static constexpr color navy(void) noexcept</div><div class="ttdoc">Get navy color.</div><div class="ttdef"><b>Definition:</b> <a href="color_8inl_source.html#l00192">color.inl:192</a></div></div>
+<div class="ttc" id="aclassqx_1_1color_html_ace0b1e39053b9b367c443d12a95558ac"><div class="ttname"><a href="classqx_1_1color.html#ace0b1e39053b9b367c443d12a95558ac">qx::color::aqua</a></div><div class="ttdeci">static constexpr color aqua(void) noexcept</div><div class="ttdoc">Get aqua color.</div><div class="ttdef"><b>Definition:</b> <a href="color_8inl_source.html#l00152">color.inl:152</a></div></div>
+<div class="ttc" id="aclassqx_1_1color_html_ad2b012c258ee97b24736d5ad7f6bdb32"><div class="ttname"><a href="classqx_1_1color.html#ad2b012c258ee97b24736d5ad7f6bdb32">qx::color::operator==</a></div><div class="ttdeci">constexpr bool operator==(const color &amp;other) const noexcept</div><div class="ttdoc">operator==</div><div class="ttdef"><b>Definition:</b> <a href="color_8inl_source.html#l00057">color.inl:57</a></div></div>
+<div class="ttc" id="aclassqx_1_1color_html_ae12acacca6b7690b8d862c1086d48694"><div class="ttname"><a href="classqx_1_1color.html#ae12acacca6b7690b8d862c1086d48694">qx::color::update_b_dec</a></div><div class="ttdeci">constexpr void update_b_dec(int nDeltaValue) noexcept</div><div class="ttdoc">Add value to blue component.</div><div class="ttdef"><b>Definition:</b> <a href="color_8inl_source.html#l00102">color.inl:102</a></div></div>
+<div class="ttc" id="aclassqx_1_1color_html_ae1c1d45330c9ee2e6efd65b109aea1e8"><div class="ttname"><a href="classqx_1_1color.html#ae1c1d45330c9ee2e6efd65b109aea1e8">qx::color::green</a></div><div class="ttdeci">static constexpr color green(void) noexcept</div><div class="ttdoc">Get green color.</div><div class="ttdef"><b>Definition:</b> <a href="color_8inl_source.html#l00177">color.inl:177</a></div></div>
+<div class="ttc" id="aclassqx_1_1color_html_ae5bd9470fb833cf52390db9a7ce9961b"><div class="ttname"><a href="classqx_1_1color.html#ae5bd9470fb833cf52390db9a7ce9961b">qx::color::set_r_dec</a></div><div class="ttdeci">constexpr void set_r_dec(int nValue) noexcept</div><div class="ttdoc">Set new value of red component.</div><div class="ttdef"><b>Definition:</b> <a href="color_8inl_source.html#l00132">color.inl:132</a></div></div>
+<div class="ttc" id="aclassqx_1_1color_html_aed8f4fd86a8b170ae489273f155876e4"><div class="ttname"><a href="classqx_1_1color.html#aed8f4fd86a8b170ae489273f155876e4">qx::color::red</a></div><div class="ttdeci">static constexpr color red(void) noexcept</div><div class="ttdoc">Get red color.</div><div class="ttdef"><b>Definition:</b> <a href="color_8inl_source.html#l00207">color.inl:207</a></div></div>
+<div class="ttc" id="aclassqx_1_1color_html_af4f0e74e19d728b46afa5915dd3cc6ec"><div class="ttname"><a href="classqx_1_1color.html#af4f0e74e19d728b46afa5915dd3cc6ec">qx::color::set_b_dec</a></div><div class="ttdeci">constexpr void set_b_dec(int nValue) noexcept</div><div class="ttdoc">Set new value of blue component.</div><div class="ttdef"><b>Definition:</b> <a href="color_8inl_source.html#l00142">color.inl:142</a></div></div>
+<div class="ttc" id="aclassqx_1_1color_html_af6243d72e3c2fbaf4c082c99382264c1"><div class="ttname"><a href="classqx_1_1color.html#af6243d72e3c2fbaf4c082c99382264c1">qx::color::update_a_dec</a></div><div class="ttdeci">constexpr void update_a_dec(int nDeltaValue) noexcept</div><div class="ttdoc">Add value to alpha component.</div><div class="ttdef"><b>Definition:</b> <a href="color_8inl_source.html#l00107">color.inl:107</a></div></div>
+<div class="ttc" id="aclassqx_1_1color_html_af660c3bb84699b1318a5439797e02c6a"><div class="ttname"><a href="classqx_1_1color.html#af660c3bb84699b1318a5439797e02c6a">qx::color::set_a</a></div><div class="ttdeci">constexpr void set_a(float fValue) noexcept</div><div class="ttdoc">Set new value of alpha component.</div><div class="ttdef"><b>Definition:</b> <a href="color_8inl_source.html#l00127">color.inl:127</a></div></div>
+<div class="ttc" id="aclassqx_1_1color_html_af9608766e5042f9063beddd2cc742b4c"><div class="ttname"><a href="classqx_1_1color.html#af9608766e5042f9063beddd2cc742b4c">qx::color::teal</a></div><div class="ttdeci">static constexpr color teal(void) noexcept</div><div class="ttdoc">Get teal color.</div><div class="ttdef"><b>Definition:</b> <a href="color_8inl_source.html#l00217">color.inl:217</a></div></div>
+<div class="ttc" id="aclassqx_1_1color_html_afa7678d3200a1e5d3ecbb8c901d8bdf9"><div class="ttname"><a href="classqx_1_1color.html#afa7678d3200a1e5d3ecbb8c901d8bdf9">qx::color::g</a></div><div class="ttdeci">constexpr float g(void) const noexcept</div><div class="ttdoc">Get green component.</div><div class="ttdef"><b>Definition:</b> <a href="color_8inl_source.html#l00037">color.inl:37</a></div></div>
+<div class="ttc" id="aclassqx_1_1color_html_afd1263f609450b8291d72ff2415c5646"><div class="ttname"><a href="classqx_1_1color.html#afd1263f609450b8291d72ff2415c5646">qx::color::blue</a></div><div class="ttdeci">static constexpr color blue(void) noexcept</div><div class="ttdoc">Get blue color.</div><div class="ttdef"><b>Definition:</b> <a href="color_8inl_source.html#l00162">color.inl:162</a></div></div>
+<div class="ttc" id="aclassqx_1_1color_html_afec98962905ed5a335354a5410cf6bb0"><div class="ttname"><a href="classqx_1_1color.html#afec98962905ed5a335354a5410cf6bb0">qx::color::set_a_dec</a></div><div class="ttdeci">constexpr void set_a_dec(int nValue) noexcept</div><div class="ttdoc">Set new value of alpha component.</div><div class="ttdef"><b>Definition:</b> <a href="color_8inl_source.html#l00147">color.inl:147</a></div></div>
+<div class="ttc" id="acolor_8h_html"><div class="ttname"><a href="color_8h.html">color.h</a></div><div class="ttdoc">Contains qx::color class.</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
