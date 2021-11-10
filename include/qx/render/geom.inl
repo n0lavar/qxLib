@@ -52,6 +52,7 @@ inline geometry create_parallelogram(float fSide1, float fSide2, float fSide3)
                  3, 1, 0, 2, 1, 3, 2, 5, 1, 6, 5, 2, 6, 4, 5, 7, 4, 6,
                  7, 0, 4, 3, 0, 7, 7, 2, 3, 6, 2, 7, 0, 5, 4, 1, 5, 0,
              },
+             { fHalfSide1, fHalfSide2, fHalfSide3 },
              draw_mode::triangles_list };
 }
 
@@ -106,6 +107,7 @@ inline geometry create_icosahedron(float fRadius)
                  3,  10, 7, 10, 6, 7, 6, 11, 7, 6, 0, 11, 6,  1, 0,
                  10, 1,  6, 11, 0, 9, 2, 11, 9, 5, 2, 9,  11, 2, 7,
              },
+             { fRadius, fRadius, fRadius },
              draw_mode::triangles_list };
 }
 
@@ -202,6 +204,90 @@ inline geometry create_icosphere_lines(float fRadius, size_t nDivides)
         detail::transform_triangle_indices_to_lines(geom.geomIndices);
 
     return geom;
+}
+
+inline geometry create_rect(float fWidth, float fHeight)
+{
+    const float fHalfWidth  = fWidth / 2.f;
+    const float fHalfHeight = fHeight / 2.f;
+
+    return { { { { fHalfWidth, fHalfHeight, 0.f },
+                 { fHalfWidth, -fHalfHeight, 0.f },
+                 { -fHalfWidth, -fHalfHeight, 0.f },
+                 { -fHalfWidth, fHalfHeight, 0.f } } },
+             { 0, 1, 3, 1, 2, 3 },
+             { fHalfWidth, fHalfHeight, 0.f },
+             draw_mode::triangles_list };
+}
+
+inline geometry create_rect_lines(float fWidth, float fHeight)
+{
+    geometry ret    = create_rect(fWidth, fHeight);
+    ret.geomIndices = { 0, 1, 2, 3, 0 };
+    ret.eDrawMode   = draw_mode::lines_strip;
+    return ret;
+}
+
+inline geometry create_square(float fSideLength)
+{
+    return create_rect(fSideLength, fSideLength);
+}
+
+inline geometry create_square_lines(float fSideLength)
+{
+    return create_rect_lines(fSideLength, fSideLength);
+}
+
+inline geometry create_ellipse(
+    float  fHorRadius,
+    float  fVertRadius,
+    size_t nSides)
+{
+    const size_t    nVertices = nSides + 2;
+    const float     fSides    = static_cast<float>(nSides);
+    constexpr float f2Pi      = 2.0f * std::numbers::pi_v<float>;
+
+    geometry ret;
+    ret.geomIndices.reserve(nVertices);
+    ret.geomVertices.reserve(nVertices);
+
+    ret.geomIndices.push_back(0);
+    ret.geomVertices.push_back({ 0.f, 0.f, 0.f });
+
+    for (size_t i = 1; i < nVertices; ++i)
+    {
+        ret.geomIndices.push_back(static_cast<index_type>(i));
+        ret.geomVertices.push_back(
+            { fHorRadius * std::cos(static_cast<float>(i) * f2Pi / fSides),
+              fVertRadius * std::sin(static_cast<float>(i) * f2Pi / fSides),
+              0.f });
+    }
+
+    ret.eDrawMode = draw_mode::triangles_fan;
+    ret.offset    = { fHorRadius, fVertRadius, 0.f };
+
+    return ret;
+}
+
+inline geometry create_ellipse_lines(
+    float  fHorRadius,
+    float  fVertRadius,
+    size_t nSides)
+{
+    geometry ret       = create_ellipse(fHorRadius, fVertRadius, nSides);
+    ret.geomIndices[0] = ret.geomIndices[ret.geomIndices.size() - 1];
+    ret.eDrawMode      = draw_mode::lines_strip;
+    return ret;
+}
+
+inline geometry create_circle(float fRadius, size_t nSides)
+{
+    return create_ellipse(fRadius, fRadius, nSides);
+}
+
+inline geometry create_circle_lines(float fRadius, size_t nSides)
+{
+    return create_ellipse_lines(fRadius, fRadius, nSides);
 }
 
 } // namespace qx

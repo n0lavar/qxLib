@@ -12,9 +12,12 @@
 #include <qx/render/draw_mode.h>
 #include <qx/typedefs.h>
 
-#include <array>
 #include <glm/geometric.hpp>
 #include <glm/vec3.hpp>
+
+#include <array>
+#include <cmath>
+#include <numbers>
 #include <unordered_map>
 #include <vector>
 
@@ -31,9 +34,10 @@ using indices    = std::vector<index_type>;
 **/
 struct geometry
 {
-    vertices  geomVertices;
-    indices   geomIndices;
-    draw_mode eDrawMode;
+    vertices  geomVertices; //!< vertices array
+    indices   geomIndices;  //!< indices array
+    glm::vec3 offset;       //!< offset of the center
+    draw_mode eDrawMode;    //!< draw mode
 };
 
 /**
@@ -97,6 +101,77 @@ geometry create_icosphere(float fRadius, size_t nDivides);
     @retval          - icosphere geometry 
 **/
 geometry create_icosphere_lines(float fRadius, size_t nDivides);
+
+/**
+    @brief  Create rectangle geometry
+    @param  fWidth  - rectangle width
+    @param  fHeight - rectangle height
+    @retval         - rectangle geometry
+**/
+geometry create_rect(float fWidth, float fHeight);
+
+/**
+    @brief  Create rectangle geometry for lines drawing
+    @param  fWidth  - rectangle width
+    @param  fHeight - rectangle height
+    @retval         - rectangle geometry
+**/
+geometry create_rect_lines(float fWidth, float fHeight);
+
+/**
+    @brief  Create square geometry
+    @param  fSideLength - square side length
+    @retval             - square geometry
+**/
+geometry create_square(float fSideLength);
+
+/**
+    @brief  Create square geometry for lines drawing
+    @param  fSideLength - square side length
+    @retval             - square geometry
+**/
+geometry create_square_lines(float fSideLength);
+
+/**
+    @brief  Create ellipse geometry
+    @param  fHorRadius  - ellipse horizontal radius
+    @param  fVertRadius - ellipse vertical radius
+    @param  nSides      - number of lines in ellipse edge, must be > 3
+                          the greater value, the smoother еру edge
+    @retval             - ellipse geometry
+**/
+geometry create_ellipse(float fHorRadius, float fVertRadius, size_t nSides);
+
+/**
+    @brief  Create ellipse geometry for lines drawing
+    @param  fHorRadius  - ellipse horizontal radius
+    @param  fVertRadius - ellipse vertical radius
+    @param  nSides      - number of lines in ellipse edge, must be > 3
+                          the greater value, the smoother еру edge
+    @retval             - ellipse geometry
+**/
+geometry create_ellipse_lines(
+    float  fHorRadius,
+    float  fVertRadius,
+    size_t nSides);
+
+/**
+    @brief  Create circle geometry for lines drawing
+    @param  fRadius - circle radius
+    @param  nSides  - number of lines in ellipse edge, must be > 3
+                      the greater value, the smoother еру edge
+    @retval         - circle geometry
+**/
+geometry create_circle(float fRadius, size_t nSides);
+
+/**
+    @brief  Create circle geometry for lines drawing
+    @param  fRadius - circle radius
+    @param  nSides  - number of lines in ellipse edge, must be > 3
+                      the greater value, the smoother еру edge
+    @retval         - circle geometry
+**/
+geometry create_circle_lines(float fRadius, size_t nSides);
 
 } // namespace qx
 
