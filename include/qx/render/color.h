@@ -322,6 +322,14 @@ public:
     **/
     static constexpr color yellow(void) noexcept;
 
+    /**
+        @brief   Get empty color (0, 0, 0, 0)
+        @details - empty color can be useful for out of border values
+                   as they won't affect calc result
+        @retval  - empty color
+    **/
+    static constexpr color empty(void) noexcept;
+
 private:
     /**
         @brief  Clamp a value to a valid range

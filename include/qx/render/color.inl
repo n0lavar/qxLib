@@ -1,3 +1,4 @@
+#include "color.h"
 /**
 
     @file      color.inl
@@ -226,6 +227,11 @@ constexpr color color::white(void) noexcept
 constexpr color color::yellow(void) noexcept
 {
     return color(255, 255, 000);
+}
+
+constexpr color color::empty(void) noexcept
+{
+    return color(0, 0, 0, 0);
 }
 
 constexpr float color::clamp_value(float fValue) noexcept
