@@ -66,6 +66,12 @@ public:
     constexpr color(int nRed, int nGreen, int nBlue, int nAlpha = 255) noexcept;
 
     /**
+        @brief color object constructor
+        @param nHexValue - hex color value in 0xAARRGGBB format
+    **/
+    constexpr color(int nHexValue) noexcept;
+
+    /**
         @brief  Get red component
         @retval - red component
     **/
@@ -94,6 +100,12 @@ public:
         @retval - pointer to the first component
     **/
     constexpr const float* data(void) const noexcept;
+
+    /**
+        @brief  Get color as hex
+        @retval - hex color value in 0xAARRGGBB format
+    **/
+    constexpr int hex(void) const noexcept;
 
     /**
         @brief  operator==

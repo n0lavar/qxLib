@@ -29,6 +29,15 @@ constexpr color::color(int nRed, int nGreen, int nBlue, int nAlpha) noexcept
 {
 }
 
+constexpr color::color(int nHexValue) noexcept
+    : color(
+        dec_to_float(nHexValue >> 24 & 0xFF),
+        dec_to_float(nHexValue >> 16 & 0xFF),
+        dec_to_float(nHexValue >> 8 & 0xFF),
+        dec_to_float(nHexValue >> 0 & 0xFF))
+{
+}
+
 constexpr float color::r(void) const noexcept
 {
     return m_Color.x;
@@ -52,6 +61,17 @@ constexpr float color::a(void) const noexcept
 constexpr const float* color::data(void) const noexcept
 {
     return &(m_Color.x);
+}
+
+constexpr int color::hex(void) const noexcept
+{
+    int r = static_cast<int>(m_Color.x * 255.f);
+    int g = static_cast<int>(m_Color.y * 255.f);
+    int b = static_cast<int>(m_Color.z * 255.f);
+    int a = static_cast<int>(m_Color.w * 255.f);
+
+    return ((r & 0xff) << 24) + ((g & 0xff) << 16) + ((b & 0xff) << 8)
+           + (a & 0xff);
 }
 
 constexpr bool color::operator==(const color& other) const noexcept
