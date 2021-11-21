@@ -1,8 +1,9 @@
 /**
 
     @file      reflection_creator.h
-    @brief     
-    @details   
+    @brief     Contains reflection creator functionality
+    @details   The creator allows you to create instances
+               of the class using its name or ID
     @author    Khrapov
     @date      9.09.2021
     @copyright © Nick Khrapov, 2021. All right reserved.
@@ -10,7 +11,7 @@
 **/
 #pragma once
 
-#include <qx/reflection/class_identificator.h>
+#include <qx/rtti/class_identificator.h>
 #include <qx/useful_macros.h>
 
 #include <functional>
@@ -21,14 +22,10 @@
 namespace qx
 {
 
-template<class BaseClass, class... Args>
-using reflection_class_factory =
-    std::function<std::unique_ptr<BaseClass>(Args...)>;
-
 /**
 
     @class   reflection_creator
-    @brief   
+    @brief   Reflection creator
     @details Performs registration of classes inherited from BaseClass
              and creates their instances by their ID and name.
              Allocates memory.
@@ -42,9 +39,15 @@ template<class BaseClass, class... Args>
 class reflection_creator
 {
 public:
-    using factory = reflection_class_factory<BaseClass, Args...>;
+    using factory = std::function<std::unique_ptr<BaseClass>(Args...)>;
 
 public:
+    /**
+        @brief  Create object based on class id
+        @param  id   - class id
+        @param  args - template parameter pack
+        @retval      - class instance or nullptr if can't find factory or can't create
+    **/
     [[nodiscard]] static std::unique_ptr<BaseClass> create_object(
         class_identificator id,
         Args&&... args)
@@ -55,6 +58,12 @@ public:
         return nullptr;
     }
 
+    /**
+        @brief  Create object based on class name
+        @param  svClassName - class name
+        @param  args        - template parameter pack
+        @retval             - class instance or nullptr if can't find factory or can't create
+    **/
     [[nodiscard]] static std::unique_ptr<BaseClass> create_object(
         std::string_view svClassName,
         Args&&... args)
@@ -68,7 +77,14 @@ public:
         return nullptr;
     }
 
-    static bool register_class(
+    /**
+        @brief  Register class so it can be constructed by creator
+        @param  factory     - class factory
+        @param  id          - class id
+        @param  svClassName - class name
+        @retval             - true if registered
+    **/
+    static bool _register_class(
         factory             factory,
         class_identificator id,
         std::string_view    svClassName)
@@ -90,21 +106,40 @@ private:
     static inline std::map<std::string_view, factory>    m_FactoriesByName;
 };
 
-template<class BaseClass, class ThisClass, class... Args>
-static std::unique_ptr<BaseClass> _create_object(Args&&... args)
+namespace detail
 {
-    if constexpr (std::is_constructible_v<ThisClass, Args...>)
-        return std::make_unique<ThisClass>(std::forward<Args>(args)...);
+
+template<class BaseClass, class T, class... Args>
+static std::unique_ptr<BaseClass> create_object(Args&&... args)
+{
+    if constexpr (std::is_constructible_v<T, Args...>)
+        return std::make_unique<T>(std::forward<Args>(args)...);
     else
         return nullptr;
 }
 
-#define QX_REGISTER_CREATOR(...)                                   \
-private:                                                           \
-    static inline bool QX_LINE_NAME(s_bRegistered) =               \
-        qx::reflection_creator<ThisClass>::register_class(         \
-            qx::_create_object<BaseClass, ThisClass, __VA_ARGS__>, \
-            get_class_id_static(),                                 \
+} // namespace detail
+
+/**
+    @def   QX_REGISTER_CREATOR
+    @brief Macro for base class. Use YourClass::Creator::create_object
+    @param ... - constructor args types
+**/
+#define QX_REGISTER_CREATOR(...)   \
+    using CreatorRoot = ThisClass; \
+    using Creator     = qx::reflection_creator<CreatorRoot, __VA_ARGS__>;
+
+/**
+    @def   QX_REGISTER_CONSTRUCTOR
+    @brief Macro for all classes inherited from base class
+    @param ... - constructor args types
+**/
+#define QX_REGISTER_CONSTRUCTOR(...)                                        \
+private:                                                                    \
+    static inline volatile bool QX_LINE_NAME(s_bRegistered) =               \
+        Creator::_register_class(                                           \
+            qx::detail::create_object<CreatorRoot, ThisClass, __VA_ARGS__>, \
+            get_class_id_static(),                                          \
             get_class_name_static());
 
 
