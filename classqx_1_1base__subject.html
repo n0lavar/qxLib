@@ -66,10 +66,7 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="summary">
-<a href="#pub-types">Public Types</a> &#124;
-<a href="#pub-methods">Public Member Functions</a> &#124;
-<a href="#pub-attribs">Public Attributes</a> &#124;
-<a href="#friends">Friends</a> &#124;
+<a href="#pro-methods">Protected Member Functions</a> &#124;
 <a href="classqx_1_1base__subject-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">qx::base_subject Class Reference<span class="mlabels"><span class="mlabel">abstract</span></span></div>  </div>
@@ -90,57 +87,26 @@ Inheritance diagram for qx::base_subject:</div>
   </map>
 </div></div>
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-types"></a>
-Public Types</h2></td></tr>
-<tr class="memitem:aa38a052b662bd975eca3b7df8f830a66"><td class="memItemLeft" align="right" valign="top"><a id="aa38a052b662bd975eca3b7df8f830a66"></a>
-using&#160;</td><td class="memItemRight" valign="bottom"><b>observers_container</b> = std::vector&lt; <a class="el" href="classqx_1_1observer.html">observer</a> * &gt;</td></tr>
-<tr class="separator:aa38a052b662bd975eca3b7df8f830a66"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
-Public Member Functions</h2></td></tr>
-<tr class="memitem:ab002b57f70f7626fe6660aed37b757a0"><td class="memItemLeft" align="right" valign="top"><a id="ab002b57f70f7626fe6660aed37b757a0"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>QX_NONCOPYABLE</b> (<a class="el" href="classqx_1_1base__subject.html">base_subject</a>)</td></tr>
-<tr class="separator:ab002b57f70f7626fe6660aed37b757a0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adb43d2e9945e28e9530f208e6a810b17"><td class="memItemLeft" align="right" valign="top"><a id="adb43d2e9945e28e9530f208e6a810b17"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>QX_MOVABLE</b> (<a class="el" href="classqx_1_1base__subject.html">base_subject</a>)</td></tr>
-<tr class="separator:adb43d2e9945e28e9530f208e6a810b17"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a51ad6345028e788998fe20980a7a43d6"><td class="memItemLeft" align="right" valign="top"><a id="a51ad6345028e788998fe20980a7a43d6"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1base__subject.html#a51ad6345028e788998fe20980a7a43d6">base_subject</a> (void)=default</td></tr>
-<tr class="memdesc:a51ad6345028e788998fe20980a7a43d6"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classqx_1_1base__subject.html" title="Base subject class.">base_subject</a> object constructor <br /></td></tr>
-<tr class="separator:a51ad6345028e788998fe20980a7a43d6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7ae56cb5b46ad0f3a2ae4c8b5bb8cbb8"><td class="memItemLeft" align="right" valign="top"><a id="a7ae56cb5b46ad0f3a2ae4c8b5bb8cbb8"></a>
-virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1base__subject.html#a7ae56cb5b46ad0f3a2ae4c8b5bb8cbb8">~base_subject</a> (void) noexcept=0</td></tr>
-<tr class="memdesc:a7ae56cb5b46ad0f3a2ae4c8b5bb8cbb8"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classqx_1_1base__subject.html" title="Base subject class.">base_subject</a> object destructor <br /></td></tr>
-<tr class="separator:a7ae56cb5b46ad0f3a2ae4c8b5bb8cbb8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a03572bbae3bb79a9cc2a429b81581896"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1base__subject.html#a03572bbae3bb79a9cc2a429b81581896">get_num_observers</a> (void) const noexcept</td></tr>
-<tr class="memdesc:a03572bbae3bb79a9cc2a429b81581896"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get number of observers attached to this subject.  <a href="classqx_1_1base__subject.html#a03572bbae3bb79a9cc2a429b81581896">More...</a><br /></td></tr>
-<tr class="separator:a03572bbae3bb79a9cc2a429b81581896"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
-Public Attributes</h2></td></tr>
-<tr class="memitem:a5e1f4f123466d78ec89d752dfae39fb8"><td class="memItemLeft" align="right" valign="top"><a id="a5e1f4f123466d78ec89d752dfae39fb8"></a>
-friend&#160;</td><td class="memItemRight" valign="bottom"><b>observer_token</b></td></tr>
-<tr class="separator:a5e1f4f123466d78ec89d752dfae39fb8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a75c869068f59c986638558c8e1e9c8d3"><td class="memItemLeft" align="right" valign="top"><a id="a75c869068f59c986638558c8e1e9c8d3"></a>
-friend&#160;</td><td class="memItemRight" valign="bottom"><b>observer</b></td></tr>
-<tr class="separator:a75c869068f59c986638558c8e1e9c8d3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="friends"></a>
-Friends</h2></td></tr>
-<tr class="memitem:ab5401a0b39513d2a6ddf125021ed49d1"><td class="memTemplParams" colspan="2"><a id="ab5401a0b39513d2a6ddf125021ed49d1"></a>
-template&lt;typename TObserver &gt; </td></tr>
-<tr class="memitem:ab5401a0b39513d2a6ddf125021ed49d1"><td class="memTemplItemLeft" align="right" valign="top">class&#160;</td><td class="memTemplItemRight" valign="bottom"><b>subject</b></td></tr>
-<tr class="separator:ab5401a0b39513d2a6ddf125021ed49d1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
+Protected Member Functions</h2></td></tr>
+<tr class="memitem:a7a55e74de88f48347f9a47e6e6384668"><td class="memItemLeft" align="right" valign="top"><a id="a7a55e74de88f48347f9a47e6e6384668"></a>
+virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1base__subject.html#a7a55e74de88f48347f9a47e6e6384668">~base_subject</a> (void) noexcept=default</td></tr>
+<tr class="memdesc:a7a55e74de88f48347f9a47e6e6384668"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classqx_1_1base__subject.html" title="Base subject class.">base_subject</a> object destructor <br /></td></tr>
+<tr class="separator:a7a55e74de88f48347f9a47e6e6384668"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab2208674b22acaf27dda098fb4a5a9b1"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1base__subject.html#ab2208674b22acaf27dda098fb4a5a9b1">detach</a> (void *pObserver) noexcept=0</td></tr>
+<tr class="memdesc:ab2208674b22acaf27dda098fb4a5a9b1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Detach observer from subject.  <a href="classqx_1_1base__subject.html#ab2208674b22acaf27dda098fb4a5a9b1">More...</a><br /></td></tr>
+<tr class="separator:ab2208674b22acaf27dda098fb4a5a9b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Base subject class. </p>
-<p>Allows to avoid template parameter for base logic </p><dl class="section author"><dt>Author</dt><dd>Khrapov </dd></dl>
-<dl class="section date"><dt>Date</dt><dd>10.03.2021 </dd></dl>
+<p>Allows to avoid template parameter for base logic</p>
+<p>~ </p><dl class="section author"><dt>Author</dt><dd>Khrapov </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>17.11.2021 </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="observer_8h_source.html#l00104">104</a> of file <a class="el" href="observer_8h_source.html">observer.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="observer_8h_source.html#l00101">101</a> of file <a class="el" href="observer_8h_source.html">observer.h</a>.</p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
-<a id="a03572bbae3bb79a9cc2a429b81581896"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a03572bbae3bb79a9cc2a429b81581896">&#9670;&nbsp;</a></span>get_num_observers()</h2>
+<a id="ab2208674b22acaf27dda098fb4a5a9b1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab2208674b22acaf27dda098fb4a5a9b1">&#9670;&nbsp;</a></span>detach()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -149,35 +115,32 @@ template&lt;typename TObserver &gt; </td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">size_t qx::base_subject::get_num_observers </td>
+          <td class="memname">virtual void qx::base_subject::detach </td>
           <td>(</td>
-          <td class="paramtype">void&#160;</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const</td>
+          <td class="paramtype">void *&#160;</td>
+          <td class="paramname"><em>pObserver</em></td><td>)</td>
+          <td></td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel">protected</span><span class="mlabel">pure virtual</span><span class="mlabel">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p>Get number of observers attached to this subject. </p>
-<dl class="retval"><dt>Return values</dt><dd>
-  <table class="retval">
-    <tr><td class="paramname">-</td><td>number of observers attached to this subject </td></tr>
+<p>Detach observer from subject. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">pObserver</td><td>- observer pointer </td></tr>
   </table>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="observer_8inl_source.html#l00070">70</a> of file <a class="el" href="observer_8inl_source.html">observer.inl</a>.</p>
-
 </div>
 </div>
-<hr/>The documentation for this class was generated from the following files:<ul>
+<hr/>The documentation for this class was generated from the following file:<ul>
 <li>include/qx/patterns/<a class="el" href="observer_8h_source.html">observer.h</a></li>
-<li>include/qx/patterns/<a class="el" href="observer_8inl_source.html">observer.inl</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->
