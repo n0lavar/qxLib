@@ -67,17 +67,15 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#nested-classes">Classes</a> &#124;
-<a href="#define-members">Macros</a> &#124;
-<a href="#typedef-members">Typedefs</a>  </div>
+<a href="#define-members">Macros</a>  </div>
   <div class="headertitle">
 <div class="title">reflection_creator.h File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p><br  />
-  
+<p>Contains reflection creator functionality.  
 <a href="#details">More...</a></p>
-<div class="textblock"><code>#include &lt;qx/reflection/class_identificator.h&gt;</code><br />
+<div class="textblock"><code>#include &lt;<a class="el" href="class__identificator_8h_source.html">qx/rtti/class_identificator.h</a>&gt;</code><br />
 <code>#include &lt;<a class="el" href="useful__macros_8h_source.html">qx/useful_macros.h</a>&gt;</code><br />
 <code>#include &lt;functional&gt;</code><br />
 <code>#include &lt;map&gt;</code><br />
@@ -89,32 +87,61 @@ $(function() {
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1reflection__creator.html">qx::reflection_creator&lt; BaseClass, Args &gt;</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><br  />
-  <a href="classqx_1_1reflection__creator.html#details">More...</a><br /></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reflection creator.  <a href="classqx_1_1reflection__creator.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
 Macros</h2></td></tr>
-<tr class="memitem:a52506649d10171df0f1a4a287f4614cd"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><b>QX_REGISTER_CREATOR</b>(...)</td></tr>
+<tr class="memitem:a52506649d10171df0f1a4a287f4614cd"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="reflection__creator_8h.html#a52506649d10171df0f1a4a287f4614cd">QX_REGISTER_CREATOR</a>(...)</td></tr>
+<tr class="memdesc:a52506649d10171df0f1a4a287f4614cd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Macro for base class. Use YourClass::Creator::create_object.  <a href="reflection__creator_8h.html#a52506649d10171df0f1a4a287f4614cd">More...</a><br /></td></tr>
 <tr class="separator:a52506649d10171df0f1a4a287f4614cd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
-Typedefs</h2></td></tr>
-<tr class="memitem:a27538f622ddf116aad6b1020f950ed22"><td class="memTemplParams" colspan="2"><a id="a27538f622ddf116aad6b1020f950ed22"></a>
-template&lt;class BaseClass , class... Args&gt; </td></tr>
-<tr class="memitem:a27538f622ddf116aad6b1020f950ed22"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><b>qx::reflection_class_factory</b> = std::function&lt; std::unique_ptr&lt; BaseClass &gt;(Args...)&gt;</td></tr>
-<tr class="separator:a27538f622ddf116aad6b1020f950ed22"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae567d7346c2b6964f4fb564bd8980c35"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="reflection__creator_8h.html#ae567d7346c2b6964f4fb564bd8980c35">QX_REGISTER_CONSTRUCTOR</a>(...)</td></tr>
+<tr class="memdesc:ae567d7346c2b6964f4fb564bd8980c35"><td class="mdescLeft">&#160;</td><td class="mdescRight">Macro for all classes inherited from base class.  <a href="reflection__creator_8h.html#ae567d7346c2b6964f4fb564bd8980c35">More...</a><br /></td></tr>
+<tr class="separator:ae567d7346c2b6964f4fb564bd8980c35"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p><br  />
- </p>
-<p><br  />
- </p><dl class="section author"><dt>Author</dt><dd>Khrapov </dd></dl>
+<div class="textblock"><p>Contains reflection creator functionality. </p>
+<p>The creator allows you to create instances of the class using its name or ID </p><dl class="section author"><dt>Author</dt><dd>Khrapov </dd></dl>
 <dl class="section date"><dt>Date</dt><dd>9.09.2021 </dd></dl>
 <dl class="section copyright"><dt>Copyright</dt><dd>© Nick Khrapov, 2021. All right reserved. </dd></dl>
 
 <p class="definition">Definition in file <a class="el" href="reflection__creator_8h_source.html">reflection_creator.h</a>.</p>
 </div><h2 class="groupheader">Macro Definition Documentation</h2>
+<a id="ae567d7346c2b6964f4fb564bd8980c35"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae567d7346c2b6964f4fb564bd8980c35">&#9670;&nbsp;</a></span>QX_REGISTER_CONSTRUCTOR</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define QX_REGISTER_CONSTRUCTOR</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>...</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Value:</b><div class="fragment"><div class="line"><span class="keyword">private</span>:                                                                    \</div>
+<div class="line">    static <span class="keyword">inline</span> <span class="keyword">volatile</span> <span class="keywordtype">bool</span> <a class="code" href="useful__macros_8h.html#a8f51bd935768d1845211352e225739ed">QX_LINE_NAME</a>(s_bRegistered) =               \</div>
+<div class="line">        Creator::_register_class(                                           \</div>
+<div class="line">            qx::detail::create_object&lt;CreatorRoot, ThisClass, __VA_ARGS__&gt;, \</div>
+<div class="line">            get_class_id_static(),                                          \</div>
+<div class="line">            get_class_name_static());</div>
+<div class="ttc" id="auseful__macros_8h_html_a8f51bd935768d1845211352e225739ed"><div class="ttname"><a href="useful__macros_8h.html#a8f51bd935768d1845211352e225739ed">QX_LINE_NAME</a></div><div class="ttdeci">#define QX_LINE_NAME(prefix)</div><div class="ttdoc">Do magic! Creates a unique name using the line number.</div><div class="ttdef"><b>Definition:</b> <a href="useful__macros_8h_source.html#l00071">useful_macros.h:71</a></div></div>
+</div><!-- fragment -->
+<p>Macro for all classes inherited from base class. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">...</td><td>- constructor args types </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="reflection__creator_8h_source.html#l00137">137</a> of file <a class="el" href="reflection__creator_8h_source.html">reflection_creator.h</a>.</p>
+
+</div>
+</div>
 <a id="a52506649d10171df0f1a4a287f4614cd"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a52506649d10171df0f1a4a287f4614cd">&#9670;&nbsp;</a></span>QX_REGISTER_CREATOR</h2>
 
@@ -130,15 +157,19 @@ template&lt;class BaseClass , class... Args&gt; </td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<b>Value:</b><div class="fragment"><div class="line"><span class="keyword">private</span>:                                                           \</div>
-<div class="line">    static <span class="keyword">inline</span> <span class="keywordtype">bool</span> <a class="code" href="useful__macros_8h.html#a8f51bd935768d1845211352e225739ed">QX_LINE_NAME</a>(s_bRegistered) =               \</div>
-<div class="line">        qx::reflection_creator&lt;ThisClass&gt;::register_class(         \</div>
-<div class="line">            qx::_create_object&lt;BaseClass, ThisClass, __VA_ARGS__&gt;, \</div>
-<div class="line">            get_class_id_static(),                                 \</div>
-<div class="line">            get_class_name_static());</div>
-<div class="ttc" id="auseful__macros_8h_html_a8f51bd935768d1845211352e225739ed"><div class="ttname"><a href="useful__macros_8h.html#a8f51bd935768d1845211352e225739ed">QX_LINE_NAME</a></div><div class="ttdeci">#define QX_LINE_NAME(prefix)</div><div class="ttdoc">Do magic! Creates a unique name using the line number.</div><div class="ttdef"><b>Definition:</b> <a href="useful__macros_8h_source.html#l00071">useful_macros.h:71</a></div></div>
+<b>Value:</b><div class="fragment"><div class="line">    <span class="keyword">using</span> CreatorRoot = ThisClass; \</div>
+<div class="line">    using Creator     = <a class="code" href="classqx_1_1reflection__creator.html">qx::reflection_creator&lt;CreatorRoot, __VA_ARGS__&gt;</a>;</div>
+<div class="ttc" id="aclassqx_1_1reflection__creator_html"><div class="ttname"><a href="classqx_1_1reflection__creator.html">qx::reflection_creator</a></div><div class="ttdoc">Reflection creator.</div><div class="ttdef"><b>Definition:</b> <a href="reflection__creator_8h_source.html#l00039">reflection_creator.h:40</a></div></div>
 </div><!-- fragment -->
-<p class="definition">Definition at line <a class="el" href="reflection__creator_8h_source.html#l00102">102</a> of file <a class="el" href="reflection__creator_8h_source.html">reflection_creator.h</a>.</p>
+<p>Macro for base class. Use YourClass::Creator::create_object. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">...</td><td>- constructor args types </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="reflection__creator_8h_source.html#l00128">128</a> of file <a class="el" href="reflection__creator_8h_source.html">reflection_creator.h</a>.</p>
 
 </div>
 </div>

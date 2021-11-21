@@ -1,12 +1,12 @@
 var searchData=
 [
-  ['make_5farray_897',['make_array',['../useful__funcs_8h.html#a9d6faba90a6874d7629cf440bdd4092c',1,'qx']]],
-  ['make_5fheap_898',['make_heap',['../sort_8h.html#ab8aed768192e446d4c386d04be1cbc75',1,'qx']]],
-  ['maroon_899',['maroon',['../classqx_1_1color.html#ab12415ad03ae4f77a254faea8ca887ab',1,'qx::color']]],
-  ['max_5fsize_900',['max_size',['../classqx_1_1basic__string.html#aff5ac427cb6b9293f45502700facbefc',1,'qx::basic_string']]],
-  ['maxpot_901',['maxpot',['../numerical_8h.html#a558b28fe2075e7c4a244b55920b69df7',1,'qx']]],
-  ['membarrier_902',['MemBarrier',['../classqx_1_1buffer__base.html#afdda7c04777a157e7bcf682a7597986a',1,'qx::buffer_base']]],
-  ['merge_903',['merge',['../sort_8h.html#a71990eee89b947bb251bd6c6578520de',1,'qx']]],
-  ['moving_5faverage_904',['moving_average',['../classqx_1_1moving__average.html#a4e9b0115aaaffd7e8926a83ea95f4469',1,'qx::moving_average']]],
-  ['murmur_5f32_5fhash_905',['murmur_32_hash',['../string__utils_8h.html#a10d24a95eb62a4887e57bcb71daf18fe',1,'qx']]]
+  ['last_929',['last',['../classqx_1_1benchmark.html#aa5fe957b87126d8f900dae75f7e2beea',1,'qx::benchmark']]],
+  ['lcm_930',['lcm',['../numerical_8h.html#a56b88020cf301f6f8b9dbe523b5f667a',1,'qx']]],
+  ['left_931',['left',['../classqx_1_1rect.html#a279ba4889f29f747115eaa755e6411e8',1,'qx::rect']]],
+  ['length_932',['length',['../classqx_1_1basic__string.html#a0b3143a9a3d09d6c6e8854b44c2e5b21',1,'qx::basic_string']]],
+  ['lime_933',['lime',['../classqx_1_1color.html#a1865ab379c4fec9269b8c31a75e7a31a',1,'qx::color']]],
+  ['linear_5finterpolation_934',['linear_interpolation',['../functional_8h.html#af733f871b9e6a2dde54b17c87d7c5811',1,'qx']]],
+  ['link_935',['Link',['../classqx_1_1base__shader__program.html#ae2f76f2ed0f404412aeeac1931f6c2ab',1,'qx::base_shader_program']]],
+  ['list_5fse_936',['list_se',['../classqx_1_1list__se.html#aa5198a46963f3bfff4208283f6282ca1',1,'qx::list_se::list_se(const list_se &amp;list)'],['../classqx_1_1list__se.html#a37c0cf64f1b28df7de14fa96777fecb8',1,'qx::list_se::list_se(list_se &amp;&amp;list) noexcept'],['../classqx_1_1list__se.html#a0035e2ee16515107bcc2185f3750f0d7',1,'qx::list_se::list_se(init_list init)'],['../classqx_1_1list__se.html#adf1c5dece0e69ff2b1ff92b2b83004a0',1,'qx::list_se::list_se(size_type nElements, const_reference value)']]],
+  ['lock_937',['lock',['../classqx_1_1threads__shared.html#aa681ffc93a0f4efb476ecdef3f59a47c',1,'qx::threads_shared']]]
 ];
