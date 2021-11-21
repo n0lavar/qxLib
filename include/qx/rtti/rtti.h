@@ -131,14 +131,14 @@ protected:
     @def   QX_RTTI_CLASS
     @brief Macro for every class inherited from class with QX_RTTI_BASE_CLASS macro
     @param thisClass  - this class name
-    @param superClass - super class name (must implement QX_RTTI_CLASS or QX_RTTI_BASE_CLASS macro)
+    @param ...        - super class name (must implement QX_RTTI_CLASS or QX_RTTI_BASE_CLASS macro)
 **/
-#define QX_RTTI_CLASS(thisClass, superClass)                                   \
+#define QX_RTTI_CLASS(thisClass, ...)                                          \
                                                                                \
 public:                                                                        \
-    using BaseClass  = SuperClass::BaseClass;                                  \
-    using SuperClass = superClass;                                             \
     using ThisClass  = thisClass;                                              \
+    using SuperClass = __VA_ARGS__;                                            \
+    using BaseClass  = typename SuperClass::BaseClass;                         \
                                                                                \
 public:                                                                        \
     virtual bool is_derived_from_id(qx::class_identificator id)                \
@@ -150,7 +150,8 @@ public:                                                                        \
                                                                                \
     static constexpr std::string_view get_class_name_static(void) noexcept     \
     {                                                                          \
-        return _get_class_name_by_strategy<QX_STRINGIFY(thisClass)>();         \
+        return BaseClass::template _get_class_name_by_strategy<QX_STRINGIFY(   \
+            thisClass)>();                                                     \
     }                                                                          \
                                                                                \
     virtual qx::class_identificator get_class_id(void) const noexcept override \
@@ -160,7 +161,7 @@ public:                                                                        \
                                                                                \
     static qx::class_identificator get_class_id_static(void) noexcept          \
     {                                                                          \
-        static auto id = _get_next_id();                                       \
+        static auto id = BaseClass::_get_next_id();                            \
         return id;                                                             \
     }                                                                          \
                                                                                \
