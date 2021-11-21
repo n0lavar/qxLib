@@ -10,11 +10,11 @@
 namespace qx
 {
 
-//------------------------- qx::subject::observer_token ------------------------
+// ----------------------------- qx::observer_token ----------------------------
 
 inline observer_token::observer_token(
     base_subject* pSubject,
-    observer*     pObserver) noexcept
+    void*         pObserver) noexcept
     : m_pSubject(pSubject)
     , m_pObserver(pObserver)
 {
@@ -22,6 +22,9 @@ inline observer_token::observer_token(
 
 inline void observer_token::reset(void) noexcept
 {
+    if (m_pSubject && m_pObserver)
+        m_pSubject->detach(m_pObserver);
+
     m_pSubject  = nullptr;
     m_pObserver = nullptr;
 }
@@ -42,8 +45,7 @@ inline observer_token& observer_token::operator=(
 
 inline observer_token::~observer_token() noexcept
 {
-    if (m_pSubject && m_pObserver)
-        m_pSubject->detach(m_pObserver);
+    reset();
 }
 
 inline bool observer_token::operator==(
@@ -55,69 +57,6 @@ inline bool observer_token::operator==(
 inline observer_token::operator bool(void) const noexcept
 {
     return m_pSubject && m_pObserver;
-}
-
-
-
-//--------------------------------- qx::subject --------------------------------
-
-inline base_subject::~base_subject(void) noexcept
-{
-    while (!m_Observers.empty())
-        m_Observers.back()->detach_from(this);
-}
-
-inline size_t base_subject::get_num_observers(void) const noexcept
-{
-    return m_Observers.size();
-}
-
-inline observer_token base_subject::attach(observer* pObserver)
-{
-    if (std::find(m_Observers.begin(), m_Observers.end(), pObserver)
-        == m_Observers.end())
-    {
-        m_Observers.push_back(pObserver);
-        return observer_token(this, pObserver);
-    }
-    else
-    {
-        return observer_token();
-    }
-}
-
-inline void base_subject::detach(observer* pObserver) noexcept
-{
-    if (m_nIterators == 0)
-    {
-        m_Observers.erase(
-            std::remove(m_Observers.begin(), m_Observers.end(), pObserver),
-            m_Observers.end());
-    }
-    else
-    {
-        std::replace(
-            m_Observers.begin(),
-            m_Observers.end(),
-            pObserver,
-            static_cast<observer*>(nullptr));
-    }
-}
-
-inline void base_subject::on_iterator_destructed(void) noexcept
-{
-    m_nIterators--;
-    if (m_nIterators == 0)
-    {
-        m_Observers.erase(
-            std::remove(m_Observers.begin(), m_Observers.end(), nullptr),
-            m_Observers.end());
-    }
-}
-
-inline void base_subject::on_iterator_constructed(void) noexcept
-{
-    m_nIterators++;
 }
 
 
@@ -215,6 +154,27 @@ const TObserver&    subject<TObserver>::const_base_iterator<
 // ---------------------------------- subject ----------------------------------
 
 template<class TObserver>
+inline size_t subject<TObserver>::get_num_observers(void) const noexcept
+{
+    return m_Observers.size();
+}
+
+template<class TObserver>
+inline observer_token subject<TObserver>::attach(TObserver* pObserver) noexcept
+{
+    if (std::find(m_Observers.begin(), m_Observers.end(), pObserver)
+        == m_Observers.end())
+    {
+        m_Observers.push_back(pObserver);
+        return observer_token(this, pObserver);
+    }
+    else
+    {
+        return observer_token();
+    }
+}
+
+template<class TObserver>
 inline typename subject<TObserver>::iterator subject<TObserver>::begin(void)
 {
     return iterator(m_Observers.begin(), this);
@@ -296,57 +256,41 @@ inline typename subject<TObserver>::const_reverse_iterator subject<
     return const_reverse_iterator(m_Observers.crend());
 }
 
-
-
-//-------------------------------- qx::observer --------------------------------
-
-inline observer::~observer(void) = default;
-
-inline void observer::attach_to(base_subject* pSubject)
+template<class TObserver>
+inline void subject<TObserver>::detach(void* pObserver) noexcept
 {
-    if (auto subjectToken = pSubject->attach(this))
+    if (m_nIterators == 0)
     {
-        if (std::find(m_Tokens.begin(), m_Tokens.end(), subjectToken)
-            == m_Tokens.end())
-        {
-            m_Tokens.push_back(std::move(subjectToken));
-        }
-        else
-        {
-            subjectToken.reset();
-        }
+        m_Observers.erase(
+            std::remove(m_Observers.begin(), m_Observers.end(), pObserver),
+            m_Observers.end());
+    }
+    else
+    {
+        std::replace(
+            m_Observers.begin(),
+            m_Observers.end(),
+            static_cast<TObserver*>(pObserver),
+            static_cast<TObserver*>(nullptr));
     }
 }
 
-inline void observer::detach_from(base_subject* pSubject)
+template<class TObserver>
+inline void subject<TObserver>::on_iterator_destructed(void) noexcept
 {
-    auto get_token_it = [this, pSubject]()
+    m_nIterators--;
+    if (m_nIterators == 0)
     {
-        return std::find_if(
-            m_Tokens.begin(),
-            m_Tokens.end(),
-            [pSubject](auto& _token)
-            {
-                return _token.m_pSubject == pSubject;
-            });
-    };
-
-    auto it = get_token_it();
-    while (it != m_Tokens.end())
-    {
-        m_Tokens.erase(it);
-        it = get_token_it();
+        m_Observers.erase(
+            std::remove(m_Observers.begin(), m_Observers.end(), nullptr),
+            m_Observers.end());
     }
 }
 
-inline void observer::detach_from_all(void)
+template<class TObserver>
+inline void subject<TObserver>::on_iterator_constructed(void) noexcept
 {
-    m_Tokens.clear();
-}
-
-inline size_t observer::get_num_subjects_attached_to(void) const
-{
-    return m_Tokens.size();
+    m_nIterators++;
 }
 
 } // namespace qx

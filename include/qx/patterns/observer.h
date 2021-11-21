@@ -1,7 +1,7 @@
 /**
 
     @file      observer.h
-    @brief     Contains qx::subject and qx::observer classes
+    @brief     Contains qx::subject and qx::observer_token classes
     @author    Khrapov
     @date      6.03.2021
     @copyright © Nick Khrapov, 2021. All right reserved.
@@ -17,7 +17,6 @@
 namespace qx
 {
 
-class observer;
 class base_subject;
 
 /**
@@ -32,18 +31,31 @@ class base_subject;
 **/
 class observer_token
 {
-    friend base_subject;
-    friend observer;
-
     QX_NONCOPYABLE(observer_token);
 
-private:
+public:
+    /**
+        @brief observer_token object constructor
+    **/
+    observer_token(void) noexcept = default;
+
     /**
         @brief observer_token object constructor
         @param pSubject  - corresponding subject pointer 
         @param pObserver - corresponding observer pointer 
     **/
-    observer_token(base_subject* pSubject, observer* pObserver) noexcept;
+    observer_token(base_subject* pSubject, void* pObserver) noexcept;
+
+    /**
+        @brief observer_token object constructor
+        @param other - other observer_token object rvalue ref
+    **/
+    observer_token(observer_token&& other) noexcept;
+
+    /**
+        @brief observer_token object destructor
+    **/
+    ~observer_token(void) noexcept;
 
     /**
         @brief   Reset observer_token
@@ -51,28 +63,12 @@ private:
     **/
     void reset(void) noexcept;
 
-public:
-    /**
-        @brief observer_token object constructor
-        @param other - other observer_token object rvalue ref
-    **/
-    observer_token(observer_token&& other) noexcept;
     /**
         @brief  operator=
         @param  other - other observer_token object rvalue ref
         @retval       - this object reference
     **/
     observer_token& operator=(observer_token&& other) noexcept;
-
-    /**
-        @brief observer_token object constructor
-    **/
-    observer_token(void) noexcept = default;
-
-    /**
-        @brief observer_token object destructor
-    **/
-    ~observer_token(void) noexcept;
 
     /**
         @brief  operator==
@@ -89,7 +85,7 @@ public:
 
 private:
     base_subject* m_pSubject  = nullptr;
-    observer*     m_pObserver = nullptr;
+    void*         m_pObserver = nullptr;
 };
 
 /**
@@ -97,67 +93,26 @@ private:
     @class   base_subject
     @brief   Base subject class
     @details Allows to avoid template parameter for base logic
+    @details ~
     @author  Khrapov
-    @date    10.03.2021
+    @date    17.11.2021
 
 **/
 class base_subject
 {
-public:
-    using observers_container = std::vector<observer*>;
-
-    template<typename TObserver>
-    friend class subject;
     friend observer_token;
-    friend observer;
 
-public:
-    QX_NONCOPYABLE(base_subject);
-    QX_MOVABLE(base_subject);
-
-    /**
-        @brief base_subject object constructor
-    **/
-    base_subject(void) = default;
-
+protected:
     /**
         @brief base_subject object destructor
     **/
-    virtual ~base_subject(void) noexcept = 0;
+    virtual ~base_subject(void) noexcept = default;
 
     /**
-        @brief  Get number of observers attached to this subject
-        @retval - number of observers attached to this subject
-    **/
-    size_t get_num_observers(void) const noexcept;
-
-private:
-    /**
-        @brief  Attach observer to this subject
-        @param  pObserver - observer pointer 
-        @retval           - observer_token for autodetaching observer from this subject 
-    **/
-    [[nodiscard]] observer_token attach(observer* pObserver);
-
-    /**
-        @brief Detach observer from this subject
+        @brief Detach observer from subject
         @param pObserver - observer pointer
     **/
-    void detach(observer* pObserver) noexcept;
-
-    /**
-        @brief Iterator destructing event handler
-    **/
-    void on_iterator_destructed(void) noexcept;
-
-    /**
-        @brief Iterator constructing event handler
-    **/
-    void on_iterator_constructed(void) noexcept;
-
-private:
-    observers_container m_Observers;
-    size_t              m_nIterators = 0;
+    virtual void detach(void* pObserver) noexcept = 0;
 };
 
 /**
@@ -270,18 +225,35 @@ class subject : public base_subject
     };
 
 public:
-    using iterator = base_iterator<observers_container::iterator>;
+    using observers_container = std::vector<TObserver*>;
+
+    using iterator = base_iterator<typename observers_container::iterator>;
 
     using const_iterator =
-        const_base_iterator<observers_container::const_iterator>;
+        const_base_iterator<typename observers_container::const_iterator>;
 
     using reverse_iterator =
-        base_iterator<observers_container::reverse_iterator>;
+        base_iterator<typename observers_container::reverse_iterator>;
 
-    using const_reverse_iterator =
-        const_base_iterator<observers_container::const_reverse_iterator>;
+    using const_reverse_iterator = const_base_iterator<
+        typename observers_container::const_reverse_iterator>;
 
 public:
+    QX_NONCOPYABLE(subject);
+    QX_MOVABLE(subject);
+
+    /**
+        @brief base_subject object constructor
+    **/
+    subject(void) = default;
+
+    /**
+        @brief  Attach observer to this subject
+        @param  pObserver - observer pointer 
+        @retval           - observer_token for autodetaching observer from this subject 
+    **/
+    [[nodiscard]] observer_token attach(TObserver* pObserver) noexcept;
+
     /**
         @brief  Return iterator to beginning
         @retval - iterator to beginning
@@ -353,50 +325,33 @@ public:
         @retval - const reverse iterator to reverse end
     **/
     const_reverse_iterator crend(void) const;
-};
-
-/**
-
-    @class   observer
-    @brief   qx::subject class event observers
-    @details ~
-    @author  Khrapov
-    @date    6.03.2021
-
-**/
-class observer
-{
-public:
-    /**
-        @brief observer object destructor
-    **/
-    virtual ~observer(void) = 0;
 
     /**
-        @brief Attach this observer to subject
-        @param pSubject - subject pointer
+        @brief  Get number of observers attached to this subject
+        @retval - number of observers attached to this subject
     **/
-    void attach_to(base_subject* pSubject);
-
-    /**
-        @brief Detach this observer from subject
-        @param pSubject - subject pointer
-    **/
-    void detach_from(base_subject* pSubject);
-
-    /**
-        @brief Detach observer from all subjects
-    **/
-    void detach_from_all(void);
-
-    /**
-        @brief  Get number of subjects this observer is attached to
-        @retval - number of subjects this observer is attached to
-    **/
-    size_t get_num_subjects_attached_to(void) const;
+    size_t get_num_observers(void) const noexcept;
 
 private:
-    std::vector<observer_token> m_Tokens;
+    /**
+        @brief Detach observer from this subject
+        @param pObserver - observer pointer
+    **/
+    virtual void detach(void* pObserver) noexcept override;
+
+    /**
+        @brief Iterator destructing event handler
+    **/
+    void on_iterator_destructed(void) noexcept;
+
+    /**
+        @brief Iterator constructing event handler
+    **/
+    void on_iterator_constructed(void) noexcept;
+
+private:
+    observers_container m_Observers;
+    size_t              m_nIterators = 0;
 };
 
 } // namespace qx

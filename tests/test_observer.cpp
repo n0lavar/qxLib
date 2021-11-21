@@ -17,10 +17,11 @@
 #include <memory>
 #include <string>
 
-class TestObserver : public qx::observer
+class TestObserver
 {
 public:
-    virtual int get_num_observer() const = 0;
+    virtual ~TestObserver(void)              = default;
+    virtual int get_num_observer(void) const = 0;
 
     void EventHandler1(std::string_view svSubjectName)
     {
@@ -143,15 +144,15 @@ protected:
         EXPECT_EQ(pSubject->get_num_observers(), 0);
 
         pObserver1 = std::make_unique<TestObserver1>();
-        pObserver1->attach_to(pSubject.get());
+        tokens.emplace_back(pSubject->attach(pObserver1.get()));
         EXPECT_EQ(pSubject->get_num_observers(), 1);
 
         pObserver2 = std::make_unique<TestObserver2>();
-        pObserver2->attach_to(pSubject.get());
+        tokens.emplace_back(pSubject->attach(pObserver2.get()));
         EXPECT_EQ(pSubject->get_num_observers(), 2);
 
         pObserver3 = std::make_unique<TestObserver3>();
-        pObserver3->attach_to(pSubject.get());
+        tokens.emplace_back(pSubject->attach(pObserver3.get()));
         EXPECT_EQ(pSubject->get_num_observers(), 3);
     }
 
@@ -165,6 +166,8 @@ protected:
     std::unique_ptr<TestObserver1> pObserver1;
     std::unique_ptr<TestObserver2> pObserver2;
     std::unique_ptr<TestObserver3> pObserver3;
+
+    std::vector<qx::observer_token> tokens;
 };
 
 TEST_F(TestObserverClass, events)
@@ -236,13 +239,13 @@ TEST_F(TestObserverClass, reattachment)
 {
     EXPECT_EQ(pSubject->get_num_observers(), 3);
 
-    pObserver1->attach_to(pSubject.get());
+    tokens.emplace_back(pSubject->attach(pObserver1.get()));
     EXPECT_EQ(pSubject->get_num_observers(), 3);
 
-    pObserver2->attach_to(pSubject.get());
+    tokens.emplace_back(pSubject->attach(pObserver2.get()));
     EXPECT_EQ(pSubject->get_num_observers(), 3);
 
-    pObserver3->attach_to(pSubject.get());
+    tokens.emplace_back(pSubject->attach(pObserver3.get()));
     EXPECT_EQ(pSubject->get_num_observers(), 3);
 }
 
@@ -250,36 +253,14 @@ TEST_F(TestObserverClass, detaching)
 {
     EXPECT_EQ(pSubject->get_num_observers(), 3);
 
-    pObserver1->detach_from(pSubject.get());
+    tokens.erase(tokens.begin());
     EXPECT_EQ(pSubject->get_num_observers(), 2);
 
-    pObserver2->detach_from(pSubject.get());
+    tokens.erase(tokens.begin());
     EXPECT_EQ(pSubject->get_num_observers(), 1);
 
-    pObserver3->detach_from(pSubject.get());
+    tokens.erase(tokens.begin());
     EXPECT_EQ(pSubject->get_num_observers(), 0);
-}
-
-TEST_F(TestObserverClass, detaching_all)
-{
-    EXPECT_EQ(pSubject->get_num_observers(), 3);
-
-    TestSubject subject2;
-    pObserver1->attach_to(&subject2);
-    pObserver2->attach_to(&subject2);
-    EXPECT_EQ(subject2.get_num_observers(), 2);
-
-    pObserver1->detach_from_all();
-    EXPECT_EQ(pSubject->get_num_observers(), 2);
-    EXPECT_EQ(subject2.get_num_observers(), 1);
-
-    pObserver2->detach_from_all();
-    EXPECT_EQ(pSubject->get_num_observers(), 1);
-    EXPECT_EQ(subject2.get_num_observers(), 0);
-
-    pObserver3->detach_from_all();
-    EXPECT_EQ(pSubject->get_num_observers(), 0);
-    EXPECT_EQ(subject2.get_num_observers(), 0);
 }
 
 TEST_F(TestObserverClass, observer_destructing_auto_detaching)
@@ -288,15 +269,15 @@ TEST_F(TestObserverClass, observer_destructing_auto_detaching)
 
     {
         TestObserver1 observer1;
-        observer1.attach_to(pSubject.get());
+        auto          token1 = pSubject->attach(&observer1);
         EXPECT_EQ(pSubject->get_num_observers(), 4);
 
         TestObserver2 observer2;
-        observer2.attach_to(pSubject.get());
+        auto          token2 = pSubject->attach(&observer2);
         EXPECT_EQ(pSubject->get_num_observers(), 5);
 
         TestObserver3 observer3;
-        observer3.attach_to(pSubject.get());
+        auto          token3 = pSubject->attach(&observer3);
         EXPECT_EQ(pSubject->get_num_observers(), 6);
     }
 
@@ -308,11 +289,11 @@ TEST_F(TestObserverClass, detaching_while_iterating)
     std::vector<int> nums;
 
     TestObserver1 observer1;
-    observer1.attach_to(pSubject.get());
+    tokens.emplace_back(pSubject->attach(&observer1));
     EXPECT_EQ(pSubject->get_num_observers(), 4);
 
     TestObserver2 observer2;
-    observer2.attach_to(pSubject.get());
+    tokens.emplace_back(pSubject->attach(&observer2));
     EXPECT_EQ(pSubject->get_num_observers(), 5);
 
     // detach all observers with number 2
@@ -323,7 +304,7 @@ TEST_F(TestObserverClass, detaching_while_iterating)
         EXPECT_EQ(pSubject->get_num_observers(), 5);
         nums.push_back(observer.get_num_observer());
         if (nums.back() == 2)
-            observer.detach_from(pSubject.get());
+            tokens[nums.size() - 1].reset();
     }
 
     // with destructing of last iterator all nullptrs removed
@@ -331,24 +312,32 @@ TEST_F(TestObserverClass, detaching_while_iterating)
     EXPECT_EQ(nums, std::vector<int>({ 1, 2, 3, 1, 2 }));
 }
 
+#if 0
+
 TEST_F(TestObserverClass, subject_destructing_auto_detaching)
 {
+    TestObserver1 observer1;
+    TestObserver1 observer2;
+    TestObserver1 observer3;
+
     {
         TestSubject subject;
 
-        pObserver1->attach_to(&subject);
-        EXPECT_EQ(pObserver1->get_num_subjects_attached_to(), 2);
+        tokens.emplace_back(subject.attach(&observer1));
+        EXPECT_TRUE(tokens.back());
 
-        pObserver2->attach_to(&subject);
-        EXPECT_EQ(pObserver2->get_num_subjects_attached_to(), 2);
+        tokens.emplace_back(subject.attach(&observer2));
+        EXPECT_TRUE(tokens.back());
 
-        pObserver3->attach_to(&subject);
-        EXPECT_EQ(pObserver3->get_num_subjects_attached_to(), 2);
+        tokens.emplace_back(subject.attach(&observer3));
+        EXPECT_TRUE(tokens.back());
     }
 
-    EXPECT_EQ(pObserver1->get_num_subjects_attached_to(), 1);
-    EXPECT_EQ(pObserver2->get_num_subjects_attached_to(), 1);
-    EXPECT_EQ(pObserver3->get_num_subjects_attached_to(), 1);
+    EXPECT_FALSE(*(tokens.end() - 1));
+    EXPECT_FALSE(*(tokens.end() - 2));
+    EXPECT_FALSE(*(tokens.end() - 3));
 }
+
+#endif
 
 #endif
