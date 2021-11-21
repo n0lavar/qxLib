@@ -1706,14 +1706,18 @@ inline typename basic_string<Traits>::views basic_string<Traits>::split(
 {
     views tokens;
 
-    size_type start = 0;
-    size_type end   = 0;
-    while ((end = find(chSeparator, start)) != npos)
+    size_type nStart = 0;
+    size_type nEnd   = 0;
+    while ((nEnd = find(chSeparator, nStart)) != npos)
     {
-        tokens.push_back(substr(start, end - start));
-        start = end + 1;
+        tokens.push_back(substr(nStart, nEnd - nStart));
+        nStart = nEnd;
+        while (Traits::compare_n(data() + nStart, &chSeparator, 1) == 0)
+            ++nStart;
     }
-    tokens.push_back(substr(start));
+
+    if (nStart != size())
+        tokens.push_back(substr(nStart));
 
     return std::move(tokens);
 }
@@ -1728,14 +1732,18 @@ inline typename basic_string<Traits>::views basic_string<Traits>::split(
     if (nSepLen == npos)
         nSepLen = Traits::length(pszSeparator);
 
-    size_type mStart = 0;
+    size_type nStart = 0;
     size_type nEnd   = 0;
-    while ((nEnd = find(pszSeparator, mStart, nSepLen, npos)) != npos)
+    while ((nEnd = find(pszSeparator, nStart, nSepLen, npos)) != npos)
     {
-        tokens.push_back(substr(mStart, nEnd - mStart));
-        mStart = nEnd + nSepLen;
+        tokens.push_back(substr(nStart, nEnd - nStart));
+        nStart = nEnd;
+        while (Traits::compare_n(data() + nStart, pszSeparator, nSepLen) == 0)
+            nStart += nSepLen;
     }
-    tokens.push_back(substr(mStart));
+
+    if (nStart != size())
+        tokens.push_back(substr(nStart));
 
     return tokens;
 }
