@@ -30,16 +30,17 @@ namespace qx
              and creates their instances by their ID and name.
              Allocates memory.
     @tparam  BaseClass - base class type
+    @tparam  SmartPtr  - smart pointer class type
     @tparam  Args      - args for type creation
     @author  Khrapov
     @date    7.09.2021
 
 **/
-template<class BaseClass, class... Args>
+template<class BaseClass, template<class> class SmartPtr, class... Args>
 class reflection_creator
 {
 public:
-    using factory = std::function<std::unique_ptr<BaseClass>(Args...)>;
+    using factory = std::function<SmartPtr<BaseClass>(Args...)>;
 
 public:
     /**
@@ -48,7 +49,7 @@ public:
         @param  args - template parameter pack
         @retval      - class instance or nullptr if can't find factory or can't create
     **/
-    [[nodiscard]] static std::unique_ptr<BaseClass> create_object(
+    [[nodiscard]] static SmartPtr<BaseClass> create_object(
         class_identificator id,
         Args&&... args)
     {
@@ -64,7 +65,7 @@ public:
         @param  args        - template parameter pack
         @retval             - class instance or nullptr if can't find factory or can't create
     **/
-    [[nodiscard]] static std::unique_ptr<BaseClass> create_object(
+    [[nodiscard]] static SmartPtr<BaseClass> create_object(
         std::string_view svClassName,
         Args&&... args)
     {
@@ -110,7 +111,7 @@ namespace detail
 {
 
 template<class BaseClass, class T, class... Args>
-static std::unique_ptr<BaseClass> create_object(Args&&... args)
+static std::unique_ptr<BaseClass> create_unique(Args&&... args)
 {
     if constexpr (std::is_constructible_v<T, Args...>)
         return std::make_unique<T>(std::forward<Args>(args)...);
@@ -118,29 +119,68 @@ static std::unique_ptr<BaseClass> create_object(Args&&... args)
         return nullptr;
 }
 
+template<class BaseClass, class T, class... Args>
+static std::shared_ptr<BaseClass> create_shared(Args&&... args)
+{
+    if constexpr (std::is_constructible_v<T, Args...>)
+        return std::make_shared<T>(std::forward<Args>(args)...);
+    else
+        return nullptr;
+}
+
 } // namespace detail
 
 /**
-    @def   QX_REGISTER_CREATOR
-    @brief Macro for base class. Use YourClass::Creator::create_object
-    @param ... - constructor args types
+    @def     QX_REGISTER_UNIQUE_CREATOR
+    @brief   Macro for base class. Use YourClass::Creator::create_object
+    @details std::unique_ptr version
+    @param   ... - constructor args types
 **/
-#define QX_REGISTER_CREATOR(...)   \
-    using CreatorRoot = ThisClass; \
-    using Creator     = qx::reflection_creator<CreatorRoot, __VA_ARGS__>;
+#define QX_REGISTER_UNIQUE_CREATOR(...) \
+    using CreatorRoot = ThisClass;      \
+    using Creator =                     \
+        qx::reflection_creator<CreatorRoot, std::unique_ptr, __VA_ARGS__>;
 
 /**
-    @def   QX_REGISTER_CONSTRUCTOR
-    @brief Macro for all classes inherited from base class
-    @param ... - constructor args types
+    @def     QX_REGISTER_UNIQUE_CONSTRUCTOR
+    @brief   Macro for all classes inherited from base class
+    @details std::unique_ptr version
+    @param   ... - constructor args types
 **/
-#define QX_REGISTER_CONSTRUCTOR(...)                                        \
+#define QX_REGISTER_UNIQUE_CONSTRUCTOR(...)                                 \
 private:                                                                    \
     static inline volatile bool QX_LINE_NAME(s_bRegistered) =               \
         Creator::_register_class(                                           \
-            qx::detail::create_object<CreatorRoot, ThisClass, __VA_ARGS__>, \
+            qx::detail::create_unique<CreatorRoot, ThisClass, __VA_ARGS__>, \
             get_class_id_static(),                                          \
             get_class_name_static());
 
+/**
+    @def     QX_REGISTER_SHARED_CREATOR
+    @brief   Macro for base class. Use YourClass::Creator::create_object
+    @details std::shared_ptr version
+    @param   ... - constructor args types
+**/
+#define QX_REGISTER_SHARED_CREATOR(...) \
+    using CreatorRoot = ThisClass;      \
+    using Creator =                     \
+        qx::reflection_creator<CreatorRoot, std::shared_ptr, __VA_ARGS__>;
+
+/**
+    @def     QX_REGISTER_SHARED_CONSTRUCTOR
+    @brief   Macro for all classes inherited from base class
+    @details std::shared_ptr version
+    @param   ... - constructor args types
+**/
+#define QX_REGISTER_SHARED_CONSTRUCTOR(...)                                 \
+private:                                                                    \
+    static inline volatile bool QX_LINE_NAME(s_bRegistered) =               \
+        Creator::_register_class(                                           \
+            qx::detail::create_shared<CreatorRoot, ThisClass, __VA_ARGS__>, \
+            get_class_id_static(),                                          \
+            get_class_name_static());
+
+#define QX_REGISTER_CREATOR     QX_REGISTER_UNIQUE_CREATOR
+#define QX_REGISTER_CONSTRUCTOR QX_REGISTER_UNIQUE_CONSTRUCTOR
 
 } // namespace qx

@@ -17,7 +17,7 @@
 
 #if QX_CONSTEXPR_SEQUENCE_SUPPORTED
 
-    #include <qx/meta/constexpr_flag.h>
+#include <qx/meta/constexpr_flag.h>
 
 namespace qx
 {

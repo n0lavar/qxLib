@@ -81,6 +81,12 @@ public:
                || qx::get_class_id<RTTI_TYPE>() == get_class_id();
     }
 
+    template<typename RTTI_TYPE>
+    bool is() const noexcept
+    {
+        return get_class_id() == RTTI_TYPE::get_class_id_static();
+    }
+
     virtual bool is_derived_from_id(class_identificator id) const noexcept
     {
         return id == get_class_id_static();
