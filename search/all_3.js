@@ -51,7 +51,7 @@ var searchData=
   ['create_5ficosahedron_5flines_114',['create_icosahedron_lines',['../geom_8h.html#aae54f89a88a320a15853e6d3f518b818',1,'qx']]],
   ['create_5ficosphere_115',['create_icosphere',['../geom_8h.html#a258a03c475596c942001c52b9f5422bf',1,'qx']]],
   ['create_5ficosphere_5flines_116',['create_icosphere_lines',['../geom_8h.html#a400186cef6bd1c97bab9845b22d26bae',1,'qx']]],
-  ['create_5fobject_117',['create_object',['../classqx_1_1reflection__creator.html#aeca242e1a8cfc07f75b22205f5ae8dba',1,'qx::reflection_creator::create_object(std::string_view svClassName, Args &amp;&amp;... args)'],['../classqx_1_1reflection__creator.html#a0c0877226febf6c9aa0faa55607807d4',1,'qx::reflection_creator::create_object(class_identificator id, Args &amp;&amp;... args)']]],
+  ['create_5fobject_117',['create_object',['../classqx_1_1reflection__creator.html#ad9a2291e02aaa3f626ec01fe132b7aa2',1,'qx::reflection_creator::create_object(std::string_view svClassName, Args &amp;&amp;... args)'],['../classqx_1_1reflection__creator.html#ad011237d42e327c85a98d97e8f51e2bb',1,'qx::reflection_creator::create_object(class_identificator id, Args &amp;&amp;... args)']]],
   ['create_5fparallelogram_118',['create_parallelogram',['../geom_8h.html#a3dd7e7e955c64db12979f977a22d963d',1,'qx']]],
   ['create_5fparallelogram_5flines_119',['create_parallelogram_lines',['../geom_8h.html#a3517af8feed4720fe64653a1c8f7d9c6',1,'qx']]],
   ['create_5frect_120',['create_rect',['../geom_8h.html#af093b2b495cb81dec4eaa780ed3783dc',1,'qx']]],

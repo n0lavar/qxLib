@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>qxLib: qx::reflection_creator&lt; BaseClass, Args &gt; Class Template Reference</title>
+<title>qxLib: qx::reflection_creator&lt; BaseClass, SmartPtr, Args &gt; Class Template Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -70,7 +70,7 @@ $(function() {
 <a href="#pub-static-methods">Static Public Member Functions</a> &#124;
 <a href="classqx_1_1reflection__creator-members.html">List of all members</a>  </div>
   <div class="headertitle">
-<div class="title">qx::reflection_creator&lt; BaseClass, Args &gt; Class Template Reference</div>  </div>
+<div class="title">qx::reflection_creator&lt; BaseClass, SmartPtr, Args &gt; Class Template Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
@@ -81,30 +81,31 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-types"></a>
 Public Types</h2></td></tr>
-<tr class="memitem:aae322ee24d447003049adee1f907429e"><td class="memItemLeft" align="right" valign="top"><a id="aae322ee24d447003049adee1f907429e"></a>
-using&#160;</td><td class="memItemRight" valign="bottom"><b>factory</b> = std::function&lt; std::unique_ptr&lt; BaseClass &gt;(Args...)&gt;</td></tr>
-<tr class="separator:aae322ee24d447003049adee1f907429e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1784dbc745c94366eb4648bdcebecb7a"><td class="memItemLeft" align="right" valign="top"><a id="a1784dbc745c94366eb4648bdcebecb7a"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><b>factory</b> = std::function&lt; SmartPtr&lt; BaseClass &gt;(Args...)&gt;</td></tr>
+<tr class="separator:a1784dbc745c94366eb4648bdcebecb7a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
-<tr class="memitem:a0c0877226febf6c9aa0faa55607807d4"><td class="memItemLeft" align="right" valign="top">static std::unique_ptr&lt; BaseClass &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1reflection__creator.html#a0c0877226febf6c9aa0faa55607807d4">create_object</a> (class_identificator id, Args &amp;&amp;... args)</td></tr>
-<tr class="memdesc:a0c0877226febf6c9aa0faa55607807d4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create object based on class id.  <a href="classqx_1_1reflection__creator.html#a0c0877226febf6c9aa0faa55607807d4">More...</a><br /></td></tr>
-<tr class="separator:a0c0877226febf6c9aa0faa55607807d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aeca242e1a8cfc07f75b22205f5ae8dba"><td class="memItemLeft" align="right" valign="top">static std::unique_ptr&lt; BaseClass &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1reflection__creator.html#aeca242e1a8cfc07f75b22205f5ae8dba">create_object</a> (std::string_view svClassName, Args &amp;&amp;... args)</td></tr>
-<tr class="memdesc:aeca242e1a8cfc07f75b22205f5ae8dba"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create object based on class name.  <a href="classqx_1_1reflection__creator.html#aeca242e1a8cfc07f75b22205f5ae8dba">More...</a><br /></td></tr>
-<tr class="separator:aeca242e1a8cfc07f75b22205f5ae8dba"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2edc9daea59efe1155fe5a61f126b3d4"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1reflection__creator.html#a2edc9daea59efe1155fe5a61f126b3d4">_register_class</a> (factory factory, class_identificator id, std::string_view svClassName)</td></tr>
-<tr class="memdesc:a2edc9daea59efe1155fe5a61f126b3d4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Register class so it can be constructed by creator.  <a href="classqx_1_1reflection__creator.html#a2edc9daea59efe1155fe5a61f126b3d4">More...</a><br /></td></tr>
-<tr class="separator:a2edc9daea59efe1155fe5a61f126b3d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad011237d42e327c85a98d97e8f51e2bb"><td class="memItemLeft" align="right" valign="top">static SmartPtr&lt; BaseClass &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1reflection__creator.html#ad011237d42e327c85a98d97e8f51e2bb">create_object</a> (class_identificator id, Args &amp;&amp;... args)</td></tr>
+<tr class="memdesc:ad011237d42e327c85a98d97e8f51e2bb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create object based on class id.  <a href="classqx_1_1reflection__creator.html#ad011237d42e327c85a98d97e8f51e2bb">More...</a><br /></td></tr>
+<tr class="separator:ad011237d42e327c85a98d97e8f51e2bb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad9a2291e02aaa3f626ec01fe132b7aa2"><td class="memItemLeft" align="right" valign="top">static SmartPtr&lt; BaseClass &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1reflection__creator.html#ad9a2291e02aaa3f626ec01fe132b7aa2">create_object</a> (std::string_view svClassName, Args &amp;&amp;... args)</td></tr>
+<tr class="memdesc:ad9a2291e02aaa3f626ec01fe132b7aa2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create object based on class name.  <a href="classqx_1_1reflection__creator.html#ad9a2291e02aaa3f626ec01fe132b7aa2">More...</a><br /></td></tr>
+<tr class="separator:ad9a2291e02aaa3f626ec01fe132b7aa2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a90dc12542233b4e1224a5c5942a5ecb7"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1reflection__creator.html#a90dc12542233b4e1224a5c5942a5ecb7">_register_class</a> (factory factory, class_identificator id, std::string_view svClassName)</td></tr>
+<tr class="memdesc:a90dc12542233b4e1224a5c5942a5ecb7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Register class so it can be constructed by creator.  <a href="classqx_1_1reflection__creator.html#a90dc12542233b4e1224a5c5942a5ecb7">More...</a><br /></td></tr>
+<tr class="separator:a90dc12542233b4e1224a5c5942a5ecb7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><h3>template&lt;class BaseClass, class... Args&gt;<br />
-class qx::reflection_creator&lt; BaseClass, Args &gt;</h3>
+<div class="textblock"><h3>template&lt;class BaseClass, template&lt; class &gt; class SmartPtr, class... Args&gt;<br />
+class qx::reflection_creator&lt; BaseClass, SmartPtr, Args &gt;</h3>
 
 <p>Reflection creator. </p>
 <p>Performs registration of classes inherited from BaseClass and creates their instances by their ID and name. Allocates memory. </p><dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
     <tr><td class="paramname">BaseClass</td><td>- base class type </td></tr>
+    <tr><td class="paramname">SmartPtr</td><td>- smart pointer class type </td></tr>
     <tr><td class="paramname">Args</td><td>- args for type creation </td></tr>
   </table>
   </dd>
@@ -112,21 +113,21 @@ class qx::reflection_creator&lt; BaseClass, Args &gt;</h3>
 <dl class="section author"><dt>Author</dt><dd>Khrapov </dd></dl>
 <dl class="section date"><dt>Date</dt><dd>7.09.2021 </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="reflection__creator_8h_source.html#l00039">39</a> of file <a class="el" href="reflection__creator_8h_source.html">reflection_creator.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="reflection__creator_8h_source.html#l00040">40</a> of file <a class="el" href="reflection__creator_8h_source.html">reflection_creator.h</a>.</p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
-<a id="a2edc9daea59efe1155fe5a61f126b3d4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2edc9daea59efe1155fe5a61f126b3d4">&#9670;&nbsp;</a></span>_register_class()</h2>
+<a id="a90dc12542233b4e1224a5c5942a5ecb7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a90dc12542233b4e1224a5c5942a5ecb7">&#9670;&nbsp;</a></span>_register_class()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class BaseClass , class... Args&gt; </div>
+template&lt;class BaseClass , template&lt; class &gt; class SmartPtr, class... Args&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">static bool <a class="el" href="classqx_1_1reflection__creator.html">qx::reflection_creator</a>&lt; BaseClass, Args &gt;::_register_class </td>
+          <td class="memname">static bool <a class="el" href="classqx_1_1reflection__creator.html">qx::reflection_creator</a>&lt; BaseClass, SmartPtr, Args &gt;::_register_class </td>
           <td>(</td>
           <td class="paramtype">factory&#160;</td>
           <td class="paramname"><em>factory</em>, </td>
@@ -172,23 +173,23 @@ template&lt;class BaseClass , class... Args&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="reflection__creator_8h_source.html#l00087">87</a> of file <a class="el" href="reflection__creator_8h_source.html">reflection_creator.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="reflection__creator_8h_source.html#l00088">88</a> of file <a class="el" href="reflection__creator_8h_source.html">reflection_creator.h</a>.</p>
 
 </div>
 </div>
-<a id="a0c0877226febf6c9aa0faa55607807d4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0c0877226febf6c9aa0faa55607807d4">&#9670;&nbsp;</a></span>create_object() <span class="overload">[1/2]</span></h2>
+<a id="ad011237d42e327c85a98d97e8f51e2bb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad011237d42e327c85a98d97e8f51e2bb">&#9670;&nbsp;</a></span>create_object() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class BaseClass , class... Args&gt; </div>
+template&lt;class BaseClass , template&lt; class &gt; class SmartPtr, class... Args&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">static std::unique_ptr&lt;BaseClass&gt; <a class="el" href="classqx_1_1reflection__creator.html">qx::reflection_creator</a>&lt; BaseClass, Args &gt;::create_object </td>
+          <td class="memname">static SmartPtr&lt;BaseClass&gt; <a class="el" href="classqx_1_1reflection__creator.html">qx::reflection_creator</a>&lt; BaseClass, SmartPtr, Args &gt;::create_object </td>
           <td>(</td>
           <td class="paramtype">class_identificator&#160;</td>
           <td class="paramname"><em>id</em>, </td>
@@ -227,23 +228,23 @@ template&lt;class BaseClass , class... Args&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="reflection__creator_8h_source.html#l00051">51</a> of file <a class="el" href="reflection__creator_8h_source.html">reflection_creator.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="reflection__creator_8h_source.html#l00052">52</a> of file <a class="el" href="reflection__creator_8h_source.html">reflection_creator.h</a>.</p>
 
 </div>
 </div>
-<a id="aeca242e1a8cfc07f75b22205f5ae8dba"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aeca242e1a8cfc07f75b22205f5ae8dba">&#9670;&nbsp;</a></span>create_object() <span class="overload">[2/2]</span></h2>
+<a id="ad9a2291e02aaa3f626ec01fe132b7aa2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad9a2291e02aaa3f626ec01fe132b7aa2">&#9670;&nbsp;</a></span>create_object() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class BaseClass , class... Args&gt; </div>
+template&lt;class BaseClass , template&lt; class &gt; class SmartPtr, class... Args&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">static std::unique_ptr&lt;BaseClass&gt; <a class="el" href="classqx_1_1reflection__creator.html">qx::reflection_creator</a>&lt; BaseClass, Args &gt;::create_object </td>
+          <td class="memname">static SmartPtr&lt;BaseClass&gt; <a class="el" href="classqx_1_1reflection__creator.html">qx::reflection_creator</a>&lt; BaseClass, SmartPtr, Args &gt;::create_object </td>
           <td>(</td>
           <td class="paramtype">std::string_view&#160;</td>
           <td class="paramname"><em>svClassName</em>, </td>
@@ -282,7 +283,7 @@ template&lt;class BaseClass , class... Args&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="reflection__creator_8h_source.html#l00067">67</a> of file <a class="el" href="reflection__creator_8h_source.html">reflection_creator.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="reflection__creator_8h_source.html#l00068">68</a> of file <a class="el" href="reflection__creator_8h_source.html">reflection_creator.h</a>.</p>
 
 </div>
 </div>
