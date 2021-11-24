@@ -9,7 +9,7 @@
 **/
 #pragma once
 
-#include <qx/containers/string.h>
+#include <qx/containers/string/string.h>
 #include <qx/suppress_warnings.h>
 
 #include <ctime>

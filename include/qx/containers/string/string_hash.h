@@ -9,7 +9,7 @@
 **/
 #pragma once
 
-#include <qx/containers/string_traits.h>
+#include <qx/containers/string/string_traits.h>
 
 namespace qx
 {
@@ -125,4 +125,4 @@ using fast_wstring_hash = basic_string_hash<fast_hash_string_traits<wchar_t>>;
 
 } // namespace qx
 
-#include <qx/containers/string_hash.inl>
+#include <qx/containers/string/string_hash.inl>

@@ -9,7 +9,7 @@
 **/
 #pragma once
 
-#include <qx/containers/string.h>
+#include <qx/containers/string/string.h>
 #include <qx/useful_macros.h>
 
 #include <glew.h>

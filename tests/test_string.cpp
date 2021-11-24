@@ -12,7 +12,7 @@
 
 #if QX_TEST_STRING
 
-#include <qx/containers/string.h>
+#include <qx/containers/string/string.h>
 
 #include <list>
 #include <unordered_map>

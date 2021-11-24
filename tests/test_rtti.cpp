@@ -12,7 +12,7 @@
 
 #if QX_TEST_RTTI
 
-#include <qx/containers/string_utils.h>
+#include <qx/containers/string/string_utils.h>
 #include <qx/rtti/rtti.h>
 #include <qx/rtti/rtti_cast.h>
 #include <qx/useful_macros.h>

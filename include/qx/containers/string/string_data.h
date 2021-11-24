@@ -95,4 +95,4 @@ private:
 
 } // namespace qx
 
-#include <qx/containers/string_data.inl>
+#include <qx/containers/string/string_data.inl>

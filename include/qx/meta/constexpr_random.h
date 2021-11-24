@@ -9,12 +9,12 @@
 **/
 #pragma once
 
-#include <qx/containers/string_utils.h>
+#include <qx/containers/string/string_utils.h>
 #include <qx/meta/constexpr_sequence.h>
 
 #if QX_CONSTEXPR_SEQUENCE_SUPPORTED
 
-    #include <qx/typedefs.h>
+#include <qx/typedefs.h>
 
 namespace qx
 {

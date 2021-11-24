@@ -11,7 +11,7 @@
 **/
 #pragma once
 
-#include <qx/containers/string_literal.h>
+#include <qx/containers/string/string_literal.h>
 
 namespace qx
 {

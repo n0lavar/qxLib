@@ -9,7 +9,7 @@
 **/
 #pragma once
 
-#include <qx/containers/string_utils.h>
+#include <qx/containers/string/string_utils.h>
 #include <qx/useful_macros.h>
 
 #include <cctype>

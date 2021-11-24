@@ -12,7 +12,7 @@
 
 #if QX_TEST_USEFUL_MACROS
 
-#include <qx/containers/string_utils.h>
+#include <qx/containers/string/string_utils.h>
 #include <qx/useful_macros.h>
 
 #include <map>

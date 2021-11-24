@@ -10,8 +10,8 @@
 #pragma once
 
 #include <qx/containers/container.h>
-#include <qx/containers/string_data.h>
-#include <qx/containers/string_hash.h>
+#include <qx/containers/string/string_data.h>
+#include <qx/containers/string/string_hash.h>
 #include <qx/type_traits.h>
 
 #include <iostream>
@@ -2023,4 +2023,4 @@ using wstring = basic_string<char_traits<wchar_t>>;
 
 } // namespace qx
 
-#include <qx/containers/string.inl>
+#include <qx/containers/string/string.inl>
