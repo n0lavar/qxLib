@@ -336,11 +336,12 @@ public:
 
     /**
         @brief  Convert string to specified type
-        @tparam To - type to convert
-        @retval    - converted value or std::nullopt
+        @tparam To        - type to convert
+        @param  pszFormat - format string
+        @retval           - converted value or std::nullopt
     **/
     template<typename To>
-    std::optional<To> to(void) const noexcept;
+    std::optional<To> to(const_pointer pszFormat = nullptr) const noexcept;
 
     /**
         @brief  Copies a substring [nPos, nPos + nCount) to character string pointed to by pDest

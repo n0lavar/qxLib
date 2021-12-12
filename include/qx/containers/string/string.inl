@@ -300,7 +300,8 @@ constexpr typename basic_string<Traits>::size_type basic_string<
 
 template<class Traits>
 template<typename To>
-inline std::optional<To> basic_string<Traits>::to(void) const noexcept
+inline std::optional<To> basic_string<Traits>::to(
+    const_pointer pszFormat) const noexcept
 {
     std::optional<To> optResult = std::nullopt;
 
@@ -328,11 +329,13 @@ inline std::optional<To> basic_string<Traits>::to(void) const noexcept
                 optResult = false;
             }
         }
-        else if (auto pszFormat = get_format_specifier<value_type, To>())
+        else if (
+            const auto pszSelectedFormat =
+                pszFormat ? pszFormat : get_format_specifier<value_type, To>())
         {
             To        result;
             const int nConvertedArgs =
-                Traits::sscanf(data(), pszFormat, &result);
+                Traits::sscanf(data(), pszSelectedFormat, &result);
 
             if (nConvertedArgs == 1)
                 optResult = result;
