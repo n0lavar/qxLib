@@ -182,6 +182,11 @@ public:
     lock_ptr lock(void) const noexcept;
 
     /**
+        @brief Reset pointer
+    **/
+    void reset(void) noexcept;
+
+    /**
         @brief  If pointer is expired
         @retval - true if pointer is expired
     **/

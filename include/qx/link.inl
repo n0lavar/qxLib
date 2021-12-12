@@ -112,6 +112,12 @@ typename link<T>::lock_ptr link<T>::lock(void) const noexcept
 }
 
 template<class T>
+void link<T>::reset(void) noexcept
+{
+    m_pWeak.reset();
+}
+
+template<class T>
 inline bool link<T>::expired(void) const noexcept
 {
     return m_pWeak.expired();
