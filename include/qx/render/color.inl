@@ -1,4 +1,3 @@
-#include "color.h"
 /**
 
     @file      color.inl
@@ -29,12 +28,30 @@ constexpr color::color(int nRed, int nGreen, int nBlue, int nAlpha) noexcept
 {
 }
 
-constexpr color::color(int nHexValue) noexcept
+constexpr color::color(unsigned int nHexValue) noexcept
     : color(
         dec_to_float(nHexValue >> 24 & 0xFF),
         dec_to_float(nHexValue >> 16 & 0xFF),
         dec_to_float(nHexValue >> 8 & 0xFF),
         dec_to_float(nHexValue >> 0 & 0xFF))
+{
+}
+
+inline constexpr color::color(const glm::ivec3& vec3) noexcept
+    : color(
+        dec_to_float(vec3.x),
+        dec_to_float(vec3.y),
+        dec_to_float(vec3.z),
+        1.f)
+{
+}
+
+inline constexpr color::color(const glm::ivec4& vec4) noexcept
+    : color(
+        dec_to_float(vec4.x),
+        dec_to_float(vec4.y),
+        dec_to_float(vec4.z),
+        dec_to_float(vec4.w))
 {
 }
 
@@ -58,17 +75,37 @@ constexpr float color::a(void) const noexcept
     return m_Color.w;
 }
 
+inline constexpr int color::r_dec(void) const noexcept
+{
+    return float_to_dec(m_Color.x);
+}
+
+inline constexpr int color::g_dec(void) const noexcept
+{
+    return float_to_dec(m_Color.y);
+}
+
+inline constexpr int color::b_dec(void) const noexcept
+{
+    return float_to_dec(m_Color.z);
+}
+
+inline constexpr int color::a_dec(void) const noexcept
+{
+    return float_to_dec(m_Color.w);
+}
+
 constexpr const float* color::data(void) const noexcept
 {
     return &(m_Color.x);
 }
 
-constexpr int color::hex(void) const noexcept
+constexpr unsigned int color::hex(void) const noexcept
 {
-    int r = static_cast<int>(m_Color.x * 255.f);
-    int g = static_cast<int>(m_Color.y * 255.f);
-    int b = static_cast<int>(m_Color.z * 255.f);
-    int a = static_cast<int>(m_Color.w * 255.f);
+    unsigned int r = static_cast<unsigned int>(float_to_dec(m_Color.x));
+    unsigned int g = static_cast<unsigned int>(float_to_dec(m_Color.y));
+    unsigned int b = static_cast<unsigned int>(float_to_dec(m_Color.z));
+    unsigned int a = static_cast<unsigned int>(float_to_dec(m_Color.w));
 
     return ((r & 0xff) << 24) + ((g & 0xff) << 16) + ((b & 0xff) << 8)
            + (a & 0xff);
@@ -262,6 +299,11 @@ constexpr float color::clamp_value(float fValue) noexcept
 constexpr float color::dec_to_float(int nValue) noexcept
 {
     return static_cast<float>(nValue) / 255.f;
+}
+
+constexpr int color::float_to_dec(float fValue) noexcept
+{
+    return static_cast<int>(fValue * 255.f);
 }
 
 constexpr void color::assign_checked(const glm::vec4& other) noexcept

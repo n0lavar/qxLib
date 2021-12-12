@@ -67,9 +67,21 @@ public:
 
     /**
         @brief color object constructor
-        @param nHexValue - hex color value in 0xAARRGGBB format
+        @param nHexValue - hex color value in 0xRRGGBBAA format
     **/
-    constexpr color(int nHexValue) noexcept;
+    constexpr explicit color(unsigned int nHexValue) noexcept;
+
+    /**
+        @brief color object constructor
+        @param vec3 - int vector
+    **/
+    constexpr explicit color(const glm::ivec3& vec3) noexcept;
+
+    /**
+        @brief color object constructor
+        @param vec4 - int vector
+    **/
+    constexpr explicit color(const glm::ivec4& vec4) noexcept;
 
     /**
         @brief  Get red component
@@ -96,6 +108,30 @@ public:
     constexpr float a(void) const noexcept;
 
     /**
+        @brief  Get red component as decimal 
+        @retval - red component as decimal
+    **/
+    constexpr int r_dec(void) const noexcept;
+
+    /**
+        @brief  Get green component as decimal 
+        @retval - green component as decimal
+    **/
+    constexpr int g_dec(void) const noexcept;
+
+    /**
+        @brief  Get blue component as decimal 
+        @retval - blue component as decimal
+    **/
+    constexpr int b_dec(void) const noexcept;
+
+    /**
+        @brief  Get alpha component as decimal 
+        @retval - alpha component as decimal
+    **/
+    constexpr int a_dec(void) const noexcept;
+
+    /**
         @brief  Get pointer to the first component
         @retval - pointer to the first component
     **/
@@ -103,9 +139,9 @@ public:
 
     /**
         @brief  Get color as hex
-        @retval - hex color value in 0xAARRGGBB format
+        @retval - hex color value in 0xRRGGBBAA format
     **/
-    constexpr int hex(void) const noexcept;
+    constexpr unsigned int hex(void) const noexcept;
 
     /**
         @brief  operator==
@@ -356,6 +392,13 @@ private:
         @retval        - float value     [0.f, 1.f]
     **/
     static constexpr float dec_to_float(int nValue) noexcept;
+
+    /**
+        @brief  Convert float value to decimal
+        @param  fValue - float value     [0.f, 1.f]
+        @retval        - decimal value   [0, 255]
+    **/
+    static constexpr int float_to_dec(float fValue) noexcept;
 
     /**
         @brief Clamp all vector components and assign
