@@ -103,6 +103,14 @@ Functions</h2></td></tr>
 <tr class="memitem:a2db6d38ad44aebd45809cb9a06774ffd"><td class="memTemplItemLeft" align="right" valign="top">constexpr bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="math_8h.html#a2db6d38ad44aebd45809cb9a06774ffd">qx::epsilon_greater_equal</a> (T left, T right, T eps=std::numeric_limits&lt; T &gt;::epsilon())</td></tr>
 <tr class="memdesc:a2db6d38ad44aebd45809cb9a06774ffd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constexpr comparison function for a user defined epsilon values.  <a href="math_8h.html#a2db6d38ad44aebd45809cb9a06774ffd">More...</a><br /></td></tr>
 <tr class="separator:a2db6d38ad44aebd45809cb9a06774ffd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8662f96933a20e0a8c713191c9e58b2a"><td class="memTemplParams" colspan="2">template&lt;std::integral T&gt; </td></tr>
+<tr class="memitem:a8662f96933a20e0a8c713191c9e58b2a"><td class="memTemplItemLeft" align="right" valign="top">constexpr bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="math_8h.html#a8662f96933a20e0a8c713191c9e58b2a">qx::is_odd</a> (T val)</td></tr>
+<tr class="memdesc:a8662f96933a20e0a8c713191c9e58b2a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if value is odd.  <a href="math_8h.html#a8662f96933a20e0a8c713191c9e58b2a">More...</a><br /></td></tr>
+<tr class="separator:a8662f96933a20e0a8c713191c9e58b2a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae3e2a6429953e9e0156d0e73b4ae7371"><td class="memTemplParams" colspan="2">template&lt;std::integral T&gt; </td></tr>
+<tr class="memitem:ae3e2a6429953e9e0156d0e73b4ae7371"><td class="memTemplItemLeft" align="right" valign="top">constexpr bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="math_8h.html#ae3e2a6429953e9e0156d0e73b4ae7371">qx::is_even</a> (T val)</td></tr>
+<tr class="memdesc:ae3e2a6429953e9e0156d0e73b4ae7371"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if value is even.  <a href="math_8h.html#ae3e2a6429953e9e0156d0e73b4ae7371">More...</a><br /></td></tr>
+<tr class="separator:ae3e2a6429953e9e0156d0e73b4ae7371"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Math functions. </p>
@@ -363,6 +371,106 @@ template&lt;typename T &gt; </div>
 </dl>
 
 <p class="definition">Definition at line <a class="el" href="math_8h_source.html#l00091">91</a> of file <a class="el" href="math_8h_source.html">math.h</a>.</p>
+
+</div>
+</div>
+<a id="ae3e2a6429953e9e0156d0e73b4ae7371"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae3e2a6429953e9e0156d0e73b4ae7371">&#9670;&nbsp;</a></span>is_even()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;std::integral T&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr bool qx::is_even </td>
+          <td>(</td>
+          <td class="paramtype">T&#160;</td>
+          <td class="paramname"><em>val</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Check if value is even. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>- integral type </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">val</td><td>- value </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Return values</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">-</td><td>true if value is even </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="math_8h_source.html#l00135">135</a> of file <a class="el" href="math_8h_source.html">math.h</a>.</p>
+
+</div>
+</div>
+<a id="a8662f96933a20e0a8c713191c9e58b2a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8662f96933a20e0a8c713191c9e58b2a">&#9670;&nbsp;</a></span>is_odd()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;std::integral T&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr bool qx::is_odd </td>
+          <td>(</td>
+          <td class="paramtype">T&#160;</td>
+          <td class="paramname"><em>val</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Check if value is odd. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>- integral type </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">val</td><td>- value </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Return values</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">-</td><td>true if value is odd </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="math_8h_source.html#l00123">123</a> of file <a class="el" href="math_8h_source.html">math.h</a>.</p>
 
 </div>
 </div>
