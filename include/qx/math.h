@@ -113,4 +113,28 @@ constexpr bool epsilon_greater_equal(
     return left > right || epsilon_equal(left, right, eps);
 }
 
+/**
+    @brief  Check if value is odd
+    @tparam T   - integral type
+    @param  val - value
+    @retval     - true if value is odd
+**/
+template<std::integral T>
+constexpr bool is_odd(T val)
+{
+    return (val & 1) == 1;
+}
+
+/**
+    @brief  Check if value is even
+    @tparam T   - integral type
+    @param  val - value
+    @retval     - true if value is even
+**/
+template<std::integral T>
+constexpr bool is_even(T val)
+{
+    return (val & 1) == 0;
+}
+
 } // namespace qx
