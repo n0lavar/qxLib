@@ -206,6 +206,32 @@ constexpr void color::set_a_dec(int nValue) noexcept
     assign_a_checked(dec_to_float(nValue));
 }
 
+constexpr void color::darken(float fPercent) noexcept
+{
+    brighten(-fPercent);
+}
+
+constexpr void color::brighten(float fPercent) noexcept
+{
+    m_Color.x *= (100.f + fPercent) / 100.f;
+    m_Color.y *= (100.f + fPercent) / 100.f;
+    m_Color.z *= (100.f + fPercent) / 100.f;
+}
+
+constexpr color color::darken(const color& other, float fPercent) noexcept
+{
+    color ret = other;
+    ret.darken(fPercent);
+    return ret;
+}
+
+constexpr color color::brighten(const color& other, float fPercent) noexcept
+{
+    color ret = other;
+    ret.brighten(fPercent);
+    return ret;
+}
+
 constexpr color color::aqua(void) noexcept
 {
     return color(000, 255, 255);

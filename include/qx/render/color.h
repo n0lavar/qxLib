@@ -275,6 +275,36 @@ public:
     constexpr void set_a_dec(int nValue) noexcept;
 
     /**
+        @brief Make color darker 
+        @param fPercent - dark factor
+    **/
+    constexpr void darken(float fPercent) noexcept;
+
+    /**
+        @brief Make color brighter
+        @param fPercent - brighter factor
+    **/
+    constexpr void brighten(float fPercent) noexcept;
+
+    /**
+        @brief  Make darker color
+        @param  other    - original color
+        @param  fPercent - dark factor
+        @retval          - darker color
+    **/
+    constexpr static color darken(const color& other, float fPercent) noexcept;
+
+    /**
+        @brief  Make brighter color
+        @param  other    - original color
+        @param  fPercent - brighter factor
+        @retval          - brighter color
+    **/
+    constexpr static color brighten(
+        const color& other,
+        float        fPercent) noexcept;
+
+    /**
         @brief  Get aqua color
         @retval - aqua color
     **/
