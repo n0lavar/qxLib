@@ -64,6 +64,21 @@
     }
 
 /**
+    @def   QX_PROPERTY
+    @brief A set of data member, getter and setter
+    @param type - data type
+    @param name - data name
+    @param ...  - data default value
+**/
+#define QX_PROPERTY(type, name, ...) \
+public:                              \
+    QX_GETTER(type, name);           \
+    QX_SETTER(type, name);           \
+                                     \
+private:                             \
+    type m_##name = type(__VA_ARGS__);
+
+/**
     @def   QX_LINE_NAME
     @brief Do magic! Creates a unique name using the line number
     @param prefix - name prefix
