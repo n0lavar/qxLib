@@ -96,9 +96,12 @@ using&#160;</td><td class="memItemRight" valign="bottom"><b>difference_type</b> 
 <tr class="memitem:ad56d2895685feab94f01c5d2fc95d0dd"><td class="memItemLeft" align="right" valign="top"><a id="ad56d2895685feab94f01c5d2fc95d0dd"></a>
 using&#160;</td><td class="memItemRight" valign="bottom"><b>size_type</b> = typename C::size_type</td></tr>
 <tr class="separator:ad56d2895685feab94f01c5d2fc95d0dd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a80e673e228024eab6546679ca8dbf8b3"><td class="memItemLeft" align="right" valign="top"><a id="a80e673e228024eab6546679ca8dbf8b3"></a>
-using&#160;</td><td class="memItemRight" valign="bottom"><b>iterator_category</b> = std::random_access_iterator_tag</td></tr>
-<tr class="separator:a80e673e228024eab6546679ca8dbf8b3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a36beb215c70182b5a3d7fd356aab7dbc"><td class="memItemLeft" align="right" valign="top"><a id="a36beb215c70182b5a3d7fd356aab7dbc"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><b>iterator_category</b> = std::contiguous_iterator_tag</td></tr>
+<tr class="separator:a36beb215c70182b5a3d7fd356aab7dbc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac4406af0bfcac1f4a8d705f6d8178f35"><td class="memItemLeft" align="right" valign="top"><a id="ac4406af0bfcac1f4a8d705f6d8178f35"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><b>iterator_concept</b> = std::contiguous_iterator_tag</td></tr>
+<tr class="separator:ac4406af0bfcac1f4a8d705f6d8178f35"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
@@ -108,15 +111,15 @@ constexpr&#160;</td><td class="memItemRight" valign="bottom"><b>const_iterator</
 <tr class="memitem:aaa006ca4a616e40f0686016eaa4ed272"><td class="memItemLeft" align="right" valign="top"><a id="aaa006ca4a616e40f0686016eaa4ed272"></a>
 constexpr&#160;</td><td class="memItemRight" valign="bottom"><b>const_iterator</b> (const <a class="el" href="classqx_1_1iterator.html">iterator</a>&lt; C &gt; &amp;it) noexcept</td></tr>
 <tr class="separator:aaa006ca4a616e40f0686016eaa4ed272"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab0596e0ab1d7e0922b324b460cec2ca2"><td class="memItemLeft" align="right" valign="top"><a id="ab0596e0ab1d7e0922b324b460cec2ca2"></a>
-constexpr reference&#160;</td><td class="memItemRight" valign="bottom"><b>operator*</b> (void) noexcept</td></tr>
-<tr class="separator:ab0596e0ab1d7e0922b324b460cec2ca2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a44c3edbe4abdce0b65be639ee008d2d8"><td class="memItemLeft" align="right" valign="top"><a id="a44c3edbe4abdce0b65be639ee008d2d8"></a>
-constexpr pointer&#160;</td><td class="memItemRight" valign="bottom"><b>operator-&gt;</b> (void) noexcept</td></tr>
-<tr class="separator:a44c3edbe4abdce0b65be639ee008d2d8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4956efa55d2f44b0cacaa905d2504fc2"><td class="memItemLeft" align="right" valign="top"><a id="a4956efa55d2f44b0cacaa905d2504fc2"></a>
-constexpr reference&#160;</td><td class="memItemRight" valign="bottom"><b>operator[]</b> (size_type m) noexcept</td></tr>
-<tr class="separator:a4956efa55d2f44b0cacaa905d2504fc2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abac96c18c4a17922210347931e61b6db"><td class="memItemLeft" align="right" valign="top"><a id="abac96c18c4a17922210347931e61b6db"></a>
+constexpr reference&#160;</td><td class="memItemRight" valign="bottom"><b>operator*</b> (void) const noexcept</td></tr>
+<tr class="separator:abac96c18c4a17922210347931e61b6db"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8e4df908c9beb5e1423537f784b48fb1"><td class="memItemLeft" align="right" valign="top"><a id="a8e4df908c9beb5e1423537f784b48fb1"></a>
+constexpr pointer&#160;</td><td class="memItemRight" valign="bottom"><b>operator-&gt;</b> (void) const noexcept</td></tr>
+<tr class="separator:a8e4df908c9beb5e1423537f784b48fb1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2cee7ac08fe4b32c3e5e949caf7297c4"><td class="memItemLeft" align="right" valign="top"><a id="a2cee7ac08fe4b32c3e5e949caf7297c4"></a>
+constexpr reference&#160;</td><td class="memItemRight" valign="bottom"><b>operator[]</b> (size_type m) const noexcept</td></tr>
+<tr class="separator:a2cee7ac08fe4b32c3e5e949caf7297c4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8acb0060dafd384aeb689638d6672f03"><td class="memItemLeft" align="right" valign="top"><a id="a8acb0060dafd384aeb689638d6672f03"></a>
 constexpr <a class="el" href="classqx_1_1const__iterator.html">const_iterator</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>operator++</b> (void) noexcept</td></tr>
 <tr class="separator:a8acb0060dafd384aeb689638d6672f03"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -144,18 +147,18 @@ constexpr <a class="el" href="classqx_1_1const__iterator.html">const_iterator</a
 <tr class="memitem:a42531ed5148774c4f67181a97654e896"><td class="memItemLeft" align="right" valign="top"><a id="a42531ed5148774c4f67181a97654e896"></a>
 constexpr difference_type&#160;</td><td class="memItemRight" valign="bottom"><b>operator-</b> (<a class="el" href="classqx_1_1const__iterator.html">const_iterator</a> const &amp;r) const noexcept</td></tr>
 <tr class="separator:a42531ed5148774c4f67181a97654e896"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac6c5c605af9ad35e61262239a19234d6"><td class="memItemLeft" align="right" valign="top"><a id="ac6c5c605af9ad35e61262239a19234d6"></a>
-constexpr bool&#160;</td><td class="memItemRight" valign="bottom"><b>operator&lt;</b> (<a class="el" href="classqx_1_1const__iterator.html">const_iterator</a> const &amp;r) const noexcept</td></tr>
-<tr class="separator:ac6c5c605af9ad35e61262239a19234d6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a959201ff711a9519c25be44b05c493e4"><td class="memItemLeft" align="right" valign="top"><a id="a959201ff711a9519c25be44b05c493e4"></a>
-constexpr bool&#160;</td><td class="memItemRight" valign="bottom"><b>operator&lt;=</b> (<a class="el" href="classqx_1_1const__iterator.html">const_iterator</a> const &amp;r) const noexcept</td></tr>
-<tr class="separator:a959201ff711a9519c25be44b05c493e4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4e4a21719b7b28bb0c6eb8eb2f27e0c6"><td class="memItemLeft" align="right" valign="top"><a id="a4e4a21719b7b28bb0c6eb8eb2f27e0c6"></a>
-constexpr bool&#160;</td><td class="memItemRight" valign="bottom"><b>operator&gt;</b> (<a class="el" href="classqx_1_1const__iterator.html">const_iterator</a> const &amp;r) const noexcept</td></tr>
-<tr class="separator:a4e4a21719b7b28bb0c6eb8eb2f27e0c6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abe8e2aa9c43e61006b417b8833bf9b82"><td class="memItemLeft" align="right" valign="top"><a id="abe8e2aa9c43e61006b417b8833bf9b82"></a>
-constexpr bool&#160;</td><td class="memItemRight" valign="bottom"><b>operator&gt;=</b> (<a class="el" href="classqx_1_1const__iterator.html">const_iterator</a> const &amp;r) const noexcept</td></tr>
-<tr class="separator:abe8e2aa9c43e61006b417b8833bf9b82"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a08e24a1132fd7a978c78618db96a3aa4"><td class="memItemLeft" align="right" valign="top"><a id="a08e24a1132fd7a978c78618db96a3aa4"></a>
+constexpr bool&#160;</td><td class="memItemRight" valign="bottom"><b>operator&lt;</b> (const <a class="el" href="classqx_1_1const__iterator.html">const_iterator</a> &amp;r) const noexcept</td></tr>
+<tr class="separator:a08e24a1132fd7a978c78618db96a3aa4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af19984b3c11b53a2b4127b8b0b318e33"><td class="memItemLeft" align="right" valign="top"><a id="af19984b3c11b53a2b4127b8b0b318e33"></a>
+constexpr bool&#160;</td><td class="memItemRight" valign="bottom"><b>operator&lt;=</b> (const <a class="el" href="classqx_1_1const__iterator.html">const_iterator</a> &amp;r) const noexcept</td></tr>
+<tr class="separator:af19984b3c11b53a2b4127b8b0b318e33"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a651c41a35ed85caeb9c7bec02b328e6b"><td class="memItemLeft" align="right" valign="top"><a id="a651c41a35ed85caeb9c7bec02b328e6b"></a>
+constexpr bool&#160;</td><td class="memItemRight" valign="bottom"><b>operator&gt;</b> (const <a class="el" href="classqx_1_1const__iterator.html">const_iterator</a> &amp;r) const noexcept</td></tr>
+<tr class="separator:a651c41a35ed85caeb9c7bec02b328e6b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac3fb88d1397f20267f13ff240d894c92"><td class="memItemLeft" align="right" valign="top"><a id="ac3fb88d1397f20267f13ff240d894c92"></a>
+constexpr bool&#160;</td><td class="memItemRight" valign="bottom"><b>operator&gt;=</b> (const <a class="el" href="classqx_1_1const__iterator.html">const_iterator</a> &amp;r) const noexcept</td></tr>
+<tr class="separator:ac3fb88d1397f20267f13ff240d894c92"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afd5cfee621f5ccf3b058aa7fed7a3dc3"><td class="memItemLeft" align="right" valign="top"><a id="afd5cfee621f5ccf3b058aa7fed7a3dc3"></a>
 constexpr bool&#160;</td><td class="memItemRight" valign="bottom"><b>operator!=</b> (const <a class="el" href="classqx_1_1const__iterator.html">const_iterator</a> &amp;r) const noexcept</td></tr>
 <tr class="separator:afd5cfee621f5ccf3b058aa7fed7a3dc3"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -180,7 +183,7 @@ class qx::const_iterator&lt; C &gt;</h3>
 <dl class="section author"><dt>Author</dt><dd>Khrapov </dd></dl>
 <dl class="section date"><dt>Date</dt><dd>27.07.2019 </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="iterator_8h_source.html#l00155">155</a> of file <a class="el" href="iterator_8h_source.html">iterator.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="iterator_8h_source.html#l00164">164</a> of file <a class="el" href="iterator_8h_source.html">iterator.h</a>.</p>
 </div><hr/>The documentation for this class was generated from the following file:<ul>
 <li>include/qx/patterns/<a class="el" href="iterator_8h_source.html">iterator.h</a></li>
 </ul>

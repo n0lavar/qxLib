@@ -96,9 +96,12 @@ using&#160;</td><td class="memItemRight" valign="bottom"><b>difference_type</b> 
 <tr class="memitem:acb4257366c06ad13b3b5fb4145f9d4a1"><td class="memItemLeft" align="right" valign="top"><a id="acb4257366c06ad13b3b5fb4145f9d4a1"></a>
 using&#160;</td><td class="memItemRight" valign="bottom"><b>size_type</b> = typename C::size_type</td></tr>
 <tr class="separator:acb4257366c06ad13b3b5fb4145f9d4a1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aded5e24ffcc6240a838a275cb8dd94d5"><td class="memItemLeft" align="right" valign="top"><a id="aded5e24ffcc6240a838a275cb8dd94d5"></a>
-using&#160;</td><td class="memItemRight" valign="bottom"><b>iterator_category</b> = std::random_access_iterator_tag</td></tr>
-<tr class="separator:aded5e24ffcc6240a838a275cb8dd94d5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae0efe24ac4b47a3768737d3eaeb99f56"><td class="memItemLeft" align="right" valign="top"><a id="ae0efe24ac4b47a3768737d3eaeb99f56"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><b>iterator_category</b> = std::contiguous_iterator_tag</td></tr>
+<tr class="separator:ae0efe24ac4b47a3768737d3eaeb99f56"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6209ae3297876d174ac3003fb13a7ee5"><td class="memItemLeft" align="right" valign="top"><a id="a6209ae3297876d174ac3003fb13a7ee5"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><b>iterator_concept</b> = std::contiguous_iterator_tag</td></tr>
+<tr class="separator:a6209ae3297876d174ac3003fb13a7ee5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
@@ -108,15 +111,15 @@ constexpr&#160;</td><td class="memItemRight" valign="bottom"><b>const_reverse_it
 <tr class="memitem:a69be94919eb9714363a7f9d0e8ced6b9"><td class="memItemLeft" align="right" valign="top"><a id="a69be94919eb9714363a7f9d0e8ced6b9"></a>
 constexpr&#160;</td><td class="memItemRight" valign="bottom"><b>const_reverse_iterator</b> (const <a class="el" href="classqx_1_1reverse__iterator.html">reverse_iterator</a>&lt; C &gt; &amp;it) noexcept</td></tr>
 <tr class="separator:a69be94919eb9714363a7f9d0e8ced6b9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae0c1546a30d3e295df577ba362bb632d"><td class="memItemLeft" align="right" valign="top"><a id="ae0c1546a30d3e295df577ba362bb632d"></a>
-constexpr reference&#160;</td><td class="memItemRight" valign="bottom"><b>operator*</b> (void) noexcept</td></tr>
-<tr class="separator:ae0c1546a30d3e295df577ba362bb632d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a139cfcbec8235590ede0adc9d86dd2d5"><td class="memItemLeft" align="right" valign="top"><a id="a139cfcbec8235590ede0adc9d86dd2d5"></a>
-constexpr pointer&#160;</td><td class="memItemRight" valign="bottom"><b>operator-&gt;</b> (void) noexcept</td></tr>
-<tr class="separator:a139cfcbec8235590ede0adc9d86dd2d5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab92792e9ef6698446f327414c55c03db"><td class="memItemLeft" align="right" valign="top"><a id="ab92792e9ef6698446f327414c55c03db"></a>
-constexpr reference&#160;</td><td class="memItemRight" valign="bottom"><b>operator[]</b> (size_type m) noexcept</td></tr>
-<tr class="separator:ab92792e9ef6698446f327414c55c03db"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aff503adfcdf0c2790bba3b651b41adbf"><td class="memItemLeft" align="right" valign="top"><a id="aff503adfcdf0c2790bba3b651b41adbf"></a>
+constexpr reference&#160;</td><td class="memItemRight" valign="bottom"><b>operator*</b> (void) const noexcept</td></tr>
+<tr class="separator:aff503adfcdf0c2790bba3b651b41adbf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a69f6b66ab3c338493db32b3f32759548"><td class="memItemLeft" align="right" valign="top"><a id="a69f6b66ab3c338493db32b3f32759548"></a>
+constexpr pointer&#160;</td><td class="memItemRight" valign="bottom"><b>operator-&gt;</b> (void) const noexcept</td></tr>
+<tr class="separator:a69f6b66ab3c338493db32b3f32759548"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3c6106391c442666e6f8b2d7e730db49"><td class="memItemLeft" align="right" valign="top"><a id="a3c6106391c442666e6f8b2d7e730db49"></a>
+constexpr reference&#160;</td><td class="memItemRight" valign="bottom"><b>operator[]</b> (size_type m) const noexcept</td></tr>
+<tr class="separator:a3c6106391c442666e6f8b2d7e730db49"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a347495b12db1523034cac2f08268e431"><td class="memItemLeft" align="right" valign="top"><a id="a347495b12db1523034cac2f08268e431"></a>
 constexpr <a class="el" href="classqx_1_1const__reverse__iterator.html">const_reverse_iterator</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>operator++</b> (void) noexcept</td></tr>
 <tr class="separator:a347495b12db1523034cac2f08268e431"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -141,21 +144,21 @@ constexpr <a class="el" href="classqx_1_1const__reverse__iterator.html">const_re
 <tr class="memitem:a9e079cba4270c0f73581879707c6b511"><td class="memItemLeft" align="right" valign="top"><a id="a9e079cba4270c0f73581879707c6b511"></a>
 constexpr <a class="el" href="classqx_1_1const__reverse__iterator.html">const_reverse_iterator</a>&#160;</td><td class="memItemRight" valign="bottom"><b>operator-</b> (size_type n) const noexcept</td></tr>
 <tr class="separator:a9e079cba4270c0f73581879707c6b511"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac245bea7d6ce7772c95e7913aa6974cd"><td class="memItemLeft" align="right" valign="top"><a id="ac245bea7d6ce7772c95e7913aa6974cd"></a>
-constexpr difference_type&#160;</td><td class="memItemRight" valign="bottom"><b>operator-</b> (<a class="el" href="classqx_1_1const__reverse__iterator.html">const_reverse_iterator</a> const &amp;r) const noexcept</td></tr>
-<tr class="separator:ac245bea7d6ce7772c95e7913aa6974cd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a051cca46b9de5dc3544f5cbce965fe91"><td class="memItemLeft" align="right" valign="top"><a id="a051cca46b9de5dc3544f5cbce965fe91"></a>
-constexpr bool&#160;</td><td class="memItemRight" valign="bottom"><b>operator&lt;</b> (<a class="el" href="classqx_1_1const__reverse__iterator.html">const_reverse_iterator</a> const &amp;r) const noexcept</td></tr>
-<tr class="separator:a051cca46b9de5dc3544f5cbce965fe91"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7851885d248fee4d3b200b88a455db9a"><td class="memItemLeft" align="right" valign="top"><a id="a7851885d248fee4d3b200b88a455db9a"></a>
-constexpr bool&#160;</td><td class="memItemRight" valign="bottom"><b>operator&lt;=</b> (<a class="el" href="classqx_1_1const__reverse__iterator.html">const_reverse_iterator</a> const &amp;r) const noexcept</td></tr>
-<tr class="separator:a7851885d248fee4d3b200b88a455db9a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7efe35ebc971ad08a5fe637d72990ea8"><td class="memItemLeft" align="right" valign="top"><a id="a7efe35ebc971ad08a5fe637d72990ea8"></a>
-constexpr bool&#160;</td><td class="memItemRight" valign="bottom"><b>operator&gt;</b> (<a class="el" href="classqx_1_1const__reverse__iterator.html">const_reverse_iterator</a> const &amp;r) const noexcept</td></tr>
-<tr class="separator:a7efe35ebc971ad08a5fe637d72990ea8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a18fd5ef240b3eaa61617a61c20741e1f"><td class="memItemLeft" align="right" valign="top"><a id="a18fd5ef240b3eaa61617a61c20741e1f"></a>
-constexpr bool&#160;</td><td class="memItemRight" valign="bottom"><b>operator&gt;=</b> (<a class="el" href="classqx_1_1const__reverse__iterator.html">const_reverse_iterator</a> const &amp;r) const noexcept</td></tr>
-<tr class="separator:a18fd5ef240b3eaa61617a61c20741e1f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab28bf4c888644865d3a0e86cbe8ea999"><td class="memItemLeft" align="right" valign="top"><a id="ab28bf4c888644865d3a0e86cbe8ea999"></a>
+constexpr difference_type&#160;</td><td class="memItemRight" valign="bottom"><b>operator-</b> (const <a class="el" href="classqx_1_1const__reverse__iterator.html">const_reverse_iterator</a> &amp;r) const noexcept</td></tr>
+<tr class="separator:ab28bf4c888644865d3a0e86cbe8ea999"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a32fa5b19b48dc9015caf174583d78bb8"><td class="memItemLeft" align="right" valign="top"><a id="a32fa5b19b48dc9015caf174583d78bb8"></a>
+constexpr bool&#160;</td><td class="memItemRight" valign="bottom"><b>operator&lt;</b> (const <a class="el" href="classqx_1_1const__reverse__iterator.html">const_reverse_iterator</a> &amp;r) const noexcept</td></tr>
+<tr class="separator:a32fa5b19b48dc9015caf174583d78bb8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab9b0b87832aacb9219953346e426f057"><td class="memItemLeft" align="right" valign="top"><a id="ab9b0b87832aacb9219953346e426f057"></a>
+constexpr bool&#160;</td><td class="memItemRight" valign="bottom"><b>operator&lt;=</b> (const <a class="el" href="classqx_1_1const__reverse__iterator.html">const_reverse_iterator</a> &amp;r) const noexcept</td></tr>
+<tr class="separator:ab9b0b87832aacb9219953346e426f057"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6ba01372655eea37172987f185bb7707"><td class="memItemLeft" align="right" valign="top"><a id="a6ba01372655eea37172987f185bb7707"></a>
+constexpr bool&#160;</td><td class="memItemRight" valign="bottom"><b>operator&gt;</b> (const <a class="el" href="classqx_1_1const__reverse__iterator.html">const_reverse_iterator</a> &amp;r) const noexcept</td></tr>
+<tr class="separator:a6ba01372655eea37172987f185bb7707"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a774ddfabcfe1d19abd85a2f5a43ad5bc"><td class="memItemLeft" align="right" valign="top"><a id="a774ddfabcfe1d19abd85a2f5a43ad5bc"></a>
+constexpr bool&#160;</td><td class="memItemRight" valign="bottom"><b>operator&gt;=</b> (const <a class="el" href="classqx_1_1const__reverse__iterator.html">const_reverse_iterator</a> &amp;r) const noexcept</td></tr>
+<tr class="separator:a774ddfabcfe1d19abd85a2f5a43ad5bc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a55b329d31f77a7e444e183aac1b1a86b"><td class="memItemLeft" align="right" valign="top"><a id="a55b329d31f77a7e444e183aac1b1a86b"></a>
 constexpr bool&#160;</td><td class="memItemRight" valign="bottom"><b>operator!=</b> (const <a class="el" href="classqx_1_1const__reverse__iterator.html">const_reverse_iterator</a> &amp;r) const noexcept</td></tr>
 <tr class="separator:a55b329d31f77a7e444e183aac1b1a86b"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -180,7 +183,7 @@ class qx::const_reverse_iterator&lt; C &gt;</h3>
 <dl class="section author"><dt>Author</dt><dd>Khrapov </dd></dl>
 <dl class="section date"><dt>Date</dt><dd>19.03.2020 </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="iterator_8h_source.html#l00411">411</a> of file <a class="el" href="iterator_8h_source.html">iterator.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="iterator_8h_source.html#l00437">437</a> of file <a class="el" href="iterator_8h_source.html">iterator.h</a>.</p>
 </div><hr/>The documentation for this class was generated from the following file:<ul>
 <li>include/qx/patterns/<a class="el" href="iterator_8h_source.html">iterator.h</a></li>
 </ul>
