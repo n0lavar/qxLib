@@ -95,11 +95,11 @@ $(function() {
 <div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;};</div>
 <div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160; </div>
 <div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="line"><a name="l00034"></a><span class="lineno"><a class="line" href="structqx_1_1is__random__access__iterator_3_01_t_00_01typename_01std_1_1enable__if__t_3_01is__iteda1f3f9e80d2d8b05b972d170abf6f51.html">   34</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structqx_1_1is__random__access__iterator.html">is_random_access_iterator</a>&lt;</div>
+<div class="line"><a name="l00034"></a><span class="lineno"><a class="line" href="structqx_1_1is__random__access__iterator_3_01_t_00_01typename_01std_1_1enable__if__t_3_01is__itebb6b1aac5d4b872a764409b35e55889d.html">   34</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structqx_1_1is__random__access__iterator.html">is_random_access_iterator</a>&lt;</div>
 <div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    T,</div>
 <div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    typename std::enable_if_t&lt;</div>
 <div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;        is_iterator&lt;</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;            T&gt; &amp;&amp; std::is_same_v&lt;typename T::iterator_category, std::random_access_iterator_tag&gt;&gt;&gt;</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;            T&gt; &amp;&amp; std::derived_from&lt;typename T::iterator_category, std::random_access_iterator_tag&gt;&gt;&gt;</div>
 <div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;{</div>
 <div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    <span class="keyword">static</span> constexpr <span class="keywordtype">bool</span> value = <span class="keyword">true</span>;</div>
 <div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;};</div>
