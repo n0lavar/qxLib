@@ -35,7 +35,7 @@ struct is_random_access_iterator<
     T,
     typename std::enable_if_t<
         is_iterator<
-            T> && std::is_same_v<typename T::iterator_category, std::random_access_iterator_tag>>>
+            T> && std::derived_from<typename T::iterator_category, std::random_access_iterator_tag>>>
 {
     static constexpr bool value = true;
 };
