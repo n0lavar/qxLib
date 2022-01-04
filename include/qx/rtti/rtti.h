@@ -112,6 +112,8 @@ public:
         return get_class_id_static();
     }
 
+    auto operator<=>(const rtti_root&) const = default;
+
 protected:
     virtual ~rtti_root() noexcept = default;
 
