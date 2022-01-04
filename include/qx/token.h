@@ -34,6 +34,11 @@ public:
 
     /**
         @brief token object constructor
+    **/
+    token(void) noexcept = default;
+
+    /**
+        @brief token object constructor
         @param _destroyer - functor that will be called when object will be destroyed
     **/
     token(destroyer _destroyer) : m_Destroyer(std::move(_destroyer))
