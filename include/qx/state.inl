@@ -10,34 +10,65 @@
 namespace qx
 {
 
-template<class Traits>
-inline basic_state<Traits>::basic_state(const type& value) : m_State(value)
+template<class T>
+inline state<T>::state(const T& value) noexcept : m_State(value)
 {
 }
 
-template<class Traits>
-inline basic_state<Traits>& basic_state<Traits>::operator=(const type& value)
+template<class T>
+inline state<T>::state(const T& value, const T& defaultValue) noexcept
+    : m_State(value)
+    , m_DefaultValue(defaultValue)
+{
+}
+
+template<class T>
+inline state<T>& state<T>::operator=(const T& value) noexcept
 {
     m_State = value;
     return *this;
 }
 
-template<class Traits>
-inline bool basic_state<Traits>::operator==(const type& value) const
+template<class T>
+inline bool state<T>::operator==(const T& value) const noexcept
 {
     return m_State == value;
 }
 
-template<class Traits>
-inline void basic_state<Traits>::reset(void)
+template<class T>
+inline T* state<T>::operator->() noexcept
 {
-    m_State = default_value;
+    return &m_State;
 }
 
-template<class Traits>
-inline bool basic_state<Traits>::is_default(void) const
+template<class T>
+inline const T* state<T>::operator->() const noexcept
 {
-    return m_State == default_value;
+    return &m_State;
+}
+
+template<class T>
+inline T& state<T>::operator*() noexcept
+{
+    return m_State;
+}
+
+template<class T>
+inline const T& state<T>::operator*() const noexcept
+{
+    return m_State;
+}
+
+template<class T>
+inline void state<T>::reset(void) noexcept
+{
+    m_State = m_DefaultValue;
+}
+
+template<class T>
+inline bool state<T>::is_default(void) const noexcept
+{
+    return m_State == m_DefaultValue;
 }
 
 } // namespace qx
@@ -45,12 +76,12 @@ inline bool basic_state<Traits>::is_default(void) const
 namespace std
 {
 
-template<class Traits>
-struct hash<qx::basic_state<Traits>>
+template<class T>
+struct hash<qx::state<T>>
 {
-    size_t operator()(const qx::basic_state<Traits>& state) const noexcept
+    size_t operator()(const qx::state<T>& state) const noexcept
     {
-        return std::hash<typename Traits::type>()(state.m_State);
+        return std::hash<T>()(state.m_State);
     }
 };
 

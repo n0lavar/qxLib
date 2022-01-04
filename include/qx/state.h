@@ -11,90 +11,105 @@
 
 #include <qx/useful_macros.h>
 
-#include <limits>
-
 namespace qx
 {
 
 /**
-    @struct state_default_traits
-    @date   27.04.2021
-**/
-struct state_default_traits
-{
-    using type                          = int;
-    static constexpr type default_value = std::numeric_limits<int>::max();
-};
 
-/**
-
-    @class   basic_state
+    @class   state
     @brief   State abstraction class
     @details State is an entity that can be set to its default value
-    @tparam  Traits - state traits type \see qx::state_default_traits
+    @tparam  T - state value type
     @author  Khrapov
     @date    27.04.2021
     
 **/
-template<class Traits>
-class basic_state
+template<class T>
+class state
 {
-    friend struct std::hash<basic_state<Traits>>;
+    friend struct std::hash<state<T>>;
 
 public:
-    using type                          = typename Traits::type;
-    static constexpr type default_value = Traits::default_value;
-
-    QX_COPYMOVABLE(basic_state);
+    QX_COPYMOVABLE(state<T>);
 
     /**
         @brief basic_state object constructor
     **/
-    basic_state(void) = default;
+    state(void) noexcept = default;
 
     /**
-        @brief basic_state object constructor
+        @brief state object constructor
         @param value - start value
     **/
-    basic_state(const type& value);
+    state(const T& value) noexcept;
+
+    /**
+        @brief basic_state object constructor
+        @param value        - start value
+        @param defaultValue - default value
+    **/
+    state(const T& value, const T& defaultValue) noexcept;
 
     /**
         @brief  operator=
         @param  value - new state value
         @retval       - this object reference
     **/
-    basic_state& operator=(const type& value);
+    state& operator=(const T& value) noexcept;
 
     /**
         @brief  operator==
         @param   - other state
         @retval  - true, if objects are equal
     **/
-    bool operator==(const basic_state&) const = default;
+    bool operator==(const state&) const noexcept = default;
 
     /**
         @brief  operator==
         @param  value - state value
         @retval       - true, if objects are equal
     **/
-    bool operator==(const type& value) const;
+    bool operator==(const T& value) const noexcept;
+
+    /**
+        @brief  operator->
+        @retval - state object pointer
+    **/
+    T* operator->(void) noexcept;
+
+    /**
+        @brief  operator->
+        @retval - state object pointer
+    **/
+    const T* operator->(void) const noexcept;
+
+    /**
+        @brief  operator*
+        @retval - state object reference
+    **/
+    T& operator*(void) noexcept;
+
+    /**
+        @brief  operator*
+        @retval - state object reference
+    **/
+    const T& operator*(void) const noexcept;
 
     /**
         @brief Reset current state to its default value
     **/
-    void reset(void);
+    void reset(void) noexcept;
 
     /**
         @brief  Is current state default
         @retval - true if default
     **/
-    bool is_default(void) const;
+    bool is_default(void) const noexcept;
 
 private:
-    type m_State = default_value;
+    T m_State;
+    T m_DefaultValue;
 };
-
-using state = basic_state<state_default_traits>;
 
 } // namespace qx
 

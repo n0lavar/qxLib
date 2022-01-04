@@ -16,39 +16,41 @@
 
 #include <unordered_map>
 
+using TState = qx::state<int>;
+
 TEST(state, construct)
 {
-    qx::state state1;
+    TState state1;
     EXPECT_TRUE(state1.is_default());
 
-    qx::state state2(state1);
+    TState state2(state1);
     EXPECT_TRUE(state2.is_default());
 
-    qx::state state3(std::move(state2));
+    TState state3(std::move(state2));
     EXPECT_TRUE(state3.is_default());
 
-    qx::state state4(1);
+    TState state4(1);
     EXPECT_FALSE(state4.is_default());
 }
 
 TEST(state, assign)
 {
-    qx::state state1;
-    qx::state state2 = state1;
+    TState state1 = TState();
+    TState state2 = state1;
     EXPECT_TRUE(state2.is_default());
 
-    qx::state state3 = std::move(state2);
+    TState state3 = std::move(state2);
     EXPECT_TRUE(state3.is_default());
 
-    qx::state state4 = 1;
+    TState state4 = 1;
     EXPECT_FALSE(state4.is_default());
 }
 
 TEST(state, equal)
 {
-    qx::state state11(1);
-    qx::state state12(1);
-    qx::state state2(2);
+    TState state11(1);
+    TState state12(1);
+    TState state2(2);
 
     EXPECT_EQ(state11, state12);
     EXPECT_NE(state11, state2);
@@ -61,7 +63,7 @@ TEST(state, equal)
 
 TEST(state, reset_is_default)
 {
-    qx::state state;
+    TState state;
     EXPECT_TRUE(state.is_default());
 
     state = 1;
@@ -73,7 +75,7 @@ TEST(state, reset_is_default)
 
 TEST(state, hash)
 {
-    std::unordered_map<qx::state, int> map;
+    std::unordered_map<TState, int> map;
 }
 
 #endif
