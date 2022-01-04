@@ -312,8 +312,6 @@ TEST_F(TestObserverClass, detaching_while_iterating)
     EXPECT_EQ(nums, std::vector<int>({ 1, 2, 3, 1, 2 }));
 }
 
-#if 0
-
 TEST_F(TestObserverClass, subject_destructing_auto_detaching)
 {
     TestObserver1 observer1;
@@ -333,11 +331,9 @@ TEST_F(TestObserverClass, subject_destructing_auto_detaching)
         EXPECT_TRUE(tokens.back());
     }
 
-    EXPECT_FALSE(*(tokens.end() - 1));
-    EXPECT_FALSE(*(tokens.end() - 2));
-    EXPECT_FALSE(*(tokens.end() - 3));
+    EXPECT_FALSE(**(tokens.end() - 1));
+    EXPECT_FALSE(**(tokens.end() - 2));
+    EXPECT_FALSE(**(tokens.end() - 3));
 }
-
-#endif
 
 #endif

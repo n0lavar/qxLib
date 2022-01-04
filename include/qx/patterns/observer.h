@@ -12,6 +12,7 @@
 #include <qx/useful_macros.h>
 
 #include <algorithm>
+#include <memory>
 #include <vector>
 
 namespace qx
@@ -19,9 +20,12 @@ namespace qx
 
 class base_subject;
 
+template<class TObserver>
+class subject;
+
 /**
 
-    @class   observer_token
+    @class   observer_token_data
     @brief   Tokens are used to automatically detach observer when the observer
              object is destroyed
     @details ~
@@ -29,33 +33,36 @@ class base_subject;
     @date    10.03.2021
 
 **/
-class observer_token
+class observer_token_data
 {
-    QX_NONCOPYABLE(observer_token);
+    QX_NONCOPYABLE(observer_token_data);
+
+    template<class>
+    friend class subject;
 
 public:
     /**
         @brief observer_token object constructor
     **/
-    observer_token(void) noexcept = default;
+    observer_token_data(void) noexcept = default;
 
     /**
         @brief observer_token object constructor
         @param pSubject  - corresponding subject pointer 
         @param pObserver - corresponding observer pointer 
     **/
-    observer_token(base_subject* pSubject, void* pObserver) noexcept;
+    observer_token_data(base_subject* pSubject, void* pObserver) noexcept;
 
     /**
         @brief observer_token object constructor
         @param other - other observer_token object rvalue ref
     **/
-    observer_token(observer_token&& other) noexcept;
+    observer_token_data(observer_token_data&& other) noexcept;
 
     /**
         @brief observer_token object destructor
     **/
-    ~observer_token(void) noexcept;
+    ~observer_token_data(void) noexcept;
 
     /**
         @brief   Reset observer_token
@@ -68,14 +75,14 @@ public:
         @param  other - other observer_token object rvalue ref
         @retval       - this object reference
     **/
-    observer_token& operator=(observer_token&& other) noexcept;
+    observer_token_data& operator=(observer_token_data&& other) noexcept;
 
     /**
         @brief  operator==
         @param  other - other observer_token object
         @retval       - true, if objects are equal
     **/
-    bool operator==(const observer_token& other) const noexcept;
+    bool operator==(const observer_token_data& other) const noexcept;
 
     /**
         @brief  operator bool
@@ -87,6 +94,8 @@ private:
     base_subject* m_pSubject  = nullptr;
     void*         m_pObserver = nullptr;
 };
+
+using observer_token = std::unique_ptr<observer_token_data>;
 
 /**
 
@@ -100,7 +109,7 @@ private:
 **/
 class base_subject
 {
-    friend observer_token;
+    friend observer_token_data;
 
 protected:
     /**
@@ -248,6 +257,11 @@ public:
     subject(void) = default;
 
     /**
+        @brief subject object destructor
+    **/
+    virtual ~subject(void) override;
+
+    /**
         @brief  Attach observer to this subject
         @param  pObserver - observer pointer 
         @retval           - observer_token for autodetaching observer from this subject 
@@ -350,8 +364,9 @@ private:
     void on_iterator_constructed(void) noexcept;
 
 private:
-    observers_container m_Observers;
-    size_t              m_nIterators = 0;
+    observers_container               m_Observers;
+    std::vector<observer_token_data*> m_Tokens;
+    size_t                            m_nIterators = 0;
 };
 
 } // namespace qx
