@@ -49,7 +49,7 @@ public:
         @param size - rect size
         @param pos  - upper left corner pos
     **/
-    constexpr rect(
+    constexpr explicit rect(
         vector_type size,
         vector_type pos = vector_type(value_type(0.f))) noexcept;
 
