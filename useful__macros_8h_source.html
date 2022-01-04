@@ -137,29 +137,29 @@ $(function() {
 <div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160; </div>
 <div class="line"><a name="l00129"></a><span class="lineno"><a class="line" href="useful__macros_8h.html#a8b36634eb91cfdc0b9d7ed59249f0853">  129</a></span>&#160;<span class="preprocessor">#define QX_SINGLE_ARGUMENT(...) __VA_ARGS__</span></div>
 <div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160; </div>
-<div class="line"><a name="l00136"></a><span class="lineno"><a class="line" href="useful__macros_8h.html#ad8b86e20bfd805bba4008aadca8c8e3d">  136</a></span>&#160;<span class="preprocessor">#define QX_COPYABLE(name)        \</span></div>
-<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;<span class="preprocessor">    name(const name&amp;) = default; \</span></div>
-<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;<span class="preprocessor">    name&amp; operator=(const name&amp;) = default;</span></div>
+<div class="line"><a name="l00136"></a><span class="lineno"><a class="line" href="useful__macros_8h.html#adc4000678f9d7f6b47d7c4183775f5e0">  136</a></span>&#160;<span class="preprocessor">#define QX_COPYABLE(...)                       \</span></div>
+<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;<span class="preprocessor">    __VA_ARGS__(const __VA_ARGS__&amp;) = default; \</span></div>
+<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;<span class="preprocessor">    __VA_ARGS__&amp; operator=(const __VA_ARGS__&amp;) = default;</span></div>
 <div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160; </div>
-<div class="line"><a name="l00145"></a><span class="lineno"><a class="line" href="useful__macros_8h.html#a142a312141cbb7a9f1d9f1fcdddcb927">  145</a></span>&#160;<span class="preprocessor">#define QX_MOVABLE(name)             \</span></div>
-<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;<span class="preprocessor">    name(name&amp;&amp;) noexcept = default; \</span></div>
-<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;<span class="preprocessor">    name&amp; operator=(name&amp;&amp;) noexcept = default;</span></div>
+<div class="line"><a name="l00145"></a><span class="lineno"><a class="line" href="useful__macros_8h.html#a44db208ac964aa941ca689ca7d2d0df6">  145</a></span>&#160;<span class="preprocessor">#define QX_MOVABLE(...)                            \</span></div>
+<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;<span class="preprocessor">    __VA_ARGS__(__VA_ARGS__&amp;&amp;) noexcept = default; \</span></div>
+<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;<span class="preprocessor">    __VA_ARGS__&amp; operator=(__VA_ARGS__&amp;&amp;) noexcept = default;</span></div>
 <div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160; </div>
-<div class="line"><a name="l00154"></a><span class="lineno"><a class="line" href="useful__macros_8h.html#ad1bc8c564ae320bdcd3fc6b1ea3bd995">  154</a></span>&#160;<span class="preprocessor">#define QX_COPYMOVABLE(name) \</span></div>
-<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;<span class="preprocessor">    QX_COPYABLE(name)        \</span></div>
-<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;<span class="preprocessor">    QX_MOVABLE(name)</span></div>
+<div class="line"><a name="l00154"></a><span class="lineno"><a class="line" href="useful__macros_8h.html#a86b0375689562540774b911ee9d574ff">  154</a></span>&#160;<span class="preprocessor">#define QX_COPYMOVABLE(...)  \</span></div>
+<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;<span class="preprocessor">    QX_COPYABLE(__VA_ARGS__) \</span></div>
+<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;<span class="preprocessor">    QX_MOVABLE(__VA_ARGS__)</span></div>
 <div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160; </div>
-<div class="line"><a name="l00163"></a><span class="lineno"><a class="line" href="useful__macros_8h.html#a69d34c8ba6c4f5f30a1920c2d5f3f9f0">  163</a></span>&#160;<span class="preprocessor">#define QX_NONCOPYABLE(name)    \</span></div>
-<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;<span class="preprocessor">    name(const name&amp;) = delete; \</span></div>
-<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;<span class="preprocessor">    name&amp; operator=(const name&amp;) = delete;</span></div>
+<div class="line"><a name="l00163"></a><span class="lineno"><a class="line" href="useful__macros_8h.html#aae938922af1b0f884bd82f43fb136cd0">  163</a></span>&#160;<span class="preprocessor">#define QX_NONCOPYABLE(...)                   \</span></div>
+<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;<span class="preprocessor">    __VA_ARGS__(const __VA_ARGS__&amp;) = delete; \</span></div>
+<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;<span class="preprocessor">    __VA_ARGS__&amp; operator=(const __VA_ARGS__&amp;) = delete;</span></div>
 <div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160; </div>
-<div class="line"><a name="l00172"></a><span class="lineno"><a class="line" href="useful__macros_8h.html#ad5b78a8066f84469dfc17a5a89777352">  172</a></span>&#160;<span class="preprocessor">#define QX_NONMOVABLE(name)         \</span></div>
-<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;<span class="preprocessor">    name(name&amp;&amp;) noexcept = delete; \</span></div>
-<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;<span class="preprocessor">    name&amp; operator=(name&amp;&amp;) noexcept = delete;</span></div>
+<div class="line"><a name="l00172"></a><span class="lineno"><a class="line" href="useful__macros_8h.html#a0693024fe8ef867ba958b76646cb22d0">  172</a></span>&#160;<span class="preprocessor">#define QX_NONMOVABLE(...)                        \</span></div>
+<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;<span class="preprocessor">    __VA_ARGS__(__VA_ARGS__&amp;&amp;) noexcept = delete; \</span></div>
+<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;<span class="preprocessor">    __VA_ARGS__&amp; operator=(__VA_ARGS__&amp;&amp;) noexcept = delete;</span></div>
 <div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160; </div>
-<div class="line"><a name="l00181"></a><span class="lineno"><a class="line" href="useful__macros_8h.html#ac64a4aef84b0bfb3af918690d62104c4">  181</a></span>&#160;<span class="preprocessor">#define QX_NONCOPYMOVABLE(name) \</span></div>
-<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;<span class="preprocessor">    QX_NONCOPYABLE(name)        \</span></div>
-<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;<span class="preprocessor">    QX_NONMOVABLE(name)</span></div>
+<div class="line"><a name="l00181"></a><span class="lineno"><a class="line" href="useful__macros_8h.html#a09c5ff42dcd9da4a9bbaaa75bb92f367">  181</a></span>&#160;<span class="preprocessor">#define QX_NONCOPYMOVABLE(...)  \</span></div>
+<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;<span class="preprocessor">    QX_NONCOPYABLE(__VA_ARGS__) \</span></div>
+<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;<span class="preprocessor">    QX_NONMOVABLE(__VA_ARGS__)</span></div>
 <div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160; </div>
 <div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160; </div>
 <div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;<span class="keyword">namespace </span>qx::detail</div>

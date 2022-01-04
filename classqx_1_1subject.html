@@ -119,7 +119,11 @@ Public Member Functions</h2></td></tr>
 &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1subject.html#ae8fcc6c58b27c6842ea2700538866657">subject</a> (void)=default</td></tr>
 <tr class="memdesc:ae8fcc6c58b27c6842ea2700538866657"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classqx_1_1base__subject.html" title="Base subject class.">base_subject</a> object constructor <br /></td></tr>
 <tr class="separator:ae8fcc6c58b27c6842ea2700538866657"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a34fce9cad9b0f3c45574049e2002f1c9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classqx_1_1observer__token.html">observer_token</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1subject.html#a34fce9cad9b0f3c45574049e2002f1c9">attach</a> (TObserver *pObserver) noexcept</td></tr>
+<tr class="memitem:a44f7364b6feb8b0a8e85dcd400922434"><td class="memItemLeft" align="right" valign="top"><a id="a44f7364b6feb8b0a8e85dcd400922434"></a>
+virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1subject.html#a44f7364b6feb8b0a8e85dcd400922434">~subject</a> (void) override</td></tr>
+<tr class="memdesc:a44f7364b6feb8b0a8e85dcd400922434"><td class="mdescLeft">&#160;</td><td class="mdescRight">subject object destructor <br /></td></tr>
+<tr class="separator:a44f7364b6feb8b0a8e85dcd400922434"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a34fce9cad9b0f3c45574049e2002f1c9"><td class="memItemLeft" align="right" valign="top">observer_token&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1subject.html#a34fce9cad9b0f3c45574049e2002f1c9">attach</a> (TObserver *pObserver) noexcept</td></tr>
 <tr class="memdesc:a34fce9cad9b0f3c45574049e2002f1c9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Attach observer to this subject.  <a href="classqx_1_1subject.html#a34fce9cad9b0f3c45574049e2002f1c9">More...</a><br /></td></tr>
 <tr class="separator:a34fce9cad9b0f3c45574049e2002f1c9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5c0dcf68c7fa5bb283257e9bdca7a132"><td class="memItemLeft" align="right" valign="top">iterator&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1subject.html#a5c0dcf68c7fa5bb283257e9bdca7a132">begin</a> (void)</td></tr>
@@ -184,7 +188,7 @@ class qx::subject&lt; TObserver &gt;</h3>
 <dl class="section author"><dt>Author</dt><dd>Khrapov </dd></dl>
 <dl class="section date"><dt>Date</dt><dd>6.03.2021 </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="observer_8h_source.html#l00130">130</a> of file <a class="el" href="observer_8h_source.html">observer.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="observer_8h_source.html#l00139">139</a> of file <a class="el" href="observer_8h_source.html">observer.h</a>.</p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="a34fce9cad9b0f3c45574049e2002f1c9"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a34fce9cad9b0f3c45574049e2002f1c9">&#9670;&nbsp;</a></span>attach()</h2>
@@ -198,7 +202,7 @@ template&lt;class TObserver &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classqx_1_1observer__token.html">observer_token</a> <a class="el" href="classqx_1_1subject.html">qx::subject</a>&lt; TObserver &gt;::attach </td>
+          <td class="memname">observer_token <a class="el" href="classqx_1_1subject.html">qx::subject</a>&lt; TObserver &gt;::attach </td>
           <td>(</td>
           <td class="paramtype">TObserver *&#160;</td>
           <td class="paramname"><em>pObserver</em></td><td>)</td>
@@ -221,12 +225,12 @@ template&lt;class TObserver &gt; </div>
 </dl>
 <dl class="retval"><dt>Return values</dt><dd>
   <table class="retval">
-    <tr><td class="paramname">-</td><td><a class="el" href="classqx_1_1observer__token.html" title="Tokens are used to automatically detach observer when the observer object is destroyed.">observer_token</a> for autodetaching observer from this subject </td></tr>
+    <tr><td class="paramname">-</td><td>observer_token for autodetaching observer from this subject </td></tr>
   </table>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="observer_8inl_source.html#l00163">163</a> of file <a class="el" href="observer_8inl_source.html">observer.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="observer_8inl_source.html#l00167">167</a> of file <a class="el" href="observer_8inl_source.html">observer.inl</a>.</p>
 
 </div>
 </div>
@@ -264,7 +268,7 @@ template&lt;class TObserver &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="observer_8inl_source.html#l00178">178</a> of file <a class="el" href="observer_8inl_source.html">observer.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="observer_8inl_source.html#l00184">184</a> of file <a class="el" href="observer_8inl_source.html">observer.inl</a>.</p>
 
 </div>
 </div>
@@ -302,7 +306,7 @@ template&lt;class TObserver &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="observer_8inl_source.html#l00184">184</a> of file <a class="el" href="observer_8inl_source.html">observer.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="observer_8inl_source.html#l00190">190</a> of file <a class="el" href="observer_8inl_source.html">observer.inl</a>.</p>
 
 </div>
 </div>
@@ -340,7 +344,7 @@ template&lt;class TObserver &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="observer_8inl_source.html#l00191">191</a> of file <a class="el" href="observer_8inl_source.html">observer.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="observer_8inl_source.html#l00197">197</a> of file <a class="el" href="observer_8inl_source.html">observer.inl</a>.</p>
 
 </div>
 </div>
@@ -378,7 +382,7 @@ template&lt;class TObserver &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="observer_8inl_source.html#l00211">211</a> of file <a class="el" href="observer_8inl_source.html">observer.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="observer_8inl_source.html#l00217">217</a> of file <a class="el" href="observer_8inl_source.html">observer.inl</a>.</p>
 
 </div>
 </div>
@@ -416,7 +420,7 @@ template&lt;class TObserver &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="observer_8inl_source.html#l00233">233</a> of file <a class="el" href="observer_8inl_source.html">observer.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="observer_8inl_source.html#l00239">239</a> of file <a class="el" href="observer_8inl_source.html">observer.inl</a>.</p>
 
 </div>
 </div>
@@ -454,7 +458,7 @@ template&lt;class TObserver &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="observer_8inl_source.html#l00254">254</a> of file <a class="el" href="observer_8inl_source.html">observer.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="observer_8inl_source.html#l00260">260</a> of file <a class="el" href="observer_8inl_source.html">observer.inl</a>.</p>
 
 </div>
 </div>
@@ -492,7 +496,7 @@ template&lt;class TObserver &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="observer_8inl_source.html#l00198">198</a> of file <a class="el" href="observer_8inl_source.html">observer.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="observer_8inl_source.html#l00204">204</a> of file <a class="el" href="observer_8inl_source.html">observer.inl</a>.</p>
 
 </div>
 </div>
@@ -530,7 +534,7 @@ template&lt;class TObserver &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="observer_8inl_source.html#l00204">204</a> of file <a class="el" href="observer_8inl_source.html">observer.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="observer_8inl_source.html#l00210">210</a> of file <a class="el" href="observer_8inl_source.html">observer.inl</a>.</p>
 
 </div>
 </div>
@@ -568,7 +572,7 @@ template&lt;class TObserver &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="observer_8inl_source.html#l00157">157</a> of file <a class="el" href="observer_8inl_source.html">observer.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="observer_8inl_source.html#l00266">266</a> of file <a class="el" href="observer_8inl_source.html">observer.inl</a>.</p>
 
 </div>
 </div>
@@ -606,7 +610,7 @@ template&lt;class TObserver &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="observer_8inl_source.html#l00218">218</a> of file <a class="el" href="observer_8inl_source.html">observer.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="observer_8inl_source.html#l00224">224</a> of file <a class="el" href="observer_8inl_source.html">observer.inl</a>.</p>
 
 </div>
 </div>
@@ -644,7 +648,7 @@ template&lt;class TObserver &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="observer_8inl_source.html#l00226">226</a> of file <a class="el" href="observer_8inl_source.html">observer.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="observer_8inl_source.html#l00232">232</a> of file <a class="el" href="observer_8inl_source.html">observer.inl</a>.</p>
 
 </div>
 </div>
@@ -682,7 +686,7 @@ template&lt;class TObserver &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="observer_8inl_source.html#l00239">239</a> of file <a class="el" href="observer_8inl_source.html">observer.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="observer_8inl_source.html#l00245">245</a> of file <a class="el" href="observer_8inl_source.html">observer.inl</a>.</p>
 
 </div>
 </div>
@@ -720,7 +724,7 @@ template&lt;class TObserver &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="observer_8inl_source.html#l00247">247</a> of file <a class="el" href="observer_8inl_source.html">observer.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="observer_8inl_source.html#l00253">253</a> of file <a class="el" href="observer_8inl_source.html">observer.inl</a>.</p>
 
 </div>
 </div>
