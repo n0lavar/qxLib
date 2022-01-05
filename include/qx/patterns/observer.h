@@ -12,6 +12,7 @@
 #include <qx/useful_macros.h>
 
 #include <algorithm>
+#include <functional>
 #include <memory>
 #include <vector>
 
@@ -145,7 +146,7 @@ class subject : public base_subject
         /**
             @brief base_iterator object constructor
         **/
-        base_iterator(void) noexcept;
+        base_iterator(void) noexcept = default;
 
         /**
             @brief base_iterator object constructor
@@ -247,6 +248,8 @@ public:
     using const_reverse_iterator = const_base_iterator<
         typename observers_container::const_reverse_iterator>;
 
+    using notify_func = std::function<void(TObserver*)>;
+
 public:
     QX_NONCOPYABLE(subject);
     QX_MOVABLE(subject);
@@ -264,9 +267,15 @@ public:
     /**
         @brief  Attach observer to this subject
         @param  pObserver - observer pointer 
-        @retval           - observer_token for autodetaching observer from this subject 
+        @retval           - observer_token for auto detaching observer from this subject 
     **/
     [[nodiscard]] observer_token attach(TObserver* pObserver) noexcept;
+
+    /**
+        @brief Notify all observers
+        @param notifyFunc - callback
+    **/
+    void notify(const notify_func& notifyFunc) const noexcept;
 
     /**
         @brief  Return iterator to beginning

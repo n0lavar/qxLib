@@ -127,6 +127,19 @@ public:
         }
         return ret;
     }
+
+    std::vector<int> EmitNotify() const
+    {
+        std::vector<int> ret;
+        notify(
+            [&ret](TestObserver* pObserver)
+            {
+                pObserver->EventHandler1(SUBJECT);
+                ret.push_back(pObserver->get_num_observer());
+            });
+
+        return ret;
+    }
 };
 
 class TestObserverClass : public ::testing::Test
@@ -212,6 +225,7 @@ TEST_F(TestObserverClass, events)
             return pSubject->EmitEvent1Forward();
         },
         { 1, 2, 3 });
+
     check_observers(
         1,
         [this]()
@@ -219,6 +233,7 @@ TEST_F(TestObserverClass, events)
             return pSubject->EmitEvent1Backward();
         },
         { 3, 2, 1 });
+
     check_observers(
         2,
         [this]()
@@ -226,6 +241,7 @@ TEST_F(TestObserverClass, events)
             return pSubject->EmitEvent2Forward();
         },
         { 1, 2, 3 });
+
     check_observers(
         2,
         [this]()
@@ -233,6 +249,14 @@ TEST_F(TestObserverClass, events)
             return pSubject->EmitEvent2Backward();
         },
         { 3, 2, 1 });
+
+    check_observers(
+        1,
+        [this]()
+        {
+            return pSubject->EmitNotify();
+        },
+        { 1, 2, 3 });
 }
 
 TEST_F(TestObserverClass, reattachment)

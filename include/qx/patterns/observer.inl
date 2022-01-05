@@ -66,13 +66,6 @@ inline observer_token_data::operator bool(void) const noexcept
 
 template<class TObserver>
 template<class TBaseIterator>
-subject<TObserver>::base_iterator<TBaseIterator>::base_iterator(void) noexcept
-    : TBaseIterator()
-{
-}
-
-template<class TObserver>
-template<class TBaseIterator>
 subject<TObserver>::base_iterator<TBaseIterator>::base_iterator(
     const TBaseIterator& other,
     subject*             pSubject) noexcept
@@ -178,6 +171,14 @@ inline observer_token subject<TObserver>::attach(TObserver* pObserver) noexcept
     {
         return observer_token();
     }
+}
+
+template<class TObserver>
+inline void subject<TObserver>::notify(
+    const notify_func& notifyFunc) const noexcept
+{
+    for (auto pObserver : m_Observers)
+        notifyFunc(pObserver);
 }
 
 template<class TObserver>
