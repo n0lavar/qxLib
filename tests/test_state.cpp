@@ -16,7 +16,22 @@
 
 #include <unordered_map>
 
-using TState = qx::state<int>;
+class CNonZeroInt
+{
+public:
+    CNonZeroInt(void) = default;
+
+    CNonZeroInt(int nValue) : m_nValue(nValue)
+    {
+    }
+
+    auto operator<=>(const CNonZeroInt&) const = default;
+
+private:
+    int m_nValue = 0;
+};
+
+using TState = qx::state<CNonZeroInt>;
 
 TEST(state, construct)
 {
@@ -42,7 +57,7 @@ TEST(state, assign)
     TState state3 = std::move(state2);
     EXPECT_TRUE(state3.is_default());
 
-    TState state4 = 1;
+    TState state4 = CNonZeroInt(1);
     EXPECT_FALSE(state4.is_default());
 }
 
