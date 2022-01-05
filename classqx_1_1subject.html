@@ -106,6 +106,9 @@ using&#160;</td><td class="memItemRight" valign="bottom"><b>reverse_iterator</b>
 <tr class="memitem:a22748f639c9e9734f7c3c6c0111ca496"><td class="memItemLeft" align="right" valign="top"><a id="a22748f639c9e9734f7c3c6c0111ca496"></a>
 using&#160;</td><td class="memItemRight" valign="bottom"><b>const_reverse_iterator</b> = const_base_iterator&lt; typename observers_container::const_reverse_iterator &gt;</td></tr>
 <tr class="separator:a22748f639c9e9734f7c3c6c0111ca496"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a431a94b0d3d9df0e022d0acf20470625"><td class="memItemLeft" align="right" valign="top"><a id="a431a94b0d3d9df0e022d0acf20470625"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><b>notify_func</b> = std::function&lt; void(TObserver *)&gt;</td></tr>
+<tr class="separator:a431a94b0d3d9df0e022d0acf20470625"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
@@ -126,6 +129,9 @@ virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="c
 <tr class="memitem:a34fce9cad9b0f3c45574049e2002f1c9"><td class="memItemLeft" align="right" valign="top">observer_token&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1subject.html#a34fce9cad9b0f3c45574049e2002f1c9">attach</a> (TObserver *pObserver) noexcept</td></tr>
 <tr class="memdesc:a34fce9cad9b0f3c45574049e2002f1c9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Attach observer to this subject.  <a href="classqx_1_1subject.html#a34fce9cad9b0f3c45574049e2002f1c9">More...</a><br /></td></tr>
 <tr class="separator:a34fce9cad9b0f3c45574049e2002f1c9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aea3b74aad10b993fd343e6dd92c640f9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1subject.html#aea3b74aad10b993fd343e6dd92c640f9">notify</a> (const notify_func &amp;notifyFunc) const noexcept</td></tr>
+<tr class="memdesc:aea3b74aad10b993fd343e6dd92c640f9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Notify all observers.  <a href="classqx_1_1subject.html#aea3b74aad10b993fd343e6dd92c640f9">More...</a><br /></td></tr>
+<tr class="separator:aea3b74aad10b993fd343e6dd92c640f9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5c0dcf68c7fa5bb283257e9bdca7a132"><td class="memItemLeft" align="right" valign="top">iterator&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1subject.html#a5c0dcf68c7fa5bb283257e9bdca7a132">begin</a> (void)</td></tr>
 <tr class="memdesc:a5c0dcf68c7fa5bb283257e9bdca7a132"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return iterator to beginning.  <a href="classqx_1_1subject.html#a5c0dcf68c7fa5bb283257e9bdca7a132">More...</a><br /></td></tr>
 <tr class="separator:a5c0dcf68c7fa5bb283257e9bdca7a132"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -188,7 +194,7 @@ class qx::subject&lt; TObserver &gt;</h3>
 <dl class="section author"><dt>Author</dt><dd>Khrapov </dd></dl>
 <dl class="section date"><dt>Date</dt><dd>6.03.2021 </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="observer_8h_source.html#l00139">139</a> of file <a class="el" href="observer_8h_source.html">observer.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="observer_8h_source.html#l00140">140</a> of file <a class="el" href="observer_8h_source.html">observer.h</a>.</p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="a34fce9cad9b0f3c45574049e2002f1c9"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a34fce9cad9b0f3c45574049e2002f1c9">&#9670;&nbsp;</a></span>attach()</h2>
@@ -225,12 +231,12 @@ template&lt;class TObserver &gt; </div>
 </dl>
 <dl class="retval"><dt>Return values</dt><dd>
   <table class="retval">
-    <tr><td class="paramname">-</td><td>observer_token for autodetaching observer from this subject </td></tr>
+    <tr><td class="paramname">-</td><td>observer_token for auto detaching observer from this subject </td></tr>
   </table>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="observer_8inl_source.html#l00167">167</a> of file <a class="el" href="observer_8inl_source.html">observer.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="observer_8inl_source.html#l00160">160</a> of file <a class="el" href="observer_8inl_source.html">observer.inl</a>.</p>
 
 </div>
 </div>
@@ -268,7 +274,7 @@ template&lt;class TObserver &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="observer_8inl_source.html#l00184">184</a> of file <a class="el" href="observer_8inl_source.html">observer.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="observer_8inl_source.html#l00185">185</a> of file <a class="el" href="observer_8inl_source.html">observer.inl</a>.</p>
 
 </div>
 </div>
@@ -306,7 +312,7 @@ template&lt;class TObserver &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="observer_8inl_source.html#l00190">190</a> of file <a class="el" href="observer_8inl_source.html">observer.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="observer_8inl_source.html#l00191">191</a> of file <a class="el" href="observer_8inl_source.html">observer.inl</a>.</p>
 
 </div>
 </div>
@@ -344,7 +350,7 @@ template&lt;class TObserver &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="observer_8inl_source.html#l00197">197</a> of file <a class="el" href="observer_8inl_source.html">observer.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="observer_8inl_source.html#l00198">198</a> of file <a class="el" href="observer_8inl_source.html">observer.inl</a>.</p>
 
 </div>
 </div>
@@ -382,7 +388,7 @@ template&lt;class TObserver &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="observer_8inl_source.html#l00217">217</a> of file <a class="el" href="observer_8inl_source.html">observer.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="observer_8inl_source.html#l00218">218</a> of file <a class="el" href="observer_8inl_source.html">observer.inl</a>.</p>
 
 </div>
 </div>
@@ -420,7 +426,7 @@ template&lt;class TObserver &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="observer_8inl_source.html#l00239">239</a> of file <a class="el" href="observer_8inl_source.html">observer.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="observer_8inl_source.html#l00240">240</a> of file <a class="el" href="observer_8inl_source.html">observer.inl</a>.</p>
 
 </div>
 </div>
@@ -458,7 +464,7 @@ template&lt;class TObserver &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="observer_8inl_source.html#l00260">260</a> of file <a class="el" href="observer_8inl_source.html">observer.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="observer_8inl_source.html#l00261">261</a> of file <a class="el" href="observer_8inl_source.html">observer.inl</a>.</p>
 
 </div>
 </div>
@@ -496,7 +502,7 @@ template&lt;class TObserver &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="observer_8inl_source.html#l00204">204</a> of file <a class="el" href="observer_8inl_source.html">observer.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="observer_8inl_source.html#l00205">205</a> of file <a class="el" href="observer_8inl_source.html">observer.inl</a>.</p>
 
 </div>
 </div>
@@ -534,7 +540,7 @@ template&lt;class TObserver &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="observer_8inl_source.html#l00210">210</a> of file <a class="el" href="observer_8inl_source.html">observer.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="observer_8inl_source.html#l00211">211</a> of file <a class="el" href="observer_8inl_source.html">observer.inl</a>.</p>
 
 </div>
 </div>
@@ -572,7 +578,45 @@ template&lt;class TObserver &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="observer_8inl_source.html#l00266">266</a> of file <a class="el" href="observer_8inl_source.html">observer.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="observer_8inl_source.html#l00267">267</a> of file <a class="el" href="observer_8inl_source.html">observer.inl</a>.</p>
+
+</div>
+</div>
+<a id="aea3b74aad10b993fd343e6dd92c640f9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aea3b74aad10b993fd343e6dd92c640f9">&#9670;&nbsp;</a></span>notify()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class TObserver &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classqx_1_1subject.html">qx::subject</a>&lt; TObserver &gt;::notify </td>
+          <td>(</td>
+          <td class="paramtype">const notify_func &amp;&#160;</td>
+          <td class="paramname"><em>notifyFunc</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Notify all observers. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">notifyFunc</td><td>- callback </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="observer_8inl_source.html#l00177">177</a> of file <a class="el" href="observer_8inl_source.html">observer.inl</a>.</p>
 
 </div>
 </div>
@@ -610,7 +654,7 @@ template&lt;class TObserver &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="observer_8inl_source.html#l00224">224</a> of file <a class="el" href="observer_8inl_source.html">observer.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="observer_8inl_source.html#l00225">225</a> of file <a class="el" href="observer_8inl_source.html">observer.inl</a>.</p>
 
 </div>
 </div>
@@ -648,7 +692,7 @@ template&lt;class TObserver &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="observer_8inl_source.html#l00232">232</a> of file <a class="el" href="observer_8inl_source.html">observer.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="observer_8inl_source.html#l00233">233</a> of file <a class="el" href="observer_8inl_source.html">observer.inl</a>.</p>
 
 </div>
 </div>
@@ -686,7 +730,7 @@ template&lt;class TObserver &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="observer_8inl_source.html#l00245">245</a> of file <a class="el" href="observer_8inl_source.html">observer.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="observer_8inl_source.html#l00246">246</a> of file <a class="el" href="observer_8inl_source.html">observer.inl</a>.</p>
 
 </div>
 </div>
@@ -724,7 +768,7 @@ template&lt;class TObserver &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="observer_8inl_source.html#l00253">253</a> of file <a class="el" href="observer_8inl_source.html">observer.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="observer_8inl_source.html#l00254">254</a> of file <a class="el" href="observer_8inl_source.html">observer.inl</a>.</p>
 
 </div>
 </div>
