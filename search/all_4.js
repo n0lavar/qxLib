@@ -6,7 +6,7 @@ var searchData=
   ['destruct_130',['destruct',['../useful__funcs_8h.html#a567475c55a5a56c634d471de261b0428',1,'qx']]],
   ['detach_131',['detach',['../classqx_1_1base__subject.html#ab2208674b22acaf27dda098fb4a5a9b1',1,'qx::base_subject']]],
   ['disablevertexarrtibarray_132',['DisableVertexArrtibArray',['../classqx_1_1base__vao.html#a72a3833997538c341c13b7a24bcd9c41',1,'qx::base_vao']]],
-  ['dispatchcompute_133',['DispatchCompute',['../classqx_1_1base__shader__program.html#ac1911aedf58864a1b99e9e9d82736db2',1,'qx::base_shader_program']]],
+  ['dispatchcompute_133',['DispatchCompute',['../classqx_1_1base__shader__program.html#a2663d683f43579fae0f515a4bc7f6715',1,'qx::base_shader_program']]],
   ['djb2a_5fhash_134',['djb2a_hash',['../string__utils_8h.html#a772986a8e501ea57c6f1695c110f22ef',1,'qx::djb2a_hash(const value_type *pStr, u32 nSeed, size_t nLen)'],['../string__utils_8h.html#a96f93bad38ed043360e5b277ecb487bf',1,'qx::djb2a_hash(const value_type *pszStr, u32 nSeed)']]],
   ['draw_5fmode_2eh_135',['draw_mode.h',['../draw__mode_8h.html',1,'']]]
 ];

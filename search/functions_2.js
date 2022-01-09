@@ -5,7 +5,7 @@ var searchData=
   ['back_814',['back',['../classqx_1_1list__se.html#a7ece796354ea0e8cee4d6d8c2a4e8f2c',1,'qx::list_se::back(void)'],['../classqx_1_1list__se.html#a7913d69536659f1b58d702b5090e777e',1,'qx::list_se::back(void) const'],['../classqx_1_1basic__string.html#ab49d514a2ba705fab09126a11953f851',1,'qx::basic_string::back()']]],
   ['base_5feasing_5felement_815',['base_easing_element',['../classqx_1_1base__easing__element.html#af5b7247938575b5affd2890f03f41be7',1,'qx::base_easing_element']]],
   ['base_5flogger_5fstream_816',['base_logger_stream',['../classqx_1_1base__logger__stream.html#a8f2d717a3170bc0af4604e22ce47cc35',1,'qx::base_logger_stream']]],
-  ['base_5fshader_5fprogram_817',['base_shader_program',['../classqx_1_1base__shader__program.html#ac4186e068319ddebfc21f002851f3e4a',1,'qx::base_shader_program']]],
+  ['base_5fshader_5fprogram_817',['base_shader_program',['../classqx_1_1base__shader__program.html#ac4186e068319ddebfc21f002851f3e4a',1,'qx::base_shader_program::base_shader_program(void)=default'],['../classqx_1_1base__shader__program.html#a0346f9e021b7d471882a74675790bab5',1,'qx::base_shader_program::base_shader_program(base_shader_program &amp;&amp;baseShaderProgram) noexcept']]],
   ['base_5fssbo_818',['base_ssbo',['../classqx_1_1base__ssbo.html#abf7d2a422c666b446eeedcd2754d2e2f',1,'qx::base_ssbo']]],
   ['base_5ftexture_819',['base_texture',['../classqx_1_1base__texture.html#a7c4508b1ed4217e1b042642dec31710c',1,'qx::base_texture']]],
   ['base_5fubo_820',['base_ubo',['../classqx_1_1base__ubo.html#a1349f68be1e01a48e34257eee44853a1',1,'qx::base_ubo']]],
