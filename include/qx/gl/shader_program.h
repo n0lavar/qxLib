@@ -9,6 +9,7 @@
 **/
 #pragma once
 
+#include <qx/containers/string/string.h>
 #include <qx/gl/shaders.h>
 
 #include <glew.h>
@@ -30,7 +31,6 @@ class base_shader_program
 {
 public:
     QX_NONCOPYABLE(base_shader_program)
-    QX_MOVABLE(base_shader_program)
 
     /**
         @brief base_shader_program object constructor
@@ -38,14 +38,20 @@ public:
     base_shader_program(void) = default;
 
     /**
+        @brief base_shader_program object constructor
+        @param baseShaderProgram - shader program rvalue ref
+    **/
+    base_shader_program(base_shader_program&& baseShaderProgram) noexcept;
+
+    /**
         @brief base_shader_program object destructor
     **/
-    ~base_shader_program(void);
+    ~base_shader_program(void) noexcept;
 
     /**
         @brief Init shader program
     **/
-    void Init(void);
+    void Init(void) noexcept;
 
     /**
         @brief  Attach shader to the program
@@ -53,23 +59,24 @@ public:
         @param  pShader    - shader object pointer
     **/
     template<GLenum ShaderType>
-    void AttachShader(shader_base<ShaderType>* pShader);
+    void AttachShader(shader_base<ShaderType>* pShader) noexcept;
 
     /**
         @brief  Link attached shaders
-        @retval - true if success
+        @param  pErrorString - string for error
+        @retval              - true if success
     **/
-    bool Link(void);
+    bool Link(string* pErrorString = nullptr) noexcept;
 
     /**
         @brief Use shader program
     **/
-    void Use(void) const;
+    void Use(void) const noexcept;
 
     /**
         @brief Drop current shader
     **/
-    void Unuse(void) const;
+    void Unuse(void) const noexcept;
 
     /**
         @brief  Get shader program parameter
@@ -77,13 +84,13 @@ public:
                 \see https://www.khronos.org/registry/OpenGL-Refpages/gl4/html/glGetProgram.xhtml
         @retval            - shader program parameter
     **/
-    GLint GetParameter(GLenum eParameter) const;
+    GLint GetParameter(GLenum eParameter) const noexcept;
 
     /**
         @brief  Get shader buffer name
         @retval - shader buffer name
     **/
-    GLuint GetBufferName(void) const;
+    GLuint GetBufferName(void) const noexcept;
 
     /**
         @brief  Specify the value of a uniform variable
@@ -94,7 +101,10 @@ public:
         @param  nCount           - number of values that are to be modified.
     **/
     template<typename T>
-    void SetUniform(GLint nUniformLocation, const T* pValue, GLsizei nCount);
+    void SetUniform(
+        GLint    nUniformLocation,
+        const T* pValue,
+        GLsizei  nCount) noexcept;
 
     /**
         @brief  Specify the value of a uniform variable
@@ -105,7 +115,10 @@ public:
         @param  nCount  - number of values that are to be modified.
     **/
     template<typename T>
-    void SetUniform(const GLchar* pszName, const T* pValue, GLsizei nCount);
+    void SetUniform(
+        const GLchar* pszName,
+        const T*      pValue,
+        GLsizei       nCount) noexcept;
 
     /**
         @brief  Specify the value of a uniform variable
@@ -114,7 +127,7 @@ public:
         @param  value            - the value of a uniform variable
     **/
     template<typename T>
-    void SetUniform(GLint nUniformLocation, const T& value);
+    void SetUniform(GLint nUniformLocation, const T& value) noexcept;
 
     /**
         @brief  Specify the value of a uniform variable
@@ -123,7 +136,7 @@ public:
         @param  value   - the value of a uniform variable. 
     **/
     template<typename T>
-    void SetUniform(const GLchar* pszName, const T& value);
+    void SetUniform(const GLchar* pszName, const T& value) noexcept;
 
     /**
         @brief  Get uniform location based on it's name
@@ -132,7 +145,7 @@ public:
         @retval         - location number
     **/
     GLint GetUniformLocation(const GLchar* pszName, string* pError = nullptr)
-        const;
+        const noexcept;
 
     /**
         @brief   Add include string
@@ -152,7 +165,7 @@ public:
         const char* pszName,
         GLint       nNameLength,
         const char* pszText,
-        GLint       nTextLength);
+        GLint       nTextLength) noexcept;
 
     /**
         @brief Dispatch program compute
@@ -163,14 +176,24 @@ public:
     static void DispatchCompute(
         GLuint nGroupsX,
         GLuint nGroupsY,
-        GLuint nGroupsZ);
+        GLuint nGroupsZ) noexcept;
 
     /**
         @brief  operator==
         @param  other - other shader program
         @retval       - true, if objects are equal
     **/
-    bool operator==(const base_shader_program& other) const;
+    bool operator==(const base_shader_program& other) const noexcept;
+
+    /**
+        @brief  operator=
+        @param  baseShaderProgram - shader program rvalue ref
+        @retval                   - this object reference
+    **/
+    base_shader_program& operator=(
+        base_shader_program&& baseShaderProgram) noexcept;
+
+
 
 private:
     GLuint m_nProgram = std::numeric_limits<GLuint>::max();

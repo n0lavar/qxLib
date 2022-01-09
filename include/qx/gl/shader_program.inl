@@ -10,56 +10,67 @@
 namespace qx
 {
 
-inline base_shader_program::~base_shader_program(void)
+inline base_shader_program::base_shader_program(
+    base_shader_program&& baseShaderProgram) noexcept
+{
+    std::swap(m_nProgram, baseShaderProgram.m_nProgram);
+}
+
+inline base_shader_program::~base_shader_program(void) noexcept
 {
     if (m_nProgram != std::numeric_limits<GLuint>::max())
         glDeleteProgram(m_nProgram);
 }
 
-inline void base_shader_program::Init(void)
+inline void base_shader_program::Init(void) noexcept
 {
     m_nProgram = glCreateProgram();
 }
 
 template<GLenum ShaderType>
-inline void base_shader_program::AttachShader(shader_base<ShaderType>* pShader)
+inline void base_shader_program::AttachShader(
+    shader_base<ShaderType>* pShader) noexcept
 {
     glAttachShader(m_nProgram, pShader->GetID());
 }
 
-inline bool base_shader_program::Link(void)
+inline bool base_shader_program::Link(string* pErrorString) noexcept
 {
     glLinkProgram(m_nProgram);
     const GLint bSuccess = GetParameter(GL_LINK_STATUS);
 
-    if (bSuccess != GL_TRUE)
+    if (bSuccess != GL_TRUE && pErrorString)
     {
-        GLchar infoLog[512];
-        glGetProgramInfoLog(m_nProgram, 512, nullptr, infoLog);
-        QX_ASSERT_MSG(0, "Shader linking failed: \n%s", infoLog);
+        const GLsizei nLogLength = GetParameter(GL_INFO_LOG_LENGTH);
+        pErrorString->assign(static_cast<size_t>(nLogLength), '\0');
+        glGetProgramInfoLog(
+            m_nProgram,
+            nLogLength,
+            nullptr,
+            pErrorString->data());
     }
 
     return bSuccess == GL_TRUE;
 }
 
-inline void base_shader_program::Use(void) const
+inline void base_shader_program::Use(void) const noexcept
 {
     glUseProgram(m_nProgram);
 }
 
-inline void base_shader_program::Unuse(void) const
+inline void base_shader_program::Unuse(void) const noexcept
 {
     glUseProgram(0);
 }
 
-inline GLint base_shader_program::GetParameter(GLenum eParameter) const
+inline GLint base_shader_program::GetParameter(GLenum eParameter) const noexcept
 {
     GLint nRet = -1;
     glGetProgramiv(m_nProgram, eParameter, &nRet);
     return nRet;
 }
 
-inline GLuint base_shader_program::GetBufferName(void) const
+inline GLuint base_shader_program::GetBufferName(void) const noexcept
 {
     return m_nProgram;
 }
@@ -68,7 +79,7 @@ template<typename T>
 inline void base_shader_program::SetUniform(
     GLint    nUniformLocation,
     const T* pValue,
-    GLsizei  nCount)
+    GLsizei  nCount) noexcept
 {
     if constexpr (std::is_same_v<T, GLfloat>)
     {
@@ -204,7 +215,7 @@ template<typename T>
 inline void base_shader_program::SetUniform(
     const GLchar* pszName,
     const T*      pValue,
-    GLsizei       nCount)
+    GLsizei       nCount) noexcept
 {
     SetUniform(GetUniformLocation(pszName), pValue, nCount);
 }
@@ -212,7 +223,7 @@ inline void base_shader_program::SetUniform(
 template<typename T>
 inline void base_shader_program::SetUniform(
     GLint    nUniformLocation,
-    const T& value)
+    const T& value) noexcept
 {
     using type = std::remove_cvref_t<T>;
     if constexpr (std::is_same_v<T, GLfloat>)
@@ -240,14 +251,14 @@ inline void base_shader_program::SetUniform(
 template<typename T>
 inline void base_shader_program::SetUniform(
     const GLchar* pszName,
-    const T&      value)
+    const T&      value) noexcept
 {
     SetUniform(GetUniformLocation(pszName), value);
 }
 
 inline GLint base_shader_program::GetUniformLocation(
     const GLchar* pszName,
-    string*       pError) const
+    string*       pError) const noexcept
 {
     const GLint nLocation = glGetUniformLocation(m_nProgram, pszName);
 
@@ -261,7 +272,7 @@ inline bool base_shader_program::AddInclude(
     const char* pszName,
     GLint       nNameLength,
     const char* pszText,
-    GLint       nTextLength)
+    GLint       nTextLength) noexcept
 {
     const bool bGlslIncludeSupported = GLEW_ARB_shading_language_include != 0;
     if (bGlslIncludeSupported)
@@ -280,16 +291,22 @@ inline bool base_shader_program::AddInclude(
 inline void base_shader_program::DispatchCompute(
     GLuint nGroupsX,
     GLuint nGroupsY,
-    GLuint nGroupsZ)
+    GLuint nGroupsZ) noexcept
 {
     glDispatchCompute(nGroupsX, nGroupsY, nGroupsZ);
 }
 
 inline bool base_shader_program::operator==(
-    const base_shader_program& other) const
+    const base_shader_program& other) const noexcept
 {
     return m_nProgram == other.m_nProgram;
 }
 
+inline base_shader_program& base_shader_program::operator=(
+    base_shader_program&& baseShaderProgram) noexcept
+{
+    std::swap(m_nProgram, baseShaderProgram.m_nProgram);
+    return *this;
+}
 
 } // namespace qx
