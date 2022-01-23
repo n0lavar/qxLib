@@ -31,7 +31,7 @@ T* link<T>::lock_ptr::get(void) const noexcept
 template<class T>
 link<T>::lock_ptr::operator bool(void) const noexcept
 {
-    return static_cast<bool>(m_pRaw);
+    return m_pRaw != nullptr;
 }
 
 template<class T>
