@@ -308,97 +308,112 @@ public:
         @brief  Get aqua color
         @retval - aqua color
     **/
-    static constexpr color aqua(void) noexcept;
+    static constexpr color aqua(float fAlpha = 1.f) noexcept;
 
     /**
         @brief  Get black color
-        @retval - black color
+        @param  fAlpha - alpha component
+        @retval        - black color
     **/
-    static constexpr color black(void) noexcept;
+    static constexpr color black(float fAlpha = 1.f) noexcept;
 
     /**
         @brief  Get blue color
-        @retval - blue color
+        @param  fAlpha - alpha component
+        @retval        - blue color
     **/
-    static constexpr color blue(void) noexcept;
+    static constexpr color blue(float fAlpha = 1.f) noexcept;
 
     /**
         @brief  Get fuchsia color
-        @retval - fuchsia color
+        @param  fAlpha - alpha component
+        @retval        - fuchsia color
     **/
-    static constexpr color fuchsia(void) noexcept;
+    static constexpr color fuchsia(float fAlpha = 1.f) noexcept;
 
     /**
         @brief  Get gray color
-        @retval - gray color
+        @param  fAlpha - alpha component
+        @retval        - gray color
     **/
-    static constexpr color gray(void) noexcept;
+    static constexpr color gray(float fAlpha = 1.f) noexcept;
 
     /**
         @brief  Get green color
-        @retval - green color
+        @param  fAlpha - alpha component
+        @retval        - green color
     **/
-    static constexpr color green(void) noexcept;
+    static constexpr color green(float fAlpha = 1.f) noexcept;
 
     /**
         @brief  Get lime color
-        @retval - lime color
+        @param  fAlpha - alpha component
+        @retval        - lime color
     **/
-    static constexpr color lime(void) noexcept;
+    static constexpr color lime(float fAlpha = 1.f) noexcept;
 
     /**
         @brief  Get maroon color
-        @retval - maroon color
+        @param  fAlpha - alpha component
+        @retval        - maroon color
     **/
-    static constexpr color maroon(void) noexcept;
+    static constexpr color maroon(float fAlpha = 1.f) noexcept;
 
     /**
         @brief  Get navy color
-        @retval - navy color
+        @param  fAlpha - alpha component
+        @retval        - navy color
     **/
-    static constexpr color navy(void) noexcept;
+    static constexpr color navy(float fAlpha = 1.f) noexcept;
 
     /**
         @brief  Get olive color
-        @retval - olive color
+        @param  fAlpha - alpha component
+        @retval        - olive color
     **/
-    static constexpr color olive(void) noexcept;
+    static constexpr color olive(float fAlpha = 1.f) noexcept;
 
     /**
         @brief  Get purple color
-        @retval - purple color
+        @param  fAlpha - alpha component
+        @retval        - purple color
     **/
-    static constexpr color purple(void) noexcept;
+    static constexpr color purple(float fAlpha = 1.f) noexcept;
 
     /**
         @brief  Get red color
-        @retval - red color
+        @param  fAlpha - alpha component
+        @retval        - red color
     **/
-    static constexpr color red(void) noexcept;
+    static constexpr color red(float fAlpha = 1.f) noexcept;
 
     /**
         @brief  Get silver color
-        @retval - silver color
+        @param  fAlpha - alpha component
+        @retval        - silver color
     **/
-    static constexpr color silver(void) noexcept;
+    static constexpr color silver(float fAlpha = 1.f) noexcept;
 
     /**
         @brief  Get teal color
-        @retval - teal color
+        @param  fAlpha - alpha component
+        @retval        - teal color
     **/
-    static constexpr color teal(void) noexcept;
+    static constexpr color teal(float fAlpha = 1.f) noexcept;
 
     /**
         @brief  Get white color
-        @retval - white color
+        @param  fAlpha - alpha component
+        @retval        - white color
     **/
-    static constexpr color white(void) noexcept;
+    static constexpr color white(float fAlpha = 1.f) noexcept;
 
     /**
         @brief  Get yellow color
-        @retval - yellow color
+        @param  fAlpha - alpha component
+        @retval        - yellow color
     **/
-    static constexpr color yellow(void) noexcept;
+    static constexpr color yellow(float fAlpha = 1.f) noexcept;
 
     /**
         @brief   Get empty color (0, 0, 0, 0)

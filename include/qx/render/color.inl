@@ -232,84 +232,84 @@ constexpr color color::brighten(const color& other, float fPercent) noexcept
     return ret;
 }
 
-constexpr color color::aqua(void) noexcept
+constexpr color color::aqua(float fAlpha) noexcept
 {
-    return color(000, 255, 255);
+    return color(000, 255, 255, float_to_dec(fAlpha));
 }
 
-constexpr color color::black(void) noexcept
+constexpr color color::black(float fAlpha) noexcept
 {
-    return color(000, 000, 000);
+    return color(000, 000, 000, float_to_dec(fAlpha));
 }
 
-constexpr color color::blue(void) noexcept
+constexpr color color::blue(float fAlpha) noexcept
 {
-    return color(000, 000, 255);
+    return color(000, 000, 255, float_to_dec(fAlpha));
 }
 
-constexpr color color::fuchsia(void) noexcept
+constexpr color color::fuchsia(float fAlpha) noexcept
 {
-    return color(255, 000, 255);
+    return color(255, 000, 255, float_to_dec(fAlpha));
 }
 
-constexpr color color::gray(void) noexcept
+constexpr color color::gray(float fAlpha) noexcept
 {
-    return color(128, 128, 128);
+    return color(128, 128, 128, float_to_dec(fAlpha));
 }
 
-constexpr color color::green(void) noexcept
+constexpr color color::green(float fAlpha) noexcept
 {
-    return color(000, 128, 000);
+    return color(000, 128, 000, float_to_dec(fAlpha));
 }
 
-constexpr color color::lime(void) noexcept
+constexpr color color::lime(float fAlpha) noexcept
 {
-    return color(000, 255, 000);
+    return color(000, 255, 000, float_to_dec(fAlpha));
 }
 
-constexpr color color::maroon(void) noexcept
+constexpr color color::maroon(float fAlpha) noexcept
 {
-    return color(128, 000, 000);
+    return color(128, 000, 000, float_to_dec(fAlpha));
 }
 
-constexpr color color::navy(void) noexcept
+constexpr color color::navy(float fAlpha) noexcept
 {
-    return color(000, 000, 128);
+    return color(000, 000, 128, float_to_dec(fAlpha));
 }
 
-constexpr color color::olive(void) noexcept
+constexpr color color::olive(float fAlpha) noexcept
 {
-    return color(128, 128, 000);
+    return color(128, 128, 000, float_to_dec(fAlpha));
 }
 
-constexpr color color::purple(void) noexcept
+constexpr color color::purple(float fAlpha) noexcept
 {
-    return color(128, 000, 128);
+    return color(128, 000, 128, float_to_dec(fAlpha));
 }
 
-constexpr color color::red(void) noexcept
+constexpr color color::red(float fAlpha) noexcept
 {
-    return color(255, 000, 000);
+    return color(255, 000, 000, float_to_dec(fAlpha));
 }
 
-constexpr color color::silver(void) noexcept
+constexpr color color::silver(float fAlpha) noexcept
 {
-    return color(192, 192, 192);
+    return color(192, 192, 192, float_to_dec(fAlpha));
 }
 
-constexpr color color::teal(void) noexcept
+constexpr color color::teal(float fAlpha) noexcept
 {
-    return color(000, 128, 128);
+    return color(000, 128, 128, float_to_dec(fAlpha));
 }
 
-constexpr color color::white(void) noexcept
+constexpr color color::white(float fAlpha) noexcept
 {
-    return color(255, 255, 255);
+    return color(255, 255, 255, float_to_dec(fAlpha));
 }
 
-constexpr color color::yellow(void) noexcept
+constexpr color color::yellow(float fAlpha) noexcept
 {
-    return color(255, 255, 000);
+    return color(255, 255, 000, float_to_dec(fAlpha));
 }
 
 constexpr color color::empty(void) noexcept
