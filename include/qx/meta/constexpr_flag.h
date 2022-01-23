@@ -59,7 +59,7 @@ public:
     static constexpr T test_and_set() noexcept
     {
         Writer<Value && 0> tmp {};
-        () tmp;
+        (void)tmp;
         return Value;
     }
 
