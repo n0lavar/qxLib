@@ -177,17 +177,23 @@ public:
 
     /**
         @brief  Is point inside rect
-        @param  pos - point pos
-        @retval     - true if pos is inside rect
+        @param  pos       - point pos
+        @param  originPos - coordinate system center pos
+        @retval           - true if pos is inside rect
     **/
-    constexpr bool contains(const vector_type& pos) const noexcept;
+    constexpr bool contains(
+        const vector_type& pos,
+        const vector_type& originPos = vector_type(0.f)) const noexcept;
 
     /**
         @brief  Is other rect inside this rect
-        @param  other - other rect
-        @retval       - true if other rect is inside this rect
+        @param  other     - other rect
+        @param  originPos - coordinate system center pos
+        @retval           - true if other rect is inside this rect
     **/
-    constexpr bool contains(const rect& other) const noexcept;
+    constexpr bool contains(
+        const rect&        other,
+        const vector_type& originPos = vector_type(0.f)) const noexcept;
 
     /**
         @brief  Is this rect overlaps other rect

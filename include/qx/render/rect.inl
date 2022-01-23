@@ -115,23 +115,27 @@ constexpr rect::value_type rect::area(void) const noexcept
     return m_Size.x * m_Size.y;
 }
 
-constexpr bool rect::contains(const vector_type& pos) const noexcept
+constexpr bool rect::contains(
+    const vector_type& pos,
+    const vector_type& originPos) const noexcept
 {
-    return epsilon_less_equal(m_Pos.x, pos.x)
-           && epsilon_less_equal(m_Pos.y, pos.y)
-           && epsilon_greater_equal(m_Pos.x + m_Size.x, pos.x)
-           && epsilon_greater_equal(m_Pos.y + m_Size.y, pos.y);
+    const vector_type posRelativeToOrigin = pos + originPos;
+    return epsilon_less_equal(m_Pos.x, posRelativeToOrigin.x)
+           && epsilon_less_equal(m_Pos.y, posRelativeToOrigin.y)
+           && epsilon_greater_equal(m_Pos.x + m_Size.x, posRelativeToOrigin.x)
+           && epsilon_greater_equal(m_Pos.y + m_Size.y, posRelativeToOrigin.y);
 }
 
-constexpr bool rect::contains(const rect& other) const noexcept
+constexpr bool rect::contains(const rect& other, const vector_type& originPos)
+    const noexcept
 {
-    return contains(other.min()) && contains(other.max());
+    return contains(other.min(), originPos) && contains(other.max(), originPos);
 }
 
 constexpr bool rect::overlaps(const rect& other) const noexcept
 {
     return left() < other.right() && right() > other.left()
-           && top() > other.bottom() && bottom() < other.top();
+           && top() < other.bottom() && bottom() > other.top();
 }
 
 constexpr std::optional<rect> rect::overlap(const rect& other) const noexcept
