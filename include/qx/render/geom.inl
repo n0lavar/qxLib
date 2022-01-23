@@ -222,10 +222,21 @@ inline geometry create_rect(float fWidth, float fHeight)
 
 inline geometry create_rect_lines(float fWidth, float fHeight)
 {
-    geometry ret    = create_rect(fWidth, fHeight);
-    ret.geomIndices = { 0, 1, 2, 3, 0 };
-    ret.eDrawMode   = draw_mode::lines_strip;
-    return ret;
+    const float fLinesWidth  = fWidth - 1.f;
+    const float fLinesHeight = fHeight - 1.f;
+
+    const float fHalfWidth  = fLinesWidth / 2.f;
+    const float fHalfHeight = fLinesHeight / 2.f;
+
+    // one additional line for missing corner pixel fix
+    return { { { { fHalfWidth, fHalfHeight, 0.f },
+                 { fHalfWidth, -fHalfHeight, 0.f },
+                 { -fHalfWidth, -fHalfHeight, 0.f },
+                 { -fHalfWidth, -fHalfHeight - 1.f, 0.f },
+                 { -fHalfWidth, fHalfHeight, 0.f } } },
+             { 0, 1, 2, 3, 4, 0 },
+             { fHalfWidth + 1.f, fHalfHeight + 1.f, 0.f },
+             draw_mode::lines_strip };
 }
 
 inline geometry create_square(float fSideLength)
