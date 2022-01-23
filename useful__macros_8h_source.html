@@ -78,14 +78,14 @@ $(function() {
 <div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160; </div>
 <div class="line"><a name="l00028"></a><span class="lineno"><a class="line" href="useful__macros_8h.html#aafbad02364b98b20fd2de0a4afedc06d">   28</a></span>&#160;<span class="preprocessor">#define QX_STRINGIFY(name) #name</span></div>
 <div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160; </div>
-<div class="line"><a name="l00036"></a><span class="lineno"><a class="line" href="useful__macros_8h.html#aa8bf80784fab0cc3dd2f84047aa46eab">   36</a></span>&#160;<span class="preprocessor">#define QX_GETTER(type, name)         \</span></div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="preprocessor">    const type&amp; Get##name(void) const \</span></div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="preprocessor">    {                                 \</span></div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="preprocessor">        return m_##name;              \</span></div>
+<div class="line"><a name="l00036"></a><span class="lineno"><a class="line" href="useful__macros_8h.html#aa8bf80784fab0cc3dd2f84047aa46eab">   36</a></span>&#160;<span class="preprocessor">#define QX_GETTER(type, name)     \</span></div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="preprocessor">    const type&amp; Get##name() const \</span></div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="preprocessor">    {                             \</span></div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="preprocessor">        return m_##name;          \</span></div>
 <div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="preprocessor">    }</span></div>
 <div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160; </div>
 <div class="line"><a name="l00048"></a><span class="lineno"><a class="line" href="useful__macros_8h.html#a42a45a1b0c54f07a6cc243abc7455073">   48</a></span>&#160;<span class="preprocessor">#define QX_GETTER_REF(type, name) \</span></div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="preprocessor">    type&amp; Get##name(void)         \</span></div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="preprocessor">    type&amp; Get##name()             \</span></div>
 <div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="preprocessor">    {                             \</span></div>
 <div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="preprocessor">        return m_##name;          \</span></div>
 <div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<span class="preprocessor">    }</span></div>

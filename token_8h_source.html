@@ -80,19 +80,19 @@ $(function() {
 <div class="line"><a name="l00026"></a><span class="lineno"><a class="line" href="classqx_1_1token.html">   26</a></span>&#160;<span class="keyword">class </span><a class="code" href="classqx_1_1token.html">token</a></div>
 <div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;{</div>
 <div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    <span class="keyword">using</span> destroyer = std::function&lt;void(<span class="keywordtype">void</span>)&gt;;</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    <span class="keyword">using</span> destroyer = std::function&lt;void()&gt;;</div>
 <div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160; </div>
 <div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="keyword">public</span>:</div>
 <div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    QX_NONCOPYABLE(<a class="code" href="classqx_1_1token.html">token</a>);</div>
 <div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    QX_MOVABLE(<a class="code" href="classqx_1_1token.html">token</a>);</div>
 <div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160; </div>
-<div class="line"><a name="l00038"></a><span class="lineno"><a class="line" href="classqx_1_1token.html#aeabb27996d8402904600f495e71557b8">   38</a></span>&#160;    <a class="code" href="classqx_1_1token.html#aeabb27996d8402904600f495e71557b8">token</a>(<span class="keywordtype">void</span>) noexcept = <span class="keywordflow">default</span>;</div>
+<div class="line"><a name="l00038"></a><span class="lineno"><a class="line" href="classqx_1_1token.html#a197137e488dcac922701edc8f88d814e">   38</a></span>&#160;    <a class="code" href="classqx_1_1token.html#a197137e488dcac922701edc8f88d814e">token</a>() noexcept = default;</div>
 <div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160; </div>
-<div class="line"><a name="l00044"></a><span class="lineno"><a class="line" href="classqx_1_1token.html#a15def5174caee5acdb2246398803a0ec">   44</a></span>&#160;    <a class="code" href="classqx_1_1token.html#a15def5174caee5acdb2246398803a0ec">token</a>(destroyer _destroyer) : m_Destroyer(std::move(_destroyer))</div>
+<div class="line"><a name="l00044"></a><span class="lineno"><a class="line" href="classqx_1_1token.html#a15def5174caee5acdb2246398803a0ec">   44</a></span>&#160;    <a class="code" href="classqx_1_1token.html">token</a>(destroyer _destroyer) : m_Destroyer(std::move(_destroyer))</div>
 <div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    {</div>
 <div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    }</div>
 <div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160; </div>
-<div class="line"><a name="l00051"></a><span class="lineno"><a class="line" href="classqx_1_1token.html#ae3d8ce5bcb32dcaf90b9f52b78231256">   51</a></span>&#160;    <a class="code" href="classqx_1_1token.html#ae3d8ce5bcb32dcaf90b9f52b78231256">~token</a>(<span class="keywordtype">void</span>)</div>
+<div class="line"><a name="l00051"></a><span class="lineno"><a class="line" href="classqx_1_1token.html#a9932af206dd3f9c1493f6c823b27eb3f">   51</a></span>&#160;    <a class="code" href="classqx_1_1token.html#a9932af206dd3f9c1493f6c823b27eb3f">~token</a>()</div>
 <div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    {</div>
 <div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;        <span class="keywordflow">if</span> (m_Destroyer)</div>
 <div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;            m_Destroyer();</div>
@@ -104,9 +104,8 @@ $(function() {
 <div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160; </div>
 <div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;} <span class="comment">// namespace qx</span></div>
 <div class="ttc" id="aclassqx_1_1token_html"><div class="ttname"><a href="classqx_1_1token.html">qx::token</a></div><div class="ttdoc">Token class for RAII.</div><div class="ttdef"><b>Definition:</b> <a href="token_8h_source.html#l00026">token.h:27</a></div></div>
-<div class="ttc" id="aclassqx_1_1token_html_a15def5174caee5acdb2246398803a0ec"><div class="ttname"><a href="classqx_1_1token.html#a15def5174caee5acdb2246398803a0ec">qx::token::token</a></div><div class="ttdeci">token(destroyer _destroyer)</div><div class="ttdoc">token object constructor</div><div class="ttdef"><b>Definition:</b> <a href="token_8h_source.html#l00044">token.h:44</a></div></div>
-<div class="ttc" id="aclassqx_1_1token_html_ae3d8ce5bcb32dcaf90b9f52b78231256"><div class="ttname"><a href="classqx_1_1token.html#ae3d8ce5bcb32dcaf90b9f52b78231256">qx::token::~token</a></div><div class="ttdeci">~token(void)</div><div class="ttdoc">token object destructor</div><div class="ttdef"><b>Definition:</b> <a href="token_8h_source.html#l00051">token.h:51</a></div></div>
-<div class="ttc" id="aclassqx_1_1token_html_aeabb27996d8402904600f495e71557b8"><div class="ttname"><a href="classqx_1_1token.html#aeabb27996d8402904600f495e71557b8">qx::token::token</a></div><div class="ttdeci">token(void) noexcept=default</div><div class="ttdoc">token object constructor</div></div>
+<div class="ttc" id="aclassqx_1_1token_html_a197137e488dcac922701edc8f88d814e"><div class="ttname"><a href="classqx_1_1token.html#a197137e488dcac922701edc8f88d814e">qx::token::token</a></div><div class="ttdeci">token() noexcept=default</div><div class="ttdoc">token object constructor</div></div>
+<div class="ttc" id="aclassqx_1_1token_html_a9932af206dd3f9c1493f6c823b27eb3f"><div class="ttname"><a href="classqx_1_1token.html#a9932af206dd3f9c1493f6c823b27eb3f">qx::token::~token</a></div><div class="ttdeci">~token()</div><div class="ttdoc">token object destructor</div><div class="ttdef"><b>Definition:</b> <a href="token_8h_source.html#l00051">token.h:51</a></div></div>
 <div class="ttc" id="auseful__macros_8h_html"><div class="ttname"><a href="useful__macros_8h.html">useful_macros.h</a></div><div class="ttdoc">Useful macros.</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->

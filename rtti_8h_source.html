@@ -91,7 +91,7 @@ $(function() {
 <div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;} <span class="comment">// namespace detail</span></div>
 <div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160; </div>
 <div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> C&gt;</div>
-<div class="line"><a name="l00041"></a><span class="lineno"><a class="line" href="rtti_8h.html#a7d49e11afeb462aa6d0876395755ed79">   41</a></span>&#160;<span class="keyword">inline</span> class_identificator <a class="code" href="rtti_8h.html#a7d49e11afeb462aa6d0876395755ed79">get_class_id</a>(<span class="keywordtype">void</span>) noexcept</div>
+<div class="line"><a name="l00041"></a><span class="lineno"><a class="line" href="rtti_8h.html#a6d8a41ae6ddba250b07deb594edb332c">   41</a></span>&#160;<span class="keyword">inline</span> class_identificator <a class="code" href="rtti_8h.html#a6d8a41ae6ddba250b07deb594edb332c">get_class_id</a>() noexcept</div>
 <div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;{</div>
 <div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    <span class="keywordflow">if</span> constexpr (detail::has_get_class_id_static&lt;C&gt;)</div>
 <div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    {</div>
@@ -133,22 +133,22 @@ $(function() {
 <div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;        <span class="keywordflow">return</span> <span class="keywordtype">id</span> == get_class_id_static();</div>
 <div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;    }</div>
 <div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160; </div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;    <span class="keyword">static</span> constexpr std::string_view get_class_name_static(<span class="keywordtype">void</span>) noexcept</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;    <span class="keyword">static</span> constexpr std::string_view get_class_name_static() noexcept</div>
 <div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;    {</div>
 <div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;        <span class="keywordflow">return</span> _get_class_name_by_strategy&lt;QX_STRINGIFY(rtti_root)&gt;();</div>
 <div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;    }</div>
 <div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160; </div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;    <span class="keyword">virtual</span> std::string_view get_class_name(<span class="keywordtype">void</span>) <span class="keyword">const</span> noexcept</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;    <span class="keyword">virtual</span> std::string_view get_class_name() <span class="keyword">const</span> noexcept</div>
 <div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;    {</div>
 <div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;        <span class="keywordflow">return</span> get_class_name_static();</div>
 <div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;    }</div>
 <div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160; </div>
-<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;    <span class="keyword">static</span> class_identificator get_class_id_static(<span class="keywordtype">void</span>) noexcept</div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;    <span class="keyword">static</span> class_identificator get_class_id_static() noexcept</div>
 <div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;    {</div>
 <div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;        <span class="keywordflow">return</span> 0;</div>
 <div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;    }</div>
 <div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160; </div>
-<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">int</span> get_class_id(<span class="keywordtype">void</span>) <span class="keyword">const</span> noexcept</div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">int</span> get_class_id() <span class="keyword">const</span> noexcept</div>
 <div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;    {</div>
 <div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;        <span class="keywordflow">return</span> get_class_id_static();</div>
 <div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;    }</div>
@@ -176,55 +176,55 @@ $(function() {
 <div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;    }</div>
 <div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;};</div>
 <div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160; </div>
-<div class="line"><a name="l00144"></a><span class="lineno"><a class="line" href="rtti_8h.html#ae0343c893e61db7576b61fe33a630bda">  144</a></span>&#160;<span class="preprocessor">#define QX_RTTI_CLASS(thisClass, ...)                                          \</span></div>
-<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;<span class="preprocessor">                                                                               \</span></div>
-<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;<span class="preprocessor">public:                                                                        \</span></div>
-<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;<span class="preprocessor">    using ThisClass  = thisClass;                                              \</span></div>
-<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;<span class="preprocessor">    using SuperClass = __VA_ARGS__;                                            \</span></div>
-<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;<span class="preprocessor">    using BaseClass  = typename SuperClass::BaseClass;                         \</span></div>
-<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;<span class="preprocessor">                                                                               \</span></div>
-<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;<span class="preprocessor">public:                                                                        \</span></div>
-<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;<span class="preprocessor">    virtual bool is_derived_from_id(qx::class_identificator id)                \</span></div>
-<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;<span class="preprocessor">        const noexcept override                                                \</span></div>
-<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;<span class="preprocessor">    {                                                                          \</span></div>
-<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;<span class="preprocessor">        return id == get_class_id_static()                                     \</span></div>
-<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;<span class="preprocessor">               || SuperClass::is_derived_from_id(id);                          \</span></div>
-<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;<span class="preprocessor">    }                                                                          \</span></div>
-<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;<span class="preprocessor">                                                                               \</span></div>
-<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;<span class="preprocessor">    static constexpr std::string_view get_class_name_static(void) noexcept     \</span></div>
-<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;<span class="preprocessor">    {                                                                          \</span></div>
-<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;<span class="preprocessor">        return BaseClass::template _get_class_name_by_strategy&lt;QX_STRINGIFY(   \</span></div>
-<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;<span class="preprocessor">            thisClass)&gt;();                                                     \</span></div>
-<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;<span class="preprocessor">    }                                                                          \</span></div>
-<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;<span class="preprocessor">                                                                               \</span></div>
-<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;<span class="preprocessor">    virtual qx::class_identificator get_class_id(void) const noexcept override \</span></div>
-<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;<span class="preprocessor">    {                                                                          \</span></div>
-<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;<span class="preprocessor">        return get_class_id_static();                                          \</span></div>
-<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;<span class="preprocessor">    }                                                                          \</span></div>
-<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;<span class="preprocessor">                                                                               \</span></div>
-<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;<span class="preprocessor">    static qx::class_identificator get_class_id_static(void) noexcept          \</span></div>
-<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;<span class="preprocessor">    {                                                                          \</span></div>
-<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;<span class="preprocessor">        static auto id = BaseClass::_get_next_id();                            \</span></div>
-<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;<span class="preprocessor">        return id;                                                             \</span></div>
-<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;<span class="preprocessor">    }                                                                          \</span></div>
-<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;<span class="preprocessor">                                                                               \</span></div>
-<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;<span class="preprocessor">    virtual std::string_view get_class_name(void) const noexcept override      \</span></div>
-<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;<span class="preprocessor">    {                                                                          \</span></div>
-<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;<span class="preprocessor">        return get_class_name_static();                                        \</span></div>
-<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;<span class="preprocessor">    }                                                                          \</span></div>
-<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;<span class="preprocessor">                                                                               \</span></div>
-<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;<span class="preprocessor">protected:                                                                     \</span></div>
-<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;<span class="preprocessor">    virtual bool _is_base_id(qx::class_identificator base_id)                  \</span></div>
-<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;<span class="preprocessor">        const noexcept override                                                \</span></div>
-<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;<span class="preprocessor">    {                                                                          \</span></div>
-<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;<span class="preprocessor">        return base_id == qx::get_class_id&lt;SuperClass&gt;()                       \</span></div>
-<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;<span class="preprocessor">               || SuperClass::_is_base_id(base_id);                            \</span></div>
+<div class="line"><a name="l00144"></a><span class="lineno"><a class="line" href="rtti_8h.html#ae0343c893e61db7576b61fe33a630bda">  144</a></span>&#160;<span class="preprocessor">#define QX_RTTI_CLASS(thisClass, ...)                                        \</span></div>
+<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;<span class="preprocessor">                                                                             \</span></div>
+<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;<span class="preprocessor">public:                                                                      \</span></div>
+<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;<span class="preprocessor">    using ThisClass  = thisClass;                                            \</span></div>
+<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;<span class="preprocessor">    using SuperClass = __VA_ARGS__;                                          \</span></div>
+<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;<span class="preprocessor">    using BaseClass  = typename SuperClass::BaseClass;                       \</span></div>
+<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;<span class="preprocessor">                                                                             \</span></div>
+<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;<span class="preprocessor">public:                                                                      \</span></div>
+<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;<span class="preprocessor">    virtual bool is_derived_from_id(qx::class_identificator id)              \</span></div>
+<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;<span class="preprocessor">        const noexcept override                                              \</span></div>
+<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;<span class="preprocessor">    {                                                                        \</span></div>
+<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;<span class="preprocessor">        return id == get_class_id_static()                                   \</span></div>
+<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;<span class="preprocessor">               || SuperClass::is_derived_from_id(id);                        \</span></div>
+<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;<span class="preprocessor">    }                                                                        \</span></div>
+<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;<span class="preprocessor">                                                                             \</span></div>
+<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;<span class="preprocessor">    static constexpr std::string_view get_class_name_static() noexcept       \</span></div>
+<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;<span class="preprocessor">    {                                                                        \</span></div>
+<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;<span class="preprocessor">        return BaseClass::template _get_class_name_by_strategy&lt;QX_STRINGIFY( \</span></div>
+<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;<span class="preprocessor">            thisClass)&gt;();                                                   \</span></div>
+<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;<span class="preprocessor">    }                                                                        \</span></div>
+<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;<span class="preprocessor">                                                                             \</span></div>
+<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;<span class="preprocessor">    virtual qx::class_identificator get_class_id() const noexcept override   \</span></div>
+<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;<span class="preprocessor">    {                                                                        \</span></div>
+<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;<span class="preprocessor">        return get_class_id_static();                                        \</span></div>
+<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;<span class="preprocessor">    }                                                                        \</span></div>
+<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;<span class="preprocessor">                                                                             \</span></div>
+<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;<span class="preprocessor">    static qx::class_identificator get_class_id_static() noexcept            \</span></div>
+<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;<span class="preprocessor">    {                                                                        \</span></div>
+<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;<span class="preprocessor">        static auto id = BaseClass::_get_next_id();                          \</span></div>
+<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;<span class="preprocessor">        return id;                                                           \</span></div>
+<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;<span class="preprocessor">    }                                                                        \</span></div>
+<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;<span class="preprocessor">                                                                             \</span></div>
+<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;<span class="preprocessor">    virtual std::string_view get_class_name() const noexcept override        \</span></div>
+<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;<span class="preprocessor">    {                                                                        \</span></div>
+<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;<span class="preprocessor">        return get_class_name_static();                                      \</span></div>
+<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;<span class="preprocessor">    }                                                                        \</span></div>
+<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;<span class="preprocessor">                                                                             \</span></div>
+<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;<span class="preprocessor">protected:                                                                   \</span></div>
+<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;<span class="preprocessor">    virtual bool _is_base_id(qx::class_identificator base_id)                \</span></div>
+<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;<span class="preprocessor">        const noexcept override                                              \</span></div>
+<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;<span class="preprocessor">    {                                                                        \</span></div>
+<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;<span class="preprocessor">        return base_id == qx::get_class_id&lt;SuperClass&gt;()                     \</span></div>
+<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;<span class="preprocessor">               || SuperClass::_is_base_id(base_id);                          \</span></div>
 <div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;<span class="preprocessor">    }</span></div>
 <div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160; </div>
 <div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;} <span class="comment">// namespace qx</span></div>
 <div class="ttc" id="aclass__identificator_8h_html"><div class="ttname"><a href="class__identificator_8h.html">class_identificator.h</a></div><div class="ttdoc">Contains qx::class_identificator.</div></div>
 <div class="ttc" id="aclassqx_1_1rtti__root_html"><div class="ttname"><a href="classqx_1_1rtti__root.html">qx::rtti_root</a></div><div class="ttdoc">RTTI root class.</div><div class="ttdef"><b>Definition:</b> <a href="rtti_8h_source.html#l00069">rtti.h:70</a></div></div>
-<div class="ttc" id="artti_8h_html_a7d49e11afeb462aa6d0876395755ed79"><div class="ttname"><a href="rtti_8h.html#a7d49e11afeb462aa6d0876395755ed79">qx::get_class_id</a></div><div class="ttdeci">class_identificator get_class_id(void) noexcept</div><div class="ttdoc">Get class id if C is supported qx RTTI system.</div><div class="ttdef"><b>Definition:</b> <a href="rtti_8h_source.html#l00041">rtti.h:41</a></div></div>
+<div class="ttc" id="artti_8h_html_a6d8a41ae6ddba250b07deb594edb332c"><div class="ttname"><a href="rtti_8h.html#a6d8a41ae6ddba250b07deb594edb332c">qx::get_class_id</a></div><div class="ttdeci">class_identificator get_class_id() noexcept</div><div class="ttdoc">Get class id if C is supported qx RTTI system.</div><div class="ttdef"><b>Definition:</b> <a href="rtti_8h_source.html#l00041">rtti.h:41</a></div></div>
 <div class="ttc" id="artti__naming__strategy_8h_html"><div class="ttname"><a href="rtti__naming__strategy_8h.html">rtti_naming_strategy.h</a></div><div class="ttdoc">Contains naming strategies for qx::rtti_root class.</div></div>
 <div class="ttc" id="auseful__macros_8h_html"><div class="ttname"><a href="useful__macros_8h.html">useful_macros.h</a></div><div class="ttdoc">Useful macros.</div></div>
 </div><!-- fragment --></div><!-- contents -->

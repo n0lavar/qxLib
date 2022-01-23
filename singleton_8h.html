@@ -153,12 +153,12 @@ Macros</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <b>Value:</b><div class="fragment"><div class="line"><span class="keyword">private</span>:                                                               \</div>
-<div class="line">    T(<span class="keywordtype">void</span>) constructor;                                               \</div>
-<div class="line">    ~T(<span class="keywordtype">void</span>) destructor;                                               \</div>
-<div class="line">    T(<span class="keyword">const</span> T&amp;)      = <span class="keyword">delete</span>;                                         \</div>
-<div class="line">    T(T&amp;&amp;)           = <span class="keyword">delete</span>;                                         \</div>
-<div class="line">    const T&amp; operator=(<span class="keyword">const</span> T&amp;) = <span class="keyword">delete</span>;                             \</div>
-<div class="line">    const T&amp; operator=(T&amp;&amp;) = <span class="keyword">delete</span>;                                  \</div>
+<div class="line">    T() constructor;                                                   \</div>
+<div class="line">    ~T() destructor;                                                   \</div>
+<div class="line">    T(const T&amp;)      = delete;                                         \</div>
+<div class="line">    T(T&amp;&amp;)           = delete;                                         \</div>
+<div class="line">    const T&amp; operator=(const T&amp;) = delete;                             \</div>
+<div class="line">    const T&amp; operator=(T&amp;&amp;) = delete;                                  \</div>
 <div class="line">                                                                       \</div>
 <div class="line">public:                                                                \</div>
 <div class="line">    static T&amp; get_instance()                                           \</div>

@@ -74,8 +74,8 @@ $(function() {
 <div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160; </div>
 <div class="line"><a name="l00020"></a><span class="lineno"><a class="line" href="singleton_8h.html#abd580e7d55323e05229cdcb486d7afbc">   20</a></span>&#160;<span class="preprocessor">#define _QX_SINGLETON_IMPL(T, constructor, destructor, process_getter) \</span></div>
 <div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="preprocessor">private:                                                               \</span></div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="preprocessor">    T(void) constructor;                                               \</span></div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="preprocessor">    ~T(void) destructor;                                               \</span></div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="preprocessor">    T() constructor;                                                   \</span></div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="preprocessor">    ~T() destructor;                                                   \</span></div>
 <div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="preprocessor">    T(const T&amp;)      = delete;                                         \</span></div>
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="preprocessor">    T(T&amp;&amp;)           = delete;                                         \</span></div>
 <div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="preprocessor">    const T&amp; operator=(const T&amp;) = delete;                             \</span></div>
