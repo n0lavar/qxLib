@@ -10,7 +10,7 @@
 namespace qx
 {
 
-inline base_vao::~base_vao(void)
+inline base_vao::~base_vao()
 {
     if (m_nVAO != std::numeric_limits<GLuint>::max())
     {
@@ -19,27 +19,27 @@ inline base_vao::~base_vao(void)
     }
 }
 
-inline void base_vao::Generate(void)
+inline void base_vao::Generate()
 {
     glGenVertexArrays(1, &m_nVAO);
 }
 
-inline void base_vao::Bind(void) const
+inline void base_vao::Bind() const
 {
     glBindVertexArray(m_nVAO);
 }
 
-inline void base_vao::Unbind(void) const
+inline void base_vao::Unbind() const
 {
     glBindVertexArray(0);
 }
 
-inline GLuint base_vao::GetBufferName(void) const
+inline GLuint base_vao::GetBufferName() const
 {
     return m_nVAO;
 }
 
-inline bool base_vao::IsGenerated(void) const
+inline bool base_vao::IsGenerated() const
 {
     return m_nVAO != std::numeric_limits<GLuint>::max();
 };

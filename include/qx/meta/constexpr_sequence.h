@@ -46,7 +46,7 @@ private:
     template<T nIndex>
     struct Element
     {
-        static constexpr T value(void) noexcept
+        static constexpr T value() noexcept
         {
             T _value = Start;
 
@@ -60,7 +60,7 @@ private:
     template<std::size_t nCurrent, bool bWasSet /* = false */>
     struct CheckerSetter
     {
-        static constexpr std::size_t index(void) noexcept
+        static constexpr std::size_t index() noexcept
         {
             return nCurrent;
         }
@@ -72,7 +72,7 @@ private:
         template<
             bool        bWasSet = constexpr_flag<Element<nCurrent>> {}.test(),
             std::size_t nNext   = CheckerSetter<nCurrent, bWasSet> {}.index()>
-        static constexpr std::size_t index(void) noexcept
+        static constexpr std::size_t index() noexcept
         {
             return nNext;
         }
@@ -82,7 +82,7 @@ private:
     struct CheckerSetter<nCurrent, /* bool bWasSet = */ true>
     {
         template<std::size_t nNext = CheckerWrapper<nCurrent + 1> {}.index()>
-        static constexpr std::size_t index(void) noexcept
+        static constexpr std::size_t index() noexcept
         {
             return nNext;
         }
@@ -102,7 +102,7 @@ public:
     template<
         std::size_t nIndex = CheckerWrapper<0> {}.index(),
         T           _value = Element<nIndex> {}.value()>
-    static constexpr T value(void) noexcept
+    static constexpr T value() noexcept
     {
         return _value;
     }
@@ -122,7 +122,7 @@ public:
         std::size_t nIndex = CheckerWrapper<0> {}.index(),
         T           _value = Element<nIndex> {}.value(),
         bool        bStub  = constexpr_flag<Element<nIndex>> {}.test_and_set()>
-    static constexpr T next(void) noexcept
+    static constexpr T next() noexcept
     {
         return Func(_value);
     }

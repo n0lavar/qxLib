@@ -93,7 +93,7 @@ inline const Data& shared_proxy<Data, SynchronizationPrimitive>::operator*(
 
 template<class Data, class SynchronizationPrimitive>
 inline threads_shared<Data, SynchronizationPrimitive>::
-    synchronization_primitive_raii::synchronization_primitive_raii(void)
+    synchronization_primitive_raii::synchronization_primitive_raii()
 {
     lock_synchronization_primitive(&sp);
 }
@@ -109,7 +109,7 @@ template<class Data, class SynchronizationPrimitive>
 inline SynchronizationPrimitive* threads_shared<
     Data,
     SynchronizationPrimitive>::synchronization_primitive_raii::
-    get_object(void) noexcept
+    get_object() noexcept
 {
     return &sp;
 }
@@ -149,7 +149,7 @@ inline typename threads_shared<Data, SynchronizationPrimitive>::proxy
 template<class Data, class SynchronizationPrimitive>
 inline std::optional<
     typename threads_shared<Data, SynchronizationPrimitive>::proxy>
-    threads_shared<Data, SynchronizationPrimitive>::try_lock(void)
+    threads_shared<Data, SynchronizationPrimitive>::try_lock()
 {
     auto object =
         proxy(&m_Data, m_SynchronizationPrimitiveRAII.get_object(), true);

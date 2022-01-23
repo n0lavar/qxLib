@@ -33,19 +33,19 @@ public:
     /**
         @brief Start benchmark
     **/
-    void start(void);
+    void start();
 
     /**
         @brief  End benchmark
         @retval - number of seconds since start time
     **/
-    double end(void);
+    double end();
 
     /**
         @brief  Get last benchmark time
         @retval - last number of seconds since start time
     **/
-    double last(void) const;
+    double last() const;
 
 private:
     time_point m_Start;

@@ -55,52 +55,52 @@ inline constexpr color::color(const glm::ivec4& vec4) noexcept
 {
 }
 
-constexpr float color::r(void) const noexcept
+constexpr float color::r() const noexcept
 {
     return m_Color.x;
 }
 
-constexpr float color::g(void) const noexcept
+constexpr float color::g() const noexcept
 {
     return m_Color.y;
 }
 
-constexpr float color::b(void) const noexcept
+constexpr float color::b() const noexcept
 {
     return m_Color.z;
 }
 
-constexpr float color::a(void) const noexcept
+constexpr float color::a() const noexcept
 {
     return m_Color.w;
 }
 
-inline constexpr int color::r_dec(void) const noexcept
+inline constexpr int color::r_dec() const noexcept
 {
     return float_to_dec(m_Color.x);
 }
 
-inline constexpr int color::g_dec(void) const noexcept
+inline constexpr int color::g_dec() const noexcept
 {
     return float_to_dec(m_Color.y);
 }
 
-inline constexpr int color::b_dec(void) const noexcept
+inline constexpr int color::b_dec() const noexcept
 {
     return float_to_dec(m_Color.z);
 }
 
-inline constexpr int color::a_dec(void) const noexcept
+inline constexpr int color::a_dec() const noexcept
 {
     return float_to_dec(m_Color.w);
 }
 
-constexpr const float* color::data(void) const noexcept
+constexpr const float* color::data() const noexcept
 {
     return &(m_Color.x);
 }
 
-constexpr unsigned int color::hex(void) const noexcept
+constexpr unsigned int color::hex() const noexcept
 {
     unsigned int r = static_cast<unsigned int>(float_to_dec(m_Color.x));
     unsigned int g = static_cast<unsigned int>(float_to_dec(m_Color.y));
@@ -116,12 +116,12 @@ constexpr bool color::operator==(const color& other) const noexcept
     return m_Color == other.m_Color;
 }
 
-constexpr color::operator glm::vec3(void) const noexcept
+constexpr color::operator glm::vec3() const noexcept
 {
     return m_Color;
 }
 
-constexpr color::operator glm::vec4(void) const noexcept
+constexpr color::operator glm::vec4() const noexcept
 {
     return m_Color;
 }
@@ -312,7 +312,7 @@ constexpr color color::yellow(float fAlpha) noexcept
     return color(255, 255, 000, float_to_dec(fAlpha));
 }
 
-constexpr color color::empty(void) noexcept
+constexpr color color::empty() noexcept
 {
     return color(0, 0, 0, 0);
 }

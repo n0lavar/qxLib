@@ -10,7 +10,7 @@
 namespace qx
 {
 
-inline base_logger_stream::base_logger_stream(void)
+inline base_logger_stream::base_logger_stream()
 {
     register_unit(DEFAULT_UNIT, { log_level::info });
 }
@@ -169,7 +169,7 @@ inline void base_logger_stream::format_time_string(string& sTime) noexcept
         now->tm_sec);
 }
 
-inline string& base_logger_stream::get_time_buffer(void) noexcept
+inline string& base_logger_stream::get_time_buffer() noexcept
 {
     return m_sBufferTime;
 }

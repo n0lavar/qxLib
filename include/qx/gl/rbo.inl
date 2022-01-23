@@ -10,7 +10,7 @@
 namespace qx
 {
 
-inline base_rbo::~base_rbo(void)
+inline base_rbo::~base_rbo()
 {
     if (m_nBuffer != std::numeric_limits<GLuint>::max())
     {
@@ -51,47 +51,47 @@ inline void base_rbo::Init(
     }
 }
 
-inline void base_rbo::Generate(void)
+inline void base_rbo::Generate()
 {
     glGenRenderbuffers(1, &m_nBuffer);
 }
 
-inline void base_rbo::Bind(void) const
+inline void base_rbo::Bind() const
 {
     glBindRenderbuffer(GL_RENDERBUFFER, m_nBuffer);
 }
 
-inline void base_rbo::Unbind(void) const
+inline void base_rbo::Unbind() const
 {
     glBindRenderbuffer(GL_RENDERBUFFER, 0);
 }
 
-inline GLuint base_rbo::GetBufferName(void) const
+inline GLuint base_rbo::GetBufferName() const
 {
     return m_nBuffer;
 }
 
-inline bool base_rbo::IsGenerated(void) const
+inline bool base_rbo::IsGenerated() const
 {
     return m_nBuffer != std::numeric_limits<GLuint>::max();
 }
 
-inline size_t base_rbo::GetWidth(void) const
+inline size_t base_rbo::GetWidth() const
 {
     return m_nWidth;
 }
 
-inline size_t base_rbo::GetHeight(void) const
+inline size_t base_rbo::GetHeight() const
 {
     return m_nHeight;
 }
 
-inline GLenum base_rbo::GetInternalFormat(void) const
+inline GLenum base_rbo::GetInternalFormat() const
 {
     return m_eInternalFormat;
 }
 
-inline GLenum base_rbo::GetAttachmentType(void) const
+inline GLenum base_rbo::GetAttachmentType() const
 {
     return m_eAttachmentType;
 }

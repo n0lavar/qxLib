@@ -111,7 +111,7 @@ typename string_data<Traits>::size_type string_data<Traits>::capacity(
 }
 
 template<class Traits>
-bool string_data<Traits>::is_small(void) const noexcept
+bool string_data<Traits>::is_small() const noexcept
 {
     return m_nAllocatedSize == 0;
 }

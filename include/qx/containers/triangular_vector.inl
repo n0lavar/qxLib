@@ -38,7 +38,7 @@ inline triangular_vector<T>::triangular_vector(
 }
 
 template<class T>
-inline triangular_vector<T>::~triangular_vector(void)
+inline triangular_vector<T>::~triangular_vector()
 {
     free();
 }
@@ -177,7 +177,7 @@ inline typename triangular_vector<T>::size_type triangular_vector<T>::capacity(
 }
 
 template<class T>
-inline void triangular_vector<T>::free(void)
+inline void triangular_vector<T>::free()
 {
     clear();
     std::free(m_pData);
@@ -240,7 +240,7 @@ inline typename triangular_vector<T>::reference triangular_vector<T>::at(
     @brief Clear triangular vector
 **/
 template<class T>
-inline void triangular_vector<T>::clear(void) noexcept
+inline void triangular_vector<T>::clear() noexcept
 {
     if (m_pData)
         destruct(begin(), end());

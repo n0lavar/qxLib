@@ -10,12 +10,12 @@
 namespace qx
 {
 
-inline GLenum base_vbo::GetBufferType(void) const
+inline GLenum base_vbo::GetBufferType() const
 {
     return GL_ARRAY_BUFFER;
 }
 
-inline GLbitfield base_vbo::GetBarrierBit(void) const
+inline GLbitfield base_vbo::GetBarrierBit() const
 {
     return GL_VERTEX_ATTRIB_ARRAY_BARRIER_BIT;
 }

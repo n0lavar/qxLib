@@ -25,7 +25,7 @@ inline base_easing_element<T>::base_easing_element(
 }
 
 template<typename T>
-inline void base_easing_element<T>::start(void) noexcept
+inline void base_easing_element<T>::start() noexcept
 {
     m_eStatus   = status::started;
     m_fCurrentX = T(0.f);
@@ -33,21 +33,21 @@ inline void base_easing_element<T>::start(void) noexcept
 }
 
 template<typename T>
-inline void base_easing_element<T>::pause(void) noexcept
+inline void base_easing_element<T>::pause() noexcept
 {
     if (m_eStatus == status::started)
         m_eStatus = status::paused;
 }
 
 template<typename T>
-inline void base_easing_element<T>::resume(void) noexcept
+inline void base_easing_element<T>::resume() noexcept
 {
     if (m_eStatus == status::paused)
         m_eStatus = status::started;
 }
 
 template<typename T>
-inline void base_easing_element<T>::finish(void) noexcept
+inline void base_easing_element<T>::finish() noexcept
 {
     m_eStatus   = status::finished;
     m_fCurrentX = T(1.f);
@@ -55,7 +55,7 @@ inline void base_easing_element<T>::finish(void) noexcept
 }
 
 template<typename T>
-inline void base_easing_element<T>::reset(void) noexcept
+inline void base_easing_element<T>::reset() noexcept
 {
     m_eStatus   = status::not_started;
     m_fCurrentX = T(0.f);
@@ -98,50 +98,50 @@ inline void base_easing_element<T>::set_speed(T fSpeed) noexcept
 }
 
 template<typename T>
-inline T base_easing_element<T>::get(void) const noexcept
+inline T base_easing_element<T>::get() const noexcept
 {
     return m_fCurrentY;
 }
 
 template<typename T>
-inline T base_easing_element<T>::get_fraction(void) const noexcept
+inline T base_easing_element<T>::get_fraction() const noexcept
 {
     return m_fCurrentX;
 }
 
 template<typename T>
-inline T base_easing_element<T>::get_speed(void) const noexcept
+inline T base_easing_element<T>::get_speed() const noexcept
 {
     return m_fSpeed;
 }
 
 template<typename T>
 inline typename base_easing_element<T>::status base_easing_element<
-    T>::get_status(void) const noexcept
+    T>::get_status() const noexcept
 {
     return m_eStatus;
 }
 
 template<typename T>
-inline bool base_easing_element<T>::is_not_started(void) const noexcept
+inline bool base_easing_element<T>::is_not_started() const noexcept
 {
     return m_eStatus == status::not_started;
 }
 
 template<typename T>
-inline bool base_easing_element<T>::is_started(void) const noexcept
+inline bool base_easing_element<T>::is_started() const noexcept
 {
     return m_eStatus == status::started;
 }
 
 template<typename T>
-inline bool base_easing_element<T>::is_paused(void) const noexcept
+inline bool base_easing_element<T>::is_paused() const noexcept
 {
     return m_eStatus == status::paused;
 }
 
 template<typename T>
-inline bool base_easing_element<T>::is_finished(void) const noexcept
+inline bool base_easing_element<T>::is_finished() const noexcept
 {
     return m_eStatus == status::finished;
 }

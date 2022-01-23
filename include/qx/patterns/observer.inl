@@ -20,7 +20,7 @@ inline observer_token_data::observer_token_data(
 {
 }
 
-inline void observer_token_data::reset(void) noexcept
+inline void observer_token_data::reset() noexcept
 {
     if (m_pSubject && m_pObserver)
         m_pSubject->detach(m_pObserver);
@@ -55,7 +55,7 @@ inline bool observer_token_data::operator==(
     return m_pSubject == other.m_pSubject && m_pObserver == other.m_pObserver;
 }
 
-inline observer_token_data::operator bool(void) const noexcept
+inline observer_token_data::operator bool() const noexcept
 {
     return m_pSubject && m_pObserver;
 }
@@ -87,7 +87,7 @@ subject<TObserver>::base_iterator<TBaseIterator>::base_iterator(
 
 template<class TObserver>
 template<class TBaseIterator>
-subject<TObserver>::base_iterator<TBaseIterator>::~base_iterator(void) noexcept
+subject<TObserver>::base_iterator<TBaseIterator>::~base_iterator() noexcept
 {
     m_pSubject->on_iterator_destructed();
 }
@@ -110,7 +110,7 @@ TObserver& subject<TObserver>::base_iterator<TBaseIterator>::operator*(
 
 template<class TObserver>
 template<class TBaseIterator>
-void subject<TObserver>::base_iterator<TBaseIterator>::init(void) noexcept
+void subject<TObserver>::base_iterator<TBaseIterator>::init() noexcept
 {
     m_pSubject->on_iterator_constructed();
 }
@@ -130,7 +130,7 @@ inline subject<TObserver>::const_base_iterator<
 template<class TObserver>
 template<class TBaseIterator>
 const TObserver*    subject<TObserver>::const_base_iterator<
-    TBaseIterator>::operator->(void) const noexcept
+    TBaseIterator>::operator->() const noexcept
 {
     return static_cast<const TObserver*>(*TBaseIterator::operator->());
 }
@@ -138,7 +138,7 @@ const TObserver*    subject<TObserver>::const_base_iterator<
 template<class TObserver>
 template<class TBaseIterator>
 const TObserver&    subject<TObserver>::const_base_iterator<
-    TBaseIterator>::operator*(void) const noexcept
+    TBaseIterator>::operator*() const noexcept
 {
     return static_cast<const TObserver&>(*TBaseIterator::operator*());
 }
@@ -148,7 +148,7 @@ const TObserver&    subject<TObserver>::const_base_iterator<
 // ---------------------------------- subject ----------------------------------
 
 template<class TObserver>
-inline subject<TObserver>::~subject(void)
+inline subject<TObserver>::~subject()
 {
     // temp vector because reset will erase elements from m_Tokens
     const auto tokens = m_Tokens;
@@ -182,7 +182,7 @@ inline void subject<TObserver>::notify(
 }
 
 template<class TObserver>
-inline typename subject<TObserver>::iterator subject<TObserver>::begin(void)
+inline typename subject<TObserver>::iterator subject<TObserver>::begin()
 {
     return iterator(m_Observers.begin(), this);
 }
@@ -202,7 +202,7 @@ inline typename subject<TObserver>::const_iterator subject<TObserver>::cbegin(
 }
 
 template<class TObserver>
-inline typename subject<TObserver>::iterator subject<TObserver>::end(void)
+inline typename subject<TObserver>::iterator subject<TObserver>::end()
 {
     return iterator(m_Observers.end(), this);
 }
@@ -230,14 +230,14 @@ inline typename subject<TObserver>::reverse_iterator subject<TObserver>::rbegin(
 
 template<class TObserver>
 inline typename subject<TObserver>::const_reverse_iterator subject<
-    TObserver>::rbegin(void) const
+    TObserver>::rbegin() const
 {
     return const_reverse_iterator(m_Observers.crbegin());
 }
 
 template<class TObserver>
 inline typename subject<TObserver>::const_reverse_iterator subject<
-    TObserver>::crbegin(void) const
+    TObserver>::crbegin() const
 {
     return const_reverse_iterator(m_Observers.crbegin());
 }
@@ -251,20 +251,20 @@ inline typename subject<TObserver>::reverse_iterator subject<TObserver>::rend(
 
 template<class TObserver>
 inline typename subject<TObserver>::const_reverse_iterator subject<
-    TObserver>::rend(void) const
+    TObserver>::rend() const
 {
     return const_reverse_iterator(m_Observers.crend());
 }
 
 template<class TObserver>
 inline typename subject<TObserver>::const_reverse_iterator subject<
-    TObserver>::crend(void) const
+    TObserver>::crend() const
 {
     return const_reverse_iterator(m_Observers.crend());
 }
 
 template<class TObserver>
-inline size_t subject<TObserver>::get_num_observers(void) const noexcept
+inline size_t subject<TObserver>::get_num_observers() const noexcept
 {
     return m_Observers.size();
 }
@@ -305,7 +305,7 @@ inline void subject<TObserver>::detach(void* pObserver) noexcept
 }
 
 template<class TObserver>
-inline void subject<TObserver>::on_iterator_destructed(void) noexcept
+inline void subject<TObserver>::on_iterator_destructed() noexcept
 {
     m_nIterators--;
     if (m_nIterators == 0)
@@ -321,7 +321,7 @@ inline void subject<TObserver>::on_iterator_destructed(void) noexcept
 }
 
 template<class TObserver>
-inline void subject<TObserver>::on_iterator_constructed(void) noexcept
+inline void subject<TObserver>::on_iterator_constructed() noexcept
 {
     m_nIterators++;
 }

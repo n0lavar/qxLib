@@ -30,14 +30,14 @@ public:
     /**
         @brief buffer_base object destructor
     **/
-    virtual ~buffer_base(void);
+    virtual ~buffer_base();
 
     QX_DECL_IBUFFER
 
     /**
         @brief Defines a barrier ordering memory transactions
     **/
-    virtual void MemBarrier(void);
+    virtual void MemBarrier();
 
     /**
         @brief Allocate memory for the buffer
@@ -66,21 +66,21 @@ protected:
         @brief  Get buffer type
         @retval - buffer type
     **/
-    virtual GLenum GetBufferType(void) const = 0;
+    virtual GLenum GetBufferType() const = 0;
 
     /**
         @brief  Get buffer type barrier bit
         @retval - buffer type barrier bit
     **/
-    virtual GLbitfield GetBarrierBit(void) const = 0;
+    virtual GLbitfield GetBarrierBit() const = 0;
 
 private:
     GLuint m_nBuffer = std::numeric_limits<GLuint>::max();
 };
 
-#define QX_DECL_BUFFER_BASE                                \
-    virtual GLenum     GetBufferType(void) const override; \
-    virtual GLbitfield GetBarrierBit(void) const override;
+#define QX_DECL_BUFFER_BASE                            \
+    virtual GLenum     GetBufferType() const override; \
+    virtual GLbitfield GetBarrierBit() const override;
 
 } // namespace qx
 

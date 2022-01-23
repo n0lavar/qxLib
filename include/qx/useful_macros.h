@@ -33,10 +33,10 @@
     @param type - value type
     @param name - value name
 **/
-#define QX_GETTER(type, name)         \
-    const type& Get##name(void) const \
-    {                                 \
-        return m_##name;              \
+#define QX_GETTER(type, name)     \
+    const type& Get##name() const \
+    {                             \
+        return m_##name;          \
     }
 
 /**
@@ -46,7 +46,7 @@
     @param name - value name
 **/
 #define QX_GETTER_REF(type, name) \
-    type& Get##name(void)         \
+    type& Get##name()             \
     {                             \
         return m_##name;          \
     }

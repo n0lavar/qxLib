@@ -92,7 +92,7 @@ public:
     /**
         @brief basic_string object constructor
     **/
-    basic_string(void) noexcept = default;
+    basic_string() noexcept = default;
 
     /**
         @brief basic_string object constructor
@@ -158,7 +158,7 @@ public:
     /**
         @brief basic_string object destructor
     **/
-    ~basic_string(void) noexcept;
+    ~basic_string() noexcept;
 
     /**
         @brief  Assign by single char
@@ -271,12 +271,12 @@ public:
     /**
         @brief  Fit allocated size to string's actual size
     **/
-    void shrink_to_fit(void) noexcept;
+    void shrink_to_fit() noexcept;
 
     /**
         @brief  Clear string and free allocated memory
     **/
-    void free(void) noexcept;
+    void free() noexcept;
 
     /**
         @brief  Get substring
@@ -290,49 +290,49 @@ public:
     /**
         @brief  Convert string to lowercase
     **/
-    void to_lower(void) noexcept;
+    void to_lower() noexcept;
 
     /**
         @brief  Convert string to uppercase
     **/
-    void to_upper(void) noexcept;
+    void to_upper() noexcept;
 
     /**
         @brief  Get first char of the string
         @retval - first char of the string
     **/
-    value_type front(void) const noexcept;
+    value_type front() const noexcept;
 
     /**
         @brief  Get last char of the string
         @retval - last char of the string
     **/
-    value_type back(void) const noexcept;
+    value_type back() const noexcept;
 
     /**
         @brief  Get string length
         @brief  Same as size()
         @retval - string length
     **/
-    size_type length(void) const noexcept;
+    size_type length() const noexcept;
 
     /**
         @brief  Get pointer to string zero terminated
         @retval - pointer to string zero terminated
     **/
-    const_pointer c_str(void) const noexcept;
+    const_pointer c_str() const noexcept;
 
     /**
         @brief  Get allocated memory size (including null terminator)
         @retval - allocated memory size
     **/
-    size_type capacity(void) const noexcept;
+    size_type capacity() const noexcept;
 
     /**
         @brief  Get the theoretical maximum of string size
         @retval - theoretical maximum of string size
     **/
-    static constexpr size_type max_size(void) noexcept;
+    static constexpr size_type max_size() noexcept;
 
     /**
         @brief  Convert string to specified type
@@ -556,19 +556,19 @@ public:
         @brief  Erase last char and return it
         @retval - last char
     **/
-    value_type pop_back(void) noexcept;
+    value_type pop_back() noexcept;
 
     /**
         @brief  Erase first char and return it
         @retval - first char
     **/
-    value_type pop_front(void) noexcept;
+    value_type pop_front() noexcept;
 
     /**
         @brief  Trim the string to the left (whitespace characters)
         @retval - number of deleted symbols
     **/
-    size_type trim_left(void) noexcept;
+    size_type trim_left() noexcept;
 
     /**
         @brief  Trim the string to the left
@@ -622,7 +622,7 @@ public:
         @brief  Trim the string to the right (whitespace characters)
         @retval - number of deleted symbols
     **/
-    size_type trim_right(void) noexcept;
+    size_type trim_right() noexcept;
 
     /**
         @brief  Trim the string to the right
@@ -676,7 +676,7 @@ public:
         @brief  Trim the string to the both sides (whitespace characters)
         @retval - number of deleted symbols
     **/
-    size_type trim(void) noexcept;
+    size_type trim() noexcept;
 
     /**
         @brief  Trim the string to the both sides
@@ -1878,7 +1878,7 @@ public:
         @brief  operator string_view
         @retval string_view of this string
     **/
-    operator string_view(void) const noexcept;
+    operator string_view() const noexcept;
 
 private:
     /**

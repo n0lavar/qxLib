@@ -58,25 +58,25 @@ public:
             @brief  operator->
             @retval - T object pointer
         **/
-        T* operator->(void) const noexcept;
+        T* operator->() const noexcept;
 
         /**
             @brief  operator*
             @retval - T object reference
         **/
-        T& operator*(void) const noexcept;
+        T& operator*() const noexcept;
 
         /**
             @brief  Get object pointer
             @retval - T object pointer
         **/
-        T* get(void) const noexcept;
+        T* get() const noexcept;
 
         /**
             @brief  Is object presents
             @retval - true if object presents
         **/
-        explicit operator bool(void) const noexcept;
+        explicit operator bool() const noexcept;
 
         /**
             @brief  operator==
@@ -111,7 +111,7 @@ public:
     /**
         @brief link object constructor
     **/
-    link(void) noexcept = default;
+    link() noexcept = default;
 
     /**
         @brief  link object constructor
@@ -179,24 +179,24 @@ public:
         @brief  Lock and return strong pointer
         @retval - strong pointer
     **/
-    lock_ptr lock(void) const noexcept;
+    lock_ptr lock() const noexcept;
 
     /**
         @brief Reset pointer
     **/
-    void reset(void) noexcept;
+    void reset() noexcept;
 
     /**
         @brief  If pointer is expired
         @retval - true if pointer is expired
     **/
-    bool expired(void) const noexcept;
+    bool expired() const noexcept;
 
     /**
         @brief  If pointer is expired
         @retval - true if pointer is expired
     **/
-    explicit operator bool(void) const noexcept;
+    explicit operator bool() const noexcept;
 
     /**
         @brief  operator==

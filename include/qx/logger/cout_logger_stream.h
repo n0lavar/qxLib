@@ -51,7 +51,7 @@ class cout_logger_stream : public base_logger_stream
         {
             std::cout << color;
         }
-        ~auto_terminal_color(void)
+        ~auto_terminal_color()
         {
             std::cout << reset;
         }

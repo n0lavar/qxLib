@@ -29,41 +29,41 @@ public:
     /**
         @brief IBuffer object destructor
     **/
-    virtual ~IBuffer(void) = default;
+    virtual ~IBuffer() = default;
 
     /**
         @brief Generate buffer object
     **/
-    virtual void Generate(void) = 0;
+    virtual void Generate() = 0;
 
     /**
         @brief Bind a named buffer object
     **/
-    virtual void Bind(void) const = 0;
+    virtual void Bind() const = 0;
 
     /**
         @brief Unbind a named buffer object
     **/
-    virtual void Unbind(void) const = 0;
+    virtual void Unbind() const = 0;
 
     /**
         @brief  Get the object's name - the reference to the object
         @retval - the object's name
     **/
-    virtual GLuint GetBufferName(void) const = 0;
+    virtual GLuint GetBufferName() const = 0;
 
     /**
         @brief  Is this buffer generated
         @retval - true is generated
     **/
-    virtual bool IsGenerated(void) const = 0;
+    virtual bool IsGenerated() const = 0;
 };
 
-#define QX_DECL_IBUFFER                                \
-    virtual void   Generate(void) override;            \
-    virtual void   Bind(void) const override;          \
-    virtual void   Unbind(void) const override;        \
-    virtual GLuint GetBufferName(void) const override; \
-    virtual bool   IsGenerated(void) const override;
+#define QX_DECL_IBUFFER                            \
+    virtual void   Generate() override;            \
+    virtual void   Bind() const override;          \
+    virtual void   Unbind() const override;        \
+    virtual GLuint GetBufferName() const override; \
+    virtual bool   IsGenerated() const override;
 
 } // namespace qx

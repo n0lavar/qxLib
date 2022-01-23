@@ -31,12 +31,12 @@ public:
     /**
         @brief base_texture object constructor
     **/
-    base_texture(void) = default;
+    base_texture() = default;
 
     /**
         @brief base_texture object destructor
     **/
-    virtual ~base_texture(void);
+    virtual ~base_texture();
 
     QX_DECL_IBUFFER
 
@@ -44,25 +44,25 @@ public:
         @brief  Get texture target
         @retval - texture target
     **/
-    GLenum GetTarget(void) const;
+    GLenum GetTarget() const;
 
     /**
         @brief  Get texture internal format
         @retval - texture internal format
     **/
-    GLenum GetInternalFormat(void) const;
+    GLenum GetInternalFormat() const;
 
     /**
         @brief  Get texture width
         @retval - texture width
     **/
-    GLsizei GetWidth(void) const;
+    GLsizei GetWidth() const;
 
     /**
         @brief  Get texture height
         @retval - texture height
     **/
-    GLsizei GetHeight(void) const;
+    GLsizei GetHeight() const;
 
     /**
         @brief Set texture target
@@ -114,7 +114,7 @@ public:
     /**
         @brief Generate mipmap for texture
     **/
-    void GenerateMipmap(void);
+    void GenerateMipmap();
 
     /**
         @brief Set texture parameter

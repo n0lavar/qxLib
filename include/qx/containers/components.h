@@ -50,12 +50,12 @@ public:
     class iterator : public TSuperClass
     {
     public:
-        iterator(void) noexcept            = default;
+        iterator() noexcept                = default;
         iterator(const iterator&) noexcept = default;
         iterator(iterator&&) noexcept      = default;
         iterator(const TSuperClass& other) noexcept;
-        auto* operator->(void) noexcept;
-        auto& operator*(void) noexcept;
+        auto* operator->() noexcept;
+        auto& operator*() noexcept;
     };
 
     /**
@@ -71,12 +71,12 @@ public:
     class const_iterator : public TSuperClass
     {
     public:
-        const_iterator(void) noexcept                  = default;
+        const_iterator() noexcept                      = default;
         const_iterator(const const_iterator&) noexcept = default;
         const_iterator(const_iterator&&) noexcept      = default;
         const_iterator(const TSuperClass& other) noexcept;
-        const auto* operator->(void) const noexcept;
-        const auto& operator*(void) const noexcept;
+        const auto* operator->() const noexcept;
+        const auto& operator*() const noexcept;
     };
 
 public:
@@ -106,7 +106,7 @@ public:
         @retval               - component pointer or nullptr if not found
     **/
     template<class TKeyComponent>
-    TKeyComponent* get(void) const;
+    TKeyComponent* get() const;
 
     /**
         @brief  Get first component with "class_identificator" key
@@ -131,7 +131,7 @@ public:
         @retval               - components range
     **/
     template<class TKeyComponent>
-    auto get_all(void) const;
+    auto get_all() const;
 
     /**
         @brief  Get all components with "class_identificator" key
@@ -146,7 +146,7 @@ public:
         @retval               - component unique pointer or nullptr if not found
     **/
     template<class TKeyComponent>
-    pointer extract(void);
+    pointer extract();
 
     /**
         @brief  Remove component from container
@@ -154,14 +154,14 @@ public:
         @retval               - true if removed
     **/
     template<class TKeyComponent>
-    bool remove(void);
+    bool remove();
 
     /**
         @brief  Remove all components with "type" key from container
         @tparam TKeyComponent - the type-identifier that was used when adding the component
     **/
     template<class TKeyComponent>
-    void remove_all(void);
+    void remove_all();
 
     /**
         @brief  Is container contains value with TKeyComponent key
@@ -169,84 +169,84 @@ public:
         @retval               - true if contains
     **/
     template<class TKeyComponent>
-    bool contains(void) const;
+    bool contains() const;
 
     /**
         @brief  Return iterator to beginning
         @retval - iterator to beginning
     **/
-    auto begin(void) noexcept;
+    auto begin() noexcept;
 
     /**
         @brief  Return iterator to end
         @retval - iterator to end
     **/
-    auto end(void) noexcept;
+    auto end() noexcept;
 
     /**
         @brief  Return iterator to beginning
         @retval - iterator to beginning
     **/
-    auto begin(void) const noexcept;
+    auto begin() const noexcept;
 
     /**
         @brief  Return iterator to end
         @retval - iterator to end
     **/
-    auto end(void) const noexcept;
+    auto end() const noexcept;
 
     /**
         @brief  Return const iterator to beginning
         @retval - const iterator to beginning
     **/
-    auto cbegin(void) const noexcept;
+    auto cbegin() const noexcept;
 
     /**
         @brief  Return const iterator to end
         @retval - const iterator to end
     **/
-    auto cend(void) const noexcept;
+    auto cend() const noexcept;
 
     /**
         @brief  Return reverse iterator to reverse beginning
         @retval - reverse iterator to reverse beginning
     **/
-    auto rbegin(void) noexcept;
+    auto rbegin() noexcept;
 
     /**
         @brief  Return reverse iterator to reverse end
         @retval - reverse iterator to reverse end
     **/
-    auto rend(void) noexcept;
+    auto rend() noexcept;
 
     /**
         @brief  Return const reverse iterator to reverse beginning
         @retval - const reverse iterator to reverse beginning
     **/
-    auto crbegin(void) const noexcept;
+    auto crbegin() const noexcept;
 
     /**
         @brief  Return const reverse iterator to reverse end
         @retval - const reverse iterator to reverse end
     **/
-    auto crend(void) const noexcept;
+    auto crend() const noexcept;
 
     /**
         @brief  Get number of components in container
         @retval - number of components in container
     **/
-    size_t size(void) const noexcept;
+    size_t size() const noexcept;
 
     /**
         @brief  Is component empty
         @retval - true if component empty
     **/
-    bool empty(void) const noexcept;
+    bool empty() const noexcept;
 
     /**
         @brief  Clear container
     **/
-    void clear(void) noexcept;
+    void clear() noexcept;
 
 private:
     container       m_Components;

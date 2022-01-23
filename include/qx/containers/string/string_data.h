@@ -45,12 +45,12 @@ public:
         @brief  Get string data: from buffer or from pointer
         @retval - string pointer
     **/
-    pointer data(void) noexcept;
+    pointer data() noexcept;
 
     /**
         @brief Free allocated memory
     **/
-    void free(void) noexcept;
+    void free() noexcept;
 
     /**
         @brief  Resize string data
@@ -68,19 +68,19 @@ public:
         @brief  Get string length
         @retval - string length
     **/
-    size_type size(void) const noexcept;
+    size_type size() const noexcept;
 
     /**
         @brief  Get capacity of string
         @retval - string capacity, can't be less than Traits::small_string_size()
     **/
-    size_type capacity(void) const noexcept;
+    size_type capacity() const noexcept;
 
     /**
         @brief  Is string small and fits in the local buffer
         @retval - true if string is small and fits in the local buffer
     **/
-    bool is_small(void) const noexcept;
+    bool is_small() const noexcept;
 
 private:
     union

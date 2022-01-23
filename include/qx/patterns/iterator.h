@@ -43,17 +43,17 @@ public:
     using iterator_concept  = std::contiguous_iterator_tag;
 
 public:
-    constexpr iterator(void) noexcept = default;
+    constexpr iterator() noexcept = default;
     constexpr iterator(C* c, size_type i) noexcept
         : m_nIndex(i)
         , m_pCollection(c)
     {
     }
-    [[nodiscard]] constexpr reference operator*(void) const noexcept
+    [[nodiscard]] constexpr reference operator*() const noexcept
     {
         return (*m_pCollection).at(m_nIndex);
     }
-    [[nodiscard]] constexpr pointer operator->(void) const noexcept
+    [[nodiscard]] constexpr pointer operator->() const noexcept
     {
         return &(*m_pCollection).at(m_nIndex);
     }
@@ -61,12 +61,12 @@ public:
     {
         return (*m_pCollection).at(m_nIndex + i);
     }
-    constexpr iterator& operator++(void) noexcept
+    constexpr iterator& operator++() noexcept
     {
         ++m_nIndex;
         return *this;
     }
-    constexpr iterator& operator--(void) noexcept
+    constexpr iterator& operator--() noexcept
     {
         --m_nIndex;
         return *this;
@@ -131,7 +131,7 @@ public:
     {
         return m_nIndex == r.m_nIndex;
     }
-    constexpr operator void*(void) noexcept
+    constexpr operator void*() noexcept
     {
         return &(*m_pCollection).at(m_nIndex);
     }
@@ -173,7 +173,7 @@ public:
     using iterator_concept  = std::contiguous_iterator_tag;
 
 public:
-    constexpr const_iterator(void) noexcept = default;
+    constexpr const_iterator() noexcept = default;
     constexpr const_iterator(const C* c, size_type i) noexcept
         : m_nIndex(i)
         , m_pCollection(c)
@@ -184,11 +184,11 @@ public:
         , m_pCollection(it.m_pCollection)
     {
     }
-    [[nodiscard]] constexpr reference operator*(void) const noexcept
+    [[nodiscard]] constexpr reference operator*() const noexcept
     {
         return (*m_pCollection).at(m_nIndex);
     }
-    [[nodiscard]] constexpr pointer operator->(void) const noexcept
+    [[nodiscard]] constexpr pointer operator->() const noexcept
     {
         return &(*m_pCollection).at(m_nIndex);
     }
@@ -196,12 +196,12 @@ public:
     {
         return (*m_pCollection).at(m_nIndex + m);
     }
-    constexpr const_iterator& operator++(void) noexcept
+    constexpr const_iterator& operator++() noexcept
     {
         ++m_nIndex;
         return *this;
     }
-    constexpr const_iterator& operator--(void) noexcept
+    constexpr const_iterator& operator--() noexcept
     {
         --m_nIndex;
         return *this;
@@ -266,7 +266,7 @@ public:
     {
         return m_nIndex == r.m_nIndex;
     }
-    constexpr operator const void*(void) const noexcept
+    constexpr operator const void*() const noexcept
     {
         return &(*m_pCollection).at(m_nIndex);
     }
@@ -313,17 +313,17 @@ public:
     using iterator_concept  = std::contiguous_iterator_tag;
 
 public:
-    constexpr reverse_iterator(void) noexcept = default;
+    constexpr reverse_iterator() noexcept = default;
     constexpr reverse_iterator(C* c, size_type i) noexcept
         : m_nIndex(i)
         , m_pCollection(c)
     {
     }
-    [[nodiscard]] constexpr reference operator*(void) const noexcept
+    [[nodiscard]] constexpr reference operator*() const noexcept
     {
         return (*m_pCollection).at(m_nIndex);
     }
-    [[nodiscard]] constexpr pointer operator->(void) const noexcept
+    [[nodiscard]] constexpr pointer operator->() const noexcept
     {
         return &(*m_pCollection).at(m_nIndex);
     }
@@ -331,12 +331,12 @@ public:
     {
         return (*m_pCollection).at(m_nIndex + m);
     }
-    constexpr reverse_iterator& operator++(void) noexcept
+    constexpr reverse_iterator& operator++() noexcept
     {
         --m_nIndex;
         return *this;
     }
-    constexpr reverse_iterator& operator--(void) noexcept
+    constexpr reverse_iterator& operator--() noexcept
     {
         ++m_nIndex;
         return *this;
@@ -404,7 +404,7 @@ public:
     {
         return m_nIndex + 1 == r.m_nIndex + 1;
     }
-    constexpr operator void*(void) noexcept
+    constexpr operator void*() noexcept
     {
         return &(*m_pCollection).at(m_nIndex);
     }
@@ -446,7 +446,7 @@ public:
     using iterator_concept  = std::contiguous_iterator_tag;
 
 public:
-    constexpr const_reverse_iterator(void) noexcept = default;
+    constexpr const_reverse_iterator() noexcept = default;
     constexpr const_reverse_iterator(const C* c, size_type i) noexcept
         : m_nIndex(i)
         , m_pCollection(c)
@@ -457,11 +457,11 @@ public:
         , m_pCollection(it.m_pCollection)
     {
     }
-    [[nodiscard]] constexpr reference operator*(void) const noexcept
+    [[nodiscard]] constexpr reference operator*() const noexcept
     {
         return (*m_pCollection).at(m_nIndex);
     }
-    [[nodiscard]] constexpr pointer operator->(void) const noexcept
+    [[nodiscard]] constexpr pointer operator->() const noexcept
     {
         return &(*m_pCollection).at(m_nIndex);
     }
@@ -469,12 +469,12 @@ public:
     {
         return (*m_pCollection).at(m_nIndex + m);
     }
-    constexpr const_reverse_iterator& operator++(void) noexcept
+    constexpr const_reverse_iterator& operator++() noexcept
     {
         --m_nIndex;
         return *this;
     }
-    constexpr const_reverse_iterator& operator--(void) noexcept
+    constexpr const_reverse_iterator& operator--() noexcept
     {
         ++m_nIndex;
         return *this;
@@ -542,7 +542,7 @@ public:
     {
         return m_nIndex + 1 == r.m_nIndex + 1;
     }
-    constexpr operator const void*(void) const noexcept
+    constexpr operator const void*() const noexcept
     {
         return &(*m_pCollection).at(m_nIndex);
     }

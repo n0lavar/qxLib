@@ -41,7 +41,7 @@ public:
     /**
         @brief thread_worker object destructor
     **/
-    virtual ~thread_worker(void);
+    virtual ~thread_worker();
 
     /**
         @brief Create and start thread
@@ -59,7 +59,7 @@ public:
     /**
         @brief Wait for thread termination
     **/
-    void thread_wait_termination(void);
+    void thread_wait_termination();
 
     /**
         @brief   Set "terminate in destructor" flag
@@ -74,41 +74,41 @@ public:
         @brief  Is thread terminating
         @retval - true if thread is terminating
     **/
-    bool thread_is_terminating(void) const;
+    bool thread_is_terminating() const;
 
     /**
         @brief  Is thread running
         @retval - true if thread is running
     **/
-    bool thread_is_running(void) const;
+    bool thread_is_running() const;
 
     /**
         @brief  Get thread state
         @retval - thread state
     **/
-    thread_state thread_get_state(void) const;
+    thread_state thread_get_state() const;
 
     /**
         @brief  Get thread id
         @retval - thread id
     **/
-    std::thread::id thread_get_id(void) const;
+    std::thread::id thread_get_id() const;
 
 protected:
     /**
         @brief Thread started event
     **/
-    virtual void thread_on_started(void);
+    virtual void thread_on_started();
 
     /**
         @brief Thread work method
     **/
-    virtual void thread_run(void) = 0;
+    virtual void thread_run() = 0;
 
     /**
         @brief Thread stopped event
     **/
-    virtual void thread_on_stopped(void);
+    virtual void thread_on_stopped();
 
 private:
     std::thread               m_Thread;

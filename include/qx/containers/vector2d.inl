@@ -41,7 +41,7 @@ inline vector2d<T>::vector2d(
 }
 
 template<class T>
-inline vector2d<T>::~vector2d(void)
+inline vector2d<T>::~vector2d()
 {
     free();
 }
@@ -159,7 +159,7 @@ inline bool vector2d<T>::resize(
 }
 
 template<class T>
-inline void vector2d<T>::free(void)
+inline void vector2d<T>::free()
 {
     clear();
     std::free(m_pData);
@@ -204,25 +204,25 @@ inline void vector2d<T>::set(
 }
 
 template<class T>
-inline typename vector2d<T>::size_type vector2d<T>::rows(void) const noexcept
+inline typename vector2d<T>::size_type vector2d<T>::rows() const noexcept
 {
     return m_nRows;
 }
 
 template<class T>
-inline typename vector2d<T>::size_type vector2d<T>::cols(void) const noexcept
+inline typename vector2d<T>::size_type vector2d<T>::cols() const noexcept
 {
     return m_nCols;
 }
 
 template<class T>
-inline typename vector2d<T>::size_type vector2d<T>::size_x(void) const noexcept
+inline typename vector2d<T>::size_type vector2d<T>::size_x() const noexcept
 {
     return m_nRows;
 }
 
 template<class T>
-inline typename vector2d<T>::size_type vector2d<T>::size_y(void) const noexcept
+inline typename vector2d<T>::size_type vector2d<T>::size_y() const noexcept
 {
     return m_nCols;
 }
@@ -239,7 +239,7 @@ inline typename vector2d<T>::size_type vector2d<T>::capacity(
     @retval - num of elements (cols * rows)
 **/
 template<class T>
-inline typename vector2d<T>::size_type vector2d<T>::size(void) const noexcept
+inline typename vector2d<T>::size_type vector2d<T>::size() const noexcept
 {
     return size_x() * size_y();
 }
@@ -249,7 +249,7 @@ inline typename vector2d<T>::size_type vector2d<T>::size(void) const noexcept
     @retval - first element pointer
 **/
 template<class T>
-inline typename vector2d<T>::pointer vector2d<T>::data(void) noexcept
+inline typename vector2d<T>::pointer vector2d<T>::data() noexcept
 {
     return m_pData;
 }
@@ -270,7 +270,7 @@ inline typename vector2d<T>::reference vector2d<T>::at(
     @brief Clear vector (do not free memory)
 **/
 template<class T>
-inline void vector2d<T>::clear(void) noexcept
+inline void vector2d<T>::clear() noexcept
 {
     if (m_pData)
         destruct(begin(), end());

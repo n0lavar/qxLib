@@ -51,7 +51,7 @@ public:
     using const_pointer = typename Traits::const_pointer;
     using size_type     = typename Traits::size_type;
 
-    constexpr basic_string_hash(void) noexcept = default;
+    constexpr basic_string_hash() noexcept = default;
 
     /**
         @brief basic_string_hash object constructor

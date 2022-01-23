@@ -30,7 +30,7 @@ public:
     /**
         @brief base_fbo object destructor
     **/
-    virtual ~base_fbo(void);
+    virtual ~base_fbo();
 
     QX_DECL_IBUFFER
 
@@ -72,7 +72,7 @@ public:
     /**
         @brief Check framebuffer status
     **/
-    void CheckStatus(void) const;
+    void CheckStatus() const;
 
 private:
     GLuint m_nBuffer = std::numeric_limits<GLuint>::max();

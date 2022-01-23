@@ -35,7 +35,7 @@ public:
     /**
         @brief basic_state object constructor
     **/
-    state(void) noexcept = default;
+    state() noexcept = default;
 
     /**
         @brief state object constructor
@@ -75,36 +75,36 @@ public:
         @brief  operator->
         @retval - state object pointer
     **/
-    T* operator->(void) noexcept;
+    T* operator->() noexcept;
 
     /**
         @brief  operator->
         @retval - state object pointer
     **/
-    const T* operator->(void) const noexcept;
+    const T* operator->() const noexcept;
 
     /**
         @brief  operator*
         @retval - state object reference
     **/
-    T& operator*(void) noexcept;
+    T& operator*() noexcept;
 
     /**
         @brief  operator*
         @retval - state object reference
     **/
-    const T& operator*(void) const noexcept;
+    const T& operator*() const noexcept;
 
     /**
         @brief Reset current state to its default value
     **/
-    void reset(void) noexcept;
+    void reset() noexcept;
 
     /**
         @brief  Is current state default
         @retval - true if default
     **/
-    bool is_default(void) const noexcept;
+    bool is_default() const noexcept;
 
 private:
     T m_State;

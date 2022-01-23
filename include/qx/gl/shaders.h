@@ -47,7 +47,7 @@ public:
     /**
         @brief shader_base object constructor
     **/
-    shader_base(void) = default;
+    shader_base() = default;
 
     /**
         @brief shader_base object constructor
@@ -59,7 +59,7 @@ public:
     /**
         @brief shader_base object destructor
     **/
-    ~shader_base(void);
+    ~shader_base();
 
     /**
         @brief Init (compile) shader
@@ -72,7 +72,7 @@ public:
         @brief  Get shader name
         @retval - shader name
     **/
-    GLuint GetID(void) const;
+    GLuint GetID() const;
 
     /**
         @brief  Get shader parameter

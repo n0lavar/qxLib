@@ -45,7 +45,7 @@ inline components<TBaseComponent>::const_iterator<TSuperClass>::const_iterator(
 template<class TBaseComponent>
 template<class TSuperClass>
 inline const auto* components<TBaseComponent>::const_iterator<
-    TSuperClass>::operator->(void) const noexcept
+    TSuperClass>::operator->() const noexcept
 {
     return *TSuperClass::operator->();
 }
@@ -53,7 +53,7 @@ inline const auto* components<TBaseComponent>::const_iterator<
 template<class TBaseComponent>
 template<class TSuperClass>
 inline const auto& components<TBaseComponent>::const_iterator<
-    TSuperClass>::operator*(void) const noexcept
+    TSuperClass>::operator*() const noexcept
 {
     return *TSuperClass::operator*();
 }
@@ -76,7 +76,7 @@ inline TComponent* components<TBaseComponent>::add(
 
 template<class TBaseComponent>
 template<class TKeyComponent>
-inline TKeyComponent* components<TBaseComponent>::get(void) const
+inline TKeyComponent* components<TBaseComponent>::get() const
 {
     return static_cast<TKeyComponent*>(
         get_by_id(TKeyComponent::get_class_id_static()));
@@ -107,7 +107,7 @@ inline TKeyComponent* components<TBaseComponent>::add_to(pointer pComponent)
 
 template<class TBaseComponent>
 template<class TKeyComponent>
-inline auto components<TBaseComponent>::get_all(void) const
+inline auto components<TBaseComponent>::get_all() const
 {
     return get_all_by_id(TKeyComponent::get_class_id_static());
 }
@@ -122,7 +122,7 @@ inline auto components<TBaseComponent>::get_all_by_id(
 template<class TBaseComponent>
 template<class TKeyComponent>
 inline typename components<TBaseComponent>::pointer components<
-    TBaseComponent>::extract(void)
+    TBaseComponent>::extract()
 {
     if (auto it = m_Components.find(TKeyComponent::get_class_id_static());
         it != m_Components.end())
@@ -150,14 +150,14 @@ inline typename components<TBaseComponent>::pointer components<
 
 template<class TBaseComponent>
 template<class TKeyComponent>
-inline bool components<TBaseComponent>::remove(void)
+inline bool components<TBaseComponent>::remove()
 {
     return extract<TKeyComponent>().get() != nullptr;
 }
 
 template<class TBaseComponent>
 template<class TKeyComponent>
-inline void components<TBaseComponent>::remove_all(void)
+inline void components<TBaseComponent>::remove_all()
 {
     while (remove<TKeyComponent>())
         ;
@@ -165,95 +165,95 @@ inline void components<TBaseComponent>::remove_all(void)
 
 template<class TBaseComponent>
 template<class TKeyComponent>
-inline bool components<TBaseComponent>::contains(void) const
+inline bool components<TBaseComponent>::contains() const
 {
     return get<TKeyComponent>() != nullptr;
 }
 
 template<class TBaseComponent>
-auto components<TBaseComponent>::begin(void) noexcept
+auto components<TBaseComponent>::begin() noexcept
 {
     return iterator<typename order_container::iterator>(
         m_InsertionOrderComponents.begin());
 }
 
 template<class TBaseComponent>
-auto components<TBaseComponent>::end(void) noexcept
+auto components<TBaseComponent>::end() noexcept
 {
     return iterator<typename order_container::iterator>(
         m_InsertionOrderComponents.end());
 }
 
 template<class TBaseComponent>
-auto components<TBaseComponent>::begin(void) const noexcept
+auto components<TBaseComponent>::begin() const noexcept
 {
     return const_iterator<typename order_container::const_iterator>(
         m_InsertionOrderComponents.begin());
 }
 
 template<class TBaseComponent>
-auto components<TBaseComponent>::end(void) const noexcept
+auto components<TBaseComponent>::end() const noexcept
 {
     return const_iterator<typename order_container::const_iterator>(
         m_InsertionOrderComponents.end());
 }
 
 template<class TBaseComponent>
-auto components<TBaseComponent>::cbegin(void) const noexcept
+auto components<TBaseComponent>::cbegin() const noexcept
 {
     return const_iterator<typename order_container::const_iterator>(
         m_InsertionOrderComponents.cbegin());
 }
 
 template<class TBaseComponent>
-auto components<TBaseComponent>::cend(void) const noexcept
+auto components<TBaseComponent>::cend() const noexcept
 {
     return const_iterator<typename order_container::const_iterator>(
         m_InsertionOrderComponents.cend());
 }
 
 template<class TBaseComponent>
-auto components<TBaseComponent>::rbegin(void) noexcept
+auto components<TBaseComponent>::rbegin() noexcept
 {
     return iterator<typename order_container::reverse_iterator>(
         m_InsertionOrderComponents.rbegin());
 }
 
 template<class TBaseComponent>
-auto components<TBaseComponent>::rend(void) noexcept
+auto components<TBaseComponent>::rend() noexcept
 {
     return iterator<typename order_container::reverse_iterator>(
         m_InsertionOrderComponents.rend());
 }
 
 template<class TBaseComponent>
-auto components<TBaseComponent>::crbegin(void) const noexcept
+auto components<TBaseComponent>::crbegin() const noexcept
 {
     return const_iterator<typename order_container::const_reverse_iterator>(
         m_InsertionOrderComponents.crbegin());
 }
 
 template<class TBaseComponent>
-auto components<TBaseComponent>::crend(void) const noexcept
+auto components<TBaseComponent>::crend() const noexcept
 {
     return const_iterator<typename order_container::const_reverse_iterator>(
         m_InsertionOrderComponents.crend());
 }
 
 template<class TBaseComponent>
-size_t components<TBaseComponent>::size(void) const noexcept
+size_t components<TBaseComponent>::size() const noexcept
 {
     return m_Components.size();
 }
 
 template<class TBaseComponent>
-bool components<TBaseComponent>::empty(void) const noexcept
+bool components<TBaseComponent>::empty() const noexcept
 {
     return m_Components.empty();
 }
 
 template<class TBaseComponent>
-void components<TBaseComponent>::clear(void) noexcept
+void components<TBaseComponent>::clear() noexcept
 {
     m_Components.clear();
     m_InsertionOrderComponents.clear();

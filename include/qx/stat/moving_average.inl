@@ -72,13 +72,13 @@ inline T moving_average<T>::update(T value)
 }
 
 template<typename T>
-inline T moving_average<T>::get(void) const
+inline T moving_average<T>::get() const
 {
     return m_Value;
 }
 
 template<typename T>
-inline size_t moving_average<T>::get_num_entries(void) const
+inline size_t moving_average<T>::get_num_entries() const
 {
     return m_Entries.size();
 }

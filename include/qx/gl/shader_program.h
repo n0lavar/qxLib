@@ -35,7 +35,7 @@ public:
     /**
         @brief base_shader_program object constructor
     **/
-    base_shader_program(void) = default;
+    base_shader_program() = default;
 
     /**
         @brief base_shader_program object constructor
@@ -46,12 +46,12 @@ public:
     /**
         @brief base_shader_program object destructor
     **/
-    ~base_shader_program(void) noexcept;
+    ~base_shader_program() noexcept;
 
     /**
         @brief Init shader program
     **/
-    void Init(void) noexcept;
+    void Init() noexcept;
 
     /**
         @brief  Attach shader to the program
@@ -71,12 +71,12 @@ public:
     /**
         @brief Use shader program
     **/
-    void Use(void) const noexcept;
+    void Use() const noexcept;
 
     /**
         @brief Drop current shader
     **/
-    void Unuse(void) const noexcept;
+    void Unuse() const noexcept;
 
     /**
         @brief  Get shader program parameter
@@ -90,7 +90,7 @@ public:
         @brief  Get shader buffer name
         @retval - shader buffer name
     **/
-    GLuint GetBufferName(void) const noexcept;
+    GLuint GetBufferName() const noexcept;
 
     /**
         @brief  Specify the value of a uniform variable

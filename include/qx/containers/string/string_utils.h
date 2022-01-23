@@ -293,7 +293,7 @@ namespace qx
     @retval            - format specifier or nullptr
 **/
 template<typename value_type, typename T>
-constexpr auto get_format_specifier(void) noexcept
+constexpr auto get_format_specifier() noexcept
 {
     const value_type* pszFormat = nullptr;
 

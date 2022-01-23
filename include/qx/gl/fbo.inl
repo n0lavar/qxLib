@@ -10,7 +10,7 @@
 namespace qx
 {
 
-inline base_fbo::~base_fbo(void)
+inline base_fbo::~base_fbo()
 {
     if (m_nBuffer != std::numeric_limits<GLuint>::max())
     {
@@ -19,27 +19,27 @@ inline base_fbo::~base_fbo(void)
     }
 }
 
-inline void base_fbo::Generate(void)
+inline void base_fbo::Generate()
 {
     glGenFramebuffers(1, &m_nBuffer);
 }
 
-inline void base_fbo::Bind(void) const
+inline void base_fbo::Bind() const
 {
     glBindFramebuffer(m_nTarget, m_nBuffer);
 }
 
-inline void base_fbo::Unbind(void) const
+inline void base_fbo::Unbind() const
 {
     glBindFramebuffer(m_nTarget, 0);
 }
 
-inline GLuint base_fbo::GetBufferName(void) const
+inline GLuint base_fbo::GetBufferName() const
 {
     return m_nBuffer;
 }
 
-inline bool base_fbo::IsGenerated(void) const
+inline bool base_fbo::IsGenerated() const
 {
     return m_nBuffer != std::numeric_limits<GLuint>::max();
 }
@@ -83,7 +83,7 @@ inline void base_fbo::AttachTexture(
         nMipmapLevel);
 }
 
-inline void base_fbo::CheckStatus(void) const
+inline void base_fbo::CheckStatus() const
 {
     if (const auto eStatus = glCheckFramebufferStatus(GL_FRAMEBUFFER);
         eStatus != GL_FRAMEBUFFER_COMPLETE)

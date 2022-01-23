@@ -56,15 +56,15 @@ struct char_traits;
 template<>
 struct char_traits<char> : public common_char_traits<char>
 {
-    static constexpr size_type align(void) noexcept
+    static constexpr size_type align() noexcept
     {
         return 16;
     }
-    static constexpr size_type small_string_size(void) noexcept
+    static constexpr size_type small_string_size() noexcept
     {
         return 48;
     }
-    static constexpr u32 hash_seed(void) noexcept
+    static constexpr u32 hash_seed() noexcept
     {
         return 5712564;
     }
@@ -122,11 +122,11 @@ struct char_traits<char> : public common_char_traits<char>
 template<>
 struct char_traits<wchar_t> : public common_char_traits<wchar_t>
 {
-    static constexpr size_type align(void) noexcept
+    static constexpr size_type align() noexcept
     {
         return 8;
     }
-    static constexpr size_type small_string_size(void) noexcept
+    static constexpr size_type small_string_size() noexcept
     {
 // MSVC:     sizeof(wchar_t) == 2
 // GNU/Linux sizeof(wchar_t) == 4
@@ -136,7 +136,7 @@ struct char_traits<wchar_t> : public common_char_traits<wchar_t>
         return 12;
 #endif
     }
-    static constexpr u32 hash_seed(void) noexcept
+    static constexpr u32 hash_seed() noexcept
     {
         return 985214;
     }

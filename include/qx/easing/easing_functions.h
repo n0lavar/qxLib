@@ -32,13 +32,13 @@ using func = std::function<T(T)>;
 // ---------------------- epsilon for borders guarantees -----------------------
 
 template<typename T>
-constexpr T eps(void)
+constexpr T eps()
 {
     return T(1e-14f);
 }
 
 template<>
-constexpr float eps(void)
+constexpr float eps()
 {
     return 1e-6f;
 }

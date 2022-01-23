@@ -42,7 +42,7 @@ public:
     /**
         @brief rect object constructor
     **/
-    constexpr rect(void) noexcept = default;
+    constexpr rect() noexcept = default;
 
     /**
         @brief rect object constructor
@@ -100,80 +100,80 @@ public:
         @brief  Get upper left corner pos
         @retval - upper left corner pos
     **/
-    constexpr const vector_type& pos(void) const noexcept;
+    constexpr const vector_type& pos() const noexcept;
 
     /**
         @brief   Get min rect pos
         @details same as pos()
         @retval  - min rect pos
     **/
-    constexpr const vector_type& min(void) const noexcept;
+    constexpr const vector_type& min() const noexcept;
 
     /**
         @brief  Get max rect pos
         @retval - max rect pos
     **/
-    constexpr vector_type max(void) const noexcept;
+    constexpr vector_type max() const noexcept;
 
     /**
         @brief  Get rect size
         @retval - rect size
     **/
-    constexpr const vector_type& size(void) const noexcept;
+    constexpr const vector_type& size() const noexcept;
 
     /**
         @brief  Get rect width
         @retval - rect width
     **/
-    constexpr value_type width(void) const noexcept;
+    constexpr value_type width() const noexcept;
 
     /**
         @brief  Get rect height
         @retval - rect height
     **/
-    constexpr value_type height(void) const noexcept;
+    constexpr value_type height() const noexcept;
 
     /**
         @brief  Get rect left border coord (x)
         @retval - rect left border coord (x)
     **/
-    constexpr value_type left(void) const noexcept;
+    constexpr value_type left() const noexcept;
 
     /**
         @brief  rect right border coord (x)
         @retval - rect right border coord (x)
     **/
-    constexpr value_type right(void) const noexcept;
+    constexpr value_type right() const noexcept;
 
     /**
         @brief  rect top border coord (y)
         @retval - rect top border coord (y)
     **/
-    constexpr value_type top(void) const noexcept;
+    constexpr value_type top() const noexcept;
 
     /**
         @brief  rect bottom border coord (y)
         @retval - rect bottom border coord (y)
     **/
-    constexpr value_type bottom(void) const noexcept;
+    constexpr value_type bottom() const noexcept;
 
     /**
         @brief  Get rect center pos
         @retval - rect center pos
     **/
-    constexpr vector_type center(void) const noexcept;
+    constexpr vector_type center() const noexcept;
 
     /**
         @brief  Is rect empty
         @retval - true if rect is empty
     **/
-    constexpr bool empty(void) const noexcept;
+    constexpr bool empty() const noexcept;
 
     /**
         @brief  Calc rect area
         @retval - rect area
     **/
-    constexpr value_type area(void) const noexcept;
+    constexpr value_type area() const noexcept;
 
     /**
         @brief  Is point inside rect

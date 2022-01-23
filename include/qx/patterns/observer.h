@@ -45,7 +45,7 @@ public:
     /**
         @brief observer_token object constructor
     **/
-    observer_token_data(void) noexcept = default;
+    observer_token_data() noexcept = default;
 
     /**
         @brief observer_token object constructor
@@ -63,13 +63,13 @@ public:
     /**
         @brief observer_token object destructor
     **/
-    ~observer_token_data(void) noexcept;
+    ~observer_token_data() noexcept;
 
     /**
         @brief   Reset observer_token
         @details Token won't unsubscribe observer from subject in destructor
     **/
-    void reset(void) noexcept;
+    void reset() noexcept;
 
     /**
         @brief  operator=
@@ -89,7 +89,7 @@ public:
         @brief  operator bool
         @retval - true if observer_token is valid
     **/
-    operator bool(void) const noexcept;
+    operator bool() const noexcept;
 
 private:
     base_subject* m_pSubject  = nullptr;
@@ -116,7 +116,7 @@ protected:
     /**
         @brief base_subject object destructor
     **/
-    virtual ~base_subject(void) noexcept = default;
+    virtual ~base_subject() noexcept = default;
 
     /**
         @brief Detach observer from subject
@@ -146,7 +146,7 @@ class subject : public base_subject
         /**
             @brief base_iterator object constructor
         **/
-        base_iterator(void) noexcept = default;
+        base_iterator() noexcept = default;
 
         /**
             @brief base_iterator object constructor
@@ -170,25 +170,25 @@ class subject : public base_subject
         /**
             @brief base_iterator object destructor
         **/
-        ~base_iterator(void) noexcept;
+        ~base_iterator() noexcept;
 
         /**
             @brief  operator->
             @retval - observer object pointer
         **/
-        TObserver* operator->(void) noexcept;
+        TObserver* operator->() noexcept;
 
         /**
             @brief  operator*
             @retval - observer object ref
         **/
-        TObserver& operator*(void) noexcept;
+        TObserver& operator*() noexcept;
 
     private:
         /**
             @brief Init iterator by calling subject callback
         **/
-        void init(void) noexcept;
+        void init() noexcept;
 
     private:
         subject* m_pSubject = nullptr;
@@ -201,7 +201,7 @@ class subject : public base_subject
         /**
             @brief const_base_iterator object constructor
         **/
-        const_base_iterator(void) noexcept = default;
+        const_base_iterator() noexcept = default;
 
         /**
             @brief const_base_iterator object constructor
@@ -225,13 +225,13 @@ class subject : public base_subject
             @brief  operator->
             @retval - observer object const pointer
         **/
-        const TObserver* operator->(void) const noexcept;
+        const TObserver* operator->() const noexcept;
 
         /**
             @brief  operator*
             @retval - observer object const ref
         **/
-        const TObserver& operator*(void) const noexcept;
+        const TObserver& operator*() const noexcept;
     };
 
 public:
@@ -257,12 +257,12 @@ public:
     /**
         @brief base_subject object constructor
     **/
-    subject(void) = default;
+    subject() = default;
 
     /**
         @brief subject object destructor
     **/
-    virtual ~subject(void) override;
+    virtual ~subject() override;
 
     /**
         @brief  Attach observer to this subject
@@ -281,79 +281,79 @@ public:
         @brief  Return iterator to beginning
         @retval - iterator to beginning
     **/
-    iterator begin(void);
+    iterator begin();
 
     /**
         @brief  Return iterator to beginning
         @retval - iterator to beginning
     **/
-    const_iterator begin(void) const;
+    const_iterator begin() const;
 
     /**
         @brief  Return const iterator to beginning
         @retval - const iterator to beginning
     **/
-    const_iterator cbegin(void) const;
+    const_iterator cbegin() const;
 
     /**
         @brief  Return iterator to end
         @retval - iterator to end
     **/
-    iterator end(void);
+    iterator end();
 
     /**
         @brief  Return iterator to end
         @retval - iterator to end
     **/
-    const_iterator end(void) const;
+    const_iterator end() const;
 
     /**
         @brief  Return const iterator to end
         @retval - const iterator to end
     **/
-    const_iterator cend(void) const;
+    const_iterator cend() const;
 
     /**
         @brief  Return reverse iterator to reverse beginning
         @retval - reverse iterator to reverse beginning
     **/
-    reverse_iterator rbegin(void);
+    reverse_iterator rbegin();
 
     /**
         @brief  Return reverse iterator to reverse beginning
         @retval - reverse iterator to reverse beginning
     **/
-    const_reverse_iterator rbegin(void) const;
+    const_reverse_iterator rbegin() const;
 
     /**
         @brief  Return const reverse iterator to reverse beginning
         @retval - const reverse iterator to reverse beginning
     **/
-    const_reverse_iterator crbegin(void) const;
+    const_reverse_iterator crbegin() const;
 
     /**
         @brief  Return reverse iterator to reverse end
         @retval - reverse iterator to reverse end
     **/
-    reverse_iterator rend(void);
+    reverse_iterator rend();
 
     /**
         @brief  Return reverse iterator to reverse end
         @retval - reverse iterator to reverse end
     **/
-    const_reverse_iterator rend(void) const;
+    const_reverse_iterator rend() const;
 
     /**
         @brief  Return const reverse iterator to reverse end
         @retval - const reverse iterator to reverse end
     **/
-    const_reverse_iterator crend(void) const;
+    const_reverse_iterator crend() const;
 
     /**
         @brief  Get number of observers attached to this subject
         @retval - number of observers attached to this subject
     **/
-    size_t get_num_observers(void) const noexcept;
+    size_t get_num_observers() const noexcept;
 
 private:
     /**
@@ -365,12 +365,12 @@ private:
     /**
         @brief Iterator destructing event handler
     **/
-    void on_iterator_destructed(void) noexcept;
+    void on_iterator_destructed() noexcept;
 
     /**
         @brief Iterator constructing event handler
     **/
-    void on_iterator_constructed(void) noexcept;
+    void on_iterator_constructed() noexcept;
 
 private:
     observers_container               m_Observers;

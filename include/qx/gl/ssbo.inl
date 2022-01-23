@@ -10,18 +10,18 @@
 namespace qx
 {
 
-inline GLint base_ssbo::GetMaxSize(void) const
+inline GLint base_ssbo::GetMaxSize() const
 {
     GLint ret;
     glGetIntegerv(GL_MAX_SHADER_STORAGE_BLOCK_SIZE, &ret);
     return ret;
 }
 
-inline GLenum base_ssbo::GetBufferType(void) const
+inline GLenum base_ssbo::GetBufferType() const
 {
     return GL_SHADER_STORAGE_BUFFER;
 }
-inline GLbitfield base_ssbo::GetBarrierBit(void) const
+inline GLbitfield base_ssbo::GetBarrierBit() const
 {
     return GL_SHADER_STORAGE_BARRIER_BIT;
 }

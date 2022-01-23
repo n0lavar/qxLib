@@ -35,7 +35,7 @@ struct string_literal
         std::copy_n(str, N, value);
     }
 
-    static constexpr size_t size(void) noexcept
+    static constexpr size_t size() noexcept
     {
         return N;
     }

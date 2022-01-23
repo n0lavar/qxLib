@@ -62,7 +62,7 @@ inline void shader_base<ShaderType>::Init(
 
 
 template<GLenum ShaderType>
-inline GLuint shader_base<ShaderType>::GetID(void) const
+inline GLuint shader_base<ShaderType>::GetID() const
 {
     return m_nShader;
 }

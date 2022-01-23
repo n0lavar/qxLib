@@ -39,7 +39,7 @@ public:
     /**
         @brief color object constructor
     **/
-    constexpr color(void) noexcept = default;
+    constexpr color() noexcept = default;
 
     /**
         @brief   color object constructor
@@ -87,61 +87,61 @@ public:
         @brief  Get red component
         @retval - red component
     **/
-    constexpr float r(void) const noexcept;
+    constexpr float r() const noexcept;
 
     /**
         @brief  Get green component
         @retval - green component
     **/
-    constexpr float g(void) const noexcept;
+    constexpr float g() const noexcept;
 
     /**
         @brief  Get blue component
         @retval - blue component
     **/
-    constexpr float b(void) const noexcept;
+    constexpr float b() const noexcept;
 
     /**
         @brief  Get alpha component
         @retval - alpha component
     **/
-    constexpr float a(void) const noexcept;
+    constexpr float a() const noexcept;
 
     /**
         @brief  Get red component as decimal 
         @retval - red component as decimal
     **/
-    constexpr int r_dec(void) const noexcept;
+    constexpr int r_dec() const noexcept;
 
     /**
         @brief  Get green component as decimal 
         @retval - green component as decimal
     **/
-    constexpr int g_dec(void) const noexcept;
+    constexpr int g_dec() const noexcept;
 
     /**
         @brief  Get blue component as decimal 
         @retval - blue component as decimal
     **/
-    constexpr int b_dec(void) const noexcept;
+    constexpr int b_dec() const noexcept;
 
     /**
         @brief  Get alpha component as decimal 
         @retval - alpha component as decimal
     **/
-    constexpr int a_dec(void) const noexcept;
+    constexpr int a_dec() const noexcept;
 
     /**
         @brief  Get pointer to the first component
         @retval - pointer to the first component
     **/
-    constexpr const float* data(void) const noexcept;
+    constexpr const float* data() const noexcept;
 
     /**
         @brief  Get color as hex
         @retval - hex color value in 0xRRGGBBAA format
     **/
-    constexpr unsigned int hex(void) const noexcept;
+    constexpr unsigned int hex() const noexcept;
 
     /**
         @brief  operator==
@@ -154,13 +154,13 @@ public:
         @brief  operator glm::vec3
         @retval - color as vec3
     **/
-    constexpr operator glm::vec3(void) const noexcept;
+    constexpr operator glm::vec3() const noexcept;
 
     /**
         @brief  operator glm::vec4
         @retval - color as vec4
     **/
-    constexpr operator glm::vec4(void) const noexcept;
+    constexpr operator glm::vec4() const noexcept;
 
     /**
         @brief   Add value to red component
@@ -421,7 +421,7 @@ public:
                    as they won't affect calc result
         @retval  - empty color
     **/
-    static constexpr color empty(void) noexcept;
+    static constexpr color empty() noexcept;
 
 private:
     /**

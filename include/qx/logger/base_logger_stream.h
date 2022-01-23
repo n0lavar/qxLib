@@ -77,12 +77,12 @@ public:
     /**
         @brief base_logger_stream object constructor
     **/
-    base_logger_stream(void);
+    base_logger_stream();
 
     /**
         @brief base_logger_stream object destructor
     **/
-    virtual ~base_logger_stream(void) = default;
+    virtual ~base_logger_stream() = default;
 
     /**
         @brief Output message to the stream
@@ -175,7 +175,7 @@ protected:
         @brief  Get time buffer string
         @retval - time buffer string
     **/
-    string& get_time_buffer(void) noexcept;
+    string& get_time_buffer() noexcept;
 
 private:
     std::unordered_map<string_hash, log_unit_info> m_Units;

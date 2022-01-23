@@ -10,14 +10,14 @@
 namespace qx
 {
 
-inline file_logger_stream::file_logger_stream(void)
+inline file_logger_stream::file_logger_stream()
 {
     string& sTime = get_time_buffer();
     format_time_string(sTime);
     m_sSessionTime = sTime + '/';
 }
 
-inline file_logger_stream::~file_logger_stream(void)
+inline file_logger_stream::~file_logger_stream()
 {
     for (const auto& file : m_Files)
     {

@@ -10,7 +10,7 @@
 namespace qx
 {
 
-inline buffer_base::~buffer_base(void)
+inline buffer_base::~buffer_base()
 {
     if (m_nBuffer != std::numeric_limits<GLuint>::max())
     {
@@ -34,12 +34,12 @@ inline void buffer_base::Unbind() const
     glBindBuffer(GetBufferType(), 0);
 }
 
-inline GLuint buffer_base::GetBufferName(void) const
+inline GLuint buffer_base::GetBufferName() const
 {
     return m_nBuffer;
 }
 
-inline bool buffer_base::IsGenerated(void) const
+inline bool buffer_base::IsGenerated() const
 {
     return m_nBuffer != std::numeric_limits<GLuint>::max();
 }

@@ -29,13 +29,13 @@ public:
     /**
         @brief base_ssbo object constructor
     **/
-    base_ssbo(void) = default;
+    base_ssbo() = default;
 
     /**
         @brief  Get max SSBO size
         @retval - max SSBO size
     **/
-    GLint GetMaxSize(void) const;
+    GLint GetMaxSize() const;
 
 protected:
     QX_DECL_BUFFER_BASE

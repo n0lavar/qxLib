@@ -56,15 +56,15 @@ private:
 
 public:
     template<class Dummy = Dummy, T Value = check<Dummy>(0)>
-    static constexpr T test_and_set(void) noexcept
+    static constexpr T test_and_set() noexcept
     {
         Writer<Value && 0> tmp {};
-        (void)tmp;
+        () tmp;
         return Value;
     }
 
     template<class Dummy = Dummy, T Value = check<Dummy>(0)>
-    static constexpr T test(void) noexcept
+    static constexpr T test() noexcept
     {
         return Value;
     }

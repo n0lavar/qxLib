@@ -26,7 +26,7 @@ namespace qx
 class base_vbo : public buffer_base
 {
 public:
-    base_vbo(void) = default;
+    base_vbo() = default;
 
 protected:
     QX_DECL_BUFFER_BASE

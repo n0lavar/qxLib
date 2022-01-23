@@ -65,7 +65,7 @@ inline basic_string<Traits>::basic_string(const String& sAnother) noexcept
 }
 
 template<class Traits>
-inline basic_string<Traits>::~basic_string(void) noexcept
+inline basic_string<Traits>::~basic_string() noexcept
 {
     free();
 }
@@ -219,14 +219,14 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::reserve(
 }
 
 template<class Traits>
-inline void basic_string<Traits>::shrink_to_fit(void) noexcept
+inline void basic_string<Traits>::shrink_to_fit() noexcept
 {
     if (!m_Data.is_small() && capacity() > size())
         _resize(size(), string_resize_type::shrink_to_fit);
 }
 
 template<class Traits>
-inline void basic_string<Traits>::free(void) noexcept
+inline void basic_string<Traits>::free() noexcept
 {
     m_Data.free();
 }
@@ -242,14 +242,14 @@ inline typename basic_string<Traits>::string_view basic_string<Traits>::substr(
 }
 
 template<class Traits>
-inline void basic_string<Traits>::to_lower(void) noexcept
+inline void basic_string<Traits>::to_lower() noexcept
 {
     for (value_type& ch : *this)
         ch = Traits::to_lower(ch);
 }
 
 template<class Traits>
-inline void basic_string<Traits>::to_upper(void) noexcept
+inline void basic_string<Traits>::to_upper() noexcept
 {
     for (value_type& ch : *this)
         ch = Traits::to_upper(ch);
@@ -292,7 +292,7 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::capacity(
 
 template<class Traits>
 constexpr typename basic_string<Traits>::size_type basic_string<
-    Traits>::max_size(void) noexcept
+    Traits>::max_size() noexcept
 {
     return std::numeric_limits<size_type>::max() - 1 // npos reserved
            - 1;                                      // null terminator
@@ -675,7 +675,7 @@ inline typename basic_string<Traits>::value_type basic_string<Traits>::pop_back(
 
 template<class Traits>
 inline typename basic_string<Traits>::value_type basic_string<
-    Traits>::pop_front(void) noexcept
+    Traits>::pop_front() noexcept
 {
     value_type chRet = front();
     erase(0);
@@ -772,7 +772,7 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::trim_left(
 
 template<class Traits>
 inline typename basic_string<Traits>::size_type basic_string<
-    Traits>::trim_right(void) noexcept
+    Traits>::trim_right() noexcept
 {
     return _trim_right(
         [](value_type ch)
@@ -2190,7 +2190,7 @@ inline typename basic_string<Traits>::const_reference basic_string<
 
 template<class Traits>
 inline basic_string<Traits>::operator std::basic_string_view<
-    typename basic_string<Traits>::value_type>(void) const noexcept
+    typename basic_string<Traits>::value_type>() const noexcept
 {
     return std::basic_string_view<value_type, std::char_traits<value_type>>(
         data(),
@@ -2554,7 +2554,7 @@ inline typename basic_string<Traits>::reference basic_string<Traits>::at(
     @brief Clear string
 **/
 template<class Traits>
-inline void basic_string<Traits>::clear(void) noexcept
+inline void basic_string<Traits>::clear() noexcept
 {
     assign(QX_STR_PREFIX(typename Traits::value_type, ""));
 }

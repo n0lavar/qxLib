@@ -10,18 +10,18 @@
 namespace qx
 {
 
-inline void benchmark::start(void)
+inline void benchmark::start()
 {
     m_Start = clock::now();
 }
 
-inline double benchmark::end(void)
+inline double benchmark::end()
 {
     m_LastDuration = clock::now() - m_Start;
     return last();
 }
 
-inline double benchmark::last(void) const
+inline double benchmark::last() const
 {
     return static_cast<double>(m_LastDuration.count()) / 1e9;
 }

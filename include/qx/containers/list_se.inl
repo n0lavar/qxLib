@@ -50,7 +50,7 @@ inline bool list_se<T>::iterator::operator==(const iterator& r) const
 
 template<class T>
 inline typename list_se<T>::iterator::iterator& list_se<
-    T>::iterator::operator++(void)
+    T>::iterator::operator++()
 {
     m_pNode = m_pNode->pNext;
     return *this;
@@ -79,14 +79,14 @@ list_se<T>::const_iterator::const_iterator(const iterator& it)
 
 template<class T>
 inline typename list_se<T>::const_iterator::reference list_se<
-    T>::const_iterator::operator*(void)
+    T>::const_iterator::operator*()
 {
     return m_pNode->value;
 }
 
 template<class T>
 inline typename list_se<T>::const_iterator::pointer list_se<
-    T>::const_iterator::operator->(void)
+    T>::const_iterator::operator->()
 {
     return &m_pNode->value;
 }
@@ -106,7 +106,7 @@ bool list_se<T>::const_iterator::operator==(const const_iterator& r) const
 
 template<class T>
 inline typename list_se<T>::const_iterator::const_iterator& list_se<
-    T>::const_iterator::operator++(void)
+    T>::const_iterator::operator++()
 {
     m_pNode = m_pNode->pNext;
     return *this;
@@ -146,7 +146,7 @@ inline list_se<T>::list_se(size_type nElements, const_reference value)
 }
 
 template<class T>
-inline list_se<T>::~list_se(void)
+inline list_se<T>::~list_se()
 {
     clear();
 }
@@ -368,13 +368,13 @@ inline void list_se<T>::push_front(const_reference what)
 }
 
 template<class T>
-inline void list_se<T>::pop_back(void)
+inline void list_se<T>::pop_back()
 {
     erase(m_pLastNode);
 }
 
 template<class T>
-inline void list_se<T>::pop_front(void)
+inline void list_se<T>::pop_front()
 {
     list_se_node* temp = m_pFirstNode;
     m_pFirstNode       = m_pFirstNode->pNext;
@@ -386,7 +386,7 @@ inline void list_se<T>::pop_front(void)
 }
 
 template<class T>
-inline void list_se<T>::clear(void)
+inline void list_se<T>::clear()
 {
     list_se_node* pCurrent = nullptr;
     list_se_node* pNext    = m_pFirstNode;
@@ -404,73 +404,73 @@ inline void list_se<T>::clear(void)
 }
 
 template<class T>
-inline typename list_se<T>::size_type list_se<T>::size(void) const
+inline typename list_se<T>::size_type list_se<T>::size() const
 {
     return m_nSize;
 }
 
 template<class T>
-inline bool list_se<T>::empty(void) const
+inline bool list_se<T>::empty() const
 {
     return size() == 0;
 }
 
 template<class T>
-inline typename list_se<T>::iterator list_se<T>::begin(void)
+inline typename list_se<T>::iterator list_se<T>::begin()
 {
     return iterator(m_pFirstNode);
 }
 
 template<class T>
-inline typename list_se<T>::const_iterator list_se<T>::begin(void) const
+inline typename list_se<T>::const_iterator list_se<T>::begin() const
 {
     return const_iterator(m_pFirstNode);
 }
 
 template<class T>
-inline typename list_se<T>::iterator list_se<T>::end(void)
+inline typename list_se<T>::iterator list_se<T>::end()
 {
     return iterator(nullptr);
 }
 
 template<class T>
-inline typename list_se<T>::const_iterator list_se<T>::end(void) const
+inline typename list_se<T>::const_iterator list_se<T>::end() const
 {
     return const_iterator(nullptr);
 }
 
 template<class T>
-inline typename list_se<T>::const_iterator list_se<T>::cbegin(void) const
+inline typename list_se<T>::const_iterator list_se<T>::cbegin() const
 {
     return const_iterator(m_pFirstNode);
 }
 
 template<class T>
-inline typename list_se<T>::const_iterator list_se<T>::cend(void) const
+inline typename list_se<T>::const_iterator list_se<T>::cend() const
 {
     return const_iterator(nullptr);
 }
 
 template<class T>
-inline typename list_se<T>::reference list_se<T>::front(void)
+inline typename list_se<T>::reference list_se<T>::front()
 {
     return m_pFirstNode->value;
 }
 
 template<class T>
-inline typename list_se<T>::reference list_se<T>::back(void)
+inline typename list_se<T>::reference list_se<T>::back()
 {
     return m_pLastNode->value;
 }
 
 template<class T>
-inline typename list_se<T>::const_reference list_se<T>::front(void) const
+inline typename list_se<T>::const_reference list_se<T>::front() const
 {
     return m_pFirstNode->value;
 }
 
 template<class T>
-inline typename list_se<T>::const_reference list_se<T>::back(void) const
+inline typename list_se<T>::const_reference list_se<T>::back() const
 {
     return m_pLastNode->value;
 }

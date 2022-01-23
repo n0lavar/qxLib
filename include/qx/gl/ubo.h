@@ -31,13 +31,13 @@ public:
     /**
         @brief base_ubo object constructor
     **/
-    base_ubo(void) = default;
+    base_ubo() = default;
 
     /**
         @brief  Get max UBO size
         @retval - max UBO size
     **/
-    GLint GetMaxSize(void) const;
+    GLint GetMaxSize() const;
 
 protected:
     QX_DECL_BUFFER_BASE

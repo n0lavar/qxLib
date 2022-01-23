@@ -27,7 +27,7 @@ inline void base_easing_sequence<T>::emplace_back(Args&&... args) noexcept
 }
 
 template<typename T>
-inline void base_easing_sequence<T>::clear(void) noexcept
+inline void base_easing_sequence<T>::clear() noexcept
 {
     m_ElementsSequence.clear();
     m_nCurrentElement = 0;
@@ -35,7 +35,7 @@ inline void base_easing_sequence<T>::clear(void) noexcept
 }
 
 template<typename T>
-inline void base_easing_sequence<T>::start(void) noexcept
+inline void base_easing_sequence<T>::start() noexcept
 {
     reset();
     if (auto pCurrentElement = get_current_element())
@@ -43,14 +43,14 @@ inline void base_easing_sequence<T>::start(void) noexcept
 }
 
 template<typename T>
-inline void base_easing_sequence<T>::pause(void) noexcept
+inline void base_easing_sequence<T>::pause() noexcept
 {
     if (auto pCurrentElement = get_current_element())
         pCurrentElement->pause();
 }
 
 template<typename T>
-inline void base_easing_sequence<T>::resume(void) noexcept
+inline void base_easing_sequence<T>::resume() noexcept
 {
     if (auto pCurrentElement = get_current_element())
         pCurrentElement->resume();
@@ -67,7 +67,7 @@ inline void base_easing_sequence<T>::skip() noexcept
 }
 
 template<typename T>
-inline void base_easing_sequence<T>::reset(void) noexcept
+inline void base_easing_sequence<T>::reset() noexcept
 {
     m_nCurrentElement = 0;
     m_fCurrentTime    = T(0.f);
@@ -115,7 +115,7 @@ inline void base_easing_sequence<T>::set_speed(T fSpeed) noexcept
 }
 
 template<typename T>
-inline T base_easing_sequence<T>::get(void) const noexcept
+inline T base_easing_sequence<T>::get() const noexcept
 {
     if (auto pCurrentElement = get_current_element())
     {
@@ -134,7 +134,7 @@ inline T base_easing_sequence<T>::get(void) const noexcept
 }
 
 template<typename T>
-inline T base_easing_sequence<T>::get_fraction(void) const noexcept
+inline T base_easing_sequence<T>::get_fraction() const noexcept
 {
     if (auto pCurrentElement = get_current_element())
     {
@@ -154,13 +154,13 @@ inline T base_easing_sequence<T>::get_fraction(void) const noexcept
 }
 
 template<typename T>
-inline T base_easing_sequence<T>::get_speed(void) const noexcept
+inline T base_easing_sequence<T>::get_speed() const noexcept
 {
     return m_fSpeed;
 }
 
 template<typename T>
-inline bool base_easing_sequence<T>::is_not_started(void) const noexcept
+inline bool base_easing_sequence<T>::is_not_started() const noexcept
 {
     if (auto pCurrentElement = get_current_element())
     {
@@ -179,7 +179,7 @@ inline bool base_easing_sequence<T>::is_not_started(void) const noexcept
 }
 
 template<typename T>
-inline bool base_easing_sequence<T>::is_started(void) const noexcept
+inline bool base_easing_sequence<T>::is_started() const noexcept
 {
     if (auto pCurrentElement = get_current_element())
     {
@@ -198,7 +198,7 @@ inline bool base_easing_sequence<T>::is_started(void) const noexcept
 }
 
 template<typename T>
-inline bool base_easing_sequence<T>::is_paused(void) const noexcept
+inline bool base_easing_sequence<T>::is_paused() const noexcept
 {
     if (auto pCurrentElement = get_current_element())
         return pCurrentElement->is_paused();
@@ -207,7 +207,7 @@ inline bool base_easing_sequence<T>::is_paused(void) const noexcept
 }
 
 template<typename T>
-inline bool base_easing_sequence<T>::is_finished(void) const noexcept
+inline bool base_easing_sequence<T>::is_finished() const noexcept
 {
     if (auto pCurrentElement = get_current_element())
     {
@@ -226,14 +226,14 @@ inline bool base_easing_sequence<T>::is_finished(void) const noexcept
 }
 
 template<typename T>
-inline bool base_easing_sequence<T>::is_looped(void) const noexcept
+inline bool base_easing_sequence<T>::is_looped() const noexcept
 {
     return m_bLoop;
 }
 
 template<typename T>
 inline typename base_easing_sequence<T>::easing_element_type*
-    base_easing_sequence<T>::get_current_element(void) noexcept
+    base_easing_sequence<T>::get_current_element() noexcept
 {
     return m_nCurrentElement < m_ElementsSequence.size()
                ? &m_ElementsSequence[m_nCurrentElement]
@@ -242,7 +242,7 @@ inline typename base_easing_sequence<T>::easing_element_type*
 
 template<typename T>
 inline const typename base_easing_sequence<T>::easing_element_type*
-    base_easing_sequence<T>::get_current_element(void) const noexcept
+    base_easing_sequence<T>::get_current_element() const noexcept
 {
     return const_cast<base_easing_sequence*>(
                static_cast<const base_easing_sequence*>(this))
@@ -250,7 +250,7 @@ inline const typename base_easing_sequence<T>::easing_element_type*
 }
 
 template<typename T>
-inline void base_easing_sequence<T>::update_total_time(void) noexcept
+inline void base_easing_sequence<T>::update_total_time() noexcept
 {
     m_fTotalTime += T(1.f) / m_ElementsSequence.back().get_speed();
 }

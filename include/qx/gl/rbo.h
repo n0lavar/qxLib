@@ -30,7 +30,7 @@ public:
     /**
         @brief base_rbo object destructor
     **/
-    virtual ~base_rbo(void);
+    virtual ~base_rbo();
 
     /**
         @brief Init RBO with width and height
@@ -53,25 +53,25 @@ public:
         @brief  Get texture width
         @retval - texture width
     **/
-    size_t GetWidth(void) const;
+    size_t GetWidth() const;
 
     /**
         @brief  Get texture height
         @retval - texture height
     **/
-    size_t GetHeight(void) const;
+    size_t GetHeight() const;
 
     /**
         @brief  Get texture internal format
         @retval - texture internal format
     **/
-    GLenum GetInternalFormat(void) const;
+    GLenum GetInternalFormat() const;
 
     /**
         @brief  Get attachment type
         @retval - attachment type
     **/
-    GLenum GetAttachmentType(void) const;
+    GLenum GetAttachmentType() const;
 
 private:
     GLuint m_nBuffer         = std::numeric_limits<GLuint>::max();

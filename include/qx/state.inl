@@ -60,13 +60,13 @@ inline const T& state<T>::operator*() const noexcept
 }
 
 template<class T>
-inline void state<T>::reset(void) noexcept
+inline void state<T>::reset() noexcept
 {
     m_State = m_DefaultValue;
 }
 
 template<class T>
-inline bool state<T>::is_default(void) const noexcept
+inline bool state<T>::is_default() const noexcept
 {
     return m_State == m_DefaultValue;
 }

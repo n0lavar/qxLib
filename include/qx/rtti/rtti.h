@@ -38,7 +38,7 @@ concept has_get_class_id_static = requires(T t)
     @retval   - class id
 **/
 template<class C>
-inline class_identificator get_class_id(void) noexcept
+inline class_identificator get_class_id() noexcept
 {
     if constexpr (detail::has_get_class_id_static<C>)
     {
@@ -92,22 +92,22 @@ public:
         return id == get_class_id_static();
     }
 
-    static constexpr std::string_view get_class_name_static(void) noexcept
+    static constexpr std::string_view get_class_name_static() noexcept
     {
         return _get_class_name_by_strategy<QX_STRINGIFY(rtti_root)>();
     }
 
-    virtual std::string_view get_class_name(void) const noexcept
+    virtual std::string_view get_class_name() const noexcept
     {
         return get_class_name_static();
     }
 
-    static class_identificator get_class_id_static(void) noexcept
+    static class_identificator get_class_id_static() noexcept
     {
         return 0;
     }
 
-    virtual int get_class_id(void) const noexcept
+    virtual int get_class_id() const noexcept
     {
         return get_class_id_static();
     }
@@ -141,49 +141,49 @@ protected:
     @param thisClass  - this class name
     @param ...        - super class name (must implement QX_RTTI_CLASS or QX_RTTI_BASE_CLASS macro)
 **/
-#define QX_RTTI_CLASS(thisClass, ...)                                          \
-                                                                               \
-public:                                                                        \
-    using ThisClass  = thisClass;                                              \
-    using SuperClass = __VA_ARGS__;                                            \
-    using BaseClass  = typename SuperClass::BaseClass;                         \
-                                                                               \
-public:                                                                        \
-    virtual bool is_derived_from_id(qx::class_identificator id)                \
-        const noexcept override                                                \
-    {                                                                          \
-        return id == get_class_id_static()                                     \
-               || SuperClass::is_derived_from_id(id);                          \
-    }                                                                          \
-                                                                               \
-    static constexpr std::string_view get_class_name_static(void) noexcept     \
-    {                                                                          \
-        return BaseClass::template _get_class_name_by_strategy<QX_STRINGIFY(   \
-            thisClass)>();                                                     \
-    }                                                                          \
-                                                                               \
-    virtual qx::class_identificator get_class_id(void) const noexcept override \
-    {                                                                          \
-        return get_class_id_static();                                          \
-    }                                                                          \
-                                                                               \
-    static qx::class_identificator get_class_id_static(void) noexcept          \
-    {                                                                          \
-        static auto id = BaseClass::_get_next_id();                            \
-        return id;                                                             \
-    }                                                                          \
-                                                                               \
-    virtual std::string_view get_class_name(void) const noexcept override      \
-    {                                                                          \
-        return get_class_name_static();                                        \
-    }                                                                          \
-                                                                               \
-protected:                                                                     \
-    virtual bool _is_base_id(qx::class_identificator base_id)                  \
-        const noexcept override                                                \
-    {                                                                          \
-        return base_id == qx::get_class_id<SuperClass>()                       \
-               || SuperClass::_is_base_id(base_id);                            \
+#define QX_RTTI_CLASS(thisClass, ...)                                        \
+                                                                             \
+public:                                                                      \
+    using ThisClass  = thisClass;                                            \
+    using SuperClass = __VA_ARGS__;                                          \
+    using BaseClass  = typename SuperClass::BaseClass;                       \
+                                                                             \
+public:                                                                      \
+    virtual bool is_derived_from_id(qx::class_identificator id)              \
+        const noexcept override                                              \
+    {                                                                        \
+        return id == get_class_id_static()                                   \
+               || SuperClass::is_derived_from_id(id);                        \
+    }                                                                        \
+                                                                             \
+    static constexpr std::string_view get_class_name_static() noexcept       \
+    {                                                                        \
+        return BaseClass::template _get_class_name_by_strategy<QX_STRINGIFY( \
+            thisClass)>();                                                   \
+    }                                                                        \
+                                                                             \
+    virtual qx::class_identificator get_class_id() const noexcept override   \
+    {                                                                        \
+        return get_class_id_static();                                        \
+    }                                                                        \
+                                                                             \
+    static qx::class_identificator get_class_id_static() noexcept            \
+    {                                                                        \
+        static auto id = BaseClass::_get_next_id();                          \
+        return id;                                                           \
+    }                                                                        \
+                                                                             \
+    virtual std::string_view get_class_name() const noexcept override        \
+    {                                                                        \
+        return get_class_name_static();                                      \
+    }                                                                        \
+                                                                             \
+protected:                                                                   \
+    virtual bool _is_base_id(qx::class_identificator base_id)                \
+        const noexcept override                                              \
+    {                                                                        \
+        return base_id == qx::get_class_id<SuperClass>()                     \
+               || SuperClass::_is_base_id(base_id);                          \
     }
 
 } // namespace qx

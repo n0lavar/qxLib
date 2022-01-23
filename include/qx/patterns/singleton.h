@@ -19,8 +19,8 @@
 **/
 #define _QX_SINGLETON_IMPL(T, constructor, destructor, process_getter) \
 private:                                                               \
-    T(void) constructor;                                               \
-    ~T(void) destructor;                                               \
+    T() constructor;                                                   \
+    ~T() destructor;                                                   \
     T(const T&)      = delete;                                         \
     T(T&&)           = delete;                                         \
     const T& operator=(const T&) = delete;                             \

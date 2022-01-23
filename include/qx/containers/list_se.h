@@ -75,7 +75,7 @@ public:
         using iterator_category = std::forward_iterator_tag;
 
     public:
-        iterator(void) = default;
+        iterator() = default;
 
         /**
             @brief iterator object constructor
@@ -87,13 +87,13 @@ public:
             @brief  operator*
             @retval - object reference
         **/
-        reference operator*(void);
+        reference operator*();
 
         /**
             @brief  operator->
             @retval - object pointer
         **/
-        pointer operator->(void);
+        pointer operator->();
 
         /**
             @brief  operator!=
@@ -113,7 +113,7 @@ public:
             @brief  operator++
             @retval - reference to incremented value
         **/
-        iterator& operator++(void);
+        iterator& operator++();
 
         /**
             @brief  operator++
@@ -139,7 +139,7 @@ public:
         using iterator_category = std::forward_iterator_tag;
 
     public:
-        const_iterator(void) = default;
+        const_iterator() = default;
 
         /**
             @brief const_iterator object constructor
@@ -157,13 +157,13 @@ public:
             @brief  operator*
             @retval - object reference
         **/
-        reference operator*(void);
+        reference operator*();
 
         /**
             @brief  operator->
             @retval - object pointer
         **/
-        pointer operator->(void);
+        pointer operator->();
 
         /**
             @brief  operator!=
@@ -183,7 +183,7 @@ public:
             @brief  operator++
             @retval reference to incremented value
         **/
-        const_iterator& operator++(void);
+        const_iterator& operator++();
 
         /**
             @brief  operator++
@@ -205,7 +205,7 @@ public:
     using init_list       = const std::initializer_list<T>&;
 
 public:
-    list_se(void) = default;
+    list_se() = default;
 
     /**
         @brief list_se object constructor
@@ -235,7 +235,7 @@ public:
     /**
         @brief list_se object destructor
     **/
-    ~list_se(void);
+    ~list_se();
 
     /**
         @brief  operator=
@@ -398,103 +398,103 @@ public:
         @brief      Pop back element
         @complexity O(size())
     **/
-    void pop_back(void);
+    void pop_back();
 
     /**
         @brief      Pop front element
         @complexity O(1)
     **/
-    void pop_front(void);
+    void pop_front();
 
     /**
         @brief      Clear list
         @complexity O(size())
     **/
-    void clear(void);
+    void clear();
 
     /**
         @brief      Get number of elements in list
         @complexity O(1)
         @retval     - number of elements in list
     **/
-    size_type size(void) const;
+    size_type size() const;
 
     /**
         @brief      If list empty
         @complexity O(1)
         @retval     - true, if list is empty
     **/
-    bool empty(void) const;
+    bool empty() const;
 
     /**
         @brief      Return iterator to beginning
         @complexity O(1)
         @retval     - iterator to beginning
     **/
-    iterator begin(void);
+    iterator begin();
 
     /**
         @brief      Return iterator to beginning
         @complexity O(1)
         @retval     - iterator to beginning
     **/
-    const_iterator begin(void) const;
+    const_iterator begin() const;
 
     /**
         @brief      Return iterator to end
         @complexity O(1)
         @retval     - iterator to end
     **/
-    iterator end(void);
+    iterator end();
 
     /**
         @brief      Return iterator to end
         @complexity O(1)
         @retval     - iterator to end
     **/
-    const_iterator end(void) const;
+    const_iterator end() const;
 
     /**
         @brief      Return const iterator to beginning
         @complexity O(1)
         @retval     - const iterator to beginning
     **/
-    const_iterator cbegin(void) const;
+    const_iterator cbegin() const;
 
     /**
         @brief      Return const iterator to end
         @complexity O(1)
         @retval     - const iterator to end
     **/
-    const_iterator cend(void) const;
+    const_iterator cend() const;
 
     /**
         @brief      Get first element reference
         @complexity O(1)
         @retval     - first element reference
     **/
-    reference front(void);
+    reference front();
 
     /**
         @brief      Get last element reference
         @complexity O(1)
         @retval     - last element reference
     **/
-    reference back(void);
+    reference back();
 
     /**
         @brief      Get first element const reference
         @complexity O(1)
         @retval     - first element const reference
     **/
-    const_reference front(void) const;
+    const_reference front() const;
 
     /**
         @brief      Get last element const reference
         @complexity O(1)
         @retval     - last element const reference
     **/
-    const_reference back(void) const;
+    const_reference back() const;
 
 
 private:

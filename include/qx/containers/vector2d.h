@@ -42,7 +42,7 @@ public:
     QX_IMPL_CONTAINER(vector2d)
 
 public:
-    vector2d(void) = default;
+    vector2d() = default;
 
     /**
         @brief vector2d object constructor
@@ -75,7 +75,7 @@ public:
     /**
         @brief vector2d object destructor
     **/
-    ~vector2d(void);
+    ~vector2d();
 
     /**
         @brief  operator=
@@ -150,7 +150,7 @@ public:
     /**
         @brief Clear vector and free memory
     **/
-    void free(void);
+    void free();
 
     /**
         @brief Fill vector with element
@@ -192,31 +192,31 @@ public:
         @brief  Get num of rows in vector
         @retval - num of rows in vector
     **/
-    size_type rows(void) const noexcept;
+    size_type rows() const noexcept;
 
     /**
         @brief  Get num of cols in vector
         @retval - num of cols in vector
     **/
-    size_type cols(void) const noexcept;
+    size_type cols() const noexcept;
 
     /**
         @brief  Get num of rows in vector
         @retval - num of rows in vector
     **/
-    size_type size_x(void) const noexcept;
+    size_type size_x() const noexcept;
 
     /**
         @brief  Get num of cols in vector
         @retval - num of cols in vector
     **/
-    size_type size_y(void) const noexcept;
+    size_type size_y() const noexcept;
 
     /**
         @brief  Get allocated size
         @retval - allocated size
     **/
-    size_type capacity(void) const noexcept;
+    size_type capacity() const noexcept;
 
 private:
     pointer   m_pData          = nullptr;

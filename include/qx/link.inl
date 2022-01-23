@@ -11,25 +11,25 @@ namespace qx
 {
 
 template<class T>
-T* link<T>::lock_ptr::operator->(void) const noexcept
+T* link<T>::lock_ptr::operator->() const noexcept
 {
     return m_pRaw.get();
 }
 
 template<class T>
-T& link<T>::lock_ptr::operator*(void) const noexcept
+T& link<T>::lock_ptr::operator*() const noexcept
 {
     return *m_pRaw;
 }
 
 template<class T>
-T* link<T>::lock_ptr::get(void) const noexcept
+T* link<T>::lock_ptr::get() const noexcept
 {
     return m_pRaw.get();
 }
 
 template<class T>
-link<T>::lock_ptr::operator bool(void) const noexcept
+link<T>::lock_ptr::operator bool() const noexcept
 {
     return m_pRaw != nullptr;
 }
@@ -106,25 +106,25 @@ link<T>::link(std::nullptr_t) noexcept
 }
 
 template<class T>
-typename link<T>::lock_ptr link<T>::lock(void) const noexcept
+typename link<T>::lock_ptr link<T>::lock() const noexcept
 {
     return lock_ptr(std::move(m_pWeak.lock()));
 }
 
 template<class T>
-void link<T>::reset(void) noexcept
+void link<T>::reset() noexcept
 {
     m_pWeak.reset();
 }
 
 template<class T>
-inline bool link<T>::expired(void) const noexcept
+inline bool link<T>::expired() const noexcept
 {
     return m_pWeak.expired();
 }
 
 template<class T>
-link<T>::operator bool(void) const noexcept
+link<T>::operator bool() const noexcept
 {
     return !m_pWeak.expired();
 }

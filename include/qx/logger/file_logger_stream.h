@@ -52,12 +52,12 @@ public:
     /**
         @brief file_logger_stream object constructor
     **/
-    file_logger_stream(void);
+    file_logger_stream();
 
     /**
         @brief file_logger_stream object destructor
     **/
-    virtual ~file_logger_stream(void);
+    virtual ~file_logger_stream();
 
     /**
         @brief Output to file

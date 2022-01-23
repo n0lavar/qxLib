@@ -51,32 +51,32 @@ public:
     /**
         @brief Clear elements queue
     **/
-    void clear(void) noexcept;
+    void clear() noexcept;
 
     /**
         @brief Start easing element sequence playing
     **/
-    void start(void) noexcept;
+    void start() noexcept;
 
     /**
         @brief Pause easing element sequence playing
     **/
-    void pause(void) noexcept;
+    void pause() noexcept;
 
     /**
         @brief Resume easing element sequence playing
     **/
-    void resume(void) noexcept;
+    void resume() noexcept;
 
     /**
         @brief Skip current element
     **/
-    void skip(void) noexcept;
+    void skip() noexcept;
 
     /**
         @brief Reset sequence
     **/
-    void reset(void) noexcept;
+    void reset() noexcept;
 
     /**
         @brief Update easing element sequence
@@ -100,67 +100,67 @@ public:
         @brief  Get value of current sequence element
         @retval - value of current sequence element
     **/
-    T get(void) const noexcept;
+    T get() const noexcept;
 
     /**
         @brief  Get a fraction indicating how much of the sequence has played
         @retval - fraction [0.0, 1.0]
     **/
-    T get_fraction(void) const noexcept;
+    T get_fraction() const noexcept;
 
     /**
         @brief  Get updating speed value
         @retval - speed
     **/
-    T get_speed(void) const noexcept;
+    T get_speed() const noexcept;
 
     /**
         @brief  Is sequence not started
         @retval - true if sequence is not started
     **/
-    bool is_not_started(void) const noexcept;
+    bool is_not_started() const noexcept;
 
     /**
         @brief  Is sequence started
         @retval - true if sequence is started
     **/
-    bool is_started(void) const noexcept;
+    bool is_started() const noexcept;
 
     /**
         @brief  Is sequence paused
         @retval - true if sequence is paused
     **/
-    bool is_paused(void) const noexcept;
+    bool is_paused() const noexcept;
 
     /**
         @brief  Is sequence finished
         @retval - true if sequence is finished
     **/
-    bool is_finished(void) const noexcept;
+    bool is_finished() const noexcept;
 
     /**
         @brief  Is sequence looped
         @retval - true if sequence is looped
     **/
-    bool is_looped(void) const noexcept;
+    bool is_looped() const noexcept;
 
 private:
     /**
         @brief  Get current element pointer or nullptr if no elements
         @retval - current element pointer or nullptr if no elements
     **/
-    easing_element_type* get_current_element(void) noexcept;
+    easing_element_type* get_current_element() noexcept;
 
     /**
         @brief  Get current element pointer or nullptr if no elements
         @retval - current element pointer or nullptr if no elements
     **/
-    const easing_element_type* get_current_element(void) const noexcept;
+    const easing_element_type* get_current_element() const noexcept;
 
     /**
         @brief Update total time by adding time from last element
     **/
-    void update_total_time(void) noexcept;
+    void update_total_time() noexcept;
 
 private:
     std::vector<easing_element_type> m_ElementsSequence;

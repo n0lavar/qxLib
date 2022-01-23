@@ -59,27 +59,27 @@ public:
     /**
         @brief Mark element as active and let it update
     **/
-    void start(void) noexcept;
+    void start() noexcept;
 
     /**
         @brief Pause element if started
     **/
-    void pause(void) noexcept;
+    void pause() noexcept;
 
     /**
         @brief Resume updating if paused
     **/
-    void resume(void) noexcept;
+    void resume() noexcept;
 
     /**
         @brief Mark element as finished
     **/
-    void finish(void) noexcept;
+    void finish() noexcept;
 
     /**
         @brief Mark element as inactive
     **/
-    void reset(void) noexcept;
+    void reset() noexcept;
 
     /**
         @brief  Update element corresponding to easing function
@@ -98,49 +98,49 @@ public:
         @brief  Get current value of element
         @retval - current value of element
     **/
-    [[nodiscard]] T get(void) const noexcept;
+    [[nodiscard]] T get() const noexcept;
 
     /**
         @brief  Get a fraction indicating how much of the element has played
         @retval - fraction [0.0, 1.0]
     **/
-    [[nodiscard]] T get_fraction(void) const noexcept;
+    [[nodiscard]] T get_fraction() const noexcept;
 
     /**
         @brief  Get speed value
         @retval - speed value
     **/
-    [[nodiscard]] T get_speed(void) const noexcept;
+    [[nodiscard]] T get_speed() const noexcept;
 
     /**
         @brief  Get element status
         @retval - element status
     **/
-    [[nodiscard]] status get_status(void) const noexcept;
+    [[nodiscard]] status get_status() const noexcept;
 
     /**
         @brief  Check if element is not started
         @retval - true if element is not started
     **/
-    [[nodiscard]] bool is_not_started(void) const noexcept;
+    [[nodiscard]] bool is_not_started() const noexcept;
 
     /**
         @brief  Check if element is started
         @retval - true if element is started
     **/
-    [[nodiscard]] bool is_started(void) const noexcept;
+    [[nodiscard]] bool is_started() const noexcept;
 
     /**
         @brief  Check if element is paused
         @retval - true if element is paused
     **/
-    [[nodiscard]] bool is_paused(void) const noexcept;
+    [[nodiscard]] bool is_paused() const noexcept;
 
     /**
         @brief  Check if element is finished
         @retval - true if element is finished
     **/
-    [[nodiscard]] bool is_finished(void) const noexcept;
+    [[nodiscard]] bool is_finished() const noexcept;
 
 private:
     easing::func<T> m_EasingFunc;

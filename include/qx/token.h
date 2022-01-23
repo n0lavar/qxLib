@@ -26,7 +26,7 @@ namespace qx
 class token
 {
 public:
-    using destroyer = std::function<void(void)>;
+    using destroyer = std::function<void()>;
 
 public:
     QX_NONCOPYABLE(token);
@@ -35,7 +35,7 @@ public:
     /**
         @brief token object constructor
     **/
-    token(void) noexcept = default;
+    token() noexcept = default;
 
     /**
         @brief token object constructor
@@ -48,7 +48,7 @@ public:
     /**
         @brief token object destructor
     **/
-    ~token(void)
+    ~token()
     {
         if (m_Destroyer)
             m_Destroyer();

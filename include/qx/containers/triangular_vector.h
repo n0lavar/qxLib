@@ -47,7 +47,7 @@ public:
     QX_IMPL_CONTAINER(triangular_vector)
 
 public:
-    triangular_vector(void) = default;
+    triangular_vector() = default;
 
     /**
         @brief triangular_vector object constructor
@@ -77,7 +77,7 @@ public:
     /**
         @brief triangular_vector object destructor
     **/
-    ~triangular_vector(void);
+    ~triangular_vector();
 
     /**
         @brief  operator=
@@ -160,18 +160,18 @@ public:
         @brief  Get matrix side size
         @retval - matrix side size
     **/
-    size_type size_side(void) const noexcept;
+    size_type size_side() const noexcept;
 
     /**
         @brief  Get capacity
         @retval - capacity
     **/
-    size_type capacity(void) const noexcept;
+    size_type capacity() const noexcept;
 
     /**
         @brief Clear vector and free memory
     **/
-    void free(void);
+    void free();
 
 private:
     /**

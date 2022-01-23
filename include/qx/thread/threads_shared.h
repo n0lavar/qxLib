@@ -71,31 +71,31 @@ public:
     /**
         @brief shared_proxy object destructor
     **/
-    ~shared_proxy(void);
+    ~shared_proxy();
 
     /**
         @brief  operator->
         @retval - data pointer
     **/
-    [[nodiscard]] Data* operator->(void) noexcept;
+    [[nodiscard]] Data* operator->() noexcept;
 
     /**
         @brief  operator->
         @retval - data const pointer
     **/
-    [[nodiscard]] const Data* operator->(void) const noexcept;
+    [[nodiscard]] const Data* operator->() const noexcept;
 
     /**
         @brief  operator*
         @retval - data reference
     **/
-    [[nodiscard]] Data& operator*(void) noexcept;
+    [[nodiscard]] Data& operator*() noexcept;
 
     /**
         @brief  operator*
         @retval - data const reference
     **/
-    [[nodiscard]] const Data& operator*(void) const noexcept;
+    [[nodiscard]] const Data& operator*() const noexcept;
 
 private:
     SynchronizationPrimitive* m_pSynchronizationPrimitive = nullptr;
@@ -132,18 +132,18 @@ class threads_shared
         /**
             @brief synchronization_primitive_raii object constructor
         **/
-        synchronization_primitive_raii(void);
+        synchronization_primitive_raii();
 
         /**
             @brief synchronization_primitive_raii object destructor
         **/
-        ~synchronization_primitive_raii(void);
+        ~synchronization_primitive_raii();
 
         /**
             @brief  Get synchronization primitive stored in proxy
             @retval - synchronization primitive
         **/
-        SynchronizationPrimitive* get_object(void) noexcept;
+        SynchronizationPrimitive* get_object() noexcept;
 
     private:
         SynchronizationPrimitive sp;
@@ -165,7 +165,7 @@ public:
     /**
         @brief threads_shared object destructor
     **/
-    ~threads_shared(void);
+    ~threads_shared();
 
     /**
         @brief  Wait for other threads to finish work with data object and retrieve
@@ -173,14 +173,14 @@ public:
         @retval - proxy that provides access to an object stored in threads_shared
                   and provides raii for synchronization primitives
     **/
-    [[nodiscard]] proxy lock(void);
+    [[nodiscard]] proxy lock();
 
     /**
         @brief  Try to lock synchronization primitive and get proxy
         @retval - proxy that provides access to an object stored
                   in threads_shared or std::nullopt
     **/
-    [[nodiscard]] std::optional<proxy> try_lock(void);
+    [[nodiscard]] std::optional<proxy> try_lock();
 
 private:
     synchronization_primitive_raii m_SynchronizationPrimitiveRAII;

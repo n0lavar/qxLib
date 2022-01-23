@@ -10,7 +10,7 @@
 namespace qx
 {
 
-inline base_texture::~base_texture(void)
+inline base_texture::~base_texture()
 {
     if (m_nTexture != std::numeric_limits<GLuint>::max())
     {
@@ -19,48 +19,48 @@ inline base_texture::~base_texture(void)
     }
 }
 
-inline void base_texture::Generate(void)
+inline void base_texture::Generate()
 {
     if (m_nTexture == std::numeric_limits<GLuint>::max())
         glGenTextures(1, &m_nTexture);
 }
 
-inline void base_texture::Bind(void) const
+inline void base_texture::Bind() const
 {
     glBindTexture(m_eTextureTarget, m_nTexture);
 }
 
-inline void base_texture::Unbind(void) const
+inline void base_texture::Unbind() const
 {
     glBindTexture(m_eTextureTarget, 0);
 }
 
-inline GLuint base_texture::GetBufferName(void) const
+inline GLuint base_texture::GetBufferName() const
 {
     return m_nTexture;
 }
 
-inline bool base_texture::IsGenerated(void) const
+inline bool base_texture::IsGenerated() const
 {
     return m_nTexture != std::numeric_limits<GLuint>::max();
 };
 
-inline GLenum base_texture::GetTarget(void) const
+inline GLenum base_texture::GetTarget() const
 {
     return m_eTextureTarget;
 }
 
-inline GLenum base_texture::GetInternalFormat(void) const
+inline GLenum base_texture::GetInternalFormat() const
 {
     return m_eInternalFormat;
 }
 
-inline GLsizei base_texture::GetWidth(void) const
+inline GLsizei base_texture::GetWidth() const
 {
     return m_nWidth;
 }
 
-inline GLsizei base_texture::GetHeight(void) const
+inline GLsizei base_texture::GetHeight() const
 {
     return m_nHeight;
 }
@@ -116,7 +116,7 @@ inline void base_texture::Specify2DMultisample(
     m_eInternalFormat = eInternalFormat;
 }
 
-inline void base_texture::GenerateMipmap(void)
+inline void base_texture::GenerateMipmap()
 {
     glGenerateMipmap(m_eTextureTarget);
 }

@@ -16,13 +16,13 @@ inline base_shader_program::base_shader_program(
     std::swap(m_nProgram, baseShaderProgram.m_nProgram);
 }
 
-inline base_shader_program::~base_shader_program(void) noexcept
+inline base_shader_program::~base_shader_program() noexcept
 {
     if (m_nProgram != std::numeric_limits<GLuint>::max())
         glDeleteProgram(m_nProgram);
 }
 
-inline void base_shader_program::Init(void) noexcept
+inline void base_shader_program::Init() noexcept
 {
     m_nProgram = glCreateProgram();
 }
@@ -53,12 +53,12 @@ inline bool base_shader_program::Link(string* pErrorString) noexcept
     return bSuccess == GL_TRUE;
 }
 
-inline void base_shader_program::Use(void) const noexcept
+inline void base_shader_program::Use() const noexcept
 {
     glUseProgram(m_nProgram);
 }
 
-inline void base_shader_program::Unuse(void) const noexcept
+inline void base_shader_program::Unuse() const noexcept
 {
     glUseProgram(0);
 }
@@ -70,7 +70,7 @@ inline GLint base_shader_program::GetParameter(GLenum eParameter) const noexcept
     return nRet;
 }
 
-inline GLuint base_shader_program::GetBufferName(void) const noexcept
+inline GLuint base_shader_program::GetBufferName() const noexcept
 {
     return m_nProgram;
 }

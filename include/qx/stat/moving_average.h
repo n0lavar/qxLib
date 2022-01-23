@@ -91,13 +91,13 @@ public:
         @brief  Get current moving average
         @retval - current moving average
     **/
-    T get(void) const;
+    T get() const;
 
     /**
         @brief  Get number of entries in average calc
         @retval - number of entries in average calc
     **/
-    size_t get_num_entries(void) const;
+    size_t get_num_entries() const;
 
 private:
     T              m_Value;

@@ -30,12 +30,12 @@ public:
     /**
         @brief base_vao object constructor
     **/
-    base_vao(void) = default;
+    base_vao() = default;
 
     /**
         @brief base_vao object destructor
     **/
-    virtual ~base_vao(void);
+    virtual ~base_vao();
 
     QX_DECL_IBUFFER
 

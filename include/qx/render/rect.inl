@@ -110,7 +110,7 @@ constexpr bool rect::empty() const noexcept
     return epsilon_equal(area(), 0.f);
 }
 
-constexpr rect::value_type rect::area(void) const noexcept
+constexpr rect::value_type rect::area() const noexcept
 {
     return m_Size.x * m_Size.y;
 }

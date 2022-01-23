@@ -10,11 +10,11 @@
 namespace qx
 {
 
-inline GLenum base_ebo::GetBufferType(void) const
+inline GLenum base_ebo::GetBufferType() const
 {
     return GL_ELEMENT_ARRAY_BUFFER;
 }
-inline GLbitfield base_ebo::GetBarrierBit(void) const
+inline GLbitfield base_ebo::GetBarrierBit() const
 {
     return GL_ELEMENT_ARRAY_BARRIER_BIT;
 }
