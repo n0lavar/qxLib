@@ -241,7 +241,7 @@ inline void make_heap(RandomIt begin, RandomIt end, Compare compare = Compare())
         adjust_heap(
             begin,
             static_cast<size_t>(max),
-            static_cast<size_t>(i),
+            static_cast<size_t>(i), //-V201
             compare);
     }
 }

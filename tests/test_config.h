@@ -9,6 +9,7 @@
 **/
 #pragma once
 
+#include <qx/pvs_config.h>
 #include <qx/suppress_warnings.h>
 
 QX_PUSH_SUPPRESS_ALL_WARNINGS

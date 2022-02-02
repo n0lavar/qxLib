@@ -173,6 +173,13 @@ class subject : public base_subject
         ~base_iterator() noexcept;
 
         /**
+            @brief  operator=
+            @param  other - other object
+            @retval       - this object reference
+        **/
+        base_iterator& operator=(const base_iterator& other) noexcept;
+
+        /**
             @brief  operator->
             @retval - observer object pointer
         **/

@@ -50,6 +50,7 @@
     {                             \
         return m_##name;          \
     }
+//-V:QX_GETTER_REF:1003
 
 /**
     @def   QX_SETTER

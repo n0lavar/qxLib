@@ -63,8 +63,9 @@ public:
         @param svMessage - message string
         @param logUnit   - log unit info
     **/
-    virtual void process_output(std::string_view svMessage, log_unit logUnit)
-        override;
+    virtual void process_output(
+        std::string_view svMessage,
+        const log_unit&  logUnit) override;
 
     /**
         @brief Set whether cout output should be colored

@@ -24,9 +24,9 @@ namespace qx
     @retval            - 32bit unsigned value
 **/
 template<typename value_type>
-constexpr u32 djb2a_hash(const value_type* pStr, u32 nSeed, size_t nLen)
+constexpr size_t djb2a_hash(const value_type* pStr, size_t nSeed, size_t nLen)
 {
-    u32 nHash = nSeed;
+    size_t nHash = nSeed;
 
     for (size_t i = 0; i < nLen; i++)
         nHash = nHash * 33 ^ pStr[i];
@@ -42,9 +42,9 @@ constexpr u32 djb2a_hash(const value_type* pStr, u32 nSeed, size_t nLen)
     @retval            - 32bit unsigned value
 **/
 template<typename value_type>
-constexpr u32 djb2a_hash(const value_type* pszStr, u32 nSeed)
+constexpr size_t djb2a_hash(const value_type* pszStr, size_t nSeed)
 {
-    u32        nHash = nSeed;
+    size_t     nHash = nSeed;
     value_type ch;
 
     while ((ch = *pszStr++) != 0)
@@ -64,24 +64,24 @@ constexpr u32 djb2a_hash(const value_type* pszStr, u32 nSeed)
     @retval             - 32bit unsigned value
 **/
 template<typename value_type>
-constexpr u32 murmur_32_hash(
+constexpr size_t murmur_32_hash(
     const value_type* pStr,
-    u32               nSeed,
+    size_t            nSeed,
     size_t            nLen) noexcept
 {
-    u32 nHash = nSeed;
+    size_t nHash = nSeed;
 
     if (nLen > 3)
     {
         size_t i = nLen >> 2;
         do
         {
-            u32 k = 0;
+            size_t k = 0;
 
             // constexpr version of std::memcpy(&k, pszStr, sizeof(u32));
             static_assert(
                 sizeof(value_type) == 1 || sizeof(value_type) == 2
-                || sizeof(value_type) == 4);
+                || sizeof(value_type) == 4); //-V112
 
             if constexpr (sizeof(value_type) == sizeof(u32))
             {
@@ -106,26 +106,26 @@ constexpr u32 murmur_32_hash(
 
             pStr += sizeof(u32);
 
-            k *= 0xcc9e2d51;
+            k *= 0xcc9e2d51; //-V101
             k = (k << 15) | (k >> 17);
             k *= 0x1b873593;
 
             nHash ^= k;
             nHash = (nHash << 13) | (nHash >> 19);
-            nHash = nHash * 5 + 0xe6546b64;
+            nHash = nHash * 5 + 0xe6546b64; //-V104
         } while (--i);
     }
 
     if (nLen & 3)
     {
         size_t i = nLen & 3;
-        u32    k = 0;
+        size_t k = 0;
         do
         {
             k <<= 8;
             k |= pStr[i - 1];
         } while (--i);
-        k *= 0xcc9e2d51;
+        k *= 0xcc9e2d51; //-V101
         k = (k << 15) | (k >> 17);
         k *= 0x1b873593;
         nHash ^= k;
@@ -133,9 +133,9 @@ constexpr u32 murmur_32_hash(
 
     nHash ^= nLen; //-V103
     nHash ^= nHash >> 16;
-    nHash *= 0x85ebca6b;
+    nHash *= 0x85ebca6b; //-V101
     nHash ^= nHash >> 13;
-    nHash *= 0xc2b2ae35;
+    nHash *= 0xc2b2ae35; //-V101
     nHash ^= nHash >> 16;
 
     return nHash;

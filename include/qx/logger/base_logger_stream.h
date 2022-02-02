@@ -91,7 +91,7 @@ public:
     **/
     virtual void process_output(
         std::string_view svMessage,
-        log_unit         logUnit) = 0;
+        const log_unit&  logUnit) = 0;
 
     /**
         @brief Output to stream

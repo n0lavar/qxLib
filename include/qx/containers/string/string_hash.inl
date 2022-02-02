@@ -66,7 +66,7 @@ constexpr typename char_traits<value_type>::size_type fast_hash_string_traits<
         size_t                                          nSeed,
         typename char_traits<value_type>::size_type     nLen) noexcept
 {
-    return djb2a_hash(sStr, static_cast<u32>(nSeed), nLen);
+    return djb2a_hash(sStr, nSeed, nLen);
 }
 
 template<typename value_type>
@@ -76,7 +76,7 @@ constexpr typename char_traits<value_type>::size_type fast_hash_string_traits<
         typename char_traits<value_type>::const_pointer pszStr,
         size_t                                          nSeed) noexcept
 {
-    return djb2a_hash(pszStr, static_cast<u32>(nSeed));
+    return djb2a_hash(pszStr, nSeed);
 }
 
 } // namespace qx

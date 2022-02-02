@@ -28,7 +28,7 @@ template<std::integral T>
 T random(T min, T max)
 {
     static std::default_random_engine generator(
-        static_cast<unsigned>(std::time(nullptr)));
+        static_cast<unsigned>(std::time(nullptr))); //-V202
 
     std::uniform_int_distribution<T> distribution(min, max);
     return distribution(generator);
@@ -45,7 +45,8 @@ template<std::floating_point T>
 T random(T min, T max)
 {
     static std::default_random_engine generator(
-        static_cast<unsigned>(std::time(nullptr)));
+        static_cast<unsigned>(std::time(nullptr))); //-V202
+
     std::uniform_real_distribution<T> distribution(min, max);
     return distribution(generator);
 }

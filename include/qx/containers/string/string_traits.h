@@ -42,7 +42,7 @@ struct common_char_traits
         size_t        nSeed,
         size_type     nLen) noexcept
     {
-        return murmur_32_hash(pszStr, static_cast<u32>(nSeed), nLen);
+        return murmur_32_hash(pszStr, nSeed, nLen);
     }
 };
 

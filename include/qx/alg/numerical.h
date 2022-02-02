@@ -164,8 +164,15 @@ inline std::vector<I> find_prime_factors(I nValue)
 
     std::vector<I> factors;
 
-    if (nValue < 0)
-        nValue = -nValue;
+    bool bValueNegative = false;
+    if constexpr (std::numeric_limits<I>::min() < 0)
+    {
+        if (nValue < 0)
+        {
+            bValueNegative = true;
+            nValue         = -nValue;
+        }
+    }
 
     if (nValue > 1)
     {
@@ -192,6 +199,10 @@ inline std::vector<I> find_prime_factors(I nValue)
         if (nValue > 1)
             factors.push_back(nValue);
     }
+
+    if constexpr (std::numeric_limits<I>::min() < 0)
+        if (!factors.empty() && bValueNegative)
+            factors[0] = -factors[0];
 
     return factors;
 }
@@ -255,7 +266,7 @@ inline std::vector<I> find_primes(I nMaxNumber)
 **/
 inline bool is_prime(size_t nValue)
 {
-    return find_prime_factors(static_cast<int>(nValue)).size() == 1;
+    return find_prime_factors(nValue).size() == 1;
 }
 
 /**
@@ -278,7 +289,7 @@ inline bool is_prime(size_t nValue, double fProbability)
         std::ceil(std::log(1.0 / (1.0 - fProbability)) / fLog2));
 
     std::default_random_engine generator(
-        static_cast<unsigned int>(std::time(0)));
+        static_cast<unsigned>(std::time(nullptr))); //-V202
 
     std::uniform_int_distribution<size_t> num_dist(2, nValue);
 
@@ -286,7 +297,7 @@ inline bool is_prime(size_t nValue, double fProbability)
     {
         const size_t nRandomNumber = num_dist(generator);
         if (static_cast<size_t>(
-                pow(nRandomNumber, static_cast<int>(nValue - 1)))
+                pow(nRandomNumber, static_cast<int>(nValue) - 1)) //-V202
                 % nValue
             != 1)
         {

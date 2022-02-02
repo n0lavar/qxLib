@@ -12,7 +12,7 @@ namespace qx
 
 inline void cout_logger_stream::process_output(
     std::string_view svMessage,
-    log_unit         logUnit)
+    const log_unit&  logUnit)
 {
     std::string_view svColor;
     switch (logUnit.pUnitInfo->eUnitLevel)

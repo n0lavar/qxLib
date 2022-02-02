@@ -102,7 +102,7 @@ TEST(numerical, find_prime_factors)
         GTEST_SINGLE_ARGUMENT(std::vector<int> {}));
     ASSERT_EQ(
         qx::find_prime_factors(-2),
-        GTEST_SINGLE_ARGUMENT(std::vector<int> { 2 }));
+        GTEST_SINGLE_ARGUMENT(std::vector<int> { -2 }));
     ASSERT_EQ(
         qx::find_prime_factors(6),
         GTEST_SINGLE_ARGUMENT(std::vector<int> { 2, 3 }));
@@ -118,6 +118,9 @@ TEST(numerical, find_prime_factors)
     ASSERT_EQ(
         qx::find_prime_factors(88),
         GTEST_SINGLE_ARGUMENT(std::vector<int> { 2, 2, 2, 11 }));
+    ASSERT_EQ(
+        qx::find_prime_factors(-88),
+        GTEST_SINGLE_ARGUMENT(std::vector<int> { -2, 2, 2, 11 }));
 }
 
 TEST(numerical, find_primes)

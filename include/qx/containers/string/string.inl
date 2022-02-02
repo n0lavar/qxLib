@@ -1713,14 +1713,14 @@ inline typename basic_string<Traits>::views basic_string<Traits>::split(
     size_type nEnd   = 0;
     while ((nEnd = find(chSeparator, nStart)) != npos)
     {
-        tokens.push_back(substr(nStart, nEnd - nStart));
+        tokens.emplace_back(substr(nStart, nEnd - nStart));
         nStart = nEnd;
         while (Traits::compare_n(data() + nStart, &chSeparator, 1) == 0)
             ++nStart;
     }
 
     if (nStart != size())
-        tokens.push_back(substr(nStart));
+        tokens.emplace_back(substr(nStart));
 
     return std::move(tokens);
 }
@@ -1739,14 +1739,14 @@ inline typename basic_string<Traits>::views basic_string<Traits>::split(
     size_type nEnd   = 0;
     while ((nEnd = find(pszSeparator, nStart, nSepLen, npos)) != npos)
     {
-        tokens.push_back(substr(nStart, nEnd - nStart));
+        tokens.emplace_back(substr(nStart, nEnd - nStart));
         nStart = nEnd;
         while (Traits::compare_n(data() + nStart, pszSeparator, nSepLen) == 0)
             nStart += nSepLen;
     }
 
     if (nStart != size())
-        tokens.push_back(substr(nStart));
+        tokens.emplace_back(substr(nStart));
 
     return tokens;
 }
@@ -1773,10 +1773,10 @@ inline typename basic_string<Traits>::views basic_string<Traits>::split(
     size_type nEnd   = 0;
     while ((nEnd = find(itSepFirst, itSepLast, nStart)) != npos)
     {
-        tokens.push_back(substr(nStart, nEnd - nStart));
+        tokens.emplace_back(substr(nStart, nEnd - nStart));
         nStart = nEnd + nSepLen;
     }
-    tokens.push_back(substr(nStart));
+    tokens.emplace_back(substr(nStart));
 
     return tokens;
 }
@@ -2413,7 +2413,7 @@ basic_string<Traits> operator+(
 {
     basic_string<Traits> str(lhs);
     str += rhs;
-    return std::move(str);
+    return str;
 }
 
 template<class Traits>

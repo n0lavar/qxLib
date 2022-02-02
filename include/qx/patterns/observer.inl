@@ -66,7 +66,7 @@ inline observer_token_data::operator bool() const noexcept
 
 template<class TObserver>
 template<class TBaseIterator>
-subject<TObserver>::base_iterator<TBaseIterator>::base_iterator(
+inline subject<TObserver>::base_iterator<TBaseIterator>::base_iterator(
     const TBaseIterator& other,
     subject*             pSubject) noexcept
     : TBaseIterator(other)
@@ -77,7 +77,7 @@ subject<TObserver>::base_iterator<TBaseIterator>::base_iterator(
 
 template<class TObserver>
 template<class TBaseIterator>
-subject<TObserver>::base_iterator<TBaseIterator>::base_iterator(
+inline subject<TObserver>::base_iterator<TBaseIterator>::base_iterator(
     const base_iterator& other) noexcept
     : TBaseIterator(other)
     , m_pSubject(other.m_pSubject)
@@ -87,14 +87,25 @@ subject<TObserver>::base_iterator<TBaseIterator>::base_iterator(
 
 template<class TObserver>
 template<class TBaseIterator>
-subject<TObserver>::base_iterator<TBaseIterator>::~base_iterator() noexcept
+inline subject<TObserver>::base_iterator<
+    TBaseIterator>::~base_iterator() noexcept
 {
     m_pSubject->on_iterator_destructed();
 }
 
 template<class TObserver>
 template<class TBaseIterator>
-TObserver* subject<TObserver>::base_iterator<TBaseIterator>::operator->(
+inline typename subject<TObserver>::base_iterator<TBaseIterator>& subject<
+    TObserver>::base_iterator<TBaseIterator>::operator=(const base_iterator&
+                                                            other) noexcept
+{
+    *this = std::move(base_iterator(other));
+    return *this;
+}
+
+template<class TObserver>
+template<class TBaseIterator>
+inline TObserver* subject<TObserver>::base_iterator<TBaseIterator>::operator->(
     void) noexcept
 {
     return static_cast<TObserver*>(*TBaseIterator::operator->());
@@ -102,7 +113,7 @@ TObserver* subject<TObserver>::base_iterator<TBaseIterator>::operator->(
 
 template<class TObserver>
 template<class TBaseIterator>
-TObserver& subject<TObserver>::base_iterator<TBaseIterator>::operator*(
+inline TObserver& subject<TObserver>::base_iterator<TBaseIterator>::operator*(
     void) noexcept
 {
     return static_cast<TObserver&>(*TBaseIterator::operator*());
@@ -110,7 +121,7 @@ TObserver& subject<TObserver>::base_iterator<TBaseIterator>::operator*(
 
 template<class TObserver>
 template<class TBaseIterator>
-void subject<TObserver>::base_iterator<TBaseIterator>::init() noexcept
+inline void subject<TObserver>::base_iterator<TBaseIterator>::init() noexcept
 {
     m_pSubject->on_iterator_constructed();
 }

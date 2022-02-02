@@ -27,13 +27,11 @@ inline void base_logger_stream::output(
 {
     if (const auto optLogUnit = get_unit_info(pszTag, pszFile, pszFunction))
     {
-        auto& logUnit = optLogUnit.value();
-
-        if (eLogLevel >= logUnit.pUnitInfo->eUnitLevel)
+        if (eLogLevel >= optLogUnit->pUnitInfo->eUnitLevel)
         {
             m_sBufferMessage.clear();
 
-            auto formatFunc = logUnit.pUnitInfo->formatFunc;
+            auto formatFunc = optLogUnit->pUnitInfo->formatFunc;
             if (!formatFunc)
                 formatFunc = format_line;
 
@@ -55,7 +53,7 @@ inline void base_logger_stream::output(
             va_end(argsCopy);
 
             if (!m_sBufferMessage.empty())
-                process_output(m_sBufferMessage, logUnit);
+                process_output(m_sBufferMessage, *optLogUnit);
         }
     }
 }
