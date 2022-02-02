@@ -119,7 +119,7 @@ $(function() {
 <div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;            <span class="comment">// constexpr version of std::memcpy(&amp;k, pszStr, sizeof(u32));</span></div>
 <div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;            static_assert(</div>
 <div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;                <span class="keyword">sizeof</span>(value_type) == 1 || <span class="keyword">sizeof</span>(value_type) == 2</div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;                || <span class="keyword">sizeof</span>(value_type) == 4); <span class="comment">//-V112</span></div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;                || <span class="keyword">sizeof</span>(value_type) == 4);</div>
 <div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160; </div>
 <div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;            <span class="keywordflow">if</span> constexpr (<span class="keyword">sizeof</span>(value_type) == <span class="keyword">sizeof</span>(<a class="code" href="typedefs_8h.html#a70c1fcc1a4e96af8f6580f708657cd41">u32</a>))</div>
 <div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;            {</div>

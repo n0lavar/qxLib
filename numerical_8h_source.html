@@ -290,7 +290,7 @@ $(function() {
 <div class="line"><a name="l00289"></a><span class="lineno">  289</span>&#160;        std::ceil(std::log(1.0 / (1.0 - fProbability)) / fLog2));</div>
 <div class="line"><a name="l00290"></a><span class="lineno">  290</span>&#160; </div>
 <div class="line"><a name="l00291"></a><span class="lineno">  291</span>&#160;    std::default_random_engine generator(</div>
-<div class="line"><a name="l00292"></a><span class="lineno">  292</span>&#160;        <span class="keyword">static_cast&lt;</span><span class="keywordtype">unsigned</span><span class="keyword">&gt;</span>(std::time(<span class="keyword">nullptr</span>))); <span class="comment">//-V202</span></div>
+<div class="line"><a name="l00292"></a><span class="lineno">  292</span>&#160;        <span class="keyword">static_cast&lt;</span><span class="keywordtype">unsigned</span><span class="keyword">&gt;</span>(std::time(<span class="keyword">nullptr</span>)));</div>
 <div class="line"><a name="l00293"></a><span class="lineno">  293</span>&#160; </div>
 <div class="line"><a name="l00294"></a><span class="lineno">  294</span>&#160;    std::uniform_int_distribution&lt;size_t&gt; num_dist(2, nValue);</div>
 <div class="line"><a name="l00295"></a><span class="lineno">  295</span>&#160; </div>
@@ -298,7 +298,7 @@ $(function() {
 <div class="line"><a name="l00297"></a><span class="lineno">  297</span>&#160;    {</div>
 <div class="line"><a name="l00298"></a><span class="lineno">  298</span>&#160;        <span class="keyword">const</span> <span class="keywordtype">size_t</span> nRandomNumber = num_dist(generator);</div>
 <div class="line"><a name="l00299"></a><span class="lineno">  299</span>&#160;        <span class="keywordflow">if</span> (<span class="keyword">static_cast&lt;</span><span class="keywordtype">size_t</span><span class="keyword">&gt;</span>(</div>
-<div class="line"><a name="l00300"></a><span class="lineno">  300</span>&#160;                <a class="code" href="numerical_8h.html#a067253ab2ca1eebe6341415e897fca4b">pow</a>(nRandomNumber, <span class="keyword">static_cast&lt;</span><span class="keywordtype">int</span><span class="keyword">&gt;</span>(nValue) - 1)) <span class="comment">//-V202</span></div>
+<div class="line"><a name="l00300"></a><span class="lineno">  300</span>&#160;                <a class="code" href="numerical_8h.html#a067253ab2ca1eebe6341415e897fca4b">pow</a>(nRandomNumber, <span class="keyword">static_cast&lt;</span><span class="keywordtype">int</span><span class="keyword">&gt;</span>(nValue) - 1))</div>
 <div class="line"><a name="l00301"></a><span class="lineno">  301</span>&#160;                % nValue</div>
 <div class="line"><a name="l00302"></a><span class="lineno">  302</span>&#160;            != 1)</div>
 <div class="line"><a name="l00303"></a><span class="lineno">  303</span>&#160;        {</div>

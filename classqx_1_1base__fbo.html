@@ -105,10 +105,9 @@ virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="c
 <tr class="memitem:adbe96d68b2d96149c6fb6a68181f9085"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1base__fbo.html#adbe96d68b2d96149c6fb6a68181f9085">AttachTexture</a> (GLenum attachment, const <a class="el" href="classqx_1_1base__texture.html">base_texture</a> &amp;<a class="el" href="classqx_1_1base__texture.html">texture</a>, GLint nMipmapLevel=0)</td></tr>
 <tr class="memdesc:adbe96d68b2d96149c6fb6a68181f9085"><td class="mdescLeft">&#160;</td><td class="mdescRight">Attache all cube map faces of a specific MIP level as an array of images (layered framebuffer)  <a href="classqx_1_1base__fbo.html#adbe96d68b2d96149c6fb6a68181f9085">More...</a><br /></td></tr>
 <tr class="separator:adbe96d68b2d96149c6fb6a68181f9085"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a38a05f0cf09114430fd4c3312319cd02"><td class="memItemLeft" align="right" valign="top"><a id="a38a05f0cf09114430fd4c3312319cd02"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1base__fbo.html#a38a05f0cf09114430fd4c3312319cd02">CheckStatus</a> () const</td></tr>
-<tr class="memdesc:a38a05f0cf09114430fd4c3312319cd02"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check framebuffer status. <br /></td></tr>
-<tr class="separator:a38a05f0cf09114430fd4c3312319cd02"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9eebe7538c973668bb326c97a2d6c90c"><td class="memItemLeft" align="right" valign="top">std::string_view&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1base__fbo.html#a9eebe7538c973668bb326c97a2d6c90c">CheckStatus</a> () const</td></tr>
+<tr class="memdesc:a9eebe7538c973668bb326c97a2d6c90c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check framebuffer status.  <a href="classqx_1_1base__fbo.html#a9eebe7538c973668bb326c97a2d6c90c">More...</a><br /></td></tr>
+<tr class="separator:a9eebe7538c973668bb326c97a2d6c90c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_classqx_1_1_i_buffer"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classqx_1_1_i_buffer')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classqx_1_1_i_buffer.html">qx::IBuffer</a></td></tr>
 <tr class="memitem:a757bf0a2b993efe878650dd89db9f388 inherit pub_methods_classqx_1_1_i_buffer"><td class="memItemLeft" align="right" valign="top"><a id="a757bf0a2b993efe878650dd89db9f388"></a>
 virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1_i_buffer.html#a757bf0a2b993efe878650dd89db9f388">~IBuffer</a> ()=default</td></tr>
@@ -281,6 +280,42 @@ virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hr
 </dl>
 
 <p class="definition">Definition at line <a class="el" href="fbo_8inl_source.html#l00061">61</a> of file <a class="el" href="fbo_8inl_source.html">fbo.inl</a>.</p>
+
+</div>
+</div>
+<a id="a9eebe7538c973668bb326c97a2d6c90c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9eebe7538c973668bb326c97a2d6c90c">&#9670;&nbsp;</a></span>CheckStatus()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string_view qx::base_fbo::CheckStatus </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Check framebuffer status. </p>
+<dl class="retval"><dt>Return values</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">-</td><td>framebuffer error or empty if success <br  />
+ </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="fbo_8inl_source.html#l00086">86</a> of file <a class="el" href="fbo_8inl_source.html">fbo.inl</a>.</p>
 
 </div>
 </div>

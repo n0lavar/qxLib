@@ -212,7 +212,7 @@ $(function() {
 <div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;                <span class="keywordflow">if</span> (e1 &gt; e0)</div>
 <div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;                    std::swap(e0, e1);</div>
 <div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160; </div>
-<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;                <span class="keyword">const</span> <span class="keywordtype">size_t</span> nEdgeKey = e0 | e1 &lt;&lt; 16;</div>
+<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;                <span class="keyword">const</span> <span class="keywordtype">size_t</span> nEdgeKey = e0 | e1 &lt;&lt; 16; <span class="comment">//-V101</span></div>
 <div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160; </div>
 <div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;                <span class="keywordflow">if</span> (<span class="keyword">auto</span> it = edgeMap.find(nEdgeKey); it != edgeMap.end())</div>
 <div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;                {</div>
@@ -224,11 +224,11 @@ $(function() {
 <div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;                        <span class="keyword">static_cast&lt;</span>index_type<span class="keyword">&gt;</span>(ret.<a class="code" href="structqx_1_1geometry.html#ab318107b02ed7911918dbba32081c8e7">geomVertices</a>.size());</div>
 <div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;                    edgeMap[nEdgeKey] = indicesEdge[k];</div>
 <div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160; </div>
-<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;                    glm::vec3 newVertex {</div>
-<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;                        ret.<a class="code" href="structqx_1_1geometry.html#ab318107b02ed7911918dbba32081c8e7">geomVertices</a>[e0].x + ret.<a class="code" href="structqx_1_1geometry.html#ab318107b02ed7911918dbba32081c8e7">geomVertices</a>[e1].x,</div>
-<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;                        ret.<a class="code" href="structqx_1_1geometry.html#ab318107b02ed7911918dbba32081c8e7">geomVertices</a>[e0].y + ret.<a class="code" href="structqx_1_1geometry.html#ab318107b02ed7911918dbba32081c8e7">geomVertices</a>[e1].y,</div>
-<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;                        ret.<a class="code" href="structqx_1_1geometry.html#ab318107b02ed7911918dbba32081c8e7">geomVertices</a>[e0].z + ret.<a class="code" href="structqx_1_1geometry.html#ab318107b02ed7911918dbba32081c8e7">geomVertices</a>[e1].z</div>
-<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;                    };</div>
+<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;                    <span class="keyword">const</span> <span class="keyword">auto</span>&amp; e0vert = ret.<a class="code" href="structqx_1_1geometry.html#ab318107b02ed7911918dbba32081c8e7">geomVertices</a>[e0]; <span class="comment">//-V108</span></div>
+<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;                    <span class="keyword">const</span> <span class="keyword">auto</span>&amp; e1vert = ret.<a class="code" href="structqx_1_1geometry.html#ab318107b02ed7911918dbba32081c8e7">geomVertices</a>[e1]; <span class="comment">//-V108</span></div>
+<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;                    glm::vec3   newVertex { e0vert.x + e1vert.x,</div>
+<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;                                          e0vert.y + e1vert.y,</div>
+<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;                                          e0vert.z + e1vert.z };</div>
 <div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160; </div>
 <div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;                    <span class="keyword">const</span> <span class="keywordtype">float</span> fScale = fRadius / glm::length(newVertex);</div>
 <div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;                    newVertex *= fScale;</div>
