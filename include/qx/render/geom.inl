@@ -149,7 +149,7 @@ inline geometry create_icosphere(float fRadius, size_t nDivides)
                 if (e1 > e0)
                     std::swap(e0, e1);
 
-                const size_t nEdgeKey = e0 | e1 << 16;
+                const size_t nEdgeKey = e0 | e1 << 16; //-V101
 
                 if (auto it = edgeMap.find(nEdgeKey); it != edgeMap.end())
                 {
@@ -161,11 +161,11 @@ inline geometry create_icosphere(float fRadius, size_t nDivides)
                         static_cast<index_type>(ret.geomVertices.size());
                     edgeMap[nEdgeKey] = indicesEdge[k];
 
-                    glm::vec3 newVertex {
-                        ret.geomVertices[e0].x + ret.geomVertices[e1].x,
-                        ret.geomVertices[e0].y + ret.geomVertices[e1].y,
-                        ret.geomVertices[e0].z + ret.geomVertices[e1].z
-                    };
+                    const auto& e0vert = ret.geomVertices[e0]; //-V108
+                    const auto& e1vert = ret.geomVertices[e1]; //-V108
+                    glm::vec3   newVertex { e0vert.x + e1vert.x,
+                                          e0vert.y + e1vert.y,
+                                          e0vert.z + e1vert.z };
 
                     const float fScale = fRadius / glm::length(newVertex);
                     newVertex *= fScale;

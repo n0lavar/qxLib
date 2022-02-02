@@ -289,7 +289,7 @@ inline bool is_prime(size_t nValue, double fProbability)
         std::ceil(std::log(1.0 / (1.0 - fProbability)) / fLog2));
 
     std::default_random_engine generator(
-        static_cast<unsigned>(std::time(nullptr))); //-V202
+        static_cast<unsigned>(std::time(nullptr)));
 
     std::uniform_int_distribution<size_t> num_dist(2, nValue);
 
@@ -297,7 +297,7 @@ inline bool is_prime(size_t nValue, double fProbability)
     {
         const size_t nRandomNumber = num_dist(generator);
         if (static_cast<size_t>(
-                pow(nRandomNumber, static_cast<int>(nValue) - 1)) //-V202
+                pow(nRandomNumber, static_cast<int>(nValue) - 1))
                 % nValue
             != 1)
         {

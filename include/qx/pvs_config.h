@@ -10,9 +10,21 @@
 **/
 #pragma once
 
+// Implicit assignment type conversion to memsize type
+// too pedantic warning
+//-V::101
+
 // Call of function with variable number of arguments. N argument has memsize type
 // assume we use 64bit only
 //-V::111
+
+// Dangerous magic number N used
+// too pedantic warning
+//-V::112
+
+// Implicit type conversion from memsize to double type or vice versa
+// too pedantic warning
+//-V::113
 
 // Memsize type is used in the struct/class
 // assume we use 64bit only
@@ -22,6 +34,18 @@
 // assume we use 64bit only
 //-V::126
 
+// Explicit conversion from 32-bit integer type to memsize type
+// too pedantic warning
+//-V::201
+
+// Explicit conversion from memsize type to 32-bit integer type
+// too pedantic warning
+//-V::202
+
 // Explicit type conversion from memsize to double type or vice versa
-// we assume that we do not use such large values
+// too pedantic warning
 //-V::203
+
+// The switch statement does not cover all values
+// valid in most cases
+//-V::719

@@ -244,7 +244,7 @@ inline double integrate_monte_carlo(
     int points_inside = 0;
 
     std::default_random_engine generator(
-        static_cast<unsigned>(std::time(nullptr))); //-V202
+        static_cast<unsigned>(std::time(nullptr)));
 
     std::uniform_real_distribution<double> x_dist(pos0.x, pos1.x);
     std::uniform_real_distribution<double> y_dist(pos0.y, pos1.y);

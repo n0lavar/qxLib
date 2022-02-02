@@ -81,7 +81,7 @@ constexpr size_t murmur_32_hash(
             // constexpr version of std::memcpy(&k, pszStr, sizeof(u32));
             static_assert(
                 sizeof(value_type) == 1 || sizeof(value_type) == 2
-                || sizeof(value_type) == 4); //-V112
+                || sizeof(value_type) == 4);
 
             if constexpr (sizeof(value_type) == sizeof(u32))
             {
