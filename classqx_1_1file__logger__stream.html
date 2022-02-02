@@ -98,9 +98,9 @@ Public Member Functions</h2></td></tr>
 virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1file__logger__stream.html#a1f03b48e0e9bc9c368882928d4e3c6b7">~file_logger_stream</a> ()</td></tr>
 <tr class="memdesc:a1f03b48e0e9bc9c368882928d4e3c6b7"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classqx_1_1file__logger__stream.html" title="Logger stream for file output.">file_logger_stream</a> object destructor <br /></td></tr>
 <tr class="separator:a1f03b48e0e9bc9c368882928d4e3c6b7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac5943323b162292441494be9a0a82c44"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1file__logger__stream.html#ac5943323b162292441494be9a0a82c44">process_output</a> (std::string_view svMessage, <a class="el" href="structqx_1_1log__unit.html">log_unit</a> logUnit) override</td></tr>
-<tr class="memdesc:ac5943323b162292441494be9a0a82c44"><td class="mdescLeft">&#160;</td><td class="mdescRight">Output to file.  <a href="classqx_1_1file__logger__stream.html#ac5943323b162292441494be9a0a82c44">More...</a><br /></td></tr>
-<tr class="separator:ac5943323b162292441494be9a0a82c44"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2b80b065561a8aea41aace00584167ab"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1file__logger__stream.html#a2b80b065561a8aea41aace00584167ab">process_output</a> (std::string_view svMessage, const <a class="el" href="structqx_1_1log__unit.html">log_unit</a> &amp;logUnit) override</td></tr>
+<tr class="memdesc:a2b80b065561a8aea41aace00584167ab"><td class="mdescLeft">&#160;</td><td class="mdescRight">Output to file.  <a href="classqx_1_1file__logger__stream.html#a2b80b065561a8aea41aace00584167ab">More...</a><br /></td></tr>
+<tr class="separator:a2b80b065561a8aea41aace00584167ab"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a497fbdca4903780920ec2d1905d8ea8f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1file__logger__stream.html#a497fbdca4903780920ec2d1905d8ea8f">set_logs_folder</a> (std::string_view svFolder) noexcept</td></tr>
 <tr class="memdesc:a497fbdca4903780920ec2d1905d8ea8f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set logs folder.  <a href="classqx_1_1file__logger__stream.html#a497fbdca4903780920ec2d1905d8ea8f">More...</a><br /></td></tr>
 <tr class="separator:a497fbdca4903780920ec2d1905d8ea8f"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -154,8 +154,8 @@ static constexpr const char *&#160;</td><td class="memItemRight" valign="bottom"
 
 <p class="definition">Definition at line <a class="el" href="file__logger__stream_8h_source.html#l00036">36</a> of file <a class="el" href="file__logger__stream_8h_source.html">file_logger_stream.h</a>.</p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
-<a id="ac5943323b162292441494be9a0a82c44"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac5943323b162292441494be9a0a82c44">&#9670;&nbsp;</a></span>process_output()</h2>
+<a id="a2b80b065561a8aea41aace00584167ab"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2b80b065561a8aea41aace00584167ab">&#9670;&nbsp;</a></span>process_output()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -172,7 +172,7 @@ static constexpr const char *&#160;</td><td class="memItemRight" valign="bottom"
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="structqx_1_1log__unit.html">log_unit</a>&#160;</td>
+          <td class="paramtype">const <a class="el" href="structqx_1_1log__unit.html">log_unit</a> &amp;&#160;</td>
           <td class="paramname"><em>logUnit</em>&#160;</td>
         </tr>
         <tr>
@@ -197,7 +197,7 @@ static constexpr const char *&#160;</td><td class="memItemRight" valign="bottom"
   </dd>
 </dl>
 
-<p>Implements <a class="el" href="classqx_1_1base__logger__stream.html#ad4430d4e44b1695532f99eadad25287a">qx::base_logger_stream</a>.</p>
+<p>Implements <a class="el" href="classqx_1_1base__logger__stream.html#afbbd57bcf16d23020e76dfa9762b6c5f">qx::base_logger_stream</a>.</p>
 
 <p class="definition">Definition at line <a class="el" href="file__logger__stream_8inl_source.html#l00036">36</a> of file <a class="el" href="file__logger__stream_8inl_source.html">file_logger_stream.inl</a>.</p>
 

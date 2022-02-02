@@ -7,6 +7,6 @@ var searchData=
   ['detach_131',['detach',['../classqx_1_1base__subject.html#ab2208674b22acaf27dda098fb4a5a9b1',1,'qx::base_subject']]],
   ['disablevertexarrtibarray_132',['DisableVertexArrtibArray',['../classqx_1_1base__vao.html#a72a3833997538c341c13b7a24bcd9c41',1,'qx::base_vao']]],
   ['dispatchcompute_133',['DispatchCompute',['../classqx_1_1base__shader__program.html#a2663d683f43579fae0f515a4bc7f6715',1,'qx::base_shader_program']]],
-  ['djb2a_5fhash_134',['djb2a_hash',['../string__utils_8h.html#a772986a8e501ea57c6f1695c110f22ef',1,'qx::djb2a_hash(const value_type *pStr, u32 nSeed, size_t nLen)'],['../string__utils_8h.html#a96f93bad38ed043360e5b277ecb487bf',1,'qx::djb2a_hash(const value_type *pszStr, u32 nSeed)']]],
+  ['djb2a_5fhash_134',['djb2a_hash',['../string__utils_8h.html#a14b2d1aac981691108f19aefa3ec1109',1,'qx::djb2a_hash(const value_type *pStr, size_t nSeed, size_t nLen)'],['../string__utils_8h.html#ae563089fcdc4bc5a62fae34498d94e74',1,'qx::djb2a_hash(const value_type *pszStr, size_t nSeed)']]],
   ['draw_5fmode_2eh_135',['draw_mode.h',['../draw__mode_8h.html',1,'']]]
 ];

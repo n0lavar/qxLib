@@ -100,7 +100,7 @@ $(function() {
 <div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;        <span class="keywordtype">size_t</span>        nSeed,</div>
 <div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;        size_type     nLen) noexcept</div>
 <div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    {</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;        <span class="keywordflow">return</span> <a class="code" href="string__utils_8h.html#a10d24a95eb62a4887e57bcb71daf18fe">murmur_32_hash</a>(pszStr, <span class="keyword">static_cast&lt;</span><a class="code" href="typedefs_8h.html#a70c1fcc1a4e96af8f6580f708657cd41">u32</a><span class="keyword">&gt;</span>(nSeed), nLen);</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;        <span class="keywordflow">return</span> <a class="code" href="string__utils_8h.html#a1eb12d2223725f5a5e77213e01e54626">murmur_32_hash</a>(pszStr, nSeed, nLen);</div>
 <div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    }</div>
 <div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;};</div>
 <div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160; </div>
@@ -261,7 +261,7 @@ $(function() {
 <div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160; </div>
 <div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160;} <span class="comment">// namespace qx</span></div>
 <div class="ttc" id="astring__utils_8h_html"><div class="ttname"><a href="string__utils_8h.html">string_utils.h</a></div><div class="ttdoc">String functions.</div></div>
-<div class="ttc" id="astring__utils_8h_html_a10d24a95eb62a4887e57bcb71daf18fe"><div class="ttname"><a href="string__utils_8h.html#a10d24a95eb62a4887e57bcb71daf18fe">qx::murmur_32_hash</a></div><div class="ttdeci">constexpr u32 murmur_32_hash(const value_type *pStr, u32 nSeed, size_t nLen) noexcept</div><div class="ttdoc">Murmur nHash.</div><div class="ttdef"><b>Definition:</b> <a href="string__utils_8h_source.html#l00067">string_utils.h:67</a></div></div>
+<div class="ttc" id="astring__utils_8h_html_a1eb12d2223725f5a5e77213e01e54626"><div class="ttname"><a href="string__utils_8h.html#a1eb12d2223725f5a5e77213e01e54626">qx::murmur_32_hash</a></div><div class="ttdeci">constexpr size_t murmur_32_hash(const value_type *pStr, size_t nSeed, size_t nLen) noexcept</div><div class="ttdoc">Murmur nHash.</div><div class="ttdef"><b>Definition:</b> <a href="string__utils_8h_source.html#l00067">string_utils.h:67</a></div></div>
 <div class="ttc" id="astructqx_1_1char__traits_html"><div class="ttname"><a href="structqx_1_1char__traits.html">qx::char_traits</a></div><div class="ttdef"><b>Definition:</b> <a href="string__traits_8h_source.html#l00053">string_traits.h:50</a></div></div>
 <div class="ttc" id="astructqx_1_1common__char__traits_html"><div class="ttname"><a href="structqx_1_1common__char__traits.html">qx::common_char_traits</a></div><div class="ttdef"><b>Definition:</b> <a href="string__traits_8h_source.html#l00030">string_traits.h:31</a></div></div>
 <div class="ttc" id="atypedefs_8h_html_a70c1fcc1a4e96af8f6580f708657cd41"><div class="ttname"><a href="typedefs_8h.html#a70c1fcc1a4e96af8f6580f708657cd41">u32</a></div><div class="ttdeci">uint32_t u32</div><div class="ttdoc">0 .. 18 446 744 073 709 551 615</div><div class="ttdef"><b>Definition:</b> <a href="typedefs_8h_source.html#l00024">typedefs.h:25</a></div></div>
