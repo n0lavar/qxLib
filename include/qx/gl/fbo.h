@@ -70,9 +70,10 @@ public:
         GLint               nMipmapLevel = 0);
 
     /**
-        @brief Check framebuffer status
+        @brief  Check framebuffer status
+        @retval - framebuffer error or empty if success  
     **/
-    void CheckStatus() const;
+    std::string_view CheckStatus() const;
 
 private:
     GLuint m_nBuffer = std::numeric_limits<GLuint>::max();

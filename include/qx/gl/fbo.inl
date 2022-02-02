@@ -83,54 +83,54 @@ inline void base_fbo::AttachTexture(
         nMipmapLevel);
 }
 
-inline void base_fbo::CheckStatus() const
+inline std::string_view base_fbo::CheckStatus() const
 {
+    std::string_view svErrorMsg;
     if (const auto eStatus = glCheckFramebufferStatus(GL_FRAMEBUFFER);
         eStatus != GL_FRAMEBUFFER_COMPLETE)
     {
-        char const* pszErrorMsg = nullptr;
         switch (eStatus)
         {
         case GL_FRAMEBUFFER_UNDEFINED:
-            pszErrorMsg =
+            svErrorMsg =
                 "The specified framebuffer is the default read or draw"
                 "framebuffer, but the default framebuffer does not exist.";
             break;
 
         case GL_FRAMEBUFFER_INCOMPLETE_ATTACHMENT:
-            pszErrorMsg =
+            svErrorMsg =
                 "Any of the framebuffer attachment points "
                 "are framebuffer incomplete.";
             break;
 
         case GL_FRAMEBUFFER_INCOMPLETE_MISSING_ATTACHMENT:
-            pszErrorMsg =
+            svErrorMsg =
                 "The framebuffer does not have at least one "
                 "image attached to it.";
             break;
 
         case GL_FRAMEBUFFER_INCOMPLETE_DRAW_BUFFER:
-            pszErrorMsg =
+            svErrorMsg =
                 "The value of GL_FRAMEBUFFER_ATTACHMENT_OBJECT_TYPE is GL_NONE "
                 "for any color attachment point(s) named by GL_DRAW_BUFFERi.";
             break;
 
         case GL_FRAMEBUFFER_INCOMPLETE_READ_BUFFER:
-            pszErrorMsg =
+            svErrorMsg =
                 "GL_READ_BUFFER is not GL_NONE and the value of "
                 "GL_FRAMEBUFFER_ATTACHMENT_OBJECT_TYPE is GL_NONE "
                 "for the color attachment point named by GL_READ_BUFFER.";
             break;
 
         case GL_FRAMEBUFFER_UNSUPPORTED:
-            pszErrorMsg =
+            svErrorMsg =
                 "The combination of internal formats of the attached "
                 "images violates an implementation - dependent set of "
                 "restrictions.";
             break;
 
         case GL_FRAMEBUFFER_INCOMPLETE_MULTISAMPLE:
-            pszErrorMsg =
+            svErrorMsg =
                 "The value of GL_RENDERBUFFER_SAMPLES is not the "
                 "same for all attached renderbuffers; if the value of "
                 "GL_TEXTURE_SAMPLES is the not same for all attached textures; "
@@ -146,23 +146,19 @@ inline void base_fbo::CheckStatus() const
             break;
 
         case GL_FRAMEBUFFER_INCOMPLETE_LAYER_TARGETS:
-            pszErrorMsg =
+            svErrorMsg =
                 "Any framebuffer attachment is layered, and any "
                 "populated attachment is not layered, or if all populated "
                 "color attachments are not from textures of the same target.";
             break;
 
         default:
-            pszErrorMsg = "Unknown error";
+            svErrorMsg = "Unknown error";
             break;
         }
-
-        ASSERT_MSG(
-            0,
-            "Framebuffer status is not complete: Status: %d, Error: %s",
-            eStatus,
-            pszErrorMsg);
     }
+
+    return svErrorMsg;
 }
 
 } // namespace qx
