@@ -150,7 +150,7 @@ protected:
         auto pConsoleLoggerStream = std::make_unique<qx::cout_logger_stream>();
 
         pConsoleLoggerStream->deregister_unit(
-            qx::base_logger_stream::DEFAULT_UNIT);
+            qx::base_logger_stream::k_svDefaultUnit);
 
         pConsoleLoggerStream->register_unit(
             Traits::GetUnit(),
@@ -160,7 +160,7 @@ protected:
 
         pFileLoggerStream->set_logs_folder(Traits::GetLogsFolder());
         pFileLoggerStream->deregister_unit(
-            qx::base_logger_stream::DEFAULT_UNIT);
+            qx::base_logger_stream::k_svDefaultUnit);
 
         pFileLoggerStream->register_unit(
             Traits::GetUnit(),
