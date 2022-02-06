@@ -71,7 +71,7 @@ struct log_unit
 class base_logger_stream
 {
 public:
-    static constexpr const char* DEFAULT_UNIT = "default";
+    static constexpr const char* k_svDefaultUnit = "default";
 
 public:
     /**

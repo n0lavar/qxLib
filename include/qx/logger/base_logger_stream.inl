@@ -12,7 +12,7 @@ namespace qx
 
 inline base_logger_stream::base_logger_stream()
 {
-    register_unit(DEFAULT_UNIT, { log_level::info });
+    register_unit(k_svDefaultUnit, { log_level::info });
 }
 
 inline void base_logger_stream::output(
@@ -77,8 +77,8 @@ inline std::optional<log_unit> base_logger_stream::get_unit_info(
         logUnit = { &it->second, pszFile };
     else if (it = find_unit(pszFunction); it != m_Units.end())
         logUnit = { &it->second, pszFunction };
-    else if (it = find_unit(DEFAULT_UNIT); it != m_Units.end())
-        logUnit = { &it->second, DEFAULT_UNIT };
+    else if (it = find_unit(k_svDefaultUnit); it != m_Units.end())
+        logUnit = { &it->second, k_svDefaultUnit };
 
     return logUnit;
 }
