@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['_5fqx_5fsingleton_5fimpl_1195',['_QX_SINGLETON_IMPL',['../singleton_8h.html#abd580e7d55323e05229cdcb486d7afbc',1,'singleton.h']]]
+  ['_5fqx_5fsingleton_5fimpl_1199',['_QX_SINGLETON_IMPL',['../singleton_8h.html#abd580e7d55323e05229cdcb486d7afbc',1,'singleton.h']]]
 ];

@@ -75,7 +75,7 @@ $(function() {
 <div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160; </div>
 <div class="line"><a name="l00013"></a><span class="lineno"><a class="line" href="classqx_1_1base__logger__stream.html#ac909889551a450d2302b29dec55b1d8b">   13</a></span>&#160;<span class="keyword">inline</span> <a class="code" href="classqx_1_1base__logger__stream.html#ac909889551a450d2302b29dec55b1d8b">base_logger_stream::base_logger_stream</a>()</div>
 <div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;{</div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;    <a class="code" href="classqx_1_1base__logger__stream.html#a5df3c8694335bdc9595da5529c10a6e9">register_unit</a>(DEFAULT_UNIT, { log_level::info });</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;    <a class="code" href="classqx_1_1base__logger__stream.html#a5df3c8694335bdc9595da5529c10a6e9">register_unit</a>(k_svDefaultUnit, { log_level::info });</div>
 <div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;}</div>
 <div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160; </div>
 <div class="line"><a name="l00018"></a><span class="lineno"><a class="line" href="classqx_1_1base__logger__stream.html#a079f651c1785f4b3315e63039babc862">   18</a></span>&#160;<span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="classqx_1_1base__logger__stream.html#a079f651c1785f4b3315e63039babc862">base_logger_stream::output</a>(</div>
@@ -140,8 +140,8 @@ $(function() {
 <div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;        logUnit = { &amp;it-&gt;second, pszFile };</div>
 <div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;    <span class="keywordflow">else</span> <span class="keywordflow">if</span> (it = find_unit(pszFunction); it != m_Units.end())</div>
 <div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;        logUnit = { &amp;it-&gt;second, pszFunction };</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;    <span class="keywordflow">else</span> <span class="keywordflow">if</span> (it = find_unit(DEFAULT_UNIT); it != m_Units.end())</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;        logUnit = { &amp;it-&gt;second, DEFAULT_UNIT };</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;    <span class="keywordflow">else</span> <span class="keywordflow">if</span> (it = find_unit(k_svDefaultUnit); it != m_Units.end())</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;        logUnit = { &amp;it-&gt;second, k_svDefaultUnit };</div>
 <div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160; </div>
 <div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;    <span class="keywordflow">return</span> logUnit;</div>
 <div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;}</div>

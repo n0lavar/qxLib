@@ -66,7 +66,8 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="summary">
-<a href="#func-members">Functions</a>  </div>
+<a href="#func-members">Functions</a> &#124;
+<a href="#var-members">Variables</a>  </div>
   <div class="headertitle">
 <div class="title">geom.inl File Reference</div>  </div>
 </div><!--header-->
@@ -79,27 +80,42 @@ Functions</h2></td></tr>
 <tr class="memitem:a7318aa88e1a281c68ade10238b2e98d8"><td class="memItemLeft" align="right" valign="top"><a id="a7318aa88e1a281c68ade10238b2e98d8"></a>
 indices&#160;</td><td class="memItemRight" valign="bottom"><b>qx::detail::transform_triangle_indices_to_lines</b> (const indices &amp;triangles)</td></tr>
 <tr class="separator:a7318aa88e1a281c68ade10238b2e98d8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3dd7e7e955c64db12979f977a22d963d"><td class="memItemLeft" align="right" valign="top">geometry&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="geom_8h.html#a3dd7e7e955c64db12979f977a22d963d">qx::create_parallelogram</a> (float fSide1, float fSide2, float fSide3)</td></tr>
-<tr class="memdesc:a3dd7e7e955c64db12979f977a22d963d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create parallelogram geometry.  <a href="geom_8h.html#a3dd7e7e955c64db12979f977a22d963d">More...</a><br /></td></tr>
-<tr class="separator:a3dd7e7e955c64db12979f977a22d963d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abbbee03eef9d49476a41796f167c40cd"><td class="memItemLeft" align="right" valign="top"><a id="abbbee03eef9d49476a41796f167c40cd"></a>
+glm::vec3&#160;</td><td class="memItemRight" valign="bottom"><b>qx::detail::create_tangent</b> (const glm::vec3 &amp;normal)</td></tr>
+<tr class="separator:abbbee03eef9d49476a41796f167c40cd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aac661e246c112cc8f1a27ba6925626da"><td class="memItemLeft" align="right" valign="top"><a id="aac661e246c112cc8f1a27ba6925626da"></a>
+vertex&#160;</td><td class="memItemRight" valign="bottom"><b>qx::detail::create_vertex</b> (const glm::vec3 &amp;pos, bool bUnitLengthPosNormal=false)</td></tr>
+<tr class="separator:aac661e246c112cc8f1a27ba6925626da"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aadf140e34d5b1aaa2cbbc4f4bf460f57"><td class="memItemLeft" align="right" valign="top"><a id="aadf140e34d5b1aaa2cbbc4f4bf460f57"></a>
+geometry&#160;</td><td class="memItemRight" valign="bottom"><b>qx::detail::create_figure</b> (std::span&lt; const glm::vec3 &gt; positions, std::span&lt; const index_type &gt; _indices, const glm::vec3 &amp;offset, bool bFlatNormals, bool bUnitLengthPosNormal=false)</td></tr>
+<tr class="separator:aadf140e34d5b1aaa2cbbc4f4bf460f57"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a66b638b1ac209e24166fa8dc1689a99e"><td class="memItemLeft" align="right" valign="top"><a id="a66b638b1ac209e24166fa8dc1689a99e"></a>
+std::array&lt; glm::vec3, 12 &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>qx::detail::create_icosahedron_positions</b> (float fRadius)</td></tr>
+<tr class="separator:a66b638b1ac209e24166fa8dc1689a99e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a484162b3d68bf1af1b0c015761ee61fa"><td class="memItemLeft" align="right" valign="top"><a id="a484162b3d68bf1af1b0c015761ee61fa"></a>
+geometry&#160;</td><td class="memItemRight" valign="bottom"><b>qx::detail::create_parallelogram</b> (float fSide1, float fSide2, float fSide3, bool bFlatNormals, bool bUnitLengthPosNormal)</td></tr>
+<tr class="separator:a484162b3d68bf1af1b0c015761ee61fa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6bba172163dadc0246a0553848328509"><td class="memItemLeft" align="right" valign="top">geometry&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="geom_8h.html#a6bba172163dadc0246a0553848328509">qx::create_parallelogram</a> (float fSide1, float fSide2, float fSide3, bool bFlatNormals=true)</td></tr>
+<tr class="memdesc:a6bba172163dadc0246a0553848328509"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create parallelogram geometry.  <a href="geom_8h.html#a6bba172163dadc0246a0553848328509">More...</a><br /></td></tr>
+<tr class="separator:a6bba172163dadc0246a0553848328509"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3517af8feed4720fe64653a1c8f7d9c6"><td class="memItemLeft" align="right" valign="top">geometry&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="geom_8h.html#a3517af8feed4720fe64653a1c8f7d9c6">qx::create_parallelogram_lines</a> (float fSide1, float fSide2, float fSide3)</td></tr>
 <tr class="memdesc:a3517af8feed4720fe64653a1c8f7d9c6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create parallelogram geometry for lines drawing.  <a href="geom_8h.html#a3517af8feed4720fe64653a1c8f7d9c6">More...</a><br /></td></tr>
 <tr class="separator:a3517af8feed4720fe64653a1c8f7d9c6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8687b316462ffbe0a638ba54e9a70662"><td class="memItemLeft" align="right" valign="top">geometry&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="geom_8h.html#a8687b316462ffbe0a638ba54e9a70662">qx::create_cube</a> (float fSide)</td></tr>
-<tr class="memdesc:a8687b316462ffbe0a638ba54e9a70662"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create cube geometry.  <a href="geom_8h.html#a8687b316462ffbe0a638ba54e9a70662">More...</a><br /></td></tr>
-<tr class="separator:a8687b316462ffbe0a638ba54e9a70662"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a08c05863505c6898d5468be45678af38"><td class="memItemLeft" align="right" valign="top">geometry&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="geom_8h.html#a08c05863505c6898d5468be45678af38">qx::create_cube</a> (float fSide, bool bFlatNormals=true)</td></tr>
+<tr class="memdesc:a08c05863505c6898d5468be45678af38"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create cube geometry.  <a href="geom_8h.html#a08c05863505c6898d5468be45678af38">More...</a><br /></td></tr>
+<tr class="separator:a08c05863505c6898d5468be45678af38"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9f2651a09a8b23be05d32c310d2f4cec"><td class="memItemLeft" align="right" valign="top">geometry&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="geom_8h.html#a9f2651a09a8b23be05d32c310d2f4cec">qx::create_cube_lines</a> (float fSide)</td></tr>
 <tr class="memdesc:a9f2651a09a8b23be05d32c310d2f4cec"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create cube geometry for lines drawing.  <a href="geom_8h.html#a9f2651a09a8b23be05d32c310d2f4cec">More...</a><br /></td></tr>
 <tr class="separator:a9f2651a09a8b23be05d32c310d2f4cec"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afde74ec42c03ea39feda0baafbfd2012"><td class="memItemLeft" align="right" valign="top">geometry&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="geom_8h.html#afde74ec42c03ea39feda0baafbfd2012">qx::create_icosahedron</a> (float fRadius)</td></tr>
-<tr class="memdesc:afde74ec42c03ea39feda0baafbfd2012"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create icosahedron geometry.  <a href="geom_8h.html#afde74ec42c03ea39feda0baafbfd2012">More...</a><br /></td></tr>
-<tr class="separator:afde74ec42c03ea39feda0baafbfd2012"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a28e96ef8677009f2a11a4a2381010efe"><td class="memItemLeft" align="right" valign="top">geometry&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="geom_8h.html#a28e96ef8677009f2a11a4a2381010efe">qx::create_icosahedron</a> (float fRadius, bool bFlatNormals=true)</td></tr>
+<tr class="memdesc:a28e96ef8677009f2a11a4a2381010efe"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create icosahedron geometry.  <a href="geom_8h.html#a28e96ef8677009f2a11a4a2381010efe">More...</a><br /></td></tr>
+<tr class="separator:a28e96ef8677009f2a11a4a2381010efe"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aae54f89a88a320a15853e6d3f518b818"><td class="memItemLeft" align="right" valign="top">geometry&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="geom_8h.html#aae54f89a88a320a15853e6d3f518b818">qx::create_icosahedron_lines</a> (float fRadius)</td></tr>
 <tr class="memdesc:aae54f89a88a320a15853e6d3f518b818"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create icosahedron geometry for lines drawing.  <a href="geom_8h.html#aae54f89a88a320a15853e6d3f518b818">More...</a><br /></td></tr>
 <tr class="separator:aae54f89a88a320a15853e6d3f518b818"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a258a03c475596c942001c52b9f5422bf"><td class="memItemLeft" align="right" valign="top">geometry&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="geom_8h.html#a258a03c475596c942001c52b9f5422bf">qx::create_icosphere</a> (float fRadius, size_t nDivides)</td></tr>
-<tr class="memdesc:a258a03c475596c942001c52b9f5422bf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create icosphere geometry.  <a href="geom_8h.html#a258a03c475596c942001c52b9f5422bf">More...</a><br /></td></tr>
-<tr class="separator:a258a03c475596c942001c52b9f5422bf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acff375b015e5af55f688e621278819b6"><td class="memItemLeft" align="right" valign="top">geometry&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="geom_8h.html#acff375b015e5af55f688e621278819b6">qx::create_icosphere</a> (float fRadius, size_t nDivides, bool bFlatNormals=false)</td></tr>
+<tr class="memdesc:acff375b015e5af55f688e621278819b6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create icosphere geometry.  <a href="geom_8h.html#acff375b015e5af55f688e621278819b6">More...</a><br /></td></tr>
+<tr class="separator:acff375b015e5af55f688e621278819b6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a400186cef6bd1c97bab9845b22d26bae"><td class="memItemLeft" align="right" valign="top">geometry&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="geom_8h.html#a400186cef6bd1c97bab9845b22d26bae">qx::create_icosphere_lines</a> (float fRadius, size_t nDivides)</td></tr>
 <tr class="memdesc:a400186cef6bd1c97bab9845b22d26bae"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create icosphere geometry for lines drawing.  <a href="geom_8h.html#a400186cef6bd1c97bab9845b22d26bae">More...</a><br /></td></tr>
 <tr class="separator:a400186cef6bd1c97bab9845b22d26bae"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -127,6 +143,11 @@ indices&#160;</td><td class="memItemRight" valign="bottom"><b>qx::detail::transf
 <tr class="memitem:a1aea2eadb1f142d660217f8d29f4f5a3"><td class="memItemLeft" align="right" valign="top">geometry&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="geom_8h.html#a1aea2eadb1f142d660217f8d29f4f5a3">qx::create_circle_lines</a> (float fRadius, size_t nSides)</td></tr>
 <tr class="memdesc:a1aea2eadb1f142d660217f8d29f4f5a3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create circle geometry for lines drawing.  <a href="geom_8h.html#a1aea2eadb1f142d660217f8d29f4f5a3">More...</a><br /></td></tr>
 <tr class="separator:a1aea2eadb1f142d660217f8d29f4f5a3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:aefbbae5ce3d974abbc92469237af7aae"><td class="memItemLeft" align="right" valign="top">constexpr std::array&lt; index_type, 60 &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>qx::detail::k_IcosahedronIndices</b></td></tr>
+<tr class="separator:aefbbae5ce3d974abbc92469237af7aae"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><dl class="section author"><dt>Author</dt><dd>Khrapov </dd></dl>
@@ -184,7 +205,7 @@ indices&#160;</td><td class="memItemRight" valign="bottom"><b>qx::detail::transf
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="geom_8inl_source.html#l00294">294</a> of file <a class="el" href="geom_8inl_source.html">geom.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="geom_8inl_source.html#l00418">418</a> of file <a class="el" href="geom_8inl_source.html">geom.inl</a>.</p>
 
 </div>
 </div>
@@ -237,12 +258,12 @@ indices&#160;</td><td class="memItemRight" valign="bottom"><b>qx::detail::transf
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="geom_8inl_source.html#l00299">299</a> of file <a class="el" href="geom_8inl_source.html">geom.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="geom_8inl_source.html#l00423">423</a> of file <a class="el" href="geom_8inl_source.html">geom.inl</a>.</p>
 
 </div>
 </div>
-<a id="a8687b316462ffbe0a638ba54e9a70662"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8687b316462ffbe0a638ba54e9a70662">&#9670;&nbsp;</a></span>create_cube()</h2>
+<a id="a08c05863505c6898d5468be45678af38"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a08c05863505c6898d5468be45678af38">&#9670;&nbsp;</a></span>create_cube()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -254,8 +275,18 @@ indices&#160;</td><td class="memItemRight" valign="bottom"><b>qx::detail::transf
           <td class="memname">geometry qx::create_cube </td>
           <td>(</td>
           <td class="paramtype">float&#160;</td>
-          <td class="paramname"><em>fSide</em></td><td>)</td>
+          <td class="paramname"><em>fSide</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>bFlatNormals</em> = <code>true</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
   </td>
@@ -269,6 +300,7 @@ indices&#160;</td><td class="memItemRight" valign="bottom"><b>qx::detail::transf
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">fSide</td><td>- cube side length </td></tr>
+    <tr><td class="paramname">bFlatNormals</td><td>- if true, each vertex will have independent normal </td></tr>
   </table>
   </dd>
 </dl>
@@ -279,7 +311,7 @@ indices&#160;</td><td class="memItemRight" valign="bottom"><b>qx::detail::transf
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="geom_8inl_source.html#l00072">72</a> of file <a class="el" href="geom_8inl_source.html">geom.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="geom_8inl_source.html#l00195">195</a> of file <a class="el" href="geom_8inl_source.html">geom.inl</a>.</p>
 
 </div>
 </div>
@@ -321,7 +353,7 @@ indices&#160;</td><td class="memItemRight" valign="bottom"><b>qx::detail::transf
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="geom_8inl_source.html#l00077">77</a> of file <a class="el" href="geom_8inl_source.html">geom.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="geom_8inl_source.html#l00205">205</a> of file <a class="el" href="geom_8inl_source.html">geom.inl</a>.</p>
 
 </div>
 </div>
@@ -381,7 +413,7 @@ indices&#160;</td><td class="memItemRight" valign="bottom"><b>qx::detail::transf
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="geom_8inl_source.html#l00252">252</a> of file <a class="el" href="geom_8inl_source.html">geom.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="geom_8inl_source.html#l00376">376</a> of file <a class="el" href="geom_8inl_source.html">geom.inl</a>.</p>
 
 </div>
 </div>
@@ -441,12 +473,12 @@ indices&#160;</td><td class="memItemRight" valign="bottom"><b>qx::detail::transf
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="geom_8inl_source.html#l00283">283</a> of file <a class="el" href="geom_8inl_source.html">geom.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="geom_8inl_source.html#l00407">407</a> of file <a class="el" href="geom_8inl_source.html">geom.inl</a>.</p>
 
 </div>
 </div>
-<a id="afde74ec42c03ea39feda0baafbfd2012"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#afde74ec42c03ea39feda0baafbfd2012">&#9670;&nbsp;</a></span>create_icosahedron()</h2>
+<a id="a28e96ef8677009f2a11a4a2381010efe"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a28e96ef8677009f2a11a4a2381010efe">&#9670;&nbsp;</a></span>create_icosahedron()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -458,8 +490,18 @@ indices&#160;</td><td class="memItemRight" valign="bottom"><b>qx::detail::transf
           <td class="memname">geometry qx::create_icosahedron </td>
           <td>(</td>
           <td class="paramtype">float&#160;</td>
-          <td class="paramname"><em>fRadius</em></td><td>)</td>
+          <td class="paramname"><em>fRadius</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>bFlatNormals</em> = <code>true</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
   </td>
@@ -473,6 +515,7 @@ indices&#160;</td><td class="memItemRight" valign="bottom"><b>qx::detail::transf
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">fRadius</td><td>- icosahedron radius </td></tr>
+    <tr><td class="paramname">bFlatNormals</td><td>- if true, each vertex will have independent normal </td></tr>
   </table>
   </dd>
 </dl>
@@ -483,7 +526,7 @@ indices&#160;</td><td class="memItemRight" valign="bottom"><b>qx::detail::transf
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="geom_8inl_source.html#l00087">87</a> of file <a class="el" href="geom_8inl_source.html">geom.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="geom_8inl_source.html#l00215">215</a> of file <a class="el" href="geom_8inl_source.html">geom.inl</a>.</p>
 
 </div>
 </div>
@@ -525,12 +568,12 @@ indices&#160;</td><td class="memItemRight" valign="bottom"><b>qx::detail::transf
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="geom_8inl_source.html#l00114">114</a> of file <a class="el" href="geom_8inl_source.html">geom.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="geom_8inl_source.html#l00224">224</a> of file <a class="el" href="geom_8inl_source.html">geom.inl</a>.</p>
 
 </div>
 </div>
-<a id="a258a03c475596c942001c52b9f5422bf"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a258a03c475596c942001c52b9f5422bf">&#9670;&nbsp;</a></span>create_icosphere()</h2>
+<a id="acff375b015e5af55f688e621278819b6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acff375b015e5af55f688e621278819b6">&#9670;&nbsp;</a></span>create_icosphere()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -548,7 +591,13 @@ indices&#160;</td><td class="memItemRight" valign="bottom"><b>qx::detail::transf
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">size_t&#160;</td>
-          <td class="paramname"><em>nDivides</em>&#160;</td>
+          <td class="paramname"><em>nDivides</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>bFlatNormals</em> = <code>false</code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -568,6 +617,7 @@ indices&#160;</td><td class="memItemRight" valign="bottom"><b>qx::detail::transf
   <table class="params">
     <tr><td class="paramname">fRadius</td><td>- icosphere radius </td></tr>
     <tr><td class="paramname">nDivides</td><td>- num of divides of icosahedron (bigger is higher precision) </td></tr>
+    <tr><td class="paramname">bFlatNormals</td><td>- if true, each vertex will have independent normal </td></tr>
   </table>
   </dd>
 </dl>
@@ -578,7 +628,7 @@ indices&#160;</td><td class="memItemRight" valign="bottom"><b>qx::detail::transf
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="geom_8inl_source.html#l00124">124</a> of file <a class="el" href="geom_8inl_source.html">geom.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="geom_8inl_source.html#l00234">234</a> of file <a class="el" href="geom_8inl_source.html">geom.inl</a>.</p>
 
 </div>
 </div>
@@ -631,12 +681,12 @@ indices&#160;</td><td class="memItemRight" valign="bottom"><b>qx::detail::transf
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="geom_8inl_source.html#l00199">199</a> of file <a class="el" href="geom_8inl_source.html">geom.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="geom_8inl_source.html#l00321">321</a> of file <a class="el" href="geom_8inl_source.html">geom.inl</a>.</p>
 
 </div>
 </div>
-<a id="a3dd7e7e955c64db12979f977a22d963d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3dd7e7e955c64db12979f977a22d963d">&#9670;&nbsp;</a></span>create_parallelogram()</h2>
+<a id="a6bba172163dadc0246a0553848328509"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6bba172163dadc0246a0553848328509">&#9670;&nbsp;</a></span>create_parallelogram()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -660,7 +710,13 @@ indices&#160;</td><td class="memItemRight" valign="bottom"><b>qx::detail::transf
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">float&#160;</td>
-          <td class="paramname"><em>fSide3</em>&#160;</td>
+          <td class="paramname"><em>fSide3</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>bFlatNormals</em> = <code>true</code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -681,6 +737,7 @@ indices&#160;</td><td class="memItemRight" valign="bottom"><b>qx::detail::transf
     <tr><td class="paramname">fSide1</td><td>- side 1 length </td></tr>
     <tr><td class="paramname">fSide2</td><td>- side 2 length </td></tr>
     <tr><td class="paramname">fSide3</td><td>- side 3 length </td></tr>
+    <tr><td class="paramname">bFlatNormals</td><td>- if true, each vertex will have independent normal </td></tr>
   </table>
   </dd>
 </dl>
@@ -691,7 +748,7 @@ indices&#160;</td><td class="memItemRight" valign="bottom"><b>qx::detail::transf
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="geom_8inl_source.html#l00037">37</a> of file <a class="el" href="geom_8inl_source.html">geom.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="geom_8inl_source.html#l00168">168</a> of file <a class="el" href="geom_8inl_source.html">geom.inl</a>.</p>
 
 </div>
 </div>
@@ -751,7 +808,7 @@ indices&#160;</td><td class="memItemRight" valign="bottom"><b>qx::detail::transf
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="geom_8inl_source.html#l00059">59</a> of file <a class="el" href="geom_8inl_source.html">geom.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="geom_8inl_source.html#l00182">182</a> of file <a class="el" href="geom_8inl_source.html">geom.inl</a>.</p>
 
 </div>
 </div>
@@ -804,7 +861,7 @@ indices&#160;</td><td class="memItemRight" valign="bottom"><b>qx::detail::transf
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="geom_8inl_source.html#l00209">209</a> of file <a class="el" href="geom_8inl_source.html">geom.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="geom_8inl_source.html#l00331">331</a> of file <a class="el" href="geom_8inl_source.html">geom.inl</a>.</p>
 
 </div>
 </div>
@@ -857,7 +914,7 @@ indices&#160;</td><td class="memItemRight" valign="bottom"><b>qx::detail::transf
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="geom_8inl_source.html#l00223">223</a> of file <a class="el" href="geom_8inl_source.html">geom.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="geom_8inl_source.html#l00345">345</a> of file <a class="el" href="geom_8inl_source.html">geom.inl</a>.</p>
 
 </div>
 </div>
@@ -899,7 +956,7 @@ indices&#160;</td><td class="memItemRight" valign="bottom"><b>qx::detail::transf
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="geom_8inl_source.html#l00242">242</a> of file <a class="el" href="geom_8inl_source.html">geom.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="geom_8inl_source.html#l00366">366</a> of file <a class="el" href="geom_8inl_source.html">geom.inl</a>.</p>
 
 </div>
 </div>
@@ -941,7 +998,37 @@ indices&#160;</td><td class="memItemRight" valign="bottom"><b>qx::detail::transf
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="geom_8inl_source.html#l00247">247</a> of file <a class="el" href="geom_8inl_source.html">geom.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="geom_8inl_source.html#l00371">371</a> of file <a class="el" href="geom_8inl_source.html">geom.inl</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Variable Documentation</h2>
+<a id="aefbbae5ce3d974abbc92469237af7aae"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aefbbae5ce3d974abbc92469237af7aae">&#9670;&nbsp;</a></span>k_IcosahedronIndices</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr std::array&lt;index_type, 60&gt; qx::detail::k_IcosahedronIndices</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line">{ {</div>
+<div class="line">    1, 4,  0, 4, 9, 0,  4, 5, 9,  8, 5, 4,  1,  8,  4, 1, 10, 8,  10, 3,</div>
+<div class="line">    8, 8,  3, 5, 3, 2,  5, 3, 7,  2, 3, 10, 7,  10, 6, 7, 6,  11, 7,  6,</div>
+<div class="line">    0, 11, 6, 1, 0, 10, 1, 6, 11, 0, 9, 2,  11, 9,  5, 2, 9,  11, 2,  7,</div>
+<div class="line">} }</div>
+</div><!-- fragment -->
+<p class="definition">Definition at line <a class="el" href="geom_8inl_source.html#l00016">16</a> of file <a class="el" href="geom_8inl_source.html">geom.inl</a>.</p>
 
 </div>
 </div>

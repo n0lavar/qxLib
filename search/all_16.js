@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['yellow_583',['yellow',['../classqx_1_1color.html#a2aaaeddb40c85f9c236b71ec41fbf26d',1,'qx::color']]]
+  ['white_583',['white',['../classqx_1_1color.html#af0817f32bfe3d13f4723b4bc349535f1',1,'qx::color']]],
+  ['width_584',['width',['../classqx_1_1rect.html#a3c6a6e2a862c3134532fcf600688fc16',1,'qx::rect']]]
 ];

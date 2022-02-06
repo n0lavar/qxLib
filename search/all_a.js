@@ -1,27 +1,4 @@
 var searchData=
 [
-  ['last_267',['last',['../classqx_1_1benchmark.html#ac6b9a7240832f3c602ac7810f7c2393c',1,'qx::benchmark']]],
-  ['lcm_268',['lcm',['../numerical_8h.html#a56b88020cf301f6f8b9dbe523b5f667a',1,'qx']]],
-  ['left_269',['left',['../classqx_1_1rect.html#a701b5a0481f93573bfe637517a32cab0',1,'qx::rect']]],
-  ['length_270',['length',['../classqx_1_1basic__string.html#ad98fbea196af3fc71b189b7eb81d6161',1,'qx::basic_string']]],
-  ['lime_271',['lime',['../classqx_1_1color.html#adc1ab98dc6049122c5e8bd7aaa9842f4',1,'qx::color']]],
-  ['linear_5finterpolation_272',['linear_interpolation',['../functional_8h.html#af733f871b9e6a2dde54b17c87d7c5811',1,'qx']]],
-  ['link_273',['link',['../classqx_1_1link.html#ac5f23a15679e348acb7fa32f2246c763',1,'qx::link::link(link&lt; U &gt; &amp;&amp;pLink) noexcept'],['../classqx_1_1link.html#a7d0aaef5705d686fdd1d0ea5db0404ca',1,'qx::link::link(const std::shared_ptr&lt; U &gt; &amp;pStrong) noexcept'],['../classqx_1_1link.html#aab9e56e1fdaca4bfb1866def27ced8c1',1,'qx::link::link(std::weak_ptr&lt; T &gt; pWeak) noexcept'],['../classqx_1_1link.html#abd5af99934dafca45bda5d0cbe29a956',1,'qx::link::link(const std::weak_ptr&lt; U &gt; &amp;pWeak) noexcept'],['../classqx_1_1link.html#a00e012325118fd99b4a304772cd18d18',1,'qx::link::link() noexcept=default']]],
-  ['link_274',['Link',['../classqx_1_1base__shader__program.html#a8fe983c2b22f74fdabba284202fe8b54',1,'qx::base_shader_program']]],
-  ['link_275',['link',['../classqx_1_1link.html#ab06d224d0a2e66c082bc328b9693cf99',1,'qx::link::link(const link&lt; U &gt; &amp;pLink) noexcept'],['../classqx_1_1link.html#a413eb19c581de68acafe83b9f6fe4616',1,'qx::link::link(std::nullptr_t) noexcept'],['../classqx_1_1link.html',1,'qx::link&lt; T &gt;']]],
-  ['link_2eh_276',['link.h',['../link_8h.html',1,'']]],
-  ['link_2einl_277',['link.inl',['../link_8inl.html',1,'']]],
-  ['list_5fse_278',['list_se',['../classqx_1_1list__se.html#aa5198a46963f3bfff4208283f6282ca1',1,'qx::list_se::list_se(const list_se &amp;list)'],['../classqx_1_1list__se.html#a37c0cf64f1b28df7de14fa96777fecb8',1,'qx::list_se::list_se(list_se &amp;&amp;list) noexcept'],['../classqx_1_1list__se.html#a0035e2ee16515107bcc2185f3750f0d7',1,'qx::list_se::list_se(init_list init)'],['../classqx_1_1list__se.html#adf1c5dece0e69ff2b1ff92b2b83004a0',1,'qx::list_se::list_se(size_type nElements, const_reference value)'],['../classqx_1_1list__se.html',1,'qx::list_se&lt; T &gt;']]],
-  ['list_5fse_2eh_279',['list_se.h',['../list__se_8h.html',1,'']]],
-  ['list_5fse_2einl_280',['list_se.inl',['../list__se_8inl.html',1,'']]],
-  ['lock_281',['lock',['../classqx_1_1link.html#a24382e977367a817ccddf21d3acd8e34',1,'qx::link::lock()'],['../classqx_1_1threads__shared.html#ab7224be96c0026a5f693c7bf37d39405',1,'qx::threads_shared::lock()']]],
-  ['lock_5fptr_282',['lock_ptr',['../classqx_1_1link_1_1lock__ptr.html',1,'qx::link']]],
-  ['log_5ffile_5fpolicy_283',['log_file_policy',['../file__logger__stream_8h.html#aaab6d2d26ae57b1521451921e1273220',1,'qx']]],
-  ['log_5flevel_284',['log_level',['../base__logger__stream_8h.html#aeeb3d388b3fe9ff99ce7abcb70484d38',1,'qx']]],
-  ['log_5funit_285',['log_unit',['../structqx_1_1log__unit.html',1,'qx']]],
-  ['log_5funit_5finfo_286',['log_unit_info',['../structqx_1_1log__unit__info.html',1,'qx']]],
-  ['logger_287',['logger',['../classqx_1_1logger.html',1,'qx']]],
-  ['logger_2eh_288',['logger.h',['../logger_8h.html',1,'']]],
-  ['logger_2einl_289',['logger.inl',['../logger_8inl.html',1,'']]],
-  ['logger_5fsingleton_290',['logger_singleton',['../classqx_1_1logger__singleton.html',1,'qx']]]
+  ['join_5farrays_267',['join_arrays',['../useful__funcs_8h.html#aeccf764444fb66cff5690d7570fdefc2',1,'qx']]]
 ];
