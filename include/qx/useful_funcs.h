@@ -13,6 +13,7 @@
 #include <qx/suppress_warnings.h>
 #include <qx/typedefs.h>
 
+#include <algorithm>
 #include <array>
 #include <functional>
 
@@ -112,6 +113,26 @@ constexpr auto make_array(T init_val = T())
     std::array<T, N> ret;
     ret.fill(init_val);
     return ret;
+}
+
+/**
+    @brief  Join arrays at compile-time
+    @tparam T           - array value_type
+    @tparam LeftLength  - left array length
+    @tparam RightLength - right array length
+    @param  rhs         - left array
+    @param  lhs         - right array
+    @retval             - new array where elements from the right array placed after elements from the left array
+**/
+template<typename T, std::size_t LeftLength, std::size_t RightLength>
+constexpr std::array<T, LeftLength + RightLength> join_arrays(
+    std::array<T, LeftLength>  rhs,
+    std::array<T, RightLength> lhs)
+{
+    std::array<T, LeftLength + RightLength> res;
+    auto current = std::copy(rhs.begin(), rhs.end(), res.begin());
+    std::copy(lhs.begin(), lhs.end(), current);
+    return res;
 }
 
 /**
