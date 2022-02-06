@@ -18,14 +18,26 @@
 #include <array>
 #include <cmath>
 #include <numbers>
+#include <span>
 #include <unordered_map>
 #include <vector>
 
 namespace qx
 {
 
+/**
+    @struct vertex
+    @date   4.02.2022
+**/
+struct vertex
+{
+    glm::vec3 pos     = glm::vec3(0.f);
+    glm::vec3 normal  = glm::vec3(0.f);
+    glm::vec3 tangent = glm::vec3(0.f);
+};
+
 using index_type = u32;
-using vertices   = std::vector<glm::vec3>;
+using vertices   = std::vector<vertex>;
 using indices    = std::vector<index_type>;
 
 /**
@@ -34,20 +46,25 @@ using indices    = std::vector<index_type>;
 **/
 struct geometry
 {
-    vertices  geomVertices; //!< vertices array
-    indices   geomIndices;  //!< indices array
-    glm::vec3 offset;       //!< offset of the center
-    draw_mode eDrawMode;    //!< draw mode
+    vertices  geomVertices;                          //!< vertices array
+    indices   geomIndices;                           //!< indices array
+    glm::vec3 offset    = glm::vec3(0.f);            //!< offset of the center
+    draw_mode eDrawMode = draw_mode::triangles_list; //!< draw mode
 };
 
 /**
     @brief  Create parallelogram geometry
-    @param  fSide1 - side 1 length
-    @param  fSide2 - side 2 length
-    @param  fSide3 - side 3 length
-    @retval        - parallelogram geometry
+    @param  fSide1       - side 1 length
+    @param  fSide2       - side 2 length
+    @param  fSide3       - side 3 length
+    @param  bFlatNormals - if true, each vertex will have independent normal
+    @retval              - parallelogram geometry
 **/
-geometry create_parallelogram(float fSide1, float fSide2, float fSide3);
+geometry create_parallelogram(
+    float fSide1,
+    float fSide2,
+    float fSide3,
+    bool  bFlatNormals = true);
 
 /**
     @brief  Create parallelogram geometry for lines drawing
@@ -60,10 +77,11 @@ geometry create_parallelogram_lines(float fSide1, float fSide2, float fSide3);
 
 /**
     @brief  Create cube geometry
-    @param  fSide - cube side length
-    @retval       - cube geometry
+    @param  fSide        - cube side length
+    @param  bFlatNormals - if true, each vertex will have independent normal
+    @retval              - cube geometry
 **/
-geometry create_cube(float fSide);
+geometry create_cube(float fSide, bool bFlatNormals = true);
 
 /**
     @brief  Create cube geometry for lines drawing
@@ -74,10 +92,11 @@ geometry create_cube_lines(float fSide);
 
 /**
     @brief  Create icosahedron geometry
-    @param  fRadius - icosahedron radius
-    @retval         - icosahedron geometry
+    @param  fRadius      - icosahedron radius
+    @param  bFlatNormals - if true, each vertex will have independent normal
+    @retval              - icosahedron geometry
 **/
-geometry create_icosahedron(float fRadius);
+geometry create_icosahedron(float fRadius, bool bFlatNormals = true);
 
 /**
     @brief  Create icosahedron geometry for lines drawing
@@ -88,11 +107,15 @@ geometry create_icosahedron_lines(float fRadius);
 
 /**
     @brief  Create icosphere geometry
-    @param  fRadius  - icosphere radius
-    @param  nDivides - num of divides of icosahedron (bigger is higher precision)
-    @retval          - icosphere geometry
+    @param  fRadius      - icosphere radius
+    @param  nDivides     - num of divides of icosahedron (bigger is higher precision)
+    @param  bFlatNormals - if true, each vertex will have independent normal
+    @retval              - icosphere geometry
 **/
-geometry create_icosphere(float fRadius, size_t nDivides);
+geometry create_icosphere(
+    float  fRadius,
+    size_t nDivides,
+    bool   bFlatNormals = false);
 
 /**
     @brief  Create icosphere geometry for lines drawing

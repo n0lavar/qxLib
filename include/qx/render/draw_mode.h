@@ -45,9 +45,9 @@ enum class draw_mode
         Vertices 3, 4, and 5 form a triangle.
         And so on.
 
-        { 0, 1, 3 },
-                     { 4, 5, 6 },
-                                  { 7, 8, 9 }
+        { 0, 1, 2 },
+                     { 3, 4, 5 },
+                                  { 6, 7, 8 }
     */
     triangles_list,
 
