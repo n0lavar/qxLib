@@ -36,7 +36,7 @@ if(GTEST_FOUND)
     if (WIN32)
         set(GTEST_LIBRARIES
             optimized   "${GTEST_INCLUDE_DIR}/../../build/lib/Release/gtest.lib"
-            debug       "${GTEST_INCLUDE_DIR}/../../build/lib/Debug/gtestd.lib"
+            debug       "${GTEST_INCLUDE_DIR}/../../build/lib/Debug/gtest.lib"
         )    
     else ()
         set(GTEST_LIBRARIES
