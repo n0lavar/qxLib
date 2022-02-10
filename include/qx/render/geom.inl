@@ -72,8 +72,7 @@ inline geometry create_figure(
     bool                        bUnitLengthPosNormal = false)
 {
     geometry ret;
-    ret.offset    = offset;
-    ret.eDrawMode = draw_mode::triangles_list;
+    ret.offset = offset;
 
     if (bFlatNormals)
     {
@@ -387,12 +386,12 @@ inline geometry create_ellipse(
     ret.geomVertices.reserve(nVertices);
 
     ret.geomIndices.push_back(0);
-    ret.geomVertices.push_back(detail::create_vertex({ 0.f, 0.f, 0.f }));
+    ret.geomVertices.emplace_back(detail::create_vertex({ 0.f, 0.f, 0.f }));
 
     for (size_t i = 1; i < nVertices; ++i)
     {
         ret.geomIndices.push_back(static_cast<index_type>(i));
-        ret.geomVertices.push_back(detail::create_vertex(
+        ret.geomVertices.emplace_back(detail::create_vertex(
             { fHorRadius * std::cos(static_cast<float>(i) * f2Pi / fSides),
               fVertRadius * std::sin(static_cast<float>(i) * f2Pi / fSides),
               0.f }));
