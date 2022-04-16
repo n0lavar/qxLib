@@ -50,4 +50,23 @@ inline string to_string(
     return string(buf.data(), buf.size());
 }
 
+/**
+    @brief   Convert string_view to the null terminated chars array
+    @details Some libraries or even c++ types can't deal with std::string_view
+             (for ex. std::ifstream). This function allows to reduce number of
+             allocations, but still leads to overhead due to chars copying
+    @tparam  value_type - string value type
+    @param   stringView - string view to convert
+    @retval             - null terminated string with stringView convent
+                          valid until the next function call
+**/
+template<typename value_type>
+inline const value_type* to_char_pointer(
+    std::basic_string_view<value_type> stringView)
+{
+    thread_local basic_string<char_traits<value_type>> sBuffer;
+    sBuffer = stringView;
+    return sBuffer.c_str();
+}
+
 } // namespace qx
