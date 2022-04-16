@@ -20,9 +20,17 @@ function(set_target_options _target)
         )
     
     elseif(${CMAKE_CXX_COMPILER_ID} STREQUAL MSVC)
+
+        string(REGEX REPLACE "bin/.+" "include" MSVC_INCLUDE_PATH ${CMAKE_CXX_COMPILER})
     
         target_compile_options(${_target} PRIVATE
-            /EHsc /Wall /WX
+            # exceptions support
+            /EHsc 
+            # enable all warnings and treat them as errors
+            /Wall /WX
+            # ignore all MSVC headers warnings
+            /external:I"${MSVC_INCLUDE_PATH}" /external:W0
+            # ignore trash or too pedantic warnings
             /wd4061 # enumerator 'identifier' in switch of enum 'enumeration' is not explicitly handled by a case label
             /wd4062 # enumerator 'identifier' in switch of enum 'enumeration' is not handled
             /wd4100 # 'identifier' : unreferenced formal parameter
@@ -49,6 +57,8 @@ function(set_target_options _target)
         target_link_options(${_target} PRIVATE 
             $<$<CONFIG:Release>: /NODEFAULTLIB:LIBCMTD>
             $<$<CONFIG:Debug>: /INCREMENTAL>
+            "/ignore:4098" # defaultlib 'library' conflicts with use of other libs; use /NODEFAULTLIB:library
+            "/ignore:4099" # PDB 'filename' was not found with 'object/library' or at 'path'; linking object as if no debug info
         )
 
         
