@@ -86,26 +86,22 @@ Macros</h2></td></tr>
 <tr class="memitem:a554e3e1ea4d394962c7e0647696e7962"><td class="memItemLeft" align="right" valign="top"><a id="a554e3e1ea4d394962c7e0647696e7962"></a>
 #define&#160;</td><td class="memItemRight" valign="bottom"><b>QX_ENABLE_DEBUG_BREAK</b>&#160;&#160;&#160;QX_DEBUG</td></tr>
 <tr class="separator:a554e3e1ea4d394962c7e0647696e7962"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6e97f97010a95ebdbc16873d98ee144e"><td class="memItemLeft" align="right" valign="top"><a id="a6e97f97010a95ebdbc16873d98ee144e"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>QX_PROCESS_ASSERT</b>(statement)&#160;&#160;&#160;<a class="el" href="useful__macros_8h.html#abff5c48c8f5e30fdb8643308a9b3eaf7">QX_EMPTY_MACRO</a></td></tr>
-<tr class="separator:a6e97f97010a95ebdbc16873d98ee144e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4c43ea20ef02f687d7793376ba2aff9b"><td class="memItemLeft" align="right" valign="top"><a id="a4c43ea20ef02f687d7793376ba2aff9b"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>QX_PROCESS_ASSERT_MSG</b>(statement,  msg, ...)&#160;&#160;&#160;QX_PROCESS_ASSERT(statement)</td></tr>
-<tr class="separator:a4c43ea20ef02f687d7793376ba2aff9b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a002033fab63c801cc004fe532771c859"><td class="memItemLeft" align="right" valign="top"><a id="a002033fab63c801cc004fe532771c859"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>QX_PROCESS_ASSERT</b>(statement,  msg, ...)&#160;&#160;&#160;<a class="el" href="useful__macros_8h.html#abff5c48c8f5e30fdb8643308a9b3eaf7">QX_EMPTY_MACRO</a></td></tr>
+<tr class="separator:a002033fab63c801cc004fe532771c859"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af71e6aa86267af0291f2b11fa2475f07"><td class="memItemLeft" align="right" valign="top"><a id="af71e6aa86267af0291f2b11fa2475f07"></a>
 #define&#160;</td><td class="memItemRight" valign="bottom"><b>QX_DEBUG_BREAK</b>&#160;&#160;&#160;<a class="el" href="useful__macros_8h.html#abff5c48c8f5e30fdb8643308a9b3eaf7">QX_EMPTY_MACRO</a></td></tr>
 <tr class="separator:af71e6aa86267af0291f2b11fa2475f07"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2eb2affe84e6d34db31253b0e5f69726"><td class="memItemLeft" align="right" valign="top"><a id="a2eb2affe84e6d34db31253b0e5f69726"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>QX_ASSERT</b>(statement)&#160;&#160;&#160;<a class="el" href="useful__macros_8h.html#abff5c48c8f5e30fdb8643308a9b3eaf7">QX_EMPTY_MACRO</a></td></tr>
-<tr class="separator:a2eb2affe84e6d34db31253b0e5f69726"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0db0022f4e471845272bd7881fc94444"><td class="memItemLeft" align="right" valign="top"><a id="a0db0022f4e471845272bd7881fc94444"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>QX_ASSERT_MSG</b>(statement,  msg, ...)&#160;&#160;&#160;<a class="el" href="useful__macros_8h.html#abff5c48c8f5e30fdb8643308a9b3eaf7">QX_EMPTY_MACRO</a></td></tr>
+<tr class="memitem:a0db0022f4e471845272bd7881fc94444"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><b>QX_ASSERT_MSG</b>(statement,  msg, ...)</td></tr>
 <tr class="separator:a0db0022f4e471845272bd7881fc94444"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0dc4bdce7e0d8a1f1169ac9a384effae"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><b>QX_CHECK</b>(condition)</td></tr>
-<tr class="separator:a0dc4bdce7e0d8a1f1169ac9a384effae"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1b2ef6392c3c155c8a9da19dbd224bbf"><td class="memItemLeft" align="right" valign="top"><a id="a1b2ef6392c3c155c8a9da19dbd224bbf"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>QX_ASSERT_NOT_IMPL</b>&#160;&#160;&#160;QX_ASSERT_MSG(0, &quot;Implementation isn't ready&quot;)</td></tr>
-<tr class="separator:a1b2ef6392c3c155c8a9da19dbd224bbf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2eb2affe84e6d34db31253b0e5f69726"><td class="memItemLeft" align="right" valign="top"><a id="a2eb2affe84e6d34db31253b0e5f69726"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>QX_ASSERT</b>(statement)&#160;&#160;&#160;QX_ASSERT_MSG(statement, &quot;&quot;)</td></tr>
+<tr class="separator:a2eb2affe84e6d34db31253b0e5f69726"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a698451aa0963d4d75eeafdb86fd848d3"><td class="memItemLeft" align="right" valign="top"><a id="a698451aa0963d4d75eeafdb86fd848d3"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>QX_ASSERT_NO_ENTRY</b>&#160;&#160;&#160;QX_ASSERT(0)</td></tr>
+<tr class="separator:a698451aa0963d4d75eeafdb86fd848d3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a595d81253fd06d723ffe543ffc898236"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><b>QX_ASSERT_RETURN</b>(statement, ...)</td></tr>
+<tr class="separator:a595d81253fd06d723ffe543ffc898236"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Assert macros. </p>
@@ -115,25 +111,75 @@ Macros</h2></td></tr>
 
 <p class="definition">Definition in file <a class="el" href="assert_8h_source.html">assert.h</a>.</p>
 </div><h2 class="groupheader">Macro Definition Documentation</h2>
-<a id="a0dc4bdce7e0d8a1f1169ac9a384effae"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0dc4bdce7e0d8a1f1169ac9a384effae">&#9670;&nbsp;</a></span>QX_CHECK</h2>
+<a id="a0db0022f4e471845272bd7881fc94444"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0db0022f4e471845272bd7881fc94444">&#9670;&nbsp;</a></span>QX_ASSERT_MSG</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define QX_CHECK</td>
+          <td class="memname">#define QX_ASSERT_MSG</td>
           <td>(</td>
           <td class="paramtype">&#160;</td>
-          <td class="paramname">condition</td><td>)</td>
+          <td class="paramname">statement, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">msg, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>...</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
 </div><div class="memdoc">
-<b>Value:</b><div class="fragment"><div class="line">    QX_ASSERT(condition);   \</div>
-<div class="line">    if (condition)</div>
+<b>Value:</b><div class="fragment"><div class="line">    [&amp;]()                                    \</div>
+<div class="line">    {                                        \</div>
+<div class="line">        return <span class="keyword">static_cast&lt;</span><span class="keywordtype">bool</span><span class="keyword">&gt;</span>(statement); \</div>
+<div class="line">    }()</div>
 </div><!-- fragment -->
-<p class="definition">Definition at line <a class="el" href="assert_8h_source.html#l00090">90</a> of file <a class="el" href="assert_8h_source.html">assert.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="assert_8h_source.html#l00121">121</a> of file <a class="el" href="assert_8h_source.html">assert.h</a>.</p>
+
+</div>
+</div>
+<a id="a595d81253fd06d723ffe543ffc898236"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a595d81253fd06d723ffe543ffc898236">&#9670;&nbsp;</a></span>QX_ASSERT_RETURN</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define QX_ASSERT_RETURN</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">statement, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>...</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Value:</b><div class="fragment"><div class="line">    <span class="keywordflow">if</span> (!(statement))                    \</div>
+<div class="line">        return ##__VA_ARGS__;</div>
+</div><!-- fragment -->
+<p class="definition">Definition at line <a class="el" href="assert_8h_source.html#l00128">128</a> of file <a class="el" href="assert_8h_source.html">assert.h</a>.</p>
 
 </div>
 </div>
