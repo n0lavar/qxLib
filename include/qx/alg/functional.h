@@ -9,7 +9,7 @@
 **/
 #pragma once
 
-#include <qx/assert.h>
+#include <qx/containers/string/string.h>
 #include <qx/useful_macros.h>
 
 QX_PUSH_SUPPRESS_ALL_WARNINGS
@@ -27,55 +27,49 @@ using function2d = std::function<double(double)>;
 
 /**
     @brief  Linear interpolation algorithm
-    @param  p0 - point 0 (x - coord, y - f(x))
-    @param  p1 - point 1 (x - coord, y - f(x))
-    @param  x  - point
-    @retval    - ~f(x)
+    @param  p0     - point 0 (x - coordinate, y - f(x))
+    @param  p1     - point 1 (x - coordinate, y - f(x))
+    @param  x      - point
+    @param  pError - error string. if not nullptr and error occured, this string will be filled
+    @retval        - ~f(x)
 **/
 inline double linear_interpolation(
     const glm::dvec2& p0,
     const glm::dvec2& p1,
-    double            x)
+    double            x,
+    string*           pError = nullptr)
 {
-    QX_ASSERT_MSG(
-        glm::epsilonNotEqual(p1.x, p0.x, DBL_EPSILON),
-        "two x are equal, result is nan");
+    if (pError && !epsilon_equal(p1.x, p0.x, DBL_EPSILON))
+        *pError = "two x are equal, result is nan";
 
     return p0.y + (p1.y - p0.y) * (x - p0.x) / (p1.x - p0.x);
 }
 
 /**
     @brief  Bilinear interpolation algorithm. Points are clockwise or counterclock-wise
-    @param  p0 - point 0 (x, y - coords, z - f(x, y)) 
-    @param  p1 - point 1 (x, y - coords, z - f(x, y)) 
-    @param  p2 - point 2 (x, y - coords, z - f(x, y)) 
-    @param  p3 - point 3 (x, y - coords, z - f(x, y)) 
-    @param  p  - point (x, y - coords).
-                 It can be out of points square, in this case algorithm called extrapolation
-    @retval    - ~f(p.x, p.y) 
+    @param  p0     - point 0 (x, y - coordinates, z - f(x, y)) 
+    @param  p1     - point 1 (x, y - coordinates, z - f(x, y)) 
+    @param  p2     - point 2 (x, y - coordinates, z - f(x, y)) 
+    @param  p3     - point 3 (x, y - coordinates, z - f(x, y)) 
+    @param  p      - point (x, y - coordinates).
+                     It can be out of points square, in this case algorithm called extrapolation
+    @param  pError - error string. if not nullptr and error occured, this string will be filled
+    @retval        - ~f(p.x, p.y) 
 **/
 inline double bilinear_interpolation(
     const glm::dvec3& p0,
     const glm::dvec3& p1,
     const glm::dvec3& p2,
     const glm::dvec3& p3,
-    const glm::dvec2& p)
+    const glm::dvec2& p,
+    string*           pError = nullptr)
 {
-    QX_ASSERT_MSG(
-        glm::epsilonEqual(p0.y, p1.y, DBL_EPSILON),
-        "points must be as square");
-
-    QX_ASSERT_MSG(
-        glm::epsilonEqual(p2.y, p3.y, DBL_EPSILON),
-        "points must be as square");
-
-    QX_ASSERT_MSG(
-        glm::epsilonEqual(p0.x, p3.x, DBL_EPSILON),
-        "points must be as square");
-
-    QX_ASSERT_MSG(
-        glm::epsilonEqual(p1.x, p2.x, DBL_EPSILON),
-        "points must be as square");
+    if (pError
+        && (epsilon_equal(p0.y, p1.y) || epsilon_equal(p2.y, p3.y)
+            || epsilon_equal(p0.x, p3.x) || epsilon_equal(p1.x, p2.x)))
+    {
+        *pError = "points must be as square";
+    }
 
     const glm::dvec2 temp0 {
         p0.y,
@@ -226,8 +220,8 @@ inline double integrate_adaptive_midpoint(
                                   1 if point is inside shape with positive value
                                   0 if point is not inside shape
                                   -1 if point is inside shape with negative value
-    @param  pos0                - left down corner coords
-    @param  pos1                - right up corner coords
+    @param  pos0                - left down corner coordinates
+    @param  pos1                - right up corner coordinates
     @param  nPointsPerOneSquare - points per 1 square (more is better)
     @retval                     - approximate integral
 **/
