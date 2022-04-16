@@ -23,7 +23,7 @@ using moving_average_weights_func =
 
 /**
     @brief  Generate weights for moving_average as arithmetic mean
-    @tparam T        - 
+    @tparam T        - floating point ish type
     @param  nEntries - number of entries in moving_average
     @retval          - weights
 **/
@@ -33,7 +33,7 @@ inline std::vector<T> get_moving_average_simple_weights(size_t nEntries);
 /**
     @brief  Generate weights for moving_average with linearly decrease,
             from highest weight for the most recent data, down to zero
-    @tparam T        - 
+    @tparam T        - floating point ish type
     @param  nEntries - number of entries in moving_average
     @retval          - weights
 **/
@@ -43,7 +43,7 @@ inline std::vector<T> get_moving_average_linear_weights(size_t nEntries);
 /**
     @brief  Generate weights for moving_average with exponential decrease,
             from highest weight for the most recent data, down to zero
-    @tparam T        - 
+    @tparam T        - floating point ish type
     @param  nEntries - number of entries in moving_average
     @retval          - weights
 **/
