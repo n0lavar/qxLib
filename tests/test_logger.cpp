@@ -20,6 +20,8 @@
 
 #include <regex>
 
+QX_PUSH_SUPPRESS_MSVC_WARNINGS(5233)
+
 template<
     const char sLogsFolder[],
     const char sLogsFile[],
@@ -475,5 +477,7 @@ TYPED_TEST(TestLogger, logger_lambda)
 
     TestLoggerLambda(*TestFixture::m_pLogger);
 }
+
+QX_POP_SUPPRESS_WARNINGS
 
 #endif

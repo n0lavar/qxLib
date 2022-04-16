@@ -17,6 +17,8 @@
 #include <list>
 #include <unordered_map>
 
+QX_PUSH_SUPPRESS_MSVC_WARNINGS(5233)
+
 template<typename Char>
 constexpr auto get_string_format_specifier(void)
 {
@@ -999,6 +1001,9 @@ TYPED_TEST(TestQxString, to)
 
         auto n2 = str.template to<unsigned>();
         EXPECT_FALSE(n2.has_value());
+
+        auto n3 = str.template to<bool>();
+        EXPECT_FALSE(n3.has_value());
     }
 
     {
@@ -2215,5 +2220,7 @@ TYPED_TEST(TestQxString, rfind)
     test(sStdStr);
     test(sStdStr.cbegin(), sStdStr.cend());
 }
+
+QX_POP_SUPPRESS_WARNINGS
 
 #endif

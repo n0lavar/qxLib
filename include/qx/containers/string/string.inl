@@ -324,7 +324,9 @@ inline std::optional<To> basic_string<Traits>::to(
             {
                 optResult = true;
             }
-            else
+            else if (
+                compare(QX_STR_PREFIX(typename Traits::value_type, "false"))
+                == 0)
             {
                 optResult = false;
             }
@@ -2586,7 +2588,7 @@ struct hash<qx::basic_string<Traits>>
 
 //------------------------------------ swap ------------------------------------
 
-namespace std
+namespace std //-V1061
 {
 
 template<class Traits>
