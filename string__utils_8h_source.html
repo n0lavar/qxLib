@@ -79,24 +79,24 @@ $(function() {
 <div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;{</div>
 <div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160; </div>
 <div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> value_type&gt;</div>
-<div class="line"><a name="l00027"></a><span class="lineno"><a class="line" href="string__utils_8h.html#a14b2d1aac981691108f19aefa3ec1109">   27</a></span>&#160;constexpr <span class="keywordtype">size_t</span> <a class="code" href="string__utils_8h.html#a14b2d1aac981691108f19aefa3ec1109">djb2a_hash</a>(<span class="keyword">const</span> value_type* pStr, <span class="keywordtype">size_t</span> nSeed, <span class="keywordtype">size_t</span> nLen)</div>
+<div class="line"><a name="l00027"></a><span class="lineno"><a class="line" href="string__utils_8h.html#a49ac0e2f7b72f7474a2470d56fc61e94">   27</a></span>&#160;constexpr <span class="keywordtype">size_t</span> <a class="code" href="string__utils_8h.html#a49ac0e2f7b72f7474a2470d56fc61e94">djb2a_hash</a>(<span class="keyword">const</span> value_type* pszStr, <span class="keywordtype">size_t</span> nSeed, <span class="keywordtype">size_t</span> nLen)</div>
 <div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;{</div>
 <div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    <span class="keywordtype">size_t</span> nHash = nSeed;</div>
 <div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160; </div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = 0; i &lt; nLen; i++)</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;        nHash = nHash * 33 ^ pStr[i];</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = 0; i &lt; nLen; ++i)</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;        nHash = nHash * 33 ^ pszStr[i];</div>
 <div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160; </div>
 <div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    <span class="keywordflow">return</span> nHash;</div>
 <div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;}</div>
 <div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160; </div>
 <div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> value_type&gt;</div>
-<div class="line"><a name="l00045"></a><span class="lineno"><a class="line" href="string__utils_8h.html#ae563089fcdc4bc5a62fae34498d94e74">   45</a></span>&#160;constexpr <span class="keywordtype">size_t</span> <a class="code" href="string__utils_8h.html#a14b2d1aac981691108f19aefa3ec1109">djb2a_hash</a>(<span class="keyword">const</span> value_type* pszStr, <span class="keywordtype">size_t</span> nSeed)</div>
+<div class="line"><a name="l00045"></a><span class="lineno"><a class="line" href="string__utils_8h.html#ae563089fcdc4bc5a62fae34498d94e74">   45</a></span>&#160;constexpr <span class="keywordtype">size_t</span> <a class="code" href="string__utils_8h.html#a49ac0e2f7b72f7474a2470d56fc61e94">djb2a_hash</a>(<span class="keyword">const</span> value_type* pszStr, <span class="keywordtype">size_t</span> nSeed)</div>
 <div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;{</div>
 <div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    <span class="keywordtype">size_t</span>     nHash = nSeed;</div>
 <div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    value_type ch;</div>
 <div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160; </div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    <span class="keywordflow">while</span> ((ch = *pszStr++) != 0)</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;        nHash = ((nHash &lt;&lt; 5) + nHash) + ch;</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = 0; pszStr[i]; ++i)</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;        nHash = nHash * 33 ^ pszStr[i];</div>
 <div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160; </div>
 <div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    <span class="keywordflow">return</span> nHash;</div>
 <div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;}</div>
@@ -370,8 +370,8 @@ $(function() {
 <div class="line"><a name="l00382"></a><span class="lineno">  382</span>&#160; </div>
 <div class="line"><a name="l00383"></a><span class="lineno">  383</span>&#160;} <span class="comment">// namespace qx</span></div>
 <div class="ttc" id="aconfig_8h_html"><div class="ttname"><a href="config_8h.html">config.h</a></div><div class="ttdoc">Config macros.</div></div>
-<div class="ttc" id="astring__utils_8h_html_a14b2d1aac981691108f19aefa3ec1109"><div class="ttname"><a href="string__utils_8h.html#a14b2d1aac981691108f19aefa3ec1109">qx::djb2a_hash</a></div><div class="ttdeci">constexpr size_t djb2a_hash(const value_type *pStr, size_t nSeed, size_t nLen)</div><div class="ttdoc">djb2a hash</div><div class="ttdef"><b>Definition:</b> <a href="string__utils_8h_source.html#l00027">string_utils.h:27</a></div></div>
 <div class="ttc" id="astring__utils_8h_html_a1eb12d2223725f5a5e77213e01e54626"><div class="ttname"><a href="string__utils_8h.html#a1eb12d2223725f5a5e77213e01e54626">qx::murmur_32_hash</a></div><div class="ttdeci">constexpr size_t murmur_32_hash(const value_type *pStr, size_t nSeed, size_t nLen) noexcept</div><div class="ttdoc">Murmur nHash.</div><div class="ttdef"><b>Definition:</b> <a href="string__utils_8h_source.html#l00067">string_utils.h:67</a></div></div>
+<div class="ttc" id="astring__utils_8h_html_a49ac0e2f7b72f7474a2470d56fc61e94"><div class="ttname"><a href="string__utils_8h.html#a49ac0e2f7b72f7474a2470d56fc61e94">qx::djb2a_hash</a></div><div class="ttdeci">constexpr size_t djb2a_hash(const value_type *pszStr, size_t nSeed, size_t nLen)</div><div class="ttdoc">djb2a hash</div><div class="ttdef"><b>Definition:</b> <a href="string__utils_8h_source.html#l00027">string_utils.h:27</a></div></div>
 <div class="ttc" id="astring__utils_8h_html_a4ec6630ad6d65fe8bb53d5c1ed2ac711"><div class="ttname"><a href="string__utils_8h.html#a4ec6630ad6d65fe8bb53d5c1ed2ac711">qx::strcmp</a></div><div class="ttdeci">constexpr int strcmp(const value_type *pszLeft, const value_type *pszRight)</div><div class="ttdoc">Constexpr compare two strings.</div><div class="ttdef"><b>Definition:</b> <a href="string__utils_8h_source.html#l00190">string_utils.h:190</a></div></div>
 <div class="ttc" id="astring__utils_8h_html_a8c51be95bedbc7e6a1f1612d2a45e29b"><div class="ttname"><a href="string__utils_8h.html#a8c51be95bedbc7e6a1f1612d2a45e29b">qx::get_format_specifier</a></div><div class="ttdeci">constexpr auto get_format_specifier() noexcept</div><div class="ttdoc">Get format specifier for type.</div><div class="ttdef"><b>Definition:</b> <a href="string__utils_8h_source.html#l00296">string_utils.h:296</a></div></div>
 <div class="ttc" id="astring__utils_8h_html_a8e0efa61531960b546130958f6e42cf4"><div class="ttname"><a href="string__utils_8h.html#a8e0efa61531960b546130958f6e42cf4">qx::strlen</a></div><div class="ttdeci">constexpr std::size_t strlen(const value_type *psz)</div><div class="ttdoc">Constexpr string length.</div><div class="ttdef"><b>Definition:</b> <a href="string__utils_8h_source.html#l00371">string_utils.h:371</a></div></div>

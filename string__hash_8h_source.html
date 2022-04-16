@@ -140,9 +140,22 @@ $(function() {
 <div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;<span class="keyword">using</span> <a class="code" href="classqx_1_1basic__string__hash.html">fast_string_hash</a>  = <a class="code" href="classqx_1_1basic__string__hash.html">basic_string_hash&lt;fast_hash_string_traits&lt;char&gt;</a>&gt;;</div>
 <div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;<span class="keyword">using</span> <a class="code" href="classqx_1_1basic__string__hash.html">fast_wstring_hash</a> = <a class="code" href="classqx_1_1basic__string__hash.html">basic_string_hash&lt;fast_hash_string_traits&lt;wchar_t&gt;</a>&gt;;</div>
 <div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160; </div>
-<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;} <span class="comment">// namespace qx</span></div>
-<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160; </div>
-<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="string__hash_8inl.html">qx/containers/string/string_hash.inl</a>&gt;</span></div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;<span class="keyword">namespace </span>literals</div>
+<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;{</div>
+<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160; </div>
+<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;constexpr <a class="code" href="classqx_1_1basic__string__hash.html">basic_string_hash&lt;fast_hash_string_traits&lt;char&gt;</a>&gt; <span class="keyword">operator</span><span class="stringliteral">&quot;&quot;</span> _sh(</div>
+<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;    <span class="keyword">const</span> <span class="keywordtype">char</span>* pszText,</div>
+<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;    <span class="keywordtype">size_t</span>      nSize);</div>
+<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160; </div>
+<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;constexpr <a class="code" href="classqx_1_1basic__string__hash.html">basic_string_hash&lt;fast_hash_string_traits&lt;wchar_t&gt;</a>&gt; <span class="keyword">operator</span><span class="stringliteral">&quot;&quot;</span> _sh(</div>
+<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;    <span class="keyword">const</span> <span class="keywordtype">wchar_t</span>* pszText,</div>
+<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;    <span class="keywordtype">size_t</span>         nSize);</div>
+<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160; </div>
+<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;} <span class="comment">// namespace literals</span></div>
+<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160; </div>
+<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;} <span class="comment">// namespace qx</span></div>
+<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160; </div>
+<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="string__hash_8inl.html">qx/containers/string/string_hash.inl</a>&gt;</span></div>
 <div class="ttc" id="aclassqx_1_1basic__string__hash_html"><div class="ttname"><a href="classqx_1_1basic__string__hash.html">qx::basic_string_hash</a></div><div class="ttdoc">String hash object.</div><div class="ttdef"><b>Definition:</b> <a href="string__hash_8h_source.html#l00048">string_hash.h:49</a></div></div>
 <div class="ttc" id="astring__hash_8inl_html"><div class="ttname"><a href="string__hash_8inl.html">string_hash.inl</a></div></div>
 <div class="ttc" id="astring__traits_8h_html"><div class="ttname"><a href="string__traits_8h.html">string_traits.h</a></div><div class="ttdoc">Contains traits for qx::string.</div></div>

@@ -100,11 +100,22 @@ $(function() {
 <div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="classqx_1_1basic__string.html">string</a>(buf.data(), buf.size());</div>
 <div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;}</div>
 <div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160; </div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;} <span class="comment">// namespace qx</span></div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> value_type&gt;</div>
+<div class="line"><a name="l00064"></a><span class="lineno"><a class="line" href="string__converters_8h.html#abae43e12d9d47cc45926f2599f74b792">   64</a></span>&#160;<span class="keyword">inline</span> <span class="keyword">const</span> value_type* <a class="code" href="string__converters_8h.html#abae43e12d9d47cc45926f2599f74b792">to_char_pointer</a>(</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    std::basic_string_view&lt;value_type&gt; stringView)</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;{</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    thread_local <a class="code" href="classqx_1_1basic__string.html">basic_string&lt;char_traits&lt;value_type&gt;</a>&gt; sBuffer;</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;    sBuffer = stringView;</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    <span class="keywordflow">return</span> sBuffer.<a class="code" href="classqx_1_1basic__string.html#ae80a94bb065eda141d210a81e7d624a0">c_str</a>();</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;}</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160; </div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;} <span class="comment">// namespace qx</span></div>
 <div class="ttc" id="aclassqx_1_1basic__string_html"><div class="ttname"><a href="classqx_1_1basic__string.html">qx::basic_string</a></div><div class="ttdoc">String class.</div><div class="ttdef"><b>Definition:</b> <a href="string_8h_source.html#l00067">string.h:68</a></div></div>
+<div class="ttc" id="aclassqx_1_1basic__string_html_ae80a94bb065eda141d210a81e7d624a0"><div class="ttname"><a href="classqx_1_1basic__string.html#ae80a94bb065eda141d210a81e7d624a0">qx::basic_string::c_str</a></div><div class="ttdeci">const_pointer c_str() const noexcept</div><div class="ttdoc">Get pointer to string zero terminated.</div><div class="ttdef"><b>Definition:</b> <a href="string_8inl_source.html#l00280">string.inl:280</a></div></div>
 <div class="ttc" id="astring_8h_html"><div class="ttname"><a href="string_8h.html">string.h</a></div><div class="ttdoc">Contains qx::string class.</div></div>
 <div class="ttc" id="astring__converters_8h_html_a3e1f4e7844477718e8e50adb0a7bbfb6"><div class="ttname"><a href="string__converters_8h.html#a3e1f4e7844477718e8e50adb0a7bbfb6">qx::to_string</a></div><div class="ttdeci">string to_string(std::wstring_view str, const std::locale &amp;locale=std::locale())</div><div class="ttdoc">Convert wstring to string.</div><div class="ttdef"><b>Definition:</b> <a href="string__converters_8h_source.html#l00043">string_converters.h:43</a></div></div>
 <div class="ttc" id="astring__converters_8h_html_aa203fa26e66091ce0c1f4ffff0c4e7dc"><div class="ttname"><a href="string__converters_8h.html#aa203fa26e66091ce0c1f4ffff0c4e7dc">qx::to_wstring</a></div><div class="ttdeci">wstring to_wstring(std::string_view str, const std::locale &amp;locale=std::locale())</div><div class="ttdoc">convert string to wstring</div><div class="ttdef"><b>Definition:</b> <a href="string__converters_8h_source.html#l00023">string_converters.h:23</a></div></div>
+<div class="ttc" id="astring__converters_8h_html_abae43e12d9d47cc45926f2599f74b792"><div class="ttname"><a href="string__converters_8h.html#abae43e12d9d47cc45926f2599f74b792">qx::to_char_pointer</a></div><div class="ttdeci">const value_type * to_char_pointer(std::basic_string_view&lt; value_type &gt; stringView)</div><div class="ttdoc">Convert string_view to the null terminated chars array.</div><div class="ttdef"><b>Definition:</b> <a href="string__converters_8h_source.html#l00064">string_converters.h:64</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

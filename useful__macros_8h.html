@@ -171,6 +171,9 @@ Macros</h2></td></tr>
 <tr class="memitem:a06c64a5f786d6ed8416e6a90502eaa86"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="useful__macros_8h.html#a06c64a5f786d6ed8416e6a90502eaa86">QX_STATIC_ASSERT_BETWEEN</a>(L,  V,  R)</td></tr>
 <tr class="memdesc:a06c64a5f786d6ed8416e6a90502eaa86"><td class="mdescLeft">&#160;</td><td class="mdescRight">Shows L, V and R in error msg.  <a href="useful__macros_8h.html#a06c64a5f786d6ed8416e6a90502eaa86">More...</a><br /></td></tr>
 <tr class="separator:a06c64a5f786d6ed8416e6a90502eaa86"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7a73fab5264de55ef55d54f3a6cd2a8f"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="useful__macros_8h.html#a7a73fab5264de55ef55d54f3a6cd2a8f">QX_ENUM_CLASS</a>(TypeName, ...)</td></tr>
+<tr class="memdesc:a7a73fab5264de55ef55d54f3a6cd2a8f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Macro for generating "enum class"-like class or struct with additional data/methods.  <a href="useful__macros_8h.html#a7a73fab5264de55ef55d54f3a6cd2a8f">More...</a><br /></td></tr>
+<tr class="separator:a7a73fab5264de55ef55d54f3a6cd2a8f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
@@ -263,6 +266,64 @@ constexpr const char *&#160;</td><td class="memItemRight" valign="bottom"><b>qx:
 <p>Has no effect and work correctly with "if else" </p>
 
 <p class="definition">Definition at line <a class="el" href="useful__macros_8h_source.html#l00019">19</a> of file <a class="el" href="useful__macros_8h_source.html">useful_macros.h</a>.</p>
+
+</div>
+</div>
+<a id="a7a73fab5264de55ef55d54f3a6cd2a8f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7a73fab5264de55ef55d54f3a6cd2a8f">&#9670;&nbsp;</a></span>QX_ENUM_CLASS</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define QX_ENUM_CLASS</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">TypeName, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>...</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Value:</b><div class="fragment"><div class="line">    <span class="keyword">enum</span> TypeName##Internal { __VA_ARGS__ };                            \</div>
+<div class="line">                                                                        \</div>
+<div class="line">    TypeName##Internal _eInternal = <span class="keyword">static_cast&lt;</span>TypeName##Internal<span class="keyword">&gt;</span>(0); \</div>
+<div class="line">                                                                        \</div>
+<div class="line">    TypeName&amp; operator=(<span class="keyword">const</span> TypeName##Internal&amp; eInternal)            \</div>
+<div class="line">    {                                                                   \</div>
+<div class="line">        _eInternal = eInternal;                                         \</div>
+<div class="line">        return *<span class="keyword">this</span>;                                                   \</div>
+<div class="line">    }                                                                   \</div>
+<div class="line">                                                                        \</div>
+<div class="line">    bool operator==(<span class="keyword">const</span> TypeName##Internal&amp; eInternal) <span class="keyword">const</span>          \</div>
+<div class="line">    {                                                                   \</div>
+<div class="line">        return _eInternal == eInternal;                                 \</div>
+<div class="line">    }                                                                   \</div>
+<div class="line">                                                                        \</div>
+<div class="line">    operator TypeName##Internal() const                                 \</div>
+<div class="line">    {                                                                   \</div>
+<div class="line">        return _eInternal;                                              \</div>
+<div class="line">    }</div>
+</div><!-- fragment -->
+<p>Macro for generating "enum class"-like class or struct with additional data/methods. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">TypeName</td><td>- class/struct name </td></tr>
+    <tr><td class="paramname">...</td><td>- enum values </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="useful__macros_8h_source.html#l00288">288</a> of file <a class="el" href="useful__macros_8h_source.html">useful_macros.h</a>.</p>
 
 </div>
 </div>

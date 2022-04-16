@@ -68,6 +68,7 @@ $(function() {
   <div class="summary">
 <a href="#nested-classes">Classes</a> &#124;
 <a href="#typedef-members">Typedefs</a> &#124;
+<a href="#func-members">Functions</a> &#124;
 <a href="#var-members">Variables</a>  </div>
   <div class="headertitle">
 <div class="title">string_hash.h File Reference</div>  </div>
@@ -104,6 +105,15 @@ using&#160;</td><td class="memItemRight" valign="bottom"><b>qx::fast_string_hash
 using&#160;</td><td class="memItemRight" valign="bottom"><b>qx::fast_wstring_hash</b> = basic_string_hash&lt; fast_hash_string_traits&lt; wchar_t &gt; &gt;</td></tr>
 <tr class="separator:a5e876b46a3a33fd4b2849840e8e1a952"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:acabe0c0114ed5116a27961e85c4fc233"><td class="memItemLeft" align="right" valign="top">constexpr basic_string_hash&lt; fast_hash_string_traits&lt; char &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="string__hash_8h.html#acabe0c0114ed5116a27961e85c4fc233">qx::literals::operator&quot;&quot;_sh</a> (const char *pszText, size_t nSize)</td></tr>
+<tr class="memdesc:acabe0c0114ed5116a27961e85c4fc233"><td class="mdescLeft">&#160;</td><td class="mdescRight">String hash literal for constexpr converting. Can be used with switch-case.  <a href="string__hash_8h.html#acabe0c0114ed5116a27961e85c4fc233">More...</a><br /></td></tr>
+<tr class="separator:acabe0c0114ed5116a27961e85c4fc233"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab540250e1158ad11d7165346e8b841c5"><td class="memItemLeft" align="right" valign="top">constexpr basic_string_hash&lt; fast_hash_string_traits&lt; wchar_t &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="string__hash_8h.html#ab540250e1158ad11d7165346e8b841c5">qx::literals::operator&quot;&quot;_sh</a> (const wchar_t *pszText, size_t nSize)</td></tr>
+<tr class="memdesc:ab540250e1158ad11d7165346e8b841c5"><td class="mdescLeft">&#160;</td><td class="mdescRight">String hash literal for constexpr converting. Can be used with switch-case.  <a href="string__hash_8h.html#ab540250e1158ad11d7165346e8b841c5">More...</a><br /></td></tr>
+<tr class="separator:ab540250e1158ad11d7165346e8b841c5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
 Variables</h2></td></tr>
 <tr class="memitem:af3c042460af4ca88e0349f4a2c643d09"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
@@ -120,7 +130,114 @@ Variables</h2></td></tr>
 <dl class="section copyright"><dt>Copyright</dt><dd>© Nick Khrapov, 2021. All right reserved. </dd></dl>
 
 <p class="definition">Definition in file <a class="el" href="string__hash_8h_source.html">string_hash.h</a>.</p>
-</div><h2 class="groupheader">Variable Documentation</h2>
+</div><h2 class="groupheader">Function Documentation</h2>
+<a id="acabe0c0114ed5116a27961e85c4fc233"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acabe0c0114ed5116a27961e85c4fc233">&#9670;&nbsp;</a></span>operator&quot;&quot;_sh() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr basic_string_hash&lt; fast_hash_string_traits&lt; char &gt; &gt; qx::literals::operator&quot;&quot;_sh </td>
+          <td>(</td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>pszText</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>nSize</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>String hash literal for constexpr converting. Can be used with switch-case. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">pszText</td><td>- literal text pointer </td></tr>
+    <tr><td class="paramname">nSize</td><td>- literal text size </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Return values</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">-</td><td>text hash value </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="string__hash_8inl_source.html#l00087">87</a> of file <a class="el" href="string__hash_8inl_source.html">string_hash.inl</a>.</p>
+
+</div>
+</div>
+<a id="ab540250e1158ad11d7165346e8b841c5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab540250e1158ad11d7165346e8b841c5">&#9670;&nbsp;</a></span>operator&quot;&quot;_sh() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr basic_string_hash&lt; fast_hash_string_traits&lt; wchar_t &gt; &gt; qx::literals::operator&quot;&quot;_sh </td>
+          <td>(</td>
+          <td class="paramtype">const wchar_t *&#160;</td>
+          <td class="paramname"><em>pszText</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>nSize</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>String hash literal for constexpr converting. Can be used with switch-case. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">pszText</td><td>- literal text pointer </td></tr>
+    <tr><td class="paramname">nSize</td><td>- literal text size </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Return values</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">-</td><td>text hash value </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="string__hash_8inl_source.html#l00094">94</a> of file <a class="el" href="string__hash_8inl_source.html">string_hash.inl</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Variable Documentation</h2>
 <a id="af3c042460af4ca88e0349f4a2c643d09"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#af3c042460af4ca88e0349f4a2c643d09">&#9670;&nbsp;</a></span>has_zero_termonated_hash_func_overload</h2>
 
