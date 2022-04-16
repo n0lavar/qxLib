@@ -114,7 +114,7 @@
 **/
 #define QX_ASSERT_RETURN(statement, ...) \
     if (!QX_ASSERT(statement))           \
-        return ##__VA_ARGS__;
+        return __VA_ARGS__;
 
 #else
 
@@ -127,6 +127,6 @@
 #define QX_ASSERT_NO_ENTRY   QX_ASSERT(0)
 #define QX_ASSERT_RETURN(statement, ...) \
     if (!(statement))                    \
-        return ##__VA_ARGS__;
+        return __VA_ARGS__;
 
 #endif
