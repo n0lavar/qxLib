@@ -25,11 +25,7 @@
 #endif
 
 #ifndef QX_PROCESS_ASSERT
-#define QX_PROCESS_ASSERT(statement) QX_EMPTY_MACRO
-#endif
-
-#ifndef QX_PROCESS_ASSERT_MSG
-#define QX_PROCESS_ASSERT_MSG(statement, msg, ...) QX_PROCESS_ASSERT(statement)
+#define QX_PROCESS_ASSERT(statement, msg, ...) QX_EMPTY_MACRO
 #endif
 
 #if QX_ENABLE_DEBUG_BREAK
@@ -54,47 +50,83 @@
 
 #if QX_ENABLE_ASSERTS
 
-#define QX_ASSERT(statement)              \
-    do                                    \
-    {                                     \
-        if (!(statement))                 \
-        {                                 \
-            QX_PROCESS_ASSERT(statement); \
-            QX_DEBUG_BREAK;               \
-        }                                 \
-    } while (false)
+/**
+    @brief   Assert macro with message
+    @details Same as QX_ASSERT, but with output possibility
+    @param   statement - statement to check
+    @param   msg       - message format
+    @param   ...       - message arguments
 
-#define QX_ASSERT_MSG(statement, msg, ...)                        \
-    do                                                            \
-    {                                                             \
-        if (!(statement))                                         \
-        {                                                         \
-            QX_PROCESS_ASSERT_MSG(statement, msg, ##__VA_ARGS__); \
-            QX_DEBUG_BREAK;                                       \
-        }                                                         \
-    } while (false)
+    May be used in if statemant:
+
+    @code
+    
+    const auto file = OpenFile(path);
+    if (QX_ASSERT_MSG(file, "Can't open %s file", path.c_str()))
+        ReadFromFile(file);
+        
+    @endcode 
+
+**/
+#define QX_ASSERT_MSG(statement, msg, ...)                    \
+    [&]()                                                     \
+    {                                                         \
+        if (!(statement))                                     \
+        {                                                     \
+            QX_PROCESS_ASSERT(statement, msg, ##__VA_ARGS__); \
+            QX_DEBUG_BREAK;                                   \
+            return false;                                     \
+        }                                                     \
+        else                                                  \
+        {                                                     \
+            return true;                                      \
+        }                                                     \
+    }()
+
+/**
+    @brief   Assert macro
+    @details If statement is false, assert processer will be called
+             and debugging will stop at this point
+    @param   statement - statement to check
+
+    May be used in if statemant:
+
+    @code
+    
+    const auto file = ...;
+    if (QX_ASSERT(file))
+        ReadFromFile(file);
+        
+    @endcode 
+
+**/
+#define QX_ASSERT(statement) QX_ASSERT_MSG(statement, "")
+
+/**
+    @brief Invokes assert unconditionally if this code should not be executed
+**/
+#define QX_ASSERT_NO_ENTRY QX_ASSERT_MSG(0, "No entry")
+
+/**
+    @brief Check statement and return if false
+    @param statement - statement to check
+    @param ...       - return value if statement is false
+**/
+#define QX_ASSERT_RETURN(statement, ...) \
+    if (!QX_ASSERT(statement))           \
+        return ##__VA_ARGS__;
 
 #else
 
-#define QX_ASSERT(statement)               QX_EMPTY_MACRO
-#define QX_ASSERT_MSG(statement, msg, ...) QX_EMPTY_MACRO
+#define QX_ASSERT_MSG(statement, msg, ...)   \
+    [&]()                                    \
+    {                                        \
+        return static_cast<bool>(statement); \
+    }()
+#define QX_ASSERT(statement) QX_ASSERT_MSG(statement, "")
+#define QX_ASSERT_NO_ENTRY   QX_ASSERT(0)
+#define QX_ASSERT_RETURN(statement, ...) \
+    if (!(statement))                    \
+        return ##__VA_ARGS__;
 
 #endif
-
-//==============================================================================
-
-/*
-    Short assert and if (no need to double condition)
-*/
-
-#define QX_CHECK(condition) \
-    QX_ASSERT(condition);   \
-    if (condition)
-
-//==============================================================================
-
-/*
-    Stub for not implemented yet code lines
-*/
-
-#define QX_ASSERT_NOT_IMPL QX_ASSERT_MSG(0, "Implementation isn't ready")

@@ -102,24 +102,24 @@ TEST(qx_assert, assert_not_impl_macro)
     // and dont want out test to be failed in SIGTRAP
     return;
 
-    QX_ASSERT_NOT_IMPL;
+    QX_ASSERT_NO_ENTRY;
 
     if (false)
-        QX_ASSERT_NOT_IMPL;
+        QX_ASSERT_NO_ENTRY;
 
     if (false)
-        QX_ASSERT_NOT_IMPL;
+        QX_ASSERT_NO_ENTRY;
     else
         Foo();
 
     if (false)
         Foo();
     else
-        QX_ASSERT_NOT_IMPL;
+        QX_ASSERT_NO_ENTRY;
 
     if (false)
     {
-        QX_ASSERT_NOT_IMPL;
+        QX_ASSERT_NO_ENTRY;
         Foo();
     }
 
@@ -127,7 +127,7 @@ TEST(qx_assert, assert_not_impl_macro)
         Foo();
     else
     {
-        QX_ASSERT_NOT_IMPL;
+        QX_ASSERT_NO_ENTRY;
         Foo();
     }
 }
