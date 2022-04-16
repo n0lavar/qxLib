@@ -18,18 +18,18 @@ namespace qx
 /**
     @brief  djb2a hash
     @tparam value_type - char type
-    @param  pStr       - string for hashing
+    @param  pszStr     - string for hashing
     @param  nSeed      - seed for hashing
     @param  nLen       - string length
     @retval            - 32bit unsigned value
 **/
 template<typename value_type>
-constexpr size_t djb2a_hash(const value_type* pStr, size_t nSeed, size_t nLen)
+constexpr size_t djb2a_hash(const value_type* pszStr, size_t nSeed, size_t nLen)
 {
     size_t nHash = nSeed;
 
-    for (size_t i = 0; i < nLen; i++)
-        nHash = nHash * 33 ^ pStr[i];
+    for (size_t i = 0; i < nLen; ++i)
+        nHash = nHash * 33 ^ pszStr[i];
 
     return nHash;
 }
@@ -47,8 +47,8 @@ constexpr size_t djb2a_hash(const value_type* pszStr, size_t nSeed)
     size_t     nHash = nSeed;
     value_type ch;
 
-    while ((ch = *pszStr++) != 0)
-        nHash = ((nHash << 5) + nHash) + ch;
+    for (size_t i = 0; pszStr[i]; ++i)
+        nHash = nHash * 33 ^ pszStr[i];
 
     return nHash;
 }
