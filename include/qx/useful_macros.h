@@ -279,3 +279,29 @@ struct StaticAssertBetween
 #define QX_STATIC_ASSERT_BETWEEN(L, V, R)                        \
     qx::detail::StaticAssertBetween<(L), (V), (R)> QX_LINE_NAME( \
         static_assert_between_)
+
+/**
+    @brief Macro for generating "enum class"-like class or struct with additional data/methods
+    @param TypeName - class/struct name
+    @param ...      - enum values
+**/
+#define QX_ENUM_CLASS(TypeName, ...)                                    \
+    enum TypeName##Internal { __VA_ARGS__ };                            \
+                                                                        \
+    TypeName##Internal _eInternal = static_cast<TypeName##Internal>(0); \
+                                                                        \
+    TypeName& operator=(const TypeName##Internal& eInternal)            \
+    {                                                                   \
+        _eInternal = eInternal;                                         \
+        return *this;                                                   \
+    }                                                                   \
+                                                                        \
+    bool operator==(const TypeName##Internal& eInternal) const          \
+    {                                                                   \
+        return _eInternal == eInternal;                                 \
+    }                                                                   \
+                                                                        \
+    operator TypeName##Internal() const                                 \
+    {                                                                   \
+        return _eInternal;                                              \
+    }
