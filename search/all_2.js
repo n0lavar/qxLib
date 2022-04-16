@@ -26,7 +26,7 @@ var searchData=
   ['benchmark_2eh_51',['benchmark.h',['../benchmark_8h.html',1,'']]],
   ['benchmark_2einl_52',['benchmark.inl',['../benchmark_8inl.html',1,'']]],
   ['between_53',['between',['../useful__funcs_8h.html#a2986ab33c946935721e51f4564ea9a08',1,'qx::between(T left, T value, T right, Compare compare)'],['../useful__funcs_8h.html#a55c30568a7ce6ec5ca535aa6a4e9ddbe',1,'qx::between(T left, T value, T right)']]],
-  ['bilinear_5finterpolation_54',['bilinear_interpolation',['../functional_8h.html#a7b302f778e0aef24ea53a73721d4224f',1,'qx']]],
+  ['bilinear_5finterpolation_54',['bilinear_interpolation',['../functional_8h.html#a2ca06ffb491649f2612dca14c67c1e16',1,'qx']]],
   ['bind_55',['Bind',['../classqx_1_1_i_buffer.html#a072a1b3985f7fcd35de9d1106f72d203',1,'qx::IBuffer']]],
   ['bindbase_56',['BindBase',['../classqx_1_1buffer__binding__point__base.html#ab8918e756b62c850cb7b8e1427252188',1,'qx::buffer_binding_point_base']]],
   ['black_57',['black',['../classqx_1_1color.html#aa436f2c2f346441ee67f64f70ce255a3',1,'qx::color']]],
