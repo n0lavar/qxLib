@@ -18,6 +18,7 @@
 #if QX_CONSTEXPR_SEQUENCE_SUPPORTED
 
 #include <qx/meta/constexpr_flag.h>
+#include <qx/useful_macros.h>
 
 namespace qx
 {
@@ -43,46 +44,49 @@ template<class Tag, typename T, T Start, T Func(T)>
 class constexpr_sequence
 {
 private:
-    template<T nIndex>
+    template<size_t nIndex>
     struct Element
     {
         static constexpr T value() noexcept
         {
             T _value = Start;
 
-            for (std::size_t i = 0; i < nIndex; i++)
+            for (size_t i = 0; i < nIndex; ++i)
                 _value = Func(_value);
 
             return _value;
         }
     };
 
-    template<std::size_t nCurrent, bool bWasSet /* = false */>
+    template<size_t nIndex>
+    using TElementFlag = constexpr_flag<Element<nIndex>>;
+
+    template<size_t nCurrent, bool bWasSet /* = false */>
     struct CheckerSetter
     {
-        static constexpr std::size_t index() noexcept
+        static constexpr size_t index() noexcept
         {
             return nCurrent;
         }
     };
 
-    template<T nCurrent>
+    template<size_t nCurrent>
     struct CheckerWrapper
     {
         template<
-            bool        bWasSet = constexpr_flag<Element<nCurrent>> {}.test(),
-            std::size_t nNext   = CheckerSetter<nCurrent, bWasSet> {}.index()>
-        static constexpr std::size_t index() noexcept
+            bool   bWasSet = TElementFlag<nCurrent> {}.test(),
+            size_t nNext   = CheckerSetter<nCurrent, bWasSet> {}.index()>
+        static constexpr size_t index() noexcept
         {
             return nNext;
         }
     };
 
-    template<std::size_t nCurrent>
+    template<size_t nCurrent>
     struct CheckerSetter<nCurrent, /* bool bWasSet = */ true>
     {
-        template<std::size_t nNext = CheckerWrapper<nCurrent + 1> {}.index()>
-        static constexpr std::size_t index() noexcept
+        template<size_t nNext = CheckerWrapper<nCurrent + 1> {}.index()>
+        static constexpr size_t index() noexcept
         {
             return nNext;
         }
@@ -100,8 +104,8 @@ public:
         @retval         - current sequence value
     **/
     template<
-        std::size_t nIndex = CheckerWrapper<0> {}.index(),
-        T           _value = Element<nIndex> {}.value()>
+        size_t nIndex = CheckerWrapper<0> {}.index(),
+        T      _value = Element<nIndex> {}.value()>
     static constexpr T value() noexcept
     {
         return _value;
@@ -119,9 +123,9 @@ public:
         @retval         - next sequence value
     **/
     template<
-        std::size_t nIndex = CheckerWrapper<0> {}.index(),
-        T           _value = Element<nIndex> {}.value(),
-        bool        bStub  = constexpr_flag<Element<nIndex>> {}.test_and_set()>
+        size_t nIndex = CheckerWrapper<0> {}.index(),
+        T      _value = Element<nIndex> {}.value(),
+        bool   bStub  = TElementFlag<nIndex> {}.test_and_set()>
     static constexpr T next() noexcept
     {
         return Func(_value);
