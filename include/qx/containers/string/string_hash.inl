@@ -79,6 +79,27 @@ constexpr typename char_traits<value_type>::size_type fast_hash_string_traits<
     return djb2a_hash(pszStr, nSeed);
 }
 
+// ------------------------------- operator"" _sh ------------------------------
+
+namespace literals
+{
+
+constexpr basic_string_hash<fast_hash_string_traits<char>> operator"" _sh(
+    const char* pszText,
+    size_t      nSize)
+{
+    return basic_string_hash<fast_hash_string_traits<char>>(pszText, nSize);
+}
+
+constexpr basic_string_hash<fast_hash_string_traits<wchar_t>> operator"" _sh(
+    const wchar_t* pszText,
+    size_t         nSize)
+{
+    return basic_string_hash<fast_hash_string_traits<wchar_t>>(pszText, nSize);
+}
+
+} // namespace literals
+
 } // namespace qx
 
 

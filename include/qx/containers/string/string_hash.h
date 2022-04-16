@@ -123,6 +123,31 @@ struct fast_hash_string_traits : public char_traits<value_type>
 using fast_string_hash  = basic_string_hash<fast_hash_string_traits<char>>;
 using fast_wstring_hash = basic_string_hash<fast_hash_string_traits<wchar_t>>;
 
+namespace literals
+{
+
+/**
+    @brief  String hash literal for constexpr converting. Can be used with switch-case
+    @param  pszText - literal text pointer
+    @param  nSize   - literal text size
+    @retval         - text hash value
+**/
+constexpr basic_string_hash<fast_hash_string_traits<char>> operator"" _sh(
+    const char* pszText,
+    size_t      nSize);
+
+/**
+    @brief  String hash literal for constexpr converting. Can be used with switch-case
+    @param  pszText - literal text pointer
+    @param  nSize   - literal text size
+    @retval         - text hash value
+**/
+constexpr basic_string_hash<fast_hash_string_traits<wchar_t>> operator"" _sh(
+    const wchar_t* pszText,
+    size_t         nSize);
+
+} // namespace literals
+
 } // namespace qx
 
 #include <qx/containers/string/string_hash.inl>
