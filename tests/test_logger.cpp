@@ -190,7 +190,7 @@ protected:
                   {
                       sMsg.vsprintf(pszFormat, args);
                       qx::base_logger_stream::format_time_string(sFormat);
-                      sMsg = qx::string("[I][") + sFormat + "][" + svTag + "] "
+                      sMsg = qx::string("   [") + sFormat + "][" + svTag + "] "
                              + sMsg + '\n';
                   } });
 
@@ -220,7 +220,7 @@ protected:
             std::regex  regex;
             qx::string  sFile;
 
-            constexpr const char* pszInfo   = "\\[I\\]";
+            constexpr const char* pszInfo   = "   ";
             constexpr const char* pszError  = "\\[E\\]";
             constexpr const char* pszAssert = "\\[A\\]";
             constexpr const char* pszDate   = "\\[\\d{2}-\\d{2}-\\d{4}_";
