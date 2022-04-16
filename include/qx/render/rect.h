@@ -134,26 +134,26 @@ public:
     constexpr value_type height() const noexcept;
 
     /**
-        @brief  Get rect left border coord (x)
-        @retval - rect left border coord (x)
+        @brief  Get rect left border coordinate (x)
+        @retval - rect left border coordinate (x)
     **/
     constexpr value_type left() const noexcept;
 
     /**
-        @brief  rect right border coord (x)
-        @retval - rect right border coord (x)
+        @brief  rect right border coordinate (x)
+        @retval - rect right border coordinate (x)
     **/
     constexpr value_type right() const noexcept;
 
     /**
-        @brief  rect top border coord (y)
-        @retval - rect top border coord (y)
+        @brief  rect top border coordinate (y)
+        @retval - rect top border coordinate (y)
     **/
     constexpr value_type top() const noexcept;
 
     /**
-        @brief  rect bottom border coord (y)
-        @retval - rect bottom border coord (y)
+        @brief  rect bottom border coordinate (y)
+        @retval - rect bottom border coordinate (y)
     **/
     constexpr value_type bottom() const noexcept;
 

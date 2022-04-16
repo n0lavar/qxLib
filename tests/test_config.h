@@ -152,4 +152,8 @@ QX_POP_SUPPRESS_WARNINGS
     #define QX_TEST_STRING_LITERAL 1
 #endif
 
+#ifndef QX_TEST_RECT
+    #define QX_TEST_RECT 1
+#endif
+
 // clang-format on

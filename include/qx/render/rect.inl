@@ -134,8 +134,10 @@ constexpr bool rect::contains(const rect& other, const vector_type& originPos)
 
 constexpr bool rect::overlaps(const rect& other) const noexcept
 {
-    return left() < other.right() && right() > other.left()
-           && top() < other.bottom() && bottom() > other.top();
+    return epsilon_less_equal(left(), other.right())
+           && epsilon_greater_equal(right(), other.left())
+           && epsilon_less_equal(top(), other.bottom())
+           && epsilon_greater_equal(bottom(), other.top());
 }
 
 constexpr std::optional<rect> rect::overlap(const rect& other) const noexcept
@@ -150,7 +152,7 @@ constexpr std::optional<rect> rect::overlap(const rect& other) const noexcept
     if (epsilon_greater_equal(x2 - x1, 0.f)
         && epsilon_greater_equal(y2 - y1, 0.f))
     {
-        return rect({ x1, y1 }, { x2 - x1, y2 - y1 });
+        return rect({ x2 - x1, y2 - y1 }, { x1, y1 });
     }
     else
     {
