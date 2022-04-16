@@ -66,8 +66,7 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="summary">
-<a href="#func-members">Functions</a> &#124;
-<a href="#var-members">Variables</a>  </div>
+<a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
 <div class="title">geom.inl File Reference</div>  </div>
 </div><!--header-->
@@ -77,12 +76,6 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a7318aa88e1a281c68ade10238b2e98d8"><td class="memItemLeft" align="right" valign="top"><a id="a7318aa88e1a281c68ade10238b2e98d8"></a>
-indices&#160;</td><td class="memItemRight" valign="bottom"><b>qx::detail::transform_triangle_indices_to_lines</b> (const indices &amp;triangles)</td></tr>
-<tr class="separator:a7318aa88e1a281c68ade10238b2e98d8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abbbee03eef9d49476a41796f167c40cd"><td class="memItemLeft" align="right" valign="top"><a id="abbbee03eef9d49476a41796f167c40cd"></a>
-glm::vec3&#160;</td><td class="memItemRight" valign="bottom"><b>qx::detail::create_tangent</b> (const glm::vec3 &amp;normal)</td></tr>
-<tr class="separator:abbbee03eef9d49476a41796f167c40cd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aac661e246c112cc8f1a27ba6925626da"><td class="memItemLeft" align="right" valign="top"><a id="aac661e246c112cc8f1a27ba6925626da"></a>
 vertex&#160;</td><td class="memItemRight" valign="bottom"><b>qx::detail::create_vertex</b> (const glm::vec3 &amp;pos, bool bUnitLengthPosNormal=false)</td></tr>
 <tr class="separator:aac661e246c112cc8f1a27ba6925626da"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -95,6 +88,12 @@ std::array&lt; glm::vec3, 12 &gt;&#160;</td><td class="memItemRight" valign="bot
 <tr class="memitem:a484162b3d68bf1af1b0c015761ee61fa"><td class="memItemLeft" align="right" valign="top"><a id="a484162b3d68bf1af1b0c015761ee61fa"></a>
 geometry&#160;</td><td class="memItemRight" valign="bottom"><b>qx::detail::create_parallelogram</b> (float fSide1, float fSide2, float fSide3, bool bFlatNormals, bool bUnitLengthPosNormal)</td></tr>
 <tr class="separator:a484162b3d68bf1af1b0c015761ee61fa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a68858cdb447bd3044c3c31832a9550da"><td class="memItemLeft" align="right" valign="top">glm::vec3&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="geom_8h.html#a68858cdb447bd3044c3c31832a9550da">qx::create_tangent</a> (const glm::vec3 &amp;normal)</td></tr>
+<tr class="memdesc:a68858cdb447bd3044c3c31832a9550da"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create tangent vector for a given normal.  <a href="geom_8h.html#a68858cdb447bd3044c3c31832a9550da">More...</a><br /></td></tr>
+<tr class="separator:a68858cdb447bd3044c3c31832a9550da"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aabddf2007d7b3f0561697b083caf59a7"><td class="memItemLeft" align="right" valign="top">indices&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="geom_8h.html#aabddf2007d7b3f0561697b083caf59a7">qx::transform_triangle_indices_to_lines</a> (indices_view triangles)</td></tr>
+<tr class="memdesc:aabddf2007d7b3f0561697b083caf59a7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Transform triangle indices to line indices.  <a href="geom_8h.html#aabddf2007d7b3f0561697b083caf59a7">More...</a><br /></td></tr>
+<tr class="separator:aabddf2007d7b3f0561697b083caf59a7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6bba172163dadc0246a0553848328509"><td class="memItemLeft" align="right" valign="top">geometry&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="geom_8h.html#a6bba172163dadc0246a0553848328509">qx::create_parallelogram</a> (float fSide1, float fSide2, float fSide3, bool bFlatNormals=true)</td></tr>
 <tr class="memdesc:a6bba172163dadc0246a0553848328509"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create parallelogram geometry.  <a href="geom_8h.html#a6bba172163dadc0246a0553848328509">More...</a><br /></td></tr>
 <tr class="separator:a6bba172163dadc0246a0553848328509"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -143,11 +142,6 @@ geometry&#160;</td><td class="memItemRight" valign="bottom"><b>qx::detail::creat
 <tr class="memitem:a1aea2eadb1f142d660217f8d29f4f5a3"><td class="memItemLeft" align="right" valign="top">geometry&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="geom_8h.html#a1aea2eadb1f142d660217f8d29f4f5a3">qx::create_circle_lines</a> (float fRadius, size_t nSides)</td></tr>
 <tr class="memdesc:a1aea2eadb1f142d660217f8d29f4f5a3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create circle geometry for lines drawing.  <a href="geom_8h.html#a1aea2eadb1f142d660217f8d29f4f5a3">More...</a><br /></td></tr>
 <tr class="separator:a1aea2eadb1f142d660217f8d29f4f5a3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
-Variables</h2></td></tr>
-<tr class="memitem:aefbbae5ce3d974abbc92469237af7aae"><td class="memItemLeft" align="right" valign="top">constexpr std::array&lt; index_type, 60 &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>qx::detail::k_IcosahedronIndices</b></td></tr>
-<tr class="separator:aefbbae5ce3d974abbc92469237af7aae"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><dl class="section author"><dt>Author</dt><dd>Khrapov </dd></dl>
@@ -205,7 +199,7 @@ Variables</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="geom_8inl_source.html#l00417">417</a> of file <a class="el" href="geom_8inl_source.html">geom.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="geom_8inl_source.html#l00404">404</a> of file <a class="el" href="geom_8inl_source.html">geom.inl</a>.</p>
 
 </div>
 </div>
@@ -258,7 +252,7 @@ Variables</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="geom_8inl_source.html#l00422">422</a> of file <a class="el" href="geom_8inl_source.html">geom.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="geom_8inl_source.html#l00409">409</a> of file <a class="el" href="geom_8inl_source.html">geom.inl</a>.</p>
 
 </div>
 </div>
@@ -311,7 +305,7 @@ Variables</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="geom_8inl_source.html#l00194">194</a> of file <a class="el" href="geom_8inl_source.html">geom.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="geom_8inl_source.html#l00182">182</a> of file <a class="el" href="geom_8inl_source.html">geom.inl</a>.</p>
 
 </div>
 </div>
@@ -353,7 +347,7 @@ Variables</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="geom_8inl_source.html#l00204">204</a> of file <a class="el" href="geom_8inl_source.html">geom.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="geom_8inl_source.html#l00192">192</a> of file <a class="el" href="geom_8inl_source.html">geom.inl</a>.</p>
 
 </div>
 </div>
@@ -413,7 +407,7 @@ Variables</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="geom_8inl_source.html#l00375">375</a> of file <a class="el" href="geom_8inl_source.html">geom.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="geom_8inl_source.html#l00362">362</a> of file <a class="el" href="geom_8inl_source.html">geom.inl</a>.</p>
 
 </div>
 </div>
@@ -473,7 +467,7 @@ Variables</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="geom_8inl_source.html#l00406">406</a> of file <a class="el" href="geom_8inl_source.html">geom.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="geom_8inl_source.html#l00393">393</a> of file <a class="el" href="geom_8inl_source.html">geom.inl</a>.</p>
 
 </div>
 </div>
@@ -526,7 +520,7 @@ Variables</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="geom_8inl_source.html#l00214">214</a> of file <a class="el" href="geom_8inl_source.html">geom.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="geom_8inl_source.html#l00201">201</a> of file <a class="el" href="geom_8inl_source.html">geom.inl</a>.</p>
 
 </div>
 </div>
@@ -568,7 +562,7 @@ Variables</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="geom_8inl_source.html#l00223">223</a> of file <a class="el" href="geom_8inl_source.html">geom.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="geom_8inl_source.html#l00210">210</a> of file <a class="el" href="geom_8inl_source.html">geom.inl</a>.</p>
 
 </div>
 </div>
@@ -628,7 +622,7 @@ Variables</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="geom_8inl_source.html#l00233">233</a> of file <a class="el" href="geom_8inl_source.html">geom.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="geom_8inl_source.html#l00219">219</a> of file <a class="el" href="geom_8inl_source.html">geom.inl</a>.</p>
 
 </div>
 </div>
@@ -681,7 +675,7 @@ Variables</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="geom_8inl_source.html#l00320">320</a> of file <a class="el" href="geom_8inl_source.html">geom.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="geom_8inl_source.html#l00306">306</a> of file <a class="el" href="geom_8inl_source.html">geom.inl</a>.</p>
 
 </div>
 </div>
@@ -748,7 +742,7 @@ Variables</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="geom_8inl_source.html#l00167">167</a> of file <a class="el" href="geom_8inl_source.html">geom.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="geom_8inl_source.html#l00156">156</a> of file <a class="el" href="geom_8inl_source.html">geom.inl</a>.</p>
 
 </div>
 </div>
@@ -808,7 +802,7 @@ Variables</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="geom_8inl_source.html#l00181">181</a> of file <a class="el" href="geom_8inl_source.html">geom.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="geom_8inl_source.html#l00170">170</a> of file <a class="el" href="geom_8inl_source.html">geom.inl</a>.</p>
 
 </div>
 </div>
@@ -861,7 +855,7 @@ Variables</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="geom_8inl_source.html#l00330">330</a> of file <a class="el" href="geom_8inl_source.html">geom.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="geom_8inl_source.html#l00315">315</a> of file <a class="el" href="geom_8inl_source.html">geom.inl</a>.</p>
 
 </div>
 </div>
@@ -914,7 +908,7 @@ Variables</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="geom_8inl_source.html#l00344">344</a> of file <a class="el" href="geom_8inl_source.html">geom.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="geom_8inl_source.html#l00331">331</a> of file <a class="el" href="geom_8inl_source.html">geom.inl</a>.</p>
 
 </div>
 </div>
@@ -956,7 +950,7 @@ Variables</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="geom_8inl_source.html#l00365">365</a> of file <a class="el" href="geom_8inl_source.html">geom.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="geom_8inl_source.html#l00352">352</a> of file <a class="el" href="geom_8inl_source.html">geom.inl</a>.</p>
 
 </div>
 </div>
@@ -998,13 +992,12 @@ Variables</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="geom_8inl_source.html#l00370">370</a> of file <a class="el" href="geom_8inl_source.html">geom.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="geom_8inl_source.html#l00357">357</a> of file <a class="el" href="geom_8inl_source.html">geom.inl</a>.</p>
 
 </div>
 </div>
-<h2 class="groupheader">Variable Documentation</h2>
-<a id="aefbbae5ce3d974abbc92469237af7aae"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aefbbae5ce3d974abbc92469237af7aae">&#9670;&nbsp;</a></span>k_IcosahedronIndices</h2>
+<a id="a68858cdb447bd3044c3c31832a9550da"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a68858cdb447bd3044c3c31832a9550da">&#9670;&nbsp;</a></span>create_tangent()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1013,22 +1006,77 @@ Variables</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">constexpr std::array&lt;index_type, 60&gt; qx::detail::k_IcosahedronIndices</td>
+          <td class="memname">glm::vec3 qx::create_tangent </td>
+          <td>(</td>
+          <td class="paramtype">const glm::vec3 &amp;&#160;</td>
+          <td class="paramname"><em>normal</em></td><td>)</td>
+          <td></td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
-<b>Initial value:</b><div class="fragment"><div class="line">{ {</div>
-<div class="line">    1, 4,  0, 4, 9, 0,  4, 5, 9,  8, 5, 4,  1,  8,  4, 1, 10, 8,  10, 3,</div>
-<div class="line">    8, 8,  3, 5, 3, 2,  5, 3, 7,  2, 3, 10, 7,  10, 6, 7, 6,  11, 7,  6,</div>
-<div class="line">    0, 11, 6, 1, 0, 10, 1, 6, 11, 0, 9, 2,  11, 9,  5, 2, 9,  11, 2,  7,</div>
-<div class="line">} }</div>
-</div><!-- fragment -->
-<p class="definition">Definition at line <a class="el" href="geom_8inl_source.html#l00016">16</a> of file <a class="el" href="geom_8inl_source.html">geom.inl</a>.</p>
+
+<p>Create tangent vector for a given normal. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">normal</td><td>- normal vector </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Return values</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">-</td><td>tangent vector </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="geom_8inl_source.html#l00130">130</a> of file <a class="el" href="geom_8inl_source.html">geom.inl</a>.</p>
+
+</div>
+</div>
+<a id="aabddf2007d7b3f0561697b083caf59a7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aabddf2007d7b3f0561697b083caf59a7">&#9670;&nbsp;</a></span>transform_triangle_indices_to_lines()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">indices qx::transform_triangle_indices_to_lines </td>
+          <td>(</td>
+          <td class="paramtype">indices_view&#160;</td>
+          <td class="paramname"><em>triangles</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Transform triangle indices to line indices. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">triangles</td><td>- triangle indices </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Return values</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">-</td><td>line indices </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="geom_8inl_source.html#l00137">137</a> of file <a class="el" href="geom_8inl_source.html">geom.inl</a>.</p>
 
 </div>
 </div>
