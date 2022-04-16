@@ -36,9 +36,10 @@ struct vertex
     glm::vec3 tangent = glm::vec3(0.f);
 };
 
-using index_type = u32;
-using vertices   = std::vector<vertex>;
-using indices    = std::vector<index_type>;
+using index_type   = u32;
+using vertices     = std::vector<vertex>;
+using indices      = std::vector<index_type>;
+using indices_view = std::span<const index_type>;
 
 /**
     @struct geometry
@@ -51,6 +52,38 @@ struct geometry
     glm::vec3 offset    = glm::vec3(0.f);            //!< offset of the center
     draw_mode eDrawMode = draw_mode::triangles_list; //!< draw mode
 };
+
+namespace shape_indices
+{
+
+constexpr std::array<index_type, 60> icosahedron { {
+    1, 4,  0, 4, 9, 0,  4, 5, 9,  8, 5, 4,  1,  8,  4, 1, 10, 8,  10, 3,
+    8, 8,  3, 5, 3, 2,  5, 3, 7,  2, 3, 10, 7,  10, 6, 7, 6,  11, 7,  6,
+    0, 11, 6, 1, 0, 10, 1, 6, 11, 0, 9, 2,  11, 9,  5, 2, 9,  11, 2,  7,
+} };
+
+constexpr std::array<index_type, 36> parallelogram = {
+    3, 1, 0, 2, 1, 3, 2, 5, 1, 6, 5, 2, 6, 4, 5, 7, 4, 6,
+    7, 0, 4, 3, 0, 7, 7, 2, 3, 6, 2, 7, 0, 5, 4, 1, 5, 0,
+};
+
+constexpr std::array<index_type, 6> rect = { 0, 1, 3, 1, 2, 3 };
+
+} // namespace shape_indices
+
+/**
+    @brief  Create tangent vector for a given normal
+    @param  normal - normal vector
+    @retval        - tangent vector
+**/
+glm::vec3 create_tangent(const glm::vec3& normal);
+
+/**
+    @brief  Transform triangle indices to line indices
+    @param  triangles - triangle indices
+    @retval           - line indices
+**/
+indices transform_triangle_indices_to_lines(indices_view triangles);
 
 /**
     @brief  Create parallelogram geometry

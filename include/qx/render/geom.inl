@@ -13,38 +13,6 @@ namespace qx
 namespace detail
 {
 
-constexpr std::array<index_type, 60> k_IcosahedronIndices { {
-    1, 4,  0, 4, 9, 0,  4, 5, 9,  8, 5, 4,  1,  8,  4, 1, 10, 8,  10, 3,
-    8, 8,  3, 5, 3, 2,  5, 3, 7,  2, 3, 10, 7,  10, 6, 7, 6,  11, 7,  6,
-    0, 11, 6, 1, 0, 10, 1, 6, 11, 0, 9, 2,  11, 9,  5, 2, 9,  11, 2,  7,
-} };
-
-inline indices transform_triangle_indices_to_lines(const indices& triangles)
-{
-    indices lines;
-
-    for (size_t i = 0; i < triangles.size(); i += 3)
-    {
-        lines.push_back(triangles[i + 0]);
-        lines.push_back(triangles[i + 1]);
-
-        lines.push_back(triangles[i + 1]);
-        lines.push_back(triangles[i + 2]);
-
-        lines.push_back(triangles[i + 2]);
-        lines.push_back(triangles[i + 0]);
-    }
-
-    return lines;
-}
-
-inline glm::vec3 create_tangent(const glm::vec3& normal)
-{
-    // tangent vector is pointing up (positive y)
-    constexpr auto negativeZVector = glm::vec3(0.f, 0.f, -1.f);
-    return glm::normalize(glm::cross(negativeZVector, normal));
-}
-
 inline vertex create_vertex(
     const glm::vec3& pos,
     bool             bUnitLengthPosNormal = false)
@@ -83,7 +51,7 @@ inline geometry create_figure(
             const glm::vec3 pos2 = positions[_indices[i + 2]];
 
             const glm::vec3 normal  = glm::cross(pos2 - pos1, pos0 - pos1);
-            const glm::vec3 tangent = detail::create_tangent(normal);
+            const glm::vec3 tangent = create_tangent(normal);
 
             ret.geomVertices.emplace_back(pos0, normal, tangent);
             ret.geomVertices.emplace_back(pos1, normal, tangent);
@@ -134,11 +102,6 @@ inline geometry create_parallelogram(
     bool  bFlatNormals,
     bool  bUnitLengthPosNormal)
 {
-    constexpr std::array<index_type, 36> parallelogramIndices = {
-        3, 1, 0, 2, 1, 3, 2, 5, 1, 6, 5, 2, 6, 4, 5, 7, 4, 6,
-        7, 0, 4, 3, 0, 7, 7, 2, 3, 6, 2, 7, 0, 5, 4, 1, 5, 0,
-    };
-
     const float fHalfSide1 = fSide1 / 2.f;
     const float fHalfSide2 = fSide2 / 2.f;
     const float fHalfSide3 = fSide3 / 2.f;
@@ -156,13 +119,39 @@ inline geometry create_parallelogram(
 
     return detail::create_figure(
         parallelogramPositions,
-        parallelogramIndices,
+        shape_indices::parallelogram,
         { fHalfSide1, fHalfSide2, fHalfSide3 },
         bFlatNormals,
         bUnitLengthPosNormal);
 }
 
 } // namespace detail
+
+inline glm::vec3 create_tangent(const glm::vec3& normal)
+{
+    // tangent vector is pointing up (positive y)
+    constexpr auto negativeZVector = glm::vec3(0.f, 0.f, -1.f);
+    return glm::normalize(glm::cross(negativeZVector, normal));
+}
+
+inline indices transform_triangle_indices_to_lines(indices_view triangles)
+{
+    indices lines;
+
+    for (size_t i = 0; i < triangles.size(); i += 3)
+    {
+        lines.push_back(triangles[i + 0]);
+        lines.push_back(triangles[i + 1]);
+
+        lines.push_back(triangles[i + 1]);
+        lines.push_back(triangles[i + 2]);
+
+        lines.push_back(triangles[i + 2]);
+        lines.push_back(triangles[i + 0]);
+    }
+
+    return lines;
+}
 
 inline geometry create_parallelogram(
     float fSide1,
@@ -183,10 +172,9 @@ inline geometry create_parallelogram_lines(
     float fSide2,
     float fSide3)
 {
-    auto geom      = create_parallelogram(fSide1, fSide2, fSide3, false);
-    geom.eDrawMode = draw_mode::lines_list;
-    geom.geomIndices =
-        detail::transform_triangle_indices_to_lines(geom.geomIndices);
+    auto geom        = create_parallelogram(fSide1, fSide2, fSide3, false);
+    geom.eDrawMode   = draw_mode::lines_list;
+    geom.geomIndices = transform_triangle_indices_to_lines(geom.geomIndices);
 
     return geom;
 }
@@ -203,10 +191,9 @@ inline geometry create_cube(float fSide, bool bFlatNormals)
 
 inline geometry create_cube_lines(float fSide)
 {
-    auto geom      = create_cube(fSide, false);
-    geom.eDrawMode = draw_mode::lines_list;
-    geom.geomIndices =
-        detail::transform_triangle_indices_to_lines(geom.geomIndices);
+    auto geom        = create_cube(fSide, false);
+    geom.eDrawMode   = draw_mode::lines_list;
+    geom.geomIndices = transform_triangle_indices_to_lines(geom.geomIndices);
 
     return geom;
 }
@@ -215,17 +202,16 @@ inline geometry create_icosahedron(float fRadius, bool bFlatNormals)
 {
     return detail::create_figure(
         detail::create_icosahedron_positions(fRadius),
-        detail::k_IcosahedronIndices,
+        shape_indices::icosahedron,
         { fRadius, fRadius, fRadius },
         bFlatNormals);
 }
 
 inline geometry create_icosahedron_lines(float fRadius)
 {
-    auto geom      = create_icosahedron(fRadius, false);
-    geom.eDrawMode = draw_mode::lines_list;
-    geom.geomIndices =
-        detail::transform_triangle_indices_to_lines(geom.geomIndices);
+    auto geom        = create_icosahedron(fRadius, false);
+    geom.eDrawMode   = draw_mode::lines_list;
+    geom.geomIndices = transform_triangle_indices_to_lines(geom.geomIndices);
 
     return geom;
 }
@@ -243,8 +229,8 @@ inline geometry create_icosphere(
 
     indices thisLevelIndices;
     indices prevLevelIndices = indices(
-        detail::k_IcosahedronIndices.cbegin(),
-        detail::k_IcosahedronIndices.cend());
+        shape_indices::icosahedron.cbegin(),
+        shape_indices::icosahedron.cend());
 
     std::unordered_map<size_t, index_type> edgeMap;
 
@@ -319,10 +305,9 @@ inline geometry create_icosphere(
 
 inline geometry create_icosphere_lines(float fRadius, size_t nDivides)
 {
-    auto geom      = create_icosphere(fRadius, nDivides, false);
-    geom.eDrawMode = draw_mode::lines_list;
-    geom.geomIndices =
-        detail::transform_triangle_indices_to_lines(geom.geomIndices);
+    auto geom        = create_icosphere(fRadius, nDivides, false);
+    geom.eDrawMode   = draw_mode::lines_list;
+    geom.geomIndices = transform_triangle_indices_to_lines(geom.geomIndices);
 
     return geom;
 }
@@ -332,13 +317,15 @@ inline geometry create_rect(float fWidth, float fHeight)
     const float fHalfWidth  = fWidth / 2.f;
     const float fHalfHeight = fHeight / 2.f;
 
-    return { { { detail::create_vertex({ fHalfWidth, fHalfHeight, 0.f }),
-                 detail::create_vertex({ fHalfWidth, -fHalfHeight, 0.f }),
-                 detail::create_vertex({ -fHalfWidth, -fHalfHeight, 0.f }),
-                 detail::create_vertex({ -fHalfWidth, fHalfHeight, 0.f }) } },
-             { 0, 1, 3, 1, 2, 3 },
-             { fHalfWidth, fHalfHeight, 0.f },
-             draw_mode::triangles_list };
+    return {
+        { { detail::create_vertex({ fHalfWidth, fHalfHeight, 0.f }),
+            detail::create_vertex({ fHalfWidth, -fHalfHeight, 0.f }),
+            detail::create_vertex({ -fHalfWidth, -fHalfHeight, 0.f }),
+            detail::create_vertex({ -fHalfWidth, fHalfHeight, 0.f }) } },
+        std::vector(shape_indices::rect.cbegin(), shape_indices::rect.cend()),
+        { fHalfWidth, fHalfHeight, 0.f },
+        draw_mode::triangles_list
+    };
 }
 
 inline geometry create_rect_lines(float fWidth, float fHeight)
