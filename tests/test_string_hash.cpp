@@ -16,6 +16,8 @@
 #include <qx/containers/string/string_hash.h>
 #include <string_test_helpers.h>
 
+QX_PUSH_SUPPRESS_MSVC_WARNINGS(5233)
+
 template<typename StringTraits>
 class TestStringHashTyped : public ::testing::Test
 {
@@ -58,7 +60,7 @@ TYPED_TEST(TestStringHashTyped, hashes_inequality)
     const bool bAllDifferent = std::all_of(
         hashes.cbegin() + 1,
         hashes.cend(),
-        [](const auto& hash)
+        [hashes](const auto& hash)
         {
             return hash != hashes[0];
         });
@@ -82,5 +84,7 @@ TEST(TestStringHash, operator_)
         EXPECT_EQ(hash0, hash1);
     }
 }
+
+QX_POP_SUPPRESS_WARNINGS
 
 #endif
