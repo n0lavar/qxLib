@@ -55,11 +55,13 @@ TEST(string_converters, to_string)
         EXPECT_STREQ(str.data(), "!@#$%^&*()_+");
     }
 
+#if 0
     {
         qx::wstring wstr(L"Привет мир");
         qx::string  str = qx::to_string(wstr);
         EXPECT_STREQ(str.data(), "?????? ???");
     }
+#endif
 }
 
 TEST(string_converters, to_char_pointer)
