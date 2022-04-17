@@ -13,44 +13,17 @@
 #if QX_TEST_STRING
 
 #include <qx/containers/string/string.h>
+#include <string_test_helpers.h>
 
 #include <list>
 #include <unordered_map>
 
 QX_PUSH_SUPPRESS_MSVC_WARNINGS(5233)
 
-template<typename Char>
-constexpr auto get_string_format_specifier(void)
-{
-    if constexpr (std::is_same_v<Char, char>)
-        return "%s";
-    else if constexpr (std::is_same_v<Char, wchar_t>)
-        return L"%ls";
-}
-
 template<typename StringTraits>
 class TestQxString : public ::testing::Test
 {
 };
-
-
-#define ValueType    typename TypeParam::value_type
-#define ConstPointer typename TypeParam::const_pointer
-#define StringTypeTn typename qx::basic_string<TypeParam>
-#define StringType   qx::basic_string<TypeParam>
-#define StdString                    \
-    typename std::basic_string<      \
-        ValueType,                   \
-        std::char_traits<ValueType>, \
-        std::allocator<ValueType>>
-#define StdStringArg                                   \
-    GTEST_SINGLE_ARGUMENT(typename std::basic_string<  \
-                          ValueType,                   \
-                          std::char_traits<ValueType>, \
-                          std::allocator<ValueType>>)
-#define STR(str) QX_STR_PREFIX(ValueType, str)
-#define CH(str)  QX_CHAR_PREFIX(ValueType, str)
-
 
 using Implementations =
     ::testing::Types<qx::char_traits<char>, qx::char_traits<wchar_t>>;

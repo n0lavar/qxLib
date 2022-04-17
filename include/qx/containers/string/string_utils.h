@@ -44,8 +44,7 @@ constexpr size_t djb2a_hash(const value_type* pszStr, size_t nSeed, size_t nLen)
 template<typename value_type>
 constexpr size_t djb2a_hash(const value_type* pszStr, size_t nSeed)
 {
-    size_t     nHash = nSeed;
-    value_type ch;
+    size_t nHash = nSeed;
 
     for (size_t i = 0; pszStr[i]; ++i)
         nHash = nHash * 33 ^ pszStr[i];

@@ -160,4 +160,8 @@ QX_POP_SUPPRESS_WARNINGS
     #define QX_TEST_STRING_CONVERTERS 1
 #endif
 
+#ifndef QX_TEST_STRING_HASH
+    #define QX_TEST_STRING_HASH 1
+#endif
+
 // clang-format on

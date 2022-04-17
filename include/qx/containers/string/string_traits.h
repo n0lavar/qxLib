@@ -72,9 +72,12 @@ struct char_traits<char> : public common_char_traits<char>
     {
         return std::isspace(static_cast<int>(ch)) != 0;
     }
-    static size_type length(const_pointer pszStr) noexcept
+    static constexpr size_type length(const_pointer pszStr) noexcept
     {
-        return static_cast<size_type>(std::strlen(pszStr));
+        if (std::is_constant_evaluated())
+            return static_cast<size_type>(qx::strlen(pszStr));
+        else
+            return static_cast<size_type>(std::strlen(pszStr));
     }
     static value_type to_lower(value_type ch) noexcept
     {
@@ -144,9 +147,12 @@ struct char_traits<wchar_t> : public common_char_traits<wchar_t>
     {
         return std::iswspace(static_cast<wint_t>(ch)) != 0;
     }
-    static size_type length(const_pointer pszStr) noexcept
+    static constexpr size_type length(const_pointer pszStr) noexcept
     {
-        return static_cast<size_type>(std::wcslen(pszStr));
+        if (std::is_constant_evaluated())
+            return static_cast<size_type>(qx::strlen(pszStr));
+        else
+            return static_cast<size_type>(std::wcslen(pszStr));
     }
     static value_type to_lower(value_type ch) noexcept
     {
