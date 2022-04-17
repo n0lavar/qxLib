@@ -58,7 +58,7 @@ inline string to_string(
     @tparam  value_type - string value type
     @param   stringView - string view to convert
     @retval             - null terminated string with stringView convent
-                          valid until the next function call
+                          valid until the next to_char_pointer call
 **/
 template<typename value_type>
 inline const value_type* to_char_pointer(

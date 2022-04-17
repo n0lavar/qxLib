@@ -8,7 +8,7 @@
 **/
 #include <test_config.h>
 
-//V_EXCLUDE_PATH *test_string.cpp
+//V_EXCLUDE_PATH *test_rect.cpp
 
 #if QX_TEST_RECT
 
