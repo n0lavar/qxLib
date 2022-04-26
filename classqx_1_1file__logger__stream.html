@@ -98,9 +98,9 @@ Public Member Functions</h2></td></tr>
 virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1file__logger__stream.html#a1f03b48e0e9bc9c368882928d4e3c6b7">~file_logger_stream</a> ()</td></tr>
 <tr class="memdesc:a1f03b48e0e9bc9c368882928d4e3c6b7"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classqx_1_1file__logger__stream.html" title="Logger stream for file output.">file_logger_stream</a> object destructor <br /></td></tr>
 <tr class="separator:a1f03b48e0e9bc9c368882928d4e3c6b7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2b80b065561a8aea41aace00584167ab"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1file__logger__stream.html#a2b80b065561a8aea41aace00584167ab">process_output</a> (std::string_view svMessage, const <a class="el" href="structqx_1_1log__unit.html">log_unit</a> &amp;logUnit) override</td></tr>
-<tr class="memdesc:a2b80b065561a8aea41aace00584167ab"><td class="mdescLeft">&#160;</td><td class="mdescRight">Output to file.  <a href="classqx_1_1file__logger__stream.html#a2b80b065561a8aea41aace00584167ab">More...</a><br /></td></tr>
-<tr class="separator:a2b80b065561a8aea41aace00584167ab"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abc7bdfcc653daeb34b56a6e7dcf08919"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1file__logger__stream.html#abc7bdfcc653daeb34b56a6e7dcf08919">process_output</a> (std::string_view svMessage, const <a class="el" href="structqx_1_1log__unit.html">log_unit</a> &amp;logUnit, <a class="el" href="base__logger__stream_8h.html#aeeb3d388b3fe9ff99ce7abcb70484d38">log_level</a> eLogLevel) override</td></tr>
+<tr class="memdesc:abc7bdfcc653daeb34b56a6e7dcf08919"><td class="mdescLeft">&#160;</td><td class="mdescRight">Output to file.  <a href="classqx_1_1file__logger__stream.html#abc7bdfcc653daeb34b56a6e7dcf08919">More...</a><br /></td></tr>
+<tr class="separator:abc7bdfcc653daeb34b56a6e7dcf08919"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a497fbdca4903780920ec2d1905d8ea8f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1file__logger__stream.html#a497fbdca4903780920ec2d1905d8ea8f">set_logs_folder</a> (std::string_view svFolder) noexcept</td></tr>
 <tr class="memdesc:a497fbdca4903780920ec2d1905d8ea8f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set logs folder.  <a href="classqx_1_1file__logger__stream.html#a497fbdca4903780920ec2d1905d8ea8f">More...</a><br /></td></tr>
 <tr class="separator:a497fbdca4903780920ec2d1905d8ea8f"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -154,8 +154,8 @@ static constexpr const char *&#160;</td><td class="memItemRight" valign="bottom"
 
 <p class="definition">Definition at line <a class="el" href="file__logger__stream_8h_source.html#l00036">36</a> of file <a class="el" href="file__logger__stream_8h_source.html">file_logger_stream.h</a>.</p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
-<a id="a2b80b065561a8aea41aace00584167ab"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2b80b065561a8aea41aace00584167ab">&#9670;&nbsp;</a></span>process_output()</h2>
+<a id="abc7bdfcc653daeb34b56a6e7dcf08919"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abc7bdfcc653daeb34b56a6e7dcf08919">&#9670;&nbsp;</a></span>process_output()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -173,7 +173,13 @@ static constexpr const char *&#160;</td><td class="memItemRight" valign="bottom"
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">const <a class="el" href="structqx_1_1log__unit.html">log_unit</a> &amp;&#160;</td>
-          <td class="paramname"><em>logUnit</em>&#160;</td>
+          <td class="paramname"><em>logUnit</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="base__logger__stream_8h.html#aeeb3d388b3fe9ff99ce7abcb70484d38">log_level</a>&#160;</td>
+          <td class="paramname"><em>eLogLevel</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -193,11 +199,12 @@ static constexpr const char *&#160;</td><td class="memItemRight" valign="bottom"
   <table class="params">
     <tr><td class="paramname">svMessage</td><td>- message string </td></tr>
     <tr><td class="paramname">logUnit</td><td>- log unit info </td></tr>
+    <tr><td class="paramname">eLogLevel</td><td>- this message log level </td></tr>
   </table>
   </dd>
 </dl>
 
-<p>Implements <a class="el" href="classqx_1_1base__logger__stream.html#afbbd57bcf16d23020e76dfa9762b6c5f">qx::base_logger_stream</a>.</p>
+<p>Implements <a class="el" href="classqx_1_1base__logger__stream.html#a298dbfc27af4d96ad9d6d099ca747177">qx::base_logger_stream</a>.</p>
 
 <p class="definition">Definition at line <a class="el" href="file__logger__stream_8inl_source.html#l00036">36</a> of file <a class="el" href="file__logger__stream_8inl_source.html">file_logger_stream.inl</a>.</p>
 
@@ -253,7 +260,7 @@ static constexpr const char *&#160;</td><td class="memItemRight" valign="bottom"
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="file__logger__stream_8inl_source.html#l00087">87</a> of file <a class="el" href="file__logger__stream_8inl_source.html">file_logger_stream.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="file__logger__stream_8inl_source.html#l00088">88</a> of file <a class="el" href="file__logger__stream_8inl_source.html">file_logger_stream.inl</a>.</p>
 
 </div>
 </div>
@@ -289,7 +296,7 @@ static constexpr const char *&#160;</td><td class="memItemRight" valign="bottom"
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="file__logger__stream_8inl_source.html#l00079">79</a> of file <a class="el" href="file__logger__stream_8inl_source.html">file_logger_stream.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="file__logger__stream_8inl_source.html#l00080">80</a> of file <a class="el" href="file__logger__stream_8inl_source.html">file_logger_stream.inl</a>.</p>
 
 </div>
 </div>
