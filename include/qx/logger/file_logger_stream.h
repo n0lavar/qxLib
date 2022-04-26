@@ -62,11 +62,13 @@ public:
     /**
         @brief Output to file
         @param svMessage - message string 
-        @param logUnit   - log unit info 
+        @param logUnit   - log unit info
+        @param eLogLevel - this message log level
     **/
     virtual void process_output(
         std::string_view svMessage,
-        const log_unit&  logUnit) override;
+        const log_unit&  logUnit,
+        log_level        eLogLevel) override;
 
     /**
         @brief Set logs folder

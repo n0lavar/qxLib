@@ -59,13 +59,26 @@ class cout_logger_stream : public base_logger_stream
 
 public:
     /**
+        @brief cout_logger_stream object constructor
+        @param bUseColors        - use color when output is not info
+        @param bDisableStdioSync - don't synchronize to the standard C streams after each input/output operation
+        @param bUntieCin         - untie cin from cout
+    **/
+    cout_logger_stream(
+        bool bUseColors        = true,
+        bool bDisableStdioSync = true,
+        bool bUntieCin         = true);
+
+    /**
         @brief Output to std::cout
         @param svMessage - message string
         @param logUnit   - log unit info
+        @param eLogLevel - this message log level
     **/
     virtual void process_output(
         std::string_view svMessage,
-        const log_unit&  logUnit) override;
+        const log_unit&  logUnit,
+        log_level        eLogLevel) override;
 
     /**
         @brief Set whether cout output should be colored
@@ -74,7 +87,7 @@ public:
     void set_using_colors(bool bUsingColors) noexcept;
 
 private:
-    bool m_bUsingColors = false;
+    bool m_bUsingColors = true;
 };
 
 } // namespace qx

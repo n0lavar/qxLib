@@ -27,7 +27,7 @@ inline void base_logger_stream::output(
 {
     if (const auto optLogUnit = get_unit_info(pszTag, pszFile, pszFunction))
     {
-        if (eLogLevel >= optLogUnit->pUnitInfo->eUnitLevel)
+        if (eLogLevel >= optLogUnit->pUnitInfo->eMinLogLevel)
         {
             m_sBufferMessage.clear();
 
@@ -53,7 +53,7 @@ inline void base_logger_stream::output(
             va_end(argsCopy);
 
             if (!m_sBufferMessage.empty())
-                process_output(m_sBufferMessage, *optLogUnit);
+                process_output(m_sBufferMessage, *optLogUnit, eLogLevel);
         }
     }
 }

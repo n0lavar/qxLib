@@ -45,7 +45,7 @@ struct log_unit_info
         va_list     args                 // additional args for format
         )>;
 
-    log_level   eUnitLevel = log_level::info;
+    log_level   eMinLogLevel = log_level::info;
     format_func formatFunc;
 };
 
@@ -88,10 +88,12 @@ public:
         @brief Output message to the stream
         @param svMessage - message string
         @param logUnit   - log unit info
+        @param eLogLevel - this message log level
     **/
     virtual void process_output(
         std::string_view svMessage,
-        const log_unit&  logUnit) = 0;
+        const log_unit&  logUnit,
+        log_level        eLogLevel) = 0;
 
     /**
         @brief Output to stream

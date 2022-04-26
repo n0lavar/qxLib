@@ -35,7 +35,8 @@ inline file_logger_stream::~file_logger_stream()
 
 inline void file_logger_stream::process_output(
     std::string_view svMessage,
-    const log_unit&  logUnit)
+    const log_unit&  logUnit,
+    log_level        eLogLevel)
 {
     std::string_view        svFileName;
     log_file_policy         eLogFilePolicy = log_file_policy::append;
