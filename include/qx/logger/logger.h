@@ -15,33 +15,33 @@
 #include <memory>
 
 /**
-    @def   QX_TRACE_FROM
-    @brief Trace common info from instance
+    @def   QX_LOG_FROM
+    @brief Log common info from instance
     @param loggerInstance - logger instance 
     @param format         - format string
     @param ...            - additional args for formatting
 **/
-#define QX_TRACE_FROM(loggerInstance, format, ...) \
-    loggerInstance.output(                         \
-        qx::log_level::info,                       \
-        format,                                    \
-        nullptr,                                   \
-        nullptr,                                   \
-        QX_SHORT_FILE,                             \
-        __FUNCTION__,                              \
-        __LINE__,                                  \
+#define QX_LOG_FROM(loggerInstance, format, ...) \
+    loggerInstance.output(                       \
+        qx::log_level::info,                     \
+        format,                                  \
+        nullptr,                                 \
+        nullptr,                                 \
+        QX_SHORT_FILE,                           \
+        __FUNCTION__,                            \
+        __LINE__,                                \
         ##__VA_ARGS__)
 
 /**
-    @def   QX_TRACE_ERROR_FROM
-    @brief Trace error from instance
-    @param loggerInstance - logger instance
+    @def   QX_LOG_WARNING_FROM
+    @brief Log warnings from instance
+    @param loggerInstance - logger instance 
     @param format         - format string
     @param ...            - additional args for formatting
 **/
-#define QX_TRACE_ERROR_FROM(loggerInstance, format, ...) \
+#define QX_LOG_WARNING_FROM(loggerInstance, format, ...) \
     loggerInstance.output(                               \
-        qx::log_level::errors,                           \
+        qx::log_level::warnings,                         \
         format,                                          \
         nullptr,                                         \
         nullptr,                                         \
@@ -51,57 +51,87 @@
         ##__VA_ARGS__)
 
 /**
-    @def   QX_TRACE_ASSERT_FROM
-    @brief Trace assert from instance
+    @def   QX_LOG_ERROR_FROM
+    @brief Log error from instance
+    @param loggerInstance - logger instance
+    @param format         - format string
+    @param ...            - additional args for formatting
+**/
+#define QX_LOG_ERROR_FROM(loggerInstance, format, ...) \
+    loggerInstance.output(                             \
+        qx::log_level::errors,                         \
+        format,                                        \
+        nullptr,                                       \
+        nullptr,                                       \
+        QX_SHORT_FILE,                                 \
+        __FUNCTION__,                                  \
+        __LINE__,                                      \
+        ##__VA_ARGS__)
+
+/**
+    @def   QX_LOG_ASSERT_FROM
+    @brief Log assert from instance
     @param loggerInstance - logger instance
     @param expr           - assert expression
     @param format         - format string
     @param ...            - additional args for formatting
 **/
-#define QX_TRACE_ASSERT_FROM(loggerInstance, expr, format, ...) \
-    loggerInstance.output(                                      \
-        qx::log_level::asserts,                                 \
-        format,                                                 \
-        #expr,                                                  \
-        nullptr,                                                \
-        QX_SHORT_FILE,                                          \
-        __FUNCTION__,                                           \
-        __LINE__,                                               \
+#define QX_LOG_ASSERT_FROM(loggerInstance, expr, format, ...) \
+    loggerInstance.output(                                    \
+        qx::log_level::asserts,                               \
+        format,                                               \
+        #expr,                                                \
+        nullptr,                                              \
+        QX_SHORT_FILE,                                        \
+        __FUNCTION__,                                         \
+        __LINE__,                                             \
         ##__VA_ARGS__)
 
 
 // redefine these macros in your own header with renaming only or using your instance of logger
 
 /**
-    @def   QX_TRACE
-    @brief Trace common info
+    @def   QX_LOG
+    @brief Log common info
     @param format - format string
     @param ...    - additional args for formatting
 **/
-#define QX_TRACE(format, ...) \
-    QX_TRACE_FROM(qx::logger_singleton::get_instance(), format, ##__VA_ARGS__)
+#define QX_LOG(format, ...) \
+    QX_LOG_FROM(qx::logger_singleton::get_instance(), format, ##__VA_ARGS__)
 
 /**
-    @def   QX_TRACE_ERROR
-    @brief Trace error
+    @def   QX_LOG_WARNING
+    @brief Log warning
     @param format - format string
     @param ...    - additional args for formatting
 **/
-#define QX_TRACE_ERROR(format, ...)           \
-    QX_TRACE_ERROR_FROM(                      \
+#define QX_LOG_WARNING(format, ...)           \
+    QX_LOG_WARNING_FROM(                      \
         qx::logger_singleton::get_instance(), \
         format,                               \
         ##__VA_ARGS__)
 
 /**
-    @def   QX_TRACE_ASSERT
-    @brief Trace assertion
+    @def   QX_LOG_ERROR
+    @brief Log error
+    @param format - format string
+    @param ...    - additional args for formatting
+**/
+#define QX_LOG_ERROR(format, ...)             \
+    QX_LOG_ERROR_FROM(                        \
+        qx::logger_singleton::get_instance(), \
+        format,                               \
+        ##__VA_ARGS__)
+
+/**
+    @def   QX_LOG_ASSERT
+    @brief Log assertion
     @param expr   - assert expression
     @param format - format string
     @param ...    - additional args for formatting
 **/
-#define QX_TRACE_ASSERT(expr, format, ...)    \
-    QX_TRACE_ASSERT_FROM(                     \
+#define QX_LOG_ASSERT(expr, format, ...)      \
+    QX_LOG_ASSERT_FROM(                       \
         qx::logger_singleton::get_instance(), \
         expr,                                 \
         format,                               \

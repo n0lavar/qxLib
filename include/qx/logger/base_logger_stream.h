@@ -20,10 +20,11 @@ namespace qx
 
 enum class log_level
 {
-    info,    //!< asserts + errors + info
-    errors,  //!< asserts + errors
-    asserts, //!< asserts
-    none,    //!< disable
+    info,     //!< asserts + errors + warnings + info
+    warnings, //!< asserts + errors + warnings
+    errors,   //!< asserts + errors
+    asserts,  //!< asserts
+    none,     //!< disable
 };
 
 /**

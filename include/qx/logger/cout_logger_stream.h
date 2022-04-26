@@ -27,6 +27,7 @@ namespace qx
 **/
 class cout_logger_stream : public base_logger_stream
 {
+public:
     /**
         @struct cout_logger_stream::auto_terminal_color
         @date   19.08.2021

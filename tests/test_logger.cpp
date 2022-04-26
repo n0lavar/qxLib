@@ -220,11 +220,12 @@ protected:
             std::regex  regex;
             qx::string  sFile;
 
-            constexpr const char* pszInfo   = "   ";
-            constexpr const char* pszError  = "\\[E\\]";
-            constexpr const char* pszAssert = "\\[A\\]";
-            constexpr const char* pszDate   = "\\[\\d{2}-\\d{2}-\\d{4}_";
-            constexpr const char* pszTime   = "\\d{2}-\\d{2}-\\d{2}\\]";
+            constexpr const char* pszInfo    = "   ";
+            constexpr const char* pszWarning = "\\[W\\]";
+            constexpr const char* pszError   = "\\[E\\]";
+            constexpr const char* pszAssert  = "\\[A\\]";
+            constexpr const char* pszDate    = "\\[\\d{2}-\\d{2}-\\d{4}_";
+            constexpr const char* pszTime    = "\\d{2}-\\d{2}-\\d{2}\\]";
 
             auto CheckRegex =
                 [&regex,
@@ -303,6 +304,13 @@ protected:
             CheckStringCommon(pszInfo, " 1.000000 4");
             CheckStringCommon(pszInfo, " 1.000000 5");
 
+            CheckStringCommon(pszWarning, " 1.000000");
+            CheckStringCommon(pszWarning, " 1.000000 1");
+            CheckStringCommon(pszWarning, " 1.000000 2");
+            CheckStringCommon(pszWarning, " 1.000000 3");
+            CheckStringCommon(pszWarning, " 1.000000 4");
+            CheckStringCommon(pszWarning, " 1.000000 5");
+
             CheckStringCommon(pszError, " 1.000000 1");
             CheckStringCommon(pszError, " 1.000000 2");
             CheckStringCommon(pszError, " 1.000000 3");
@@ -375,6 +383,17 @@ TYPED_TEST_SUITE(TestLogger, Implementations);
         __LINE__,                     \
         ##__VA_ARGS__)
 
+#define TRACE_WARNING(traceFile, format, ...) \
+    myLogger.output(                          \
+        qx::log_level::warnings,              \
+        format,                               \
+        nullptr,                              \
+        nullptr,                              \
+        traceFile,                            \
+        __FUNCTION__,                         \
+        __LINE__,                             \
+        ##__VA_ARGS__)
+
 #define TRACE_TAG(traceFile, tag, format, ...) \
     myLogger.output(                           \
         qx::log_level::info,                   \
@@ -417,6 +436,13 @@ TYPED_TEST_SUITE(TestLogger, Implementations);
     TRACE(traceFile, "%f %d", 1.f, 3);                           \
     TRACE(traceFile, "%f %d", 1.f, 4);                           \
     TRACE(traceFile, "%f %d", 1.f, 5);                           \
+                                                                 \
+    TRACE_WARNING(traceFile, "%f", 1.f);                         \
+    TRACE_WARNING(traceFile, "%f %d", 1.f, 1);                   \
+    TRACE_WARNING(traceFile, "%f %d", 1.f, 2);                   \
+    TRACE_WARNING(traceFile, "%f %d", 1.f, 3);                   \
+    TRACE_WARNING(traceFile, "%f %d", 1.f, 4);                   \
+    TRACE_WARNING(traceFile, "%f %d", 1.f, 5);                   \
                                                                  \
     TRACE_ERROR(traceFile, "%f %d", 1.f, 1);                     \
     TRACE_ERROR(traceFile, "%f %d", 1.f, 2);                     \

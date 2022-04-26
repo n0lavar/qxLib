@@ -118,6 +118,10 @@ inline void base_logger_stream::format_line(
         sFormat = "   [" + sFormat + "][%s::%s(%d)] ";
         break;
 
+    case log_level::warnings:
+        sFormat = "[W][" + sFormat + "][%s::%s(%d)] ";
+        break;
+
     case log_level::errors:
         sFormat = "[E][" + sFormat + "][%s::%s(%d)] ";
         break;

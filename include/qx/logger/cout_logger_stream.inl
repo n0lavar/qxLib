@@ -37,20 +37,24 @@ inline void cout_logger_stream::process_output(
     const log_unit&  logUnit,
     log_level        eLogLevel)
 {
-    std::string_view svColor;
-    switch (eLogLevel)
+    if (m_bUsingColors)
     {
-    case log_level::errors:
-        svColor = auto_terminal_color::yellow;
-        break;
+        std::string_view svColor;
+        switch (eLogLevel)
+        {
+        case log_level::warnings:
+            svColor = auto_terminal_color::yellow_bold;
+            break;
 
-    case log_level::asserts:
-        svColor = auto_terminal_color::red;
-        break;
-    }
+        case log_level::errors:
+            svColor = auto_terminal_color::yellow;
+            break;
 
-    if (!svColor.empty() && m_bUsingColors)
-    {
+        case log_level::asserts:
+            svColor = auto_terminal_color::red;
+            break;
+        }
+
         auto_terminal_color atc(svColor);
         std::cout << svMessage;
     }
