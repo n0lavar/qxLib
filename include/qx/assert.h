@@ -71,7 +71,7 @@
 #define QX_ASSERT_MSG(statement, msg, ...)                    \
     [&]()                                                     \
     {                                                         \
-        if (!(statement))                                     \
+        if (!(statement)) [[unlikely]]                        \
         {                                                     \
             QX_PROCESS_ASSERT(statement, msg, ##__VA_ARGS__); \
             QX_DEBUG_BREAK;                                   \
@@ -112,8 +112,8 @@
     @param statement - statement to check
     @param ...       - return value if statement is false
 **/
-#define QX_ASSERT_RETURN(statement, ...) \
-    if (!QX_ASSERT(statement))           \
+#define QX_ASSERT_RETURN(statement, ...)    \
+    if (!QX_ASSERT(statement)) [[unlikely]] \
         return __VA_ARGS__;
 
 #else
@@ -126,7 +126,7 @@
 #define QX_ASSERT(statement) QX_ASSERT_MSG(statement, "")
 #define QX_ASSERT_NO_ENTRY   QX_ASSERT(0)
 #define QX_ASSERT_RETURN(statement, ...) \
-    if (!(statement))                    \
+    if (!(statement)) [[unlikely]]       \
         return __VA_ARGS__;
 
 #endif
