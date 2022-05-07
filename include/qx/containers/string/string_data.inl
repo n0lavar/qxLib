@@ -47,20 +47,24 @@ bool string_data<Traits>::resize(
         || size() == 0                             // string is empty
         || nSymbolsToAllocate > capacity())        // need to increase size
     {
-        buffer    buff;
-        bool      bSmallAtStart = is_small();
-        size_type nNewSize      = nSymbolsToAllocate * sizeof(value_type);
+        const bool      bSmallAtStart = is_small();
+        const size_type nNewSize      = nSymbolsToAllocate * sizeof(value_type);
+
+        buffer buff;
 
         if (nSymbolsToAllocate <= m_Buffer.size())
         {
-            if (!bSmallAtStart)
+            if (!bSmallAtStart
+                && (Traits::shrink_to_fit_when_small()
+                    || eType == string_resize_type::shrink_to_fit))
             {
                 // free allocated memory and move string to buffer
                 std::memmove(buff.data(), m_pData, nNewSize);
                 free();
                 m_Buffer = buff;
-                m_nSize  = nSymbolsToAllocate - 1;
             }
+
+            m_nSize = nSymbolsToAllocate - 1;
         }
         else
         {

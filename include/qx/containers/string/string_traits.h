@@ -44,6 +44,10 @@ struct common_char_traits
     {
         return murmur_32_hash(pszStr, nSeed, nLen);
     }
+    static constexpr bool shrink_to_fit_when_small() noexcept
+    {
+        return false;
+    }
 };
 
 template<typename value_type>
