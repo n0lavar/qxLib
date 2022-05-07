@@ -290,18 +290,18 @@ struct StaticAssertBetween
                                                                         \
     TypeName##Internal _eInternal = static_cast<TypeName##Internal>(0); \
                                                                         \
-    TypeName& operator=(const TypeName##Internal& eInternal)            \
+    TypeName& operator=(const TypeName##Internal& eInternal) noexcept   \
     {                                                                   \
         _eInternal = eInternal;                                         \
         return *this;                                                   \
     }                                                                   \
                                                                         \
-    bool operator==(const TypeName##Internal& eInternal) const          \
+    bool operator==(const TypeName##Internal& eInternal) const noexcept \
     {                                                                   \
         return _eInternal == eInternal;                                 \
     }                                                                   \
                                                                         \
-    operator TypeName##Internal() const                                 \
+    operator TypeName##Internal() const noexcept                        \
     {                                                                   \
         return _eInternal;                                              \
     }

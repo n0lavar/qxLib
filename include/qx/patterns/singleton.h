@@ -21,10 +21,10 @@
 private:                                                               \
     T() constructor;                                                   \
     ~T() destructor;                                                   \
-    T(const T&)      = delete;                                         \
-    T(T&&)           = delete;                                         \
+    T(const T&)                  = delete;                             \
+    T(T&&)                       = delete;                             \
     const T& operator=(const T&) = delete;                             \
-    const T& operator=(T&&) = delete;                                  \
+    const T& operator=(T&&)      = delete;                             \
                                                                        \
 public:                                                                \
     static T& get_instance()                                           \
