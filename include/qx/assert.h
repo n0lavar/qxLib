@@ -116,6 +116,22 @@
     if (!QX_ASSERT(statement)) [[unlikely]] \
         return __VA_ARGS__;
 
+/**
+    @brief Check statement and continue loop if false
+    @param statement - statement to check
+**/
+#define QX_ASSERT_CONTINUE(statement)       \
+    if (!QX_ASSERT(statement)) [[unlikely]] \
+        continue;
+
+/**
+    @brief Check statement and break loop if false
+    @param statement - statement to check
+**/
+#define QX_ASSERT_BREAK(statement)          \
+    if (!QX_ASSERT(statement)) [[unlikely]] \
+        break;
+
 #else
 
 #define QX_ASSERT_MSG(statement, msg, ...)   \
@@ -128,5 +144,11 @@
 #define QX_ASSERT_RETURN(statement, ...) \
     if (!(statement)) [[unlikely]]       \
         return __VA_ARGS__;
+#define QX_ASSERT_CONTINUE(statement) \
+    if (!(statement)) [[unlikely]]    \
+        continue;
+#define QX_ASSERT_BREAK(statement) \
+    if (!(statement)) [[unlikely]] \
+        break;
 
 #endif
