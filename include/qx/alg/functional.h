@@ -39,22 +39,26 @@ inline double linear_interpolation(
     double            x,
     string*           pError = nullptr)
 {
-    if (pError && !epsilon_equal(p1.x, p0.x, DBL_EPSILON))
-        *pError = "two x are equal, result is nan";
+    if (pError && epsilon_equal(p1.x, p0.x))
+    {
+        *pError = "Two x are equal, result is nan";
+        return p0.y;
+    }
 
     return p0.y + (p1.y - p0.y) * (x - p0.x) / (p1.x - p0.x);
 }
 
 /**
-    @brief  Bilinear interpolation algorithm. Points are clockwise or counterclock-wise
-    @param  p0     - point 0 (x, y - coordinates, z - f(x, y)) 
-    @param  p1     - point 1 (x, y - coordinates, z - f(x, y)) 
-    @param  p2     - point 2 (x, y - coordinates, z - f(x, y)) 
-    @param  p3     - point 3 (x, y - coordinates, z - f(x, y)) 
-    @param  p      - point (x, y - coordinates).
-                     It can be out of points square, in this case algorithm called extrapolation
-    @param  pError - error string. if not nullptr and error occured, this string will be filled
-    @retval        - ~f(p.x, p.y) 
+    @brief   Bilinear interpolation algorithm
+    @details po.z is returned on any error
+    @param   p0     - point 0 (x, y - coordinates, z - f(x, y)) 
+    @param   p1     - point 1 (x, y - coordinates, z - f(x, y)) 
+    @param   p2     - point 2 (x, y - coordinates, z - f(x, y)) 
+    @param   p3     - point 3 (x, y - coordinates, z - f(x, y))
+    @param   p      - point (x, y - coordinates).
+                      It can be out of points square, in this case algorithm called extrapolation
+    @param   pError - error string. if not nullptr and error occurred, this string will be filled
+    @retval         - ~f(p.x, p.y) 
 **/
 inline double bilinear_interpolation(
     const glm::dvec3& p0,
@@ -64,24 +68,28 @@ inline double bilinear_interpolation(
     const glm::dvec2& p,
     string*           pError = nullptr)
 {
-    if (pError
-        && (epsilon_equal(p0.y, p1.y) || epsilon_equal(p2.y, p3.y)
-            || epsilon_equal(p0.x, p3.x) || epsilon_equal(p1.x, p2.x)))
-    {
-        *pError = "points must be as square";
-    }
-
     const glm::dvec2 temp0 {
         p0.y,
-        linear_interpolation({ p0.x, p0.z }, { p1.x, p1.z }, p.x)
+        linear_interpolation({ p0.x, p0.z }, { p1.x, p1.z }, p.x, pError)
     };
+
+    if (pError && !pError->empty())
+        return p0.z;
 
     const glm::dvec2 temp1 {
         p2.y,
-        linear_interpolation({ p2.x, p2.z }, { p3.x, p3.z }, p.x)
+        linear_interpolation({ p2.x, p2.z }, { p3.x, p3.z }, p.x, pError)
     };
 
-    return linear_interpolation(temp0, temp1, p.y);
+    if (pError && !pError->empty())
+        return p0.z;
+
+    const double fRet = linear_interpolation(temp0, temp1, p.y, pError);
+
+    if (pError && !pError->empty())
+        return p0.z;
+
+    return fRet;
 }
 
 /**
