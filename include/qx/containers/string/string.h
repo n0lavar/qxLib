@@ -1880,6 +1880,12 @@ public:
     **/
     operator string_view() const noexcept;
 
+    /**
+        @brief  operator bool
+        @retval  - true if string is not empty
+    **/
+    explicit operator bool() const noexcept;
+
 private:
     /**
         @brief   Resize string

@@ -628,21 +628,27 @@ inline void basic_string<Traits>::erase(
     iterator itFirst,
     iterator itLast) noexcept
 {
-    if (itFirst < itLast)
+    if (const typename iterator::difference_type nCharsToErase =
+            itLast - itFirst;
+        nCharsToErase > 0)
     {
-        size_type nStartSize = size();
-        size_type nSymbolsToCopy =
+        const size_type nStartSize = size();
+        const size_type nSymbolsToCopy =
             itLast != end() ? Traits::length(itLast.operator->()) : 0;
 
         if (nSymbolsToCopy > 0)
         {
-            std::memcpy(
+            std::memmove(
                 itFirst.operator->(),
                 itLast. operator->(),
                 nSymbolsToCopy * sizeof(value_type));
         }
 
-        _resize(static_cast<size_type>(nStartSize - (itLast - itFirst)));
+        if (static_cast<typename iterator::difference_type>(nStartSize)
+            >= nCharsToErase)
+        {
+            _resize(nStartSize - nCharsToErase);
+        }
     }
 }
 
@@ -2197,6 +2203,12 @@ inline basic_string<Traits>::operator std::basic_string_view<
     return std::basic_string_view<value_type, std::char_traits<value_type>>(
         data(),
         size());
+}
+
+template<class Traits>
+inline basic_string<Traits>::operator bool() const noexcept
+{
+    return !empty();
 }
 
 template<class Traits>

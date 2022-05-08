@@ -291,12 +291,14 @@ TYPED_TEST(TestQxString, size)
 {
     StringTypeTn str0;
     EXPECT_TRUE(str0.empty());
+    EXPECT_FALSE(str0);
     EXPECT_EQ(str0.size(), 0);
     EXPECT_EQ(str0.capacity(), TypeParam::small_string_size());
 
     typename TypeParam::size_type nCapacity = str0.reserve(20);
     EXPECT_EQ(str0.size(), 0);
     EXPECT_TRUE(str0.empty());
+    EXPECT_FALSE(str0);
     EXPECT_TRUE(nCapacity > 0);
     EXPECT_EQ(nCapacity % TypeParam::align(), 0);
 
@@ -304,10 +306,14 @@ TYPED_TEST(TestQxString, size)
     EXPECT_TRUE(str0.size() > 0);
     EXPECT_TRUE(str0.capacity() > 0);
     EXPECT_TRUE(str0.size() <= str0.capacity());
+    EXPECT_FALSE(str0.empty());
+    EXPECT_TRUE(str0);
 
     str0 = STR("some long long long long long long long long long sentence");
     EXPECT_EQ(str0.size(), 58);
     EXPECT_TRUE(str0.capacity() >= nCapacity);
+    EXPECT_FALSE(str0.empty());
+    EXPECT_TRUE(str0);
     nCapacity = str0.capacity();
     EXPECT_TRUE(str0.size() <= nCapacity);
     EXPECT_EQ(nCapacity % TypeParam::align(), 0);
@@ -319,6 +325,8 @@ TYPED_TEST(TestQxString, size)
     EXPECT_EQ(str0.size(), 58);
     EXPECT_EQ(str0.size() + 1, str0.capacity());
     EXPECT_TRUE(str0.capacity() < nNewCapacity);
+    EXPECT_FALSE(str0.empty());
+    EXPECT_TRUE(str0);
 }
 
 TYPED_TEST(TestQxString, erase)
