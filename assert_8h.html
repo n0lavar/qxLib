@@ -102,6 +102,10 @@ Macros</h2></td></tr>
 <tr class="separator:a698451aa0963d4d75eeafdb86fd848d3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a595d81253fd06d723ffe543ffc898236"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><b>QX_ASSERT_RETURN</b>(statement, ...)</td></tr>
 <tr class="separator:a595d81253fd06d723ffe543ffc898236"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a915ebde63be92cc58e5dc28fbec7373d"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><b>QX_ASSERT_CONTINUE</b>(statement)</td></tr>
+<tr class="separator:a915ebde63be92cc58e5dc28fbec7373d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae22a68de6e317d07004165f384349194"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><b>QX_ASSERT_BREAK</b>(statement)</td></tr>
+<tr class="separator:ae22a68de6e317d07004165f384349194"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Assert macros. </p>
@@ -111,6 +115,50 @@ Macros</h2></td></tr>
 
 <p class="definition">Definition in file <a class="el" href="assert_8h_source.html">assert.h</a>.</p>
 </div><h2 class="groupheader">Macro Definition Documentation</h2>
+<a id="ae22a68de6e317d07004165f384349194"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae22a68de6e317d07004165f384349194">&#9670;&nbsp;</a></span>QX_ASSERT_BREAK</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define QX_ASSERT_BREAK</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">statement</td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Value:</b><div class="fragment"><div class="line">    <span class="keywordflow">if</span> (!(statement)) [[unlikely]] \</div>
+<div class="line">        break;</div>
+</div><!-- fragment -->
+<p class="definition">Definition at line <a class="el" href="assert_8h_source.html#l00150">150</a> of file <a class="el" href="assert_8h_source.html">assert.h</a>.</p>
+
+</div>
+</div>
+<a id="a915ebde63be92cc58e5dc28fbec7373d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a915ebde63be92cc58e5dc28fbec7373d">&#9670;&nbsp;</a></span>QX_ASSERT_CONTINUE</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define QX_ASSERT_CONTINUE</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">statement</td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Value:</b><div class="fragment"><div class="line">    <span class="keywordflow">if</span> (!(statement)) [[unlikely]]    \</div>
+<div class="line">        continue;</div>
+</div><!-- fragment -->
+<p class="definition">Definition at line <a class="el" href="assert_8h_source.html#l00147">147</a> of file <a class="el" href="assert_8h_source.html">assert.h</a>.</p>
+
+</div>
+</div>
 <a id="a0db0022f4e471845272bd7881fc94444"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a0db0022f4e471845272bd7881fc94444">&#9670;&nbsp;</a></span>QX_ASSERT_MSG</h2>
 
@@ -147,7 +195,7 @@ Macros</h2></td></tr>
 <div class="line">        return <span class="keyword">static_cast&lt;</span><span class="keywordtype">bool</span><span class="keyword">&gt;</span>(statement); \</div>
 <div class="line">    }()</div>
 </div><!-- fragment -->
-<p class="definition">Definition at line <a class="el" href="assert_8h_source.html#l00121">121</a> of file <a class="el" href="assert_8h_source.html">assert.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="assert_8h_source.html#l00137">137</a> of file <a class="el" href="assert_8h_source.html">assert.h</a>.</p>
 
 </div>
 </div>
@@ -179,7 +227,7 @@ Macros</h2></td></tr>
 <b>Value:</b><div class="fragment"><div class="line">    <span class="keywordflow">if</span> (!(statement)) [[unlikely]]       \</div>
 <div class="line">        return __VA_ARGS__;</div>
 </div><!-- fragment -->
-<p class="definition">Definition at line <a class="el" href="assert_8h_source.html#l00128">128</a> of file <a class="el" href="assert_8h_source.html">assert.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="assert_8h_source.html#l00144">144</a> of file <a class="el" href="assert_8h_source.html">assert.h</a>.</p>
 
 </div>
 </div>

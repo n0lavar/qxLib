@@ -96,7 +96,7 @@ Functions</h2></td></tr>
 <tr class="memdesc:a16c674ab0e5dea993be5cb390c0bf0ed"><td class="mdescLeft">&#160;</td><td class="mdescRight">Linear interpolation algorithm.  <a href="functional_8h.html#a16c674ab0e5dea993be5cb390c0bf0ed">More...</a><br /></td></tr>
 <tr class="separator:a16c674ab0e5dea993be5cb390c0bf0ed"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2ca06ffb491649f2612dca14c67c1e16"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="functional_8h.html#a2ca06ffb491649f2612dca14c67c1e16">qx::bilinear_interpolation</a> (const glm::dvec3 &amp;p0, const glm::dvec3 &amp;p1, const glm::dvec3 &amp;p2, const glm::dvec3 &amp;p3, const glm::dvec2 &amp;p, string *pError=nullptr)</td></tr>
-<tr class="memdesc:a2ca06ffb491649f2612dca14c67c1e16"><td class="mdescLeft">&#160;</td><td class="mdescRight">Bilinear interpolation algorithm. Points are clockwise or counterclock-wise.  <a href="functional_8h.html#a2ca06ffb491649f2612dca14c67c1e16">More...</a><br /></td></tr>
+<tr class="memdesc:a2ca06ffb491649f2612dca14c67c1e16"><td class="mdescLeft">&#160;</td><td class="mdescRight">Bilinear interpolation algorithm.  <a href="functional_8h.html#a2ca06ffb491649f2612dca14c67c1e16">More...</a><br /></td></tr>
 <tr class="separator:a2ca06ffb491649f2612dca14c67c1e16"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a371e0394e1d71e822945cb9f1c472816"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="functional_8h.html#a371e0394e1d71e822945cb9f1c472816">qx::integrate_rectangle_rule</a> (const function2d &amp;func, double x0, double x1, size_t nIntervalsPer1=10)</td></tr>
 <tr class="memdesc:a371e0394e1d71e822945cb9f1c472816"><td class="mdescLeft">&#160;</td><td class="mdescRight">Integrate using rectangle rule.  <a href="functional_8h.html#a371e0394e1d71e822945cb9f1c472816">More...</a><br /></td></tr>
@@ -180,15 +180,15 @@ Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Bilinear interpolation algorithm. Points are clockwise or counterclock-wise. </p>
-<dl class="params"><dt>Parameters</dt><dd>
+<p>Bilinear interpolation algorithm. </p>
+<p>po.z is returned on any error </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">p0</td><td>- point 0 (x, y - coordinates, z - f(x, y)) </td></tr>
     <tr><td class="paramname">p1</td><td>- point 1 (x, y - coordinates, z - f(x, y)) </td></tr>
     <tr><td class="paramname">p2</td><td>- point 2 (x, y - coordinates, z - f(x, y)) </td></tr>
     <tr><td class="paramname">p3</td><td>- point 3 (x, y - coordinates, z - f(x, y)) </td></tr>
     <tr><td class="paramname">p</td><td>- point (x, y - coordinates). It can be out of points square, in this case algorithm called extrapolation </td></tr>
-    <tr><td class="paramname">pError</td><td>- error string. if not nullptr and error occured, this string will be filled </td></tr>
+    <tr><td class="paramname">pError</td><td>- error string. if not nullptr and error occurred, this string will be filled </td></tr>
   </table>
   </dd>
 </dl>
@@ -199,7 +199,7 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="functional_8h_source.html#l00059">59</a> of file <a class="el" href="functional_8h_source.html">functional.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="functional_8h_source.html#l00063">63</a> of file <a class="el" href="functional_8h_source.html">functional.h</a>.</p>
 
 </div>
 </div>
@@ -273,7 +273,7 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="functional_8h_source.html#l00267">267</a> of file <a class="el" href="functional_8h_source.html">functional.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="functional_8h_source.html#l00275">275</a> of file <a class="el" href="functional_8h_source.html">functional.h</a>.</p>
 
 </div>
 </div>
@@ -354,7 +354,7 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="functional_8h_source.html#l00157">157</a> of file <a class="el" href="functional_8h_source.html">functional.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="functional_8h_source.html#l00165">165</a> of file <a class="el" href="functional_8h_source.html">functional.h</a>.</p>
 
 </div>
 </div>
@@ -421,7 +421,7 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="functional_8h_source.html#l00228">228</a> of file <a class="el" href="functional_8h_source.html">functional.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="functional_8h_source.html#l00236">236</a> of file <a class="el" href="functional_8h_source.html">functional.h</a>.</p>
 
 </div>
 </div>
@@ -488,7 +488,7 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="functional_8h_source.html#l00095">95</a> of file <a class="el" href="functional_8h_source.html">functional.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="functional_8h_source.html#l00103">103</a> of file <a class="el" href="functional_8h_source.html">functional.h</a>.</p>
 
 </div>
 </div>
@@ -555,7 +555,7 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="functional_8h_source.html#l00125">125</a> of file <a class="el" href="functional_8h_source.html">functional.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="functional_8h_source.html#l00133">133</a> of file <a class="el" href="functional_8h_source.html">functional.h</a>.</p>
 
 </div>
 </div>

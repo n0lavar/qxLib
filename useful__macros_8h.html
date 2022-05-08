@@ -298,18 +298,18 @@ constexpr const char *&#160;</td><td class="memItemRight" valign="bottom"><b>qx:
 <div class="line">                                                                        \</div>
 <div class="line">    TypeName##Internal _eInternal = <span class="keyword">static_cast&lt;</span>TypeName##Internal<span class="keyword">&gt;</span>(0); \</div>
 <div class="line">                                                                        \</div>
-<div class="line">    TypeName&amp; operator=(<span class="keyword">const</span> TypeName##Internal&amp; eInternal)            \</div>
+<div class="line">    TypeName&amp; operator=(<span class="keyword">const</span> TypeName##Internal&amp; eInternal) noexcept   \</div>
 <div class="line">    {                                                                   \</div>
 <div class="line">        _eInternal = eInternal;                                         \</div>
 <div class="line">        return *<span class="keyword">this</span>;                                                   \</div>
 <div class="line">    }                                                                   \</div>
 <div class="line">                                                                        \</div>
-<div class="line">    bool operator==(<span class="keyword">const</span> TypeName##Internal&amp; eInternal) <span class="keyword">const</span>          \</div>
+<div class="line">    bool operator==(<span class="keyword">const</span> TypeName##Internal&amp; eInternal) <span class="keyword">const</span> noexcept \</div>
 <div class="line">    {                                                                   \</div>
 <div class="line">        return _eInternal == eInternal;                                 \</div>
 <div class="line">    }                                                                   \</div>
 <div class="line">                                                                        \</div>
-<div class="line">    operator TypeName##Internal() const                                 \</div>
+<div class="line">    operator TypeName##Internal() const noexcept                        \</div>
 <div class="line">    {                                                                   \</div>
 <div class="line">        return _eInternal;                                              \</div>
 <div class="line">    }</div>
