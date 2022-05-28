@@ -30,37 +30,38 @@ namespace qx
     @date    12.11.2021
 
 **/
-class rect
+template<class VectorType>
+class basic_rect
 {
 public:
-    using vector_type = glm::vec2;
-    using value_type  = vector_type::value_type;
+    using vector_type = VectorType;
+    using value_type  = typename vector_type::value_type;
 
 public:
-    QX_COPYMOVABLE(rect);
+    QX_COPYMOVABLE(basic_rect);
 
     /**
-        @brief rect object constructor
+        @brief basic_rect object constructor
     **/
-    constexpr rect() noexcept = default;
+    constexpr basic_rect() noexcept = default;
 
     /**
-        @brief rect object constructor
+        @brief basic_rect object constructor
         @param size - rect size
         @param pos  - upper left corner pos
     **/
-    constexpr explicit rect(
+    constexpr explicit basic_rect(
         vector_type size,
         vector_type pos = vector_type(value_type(0.f))) noexcept;
 
     /**
-        @brief rect object constructor
+        @brief basic_rect object constructor
         @param width  - rect width
         @param height - rect height
         @param xPos   - rect upper left corner x pos
         @param yPos   - rect upper left corner y pos
     **/
-    constexpr rect(
+    constexpr basic_rect(
         value_type width,
         value_type height,
         value_type xPos = value_type(0.f),
@@ -192,7 +193,7 @@ public:
         @retval           - true if other rect is inside this rect
     **/
     constexpr bool contains(
-        const rect&        other,
+        const basic_rect&  other,
         const vector_type& originPos = vector_type(0.f)) const noexcept;
 
     /**
@@ -200,28 +201,29 @@ public:
         @param  other - other rect
         @retval       - true if this rect is overlaps other rect
     **/
-    constexpr bool overlaps(const rect& other) const noexcept;
+    constexpr bool overlaps(const basic_rect& other) const noexcept;
 
     /**
         @brief  Get rect representing overlap this rect by other rect
         @param  other - other rect
         @retval       - rect representing overlap this rect by other rect or nullopt
     **/
-    constexpr std::optional<rect> overlap(const rect& other) const noexcept;
+    constexpr std::optional<basic_rect> overlap(
+        const basic_rect& other) const noexcept;
 
     /**
         @brief  operator==
         @param  other - other rect
         @retval       - true, if objects are equal
     **/
-    constexpr bool operator==(const rect& other) const noexcept;
+    constexpr bool operator==(const basic_rect& other) const noexcept;
 
     /**
         @brief  operator!=
         @param  other - other rect
         @retval       - true, if objects are not equal
     **/
-    constexpr bool operator!=(const rect& other) const noexcept;
+    constexpr bool operator!=(const basic_rect& other) const noexcept;
 
 private:
     /**
@@ -234,6 +236,9 @@ private:
     vector_type m_Size = vector_type(0.f);
     vector_type m_Pos  = vector_type(0.f);
 };
+
+using rect  = basic_rect<glm::vec2>;
+using drect = basic_rect<glm::dvec2>;
 
 } // namespace qx
 

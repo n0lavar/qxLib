@@ -10,12 +10,17 @@
 namespace qx
 {
 
-constexpr rect::rect(vector_type size, vector_type pos) noexcept : m_Pos(pos)
+template<class VectorType>
+constexpr basic_rect<VectorType>::basic_rect(
+    vector_type size,
+    vector_type pos) noexcept
+    : m_Pos(pos)
 {
     check_and_assign_size(size);
 }
 
-constexpr rect::rect(
+template<class VectorType>
+constexpr basic_rect<VectorType>::basic_rect(
     value_type width,
     value_type height,
     value_type xPos,
@@ -25,97 +30,130 @@ constexpr rect::rect(
     check_and_assign_size({ width, height });
 }
 
-constexpr void rect::expand(const vector_type& dSize) noexcept
+template<class VectorType>
+constexpr void basic_rect<VectorType>::expand(const vector_type& dSize) noexcept
 {
     check_and_assign_size(m_Size + dSize);
 }
 
-constexpr void rect::contract(const vector_type& dSize) noexcept
+template<class VectorType>
+constexpr void basic_rect<VectorType>::contract(
+    const vector_type& dSize) noexcept
 {
     check_and_assign_size(m_Size - dSize);
 }
 
-constexpr void rect::set_size(const vector_type& size) noexcept
+template<class VectorType>
+constexpr void basic_rect<VectorType>::set_size(
+    const vector_type& size) noexcept
 {
     check_and_assign_size(size);
 }
 
-constexpr void rect::set_pos(const vector_type& pos) noexcept
+template<class VectorType>
+constexpr void basic_rect<VectorType>::set_pos(const vector_type& pos) noexcept
 {
     m_Pos = pos;
 }
 
-constexpr void rect::shift(const vector_type& dPos) noexcept
+template<class VectorType>
+constexpr void basic_rect<VectorType>::shift(const vector_type& dPos) noexcept
 {
     m_Pos += dPos;
 }
 
-constexpr const rect::vector_type& rect::pos() const noexcept
+template<class VectorType>
+constexpr const typename basic_rect<VectorType>::vector_type& basic_rect<
+    VectorType>::pos() const noexcept
 {
     return m_Pos;
 }
 
-constexpr const rect::vector_type& rect::min() const noexcept
+template<class VectorType>
+constexpr const typename basic_rect<VectorType>::vector_type& basic_rect<
+    VectorType>::min() const noexcept
 {
     return pos();
 }
 
-constexpr rect::vector_type rect::max() const noexcept
+template<class VectorType>
+constexpr typename basic_rect<VectorType>::vector_type basic_rect<
+    VectorType>::max() const noexcept
 {
     return m_Pos + m_Size;
 }
 
-constexpr const rect::vector_type& rect::size() const noexcept
+template<class VectorType>
+constexpr const typename basic_rect<VectorType>::vector_type& basic_rect<
+    VectorType>::size() const noexcept
 {
     return m_Size;
 }
 
-constexpr rect::value_type rect::width() const noexcept
+template<class VectorType>
+constexpr typename basic_rect<VectorType>::value_type basic_rect<
+    VectorType>::width() const noexcept
 {
     return m_Size.x;
 }
 
-constexpr rect::value_type rect::height() const noexcept
+template<class VectorType>
+constexpr typename basic_rect<VectorType>::value_type basic_rect<
+    VectorType>::height() const noexcept
 {
     return m_Size.y;
 }
 
-constexpr rect::value_type rect::left() const noexcept
+template<class VectorType>
+constexpr typename basic_rect<VectorType>::value_type basic_rect<
+    VectorType>::left() const noexcept
 {
     return m_Pos.x;
 }
 
-constexpr rect::value_type rect::right() const noexcept
+template<class VectorType>
+constexpr typename basic_rect<VectorType>::value_type basic_rect<
+    VectorType>::right() const noexcept
 {
     return m_Pos.x + m_Size.x;
 }
 
-constexpr rect::value_type rect::top() const noexcept
+template<class VectorType>
+constexpr typename basic_rect<VectorType>::value_type basic_rect<
+    VectorType>::top() const noexcept
 {
     return m_Pos.y;
 }
 
-constexpr rect::value_type rect::bottom() const noexcept
+template<class VectorType>
+constexpr typename basic_rect<VectorType>::value_type basic_rect<
+    VectorType>::bottom() const noexcept
 {
     return m_Pos.y + m_Size.y;
 }
 
-constexpr rect::vector_type rect::center() const noexcept
+template<class VectorType>
+constexpr typename basic_rect<VectorType>::vector_type basic_rect<
+    VectorType>::center() const noexcept
 {
-    return m_Pos + m_Size / 2.f;
+    return m_Pos + m_Size / static_cast<value_type>(2.0);
 }
 
-constexpr bool rect::empty() const noexcept
+template<class VectorType>
+constexpr bool basic_rect<VectorType>::empty() const noexcept
 {
-    return epsilon_equal(area(), 0.f);
+    return epsilon_equal(area(), static_cast<value_type>(0.0));
 }
 
-constexpr rect::value_type rect::area() const noexcept
+template<class VectorType>
+constexpr typename basic_rect<VectorType>::value_type basic_rect<
+    VectorType>::area() const noexcept
 {
     return m_Size.x * m_Size.y;
 }
 
-constexpr bool rect::contains(
+template<class VectorType>
+constexpr bool basic_rect<VectorType>::contains(
     const vector_type& pos,
     const vector_type& originPos) const noexcept
 {
@@ -126,13 +164,17 @@ constexpr bool rect::contains(
            && epsilon_greater_equal(m_Pos.y + m_Size.y, posRelativeToOrigin.y);
 }
 
-constexpr bool rect::contains(const rect& other, const vector_type& originPos)
-    const noexcept
+template<class VectorType>
+constexpr bool basic_rect<VectorType>::contains(
+    const basic_rect&  other,
+    const vector_type& originPos) const noexcept
 {
     return contains(other.min(), originPos) && contains(other.max(), originPos);
 }
 
-constexpr bool rect::overlaps(const rect& other) const noexcept
+template<class VectorType>
+constexpr bool basic_rect<VectorType>::overlaps(
+    const basic_rect& other) const noexcept
 {
     return epsilon_less_equal(left(), other.right())
            && epsilon_greater_equal(right(), other.left())
@@ -140,7 +182,9 @@ constexpr bool rect::overlaps(const rect& other) const noexcept
            && epsilon_greater_equal(bottom(), other.top());
 }
 
-constexpr std::optional<rect> rect::overlap(const rect& other) const noexcept
+template<class VectorType>
+constexpr std::optional<basic_rect<VectorType>> basic_rect<VectorType>::overlap(
+    const basic_rect& other) const noexcept
 {
     const value_type x1 = std::max(left(), other.left());
     const value_type x2 =
@@ -149,10 +193,10 @@ constexpr std::optional<rect> rect::overlap(const rect& other) const noexcept
     const value_type y2 =
         std::min(top() + height(), other.top() + other.height());
 
-    if (epsilon_greater_equal(x2 - x1, 0.f)
-        && epsilon_greater_equal(y2 - y1, 0.f))
+    if (epsilon_greater_equal(x2 - x1, static_cast<value_type>(0.0))
+        && epsilon_greater_equal(y2 - y1, static_cast<value_type>(0.0)))
     {
-        return rect({ x2 - x1, y2 - y1 }, { x1, y1 });
+        return basic_rect({ x2 - x1, y2 - y1 }, { x1, y1 });
     }
     else
     {
@@ -160,7 +204,9 @@ constexpr std::optional<rect> rect::overlap(const rect& other) const noexcept
     }
 }
 
-constexpr bool rect::operator==(const rect& other) const noexcept
+template<class VectorType>
+constexpr bool basic_rect<VectorType>::operator==(
+    const basic_rect& other) const noexcept
 {
     return epsilon_equal(left(), other.left())
            && epsilon_equal(top(), other.top())
@@ -168,15 +214,19 @@ constexpr bool rect::operator==(const rect& other) const noexcept
            && epsilon_equal(height(), other.height());
 }
 
-constexpr bool rect::operator!=(const rect& other) const noexcept
+template<class VectorType>
+constexpr bool basic_rect<VectorType>::operator!=(
+    const basic_rect& other) const noexcept
 {
     return !(*this == other);
 }
 
-constexpr void rect::check_and_assign_size(const vector_type& size) noexcept
+template<class VectorType>
+constexpr void basic_rect<VectorType>::check_and_assign_size(
+    const vector_type& size) noexcept
 {
-    m_Size.x = std::max(size.x, 0.f);
-    m_Size.y = std::max(size.y, 0.f);
+    m_Size.x = std::max(size.x, static_cast<value_type>(0.0));
+    m_Size.y = std::max(size.y, static_cast<value_type>(0.0));
 }
 
 } // namespace qx

@@ -14,168 +14,179 @@
 
 #include <qx/render/rect.h>
 
-void CheckRect(
-    const qx::rect& rect,
-    float           fWidth,
-    float           fHeight,
-    float           fX1,
-    float           fX2)
+template<typename VectorType>
+class TestRect : public ::testing::Test
 {
-    EXPECT_FLOAT_EQ(rect.width(), fWidth);
-    EXPECT_FLOAT_EQ(rect.height(), fHeight);
-    EXPECT_FLOAT_EQ(rect.left(), fX1);
-    EXPECT_FLOAT_EQ(rect.top(), fX2);
-    EXPECT_FLOAT_EQ(rect.right(), fX1 + fWidth);
-    EXPECT_FLOAT_EQ(rect.bottom(), fX2 + fHeight);
-    EXPECT_EQ(rect.pos(), glm::vec2(fX1, fX2));
-    EXPECT_EQ(rect.size(), glm::vec2(fWidth, fHeight));
-    EXPECT_FLOAT_EQ(rect.area(), fWidth * fHeight);
-    EXPECT_EQ(rect.min(), glm::vec2(fX1, fX2));
-    EXPECT_EQ(rect.max(), glm::vec2(fX1 + fWidth, fX2 + fHeight));
+};
+
+using Implementations = ::testing::Types<glm::vec2, glm::dvec2>;
+
+TYPED_TEST_SUITE(TestRect, Implementations);
+
+template<class Rect>
+void CheckRect(
+    const Rect&               rect,
+    typename Rect::value_type fWidth,
+    typename Rect::value_type fHeight,
+    typename Rect::value_type fX1,
+    typename Rect::value_type fX2)
+{
+    using VectorType = typename Rect::vector_type;
+
+    EXPECT_DOUBLE_EQ(rect.width(), fWidth);
+    EXPECT_DOUBLE_EQ(rect.height(), fHeight);
+    EXPECT_DOUBLE_EQ(rect.left(), fX1);
+    EXPECT_DOUBLE_EQ(rect.top(), fX2);
+    EXPECT_DOUBLE_EQ(rect.right(), fX1 + fWidth);
+    EXPECT_DOUBLE_EQ(rect.bottom(), fX2 + fHeight);
+    EXPECT_EQ(rect.pos(), VectorType(fX1, fX2));
+    EXPECT_EQ(rect.size(), VectorType(fWidth, fHeight));
+    EXPECT_DOUBLE_EQ(rect.area(), fWidth * fHeight);
+    EXPECT_EQ(rect.min(), VectorType(fX1, fX2));
+    EXPECT_EQ(rect.max(), VectorType(fX1 + fWidth, fX2 + fHeight));
     EXPECT_EQ(
         rect.center(),
-        glm::vec2(fX1, fX2) + glm::vec2(fWidth, fHeight) / 2.f);
-    EXPECT_EQ(!rect.empty(), fWidth * fHeight > 0.f);
+        VectorType(fX1, fX2)
+            + VectorType(fWidth, fHeight)
+                  / static_cast<typename Rect::value_type>(2.0));
+    EXPECT_EQ(!rect.empty(), fWidth * fHeight > 0.0);
 }
 
-TEST(rect, construct)
+#define Rect       qx::basic_rect<TypeParam>
+#define VectorType TypeParam
+
+TYPED_TEST(TestRect, construct)
 {
     {
-        qx::rect rect;
-        CheckRect(rect, 0.f, 0.f, 0.f, 0.f);
+        Rect rect;
+        CheckRect(rect, 0.0, 0.0, 0.0, 0.0);
     }
 
     {
-        qx::rect rect(glm::vec2 { 1.f, 1.f });
-        CheckRect(rect, 1.f, 1.f, 0.f, 0.f);
+        Rect rect(VectorType { 1.0, 1.0 });
+        CheckRect(rect, 1.0, 1.0, 0.0, 0.0);
     }
 
     {
-        qx::rect rect(glm::vec2 { 1.f, 1.f }, glm::vec2 { 2.f, 2.f });
-        CheckRect(rect, 1.f, 1.f, 2.f, 2.f);
+        Rect rect(VectorType { 1.0, 1.0 }, VectorType { 2.0, 2.0 });
+        CheckRect(rect, 1.0, 1.0, 2.0, 2.0);
     }
 
     {
-        qx::rect rect(1.f, 1.f);
-        CheckRect(rect, 1.f, 1.f, 0.f, 0.f);
+        Rect rect(1.0, 1.0);
+        CheckRect(rect, 1.0, 1.0, 0.0, 0.0);
     }
 
     {
-        qx::rect rect(1.f, 1.f, 2.f, 2.f);
-        CheckRect(rect, 1.f, 1.f, 2.f, 2.f);
+        Rect rect(1.0, 1.0, 2.0, 2.0);
+        CheckRect(rect, 1.0, 1.0, 2.0, 2.0);
     }
 }
 
-TEST(rect, resize)
+TYPED_TEST(TestRect, resize)
 {
-    qx::rect rect(1.f, 1.f);
-    CheckRect(rect, 1.f, 1.f, 0.f, 0.f);
+    Rect rect(1.0, 1.0);
+    CheckRect(rect, 1.0, 1.0, 0.0, 0.0);
 
-    rect.expand({ 2.f, 3.f });
-    CheckRect(rect, 3.f, 4.f, 0.f, 0.f);
+    rect.expand({ 2.0, 3.0 });
+    CheckRect(rect, 3.0, 4.0, 0.0, 0.0);
 
-    rect.contract({ 1.f, 3.f });
-    CheckRect(rect, 2.f, 1.f, 0.f, 0.f);
+    rect.contract({ 1.0, 3.0 });
+    CheckRect(rect, 2.0, 1.0, 0.0, 0.0);
 
-    rect.set_size({ 5.f, 5.f });
-    CheckRect(rect, 5.f, 5.f, 0.f, 0.f);
+    rect.set_size({ 5.0, 5.0 });
+    CheckRect(rect, 5.0, 5.0, 0.0, 0.0);
 
-    rect.set_size({ -1.f, -1.f });
-    CheckRect(rect, 0.f, 0.f, 0.f, 0.f);
+    rect.set_size({ -1.0, -1.0 });
+    CheckRect(rect, 0.0, 0.0, 0.0, 0.0);
 
-    rect.set_size({ 1.f, 1.f });
-    rect.expand({ -2.f, 3.f });
-    CheckRect(rect, 0.f, 4.f, 0.f, 0.f);
+    rect.set_size({ 1.0, 1.0 });
+    rect.expand({ -2.0, 3.0 });
+    CheckRect(rect, 0.0, 4.0, 0.0, 0.0);
 
-    rect.set_size({ 1.f, 3.f });
-    rect.contract({ 2.f, 2.f });
-    CheckRect(rect, 0.f, 1.f, 0.f, 0.f);
+    rect.set_size({ 1.0, 3.0 });
+    rect.contract({ 2.0, 2.0 });
+    CheckRect(rect, 0.0, 1.0, 0.0, 0.0);
 }
 
-TEST(rect, replace)
+TYPED_TEST(TestRect, replace)
 {
-    qx::rect rect(1.f, 1.f);
-    CheckRect(rect, 1.f, 1.f, 0.f, 0.f);
+    Rect rect(1.0, 1.0);
+    CheckRect(rect, 1.0, 1.0, 0.0, 0.0);
 
-    rect.shift({ 1.f, 2.f });
-    CheckRect(rect, 1.f, 1.f, 1.f, 2.f);
+    rect.shift({ 1.0, 2.0 });
+    CheckRect(rect, 1.0, 1.0, 1.0, 2.0);
 
-    rect.shift({ -2.f, -1.f });
-    CheckRect(rect, 1.f, 1.f, -1.f, 1.f);
+    rect.shift({ -2.0, -1.0 });
+    CheckRect(rect, 1.0, 1.0, -1.0, 1.0);
 
-    rect.set_pos({ 5.f, 5.f });
-    CheckRect(rect, 1.f, 1.f, 5.f, 5.f);
+    rect.set_pos({ 5.0, 5.0 });
+    CheckRect(rect, 1.0, 1.0, 5.0, 5.0);
 }
 
-TEST(rect, contains)
+TYPED_TEST(TestRect, contains)
 {
-    qx::rect rect(1.f, 2.f, 1.f, 2.f);
+    Rect rect(1.0, 2.0, 1.0, 2.0);
 
-    EXPECT_TRUE(rect.contains(glm::vec2({ 1.f, 2.f })));
-    EXPECT_TRUE(rect.contains(glm::vec2({ 1.f, 4.f })));
-    EXPECT_TRUE(rect.contains(glm::vec2({ 2.f, 3.f })));
-    EXPECT_TRUE(rect.contains(glm::vec2({ 2.f, 2.f })));
-    EXPECT_FALSE(rect.contains(glm::vec2({ 0.f, 0.f })));
-    EXPECT_FALSE(rect.contains(glm::vec2({ 10.f, 0.f })));
-    EXPECT_FALSE(rect.contains(glm::vec2({ 0.f, 10.f })));
-    EXPECT_FALSE(rect.contains(glm::vec2({ 10.f, 10.f })));
+    EXPECT_TRUE(rect.contains(VectorType({ 1.0, 2.0 })));
+    EXPECT_TRUE(rect.contains(VectorType({ 1.0, 4.0 })));
+    EXPECT_TRUE(rect.contains(VectorType({ 2.0, 3.0 })));
+    EXPECT_TRUE(rect.contains(VectorType({ 2.0, 2.0 })));
+    EXPECT_FALSE(rect.contains(VectorType({ 0.0, 0.0 })));
+    EXPECT_FALSE(rect.contains(VectorType({ 10.0, 0.0 })));
+    EXPECT_FALSE(rect.contains(VectorType({ 0.0, 10.0 })));
+    EXPECT_FALSE(rect.contains(VectorType({ 10.0, 10.0 })));
 
     EXPECT_TRUE(rect.contains(rect));
-    EXPECT_TRUE(rect.contains(qx::rect(1.f, 1.f, 1.f, 2.f)));
-    EXPECT_TRUE(rect.contains(qx::rect(1.f, 1.f, 1.f, 3.f)));
+    EXPECT_TRUE(rect.contains(Rect(1.0, 1.0, 1.0, 2.0)));
+    EXPECT_TRUE(rect.contains(Rect(1.0, 1.0, 1.0, 3.0)));
 
-    EXPECT_FALSE(rect.contains(qx::rect(1.f, 2.f)));
-    EXPECT_FALSE(rect.contains(qx::rect(1.f, 10.f)));
-    EXPECT_FALSE(rect.contains(qx::rect(1.f, 1.f, 1.f, 4.f)));
-    EXPECT_FALSE(rect.contains(qx::rect(1.f, 1.f, 2.f, 1.f)));
+    EXPECT_FALSE(rect.contains(Rect(1.0, 2.0)));
+    EXPECT_FALSE(rect.contains(Rect(1.0, 10.0)));
+    EXPECT_FALSE(rect.contains(Rect(1.0, 1.0, 1.0, 4.0)));
+    EXPECT_FALSE(rect.contains(Rect(1.0, 1.0, 2.0, 1.0)));
 }
 
-TEST(rect, overlaps)
+TYPED_TEST(TestRect, overlaps)
 {
-    qx::rect rect(1.f, 2.f, 1.f, 2.f);
+    Rect rect(1.0, 2.0, 1.0, 2.0);
 
-    EXPECT_TRUE(rect.overlaps(qx::rect(1.f, 2.f)));
-    EXPECT_TRUE(rect.overlaps(qx::rect(1.f, 4.f)));
-    EXPECT_TRUE(rect.overlaps(qx::rect(2.f, 3.f)));
-    EXPECT_TRUE(rect.overlaps(qx::rect(2.f, 2.f)));
-    EXPECT_TRUE(rect.overlaps(qx::rect(10.f, 10.f)));
+    EXPECT_TRUE(rect.overlaps(Rect(1.0, 2.0)));
+    EXPECT_TRUE(rect.overlaps(Rect(1.0, 4.0)));
+    EXPECT_TRUE(rect.overlaps(Rect(2.0, 3.0)));
+    EXPECT_TRUE(rect.overlaps(Rect(2.0, 2.0)));
+    EXPECT_TRUE(rect.overlaps(Rect(10.0, 10.0)));
 
-    EXPECT_FALSE(rect.overlaps(qx::rect(0.f, 0.f)));
-    EXPECT_FALSE(rect.overlaps(qx::rect(10.f, 0.f)));
-    EXPECT_FALSE(rect.overlaps(qx::rect(0.f, 10.f)));
-    EXPECT_FALSE(rect.overlaps(qx::rect(1.f, 0.5f)));
-    EXPECT_FALSE(rect.overlaps(qx::rect(0.5f, 1.f)));
+    EXPECT_FALSE(rect.overlaps(Rect(0.0, 0.0)));
+    EXPECT_FALSE(rect.overlaps(Rect(10.0, 0.0)));
+    EXPECT_FALSE(rect.overlaps(Rect(0.0, 10.0)));
+    EXPECT_FALSE(rect.overlaps(Rect(1.0, 0.5f)));
+    EXPECT_FALSE(rect.overlaps(Rect(0.5f, 1.0)));
 }
 
-TEST(rect, overlap)
+TYPED_TEST(TestRect, overlap)
 {
-    qx::rect rect(1.f, 2.f, 1.f, 2.f);
+    Rect rect(1.0, 2.0, 1.0, 2.0);
 
-    EXPECT_EQ(rect.overlap(qx::rect()), std::nullopt);
-    EXPECT_EQ(rect.overlap(qx::rect(1.f, 1.f)), std::nullopt);
-    EXPECT_EQ(rect.overlap(qx::rect(1.f, 2.f, 3.f, 5.f)), std::nullopt);
+    EXPECT_EQ(rect.overlap(Rect()), std::nullopt);
+    EXPECT_EQ(rect.overlap(Rect(1.0, 1.0)), std::nullopt);
+    EXPECT_EQ(rect.overlap(Rect(1.0, 2.0, 3.0, 5.0)), std::nullopt);
 
-    EXPECT_EQ(rect.overlap(qx::rect(1.f, 2.f)), qx::rect(0.f, 0.f, 1.f, 2.f));
-    EXPECT_EQ(
-        rect.overlap(qx::rect(1.f, 2.f, 1.f, 2.f)),
-        qx::rect(1.f, 2.f, 1.f, 2.f));
-    EXPECT_EQ(
-        rect.overlap(qx::rect(2.f, 1.f, 0.f, 2.f)),
-        qx::rect(1.f, 1.f, 1.f, 2.f));
-    EXPECT_EQ(
-        rect.overlap(qx::rect(2.f, 1.f, 0.f, 2.f)),
-        qx::rect(1.f, 1.f, 1.f, 2.f));
+    EXPECT_EQ(rect.overlap(Rect(1.0, 2.0)), Rect(0.0, 0.0, 1.0, 2.0));
+    EXPECT_EQ(rect.overlap(Rect(1.0, 2.0, 1.0, 2.0)), Rect(1.0, 2.0, 1.0, 2.0));
+    EXPECT_EQ(rect.overlap(Rect(2.0, 1.0, 0.0, 2.0)), Rect(1.0, 1.0, 1.0, 2.0));
+    EXPECT_EQ(rect.overlap(Rect(2.0, 1.0, 0.0, 2.0)), Rect(1.0, 1.0, 1.0, 2.0));
 }
 
-TEST(rect, equal)
+TYPED_TEST(TestRect, equal)
 {
-    qx::rect rec0(1.f, 2.f, 1.f, 2.f);
-    qx::rect rec1(1.f, 2.f, 1.f, 3.f);
-    qx::rect rec2(1.f, 3.f, 1.f, 2.f);
+    Rect rec0(1.0, 2.0, 1.0, 2.0);
+    Rect rec1(1.0, 2.0, 1.0, 3.0);
+    Rect rec2(1.0, 3.0, 1.0, 2.0);
 
-    EXPECT_EQ(rec0, qx::rect(1.f, 2.f, 1.f, 2.f));
-    EXPECT_EQ(rec1, qx::rect(1.f, 2.f, 1.f, 3.f));
-    EXPECT_EQ(rec2, qx::rect(1.f, 3.f, 1.f, 2.f));
+    EXPECT_EQ(rec0, Rect(1.0, 2.0, 1.0, 2.0));
+    EXPECT_EQ(rec1, Rect(1.0, 2.0, 1.0, 3.0));
+    EXPECT_EQ(rec2, Rect(1.0, 3.0, 1.0, 2.0));
 
     EXPECT_NE(rec0, rec1);
     EXPECT_NE(rec0, rec2);
