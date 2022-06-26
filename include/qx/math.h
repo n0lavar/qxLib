@@ -81,6 +81,19 @@ constexpr bool epsilon_equal(
 }
 
 /**
+    @brief  Constexpr comparison with zero for a user defined epsilon values
+    @tparam T     - value type
+    @param  value - user value
+    @param  eps   - epsilon value
+    @retval       - true if |value| < eps
+**/
+template<typename T>
+constexpr bool epsilon_zero(T value, T eps = std::numeric_limits<T>::epsilon())
+{
+    return abs(value) < eps;
+}
+
+/**
     @brief  Constexpr comparison function for a user defined epsilon values
     @tparam T     - value type
     @param  left  - left value

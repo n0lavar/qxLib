@@ -16,7 +16,7 @@
 #include <qx/useful_funcs.h>
 #include <qx/useful_macros.h>
 
-//-------------------------------- qx::meta::abs -------------------------------
+// ---------------------------------- qx::abs ----------------------------------
 
 QX_STATIC_ASSERT_EQ(qx::abs(1), 1);
 QX_STATIC_ASSERT_EQ(qx::abs(2), 2);
@@ -27,9 +27,7 @@ QX_STATIC_ASSERT_EQ(qx::abs(-2), 2);
 QX_STATIC_ASSERT_EQ(qx::abs(-3), 3);
 QX_STATIC_ASSERT_EQ(qx::abs(-4), 4);
 
-
-
-//--------------------------- qx::meta::epsilon_equal --------------------------
+// ----------------------------- qx::epsilon_equal -----------------------------
 
 static_assert(qx::epsilon_equal(0.5, 0.41, 0.1));
 static_assert(qx::epsilon_equal(0.5, 0.45, 0.1));
@@ -37,7 +35,14 @@ static_assert(qx::epsilon_equal(0.5, 0.48, 0.1));
 static_assert(qx::epsilon_equal(0.5, 0.49, 0.1));
 static_assert(!qx::epsilon_equal(0.5, 0.39, 0.1));
 
-//------------------------ qx::meta::epsilon_less_equal ------------------------
+// ------------------------------ qx::epsilon_zero -----------------------------
+
+static_assert(qx::epsilon_zero(0.0));
+static_assert(qx::epsilon_zero(0.f));
+static_assert(!qx::epsilon_zero(0.1));
+static_assert(!qx::epsilon_zero(1.0));
+
+// --------------------------- qx::epsilon_less_equal --------------------------
 
 static_assert(qx::epsilon_less_equal(0.5, 0.41, 0.1));
 static_assert(qx::epsilon_less_equal(0.2, 0.45, 0.1));
@@ -45,7 +50,7 @@ static_assert(qx::epsilon_less_equal(0.0, 0.48, 0.1));
 static_assert(!qx::epsilon_less_equal(0.5, 0.2, 0.1));
 static_assert(!qx::epsilon_less_equal(0.5, 0.39, 0.1));
 
-//----------------------- qx::meta::epsilon_greater_equal ----------------------
+// ------------------------- qx::epsilon_greater_equal -------------------------
 
 static_assert(qx::epsilon_greater_equal(0.5, 0.41, 0.1));
 static_assert(qx::epsilon_greater_equal(0.5, 0.45, 0.1));
@@ -61,7 +66,7 @@ void TestRandom(T min, T max, size_t nIterations)
         ASSERT_TRUE(qx::between(min, qx::random(min, max), max));
 }
 
-TEST(random, random)
+TEST(math, random)
 {
     constexpr size_t NUM_TESTS = 100000;
 
@@ -73,5 +78,49 @@ TEST(random, random)
     TestRandom(0.0, 100.0, NUM_TESTS);
     TestRandom(-100.0, 100.0, NUM_TESTS);
 }
+
+// --------------------------------- qx::is_odd --------------------------------
+
+static_assert(qx::is_odd(-9));
+static_assert(!qx::is_odd(-8));
+static_assert(qx::is_odd(-7));
+static_assert(!qx::is_odd(-6));
+static_assert(qx::is_odd(-5));
+static_assert(!qx::is_odd(-4));
+static_assert(qx::is_odd(-3));
+static_assert(!qx::is_odd(-2));
+static_assert(qx::is_odd(-1));
+static_assert(!qx::is_odd(0));
+static_assert(qx::is_odd(1));
+static_assert(!qx::is_odd(2));
+static_assert(qx::is_odd(3));
+static_assert(!qx::is_odd(4));
+static_assert(qx::is_odd(5));
+static_assert(!qx::is_odd(6));
+static_assert(qx::is_odd(7));
+static_assert(!qx::is_odd(8));
+static_assert(qx::is_odd(9));
+
+// -------------------------------- qx::is_even --------------------------------
+
+static_assert(!qx::is_even(-9));
+static_assert(qx::is_even(-8));
+static_assert(!qx::is_even(-7));
+static_assert(qx::is_even(-6));
+static_assert(!qx::is_even(-5));
+static_assert(qx::is_even(-4));
+static_assert(!qx::is_even(-3));
+static_assert(qx::is_even(-2));
+static_assert(!qx::is_even(-1));
+static_assert(qx::is_even(0));
+static_assert(!qx::is_even(1));
+static_assert(qx::is_even(2));
+static_assert(!qx::is_even(3));
+static_assert(qx::is_even(4));
+static_assert(!qx::is_even(5));
+static_assert(qx::is_even(6));
+static_assert(!qx::is_even(7));
+static_assert(qx::is_even(8));
+static_assert(!qx::is_even(9));
 
 #endif
