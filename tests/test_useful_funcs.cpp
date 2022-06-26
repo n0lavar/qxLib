@@ -16,6 +16,9 @@
 #include <qx/useful_macros.h>
 
 #include <algorithm>
+#include <array>
+#include <list>
+#include <vector>
 
 //--------------------------------- qx::between --------------------------------
 
@@ -122,5 +125,41 @@ static_assert(std::all_of(
         return val == 1;
     }));
 static_assert(TEST_ARRAY_1.size() == 5);
+
+// ------------------------------ qx::join_arrays ------------------------------
+
+constexpr std::array first { 0, 1, 2, 3 };
+constexpr std::array second { 4, 5, 6, 7 };
+constexpr auto       result = qx::join_arrays(first, second);
+static_assert(result == std::array<int, 8> { 0, 1, 2, 3, 4, 5, 6, 7 });
+
+// ---------------------------- qx::create_container ---------------------------
+
+TEST(useful_funcs, create_container)
+{
+    constexpr std::array   array { 0, 1, 2, 3, 4 };
+    const std::vector<int> vector =
+        qx::create_container<std::vector<int>>(array);
+
+    EXPECT_EQ(vector.size(), array.size());
+    for (size_t i = 0; i < array.size(); ++i)
+        EXPECT_EQ(vector[i], array[i]);
+}
+
+// ------------------------------- qx::bytes_size ------------------------------
+
+TEST(useful_funcs, bytes_size)
+{
+    const std::array<int, 1000> array { 0 };
+    EXPECT_EQ(qx::bytes_size(array), 4000);
+
+    const std::vector<int> vector(2000);
+    EXPECT_EQ(qx::bytes_size(vector), 8000);
+
+    std::list<int> list;
+    for (size_t i = 0; i < 500; ++i)
+        list.push_back(0);
+    EXPECT_EQ(qx::bytes_size(list), 2000);
+}
 
 #endif

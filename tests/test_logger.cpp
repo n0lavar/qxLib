@@ -242,15 +242,10 @@ protected:
                     << "logs trace file: " << Traits::GetTraceFile();
             };
 
-            auto CheckStringCommon = [&sFormat,
-                                      &sFile,
-                                      &ifs,
-                                      &sLine,
-                                      &CheckRegex,
-                                      &pszDate,
-                                      &pszTime](
-                                         const char* pszStringStarting,
-                                         const char* pszStringEnding)
+            auto CheckStringCommon =
+                [&sFormat, &sFile, &ifs, &sLine, &CheckRegex
+
+            ](const char* pszStringStarting, const char* pszStringEnding)
             {
                 sFile.sprintf("\\[%s::", Traits::GetTraceFile());
                 constexpr const char* pszFunc = "(.*?)"; // compiler-dependent
@@ -273,13 +268,8 @@ protected:
                 CheckRegex(sFormat, sLine);
             };
 
-            auto CheckStringTag = [&sFormat,
-                                   &ifs,
-                                   &sLine,
-                                   &CheckRegex,
-                                   &pszInfo,
-                                   &pszDate,
-                                   &pszTime](const char* pszStringEnding)
+            auto CheckStringTag = [&sFormat, &ifs, &sLine, &CheckRegex](
+                                      const char* pszStringEnding)
             {
                 sFormat.sprintf(
                     "%s%s%s\\[%s\\]%s",

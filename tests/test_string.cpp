@@ -737,7 +737,7 @@ TYPED_TEST(TestQxString, remove)
         EXPECT_STREQ(str.data(), expected_str);
     };
 
-    auto check_remove_type = [&check_remove, STRING](auto type_var)
+    auto check_remove_type = [&check_remove](auto type_var)
     {
         using type       = decltype(type_var);
         StringTypeTn str = STRING;
@@ -806,7 +806,7 @@ TYPED_TEST(TestQxString, remove_all)
         EXPECT_STREQ(str.data(), expected_str);
     };
 
-    auto check_remove_all_type = [&check_remove_all, STRING](auto type_var)
+    auto check_remove_all_type = [&check_remove_all](auto type_var)
     {
         using type       = decltype(type_var);
         StringTypeTn str = STRING;

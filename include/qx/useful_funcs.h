@@ -20,6 +20,11 @@
 namespace qx
 {
 
+// trick to determine if an integer is between two integers (inclusive)
+// with only one comparison/branch
+// https://stackoverflow.com/a/17095534/8021662
+QX_DISABLE_MSVC_WARNINGS(4018 4388)
+
 /**
     @brief  Checks if value is between left and right
     @tparam T       - value type
@@ -33,11 +38,6 @@ namespace qx
 template<typename T, typename Compare = std::less_equal<>>
 constexpr bool between(T left, T value, T right, Compare compare)
 {
-    // trick to determine if an integer is between two integers (inclusive)
-    // with only one comparison/branch
-    // https://stackoverflow.com/a/17095534/8021662
-    QX_PUSH_SUPPRESS_MSVC_WARNINGS(4018 4388)
-
     if constexpr (std::is_enum_v<T>)
     {
         i64 l = static_cast<i64>(left);
@@ -61,9 +61,9 @@ constexpr bool between(T left, T value, T right, Compare compare)
     {
         return compare(left, value) && compare(value, right);
     }
-
-    QX_POP_SUPPRESS_WARNINGS
 }
+
+QX_RESTORE_MSVC_WARNINGS(4018 4388)
 
 /**
     @brief   Checks if value is between left and right
@@ -136,6 +136,25 @@ constexpr std::array<T, LeftLength + RightLength> join_arrays(
 }
 
 /**
+    @brief  Create a container by constructing each element from the corresponding
+            element of the original container
+    @tparam ContainerTo   - target container type, must support value_type and push_back
+    @tparam ContainerFrom - original container type, must support forward iteration
+    @param  from          - original container
+    @retval               - target container
+**/
+template<class ContainerTo, class ContainerFrom>
+ContainerTo create_container(const ContainerFrom& from)
+{
+    ContainerTo container;
+
+    for (const auto& item : from)
+        container.push_back(typename ContainerTo::value_type(item));
+
+    return container;
+}
+
+/**
     @brief  Get the size of memory allocated for container elements
     @tparam Container - container type
     @param  container - container const ref
@@ -144,7 +163,7 @@ constexpr std::array<T, LeftLength + RightLength> join_arrays(
 template<class Container>
 constexpr size_t bytes_size(const Container& container)
 {
-    return container.size() * sizeof(Container::value_type);
+    return container.size() * sizeof(typename Container::value_type);
 }
 
 } // namespace qx

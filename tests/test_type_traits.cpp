@@ -169,12 +169,14 @@ enum class ETest2
     b
 };
 
+struct S;
+
 static_assert(qx::enumeration<ETest1>);
 static_assert(qx::enumeration<ETest2>);
 static_assert(!qx::enumeration<int>);
 static_assert(!qx::enumeration<vec_int>);
 static_assert(!qx::enumeration<vec_float>);
 static_assert(!qx::enumeration<C<int>>);
-static_assert(!qx::enumeration<struct S>);
+static_assert(!qx::enumeration<S>);
 
 #endif
