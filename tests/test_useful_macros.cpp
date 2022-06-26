@@ -157,4 +157,32 @@ static_assert(ch == 'c');
 constexpr wchar_t wch = QX_CHAR_PREFIX(wchar_t, 'w');
 static_assert(wch == L'w');
 
+// ------------------------------- QX_ENUM_CLASS -------------------------------
+
+struct EQuadrant
+{
+    QX_ENUM_CLASS(EQuadrant, NorthEast, SouthEast, SouthWest, NorthWest);
+};
+
+
+TEST(useful_macros, enum_class)
+{
+    // default is zero
+    EQuadrant eQuadrant;
+
+    // can compare
+    EXPECT_EQ(eQuadrant, EQuadrant::NorthEast);
+
+    // can assign
+    eQuadrant = EQuadrant::NorthWest;
+    EXPECT_EQ(eQuadrant, EQuadrant::NorthWest);
+
+    // can be used as ::Internal
+    const auto lambda = [](EQuadrant _eQuadrant)
+    {
+        return _eQuadrant;
+    };
+    EXPECT_EQ(lambda(eQuadrant), eQuadrant);
+}
+
 #endif

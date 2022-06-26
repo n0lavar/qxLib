@@ -282,6 +282,7 @@ struct StaticAssertBetween
 
 /**
     @brief Macro for generating "enum class"-like class or struct with additional data/methods
+    @note  Default value is one corresponds to 0
     @param TypeName - class/struct name
     @param ...      - enum values
 **/
