@@ -43,6 +43,7 @@ function(set_target_options _target)
             /wd4710 # 'function' : function not inlined
             /wd4711 # 'function' selected for inline expansion. Inlining is performed at the compiler's discretion
             /wd4820 # 'bytes' bytes padding added after construct 'member_name'
+            /wd4868 # 'file(line_number)' compiler may not enforce left-to-right evaluation order in braced initializer list
             /wd5026 # 'type': move constructor was implicitly defined as deleted
             /wd5027 # 'type': move assignment operator was implicitly defined as deleted
             /wd5045 # Compiler will insert Spectre mitigation for memory load if /Qspectre switch specified
