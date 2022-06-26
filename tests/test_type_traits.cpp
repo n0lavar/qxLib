@@ -23,9 +23,8 @@
 #include <string>
 #include <unordered_map>
 #include <unordered_set>
+#include <variant>
 #include <vector>
-
-
 
 //-------------------------------- is_iterator -------------------------------
 
@@ -178,5 +177,52 @@ static_assert(!qx::enumeration<vec_int>);
 static_assert(!qx::enumeration<vec_float>);
 static_assert(!qx::enumeration<C<int>>);
 static_assert(!qx::enumeration<S>);
+
+TEST(type_traits, visit_overload)
+{
+    struct Fluid
+    {
+    };
+    struct LightItem
+    {
+    };
+    struct HeavyItem
+    {
+    };
+    struct FragileItem
+    {
+    };
+
+    int        result         = 0;
+    const auto visit_overload = qx::visit_overload { [&result](const Fluid&)
+                                                     {
+                                                         result= 1;
+                                                     },
+                                                     [&result](const LightItem&)
+                                                     {
+                                                         result= 2;
+                                                     },
+                                                     [&result](const auto&)
+                                                     {
+                                                         result= 3;
+                                                     } };
+
+    std::variant<Fluid, LightItem, HeavyItem, FragileItem> package =
+        HeavyItem();
+    std::visit(visit_overload, package);
+    EXPECT_EQ(result, 3);
+
+    package = Fluid();
+    std::visit(visit_overload, package);
+    EXPECT_EQ(result, 1);
+
+    package = LightItem();
+    std::visit(visit_overload, package);
+    EXPECT_EQ(result, 2);
+
+    package = FragileItem();
+    std::visit(visit_overload, package);
+    EXPECT_EQ(result, 3);
+}
 
 #endif

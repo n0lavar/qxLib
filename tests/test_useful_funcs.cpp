@@ -133,8 +133,6 @@ constexpr std::array second { 4, 5, 6, 7 };
 constexpr auto       result = qx::join_arrays(first, second);
 static_assert(result == std::array<int, 8> { 0, 1, 2, 3, 4, 5, 6, 7 });
 
-// ---------------------------- qx::create_container ---------------------------
-
 TEST(useful_funcs, create_container)
 {
     constexpr std::array   array { 0, 1, 2, 3, 4 };
@@ -145,8 +143,6 @@ TEST(useful_funcs, create_container)
     for (size_t i = 0; i < array.size(); ++i)
         EXPECT_EQ(vector[i], array[i]);
 }
-
-// ------------------------------- qx::bytes_size ------------------------------
 
 TEST(useful_funcs, bytes_size)
 {
