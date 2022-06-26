@@ -163,4 +163,7 @@ struct visit_overload : Ts...
     using Ts::operator()...;
 };
 
+template<class... Ts>
+visit_overload(Ts...) -> visit_overload<Ts...>;
+
 } // namespace qx
