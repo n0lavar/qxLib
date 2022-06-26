@@ -1,12 +1,6 @@
 var searchData=
 [
-  ['ibuffer_665',['IBuffer',['../classqx_1_1_i_buffer.html',1,'qx']]],
-  ['is_5frandom_5faccess_5fiterator_666',['is_random_access_iterator',['../structqx_1_1is__random__access__iterator.html',1,'qx']]],
-  ['is_5frandom_5faccess_5fiterator_3c_20t_2c_20typename_20std_3a_3aenable_5fif_5ft_3c_20is_5fiterator_3c_20t_20_3e_20_26_26std_3a_3aderived_5ffrom_3c_20typename_20t_3a_3aiterator_5fcategory_2c_20std_3a_3arandom_5faccess_5fiterator_5ftag_20_3e_20_3e_20_3e_667',['is_random_access_iterator&lt; T, typename std::enable_if_t&lt; is_iterator&lt; T &gt; &amp;&amp;std::derived_from&lt; typename T::iterator_category, std::random_access_iterator_tag &gt; &gt; &gt;',['../structqx_1_1is__random__access__iterator_3_01_t_00_01typename_01std_1_1enable__if__t_3_01is__itebb6b1aac5d4b872a764409b35e55889d.html',1,'qx']]],
-  ['is_5fspecialization_5fof_668',['is_specialization_of',['../structqx_1_1is__specialization__of.html',1,'qx']]],
-  ['is_5fspecialization_5fof_3c_20ref_3c_20args_2e_2e_2e_20_3e_2c_20ref_20_3e_669',['is_specialization_of&lt; Ref&lt; Args... &gt;, Ref &gt;',['../structqx_1_1is__specialization__of_3_01_ref_3_01_args_8_8_8_01_4_00_01_ref_01_4.html',1,'qx']]],
-  ['iterator_670',['iterator',['../classqx_1_1components_1_1iterator.html',1,'qx::components&lt; TBaseComponent &gt;::iterator&lt; TSuperClass &gt;'],['../classqx_1_1iterator.html',1,'qx::iterator&lt; C &gt;'],['../classqx_1_1list__se_1_1iterator.html',1,'qx::list_se&lt; T &gt;::iterator']]],
-  ['iterator_5fvalue_671',['iterator_value',['../structqx_1_1iterator__value.html',1,'qx']]],
-  ['iterator_5fvalue_3c_20t_2c_20typename_20std_3a_3aenable_5fif_5ft_3c_20is_5fiterator_3c_20t_20_3e_20_3e_20_3e_672',['iterator_value&lt; T, typename std::enable_if_t&lt; is_iterator&lt; T &gt; &gt; &gt;',['../structqx_1_1iterator__value_3_01_t_00_01typename_01std_1_1enable__if__t_3_01is__iterator_3_01_t_01_4_01_4_01_4.html',1,'qx']]],
-  ['iterator_5fvalue_3c_20t_2c_20typename_20std_3a_3aenable_5fif_5ft_3c_20std_3a_3ais_5fpointer_5fv_3c_20t_20_3e_20_3e_20_3e_673',['iterator_value&lt; T, typename std::enable_if_t&lt; std::is_pointer_v&lt; T &gt; &gt; &gt;',['../structqx_1_1iterator__value_3_01_t_00_01typename_01std_1_1enable__if__t_3_01std_1_1is__pointer__v_3_01_t_01_4_01_4_01_4.html',1,'qx']]]
+  ['hash_3c_20qx_3a_3abasic_5fstring_3c_20traits_20_3e_20_3e_663',['hash&lt; qx::basic_string&lt; Traits &gt; &gt;',['../structstd_1_1hash_3_01qx_1_1basic__string_3_01_traits_01_4_01_4.html',1,'std']]],
+  ['hash_3c_20qx_3a_3abasic_5fstring_5fhash_3c_20traits_20_3e_20_3e_664',['hash&lt; qx::basic_string_hash&lt; Traits &gt; &gt;',['../structstd_1_1hash_3_01qx_1_1basic__string__hash_3_01_traits_01_4_01_4.html',1,'std']]],
+  ['hash_3c_20qx_3a_3astate_3c_20t_20_3e_20_3e_665',['hash&lt; qx::state&lt; T &gt; &gt;',['../structstd_1_1hash_3_01qx_1_1state_3_01_t_01_4_01_4.html',1,'std']]]
 ];
