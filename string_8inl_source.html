@@ -2678,55 +2678,56 @@ $(function() {
 <div class="line"><a name="l02631"></a><span class="lineno"> 2631</span>&#160;{</div>
 <div class="line"><a name="l02632"></a><span class="lineno"> 2632</span>&#160;    <span class="keyword">typename</span> qx::detail::istream&lt;Traits&gt;::iostate ret_bit =</div>
 <div class="line"><a name="l02633"></a><span class="lineno"> 2633</span>&#160;        qx::detail::istream&lt;Traits&gt;::goodbit;</div>
-<div class="line"><a name="l02634"></a><span class="lineno"> 2634</span>&#160;    <span class="keyword">auto</span> try_push_back =</div>
-<div class="line"><a name="l02635"></a><span class="lineno"> 2635</span>&#160;        [&amp;str, &amp;is, &amp;ret_bit](</div>
-<div class="line"><a name="l02636"></a><span class="lineno"> 2636</span>&#160;            <span class="keyword">typename</span> qx::basic_string&lt;Traits&gt;::value_type ch) -&gt; <span class="keywordtype">bool</span></div>
-<div class="line"><a name="l02637"></a><span class="lineno"> 2637</span>&#160;    {</div>
-<div class="line"><a name="l02638"></a><span class="lineno"> 2638</span>&#160;        <span class="keyword">typename</span> qx::basic_string&lt;Traits&gt;::size_type nCurrentSize = str.size();</div>
-<div class="line"><a name="l02639"></a><span class="lineno"> 2639</span>&#160;        <span class="keywordflow">if</span> (str._resize(nCurrentSize + 1))</div>
-<div class="line"><a name="l02640"></a><span class="lineno"> 2640</span>&#160;        {</div>
-<div class="line"><a name="l02641"></a><span class="lineno"> 2641</span>&#160;            str[nCurrentSize] = ch;</div>
-<div class="line"><a name="l02642"></a><span class="lineno"> 2642</span>&#160;            <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
-<div class="line"><a name="l02643"></a><span class="lineno"> 2643</span>&#160;        }</div>
-<div class="line"><a name="l02644"></a><span class="lineno"> 2644</span>&#160;        <span class="keywordflow">else</span></div>
-<div class="line"><a name="l02645"></a><span class="lineno"> 2645</span>&#160;        {</div>
-<div class="line"><a name="l02646"></a><span class="lineno"> 2646</span>&#160;            is.unget();</div>
-<div class="line"><a name="l02647"></a><span class="lineno"> 2647</span>&#160;            ret_bit |= qx::detail::istream&lt;Traits&gt;::failbit;</div>
-<div class="line"><a name="l02648"></a><span class="lineno"> 2648</span>&#160;            <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a name="l02649"></a><span class="lineno"> 2649</span>&#160;        }</div>
-<div class="line"><a name="l02650"></a><span class="lineno"> 2650</span>&#160;    };</div>
-<div class="line"><a name="l02651"></a><span class="lineno"> 2651</span>&#160; </div>
-<div class="line"><a name="l02652"></a><span class="lineno"> 2652</span>&#160;    str.clear();</div>
-<div class="line"><a name="l02653"></a><span class="lineno"> 2653</span>&#160;    <span class="keyword">typename</span> qx::basic_string&lt;Traits&gt;::value_type ch;</div>
-<div class="line"><a name="l02654"></a><span class="lineno"> 2654</span>&#160; </div>
-<div class="line"><a name="l02655"></a><span class="lineno"> 2655</span>&#160;    <span class="comment">// skip all space symbols and add first symbol is any</span></div>
-<div class="line"><a name="l02656"></a><span class="lineno"> 2656</span>&#160;    <span class="keywordflow">while</span> (is.get(ch))</div>
-<div class="line"><a name="l02657"></a><span class="lineno"> 2657</span>&#160;    {</div>
-<div class="line"><a name="l02658"></a><span class="lineno"> 2658</span>&#160;        <span class="keywordflow">if</span> (!Traits::is_space(ch))</div>
-<div class="line"><a name="l02659"></a><span class="lineno"> 2659</span>&#160;        {</div>
-<div class="line"><a name="l02660"></a><span class="lineno"> 2660</span>&#160;            try_push_back(ch);</div>
-<div class="line"><a name="l02661"></a><span class="lineno"> 2661</span>&#160;            <span class="keywordflow">break</span>;</div>
-<div class="line"><a name="l02662"></a><span class="lineno"> 2662</span>&#160;        }</div>
-<div class="line"><a name="l02663"></a><span class="lineno"> 2663</span>&#160;    }</div>
-<div class="line"><a name="l02664"></a><span class="lineno"> 2664</span>&#160; </div>
-<div class="line"><a name="l02665"></a><span class="lineno"> 2665</span>&#160;    <span class="comment">// add other symbols until space symbol</span></div>
-<div class="line"><a name="l02666"></a><span class="lineno"> 2666</span>&#160;    <span class="keywordflow">while</span> (is.get(ch))</div>
-<div class="line"><a name="l02667"></a><span class="lineno"> 2667</span>&#160;    {</div>
-<div class="line"><a name="l02668"></a><span class="lineno"> 2668</span>&#160;        <span class="keywordflow">if</span> (!Traits::is_space(ch))</div>
-<div class="line"><a name="l02669"></a><span class="lineno"> 2669</span>&#160;        {</div>
-<div class="line"><a name="l02670"></a><span class="lineno"> 2670</span>&#160;            <span class="keywordflow">if</span> (!try_push_back(ch))</div>
-<div class="line"><a name="l02671"></a><span class="lineno"> 2671</span>&#160;                <span class="keywordflow">break</span>;</div>
-<div class="line"><a name="l02672"></a><span class="lineno"> 2672</span>&#160;        }</div>
-<div class="line"><a name="l02673"></a><span class="lineno"> 2673</span>&#160;        <span class="keywordflow">else</span></div>
-<div class="line"><a name="l02674"></a><span class="lineno"> 2674</span>&#160;        {</div>
-<div class="line"><a name="l02675"></a><span class="lineno"> 2675</span>&#160;            is.unget();</div>
-<div class="line"><a name="l02676"></a><span class="lineno"> 2676</span>&#160;            <span class="keywordflow">break</span>;</div>
-<div class="line"><a name="l02677"></a><span class="lineno"> 2677</span>&#160;        }</div>
-<div class="line"><a name="l02678"></a><span class="lineno"> 2678</span>&#160;    }</div>
-<div class="line"><a name="l02679"></a><span class="lineno"> 2679</span>&#160; </div>
-<div class="line"><a name="l02680"></a><span class="lineno"> 2680</span>&#160;    is.setstate(ret_bit);</div>
-<div class="line"><a name="l02681"></a><span class="lineno"> 2681</span>&#160;    <span class="keywordflow">return</span> is;</div>
-<div class="line"><a name="l02682"></a><span class="lineno"> 2682</span>&#160;}</div>
+<div class="line"><a name="l02634"></a><span class="lineno"> 2634</span>&#160; </div>
+<div class="line"><a name="l02635"></a><span class="lineno"> 2635</span>&#160;    <span class="keyword">auto</span> try_push_back =</div>
+<div class="line"><a name="l02636"></a><span class="lineno"> 2636</span>&#160;        [&amp;str, &amp;is, &amp;ret_bit](</div>
+<div class="line"><a name="l02637"></a><span class="lineno"> 2637</span>&#160;            <span class="keyword">typename</span> qx::basic_string&lt;Traits&gt;::value_type ch) -&gt; <span class="keywordtype">bool</span></div>
+<div class="line"><a name="l02638"></a><span class="lineno"> 2638</span>&#160;    {</div>
+<div class="line"><a name="l02639"></a><span class="lineno"> 2639</span>&#160;        <span class="keyword">typename</span> qx::basic_string&lt;Traits&gt;::size_type nCurrentSize = str.size();</div>
+<div class="line"><a name="l02640"></a><span class="lineno"> 2640</span>&#160;        <span class="keywordflow">if</span> (str._resize(nCurrentSize + 1))</div>
+<div class="line"><a name="l02641"></a><span class="lineno"> 2641</span>&#160;        {</div>
+<div class="line"><a name="l02642"></a><span class="lineno"> 2642</span>&#160;            str[nCurrentSize] = ch;</div>
+<div class="line"><a name="l02643"></a><span class="lineno"> 2643</span>&#160;            <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><a name="l02644"></a><span class="lineno"> 2644</span>&#160;        }</div>
+<div class="line"><a name="l02645"></a><span class="lineno"> 2645</span>&#160;        <span class="keywordflow">else</span></div>
+<div class="line"><a name="l02646"></a><span class="lineno"> 2646</span>&#160;        {</div>
+<div class="line"><a name="l02647"></a><span class="lineno"> 2647</span>&#160;            is.unget();</div>
+<div class="line"><a name="l02648"></a><span class="lineno"> 2648</span>&#160;            ret_bit |= qx::detail::istream&lt;Traits&gt;::failbit;</div>
+<div class="line"><a name="l02649"></a><span class="lineno"> 2649</span>&#160;            <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a name="l02650"></a><span class="lineno"> 2650</span>&#160;        }</div>
+<div class="line"><a name="l02651"></a><span class="lineno"> 2651</span>&#160;    };</div>
+<div class="line"><a name="l02652"></a><span class="lineno"> 2652</span>&#160; </div>
+<div class="line"><a name="l02653"></a><span class="lineno"> 2653</span>&#160;    str.clear();</div>
+<div class="line"><a name="l02654"></a><span class="lineno"> 2654</span>&#160;    <span class="keyword">typename</span> qx::basic_string&lt;Traits&gt;::value_type ch;</div>
+<div class="line"><a name="l02655"></a><span class="lineno"> 2655</span>&#160; </div>
+<div class="line"><a name="l02656"></a><span class="lineno"> 2656</span>&#160;    <span class="comment">// skip all space symbols and add first symbol is any</span></div>
+<div class="line"><a name="l02657"></a><span class="lineno"> 2657</span>&#160;    <span class="keywordflow">while</span> (is.get(ch))</div>
+<div class="line"><a name="l02658"></a><span class="lineno"> 2658</span>&#160;    {</div>
+<div class="line"><a name="l02659"></a><span class="lineno"> 2659</span>&#160;        <span class="keywordflow">if</span> (!Traits::is_space(ch))</div>
+<div class="line"><a name="l02660"></a><span class="lineno"> 2660</span>&#160;        {</div>
+<div class="line"><a name="l02661"></a><span class="lineno"> 2661</span>&#160;            try_push_back(ch);</div>
+<div class="line"><a name="l02662"></a><span class="lineno"> 2662</span>&#160;            <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l02663"></a><span class="lineno"> 2663</span>&#160;        }</div>
+<div class="line"><a name="l02664"></a><span class="lineno"> 2664</span>&#160;    }</div>
+<div class="line"><a name="l02665"></a><span class="lineno"> 2665</span>&#160; </div>
+<div class="line"><a name="l02666"></a><span class="lineno"> 2666</span>&#160;    <span class="comment">// add other symbols until space symbol</span></div>
+<div class="line"><a name="l02667"></a><span class="lineno"> 2667</span>&#160;    <span class="keywordflow">while</span> (is.get(ch))</div>
+<div class="line"><a name="l02668"></a><span class="lineno"> 2668</span>&#160;    {</div>
+<div class="line"><a name="l02669"></a><span class="lineno"> 2669</span>&#160;        <span class="keywordflow">if</span> (!Traits::is_space(ch))</div>
+<div class="line"><a name="l02670"></a><span class="lineno"> 2670</span>&#160;        {</div>
+<div class="line"><a name="l02671"></a><span class="lineno"> 2671</span>&#160;            <span class="keywordflow">if</span> (!try_push_back(ch))</div>
+<div class="line"><a name="l02672"></a><span class="lineno"> 2672</span>&#160;                <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l02673"></a><span class="lineno"> 2673</span>&#160;        }</div>
+<div class="line"><a name="l02674"></a><span class="lineno"> 2674</span>&#160;        <span class="keywordflow">else</span></div>
+<div class="line"><a name="l02675"></a><span class="lineno"> 2675</span>&#160;        {</div>
+<div class="line"><a name="l02676"></a><span class="lineno"> 2676</span>&#160;            is.unget();</div>
+<div class="line"><a name="l02677"></a><span class="lineno"> 2677</span>&#160;            <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l02678"></a><span class="lineno"> 2678</span>&#160;        }</div>
+<div class="line"><a name="l02679"></a><span class="lineno"> 2679</span>&#160;    }</div>
+<div class="line"><a name="l02680"></a><span class="lineno"> 2680</span>&#160; </div>
+<div class="line"><a name="l02681"></a><span class="lineno"> 2681</span>&#160;    is.setstate(ret_bit);</div>
+<div class="line"><a name="l02682"></a><span class="lineno"> 2682</span>&#160;    <span class="keywordflow">return</span> is;</div>
+<div class="line"><a name="l02683"></a><span class="lineno"> 2683</span>&#160;}</div>
 <div class="ttc" id="aclassqx_1_1basic__string_html"><div class="ttname"><a href="classqx_1_1basic__string.html">qx::basic_string</a></div><div class="ttdoc">String class.</div><div class="ttdef"><b>Definition:</b> <a href="string_8h_source.html#l00067">string.h:68</a></div></div>
 <div class="ttc" id="aclassqx_1_1basic__string_html_a012a32cf220c35122f5ae0c52404a223"><div class="ttname"><a href="classqx_1_1basic__string.html#a012a32cf220c35122f5ae0c52404a223">qx::basic_string::from</a></div><div class="ttdeci">void from(const From &amp;data, const_pointer pszFormat=nullptr) noexcept</div><div class="ttdoc">Construct string from custom type.</div><div class="ttdef"><b>Definition:</b> <a href="string_8inl_source.html#l00376">string.inl:376</a></div></div>
 <div class="ttc" id="aclassqx_1_1basic__string_html_a07ea9ed94a487e50ef7d9d5b9a6bba40"><div class="ttname"><a href="classqx_1_1basic__string.html#a07ea9ed94a487e50ef7d9d5b9a6bba40">qx::basic_string::trim</a></div><div class="ttdeci">size_type trim() noexcept</div><div class="ttdoc">Trim the string to the both sides (whitespace characters)</div><div class="ttdef"><b>Definition:</b> <a href="string_8inl_source.html#l00868">string.inl:868</a></div></div>
