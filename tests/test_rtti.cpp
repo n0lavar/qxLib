@@ -437,4 +437,21 @@ TEST(rtti, rtti_cast)
     EXPECT_TRUE(qx::rtti_cast<CDerived1_3>(p1_3));
 }
 
+TEST(rtti, is)
+{
+    EXPECT_TRUE(p1->is<CBase1>());
+    EXPECT_FALSE(p1->is<CDerived1_1>());
+    EXPECT_FALSE(p1->is<CDerived1_2>());
+    EXPECT_FALSE(p1->is<CDerived1_21>());
+    EXPECT_FALSE(p1->is<CDerived1_22>());
+    EXPECT_FALSE(p1->is<CDerived1_221>());
+    EXPECT_FALSE(p1->is<CDerived1_222>());
+    EXPECT_FALSE(p1->is<CDerived1_3>());
+    EXPECT_FALSE(p1->is<CDerived2_1>());
+    EXPECT_FALSE(p1->is<CDerived2_2>());
+    EXPECT_FALSE(p1->is<CDerived2_3>());
+    EXPECT_FALSE(p1->is<CDerived2_31>());
+    EXPECT_FALSE(p1->is<CDerived2_32>());
+}
+
 #endif
