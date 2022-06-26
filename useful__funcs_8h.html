@@ -105,6 +105,10 @@ Functions</h2></td></tr>
 <tr class="memitem:aeccf764444fb66cff5690d7570fdefc2"><td class="memTemplItemLeft" align="right" valign="top">constexpr std::array&lt; T, LeftLength+RightLength &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="useful__funcs_8h.html#aeccf764444fb66cff5690d7570fdefc2">qx::join_arrays</a> (std::array&lt; T, LeftLength &gt; rhs, std::array&lt; T, RightLength &gt; lhs)</td></tr>
 <tr class="memdesc:aeccf764444fb66cff5690d7570fdefc2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Join arrays at compile-time.  <a href="useful__funcs_8h.html#aeccf764444fb66cff5690d7570fdefc2">More...</a><br /></td></tr>
 <tr class="separator:aeccf764444fb66cff5690d7570fdefc2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a840e9d0a6b6ed606ce3048a3abc6bb81"><td class="memTemplParams" colspan="2">template&lt;class ContainerTo , class ContainerFrom &gt; </td></tr>
+<tr class="memitem:a840e9d0a6b6ed606ce3048a3abc6bb81"><td class="memTemplItemLeft" align="right" valign="top">ContainerTo&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="useful__funcs_8h.html#a840e9d0a6b6ed606ce3048a3abc6bb81">qx::create_container</a> (const ContainerFrom &amp;from)</td></tr>
+<tr class="memdesc:a840e9d0a6b6ed606ce3048a3abc6bb81"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a container by constructing each element from the corresponding element of the original container.  <a href="useful__funcs_8h.html#a840e9d0a6b6ed606ce3048a3abc6bb81">More...</a><br /></td></tr>
+<tr class="separator:a840e9d0a6b6ed606ce3048a3abc6bb81"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a23356c78dace0fc62401e0c85d2c455a"><td class="memTemplParams" colspan="2">template&lt;class Container &gt; </td></tr>
 <tr class="memitem:a23356c78dace0fc62401e0c85d2c455a"><td class="memTemplItemLeft" align="right" valign="top">constexpr size_t&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="useful__funcs_8h.html#a23356c78dace0fc62401e0c85d2c455a">qx::bytes_size</a> (const Container &amp;container)</td></tr>
 <tr class="memdesc:a23356c78dace0fc62401e0c85d2c455a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the size of memory allocated for container elements.  <a href="useful__funcs_8h.html#a23356c78dace0fc62401e0c85d2c455a">More...</a><br /></td></tr>
@@ -259,7 +263,7 @@ template&lt;typename T , typename Compare  = std::less_equal&lt;&gt;&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="useful__funcs_8h_source.html#l00034">34</a> of file <a class="el" href="useful__funcs_8h_source.html">useful_funcs.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="useful__funcs_8h_source.html#l00039">39</a> of file <a class="el" href="useful__funcs_8h_source.html">useful_funcs.h</a>.</p>
 
 </div>
 </div>
@@ -309,7 +313,50 @@ template&lt;class Container &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="useful__funcs_8h_source.html#l00145">145</a> of file <a class="el" href="useful__funcs_8h_source.html">useful_funcs.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="useful__funcs_8h_source.html#l00164">164</a> of file <a class="el" href="useful__funcs_8h_source.html">useful_funcs.h</a>.</p>
+
+</div>
+</div>
+<a id="a840e9d0a6b6ed606ce3048a3abc6bb81"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a840e9d0a6b6ed606ce3048a3abc6bb81">&#9670;&nbsp;</a></span>create_container()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ContainerTo , class ContainerFrom &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">ContainerTo qx::create_container </td>
+          <td>(</td>
+          <td class="paramtype">const ContainerFrom &amp;&#160;</td>
+          <td class="paramname"><em>from</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Create a container by constructing each element from the corresponding element of the original container. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">ContainerTo</td><td>- target container type, must support value_type and push_back </td></tr>
+    <tr><td class="paramname">ContainerFrom</td><td>- original container type, must support forward iteration </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">from</td><td>- original container </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Return values</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">-</td><td>target container </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="useful__funcs_8h_source.html#l00147">147</a> of file <a class="el" href="useful__funcs_8h_source.html">useful_funcs.h</a>.</p>
 
 </div>
 </div>

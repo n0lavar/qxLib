@@ -83,14 +83,15 @@ $(function() {
 <div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="keyword">namespace </span>qx</div>
 <div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;{</div>
 <div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160; </div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T, <span class="keyword">typename</span> Compare = std::less_equal&lt;&gt;&gt;</div>
-<div class="line"><a name="l00034"></a><span class="lineno"><a class="line" href="useful__funcs_8h.html#a2986ab33c946935721e51f4564ea9a08">   34</a></span>&#160;constexpr <span class="keywordtype">bool</span> <a class="code" href="useful__funcs_8h.html#a2986ab33c946935721e51f4564ea9a08">between</a>(T left, T value, T right, Compare compare)</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;{</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    <span class="comment">// trick to determine if an integer is between two integers (inclusive)</span></div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    <span class="comment">// with only one comparison/branch</span></div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    <span class="comment">// https://stackoverflow.com/a/17095534/8021662</span></div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    QX_PUSH_SUPPRESS_MSVC_WARNINGS(4018 4388)</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160; </div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="comment">// trick to determine if an integer is between two integers (inclusive)</span></div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="comment">// with only one comparison/branch</span></div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="comment">// https://stackoverflow.com/a/17095534/8021662</span></div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;QX_DISABLE_MSVC_WARNINGS(4018 4388)</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160; </div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160; </div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;template&lt;typename T, typename Compare = std::less_equal&lt;&gt;&gt;</div>
+<div class="line"><a name="l00039"></a><span class="lineno"><a class="line" href="useful__funcs_8h.html#a2986ab33c946935721e51f4564ea9a08">   39</a></span>&#160;constexpr <span class="keywordtype">bool</span> between(T left, T value, T right, Compare compare)</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;{</div>
 <div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    <span class="keywordflow">if</span> constexpr (std::is_enum_v&lt;T&gt;)</div>
 <div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    {</div>
 <div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;        i64 l = <span class="keyword">static_cast&lt;</span>i64<span class="keyword">&gt;</span>(left);</div>
@@ -114,12 +115,13 @@ $(function() {
 <div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    {</div>
 <div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;        <span class="keywordflow">return</span> compare(left, value) &amp;&amp; compare(value, right);</div>
 <div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    }</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160; </div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    QX_POP_SUPPRESS_WARNINGS</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;}</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;}</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160; </div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;QX_RESTORE_MSVC_WARNINGS(4018 4388)</div>
 <div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160; </div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T, <span class="keyword">typename</span> Compare = std::less_equal&lt;&gt;&gt;</div>
-<div class="line"><a name="l00079"></a><span class="lineno"><a class="line" href="useful__funcs_8h.html#a55c30568a7ce6ec5ca535aa6a4e9ddbe">   79</a></span>&#160;constexpr <span class="keywordtype">bool</span> <a class="code" href="useful__funcs_8h.html#a2986ab33c946935721e51f4564ea9a08">between</a>(T left, T value, T right)</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160; </div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;template&lt;typename T, typename Compare = std::less_equal&lt;&gt;&gt;</div>
+<div class="line"><a name="l00079"></a><span class="lineno"><a class="line" href="useful__funcs_8h.html#a55c30568a7ce6ec5ca535aa6a4e9ddbe">   79</a></span>&#160;constexpr <span class="keywordtype">bool</span> between(T left, T value, T right)</div>
 <div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;{</div>
 <div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;    QX_PUSH_SUPPRESS_MSVC_WARNINGS(4388)</div>
 <div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="useful__funcs_8h.html#a2986ab33c946935721e51f4564ea9a08">between</a>(left, value, right, Compare());</div>
@@ -156,21 +158,33 @@ $(function() {
 <div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;    <span class="keywordflow">return</span> res;</div>
 <div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;}</div>
 <div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160; </div>
-<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> Container&gt;</div>
-<div class="line"><a name="l00145"></a><span class="lineno"><a class="line" href="useful__funcs_8h.html#a23356c78dace0fc62401e0c85d2c455a">  145</a></span>&#160;constexpr <span class="keywordtype">size_t</span> <a class="code" href="useful__funcs_8h.html#a23356c78dace0fc62401e0c85d2c455a">bytes_size</a>(<span class="keyword">const</span> Container&amp; container)</div>
-<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;{</div>
-<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;    <span class="keywordflow">return</span> container.size() * <span class="keyword">sizeof</span>(Container::value_type);</div>
-<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;}</div>
-<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160; </div>
-<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;} <span class="comment">// namespace qx</span></div>
+<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> ContainerTo, <span class="keyword">class</span> ContainerFrom&gt;</div>
+<div class="line"><a name="l00147"></a><span class="lineno"><a class="line" href="useful__funcs_8h.html#a840e9d0a6b6ed606ce3048a3abc6bb81">  147</a></span>&#160;ContainerTo <a class="code" href="useful__funcs_8h.html#a840e9d0a6b6ed606ce3048a3abc6bb81">create_container</a>(<span class="keyword">const</span> ContainerFrom&amp; from)</div>
+<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;{</div>
+<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;    ContainerTo container;</div>
+<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160; </div>
+<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;    <span class="keywordflow">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span>&amp; item : from)</div>
+<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;        container.push_back(ContainerTo::value_type(item));</div>
+<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160; </div>
+<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;    <span class="keywordflow">return</span> container;</div>
+<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;}</div>
+<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160; </div>
+<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> Container&gt;</div>
+<div class="line"><a name="l00164"></a><span class="lineno"><a class="line" href="useful__funcs_8h.html#a23356c78dace0fc62401e0c85d2c455a">  164</a></span>&#160;constexpr <span class="keywordtype">size_t</span> <a class="code" href="useful__funcs_8h.html#a23356c78dace0fc62401e0c85d2c455a">bytes_size</a>(<span class="keyword">const</span> Container&amp; container)</div>
+<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;{</div>
+<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;    <span class="keywordflow">return</span> container.size() * <span class="keyword">sizeof</span>(Container::value_type);</div>
+<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;}</div>
+<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160; </div>
+<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;} <span class="comment">// namespace qx</span></div>
 <div class="ttc" id="aclassqx_1_1iterator_html"><div class="ttname"><a href="classqx_1_1iterator.html">qx::iterator</a></div><div class="ttdoc">Non-const random access iterator type.</div><div class="ttdef"><b>Definition:</b> <a href="iterator_8h_source.html#l00032">iterator.h:33</a></div></div>
 <div class="ttc" id="amath_8h_html"><div class="ttname"><a href="math_8h.html">math.h</a></div><div class="ttdoc">Math functions.</div></div>
 <div class="ttc" id="amath_8h_html_abc0bd064c0a27a488aabf1d2f2e2fcfa"><div class="ttname"><a href="math_8h.html#abc0bd064c0a27a488aabf1d2f2e2fcfa">qx::epsilon_less_equal</a></div><div class="ttdeci">constexpr bool epsilon_less_equal(T left, T right, T eps=std::numeric_limits&lt; T &gt;::epsilon())</div><div class="ttdoc">Constexpr comparison function for a user defined epsilon values.</div><div class="ttdef"><b>Definition:</b> <a href="math_8h_source.html#l00092">math.h:92</a></div></div>
 <div class="ttc" id="asuppress__warnings_8h_html"><div class="ttname"><a href="suppress__warnings_8h.html">suppress_warnings.h</a></div><div class="ttdoc">Suppress warnings macros.</div></div>
 <div class="ttc" id="atypedefs_8h_html"><div class="ttname"><a href="typedefs_8h.html">typedefs.h</a></div><div class="ttdoc">Project typedefs.</div></div>
-<div class="ttc" id="auseful__funcs_8h_html_a23356c78dace0fc62401e0c85d2c455a"><div class="ttname"><a href="useful__funcs_8h.html#a23356c78dace0fc62401e0c85d2c455a">qx::bytes_size</a></div><div class="ttdeci">constexpr size_t bytes_size(const Container &amp;container)</div><div class="ttdoc">Get the size of memory allocated for container elements.</div><div class="ttdef"><b>Definition:</b> <a href="useful__funcs_8h_source.html#l00145">useful_funcs.h:145</a></div></div>
-<div class="ttc" id="auseful__funcs_8h_html_a2986ab33c946935721e51f4564ea9a08"><div class="ttname"><a href="useful__funcs_8h.html#a2986ab33c946935721e51f4564ea9a08">qx::between</a></div><div class="ttdeci">constexpr bool between(T left, T value, T right, Compare compare)</div><div class="ttdoc">Checks if value is between left and right.</div><div class="ttdef"><b>Definition:</b> <a href="useful__funcs_8h_source.html#l00034">useful_funcs.h:34</a></div></div>
+<div class="ttc" id="auseful__funcs_8h_html_a23356c78dace0fc62401e0c85d2c455a"><div class="ttname"><a href="useful__funcs_8h.html#a23356c78dace0fc62401e0c85d2c455a">qx::bytes_size</a></div><div class="ttdeci">constexpr size_t bytes_size(const Container &amp;container)</div><div class="ttdoc">Get the size of memory allocated for container elements.</div><div class="ttdef"><b>Definition:</b> <a href="useful__funcs_8h_source.html#l00164">useful_funcs.h:164</a></div></div>
+<div class="ttc" id="auseful__funcs_8h_html_a2986ab33c946935721e51f4564ea9a08"><div class="ttname"><a href="useful__funcs_8h.html#a2986ab33c946935721e51f4564ea9a08">qx::between</a></div><div class="ttdeci">constexpr bool between(T left, T value, T right, Compare compare)</div><div class="ttdoc">Checks if value is between left and right.</div><div class="ttdef"><b>Definition:</b> <a href="useful__funcs_8h_source.html#l00039">useful_funcs.h:39</a></div></div>
 <div class="ttc" id="auseful__funcs_8h_html_a567475c55a5a56c634d471de261b0428"><div class="ttname"><a href="useful__funcs_8h.html#a567475c55a5a56c634d471de261b0428">qx::destruct</a></div><div class="ttdeci">void destruct(iterator start, iterator end)</div><div class="ttdoc">Call destructors.</div><div class="ttdef"><b>Definition:</b> <a href="useful__funcs_8h_source.html#l00093">useful_funcs.h:93</a></div></div>
+<div class="ttc" id="auseful__funcs_8h_html_a840e9d0a6b6ed606ce3048a3abc6bb81"><div class="ttname"><a href="useful__funcs_8h.html#a840e9d0a6b6ed606ce3048a3abc6bb81">qx::create_container</a></div><div class="ttdeci">ContainerTo create_container(const ContainerFrom &amp;from)</div><div class="ttdoc">Create a container by constructing each element from the corresponding element of the original contai...</div><div class="ttdef"><b>Definition:</b> <a href="useful__funcs_8h_source.html#l00147">useful_funcs.h:147</a></div></div>
 <div class="ttc" id="auseful__funcs_8h_html_a9d6faba90a6874d7629cf440bdd4092c"><div class="ttname"><a href="useful__funcs_8h.html#a9d6faba90a6874d7629cf440bdd4092c">qx::make_array</a></div><div class="ttdeci">constexpr auto make_array(T init_val=T())</div><div class="ttdoc">Fill array with value in constructor.</div><div class="ttdef"><b>Definition:</b> <a href="useful__funcs_8h_source.html#l00111">useful_funcs.h:111</a></div></div>
 <div class="ttc" id="auseful__funcs_8h_html_aeccf764444fb66cff5690d7570fdefc2"><div class="ttname"><a href="useful__funcs_8h.html#aeccf764444fb66cff5690d7570fdefc2">qx::join_arrays</a></div><div class="ttdeci">constexpr std::array&lt; T, LeftLength+RightLength &gt; join_arrays(std::array&lt; T, LeftLength &gt; rhs, std::array&lt; T, RightLength &gt; lhs)</div><div class="ttdoc">Join arrays at compile-time.</div><div class="ttdef"><b>Definition:</b> <a href="useful__funcs_8h_source.html#l00128">useful_funcs.h:128</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
