@@ -164,4 +164,8 @@ QX_POP_SUPPRESS_WARNINGS
     #define QX_TEST_STRING_HASH 1
 #endif
 
+#ifndef QX_TEST_DESTRUCTION_CALLBACK
+    #define QX_TEST_DESTRUCTION_CALLBACK 1
+#endif
+
 // clang-format on
