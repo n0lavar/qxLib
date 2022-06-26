@@ -12,7 +12,9 @@
 
 #if QX_TEST_TYPE_TRAITS
 
+#include <qx/concepts.h>
 #include <qx/type_traits.h>
+
 #include <deque>
 #include <forward_list>
 #include <list>
@@ -151,5 +153,28 @@ static_assert(qx::is_specialization_of<vec_float, std::vector>::value);
 static_assert(!qx::is_specialization_of<vec_int, std::list>::value);
 static_assert(!qx::is_specialization_of<vec_int, std::list>::value);
 static_assert(!qx::is_specialization_of<float, std::list>::value);
+
+
+// -------------------------------- enumeration --------------------------------
+
+enum ETest1
+{
+    a,
+    b
+};
+
+enum class ETest2
+{
+    a,
+    b
+};
+
+static_assert(qx::enumeration<ETest1>);
+static_assert(qx::enumeration<ETest2>);
+static_assert(!qx::enumeration<int>);
+static_assert(!qx::enumeration<vec_int>);
+static_assert(!qx::enumeration<vec_float>);
+static_assert(!qx::enumeration<C<int>>);
+static_assert(!qx::enumeration<struct S>);
 
 #endif
