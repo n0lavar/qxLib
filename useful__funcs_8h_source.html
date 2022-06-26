@@ -164,7 +164,7 @@ $(function() {
 <div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;    ContainerTo container;</div>
 <div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160; </div>
 <div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;    <span class="keywordflow">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span>&amp; item : from)</div>
-<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;        container.push_back(ContainerTo::value_type(item));</div>
+<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;        container.push_back(<span class="keyword">typename</span> ContainerTo::value_type(item));</div>
 <div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160; </div>
 <div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;    <span class="keywordflow">return</span> container;</div>
 <div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;}</div>
@@ -172,7 +172,7 @@ $(function() {
 <div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> Container&gt;</div>
 <div class="line"><a name="l00164"></a><span class="lineno"><a class="line" href="useful__funcs_8h.html#a23356c78dace0fc62401e0c85d2c455a">  164</a></span>&#160;constexpr <span class="keywordtype">size_t</span> <a class="code" href="useful__funcs_8h.html#a23356c78dace0fc62401e0c85d2c455a">bytes_size</a>(<span class="keyword">const</span> Container&amp; container)</div>
 <div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;{</div>
-<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;    <span class="keywordflow">return</span> container.size() * <span class="keyword">sizeof</span>(Container::value_type);</div>
+<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;    <span class="keywordflow">return</span> container.size() * <span class="keyword">sizeof</span>(<span class="keyword">typename</span> Container::value_type);</div>
 <div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;}</div>
 <div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160; </div>
 <div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;} <span class="comment">// namespace qx</span></div>
