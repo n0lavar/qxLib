@@ -102,10 +102,10 @@ constexpr const float* color::data() const noexcept
 
 constexpr unsigned int color::hex() const noexcept
 {
-    unsigned int r = static_cast<unsigned int>(float_to_dec(m_Color.x));
-    unsigned int g = static_cast<unsigned int>(float_to_dec(m_Color.y));
-    unsigned int b = static_cast<unsigned int>(float_to_dec(m_Color.z));
-    unsigned int a = static_cast<unsigned int>(float_to_dec(m_Color.w));
+    const unsigned int r = static_cast<unsigned int>(float_to_dec(m_Color.x));
+    const unsigned int g = static_cast<unsigned int>(float_to_dec(m_Color.y));
+    const unsigned int b = static_cast<unsigned int>(float_to_dec(m_Color.z));
+    const unsigned int a = static_cast<unsigned int>(float_to_dec(m_Color.w));
 
     return ((r & 0xff) << 24) + ((g & 0xff) << 16) + ((b & 0xff) << 8)
            + (a & 0xff);

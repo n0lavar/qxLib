@@ -2631,6 +2631,7 @@ qx::detail::istream<Traits>& operator>>(
 {
     typename qx::detail::istream<Traits>::iostate ret_bit =
         qx::detail::istream<Traits>::goodbit;
+
     auto try_push_back =
         [&str, &is, &ret_bit](
             typename qx::basic_string<Traits>::value_type ch) -> bool
