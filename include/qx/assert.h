@@ -50,25 +50,7 @@
 
 #if QX_ENABLE_ASSERTS
 
-/**
-    @brief   Assert macro with message
-    @details Same as QX_ASSERT, but with output possibility
-    @param   statement - statement to check
-    @param   msg       - message format
-    @param   ...       - message arguments
-
-    May be used in if statemant:
-
-    @code
-    
-    const auto file = OpenFile(path);
-    if (QX_ASSERT_MSG(file, "Can't open %s file", path.c_str()))
-        ReadFromFile(file);
-        
-    @endcode 
-
-**/
-#define QX_ASSERT_MSG(statement, msg, ...)                    \
+#define _QX_ASSERT_MSG(statement, msg, ...)                   \
     [&]()                                                     \
     {                                                         \
         if (!(statement)) [[unlikely]]                        \
@@ -83,6 +65,67 @@
         }                                                     \
     }()
 
+#define _QX_ASSERT(statement) QX_ASSERT_MSG(statement, "")
+
+#define _QX_ASSERT_NO_ENTRY QX_ASSERT_MSG(0, "No entry")
+
+#define _QX_ASSERT_RETURN(statement, ...)   \
+    if (!QX_ASSERT(statement)) [[unlikely]] \
+        return __VA_ARGS__;
+
+#define _QX_ASSERT_CONTINUE(statement)      \
+    if (!QX_ASSERT(statement)) [[unlikely]] \
+        continue;
+
+#define _QX_ASSERT_BREAK(statement)         \
+    if (!QX_ASSERT(statement)) [[unlikely]] \
+        break;
+
+#else
+
+#define _QX_ASSERT_MSG(statement, msg, ...)  \
+    [&]()                                    \
+    {                                        \
+        return static_cast<bool>(statement); \
+    }()
+
+#define _QX_ASSERT(statement) QX_ASSERT_MSG(statement, "")
+
+#define _QX_ASSERT_NO_ENTRY QX_ASSERT(0)
+
+#define _QX_ASSERT_RETURN(statement, ...) \
+    if (!(statement)) [[unlikely]]        \
+        return __VA_ARGS__;
+
+#define _QX_ASSERT_CONTINUE(statement) \
+    if (!(statement)) [[unlikely]]     \
+        continue;
+
+#define _QX_ASSERT_BREAK(statement) \
+    if (!(statement)) [[unlikely]]  \
+        break;
+
+#endif
+
+/**
+    @brief   Assert macro with message
+    @details Same as QX_ASSERT, but with output possibility
+    @param   statement - statement to check
+    @param   msg       - message format
+    @param   ...       - message arguments
+
+    May be used in if statemant:
+
+    @code
+    const auto file = OpenFile(path);
+    if (QX_ASSERT_MSG(file, "Can't open %s file", path.c_str()))
+        ReadFromFile(file);
+    @endcode 
+
+**/
+#define QX_ASSERT_MSG(statement, msg, ...) \
+    _QX_ASSERT_MSG(statement, msg, __VA_ARGS__)
+
 /**
     @brief   Assert macro
     @details If statement is false, assert processer will be called
@@ -92,63 +135,35 @@
     May be used in if statemant:
 
     @code
-    
     const auto file = ...;
     if (QX_ASSERT(file))
         ReadFromFile(file);
-        
     @endcode 
 
 **/
-#define QX_ASSERT(statement) QX_ASSERT_MSG(statement, "")
+#define QX_ASSERT(statement) _QX_ASSERT(statement)
 
 /**
     @brief Invokes assert unconditionally if this code should not be executed
 **/
-#define QX_ASSERT_NO_ENTRY QX_ASSERT_MSG(0, "No entry")
+#define QX_ASSERT_NO_ENTRY _QX_ASSERT_NO_ENTRY
 
 /**
     @brief Check statement and return if false
     @param statement - statement to check
     @param ...       - return value if statement is false
 **/
-#define QX_ASSERT_RETURN(statement, ...)    \
-    if (!QX_ASSERT(statement)) [[unlikely]] \
-        return __VA_ARGS__;
+#define QX_ASSERT_RETURN(statement, ...) \
+    _QX_ASSERT_RETURN(statement, __VA_ARGS__)
 
 /**
     @brief Check statement and continue loop if false
     @param statement - statement to check
 **/
-#define QX_ASSERT_CONTINUE(statement)       \
-    if (!QX_ASSERT(statement)) [[unlikely]] \
-        continue;
+#define QX_ASSERT_CONTINUE(statement) _QX_ASSERT_CONTINUE(statement)
 
 /**
     @brief Check statement and break loop if false
     @param statement - statement to check
 **/
-#define QX_ASSERT_BREAK(statement)          \
-    if (!QX_ASSERT(statement)) [[unlikely]] \
-        break;
-
-#else
-
-#define QX_ASSERT_MSG(statement, msg, ...)   \
-    [&]()                                    \
-    {                                        \
-        return static_cast<bool>(statement); \
-    }()
-#define QX_ASSERT(statement) QX_ASSERT_MSG(statement, "")
-#define QX_ASSERT_NO_ENTRY   QX_ASSERT(0)
-#define QX_ASSERT_RETURN(statement, ...) \
-    if (!(statement)) [[unlikely]]       \
-        return __VA_ARGS__;
-#define QX_ASSERT_CONTINUE(statement) \
-    if (!(statement)) [[unlikely]]    \
-        continue;
-#define QX_ASSERT_BREAK(statement) \
-    if (!(statement)) [[unlikely]] \
-        break;
-
-#endif
+#define QX_ASSERT_BREAK(statement) _QX_ASSERT_BREAK(statement)

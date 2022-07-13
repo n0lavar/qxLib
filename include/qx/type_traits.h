@@ -133,11 +133,10 @@ struct is_specialization_of<Ref<Args...>, Ref> : std::true_type
 /**
     @struct  visit_overload
     @details This struct allows to visit std::variant with lambdas
-    @link    https://www.cppstories.com/2018/09/visit-variants/
+    @note    https://www.cppstories.com/2018/09/visit-variants/
     @tparam  Ts - lambda types
 
     @code
-
     struct Fluid { };
     struct LightItem { };
     struct HeavyItem { };
@@ -154,7 +153,6 @@ struct is_specialization_of<Ref<Args...>, Ref> : std::true_type
             },
             package);
     }
-    
     @endcode 
 **/
 template<class... Ts>
