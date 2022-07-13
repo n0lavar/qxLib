@@ -37,7 +37,7 @@ constexpr color::color(unsigned int nHexValue) noexcept
 {
 }
 
-inline constexpr color::color(const glm::ivec3& vec3) noexcept
+constexpr color::color(const glm::ivec3& vec3) noexcept
     : color(
         dec_to_float(vec3.x),
         dec_to_float(vec3.y),
@@ -46,7 +46,7 @@ inline constexpr color::color(const glm::ivec3& vec3) noexcept
 {
 }
 
-inline constexpr color::color(const glm::ivec4& vec4) noexcept
+constexpr color::color(const glm::ivec4& vec4) noexcept
     : color(
         dec_to_float(vec4.x),
         dec_to_float(vec4.y),
@@ -75,22 +75,22 @@ constexpr float color::a() const noexcept
     return m_Color.w;
 }
 
-inline constexpr int color::r_dec() const noexcept
+constexpr int color::r_dec() const noexcept
 {
     return float_to_dec(m_Color.x);
 }
 
-inline constexpr int color::g_dec() const noexcept
+constexpr int color::g_dec() const noexcept
 {
     return float_to_dec(m_Color.y);
 }
 
-inline constexpr int color::b_dec() const noexcept
+constexpr int color::b_dec() const noexcept
 {
     return float_to_dec(m_Color.z);
 }
 
-inline constexpr int color::a_dec() const noexcept
+constexpr int color::a_dec() const noexcept
 {
     return float_to_dec(m_Color.w);
 }
