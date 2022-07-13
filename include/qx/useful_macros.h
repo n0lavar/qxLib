@@ -281,12 +281,49 @@ struct StaticAssertBetween
         static_assert_between_)
 
 /**
+    @brief This static assert will fail if block it placed in must not be instantiated
+
+    @code
+    template<class T>
+    constexpr int GetValue()
+    {
+        if constexpr (std::is_same_v<T, bool>)
+        {
+            return 0;
+        }
+        else if constexpr (std::is_same_v<T, int>)
+        {
+            return 0;
+        }
+        else
+        {
+            QX_STATIC_ASSERT_NO_INSTANTIATION("T must be bool or int");
+            return 0;
+        }
+    }
+
+    constexpr int val1 = GetValue<bool>();  // ok
+    constexpr int val2 = GetValue<int>();   // ok
+    constexpr int val3 = GetValue<long>();  // static_assert failure
+    @endcode 
+    
+    @param Message - static_assert message
+**/
+#define QX_STATIC_ASSERT_NO_INSTANTIATION(Message) \
+    []<bool flag = false>()                        \
+    {                                              \
+        static_assert(flag, Message);              \
+    }                                              \
+    ()
+
+/**
     @brief Macro for generating "enum class"-like class or struct with additional data/methods
     @note  Default value is one corresponds to 0
     @param TypeName - class/struct name
     @param ...      - enum values
 **/
 #define QX_ENUM_CLASS(TypeName, ...)                                    \
+public:                                                                 \
     enum TypeName##Internal { __VA_ARGS__ };                            \
                                                                         \
     TypeName##Internal _eInternal = static_cast<TypeName##Internal>(0); \
