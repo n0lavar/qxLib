@@ -69,7 +69,15 @@ $(function() {
 <div class="title">functional.h</div>  </div>
 </div><!--header-->
 <div class="contents">
-<a href="functional_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160; </div>
+<a href="functional_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">/**</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment">    @file      functional.h</span></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment">    @brief     Algorithms for math functions</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment">    @author    Khrapov</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="comment">    @date      2.02.2020</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="comment">    @copyright © Nick Khrapov, 2021. All right reserved.</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="comment">**/</span></div>
 <div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#pragma once</span></div>
 <div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160; </div>
 <div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="string_8h.html">qx/containers/string/string.h</a>&gt;</span></div>
@@ -87,7 +95,15 @@ $(function() {
 <div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;{</div>
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160; </div>
 <div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="keyword">using</span> function2d = std::function&lt;double(<span class="keywordtype">double</span>)&gt;;</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160; </div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="comment">/**</span></div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="comment">    @brief  Linear interpolation algorithm</span></div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="comment">    @param  p0     - point 0 (x - coordinate, y - f(x))</span></div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="comment">    @param  p1     - point 1 (x - coordinate, y - f(x))</span></div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="comment">    @param  x      - point</span></div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="comment">    @param  pError - error string. if not nullptr and error occured, this string will be filled</span></div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="comment">    @retval        - ~f(x)</span></div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="comment">**/</span></div>
 <div class="line"><a name="l00036"></a><span class="lineno"><a class="line" href="functional_8h.html#a16c674ab0e5dea993be5cb390c0bf0ed">   36</a></span>&#160;<span class="keyword">inline</span> <span class="keywordtype">double</span> <a class="code" href="functional_8h.html#a16c674ab0e5dea993be5cb390c0bf0ed">linear_interpolation</a>(</div>
 <div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    <span class="keyword">const</span> glm::dvec2&amp; p0,</div>
 <div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    <span class="keyword">const</span> glm::dvec2&amp; p1,</div>
@@ -102,7 +118,19 @@ $(function() {
 <div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160; </div>
 <div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    <span class="keywordflow">return</span> p0.y + (p1.y - p0.y) * (x - p0.x) / (p1.x - p0.x);</div>
 <div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;}</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160; </div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="comment">/**</span></div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<span class="comment">    @brief   Bilinear interpolation algorithm</span></div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<span class="comment">    @details po.z is returned on any error</span></div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;<span class="comment">    @param   p0     - point 0 (x, y - coordinates, z - f(x, y)) </span></div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="comment">    @param   p1     - point 1 (x, y - coordinates, z - f(x, y)) </span></div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;<span class="comment">    @param   p2     - point 2 (x, y - coordinates, z - f(x, y)) </span></div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;<span class="comment">    @param   p3     - point 3 (x, y - coordinates, z - f(x, y))</span></div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;<span class="comment">    @param   p      - point (x, y - coordinates).</span></div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;<span class="comment">                      It can be out of points square, in this case algorithm called extrapolation</span></div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;<span class="comment">    @param   pError - error string. if not nullptr and error occurred, this string will be filled</span></div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;<span class="comment">    @retval         - ~f(p.x, p.y) </span></div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;<span class="comment">**/</span></div>
 <div class="line"><a name="l00063"></a><span class="lineno"><a class="line" href="functional_8h.html#a2ca06ffb491649f2612dca14c67c1e16">   63</a></span>&#160;<span class="keyword">inline</span> <span class="keywordtype">double</span> <a class="code" href="functional_8h.html#a2ca06ffb491649f2612dca14c67c1e16">bilinear_interpolation</a>(</div>
 <div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    <span class="keyword">const</span> glm::dvec3&amp; p0,</div>
 <div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    <span class="keyword">const</span> glm::dvec3&amp; p1,</div>
@@ -134,7 +162,15 @@ $(function() {
 <div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160; </div>
 <div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;    <span class="keywordflow">return</span> fRet;</div>
 <div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;}</div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160; </div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;<span class="comment">/**</span></div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;<span class="comment">    @brief  Integrate using rectangle rule</span></div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;<span class="comment">    @param  func           - target function</span></div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;<span class="comment">    @param  x0             - left border</span></div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;<span class="comment">    @param  x1             - right border</span></div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;<span class="comment">    @param  nIntervalsPer1 - number of intervals per dx = 1</span></div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;<span class="comment">    @retval                - approximate integral</span></div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;<span class="comment">**/</span></div>
 <div class="line"><a name="l00103"></a><span class="lineno"><a class="line" href="functional_8h.html#a371e0394e1d71e822945cb9f1c472816">  103</a></span>&#160;<span class="keyword">inline</span> <span class="keywordtype">double</span> <a class="code" href="functional_8h.html#a371e0394e1d71e822945cb9f1c472816">integrate_rectangle_rule</a>(</div>
 <div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;    <span class="keyword">const</span> function2d&amp; func,</div>
 <div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;    <span class="keywordtype">double</span>            x0,</div>
@@ -156,7 +192,15 @@ $(function() {
 <div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160; </div>
 <div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;    <span class="keywordflow">return</span> fTotalArea;</div>
 <div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;}</div>
-<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160; </div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;<span class="comment">/**</span></div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;<span class="comment">    @brief  Integrate using trapezoid rule</span></div>
+<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;<span class="comment">    @param  func           - target function </span></div>
+<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;<span class="comment">    @param  x0             - left border </span></div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;<span class="comment">    @param  x1             - right border </span></div>
+<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;<span class="comment">    @param  nIntervalsPer1 - number of intervals per dx = 1 </span></div>
+<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;<span class="comment">    @retval                - approximate integral </span></div>
+<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;<span class="comment">**/</span></div>
 <div class="line"><a name="l00133"></a><span class="lineno"><a class="line" href="functional_8h.html#ac18ce7954b418d0a279fd3b73e2bedab">  133</a></span>&#160;<span class="keyword">inline</span> <span class="keywordtype">double</span> <a class="code" href="functional_8h.html#ac18ce7954b418d0a279fd3b73e2bedab">integrate_trapezoid_rule</a>(</div>
 <div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;    <span class="keyword">const</span> function2d&amp; func,</div>
 <div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;    <span class="keywordtype">double</span>            x0,</div>
@@ -178,7 +222,17 @@ $(function() {
 <div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160; </div>
 <div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;    <span class="keywordflow">return</span> fTotalArea;</div>
 <div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;}</div>
-<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160; </div>
+<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;<span class="comment">/**</span></div>
+<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;<span class="comment">    @brief  Integrate using adaptive midpoint</span></div>
+<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;<span class="comment">    @param  func           - target function </span></div>
+<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;<span class="comment">    @param  x0             - left border </span></div>
+<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;<span class="comment">    @param  x1             - right border </span></div>
+<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;<span class="comment">    @param  fMaxSliceError - max error per one slice </span></div>
+<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;<span class="comment">    @param  nIntervalsPer1 - number of intervals per dx = 1 </span></div>
+<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;<span class="comment">    @param  nMaxRecursion  - max recursion depth </span></div>
+<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;<span class="comment">    @retval                - approximate integral </span></div>
+<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;<span class="comment">**/</span></div>
 <div class="line"><a name="l00165"></a><span class="lineno"><a class="line" href="functional_8h.html#a509fa056942f3e91aa58d1c2bb230019">  165</a></span>&#160;<span class="keyword">inline</span> <span class="keywordtype">double</span> <a class="code" href="functional_8h.html#a509fa056942f3e91aa58d1c2bb230019">integrate_adaptive_midpoint</a>(</div>
 <div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;    <span class="keyword">const</span> function2d&amp; func,</div>
 <div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;    <span class="keywordtype">double</span>            x0,</div>
@@ -238,7 +292,18 @@ $(function() {
 <div class="line"><a name="l00221"></a><span class="lineno">  221</span>&#160; </div>
 <div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160;    <span class="keywordflow">return</span> fTotalArea;</div>
 <div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160;}</div>
-<div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160; </div>
+<div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160;<span class="comment">/**</span></div>
+<div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160;<span class="comment">    @brief  Integrate using probabilistic algorithm Monte Carlo</span></div>
+<div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160;<span class="comment">    @param  funcIsInside        - func that returns</span></div>
+<div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160;<span class="comment">                                  1 if point is inside shape with positive value</span></div>
+<div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160;<span class="comment">                                  0 if point is not inside shape</span></div>
+<div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160;<span class="comment">                                  -1 if point is inside shape with negative value</span></div>
+<div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160;<span class="comment">    @param  pos0                - left down corner coordinates</span></div>
+<div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160;<span class="comment">    @param  pos1                - right up corner coordinates</span></div>
+<div class="line"><a name="l00233"></a><span class="lineno">  233</span>&#160;<span class="comment">    @param  nPointsPerOneSquare - points per 1 square (more is better)</span></div>
+<div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160;<span class="comment">    @retval                     - approximate integral</span></div>
+<div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160;<span class="comment">**/</span></div>
 <div class="line"><a name="l00236"></a><span class="lineno"><a class="line" href="functional_8h.html#a8ddf97ca5c9042f504cbf355dad4eb71">  236</a></span>&#160;<span class="keyword">inline</span> <span class="keywordtype">double</span> <a class="code" href="functional_8h.html#a8ddf97ca5c9042f504cbf355dad4eb71">integrate_monte_carlo</a>(</div>
 <div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;    <span class="keyword">const</span> std::function&lt;<span class="keywordtype">int</span>(<span class="keywordtype">double</span>, <span class="keywordtype">double</span>)&gt;&amp; funcIsInside,</div>
 <div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160;    glm::dvec2                                pos0,</div>
@@ -268,7 +333,16 @@ $(function() {
 <div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160; </div>
 <div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160;    <span class="keywordflow">return</span> (<span class="keyword">static_cast&lt;</span><span class="keywordtype">double</span><span class="keyword">&gt;</span>(points_inside) / nTotalPoints) * fArea;</div>
 <div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160;}</div>
-<div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160; </div>
+<div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160;<span class="comment">/**</span></div>
+<div class="line"><a name="l00267"></a><span class="lineno">  267</span>&#160;<span class="comment">    @brief  Find root of the equation using Newtons method</span></div>
+<div class="line"><a name="l00268"></a><span class="lineno">  268</span>&#160;<span class="comment">    @param  f              - function</span></div>
+<div class="line"><a name="l00269"></a><span class="lineno">  269</span>&#160;<span class="comment">    @param  dfdx           - derivative</span></div>
+<div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160;<span class="comment">    @param  fInitialGuess  - initial root guess</span></div>
+<div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160;<span class="comment">    @param  fMaxError      - max error to stop searching</span></div>
+<div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160;<span class="comment">    @param  nMaxIterations - max iterations number (sometimes alg breaks)</span></div>
+<div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160;<span class="comment">    @retval                - approximate root</span></div>
+<div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160;<span class="comment">**/</span></div>
 <div class="line"><a name="l00275"></a><span class="lineno"><a class="line" href="functional_8h.html#ad2bc1385a20ce23bdb0b1b4348a197dd">  275</a></span>&#160;<span class="keyword">inline</span> <span class="keywordtype">double</span> <a class="code" href="functional_8h.html#ad2bc1385a20ce23bdb0b1b4348a197dd">find_zero_newtons_method</a>(</div>
 <div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160;    <span class="keyword">const</span> function2d&amp; f,</div>
 <div class="line"><a name="l00277"></a><span class="lineno">  277</span>&#160;    <span class="keyword">const</span> function2d&amp; dfdx,</div>

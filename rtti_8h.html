@@ -68,8 +68,7 @@ $(function() {
   <div class="summary">
 <a href="#nested-classes">Classes</a> &#124;
 <a href="#define-members">Macros</a> &#124;
-<a href="#func-members">Functions</a> &#124;
-<a href="#var-members">Variables</a>  </div>
+<a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
 <div class="title">rtti.h File Reference</div>  </div>
 </div><!--header-->
@@ -101,12 +100,6 @@ Functions</h2></td></tr>
 <tr class="memitem:a6d8a41ae6ddba250b07deb594edb332c"><td class="memTemplItemLeft" align="right" valign="top">class_identificator&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="rtti_8h.html#a6d8a41ae6ddba250b07deb594edb332c">qx::get_class_id</a> () noexcept</td></tr>
 <tr class="memdesc:a6d8a41ae6ddba250b07deb594edb332c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get class id if C is supported qx RTTI system.  <a href="rtti_8h.html#a6d8a41ae6ddba250b07deb594edb332c">More...</a><br /></td></tr>
 <tr class="separator:a6d8a41ae6ddba250b07deb594edb332c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
-Variables</h2></td></tr>
-<tr class="memitem:af8ae7fad813453bcbaac035fa4dc506e"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
-<tr class="memitem:af8ae7fad813453bcbaac035fa4dc506e"><td class="memTemplItemLeft" align="right" valign="top">concept&#160;</td><td class="memTemplItemRight" valign="bottom"><b>qx::detail::has_get_class_id_static</b></td></tr>
-<tr class="separator:af8ae7fad813453bcbaac035fa4dc506e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>RTTI system based on polymorphism. </p>
@@ -196,29 +189,6 @@ template&lt;class C &gt; </div>
 </dl>
 
 <p class="definition">Definition at line <a class="el" href="rtti_8h_source.html#l00041">41</a> of file <a class="el" href="rtti_8h_source.html">rtti.h</a>.</p>
-
-</div>
-</div>
-<h2 class="groupheader">Variable Documentation</h2>
-<a id="af8ae7fad813453bcbaac035fa4dc506e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af8ae7fad813453bcbaac035fa4dc506e">&#9670;&nbsp;</a></span>has_get_class_id_static</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename T &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">concept qx::detail::has_get_class_id_static</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<b>Initial value:</b><div class="fragment"><div class="line">= requires(T t)</div>
-<div class="line">{</div>
-<div class="line">    T::get_class_id_static();</div>
-<div class="line">}</div>
-</div><!-- fragment -->
-<p class="definition">Definition at line <a class="el" href="rtti_8h_source.html#l00028">28</a> of file <a class="el" href="rtti_8h_source.html">rtti.h</a>.</p>
 
 </div>
 </div>

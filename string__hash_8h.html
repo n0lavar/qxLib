@@ -67,9 +67,7 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#nested-classes">Classes</a> &#124;
-<a href="#typedef-members">Typedefs</a> &#124;
-<a href="#func-members">Functions</a> &#124;
-<a href="#var-members">Variables</a>  </div>
+<a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
 <div class="title">string_hash.h File Reference</div>  </div>
 </div><!--header-->
@@ -90,21 +88,6 @@ Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structqx_1_1fast__hash__string__traits.html">qx::fast_hash_string_traits&lt; value_type &gt;</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
-Typedefs</h2></td></tr>
-<tr class="memitem:aac0b9bbe83b7d7a1f34aee5433aac41d"><td class="memItemLeft" align="right" valign="top"><a id="aac0b9bbe83b7d7a1f34aee5433aac41d"></a>
-using&#160;</td><td class="memItemRight" valign="bottom"><b>qx::string_hash</b> = basic_string_hash&lt; char_traits&lt; char &gt; &gt;</td></tr>
-<tr class="separator:aac0b9bbe83b7d7a1f34aee5433aac41d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa38e2539773277cb245d8d476d109499"><td class="memItemLeft" align="right" valign="top"><a id="aa38e2539773277cb245d8d476d109499"></a>
-using&#160;</td><td class="memItemRight" valign="bottom"><b>qx::wstring_hash</b> = basic_string_hash&lt; char_traits&lt; wchar_t &gt; &gt;</td></tr>
-<tr class="separator:aa38e2539773277cb245d8d476d109499"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a886527395556b37046fed11d2876a444"><td class="memItemLeft" align="right" valign="top"><a id="a886527395556b37046fed11d2876a444"></a>
-using&#160;</td><td class="memItemRight" valign="bottom"><b>qx::fast_string_hash</b> = basic_string_hash&lt; fast_hash_string_traits&lt; char &gt; &gt;</td></tr>
-<tr class="separator:a886527395556b37046fed11d2876a444"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5e876b46a3a33fd4b2849840e8e1a952"><td class="memItemLeft" align="right" valign="top"><a id="a5e876b46a3a33fd4b2849840e8e1a952"></a>
-using&#160;</td><td class="memItemRight" valign="bottom"><b>qx::fast_wstring_hash</b> = basic_string_hash&lt; fast_hash_string_traits&lt; wchar_t &gt; &gt;</td></tr>
-<tr class="separator:a5e876b46a3a33fd4b2849840e8e1a952"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
 <tr class="memitem:acabe0c0114ed5116a27961e85c4fc233"><td class="memItemLeft" align="right" valign="top">constexpr basic_string_hash&lt; fast_hash_string_traits&lt; char &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="string__hash_8h.html#acabe0c0114ed5116a27961e85c4fc233">qx::literals::operator&quot;&quot;_sh</a> (const char *pszText, size_t nSize)</td></tr>
@@ -113,15 +96,6 @@ Functions</h2></td></tr>
 <tr class="memitem:ab540250e1158ad11d7165346e8b841c5"><td class="memItemLeft" align="right" valign="top">constexpr basic_string_hash&lt; fast_hash_string_traits&lt; wchar_t &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="string__hash_8h.html#ab540250e1158ad11d7165346e8b841c5">qx::literals::operator&quot;&quot;_sh</a> (const wchar_t *pszText, size_t nSize)</td></tr>
 <tr class="memdesc:ab540250e1158ad11d7165346e8b841c5"><td class="mdescLeft">&#160;</td><td class="mdescRight">String hash literal for constexpr converting. Can be used with switch-case.  <a href="string__hash_8h.html#ab540250e1158ad11d7165346e8b841c5">More...</a><br /></td></tr>
 <tr class="separator:ab540250e1158ad11d7165346e8b841c5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
-Variables</h2></td></tr>
-<tr class="memitem:af3c042460af4ca88e0349f4a2c643d09"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
-<tr class="memitem:af3c042460af4ca88e0349f4a2c643d09"><td class="memTemplItemLeft" align="right" valign="top">concept&#160;</td><td class="memTemplItemRight" valign="bottom"><b>qx::detail::has_zero_termonated_hash_func_overload</b></td></tr>
-<tr class="separator:af3c042460af4ca88e0349f4a2c643d09"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5d088ccf68fe541375770d93868fd234"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
-<tr class="memitem:a5d088ccf68fe541375770d93868fd234"><td class="memTemplItemLeft" align="right" valign="top">concept&#160;</td><td class="memTemplItemRight" valign="bottom"><b>qx::string_convertable</b></td></tr>
-<tr class="separator:a5d088ccf68fe541375770d93868fd234"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Contains <a class="el" href="classqx_1_1basic__string__hash.html" title="String hash object.">qx::basic_string_hash</a> class. </p>
@@ -234,53 +208,6 @@ Variables</h2></td></tr>
 </dl>
 
 <p class="definition">Definition at line <a class="el" href="string__hash_8inl_source.html#l00094">94</a> of file <a class="el" href="string__hash_8inl_source.html">string_hash.inl</a>.</p>
-
-</div>
-</div>
-<h2 class="groupheader">Variable Documentation</h2>
-<a id="af3c042460af4ca88e0349f4a2c643d09"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af3c042460af4ca88e0349f4a2c643d09">&#9670;&nbsp;</a></span>has_zero_termonated_hash_func_overload</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename T &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">concept qx::detail::has_zero_termonated_hash_func_overload</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<b>Initial value:</b><div class="fragment"><div class="line">=</div>
-<div class="line">    requires(<span class="keyword">typename</span> T::const_pointer pszString, <span class="keywordtype">size_t</span> nSeed)</div>
-<div class="line">{</div>
-<div class="line">    T::hash_function(pszString, nSeed);</div>
-<div class="line">}</div>
-</div><!-- fragment -->
-<p class="definition">Definition at line <a class="el" href="string__hash_8h_source.html#l00021">21</a> of file <a class="el" href="string__hash_8h_source.html">string_hash.h</a>.</p>
-
-</div>
-</div>
-<a id="a5d088ccf68fe541375770d93868fd234"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5d088ccf68fe541375770d93868fd234">&#9670;&nbsp;</a></span>string_convertable</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename T &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">concept qx::string_convertable</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<b>Initial value:</b><div class="fragment"><div class="line">= requires(T t)</div>
-<div class="line">{</div>
-<div class="line">    t.cbegin();</div>
-<div class="line">    t.cend();</div>
-<div class="line">}</div>
-</div><!-- fragment -->
-<p class="definition">Definition at line <a class="el" href="string__hash_8h_source.html#l00031">31</a> of file <a class="el" href="string__hash_8h_source.html">string_hash.h</a>.</p>
 
 </div>
 </div>

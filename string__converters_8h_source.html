@@ -69,14 +69,28 @@ $(function() {
 <div class="title">string_converters.h</div>  </div>
 </div><!--header-->
 <div class="contents">
-<a href="string__converters_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160; </div>
+<a href="string__converters_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">/**</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment">    @file      string_converters.h</span></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment">    @brief     Contains string converters</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment">    @author    Khrapov</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="comment">    @date      24.11.2021</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="comment">    @copyright © Nick Khrapov, 2021. All right reserved.</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="comment">**/</span></div>
 <div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#pragma once</span></div>
 <div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160; </div>
 <div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="string_8h.html">qx/containers/string/string.h</a>&gt;</span></div>
 <div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160; </div>
 <div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="keyword">namespace </span>qx</div>
 <div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;{</div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160; </div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="comment">/**</span></div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="comment">    @brief  convert string to wstring</span></div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="comment">    @param  str    - char string view</span></div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="comment">    @param  locale - locale to use</span></div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="comment">    @retval        - wchar_t string</span></div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="comment">**/</span></div>
 <div class="line"><a name="l00023"></a><span class="lineno"><a class="line" href="string__converters_8h.html#aa203fa26e66091ce0c1f4ffff0c4e7dc">   23</a></span>&#160;<span class="keyword">inline</span> <a class="code" href="classqx_1_1basic__string.html">wstring</a> <a class="code" href="string__converters_8h.html#aa203fa26e66091ce0c1f4ffff0c4e7dc">to_wstring</a>(</div>
 <div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    std::string_view   str,</div>
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    <span class="keyword">const</span> std::locale&amp; locale = std::locale())</div>
@@ -89,7 +103,14 @@ $(function() {
 <div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160; </div>
 <div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="classqx_1_1basic__string.html">wstring</a>(buf.data(), buf.size());</div>
 <div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;}</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160; </div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="comment">/**</span></div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="comment">    @brief   Convert wstring to string</span></div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="comment">    @details &#39;?&#39; is default character</span></div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="comment">    @param   str    - wchar_t string view</span></div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="comment">    @param   locale - locale to use</span></div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="comment">    @retval         - char string</span></div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="comment">**/</span></div>
 <div class="line"><a name="l00043"></a><span class="lineno"><a class="line" href="string__converters_8h.html#a3e1f4e7844477718e8e50adb0a7bbfb6">   43</a></span>&#160;<span class="keyword">inline</span> <span class="keywordtype">string</span> <a class="code" href="string__converters_8h.html#a3e1f4e7844477718e8e50adb0a7bbfb6">to_string</a>(</div>
 <div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    std::wstring_view  str,</div>
 <div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    <span class="keyword">const</span> std::locale&amp; locale = std::locale())</div>
@@ -99,7 +120,17 @@ $(function() {
 <div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;        .narrow(str.data(), str.data() + str.size(), <span class="charliteral">&#39;?&#39;</span>, buf.data());</div>
 <div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="classqx_1_1basic__string.html">string</a>(buf.data(), buf.size());</div>
 <div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;}</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160; </div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<span class="comment">/**</span></div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;<span class="comment">    @brief   Convert string_view to the null terminated chars array</span></div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="comment">    @details Some libraries or even c++ types can&#39;t deal with std::string_view</span></div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;<span class="comment">             (for ex. std::ifstream). This function allows to reduce number of</span></div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;<span class="comment">             allocations, but still leads to overhead due to chars copying</span></div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;<span class="comment">    @tparam  value_type - string value type</span></div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;<span class="comment">    @param   stringView - string view to convert</span></div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;<span class="comment">    @retval             - null terminated string with stringView convent</span></div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;<span class="comment">                          valid until the next to_char_pointer call</span></div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;<span class="comment">**/</span></div>
 <div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> value_type&gt;</div>
 <div class="line"><a name="l00064"></a><span class="lineno"><a class="line" href="string__converters_8h.html#abae43e12d9d47cc45926f2599f74b792">   64</a></span>&#160;<span class="keyword">inline</span> <span class="keyword">const</span> value_type* <a class="code" href="string__converters_8h.html#abae43e12d9d47cc45926f2599f74b792">to_char_pointer</a>(</div>
 <div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    std::basic_string_view&lt;value_type&gt; stringView)</div>

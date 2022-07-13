@@ -69,7 +69,15 @@ $(function() {
 <div class="title">numerical.h</div>  </div>
 </div><!--header-->
 <div class="contents">
-<a href="numerical_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160; </div>
+<a href="numerical_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">/**</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment">    @file      numerical.h</span></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment">    @brief     Numerical algorithms</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment">    @author    Khrapov</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="comment">    @date      1.02.2020</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="comment">    @copyright © Nick Khrapov, 2021. All right reserved.</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="comment">**/</span></div>
 <div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#pragma once</span></div>
 <div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160; </div>
 <div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#include &lt;array&gt;</span></div>
@@ -82,7 +90,16 @@ $(function() {
 <div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160; </div>
 <div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="keyword">namespace </span>qx</div>
 <div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;{</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160; </div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="comment">/**</span></div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="comment">    @brief      Greatest common divisor</span></div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="comment">    @details    Euclid&#39;s algorithm</span></div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="comment">                based on fact gcd(A, B) == gcd(B, A mod B)</span></div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="comment">    @complexity O(log(second))</span></div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="comment">    @param      nFirst  - first num</span></div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="comment">    @param      nSecond - second num</span></div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="comment">    @retval             - greatest common divisor if first and second &gt; 0, otherwise 0</span></div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="comment">**/</span></div>
 <div class="line"><a name="l00032"></a><span class="lineno"><a class="line" href="numerical_8h.html#a417c129e77501e06c66f9574fc186bab">   32</a></span>&#160;<span class="keyword">inline</span> <span class="keywordtype">int</span> <a class="code" href="numerical_8h.html#a417c129e77501e06c66f9574fc186bab">gcd</a>(<span class="keywordtype">int</span> nFirst, <span class="keywordtype">int</span> nSecond)</div>
 <div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;{</div>
 <div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    <span class="keywordflow">if</span> (nFirst == 0 || nSecond == 0)</div>
@@ -97,7 +114,14 @@ $(function() {
 <div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160; </div>
 <div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    <span class="keywordflow">return</span> std::abs(nFirst);</div>
 <div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;}</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160; </div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="comment">/**</span></div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="comment">    @brief      Least common multiple</span></div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="comment">    @complexity O(log(second))</span></div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="comment">    @param      nFirst  - first num</span></div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="comment">    @param      nSecond - second num</span></div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<span class="comment">    @retval             - least common multiple if first and second &gt; 0, otherwise 0</span></div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<span class="comment">**/</span></div>
 <div class="line"><a name="l00054"></a><span class="lineno"><a class="line" href="numerical_8h.html#a56b88020cf301f6f8b9dbe523b5f667a">   54</a></span>&#160;<span class="keyword">inline</span> <span class="keywordtype">int</span> <a class="code" href="numerical_8h.html#a56b88020cf301f6f8b9dbe523b5f667a">lcm</a>(<span class="keywordtype">int</span> nFirst, <span class="keywordtype">int</span> nSecond)</div>
 <div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;{</div>
 <div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    <span class="keywordflow">if</span> (nFirst == 0 || nSecond == 0)</div>
@@ -108,7 +132,19 @@ $(function() {
 <div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160; </div>
 <div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    <span class="keywordflow">return</span> nFirst / <a class="code" href="numerical_8h.html#a417c129e77501e06c66f9574fc186bab">gcd</a>(nFirst, nSecond) * nSecond;</div>
 <div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;}</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160; </div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;<span class="comment">/**</span></div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;<span class="comment">    @brief      Power function for integer power</span></div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;<span class="comment">    @details    About 2.22 times (positive powers)</span></div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;<span class="comment">                      1.7  times (positive and negative powers)</span></div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;<span class="comment">                      2.33 times (negative powers)</span></div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;<span class="comment">                      faster then std::pow</span></div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;<span class="comment">    @complexity O(log(power))</span></div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;<span class="comment">    @tparam     T       - Integral or floating point type</span></div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;<span class="comment">    @param      nNumber - integral of floating point value</span></div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;<span class="comment">    @param      nPower  - integral power</span></div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;<span class="comment">    @retval             - number ^ power</span></div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;<span class="comment">**/</span></div>
 <div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
 <div class="line"><a name="l00078"></a><span class="lineno"><a class="line" href="numerical_8h.html#a067253ab2ca1eebe6341415e897fca4b">   78</a></span>&#160;<span class="keyword">inline</span> <span class="keywordtype">double</span> <a class="code" href="numerical_8h.html#a067253ab2ca1eebe6341415e897fca4b">pow</a>(T nNumber, <span class="keywordtype">int</span> nPower)</div>
 <div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;{</div>
@@ -160,7 +196,13 @@ $(function() {
 <div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160; </div>
 <div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;    <span class="keywordflow">return</span> bNegativePower ? 1.0 / fResult : fResult;</div>
 <div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;}</div>
-<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160; </div>
+<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;<span class="comment">/**</span></div>
+<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;<span class="comment">    @brief  Max power of two in integer</span></div>
+<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;<span class="comment">    @tparam I      - Integral type</span></div>
+<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;<span class="comment">    @param  nValue - number</span></div>
+<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;<span class="comment">    @retval        - max power of two in number</span></div>
+<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;<span class="comment">**/</span></div>
 <div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> I&gt;</div>
 <div class="line"><a name="l00136"></a><span class="lineno"><a class="line" href="numerical_8h.html#a558b28fe2075e7c4a244b55920b69df7">  136</a></span>&#160;<span class="keyword">inline</span> I <a class="code" href="numerical_8h.html#a558b28fe2075e7c4a244b55920b69df7">maxpot</a>(I nValue)</div>
 <div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;{</div>
@@ -178,7 +220,14 @@ $(function() {
 <div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160; </div>
 <div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;    <span class="keywordflow">return</span> nPow;</div>
 <div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;}</div>
-<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160; </div>
+<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;<span class="comment">/**</span></div>
+<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;<span class="comment">    @brief      Find all prime factors</span></div>
+<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;<span class="comment">    @complexity O(sqrt(number))</span></div>
+<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;<span class="comment">    @tparam     I      - Integral type</span></div>
+<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;<span class="comment">    @param      nValue - number for search</span></div>
+<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;<span class="comment">    @retval            - all prime factors vector</span></div>
+<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;<span class="comment">**/</span></div>
 <div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> I&gt;</div>
 <div class="line"><a name="l00161"></a><span class="lineno"><a class="line" href="numerical_8h.html#aab3f10fce9f921f99e04ab5407a38fc5">  161</a></span>&#160;<span class="keyword">inline</span> std::vector&lt;I&gt; <a class="code" href="numerical_8h.html#aab3f10fce9f921f99e04ab5407a38fc5">find_prime_factors</a>(I nValue)</div>
 <div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;{</div>
@@ -228,7 +277,15 @@ $(function() {
 <div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160; </div>
 <div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160;    <span class="keywordflow">return</span> factors;</div>
 <div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160;}</div>
-<div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160; </div>
+<div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160;<span class="comment">/**</span></div>
+<div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160;<span class="comment">    @brief      Find all primes between 2 and nMaxNumber</span></div>
+<div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160;<span class="comment">    @details    Sieve of Eratosthenes</span></div>
+<div class="line"><a name="l00213"></a><span class="lineno">  213</span>&#160;<span class="comment">    @complexity O(nMaxNumber * log(log(number)))</span></div>
+<div class="line"><a name="l00214"></a><span class="lineno">  214</span>&#160;<span class="comment">    @tparam     I          - Integral type</span></div>
+<div class="line"><a name="l00215"></a><span class="lineno">  215</span>&#160;<span class="comment">    @param      nMaxNumber - max number for search</span></div>
+<div class="line"><a name="l00216"></a><span class="lineno">  216</span>&#160;<span class="comment">    @retval                - all primes vector</span></div>
+<div class="line"><a name="l00217"></a><span class="lineno">  217</span>&#160;<span class="comment">**/</span></div>
 <div class="line"><a name="l00218"></a><span class="lineno">  218</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> I&gt;</div>
 <div class="line"><a name="l00219"></a><span class="lineno"><a class="line" href="numerical_8h.html#a0ec4c5edc263dd60ba02a7ce9d973d29">  219</a></span>&#160;<span class="keyword">inline</span> std::vector&lt;I&gt; <a class="code" href="numerical_8h.html#a0ec4c5edc263dd60ba02a7ce9d973d29">find_primes</a>(I nMaxNumber)</div>
 <div class="line"><a name="l00220"></a><span class="lineno">  220</span>&#160;{</div>
@@ -270,12 +327,25 @@ $(function() {
 <div class="line"><a name="l00256"></a><span class="lineno">  256</span>&#160;    primes.shrink_to_fit();</div>
 <div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160;    <span class="keywordflow">return</span> primes;</div>
 <div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160;}</div>
-<div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160; </div>
+<div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160;<span class="comment">/**</span></div>
+<div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160;<span class="comment">    @brief      Is number prime</span></div>
+<div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160;<span class="comment">    @details    1.0 probability, high computational complexity</span></div>
+<div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160;<span class="comment">    @complexity O(sqrt(number))</span></div>
+<div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160;<span class="comment">    @param      nValue - number</span></div>
+<div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160;<span class="comment">    @retval            - true if prime</span></div>
+<div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160;<span class="comment">**/</span></div>
 <div class="line"><a name="l00267"></a><span class="lineno"><a class="line" href="numerical_8h.html#a243df841a58008f0213397f4259ebf4c">  267</a></span>&#160;<span class="keyword">inline</span> <span class="keywordtype">bool</span> <a class="code" href="numerical_8h.html#a243df841a58008f0213397f4259ebf4c">is_prime</a>(<span class="keywordtype">size_t</span> nValue)</div>
 <div class="line"><a name="l00268"></a><span class="lineno">  268</span>&#160;{</div>
 <div class="line"><a name="l00269"></a><span class="lineno">  269</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="numerical_8h.html#aab3f10fce9f921f99e04ab5407a38fc5">find_prime_factors</a>(nValue).size() == 1;</div>
 <div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160;}</div>
-<div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160; </div>
+<div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160;<span class="comment">/**</span></div>
+<div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160;<span class="comment">    @brief  Is number prime with some probability</span></div>
+<div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160;<span class="comment">    @param  nValue       - number</span></div>
+<div class="line"><a name="l00275"></a><span class="lineno">  275</span>&#160;<span class="comment">    @param  fProbability - probability (0, 1]</span></div>
+<div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160;<span class="comment">    @retval              - true is number is prime with some probability</span></div>
+<div class="line"><a name="l00277"></a><span class="lineno">  277</span>&#160;<span class="comment">**/</span></div>
 <div class="line"><a name="l00278"></a><span class="lineno"><a class="line" href="numerical_8h.html#a78654ada0326f9de3611df0dd6cfea86">  278</a></span>&#160;<span class="keyword">inline</span> <span class="keywordtype">bool</span> <a class="code" href="numerical_8h.html#a243df841a58008f0213397f4259ebf4c">is_prime</a>(<span class="keywordtype">size_t</span> nValue, <span class="keywordtype">double</span> fProbability)</div>
 <div class="line"><a name="l00279"></a><span class="lineno">  279</span>&#160;{</div>
 <div class="line"><a name="l00280"></a><span class="lineno">  280</span>&#160;    <span class="keywordflow">if</span> (fProbability &lt; 0)</div>

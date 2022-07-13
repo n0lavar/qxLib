@@ -67,8 +67,7 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#nested-classes">Classes</a> &#124;
-<a href="#define-members">Macros</a> &#124;
-<a href="#func-members">Functions</a>  </div>
+<a href="#define-members">Macros</a>  </div>
   <div class="headertitle">
 <div class="title">useful_macros.h File Reference</div>  </div>
 </div><!--header-->
@@ -122,15 +121,6 @@ Macros</h2></td></tr>
 <tr class="memitem:a8f51bd935768d1845211352e225739ed"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="useful__macros_8h.html#a8f51bd935768d1845211352e225739ed">QX_LINE_NAME</a>(prefix)&#160;&#160;&#160;_QX_JOIN(prefix, __LINE__)</td></tr>
 <tr class="memdesc:a8f51bd935768d1845211352e225739ed"><td class="mdescLeft">&#160;</td><td class="mdescRight">Do magic! Creates a unique name using the line number.  <a href="useful__macros_8h.html#a8f51bd935768d1845211352e225739ed">More...</a><br /></td></tr>
 <tr class="separator:a8f51bd935768d1845211352e225739ed"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acc6f80cc2546ec7a438bd07e7018bda2"><td class="memItemLeft" align="right" valign="top"><a id="acc6f80cc2546ec7a438bd07e7018bda2"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>_QX_JOIN</b>(symbol1,  symbol2)&#160;&#160;&#160;_QX_DO_JOIN(symbol1, symbol2)</td></tr>
-<tr class="separator:acc6f80cc2546ec7a438bd07e7018bda2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8b555f801833eaefff365e12aef63a7e"><td class="memItemLeft" align="right" valign="top"><a id="a8b555f801833eaefff365e12aef63a7e"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>_QX_DO_JOIN</b>(symbol1,  symbol2)&#160;&#160;&#160;symbol1##symbol2</td></tr>
-<tr class="separator:a8b555f801833eaefff365e12aef63a7e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a89dae3b1ae46f2dbe47cf0edf36be9c9"><td class="memItemLeft" align="right" valign="top"><a id="a89dae3b1ae46f2dbe47cf0edf36be9c9"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>QX_PATH_SEPARATOR</b>&#160;&#160;&#160;'/'</td></tr>
-<tr class="separator:a89dae3b1ae46f2dbe47cf0edf36be9c9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae158b161fec70fada62391b9ffa7d502"><td class="memItemLeft" align="right" valign="top"><a id="ae158b161fec70fada62391b9ffa7d502"></a>
 #define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="useful__macros_8h.html#ae158b161fec70fada62391b9ffa7d502">QX_SHORT_FILE</a>&#160;&#160;&#160;qx::detail::last_slash(__FILE__)</td></tr>
 <tr class="memdesc:ae158b161fec70fada62391b9ffa7d502"><td class="mdescLeft">&#160;</td><td class="mdescRight">Cuts full absolute path to the file name only ex: "C:\folder1\foler2\file.h" =&gt; "file.h". <br /></td></tr>
@@ -156,30 +146,15 @@ Macros</h2></td></tr>
 <tr class="memitem:a09c5ff42dcd9da4a9bbaaa75bb92f367"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="useful__macros_8h.html#a09c5ff42dcd9da4a9bbaaa75bb92f367">QX_NONCOPYMOVABLE</a>(...)</td></tr>
 <tr class="memdesc:a09c5ff42dcd9da4a9bbaaa75bb92f367"><td class="mdescLeft">&#160;</td><td class="mdescRight">Define class as non copyable and non movable.  <a href="useful__macros_8h.html#a09c5ff42dcd9da4a9bbaaa75bb92f367">More...</a><br /></td></tr>
 <tr class="separator:a09c5ff42dcd9da4a9bbaaa75bb92f367"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a605ea7d61e15258e9655f20269a765de"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><b>QX_STATIC_ASSERT_EQ</b>(a,  b)</td></tr>
-<tr class="separator:a605ea7d61e15258e9655f20269a765de"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a259965ca58f31b6308462682095fe9ff"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><b>QX_STATIC_ASSERT_NE</b>(a,  b)</td></tr>
-<tr class="separator:a259965ca58f31b6308462682095fe9ff"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a649656bc79d1c14a3a9d03bb37a8bced"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><b>QX_STATIC_ASSERT_LT</b>(a,  b)</td></tr>
-<tr class="separator:a649656bc79d1c14a3a9d03bb37a8bced"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7496297570837429b56f6f4c4574d81d"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><b>QX_STATIC_ASSERT_LE</b>(a,  b)</td></tr>
-<tr class="separator:a7496297570837429b56f6f4c4574d81d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3875bde7cfb136033c8979dad2d40c70"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><b>QX_STATIC_ASSERT_GT</b>(a,  b)</td></tr>
-<tr class="separator:a3875bde7cfb136033c8979dad2d40c70"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a96cebe4d834c8fa837ed4154aa720ef1"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><b>QX_STATIC_ASSERT_GE</b>(a,  b)</td></tr>
-<tr class="separator:a96cebe4d834c8fa837ed4154aa720ef1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a06c64a5f786d6ed8416e6a90502eaa86"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="useful__macros_8h.html#a06c64a5f786d6ed8416e6a90502eaa86">QX_STATIC_ASSERT_BETWEEN</a>(L,  V,  R)</td></tr>
 <tr class="memdesc:a06c64a5f786d6ed8416e6a90502eaa86"><td class="mdescLeft">&#160;</td><td class="mdescRight">Shows L, V and R in error msg.  <a href="useful__macros_8h.html#a06c64a5f786d6ed8416e6a90502eaa86">More...</a><br /></td></tr>
 <tr class="separator:a06c64a5f786d6ed8416e6a90502eaa86"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac863db693e59fe16168b9d7c1c3cc2ed"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="useful__macros_8h.html#ac863db693e59fe16168b9d7c1c3cc2ed">QX_STATIC_ASSERT_NO_INSTANTIATION</a>(Message)</td></tr>
+<tr class="memdesc:ac863db693e59fe16168b9d7c1c3cc2ed"><td class="mdescLeft">&#160;</td><td class="mdescRight">This static assert will fail if block it placed in must not be instantiated.  <a href="useful__macros_8h.html#ac863db693e59fe16168b9d7c1c3cc2ed">More...</a><br /></td></tr>
+<tr class="separator:ac863db693e59fe16168b9d7c1c3cc2ed"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7a73fab5264de55ef55d54f3a6cd2a8f"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="useful__macros_8h.html#a7a73fab5264de55ef55d54f3a6cd2a8f">QX_ENUM_CLASS</a>(TypeName, ...)</td></tr>
 <tr class="memdesc:a7a73fab5264de55ef55d54f3a6cd2a8f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Macro for generating "enum class"-like class or struct with additional data/methods.  <a href="useful__macros_8h.html#a7a73fab5264de55ef55d54f3a6cd2a8f">More...</a><br /></td></tr>
 <tr class="separator:a7a73fab5264de55ef55d54f3a6cd2a8f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
-Functions</h2></td></tr>
-<tr class="memitem:ab38a1db613ed5d5d8e170f7b15e134de"><td class="memItemLeft" align="right" valign="top"><a id="ab38a1db613ed5d5d8e170f7b15e134de"></a>
-constexpr const char *&#160;</td><td class="memItemRight" valign="bottom"><b>qx::detail::last_slash</b> (const char *str)</td></tr>
-<tr class="separator:ab38a1db613ed5d5d8e170f7b15e134de"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Useful macros. </p>
@@ -294,7 +269,8 @@ constexpr const char *&#160;</td><td class="memItemRight" valign="bottom"><b>qx:
         </tr>
       </table>
 </div><div class="memdoc">
-<b>Value:</b><div class="fragment"><div class="line">    <span class="keyword">enum</span> TypeName##Internal { __VA_ARGS__ };                            \</div>
+<b>Value:</b><div class="fragment"><div class="line"><span class="keyword">public</span>:                                                                 \</div>
+<div class="line">    enum TypeName##Internal { __VA_ARGS__ };                            \</div>
 <div class="line">                                                                        \</div>
 <div class="line">    TypeName##Internal _eInternal = <span class="keyword">static_cast&lt;</span>TypeName##Internal<span class="keyword">&gt;</span>(0); \</div>
 <div class="line">                                                                        \</div>
@@ -324,7 +300,7 @@ constexpr const char *&#160;</td><td class="memItemRight" valign="bottom"><b>qx:
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="useful__macros_8h_source.html#l00289">289</a> of file <a class="el" href="useful__macros_8h_source.html">useful_macros.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="useful__macros_8h_source.html#l00325">325</a> of file <a class="el" href="useful__macros_8h_source.html">useful_macros.h</a>.</p>
 
 </div>
 </div>
@@ -736,196 +712,58 @@ constexpr const char *&#160;</td><td class="memItemRight" valign="bottom"><b>qx:
 
 </div>
 </div>
-<a id="a605ea7d61e15258e9655f20269a765de"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a605ea7d61e15258e9655f20269a765de">&#9670;&nbsp;</a></span>QX_STATIC_ASSERT_EQ</h2>
+<a id="ac863db693e59fe16168b9d7c1c3cc2ed"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac863db693e59fe16168b9d7c1c3cc2ed">&#9670;&nbsp;</a></span>QX_STATIC_ASSERT_NO_INSTANTIATION</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define QX_STATIC_ASSERT_EQ</td>
+          <td class="memname">#define QX_STATIC_ASSERT_NO_INSTANTIATION</td>
           <td>(</td>
           <td class="paramtype">&#160;</td>
-          <td class="paramname">a, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
+          <td class="paramname">Message</td><td>)</td>
           <td></td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname">b&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
         </tr>
       </table>
 </div><div class="memdoc">
-<b>Value:</b><div class="fragment"><div class="line">    constexpr <a class="code" href="structqx_1_1detail_1_1_static_assert_two.html">qx::detail::StaticAssertTwo</a>&lt;(a), (b), std::equal_to&lt;&gt;&gt; \</div>
-<div class="line">        QX_LINE_NAME(_static_assert_eq_)</div>
-<div class="ttc" id="astructqx_1_1detail_1_1_static_assert_two_html"><div class="ttname"><a href="structqx_1_1detail_1_1_static_assert_two.html">qx::detail::StaticAssertTwo</a></div><div class="ttdef"><b>Definition:</b> <a href="useful__macros_8h_source.html#l00191">useful_macros.h:192</a></div></div>
+<b>Value:</b><div class="fragment"><div class="line">    []&lt;<span class="keywordtype">bool</span> flag = <span class="keyword">false</span>&gt;()                        \</div>
+<div class="line">    {                                              \</div>
+<div class="line">        static_assert(flag, Message);              \</div>
+<div class="line">    }                                              \</div>
+<div class="line">    ()</div>
 </div><!-- fragment -->
-<p class="definition">Definition at line <a class="el" href="useful__macros_8h_source.html#l00237">237</a> of file <a class="el" href="useful__macros_8h_source.html">useful_macros.h</a>.</p>
+<p>This static assert will fail if block it placed in must not be instantiated. </p>
+<div class="fragment"><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> T&gt;</div>
+<div class="line">constexpr <span class="keywordtype">int</span> GetValue()</div>
+<div class="line">{</div>
+<div class="line">    <span class="keywordflow">if</span> constexpr (std::is_same_v&lt;T, bool&gt;)</div>
+<div class="line">    {</div>
+<div class="line">        <span class="keywordflow">return</span> 0;</div>
+<div class="line">    }</div>
+<div class="line">    <span class="keywordflow">else</span> <span class="keywordflow">if</span> constexpr (std::is_same_v&lt;T, int&gt;)</div>
+<div class="line">    {</div>
+<div class="line">        <span class="keywordflow">return</span> 0;</div>
+<div class="line">    }</div>
+<div class="line">    <span class="keywordflow">else</span></div>
+<div class="line">    {</div>
+<div class="line">        <a class="code" href="useful__macros_8h.html#ac863db693e59fe16168b9d7c1c3cc2ed">QX_STATIC_ASSERT_NO_INSTANTIATION</a>(<span class="stringliteral">&quot;T must be bool or int&quot;</span>);</div>
+<div class="line">        <span class="keywordflow">return</span> 0;</div>
+<div class="line">    }</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line">constexpr <span class="keywordtype">int</span> val1 = GetValue&lt;bool&gt;();  <span class="comment">// ok</span></div>
+<div class="line">constexpr <span class="keywordtype">int</span> val2 = GetValue&lt;int&gt;();   <span class="comment">// ok</span></div>
+<div class="line">constexpr <span class="keywordtype">int</span> val3 = GetValue&lt;long&gt;();  <span class="comment">// static_assert failure</span></div>
+<div class="ttc" id="auseful__macros_8h_html_ac863db693e59fe16168b9d7c1c3cc2ed"><div class="ttname"><a href="useful__macros_8h.html#ac863db693e59fe16168b9d7c1c3cc2ed">QX_STATIC_ASSERT_NO_INSTANTIATION</a></div><div class="ttdeci">#define QX_STATIC_ASSERT_NO_INSTANTIATION(Message)</div><div class="ttdoc">This static assert will fail if block it placed in must not be instantiated.</div><div class="ttdef"><b>Definition:</b> <a href="useful__macros_8h_source.html#l00312">useful_macros.h:312</a></div></div>
+</div><!-- fragment --><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">Message</td><td>- static_assert message </td></tr>
+  </table>
+  </dd>
+</dl>
 
-</div>
-</div>
-<a id="a96cebe4d834c8fa837ed4154aa720ef1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a96cebe4d834c8fa837ed4154aa720ef1">&#9670;&nbsp;</a></span>QX_STATIC_ASSERT_GE</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define QX_STATIC_ASSERT_GE</td>
-          <td>(</td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname">a, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname">b&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<b>Value:</b><div class="fragment"><div class="line">    constexpr <a class="code" href="structqx_1_1detail_1_1_static_assert_two.html">qx::detail::StaticAssertTwo</a>&lt;(a), (b), std::greater_equal&lt;&gt;&gt; \</div>
-<div class="line">        QX_LINE_NAME(_static_assert_ge_)</div>
-</div><!-- fragment -->
-<p class="definition">Definition at line <a class="el" href="useful__macros_8h_source.html#l00257">257</a> of file <a class="el" href="useful__macros_8h_source.html">useful_macros.h</a>.</p>
-
-</div>
-</div>
-<a id="a3875bde7cfb136033c8979dad2d40c70"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3875bde7cfb136033c8979dad2d40c70">&#9670;&nbsp;</a></span>QX_STATIC_ASSERT_GT</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define QX_STATIC_ASSERT_GT</td>
-          <td>(</td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname">a, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname">b&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<b>Value:</b><div class="fragment"><div class="line">    constexpr <a class="code" href="structqx_1_1detail_1_1_static_assert_two.html">qx::detail::StaticAssertTwo</a>&lt;(a), (b), std::greater&lt;&gt;&gt; \</div>
-<div class="line">        QX_LINE_NAME(_static_assert_gt_)</div>
-</div><!-- fragment -->
-<p class="definition">Definition at line <a class="el" href="useful__macros_8h_source.html#l00253">253</a> of file <a class="el" href="useful__macros_8h_source.html">useful_macros.h</a>.</p>
-
-</div>
-</div>
-<a id="a7496297570837429b56f6f4c4574d81d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7496297570837429b56f6f4c4574d81d">&#9670;&nbsp;</a></span>QX_STATIC_ASSERT_LE</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define QX_STATIC_ASSERT_LE</td>
-          <td>(</td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname">a, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname">b&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<b>Value:</b><div class="fragment"><div class="line">    constexpr <a class="code" href="structqx_1_1detail_1_1_static_assert_two.html">qx::detail::StaticAssertTwo</a>&lt;(a), (b), std::less_equal&lt;&gt;&gt; \</div>
-<div class="line">        QX_LINE_NAME(_static_assert_le_)</div>
-</div><!-- fragment -->
-<p class="definition">Definition at line <a class="el" href="useful__macros_8h_source.html#l00249">249</a> of file <a class="el" href="useful__macros_8h_source.html">useful_macros.h</a>.</p>
-
-</div>
-</div>
-<a id="a649656bc79d1c14a3a9d03bb37a8bced"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a649656bc79d1c14a3a9d03bb37a8bced">&#9670;&nbsp;</a></span>QX_STATIC_ASSERT_LT</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define QX_STATIC_ASSERT_LT</td>
-          <td>(</td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname">a, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname">b&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<b>Value:</b><div class="fragment"><div class="line">    constexpr <a class="code" href="structqx_1_1detail_1_1_static_assert_two.html">qx::detail::StaticAssertTwo</a>&lt;(a), (b), std::less&lt;&gt;&gt; <a class="code" href="useful__macros_8h.html#a8f51bd935768d1845211352e225739ed">QX_LINE_NAME</a>( \</div>
-<div class="line">        _static_assert_lt_)</div>
-</div><!-- fragment -->
-<p class="definition">Definition at line <a class="el" href="useful__macros_8h_source.html#l00245">245</a> of file <a class="el" href="useful__macros_8h_source.html">useful_macros.h</a>.</p>
-
-</div>
-</div>
-<a id="a259965ca58f31b6308462682095fe9ff"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a259965ca58f31b6308462682095fe9ff">&#9670;&nbsp;</a></span>QX_STATIC_ASSERT_NE</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define QX_STATIC_ASSERT_NE</td>
-          <td>(</td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname">a, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname">b&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<b>Value:</b><div class="fragment"><div class="line">    constexpr <a class="code" href="structqx_1_1detail_1_1_static_assert_two.html">qx::detail::StaticAssertTwo</a>&lt;(a), (b), std::not_equal_to&lt;&gt;&gt; \</div>
-<div class="line">        QX_LINE_NAME(_static_assert_nq_)</div>
-</div><!-- fragment -->
-<p class="definition">Definition at line <a class="el" href="useful__macros_8h_source.html#l00241">241</a> of file <a class="el" href="useful__macros_8h_source.html">useful_macros.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="useful__macros_8h_source.html#l00312">312</a> of file <a class="el" href="useful__macros_8h_source.html">useful_macros.h</a>.</p>
 
 </div>
 </div>

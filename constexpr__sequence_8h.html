@@ -66,10 +66,7 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="summary">
-<a href="#nested-classes">Classes</a> &#124;
-<a href="#define-members">Macros</a> &#124;
-<a href="#typedef-members">Typedefs</a> &#124;
-<a href="#func-members">Functions</a>  </div>
+<a href="#nested-classes">Classes</a>  </div>
   <div class="headertitle">
 <div class="title">constexpr_sequence.h File Reference</div>  </div>
 </div><!--header-->
@@ -88,34 +85,6 @@ Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1constexpr__sequence.html">qx::constexpr_sequence&lt; Tag, T, Start, Func &gt;</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constexpr sequence. use unique tag for different instances.  <a href="classqx_1_1constexpr__sequence.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
-Macros</h2></td></tr>
-<tr class="memitem:a4b640f34250215493a0e316f9241ba13"><td class="memItemLeft" align="right" valign="top"><a id="a4b640f34250215493a0e316f9241ba13"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>QX_CONSTEXPR_SEQUENCE_SUPPORTED</b>&#160;&#160;&#160;!QX_MSVC</td></tr>
-<tr class="separator:a4b640f34250215493a0e316f9241ba13"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
-Typedefs</h2></td></tr>
-<tr class="memitem:a1c961b68884c3f817a577ef1e38ea0a8"><td class="memTemplParams" colspan="2"><a id="a1c961b68884c3f817a577ef1e38ea0a8"></a>
-template&lt;typename Tag  = struct CounterTag, typename T  = int, T Start = 0, T Inc = 1&gt; </td></tr>
-<tr class="memitem:a1c961b68884c3f817a577ef1e38ea0a8"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><b>qx::constexpr_counter</b> = constexpr_sequence&lt; Tag, T, Start, detail::increase&lt; T, Inc &gt; &gt;</td></tr>
-<tr class="separator:a1c961b68884c3f817a577ef1e38ea0a8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aba2ce5577d5279857bbeedb3e1ccc3a6"><td class="memTemplParams" colspan="2"><a id="aba2ce5577d5279857bbeedb3e1ccc3a6"></a>
-template&lt;typename Tag  = struct MultiplierTag, typename T  = int, T Start = 1, T Mult = 2&gt; </td></tr>
-<tr class="memitem:aba2ce5577d5279857bbeedb3e1ccc3a6"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><b>qx::constexpr_multiplier</b> = constexpr_sequence&lt; Tag, T, Start, detail::multiply&lt; T, Mult &gt; &gt;</td></tr>
-<tr class="separator:aba2ce5577d5279857bbeedb3e1ccc3a6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
-Functions</h2></td></tr>
-<tr class="memitem:a3123c2bba9e33e4711154f34a2f54edf"><td class="memTemplParams" colspan="2"><a id="a3123c2bba9e33e4711154f34a2f54edf"></a>
-template&lt;typename T , T INC&gt; </td></tr>
-<tr class="memitem:a3123c2bba9e33e4711154f34a2f54edf"><td class="memTemplItemLeft" align="right" valign="top">constexpr T&#160;</td><td class="memTemplItemRight" valign="bottom"><b>qx::detail::increase</b> (T val)</td></tr>
-<tr class="separator:a3123c2bba9e33e4711154f34a2f54edf"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab46bc0bccb15c670345270f8f48fe60a"><td class="memTemplParams" colspan="2"><a id="ab46bc0bccb15c670345270f8f48fe60a"></a>
-template&lt;typename T , T MULT&gt; </td></tr>
-<tr class="memitem:ab46bc0bccb15c670345270f8f48fe60a"><td class="memTemplItemLeft" align="right" valign="top">constexpr T&#160;</td><td class="memTemplItemRight" valign="bottom"><b>qx::detail::multiply</b> (T val)</td></tr>
-<tr class="separator:ab46bc0bccb15c670345270f8f48fe60a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Contains <a class="el" href="classqx_1_1constexpr__sequence.html" title="Constexpr sequence. use unique tag for different instances.">qx::constexpr_sequence</a> class. </p>

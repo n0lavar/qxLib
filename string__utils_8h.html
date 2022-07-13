@@ -82,9 +82,6 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
 Macros</h2></td></tr>
-<tr class="memitem:acce0b9750d82bb03d1e576412363653f"><td class="memItemLeft" align="right" valign="top"><a id="acce0b9750d82bb03d1e576412363653f"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>_QX_TO_WSTRING</b>(x)&#160;&#160;&#160;L##x</td></tr>
-<tr class="separator:acce0b9750d82bb03d1e576412363653f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6b22a06d00ce06f575913fec486bd955"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="string__utils_8h.html#a6b22a06d00ce06f575913fec486bd955">QX_TO_WSTRING</a>(str)&#160;&#160;&#160;_QX_TO_WSTRING(str)</td></tr>
 <tr class="memdesc:a6b22a06d00ce06f575913fec486bd955"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert char* to wchar_t*.  <a href="string__utils_8h.html#a6b22a06d00ce06f575913fec486bd955">More...</a><br /></td></tr>
 <tr class="separator:a6b22a06d00ce06f575913fec486bd955"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -94,24 +91,6 @@ Macros</h2></td></tr>
 <tr class="memitem:ab4cfe02c348ccce78db4519f9758e672"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="string__utils_8h.html#ab4cfe02c348ccce78db4519f9758e672">QX_CHAR_PREFIX</a>(value_type,  ch)&#160;&#160;&#160;    qx::detail::choose_char_prefix&lt;value_type&gt;(ch, <a class="el" href="string__utils_8h.html#a6b22a06d00ce06f575913fec486bd955">QX_TO_WSTRING</a>(ch))</td></tr>
 <tr class="memdesc:ab4cfe02c348ccce78db4519f9758e672"><td class="mdescLeft">&#160;</td><td class="mdescRight">Chose witch of prefixes add to char : L or none.  <a href="string__utils_8h.html#ab4cfe02c348ccce78db4519f9758e672">More...</a><br /></td></tr>
 <tr class="separator:ab4cfe02c348ccce78db4519f9758e672"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a65748ed52bd69abde17cd721afd15cf0"><td class="memItemLeft" align="right" valign="top"><a id="a65748ed52bd69abde17cd721afd15cf0"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>QX_STATIC_ASSERT_STR_EQ</b>(a,  b)&#160;&#160;&#160;static_assert(qx::strcmp((a), (b)) == 0)</td></tr>
-<tr class="separator:a65748ed52bd69abde17cd721afd15cf0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae7e0aa207e3fc5b4fc2835679d5021e9"><td class="memItemLeft" align="right" valign="top"><a id="ae7e0aa207e3fc5b4fc2835679d5021e9"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>QX_STATIC_ASSERT_STR_NE</b>(a,  b)&#160;&#160;&#160;static_assert(qx::strcmp((a), (b)) != 0)</td></tr>
-<tr class="separator:ae7e0aa207e3fc5b4fc2835679d5021e9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a24ac6008b1cf1fc04d8fc95a156f07a7"><td class="memItemLeft" align="right" valign="top"><a id="a24ac6008b1cf1fc04d8fc95a156f07a7"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>QX_STATIC_ASSERT_STR_LT</b>(a,  b)&#160;&#160;&#160;static_assert(qx::strcmp((a), (b)) &lt; 0)</td></tr>
-<tr class="separator:a24ac6008b1cf1fc04d8fc95a156f07a7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae687ad15727d4090dbac897eebd1ff39"><td class="memItemLeft" align="right" valign="top"><a id="ae687ad15727d4090dbac897eebd1ff39"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>QX_STATIC_ASSERT_STR_LE</b>(a,  b)&#160;&#160;&#160;static_assert(qx::strcmp((a), (b)) &lt;= 0)</td></tr>
-<tr class="separator:ae687ad15727d4090dbac897eebd1ff39"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab7edbc89547c741ba6474b69f14a1de9"><td class="memItemLeft" align="right" valign="top"><a id="ab7edbc89547c741ba6474b69f14a1de9"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>QX_STATIC_ASSERT_STR_GT</b>(a,  b)&#160;&#160;&#160;static_assert(qx::strcmp((a), (b)) &gt; 0)</td></tr>
-<tr class="separator:ab7edbc89547c741ba6474b69f14a1de9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af86c6111d69e5d081c9e599de314972d"><td class="memItemLeft" align="right" valign="top"><a id="af86c6111d69e5d081c9e599de314972d"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>QX_STATIC_ASSERT_STR_GE</b>(a,  b)&#160;&#160;&#160;static_assert(qx::strcmp((a), (b)) &gt;= 0)</td></tr>
-<tr class="separator:af86c6111d69e5d081c9e599de314972d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
@@ -135,30 +114,6 @@ Functions</h2></td></tr>
 <tr class="memitem:a4ec6630ad6d65fe8bb53d5c1ed2ac711"><td class="memTemplItemLeft" align="right" valign="top">constexpr int&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="string__utils_8h.html#a4ec6630ad6d65fe8bb53d5c1ed2ac711">qx::strcmp</a> (const value_type *pszLeft, const value_type *pszRight)</td></tr>
 <tr class="memdesc:a4ec6630ad6d65fe8bb53d5c1ed2ac711"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constexpr compare two strings.  <a href="string__utils_8h.html#a4ec6630ad6d65fe8bb53d5c1ed2ac711">More...</a><br /></td></tr>
 <tr class="separator:a4ec6630ad6d65fe8bb53d5c1ed2ac711"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abc3bf2c394ebd27842598056c5f59b7a"><td class="memTemplParams" colspan="2"><a id="abc3bf2c394ebd27842598056c5f59b7a"></a>
-template&lt;typename value_type &gt; </td></tr>
-<tr class="memitem:abc3bf2c394ebd27842598056c5f59b7a"><td class="memTemplItemLeft" align="right" valign="top">constexpr const value_type *const&#160;</td><td class="memTemplItemRight" valign="bottom"><b>qx::detail::choose_str_prefix</b> (const char *const, const wchar_t *const) noexcept</td></tr>
-<tr class="separator:abc3bf2c394ebd27842598056c5f59b7a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac1769125f54e6e1e234267eaa8dee1d1"><td class="memItemLeft" align="right" valign="top"><a id="ac1769125f54e6e1e234267eaa8dee1d1"></a>
-template&lt;&gt; </td></tr>
-<tr class="memitem:ac1769125f54e6e1e234267eaa8dee1d1"><td class="memTemplItemLeft" align="right" valign="top">constexpr const char *const&#160;</td><td class="memTemplItemRight" valign="bottom"><b>qx::detail::choose_str_prefix&lt; char &gt;</b> (const char *const c, const wchar_t *const) noexcept</td></tr>
-<tr class="separator:ac1769125f54e6e1e234267eaa8dee1d1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a08c0ad701635a4098a6f9fcf67df3ee8"><td class="memItemLeft" align="right" valign="top"><a id="a08c0ad701635a4098a6f9fcf67df3ee8"></a>
-template&lt;&gt; </td></tr>
-<tr class="memitem:a08c0ad701635a4098a6f9fcf67df3ee8"><td class="memTemplItemLeft" align="right" valign="top">constexpr const wchar_t *const&#160;</td><td class="memTemplItemRight" valign="bottom"><b>qx::detail::choose_str_prefix&lt; wchar_t &gt;</b> (const char *const, const wchar_t *const w) noexcept</td></tr>
-<tr class="separator:a08c0ad701635a4098a6f9fcf67df3ee8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aebe8d21988bac40f52fd1fba41083132"><td class="memTemplParams" colspan="2"><a id="aebe8d21988bac40f52fd1fba41083132"></a>
-template&lt;typename value_type &gt; </td></tr>
-<tr class="memitem:aebe8d21988bac40f52fd1fba41083132"><td class="memTemplItemLeft" align="right" valign="top">constexpr value_type&#160;</td><td class="memTemplItemRight" valign="bottom"><b>qx::detail::choose_char_prefix</b> (char, wchar_t) noexcept</td></tr>
-<tr class="separator:aebe8d21988bac40f52fd1fba41083132"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a89a44960932ef0267ca339719cfdbdde"><td class="memItemLeft" align="right" valign="top"><a id="a89a44960932ef0267ca339719cfdbdde"></a>
-template&lt;&gt; </td></tr>
-<tr class="memitem:a89a44960932ef0267ca339719cfdbdde"><td class="memTemplItemLeft" align="right" valign="top">constexpr char&#160;</td><td class="memTemplItemRight" valign="bottom"><b>qx::detail::choose_char_prefix&lt; char &gt;</b> (char c, wchar_t) noexcept</td></tr>
-<tr class="separator:a89a44960932ef0267ca339719cfdbdde"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8b0f79e562ec19003f7c64a58d64fd17"><td class="memItemLeft" align="right" valign="top"><a id="a8b0f79e562ec19003f7c64a58d64fd17"></a>
-template&lt;&gt; </td></tr>
-<tr class="memitem:a8b0f79e562ec19003f7c64a58d64fd17"><td class="memTemplItemLeft" align="right" valign="top">constexpr wchar_t&#160;</td><td class="memTemplItemRight" valign="bottom"><b>qx::detail::choose_char_prefix&lt; wchar_t &gt;</b> (char, wchar_t w) noexcept</td></tr>
-<tr class="separator:a8b0f79e562ec19003f7c64a58d64fd17"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8c51be95bedbc7e6a1f1612d2a45e29b"><td class="memTemplParams" colspan="2">template&lt;typename value_type , typename T &gt; </td></tr>
 <tr class="memitem:a8c51be95bedbc7e6a1f1612d2a45e29b"><td class="memTemplItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="string__utils_8h.html#a8c51be95bedbc7e6a1f1612d2a45e29b">qx::get_format_specifier</a> () noexcept</td></tr>
 <tr class="memdesc:a8c51be95bedbc7e6a1f1612d2a45e29b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get format specifier for type.  <a href="string__utils_8h.html#a8c51be95bedbc7e6a1f1612d2a45e29b">More...</a><br /></td></tr>

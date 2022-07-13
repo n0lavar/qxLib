@@ -69,7 +69,15 @@ $(function() {
 <div class="title">shaders.h</div>  </div>
 </div><!--header-->
 <div class="contents">
-<a href="shaders_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160; </div>
+<a href="shaders_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">/**</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment">    @file      shaders.h</span></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment">    @brief     Contains shaders classes</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment">    @author    Khrapov</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="comment">    @date      17.06.2019</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="comment">    @copyright © Nick Khrapov, 2021. All right reserved.</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="comment">**/</span></div>
 <div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#pragma once</span></div>
 <div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160; </div>
 <div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="string_8h.html">qx/containers/string/string.h</a>&gt;</span></div>
@@ -82,14 +90,24 @@ $(function() {
 <div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160; </div>
 <div class="line"><a name="l00020"></a><span class="lineno"><a class="line" href="shaders_8h.html#ae891b980e1f40a70e11e8bfc320d898e">   20</a></span>&#160;<span class="keyword">enum class</span> <a class="code" href="shaders_8h.html#ae891b980e1f40a70e11e8bfc320d898e">shader_type</a></div>
 <div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;{</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    <a class="code" href="shaders_8h.html#ae891b980e1f40a70e11e8bfc320d898eac9b416167392c2b301810695b92efa12">vert</a>, </div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    <a class="code" href="shaders_8h.html#ae891b980e1f40a70e11e8bfc320d898eaf765f7a0a169f4f6654ee72a84a9eb3d">tesc</a>, </div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    <a class="code" href="shaders_8h.html#ae891b980e1f40a70e11e8bfc320d898eac9dd5982f1d65f6e6b58605105e1ba6c">tese</a>, </div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    <a class="code" href="shaders_8h.html#ae891b980e1f40a70e11e8bfc320d898eadd992be5859bfc12e59d4c15b4c17cf8">geom</a>, </div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    <a class="code" href="shaders_8h.html#ae891b980e1f40a70e11e8bfc320d898ea43cf0c43c2b82750b67586fe559677a1">frag</a>, </div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    <a class="code" href="shaders_8h.html#ae891b980e1f40a70e11e8bfc320d898ea005480c8a6a0357d17cff2e8eb7e060d">comp</a>  </div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    <a class="code" href="shaders_8h.html#ae891b980e1f40a70e11e8bfc320d898eac9b416167392c2b301810695b92efa12">vert</a>, <span class="comment">//!&lt; vertex</span></div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    <a class="code" href="shaders_8h.html#ae891b980e1f40a70e11e8bfc320d898eaf765f7a0a169f4f6654ee72a84a9eb3d">tesc</a>, <span class="comment">//!&lt; tessellation control</span></div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    <a class="code" href="shaders_8h.html#ae891b980e1f40a70e11e8bfc320d898eac9dd5982f1d65f6e6b58605105e1ba6c">tese</a>, <span class="comment">//!&lt; tessellation evaluation</span></div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    <a class="code" href="shaders_8h.html#ae891b980e1f40a70e11e8bfc320d898eadd992be5859bfc12e59d4c15b4c17cf8">geom</a>, <span class="comment">//!&lt; geometry</span></div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    <a class="code" href="shaders_8h.html#ae891b980e1f40a70e11e8bfc320d898ea43cf0c43c2b82750b67586fe559677a1">frag</a>, <span class="comment">//!&lt; fragment</span></div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    <a class="code" href="shaders_8h.html#ae891b980e1f40a70e11e8bfc320d898ea005480c8a6a0357d17cff2e8eb7e060d">comp</a>  <span class="comment">//!&lt; compute</span></div>
 <div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;};</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160; </div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="comment">/**</span></div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="comment">    @class   shader_base</span></div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="comment">    @brief   OpenGL base shader</span></div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="comment">    @details ~</span></div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="comment">    @tparam  ShaderType - </span></div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="comment">    @author  Khrapov</span></div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="comment">    @date    17.06.2019</span></div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="comment">**/</span></div>
 <div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="keyword">template</span>&lt;GLenum ShaderType&gt;</div>
 <div class="line"><a name="l00041"></a><span class="lineno"><a class="line" href="classqx_1_1shader__base.html">   41</a></span>&#160;<span class="keyword">class </span><a class="code" href="classqx_1_1shader__base.html">shader_base</a></div>
 <div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;{</div>
@@ -97,17 +115,42 @@ $(function() {
 <div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    <a class="code" href="useful__macros_8h.html#aae938922af1b0f884bd82f43fb136cd0">QX_NONCOPYABLE</a>(<a class="code" href="classqx_1_1shader__base.html">shader_base</a>)</div>
 <div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    <a class="code" href="useful__macros_8h.html#a44db208ac964aa941ca689ca7d2d0df6">QX_MOVABLE</a>(<a class="code" href="classqx_1_1shader__base.html">shader_base</a>)</div>
 <div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160; </div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    </div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    <span class="comment">/**</span></div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="comment">        @brief shader_base object constructor</span></div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="comment">    **/</span></div>
 <div class="line"><a name="l00050"></a><span class="lineno"><a class="line" href="classqx_1_1shader__base.html#a8cf3b61d8b64566ab43011c3cca09cc8">   50</a></span>&#160;    <a class="code" href="classqx_1_1shader__base.html">shader_base</a>() = default;</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160; </div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<span class="comment">    /**</span></div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<span class="comment">        @brief shader_base object constructor</span></div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;<span class="comment">        @param pszShaderCode - string with shader code</span></div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="comment">        @param pError        - error string pointer</span></div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;<span class="comment">    **/</span></div>
 <div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    <a class="code" href="classqx_1_1shader__base.html">shader_base</a>(const GLchar* pszShaderCode, <span class="keywordtype">string</span>* pError = <span class="keywordtype">nullptr</span>);</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160; </div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;<span class="comment">    /**</span></div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;<span class="comment">        @brief shader_base object destructor</span></div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;<span class="comment">    **/</span></div>
 <div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    ~<a class="code" href="classqx_1_1shader__base.html">shader_base</a>();</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160; </div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;<span class="comment">    /**</span></div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;<span class="comment">        @brief Init (compile) shader</span></div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;<span class="comment">        @param pszShaderCode - string with shader code</span></div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;<span class="comment">        @param pError        - error string pointer</span></div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;<span class="comment">    **/</span></div>
 <div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classqx_1_1shader__base.html#ab229b3edf9609bea858ff50eb14e05f0">Init</a>(const GLchar* pszShaderCode, <span class="keywordtype">string</span>* pError = <span class="keywordtype">nullptr</span>);</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160; </div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;<span class="comment">    /**</span></div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;<span class="comment">        @brief  Get shader name</span></div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;<span class="comment">        @retval - shader name</span></div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;<span class="comment">    **/</span></div>
 <div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    GLuint <a class="code" href="classqx_1_1shader__base.html#a2b6adadaeb2ef4919c3c379e5170eb11">GetID</a>() const;</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160; </div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;<span class="comment">    /**</span></div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;<span class="comment">        @brief  Get shader parameter</span></div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;<span class="comment">        @param  eParameter - shader parameter</span></div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;<span class="comment">        \see https://www.khronos.org/registry/OpenGL-Refpages/gl4/html/glGetProgram.xhtml</span></div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;<span class="comment">        @retval            - shader parameter value</span></div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;<span class="comment">    **/</span></div>
 <div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;    GLint <a class="code" href="classqx_1_1shader__base.html#a2e87b997d73eed388b96f4ccc1a04fc2">GetParameter</a>(GLenum eParameter) const;</div>
 <div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160; </div>
 <div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;private:</div>

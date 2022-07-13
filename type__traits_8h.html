@@ -66,10 +66,7 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="summary">
-<a href="#nested-classes">Classes</a> &#124;
-<a href="#typedef-members">Typedefs</a> &#124;
-<a href="#func-members">Functions</a> &#124;
-<a href="#var-members">Variables</a>  </div>
+<a href="#nested-classes">Classes</a>  </div>
   <div class="headertitle">
 <div class="title">type_traits.h File Reference</div>  </div>
 </div><!--header-->
@@ -104,48 +101,6 @@ Classes</h2></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structqx_1_1visit__overload.html">qx::visit_overload&lt; Ts &gt;</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
-Typedefs</h2></td></tr>
-<tr class="memitem:abd9eadf2fb9fc10153a3b35ca71e3179"><td class="memTemplParams" colspan="2"><a id="abd9eadf2fb9fc10153a3b35ca71e3179"></a>
-template&lt;class T &gt; </td></tr>
-<tr class="memitem:abd9eadf2fb9fc10153a3b35ca71e3179"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><b>qx::iterator_value_t</b> = typename iterator_value&lt; T &gt;::type</td></tr>
-<tr class="separator:abd9eadf2fb9fc10153a3b35ca71e3179"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9468afcb8ffbf04501fce9c5f0024bd4"><td class="memTemplParams" colspan="2"><a id="a9468afcb8ffbf04501fce9c5f0024bd4"></a>
-template&lt;class T &gt; </td></tr>
-<tr class="memitem:a9468afcb8ffbf04501fce9c5f0024bd4"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><b>qx::is_specialization_exist</b> = decltype(detail::is_specialization_exist_impl(std::declval&lt; T * &gt;()))</td></tr>
-<tr class="separator:a9468afcb8ffbf04501fce9c5f0024bd4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
-Functions</h2></td></tr>
-<tr class="memitem:aec164b2ce8d8db6e19626d63b579a1c4"><td class="memTemplParams" colspan="2"><a id="aec164b2ce8d8db6e19626d63b579a1c4"></a>
-template&lt;class T , std::size_t  = sizeof(T)&gt; </td></tr>
-<tr class="memitem:aec164b2ce8d8db6e19626d63b579a1c4"><td class="memTemplItemLeft" align="right" valign="top">std::true_type&#160;</td><td class="memTemplItemRight" valign="bottom"><b>qx::detail::is_specialization_exist_impl</b> (T *)</td></tr>
-<tr class="separator:aec164b2ce8d8db6e19626d63b579a1c4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abe489d1553e5d47aacf3f9d183b31007"><td class="memItemLeft" align="right" valign="top"><a id="abe489d1553e5d47aacf3f9d183b31007"></a>
-std::false_type&#160;</td><td class="memItemRight" valign="bottom"><b>qx::detail::is_specialization_exist_impl</b> (...)</td></tr>
-<tr class="separator:abe489d1553e5d47aacf3f9d183b31007"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a81206e5c5c0ba192c0a39d259984561d"><td class="memTemplParams" colspan="2"><a id="a81206e5c5c0ba192c0a39d259984561d"></a>
-template&lt;class... Ts&gt; </td></tr>
-<tr class="memitem:a81206e5c5c0ba192c0a39d259984561d"><td class="memTemplItemLeft" align="right" valign="top">&#160;</td><td class="memTemplItemRight" valign="bottom"><b>qx::visit_overload</b> (Ts...) -&gt; visit_overload&lt; Ts... &gt;</td></tr>
-<tr class="separator:a81206e5c5c0ba192c0a39d259984561d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
-Variables</h2></td></tr>
-<tr class="memitem:ab32193dc26949d6ab910df12a6166327"><td class="memTemplParams" colspan="2">template&lt;class T &gt; </td></tr>
-<tr class="memitem:ab32193dc26949d6ab910df12a6166327"><td class="memTemplItemLeft" align="right" valign="top">concept&#160;</td><td class="memTemplItemRight" valign="bottom"><b>qx::is_iterator</b></td></tr>
-<tr class="separator:ab32193dc26949d6ab910df12a6166327"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a34d9e26ad7fee5ccaa8209b5135ccdee"><td class="memTemplParams" colspan="2">template&lt;class T &gt; </td></tr>
-<tr class="memitem:a34d9e26ad7fee5ccaa8209b5135ccdee"><td class="memTemplItemLeft" align="right" valign="top">constexpr bool&#160;</td><td class="memTemplItemRight" valign="bottom"><b>qx::is_random_access_iterator_v</b></td></tr>
-<tr class="separator:a34d9e26ad7fee5ccaa8209b5135ccdee"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae2b9b4f11963647627600fe51a77b0d0"><td class="memTemplParams" colspan="2"><a id="ae2b9b4f11963647627600fe51a77b0d0"></a>
-template&lt;typename... Ts&gt; </td></tr>
-<tr class="memitem:ae2b9b4f11963647627600fe51a77b0d0"><td class="memTemplItemLeft" align="right" valign="top">constexpr bool&#160;</td><td class="memTemplItemRight" valign="bottom"><b>qx::are_same_v</b> = are_same&lt;Ts...&gt;::value</td></tr>
-<tr class="separator:ae2b9b4f11963647627600fe51a77b0d0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a938028c70d7a8f60147816ff2f875afd"><td class="memTemplParams" colspan="2"><a id="a938028c70d7a8f60147816ff2f875afd"></a>
-template&lt;class T &gt; </td></tr>
-<tr class="memitem:a938028c70d7a8f60147816ff2f875afd"><td class="memTemplItemLeft" align="right" valign="top">constexpr bool&#160;</td><td class="memTemplItemRight" valign="bottom"><b>qx::is_specialization_exist_v</b> = is_specialization_exist&lt;T&gt;::value</td></tr>
-<tr class="separator:a938028c70d7a8f60147816ff2f875afd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Type traits. </p>
@@ -153,58 +108,7 @@ template&lt;class T &gt; </td></tr>
 <dl class="section copyright"><dt>Copyright</dt><dd>© Nick Khrapov, 2021. All right reserved. </dd></dl>
 
 <p class="definition">Definition in file <a class="el" href="type__traits_8h_source.html">type_traits.h</a>.</p>
-</div><h2 class="groupheader">Variable Documentation</h2>
-<a id="ab32193dc26949d6ab910df12a6166327"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab32193dc26949d6ab910df12a6166327">&#9670;&nbsp;</a></span>is_iterator</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class T &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">concept qx::is_iterator</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<b>Initial value:</b><div class="fragment"><div class="line">= requires(T)</div>
-<div class="line">{</div>
-<div class="line">    <span class="keyword">typename</span> T::iterator_category;</div>
-<div class="line">}</div>
-</div><!-- fragment -->
-<p class="definition">Definition at line <a class="el" href="type__traits_8h_source.html#l00018">18</a> of file <a class="el" href="type__traits_8h_source.html">type_traits.h</a>.</p>
-
-</div>
-</div>
-<a id="a34d9e26ad7fee5ccaa8209b5135ccdee"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a34d9e26ad7fee5ccaa8209b5135ccdee">&#9670;&nbsp;</a></span>is_random_access_iterator_v</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class T &gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">constexpr bool qx::is_random_access_iterator_v</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<b>Initial value:</b><div class="fragment"><div class="line">=</div>
-<div class="line">    is_random_access_iterator&lt;T&gt;::value</div>
-</div><!-- fragment -->
-<p class="definition">Definition at line <a class="el" href="type__traits_8h_source.html#l00044">44</a> of file <a class="el" href="type__traits_8h_source.html">type_traits.h</a>.</p>
-
-</div>
-</div>
-</div><!-- contents -->
+</div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1

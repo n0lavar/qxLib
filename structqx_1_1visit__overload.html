@@ -81,9 +81,32 @@ Inheritance diagram for qx::visit_overload&lt; Ts &gt;:</div>
 <div class="textblock"><h3>template&lt;class... Ts&gt;<br />
 struct qx::visit_overload&lt; Ts &gt;</h3>
 
-<p>This struct allows to visit std::variant with lambdas <a class="el" href="">Ts - lambda types  struct Fluid { }; struct LightItem { }; struct HeavyItem { }; struct FragileItem { }; int main() { std::variant&lt;Fluid, LightItem, HeavyItem, FragileItem&gt; package;  std::visit(qx::visit_overload { [](const Fluid&amp; ) { std::cout &lt;&lt; "fluid\n"; }, [](const LightItem&amp; ) { std::cout &lt;&lt; "light item\n"; }, [](const auto&amp;) { std::cout &lt;&lt; "default\n"; } }, package); }  </a></p>
-
-<p class="definition">Definition at line <a class="el" href="type__traits_8h_source.html#l00161">161</a> of file <a class="el" href="type__traits_8h_source.html">type_traits.h</a>.</p>
+<p>This struct allows to visit std::variant with lambdas </p><dl class="section note"><dt>Note</dt><dd><a href="https://www.cppstories.com/2018/09/visit-variants/">https://www.cppstories.com/2018/09/visit-variants/</a> </dd></dl>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Ts</td><td>- lambda types</td></tr>
+  </table>
+  </dd>
+</dl>
+<div class="fragment"><div class="line"><span class="keyword">struct </span>Fluid { };</div>
+<div class="line"><span class="keyword">struct </span>LightItem { };</div>
+<div class="line"><span class="keyword">struct </span>HeavyItem { };</div>
+<div class="line"><span class="keyword">struct </span>FragileItem { };</div>
+<div class="line"> </div>
+<div class="line"><span class="keywordtype">int</span> main() {</div>
+<div class="line">    std::variant&lt;Fluid, LightItem, HeavyItem, FragileItem&gt; package;</div>
+<div class="line"> </div>
+<div class="line">    std::visit(<a class="code" href="structqx_1_1visit__overload.html">qx::visit_overload</a></div>
+<div class="line">        {</div>
+<div class="line">            [](<span class="keyword">const</span> Fluid&amp; )     { std::cout &lt;&lt; <span class="stringliteral">&quot;fluid\n&quot;</span>; },</div>
+<div class="line">            [](<span class="keyword">const</span> LightItem&amp; ) { std::cout &lt;&lt; <span class="stringliteral">&quot;light item\n&quot;</span>; },</div>
+<div class="line">            [](<span class="keyword">const</span> <span class="keyword">auto</span>&amp;)       { std::cout &lt;&lt; <span class="stringliteral">&quot;default\n&quot;</span>; }</div>
+<div class="line">        },</div>
+<div class="line">        package);</div>
+<div class="line">}</div>
+<div class="ttc" id="astructqx_1_1visit__overload_html"><div class="ttname"><a href="structqx_1_1visit__overload.html">qx::visit_overload</a></div><div class="ttdef"><b>Definition:</b> <a href="type__traits_8h_source.html#l00159">type_traits.h:160</a></div></div>
+</div><!-- fragment --> 
+<p class="definition">Definition at line <a class="el" href="type__traits_8h_source.html#l00159">159</a> of file <a class="el" href="type__traits_8h_source.html">type_traits.h</a>.</p>
 </div><hr/>The documentation for this struct was generated from the following file:<ul>
 <li>include/qx/<a class="el" href="type__traits_8h_source.html">type_traits.h</a></li>
 </ul>

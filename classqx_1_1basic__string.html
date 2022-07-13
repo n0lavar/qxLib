@@ -66,11 +66,8 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="summary">
-<a href="#pub-types">Public Types</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pub-static-methods">Static Public Member Functions</a> &#124;
-<a href="#pub-static-attribs">Static Public Attributes</a> &#124;
-<a href="#friends">Friends</a> &#124;
 <a href="classqx_1_1basic__string-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">qx::basic_string&lt; Traits &gt; Class Template Reference</div>  </div>
@@ -82,47 +79,8 @@ $(function() {
 
 <p><code>#include &lt;<a class="el" href="string_8h_source.html">string.h</a>&gt;</code></p>
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-types"></a>
-Public Types</h2></td></tr>
-<tr class="memitem:af021688340f1d4481efe18f8adaa66fd"><td class="memItemLeft" align="right" valign="top"><a id="af021688340f1d4481efe18f8adaa66fd"></a>
-using&#160;</td><td class="memItemRight" valign="bottom"><b>traits_type</b> = Traits</td></tr>
-<tr class="separator:af021688340f1d4481efe18f8adaa66fd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3fb24411db7c7ee05508d6c53d3f14e1"><td class="memItemLeft" align="right" valign="top"><a id="a3fb24411db7c7ee05508d6c53d3f14e1"></a>
-using&#160;</td><td class="memItemRight" valign="bottom"><b>value_type</b> = typename Traits::value_type</td></tr>
-<tr class="separator:a3fb24411db7c7ee05508d6c53d3f14e1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a788c3c2770d3df6662a0bc37379ff9e4"><td class="memItemLeft" align="right" valign="top"><a id="a788c3c2770d3df6662a0bc37379ff9e4"></a>
-using&#160;</td><td class="memItemRight" valign="bottom"><b>pointer</b> = typename Traits::pointer</td></tr>
-<tr class="separator:a788c3c2770d3df6662a0bc37379ff9e4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af0947cb250924b1fd495a485fd16885d"><td class="memItemLeft" align="right" valign="top"><a id="af0947cb250924b1fd495a485fd16885d"></a>
-using&#160;</td><td class="memItemRight" valign="bottom"><b>const_pointer</b> = typename Traits::const_pointer</td></tr>
-<tr class="separator:af0947cb250924b1fd495a485fd16885d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae4491dc9de201b57feec4a3b4ad3fa53"><td class="memItemLeft" align="right" valign="top"><a id="ae4491dc9de201b57feec4a3b4ad3fa53"></a>
-using&#160;</td><td class="memItemRight" valign="bottom"><b>reference</b> = typename Traits::reference</td></tr>
-<tr class="separator:ae4491dc9de201b57feec4a3b4ad3fa53"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aba43c132887761d0da5bf7414f4b3d5e"><td class="memItemLeft" align="right" valign="top"><a id="aba43c132887761d0da5bf7414f4b3d5e"></a>
-using&#160;</td><td class="memItemRight" valign="bottom"><b>const_reference</b> = typename Traits::const_reference</td></tr>
-<tr class="separator:aba43c132887761d0da5bf7414f4b3d5e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a06d864c9ebecab7381ceeb9cd01621c4"><td class="memItemLeft" align="right" valign="top"><a id="a06d864c9ebecab7381ceeb9cd01621c4"></a>
-using&#160;</td><td class="memItemRight" valign="bottom"><b>difference_type</b> = typename Traits::difference_type</td></tr>
-<tr class="separator:a06d864c9ebecab7381ceeb9cd01621c4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aafeb6ecac7fbaff0b2671897917edab2"><td class="memItemLeft" align="right" valign="top"><a id="aafeb6ecac7fbaff0b2671897917edab2"></a>
-using&#160;</td><td class="memItemRight" valign="bottom"><b>size_type</b> = typename Traits::size_type</td></tr>
-<tr class="separator:aafeb6ecac7fbaff0b2671897917edab2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6bdd0e2d313ec477e5234c521724db96"><td class="memItemLeft" align="right" valign="top"><a id="a6bdd0e2d313ec477e5234c521724db96"></a>
-using&#160;</td><td class="memItemRight" valign="bottom"><b>string_view</b> = std::basic_string_view&lt; value_type &gt;</td></tr>
-<tr class="separator:a6bdd0e2d313ec477e5234c521724db96"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa7b32ace7b6490d38eb79c149a4f9e86"><td class="memItemLeft" align="right" valign="top"><a id="aa7b32ace7b6490d38eb79c149a4f9e86"></a>
-using&#160;</td><td class="memItemRight" valign="bottom"><b>sstream_type</b> = std::basic_stringstream&lt; value_type &gt;</td></tr>
-<tr class="separator:aa7b32ace7b6490d38eb79c149a4f9e86"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4ba9d89b599bb21d555162f1fd4cc005"><td class="memItemLeft" align="right" valign="top"><a id="a4ba9d89b599bb21d555162f1fd4cc005"></a>
-using&#160;</td><td class="memItemRight" valign="bottom"><b>views</b> = std::vector&lt; string_view &gt;</td></tr>
-<tr class="separator:a4ba9d89b599bb21d555162f1fd4cc005"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:ad03cc698c3ec75471ba19e3efb973656"><td class="memItemLeft" align="right" valign="top"><a id="ad03cc698c3ec75471ba19e3efb973656"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>QX_IMPL_CONTAINER</b> (<a class="el" href="classqx_1_1basic__string.html">basic_string</a>)</td></tr>
-<tr class="separator:ad03cc698c3ec75471ba19e3efb973656"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abc1f9c29a9f060d43822348abc46e3b8"><td class="memItemLeft" align="right" valign="top"><a id="abc1f9c29a9f060d43822348abc46e3b8"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1basic__string.html#abc1f9c29a9f060d43822348abc46e3b8">basic_string</a> () noexcept=default</td></tr>
 <tr class="memdesc:abc1f9c29a9f060d43822348abc46e3b8"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classqx_1_1basic__string.html" title="String class.">basic_string</a> object constructor <br /></td></tr>
@@ -790,22 +748,6 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 <tr class="memitem:accde1b71fd9af2fa5baafcc54b111609"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1basic__string.html#accde1b71fd9af2fa5baafcc54b111609">operator bool</a> () const noexcept</td></tr>
 <tr class="memdesc:accde1b71fd9af2fa5baafcc54b111609"><td class="mdescLeft">&#160;</td><td class="mdescRight">operator bool  <a href="classqx_1_1basic__string.html#accde1b71fd9af2fa5baafcc54b111609">More...</a><br /></td></tr>
 <tr class="separator:accde1b71fd9af2fa5baafcc54b111609"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5d63aa3778374bd7543cc8001efe8fa4"><td class="memTemplParams" colspan="2"><a id="a5d63aa3778374bd7543cc8001efe8fa4"></a>
-template&lt;class... Args&gt; </td></tr>
-<tr class="memitem:a5d63aa3778374bd7543cc8001efe8fa4"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classqx_1_1basic__string.html">basic_string</a>&lt; Traits &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><b>static_sprintf</b> (const_pointer pszFormat, Args... args) noexcept</td></tr>
-<tr class="separator:a5d63aa3778374bd7543cc8001efe8fa4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a74280365df014c3bd938316e9a9f7401"><td class="memTemplParams" colspan="2"><a id="a74280365df014c3bd938316e9a9f7401"></a>
-template&lt;typename From &gt; </td></tr>
-<tr class="memitem:a74280365df014c3bd938316e9a9f7401"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classqx_1_1basic__string.html">basic_string</a>&lt; Traits &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><b>static_from</b> (const From &amp;data, const_pointer pszFormat) noexcept</td></tr>
-<tr class="separator:a74280365df014c3bd938316e9a9f7401"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa8a26f2b79e9314b7135e20d8fb986b0"><td class="memTemplParams" colspan="2"><a id="aa8a26f2b79e9314b7135e20d8fb986b0"></a>
-template&lt;string_convertable String&gt; </td></tr>
-<tr class="memitem:aa8a26f2b79e9314b7135e20d8fb986b0"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classqx_1_1basic__string.html">basic_string</a>&lt; Traits &gt; &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><b>operator=</b> (const String &amp;sStr) noexcept</td></tr>
-<tr class="separator:aa8a26f2b79e9314b7135e20d8fb986b0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a598c23eb70df2b86d1d09fd13924b172"><td class="memTemplParams" colspan="2"><a id="a598c23eb70df2b86d1d09fd13924b172"></a>
-template&lt;string_convertable String&gt; </td></tr>
-<tr class="memitem:a598c23eb70df2b86d1d09fd13924b172"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classqx_1_1basic__string.html">basic_string</a>&lt; Traits &gt; &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><b>operator+=</b> (const String &amp;sStr) noexcept</td></tr>
-<tr class="separator:a598c23eb70df2b86d1d09fd13924b172"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
@@ -820,19 +762,6 @@ Static Public Member Functions</h2></td></tr>
 <tr class="memitem:a5e6566efd1c36bc5e44f7f97007fd871"><td class="memTemplItemLeft" align="right" valign="top">static <a class="el" href="classqx_1_1basic__string.html">basic_string</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classqx_1_1basic__string.html#a5e6566efd1c36bc5e44f7f97007fd871">static_from</a> (const From &amp;data, const_pointer pszFormat=nullptr) noexcept</td></tr>
 <tr class="memdesc:a5e6566efd1c36bc5e44f7f97007fd871"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct string from custom type and get it.  <a href="classqx_1_1basic__string.html#a5e6566efd1c36bc5e44f7f97007fd871">More...</a><br /></td></tr>
 <tr class="separator:a5e6566efd1c36bc5e44f7f97007fd871"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-attribs"></a>
-Static Public Attributes</h2></td></tr>
-<tr class="memitem:a7a6e12c2b38a1926a928f77722b93017"><td class="memItemLeft" align="right" valign="top"><a id="a7a6e12c2b38a1926a928f77722b93017"></a>
-static constexpr size_type&#160;</td><td class="memItemRight" valign="bottom"><b>npos</b> = std::numeric_limits&lt;size_type&gt;::max()</td></tr>
-<tr class="separator:a7a6e12c2b38a1926a928f77722b93017"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="friends"></a>
-Friends</h2></td></tr>
-<tr class="memitem:a2e63bb8a66f621d05adf298a2d07b95f"><td class="memTemplParams" colspan="2"><a id="a2e63bb8a66f621d05adf298a2d07b95f"></a>
-template&lt;class _Traits &gt; </td></tr>
-<tr class="memitem:a2e63bb8a66f621d05adf298a2d07b95f"><td class="memTemplItemLeft" align="right" valign="top">qx::detail::istream&lt; _Traits &gt; &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><b>operator&gt;&gt;</b> (qx::detail::istream&lt; _Traits &gt; &amp;is, <a class="el" href="classqx_1_1basic__string.html">basic_string</a>&lt; _Traits &gt; &amp;str)</td></tr>
-<tr class="separator:a2e63bb8a66f621d05adf298a2d07b95f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><h3>template&lt;class Traits&gt;<br />

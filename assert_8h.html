@@ -80,31 +80,24 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
 Macros</h2></td></tr>
-<tr class="memitem:a4ceea6297af2c50b6670830d8509afc5"><td class="memItemLeft" align="right" valign="top"><a id="a4ceea6297af2c50b6670830d8509afc5"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>QX_ENABLE_ASSERTS</b>&#160;&#160;&#160;QX_DEBUG</td></tr>
-<tr class="separator:a4ceea6297af2c50b6670830d8509afc5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a554e3e1ea4d394962c7e0647696e7962"><td class="memItemLeft" align="right" valign="top"><a id="a554e3e1ea4d394962c7e0647696e7962"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>QX_ENABLE_DEBUG_BREAK</b>&#160;&#160;&#160;QX_DEBUG</td></tr>
-<tr class="separator:a554e3e1ea4d394962c7e0647696e7962"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a002033fab63c801cc004fe532771c859"><td class="memItemLeft" align="right" valign="top"><a id="a002033fab63c801cc004fe532771c859"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>QX_PROCESS_ASSERT</b>(statement,  msg, ...)&#160;&#160;&#160;<a class="el" href="useful__macros_8h.html#abff5c48c8f5e30fdb8643308a9b3eaf7">QX_EMPTY_MACRO</a></td></tr>
-<tr class="separator:a002033fab63c801cc004fe532771c859"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af71e6aa86267af0291f2b11fa2475f07"><td class="memItemLeft" align="right" valign="top"><a id="af71e6aa86267af0291f2b11fa2475f07"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>QX_DEBUG_BREAK</b>&#160;&#160;&#160;<a class="el" href="useful__macros_8h.html#abff5c48c8f5e30fdb8643308a9b3eaf7">QX_EMPTY_MACRO</a></td></tr>
-<tr class="separator:af71e6aa86267af0291f2b11fa2475f07"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0db0022f4e471845272bd7881fc94444"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><b>QX_ASSERT_MSG</b>(statement,  msg, ...)</td></tr>
+<tr class="memitem:a0db0022f4e471845272bd7881fc94444"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="assert_8h.html#a0db0022f4e471845272bd7881fc94444">QX_ASSERT_MSG</a>(statement,  msg, ...)&#160;&#160;&#160;    _QX_ASSERT_MSG(statement, msg, __VA_ARGS__)</td></tr>
+<tr class="memdesc:a0db0022f4e471845272bd7881fc94444"><td class="mdescLeft">&#160;</td><td class="mdescRight">Assert macro with message.  <a href="assert_8h.html#a0db0022f4e471845272bd7881fc94444">More...</a><br /></td></tr>
 <tr class="separator:a0db0022f4e471845272bd7881fc94444"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2eb2affe84e6d34db31253b0e5f69726"><td class="memItemLeft" align="right" valign="top"><a id="a2eb2affe84e6d34db31253b0e5f69726"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>QX_ASSERT</b>(statement)&#160;&#160;&#160;QX_ASSERT_MSG(statement, &quot;&quot;)</td></tr>
+<tr class="memitem:a2eb2affe84e6d34db31253b0e5f69726"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="assert_8h.html#a2eb2affe84e6d34db31253b0e5f69726">QX_ASSERT</a>(statement)&#160;&#160;&#160;_QX_ASSERT(statement)</td></tr>
+<tr class="memdesc:a2eb2affe84e6d34db31253b0e5f69726"><td class="mdescLeft">&#160;</td><td class="mdescRight">Assert macro.  <a href="assert_8h.html#a2eb2affe84e6d34db31253b0e5f69726">More...</a><br /></td></tr>
 <tr class="separator:a2eb2affe84e6d34db31253b0e5f69726"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a698451aa0963d4d75eeafdb86fd848d3"><td class="memItemLeft" align="right" valign="top"><a id="a698451aa0963d4d75eeafdb86fd848d3"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>QX_ASSERT_NO_ENTRY</b>&#160;&#160;&#160;QX_ASSERT(0)</td></tr>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="assert_8h.html#a698451aa0963d4d75eeafdb86fd848d3">QX_ASSERT_NO_ENTRY</a>&#160;&#160;&#160;_QX_ASSERT_NO_ENTRY</td></tr>
+<tr class="memdesc:a698451aa0963d4d75eeafdb86fd848d3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Invokes assert unconditionally if this code should not be executed. <br /></td></tr>
 <tr class="separator:a698451aa0963d4d75eeafdb86fd848d3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a595d81253fd06d723ffe543ffc898236"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><b>QX_ASSERT_RETURN</b>(statement, ...)</td></tr>
+<tr class="memitem:a595d81253fd06d723ffe543ffc898236"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="assert_8h.html#a595d81253fd06d723ffe543ffc898236">QX_ASSERT_RETURN</a>(statement, ...)&#160;&#160;&#160;    _QX_ASSERT_RETURN(statement, __VA_ARGS__)</td></tr>
+<tr class="memdesc:a595d81253fd06d723ffe543ffc898236"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check statement and return if false.  <a href="assert_8h.html#a595d81253fd06d723ffe543ffc898236">More...</a><br /></td></tr>
 <tr class="separator:a595d81253fd06d723ffe543ffc898236"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a915ebde63be92cc58e5dc28fbec7373d"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><b>QX_ASSERT_CONTINUE</b>(statement)</td></tr>
+<tr class="memitem:a915ebde63be92cc58e5dc28fbec7373d"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="assert_8h.html#a915ebde63be92cc58e5dc28fbec7373d">QX_ASSERT_CONTINUE</a>(statement)&#160;&#160;&#160;_QX_ASSERT_CONTINUE(statement)</td></tr>
+<tr class="memdesc:a915ebde63be92cc58e5dc28fbec7373d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check statement and continue loop if false.  <a href="assert_8h.html#a915ebde63be92cc58e5dc28fbec7373d">More...</a><br /></td></tr>
 <tr class="separator:a915ebde63be92cc58e5dc28fbec7373d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae22a68de6e317d07004165f384349194"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><b>QX_ASSERT_BREAK</b>(statement)</td></tr>
+<tr class="memitem:ae22a68de6e317d07004165f384349194"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="assert_8h.html#ae22a68de6e317d07004165f384349194">QX_ASSERT_BREAK</a>(statement)&#160;&#160;&#160;_QX_ASSERT_BREAK(statement)</td></tr>
+<tr class="memdesc:ae22a68de6e317d07004165f384349194"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check statement and break loop if false.  <a href="assert_8h.html#ae22a68de6e317d07004165f384349194">More...</a><br /></td></tr>
 <tr class="separator:ae22a68de6e317d07004165f384349194"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
@@ -115,6 +108,39 @@ Macros</h2></td></tr>
 
 <p class="definition">Definition in file <a class="el" href="assert_8h_source.html">assert.h</a>.</p>
 </div><h2 class="groupheader">Macro Definition Documentation</h2>
+<a id="a2eb2affe84e6d34db31253b0e5f69726"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2eb2affe84e6d34db31253b0e5f69726">&#9670;&nbsp;</a></span>QX_ASSERT</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define QX_ASSERT</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">statement</td><td>)</td>
+          <td>&#160;&#160;&#160;_QX_ASSERT(statement)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Assert macro. </p>
+<p>If statement is false, assert processer will be called and debugging will stop at this point </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">statement</td><td>- statement to check</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>May be used in if statemant:</p>
+<div class="fragment"><div class="line"><span class="keyword">const</span> <span class="keyword">auto</span> file = ...;</div>
+<div class="line"><span class="keywordflow">if</span> (<a class="code" href="assert_8h.html#a2eb2affe84e6d34db31253b0e5f69726">QX_ASSERT</a>(file))</div>
+<div class="line">    ReadFromFile(file);</div>
+<div class="ttc" id="aassert_8h_html_a2eb2affe84e6d34db31253b0e5f69726"><div class="ttname"><a href="assert_8h.html#a2eb2affe84e6d34db31253b0e5f69726">QX_ASSERT</a></div><div class="ttdeci">#define QX_ASSERT(statement)</div><div class="ttdoc">Assert macro.</div><div class="ttdef"><b>Definition:</b> <a href="assert_8h_source.html#l00144">assert.h:144</a></div></div>
+</div><!-- fragment --> 
+<p class="definition">Definition at line <a class="el" href="assert_8h_source.html#l00144">144</a> of file <a class="el" href="assert_8h_source.html">assert.h</a>.</p>
+
+</div>
+</div>
 <a id="ae22a68de6e317d07004165f384349194"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ae22a68de6e317d07004165f384349194">&#9670;&nbsp;</a></span>QX_ASSERT_BREAK</h2>
 
@@ -126,14 +152,20 @@ Macros</h2></td></tr>
           <td>(</td>
           <td class="paramtype">&#160;</td>
           <td class="paramname">statement</td><td>)</td>
-          <td></td>
+          <td>&#160;&#160;&#160;_QX_ASSERT_BREAK(statement)</td>
         </tr>
       </table>
 </div><div class="memdoc">
-<b>Value:</b><div class="fragment"><div class="line">    <span class="keywordflow">if</span> (!(statement)) [[unlikely]] \</div>
-<div class="line">        break;</div>
-</div><!-- fragment -->
-<p class="definition">Definition at line <a class="el" href="assert_8h_source.html#l00150">150</a> of file <a class="el" href="assert_8h_source.html">assert.h</a>.</p>
+
+<p>Check statement and break loop if false. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">statement</td><td>- statement to check </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="assert_8h_source.html#l00169">169</a> of file <a class="el" href="assert_8h_source.html">assert.h</a>.</p>
 
 </div>
 </div>
@@ -148,14 +180,20 @@ Macros</h2></td></tr>
           <td>(</td>
           <td class="paramtype">&#160;</td>
           <td class="paramname">statement</td><td>)</td>
-          <td></td>
+          <td>&#160;&#160;&#160;_QX_ASSERT_CONTINUE(statement)</td>
         </tr>
       </table>
 </div><div class="memdoc">
-<b>Value:</b><div class="fragment"><div class="line">    <span class="keywordflow">if</span> (!(statement)) [[unlikely]]    \</div>
-<div class="line">        continue;</div>
-</div><!-- fragment -->
-<p class="definition">Definition at line <a class="el" href="assert_8h_source.html#l00147">147</a> of file <a class="el" href="assert_8h_source.html">assert.h</a>.</p>
+
+<p>Check statement and continue loop if false. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">statement</td><td>- statement to check </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="assert_8h_source.html#l00163">163</a> of file <a class="el" href="assert_8h_source.html">assert.h</a>.</p>
 
 </div>
 </div>
@@ -186,16 +224,27 @@ Macros</h2></td></tr>
         <tr>
           <td></td>
           <td>)</td>
-          <td></td><td></td>
+          <td></td><td>&#160;&#160;&#160;    _QX_ASSERT_MSG(statement, msg, __VA_ARGS__)</td>
         </tr>
       </table>
 </div><div class="memdoc">
-<b>Value:</b><div class="fragment"><div class="line">    [&amp;]()                                    \</div>
-<div class="line">    {                                        \</div>
-<div class="line">        return <span class="keyword">static_cast&lt;</span><span class="keywordtype">bool</span><span class="keyword">&gt;</span>(statement); \</div>
-<div class="line">    }()</div>
-</div><!-- fragment -->
-<p class="definition">Definition at line <a class="el" href="assert_8h_source.html#l00137">137</a> of file <a class="el" href="assert_8h_source.html">assert.h</a>.</p>
+
+<p>Assert macro with message. </p>
+<p>Same as QX_ASSERT, but with output possibility </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">statement</td><td>- statement to check </td></tr>
+    <tr><td class="paramname">msg</td><td>- message format </td></tr>
+    <tr><td class="paramname">...</td><td>- message arguments</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>May be used in if statemant:</p>
+<div class="fragment"><div class="line"><span class="keyword">const</span> <span class="keyword">auto</span> file = OpenFile(path);</div>
+<div class="line"><span class="keywordflow">if</span> (<a class="code" href="assert_8h.html#a0db0022f4e471845272bd7881fc94444">QX_ASSERT_MSG</a>(file, <span class="stringliteral">&quot;Can&#39;t open %s file&quot;</span>, path.c_str()))</div>
+<div class="line">    ReadFromFile(file);</div>
+<div class="ttc" id="aassert_8h_html_a0db0022f4e471845272bd7881fc94444"><div class="ttname"><a href="assert_8h.html#a0db0022f4e471845272bd7881fc94444">QX_ASSERT_MSG</a></div><div class="ttdeci">#define QX_ASSERT_MSG(statement, msg,...)</div><div class="ttdoc">Assert macro with message.</div><div class="ttdef"><b>Definition:</b> <a href="assert_8h_source.html#l00126">assert.h:126</a></div></div>
+</div><!-- fragment --> 
+<p class="definition">Definition at line <a class="el" href="assert_8h_source.html#l00126">126</a> of file <a class="el" href="assert_8h_source.html">assert.h</a>.</p>
 
 </div>
 </div>
@@ -220,14 +269,21 @@ Macros</h2></td></tr>
         <tr>
           <td></td>
           <td>)</td>
-          <td></td><td></td>
+          <td></td><td>&#160;&#160;&#160;    _QX_ASSERT_RETURN(statement, __VA_ARGS__)</td>
         </tr>
       </table>
 </div><div class="memdoc">
-<b>Value:</b><div class="fragment"><div class="line">    <span class="keywordflow">if</span> (!(statement)) [[unlikely]]       \</div>
-<div class="line">        return __VA_ARGS__;</div>
-</div><!-- fragment -->
-<p class="definition">Definition at line <a class="el" href="assert_8h_source.html#l00144">144</a> of file <a class="el" href="assert_8h_source.html">assert.h</a>.</p>
+
+<p>Check statement and return if false. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">statement</td><td>- statement to check </td></tr>
+    <tr><td class="paramname">...</td><td>- return value if statement is false </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="assert_8h_source.html#l00156">156</a> of file <a class="el" href="assert_8h_source.html">assert.h</a>.</p>
 
 </div>
 </div>
