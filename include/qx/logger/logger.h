@@ -15,127 +15,49 @@
 #include <memory>
 
 /**
-    @def   QX_LOG_FROM
-    @brief Log common info from instance
+    @def   QX_LOG_COMMON
+    @brief Common macro for logging. Prefer using QX_TLOG or QX_LOG
     @param loggerInstance - logger instance 
+    @param pszTag         - tag, can be used to manage output 
+    @param eLogLevel      - logging level 
     @param format         - format string
     @param ...            - additional args for formatting
 **/
-#define QX_LOG_FROM(loggerInstance, format, ...) \
-    loggerInstance.output(                       \
-        qx::log_level::info,                     \
-        format,                                  \
-        nullptr,                                 \
-        nullptr,                                 \
-        QX_SHORT_FILE,                           \
-        __FUNCTION__,                            \
-        __LINE__,                                \
+#define QX_LOG_COMMON(loggerInstance, pszTag, eLogLevel, format, ...) \
+    loggerInstance.output(                                            \
+        eLogLevel,                                                    \
+        format,                                                       \
+        pszTag,                                                       \
+        QX_SHORT_FILE,                                                \
+        __FUNCTION__,                                                 \
+        __LINE__,                                                     \
         ##__VA_ARGS__)
 
 /**
-    @def   QX_LOG_WARNING_FROM
-    @brief Log warnings from instance
-    @param loggerInstance - logger instance 
-    @param format         - format string
-    @param ...            - additional args for formatting
+    @brief Log with tag
+    @param pszTag    - tag, can be used to manage output
+    @param eLogLevel - logging level
+    @param format    - format string
+    @param ...       - additional args for formatting
 **/
-#define QX_LOG_WARNING_FROM(loggerInstance, format, ...) \
-    loggerInstance.output(                               \
-        qx::log_level::warnings,                         \
-        format,                                          \
-        nullptr,                                         \
-        nullptr,                                         \
-        QX_SHORT_FILE,                                   \
-        __FUNCTION__,                                    \
-        __LINE__,                                        \
+#define QX_TLOG(pszTag, eLogLevel, format, ...) \
+    QX_LOG_COMMON(                              \
+        qx::logger_singleton::get_instance(),   \
+        pszTag,                                 \
+        eLogLevel,                              \
+        format,                                 \
         ##__VA_ARGS__)
-
-/**
-    @def   QX_LOG_ERROR_FROM
-    @brief Log error from instance
-    @param loggerInstance - logger instance
-    @param format         - format string
-    @param ...            - additional args for formatting
-**/
-#define QX_LOG_ERROR_FROM(loggerInstance, format, ...) \
-    loggerInstance.output(                             \
-        qx::log_level::errors,                         \
-        format,                                        \
-        nullptr,                                       \
-        nullptr,                                       \
-        QX_SHORT_FILE,                                 \
-        __FUNCTION__,                                  \
-        __LINE__,                                      \
-        ##__VA_ARGS__)
-
-/**
-    @def   QX_LOG_ASSERT_FROM
-    @brief Log assert from instance
-    @param loggerInstance - logger instance
-    @param expr           - assert expression
-    @param format         - format string
-    @param ...            - additional args for formatting
-**/
-#define QX_LOG_ASSERT_FROM(loggerInstance, expr, format, ...) \
-    loggerInstance.output(                                    \
-        qx::log_level::asserts,                               \
-        format,                                               \
-        #expr,                                                \
-        nullptr,                                              \
-        QX_SHORT_FILE,                                        \
-        __FUNCTION__,                                         \
-        __LINE__,                                             \
-        ##__VA_ARGS__)
-
-
-// redefine these macros in your own header with renaming only or using your instance of logger
 
 /**
     @def   QX_LOG
-    @brief Log common info
-    @param format - format string
-    @param ...    - additional args for formatting
+    @brief Log message
+    @param eLogLevel - logging level 
+    @param format    - format string
+    @param ...       - additional args for formatting
 **/
-#define QX_LOG(format, ...) \
-    QX_LOG_FROM(qx::logger_singleton::get_instance(), format, ##__VA_ARGS__)
+#define QX_LOG(eLogLevel, format, ...) \
+    QX_TLOG(nullptr, eLogLevel, format, ##__VA_ARGS__)
 
-/**
-    @def   QX_LOG_WARNING
-    @brief Log warning
-    @param format - format string
-    @param ...    - additional args for formatting
-**/
-#define QX_LOG_WARNING(format, ...)           \
-    QX_LOG_WARNING_FROM(                      \
-        qx::logger_singleton::get_instance(), \
-        format,                               \
-        ##__VA_ARGS__)
-
-/**
-    @def   QX_LOG_ERROR
-    @brief Log error
-    @param format - format string
-    @param ...    - additional args for formatting
-**/
-#define QX_LOG_ERROR(format, ...)             \
-    QX_LOG_ERROR_FROM(                        \
-        qx::logger_singleton::get_instance(), \
-        format,                               \
-        ##__VA_ARGS__)
-
-/**
-    @def   QX_LOG_ASSERT
-    @brief Log assertion
-    @param expr   - assert expression
-    @param format - format string
-    @param ...    - additional args for formatting
-**/
-#define QX_LOG_ASSERT(expr, format, ...)      \
-    QX_LOG_ASSERT_FROM(                       \
-        qx::logger_singleton::get_instance(), \
-        expr,                                 \
-        format,                               \
-        ##__VA_ARGS__)
 
 namespace qx
 {
@@ -154,19 +76,17 @@ class logger
 public:
     /**
         @brief Process tracings
-        @param eLogLevel           - log level
-        @param pszFormat           - format string
-        @param pszAssertExpression - assert expr or nullptr
-        @param pszTag              - tracing tag
-        @param pszFile             - file name string
-        @param pszFunction         - function name string
-        @param nLine               - code line number
-        @param ...                 - additional args for format
+        @param eLogLevel   - log level
+        @param pszFormat   - format string
+        @param pszTag      - logging tag
+        @param pszFile     - file name string
+        @param pszFunction - function name string
+        @param nLine       - code line number
+        @param ...         - additional args for format
     **/
     void output(
         log_level   eLogLevel,
         const char* pszFormat,
-        const char* pszAssertExpression,
         const char* pszTag,
         const char* pszFile,
         const char* pszFunction,

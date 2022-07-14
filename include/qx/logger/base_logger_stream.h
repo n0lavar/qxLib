@@ -20,11 +20,12 @@ namespace qx
 
 enum class log_level
 {
-    info,     //!< asserts + errors + warnings + info
-    warnings, //!< asserts + errors + warnings
-    errors,   //!< asserts + errors
-    asserts,  //!< asserts
-    none,     //!< disable
+    verbose,
+    log,
+    warning,
+    error,
+    critical,
+    none,
 };
 
 /**
@@ -34,19 +35,18 @@ enum class log_level
 struct log_unit_info
 {
     using format_func = std::function<void(
-        string&     sMsg,                // output message
-        string&     sFormat,             // buffer for formatting
-        log_level   eLogLevel,           // log level
-        const char* pszFormat,           // format string
-        const char* pszAssertExpression, // assert expr or nullptr
-        const char* pszTag,              // tracing tag
-        const char* pszFile,             // file name
-        const char* pszFunction,         // function name
-        int         nLine,               // code line number
-        va_list     args                 // additional args for format
+        string&     sMsg,        // output message
+        string&     sFormat,     // buffer for formatting
+        log_level   eLogLevel,   // log level
+        const char* pszFormat,   // format string
+        const char* pszTag,      // tracing tag
+        const char* pszFile,     // file name
+        const char* pszFunction, // function name
+        int         nLine,       // code line number
+        va_list     args         // additional args for format
         )>;
 
-    log_level   eMinLogLevel = log_level::info;
+    log_level   eMinLogLevel = log_level::log;
     format_func formatFunc;
 };
 
@@ -98,19 +98,17 @@ public:
 
     /**
         @brief Output to stream
-        @param eLogLevel           - log level
-        @param pszFormat           - format string
-        @param pszAssertExpression - assert expr or nullptr
-        @param pszTag              - tracing tag
-        @param pszFile             - file name string
-        @param pszFunction         - function name string
-        @param nLine               - code line number
-        @param args                - additional args for format
+        @param eLogLevel   - log level
+        @param pszFormat   - format string
+        @param pszTag      - tracing tag
+        @param pszFile     - file name string
+        @param pszFunction - function name string
+        @param nLine       - code line number
+        @param args        - additional args for format
     **/
     void output(
         log_level   eLogLevel,
         const char* pszFormat,
-        const char* pszAssertExpression,
         const char* pszTag,
         const char* pszFile,
         const char* pszFunction,
@@ -144,23 +142,21 @@ public:
 
     /**
         @brief Format logger line
-        @param sMsg                - output msg
-        @param sFormat             - buffer for formatting
-        @param eLogLevel           - log level
-        @param pszFormat           - format string
-        @param pszAssertExpression - assert expr or nullptr
-        @param pszTag              - tracing tag or nullptr
-        @param pszFile             - file name string
-        @param pszFunction         - function name string
-        @param nLine               - code line number
-        @param args                - additional args for format
+        @param sMsg        - output msg
+        @param sFormat     - buffer for formatting
+        @param eLogLevel   - log level
+        @param pszFormat   - format string
+        @param pszTag      - tracing tag or nullptr
+        @param pszFile     - file name string
+        @param pszFunction - function name string
+        @param nLine       - code line number
+        @param args        - additional args for format
     **/
     static void format_line(
         string&     sMsg,
         string&     sFormat,
         log_level   eLogLevel,
         const char* pszFormat,
-        const char* pszAssertExpression,
         const char* pszTag,
         const char* pszFile,
         const char* pszFunction,

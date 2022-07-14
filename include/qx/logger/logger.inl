@@ -13,13 +13,15 @@ namespace qx
 inline void logger::output(
     log_level   eLogLevel,
     const char* pszFormat,
-    const char* pszAssertExpression,
     const char* pszTag,
     const char* pszFile,
     const char* pszFunction,
     int         nLine,
     ...)
 {
+    if (eLogLevel == log_level::none)
+        return;
+
     va_list args;
     va_start(args, nLine);
 
@@ -28,7 +30,6 @@ inline void logger::output(
         stream->output(
             eLogLevel,
             pszFormat,
-            pszAssertExpression,
             pszTag,
             pszFile,
             pszFunction,

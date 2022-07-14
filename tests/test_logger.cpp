@@ -166,7 +166,7 @@ protected:
 
         pFileLoggerStream->register_unit(
             Traits::GetUnit(),
-            { qx::log_level::info });
+            { qx::log_level::log });
 
         pFileLoggerStream->register_file(
             Traits::GetUnit(),
@@ -176,12 +176,11 @@ protected:
         {
             pFileLoggerStream->register_unit(
                 Traits::GetTag(),
-                { qx::log_level::info,
+                { qx::log_level::log,
                   [](qx::string& sMsg,
                      qx::string& sFormat,
                      qx::log_level,
-                     const char* pszFormat,
-                     const char*,
+                     const char*      pszFormat,
                      std::string_view svTag,
                      std::string_view,
                      std::string_view,
@@ -223,7 +222,7 @@ protected:
             constexpr const char* pszInfo    = "   ";
             constexpr const char* pszWarning = "\\[W\\]";
             constexpr const char* pszError   = "\\[E\\]";
-            constexpr const char* pszAssert  = "\\[A\\]";
+            constexpr const char* pszAssert  = "\\[C\\]";
             constexpr const char* pszDate    = "\\[\\d{2}-\\d{2}-\\d{4}_";
             constexpr const char* pszTime    = "\\d{2}-\\d{2}-\\d{2}\\]";
 
@@ -307,17 +306,17 @@ protected:
             CheckStringCommon(pszError, " 1.000000 4");
             CheckStringCommon(pszError, " 1.000000 5");
 
-            CheckStringCommon(pszAssert, "\\[false\\] 1.000000 1");
-            CheckStringCommon(pszAssert, "\\[false\\] 1.000000 2");
-            CheckStringCommon(pszAssert, "\\[false\\] 1.000000 3");
-            CheckStringCommon(pszAssert, "\\[false\\] 1.000000 4");
-            CheckStringCommon(pszAssert, "\\[false\\] 1.000000 5");
+            CheckStringCommon(pszAssert, " \\[false\\] 1.000000 1");
+            CheckStringCommon(pszAssert, " \\[false\\] 1.000000 2");
+            CheckStringCommon(pszAssert, " \\[false\\] 1.000000 3");
+            CheckStringCommon(pszAssert, " \\[false\\] 1.000000 4");
+            CheckStringCommon(pszAssert, " \\[false\\] 1.000000 5");
 
-            CheckStringCommon(pszAssert, "\\[false\\] 1.000000 1 three");
-            CheckStringCommon(pszAssert, "\\[false\\] 1.000000 2 three");
-            CheckStringCommon(pszAssert, "\\[false\\] 1.000000 3 three");
-            CheckStringCommon(pszAssert, "\\[false\\] 1.000000 4 three");
-            CheckStringCommon(pszAssert, "\\[false\\] 1.000000 5 three");
+            CheckStringCommon(pszAssert, " \\[false\\] 1.000000 1 three");
+            CheckStringCommon(pszAssert, " \\[false\\] 1.000000 2 three");
+            CheckStringCommon(pszAssert, " \\[false\\] 1.000000 3 three");
+            CheckStringCommon(pszAssert, " \\[false\\] 1.000000 4 three");
+            CheckStringCommon(pszAssert, " \\[false\\] 1.000000 5 three");
 
             if constexpr (TRACE_TAG_TAG1 == Traits::GetTag())
             {
@@ -364,9 +363,8 @@ TYPED_TEST_SUITE(TestLogger, Implementations);
 
 #define TRACE(traceFile, format, ...) \
     myLogger.output(                  \
-        qx::log_level::info,          \
+        qx::log_level::log,           \
         format,                       \
-        nullptr,                      \
         nullptr,                      \
         traceFile,                    \
         __FUNCTION__,                 \
@@ -375,9 +373,8 @@ TYPED_TEST_SUITE(TestLogger, Implementations);
 
 #define TRACE_WARNING(traceFile, format, ...) \
     myLogger.output(                          \
-        qx::log_level::warnings,              \
+        qx::log_level::warning,               \
         format,                               \
-        nullptr,                              \
         nullptr,                              \
         traceFile,                            \
         __FUNCTION__,                         \
@@ -386,9 +383,8 @@ TYPED_TEST_SUITE(TestLogger, Implementations);
 
 #define TRACE_TAG(traceFile, tag, format, ...) \
     myLogger.output(                           \
-        qx::log_level::info,                   \
+        qx::log_level::log,                    \
         format,                                \
-        nullptr,                               \
         tag,                                   \
         traceFile,                             \
         __FUNCTION__,                          \
@@ -397,9 +393,8 @@ TYPED_TEST_SUITE(TestLogger, Implementations);
 
 #define TRACE_ERROR(traceFile, format, ...) \
     myLogger.output(                        \
-        qx::log_level::errors,              \
+        qx::log_level::error,               \
         format,                             \
-        nullptr,                            \
         nullptr,                            \
         traceFile,                          \
         __FUNCTION__,                       \
@@ -408,13 +403,13 @@ TYPED_TEST_SUITE(TestLogger, Implementations);
 
 #define TRACE_ASSERT(traceFile, expr, format, ...) \
     myLogger.output(                               \
-        qx::log_level::asserts,                    \
-        format,                                    \
-        #expr,                                     \
+        qx::log_level::critical,                   \
+        "[%s] " format,                            \
         nullptr,                                   \
         traceFile,                                 \
         __FUNCTION__,                              \
         __LINE__,                                  \
+        #expr,                                     \
         ##__VA_ARGS__)
 
 #define TEST_LOGGER(traceFile, tag)                              \

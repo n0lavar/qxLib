@@ -12,13 +12,12 @@ namespace qx
 
 inline base_logger_stream::base_logger_stream()
 {
-    register_unit(k_svDefaultUnit, { log_level::info });
+    register_unit(k_svDefaultUnit, { log_level::log });
 }
 
 inline void base_logger_stream::output(
     log_level   eLogLevel,
     const char* pszFormat,
-    const char* pszAssertExpression,
     const char* pszTag,
     const char* pszFile,
     const char* pszFunction,
@@ -43,7 +42,6 @@ inline void base_logger_stream::output(
                 m_sBufferFormat,
                 eLogLevel,
                 pszFormat,
-                pszAssertExpression,
                 pszTag,
                 pszFile,
                 pszFunction,
@@ -101,7 +99,6 @@ inline void base_logger_stream::format_line(
     string&     sFormat,
     log_level   eLogLevel,
     const char* pszFormat,
-    const char* pszAssertExpression,
     const char* pszTag,
     const char* pszFile,
     const char* pszFunction,
@@ -114,43 +111,26 @@ inline void base_logger_stream::format_line(
 
     switch (eLogLevel)
     {
-    case log_level::info:
-        sFormat = "   [" + sFormat + "][%s::%s(%d)] ";
+    case log_level::warning:
+        sFormat = "[W][" + sFormat;
         break;
 
-    case log_level::warnings:
-        sFormat = "[W][" + sFormat + "][%s::%s(%d)] ";
+    case log_level::error:
+        sFormat = "[E][" + sFormat;
         break;
 
-    case log_level::errors:
-        sFormat = "[E][" + sFormat + "][%s::%s(%d)] ";
-        break;
-
-    case log_level::asserts:
-        sFormat = "[A][" + sFormat + "][%s::%s(%d)][%s] ";
+    case log_level::critical:
+        sFormat = "[C][" + sFormat;
         break;
 
     default:
-        sFormat = "";
+        sFormat = "   [" + sFormat;
         break;
     }
 
+    sFormat += "][%s::%s(%d)] ";
     sFormat += sMsg;
-
-    if (eLogLevel != log_level::asserts)
-    {
-        sMsg.sprintf(sFormat.data(), pszFile, pszFunction, nLine);
-    }
-    else
-    {
-        sMsg.sprintf(
-            sFormat.data(),
-            pszFile,
-            pszFunction,
-            nLine,
-            pszAssertExpression);
-    }
-
+    sMsg.sprintf(sFormat.data(), pszFile, pszFunction, nLine);
     sMsg += '\n';
 }
 
