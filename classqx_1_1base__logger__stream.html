@@ -100,12 +100,12 @@ Public Member Functions</h2></td></tr>
 virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1base__logger__stream.html#a19753b3ad41e31765763b19d0b801bad">~base_logger_stream</a> ()=default</td></tr>
 <tr class="memdesc:a19753b3ad41e31765763b19d0b801bad"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classqx_1_1base__logger__stream.html" title="Base class for logger streams.">base_logger_stream</a> object destructor <br /></td></tr>
 <tr class="separator:a19753b3ad41e31765763b19d0b801bad"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a298dbfc27af4d96ad9d6d099ca747177"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1base__logger__stream.html#a298dbfc27af4d96ad9d6d099ca747177">process_output</a> (std::string_view svMessage, const <a class="el" href="structqx_1_1log__unit.html">log_unit</a> &amp;logUnit, <a class="el" href="base__logger__stream_8h.html#aeeb3d388b3fe9ff99ce7abcb70484d38">log_level</a> eLogLevel)=0</td></tr>
+<tr class="memitem:a298dbfc27af4d96ad9d6d099ca747177"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1base__logger__stream.html#a298dbfc27af4d96ad9d6d099ca747177">process_output</a> (std::string_view svMessage, const <a class="el" href="structqx_1_1log__unit.html">log_unit</a> &amp;logUnit, log_level eLogLevel)=0</td></tr>
 <tr class="memdesc:a298dbfc27af4d96ad9d6d099ca747177"><td class="mdescLeft">&#160;</td><td class="mdescRight">Output message to the stream.  <a href="classqx_1_1base__logger__stream.html#a298dbfc27af4d96ad9d6d099ca747177">More...</a><br /></td></tr>
 <tr class="separator:a298dbfc27af4d96ad9d6d099ca747177"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a079f651c1785f4b3315e63039babc862"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1base__logger__stream.html#a079f651c1785f4b3315e63039babc862">output</a> (<a class="el" href="base__logger__stream_8h.html#aeeb3d388b3fe9ff99ce7abcb70484d38">log_level</a> eLogLevel, const char *pszFormat, const char *pszAssertExpression, const char *pszTag, const char *pszFile, const char *pszFunction, int nLine, va_list args)</td></tr>
-<tr class="memdesc:a079f651c1785f4b3315e63039babc862"><td class="mdescLeft">&#160;</td><td class="mdescRight">Output to stream.  <a href="classqx_1_1base__logger__stream.html#a079f651c1785f4b3315e63039babc862">More...</a><br /></td></tr>
-<tr class="separator:a079f651c1785f4b3315e63039babc862"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab94336743dd82a360884bfaecaa4c6d0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1base__logger__stream.html#ab94336743dd82a360884bfaecaa4c6d0">output</a> (log_level eLogLevel, const char *pszFormat, const char *pszTag, const char *pszFile, const char *pszFunction, int nLine, va_list args)</td></tr>
+<tr class="memdesc:ab94336743dd82a360884bfaecaa4c6d0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Output to stream.  <a href="classqx_1_1base__logger__stream.html#ab94336743dd82a360884bfaecaa4c6d0">More...</a><br /></td></tr>
+<tr class="separator:ab94336743dd82a360884bfaecaa4c6d0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9230e8cacdbc2d9929909a98c714ac08"><td class="memItemLeft" align="right" valign="top">std::optional&lt; <a class="el" href="structqx_1_1log__unit.html">log_unit</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1base__logger__stream.html#a9230e8cacdbc2d9929909a98c714ac08">get_unit_info</a> (const char *pszTag, const char *pszFile, const char *pszFunction) noexcept</td></tr>
 <tr class="memdesc:a9230e8cacdbc2d9929909a98c714ac08"><td class="mdescLeft">&#160;</td><td class="mdescRight">Try to find log unit info based on trace location info.  <a href="classqx_1_1base__logger__stream.html#a9230e8cacdbc2d9929909a98c714ac08">More...</a><br /></td></tr>
 <tr class="separator:a9230e8cacdbc2d9929909a98c714ac08"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -118,9 +118,9 @@ virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="c
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
-<tr class="memitem:a02f7711c361a74d64b92e3ca69d31d14"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1base__logger__stream.html#a02f7711c361a74d64b92e3ca69d31d14">format_line</a> (<a class="el" href="classqx_1_1basic__string.html">string</a> &amp;sMsg, <a class="el" href="classqx_1_1basic__string.html">string</a> &amp;sFormat, <a class="el" href="base__logger__stream_8h.html#aeeb3d388b3fe9ff99ce7abcb70484d38">log_level</a> eLogLevel, const char *pszFormat, const char *pszAssertExpression, const char *pszTag, const char *pszFile, const char *pszFunction, int nLine, va_list args) noexcept</td></tr>
-<tr class="memdesc:a02f7711c361a74d64b92e3ca69d31d14"><td class="mdescLeft">&#160;</td><td class="mdescRight">Format logger line.  <a href="classqx_1_1base__logger__stream.html#a02f7711c361a74d64b92e3ca69d31d14">More...</a><br /></td></tr>
-<tr class="separator:a02f7711c361a74d64b92e3ca69d31d14"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2e4b222f92f14151d95b7dcc057dabe0"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1base__logger__stream.html#a2e4b222f92f14151d95b7dcc057dabe0">format_line</a> (<a class="el" href="classqx_1_1basic__string.html">string</a> &amp;sMsg, <a class="el" href="classqx_1_1basic__string.html">string</a> &amp;sFormat, log_level eLogLevel, const char *pszFormat, const char *pszTag, const char *pszFile, const char *pszFunction, int nLine, va_list args) noexcept</td></tr>
+<tr class="memdesc:a2e4b222f92f14151d95b7dcc057dabe0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Format logger line.  <a href="classqx_1_1base__logger__stream.html#a2e4b222f92f14151d95b7dcc057dabe0">More...</a><br /></td></tr>
+<tr class="separator:a2e4b222f92f14151d95b7dcc057dabe0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6901fca2acf87051c920b02ee8f1af96"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1base__logger__stream.html#a6901fca2acf87051c920b02ee8f1af96">format_time_string</a> (<a class="el" href="classqx_1_1basic__string.html">string</a> &amp;sTime) noexcept</td></tr>
 <tr class="memdesc:a6901fca2acf87051c920b02ee8f1af96"><td class="mdescLeft">&#160;</td><td class="mdescRight">Format time string to the buffer.  <a href="classqx_1_1base__logger__stream.html#a6901fca2acf87051c920b02ee8f1af96">More...</a><br /></td></tr>
 <tr class="separator:a6901fca2acf87051c920b02ee8f1af96"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -170,12 +170,12 @@ Protected Member Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="base__logger__stream_8inl_source.html#l00094">94</a> of file <a class="el" href="base__logger__stream_8inl_source.html">base_logger_stream.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="base__logger__stream_8inl_source.html#l00092">92</a> of file <a class="el" href="base__logger__stream_8inl_source.html">base_logger_stream.inl</a>.</p>
 
 </div>
 </div>
-<a id="a02f7711c361a74d64b92e3ca69d31d14"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a02f7711c361a74d64b92e3ca69d31d14">&#9670;&nbsp;</a></span>format_line()</h2>
+<a id="a2e4b222f92f14151d95b7dcc057dabe0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2e4b222f92f14151d95b7dcc057dabe0">&#9670;&nbsp;</a></span>format_line()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -198,7 +198,7 @@ Protected Member Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="base__logger__stream_8h.html#aeeb3d388b3fe9ff99ce7abcb70484d38">log_level</a>&#160;</td>
+          <td class="paramtype">log_level&#160;</td>
           <td class="paramname"><em>eLogLevel</em>, </td>
         </tr>
         <tr>
@@ -206,12 +206,6 @@ Protected Member Functions</h2></td></tr>
           <td></td>
           <td class="paramtype">const char *&#160;</td>
           <td class="paramname"><em>pszFormat</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const char *&#160;</td>
-          <td class="paramname"><em>pszAssertExpression</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -263,7 +257,6 @@ Protected Member Functions</h2></td></tr>
     <tr><td class="paramname">sFormat</td><td>- buffer for formatting </td></tr>
     <tr><td class="paramname">eLogLevel</td><td>- log level </td></tr>
     <tr><td class="paramname">pszFormat</td><td>- format string </td></tr>
-    <tr><td class="paramname">pszAssertExpression</td><td>- assert expr or nullptr </td></tr>
     <tr><td class="paramname">pszTag</td><td>- tracing tag or nullptr </td></tr>
     <tr><td class="paramname">pszFile</td><td>- file name string </td></tr>
     <tr><td class="paramname">pszFunction</td><td>- function name string </td></tr>
@@ -273,7 +266,7 @@ Protected Member Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="base__logger__stream_8inl_source.html#l00099">99</a> of file <a class="el" href="base__logger__stream_8inl_source.html">base_logger_stream.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="base__logger__stream_8inl_source.html#l00097">97</a> of file <a class="el" href="base__logger__stream_8inl_source.html">base_logger_stream.inl</a>.</p>
 
 </div>
 </div>
@@ -309,7 +302,7 @@ Protected Member Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="base__logger__stream_8inl_source.html#l00157">157</a> of file <a class="el" href="base__logger__stream_8inl_source.html">base_logger_stream.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="base__logger__stream_8inl_source.html#l00137">137</a> of file <a class="el" href="base__logger__stream_8inl_source.html">base_logger_stream.inl</a>.</p>
 
 </div>
 </div>
@@ -344,7 +337,7 @@ Protected Member Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="base__logger__stream_8inl_source.html#l00174">174</a> of file <a class="el" href="base__logger__stream_8inl_source.html">base_logger_stream.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="base__logger__stream_8inl_source.html#l00154">154</a> of file <a class="el" href="base__logger__stream_8inl_source.html">base_logger_stream.inl</a>.</p>
 
 </div>
 </div>
@@ -404,12 +397,12 @@ Protected Member Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="base__logger__stream_8inl_source.html#l00061">61</a> of file <a class="el" href="base__logger__stream_8inl_source.html">base_logger_stream.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="base__logger__stream_8inl_source.html#l00059">59</a> of file <a class="el" href="base__logger__stream_8inl_source.html">base_logger_stream.inl</a>.</p>
 
 </div>
 </div>
-<a id="a079f651c1785f4b3315e63039babc862"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a079f651c1785f4b3315e63039babc862">&#9670;&nbsp;</a></span>output()</h2>
+<a id="ab94336743dd82a360884bfaecaa4c6d0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab94336743dd82a360884bfaecaa4c6d0">&#9670;&nbsp;</a></span>output()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -420,7 +413,7 @@ Protected Member Functions</h2></td></tr>
         <tr>
           <td class="memname">void qx::base_logger_stream::output </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="base__logger__stream_8h.html#aeeb3d388b3fe9ff99ce7abcb70484d38">log_level</a>&#160;</td>
+          <td class="paramtype">log_level&#160;</td>
           <td class="paramname"><em>eLogLevel</em>, </td>
         </tr>
         <tr>
@@ -428,12 +421,6 @@ Protected Member Functions</h2></td></tr>
           <td></td>
           <td class="paramtype">const char *&#160;</td>
           <td class="paramname"><em>pszFormat</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const char *&#160;</td>
-          <td class="paramname"><em>pszAssertExpression</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -483,7 +470,6 @@ Protected Member Functions</h2></td></tr>
   <table class="params">
     <tr><td class="paramname">eLogLevel</td><td>- log level </td></tr>
     <tr><td class="paramname">pszFormat</td><td>- format string </td></tr>
-    <tr><td class="paramname">pszAssertExpression</td><td>- assert expr or nullptr </td></tr>
     <tr><td class="paramname">pszTag</td><td>- tracing tag </td></tr>
     <tr><td class="paramname">pszFile</td><td>- file name string </td></tr>
     <tr><td class="paramname">pszFunction</td><td>- function name string </td></tr>
@@ -521,7 +507,7 @@ Protected Member Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="base__logger__stream_8h.html#aeeb3d388b3fe9ff99ce7abcb70484d38">log_level</a>&#160;</td>
+          <td class="paramtype">log_level&#160;</td>
           <td class="paramname"><em>eLogLevel</em>&#160;</td>
         </tr>
         <tr>
@@ -594,7 +580,7 @@ Protected Member Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="base__logger__stream_8inl_source.html#l00086">86</a> of file <a class="el" href="base__logger__stream_8inl_source.html">base_logger_stream.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="base__logger__stream_8inl_source.html#l00084">84</a> of file <a class="el" href="base__logger__stream_8inl_source.html">base_logger_stream.inl</a>.</p>
 
 </div>
 </div>
