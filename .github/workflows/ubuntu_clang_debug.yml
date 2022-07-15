@@ -4,13 +4,16 @@ on: push
 
 jobs:
   ubuntu_clang_debug:
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-latest
     env:
-      CXX: clang++-11
+      CXX: clang++
 
     steps:
       - uses: actions/checkout@v2
-      - uses: ./.github/actions/linux/configure_clang
+      - uses: egor-tensin/setup-clang@v1
+        with:
+          version: 14
+          platform: x64
       - uses: ./.github/actions/linux/install_dependencies
         with:
           build_type: Debug

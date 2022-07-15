@@ -30,7 +30,7 @@ class state
     friend struct std::hash<state<T>>;
 
 public:
-    QX_COPYMOVABLE(state<T>);
+    QX_COPYMOVABLE(state);
 
     /**
         @brief basic_state object constructor

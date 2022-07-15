@@ -95,9 +95,9 @@ inline subject<TObserver>::base_iterator<
 
 template<class TObserver>
 template<class TBaseIterator>
-inline typename subject<TObserver>::base_iterator<TBaseIterator>& subject<
-    TObserver>::base_iterator<TBaseIterator>::operator=(const base_iterator&
-                                                            other) noexcept
+inline typename subject<TObserver>::template base_iterator<TBaseIterator>&
+    subject<TObserver>::base_iterator<TBaseIterator>::operator=(
+        const base_iterator& other) noexcept
 {
     *this = std::move(base_iterator(other));
     return *this;

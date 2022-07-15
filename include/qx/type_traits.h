@@ -8,6 +8,8 @@
 **/
 #pragma once
 
+#include <concepts>
+
 namespace qx
 {
 
@@ -33,7 +35,7 @@ struct is_random_access_iterator
 template<typename T>
 struct is_random_access_iterator<
     T,
-    typename std::enable_if_t<
+    std::enable_if_t<
         is_iterator<
             T> && std::derived_from<typename T::iterator_category, std::random_access_iterator_tag>>>
 {
@@ -79,14 +81,14 @@ struct iterator_value
 
 // default implementation with ::value_type
 template<class T>
-struct iterator_value<T, typename std::enable_if_t<is_iterator<T>>>
+struct iterator_value<T, std::enable_if_t<is_iterator<T>>>
 {
     using type = typename T::value_type;
 };
 
 // some iterators may be implemented as pointers
 template<class T>
-struct iterator_value<T, typename std::enable_if_t<std::is_pointer_v<T>>>
+struct iterator_value<T, std::enable_if_t<std::is_pointer_v<T>>>
 {
     using type = std::remove_pointer_t<T>;
 };
