@@ -149,10 +149,6 @@ public:
     template<string_convertable String>
     basic_string(const String& sAnother) noexcept;
 
-    /**
-        @brief basic_string object constructor
-        @param  - nullptr type
-    **/
     basic_string(std::nullptr_t) = delete;
 
     /**

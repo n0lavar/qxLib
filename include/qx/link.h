@@ -182,7 +182,7 @@ public:
     lock_ptr lock() const noexcept;
 
     /**
-        @brief Reset pointer
+        @brief Reset weak pointer
     **/
     void reset() noexcept;
 
@@ -198,21 +198,9 @@ public:
     **/
     explicit operator bool() const noexcept;
 
-    /**
-        @brief  operator==
-        @tparam U - T or type convertible to T
-        @param    - other link object
-        @retval   - true, if objects are equal
-    **/
     template<class U>
     bool operator==(const link<U>&) const noexcept = delete;
 
-    /**
-        @brief  operator!=
-        @tparam U - T or type convertible to T
-        @param    - other link object
-        @retval   - true, if objects are not equal
-    **/
     template<class U>
     bool operator!=(const link<U>&) const noexcept = delete;
 

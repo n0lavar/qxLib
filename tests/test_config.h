@@ -172,4 +172,8 @@ QX_POP_SUPPRESS_WARNINGS
     #define QX_TEST_COLOR 1
 #endif
 
+#ifndef QX_TEST_LINK
+    #define QX_TEST_LINK 1
+#endif
+
 // clang-format on
