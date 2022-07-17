@@ -132,56 +132,56 @@ constexpr const char* last_slash(const char* str)
 /**
     @def   QX_COPYABLE
     @brief Define class as default copyable
-    @param ... - class name
+    @param className - class name
 **/
-#define QX_COPYABLE(...)                       \
-    __VA_ARGS__(const __VA_ARGS__&) = default; \
-    __VA_ARGS__& operator=(const __VA_ARGS__&) = default;
+#define QX_COPYABLE(className)             \
+    className(const className&) = default; \
+    className& operator=(const className&) = default;
 
 /**
     @def   QX_MOVABLE
     @brief Define class as default movable
-    @param ... - class name
+    @param className - class name
 **/
-#define QX_MOVABLE(...)                            \
-    __VA_ARGS__(__VA_ARGS__&&) noexcept = default; \
-    __VA_ARGS__& operator=(__VA_ARGS__&&) noexcept = default;
+#define QX_MOVABLE(className)                  \
+    className(className&&) noexcept = default; \
+    className& operator=(className&&) noexcept = default;
 
 /**
     @def   QX_COPYMOVABLE
     @brief Define class as default copyable and movable
-    @param ... - class name
+    @param className - class name
 **/
-#define QX_COPYMOVABLE(...)  \
-    QX_COPYABLE(__VA_ARGS__) \
-    QX_MOVABLE(__VA_ARGS__)
+#define QX_COPYMOVABLE(className) \
+    QX_COPYABLE(className)        \
+    QX_MOVABLE(className)
 
 /**
     @def   QX_NONCOPYABLE
     @brief Define class as non copyable
-    @param ... - class name
+    @param className - class name
 **/
-#define QX_NONCOPYABLE(...)                   \
-    __VA_ARGS__(const __VA_ARGS__&) = delete; \
-    __VA_ARGS__& operator=(const __VA_ARGS__&) = delete;
+#define QX_NONCOPYABLE(className)         \
+    className(const className&) = delete; \
+    className& operator=(const className&) = delete;
 
 /**
     @def   QX_NONMOVABLE
     @brief Define class as non movable
-    @param ... - class name
+    @param className - class name
 **/
-#define QX_NONMOVABLE(...)                        \
-    __VA_ARGS__(__VA_ARGS__&&) noexcept = delete; \
-    __VA_ARGS__& operator=(__VA_ARGS__&&) noexcept = delete;
+#define QX_NONMOVABLE(className)              \
+    className(className&&) noexcept = delete; \
+    className& operator=(className&&) noexcept = delete;
 
 /**
     @def   QX_NONCOPYMOVABLE
     @brief Define class as non copyable and non movable
-    @param ... - class name
+    @param className - class name
 **/
-#define QX_NONCOPYMOVABLE(...)  \
-    QX_NONCOPYABLE(__VA_ARGS__) \
-    QX_NONMOVABLE(__VA_ARGS__)
+#define QX_NONCOPYMOVABLE(className) \
+    QX_NONCOPYABLE(className)        \
+    QX_NONMOVABLE(className)
 
 
 namespace qx::detail

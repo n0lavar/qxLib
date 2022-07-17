@@ -108,6 +108,20 @@ public:
     constexpr float a() const noexcept;
 
     /**
+        @brief  Get color component
+        @param  i - component number [0, 3]
+        @retval   - component value
+    **/
+    constexpr float& operator[](size_t i) noexcept;
+
+    /**
+        @brief  Get color component
+        @param  i - component number [0, 3]
+        @retval   - component value
+    **/
+    constexpr const float& operator[](size_t i) const noexcept;
+
+    /**
         @brief  Get red component as decimal 
         @retval - red component as decimal
     **/
@@ -423,6 +437,12 @@ public:
     **/
     static constexpr color empty() noexcept;
 
+    /**
+        @brief  Get number of float components
+        @retval  - number of float components
+    **/
+    static constexpr size_t size() noexcept;
+
 private:
     /**
         @brief  Clamp a value to a valid range
@@ -452,28 +472,13 @@ private:
     constexpr void assign_checked(const glm::vec4& other) noexcept;
 
     /**
-        @brief Clamp red component and assign
-        @param fValue - component value
+        @brief Clamp component and assign
+        @param pComponent - component field
+        @param fValue     - new component value
     **/
-    constexpr void assign_r_checked(float fValue) noexcept;
-
-    /**
-        @brief Clamp green component and assign
-        @param fValue - component value
-    **/
-    constexpr void assign_g_checked(float fValue) noexcept;
-
-    /**
-        @brief Clamp blue component and assign
-        @param fValue - component value
-    **/
-    constexpr void assign_b_checked(float fValue) noexcept;
-
-    /**
-        @brief Clamp alpha component and assign
-        @param fValue - component value
-    **/
-    constexpr void assign_a_checked(float fValue) noexcept;
+    static constexpr void assign_component_checked(
+        float& pComponent,
+        float  fValue) noexcept;
 
 private:
     glm::vec4 m_Color = glm::vec4(1.f);

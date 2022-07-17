@@ -32,7 +32,7 @@ source_group(
 # ================================================================
 # Setup
 
-find_package(GTEST REQUIRED)
+find_package(GTEST)
 find_package(Threads REQUIRED)
 find_package(GLEW)
 find_package(GLM)

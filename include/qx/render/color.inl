@@ -75,6 +75,16 @@ constexpr float color::a() const noexcept
     return m_Color.w;
 }
 
+constexpr float& color::operator[](size_t i) noexcept
+{
+    return m_Color[static_cast<glm::length_t>(i)];
+}
+
+constexpr const float& color::operator[](size_t i) const noexcept
+{
+    return m_Color[static_cast<glm::length_t>(i)];
+}
+
 constexpr int color::r_dec() const noexcept
 {
     return float_to_dec(m_Color.x);
@@ -128,82 +138,82 @@ constexpr color::operator glm::vec4() const noexcept
 
 constexpr void color::update_r(float fDeltaValue) noexcept
 {
-    assign_r_checked(m_Color.x + fDeltaValue);
+    assign_component_checked(m_Color.x, m_Color.x + fDeltaValue);
 }
 
 constexpr void color::update_g(float fDeltaValue) noexcept
 {
-    assign_g_checked(m_Color.y + fDeltaValue);
+    assign_component_checked(m_Color.y, m_Color.y + fDeltaValue);
 }
 
 constexpr void color::update_b(float fDeltaValue) noexcept
 {
-    assign_b_checked(m_Color.z + fDeltaValue);
+    assign_component_checked(m_Color.z, m_Color.z + fDeltaValue);
 }
 
 constexpr void color::update_a(float fDeltaValue) noexcept
 {
-    assign_a_checked(m_Color.w + fDeltaValue);
+    assign_component_checked(m_Color.w, m_Color.w + fDeltaValue);
 }
 
 constexpr void color::update_r_dec(int nDeltaValue) noexcept
 {
-    assign_r_checked(m_Color.x + dec_to_float(nDeltaValue));
+    assign_component_checked(m_Color.x, m_Color.x + dec_to_float(nDeltaValue));
 }
 
 constexpr void color::update_g_dec(int nDeltaValue) noexcept
 {
-    assign_g_checked(m_Color.y + dec_to_float(nDeltaValue));
+    assign_component_checked(m_Color.y, m_Color.y + dec_to_float(nDeltaValue));
 }
 
 constexpr void color::update_b_dec(int nDeltaValue) noexcept
 {
-    assign_b_checked(m_Color.z + dec_to_float(nDeltaValue));
+    assign_component_checked(m_Color.z, m_Color.z + dec_to_float(nDeltaValue));
 }
 
 constexpr void color::update_a_dec(int nDeltaValue) noexcept
 {
-    assign_a_checked(m_Color.w + dec_to_float(nDeltaValue));
+    assign_component_checked(m_Color.w, m_Color.w + dec_to_float(nDeltaValue));
 }
 
 constexpr void color::set_r(float fValue) noexcept
 {
-    assign_r_checked(fValue);
+    assign_component_checked(m_Color.x, fValue);
 }
 
 constexpr void color::set_g(float fValue) noexcept
 {
-    assign_g_checked(fValue);
+    assign_component_checked(m_Color.y, fValue);
 }
 
 constexpr void color::set_b(float fValue) noexcept
 {
-    assign_b_checked(fValue);
+    assign_component_checked(m_Color.z, fValue);
 }
 
 constexpr void color::set_a(float fValue) noexcept
 {
-    assign_a_checked(fValue);
+    assign_component_checked(m_Color.w, fValue);
 }
 
 constexpr void color::set_r_dec(int nValue) noexcept
 {
-    assign_r_checked(dec_to_float(nValue));
+    assign_component_checked(m_Color.x, dec_to_float(nValue));
 }
 
 constexpr void color::set_g_dec(int nValue) noexcept
 {
-    assign_g_checked(dec_to_float(nValue));
+    assign_component_checked(m_Color.y, dec_to_float(nValue));
 }
 
 constexpr void color::set_b_dec(int nValue) noexcept
 {
-    assign_b_checked(dec_to_float(nValue));
+    assign_component_checked(m_Color.z, dec_to_float(nValue));
 }
 
 constexpr void color::set_a_dec(int nValue) noexcept
 {
-    assign_a_checked(dec_to_float(nValue));
+    assign_component_checked(m_Color.w, dec_to_float(nValue));
 }
 
 constexpr void color::darken(float fPercent) noexcept
@@ -317,6 +327,11 @@ constexpr color color::empty() noexcept
     return color(0, 0, 0, 0);
 }
 
+constexpr size_t color::size() noexcept
+{
+    return 4;
+}
+
 constexpr float color::clamp_value(float fValue) noexcept
 {
     return std::clamp(fValue, 0.f, 1.f);
@@ -334,30 +349,17 @@ constexpr int color::float_to_dec(float fValue) noexcept
 
 constexpr void color::assign_checked(const glm::vec4& other) noexcept
 {
-    assign_r_checked(other.x);
-    assign_g_checked(other.y);
-    assign_b_checked(other.z);
-    assign_a_checked(other.w);
+    assign_component_checked(m_Color.x, other.x);
+    assign_component_checked(m_Color.y, other.y);
+    assign_component_checked(m_Color.z, other.z);
+    assign_component_checked(m_Color.w, other.w);
 }
 
-constexpr void color::assign_r_checked(float fValue) noexcept
+constexpr void color::assign_component_checked(
+    float& pComponent,
+    float  fValue) noexcept
 {
-    m_Color.x = clamp_value(fValue);
-}
-
-constexpr void color::assign_g_checked(float fValue) noexcept
-{
-    m_Color.y = clamp_value(fValue);
-}
-
-constexpr void color::assign_b_checked(float fValue) noexcept
-{
-    m_Color.z = clamp_value(fValue);
-}
-
-constexpr void color::assign_a_checked(float fValue) noexcept
-{
-    m_Color.w = clamp_value(fValue);
+    pComponent = clamp_value(fValue);
 }
 
 } // namespace qx
