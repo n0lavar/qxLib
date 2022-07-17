@@ -112,6 +112,12 @@ constexpr&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href=
 <tr class="memitem:a550e2e011573d8b7ff1a3a3e4cd2e78d"><td class="memItemLeft" align="right" valign="top">constexpr float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1color.html#a550e2e011573d8b7ff1a3a3e4cd2e78d">a</a> () const noexcept</td></tr>
 <tr class="memdesc:a550e2e011573d8b7ff1a3a3e4cd2e78d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get alpha component.  <a href="classqx_1_1color.html#a550e2e011573d8b7ff1a3a3e4cd2e78d">More...</a><br /></td></tr>
 <tr class="separator:a550e2e011573d8b7ff1a3a3e4cd2e78d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5fc90af320b80025410088771af6b6f2"><td class="memItemLeft" align="right" valign="top">constexpr float &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1color.html#a5fc90af320b80025410088771af6b6f2">operator[]</a> (size_t i) noexcept</td></tr>
+<tr class="memdesc:a5fc90af320b80025410088771af6b6f2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get color component.  <a href="classqx_1_1color.html#a5fc90af320b80025410088771af6b6f2">More...</a><br /></td></tr>
+<tr class="separator:a5fc90af320b80025410088771af6b6f2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7ba043339b08f12c06e7730a2372bc5b"><td class="memItemLeft" align="right" valign="top">constexpr const float &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1color.html#a7ba043339b08f12c06e7730a2372bc5b">operator[]</a> (size_t i) const noexcept</td></tr>
+<tr class="memdesc:a7ba043339b08f12c06e7730a2372bc5b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get color component.  <a href="classqx_1_1color.html#a7ba043339b08f12c06e7730a2372bc5b">More...</a><br /></td></tr>
+<tr class="separator:a7ba043339b08f12c06e7730a2372bc5b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1fd1646aba373bb80c407d65df46b08e"><td class="memItemLeft" align="right" valign="top">constexpr int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1color.html#a1fd1646aba373bb80c407d65df46b08e">r_dec</a> () const noexcept</td></tr>
 <tr class="memdesc:a1fd1646aba373bb80c407d65df46b08e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get red component as decimal.  <a href="classqx_1_1color.html#a1fd1646aba373bb80c407d65df46b08e">More...</a><br /></td></tr>
 <tr class="separator:a1fd1646aba373bb80c407d65df46b08e"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -253,6 +259,9 @@ Static Public Member Functions</h2></td></tr>
 <tr class="memitem:a76b77e9e9b1a324bac4b8df930358731"><td class="memItemLeft" align="right" valign="top">static constexpr <a class="el" href="classqx_1_1color.html">color</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1color.html#a76b77e9e9b1a324bac4b8df930358731">empty</a> () noexcept</td></tr>
 <tr class="memdesc:a76b77e9e9b1a324bac4b8df930358731"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get empty color (0, 0, 0, 0)  <a href="classqx_1_1color.html#a76b77e9e9b1a324bac4b8df930358731">More...</a><br /></td></tr>
 <tr class="separator:a76b77e9e9b1a324bac4b8df930358731"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abb14ac204181c15f5cc5c72828bca4a1"><td class="memItemLeft" align="right" valign="top">static constexpr size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1color.html#abb14ac204181c15f5cc5c72828bca4a1">size</a> () noexcept</td></tr>
+<tr class="memdesc:abb14ac204181c15f5cc5c72828bca4a1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get number of float components.  <a href="classqx_1_1color.html#abb14ac204181c15f5cc5c72828bca4a1">More...</a><br /></td></tr>
+<tr class="separator:abb14ac204181c15f5cc5c72828bca4a1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>RGBA color. </p>
@@ -558,7 +567,7 @@ Static Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="color_8inl_source.html#l00093">93</a> of file <a class="el" href="color_8inl_source.html">color.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="color_8inl_source.html#l00103">103</a> of file <a class="el" href="color_8inl_source.html">color.inl</a>.</p>
 
 </div>
 </div>
@@ -594,7 +603,7 @@ Static Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="color_8inl_source.html#l00235">235</a> of file <a class="el" href="color_8inl_source.html">color.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="color_8inl_source.html#l00245">245</a> of file <a class="el" href="color_8inl_source.html">color.inl</a>.</p>
 
 </div>
 </div>
@@ -664,7 +673,7 @@ Static Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="color_8inl_source.html#l00088">88</a> of file <a class="el" href="color_8inl_source.html">color.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="color_8inl_source.html#l00098">98</a> of file <a class="el" href="color_8inl_source.html">color.inl</a>.</p>
 
 </div>
 </div>
@@ -706,7 +715,7 @@ Static Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="color_8inl_source.html#l00240">240</a> of file <a class="el" href="color_8inl_source.html">color.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="color_8inl_source.html#l00250">250</a> of file <a class="el" href="color_8inl_source.html">color.inl</a>.</p>
 
 </div>
 </div>
@@ -748,7 +757,7 @@ Static Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="color_8inl_source.html#l00245">245</a> of file <a class="el" href="color_8inl_source.html">color.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="color_8inl_source.html#l00255">255</a> of file <a class="el" href="color_8inl_source.html">color.inl</a>.</p>
 
 </div>
 </div>
@@ -801,7 +810,7 @@ Static Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="color_8inl_source.html#l00228">228</a> of file <a class="el" href="color_8inl_source.html">color.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="color_8inl_source.html#l00238">238</a> of file <a class="el" href="color_8inl_source.html">color.inl</a>.</p>
 
 </div>
 </div>
@@ -837,7 +846,7 @@ Static Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="color_8inl_source.html#l00214">214</a> of file <a class="el" href="color_8inl_source.html">color.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="color_8inl_source.html#l00224">224</a> of file <a class="el" href="color_8inl_source.html">color.inl</a>.</p>
 
 </div>
 </div>
@@ -890,7 +899,7 @@ Static Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="color_8inl_source.html#l00221">221</a> of file <a class="el" href="color_8inl_source.html">color.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="color_8inl_source.html#l00231">231</a> of file <a class="el" href="color_8inl_source.html">color.inl</a>.</p>
 
 </div>
 </div>
@@ -926,7 +935,7 @@ Static Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="color_8inl_source.html#l00209">209</a> of file <a class="el" href="color_8inl_source.html">color.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="color_8inl_source.html#l00219">219</a> of file <a class="el" href="color_8inl_source.html">color.inl</a>.</p>
 
 </div>
 </div>
@@ -961,7 +970,7 @@ Static Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="color_8inl_source.html#l00098">98</a> of file <a class="el" href="color_8inl_source.html">color.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="color_8inl_source.html#l00108">108</a> of file <a class="el" href="color_8inl_source.html">color.inl</a>.</p>
 
 </div>
 </div>
@@ -999,7 +1008,7 @@ Static Public Member Functions</h2></td></tr>
 </li>
 </ul>
 
-<p class="definition">Definition at line <a class="el" href="color_8inl_source.html#l00315">315</a> of file <a class="el" href="color_8inl_source.html">color.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="color_8inl_source.html#l00325">325</a> of file <a class="el" href="color_8inl_source.html">color.inl</a>.</p>
 
 </div>
 </div>
@@ -1041,7 +1050,7 @@ Static Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="color_8inl_source.html#l00250">250</a> of file <a class="el" href="color_8inl_source.html">color.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="color_8inl_source.html#l00260">260</a> of file <a class="el" href="color_8inl_source.html">color.inl</a>.</p>
 
 </div>
 </div>
@@ -1111,7 +1120,7 @@ Static Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="color_8inl_source.html#l00083">83</a> of file <a class="el" href="color_8inl_source.html">color.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="color_8inl_source.html#l00093">93</a> of file <a class="el" href="color_8inl_source.html">color.inl</a>.</p>
 
 </div>
 </div>
@@ -1153,7 +1162,7 @@ Static Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="color_8inl_source.html#l00255">255</a> of file <a class="el" href="color_8inl_source.html">color.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="color_8inl_source.html#l00265">265</a> of file <a class="el" href="color_8inl_source.html">color.inl</a>.</p>
 
 </div>
 </div>
@@ -1195,7 +1204,7 @@ Static Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="color_8inl_source.html#l00260">260</a> of file <a class="el" href="color_8inl_source.html">color.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="color_8inl_source.html#l00270">270</a> of file <a class="el" href="color_8inl_source.html">color.inl</a>.</p>
 
 </div>
 </div>
@@ -1230,7 +1239,7 @@ Static Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="color_8inl_source.html#l00103">103</a> of file <a class="el" href="color_8inl_source.html">color.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="color_8inl_source.html#l00113">113</a> of file <a class="el" href="color_8inl_source.html">color.inl</a>.</p>
 
 </div>
 </div>
@@ -1272,7 +1281,7 @@ Static Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="color_8inl_source.html#l00265">265</a> of file <a class="el" href="color_8inl_source.html">color.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="color_8inl_source.html#l00275">275</a> of file <a class="el" href="color_8inl_source.html">color.inl</a>.</p>
 
 </div>
 </div>
@@ -1314,7 +1323,7 @@ Static Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="color_8inl_source.html#l00270">270</a> of file <a class="el" href="color_8inl_source.html">color.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="color_8inl_source.html#l00280">280</a> of file <a class="el" href="color_8inl_source.html">color.inl</a>.</p>
 
 </div>
 </div>
@@ -1356,7 +1365,7 @@ Static Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="color_8inl_source.html#l00275">275</a> of file <a class="el" href="color_8inl_source.html">color.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="color_8inl_source.html#l00285">285</a> of file <a class="el" href="color_8inl_source.html">color.inl</a>.</p>
 
 </div>
 </div>
@@ -1398,7 +1407,7 @@ Static Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="color_8inl_source.html#l00280">280</a> of file <a class="el" href="color_8inl_source.html">color.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="color_8inl_source.html#l00290">290</a> of file <a class="el" href="color_8inl_source.html">color.inl</a>.</p>
 
 </div>
 </div>
@@ -1433,7 +1442,7 @@ Static Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="color_8inl_source.html#l00119">119</a> of file <a class="el" href="color_8inl_source.html">color.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="color_8inl_source.html#l00129">129</a> of file <a class="el" href="color_8inl_source.html">color.inl</a>.</p>
 
 </div>
 </div>
@@ -1468,7 +1477,7 @@ Static Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="color_8inl_source.html#l00124">124</a> of file <a class="el" href="color_8inl_source.html">color.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="color_8inl_source.html#l00134">134</a> of file <a class="el" href="color_8inl_source.html">color.inl</a>.</p>
 
 </div>
 </div>
@@ -1510,7 +1519,91 @@ Static Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="color_8inl_source.html#l00114">114</a> of file <a class="el" href="color_8inl_source.html">color.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="color_8inl_source.html#l00124">124</a> of file <a class="el" href="color_8inl_source.html">color.inl</a>.</p>
+
+</div>
+</div>
+<a id="a7ba043339b08f12c06e7730a2372bc5b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7ba043339b08f12c06e7730a2372bc5b">&#9670;&nbsp;</a></span>operator[]() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr const float &amp; qx::color::operator[] </td>
+          <td>(</td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>i</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Get color component. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">i</td><td>- component number [0, 3] </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Return values</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">-</td><td>component value </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="color_8inl_source.html#l00083">83</a> of file <a class="el" href="color_8inl_source.html">color.inl</a>.</p>
+
+</div>
+</div>
+<a id="a5fc90af320b80025410088771af6b6f2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5fc90af320b80025410088771af6b6f2">&#9670;&nbsp;</a></span>operator[]() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr float &amp; qx::color::operator[] </td>
+          <td>(</td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>i</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Get color component. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">i</td><td>- component number [0, 3] </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Return values</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">-</td><td>component value </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="color_8inl_source.html#l00078">78</a> of file <a class="el" href="color_8inl_source.html">color.inl</a>.</p>
 
 </div>
 </div>
@@ -1552,7 +1645,7 @@ Static Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="color_8inl_source.html#l00285">285</a> of file <a class="el" href="color_8inl_source.html">color.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="color_8inl_source.html#l00295">295</a> of file <a class="el" href="color_8inl_source.html">color.inl</a>.</p>
 
 </div>
 </div>
@@ -1622,7 +1715,7 @@ Static Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="color_8inl_source.html#l00078">78</a> of file <a class="el" href="color_8inl_source.html">color.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="color_8inl_source.html#l00088">88</a> of file <a class="el" href="color_8inl_source.html">color.inl</a>.</p>
 
 </div>
 </div>
@@ -1664,7 +1757,7 @@ Static Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="color_8inl_source.html#l00290">290</a> of file <a class="el" href="color_8inl_source.html">color.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="color_8inl_source.html#l00300">300</a> of file <a class="el" href="color_8inl_source.html">color.inl</a>.</p>
 
 </div>
 </div>
@@ -1700,7 +1793,7 @@ Static Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="color_8inl_source.html#l00184">184</a> of file <a class="el" href="color_8inl_source.html">color.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="color_8inl_source.html#l00194">194</a> of file <a class="el" href="color_8inl_source.html">color.inl</a>.</p>
 
 </div>
 </div>
@@ -1736,7 +1829,7 @@ Static Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="color_8inl_source.html#l00204">204</a> of file <a class="el" href="color_8inl_source.html">color.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="color_8inl_source.html#l00214">214</a> of file <a class="el" href="color_8inl_source.html">color.inl</a>.</p>
 
 </div>
 </div>
@@ -1772,7 +1865,7 @@ Static Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="color_8inl_source.html#l00179">179</a> of file <a class="el" href="color_8inl_source.html">color.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="color_8inl_source.html#l00189">189</a> of file <a class="el" href="color_8inl_source.html">color.inl</a>.</p>
 
 </div>
 </div>
@@ -1808,7 +1901,7 @@ Static Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="color_8inl_source.html#l00199">199</a> of file <a class="el" href="color_8inl_source.html">color.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="color_8inl_source.html#l00209">209</a> of file <a class="el" href="color_8inl_source.html">color.inl</a>.</p>
 
 </div>
 </div>
@@ -1844,7 +1937,7 @@ Static Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="color_8inl_source.html#l00174">174</a> of file <a class="el" href="color_8inl_source.html">color.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="color_8inl_source.html#l00184">184</a> of file <a class="el" href="color_8inl_source.html">color.inl</a>.</p>
 
 </div>
 </div>
@@ -1880,7 +1973,7 @@ Static Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="color_8inl_source.html#l00194">194</a> of file <a class="el" href="color_8inl_source.html">color.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="color_8inl_source.html#l00204">204</a> of file <a class="el" href="color_8inl_source.html">color.inl</a>.</p>
 
 </div>
 </div>
@@ -1916,7 +2009,7 @@ Static Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="color_8inl_source.html#l00169">169</a> of file <a class="el" href="color_8inl_source.html">color.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="color_8inl_source.html#l00179">179</a> of file <a class="el" href="color_8inl_source.html">color.inl</a>.</p>
 
 </div>
 </div>
@@ -1952,7 +2045,7 @@ Static Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="color_8inl_source.html#l00189">189</a> of file <a class="el" href="color_8inl_source.html">color.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="color_8inl_source.html#l00199">199</a> of file <a class="el" href="color_8inl_source.html">color.inl</a>.</p>
 
 </div>
 </div>
@@ -1994,7 +2087,43 @@ Static Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="color_8inl_source.html#l00295">295</a> of file <a class="el" href="color_8inl_source.html">color.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="color_8inl_source.html#l00305">305</a> of file <a class="el" href="color_8inl_source.html">color.inl</a>.</p>
+
+</div>
+</div>
+<a id="abb14ac204181c15f5cc5c72828bca4a1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abb14ac204181c15f5cc5c72828bca4a1">&#9670;&nbsp;</a></span>size()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr size_t qx::color::size </td>
+          <td>(</td>
+          <td class="paramtype">void&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Get number of float components. </p>
+<dl class="retval"><dt>Return values</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">-</td><td>number of float components </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="color_8inl_source.html#l00330">330</a> of file <a class="el" href="color_8inl_source.html">color.inl</a>.</p>
 
 </div>
 </div>
@@ -2036,7 +2165,7 @@ Static Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="color_8inl_source.html#l00300">300</a> of file <a class="el" href="color_8inl_source.html">color.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="color_8inl_source.html#l00310">310</a> of file <a class="el" href="color_8inl_source.html">color.inl</a>.</p>
 
 </div>
 </div>
@@ -2072,7 +2201,7 @@ Static Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="color_8inl_source.html#l00144">144</a> of file <a class="el" href="color_8inl_source.html">color.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="color_8inl_source.html#l00154">154</a> of file <a class="el" href="color_8inl_source.html">color.inl</a>.</p>
 
 </div>
 </div>
@@ -2108,7 +2237,7 @@ Static Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="color_8inl_source.html#l00164">164</a> of file <a class="el" href="color_8inl_source.html">color.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="color_8inl_source.html#l00174">174</a> of file <a class="el" href="color_8inl_source.html">color.inl</a>.</p>
 
 </div>
 </div>
@@ -2144,7 +2273,7 @@ Static Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="color_8inl_source.html#l00139">139</a> of file <a class="el" href="color_8inl_source.html">color.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="color_8inl_source.html#l00149">149</a> of file <a class="el" href="color_8inl_source.html">color.inl</a>.</p>
 
 </div>
 </div>
@@ -2180,7 +2309,7 @@ Static Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="color_8inl_source.html#l00159">159</a> of file <a class="el" href="color_8inl_source.html">color.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="color_8inl_source.html#l00169">169</a> of file <a class="el" href="color_8inl_source.html">color.inl</a>.</p>
 
 </div>
 </div>
@@ -2216,7 +2345,7 @@ Static Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="color_8inl_source.html#l00134">134</a> of file <a class="el" href="color_8inl_source.html">color.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="color_8inl_source.html#l00144">144</a> of file <a class="el" href="color_8inl_source.html">color.inl</a>.</p>
 
 </div>
 </div>
@@ -2252,7 +2381,7 @@ Static Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="color_8inl_source.html#l00154">154</a> of file <a class="el" href="color_8inl_source.html">color.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="color_8inl_source.html#l00164">164</a> of file <a class="el" href="color_8inl_source.html">color.inl</a>.</p>
 
 </div>
 </div>
@@ -2288,7 +2417,7 @@ Static Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="color_8inl_source.html#l00129">129</a> of file <a class="el" href="color_8inl_source.html">color.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="color_8inl_source.html#l00139">139</a> of file <a class="el" href="color_8inl_source.html">color.inl</a>.</p>
 
 </div>
 </div>
@@ -2324,7 +2453,7 @@ Static Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="color_8inl_source.html#l00149">149</a> of file <a class="el" href="color_8inl_source.html">color.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="color_8inl_source.html#l00159">159</a> of file <a class="el" href="color_8inl_source.html">color.inl</a>.</p>
 
 </div>
 </div>
@@ -2366,7 +2495,7 @@ Static Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="color_8inl_source.html#l00305">305</a> of file <a class="el" href="color_8inl_source.html">color.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="color_8inl_source.html#l00315">315</a> of file <a class="el" href="color_8inl_source.html">color.inl</a>.</p>
 
 </div>
 </div>
@@ -2408,7 +2537,7 @@ Static Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="color_8inl_source.html#l00310">310</a> of file <a class="el" href="color_8inl_source.html">color.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="color_8inl_source.html#l00320">320</a> of file <a class="el" href="color_8inl_source.html">color.inl</a>.</p>
 
 </div>
 </div>
