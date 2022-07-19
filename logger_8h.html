@@ -93,13 +93,13 @@ Classes</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
 Macros</h2></td></tr>
-<tr class="memitem:aac029ecd06c39428f69252cad1310574"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="logger_8h.html#aac029ecd06c39428f69252cad1310574">QX_LOG_COMMON</a>(loggerInstance,  pszTag,  eLogLevel, ...)&#160;&#160;&#160;    loggerInstance.output(eLogLevel, pszTag, <a class="el" href="useful__macros_8h.html#ae158b161fec70fada62391b9ffa7d502">QX_SHORT_FILE</a>, __FUNCTION__, __LINE__, ##__VA_ARGS__)</td></tr>
+<tr class="memitem:aac029ecd06c39428f69252cad1310574"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="logger_8h.html#aac029ecd06c39428f69252cad1310574">QX_LOG_COMMON</a>(loggerInstance,  pszTag,  eLogLevel, ...)&#160;&#160;&#160;    loggerInstance.output(eLogLevel, pszTag, <a class="el" href="useful__macros_8h.html#ae158b161fec70fada62391b9ffa7d502">QX_SHORT_FILE</a>, __FUNCTION__, __LINE__, __VA_ARGS__)</td></tr>
 <tr class="memdesc:aac029ecd06c39428f69252cad1310574"><td class="mdescLeft">&#160;</td><td class="mdescRight">Common macro for logging. Prefer using QX_TLOG or QX_LOG.  <a href="logger_8h.html#aac029ecd06c39428f69252cad1310574">More...</a><br /></td></tr>
 <tr class="separator:aac029ecd06c39428f69252cad1310574"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adfe13339f0b8e866cc9d362e37671f02"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="logger_8h.html#adfe13339f0b8e866cc9d362e37671f02">QX_TLOG</a>(pszTag,  eLogLevel, ...)&#160;&#160;&#160;    <a class="el" href="logger_8h.html#aac029ecd06c39428f69252cad1310574">QX_LOG_COMMON</a>(qx::logger_singleton::get_instance(), pszTag, eLogLevel, ##__VA_ARGS__)</td></tr>
+<tr class="memitem:adfe13339f0b8e866cc9d362e37671f02"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="logger_8h.html#adfe13339f0b8e866cc9d362e37671f02">QX_TLOG</a>(pszTag,  eLogLevel, ...)&#160;&#160;&#160;    <a class="el" href="logger_8h.html#aac029ecd06c39428f69252cad1310574">QX_LOG_COMMON</a>(qx::logger_singleton::get_instance(), pszTag, eLogLevel, __VA_ARGS__)</td></tr>
 <tr class="memdesc:adfe13339f0b8e866cc9d362e37671f02"><td class="mdescLeft">&#160;</td><td class="mdescRight">Log with tag.  <a href="logger_8h.html#adfe13339f0b8e866cc9d362e37671f02">More...</a><br /></td></tr>
 <tr class="separator:adfe13339f0b8e866cc9d362e37671f02"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9169f09308c1212078ba87b7c645f065"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="logger_8h.html#a9169f09308c1212078ba87b7c645f065">QX_LOG</a>(eLogLevel,  format, ...)&#160;&#160;&#160;<a class="el" href="logger_8h.html#adfe13339f0b8e866cc9d362e37671f02">QX_TLOG</a>(nullptr, eLogLevel, ##__VA_ARGS__)</td></tr>
+<tr class="memitem:a9169f09308c1212078ba87b7c645f065"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="logger_8h.html#a9169f09308c1212078ba87b7c645f065">QX_LOG</a>(eLogLevel,  format, ...)&#160;&#160;&#160;<a class="el" href="logger_8h.html#adfe13339f0b8e866cc9d362e37671f02">QX_TLOG</a>(nullptr, eLogLevel, __VA_ARGS__)</td></tr>
 <tr class="memdesc:a9169f09308c1212078ba87b7c645f065"><td class="mdescLeft">&#160;</td><td class="mdescRight">Log message.  <a href="logger_8h.html#a9169f09308c1212078ba87b7c645f065">More...</a><br /></td></tr>
 <tr class="separator:a9169f09308c1212078ba87b7c645f065"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
@@ -138,7 +138,7 @@ Macros</h2></td></tr>
         <tr>
           <td></td>
           <td>)</td>
-          <td></td><td>&#160;&#160;&#160;<a class="el" href="logger_8h.html#adfe13339f0b8e866cc9d362e37671f02">QX_TLOG</a>(nullptr, eLogLevel, ##__VA_ARGS__)</td>
+          <td></td><td>&#160;&#160;&#160;<a class="el" href="logger_8h.html#adfe13339f0b8e866cc9d362e37671f02">QX_TLOG</a>(nullptr, eLogLevel, __VA_ARGS__)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -189,7 +189,7 @@ Macros</h2></td></tr>
         <tr>
           <td></td>
           <td>)</td>
-          <td></td><td>&#160;&#160;&#160;    loggerInstance.output(eLogLevel, pszTag, <a class="el" href="useful__macros_8h.html#ae158b161fec70fada62391b9ffa7d502">QX_SHORT_FILE</a>, __FUNCTION__, __LINE__, ##__VA_ARGS__)</td>
+          <td></td><td>&#160;&#160;&#160;    loggerInstance.output(eLogLevel, pszTag, <a class="el" href="useful__macros_8h.html#ae158b161fec70fada62391b9ffa7d502">QX_SHORT_FILE</a>, __FUNCTION__, __LINE__, __VA_ARGS__)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -236,7 +236,7 @@ Macros</h2></td></tr>
         <tr>
           <td></td>
           <td>)</td>
-          <td></td><td>&#160;&#160;&#160;    <a class="el" href="logger_8h.html#aac029ecd06c39428f69252cad1310574">QX_LOG_COMMON</a>(qx::logger_singleton::get_instance(), pszTag, eLogLevel, ##__VA_ARGS__)</td>
+          <td></td><td>&#160;&#160;&#160;    <a class="el" href="logger_8h.html#aac029ecd06c39428f69252cad1310574">QX_LOG_COMMON</a>(qx::logger_singleton::get_instance(), pszTag, eLogLevel, __VA_ARGS__)</td>
         </tr>
       </table>
 </div><div class="memdoc">
