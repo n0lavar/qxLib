@@ -12,10 +12,10 @@
 
 #if QX_TEST_ASSERT
 
-#define QX_ENABLE_ASSERTS     1
-#define QX_ENABLE_DEBUG_BREAK 1
+    #define QX_ENABLE_ASSERTS     1
+    #define QX_ENABLE_DEBUG_BREAK 1
 
-#include <qx/assert.h>
+    #include <qx/assert.h>
 
 QX_PUSH_SUPPRESS_MSVC_WARNINGS(4702)
 
@@ -23,10 +23,219 @@ void Foo()
 {
 }
 
-TEST(qx_assert, assert_macro)
+TEST(qx_assert, expect_macro_compilation)
 {
-    // we only want to check compilation
-    // and dont want out test to be failed in SIGTRAP
+    return;
+
+    QX_EXPECT(false);
+
+    if (false)
+        QX_EXPECT(false);
+
+    if (false)
+        QX_EXPECT(false);
+    else
+        Foo();
+
+    if (false)
+        Foo();
+    else
+        QX_EXPECT(false);
+
+    if (false)
+    {
+        QX_EXPECT(false);
+        Foo();
+    }
+
+    if (false)
+        Foo();
+    else
+    {
+        QX_EXPECT(false);
+        Foo();
+    }
+}
+
+
+TEST(qx_assert, expect_mgs_macro_compilation)
+{
+    return;
+
+    QX_EXPECT_MSG(false, "msg");
+
+    if (false)
+        QX_EXPECT_MSG(false, "msg");
+
+    if (false)
+        QX_EXPECT_MSG(false, "msg");
+    else
+        Foo();
+
+    if (false)
+        Foo();
+    else
+        QX_EXPECT_MSG(false, "msg");
+
+    if (false)
+    {
+        QX_EXPECT_MSG(false, "msg");
+        Foo();
+    }
+
+    if (false)
+        Foo();
+    else
+    {
+        QX_EXPECT_MSG(false, "msg");
+        Foo();
+    }
+}
+
+TEST(qx_assert, expect_no_entry_macro_compilation)
+{
+    return;
+
+    QX_EXPECT_NO_ENTRY;
+
+    if (false)
+        QX_EXPECT_NO_ENTRY;
+
+    if (false)
+        QX_EXPECT_NO_ENTRY;
+    else
+        Foo();
+
+    if (false)
+        Foo();
+    else
+        QX_EXPECT_NO_ENTRY;
+
+    if (false)
+    {
+        QX_EXPECT_NO_ENTRY;
+        Foo();
+    }
+
+    if (false)
+        Foo();
+    else
+    {
+        QX_EXPECT_NO_ENTRY;
+        Foo();
+    }
+}
+
+TEST(qx_assert, expect_return_macro_compilation)
+{
+    return;
+
+    QX_EXPECT_RETURN(false);
+
+    if (false)
+        QX_EXPECT_RETURN(false);
+
+    if (false)
+        Foo();
+    else
+        QX_EXPECT_RETURN(false);
+
+    if (false)
+        QX_EXPECT_RETURN(false);
+    else
+        Foo();
+
+    if (false)
+    {
+        QX_EXPECT_RETURN(false);
+        Foo();
+    }
+
+    if (false)
+        Foo();
+    else
+    {
+        QX_EXPECT_RETURN(false);
+        Foo();
+    }
+}
+
+TEST(qx_assert, expect_continue_macro_compilation)
+{
+    return;
+
+    do
+    {
+        QX_EXPECT_CONTINUE(false);
+
+        if (false)
+            QX_EXPECT_CONTINUE(false);
+
+        if (false)
+            QX_EXPECT_CONTINUE(false);
+        else
+            Foo();
+
+        if (false)
+            Foo();
+        else
+            QX_EXPECT_CONTINUE(false);
+
+        if (false)
+        {
+            QX_EXPECT_CONTINUE(false);
+            Foo();
+        }
+
+        if (false)
+            Foo();
+        else
+        {
+            QX_EXPECT_CONTINUE(false);
+            Foo();
+        }
+    } while (false);
+}
+
+TEST(qx_assert, expect_break_macro_compilation)
+{
+    return;
+
+    do
+    {
+        QX_EXPECT_BREAK(false);
+
+        if (false)
+            QX_EXPECT_BREAK(false);
+
+        if (false)
+            QX_EXPECT_BREAK(false);
+        else
+            Foo();
+
+        if (false)
+            Foo();
+        else
+            QX_EXPECT_BREAK(false);
+
+        if (false)
+        {
+            QX_EXPECT_BREAK(false);
+            Foo();
+        }
+
+        if (false)
+            Foo();
+        else
+        {
+            QX_EXPECT_BREAK(false);
+            Foo();
+        }
+    } while (false);
+}
+
+TEST(qx_assert, assert_macro_compilation)
+{
     return;
 
     QX_ASSERT(false);
@@ -60,10 +269,8 @@ TEST(qx_assert, assert_macro)
 }
 
 
-TEST(qx_assert, assert_mgs_macro)
+TEST(qx_assert, assert_mgs_macro_compilation)
 {
-    // we only want to check compilation
-    // and dont want out test to be failed in SIGTRAP
     return;
 
     QX_ASSERT_MSG(false, "msg");
@@ -96,10 +303,8 @@ TEST(qx_assert, assert_mgs_macro)
     }
 }
 
-TEST(qx_assert, assert_not_impl_macro)
+TEST(qx_assert, assert_no_entry_macro_compilation)
 {
-    // we only want to check compilation
-    // and dont want out test to be failed in SIGTRAP
     return;
 
     QX_ASSERT_NO_ENTRY;
@@ -133,5 +338,12 @@ TEST(qx_assert, assert_not_impl_macro)
 }
 
 QX_POP_SUPPRESS_WARNINGS
+
+TEST(qx_assert, assert_macros)
+{
+    EXPECT_DEATH({ QX_ASSERT(0); }, "");
+    EXPECT_DEATH({ QX_ASSERT_MSG(0, ""); }, "");
+    EXPECT_DEATH({ QX_ASSERT_NO_ENTRY; }, "");
+}
 
 #endif

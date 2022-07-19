@@ -18,7 +18,6 @@ QX_POP_SUPPRESS_WARNINGS
 
 #define GTEST_SINGLE_ARGUMENT(...) (__VA_ARGS__)
 
-// clang-format off
 
 #ifndef QX_TEST_SORT
     #define QX_TEST_SORT 1
@@ -135,7 +134,7 @@ QX_POP_SUPPRESS_WARNINGS
 #ifndef QX_TEST_EASING_ELEMENT
     #define QX_TEST_EASING_ELEMENT 1
 #endif
- 
+
 #ifndef QX_TEST_EASING_SEQUENCE
     #define QX_TEST_EASING_SEQUENCE 1
 #endif
@@ -175,5 +174,3 @@ QX_POP_SUPPRESS_WARNINGS
 #ifndef QX_TEST_LINK
     #define QX_TEST_LINK 1
 #endif
-
-// clang-format on

@@ -13,12 +13,12 @@
 
 #if QX_TEST_LOGGER
 
-#include <qx/logger/logger.h>
+    #include <qx/logger/logger.h>
 
-#include <qx/logger/cout_logger_stream.h>
-#include <qx/logger/file_logger_stream.h>
+    #include <qx/logger/cout_logger_stream.h>
+    #include <qx/logger/file_logger_stream.h>
 
-#include <regex>
+    #include <regex>
 
 QX_PUSH_SUPPRESS_MSVC_WARNINGS(5233)
 
@@ -71,60 +71,15 @@ constexpr char TRACE_TAG_TAG1[]    = "tag1";
 constexpr char TRACE_TAG_TAG2[]    = "tag2";
 
 using Implementations = ::testing::Types<
-    LoggerTraits<
-        LOGS_FOLDER_ROOT,
-        LOGS_FILE_DEFAULT,
-        UNIT_DEFAULT,
-        TRACE_FILE_H,
-        TRACE_TAG_NULLPTR>,
-    LoggerTraits<
-        LOGS_FOLDER_ROOT,
-        LOGS_FILE_DEFAULT,
-        UNIT_FILE,
-        TRACE_FILE_H,
-        TRACE_TAG_NULLPTR>,
-    LoggerTraits<
-        LOGS_FOLDER_ROOT,
-        LOGS_FILE_DEFAULT,
-        UNIT_FUNC,
-        TRACE_FILE_H,
-        TRACE_TAG_NULLPTR>,
-    LoggerTraits<
-        LOGS_FOLDER_LOGS,
-        LOGS_FILE_DEFAULT,
-        UNIT_DEFAULT,
-        TRACE_FILE_H,
-        TRACE_TAG_NULLPTR>,
-    LoggerTraits<
-        LOGS_FOLDER_KEKW,
-        LOGS_FILE_DEFAULT,
-        UNIT_DEFAULT,
-        TRACE_FILE_H,
-        TRACE_TAG_NULLPTR>,
-    LoggerTraits<
-        LOGS_FOLDER_ROOT,
-        LOGS_FILE_DEFAULT,
-        UNIT_DEFAULT,
-        TRACE_FILE_CPP,
-        TRACE_TAG_NULLPTR>,
-    LoggerTraits<
-        LOGS_FOLDER_ROOT,
-        LOGS_FILE_DEFAULT,
-        UNIT_DEFAULT,
-        TRACE_FILE_INL,
-        TRACE_TAG_NULLPTR>,
-    LoggerTraits<
-        LOGS_FOLDER_ROOT,
-        LOGS_FILE_DEFAULT,
-        UNIT_DEFAULT,
-        TRACE_FILE_H,
-        TRACE_TAG_TAG1>,
-    LoggerTraits<
-        LOGS_FOLDER_ROOT,
-        LOGS_FILE_DEFAULT,
-        UNIT_DEFAULT,
-        TRACE_FILE_H,
-        TRACE_TAG_TAG2>>;
+    LoggerTraits<LOGS_FOLDER_ROOT, LOGS_FILE_DEFAULT, UNIT_DEFAULT, TRACE_FILE_H, TRACE_TAG_NULLPTR>,
+    LoggerTraits<LOGS_FOLDER_ROOT, LOGS_FILE_DEFAULT, UNIT_FILE, TRACE_FILE_H, TRACE_TAG_NULLPTR>,
+    LoggerTraits<LOGS_FOLDER_ROOT, LOGS_FILE_DEFAULT, UNIT_FUNC, TRACE_FILE_H, TRACE_TAG_NULLPTR>,
+    LoggerTraits<LOGS_FOLDER_LOGS, LOGS_FILE_DEFAULT, UNIT_DEFAULT, TRACE_FILE_H, TRACE_TAG_NULLPTR>,
+    LoggerTraits<LOGS_FOLDER_KEKW, LOGS_FILE_DEFAULT, UNIT_DEFAULT, TRACE_FILE_H, TRACE_TAG_NULLPTR>,
+    LoggerTraits<LOGS_FOLDER_ROOT, LOGS_FILE_DEFAULT, UNIT_DEFAULT, TRACE_FILE_CPP, TRACE_TAG_NULLPTR>,
+    LoggerTraits<LOGS_FOLDER_ROOT, LOGS_FILE_DEFAULT, UNIT_DEFAULT, TRACE_FILE_INL, TRACE_TAG_NULLPTR>,
+    LoggerTraits<LOGS_FOLDER_ROOT, LOGS_FILE_DEFAULT, UNIT_DEFAULT, TRACE_FILE_H, TRACE_TAG_TAG1>,
+    LoggerTraits<LOGS_FOLDER_ROOT, LOGS_FILE_DEFAULT, UNIT_DEFAULT, TRACE_FILE_H, TRACE_TAG_TAG2>>;
 
 template<typename Traits>
 class TestLogger : public ::testing::Test
@@ -151,26 +106,18 @@ protected:
 
         auto pConsoleLoggerStream = std::make_unique<qx::cout_logger_stream>();
 
-        pConsoleLoggerStream->deregister_unit(
-            qx::base_logger_stream::k_svDefaultUnit);
+        pConsoleLoggerStream->deregister_unit(qx::base_logger_stream::k_svDefaultUnit);
 
-        pConsoleLoggerStream->register_unit(
-            Traits::GetUnit(),
-            { qx::log_level::none });
+        pConsoleLoggerStream->register_unit(Traits::GetUnit(), { qx::log_level::none });
 
         auto pFileLoggerStream = std::make_unique<qx::file_logger_stream>();
 
         pFileLoggerStream->set_logs_folder(Traits::GetLogsFolder());
-        pFileLoggerStream->deregister_unit(
-            qx::base_logger_stream::k_svDefaultUnit);
+        pFileLoggerStream->deregister_unit(qx::base_logger_stream::k_svDefaultUnit);
 
-        pFileLoggerStream->register_unit(
-            Traits::GetUnit(),
-            { qx::log_level::log });
+        pFileLoggerStream->register_unit(Traits::GetUnit(), { qx::log_level::log });
 
-        pFileLoggerStream->register_file(
-            Traits::GetUnit(),
-            Traits::GetLogsFile());
+        pFileLoggerStream->register_file(Traits::GetUnit(), Traits::GetLogsFile());
 
         if constexpr (Traits::GetTag() == TRACE_TAG_TAG1)
         {
@@ -189,13 +136,10 @@ protected:
                   {
                       sMsg.vsprintf(pszFormat, args);
                       qx::base_logger_stream::format_time_string(sFormat);
-                      sMsg = qx::string("   [") + sFormat + "][" + svTag + "] "
-                             + sMsg + '\n';
+                      sMsg = qx::string("   [") + sFormat + "][" + svTag + "] " + sMsg + '\n';
                   } });
 
-            pFileLoggerStream->register_file(
-                Traits::GetTag(),
-                Traits::GetLogsFile());
+            pFileLoggerStream->register_file(Traits::GetTag(), Traits::GetLogsFile());
         }
 
         m_pLogger->add_stream(std::move(pConsoleLoggerStream));
@@ -206,8 +150,7 @@ protected:
     virtual void TearDown() override
     {
         if (Traits::GetUnit() == UNIT_DEFAULT
-            || Traits::GetUnit() == UNIT_FILE
-                   && Traits::GetUnit() == Traits::GetTraceFile()
+            || Traits::GetUnit() == UNIT_FILE && Traits::GetUnit() == Traits::GetTraceFile()
             || Traits::GetUnit() == UNIT_FUNC && m_bFunction)
         {
             ASSERT_TRUE(std::filesystem::exists(m_sLogFilePath.data()));
@@ -226,23 +169,19 @@ protected:
             constexpr const char* pszDate    = "\\[\\d{2}-\\d{2}-\\d{4}_";
             constexpr const char* pszTime    = "\\d{2}-\\d{2}-\\d{2}\\]";
 
-            auto CheckRegex =
-                [&regex,
-                 &match](const qx::string& sMatch, const std::string& sText)
+            auto CheckRegex = [&regex, &match](const qx::string& sMatch, const std::string& sText)
             {
                 regex = std::regex(sMatch.data());
                 EXPECT_TRUE(std::regex_search(sText, match, regex))
                     << "regex:           " << sMatch.data() << std::endl
                     << "line:            " << sText.data() << std::endl
-                    << "logs folder:     " << Traits::GetLogsFolder()
-                    << std::endl
+                    << "logs folder:     " << Traits::GetLogsFolder() << std::endl
                     << "logs file:       " << Traits::GetLogsFile() << std::endl
                     << "logs unit:       " << Traits::GetUnit() << std::endl
                     << "logs trace file: " << Traits::GetTraceFile();
             };
 
-            auto CheckStringCommon =
-                [&sFormat, &sFile, &ifs, &sLine, &CheckRegex
+            auto CheckStringCommon = [&sFormat, &sFile, &ifs, &sLine, &CheckRegex
 
             ](const char* pszStringStarting, const char* pszStringEnding)
             {
@@ -260,27 +199,16 @@ protected:
                     pszLine,
                     pszStringEnding);
 
-                ifs.getline(
-                    sLine.data(),
-                    static_cast<std::streamsize>(sLine.size()));
+                ifs.getline(sLine.data(), static_cast<std::streamsize>(sLine.size()));
 
                 CheckRegex(sFormat, sLine);
             };
 
-            auto CheckStringTag = [&sFormat, &ifs, &sLine, &CheckRegex](
-                                      const char* pszStringEnding)
+            auto CheckStringTag = [&sFormat, &ifs, &sLine, &CheckRegex](const char* pszStringEnding)
             {
-                sFormat.sprintf(
-                    "%s%s%s\\[%s\\]%s",
-                    pszInfo,
-                    pszDate,
-                    pszTime,
-                    Traits::GetTag(),
-                    pszStringEnding);
+                sFormat.sprintf("%s%s%s\\[%s\\]%s", pszInfo, pszDate, pszTime, Traits::GetTag(), pszStringEnding);
 
-                ifs.getline(
-                    sLine.data(),
-                    static_cast<std::streamsize>(sLine.size()));
+                ifs.getline(sLine.data(), static_cast<std::streamsize>(sLine.size()));
                 CheckRegex(sFormat, sLine);
             };
 
@@ -342,8 +270,7 @@ protected:
             ifs.close();
 
             std::error_code ec;
-            EXPECT_TRUE(std::filesystem::remove(m_sLogFilePath.data(), ec))
-                << ec.message().data();
+            EXPECT_TRUE(std::filesystem::remove(m_sLogFilePath.data(), ec)) << ec.message().data();
         }
         else
         {
@@ -361,115 +288,81 @@ protected:
 
 TYPED_TEST_SUITE(TestLogger, Implementations);
 
-#define TRACE(traceFile, format, ...) \
-    myLogger.output(                  \
-        qx::log_level::log,           \
-        format,                       \
-        nullptr,                      \
-        traceFile,                    \
-        __FUNCTION__,                 \
-        __LINE__,                     \
-        ##__VA_ARGS__)
+    #define TRACE(traceFile, format, ...) \
+        myLogger.output(qx::log_level::log, format, nullptr, traceFile, __FUNCTION__, __LINE__, ##__VA_ARGS__)
 
-#define TRACE_WARNING(traceFile, format, ...) \
-    myLogger.output(                          \
-        qx::log_level::warning,               \
-        format,                               \
-        nullptr,                              \
-        traceFile,                            \
-        __FUNCTION__,                         \
-        __LINE__,                             \
-        ##__VA_ARGS__)
+    #define TRACE_WARNING(traceFile, format, ...) \
+        myLogger.output(qx::log_level::warning, format, nullptr, traceFile, __FUNCTION__, __LINE__, ##__VA_ARGS__)
 
-#define TRACE_TAG(traceFile, tag, format, ...) \
-    myLogger.output(                           \
-        qx::log_level::log,                    \
-        format,                                \
-        tag,                                   \
-        traceFile,                             \
-        __FUNCTION__,                          \
-        __LINE__,                              \
-        ##__VA_ARGS__)
+    #define TRACE_TAG(traceFile, tag, format, ...) \
+        myLogger.output(qx::log_level::log, format, tag, traceFile, __FUNCTION__, __LINE__, ##__VA_ARGS__)
 
-#define TRACE_ERROR(traceFile, format, ...) \
-    myLogger.output(                        \
-        qx::log_level::error,               \
-        format,                             \
-        nullptr,                            \
-        traceFile,                          \
-        __FUNCTION__,                       \
-        __LINE__,                           \
-        ##__VA_ARGS__)
+    #define TRACE_ERROR(traceFile, format, ...) \
+        myLogger.output(qx::log_level::error, format, nullptr, traceFile, __FUNCTION__, __LINE__, ##__VA_ARGS__)
 
-#define TRACE_ASSERT(traceFile, expr, format, ...) \
-    myLogger.output(                               \
-        qx::log_level::critical,                   \
-        "[%s] " format,                            \
-        nullptr,                                   \
-        traceFile,                                 \
-        __FUNCTION__,                              \
-        __LINE__,                                  \
-        #expr,                                     \
-        ##__VA_ARGS__)
+    #define TRACE_ASSERT(traceFile, expr, format, ...) \
+        myLogger.output(                               \
+            qx::log_level::critical,                   \
+            "[%s] " format,                            \
+            nullptr,                                   \
+            traceFile,                                 \
+            __FUNCTION__,                              \
+            __LINE__,                                  \
+            #expr,                                     \
+            ##__VA_ARGS__)
 
-#define TEST_LOGGER(traceFile, tag)                              \
-    TRACE(traceFile, "Start test");                              \
-                                                                 \
-    TRACE(traceFile, "%f", 1.f);                                 \
-    TRACE(traceFile, "%f %d", 1.f, 1);                           \
-    TRACE(traceFile, "%f %d", 1.f, 2);                           \
-    TRACE(traceFile, "%f %d", 1.f, 3);                           \
-    TRACE(traceFile, "%f %d", 1.f, 4);                           \
-    TRACE(traceFile, "%f %d", 1.f, 5);                           \
-                                                                 \
-    TRACE_WARNING(traceFile, "%f", 1.f);                         \
-    TRACE_WARNING(traceFile, "%f %d", 1.f, 1);                   \
-    TRACE_WARNING(traceFile, "%f %d", 1.f, 2);                   \
-    TRACE_WARNING(traceFile, "%f %d", 1.f, 3);                   \
-    TRACE_WARNING(traceFile, "%f %d", 1.f, 4);                   \
-    TRACE_WARNING(traceFile, "%f %d", 1.f, 5);                   \
-                                                                 \
-    TRACE_ERROR(traceFile, "%f %d", 1.f, 1);                     \
-    TRACE_ERROR(traceFile, "%f %d", 1.f, 2);                     \
-    TRACE_ERROR(traceFile, "%f %d", 1.f, 3);                     \
-    TRACE_ERROR(traceFile, "%f %d", 1.f, 4);                     \
-    TRACE_ERROR(traceFile, "%f %d", 1.f, 5);                     \
-                                                                 \
-    TRACE_ASSERT(traceFile, false, "%f %d", 1.f, 1);             \
-    TRACE_ASSERT(traceFile, false, "%f %d", 1.f, 2);             \
-    TRACE_ASSERT(traceFile, false, "%f %d", 1.f, 3);             \
-    TRACE_ASSERT(traceFile, false, "%f %d", 1.f, 4);             \
-    TRACE_ASSERT(traceFile, false, "%f %d", 1.f, 5);             \
-                                                                 \
-    TRACE_ASSERT(traceFile, false, "%f %d %s", 1.f, 1, "three"); \
-    TRACE_ASSERT(traceFile, false, "%f %d %s", 1.f, 2, "three"); \
-    TRACE_ASSERT(traceFile, false, "%f %d %s", 1.f, 3, "three"); \
-    TRACE_ASSERT(traceFile, false, "%f %d %s", 1.f, 4, "three"); \
-    TRACE_ASSERT(traceFile, false, "%f %d %s", 1.f, 5, "three"); \
-                                                                 \
-    TRACE_TAG(traceFile, tag, "%f", 1.f);                        \
-    TRACE_TAG(traceFile, tag, "%f %d", 1.f, 1);                  \
-    TRACE_TAG(traceFile, tag, "%f %d", 1.f, 2);                  \
-    TRACE_TAG(traceFile, tag, "%f %d", 1.f, 3);                  \
-    TRACE_TAG(traceFile, tag, "%f %d", 1.f, 4);                  \
-    TRACE_TAG(traceFile, tag, "%f %d", 1.f, 5);                  \
-                                                                 \
-    TRACE(traceFile, "End test\n");
+    #define TEST_LOGGER(traceFile, tag)                              \
+        TRACE(traceFile, "Start test");                              \
+                                                                     \
+        TRACE(traceFile, "%f", 1.f);                                 \
+        TRACE(traceFile, "%f %d", 1.f, 1);                           \
+        TRACE(traceFile, "%f %d", 1.f, 2);                           \
+        TRACE(traceFile, "%f %d", 1.f, 3);                           \
+        TRACE(traceFile, "%f %d", 1.f, 4);                           \
+        TRACE(traceFile, "%f %d", 1.f, 5);                           \
+                                                                     \
+        TRACE_WARNING(traceFile, "%f", 1.f);                         \
+        TRACE_WARNING(traceFile, "%f %d", 1.f, 1);                   \
+        TRACE_WARNING(traceFile, "%f %d", 1.f, 2);                   \
+        TRACE_WARNING(traceFile, "%f %d", 1.f, 3);                   \
+        TRACE_WARNING(traceFile, "%f %d", 1.f, 4);                   \
+        TRACE_WARNING(traceFile, "%f %d", 1.f, 5);                   \
+                                                                     \
+        TRACE_ERROR(traceFile, "%f %d", 1.f, 1);                     \
+        TRACE_ERROR(traceFile, "%f %d", 1.f, 2);                     \
+        TRACE_ERROR(traceFile, "%f %d", 1.f, 3);                     \
+        TRACE_ERROR(traceFile, "%f %d", 1.f, 4);                     \
+        TRACE_ERROR(traceFile, "%f %d", 1.f, 5);                     \
+                                                                     \
+        TRACE_ASSERT(traceFile, false, "%f %d", 1.f, 1);             \
+        TRACE_ASSERT(traceFile, false, "%f %d", 1.f, 2);             \
+        TRACE_ASSERT(traceFile, false, "%f %d", 1.f, 3);             \
+        TRACE_ASSERT(traceFile, false, "%f %d", 1.f, 4);             \
+        TRACE_ASSERT(traceFile, false, "%f %d", 1.f, 5);             \
+                                                                     \
+        TRACE_ASSERT(traceFile, false, "%f %d %s", 1.f, 1, "three"); \
+        TRACE_ASSERT(traceFile, false, "%f %d %s", 1.f, 2, "three"); \
+        TRACE_ASSERT(traceFile, false, "%f %d %s", 1.f, 3, "three"); \
+        TRACE_ASSERT(traceFile, false, "%f %d %s", 1.f, 4, "three"); \
+        TRACE_ASSERT(traceFile, false, "%f %d %s", 1.f, 5, "three"); \
+                                                                     \
+        TRACE_TAG(traceFile, tag, "%f", 1.f);                        \
+        TRACE_TAG(traceFile, tag, "%f %d", 1.f, 1);                  \
+        TRACE_TAG(traceFile, tag, "%f %d", 1.f, 2);                  \
+        TRACE_TAG(traceFile, tag, "%f %d", 1.f, 3);                  \
+        TRACE_TAG(traceFile, tag, "%f %d", 1.f, 4);                  \
+        TRACE_TAG(traceFile, tag, "%f %d", 1.f, 5);                  \
+                                                                     \
+        TRACE(traceFile, "End test\n");
 
-void TestLoggerFunction(
-    qx::logger& myLogger,
-    const char* pszTraceFile,
-    const char* pszTag)
+void TestLoggerFunction(qx::logger& myLogger, const char* pszTraceFile, const char* pszTag)
 {
     TEST_LOGGER(pszTraceFile, pszTag);
 }
 
 TYPED_TEST(TestLogger, logger_function)
 {
-    TestLoggerFunction(
-        *TestFixture::m_pLogger,
-        TypeParam::GetTraceFile(),
-        TypeParam::GetTag());
+    TestLoggerFunction(*TestFixture::m_pLogger, TypeParam::GetTraceFile(), TypeParam::GetTag());
     TestFixture::m_bFunction = true;
 }
 

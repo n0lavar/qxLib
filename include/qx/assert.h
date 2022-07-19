@@ -1,7 +1,7 @@
 /**
 
     @file      assert.h
-    @brief     Assert macros
+    @brief     Expect and assert macros
     @author    Khrapov
     @date      29.10.2020
     @copyright © Nick Khrapov, 2021. All right reserved.
@@ -9,161 +9,216 @@
 **/
 #pragma once
 
+#include <qx/logger/logger.h>
 #include <qx/useful_macros.h>
 
-/*
-    QX_ASSERT and QX_ASSERT_MSG macros
-    use QX_ENABLE_ASSERTS, QX_ENABLE_DEBUG_BREAK, QX_PROCESS_ASSERT macros to configure behavior
-*/
+#include <exception>
 
-#ifndef QX_ENABLE_ASSERTS
-#define QX_ENABLE_ASSERTS QX_DEBUG
-#endif
-
-#ifndef QX_ENABLE_DEBUG_BREAK
-#define QX_ENABLE_DEBUG_BREAK QX_DEBUG
-#endif
-
-#ifndef QX_PROCESS_ASSERT
-#define QX_PROCESS_ASSERT(statement, msg, ...) QX_EMPTY_MACRO
-#endif
-
-#if QX_ENABLE_DEBUG_BREAK
 
 #if QX_MSVC
-#define QX_DEBUG_BREAK __debugbreak()
+    #define _QX_DEBUG_BREAK __debugbreak()
 #elif QX_CLANG
-#define QX_DEBUG_BREAK __builtin_debugtrap()
+    #define _QX_DEBUG_BREAK __builtin_debugtrap()
 #elif QX_GNU
-#include <signal.h>
-#define QX_DEBUG_BREAK raise(SIGTRAP)
+    #include <signal.h>
+    #define _QX_DEBUG_BREAK raise(SIGTRAP)
 #else
-#define QX_DEBUG_BREAK QX_EMPTY_MACRO
-#endif
-
-#else
-
-#define QX_DEBUG_BREAK QX_EMPTY_MACRO
-
-#endif
-
-
-#if QX_ENABLE_ASSERTS
-
-#define _QX_ASSERT_MSG(statement, msg, ...)                   \
-    [&]()                                                     \
-    {                                                         \
-        if (!(statement)) [[unlikely]]                        \
-        {                                                     \
-            QX_PROCESS_ASSERT(statement, msg, ##__VA_ARGS__); \
-            QX_DEBUG_BREAK;                                   \
-            return false;                                     \
-        }                                                     \
-        else                                                  \
-        {                                                     \
-            return true;                                      \
-        }                                                     \
-    }()
-
-#define _QX_ASSERT(statement) QX_ASSERT_MSG(statement, "")
-
-#define _QX_ASSERT_NO_ENTRY QX_ASSERT_MSG(0, "No entry")
-
-#define _QX_ASSERT_RETURN(statement, ...)   \
-    if (!QX_ASSERT(statement)) [[unlikely]] \
-        return __VA_ARGS__;
-
-#define _QX_ASSERT_CONTINUE(statement)      \
-    if (!QX_ASSERT(statement)) [[unlikely]] \
-        continue;
-
-#define _QX_ASSERT_BREAK(statement)         \
-    if (!QX_ASSERT(statement)) [[unlikely]] \
-        break;
-
-#else
-
-#define _QX_ASSERT_MSG(statement, msg, ...)  \
-    [&]()                                    \
-    {                                        \
-        return static_cast<bool>(statement); \
-    }()
-
-#define _QX_ASSERT(statement) QX_ASSERT_MSG(statement, "")
-
-#define _QX_ASSERT_NO_ENTRY QX_ASSERT(0)
-
-#define _QX_ASSERT_RETURN(statement, ...) \
-    if (!(statement)) [[unlikely]]        \
-        return __VA_ARGS__;
-
-#define _QX_ASSERT_CONTINUE(statement) \
-    if (!(statement)) [[unlikely]]     \
-        continue;
-
-#define _QX_ASSERT_BREAK(statement) \
-    if (!(statement)) [[unlikely]]  \
-        break;
-
+    #define _QX_DEBUG_BREAK QX_EMPTY_MACRO
 #endif
 
 /**
-    @brief   Assert macro with message
-    @details Same as QX_ASSERT, but with output possibility
-    @param   statement - statement to check
-    @param   msg       - message format
+    @brief Causes a breakpoint in your code, where the user will be prompted to run the debugger
+**/
+#define QX_DEBUG_BREAK _QX_DEBUG_BREAK
+
+
+#define _QX_ASSERT_MSG(before_debug_break, debug_break, after_debug_break, condition, format, ...) \
+    [&]()                                                                                          \
+    {                                                                                              \
+        if (!(condition)) [[unlikely]]                                                             \
+        {                                                                                          \
+            before_debug_break(condition, format, ##__VA_ARGS__);                                  \
+            debug_break;                                                                           \
+            after_debug_break(condition, format, ##__VA_ARGS__);                                   \
+            return false;                                                                          \
+        }                                                                                          \
+        else                                                                                       \
+        {                                                                                          \
+            return true;                                                                           \
+        }                                                                                          \
+    }()
+
+#define _QX_ASSERT(before_debug_break, debug_break, after_debug_break, condition) \
+    _QX_ASSERT_MSG(before_debug_break, debug_break, after_debug_break, condition, "")
+
+#define _QX_ASSERT_NO_ENTRY(before_debug_break, debug_break, after_debug_break) \
+    _QX_ASSERT_MSG(before_debug_break, debug_break, after_debug_break, false, "No entry")
+
+#define _QX_ASSERT_RETURN(before_debug_break, debug_break, after_debug_break, condition, ...)         \
+    if constexpr (false)                                                                              \
+        ;                                                                                             \
+    else if (!_QX_ASSERT(before_debug_break, debug_break, after_debug_break, condition)) [[unlikely]] \
+    return __VA_ARGS__
+
+#define _QX_ASSERT_CONTINUE(before_debug_break, debug_break, after_debug_break, condition)            \
+    if constexpr (false)                                                                              \
+        ;                                                                                             \
+    else if (!_QX_ASSERT(before_debug_break, debug_break, after_debug_break, condition)) [[unlikely]] \
+    continue
+
+#define _QX_ASSERT_BREAK(before_debug_break, debug_break, after_debug_break, condition)               \
+    if constexpr (false)                                                                              \
+        ;                                                                                             \
+    else if (!_QX_ASSERT(before_debug_break, debug_break, after_debug_break, condition)) [[unlikely]] \
+    break
+
+#ifndef QX_EXPECT_BEFORE_DEBUG_BREAK
+    #define QX_EXPECT_BEFORE_DEBUG_BREAK(condition, format, ...) \
+        qx::string sFormat("[%s] ");                             \
+        sFormat += format;                                       \
+        QX_LOG(qx::log_level::error, sFormat.c_str(), #condition, ##__VA_ARGS__)
+#endif
+
+#ifndef QX_EXPECT_DEBUG_BREAK
+    #if QX_DEBUG
+        #define QX_EXPECT_DEBUG_BREAK QX_DEBUG_BREAK
+    #else
+        #define QX_EXPECT_DEBUG_BREAK QX_EMPTY_MACRO
+    #endif
+#endif
+
+#ifndef QX_EXPECT_AFTER_DEBUG_BREAK
+    #define QX_EXPECT_AFTER_DEBUG_BREAK(condition, format, ...) QX_EMPTY_MACRO
+#endif
+
+#ifndef QX_ASSERT_BEFORE_DEBUG_BREAK
+    #define QX_ASSERT_BEFORE_DEBUG_BREAK(condition, format, ...) \
+        qx::string sFormat("[%s] ");                             \
+        sFormat += format;                                       \
+        QX_LOG(qx::log_level::critical, sFormat.c_str(), #condition, ##__VA_ARGS__)
+#endif
+
+#ifndef QX_ASSERT_DEBUG_BREAK
+    #if QX_DEBUG
+        #define QX_ASSERT_DEBUG_BREAK QX_DEBUG_BREAK
+    #else
+        #define QX_ASSERT_DEBUG_BREAK QX_EMPTY_MACRO
+    #endif
+#endif
+
+#ifndef QX_ASSERT_AFTER_DEBUG_BREAK
+    #define QX_ASSERT_AFTER_DEBUG_BREAK(condition, format, ...) std::terminate()
+#endif
+
+
+/**
+    @brief   Verifies that condition is true
+    @details EXPECT macros generate nonfatal failures and allow to continue running
+             Same as QX_EXPECT, but with output possibility
+    @param   condition - condition to check
+    @param   format    - message format
     @param   ...       - message arguments
 
-    May be used in if statemant:
+    May be used in if condition:
 
     @code
     const auto file = OpenFile(path);
-    if (QX_ASSERT_MSG(file, "Can't open %s file", path.c_str()))
+    if (QX_EXPECT_MSG(file, "Can't open %s file", path.c_str()))
         ReadFromFile(file);
     @endcode 
 
 **/
-#define QX_ASSERT_MSG(statement, msg, ...) \
-    _QX_ASSERT_MSG(statement, msg, __VA_ARGS__)
+#define QX_EXPECT_MSG(condition, format, ...) \
+    _QX_ASSERT_MSG(                           \
+        QX_EXPECT_BEFORE_DEBUG_BREAK,         \
+        QX_EXPECT_DEBUG_BREAK,                \
+        QX_EXPECT_AFTER_DEBUG_BREAK,          \
+        condition,                            \
+        format,                               \
+        ##__VA_ARGS__)
 
 /**
-    @brief   Assert macro
-    @details If statement is false, assert processer will be called
-             and debugging will stop at this point
-    @param   statement - statement to check
+    @brief   Verifies that condition is true
+    @details ASSERT macros generate fatal failures and abort the program execution
+             Same as QX_ASSERT, but with output possibility
+    @param   condition - condition to check
+    @param   format    - message format
+    @param   ...       - message arguments
+**/
+#define QX_ASSERT_MSG(condition, format, ...) \
+    _QX_ASSERT_MSG(                           \
+        QX_ASSERT_BEFORE_DEBUG_BREAK,         \
+        QX_ASSERT_DEBUG_BREAK,                \
+        QX_ASSERT_AFTER_DEBUG_BREAK,          \
+        condition,                            \
+        format,                               \
+        ##__VA_ARGS__)
+
+/**
+    @brief   Verifies that condition is true
+    @details EXPECT macros generate nonfatal failures and allow to continue running
+    @param   condition - condition to check
 
     May be used in if statemant:
 
     @code
     const auto file = ...;
-    if (QX_ASSERT(file))
+    if (QX_EXPECT(file))
         ReadFromFile(file);
     @endcode 
 
 **/
-#define QX_ASSERT(statement) _QX_ASSERT(statement)
+#define QX_EXPECT(condition) \
+    _QX_ASSERT(QX_EXPECT_BEFORE_DEBUG_BREAK, QX_EXPECT_DEBUG_BREAK, QX_EXPECT_AFTER_DEBUG_BREAK, condition)
 
 /**
-    @brief Invokes assert unconditionally if this code should not be executed
+    @brief   Verifies that condition is true
+    @details ASSERT macros generate fatal failures and abort the program execution
+    @param   condition - condition to check
 **/
-#define QX_ASSERT_NO_ENTRY _QX_ASSERT_NO_ENTRY
+#define QX_ASSERT(condition) \
+    _QX_ASSERT(QX_ASSERT_BEFORE_DEBUG_BREAK, QX_ASSERT_DEBUG_BREAK, QX_ASSERT_AFTER_DEBUG_BREAK, condition)
 
 /**
-    @brief Check statement and return if false
-    @param statement - statement to check
-    @param ...       - return value if statement is false
+    @brief   Fails unconditionally if this code should not be executed
+    @details EXPECT macros generate nonfatal failures and allow to continue running
 **/
-#define QX_ASSERT_RETURN(statement, ...) \
-    _QX_ASSERT_RETURN(statement, __VA_ARGS__)
+#define QX_EXPECT_NO_ENTRY \
+    _QX_ASSERT_NO_ENTRY(QX_EXPECT_BEFORE_DEBUG_BREAK, QX_EXPECT_DEBUG_BREAK, QX_EXPECT_AFTER_DEBUG_BREAK)
 
 /**
-    @brief Check statement and continue loop if false
-    @param statement - statement to check
+    @brief   Fails unconditionally if this code should not be executed
+    @details ASSERT macros generate fatal failures and abort the program execution
 **/
-#define QX_ASSERT_CONTINUE(statement) _QX_ASSERT_CONTINUE(statement)
+#define QX_ASSERT_NO_ENTRY \
+    _QX_ASSERT_NO_ENTRY(QX_ASSERT_BEFORE_DEBUG_BREAK, QX_ASSERT_DEBUG_BREAK, QX_ASSERT_AFTER_DEBUG_BREAK)
 
 /**
-    @brief Check statement and break loop if false
-    @param statement - statement to check
+    @brief   Verifies that condition is true and return if false
+    @details EXPECT macros generate nonfatal failures and allow to continue running
+    @param   condition - condition to check
+    @param   ...       - return value if condition is false
 **/
-#define QX_ASSERT_BREAK(statement) _QX_ASSERT_BREAK(statement)
+#define QX_EXPECT_RETURN(condition, ...) \
+    _QX_ASSERT_RETURN(                   \
+        QX_EXPECT_BEFORE_DEBUG_BREAK,    \
+        QX_EXPECT_DEBUG_BREAK,           \
+        QX_EXPECT_AFTER_DEBUG_BREAK,     \
+        condition,                       \
+        ##__VA_ARGS__)
+
+/**
+    @brief   Verifies that condition is true and continue loop if false
+    @details EXPECT macros generate nonfatal failures and allow to continue running
+    @param   condition - condition to check
+**/
+#define QX_EXPECT_CONTINUE(condition) \
+    _QX_ASSERT_CONTINUE(QX_EXPECT_BEFORE_DEBUG_BREAK, QX_EXPECT_DEBUG_BREAK, QX_EXPECT_AFTER_DEBUG_BREAK, condition)
+
+/**
+    @brief   Verifies that condition is true and break loop if false
+    @details EXPECT macros generate nonfatal failures and allow to continue running
+    @param   condition - condition to check
+**/
+#define QX_EXPECT_BREAK(condition) \
+    _QX_ASSERT_BREAK(QX_EXPECT_BEFORE_DEBUG_BREAK, QX_EXPECT_DEBUG_BREAK, QX_EXPECT_AFTER_DEBUG_BREAK, condition)

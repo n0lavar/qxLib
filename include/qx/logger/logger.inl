@@ -27,14 +27,7 @@ inline void logger::output(
 
     for (const auto& stream : m_Streams)
     {
-        stream->output(
-            eLogLevel,
-            pszFormat,
-            pszTag,
-            pszFile,
-            pszFunction,
-            nLine,
-            args);
+        stream->output(eLogLevel, pszFormat, pszTag, pszFile, pszFunction, nLine, args);
     }
 
     va_end(args);

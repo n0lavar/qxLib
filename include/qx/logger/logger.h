@@ -24,14 +24,7 @@
     @param ...            - additional args for formatting
 **/
 #define QX_LOG_COMMON(loggerInstance, pszTag, eLogLevel, format, ...) \
-    loggerInstance.output(                                            \
-        eLogLevel,                                                    \
-        format,                                                       \
-        pszTag,                                                       \
-        QX_SHORT_FILE,                                                \
-        __FUNCTION__,                                                 \
-        __LINE__,                                                     \
-        ##__VA_ARGS__)
+    loggerInstance.output(eLogLevel, format, pszTag, QX_SHORT_FILE, __FUNCTION__, __LINE__, ##__VA_ARGS__)
 
 /**
     @brief Log with tag
@@ -41,12 +34,7 @@
     @param ...       - additional args for formatting
 **/
 #define QX_TLOG(pszTag, eLogLevel, format, ...) \
-    QX_LOG_COMMON(                              \
-        qx::logger_singleton::get_instance(),   \
-        pszTag,                                 \
-        eLogLevel,                              \
-        format,                                 \
-        ##__VA_ARGS__)
+    QX_LOG_COMMON(qx::logger_singleton::get_instance(), pszTag, eLogLevel, format, ##__VA_ARGS__)
 
 /**
     @def   QX_LOG
@@ -55,8 +43,7 @@
     @param format    - format string
     @param ...       - additional args for formatting
 **/
-#define QX_LOG(eLogLevel, format, ...) \
-    QX_TLOG(nullptr, eLogLevel, format, ##__VA_ARGS__)
+#define QX_LOG(eLogLevel, format, ...) QX_TLOG(nullptr, eLogLevel, format, ##__VA_ARGS__)
 
 
 namespace qx

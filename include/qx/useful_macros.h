@@ -90,9 +90,9 @@ private:                             \
 
 
 #if QX_WIN
-#define QX_PATH_SEPARATOR '\\'
+    #define QX_PATH_SEPARATOR '\\'
 #else
-#define QX_PATH_SEPARATOR '/'
+    #define QX_PATH_SEPARATOR '/'
 #endif
 
 namespace qx::detail
@@ -234,29 +234,23 @@ struct StaticAssertTwo<A, B, std::greater_equal<>>
 /*
     Static assertions that shows A and B in error msg
 */
-#define QX_STATIC_ASSERT_EQ(a, b)                                    \
-    constexpr qx::detail::StaticAssertTwo<(a), (b), std::equal_to<>> \
-        QX_LINE_NAME(_static_assert_eq_)
+#define QX_STATIC_ASSERT_EQ(a, b) \
+    constexpr qx::detail::StaticAssertTwo<(a), (b), std::equal_to<>> QX_LINE_NAME(_static_assert_eq_)
 
-#define QX_STATIC_ASSERT_NE(a, b)                                        \
-    constexpr qx::detail::StaticAssertTwo<(a), (b), std::not_equal_to<>> \
-        QX_LINE_NAME(_static_assert_nq_)
+#define QX_STATIC_ASSERT_NE(a, b) \
+    constexpr qx::detail::StaticAssertTwo<(a), (b), std::not_equal_to<>> QX_LINE_NAME(_static_assert_nq_)
 
-#define QX_STATIC_ASSERT_LT(a, b)                                              \
-    constexpr qx::detail::StaticAssertTwo<(a), (b), std::less<>> QX_LINE_NAME( \
-        _static_assert_lt_)
+#define QX_STATIC_ASSERT_LT(a, b) \
+    constexpr qx::detail::StaticAssertTwo<(a), (b), std::less<>> QX_LINE_NAME(_static_assert_lt_)
 
-#define QX_STATIC_ASSERT_LE(a, b)                                      \
-    constexpr qx::detail::StaticAssertTwo<(a), (b), std::less_equal<>> \
-        QX_LINE_NAME(_static_assert_le_)
+#define QX_STATIC_ASSERT_LE(a, b) \
+    constexpr qx::detail::StaticAssertTwo<(a), (b), std::less_equal<>> QX_LINE_NAME(_static_assert_le_)
 
-#define QX_STATIC_ASSERT_GT(a, b)                                   \
-    constexpr qx::detail::StaticAssertTwo<(a), (b), std::greater<>> \
-        QX_LINE_NAME(_static_assert_gt_)
+#define QX_STATIC_ASSERT_GT(a, b) \
+    constexpr qx::detail::StaticAssertTwo<(a), (b), std::greater<>> QX_LINE_NAME(_static_assert_gt_)
 
-#define QX_STATIC_ASSERT_GE(a, b)                                         \
-    constexpr qx::detail::StaticAssertTwo<(a), (b), std::greater_equal<>> \
-        QX_LINE_NAME(_static_assert_ge_)
+#define QX_STATIC_ASSERT_GE(a, b) \
+    constexpr qx::detail::StaticAssertTwo<(a), (b), std::greater_equal<>> QX_LINE_NAME(_static_assert_ge_)
 
 namespace qx::detail
 {
@@ -276,9 +270,8 @@ struct StaticAssertBetween
     @param V - value to check
     @param R - right value
 **/
-#define QX_STATIC_ASSERT_BETWEEN(L, V, R)                        \
-    qx::detail::StaticAssertBetween<(L), (V), (R)> QX_LINE_NAME( \
-        static_assert_between_)
+#define QX_STATIC_ASSERT_BETWEEN(L, V, R) \
+    qx::detail::StaticAssertBetween<(L), (V), (R)> QX_LINE_NAME(static_assert_between_)
 
 /**
     @brief This static assert will fail if block it placed in must not be instantiated
