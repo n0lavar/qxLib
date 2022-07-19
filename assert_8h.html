@@ -187,7 +187,7 @@ Macros</h2></td></tr>
 <div class="line">        QX_ASSERT_AFTER_DEBUG_BREAK,          \</div>
 <div class="line">        condition,                            \</div>
 <div class="line">        format,                               \</div>
-<div class="line">        __VA_ARGS__)</div>
+<div class="line">        ##__VA_ARGS__)</div>
 </div><!-- fragment -->
 <p>Verifies that condition is true. </p>
 <p>ASSERT macros generate fatal failures and abort the program execution Same as QX_ASSERT, but with output possibility </p><dl class="params"><dt>Parameters</dt><dd>
@@ -348,7 +348,7 @@ Macros</h2></td></tr>
 <div class="line">        QX_EXPECT_AFTER_DEBUG_BREAK,          \</div>
 <div class="line">        condition,                            \</div>
 <div class="line">        format,                               \</div>
-<div class="line">        __VA_ARGS__)</div>
+<div class="line">        ##__VA_ARGS__)</div>
 </div><!-- fragment -->
 <p>Verifies that condition is true. </p>
 <p>EXPECT macros generate nonfatal failures and allow to continue running Same as QX_EXPECT, but with output possibility </p><dl class="params"><dt>Parameters</dt><dd>
@@ -418,7 +418,7 @@ Macros</h2></td></tr>
 <div class="line">        QX_EXPECT_DEBUG_BREAK,           \</div>
 <div class="line">        QX_EXPECT_AFTER_DEBUG_BREAK,     \</div>
 <div class="line">        condition,                       \</div>
-<div class="line">        __VA_ARGS__)</div>
+<div class="line">        ##__VA_ARGS__)</div>
 </div><!-- fragment -->
 <p>Verifies that condition is true and return if false. </p>
 <p>EXPECT macros generate nonfatal failures and allow to continue running </p><dl class="params"><dt>Parameters</dt><dd>

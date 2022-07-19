@@ -93,13 +93,13 @@ Classes</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
 Macros</h2></td></tr>
-<tr class="memitem:aac029ecd06c39428f69252cad1310574"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="logger_8h.html#aac029ecd06c39428f69252cad1310574">QX_LOG_COMMON</a>(loggerInstance,  pszTag,  eLogLevel, ...)&#160;&#160;&#160;    loggerInstance.output(eLogLevel, pszTag, <a class="el" href="useful__macros_8h.html#ae158b161fec70fada62391b9ffa7d502">QX_SHORT_FILE</a>, __FUNCTION__, __LINE__, __VA_ARGS__)</td></tr>
-<tr class="memdesc:aac029ecd06c39428f69252cad1310574"><td class="mdescLeft">&#160;</td><td class="mdescRight">Common macro for logging. Prefer using QX_TLOG or QX_LOG.  <a href="logger_8h.html#aac029ecd06c39428f69252cad1310574">More...</a><br /></td></tr>
-<tr class="separator:aac029ecd06c39428f69252cad1310574"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adfe13339f0b8e866cc9d362e37671f02"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="logger_8h.html#adfe13339f0b8e866cc9d362e37671f02">QX_TLOG</a>(pszTag,  eLogLevel, ...)&#160;&#160;&#160;    <a class="el" href="logger_8h.html#aac029ecd06c39428f69252cad1310574">QX_LOG_COMMON</a>(qx::logger_singleton::get_instance(), pszTag, eLogLevel, __VA_ARGS__)</td></tr>
-<tr class="memdesc:adfe13339f0b8e866cc9d362e37671f02"><td class="mdescLeft">&#160;</td><td class="mdescRight">Log with tag.  <a href="logger_8h.html#adfe13339f0b8e866cc9d362e37671f02">More...</a><br /></td></tr>
-<tr class="separator:adfe13339f0b8e866cc9d362e37671f02"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9169f09308c1212078ba87b7c645f065"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="logger_8h.html#a9169f09308c1212078ba87b7c645f065">QX_LOG</a>(eLogLevel,  format, ...)&#160;&#160;&#160;<a class="el" href="logger_8h.html#adfe13339f0b8e866cc9d362e37671f02">QX_TLOG</a>(nullptr, eLogLevel, __VA_ARGS__)</td></tr>
+<tr class="memitem:aa24b61bd1cd54fd73930625d11ea4b28"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="logger_8h.html#aa24b61bd1cd54fd73930625d11ea4b28">QX_LOG_COMMON</a>(loggerInstance,  pszTag,  eLogLevel,  format, ...)&#160;&#160;&#160;    loggerInstance.output(eLogLevel, format, pszTag, <a class="el" href="useful__macros_8h.html#ae158b161fec70fada62391b9ffa7d502">QX_SHORT_FILE</a>, __FUNCTION__, __LINE__, ##__VA_ARGS__)</td></tr>
+<tr class="memdesc:aa24b61bd1cd54fd73930625d11ea4b28"><td class="mdescLeft">&#160;</td><td class="mdescRight">Common macro for logging. Prefer using QX_TLOG or QX_LOG.  <a href="logger_8h.html#aa24b61bd1cd54fd73930625d11ea4b28">More...</a><br /></td></tr>
+<tr class="separator:aa24b61bd1cd54fd73930625d11ea4b28"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a976a491a81734d36ab76f6a320ef6fbf"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="logger_8h.html#a976a491a81734d36ab76f6a320ef6fbf">QX_TLOG</a>(pszTag,  eLogLevel,  format, ...)&#160;&#160;&#160;    <a class="el" href="logger_8h.html#aa24b61bd1cd54fd73930625d11ea4b28">QX_LOG_COMMON</a>(qx::logger_singleton::get_instance(), pszTag, eLogLevel, format, ##__VA_ARGS__)</td></tr>
+<tr class="memdesc:a976a491a81734d36ab76f6a320ef6fbf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Log with tag.  <a href="logger_8h.html#a976a491a81734d36ab76f6a320ef6fbf">More...</a><br /></td></tr>
+<tr class="separator:a976a491a81734d36ab76f6a320ef6fbf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9169f09308c1212078ba87b7c645f065"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="logger_8h.html#a9169f09308c1212078ba87b7c645f065">QX_LOG</a>(eLogLevel,  format, ...)&#160;&#160;&#160;<a class="el" href="logger_8h.html#a976a491a81734d36ab76f6a320ef6fbf">QX_TLOG</a>(nullptr, eLogLevel, format, ##__VA_ARGS__)</td></tr>
 <tr class="memdesc:a9169f09308c1212078ba87b7c645f065"><td class="mdescLeft">&#160;</td><td class="mdescRight">Log message.  <a href="logger_8h.html#a9169f09308c1212078ba87b7c645f065">More...</a><br /></td></tr>
 <tr class="separator:a9169f09308c1212078ba87b7c645f065"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
@@ -138,7 +138,7 @@ Macros</h2></td></tr>
         <tr>
           <td></td>
           <td>)</td>
-          <td></td><td>&#160;&#160;&#160;<a class="el" href="logger_8h.html#adfe13339f0b8e866cc9d362e37671f02">QX_TLOG</a>(nullptr, eLogLevel, __VA_ARGS__)</td>
+          <td></td><td>&#160;&#160;&#160;<a class="el" href="logger_8h.html#a976a491a81734d36ab76f6a320ef6fbf">QX_TLOG</a>(nullptr, eLogLevel, format, ##__VA_ARGS__)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -147,17 +147,18 @@ Macros</h2></td></tr>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">eLogLevel</td><td>- logging level </td></tr>
-    <tr><td class="paramname">...</td><td>- format string and additional args for formatting </td></tr>
+    <tr><td class="paramname">format</td><td>- format string </td></tr>
+    <tr><td class="paramname">...</td><td>- additional args for formatting </td></tr>
   </table>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="logger_8h_source.html#l00043">43</a> of file <a class="el" href="logger_8h_source.html">logger.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="logger_8h_source.html#l00046">46</a> of file <a class="el" href="logger_8h_source.html">logger.h</a>.</p>
 
 </div>
 </div>
-<a id="aac029ecd06c39428f69252cad1310574"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aac029ecd06c39428f69252cad1310574">&#9670;&nbsp;</a></span>QX_LOG_COMMON</h2>
+<a id="aa24b61bd1cd54fd73930625d11ea4b28"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa24b61bd1cd54fd73930625d11ea4b28">&#9670;&nbsp;</a></span>QX_LOG_COMMON</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -184,12 +185,18 @@ Macros</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">&#160;</td>
+          <td class="paramname">format, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
           <td class="paramname"><em>...</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
           <td>)</td>
-          <td></td><td>&#160;&#160;&#160;    loggerInstance.output(eLogLevel, pszTag, <a class="el" href="useful__macros_8h.html#ae158b161fec70fada62391b9ffa7d502">QX_SHORT_FILE</a>, __FUNCTION__, __LINE__, __VA_ARGS__)</td>
+          <td></td><td>&#160;&#160;&#160;    loggerInstance.output(eLogLevel, format, pszTag, <a class="el" href="useful__macros_8h.html#ae158b161fec70fada62391b9ffa7d502">QX_SHORT_FILE</a>, __FUNCTION__, __LINE__, ##__VA_ARGS__)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -200,17 +207,18 @@ Macros</h2></td></tr>
     <tr><td class="paramname">loggerInstance</td><td>- logger instance </td></tr>
     <tr><td class="paramname">pszTag</td><td>- tag, can be used to manage output </td></tr>
     <tr><td class="paramname">eLogLevel</td><td>- logging level </td></tr>
-    <tr><td class="paramname">...</td><td>- format string and additional args for formatting </td></tr>
+    <tr><td class="paramname">format</td><td>- format string </td></tr>
+    <tr><td class="paramname">...</td><td>- additional args for formatting </td></tr>
   </table>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="logger_8h_source.html#l00025">25</a> of file <a class="el" href="logger_8h_source.html">logger.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="logger_8h_source.html#l00026">26</a> of file <a class="el" href="logger_8h_source.html">logger.h</a>.</p>
 
 </div>
 </div>
-<a id="adfe13339f0b8e866cc9d362e37671f02"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#adfe13339f0b8e866cc9d362e37671f02">&#9670;&nbsp;</a></span>QX_TLOG</h2>
+<a id="a976a491a81734d36ab76f6a320ef6fbf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a976a491a81734d36ab76f6a320ef6fbf">&#9670;&nbsp;</a></span>QX_TLOG</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -231,12 +239,18 @@ Macros</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">&#160;</td>
+          <td class="paramname">format, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
           <td class="paramname"><em>...</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
           <td>)</td>
-          <td></td><td>&#160;&#160;&#160;    <a class="el" href="logger_8h.html#aac029ecd06c39428f69252cad1310574">QX_LOG_COMMON</a>(qx::logger_singleton::get_instance(), pszTag, eLogLevel, __VA_ARGS__)</td>
+          <td></td><td>&#160;&#160;&#160;    <a class="el" href="logger_8h.html#aa24b61bd1cd54fd73930625d11ea4b28">QX_LOG_COMMON</a>(qx::logger_singleton::get_instance(), pszTag, eLogLevel, format, ##__VA_ARGS__)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -246,12 +260,13 @@ Macros</h2></td></tr>
   <table class="params">
     <tr><td class="paramname">pszTag</td><td>- tag, can be used to manage output </td></tr>
     <tr><td class="paramname">eLogLevel</td><td>- logging level </td></tr>
-    <tr><td class="paramname">...</td><td>- format string and additional args for formatting </td></tr>
+    <tr><td class="paramname">format</td><td>- format string </td></tr>
+    <tr><td class="paramname">...</td><td>- additional args for formatting </td></tr>
   </table>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="logger_8h_source.html#l00034">34</a> of file <a class="el" href="logger_8h_source.html">logger.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="logger_8h_source.html#l00036">36</a> of file <a class="el" href="logger_8h_source.html">logger.h</a>.</p>
 
 </div>
 </div>

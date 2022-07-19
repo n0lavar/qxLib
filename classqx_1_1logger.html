@@ -89,9 +89,9 @@ Inheritance diagram for qx::logger:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a9544c2e4426fe52798b55fe6c842e839"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1logger.html#a9544c2e4426fe52798b55fe6c842e839">output</a> (log_level eLogLevel, const char *pszTag, const char *pszFile, const char *pszFunction, int nLine, const char *pszFormat,...)</td></tr>
-<tr class="memdesc:a9544c2e4426fe52798b55fe6c842e839"><td class="mdescLeft">&#160;</td><td class="mdescRight">Process tracings.  <a href="classqx_1_1logger.html#a9544c2e4426fe52798b55fe6c842e839">More...</a><br /></td></tr>
-<tr class="separator:a9544c2e4426fe52798b55fe6c842e839"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad05398f1f7bb50021ae4e9b3bf968d23"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1logger.html#ad05398f1f7bb50021ae4e9b3bf968d23">output</a> (log_level eLogLevel, const char *pszFormat, const char *pszTag, const char *pszFile, const char *pszFunction, int nLine,...)</td></tr>
+<tr class="memdesc:ad05398f1f7bb50021ae4e9b3bf968d23"><td class="mdescLeft">&#160;</td><td class="mdescRight">Process tracings.  <a href="classqx_1_1logger.html#ad05398f1f7bb50021ae4e9b3bf968d23">More...</a><br /></td></tr>
+<tr class="separator:ad05398f1f7bb50021ae4e9b3bf968d23"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1f42b31b5c1648d6a28433bab15ef0b1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1logger.html#a1f42b31b5c1648d6a28433bab15ef0b1">add_stream</a> (std::unique_ptr&lt; <a class="el" href="classqx_1_1base__logger__stream.html">base_logger_stream</a> &gt; pStream)</td></tr>
 <tr class="memdesc:a1f42b31b5c1648d6a28433bab15ef0b1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add output stream to the logger.  <a href="classqx_1_1logger.html#a1f42b31b5c1648d6a28433bab15ef0b1">More...</a><br /></td></tr>
 <tr class="separator:a1f42b31b5c1648d6a28433bab15ef0b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -101,7 +101,7 @@ Public Member Functions</h2></td></tr>
 <p>~ </p><dl class="section author"><dt>Author</dt><dd>Khrapov </dd></dl>
 <dl class="section date"><dt>Date</dt><dd>10.01.2020 </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="logger_8h_source.html#l00058">58</a> of file <a class="el" href="logger_8h_source.html">logger.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="logger_8h_source.html#l00061">61</a> of file <a class="el" href="logger_8h_source.html">logger.h</a>.</p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="a1f42b31b5c1648d6a28433bab15ef0b1"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a1f42b31b5c1648d6a28433bab15ef0b1">&#9670;&nbsp;</a></span>add_stream()</h2>
@@ -139,8 +139,8 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a9544c2e4426fe52798b55fe6c842e839"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9544c2e4426fe52798b55fe6c842e839">&#9670;&nbsp;</a></span>output()</h2>
+<a id="ad05398f1f7bb50021ae4e9b3bf968d23"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad05398f1f7bb50021ae4e9b3bf968d23">&#9670;&nbsp;</a></span>output()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -153,6 +153,12 @@ Public Member Functions</h2></td></tr>
           <td>(</td>
           <td class="paramtype">log_level&#160;</td>
           <td class="paramname"><em>eLogLevel</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>pszFormat</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -181,12 +187,6 @@ Public Member Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const char *&#160;</td>
-          <td class="paramname"><em>pszFormat</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
           <td class="paramtype">&#160;</td>
           <td class="paramname"><em>...</em>&#160;</td>
         </tr>
@@ -207,11 +207,11 @@ Public Member Functions</h2></td></tr>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">eLogLevel</td><td>- log level </td></tr>
+    <tr><td class="paramname">pszFormat</td><td>- format string </td></tr>
     <tr><td class="paramname">pszTag</td><td>- logging tag </td></tr>
     <tr><td class="paramname">pszFile</td><td>- file name string </td></tr>
     <tr><td class="paramname">pszFunction</td><td>- function name string </td></tr>
     <tr><td class="paramname">nLine</td><td>- code line number </td></tr>
-    <tr><td class="paramname">pszFormat</td><td>- format string </td></tr>
     <tr><td class="paramname">...</td><td>- additional args for format </td></tr>
   </table>
   </dd>

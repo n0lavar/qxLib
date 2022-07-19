@@ -20,7 +20,7 @@ var searchData=
   ['qx_5fimpl_5fcontainer_368',['QX_IMPL_CONTAINER',['../container_8h.html#a985515265ddd8b328f88ebcdf8eaaefc',1,'container.h']]],
   ['qx_5fline_5fname_369',['QX_LINE_NAME',['../useful__macros_8h.html#a8f51bd935768d1845211352e225739ed',1,'useful_macros.h']]],
   ['qx_5flog_370',['QX_LOG',['../logger_8h.html#a9169f09308c1212078ba87b7c645f065',1,'logger.h']]],
-  ['qx_5flog_5fcommon_371',['QX_LOG_COMMON',['../logger_8h.html#aac029ecd06c39428f69252cad1310574',1,'logger.h']]],
+  ['qx_5flog_5fcommon_371',['QX_LOG_COMMON',['../logger_8h.html#aa24b61bd1cd54fd73930625d11ea4b28',1,'logger.h']]],
   ['qx_5fmovable_372',['QX_MOVABLE',['../useful__macros_8h.html#afed226a730f800b62503840460223830',1,'useful_macros.h']]],
   ['qx_5fnoncopyable_373',['QX_NONCOPYABLE',['../useful__macros_8h.html#a37fb240669bedfbab5705feaa1973471',1,'useful_macros.h']]],
   ['qx_5fnoncopymovable_374',['QX_NONCOPYMOVABLE',['../useful__macros_8h.html#ada42eeeb4a06cb346dc25e887d2a6604',1,'useful_macros.h']]],
@@ -46,7 +46,7 @@ var searchData=
   ['qx_5fstatic_5fassert_5fno_5finstantiation_394',['QX_STATIC_ASSERT_NO_INSTANTIATION',['../useful__macros_8h.html#ac863db693e59fe16168b9d7c1c3cc2ed',1,'useful_macros.h']]],
   ['qx_5fstr_5fprefix_395',['QX_STR_PREFIX',['../string__utils_8h.html#ac188ca5f0d584a897b5e2a443c574729',1,'string_utils.h']]],
   ['qx_5fstringify_396',['QX_STRINGIFY',['../useful__macros_8h.html#aafbad02364b98b20fd2de0a4afedc06d',1,'useful_macros.h']]],
-  ['qx_5ftlog_397',['QX_TLOG',['../logger_8h.html#adfe13339f0b8e866cc9d362e37671f02',1,'logger.h']]],
+  ['qx_5ftlog_397',['QX_TLOG',['../logger_8h.html#a976a491a81734d36ab76f6a320ef6fbf',1,'logger.h']]],
   ['qx_5fto_5fwstring_398',['QX_TO_WSTRING',['../string__utils_8h.html#a6b22a06d00ce06f575913fec486bd955',1,'string_utils.h']]],
   ['qx_5funique_5fseed_399',['QX_UNIQUE_SEED',['../constexpr__random_8h.html#a3e05af8678b42a682039a4f067861de7',1,'constexpr_random.h']]]
 ];
