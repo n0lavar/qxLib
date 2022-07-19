@@ -146,7 +146,7 @@ Macros</h2></td></tr>
 <tr class="memitem:ada42eeeb4a06cb346dc25e887d2a6604"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="useful__macros_8h.html#ada42eeeb4a06cb346dc25e887d2a6604">QX_NONCOPYMOVABLE</a>(className)</td></tr>
 <tr class="memdesc:ada42eeeb4a06cb346dc25e887d2a6604"><td class="mdescLeft">&#160;</td><td class="mdescRight">Define class as non copyable and non movable.  <a href="useful__macros_8h.html#ada42eeeb4a06cb346dc25e887d2a6604">More...</a><br /></td></tr>
 <tr class="separator:ada42eeeb4a06cb346dc25e887d2a6604"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a06c64a5f786d6ed8416e6a90502eaa86"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="useful__macros_8h.html#a06c64a5f786d6ed8416e6a90502eaa86">QX_STATIC_ASSERT_BETWEEN</a>(L,  V,  R)</td></tr>
+<tr class="memitem:a06c64a5f786d6ed8416e6a90502eaa86"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="useful__macros_8h.html#a06c64a5f786d6ed8416e6a90502eaa86">QX_STATIC_ASSERT_BETWEEN</a>(L,  V,  R)&#160;&#160;&#160;    <a class="el" href="structqx_1_1detail_1_1_static_assert_between.html">qx::detail::StaticAssertBetween</a>&lt;(L), (V), (R)&gt; <a class="el" href="useful__macros_8h.html#a8f51bd935768d1845211352e225739ed">QX_LINE_NAME</a>(static_assert_between_)</td></tr>
 <tr class="memdesc:a06c64a5f786d6ed8416e6a90502eaa86"><td class="mdescLeft">&#160;</td><td class="mdescRight">Shows L, V and R in error msg.  <a href="useful__macros_8h.html#a06c64a5f786d6ed8416e6a90502eaa86">More...</a><br /></td></tr>
 <tr class="separator:a06c64a5f786d6ed8416e6a90502eaa86"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac863db693e59fe16168b9d7c1c3cc2ed"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="useful__macros_8h.html#ac863db693e59fe16168b9d7c1c3cc2ed">QX_STATIC_ASSERT_NO_INSTANTIATION</a>(Message)</td></tr>
@@ -300,7 +300,7 @@ Macros</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="useful__macros_8h_source.html#l00325">325</a> of file <a class="el" href="useful__macros_8h_source.html">useful_macros.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="useful__macros_8h_source.html#l00318">318</a> of file <a class="el" href="useful__macros_8h_source.html">useful_macros.h</a>.</p>
 
 </div>
 </div>
@@ -689,15 +689,11 @@ Macros</h2></td></tr>
         <tr>
           <td></td>
           <td>)</td>
-          <td></td><td></td>
+          <td></td><td>&#160;&#160;&#160;    <a class="el" href="structqx_1_1detail_1_1_static_assert_between.html">qx::detail::StaticAssertBetween</a>&lt;(L), (V), (R)&gt; <a class="el" href="useful__macros_8h.html#a8f51bd935768d1845211352e225739ed">QX_LINE_NAME</a>(static_assert_between_)</td>
         </tr>
       </table>
 </div><div class="memdoc">
-<b>Value:</b><div class="fragment"><div class="line">    <a class="code" href="structqx_1_1detail_1_1_static_assert_between.html">qx::detail::StaticAssertBetween</a>&lt;(L), (V), (R)&gt; <a class="code" href="useful__macros_8h.html#a8f51bd935768d1845211352e225739ed">QX_LINE_NAME</a>( \</div>
-<div class="line">        static_assert_between_)</div>
-<div class="ttc" id="astructqx_1_1detail_1_1_static_assert_between_html"><div class="ttname"><a href="structqx_1_1detail_1_1_static_assert_between.html">qx::detail::StaticAssertBetween</a></div><div class="ttdef"><b>Definition:</b> <a href="useful__macros_8h_source.html#l00265">useful_macros.h:266</a></div></div>
-<div class="ttc" id="auseful__macros_8h_html_a8f51bd935768d1845211352e225739ed"><div class="ttname"><a href="useful__macros_8h.html#a8f51bd935768d1845211352e225739ed">QX_LINE_NAME</a></div><div class="ttdeci">#define QX_LINE_NAME(prefix)</div><div class="ttdoc">Do magic! Creates a unique name using the line number.</div><div class="ttdef"><b>Definition:</b> <a href="useful__macros_8h_source.html#l00087">useful_macros.h:87</a></div></div>
-</div><!-- fragment -->
+
 <p>Shows L, V and R in error msg. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
@@ -708,7 +704,7 @@ Macros</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="useful__macros_8h_source.html#l00279">279</a> of file <a class="el" href="useful__macros_8h_source.html">useful_macros.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="useful__macros_8h_source.html#l00273">273</a> of file <a class="el" href="useful__macros_8h_source.html">useful_macros.h</a>.</p>
 
 </div>
 </div>
@@ -755,7 +751,7 @@ Macros</h2></td></tr>
 <div class="line">constexpr <span class="keywordtype">int</span> val1 = GetValue&lt;bool&gt;();  <span class="comment">// ok</span></div>
 <div class="line">constexpr <span class="keywordtype">int</span> val2 = GetValue&lt;int&gt;();   <span class="comment">// ok</span></div>
 <div class="line">constexpr <span class="keywordtype">int</span> val3 = GetValue&lt;long&gt;();  <span class="comment">// static_assert failure</span></div>
-<div class="ttc" id="auseful__macros_8h_html_ac863db693e59fe16168b9d7c1c3cc2ed"><div class="ttname"><a href="useful__macros_8h.html#ac863db693e59fe16168b9d7c1c3cc2ed">QX_STATIC_ASSERT_NO_INSTANTIATION</a></div><div class="ttdeci">#define QX_STATIC_ASSERT_NO_INSTANTIATION(Message)</div><div class="ttdoc">This static assert will fail if block it placed in must not be instantiated.</div><div class="ttdef"><b>Definition:</b> <a href="useful__macros_8h_source.html#l00312">useful_macros.h:312</a></div></div>
+<div class="ttc" id="auseful__macros_8h_html_ac863db693e59fe16168b9d7c1c3cc2ed"><div class="ttname"><a href="useful__macros_8h.html#ac863db693e59fe16168b9d7c1c3cc2ed">QX_STATIC_ASSERT_NO_INSTANTIATION</a></div><div class="ttdeci">#define QX_STATIC_ASSERT_NO_INSTANTIATION(Message)</div><div class="ttdoc">This static assert will fail if block it placed in must not be instantiated.</div><div class="ttdef"><b>Definition:</b> <a href="useful__macros_8h_source.html#l00305">useful_macros.h:305</a></div></div>
 </div><!-- fragment --><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">Message</td><td>- static_assert message </td></tr>
@@ -763,7 +759,7 @@ Macros</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="useful__macros_8h_source.html#l00312">312</a> of file <a class="el" href="useful__macros_8h_source.html">useful_macros.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="useful__macros_8h_source.html#l00305">305</a> of file <a class="el" href="useful__macros_8h_source.html">useful_macros.h</a>.</p>
 
 </div>
 </div>

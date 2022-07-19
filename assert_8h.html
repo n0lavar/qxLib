@@ -72,44 +72,58 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p>Assert macros.  
+<p>Expect and assert macros.  
 <a href="#details">More...</a></p>
-<div class="textblock"><code>#include &lt;<a class="el" href="useful__macros_8h_source.html">qx/useful_macros.h</a>&gt;</code><br />
+<div class="textblock"><code>#include &lt;<a class="el" href="logger_8h_source.html">qx/logger/logger.h</a>&gt;</code><br />
+<code>#include &lt;<a class="el" href="useful__macros_8h_source.html">qx/useful_macros.h</a>&gt;</code><br />
+<code>#include &lt;exception&gt;</code><br />
 </div>
 <p><a href="assert_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
 Macros</h2></td></tr>
-<tr class="memitem:a0db0022f4e471845272bd7881fc94444"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="assert_8h.html#a0db0022f4e471845272bd7881fc94444">QX_ASSERT_MSG</a>(statement,  msg, ...)&#160;&#160;&#160;    _QX_ASSERT_MSG(statement, msg, __VA_ARGS__)</td></tr>
-<tr class="memdesc:a0db0022f4e471845272bd7881fc94444"><td class="mdescLeft">&#160;</td><td class="mdescRight">Assert macro with message.  <a href="assert_8h.html#a0db0022f4e471845272bd7881fc94444">More...</a><br /></td></tr>
-<tr class="separator:a0db0022f4e471845272bd7881fc94444"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2eb2affe84e6d34db31253b0e5f69726"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="assert_8h.html#a2eb2affe84e6d34db31253b0e5f69726">QX_ASSERT</a>(statement)&#160;&#160;&#160;_QX_ASSERT(statement)</td></tr>
-<tr class="memdesc:a2eb2affe84e6d34db31253b0e5f69726"><td class="mdescLeft">&#160;</td><td class="mdescRight">Assert macro.  <a href="assert_8h.html#a2eb2affe84e6d34db31253b0e5f69726">More...</a><br /></td></tr>
-<tr class="separator:a2eb2affe84e6d34db31253b0e5f69726"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a698451aa0963d4d75eeafdb86fd848d3"><td class="memItemLeft" align="right" valign="top"><a id="a698451aa0963d4d75eeafdb86fd848d3"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="assert_8h.html#a698451aa0963d4d75eeafdb86fd848d3">QX_ASSERT_NO_ENTRY</a>&#160;&#160;&#160;_QX_ASSERT_NO_ENTRY</td></tr>
-<tr class="memdesc:a698451aa0963d4d75eeafdb86fd848d3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Invokes assert unconditionally if this code should not be executed. <br /></td></tr>
+<tr class="memitem:af71e6aa86267af0291f2b11fa2475f07"><td class="memItemLeft" align="right" valign="top"><a id="af71e6aa86267af0291f2b11fa2475f07"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="assert_8h.html#af71e6aa86267af0291f2b11fa2475f07">QX_DEBUG_BREAK</a>&#160;&#160;&#160;_QX_DEBUG_BREAK</td></tr>
+<tr class="memdesc:af71e6aa86267af0291f2b11fa2475f07"><td class="mdescLeft">&#160;</td><td class="mdescRight">Causes a breakpoint in your code, where the user will be prompted to run the debugger. <br /></td></tr>
+<tr class="separator:af71e6aa86267af0291f2b11fa2475f07"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a62eea8f4041e0035c15cda1427ef56ea"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="assert_8h.html#a62eea8f4041e0035c15cda1427ef56ea">QX_EXPECT_MSG</a>(condition,  format, ...)</td></tr>
+<tr class="memdesc:a62eea8f4041e0035c15cda1427ef56ea"><td class="mdescLeft">&#160;</td><td class="mdescRight">Verifies that condition is true.  <a href="assert_8h.html#a62eea8f4041e0035c15cda1427ef56ea">More...</a><br /></td></tr>
+<tr class="separator:a62eea8f4041e0035c15cda1427ef56ea"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a97f1737ab45728e73114e6a02a5ad556"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="assert_8h.html#a97f1737ab45728e73114e6a02a5ad556">QX_ASSERT_MSG</a>(condition,  format, ...)</td></tr>
+<tr class="memdesc:a97f1737ab45728e73114e6a02a5ad556"><td class="mdescLeft">&#160;</td><td class="mdescRight">Verifies that condition is true.  <a href="assert_8h.html#a97f1737ab45728e73114e6a02a5ad556">More...</a><br /></td></tr>
+<tr class="separator:a97f1737ab45728e73114e6a02a5ad556"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abd285f471120057509ee8602cac18f67"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="assert_8h.html#abd285f471120057509ee8602cac18f67">QX_EXPECT</a>(condition)&#160;&#160;&#160;    _QX_ASSERT(QX_EXPECT_BEFORE_DEBUG_BREAK, QX_EXPECT_DEBUG_BREAK, QX_EXPECT_AFTER_DEBUG_BREAK, condition)</td></tr>
+<tr class="memdesc:abd285f471120057509ee8602cac18f67"><td class="mdescLeft">&#160;</td><td class="mdescRight">Verifies that condition is true.  <a href="assert_8h.html#abd285f471120057509ee8602cac18f67">More...</a><br /></td></tr>
+<tr class="separator:abd285f471120057509ee8602cac18f67"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9ed1548dabdec7ac63e399e07bf4abda"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="assert_8h.html#a9ed1548dabdec7ac63e399e07bf4abda">QX_ASSERT</a>(condition)&#160;&#160;&#160;    _QX_ASSERT(QX_ASSERT_BEFORE_DEBUG_BREAK, QX_ASSERT_DEBUG_BREAK, QX_ASSERT_AFTER_DEBUG_BREAK, condition)</td></tr>
+<tr class="memdesc:a9ed1548dabdec7ac63e399e07bf4abda"><td class="mdescLeft">&#160;</td><td class="mdescRight">Verifies that condition is true.  <a href="assert_8h.html#a9ed1548dabdec7ac63e399e07bf4abda">More...</a><br /></td></tr>
+<tr class="separator:a9ed1548dabdec7ac63e399e07bf4abda"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2d5a737a3733e55443e0550b562d0968"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="assert_8h.html#a2d5a737a3733e55443e0550b562d0968">QX_EXPECT_NO_ENTRY</a>&#160;&#160;&#160;    _QX_ASSERT_NO_ENTRY(QX_EXPECT_BEFORE_DEBUG_BREAK, QX_EXPECT_DEBUG_BREAK, QX_EXPECT_AFTER_DEBUG_BREAK)</td></tr>
+<tr class="memdesc:a2d5a737a3733e55443e0550b562d0968"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fails unconditionally if this code should not be executed.  <a href="assert_8h.html#a2d5a737a3733e55443e0550b562d0968">More...</a><br /></td></tr>
+<tr class="separator:a2d5a737a3733e55443e0550b562d0968"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a698451aa0963d4d75eeafdb86fd848d3"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="assert_8h.html#a698451aa0963d4d75eeafdb86fd848d3">QX_ASSERT_NO_ENTRY</a>&#160;&#160;&#160;    _QX_ASSERT_NO_ENTRY(QX_ASSERT_BEFORE_DEBUG_BREAK, QX_ASSERT_DEBUG_BREAK, QX_ASSERT_AFTER_DEBUG_BREAK)</td></tr>
+<tr class="memdesc:a698451aa0963d4d75eeafdb86fd848d3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fails unconditionally if this code should not be executed.  <a href="assert_8h.html#a698451aa0963d4d75eeafdb86fd848d3">More...</a><br /></td></tr>
 <tr class="separator:a698451aa0963d4d75eeafdb86fd848d3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a595d81253fd06d723ffe543ffc898236"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="assert_8h.html#a595d81253fd06d723ffe543ffc898236">QX_ASSERT_RETURN</a>(statement, ...)&#160;&#160;&#160;    _QX_ASSERT_RETURN(statement, __VA_ARGS__)</td></tr>
-<tr class="memdesc:a595d81253fd06d723ffe543ffc898236"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check statement and return if false.  <a href="assert_8h.html#a595d81253fd06d723ffe543ffc898236">More...</a><br /></td></tr>
-<tr class="separator:a595d81253fd06d723ffe543ffc898236"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a915ebde63be92cc58e5dc28fbec7373d"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="assert_8h.html#a915ebde63be92cc58e5dc28fbec7373d">QX_ASSERT_CONTINUE</a>(statement)&#160;&#160;&#160;_QX_ASSERT_CONTINUE(statement)</td></tr>
-<tr class="memdesc:a915ebde63be92cc58e5dc28fbec7373d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check statement and continue loop if false.  <a href="assert_8h.html#a915ebde63be92cc58e5dc28fbec7373d">More...</a><br /></td></tr>
-<tr class="separator:a915ebde63be92cc58e5dc28fbec7373d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae22a68de6e317d07004165f384349194"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="assert_8h.html#ae22a68de6e317d07004165f384349194">QX_ASSERT_BREAK</a>(statement)&#160;&#160;&#160;_QX_ASSERT_BREAK(statement)</td></tr>
-<tr class="memdesc:ae22a68de6e317d07004165f384349194"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check statement and break loop if false.  <a href="assert_8h.html#ae22a68de6e317d07004165f384349194">More...</a><br /></td></tr>
-<tr class="separator:ae22a68de6e317d07004165f384349194"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a65b5a4597f28172e66d51dd0b5934012"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="assert_8h.html#a65b5a4597f28172e66d51dd0b5934012">QX_EXPECT_RETURN</a>(condition, ...)</td></tr>
+<tr class="memdesc:a65b5a4597f28172e66d51dd0b5934012"><td class="mdescLeft">&#160;</td><td class="mdescRight">Verifies that condition is true and return if false.  <a href="assert_8h.html#a65b5a4597f28172e66d51dd0b5934012">More...</a><br /></td></tr>
+<tr class="separator:a65b5a4597f28172e66d51dd0b5934012"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3430dce88ee22fb2bded329d6bb5d241"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="assert_8h.html#a3430dce88ee22fb2bded329d6bb5d241">QX_EXPECT_CONTINUE</a>(condition)&#160;&#160;&#160;    _QX_ASSERT_CONTINUE(QX_EXPECT_BEFORE_DEBUG_BREAK, QX_EXPECT_DEBUG_BREAK, QX_EXPECT_AFTER_DEBUG_BREAK, condition)</td></tr>
+<tr class="memdesc:a3430dce88ee22fb2bded329d6bb5d241"><td class="mdescLeft">&#160;</td><td class="mdescRight">Verifies that condition is true and continue loop if false.  <a href="assert_8h.html#a3430dce88ee22fb2bded329d6bb5d241">More...</a><br /></td></tr>
+<tr class="separator:a3430dce88ee22fb2bded329d6bb5d241"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aead3120fb7ad42181b0acdf2ffe323c2"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="assert_8h.html#aead3120fb7ad42181b0acdf2ffe323c2">QX_EXPECT_BREAK</a>(condition)&#160;&#160;&#160;    _QX_ASSERT_BREAK(QX_EXPECT_BEFORE_DEBUG_BREAK, QX_EXPECT_DEBUG_BREAK, QX_EXPECT_AFTER_DEBUG_BREAK, condition)</td></tr>
+<tr class="memdesc:aead3120fb7ad42181b0acdf2ffe323c2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Verifies that condition is true and break loop if false.  <a href="assert_8h.html#aead3120fb7ad42181b0acdf2ffe323c2">More...</a><br /></td></tr>
+<tr class="separator:aead3120fb7ad42181b0acdf2ffe323c2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Assert macros. </p>
+<div class="textblock"><p>Expect and assert macros. </p>
 <dl class="section author"><dt>Author</dt><dd>Khrapov </dd></dl>
 <dl class="section date"><dt>Date</dt><dd>29.10.2020 </dd></dl>
 <dl class="section copyright"><dt>Copyright</dt><dd>© Nick Khrapov, 2021. All right reserved. </dd></dl>
 
 <p class="definition">Definition in file <a class="el" href="assert_8h_source.html">assert.h</a>.</p>
 </div><h2 class="groupheader">Macro Definition Documentation</h2>
-<a id="a2eb2affe84e6d34db31253b0e5f69726"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2eb2affe84e6d34db31253b0e5f69726">&#9670;&nbsp;</a></span>QX_ASSERT</h2>
+<a id="a9ed1548dabdec7ac63e399e07bf4abda"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9ed1548dabdec7ac63e399e07bf4abda">&#9670;&nbsp;</a></span>QX_ASSERT</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -118,87 +132,26 @@ Macros</h2></td></tr>
           <td class="memname">#define QX_ASSERT</td>
           <td>(</td>
           <td class="paramtype">&#160;</td>
-          <td class="paramname">statement</td><td>)</td>
-          <td>&#160;&#160;&#160;_QX_ASSERT(statement)</td>
+          <td class="paramname">condition</td><td>)</td>
+          <td>&#160;&#160;&#160;    _QX_ASSERT(QX_ASSERT_BEFORE_DEBUG_BREAK, QX_ASSERT_DEBUG_BREAK, QX_ASSERT_AFTER_DEBUG_BREAK, condition)</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Assert macro. </p>
-<p>If statement is false, assert processer will be called and debugging will stop at this point </p><dl class="params"><dt>Parameters</dt><dd>
+<p>Verifies that condition is true. </p>
+<p>ASSERT macros generate fatal failures and abort the program execution </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">statement</td><td>- statement to check</td></tr>
-  </table>
-  </dd>
-</dl>
-<p>May be used in if statemant:</p>
-<div class="fragment"><div class="line"><span class="keyword">const</span> <span class="keyword">auto</span> file = ...;</div>
-<div class="line"><span class="keywordflow">if</span> (<a class="code" href="assert_8h.html#a2eb2affe84e6d34db31253b0e5f69726">QX_ASSERT</a>(file))</div>
-<div class="line">    ReadFromFile(file);</div>
-<div class="ttc" id="aassert_8h_html_a2eb2affe84e6d34db31253b0e5f69726"><div class="ttname"><a href="assert_8h.html#a2eb2affe84e6d34db31253b0e5f69726">QX_ASSERT</a></div><div class="ttdeci">#define QX_ASSERT(statement)</div><div class="ttdoc">Assert macro.</div><div class="ttdef"><b>Definition:</b> <a href="assert_8h_source.html#l00144">assert.h:144</a></div></div>
-</div><!-- fragment --> 
-<p class="definition">Definition at line <a class="el" href="assert_8h_source.html#l00144">144</a> of file <a class="el" href="assert_8h_source.html">assert.h</a>.</p>
-
-</div>
-</div>
-<a id="ae22a68de6e317d07004165f384349194"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae22a68de6e317d07004165f384349194">&#9670;&nbsp;</a></span>QX_ASSERT_BREAK</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define QX_ASSERT_BREAK</td>
-          <td>(</td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname">statement</td><td>)</td>
-          <td>&#160;&#160;&#160;_QX_ASSERT_BREAK(statement)</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Check statement and break loop if false. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">statement</td><td>- statement to check </td></tr>
+    <tr><td class="paramname">condition</td><td>- condition to check </td></tr>
   </table>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="assert_8h_source.html#l00169">169</a> of file <a class="el" href="assert_8h_source.html">assert.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="assert_8h_source.html#l00179">179</a> of file <a class="el" href="assert_8h_source.html">assert.h</a>.</p>
 
 </div>
 </div>
-<a id="a915ebde63be92cc58e5dc28fbec7373d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a915ebde63be92cc58e5dc28fbec7373d">&#9670;&nbsp;</a></span>QX_ASSERT_CONTINUE</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define QX_ASSERT_CONTINUE</td>
-          <td>(</td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname">statement</td><td>)</td>
-          <td>&#160;&#160;&#160;_QX_ASSERT_CONTINUE(statement)</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Check statement and continue loop if false. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">statement</td><td>- statement to check </td></tr>
-  </table>
-  </dd>
-</dl>
-
-<p class="definition">Definition at line <a class="el" href="assert_8h_source.html#l00163">163</a> of file <a class="el" href="assert_8h_source.html">assert.h</a>.</p>
-
-</div>
-</div>
-<a id="a0db0022f4e471845272bd7881fc94444"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0db0022f4e471845272bd7881fc94444">&#9670;&nbsp;</a></span>QX_ASSERT_MSG</h2>
+<a id="a97f1737ab45728e73114e6a02a5ad556"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a97f1737ab45728e73114e6a02a5ad556">&#9670;&nbsp;</a></span>QX_ASSERT_MSG</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -207,13 +160,13 @@ Macros</h2></td></tr>
           <td class="memname">#define QX_ASSERT_MSG</td>
           <td>(</td>
           <td class="paramtype">&#160;</td>
-          <td class="paramname">statement, </td>
+          <td class="paramname">condition, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">&#160;</td>
-          <td class="paramname">msg, </td>
+          <td class="paramname">format, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -224,41 +177,157 @@ Macros</h2></td></tr>
         <tr>
           <td></td>
           <td>)</td>
-          <td></td><td>&#160;&#160;&#160;    _QX_ASSERT_MSG(statement, msg, __VA_ARGS__)</td>
+          <td></td><td></td>
         </tr>
       </table>
 </div><div class="memdoc">
-
-<p>Assert macro with message. </p>
-<p>Same as QX_ASSERT, but with output possibility </p><dl class="params"><dt>Parameters</dt><dd>
+<b>Value:</b><div class="fragment"><div class="line">    _QX_ASSERT_MSG(                           \</div>
+<div class="line">        QX_ASSERT_BEFORE_DEBUG_BREAK,         \</div>
+<div class="line">        QX_ASSERT_DEBUG_BREAK,                \</div>
+<div class="line">        QX_ASSERT_AFTER_DEBUG_BREAK,          \</div>
+<div class="line">        condition,                            \</div>
+<div class="line">        format,                               \</div>
+<div class="line">        __VA_ARGS__)</div>
+</div><!-- fragment -->
+<p>Verifies that condition is true. </p>
+<p>ASSERT macros generate fatal failures and abort the program execution Same as QX_ASSERT, but with output possibility </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">statement</td><td>- statement to check </td></tr>
-    <tr><td class="paramname">msg</td><td>- message format </td></tr>
-    <tr><td class="paramname">...</td><td>- message arguments</td></tr>
+    <tr><td class="paramname">condition</td><td>- condition to check </td></tr>
+    <tr><td class="paramname">format</td><td>- message format </td></tr>
+    <tr><td class="paramname">...</td><td>- message arguments </td></tr>
   </table>
   </dd>
 </dl>
-<p>May be used in if statemant:</p>
-<div class="fragment"><div class="line"><span class="keyword">const</span> <span class="keyword">auto</span> file = OpenFile(path);</div>
-<div class="line"><span class="keywordflow">if</span> (<a class="code" href="assert_8h.html#a0db0022f4e471845272bd7881fc94444">QX_ASSERT_MSG</a>(file, <span class="stringliteral">&quot;Can&#39;t open %s file&quot;</span>, path.c_str()))</div>
-<div class="line">    ReadFromFile(file);</div>
-<div class="ttc" id="aassert_8h_html_a0db0022f4e471845272bd7881fc94444"><div class="ttname"><a href="assert_8h.html#a0db0022f4e471845272bd7881fc94444">QX_ASSERT_MSG</a></div><div class="ttdeci">#define QX_ASSERT_MSG(statement, msg,...)</div><div class="ttdoc">Assert macro with message.</div><div class="ttdef"><b>Definition:</b> <a href="assert_8h_source.html#l00126">assert.h:126</a></div></div>
-</div><!-- fragment --> 
-<p class="definition">Definition at line <a class="el" href="assert_8h_source.html#l00126">126</a> of file <a class="el" href="assert_8h_source.html">assert.h</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="assert_8h_source.html#l00148">148</a> of file <a class="el" href="assert_8h_source.html">assert.h</a>.</p>
 
 </div>
 </div>
-<a id="a595d81253fd06d723ffe543ffc898236"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a595d81253fd06d723ffe543ffc898236">&#9670;&nbsp;</a></span>QX_ASSERT_RETURN</h2>
+<a id="a698451aa0963d4d75eeafdb86fd848d3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a698451aa0963d4d75eeafdb86fd848d3">&#9670;&nbsp;</a></span>QX_ASSERT_NO_ENTRY</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define QX_ASSERT_RETURN</td>
+          <td class="memname">#define QX_ASSERT_NO_ENTRY&#160;&#160;&#160;    _QX_ASSERT_NO_ENTRY(QX_ASSERT_BEFORE_DEBUG_BREAK, QX_ASSERT_DEBUG_BREAK, QX_ASSERT_AFTER_DEBUG_BREAK)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Fails unconditionally if this code should not be executed. </p>
+<p>ASSERT macros generate fatal failures and abort the program execution </p>
+
+<p class="definition">Definition at line <a class="el" href="assert_8h_source.html#l00193">193</a> of file <a class="el" href="assert_8h_source.html">assert.h</a>.</p>
+
+</div>
+</div>
+<a id="abd285f471120057509ee8602cac18f67"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abd285f471120057509ee8602cac18f67">&#9670;&nbsp;</a></span>QX_EXPECT</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define QX_EXPECT</td>
           <td>(</td>
           <td class="paramtype">&#160;</td>
-          <td class="paramname">statement, </td>
+          <td class="paramname">condition</td><td>)</td>
+          <td>&#160;&#160;&#160;    _QX_ASSERT(QX_EXPECT_BEFORE_DEBUG_BREAK, QX_EXPECT_DEBUG_BREAK, QX_EXPECT_AFTER_DEBUG_BREAK, condition)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Verifies that condition is true. </p>
+<p>EXPECT macros generate nonfatal failures and allow to continue running </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">condition</td><td>- condition to check</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>May be used in if statemant:</p>
+<div class="fragment"><div class="line"><span class="keyword">const</span> <span class="keyword">auto</span> file = ...;</div>
+<div class="line"><span class="keywordflow">if</span> (<a class="code" href="assert_8h.html#abd285f471120057509ee8602cac18f67">QX_EXPECT</a>(file))</div>
+<div class="line">    ReadFromFile(file);</div>
+<div class="ttc" id="aassert_8h_html_abd285f471120057509ee8602cac18f67"><div class="ttname"><a href="assert_8h.html#abd285f471120057509ee8602cac18f67">QX_EXPECT</a></div><div class="ttdeci">#define QX_EXPECT(condition)</div><div class="ttdoc">Verifies that condition is true.</div><div class="ttdef"><b>Definition:</b> <a href="assert_8h_source.html#l00171">assert.h:171</a></div></div>
+</div><!-- fragment --> 
+<p class="definition">Definition at line <a class="el" href="assert_8h_source.html#l00171">171</a> of file <a class="el" href="assert_8h_source.html">assert.h</a>.</p>
+
+</div>
+</div>
+<a id="aead3120fb7ad42181b0acdf2ffe323c2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aead3120fb7ad42181b0acdf2ffe323c2">&#9670;&nbsp;</a></span>QX_EXPECT_BREAK</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define QX_EXPECT_BREAK</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">condition</td><td>)</td>
+          <td>&#160;&#160;&#160;    _QX_ASSERT_BREAK(QX_EXPECT_BEFORE_DEBUG_BREAK, QX_EXPECT_DEBUG_BREAK, QX_EXPECT_AFTER_DEBUG_BREAK, condition)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Verifies that condition is true and break loop if false. </p>
+<p>EXPECT macros generate nonfatal failures and allow to continue running </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">condition</td><td>- condition to check </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="assert_8h_source.html#l00223">223</a> of file <a class="el" href="assert_8h_source.html">assert.h</a>.</p>
+
+</div>
+</div>
+<a id="a3430dce88ee22fb2bded329d6bb5d241"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3430dce88ee22fb2bded329d6bb5d241">&#9670;&nbsp;</a></span>QX_EXPECT_CONTINUE</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define QX_EXPECT_CONTINUE</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">condition</td><td>)</td>
+          <td>&#160;&#160;&#160;    _QX_ASSERT_CONTINUE(QX_EXPECT_BEFORE_DEBUG_BREAK, QX_EXPECT_DEBUG_BREAK, QX_EXPECT_AFTER_DEBUG_BREAK, condition)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Verifies that condition is true and continue loop if false. </p>
+<p>EXPECT macros generate nonfatal failures and allow to continue running </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">condition</td><td>- condition to check </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="assert_8h_source.html#l00215">215</a> of file <a class="el" href="assert_8h_source.html">assert.h</a>.</p>
+
+</div>
+</div>
+<a id="a62eea8f4041e0035c15cda1427ef56ea"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a62eea8f4041e0035c15cda1427ef56ea">&#9670;&nbsp;</a></span>QX_EXPECT_MSG</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define QX_EXPECT_MSG</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">condition, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">format, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -269,21 +338,98 @@ Macros</h2></td></tr>
         <tr>
           <td></td>
           <td>)</td>
-          <td></td><td>&#160;&#160;&#160;    _QX_ASSERT_RETURN(statement, __VA_ARGS__)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Value:</b><div class="fragment"><div class="line">    _QX_ASSERT_MSG(                           \</div>
+<div class="line">        QX_EXPECT_BEFORE_DEBUG_BREAK,         \</div>
+<div class="line">        QX_EXPECT_DEBUG_BREAK,                \</div>
+<div class="line">        QX_EXPECT_AFTER_DEBUG_BREAK,          \</div>
+<div class="line">        condition,                            \</div>
+<div class="line">        format,                               \</div>
+<div class="line">        __VA_ARGS__)</div>
+</div><!-- fragment -->
+<p>Verifies that condition is true. </p>
+<p>EXPECT macros generate nonfatal failures and allow to continue running Same as QX_EXPECT, but with output possibility </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">condition</td><td>- condition to check </td></tr>
+    <tr><td class="paramname">format</td><td>- message format </td></tr>
+    <tr><td class="paramname">...</td><td>- message arguments</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>May be used in if condition:</p>
+<div class="fragment"><div class="line"><span class="keyword">const</span> <span class="keyword">auto</span> file = OpenFile(path);</div>
+<div class="line"><span class="keywordflow">if</span> (<a class="code" href="assert_8h.html#a62eea8f4041e0035c15cda1427ef56ea">QX_EXPECT_MSG</a>(file, <span class="stringliteral">&quot;Can&#39;t open %s file&quot;</span>, path.c_str()))</div>
+<div class="line">    ReadFromFile(file);</div>
+<div class="ttc" id="aassert_8h_html_a62eea8f4041e0035c15cda1427ef56ea"><div class="ttname"><a href="assert_8h.html#a62eea8f4041e0035c15cda1427ef56ea">QX_EXPECT_MSG</a></div><div class="ttdeci">#define QX_EXPECT_MSG(condition, format,...)</div><div class="ttdoc">Verifies that condition is true.</div><div class="ttdef"><b>Definition:</b> <a href="assert_8h_source.html#l00131">assert.h:131</a></div></div>
+</div><!-- fragment --> 
+<p class="definition">Definition at line <a class="el" href="assert_8h_source.html#l00131">131</a> of file <a class="el" href="assert_8h_source.html">assert.h</a>.</p>
+
+</div>
+</div>
+<a id="a2d5a737a3733e55443e0550b562d0968"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2d5a737a3733e55443e0550b562d0968">&#9670;&nbsp;</a></span>QX_EXPECT_NO_ENTRY</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define QX_EXPECT_NO_ENTRY&#160;&#160;&#160;    _QX_ASSERT_NO_ENTRY(QX_EXPECT_BEFORE_DEBUG_BREAK, QX_EXPECT_DEBUG_BREAK, QX_EXPECT_AFTER_DEBUG_BREAK)</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Check statement and return if false. </p>
-<dl class="params"><dt>Parameters</dt><dd>
+<p>Fails unconditionally if this code should not be executed. </p>
+<p>EXPECT macros generate nonfatal failures and allow to continue running </p>
+
+<p class="definition">Definition at line <a class="el" href="assert_8h_source.html#l00186">186</a> of file <a class="el" href="assert_8h_source.html">assert.h</a>.</p>
+
+</div>
+</div>
+<a id="a65b5a4597f28172e66d51dd0b5934012"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a65b5a4597f28172e66d51dd0b5934012">&#9670;&nbsp;</a></span>QX_EXPECT_RETURN</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define QX_EXPECT_RETURN</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">condition, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>...</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Value:</b><div class="fragment"><div class="line">    _QX_ASSERT_RETURN(                   \</div>
+<div class="line">        QX_EXPECT_BEFORE_DEBUG_BREAK,    \</div>
+<div class="line">        QX_EXPECT_DEBUG_BREAK,           \</div>
+<div class="line">        QX_EXPECT_AFTER_DEBUG_BREAK,     \</div>
+<div class="line">        condition,                       \</div>
+<div class="line">        __VA_ARGS__)</div>
+</div><!-- fragment -->
+<p>Verifies that condition is true and return if false. </p>
+<p>EXPECT macros generate nonfatal failures and allow to continue running </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">statement</td><td>- statement to check </td></tr>
-    <tr><td class="paramname">...</td><td>- return value if statement is false </td></tr>
+    <tr><td class="paramname">condition</td><td>- condition to check </td></tr>
+    <tr><td class="paramname">...</td><td>- return value if condition is false </td></tr>
   </table>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="assert_8h_source.html#l00156">156</a> of file <a class="el" href="assert_8h_source.html">assert.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="assert_8h_source.html#l00202">202</a> of file <a class="el" href="assert_8h_source.html">assert.h</a>.</p>
 
 </div>
 </div>
