@@ -111,27 +111,26 @@ $(function() {
 <div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="comment">        @brief destruction_callback object constructor</span></div>
 <div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="comment">        @param _destroyer - functor that will be called when object will be destroyed</span></div>
 <div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="comment">    **/</span></div>
-<div class="line"><a name="l00043"></a><span class="lineno"><a class="line" href="classqx_1_1destruction__callback.html#a8eb9992746e1779ae273041e06e8110e">   43</a></span>&#160;    <a class="code" href="classqx_1_1destruction__callback.html">destruction_callback</a>(destroyer _destroyer)</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;        : m_Destroyer(std::move(_destroyer))</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    {</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    }</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="comment">    /**</span></div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="comment">        @brief destruction_callback object destructor</span></div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="comment">    **/</span></div>
-<div class="line"><a name="l00051"></a><span class="lineno"><a class="line" href="classqx_1_1destruction__callback.html#a84b0e01dad900ea042891bbeb145b3eb">   51</a></span>&#160;    <a class="code" href="classqx_1_1destruction__callback.html#a84b0e01dad900ea042891bbeb145b3eb">~destruction_callback</a>()</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    {</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;        <span class="keywordflow">if</span> (m_Destroyer)</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;            m_Destroyer();</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    }</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160; </div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    destroyer m_Destroyer;</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;};</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160; </div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;} <span class="comment">// namespace qx</span></div>
+<div class="line"><a name="l00043"></a><span class="lineno"><a class="line" href="classqx_1_1destruction__callback.html#a8eb9992746e1779ae273041e06e8110e">   43</a></span>&#160;    <a class="code" href="classqx_1_1destruction__callback.html">destruction_callback</a>(destroyer _destroyer) : m_Destroyer(std::move(_destroyer))</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    {</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    }</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="comment">    /**</span></div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="comment">        @brief destruction_callback object destructor</span></div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="comment">    **/</span></div>
+<div class="line"><a name="l00050"></a><span class="lineno"><a class="line" href="classqx_1_1destruction__callback.html#a84b0e01dad900ea042891bbeb145b3eb">   50</a></span>&#160;    <a class="code" href="classqx_1_1destruction__callback.html#a84b0e01dad900ea042891bbeb145b3eb">~destruction_callback</a>()</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    {</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;        <span class="keywordflow">if</span> (m_Destroyer)</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;            m_Destroyer();</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    }</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160; </div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    destroyer m_Destroyer;</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;};</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160; </div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;} <span class="comment">// namespace qx</span></div>
 <div class="ttc" id="aclassqx_1_1destruction__callback_html"><div class="ttname"><a href="classqx_1_1destruction__callback.html">qx::destruction_callback</a></div><div class="ttdoc">Class for RAII: functor passed in constructor will be called in destructor.</div><div class="ttdef"><b>Definition:</b> <a href="destruction__callback_8h_source.html#l00025">destruction_callback.h:26</a></div></div>
-<div class="ttc" id="aclassqx_1_1destruction__callback_html_a84b0e01dad900ea042891bbeb145b3eb"><div class="ttname"><a href="classqx_1_1destruction__callback.html#a84b0e01dad900ea042891bbeb145b3eb">qx::destruction_callback::~destruction_callback</a></div><div class="ttdeci">~destruction_callback()</div><div class="ttdoc">destruction_callback object destructor</div><div class="ttdef"><b>Definition:</b> <a href="destruction__callback_8h_source.html#l00051">destruction_callback.h:51</a></div></div>
+<div class="ttc" id="aclassqx_1_1destruction__callback_html_a84b0e01dad900ea042891bbeb145b3eb"><div class="ttname"><a href="classqx_1_1destruction__callback.html#a84b0e01dad900ea042891bbeb145b3eb">qx::destruction_callback::~destruction_callback</a></div><div class="ttdeci">~destruction_callback()</div><div class="ttdoc">destruction_callback object destructor</div><div class="ttdef"><b>Definition:</b> <a href="destruction__callback_8h_source.html#l00050">destruction_callback.h:50</a></div></div>
 <div class="ttc" id="aclassqx_1_1destruction__callback_html_ad308360a5c60bcfad52ef37806e01e70"><div class="ttname"><a href="classqx_1_1destruction__callback.html#ad308360a5c60bcfad52ef37806e01e70">qx::destruction_callback::destruction_callback</a></div><div class="ttdeci">destruction_callback() noexcept=default</div><div class="ttdoc">destruction_callback object constructor</div></div>
 <div class="ttc" id="auseful__macros_8h_html"><div class="ttname"><a href="useful__macros_8h.html">useful_macros.h</a></div><div class="ttdoc">Useful macros.</div></div>
 </div><!-- fragment --></div><!-- contents -->

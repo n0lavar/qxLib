@@ -80,7 +80,7 @@ $(function() {
 <div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="comment">**/</span></div>
 <div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#pragma once</span></div>
 <div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160; </div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="string_8h.html">qx/containers/string/string.h</a>&gt;</span></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="lib__asserts_8h.html">qx/assert/lib_asserts.h</a>&gt;</span></div>
 <div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="useful__macros_8h.html">qx/useful_macros.h</a>&gt;</span></div>
 <div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160; </div>
 <div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="preprocessor">#include &lt;glew.h&gt;</span></div>
@@ -121,56 +121,54 @@ $(function() {
 <div class="line"><a name="l00050"></a><span class="lineno"><a class="line" href="classqx_1_1shader__base.html#a8cf3b61d8b64566ab43011c3cca09cc8">   50</a></span>&#160;    <a class="code" href="classqx_1_1shader__base.html">shader_base</a>() = default;</div>
 <div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="comment"></span> </div>
 <div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<span class="comment">    /**</span></div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<span class="comment">        @brief shader_base object constructor</span></div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;<span class="comment">        @param pszShaderCode - string with shader code</span></div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="comment">        @param pError        - error string pointer</span></div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;<span class="comment">    **/</span></div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    <a class="code" href="classqx_1_1shader__base.html">shader_base</a>(const GLchar* pszShaderCode, <span class="keywordtype">string</span>* pError = <span class="keywordtype">nullptr</span>);</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;<span class="comment">    /**</span></div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;<span class="comment">        @brief shader_base object destructor</span></div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;<span class="comment">    **/</span></div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    ~<a class="code" href="classqx_1_1shader__base.html">shader_base</a>();</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;<span class="comment">    /**</span></div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;<span class="comment">        @brief Init (compile) shader</span></div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;<span class="comment">        @param pszShaderCode - string with shader code</span></div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;<span class="comment">        @param pError        - error string pointer</span></div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;<span class="comment">    **/</span></div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classqx_1_1shader__base.html#ab229b3edf9609bea858ff50eb14e05f0">Init</a>(const GLchar* pszShaderCode, <span class="keywordtype">string</span>* pError = <span class="keywordtype">nullptr</span>);</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;<span class="comment">    /**</span></div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;<span class="comment">        @brief  Get shader name</span></div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;<span class="comment">        @retval - shader name</span></div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;<span class="comment">    **/</span></div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    GLuint <a class="code" href="classqx_1_1shader__base.html#a2b6adadaeb2ef4919c3c379e5170eb11">GetID</a>() const;</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;<span class="comment">    /**</span></div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;<span class="comment">        @brief  Get shader parameter</span></div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;<span class="comment">        @param  eParameter - shader parameter</span></div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;<span class="comment">        \see https://www.khronos.org/registry/OpenGL-Refpages/gl4/html/glGetProgram.xhtml</span></div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;<span class="comment">        @retval            - shader parameter value</span></div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;<span class="comment">    **/</span></div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;    GLint <a class="code" href="classqx_1_1shader__base.html#a2e87b997d73eed388b96f4ccc1a04fc2">GetParameter</a>(GLenum eParameter) const;</div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160; </div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;private:</div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;    GLuint m_nShader = std::numeric_limits&lt;GLuint&gt;::max();</div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;};</div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160; </div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;using <a class="code" href="classqx_1_1shader__base.html">shader_vert</a> = <a class="code" href="classqx_1_1shader__base.html">shader_base</a>&lt;GL_VERTEX_SHADER&gt;;</div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;using <a class="code" href="classqx_1_1shader__base.html">shader_tesc</a> = <a class="code" href="classqx_1_1shader__base.html">shader_base</a>&lt;GL_TESS_CONTROL_SHADER&gt;;</div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;using <a class="code" href="classqx_1_1shader__base.html">shader_tese</a> = <a class="code" href="classqx_1_1shader__base.html">shader_base</a>&lt;GL_TESS_EVALUATION_SHADER&gt;;</div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;using <a class="code" href="classqx_1_1shader__base.html">shader_geom</a> = <a class="code" href="classqx_1_1shader__base.html">shader_base</a>&lt;GL_GEOMETRY_SHADER&gt;;</div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;using <a class="code" href="classqx_1_1shader__base.html">shader_frag</a> = <a class="code" href="classqx_1_1shader__base.html">shader_base</a>&lt;GL_FRAGMENT_SHADER&gt;;</div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;using <a class="code" href="classqx_1_1shader__base.html">shader_comp</a> = <a class="code" href="classqx_1_1shader__base.html">shader_base</a>&lt;GL_COMPUTE_SHADER&gt;;</div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160; </div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;} <span class="comment">// namespace qx</span></div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160; </div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;<span class="preprocessor">#include &lt;qx/gl/shaders.inl&gt;</span></div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<span class="comment">        @brief shader_base object destructor</span></div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;<span class="comment">    **/</span></div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    ~<a class="code" href="classqx_1_1shader__base.html">shader_base</a>();</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;<span class="comment">    /**</span></div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;<span class="comment">        @brief Init (compile) shader</span></div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;<span class="comment">        @param pszShaderCode - string with shader code</span></div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;<span class="comment">    **/</span><span class="comment"></span></div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;<span class="comment">    /**</span></div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;<span class="comment">        @brief  Init (compile) shader</span></div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;<span class="comment">        @param  pszShaderCode - string with shader code</span></div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;<span class="comment">        @retval               - error or empty string if init was successful</span></div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;<span class="comment">    **/</span></div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    <span class="keywordtype">string</span> <a class="code" href="classqx_1_1shader__base.html#aadcf8a92cde30efadfeb8bd0ecae726d">Init</a>(const GLchar* pszShaderCode);</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;<span class="comment">    /**</span></div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;<span class="comment">        @brief  Get shader name</span></div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;<span class="comment">        @retval - shader name</span></div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;<span class="comment">    **/</span></div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    GLuint <a class="code" href="classqx_1_1shader__base.html#a2b6adadaeb2ef4919c3c379e5170eb11">GetID</a>() const;</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;<span class="comment">    /**</span></div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;<span class="comment">        @brief  Get shader parameter</span></div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;<span class="comment">        @param  eParameter - shader parameter</span></div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;<span class="comment">        \see https://www.khronos.org/registry/OpenGL-Refpages/gl4/html/glGetProgram.xhtml</span></div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;<span class="comment">        @retval            - shader parameter value</span></div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;<span class="comment">    **/</span></div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;    GLint <a class="code" href="classqx_1_1shader__base.html#a2e87b997d73eed388b96f4ccc1a04fc2">GetParameter</a>(GLenum eParameter) const;</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160; </div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;private:</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;    GLuint m_nShader = std::numeric_limits&lt;GLuint&gt;::max();</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;};</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160; </div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;using <a class="code" href="classqx_1_1shader__base.html">shader_vert</a> = <a class="code" href="classqx_1_1shader__base.html">shader_base</a>&lt;GL_VERTEX_SHADER&gt;;</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;using <a class="code" href="classqx_1_1shader__base.html">shader_tesc</a> = <a class="code" href="classqx_1_1shader__base.html">shader_base</a>&lt;GL_TESS_CONTROL_SHADER&gt;;</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;using <a class="code" href="classqx_1_1shader__base.html">shader_tese</a> = <a class="code" href="classqx_1_1shader__base.html">shader_base</a>&lt;GL_TESS_EVALUATION_SHADER&gt;;</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;using <a class="code" href="classqx_1_1shader__base.html">shader_geom</a> = <a class="code" href="classqx_1_1shader__base.html">shader_base</a>&lt;GL_GEOMETRY_SHADER&gt;;</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;using <a class="code" href="classqx_1_1shader__base.html">shader_frag</a> = <a class="code" href="classqx_1_1shader__base.html">shader_base</a>&lt;GL_FRAGMENT_SHADER&gt;;</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;using <a class="code" href="classqx_1_1shader__base.html">shader_comp</a> = <a class="code" href="classqx_1_1shader__base.html">shader_base</a>&lt;GL_COMPUTE_SHADER&gt;;</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160; </div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;} <span class="comment">// namespace qx</span></div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160; </div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;<span class="preprocessor">#include &lt;qx/gl/shaders.inl&gt;</span></div>
 <div class="ttc" id="aclassqx_1_1shader__base_html"><div class="ttname"><a href="classqx_1_1shader__base.html">qx::shader_base</a></div><div class="ttdoc">OpenGL base shader.</div><div class="ttdef"><b>Definition:</b> <a href="shaders_8h_source.html#l00041">shaders.h:42</a></div></div>
-<div class="ttc" id="aclassqx_1_1shader__base_html_a2b6adadaeb2ef4919c3c379e5170eb11"><div class="ttname"><a href="classqx_1_1shader__base.html#a2b6adadaeb2ef4919c3c379e5170eb11">qx::shader_base::GetID</a></div><div class="ttdeci">GLuint GetID() const</div><div class="ttdoc">Get shader name.</div><div class="ttdef"><b>Definition:</b> <a href="shaders_8inl_source.html#l00065">shaders.inl:65</a></div></div>
-<div class="ttc" id="aclassqx_1_1shader__base_html_a2e87b997d73eed388b96f4ccc1a04fc2"><div class="ttname"><a href="classqx_1_1shader__base.html#a2e87b997d73eed388b96f4ccc1a04fc2">qx::shader_base::GetParameter</a></div><div class="ttdeci">GLint GetParameter(GLenum eParameter) const</div><div class="ttdoc">Get shader parameter.</div><div class="ttdef"><b>Definition:</b> <a href="shaders_8inl_source.html#l00071">shaders.inl:71</a></div></div>
-<div class="ttc" id="aclassqx_1_1shader__base_html_ab229b3edf9609bea858ff50eb14e05f0"><div class="ttname"><a href="classqx_1_1shader__base.html#ab229b3edf9609bea858ff50eb14e05f0">qx::shader_base::Init</a></div><div class="ttdeci">void Init(const GLchar *pszShaderCode, string *pError=nullptr)</div><div class="ttdoc">Init (compile) shader.</div><div class="ttdef"><b>Definition:</b> <a href="shaders_8inl_source.html#l00028">shaders.inl:28</a></div></div>
+<div class="ttc" id="aclassqx_1_1shader__base_html_a2b6adadaeb2ef4919c3c379e5170eb11"><div class="ttname"><a href="classqx_1_1shader__base.html#a2b6adadaeb2ef4919c3c379e5170eb11">qx::shader_base::GetID</a></div><div class="ttdeci">GLuint GetID() const</div><div class="ttdoc">Get shader name.</div><div class="ttdef"><b>Definition:</b> <a href="shaders_8inl_source.html#l00055">shaders.inl:55</a></div></div>
+<div class="ttc" id="aclassqx_1_1shader__base_html_a2e87b997d73eed388b96f4ccc1a04fc2"><div class="ttname"><a href="classqx_1_1shader__base.html#a2e87b997d73eed388b96f4ccc1a04fc2">qx::shader_base::GetParameter</a></div><div class="ttdeci">GLint GetParameter(GLenum eParameter) const</div><div class="ttdoc">Get shader parameter.</div><div class="ttdef"><b>Definition:</b> <a href="shaders_8inl_source.html#l00061">shaders.inl:61</a></div></div>
+<div class="ttc" id="aclassqx_1_1shader__base_html_aadcf8a92cde30efadfeb8bd0ecae726d"><div class="ttname"><a href="classqx_1_1shader__base.html#aadcf8a92cde30efadfeb8bd0ecae726d">qx::shader_base::Init</a></div><div class="ttdeci">string Init(const GLchar *pszShaderCode)</div><div class="ttdoc">Init (compile) shader.</div><div class="ttdef"><b>Definition:</b> <a href="shaders_8inl_source.html#l00020">shaders.inl:20</a></div></div>
+<div class="ttc" id="alib__asserts_8h_html"><div class="ttname"><a href="lib__asserts_8h.html">lib_asserts.h</a></div><div class="ttdoc">Contains lib assert macros.</div></div>
 <div class="ttc" id="ashaders_8h_html_ae891b980e1f40a70e11e8bfc320d898e"><div class="ttname"><a href="shaders_8h.html#ae891b980e1f40a70e11e8bfc320d898e">qx::shader_type</a></div><div class="ttdeci">shader_type</div><div class="ttdef"><b>Definition:</b> <a href="shaders_8h_source.html#l00020">shaders.h:21</a></div></div>
 <div class="ttc" id="ashaders_8h_html_ae891b980e1f40a70e11e8bfc320d898ea005480c8a6a0357d17cff2e8eb7e060d"><div class="ttname"><a href="shaders_8h.html#ae891b980e1f40a70e11e8bfc320d898ea005480c8a6a0357d17cff2e8eb7e060d">qx::shader_type::comp</a></div><div class="ttdeci">@ comp</div><div class="ttdoc">compute</div></div>
 <div class="ttc" id="ashaders_8h_html_ae891b980e1f40a70e11e8bfc320d898ea43cf0c43c2b82750b67586fe559677a1"><div class="ttname"><a href="shaders_8h.html#ae891b980e1f40a70e11e8bfc320d898ea43cf0c43c2b82750b67586fe559677a1">qx::shader_type::frag</a></div><div class="ttdeci">@ frag</div><div class="ttdoc">fragment</div></div>
@@ -178,7 +176,6 @@ $(function() {
 <div class="ttc" id="ashaders_8h_html_ae891b980e1f40a70e11e8bfc320d898eac9dd5982f1d65f6e6b58605105e1ba6c"><div class="ttname"><a href="shaders_8h.html#ae891b980e1f40a70e11e8bfc320d898eac9dd5982f1d65f6e6b58605105e1ba6c">qx::shader_type::tese</a></div><div class="ttdeci">@ tese</div><div class="ttdoc">tessellation evaluation</div></div>
 <div class="ttc" id="ashaders_8h_html_ae891b980e1f40a70e11e8bfc320d898eadd992be5859bfc12e59d4c15b4c17cf8"><div class="ttname"><a href="shaders_8h.html#ae891b980e1f40a70e11e8bfc320d898eadd992be5859bfc12e59d4c15b4c17cf8">qx::shader_type::geom</a></div><div class="ttdeci">@ geom</div><div class="ttdoc">geometry</div></div>
 <div class="ttc" id="ashaders_8h_html_ae891b980e1f40a70e11e8bfc320d898eaf765f7a0a169f4f6654ee72a84a9eb3d"><div class="ttname"><a href="shaders_8h.html#ae891b980e1f40a70e11e8bfc320d898eaf765f7a0a169f4f6654ee72a84a9eb3d">qx::shader_type::tesc</a></div><div class="ttdeci">@ tesc</div><div class="ttdoc">tessellation control</div></div>
-<div class="ttc" id="astring_8h_html"><div class="ttname"><a href="string_8h.html">string.h</a></div><div class="ttdoc">Contains qx::string class.</div></div>
 <div class="ttc" id="auseful__macros_8h_html"><div class="ttname"><a href="useful__macros_8h.html">useful_macros.h</a></div><div class="ttdoc">Useful macros.</div></div>
 <div class="ttc" id="auseful__macros_8h_html_a37fb240669bedfbab5705feaa1973471"><div class="ttname"><a href="useful__macros_8h.html#a37fb240669bedfbab5705feaa1973471">QX_NONCOPYABLE</a></div><div class="ttdeci">#define QX_NONCOPYABLE(className)</div><div class="ttdoc">Define class as non copyable.</div><div class="ttdef"><b>Definition:</b> <a href="useful__macros_8h_source.html#l00164">useful_macros.h:164</a></div></div>
 <div class="ttc" id="auseful__macros_8h_html_afed226a730f800b62503840460223830"><div class="ttname"><a href="useful__macros_8h.html#afed226a730f800b62503840460223830">QX_MOVABLE</a></div><div class="ttdeci">#define QX_MOVABLE(className)</div><div class="ttdoc">Define class as default movable.</div><div class="ttdef"><b>Definition:</b> <a href="useful__macros_8h_source.html#l00146">useful_macros.h:146</a></div></div>

@@ -111,54 +111,50 @@ $(function() {
 <div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    constexpr T fAlpha = T(0.8f);</div>
 <div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160; </div>
 <div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = 0; i &lt; nEntries; ++i)</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;        weights[i] =</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;            fAlpha * std::pow(1 - fAlpha, <span class="keyword">static_cast&lt;</span>T<span class="keyword">&gt;</span>(nEntries - i - 1));</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160; </div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    <span class="keywordflow">return</span> weights;</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;}</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160; </div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="line"><a name="l00050"></a><span class="lineno"><a class="line" href="classqx_1_1moving__average.html#a4e9b0115aaaffd7e8926a83ea95f4469">   50</a></span>&#160;<span class="keyword">inline</span> <a class="code" href="classqx_1_1moving__average.html#a4e9b0115aaaffd7e8926a83ea95f4469">moving_average&lt;T&gt;::moving_average</a>(</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    <span class="keywordtype">size_t</span>                         nEntries,</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    T                              startValue,</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    moving_average_weights_func&lt;T&gt; func)</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    : m_Value(startValue)</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    , m_Entries(nEntries, startValue)</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    , m_Weights(func(m_Entries.size()))</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;{</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;}</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160; </div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="line"><a name="l00061"></a><span class="lineno"><a class="line" href="classqx_1_1moving__average.html#a91cdac3a2cde43391571cce3608eb9ac">   61</a></span>&#160;<span class="keyword">inline</span> T <a class="code" href="classqx_1_1moving__average.html#a91cdac3a2cde43391571cce3608eb9ac">moving_average&lt;T&gt;::update</a>(T value)</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;{</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    m_Entries.pop_front();</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;        weights[i] = fAlpha * std::pow(1 - fAlpha, <span class="keyword">static_cast&lt;</span>T<span class="keyword">&gt;</span>(nEntries - i - 1));</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160; </div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    <span class="keywordflow">return</span> weights;</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;}</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160; </div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a name="l00049"></a><span class="lineno"><a class="line" href="classqx_1_1moving__average.html#a4e9b0115aaaffd7e8926a83ea95f4469">   49</a></span>&#160;<span class="keyword">inline</span> <a class="code" href="classqx_1_1moving__average.html#a4e9b0115aaaffd7e8926a83ea95f4469">moving_average&lt;T&gt;::moving_average</a>(<span class="keywordtype">size_t</span> nEntries, T startValue, moving_average_weights_func&lt;T&gt; func)</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    : m_Value(startValue)</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    , m_Entries(nEntries, startValue)</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    , m_Weights(func(m_Entries.size()))</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;{</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;}</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160; </div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a name="l00057"></a><span class="lineno"><a class="line" href="classqx_1_1moving__average.html#a91cdac3a2cde43391571cce3608eb9ac">   57</a></span>&#160;<span class="keyword">inline</span> T <a class="code" href="classqx_1_1moving__average.html#a91cdac3a2cde43391571cce3608eb9ac">moving_average&lt;T&gt;::update</a>(T value)</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;{</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    m_Entries.pop_front();</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160; </div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    T fSumm = T(0.f);</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = 0; i &lt; m_Entries.size(); ++i)</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;        fSumm += m_Entries[i] * m_Weights[i];</div>
 <div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160; </div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    T fSumm = T(0.f);</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = 0; i &lt; m_Entries.size(); ++i)</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;        fSumm += m_Entries[i] * m_Weights[i];</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160; </div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    m_Value = fSumm / <span class="keyword">static_cast&lt;</span>T<span class="keyword">&gt;</span>(m_Entries.size());</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;    m_Entries.push_back(value);</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;    <span class="keywordflow">return</span> m_Value;</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;}</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160; </div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="line"><a name="l00075"></a><span class="lineno"><a class="line" href="classqx_1_1moving__average.html#aa86c676030171048234b82f58aa67c89">   75</a></span>&#160;<span class="keyword">inline</span> T <a class="code" href="classqx_1_1moving__average.html#aa86c676030171048234b82f58aa67c89">moving_average&lt;T&gt;::get</a>()<span class="keyword"> const</span></div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;<span class="keyword"></span>{</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;    <span class="keywordflow">return</span> m_Value;</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;}</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160; </div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="line"><a name="l00081"></a><span class="lineno"><a class="line" href="classqx_1_1moving__average.html#a21a2e82dbb4ce2fd748fb2d97738f932">   81</a></span>&#160;<span class="keyword">inline</span> <span class="keywordtype">size_t</span> <a class="code" href="classqx_1_1moving__average.html#a21a2e82dbb4ce2fd748fb2d97738f932">moving_average&lt;T&gt;::get_num_entries</a>()<span class="keyword"> const</span></div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;<span class="keyword"></span>{</div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;    <span class="keywordflow">return</span> m_Entries.size();</div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;}</div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160; </div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;} <span class="comment">// namespace qx</span></div>
-<div class="ttc" id="aclassqx_1_1moving__average_html_a21a2e82dbb4ce2fd748fb2d97738f932"><div class="ttname"><a href="classqx_1_1moving__average.html#a21a2e82dbb4ce2fd748fb2d97738f932">qx::moving_average::get_num_entries</a></div><div class="ttdeci">size_t get_num_entries() const</div><div class="ttdoc">Get number of entries in average calc.</div><div class="ttdef"><b>Definition:</b> <a href="moving__average_8inl_source.html#l00081">moving_average.inl:81</a></div></div>
-<div class="ttc" id="aclassqx_1_1moving__average_html_a4e9b0115aaaffd7e8926a83ea95f4469"><div class="ttname"><a href="classqx_1_1moving__average.html#a4e9b0115aaaffd7e8926a83ea95f4469">qx::moving_average::moving_average</a></div><div class="ttdeci">moving_average(size_t nEntries, T startValue, moving_average_weights_func&lt; T &gt; func=get_moving_average_simple_weights&lt; T &gt;)</div><div class="ttdoc">moving_average object constructor</div><div class="ttdef"><b>Definition:</b> <a href="moving__average_8inl_source.html#l00050">moving_average.inl:50</a></div></div>
-<div class="ttc" id="aclassqx_1_1moving__average_html_a91cdac3a2cde43391571cce3608eb9ac"><div class="ttname"><a href="classqx_1_1moving__average.html#a91cdac3a2cde43391571cce3608eb9ac">qx::moving_average::update</a></div><div class="ttdeci">T update(T value)</div><div class="ttdoc">Update moving average.</div><div class="ttdef"><b>Definition:</b> <a href="moving__average_8inl_source.html#l00061">moving_average.inl:61</a></div></div>
-<div class="ttc" id="aclassqx_1_1moving__average_html_aa86c676030171048234b82f58aa67c89"><div class="ttname"><a href="classqx_1_1moving__average.html#aa86c676030171048234b82f58aa67c89">qx::moving_average::get</a></div><div class="ttdeci">T get() const</div><div class="ttdoc">Get current moving average.</div><div class="ttdef"><b>Definition:</b> <a href="moving__average_8inl_source.html#l00075">moving_average.inl:75</a></div></div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    m_Value = fSumm / <span class="keyword">static_cast&lt;</span>T<span class="keyword">&gt;</span>(m_Entries.size());</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    m_Entries.push_back(value);</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    <span class="keywordflow">return</span> m_Value;</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;}</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160; </div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a name="l00071"></a><span class="lineno"><a class="line" href="classqx_1_1moving__average.html#aa86c676030171048234b82f58aa67c89">   71</a></span>&#160;<span class="keyword">inline</span> T <a class="code" href="classqx_1_1moving__average.html#aa86c676030171048234b82f58aa67c89">moving_average&lt;T&gt;::get</a>()<span class="keyword"> const</span></div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;<span class="keyword"></span>{</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;    <span class="keywordflow">return</span> m_Value;</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;}</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160; </div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a name="l00077"></a><span class="lineno"><a class="line" href="classqx_1_1moving__average.html#a21a2e82dbb4ce2fd748fb2d97738f932">   77</a></span>&#160;<span class="keyword">inline</span> <span class="keywordtype">size_t</span> <a class="code" href="classqx_1_1moving__average.html#a21a2e82dbb4ce2fd748fb2d97738f932">moving_average&lt;T&gt;::get_num_entries</a>()<span class="keyword"> const</span></div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;<span class="keyword"></span>{</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;    <span class="keywordflow">return</span> m_Entries.size();</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;}</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160; </div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;} <span class="comment">// namespace qx</span></div>
+<div class="ttc" id="aclassqx_1_1moving__average_html_a21a2e82dbb4ce2fd748fb2d97738f932"><div class="ttname"><a href="classqx_1_1moving__average.html#a21a2e82dbb4ce2fd748fb2d97738f932">qx::moving_average::get_num_entries</a></div><div class="ttdeci">size_t get_num_entries() const</div><div class="ttdoc">Get number of entries in average calc.</div><div class="ttdef"><b>Definition:</b> <a href="moving__average_8inl_source.html#l00077">moving_average.inl:77</a></div></div>
+<div class="ttc" id="aclassqx_1_1moving__average_html_a4e9b0115aaaffd7e8926a83ea95f4469"><div class="ttname"><a href="classqx_1_1moving__average.html#a4e9b0115aaaffd7e8926a83ea95f4469">qx::moving_average::moving_average</a></div><div class="ttdeci">moving_average(size_t nEntries, T startValue, moving_average_weights_func&lt; T &gt; func=get_moving_average_simple_weights&lt; T &gt;)</div><div class="ttdoc">moving_average object constructor</div><div class="ttdef"><b>Definition:</b> <a href="moving__average_8inl_source.html#l00049">moving_average.inl:49</a></div></div>
+<div class="ttc" id="aclassqx_1_1moving__average_html_a91cdac3a2cde43391571cce3608eb9ac"><div class="ttname"><a href="classqx_1_1moving__average.html#a91cdac3a2cde43391571cce3608eb9ac">qx::moving_average::update</a></div><div class="ttdeci">T update(T value)</div><div class="ttdoc">Update moving average.</div><div class="ttdef"><b>Definition:</b> <a href="moving__average_8inl_source.html#l00057">moving_average.inl:57</a></div></div>
+<div class="ttc" id="aclassqx_1_1moving__average_html_aa86c676030171048234b82f58aa67c89"><div class="ttname"><a href="classqx_1_1moving__average.html#aa86c676030171048234b82f58aa67c89">qx::moving_average::get</a></div><div class="ttdeci">T get() const</div><div class="ttdoc">Get current moving average.</div><div class="ttdef"><b>Definition:</b> <a href="moving__average_8inl_source.html#l00071">moving_average.inl:71</a></div></div>
 <div class="ttc" id="amoving__average_8h_html_aad98af413f8a5bec6733a1c0560a14c9"><div class="ttname"><a href="moving__average_8h.html#aad98af413f8a5bec6733a1c0560a14c9">qx::get_moving_average_exp_weights</a></div><div class="ttdeci">std::vector&lt; T &gt; get_moving_average_exp_weights(size_t nEntries)</div><div class="ttdoc">Generate weights for moving_average with exponential decrease, from highest weight for the most recen...</div><div class="ttdef"><b>Definition:</b> <a href="moving__average_8inl_source.html#l00033">moving_average.inl:33</a></div></div>
 <div class="ttc" id="amoving__average_8h_html_aada43078b79dc6e196f944105ac62eda"><div class="ttname"><a href="moving__average_8h.html#aada43078b79dc6e196f944105ac62eda">qx::get_moving_average_simple_weights</a></div><div class="ttdeci">std::vector&lt; T &gt; get_moving_average_simple_weights(size_t nEntries)</div><div class="ttdoc">Generate weights for moving_average as arithmetic mean.</div><div class="ttdef"><b>Definition:</b> <a href="moving__average_8inl_source.html#l00014">moving_average.inl:14</a></div></div>
 <div class="ttc" id="amoving__average_8h_html_aafcd27954378738a4df732eb2c5704c4"><div class="ttname"><a href="moving__average_8h.html#aafcd27954378738a4df732eb2c5704c4">qx::get_moving_average_linear_weights</a></div><div class="ttdeci">std::vector&lt; T &gt; get_moving_average_linear_weights(size_t nEntries)</div><div class="ttdoc">Generate weights for moving_average with linearly decrease, from highest weight for the most recent d...</div><div class="ttdef"><b>Definition:</b> <a href="moving__average_8inl_source.html#l00020">moving_average.inl:20</a></div></div>

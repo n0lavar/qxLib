@@ -118,177 +118,174 @@ $(function() {
 <div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="comment">                                           threads to unlock the sp and will construct</span></div>
 <div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="comment">                                           shared_proxy with nullptrs</span></div>
 <div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="comment">    **/</span></div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    <a class="code" href="classqx_1_1shared__proxy.html">shared_proxy</a>(</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;        Data*                     pData,</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;        SynchronizationPrimitive* pSynchronizationPrimitive,</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;        <span class="keywordtype">bool</span>                      bTryLock);</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160; </div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    QX_NONCOPYABLE(<a class="code" href="classqx_1_1shared__proxy.html">shared_proxy</a>);</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;<span class="comment">    /**</span></div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;<span class="comment">        @brief shared_proxy object constructor</span></div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;<span class="comment">        @param other - other shared_proxy rvalue ref</span></div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;<span class="comment">    **/</span></div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    <a class="code" href="classqx_1_1shared__proxy.html">shared_proxy</a>(<a class="code" href="classqx_1_1shared__proxy.html">shared_proxy</a>&amp;&amp; other) noexcept;</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;<span class="comment">    /**</span></div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;<span class="comment">        @brief  operator=</span></div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;<span class="comment">        @param  other - Assign by other shared_proxy</span></div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;<span class="comment">        @retval       - this object rvalue ref</span></div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;<span class="comment">    **/</span></div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    <a class="code" href="classqx_1_1shared__proxy.html">shared_proxy</a>&amp; <a class="code" href="classqx_1_1shared__proxy.html#aaaab8fcb8545855635c0ffa21acf1cde">operator=</a>(<a class="code" href="classqx_1_1shared__proxy.html">shared_proxy</a>&amp;&amp; other) noexcept;</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;<span class="comment">    /**</span></div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;<span class="comment">        @brief shared_proxy object destructor</span></div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;<span class="comment">    **/</span></div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    <a class="code" href="classqx_1_1shared__proxy.html#a1c2c58f704380f2c5b7c381e116290e6">~shared_proxy</a>();</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;<span class="comment">    /**</span></div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;<span class="comment">        @brief  operator-&gt;</span></div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;<span class="comment">        @retval - data pointer</span></div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;<span class="comment">    **/</span></div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;    [[nodiscard]] Data* <a class="code" href="classqx_1_1shared__proxy.html#a325ffa73c5dfe590a5c5bc74d5d508af">operator-&gt;</a>() noexcept;</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;<span class="comment">    /**</span></div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;<span class="comment">        @brief  operator-&gt;</span></div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;<span class="comment">        @retval - data const pointer</span></div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;<span class="comment">    **/</span></div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;    [[nodiscard]] <span class="keyword">const</span> Data* <a class="code" href="classqx_1_1shared__proxy.html#a325ffa73c5dfe590a5c5bc74d5d508af">operator-&gt;</a>() <span class="keyword">const</span> noexcept;</div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;<span class="comment">    /**</span></div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;<span class="comment">        @brief  operator*</span></div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;<span class="comment">        @retval - data reference</span></div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;<span class="comment">    **/</span></div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;    [[nodiscard]] Data&amp; <a class="code" href="classqx_1_1shared__proxy.html#a8f3fc76c16e66f26d53f232f8d20e131">operator*</a>() noexcept;</div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;<span class="comment">    /**</span></div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;<span class="comment">        @brief  operator*</span></div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;<span class="comment">        @retval - data const reference</span></div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;<span class="comment">    **/</span></div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;    [[nodiscard]] <span class="keyword">const</span> Data&amp; <a class="code" href="classqx_1_1shared__proxy.html#a8f3fc76c16e66f26d53f232f8d20e131">operator*</a>() <span class="keyword">const</span> noexcept;</div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160; </div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;    SynchronizationPrimitive* m_pSynchronizationPrimitive = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;    Data*                     m_pData                     = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;};</div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;<span class="comment">/**</span></div>
-<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;<span class="comment">    @class   threads_shared</span></div>
-<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;<span class="comment">    @brief   A class that provides thread-safe access to an object,</span></div>
-<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;<span class="comment">             including construction and destruction</span></div>
-<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;<span class="comment">    @details ~</span></div>
-<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;<span class="comment">    @tparam  Data                     - data type</span></div>
-<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;<span class="comment">    @tparam  SynchronizationPrimitive - synchronization primitive type</span></div>
-<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;<span class="comment">    @author  Khrapov</span></div>
-<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;<span class="comment">    @date    20.08.2021</span></div>
-<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;<span class="comment">**/</span></div>
-<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> Data, <span class="keyword">class</span> SynchronizationPrimitive = std::mutex&gt;</div>
-<div class="line"><a name="l00118"></a><span class="lineno"><a class="line" href="classqx_1_1threads__shared.html">  118</a></span>&#160;<span class="keyword">class </span><a class="code" href="classqx_1_1threads__shared.html">threads_shared</a></div>
-<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;{<span class="comment"></span></div>
-<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;<span class="comment">    /**</span></div>
-<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;<span class="comment">        @class   synchronization_primitive_raii</span></div>
-<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;<span class="comment">        @brief   class guaranties thread safe construction and destruction of threads_shared</span></div>
-<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;<span class="comment">        @details ~</span></div>
-<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;<span class="comment">        @author  Khrapov</span></div>
-<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;<span class="comment">        @date    20.08.2021</span></div>
-<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;<span class="comment">    **/</span></div>
-<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;    <span class="keyword">class </span>synchronization_primitive_raii</div>
-<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;    {</div>
-<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;    <span class="keyword">public</span>:<span class="comment"></span></div>
-<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;<span class="comment">        /**</span></div>
-<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;<span class="comment">            @brief synchronization_primitive_raii object constructor</span></div>
-<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;<span class="comment">        **/</span></div>
-<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;        synchronization_primitive_raii();</div>
-<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;<span class="comment">        /**</span></div>
-<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;<span class="comment">            @brief synchronization_primitive_raii object destructor</span></div>
-<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;<span class="comment">        **/</span></div>
-<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;        ~synchronization_primitive_raii();</div>
-<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;<span class="comment">        /**</span></div>
-<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;<span class="comment">            @brief  Get synchronization primitive stored in proxy</span></div>
-<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;<span class="comment">            @retval - synchronization primitive</span></div>
-<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;<span class="comment">        **/</span></div>
-<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;        SynchronizationPrimitive* get_object() noexcept;</div>
-<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160; </div>
-<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;    <span class="keyword">private</span>:</div>
-<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;        SynchronizationPrimitive sp;</div>
-<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;    };</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    <a class="code" href="classqx_1_1shared__proxy.html">shared_proxy</a>(Data* pData, SynchronizationPrimitive* pSynchronizationPrimitive, <span class="keywordtype">bool</span> bTryLock);</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160; </div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    QX_NONCOPYABLE(<a class="code" href="classqx_1_1shared__proxy.html">shared_proxy</a>);</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="comment">    /**</span></div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;<span class="comment">        @brief shared_proxy object constructor</span></div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;<span class="comment">        @param other - other shared_proxy rvalue ref</span></div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;<span class="comment">    **/</span></div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    <a class="code" href="classqx_1_1shared__proxy.html">shared_proxy</a>(<a class="code" href="classqx_1_1shared__proxy.html">shared_proxy</a>&amp;&amp; other) noexcept;</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;<span class="comment">    /**</span></div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;<span class="comment">        @brief  operator=</span></div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;<span class="comment">        @param  other - Assign by other shared_proxy</span></div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;<span class="comment">        @retval       - this object rvalue ref</span></div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;<span class="comment">    **/</span></div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    <a class="code" href="classqx_1_1shared__proxy.html">shared_proxy</a>&amp; <a class="code" href="classqx_1_1shared__proxy.html#aaaab8fcb8545855635c0ffa21acf1cde">operator=</a>(<a class="code" href="classqx_1_1shared__proxy.html">shared_proxy</a>&amp;&amp; other) noexcept;</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;<span class="comment">    /**</span></div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;<span class="comment">        @brief shared_proxy object destructor</span></div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;<span class="comment">    **/</span></div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;    <a class="code" href="classqx_1_1shared__proxy.html#a1c2c58f704380f2c5b7c381e116290e6">~shared_proxy</a>();</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;<span class="comment">    /**</span></div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;<span class="comment">        @brief  operator-&gt;</span></div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;<span class="comment">        @retval - data pointer</span></div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;<span class="comment">    **/</span></div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;    [[nodiscard]] Data* <a class="code" href="classqx_1_1shared__proxy.html#a325ffa73c5dfe590a5c5bc74d5d508af">operator-&gt;</a>() noexcept;</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;<span class="comment">    /**</span></div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;<span class="comment">        @brief  operator-&gt;</span></div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;<span class="comment">        @retval - data const pointer</span></div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;<span class="comment">    **/</span></div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;    [[nodiscard]] <span class="keyword">const</span> Data* <a class="code" href="classqx_1_1shared__proxy.html#a325ffa73c5dfe590a5c5bc74d5d508af">operator-&gt;</a>() <span class="keyword">const</span> noexcept;</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;<span class="comment">    /**</span></div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;<span class="comment">        @brief  operator*</span></div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;<span class="comment">        @retval - data reference</span></div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;<span class="comment">    **/</span></div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;    [[nodiscard]] Data&amp; <a class="code" href="classqx_1_1shared__proxy.html#a8f3fc76c16e66f26d53f232f8d20e131">operator*</a>() noexcept;</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;<span class="comment">    /**</span></div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;<span class="comment">        @brief  operator*</span></div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;<span class="comment">        @retval - data const reference</span></div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;<span class="comment">    **/</span></div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;    [[nodiscard]] <span class="keyword">const</span> Data&amp; <a class="code" href="classqx_1_1shared__proxy.html#a8f3fc76c16e66f26d53f232f8d20e131">operator*</a>() <span class="keyword">const</span> noexcept;</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160; </div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;    SynchronizationPrimitive* m_pSynchronizationPrimitive = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;    Data*                     m_pData                     = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;};</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;<span class="comment">/**</span></div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;<span class="comment">    @class   threads_shared</span></div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;<span class="comment">    @brief   A class that provides thread-safe access to an object,</span></div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;<span class="comment">             including construction and destruction</span></div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;<span class="comment">    @details ~</span></div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;<span class="comment">    @tparam  Data                     - data type</span></div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;<span class="comment">    @tparam  SynchronizationPrimitive - synchronization primitive type</span></div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;<span class="comment">    @author  Khrapov</span></div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;<span class="comment">    @date    20.08.2021</span></div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;<span class="comment">**/</span></div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> Data, <span class="keyword">class</span> SynchronizationPrimitive = std::mutex&gt;</div>
+<div class="line"><a name="l00115"></a><span class="lineno"><a class="line" href="classqx_1_1threads__shared.html">  115</a></span>&#160;<span class="keyword">class </span><a class="code" href="classqx_1_1threads__shared.html">threads_shared</a></div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;{<span class="comment"></span></div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;<span class="comment">    /**</span></div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;<span class="comment">        @class   synchronization_primitive_raii</span></div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;<span class="comment">        @brief   class guaranties thread safe construction and destruction of threads_shared</span></div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;<span class="comment">        @details ~</span></div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;<span class="comment">        @author  Khrapov</span></div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;<span class="comment">        @date    20.08.2021</span></div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;<span class="comment">    **/</span></div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;    <span class="keyword">class </span>synchronization_primitive_raii</div>
+<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;    {</div>
+<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;    <span class="keyword">public</span>:<span class="comment"></span></div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;<span class="comment">        /**</span></div>
+<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;<span class="comment">            @brief synchronization_primitive_raii object constructor</span></div>
+<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;<span class="comment">        **/</span></div>
+<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;        synchronization_primitive_raii();</div>
+<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;<span class="comment">        /**</span></div>
+<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;<span class="comment">            @brief synchronization_primitive_raii object destructor</span></div>
+<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;<span class="comment">        **/</span></div>
+<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;        ~synchronization_primitive_raii();</div>
+<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;<span class="comment">        /**</span></div>
+<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;<span class="comment">            @brief  Get synchronization primitive stored in proxy</span></div>
+<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;<span class="comment">            @retval - synchronization primitive</span></div>
+<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;<span class="comment">        **/</span></div>
+<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;        SynchronizationPrimitive* get_object() noexcept;</div>
+<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160; </div>
+<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;    <span class="keyword">private</span>:</div>
+<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;        SynchronizationPrimitive sp;</div>
+<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;    };</div>
+<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160; </div>
+<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;    <span class="keyword">using</span> <a class="code" href="classqx_1_1shared__proxy.html">proxy</a> = <a class="code" href="classqx_1_1shared__proxy.html">shared_proxy&lt;Data, SynchronizationPrimitive&gt;</a>;</div>
 <div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160; </div>
-<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;    <span class="keyword">using</span> <a class="code" href="classqx_1_1shared__proxy.html">proxy</a> = <a class="code" href="classqx_1_1shared__proxy.html">shared_proxy&lt;Data, SynchronizationPrimitive&gt;</a>;</div>
-<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160; </div>
-<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;    QX_NONCOPYMOVABLE(<a class="code" href="classqx_1_1threads__shared.html">threads_shared</a>);</div>
-<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;<span class="comment">    /**</span></div>
-<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;<span class="comment">        @brief  threads_shared object constructor</span></div>
-<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;<span class="comment">        @tparam Args - template parameter pack type</span></div>
-<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;<span class="comment">        @param  args - arguments to constructing Data object</span></div>
-<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;<span class="comment">    **/</span></div>
-<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;    <span class="keyword">template</span>&lt;<span class="keyword">class</span>... Args&gt;</div>
-<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;    <a class="code" href="classqx_1_1threads__shared.html#afc27e6a9e5e17b083f3f01c27d173bdc">threads_shared</a>(Args&amp;&amp;... args);</div>
-<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;<span class="comment">    /**</span></div>
-<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;<span class="comment">        @brief threads_shared object destructor</span></div>
-<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;<span class="comment">    **/</span></div>
-<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;    <a class="code" href="classqx_1_1threads__shared.html#abddcb486e3d24cba3d752ec1ee23dec9">~threads_shared</a>();</div>
-<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;<span class="comment">    /**</span></div>
-<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;<span class="comment">        @brief  Wait for other threads to finish work with data object and retrieve</span></div>
-<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;<span class="comment">                proxy object</span></div>
-<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;<span class="comment">        @retval - proxy that provides access to an object stored in threads_shared</span></div>
-<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;<span class="comment">                  and provides raii for synchronization primitives</span></div>
-<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;<span class="comment">    **/</span></div>
-<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;    [[nodiscard]] <a class="code" href="classqx_1_1shared__proxy.html">proxy</a> <a class="code" href="classqx_1_1threads__shared.html#ab7224be96c0026a5f693c7bf37d39405">lock</a>();</div>
-<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;<span class="comment">    /**</span></div>
-<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;<span class="comment">        @brief  Try to lock synchronization primitive and get proxy</span></div>
-<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;<span class="comment">        @retval - proxy that provides access to an object stored</span></div>
-<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;<span class="comment">                  in threads_shared or std::nullopt</span></div>
-<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;<span class="comment">    **/</span></div>
-<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;    [[nodiscard]] std::optional&lt;proxy&gt; <a class="code" href="classqx_1_1threads__shared.html#a9edb9fe0308c2a522847b7d90756a756">try_lock</a>();</div>
-<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160; </div>
-<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;    synchronization_primitive_raii m_SynchronizationPrimitiveRAII;</div>
-<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;    Data                           m_Data;</div>
-<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;};</div>
-<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160; </div>
-<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> SynchronizationPrimitive&gt;</div>
-<div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;<span class="keyword">inline</span> <span class="keywordtype">void</span> lock_synchronization_primitive(SynchronizationPrimitive* pSP)</div>
-<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;{</div>
-<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;    pSP-&gt;lock();</div>
-<div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;}</div>
-<div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160; </div>
-<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> SynchronizationPrimitive&gt;</div>
-<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;<span class="keyword">inline</span> <span class="keywordtype">void</span> unlock_synchronization_primitive(SynchronizationPrimitive* pSP)</div>
-<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;{</div>
-<div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160;    pSP-&gt;unlock();</div>
-<div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160;}</div>
-<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160; </div>
-<div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> SynchronizationPrimitive&gt;</div>
-<div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160;<span class="keyword">inline</span> <span class="keywordtype">bool</span> try_lock_synchronization_primitive(SynchronizationPrimitive* pSP)</div>
-<div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;{</div>
-<div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;    <span class="keywordflow">return</span> pSP-&gt;try_lock();</div>
-<div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160;}</div>
-<div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160; </div>
-<div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160;} <span class="comment">// namespace qx</span></div>
-<div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160; </div>
-<div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="threads__shared_8inl.html">qx/thread/threads_shared.inl</a>&gt;</span></div>
+<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;    QX_NONCOPYMOVABLE(<a class="code" href="classqx_1_1threads__shared.html">threads_shared</a>);</div>
+<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;<span class="comment">    /**</span></div>
+<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;<span class="comment">        @brief  threads_shared object constructor</span></div>
+<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;<span class="comment">        @tparam Args - template parameter pack type</span></div>
+<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;<span class="comment">        @param  args - arguments to constructing Data object</span></div>
+<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;<span class="comment">    **/</span></div>
+<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;    <span class="keyword">template</span>&lt;<span class="keyword">class</span>... Args&gt;</div>
+<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;    <a class="code" href="classqx_1_1threads__shared.html#afc27e6a9e5e17b083f3f01c27d173bdc">threads_shared</a>(Args&amp;&amp;... args);</div>
+<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;<span class="comment">    /**</span></div>
+<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;<span class="comment">        @brief threads_shared object destructor</span></div>
+<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;<span class="comment">    **/</span></div>
+<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;    <a class="code" href="classqx_1_1threads__shared.html#abddcb486e3d24cba3d752ec1ee23dec9">~threads_shared</a>();</div>
+<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;<span class="comment">    /**</span></div>
+<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;<span class="comment">        @brief  Wait for other threads to finish work with data object and retrieve</span></div>
+<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;<span class="comment">                proxy object</span></div>
+<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;<span class="comment">        @retval - proxy that provides access to an object stored in threads_shared</span></div>
+<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;<span class="comment">                  and provides raii for synchronization primitives</span></div>
+<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;<span class="comment">    **/</span></div>
+<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;    [[nodiscard]] <a class="code" href="classqx_1_1shared__proxy.html">proxy</a> <a class="code" href="classqx_1_1threads__shared.html#ab7224be96c0026a5f693c7bf37d39405">lock</a>();</div>
+<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;<span class="comment">    /**</span></div>
+<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;<span class="comment">        @brief  Try to lock synchronization primitive and get proxy</span></div>
+<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;<span class="comment">        @retval - proxy that provides access to an object stored</span></div>
+<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;<span class="comment">                  in threads_shared or std::nullopt</span></div>
+<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;<span class="comment">    **/</span></div>
+<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;    [[nodiscard]] std::optional&lt;proxy&gt; <a class="code" href="classqx_1_1threads__shared.html#a9edb9fe0308c2a522847b7d90756a756">try_lock</a>();</div>
+<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160; </div>
+<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;    synchronization_primitive_raii m_SynchronizationPrimitiveRAII;</div>
+<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;    Data                           m_Data;</div>
+<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;};</div>
+<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160; </div>
+<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> SynchronizationPrimitive&gt;</div>
+<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;<span class="keyword">inline</span> <span class="keywordtype">void</span> lock_synchronization_primitive(SynchronizationPrimitive* pSP)</div>
+<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;{</div>
+<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;    pSP-&gt;lock();</div>
+<div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;}</div>
+<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160; </div>
+<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> SynchronizationPrimitive&gt;</div>
+<div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;<span class="keyword">inline</span> <span class="keywordtype">void</span> unlock_synchronization_primitive(SynchronizationPrimitive* pSP)</div>
+<div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;{</div>
+<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;    pSP-&gt;unlock();</div>
+<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;}</div>
+<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160; </div>
+<div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> SynchronizationPrimitive&gt;</div>
+<div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160;<span class="keyword">inline</span> <span class="keywordtype">bool</span> try_lock_synchronization_primitive(SynchronizationPrimitive* pSP)</div>
+<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160;{</div>
+<div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160;    <span class="keywordflow">return</span> pSP-&gt;try_lock();</div>
+<div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160;}</div>
+<div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160; </div>
+<div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;} <span class="comment">// namespace qx</span></div>
+<div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160; </div>
+<div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="threads__shared_8inl.html">qx/thread/threads_shared.inl</a>&gt;</span></div>
 <div class="ttc" id="aclassqx_1_1shared__proxy_html"><div class="ttname"><a href="classqx_1_1shared__proxy.html">qx::shared_proxy</a></div><div class="ttdoc">A proxy class that provides access to an object stored in threads_shared and provides raii for synchr...</div><div class="ttdef"><b>Definition:</b> <a href="threads__shared_8h_source.html#l00037">threads_shared.h:38</a></div></div>
-<div class="ttc" id="aclassqx_1_1shared__proxy_html_a1c2c58f704380f2c5b7c381e116290e6"><div class="ttname"><a href="classqx_1_1shared__proxy.html#a1c2c58f704380f2c5b7c381e116290e6">qx::shared_proxy::~shared_proxy</a></div><div class="ttdeci">~shared_proxy()</div><div class="ttdoc">shared_proxy object destructor</div><div class="ttdef"><b>Definition:</b> <a href="threads__shared_8inl_source.html#l00056">threads_shared.inl:56</a></div></div>
-<div class="ttc" id="aclassqx_1_1shared__proxy_html_a325ffa73c5dfe590a5c5bc74d5d508af"><div class="ttname"><a href="classqx_1_1shared__proxy.html#a325ffa73c5dfe590a5c5bc74d5d508af">qx::shared_proxy::operator-&gt;</a></div><div class="ttdeci">Data * operator-&gt;() noexcept</div><div class="ttdoc">operator-&gt;</div><div class="ttdef"><b>Definition:</b> <a href="threads__shared_8inl_source.html#l00063">threads_shared.inl:63</a></div></div>
-<div class="ttc" id="aclassqx_1_1shared__proxy_html_a8f3fc76c16e66f26d53f232f8d20e131"><div class="ttname"><a href="classqx_1_1shared__proxy.html#a8f3fc76c16e66f26d53f232f8d20e131">qx::shared_proxy::operator*</a></div><div class="ttdeci">Data &amp; operator*() noexcept</div><div class="ttdoc">operator*</div><div class="ttdef"><b>Definition:</b> <a href="threads__shared_8inl_source.html#l00077">threads_shared.inl:77</a></div></div>
-<div class="ttc" id="aclassqx_1_1shared__proxy_html_aaaab8fcb8545855635c0ffa21acf1cde"><div class="ttname"><a href="classqx_1_1shared__proxy.html#aaaab8fcb8545855635c0ffa21acf1cde">qx::shared_proxy::operator=</a></div><div class="ttdeci">shared_proxy &amp; operator=(shared_proxy &amp;&amp;other) noexcept</div><div class="ttdoc">operator=</div><div class="ttdef"><b>Definition:</b> <a href="threads__shared_8inl_source.html#l00048">threads_shared.inl:48</a></div></div>
-<div class="ttc" id="aclassqx_1_1threads__shared_html"><div class="ttname"><a href="classqx_1_1threads__shared.html">qx::threads_shared</a></div><div class="ttdoc">A class that provides thread-safe access to an object, including construction and destruction.</div><div class="ttdef"><b>Definition:</b> <a href="threads__shared_8h_source.html#l00118">threads_shared.h:119</a></div></div>
-<div class="ttc" id="aclassqx_1_1threads__shared_html_a9edb9fe0308c2a522847b7d90756a756"><div class="ttname"><a href="classqx_1_1threads__shared.html#a9edb9fe0308c2a522847b7d90756a756">qx::threads_shared::try_lock</a></div><div class="ttdeci">std::optional&lt; proxy &gt; try_lock()</div><div class="ttdoc">Try to lock synchronization primitive and get proxy.</div><div class="ttdef"><b>Definition:</b> <a href="threads__shared_8inl_source.html#l00152">threads_shared.inl:152</a></div></div>
-<div class="ttc" id="aclassqx_1_1threads__shared_html_ab7224be96c0026a5f693c7bf37d39405"><div class="ttname"><a href="classqx_1_1threads__shared.html#ab7224be96c0026a5f693c7bf37d39405">qx::threads_shared::lock</a></div><div class="ttdeci">proxy lock()</div><div class="ttdoc">Wait for other threads to finish work with data object and retrieve proxy object.</div><div class="ttdef"><b>Definition:</b> <a href="threads__shared_8inl_source.html#l00144">threads_shared.inl:144</a></div></div>
-<div class="ttc" id="aclassqx_1_1threads__shared_html_abddcb486e3d24cba3d752ec1ee23dec9"><div class="ttname"><a href="classqx_1_1threads__shared.html#abddcb486e3d24cba3d752ec1ee23dec9">qx::threads_shared::~threads_shared</a></div><div class="ttdeci">~threads_shared()</div><div class="ttdoc">threads_shared object destructor</div><div class="ttdef"><b>Definition:</b> <a href="threads__shared_8inl_source.html#l00134">threads_shared.inl:134</a></div></div>
-<div class="ttc" id="aclassqx_1_1threads__shared_html_afc27e6a9e5e17b083f3f01c27d173bdc"><div class="ttname"><a href="classqx_1_1threads__shared.html#afc27e6a9e5e17b083f3f01c27d173bdc">qx::threads_shared::threads_shared</a></div><div class="ttdeci">threads_shared(Args &amp;&amp;... args)</div><div class="ttdoc">threads_shared object constructor</div><div class="ttdef"><b>Definition:</b> <a href="threads__shared_8inl_source.html#l00123">threads_shared.inl:123</a></div></div>
+<div class="ttc" id="aclassqx_1_1shared__proxy_html_a1c2c58f704380f2c5b7c381e116290e6"><div class="ttname"><a href="classqx_1_1shared__proxy.html#a1c2c58f704380f2c5b7c381e116290e6">qx::shared_proxy::~shared_proxy</a></div><div class="ttdeci">~shared_proxy()</div><div class="ttdoc">shared_proxy object destructor</div><div class="ttdef"><b>Definition:</b> <a href="threads__shared_8inl_source.html#l00054">threads_shared.inl:54</a></div></div>
+<div class="ttc" id="aclassqx_1_1shared__proxy_html_a325ffa73c5dfe590a5c5bc74d5d508af"><div class="ttname"><a href="classqx_1_1shared__proxy.html#a325ffa73c5dfe590a5c5bc74d5d508af">qx::shared_proxy::operator-&gt;</a></div><div class="ttdeci">Data * operator-&gt;() noexcept</div><div class="ttdoc">operator-&gt;</div><div class="ttdef"><b>Definition:</b> <a href="threads__shared_8inl_source.html#l00061">threads_shared.inl:61</a></div></div>
+<div class="ttc" id="aclassqx_1_1shared__proxy_html_a8f3fc76c16e66f26d53f232f8d20e131"><div class="ttname"><a href="classqx_1_1shared__proxy.html#a8f3fc76c16e66f26d53f232f8d20e131">qx::shared_proxy::operator*</a></div><div class="ttdeci">Data &amp; operator*() noexcept</div><div class="ttdoc">operator*</div><div class="ttdef"><b>Definition:</b> <a href="threads__shared_8inl_source.html#l00073">threads_shared.inl:73</a></div></div>
+<div class="ttc" id="aclassqx_1_1shared__proxy_html_aaaab8fcb8545855635c0ffa21acf1cde"><div class="ttname"><a href="classqx_1_1shared__proxy.html#aaaab8fcb8545855635c0ffa21acf1cde">qx::shared_proxy::operator=</a></div><div class="ttdeci">shared_proxy &amp; operator=(shared_proxy &amp;&amp;other) noexcept</div><div class="ttdoc">operator=</div><div class="ttdef"><b>Definition:</b> <a href="threads__shared_8inl_source.html#l00045">threads_shared.inl:45</a></div></div>
+<div class="ttc" id="aclassqx_1_1threads__shared_html"><div class="ttname"><a href="classqx_1_1threads__shared.html">qx::threads_shared</a></div><div class="ttdoc">A class that provides thread-safe access to an object, including construction and destruction.</div><div class="ttdef"><b>Definition:</b> <a href="threads__shared_8h_source.html#l00115">threads_shared.h:116</a></div></div>
+<div class="ttc" id="aclassqx_1_1threads__shared_html_a9edb9fe0308c2a522847b7d90756a756"><div class="ttname"><a href="classqx_1_1threads__shared.html#a9edb9fe0308c2a522847b7d90756a756">qx::threads_shared::try_lock</a></div><div class="ttdeci">std::optional&lt; proxy &gt; try_lock()</div><div class="ttdoc">Try to lock synchronization primitive and get proxy.</div><div class="ttdef"><b>Definition:</b> <a href="threads__shared_8inl_source.html#l00140">threads_shared.inl:140</a></div></div>
+<div class="ttc" id="aclassqx_1_1threads__shared_html_ab7224be96c0026a5f693c7bf37d39405"><div class="ttname"><a href="classqx_1_1threads__shared.html#ab7224be96c0026a5f693c7bf37d39405">qx::threads_shared::lock</a></div><div class="ttdeci">proxy lock()</div><div class="ttdoc">Wait for other threads to finish work with data object and retrieve proxy object.</div><div class="ttdef"><b>Definition:</b> <a href="threads__shared_8inl_source.html#l00131">threads_shared.inl:132</a></div></div>
+<div class="ttc" id="aclassqx_1_1threads__shared_html_abddcb486e3d24cba3d752ec1ee23dec9"><div class="ttname"><a href="classqx_1_1threads__shared.html#abddcb486e3d24cba3d752ec1ee23dec9">qx::threads_shared::~threads_shared</a></div><div class="ttdeci">~threads_shared()</div><div class="ttdoc">threads_shared object destructor</div><div class="ttdef"><b>Definition:</b> <a href="threads__shared_8inl_source.html#l00122">threads_shared.inl:122</a></div></div>
+<div class="ttc" id="aclassqx_1_1threads__shared_html_afc27e6a9e5e17b083f3f01c27d173bdc"><div class="ttname"><a href="classqx_1_1threads__shared.html#afc27e6a9e5e17b083f3f01c27d173bdc">qx::threads_shared::threads_shared</a></div><div class="ttdeci">threads_shared(Args &amp;&amp;... args)</div><div class="ttdoc">threads_shared object constructor</div><div class="ttdef"><b>Definition:</b> <a href="threads__shared_8inl_source.html#l00113">threads_shared.inl:113</a></div></div>
 <div class="ttc" id="athreads__shared_8inl_html"><div class="ttname"><a href="threads__shared_8inl.html">threads_shared.inl</a></div></div>
 <div class="ttc" id="auseful__macros_8h_html"><div class="ttname"><a href="useful__macros_8h.html">useful_macros.h</a></div><div class="ttdoc">Useful macros.</div></div>
 </div><!-- fragment --></div><!-- contents -->

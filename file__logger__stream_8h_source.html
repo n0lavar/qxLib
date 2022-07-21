@@ -136,54 +136,50 @@ $(function() {
 <div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;<span class="comment">        @param logUnit   - log unit info</span></div>
 <div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;<span class="comment">        @param eLogLevel - this message log level</span></div>
 <div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;<span class="comment">    **/</span></div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classqx_1_1file__logger__stream.html#abc7bdfcc653daeb34b56a6e7dcf08919">process_output</a>(</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;        std::string_view svMessage,</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;        <span class="keyword">const</span> <a class="code" href="structqx_1_1log__unit.html">log_unit</a>&amp;  logUnit,</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;        log_level        eLogLevel) <span class="keyword">override</span>;</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;<span class="comment">    /**</span></div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;<span class="comment">        @brief Set logs folder</span></div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;<span class="comment">        @param svFolder - logs folder</span></div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;<span class="comment">    **/</span></div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classqx_1_1file__logger__stream.html#a497fbdca4903780920ec2d1905d8ea8f">set_logs_folder</a>(std::string_view svFolder) noexcept;</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;<span class="comment">    /**</span></div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;<span class="comment">        @brief Register output to specific file for specific unit</span></div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;<span class="comment">        @param svUnitName - unit name</span></div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;<span class="comment">        @param svFileName - file name</span></div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;<span class="comment">        @param eLogPolicy - log file policy</span></div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;<span class="comment">    **/</span></div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classqx_1_1file__logger__stream.html#a99f07a37beb90614f37bbd404e76f940">register_file</a>(</div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;        std::string_view svUnitName,</div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;        std::string_view svFileName,</div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;        <a class="code" href="file__logger__stream_8h.html#aaab6d2d26ae57b1521451921e1273220">log_file_policy</a>  eLogPolicy = log_file_policy::append);</div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160; </div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;<span class="keyword">private</span>:<span class="comment"></span></div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;<span class="comment">    /**</span></div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;<span class="comment">        @brief Fill string with file folder path</span></div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;<span class="comment">        @param eLogFilePolicy - file log policy</span></div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;<span class="comment">        @param sFileFolder    - output string</span></div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;<span class="comment">    **/</span></div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;    <span class="keywordtype">void</span> fill_file_folder(<a class="code" href="file__logger__stream_8h.html#aaab6d2d26ae57b1521451921e1273220">log_file_policy</a> eLogFilePolicy, <span class="keywordtype">string</span>&amp; sFileFolder)</div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;        <span class="keyword">const</span> noexcept;</div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160; </div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;    std::unordered_map&lt;string_hash, log_file_data&gt; m_Files;</div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;    <span class="keywordtype">string</span>                                         m_sFolder;</div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;    <span class="keywordtype">string</span>                                         m_sBufferPath;</div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;    <span class="keywordtype">string</span>                                         m_sSessionTime;</div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;};</div>
-<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160; </div>
-<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;} <span class="comment">// namespace qx</span></div>
-<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160; </div>
-<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="file__logger__stream_8inl.html">qx/logger/file_logger_stream.inl</a>&gt;</span></div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classqx_1_1file__logger__stream.html#abc7bdfcc653daeb34b56a6e7dcf08919">process_output</a>(std::string_view svMessage, <span class="keyword">const</span> <a class="code" href="structqx_1_1log__unit.html">log_unit</a>&amp; logUnit, log_level eLogLevel) <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;<span class="comment">    /**</span></div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;<span class="comment">        @brief Set logs folder</span></div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;<span class="comment">        @param svFolder - logs folder</span></div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;<span class="comment">    **/</span></div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classqx_1_1file__logger__stream.html#a497fbdca4903780920ec2d1905d8ea8f">set_logs_folder</a>(std::string_view svFolder) noexcept;</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;<span class="comment">    /**</span></div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;<span class="comment">        @brief Register output to specific file for specific unit</span></div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;<span class="comment">        @param svUnitName - unit name</span></div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;<span class="comment">        @param svFileName - file name</span></div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;<span class="comment">        @param eLogPolicy - log file policy</span></div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;<span class="comment">    **/</span></div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classqx_1_1file__logger__stream.html#a99f07a37beb90614f37bbd404e76f940">register_file</a>(</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;        std::string_view svUnitName,</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;        std::string_view svFileName,</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;        <a class="code" href="file__logger__stream_8h.html#aaab6d2d26ae57b1521451921e1273220">log_file_policy</a>  eLogPolicy = log_file_policy::append);</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160; </div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;<span class="keyword">private</span>:<span class="comment"></span></div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;<span class="comment">    /**</span></div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;<span class="comment">        @brief Fill string with file folder path</span></div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;<span class="comment">        @param eLogFilePolicy - file log policy</span></div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;<span class="comment">        @param sFileFolder    - output string</span></div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;<span class="comment">    **/</span></div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;    <span class="keywordtype">void</span> fill_file_folder(<a class="code" href="file__logger__stream_8h.html#aaab6d2d26ae57b1521451921e1273220">log_file_policy</a> eLogFilePolicy, <span class="keywordtype">string</span>&amp; sFileFolder) <span class="keyword">const</span> noexcept;</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160; </div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;    std::unordered_map&lt;string_hash, log_file_data&gt; m_Files;</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;    <span class="keywordtype">string</span>                                         m_sFolder;</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;    <span class="keywordtype">string</span>                                         m_sBufferPath;</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;    <span class="keywordtype">string</span>                                         m_sSessionTime;</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;};</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160; </div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;} <span class="comment">// namespace qx</span></div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160; </div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="file__logger__stream_8inl.html">qx/logger/file_logger_stream.inl</a>&gt;</span></div>
 <div class="ttc" id="abase__logger__stream_8h_html"><div class="ttname"><a href="base__logger__stream_8h.html">base_logger_stream.h</a></div><div class="ttdoc">Contains qx::base_logger_stream class.</div></div>
 <div class="ttc" id="aclassqx_1_1base__logger__stream_html"><div class="ttname"><a href="classqx_1_1base__logger__stream.html">qx::base_logger_stream</a></div><div class="ttdoc">Base class for logger streams.</div><div class="ttdef"><b>Definition:</b> <a href="base__logger__stream_8h_source.html#l00072">base_logger_stream.h:73</a></div></div>
 <div class="ttc" id="aclassqx_1_1file__logger__stream_html"><div class="ttname"><a href="classqx_1_1file__logger__stream.html">qx::file_logger_stream</a></div><div class="ttdoc">Logger stream for file output.</div><div class="ttdef"><b>Definition:</b> <a href="file__logger__stream_8h_source.html#l00036">file_logger_stream.h:37</a></div></div>
 <div class="ttc" id="aclassqx_1_1file__logger__stream_html_a1f03b48e0e9bc9c368882928d4e3c6b7"><div class="ttname"><a href="classqx_1_1file__logger__stream.html#a1f03b48e0e9bc9c368882928d4e3c6b7">qx::file_logger_stream::~file_logger_stream</a></div><div class="ttdeci">virtual ~file_logger_stream()</div><div class="ttdoc">file_logger_stream object destructor</div><div class="ttdef"><b>Definition:</b> <a href="file__logger__stream_8inl_source.html#l00020">file_logger_stream.inl:20</a></div></div>
 <div class="ttc" id="aclassqx_1_1file__logger__stream_html_a22dcd096b85f1c0866e0b8ee83c6fe57"><div class="ttname"><a href="classqx_1_1file__logger__stream.html#a22dcd096b85f1c0866e0b8ee83c6fe57">qx::file_logger_stream::file_logger_stream</a></div><div class="ttdeci">file_logger_stream()</div><div class="ttdoc">file_logger_stream object constructor</div><div class="ttdef"><b>Definition:</b> <a href="file__logger__stream_8inl_source.html#l00013">file_logger_stream.inl:13</a></div></div>
-<div class="ttc" id="aclassqx_1_1file__logger__stream_html_a497fbdca4903780920ec2d1905d8ea8f"><div class="ttname"><a href="classqx_1_1file__logger__stream.html#a497fbdca4903780920ec2d1905d8ea8f">qx::file_logger_stream::set_logs_folder</a></div><div class="ttdeci">void set_logs_folder(std::string_view svFolder) noexcept</div><div class="ttdoc">Set logs folder.</div><div class="ttdef"><b>Definition:</b> <a href="file__logger__stream_8inl_source.html#l00080">file_logger_stream.inl:80</a></div></div>
-<div class="ttc" id="aclassqx_1_1file__logger__stream_html_a99f07a37beb90614f37bbd404e76f940"><div class="ttname"><a href="classqx_1_1file__logger__stream.html#a99f07a37beb90614f37bbd404e76f940">qx::file_logger_stream::register_file</a></div><div class="ttdeci">void register_file(std::string_view svUnitName, std::string_view svFileName, log_file_policy eLogPolicy=log_file_policy::append)</div><div class="ttdoc">Register output to specific file for specific unit.</div><div class="ttdef"><b>Definition:</b> <a href="file__logger__stream_8inl_source.html#l00088">file_logger_stream.inl:88</a></div></div>
+<div class="ttc" id="aclassqx_1_1file__logger__stream_html_a497fbdca4903780920ec2d1905d8ea8f"><div class="ttname"><a href="classqx_1_1file__logger__stream.html#a497fbdca4903780920ec2d1905d8ea8f">qx::file_logger_stream::set_logs_folder</a></div><div class="ttdeci">void set_logs_folder(std::string_view svFolder) noexcept</div><div class="ttdoc">Set logs folder.</div><div class="ttdef"><b>Definition:</b> <a href="file__logger__stream_8inl_source.html#l00076">file_logger_stream.inl:76</a></div></div>
+<div class="ttc" id="aclassqx_1_1file__logger__stream_html_a99f07a37beb90614f37bbd404e76f940"><div class="ttname"><a href="classqx_1_1file__logger__stream.html#a99f07a37beb90614f37bbd404e76f940">qx::file_logger_stream::register_file</a></div><div class="ttdeci">void register_file(std::string_view svUnitName, std::string_view svFileName, log_file_policy eLogPolicy=log_file_policy::append)</div><div class="ttdoc">Register output to specific file for specific unit.</div><div class="ttdef"><b>Definition:</b> <a href="file__logger__stream_8inl_source.html#l00083">file_logger_stream.inl:83</a></div></div>
 <div class="ttc" id="aclassqx_1_1file__logger__stream_html_abc7bdfcc653daeb34b56a6e7dcf08919"><div class="ttname"><a href="classqx_1_1file__logger__stream.html#abc7bdfcc653daeb34b56a6e7dcf08919">qx::file_logger_stream::process_output</a></div><div class="ttdeci">virtual void process_output(std::string_view svMessage, const log_unit &amp;logUnit, log_level eLogLevel) override</div><div class="ttdoc">Output to file.</div><div class="ttdef"><b>Definition:</b> <a href="file__logger__stream_8inl_source.html#l00036">file_logger_stream.inl:36</a></div></div>
 <div class="ttc" id="afile__logger__stream_8h_html_aaab6d2d26ae57b1521451921e1273220"><div class="ttname"><a href="file__logger__stream_8h.html#aaab6d2d26ae57b1521451921e1273220">qx::log_file_policy</a></div><div class="ttdeci">log_file_policy</div><div class="ttdef"><b>Definition:</b> <a href="file__logger__stream_8h_source.html#l00020">file_logger_stream.h:21</a></div></div>
 <div class="ttc" id="afile__logger__stream_8h_html_aaab6d2d26ae57b1521451921e1273220a10c186e8b29856d1cc7242fce0cb487c"><div class="ttname"><a href="file__logger__stream_8h.html#aaab6d2d26ae57b1521451921e1273220a10c186e8b29856d1cc7242fce0cb487c">qx::log_file_policy::clear_then_uppend</a></div><div class="ttdeci">@ clear_then_uppend</div><div class="ttdoc">clear file at start, then append</div></div>

@@ -85,10 +85,10 @@ Macros</h2></td></tr>
 <tr class="memitem:a6b22a06d00ce06f575913fec486bd955"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="string__utils_8h.html#a6b22a06d00ce06f575913fec486bd955">QX_TO_WSTRING</a>(str)&#160;&#160;&#160;_QX_TO_WSTRING(str)</td></tr>
 <tr class="memdesc:a6b22a06d00ce06f575913fec486bd955"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert char* to wchar_t*.  <a href="string__utils_8h.html#a6b22a06d00ce06f575913fec486bd955">More...</a><br /></td></tr>
 <tr class="separator:a6b22a06d00ce06f575913fec486bd955"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac188ca5f0d584a897b5e2a443c574729"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="string__utils_8h.html#ac188ca5f0d584a897b5e2a443c574729">QX_STR_PREFIX</a>(value_type,  str)&#160;&#160;&#160;    qx::detail::choose_str_prefix&lt;value_type&gt;(str, <a class="el" href="string__utils_8h.html#a6b22a06d00ce06f575913fec486bd955">QX_TO_WSTRING</a>(str))</td></tr>
+<tr class="memitem:ac188ca5f0d584a897b5e2a443c574729"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="string__utils_8h.html#ac188ca5f0d584a897b5e2a443c574729">QX_STR_PREFIX</a>(value_type,  str)&#160;&#160;&#160;qx::detail::choose_str_prefix&lt;value_type&gt;(str, <a class="el" href="string__utils_8h.html#a6b22a06d00ce06f575913fec486bd955">QX_TO_WSTRING</a>(str))</td></tr>
 <tr class="memdesc:ac188ca5f0d584a897b5e2a443c574729"><td class="mdescLeft">&#160;</td><td class="mdescRight">Chose witch of prefixes add to string : L or none.  <a href="string__utils_8h.html#ac188ca5f0d584a897b5e2a443c574729">More...</a><br /></td></tr>
 <tr class="separator:ac188ca5f0d584a897b5e2a443c574729"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab4cfe02c348ccce78db4519f9758e672"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="string__utils_8h.html#ab4cfe02c348ccce78db4519f9758e672">QX_CHAR_PREFIX</a>(value_type,  ch)&#160;&#160;&#160;    qx::detail::choose_char_prefix&lt;value_type&gt;(ch, <a class="el" href="string__utils_8h.html#a6b22a06d00ce06f575913fec486bd955">QX_TO_WSTRING</a>(ch))</td></tr>
+<tr class="memitem:ab4cfe02c348ccce78db4519f9758e672"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="string__utils_8h.html#ab4cfe02c348ccce78db4519f9758e672">QX_CHAR_PREFIX</a>(value_type,  ch)&#160;&#160;&#160;qx::detail::choose_char_prefix&lt;value_type&gt;(ch, <a class="el" href="string__utils_8h.html#a6b22a06d00ce06f575913fec486bd955">QX_TO_WSTRING</a>(ch))</td></tr>
 <tr class="memdesc:ab4cfe02c348ccce78db4519f9758e672"><td class="mdescLeft">&#160;</td><td class="mdescRight">Chose witch of prefixes add to char : L or none.  <a href="string__utils_8h.html#ab4cfe02c348ccce78db4519f9758e672">More...</a><br /></td></tr>
 <tr class="separator:ab4cfe02c348ccce78db4519f9758e672"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
@@ -152,7 +152,7 @@ Functions</h2></td></tr>
         <tr>
           <td></td>
           <td>)</td>
-          <td></td><td>&#160;&#160;&#160;    qx::detail::choose_char_prefix&lt;value_type&gt;(ch, <a class="el" href="string__utils_8h.html#a6b22a06d00ce06f575913fec486bd955">QX_TO_WSTRING</a>(ch))</td>
+          <td></td><td>&#160;&#160;&#160;qx::detail::choose_char_prefix&lt;value_type&gt;(ch, <a class="el" href="string__utils_8h.html#a6b22a06d00ce06f575913fec486bd955">QX_TO_WSTRING</a>(ch))</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -166,7 +166,7 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="string__utils_8h_source.html#l00268">268</a> of file <a class="el" href="string__utils_8h_source.html">string_utils.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="string__utils_8h_source.html#l00252">252</a> of file <a class="el" href="string__utils_8h_source.html">string_utils.h</a>.</p>
 
 </div>
 </div>
@@ -191,7 +191,7 @@ Functions</h2></td></tr>
         <tr>
           <td></td>
           <td>)</td>
-          <td></td><td>&#160;&#160;&#160;    qx::detail::choose_str_prefix&lt;value_type&gt;(str, <a class="el" href="string__utils_8h.html#a6b22a06d00ce06f575913fec486bd955">QX_TO_WSTRING</a>(str))</td>
+          <td></td><td>&#160;&#160;&#160;qx::detail::choose_str_prefix&lt;value_type&gt;(str, <a class="el" href="string__utils_8h.html#a6b22a06d00ce06f575913fec486bd955">QX_TO_WSTRING</a>(str))</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -205,7 +205,7 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="string__utils_8h_source.html#l00259">259</a> of file <a class="el" href="string__utils_8h_source.html">string_utils.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="string__utils_8h_source.html#l00244">244</a> of file <a class="el" href="string__utils_8h_source.html">string_utils.h</a>.</p>
 
 </div>
 </div>
@@ -233,7 +233,7 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="string__utils_8h_source.html#l00251">251</a> of file <a class="el" href="string__utils_8h_source.html">string_utils.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="string__utils_8h_source.html#l00236">236</a> of file <a class="el" href="string__utils_8h_source.html">string_utils.h</a>.</p>
 
 </div>
 </div>
@@ -407,7 +407,7 @@ template&lt;typename value_type , typename T &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="string__utils_8h_source.html#l00295">295</a> of file <a class="el" href="string__utils_8h_source.html">string_utils.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="string__utils_8h_source.html#l00278">278</a> of file <a class="el" href="string__utils_8h_source.html">string_utils.h</a>.</p>
 
 </div>
 </div>
@@ -483,7 +483,7 @@ template&lt;class FwdIt1 , class FwdIt2 &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="string__utils_8h_source.html#l00156">156</a> of file <a class="el" href="string__utils_8h_source.html">string_utils.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="string__utils_8h_source.html#l00151">151</a> of file <a class="el" href="string__utils_8h_source.html">string_utils.h</a>.</p>
 
 </div>
 </div>
@@ -612,7 +612,7 @@ template&lt;typename value_type &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="string__utils_8h_source.html#l00189">189</a> of file <a class="el" href="string__utils_8h_source.html">string_utils.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="string__utils_8h_source.html#l00180">180</a> of file <a class="el" href="string__utils_8h_source.html">string_utils.h</a>.</p>
 
 </div>
 </div>
@@ -662,7 +662,7 @@ template&lt;typename value_type &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="string__utils_8h_source.html#l00370">370</a> of file <a class="el" href="string__utils_8h_source.html">string_utils.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="string__utils_8h_source.html#l00353">353</a> of file <a class="el" href="string__utils_8h_source.html">string_utils.h</a>.</p>
 
 </div>
 </div>

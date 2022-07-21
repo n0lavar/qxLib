@@ -122,117 +122,97 @@ $(function() {
 <div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160; </div>
 <div class="line"><a name="l00052"></a><span class="lineno"><a class="line" href="classqx_1_1base__fbo.html#a1079e290541780fa27cfb4a7663c521e">   52</a></span>&#160;<span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="classqx_1_1base__fbo.html#a1079e290541780fa27cfb4a7663c521e">base_fbo::AttachRBO</a>(<span class="keyword">const</span> <a class="code" href="classqx_1_1base__rbo.html">base_rbo</a>&amp; <a class="code" href="classqx_1_1base__rbo.html">rbo</a>)</div>
 <div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;{</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    glFramebufferRenderbuffer(</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;        m_nTarget,</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;        <a class="code" href="classqx_1_1base__rbo.html">rbo</a>.<a class="code" href="classqx_1_1base__rbo.html#ad421be0614650de4d399bbf1aa30b3cc">GetAttachmentType</a>(),</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;        GL_RENDERBUFFER,</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;        <a class="code" href="classqx_1_1base__rbo.html">rbo</a>.GetBufferName());</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;}</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160; </div>
-<div class="line"><a name="l00061"></a><span class="lineno"><a class="line" href="classqx_1_1base__fbo.html#ab164b7dabf3c247b8fa28d4885de00a4">   61</a></span>&#160;<span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="classqx_1_1base__fbo.html#ab164b7dabf3c247b8fa28d4885de00a4">base_fbo::AttachTexture2D</a>(</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    GLenum              attachment,</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    <span class="keyword">const</span> <a class="code" href="classqx_1_1base__texture.html">base_texture</a>&amp; <a class="code" href="classqx_1_1base__texture.html">texture</a>,</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    GLint               nMipmapLevel)</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;{</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    glFramebufferTexture2D(</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;        m_nTarget,</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;        attachment,</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;        <a class="code" href="classqx_1_1base__texture.html">texture</a>.<a class="code" href="classqx_1_1base__texture.html#a41f7a0a3db36875035839f67e5f8ecdf">GetTarget</a>(),</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;        <a class="code" href="classqx_1_1base__texture.html">texture</a>.<a class="code" href="classqx_1_1_i_buffer.html#ad7b2a935c11b4d7e12c61388159607d0">GetBufferName</a>(),</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;        nMipmapLevel);</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;}</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160; </div>
-<div class="line"><a name="l00074"></a><span class="lineno"><a class="line" href="classqx_1_1base__fbo.html#adbe96d68b2d96149c6fb6a68181f9085">   74</a></span>&#160;<span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="classqx_1_1base__fbo.html#adbe96d68b2d96149c6fb6a68181f9085">base_fbo::AttachTexture</a>(</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    GLenum              attachment,</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    <span class="keyword">const</span> <a class="code" href="classqx_1_1base__texture.html">base_texture</a>&amp; <a class="code" href="classqx_1_1base__texture.html">texture</a>,</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;    GLint               nMipmapLevel)</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;{</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;    glFramebufferTexture(</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;        m_nTarget,</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;        attachment,</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;        <a class="code" href="classqx_1_1base__texture.html">texture</a>.<a class="code" href="classqx_1_1_i_buffer.html#ad7b2a935c11b4d7e12c61388159607d0">GetBufferName</a>(),</div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;        nMipmapLevel);</div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;}</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    glFramebufferRenderbuffer(m_nTarget, <a class="code" href="classqx_1_1base__rbo.html">rbo</a>.<a class="code" href="classqx_1_1base__rbo.html#ad421be0614650de4d399bbf1aa30b3cc">GetAttachmentType</a>(), GL_RENDERBUFFER, <a class="code" href="classqx_1_1base__rbo.html">rbo</a>.GetBufferName());</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;}</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160; </div>
+<div class="line"><a name="l00057"></a><span class="lineno"><a class="line" href="classqx_1_1base__fbo.html#ab164b7dabf3c247b8fa28d4885de00a4">   57</a></span>&#160;<span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="classqx_1_1base__fbo.html#ab164b7dabf3c247b8fa28d4885de00a4">base_fbo::AttachTexture2D</a>(GLenum attachment, <span class="keyword">const</span> <a class="code" href="classqx_1_1base__texture.html">base_texture</a>&amp; <a class="code" href="classqx_1_1base__texture.html">texture</a>, GLint nMipmapLevel)</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;{</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    glFramebufferTexture2D(m_nTarget, attachment, <a class="code" href="classqx_1_1base__texture.html">texture</a>.<a class="code" href="classqx_1_1base__texture.html#a41f7a0a3db36875035839f67e5f8ecdf">GetTarget</a>(), <a class="code" href="classqx_1_1base__texture.html">texture</a>.<a class="code" href="classqx_1_1_i_buffer.html#ad7b2a935c11b4d7e12c61388159607d0">GetBufferName</a>(), nMipmapLevel);</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;}</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160; </div>
+<div class="line"><a name="l00062"></a><span class="lineno"><a class="line" href="classqx_1_1base__fbo.html#adbe96d68b2d96149c6fb6a68181f9085">   62</a></span>&#160;<span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="classqx_1_1base__fbo.html#adbe96d68b2d96149c6fb6a68181f9085">base_fbo::AttachTexture</a>(GLenum attachment, <span class="keyword">const</span> <a class="code" href="classqx_1_1base__texture.html">base_texture</a>&amp; <a class="code" href="classqx_1_1base__texture.html">texture</a>, GLint nMipmapLevel)</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;{</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    glFramebufferTexture(m_nTarget, attachment, <a class="code" href="classqx_1_1base__texture.html">texture</a>.<a class="code" href="classqx_1_1_i_buffer.html#ad7b2a935c11b4d7e12c61388159607d0">GetBufferName</a>(), nMipmapLevel);</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;}</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160; </div>
+<div class="line"><a name="l00067"></a><span class="lineno"><a class="line" href="classqx_1_1base__fbo.html#a9eebe7538c973668bb326c97a2d6c90c">   67</a></span>&#160;<span class="keyword">inline</span> std::string_view <a class="code" href="classqx_1_1base__fbo.html#a9eebe7538c973668bb326c97a2d6c90c">base_fbo::CheckStatus</a>()<span class="keyword"> const</span></div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;<span class="keyword"></span>{</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    std::string_view svErrorMsg;</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;    <span class="keywordflow">if</span> (<span class="keyword">const</span> <span class="keyword">auto</span> eStatus = glCheckFramebufferStatus(GL_FRAMEBUFFER); eStatus != GL_FRAMEBUFFER_COMPLETE)</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;    {</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;        <span class="keywordflow">switch</span> (eStatus)</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;        {</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;        <span class="keywordflow">case</span> GL_FRAMEBUFFER_UNDEFINED:</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;            svErrorMsg =</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;                <span class="stringliteral">&quot;The specified framebuffer is the default read or draw&quot;</span></div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;                <span class="stringliteral">&quot;framebuffer, but the default framebuffer does not exist.&quot;</span>;</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;            <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160; </div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;        <span class="keywordflow">case</span> GL_FRAMEBUFFER_INCOMPLETE_ATTACHMENT:</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;            svErrorMsg =</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;                <span class="stringliteral">&quot;Any of the framebuffer attachment points &quot;</span></div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;                <span class="stringliteral">&quot;are framebuffer incomplete.&quot;</span>;</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;            <span class="keywordflow">break</span>;</div>
 <div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160; </div>
-<div class="line"><a name="l00086"></a><span class="lineno"><a class="line" href="classqx_1_1base__fbo.html#a9eebe7538c973668bb326c97a2d6c90c">   86</a></span>&#160;<span class="keyword">inline</span> std::string_view <a class="code" href="classqx_1_1base__fbo.html#a9eebe7538c973668bb326c97a2d6c90c">base_fbo::CheckStatus</a>()<span class="keyword"> const</span></div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;<span class="keyword"></span>{</div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;    std::string_view svErrorMsg;</div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;    <span class="keywordflow">if</span> (<span class="keyword">const</span> <span class="keyword">auto</span> eStatus = glCheckFramebufferStatus(GL_FRAMEBUFFER);</div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;        eStatus != GL_FRAMEBUFFER_COMPLETE)</div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;    {</div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;        <span class="keywordflow">switch</span> (eStatus)</div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;        {</div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;        <span class="keywordflow">case</span> GL_FRAMEBUFFER_UNDEFINED:</div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;            svErrorMsg =</div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;                <span class="stringliteral">&quot;The specified framebuffer is the default read or draw&quot;</span></div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;                <span class="stringliteral">&quot;framebuffer, but the default framebuffer does not exist.&quot;</span>;</div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;            <span class="keywordflow">break</span>;</div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160; </div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;        <span class="keywordflow">case</span> GL_FRAMEBUFFER_INCOMPLETE_ATTACHMENT:</div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;            svErrorMsg =</div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;                <span class="stringliteral">&quot;Any of the framebuffer attachment points &quot;</span></div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;                <span class="stringliteral">&quot;are framebuffer incomplete.&quot;</span>;</div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;            <span class="keywordflow">break</span>;</div>
-<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160; </div>
-<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;        <span class="keywordflow">case</span> GL_FRAMEBUFFER_INCOMPLETE_MISSING_ATTACHMENT:</div>
-<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;            svErrorMsg =</div>
-<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;                <span class="stringliteral">&quot;The framebuffer does not have at least one &quot;</span></div>
-<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;                <span class="stringliteral">&quot;image attached to it.&quot;</span>;</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;        <span class="keywordflow">case</span> GL_FRAMEBUFFER_INCOMPLETE_MISSING_ATTACHMENT:</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;            svErrorMsg =</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;                <span class="stringliteral">&quot;The framebuffer does not have at least one &quot;</span></div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;                <span class="stringliteral">&quot;image attached to it.&quot;</span>;</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;            <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160; </div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;        <span class="keywordflow">case</span> GL_FRAMEBUFFER_INCOMPLETE_DRAW_BUFFER:</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;            svErrorMsg =</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;                <span class="stringliteral">&quot;The value of GL_FRAMEBUFFER_ATTACHMENT_OBJECT_TYPE is GL_NONE &quot;</span></div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;                <span class="stringliteral">&quot;for any color attachment point(s) named by GL_DRAW_BUFFERi.&quot;</span>;</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;            <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160; </div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;        <span class="keywordflow">case</span> GL_FRAMEBUFFER_INCOMPLETE_READ_BUFFER:</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;            svErrorMsg =</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;                <span class="stringliteral">&quot;GL_READ_BUFFER is not GL_NONE and the value of &quot;</span></div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;                <span class="stringliteral">&quot;GL_FRAMEBUFFER_ATTACHMENT_OBJECT_TYPE is GL_NONE &quot;</span></div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;                <span class="stringliteral">&quot;for the color attachment point named by GL_READ_BUFFER.&quot;</span>;</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;            <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160; </div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;        <span class="keywordflow">case</span> GL_FRAMEBUFFER_UNSUPPORTED:</div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;            svErrorMsg =</div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;                <span class="stringliteral">&quot;The combination of internal formats of the attached &quot;</span></div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;                <span class="stringliteral">&quot;images violates an implementation - dependent set of &quot;</span></div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;                <span class="stringliteral">&quot;restrictions.&quot;</span>;</div>
 <div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;            <span class="keywordflow">break</span>;</div>
 <div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160; </div>
-<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;        <span class="keywordflow">case</span> GL_FRAMEBUFFER_INCOMPLETE_DRAW_BUFFER:</div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;        <span class="keywordflow">case</span> GL_FRAMEBUFFER_INCOMPLETE_MULTISAMPLE:</div>
 <div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;            svErrorMsg =</div>
-<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;                <span class="stringliteral">&quot;The value of GL_FRAMEBUFFER_ATTACHMENT_OBJECT_TYPE is GL_NONE &quot;</span></div>
-<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;                <span class="stringliteral">&quot;for any color attachment point(s) named by GL_DRAW_BUFFERi.&quot;</span>;</div>
-<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;            <span class="keywordflow">break</span>;</div>
-<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160; </div>
-<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;        <span class="keywordflow">case</span> GL_FRAMEBUFFER_INCOMPLETE_READ_BUFFER:</div>
-<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;            svErrorMsg =</div>
-<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;                <span class="stringliteral">&quot;GL_READ_BUFFER is not GL_NONE and the value of &quot;</span></div>
-<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;                <span class="stringliteral">&quot;GL_FRAMEBUFFER_ATTACHMENT_OBJECT_TYPE is GL_NONE &quot;</span></div>
-<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;                <span class="stringliteral">&quot;for the color attachment point named by GL_READ_BUFFER.&quot;</span>;</div>
-<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;            <span class="keywordflow">break</span>;</div>
-<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160; </div>
-<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;        <span class="keywordflow">case</span> GL_FRAMEBUFFER_UNSUPPORTED:</div>
-<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;            svErrorMsg =</div>
-<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;                <span class="stringliteral">&quot;The combination of internal formats of the attached &quot;</span></div>
-<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;                <span class="stringliteral">&quot;images violates an implementation - dependent set of &quot;</span></div>
-<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;                <span class="stringliteral">&quot;restrictions.&quot;</span>;</div>
-<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;            <span class="keywordflow">break</span>;</div>
-<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160; </div>
-<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;        <span class="keywordflow">case</span> GL_FRAMEBUFFER_INCOMPLETE_MULTISAMPLE:</div>
-<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;            svErrorMsg =</div>
-<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;                <span class="stringliteral">&quot;The value of GL_RENDERBUFFER_SAMPLES is not the &quot;</span></div>
-<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;                <span class="stringliteral">&quot;same for all attached renderbuffers; if the value of &quot;</span></div>
-<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;                <span class="stringliteral">&quot;GL_TEXTURE_SAMPLES is the not same for all attached textures; &quot;</span></div>
-<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;                <span class="stringliteral">&quot;or , if the attached images are a mix of renderbuffersand &quot;</span></div>
-<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;                <span class="stringliteral">&quot;textures, &quot;</span></div>
-<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;                <span class="stringliteral">&quot;the value of GL_RENDERBUFFER_SAMPLES does not match the value &quot;</span></div>
-<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;                <span class="stringliteral">&quot;of GL_TEXTURE_SAMPLES. Also returned if the value &quot;</span></div>
-<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;                <span class="stringliteral">&quot;of GL_TEXTURE_FIXED_SAMPLE_LOCATIONS is not the same for all &quot;</span></div>
-<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;                <span class="stringliteral">&quot;attached textures; or , if the attached images are a mix &quot;</span></div>
-<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;                <span class="stringliteral">&quot;of renderbuffersand textures, the value of &quot;</span></div>
-<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;                <span class="stringliteral">&quot;GL_TEXTURE_FIXED_SAMPLE_LOCATIONS is not GL_TRUE for all &quot;</span></div>
-<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;                <span class="stringliteral">&quot;attached textures.&quot;</span>;</div>
-<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;            <span class="keywordflow">break</span>;</div>
-<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160; </div>
-<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;        <span class="keywordflow">case</span> GL_FRAMEBUFFER_INCOMPLETE_LAYER_TARGETS:</div>
-<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;            svErrorMsg =</div>
-<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;                <span class="stringliteral">&quot;Any framebuffer attachment is layered, and any &quot;</span></div>
-<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;                <span class="stringliteral">&quot;populated attachment is not layered, or if all populated &quot;</span></div>
-<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;                <span class="stringliteral">&quot;color attachments are not from textures of the same target.&quot;</span>;</div>
-<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;            <span class="keywordflow">break</span>;</div>
-<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160; </div>
-<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;        <span class="keywordflow">default</span>:</div>
-<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;            svErrorMsg = <span class="stringliteral">&quot;Unknown error&quot;</span>;</div>
-<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;            <span class="keywordflow">break</span>;</div>
-<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;        }</div>
-<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;    }</div>
-<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160; </div>
-<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;    <span class="keywordflow">return</span> svErrorMsg;</div>
-<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;}</div>
-<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160; </div>
-<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;} <span class="comment">// namespace qx</span></div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;                <span class="stringliteral">&quot;The value of GL_RENDERBUFFER_SAMPLES is not the &quot;</span></div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;                <span class="stringliteral">&quot;same for all attached renderbuffers; if the value of &quot;</span></div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;                <span class="stringliteral">&quot;GL_TEXTURE_SAMPLES is the not same for all attached textures; &quot;</span></div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;                <span class="stringliteral">&quot;or , if the attached images are a mix of renderbuffersand &quot;</span></div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;                <span class="stringliteral">&quot;textures, &quot;</span></div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;                <span class="stringliteral">&quot;the value of GL_RENDERBUFFER_SAMPLES does not match the value &quot;</span></div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;                <span class="stringliteral">&quot;of GL_TEXTURE_SAMPLES. Also returned if the value &quot;</span></div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;                <span class="stringliteral">&quot;of GL_TEXTURE_FIXED_SAMPLE_LOCATIONS is not the same for all &quot;</span></div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;                <span class="stringliteral">&quot;attached textures; or , if the attached images are a mix &quot;</span></div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;                <span class="stringliteral">&quot;of renderbuffersand textures, the value of &quot;</span></div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;                <span class="stringliteral">&quot;GL_TEXTURE_FIXED_SAMPLE_LOCATIONS is not GL_TRUE for all &quot;</span></div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;                <span class="stringliteral">&quot;attached textures.&quot;</span>;</div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;            <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160; </div>
+<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;        <span class="keywordflow">case</span> GL_FRAMEBUFFER_INCOMPLETE_LAYER_TARGETS:</div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;            svErrorMsg =</div>
+<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;                <span class="stringliteral">&quot;Any framebuffer attachment is layered, and any &quot;</span></div>
+<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;                <span class="stringliteral">&quot;populated attachment is not layered, or if all populated &quot;</span></div>
+<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;                <span class="stringliteral">&quot;color attachments are not from textures of the same target.&quot;</span>;</div>
+<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;            <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160; </div>
+<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;        <span class="keywordflow">default</span>:</div>
+<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;            svErrorMsg = <span class="stringliteral">&quot;Unknown error&quot;</span>;</div>
+<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;            <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;        }</div>
+<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;    }</div>
+<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160; </div>
+<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;    <span class="keywordflow">return</span> svErrorMsg;</div>
+<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;}</div>
+<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160; </div>
+<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;} <span class="comment">// namespace qx</span></div>
 <div class="ttc" id="aclassqx_1_1_i_buffer_html_a072a1b3985f7fcd35de9d1106f72d203"><div class="ttname"><a href="classqx_1_1_i_buffer.html#a072a1b3985f7fcd35de9d1106f72d203">qx::IBuffer::Bind</a></div><div class="ttdeci">virtual void Bind() const =0</div><div class="ttdoc">Bind a named buffer object.</div></div>
 <div class="ttc" id="aclassqx_1_1_i_buffer_html_a4f5ba5224f74c6f3877bd8ffe6ccb66d"><div class="ttname"><a href="classqx_1_1_i_buffer.html#a4f5ba5224f74c6f3877bd8ffe6ccb66d">qx::IBuffer::Generate</a></div><div class="ttdeci">virtual void Generate()=0</div><div class="ttdoc">Generate buffer object.</div></div>
 <div class="ttc" id="aclassqx_1_1_i_buffer_html_a56e6ae2500cf59a098f0cb51cc744f67"><div class="ttname"><a href="classqx_1_1_i_buffer.html#a56e6ae2500cf59a098f0cb51cc744f67">qx::IBuffer::IsGenerated</a></div><div class="ttdeci">virtual bool IsGenerated() const =0</div><div class="ttdoc">Is this buffer generated.</div></div>
@@ -240,10 +220,10 @@ $(function() {
 <div class="ttc" id="aclassqx_1_1_i_buffer_html_addde8a25b9cc9b95dba2bbc0aff531e1"><div class="ttname"><a href="classqx_1_1_i_buffer.html#addde8a25b9cc9b95dba2bbc0aff531e1">qx::IBuffer::Unbind</a></div><div class="ttdeci">virtual void Unbind() const =0</div><div class="ttdoc">Unbind a named buffer object.</div></div>
 <div class="ttc" id="aclassqx_1_1base__fbo_html_a1079e290541780fa27cfb4a7663c521e"><div class="ttname"><a href="classqx_1_1base__fbo.html#a1079e290541780fa27cfb4a7663c521e">qx::base_fbo::AttachRBO</a></div><div class="ttdeci">void AttachRBO(const base_rbo &amp;rbo)</div><div class="ttdoc">Attach RBO th FRO.</div><div class="ttdef"><b>Definition:</b> <a href="fbo_8inl_source.html#l00052">fbo.inl:52</a></div></div>
 <div class="ttc" id="aclassqx_1_1base__fbo_html_a228307f9d61515dab941eedc092cf36c"><div class="ttname"><a href="classqx_1_1base__fbo.html#a228307f9d61515dab941eedc092cf36c">qx::base_fbo::SetTarget</a></div><div class="ttdeci">QX_DECL_IBUFFER void SetTarget(GLenum target)</div><div class="ttdoc">Set target type.</div><div class="ttdef"><b>Definition:</b> <a href="fbo_8inl_source.html#l00047">fbo.inl:47</a></div></div>
-<div class="ttc" id="aclassqx_1_1base__fbo_html_a9eebe7538c973668bb326c97a2d6c90c"><div class="ttname"><a href="classqx_1_1base__fbo.html#a9eebe7538c973668bb326c97a2d6c90c">qx::base_fbo::CheckStatus</a></div><div class="ttdeci">std::string_view CheckStatus() const</div><div class="ttdoc">Check framebuffer status.</div><div class="ttdef"><b>Definition:</b> <a href="fbo_8inl_source.html#l00086">fbo.inl:86</a></div></div>
+<div class="ttc" id="aclassqx_1_1base__fbo_html_a9eebe7538c973668bb326c97a2d6c90c"><div class="ttname"><a href="classqx_1_1base__fbo.html#a9eebe7538c973668bb326c97a2d6c90c">qx::base_fbo::CheckStatus</a></div><div class="ttdeci">std::string_view CheckStatus() const</div><div class="ttdoc">Check framebuffer status.</div><div class="ttdef"><b>Definition:</b> <a href="fbo_8inl_source.html#l00067">fbo.inl:67</a></div></div>
 <div class="ttc" id="aclassqx_1_1base__fbo_html_aa8eaa0b2099b6af390a39aac27d6debb"><div class="ttname"><a href="classqx_1_1base__fbo.html#aa8eaa0b2099b6af390a39aac27d6debb">qx::base_fbo::~base_fbo</a></div><div class="ttdeci">virtual ~base_fbo()</div><div class="ttdoc">base_fbo object destructor</div><div class="ttdef"><b>Definition:</b> <a href="fbo_8inl_source.html#l00013">fbo.inl:13</a></div></div>
-<div class="ttc" id="aclassqx_1_1base__fbo_html_ab164b7dabf3c247b8fa28d4885de00a4"><div class="ttname"><a href="classqx_1_1base__fbo.html#ab164b7dabf3c247b8fa28d4885de00a4">qx::base_fbo::AttachTexture2D</a></div><div class="ttdeci">void AttachTexture2D(GLenum attachment, const base_texture &amp;texture, GLint nMipmapLevel=0)</div><div class="ttdoc">Attache a single face of a specific MIP level to FBO.</div><div class="ttdef"><b>Definition:</b> <a href="fbo_8inl_source.html#l00061">fbo.inl:61</a></div></div>
-<div class="ttc" id="aclassqx_1_1base__fbo_html_adbe96d68b2d96149c6fb6a68181f9085"><div class="ttname"><a href="classqx_1_1base__fbo.html#adbe96d68b2d96149c6fb6a68181f9085">qx::base_fbo::AttachTexture</a></div><div class="ttdeci">void AttachTexture(GLenum attachment, const base_texture &amp;texture, GLint nMipmapLevel=0)</div><div class="ttdoc">Attache all cube map faces of a specific MIP level as an array of images (layered framebuffer)</div><div class="ttdef"><b>Definition:</b> <a href="fbo_8inl_source.html#l00074">fbo.inl:74</a></div></div>
+<div class="ttc" id="aclassqx_1_1base__fbo_html_ab164b7dabf3c247b8fa28d4885de00a4"><div class="ttname"><a href="classqx_1_1base__fbo.html#ab164b7dabf3c247b8fa28d4885de00a4">qx::base_fbo::AttachTexture2D</a></div><div class="ttdeci">void AttachTexture2D(GLenum attachment, const base_texture &amp;texture, GLint nMipmapLevel=0)</div><div class="ttdoc">Attache a single face of a specific MIP level to FBO.</div><div class="ttdef"><b>Definition:</b> <a href="fbo_8inl_source.html#l00057">fbo.inl:57</a></div></div>
+<div class="ttc" id="aclassqx_1_1base__fbo_html_adbe96d68b2d96149c6fb6a68181f9085"><div class="ttname"><a href="classqx_1_1base__fbo.html#adbe96d68b2d96149c6fb6a68181f9085">qx::base_fbo::AttachTexture</a></div><div class="ttdeci">void AttachTexture(GLenum attachment, const base_texture &amp;texture, GLint nMipmapLevel=0)</div><div class="ttdoc">Attache all cube map faces of a specific MIP level as an array of images (layered framebuffer)</div><div class="ttdef"><b>Definition:</b> <a href="fbo_8inl_source.html#l00062">fbo.inl:62</a></div></div>
 <div class="ttc" id="aclassqx_1_1base__rbo_html"><div class="ttname"><a href="classqx_1_1base__rbo.html">qx::base_rbo</a></div><div class="ttdoc">Base RBO class.</div><div class="ttdef"><b>Definition:</b> <a href="rbo_8h_source.html#l00027">rbo.h:28</a></div></div>
 <div class="ttc" id="aclassqx_1_1base__rbo_html_ad421be0614650de4d399bbf1aa30b3cc"><div class="ttname"><a href="classqx_1_1base__rbo.html#ad421be0614650de4d399bbf1aa30b3cc">qx::base_rbo::GetAttachmentType</a></div><div class="ttdeci">GLenum GetAttachmentType() const</div><div class="ttdoc">Get attachment type.</div><div class="ttdef"><b>Definition:</b> <a href="rbo_8inl_source.html#l00094">rbo.inl:94</a></div></div>
 <div class="ttc" id="aclassqx_1_1base__texture_html"><div class="ttname"><a href="classqx_1_1base__texture.html">qx::base_texture</a></div><div class="ttdoc">Base texture class.</div><div class="ttdef"><b>Definition:</b> <a href="texture_8h_source.html#l00028">texture.h:29</a></div></div>
