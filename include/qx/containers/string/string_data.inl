@@ -33,15 +33,11 @@ void string_data<Traits>::free() noexcept
 }
 
 template<class Traits>
-bool string_data<Traits>::resize(
-    size_type          nSymbols,
-    size_type          nAlign,
-    string_resize_type eType) noexcept
+bool string_data<Traits>::resize(size_type nSymbols, size_type nAlign, string_resize_type eType) noexcept
 {
     bool bRet = true;
 
-    typename Traits::size_type nSymbolsToAllocate =
-        nAlign > 0 ? nAlign * ((nSymbols + 1) / nAlign + 1) : nSymbols + 1;
+    typename Traits::size_type nSymbolsToAllocate = nAlign > 0 ? nAlign * ((nSymbols + 1) / nAlign + 1) : nSymbols + 1;
 
     if (eType == string_resize_type::shrink_to_fit // need to decrease size
         || size() == 0                             // string is empty
@@ -54,9 +50,7 @@ bool string_data<Traits>::resize(
 
         if (nSymbolsToAllocate <= m_Buffer.size())
         {
-            if (!bSmallAtStart
-                && (Traits::shrink_to_fit_when_small()
-                    || eType == string_resize_type::shrink_to_fit))
+            if (!bSmallAtStart && (Traits::shrink_to_fit_when_small() || eType == string_resize_type::shrink_to_fit))
             {
                 // free allocated memory and move string to buffer
                 std::memmove(buff.data(), m_pData, nNewSize);
@@ -75,11 +69,10 @@ bool string_data<Traits>::resize(
                 nStartSize = size() * sizeof(value_type);
             }
 
-            if (void* pNewBlock =
-                    std::realloc(bSmallAtStart ? nullptr : m_pData, nNewSize))
+            if (void* pNewBlock = std::realloc(bSmallAtStart ? nullptr : m_pData, nNewSize))
             {
                 m_nAllocatedSize = nSymbolsToAllocate;
-                m_pData = static_cast<typename Traits::value_type*>(pNewBlock);
+                m_pData          = static_cast<typename Traits::value_type*>(pNewBlock);
 
                 if (bSmallAtStart)
                     std::memmove(m_pData, buff.data(), nStartSize);
@@ -98,15 +91,13 @@ bool string_data<Traits>::resize(
 }
 
 template<class Traits>
-typename string_data<Traits>::size_type string_data<Traits>::size(
-    void) const noexcept
+typename string_data<Traits>::size_type string_data<Traits>::size(void) const noexcept
 {
     return m_nSize;
 }
 
 template<class Traits>
-typename string_data<Traits>::size_type string_data<Traits>::capacity(
-    void) const noexcept
+typename string_data<Traits>::size_type string_data<Traits>::capacity(void) const noexcept
 {
     if (is_small())
         return m_Buffer.size();

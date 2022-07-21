@@ -12,8 +12,8 @@
 
 #if QX_TEST_STRING_UTILS
 
-#include <qx/containers/string/string_utils.h>
-#include <qx/useful_macros.h>
+    #include <qx/containers/string/string_utils.h>
+    #include <qx/useful_macros.h>
 
 //--------------------------------- qx::strlen ---------------------------------
 

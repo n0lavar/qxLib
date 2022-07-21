@@ -52,10 +52,7 @@ public:
         @param texture      - fbo texture
         @param nMipmapLevel - mipmap level of texture
     **/
-    void AttachTexture2D(
-        GLenum              attachment,
-        const base_texture& texture,
-        GLint               nMipmapLevel = 0);
+    void AttachTexture2D(GLenum attachment, const base_texture& texture, GLint nMipmapLevel = 0);
 
     /**
         @brief Attache all cube map faces of a specific MIP level
@@ -64,10 +61,7 @@ public:
         @param texture      - fbo texture
         @param nMipmapLevel - mipmap level of texture
     **/
-    void AttachTexture(
-        GLenum              attachment,
-        const base_texture& texture,
-        GLint               nMipmapLevel = 0);
+    void AttachTexture(GLenum attachment, const base_texture& texture, GLint nMipmapLevel = 0);
 
     /**
         @brief  Check framebuffer status

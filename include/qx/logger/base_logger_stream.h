@@ -91,10 +91,7 @@ public:
         @param logUnit   - log unit info
         @param eLogLevel - this message log level
     **/
-    virtual void process_output(
-        std::string_view svMessage,
-        const log_unit&  logUnit,
-        log_level        eLogLevel) = 0;
+    virtual void process_output(std::string_view svMessage, const log_unit& logUnit, log_level eLogLevel) = 0;
 
     /**
         @brief Output to stream
@@ -122,10 +119,7 @@ public:
         @param  pszFunction - function string
         @retval             - log unit info if found
     **/
-    std::optional<log_unit> get_unit_info(
-        const char* pszTag,
-        const char* pszFile,
-        const char* pszFunction) noexcept;
+    std::optional<log_unit> get_unit_info(const char* pszTag, const char* pszFile, const char* pszFunction) noexcept;
 
     /**
         @brief Register logger unit

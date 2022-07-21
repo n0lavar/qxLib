@@ -12,10 +12,10 @@
 
 #if QX_TEST_BENCHMARK
 
-#include <cmath>
-#include <thread>
+    #include <cmath>
+    #include <thread>
 
-#include <qx/stat/benchmark.h>
+    #include <qx/stat/benchmark.h>
 
 TEST(benchmark, benchmark)
 {
@@ -27,8 +27,7 @@ TEST(benchmark, benchmark)
     for (size_t i = 0; i < NUM_ITERATIONS; i++)
     {
         bench.start();
-        std::this_thread::sleep_for(
-            std::chrono::duration<double>(WAIT_INTERVAL));
+        std::this_thread::sleep_for(std::chrono::duration<double>(WAIT_INTERVAL));
         double duration = bench.end();
         EXPECT_GE(duration, WAIT_INTERVAL);
     }

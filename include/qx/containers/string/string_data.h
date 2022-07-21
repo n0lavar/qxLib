@@ -59,10 +59,7 @@ public:
         @param  eType    - resize type
         @retval          - true if memory alloc is successful
     **/
-    bool resize(
-        size_type          nSymbols,
-        size_type          nAlign,
-        string_resize_type eType) noexcept;
+    bool resize(size_type nSymbols, size_type nAlign, string_resize_type eType) noexcept;
 
     /**
         @brief  Get string length

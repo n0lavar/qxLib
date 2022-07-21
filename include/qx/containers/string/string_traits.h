@@ -37,10 +37,7 @@ struct common_char_traits
     using difference_type = std::ptrdiff_t;
     using size_type       = size_t;
 
-    static constexpr size_type hash_function(
-        const_pointer pszStr,
-        size_t        nSeed,
-        size_type     nLen) noexcept
+    static constexpr size_type hash_function(const_pointer pszStr, size_t nSeed, size_type nLen) noexcept
     {
         return murmur_32_hash(pszStr, nSeed, nLen);
     }
@@ -95,26 +92,16 @@ struct char_traits<char> : public common_char_traits<char>
     {
         return std::strcmp(pszFirst, pszSecond);
     }
-    static int compare_n(
-        const_pointer pszFirst,
-        const_pointer pszSecond,
-        size_type     nCount) noexcept
+    static int compare_n(const_pointer pszFirst, const_pointer pszSecond, size_type nCount) noexcept
     {
         return std::strncmp(pszFirst, pszSecond, nCount);
     }
-    static int vsnprintf(
-        pointer       pszDest,
-        size_type     nBuffer,
-        const_pointer pszFormat,
-        va_list       args) noexcept
+    static int vsnprintf(pointer pszDest, size_type nBuffer, const_pointer pszFormat, va_list args) noexcept
     {
         return std::vsnprintf(pszDest, nBuffer, pszFormat, args);
     }
     template<class... Args>
-    static int sscanf(
-        const_pointer pszString,
-        const_pointer pszFormat,
-        Args... args) noexcept
+    static int sscanf(const_pointer pszString, const_pointer pszFormat, Args... args) noexcept
     {
         QX_PUSH_SUPPRESS_ALL_WARNINGS
         return std::sscanf(pszString, pszFormat, args...);
@@ -170,18 +157,11 @@ struct char_traits<wchar_t> : public common_char_traits<wchar_t>
     {
         return std::wcscmp(pszFirst, pszSecond);
     }
-    static int compare_n(
-        const_pointer pszFirst,
-        const_pointer pszSecond,
-        size_type     nCount) noexcept
+    static int compare_n(const_pointer pszFirst, const_pointer pszSecond, size_type nCount) noexcept
     {
         return std::wcsncmp(pszFirst, pszSecond, nCount);
     }
-    static int vsnprintf(
-        pointer       pszDest,
-        size_type     nBuffer,
-        const_pointer pszFormat,
-        va_list       args) noexcept
+    static int vsnprintf(pointer pszDest, size_type nBuffer, const_pointer pszFormat, va_list args) noexcept
     {
 // MVSC's std::swprintf returns required size if nullptr and 0 passed as pDest and nBuffer,
 // while other compilers returns -1
@@ -208,10 +188,7 @@ struct char_traits<wchar_t> : public common_char_traits<wchar_t>
 #endif
     }
     template<class... Args>
-    static int sscanf(
-        const_pointer pszString,
-        const_pointer pszFormat,
-        Args... args) noexcept
+    static int sscanf(const_pointer pszString, const_pointer pszFormat, Args... args) noexcept
     {
         QX_PUSH_SUPPRESS_ALL_WARNINGS
         return std::swscanf(pszString, pszFormat, args...);

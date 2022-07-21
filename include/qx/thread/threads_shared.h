@@ -47,10 +47,7 @@ private:
                                            threads to unlock the sp and will construct
                                            shared_proxy with nullptrs
     **/
-    shared_proxy(
-        Data*                     pData,
-        SynchronizationPrimitive* pSynchronizationPrimitive,
-        bool                      bTryLock);
+    shared_proxy(Data* pData, SynchronizationPrimitive* pSynchronizationPrimitive, bool bTryLock);
 
 public:
     QX_NONCOPYABLE(shared_proxy);

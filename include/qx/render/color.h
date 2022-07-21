@@ -49,11 +49,7 @@ public:
         @param   fBlue  - blue component  [0.f, 1.f]
         @param   fAlpha - alpha component [0.f, 1.f]
     **/
-    constexpr color(
-        float fRed,
-        float fGreen,
-        float fBlue,
-        float fAlpha = 1.f) noexcept;
+    constexpr color(float fRed, float fGreen, float fBlue, float fAlpha = 1.f) noexcept;
 
     /**
         @brief   color object constructor
@@ -314,9 +310,7 @@ public:
         @param  fPercent - brighter factor
         @retval          - brighter color
     **/
-    constexpr static color brighten(
-        const color& other,
-        float        fPercent) noexcept;
+    constexpr static color brighten(const color& other, float fPercent) noexcept;
 
     /**
         @brief  Get aqua color
@@ -476,9 +470,7 @@ private:
         @param pComponent - component field
         @param fValue     - new component value
     **/
-    static constexpr void assign_component_checked(
-        float& pComponent,
-        float  fValue) noexcept;
+    static constexpr void assign_component_checked(float& pComponent, float fValue) noexcept;
 
 private:
     glm::vec4 m_Color = glm::vec4(1.f);

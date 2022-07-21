@@ -77,9 +77,7 @@ inline int lcm(int nFirst, int nSecond)
 template<typename T>
 inline double pow(T nNumber, int nPower)
 {
-    static_assert(
-        std::is_integral_v<T> || std::is_floating_point_v<T>,
-        "Integral or floating point required");
+    static_assert(std::is_integral_v<T> || std::is_floating_point_v<T>, "Integral or floating point required");
 
     const bool   bNegativePower = nPower < 0;
     const size_t nPositivePower = static_cast<size_t>(std::abs(nPower));
@@ -99,8 +97,7 @@ inline double pow(T nNumber, int nPower)
         break;
 
     default:
-        const std::bitset<std::numeric_limits<int>::digits> powerBitSet(
-            nPositivePower);
+        const std::bitset<std::numeric_limits<int>::digits> powerBitSet(nPositivePower);
 
         std::array<double, std::numeric_limits<int>::digits> powers;
 
@@ -140,8 +137,7 @@ inline I maxpot(I nValue)
     if (nValue == I(0))
         return I(0);
 
-    std::bitset<std::numeric_limits<I>::digits> powers(
-        static_cast<size_t>(std::abs(nValue)));
+    std::bitset<std::numeric_limits<I>::digits> powers(static_cast<size_t>(std::abs(nValue)));
 
     I nPow = static_cast<I>(std::numeric_limits<I>::digits - 1);
     while (!powers.test(static_cast<size_t>(nPow)))
@@ -223,9 +219,7 @@ inline std::vector<I> find_primes(I nMaxNumber)
     std::vector<bool> isComposite(static_cast<size_t>(nMaxNumber) + 1, false);
 
     constexpr size_t first_composite_power_of_two = 4;
-    for (size_t i = first_composite_power_of_two;
-         i < static_cast<size_t>(nMaxNumber) + 1;
-         i += 2)
+    for (size_t i = first_composite_power_of_two; i < static_cast<size_t>(nMaxNumber) + 1; i += 2)
     {
         isComposite[i] = true;
     }
@@ -239,8 +233,7 @@ inline std::vector<I> find_primes(I nMaxNumber)
 
         nNextPrime += 2;
 
-        while (nNextPrime <= nMaxNumber
-               && isComposite[static_cast<size_t>(nNextPrime)])
+        while (nNextPrime <= nMaxNumber && isComposite[static_cast<size_t>(nNextPrime)])
         {
             nNextPrime += 2;
         }
@@ -285,21 +278,16 @@ inline bool is_prime(size_t nValue, double fProbability)
 
     constexpr double fLog2 = 0.30102999566; // std::log(2)
 
-    const size_t nTests = static_cast<size_t>(
-        std::ceil(std::log(1.0 / (1.0 - fProbability)) / fLog2));
+    const size_t nTests = static_cast<size_t>(std::ceil(std::log(1.0 / (1.0 - fProbability)) / fLog2));
 
-    std::default_random_engine generator(
-        static_cast<unsigned>(std::time(nullptr)));
+    std::default_random_engine generator(static_cast<unsigned>(std::time(nullptr)));
 
     std::uniform_int_distribution<size_t> num_dist(2, nValue);
 
     for (size_t i = 0; i < nTests; i++)
     {
         const size_t nRandomNumber = num_dist(generator);
-        if (static_cast<size_t>(
-                pow(nRandomNumber, static_cast<int>(nValue) - 1))
-                % nValue
-            != 1)
+        if (static_cast<size_t>(pow(nRandomNumber, static_cast<int>(nValue) - 1)) % nValue != 1)
         {
             return false;
         }

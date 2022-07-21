@@ -13,7 +13,7 @@
 
 #if QX_TEST_LINK
 
-#include <qx/link.h>
+    #include <qx/link.h>
 
 struct STest
 {

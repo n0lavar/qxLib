@@ -12,7 +12,7 @@
 
 #if QX_TEST_TYPEDEFS
 
-#include <qx/typedefs.h>
+    #include <qx/typedefs.h>
 
 static_assert(sizeof(u8) == 1);
 static_assert(sizeof(u16) == 2);

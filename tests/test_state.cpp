@@ -12,9 +12,9 @@
 
 #if QX_TEST_STATE
 
-#include <qx/state.h>
+    #include <qx/state.h>
 
-#include <unordered_map>
+    #include <unordered_map>
 
 class CNonZeroInt
 {

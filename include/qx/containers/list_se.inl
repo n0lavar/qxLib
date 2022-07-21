@@ -12,8 +12,7 @@ namespace qx
 
 template<class T>
 template<class... Args>
-inline list_se<T>::list_se_node::list_se_node(Args&&... args)
-    : value(std::forward<Args>(args)...)
+inline list_se<T>::list_se_node::list_se_node(Args&&... args) : value(std::forward<Args>(args)...)
 {
 }
 
@@ -23,15 +22,13 @@ inline list_se<T>::iterator::iterator(list_se_node* pNode) : m_pNode(pNode)
 }
 
 template<class T>
-inline typename list_se<T>::iterator::reference list_se<T>::iterator::operator*(
-    void)
+inline typename list_se<T>::iterator::reference list_se<T>::iterator::operator*(void)
 {
     return m_pNode->value;
 }
 
 template<class T>
-inline typename list_se<T>::iterator::pointer list_se<T>::iterator::operator->(
-    void)
+inline typename list_se<T>::iterator::pointer list_se<T>::iterator::operator->(void)
 {
     return &m_pNode->value;
 }
@@ -49,16 +46,14 @@ inline bool list_se<T>::iterator::operator==(const iterator& r) const
 }
 
 template<class T>
-inline typename list_se<T>::iterator::iterator& list_se<
-    T>::iterator::operator++()
+inline typename list_se<T>::iterator::iterator& list_se<T>::iterator::operator++()
 {
     m_pNode = m_pNode->pNext;
     return *this;
 }
 
 template<class T>
-inline typename list_se<T>::iterator::iterator list_se<T>::iterator::operator++(
-    int)
+inline typename list_se<T>::iterator::iterator list_se<T>::iterator::operator++(int)
 {
     iterator i(m_pNode);
     m_pNode = m_pNode->pNext;
@@ -66,34 +61,29 @@ inline typename list_se<T>::iterator::iterator list_se<T>::iterator::operator++(
 }
 
 template<class T>
-list_se<T>::const_iterator::const_iterator(const list_se_node* pNode)
-    : m_pNode(pNode)
+list_se<T>::const_iterator::const_iterator(const list_se_node* pNode) : m_pNode(pNode)
 {
 }
 
 template<class T>
-list_se<T>::const_iterator::const_iterator(const iterator& it)
-    : m_pNode(it.m_pNote)
+list_se<T>::const_iterator::const_iterator(const iterator& it) : m_pNode(it.m_pNote)
 {
 }
 
 template<class T>
-inline typename list_se<T>::const_iterator::reference list_se<
-    T>::const_iterator::operator*()
+inline typename list_se<T>::const_iterator::reference list_se<T>::const_iterator::operator*()
 {
     return m_pNode->value;
 }
 
 template<class T>
-inline typename list_se<T>::const_iterator::pointer list_se<
-    T>::const_iterator::operator->()
+inline typename list_se<T>::const_iterator::pointer list_se<T>::const_iterator::operator->()
 {
     return &m_pNode->value;
 }
 
 template<class T>
-inline bool list_se<T>::const_iterator::operator!=(
-    const const_iterator& r) const
+inline bool list_se<T>::const_iterator::operator!=(const const_iterator& r) const
 {
     return m_pNode != r.m_pNode;
 }
@@ -105,16 +95,14 @@ bool list_se<T>::const_iterator::operator==(const const_iterator& r) const
 }
 
 template<class T>
-inline typename list_se<T>::const_iterator::const_iterator& list_se<
-    T>::const_iterator::operator++()
+inline typename list_se<T>::const_iterator::const_iterator& list_se<T>::const_iterator::operator++()
 {
     m_pNode = m_pNode->pNext;
     return *this;
 }
 
 template<class T>
-inline typename list_se<T>::const_iterator::const_iterator list_se<
-    T>::const_iterator::operator++(int)
+inline typename list_se<T>::const_iterator::const_iterator list_se<T>::const_iterator::operator++(int)
 {
     const_iterator i(m_pNode);
     m_pNode = m_pNode->pNext;
@@ -214,10 +202,7 @@ inline void list_se<T>::insert(iterator where, const_reference what)
 }
 
 template<class T>
-inline void list_se<T>::insert(
-    iterator      itWhere,
-    const_pointer pWhat,
-    size_type     nElements)
+inline void list_se<T>::insert(iterator itWhere, const_pointer pWhat, size_type nElements)
 {
     if (itWhere != begin())
     {
@@ -242,10 +227,7 @@ inline void list_se<T>::insert_after(iterator itWhere, const_reference what)
 }
 
 template<class T>
-inline void list_se<T>::insert_after(
-    iterator      itWhere,
-    const_pointer pWhat,
-    size_type     nElements)
+inline void list_se<T>::insert_after(iterator itWhere, const_pointer pWhat, size_type nElements)
 {
     for (size_type i = 0; i < nElements; i++)
     {

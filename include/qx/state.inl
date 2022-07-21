@@ -16,9 +16,8 @@ inline state<T>::state(const T& value) noexcept : m_State(value)
 }
 
 template<class T>
-inline state<T>::state(const T& value, const T& defaultValue) noexcept
-    : m_State(value)
-    , m_DefaultValue(defaultValue)
+inline state<T>::state(const T& value, const T& defaultValue) noexcept : m_State(value)
+                                                                       , m_DefaultValue(defaultValue)
 {
 }
 

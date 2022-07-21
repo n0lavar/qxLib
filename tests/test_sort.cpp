@@ -12,22 +12,18 @@
 
 #if QX_TEST_SORT
 
-#include <qx/alg/sort.h>
-#include <array>
-#include <limits>
-#include <random>
+    #include <qx/alg/sort.h>
+    #include <array>
+    #include <limits>
+    #include <random>
 
 
-#undef INT_MAX
-#undef INT_MIN
+    #undef INT_MAX
+    #undef INT_MIN
 constexpr int INT_MAX = std::numeric_limits<int>::max();
 constexpr int INT_MIN = std::numeric_limits<int>::min();
 
-template<
-    typename Compare,
-    int64_t minElement,
-    int64_t maxElement,
-    size_t  arraySize>
+template<typename Compare, int64_t minElement, int64_t maxElement, size_t arraySize>
 struct TestTraits
 {
     static constexpr Compare compare()
@@ -57,10 +53,8 @@ protected:
     /* init protected members here */
     TestQxSort()
     {
-        std::default_random_engine generator(static_cast<unsigned>(time(0)));
-        std::uniform_int_distribution<int64_t> fillDistribution(
-            Traits::min_element(),
-            Traits::max_element());
+        std::default_random_engine             generator(static_cast<unsigned>(time(0)));
+        std::uniform_int_distribution<int64_t> fillDistribution(Traits::min_element(), Traits::max_element());
 
         for (size_t i = 0; i < m_Unsorted.size(); i++)
             m_Unsorted[i] = fillDistribution(generator);
@@ -89,141 +83,81 @@ protected:
 
 //---------------------------- small signed range ----------------------------
 
-using TestQxSort_less_0_elements_small_signed_range =
-    TestTraits<std::less<>, -100, 100, 0>;
-using TestQxSort_greater_0_elements_small_signed_range =
-    TestTraits<std::greater<>, -100, 100, 0>;
-using TestQxSort_less_1_elements_small_signed_range =
-    TestTraits<std::less<>, -100, 100, 1>;
-using TestQxSort_greater_1_elements_small_signed_range =
-    TestTraits<std::greater<>, -100, 100, 1>;
-using TestQxSort_less_10_elements_small_signed_range =
-    TestTraits<std::less<>, -100, 100, 10>;
-using TestQxSort_greater_10_elements_small_signed_range =
-    TestTraits<std::greater<>, -100, 100, 10>;
-using TestQxSort_less_1000_elements_small_signed_range =
-    TestTraits<std::less<>, -100, 100, 1000>;
-using TestQxSort_greater_1000_elements_small_signed_range =
-    TestTraits<std::greater<>, -100, 100, 1000>;
-using TestQxSort_less_100000_elements_small_signed_range =
-    TestTraits<std::less<>, -100, 100, 100000>;
-using TestQxSort_greater_100000_elements_small_signed_range =
-    TestTraits<std::greater<>, -100, 100, 100000>;
+using TestQxSort_less_0_elements_small_signed_range         = TestTraits<std::less<>, -100, 100, 0>;
+using TestQxSort_greater_0_elements_small_signed_range      = TestTraits<std::greater<>, -100, 100, 0>;
+using TestQxSort_less_1_elements_small_signed_range         = TestTraits<std::less<>, -100, 100, 1>;
+using TestQxSort_greater_1_elements_small_signed_range      = TestTraits<std::greater<>, -100, 100, 1>;
+using TestQxSort_less_10_elements_small_signed_range        = TestTraits<std::less<>, -100, 100, 10>;
+using TestQxSort_greater_10_elements_small_signed_range     = TestTraits<std::greater<>, -100, 100, 10>;
+using TestQxSort_less_1000_elements_small_signed_range      = TestTraits<std::less<>, -100, 100, 1000>;
+using TestQxSort_greater_1000_elements_small_signed_range   = TestTraits<std::greater<>, -100, 100, 1000>;
+using TestQxSort_less_100000_elements_small_signed_range    = TestTraits<std::less<>, -100, 100, 100000>;
+using TestQxSort_greater_100000_elements_small_signed_range = TestTraits<std::greater<>, -100, 100, 100000>;
 
 //---------------------------- medium signed range ---------------------------
 
-using TestQxSort_less_0_elements_medium_signed_range =
-    TestTraits<std::less<>, -100000, 100000, 0>;
-using TestQxSort_greater_0_elements_medium_signed_range =
-    TestTraits<std::greater<>, -100000, 100000, 0>;
-using TestQxSort_less_1_medium_signed_range =
-    TestTraits<std::less<>, -100000, 100000, 1>;
-using TestQxSort_greater_1_elements_medium_signed_range =
-    TestTraits<std::greater<>, -100000, 100000, 1>;
-using TestQxSort_less_10_elements_medium_signed_range =
-    TestTraits<std::less<>, -100000, 100000, 10>;
-using TestQxSort_greater_10_elements_medium_signed_range =
-    TestTraits<std::greater<>, -100000, 100000, 10>;
-using TestQxSort_less_1000_elements_medium_signed_range =
-    TestTraits<std::less<>, -100000, 100000, 1000>;
-using TestQxSort_greater_1000_elements_medium_signed_range =
-    TestTraits<std::greater<>, -100000, 100000, 1000>;
-using TestQxSort_less_100000_elements_medium_signed_range =
-    TestTraits<std::less<>, -100000, 100000, 100000>;
-using TestQxSort_greater_100000_elements_medium_signed_range =
-    TestTraits<std::greater<>, -100000, 100000, 100000>;
+using TestQxSort_less_0_elements_medium_signed_range         = TestTraits<std::less<>, -100000, 100000, 0>;
+using TestQxSort_greater_0_elements_medium_signed_range      = TestTraits<std::greater<>, -100000, 100000, 0>;
+using TestQxSort_less_1_medium_signed_range                  = TestTraits<std::less<>, -100000, 100000, 1>;
+using TestQxSort_greater_1_elements_medium_signed_range      = TestTraits<std::greater<>, -100000, 100000, 1>;
+using TestQxSort_less_10_elements_medium_signed_range        = TestTraits<std::less<>, -100000, 100000, 10>;
+using TestQxSort_greater_10_elements_medium_signed_range     = TestTraits<std::greater<>, -100000, 100000, 10>;
+using TestQxSort_less_1000_elements_medium_signed_range      = TestTraits<std::less<>, -100000, 100000, 1000>;
+using TestQxSort_greater_1000_elements_medium_signed_range   = TestTraits<std::greater<>, -100000, 100000, 1000>;
+using TestQxSort_less_100000_elements_medium_signed_range    = TestTraits<std::less<>, -100000, 100000, 100000>;
+using TestQxSort_greater_100000_elements_medium_signed_range = TestTraits<std::greater<>, -100000, 100000, 100000>;
 
 //---------------------------- big signed range ---------------------------
 
-using TestQxSort_less_0_elements_big_signed_range =
-    TestTraits<std::less<>, INT_MIN, INT_MAX, 0>;
-using TestQxSort_greater_0_elements_big_signed_range =
-    TestTraits<std::greater<>, INT_MIN, INT_MAX, 0>;
-using TestQxSort_less_1_elements_big_signed_range =
-    TestTraits<std::less<>, INT_MIN, INT_MAX, 1>;
-using TestQxSort_greater_1_elements_big_signed_range =
-    TestTraits<std::greater<>, INT_MIN, INT_MAX, 1>;
-using TestQxSort_less_10_elements_big_signed_range =
-    TestTraits<std::less<>, INT_MIN, INT_MAX, 10>;
-using TestQxSort_greater_10_elements_big_signed_range =
-    TestTraits<std::greater<>, INT_MIN, INT_MAX, 10>;
-using TestQxSort_less_1000_elements_big_signed_range =
-    TestTraits<std::less<>, INT_MIN, INT_MAX, 1000>;
-using TestQxSort_greater_1000_elements_big_signed_range =
-    TestTraits<std::greater<>, INT_MIN, INT_MAX, 1000>;
-using TestQxSort_less_100000_elements_big_signed_range =
-    TestTraits<std::less<>, INT_MIN, INT_MAX, 100000>;
-using TestQxSort_greater_100000_elements_big_signed_range =
-    TestTraits<std::greater<>, INT_MIN, INT_MAX, 100000>;
+using TestQxSort_less_0_elements_big_signed_range         = TestTraits<std::less<>, INT_MIN, INT_MAX, 0>;
+using TestQxSort_greater_0_elements_big_signed_range      = TestTraits<std::greater<>, INT_MIN, INT_MAX, 0>;
+using TestQxSort_less_1_elements_big_signed_range         = TestTraits<std::less<>, INT_MIN, INT_MAX, 1>;
+using TestQxSort_greater_1_elements_big_signed_range      = TestTraits<std::greater<>, INT_MIN, INT_MAX, 1>;
+using TestQxSort_less_10_elements_big_signed_range        = TestTraits<std::less<>, INT_MIN, INT_MAX, 10>;
+using TestQxSort_greater_10_elements_big_signed_range     = TestTraits<std::greater<>, INT_MIN, INT_MAX, 10>;
+using TestQxSort_less_1000_elements_big_signed_range      = TestTraits<std::less<>, INT_MIN, INT_MAX, 1000>;
+using TestQxSort_greater_1000_elements_big_signed_range   = TestTraits<std::greater<>, INT_MIN, INT_MAX, 1000>;
+using TestQxSort_less_100000_elements_big_signed_range    = TestTraits<std::less<>, INT_MIN, INT_MAX, 100000>;
+using TestQxSort_greater_100000_elements_big_signed_range = TestTraits<std::greater<>, INT_MIN, INT_MAX, 100000>;
 
 //---------------------------- small unsigned range ----------------------------
 
-using TestQxSort_less_0_elements_small_unsigned_range =
-    TestTraits<std::less<>, 0, 100, 0>;
-using TestQxSort_greater_0_elements_small_unsigned_range =
-    TestTraits<std::greater<>, 0, 100, 0>;
-using TestQxSort_less_1_elements_small_unsigned_range =
-    TestTraits<std::less<>, 0, 100, 1>;
-using TestQxSort_greater_1_elements_small_unsigned_range =
-    TestTraits<std::greater<>, 0, 100, 1>;
-using TestQxSort_less_10_elements_small_unsigned_range =
-    TestTraits<std::less<>, 0, 100, 10>;
-using TestQxSort_greater_10_elements_small_unsigned_range =
-    TestTraits<std::greater<>, 0, 100, 10>;
-using TestQxSort_less_1000_elements_small_unsigned_range =
-    TestTraits<std::less<>, 0, 100, 1000>;
-using TestQxSort_greater_1000_elements_small_unsigned_range =
-    TestTraits<std::greater<>, 0, 100, 1000>;
-using TestQxSort_less_100000_elements_small_unsigned_range =
-    TestTraits<std::less<>, 0, 100, 100000>;
-using TestQxSort_greater_100000_elements_small_unsigned_range =
-    TestTraits<std::greater<>, 0, 100, 100000>;
+using TestQxSort_less_0_elements_small_unsigned_range         = TestTraits<std::less<>, 0, 100, 0>;
+using TestQxSort_greater_0_elements_small_unsigned_range      = TestTraits<std::greater<>, 0, 100, 0>;
+using TestQxSort_less_1_elements_small_unsigned_range         = TestTraits<std::less<>, 0, 100, 1>;
+using TestQxSort_greater_1_elements_small_unsigned_range      = TestTraits<std::greater<>, 0, 100, 1>;
+using TestQxSort_less_10_elements_small_unsigned_range        = TestTraits<std::less<>, 0, 100, 10>;
+using TestQxSort_greater_10_elements_small_unsigned_range     = TestTraits<std::greater<>, 0, 100, 10>;
+using TestQxSort_less_1000_elements_small_unsigned_range      = TestTraits<std::less<>, 0, 100, 1000>;
+using TestQxSort_greater_1000_elements_small_unsigned_range   = TestTraits<std::greater<>, 0, 100, 1000>;
+using TestQxSort_less_100000_elements_small_unsigned_range    = TestTraits<std::less<>, 0, 100, 100000>;
+using TestQxSort_greater_100000_elements_small_unsigned_range = TestTraits<std::greater<>, 0, 100, 100000>;
 
 //---------------------------- medium unsigned range ---------------------------
 
-using TestQxSort_less_0_elements_medium_unsigned_range =
-    TestTraits<std::less<>, 0, 100000, 0>;
-using TestQxSort_greater_0_elements_medium_unsigned_range =
-    TestTraits<std::greater<>, 0, 100000, 0>;
-using TestQxSort_less_1_elements_medium_unsigned_range =
-    TestTraits<std::less<>, 0, 100000, 1>;
-using TestQxSort_greater_1_elements_medium_unsigned_range =
-    TestTraits<std::greater<>, 0, 100000, 1>;
-using TestQxSort_less_10_elements_medium_unsigned_range =
-    TestTraits<std::less<>, 0, 100000, 10>;
-using TestQxSort_greater_10_elements_medium_unsigned_range =
-    TestTraits<std::greater<>, 0, 100000, 10>;
-using TestQxSort_less_1000_elements_medium_unsigned_range =
-    TestTraits<std::less<>, 0, 100000, 1000>;
-using TestQxSort_greater_1000_elements_medium_unsigned_range =
-    TestTraits<std::greater<>, 0, 100000, 1000>;
-using TestQxSort_less_100000_elements_medium_unsigned_range =
-    TestTraits<std::less<>, 0, 100000, 100000>;
-using TestQxSort_greater_100000_elements_medium_unsigned_range =
-    TestTraits<std::greater<>, 0, 100000, 100000>;
+using TestQxSort_less_0_elements_medium_unsigned_range         = TestTraits<std::less<>, 0, 100000, 0>;
+using TestQxSort_greater_0_elements_medium_unsigned_range      = TestTraits<std::greater<>, 0, 100000, 0>;
+using TestQxSort_less_1_elements_medium_unsigned_range         = TestTraits<std::less<>, 0, 100000, 1>;
+using TestQxSort_greater_1_elements_medium_unsigned_range      = TestTraits<std::greater<>, 0, 100000, 1>;
+using TestQxSort_less_10_elements_medium_unsigned_range        = TestTraits<std::less<>, 0, 100000, 10>;
+using TestQxSort_greater_10_elements_medium_unsigned_range     = TestTraits<std::greater<>, 0, 100000, 10>;
+using TestQxSort_less_1000_elements_medium_unsigned_range      = TestTraits<std::less<>, 0, 100000, 1000>;
+using TestQxSort_greater_1000_elements_medium_unsigned_range   = TestTraits<std::greater<>, 0, 100000, 1000>;
+using TestQxSort_less_100000_elements_medium_unsigned_range    = TestTraits<std::less<>, 0, 100000, 100000>;
+using TestQxSort_greater_100000_elements_medium_unsigned_range = TestTraits<std::greater<>, 0, 100000, 100000>;
 
 //---------------------------- big unsigned range ---------------------------
 
-using TestQxSort_less_0_elements_big_unsigned_range =
-    TestTraits<std::less<>, 0, INT_MAX, 0>;
-using TestQxSort_greater_0_elements_big_unsigned_range =
-    TestTraits<std::greater<>, 0, INT_MAX, 0>;
-using TestQxSort_less_1_elements_big_unsigned_range =
-    TestTraits<std::less<>, 0, INT_MAX, 1>;
-using TestQxSort_greater_1_elements_big_unsigned_range =
-    TestTraits<std::greater<>, 0, INT_MAX, 1>;
-using TestQxSort_less_10_elements_big_unsigned_range =
-    TestTraits<std::less<>, 0, INT_MAX, 10>;
-using TestQxSort_greater_10_elements_big_unsigned_range =
-    TestTraits<std::greater<>, 0, INT_MAX, 10>;
-using TestQxSort_less_1000_elements_big_unsigned_range =
-    TestTraits<std::less<>, 0, INT_MAX, 1000>;
-using TestQxSort_greater_1000_elements_big_unsigned_range =
-    TestTraits<std::greater<>, 0, INT_MAX, 1000>;
-using TestQxSort_less_100000_elements_big_unsigned_range =
-    TestTraits<std::less<>, 0, INT_MAX, 100000>;
-using TestQxSort_greater_100000_elements_big_unsigned_range =
-    TestTraits<std::greater<>, 0, INT_MAX, 100000>;
+using TestQxSort_less_0_elements_big_unsigned_range         = TestTraits<std::less<>, 0, INT_MAX, 0>;
+using TestQxSort_greater_0_elements_big_unsigned_range      = TestTraits<std::greater<>, 0, INT_MAX, 0>;
+using TestQxSort_less_1_elements_big_unsigned_range         = TestTraits<std::less<>, 0, INT_MAX, 1>;
+using TestQxSort_greater_1_elements_big_unsigned_range      = TestTraits<std::greater<>, 0, INT_MAX, 1>;
+using TestQxSort_less_10_elements_big_unsigned_range        = TestTraits<std::less<>, 0, INT_MAX, 10>;
+using TestQxSort_greater_10_elements_big_unsigned_range     = TestTraits<std::greater<>, 0, INT_MAX, 10>;
+using TestQxSort_less_1000_elements_big_unsigned_range      = TestTraits<std::less<>, 0, INT_MAX, 1000>;
+using TestQxSort_greater_1000_elements_big_unsigned_range   = TestTraits<std::greater<>, 0, INT_MAX, 1000>;
+using TestQxSort_less_100000_elements_big_unsigned_range    = TestTraits<std::less<>, 0, INT_MAX, 100000>;
+using TestQxSort_greater_100000_elements_big_unsigned_range = TestTraits<std::greater<>, 0, INT_MAX, 100000>;
 
 
 using Implementations = ::testing::Types<
@@ -300,10 +234,7 @@ TYPED_TEST_SUITE(TestQxSort, Implementations);
 
 TYPED_TEST(TestQxSort, sort_insertion_it)
 {
-    qx::sort_insertion(
-        TestFixture::m_SortedTest.begin(),
-        TestFixture::m_SortedTest.end(),
-        TypeParam::compare());
+    qx::sort_insertion(TestFixture::m_SortedTest.begin(), TestFixture::m_SortedTest.end(), TypeParam::compare());
 }
 
 TYPED_TEST(TestQxSort, sort_insertion)
@@ -313,10 +244,7 @@ TYPED_TEST(TestQxSort, sort_insertion)
 
 TYPED_TEST(TestQxSort, sort_selection_it)
 {
-    qx::sort_selection(
-        TestFixture::m_SortedTest.begin(),
-        TestFixture::m_SortedTest.end(),
-        TypeParam::compare());
+    qx::sort_selection(TestFixture::m_SortedTest.begin(), TestFixture::m_SortedTest.end(), TypeParam::compare());
 }
 
 TYPED_TEST(TestQxSort, sort_selection)
@@ -326,10 +254,7 @@ TYPED_TEST(TestQxSort, sort_selection)
 
 TYPED_TEST(TestQxSort, sort_bubble_it)
 {
-    qx::sort_bubble(
-        TestFixture::m_SortedTest.begin(),
-        TestFixture::m_SortedTest.end(),
-        TypeParam::compare());
+    qx::sort_bubble(TestFixture::m_SortedTest.begin(), TestFixture::m_SortedTest.end(), TypeParam::compare());
 }
 
 TYPED_TEST(TestQxSort, sort_bubble)
@@ -339,10 +264,7 @@ TYPED_TEST(TestQxSort, sort_bubble)
 
 TYPED_TEST(TestQxSort, sort_heap_it)
 {
-    qx::sort_heap(
-        TestFixture::m_SortedTest.begin(),
-        TestFixture::m_SortedTest.end(),
-        TypeParam::compare());
+    qx::sort_heap(TestFixture::m_SortedTest.begin(), TestFixture::m_SortedTest.end(), TypeParam::compare());
 }
 
 TYPED_TEST(TestQxSort, sort_heap)
@@ -352,10 +274,7 @@ TYPED_TEST(TestQxSort, sort_heap)
 
 TYPED_TEST(TestQxSort, sort_quick_hoare_it)
 {
-    qx::sort_quick_hoare(
-        TestFixture::m_SortedTest.begin(),
-        TestFixture::m_SortedTest.end(),
-        TypeParam::compare());
+    qx::sort_quick_hoare(TestFixture::m_SortedTest.begin(), TestFixture::m_SortedTest.end(), TypeParam::compare());
 }
 
 TYPED_TEST(TestQxSort, sort_quick_hoare)
@@ -365,10 +284,7 @@ TYPED_TEST(TestQxSort, sort_quick_hoare)
 
 TYPED_TEST(TestQxSort, sort_quick_three_way_it)
 {
-    qx::sort_quick_three_way(
-        TestFixture::m_SortedTest.begin(),
-        TestFixture::m_SortedTest.end(),
-        TypeParam::compare());
+    qx::sort_quick_three_way(TestFixture::m_SortedTest.begin(), TestFixture::m_SortedTest.end(), TypeParam::compare());
 }
 
 TYPED_TEST(TestQxSort, sort_quick_three_way)
@@ -378,10 +294,7 @@ TYPED_TEST(TestQxSort, sort_quick_three_way)
 
 TYPED_TEST(TestQxSort, sort_quick_dual_pivot_it)
 {
-    qx::sort_quick_dual_pivot(
-        TestFixture::m_SortedTest.begin(),
-        TestFixture::m_SortedTest.end(),
-        TypeParam::compare());
+    qx::sort_quick_dual_pivot(TestFixture::m_SortedTest.begin(), TestFixture::m_SortedTest.end(), TypeParam::compare());
 }
 
 TYPED_TEST(TestQxSort, sort_quick_dual_pivot)
@@ -391,10 +304,7 @@ TYPED_TEST(TestQxSort, sort_quick_dual_pivot)
 
 TYPED_TEST(TestQxSort, sort_merge_it)
 {
-    qx::sort_merge(
-        TestFixture::m_SortedTest.begin(),
-        TestFixture::m_SortedTest.end(),
-        TypeParam::compare());
+    qx::sort_merge(TestFixture::m_SortedTest.begin(), TestFixture::m_SortedTest.end(), TypeParam::compare());
 }
 
 TYPED_TEST(TestQxSort, sort_merge)
@@ -404,13 +314,9 @@ TYPED_TEST(TestQxSort, sort_merge)
 
 TYPED_TEST(TestQxSort, sort_counting_it)
 {
-    bool bSucc = qx::sort_counting(
-        TestFixture::m_SortedTest.begin(),
-        TestFixture::m_SortedTest.end(),
-        TypeParam::compare());
-    if constexpr (
-        TypeParam::max_element() - TypeParam::min_element() + 1
-        > qx::SORT_COUNTING_MAX_BUFFER_SIZE)
+    bool bSucc =
+        qx::sort_counting(TestFixture::m_SortedTest.begin(), TestFixture::m_SortedTest.end(), TypeParam::compare());
+    if constexpr (TypeParam::max_element() - TypeParam::min_element() + 1 > qx::SORT_COUNTING_MAX_BUFFER_SIZE)
     {
         if (!bSucc)
         {
@@ -424,11 +330,8 @@ TYPED_TEST(TestQxSort, sort_counting_it)
 
 TYPED_TEST(TestQxSort, sort_counting)
 {
-    bool bSucc =
-        qx::sort_counting(TestFixture::m_SortedTest, TypeParam::compare());
-    if constexpr (
-        TypeParam::max_element() - TypeParam::min_element() + 1
-        > qx::SORT_COUNTING_MAX_BUFFER_SIZE)
+    bool bSucc = qx::sort_counting(TestFixture::m_SortedTest, TypeParam::compare());
+    if constexpr (TypeParam::max_element() - TypeParam::min_element() + 1 > qx::SORT_COUNTING_MAX_BUFFER_SIZE)
     {
         if (!bSucc)
         {

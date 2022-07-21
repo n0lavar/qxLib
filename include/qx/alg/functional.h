@@ -9,7 +9,7 @@
 **/
 #pragma once
 
-#include <qx/containers/string/string.h>
+#include <qx/assert/lib_asserts.h>
 #include <qx/useful_macros.h>
 
 QX_PUSH_SUPPRESS_ALL_WARNINGS
@@ -27,68 +27,38 @@ using function2d = std::function<double(double)>;
 
 /**
     @brief  Linear interpolation algorithm
-    @param  p0     - point 0 (x - coordinate, y - f(x))
-    @param  p1     - point 1 (x - coordinate, y - f(x))
-    @param  x      - point
-    @param  pError - error string. if not nullptr and error occured, this string will be filled
-    @retval        - ~f(x)
+    @param  p0 - point 0 (x - coordinate, y - f(x))
+    @param  p1 - point 1 (x - coordinate, y - f(x))
+    @param  x  - point
+    @retval    - ~f(x)
 **/
-inline double linear_interpolation(
-    const glm::dvec2& p0,
-    const glm::dvec2& p1,
-    double            x,
-    string*           pError = nullptr)
+inline double linear_interpolation(const glm::dvec2& p0, const glm::dvec2& p1, double x)
 {
-    if (pError && epsilon_equal(p1.x, p0.x))
-    {
-        *pError = "Two x are equal, result is nan";
-        return p0.y;
-    }
-
+    QX_LIB_EXPECT_RETURN(!epsilon_equal(p1.x, p0.x) && "Two x are equal, result is nan", p0.y);
     return p0.y + (p1.y - p0.y) * (x - p0.x) / (p1.x - p0.x);
 }
 
 /**
     @brief   Bilinear interpolation algorithm
     @details po.z is returned on any error
-    @param   p0     - point 0 (x, y - coordinates, z - f(x, y)) 
-    @param   p1     - point 1 (x, y - coordinates, z - f(x, y)) 
-    @param   p2     - point 2 (x, y - coordinates, z - f(x, y)) 
-    @param   p3     - point 3 (x, y - coordinates, z - f(x, y))
-    @param   p      - point (x, y - coordinates).
-                      It can be out of points square, in this case algorithm called extrapolation
-    @param   pError - error string. if not nullptr and error occurred, this string will be filled
-    @retval         - ~f(p.x, p.y) 
+    @param   p0  - point 0 (x, y - coordinates, z - f(x, y)) 
+    @param   p1  - point 1 (x, y - coordinates, z - f(x, y)) 
+    @param   p2  - point 2 (x, y - coordinates, z - f(x, y)) 
+    @param   p3  - point 3 (x, y - coordinates, z - f(x, y))
+    @param   p   - point (x, y - coordinates).
+                   It can be out of points square, in this case algorithm called extrapolation
+    @retval      - ~f(p.x, p.y) 
 **/
 inline double bilinear_interpolation(
     const glm::dvec3& p0,
     const glm::dvec3& p1,
     const glm::dvec3& p2,
     const glm::dvec3& p3,
-    const glm::dvec2& p,
-    string*           pError = nullptr)
+    const glm::dvec2& p)
 {
-    const glm::dvec2 temp0 {
-        p0.y,
-        linear_interpolation({ p0.x, p0.z }, { p1.x, p1.z }, p.x, pError)
-    };
-
-    if (pError && !pError->empty())
-        return p0.z;
-
-    const glm::dvec2 temp1 {
-        p2.y,
-        linear_interpolation({ p2.x, p2.z }, { p3.x, p3.z }, p.x, pError)
-    };
-
-    if (pError && !pError->empty())
-        return p0.z;
-
-    const double fRet = linear_interpolation(temp0, temp1, p.y, pError);
-
-    if (pError && !pError->empty())
-        return p0.z;
-
+    const glm::dvec2 temp0 { p0.y, linear_interpolation({ p0.x, p0.z }, { p1.x, p1.z }, p.x) };
+    const glm::dvec2 temp1 { p2.y, linear_interpolation({ p2.x, p2.z }, { p3.x, p3.z }, p.x) };
+    const double     fRet = linear_interpolation(temp0, temp1, p.y);
     return fRet;
 }
 
@@ -100,14 +70,9 @@ inline double bilinear_interpolation(
     @param  nIntervalsPer1 - number of intervals per dx = 1
     @retval                - approximate integral
 **/
-inline double integrate_rectangle_rule(
-    const function2d& func,
-    double            x0,
-    double            x1,
-    size_t            nIntervalsPer1 = 10)
+inline double integrate_rectangle_rule(const function2d& func, double x0, double x1, size_t nIntervalsPer1 = 10)
 {
-    const size_t nIntervals = static_cast<size_t>(
-        std::ceil((x1 - x0) * static_cast<double>(nIntervalsPer1)));
+    const size_t nIntervals = static_cast<size_t>(std::ceil((x1 - x0) * static_cast<double>(nIntervalsPer1)));
 
     const double dx         = (x1 - x0) / static_cast<double>(nIntervals);
     double       fTotalArea = 0.0;
@@ -130,14 +95,9 @@ inline double integrate_rectangle_rule(
     @param  nIntervalsPer1 - number of intervals per dx = 1 
     @retval                - approximate integral 
 **/
-inline double integrate_trapezoid_rule(
-    const function2d& func,
-    double            x0,
-    double            x1,
-    size_t            nIntervalsPer1 = 10)
+inline double integrate_trapezoid_rule(const function2d& func, double x0, double x1, size_t nIntervalsPer1 = 10)
 {
-    const size_t nIntervals = static_cast<size_t>(
-        std::ceil(static_cast<double>(nIntervalsPer1) * (x1 - x0)));
+    const size_t nIntervals = static_cast<size_t>(std::ceil(static_cast<double>(nIntervalsPer1) * (x1 - x0)));
 
     const double dx         = (x1 - x0) / static_cast<double>(nIntervals);
     double       fTotalArea = 0.0;
@@ -170,20 +130,16 @@ inline double integrate_adaptive_midpoint(
     size_t            nIntervalsPer1 = 10,
     size_t            nMaxRecursion  = 300)
 {
-    const size_t nIntervals = static_cast<size_t>(
-        std::ceil(static_cast<double>(nIntervalsPer1) * (x1 - x0)));
+    const size_t nIntervals = static_cast<size_t>(std::ceil(static_cast<double>(nIntervalsPer1) * (x1 - x0)));
 
     const double dx         = (x1 - x0) / static_cast<double>(nIntervals);
     double       fTotalArea = 0.0;
     double       x          = x0;
 
-    std::function<double(const function2d&, double, double, double, size_t)>
-        slice_area = [&slice_area, &nMaxRecursion](
-                         const function2d& func,
-                         double            x0,
-                         double            x1,
-                         double            max_slice_error,
-                         size_t            recursionLevel) -> double
+    std::function<double(const function2d&, double, double, double, size_t)> slice_area =
+        [&slice_area,
+         &nMaxRecursion](const function2d& func, double x0, double x1, double max_slice_error, size_t recursionLevel)
+        -> double
     {
         recursionLevel++;
         const double y0 = func(x0);
@@ -198,8 +154,7 @@ inline double integrate_adaptive_midpoint(
 
         const double fError = (fArea1m2 - fArea12) / fArea12;
 
-        if (recursionLevel > nMaxRecursion
-            || std::abs(fError) < max_slice_error)
+        if (recursionLevel > nMaxRecursion || std::abs(fError) < max_slice_error)
         {
             return fArea1m2;
         }
@@ -213,8 +168,7 @@ inline double integrate_adaptive_midpoint(
     for (size_t i = 0; i < nIntervals; i++)
     {
         const size_t nRecursionLevel = 0;
-        fTotalArea +=
-            slice_area(func, x, x + dx, fMaxSliceError, nRecursionLevel);
+        fTotalArea += slice_area(func, x, x + dx, fMaxSliceError, nRecursionLevel);
 
         x += dx;
     }
@@ -239,14 +193,12 @@ inline double integrate_monte_carlo(
     glm::dvec2                                pos1,
     size_t                                    nPointsPerOneSquare = 1000)
 {
-    const double fArea = std::abs(pos1.x - pos0.x) * std::abs(pos1.y - pos0.y);
-    const int    nTotalPoints = static_cast<int>(
-        std::ceil(fArea * static_cast<double>(nPointsPerOneSquare)));
+    const double fArea        = std::abs(pos1.x - pos0.x) * std::abs(pos1.y - pos0.y);
+    const int    nTotalPoints = static_cast<int>(std::ceil(fArea * static_cast<double>(nPointsPerOneSquare)));
 
     int points_inside = 0;
 
-    std::default_random_engine generator(
-        static_cast<unsigned>(std::time(nullptr)));
+    std::default_random_engine generator(static_cast<unsigned>(std::time(nullptr)));
 
     std::uniform_real_distribution<double> x_dist(pos0.x, pos1.x);
     std::uniform_real_distribution<double> y_dist(pos0.y, pos1.y);

@@ -12,8 +12,8 @@
 
 #if QX_TEST_CONSTEXPR_FLAG
 
-#include <qx/meta/constexpr_flag.h>
-#include <qx/useful_macros.h>
+    #include <qx/meta/constexpr_flag.h>
+    #include <qx/useful_macros.h>
 
 
 using Flag1 = qx::constexpr_flag<class FtagTag1>;

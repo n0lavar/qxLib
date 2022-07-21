@@ -12,9 +12,9 @@
 
 #if QX_TEST_STRING_HASH
 
-#include <qx/containers/string/string.h>
-#include <qx/containers/string/string_hash.h>
-#include <string_test_helpers.h>
+    #include <qx/containers/string/string.h>
+    #include <qx/containers/string/string_hash.h>
+    #include <string_test_helpers.h>
 
 QX_PUSH_SUPPRESS_MSVC_WARNINGS(5233)
 

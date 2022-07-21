@@ -45,10 +45,7 @@ public:
         @param pData  - data pointer
         @param eUsage - the expected usage pattern of the data store
     **/
-    virtual void Allocate(
-        GLsizeiptr  nSize,
-        const void* pData  = nullptr,
-        GLenum      eUsage = GL_DYNAMIC_DRAW);
+    virtual void Allocate(GLsizeiptr nSize, const void* pData = nullptr, GLenum eUsage = GL_DYNAMIC_DRAW);
 
     /**
         @brief Update buffer
@@ -56,10 +53,7 @@ public:
         @param nSize   - data size
         @param nOffset - offset from the buffer beginning
     **/
-    virtual void Update(
-        const void* pData,
-        GLsizeiptr  nSize,
-        GLintptr    nOffset = 0);
+    virtual void Update(const void* pData, GLsizeiptr nSize, GLintptr nOffset = 0);
 
 protected:
     /**

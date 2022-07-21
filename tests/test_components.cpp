@@ -12,9 +12,9 @@
 
 #if QX_TEST_COMPONENTS
 
-#include <qx/containers/components.h>
+    #include <qx/containers/components.h>
 
-#include <string>
+    #include <string>
 
 class BaseTestComponent : public qx::rtti_root<BaseTestComponent>
 {
@@ -127,25 +127,21 @@ TEST(components, main)
     EXPECT_FALSE(container.empty());
 
     // unique ptr add
-    TestComponent* pTestComponentAdd2 =
-        container.add(std::make_unique<TestComponent>('b'));
+    TestComponent* pTestComponentAdd2 = container.add(std::make_unique<TestComponent>('b'));
     EXPECT_TRUE(pTestComponentAdd2);
     EXPECT_EQ(container.size(), 2);
 
     // add first with own key "ITestComponent"
-    ITestComponent* pTestComponent1Add =
-        container.add_to<ITestComponent>(std::make_unique<TestComponent1>(4));
+    ITestComponent* pTestComponent1Add = container.add_to<ITestComponent>(std::make_unique<TestComponent1>(4));
     EXPECT_TRUE(pTestComponent1Add);
     EXPECT_EQ(container.size(), 3);
 
     // add second with own key "ITestComponent"
-    ITestComponent* pTestComponent2Add =
-        container.add_to<ITestComponent>(std::make_unique<TestComponent2>(5.0));
+    ITestComponent* pTestComponent2Add = container.add_to<ITestComponent>(std::make_unique<TestComponent2>(5.0));
     EXPECT_TRUE(pTestComponent2Add);
     EXPECT_EQ(container.size(), 4);
 
-    ITestComponent* pTestComponent3Add =
-        container.add_to<ITestComponent>(std::make_unique<TestComponent2>(2.0));
+    ITestComponent* pTestComponent3Add = container.add_to<ITestComponent>(std::make_unique<TestComponent2>(2.0));
     EXPECT_TRUE(pTestComponent3Add);
     EXPECT_EQ(container.size(), 5);
 
@@ -164,9 +160,7 @@ TEST(components, main)
 
     // get
     TestComponent* pTestComponent = container.get<TestComponent>();
-    EXPECT_TRUE(
-        pTestComponentAdd1 == pTestComponent
-        || pTestComponentAdd2 == pTestComponent);
+    EXPECT_TRUE(pTestComponentAdd1 == pTestComponent || pTestComponentAdd2 == pTestComponent);
     EXPECT_EQ(pTestComponentAdd1->GetTestComponentData(), 'a');
     EXPECT_EQ(container.size(), 5);
 
@@ -176,8 +170,7 @@ TEST(components, main)
     for (auto it = range.first; it != range.second; ++it)
     {
         EXPECT_TRUE(
-            it->second.get() == pTestComponent1Add
-            || it->second.get() == pTestComponent2Add
+            it->second.get() == pTestComponent1Add || it->second.get() == pTestComponent2Add
             || it->second.get() == pTestComponent3Add);
     }
     EXPECT_EQ(container.size(), 5);
@@ -202,8 +195,7 @@ TEST(components, main)
         EXPECT_TRUE(it.GetConst());
 
     // extract
-    qx::components<BaseTestComponent>::pointer pTestComponentOwner =
-        container.extract<TestComponent>();
+    qx::components<BaseTestComponent>::pointer pTestComponentOwner = container.extract<TestComponent>();
 
     EXPECT_EQ(pTestComponentOwner.get(), pTestComponent);
     EXPECT_EQ(container.size(), 4);

@@ -50,11 +50,7 @@ public:
         @param fEnd   - end value
         @param fSpeed - speed of updating
     **/
-    base_easing_element(
-        const easing::func<T>& func,
-        T                      fStart = T(0.f),
-        T                      fEnd   = T(1.f),
-        T                      fSpeed = T(1.f)) noexcept;
+    base_easing_element(const easing::func<T>& func, T fStart = T(0.f), T fEnd = T(1.f), T fSpeed = T(1.f)) noexcept;
 
     /**
         @brief Mark element as active and let it update

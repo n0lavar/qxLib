@@ -12,11 +12,11 @@
 
 #if QX_TEST_STRING
 
-#include <qx/containers/string/string.h>
-#include <string_test_helpers.h>
+    #include <qx/containers/string/string.h>
+    #include <string_test_helpers.h>
 
-#include <list>
-#include <unordered_map>
+    #include <list>
+    #include <unordered_map>
 
 QX_PUSH_SUPPRESS_MSVC_WARNINGS(5233)
 
@@ -25,8 +25,7 @@ class TestQxString : public ::testing::Test
 {
 };
 
-using Implementations =
-    ::testing::Types<qx::char_traits<char>, qx::char_traits<wchar_t>>;
+using Implementations = ::testing::Types<qx::char_traits<char>, qx::char_traits<wchar_t>>;
 
 TYPED_TEST_SUITE(TestQxString, Implementations);
 
@@ -254,8 +253,7 @@ TYPED_TEST(TestQxString, format)
     EXPECT_FALSE(str0.empty());
     EXPECT_EQ(str0.size(), 27);
 
-    StringTypeTn str1 =
-        StringType::static_sprintf(STR("The half of %d is %f"), 75, 75.f / 2);
+    StringTypeTn str1 = StringType::static_sprintf(STR("The half of %d is %f"), 75, 75.f / 2);
     EXPECT_STREQ(str1.data(), STR("The half of 75 is 37.500000"));
     EXPECT_FALSE(str0.empty());
     EXPECT_EQ(str1.size(), 27);
@@ -453,15 +451,11 @@ TYPED_TEST(TestQxString, insert)
 
         EXPECT_EQ(insert<type>(str, start + 25u, STR("big ")), 29);
         EXPECT_EQ(str.size(), 41);
-        EXPECT_STREQ(
-            str.data(),
-            STR("you be careful with that big butter knife"));
+        EXPECT_STREQ(str.data(), STR("you be careful with that big butter knife"));
 
         EXPECT_EQ(insert<type>(str, start + 41u, STR(", mate!")), 48);
         EXPECT_EQ(str.size(), 48);
-        EXPECT_STREQ(
-            str.data(),
-            STR("you be careful with that big butter knife, mate!"));
+        EXPECT_STREQ(str.data(), STR("you be careful with that big butter knife, mate!"));
     };
 
     test_continuous(StringType(), 0u);
@@ -729,8 +723,7 @@ TYPED_TEST(TestQxString, remove)
         EXPECT_STREQ(str.data(), STR("0010002225666"));
     }
 
-    auto check_remove =
-        [](auto& str, auto expected_ret, auto expected_str, auto... remove_args)
+    auto check_remove = [](auto& str, auto expected_ret, auto expected_str, auto... remove_args)
     {
         auto ret = str.remove(remove_args...);
         EXPECT_EQ(ret, expected_ret);
@@ -746,18 +739,9 @@ TYPED_TEST(TestQxString, remove)
 
         check_remove(str, 9, STR("0001122235666"), type(STR("4")));
 
-        check_remove(
-            str,
-            StringType::npos,
-            STR("0001122235666"),
-            type(STR("7")));
+        check_remove(str, StringType::npos, STR("0001122235666"), type(STR("7")));
 
-        check_remove(
-            str,
-            1,
-            STR("01122235666"),
-            type(STR("00")),
-            static_cast<StringTypeTn::size_type>(1));
+        check_remove(str, 1, STR("01122235666"), type(STR("00")), static_cast<StringTypeTn::size_type>(1));
 
         check_remove(
             str,
@@ -798,8 +782,7 @@ TYPED_TEST(TestQxString, remove_all)
         EXPECT_STREQ(str.data(), STR("1111233398"));
     }
 
-    auto check_remove_all =
-        [](auto& str, auto expected_ret, auto expected_str, auto... remove_args)
+    auto check_remove_all = [](auto& str, auto expected_ret, auto expected_str, auto... remove_args)
     {
         auto ret = str.remove_all(remove_args...);
         EXPECT_EQ(ret, expected_ret);
@@ -817,12 +800,7 @@ TYPED_TEST(TestQxString, remove_all)
 
         check_remove_all(str, 4, STR("2222333987"), type(STR("1")));
 
-        check_remove_all(
-            str,
-            1,
-            STR("22333987"),
-            type(STR("22")),
-            static_cast<StringTypeTn::size_type>(2));
+        check_remove_all(str, 1, STR("22333987"), type(STR("22")), static_cast<StringTypeTn::size_type>(2));
 
         check_remove_all(
             str,
@@ -840,22 +818,17 @@ TYPED_TEST(TestQxString, remove_all)
 
 TYPED_TEST(TestQxString, cases)
 {
-    StringTypeTn str(
-        STR("maNy diffeRent words placEd Here. yoU can test,iT. really"));
+    StringTypeTn str(STR("maNy diffeRent words placEd Here. yoU can test,iT. really"));
 
     StringTypeTn str0(str);
     str0.to_lower();
     EXPECT_EQ(str0.size(), str.size());
-    EXPECT_STREQ(
-        str0.data(),
-        STR("many different words placed here. you can test,it. really"));
+    EXPECT_STREQ(str0.data(), STR("many different words placed here. you can test,it. really"));
 
     StringTypeTn str1(str);
     str1.to_upper();
     EXPECT_EQ(str1.size(), str.size());
-    EXPECT_STREQ(
-        str1.data(),
-        STR("MANY DIFFERENT WORDS PLACED HERE. YOU CAN TEST,IT. REALLY"));
+    EXPECT_STREQ(str1.data(), STR("MANY DIFFERENT WORDS PLACED HERE. YOU CAN TEST,IT. REALLY"));
 }
 
 // type and operator>> overloading for basic_string::to
@@ -1265,13 +1238,12 @@ TYPED_TEST(TestQxString, from)
         str = fromFunc(nullptr);
         EXPECT_STREQ(str.data(), STR("nullptr"));
 
-        str = fromFunc(reinterpret_cast<void*>(0x000000004128FF44));
+        str                     = fromFunc(reinterpret_cast<void*>(0x000000004128FF44));
         const bool bFormatCase1 = str == STR("0x000000004128FF44");
         const bool bFormatCase2 = str == STR("0x000000004128ff44");
         const bool bFormatCase3 = str == STR("0x4128ff44");
         const bool bFormatCase4 = str == STR("0x4128FF44");
-        EXPECT_TRUE(
-            bFormatCase1 || bFormatCase2 || bFormatCase3 || bFormatCase4);
+        EXPECT_TRUE(bFormatCase1 || bFormatCase2 || bFormatCase3 || bFormatCase4);
 
         str = fromFunc(true);
         EXPECT_STREQ(str.data(), STR("true"));
@@ -1285,8 +1257,7 @@ TYPED_TEST(TestQxString, from)
     };
 
     test_from(
-        [](const auto&                       data,
-           typename TypeParam::const_pointer pszFormat = nullptr)
+        [](const auto& data, typename TypeParam::const_pointer pszFormat = nullptr)
         {
             StringTypeTn str;
             str.from(data, pszFormat);
@@ -1294,8 +1265,7 @@ TYPED_TEST(TestQxString, from)
         });
 
     test_from(
-        [](const auto&                       data,
-           typename TypeParam::const_pointer pszFormat = nullptr)
+        [](const auto& data, typename TypeParam::const_pointer pszFormat = nullptr)
         {
             return StringType::static_from(data, pszFormat);
         });
@@ -1508,11 +1478,9 @@ TYPED_TEST(TestQxString, operator_stream_in)
 
 TYPED_TEST(TestQxString, string_view)
 {
-    StringTypeTn qx_str = STR("qx_str");
-    std::basic_string_view<ValueType, std::char_traits<ValueType>> view1(
-        qx_str);
-    std::basic_string_view<ValueType, std::char_traits<ValueType>> view2 =
-        qx_str;
+    StringTypeTn                                                   qx_str = STR("qx_str");
+    std::basic_string_view<ValueType, std::char_traits<ValueType>> view1(qx_str);
+    std::basic_string_view<ValueType, std::char_traits<ValueType>> view2 = qx_str;
 }
 
 TYPED_TEST(TestQxString, small_string_optimization)
@@ -1528,9 +1496,9 @@ TYPED_TEST(TestQxString, small_string_optimization)
             "big big big string 1");
     constexpr auto nBigStrSize1 = qx::strlen(pszBigString1);
 
-    constexpr auto pszBigString2 = STR(
-        "big big big big big big big big big big big big big big big big big "
-        "big big big big big big big big big big big big big string 2 ");
+    constexpr auto pszBigString2 =
+        STR("big big big big big big big big big big big big big big big big big "
+            "big big big big big big big big big big big big big string 2 ");
     constexpr auto nBigStrSize2 = qx::strlen(pszBigString2);
 
     // from small to small
@@ -1634,52 +1602,39 @@ TYPED_TEST(TestQxString, replase)
 
 
 
-    auto test_replace =
-        [pszStartStr, &str](auto type_find_var, auto type_replace_var)
+    auto test_replace = [pszStartStr, &str](auto type_find_var, auto type_replace_var)
     {
         using type_find    = decltype(type_find_var);
         using type_replace = decltype(type_replace_var);
 
 
         str = pszStartStr;
-        EXPECT_EQ(
-            str.replace(type_find(STR("you")), type_replace(STR("12345"))),
-            17);
+        EXPECT_EQ(str.replace(type_find(STR("you")), type_replace(STR("12345"))), 17);
         EXPECT_STREQ(str.data(), STR("Let me help 12345 with your baggage"));
         EXPECT_EQ(str.size(), 35);
 
         str = pszStartStr;
-        EXPECT_EQ(
-            str.replace(type_find(STR("you")), type_replace(STR("123"))),
-            15);
+        EXPECT_EQ(str.replace(type_find(STR("you")), type_replace(STR("123"))), 15);
         EXPECT_STREQ(str.data(), STR("Let me help 123 with your baggage"));
         EXPECT_EQ(str.size(), 33);
 
         str = pszStartStr;
-        EXPECT_EQ(
-            str.replace(type_find(STR("you")), type_replace(STR("12"))),
-            14);
+        EXPECT_EQ(str.replace(type_find(STR("you")), type_replace(STR("12"))), 14);
         EXPECT_STREQ(str.data(), STR("Let me help 12 with your baggage"));
         EXPECT_EQ(str.size(), 32);
 
         str = pszStartStr;
-        EXPECT_EQ(
-            str.replace(type_find(STR("you")), type_replace(STR("12")), 16),
-            23);
+        EXPECT_EQ(str.replace(type_find(STR("you")), type_replace(STR("12")), 16), 23);
         EXPECT_STREQ(str.data(), STR("Let me help you with 12r baggage"));
         EXPECT_EQ(str.size(), 32);
 
         str = pszStartStr;
-        EXPECT_EQ(
-            str.replace(type_find(STR("you")), type_replace(STR("12")), 26),
-            StringType::npos);
+        EXPECT_EQ(str.replace(type_find(STR("you")), type_replace(STR("12")), 26), StringType::npos);
         EXPECT_STREQ(str.data(), STR("Let me help you with your baggage"));
         EXPECT_EQ(str.size(), 33);
 
         str = pszStartStr;
-        EXPECT_EQ(
-            str.replace(type_find(STR("you")), type_replace(STR("12")), 0, 10),
-            StringType::npos);
+        EXPECT_EQ(str.replace(type_find(STR("you")), type_replace(STR("12")), 0, 10), StringType::npos);
         EXPECT_STREQ(str.data(), STR("Let me help you with your baggage"));
         EXPECT_EQ(str.size(), 33);
     };
@@ -1708,44 +1663,32 @@ TYPED_TEST(TestQxString, replase_all)
         auto         pszStartStr = STR("aa bb cc aaa bbb ccc dddd");
 
         str = pszStartStr;
-        EXPECT_EQ(
-            str.replace_all(type_find(STR("aa")), type_replace(STR("bb"))),
-            2);
+        EXPECT_EQ(str.replace_all(type_find(STR("aa")), type_replace(STR("bb"))), 2);
         EXPECT_STREQ(str.data(), STR("bb bb cc bba bbb ccc dddd"));
         EXPECT_EQ(str.size(), 25);
 
         str = pszStartStr;
-        EXPECT_EQ(
-            str.replace_all(type_find(STR("aa")), type_replace(STR("bb")), 4),
-            1);
+        EXPECT_EQ(str.replace_all(type_find(STR("aa")), type_replace(STR("bb")), 4), 1);
         EXPECT_STREQ(str.data(), STR("aa bb cc bba bbb ccc dddd"));
         EXPECT_EQ(str.size(), 25);
 
         str = pszStartStr;
-        EXPECT_EQ(
-            str.replace_all(type_find(STR("fff")), type_replace(STR("bb"))),
-            0);
+        EXPECT_EQ(str.replace_all(type_find(STR("fff")), type_replace(STR("bb"))), 0);
         EXPECT_STREQ(str.data(), STR("aa bb cc aaa bbb ccc dddd"));
         EXPECT_EQ(str.size(), 25);
 
         str = pszStartStr;
-        EXPECT_EQ(
-            str.replace_all(type_find(STR("aaa")), type_replace(STR("bbb"))),
-            1);
+        EXPECT_EQ(str.replace_all(type_find(STR("aaa")), type_replace(STR("bbb"))), 1);
         EXPECT_STREQ(str.data(), STR("aa bb cc bbb bbb ccc dddd"));
         EXPECT_EQ(str.size(), 25);
 
         str = pszStartStr;
-        EXPECT_EQ(
-            str.replace_all(type_find(STR("aaa")), type_replace(STR("bbb"))),
-            1);
+        EXPECT_EQ(str.replace_all(type_find(STR("aaa")), type_replace(STR("bbb"))), 1);
         EXPECT_STREQ(str.data(), STR("aa bb cc bbb bbb ccc dddd"));
         EXPECT_EQ(str.size(), 25);
 
         str = pszStartStr;
-        EXPECT_EQ(
-            str.replace_all(type_find(STR("a")), type_replace(STR("b"))),
-            5);
+        EXPECT_EQ(str.replace_all(type_find(STR("a")), type_replace(STR("b"))), 5);
         EXPECT_STREQ(str.data(), STR("bb bb cc bbb bbb ccc dddd"));
         EXPECT_EQ(str.size(), 25);
     };

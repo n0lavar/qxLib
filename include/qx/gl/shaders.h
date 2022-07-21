@@ -9,7 +9,7 @@
 **/
 #pragma once
 
-#include <qx/containers/string/string.h>
+#include <qx/assert/lib_asserts.h>
 #include <qx/useful_macros.h>
 
 #include <glew.h>
@@ -50,13 +50,6 @@ public:
     shader_base() = default;
 
     /**
-        @brief shader_base object constructor
-        @param pszShaderCode - string with shader code
-        @param pError        - error string pointer
-    **/
-    shader_base(const GLchar* pszShaderCode, string* pError = nullptr);
-
-    /**
         @brief shader_base object destructor
     **/
     ~shader_base();
@@ -64,9 +57,13 @@ public:
     /**
         @brief Init (compile) shader
         @param pszShaderCode - string with shader code
-        @param pError        - error string pointer
     **/
-    void Init(const GLchar* pszShaderCode, string* pError = nullptr);
+    /**
+        @brief  Init (compile) shader
+        @param  pszShaderCode - string with shader code
+        @retval               - error or empty string if init was successful
+    **/
+    string Init(const GLchar* pszShaderCode);
 
     /**
         @brief  Get shader name

@@ -11,8 +11,7 @@ namespace qx
 {
 
 template<typename T>
-inline void base_easing_sequence<T>::push_back(
-    easing_element_type element) noexcept
+inline void base_easing_sequence<T>::push_back(easing_element_type element) noexcept
 {
     m_ElementsSequence.push_back(std::move(element));
     update_total_time();
@@ -80,8 +79,7 @@ inline void base_easing_sequence<T>::update(T fDeltaTime) noexcept
 {
     if (auto pCurrentElement = get_current_element())
     {
-        T fNotUsedTime =
-            pCurrentElement->update(fDeltaTime * m_fSpeed) / m_fSpeed;
+        T fNotUsedTime = pCurrentElement->update(fDeltaTime * m_fSpeed) / m_fSpeed;
 
         if (pCurrentElement->is_finished())
         {
@@ -121,9 +119,7 @@ inline T base_easing_sequence<T>::get() const noexcept
     {
         return pCurrentElement->get();
     }
-    else if (
-        !m_ElementsSequence.empty()
-        && m_nCurrentElement >= m_ElementsSequence.size())
+    else if (!m_ElementsSequence.empty() && m_nCurrentElement >= m_ElementsSequence.size())
     {
         return m_ElementsSequence.back().get();
     }
@@ -138,10 +134,7 @@ inline T base_easing_sequence<T>::get_fraction() const noexcept
 {
     if (auto pCurrentElement = get_current_element())
     {
-        return (m_fCurrentTime
-                + pCurrentElement->get_fraction()
-                      / pCurrentElement->get_speed())
-               / m_fTotalTime;
+        return (m_fCurrentTime + pCurrentElement->get_fraction() / pCurrentElement->get_speed()) / m_fTotalTime;
     }
     else if (m_fTotalTime > T(0.f))
     {
@@ -166,9 +159,7 @@ inline bool base_easing_sequence<T>::is_not_started() const noexcept
     {
         return pCurrentElement->is_not_started();
     }
-    else if (
-        !m_ElementsSequence.empty()
-        && m_nCurrentElement >= m_ElementsSequence.size())
+    else if (!m_ElementsSequence.empty() && m_nCurrentElement >= m_ElementsSequence.size())
     {
         return m_ElementsSequence.back().is_not_started();
     }
@@ -185,9 +176,7 @@ inline bool base_easing_sequence<T>::is_started() const noexcept
     {
         return pCurrentElement->is_started();
     }
-    else if (
-        !m_ElementsSequence.empty()
-        && m_nCurrentElement >= m_ElementsSequence.size())
+    else if (!m_ElementsSequence.empty() && m_nCurrentElement >= m_ElementsSequence.size())
     {
         return m_ElementsSequence.back().is_started();
     }
@@ -213,9 +202,7 @@ inline bool base_easing_sequence<T>::is_finished() const noexcept
     {
         return pCurrentElement->is_finished();
     }
-    else if (
-        !m_ElementsSequence.empty()
-        && m_nCurrentElement >= m_ElementsSequence.size())
+    else if (!m_ElementsSequence.empty() && m_nCurrentElement >= m_ElementsSequence.size())
     {
         return m_ElementsSequence.back().is_finished();
     }
@@ -232,21 +219,16 @@ inline bool base_easing_sequence<T>::is_looped() const noexcept
 }
 
 template<typename T>
-inline typename base_easing_sequence<T>::easing_element_type*
-    base_easing_sequence<T>::get_current_element() noexcept
+inline typename base_easing_sequence<T>::easing_element_type* base_easing_sequence<T>::get_current_element() noexcept
 {
-    return m_nCurrentElement < m_ElementsSequence.size()
-               ? &m_ElementsSequence[m_nCurrentElement]
-               : nullptr;
+    return m_nCurrentElement < m_ElementsSequence.size() ? &m_ElementsSequence[m_nCurrentElement] : nullptr;
 }
 
 template<typename T>
-inline const typename base_easing_sequence<T>::easing_element_type*
-    base_easing_sequence<T>::get_current_element() const noexcept
+inline const typename base_easing_sequence<T>::easing_element_type* base_easing_sequence<T>::get_current_element()
+    const noexcept
 {
-    return const_cast<base_easing_sequence*>(
-               static_cast<const base_easing_sequence*>(this))
-        ->get_current_element();
+    return const_cast<base_easing_sequence*>(static_cast<const base_easing_sequence*>(this))->get_current_element();
 }
 
 template<typename T>

@@ -9,7 +9,7 @@
 **/
 #pragma once
 
-#include <qx/containers/string/string.h>
+#include <qx/assert/lib_asserts.h>
 #include <qx/gl/shaders.h>
 
 #include <glew.h>
@@ -63,10 +63,9 @@ public:
 
     /**
         @brief  Link attached shaders
-        @param  pErrorString - string for error
-        @retval              - true if success
+        @retval - true if success
     **/
-    bool Link(string* pErrorString = nullptr) noexcept;
+    bool Link() noexcept;
 
     /**
         @brief Use shader program
@@ -101,10 +100,7 @@ public:
         @param  nCount           - number of values that are to be modified.
     **/
     template<typename T>
-    void SetUniform(
-        GLint    nUniformLocation,
-        const T* pValue,
-        GLsizei  nCount) noexcept;
+    void SetUniform(GLint nUniformLocation, const T* pValue, GLsizei nCount) noexcept;
 
     /**
         @brief  Specify the value of a uniform variable
@@ -115,10 +111,7 @@ public:
         @param  nCount  - number of values that are to be modified.
     **/
     template<typename T>
-    void SetUniform(
-        const GLchar* pszName,
-        const T*      pValue,
-        GLsizei       nCount) noexcept;
+    void SetUniform(const GLchar* pszName, const T* pValue, GLsizei nCount) noexcept;
 
     /**
         @brief  Specify the value of a uniform variable
@@ -141,11 +134,9 @@ public:
     /**
         @brief  Get uniform location based on it's name
         @param  pszName - uniform string name
-        @param  pError  - error string pointer
         @retval         - location number
     **/
-    GLint GetUniformLocation(const GLchar* pszName, string* pError = nullptr)
-        const noexcept;
+    GLint GetUniformLocation(const GLchar* pszName) const noexcept;
 
     /**
         @brief   Add include string
@@ -161,11 +152,7 @@ public:
         @param nTextLength  - text length 
         @retval             - true if include extension is supported and successfully added
     **/
-    static bool AddInclude(
-        const char* pszName,
-        GLint       nNameLength,
-        const char* pszText,
-        GLint       nTextLength) noexcept;
+    static bool AddInclude(const char* pszName, GLint nNameLength, const char* pszText, GLint nTextLength) noexcept;
 
     /**
         @brief Dispatch program compute
@@ -173,10 +160,7 @@ public:
         @param nGroupsY - The number of work groups to be launched in the Y dimension 
         @param nGroupsZ - The number of work groups to be launched in the Z dimension 
     **/
-    static void DispatchCompute(
-        GLuint nGroupsX,
-        GLuint nGroupsY,
-        GLuint nGroupsZ) noexcept;
+    static void DispatchCompute(GLuint nGroupsX, GLuint nGroupsY, GLuint nGroupsZ) noexcept;
 
     /**
         @brief  operator==
@@ -190,8 +174,7 @@ public:
         @param  baseShaderProgram - shader program rvalue ref
         @retval                   - this object reference
     **/
-    base_shader_program& operator=(
-        base_shader_program&& baseShaderProgram) noexcept;
+    base_shader_program& operator=(base_shader_program&& baseShaderProgram) noexcept;
 
 
 

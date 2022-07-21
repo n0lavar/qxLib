@@ -103,13 +103,7 @@ inline void base_texture::Specify2DMultisample(
     GLsizei   nHeight,
     GLboolean bFixedSampleLocations)
 {
-    glTexImage2DMultisample(
-        m_eTextureTarget,
-        nSamples,
-        eInternalFormat,
-        nWidth,
-        nHeight,
-        bFixedSampleLocations);
+    glTexImage2DMultisample(m_eTextureTarget, nSamples, eInternalFormat, nWidth, nHeight, bFixedSampleLocations);
 
     m_nWidth          = nWidth;
     m_nHeight         = nHeight;

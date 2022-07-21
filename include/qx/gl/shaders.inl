@@ -11,24 +11,16 @@ namespace qx
 {
 
 template<GLenum ShaderType>
-inline shader_base<ShaderType>::shader_base(
-    const GLchar* pszShaderCode,
-    string*       pError)
-{
-    Init(pszShaderCode, pError);
-}
-
-template<GLenum ShaderType>
 inline shader_base<ShaderType>::~shader_base()
 {
     glDeleteShader(m_nShader);
 }
 
 template<GLenum ShaderType>
-inline void shader_base<ShaderType>::Init(
-    const GLchar* pszShaderCode,
-    string*       pError)
+inline string shader_base<ShaderType>::Init(const GLchar* pszShaderCode)
 {
+    string sError;
+
     if (pszShaderCode)
     {
         // Compile
@@ -37,27 +29,25 @@ inline void shader_base<ShaderType>::Init(
         glCompileShader(m_nShader);
 
         // Print compile errors if any
-        if (const GLint bSuccess = GetParameter(GL_COMPILE_STATUS);
-            pError && !bSuccess)
+        if (const GLint bSuccess = GetParameter(GL_COMPILE_STATUS); !bSuccess)
         {
             GLsizei nErrorStringLength = 0;
             glGetShaderiv(m_nShader, GL_INFO_LOG_LENGTH, &nErrorStringLength);
 
             if (nErrorStringLength > 0)
             {
-                pError->assign(nErrorStringLength, '\0');
-                glGetShaderInfoLog(
-                    m_nShader,
-                    nErrorStringLength,
-                    nullptr,
-                    pError->data());
+                sError.assign(nErrorStringLength, '\0');
+                glGetShaderInfoLog(m_nShader, nErrorStringLength, nullptr, sError.data());
+                QX_LIB_EXPECT_MSG(0, sError.data());
             }
         }
     }
-    else if (pError)
+    else
     {
-        *pError = "Nullptr passed as shader text pointer";
+        QX_LIB_EXPECT_MSG(0, "Nullptr passed as shader text pointer");
     }
+
+    return sError;
 }
 
 

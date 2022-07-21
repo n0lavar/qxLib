@@ -12,10 +12,10 @@
 
 #if QX_TEST_OBSERVER
 
-#include <qx/patterns/observer.h>
+    #include <qx/patterns/observer.h>
 
-#include <memory>
-#include <string>
+    #include <memory>
+    #include <string>
 
 class TestObserver
 {
@@ -25,16 +25,14 @@ public:
 
     void EventHandler1(std::string_view svSubjectName)
     {
-        sLastMsg = std::string("TestObserver")
-                   + std::to_string(get_num_observer())
-                   + ": caught event 1 from " + std::string(svSubjectName);
+        sLastMsg = std::string("TestObserver") + std::to_string(get_num_observer()) + ": caught event 1 from "
+                   + std::string(svSubjectName);
     }
 
     void EventHandler2(std::string_view svSubjectName) const
     {
-        sLastMsg = std::string("TestObserver")
-                   + std::to_string(get_num_observer())
-                   + ": caught event 2 from " + std::string(svSubjectName);
+        sLastMsg = std::string("TestObserver") + std::to_string(get_num_observer()) + ": caught event 2 from "
+                   + std::string(svSubjectName);
     }
 
     std::string_view GetLastMsg() const
@@ -185,8 +183,7 @@ protected:
 
 TEST_F(TestObserverClass, events)
 {
-    auto check_observers =
-        [this](int nEvent, auto funcEmit, std::vector<int> expect)
+    auto check_observers = [this](int nEvent, auto funcEmit, std::vector<int> expect)
     {
         pObserver1->ClearLastMsg();
         pObserver2->ClearLastMsg();
@@ -198,24 +195,15 @@ TEST_F(TestObserverClass, events)
         // check msgs
         EXPECT_STREQ(
             pObserver1->GetLastMsg().data(),
-            std::string(
-                "TestObserver1: caught event " + std::to_string(nEvent)
-                + " from TestSubject")
-                .data());
+            std::string("TestObserver1: caught event " + std::to_string(nEvent) + " from TestSubject").data());
 
         EXPECT_STREQ(
             pObserver2->GetLastMsg().data(),
-            std::string(
-                "TestObserver2: caught event " + std::to_string(nEvent)
-                + " from TestSubject")
-                .data());
+            std::string("TestObserver2: caught event " + std::to_string(nEvent) + " from TestSubject").data());
 
         EXPECT_STREQ(
             pObserver3->GetLastMsg().data(),
-            std::string(
-                "TestObserver3: caught event " + std::to_string(nEvent)
-                + " from TestSubject")
-                .data());
+            std::string("TestObserver3: caught event " + std::to_string(nEvent) + " from TestSubject").data());
     };
 
     check_observers(

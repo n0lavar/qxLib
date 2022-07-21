@@ -20,15 +20,10 @@ namespace qx
     @param  locale - locale to use
     @retval        - wchar_t string
 **/
-inline wstring to_wstring(
-    std::string_view   str,
-    const std::locale& locale = std::locale())
+inline wstring to_wstring(std::string_view str, const std::locale& locale = std::locale())
 {
     std::vector<wchar_t> buf(str.size());
-    std::use_facet<std::ctype<wchar_t>>(locale).widen(
-        str.data(),
-        str.data() + str.size(),
-        buf.data());
+    std::use_facet<std::ctype<wchar_t>>(locale).widen(str.data(), str.data() + str.size(), buf.data());
 
     return wstring(buf.data(), buf.size());
 }
@@ -40,13 +35,10 @@ inline wstring to_wstring(
     @param   locale - locale to use
     @retval         - char string
 **/
-inline string to_string(
-    std::wstring_view  str,
-    const std::locale& locale = std::locale())
+inline string to_string(std::wstring_view str, const std::locale& locale = std::locale())
 {
     std::vector<char> buf(str.size());
-    std::use_facet<std::ctype<wchar_t>>(locale)
-        .narrow(str.data(), str.data() + str.size(), '?', buf.data());
+    std::use_facet<std::ctype<wchar_t>>(locale).narrow(str.data(), str.data() + str.size(), '?', buf.data());
     return string(buf.data(), buf.size());
 }
 
@@ -61,8 +53,7 @@ inline string to_string(
                           valid until the next to_char_pointer call
 **/
 template<typename value_type>
-inline const value_type* to_char_pointer(
-    std::basic_string_view<value_type> stringView)
+inline const value_type* to_char_pointer(std::basic_string_view<value_type> stringView)
 {
     thread_local basic_string<char_traits<value_type>> sBuffer;
     sBuffer = stringView;

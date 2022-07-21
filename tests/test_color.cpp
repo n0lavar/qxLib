@@ -13,7 +13,7 @@
 
 #if QX_TEST_COLOR
 
-#include <qx/render/color.h>
+    #include <qx/render/color.h>
 
 void TestColor(const qx::color& color)
 {

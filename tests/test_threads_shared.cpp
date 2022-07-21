@@ -12,12 +12,12 @@
 
 #if QX_TEST_THREADS_SHARED
 
-#include <qx/thread/threads_shared.h>
+    #include <qx/thread/threads_shared.h>
 
-#include <chrono>
-#include <list>
-#include <random>
-#include <thread>
+    #include <chrono>
+    #include <list>
+    #include <random>
+    #include <thread>
 
 struct STestStruct
 {
@@ -27,11 +27,7 @@ struct STestStruct
     size_t unsignedData = 0u;
 
     constexpr STestStruct(void) = default;
-    constexpr STestStruct(
-        int    _intData,
-        float  _floatData,
-        bool   _boolData,
-        size_t _unsignedData)
+    constexpr STestStruct(int _intData, float _floatData, bool _boolData, size_t _unsignedData)
         : intData(_intData)
         , floatData(_floatData)
         , boolData(_boolData)
@@ -41,8 +37,7 @@ struct STestStruct
 
     bool operator==(const STestStruct& other) const
     {
-        return intData == other.intData && floatData == other.floatData
-               && boolData == other.boolData
+        return intData == other.intData && floatData == other.floatData && boolData == other.boolData
                && unsignedData == other.unsignedData;
     }
 };
@@ -64,36 +59,30 @@ TEST(threads_shared, main)
         ASSERT_EQ(*data, TEST_DATA_2);
     }
 
-    std::thread thread_setting_0 {
-        [&sharedData]()
-        {
-            std::default_random_engine generator(
-                static_cast<unsigned>(std::time(nullptr)));
-            std::uniform_int_distribution<size_t> distribution(
-                MIN_MS_WAIT,
-                MAX_MS_WAIT);
+    // clang-format off
+    std::thread thread_setting_0 { [&sharedData]()
+                                   {
+                                       std::default_random_engine generator(static_cast<unsigned>(std::time(nullptr)));
+                                       std::uniform_int_distribution distribution(MIN_MS_WAIT, MAX_MS_WAIT);
 
-            for (size_t i = 0; i < NUM_ITERATIONS; ++i)
-            {
-                auto data = sharedData.lock();
-                std::cout << "thread_setting_0: locked\n";
-                *data = TEST_DATA_0;
-                ASSERT_EQ(*data, TEST_DATA_0);
-                std::this_thread::sleep_for(
-                    std::chrono::microseconds(distribution(generator)));
-                ASSERT_EQ(*data, TEST_DATA_0);
-            }
-        }
-    };
+                                       for (size_t i = 0; i < NUM_ITERATIONS; ++i)
+                                       {
+                                           auto data = sharedData.lock();
+                                           std::cout << "thread_setting_0: locked\n";
+                                           *data = TEST_DATA_0;
+                                           ASSERT_EQ(*data, TEST_DATA_0);
+                                           std::this_thread::sleep_for(
+                                               std::chrono::microseconds(distribution(generator)));
+                                           ASSERT_EQ(*data, TEST_DATA_0);
+                                       }
+                                   } };
+    // clang-format on
 
     std::thread thread_setting_1 {
         [&sharedData]()
         {
-            std::default_random_engine generator(
-                static_cast<unsigned>(std::time(nullptr) + 1));
-            std::uniform_int_distribution<size_t> distribution(
-                MIN_MS_WAIT,
-                MAX_MS_WAIT);
+            std::default_random_engine            generator(static_cast<unsigned>(std::time(nullptr) + 1));
+            std::uniform_int_distribution<size_t> distribution(MIN_MS_WAIT, MAX_MS_WAIT);
 
             for (size_t i = 0; i < NUM_ITERATIONS; ++i)
             {
@@ -101,8 +90,7 @@ TEST(threads_shared, main)
                 std::cout << "thread_setting_1: locked\n";
                 *data = TEST_DATA_1;
                 ASSERT_EQ(*data, TEST_DATA_1);
-                std::this_thread::sleep_for(
-                    std::chrono::microseconds(distribution(generator)));
+                std::this_thread::sleep_for(std::chrono::microseconds(distribution(generator)));
                 ASSERT_EQ(*data, TEST_DATA_1);
             }
         }
@@ -111,12 +99,9 @@ TEST(threads_shared, main)
     std::thread thread_setting_2 {
         [&sharedData]()
         {
-            std::default_random_engine generator(
-                static_cast<unsigned>(std::time(nullptr) + 2));
+            std::default_random_engine generator(static_cast<unsigned>(std::time(nullptr) + 2));
 
-            std::uniform_int_distribution<size_t> distribution(
-                MIN_MS_WAIT,
-                MAX_MS_WAIT);
+            std::uniform_int_distribution<size_t> distribution(MIN_MS_WAIT, MAX_MS_WAIT);
 
             for (size_t i = 0; i < NUM_ITERATIONS; ++i)
             {
@@ -128,8 +113,7 @@ TEST(threads_shared, main)
                     std::cout << "thread_setting_2: locked\n";
                     *proxy = TEST_DATA_2;
                     ASSERT_EQ(*proxy, TEST_DATA_2);
-                    std::this_thread::sleep_for(
-                        std::chrono::microseconds(distribution(generator)));
+                    std::this_thread::sleep_for(std::chrono::microseconds(distribution(generator)));
                     ASSERT_EQ(*proxy, TEST_DATA_2);
                 }
                 else
@@ -138,8 +122,7 @@ TEST(threads_shared, main)
                     --i;
                 }
 
-                std::this_thread::sleep_for(
-                    std::chrono::microseconds(distribution(generator)));
+                std::this_thread::sleep_for(std::chrono::microseconds(distribution(generator)));
             }
         }
     };
@@ -164,11 +147,7 @@ TEST(threads_shared, list)
 TEST(threads_shared, recursive_mutex)
 {
     // check compilation
-    qx::threads_shared<STestStruct, std::recursive_mutex> sharedData(
-        2,
-        2.f,
-        true,
-        2u);
+    qx::threads_shared<STestStruct, std::recursive_mutex> sharedData(2, 2.f, true, 2u);
 
     {
         auto data = sharedData.lock();

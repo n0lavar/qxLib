@@ -14,7 +14,7 @@
 
 #if QX_CONSTEXPR_SEQUENCE_SUPPORTED
 
-#include <qx/typedefs.h>
+    #include <qx/typedefs.h>
 
 namespace qx
 {
@@ -59,11 +59,7 @@ template<
     u32 MOD  = 2147483648u,
     u32 MULT = 1103515245u,
     u32 INC  = 12345u>
-using constexpr_random = constexpr_sequence<
-    Tag,
-    u32,
-    SEED,
-    uniform_distribution<MIN, MAX, MOD, MULT, INC> >;
+using constexpr_random = constexpr_sequence<Tag, u32, SEED, uniform_distribution<MIN, MAX, MOD, MULT, INC> >;
 
 } // namespace qx
 
@@ -73,10 +69,6 @@ using constexpr_random = constexpr_sequence<
     @def   QX_UNIQUE_SEED
     @brief Creates unique u32 seed for current: file, date, time (seconds) and line number
 **/
-#define QX_UNIQUE_SEED                               \
-    static_cast<u32>(                                \
-        (qx::murmur_32_hash(                         \
-             __FILE__ __DATE__ __TIME__,             \
-             42u,                                    \
-             qx::strlen(__FILE__ __DATE__ __TIME__)) \
-         + __LINE__))
+#define QX_UNIQUE_SEED \
+    static_cast<u32>(  \
+        (qx::murmur_32_hash(__FILE__ __DATE__ __TIME__, 42u, qx::strlen(__FILE__ __DATE__ __TIME__)) + __LINE__))

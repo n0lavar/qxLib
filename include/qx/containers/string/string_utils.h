@@ -63,10 +63,7 @@ constexpr size_t djb2a_hash(const value_type* pszStr, size_t nSeed)
     @retval             - 32bit unsigned value
 **/
 template<typename value_type>
-constexpr size_t murmur_32_hash(
-    const value_type* pStr,
-    size_t            nSeed,
-    size_t            nLen) noexcept
+constexpr size_t murmur_32_hash(const value_type* pStr, size_t nSeed, size_t nLen) noexcept
 {
     size_t nHash = nSeed;
 
@@ -78,9 +75,7 @@ constexpr size_t murmur_32_hash(
             size_t k = 0;
 
             // constexpr version of std::memcpy(&k, pszStr, sizeof(u32));
-            static_assert(
-                sizeof(value_type) == 1 || sizeof(value_type) == 2
-                || sizeof(value_type) == 4);
+            static_assert(sizeof(value_type) == 1 || sizeof(value_type) == 2 || sizeof(value_type) == 4);
 
             if constexpr (sizeof(value_type) == sizeof(u32))
             {
@@ -153,11 +148,7 @@ constexpr size_t murmur_32_hash(
                        > 0 the first character that does not match has a greater value in str 1 than in str 2
 **/
 template<class FwdIt1, class FwdIt2>
-constexpr int iter_strcmp(
-    FwdIt1 itBegin1,
-    FwdIt1 itEnd1,
-    FwdIt2 itBegin2,
-    FwdIt2 itEnd2) noexcept
+constexpr int iter_strcmp(FwdIt1 itBegin1, FwdIt1 itEnd1, FwdIt2 itBegin2, FwdIt2 itEnd2) noexcept
 {
     int nRet = 0;
 
@@ -200,22 +191,16 @@ namespace detail
 {
 
 template<typename value_type>
-constexpr const value_type* const choose_str_prefix(
-    const char* const,
-    const wchar_t* const) noexcept;
+constexpr const value_type* const choose_str_prefix(const char* const, const wchar_t* const) noexcept;
 
 template<>
-constexpr const char* const choose_str_prefix<char>(
-    const char* const c,
-    const wchar_t* const) noexcept
+constexpr const char* const choose_str_prefix<char>(const char* const c, const wchar_t* const) noexcept
 {
     return c;
 }
 
 template<>
-constexpr const wchar_t* const choose_str_prefix<wchar_t>(
-    const char* const,
-    const wchar_t* const w) noexcept
+constexpr const wchar_t* const choose_str_prefix<wchar_t>(const char* const, const wchar_t* const w) noexcept
 {
     return w;
 }
@@ -256,8 +241,7 @@ constexpr wchar_t choose_char_prefix<wchar_t>(char, wchar_t w) noexcept
     @param value_type - char type
     @param str        - string to apply
 **/
-#define QX_STR_PREFIX(value_type, str) \
-    qx::detail::choose_str_prefix<value_type>(str, QX_TO_WSTRING(str))
+#define QX_STR_PREFIX(value_type, str) qx::detail::choose_str_prefix<value_type>(str, QX_TO_WSTRING(str))
 
 /**
     @def   QX_CHAR_PREFIX
@@ -265,8 +249,7 @@ constexpr wchar_t choose_char_prefix<wchar_t>(char, wchar_t w) noexcept
     @param value_type - char type
     @param ch         - string to apply
 **/
-#define QX_CHAR_PREFIX(value_type, ch) \
-    qx::detail::choose_char_prefix<value_type>(ch, QX_TO_WSTRING(ch))
+#define QX_CHAR_PREFIX(value_type, ch) qx::detail::choose_char_prefix<value_type>(ch, QX_TO_WSTRING(ch))
 
 //==============================================================================
 

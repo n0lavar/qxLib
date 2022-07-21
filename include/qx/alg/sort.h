@@ -53,10 +53,7 @@ inline bool sort_required(RandomIt begin, RandomIt end)
     @param      compare  - comparison function 
 **/
 template<typename RandomIt, typename Compare = std::less<>>
-inline void sort_insertion(
-    RandomIt begin,
-    RandomIt end,
-    Compare  compare = Compare())
+inline void sort_insertion(RandomIt begin, RandomIt end, Compare compare = Compare())
 {
     if (!sort_required(begin, end))
         return;
@@ -92,10 +89,7 @@ inline void sort_insertion(Container& cont, Compare compare = Compare())
     @param      compare  - comparison function
 **/
 template<typename RandomIt, typename Compare = std::less<>>
-inline void sort_selection(
-    RandomIt begin,
-    RandomIt end,
-    Compare  compare = Compare())
+inline void sort_selection(RandomIt begin, RandomIt end, Compare compare = Compare())
 {
     if (!sort_required(begin, end))
         return;
@@ -137,10 +131,7 @@ inline void sort_selection(Container& cont, Compare compare = Compare())
     @param      compare  - comparison function
 **/
 template<typename RandomIt, typename Compare = std::less<>>
-inline void sort_bubble(
-    RandomIt begin,
-    RandomIt end,
-    Compare  compare = Compare())
+inline void sort_bubble(RandomIt begin, RandomIt end, Compare compare = Compare())
 {
     if (!sort_required(begin, end))
         return;
@@ -186,11 +177,7 @@ inline void sort_bubble(Container& cont, Compare compare = Compare())
     @param      compare   - comparison function 
 **/
 template<typename RandomIt, typename Compare>
-inline void adjust_heap(
-    RandomIt begin,
-    size_t   nHeapSize,
-    size_t   nPosition,
-    Compare  compare = Compare())
+inline void adjust_heap(RandomIt begin, size_t nHeapSize, size_t nPosition, Compare compare = Compare())
 {
     using iter_diff = decltype(RandomIt() - RandomIt());
 
@@ -207,17 +194,13 @@ inline void adjust_heap(
                 nChildPos += 1;
             }
 
-            if (compare(
-                    *(begin + static_cast<iter_diff>(nChildPos)),
-                    *(begin + static_cast<iter_diff>(nPosition))))
+            if (compare(*(begin + static_cast<iter_diff>(nChildPos)), *(begin + static_cast<iter_diff>(nPosition))))
             {
                 return;
             }
             else
             {
-                std::iter_swap(
-                    begin + static_cast<iter_diff>(nPosition),
-                    begin + static_cast<iter_diff>(nChildPos));
+                std::iter_swap(begin + static_cast<iter_diff>(nPosition), begin + static_cast<iter_diff>(nChildPos));
             }
         }
         nPosition = nChildPos;
@@ -299,10 +282,7 @@ inline void sort_heap(Container& cont, Compare compare = Compare())
     @param      compare  - comparison function
 **/
 template<typename RandomIt, typename Compare = std::less<>>
-inline void sort_quick_hoare(
-    RandomIt begin,
-    RandomIt end,
-    Compare  compare = Compare())
+inline void sort_quick_hoare(RandomIt begin, RandomIt end, Compare compare = Compare())
 {
     if (!sort_required(begin, end))
         return;
@@ -357,10 +337,7 @@ inline void sort_quick_hoare(Container& cont, Compare compare = Compare())
     @param      compare  - comparison function
 **/
 template<typename RandomIt, typename Compare = std::less<>>
-inline void sort_quick_three_way(
-    RandomIt begin,
-    RandomIt end,
-    Compare  compare = Compare())
+inline void sort_quick_three_way(RandomIt begin, RandomIt end, Compare compare = Compare())
 {
     if (!sort_required(begin, end))
         return;
@@ -463,10 +440,7 @@ inline void sort_quick_three_way(Container& cont, Compare compare = Compare())
     @param      compare  - comparison function
 **/
 template<typename RandomIt, typename Compare = std::less<>>
-inline void sort_quick_dual_pivot(
-    RandomIt begin,
-    RandomIt end,
-    Compare  compare = Compare())
+inline void sort_quick_dual_pivot(RandomIt begin, RandomIt end, Compare compare = Compare())
 {
     if (!sort_required(begin, end))
         return;
@@ -612,22 +586,17 @@ inline void merge(
     pPreallocatedBuffer->resize(static_cast<size_t>(end - begin));
 
     // merge
-    while ((begin + static_cast<iter_diff>(nInd1) < mid)
-           && (mid + static_cast<iter_diff>(nInd2) < end))
+    while ((begin + static_cast<iter_diff>(nInd1) < mid) && (mid + static_cast<iter_diff>(nInd2) < end))
     {
-        if (compare(
-                *(begin + static_cast<iter_diff>(nInd1)),
-                *(mid + static_cast<iter_diff>(nInd2))))
+        if (compare(*(begin + static_cast<iter_diff>(nInd1)), *(mid + static_cast<iter_diff>(nInd2))))
         {
-            (*pPreallocatedBuffer)[nInd1 + nInd2] =
-                *(begin + static_cast<iter_diff>(nInd1));
+            (*pPreallocatedBuffer)[nInd1 + nInd2] = *(begin + static_cast<iter_diff>(nInd1));
 
             nInd1++;
         }
         else
         {
-            (*pPreallocatedBuffer)[nInd1 + nInd2] =
-                *(mid + static_cast<iter_diff>(nInd2));
+            (*pPreallocatedBuffer)[nInd1 + nInd2] = *(mid + static_cast<iter_diff>(nInd2));
 
             nInd2++;
         }
@@ -636,16 +605,14 @@ inline void merge(
     // append tails
     while (begin + static_cast<iter_diff>(nInd1) < mid)
     {
-        (*pPreallocatedBuffer)[nInd1 + nInd2] =
-            *(begin + static_cast<iter_diff>(nInd1));
+        (*pPreallocatedBuffer)[nInd1 + nInd2] = *(begin + static_cast<iter_diff>(nInd1));
 
         nInd1++;
     }
 
     while (mid + static_cast<iter_diff>(nInd2) < end)
     {
-        (*pPreallocatedBuffer)[nInd1 + nInd2] =
-            *(mid + static_cast<iter_diff>(nInd2));
+        (*pPreallocatedBuffer)[nInd1 + nInd2] = *(mid + static_cast<iter_diff>(nInd2));
 
         nInd2++;
     }
@@ -709,9 +676,8 @@ inline void sort_merge(
 template<typename Container, typename Compare = std::less<>>
 inline void sort_merge(
     Container&                                      cont,
-    Compare                                         compare = Compare(),
-    vector_of_values<typename Container::iterator>* pPreallocatedBuffer =
-        nullptr)
+    Compare                                         compare             = Compare(),
+    vector_of_values<typename Container::iterator>* pPreallocatedBuffer = nullptr)
 {
     sort_merge(cont.begin(), cont.end(), compare, pPreallocatedBuffer);
 }
@@ -734,9 +700,7 @@ template<typename RandomIt, typename Compare = std::less<>>
     Compare  compare        = Compare(),
     size_t   nMaxBufferSize = SORT_COUNTING_MAX_BUFFER_SIZE)
 {
-    static_assert(
-        std::is_integral_v<iterator_value_t<RandomIt>>,
-        "Integral type required for counting sort");
+    static_assert(std::is_integral_v<iterator_value_t<RandomIt>>, "Integral type required for counting sort");
 
     if (end - begin < 2)
         return true;
@@ -763,8 +727,7 @@ template<typename RandomIt, typename Compare = std::less<>>
         {
             // nGreater
             for (size_t i = 0; i < nSizeRequired; ++i)
-                begin =
-                    std::fill_n(begin, counts[nSizeRequired - i - 1], max--);
+                begin = std::fill_n(begin, counts[nSizeRequired - i - 1], max--);
         }
 
         return true;

@@ -40,8 +40,7 @@ public:
         @brief destruction_callback object constructor
         @param _destroyer - functor that will be called when object will be destroyed
     **/
-    destruction_callback(destroyer _destroyer)
-        : m_Destroyer(std::move(_destroyer))
+    destruction_callback(destroyer _destroyer) : m_Destroyer(std::move(_destroyer))
     {
     }
 

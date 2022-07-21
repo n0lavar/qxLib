@@ -12,8 +12,8 @@
 
 #if QX_TEST_TRIANGULAR_VECTOR
 
-#include <qx/containers/triangular_vector.h>
-#include <algorithm>
+    #include <qx/containers/triangular_vector.h>
+    #include <algorithm>
 
 
 TEST(TestQxTriangularVector, constructing)

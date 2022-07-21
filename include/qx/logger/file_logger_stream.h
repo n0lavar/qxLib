@@ -65,10 +65,7 @@ public:
         @param logUnit   - log unit info
         @param eLogLevel - this message log level
     **/
-    virtual void process_output(
-        std::string_view svMessage,
-        const log_unit&  logUnit,
-        log_level        eLogLevel) override;
+    virtual void process_output(std::string_view svMessage, const log_unit& logUnit, log_level eLogLevel) override;
 
     /**
         @brief Set logs folder
@@ -93,8 +90,7 @@ private:
         @param eLogFilePolicy - file log policy
         @param sFileFolder    - output string
     **/
-    void fill_file_folder(log_file_policy eLogFilePolicy, string& sFileFolder)
-        const noexcept;
+    void fill_file_folder(log_file_policy eLogFilePolicy, string& sFileFolder) const noexcept;
 
 private:
     std::unordered_map<string_hash, log_file_data> m_Files;

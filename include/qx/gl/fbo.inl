@@ -51,43 +51,23 @@ inline void base_fbo::SetTarget(GLenum target)
 
 inline void base_fbo::AttachRBO(const base_rbo& rbo)
 {
-    glFramebufferRenderbuffer(
-        m_nTarget,
-        rbo.GetAttachmentType(),
-        GL_RENDERBUFFER,
-        rbo.GetBufferName());
+    glFramebufferRenderbuffer(m_nTarget, rbo.GetAttachmentType(), GL_RENDERBUFFER, rbo.GetBufferName());
 }
 
-inline void base_fbo::AttachTexture2D(
-    GLenum              attachment,
-    const base_texture& texture,
-    GLint               nMipmapLevel)
+inline void base_fbo::AttachTexture2D(GLenum attachment, const base_texture& texture, GLint nMipmapLevel)
 {
-    glFramebufferTexture2D(
-        m_nTarget,
-        attachment,
-        texture.GetTarget(),
-        texture.GetBufferName(),
-        nMipmapLevel);
+    glFramebufferTexture2D(m_nTarget, attachment, texture.GetTarget(), texture.GetBufferName(), nMipmapLevel);
 }
 
-inline void base_fbo::AttachTexture(
-    GLenum              attachment,
-    const base_texture& texture,
-    GLint               nMipmapLevel)
+inline void base_fbo::AttachTexture(GLenum attachment, const base_texture& texture, GLint nMipmapLevel)
 {
-    glFramebufferTexture(
-        m_nTarget,
-        attachment,
-        texture.GetBufferName(),
-        nMipmapLevel);
+    glFramebufferTexture(m_nTarget, attachment, texture.GetBufferName(), nMipmapLevel);
 }
 
 inline std::string_view base_fbo::CheckStatus() const
 {
     std::string_view svErrorMsg;
-    if (const auto eStatus = glCheckFramebufferStatus(GL_FRAMEBUFFER);
-        eStatus != GL_FRAMEBUFFER_COMPLETE)
+    if (const auto eStatus = glCheckFramebufferStatus(GL_FRAMEBUFFER); eStatus != GL_FRAMEBUFFER_COMPLETE)
     {
         switch (eStatus)
         {

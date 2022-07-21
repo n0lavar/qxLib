@@ -40,17 +40,13 @@ inline std::vector<T> get_moving_average_exp_weights(size_t nEntries)
     constexpr T fAlpha = T(0.8f);
 
     for (size_t i = 0; i < nEntries; ++i)
-        weights[i] =
-            fAlpha * std::pow(1 - fAlpha, static_cast<T>(nEntries - i - 1));
+        weights[i] = fAlpha * std::pow(1 - fAlpha, static_cast<T>(nEntries - i - 1));
 
     return weights;
 }
 
 template<typename T>
-inline moving_average<T>::moving_average(
-    size_t                         nEntries,
-    T                              startValue,
-    moving_average_weights_func<T> func)
+inline moving_average<T>::moving_average(size_t nEntries, T startValue, moving_average_weights_func<T> func)
     : m_Value(startValue)
     , m_Entries(nEntries, startValue)
     , m_Weights(func(m_Entries.size()))

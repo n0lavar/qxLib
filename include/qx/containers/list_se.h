@@ -319,10 +319,7 @@ public:
         @param      pWhat     - new element pointer
         @param      nElements - number of elements
     **/
-    void insert_after(
-        iterator      itWhere,
-        const_pointer pWhat,
-        size_type     nElements = 1);
+    void insert_after(iterator itWhere, const_pointer pWhat, size_type nElements = 1);
 
     /**
         @brief      Erase elements from list

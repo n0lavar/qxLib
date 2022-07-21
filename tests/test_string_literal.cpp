@@ -12,8 +12,8 @@
 
 #if QX_TEST_STRING_LITERAL
 
-#include <qx/containers/string/string_literal.h>
-#include <qx/containers/string/string_utils.h>
+    #include <qx/containers/string/string_literal.h>
+    #include <qx/containers/string/string_utils.h>
 
 template<qx::string_literal text>
 class StringTemplateClass

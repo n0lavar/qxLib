@@ -12,11 +12,11 @@
 
 #if QX_TEST_CONSTEXPR_SEQUENCE
 
-#include <qx/meta/constexpr_sequence.h>
+    #include <qx/meta/constexpr_sequence.h>
 
-#if QX_CONSTEXPR_SEQUENCE_SUPPORTED
+    #if QX_CONSTEXPR_SEQUENCE_SUPPORTED
 
-#include <qx/useful_macros.h>
+        #include <qx/useful_macros.h>
 
 
 //---------------------------- qx::detail::increase ----------------------------
@@ -140,6 +140,6 @@ QX_STATIC_ASSERT_EQ(counter_G_0_0::value(), 0);
 QX_STATIC_ASSERT_EQ(counter_G_0_0::value(), 0);
 QX_STATIC_ASSERT_EQ(counter_G_0_0::value(), 0);
 
-#endif
+    #endif
 
 #endif

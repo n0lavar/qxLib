@@ -10,10 +10,7 @@
 namespace qx
 {
 
-inline cout_logger_stream::cout_logger_stream(
-    bool bUseColors,
-    bool bDisableStdioSync,
-    bool bUntieCin)
+inline cout_logger_stream::cout_logger_stream(bool bUseColors, bool bDisableStdioSync, bool bUntieCin)
     : m_bUsingColors(bUseColors)
 {
     if (bDisableStdioSync)
@@ -32,10 +29,7 @@ inline cout_logger_stream::cout_logger_stream(
     }
 }
 
-inline void cout_logger_stream::process_output(
-    std::string_view svMessage,
-    const log_unit&  logUnit,
-    log_level        eLogLevel)
+inline void cout_logger_stream::process_output(std::string_view svMessage, const log_unit& logUnit, log_level eLogLevel)
 {
     if (m_bUsingColors)
     {

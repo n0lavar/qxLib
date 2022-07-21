@@ -33,8 +33,8 @@ template<class TBaseComponent>
 class components
 {
 public:
-    using pointer   = std::unique_ptr<TBaseComponent>;
-    using container = std::unordered_multimap<class_identificator, pointer>;
+    using pointer         = std::unique_ptr<TBaseComponent>;
+    using container       = std::unordered_multimap<class_identificator, pointer>;
     using order_container = std::vector<TBaseComponent*>;
 
     /**

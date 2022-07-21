@@ -17,8 +17,8 @@
 
 #if QX_CONSTEXPR_SEQUENCE_SUPPORTED
 
-#include <qx/meta/constexpr_flag.h>
-#include <qx/useful_macros.h>
+    #include <qx/meta/constexpr_flag.h>
+    #include <qx/useful_macros.h>
 
 namespace qx
 {
@@ -103,9 +103,7 @@ public:
         @tparam  _value - current sequence value
         @retval         - current sequence value
     **/
-    template<
-        size_t nIndex = CheckerWrapper<0> {}.index(),
-        T      _value = Element<nIndex> {}.value()>
+    template<size_t nIndex = CheckerWrapper<0> {}.index(), T _value = Element<nIndex> {}.value()>
     static constexpr T value() noexcept
     {
         return _value;
@@ -149,21 +147,11 @@ constexpr T multiply(T val)
 
 } // namespace detail
 
-template<
-    typename Tag = struct CounterTag,
-    typename T   = int,
-    T Start      = 0,
-    T Inc        = 1>
-using constexpr_counter =
-    constexpr_sequence<Tag, T, Start, detail::increase<T, Inc>>;
+template<typename Tag = struct CounterTag, typename T = int, T Start = 0, T Inc = 1>
+using constexpr_counter = constexpr_sequence<Tag, T, Start, detail::increase<T, Inc>>;
 
-template<
-    typename Tag = struct MultiplierTag,
-    typename T   = int,
-    T Start      = 1,
-    T Mult       = 2>
-using constexpr_multiplier =
-    constexpr_sequence<Tag, T, Start, detail::multiply<T, Mult>>;
+template<typename Tag = struct MultiplierTag, typename T = int, T Start = 1, T Mult = 2>
+using constexpr_multiplier = constexpr_sequence<Tag, T, Start, detail::multiply<T, Mult>>;
 
 } // namespace qx
 

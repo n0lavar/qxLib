@@ -10,21 +10,13 @@
 namespace qx
 {
 
-constexpr color::color(
-    float fRed,
-    float fGreen,
-    float fBlue,
-    float fAlpha) noexcept
+constexpr color::color(float fRed, float fGreen, float fBlue, float fAlpha) noexcept
 {
     assign_checked({ fRed, fGreen, fBlue, fAlpha });
 }
 
 constexpr color::color(int nRed, int nGreen, int nBlue, int nAlpha) noexcept
-    : color(
-        dec_to_float(nRed),
-        dec_to_float(nGreen),
-        dec_to_float(nBlue),
-        dec_to_float(nAlpha))
+    : color(dec_to_float(nRed), dec_to_float(nGreen), dec_to_float(nBlue), dec_to_float(nAlpha))
 {
 }
 
@@ -38,20 +30,12 @@ constexpr color::color(unsigned int nHexValue) noexcept
 }
 
 constexpr color::color(const glm::ivec3& vec3) noexcept
-    : color(
-        dec_to_float(vec3.x),
-        dec_to_float(vec3.y),
-        dec_to_float(vec3.z),
-        1.f)
+    : color(dec_to_float(vec3.x), dec_to_float(vec3.y), dec_to_float(vec3.z), 1.f)
 {
 }
 
 constexpr color::color(const glm::ivec4& vec4) noexcept
-    : color(
-        dec_to_float(vec4.x),
-        dec_to_float(vec4.y),
-        dec_to_float(vec4.z),
-        dec_to_float(vec4.w))
+    : color(dec_to_float(vec4.x), dec_to_float(vec4.y), dec_to_float(vec4.z), dec_to_float(vec4.w))
 {
 }
 
@@ -117,8 +101,7 @@ constexpr unsigned int color::hex() const noexcept
     const unsigned int b = static_cast<unsigned int>(float_to_dec(m_Color.z));
     const unsigned int a = static_cast<unsigned int>(float_to_dec(m_Color.w));
 
-    return ((r & 0xff) << 24) + ((g & 0xff) << 16) + ((b & 0xff) << 8)
-           + (a & 0xff);
+    return ((r & 0xff) << 24) + ((g & 0xff) << 16) + ((b & 0xff) << 8) + (a & 0xff);
 }
 
 constexpr bool color::operator==(const color& other) const noexcept
@@ -355,9 +338,7 @@ constexpr void color::assign_checked(const glm::vec4& other) noexcept
     assign_component_checked(m_Color.w, other.w);
 }
 
-constexpr void color::assign_component_checked(
-    float& pComponent,
-    float  fValue) noexcept
+constexpr void color::assign_component_checked(float& pComponent, float fValue) noexcept
 {
     pComponent = clamp_value(fValue);
 }

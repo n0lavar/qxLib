@@ -12,13 +12,13 @@
 
 #if QX_TEST_USEFUL_FUNCS
 
-#include <qx/containers/container.h>
-#include <qx/useful_macros.h>
+    #include <qx/containers/container.h>
+    #include <qx/useful_macros.h>
 
-#include <algorithm>
-#include <array>
-#include <list>
-#include <vector>
+    #include <algorithm>
+    #include <array>
+    #include <list>
+    #include <vector>
 
 //--------------------------------- qx::between --------------------------------
 
@@ -136,8 +136,7 @@ static_assert(result == std::array<int, 8> { 0, 1, 2, 3, 4, 5, 6, 7 });
 TEST(useful_funcs, create_container)
 {
     constexpr std::array   array { 0, 1, 2, 3, 4 };
-    const std::vector<int> vector =
-        qx::create_container<std::vector<int>>(array);
+    const std::vector<int> vector = qx::create_container<std::vector<int>>(array);
 
     EXPECT_EQ(vector.size(), array.size());
     for (size_t i = 0; i < array.size(); ++i)

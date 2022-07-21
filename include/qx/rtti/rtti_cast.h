@@ -35,8 +35,7 @@ concept has_is_derived_from = requires(T* t)
 template<typename Y>
 Y* rtti_cast(auto& pointer)
 {
-    using smart_pointer_t =
-        typename std::remove_reference_t<decltype(pointer)>::element_type;
+    using smart_pointer_t = typename std::remove_reference_t<decltype(pointer)>::element_type;
     if constexpr (detail::has_is_derived_from<smart_pointer_t, Y>)
         if (pointer && pointer->template is_derived_from<Y>())
             return static_cast<Y*>(pointer.get());

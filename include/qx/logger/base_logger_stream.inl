@@ -81,9 +81,7 @@ inline std::optional<log_unit> base_logger_stream::get_unit_info(
     return logUnit;
 }
 
-inline void base_logger_stream::register_unit(
-    std::string_view     svUnitName,
-    const log_unit_info& unit)
+inline void base_logger_stream::register_unit(std::string_view svUnitName, const log_unit_info& unit)
 {
     if (!svUnitName.empty())
         m_Units.emplace(string_hash(svUnitName), unit);

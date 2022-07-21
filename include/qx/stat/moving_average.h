@@ -18,8 +18,7 @@ namespace qx
 {
 
 template<typename T>
-using moving_average_weights_func =
-    std::function<std::vector<T>(size_t nEntries)>;
+using moving_average_weights_func = std::function<std::vector<T>(size_t nEntries)>;
 
 /**
     @brief  Generate weights for moving_average as arithmetic mean
@@ -77,8 +76,7 @@ public:
     moving_average(
         size_t                         nEntries,
         T                              startValue,
-        moving_average_weights_func<T> func =
-            get_moving_average_simple_weights<T>);
+        moving_average_weights_func<T> func = get_moving_average_simple_weights<T>);
 
     /**
         @brief  Update moving average

@@ -12,9 +12,9 @@
 
 #if QX_TEST_LIST_SE
 
-#include <qx/containers/list_se.h>
-#include <algorithm>
-#include <string>
+    #include <qx/containers/list_se.h>
+    #include <algorithm>
+    #include <string>
 
 
 TEST(list_se, testing)

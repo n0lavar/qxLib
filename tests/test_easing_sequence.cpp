@@ -12,9 +12,9 @@
 
 #if QX_TEST_EASING_SEQUENCE
 
-#include <qx/easing/easing_sequence.h>
+    #include <qx/easing/easing_sequence.h>
 
-#define TYPE typename TypeParam::type
+    #define TYPE typename TypeParam::type
 
 template<typename T>
 class TestEasingSequence : public ::testing::Test
@@ -31,16 +31,10 @@ protected:
 
     void AddDefaultElements()
     {
-        m_Sequence.emplace_back(
-            qx::easing::linear_func<type>,
-            type(0.f),
-            type(1.f));
+        m_Sequence.emplace_back(qx::easing::linear_func<type>, type(0.f), type(1.f));
 
-        m_Sequence.push_back(typename T::easing_element_type(
-            qx::easing::linear_func<type>,
-            type(1.f),
-            type(0.5f),
-            type(0.5f)));
+        m_Sequence.push_back(
+            typename T::easing_element_type(qx::easing::linear_func<type>, type(1.f), type(0.5f), type(0.5f)));
     }
 
     void CheckNotStarted()
@@ -54,10 +48,7 @@ protected:
         EXPECT_TRUE(qx::epsilon_equal(m_Sequence.get_fraction(), type(0.f)));
     }
 
-    void CheckStarted(
-        type fExpectedValue,
-        type fExpectedFraction,
-        bool bExpectedLooped = false)
+    void CheckStarted(type fExpectedValue, type fExpectedFraction, bool bExpectedLooped = false)
     {
         EXPECT_FALSE(m_Sequence.is_not_started());
         EXPECT_TRUE(m_Sequence.is_started());
@@ -65,10 +56,7 @@ protected:
         EXPECT_FALSE(m_Sequence.is_finished());
         EXPECT_EQ(m_Sequence.is_looped(), bExpectedLooped);
         EXPECT_TRUE(qx::epsilon_equal(m_Sequence.get(), fExpectedValue, eps));
-        EXPECT_TRUE(qx::epsilon_equal(
-            m_Sequence.get_fraction(),
-            fExpectedFraction,
-            eps));
+        EXPECT_TRUE(qx::epsilon_equal(m_Sequence.get_fraction(), fExpectedFraction, eps));
     }
 
     void CheckPaused(type fExpectedValue, type fExpectedFraction)
@@ -79,10 +67,7 @@ protected:
         EXPECT_FALSE(m_Sequence.is_finished());
         EXPECT_FALSE(m_Sequence.is_looped());
         EXPECT_TRUE(qx::epsilon_equal(m_Sequence.get(), fExpectedValue, eps));
-        EXPECT_TRUE(qx::epsilon_equal(
-            m_Sequence.get_fraction(),
-            fExpectedFraction,
-            eps));
+        EXPECT_TRUE(qx::epsilon_equal(m_Sequence.get_fraction(), fExpectedFraction, eps));
     }
 
     void CheckFinished(type fExpectedValue)
@@ -100,10 +85,8 @@ protected:
     T m_Sequence;
 };
 
-using Implementations = ::testing::Types<
-    qx::base_easing_sequence<float>,
-    qx::base_easing_sequence<double>,
-    qx::base_easing_sequence<long double> >;
+using Implementations = ::testing::
+    Types<qx::base_easing_sequence<float>, qx::base_easing_sequence<double>, qx::base_easing_sequence<long double> >;
 
 TYPED_TEST_SUITE(TestEasingSequence, Implementations);
 
@@ -159,30 +142,24 @@ TYPED_TEST(TestEasingSequence, update_overflow)
 
 TYPED_TEST(TestEasingSequence, update_speed)
 {
-    EXPECT_TRUE(
-        qx::epsilon_equal(TestFixture::m_Sequence.get_speed(), TYPE(1.f)));
+    EXPECT_TRUE(qx::epsilon_equal(TestFixture::m_Sequence.get_speed(), TYPE(1.f)));
 
     TestFixture::AddDefaultElements();
-    EXPECT_TRUE(
-        qx::epsilon_equal(TestFixture::m_Sequence.get_speed(), TYPE(1.f)));
+    EXPECT_TRUE(qx::epsilon_equal(TestFixture::m_Sequence.get_speed(), TYPE(1.f)));
 
     TestFixture::m_Sequence.set_speed(TYPE(2.f));
-    EXPECT_TRUE(
-        qx::epsilon_equal(TestFixture::m_Sequence.get_speed(), TYPE(2.f)));
+    EXPECT_TRUE(qx::epsilon_equal(TestFixture::m_Sequence.get_speed(), TYPE(2.f)));
 
     TestFixture::m_Sequence.start();
-    EXPECT_TRUE(
-        qx::epsilon_equal(TestFixture::m_Sequence.get_speed(), TYPE(2.f)));
+    EXPECT_TRUE(qx::epsilon_equal(TestFixture::m_Sequence.get_speed(), TYPE(2.f)));
 
     TestFixture::m_Sequence.update(TYPE(0.7f));
     TestFixture::CheckStarted(TYPE(0.9f), TYPE(1.f / 3.f + 2.f / 15.f));
-    EXPECT_TRUE(
-        qx::epsilon_equal(TestFixture::m_Sequence.get_speed(), TYPE(2.f)));
+    EXPECT_TRUE(qx::epsilon_equal(TestFixture::m_Sequence.get_speed(), TYPE(2.f)));
 
     TestFixture::m_Sequence.update(TYPE(1.0f));
     TestFixture::CheckFinished(TYPE(0.5f));
-    EXPECT_TRUE(
-        qx::epsilon_equal(TestFixture::m_Sequence.get_speed(), TYPE(2.f)));
+    EXPECT_TRUE(qx::epsilon_equal(TestFixture::m_Sequence.get_speed(), TYPE(2.f)));
 }
 
 TYPED_TEST(TestEasingSequence, pause_resume)

@@ -43,15 +43,13 @@ bool link<T>::lock_ptr::operator==(const U& other) const noexcept
 
 template<class T>
 template<class U>
-std::strong_ordering link<T>::lock_ptr::operator<=>(
-    const U& other) const noexcept
+std::strong_ordering link<T>::lock_ptr::operator<=>(const U& other) const noexcept
 {
     return get() <=> other.get();
 }
 
 template<class T>
-link<T>::lock_ptr::lock_ptr(std::shared_ptr<T> pShared) noexcept
-    : m_pRaw(std::move(pShared))
+link<T>::lock_ptr::lock_ptr(std::shared_ptr<T> pShared) noexcept : m_pRaw(std::move(pShared))
 {
 }
 

@@ -12,7 +12,7 @@
 
 #if QX_TEST_RECT
 
-#include <qx/render/rect.h>
+    #include <qx/render/rect.h>
 
 template<typename VectorType>
 class TestRect : public ::testing::Test
@@ -46,14 +46,12 @@ void CheckRect(
     EXPECT_EQ(rect.max(), VectorType(fX1 + fWidth, fX2 + fHeight));
     EXPECT_EQ(
         rect.center(),
-        VectorType(fX1, fX2)
-            + VectorType(fWidth, fHeight)
-                  / static_cast<typename Rect::value_type>(2.0));
+        VectorType(fX1, fX2) + VectorType(fWidth, fHeight) / static_cast<typename Rect::value_type>(2.0));
     EXPECT_EQ(!rect.empty(), fWidth * fHeight > 0.0);
 }
 
-#define Rect       qx::basic_rect<TypeParam>
-#define VectorType TypeParam
+    #define Rect       qx::basic_rect<TypeParam>
+    #define VectorType TypeParam
 
 TYPED_TEST(TestRect, construct)
 {

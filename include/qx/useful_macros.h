@@ -134,8 +134,8 @@ constexpr const char* last_slash(const char* str)
     @brief Define class as default copyable
     @param className - class name
 **/
-#define QX_COPYABLE(className)             \
-    className(const className&) = default; \
+#define QX_COPYABLE(className)                        \
+    className(const className&)            = default; \
     className& operator=(const className&) = default;
 
 /**
@@ -143,8 +143,8 @@ constexpr const char* last_slash(const char* str)
     @brief Define class as default movable
     @param className - class name
 **/
-#define QX_MOVABLE(className)                  \
-    className(className&&) noexcept = default; \
+#define QX_MOVABLE(className)                             \
+    className(className&&) noexcept            = default; \
     className& operator=(className&&) noexcept = default;
 
 /**
@@ -161,8 +161,8 @@ constexpr const char* last_slash(const char* str)
     @brief Define class as non copyable
     @param className - class name
 **/
-#define QX_NONCOPYABLE(className)         \
-    className(const className&) = delete; \
+#define QX_NONCOPYABLE(className)                    \
+    className(const className&)            = delete; \
     className& operator=(const className&) = delete;
 
 /**
@@ -170,8 +170,8 @@ constexpr const char* last_slash(const char* str)
     @brief Define class as non movable
     @param className - class name
 **/
-#define QX_NONMOVABLE(className)              \
-    className(className&&) noexcept = delete; \
+#define QX_NONMOVABLE(className)                         \
+    className(className&&) noexcept            = delete; \
     className& operator=(className&&) noexcept = delete;
 
 /**

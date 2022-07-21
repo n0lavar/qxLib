@@ -36,15 +36,13 @@ template<typename T>
 struct is_random_access_iterator<
     T,
     std::enable_if_t<
-        is_iterator<
-            T> && std::derived_from<typename T::iterator_category, std::random_access_iterator_tag>>>
+        is_iterator<T> && std::derived_from<typename T::iterator_category, std::random_access_iterator_tag>>>
 {
     static constexpr bool value = true;
 };
 
 template<class T>
-constexpr bool is_random_access_iterator_v =
-    is_random_access_iterator<T>::value;
+constexpr bool is_random_access_iterator_v = is_random_access_iterator<T>::value;
 
 
 
@@ -110,8 +108,7 @@ std::false_type is_specialization_exist_impl(...);
 
 // decide if a struct/class specialization exist
 template<class T>
-using is_specialization_exist =
-    decltype(detail::is_specialization_exist_impl(std::declval<T*>()));
+using is_specialization_exist = decltype(detail::is_specialization_exist_impl(std::declval<T*>()));
 
 template<class T>
 constexpr bool is_specialization_exist_v = is_specialization_exist<T>::value;

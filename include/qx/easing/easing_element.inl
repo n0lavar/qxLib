@@ -11,11 +11,7 @@ namespace qx
 {
 
 template<typename T>
-inline base_easing_element<T>::base_easing_element(
-    const easing::func<T>& func,
-    T                      fStart,
-    T                      fEnd,
-    T                      fSpeed) noexcept
+inline base_easing_element<T>::base_easing_element(const easing::func<T>& func, T fStart, T fEnd, T fSpeed) noexcept
     : m_EasingFunc(func)
     , m_fCurrentY(fStart)
     , m_fStartY(fStart)
@@ -73,8 +69,7 @@ inline T base_easing_element<T>::update(T fDeltaTime) noexcept
 
         if (m_fCurrentX < T(1.f))
         {
-            m_fCurrentY =
-                m_fStartY + m_EasingFunc(m_fCurrentX) * (m_fEndY - m_fStartY);
+            m_fCurrentY = m_fStartY + m_EasingFunc(m_fCurrentX) * (m_fEndY - m_fStartY);
         }
         else
         {
@@ -116,8 +111,7 @@ inline T base_easing_element<T>::get_speed() const noexcept
 }
 
 template<typename T>
-inline typename base_easing_element<T>::status base_easing_element<
-    T>::get_status() const noexcept
+inline typename base_easing_element<T>::status base_easing_element<T>::get_status() const noexcept
 {
     return m_eStatus;
 }

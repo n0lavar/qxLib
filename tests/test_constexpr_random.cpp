@@ -12,17 +12,16 @@
 
 #if QX_TEST_CONSTEXPR_RANDOM
 
-#include <qx/meta/constexpr_random.h>
+    #include <qx/meta/constexpr_random.h>
 
-#if QX_CONSTEXPR_SEQUENCE_SUPPORTED
+    #if QX_CONSTEXPR_SEQUENCE_SUPPORTED
 
-#include <qx/useful_macros.h>
-#include <array>
+        #include <qx/useful_macros.h>
+        #include <array>
 
 
-constexpr u32 CONST_SEED = 0u;
-using random_check_duplicate =
-    qx::constexpr_random<class TagA, CONST_SEED, 0u, 100u>;
+constexpr u32 CONST_SEED     = 0u;
+using random_check_duplicate = qx::constexpr_random<class TagA, CONST_SEED, 0u, 100u>;
 QX_STATIC_ASSERT_EQ(random_check_duplicate::next(), 45u);
 QX_STATIC_ASSERT_EQ(random_check_duplicate::next(), 66u);
 QX_STATIC_ASSERT_EQ(random_check_duplicate::next(), 31u);
@@ -76,7 +75,7 @@ QX_STATIC_ASSERT_EQ(random_check_duplicate::next(), 26u);
 
 constexpr u32 left  = 4294967200u;
 constexpr u32 right = 200u;
-using random1 = qx::constexpr_random<class TagB, QX_UNIQUE_SEED, left, right>;
+using random1       = qx::constexpr_random<class TagB, QX_UNIQUE_SEED, left, right>;
 QX_STATIC_ASSERT_BETWEEN(left, random1::next(), right);
 QX_STATIC_ASSERT_BETWEEN(left, random1::next(), right);
 QX_STATIC_ASSERT_BETWEEN(left, random1::next(), right);
@@ -135,6 +134,6 @@ QX_STATIC_ASSERT_BETWEEN(left, random1::next(), right);
 QX_STATIC_ASSERT_BETWEEN(left, random1::next(), right);
 QX_STATIC_ASSERT_BETWEEN(left, random1::next(), right);
 
-#endif
+    #endif
 
 #endif

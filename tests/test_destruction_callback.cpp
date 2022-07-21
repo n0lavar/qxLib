@@ -13,7 +13,7 @@
 
 #if QX_TEST_DESTRUCTION_CALLBACK
 
-#include <qx/destruction_callback.h>
+    #include <qx/destruction_callback.h>
 
 TEST(destruction_callback, main)
 {

@@ -27,8 +27,7 @@ namespace qx
 template<std::integral T>
 T random(T min, T max)
 {
-    static std::default_random_engine generator(
-        static_cast<unsigned>(std::time(nullptr)));
+    static std::default_random_engine generator(static_cast<unsigned>(std::time(nullptr)));
 
     std::uniform_int_distribution<T> distribution(min, max);
     return distribution(generator);
@@ -44,8 +43,7 @@ T random(T min, T max)
 template<std::floating_point T>
 T random(T min, T max)
 {
-    static std::default_random_engine generator(
-        static_cast<unsigned>(std::time(nullptr)));
+    static std::default_random_engine generator(static_cast<unsigned>(std::time(nullptr)));
 
     std::uniform_real_distribution<T> distribution(min, max);
     return distribution(generator);
@@ -72,10 +70,7 @@ constexpr T abs(T value)
     @retval       - true if |left - right| < eps
 **/
 template<typename T>
-constexpr bool epsilon_equal(
-    T left,
-    T right,
-    T eps = std::numeric_limits<T>::epsilon())
+constexpr bool epsilon_equal(T left, T right, T eps = std::numeric_limits<T>::epsilon())
 {
     return abs(left - right) < eps;
 }
@@ -102,10 +97,7 @@ constexpr bool epsilon_zero(T value, T eps = std::numeric_limits<T>::epsilon())
     @retval       - true if left < right or |left - right| < eps
 **/
 template<typename T>
-constexpr bool epsilon_less_equal(
-    T left,
-    T right,
-    T eps = std::numeric_limits<T>::epsilon())
+constexpr bool epsilon_less_equal(T left, T right, T eps = std::numeric_limits<T>::epsilon())
 {
     return left < right || epsilon_equal(left, right, eps);
 }
@@ -119,10 +111,7 @@ constexpr bool epsilon_less_equal(
     @retval       - true if left > right or |left - right| < eps
 **/
 template<typename T>
-constexpr bool epsilon_greater_equal(
-    T left,
-    T right,
-    T eps = std::numeric_limits<T>::epsilon())
+constexpr bool epsilon_greater_equal(T left, T right, T eps = std::numeric_limits<T>::epsilon())
 {
     return left > right || epsilon_equal(left, right, eps);
 }

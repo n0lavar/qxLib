@@ -48,8 +48,7 @@ private:
     @param T              - your class type
     @param process_getter - getter processing realization
 **/
-#define QX_SINGLETON_P(T, process_getter) \
-    _QX_SINGLETON_IMPL(T, = default, = default, process_getter)
+#define QX_SINGLETON_P(T, process_getter) _QX_SINGLETON_IMPL(T, = default, = default, process_getter)
 
 /**
     @def   QX_SINGLETON_C
@@ -57,8 +56,7 @@ private:
     @param T           - your class type
     @param constructor - constructor realization
 **/
-#define QX_SINGLETON_C(T, constructor) \
-    _QX_SINGLETON_IMPL(T, { constructor }, = default, )
+#define QX_SINGLETON_C(T, constructor) _QX_SINGLETON_IMPL(T, { constructor }, = default, )
 
 /**
     @def   QX_SINGLETON_CP
@@ -76,8 +74,7 @@ private:
     @param T          - your class type
     @param destructor - destructor realization
 **/
-#define QX_SINGLETON_D(T, destructor) \
-    _QX_SINGLETON_IMPL(T, = default, { destructor }, )
+#define QX_SINGLETON_D(T, destructor) _QX_SINGLETON_IMPL(T, = default, { destructor }, )
 
 /**
     @def   QX_SINGLETON_DP
@@ -86,8 +83,7 @@ private:
     @param destructor     - destructor realization
     @param process_getter - getter processing realization
 **/
-#define QX_SINGLETON_DP(T, destructor, process_getter) \
-    _QX_SINGLETON_IMPL(T, = default, { destructor }, process_getter)
+#define QX_SINGLETON_DP(T, destructor, process_getter) _QX_SINGLETON_IMPL(T, = default, { destructor }, process_getter)
 
 /**
     @def   QX_SINGLETON_CD
@@ -96,8 +92,7 @@ private:
     @param constructor - constructor realization
     @param destructor  - destructor realization
 **/
-#define QX_SINGLETON_CD(T, constructor, destructor) \
-    _QX_SINGLETON_IMPL(T, { constructor }, { destructor }, )
+#define QX_SINGLETON_CD(T, constructor, destructor) _QX_SINGLETON_IMPL(T, { constructor }, { destructor }, )
 
 /**
     @def   QX_SINGLETON_CDP

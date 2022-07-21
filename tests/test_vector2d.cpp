@@ -12,10 +12,10 @@
 
 #if QX_TEST_VECTOR2D
 
-#include <qx/containers/vector2d.h>
+    #include <qx/containers/vector2d.h>
 
-#include <algorithm>
-#include <array>
+    #include <algorithm>
+    #include <array>
 
 TEST(TestQxVector2d, constructing)
 {

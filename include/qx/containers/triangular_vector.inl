@@ -11,8 +11,7 @@ namespace qx
 {
 
 template<class T>
-inline triangular_vector<T>::triangular_vector(
-    triangular_vector&& other) noexcept
+inline triangular_vector<T>::triangular_vector(triangular_vector&& other) noexcept
 {
     assign(std::move(other));
 }
@@ -30,9 +29,7 @@ inline triangular_vector<T>::triangular_vector(size_type nSideSize)
 }
 
 template<class T>
-inline triangular_vector<T>::triangular_vector(
-    size_type       nSideSize,
-    const_reference data)
+inline triangular_vector<T>::triangular_vector(size_type nSideSize, const_reference data)
 {
     assign(nSideSize, data);
 }
@@ -44,16 +41,16 @@ inline triangular_vector<T>::~triangular_vector()
 }
 
 template<class T>
-inline const typename triangular_vector<T>::triangular_vector&
-    triangular_vector<T>::operator=(triangular_vector&& other) noexcept
+inline const typename triangular_vector<T>::triangular_vector& triangular_vector<T>::operator=(
+    triangular_vector&& other) noexcept
 {
     assign(std::move(other));
     return *this;
 }
 
 template<class T>
-inline const typename triangular_vector<T>::triangular_vector&
-    triangular_vector<T>::operator=(const triangular_vector& other)
+inline const typename triangular_vector<T>::triangular_vector& triangular_vector<T>::operator=(
+    const triangular_vector& other)
 {
     assign(other);
     return *this;
@@ -76,9 +73,7 @@ inline void triangular_vector<T>::assign(const triangular_vector& other)
 }
 
 template<class T>
-inline void triangular_vector<T>::assign(
-    size_type       nSideSize,
-    const_reference data)
+inline void triangular_vector<T>::assign(size_type nSideSize, const_reference data)
 {
     resize(nSideSize, data);
 }
@@ -126,9 +121,7 @@ inline bool triangular_vector<T>::resize(size_type nSideSize)
 }
 
 template<class T>
-inline bool triangular_vector<T>::resize(
-    size_type       nSideSize,
-    const_reference data)
+inline bool triangular_vector<T>::resize(size_type nSideSize, const_reference data)
 {
     bool bRet = resize(nSideSize);
 
@@ -146,32 +139,26 @@ inline void triangular_vector<T>::fill(const_reference data)
 }
 
 template<class T>
-inline typename triangular_vector<T>::const_reference triangular_vector<T>::get(
-    size_type nRow,
-    size_type nCol) const noexcept
+inline typename triangular_vector<T>::const_reference triangular_vector<T>::get(size_type nRow, size_type nCol)
+    const noexcept
 {
     return m_pData[_get_index(nRow, nCol)];
 }
 
 template<class T>
-inline void triangular_vector<T>::set(
-    size_type       nRow,
-    size_type       nCol,
-    const_reference data) noexcept
+inline void triangular_vector<T>::set(size_type nRow, size_type nCol, const_reference data) noexcept
 {
     m_pData[_get_index(nRow, nCol)] = data;
 }
 
 template<class T>
-inline typename triangular_vector<T>::size_type triangular_vector<T>::size_side(
-    void) const noexcept
+inline typename triangular_vector<T>::size_type triangular_vector<T>::size_side(void) const noexcept
 {
     return m_nSideSize;
 }
 
 template<class T>
-inline typename triangular_vector<T>::size_type triangular_vector<T>::capacity(
-    void) const noexcept
+inline typename triangular_vector<T>::size_type triangular_vector<T>::capacity(void) const noexcept
 {
     return m_nAllocatedSize;
 }
@@ -186,8 +173,9 @@ inline void triangular_vector<T>::free()
 }
 
 template<class T>
-inline typename triangular_vector<T>::size_type triangular_vector<
-    T>::_get_index(size_type nRow, size_type nCol) noexcept
+inline typename triangular_vector<T>::size_type triangular_vector<T>::_get_index(
+    size_type nRow,
+    size_type nCol) noexcept
 {
     if (nRow >= nCol)
         return (nRow * nRow + nRow) / 2 + nCol;
@@ -196,8 +184,7 @@ inline typename triangular_vector<T>::size_type triangular_vector<
 }
 
 template<class T>
-inline typename triangular_vector<T>::size_type triangular_vector<
-    T>::_get_vector_size(size_type nSideSize) noexcept
+inline typename triangular_vector<T>::size_type triangular_vector<T>::_get_vector_size(size_type nSideSize) noexcept
 {
     return (nSideSize * nSideSize + nSideSize) / 2;
 }
@@ -207,8 +194,7 @@ inline typename triangular_vector<T>::size_type triangular_vector<
     @retval - number of elements in triangular vector (without duplication)
 **/
 template<class T>
-inline typename triangular_vector<T>::size_type triangular_vector<T>::size(
-    void) const noexcept
+inline typename triangular_vector<T>::size_type triangular_vector<T>::size(void) const noexcept
 {
     return m_nSize;
 }
@@ -218,8 +204,7 @@ inline typename triangular_vector<T>::size_type triangular_vector<T>::size(
     @retval - data pointer
 **/
 template<class T>
-inline typename triangular_vector<T>::pointer triangular_vector<T>::data(
-    void) noexcept
+inline typename triangular_vector<T>::pointer triangular_vector<T>::data(void) noexcept
 {
     return m_pData;
 }
@@ -230,8 +215,7 @@ inline typename triangular_vector<T>::pointer triangular_vector<T>::data(
     @retval        - value
 **/
 template<class T>
-inline typename triangular_vector<T>::reference triangular_vector<T>::at(
-    size_type nIndex) noexcept
+inline typename triangular_vector<T>::reference triangular_vector<T>::at(size_type nIndex) noexcept
 {
     return m_pData[nIndex];
 }

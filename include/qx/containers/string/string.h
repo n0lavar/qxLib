@@ -29,23 +29,17 @@ namespace detail
 {
 
 template<class Traits>
-using ostream = std::basic_ostream<
-    typename Traits::value_type,
-    std::char_traits<typename Traits::value_type>>;
+using ostream = std::basic_ostream<typename Traits::value_type, std::char_traits<typename Traits::value_type>>;
 
 template<class Traits>
-using istream = std::basic_istream<
-    typename Traits::value_type,
-    std::char_traits<typename Traits::value_type>>;
+using istream = std::basic_istream<typename Traits::value_type, std::char_traits<typename Traits::value_type>>;
 
 } // namespace detail
 
 } // namespace qx
 
 template<class Traits>
-qx::detail::istream<Traits>& operator>>(
-    qx::detail::istream<Traits>& is,
-    qx::basic_string<Traits>&    str);
+qx::detail::istream<Traits>& operator>>(qx::detail::istream<Traits>& is, qx::basic_string<Traits>& str);
 
 namespace qx
 {
@@ -67,9 +61,7 @@ template<class Traits>
 class basic_string
 {
     template<class _Traits>
-    friend qx::detail::istream<_Traits>& ::operator>>(
-        qx::detail::istream<_Traits>& is,
-        basic_string<_Traits>&        str);
+    friend qx::detail::istream<_Traits>& ::operator>>(qx::detail::istream<_Traits>& is, basic_string<_Traits>& str);
 
 public:
     using traits_type     = Traits;
@@ -233,9 +225,7 @@ public:
         @retval           - formatted string
     **/
     template<class... Args>
-    static basic_string static_sprintf(
-        const_pointer pszFormat,
-        Args... args) noexcept;
+    static basic_string static_sprintf(const_pointer pszFormat, Args... args) noexcept;
 
     /**
         @brief  Format string (c-style printf) and append to the current string
@@ -280,8 +270,7 @@ public:
         @param  nSymbols - string size (npos - to the end)
         @retval          - substring view
     **/
-    string_view substr(size_type nPos, size_type nSymbols = npos)
-        const noexcept;
+    string_view substr(size_type nPos, size_type nSymbols = npos) const noexcept;
 
     /**
         @brief  Convert string to lowercase
@@ -346,8 +335,7 @@ public:
         @param  nPos   - position of the first character to include 
         @retval        - number of characters copied
     **/
-    size_type copy(pointer pDest, size_type nCount, size_type nPos = 0)
-        const noexcept;
+    size_type copy(pointer pDest, size_type nCount, size_type nPos = 0) const noexcept;
 
     /**
         @brief  Construct string from custom type
@@ -366,9 +354,7 @@ public:
         @retval           - constructed string
     **/
     template<typename From>
-    static basic_string static_from(
-        const From&   data,
-        const_pointer pszFormat = nullptr) noexcept;
+    static basic_string static_from(const From& data, const_pointer pszFormat = nullptr) noexcept;
 
     /**
         @brief  Append char
@@ -421,10 +407,7 @@ public:
         @param  nSymbols - number of symbols to insert 
         @retval          - pos of char after last char of inserted string or npos
     **/
-    size_type insert(
-        size_type     nPos,
-        const_pointer pszWhat,
-        size_type     nSymbols = npos) noexcept;
+    size_type insert(size_type nPos, const_pointer pszWhat, size_type nSymbols = npos) noexcept;
 
     /**
         @brief  Insert substring
@@ -443,10 +426,7 @@ public:
         @retval             - pos of char after last char of inserted string or npos
     **/
     template<class FwdIt>
-    size_type insert(
-        size_type nPos,
-        FwdIt     itWhatBegin,
-        FwdIt     itWhatEnd) noexcept;
+    size_type insert(size_type nPos, FwdIt itWhatBegin, FwdIt itWhatEnd) noexcept;
 
     /**
         @brief  Insert substring
@@ -473,10 +453,7 @@ public:
         @param  nSymbols - number of symbols to insert
         @retval          - pos of char after last char of inserted string or npos
     **/
-    size_type insert(
-        const_iterator itPos,
-        const_pointer  pszWhat,
-        size_type      nSymbols = npos) noexcept;
+    size_type insert(const_iterator itPos, const_pointer pszWhat, size_type nSymbols = npos) noexcept;
 
     /**
         @brief  Insert substring
@@ -495,10 +472,7 @@ public:
         @retval             - pos of char after last char of inserted string or npos
     **/
     template<class FwdIt>
-    size_type insert(
-        const_iterator itPos,
-        FwdIt          itWhatBegin,
-        FwdIt          itWhatEnd) noexcept;
+    size_type insert(const_iterator itPos, FwdIt itWhatBegin, FwdIt itWhatEnd) noexcept;
 
     /**
         @brief  Insert substring
@@ -729,10 +703,7 @@ public:
         @param  nEnd     - end searching index
         @retval          - position where the first occurrence was or npos
     **/
-    size_type remove(
-        value_type chSymbol,
-        size_type  nBegin = 0,
-        size_type  nEnd   = npos) noexcept;
+    size_type remove(value_type chSymbol, size_type nBegin = 0, size_type nEnd = npos) noexcept;
 
     /**
         @brief  Remove the first occurrence of a substring in a string
@@ -755,10 +726,7 @@ public:
         @param  nEnd   - end searching index
         @retval        - position where the first occurrence was or npos
     **/
-    size_type remove(
-        const basic_string& sStr,
-        size_type           nBegin = 0,
-        size_type           nEnd   = npos) noexcept;
+    size_type remove(const basic_string& sStr, size_type nBegin = 0, size_type nEnd = npos) noexcept;
 
     /**
         @brief  Remove the first occurrence of a substring in a string
@@ -770,11 +738,7 @@ public:
         @retval         - position where the first occurrence was or npos
     **/
     template<class FwdIt>
-    size_type remove(
-        FwdIt     itBegin,
-        FwdIt     itEnd,
-        size_type nBegin = 0,
-        size_type nEnd   = npos) noexcept;
+    size_type remove(FwdIt itBegin, FwdIt itEnd, size_type nBegin = 0, size_type nEnd = npos) noexcept;
 
     /**
         @brief  Remove the first occurrence of a substring in a string
@@ -785,10 +749,7 @@ public:
         @retval        - position where the first occurrence was or npos
     **/
     template<string_convertable String>
-    size_type remove(
-        const String& sStr,
-        size_type     nBegin = 0,
-        size_type     nEnd   = npos) noexcept;
+    size_type remove(const String& sStr, size_type nBegin = 0, size_type nEnd = npos) noexcept;
 
     /**
         @brief  Remove string prefix if matches
@@ -879,10 +840,7 @@ public:
         @param  nEnd     - end searching index 
         @retval          - number of deleted occurrences
     **/
-    size_type remove_all(
-        value_type chSymbol,
-        size_type  nBegin = 0,
-        size_type  nEnd   = npos) noexcept;
+    size_type remove_all(value_type chSymbol, size_type nBegin = 0, size_type nEnd = npos) noexcept;
 
     /**
         @brief  Remove all occurrences of a substring in a string
@@ -905,10 +863,7 @@ public:
         @param  nEnd   - end searching index
         @retval        - number of deleted occurrences
     **/
-    size_type remove_all(
-        const basic_string& sStr,
-        size_type           nBegin = 0,
-        size_type           nEnd   = npos) noexcept;
+    size_type remove_all(const basic_string& sStr, size_type nBegin = 0, size_type nEnd = npos) noexcept;
 
     /**
         @brief  Remove all occurrences of a substring in a string
@@ -920,11 +875,7 @@ public:
         @retval         - number of deleted occurrences
     **/
     template<class FwdIt>
-    size_type remove_all(
-        FwdIt     itFirst,
-        FwdIt     itLast,
-        size_type nBegin = 0,
-        size_type nEnd   = npos) noexcept;
+    size_type remove_all(FwdIt itFirst, FwdIt itLast, size_type nBegin = 0, size_type nEnd = npos) noexcept;
 
     /**
         @brief  Remove all occurrences of a substring in a string
@@ -935,10 +886,7 @@ public:
         @retval        - number of deleted occurrences
     **/
     template<string_convertable String>
-    size_type remove_all(
-        const String& sStr,
-        size_type     nBegin = 0,
-        size_type     nEnd   = npos) noexcept;
+    size_type remove_all(const String& sStr, size_type nBegin = 0, size_type nEnd = npos) noexcept;
 
     /**
         @brief  Replace first occurrence of sFind with sReplace
@@ -951,11 +899,7 @@ public:
         @retval          - pos of char after last char of replaced string or npos
     **/
     template<class TFind, class TReplace>
-    size_type replace(
-        TFind     sFind,
-        TReplace  sReplace,
-        size_type nBegin = 0,
-        size_type nEnd   = npos) noexcept;
+    size_type replace(TFind sFind, TReplace sReplace, size_type nBegin = 0, size_type nEnd = npos) noexcept;
 
     /**
         @brief  Replace all occurrences of sFind with sReplace
@@ -968,11 +912,7 @@ public:
         @retval          - number of replaced occurrences
     **/
     template<class TFind, class TReplace>
-    size_type replace_all(
-        TFind     sFind,
-        TReplace  sReplace,
-        size_type nBegin = 0,
-        size_type nEnd   = npos) noexcept;
+    size_type replace_all(TFind sFind, TReplace sReplace, size_type nBegin = 0, size_type nEnd = npos) noexcept;
 
     /**
         @brief  Performs a binary comparison of the characters
@@ -1053,10 +993,7 @@ public:
         @param  nEnd     - end searching index (npos - to the end)
         @retval          - substring index or npos if not found
     **/
-    size_type find(
-        value_type chSymbol,
-        size_type  nBegin = 0,
-        size_type  nEnd   = npos) const noexcept;
+    size_type find(value_type chSymbol, size_type nBegin = 0, size_type nEnd = npos) const noexcept;
 
     /**
         @brief  Find substring
@@ -1066,11 +1003,8 @@ public:
         @param  nEnd      - end searching index (npos - to the end).
         @retval           - substring index
     **/
-    size_type find(
-        const_pointer pszWhat,
-        size_type     nBegin    = 0,
-        size_type     nWhatSize = npos,
-        size_type     nEnd      = npos) const noexcept;
+    size_type find(const_pointer pszWhat, size_type nBegin = 0, size_type nWhatSize = npos, size_type nEnd = npos)
+        const noexcept;
 
     /**
         @brief  Find substring
@@ -1079,10 +1013,7 @@ public:
         @param  nEnd   - end searching index
         @retval        - substring index or npos if not found
     **/
-    size_type find(
-        const basic_string& sWhat,
-        size_type           nBegin = 0,
-        size_type           nEnd   = npos) const noexcept;
+    size_type find(const basic_string& sWhat, size_type nBegin = 0, size_type nEnd = npos) const noexcept;
 
     /**
         @brief  Find substring
@@ -1094,11 +1025,7 @@ public:
         @retval             - substring index or npos if not found
     **/
     template<class FwdIt>
-    size_type find(
-        FwdIt     itWhatBegin,
-        FwdIt     itWhatEnd,
-        size_type nBegin = 0,
-        size_type nEnd   = npos) const noexcept;
+    size_type find(FwdIt itWhatBegin, FwdIt itWhatEnd, size_type nBegin = 0, size_type nEnd = npos) const noexcept;
 
     /**
         @brief  Find substring
@@ -1109,8 +1036,7 @@ public:
         @retval        - substring index or npos if not found
     **/
     template<string_convertable String>
-    size_type find(String sWhat, size_type nBegin = 0, size_type nEnd = npos)
-        const noexcept;
+    size_type find(String sWhat, size_type nBegin = 0, size_type nEnd = npos) const noexcept;
 
     /**
         @brief  Find substring (reverse direction)
@@ -1120,10 +1046,7 @@ public:
                            (if nBegin < end, result is equivalent of find(...))
         @retval          - substring index or npos if not found
     **/
-    size_type rfind(
-        value_type chSymbol,
-        size_type  nBegin = npos,
-        size_type  nEnd   = 0) const noexcept;
+    size_type rfind(value_type chSymbol, size_type nBegin = npos, size_type nEnd = 0) const noexcept;
 
     /**
         @brief  Find substring (reverse direction)
@@ -1134,11 +1057,8 @@ public:
                             (if nBegin < end, result is equivalent of find(...))
         @retval           - substring index or npos if not found
     **/
-    size_type rfind(
-        const_pointer pszWhat,
-        size_type     nBegin    = npos,
-        size_type     nWhatSize = npos,
-        size_type     nEnd      = 0) const noexcept;
+    size_type rfind(const_pointer pszWhat, size_type nBegin = npos, size_type nWhatSize = npos, size_type nEnd = 0)
+        const noexcept;
 
     /**
         @brief  Find substring (reverse direction)
@@ -1148,10 +1068,7 @@ public:
                          (if nBegin < end, result is equivalent of find(...))
         @retval        - substring index or npos if not found
     **/
-    size_type rfind(
-        const basic_string& sWhat,
-        size_type           nBegin = npos,
-        size_type           nEnd   = 0) const noexcept;
+    size_type rfind(const basic_string& sWhat, size_type nBegin = npos, size_type nEnd = 0) const noexcept;
 
     /**
         @brief  Find substring (reverse direction)
@@ -1164,11 +1081,7 @@ public:
         @retval             - substring index or npos if not found
     **/
     template<class FwdIt>
-    size_type rfind(
-        FwdIt     itWhatBegin,
-        FwdIt     itWhatEnd,
-        size_type nBegin = npos,
-        size_type nEnd   = 0) const noexcept;
+    size_type rfind(FwdIt itWhatBegin, FwdIt itWhatEnd, size_type nBegin = npos, size_type nEnd = 0) const noexcept;
 
     /**
         @brief  Find substring (reverse direction)
@@ -1180,8 +1093,7 @@ public:
         @retval        - substring index or npos if not found
     **/
     template<string_convertable String>
-    size_type rfind(String sWhat, size_type nBegin = npos, size_type nEnd = 0)
-        const noexcept;
+    size_type rfind(String sWhat, size_type nBegin = npos, size_type nEnd = 0) const noexcept;
 
     /**
         @brief  Find first position of character
@@ -1189,8 +1101,7 @@ public:
         @param  nBegin   - position at which the search is to begin
         @retval          - symbol index or npos
     **/
-    size_type find_first_of(value_type chSymbol, size_type nBegin = 0)
-        const noexcept;
+    size_type find_first_of(value_type chSymbol, size_type nBegin = 0) const noexcept;
 
     /**
         @brief  Finds the first character equal to one of characters in the given character sequence
@@ -1199,10 +1110,7 @@ public:
         @param  nWhatSize - length of character string identifying characters to search for
         @retval           - symbol index or npos
     **/
-    size_type find_first_of(
-        const_pointer pszWhat,
-        size_type     nBegin,
-        size_type     nWhatSize) const noexcept;
+    size_type find_first_of(const_pointer pszWhat, size_type nBegin, size_type nWhatSize) const noexcept;
 
     /**
         @brief  Finds the first character equal to one of characters in the given character sequence
@@ -1210,8 +1118,7 @@ public:
         @param  nBegin  - position at which the search is to begin
         @retval         - symbol index or npos
     **/
-    size_type find_first_of(const_pointer pszWhat, size_type nBegin = 0)
-        const noexcept;
+    size_type find_first_of(const_pointer pszWhat, size_type nBegin = 0) const noexcept;
 
     /**
         @brief  Finds the first character equal to one of characters in the given character sequence
@@ -1219,8 +1126,7 @@ public:
         @param  nBegin - position at which the search is to begin
         @retval        - symbol index or npos
     **/
-    size_type find_first_of(const basic_string& sWhat, size_type nBegin = 0)
-        const noexcept;
+    size_type find_first_of(const basic_string& sWhat, size_type nBegin = 0) const noexcept;
 
     /**
         @brief  Finds the first character equal to one of characters in the given character sequence
@@ -1231,10 +1137,7 @@ public:
         @retval             - symbol index or npos
     **/
     template<class FwdIt>
-    size_type find_first_of(
-        FwdIt     itWhatBegin,
-        FwdIt     itWhatEnd,
-        size_type nBegin = 0) const noexcept;
+    size_type find_first_of(FwdIt itWhatBegin, FwdIt itWhatEnd, size_type nBegin = 0) const noexcept;
 
     /**
         @brief  Finds the first character equal to one of characters in the given character sequence
@@ -1252,8 +1155,7 @@ public:
         @param  nEnd     - position at which the search is to finish
         @retval          - symbol index or npos
     **/
-    size_type find_last_of(value_type chSymbol, size_type nEnd = 0)
-        const noexcept;
+    size_type find_last_of(value_type chSymbol, size_type nEnd = 0) const noexcept;
 
     /**
         @brief  Finds the last character equal to one of characters in the given character sequence
@@ -1262,10 +1164,7 @@ public:
         @param  nWhatSize - length of character string identifying characters to search for
         @retval           - symbol index or npos
     **/
-    size_type find_last_of(
-        const_pointer pszWhat,
-        size_type     nEnd,
-        size_type     nWhatSize) const noexcept;
+    size_type find_last_of(const_pointer pszWhat, size_type nEnd, size_type nWhatSize) const noexcept;
 
     /**
         @brief  Finds the last character equal to one of characters in the given character sequence
@@ -1273,8 +1172,7 @@ public:
         @param  nEnd    - position at which the search is to finish
         @retval         - symbol index or npos
     **/
-    size_type find_last_of(const_pointer pszWhat, size_type nEnd = 0)
-        const noexcept;
+    size_type find_last_of(const_pointer pszWhat, size_type nEnd = 0) const noexcept;
 
     /**
         @brief  Finds the last character equal to one of characters in the given character sequence
@@ -1282,8 +1180,7 @@ public:
         @param  nEnd  - position at which the search is to finish 
         @retval       - symbol index or npos
     **/
-    size_type find_last_of(const basic_string& sWhat, size_type nEnd = 0)
-        const noexcept;
+    size_type find_last_of(const basic_string& sWhat, size_type nEnd = 0) const noexcept;
 
     /**
         @brief  Finds the last character equal to one of characters in the given character sequence
@@ -1294,10 +1191,7 @@ public:
         @retval             - symbol index or npos
     **/
     template<class FwdIt>
-    size_type find_last_of(
-        FwdIt     itWhatBegin,
-        FwdIt     itWhatEnd,
-        size_type nEnd = 0) const noexcept;
+    size_type find_last_of(FwdIt itWhatBegin, FwdIt itWhatEnd, size_type nEnd = 0) const noexcept;
 
     /**
         @brief  Finds the last character equal to one of characters in the given character sequence
@@ -1315,8 +1209,7 @@ public:
         @param  nBegin   - position at which the search is to begin
         @retval          - symbol index or npos
     **/
-    size_type find_first_not_of(value_type chSymbol, size_type nBegin = 0)
-        const noexcept;
+    size_type find_first_not_of(value_type chSymbol, size_type nBegin = 0) const noexcept;
 
     /**
         @brief  Finds the first character equal to none of the characters in the given character sequence
@@ -1325,10 +1218,7 @@ public:
         @param  nWhatSize - length of character string identifying characters to search for
         @retval           - symbol index or npos
     **/
-    size_type find_first_not_of(
-        const_pointer pszWhat,
-        size_type     nBegin,
-        size_type     nWhatSize) const noexcept;
+    size_type find_first_not_of(const_pointer pszWhat, size_type nBegin, size_type nWhatSize) const noexcept;
 
     /**
         @brief  Finds the first character equal to none of the characters in the given character sequence
@@ -1336,8 +1226,7 @@ public:
         @param  nBegin  - position at which the search is to begin
         @retval         - symbol index or npos
     **/
-    size_type find_first_not_of(const_pointer pszWhat, size_type nBegin = 0)
-        const noexcept;
+    size_type find_first_not_of(const_pointer pszWhat, size_type nBegin = 0) const noexcept;
 
     /**
         @brief  Finds the first character equal to none of the characters in the given character sequence
@@ -1345,8 +1234,7 @@ public:
         @param  nBegin - position at which the search is to begin
         @retval        - symbol index or npos
     **/
-    size_type find_first_not_of(const basic_string& sWhat, size_type nBegin = 0)
-        const noexcept;
+    size_type find_first_not_of(const basic_string& sWhat, size_type nBegin = 0) const noexcept;
 
     /**
         @brief  Finds the first character equal to none of the characters in the given character sequence
@@ -1357,10 +1245,7 @@ public:
         @retval             - symbol index or npos
     **/
     template<class FwdIt>
-    size_type find_first_not_of(
-        FwdIt     itWhatBegin,
-        FwdIt     itWhatEnd,
-        size_type nBegin = 0) const noexcept;
+    size_type find_first_not_of(FwdIt itWhatBegin, FwdIt itWhatEnd, size_type nBegin = 0) const noexcept;
 
     /**
         @brief  Finds the first character equal to none of the characters in the given character sequence
@@ -1370,8 +1255,7 @@ public:
         @retval        - symbol index or npos
     **/
     template<string_convertable String>
-    size_type find_first_not_of(String sWhat, size_type nBegin = 0)
-        const noexcept;
+    size_type find_first_not_of(String sWhat, size_type nBegin = 0) const noexcept;
 
     /**
         @brief  Finds the last character not equal to chSymbol
@@ -1379,8 +1263,7 @@ public:
         @param  nEnd     - position at which the search is to finish 
         @retval          - symbol index or npos
     **/
-    size_type find_last_not_of(value_type chSymbol, size_type nEnd = 0)
-        const noexcept;
+    size_type find_last_not_of(value_type chSymbol, size_type nEnd = 0) const noexcept;
 
     /**
         @brief  Finds the last character equal to none of the characters in the given character sequence
@@ -1389,10 +1272,7 @@ public:
         @param  nWhatSize - length of character string identifying characters to search for
         @retval           - symbol index or npos
     **/
-    size_type find_last_not_of(
-        const_pointer pszWhat,
-        size_type     nEnd,
-        size_type     nWhatSize) const noexcept;
+    size_type find_last_not_of(const_pointer pszWhat, size_type nEnd, size_type nWhatSize) const noexcept;
 
     /**
         @brief  Finds the last character equal to none of the characters in the given character sequence
@@ -1400,8 +1280,7 @@ public:
         @param  nEnd    - position at which the search is to finish
         @retval         - symbol index or npos
     **/
-    size_type find_last_not_of(const_pointer pszWhat, size_type nEnd = 0)
-        const noexcept;
+    size_type find_last_not_of(const_pointer pszWhat, size_type nEnd = 0) const noexcept;
 
     /**
         @brief  Finds the last character equal to none of the characters in the given character sequence
@@ -1409,8 +1288,7 @@ public:
         @param  nEnd  - position at which the search is to finish
         @retval       - symbol index or npos
     **/
-    size_type find_last_not_of(const basic_string& sWhat, size_type nEnd = 0)
-        const noexcept;
+    size_type find_last_not_of(const basic_string& sWhat, size_type nEnd = 0) const noexcept;
 
     /**
         @brief  Finds the last character equal to none of the characters in the given character sequence
@@ -1421,10 +1299,7 @@ public:
         @retval             - symbol index or npos
     **/
     template<class FwdIt>
-    size_type find_last_not_of(
-        FwdIt     itWhatBegin,
-        FwdIt     itWhatEnd,
-        size_type nEnd = 0) const noexcept;
+    size_type find_last_not_of(FwdIt itWhatBegin, FwdIt itWhatEnd, size_type nEnd = 0) const noexcept;
 
     /**
         @brief  Finds the last character equal to none of the characters in the given character sequence
@@ -1449,8 +1324,7 @@ public:
         @param  nSepLen      - separator string length (npos if str is null terminated)
         @retval              - string_view container
     **/
-    views split(const_pointer pszSeparator, size_type nSepLen = npos)
-        const noexcept;
+    views split(const_pointer pszSeparator, size_type nSepLen = npos) const noexcept;
 
     /**
         @brief  Split string by separator
@@ -1491,8 +1365,7 @@ public:
         @param  nStrSize - string length
         @retval          - true if starts with string
     **/
-    bool starts_with(const_pointer pszStr, size_type nStrSize = npos)
-        const noexcept;
+    bool starts_with(const_pointer pszStr, size_type nStrSize = npos) const noexcept;
 
     /**
         @brief  Check if current string starts with string
@@ -1533,8 +1406,7 @@ public:
         @param  nStrSize - string length
         @retval          - true if ends with string
     **/
-    bool ends_with(const_pointer pszStr, size_type nStrSize = npos)
-        const noexcept;
+    bool ends_with(const_pointer pszStr, size_type nStrSize = npos) const noexcept;
 
     /**
         @brief  Check if current string ends with string
@@ -1577,8 +1449,7 @@ public:
         @param   nStrSize - substring size 
         @retval           - true if this string contains substring
     **/
-    bool contains(const_pointer pszStr, size_type nStrSize = npos)
-        const noexcept;
+    bool contains(const_pointer pszStr, size_type nStrSize = npos) const noexcept;
 
     /**
         @brief   Check if string contains substring
@@ -1890,9 +1761,7 @@ private:
         @param   eType    - resize type
         @retval           - true if memory alloc is successful
     **/
-    bool _resize(
-        size_type          nSymbols,
-        string_resize_type eType = string_resize_type::common) noexcept;
+    bool _resize(size_type nSymbols, string_resize_type eType = string_resize_type::common) noexcept;
 
     /**
         @brief  Common algorithm for trimming string to the left
@@ -1930,10 +1799,7 @@ private:
         @retval            - substring index or npos if not found
     **/
     template<class Comparator>
-    size_type _find(
-        size_type         nBegin,
-        size_type         nEnd,
-        const Comparator& comparator) const noexcept;
+    size_type _find(size_type nBegin, size_type nEnd, const Comparator& comparator) const noexcept;
 
     /**
         @brief  
@@ -1944,10 +1810,7 @@ private:
         @retval            - substring index or npos if not found
     **/
     template<class Comparator>
-    size_type _rfind(
-        size_type         nBegin,
-        size_type         nEnd,
-        const Comparator& comparator) const noexcept;
+    size_type _rfind(size_type nBegin, size_type nEnd, const Comparator& comparator) const noexcept;
 
     /**
         @brief  Common algorithm for find_first_of
@@ -1960,11 +1823,8 @@ private:
         @retval             - symbol index or npos
     **/
     template<class Incrementer, class FwdIt>
-    size_type _find_first_of(
-        FwdIt              itBegin,
-        FwdIt              itEnd,
-        size_type          nBegin,
-        const Incrementer& incrementer) const noexcept;
+    size_type _find_first_of(FwdIt itBegin, FwdIt itEnd, size_type nBegin, const Incrementer& incrementer)
+        const noexcept;
 
     /**
         @brief  Common algorithm for find_last_of
@@ -1977,11 +1837,7 @@ private:
         @retval             - symbol index or npos
     **/
     template<class Incrementer, class FwdIt>
-    size_type _find_last_of(
-        FwdIt              itBegin,
-        FwdIt              itEnd,
-        size_type          nEnd,
-        const Incrementer& incrementer) const noexcept;
+    size_type _find_last_of(FwdIt itBegin, FwdIt itEnd, size_type nEnd, const Incrementer& incrementer) const noexcept;
 
     /**
         @brief  Common algorithm for find_first_not_of
@@ -1994,11 +1850,8 @@ private:
         @retval             - symbol index or npos
     **/
     template<class Incrementer, class FwdIt>
-    size_type _find_first_not_of(
-        FwdIt              itBegin,
-        FwdIt              itEnd,
-        size_type          nBegin,
-        const Incrementer& incrementer) const noexcept;
+    size_type _find_first_not_of(FwdIt itBegin, FwdIt itEnd, size_type nBegin, const Incrementer& incrementer)
+        const noexcept;
 
     /**
         @brief  Common algorithm for find_last_not_of
@@ -2011,11 +1864,8 @@ private:
         @retval             - symbol index or npos
     **/
     template<class Incrementer, class FwdIt>
-    size_type _find_last_not_of(
-        FwdIt              itBegin,
-        FwdIt              itEnd,
-        size_type          nEnd,
-        const Incrementer& incrementer) const noexcept;
+    size_type _find_last_not_of(FwdIt itBegin, FwdIt itEnd, size_type nEnd, const Incrementer& incrementer)
+        const noexcept;
 
 private:
     string_data<Traits> m_Data;

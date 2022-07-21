@@ -12,12 +12,12 @@
 
 #if QX_TEST_RTTI
 
-#include <qx/containers/string/string_utils.h>
-#include <qx/rtti/rtti.h>
-#include <qx/rtti/rtti_cast.h>
-#include <qx/useful_macros.h>
+    #include <qx/containers/string/string_utils.h>
+    #include <qx/rtti/rtti.h>
+    #include <qx/rtti/rtti_cast.h>
+    #include <qx/useful_macros.h>
 
-#include <memory>
+    #include <memory>
 
 class CClass1
 {
@@ -156,27 +156,13 @@ static_assert(std::is_same_v<CDerived2_32::ThisClass, CDerived2_32>);
 //---------------------------- get_class_name_static ---------------------------
 
 QX_STATIC_ASSERT_STR_EQ(CBase1::get_class_name_static().data(), "CBase1");
-QX_STATIC_ASSERT_STR_EQ(
-    CDerived1_1::get_class_name_static().data(),
-    "CDerived1_1");
-QX_STATIC_ASSERT_STR_EQ(
-    CDerived1_2::get_class_name_static().data(),
-    "CDerived1_2");
-QX_STATIC_ASSERT_STR_EQ(
-    CDerived1_21::get_class_name_static().data(),
-    "CDerived1_21");
-QX_STATIC_ASSERT_STR_EQ(
-    CDerived1_22::get_class_name_static().data(),
-    "CDerived1_22");
-QX_STATIC_ASSERT_STR_EQ(
-    CDerived1_221::get_class_name_static().data(),
-    "CDerived1_221");
-QX_STATIC_ASSERT_STR_EQ(
-    CDerived1_222::get_class_name_static().data(),
-    "CDerived1_222");
-QX_STATIC_ASSERT_STR_EQ(
-    CDerived1_3::get_class_name_static().data(),
-    "CDerived1_3");
+QX_STATIC_ASSERT_STR_EQ(CDerived1_1::get_class_name_static().data(), "CDerived1_1");
+QX_STATIC_ASSERT_STR_EQ(CDerived1_2::get_class_name_static().data(), "CDerived1_2");
+QX_STATIC_ASSERT_STR_EQ(CDerived1_21::get_class_name_static().data(), "CDerived1_21");
+QX_STATIC_ASSERT_STR_EQ(CDerived1_22::get_class_name_static().data(), "CDerived1_22");
+QX_STATIC_ASSERT_STR_EQ(CDerived1_221::get_class_name_static().data(), "CDerived1_221");
+QX_STATIC_ASSERT_STR_EQ(CDerived1_222::get_class_name_static().data(), "CDerived1_222");
+QX_STATIC_ASSERT_STR_EQ(CDerived1_3::get_class_name_static().data(), "CDerived1_3");
 
 // ------------------------------------ RTTI -----------------------------------
 
@@ -185,12 +171,8 @@ TEST(rtti, class_id)
     EXPECT_EQ(qx::get_class_id<CClass1>(), -1);
     EXPECT_EQ(qx::get_class_id<CClass2>(), -1);
 
-    EXPECT_TRUE(
-        static_cast<CBase1*>(p1_21.get())->get_class_id()
-        == qx::get_class_id<CDerived1_21>());
-    EXPECT_TRUE(
-        static_cast<CDerived1_2*>(p1_21.get())->get_class_id()
-        == qx::get_class_id<CDerived1_21>());
+    EXPECT_TRUE(static_cast<CBase1*>(p1_21.get())->get_class_id() == qx::get_class_id<CDerived1_21>());
+    EXPECT_TRUE(static_cast<CDerived1_2*>(p1_21.get())->get_class_id() == qx::get_class_id<CDerived1_21>());
     EXPECT_TRUE(p1_21->get_class_id() == qx::get_class_id<CDerived1_21>());
 
     std::set<int> ids;
@@ -223,9 +205,7 @@ void TestDerivedFrom(const auto& pClass, bool bExpect)
 
     if constexpr (qx::detail::has_get_class_id_static<T>)
     {
-        EXPECT_EQ(
-            pClass->is_derived_from_id(T::get_class_id_static()),
-            bExpect);
+        EXPECT_EQ(pClass->is_derived_from_id(T::get_class_id_static()), bExpect);
     }
 }
 
@@ -366,28 +346,16 @@ TEST(rtti, get_class_name)
 {
     EXPECT_STREQ(p1->get_class_name().data(), "CBase1");
 
-    EXPECT_STREQ(
-        static_cast<CBase1*>(p1_2.get())->get_class_name().data(),
-        "CDerived1_2");
+    EXPECT_STREQ(static_cast<CBase1*>(p1_2.get())->get_class_name().data(), "CDerived1_2");
     EXPECT_STREQ(p1_2->get_class_name().data(), "CDerived1_2");
 
-    EXPECT_STREQ(
-        static_cast<CBase1*>(p1_22.get())->get_class_name().data(),
-        "CDerived1_22");
-    EXPECT_STREQ(
-        static_cast<CDerived1_2*>(p1_22.get())->get_class_name().data(),
-        "CDerived1_22");
+    EXPECT_STREQ(static_cast<CBase1*>(p1_22.get())->get_class_name().data(), "CDerived1_22");
+    EXPECT_STREQ(static_cast<CDerived1_2*>(p1_22.get())->get_class_name().data(), "CDerived1_22");
     EXPECT_STREQ(p1_22->get_class_name().data(), "CDerived1_22");
 
-    EXPECT_STREQ(
-        static_cast<CBase1*>(p1_222.get())->get_class_name().data(),
-        "CDerived1_222");
-    EXPECT_STREQ(
-        static_cast<CDerived1_2*>(p1_222.get())->get_class_name().data(),
-        "CDerived1_222");
-    EXPECT_STREQ(
-        static_cast<CDerived1_22*>(p1_222.get())->get_class_name().data(),
-        "CDerived1_222");
+    EXPECT_STREQ(static_cast<CBase1*>(p1_222.get())->get_class_name().data(), "CDerived1_222");
+    EXPECT_STREQ(static_cast<CDerived1_2*>(p1_222.get())->get_class_name().data(), "CDerived1_222");
+    EXPECT_STREQ(static_cast<CDerived1_22*>(p1_222.get())->get_class_name().data(), "CDerived1_222");
     EXPECT_STREQ(p1_222->get_class_name().data(), "CDerived1_222");
 }
 

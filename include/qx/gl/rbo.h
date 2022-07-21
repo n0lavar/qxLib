@@ -40,12 +40,7 @@ public:
         @param eAttachment     - attachment point of the framebuffer 
         @param nMultiSamples   - samples number, 0 - disable 
     **/
-    void Init(
-        size_t nWidth,
-        size_t nHeight,
-        GLenum eInternalFormat,
-        GLenum eAttachment,
-        size_t nMultiSamples = 0);
+    void Init(size_t nWidth, size_t nHeight, GLenum eInternalFormat, GLenum eAttachment, size_t nMultiSamples = 0);
 
     QX_DECL_IBUFFER
 

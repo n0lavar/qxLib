@@ -12,9 +12,9 @@
 
 #if QX_TEST_MATH
 
-#include <qx/math.h>
-#include <qx/useful_funcs.h>
-#include <qx/useful_macros.h>
+    #include <qx/math.h>
+    #include <qx/useful_funcs.h>
+    #include <qx/useful_macros.h>
 
 // ---------------------------------- qx::abs ----------------------------------
 

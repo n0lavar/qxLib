@@ -23,19 +23,13 @@ inline vector2d<T>::vector2d(const vector2d& other)
 }
 
 template<class T>
-inline vector2d<T>::vector2d(
-    size_type     rows,
-    size_type     cols,
-    const_pointer pData)
+inline vector2d<T>::vector2d(size_type rows, size_type cols, const_pointer pData)
 {
     assign(rows, cols, pData);
 }
 
 template<class T>
-inline vector2d<T>::vector2d(
-    size_type       rows,
-    size_type       cols,
-    const_reference data)
+inline vector2d<T>::vector2d(size_type rows, size_type cols, const_reference data)
 {
     assign(rows, cols, data);
 }
@@ -47,16 +41,14 @@ inline vector2d<T>::~vector2d()
 }
 
 template<class T>
-inline const typename vector2d<T>::vector2d& vector2d<T>::operator=(
-    vector2d&& other) noexcept
+inline const typename vector2d<T>::vector2d& vector2d<T>::operator=(vector2d&& other) noexcept
 {
     assign(std::move(other));
     return *this;
 }
 
 template<class T>
-inline const typename vector2d<T>::vector2d& vector2d<T>::operator=(
-    const vector2d& other)
+inline const typename vector2d<T>::vector2d& vector2d<T>::operator=(const vector2d& other)
 {
     assign(other);
     return *this;
@@ -79,20 +71,14 @@ inline void vector2d<T>::assign(const vector2d& other)
 }
 
 template<class T>
-inline void vector2d<T>::assign(
-    size_type     rows,
-    size_type     cols,
-    const_pointer pData)
+inline void vector2d<T>::assign(size_type rows, size_type cols, const_pointer pData)
 {
     if (resize(rows, cols) && pData)
         std::memcpy(m_pData, pData, rows * cols * sizeof(T));
 }
 
 template<class T>
-inline void vector2d<T>::assign(
-    size_type       rows,
-    size_type       cols,
-    const_reference data)
+inline void vector2d<T>::assign(size_type rows, size_type cols, const_reference data)
 {
     if (resize(rows, cols))
         fill(data);
@@ -145,10 +131,7 @@ inline bool vector2d<T>::resize(size_type rows, size_type cols)
 }
 
 template<class T>
-inline bool vector2d<T>::resize(
-    size_type       rows,
-    size_type       cols,
-    const_reference data)
+inline bool vector2d<T>::resize(size_type rows, size_type cols, const_reference data)
 {
     const bool bRet = resize(rows, cols);
 
@@ -175,15 +158,13 @@ inline void vector2d<T>::fill(const_reference elem)
 }
 
 template<class T>
-inline typename vector2d<T>::pointer vector2d<T>::operator[](
-    size_type nRow) noexcept
+inline typename vector2d<T>::pointer vector2d<T>::operator[](size_type nRow) noexcept
 {
     return m_pData + nRow * m_nCols;
 }
 
 template<class T>
-inline typename vector2d<T>::const_pointer vector2d<T>::operator[](
-    size_type nRow) const noexcept
+inline typename vector2d<T>::const_pointer vector2d<T>::operator[](size_type nRow) const noexcept
 {
     return m_pData + nRow * m_nCols;
 }
@@ -195,10 +176,7 @@ inline const T& vector2d<T>::get(size_type nRow, size_type nCol) const noexcept
 }
 
 template<class T>
-inline void vector2d<T>::set(
-    size_type       nRow,
-    size_type       nCol,
-    const_reference data) noexcept
+inline void vector2d<T>::set(size_type nRow, size_type nCol, const_reference data) noexcept
 {
     (*this)[nRow][nCol] = data;
 }
@@ -228,8 +206,7 @@ inline typename vector2d<T>::size_type vector2d<T>::size_y() const noexcept
 }
 
 template<class T>
-inline typename vector2d<T>::size_type vector2d<T>::capacity(
-    void) const noexcept
+inline typename vector2d<T>::size_type vector2d<T>::capacity(void) const noexcept
 {
     return m_nAllocatedSize;
 }
@@ -260,8 +237,7 @@ inline typename vector2d<T>::pointer vector2d<T>::data() noexcept
     @retval        - element
 **/
 template<class T>
-inline typename vector2d<T>::reference vector2d<T>::at(
-    size_type nIndex) noexcept
+inline typename vector2d<T>::reference vector2d<T>::at(size_type nIndex) noexcept
 {
     return m_pData[nIndex];
 }

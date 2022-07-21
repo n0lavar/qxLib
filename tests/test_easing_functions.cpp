@@ -12,7 +12,7 @@
 
 #if QX_TEST_EASING_FUNCTIONS
 
-#include <qx/easing/easing_functions.h>
+    #include <qx/easing/easing_functions.h>
 
 template<typename T>
 class TestEasingFunctions : public ::testing::Test
@@ -22,12 +22,10 @@ protected:
     void TestFunc()
     {
         // x zero
-        EXPECT_TRUE(
-            qx::epsilon_equal(Func(T(0.f)), T(0.f), qx::easing::eps<T>()));
+        EXPECT_TRUE(qx::epsilon_equal(Func(T(0.f)), T(0.f), qx::easing::eps<T>()));
 
         // x one
-        EXPECT_TRUE(
-            qx::epsilon_equal(Func(T(1.f)), T(1.f), qx::easing::eps<T>()));
+        EXPECT_TRUE(qx::epsilon_equal(Func(T(1.f)), T(1.f), qx::easing::eps<T>()));
 
         // check there are no divides on zero and other calc errors
         constexpr T step(0.001f);

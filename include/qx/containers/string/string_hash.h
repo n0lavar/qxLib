@@ -18,8 +18,7 @@ namespace detail
 {
 
 template<typename T>
-concept has_zero_termonated_hash_func_overload =
-    requires(typename T::const_pointer pszString, size_t nSeed)
+concept has_zero_termonated_hash_func_overload = requires(typename T::const_pointer pszString, size_t nSeed)
 {
     T::hash_function(pszString, nSeed);
 };
@@ -58,9 +57,7 @@ public:
         @param pString - string first char pointer
         @param nSize   - string size
     **/
-    constexpr basic_string_hash(
-        const_pointer pString,
-        size_type     nSize) noexcept;
+    constexpr basic_string_hash(const_pointer pString, size_type nSize) noexcept;
 
     /**
         @brief basic_string_hash object constructor
@@ -132,9 +129,7 @@ namespace literals
     @param  nSize   - literal text size
     @retval         - text hash value
 **/
-constexpr basic_string_hash<fast_hash_string_traits<char>> operator"" _sh(
-    const char* pszText,
-    size_t      nSize);
+constexpr basic_string_hash<fast_hash_string_traits<char>> operator"" _sh(const char* pszText, size_t nSize);
 
 /**
     @brief  String hash literal for constexpr converting. Can be used with switch-case
@@ -142,9 +137,7 @@ constexpr basic_string_hash<fast_hash_string_traits<char>> operator"" _sh(
     @param  nSize   - literal text size
     @retval         - text hash value
 **/
-constexpr basic_string_hash<fast_hash_string_traits<wchar_t>> operator"" _sh(
-    const wchar_t* pszText,
-    size_t         nSize);
+constexpr basic_string_hash<fast_hash_string_traits<wchar_t>> operator"" _sh(const wchar_t* pszText, size_t nSize);
 
 } // namespace literals
 

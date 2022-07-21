@@ -12,12 +12,11 @@
 
 #if QX_TEST_SINGLETON
 
-#include <qx/patterns/singleton.h>
+    #include <qx/patterns/singleton.h>
 
 class CTestSingleton
 {
-    QX_SINGLETON_CDP(CTestSingleton, on_create();, on_terminate();
-                     , ProcessGetter();)
+    QX_SINGLETON_CDP(CTestSingleton, on_create();, on_terminate();, ProcessGetter();)
 
     void on_create(void)
     {

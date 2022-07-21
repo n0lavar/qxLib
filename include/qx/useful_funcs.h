@@ -45,17 +45,13 @@ constexpr bool between(T left, T value, T right, Compare compare)
         i64 v = static_cast<i64>(value);
         return between(l, v, r, compare);
     }
-    else if constexpr (
-        std::is_integral_v<T> && std::is_same_v<Compare, std::less_equal<>>)
+    else if constexpr (std::is_integral_v<T> && std::is_same_v<Compare, std::less_equal<>>)
     {
         return compare(static_cast<size_t>(value - left), right - left);
     }
-    else if constexpr (
-        std::is_floating_point_v<
-            T> && std::is_same_v<Compare, std::less_equal<>>)
+    else if constexpr (std::is_floating_point_v<T> && std::is_same_v<Compare, std::less_equal<>>)
     {
-        return qx::epsilon_less_equal(left, value)
-               && qx::epsilon_less_equal(value, right);
+        return qx::epsilon_less_equal(left, value) && qx::epsilon_less_equal(value, right);
     }
     else
     {
@@ -130,7 +126,7 @@ constexpr std::array<T, LeftLength + RightLength> join_arrays(
     std::array<T, RightLength> lhs)
 {
     std::array<T, LeftLength + RightLength> res;
-    auto current = std::copy(rhs.begin(), rhs.end(), res.begin());
+    auto                                    current = std::copy(rhs.begin(), rhs.end(), res.begin());
     std::copy(lhs.begin(), lhs.end(), current);
     return res;
 }

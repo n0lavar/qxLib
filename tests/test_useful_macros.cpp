@@ -12,16 +12,16 @@
 
 #if QX_TEST_USEFUL_MACROS
 
-#include <qx/containers/string/string_utils.h>
-#include <qx/useful_macros.h>
+    #include <qx/containers/string/string_utils.h>
+    #include <qx/useful_macros.h>
 
-#include <map>
+    #include <map>
 
 
 //------------------------------- QX_EMPTY_MACRO -------------------------------
 
-#define EMPTY1 QX_EMPTY_MACRO
-#define EMPTY2 QX_EMPTY_MACRO
+    #define EMPTY1 QX_EMPTY_MACRO
+    #define EMPTY2 QX_EMPTY_MACRO
 
 TEST(useful_macros, empty_macro)
 {
@@ -64,9 +64,9 @@ QX_STATIC_ASSERT_STR_EQ(pszFileName, "test_useful_macros.cpp");
 
 //----------------------------- QX_SINGLE_ARGUMENT -----------------------------
 
-#define MACRO_WITH_2_ARGS(a, b) \
-    if (a != b)                 \
-        throw std::exception();
+    #define MACRO_WITH_2_ARGS(a, b) \
+        if (a != b)                 \
+            throw std::exception();
 
 TEST(useful_macros, single_argument)
 {

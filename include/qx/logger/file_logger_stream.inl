@@ -33,10 +33,7 @@ inline file_logger_stream::~file_logger_stream()
     }
 }
 
-inline void file_logger_stream::process_output(
-    std::string_view svMessage,
-    const log_unit&  logUnit,
-    log_level        eLogLevel)
+inline void file_logger_stream::process_output(std::string_view svMessage, const log_unit& logUnit, log_level eLogLevel)
 {
     std::string_view        svFileName;
     log_file_policy         eLogFilePolicy = log_file_policy::append;
@@ -47,8 +44,7 @@ inline void file_logger_stream::process_output(
         svFileName     = it->second.sFileName;
         eLogFilePolicy = it->second.eLogPolicy;
 
-        if (!it->second.bWroteToFile
-            && eLogFilePolicy == log_file_policy::clear_then_uppend)
+        if (!it->second.bWroteToFile && eLogFilePolicy == log_file_policy::clear_then_uppend)
             ofstreamMode = std::ofstream::out | std::ofstream::trunc;
 
         it->second.bWroteToFile = true;
@@ -77,8 +73,7 @@ inline void file_logger_stream::process_output(
     }
 }
 
-inline void file_logger_stream::set_logs_folder(
-    std::string_view svFolder) noexcept
+inline void file_logger_stream::set_logs_folder(std::string_view svFolder) noexcept
 {
     m_sFolder = svFolder;
     if (!m_sFolder.empty() && !m_sFolder.ends_with('/'))
@@ -94,9 +89,7 @@ inline void file_logger_stream::register_file(
         m_Files[svUnitName] = { svFileName, eLogPolicy };
 }
 
-inline void file_logger_stream::fill_file_folder(
-    log_file_policy eLogFilePolicy,
-    string&         sFileFolder) const noexcept
+inline void file_logger_stream::fill_file_folder(log_file_policy eLogFilePolicy, string& sFileFolder) const noexcept
 {
     switch (eLogFilePolicy)
     {

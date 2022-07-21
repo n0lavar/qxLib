@@ -12,10 +12,10 @@
 
 #if QX_TEST_THREAD_WORKER
 
-#include <qx/thread/thread_worker.h>
+    #include <qx/thread/thread_worker.h>
 
-#include <cmath>
-#include <memory>
+    #include <cmath>
+    #include <memory>
 
 constexpr size_t NUM_ITERATIONS = 1000000;
 constexpr double PI_RESULT      = 3.141591653589774;
@@ -41,8 +41,7 @@ private:
         for (size_t i = 0; i < NUM_ITERATIONS && !thread_is_terminating(); i++)
         {
             double fExpected = m_fSumm.load();
-            double fDesired =
-                fExpected + (std::pow(-1, i) / static_cast<double>(2 * i + 1));
+            double fDesired  = fExpected + (std::pow(-1, i) / static_cast<double>(2 * i + 1));
             while (!m_fSumm.compare_exchange_weak(fExpected, fDesired))
                 ;
         }
@@ -75,9 +74,7 @@ protected:
 
         EXPECT_FALSE(m_pWorker->thread_is_terminating());
         EXPECT_FALSE(m_pWorker->thread_is_running());
-        EXPECT_EQ(
-            m_pWorker->thread_get_state(),
-            pi_worker::thread_state::inactive);
+        EXPECT_EQ(m_pWorker->thread_get_state(), pi_worker::thread_state::inactive);
 
         m_pWorker->thread_start();
     }
@@ -89,9 +86,7 @@ protected:
 
         EXPECT_TRUE(m_pWorker->thread_is_terminating());
         EXPECT_FALSE(m_pWorker->thread_is_running());
-        EXPECT_EQ(
-            m_pWorker->thread_get_state(),
-            pi_worker::thread_state::inactive);
+        EXPECT_EQ(m_pWorker->thread_get_state(), pi_worker::thread_state::inactive);
 
         if (!m_bTerminated)
             EXPECT_DOUBLE_EQ(m_fCurrentPi, PI_RESULT);

@@ -44,9 +44,7 @@ public:
 
 public:
     constexpr iterator() noexcept = default;
-    constexpr iterator(C* c, size_type i) noexcept
-        : m_nIndex(i)
-        , m_pCollection(c)
+    constexpr iterator(C* c, size_type i) noexcept : m_nIndex(i), m_pCollection(c)
     {
     }
     [[nodiscard]] constexpr reference operator*() const noexcept
@@ -142,9 +140,7 @@ private:
 };
 
 template<class C>
-constexpr iterator<C> operator+(
-    typename iterator<C>::size_type n,
-    iterator<C>                     it) noexcept
+constexpr iterator<C> operator+(typename iterator<C>::size_type n, iterator<C> it) noexcept
 {
     return it += n;
 }
@@ -174,14 +170,10 @@ public:
 
 public:
     constexpr const_iterator() noexcept = default;
-    constexpr const_iterator(const C* c, size_type i) noexcept
-        : m_nIndex(i)
-        , m_pCollection(c)
+    constexpr const_iterator(const C* c, size_type i) noexcept : m_nIndex(i), m_pCollection(c)
     {
     }
-    constexpr const_iterator(const iterator<C>& it) noexcept
-        : m_nIndex(it.m_nIndex)
-        , m_pCollection(it.m_pCollection)
+    constexpr const_iterator(const iterator<C>& it) noexcept : m_nIndex(it.m_nIndex), m_pCollection(it.m_pCollection)
     {
     }
     [[nodiscard]] constexpr reference operator*() const noexcept
@@ -277,9 +269,7 @@ private:
 };
 
 template<class C>
-constexpr const_iterator<C> operator+(
-    typename const_iterator<C>::size_type n,
-    const_iterator<C>                     it) noexcept
+constexpr const_iterator<C> operator+(typename const_iterator<C>::size_type n, const_iterator<C> it) noexcept
 {
     return it += n;
 }
@@ -314,9 +304,7 @@ public:
 
 public:
     constexpr reverse_iterator() noexcept = default;
-    constexpr reverse_iterator(C* c, size_type i) noexcept
-        : m_nIndex(i)
-        , m_pCollection(c)
+    constexpr reverse_iterator(C* c, size_type i) noexcept : m_nIndex(i), m_pCollection(c)
     {
     }
     [[nodiscard]] constexpr reference operator*() const noexcept
@@ -373,8 +361,7 @@ public:
         reverse_iterator r(*this);
         return r += n;
     }
-    constexpr difference_type operator-(
-        const reverse_iterator& r) const noexcept
+    constexpr difference_type operator-(const reverse_iterator& r) const noexcept
     {
         return static_cast<difference_type>(r.m_nIndex - m_nIndex);
     }
@@ -415,9 +402,7 @@ private:
 };
 
 template<class C>
-constexpr reverse_iterator<C> operator+(
-    typename reverse_iterator<C>::size_type n,
-    reverse_iterator<C>                     it) noexcept
+constexpr reverse_iterator<C> operator+(typename reverse_iterator<C>::size_type n, reverse_iterator<C> it) noexcept
 {
     return it += n;
 }
@@ -447,9 +432,7 @@ public:
 
 public:
     constexpr const_reverse_iterator() noexcept = default;
-    constexpr const_reverse_iterator(const C* c, size_type i) noexcept
-        : m_nIndex(i)
-        , m_pCollection(c)
+    constexpr const_reverse_iterator(const C* c, size_type i) noexcept : m_nIndex(i), m_pCollection(c)
     {
     }
     constexpr const_reverse_iterator(const reverse_iterator<C>& it) noexcept
@@ -511,8 +494,7 @@ public:
         const_reverse_iterator r(*this);
         return r += n;
     }
-    constexpr difference_type operator-(
-        const const_reverse_iterator& r) const noexcept
+    constexpr difference_type operator-(const const_reverse_iterator& r) const noexcept
     {
         return static_cast<difference_type>(r.m_nIndex - m_nIndex);
     }

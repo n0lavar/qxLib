@@ -24,24 +24,16 @@ inline void thread_worker::thread_start(bool bWait)
     m_Thread = std::thread(
         [this]()
         {
-            m_eThreadState.store(
-                thread_state::starting,
-                std::memory_order_release);
+            m_eThreadState.store(thread_state::starting, std::memory_order_release);
             thread_on_started();
 
-            m_eThreadState.store(
-                thread_state::running,
-                std::memory_order_release);
+            m_eThreadState.store(thread_state::running, std::memory_order_release);
             thread_run();
 
-            m_eThreadState.store(
-                thread_state::stopping,
-                std::memory_order_release);
+            m_eThreadState.store(thread_state::stopping, std::memory_order_release);
             thread_on_stopped();
 
-            m_eThreadState.store(
-                thread_state::inactive,
-                std::memory_order_release);
+            m_eThreadState.store(thread_state::inactive, std::memory_order_release);
             m_bThreadTerminating.store(true, std::memory_order_release);
         });
 
