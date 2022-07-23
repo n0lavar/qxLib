@@ -51,8 +51,8 @@
 #define _QX_ASSERT(before_debug_break, debug_break, after_debug_break, condition) \
     _QX_ASSERT_MSG(before_debug_break, debug_break, after_debug_break, condition, "")
 
-#define _QX_ASSERT_NO_ENTRY(before_debug_break, debug_break, after_debug_break) \
-    _QX_ASSERT_MSG(before_debug_break, debug_break, after_debug_break, false, "No entry")
+#define _QX_ASSERT_NO_ENTRY(before_debug_break, debug_break, after_debug_break, format, ...) \
+    _QX_ASSERT_MSG(before_debug_break, debug_break, after_debug_break, false, format, ##__VA_ARGS__)
 
 #define _QX_ASSERT_RETURN(before_debug_break, debug_break, after_debug_break, condition, ...)         \
     if constexpr (false)                                                                              \
@@ -184,14 +184,42 @@
     @details EXPECT macros generate nonfatal failures and allow to continue running
 **/
 #define QX_EXPECT_NO_ENTRY \
-    _QX_ASSERT_NO_ENTRY(QX_EXPECT_BEFORE_DEBUG_BREAK, QX_EXPECT_DEBUG_BREAK, QX_EXPECT_AFTER_DEBUG_BREAK)
+    _QX_ASSERT_NO_ENTRY(QX_EXPECT_BEFORE_DEBUG_BREAK, QX_EXPECT_DEBUG_BREAK, QX_EXPECT_AFTER_DEBUG_BREAK, "No entry")
+
+/**
+    @brief   Fails unconditionally if this code should not be executed
+    @details EXPECT macros generate nonfatal failures and allow to continue running
+    @param   format - message format
+    @param   ...    - message arguments
+**/
+#define QX_EXPECT_NO_ENTRY_MSG(format, ...) \
+    _QX_ASSERT_NO_ENTRY(                    \
+        QX_EXPECT_BEFORE_DEBUG_BREAK,       \
+        QX_EXPECT_DEBUG_BREAK,              \
+        QX_EXPECT_AFTER_DEBUG_BREAK,        \
+        format,                             \
+        ##__VA_ARGS__)
 
 /**
     @brief   Fails unconditionally if this code should not be executed
     @details ASSERT macros generate fatal failures and abort the program execution
 **/
 #define QX_ASSERT_NO_ENTRY \
-    _QX_ASSERT_NO_ENTRY(QX_ASSERT_BEFORE_DEBUG_BREAK, QX_ASSERT_DEBUG_BREAK, QX_ASSERT_AFTER_DEBUG_BREAK)
+    _QX_ASSERT_NO_ENTRY(QX_ASSERT_BEFORE_DEBUG_BREAK, QX_ASSERT_DEBUG_BREAK, QX_ASSERT_AFTER_DEBUG_BREAK, "No entry")
+
+/**
+    @brief   Fails unconditionally if this code should not be executed
+    @details ASSERT macros generate fatal failures and abort the program execution
+    @param   format - message format
+    @param   ...    - message arguments
+**/
+#define QX_ASSERT_NO_ENTRY_MSG(format, ...) \
+    _QX_ASSERT_NO_ENTRY(                    \
+        QX_ASSERT_BEFORE_DEBUG_BREAK,       \
+        QX_ASSERT_DEBUG_BREAK,              \
+        QX_ASSERT_AFTER_DEBUG_BREAK,        \
+        format,                             \
+        ##__VA_ARGS__)
 
 /**
     @brief   Verifies that condition is true and return if false

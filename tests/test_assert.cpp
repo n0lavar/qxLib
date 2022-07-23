@@ -63,24 +63,24 @@ TEST(qx_assert, expect_mgs_macro_compilation)
 {
     return;
 
-    QX_EXPECT_MSG(false, "msg");
+    QX_EXPECT_MSG(false, "msg %d", 41);
 
     if (false)
-        QX_EXPECT_MSG(false, "msg");
+        QX_EXPECT_MSG(false, "msg %d", 41);
 
     if (false)
-        QX_EXPECT_MSG(false, "msg");
+        QX_EXPECT_MSG(false, "msg %d", 41);
     else
         Foo();
 
     if (false)
         Foo();
     else
-        QX_EXPECT_MSG(false, "msg");
+        QX_EXPECT_MSG(false, "msg %d", 41);
 
     if (false)
     {
-        QX_EXPECT_MSG(false, "msg");
+        QX_EXPECT_MSG(false, "msg %d", 41);
         Foo();
     }
 
@@ -88,7 +88,7 @@ TEST(qx_assert, expect_mgs_macro_compilation)
         Foo();
     else
     {
-        QX_EXPECT_MSG(false, "msg");
+        QX_EXPECT_MSG(false, "msg %d", 41);
         Foo();
     }
 }
@@ -123,6 +123,40 @@ TEST(qx_assert, expect_no_entry_macro_compilation)
     else
     {
         QX_EXPECT_NO_ENTRY;
+        Foo();
+    }
+}
+
+TEST(qx_assert, expect_no_entry_msg_macro_compilation)
+{
+    return;
+
+    QX_EXPECT_NO_ENTRY_MSG("msg %d", 41);
+
+    if (false)
+        QX_EXPECT_NO_ENTRY_MSG("msg %d", 41);
+
+    if (false)
+        QX_EXPECT_NO_ENTRY_MSG("msg %d", 41);
+    else
+        Foo();
+
+    if (false)
+        Foo();
+    else
+        QX_EXPECT_NO_ENTRY_MSG("msg %d", 41);
+
+    if (false)
+    {
+        QX_EXPECT_NO_ENTRY_MSG("msg %d", 41);
+        Foo();
+    }
+
+    if (false)
+        Foo();
+    else
+    {
+        QX_EXPECT_NO_ENTRY_MSG("msg %d", 41);
         Foo();
     }
 }
@@ -274,24 +308,24 @@ TEST(qx_assert, assert_mgs_macro_compilation)
 {
     return;
 
-    QX_ASSERT_MSG(false, "msg");
+    QX_ASSERT_MSG(false, "msg %d", 41);
 
     if (false)
-        QX_ASSERT_MSG(false, "msg");
+        QX_ASSERT_MSG(false, "msg %d", 41);
 
     if (false)
-        QX_ASSERT_MSG(false, "msg");
+        QX_ASSERT_MSG(false, "msg %d", 41);
     else
         Foo();
 
     if (false)
         Foo();
     else
-        QX_ASSERT_MSG(false, "msg");
+        QX_ASSERT_MSG(false, "msg %d", 41);
 
     if (false)
     {
-        QX_ASSERT_MSG(false, "msg");
+        QX_ASSERT_MSG(false, "msg %d", 41);
         Foo();
     }
 
@@ -299,7 +333,41 @@ TEST(qx_assert, assert_mgs_macro_compilation)
         Foo();
     else
     {
-        QX_ASSERT_MSG(false, "msg");
+        QX_ASSERT_MSG(false, "msg %d", 41);
+        Foo();
+    }
+}
+
+TEST(qx_assert, assert_no_entry_msg_macro_compilation)
+{
+    return;
+
+    QX_ASSERT_NO_ENTRY_MSG("msg %d", 41);
+
+    if (false)
+        QX_ASSERT_NO_ENTRY_MSG("msg %d", 41);
+
+    if (false)
+        QX_ASSERT_NO_ENTRY_MSG("msg %d", 41);
+    else
+        Foo();
+
+    if (false)
+        Foo();
+    else
+        QX_ASSERT_NO_ENTRY_MSG("msg %d", 41);
+
+    if (false)
+    {
+        QX_ASSERT_NO_ENTRY_MSG("msg %d", 41);
+        Foo();
+    }
+
+    if (false)
+        Foo();
+    else
+    {
+        QX_ASSERT_NO_ENTRY_MSG("msg %d", 41);
         Foo();
     }
 }
@@ -345,6 +413,7 @@ TEST(qx_assert, assert_macros)
     EXPECT_DEATH({ QX_ASSERT(0); }, "");
     EXPECT_DEATH({ QX_ASSERT_MSG(0, ""); }, "");
     EXPECT_DEATH({ QX_ASSERT_NO_ENTRY; }, "");
+    EXPECT_DEATH({ QX_ASSERT_NO_ENTRY_MSG("%d", 42); }, "");
 }
 
 #endif
