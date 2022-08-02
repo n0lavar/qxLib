@@ -159,7 +159,7 @@
     @details EXPECT macros generate nonfatal failures and allow to continue running
     @param   condition - condition to check
 
-    May be used in if statemant:
+    May be used in if statement:
 
     @code
     const auto file = ...;
