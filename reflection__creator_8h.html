@@ -75,8 +75,8 @@ $(function() {
 
 <p>Contains reflection creator functionality.  
 <a href="#details">More...</a></p>
-<div class="textblock"><code>#include &lt;<a class="el" href="class__identificator_8h_source.html">qx/rtti/class_identificator.h</a>&gt;</code><br />
-<code>#include &lt;<a class="el" href="useful__macros_8h_source.html">qx/useful_macros.h</a>&gt;</code><br />
+<div class="textblock"><code>#include &lt;<a class="el" href="macros_2common_8h_source.html">qx/macros/common.h</a>&gt;</code><br />
+<code>#include &lt;<a class="el" href="class__identificator_8h_source.html">qx/rtti/class_identificator.h</a>&gt;</code><br />
 <code>#include &lt;functional&gt;</code><br />
 <code>#include &lt;map&gt;</code><br />
 <code>#include &lt;memory&gt;</code><br />
@@ -129,11 +129,11 @@ Macros</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <b>Value:</b><div class="fragment"><div class="line"><span class="keyword">private</span>:                                                                                \</div>
-<div class="line">    static <span class="keyword">inline</span> <span class="keyword">volatile</span> <span class="keywordtype">bool</span> <a class="code" href="useful__macros_8h.html#a8f51bd935768d1845211352e225739ed">QX_LINE_NAME</a>(s_bRegistered) = Creator::_register_class( \</div>
+<div class="line">    static <span class="keyword">inline</span> <span class="keyword">volatile</span> <span class="keywordtype">bool</span> <a class="code" href="macros_2common_8h.html#a8f51bd935768d1845211352e225739ed">QX_LINE_NAME</a>(s_bRegistered) = Creator::_register_class( \</div>
 <div class="line">        qx::detail::create_shared&lt;CreatorRoot, ThisClass, __VA_ARGS__&gt;,                 \</div>
 <div class="line">        get_class_id_static(),                                                          \</div>
 <div class="line">        get_class_name_static());</div>
-<div class="ttc" id="auseful__macros_8h_html_a8f51bd935768d1845211352e225739ed"><div class="ttname"><a href="useful__macros_8h.html#a8f51bd935768d1845211352e225739ed">QX_LINE_NAME</a></div><div class="ttdeci">#define QX_LINE_NAME(prefix)</div><div class="ttdoc">Do magic! Creates a unique name using the line number.</div><div class="ttdef"><b>Definition:</b> <a href="useful__macros_8h_source.html#l00087">useful_macros.h:87</a></div></div>
+<div class="ttc" id="amacros_2common_8h_html_a8f51bd935768d1845211352e225739ed"><div class="ttname"><a href="macros_2common_8h.html#a8f51bd935768d1845211352e225739ed">QX_LINE_NAME</a></div><div class="ttdeci">#define QX_LINE_NAME(prefix)</div><div class="ttdoc">Do magic! Creates a unique name using the line number.</div><div class="ttdef"><b>Definition:</b> <a href="macros_2common_8h_source.html#l00033">common.h:33</a></div></div>
 </div><!-- fragment -->
 <p>Macro for all classes inherited from base class. </p>
 <p>std::shared_ptr version </p><dl class="params"><dt>Parameters</dt><dd>
@@ -194,7 +194,7 @@ Macros</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <b>Value:</b><div class="fragment"><div class="line"><span class="keyword">private</span>:                                                                                \</div>
-<div class="line">    static <span class="keyword">inline</span> <span class="keyword">volatile</span> <span class="keywordtype">bool</span> <a class="code" href="useful__macros_8h.html#a8f51bd935768d1845211352e225739ed">QX_LINE_NAME</a>(s_bRegistered) = Creator::_register_class( \</div>
+<div class="line">    static <span class="keyword">inline</span> <span class="keyword">volatile</span> <span class="keywordtype">bool</span> <a class="code" href="macros_2common_8h.html#a8f51bd935768d1845211352e225739ed">QX_LINE_NAME</a>(s_bRegistered) = Creator::_register_class( \</div>
 <div class="line">        qx::detail::create_unique&lt;CreatorRoot, ThisClass, __VA_ARGS__&gt;,                 \</div>
 <div class="line">        get_class_id_static(),                                                          \</div>
 <div class="line">        get_class_name_static());</div>

@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>qxLib: include/qx/useful_funcs.h File Reference</title>
+<title>qxLib: include/qx/containers/utils.h File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -61,212 +61,55 @@ $(function() {
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="dir_6159fad94d64d847460e6e9a559e7dc6.html">qx</a></li>  </ul>
+<li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="dir_6159fad94d64d847460e6e9a559e7dc6.html">qx</a></li><li class="navelem"><a class="el" href="dir_7697a308b845a35d6c83f6082cbb932b.html">containers</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
   <div class="summary">
 <a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
-<div class="title">useful_funcs.h File Reference</div>  </div>
+<div class="title">utils.h File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>Different useful functions.  
+<p>Contains various utils for containers.  
 <a href="#details">More...</a></p>
-<div class="textblock"><code>#include &lt;<a class="el" href="math_8h_source.html">qx/math.h</a>&gt;</code><br />
-<code>#include &lt;<a class="el" href="suppress__warnings_8h_source.html">qx/suppress_warnings.h</a>&gt;</code><br />
-<code>#include &lt;<a class="el" href="typedefs_8h_source.html">qx/typedefs.h</a>&gt;</code><br />
-<code>#include &lt;algorithm&gt;</code><br />
+<div class="textblock"><code>#include &lt;algorithm&gt;</code><br />
 <code>#include &lt;array&gt;</code><br />
-<code>#include &lt;functional&gt;</code><br />
 </div>
-<p><a href="useful__funcs_8h_source.html">Go to the source code of this file.</a></p>
+<p><a href="utils_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a2986ab33c946935721e51f4564ea9a08"><td class="memTemplParams" colspan="2">template&lt;typename T , typename Compare  = std::less_equal&lt;&gt;&gt; </td></tr>
-<tr class="memitem:a2986ab33c946935721e51f4564ea9a08"><td class="memTemplItemLeft" align="right" valign="top">constexpr bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="useful__funcs_8h.html#a2986ab33c946935721e51f4564ea9a08">qx::between</a> (T left, T value, T right, Compare compare)</td></tr>
-<tr class="memdesc:a2986ab33c946935721e51f4564ea9a08"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if value is between left and right.  <a href="useful__funcs_8h.html#a2986ab33c946935721e51f4564ea9a08">More...</a><br /></td></tr>
-<tr class="separator:a2986ab33c946935721e51f4564ea9a08"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a55c30568a7ce6ec5ca535aa6a4e9ddbe"><td class="memTemplParams" colspan="2">template&lt;typename T , typename Compare  = std::less_equal&lt;&gt;&gt; </td></tr>
-<tr class="memitem:a55c30568a7ce6ec5ca535aa6a4e9ddbe"><td class="memTemplItemLeft" align="right" valign="top">constexpr bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="useful__funcs_8h.html#a55c30568a7ce6ec5ca535aa6a4e9ddbe">qx::between</a> (T left, T value, T right)</td></tr>
-<tr class="memdesc:a55c30568a7ce6ec5ca535aa6a4e9ddbe"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if value is between left and right.  <a href="useful__funcs_8h.html#a55c30568a7ce6ec5ca535aa6a4e9ddbe">More...</a><br /></td></tr>
-<tr class="separator:a55c30568a7ce6ec5ca535aa6a4e9ddbe"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a567475c55a5a56c634d471de261b0428"><td class="memTemplParams" colspan="2">template&lt;class iterator &gt; </td></tr>
-<tr class="memitem:a567475c55a5a56c634d471de261b0428"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="useful__funcs_8h.html#a567475c55a5a56c634d471de261b0428">qx::destruct</a> (iterator start, iterator end)</td></tr>
-<tr class="memdesc:a567475c55a5a56c634d471de261b0428"><td class="mdescLeft">&#160;</td><td class="mdescRight">Call destructors.  <a href="useful__funcs_8h.html#a567475c55a5a56c634d471de261b0428">More...</a><br /></td></tr>
+<tr class="memitem:a567475c55a5a56c634d471de261b0428"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="utils_8h.html#a567475c55a5a56c634d471de261b0428">qx::destruct</a> (iterator start, iterator end)</td></tr>
+<tr class="memdesc:a567475c55a5a56c634d471de261b0428"><td class="mdescLeft">&#160;</td><td class="mdescRight">Call destructors.  <a href="utils_8h.html#a567475c55a5a56c634d471de261b0428">More...</a><br /></td></tr>
 <tr class="separator:a567475c55a5a56c634d471de261b0428"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9d6faba90a6874d7629cf440bdd4092c"><td class="memTemplParams" colspan="2">template&lt;size_t N, typename T &gt; </td></tr>
-<tr class="memitem:a9d6faba90a6874d7629cf440bdd4092c"><td class="memTemplItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="useful__funcs_8h.html#a9d6faba90a6874d7629cf440bdd4092c">qx::make_array</a> (T init_val=T())</td></tr>
-<tr class="memdesc:a9d6faba90a6874d7629cf440bdd4092c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fill array with value in constructor.  <a href="useful__funcs_8h.html#a9d6faba90a6874d7629cf440bdd4092c">More...</a><br /></td></tr>
+<tr class="memitem:a9d6faba90a6874d7629cf440bdd4092c"><td class="memTemplItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="utils_8h.html#a9d6faba90a6874d7629cf440bdd4092c">qx::make_array</a> (T init_val=T())</td></tr>
+<tr class="memdesc:a9d6faba90a6874d7629cf440bdd4092c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fill array with value in constructor.  <a href="utils_8h.html#a9d6faba90a6874d7629cf440bdd4092c">More...</a><br /></td></tr>
 <tr class="separator:a9d6faba90a6874d7629cf440bdd4092c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aeccf764444fb66cff5690d7570fdefc2"><td class="memTemplParams" colspan="2">template&lt;typename T , std::size_t LeftLength, std::size_t RightLength&gt; </td></tr>
-<tr class="memitem:aeccf764444fb66cff5690d7570fdefc2"><td class="memTemplItemLeft" align="right" valign="top">constexpr std::array&lt; T, LeftLength+RightLength &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="useful__funcs_8h.html#aeccf764444fb66cff5690d7570fdefc2">qx::join_arrays</a> (std::array&lt; T, LeftLength &gt; rhs, std::array&lt; T, RightLength &gt; lhs)</td></tr>
-<tr class="memdesc:aeccf764444fb66cff5690d7570fdefc2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Join arrays at compile-time.  <a href="useful__funcs_8h.html#aeccf764444fb66cff5690d7570fdefc2">More...</a><br /></td></tr>
+<tr class="memitem:aeccf764444fb66cff5690d7570fdefc2"><td class="memTemplItemLeft" align="right" valign="top">constexpr std::array&lt; T, LeftLength+RightLength &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="utils_8h.html#aeccf764444fb66cff5690d7570fdefc2">qx::join_arrays</a> (std::array&lt; T, LeftLength &gt; rhs, std::array&lt; T, RightLength &gt; lhs)</td></tr>
+<tr class="memdesc:aeccf764444fb66cff5690d7570fdefc2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Join arrays at compile-time.  <a href="utils_8h.html#aeccf764444fb66cff5690d7570fdefc2">More...</a><br /></td></tr>
 <tr class="separator:aeccf764444fb66cff5690d7570fdefc2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a840e9d0a6b6ed606ce3048a3abc6bb81"><td class="memTemplParams" colspan="2">template&lt;class ContainerTo , class ContainerFrom &gt; </td></tr>
-<tr class="memitem:a840e9d0a6b6ed606ce3048a3abc6bb81"><td class="memTemplItemLeft" align="right" valign="top">ContainerTo&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="useful__funcs_8h.html#a840e9d0a6b6ed606ce3048a3abc6bb81">qx::create_container</a> (const ContainerFrom &amp;from)</td></tr>
-<tr class="memdesc:a840e9d0a6b6ed606ce3048a3abc6bb81"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a container by constructing each element from the corresponding element of the original container.  <a href="useful__funcs_8h.html#a840e9d0a6b6ed606ce3048a3abc6bb81">More...</a><br /></td></tr>
+<tr class="memitem:a840e9d0a6b6ed606ce3048a3abc6bb81"><td class="memTemplItemLeft" align="right" valign="top">ContainerTo&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="utils_8h.html#a840e9d0a6b6ed606ce3048a3abc6bb81">qx::create_container</a> (const ContainerFrom &amp;from)</td></tr>
+<tr class="memdesc:a840e9d0a6b6ed606ce3048a3abc6bb81"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a container by constructing each element from the corresponding element of the original container.  <a href="utils_8h.html#a840e9d0a6b6ed606ce3048a3abc6bb81">More...</a><br /></td></tr>
 <tr class="separator:a840e9d0a6b6ed606ce3048a3abc6bb81"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a23356c78dace0fc62401e0c85d2c455a"><td class="memTemplParams" colspan="2">template&lt;class Container &gt; </td></tr>
-<tr class="memitem:a23356c78dace0fc62401e0c85d2c455a"><td class="memTemplItemLeft" align="right" valign="top">constexpr size_t&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="useful__funcs_8h.html#a23356c78dace0fc62401e0c85d2c455a">qx::bytes_size</a> (const Container &amp;container)</td></tr>
-<tr class="memdesc:a23356c78dace0fc62401e0c85d2c455a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the size of memory allocated for container elements.  <a href="useful__funcs_8h.html#a23356c78dace0fc62401e0c85d2c455a">More...</a><br /></td></tr>
+<tr class="memitem:a23356c78dace0fc62401e0c85d2c455a"><td class="memTemplItemLeft" align="right" valign="top">constexpr size_t&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="utils_8h.html#a23356c78dace0fc62401e0c85d2c455a">qx::bytes_size</a> (const Container &amp;container)</td></tr>
+<tr class="memdesc:a23356c78dace0fc62401e0c85d2c455a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the size of memory allocated for container elements.  <a href="utils_8h.html#a23356c78dace0fc62401e0c85d2c455a">More...</a><br /></td></tr>
 <tr class="separator:a23356c78dace0fc62401e0c85d2c455a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Different useful functions. </p>
-<dl class="section author"><dt>Author</dt><dd>Khrapov </dd></dl>
-<dl class="section date"><dt>Date</dt><dd>1.11.2019 </dd></dl>
-<dl class="section copyright"><dt>Copyright</dt><dd>© Nick Khrapov, 2021. All right reserved. </dd></dl>
+<div class="textblock"><p>Contains various utils for containers. </p>
+<p>~ </p><dl class="section author"><dt>Author</dt><dd>Khrapov </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>6.08.2022 </dd></dl>
+<dl class="section copyright"><dt>Copyright</dt><dd>© Nick Khrapov, 2022. All right reserved. </dd></dl>
 
-<p class="definition">Definition in file <a class="el" href="useful__funcs_8h_source.html">useful_funcs.h</a>.</p>
+<p class="definition">Definition in file <a class="el" href="utils_8h_source.html">utils.h</a>.</p>
 </div><h2 class="groupheader">Function Documentation</h2>
-<a id="a55c30568a7ce6ec5ca535aa6a4e9ddbe"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a55c30568a7ce6ec5ca535aa6a4e9ddbe">&#9670;&nbsp;</a></span>between() <span class="overload">[1/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename T , typename Compare  = std::less_equal&lt;&gt;&gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">constexpr bool qx::between </td>
-          <td>(</td>
-          <td class="paramtype">T&#160;</td>
-          <td class="paramname"><em>left</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">T&#160;</td>
-          <td class="paramname"><em>value</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">T&#160;</td>
-          <td class="paramname"><em>right</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Checks if value is between left and right. </p>
-<p>Overloading for disabling 4388 warning with Compare instantiation </p><dl class="tparams"><dt>Template Parameters</dt><dd>
-  <table class="tparams">
-    <tr><td class="paramname">T</td><td>- value type </td></tr>
-    <tr><td class="paramname">Compare</td><td>- comparator type </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">left</td><td>- left value </td></tr>
-    <tr><td class="paramname">value</td><td>- value </td></tr>
-    <tr><td class="paramname">right</td><td>- right value </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="retval"><dt>Return values</dt><dd>
-  <table class="retval">
-    <tr><td class="paramname">-</td><td>true, left &lt;= value &lt;= right </td></tr>
-  </table>
-  </dd>
-</dl>
-
-<p class="definition">Definition at line <a class="el" href="useful__funcs_8h_source.html#l00075">75</a> of file <a class="el" href="useful__funcs_8h_source.html">useful_funcs.h</a>.</p>
-
-</div>
-</div>
-<a id="a2986ab33c946935721e51f4564ea9a08"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2986ab33c946935721e51f4564ea9a08">&#9670;&nbsp;</a></span>between() <span class="overload">[2/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename T , typename Compare  = std::less_equal&lt;&gt;&gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">constexpr bool qx::between </td>
-          <td>(</td>
-          <td class="paramtype">T&#160;</td>
-          <td class="paramname"><em>left</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">T&#160;</td>
-          <td class="paramname"><em>value</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">T&#160;</td>
-          <td class="paramname"><em>right</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">Compare&#160;</td>
-          <td class="paramname"><em>compare</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Checks if value is between left and right. </p>
-<dl class="tparams"><dt>Template Parameters</dt><dd>
-  <table class="tparams">
-    <tr><td class="paramname">T</td><td>- value type </td></tr>
-    <tr><td class="paramname">Compare</td><td>- comparator type </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">left</td><td>- left value </td></tr>
-    <tr><td class="paramname">value</td><td>- value </td></tr>
-    <tr><td class="paramname">right</td><td>- right value </td></tr>
-    <tr><td class="paramname">compare</td><td>- comparator function </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="retval"><dt>Return values</dt><dd>
-  <table class="retval">
-    <tr><td class="paramname">-</td><td>true, left &lt;= value &lt;= right </td></tr>
-  </table>
-  </dd>
-</dl>
-
-<p class="definition">Definition at line <a class="el" href="useful__funcs_8h_source.html#l00039">39</a> of file <a class="el" href="useful__funcs_8h_source.html">useful_funcs.h</a>.</p>
-
-</div>
-</div>
 <a id="a23356c78dace0fc62401e0c85d2c455a"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a23356c78dace0fc62401e0c85d2c455a">&#9670;&nbsp;</a></span>bytes_size()</h2>
 
@@ -313,7 +156,7 @@ template&lt;class Container &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="useful__funcs_8h_source.html#l00160">160</a> of file <a class="el" href="useful__funcs_8h_source.html">useful_funcs.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="utils_8h_source.html#l00097">97</a> of file <a class="el" href="utils_8h_source.html">utils.h</a>.</p>
 
 </div>
 </div>
@@ -356,7 +199,7 @@ template&lt;class ContainerTo , class ContainerFrom &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="useful__funcs_8h_source.html#l00143">143</a> of file <a class="el" href="useful__funcs_8h_source.html">useful_funcs.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="utils_8h_source.html#l00080">80</a> of file <a class="el" href="utils_8h_source.html">utils.h</a>.</p>
 
 </div>
 </div>
@@ -411,7 +254,7 @@ template&lt;class iterator &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="useful__funcs_8h_source.html#l00089">89</a> of file <a class="el" href="useful__funcs_8h_source.html">useful_funcs.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="utils_8h_source.html#l00026">26</a> of file <a class="el" href="utils_8h_source.html">utils.h</a>.</p>
 
 </div>
 </div>
@@ -474,7 +317,7 @@ template&lt;typename T , std::size_t LeftLength, std::size_t RightLength&gt; </d
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="useful__funcs_8h_source.html#l00124">124</a> of file <a class="el" href="useful__funcs_8h_source.html">useful_funcs.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="utils_8h_source.html#l00061">61</a> of file <a class="el" href="utils_8h_source.html">utils.h</a>.</p>
 
 </div>
 </div>
@@ -525,7 +368,7 @@ template&lt;size_t N, typename T &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="useful__funcs_8h_source.html#l00107">107</a> of file <a class="el" href="useful__funcs_8h_source.html">useful_funcs.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="utils_8h_source.html#l00044">44</a> of file <a class="el" href="utils_8h_source.html">utils.h</a>.</p>
 
 </div>
 </div>

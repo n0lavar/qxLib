@@ -183,7 +183,7 @@ $(function() {
 <div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;        m_nSize     = _get_vector_size(nSideSize);</div>
 <div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160; </div>
 <div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;        <span class="keyword">auto</span> itLast = <a class="code" href="classqx_1_1iterator.html">iterator</a>(<span class="keyword">this</span>, m_nSize);</div>
-<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;        <a class="code" href="useful__funcs_8h.html#a567475c55a5a56c634d471de261b0428">destruct</a>(itFirst, itLast);</div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;        <a class="code" href="utils_8h.html#a567475c55a5a56c634d471de261b0428">destruct</a>(itFirst, itLast);</div>
 <div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160; </div>
 <div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;        bRet = <span class="keyword">true</span>;</div>
 <div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;    }</div>
@@ -298,7 +298,7 @@ $(function() {
 <div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160;<span class="keyword">inline</span> <span class="keywordtype">void</span> triangular_vector&lt;T&gt;::clear() noexcept</div>
 <div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160;{</div>
 <div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160;    <span class="keywordflow">if</span> (m_pData)</div>
-<div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160;        <a class="code" href="useful__funcs_8h.html#a567475c55a5a56c634d471de261b0428">destruct</a>(begin(), end());</div>
+<div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160;        <a class="code" href="utils_8h.html#a567475c55a5a56c634d471de261b0428">destruct</a>(begin(), end());</div>
 <div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160; </div>
 <div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160;    m_nSideSize = 0;</div>
 <div class="line"><a name="l00233"></a><span class="lineno">  233</span>&#160;    m_nSize     = 0;</div>
@@ -318,7 +318,7 @@ $(function() {
 <div class="ttc" id="aclassqx_1_1triangular__vector_html_ac2685ee62327bdbf3a0756079d5573df"><div class="ttname"><a href="classqx_1_1triangular__vector.html#ac2685ee62327bdbf3a0756079d5573df">qx::triangular_vector::operator=</a></div><div class="ttdeci">const triangular_vector &amp; operator=(triangular_vector &amp;&amp;other) noexcept</div><div class="ttdoc">operator=</div><div class="ttdef"><b>Definition:</b> <a href="triangular__vector_8inl_source.html#l00044">triangular_vector.inl:44</a></div></div>
 <div class="ttc" id="aclassqx_1_1triangular__vector_html_ac7bb753ff1def1f417f2949a6910a473"><div class="ttname"><a href="classqx_1_1triangular__vector.html#ac7bb753ff1def1f417f2949a6910a473">qx::triangular_vector::fill</a></div><div class="ttdeci">void fill(const_reference data)</div><div class="ttdoc">Fill vector with value.</div><div class="ttdef"><b>Definition:</b> <a href="triangular__vector_8inl_source.html#l00135">triangular_vector.inl:135</a></div></div>
 <div class="ttc" id="aclassqx_1_1triangular__vector_html_af3f956e0fb096f2b1607320cd02c1417"><div class="ttname"><a href="classqx_1_1triangular__vector.html#af3f956e0fb096f2b1607320cd02c1417">qx::triangular_vector::size_side</a></div><div class="ttdeci">size_type size_side() const noexcept</div><div class="ttdoc">Get matrix side size.</div><div class="ttdef"><b>Definition:</b> <a href="triangular__vector_8inl_source.html#l00155">triangular_vector.inl:155</a></div></div>
-<div class="ttc" id="auseful__funcs_8h_html_a567475c55a5a56c634d471de261b0428"><div class="ttname"><a href="useful__funcs_8h.html#a567475c55a5a56c634d471de261b0428">qx::destruct</a></div><div class="ttdeci">void destruct(iterator start, iterator end)</div><div class="ttdoc">Call destructors.</div><div class="ttdef"><b>Definition:</b> <a href="useful__funcs_8h_source.html#l00089">useful_funcs.h:89</a></div></div>
+<div class="ttc" id="autils_8h_html_a567475c55a5a56c634d471de261b0428"><div class="ttname"><a href="utils_8h.html#a567475c55a5a56c634d471de261b0428">qx::destruct</a></div><div class="ttdeci">void destruct(iterator start, iterator end)</div><div class="ttdoc">Call destructors.</div><div class="ttdef"><b>Definition:</b> <a href="utils_8h_source.html#l00026">utils.h:26</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

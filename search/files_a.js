@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['numerical_2eh_766',['numerical.h',['../numerical_8h.html',1,'']]]
+  ['newtons_5fmethod_2eh_774',['newtons_method.h',['../newtons__method_8h.html',1,'']]]
 ];

@@ -80,7 +80,7 @@ $(function() {
 <div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="comment">**/</span></div>
 <div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#pragma once</span></div>
 <div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160; </div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="useful__macros_8h.html">qx/useful_macros.h</a>&gt;</span></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="copyable__movable_8h.html">qx/macros/copyable_movable.h</a>&gt;</span></div>
 <div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160; </div>
 <div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="preprocessor">#include &lt;algorithm&gt;</span></div>
 <div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="preprocessor">#include &lt;functional&gt;</span></div>
@@ -327,7 +327,7 @@ $(function() {
 <div class="line"><a name="l00256"></a><span class="lineno">  256</span>&#160; </div>
 <div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160;<span class="keyword">public</span>:</div>
 <div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160;    QX_NONCOPYABLE(<a class="code" href="classqx_1_1subject.html">subject</a>);</div>
-<div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160;    <a class="code" href="useful__macros_8h.html#afed226a730f800b62503840460223830">QX_MOVABLE</a>(<a class="code" href="classqx_1_1subject.html">subject</a>);</div>
+<div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160;    <a class="code" href="copyable__movable_8h.html#afed226a730f800b62503840460223830">QX_MOVABLE</a>(<a class="code" href="classqx_1_1subject.html">subject</a>);</div>
 <div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160;<span class="comment"></span> </div>
 <div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160;<span class="comment">    /**</span></div>
 <div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160;<span class="comment">        @brief base_subject object constructor</span></div>
@@ -468,8 +468,8 @@ $(function() {
 <div class="ttc" id="aclassqx_1_1subject_html_ab88e67bf0e682fbba6cd496b3bd6d84e"><div class="ttname"><a href="classqx_1_1subject.html#ab88e67bf0e682fbba6cd496b3bd6d84e">qx::subject::end</a></div><div class="ttdeci">const_iterator end() const</div><div class="ttdoc">Return iterator to end.</div></div>
 <div class="ttc" id="aclassqx_1_1subject_html_acbab112508bbb43a9a0770c8a1ac195c"><div class="ttname"><a href="classqx_1_1subject.html#acbab112508bbb43a9a0770c8a1ac195c">qx::subject::subject</a></div><div class="ttdeci">subject()=default</div><div class="ttdoc">base_subject object constructor</div></div>
 <div class="ttc" id="aclassqx_1_1subject_html_aecb2d35649dba41a5624a3e1123813b4"><div class="ttname"><a href="classqx_1_1subject.html#aecb2d35649dba41a5624a3e1123813b4">qx::subject::begin</a></div><div class="ttdeci">const_iterator begin() const</div><div class="ttdoc">Return iterator to beginning.</div></div>
-<div class="ttc" id="auseful__macros_8h_html"><div class="ttname"><a href="useful__macros_8h.html">useful_macros.h</a></div><div class="ttdoc">Useful macros.</div></div>
-<div class="ttc" id="auseful__macros_8h_html_afed226a730f800b62503840460223830"><div class="ttname"><a href="useful__macros_8h.html#afed226a730f800b62503840460223830">QX_MOVABLE</a></div><div class="ttdeci">#define QX_MOVABLE(className)</div><div class="ttdoc">Define class as default movable.</div><div class="ttdef"><b>Definition:</b> <a href="useful__macros_8h_source.html#l00146">useful_macros.h:146</a></div></div>
+<div class="ttc" id="acopyable__movable_8h_html"><div class="ttname"><a href="copyable__movable_8h.html">copyable_movable.h</a></div><div class="ttdoc">Contains macros to set class as copyable/movable.</div></div>
+<div class="ttc" id="acopyable__movable_8h_html_afed226a730f800b62503840460223830"><div class="ttname"><a href="copyable__movable_8h.html#afed226a730f800b62503840460223830">QX_MOVABLE</a></div><div class="ttdeci">#define QX_MOVABLE(className)</div><div class="ttdoc">Define class as default movable.</div><div class="ttdef"><b>Definition:</b> <a href="copyable__movable_8h_source.html#l00027">copyable_movable.h:27</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

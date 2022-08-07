@@ -81,7 +81,7 @@ $(function() {
 <div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#pragma once</span></div>
 <div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160; </div>
 <div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="easing__functions_8h.html">qx/easing/easing_functions.h</a>&gt;</span></div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="useful__macros_8h.html">qx/useful_macros.h</a>&gt;</span></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="copyable__movable_8h.html">qx/macros/copyable_movable.h</a>&gt;</span></div>
 <div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160; </div>
 <div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="keyword">namespace </span>qx</div>
 <div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;{</div>
@@ -112,9 +112,9 @@ $(function() {
 <div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    <span class="keyword">using</span> type = T;</div>
 <div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160; </div>
 <div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    <a class="code" href="useful__macros_8h.html#ad3795a19a36d658369022347bd6f765a">QX_COPYMOVABLE</a>(<a class="code" href="classqx_1_1base__easing__element.html">base_easing_element</a>)</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160; </div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    <span class="comment">/**</span></div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    QX_COPYMOVABLE(<a class="code" href="classqx_1_1base__easing__element.html">base_easing_element</a>);</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="comment">    /**</span></div>
 <div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="comment">        @brief base_easing_element object constructor</span></div>
 <div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="comment">        @param func   - easing function</span></div>
 <div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="comment">        @param fStart - start value</span></div>
@@ -241,10 +241,9 @@ $(function() {
 <div class="ttc" id="aclassqx_1_1base__easing__element_html_af5b7247938575b5affd2890f03f41be7"><div class="ttname"><a href="classqx_1_1base__easing__element.html#af5b7247938575b5affd2890f03f41be7">qx::base_easing_element::base_easing_element</a></div><div class="ttdeci">base_easing_element(const easing::func&lt; T &gt; &amp;func, T fStart=T(0.f), T fEnd=T(1.f), T fSpeed=T(1.f)) noexcept</div><div class="ttdoc">base_easing_element object constructor</div><div class="ttdef"><b>Definition:</b> <a href="easing__element_8inl_source.html#l00014">easing_element.inl:14</a></div></div>
 <div class="ttc" id="aclassqx_1_1base__easing__element_html_af738a8f7243bab7b5fe9ed7796ac78bc"><div class="ttname"><a href="classqx_1_1base__easing__element.html#af738a8f7243bab7b5fe9ed7796ac78bc">qx::base_easing_element::is_finished</a></div><div class="ttdeci">bool is_finished() const noexcept</div><div class="ttdoc">Check if element is finished.</div><div class="ttdef"><b>Definition:</b> <a href="easing__element_8inl_source.html#l00138">easing_element.inl:138</a></div></div>
 <div class="ttc" id="aclassqx_1_1base__easing__element_html_afe2a4794401919a889aa4b12bef79214"><div class="ttname"><a href="classqx_1_1base__easing__element.html#afe2a4794401919a889aa4b12bef79214">qx::base_easing_element::start</a></div><div class="ttdeci">void start() noexcept</div><div class="ttdoc">Mark element as active and let it update.</div><div class="ttdef"><b>Definition:</b> <a href="easing__element_8inl_source.html#l00024">easing_element.inl:24</a></div></div>
+<div class="ttc" id="acopyable__movable_8h_html"><div class="ttname"><a href="copyable__movable_8h.html">copyable_movable.h</a></div><div class="ttdoc">Contains macros to set class as copyable/movable.</div></div>
 <div class="ttc" id="aeasing__element_8inl_html"><div class="ttname"><a href="easing__element_8inl.html">easing_element.inl</a></div></div>
 <div class="ttc" id="aeasing__functions_8h_html"><div class="ttname"><a href="easing__functions_8h.html">easing_functions.h</a></div><div class="ttdoc">File contains easing functions.</div></div>
-<div class="ttc" id="auseful__macros_8h_html"><div class="ttname"><a href="useful__macros_8h.html">useful_macros.h</a></div><div class="ttdoc">Useful macros.</div></div>
-<div class="ttc" id="auseful__macros_8h_html_ad3795a19a36d658369022347bd6f765a"><div class="ttname"><a href="useful__macros_8h.html#ad3795a19a36d658369022347bd6f765a">QX_COPYMOVABLE</a></div><div class="ttdeci">#define QX_COPYMOVABLE(className)</div><div class="ttdoc">Define class as default copyable and movable.</div><div class="ttdef"><b>Definition:</b> <a href="useful__macros_8h_source.html#l00155">useful_macros.h:155</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
