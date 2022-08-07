@@ -9,7 +9,7 @@
 **/
 #pragma once
 
-#include <qx/useful_macros.h>
+#include <qx/macros/copyable_movable.h>
 
 #include <algorithm>
 #include <functional>

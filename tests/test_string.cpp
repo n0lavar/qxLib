@@ -6,17 +6,16 @@
     @copyright © Nick Khrapov, 2021. All right reserved.
 
 **/
-#include <test_config.h>
+#include <common.h>
 
 //V_EXCLUDE_PATH *test_string.cpp
 
-#if QX_TEST_STRING
+#include <qx/containers/string/string.h>
+#include <qx/macros/static_assert.h>
+#include <string_test_helpers.h>
 
-    #include <qx/containers/string/string.h>
-    #include <string_test_helpers.h>
-
-    #include <list>
-    #include <unordered_map>
+#include <list>
+#include <unordered_map>
 
 QX_PUSH_SUPPRESS_MSVC_WARNINGS(5233)
 
@@ -393,7 +392,7 @@ auto insert = [](auto& str, auto pos, auto pszStr)
 {
     using TChar = std::remove_const_t<std::remove_pointer_t<decltype(pszStr)>>;
 
-    if constexpr (qx::is_random_access_iterator_v<Arg>)
+    if constexpr (qx::is_random_access_iterator<Arg>)
     {
         // random access iterator
         std::basic_string<TChar> iter_str = pszStr;
@@ -2156,5 +2155,3 @@ TYPED_TEST(TestQxString, rfind)
 }
 
 QX_POP_SUPPRESS_WARNINGS
-
-#endif

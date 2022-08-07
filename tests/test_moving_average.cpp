@@ -6,20 +6,15 @@
     @copyright © Nick Khrapov, 2021. All right reserved.
 
 **/
-#include <test_config.h>
+#include <common.h>
 
 //V_EXCLUDE_PATH *test_moving_average.cpp
 
-#if QX_TEST_MOVING_AVERAGE
+#include <qx/stat/moving_average.h>
 
-    #include <qx/stat/moving_average.h>
-
-    #include <qx/math.h>
-
-    #include <array>
-    #include <iomanip>
-    #include <limits>
-    #include <numeric>
+#include <array>
+#include <iomanip>
+#include <numeric>
 
 template<typename T, size_t ENTRIES, size_t START_VALUE, std::vector<T> FUNC(size_t nEntries)>
 class MovingAverageTraits
@@ -104,13 +99,11 @@ TYPED_TEST(TestMovingAverageClass, values)
         EXPECT_GE(fAverage, fLowerBound);
         EXPECT_LE(fAverage, fUpperBound);
 
-    #if 0
+#if 0
         std::cout
             << std::setw(30) << std::setprecision(std::numeric_limits<typename TypeParam::type>::digits) << fValue
             << std::setw(30) << std::setprecision(std::numeric_limits<typename TypeParam::type>::digits) << fAverage
             << std::endl;
-    #endif
+#endif
     }
 }
-
-#endif

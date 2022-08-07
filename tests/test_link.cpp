@@ -7,13 +7,11 @@
 
 **/
 
-#include <test_config.h>
+#include <common.h>
 
 //V_EXCLUDE_PATH *test_link.cpp
 
-#if QX_TEST_LINK
-
-    #include <qx/link.h>
+#include <qx/link.h>
 
 struct STest
 {
@@ -96,5 +94,3 @@ TEST(link, main)
     EXPECT_TRUE(pLink2.expired());
     EXPECT_FALSE(pLink2.lock());
 }
-
-#endif

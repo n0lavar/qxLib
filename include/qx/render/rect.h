@@ -12,7 +12,8 @@
 #include <algorithm>
 #include <optional>
 
-#include <qx/useful_macros.h>
+#include <qx/macros/copyable_movable.h>
+#include <qx/math/common.h>
 
 QX_PUSH_SUPPRESS_ALL_WARNINGS
 #include <glm/vec2.hpp>

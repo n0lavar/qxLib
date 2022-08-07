@@ -1,29 +1,27 @@
 /**
 
-    @file      test_useful_macros.cpp
+    @file      test_macros.cpp
     @author    Khrapov
     @date      25.09.2020
     @copyright © Nick Khrapov, 2021. All right reserved.
 
 **/
-#include <test_config.h>
+#include <common.h>
 
-//V_EXCLUDE_PATH *test_useful_macros.cpp
+//V_EXCLUDE_PATH *test_macros.cpp
 
-#if QX_TEST_USEFUL_MACROS
+#include <qx/containers/string/string_utils.h>
+#include <qx/macros/common.h>
+#include <qx/macros/static_assert.h>
 
-    #include <qx/containers/string/string_utils.h>
-    #include <qx/useful_macros.h>
-
-    #include <map>
-
+#include <map>
 
 //------------------------------- QX_EMPTY_MACRO -------------------------------
 
-    #define EMPTY1 QX_EMPTY_MACRO
-    #define EMPTY2 QX_EMPTY_MACRO
+#define EMPTY1 QX_EMPTY_MACRO
+#define EMPTY2 QX_EMPTY_MACRO
 
-TEST(useful_macros, empty_macro)
+TEST(macros, empty_macro)
 {
     // check compilation
 
@@ -51,24 +49,24 @@ QX_STATIC_ASSERT_STR_EQ(pszName, "val");
 //-------------------------------- QX_LINE_NAME --------------------------------
 
 constexpr int QX_LINE_NAME(test) = 5;
-static_assert(test53 == 5);
+static_assert(test51 == 5);
 
 
 
 //-------------------------------- QX_SHORT_FILE -------------------------------
 
 constexpr auto pszFileName = QX_SHORT_FILE;
-QX_STATIC_ASSERT_STR_EQ(pszFileName, "test_useful_macros.cpp");
+QX_STATIC_ASSERT_STR_EQ(pszFileName, "test_macros.cpp");
 
 
 
 //----------------------------- QX_SINGLE_ARGUMENT -----------------------------
 
-    #define MACRO_WITH_2_ARGS(a, b) \
-        if (a != b)                 \
-            throw std::exception();
+#define MACRO_WITH_2_ARGS(a, b) \
+    if (a != b)                 \
+        throw std::exception();
 
-TEST(useful_macros, single_argument)
+TEST(macros, single_argument)
 {
     // check compilation
     MACRO_WITH_2_ARGS(QX_SINGLE_ARGUMENT(std::map<int, int>().size()), 0);
@@ -131,16 +129,12 @@ QX_STATIC_ASSERT_STR_GE("2", "1");
 QX_STATIC_ASSERT_STR_GE("1", "1");
 QX_STATIC_ASSERT_STR_GE("", "");
 
-
-
 //-------------------------- QX_STATIC_ASSERT_BETWEEN --------------------------
 
 QX_STATIC_ASSERT_BETWEEN(0, 0, 0);
 QX_STATIC_ASSERT_BETWEEN(0, 0, 1);
 QX_STATIC_ASSERT_BETWEEN(0, 1, 2);
 QX_STATIC_ASSERT_BETWEEN(0, 2, 2);
-
-
 
 //-------------------------------- QX_STR_PREFIX -------------------------------
 
@@ -165,7 +159,7 @@ struct EQuadrant
 };
 
 
-TEST(useful_macros, enum_class)
+TEST(macros, enum_class)
 {
     // default is zero
     EQuadrant eQuadrant;
@@ -184,5 +178,3 @@ TEST(useful_macros, enum_class)
     };
     EXPECT_EQ(lambda(eQuadrant), eQuadrant);
 }
-
-#endif

@@ -6,16 +6,14 @@
     @copyright © Nick Khrapov, 2021. All right reserved.
 
 **/
-#include <test_config.h>
+#include <common.h>
 
 //V_EXCLUDE_PATH *test_thread_worker.cpp
 
-#if QX_TEST_THREAD_WORKER
+#include <qx/thread/thread_worker.h>
 
-    #include <qx/thread/thread_worker.h>
-
-    #include <cmath>
-    #include <memory>
+#include <cmath>
+#include <memory>
 
 constexpr size_t NUM_ITERATIONS = 1000000;
 constexpr double PI_RESULT      = 3.141591653589774;
@@ -120,5 +118,3 @@ TEST_F(TestThreadWorker, terminating)
     m_pWorker->thread_terminate();
     m_bTerminated = true;
 }
-
-#endif

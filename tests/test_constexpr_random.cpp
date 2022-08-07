@@ -6,19 +6,17 @@
     @copyright © Nick Khrapov, 2021. All right reserved.
 
 **/
-#include <test_config.h>
+#include <common.h>
 
 //V_EXCLUDE_PATH *test_constexpr_random.cpp
 
-#if QX_TEST_CONSTEXPR_RANDOM
+#include <qx/meta/constexpr_random.h>
 
-    #include <qx/meta/constexpr_random.h>
+#if QX_CONSTEXPR_SEQUENCE_SUPPORTED
 
-    #if QX_CONSTEXPR_SEQUENCE_SUPPORTED
+    #include <qx/macros/static_assert.h>
 
-        #include <qx/useful_macros.h>
-        #include <array>
-
+    #include <array>
 
 constexpr u32 CONST_SEED     = 0u;
 using random_check_duplicate = qx::constexpr_random<class TagA, CONST_SEED, 0u, 100u>;
@@ -133,7 +131,5 @@ QX_STATIC_ASSERT_BETWEEN(left, random1::next(), right);
 QX_STATIC_ASSERT_BETWEEN(left, random1::next(), right);
 QX_STATIC_ASSERT_BETWEEN(left, random1::next(), right);
 QX_STATIC_ASSERT_BETWEEN(left, random1::next(), right);
-
-    #endif
 
 #endif

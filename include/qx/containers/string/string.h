@@ -12,7 +12,7 @@
 #include <qx/containers/container.h>
 #include <qx/containers/string/string_data.h>
 #include <qx/containers/string/string_hash.h>
-#include <qx/type_traits.h>
+#include <qx/meta/type_traits.h>
 
 #include <iostream>
 #include <optional>

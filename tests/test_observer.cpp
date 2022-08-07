@@ -6,16 +6,14 @@
     @copyright © Nick Khrapov, 2021. All right reserved.
 
 **/
-#include <test_config.h>
+#include <common.h>
 
 //V_EXCLUDE_PATH *test_observer.cpp
 
-#if QX_TEST_OBSERVER
+#include <qx/patterns/observer.h>
 
-    #include <qx/patterns/observer.h>
-
-    #include <memory>
-    #include <string>
+#include <memory>
+#include <string>
 
 class TestObserver
 {
@@ -347,5 +345,3 @@ TEST_F(TestObserverClass, subject_destructing_auto_detaching)
     EXPECT_FALSE(**(tokens.end() - 2));
     EXPECT_FALSE(**(tokens.end() - 3));
 }
-
-#endif

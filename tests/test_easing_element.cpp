@@ -6,15 +6,13 @@
     @copyright © Nick Khrapov, 2021. All right reserved.
 
 **/
-#include <test_config.h>
+#include <common.h>
 
 //V_EXCLUDE_PATH *test_easing_element.cpp
 
-#if QX_TEST_EASING_ELEMENT
+#include <qx/easing/easing_element.h>
 
-    #include <qx/easing/easing_element.h>
-
-    #define TYPE typename TypeParam::type
+#define TYPE typename TypeParam::type
 
 template<typename T>
 class TestEasingElements : public ::testing::Test
@@ -152,5 +150,3 @@ TYPED_TEST(TestEasingElements, reset)
     TestFixture::m_Element.reset();
     TestFixture::CheckNotStarted();
 }
-
-#endif

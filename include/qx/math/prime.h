@@ -1,150 +1,21 @@
 /**
 
-    @file      numerical.h
-    @brief     Numerical algorithms
+    @file      prime.h
+    @brief     Contains prime numbers algorithms
+    @details   ~
     @author    Khrapov
-    @date      1.02.2020
-    @copyright © Nick Khrapov, 2021. All right reserved.
+    @date      6.08.2022
+    @copyright © Nick Khrapov, 2022. All right reserved.
 
 **/
 #pragma once
 
-#include <array>
-#include <bitset>
 #include <cmath>
-#include <ctime>
-#include <limits>
 #include <random>
 #include <vector>
 
 namespace qx
 {
-
-/**
-    @brief      Greatest common divisor
-    @details    Euclid's algorithm
-                based on fact gcd(A, B) == gcd(B, A mod B)
-    @complexity O(log(second))
-    @param      nFirst  - first num
-    @param      nSecond - second num
-    @retval             - greatest common divisor if first and second > 0, otherwise 0
-**/
-inline int gcd(int nFirst, int nSecond)
-{
-    if (nFirst == 0 || nSecond == 0)
-        return 0;
-
-    while (nSecond != 0)
-    {
-        const int nRemainder = nFirst % nSecond;
-        nFirst               = nSecond;
-        nSecond              = nRemainder;
-    }
-
-    return std::abs(nFirst);
-}
-
-/**
-    @brief      Least common multiple
-    @complexity O(log(second))
-    @param      nFirst  - first num
-    @param      nSecond - second num
-    @retval             - least common multiple if first and second > 0, otherwise 0
-**/
-inline int lcm(int nFirst, int nSecond)
-{
-    if (nFirst == 0 || nSecond == 0)
-        return 0;
-
-    nFirst  = std::abs(nFirst);
-    nSecond = std::abs(nSecond);
-
-    return nFirst / gcd(nFirst, nSecond) * nSecond;
-}
-
-/**
-    @brief      Power function for integer power
-    @details    About 2.22 times (positive powers)
-                      1.7  times (positive and negative powers)
-                      2.33 times (negative powers)
-                      faster then std::pow
-    @complexity O(log(power))
-    @tparam     T       - Integral or floating point type
-    @param      nNumber - integral of floating point value
-    @param      nPower  - integral power
-    @retval             - number ^ power
-**/
-template<typename T>
-inline double pow(T nNumber, int nPower)
-{
-    static_assert(std::is_integral_v<T> || std::is_floating_point_v<T>, "Integral or floating point required");
-
-    const bool   bNegativePower = nPower < 0;
-    const size_t nPositivePower = static_cast<size_t>(std::abs(nPower));
-
-    double fResult = 1.0;
-    switch (nPositivePower)
-    {
-    case 0:
-        break;
-
-    case 1:
-        fResult = static_cast<double>(nNumber);
-        break;
-
-    case 2:
-        fResult = static_cast<double>(nNumber * nNumber);
-        break;
-
-    default:
-        const std::bitset<std::numeric_limits<int>::digits> powerBitSet(nPositivePower);
-
-        std::array<double, std::numeric_limits<int>::digits> powers;
-
-        powers[0] = static_cast<double>(nNumber);
-
-        size_t nCurPower = 1;
-        size_t nCurIndex = 1;
-
-        while (nCurPower < nPositivePower)
-        {
-            powers[nCurIndex] = powers[nCurIndex - 1] * powers[nCurIndex - 1];
-            nCurPower *= 2;
-            nCurIndex++;
-        }
-
-        for (size_t i = 0; i < static_cast<size_t>(nCurIndex); i++)
-            if (powerBitSet.test(i))
-                fResult *= powers[i];
-
-        break;
-    }
-
-    return bNegativePower ? 1.0 / fResult : fResult;
-}
-
-/**
-    @brief  Max power of two in integer
-    @tparam I      - Integral type
-    @param  nValue - number
-    @retval        - max power of two in number
-**/
-template<typename I>
-inline I maxpot(I nValue)
-{
-    static_assert(std::is_integral_v<I>, "Integral required");
-
-    if (nValue == I(0))
-        return I(0);
-
-    std::bitset<std::numeric_limits<I>::digits> powers(static_cast<size_t>(std::abs(nValue)));
-
-    I nPow = static_cast<I>(std::numeric_limits<I>::digits - 1);
-    while (!powers.test(static_cast<size_t>(nPow)))
-        --nPow;
-
-    return nPow;
-}
 
 /**
     @brief      Find all prime factors

@@ -6,15 +6,13 @@
     @copyright © Nick Khrapov, 2021. All right reserved.
 
 **/
-#include <test_config.h>
+#include <common.h>
 
 //V_EXCLUDE_PATH *test_list_se.cpp
 
-#if QX_TEST_LIST_SE
-
-    #include <qx/containers/list_se.h>
-    #include <algorithm>
-    #include <string>
+#include <qx/containers/list_se.h>
+#include <algorithm>
+#include <string>
 
 
 TEST(list_se, testing)
@@ -257,5 +255,3 @@ TEST(list_se, testing)
     EXPECT_STREQ(itStr++->c_str(), "1");
     EXPECT_STREQ(itStr++->c_str(), "3");
 }
-
-#endif

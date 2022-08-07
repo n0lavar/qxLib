@@ -6,13 +6,11 @@
     @copyright © Nick Khrapov, 2021. All right reserved.
 
 **/
-#include <test_config.h>
+#include <common.h>
 
 //V_EXCLUDE_PATH *test_easing_functions.cpp
 
-#if QX_TEST_EASING_FUNCTIONS
-
-    #include <qx/easing/easing_functions.h>
+#include <qx/easing/easing_functions.h>
 
 template<typename T>
 class TestEasingFunctions : public ::testing::Test
@@ -79,5 +77,3 @@ TYPED_TEST(TestEasingFunctions, common)
     TestFixture::template TestFunc<qx::easing::bounce_in_func>();
     TestFixture::template TestFunc<qx::easing::bounce_in_out_func>();
 }
-
-#endif

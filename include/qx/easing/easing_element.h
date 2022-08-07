@@ -10,7 +10,7 @@
 #pragma once
 
 #include <qx/easing/easing_functions.h>
-#include <qx/useful_macros.h>
+#include <qx/macros/copyable_movable.h>
 
 namespace qx
 {
@@ -41,7 +41,7 @@ public:
     using type = T;
 
 public:
-    QX_COPYMOVABLE(base_easing_element)
+    QX_COPYMOVABLE(base_easing_element);
 
     /**
         @brief base_easing_element object constructor

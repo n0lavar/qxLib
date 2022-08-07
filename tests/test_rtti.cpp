@@ -6,18 +6,15 @@
     @copyright © Nick Khrapov, 2021. All right reserved.
 
 **/
-#include <test_config.h>
+#include <common.h>
 
 //V_EXCLUDE_PATH *test_rtti.cpp
 
-#if QX_TEST_RTTI
+#include <qx/containers/string/string_utils.h>
+#include <qx/rtti/rtti.h>
+#include <qx/rtti/rtti_cast.h>
 
-    #include <qx/containers/string/string_utils.h>
-    #include <qx/rtti/rtti.h>
-    #include <qx/rtti/rtti_cast.h>
-    #include <qx/useful_macros.h>
-
-    #include <memory>
+#include <memory>
 
 class CClass1
 {
@@ -421,5 +418,3 @@ TEST(rtti, is)
     EXPECT_FALSE(p1->is<CDerived2_31>());
     EXPECT_FALSE(p1->is<CDerived2_32>());
 }
-
-#endif

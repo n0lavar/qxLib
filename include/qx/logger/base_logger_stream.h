@@ -10,7 +10,7 @@
 #pragma once
 
 #include <qx/containers/string/string.h>
-#include <qx/suppress_warnings.h>
+#include <qx/macros/suppress_warnings.h>
 
 #include <ctime>
 #include <unordered_map>

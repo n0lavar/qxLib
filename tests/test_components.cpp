@@ -6,15 +6,13 @@
     @copyright © Nick Khrapov, 2021. All right reserved.
 
 **/
-#include <test_config.h>
+#include <common.h>
 
 //V_EXCLUDE_PATH *test_components.cpp
 
-#if QX_TEST_COMPONENTS
+#include <qx/containers/components.h>
 
-    #include <qx/containers/components.h>
-
-    #include <string>
+#include <string>
 
 class BaseTestComponent : public qx::rtti_root<BaseTestComponent>
 {
@@ -212,5 +210,3 @@ TEST(components, main)
     EXPECT_EQ(container.size(), 0);
     EXPECT_TRUE(container.empty());
 }
-
-#endif

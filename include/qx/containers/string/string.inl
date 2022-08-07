@@ -449,7 +449,7 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::insert(
     FwdIt     itWhatBegin,
     FwdIt     itWhatEnd) noexcept
 {
-    if constexpr (is_random_access_iterator_v<FwdIt>)
+    if constexpr (is_random_access_iterator<FwdIt>)
     {
         return insert(nPos, itWhatBegin.operator->(), static_cast<size_type>(itWhatEnd - itWhatBegin));
     }

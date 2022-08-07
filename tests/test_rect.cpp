@@ -6,13 +6,11 @@
     @copyright © Nick Khrapov, 2022. All right reserved.
 
 **/
-#include <test_config.h>
+#include <common.h>
 
 //V_EXCLUDE_PATH *test_rect.cpp
 
-#if QX_TEST_RECT
-
-    #include <qx/render/rect.h>
+#include <qx/render/rect.h>
 
 template<typename VectorType>
 class TestRect : public ::testing::Test
@@ -50,8 +48,8 @@ void CheckRect(
     EXPECT_EQ(!rect.empty(), fWidth * fHeight > 0.0);
 }
 
-    #define Rect       qx::basic_rect<TypeParam>
-    #define VectorType TypeParam
+#define Rect       qx::basic_rect<TypeParam>
+#define VectorType TypeParam
 
 TYPED_TEST(TestRect, construct)
 {
@@ -193,5 +191,3 @@ TYPED_TEST(TestRect, equal)
     EXPECT_NE(rec2, rec0);
     EXPECT_NE(rec2, rec1);
 }
-
-#endif

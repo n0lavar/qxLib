@@ -10,7 +10,7 @@
 #pragma once
 
 #include <qx/logger/logger.h>
-#include <qx/useful_macros.h>
+#include <qx/macros/common.h>
 
 #include <exception>
 

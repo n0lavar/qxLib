@@ -6,15 +6,13 @@
     @copyright © Nick Khrapov, 2021. All right reserved.
 
 **/
-#include <test_config.h>
+#include <common.h>
 
 //V_EXCLUDE_PATH *test_easing_sequence.cpp
 
-#if QX_TEST_EASING_SEQUENCE
+#include <qx/easing/easing_sequence.h>
 
-    #include <qx/easing/easing_sequence.h>
-
-    #define TYPE typename TypeParam::type
+#define TYPE typename TypeParam::type
 
 template<typename T>
 class TestEasingSequence : public ::testing::Test
@@ -245,5 +243,3 @@ TYPED_TEST(TestEasingSequence, loop)
     TestFixture::m_Sequence.update(TYPE(2.f));
     TestFixture::CheckFinished(TYPE(0.5f));
 }
-
-#endif

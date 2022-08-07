@@ -10,7 +10,8 @@
 #pragma once
 
 #include <qx/containers/string/string_utils.h>
-#include <qx/useful_macros.h>
+#include <qx/macros/config.h>
+#include <qx/macros/suppress_warnings.h>
 
 #include <cctype>
 #include <cstdarg>

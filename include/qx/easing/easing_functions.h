@@ -15,7 +15,7 @@
 **/
 #pragma once
 
-#include <qx/math.h>
+#include <qx/math/common.h>
 
 #include <cmath>
 #include <functional>

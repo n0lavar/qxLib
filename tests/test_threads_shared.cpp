@@ -6,18 +6,16 @@
     @copyright © Nick Khrapov, 2021. All right reserved.
 
 **/
-#include <test_config.h>
+#include <common.h>
 
 //V_EXCLUDE_PATH *threads_shared.cpp
 
-#if QX_TEST_THREADS_SHARED
+#include <qx/thread/threads_shared.h>
 
-    #include <qx/thread/threads_shared.h>
-
-    #include <chrono>
-    #include <list>
-    #include <random>
-    #include <thread>
+#include <chrono>
+#include <list>
+#include <random>
+#include <thread>
 
 struct STestStruct
 {
@@ -154,5 +152,3 @@ TEST(threads_shared, recursive_mutex)
         ASSERT_EQ(*data, TEST_DATA_2);
     }
 }
-
-#endif

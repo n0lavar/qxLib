@@ -11,8 +11,8 @@
 **/
 #pragma once
 
+#include <qx/macros/common.h>
 #include <qx/rtti/class_identificator.h>
-#include <qx/useful_macros.h>
 
 #include <functional>
 #include <map>

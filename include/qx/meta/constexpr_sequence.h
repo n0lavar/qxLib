@@ -9,7 +9,7 @@
 **/
 #pragma once
 
-#include <qx/config.h>
+#include <qx/macros/config.h>
 
 // https://stackoverflow.com/questions/65566935/
 // https://developercommunity.visualstudio.com/content/problem/1300886/possible-error-in-compiler-with-cpp20.html
@@ -18,7 +18,6 @@
 #if QX_CONSTEXPR_SEQUENCE_SUPPORTED
 
     #include <qx/meta/constexpr_flag.h>
-    #include <qx/useful_macros.h>
 
 namespace qx
 {

@@ -10,7 +10,7 @@
 #pragma once
 
 #include <qx/assert/lib_asserts.h>
-#include <qx/useful_macros.h>
+#include <qx/macros/copyable_movable.h>
 
 #include <glew.h>
 
@@ -41,8 +41,8 @@ template<GLenum ShaderType>
 class shader_base
 {
 public:
-    QX_NONCOPYABLE(shader_base)
-    QX_MOVABLE(shader_base)
+    QX_NONCOPYABLE(shader_base);
+    QX_MOVABLE(shader_base);
 
     /**
         @brief shader_base object constructor

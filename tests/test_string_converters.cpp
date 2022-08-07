@@ -6,13 +6,11 @@
     @copyright © Nick Khrapov, 2022. All right reserved.
 
 **/
-#include <test_config.h>
+#include <common.h>
 
 //V_EXCLUDE_PATH *test_string_converters.cpp
 
-#if QX_TEST_STRING_CONVERTERS
-
-    #include <qx/containers/string/string_converters.h>
+#include <qx/containers/string/string_converters.h>
 
 TEST(string_converters, to_wstring)
 {
@@ -55,13 +53,13 @@ TEST(string_converters, to_string)
         EXPECT_STREQ(str.data(), "!@#$%^&*()_+");
     }
 
-    #if 0
+#if 0
     {
         qx::wstring wstr(L"Привет мир");
         qx::string  str = qx::to_string(wstr);
         EXPECT_STREQ(str.data(), "?????? ???");
     }
-    #endif
+#endif
 }
 
 TEST(string_converters, to_char_pointer)
@@ -86,5 +84,3 @@ TEST(string_converters, to_char_pointer)
         EXPECT_STREQ(pszHelloWorld2, L"! Hello world !");
     }
 }
-
-#endif

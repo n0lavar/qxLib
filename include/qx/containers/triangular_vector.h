@@ -10,7 +10,7 @@
 #pragma once
 
 #include <qx/containers/container.h>
-#include <qx/useful_funcs.h>
+#include <qx/containers/utils.h>
 
 #include <cstring>
 

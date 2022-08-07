@@ -6,13 +6,11 @@
     @copyright © Nick Khrapov, 2021. All right reserved.
 
 **/
-#include <test_config.h>
+#include <common.h>
 
 //V_EXCLUDE_PATH *test_typedefs.cpp
 
-#if QX_TEST_TYPEDEFS
-
-    #include <qx/typedefs.h>
+#include <qx/typedefs.h>
 
 static_assert(sizeof(u8) == 1);
 static_assert(sizeof(u16) == 2);
@@ -22,5 +20,3 @@ static_assert(sizeof(i8) == 1);
 static_assert(sizeof(i16) == 2);
 static_assert(sizeof(i32) == 4);
 static_assert(sizeof(i64) == 8);
-
-#endif

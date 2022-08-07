@@ -6,16 +6,14 @@
     @copyright © Nick Khrapov, 2021. All right reserved.
 
 **/
-#include <test_config.h>
+#include <common.h>
 
 //V_EXCLUDE_PATH *test_vector2d.cpp
 
-#if QX_TEST_VECTOR2D
+#include <qx/containers/vector2d.h>
 
-    #include <qx/containers/vector2d.h>
-
-    #include <algorithm>
-    #include <array>
+#include <algorithm>
+#include <array>
 
 TEST(TestQxVector2d, constructing)
 {
@@ -226,5 +224,3 @@ TEST(TestQxVector2d, access)
 
     check(vec1);
 }
-
-#endif

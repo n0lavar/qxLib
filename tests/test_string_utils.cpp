@@ -6,14 +6,12 @@
     @copyright © Nick Khrapov, 2021. All right reserved.
 
 **/
-#include <test_config.h>
+#include <common.h>
 
 //V_EXCLUDE_PATH *test_string_utils.cpp
 
-#if QX_TEST_STRING_UTILS
-
-    #include <qx/containers/string/string_utils.h>
-    #include <qx/useful_macros.h>
+#include <qx/containers/string/string_utils.h>
+#include <qx/macros/static_assert.h>
 
 //--------------------------------- qx::strlen ---------------------------------
 
@@ -45,5 +43,3 @@ QX_STATIC_ASSERT_GT(qx::strcmp("1", "0"), 0);
 QX_STATIC_ASSERT_GT(qx::strcmp("11", "00"), 0);
 QX_STATIC_ASSERT_GT(qx::strcmp("111", "0"), 0);
 QX_STATIC_ASSERT_GT(qx::strcmp("1", "000"), 0);
-
-#endif

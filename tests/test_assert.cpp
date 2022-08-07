@@ -6,17 +6,15 @@
     @copyright © Nick Khrapov, 2021. All right reserved.
 
 **/
-#include <test_config.h>
+#include <common.h>
 
 //V_EXCLUDE_PATH *test_assert.cpp
 
-#if QX_TEST_ASSERT
+#define QX_ENABLE_ASSERTS     1
+#define QX_ENABLE_DEBUG_BREAK 1
 
-    #define QX_ENABLE_ASSERTS     1
-    #define QX_ENABLE_DEBUG_BREAK 1
-
-    #include <qx/assert/assert.h>
-    #include <qx/assert/lib_asserts.h>
+#include <qx/assert/assert.h>
+#include <qx/assert/lib_asserts.h>
 
 QX_PUSH_SUPPRESS_MSVC_WARNINGS(4702)
 
@@ -415,5 +413,3 @@ TEST(qx_assert, assert_macros)
     EXPECT_DEATH({ QX_ASSERT_NO_ENTRY; }, "");
     EXPECT_DEATH({ QX_ASSERT_NO_ENTRY_MSG("%d", 42); }, "");
 }
-
-#endif

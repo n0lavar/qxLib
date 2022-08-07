@@ -7,13 +7,12 @@
 
 **/
 
-#include <test_config.h>
+#include <common.h>
 
 //V_EXCLUDE_PATH *test_color.cpp
 
-#if QX_TEST_COLOR
-
-    #include <qx/render/color.h>
+#include <qx/math/common.h>
+#include <qx/render/color.h>
 
 void TestColor(const qx::color& color)
 {
@@ -430,5 +429,3 @@ TEST(color, update_dec)
     EXPECT_EQ(color.b_dec(), 0);
     EXPECT_EQ(color.a_dec(), 0);
 }
-
-#endif

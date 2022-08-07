@@ -6,16 +6,14 @@
     @copyright © Nick Khrapov, 2021. All right reserved.
 
 **/
-#include <test_config.h>
+#include <common.h>
 
 //V_EXCLUDE_PATH *test_benchmark.cpp
 
-#if QX_TEST_BENCHMARK
+#include <cmath>
+#include <thread>
 
-    #include <cmath>
-    #include <thread>
-
-    #include <qx/stat/benchmark.h>
+#include <qx/stat/benchmark.h>
 
 TEST(benchmark, benchmark)
 {
@@ -32,5 +30,3 @@ TEST(benchmark, benchmark)
         EXPECT_GE(duration, WAIT_INTERVAL);
     }
 }
-
-#endif

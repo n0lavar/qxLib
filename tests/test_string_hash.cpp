@@ -6,15 +6,16 @@
     @copyright © Nick Khrapov, 2022. All right reserved.
 
 **/
-#include <test_config.h>
+#include <common.h>
 
 //V_EXCLUDE_PATH *test_string_hash.cpp
 
-#if QX_TEST_STRING_HASH
+#include <qx/containers/string/string.h>
+#include <qx/containers/string/string_hash.h>
+#include <qx/macros/static_assert.h>
+#include <string_test_helpers.h>
 
-    #include <qx/containers/string/string.h>
-    #include <qx/containers/string/string_hash.h>
-    #include <string_test_helpers.h>
+#include <algorithm>
 
 QX_PUSH_SUPPRESS_MSVC_WARNINGS(5233)
 
@@ -88,5 +89,3 @@ TEST(TestStringHash, operator_)
 }
 
 QX_POP_SUPPRESS_WARNINGS
-
-#endif

@@ -11,7 +11,7 @@
 
 #include <qx/typedefs.h>
 
-#include <qx/type_traits.h>
+#include <qx/meta/type_traits.h>
 #include <algorithm>
 #include <functional>
 #include <vector>

@@ -6,20 +6,18 @@
     @copyright © Nick Khrapov, 2021. All right reserved.
 
 **/
-#include <test_config.h>
+#include <common.h>
 
 //V_EXCLUDE_PATH *test_sort.cpp
 
-#if QX_TEST_SORT
-
-    #include <qx/alg/sort.h>
-    #include <array>
-    #include <limits>
-    #include <random>
+#include <qx/algo/sort.h>
+#include <array>
+#include <limits>
+#include <random>
 
 
-    #undef INT_MAX
-    #undef INT_MIN
+#undef INT_MAX
+#undef INT_MIN
 constexpr int INT_MAX = std::numeric_limits<int>::max();
 constexpr int INT_MIN = std::numeric_limits<int>::min();
 
@@ -342,5 +340,3 @@ TYPED_TEST(TestQxSort, sort_counting)
     }
     ASSERT_TRUE(bSucc);
 }
-
-#endif

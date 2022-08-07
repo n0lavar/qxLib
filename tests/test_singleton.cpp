@@ -6,13 +6,11 @@
     @copyright © Nick Khrapov, 2021. All right reserved.
 
 **/
-#include <test_config.h>
+#include <common.h>
 
 //V_EXCLUDE_PATH *test_singleton.cpp
 
-#if QX_TEST_SINGLETON
-
-    #include <qx/patterns/singleton.h>
+#include <qx/patterns/singleton.h>
 
 class CTestSingleton
 {
@@ -74,5 +72,3 @@ TEST(singleton, test)
     ASSERT_EQ(CTestSingleton::get_counter(), 3);
     ASSERT_EQ(CTestSingleton::get_created(), true);
 }
-
-#endif

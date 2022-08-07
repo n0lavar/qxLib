@@ -8,43 +8,10 @@
 **/
 #pragma once
 
-#include <concepts>
+#include <qx/meta/concepts.h>
 
 namespace qx
 {
-
-//-------------------------------- is_iterator -------------------------------
-
-
-template<class T>
-concept is_iterator = requires(T)
-{
-    typename T::iterator_category;
-};
-
-
-
-//------------------------- is_random_access_iterator_v ------------------------
-
-template<typename T, typename = void>
-struct is_random_access_iterator
-{
-    static constexpr bool value = false;
-};
-
-template<typename T>
-struct is_random_access_iterator<
-    T,
-    std::enable_if_t<
-        is_iterator<T> && std::derived_from<typename T::iterator_category, std::random_access_iterator_tag>>>
-{
-    static constexpr bool value = true;
-};
-
-template<class T>
-constexpr bool is_random_access_iterator_v = is_random_access_iterator<T>::value;
-
-
 
 //--------------------------------- are_same ---------------------------------
 

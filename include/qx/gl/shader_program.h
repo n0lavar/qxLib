@@ -30,7 +30,7 @@ namespace qx
 class base_shader_program
 {
 public:
-    QX_NONCOPYABLE(base_shader_program)
+    QX_NONCOPYABLE(base_shader_program);
 
     /**
         @brief base_shader_program object constructor

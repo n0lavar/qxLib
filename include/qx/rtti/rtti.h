@@ -14,9 +14,9 @@
 **/
 #pragma once
 
+#include <qx/macros/common.h>
 #include <qx/rtti/class_identificator.h>
 #include <qx/rtti/rtti_naming_strategy.h>
-#include <qx/useful_macros.h>
 
 namespace qx
 {

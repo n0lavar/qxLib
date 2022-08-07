@@ -9,7 +9,7 @@
 
 //V_EXCLUDE_PATH *main.cpp
 
-#include <qx/suppress_warnings.h>
+#include <qx/macros/suppress_warnings.h>
 
 QX_PUSH_SUPPRESS_ALL_WARNINGS
 #include <gtest/gtest.h>

@@ -9,8 +9,8 @@
 **/
 #pragma once
 
-#include <qx/suppress_warnings.h>
-#include <qx/useful_macros.h>
+#include <qx/macros/copyable_movable.h>
+#include <qx/macros/suppress_warnings.h>
 
 #include <algorithm>
 

@@ -7,13 +7,11 @@
 
 **/
 
-#include <test_config.h>
+#include <common.h>
 
 //V_EXCLUDE_PATH *test_destruction_callback.cpp
 
-#if QX_TEST_DESTRUCTION_CALLBACK
-
-    #include <qx/destruction_callback.h>
+#include <qx/destruction_callback.h>
 
 TEST(destruction_callback, main)
 {
@@ -32,5 +30,3 @@ TEST(destruction_callback, main)
     }
     EXPECT_EQ(num, 1);
 }
-
-#endif

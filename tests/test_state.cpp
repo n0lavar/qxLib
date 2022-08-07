@@ -6,15 +6,13 @@
     @copyright © Nick Khrapov, 2021. All right reserved.
 
 **/
-#include <test_config.h>
+#include <common.h>
 
 //V_EXCLUDE_PATH *test_state.cpp
 
-#if QX_TEST_STATE
+#include <qx/state.h>
 
-    #include <qx/state.h>
-
-    #include <unordered_map>
+#include <unordered_map>
 
 class CNonZeroInt
 {
@@ -92,5 +90,3 @@ TEST(state, hash)
 {
     std::unordered_map<TState, int> map;
 }
-
-#endif

@@ -6,14 +6,12 @@
     @copyright © Nick Khrapov, 2021. All right reserved.
 
 **/
-#include <test_config.h>
+#include <common.h>
 
 //V_EXCLUDE_PATH *test_triangular_vector.cpp
 
-#if QX_TEST_TRIANGULAR_VECTOR
-
-    #include <qx/containers/triangular_vector.h>
-    #include <algorithm>
+#include <qx/containers/triangular_vector.h>
+#include <algorithm>
 
 
 TEST(TestQxTriangularVector, constructing)
@@ -163,5 +161,3 @@ TEST(TestQxTriangularVector, access)
     EXPECT_EQ(vec1.get(3, 2), 5);
     EXPECT_EQ(vec1.get(3, 3), 6);
 }
-
-#endif
