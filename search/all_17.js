@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['yellow_609',['yellow',['../classqx_1_1color.html#a2aaaeddb40c85f9c236b71ec41fbf26d',1,'qx::color']]]
+  ['yellow_611',['yellow',['../classqx_1_1color.html#a2aaaeddb40c85f9c236b71ec41fbf26d',1,'qx::color']]]
 ];
