@@ -9,8 +9,8 @@
 **/
 #pragma once
 
-#include <qx/assert/lib_asserts.h>
 #include <qx/macros/copyable_movable.h>
+#include <qx/macros/lib_asserts.h>
 
 #include <glew.h>
 

@@ -11,7 +11,7 @@
 **/
 #pragma once
 
-#include <qx/assert/assert.h>
+#include <qx/macros/assert.h>
 
 #ifndef QX_LIB_EXPECT_MSG
     #define QX_LIB_EXPECT_MSG QX_EXPECT_MSG

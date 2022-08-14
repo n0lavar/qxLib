@@ -10,7 +10,7 @@
 **/
 #pragma once
 
-#include <qx/assert/lib_asserts.h>
+#include <qx/macros/lib_asserts.h>
 #include <qx/math/common.h>
 
 QX_PUSH_SUPPRESS_ALL_WARNINGS

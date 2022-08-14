@@ -13,8 +13,7 @@
 #define QX_ENABLE_ASSERTS     1
 #define QX_ENABLE_DEBUG_BREAK 1
 
-#include <qx/assert/assert.h>
-#include <qx/assert/lib_asserts.h>
+#include <qx/macros/assert.h>
 
 QX_PUSH_SUPPRESS_MSVC_WARNINGS(4702)
 

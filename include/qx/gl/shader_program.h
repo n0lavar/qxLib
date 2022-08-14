@@ -9,8 +9,8 @@
 **/
 #pragma once
 
-#include <qx/assert/lib_asserts.h>
 #include <qx/gl/shaders.h>
+#include <qx/macros/lib_asserts.h>
 
 #include <glew.h>
 #include <glm/gtc/type_ptr.hpp>

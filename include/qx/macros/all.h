@@ -10,6 +10,7 @@
 **/
 #pragma once
 
+#include <qx/macros/assert.h>
 #include <qx/macros/common.h>
 #include <qx/macros/config.h>
 #include <qx/macros/copyable_movable.h>
