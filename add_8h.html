@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>qxLib: include/qx/algo/add_unique.h File Reference</title>
+<title>qxLib: include/qx/algo/add.h File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -68,30 +68,34 @@ $(function() {
   <div class="summary">
 <a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
-<div class="title">add_unique.h File Reference</div>  </div>
+<div class="title">add.h File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>Contains add unique algorithms.  
+<p>Contains add algorithms.  
 <a href="#details">More...</a></p>
 <div class="textblock"><code>#include &lt;<a class="el" href="contains_8h_source.html">qx/algo/contains.h</a>&gt;</code><br />
 </div>
-<p><a href="add__unique_8h_source.html">Go to the source code of this file.</a></p>
+<p><a href="add_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
 <tr class="memitem:af9f1d84f087face448022c3d5d08ac68"><td class="memTemplParams" colspan="2">template&lt;class ContainerType , class ValueType &gt; </td></tr>
-<tr class="memitem:af9f1d84f087face448022c3d5d08ac68"><td class="memTemplItemLeft" align="right" valign="top">bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="add__unique_8h.html#af9f1d84f087face448022c3d5d08ac68">qx::add_unique</a> (ContainerType &amp;container, const ValueType &amp;value)</td></tr>
-<tr class="memdesc:af9f1d84f087face448022c3d5d08ac68"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add an element to the container if it doesn't already contain one.  <a href="add__unique_8h.html#af9f1d84f087face448022c3d5d08ac68">More...</a><br /></td></tr>
+<tr class="memitem:af9f1d84f087face448022c3d5d08ac68"><td class="memTemplItemLeft" align="right" valign="top">bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="add_8h.html#af9f1d84f087face448022c3d5d08ac68">qx::add_unique</a> (ContainerType &amp;container, const ValueType &amp;value)</td></tr>
+<tr class="memdesc:af9f1d84f087face448022c3d5d08ac68"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add an element to the container if it doesn't already contain one.  <a href="add_8h.html#af9f1d84f087face448022c3d5d08ac68">More...</a><br /></td></tr>
 <tr class="separator:af9f1d84f087face448022c3d5d08ac68"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa37160da6775765e5f3ff92a2c5c54c1"><td class="memTemplParams" colspan="2">template&lt;class ContainerType , class ValueType , class PredicateType &gt; </td></tr>
+<tr class="memitem:aa37160da6775765e5f3ff92a2c5c54c1"><td class="memTemplItemLeft" align="right" valign="top">bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="add_8h.html#aa37160da6775765e5f3ff92a2c5c54c1">qx::add_unique_if</a> (ContainerType &amp;container, const ValueType &amp;value, const PredicateType &amp;predicate)</td></tr>
+<tr class="memdesc:aa37160da6775765e5f3ff92a2c5c54c1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add an element to the container if all elements do not satisfy the predicate.  <a href="add_8h.html#aa37160da6775765e5f3ff92a2c5c54c1">More...</a><br /></td></tr>
+<tr class="separator:aa37160da6775765e5f3ff92a2c5c54c1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Contains add unique algorithms. </p>
+<div class="textblock"><p>Contains add algorithms. </p>
 <p>~ </p><dl class="section author"><dt>Author</dt><dd>Khrapov </dd></dl>
 <dl class="section date"><dt>Date</dt><dd>14.08.2022 </dd></dl>
 <dl class="section copyright"><dt>Copyright</dt><dd>© Nick Khrapov, 2022. All right reserved. </dd></dl>
 
-<p class="definition">Definition in file <a class="el" href="add__unique_8h_source.html">add_unique.h</a>.</p>
+<p class="definition">Definition in file <a class="el" href="add_8h_source.html">add.h</a>.</p>
 </div><h2 class="groupheader">Function Documentation</h2>
 <a id="af9f1d84f087face448022c3d5d08ac68"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#af9f1d84f087face448022c3d5d08ac68">&#9670;&nbsp;</a></span>add_unique()</h2>
@@ -143,7 +147,69 @@ template&lt;class ContainerType , class ValueType &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="add__unique_8h_source.html#l00027">27</a> of file <a class="el" href="add__unique_8h_source.html">add_unique.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="add_8h_source.html#l00027">27</a> of file <a class="el" href="add_8h_source.html">add.h</a>.</p>
+
+</div>
+</div>
+<a id="aa37160da6775765e5f3ff92a2c5c54c1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa37160da6775765e5f3ff92a2c5c54c1">&#9670;&nbsp;</a></span>add_unique_if()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ContainerType , class ValueType , class PredicateType &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">bool qx::add_unique_if </td>
+          <td>(</td>
+          <td class="paramtype">ContainerType &amp;&#160;</td>
+          <td class="paramname"><em>container</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const ValueType &amp;&#160;</td>
+          <td class="paramname"><em>value</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const PredicateType &amp;&#160;</td>
+          <td class="paramname"><em>predicate</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Add an element to the container if all elements do not satisfy the predicate. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">ContainerType</td><td>- container type </td></tr>
+    <tr><td class="paramname">ValueType</td><td>- value type </td></tr>
+    <tr><td class="paramname">PredicateType</td><td>- predicate type </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">container</td><td>- container to add to </td></tr>
+    <tr><td class="paramname">value</td><td>- value to check and add </td></tr>
+    <tr><td class="paramname">predicate</td><td>- predicate witch </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Return values</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">-</td><td>true if value was added </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="add_8h_source.html#l00051">51</a> of file <a class="el" href="add_8h_source.html">add.h</a>.</p>
 
 </div>
 </div>
