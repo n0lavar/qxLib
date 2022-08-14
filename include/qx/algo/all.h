@@ -10,7 +10,7 @@
 **/
 #pragma once
 
-#include <qx/algo/add_unique.h>
+#include <qx/algo/add.h>
 #include <qx/algo/contains.h>
 #include <qx/algo/remove.h>
 #include <qx/algo/sort.h>

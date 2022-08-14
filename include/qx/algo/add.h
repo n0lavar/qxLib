@@ -1,7 +1,7 @@
 /**
 
-    @file      add_unique.h
-    @brief     Contains add unique algorithms
+    @file      add.h
+    @brief     Contains add algorithms
     @details   ~
     @author    Khrapov
     @date      14.08.2022
@@ -35,6 +35,27 @@ bool add_unique(ContainerType& container, const ValueType& value)
     {
         return false;
     }
+}
+
+/**
+    @brief  Add an element to the container if all elements do not satisfy the predicate
+    @tparam ContainerType - container type
+    @tparam ValueType     - value type
+    @tparam PredicateType - predicate type
+    @param  container     - container to add to
+    @param  value         - value to check and add
+    @param  predicate     - predicate witch 
+    @retval               - true if value was added
+**/
+template<class ContainerType, class ValueType, class PredicateType>
+bool add_unique_if(ContainerType& container, const ValueType& value, const PredicateType& predicate)
+{
+    for (const auto& element : container)
+        if (predicate(element, value))
+            return false;
+
+    container.insert(container.end(), value);
+    return true;
 }
 
 } // namespace qx
