@@ -175,6 +175,8 @@ protected:                                                                      
     virtual bool _is_base_id(qx::class_identificator base_id) const noexcept override         \
     {                                                                                         \
         return base_id == qx::get_class_id<SuperClass>() || SuperClass::_is_base_id(base_id); \
-    }
+    }                                                                                         \
+                                                                                              \
+private:
 
 } // namespace qx

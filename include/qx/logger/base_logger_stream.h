@@ -13,6 +13,7 @@
 #include <qx/macros/suppress_warnings.h>
 
 #include <ctime>
+#include <functional>
 #include <unordered_map>
 
 namespace qx

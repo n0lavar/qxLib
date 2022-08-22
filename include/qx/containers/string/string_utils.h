@@ -9,6 +9,7 @@
 **/
 #pragma once
 
+#include <qx/macros/config.h>
 #include <qx/typedefs.h>
 
 namespace qx
