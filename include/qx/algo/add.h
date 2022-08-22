@@ -12,7 +12,7 @@
 
 #include <qx/algo/contains.h>
 
-#include <type_traits>>
+#include <type_traits>
 
 namespace qx
 {
