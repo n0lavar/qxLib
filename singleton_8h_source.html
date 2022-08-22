@@ -79,102 +79,91 @@ $(function() {
 <div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="comment"></span> </div>
 <div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="comment">**/</span></div>
 <div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#pragma once</span></div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="comment">/**</span></div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="comment">    @def   _QX_SINGLETON_IMPL</span></div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="comment">    @brief Simple Meyer&#39;s singleton</span></div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="comment">    @param T              - your class type</span></div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="comment">    @param constructor    - constructor realization</span></div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="comment">    @param destructor     - destructor realization</span></div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="comment">    @param process_getter - getter processing realization</span></div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="comment">**/</span></div>
-<div class="line"><a name="l00020"></a><span class="lineno"><a class="line" href="singleton_8h.html#abd580e7d55323e05229cdcb486d7afbc">   20</a></span>&#160;<span class="preprocessor">#define _QX_SINGLETON_IMPL(T, constructor, destructor, process_getter) \</span></div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="preprocessor">private:                                                               \</span></div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="preprocessor">    T() constructor;                                                   \</span></div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="preprocessor">    ~T() destructor;                                                   \</span></div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="preprocessor">    T(const T&amp;)                  = delete;                             \</span></div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="preprocessor">    T(T&amp;&amp;)                       = delete;                             \</span></div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="preprocessor">    const T&amp; operator=(const T&amp;) = delete;                             \</span></div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="preprocessor">    const T&amp; operator=(T&amp;&amp;)      = delete;                             \</span></div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="preprocessor">                                                                       \</span></div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="preprocessor">public:                                                                \</span></div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="preprocessor">    static T&amp; get_instance()                                           \</span></div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="preprocessor">    {                                                                  \</span></div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="preprocessor">        static T instance;                                             \</span></div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="preprocessor">        process_getter return instance;                                \</span></div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="preprocessor">    }                                                                  \</span></div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="preprocessor">                                                                       \</span></div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="preprocessor">private:</span></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160; </div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="keyword">namespace </span>qx</div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;{</div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="comment">/**</span></div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="comment">    @struct  singleton_traits</span></div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="comment">    @tparam  T - singleton class</span></div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="comment">**/</span></div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> T&gt;</div>
+<div class="line"><a name="l00020"></a><span class="lineno"><a class="line" href="structqx_1_1singleton__traits.html">   20</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structqx_1_1singleton__traits.html">singleton_traits</a></div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;{<span class="comment"></span></div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="comment">    /**</span></div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="comment">        @brief Called when singleton constructed</span></div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="comment">        @param instance - singleton instance</span></div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="comment">    **/</span></div>
+<div class="line"><a name="l00026"></a><span class="lineno"><a class="line" href="structqx_1_1singleton__traits.html#a975794f5058a67e55bd334657d21575b">   26</a></span>&#160;    <span class="keyword">static</span> <span class="keywordtype">void</span> <a class="code" href="structqx_1_1singleton__traits.html#a975794f5058a67e55bd334657d21575b">on_constructed</a>(T&amp; instance)</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    {</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    }</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="comment">    /**</span></div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="comment">        @brief Called when singleton proceeds getter</span></div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="comment">        @param instance - singleton instance</span></div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="comment">    **/</span></div>
+<div class="line"><a name="l00034"></a><span class="lineno"><a class="line" href="structqx_1_1singleton__traits.html#a4c1c0de2bf9b3cf56179d0656092e840">   34</a></span>&#160;    <span class="keyword">static</span> <span class="keywordtype">void</span> <a class="code" href="structqx_1_1singleton__traits.html#a4c1c0de2bf9b3cf56179d0656092e840">on_getter</a>(T&amp; instance)</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    {</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    }</div>
 <div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="comment">/**</span></div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="comment">    @def   QX_SINGLETON</span></div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="comment">    @brief Simple Meyer&#39;s singleton</span></div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="comment">    @param T - your class type</span></div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="comment">**/</span></div>
-<div class="line"><a name="l00043"></a><span class="lineno"><a class="line" href="singleton_8h.html#a63d33417ea5425173513e0ac6e8e3a14">   43</a></span>&#160;<span class="preprocessor">#define QX_SINGLETON(T) _QX_SINGLETON_IMPL(T, = default, = default, )</span></div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="comment">/**</span></div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="comment">    @def   QX_SINGLETON_P</span></div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="comment">    @brief Simple Meyer&#39;s singleton</span></div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="comment">    @param T              - your class type</span></div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="comment">    @param process_getter - getter processing realization</span></div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="comment">**/</span></div>
-<div class="line"><a name="l00051"></a><span class="lineno"><a class="line" href="singleton_8h.html#a75677171c6a8cfd57e5b95829a7e2f2b">   51</a></span>&#160;<span class="preprocessor">#define QX_SINGLETON_P(T, process_getter) _QX_SINGLETON_IMPL(T, = default, = default, process_getter)</span></div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<span class="comment">/**</span></div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;<span class="comment">    @def   QX_SINGLETON_C</span></div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="comment">    @brief Simple Meyer&#39;s singleton</span></div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;<span class="comment">    @param T           - your class type</span></div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;<span class="comment">    @param constructor - constructor realization</span></div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;<span class="comment">**/</span></div>
-<div class="line"><a name="l00059"></a><span class="lineno"><a class="line" href="singleton_8h.html#a6cb5eafc89298d74c08302cda69d5d09">   59</a></span>&#160;<span class="preprocessor">#define QX_SINGLETON_C(T, constructor) _QX_SINGLETON_IMPL(T, { constructor }, = default, )</span></div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;<span class="comment">/**</span></div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;<span class="comment">    @def   QX_SINGLETON_CP</span></div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;<span class="comment">    @brief Simple Meyer&#39;s singleton</span></div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;<span class="comment">    @param T              - your class type</span></div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;<span class="comment">    @param constructor    - constructor realization</span></div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;<span class="comment">    @param process_getter - getter processing realization</span></div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;<span class="comment">**/</span></div>
-<div class="line"><a name="l00068"></a><span class="lineno"><a class="line" href="singleton_8h.html#abfa5567a2040c96313200c53f27f8c3e">   68</a></span>&#160;<span class="preprocessor">#define QX_SINGLETON_CP(T, constructor, process_getter) \</span></div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;<span class="preprocessor">    _QX_SINGLETON_IMPL(T, { constructor }, = default, process_getter)</span></div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;<span class="comment">/**</span></div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;<span class="comment">    @def   QX_SINGLETON_D</span></div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;<span class="comment">    @brief Simple Meyer&#39;s singleton</span></div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;<span class="comment">    @param T          - your class type</span></div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;<span class="comment">    @param destructor - destructor realization</span></div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;<span class="comment">**/</span></div>
-<div class="line"><a name="l00077"></a><span class="lineno"><a class="line" href="singleton_8h.html#a3a19e46098dfe3db4ba07a5c9977290b">   77</a></span>&#160;<span class="preprocessor">#define QX_SINGLETON_D(T, destructor) _QX_SINGLETON_IMPL(T, = default, { destructor }, )</span></div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;<span class="comment">/**</span></div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;<span class="comment">    @def   QX_SINGLETON_DP</span></div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;<span class="comment">    @brief Simple Meyer&#39;s singleton</span></div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;<span class="comment">    @param T              - your class type</span></div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;<span class="comment">    @param destructor     - destructor realization</span></div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;<span class="comment">    @param process_getter - getter processing realization</span></div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;<span class="comment">**/</span></div>
-<div class="line"><a name="l00086"></a><span class="lineno"><a class="line" href="singleton_8h.html#af9b95d32fa06b7e66e58624afb0fdb27">   86</a></span>&#160;<span class="preprocessor">#define QX_SINGLETON_DP(T, destructor, process_getter) _QX_SINGLETON_IMPL(T, = default, { destructor }, process_getter)</span></div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;<span class="comment">/**</span></div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;<span class="comment">    @def   QX_SINGLETON_CD</span></div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;<span class="comment">    @brief Simple Meyer&#39;s singleton</span></div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;<span class="comment">    @param T           - your class type</span></div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;<span class="comment">    @param constructor - constructor realization</span></div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;<span class="comment">    @param destructor  - destructor realization</span></div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;<span class="comment">**/</span></div>
-<div class="line"><a name="l00095"></a><span class="lineno"><a class="line" href="singleton_8h.html#aa19a7b3178dc32728ba55636e117b6a6">   95</a></span>&#160;<span class="preprocessor">#define QX_SINGLETON_CD(T, constructor, destructor) _QX_SINGLETON_IMPL(T, { constructor }, { destructor }, )</span></div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;<span class="comment">/**</span></div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;<span class="comment">    @def   QX_SINGLETON_CDP</span></div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;<span class="comment">    @brief Simple Meyer&#39;s singleton</span></div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;<span class="comment">    @param T              - your class type</span></div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;<span class="comment">    @param constructor    - constructor realization</span></div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;<span class="comment">    @param destructor     - destructor realization</span></div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;<span class="comment">    @param process_getter - getter processing realization</span></div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;<span class="comment">**/</span></div>
-<div class="line"><a name="l00105"></a><span class="lineno"><a class="line" href="singleton_8h.html#a0239a66e102ac5c6d9205775e4111b85">  105</a></span>&#160;<span class="preprocessor">#define QX_SINGLETON_CDP(T, constructor, destructor, process_getter) \</span></div>
-<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;<span class="preprocessor">    _QX_SINGLETON_IMPL(T, { constructor }, { destructor }, process_getter)</span></div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="comment">    /**</span></div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="comment">        @brief Called before singleton destructed</span></div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="comment">        @param instance - singleton instance</span></div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="comment">    **/</span></div>
+<div class="line"><a name="l00042"></a><span class="lineno"><a class="line" href="structqx_1_1singleton__traits.html#a86e04ea5e8e6b42d78d8745667348bd2">   42</a></span>&#160;    <span class="keyword">static</span> <span class="keywordtype">void</span> <a class="code" href="structqx_1_1singleton__traits.html#a86e04ea5e8e6b42d78d8745667348bd2">on_destructed</a>(T&amp; instance)</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    {</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    }</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;};</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160; </div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;} <span class="comment">// namespace qx</span></div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="comment">/**</span></div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="comment">    @def     QX_SINGLETON_S</span></div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="comment">    @brief   Simple Meyer&#39;s singleton</span></div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<span class="comment">    @details Implement singleton_traits for your type to change creation,</span></div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<span class="comment">             getting and destruction behaviour</span></div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;<span class="comment">    @param   T          - your class type</span></div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="comment">    @param   specifiers - type specifiers, such as &quot;static&quot; or &quot;thread_safe&quot;</span></div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;<span class="comment">**/</span></div>
+<div class="line"><a name="l00057"></a><span class="lineno"><a class="line" href="singleton_8h.html#ac3def423b245609bb699625bbe11a78a">   57</a></span>&#160;<span class="preprocessor">#define QX_SINGLETON_S(T, specifiers)                   \</span></div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;<span class="preprocessor">private:                                                \</span></div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;<span class="preprocessor">    friend struct qx::singleton_traits&lt;T&gt;;              \</span></div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;<span class="preprocessor">                                                        \</span></div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;<span class="preprocessor">    T()                                                 \</span></div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;<span class="preprocessor">    {                                                   \</span></div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;<span class="preprocessor">        qx::singleton_traits&lt;T&gt;::on_constructed(*this); \</span></div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;<span class="preprocessor">    }                                                   \</span></div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;<span class="preprocessor">    ~T()                                                \</span></div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;<span class="preprocessor">    {                                                   \</span></div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;<span class="preprocessor">        qx::singleton_traits&lt;T&gt;::on_destructed(*this);  \</span></div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;<span class="preprocessor">    }                                                   \</span></div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;<span class="preprocessor">    T(const T&amp;)      = delete;                          \</span></div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;<span class="preprocessor">    T(T&amp;&amp;)           = delete;                          \</span></div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;<span class="preprocessor">    const T&amp; operator=(const T&amp;) = delete;              \</span></div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;<span class="preprocessor">    const T&amp; operator=(T&amp;&amp;) = delete;                   \</span></div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;<span class="preprocessor">                                                        \</span></div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;<span class="preprocessor">public:                                                 \</span></div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;<span class="preprocessor">    static T&amp; get_instance()                            \</span></div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;<span class="preprocessor">    {                                                   \</span></div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;<span class="preprocessor">        specifiers T instance;                          \</span></div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;<span class="preprocessor">        qx::singleton_traits&lt;T&gt;::on_getter(instance);   \</span></div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;<span class="preprocessor">        return instance;                                \</span></div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;<span class="preprocessor">    }                                                   \</span></div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;<span class="preprocessor">                                                        \</span></div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;<span class="preprocessor">private:</span></div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;<span class="comment">/**</span></div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;<span class="comment">    @def     QX_SINGLETON</span></div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;<span class="comment">    @details Implement singleton_traits for your type to change creation,</span></div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;<span class="comment">             getting and destruction behaviour</span></div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;<span class="comment">    @brief   Simple Meyer&#39;s singleton</span></div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;<span class="comment">    @param   T - your class type</span></div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;<span class="comment">**/</span></div>
+<div class="line"><a name="l00091"></a><span class="lineno"><a class="line" href="singleton_8h.html#a63d33417ea5425173513e0ac6e8e3a14">   91</a></span>&#160;<span class="preprocessor">#define QX_SINGLETON(T) QX_SINGLETON_S(T, static)</span></div>
+<div class="ttc" id="astructqx_1_1singleton__traits_html"><div class="ttname"><a href="structqx_1_1singleton__traits.html">qx::singleton_traits</a></div><div class="ttdef"><b>Definition:</b> <a href="singleton_8h_source.html#l00020">singleton.h:21</a></div></div>
+<div class="ttc" id="astructqx_1_1singleton__traits_html_a4c1c0de2bf9b3cf56179d0656092e840"><div class="ttname"><a href="structqx_1_1singleton__traits.html#a4c1c0de2bf9b3cf56179d0656092e840">qx::singleton_traits::on_getter</a></div><div class="ttdeci">static void on_getter(T &amp;instance)</div><div class="ttdoc">Called when singleton proceeds getter.</div><div class="ttdef"><b>Definition:</b> <a href="singleton_8h_source.html#l00034">singleton.h:34</a></div></div>
+<div class="ttc" id="astructqx_1_1singleton__traits_html_a86e04ea5e8e6b42d78d8745667348bd2"><div class="ttname"><a href="structqx_1_1singleton__traits.html#a86e04ea5e8e6b42d78d8745667348bd2">qx::singleton_traits::on_destructed</a></div><div class="ttdeci">static void on_destructed(T &amp;instance)</div><div class="ttdoc">Called before singleton destructed.</div><div class="ttdef"><b>Definition:</b> <a href="singleton_8h_source.html#l00042">singleton.h:42</a></div></div>
+<div class="ttc" id="astructqx_1_1singleton__traits_html_a975794f5058a67e55bd334657d21575b"><div class="ttname"><a href="structqx_1_1singleton__traits.html#a975794f5058a67e55bd334657d21575b">qx::singleton_traits::on_constructed</a></div><div class="ttdeci">static void on_constructed(T &amp;instance)</div><div class="ttdoc">Called when singleton constructed.</div><div class="ttdef"><b>Definition:</b> <a href="singleton_8h_source.html#l00026">singleton.h:26</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
