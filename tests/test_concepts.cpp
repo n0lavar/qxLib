@@ -99,3 +99,32 @@ static_assert(!qx::is_enumeration<vec_int>);
 static_assert(!qx::is_enumeration<vec_float>);
 static_assert(!qx::is_enumeration<C<int>>);
 static_assert(!qx::is_enumeration<S>);
+
+// ---------------------------------- callable ---------------------------------
+
+struct test1
+{
+};
+struct test2
+{
+};
+
+// clang-format off
+static_assert(qx::callable<std::function<void()>>);
+static_assert(!qx::callable<std::function<void(test1)>>);
+static_assert(qx::callable<std::function<void(test1)>, void, test1>);
+static_assert(!qx::callable<std::function<test2(test1)>, void, test1>);
+static_assert(qx::callable<std::function<test2(test1)>, test2, test1>);
+
+static_assert(qx::callable<void()>);
+static_assert(!qx::callable<void(test1)>);
+static_assert(qx::callable<void(test1), void, test1>);
+static_assert(!qx::callable<test2(test1), void, test1>);
+static_assert(qx::callable<test2(test1), test2, test1>);
+
+static_assert(qx::callable<decltype([](){})>);
+static_assert(!qx::callable<decltype([](test1){})>);
+static_assert(qx::callable<decltype([](test1){}), void, test1>);
+static_assert(!qx::callable<decltype([](test1){ return test2(); }), void, test1>);
+static_assert(qx::callable<decltype([](test1){ return test2(); }), test2, test1>);
+// clang-format on
