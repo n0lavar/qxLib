@@ -12,35 +12,28 @@
 
 #include <qx/patterns/singleton.h>
 
+template<>
+struct qx::singleton_traits<class CTestSingleton>
+{
+    static void on_constructed(CTestSingleton& instance);
+    static void on_getter(CTestSingleton& instance);
+    static void on_destructed(CTestSingleton& instance);
+};
+
 class CTestSingleton
 {
-    QX_SINGLETON_CDP(CTestSingleton, on_create();, on_terminate();, ProcessGetter();)
-
-    void on_create(void)
-    {
-        m_bCreated = true;
-    }
-
-    void on_terminate(void)
-    {
-        m_bCreated = false;
-    }
-
-    static void ProcessGetter(void)
-    {
-        m_nCounter++;
-    }
+    QX_SINGLETON(CTestSingleton);
 
 public:
-    static int get_counter(void)
+    static int get_counter()
     {
         return m_nCounter;
     }
-    static bool get_created(void)
+    static bool get_created()
     {
         return m_bCreated;
     }
-    void do_stuff(void)
+    void do_stuff()
     {
     }
 
@@ -48,6 +41,20 @@ private:
     static bool m_bCreated;
     static int  m_nCounter;
 };
+
+void qx::singleton_traits<CTestSingleton>::on_constructed(CTestSingleton& instance)
+{
+    instance.m_bCreated = true;
+}
+void qx::singleton_traits<CTestSingleton>::on_getter(CTestSingleton& instance)
+{
+    instance.m_nCounter++;
+}
+void qx::singleton_traits<CTestSingleton>::on_destructed(CTestSingleton& instance)
+{
+    instance.m_bCreated = false;
+}
+
 
 bool CTestSingleton::m_bCreated = false;
 int  CTestSingleton::m_nCounter = 0;
