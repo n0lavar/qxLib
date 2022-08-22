@@ -12,6 +12,8 @@
 
 #include <qx/algo/contains.h>
 
+#include <type_traits>>
+
 namespace qx
 {
 
@@ -41,19 +43,28 @@ bool add_unique(ContainerType& container, const ValueType& value)
     @brief  Add an element to the container if all elements do not satisfy the predicate
     @tparam ContainerType - container type
     @tparam ValueType     - value type
-    @tparam PredicateType - predicate type
+    @tparam PredicateType - predicate type which can be called with (element, value) or (element) only
     @param  container     - container to add to
     @param  value         - value to check and add
-    @param  predicate     - predicate witch 
+    @param  predicate     - predicate object
     @retval               - true if value was added
 **/
 template<class ContainerType, class ValueType, class PredicateType>
 bool add_unique_if(ContainerType& container, const ValueType& value, const PredicateType& predicate)
 {
     for (const auto& element : container)
-        if (predicate(element, value))
-            return false;
-
+    {
+        if constexpr (std::is_invocable_v<PredicateType, decltype(element), const ValueType&>)
+        {
+            if (predicate(element, value))
+                return false;
+        }
+        else
+        {
+            if (predicate(element))
+                return false;
+        }
+    }
     container.insert(container.end(), value);
     return true;
 }

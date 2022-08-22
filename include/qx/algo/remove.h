@@ -46,13 +46,12 @@ FwdItType remove_if_i(FwdItType itBegin, FwdItType itEnd, const PredicateType& p
     @tparam PredicateType - predicate type
     @param  container     - the range of elements
     @param  predicate     - unary predicate which returns ​true if the element should be removed
-    @param  nStartIndex   - we can't find out the index of itBegin so you should specify it
     @retval               - past-the-end iterator for the new range of values
 **/
 template<class ContainerType, class PredicateType>
-auto remove_if_i(ContainerType& container, const PredicateType& predicate, size_t nStartIndex = 0)
+auto remove_if_i(ContainerType& container, const PredicateType& predicate)
 {
-    return remove_if_i(container.begin(), container.end(), predicate, nStartIndex);
+    return remove_if_i(container.begin(), container.end(), predicate, 0);
 }
 
 } // namespace qx
