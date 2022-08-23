@@ -1606,7 +1606,6 @@ TYPED_TEST(TestQxString, replase)
         using type_find    = decltype(type_find_var);
         using type_replace = decltype(type_replace_var);
 
-
         str = pszStartStr;
         EXPECT_EQ(str.replace(type_find(STR("you")), type_replace(STR("12345"))), 17);
         EXPECT_STREQ(str.data(), STR("Let me help 12345 with your baggage"));

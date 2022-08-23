@@ -12,6 +12,7 @@
 #include <qx/containers/container.h>
 #include <qx/containers/string/string_data.h>
 #include <qx/containers/string/string_hash.h>
+#include <qx/macros/static_assert.h>
 #include <qx/meta/type_traits.h>
 
 #include <iostream>
@@ -250,17 +251,17 @@ public:
     /**
         @brief  Reserve memory for the string
         @param  nCapacity - required capacity
-        @retval           - string capacity
+        @retval           - new string capacity
     **/
     size_type reserve(size_type nCapacity) noexcept;
 
     /**
-        @brief  Fit allocated size to string's actual size
+        @brief Fit allocated size to string's actual size
     **/
     void shrink_to_fit() noexcept;
 
     /**
-        @brief  Clear string and free allocated memory
+        @brief Clear string and free allocated memory
     **/
     void free() noexcept;
 
@@ -273,12 +274,12 @@ public:
     string_view substr(size_type nPos, size_type nSymbols = npos) const noexcept;
 
     /**
-        @brief  Convert string to lowercase
+        @brief Convert string to lowercase
     **/
     void to_lower() noexcept;
 
     /**
-        @brief  Convert string to uppercase
+        @brief Convert string to uppercase
     **/
     void to_upper() noexcept;
 
@@ -899,7 +900,11 @@ public:
         @retval          - pos of char after last char of replaced string or npos
     **/
     template<class TFind, class TReplace>
-    size_type replace(TFind sFind, TReplace sReplace, size_type nBegin = 0, size_type nEnd = npos) noexcept;
+    size_type replace(
+        const TFind&    sFind,
+        const TReplace& sReplace,
+        size_type       nBegin = 0,
+        size_type       nEnd   = npos) noexcept;
 
     /**
         @brief  Replace all occurrences of sFind with sReplace
@@ -912,7 +917,11 @@ public:
         @retval          - number of replaced occurrences
     **/
     template<class TFind, class TReplace>
-    size_type replace_all(TFind sFind, TReplace sReplace, size_type nBegin = 0, size_type nEnd = npos) noexcept;
+    size_type replace_all(
+        const TFind&    sFind,
+        const TReplace& sReplace,
+        size_type       nBegin = 0,
+        size_type       nEnd   = npos) noexcept;
 
     /**
         @brief  Performs a binary comparison of the characters

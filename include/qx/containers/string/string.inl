@@ -431,9 +431,7 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::insert(
     if (nSizeSource > 0 && _resize(nSize + nSizeSource))
     {
         std::memmove(data() + nPos + nSizeSource, data() + nPos, (nSize - nPos) * sizeof(value_type));
-
         std::memcpy(data() + nPos, pszWhat, nSizeSource * sizeof(value_type));
-
         return nPos + nSizeSource;
     }
     else
@@ -1065,25 +1063,86 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::remove_all
 template<class Traits>
 template<class TFind, class TReplace>
 inline typename basic_string<Traits>::size_type basic_string<Traits>::replace(
-    TFind     sFind,
-    TReplace  sReplace,
-    size_type nBegin,
-    size_type nEnd) noexcept
+    const TFind&    sFind,
+    const TReplace& sReplace,
+    size_type       nBegin,
+    size_type       nEnd) noexcept
 {
-    size_type nPos = remove(sFind, nBegin, nEnd);
-    if (nPos != npos)
-        return insert(nPos, sReplace);
+    auto get_size = []<class T>(const T& val) -> size_type
+    {
+        if constexpr (std::is_same_v<T, value_type>)
+        {
+            return 1;
+        }
+        else if constexpr (std::is_same_v<T, const_pointer>)
+        {
+            return Traits::length(val);
+        }
+        else if constexpr (string_convertable<T>)
+        {
+            return val.size();
+        }
+        else
+        {
+            QX_STATIC_ASSERT_NO_INSTANTIATION("Unexpected type");
+            return 0;
+        }
+    };
+
+    auto get_data = []<class T>(const T& val) -> const_pointer
+    {
+        if constexpr (std::is_same_v<T, value_type>)
+        {
+            return &val;
+        }
+        else if constexpr (std::is_same_v<T, const_pointer>)
+        {
+            return val;
+        }
+        else if constexpr (string_convertable<T>)
+        {
+            return val.data();
+        }
+        else
+        {
+            QX_STATIC_ASSERT_NO_INSTANTIATION("Unexpected type");
+            return nullptr;
+        }
+    };
+
+    if (size_type nPos = find(sFind, nBegin, nEnd); nPos != npos)
+    {
+        const size_type nStartSize   = size();
+        const size_type nFindSize    = get_size(sFind);
+        const size_type nReplaceSize = get_size(sReplace);
+        const size_type nNewSize     = nStartSize - nFindSize + nReplaceSize;
+
+        _resize(nNewSize, string_resize_type::reserve);
+
+        std::memmove(
+            data() + nPos + nReplaceSize,
+            data() + nPos + nFindSize,
+            (nStartSize - nPos - nFindSize) * sizeof(value_type));
+
+        std::memcpy(data() + nPos, get_data(sReplace), nReplaceSize * sizeof(value_type));
+
+        _resize(nNewSize);
+
+        return nPos + nReplaceSize;
+    }
     else
+    {
         return npos;
+    }
 }
 
 template<class Traits>
 template<class TFind, class TReplace>
 inline typename basic_string<Traits>::size_type basic_string<Traits>::replace_all(
-    TFind     sFind,
-    TReplace  sReplace,
-    size_type nBegin,
-    size_type nEnd) noexcept
+    const TFind&    sFind,
+    const TReplace& sReplace,
+    size_type       nBegin,
+    size_type       nEnd) noexcept
 {
     size_type nOccurrences = 0;
     size_type nPos         = nBegin;
