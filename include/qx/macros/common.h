@@ -87,6 +87,8 @@ public:                                                                         
                                                                                    \
     TypeName##Internal _eInternal = static_cast<TypeName##Internal>(0);            \
                                                                                    \
+    TypeName() noexcept = default;                                                 \
+                                                                                   \
     TypeName(const TypeName##Internal& eInternal) noexcept : _eInternal(eInternal) \
     {                                                                              \
     }                                                                              \
