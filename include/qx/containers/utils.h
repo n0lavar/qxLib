@@ -82,7 +82,7 @@ ContainerTo create_container(const ContainerFrom& from)
     ContainerTo container;
 
     for (const auto& item : from)
-        container.push_back(typename ContainerTo::value_type(item));
+        container.insert(container.end(), typename ContainerTo::value_type(item));
 
     return container;
 }

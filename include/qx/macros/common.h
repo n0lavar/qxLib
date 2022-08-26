@@ -81,24 +81,53 @@ constexpr const char* last_slash(const char* str)
     @param TypeName - class/struct name
     @param ...      - enum values
 **/
-#define QX_ENUM_CLASS(TypeName, ...)                                    \
-public:                                                                 \
-    enum TypeName##Internal { __VA_ARGS__ };                            \
-                                                                        \
-    TypeName##Internal _eInternal = static_cast<TypeName##Internal>(0); \
-                                                                        \
-    TypeName& operator=(const TypeName##Internal& eInternal) noexcept   \
-    {                                                                   \
-        _eInternal = eInternal;                                         \
-        return *this;                                                   \
-    }                                                                   \
-                                                                        \
-    bool operator==(const TypeName##Internal& eInternal) const noexcept \
-    {                                                                   \
-        return _eInternal == eInternal;                                 \
-    }                                                                   \
-                                                                        \
-    operator TypeName##Internal() const noexcept                        \
-    {                                                                   \
-        return _eInternal;                                              \
+#define QX_ENUM_CLASS(TypeName, ...)                                               \
+public:                                                                            \
+    enum TypeName##Internal { __VA_ARGS__ };                                       \
+                                                                                   \
+    TypeName##Internal _eInternal = static_cast<TypeName##Internal>(0);            \
+                                                                                   \
+    TypeName(const TypeName##Internal& eInternal) noexcept : _eInternal(eInternal) \
+    {                                                                              \
+    }                                                                              \
+                                                                                   \
+    TypeName& operator=(const TypeName##Internal& eInternal) noexcept              \
+    {                                                                              \
+        _eInternal = eInternal;                                                    \
+        return *this;                                                              \
+    }                                                                              \
+                                                                                   \
+    bool operator==(const TypeName##Internal& eInternal) const noexcept            \
+    {                                                                              \
+        return _eInternal == eInternal;                                            \
+    }                                                                              \
+                                                                                   \
+    bool operator!=(const TypeName##Internal& eInternal) const noexcept            \
+    {                                                                              \
+        return _eInternal != eInternal;                                            \
+    }                                                                              \
+                                                                                   \
+    bool operator<(const TypeName##Internal& eInternal) const noexcept             \
+    {                                                                              \
+        return _eInternal < eInternal;                                             \
+    }                                                                              \
+                                                                                   \
+    bool operator<=(const TypeName##Internal& eInternal) const noexcept            \
+    {                                                                              \
+        return _eInternal <= eInternal;                                            \
+    }                                                                              \
+                                                                                   \
+    bool operator>(const TypeName##Internal& eInternal) const noexcept             \
+    {                                                                              \
+        return _eInternal > eInternal;                                             \
+    }                                                                              \
+                                                                                   \
+    bool operator>=(const TypeName##Internal& eInternal) const noexcept            \
+    {                                                                              \
+        return _eInternal >= eInternal;                                            \
+    }                                                                              \
+                                                                                   \
+    operator TypeName##Internal() const noexcept                                   \
+    {                                                                              \
+        return _eInternal;                                                         \
     }
