@@ -164,10 +164,10 @@ Macros</h2></td></tr>
 <div class="line">    {                                                   <a class="code" href="structqx_1_1singleton__traits.html#a86e04ea5e8e6b42d78d8745667348bd2">\</a></div>
 <div class="line"><a class="code" href="structqx_1_1singleton__traits.html#a86e04ea5e8e6b42d78d8745667348bd2">        qx::singleton_traits&lt;T&gt;::on_destructed</a>(*<span class="keyword">this</span>);  \</div>
 <div class="line">    }                                                   \</div>
-<div class="line">    T(<span class="keyword">const</span> T&amp;)      = <span class="keyword">delete</span>;                          \</div>
-<div class="line">    T(T&amp;&amp;)           = <span class="keyword">delete</span>;                          \</div>
+<div class="line">    T(<span class="keyword">const</span> T&amp;)                  = <span class="keyword">delete</span>;              \</div>
+<div class="line">    T(T&amp;&amp;)                       = <span class="keyword">delete</span>;              \</div>
 <div class="line">    const T&amp; operator=(<span class="keyword">const</span> T&amp;) = <span class="keyword">delete</span>;              \</div>
-<div class="line">    const T&amp; operator=(T&amp;&amp;) = <span class="keyword">delete</span>;                   \</div>
+<div class="line">    const T&amp; operator=(T&amp;&amp;)      = <span class="keyword">delete</span>;              \</div>
 <div class="line">                                                        \</div>
 <div class="line">public:                                                 \</div>
 <div class="line">    static T&amp; get_instance()                            \</div>

@@ -151,27 +151,7 @@ Macros</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<b>Value:</b><div class="fragment"><div class="line"><span class="keyword">public</span>:                                                                 \</div>
-<div class="line">    enum TypeName##Internal { __VA_ARGS__ };                            \</div>
-<div class="line">                                                                        \</div>
-<div class="line">    TypeName##Internal _eInternal = <span class="keyword">static_cast&lt;</span>TypeName##Internal<span class="keyword">&gt;</span>(0); \</div>
-<div class="line">                                                                        \</div>
-<div class="line">    TypeName&amp; operator=(<span class="keyword">const</span> TypeName##Internal&amp; eInternal) noexcept   \</div>
-<div class="line">    {                                                                   \</div>
-<div class="line">        _eInternal = eInternal;                                         \</div>
-<div class="line">        return *<span class="keyword">this</span>;                                                   \</div>
-<div class="line">    }                                                                   \</div>
-<div class="line">                                                                        \</div>
-<div class="line">    bool operator==(<span class="keyword">const</span> TypeName##Internal&amp; eInternal) <span class="keyword">const</span> noexcept \</div>
-<div class="line">    {                                                                   \</div>
-<div class="line">        return _eInternal == eInternal;                                 \</div>
-<div class="line">    }                                                                   \</div>
-<div class="line">                                                                        \</div>
-<div class="line">    operator TypeName##Internal() const noexcept                        \</div>
-<div class="line">    {                                                                   \</div>
-<div class="line">        return _eInternal;                                              \</div>
-<div class="line">    }</div>
-</div><!-- fragment -->
+
 <p>Macro for generating "enum class"-like class or struct with additional data/methods. </p>
 <dl class="section note"><dt>Note</dt><dd>Default value is one corresponds to 0 </dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>

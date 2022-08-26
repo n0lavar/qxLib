@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>qxLib: include/qx/iterate.h File Reference</title>
+<title>qxLib: include/qx/algo/iterate.h File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -61,7 +61,7 @@ $(function() {
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="dir_6159fad94d64d847460e6e9a559e7dc6.html">qx</a></li>  </ul>
+<li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="dir_6159fad94d64d847460e6e9a559e7dc6.html">qx</a></li><li class="navelem"><a class="el" href="dir_272b338fa03983558978b8884b5a5186.html">algo</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
@@ -80,10 +80,10 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a14311fa8af7dc1bed8511b7b957f8460"><td class="memTemplParams" colspan="2">template&lt;class Container , class Callable , class Filter  = decltype(filters::always_true), class Adapter  = decltype(adapters::no_change)&gt; </td></tr>
-<tr class="memitem:a14311fa8af7dc1bed8511b7b957f8460"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="iterate_8h.html#a14311fa8af7dc1bed8511b7b957f8460">qx::iterate</a> (const Container &amp;container, const Callable &amp;callable, const Filter &amp;filter=filters::always_true, const Adapter &amp;adapter=adapters::no_change)</td></tr>
-<tr class="memdesc:a14311fa8af7dc1bed8511b7b957f8460"><td class="mdescLeft">&#160;</td><td class="mdescRight">Iterate container with filter.  <a href="iterate_8h.html#a14311fa8af7dc1bed8511b7b957f8460">More...</a><br /></td></tr>
-<tr class="separator:a14311fa8af7dc1bed8511b7b957f8460"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a645bc055a73817ca2a097f12fa04a305"><td class="memTemplParams" colspan="2">template&lt;class Container , class Callable , class Filter  = decltype(iterate_filters::always_true), class Adapter  = decltype(iterate_adapters::no_change)&gt; </td></tr>
+<tr class="memitem:a645bc055a73817ca2a097f12fa04a305"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="iterate_8h.html#a645bc055a73817ca2a097f12fa04a305">qx::iterate</a> (const Container &amp;container, const Callable &amp;callable, const Filter &amp;filter=iterate_filters::always_true, const Adapter &amp;adapter=iterate_adapters::no_change)</td></tr>
+<tr class="memdesc:a645bc055a73817ca2a097f12fa04a305"><td class="mdescLeft">&#160;</td><td class="mdescRight">Iterate container with filter.  <a href="iterate_8h.html#a645bc055a73817ca2a097f12fa04a305">More...</a><br /></td></tr>
+<tr class="separator:a645bc055a73817ca2a097f12fa04a305"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Contains qx::iterate functions along with default filters and adapters for him. </p>
@@ -93,13 +93,13 @@ Functions</h2></td></tr>
 
 <p class="definition">Definition in file <a class="el" href="iterate_8h_source.html">iterate.h</a>.</p>
 </div><h2 class="groupheader">Function Documentation</h2>
-<a id="a14311fa8af7dc1bed8511b7b957f8460"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a14311fa8af7dc1bed8511b7b957f8460">&#9670;&nbsp;</a></span>iterate()</h2>
+<a id="a645bc055a73817ca2a097f12fa04a305"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a645bc055a73817ca2a097f12fa04a305">&#9670;&nbsp;</a></span>iterate()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class Container , class Callable , class Filter  = decltype(filters::always_true), class Adapter  = decltype(adapters::no_change)&gt; </div>
+template&lt;class Container , class Callable , class Filter  = decltype(iterate_filters::always_true), class Adapter  = decltype(iterate_adapters::no_change)&gt; </div>
       <table class="memname">
         <tr>
           <td class="memname">void qx::iterate </td>
@@ -117,13 +117,13 @@ template&lt;class Container , class Callable , class Filter  = decltype(filters:
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">const Filter &amp;&#160;</td>
-          <td class="paramname"><em>filter</em> = <code>filters::always_true</code>, </td>
+          <td class="paramname"><em>filter</em> = <code>iterate_filters::always_true</code>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">const Adapter &amp;&#160;</td>
-          <td class="paramname"><em>adapter</em> = <code>adapters::no_change</code>&#160;</td>
+          <td class="paramname"><em>adapter</em> = <code>iterate_adapters::no_change</code>&#160;</td>
         </tr>
         <tr>
           <td></td>
