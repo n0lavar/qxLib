@@ -12,5 +12,7 @@
 
 #include <qx/algo/add.h>
 #include <qx/algo/contains.h>
+#include <qx/algo/iterate.h>
+#include <qx/algo/iterate_several_containers.h>
 #include <qx/algo/remove.h>
 #include <qx/algo/sort.h>

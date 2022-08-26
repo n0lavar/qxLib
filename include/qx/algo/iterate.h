@@ -15,7 +15,7 @@
 namespace qx
 {
 
-namespace adapters
+namespace iterate_adapters
 {
 
 constexpr auto no_change = []<class T>(T&& value)
@@ -23,9 +23,9 @@ constexpr auto no_change = []<class T>(T&& value)
     return std::forward<T>(value);
 };
 
-} // namespace adapters
+} // namespace iterate_adapters
 
-namespace filters
+namespace iterate_filters
 {
 
 constexpr auto always_true = [](const auto&)
@@ -33,7 +33,7 @@ constexpr auto always_true = [](const auto&)
     return true;
 };
 
-} // namespace filters
+} // namespace iterate_filters
 
 /**
     @brief   Iterate container with filter
@@ -55,13 +55,13 @@ constexpr auto always_true = [](const auto&)
 template<
     class Container,
     class Callable,
-    class Filter  = decltype(filters::always_true),
-    class Adapter = decltype(adapters::no_change)>
+    class Filter  = decltype(iterate_filters::always_true),
+    class Adapter = decltype(iterate_adapters::no_change)>
 void iterate(
     const Container& container,
     const Callable&  callable,
-    const Filter&    filter  = filters::always_true,
-    const Adapter&   adapter = adapters::no_change)
+    const Filter&    filter  = iterate_filters::always_true,
+    const Adapter&   adapter = iterate_adapters::no_change)
 {
     for (const auto& element : container)
     {

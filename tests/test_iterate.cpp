@@ -10,7 +10,7 @@
 
 //V_EXCLUDE_PATH *test_iterate.cpp
 
-#include <qx/iterate.h>
+#include <qx/algo/iterate.h>
 
 #include <vector>
 
@@ -27,14 +27,14 @@ public:
     {
     }
 
-    template<class Callable, class Filter = decltype(qx::filters::always_true)>
-    void Iterate(const Callable& callable, const Filter& filter = qx::filters::always_true) const
+    template<class Callable, class Filter = decltype(qx::iterate_filters::always_true)>
+    void Iterate(const Callable& callable, const Filter& filter = qx::iterate_filters::always_true) const
     {
         qx::iterate(m_Vector, callable, filter);
     }
 
-    template<class Callable, class Filter = decltype(qx::filters::always_true)>
-    void IterateInteger(const Callable& callable, const Filter& filter = qx::filters::always_true) const
+    template<class Callable, class Filter = decltype(qx::iterate_filters::always_true)>
+    void IterateInteger(const Callable& callable, const Filter& filter = qx::iterate_filters::always_true) const
     {
         qx::iterate(
             m_Vector,
