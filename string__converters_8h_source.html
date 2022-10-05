@@ -82,62 +82,78 @@ $(function() {
 <div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160; </div>
 <div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="string_8h.html">qx/containers/string/string.h</a>&gt;</span></div>
 <div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160; </div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="keyword">namespace </span>qx</div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;{</div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="comment">/**</span></div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="comment">    @brief  convert string to wstring</span></div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="comment">    @param  str    - char string view</span></div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="comment">    @param  locale - locale to use</span></div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="comment">    @retval        - wchar_t string</span></div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="comment">**/</span></div>
-<div class="line"><a name="l00023"></a><span class="lineno"><a class="line" href="string__converters_8h.html#aa203fa26e66091ce0c1f4ffff0c4e7dc">   23</a></span>&#160;<span class="keyword">inline</span> <a class="code" href="classqx_1_1basic__string.html">wstring</a> <a class="code" href="string__converters_8h.html#aa203fa26e66091ce0c1f4ffff0c4e7dc">to_wstring</a>(std::string_view str, <span class="keyword">const</span> std::locale&amp; locale = std::locale())</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;{</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    std::vector&lt;wchar_t&gt; buf(str.size());</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    std::use_facet&lt;std::ctype&lt;wchar_t&gt;&gt;(locale).widen(str.data(), str.data() + str.size(), buf.data());</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160; </div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="classqx_1_1basic__string.html">wstring</a>(buf.data(), buf.size());</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;}</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="comment">/**</span></div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="comment">    @brief   Convert wstring to string</span></div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="comment">    @details &#39;?&#39; is default character</span></div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="comment">    @param   str    - wchar_t string view</span></div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="comment">    @param   locale - locale to use</span></div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="comment">    @retval         - char string</span></div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="comment">**/</span></div>
-<div class="line"><a name="l00038"></a><span class="lineno"><a class="line" href="string__converters_8h.html#a3e1f4e7844477718e8e50adb0a7bbfb6">   38</a></span>&#160;<span class="keyword">inline</span> <span class="keywordtype">string</span> <a class="code" href="string__converters_8h.html#a3e1f4e7844477718e8e50adb0a7bbfb6">to_string</a>(std::wstring_view str, <span class="keyword">const</span> std::locale&amp; locale = std::locale())</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;{</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    std::vector&lt;char&gt; buf(str.size());</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    std::use_facet&lt;std::ctype&lt;wchar_t&gt;&gt;(locale).narrow(str.data(), str.data() + str.size(), <span class="charliteral">&#39;?&#39;</span>, buf.data());</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="classqx_1_1basic__string.html">string</a>(buf.data(), buf.size());</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;}</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="comment">/**</span></div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="comment">    @brief   Convert string_view to the null terminated chars array</span></div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="comment">    @details Some libraries or even c++ types can&#39;t deal with std::string_view</span></div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="comment">             (for ex. std::ifstream). This function allows to reduce number of</span></div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="comment">             allocations, but still leads to overhead due to chars copying</span></div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="comment">    @tparam  value_type - string value type</span></div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="comment">    @param   stringView - string view to convert</span></div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<span class="comment">    @retval             - null terminated string with stringView convent</span></div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<span class="comment">                          valid until the next to_char_pointer call</span></div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;<span class="comment">**/</span></div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> value_type&gt;</div>
-<div class="line"><a name="l00056"></a><span class="lineno"><a class="line" href="string__converters_8h.html#abae43e12d9d47cc45926f2599f74b792">   56</a></span>&#160;<span class="keyword">inline</span> <span class="keyword">const</span> value_type* <a class="code" href="string__converters_8h.html#abae43e12d9d47cc45926f2599f74b792">to_char_pointer</a>(std::basic_string_view&lt;value_type&gt; stringView)</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;{</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    thread_local <a class="code" href="classqx_1_1basic__string.html">basic_string&lt;char_traits&lt;value_type&gt;</a>&gt; sBuffer;</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    sBuffer = stringView;</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    <span class="keywordflow">return</span> sBuffer.<a class="code" href="classqx_1_1basic__string.html#ae80a94bb065eda141d210a81e7d624a0">c_str</a>();</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;}</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160; </div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;} <span class="comment">// namespace qx</span></div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="preprocessor">#include &lt;codecvt&gt;</span></div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="preprocessor">#include &lt;locale&gt;</span></div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160; </div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="keyword">namespace </span>qx</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;{</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="comment">/**</span></div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="comment">    @brief  convert string to wstring</span></div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="comment">    @param  str    - char string view</span></div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="comment">    @param  locale - locale to use</span></div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="comment">    @retval        - wchar_t string</span></div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="comment">**/</span></div>
+<div class="line"><a name="l00026"></a><span class="lineno"><a class="line" href="string__converters_8h.html#aa203fa26e66091ce0c1f4ffff0c4e7dc">   26</a></span>&#160;<span class="keyword">inline</span> <a class="code" href="classqx_1_1basic__string.html">wstring</a> <a class="code" href="string__converters_8h.html#aa203fa26e66091ce0c1f4ffff0c4e7dc">to_wstring</a>(std::string_view str, <span class="keyword">const</span> std::locale&amp; locale = std::locale())</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;{</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    std::vector&lt;wchar_t&gt; buf(str.size());</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    std::use_facet&lt;std::ctype&lt;wchar_t&gt;&gt;(locale).widen(str.data(), str.data() + str.size(), buf.data());</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="classqx_1_1basic__string.html">wstring</a>(buf.data(), buf.size());</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;}</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="comment">/**</span></div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="comment">    @brief   Convert wstring to string</span></div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="comment">    @details &#39;?&#39; is default character</span></div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="comment">    @param   str    - wchar_t string view</span></div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="comment">    @param   locale - locale to use</span></div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="comment">    @retval         - char string</span></div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="comment">**/</span></div>
+<div class="line"><a name="l00040"></a><span class="lineno"><a class="line" href="string__converters_8h.html#a3e1f4e7844477718e8e50adb0a7bbfb6">   40</a></span>&#160;<span class="keyword">inline</span> <span class="keywordtype">string</span> <a class="code" href="string__converters_8h.html#a3e1f4e7844477718e8e50adb0a7bbfb6">to_string</a>(std::wstring_view str, <span class="keyword">const</span> std::locale&amp; locale = std::locale())</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;{</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    std::vector&lt;char&gt; buf(str.size());</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    std::use_facet&lt;std::ctype&lt;wchar_t&gt;&gt;(locale).narrow(str.data(), str.data() + str.size(), <span class="charliteral">&#39;?&#39;</span>, buf.data());</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="classqx_1_1basic__string.html">string</a>(buf.data(), buf.size());</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;}</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="comment">/**</span></div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="comment">    @brief  Convert const char* representing UTF8 to wstring</span></div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="comment">    @param  pszUtf8 - UTF8 string</span></div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="comment">    @retval         - wstring value</span></div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="comment">**/</span></div>
+<div class="line"><a name="l00052"></a><span class="lineno"><a class="line" href="string__converters_8h.html#a30847adf8f3f3abb2b93591c4038d6b6">   52</a></span>&#160;<span class="keyword">inline</span> <a class="code" href="classqx_1_1basic__string.html">wstring</a> <a class="code" href="string__converters_8h.html#a30847adf8f3f3abb2b93591c4038d6b6">utf8_to_wstring</a>(<span class="keyword">const</span> <span class="keywordtype">char</span>* pszUtf8)</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;{</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    QX_PUSH_SUPPRESS_ALL_WARNINGS</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    std::wstring_convert&lt;std::codecvt_utf8_utf16&lt;wchar_t&gt;&gt; converter;</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    <span class="keywordflow">return</span> converter.from_bytes(pszUtf8);</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    QX_POP_SUPPRESS_WARNINGS</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;}</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;<span class="comment">/**</span></div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;<span class="comment">    @brief   Convert string_view to the null terminated chars array</span></div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;<span class="comment">    @details Some libraries or even c++ types can&#39;t deal with std::string_view</span></div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;<span class="comment">             (for ex. std::ifstream). This function allows to reduce number of</span></div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;<span class="comment">             allocations, but still leads to overhead due to chars copying</span></div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;<span class="comment">    @tparam  value_type - string value type</span></div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;<span class="comment">    @param   stringView - string view to convert</span></div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;<span class="comment">    @retval             - null terminated string with stringView convent</span></div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;<span class="comment">                          valid until the next to_char_pointer call</span></div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;<span class="comment">**/</span></div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> value_type&gt;</div>
+<div class="line"><a name="l00071"></a><span class="lineno"><a class="line" href="string__converters_8h.html#abae43e12d9d47cc45926f2599f74b792">   71</a></span>&#160;<span class="keyword">inline</span> <span class="keyword">const</span> value_type* <a class="code" href="string__converters_8h.html#abae43e12d9d47cc45926f2599f74b792">to_char_pointer</a>(std::basic_string_view&lt;value_type&gt; stringView)</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;{</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;    thread_local <a class="code" href="classqx_1_1basic__string.html">basic_string&lt;char_traits&lt;value_type&gt;</a>&gt; sBuffer;</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    sBuffer = stringView;</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    <span class="keywordflow">return</span> sBuffer.<a class="code" href="classqx_1_1basic__string.html#ae80a94bb065eda141d210a81e7d624a0">c_str</a>();</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;}</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160; </div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;} <span class="comment">// namespace qx</span></div>
 <div class="ttc" id="aclassqx_1_1basic__string_html"><div class="ttname"><a href="classqx_1_1basic__string.html">qx::basic_string</a></div><div class="ttdoc">String class.</div><div class="ttdef"><b>Definition:</b> <a href="string_8h_source.html#l00062">string.h:63</a></div></div>
 <div class="ttc" id="aclassqx_1_1basic__string_html_ae80a94bb065eda141d210a81e7d624a0"><div class="ttname"><a href="classqx_1_1basic__string.html#ae80a94bb065eda141d210a81e7d624a0">qx::basic_string::c_str</a></div><div class="ttdeci">const_pointer c_str() const noexcept</div><div class="ttdoc">Get pointer to string zero terminated.</div><div class="ttdef"><b>Definition:</b> <a href="string_8inl_source.html#l00249">string.inl:249</a></div></div>
 <div class="ttc" id="astring_8h_html"><div class="ttname"><a href="string_8h.html">string.h</a></div><div class="ttdoc">Contains qx::string class.</div></div>
-<div class="ttc" id="astring__converters_8h_html_a3e1f4e7844477718e8e50adb0a7bbfb6"><div class="ttname"><a href="string__converters_8h.html#a3e1f4e7844477718e8e50adb0a7bbfb6">qx::to_string</a></div><div class="ttdeci">string to_string(std::wstring_view str, const std::locale &amp;locale=std::locale())</div><div class="ttdoc">Convert wstring to string.</div><div class="ttdef"><b>Definition:</b> <a href="string__converters_8h_source.html#l00038">string_converters.h:38</a></div></div>
-<div class="ttc" id="astring__converters_8h_html_aa203fa26e66091ce0c1f4ffff0c4e7dc"><div class="ttname"><a href="string__converters_8h.html#aa203fa26e66091ce0c1f4ffff0c4e7dc">qx::to_wstring</a></div><div class="ttdeci">wstring to_wstring(std::string_view str, const std::locale &amp;locale=std::locale())</div><div class="ttdoc">convert string to wstring</div><div class="ttdef"><b>Definition:</b> <a href="string__converters_8h_source.html#l00023">string_converters.h:23</a></div></div>
-<div class="ttc" id="astring__converters_8h_html_abae43e12d9d47cc45926f2599f74b792"><div class="ttname"><a href="string__converters_8h.html#abae43e12d9d47cc45926f2599f74b792">qx::to_char_pointer</a></div><div class="ttdeci">const value_type * to_char_pointer(std::basic_string_view&lt; value_type &gt; stringView)</div><div class="ttdoc">Convert string_view to the null terminated chars array.</div><div class="ttdef"><b>Definition:</b> <a href="string__converters_8h_source.html#l00056">string_converters.h:56</a></div></div>
+<div class="ttc" id="astring__converters_8h_html_a30847adf8f3f3abb2b93591c4038d6b6"><div class="ttname"><a href="string__converters_8h.html#a30847adf8f3f3abb2b93591c4038d6b6">qx::utf8_to_wstring</a></div><div class="ttdeci">wstring utf8_to_wstring(const char *pszUtf8)</div><div class="ttdoc">Convert const char* representing UTF8 to wstring.</div><div class="ttdef"><b>Definition:</b> <a href="string__converters_8h_source.html#l00052">string_converters.h:52</a></div></div>
+<div class="ttc" id="astring__converters_8h_html_a3e1f4e7844477718e8e50adb0a7bbfb6"><div class="ttname"><a href="string__converters_8h.html#a3e1f4e7844477718e8e50adb0a7bbfb6">qx::to_string</a></div><div class="ttdeci">string to_string(std::wstring_view str, const std::locale &amp;locale=std::locale())</div><div class="ttdoc">Convert wstring to string.</div><div class="ttdef"><b>Definition:</b> <a href="string__converters_8h_source.html#l00040">string_converters.h:40</a></div></div>
+<div class="ttc" id="astring__converters_8h_html_aa203fa26e66091ce0c1f4ffff0c4e7dc"><div class="ttname"><a href="string__converters_8h.html#aa203fa26e66091ce0c1f4ffff0c4e7dc">qx::to_wstring</a></div><div class="ttdeci">wstring to_wstring(std::string_view str, const std::locale &amp;locale=std::locale())</div><div class="ttdoc">convert string to wstring</div><div class="ttdef"><b>Definition:</b> <a href="string__converters_8h_source.html#l00026">string_converters.h:26</a></div></div>
+<div class="ttc" id="astring__converters_8h_html_abae43e12d9d47cc45926f2599f74b792"><div class="ttname"><a href="string__converters_8h.html#abae43e12d9d47cc45926f2599f74b792">qx::to_char_pointer</a></div><div class="ttdeci">const value_type * to_char_pointer(std::basic_string_view&lt; value_type &gt; stringView)</div><div class="ttdoc">Convert string_view to the null terminated chars array.</div><div class="ttdef"><b>Definition:</b> <a href="string__converters_8h_source.html#l00071">string_converters.h:71</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

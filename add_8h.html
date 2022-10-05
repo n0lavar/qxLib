@@ -81,14 +81,14 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:af9f1d84f087face448022c3d5d08ac68"><td class="memTemplParams" colspan="2">template&lt;class ContainerType , class ValueType &gt; </td></tr>
-<tr class="memitem:af9f1d84f087face448022c3d5d08ac68"><td class="memTemplItemLeft" align="right" valign="top">bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="add_8h.html#af9f1d84f087face448022c3d5d08ac68">qx::add_unique</a> (ContainerType &amp;container, const ValueType &amp;value)</td></tr>
-<tr class="memdesc:af9f1d84f087face448022c3d5d08ac68"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add an element to the container if it doesn't already contain one.  <a href="add_8h.html#af9f1d84f087face448022c3d5d08ac68">More...</a><br /></td></tr>
-<tr class="separator:af9f1d84f087face448022c3d5d08ac68"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa37160da6775765e5f3ff92a2c5c54c1"><td class="memTemplParams" colspan="2">template&lt;class ContainerType , class ValueType , class PredicateType &gt; </td></tr>
-<tr class="memitem:aa37160da6775765e5f3ff92a2c5c54c1"><td class="memTemplItemLeft" align="right" valign="top">bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="add_8h.html#aa37160da6775765e5f3ff92a2c5c54c1">qx::add_unique_if</a> (ContainerType &amp;container, const ValueType &amp;value, const PredicateType &amp;predicate)</td></tr>
-<tr class="memdesc:aa37160da6775765e5f3ff92a2c5c54c1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add an element to the container if all elements do not satisfy the predicate.  <a href="add_8h.html#aa37160da6775765e5f3ff92a2c5c54c1">More...</a><br /></td></tr>
-<tr class="separator:aa37160da6775765e5f3ff92a2c5c54c1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9086baacc55be4df28b4fa211770597b"><td class="memTemplParams" colspan="2">template&lt;class ContainerType , class ValueType &gt; </td></tr>
+<tr class="memitem:a9086baacc55be4df28b4fa211770597b"><td class="memTemplItemLeft" align="right" valign="top">bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="add_8h.html#a9086baacc55be4df28b4fa211770597b">qx::add_unique</a> (ContainerType &amp;container, ValueType &amp;&amp;value)</td></tr>
+<tr class="memdesc:a9086baacc55be4df28b4fa211770597b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add an element to the container if it doesn't already contain one.  <a href="add_8h.html#a9086baacc55be4df28b4fa211770597b">More...</a><br /></td></tr>
+<tr class="separator:a9086baacc55be4df28b4fa211770597b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a384340f231e422d69953da198c57d69c"><td class="memTemplParams" colspan="2">template&lt;class ContainerType , class ValueType , class PredicateType &gt; </td></tr>
+<tr class="memitem:a384340f231e422d69953da198c57d69c"><td class="memTemplItemLeft" align="right" valign="top">bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="add_8h.html#a384340f231e422d69953da198c57d69c">qx::add_unique_if</a> (ContainerType &amp;container, ValueType &amp;&amp;value, const PredicateType &amp;predicate)</td></tr>
+<tr class="memdesc:a384340f231e422d69953da198c57d69c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add an element to the container if all elements do not satisfy the predicate.  <a href="add_8h.html#a384340f231e422d69953da198c57d69c">More...</a><br /></td></tr>
+<tr class="separator:a384340f231e422d69953da198c57d69c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Contains add algorithms. </p>
@@ -98,8 +98,8 @@ Functions</h2></td></tr>
 
 <p class="definition">Definition in file <a class="el" href="add_8h_source.html">add.h</a>.</p>
 </div><h2 class="groupheader">Function Documentation</h2>
-<a id="af9f1d84f087face448022c3d5d08ac68"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af9f1d84f087face448022c3d5d08ac68">&#9670;&nbsp;</a></span>add_unique()</h2>
+<a id="a9086baacc55be4df28b4fa211770597b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9086baacc55be4df28b4fa211770597b">&#9670;&nbsp;</a></span>add_unique()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -115,7 +115,7 @@ template&lt;class ContainerType , class ValueType &gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const ValueType &amp;&#160;</td>
+          <td class="paramtype">ValueType &amp;&amp;&#160;</td>
           <td class="paramname"><em>value</em>&#160;</td>
         </tr>
         <tr>
@@ -152,8 +152,8 @@ template&lt;class ContainerType , class ValueType &gt; </div>
 
 </div>
 </div>
-<a id="aa37160da6775765e5f3ff92a2c5c54c1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa37160da6775765e5f3ff92a2c5c54c1">&#9670;&nbsp;</a></span>add_unique_if()</h2>
+<a id="a384340f231e422d69953da198c57d69c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a384340f231e422d69953da198c57d69c">&#9670;&nbsp;</a></span>add_unique_if()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -169,7 +169,7 @@ template&lt;class ContainerType , class ValueType , class PredicateType &gt; </d
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const ValueType &amp;&#160;</td>
+          <td class="paramtype">ValueType &amp;&amp;&#160;</td>
           <td class="paramname"><em>value</em>, </td>
         </tr>
         <tr>

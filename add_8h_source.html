@@ -97,11 +97,11 @@ $(function() {
 <div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="comment">    @retval               - true if value was added</span></div>
 <div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="comment">**/</span></div>
 <div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> ContainerType, <span class="keyword">class</span> ValueType&gt;</div>
-<div class="line"><a name="l00029"></a><span class="lineno"><a class="line" href="add_8h.html#af9f1d84f087face448022c3d5d08ac68">   29</a></span>&#160;<span class="keywordtype">bool</span> <a class="code" href="add_8h.html#af9f1d84f087face448022c3d5d08ac68">add_unique</a>(ContainerType&amp; container, <span class="keyword">const</span> ValueType&amp; value)</div>
+<div class="line"><a name="l00029"></a><span class="lineno"><a class="line" href="add_8h.html#a9086baacc55be4df28b4fa211770597b">   29</a></span>&#160;<span class="keywordtype">bool</span> <a class="code" href="add_8h.html#a9086baacc55be4df28b4fa211770597b">add_unique</a>(ContainerType&amp; container, ValueType&amp;&amp; value)</div>
 <div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;{</div>
 <div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    <span class="keywordflow">if</span> (!<a class="code" href="contains_8h.html#a878a594228af7bd36afdca86aee92d19">contains</a>(container, value))</div>
 <div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    {</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;        container.insert(container.end(), value);</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;        container.insert(container.end(), std::forward&lt;ValueType&gt;(value));</div>
 <div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;        <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
 <div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    }</div>
 <div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    <span class="keywordflow">else</span></div>
@@ -121,7 +121,7 @@ $(function() {
 <div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="comment">    @retval               - true if value was added</span></div>
 <div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="comment">**/</span></div>
 <div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> ContainerType, <span class="keyword">class</span> ValueType, <span class="keyword">class</span> PredicateType&gt;</div>
-<div class="line"><a name="l00053"></a><span class="lineno"><a class="line" href="add_8h.html#aa37160da6775765e5f3ff92a2c5c54c1">   53</a></span>&#160;<span class="keywordtype">bool</span> <a class="code" href="add_8h.html#aa37160da6775765e5f3ff92a2c5c54c1">add_unique_if</a>(ContainerType&amp; container, <span class="keyword">const</span> ValueType&amp; value, <span class="keyword">const</span> PredicateType&amp; predicate)</div>
+<div class="line"><a name="l00053"></a><span class="lineno"><a class="line" href="add_8h.html#a384340f231e422d69953da198c57d69c">   53</a></span>&#160;<span class="keywordtype">bool</span> <a class="code" href="add_8h.html#a384340f231e422d69953da198c57d69c">add_unique_if</a>(ContainerType&amp; container, ValueType&amp;&amp; value, <span class="keyword">const</span> PredicateType&amp; predicate)</div>
 <div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;{</div>
 <div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    <span class="keywordflow">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span>&amp; element : container)</div>
 <div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    {</div>
@@ -136,13 +136,14 @@ $(function() {
 <div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;                <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
 <div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;        }</div>
 <div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    }</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;    container.insert(container.end(), value);</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;}</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160; </div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;} <span class="comment">// namespace qx</span></div>
-<div class="ttc" id="aadd_8h_html_aa37160da6775765e5f3ff92a2c5c54c1"><div class="ttname"><a href="add_8h.html#aa37160da6775765e5f3ff92a2c5c54c1">qx::add_unique_if</a></div><div class="ttdeci">bool add_unique_if(ContainerType &amp;container, const ValueType &amp;value, const PredicateType &amp;predicate)</div><div class="ttdoc">Add an element to the container if all elements do not satisfy the predicate.</div><div class="ttdef"><b>Definition:</b> <a href="add_8h_source.html#l00053">add.h:53</a></div></div>
-<div class="ttc" id="aadd_8h_html_af9f1d84f087face448022c3d5d08ac68"><div class="ttname"><a href="add_8h.html#af9f1d84f087face448022c3d5d08ac68">qx::add_unique</a></div><div class="ttdeci">bool add_unique(ContainerType &amp;container, const ValueType &amp;value)</div><div class="ttdoc">Add an element to the container if it doesn't already contain one.</div><div class="ttdef"><b>Definition:</b> <a href="add_8h_source.html#l00029">add.h:29</a></div></div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160; </div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    container.insert(container.end(), std::forward&lt;ValueType&gt;(value));</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;}</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160; </div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;} <span class="comment">// namespace qx</span></div>
+<div class="ttc" id="aadd_8h_html_a384340f231e422d69953da198c57d69c"><div class="ttname"><a href="add_8h.html#a384340f231e422d69953da198c57d69c">qx::add_unique_if</a></div><div class="ttdeci">bool add_unique_if(ContainerType &amp;container, ValueType &amp;&amp;value, const PredicateType &amp;predicate)</div><div class="ttdoc">Add an element to the container if all elements do not satisfy the predicate.</div><div class="ttdef"><b>Definition:</b> <a href="add_8h_source.html#l00053">add.h:53</a></div></div>
+<div class="ttc" id="aadd_8h_html_a9086baacc55be4df28b4fa211770597b"><div class="ttname"><a href="add_8h.html#a9086baacc55be4df28b4fa211770597b">qx::add_unique</a></div><div class="ttdeci">bool add_unique(ContainerType &amp;container, ValueType &amp;&amp;value)</div><div class="ttdoc">Add an element to the container if it doesn't already contain one.</div><div class="ttdef"><b>Definition:</b> <a href="add_8h_source.html#l00029">add.h:29</a></div></div>
 <div class="ttc" id="acontains_8h_html"><div class="ttname"><a href="contains_8h.html">contains.h</a></div><div class="ttdoc">Contains &quot;contains&quot; functions (ba-dam-tss)</div></div>
 <div class="ttc" id="acontains_8h_html_a878a594228af7bd36afdca86aee92d19"><div class="ttname"><a href="contains_8h.html#a878a594228af7bd36afdca86aee92d19">qx::contains</a></div><div class="ttdeci">bool contains(FwdItType itBegin, FwdItType itEnd, const T &amp;value)</div><div class="ttdoc">Check if range contains value.</div><div class="ttdef"><b>Definition:</b> <a href="contains_8h_source.html#l00028">contains.h:28</a></div></div>
 </div><!-- fragment --></div><!-- contents -->

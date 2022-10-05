@@ -75,6 +75,8 @@ $(function() {
 <p>Contains string converters.  
 <a href="#details">More...</a></p>
 <div class="textblock"><code>#include &lt;<a class="el" href="string_8h_source.html">qx/containers/string/string.h</a>&gt;</code><br />
+<code>#include &lt;codecvt&gt;</code><br />
+<code>#include &lt;locale&gt;</code><br />
 </div>
 <p><a href="string__converters_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
@@ -86,6 +88,9 @@ Functions</h2></td></tr>
 <tr class="memitem:a3e1f4e7844477718e8e50adb0a7bbfb6"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="string__converters_8h.html#a3e1f4e7844477718e8e50adb0a7bbfb6">qx::to_string</a> (std::wstring_view str, const std::locale &amp;locale=std::locale())</td></tr>
 <tr class="memdesc:a3e1f4e7844477718e8e50adb0a7bbfb6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert wstring to string.  <a href="string__converters_8h.html#a3e1f4e7844477718e8e50adb0a7bbfb6">More...</a><br /></td></tr>
 <tr class="separator:a3e1f4e7844477718e8e50adb0a7bbfb6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a30847adf8f3f3abb2b93591c4038d6b6"><td class="memItemLeft" align="right" valign="top">wstring&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="string__converters_8h.html#a30847adf8f3f3abb2b93591c4038d6b6">qx::utf8_to_wstring</a> (const char *pszUtf8)</td></tr>
+<tr class="memdesc:a30847adf8f3f3abb2b93591c4038d6b6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert const char* representing UTF8 to wstring.  <a href="string__converters_8h.html#a30847adf8f3f3abb2b93591c4038d6b6">More...</a><br /></td></tr>
+<tr class="separator:a30847adf8f3f3abb2b93591c4038d6b6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abae43e12d9d47cc45926f2599f74b792"><td class="memTemplParams" colspan="2">template&lt;typename value_type &gt; </td></tr>
 <tr class="memitem:abae43e12d9d47cc45926f2599f74b792"><td class="memTemplItemLeft" align="right" valign="top">const value_type *&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="string__converters_8h.html#abae43e12d9d47cc45926f2599f74b792">qx::to_char_pointer</a> (std::basic_string_view&lt; value_type &gt; stringView)</td></tr>
 <tr class="memdesc:abae43e12d9d47cc45926f2599f74b792"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert string_view to the null terminated chars array.  <a href="string__converters_8h.html#abae43e12d9d47cc45926f2599f74b792">More...</a><br /></td></tr>
@@ -145,7 +150,7 @@ template&lt;typename value_type &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="string__converters_8h_source.html#l00056">56</a> of file <a class="el" href="string__converters_8h_source.html">string_converters.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="string__converters_8h_source.html#l00071">71</a> of file <a class="el" href="string__converters_8h_source.html">string_converters.h</a>.</p>
 
 </div>
 </div>
@@ -198,7 +203,7 @@ template&lt;typename value_type &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="string__converters_8h_source.html#l00038">38</a> of file <a class="el" href="string__converters_8h_source.html">string_converters.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="string__converters_8h_source.html#l00040">40</a> of file <a class="el" href="string__converters_8h_source.html">string_converters.h</a>.</p>
 
 </div>
 </div>
@@ -251,7 +256,49 @@ template&lt;typename value_type &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="string__converters_8h_source.html#l00023">23</a> of file <a class="el" href="string__converters_8h_source.html">string_converters.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="string__converters_8h_source.html#l00026">26</a> of file <a class="el" href="string__converters_8h_source.html">string_converters.h</a>.</p>
+
+</div>
+</div>
+<a id="a30847adf8f3f3abb2b93591c4038d6b6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a30847adf8f3f3abb2b93591c4038d6b6">&#9670;&nbsp;</a></span>utf8_to_wstring()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">wstring qx::utf8_to_wstring </td>
+          <td>(</td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>pszUtf8</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Convert const char* representing UTF8 to wstring. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">pszUtf8</td><td>- UTF8 string </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Return values</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">-</td><td>wstring value </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="string__converters_8h_source.html#l00052">52</a> of file <a class="el" href="string__converters_8h_source.html">string_converters.h</a>.</p>
 
 </div>
 </div>
