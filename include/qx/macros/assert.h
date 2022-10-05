@@ -60,16 +60,18 @@
     else if (!_QX_ASSERT(before_debug_break, debug_break, after_debug_break, condition)) [[unlikely]] \
     return __VA_ARGS__
 
-#define _QX_ASSERT_CONTINUE(before_debug_break, debug_break, after_debug_break, condition)            \
-    if constexpr (false)                                                                              \
-        ;                                                                                             \
-    else if (!_QX_ASSERT(before_debug_break, debug_break, after_debug_break, condition)) [[unlikely]] \
+#define _QX_ASSERT_CONTINUE(before_debug_break, debug_break, after_debug_break, condition, format, ...)             \
+    if constexpr (false)                                                                                            \
+        ;                                                                                                           \
+    else if (!_QX_ASSERT_MSG(before_debug_break, debug_break, after_debug_break, condition, format, ##__VA_ARGS__)) \
+        [[unlikely]]                                                                                                \
     continue
 
-#define _QX_ASSERT_BREAK(before_debug_break, debug_break, after_debug_break, condition)               \
-    if constexpr (false)                                                                              \
-        ;                                                                                             \
-    else if (!_QX_ASSERT(before_debug_break, debug_break, after_debug_break, condition)) [[unlikely]] \
+#define _QX_ASSERT_BREAK(before_debug_break, debug_break, after_debug_break, condition, format, ...)                \
+    if constexpr (false)                                                                                            \
+        ;                                                                                                           \
+    else if (!_QX_ASSERT_MSG(before_debug_break, debug_break, after_debug_break, condition, format, ##__VA_ARGS__)) \
+        [[unlikely]]                                                                                                \
     break
 
 #ifndef QX_EXPECT_BEFORE_DEBUG_BREAK
@@ -183,7 +185,7 @@
     @brief   Fails unconditionally if this code should not be executed
     @details EXPECT macros generate nonfatal failures and allow to continue running
 **/
-#define QX_EXPECT_NO_ENTRY \
+#define QX_EXPECT_NO_ENTRY() \
     _QX_ASSERT_NO_ENTRY(QX_EXPECT_BEFORE_DEBUG_BREAK, QX_EXPECT_DEBUG_BREAK, QX_EXPECT_AFTER_DEBUG_BREAK, "No entry")
 
 /**
@@ -204,7 +206,7 @@
     @brief   Fails unconditionally if this code should not be executed
     @details ASSERT macros generate fatal failures and abort the program execution
 **/
-#define QX_ASSERT_NO_ENTRY \
+#define QX_ASSERT_NO_ENTRY() \
     _QX_ASSERT_NO_ENTRY(QX_ASSERT_BEFORE_DEBUG_BREAK, QX_ASSERT_DEBUG_BREAK, QX_ASSERT_AFTER_DEBUG_BREAK, "No entry")
 
 /**
@@ -241,7 +243,23 @@
     @param   condition - condition to check
 **/
 #define QX_EXPECT_CONTINUE(condition) \
-    _QX_ASSERT_CONTINUE(QX_EXPECT_BEFORE_DEBUG_BREAK, QX_EXPECT_DEBUG_BREAK, QX_EXPECT_AFTER_DEBUG_BREAK, condition)
+    _QX_ASSERT_CONTINUE(QX_EXPECT_BEFORE_DEBUG_BREAK, QX_EXPECT_DEBUG_BREAK, QX_EXPECT_AFTER_DEBUG_BREAK, condition, "")
+
+/**
+    @brief   Verifies that condition is true and continue loop if false
+    @details EXPECT macros generate nonfatal failures and allow to continue running
+    @param   condition - condition to check
+    @param   format    - message format
+    @param   ...       - message arguments
+**/
+#define QX_EXPECT_CONTINUE_MSG(condition, format, ...) \
+    _QX_ASSERT_CONTINUE(                               \
+        QX_EXPECT_BEFORE_DEBUG_BREAK,                  \
+        QX_EXPECT_DEBUG_BREAK,                         \
+        QX_EXPECT_AFTER_DEBUG_BREAK,                   \
+        condition,                                     \
+        format,                                        \
+        ##__VA_ARGS__)
 
 /**
     @brief   Verifies that condition is true and break loop if false
@@ -249,4 +267,20 @@
     @param   condition - condition to check
 **/
 #define QX_EXPECT_BREAK(condition) \
-    _QX_ASSERT_BREAK(QX_EXPECT_BEFORE_DEBUG_BREAK, QX_EXPECT_DEBUG_BREAK, QX_EXPECT_AFTER_DEBUG_BREAK, condition)
+    _QX_ASSERT_BREAK(QX_EXPECT_BEFORE_DEBUG_BREAK, QX_EXPECT_DEBUG_BREAK, QX_EXPECT_AFTER_DEBUG_BREAK, condition, "")
+
+/**
+    @brief   Verifies that condition is true and break loop if false
+    @details EXPECT macros generate nonfatal failures and allow to continue running
+    @param   condition - condition to check
+    @param   format    - message format
+    @param   ...       - message arguments
+**/
+#define QX_EXPECT_BREAK_MSG(condition, format, ...) \
+    _QX_ASSERT_BREAK(                               \
+        QX_EXPECT_BEFORE_DEBUG_BREAK,               \
+        QX_EXPECT_DEBUG_BREAK,                      \
+        QX_EXPECT_AFTER_DEBUG_BREAK,                \
+        condition,                                  \
+        format,                                     \
+        ##__VA_ARGS__)
