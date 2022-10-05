@@ -15,23 +15,23 @@ namespace qx
 
 //--------------------------------- are_same ---------------------------------
 
-template<typename...>
+template<class...>
 struct are_same : std::true_type
 {
 };
 
-template<typename S, typename T, typename... Ts>
+template<class S, class T, class... Ts>
 struct are_same<S, T, Ts...> : std::false_type
 {
 };
 
 // check if all of variadic arguments are same type
-template<typename T, typename... Ts>
+template<class T, class... Ts>
 struct are_same<T, T, Ts...> : are_same<T, Ts...>
 {
 };
 
-template<typename... Ts>
+template<class... Ts>
 constexpr bool are_same_v = are_same<Ts...>::value;
 
 
@@ -39,7 +39,7 @@ constexpr bool are_same_v = are_same<Ts...>::value;
 //------------------------------- iterator_value -------------------------------
 
 // get value type of iterator
-template<typename T, class = void>
+template<class T, class = void>
 struct iterator_value
 {
 };
@@ -84,12 +84,12 @@ constexpr bool is_specialization_exist_v = is_specialization_exist<T>::value;
 
 //---------------------------- is_specialization_of ----------------------------
 
-template<typename Test, template<typename...> class Ref>
+template<class Test, template<class...> class Ref>
 struct is_specialization_of : std::false_type
 {
 };
 
-template<template<typename...> class Ref, typename... Args>
+template<template<class...> class Ref, class... Args>
 struct is_specialization_of<Ref<Args...>, Ref> : std::true_type
 {
 };
