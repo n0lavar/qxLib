@@ -37,6 +37,7 @@ function(set_target_options _target)
             /wd4355 # 'this' : used in base member initializer list
             /wd4365 # 'action' : conversion from 'type_1' to 'type_2', signed/unsigned mismatch: MVSC headers warnings
             /wd4514 # 'function' : unreferenced inline function has been removed
+            /wd4599 # 'flag path': command line argument number number does not match precompiled header: conflict with /external:I path which leads to the broken "edit and continue"
             /wd4623 # 'derived class' : default constructor was implicitly defined as deleted because a base class default constructor is inaccessible or deleted
             /wd4625 # 'type': move assignment operator was implicitly defined as deleted
             /wd4626 # 'derived class' : assignment operator was implicitly defined as deleted because a base class assignment operator is inaccessible or deleted
@@ -51,7 +52,7 @@ function(set_target_options _target)
             
             $<$<CONFIG:Debug>:          /MTd /ZI /D_DEBUG>
             $<$<CONFIG:Release>:        /MT /DNDEBUG>
-            $<$<CONFIG:RelWithDebInfo>: /MTd /ZI /D_DEBUG>
+            $<$<CONFIG:RelWithDebInfo>: /MT /DNDEBUG>
             $<$<CONFIG:MinSizeRel>:     /MT /DNDEBUG>
         )
         
@@ -61,7 +62,6 @@ function(set_target_options _target)
             "/ignore:4098" # defaultlib 'library' conflicts with use of other libs; use /NODEFAULTLIB:library
             "/ignore:4099" # PDB 'filename' was not found with 'object/library' or at 'path'; linking object as if no debug info
         )
-
         
     endif()
         
