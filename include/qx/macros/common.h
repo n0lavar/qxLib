@@ -34,13 +34,6 @@
 #define _QX_JOIN(symbol1, symbol2)    _QX_DO_JOIN(symbol1, symbol2)
 #define _QX_DO_JOIN(symbol1, symbol2) symbol1##symbol2
 
-
-#if QX_WIN
-    #define QX_PATH_SEPARATOR '\\'
-#else
-    #define QX_PATH_SEPARATOR '/'
-#endif
-
 namespace qx::detail
 {
 
@@ -49,7 +42,7 @@ constexpr const char* last_slash(const char* str)
     const char* pszLastSlash = str;
     while (str && *str != '\0')
     {
-        if (*str == QX_PATH_SEPARATOR)
+        if (*str == '\\' || *str == '/')
             pszLastSlash = str;
 
         str++;
