@@ -26,11 +26,11 @@ namespace qx
     @retval               - true if value was added
 **/
 template<class ContainerType, class ValueType>
-bool add_unique(ContainerType& container, const ValueType& value)
+bool add_unique(ContainerType& container, ValueType&& value)
 {
     if (!contains(container, value))
     {
-        container.insert(container.end(), value);
+        container.insert(container.end(), std::forward<ValueType>(value));
         return true;
     }
     else
@@ -50,7 +50,7 @@ bool add_unique(ContainerType& container, const ValueType& value)
     @retval               - true if value was added
 **/
 template<class ContainerType, class ValueType, class PredicateType>
-bool add_unique_if(ContainerType& container, const ValueType& value, const PredicateType& predicate)
+bool add_unique_if(ContainerType& container, ValueType&& value, const PredicateType& predicate)
 {
     for (const auto& element : container)
     {
@@ -65,7 +65,8 @@ bool add_unique_if(ContainerType& container, const ValueType& value, const Predi
                 return false;
         }
     }
-    container.insert(container.end(), value);
+
+    container.insert(container.end(), std::forward<ValueType>(value));
     return true;
 }
 
