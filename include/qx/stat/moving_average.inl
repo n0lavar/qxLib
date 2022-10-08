@@ -57,13 +57,12 @@ template<typename T>
 inline T moving_average<T>::update(T value)
 {
     m_Entries.pop_front();
-
-    T fSumm = T(0.f);
-    for (size_t i = 0; i < m_Entries.size(); ++i)
-        fSumm += m_Entries[i] * m_Weights[i];
-
-    m_Value = fSumm / static_cast<T>(m_Entries.size());
     m_Entries.push_back(value);
+
+    m_Value = T(0.f);
+    for (size_t i = 0; i < m_Entries.size(); ++i)
+        m_Value += m_Entries[i] * m_Weights[i];
+
     return m_Value;
 }
 

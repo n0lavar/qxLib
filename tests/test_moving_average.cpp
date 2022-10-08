@@ -15,6 +15,7 @@
 #include <array>
 #include <iomanip>
 #include <numeric>
+#include <random>
 
 template<typename T, size_t ENTRIES, size_t START_VALUE, std::vector<T> FUNC(size_t nEntries)>
 class MovingAverageTraits
