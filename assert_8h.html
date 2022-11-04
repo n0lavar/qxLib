@@ -113,6 +113,9 @@ Macros</h2></td></tr>
 <tr class="memitem:a65b5a4597f28172e66d51dd0b5934012"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="assert_8h.html#a65b5a4597f28172e66d51dd0b5934012">QX_EXPECT_RETURN</a>(condition, ...)</td></tr>
 <tr class="memdesc:a65b5a4597f28172e66d51dd0b5934012"><td class="mdescLeft">&#160;</td><td class="mdescRight">Verifies that condition is true and return if false.  <a href="assert_8h.html#a65b5a4597f28172e66d51dd0b5934012">More...</a><br /></td></tr>
 <tr class="separator:a65b5a4597f28172e66d51dd0b5934012"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a77916557304c7d55fb5d0663dbb2cb33"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="assert_8h.html#a77916557304c7d55fb5d0663dbb2cb33">QX_EXPECT_CO_RETURN</a>(condition, ...)</td></tr>
+<tr class="memdesc:a77916557304c7d55fb5d0663dbb2cb33"><td class="mdescLeft">&#160;</td><td class="mdescRight">Verifies that condition is true and co_return if false.  <a href="assert_8h.html#a77916557304c7d55fb5d0663dbb2cb33">More...</a><br /></td></tr>
+<tr class="separator:a77916557304c7d55fb5d0663dbb2cb33"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3430dce88ee22fb2bded329d6bb5d241"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="assert_8h.html#a3430dce88ee22fb2bded329d6bb5d241">QX_EXPECT_CONTINUE</a>(condition)&#160;&#160;&#160;    _QX_ASSERT_CONTINUE(QX_EXPECT_BEFORE_DEBUG_BREAK, QX_EXPECT_DEBUG_BREAK, QX_EXPECT_AFTER_DEBUG_BREAK, condition, &quot;&quot;)</td></tr>
 <tr class="memdesc:a3430dce88ee22fb2bded329d6bb5d241"><td class="mdescLeft">&#160;</td><td class="mdescRight">Verifies that condition is true and continue loop if false.  <a href="assert_8h.html#a3430dce88ee22fb2bded329d6bb5d241">More...</a><br /></td></tr>
 <tr class="separator:a3430dce88ee22fb2bded329d6bb5d241"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -339,7 +342,7 @@ Macros</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="assert_8h_source.html#l00269">269</a> of file <a class="el" href="assert_8h_source.html">assert.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="assert_8h_source.html#l00285">285</a> of file <a class="el" href="assert_8h_source.html">assert.h</a>.</p>
 
 </div>
 </div>
@@ -392,7 +395,53 @@ Macros</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="assert_8h_source.html#l00279">279</a> of file <a class="el" href="assert_8h_source.html">assert.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="assert_8h_source.html#l00295">295</a> of file <a class="el" href="assert_8h_source.html">assert.h</a>.</p>
+
+</div>
+</div>
+<a id="a77916557304c7d55fb5d0663dbb2cb33"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a77916557304c7d55fb5d0663dbb2cb33">&#9670;&nbsp;</a></span>QX_EXPECT_CO_RETURN</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define QX_EXPECT_CO_RETURN</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">condition, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>...</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Value:</b><div class="fragment"><div class="line">    _QX_ASSERT_RETURN(                      \</div>
+<div class="line">        QX_EXPECT_BEFORE_DEBUG_BREAK,       \</div>
+<div class="line">        QX_EXPECT_DEBUG_BREAK,              \</div>
+<div class="line">        QX_EXPECT_AFTER_DEBUG_BREAK,        \</div>
+<div class="line">        co_return,                          \</div>
+<div class="line">        condition,                          \</div>
+<div class="line">        ##__VA_ARGS__)</div>
+</div><!-- fragment -->
+<p>Verifies that condition is true and co_return if false. </p>
+<p>EXPECT macros generate nonfatal failures and allow to continue running </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">condition</td><td>- condition to check </td></tr>
+    <tr><td class="paramname">...</td><td>- return value if condition is false </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="assert_8h_source.html#l00247">247</a> of file <a class="el" href="assert_8h_source.html">assert.h</a>.</p>
 
 </div>
 </div>
@@ -420,7 +469,7 @@ Macros</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="assert_8h_source.html#l00245">245</a> of file <a class="el" href="assert_8h_source.html">assert.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="assert_8h_source.html#l00261">261</a> of file <a class="el" href="assert_8h_source.html">assert.h</a>.</p>
 
 </div>
 </div>
@@ -473,7 +522,7 @@ Macros</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="assert_8h_source.html#l00255">255</a> of file <a class="el" href="assert_8h_source.html">assert.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="assert_8h_source.html#l00271">271</a> of file <a class="el" href="assert_8h_source.html">assert.h</a>.</p>
 
 </div>
 </div>
@@ -631,6 +680,7 @@ Macros</h2></td></tr>
 <div class="line">        QX_EXPECT_BEFORE_DEBUG_BREAK,    \</div>
 <div class="line">        QX_EXPECT_DEBUG_BREAK,           \</div>
 <div class="line">        QX_EXPECT_AFTER_DEBUG_BREAK,     \</div>
+<div class="line">        <span class="keywordflow">return</span>,                          \</div>
 <div class="line">        condition,                       \</div>
 <div class="line">        ##__VA_ARGS__)</div>
 </div><!-- fragment -->

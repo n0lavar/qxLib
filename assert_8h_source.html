@@ -125,25 +125,25 @@ $(function() {
 <div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;<span class="preprocessor">#define _QX_ASSERT_NO_ENTRY(before_debug_break, debug_break, after_debug_break, format, ...) \</span></div>
 <div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="preprocessor">    _QX_ASSERT_MSG(before_debug_break, debug_break, after_debug_break, false, format, ##__VA_ARGS__)</span></div>
 <div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160; </div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;<span class="preprocessor">#define _QX_ASSERT_RETURN(before_debug_break, debug_break, after_debug_break, condition, ...)         \</span></div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;<span class="preprocessor">    if constexpr (false)                                                                              \</span></div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;<span class="preprocessor">        ;                                                                                             \</span></div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;<span class="preprocessor">    else if (!_QX_ASSERT(before_debug_break, debug_break, after_debug_break, condition)) [[unlikely]] \</span></div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;<span class="preprocessor">    return __VA_ARGS__</span></div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;<span class="preprocessor">#define _QX_ASSERT_RETURN(before_debug_break, debug_break, after_debug_break, return_keyword, condition, ...) \</span></div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;<span class="preprocessor">    if (!_QX_ASSERT(before_debug_break, debug_break, after_debug_break, condition)) [[unlikely]]              \</span></div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;<span class="preprocessor">        return_keyword __VA_ARGS__;                                                                           \</span></div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;<span class="preprocessor">    else                                                                                                      \</span></div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;<span class="preprocessor">        QX_EMPTY_MACRO</span></div>
 <div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160; </div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;<span class="preprocessor">#define _QX_ASSERT_CONTINUE(before_debug_break, debug_break, after_debug_break, condition, format, ...)             \</span></div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;<span class="preprocessor">    if constexpr (false)                                                                                            \</span></div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;<span class="preprocessor">        ;                                                                                                           \</span></div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;<span class="preprocessor">    else if (!_QX_ASSERT_MSG(before_debug_break, debug_break, after_debug_break, condition, format, ##__VA_ARGS__)) \</span></div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;<span class="preprocessor">        [[unlikely]]                                                                                                \</span></div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;<span class="preprocessor">    continue</span></div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;<span class="preprocessor">#define _QX_ASSERT_CONTINUE(before_debug_break, debug_break, after_debug_break, condition, format, ...)        \</span></div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;<span class="preprocessor">    if (!_QX_ASSERT_MSG(before_debug_break, debug_break, after_debug_break, condition, format, ##__VA_ARGS__)) \</span></div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;<span class="preprocessor">        [[unlikely]]                                                                                           \</span></div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;<span class="preprocessor">        continue;                                                                                              \</span></div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;<span class="preprocessor">    else                                                                                                       \</span></div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;<span class="preprocessor">        QX_EMPTY_MACRO</span></div>
 <div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160; </div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;<span class="preprocessor">#define _QX_ASSERT_BREAK(before_debug_break, debug_break, after_debug_break, condition, format, ...)                \</span></div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;<span class="preprocessor">    if constexpr (false)                                                                                            \</span></div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;<span class="preprocessor">        ;                                                                                                           \</span></div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;<span class="preprocessor">    else if (!_QX_ASSERT_MSG(before_debug_break, debug_break, after_debug_break, condition, format, ##__VA_ARGS__)) \</span></div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;<span class="preprocessor">        [[unlikely]]                                                                                                \</span></div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;<span class="preprocessor">    break</span></div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;<span class="preprocessor">#define _QX_ASSERT_BREAK(before_debug_break, debug_break, after_debug_break, condition, format, ...)           \</span></div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;<span class="preprocessor">    if (!_QX_ASSERT_MSG(before_debug_break, debug_break, after_debug_break, condition, format, ##__VA_ARGS__)) \</span></div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;<span class="preprocessor">        [[unlikely]]                                                                                           \</span></div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;<span class="preprocessor">        break;                                                                                                 \</span></div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;<span class="preprocessor">    else                                                                                                       \</span></div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;<span class="preprocessor">        QX_EMPTY_MACRO</span></div>
 <div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160; </div>
 <div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;<span class="preprocessor">#ifndef QX_EXPECT_BEFORE_DEBUG_BREAK</span></div>
 <div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;<span class="preprocessor">    #define QX_EXPECT_BEFORE_DEBUG_BREAK(condition, format, ...) \</span></div>
@@ -305,56 +305,72 @@ $(function() {
 <div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160;<span class="preprocessor">        QX_EXPECT_BEFORE_DEBUG_BREAK,    \</span></div>
 <div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160;<span class="preprocessor">        QX_EXPECT_DEBUG_BREAK,           \</span></div>
 <div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160;<span class="preprocessor">        QX_EXPECT_AFTER_DEBUG_BREAK,     \</span></div>
-<div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;<span class="preprocessor">        condition,                       \</span></div>
-<div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160;<span class="preprocessor">        ##__VA_ARGS__)</span></div>
-<div class="line"><a name="l00239"></a><span class="lineno">  239</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160;<span class="comment">/**</span></div>
-<div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160;<span class="comment">    @brief   Verifies that condition is true and continue loop if false</span></div>
-<div class="line"><a name="l00242"></a><span class="lineno">  242</span>&#160;<span class="comment">    @details EXPECT macros generate nonfatal failures and allow to continue running</span></div>
-<div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160;<span class="comment">    @param   condition - condition to check</span></div>
-<div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160;<span class="comment">**/</span></div>
-<div class="line"><a name="l00245"></a><span class="lineno"><a class="line" href="assert_8h.html#a3430dce88ee22fb2bded329d6bb5d241">  245</a></span>&#160;<span class="preprocessor">#define QX_EXPECT_CONTINUE(condition) \</span></div>
-<div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160;<span class="preprocessor">    _QX_ASSERT_CONTINUE(QX_EXPECT_BEFORE_DEBUG_BREAK, QX_EXPECT_DEBUG_BREAK, QX_EXPECT_AFTER_DEBUG_BREAK, condition, &quot;&quot;</span>)</div>
-<div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160;<span class="comment">/**</span></div>
-<div class="line"><a name="l00249"></a><span class="lineno">  249</span>&#160;<span class="comment">    @brief   Verifies that condition is true and continue loop if false</span></div>
-<div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160;<span class="comment">    @details EXPECT macros generate nonfatal failures and allow to continue running</span></div>
-<div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160;<span class="comment">    @param   condition - condition to check</span></div>
-<div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160;<span class="comment">    @param   format    - message format</span></div>
-<div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160;<span class="comment">    @param   ...       - message arguments</span></div>
-<div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160;<span class="comment">**/</span></div>
-<div class="line"><a name="l00255"></a><span class="lineno"><a class="line" href="assert_8h.html#a1fa682838577c7093c5034cb3ffb492d">  255</a></span>&#160;<span class="preprocessor">#define QX_EXPECT_CONTINUE_MSG(condition, format, ...) \</span></div>
-<div class="line"><a name="l00256"></a><span class="lineno">  256</span>&#160;<span class="preprocessor">    _QX_ASSERT_CONTINUE(                               \</span></div>
-<div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160;<span class="preprocessor">        QX_EXPECT_BEFORE_DEBUG_BREAK,                  \</span></div>
-<div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160;<span class="preprocessor">        QX_EXPECT_DEBUG_BREAK,                         \</span></div>
-<div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160;<span class="preprocessor">        QX_EXPECT_AFTER_DEBUG_BREAK,                   \</span></div>
-<div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160;<span class="preprocessor">        condition,                                     \</span></div>
-<div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160;<span class="preprocessor">        format,                                        \</span></div>
-<div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160;<span class="preprocessor">        ##__VA_ARGS__)</span></div>
+<div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;<span class="preprocessor">        return,                          \</span></div>
+<div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160;<span class="preprocessor">        condition,                       \</span></div>
+<div class="line"><a name="l00239"></a><span class="lineno">  239</span>&#160;<span class="preprocessor">        ##__VA_ARGS__)</span></div>
+<div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160;<span class="comment">/**</span></div>
+<div class="line"><a name="l00242"></a><span class="lineno">  242</span>&#160;<span class="comment">    @brief   Verifies that condition is true and co_return if false</span></div>
+<div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160;<span class="comment">    @details EXPECT macros generate nonfatal failures and allow to continue running</span></div>
+<div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160;<span class="comment">    @param   condition - condition to check</span></div>
+<div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160;<span class="comment">    @param   ...       - return value if condition is false</span></div>
+<div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160;<span class="comment">**/</span></div>
+<div class="line"><a name="l00247"></a><span class="lineno"><a class="line" href="assert_8h.html#a77916557304c7d55fb5d0663dbb2cb33">  247</a></span>&#160;<span class="preprocessor">#define QX_EXPECT_CO_RETURN(condition, ...) \</span></div>
+<div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160;<span class="preprocessor">    _QX_ASSERT_RETURN(                      \</span></div>
+<div class="line"><a name="l00249"></a><span class="lineno">  249</span>&#160;<span class="preprocessor">        QX_EXPECT_BEFORE_DEBUG_BREAK,       \</span></div>
+<div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160;<span class="preprocessor">        QX_EXPECT_DEBUG_BREAK,              \</span></div>
+<div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160;<span class="preprocessor">        QX_EXPECT_AFTER_DEBUG_BREAK,        \</span></div>
+<div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160;<span class="preprocessor">        co_return,                          \</span></div>
+<div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160;<span class="preprocessor">        condition,                          \</span></div>
+<div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160;<span class="preprocessor">        ##__VA_ARGS__)</span></div>
+<div class="line"><a name="l00255"></a><span class="lineno">  255</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00256"></a><span class="lineno">  256</span>&#160;<span class="comment">/**</span></div>
+<div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160;<span class="comment">    @brief   Verifies that condition is true and continue loop if false</span></div>
+<div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160;<span class="comment">    @details EXPECT macros generate nonfatal failures and allow to continue running</span></div>
+<div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160;<span class="comment">    @param   condition - condition to check</span></div>
+<div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160;<span class="comment">**/</span></div>
+<div class="line"><a name="l00261"></a><span class="lineno"><a class="line" href="assert_8h.html#a3430dce88ee22fb2bded329d6bb5d241">  261</a></span>&#160;<span class="preprocessor">#define QX_EXPECT_CONTINUE(condition) \</span></div>
+<div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160;<span class="preprocessor">    _QX_ASSERT_CONTINUE(QX_EXPECT_BEFORE_DEBUG_BREAK, QX_EXPECT_DEBUG_BREAK, QX_EXPECT_AFTER_DEBUG_BREAK, condition, &quot;&quot;</span>)</div>
 <div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160;<span class="comment"></span> </div>
 <div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160;<span class="comment">/**</span></div>
-<div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160;<span class="comment">    @brief   Verifies that condition is true and break loop if false</span></div>
+<div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160;<span class="comment">    @brief   Verifies that condition is true and continue loop if false</span></div>
 <div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160;<span class="comment">    @details EXPECT macros generate nonfatal failures and allow to continue running</span></div>
 <div class="line"><a name="l00267"></a><span class="lineno">  267</span>&#160;<span class="comment">    @param   condition - condition to check</span></div>
-<div class="line"><a name="l00268"></a><span class="lineno">  268</span>&#160;<span class="comment">**/</span></div>
-<div class="line"><a name="l00269"></a><span class="lineno"><a class="line" href="assert_8h.html#aead3120fb7ad42181b0acdf2ffe323c2">  269</a></span>&#160;<span class="preprocessor">#define QX_EXPECT_BREAK(condition) \</span></div>
-<div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160;<span class="preprocessor">    _QX_ASSERT_BREAK(QX_EXPECT_BEFORE_DEBUG_BREAK, QX_EXPECT_DEBUG_BREAK, QX_EXPECT_AFTER_DEBUG_BREAK, condition, &quot;&quot;</span>)</div>
-<div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160;<span class="comment">/**</span></div>
-<div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160;<span class="comment">    @brief   Verifies that condition is true and break loop if false</span></div>
-<div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160;<span class="comment">    @details EXPECT macros generate nonfatal failures and allow to continue running</span></div>
-<div class="line"><a name="l00275"></a><span class="lineno">  275</span>&#160;<span class="comment">    @param   condition - condition to check</span></div>
-<div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160;<span class="comment">    @param   format    - message format</span></div>
-<div class="line"><a name="l00277"></a><span class="lineno">  277</span>&#160;<span class="comment">    @param   ...       - message arguments</span></div>
-<div class="line"><a name="l00278"></a><span class="lineno">  278</span>&#160;<span class="comment">**/</span></div>
-<div class="line"><a name="l00279"></a><span class="lineno"><a class="line" href="assert_8h.html#ad4bd34f6be7a31b80a5ac6edcedd36f2">  279</a></span>&#160;<span class="preprocessor">#define QX_EXPECT_BREAK_MSG(condition, format, ...) \</span></div>
-<div class="line"><a name="l00280"></a><span class="lineno">  280</span>&#160;<span class="preprocessor">    _QX_ASSERT_BREAK(                               \</span></div>
-<div class="line"><a name="l00281"></a><span class="lineno">  281</span>&#160;<span class="preprocessor">        QX_EXPECT_BEFORE_DEBUG_BREAK,               \</span></div>
-<div class="line"><a name="l00282"></a><span class="lineno">  282</span>&#160;<span class="preprocessor">        QX_EXPECT_DEBUG_BREAK,                      \</span></div>
-<div class="line"><a name="l00283"></a><span class="lineno">  283</span>&#160;<span class="preprocessor">        QX_EXPECT_AFTER_DEBUG_BREAK,                \</span></div>
-<div class="line"><a name="l00284"></a><span class="lineno">  284</span>&#160;<span class="preprocessor">        condition,                                  \</span></div>
-<div class="line"><a name="l00285"></a><span class="lineno">  285</span>&#160;<span class="preprocessor">        format,                                     \</span></div>
-<div class="line"><a name="l00286"></a><span class="lineno">  286</span>&#160;<span class="preprocessor">        ##__VA_ARGS__)</span></div>
+<div class="line"><a name="l00268"></a><span class="lineno">  268</span>&#160;<span class="comment">    @param   format    - message format</span></div>
+<div class="line"><a name="l00269"></a><span class="lineno">  269</span>&#160;<span class="comment">    @param   ...       - message arguments</span></div>
+<div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160;<span class="comment">**/</span></div>
+<div class="line"><a name="l00271"></a><span class="lineno"><a class="line" href="assert_8h.html#a1fa682838577c7093c5034cb3ffb492d">  271</a></span>&#160;<span class="preprocessor">#define QX_EXPECT_CONTINUE_MSG(condition, format, ...) \</span></div>
+<div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160;<span class="preprocessor">    _QX_ASSERT_CONTINUE(                               \</span></div>
+<div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160;<span class="preprocessor">        QX_EXPECT_BEFORE_DEBUG_BREAK,                  \</span></div>
+<div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160;<span class="preprocessor">        QX_EXPECT_DEBUG_BREAK,                         \</span></div>
+<div class="line"><a name="l00275"></a><span class="lineno">  275</span>&#160;<span class="preprocessor">        QX_EXPECT_AFTER_DEBUG_BREAK,                   \</span></div>
+<div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160;<span class="preprocessor">        condition,                                     \</span></div>
+<div class="line"><a name="l00277"></a><span class="lineno">  277</span>&#160;<span class="preprocessor">        format,                                        \</span></div>
+<div class="line"><a name="l00278"></a><span class="lineno">  278</span>&#160;<span class="preprocessor">        ##__VA_ARGS__)</span></div>
+<div class="line"><a name="l00279"></a><span class="lineno">  279</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00280"></a><span class="lineno">  280</span>&#160;<span class="comment">/**</span></div>
+<div class="line"><a name="l00281"></a><span class="lineno">  281</span>&#160;<span class="comment">    @brief   Verifies that condition is true and break loop if false</span></div>
+<div class="line"><a name="l00282"></a><span class="lineno">  282</span>&#160;<span class="comment">    @details EXPECT macros generate nonfatal failures and allow to continue running</span></div>
+<div class="line"><a name="l00283"></a><span class="lineno">  283</span>&#160;<span class="comment">    @param   condition - condition to check</span></div>
+<div class="line"><a name="l00284"></a><span class="lineno">  284</span>&#160;<span class="comment">**/</span></div>
+<div class="line"><a name="l00285"></a><span class="lineno"><a class="line" href="assert_8h.html#aead3120fb7ad42181b0acdf2ffe323c2">  285</a></span>&#160;<span class="preprocessor">#define QX_EXPECT_BREAK(condition) \</span></div>
+<div class="line"><a name="l00286"></a><span class="lineno">  286</span>&#160;<span class="preprocessor">    _QX_ASSERT_BREAK(QX_EXPECT_BEFORE_DEBUG_BREAK, QX_EXPECT_DEBUG_BREAK, QX_EXPECT_AFTER_DEBUG_BREAK, condition, &quot;&quot;</span>)</div>
+<div class="line"><a name="l00287"></a><span class="lineno">  287</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00288"></a><span class="lineno">  288</span>&#160;<span class="comment">/**</span></div>
+<div class="line"><a name="l00289"></a><span class="lineno">  289</span>&#160;<span class="comment">    @brief   Verifies that condition is true and break loop if false</span></div>
+<div class="line"><a name="l00290"></a><span class="lineno">  290</span>&#160;<span class="comment">    @details EXPECT macros generate nonfatal failures and allow to continue running</span></div>
+<div class="line"><a name="l00291"></a><span class="lineno">  291</span>&#160;<span class="comment">    @param   condition - condition to check</span></div>
+<div class="line"><a name="l00292"></a><span class="lineno">  292</span>&#160;<span class="comment">    @param   format    - message format</span></div>
+<div class="line"><a name="l00293"></a><span class="lineno">  293</span>&#160;<span class="comment">    @param   ...       - message arguments</span></div>
+<div class="line"><a name="l00294"></a><span class="lineno">  294</span>&#160;<span class="comment">**/</span></div>
+<div class="line"><a name="l00295"></a><span class="lineno"><a class="line" href="assert_8h.html#ad4bd34f6be7a31b80a5ac6edcedd36f2">  295</a></span>&#160;<span class="preprocessor">#define QX_EXPECT_BREAK_MSG(condition, format, ...) \</span></div>
+<div class="line"><a name="l00296"></a><span class="lineno">  296</span>&#160;<span class="preprocessor">    _QX_ASSERT_BREAK(                               \</span></div>
+<div class="line"><a name="l00297"></a><span class="lineno">  297</span>&#160;<span class="preprocessor">        QX_EXPECT_BEFORE_DEBUG_BREAK,               \</span></div>
+<div class="line"><a name="l00298"></a><span class="lineno">  298</span>&#160;<span class="preprocessor">        QX_EXPECT_DEBUG_BREAK,                      \</span></div>
+<div class="line"><a name="l00299"></a><span class="lineno">  299</span>&#160;<span class="preprocessor">        QX_EXPECT_AFTER_DEBUG_BREAK,                \</span></div>
+<div class="line"><a name="l00300"></a><span class="lineno">  300</span>&#160;<span class="preprocessor">        condition,                                  \</span></div>
+<div class="line"><a name="l00301"></a><span class="lineno">  301</span>&#160;<span class="preprocessor">        format,                                     \</span></div>
+<div class="line"><a name="l00302"></a><span class="lineno">  302</span>&#160;<span class="preprocessor">        ##__VA_ARGS__)</span></div>
 <div class="ttc" id="alogger_8h_html"><div class="ttname"><a href="logger_8h.html">logger.h</a></div><div class="ttdoc">Contains qx::logger class.</div></div>
 <div class="ttc" id="amacros_2common_8h_html"><div class="ttname"><a href="macros_2common_8h.html">common.h</a></div><div class="ttdoc">Useful macros.</div></div>
 </div><!-- fragment --></div><!-- contents -->
