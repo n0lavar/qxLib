@@ -1,7 +1,7 @@
 /**
 
     @file      static_assert.h
-    @brief     
+    @brief     Static assert macros
     @details   ~
     @author    Khrapov
     @date      7.08.2022
