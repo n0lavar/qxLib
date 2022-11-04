@@ -54,25 +54,25 @@
 #define _QX_ASSERT_NO_ENTRY(before_debug_break, debug_break, after_debug_break, format, ...) \
     _QX_ASSERT_MSG(before_debug_break, debug_break, after_debug_break, false, format, ##__VA_ARGS__)
 
-#define _QX_ASSERT_RETURN(before_debug_break, debug_break, after_debug_break, condition, ...)         \
-    if constexpr (false)                                                                              \
-        ;                                                                                             \
-    else if (!_QX_ASSERT(before_debug_break, debug_break, after_debug_break, condition)) [[unlikely]] \
-    return __VA_ARGS__
+#define _QX_ASSERT_RETURN(before_debug_break, debug_break, after_debug_break, return_keyword, condition, ...) \
+    if (!_QX_ASSERT(before_debug_break, debug_break, after_debug_break, condition)) [[unlikely]]              \
+        return_keyword __VA_ARGS__;                                                                           \
+    else                                                                                                      \
+        QX_EMPTY_MACRO
 
-#define _QX_ASSERT_CONTINUE(before_debug_break, debug_break, after_debug_break, condition, format, ...)             \
-    if constexpr (false)                                                                                            \
-        ;                                                                                                           \
-    else if (!_QX_ASSERT_MSG(before_debug_break, debug_break, after_debug_break, condition, format, ##__VA_ARGS__)) \
-        [[unlikely]]                                                                                                \
-    continue
+#define _QX_ASSERT_CONTINUE(before_debug_break, debug_break, after_debug_break, condition, format, ...)        \
+    if (!_QX_ASSERT_MSG(before_debug_break, debug_break, after_debug_break, condition, format, ##__VA_ARGS__)) \
+        [[unlikely]]                                                                                           \
+        continue;                                                                                              \
+    else                                                                                                       \
+        QX_EMPTY_MACRO
 
-#define _QX_ASSERT_BREAK(before_debug_break, debug_break, after_debug_break, condition, format, ...)                \
-    if constexpr (false)                                                                                            \
-        ;                                                                                                           \
-    else if (!_QX_ASSERT_MSG(before_debug_break, debug_break, after_debug_break, condition, format, ##__VA_ARGS__)) \
-        [[unlikely]]                                                                                                \
-    break
+#define _QX_ASSERT_BREAK(before_debug_break, debug_break, after_debug_break, condition, format, ...)           \
+    if (!_QX_ASSERT_MSG(before_debug_break, debug_break, after_debug_break, condition, format, ##__VA_ARGS__)) \
+        [[unlikely]]                                                                                           \
+        break;                                                                                                 \
+    else                                                                                                       \
+        QX_EMPTY_MACRO
 
 #ifndef QX_EXPECT_BEFORE_DEBUG_BREAK
     #define QX_EXPECT_BEFORE_DEBUG_BREAK(condition, format, ...) \
@@ -234,7 +234,23 @@
         QX_EXPECT_BEFORE_DEBUG_BREAK,    \
         QX_EXPECT_DEBUG_BREAK,           \
         QX_EXPECT_AFTER_DEBUG_BREAK,     \
+        return,                          \
         condition,                       \
+        ##__VA_ARGS__)
+
+/**
+    @brief   Verifies that condition is true and co_return if false
+    @details EXPECT macros generate nonfatal failures and allow to continue running
+    @param   condition - condition to check
+    @param   ...       - return value if condition is false
+**/
+#define QX_EXPECT_CO_RETURN(condition, ...) \
+    _QX_ASSERT_RETURN(                      \
+        QX_EXPECT_BEFORE_DEBUG_BREAK,       \
+        QX_EXPECT_DEBUG_BREAK,              \
+        QX_EXPECT_AFTER_DEBUG_BREAK,        \
+        co_return,                          \
+        condition,                          \
         ##__VA_ARGS__)
 
 /**
