@@ -110,9 +110,18 @@ template<class Traits>
 template<class FwdIt>
 inline void basic_string<Traits>::assign(FwdIt itFirst, FwdIt itLast) noexcept
 {
-    clear();
-    for (FwdIt it = itFirst; it != itLast; ++it)
-        push_back(*it);
+    if (_resize(std::distance(itFirst, itLast)))
+    {
+        FwdIt    itOther = itFirst;
+        iterator itThis  = begin();
+
+        while (itOther != itLast)
+        {
+            *itThis = *itOther;
+            ++itThis;
+            ++itOther;
+        }
+    }
 }
 
 template<class Traits>
