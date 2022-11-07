@@ -26,10 +26,39 @@ inline cout_logger_stream::cout_logger_stream(bool bUseColors, bool bDisableStdi
         // Tied streams ensure that one stream is flushed automatically
         // before each I/O operation on the other stream
         std::cin.tie(nullptr);
+        std::wcin.tie(nullptr);
     }
 }
 
-inline void cout_logger_stream::process_output(std::string_view svMessage, const log_unit& logUnit, log_level eLogLevel)
+inline void cout_logger_stream::do_log(std::string_view svMessage, const log_unit& logUnit, log_level eLogLevel)
+{
+    log_cout(svMessage, logUnit, eLogLevel);
+}
+
+inline void cout_logger_stream::do_log(std::wstring_view svMessage, const log_unit& logUnit, log_level eLogLevel)
+{
+    log_cout(svMessage, logUnit, eLogLevel);
+}
+
+inline void cout_logger_stream::set_using_colors(bool bUsingColors) noexcept
+{
+    m_bUsingColors = bUsingColors;
+}
+
+template<class char_type>
+inline std::basic_ostream<char_type>& cout_logger_stream::get_cout() noexcept
+{
+    if constexpr (std::is_same_v<char_type, char>)
+        return std::cout;
+    else
+        return std::wcout;
+}
+
+template<class char_type>
+inline void cout_logger_stream::log_cout(
+    std::basic_string_view<char_type> svMessage,
+    const log_unit&                   logUnit,
+    log_level                         eLogLevel)
 {
     if (m_bUsingColors)
     {
@@ -50,17 +79,13 @@ inline void cout_logger_stream::process_output(std::string_view svMessage, const
         }
 
         auto_terminal_color atc(svColor);
-        std::cout << svMessage;
+        get_cout<char_type>() << svMessage;
     }
     else
     {
-        std::cout << svMessage;
+        get_cout<char_type>() << svMessage;
     }
 }
 
-inline void cout_logger_stream::set_using_colors(bool bUsingColors) noexcept
-{
-    m_bUsingColors = bUsingColors;
-}
 
 } // namespace qx

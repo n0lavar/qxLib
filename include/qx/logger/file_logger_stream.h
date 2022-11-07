@@ -57,7 +57,7 @@ public:
     /**
         @brief file_logger_stream object destructor
     **/
-    virtual ~file_logger_stream();
+    virtual ~file_logger_stream() override;
 
     /**
         @brief Output to file
@@ -65,7 +65,15 @@ public:
         @param logUnit   - log unit info
         @param eLogLevel - this message log level
     **/
-    virtual void process_output(std::string_view svMessage, const log_unit& logUnit, log_level eLogLevel) override;
+    virtual void do_log(std::string_view svMessage, const log_unit& logUnit, log_level eLogLevel) override;
+
+    /**
+        @brief Output to file
+        @param svMessage - message string 
+        @param logUnit   - log unit info
+        @param eLogLevel - this message log level
+    **/
+    virtual void do_log(std::wstring_view svMessage, const log_unit& logUnit, log_level eLogLevel) override;
 
     /**
         @brief Set logs folder
@@ -85,6 +93,9 @@ public:
         log_file_policy  eLogPolicy = log_file_policy::append);
 
 private:
+    template<class char_type>
+    void log_file(std::basic_string_view<char_type> svMessage, const log_unit& logUnit, log_level eLogLevel);
+
     /**
         @brief Fill string with file folder path
         @param eLogFilePolicy - file log policy

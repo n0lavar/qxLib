@@ -10,13 +10,14 @@
 namespace qx
 {
 
-inline void logger::output(
-    log_level   eLogLevel,
-    const char* pszFormat,
-    const char* pszTag,
-    const char* pszFile,
-    const char* pszFunction,
-    int         nLine,
+template<class char_type>
+inline void logger::log(
+    log_level        eLogLevel,
+    const char_type* pszFormat,
+    const char*      pszTag,
+    const char*      pszFile,
+    const char*      pszFunction,
+    int              nLine,
     ...)
 {
     if (eLogLevel == log_level::none)
@@ -26,9 +27,7 @@ inline void logger::output(
     va_start(args, nLine);
 
     for (const auto& stream : m_Streams)
-    {
-        stream->output(eLogLevel, pszFormat, pszTag, pszFile, pszFunction, nLine, args);
-    }
+        stream->log(eLogLevel, pszFormat, pszTag, pszFile, pszFunction, nLine, args);
 
     va_end(args);
 }

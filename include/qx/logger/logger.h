@@ -24,7 +24,7 @@
     @param ...            - additional args for formatting
 **/
 #define QX_LOG_COMMON(loggerInstance, pszTag, eLogLevel, format, ...) \
-    loggerInstance.output(eLogLevel, format, pszTag, QX_SHORT_FILE, __FUNCTION__, __LINE__, ##__VA_ARGS__)
+    loggerInstance.log(eLogLevel, format, pszTag, QX_SHORT_FILE, __FUNCTION__, __LINE__, ##__VA_ARGS__)
 
 /**
     @brief Log with tag
@@ -62,22 +62,24 @@ class logger
 {
 public:
     /**
-        @brief Process tracings
-        @param eLogLevel   - log level
-        @param pszFormat   - format string
-        @param pszTag      - logging tag
-        @param pszFile     - file name string
-        @param pszFunction - function name string
-        @param nLine       - code line number
-        @param ...         - additional args for format
+        @brief  Log to all streams
+        @tparam char_type   - char type, typically char or wchar_t
+        @param  eLogLevel   - log level
+        @param  pszFormat   - format string
+        @param  pszTag      - logging tag
+        @param  pszFile     - file name string
+        @param  pszFunction - function name string
+        @param  nLine       - code line number
+        @param  ...         - additional args for format
     **/
-    void output(
-        log_level   eLogLevel,
-        const char* pszFormat,
-        const char* pszTag,
-        const char* pszFile,
-        const char* pszFunction,
-        int         nLine,
+    template<class char_type>
+    void log(
+        log_level        eLogLevel,
+        const char_type* pszFormat,
+        const char*      pszTag,
+        const char*      pszFile,
+        const char*      pszFunction,
+        int              nLine,
         ...);
 
     /**
