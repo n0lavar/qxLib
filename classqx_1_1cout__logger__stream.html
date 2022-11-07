@@ -98,9 +98,12 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ad68dc8b7bc59769bb3bc97768f61de69"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1cout__logger__stream.html#ad68dc8b7bc59769bb3bc97768f61de69">cout_logger_stream</a> (bool bUseColors=true, bool bDisableStdioSync=true, bool bUntieCin=true)</td></tr>
 <tr class="memdesc:ad68dc8b7bc59769bb3bc97768f61de69"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classqx_1_1cout__logger__stream.html" title="Logger stream for std::cout output.">cout_logger_stream</a> object constructor  <a href="classqx_1_1cout__logger__stream.html#ad68dc8b7bc59769bb3bc97768f61de69">More...</a><br /></td></tr>
 <tr class="separator:ad68dc8b7bc59769bb3bc97768f61de69"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3f2ca78bab54c06da6d69200f4ae9ebe"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1cout__logger__stream.html#a3f2ca78bab54c06da6d69200f4ae9ebe">process_output</a> (std::string_view svMessage, const <a class="el" href="structqx_1_1log__unit.html">log_unit</a> &amp;logUnit, log_level eLogLevel) override</td></tr>
-<tr class="memdesc:a3f2ca78bab54c06da6d69200f4ae9ebe"><td class="mdescLeft">&#160;</td><td class="mdescRight">Output to std::cout.  <a href="classqx_1_1cout__logger__stream.html#a3f2ca78bab54c06da6d69200f4ae9ebe">More...</a><br /></td></tr>
-<tr class="separator:a3f2ca78bab54c06da6d69200f4ae9ebe"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8034503126665acca82083451dddadcd"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1cout__logger__stream.html#a8034503126665acca82083451dddadcd">do_log</a> (std::string_view svMessage, const <a class="el" href="structqx_1_1log__unit.html">log_unit</a> &amp;logUnit, log_level eLogLevel) override</td></tr>
+<tr class="memdesc:a8034503126665acca82083451dddadcd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Output to std::cout.  <a href="classqx_1_1cout__logger__stream.html#a8034503126665acca82083451dddadcd">More...</a><br /></td></tr>
+<tr class="separator:a8034503126665acca82083451dddadcd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aad79ab378e7120577a3708dba5c86efb"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1cout__logger__stream.html#aad79ab378e7120577a3708dba5c86efb">do_log</a> (std::wstring_view svMessage, const <a class="el" href="structqx_1_1log__unit.html">log_unit</a> &amp;logUnit, log_level eLogLevel) override</td></tr>
+<tr class="memdesc:aad79ab378e7120577a3708dba5c86efb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Output to std::wcout.  <a href="classqx_1_1cout__logger__stream.html#aad79ab378e7120577a3708dba5c86efb">More...</a><br /></td></tr>
+<tr class="separator:aad79ab378e7120577a3708dba5c86efb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aae380a8ac0a4667d36572fd75694305c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1cout__logger__stream.html#aae380a8ac0a4667d36572fd75694305c">set_using_colors</a> (bool bUsingColors) noexcept</td></tr>
 <tr class="memdesc:aae380a8ac0a4667d36572fd75694305c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set whether cout output should be colored.  <a href="classqx_1_1cout__logger__stream.html#aae380a8ac0a4667d36572fd75694305c">More...</a><br /></td></tr>
 <tr class="separator:aae380a8ac0a4667d36572fd75694305c"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -113,32 +116,29 @@ Public Member Functions</h2></td></tr>
 virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1base__logger__stream.html#a19753b3ad41e31765763b19d0b801bad">~base_logger_stream</a> ()=default</td></tr>
 <tr class="memdesc:a19753b3ad41e31765763b19d0b801bad inherit pub_methods_classqx_1_1base__logger__stream"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classqx_1_1base__logger__stream.html" title="Base class for logger streams.">base_logger_stream</a> object destructor <br /></td></tr>
 <tr class="separator:a19753b3ad41e31765763b19d0b801bad inherit pub_methods_classqx_1_1base__logger__stream"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab94336743dd82a360884bfaecaa4c6d0 inherit pub_methods_classqx_1_1base__logger__stream"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1base__logger__stream.html#ab94336743dd82a360884bfaecaa4c6d0">output</a> (log_level eLogLevel, const char *pszFormat, const char *pszTag, const char *pszFile, const char *pszFunction, int nLine, va_list args)</td></tr>
-<tr class="memdesc:ab94336743dd82a360884bfaecaa4c6d0 inherit pub_methods_classqx_1_1base__logger__stream"><td class="mdescLeft">&#160;</td><td class="mdescRight">Output to stream.  <a href="classqx_1_1base__logger__stream.html#ab94336743dd82a360884bfaecaa4c6d0">More...</a><br /></td></tr>
-<tr class="separator:ab94336743dd82a360884bfaecaa4c6d0 inherit pub_methods_classqx_1_1base__logger__stream"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9230e8cacdbc2d9929909a98c714ac08 inherit pub_methods_classqx_1_1base__logger__stream"><td class="memItemLeft" align="right" valign="top">std::optional&lt; <a class="el" href="structqx_1_1log__unit.html">log_unit</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1base__logger__stream.html#a9230e8cacdbc2d9929909a98c714ac08">get_unit_info</a> (const char *pszTag, const char *pszFile, const char *pszFunction) noexcept</td></tr>
-<tr class="memdesc:a9230e8cacdbc2d9929909a98c714ac08 inherit pub_methods_classqx_1_1base__logger__stream"><td class="mdescLeft">&#160;</td><td class="mdescRight">Try to find log unit info based on trace location info.  <a href="classqx_1_1base__logger__stream.html#a9230e8cacdbc2d9929909a98c714ac08">More...</a><br /></td></tr>
-<tr class="separator:a9230e8cacdbc2d9929909a98c714ac08 inherit pub_methods_classqx_1_1base__logger__stream"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5df3c8694335bdc9595da5529c10a6e9 inherit pub_methods_classqx_1_1base__logger__stream"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1base__logger__stream.html#a5df3c8694335bdc9595da5529c10a6e9">register_unit</a> (std::string_view svUnitName, const <a class="el" href="structqx_1_1log__unit__info.html">log_unit_info</a> &amp;unit)</td></tr>
-<tr class="memdesc:a5df3c8694335bdc9595da5529c10a6e9 inherit pub_methods_classqx_1_1base__logger__stream"><td class="mdescLeft">&#160;</td><td class="mdescRight">Register logger unit.  <a href="classqx_1_1base__logger__stream.html#a5df3c8694335bdc9595da5529c10a6e9">More...</a><br /></td></tr>
-<tr class="separator:a5df3c8694335bdc9595da5529c10a6e9 inherit pub_methods_classqx_1_1base__logger__stream"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af099afed0e8ad3543bf9a00367226884 inherit pub_methods_classqx_1_1base__logger__stream"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1base__logger__stream.html#af099afed0e8ad3543bf9a00367226884">deregister_unit</a> (std::string_view svUnitName)</td></tr>
-<tr class="memdesc:af099afed0e8ad3543bf9a00367226884 inherit pub_methods_classqx_1_1base__logger__stream"><td class="mdescLeft">&#160;</td><td class="mdescRight">Deregister logger unit.  <a href="classqx_1_1base__logger__stream.html#af099afed0e8ad3543bf9a00367226884">More...</a><br /></td></tr>
-<tr class="separator:af099afed0e8ad3543bf9a00367226884 inherit pub_methods_classqx_1_1base__logger__stream"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2ab8a7a0ba62f0e1961309aff3271093 inherit pub_methods_classqx_1_1base__logger__stream"><td class="memTemplParams" colspan="2">template&lt;class char_type &gt; </td></tr>
+<tr class="memitem:a2ab8a7a0ba62f0e1961309aff3271093 inherit pub_methods_classqx_1_1base__logger__stream"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classqx_1_1base__logger__stream.html#a2ab8a7a0ba62f0e1961309aff3271093">log</a> (log_level eLogLevel, const char_type *pszFormat, const char *pszTag, const char *pszFile, const char *pszFunction, int nLine, va_list args)</td></tr>
+<tr class="memdesc:a2ab8a7a0ba62f0e1961309aff3271093 inherit pub_methods_classqx_1_1base__logger__stream"><td class="mdescLeft">&#160;</td><td class="mdescRight">Output to stream.  <a href="classqx_1_1base__logger__stream.html#a2ab8a7a0ba62f0e1961309aff3271093">More...</a><br /></td></tr>
+<tr class="separator:a2ab8a7a0ba62f0e1961309aff3271093 inherit pub_methods_classqx_1_1base__logger__stream"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a99637f11420d3b811336fc05fd63b987 inherit pub_methods_classqx_1_1base__logger__stream"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1base__logger__stream.html#a99637f11420d3b811336fc05fd63b987">register_unit</a> (std::string_view svUnitName, const <a class="el" href="structqx_1_1log__unit__info.html">log_unit_info</a> &amp;unit) noexcept</td></tr>
+<tr class="memdesc:a99637f11420d3b811336fc05fd63b987 inherit pub_methods_classqx_1_1base__logger__stream"><td class="mdescLeft">&#160;</td><td class="mdescRight">Register logger unit.  <a href="classqx_1_1base__logger__stream.html#a99637f11420d3b811336fc05fd63b987">More...</a><br /></td></tr>
+<tr class="separator:a99637f11420d3b811336fc05fd63b987 inherit pub_methods_classqx_1_1base__logger__stream"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9f1a63558efd0f219661b9fe05556b92 inherit pub_methods_classqx_1_1base__logger__stream"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1base__logger__stream.html#a9f1a63558efd0f219661b9fe05556b92">deregister_unit</a> (std::string_view svUnitName) noexcept</td></tr>
+<tr class="memdesc:a9f1a63558efd0f219661b9fe05556b92 inherit pub_methods_classqx_1_1base__logger__stream"><td class="mdescLeft">&#160;</td><td class="mdescRight">Deregister logger unit.  <a href="classqx_1_1base__logger__stream.html#a9f1a63558efd0f219661b9fe05556b92">More...</a><br /></td></tr>
+<tr class="separator:a9f1a63558efd0f219661b9fe05556b92 inherit pub_methods_classqx_1_1base__logger__stream"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="inherited"></a>
 Additional Inherited Members</h2></td></tr>
 <tr class="inherit_header pub_static_methods_classqx_1_1base__logger__stream"><td colspan="2" onclick="javascript:toggleInherit('pub_static_methods_classqx_1_1base__logger__stream')"><img src="closed.png" alt="-"/>&#160;Static Public Member Functions inherited from <a class="el" href="classqx_1_1base__logger__stream.html">qx::base_logger_stream</a></td></tr>
-<tr class="memitem:a2e4b222f92f14151d95b7dcc057dabe0 inherit pub_static_methods_classqx_1_1base__logger__stream"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1base__logger__stream.html#a2e4b222f92f14151d95b7dcc057dabe0">format_line</a> (<a class="el" href="classqx_1_1basic__string.html">string</a> &amp;sMsg, <a class="el" href="classqx_1_1basic__string.html">string</a> &amp;sFormat, log_level eLogLevel, const char *pszFormat, const char *pszTag, const char *pszFile, const char *pszFunction, int nLine, va_list args) noexcept</td></tr>
-<tr class="memdesc:a2e4b222f92f14151d95b7dcc057dabe0 inherit pub_static_methods_classqx_1_1base__logger__stream"><td class="mdescLeft">&#160;</td><td class="mdescRight">Format logger line.  <a href="classqx_1_1base__logger__stream.html#a2e4b222f92f14151d95b7dcc057dabe0">More...</a><br /></td></tr>
-<tr class="separator:a2e4b222f92f14151d95b7dcc057dabe0 inherit pub_static_methods_classqx_1_1base__logger__stream"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6901fca2acf87051c920b02ee8f1af96 inherit pub_static_methods_classqx_1_1base__logger__stream"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1base__logger__stream.html#a6901fca2acf87051c920b02ee8f1af96">format_time_string</a> (<a class="el" href="classqx_1_1basic__string.html">string</a> &amp;sTime) noexcept</td></tr>
-<tr class="memdesc:a6901fca2acf87051c920b02ee8f1af96 inherit pub_static_methods_classqx_1_1base__logger__stream"><td class="mdescLeft">&#160;</td><td class="mdescRight">Format time string to the buffer.  <a href="classqx_1_1base__logger__stream.html#a6901fca2acf87051c920b02ee8f1af96">More...</a><br /></td></tr>
-<tr class="separator:a6901fca2acf87051c920b02ee8f1af96 inherit pub_static_methods_classqx_1_1base__logger__stream"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afde430836cbdcaa4a1d5bc85165f000a inherit pub_static_methods_classqx_1_1base__logger__stream"><td class="memTemplParams" colspan="2">template&lt;class char_type &gt; </td></tr>
+<tr class="memitem:afde430836cbdcaa4a1d5bc85165f000a inherit pub_static_methods_classqx_1_1base__logger__stream"><td class="memTemplItemLeft" align="right" valign="top">static void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classqx_1_1base__logger__stream.html#afde430836cbdcaa4a1d5bc85165f000a">format_time_string</a> (<a class="el" href="classqx_1_1basic__string.html">basic_string</a>&lt; char_type &gt; &amp;sTime) noexcept</td></tr>
+<tr class="memdesc:afde430836cbdcaa4a1d5bc85165f000a inherit pub_static_methods_classqx_1_1base__logger__stream"><td class="mdescLeft">&#160;</td><td class="mdescRight">Format time string to the buffer.  <a href="classqx_1_1base__logger__stream.html#afde430836cbdcaa4a1d5bc85165f000a">More...</a><br /></td></tr>
+<tr class="separator:afde430836cbdcaa4a1d5bc85165f000a inherit pub_static_methods_classqx_1_1base__logger__stream"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pro_methods_classqx_1_1base__logger__stream"><td colspan="2" onclick="javascript:toggleInherit('pro_methods_classqx_1_1base__logger__stream')"><img src="closed.png" alt="-"/>&#160;Protected Member Functions inherited from <a class="el" href="classqx_1_1base__logger__stream.html">qx::base_logger_stream</a></td></tr>
-<tr class="memitem:a9b0e40779a8c8e143ad698299e83a6b7 inherit pro_methods_classqx_1_1base__logger__stream"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classqx_1_1basic__string.html">string</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1base__logger__stream.html#a9b0e40779a8c8e143ad698299e83a6b7">get_time_buffer</a> () noexcept</td></tr>
-<tr class="memdesc:a9b0e40779a8c8e143ad698299e83a6b7 inherit pro_methods_classqx_1_1base__logger__stream"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get time buffer string.  <a href="classqx_1_1base__logger__stream.html#a9b0e40779a8c8e143ad698299e83a6b7">More...</a><br /></td></tr>
-<tr class="separator:a9b0e40779a8c8e143ad698299e83a6b7 inherit pro_methods_classqx_1_1base__logger__stream"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2ec2fe5a3a744c0a9f46b1192c27d98e inherit pro_methods_classqx_1_1base__logger__stream"><td class="memTemplParams" colspan="2">template&lt;class char_type &gt; </td></tr>
+<tr class="memitem:a2ec2fe5a3a744c0a9f46b1192c27d98e inherit pro_methods_classqx_1_1base__logger__stream"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="structqx_1_1logger__buffers.html">logger_buffers</a>&lt; char_type &gt; &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classqx_1_1base__logger__stream.html#a2ec2fe5a3a744c0a9f46b1192c27d98e">get_string_buffers</a> () noexcept</td></tr>
+<tr class="memdesc:a2ec2fe5a3a744c0a9f46b1192c27d98e inherit pro_methods_classqx_1_1base__logger__stream"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get string buffers.  <a href="classqx_1_1base__logger__stream.html#a2ec2fe5a3a744c0a9f46b1192c27d98e">More...</a><br /></td></tr>
+<tr class="separator:a2ec2fe5a3a744c0a9f46b1192c27d98e inherit pro_methods_classqx_1_1base__logger__stream"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Logger stream for std::cout output. </p>
@@ -202,8 +202,8 @@ Additional Inherited Members</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="a3f2ca78bab54c06da6d69200f4ae9ebe"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3f2ca78bab54c06da6d69200f4ae9ebe">&#9670;&nbsp;</a></span>process_output()</h2>
+<a id="a8034503126665acca82083451dddadcd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8034503126665acca82083451dddadcd">&#9670;&nbsp;</a></span>do_log() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -212,7 +212,7 @@ Additional Inherited Members</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void qx::cout_logger_stream::process_output </td>
+          <td class="memname">void qx::cout_logger_stream::do_log </td>
           <td>(</td>
           <td class="paramtype">std::string_view&#160;</td>
           <td class="paramname"><em>svMessage</em>, </td>
@@ -252,9 +252,65 @@ Additional Inherited Members</h2></td></tr>
   </dd>
 </dl>
 
-<p>Implements <a class="el" href="classqx_1_1base__logger__stream.html#a298dbfc27af4d96ad9d6d099ca747177">qx::base_logger_stream</a>.</p>
+<p>Implements <a class="el" href="classqx_1_1base__logger__stream.html">qx::base_logger_stream</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="cout__logger__stream_8inl_source.html#l00032">32</a> of file <a class="el" href="cout__logger__stream_8inl_source.html">cout_logger_stream.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="cout__logger__stream_8inl_source.html#l00033">33</a> of file <a class="el" href="cout__logger__stream_8inl_source.html">cout_logger_stream.inl</a>.</p>
+
+</div>
+</div>
+<a id="aad79ab378e7120577a3708dba5c86efb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aad79ab378e7120577a3708dba5c86efb">&#9670;&nbsp;</a></span>do_log() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void qx::cout_logger_stream::do_log </td>
+          <td>(</td>
+          <td class="paramtype">std::wstring_view&#160;</td>
+          <td class="paramname"><em>svMessage</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="structqx_1_1log__unit.html">log_unit</a> &amp;&#160;</td>
+          <td class="paramname"><em>logUnit</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">log_level&#160;</td>
+          <td class="paramname"><em>eLogLevel</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Output to std::wcout. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">svMessage</td><td>- message string </td></tr>
+    <tr><td class="paramname">logUnit</td><td>- log unit info </td></tr>
+    <tr><td class="paramname">eLogLevel</td><td>- this message log level </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Implements <a class="el" href="classqx_1_1base__logger__stream.html">qx::base_logger_stream</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="cout__logger__stream_8inl_source.html#l00038">38</a> of file <a class="el" href="cout__logger__stream_8inl_source.html">cout_logger_stream.inl</a>.</p>
 
 </div>
 </div>
@@ -290,7 +346,7 @@ Additional Inherited Members</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="cout__logger__stream_8inl_source.html#l00061">61</a> of file <a class="el" href="cout__logger__stream_8inl_source.html">cout_logger_stream.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="cout__logger__stream_8inl_source.html#l00043">43</a> of file <a class="el" href="cout__logger__stream_8inl_source.html">cout_logger_stream.inl</a>.</p>
 
 </div>
 </div>

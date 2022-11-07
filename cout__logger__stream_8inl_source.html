@@ -97,49 +97,74 @@ $(function() {
 <div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;        <span class="comment">// Tied streams ensure that one stream is flushed automatically</span></div>
 <div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;        <span class="comment">// before each I/O operation on the other stream</span></div>
 <div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;        std::cin.tie(<span class="keyword">nullptr</span>);</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    }</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;}</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160; </div>
-<div class="line"><a name="l00032"></a><span class="lineno"><a class="line" href="classqx_1_1cout__logger__stream.html#a3f2ca78bab54c06da6d69200f4ae9ebe">   32</a></span>&#160;<span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="classqx_1_1cout__logger__stream.html#a3f2ca78bab54c06da6d69200f4ae9ebe">cout_logger_stream::process_output</a>(std::string_view svMessage, <span class="keyword">const</span> <a class="code" href="structqx_1_1log__unit.html">log_unit</a>&amp; logUnit, log_level eLogLevel)</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;{</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    <span class="keywordflow">if</span> (m_bUsingColors)</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    {</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;        std::string_view svColor;</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;        <span class="keywordflow">switch</span> (eLogLevel)</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;        {</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;        <span class="keywordflow">case</span> log_level::warning:</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;            svColor = auto_terminal_color::yellow_bold;</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;            <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;        std::wcin.tie(<span class="keyword">nullptr</span>);</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    }</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;}</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160; </div>
+<div class="line"><a name="l00033"></a><span class="lineno"><a class="line" href="classqx_1_1cout__logger__stream.html#a8034503126665acca82083451dddadcd">   33</a></span>&#160;<span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="classqx_1_1cout__logger__stream.html#a8034503126665acca82083451dddadcd">cout_logger_stream::do_log</a>(std::string_view svMessage, <span class="keyword">const</span> <a class="code" href="structqx_1_1log__unit.html">log_unit</a>&amp; logUnit, log_level eLogLevel)</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;{</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    log_cout(svMessage, logUnit, eLogLevel);</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;}</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160; </div>
+<div class="line"><a name="l00038"></a><span class="lineno"><a class="line" href="classqx_1_1cout__logger__stream.html#aad79ab378e7120577a3708dba5c86efb">   38</a></span>&#160;<span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="classqx_1_1cout__logger__stream.html#a8034503126665acca82083451dddadcd">cout_logger_stream::do_log</a>(std::wstring_view svMessage, <span class="keyword">const</span> <a class="code" href="structqx_1_1log__unit.html">log_unit</a>&amp; logUnit, log_level eLogLevel)</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;{</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    log_cout(svMessage, logUnit, eLogLevel);</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;}</div>
 <div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160; </div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;        <span class="keywordflow">case</span> log_level::error:</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;            svColor = auto_terminal_color::yellow;</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;            <span class="keywordflow">break</span>;</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160; </div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;        <span class="keywordflow">case</span> log_level::critical:</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;            svColor = auto_terminal_color::red;</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;            <span class="keywordflow">break</span>;</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;        }</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160; </div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;        <a class="code" href="structqx_1_1cout__logger__stream_1_1auto__terminal__color.html">auto_terminal_color</a> atc(svColor);</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;        std::cout &lt;&lt; svMessage;</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    }</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    <span class="keywordflow">else</span></div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    {</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;        std::cout &lt;&lt; svMessage;</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    }</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;}</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160; </div>
-<div class="line"><a name="l00061"></a><span class="lineno"><a class="line" href="classqx_1_1cout__logger__stream.html#aae380a8ac0a4667d36572fd75694305c">   61</a></span>&#160;<span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="classqx_1_1cout__logger__stream.html#aae380a8ac0a4667d36572fd75694305c">cout_logger_stream::set_using_colors</a>(<span class="keywordtype">bool</span> bUsingColors) noexcept</div>
+<div class="line"><a name="l00043"></a><span class="lineno"><a class="line" href="classqx_1_1cout__logger__stream.html#aae380a8ac0a4667d36572fd75694305c">   43</a></span>&#160;<span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="classqx_1_1cout__logger__stream.html#aae380a8ac0a4667d36572fd75694305c">cout_logger_stream::set_using_colors</a>(<span class="keywordtype">bool</span> bUsingColors) noexcept</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;{</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    m_bUsingColors = bUsingColors;</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;}</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160; </div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> <span class="keywordtype">char</span>_type&gt;</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="keyword">inline</span> std::basic_ostream&lt;char_type&gt;&amp; cout_logger_stream::get_cout() noexcept</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;{</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    <span class="keywordflow">if</span> constexpr (std::is_same_v&lt;char_type, char&gt;)</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;        <span class="keywordflow">return</span> std::cout;</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    <span class="keywordflow">else</span></div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;        <span class="keywordflow">return</span> std::wcout;</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;}</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160; </div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> <span class="keywordtype">char</span>_type&gt;</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;<span class="keyword">inline</span> <span class="keywordtype">void</span> cout_logger_stream::log_cout(</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    std::basic_string_view&lt;char_type&gt; svMessage,</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    <span class="keyword">const</span> log_unit&amp;                   logUnit,</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    log_level                         eLogLevel)</div>
 <div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;{</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    m_bUsingColors = bUsingColors;</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;}</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160; </div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;} <span class="comment">// namespace qx</span></div>
-<div class="ttc" id="aclassqx_1_1cout__logger__stream_html_a3f2ca78bab54c06da6d69200f4ae9ebe"><div class="ttname"><a href="classqx_1_1cout__logger__stream.html#a3f2ca78bab54c06da6d69200f4ae9ebe">qx::cout_logger_stream::process_output</a></div><div class="ttdeci">virtual void process_output(std::string_view svMessage, const log_unit &amp;logUnit, log_level eLogLevel) override</div><div class="ttdoc">Output to std::cout.</div><div class="ttdef"><b>Definition:</b> <a href="cout__logger__stream_8inl_source.html#l00032">cout_logger_stream.inl:32</a></div></div>
-<div class="ttc" id="aclassqx_1_1cout__logger__stream_html_aae380a8ac0a4667d36572fd75694305c"><div class="ttname"><a href="classqx_1_1cout__logger__stream.html#aae380a8ac0a4667d36572fd75694305c">qx::cout_logger_stream::set_using_colors</a></div><div class="ttdeci">void set_using_colors(bool bUsingColors) noexcept</div><div class="ttdoc">Set whether cout output should be colored.</div><div class="ttdef"><b>Definition:</b> <a href="cout__logger__stream_8inl_source.html#l00061">cout_logger_stream.inl:61</a></div></div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    <span class="keywordflow">if</span> (m_bUsingColors)</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    {</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;        std::string_view svColor;</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;        <span class="keywordflow">switch</span> (eLogLevel)</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;        {</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;        <span class="keywordflow">case</span> log_level::warning:</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;            svColor = auto_terminal_color::yellow_bold;</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;            <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160; </div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;        <span class="keywordflow">case</span> log_level::error:</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;            svColor = auto_terminal_color::yellow;</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;            <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160; </div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;        <span class="keywordflow">case</span> log_level::critical:</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;            svColor = auto_terminal_color::red;</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;            <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;        }</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160; </div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;        <a class="code" href="structcout__logger__stream_1_1auto__terminal__color.html">auto_terminal_color</a> atc(svColor);</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;        get_cout&lt;char_type&gt;() &lt;&lt; svMessage;</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;    }</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;    <span class="keywordflow">else</span></div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;    {</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;        get_cout&lt;char_type&gt;() &lt;&lt; svMessage;</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;    }</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;}</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160; </div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160; </div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;} <span class="comment">// namespace qx</span></div>
+<div class="ttc" id="aclassqx_1_1cout__logger__stream_html_a8034503126665acca82083451dddadcd"><div class="ttname"><a href="classqx_1_1cout__logger__stream.html#a8034503126665acca82083451dddadcd">qx::cout_logger_stream::do_log</a></div><div class="ttdeci">virtual void do_log(std::string_view svMessage, const log_unit &amp;logUnit, log_level eLogLevel) override</div><div class="ttdoc">Output to std::cout.</div><div class="ttdef"><b>Definition:</b> <a href="cout__logger__stream_8inl_source.html#l00033">cout_logger_stream.inl:33</a></div></div>
+<div class="ttc" id="aclassqx_1_1cout__logger__stream_html_aae380a8ac0a4667d36572fd75694305c"><div class="ttname"><a href="classqx_1_1cout__logger__stream.html#aae380a8ac0a4667d36572fd75694305c">qx::cout_logger_stream::set_using_colors</a></div><div class="ttdeci">void set_using_colors(bool bUsingColors) noexcept</div><div class="ttdoc">Set whether cout output should be colored.</div><div class="ttdef"><b>Definition:</b> <a href="cout__logger__stream_8inl_source.html#l00043">cout_logger_stream.inl:43</a></div></div>
 <div class="ttc" id="aclassqx_1_1cout__logger__stream_html_ad68dc8b7bc59769bb3bc97768f61de69"><div class="ttname"><a href="classqx_1_1cout__logger__stream.html#ad68dc8b7bc59769bb3bc97768f61de69">qx::cout_logger_stream::cout_logger_stream</a></div><div class="ttdeci">cout_logger_stream(bool bUseColors=true, bool bDisableStdioSync=true, bool bUntieCin=true)</div><div class="ttdoc">cout_logger_stream object constructor</div><div class="ttdef"><b>Definition:</b> <a href="cout__logger__stream_8inl_source.html#l00013">cout_logger_stream.inl:13</a></div></div>
-<div class="ttc" id="astructqx_1_1cout__logger__stream_1_1auto__terminal__color_html"><div class="ttname"><a href="structqx_1_1cout__logger__stream_1_1auto__terminal__color.html">qx::cout_logger_stream::auto_terminal_color</a></div><div class="ttdef"><b>Definition:</b> <a href="cout__logger__stream_8h_source.html#l00035">cout_logger_stream.h:36</a></div></div>
-<div class="ttc" id="astructqx_1_1log__unit_html"><div class="ttname"><a href="structqx_1_1log__unit.html">qx::log_unit</a></div><div class="ttdef"><b>Definition:</b> <a href="base__logger__stream_8h_source.html#l00058">base_logger_stream.h:59</a></div></div>
+<div class="ttc" id="astructcout__logger__stream_1_1auto__terminal__color_html"><div class="ttname"><a href="structcout__logger__stream_1_1auto__terminal__color.html">auto_terminal_color</a></div></div>
+<div class="ttc" id="astructqx_1_1log__unit_html"><div class="ttname"><a href="structqx_1_1log__unit.html">qx::log_unit</a></div><div class="ttdef"><b>Definition:</b> <a href="base__logger__stream_8h_source.html#l00075">base_logger_stream.h:76</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

@@ -144,31 +144,57 @@ $(function() {
 <div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;<span class="comment">        @param logUnit   - log unit info</span></div>
 <div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;<span class="comment">        @param eLogLevel - this message log level</span></div>
 <div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;<span class="comment">    **/</span></div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classqx_1_1cout__logger__stream.html#a3f2ca78bab54c06da6d69200f4ae9ebe">process_output</a>(std::string_view svMessage, <span class="keyword">const</span> <a class="code" href="structqx_1_1log__unit.html">log_unit</a>&amp; logUnit, log_level eLogLevel) <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classqx_1_1cout__logger__stream.html#a8034503126665acca82083451dddadcd">do_log</a>(std::string_view svMessage, <span class="keyword">const</span> <a class="code" href="structqx_1_1log__unit.html">log_unit</a>&amp; logUnit, log_level eLogLevel) <span class="keyword">override</span>;</div>
 <div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;<span class="comment"></span> </div>
 <div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;<span class="comment">    /**</span></div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;<span class="comment">        @brief Set whether cout output should be colored</span></div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;<span class="comment">        @param bUsingColors - true if cout output should be colored</span></div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;<span class="comment">    **/</span></div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classqx_1_1cout__logger__stream.html#aae380a8ac0a4667d36572fd75694305c">set_using_colors</a>(<span class="keywordtype">bool</span> bUsingColors) noexcept;</div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160; </div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;    <span class="keywordtype">bool</span> m_bUsingColors = <span class="keyword">true</span>;</div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;};</div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160; </div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;} <span class="comment">// namespace qx</span></div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160; </div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="cout__logger__stream_8inl.html">qx/logger/cout_logger_stream.inl</a>&gt;</span></div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;<span class="comment">        @brief Output to std::wcout</span></div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;<span class="comment">        @param svMessage - message string</span></div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;<span class="comment">        @param logUnit   - log unit info</span></div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;<span class="comment">        @param eLogLevel - this message log level</span></div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;<span class="comment">    **/</span></div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classqx_1_1cout__logger__stream.html#a8034503126665acca82083451dddadcd">do_log</a>(std::wstring_view svMessage, <span class="keyword">const</span> <a class="code" href="structqx_1_1log__unit.html">log_unit</a>&amp; logUnit, log_level eLogLevel) <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;<span class="comment">    /**</span></div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;<span class="comment">        @brief Set whether cout output should be colored</span></div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;<span class="comment">        @param bUsingColors - true if cout output should be colored</span></div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;<span class="comment">    **/</span></div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classqx_1_1cout__logger__stream.html#aae380a8ac0a4667d36572fd75694305c">set_using_colors</a>(<span class="keywordtype">bool</span> bUsingColors) noexcept;</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160; </div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;<span class="keyword">private</span>:<span class="comment"></span></div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;<span class="comment">    /**</span></div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;<span class="comment">        @brief  Get cout by char type</span></div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;<span class="comment">        @tparam char_type - char type</span></div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;<span class="comment">        @retval           - cout ref</span></div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;<span class="comment">    **/</span></div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;    <span class="keyword">template</span>&lt;<span class="keyword">class</span> <span class="keywordtype">char</span>_type&gt;</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;    <span class="keyword">static</span> std::basic_ostream&lt;char_type&gt;&amp; get_cout() noexcept;</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;<span class="comment">    /**</span></div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;<span class="comment">        @brief  Output to std::basic_ostream </span></div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;<span class="comment">        @tparam char_type - char type</span></div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;<span class="comment">        @param  svMessage - message string</span></div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;<span class="comment">        @param  logUnit   - log unit info</span></div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;<span class="comment">        @param  eLogLevel - this message log level</span></div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;<span class="comment">    **/</span></div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;    template&lt;class char_type&gt;</div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;    <span class="keywordtype">void</span> log_cout(std::basic_string_view&lt;char_type&gt; svMessage, const <a class="code" href="structqx_1_1log__unit.html">log_unit</a>&amp; logUnit, log_level eLogLevel);</div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160; </div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;private:</div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;    <span class="keywordtype">bool</span> m_bUsingColors = true;</div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;};</div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160; </div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;} <span class="comment">// namespace qx</span></div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160; </div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;<span class="preprocessor">#include &lt;qx/logger/cout_logger_stream.inl&gt;</span></div>
 <div class="ttc" id="abase__logger__stream_8h_html"><div class="ttname"><a href="base__logger__stream_8h.html">base_logger_stream.h</a></div><div class="ttdoc">Contains qx::base_logger_stream class.</div></div>
-<div class="ttc" id="aclassqx_1_1base__logger__stream_html"><div class="ttname"><a href="classqx_1_1base__logger__stream.html">qx::base_logger_stream</a></div><div class="ttdoc">Base class for logger streams.</div><div class="ttdef"><b>Definition:</b> <a href="base__logger__stream_8h_source.html#l00073">base_logger_stream.h:74</a></div></div>
+<div class="ttc" id="aclassqx_1_1base__logger__stream_html"><div class="ttname"><a href="classqx_1_1base__logger__stream.html">qx::base_logger_stream</a></div><div class="ttdoc">Base class for logger streams.</div><div class="ttdef"><b>Definition:</b> <a href="base__logger__stream_8h_source.html#l00090">base_logger_stream.h:91</a></div></div>
 <div class="ttc" id="aclassqx_1_1color_html"><div class="ttname"><a href="classqx_1_1color.html">qx::color</a></div><div class="ttdoc">RGBA color.</div><div class="ttdef"><b>Definition:</b> <a href="color_8h_source.html#l00034">color.h:35</a></div></div>
 <div class="ttc" id="aclassqx_1_1cout__logger__stream_html"><div class="ttname"><a href="classqx_1_1cout__logger__stream.html">qx::cout_logger_stream</a></div><div class="ttdoc">Logger stream for std::cout output.</div><div class="ttdef"><b>Definition:</b> <a href="cout__logger__stream_8h_source.html#l00028">cout_logger_stream.h:29</a></div></div>
-<div class="ttc" id="aclassqx_1_1cout__logger__stream_html_a3f2ca78bab54c06da6d69200f4ae9ebe"><div class="ttname"><a href="classqx_1_1cout__logger__stream.html#a3f2ca78bab54c06da6d69200f4ae9ebe">qx::cout_logger_stream::process_output</a></div><div class="ttdeci">virtual void process_output(std::string_view svMessage, const log_unit &amp;logUnit, log_level eLogLevel) override</div><div class="ttdoc">Output to std::cout.</div><div class="ttdef"><b>Definition:</b> <a href="cout__logger__stream_8inl_source.html#l00032">cout_logger_stream.inl:32</a></div></div>
-<div class="ttc" id="aclassqx_1_1cout__logger__stream_html_aae380a8ac0a4667d36572fd75694305c"><div class="ttname"><a href="classqx_1_1cout__logger__stream.html#aae380a8ac0a4667d36572fd75694305c">qx::cout_logger_stream::set_using_colors</a></div><div class="ttdeci">void set_using_colors(bool bUsingColors) noexcept</div><div class="ttdoc">Set whether cout output should be colored.</div><div class="ttdef"><b>Definition:</b> <a href="cout__logger__stream_8inl_source.html#l00061">cout_logger_stream.inl:61</a></div></div>
+<div class="ttc" id="aclassqx_1_1cout__logger__stream_html_a8034503126665acca82083451dddadcd"><div class="ttname"><a href="classqx_1_1cout__logger__stream.html#a8034503126665acca82083451dddadcd">qx::cout_logger_stream::do_log</a></div><div class="ttdeci">virtual void do_log(std::string_view svMessage, const log_unit &amp;logUnit, log_level eLogLevel) override</div><div class="ttdoc">Output to std::cout.</div><div class="ttdef"><b>Definition:</b> <a href="cout__logger__stream_8inl_source.html#l00033">cout_logger_stream.inl:33</a></div></div>
+<div class="ttc" id="aclassqx_1_1cout__logger__stream_html_aae380a8ac0a4667d36572fd75694305c"><div class="ttname"><a href="classqx_1_1cout__logger__stream.html#aae380a8ac0a4667d36572fd75694305c">qx::cout_logger_stream::set_using_colors</a></div><div class="ttdeci">void set_using_colors(bool bUsingColors) noexcept</div><div class="ttdoc">Set whether cout output should be colored.</div><div class="ttdef"><b>Definition:</b> <a href="cout__logger__stream_8inl_source.html#l00043">cout_logger_stream.inl:43</a></div></div>
 <div class="ttc" id="aclassqx_1_1cout__logger__stream_html_ad68dc8b7bc59769bb3bc97768f61de69"><div class="ttname"><a href="classqx_1_1cout__logger__stream.html#ad68dc8b7bc59769bb3bc97768f61de69">qx::cout_logger_stream::cout_logger_stream</a></div><div class="ttdeci">cout_logger_stream(bool bUseColors=true, bool bDisableStdioSync=true, bool bUntieCin=true)</div><div class="ttdoc">cout_logger_stream object constructor</div><div class="ttdef"><b>Definition:</b> <a href="cout__logger__stream_8inl_source.html#l00013">cout_logger_stream.inl:13</a></div></div>
-<div class="ttc" id="acout__logger__stream_8inl_html"><div class="ttname"><a href="cout__logger__stream_8inl.html">cout_logger_stream.inl</a></div></div>
 <div class="ttc" id="astructqx_1_1cout__logger__stream_1_1auto__terminal__color_html"><div class="ttname"><a href="structqx_1_1cout__logger__stream_1_1auto__terminal__color.html">qx::cout_logger_stream::auto_terminal_color</a></div><div class="ttdef"><b>Definition:</b> <a href="cout__logger__stream_8h_source.html#l00035">cout_logger_stream.h:36</a></div></div>
-<div class="ttc" id="astructqx_1_1log__unit_html"><div class="ttname"><a href="structqx_1_1log__unit.html">qx::log_unit</a></div><div class="ttdef"><b>Definition:</b> <a href="base__logger__stream_8h_source.html#l00058">base_logger_stream.h:59</a></div></div>
+<div class="ttc" id="astructqx_1_1log__unit_html"><div class="ttname"><a href="structqx_1_1log__unit.html">qx::log_unit</a></div><div class="ttdef"><b>Definition:</b> <a href="base__logger__stream_8h_source.html#l00075">base_logger_stream.h:76</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

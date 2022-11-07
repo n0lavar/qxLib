@@ -116,12 +116,12 @@ $(function() {
 <div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    {</div>
 <div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;        <span class="keyword">const</span> <span class="keywordtype">bool</span>      bSmallAtStart = is_small();</div>
 <div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;        <span class="keyword">const</span> size_type nNewSize      = nSymbolsToAllocate * <span class="keyword">sizeof</span>(value_type);</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160; </div>
+<div class="line"><a name="l00048"></a><span class="lineno"><a class="line" href="classqx_1_1string__data.html#a88412f7d742095bd11b2f6af440b02ed">   48</a></span>&#160; </div>
 <div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;        buffer buff;</div>
 <div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160; </div>
 <div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;        <span class="keywordflow">if</span> (nSymbolsToAllocate &lt;= m_Buffer.size())</div>
 <div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;        {</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;            <span class="keywordflow">if</span> (!bSmallAtStart &amp;&amp; (Traits::shrink_to_fit_when_small() || eType == string_resize_type::shrink_to_fit))</div>
+<div class="line"><a name="l00053"></a><span class="lineno"><a class="line" href="classqx_1_1string__data.html#a7778fbc6c2e656464d683c8f2e49dd32">   53</a></span>&#160;            <span class="keywordflow">if</span> (!bSmallAtStart &amp;&amp; (Traits::shrink_to_fit_when_small() || eType == string_resize_type::shrink_to_fit))</div>
 <div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;            {</div>
 <div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;                <span class="comment">// free allocated memory and move string to buffer</span></div>
 <div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;                std::memmove(buff.data(), m_pData, nNewSize);</div>
@@ -130,25 +130,25 @@ $(function() {
 <div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;            }</div>
 <div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160; </div>
 <div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;            m_nSize = nSymbolsToAllocate - 1;</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;        }</div>
+<div class="line"><a name="l00062"></a><span class="lineno"><a class="line" href="classqx_1_1string__data.html#ab7460ff08ae3b0e33df7836f9ab154ee">   62</a></span>&#160;        }</div>
 <div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;        <span class="keywordflow">else</span></div>
 <div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;        {</div>
 <div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;            size_type nStartSize = 0;</div>
 <div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;            <span class="keywordflow">if</span> (bSmallAtStart)</div>
 <div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;            {</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;                buff       = m_Buffer;</div>
+<div class="line"><a name="l00068"></a><span class="lineno"><a class="line" href="classqx_1_1string__data.html#a19fe5904e77a4e97565514611b7cfbd7">   68</a></span>&#160;                buff       = m_Buffer;</div>
 <div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;                nStartSize = size() * <span class="keyword">sizeof</span>(value_type);</div>
 <div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;            }</div>
 <div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160; </div>
 <div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;            <span class="keywordflow">if</span> (<span class="keywordtype">void</span>* pNewBlock = std::realloc(bSmallAtStart ? <span class="keyword">nullptr</span> : m_pData, nNewSize))</div>
 <div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;            {</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;                m_nAllocatedSize = nSymbolsToAllocate;</div>
+<div class="line"><a name="l00074"></a><span class="lineno"><a class="line" href="classqx_1_1string__data.html#a30becfdb1549ac2275dd7547f0126f74">   74</a></span>&#160;                m_nAllocatedSize = nSymbolsToAllocate;</div>
 <div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;                m_pData          = <span class="keyword">static_cast&lt;</span>typename Traits::value_type*<span class="keyword">&gt;</span>(pNewBlock);</div>
 <div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160; </div>
 <div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;                <span class="keywordflow">if</span> (bSmallAtStart)</div>
 <div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;                    std::memmove(m_pData, buff.data(), nStartSize);</div>
 <div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;            }</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;            <span class="keywordflow">else</span></div>
+<div class="line"><a name="l00080"></a><span class="lineno"><a class="line" href="classqx_1_1string__data.html#a92b4446e5ca32598accac8668ce56523">   80</a></span>&#160;            <span class="keywordflow">else</span></div>
 <div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;            {</div>
 <div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;                bRet = <span class="keyword">false</span>;</div>
 <div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;            }</div>
