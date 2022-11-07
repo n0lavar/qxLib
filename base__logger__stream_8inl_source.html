@@ -125,7 +125,7 @@ $(function() {
 <div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;            }</div>
 <div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;            <span class="keywordflow">else</span></div>
 <div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;            {</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;                buffers.sTag      = <a class="code" href="string__converters_8h.html#aa203fa26e66091ce0c1f4ffff0c4e7dc">to_wstring</a>(pszTag);</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;                buffers.sTag      = pszTag ? <a class="code" href="string__converters_8h.html#aa203fa26e66091ce0c1f4ffff0c4e7dc">to_wstring</a>(pszTag) : <a class="code" href="classqx_1_1basic__string.html">basic_string&lt;char_type&gt;</a>();</div>
 <div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;                buffers.sFile     = <a class="code" href="string__converters_8h.html#aa203fa26e66091ce0c1f4ffff0c4e7dc">to_wstring</a>(pszFile);</div>
 <div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;                buffers.sFunction = <a class="code" href="string__converters_8h.html#aa203fa26e66091ce0c1f4ffff0c4e7dc">to_wstring</a>(pszFunction);</div>
 <div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160; </div>
@@ -228,35 +228,47 @@ $(function() {
 <div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160; </div>
 <div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;    <span class="keywordflow">switch</span> (eLogLevel)</div>
 <div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;    {</div>
-<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;    <span class="keywordflow">case</span> log_level::warning:</div>
-<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;        buffers.sFormat = <a class="code" href="string__utils_8h.html#ac188ca5f0d584a897b5e2a443c574729">QX_STR_PREFIX</a>(char_type, <span class="stringliteral">&quot;[W][&quot;</span>) + buffers.sFormat;</div>
+<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;    <span class="keywordflow">case</span> log_level::very_verbose:</div>
+<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;        buffers.sFormat = <a class="code" href="string__utils_8h.html#ac188ca5f0d584a897b5e2a443c574729">QX_STR_PREFIX</a>(char_type, <span class="stringliteral">&quot;[VV][&quot;</span>) + buffers.sFormat;</div>
 <div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;        <span class="keywordflow">break</span>;</div>
 <div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160; </div>
-<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;    <span class="keywordflow">case</span> log_level::error:</div>
-<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;        buffers.sFormat = <a class="code" href="string__utils_8h.html#ac188ca5f0d584a897b5e2a443c574729">QX_STR_PREFIX</a>(char_type, <span class="stringliteral">&quot;[E][&quot;</span>) + buffers.sFormat;</div>
+<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;    <span class="keywordflow">case</span> log_level::verbose:</div>
+<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;        buffers.sFormat = <a class="code" href="string__utils_8h.html#ac188ca5f0d584a897b5e2a443c574729">QX_STR_PREFIX</a>(char_type, <span class="stringliteral">&quot;[V][&quot;</span>) + buffers.sFormat;</div>
 <div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;        <span class="keywordflow">break</span>;</div>
 <div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160; </div>
-<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;    <span class="keywordflow">case</span> log_level::critical:</div>
-<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;        buffers.sFormat = <a class="code" href="string__utils_8h.html#ac188ca5f0d584a897b5e2a443c574729">QX_STR_PREFIX</a>(char_type, <span class="stringliteral">&quot;[C][&quot;</span>) + buffers.sFormat;</div>
+<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;    <span class="keywordflow">case</span> log_level::important:</div>
+<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;        buffers.sFormat = <a class="code" href="string__utils_8h.html#ac188ca5f0d584a897b5e2a443c574729">QX_STR_PREFIX</a>(char_type, <span class="stringliteral">&quot;[I][&quot;</span>) + buffers.sFormat;</div>
 <div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;        <span class="keywordflow">break</span>;</div>
 <div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160; </div>
-<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;    <span class="keywordflow">default</span>:</div>
-<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;        buffers.sFormat = <a class="code" href="string__utils_8h.html#ac188ca5f0d584a897b5e2a443c574729">QX_STR_PREFIX</a>(char_type, <span class="stringliteral">&quot;   [&quot;</span>) + buffers.sFormat;</div>
+<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;    <span class="keywordflow">case</span> log_level::warning:</div>
+<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;        buffers.sFormat = <a class="code" href="string__utils_8h.html#ac188ca5f0d584a897b5e2a443c574729">QX_STR_PREFIX</a>(char_type, <span class="stringliteral">&quot;[W][&quot;</span>) + buffers.sFormat;</div>
 <div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;        <span class="keywordflow">break</span>;</div>
-<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;    }</div>
-<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160; </div>
-<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;    constexpr <span class="keyword">auto</span> pszStringFormatSpecifier = get_format_specifier&lt;char_type, const char_type*&gt;();</div>
-<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;    buffers.sFormat += <a class="code" href="string__utils_8h.html#ac188ca5f0d584a897b5e2a443c574729">QX_STR_PREFIX</a>(char_type, <span class="stringliteral">&quot;][&quot;</span>);</div>
-<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;    buffers.sFormat += pszStringFormatSpecifier;</div>
-<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;    buffers.sFormat += <a class="code" href="string__utils_8h.html#ac188ca5f0d584a897b5e2a443c574729">QX_STR_PREFIX</a>(char_type, <span class="stringliteral">&quot;::&quot;</span>);</div>
-<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;    buffers.sFormat += pszStringFormatSpecifier;</div>
-<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;    buffers.sFormat += <a class="code" href="string__utils_8h.html#ac188ca5f0d584a897b5e2a443c574729">QX_STR_PREFIX</a>(char_type, <span class="stringliteral">&quot;(%d)] &quot;</span>);</div>
-<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;    buffers.sFormat += buffers.sMessage;</div>
-<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;    buffers.sMessage.sprintf(buffers.sFormat.c_str(), pszFile, pszFunction, nLine);</div>
-<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;    buffers.sMessage += <a class="code" href="string__utils_8h.html#ab4cfe02c348ccce78db4519f9758e672">QX_CHAR_PREFIX</a>(char_type, <span class="charliteral">&#39;\n&#39;</span>);</div>
-<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;}</div>
-<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160; </div>
-<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;} <span class="comment">// namespace qx</span></div>
+<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160; </div>
+<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;    <span class="keywordflow">case</span> log_level::error:</div>
+<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;        buffers.sFormat = <a class="code" href="string__utils_8h.html#ac188ca5f0d584a897b5e2a443c574729">QX_STR_PREFIX</a>(char_type, <span class="stringliteral">&quot;[E][&quot;</span>) + buffers.sFormat;</div>
+<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;        <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160; </div>
+<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;    <span class="keywordflow">case</span> log_level::critical:</div>
+<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;        buffers.sFormat = <a class="code" href="string__utils_8h.html#ac188ca5f0d584a897b5e2a443c574729">QX_STR_PREFIX</a>(char_type, <span class="stringliteral">&quot;[C][&quot;</span>) + buffers.sFormat;</div>
+<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;        <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160; </div>
+<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;    <span class="keywordflow">default</span>:</div>
+<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;        buffers.sFormat = <a class="code" href="string__utils_8h.html#ac188ca5f0d584a897b5e2a443c574729">QX_STR_PREFIX</a>(char_type, <span class="stringliteral">&quot;   [&quot;</span>) + buffers.sFormat;</div>
+<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;        <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;    }</div>
+<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160; </div>
+<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;    constexpr <span class="keyword">auto</span> pszStringFormatSpecifier = get_format_specifier&lt;char_type, const char_type*&gt;();</div>
+<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;    buffers.sFormat += <a class="code" href="string__utils_8h.html#ac188ca5f0d584a897b5e2a443c574729">QX_STR_PREFIX</a>(char_type, <span class="stringliteral">&quot;][&quot;</span>);</div>
+<div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;    buffers.sFormat += pszStringFormatSpecifier;</div>
+<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;    buffers.sFormat += <a class="code" href="string__utils_8h.html#ac188ca5f0d584a897b5e2a443c574729">QX_STR_PREFIX</a>(char_type, <span class="stringliteral">&quot;::&quot;</span>);</div>
+<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;    buffers.sFormat += pszStringFormatSpecifier;</div>
+<div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;    buffers.sFormat += <a class="code" href="string__utils_8h.html#ac188ca5f0d584a897b5e2a443c574729">QX_STR_PREFIX</a>(char_type, <span class="stringliteral">&quot;(%d)] &quot;</span>);</div>
+<div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;    buffers.sFormat += buffers.sMessage;</div>
+<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;    buffers.sMessage.sprintf(buffers.sFormat.c_str(), pszFile, pszFunction, nLine);</div>
+<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;    buffers.sMessage += <a class="code" href="string__utils_8h.html#ab4cfe02c348ccce78db4519f9758e672">QX_CHAR_PREFIX</a>(char_type, <span class="charliteral">&#39;\n&#39;</span>);</div>
+<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;}</div>
+<div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160; </div>
+<div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160;} <span class="comment">// namespace qx</span></div>
 <div class="ttc" id="aclassqx_1_1base__logger__stream_html_a2ab8a7a0ba62f0e1961309aff3271093"><div class="ttname"><a href="classqx_1_1base__logger__stream.html#a2ab8a7a0ba62f0e1961309aff3271093">qx::base_logger_stream::log</a></div><div class="ttdeci">void log(log_level eLogLevel, const char_type *pszFormat, const char *pszTag, const char *pszFile, const char *pszFunction, int nLine, va_list args)</div><div class="ttdoc">Output to stream.</div><div class="ttdef"><b>Definition:</b> <a href="base__logger__stream_8inl_source.html#l00028">base_logger_stream.inl:28</a></div></div>
 <div class="ttc" id="aclassqx_1_1base__logger__stream_html_a2ec2fe5a3a744c0a9f46b1192c27d98e"><div class="ttname"><a href="classqx_1_1base__logger__stream.html#a2ec2fe5a3a744c0a9f46b1192c27d98e">qx::base_logger_stream::get_string_buffers</a></div><div class="ttdeci">logger_buffers&lt; char_type &gt; &amp; get_string_buffers() noexcept</div><div class="ttdoc">Get string buffers.</div><div class="ttdef"><b>Definition:</b> <a href="base__logger__stream_8inl_source.html#l00110">base_logger_stream.inl:110</a></div></div>
 <div class="ttc" id="aclassqx_1_1base__logger__stream_html_a99637f11420d3b811336fc05fd63b987"><div class="ttname"><a href="classqx_1_1base__logger__stream.html#a99637f11420d3b811336fc05fd63b987">qx::base_logger_stream::register_unit</a></div><div class="ttdeci">void register_unit(std::string_view svUnitName, const log_unit_info &amp;unit) noexcept</div><div class="ttdoc">Register logger unit.</div><div class="ttdef"><b>Definition:</b> <a href="base__logger__stream_8inl_source.html#l00080">base_logger_stream.inl:80</a></div></div>

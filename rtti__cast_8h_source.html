@@ -89,51 +89,48 @@ $(function() {
 <div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;{</div>
 <div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160; </div>
 <div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T, <span class="keyword">typename</span> From&gt;</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;concept has_is_derived_from = requires(T* t)</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;{</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    t-&gt;template is_derived_from&lt;From&gt;();</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;};</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160; </div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;} <span class="comment">// namespace detail</span></div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="comment">/**</span></div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="comment">    @brief   Returns Y* if Y is inherited from pointer class, otherwise nullptr</span></div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="comment">    @details Pointer class should contain QX_RTTI_CLASS</span></div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="comment">    @tparam  Y       - type to cast to</span></div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="comment">    @param   pointer - unique or shared pointer</span></div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="comment">    @retval          - Y* if Y is inherited from pointer class, otherwise nullptr</span></div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="comment">**/</span></div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> Y&gt;</div>
-<div class="line"><a name="l00036"></a><span class="lineno"><a class="line" href="rtti__cast_8h.html#a1af8d1c717e312349e5cd36f39cf16fa">   36</a></span>&#160;Y* <a class="code" href="rtti__cast_8h.html#a1af8d1c717e312349e5cd36f39cf16fa">rtti_cast</a>(<span class="keyword">auto</span>&amp; pointer)</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;{</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    <span class="keyword">using</span> smart_pointer_t = <span class="keyword">typename</span> std::remove_reference_t&lt;decltype(pointer)&gt;::element_type;</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    <span class="keywordflow">if</span> constexpr (detail::has_is_derived_from&lt;smart_pointer_t, Y&gt;)</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;        <span class="keywordflow">if</span> (pointer &amp;&amp; pointer-&gt;template is_derived_from&lt;Y&gt;())</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;            <span class="keywordflow">return</span> <span class="keyword">static_cast&lt;</span>Y*<span class="keyword">&gt;</span>(pointer.get());</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160; </div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    <span class="keywordflow">return</span> <span class="keyword">nullptr</span>;</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;}</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="comment">/**</span></div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="comment">    @brief   Returns Y* if Y is inherited from pointer class, otherwise nullptr</span></div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="comment">    @details Pointer class should contain QX_RTTI_CLASS</span></div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="comment">    @tparam  Y       - type to cast to</span></div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="comment">    @tparam  X       - type to cast from</span></div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="comment">    @param   pointer - raw pointer</span></div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<span class="comment">    @retval          - Y* if Y is inherited from pointer class, otherwise nullptr</span></div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<span class="comment">**/</span></div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> Y, <span class="keyword">typename</span> X&gt;</div>
-<div class="line"><a name="l00055"></a><span class="lineno"><a class="line" href="rtti__cast_8h.html#af902ef7984c2e7134318854e38c7fa46">   55</a></span>&#160;Y* <a class="code" href="rtti__cast_8h.html#a1af8d1c717e312349e5cd36f39cf16fa">rtti_cast</a>(X* pointer)</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;{</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    <span class="keywordflow">if</span> constexpr (detail::has_is_derived_from&lt;X, Y&gt;)</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;        <span class="keywordflow">if</span> (pointer &amp;&amp; pointer-&gt;template is_derived_from&lt;Y&gt;())</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;            <span class="keywordflow">return</span> <span class="keyword">static_cast&lt;</span>Y*<span class="keyword">&gt;</span>(pointer);</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;concept has_is_derived_from = requires(T* t) { t-&gt;template is_derived_from&lt;From&gt;(); };</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160; </div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;} <span class="comment">// namespace detail</span></div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="comment">/**</span></div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="comment">    @brief   Returns Y* if Y is inherited from pointer class, otherwise nullptr</span></div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="comment">    @details Pointer class should contain QX_RTTI_CLASS</span></div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="comment">    @tparam  Y       - type to cast to</span></div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="comment">    @param   pointer - unique or shared pointer</span></div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="comment">    @retval          - Y* if Y is inherited from pointer class, otherwise nullptr</span></div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="comment">**/</span></div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> Y&gt;</div>
+<div class="line"><a name="l00033"></a><span class="lineno"><a class="line" href="rtti__cast_8h.html#a1af8d1c717e312349e5cd36f39cf16fa">   33</a></span>&#160;Y* <a class="code" href="rtti__cast_8h.html#a1af8d1c717e312349e5cd36f39cf16fa">rtti_cast</a>(<span class="keyword">auto</span>&amp; pointer)</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;{</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    <span class="keyword">using</span> smart_pointer_t = <span class="keyword">typename</span> std::remove_reference_t&lt;decltype(pointer)&gt;::element_type;</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    <span class="keywordflow">if</span> constexpr (detail::has_is_derived_from&lt;smart_pointer_t, Y&gt;)</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;        <span class="keywordflow">if</span> (pointer &amp;&amp; pointer-&gt;template is_derived_from&lt;Y&gt;())</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;            <span class="keywordflow">return</span> <span class="keyword">static_cast&lt;</span>Y*<span class="keyword">&gt;</span>(pointer.get());</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160; </div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    <span class="keywordflow">return</span> <span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;}</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="comment">/**</span></div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="comment">    @brief   Returns Y* if Y is inherited from pointer class, otherwise nullptr</span></div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="comment">    @details Pointer class should contain QX_RTTI_CLASS</span></div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="comment">    @tparam  Y       - type to cast to</span></div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="comment">    @tparam  X       - type to cast from</span></div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="comment">    @param   pointer - raw pointer</span></div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="comment">    @retval          - Y* if Y is inherited from pointer class, otherwise nullptr</span></div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="comment">**/</span></div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> Y, <span class="keyword">typename</span> X&gt;</div>
+<div class="line"><a name="l00052"></a><span class="lineno"><a class="line" href="rtti__cast_8h.html#af902ef7984c2e7134318854e38c7fa46">   52</a></span>&#160;Y* <a class="code" href="rtti__cast_8h.html#a1af8d1c717e312349e5cd36f39cf16fa">rtti_cast</a>(X* pointer)</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;{</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    <span class="keywordflow">if</span> constexpr (detail::has_is_derived_from&lt;X, Y&gt;)</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;        <span class="keywordflow">if</span> (pointer &amp;&amp; pointer-&gt;template is_derived_from&lt;Y&gt;())</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;            <span class="keywordflow">return</span> <span class="keyword">static_cast&lt;</span>Y*<span class="keyword">&gt;</span>(pointer);</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160; </div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    <span class="keywordflow">return</span> <span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;}</div>
 <div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160; </div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    <span class="keywordflow">return</span> <span class="keyword">nullptr</span>;</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;}</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160; </div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;} <span class="comment">// namespace qx</span></div>
-<div class="ttc" id="artti__cast_8h_html_a1af8d1c717e312349e5cd36f39cf16fa"><div class="ttname"><a href="rtti__cast_8h.html#a1af8d1c717e312349e5cd36f39cf16fa">qx::rtti_cast</a></div><div class="ttdeci">Y * rtti_cast(auto &amp;pointer)</div><div class="ttdoc">Returns Y* if Y is inherited from pointer class, otherwise nullptr.</div><div class="ttdef"><b>Definition:</b> <a href="rtti__cast_8h_source.html#l00036">rtti_cast.h:36</a></div></div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;} <span class="comment">// namespace qx</span></div>
+<div class="ttc" id="artti__cast_8h_html_a1af8d1c717e312349e5cd36f39cf16fa"><div class="ttname"><a href="rtti__cast_8h.html#a1af8d1c717e312349e5cd36f39cf16fa">qx::rtti_cast</a></div><div class="ttdeci">Y * rtti_cast(auto &amp;pointer)</div><div class="ttdoc">Returns Y* if Y is inherited from pointer class, otherwise nullptr.</div><div class="ttdef"><b>Definition:</b> <a href="rtti__cast_8h_source.html#l00033">rtti_cast.h:33</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
