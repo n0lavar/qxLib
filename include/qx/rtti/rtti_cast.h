@@ -18,10 +18,7 @@ namespace detail
 {
 
 template<typename T, typename From>
-concept has_is_derived_from = requires(T* t)
-{
-    t->template is_derived_from<From>();
-};
+concept has_is_derived_from = requires(T* t) { t->template is_derived_from<From>(); };
 
 } // namespace detail
 

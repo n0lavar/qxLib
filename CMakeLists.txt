@@ -45,7 +45,7 @@ include_directories(
     "${CMAKE_CURRENT_LIST_DIR}/tests/"
 )
 
-add_library(qxLib ${FILES_HEADERS} ${FILES_SOURCES} ${FILES_INLINES})
+add_executable(qxLib ${FILES_HEADERS} ${FILES_SOURCES} ${FILES_INLINES})
 set_target_options(qxLib)
 set_qxlib_target_options(qxLib)
 

@@ -21,10 +21,7 @@ template<class T>
 concept enumeration = is_enumeration<T>;
 
 template<class T>
-concept is_iterator = requires(T)
-{
-    typename T::iterator_category;
-};
+concept is_iterator = requires(T) { typename T::iterator_category; };
 
 template<class T>
 concept is_random_access_iterator =

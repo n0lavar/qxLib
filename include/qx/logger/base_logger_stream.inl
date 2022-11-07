@@ -54,7 +54,7 @@ inline void base_logger_stream::log(
             }
             else
             {
-                buffers.sTag      = to_wstring(pszTag);
+                buffers.sTag      = pszTag ? to_wstring(pszTag) : basic_string<char_type>();
                 buffers.sFile     = to_wstring(pszFile);
                 buffers.sFunction = to_wstring(pszFunction);
 
@@ -157,6 +157,18 @@ inline void base_logger_stream::format_line(
 
     switch (eLogLevel)
     {
+    case log_level::very_verbose:
+        buffers.sFormat = QX_STR_PREFIX(char_type, "[VV][") + buffers.sFormat;
+        break;
+
+    case log_level::verbose:
+        buffers.sFormat = QX_STR_PREFIX(char_type, "[V][") + buffers.sFormat;
+        break;
+
+    case log_level::important:
+        buffers.sFormat = QX_STR_PREFIX(char_type, "[I][") + buffers.sFormat;
+        break;
+
     case log_level::warning:
         buffers.sFormat = QX_STR_PREFIX(char_type, "[W][") + buffers.sFormat;
         break;

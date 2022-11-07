@@ -25,10 +25,7 @@ namespace detail
 {
 
 template<typename T>
-concept has_get_class_id_static = requires(T t)
-{
-    T::get_class_id_static();
-};
+concept has_get_class_id_static = requires(T t) { T::get_class_id_static(); };
 
 } // namespace detail
 
