@@ -105,15 +105,15 @@ TEST(type_traits, visit_overload)
     int        result         = 0;
     const auto visit_overload = qx::visit_overload { [&result](const Fluid&)
                                                      {
-                                                         result= 1;
+                                                         result = 1;
                                                      },
                                                      [&result](const LightItem&)
                                                      {
-                                                         result= 2;
+                                                         result = 2;
                                                      },
                                                      [&result](const auto&)
                                                      {
-                                                         result= 3;
+                                                         result = 3;
                                                      } };
 
     std::variant<Fluid, LightItem, HeavyItem, FragileItem> package = HeavyItem();

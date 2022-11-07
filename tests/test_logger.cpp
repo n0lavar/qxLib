@@ -103,18 +103,13 @@ protected:
         m_pLogger = std::make_unique<qx::logger>();
 
         auto pConsoleLoggerStream = std::make_unique<qx::cout_logger_stream>();
-
         pConsoleLoggerStream->deregister_unit(qx::base_logger_stream::k_svDefaultUnit);
-
         pConsoleLoggerStream->register_unit(Traits::GetUnit(), { qx::log_level::none });
 
         auto pFileLoggerStream = std::make_unique<qx::file_logger_stream>();
-
         pFileLoggerStream->set_logs_folder(Traits::GetLogsFolder());
         pFileLoggerStream->deregister_unit(qx::base_logger_stream::k_svDefaultUnit);
-
         pFileLoggerStream->register_unit(Traits::GetUnit(), { qx::log_level::log });
-
         pFileLoggerStream->register_file(Traits::GetUnit(), Traits::GetLogsFile());
 
         if constexpr (Traits::GetTag() == TRACE_TAG_TAG1)
@@ -122,8 +117,7 @@ protected:
             pFileLoggerStream->register_unit(
                 Traits::GetTag(),
                 { qx::log_level::log,
-                  [](qx::string& sMsg,
-                     qx::string& sFormat,
+                  [](qx::logger_buffers<char>& buffers,
                      qx::log_level,
                      const char*      pszFormat,
                      std::string_view svTag,
@@ -132,9 +126,10 @@ protected:
                      int,
                      va_list args)
                   {
-                      sMsg.vsprintf(pszFormat, args);
-                      qx::base_logger_stream::format_time_string(sFormat);
-                      sMsg = qx::string("   [") + sFormat + "][" + svTag + "] " + sMsg + '\n';
+                      buffers.sMessage.vsprintf(pszFormat, args);
+                      qx::base_logger_stream::format_time_string(buffers.sFormat);
+                      buffers.sMessage =
+                          qx::string("   [") + buffers.sFormat + "][" + svTag + "] " + buffers.sMessage + '\n';
                   } });
 
             pFileLoggerStream->register_file(Traits::GetTag(), Traits::GetLogsFile());
@@ -287,19 +282,19 @@ protected:
 TYPED_TEST_SUITE(TestLogger, Implementations);
 
 #define TRACE(traceFile, format, ...) \
-    myLogger.output(qx::log_level::log, format, nullptr, traceFile, __FUNCTION__, __LINE__, ##__VA_ARGS__)
+    myLogger.log(qx::log_level::log, format, nullptr, traceFile, __FUNCTION__, __LINE__, ##__VA_ARGS__)
 
 #define TRACE_WARNING(traceFile, format, ...) \
-    myLogger.output(qx::log_level::warning, format, nullptr, traceFile, __FUNCTION__, __LINE__, ##__VA_ARGS__)
+    myLogger.log(qx::log_level::warning, format, nullptr, traceFile, __FUNCTION__, __LINE__, ##__VA_ARGS__)
 
 #define TRACE_TAG(traceFile, tag, format, ...) \
-    myLogger.output(qx::log_level::log, format, tag, traceFile, __FUNCTION__, __LINE__, ##__VA_ARGS__)
+    myLogger.log(qx::log_level::log, format, tag, traceFile, __FUNCTION__, __LINE__, ##__VA_ARGS__)
 
 #define TRACE_ERROR(traceFile, format, ...) \
-    myLogger.output(qx::log_level::error, format, nullptr, traceFile, __FUNCTION__, __LINE__, ##__VA_ARGS__)
+    myLogger.log(qx::log_level::error, format, nullptr, traceFile, __FUNCTION__, __LINE__, ##__VA_ARGS__)
 
 #define TRACE_ASSERT(traceFile, expr, format, ...) \
-    myLogger.output(                               \
+    myLogger.log(                                  \
         qx::log_level::critical,                   \
         "[%s] " format,                            \
         nullptr,                                   \
