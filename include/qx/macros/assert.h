@@ -82,7 +82,7 @@
 #endif
 
 #ifndef QX_EXPECT_DEBUG_BREAK
-    #if QX_DEBUG
+    #if QX_DEBUG || QX_REL_WITH_DEBUG_INFO
         #define QX_EXPECT_DEBUG_BREAK QX_DEBUG_BREAK
     #else
         #define QX_EXPECT_DEBUG_BREAK QX_EMPTY_MACRO
@@ -101,7 +101,7 @@
 #endif
 
 #ifndef QX_ASSERT_DEBUG_BREAK
-    #if QX_DEBUG
+    #if QX_DEBUG || QX_REL_WITH_DEBUG_INFO
         #define QX_ASSERT_DEBUG_BREAK QX_DEBUG_BREAK
     #else
         #define QX_ASSERT_DEBUG_BREAK QX_EMPTY_MACRO

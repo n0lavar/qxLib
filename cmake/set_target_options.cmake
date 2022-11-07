@@ -64,6 +64,13 @@ function(set_target_options _target)
         )
         
     endif()
+
+    target_compile_definitions(${_target} PRIVATE
+        $<$<CONFIG:Debug>:          QX_DEBUG=1 QX_RELEASE=0 QX_REL_WITH_DEBUG_INFO=0 QX_MIN_SIZE_RELEASE=0>
+        $<$<CONFIG:Release>:        QX_DEBUG=0 QX_RELEASE=1 QX_REL_WITH_DEBUG_INFO=0 QX_MIN_SIZE_RELEASE=0>
+        $<$<CONFIG:RelWithDebInfo>: QX_DEBUG=0 QX_RELEASE=0 QX_REL_WITH_DEBUG_INFO=1 QX_MIN_SIZE_RELEASE=0>
+        $<$<CONFIG:MinSizeRel>:     QX_DEBUG=0 QX_RELEASE=0 QX_REL_WITH_DEBUG_INFO=0 QX_MIN_SIZE_RELEASE=1>
+    )
         
     target_compile_features(${_target} PRIVATE 
         cxx_std_20
