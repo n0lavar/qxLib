@@ -10,110 +10,110 @@
 namespace qx
 {
 
-template<class Traits>
-inline basic_string<Traits>::basic_string(value_type chSymbol) noexcept
+template<class char_type, class traits_type>
+inline basic_string<char_type, traits_type>::basic_string(value_type chSymbol) noexcept
 {
     assign(chSymbol);
 }
 
-template<class Traits>
-inline basic_string<Traits>::basic_string(size_type nSymbols, value_type chSymbol) noexcept
+template<class char_type, class traits_type>
+inline basic_string<char_type, traits_type>::basic_string(size_type nSymbols, value_type chSymbol) noexcept
 {
     assign(nSymbols, chSymbol);
 }
 
-template<class Traits>
-inline basic_string<Traits>::basic_string(const_pointer pszSource, size_type nSymbols) noexcept
+template<class char_type, class traits_type>
+inline basic_string<char_type, traits_type>::basic_string(const_pointer pszSource, size_type nSymbols) noexcept
 {
     assign(pszSource, nSymbols);
 }
 
-template<class Traits>
-inline basic_string<Traits>::basic_string(const_pointer pszSource) noexcept
+template<class char_type, class traits_type>
+inline basic_string<char_type, traits_type>::basic_string(const_pointer pszSource) noexcept
 {
     assign(pszSource);
 }
 
-template<class Traits>
-inline basic_string<Traits>::basic_string(basic_string&& sAnother) noexcept
+template<class char_type, class traits_type>
+inline basic_string<char_type, traits_type>::basic_string(basic_string&& sAnother) noexcept
 {
     assign(std::move(sAnother));
 }
 
-template<class Traits>
-inline basic_string<Traits>::basic_string(const basic_string& sAnother) noexcept
+template<class char_type, class traits_type>
+inline basic_string<char_type, traits_type>::basic_string(const basic_string& sAnother) noexcept
 {
     assign(sAnother);
 }
 
-template<class Traits>
-template<class FwdIt>
-inline basic_string<Traits>::basic_string(FwdIt itFirst, FwdIt itLast) noexcept
+template<class char_type, class traits_type>
+template<class fwd_it_type>
+inline basic_string<char_type, traits_type>::basic_string(fwd_it_type itFirst, fwd_it_type itLast) noexcept
 {
     assign(itFirst, itLast);
 }
 
-template<class Traits>
-template<string_convertable String>
-inline basic_string<Traits>::basic_string(const String& sAnother) noexcept
+template<class char_type, class traits_type>
+template<string_convertable string_type>
+inline basic_string<char_type, traits_type>::basic_string(const string_type& sAnother) noexcept
 {
     assign(sAnother);
 }
 
-template<class Traits>
-inline basic_string<Traits>::~basic_string() noexcept
+template<class char_type, class traits_type>
+inline basic_string<char_type, traits_type>::~basic_string() noexcept
 {
     free();
 }
 
-template<class Traits>
-inline void basic_string<Traits>::assign(value_type chSymbol) noexcept
+template<class char_type, class traits_type>
+inline void basic_string<char_type, traits_type>::assign(value_type chSymbol) noexcept
 {
     assign(&chSymbol, 1);
 }
 
-template<class Traits>
-inline void basic_string<Traits>::assign(size_type nSymbols, value_type chSymbol) noexcept
+template<class char_type, class traits_type>
+inline void basic_string<char_type, traits_type>::assign(size_type nSymbols, value_type chSymbol) noexcept
 {
     if (_resize(nSymbols))
         std::fill(begin(), end(), chSymbol);
 }
 
-template<class Traits>
-inline void basic_string<Traits>::assign(const_pointer pSource, size_type nSymbols) noexcept
+template<class char_type, class traits_type>
+inline void basic_string<char_type, traits_type>::assign(const_pointer pSource, size_type nSymbols) noexcept
 {
     if (_resize(nSymbols))
         std::memmove(data(), pSource, nSymbols * sizeof(value_type));
 }
 
-template<class Traits>
-inline void basic_string<Traits>::assign(const_pointer pszSource) noexcept
+template<class char_type, class traits_type>
+inline void basic_string<char_type, traits_type>::assign(const_pointer pszSource) noexcept
 {
     if (pszSource != data())
-        assign(pszSource, Traits::length(pszSource));
+        assign(pszSource, traits_type::length(pszSource));
 }
 
-template<class Traits>
-inline void basic_string<Traits>::assign(basic_string&& sAnother) noexcept
+template<class char_type, class traits_type>
+inline void basic_string<char_type, traits_type>::assign(basic_string&& sAnother) noexcept
 {
     std::swap(m_Data, sAnother.m_Data);
 }
 
-template<class Traits>
-inline void basic_string<Traits>::assign(const basic_string& sAnother) noexcept
+template<class char_type, class traits_type>
+inline void basic_string<char_type, traits_type>::assign(const basic_string& sAnother) noexcept
 {
     if (sAnother.data() != data())
         assign(sAnother.data());
 }
 
-template<class Traits>
-template<class FwdIt>
-inline void basic_string<Traits>::assign(FwdIt itFirst, FwdIt itLast) noexcept
+template<class char_type, class traits_type>
+template<class fwd_it_type>
+inline void basic_string<char_type, traits_type>::assign(fwd_it_type itFirst, fwd_it_type itLast) noexcept
 {
     if (_resize(std::distance(itFirst, itLast)))
     {
-        FwdIt    itOther = itFirst;
-        iterator itThis  = begin();
+        fwd_it_type itOther = itFirst;
+        iterator    itThis  = begin();
 
         while (itOther != itLast)
         {
@@ -124,15 +124,15 @@ inline void basic_string<Traits>::assign(FwdIt itFirst, FwdIt itLast) noexcept
     }
 }
 
-template<class Traits>
-template<string_convertable String>
-inline void basic_string<Traits>::assign(const String& sAnother) noexcept
+template<class char_type, class traits_type>
+template<string_convertable string_type>
+inline void basic_string<char_type, traits_type>::assign(const string_type& sAnother) noexcept
 {
     assign(sAnother.cbegin(), sAnother.cend());
 }
 
-template<class Traits>
-void basic_string<Traits>::sprintf(const_pointer pszFormat, ...) noexcept
+template<class char_type, class traits_type>
+void basic_string<char_type, traits_type>::sprintf(const_pointer pszFormat, ...) noexcept
 {
     va_list args;
     va_start(args, pszFormat);
@@ -140,31 +140,31 @@ void basic_string<Traits>::sprintf(const_pointer pszFormat, ...) noexcept
     va_end(args);
 }
 
-template<class Traits>
-inline void basic_string<Traits>::vsprintf(const_pointer pszFormat, va_list args) noexcept
+template<class char_type, class traits_type>
+inline void basic_string<char_type, traits_type>::vsprintf(const_pointer pszFormat, va_list args) noexcept
 {
     va_list argsCopy;
     va_copy(argsCopy, args);
-    int nLength = Traits::vsnprintf(nullptr, 0, pszFormat, argsCopy);
+    int nLength = traits_type::vsnprintf(nullptr, 0, pszFormat, argsCopy);
     va_end(argsCopy);
 
     if (nLength > 0 && _resize(static_cast<size_type>(nLength)))
-    {
-        Traits::vsnprintf(data(), static_cast<size_type>(nLength) + 1, pszFormat, args);
-    }
+        traits_type::vsnprintf(data(), static_cast<size_type>(nLength) + 1, pszFormat, args);
 }
 
-template<class Traits>
-template<class... Args>
-inline basic_string<Traits> basic_string<Traits>::static_sprintf(const_pointer pszFormat, Args... args) noexcept
+template<class char_type, class traits_type>
+template<class... args_type>
+inline basic_string<char_type, traits_type> basic_string<char_type, traits_type>::static_sprintf(
+    const_pointer pszFormat,
+    args_type... args) noexcept
 {
     basic_string sTemp;
     sTemp.sprintf(pszFormat, args...);
     return std::move(sTemp);
 }
 
-template<class Traits>
-inline void basic_string<Traits>::append_sprintf(const_pointer pszFormat, ...) noexcept
+template<class char_type, class traits_type>
+inline void basic_string<char_type, traits_type>::append_sprintf(const_pointer pszFormat, ...) noexcept
 {
     va_list args;
     va_start(args, pszFormat);
@@ -172,29 +172,30 @@ inline void basic_string<Traits>::append_sprintf(const_pointer pszFormat, ...) n
     va_end(args);
 }
 
-template<class Traits>
-inline void basic_string<Traits>::append_vsprintf(const_pointer pszFormat, va_list args) noexcept
+template<class char_type, class traits_type>
+inline void basic_string<char_type, traits_type>::append_vsprintf(const_pointer pszFormat, va_list args) noexcept
 {
     va_list argsCopy;
     va_copy(argsCopy, args);
-    int nLength = Traits::vsnprintf(nullptr, 0, pszFormat, argsCopy);
+    int nLength = traits_type::vsnprintf(nullptr, 0, pszFormat, argsCopy);
     va_end(argsCopy);
 
     const size_type nSize = size();
     if (nLength > 0 && _resize(nSize + static_cast<size_type>(nLength)))
     {
-        Traits::vsnprintf(data() + nSize, static_cast<size_type>(nLength) + 1, pszFormat, args);
+        traits_type::vsnprintf(data() + nSize, static_cast<size_type>(nLength) + 1, pszFormat, args);
     }
 }
 
-template<class Traits>
-inline void basic_string<Traits>::swap(basic_string& sOther) noexcept
+template<class char_type, class traits_type>
+inline void basic_string<char_type, traits_type>::swap(basic_string& sOther) noexcept
 {
     std::swap(m_Data, sOther.m_Data);
 }
 
-template<class Traits>
-inline typename basic_string<Traits>::size_type basic_string<Traits>::reserve(size_type nCapacity) noexcept
+template<class char_type, class traits_type>
+inline typename basic_string<char_type, traits_type>::size_type basic_string<char_type, traits_type>::reserve(
+    size_type nCapacity) noexcept
 {
     if (nCapacity > capacity())
         _resize(nCapacity, string_resize_type::reserve);
@@ -202,109 +203,116 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::reserve(si
     return capacity();
 }
 
-template<class Traits>
-inline void basic_string<Traits>::shrink_to_fit() noexcept
+template<class char_type, class traits_type>
+inline void basic_string<char_type, traits_type>::shrink_to_fit() noexcept
 {
     if (!m_Data.is_small() && capacity() > size())
         _resize(size(), string_resize_type::shrink_to_fit);
 }
 
-template<class Traits>
-inline void basic_string<Traits>::free() noexcept
+template<class char_type, class traits_type>
+inline void basic_string<char_type, traits_type>::free() noexcept
 {
     m_Data.free();
 }
 
-template<class Traits>
-inline typename basic_string<Traits>::string_view basic_string<Traits>::substr(size_type nPos, size_type nSymbols)
-    const noexcept
+template<class char_type, class traits_type>
+inline typename basic_string<char_type, traits_type>::string_view basic_string<char_type, traits_type>::substr(
+    size_type nPos,
+    size_type nSymbols) const noexcept
 {
     return string_view(data() + nPos, nSymbols != npos ? nSymbols : size() - nPos);
 }
 
-template<class Traits>
-inline void basic_string<Traits>::to_lower() noexcept
+template<class char_type, class traits_type>
+inline void basic_string<char_type, traits_type>::to_lower() noexcept
 {
     for (value_type& ch : *this)
-        ch = Traits::to_lower(ch);
+        ch = traits_type::to_lower(ch);
 }
 
-template<class Traits>
-inline void basic_string<Traits>::to_upper() noexcept
+template<class char_type, class traits_type>
+inline void basic_string<char_type, traits_type>::to_upper() noexcept
 {
     for (value_type& ch : *this)
-        ch = Traits::to_upper(ch);
+        ch = traits_type::to_upper(ch);
 }
 
-template<class Traits>
-inline typename basic_string<Traits>::value_type basic_string<Traits>::front(void) const noexcept
+template<class char_type, class traits_type>
+inline typename basic_string<char_type, traits_type>::value_type basic_string<char_type, traits_type>::front(
+    void) const noexcept
 {
     return at(0);
 }
 
-template<class Traits>
-inline typename basic_string<Traits>::value_type basic_string<Traits>::back(void) const noexcept
+template<class char_type, class traits_type>
+inline typename basic_string<char_type, traits_type>::value_type basic_string<char_type, traits_type>::back(
+    void) const noexcept
 {
     return at(size() - 1);
 }
 
-template<class Traits>
-inline typename basic_string<Traits>::size_type basic_string<Traits>::length(void) const noexcept
+template<class char_type, class traits_type>
+inline typename basic_string<char_type, traits_type>::size_type basic_string<char_type, traits_type>::length(
+    void) const noexcept
 {
     return size();
 }
 
-template<class Traits>
-inline typename basic_string<Traits>::const_pointer basic_string<Traits>::c_str(void) const noexcept
+template<class char_type, class traits_type>
+inline typename basic_string<char_type, traits_type>::const_pointer basic_string<char_type, traits_type>::c_str(
+    void) const noexcept
 {
     return data();
 }
 
-template<class Traits>
-inline typename basic_string<Traits>::size_type basic_string<Traits>::capacity(void) const noexcept
+template<class char_type, class traits_type>
+inline typename basic_string<char_type, traits_type>::size_type basic_string<char_type, traits_type>::capacity(
+    void) const noexcept
 {
     return m_Data.capacity();
 }
 
-template<class Traits>
-constexpr typename basic_string<Traits>::size_type basic_string<Traits>::max_size() noexcept
+template<class char_type, class traits_type>
+constexpr typename basic_string<char_type, traits_type>::size_type basic_string<char_type, traits_type>::
+    max_size() noexcept
 {
     return std::numeric_limits<size_type>::max() - 1 // npos reserved
            - 1;                                      // null terminator
 }
 
-template<class Traits>
-template<typename To>
-inline std::optional<To> basic_string<Traits>::to(const_pointer pszFormat) const noexcept
+template<class char_type, class traits_type>
+template<typename to_type>
+inline std::optional<to_type> basic_string<char_type, traits_type>::to(const_pointer pszFormat) const noexcept
 {
-    std::optional<To> optResult = std::nullopt;
+    std::optional<to_type> optResult = std::nullopt;
 
     if constexpr (
-        std::is_trivial_v<
-            To> && std::is_standard_layout_v<To> || std::is_pointer_v<To> || std::is_same_v<To, std::nullptr_t>)
+        std::is_trivial_v<to_type> && std::is_standard_layout_v<to_type> || std::is_pointer_v<to_type>
+        || std::is_same_v<to_type, std::nullptr_t>)
     {
-        if constexpr (std::is_same_v<To, std::nullptr_t>)
+        if constexpr (std::is_same_v<to_type, std::nullptr_t>)
         {
-            if (compare(QX_STR_PREFIX(typename Traits::value_type, "nullptr")) == 0)
+            if (compare(QX_STR_PREFIX(typename traits_type::value_type, "nullptr")) == 0)
             {
                 optResult = nullptr;
             }
         }
-        else if constexpr (std::is_same_v<To, bool>)
+        else if constexpr (std::is_same_v<to_type, bool>)
         {
-            if (compare(QX_STR_PREFIX(typename Traits::value_type, "true")) == 0)
+            if (compare(QX_STR_PREFIX(typename traits_type::value_type, "true")) == 0)
             {
                 optResult = true;
             }
-            else if (compare(QX_STR_PREFIX(typename Traits::value_type, "false")) == 0)
+            else if (compare(QX_STR_PREFIX(typename traits_type::value_type, "false")) == 0)
             {
                 optResult = false;
             }
         }
-        else if (const auto pszSelectedFormat = pszFormat ? pszFormat : get_format_specifier<value_type, To>())
+        else if (const auto pszSelectedFormat = pszFormat ? pszFormat : get_format_specifier<value_type, to_type>())
         {
-            To        result;
-            const int nConvertedArgs = Traits::sscanf(data(), pszSelectedFormat, &result);
+            to_type   result;
+            const int nConvertedArgs = traits_type::sscanf(data(), pszSelectedFormat, &result);
 
             if (nConvertedArgs == 1)
                 optResult = result;
@@ -312,7 +320,7 @@ inline std::optional<To> basic_string<Traits>::to(const_pointer pszFormat) const
     }
     else
     {
-        To           result;
+        to_type      result;
         sstream_type ss(data());
         ss >> result;
         optResult = result;
@@ -321,8 +329,8 @@ inline std::optional<To> basic_string<Traits>::to(const_pointer pszFormat) const
     return optResult;
 }
 
-template<class Traits>
-inline typename basic_string<Traits>::size_type basic_string<Traits>::copy(
+template<class char_type, class traits_type>
+inline typename basic_string<char_type, traits_type>::size_type basic_string<char_type, traits_type>::copy(
     pointer   pDest,
     size_type nCount,
     size_type nPos) const noexcept
@@ -338,28 +346,28 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::copy(
     return nCharsToCopy;
 }
 
-template<class Traits>
-template<typename From>
-inline void basic_string<Traits>::from(const From& data, const_pointer pszFormat) noexcept
+template<class char_type, class traits_type>
+template<typename from_type>
+inline void basic_string<char_type, traits_type>::from(const from_type& data, const_pointer pszFormat) noexcept
 {
     if constexpr (
-        std::is_trivial_v<
-            From> && std::is_standard_layout_v<From> || std::is_pointer_v<From> || std::is_same_v<From, std::nullptr_t>)
+        std::is_trivial_v<from_type> && std::is_standard_layout_v<from_type> || std::is_pointer_v<from_type>
+        || std::is_same_v<from_type, std::nullptr_t>)
     {
         if (!pszFormat)
         {
-            if constexpr (std::is_same_v<From, std::nullptr_t>)
+            if constexpr (std::is_same_v<from_type, std::nullptr_t>)
             {
-                pszFormat = QX_STR_PREFIX(typename Traits::value_type, "nullptr");
+                pszFormat = QX_STR_PREFIX(typename traits_type::value_type, "nullptr");
             }
-            else if constexpr (std::is_same_v<From, bool>)
+            else if constexpr (std::is_same_v<from_type, bool>)
             {
-                pszFormat = data ? QX_STR_PREFIX(typename Traits::value_type, "true")
-                                 : QX_STR_PREFIX(typename Traits::value_type, "false");
+                pszFormat = data ? QX_STR_PREFIX(typename traits_type::value_type, "true")
+                                 : QX_STR_PREFIX(typename traits_type::value_type, "false");
             }
             else
             {
-                pszFormat = get_format_specifier<value_type, From>();
+                pszFormat = get_format_specifier<value_type, from_type>();
             }
         }
 
@@ -374,68 +382,70 @@ inline void basic_string<Traits>::from(const From& data, const_pointer pszFormat
     }
 }
 
-template<class Traits>
-template<typename From>
-inline basic_string<Traits> basic_string<Traits>::static_from(const From& data, const_pointer pszFormat) noexcept
+template<class char_type, class traits_type>
+template<typename from_type>
+inline basic_string<char_type, traits_type> basic_string<char_type, traits_type>::static_from(
+    const from_type& data,
+    const_pointer    pszFormat) noexcept
 {
     basic_string sTemp;
     sTemp.from(data, pszFormat);
     return std::move(sTemp);
 }
 
-template<class Traits>
-inline void basic_string<Traits>::append(value_type chSymbol) noexcept
+template<class char_type, class traits_type>
+inline void basic_string<char_type, traits_type>::append(value_type chSymbol) noexcept
 {
     append(&chSymbol, 1);
 }
 
-template<class Traits>
-inline void basic_string<Traits>::append(const_pointer pszStr, size_type nSymbols) noexcept
+template<class char_type, class traits_type>
+inline void basic_string<char_type, traits_type>::append(const_pointer pszStr, size_type nSymbols) noexcept
 {
     const size_type nSize       = size();
-    const size_type nSizeSource = nSymbols == npos ? Traits::length(pszStr) : nSymbols;
+    const size_type nSizeSource = nSymbols == npos ? traits_type::length(pszStr) : nSymbols;
 
     if (_resize(nSize + nSizeSource))
         std::memcpy(data() + nSize, pszStr, nSizeSource * sizeof(value_type));
 }
 
-template<class Traits>
-inline void basic_string<Traits>::append(const basic_string& sStr) noexcept
+template<class char_type, class traits_type>
+inline void basic_string<char_type, traits_type>::append(const basic_string& sStr) noexcept
 {
     append(sStr.data(), sStr.size());
 }
 
-template<class Traits>
-template<class FwdIt>
-inline void basic_string<Traits>::append(FwdIt itBegin, FwdIt itEnd) noexcept
+template<class char_type, class traits_type>
+template<class fwd_it_type>
+inline void basic_string<char_type, traits_type>::append(fwd_it_type itBegin, fwd_it_type itEnd) noexcept
 {
     for (auto it = itBegin; it != itEnd; ++it)
         push_back(*it);
 }
 
-template<class Traits>
-template<string_convertable String>
-inline void basic_string<Traits>::append(const String& sStr) noexcept
+template<class char_type, class traits_type>
+template<string_convertable string_type>
+inline void basic_string<char_type, traits_type>::append(const string_type& sStr) noexcept
 {
     append(sStr.cbegin(), sStr.cend());
 }
 
-template<class Traits>
-inline typename basic_string<Traits>::size_type basic_string<Traits>::insert(
+template<class char_type, class traits_type>
+inline typename basic_string<char_type, traits_type>::size_type basic_string<char_type, traits_type>::insert(
     size_type  nPos,
     value_type chSymbol) noexcept
 {
     return insert(nPos, &chSymbol, 1);
 }
 
-template<class Traits>
-inline typename basic_string<Traits>::size_type basic_string<Traits>::insert(
+template<class char_type, class traits_type>
+inline typename basic_string<char_type, traits_type>::size_type basic_string<char_type, traits_type>::insert(
     size_type     nPos,
     const_pointer pszWhat,
     size_type     nSymbols) noexcept
 {
     const size_type nSize       = size();
-    const size_type nSizeSource = nSymbols == npos ? Traits::length(pszWhat) : nSymbols;
+    const size_type nSizeSource = nSymbols == npos ? traits_type::length(pszWhat) : nSymbols;
 
     if (nSizeSource > 0 && _resize(nSize + nSizeSource))
     {
@@ -449,14 +459,14 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::insert(
     }
 }
 
-template<class Traits>
-template<class FwdIt>
-inline typename basic_string<Traits>::size_type basic_string<Traits>::insert(
-    size_type nPos,
-    FwdIt     itWhatBegin,
-    FwdIt     itWhatEnd) noexcept
+template<class char_type, class traits_type>
+template<class fwd_it_type>
+inline typename basic_string<char_type, traits_type>::size_type basic_string<char_type, traits_type>::insert(
+    size_type   nPos,
+    fwd_it_type itWhatBegin,
+    fwd_it_type itWhatEnd) noexcept
 {
-    if constexpr (is_random_access_iterator<FwdIt>)
+    if constexpr (is_random_access_iterator<fwd_it_type>)
     {
         return insert(nPos, itWhatBegin.operator->(), static_cast<size_type>(itWhatEnd - itWhatBegin));
     }
@@ -487,31 +497,33 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::insert(
     }
 }
 
-template<class Traits>
-inline typename basic_string<Traits>::size_type basic_string<Traits>::insert(
+template<class char_type, class traits_type>
+inline typename basic_string<char_type, traits_type>::size_type basic_string<char_type, traits_type>::insert(
     size_type           nPos,
     const basic_string& sWhat) noexcept
 {
     return insert(nPos, sWhat.data(), sWhat.size());
 }
 
-template<class Traits>
-template<string_convertable String>
-inline typename basic_string<Traits>::size_type basic_string<Traits>::insert(size_type nPos, String sWhat) noexcept
+template<class char_type, class traits_type>
+template<string_convertable string_type>
+inline typename basic_string<char_type, traits_type>::size_type basic_string<char_type, traits_type>::insert(
+    size_type   nPos,
+    string_type sWhat) noexcept
 {
     return insert(static_cast<size_type>(nPos), sWhat.cbegin(), sWhat.cend());
 }
 
-template<class Traits>
-inline typename basic_string<Traits>::size_type basic_string<Traits>::insert(
+template<class char_type, class traits_type>
+inline typename basic_string<char_type, traits_type>::size_type basic_string<char_type, traits_type>::insert(
     const_iterator itPos,
     value_type     chSymbol) noexcept
 {
     return insert(static_cast<size_type>(itPos - cbegin()), chSymbol);
 }
 
-template<class Traits>
-inline typename basic_string<Traits>::size_type basic_string<Traits>::insert(
+template<class char_type, class traits_type>
+inline typename basic_string<char_type, traits_type>::size_type basic_string<char_type, traits_type>::insert(
     const_iterator itPos,
     const_pointer  pszWhat,
     size_type      nSymbols) noexcept
@@ -519,52 +531,52 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::insert(
     return insert(static_cast<size_type>(itPos - cbegin()), pszWhat, nSymbols);
 }
 
-template<class Traits>
-inline typename basic_string<Traits>::size_type basic_string<Traits>::insert(
+template<class char_type, class traits_type>
+inline typename basic_string<char_type, traits_type>::size_type basic_string<char_type, traits_type>::insert(
     const_iterator      itPos,
     const basic_string& sWhat) noexcept
 {
     return insert(static_cast<size_type>(itPos - cbegin()), sWhat.data(), sWhat.size());
 }
 
-template<class Traits>
-template<class FwdIt>
-inline typename basic_string<Traits>::size_type basic_string<Traits>::insert(
+template<class char_type, class traits_type>
+template<class fwd_it_type>
+inline typename basic_string<char_type, traits_type>::size_type basic_string<char_type, traits_type>::insert(
     const_iterator itPos,
-    FwdIt          itWhatBegin,
-    FwdIt          itWhatEnd) noexcept
+    fwd_it_type    itWhatBegin,
+    fwd_it_type    itWhatEnd) noexcept
 {
     return insert(static_cast<size_type>(itPos - begin()), itWhatBegin, itWhatEnd);
 }
 
-template<class Traits>
-template<string_convertable String>
-inline typename basic_string<Traits>::size_type basic_string<Traits>::insert(
+template<class char_type, class traits_type>
+template<string_convertable string_type>
+inline typename basic_string<char_type, traits_type>::size_type basic_string<char_type, traits_type>::insert(
     const_iterator itPos,
-    String         sWhat) noexcept
+    string_type    sWhat) noexcept
 {
     return insert(static_cast<size_type>(itPos - begin()), sWhat.cbegin(), sWhat.cend());
 }
 
-template<class Traits>
-inline void basic_string<Traits>::push_back(value_type chSymbol) noexcept
+template<class char_type, class traits_type>
+inline void basic_string<char_type, traits_type>::push_back(value_type chSymbol) noexcept
 {
     insert(size(), &chSymbol, 1);
 }
 
-template<class Traits>
-inline void basic_string<Traits>::push_front(value_type chSymbol) noexcept
+template<class char_type, class traits_type>
+inline void basic_string<char_type, traits_type>::push_front(value_type chSymbol) noexcept
 {
     insert(0, &chSymbol, 1);
 }
 
-template<class Traits>
-inline void basic_string<Traits>::erase(iterator itFirst, iterator itLast) noexcept
+template<class char_type, class traits_type>
+inline void basic_string<char_type, traits_type>::erase(iterator itFirst, iterator itLast) noexcept
 {
     if (const typename iterator::difference_type nCharsToErase = itLast - itFirst; nCharsToErase > 0)
     {
         const size_type nStartSize     = size();
-        const size_type nSymbolsToCopy = itLast != end() ? Traits::length(itLast.operator->()) : 0;
+        const size_type nSymbolsToCopy = itLast != end() ? traits_type::length(itLast.operator->()) : 0;
 
         if (nSymbolsToCopy > 0)
         {
@@ -578,52 +590,56 @@ inline void basic_string<Traits>::erase(iterator itFirst, iterator itLast) noexc
     }
 }
 
-template<class Traits>
-inline void basic_string<Traits>::erase(iterator itPos) noexcept
+template<class char_type, class traits_type>
+inline void basic_string<char_type, traits_type>::erase(iterator itPos) noexcept
 {
     erase(itPos, itPos + 1);
 }
 
-template<class Traits>
-inline void basic_string<Traits>::erase(size_type nPos) noexcept
+template<class char_type, class traits_type>
+inline void basic_string<char_type, traits_type>::erase(size_type nPos) noexcept
 {
     erase(iterator(this, nPos), iterator(this, nPos + 1));
 }
 
-template<class Traits>
-inline void basic_string<Traits>::erase(size_type nPos, size_type nSymbols) noexcept
+template<class char_type, class traits_type>
+inline void basic_string<char_type, traits_type>::erase(size_type nPos, size_type nSymbols) noexcept
 {
     erase(iterator(this, nPos), iterator(this, nPos + nSymbols));
 }
 
-template<class Traits>
-inline typename basic_string<Traits>::value_type basic_string<Traits>::pop_back(void) noexcept
+template<class char_type, class traits_type>
+inline typename basic_string<char_type, traits_type>::value_type basic_string<char_type, traits_type>::pop_back(
+    void) noexcept
 {
     value_type chRet = back();
     erase(size() - 1);
     return chRet;
 }
 
-template<class Traits>
-inline typename basic_string<Traits>::value_type basic_string<Traits>::pop_front() noexcept
+template<class char_type, class traits_type>
+inline typename basic_string<char_type, traits_type>::value_type basic_string<char_type, traits_type>::
+    pop_front() noexcept
 {
     value_type chRet = front();
     erase(0);
     return chRet;
 }
 
-template<class Traits>
-inline typename basic_string<Traits>::size_type basic_string<Traits>::trim_left(void) noexcept
+template<class char_type, class traits_type>
+inline typename basic_string<char_type, traits_type>::size_type basic_string<char_type, traits_type>::trim_left(
+    void) noexcept
 {
     return _trim_left(
         [](value_type ch)
         {
-            return Traits::is_space(ch);
+            return traits_type::is_space(ch);
         });
 }
 
-template<class Traits>
-inline typename basic_string<Traits>::size_type basic_string<Traits>::trim_left(value_type chSymbol) noexcept
+template<class char_type, class traits_type>
+inline typename basic_string<char_type, traits_type>::size_type basic_string<char_type, traits_type>::trim_left(
+    value_type chSymbol) noexcept
 {
     return _trim_left(
         [chSymbol](value_type ch)
@@ -632,8 +648,9 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::trim_left(
         });
 }
 
-template<class Traits>
-inline typename basic_string<Traits>::size_type basic_string<Traits>::trim_left(const_pointer pszStr) noexcept
+template<class char_type, class traits_type>
+inline typename basic_string<char_type, traits_type>::size_type basic_string<char_type, traits_type>::trim_left(
+    const_pointer pszStr) noexcept
 {
     return _trim_left(
         [pszStr](value_type ch)
@@ -648,8 +665,8 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::trim_left(
         });
 }
 
-template<class Traits>
-inline typename basic_string<Traits>::size_type basic_string<Traits>::trim_left(
+template<class char_type, class traits_type>
+inline typename basic_string<char_type, traits_type>::size_type basic_string<char_type, traits_type>::trim_left(
     const_pointer pStr,
     size_type     nStrSize) noexcept
 {
@@ -664,15 +681,18 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::trim_left(
         });
 }
 
-template<class Traits>
-inline typename basic_string<Traits>::size_type basic_string<Traits>::trim_left(const basic_string& sStr) noexcept
+template<class char_type, class traits_type>
+inline typename basic_string<char_type, traits_type>::size_type basic_string<char_type, traits_type>::trim_left(
+    const basic_string& sStr) noexcept
 {
     return trim_left(sStr.data(), sStr.size());
 }
 
-template<class Traits>
-template<class FwdIt>
-inline typename basic_string<Traits>::size_type basic_string<Traits>::trim_left(FwdIt itBegin, FwdIt itEnd) noexcept
+template<class char_type, class traits_type>
+template<class fwd_it_type>
+inline typename basic_string<char_type, traits_type>::size_type basic_string<char_type, traits_type>::trim_left(
+    fwd_it_type itBegin,
+    fwd_it_type itEnd) noexcept
 {
     return _trim_left(
         [itBegin, itEnd](auto ch)
@@ -685,25 +705,28 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::trim_left(
         });
 }
 
-template<class Traits>
-template<string_convertable String>
-inline typename basic_string<Traits>::size_type basic_string<Traits>::trim_left(const String& sStr) noexcept
+template<class char_type, class traits_type>
+template<string_convertable string_type>
+inline typename basic_string<char_type, traits_type>::size_type basic_string<char_type, traits_type>::trim_left(
+    const string_type& sStr) noexcept
 {
     return trim_left(sStr.cbegin(), sStr.cend());
 }
 
-template<class Traits>
-inline typename basic_string<Traits>::size_type basic_string<Traits>::trim_right() noexcept
+template<class char_type, class traits_type>
+inline typename basic_string<char_type, traits_type>::size_type basic_string<char_type, traits_type>::
+    trim_right() noexcept
 {
     return _trim_right(
         [](value_type ch)
         {
-            return Traits::is_space(ch);
+            return traits_type::is_space(ch);
         });
 }
 
-template<class Traits>
-inline typename basic_string<Traits>::size_type basic_string<Traits>::trim_right(value_type chSymbol) noexcept
+template<class char_type, class traits_type>
+inline typename basic_string<char_type, traits_type>::size_type basic_string<char_type, traits_type>::trim_right(
+    value_type chSymbol) noexcept
 {
     return _trim_right(
         [chSymbol](value_type ch)
@@ -712,8 +735,9 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::trim_right
         });
 }
 
-template<class Traits>
-inline typename basic_string<Traits>::size_type basic_string<Traits>::trim_right(const_pointer pszStr) noexcept
+template<class char_type, class traits_type>
+inline typename basic_string<char_type, traits_type>::size_type basic_string<char_type, traits_type>::trim_right(
+    const_pointer pszStr) noexcept
 {
     return _trim_right(
         [pszStr](value_type ch)
@@ -728,8 +752,8 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::trim_right
         });
 }
 
-template<class Traits>
-inline typename basic_string<Traits>::size_type basic_string<Traits>::trim_right(
+template<class char_type, class traits_type>
+inline typename basic_string<char_type, traits_type>::size_type basic_string<char_type, traits_type>::trim_right(
     const_pointer pStr,
     size_type     nStrSize) noexcept
 {
@@ -744,15 +768,18 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::trim_right
         });
 }
 
-template<class Traits>
-inline typename basic_string<Traits>::size_type basic_string<Traits>::trim_right(const basic_string& sStr) noexcept
+template<class char_type, class traits_type>
+inline typename basic_string<char_type, traits_type>::size_type basic_string<char_type, traits_type>::trim_right(
+    const basic_string& sStr) noexcept
 {
     return trim_right(sStr.data(), sStr.size());
 }
 
-template<class Traits>
-template<class FwdIt>
-inline typename basic_string<Traits>::size_type basic_string<Traits>::trim_right(FwdIt itBegin, FwdIt itEnd) noexcept
+template<class char_type, class traits_type>
+template<class fwd_it_type>
+inline typename basic_string<char_type, traits_type>::size_type basic_string<char_type, traits_type>::trim_right(
+    fwd_it_type itBegin,
+    fwd_it_type itEnd) noexcept
 {
     return _trim_right(
         [itBegin, itEnd](auto ch)
@@ -765,25 +792,28 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::trim_right
         });
 }
 
-template<class Traits>
-template<string_convertable String>
-inline typename basic_string<Traits>::size_type basic_string<Traits>::trim_right(const String& sStr) noexcept
+template<class char_type, class traits_type>
+template<string_convertable string_type>
+inline typename basic_string<char_type, traits_type>::size_type basic_string<char_type, traits_type>::trim_right(
+    const string_type& sStr) noexcept
 {
     return trim_right(sStr.cbegin(), sStr.cend());
 }
 
-template<class Traits>
-inline typename basic_string<Traits>::size_type basic_string<Traits>::trim(void) noexcept
+template<class char_type, class traits_type>
+inline typename basic_string<char_type, traits_type>::size_type basic_string<char_type, traits_type>::trim(
+    void) noexcept
 {
     return _trim(
         [](value_type ch)
         {
-            return Traits::is_space(ch);
+            return traits_type::is_space(ch);
         });
 }
 
-template<class Traits>
-inline typename basic_string<Traits>::size_type basic_string<Traits>::trim(value_type chSymbol) noexcept
+template<class char_type, class traits_type>
+inline typename basic_string<char_type, traits_type>::size_type basic_string<char_type, traits_type>::trim(
+    value_type chSymbol) noexcept
 {
     return _trim(
         [chSymbol](value_type ch)
@@ -792,8 +822,9 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::trim(value
         });
 }
 
-template<class Traits>
-inline typename basic_string<Traits>::size_type basic_string<Traits>::trim(const_pointer pszStr) noexcept
+template<class char_type, class traits_type>
+inline typename basic_string<char_type, traits_type>::size_type basic_string<char_type, traits_type>::trim(
+    const_pointer pszStr) noexcept
 {
     return _trim(
         [pszStr](value_type ch)
@@ -808,8 +839,8 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::trim(const
         });
 }
 
-template<class Traits>
-inline typename basic_string<Traits>::size_type basic_string<Traits>::trim(
+template<class char_type, class traits_type>
+inline typename basic_string<char_type, traits_type>::size_type basic_string<char_type, traits_type>::trim(
     const_pointer pStr,
     size_type     nStrSize) noexcept
 {
@@ -824,15 +855,18 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::trim(
         });
 }
 
-template<class Traits>
-inline typename basic_string<Traits>::size_type basic_string<Traits>::trim(const basic_string& sStr) noexcept
+template<class char_type, class traits_type>
+inline typename basic_string<char_type, traits_type>::size_type basic_string<char_type, traits_type>::trim(
+    const basic_string& sStr) noexcept
 {
     return trim(sStr.data(), sStr.size());
 }
 
-template<class Traits>
-template<class FwdIt>
-inline typename basic_string<Traits>::size_type basic_string<Traits>::trim(FwdIt itBegin, FwdIt itEnd) noexcept
+template<class char_type, class traits_type>
+template<class fwd_it_type>
+inline typename basic_string<char_type, traits_type>::size_type basic_string<char_type, traits_type>::trim(
+    fwd_it_type itBegin,
+    fwd_it_type itEnd) noexcept
 {
     return _trim(
         [itBegin, itEnd](auto ch)
@@ -845,15 +879,16 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::trim(FwdIt
         });
 }
 
-template<class Traits>
-template<string_convertable String>
-inline typename basic_string<Traits>::size_type basic_string<Traits>::trim(const String& sStr) noexcept
+template<class char_type, class traits_type>
+template<string_convertable string_type>
+inline typename basic_string<char_type, traits_type>::size_type basic_string<char_type, traits_type>::trim(
+    const string_type& sStr) noexcept
 {
     return trim(sStr.cbegin(), sStr.cend());
 }
 
-template<class Traits>
-inline typename basic_string<Traits>::size_type basic_string<Traits>::remove(
+template<class char_type, class traits_type>
+inline typename basic_string<char_type, traits_type>::size_type basic_string<char_type, traits_type>::remove(
     value_type chSymbol,
     size_type  nBegin,
     size_type  nEnd) noexcept
@@ -866,14 +901,14 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::remove(
     return nPos;
 }
 
-template<class Traits>
-inline typename basic_string<Traits>::size_type basic_string<Traits>::remove(
+template<class char_type, class traits_type>
+inline typename basic_string<char_type, traits_type>::size_type basic_string<char_type, traits_type>::remove(
     const_pointer pszStr,
     size_type     nBegin,
     size_type     nEnd,
     size_type     nStrSize) noexcept
 {
-    const size_type nLocalStrSize = nStrSize != npos ? nStrSize : Traits::length(pszStr);
+    const size_type nLocalStrSize = nStrSize != npos ? nStrSize : traits_type::length(pszStr);
 
     const size_type nPos = find(pszStr, nBegin, nLocalStrSize, nEnd);
 
@@ -883,8 +918,8 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::remove(
     return nPos;
 }
 
-template<class Traits>
-inline typename basic_string<Traits>::size_type basic_string<Traits>::remove(
+template<class char_type, class traits_type>
+inline typename basic_string<char_type, traits_type>::size_type basic_string<char_type, traits_type>::remove(
     const basic_string& sStr,
     size_type           nBegin,
     size_type           nEnd) noexcept
@@ -897,13 +932,13 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::remove(
     return nPos;
 }
 
-template<class Traits>
-template<class FwdIt>
-inline typename basic_string<Traits>::size_type basic_string<Traits>::remove(
-    FwdIt     itBegin,
-    FwdIt     itEnd,
-    size_type nBegin,
-    size_type nEnd) noexcept
+template<class char_type, class traits_type>
+template<class fwd_it_type>
+inline typename basic_string<char_type, traits_type>::size_type basic_string<char_type, traits_type>::remove(
+    fwd_it_type itBegin,
+    fwd_it_type itEnd,
+    size_type   nBegin,
+    size_type   nEnd) noexcept
 {
     const size_type nPos = find(itBegin, itEnd, nBegin, nEnd);
 
@@ -913,88 +948,88 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::remove(
     return nPos;
 }
 
-template<class Traits>
-template<string_convertable String>
-inline typename basic_string<Traits>::size_type basic_string<Traits>::remove(
-    const String& sStr,
-    size_type     nBegin,
-    size_type     nEnd) noexcept
+template<class char_type, class traits_type>
+template<string_convertable string_type>
+inline typename basic_string<char_type, traits_type>::size_type basic_string<char_type, traits_type>::remove(
+    const string_type& sStr,
+    size_type          nBegin,
+    size_type          nEnd) noexcept
 {
     return remove(sStr.cbegin(), sStr.cend(), nBegin, nEnd);
 }
 
-template<class Traits>
-inline bool basic_string<Traits>::remove_prefix(value_type chSymbol) noexcept
+template<class char_type, class traits_type>
+inline bool basic_string<char_type, traits_type>::remove_prefix(value_type chSymbol) noexcept
 {
     return remove(chSymbol, static_cast<size_type>(0), static_cast<size_type>(1)) != npos;
 }
 
-template<class Traits>
-inline bool basic_string<Traits>::remove_prefix(const_pointer pStr, size_type nStrSize) noexcept
+template<class char_type, class traits_type>
+inline bool basic_string<char_type, traits_type>::remove_prefix(const_pointer pStr, size_type nStrSize) noexcept
 {
     return remove(pStr, static_cast<size_type>(0), nStrSize, nStrSize) != npos;
 }
 
-template<class Traits>
-inline bool basic_string<Traits>::remove_prefix(const basic_string& sStr) noexcept
+template<class char_type, class traits_type>
+inline bool basic_string<char_type, traits_type>::remove_prefix(const basic_string& sStr) noexcept
 {
     return remove(sStr, static_cast<size_type>(0), sStr.size()) != npos;
 }
 
-template<class Traits>
-template<class FwdIt>
-inline bool basic_string<Traits>::remove_prefix(FwdIt itBegin, FwdIt itEnd) noexcept
+template<class char_type, class traits_type>
+template<class fwd_it_type>
+inline bool basic_string<char_type, traits_type>::remove_prefix(fwd_it_type itBegin, fwd_it_type itEnd) noexcept
 {
     return remove(itBegin, itEnd, static_cast<size_type>(0), static_cast<size_type>(std::distance(itBegin, itEnd)))
            != npos;
 }
 
-template<class Traits>
-template<string_convertable String>
-inline bool basic_string<Traits>::remove_prefix(const String& sStr) noexcept
+template<class char_type, class traits_type>
+template<string_convertable string_type>
+inline bool basic_string<char_type, traits_type>::remove_prefix(const string_type& sStr) noexcept
 {
     return remove_prefix(sStr.cbegin(), sStr.cend());
 }
 
-template<class Traits>
-inline bool basic_string<Traits>::remove_suffix(value_type chSymbol) noexcept
+template<class char_type, class traits_type>
+inline bool basic_string<char_type, traits_type>::remove_suffix(value_type chSymbol) noexcept
 {
     const size_type nSize = size();
     return remove(chSymbol, nSize - 1, nSize) != npos;
 }
 
-template<class Traits>
-inline bool basic_string<Traits>::remove_suffix(const_pointer pStr, size_type nStrSize) noexcept
+template<class char_type, class traits_type>
+inline bool basic_string<char_type, traits_type>::remove_suffix(const_pointer pStr, size_type nStrSize) noexcept
 {
     const size_type nSize         = size();
-    const size_type nLocalStrSize = nStrSize != npos ? nStrSize : Traits::length(pStr);
+    const size_type nLocalStrSize = nStrSize != npos ? nStrSize : traits_type::length(pStr);
 
     return remove(pStr, nSize - nLocalStrSize, nSize, nLocalStrSize) != npos;
 }
 
-template<class Traits>
-inline bool basic_string<Traits>::remove_suffix(const basic_string& sStr) noexcept
+template<class char_type, class traits_type>
+inline bool basic_string<char_type, traits_type>::remove_suffix(const basic_string& sStr) noexcept
 {
     return remove_suffix(sStr.data(), sStr.size());
 }
 
-template<class Traits>
-template<class FwdIt>
-inline bool basic_string<Traits>::remove_suffix(FwdIt itBegin, FwdIt itEnd) noexcept
+template<class char_type, class traits_type>
+template<class fwd_it_type>
+inline bool basic_string<char_type, traits_type>::remove_suffix(fwd_it_type itBegin, fwd_it_type itEnd) noexcept
 {
     const size_type nSize = size();
     return remove(itBegin, itEnd, nSize - static_cast<size_type>(std::distance(itBegin, itEnd)), nSize) != npos;
 }
 
-template<class Traits>
-template<string_convertable String>
-inline bool basic_string<Traits>::remove_suffix(const String& sStr) noexcept
+template<class char_type, class traits_type>
+template<string_convertable string_type>
+inline bool basic_string<char_type, traits_type>::remove_suffix(const string_type& sStr) noexcept
 {
     return remove_suffix(sStr.cbegin(), sStr.cend());
 }
 
-template<class Traits>
-inline typename basic_string<Traits>::size_type basic_string<Traits>::remove_all(
+template<class char_type, class traits_type>
+inline typename basic_string<char_type, traits_type>::size_type basic_string<char_type, traits_type>::remove_all(
     value_type chSymbol,
     size_type  nBegin,
     size_type  nEnd) noexcept
@@ -1011,8 +1046,8 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::remove_all
     return nOccurrences - 1;
 }
 
-template<class Traits>
-inline typename basic_string<Traits>::size_type basic_string<Traits>::remove_all(
+template<class char_type, class traits_type>
+inline typename basic_string<char_type, traits_type>::size_type basic_string<char_type, traits_type>::remove_all(
     const_pointer pStr,
     size_type     nBegin,
     size_type     nEnd,
@@ -1030,8 +1065,8 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::remove_all
     return nOccurrences - 1;
 }
 
-template<class Traits>
-inline typename basic_string<Traits>::size_type basic_string<Traits>::remove_all(
+template<class char_type, class traits_type>
+inline typename basic_string<char_type, traits_type>::size_type basic_string<char_type, traits_type>::remove_all(
     const basic_string& sStr,
     size_type           nBegin,
     size_type           nEnd) noexcept
@@ -1039,13 +1074,13 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::remove_all
     return remove_all(sStr.data(), nBegin, nEnd, sStr.size());
 }
 
-template<class Traits>
-template<class FwdIt>
-inline typename basic_string<Traits>::size_type basic_string<Traits>::remove_all(
-    FwdIt     itFirst,
-    FwdIt     itLast,
-    size_type nBegin,
-    size_type nEnd) noexcept
+template<class char_type, class traits_type>
+template<class fwd_it_type>
+inline typename basic_string<char_type, traits_type>::size_type basic_string<char_type, traits_type>::remove_all(
+    fwd_it_type itFirst,
+    fwd_it_type itLast,
+    size_type   nBegin,
+    size_type   nEnd) noexcept
 {
     size_type nOccurrences       = 0;
     size_type nLastOccurrencePos = nBegin;
@@ -1059,19 +1094,19 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::remove_all
     return nOccurrences - 1;
 }
 
-template<class Traits>
-template<string_convertable String>
-inline typename basic_string<Traits>::size_type basic_string<Traits>::remove_all(
-    const String& sStr,
-    size_type     nBegin,
-    size_type     nEnd) noexcept
+template<class char_type, class traits_type>
+template<string_convertable string_type>
+inline typename basic_string<char_type, traits_type>::size_type basic_string<char_type, traits_type>::remove_all(
+    const string_type& sStr,
+    size_type          nBegin,
+    size_type          nEnd) noexcept
 {
     return remove_all(sStr.cbegin(), sStr.cend(), nBegin, nEnd);
 }
 
-template<class Traits>
+template<class char_type, class traits_type>
 template<class TFind, class TReplace>
-inline typename basic_string<Traits>::size_type basic_string<Traits>::replace(
+inline typename basic_string<char_type, traits_type>::size_type basic_string<char_type, traits_type>::replace(
     const TFind&    sFind,
     const TReplace& sReplace,
     size_type       nBegin,
@@ -1085,7 +1120,7 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::replace(
         }
         else if constexpr (std::is_same_v<T, const_pointer>)
         {
-            return Traits::length(val);
+            return traits_type::length(val);
         }
         else if constexpr (string_convertable<T>)
         {
@@ -1145,9 +1180,9 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::replace(
     }
 }
 
-template<class Traits>
+template<class char_type, class traits_type>
 template<class TFind, class TReplace>
-inline typename basic_string<Traits>::size_type basic_string<Traits>::replace_all(
+inline typename basic_string<char_type, traits_type>::size_type basic_string<char_type, traits_type>::replace_all(
     const TFind&    sFind,
     const TReplace& sReplace,
     size_type       nBegin,
@@ -1166,46 +1201,46 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::replace_al
     return nOccurrences;
 }
 
-template<class Traits>
-inline int basic_string<Traits>::compare(value_type chSymbol) const noexcept
+template<class char_type, class traits_type>
+inline int basic_string<char_type, traits_type>::compare(value_type chSymbol) const noexcept
 {
     return compare(&chSymbol, 1);
 }
 
-template<class Traits>
-inline int qx::basic_string<Traits>::compare(const_pointer pszStr) const noexcept
+template<class char_type, class traits_type>
+inline int qx::basic_string<char_type, traits_type>::compare(const_pointer pszStr) const noexcept
 {
-    return Traits::compare(data(), pszStr);
+    return traits_type::compare(data(), pszStr);
 }
 
-template<class Traits>
-inline int basic_string<Traits>::compare(const_pointer pStr, size_type nSymbols) const noexcept
+template<class char_type, class traits_type>
+inline int basic_string<char_type, traits_type>::compare(const_pointer pStr, size_type nSymbols) const noexcept
 {
-    return Traits::compare_n(data(), pStr, nSymbols);
+    return traits_type::compare_n(data(), pStr, nSymbols);
 }
 
-template<class Traits>
-inline int basic_string<Traits>::compare(const basic_string& sStr) const noexcept
+template<class char_type, class traits_type>
+inline int basic_string<char_type, traits_type>::compare(const basic_string& sStr) const noexcept
 {
     return compare(sStr.data(), sStr.size());
 }
 
-template<class Traits>
-template<class FwdIt>
-inline int basic_string<Traits>::compare(FwdIt itBegin, FwdIt itEnd) const noexcept
+template<class char_type, class traits_type>
+template<class fwd_it_type>
+inline int basic_string<char_type, traits_type>::compare(fwd_it_type itBegin, fwd_it_type itEnd) const noexcept
 {
     return iter_strcmp(cbegin(), cend(), itBegin, itEnd);
 }
 
-template<class Traits>
-template<string_convertable String>
-inline int basic_string<Traits>::compare(const String& sStr) const noexcept
+template<class char_type, class traits_type>
+template<string_convertable string_type>
+inline int basic_string<char_type, traits_type>::compare(const string_type& sStr) const noexcept
 {
     return compare(sStr.cbegin(), sStr.cend());
 }
 
-template<class Traits>
-inline typename basic_string<Traits>::size_type basic_string<Traits>::find(
+template<class char_type, class traits_type>
+inline typename basic_string<char_type, traits_type>::size_type basic_string<char_type, traits_type>::find(
     value_type chSymbol,
     size_type  nBegin,
     size_type  nEnd) const noexcept
@@ -1219,26 +1254,26 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::find(
         });
 }
 
-template<class Traits>
-inline typename basic_string<Traits>::size_type basic_string<Traits>::find(
+template<class char_type, class traits_type>
+inline typename basic_string<char_type, traits_type>::size_type basic_string<char_type, traits_type>::find(
     const_pointer pszWhat,
     size_type     nBegin,
     size_type     nWhatSize,
     size_type     nEnd) const noexcept
 {
-    const size_type nLocalWhatSize = nWhatSize != npos ? nWhatSize : Traits::length(pszWhat);
+    const size_type nLocalWhatSize = nWhatSize != npos ? nWhatSize : traits_type::length(pszWhat);
 
     return _find(
         nBegin,
         nEnd,
         [pszWhat, nLocalWhatSize](const_pointer pCurrentChar)
         {
-            return !Traits::compare_n(pszWhat, pCurrentChar, nLocalWhatSize);
+            return !traits_type::compare_n(pszWhat, pCurrentChar, nLocalWhatSize);
         });
 }
 
-template<class Traits>
-inline typename basic_string<Traits>::size_type basic_string<Traits>::find(
+template<class char_type, class traits_type>
+inline typename basic_string<char_type, traits_type>::size_type basic_string<char_type, traits_type>::find(
     const basic_string& sWhat,
     size_type           nBegin,
     size_type           nEnd) const noexcept
@@ -1246,13 +1281,13 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::find(
     return find(sWhat.data(), nBegin, sWhat.size(), nEnd);
 }
 
-template<class Traits>
-template<class FwdIt>
-inline typename basic_string<Traits>::size_type basic_string<Traits>::find(
-    FwdIt     itWhatBegin,
-    FwdIt     itWhatEnd,
-    size_type nBegin,
-    size_type nEnd) const noexcept
+template<class char_type, class traits_type>
+template<class fwd_it_type>
+inline typename basic_string<char_type, traits_type>::size_type basic_string<char_type, traits_type>::find(
+    fwd_it_type itWhatBegin,
+    fwd_it_type itWhatEnd,
+    size_type   nBegin,
+    size_type   nEnd) const noexcept
 {
     return _find(
         nBegin,
@@ -1267,18 +1302,18 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::find(
         });
 }
 
-template<class Traits>
-template<string_convertable String>
-inline typename basic_string<Traits>::size_type basic_string<Traits>::find(
-    String    sWhat,
-    size_type nBegin,
-    size_type nEnd) const noexcept
+template<class char_type, class traits_type>
+template<string_convertable string_type>
+inline typename basic_string<char_type, traits_type>::size_type basic_string<char_type, traits_type>::find(
+    string_type sWhat,
+    size_type   nBegin,
+    size_type   nEnd) const noexcept
 {
     return find(sWhat.cbegin(), sWhat.cend(), nBegin, nEnd);
 }
 
-template<class Traits>
-inline typename basic_string<Traits>::size_type basic_string<Traits>::rfind(
+template<class char_type, class traits_type>
+inline typename basic_string<char_type, traits_type>::size_type basic_string<char_type, traits_type>::rfind(
     value_type chSymbol,
     size_type  nBegin,
     size_type  nEnd) const noexcept
@@ -1292,26 +1327,26 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::rfind(
         });
 }
 
-template<class Traits>
-inline typename basic_string<Traits>::size_type basic_string<Traits>::rfind(
+template<class char_type, class traits_type>
+inline typename basic_string<char_type, traits_type>::size_type basic_string<char_type, traits_type>::rfind(
     const_pointer pszWhat,
     size_type     nBegin,
     size_type     nWhatSize,
     size_type     nEnd) const noexcept
 {
-    const size_type nLocalWhatSize = nWhatSize != npos ? nWhatSize : Traits::length(pszWhat);
+    const size_type nLocalWhatSize = nWhatSize != npos ? nWhatSize : traits_type::length(pszWhat);
 
     return _rfind(
         nBegin,
         nEnd,
         [pszWhat, nLocalWhatSize](const_pointer pCurrentChar)
         {
-            return !Traits::compare_n(pszWhat, pCurrentChar, nLocalWhatSize);
+            return !traits_type::compare_n(pszWhat, pCurrentChar, nLocalWhatSize);
         });
 }
 
-template<class Traits>
-inline typename basic_string<Traits>::size_type basic_string<Traits>::rfind(
+template<class char_type, class traits_type>
+inline typename basic_string<char_type, traits_type>::size_type basic_string<char_type, traits_type>::rfind(
     const basic_string& sWhat,
     size_type           nBegin,
     size_type           nEnd) const noexcept
@@ -1319,13 +1354,13 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::rfind(
     return rfind(sWhat.data(), nBegin, sWhat.size(), nEnd);
 }
 
-template<class Traits>
-template<class FwdIt>
-inline typename basic_string<Traits>::size_type basic_string<Traits>::rfind(
-    FwdIt     itWhatBegin,
-    FwdIt     itWhatEnd,
-    size_type nBegin,
-    size_type nEnd) const noexcept
+template<class char_type, class traits_type>
+template<class fwd_it_type>
+inline typename basic_string<char_type, traits_type>::size_type basic_string<char_type, traits_type>::rfind(
+    fwd_it_type itWhatBegin,
+    fwd_it_type itWhatEnd,
+    size_type   nBegin,
+    size_type   nEnd) const noexcept
 {
     return _rfind(
         nBegin,
@@ -1340,26 +1375,26 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::rfind(
         });
 }
 
-template<class Traits>
-template<string_convertable String>
-inline typename basic_string<Traits>::size_type basic_string<Traits>::rfind(
-    String    sWhat,
-    size_type nBegin,
-    size_type nEnd) const noexcept
+template<class char_type, class traits_type>
+template<string_convertable string_type>
+inline typename basic_string<char_type, traits_type>::size_type basic_string<char_type, traits_type>::rfind(
+    string_type sWhat,
+    size_type   nBegin,
+    size_type   nEnd) const noexcept
 {
     return rfind(sWhat.cbegin(), sWhat.cend(), nBegin, nEnd);
 }
 
-template<class Traits>
-inline typename basic_string<Traits>::size_type basic_string<Traits>::find_first_of(
+template<class char_type, class traits_type>
+inline typename basic_string<char_type, traits_type>::size_type basic_string<char_type, traits_type>::find_first_of(
     value_type chSymbol,
     size_type  nBegin) const noexcept
 {
     return find(chSymbol, nBegin);
 }
 
-template<class Traits>
-inline typename basic_string<Traits>::size_type basic_string<Traits>::find_first_of(
+template<class char_type, class traits_type>
+inline typename basic_string<char_type, traits_type>::size_type basic_string<char_type, traits_type>::find_first_of(
     const_pointer pszWhat,
     size_type     nBegin,
     size_type     nWhatSize) const noexcept
@@ -1374,8 +1409,8 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::find_first
         });
 }
 
-template<class Traits>
-inline typename basic_string<Traits>::size_type basic_string<Traits>::find_first_of(
+template<class char_type, class traits_type>
+inline typename basic_string<char_type, traits_type>::size_type basic_string<char_type, traits_type>::find_first_of(
     const_pointer pszWhat,
     size_type     nBegin) const noexcept
 {
@@ -1389,48 +1424,50 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::find_first
         });
 }
 
-template<class Traits>
-inline typename basic_string<Traits>::size_type basic_string<Traits>::find_first_of(
+template<class char_type, class traits_type>
+inline typename basic_string<char_type, traits_type>::size_type basic_string<char_type, traits_type>::find_first_of(
     const basic_string& sWhat,
     size_type           nBegin) const noexcept
 {
     return find_first_of(sWhat.data(), nBegin, sWhat.size());
 }
 
-template<class Traits>
-template<class FwdIt>
-inline typename basic_string<Traits>::size_type basic_string<Traits>::find_first_of(
-    FwdIt     itWhatBegin,
-    FwdIt     itWhatEnd,
-    size_type nBegin) const noexcept
+template<class char_type, class traits_type>
+template<class fwd_it_type>
+inline typename basic_string<char_type, traits_type>::size_type basic_string<char_type, traits_type>::find_first_of(
+    fwd_it_type itWhatBegin,
+    fwd_it_type itWhatEnd,
+    size_type   nBegin) const noexcept
 {
     return _find_first_of(
         itWhatBegin,
         itWhatEnd,
         nBegin,
-        [](FwdIt itChar)
+        [](fwd_it_type itChar)
         {
             return ++itChar;
         });
 }
 
-template<class Traits>
-template<string_convertable String>
-inline typename basic_string<Traits>::size_type basic_string<Traits>::find_first_of(String sWhat, size_type nBegin)
-    const noexcept
+template<class char_type, class traits_type>
+template<string_convertable string_type>
+inline typename basic_string<char_type, traits_type>::size_type basic_string<char_type, traits_type>::find_first_of(
+    string_type sWhat,
+    size_type   nBegin) const noexcept
 {
     return find_first_of(sWhat.cbegin(), sWhat.cend(), nBegin);
 }
 
-template<class Traits>
-inline typename basic_string<Traits>::size_type basic_string<Traits>::find_last_of(value_type chSymbol, size_type nEnd)
-    const noexcept
+template<class char_type, class traits_type>
+inline typename basic_string<char_type, traits_type>::size_type basic_string<char_type, traits_type>::find_last_of(
+    value_type chSymbol,
+    size_type  nEnd) const noexcept
 {
     return rfind(chSymbol, npos, nEnd);
 }
 
-template<class Traits>
-inline typename basic_string<Traits>::size_type basic_string<Traits>::find_last_of(
+template<class char_type, class traits_type>
+inline typename basic_string<char_type, traits_type>::size_type basic_string<char_type, traits_type>::find_last_of(
     const_pointer pszWhat,
     size_type     nEnd,
     size_type     nWhatSize) const noexcept
@@ -1445,8 +1482,8 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::find_last_
         });
 }
 
-template<class Traits>
-inline typename basic_string<Traits>::size_type basic_string<Traits>::find_last_of(
+template<class char_type, class traits_type>
+inline typename basic_string<char_type, traits_type>::size_type basic_string<char_type, traits_type>::find_last_of(
     const_pointer pszWhat,
     size_type     nEnd) const noexcept
 {
@@ -1460,41 +1497,42 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::find_last_
         });
 }
 
-template<class Traits>
-inline typename basic_string<Traits>::size_type basic_string<Traits>::find_last_of(
+template<class char_type, class traits_type>
+inline typename basic_string<char_type, traits_type>::size_type basic_string<char_type, traits_type>::find_last_of(
     const basic_string& sWhat,
     size_type           nEnd) const noexcept
 {
     return find_last_of(sWhat.data(), nEnd, sWhat.size());
 }
 
-template<class Traits>
-template<class FwdIt>
-inline typename basic_string<Traits>::size_type basic_string<Traits>::find_last_of(
-    FwdIt     itWhatBegin,
-    FwdIt     itWhatEnd,
-    size_type nEnd) const noexcept
+template<class char_type, class traits_type>
+template<class fwd_it_type>
+inline typename basic_string<char_type, traits_type>::size_type basic_string<char_type, traits_type>::find_last_of(
+    fwd_it_type itWhatBegin,
+    fwd_it_type itWhatEnd,
+    size_type   nEnd) const noexcept
 {
     return _find_last_of(
         itWhatBegin,
         itWhatEnd,
         nEnd,
-        [](FwdIt itChar)
+        [](fwd_it_type itChar)
         {
             return ++itChar;
         });
 }
 
-template<class Traits>
-template<string_convertable String>
-inline typename basic_string<Traits>::size_type basic_string<Traits>::find_last_of(String sWhat, size_type nEnd)
-    const noexcept
+template<class char_type, class traits_type>
+template<string_convertable string_type>
+inline typename basic_string<char_type, traits_type>::size_type basic_string<char_type, traits_type>::find_last_of(
+    string_type sWhat,
+    size_type   nEnd) const noexcept
 {
     return find_last_of(sWhat.cbegin(), sWhat.cend(), nEnd);
 }
 
-template<class Traits>
-inline typename basic_string<Traits>::size_type basic_string<Traits>::find_first_not_of(
+template<class char_type, class traits_type>
+inline typename basic_string<char_type, traits_type>::size_type basic_string<char_type, traits_type>::find_first_not_of(
     value_type chSymbol,
     size_type  nBegin) const noexcept
 {
@@ -1507,8 +1545,8 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::find_first
         });
 }
 
-template<class Traits>
-inline typename basic_string<Traits>::size_type basic_string<Traits>::find_first_not_of(
+template<class char_type, class traits_type>
+inline typename basic_string<char_type, traits_type>::size_type basic_string<char_type, traits_type>::find_first_not_of(
     const_pointer pszWhat,
     size_type     nBegin,
     size_type     nWhatSize) const noexcept
@@ -1523,8 +1561,8 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::find_first
         });
 }
 
-template<class Traits>
-inline typename basic_string<Traits>::size_type basic_string<Traits>::find_first_not_of(
+template<class char_type, class traits_type>
+inline typename basic_string<char_type, traits_type>::size_type basic_string<char_type, traits_type>::find_first_not_of(
     const_pointer pszWhat,
     size_type     nBegin) const noexcept
 {
@@ -1538,41 +1576,42 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::find_first
         });
 }
 
-template<class Traits>
-inline typename basic_string<Traits>::size_type basic_string<Traits>::find_first_not_of(
+template<class char_type, class traits_type>
+inline typename basic_string<char_type, traits_type>::size_type basic_string<char_type, traits_type>::find_first_not_of(
     const basic_string& sWhat,
     size_type           nBegin) const noexcept
 {
     return find_first_not_of(sWhat.data(), nBegin, sWhat.size());
 }
 
-template<class Traits>
-template<class FwdIt>
-inline typename basic_string<Traits>::size_type basic_string<Traits>::find_first_not_of(
-    FwdIt     itWhatBegin,
-    FwdIt     itWhatEnd,
-    size_type nBegin) const noexcept
+template<class char_type, class traits_type>
+template<class fwd_it_type>
+inline typename basic_string<char_type, traits_type>::size_type basic_string<char_type, traits_type>::find_first_not_of(
+    fwd_it_type itWhatBegin,
+    fwd_it_type itWhatEnd,
+    size_type   nBegin) const noexcept
 {
     return _find_first_not_of(
         itWhatBegin,
         itWhatEnd,
         nBegin,
-        [](FwdIt itChar)
+        [](fwd_it_type itChar)
         {
             return ++itChar;
         });
 }
 
-template<class Traits>
-template<string_convertable String>
-inline typename basic_string<Traits>::size_type basic_string<Traits>::find_first_not_of(String sWhat, size_type nBegin)
-    const noexcept
+template<class char_type, class traits_type>
+template<string_convertable string_type>
+inline typename basic_string<char_type, traits_type>::size_type basic_string<char_type, traits_type>::find_first_not_of(
+    string_type sWhat,
+    size_type   nBegin) const noexcept
 {
     return find_first_not_of(sWhat.cbegin(), sWhat.cend(), nBegin);
 }
 
-template<class Traits>
-inline typename basic_string<Traits>::size_type basic_string<Traits>::find_last_not_of(
+template<class char_type, class traits_type>
+inline typename basic_string<char_type, traits_type>::size_type basic_string<char_type, traits_type>::find_last_not_of(
     value_type chSymbol,
     size_type  nEnd) const noexcept
 {
@@ -1585,8 +1624,8 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::find_last_
         });
 }
 
-template<class Traits>
-inline typename basic_string<Traits>::size_type basic_string<Traits>::find_last_not_of(
+template<class char_type, class traits_type>
+inline typename basic_string<char_type, traits_type>::size_type basic_string<char_type, traits_type>::find_last_not_of(
     const_pointer pszWhat,
     size_type     nEnd,
     size_type     nWhatSize) const noexcept
@@ -1601,8 +1640,8 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::find_last_
         });
 }
 
-template<class Traits>
-inline typename basic_string<Traits>::size_type basic_string<Traits>::find_last_not_of(
+template<class char_type, class traits_type>
+inline typename basic_string<char_type, traits_type>::size_type basic_string<char_type, traits_type>::find_last_not_of(
     const_pointer pszWhat,
     size_type     nEnd) const noexcept
 {
@@ -1616,41 +1655,43 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::find_last_
         });
 }
 
-template<class Traits>
-inline typename basic_string<Traits>::size_type basic_string<Traits>::find_last_not_of(
+template<class char_type, class traits_type>
+inline typename basic_string<char_type, traits_type>::size_type basic_string<char_type, traits_type>::find_last_not_of(
     const basic_string& sWhat,
     size_type           nEnd) const noexcept
 {
     return find_last_not_of(sWhat.data(), nEnd, sWhat.size());
 }
 
-template<class Traits>
-template<class FwdIt>
-inline typename basic_string<Traits>::size_type basic_string<Traits>::find_last_not_of(
-    FwdIt     itWhatBegin,
-    FwdIt     itWhatEnd,
-    size_type nEnd) const noexcept
+template<class char_type, class traits_type>
+template<class fwd_it_type>
+inline typename basic_string<char_type, traits_type>::size_type basic_string<char_type, traits_type>::find_last_not_of(
+    fwd_it_type itWhatBegin,
+    fwd_it_type itWhatEnd,
+    size_type   nEnd) const noexcept
 {
     return _find_last_not_of(
         itWhatBegin,
         itWhatEnd,
         nEnd,
-        [](FwdIt itChar)
+        [](fwd_it_type itChar)
         {
             return ++itChar;
         });
 }
 
-template<class Traits>
-template<string_convertable String>
-inline typename basic_string<Traits>::size_type basic_string<Traits>::find_last_not_of(String sWhat, size_type nEnd)
-    const noexcept
+template<class char_type, class traits_type>
+template<string_convertable string_type>
+inline typename basic_string<char_type, traits_type>::size_type basic_string<char_type, traits_type>::find_last_not_of(
+    string_type sWhat,
+    size_type   nEnd) const noexcept
 {
     return find_last_not_of(sWhat.cbegin(), sWhat.cend(), nEnd);
 }
 
-template<class Traits>
-inline typename basic_string<Traits>::views basic_string<Traits>::split(const value_type chSeparator) const noexcept
+template<class char_type, class traits_type>
+inline typename basic_string<char_type, traits_type>::views basic_string<char_type, traits_type>::split(
+    const value_type chSeparator) const noexcept
 {
     views tokens;
 
@@ -1660,7 +1701,7 @@ inline typename basic_string<Traits>::views basic_string<Traits>::split(const va
     {
         tokens.emplace_back(substr(nStart, nEnd - nStart));
         nStart = nEnd;
-        while (Traits::compare_n(data() + nStart, &chSeparator, 1) == 0)
+        while (traits_type::compare_n(data() + nStart, &chSeparator, 1) == 0)
             ++nStart;
     }
 
@@ -1670,14 +1711,15 @@ inline typename basic_string<Traits>::views basic_string<Traits>::split(const va
     return std::move(tokens);
 }
 
-template<class Traits>
-inline typename basic_string<Traits>::views basic_string<Traits>::split(const_pointer pszSeparator, size_type nSepLen)
-    const noexcept
+template<class char_type, class traits_type>
+inline typename basic_string<char_type, traits_type>::views basic_string<char_type, traits_type>::split(
+    const_pointer pszSeparator,
+    size_type     nSepLen) const noexcept
 {
     views tokens;
 
     if (nSepLen == npos)
-        nSepLen = Traits::length(pszSeparator);
+        nSepLen = traits_type::length(pszSeparator);
 
     size_type nStart = 0;
     size_type nEnd   = 0;
@@ -1685,7 +1727,7 @@ inline typename basic_string<Traits>::views basic_string<Traits>::split(const_po
     {
         tokens.emplace_back(substr(nStart, nEnd - nStart));
         nStart = nEnd;
-        while (Traits::compare_n(data() + nStart, pszSeparator, nSepLen) == 0)
+        while (traits_type::compare_n(data() + nStart, pszSeparator, nSepLen) == 0)
             nStart += nSepLen;
     }
 
@@ -1695,16 +1737,18 @@ inline typename basic_string<Traits>::views basic_string<Traits>::split(const_po
     return tokens;
 }
 
-template<class Traits>
-inline typename basic_string<Traits>::views basic_string<Traits>::split(const basic_string& sSeparator) const noexcept
+template<class char_type, class traits_type>
+inline typename basic_string<char_type, traits_type>::views basic_string<char_type, traits_type>::split(
+    const basic_string& sSeparator) const noexcept
 {
     return split(sSeparator.data(), sSeparator.size());
 }
 
-template<class Traits>
-template<class FwdIt>
-inline typename basic_string<Traits>::views basic_string<Traits>::split(FwdIt itSepFirst, FwdIt itSepLast)
-    const noexcept
+template<class char_type, class traits_type>
+template<class fwd_it_type>
+inline typename basic_string<char_type, traits_type>::views basic_string<char_type, traits_type>::split(
+    fwd_it_type itSepFirst,
+    fwd_it_type itSepLast) const noexcept
 {
     views tokens;
 
@@ -1722,15 +1766,16 @@ inline typename basic_string<Traits>::views basic_string<Traits>::split(FwdIt it
     return tokens;
 }
 
-template<class Traits>
-template<string_convertable String>
-inline typename basic_string<Traits>::views basic_string<Traits>::split(const String& sSeparator) const noexcept
+template<class char_type, class traits_type>
+template<string_convertable string_type>
+inline typename basic_string<char_type, traits_type>::views basic_string<char_type, traits_type>::split(
+    const string_type& sSeparator) const noexcept
 {
     return split(sSeparator.cbegin(), sSeparator.cend());
 }
 
-template<class Traits>
-inline bool basic_string<Traits>::starts_with(value_type chSymbol) const noexcept
+template<class char_type, class traits_type>
+inline bool basic_string<char_type, traits_type>::starts_with(value_type chSymbol) const noexcept
 {
     if (!empty())
         return at(0) == chSymbol;
@@ -1738,44 +1783,44 @@ inline bool basic_string<Traits>::starts_with(value_type chSymbol) const noexcep
         return false;
 }
 
-template<class Traits>
-inline bool basic_string<Traits>::starts_with(const_pointer pszStr, size_type nStrSize) const noexcept
+template<class char_type, class traits_type>
+inline bool basic_string<char_type, traits_type>::starts_with(const_pointer pszStr, size_type nStrSize) const noexcept
 {
     if (size_type nThisSize = size(); nThisSize > 0)
     {
         if (nStrSize == npos)
-            nStrSize = Traits::length(pszStr);
+            nStrSize = traits_type::length(pszStr);
 
         if (nStrSize <= nThisSize)
-            return Traits::compare_n(data(), pszStr, nStrSize) == 0;
+            return traits_type::compare_n(data(), pszStr, nStrSize) == 0;
     }
 
     return false;
 }
 
-template<class Traits>
-inline bool basic_string<Traits>::starts_with(const basic_string& sStr) const noexcept
+template<class char_type, class traits_type>
+inline bool basic_string<char_type, traits_type>::starts_with(const basic_string& sStr) const noexcept
 {
     return starts_with(sStr.data(), sStr.size());
 }
 
-template<class Traits>
-template<class FwdIt>
-inline bool basic_string<Traits>::starts_with(FwdIt itBegin, FwdIt itEnd) const noexcept
+template<class char_type, class traits_type>
+template<class fwd_it_type>
+inline bool basic_string<char_type, traits_type>::starts_with(fwd_it_type itBegin, fwd_it_type itEnd) const noexcept
 {
     auto nStrSize = std::distance(itBegin, itEnd);
     return iter_strcmp(cbegin(), cbegin() + static_cast<size_type>(nStrSize), itBegin, itEnd) == 0;
 }
 
-template<class Traits>
-template<string_convertable String>
-inline bool basic_string<Traits>::starts_with(const String& sStr) const noexcept
+template<class char_type, class traits_type>
+template<string_convertable string_type>
+inline bool basic_string<char_type, traits_type>::starts_with(const string_type& sStr) const noexcept
 {
     return starts_with(sStr.cbegin(), sStr.cend());
 }
 
-template<class Traits>
-inline bool basic_string<Traits>::ends_with(value_type chSymbol) const noexcept
+template<class char_type, class traits_type>
+inline bool basic_string<char_type, traits_type>::ends_with(value_type chSymbol) const noexcept
 {
     const size_type nSize = size();
     if (nSize > 0)
@@ -1784,326 +1829,340 @@ inline bool basic_string<Traits>::ends_with(value_type chSymbol) const noexcept
         return false;
 }
 
-template<class Traits>
-inline bool basic_string<Traits>::ends_with(const_pointer pszStr, size_type nStrSize) const noexcept
+template<class char_type, class traits_type>
+inline bool basic_string<char_type, traits_type>::ends_with(const_pointer pszStr, size_type nStrSize) const noexcept
 {
     if (size_type nThisSize = size(); nThisSize > 0)
     {
         if (nStrSize == npos)
-            nStrSize = Traits::length(pszStr);
+            nStrSize = traits_type::length(pszStr);
 
         if (nStrSize <= nThisSize)
-            return Traits::compare_n(data() + nThisSize - nStrSize, pszStr, nStrSize) == 0;
+            return traits_type::compare_n(data() + nThisSize - nStrSize, pszStr, nStrSize) == 0;
     }
 
     return false;
 }
 
-template<class Traits>
-inline bool basic_string<Traits>::ends_with(const basic_string& sStr) const noexcept
+template<class char_type, class traits_type>
+inline bool basic_string<char_type, traits_type>::ends_with(const basic_string& sStr) const noexcept
 {
     return ends_with(sStr.data(), sStr.size());
 }
 
-template<class Traits>
-template<class FwdIt>
-inline bool basic_string<Traits>::ends_with(FwdIt itBegin, FwdIt itEnd) const noexcept
+template<class char_type, class traits_type>
+template<class fwd_it_type>
+inline bool basic_string<char_type, traits_type>::ends_with(fwd_it_type itBegin, fwd_it_type itEnd) const noexcept
 {
     return iter_strcmp(cend() - static_cast<size_type>(std::distance(itBegin, itEnd)), cend(), itBegin, itEnd) == 0;
 }
 
-template<class Traits>
-template<string_convertable String>
-inline bool basic_string<Traits>::ends_with(const String& sStr) const noexcept
+template<class char_type, class traits_type>
+template<string_convertable string_type>
+inline bool basic_string<char_type, traits_type>::ends_with(const string_type& sStr) const noexcept
 {
     return ends_with(sStr.cbegin(), sStr.cend());
 }
 
-template<class Traits>
-inline bool basic_string<Traits>::contains(value_type chSymbol) const noexcept
+template<class char_type, class traits_type>
+inline bool basic_string<char_type, traits_type>::contains(value_type chSymbol) const noexcept
 {
     return find(chSymbol) != npos;
 }
 
-template<class Traits>
-inline bool basic_string<Traits>::contains(const_pointer pszStr, size_type nStrSize) const noexcept
+template<class char_type, class traits_type>
+inline bool basic_string<char_type, traits_type>::contains(const_pointer pszStr, size_type nStrSize) const noexcept
 {
     return find(pszStr, 0, nStrSize) != npos;
 }
 
-template<class Traits>
-inline bool basic_string<Traits>::contains(const basic_string& sStr) const noexcept
+template<class char_type, class traits_type>
+inline bool basic_string<char_type, traits_type>::contains(const basic_string& sStr) const noexcept
 {
     return find(sStr) != npos;
 }
 
-template<class Traits>
-template<class FwdIt>
-inline bool basic_string<Traits>::contains(FwdIt itBegin, FwdIt itEnd) const noexcept
+template<class char_type, class traits_type>
+template<class fwd_it_type>
+inline bool basic_string<char_type, traits_type>::contains(fwd_it_type itBegin, fwd_it_type itEnd) const noexcept
 {
     return find(itBegin, itEnd) != npos;
 }
 
-template<class Traits>
-template<string_convertable String>
-inline bool basic_string<Traits>::contains(const String& sStr) const noexcept
+template<class char_type, class traits_type>
+template<string_convertable string_type>
+inline bool basic_string<char_type, traits_type>::contains(const string_type& sStr) const noexcept
 {
     return find(sStr) != npos;
 }
 
-template<class Traits>
-inline basic_string<Traits>& basic_string<Traits>::operator=(value_type chSymbol) noexcept
+template<class char_type, class traits_type>
+inline basic_string<char_type, traits_type>& basic_string<char_type, traits_type>::operator=(
+    value_type chSymbol) noexcept
 {
     assign(chSymbol);
     return *this;
 }
 
-template<class Traits>
-inline basic_string<Traits>& basic_string<Traits>::operator=(const_pointer pszSource) noexcept
+template<class char_type, class traits_type>
+inline basic_string<char_type, traits_type>& basic_string<char_type, traits_type>::operator=(
+    const_pointer pszSource) noexcept
 {
     assign(pszSource);
     return *this;
 }
 
-template<class Traits>
-inline basic_string<Traits>& basic_string<Traits>::operator=(basic_string&& sStr) noexcept
+template<class char_type, class traits_type>
+inline basic_string<char_type, traits_type>& basic_string<char_type, traits_type>::operator=(
+    basic_string&& sStr) noexcept
 {
     assign(std::move(sStr));
     return *this;
 }
 
-template<class Traits>
-inline basic_string<Traits>& basic_string<Traits>::operator=(const basic_string& sStr) noexcept
+template<class char_type, class traits_type>
+inline basic_string<char_type, traits_type>& basic_string<char_type, traits_type>::operator=(
+    const basic_string& sStr) noexcept
 {
     assign(sStr);
     return *this;
 }
 
-template<class Traits>
-template<string_convertable String>
-inline basic_string<Traits>& basic_string<Traits>::operator=(const String& sStr) noexcept
+template<class char_type, class traits_type>
+template<string_convertable string_type>
+inline basic_string<char_type, traits_type>& basic_string<char_type, traits_type>::operator=(
+    const string_type& sStr) noexcept
 {
     assign(sStr);
     return *this;
 }
 
-template<class Traits>
-inline basic_string<Traits>& basic_string<Traits>::operator+=(value_type chSymbol) noexcept
+template<class char_type, class traits_type>
+inline basic_string<char_type, traits_type>& basic_string<char_type, traits_type>::operator+=(
+    value_type chSymbol) noexcept
 {
     append(&chSymbol, 1);
     return *this;
 }
 
-template<class Traits>
-inline basic_string<Traits>& basic_string<Traits>::operator+=(const_pointer pszSource) noexcept
+template<class char_type, class traits_type>
+inline basic_string<char_type, traits_type>& basic_string<char_type, traits_type>::operator+=(
+    const_pointer pszSource) noexcept
 {
-    append(pszSource, Traits::length(pszSource));
+    append(pszSource, traits_type::length(pszSource));
     return *this;
 }
 
-template<class Traits>
-inline basic_string<Traits>& basic_string<Traits>::operator+=(const basic_string& sStr) noexcept
+template<class char_type, class traits_type>
+inline basic_string<char_type, traits_type>& basic_string<char_type, traits_type>::operator+=(
+    const basic_string& sStr) noexcept
 {
     append(sStr.data(), sStr.size());
     return *this;
 }
 
-template<class Traits>
-template<string_convertable String>
-inline basic_string<Traits>& basic_string<Traits>::operator+=(const String& sStr) noexcept
+template<class char_type, class traits_type>
+template<string_convertable string_type>
+inline basic_string<char_type, traits_type>& basic_string<char_type, traits_type>::operator+=(
+    const string_type& sStr) noexcept
 {
     append(sStr.cbegin(), sStr.cend());
     return *this;
 }
 
-template<class Traits>
-inline bool basic_string<Traits>::operator==(value_type chSymbol) const noexcept
+template<class char_type, class traits_type>
+inline bool basic_string<char_type, traits_type>::operator==(value_type chSymbol) const noexcept
 {
     return size() == 1 && at(0) == chSymbol;
 }
 
-template<class Traits>
-inline bool basic_string<Traits>::operator==(const_pointer pszSource) const noexcept
+template<class char_type, class traits_type>
+inline bool basic_string<char_type, traits_type>::operator==(const_pointer pszSource) const noexcept
 {
     return compare(pszSource) == 0;
 }
 
-template<class Traits>
-inline bool basic_string<Traits>::operator==(const basic_string& sStr) const noexcept
+template<class char_type, class traits_type>
+inline bool basic_string<char_type, traits_type>::operator==(const basic_string& sStr) const noexcept
 {
     return size() == sStr.size() && compare(sStr.data(), sStr.size()) == 0;
 }
 
-template<class Traits>
-template<string_convertable String>
-inline bool basic_string<Traits>::operator==(const String& sStr) const noexcept
+template<class char_type, class traits_type>
+template<string_convertable string_type>
+inline bool basic_string<char_type, traits_type>::operator==(const string_type& sStr) const noexcept
 {
     return iter_strcmp(cbegin(), cend(), sStr.cbegin(), sStr.cend()) == 0;
 }
 
-template<class Traits>
-inline bool basic_string<Traits>::operator!=(value_type chSymbol) const noexcept
+template<class char_type, class traits_type>
+inline bool basic_string<char_type, traits_type>::operator!=(value_type chSymbol) const noexcept
 {
     return !operator==(chSymbol);
 }
 
-template<class Traits>
-inline bool basic_string<Traits>::operator!=(const_pointer pszSource) const noexcept
+template<class char_type, class traits_type>
+inline bool basic_string<char_type, traits_type>::operator!=(const_pointer pszSource) const noexcept
 {
     return !operator==(pszSource);
 }
 
-template<class Traits>
-inline bool basic_string<Traits>::operator!=(const basic_string& sStr) const noexcept
+template<class char_type, class traits_type>
+inline bool basic_string<char_type, traits_type>::operator!=(const basic_string& sStr) const noexcept
 {
     return !operator==(sStr);
 }
 
-template<class Traits>
-template<string_convertable String>
-inline bool basic_string<Traits>::operator!=(const String& sStr) const noexcept
+template<class char_type, class traits_type>
+template<string_convertable string_type>
+inline bool basic_string<char_type, traits_type>::operator!=(const string_type& sStr) const noexcept
 {
     return !operator==(sStr);
 }
 
-template<class Traits>
-inline bool basic_string<Traits>::operator<(value_type chSymbol) const noexcept
+template<class char_type, class traits_type>
+inline bool basic_string<char_type, traits_type>::operator<(value_type chSymbol) const noexcept
 {
     return compare(&chSymbol, 1) < 0;
 }
 
-template<class Traits>
-inline bool basic_string<Traits>::operator<(const_pointer pszSource) const noexcept
+template<class char_type, class traits_type>
+inline bool basic_string<char_type, traits_type>::operator<(const_pointer pszSource) const noexcept
 {
     return compare(pszSource) < 0;
 }
 
-template<class Traits>
-inline bool basic_string<Traits>::operator<(const basic_string& sStr) const noexcept
+template<class char_type, class traits_type>
+inline bool basic_string<char_type, traits_type>::operator<(const basic_string& sStr) const noexcept
 {
     return compare(sStr.data(), sStr.size()) < 0;
 }
 
-template<class Traits>
-template<string_convertable String>
-inline bool basic_string<Traits>::operator<(const String& sStr) const noexcept
+template<class char_type, class traits_type>
+template<string_convertable string_type>
+inline bool basic_string<char_type, traits_type>::operator<(const string_type& sStr) const noexcept
 {
     return iter_strcmp(cbegin(), cend(), sStr.cbegin(), sStr.cend()) < 0;
 }
 
-template<class Traits>
-inline bool basic_string<Traits>::operator<=(value_type chSymbol) const noexcept
+template<class char_type, class traits_type>
+inline bool basic_string<char_type, traits_type>::operator<=(value_type chSymbol) const noexcept
 {
     return compare(&chSymbol, 1) <= 0;
 }
 
-template<class Traits>
-inline bool basic_string<Traits>::operator<=(const_pointer pszSource) const noexcept
+template<class char_type, class traits_type>
+inline bool basic_string<char_type, traits_type>::operator<=(const_pointer pszSource) const noexcept
 {
     return compare(pszSource) <= 0;
 }
 
-template<class Traits>
-inline bool basic_string<Traits>::operator<=(const basic_string& sStr) const noexcept
+template<class char_type, class traits_type>
+inline bool basic_string<char_type, traits_type>::operator<=(const basic_string& sStr) const noexcept
 {
     return compare(sStr.data(), sStr.size()) <= 0;
 }
 
-template<class Traits>
-template<string_convertable String>
-inline bool basic_string<Traits>::operator<=(const String& sStr) const noexcept
+template<class char_type, class traits_type>
+template<string_convertable string_type>
+inline bool basic_string<char_type, traits_type>::operator<=(const string_type& sStr) const noexcept
 {
     return iter_strcmp(cbegin(), cend(), sStr.cbegin(), sStr.cend()) <= 0;
 }
 
-template<class Traits>
-inline bool basic_string<Traits>::operator>(value_type chSymbol) const noexcept
+template<class char_type, class traits_type>
+inline bool basic_string<char_type, traits_type>::operator>(value_type chSymbol) const noexcept
 {
     return compare(&chSymbol, 1) > 0;
 }
 
-template<class Traits>
-inline bool basic_string<Traits>::operator>(const_pointer pszSource) const noexcept
+template<class char_type, class traits_type>
+inline bool basic_string<char_type, traits_type>::operator>(const_pointer pszSource) const noexcept
 {
     return compare(pszSource) > 0;
 }
 
-template<class Traits>
-inline bool basic_string<Traits>::operator>(const basic_string& sStr) const noexcept
+template<class char_type, class traits_type>
+inline bool basic_string<char_type, traits_type>::operator>(const basic_string& sStr) const noexcept
 {
     return compare(sStr.data(), sStr.size()) > 0;
 }
 
-template<class Traits>
-template<string_convertable String>
-inline bool basic_string<Traits>::operator>(const String& sStr) const noexcept
+template<class char_type, class traits_type>
+template<string_convertable string_type>
+inline bool basic_string<char_type, traits_type>::operator>(const string_type& sStr) const noexcept
 {
     return iter_strcmp(cbegin(), cend(), sStr.cbegin(), sStr.cend()) > 0;
 }
 
-template<class Traits>
-inline bool basic_string<Traits>::operator>=(value_type chSymbol) const noexcept
+template<class char_type, class traits_type>
+inline bool basic_string<char_type, traits_type>::operator>=(value_type chSymbol) const noexcept
 {
     return compare(&chSymbol, 1) >= 0;
 }
 
-template<class Traits>
-inline bool basic_string<Traits>::operator>=(const_pointer pszSource) const noexcept
+template<class char_type, class traits_type>
+inline bool basic_string<char_type, traits_type>::operator>=(const_pointer pszSource) const noexcept
 {
     return compare(pszSource) >= 0;
 }
 
-template<class Traits>
-inline bool basic_string<Traits>::operator>=(const basic_string& sStr) const noexcept
+template<class char_type, class traits_type>
+inline bool basic_string<char_type, traits_type>::operator>=(const basic_string& sStr) const noexcept
 {
     return compare(sStr.data(), sStr.size()) >= 0;
 }
 
-template<class Traits>
-template<string_convertable String>
-inline bool basic_string<Traits>::operator>=(const String& sStr) const noexcept
+template<class char_type, class traits_type>
+template<string_convertable string_type>
+inline bool basic_string<char_type, traits_type>::operator>=(const string_type& sStr) const noexcept
 {
     return iter_strcmp(cbegin(), cend(), sStr.cbegin(), sStr.cend()) >= 0;
 }
 
-template<class Traits>
-inline typename basic_string<Traits>::reference basic_string<Traits>::operator[](size_type nSymbol) noexcept
+template<class char_type, class traits_type>
+inline typename basic_string<char_type, traits_type>::reference basic_string<char_type, traits_type>::operator[](
+    size_type nSymbol) noexcept
 {
     return at(nSymbol);
 }
 
-template<class Traits>
-inline typename basic_string<Traits>::const_reference basic_string<Traits>::operator[](size_type nSymbol) const noexcept
+template<class char_type, class traits_type>
+inline typename basic_string<char_type, traits_type>::const_reference basic_string<char_type, traits_type>::operator[](
+    size_type nSymbol) const noexcept
 {
     return at(nSymbol);
 }
 
-template<class Traits>
-inline basic_string<Traits>::operator std::basic_string_view<typename basic_string<Traits>::value_type>() const noexcept
+template<class char_type, class traits_type>
+inline basic_string<char_type, traits_type>::operator std::basic_string_view<
+    typename basic_string<char_type, traits_type>::value_type>() const noexcept
 {
     return std::basic_string_view<value_type, std::char_traits<value_type>>(data(), size());
 }
 
-template<class Traits>
-inline basic_string<Traits>::operator bool() const noexcept
+template<class char_type, class traits_type>
+inline basic_string<char_type, traits_type>::operator bool() const noexcept
 {
     return !empty();
 }
 
-template<class Traits>
-inline bool basic_string<Traits>::_resize(size_type nSymbols, string_resize_type eType) noexcept
+template<class char_type, class traits_type>
+inline bool basic_string<char_type, traits_type>::_resize(size_type nSymbols, string_resize_type eType) noexcept
 {
-    const bool bRet = m_Data.resize(nSymbols, eType == string_resize_type::shrink_to_fit ? 0 : Traits::align(), eType);
+    const bool bRet =
+        m_Data.resize(nSymbols, eType == string_resize_type::shrink_to_fit ? 0 : traits_type::align(), eType);
 
     if (bRet && eType == string_resize_type::common)
-        at(nSymbols) = QX_CHAR_PREFIX(typename Traits::value_type, '\0');
+        at(nSymbols) = QX_CHAR_PREFIX(typename traits_type::value_type, '\0');
 
     return bRet;
 }
 
-template<class Traits>
+template<class char_type, class traits_type>
 template<class Searcher>
-inline typename basic_string<Traits>::size_type basic_string<Traits>::_trim_left(const Searcher& searcher) noexcept
+inline typename basic_string<char_type, traits_type>::size_type basic_string<char_type, traits_type>::_trim_left(
+    const Searcher& searcher) noexcept
 {
     size_type nSymbols = 0;
 
@@ -2119,9 +2178,10 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::_trim_left
     return nSymbols;
 }
 
-template<class Traits>
+template<class char_type, class traits_type>
 template<class Searcher>
-inline typename basic_string<Traits>::size_type basic_string<Traits>::_trim_right(const Searcher& searcher) noexcept
+inline typename basic_string<char_type, traits_type>::size_type basic_string<char_type, traits_type>::_trim_right(
+    const Searcher& searcher) noexcept
 {
     size_type nSymbols = 0;
     size_type nSize    = size();
@@ -2138,9 +2198,10 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::_trim_righ
     return nSymbols;
 }
 
-template<class Traits>
+template<class char_type, class traits_type>
 template<class Searcher>
-inline typename basic_string<Traits>::size_type basic_string<Traits>::_trim(const Searcher& searcher) noexcept
+inline typename basic_string<char_type, traits_type>::size_type basic_string<char_type, traits_type>::_trim(
+    const Searcher& searcher) noexcept
 {
     const size_type nSize     = size();
     size_type       nStartPos = 0;
@@ -2160,12 +2221,12 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::_trim(cons
     return nSize - nNewSize;
 }
 
-template<class Traits>
-template<class Comparator>
-inline typename basic_string<Traits>::size_type basic_string<Traits>::_find(
-    size_type         nBegin,
-    size_type         nEnd,
-    const Comparator& comparator) const noexcept
+template<class char_type, class traits_type>
+template<class comparator_type>
+inline typename basic_string<char_type, traits_type>::size_type basic_string<char_type, traits_type>::_find(
+    size_type              nBegin,
+    size_type              nEnd,
+    const comparator_type& comparator) const noexcept
 {
     if (nEnd == npos)
         nEnd = size();
@@ -2185,12 +2246,12 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::_find(
     return npos;
 }
 
-template<class Traits>
-template<class Comparator>
-inline typename basic_string<Traits>::size_type basic_string<Traits>::_rfind(
-    size_type         nBegin,
-    size_type         nEnd,
-    const Comparator& comparator) const noexcept
+template<class char_type, class traits_type>
+template<class comparator_type>
+inline typename basic_string<char_type, traits_type>::size_type basic_string<char_type, traits_type>::_rfind(
+    size_type              nBegin,
+    size_type              nEnd,
+    const comparator_type& comparator) const noexcept
 {
     if (nBegin == npos)
         nBegin = size() - 1;
@@ -2210,50 +2271,48 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::_rfind(
     return npos;
 }
 
-template<class Traits>
-template<class Incrementer, class FwdIt>
-inline typename basic_string<Traits>::size_type basic_string<Traits>::_find_first_of(
-    FwdIt              itBegin,
-    FwdIt              itEnd,
-    size_type          nBegin,
-    const Incrementer& incrementer) const noexcept
+template<class char_type, class traits_type>
+template<class incrementer_type, class fwd_it_type>
+inline typename basic_string<char_type, traits_type>::size_type basic_string<char_type, traits_type>::_find_first_of(
+    fwd_it_type             itBegin,
+    fwd_it_type             itEnd,
+    size_type               nBegin,
+    const incrementer_type& incrementer) const noexcept
 {
     for (size_type i = nBegin; i < size(); ++i)
-        for (FwdIt it = itBegin; it != itEnd; it = incrementer(it))
+        for (fwd_it_type it = itBegin; it != itEnd; it = incrementer(it))
             if (*it == at(i))
                 return i;
 
     return npos;
 }
 
-template<class Traits>
-template<class Incrementer, class FwdIt>
-inline typename basic_string<Traits>::size_type basic_string<Traits>::_find_last_of(
-    FwdIt              itBegin,
-    FwdIt              itEnd,
-    size_type          nEnd,
-    const Incrementer& incrementer) const noexcept
+template<class char_type, class traits_type>
+template<class incrementer_type, class fwd_it_type>
+inline typename basic_string<char_type, traits_type>::size_type basic_string<char_type, traits_type>::_find_last_of(
+    fwd_it_type             itBegin,
+    fwd_it_type             itEnd,
+    size_type               nEnd,
+    const incrementer_type& incrementer) const noexcept
 {
     for (size_type i = size() - 1; i != nEnd - 1; --i)
-        for (FwdIt it = itBegin; it != itEnd; it = incrementer(it))
+        for (fwd_it_type it = itBegin; it != itEnd; it = incrementer(it))
             if (*it == at(i))
                 return i;
 
     return npos;
 }
 
-template<class Traits>
-template<class Incrementer, class FwdIt>
-inline typename basic_string<Traits>::size_type basic_string<Traits>::_find_first_not_of(
-    FwdIt              itBegin,
-    FwdIt              itEnd,
-    size_type          nBegin,
-    const Incrementer& incrementer) const noexcept
+template<class char_type, class traits_type>
+template<class incrementer_type, class fwd_it_type>
+inline typename basic_string<char_type, traits_type>::size_type basic_string<char_type, traits_type>::
+    _find_first_not_of(fwd_it_type itBegin, fwd_it_type itEnd, size_type nBegin, const incrementer_type& incrementer)
+        const noexcept
 {
     for (size_type i = nBegin; i < size(); ++i)
     {
         bool bFoundOneOf = false;
-        for (FwdIt it = itBegin; !bFoundOneOf && it != itEnd; it = incrementer(it))
+        for (fwd_it_type it = itBegin; !bFoundOneOf && it != itEnd; it = incrementer(it))
             bFoundOneOf |= *it == at(i);
 
         if (!bFoundOneOf)
@@ -2263,18 +2322,18 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::_find_firs
     return npos;
 }
 
-template<class Traits>
-template<class Incrementer, class FwdIt>
-inline typename basic_string<Traits>::size_type basic_string<Traits>::_find_last_not_of(
-    FwdIt              itBegin,
-    FwdIt              itEnd,
-    size_type          nEnd,
-    const Incrementer& incrementer) const noexcept
+template<class char_type, class traits_type>
+template<class incrementer_type, class fwd_it_type>
+inline typename basic_string<char_type, traits_type>::size_type basic_string<char_type, traits_type>::_find_last_not_of(
+    fwd_it_type             itBegin,
+    fwd_it_type             itEnd,
+    size_type               nEnd,
+    const incrementer_type& incrementer) const noexcept
 {
     for (size_type i = size() - 1; i != nEnd - 1; --i)
     {
         bool bFoundOneOf = false;
-        for (FwdIt it = itBegin; !bFoundOneOf && it != itEnd; it = incrementer(it))
+        for (fwd_it_type it = itBegin; !bFoundOneOf && it != itEnd; it = incrementer(it))
             bFoundOneOf |= *it == at(i);
 
         if (!bFoundOneOf)
@@ -2284,90 +2343,112 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::_find_last
     return npos;
 }
 
-template<class Traits>
-basic_string<Traits> operator+(const basic_string<Traits>& lhs, const basic_string<Traits>& rhs) noexcept
+template<class char_type, class traits_type>
+basic_string<char_type, traits_type> operator+(
+    const basic_string<char_type, traits_type>& lhs,
+    const basic_string<char_type, traits_type>& rhs) noexcept
 {
-    basic_string<Traits> str(lhs);
+    basic_string<char_type, traits_type> str(lhs);
     str += rhs;
     return str;
 }
 
-template<class Traits>
-basic_string<Traits> operator+(basic_string<Traits>&& lhs, const basic_string<Traits>& rhs) noexcept
+template<class char_type, class traits_type>
+basic_string<char_type, traits_type> operator+(
+    basic_string<char_type, traits_type>&&      lhs,
+    const basic_string<char_type, traits_type>& rhs) noexcept
 {
-    basic_string<Traits> str(std::move(lhs));
+    basic_string<char_type, traits_type> str(std::move(lhs));
     str += rhs;
     return str;
 }
 
-template<class Traits>
-basic_string<Traits> operator+(const basic_string<Traits>& lhs, typename Traits::const_pointer rhs) noexcept
+template<class char_type, class traits_type>
+basic_string<char_type, traits_type> operator+(
+    const basic_string<char_type, traits_type>& lhs,
+    typename traits_type::const_pointer         rhs) noexcept
 {
-    basic_string<Traits> str(lhs);
+    basic_string<char_type, traits_type> str(lhs);
     str += rhs;
     return str;
 }
 
-template<class Traits>
-basic_string<Traits> operator+(basic_string<Traits>&& lhs, typename Traits::const_pointer rhs) noexcept
+template<class char_type, class traits_type>
+basic_string<char_type, traits_type> operator+(
+    basic_string<char_type, traits_type>&& lhs,
+    typename traits_type::const_pointer    rhs) noexcept
 {
-    basic_string<Traits> str(std::move(lhs));
+    basic_string<char_type, traits_type> str(std::move(lhs));
     str += rhs;
     return str;
 }
 
-template<class Traits>
-basic_string<Traits> operator+(typename Traits::const_pointer lhs, const basic_string<Traits>& rhs) noexcept
+template<class char_type, class traits_type>
+basic_string<char_type, traits_type> operator+(
+    typename traits_type::const_pointer         lhs,
+    const basic_string<char_type, traits_type>& rhs) noexcept
 {
-    basic_string<Traits> str(lhs);
+    basic_string<char_type, traits_type> str(lhs);
     str += rhs;
     return str;
 }
 
-template<class Traits>
-basic_string<Traits> operator+(const basic_string<Traits>& lhs, typename Traits::value_type rhs) noexcept
+template<class char_type, class traits_type>
+basic_string<char_type, traits_type> operator+(
+    const basic_string<char_type, traits_type>& lhs,
+    typename traits_type::value_type            rhs) noexcept
 {
-    basic_string<Traits> str(lhs);
+    basic_string<char_type, traits_type> str(lhs);
     str += rhs;
     return str;
 }
 
-template<class Traits>
-basic_string<Traits> operator+(basic_string<Traits>&& lhs, typename Traits::value_type rhs) noexcept
+template<class char_type, class traits_type>
+basic_string<char_type, traits_type> operator+(
+    basic_string<char_type, traits_type>&& lhs,
+    typename traits_type::value_type       rhs) noexcept
 {
-    basic_string<Traits> str(std::move(lhs));
+    basic_string<char_type, traits_type> str(std::move(lhs));
     str += rhs;
     return str;
 }
 
-template<class Traits>
-basic_string<Traits> operator+(typename Traits::value_type lhs, const basic_string<Traits>& rhs) noexcept
+template<class char_type, class traits_type>
+basic_string<char_type, traits_type> operator+(
+    typename traits_type::value_type            lhs,
+    const basic_string<char_type, traits_type>& rhs) noexcept
 {
-    basic_string<Traits> str(lhs);
+    basic_string<char_type, traits_type> str(lhs);
     str += rhs;
     return str;
 }
 
-template<class Traits, string_convertable String>
-basic_string<Traits> operator+(const basic_string<Traits>& lhs, const String& rhs) noexcept
+template<class char_type, class traits_type, string_convertable string_type>
+basic_string<char_type, traits_type> operator+(
+    const basic_string<char_type, traits_type>& lhs,
+    const string_type&                          rhs) noexcept
 {
-    basic_string<Traits> str(lhs);
+    basic_string<char_type, traits_type> str(lhs);
     str += rhs;
     return str;
 }
 
-template<class Traits, string_convertable String>
-basic_string<Traits> operator+(basic_string<Traits>&& lhs, const String& rhs) noexcept
+template<class char_type, class traits_type, string_convertable string_type>
+basic_string<char_type, traits_type> operator+(
+    basic_string<char_type, traits_type>&& lhs,
+    const string_type&                     rhs) noexcept
 {
-    basic_string<Traits> str(std::move(lhs));
+    basic_string<char_type, traits_type> str(std::move(lhs));
     str += rhs;
     return str;
 }
 
-template<class Traits, string_convertable String>
-basic_string<Traits> operator+(const String& lhs, const basic_string<Traits>& rhs) noexcept
+template<class char_type, class traits_type, string_convertable string_type>
+basic_string<char_type, traits_type> operator+(
+    const string_type&                          lhs,
+    const basic_string<char_type, traits_type>& rhs) noexcept
 {
-    basic_string<Traits> str(lhs);
+    basic_string<char_type, traits_type> str(lhs);
     str += rhs;
     return str;
 }
@@ -2376,8 +2457,9 @@ basic_string<Traits> operator+(const String& lhs, const basic_string<Traits>& rh
     @brief  Get string size (excluding null terminator)
     @retval - string size (excluding null terminator)
 **/
-template<class Traits>
-inline typename basic_string<Traits>::size_type basic_string<Traits>::size(void) const noexcept
+template<class char_type, class traits_type>
+inline typename basic_string<char_type, traits_type>::size_type basic_string<char_type, traits_type>::size(
+    void) const noexcept
 {
     return m_Data.size();
 }
@@ -2386,8 +2468,8 @@ inline typename basic_string<Traits>::size_type basic_string<Traits>::size(void)
     @brief  Get c-string
     @retval - c-string
 **/
-template<class Traits>
-inline typename basic_string<Traits>::pointer basic_string<Traits>::data(void) noexcept
+template<class char_type, class traits_type>
+inline typename basic_string<char_type, traits_type>::pointer basic_string<char_type, traits_type>::data(void) noexcept
 {
     return m_Data.data();
 }
@@ -2397,8 +2479,9 @@ inline typename basic_string<Traits>::pointer basic_string<Traits>::data(void) n
     @param  nIndex - char index
     @retval        - char value
 **/
-template<class Traits>
-inline typename basic_string<Traits>::reference basic_string<Traits>::at(size_type nIndex) noexcept
+template<class char_type, class traits_type>
+inline typename basic_string<char_type, traits_type>::reference basic_string<char_type, traits_type>::at(
+    size_type nIndex) noexcept
 {
     return data()[nIndex];
 }
@@ -2406,10 +2489,10 @@ inline typename basic_string<Traits>::reference basic_string<Traits>::at(size_ty
 /**
     @brief Clear string
 **/
-template<class Traits>
-inline void basic_string<Traits>::clear() noexcept
+template<class char_type, class traits_type>
+inline void basic_string<char_type, traits_type>::clear() noexcept
 {
-    assign(QX_STR_PREFIX(typename Traits::value_type, ""));
+    assign(QX_STR_PREFIX(typename traits_type::value_type, ""));
 }
 
 } // namespace qx
@@ -2421,12 +2504,12 @@ inline void basic_string<Traits>::clear() noexcept
 namespace std
 {
 
-template<class Traits>
-struct hash<qx::basic_string<Traits>>
+template<class char_type, class traits_type>
+struct hash<qx::basic_string<char_type, traits_type>>
 {
-    size_t operator()(const qx::basic_string<Traits>& str) const noexcept
+    size_t operator()(const qx::basic_string<char_type, traits_type>& str) const noexcept
     {
-        return Traits::hash_function(str.data(), Traits::hash_seed(), str.size());
+        return traits_type::hash_function(str.data(), traits_type::hash_seed(), str.size());
     }
 };
 
@@ -2439,8 +2522,8 @@ struct hash<qx::basic_string<Traits>>
 namespace std //-V1061
 {
 
-template<class Traits>
-void swap(qx::basic_string<Traits>& lhs, qx::basic_string<Traits>& rhs) noexcept
+template<class char_type, class traits_type>
+void swap(qx::basic_string<char_type, traits_type>& lhs, qx::basic_string<char_type, traits_type>& rhs) noexcept
 {
     lhs.swap(rhs);
 }
@@ -2451,21 +2534,25 @@ void swap(qx::basic_string<Traits>& lhs, qx::basic_string<Traits>& rhs) noexcept
 
 //----------------------- istream / ostream overloading ----------------------
 
-template<class Traits>
-qx::detail::ostream<Traits>& operator<<(qx::detail::ostream<Traits>& os, const qx::basic_string<Traits>& str)
+template<class char_type, class traits_type>
+qx::detail::ostream<char_type>& operator<<(
+    qx::detail::ostream<char_type>&                 os,
+    const qx::basic_string<char_type, traits_type>& str)
 {
     os << str.data();
     return os;
 }
 
-template<class Traits>
-qx::detail::istream<Traits>& operator>>(qx::detail::istream<Traits>& is, qx::basic_string<Traits>& str)
+template<class char_type, class traits_type>
+qx::detail::istream<char_type>& operator>>(
+    qx::detail::istream<char_type>&           is,
+    qx::basic_string<char_type, traits_type>& str)
 {
-    typename qx::detail::istream<Traits>::iostate ret_bit = qx::detail::istream<Traits>::goodbit;
+    typename qx::detail::istream<traits_type>::iostate ret_bit = qx::detail::istream<traits_type>::goodbit;
 
-    auto try_push_back = [&str, &is, &ret_bit](typename qx::basic_string<Traits>::value_type ch) -> bool
+    auto try_push_back = [&str, &is, &ret_bit](char_type ch) -> bool
     {
-        typename qx::basic_string<Traits>::size_type nCurrentSize = str.size();
+        typename traits_type::size_type nCurrentSize = str.size();
         if (str._resize(nCurrentSize + 1))
         {
             str[nCurrentSize] = ch;
@@ -2474,18 +2561,18 @@ qx::detail::istream<Traits>& operator>>(qx::detail::istream<Traits>& is, qx::bas
         else
         {
             is.unget();
-            ret_bit |= qx::detail::istream<Traits>::failbit;
+            ret_bit |= qx::detail::istream<traits_type>::failbit;
             return false;
         }
     };
 
     str.clear();
-    typename qx::basic_string<Traits>::value_type ch;
+    char_type ch;
 
     // skip all space symbols and add first symbol is any
     while (is.get(ch))
     {
-        if (!Traits::is_space(ch))
+        if (!traits_type::is_space(ch))
         {
             try_push_back(ch);
             break;
@@ -2495,7 +2582,7 @@ qx::detail::istream<Traits>& operator>>(qx::detail::istream<Traits>& is, qx::bas
     // add other symbols until space symbol
     while (is.get(ch))
     {
-        if (!Traits::is_space(ch))
+        if (!traits_type::is_space(ch))
         {
             if (!try_push_back(ch))
                 break;

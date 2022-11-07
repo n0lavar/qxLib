@@ -125,7 +125,7 @@ constexpr size_t murmur_32_hash(const value_type* pStr, size_t nSeed, size_t nLe
         nHash ^= k;
     }
 
-    nHash ^= nLen; //-V103
+    nHash ^= nLen;       //-V103
     nHash ^= nHash >> 16;
     nHash *= 0x85ebca6b; //-V101
     nHash ^= nHash >> 13;
@@ -279,59 +279,69 @@ constexpr auto get_format_specifier() noexcept
 {
     const value_type* pszFormat = nullptr;
 
-    if constexpr (std::is_same_v<T, char>)
+    using test_type = std::remove_cvref_t<T>;
+
+    if constexpr (std::is_same_v<test_type, char>)
     {
         pszFormat = QX_STR_PREFIX(value_type, "%hhd");
     }
-    else if constexpr (std::is_same_v<T, unsigned char>)
+    else if constexpr (std::is_same_v<test_type, unsigned char>)
     {
         pszFormat = QX_STR_PREFIX(value_type, "%hhu");
     }
-    else if constexpr (std::is_same_v<T, short>)
+    else if constexpr (std::is_same_v<test_type, short>)
     {
         pszFormat = QX_STR_PREFIX(value_type, "%hd");
     }
-    else if constexpr (std::is_same_v<T, unsigned short>)
+    else if constexpr (std::is_same_v<test_type, unsigned short>)
     {
         pszFormat = QX_STR_PREFIX(value_type, "%hu");
     }
-    else if constexpr (std::is_same_v<T, int>)
+    else if constexpr (std::is_same_v<test_type, int>)
     {
         pszFormat = QX_STR_PREFIX(value_type, "%d");
     }
-    else if constexpr (std::is_same_v<T, unsigned int>)
+    else if constexpr (std::is_same_v<test_type, unsigned int>)
     {
         pszFormat = QX_STR_PREFIX(value_type, "%u");
     }
-    else if constexpr (std::is_same_v<T, long>)
+    else if constexpr (std::is_same_v<test_type, long>)
     {
         pszFormat = QX_STR_PREFIX(value_type, "%ld");
     }
-    else if constexpr (std::is_same_v<T, unsigned long>)
+    else if constexpr (std::is_same_v<test_type, unsigned long>)
     {
         pszFormat = QX_STR_PREFIX(value_type, "%lu");
     }
-    else if constexpr (std::is_same_v<T, long long>)
+    else if constexpr (std::is_same_v<test_type, long long>)
     {
         pszFormat = QX_STR_PREFIX(value_type, "%lld");
     }
-    else if constexpr (std::is_same_v<T, unsigned long long>)
+    else if constexpr (std::is_same_v<test_type, unsigned long long>)
     {
         pszFormat = QX_STR_PREFIX(value_type, "%llu");
     }
-    else if constexpr (std::is_same_v<T, float>)
+    else if constexpr (std::is_same_v<test_type, float>)
     {
         pszFormat = QX_STR_PREFIX(value_type, "%f");
     }
-    else if constexpr (std::is_same_v<T, double>)
+    else if constexpr (std::is_same_v<test_type, double>)
     {
         pszFormat = QX_STR_PREFIX(value_type, "%lf");
     }
-    else if constexpr (std::is_same_v<T, long double>)
+    else if constexpr (std::is_same_v<test_type, long double>)
     {
         pszFormat = QX_STR_PREFIX(value_type, "%Lf");
     }
-    else if constexpr (std::is_pointer_v<T>)
+    else if constexpr (std::is_same_v<std::remove_cv_t<std::remove_pointer_t<test_type>>, char>)
+    {
+        pszFormat = QX_STR_PREFIX(value_type, "%s");
+    }
+    else if constexpr (std::is_same_v<std::remove_cv_t<std::remove_pointer_t<test_type>>, wchar_t>)
+    {
+        pszFormat = QX_STR_PREFIX(value_type, "%ls");
+    }
+    else if constexpr (std::is_pointer_v<test_type>)
     {
 #if QX_MSVC
         pszFormat = QX_STR_PREFIX(value_type, "0x%p");

@@ -18,17 +18,14 @@ namespace detail
 {
 
 template<typename T>
-concept has_zero_termonated_hash_func_overload = requires(typename T::const_pointer pszString, size_t nSeed)
-{
-    T::hash_function(pszString, nSeed);
-};
+concept has_zero_termonated_hash_func_overload =
+    requires(typename T::const_pointer pszString, size_t nSeed) { T::hash_function(pszString, nSeed); };
 
 } // namespace detail
 
 
 template<typename T>
-concept string_convertable = requires(T t)
-{
+concept string_convertable = requires(T t) {
     t.cbegin();
     t.cend();
 };

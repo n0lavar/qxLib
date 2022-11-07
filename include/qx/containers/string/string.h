@@ -23,24 +23,26 @@
 namespace qx
 {
 
-template<class Traits>
+template<class char_type, class Traits = char_traits<char_type>>
 class basic_string;
 
 namespace detail
 {
 
-template<class Traits>
-using ostream = std::basic_ostream<typename Traits::value_type, std::char_traits<typename Traits::value_type>>;
+template<class char_type>
+using ostream = std::basic_ostream<char_type, std::char_traits<char_type>>;
 
-template<class Traits>
-using istream = std::basic_istream<typename Traits::value_type, std::char_traits<typename Traits::value_type>>;
+template<class char_type>
+using istream = std::basic_istream<char_type, std::char_traits<char_type>>;
 
 } // namespace detail
 
 } // namespace qx
 
-template<class Traits>
-qx::detail::istream<Traits>& operator>>(qx::detail::istream<Traits>& is, qx::basic_string<Traits>& str);
+template<class char_type, class traits_type>
+qx::detail::istream<char_type>& operator>>(
+    qx::detail::istream<char_type>&           is,
+    qx::basic_string<char_type, traits_type>& str);
 
 namespace qx
 {
@@ -53,26 +55,29 @@ namespace qx
              Supports small strings optimization, almost completely supports
              the std::string interface (except for some overloads),
              has many additional methods for convenient working with strings.
-    @tparam  Traits - char traits. \see string_traits.h
+    @tparam  char_type   - char type (char, wchar_t, etc)
+    @tparam  traits_type - char traits. \see string_traits.h
     @author  Khrapov
     @date    20.10.2019
 
 **/
-template<class Traits>
+template<class char_type, class traits_type>
 class basic_string
 {
-    template<class _Traits>
-    friend qx::detail::istream<_Traits>& ::operator>>(qx::detail::istream<_Traits>& is, basic_string<_Traits>& str);
+    template<class _char_type, class _traits_type>
+    friend qx::detail::istream<_char_type>& ::operator>>(
+        qx::detail::istream<_char_type>&        is,
+        basic_string<_char_type, _traits_type>& str);
 
 public:
-    using traits_type     = Traits;
-    using value_type      = typename Traits::value_type;
-    using pointer         = typename Traits::pointer;
-    using const_pointer   = typename Traits::const_pointer;
-    using reference       = typename Traits::reference;
-    using const_reference = typename Traits::const_reference;
-    using difference_type = typename Traits::difference_type;
-    using size_type       = typename Traits::size_type;
+    using traits          = traits_type;
+    using value_type      = typename traits::value_type;
+    using pointer         = typename traits::pointer;
+    using const_pointer   = typename traits::const_pointer;
+    using reference       = typename traits::reference;
+    using const_reference = typename traits::const_reference;
+    using difference_type = typename traits::difference_type;
+    using size_type       = typename traits::size_type;
     using string_view     = std::basic_string_view<value_type>;
     using sstream_type    = std::basic_stringstream<value_type>;
     using views           = std::vector<string_view>;
@@ -127,20 +132,20 @@ public:
 
     /**
         @brief  basic_string object constructor
-        @tparam FwdIt   - forward iterator type
-        @param  itFirst - first source iterator
-        @param  itLast  - last source iterator
+        @tparam fwd_it_type - forward iterator type
+        @param  itFirst     - first source iterator
+        @param  itLast      - last source iterator
     **/
-    template<class FwdIt>
-    basic_string(FwdIt itFirst, FwdIt itLast) noexcept;
+    template<class fwd_it_type>
+    basic_string(fwd_it_type itFirst, fwd_it_type itLast) noexcept;
 
     /**
         @brief  basic_string object constructor
-        @tparam String   - string-ish type, satisfying the "string_convertable" concept
-        @param  sAnother - string-ish container
+        @tparam string_type - string-ish type, satisfying the "string_convertable" concept
+        @param  sAnother    - string-ish container
     **/
-    template<string_convertable String>
-    basic_string(const String& sAnother) noexcept;
+    template<string_convertable string_type>
+    basic_string(const string_type& sAnother) noexcept;
 
     basic_string(std::nullptr_t) = delete;
 
@@ -189,20 +194,20 @@ public:
 
     /**
         @brief  Assign by iterators
-        @tparam FwdIt   - forward iterator type
-        @param  itFirst - first iterator of source
-        @param  itLast  - last iterator of source
+        @tparam fwd_it_type - forward iterator type
+        @param  itFirst     - first iterator of source
+        @param  itLast      - last iterator of source
     **/
-    template<class FwdIt>
-    void assign(FwdIt itFirst, FwdIt itLast) noexcept;
+    template<class fwd_it_type>
+    void assign(fwd_it_type itFirst, fwd_it_type itLast) noexcept;
 
     /**
         @brief  Assign by char container
-        @tparam String - string-ish type, satisfying the "string_convertable" concept
-        @param  str    - char container
+        @tparam string_type - string-ish type, satisfying the "string_convertable" concept
+        @param  str         - char container
     **/
-    template<string_convertable String>
-    void assign(const String& str) noexcept;
+    template<string_convertable string_type>
+    void assign(const string_type& str) noexcept;
 
     /**
         @brief  Format string (c-style printf)
@@ -220,13 +225,13 @@ public:
 
     /**
         @brief  Static format string (c-style printf)
-        @tparam Args      - template parameter pack type
+        @tparam args_type - template parameter pack type
         @param  pszFormat - format pattern
         @param  args      - format arguments
         @retval           - formatted string
     **/
-    template<class... Args>
-    static basic_string static_sprintf(const_pointer pszFormat, Args... args) noexcept;
+    template<class... args_type>
+    static basic_string static_sprintf(const_pointer pszFormat, args_type... args) noexcept;
 
     /**
         @brief  Format string (c-style printf) and append to the current string
@@ -322,12 +327,12 @@ public:
 
     /**
         @brief  Convert string to specified type
-        @tparam To        - type to convert
+        @tparam to_type   - type to convert
         @param  pszFormat - format string
         @retval           - converted value or std::nullopt
     **/
-    template<typename To>
-    std::optional<To> to(const_pointer pszFormat = nullptr) const noexcept;
+    template<typename to_type>
+    std::optional<to_type> to(const_pointer pszFormat = nullptr) const noexcept;
 
     /**
         @brief  Copies a substring [nPos, nPos + nCount) to character string pointed to by pDest
@@ -340,22 +345,22 @@ public:
 
     /**
         @brief  Construct string from custom type
-        @tparam From      - type to convert from
-        @param  data      - data of type From
+        @tparam from_type - type to convert from
+        @param  data      - data of type from_type
         @param  pszFormat - format string if default is not enough
     **/
-    template<typename From>
-    void from(const From& data, const_pointer pszFormat = nullptr) noexcept;
+    template<typename from_type>
+    void from(const from_type& data, const_pointer pszFormat = nullptr) noexcept;
 
     /**
         @brief  Construct string from custom type and get it
-        @tparam From      - type to convert from
-        @param  data      - data of type From
+        @tparam from_type - type to convert from
+        @param  data      - data of type from_type
         @param  pszFormat - format string if default is not enough
         @retval           - constructed string
     **/
-    template<typename From>
-    static basic_string static_from(const From& data, const_pointer pszFormat = nullptr) noexcept;
+    template<typename from_type>
+    static basic_string static_from(const from_type& data, const_pointer pszFormat = nullptr) noexcept;
 
     /**
         @brief  Append char
@@ -378,20 +383,20 @@ public:
 
     /**
         @brief  Append string
-        @tparam FwdIt   - forward iterator type
-        @param  itBegin - other string begin iterator
-        @param  itEnd   - other end begin iterator
+        @tparam fwd_it_type - forward iterator type
+        @param  itBegin     - other string begin iterator
+        @param  itEnd       - other end begin iterator
     **/
-    template<class FwdIt>
-    void append(FwdIt itBegin, FwdIt itEnd) noexcept;
+    template<class fwd_it_type>
+    void append(fwd_it_type itBegin, fwd_it_type itEnd) noexcept;
 
     /**
         @brief  Append string
-        @tparam String - string-ish type, satisfying the "string_convertable" concept
-        @param  sStr   - source char container
+        @tparam string_type - string-ish type, satisfying the "string_convertable" concept
+        @param  sStr        - source char container
     **/
-    template<string_convertable String>
-    void append(const String& sStr) noexcept;
+    template<string_convertable string_type>
+    void append(const string_type& sStr) noexcept;
 
     /**
         @brief  Insert substring
@@ -420,24 +425,24 @@ public:
 
     /**
         @brief  Insert substring
-        @tparam FwdIt       - forward iterator type
+        @tparam fwd_it_type - forward iterator type
         @param  nPos        - first char index
         @param  itWhatBegin - source first iterator
         @param  itWhatEnd   - source last iterator
         @retval             - pos of char after last char of inserted string or npos
     **/
-    template<class FwdIt>
-    size_type insert(size_type nPos, FwdIt itWhatBegin, FwdIt itWhatEnd) noexcept;
+    template<class fwd_it_type>
+    size_type insert(size_type nPos, fwd_it_type itWhatBegin, fwd_it_type itWhatEnd) noexcept;
 
     /**
         @brief  Insert substring
-        @tparam String - string-ish type, satisfying the "string_convertable" concept
-        @param  nPos   - first char index
-        @param  sWhat  - source string
-        @retval        - pos of char after last char of inserted string or npos
+        @tparam string_type - string-ish type, satisfying the "string_convertable" concept
+        @param  nPos        - first char index
+        @param  sWhat       - source string
+        @retval             - pos of char after last char of inserted string or npos
     **/
-    template<string_convertable String>
-    size_type insert(size_type nPos, String sWhat) noexcept;
+    template<string_convertable string_type>
+    size_type insert(size_type nPos, string_type sWhat) noexcept;
 
     /**
         @brief  Insert char
@@ -466,24 +471,24 @@ public:
 
     /**
         @brief  Insert substring
-        @tparam FwdIt       - forward iterator type
+        @tparam fwd_it_type - forward iterator type
         @param  itPos       - first char iterator 
         @param  itWhatBegin - source string first iterator 
         @param  itWhatEnd   - source string last iterator 
         @retval             - pos of char after last char of inserted string or npos
     **/
-    template<class FwdIt>
-    size_type insert(const_iterator itPos, FwdIt itWhatBegin, FwdIt itWhatEnd) noexcept;
+    template<class fwd_it_type>
+    size_type insert(const_iterator itPos, fwd_it_type itWhatBegin, fwd_it_type itWhatEnd) noexcept;
 
     /**
         @brief  Insert substring
-        @tparam String - string-ish type, satisfying the "string_convertable" concept
-        @param  itPos  - first char iterator
-        @param  sWhat  - source string
-        @retval        - pos of char after last char of inserted string or npos
+        @tparam string_type - string-ish type, satisfying the "string_convertable" concept
+        @param  itPos       - first char iterator
+        @param  sWhat       - source string
+        @retval             - pos of char after last char of inserted string or npos
     **/
-    template<string_convertable String>
-    size_type insert(const_iterator itPos, String sWhat) noexcept;
+    template<string_convertable string_type>
+    size_type insert(const_iterator itPos, string_type sWhat) noexcept;
 
     /**
         @brief  Insert char in the end of the string
@@ -572,22 +577,22 @@ public:
 
     /**
         @brief  Trim the string to the left
-        @tparam FwdIt   - forward iterator type
-        @param  itBegin - begin it of string with symbols to delete
-        @param  itEnd   - begin it of string with symbols to delete
-        @retval         - number of deleted symbols
+        @tparam fwd_it_type - forward iterator type
+        @param  itBegin     - begin it of string with symbols to delete
+        @param  itEnd       - begin it of string with symbols to delete
+        @retval             - number of deleted symbols
     **/
-    template<class FwdIt>
-    size_type trim_left(FwdIt itBegin, FwdIt itEnd) noexcept;
+    template<class fwd_it_type>
+    size_type trim_left(fwd_it_type itBegin, fwd_it_type itEnd) noexcept;
 
     /**
         @brief  Trim the string to the left
-        @tparam String - string-ish type, satisfying the "string_convertable" concept
-        @param  sStr   - string with symbols to delete 
-        @retval        - number of deleted symbols
+        @tparam string_type - string-ish type, satisfying the "string_convertable" concept
+        @param  sStr        - string with symbols to delete 
+        @retval             - number of deleted symbols
     **/
-    template<string_convertable String>
-    size_type trim_left(const String& sStr) noexcept;
+    template<string_convertable string_type>
+    size_type trim_left(const string_type& sStr) noexcept;
 
     /**
         @brief  Trim the string to the right (whitespace characters)
@@ -626,22 +631,22 @@ public:
 
     /**
         @brief  Trim the string to the right
-        @tparam FwdIt   - forward iterator type
-        @param  itBegin - begin it of string with symbols to delete
-        @param  itEnd   - begin it of string with symbols to delete
-        @retval         - number of deleted symbols
+        @tparam fwd_it_type - forward iterator type
+        @param  itBegin     - begin it of string with symbols to delete
+        @param  itEnd       - begin it of string with symbols to delete
+        @retval             - number of deleted symbols
     **/
-    template<class FwdIt>
-    size_type trim_right(FwdIt itBegin, FwdIt itEnd) noexcept;
+    template<class fwd_it_type>
+    size_type trim_right(fwd_it_type itBegin, fwd_it_type itEnd) noexcept;
 
     /**
         @brief  Trim the string to the right
-        @tparam String - string-ish type, satisfying the "string_convertable" concept
-        @param  sStr   - string with symbols to delete
-        @retval        - number of deleted symbols
+        @tparam string_type - string-ish type, satisfying the "string_convertable" concept
+        @param  sStr        - string with symbols to delete
+        @retval             - number of deleted symbols
     **/
-    template<string_convertable String>
-    size_type trim_right(const String& sStr) noexcept;
+    template<string_convertable string_type>
+    size_type trim_right(const string_type& sStr) noexcept;
 
     /**
         @brief  Trim the string to the both sides (whitespace characters)
@@ -680,22 +685,22 @@ public:
 
     /**
         @brief  Trim the string to the both sides
-        @tparam FwdIt   - forward iterator type
-        @param  itBegin - begin it of string with symbols to delete
-        @param  itEnd   - begin it of string with symbols to delete
-        @retval         - number of deleted symbols
+        @tparam fwd_it_type - forward iterator type
+        @param  itBegin     - begin it of string with symbols to delete
+        @param  itEnd       - begin it of string with symbols to delete
+        @retval             - number of deleted symbols
     **/
-    template<class FwdIt>
-    size_type trim(FwdIt itBegin, FwdIt itEnd) noexcept;
+    template<class fwd_it_type>
+    size_type trim(fwd_it_type itBegin, fwd_it_type itEnd) noexcept;
 
     /**
         @brief  Trim the string to the both sides
-        @tparam String - string-ish type, satisfying the "string_convertable" concept
-        @param  sStr   - string with symbols to delete
-        @retval        - number of deleted symbols
+        @tparam string_type - string-ish type, satisfying the "string_convertable" concept
+        @param  sStr        - string with symbols to delete
+        @retval             - number of deleted symbols
     **/
-    template<string_convertable String>
-    size_type trim(const String& sStr) noexcept;
+    template<string_convertable string_type>
+    size_type trim(const string_type& sStr) noexcept;
 
     /**
         @brief  Remove the first occurrence of a substring in a string
@@ -731,26 +736,26 @@ public:
 
     /**
         @brief  Remove the first occurrence of a substring in a string
-        @tparam FwdIt   - forward iterator type
-        @param  itBegin - string begin iterator
-        @param  itEnd   - string end iterator
-        @param  nBegin  - start searching index
-        @param  nEnd    - end searching index
-        @retval         - position where the first occurrence was or npos
+        @tparam fwd_it_type - forward iterator type
+        @param  itBegin     - string begin iterator
+        @param  itEnd       - string end iterator
+        @param  nBegin      - start searching index
+        @param  nEnd        - end searching index
+        @retval             - position where the first occurrence was or npos
     **/
-    template<class FwdIt>
-    size_type remove(FwdIt itBegin, FwdIt itEnd, size_type nBegin = 0, size_type nEnd = npos) noexcept;
+    template<class fwd_it_type>
+    size_type remove(fwd_it_type itBegin, fwd_it_type itEnd, size_type nBegin = 0, size_type nEnd = npos) noexcept;
 
     /**
         @brief  Remove the first occurrence of a substring in a string
-        @tparam String - string-ish type, satisfying the "string_convertable" concept
-        @param  sStr   - string to remove
-        @param  nBegin - start searching index
-        @param  nEnd   - end searching index
-        @retval        - position where the first occurrence was or npos
+        @tparam string_type - string-ish type, satisfying the "string_convertable" concept
+        @param  sStr        - string to remove
+        @param  nBegin      - start searching index
+        @param  nEnd        - end searching index
+        @retval             - position where the first occurrence was or npos
     **/
-    template<string_convertable String>
-    size_type remove(const String& sStr, size_type nBegin = 0, size_type nEnd = npos) noexcept;
+    template<string_convertable string_type>
+    size_type remove(const string_type& sStr, size_type nBegin = 0, size_type nEnd = npos) noexcept;
 
     /**
         @brief  Remove string prefix if matches
@@ -776,22 +781,22 @@ public:
 
     /**
         @brief  Remove string prefix if matches
-        @tparam FwdIt   - forward iterator type
-        @param  itBegin - string to remove begin iterator
-        @param  itEnd   - string to remove end iterator
-        @retval         - true if removed
+        @tparam fwd_it_type - forward iterator type
+        @param  itBegin     - string to remove begin iterator
+        @param  itEnd       - string to remove end iterator
+        @retval             - true if removed
     **/
-    template<class FwdIt>
-    bool remove_prefix(FwdIt itBegin, FwdIt itEnd) noexcept;
+    template<class fwd_it_type>
+    bool remove_prefix(fwd_it_type itBegin, fwd_it_type itEnd) noexcept;
 
     /**
         @brief  Remove string prefix if matches
-        @tparam String - string-ish type, satisfying the "string_convertable" concept
-        @param  sStr   - string to remove
-        @retval        - true if removed
+        @tparam string_type - string-ish type, satisfying the "string_convertable" concept
+        @param  sStr        - string to remove
+        @retval             - true if removed
     **/
-    template<string_convertable String>
-    bool remove_prefix(const String& sStr) noexcept;
+    template<string_convertable string_type>
+    bool remove_prefix(const string_type& sStr) noexcept;
 
     /**
         @brief  Remove string suffix if matches
@@ -817,22 +822,22 @@ public:
 
     /**
         @brief  Remove string suffix if matches
-        @tparam FwdIt   - forward iterator type
-        @param  itBegin - string to remove begin iterator
-        @param  itEnd   - string to remove end iterator
-        @retval         - true if removed
+        @tparam fwd_it_type - forward iterator type
+        @param  itBegin     - string to remove begin iterator
+        @param  itEnd       - string to remove end iterator
+        @retval             - true if removed
     **/
-    template<class FwdIt>
-    bool remove_suffix(FwdIt itBegin, FwdIt itEnd) noexcept;
+    template<class fwd_it_type>
+    bool remove_suffix(fwd_it_type itBegin, fwd_it_type itEnd) noexcept;
 
     /**
         @brief  Remove string suffix if matches
-        @tparam String - string-ish type, satisfying the "string_convertable" concept
-        @param  sStr   - string to remove
-        @retval        - true if removed
+        @tparam string_type - string-ish type, satisfying the "string_convertable" concept
+        @param  sStr        - string to remove
+        @retval             - true if removed
     **/
-    template<string_convertable String>
-    bool remove_suffix(const String& sStr) noexcept;
+    template<string_convertable string_type>
+    bool remove_suffix(const string_type& sStr) noexcept;
 
     /**
         @brief  Remove all occurrences of a substring in a string
@@ -868,26 +873,26 @@ public:
 
     /**
         @brief  Remove all occurrences of a substring in a string
-        @tparam FwdIt   - forward iterator type
-        @param  itFirst - string begin iterator
-        @param  itLast  - string end iterator
-        @param  nBegin  - start searching index
-        @param  nEnd    - end searching index
-        @retval         - number of deleted occurrences
+        @tparam fwd_it_type - forward iterator type
+        @param  itFirst     - string begin iterator
+        @param  itLast      - string end iterator
+        @param  nBegin      - start searching index
+        @param  nEnd        - end searching index
+        @retval             - number of deleted occurrences
     **/
-    template<class FwdIt>
-    size_type remove_all(FwdIt itFirst, FwdIt itLast, size_type nBegin = 0, size_type nEnd = npos) noexcept;
+    template<class fwd_it_type>
+    size_type remove_all(fwd_it_type itFirst, fwd_it_type itLast, size_type nBegin = 0, size_type nEnd = npos) noexcept;
 
     /**
         @brief  Remove all occurrences of a substring in a string
-        @tparam String - string-ish type, satisfying the "string_convertable" concept
-        @param  sStr   - string to remove
-        @param  nBegin - start searching index
-        @param  nEnd   - end searching index
-        @retval        - number of deleted occurrences
+        @tparam string_type - string-ish type, satisfying the "string_convertable" concept
+        @param  sStr        - string to remove
+        @param  nBegin      - start searching index
+        @param  nEnd        - end searching index
+        @retval             - number of deleted occurrences
     **/
-    template<string_convertable String>
-    size_type remove_all(const String& sStr, size_type nBegin = 0, size_type nEnd = npos) noexcept;
+    template<string_convertable string_type>
+    size_type remove_all(const string_type& sStr, size_type nBegin = 0, size_type nEnd = npos) noexcept;
 
     /**
         @brief  Replace first occurrence of sFind with sReplace
@@ -970,30 +975,30 @@ public:
 
     /**
         @brief  Performs a binary comparison of the characters
-        @tparam FwdIt   - forward iterator type
-        @param  itBegin - string to compare begin iterator
-        @param  itEnd   - string to compare end iterator
-        @retval         - < 0 the first character that does not match has
-                              a lower value in this than in chSymbol
-                          = 0 the contents of both strings are equal
-                          > 0 the first character that does not match has
-                              a greater value in this than in chSymbol
+        @tparam fwd_it_type - forward iterator type
+        @param  itBegin     - string to compare begin iterator
+        @param  itEnd       - string to compare end iterator
+        @retval             - < 0 the first character that does not match has
+                                  a lower value in this than in chSymbol
+                              = 0 the contents of both strings are equal
+                              > 0 the first character that does not match has
+                                  a greater value in this than in chSymbol
     **/
-    template<class FwdIt>
-    int compare(FwdIt itBegin, FwdIt itEnd) const noexcept;
+    template<class fwd_it_type>
+    int compare(fwd_it_type itBegin, fwd_it_type itEnd) const noexcept;
 
     /**
         @brief  Performs a binary comparison of the characters
-        @tparam String - string-ish type, satisfying the "string_convertable" concept
-        @param  sStr   - string to compare
-        @retval        - < 0 the first character that does not match has
-                             a lower value in this than in chSymbol
-                         = 0 the contents of both strings are equal
-                         > 0 the first character that does not match has
-                             a greater value in this than in chSymbol
+        @tparam string_type - string-ish type, satisfying the "string_convertable" concept
+        @param  sStr        - string to compare
+        @retval             - < 0 the first character that does not match has
+                                  a lower value in this than in chSymbol
+                              = 0 the contents of both strings are equal
+                              > 0 the first character that does not match has
+                                  a greater value in this than in chSymbol
     **/
-    template<string_convertable String>
-    int compare(const String& sStr) const noexcept;
+    template<string_convertable string_type>
+    int compare(const string_type& sStr) const noexcept;
 
     /**
         @brief  Find substring
@@ -1026,26 +1031,27 @@ public:
 
     /**
         @brief  Find substring
-        @tparam FwdIt       - forward iterator type
+        @tparam fwd_it_type - forward iterator type
         @param  itWhatBegin - substring begin iterator
         @param  itWhatEnd   - substring end iterator
         @param  nBegin      - start searching index
         @param  nEnd        - end searching index
         @retval             - substring index or npos if not found
     **/
-    template<class FwdIt>
-    size_type find(FwdIt itWhatBegin, FwdIt itWhatEnd, size_type nBegin = 0, size_type nEnd = npos) const noexcept;
+    template<class fwd_it_type>
+    size_type find(fwd_it_type itWhatBegin, fwd_it_type itWhatEnd, size_type nBegin = 0, size_type nEnd = npos)
+        const noexcept;
 
     /**
         @brief  Find substring
-        @tparam String - string-ish type, satisfying the "string_convertable" concept
-        @param  sWhat  - substring
-        @param  nBegin - start searching index
-        @param  nEnd   - end searching index
-        @retval        - substring index or npos if not found
+        @tparam string_type - string-ish type, satisfying the "string_convertable" concept
+        @param  sWhat       - substring
+        @param  nBegin      - start searching index
+        @param  nEnd        - end searching index
+        @retval             - substring index or npos if not found
     **/
-    template<string_convertable String>
-    size_type find(String sWhat, size_type nBegin = 0, size_type nEnd = npos) const noexcept;
+    template<string_convertable string_type>
+    size_type find(string_type sWhat, size_type nBegin = 0, size_type nEnd = npos) const noexcept;
 
     /**
         @brief  Find substring (reverse direction)
@@ -1081,7 +1087,7 @@ public:
 
     /**
         @brief  Find substring (reverse direction)
-        @tparam FwdIt       - forward iterator type
+        @tparam fwd_it_type - forward iterator type
         @param  itWhatBegin - substring begin iterator
         @param  itWhatEnd   - substring end iterator
         @param  nBegin      - start searching index
@@ -1089,20 +1095,21 @@ public:
                               (if nBegin < end, result is equivalent of find(...))
         @retval             - substring index or npos if not found
     **/
-    template<class FwdIt>
-    size_type rfind(FwdIt itWhatBegin, FwdIt itWhatEnd, size_type nBegin = npos, size_type nEnd = 0) const noexcept;
+    template<class fwd_it_type>
+    size_type rfind(fwd_it_type itWhatBegin, fwd_it_type itWhatEnd, size_type nBegin = npos, size_type nEnd = 0)
+        const noexcept;
 
     /**
         @brief  Find substring (reverse direction)
-        @tparam String - string-ish type, satisfying the "string_convertable" concept
-        @param  sWhat  - substring
-        @param  nBegin - start searching index
-        @param  nEnd   - end searching index
-                         (if nBegin < end, result is equivalent of find(...))
-        @retval        - substring index or npos if not found
+        @tparam string_type - string-ish type, satisfying the "string_convertable" concept
+        @param  sWhat       - substring
+        @param  nBegin      - start searching index
+        @param  nEnd        - end searching index
+                              (if nBegin < end, result is equivalent of find(...))
+        @retval             - substring index or npos if not found
     **/
-    template<string_convertable String>
-    size_type rfind(String sWhat, size_type nBegin = npos, size_type nEnd = 0) const noexcept;
+    template<string_convertable string_type>
+    size_type rfind(string_type sWhat, size_type nBegin = npos, size_type nEnd = 0) const noexcept;
 
     /**
         @brief  Find first position of character
@@ -1139,24 +1146,24 @@ public:
 
     /**
         @brief  Finds the first character equal to one of characters in the given character sequence
-        @tparam FwdIt       - forward iterator type
+        @tparam fwd_it_type - forward iterator type
         @param  itWhatBegin - begin it of string identifying characters to search for
         @param  itWhatEnd   - end it of string identifying characters to search for
         @param  nBegin      - position at which the search is to begin
         @retval             - symbol index or npos
     **/
-    template<class FwdIt>
-    size_type find_first_of(FwdIt itWhatBegin, FwdIt itWhatEnd, size_type nBegin = 0) const noexcept;
+    template<class fwd_it_type>
+    size_type find_first_of(fwd_it_type itWhatBegin, fwd_it_type itWhatEnd, size_type nBegin = 0) const noexcept;
 
     /**
         @brief  Finds the first character equal to one of characters in the given character sequence
-        @tparam String - string-ish type, satisfying the "string_convertable" concept
-        @param  sWhat  - string identifying characters to search for
-        @param  nBegin - position at which the search is to begin
-        @retval        - symbol index or npos
+        @tparam string_type - string-ish type, satisfying the "string_convertable" concept
+        @param  sWhat       - string identifying characters to search for
+        @param  nBegin      - position at which the search is to begin
+        @retval             - symbol index or npos
     **/
-    template<string_convertable String>
-    size_type find_first_of(String sWhat, size_type nBegin = 0) const noexcept;
+    template<string_convertable string_type>
+    size_type find_first_of(string_type sWhat, size_type nBegin = 0) const noexcept;
 
     /**
         @brief  Find last position of character
@@ -1193,24 +1200,24 @@ public:
 
     /**
         @brief  Finds the last character equal to one of characters in the given character sequence
-        @tparam FwdIt       - forward iterator type
+        @tparam fwd_it_type - forward iterator type
         @param  itWhatBegin - begin it of string identifying characters to search for 
         @param  itWhatEnd   - end it of string identifying characters to search for 
         @param  nEnd        - position at which the search is to finish 
         @retval             - symbol index or npos
     **/
-    template<class FwdIt>
-    size_type find_last_of(FwdIt itWhatBegin, FwdIt itWhatEnd, size_type nEnd = 0) const noexcept;
+    template<class fwd_it_type>
+    size_type find_last_of(fwd_it_type itWhatBegin, fwd_it_type itWhatEnd, size_type nEnd = 0) const noexcept;
 
     /**
         @brief  Finds the last character equal to one of characters in the given character sequence
-        @tparam String - string-ish type, satisfying the "string_convertable" concept
-        @param  sWhat  - string identifying characters to search for
-        @param  nEnd   - position at which the search is to finish
-        @retval        - symbol index or npos
+        @tparam string_type - string-ish type, satisfying the "string_convertable" concept
+        @param  sWhat       - string identifying characters to search for
+        @param  nEnd        - position at which the search is to finish
+        @retval             - symbol index or npos
     **/
-    template<string_convertable String>
-    size_type find_last_of(String sWhat, size_type nEnd = 0) const noexcept;
+    template<string_convertable string_type>
+    size_type find_last_of(string_type sWhat, size_type nEnd = 0) const noexcept;
 
     /**
         @brief  Finds the first character not equal to chSymbol
@@ -1247,24 +1254,24 @@ public:
 
     /**
         @brief  Finds the first character equal to none of the characters in the given character sequence
-        @tparam FwdIt       - forward iterator type
+        @tparam fwd_it_type - forward iterator type
         @param  itWhatBegin - begin it of string identifying characters to search for
         @param  itWhatEnd   - end it of string identifying characters to search for
         @param  nBegin      - position at which the search is to begin
         @retval             - symbol index or npos
     **/
-    template<class FwdIt>
-    size_type find_first_not_of(FwdIt itWhatBegin, FwdIt itWhatEnd, size_type nBegin = 0) const noexcept;
+    template<class fwd_it_type>
+    size_type find_first_not_of(fwd_it_type itWhatBegin, fwd_it_type itWhatEnd, size_type nBegin = 0) const noexcept;
 
     /**
         @brief  Finds the first character equal to none of the characters in the given character sequence
-        @tparam String - string-ish type, satisfying the "string_convertable" concept
-        @param  sWhat  - string identifying characters to search for 
-        @param  nBegin - position at which the search is to begin 
-        @retval        - symbol index or npos
+        @tparam string_type - string-ish type, satisfying the "string_convertable" concept
+        @param  sWhat       - string identifying characters to search for 
+        @param  nBegin      - position at which the search is to begin 
+        @retval             - symbol index or npos
     **/
-    template<string_convertable String>
-    size_type find_first_not_of(String sWhat, size_type nBegin = 0) const noexcept;
+    template<string_convertable string_type>
+    size_type find_first_not_of(string_type sWhat, size_type nBegin = 0) const noexcept;
 
     /**
         @brief  Finds the last character not equal to chSymbol
@@ -1301,24 +1308,24 @@ public:
 
     /**
         @brief  Finds the last character equal to none of the characters in the given character sequence
-        @tparam FwdIt       - forward iterator type
+        @tparam fwd_it_type - forward iterator type
         @param  itWhatBegin - begin it of string identifying characters to search for
         @param  itWhatEnd   - end it of string identifying characters to search for
         @param  nEnd        - position at which the search is to finish
         @retval             - symbol index or npos
     **/
-    template<class FwdIt>
-    size_type find_last_not_of(FwdIt itWhatBegin, FwdIt itWhatEnd, size_type nEnd = 0) const noexcept;
+    template<class fwd_it_type>
+    size_type find_last_not_of(fwd_it_type itWhatBegin, fwd_it_type itWhatEnd, size_type nEnd = 0) const noexcept;
 
     /**
         @brief  Finds the last character equal to none of the characters in the given character sequence
-        @tparam String - string-ish type, satisfying the "string_convertable" concept
-        @param  sWhat  - string identifying characters to search for 
-        @param  nEnd   - position at which the search is to finish 
-        @retval        - symbol index or npos
+        @tparam string_type - string-ish type, satisfying the "string_convertable" concept
+        @param  sWhat       - string identifying characters to search for 
+        @param  nEnd        - position at which the search is to finish 
+        @retval             - symbol index or npos
     **/
-    template<string_convertable String>
-    size_type find_last_not_of(String sWhat, size_type nEnd = 0) const noexcept;
+    template<string_convertable string_type>
+    size_type find_last_not_of(string_type sWhat, size_type nEnd = 0) const noexcept;
 
     /**
         @brief  Split string by separator
@@ -1344,22 +1351,22 @@ public:
 
     /**
         @brief  Split string by separator
-        @tparam FwdIt      - forward iterator type
+        @tparam fwd_it_type - forward iterator type
         @param  itSepFirst - separator begin iterator 
         @param  itSepLast  - separator end iterator 
         @retval            - string_view container
     **/
-    template<class FwdIt>
-    views split(FwdIt itSepFirst, FwdIt itSepLast) const noexcept;
+    template<class fwd_it_type>
+    views split(fwd_it_type itSepFirst, fwd_it_type itSepLast) const noexcept;
 
     /**
         @brief  Split string by separator
-        @tparam String     - string-ish type, satisfying the "string_convertable" concept
-        @param  sSeparator - separator string
-        @retval            - string_view container
+        @tparam string_type - string-ish type, satisfying the "string_convertable" concept
+        @param  sSeparator  - separator string
+        @retval             - string_view container
     **/
-    template<string_convertable String>
-    views split(const String& sSeparator) const noexcept;
+    template<string_convertable string_type>
+    views split(const string_type& sSeparator) const noexcept;
 
     /**
         @brief  Check if current string starts with char
@@ -1385,22 +1392,22 @@ public:
 
     /**
         @brief  Check if current string starts with string
-        @tparam FwdIt   - forward iterator type
-        @param  itBegin - string begin iterator
-        @param  itEnd   - string end iterator
-        @retval         - true if starts with string
+        @tparam fwd_it_type - forward iterator type
+        @param  itBegin     - string begin iterator
+        @param  itEnd       - string end iterator
+        @retval             - true if starts with string
     **/
-    template<class FwdIt>
-    bool starts_with(FwdIt itBegin, FwdIt itEnd) const noexcept;
+    template<class fwd_it_type>
+    bool starts_with(fwd_it_type itBegin, fwd_it_type itEnd) const noexcept;
 
     /**
         @brief  Check if current string starts with string
-        @tparam String - string-ish type, satisfying the "string_convertable" concept
-        @param  sStr   - string container to check
-        @retval        - true if starts with string
+        @tparam string_type - string-ish type, satisfying the "string_convertable" concept
+        @param  sStr        - string container to check
+        @retval             - true if starts with string
     **/
-    template<string_convertable String>
-    bool starts_with(const String& sStr) const noexcept;
+    template<string_convertable string_type>
+    bool starts_with(const string_type& sStr) const noexcept;
 
     /**
         @brief  Check if current string ends with char
@@ -1426,22 +1433,22 @@ public:
 
     /**
         @brief  Check if current string ends with string
-        @tparam FwdIt   - forward iterator type
-        @param  itBegin - string begin iterator
-        @param  itEnd   - string end iterator
-        @retval         - true if ends with string
+        @tparam fwd_it_type - forward iterator type
+        @param  itBegin     - string begin iterator
+        @param  itEnd       - string end iterator
+        @retval             - true if ends with string
     **/
-    template<class FwdIt>
-    bool ends_with(FwdIt itBegin, FwdIt itEnd) const noexcept;
+    template<class fwd_it_type>
+    bool ends_with(fwd_it_type itBegin, fwd_it_type itEnd) const noexcept;
 
     /**
         @brief  Check if current string ends with string
-        @tparam String - string-ish type, satisfying the "string_convertable" concept
-        @param  sStr   - string container to check
-        @retval        - true if starts with string
+        @tparam string_type - string-ish type, satisfying the "string_convertable" concept
+        @param  sStr        - string container to check
+        @retval             - true if starts with string
     **/
-    template<string_convertable String>
-    bool ends_with(const String& sStr) const noexcept;
+    template<string_convertable string_type>
+    bool ends_with(const string_type& sStr) const noexcept;
 
     /**
         @brief   Check if string contains char
@@ -1471,23 +1478,23 @@ public:
     /**
         @brief   Check if string contains substring
         @details Equal to find != npos
-        @tparam  FwdIt   - forward iterator type
-        @param   itBegin - substring begin iterator 
-        @param   itEnd   - substring end iterator 
-        @retval          - true if this string contains substring
+        @tparam  fwd_it_type - forward iterator type
+        @param   itBegin     - substring begin iterator 
+        @param   itEnd       - substring end iterator 
+        @retval              - true if this string contains substring
     **/
-    template<class FwdIt>
-    bool contains(FwdIt itBegin, FwdIt itEnd) const noexcept;
+    template<class fwd_it_type>
+    bool contains(fwd_it_type itBegin, fwd_it_type itEnd) const noexcept;
 
     /**
         @brief   Check if string contains substring
         @details Equal to find != npos
-        @tparam  String - string-ish type, satisfying the "string_convertable" concept
-        @param   sStr   - string to check
-        @retval         - true if this string contains substring
+        @tparam  string_type - string-ish type, satisfying the "string_convertable" concept
+        @param   sStr        - string to check
+        @retval              - true if this string contains substring
     **/
-    template<string_convertable String>
-    bool contains(const String& sStr) const noexcept;
+    template<string_convertable string_type>
+    bool contains(const string_type& sStr) const noexcept;
 
     /**
         @brief  operator=
@@ -1519,12 +1526,12 @@ public:
 
     /**
         @brief  operator=
-        @tparam String - string-ish type, satisfying the "string_convertable" concept
-        @param  sStr   - string to assign
-        @retval        - this object reference
+        @tparam string_type - string-ish type, satisfying the "string_convertable" concept
+        @param  sStr        - string to assign
+        @retval             - this object reference
     **/
-    template<string_convertable String>
-    basic_string& operator=(const String& sStr) noexcept;
+    template<string_convertable string_type>
+    basic_string& operator=(const string_type& sStr) noexcept;
 
     /**
         @brief  operator+=
@@ -1549,12 +1556,12 @@ public:
 
     /**
         @brief  operator+=
-        @tparam String - string-ish type, satisfying the "string_convertable" concept
-        @param  sStr   - string to concat
-        @retval        - this object reference
+        @tparam string_type - string-ish type, satisfying the "string_convertable" concept
+        @param  sStr        - string to concat
+        @retval             - this object reference
     **/
-    template<string_convertable String>
-    basic_string& operator+=(const String& sStr) noexcept;
+    template<string_convertable string_type>
+    basic_string& operator+=(const string_type& sStr) noexcept;
 
     /**
         @brief  operator==
@@ -1579,12 +1586,12 @@ public:
 
     /**
         @brief  operator==
-        @tparam String - string-ish type, satisfying the "string_convertable" concept
-        @param  sStr   - string to compare
-        @retval        - true, if objects are equal
+        @tparam string_type - string-ish type, satisfying the "string_convertable" concept
+        @param  sStr        - string to compare
+        @retval             - true, if objects are equal
     **/
-    template<string_convertable String>
-    bool operator==(const String& sStr) const noexcept;
+    template<string_convertable string_type>
+    bool operator==(const string_type& sStr) const noexcept;
 
     /**
         @brief  operator!=
@@ -1609,12 +1616,12 @@ public:
 
     /**
         @brief  operator!=
-        @tparam String - string-ish type, satisfying the "string_convertable" concept
-        @param  sStr   - string to compare
-        @retval        - true, if objects are not equal
+        @tparam string_type - string-ish type, satisfying the "string_convertable" concept
+        @param  sStr        - string to compare
+        @retval             - true, if objects are not equal
     **/
-    template<string_convertable String>
-    bool operator!=(const String& sStr) const noexcept;
+    template<string_convertable string_type>
+    bool operator!=(const string_type& sStr) const noexcept;
 
     /**
         @brief  operator<
@@ -1639,12 +1646,12 @@ public:
 
     /**
         @brief  operator<
-        @tparam String - string-ish type, satisfying the "string_convertable" concept
-        @param  sStr   - string to compare
-        @retval        - true, if left object is less than right
+        @tparam string_type - string-ish type, satisfying the "string_convertable" concept
+        @param  sStr        - string to compare
+        @retval             - true, if left object is less than right
     **/
-    template<string_convertable String>
-    bool operator<(const String& sStr) const noexcept;
+    template<string_convertable string_type>
+    bool operator<(const string_type& sStr) const noexcept;
 
     /**
         @brief  operator<=
@@ -1669,12 +1676,12 @@ public:
 
     /**
         @brief  operator<=
-        @tparam String - string-ish type, satisfying the "string_convertable" concept
-        @param  sStr   - string to compare
-        @retval        - true, if left object is less or equal than right
+        @tparam string_type - string-ish type, satisfying the "string_convertable" concept
+        @param  sStr        - string to compare
+        @retval             - true, if left object is less or equal than right
     **/
-    template<string_convertable String>
-    bool operator<=(const String& sStr) const noexcept;
+    template<string_convertable string_type>
+    bool operator<=(const string_type& sStr) const noexcept;
 
     /**
         @brief  operator>
@@ -1699,12 +1706,12 @@ public:
 
     /**
         @brief  operator>
-        @tparam String - string-ish type, satisfying the "string_convertable" concept
-        @param  sStr   - string to compare
-        @retval        - true, if left object is greater than right
+        @tparam string_type - string-ish type, satisfying the "string_convertable" concept
+        @param  sStr        - string to compare
+        @retval             - true, if left object is greater than right
     **/
-    template<string_convertable String>
-    bool operator>(const String& sStr) const noexcept;
+    template<string_convertable string_type>
+    bool operator>(const string_type& sStr) const noexcept;
 
     /**
         @brief  operator>=
@@ -1729,12 +1736,12 @@ public:
 
     /**
         @brief  operator>=
-        @tparam String - string-ish type, satisfying the "string_convertable" concept
-        @param  sStr   - string to compare
-        @retval        - true, if left object is greater or equal than right
+        @tparam string_type - string-ish type, satisfying the "string_convertable" concept
+        @param  sStr        - string to compare
+        @retval             - true, if left object is greater or equal than right
     **/
-    template<string_convertable String>
-    bool operator>=(const String& sStr) const noexcept;
+    template<string_convertable string_type>
+    bool operator>=(const string_type& sStr) const noexcept;
 
     /**
         @brief  operator[]
@@ -1801,87 +1808,97 @@ private:
 
     /**
         @brief  Common algorithm for finding substring
-        @tparam Comparator - "comparator" type
-        @param  nBegin     - start searching index 
-        @param  nEnd       - end searching index (npos - to the end) 
-        @param  comparator - comparator function 
-        @retval            - substring index or npos if not found
+        @tparam comparator_type - "comparator" type
+        @param  nBegin          - start searching index 
+        @param  nEnd            - end searching index (npos - to the end) 
+        @param  comparator      - comparator function 
+        @retval                 - substring index or npos if not found
     **/
-    template<class Comparator>
-    size_type _find(size_type nBegin, size_type nEnd, const Comparator& comparator) const noexcept;
+    template<class comparator_type>
+    size_type _find(size_type nBegin, size_type nEnd, const comparator_type& comparator) const noexcept;
 
     /**
         @brief  
-        @tparam Comparator - "comparator" type
-        @param  nBegin     - start searching index 
-        @param  nEnd       - end searching index 
-        @param  comparator - comparator function 
-        @retval            - substring index or npos if not found
+        @tparam comparator_type - "comparator" type
+        @param  nBegin          - start searching index 
+        @param  nEnd            - end searching index 
+        @param  comparator      - comparator function 
+        @retval                 - substring index or npos if not found
     **/
-    template<class Comparator>
-    size_type _rfind(size_type nBegin, size_type nEnd, const Comparator& comparator) const noexcept;
+    template<class comparator_type>
+    size_type _rfind(size_type nBegin, size_type nEnd, const comparator_type& comparator) const noexcept;
 
     /**
         @brief  Common algorithm for find_first_of
-        @tparam Incrementer - "incrementer" type
-        @tparam FwdIt       - forward iterator type
-        @param  itBegin     - begin it of "of" string
-        @param  itEnd       - end it of "of" string
-        @param  nBegin      - position at which the search is to begin
-        @param  incrementer - function that increments iterator and returns itEnd when string is over
-        @retval             - symbol index or npos
+        @tparam incrementer_type - "incrementer" type
+        @tparam fwd_it_type      - forward iterator type
+        @param  itBegin          - begin it of "of" string
+        @param  itEnd            - end it of "of" string
+        @param  nBegin           - position at which the search is to begin
+        @param  incrementer      - function that increments iterator and returns itEnd when string is over
+        @retval                  - symbol index or npos
     **/
-    template<class Incrementer, class FwdIt>
-    size_type _find_first_of(FwdIt itBegin, FwdIt itEnd, size_type nBegin, const Incrementer& incrementer)
-        const noexcept;
+    template<class incrementer_type, class fwd_it_type>
+    size_type _find_first_of(
+        fwd_it_type             itBegin,
+        fwd_it_type             itEnd,
+        size_type               nBegin,
+        const incrementer_type& incrementer) const noexcept;
 
     /**
         @brief  Common algorithm for find_last_of
-        @tparam Incrementer - "incrementer" type
-        @tparam FwdIt       - forward iterator type
-        @param  itBegin     - begin it of "of" string
-        @param  itEnd       - end it of "of" string
-        @param  nEnd        - position at which the search is to finish
-        @param  incrementer - function that increments iterator and returns itEnd when string is over
-        @retval             - symbol index or npos
+        @tparam incrementer_type - "incrementer" type
+        @tparam fwd_it_type      - forward iterator type
+        @param  itBegin          - begin it of "of" string
+        @param  itEnd            - end it of "of" string
+        @param  nEnd             - position at which the search is to finish
+        @param  incrementer      - function that increments iterator and returns itEnd when string is over
+        @retval                  - symbol index or npos
     **/
-    template<class Incrementer, class FwdIt>
-    size_type _find_last_of(FwdIt itBegin, FwdIt itEnd, size_type nEnd, const Incrementer& incrementer) const noexcept;
+    template<class incrementer_type, class fwd_it_type>
+    size_type _find_last_of(fwd_it_type itBegin, fwd_it_type itEnd, size_type nEnd, const incrementer_type& incrementer)
+        const noexcept;
 
     /**
         @brief  Common algorithm for find_first_not_of
-        @tparam Incrementer - "incrementer" type
-        @tparam FwdIt       - forward iterator type
-        @param  itBegin     - begin it of "of" string
-        @param  itEnd       - end it of "of" string
-        @param  nBegin      - position at which the search is to begin
-        @param  incrementer - function that increments iterator and returns itEnd when string is over
-        @retval             - symbol index or npos
+        @tparam incrementer_type - "incrementer" type
+        @tparam fwd_it_type      - forward iterator type
+        @param  itBegin          - begin it of "of" string
+        @param  itEnd            - end it of "of" string
+        @param  nBegin           - position at which the search is to begin
+        @param  incrementer      - function that increments iterator and returns itEnd when string is over
+        @retval                  - symbol index or npos
     **/
-    template<class Incrementer, class FwdIt>
-    size_type _find_first_not_of(FwdIt itBegin, FwdIt itEnd, size_type nBegin, const Incrementer& incrementer)
-        const noexcept;
+    template<class incrementer_type, class fwd_it_type>
+    size_type _find_first_not_of(
+        fwd_it_type             itBegin,
+        fwd_it_type             itEnd,
+        size_type               nBegin,
+        const incrementer_type& incrementer) const noexcept;
 
     /**
         @brief  Common algorithm for find_last_not_of
-        @tparam Incrementer - "incrementer" type
-        @tparam FwdIt       - forward iterator type
-        @param  itBegin     - begin it of "of" string
-        @param  itEnd       - end it of "of" string
-        @param  nEnd        - position at which the search is to finish
-        @param  incrementer - function that increments iterator and returns itEnd when string is over
-        @retval             - symbol index or npos
+        @tparam incrementer_type - "incrementer" type
+        @tparam fwd_it_type      - forward iterator type
+        @param  itBegin          - begin it of "of" string
+        @param  itEnd            - end it of "of" string
+        @param  nEnd             - position at which the search is to finish
+        @param  incrementer      - function that increments iterator and returns itEnd when string is over
+        @retval                  - symbol index or npos
     **/
-    template<class Incrementer, class FwdIt>
-    size_type _find_last_not_of(FwdIt itBegin, FwdIt itEnd, size_type nEnd, const Incrementer& incrementer)
-        const noexcept;
+    template<class incrementer_type, class fwd_it_type>
+    size_type _find_last_not_of(
+        fwd_it_type             itBegin,
+        fwd_it_type             itEnd,
+        size_type               nEnd,
+        const incrementer_type& incrementer) const noexcept;
 
 private:
-    string_data<Traits> m_Data;
+    string_data<traits_type> m_Data;
 };
 
-using string  = basic_string<char_traits<char>>;
-using wstring = basic_string<char_traits<wchar_t>>;
+using string  = basic_string<char>;
+using wstring = basic_string<wchar_t>;
 
 } // namespace qx
 

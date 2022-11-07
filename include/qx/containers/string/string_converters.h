@@ -70,7 +70,7 @@ inline wstring utf8_to_wstring(const char* pszUtf8)
 template<typename value_type>
 inline const value_type* to_char_pointer(std::basic_string_view<value_type> stringView)
 {
-    thread_local basic_string<char_traits<value_type>> sBuffer;
+    thread_local basic_string<value_type> sBuffer;
     sBuffer = stringView;
     return sBuffer.c_str();
 }
