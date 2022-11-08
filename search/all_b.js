@@ -18,7 +18,7 @@ var searchData=
   ['list_5fse_2einl_301',['list_se.inl',['../list__se_8inl.html',1,'']]],
   ['lock_302',['lock',['../classqx_1_1threads__shared.html#ab7224be96c0026a5f693c7bf37d39405',1,'qx::threads_shared::lock()'],['../classqx_1_1link.html#a24382e977367a817ccddf21d3acd8e34',1,'qx::link::lock() const noexcept']]],
   ['lock_5fptr_303',['lock_ptr',['../classqx_1_1link_1_1lock__ptr.html',1,'qx::link']]],
-  ['log_304',['log',['../classqx_1_1logger.html#af23c092ceb360c97edf1795a805cdc0b',1,'qx::logger::log()'],['../classqx_1_1base__logger__stream.html#a2ab8a7a0ba62f0e1961309aff3271093',1,'qx::base_logger_stream::log()']]],
+  ['log_304',['log',['../classqx_1_1logger.html#a3f255f2ad52c60a079b83ab8fd8e3895',1,'qx::logger::log(log_level eLogLevel, const basic_string&lt; char_type &gt; &amp;sFormat, const char *pszTag, const char *pszFile, const char *pszFunction, int nLine,...)'],['../classqx_1_1logger.html#af23c092ceb360c97edf1795a805cdc0b',1,'qx::logger::log(log_level eLogLevel, const char_type *pszFormat, const char *pszTag, const char *pszFile, const char *pszFunction, int nLine,...)'],['../classqx_1_1base__logger__stream.html#a2ab8a7a0ba62f0e1961309aff3271093',1,'qx::base_logger_stream::log()']]],
   ['log_5ffile_5fpolicy_305',['log_file_policy',['../file__logger__stream_8h.html#aaab6d2d26ae57b1521451921e1273220',1,'qx']]],
   ['log_5funit_306',['log_unit',['../structqx_1_1log__unit.html',1,'qx']]],
   ['log_5funit_5finfo_307',['log_unit_info',['../structqx_1_1log__unit__info.html',1,'qx']]],
