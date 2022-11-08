@@ -13,6 +13,7 @@
 #include <qx/patterns/singleton.h>
 
 #include <memory>
+#include <mutex>
 
 /**
     @def   QX_LOG_COMMON
@@ -83,13 +84,60 @@ public:
         ...);
 
     /**
+        @brief  Log to all streams
+        @tparam char_type   - char type, typically char or wchar_t
+        @param  eLogLevel   - log level
+        @param  sFormat     - format string
+        @param  pszTag      - logging tag
+        @param  pszFile     - file name string
+        @param  pszFunction - function name string
+        @param  nLine       - code line number
+        @param  ...         - additional args for format
+    **/
+    template<class char_type>
+    void log(
+        log_level                      eLogLevel,
+        const basic_string<char_type>& sFormat,
+        const char*                    pszTag,
+        const char*                    pszFile,
+        const char*                    pszFunction,
+        int                            nLine,
+        ...);
+
+    /**
         @brief Add output stream to the logger
         @param pStream - stream unique pointer
     **/
     void add_stream(std::unique_ptr<base_logger_stream> pStream);
 
 private:
+    /**
+        @brief  Common method for logging
+        @tparam char_type   - char type, typically char or wchar_t
+        @param  eLogLevel   - log level
+        @param  pszFormat   - format string
+        @param  pszTag      - logging tag
+        @param  pszFile     - file name string
+        @param  pszFunction - function name string
+        @param  nLine       - code line number
+        @param  args        - template parameter pack
+    **/
+    template<class char_type>
+    void do_log(
+        log_level        eLogLevel,
+        const char_type* pszFormat,
+        const char*      pszTag,
+        const char*      pszFile,
+        const char*      pszFunction,
+        int              nLine,
+        va_list          args);
+
+private:
     std::vector<std::unique_ptr<base_logger_stream>> m_Streams;
+
+    // simple synchronization so far
+    // may be improved if it will become a problem
+    std::mutex m_Mutex;
 };
 
 /**

@@ -26,10 +26,47 @@ inline void logger::log(
     va_list args;
     va_start(args, nLine);
 
-    for (const auto& stream : m_Streams)
-        stream->log(eLogLevel, pszFormat, pszTag, pszFile, pszFunction, nLine, args);
+    do_log(eLogLevel, pszFormat, pszTag, pszFile, pszFunction, nLine, args);
 
     va_end(args);
+}
+
+template<class char_type>
+inline void logger::log(
+    log_level                      eLogLevel,
+    const basic_string<char_type>& sFormat,
+    const char*                    pszTag,
+    const char*                    pszFile,
+    const char*                    pszFunction,
+    int                            nLine,
+    ...)
+{
+    va_list args;
+    va_start(args, nLine);
+
+    do_log(eLogLevel, sFormat.c_str(), pszTag, pszFile, pszFunction, nLine, args);
+
+    va_end(args);
+}
+
+template<class char_type>
+inline void logger::do_log(
+    log_level        eLogLevel,
+    const char_type* pszFormat,
+    const char*      pszTag,
+    const char*      pszFile,
+    const char*      pszFunction,
+    int              nLine,
+    va_list          args)
+{
+    va_list argsCopy;
+    va_copy(argsCopy, args);
+
+    std::lock_guard lock(m_Mutex);
+    for (const auto& stream : m_Streams)
+        stream->log(eLogLevel, pszFormat, pszTag, pszFile, pszFunction, nLine, argsCopy);
+
+    va_end(argsCopy);
 }
 
 inline void logger::add_stream(std::unique_ptr<base_logger_stream> pStream)
