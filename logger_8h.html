@@ -85,6 +85,9 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Classes</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1log__tag.html">qx::log_tag</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Class for identifying log tags.  <a href="classqx_1_1log__tag.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1logger.html">qx::logger</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Logger class.  <a href="classqx_1_1logger.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -100,9 +103,12 @@ Macros</h2></td></tr>
 <tr class="memitem:a976a491a81734d36ab76f6a320ef6fbf"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="logger_8h.html#a976a491a81734d36ab76f6a320ef6fbf">QX_TLOG</a>(pszTag,  eLogLevel,  format, ...)&#160;&#160;&#160;    <a class="el" href="logger_8h.html#aa24b61bd1cd54fd73930625d11ea4b28">QX_LOG_COMMON</a>(qx::logger_singleton::get_instance(), pszTag, eLogLevel, format, ##__VA_ARGS__)</td></tr>
 <tr class="memdesc:a976a491a81734d36ab76f6a320ef6fbf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Log with tag.  <a href="logger_8h.html#a976a491a81734d36ab76f6a320ef6fbf">More...</a><br /></td></tr>
 <tr class="separator:a976a491a81734d36ab76f6a320ef6fbf"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9169f09308c1212078ba87b7c645f065"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="logger_8h.html#a9169f09308c1212078ba87b7c645f065">QX_LOG</a>(eLogLevel,  format, ...)&#160;&#160;&#160;<a class="el" href="logger_8h.html#a976a491a81734d36ab76f6a320ef6fbf">QX_TLOG</a>(nullptr, eLogLevel, format, ##__VA_ARGS__)</td></tr>
+<tr class="memitem:a9169f09308c1212078ba87b7c645f065"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="logger_8h.html#a9169f09308c1212078ba87b7c645f065">QX_LOG</a>(eLogLevel,  format, ...)&#160;&#160;&#160;<a class="el" href="logger_8h.html#a976a491a81734d36ab76f6a320ef6fbf">QX_TLOG</a>(<a class="el" href="classqx_1_1log__tag.html">qx::log_tag</a>(nullptr), eLogLevel, format, ##__VA_ARGS__)</td></tr>
 <tr class="memdesc:a9169f09308c1212078ba87b7c645f065"><td class="mdescLeft">&#160;</td><td class="mdescRight">Log message.  <a href="logger_8h.html#a9169f09308c1212078ba87b7c645f065">More...</a><br /></td></tr>
 <tr class="separator:a9169f09308c1212078ba87b7c645f065"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae787fcbdfa0a48b62f4457cf871c4342"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="logger_8h.html#ae787fcbdfa0a48b62f4457cf871c4342">QX_DEFINE_LOG_TAG</a>(name)&#160;&#160;&#160;constexpr <a class="el" href="classqx_1_1log__tag.html">qx::log_tag</a> name(#name);</td></tr>
+<tr class="memdesc:ae787fcbdfa0a48b62f4457cf871c4342"><td class="mdescLeft">&#160;</td><td class="mdescRight">Define a log tag that may be used in QX_TLOG macro.  <a href="logger_8h.html#ae787fcbdfa0a48b62f4457cf871c4342">More...</a><br /></td></tr>
+<tr class="separator:ae787fcbdfa0a48b62f4457cf871c4342"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Contains <a class="el" href="classqx_1_1logger.html" title="Logger class.">qx::logger</a> class. </p>
@@ -112,6 +118,34 @@ Macros</h2></td></tr>
 
 <p class="definition">Definition in file <a class="el" href="logger_8h_source.html">logger.h</a>.</p>
 </div><h2 class="groupheader">Macro Definition Documentation</h2>
+<a id="ae787fcbdfa0a48b62f4457cf871c4342"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae787fcbdfa0a48b62f4457cf871c4342">&#9670;&nbsp;</a></span>QX_DEFINE_LOG_TAG</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define QX_DEFINE_LOG_TAG</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">name</td><td>)</td>
+          <td>&#160;&#160;&#160;constexpr <a class="el" href="classqx_1_1log__tag.html">qx::log_tag</a> name(#name);</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Define a log tag that may be used in QX_TLOG macro. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">name</td><td>- log tag name </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="logger_8h_source.html#l00053">53</a> of file <a class="el" href="logger_8h_source.html">logger.h</a>.</p>
+
+</div>
+</div>
 <a id="a9169f09308c1212078ba87b7c645f065"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a9169f09308c1212078ba87b7c645f065">&#9670;&nbsp;</a></span>QX_LOG</h2>
 
@@ -139,7 +173,7 @@ Macros</h2></td></tr>
         <tr>
           <td></td>
           <td>)</td>
-          <td></td><td>&#160;&#160;&#160;<a class="el" href="logger_8h.html#a976a491a81734d36ab76f6a320ef6fbf">QX_TLOG</a>(nullptr, eLogLevel, format, ##__VA_ARGS__)</td>
+          <td></td><td>&#160;&#160;&#160;<a class="el" href="logger_8h.html#a976a491a81734d36ab76f6a320ef6fbf">QX_TLOG</a>(<a class="el" href="classqx_1_1log__tag.html">qx::log_tag</a>(nullptr), eLogLevel, format, ##__VA_ARGS__)</td>
         </tr>
       </table>
 </div><div class="memdoc">
