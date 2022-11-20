@@ -29,10 +29,6 @@ namespace qx
 template<class T>
 class list_se
 {
-    /**
-        @struct list_se_node
-        @date   9.08.2021
-    **/
     struct list_se_node
     {
         list_se_node() = default;

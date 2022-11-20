@@ -51,10 +51,6 @@ struct common_char_traits
 template<typename value_type>
 struct char_traits;
 
-/**
-    @struct char_traits
-    @date   30.10.2020
-**/
 template<>
 struct char_traits<char> : public common_char_traits<char>
 {
@@ -110,10 +106,6 @@ struct char_traits<char> : public common_char_traits<char>
     }
 };
 
-/**
-    @struct char_traits
-    @date   24.03.2020
-**/
 template<>
 struct char_traits<wchar_t> : public common_char_traits<wchar_t>
 {

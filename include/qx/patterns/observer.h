@@ -242,17 +242,12 @@ class subject : public base_subject
     };
 
 public:
-    using observers_container = std::vector<TObserver*>;
-
-    using iterator = base_iterator<typename observers_container::iterator>;
-
-    using const_iterator = const_base_iterator<typename observers_container::const_iterator>;
-
-    using reverse_iterator = base_iterator<typename observers_container::reverse_iterator>;
-
+    using observers_container    = std::vector<TObserver*>;
+    using iterator               = base_iterator<typename observers_container::iterator>;
+    using const_iterator         = const_base_iterator<typename observers_container::const_iterator>;
+    using reverse_iterator       = base_iterator<typename observers_container::reverse_iterator>;
     using const_reverse_iterator = const_base_iterator<typename observers_container::const_reverse_iterator>;
-
-    using notify_func = std::function<void(TObserver*)>;
+    using notify_func            = std::function<void(TObserver*)>;
 
 public:
     QX_NONCOPYABLE(subject);

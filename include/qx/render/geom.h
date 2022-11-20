@@ -25,10 +25,6 @@
 namespace qx
 {
 
-/**
-    @struct vertex
-    @date   4.02.2022
-**/
 struct vertex
 {
     glm::vec3 pos     = glm::vec3(0.f);
@@ -41,10 +37,6 @@ using vertices     = std::vector<vertex>;
 using indices      = std::vector<index_type>;
 using indices_view = std::span<const index_type>;
 
-/**
-    @struct geometry
-    @date   4.04.2021
-**/
 struct geometry
 {
     vertices  geomVertices;                          //!< vertices array
