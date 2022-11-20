@@ -62,7 +62,7 @@ constexpr bool general_span<T, Traits>::iterator::operator!=(const iterator& r) 
 template<class T, class Traits>
 constexpr bool general_span<T, Traits>::iterator::operator==(const iterator& r) const noexcept
 {
-    return m_Generator && r.m_Generator;
+    return m_Generator && r.m_Generator || !m_Generator && !r.m_Generator;
 }
 
 template<class T, class Traits>
