@@ -28,25 +28,25 @@ template<
     const char sTag[]>
 struct LoggerTraits
 {
-    constexpr static std::string_view GetLogsFolder(void)
+    constexpr static std::string_view GetLogsFolder()
     {
         return sLogsFolder;
     }
-    constexpr static std::string_view GetLogsFile(void)
+    constexpr static std::string_view GetLogsFile()
     {
         return sLogsFile;
     }
-    constexpr static std::string_view GetUnit(void)
+    constexpr static std::string_view GetUnit()
     {
         return sUnit;
     }
-    constexpr static const char* GetTraceFile(void)
+    constexpr static const char* GetTraceFile()
     {
         return sTraceFile;
     }
-    constexpr static const char* GetTag(void)
+    constexpr static const char* GetTag()
     {
-        return sTag;
+        return sTag[0] == '\0' ? nullptr : sTag;
     }
 };
 
@@ -174,13 +174,18 @@ protected:
                     << "logs trace file: " << Traits::GetTraceFile();
             };
 
-            auto CheckStringCommon = [&sFormat, &sFile, &ifs, &sLine, &CheckRegex
-
-            ](const char* pszStringStarting, const char* pszStringEnding)
+            auto CheckStringCommon = [&sFormat, &sFile, &ifs, &sLine, &CheckRegex](
+                                         const char* pszStringStarting,
+                                         const char* pszStringEnding,
+                                         bool        bTag = false)
             {
-                sFile.sprintf("\\[%s::", Traits::GetTraceFile());
+                sFile.sprintf(
+                    "%s\\[%s::",
+                    bTag && Traits::GetTag() ? qx::string::static_sprintf("\\[%s\\]", Traits::GetTag()).c_str() : "",
+                    Traits::GetTraceFile());
+
                 constexpr const char* pszFunc = "(.*?)"; // compiler-dependent
-                constexpr const char* pszLine = "\\(\\d+\\)\\]";
+                constexpr const char* pszLine = "::\\d+\\]";
 
                 sFormat.sprintf(
                     "%s%s%s%s%s%s%s",
@@ -200,7 +205,6 @@ protected:
             auto CheckStringTag = [&sFormat, &ifs, &sLine, &CheckRegex](const char* pszStringEnding)
             {
                 sFormat.sprintf("%s%s%s\\[%s\\]%s", pszInfo, pszDate, pszTime, Traits::GetTag(), pszStringEnding);
-
                 ifs.getline(sLine.data(), static_cast<std::streamsize>(sLine.size()));
                 CheckRegex(sFormat, sLine);
             };
@@ -250,12 +254,12 @@ protected:
             }
             else
             {
-                CheckStringCommon(pszInfo, " 1.000000");
-                CheckStringCommon(pszInfo, " 1.000000 1");
-                CheckStringCommon(pszInfo, " 1.000000 2");
-                CheckStringCommon(pszInfo, " 1.000000 3");
-                CheckStringCommon(pszInfo, " 1.000000 4");
-                CheckStringCommon(pszInfo, " 1.000000 5");
+                CheckStringCommon(pszInfo, " 1.000000", true);
+                CheckStringCommon(pszInfo, " 1.000000 1", true);
+                CheckStringCommon(pszInfo, " 1.000000 2", true);
+                CheckStringCommon(pszInfo, " 1.000000 3", true);
+                CheckStringCommon(pszInfo, " 1.000000 4", true);
+                CheckStringCommon(pszInfo, " 1.000000 5", true);
             }
 
             CheckStringCommon(pszInfo, " End test");
@@ -282,22 +286,30 @@ protected:
 TYPED_TEST_SUITE(TestLogger, Implementations);
 
 #define TRACE(traceFile, format, ...) \
-    myLogger.log(qx::log_level::log, format, nullptr, traceFile, __FUNCTION__, __LINE__, ##__VA_ARGS__)
+    myLogger.log(qx::log_level::log, format, qx::log_tag { nullptr }, traceFile, __FUNCTION__, __LINE__, ##__VA_ARGS__)
 
 #define TRACE_WARNING(traceFile, format, ...) \
-    myLogger.log(qx::log_level::warning, format, nullptr, traceFile, __FUNCTION__, __LINE__, ##__VA_ARGS__)
+    myLogger.log(                             \
+        qx::log_level::warning,               \
+        format,                               \
+        qx::log_tag { nullptr },              \
+        traceFile,                            \
+        __FUNCTION__,                         \
+        __LINE__,                             \
+        ##__VA_ARGS__)
 
 #define TRACE_TAG(traceFile, tag, format, ...) \
-    myLogger.log(qx::log_level::log, format, tag, traceFile, __FUNCTION__, __LINE__, ##__VA_ARGS__)
+    myLogger.log(qx::log_level::log, format, qx::log_tag { tag }, traceFile, __FUNCTION__, __LINE__, ##__VA_ARGS__)
 
 #define TRACE_ERROR(traceFile, format, ...) \
-    myLogger.log(qx::log_level::error, format, nullptr, traceFile, __FUNCTION__, __LINE__, ##__VA_ARGS__)
+    myLogger                                \
+        .log(qx::log_level::error, format, qx::log_tag { nullptr }, traceFile, __FUNCTION__, __LINE__, ##__VA_ARGS__)
 
 #define TRACE_ASSERT(traceFile, expr, format, ...) \
     myLogger.log(                                  \
         qx::log_level::critical,                   \
         "[%s] " format,                            \
-        nullptr,                                   \
+        qx::log_tag { nullptr },                   \
         traceFile,                                 \
         __FUNCTION__,                              \
         __LINE__,                                  \

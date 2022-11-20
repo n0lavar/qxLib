@@ -14,7 +14,7 @@ template<class char_type>
 inline void logger::log(
     log_level        eLogLevel,
     const char_type* pszFormat,
-    const char*      pszTag,
+    log_tag          tag,
     const char*      pszFile,
     const char*      pszFunction,
     int              nLine,
@@ -26,7 +26,7 @@ inline void logger::log(
     va_list args;
     va_start(args, nLine);
 
-    do_log(eLogLevel, pszFormat, pszTag, pszFile, pszFunction, nLine, args);
+    do_log(eLogLevel, pszFormat, tag.get_name(), pszFile, pszFunction, nLine, args);
 
     va_end(args);
 }
@@ -35,7 +35,7 @@ template<class char_type>
 inline void logger::log(
     log_level                      eLogLevel,
     const basic_string<char_type>& sFormat,
-    const char*                    pszTag,
+    log_tag                        tag,
     const char*                    pszFile,
     const char*                    pszFunction,
     int                            nLine,
@@ -44,7 +44,7 @@ inline void logger::log(
     va_list args;
     va_start(args, nLine);
 
-    do_log(eLogLevel, sFormat.c_str(), pszTag, pszFile, pszFunction, nLine, args);
+    do_log(eLogLevel, sFormat.c_str(), tag.get_name(), pszFile, pszFunction, nLine, args);
 
     va_end(args);
 }

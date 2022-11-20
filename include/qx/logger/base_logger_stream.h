@@ -68,10 +68,6 @@ struct log_unit_info
     format_func<wchar_t> formatFuncWChar;
 };
 
-/**
-    @struct log_unit
-    @date   30.07.2021
-**/
 struct log_unit
 {
     log_unit_info*   pUnitInfo = nullptr;

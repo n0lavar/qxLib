@@ -28,10 +28,6 @@ namespace qx
 class cout_logger_stream : public base_logger_stream
 {
 public:
-    /**
-        @struct cout_logger_stream::auto_terminal_color
-        @date   19.08.2021
-    **/
     struct auto_terminal_color
     {
         static constexpr std::string_view font_black         = "\033[30m";

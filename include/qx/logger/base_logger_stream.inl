@@ -54,7 +54,8 @@ inline void base_logger_stream::log(
             }
             else
             {
-                buffers.sTag      = pszTag ? to_wstring(pszTag) : basic_string<char_type>();
+                if (pszTag)
+                    buffers.sTag = to_wstring(pszTag);
                 buffers.sFile     = to_wstring(pszFile);
                 buffers.sFunction = to_wstring(pszFunction);
 
@@ -62,7 +63,7 @@ inline void base_logger_stream::log(
                     buffers,
                     eLogLevel,
                     pszFormat,
-                    buffers.sTag.c_str(),
+                    pszTag ? buffers.sTag.c_str() : nullptr,
                     buffers.sFile.c_str(),
                     buffers.sFunction.c_str(),
                     nLine,
@@ -189,11 +190,14 @@ inline void base_logger_stream::format_line(
     constexpr auto pszStringFormatSpecifier = get_format_specifier<char_type, const char_type*>();
     buffers.sFormat += QX_STR_PREFIX(char_type, "][");
     buffers.sFormat += pszStringFormatSpecifier;
+    if (pszTag)
+        buffers.sFormat += QX_STR_PREFIX(char_type, "][");
+    buffers.sFormat += pszStringFormatSpecifier;
     buffers.sFormat += QX_STR_PREFIX(char_type, "::");
     buffers.sFormat += pszStringFormatSpecifier;
-    buffers.sFormat += QX_STR_PREFIX(char_type, "(%d)] ");
+    buffers.sFormat += QX_STR_PREFIX(char_type, "::%d] ");
     buffers.sFormat += buffers.sMessage;
-    buffers.sMessage.sprintf(buffers.sFormat.c_str(), pszFile, pszFunction, nLine);
+    buffers.sMessage.sprintf(buffers.sFormat.c_str(), pszTag ? pszTag : "", pszFile, pszFunction, nLine);
     buffers.sMessage += QX_CHAR_PREFIX(char_type, '\n');
 }
 

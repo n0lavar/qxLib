@@ -37,10 +37,6 @@ class file_logger_stream : public base_logger_stream
 {
     static constexpr std::string_view DEFAULT_FILE = "default.log";
 
-    /**
-        @struct file_logger_stream::log_file_data
-        @date   19.08.2021
-    **/
     struct log_file_data
     {
         string          sFileName;
