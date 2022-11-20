@@ -21,7 +21,7 @@
 
 static_assert(std::forward_iterator<qx::general_span<char>::iterator>);
 
-template<class T, template<class> class Container>
+template<class T, template<class...> class Container>
 void TestContainer()
 {
     Container<std::remove_const_t<T>> container { 'a', 'b', 'c', 'd' };
@@ -64,7 +64,7 @@ struct std::hash<NotT<T>>
     }
 };
 
-template<class T, template<class> class Container>
+template<class T, template<class...> class Container>
 void TestContainerWithAdapter()
 {
     using _NotT = NotT<T>;
