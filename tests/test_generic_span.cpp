@@ -25,7 +25,10 @@ template<class T, template<class...> class Container>
 void TestContainer()
 {
     Container<std::remove_const_t<T>> container { 'a', 'b', 'c', 'd' };
-    qx::generic_span<T>               span(container);
+    qx::generic_span<T>               span;
+    EXPECT_TRUE(span.empty());
+    span = container;
+    EXPECT_FALSE(span.empty());
 
     Container<std::remove_const_t<T>> newContainer;
     for (T value : span)
@@ -75,6 +78,7 @@ void TestContainerWithAdapter()
         {
             return &notT.value;
         });
+    EXPECT_FALSE(span.empty());
 
     Container<_NotT> newContainer;
     for (T value : span)

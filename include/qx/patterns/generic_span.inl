@@ -76,18 +76,20 @@ template<class T, class Traits>
 template<class Container>
 inline generic_span<T, Traits>::generic_span(Container& container) noexcept
     : m_InitialGenerator(
-        [it = container.begin(), &container]() mutable
-        {
-            T* pRet = nullptr;
-
-            if (it != container.end())
-            {
-                pRet = it.operator->();
-                ++it;
-            }
-
-            return pRet;
-        })
+        container.begin() != container.end() 
+        ? [it = container.begin(), &container]() mutable
+          {
+              T* pRet = nullptr;
+          
+              if (it != container.end())
+              {
+                  pRet = it.operator->();
+                  ++it;
+              }
+          
+              return pRet;
+          } 
+        : generator_type(nullptr))
 {
 }
 
@@ -97,19 +99,35 @@ inline generic_span<T, Traits>::generic_span(
     Container&                                                        container,
     function_type<T*(typename Container::value_type& containerValue)> valueAdapter) noexcept
     : m_InitialGenerator(
-        [it = container.begin(), end = container.end(), _adapter = std::move(valueAdapter)]() mutable
-        {
-            T* pRet = nullptr;
-
-            if (it != end)
-            {
-                pRet = _adapter(*it);
-                ++it;
-            }
-
-            return pRet;
-        })
+        container.begin() != container.end() 
+        ? [it = container.begin(), &container, _adapter = std::move(valueAdapter)]() mutable
+          {
+              T* pRet = nullptr;
+          
+              if (it != container.end())
+              {
+                  pRet = _adapter(*it);
+                  ++it;
+              }
+          
+              return pRet;
+          } 
+        : generator_type(nullptr))
 {
+}
+
+template<class T, class Traits>
+template<class Container>
+inline generic_span<T, Traits>& generic_span<T, Traits>::operator=(Container& container) noexcept
+{
+    *this = generic_span(container);
+    return *this;
+}
+
+template<class T, class Traits>
+inline bool generic_span<T, Traits>::empty() const noexcept
+{
+    return !static_cast<bool>(m_InitialGenerator);
 }
 
 template<class T, class Traits>

@@ -78,6 +78,18 @@ public:
     generic_span() noexcept = default;
 
     /**
+        @brief generic_span object constructor
+        @param  - other span
+    **/
+    generic_span(generic_span&&) noexcept = default;
+
+    /**
+        @brief generic_span object constructor
+        @param  - other span
+    **/
+    generic_span(const generic_span&) noexcept = default;
+
+    /**
         @brief  generic_span object constructor
         @tparam Container - any container, which adapter satisfies forward iterator concept
         @param  container - container instance. container must not be edited until adapter death
@@ -95,6 +107,35 @@ public:
     generic_span(
         Container&                                                        container,
         function_type<T*(typename Container::value_type& containerValue)> valueAdapter) noexcept;
+
+    /**
+        @brief  operator=
+        @tparam Container - any container, which adapter satisfies forward iterator concept
+        @param  container - container instance. container must not be edited until adapter death
+        @retval           - this object reference
+    **/
+    template<class Container>
+    generic_span& operator=(Container& container) noexcept;
+
+    /**
+        @brief  operator=
+        @param   - other span
+        @retval  - this object reference
+    **/
+    generic_span& operator=(generic_span&&) noexcept = default;
+
+    /**
+        @brief  operator=
+        @param   - other span
+        @retval  - this object reference
+    **/
+    generic_span& operator=(const generic_span&) noexcept = default;
+
+    /**
+        @brief  Check if span is empty
+        @retval  - true if empty
+    **/
+    bool empty() const noexcept;
 
     /**
         @brief  Return iterator to beginning
@@ -121,7 +162,7 @@ public:
     iterator cend() const noexcept;
 
 private:
-    const generator_type m_InitialGenerator;
+    generator_type m_InitialGenerator;
 };
 
 } // namespace qx
