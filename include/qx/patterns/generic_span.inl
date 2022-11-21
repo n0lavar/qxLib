@@ -1,6 +1,6 @@
 /**
 
-    @file      general_span.inl
+    @file      generic_span.inl
     @author    Khrapov
     @date      20.11.2022
     @copyright © Nick Khrapov, 2022. All right reserved.
@@ -10,13 +10,13 @@
 namespace qx
 {
 template<class T, class Traits>
-constexpr general_span<T, Traits>::iterator::iterator(generator_type generator) noexcept
+constexpr generic_span<T, Traits>::iterator::iterator(generator_type generator) noexcept
     : m_Generator(std::move(generator))
 {
 }
 
 template<class T, class Traits>
-constexpr typename general_span<T, Traits>::iterator::reference general_span<T, Traits>::iterator::operator*()
+constexpr typename generic_span<T, Traits>::iterator::reference generic_span<T, Traits>::iterator::operator*()
     const noexcept
 {
     auto generator = m_Generator;
@@ -24,7 +24,7 @@ constexpr typename general_span<T, Traits>::iterator::reference general_span<T, 
 }
 
 template<class T, class Traits>
-constexpr typename general_span<T, Traits>::iterator::pointer general_span<T, Traits>::iterator::operator->()
+constexpr typename generic_span<T, Traits>::iterator::pointer generic_span<T, Traits>::iterator::operator->()
     const noexcept
 {
     auto generator = m_Generator;
@@ -32,7 +32,7 @@ constexpr typename general_span<T, Traits>::iterator::pointer general_span<T, Tr
 }
 
 template<class T, class Traits>
-constexpr typename general_span<T, Traits>::iterator& general_span<T, Traits>::iterator::operator++() noexcept
+constexpr typename generic_span<T, Traits>::iterator& generic_span<T, Traits>::iterator::operator++() noexcept
 {
     m_Generator();
 
@@ -43,7 +43,7 @@ constexpr typename general_span<T, Traits>::iterator& general_span<T, Traits>::i
 }
 
 template<class T, class Traits>
-constexpr typename general_span<T, Traits>::iterator general_span<T, Traits>::iterator::operator++(int) noexcept
+constexpr typename generic_span<T, Traits>::iterator generic_span<T, Traits>::iterator::operator++(int) noexcept
 {
     iterator r(*this);
 
@@ -54,19 +54,19 @@ constexpr typename general_span<T, Traits>::iterator general_span<T, Traits>::it
 }
 
 template<class T, class Traits>
-constexpr bool general_span<T, Traits>::iterator::operator!=(const iterator& r) const noexcept
+constexpr bool generic_span<T, Traits>::iterator::operator!=(const iterator& r) const noexcept
 {
     return !operator==(r);
 }
 
 template<class T, class Traits>
-constexpr bool general_span<T, Traits>::iterator::operator==(const iterator& r) const noexcept
+constexpr bool generic_span<T, Traits>::iterator::operator==(const iterator& r) const noexcept
 {
     return m_Generator && r.m_Generator || !m_Generator && !r.m_Generator;
 }
 
 template<class T, class Traits>
-constexpr general_span<T, Traits>::iterator::operator void*() noexcept
+constexpr generic_span<T, Traits>::iterator::operator void*() noexcept
 {
     auto generator = m_Generator;
     return generator();
@@ -74,7 +74,7 @@ constexpr general_span<T, Traits>::iterator::operator void*() noexcept
 
 template<class T, class Traits>
 template<class Container>
-inline general_span<T, Traits>::general_span(Container& container) noexcept
+inline generic_span<T, Traits>::generic_span(Container& container) noexcept
     : m_InitialGenerator(
         [it = container.begin(), &container]() mutable
         {
@@ -93,7 +93,7 @@ inline general_span<T, Traits>::general_span(Container& container) noexcept
 
 template<class T, class Traits>
 template<class Container>
-inline general_span<T, Traits>::general_span(
+inline generic_span<T, Traits>::generic_span(
     Container&                                                        container,
     function_type<T*(typename Container::value_type& containerValue)> valueAdapter) noexcept
     : m_InitialGenerator(
@@ -113,25 +113,25 @@ inline general_span<T, Traits>::general_span(
 }
 
 template<class T, class Traits>
-inline typename general_span<T, Traits>::iterator general_span<T, Traits>::begin() const noexcept
+inline typename generic_span<T, Traits>::iterator generic_span<T, Traits>::begin() const noexcept
 {
     return iterator(m_InitialGenerator);
 }
 
 template<class T, class Traits>
-inline typename general_span<T, Traits>::iterator general_span<T, Traits>::end() const noexcept
+inline typename generic_span<T, Traits>::iterator generic_span<T, Traits>::end() const noexcept
 {
     return iterator(nullptr);
 }
 
 template<class T, class Traits>
-inline typename general_span<T, Traits>::iterator general_span<T, Traits>::cbegin() const noexcept
+inline typename generic_span<T, Traits>::iterator generic_span<T, Traits>::cbegin() const noexcept
 {
     return begin();
 }
 
 template<class T, class Traits>
-inline typename general_span<T, Traits>::iterator general_span<T, Traits>::cend() const noexcept
+inline typename generic_span<T, Traits>::iterator generic_span<T, Traits>::cend() const noexcept
 {
     return end();
 }

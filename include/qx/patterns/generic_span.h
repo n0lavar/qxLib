@@ -1,7 +1,7 @@
 /**
 
-    @file      general_span.h
-    @brief     Contains qx::general_span class
+    @file      generic_span.h
+    @brief     Contains qx::generic_span class
     @details   ~
     @author    Khrapov
     @date      20.11.2022
@@ -15,7 +15,7 @@
 namespace qx
 {
 
-struct default_general_span_traits
+struct default_generic_span_traits
 {
     template<class... Args>
     using function_type = std::function<Args...>;
@@ -23,20 +23,20 @@ struct default_general_span_traits
 
 /**
 
-    @class   general_span
+    @class   generic_span
     @brief   Same as std::span, but may be used with containers with forward iterators
     @details The class can be used to use any container to iterate over its elements
              Useful when used in virtual methods
              Does not own the container
              The container should not be changed until the end of the iteration
              May be much slower then std::span
-    @tparam  T - 
+    @tparam  T - container value type
     @author  Khrapov
     @date    20.11.2022
 
 **/
-template<class T, class Traits = default_general_span_traits>
-class general_span
+template<class T, class Traits = default_generic_span_traits>
+class generic_span
 {
 public:
     using traits_type = Traits;
@@ -73,26 +73,26 @@ public:
 
 public:
     /**
-        @brief general_span object constructor
+        @brief generic_span object constructor
     **/
-    general_span() noexcept = default;
+    generic_span() noexcept = default;
 
     /**
-        @brief  general_span object constructor
+        @brief  generic_span object constructor
         @tparam Container - any container, which adapter satisfies forward iterator concept
         @param  container - container instance. container must not be edited until adapter death
     **/
     template<class Container>
-    general_span(Container& container) noexcept;
+    generic_span(Container& container) noexcept;
 
     /**
-        @brief  general_span object constructor
+        @brief  generic_span object constructor
         @tparam Container    - any container, which adapter satisfies forward iterator concept
         @param  container    - container instance. container must not be edited until adapter death
         @param  valueAdapter - function which transforms Container::value_type to T
     **/
     template<class Container>
-    general_span(
+    generic_span(
         Container&                                                        container,
         function_type<T*(typename Container::value_type& containerValue)> valueAdapter) noexcept;
 
@@ -126,4 +126,4 @@ private:
 
 } // namespace qx
 
-#include <qx/patterns/general_span.inl>
+#include <qx/patterns/generic_span.inl>

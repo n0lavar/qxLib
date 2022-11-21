@@ -1,6 +1,6 @@
 /**
 
-    @file      test_general_span.cpp
+    @file      test_generic_span.cpp
     @author    Khrapov
     @date      20.11.2022
     @copyright © Nick Khrapov, 2022. All right reserved.
@@ -9,9 +9,9 @@
 
 #include <common.h>
 
-//V_EXCLUDE_PATH *general_span.cpp
+//V_EXCLUDE_PATH *test_generic_span.cpp
 
-#include <qx/patterns/general_span.h>
+#include <qx/patterns/generic_span.h>
 
 #include <deque>
 #include <list>
@@ -19,13 +19,13 @@
 #include <unordered_set>
 #include <vector>
 
-static_assert(std::forward_iterator<qx::general_span<char>::iterator>);
+static_assert(std::forward_iterator<qx::generic_span<char>::iterator>);
 
 template<class T, template<class...> class Container>
 void TestContainer()
 {
     Container<std::remove_const_t<T>> container { 'a', 'b', 'c', 'd' };
-    qx::general_span<T>               span(container);
+    qx::generic_span<T>               span(container);
 
     Container<std::remove_const_t<T>> newContainer;
     for (T value : span)
@@ -34,7 +34,7 @@ void TestContainer()
     EXPECT_EQ(container, newContainer);
 }
 
-TEST(general_span, container)
+TEST(generic_span, container)
 {
     TestContainer<char, std::vector>();
     TestContainer<char, std::deque>();
@@ -69,7 +69,7 @@ void TestContainerWithAdapter()
 {
     using _NotT = NotT<T>;
     Container<_NotT>    container { _NotT { 'a' }, _NotT { 'b' }, _NotT { 'c' }, _NotT { 'd' } };
-    qx::general_span<T> span(
+    qx::generic_span<T> span(
         container,
         [](_NotT& notT)
         {
@@ -83,7 +83,7 @@ void TestContainerWithAdapter()
     EXPECT_EQ(container, newContainer);
 }
 
-TEST(general_span, container_with_adapter)
+TEST(generic_span, container_with_adapter)
 {
     TestContainerWithAdapter<char, std::vector>();
     TestContainerWithAdapter<char, std::deque>();
