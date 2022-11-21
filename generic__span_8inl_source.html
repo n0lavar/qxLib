@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>qxLib: include/qx/patterns/general_span.inl Source File</title>
+<title>qxLib: include/qx/patterns/generic_span.inl Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -66,12 +66,12 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="headertitle">
-<div class="title">general_span.inl</div>  </div>
+<div class="title">generic_span.inl</div>  </div>
 </div><!--header-->
 <div class="contents">
-<a href="general__span_8inl.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">/**</span></div>
+<a href="generic__span_8inl.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">/**</span></div>
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment">    @file      general_span.inl</span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment">    @file      generic_span.inl</span></div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment">    @author    Khrapov</span></div>
 <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment">    @date      20.11.2022</span></div>
 <div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="comment">    @copyright © Nick Khrapov, 2022. All right reserved.</span></div>
@@ -81,13 +81,13 @@ $(function() {
 <div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="keyword">namespace </span>qx</div>
 <div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;{</div>
 <div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> T, <span class="keyword">class</span> Traits&gt;</div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;constexpr general_span&lt;T, Traits&gt;::iterator::iterator(generator_type generator) noexcept</div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;constexpr generic_span&lt;T, Traits&gt;::iterator::iterator(generator_type generator) noexcept</div>
 <div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;    : m_Generator(std::move(generator))</div>
 <div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;{</div>
 <div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;}</div>
 <div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160; </div>
 <div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> T, <span class="keyword">class</span> Traits&gt;</div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;constexpr <span class="keyword">typename</span> general_span&lt;T, Traits&gt;::iterator::reference general_span&lt;T, Traits&gt;::iterator::operator*()</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;constexpr <span class="keyword">typename</span> generic_span&lt;T, Traits&gt;::iterator::reference generic_span&lt;T, Traits&gt;::iterator::operator*()</div>
 <div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    const noexcept</div>
 <div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;{</div>
 <div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    <span class="keyword">auto</span> generator = m_Generator;</div>
@@ -95,7 +95,7 @@ $(function() {
 <div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;}</div>
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160; </div>
 <div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> T, <span class="keyword">class</span> Traits&gt;</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;constexpr <span class="keyword">typename</span> general_span&lt;T, Traits&gt;::iterator::pointer general_span&lt;T, Traits&gt;::iterator::operator-&gt;()</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;constexpr <span class="keyword">typename</span> generic_span&lt;T, Traits&gt;::iterator::pointer generic_span&lt;T, Traits&gt;::iterator::operator-&gt;()</div>
 <div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    const noexcept</div>
 <div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;{</div>
 <div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    <span class="keyword">auto</span> generator = m_Generator;</div>
@@ -103,7 +103,7 @@ $(function() {
 <div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;}</div>
 <div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160; </div>
 <div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> T, <span class="keyword">class</span> Traits&gt;</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;constexpr <span class="keyword">typename</span> general_span&lt;T, Traits&gt;::iterator&amp; general_span&lt;T, Traits&gt;::iterator::operator++() noexcept</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;constexpr <span class="keyword">typename</span> generic_span&lt;T, Traits&gt;::iterator&amp; generic_span&lt;T, Traits&gt;::iterator::operator++() noexcept</div>
 <div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;{</div>
 <div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    m_Generator();</div>
 <div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160; </div>
@@ -114,7 +114,7 @@ $(function() {
 <div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;}</div>
 <div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160; </div>
 <div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> T, <span class="keyword">class</span> Traits&gt;</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;constexpr <span class="keyword">typename</span> general_span&lt;T, Traits&gt;::iterator general_span&lt;T, Traits&gt;::iterator::operator++(<span class="keywordtype">int</span>) noexcept</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;constexpr <span class="keyword">typename</span> generic_span&lt;T, Traits&gt;::iterator generic_span&lt;T, Traits&gt;::iterator::operator++(<span class="keywordtype">int</span>) noexcept</div>
 <div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;{</div>
 <div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    iterator r(*<span class="keyword">this</span>);</div>
 <div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160; </div>
@@ -125,19 +125,19 @@ $(function() {
 <div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;}</div>
 <div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160; </div>
 <div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> T, <span class="keyword">class</span> Traits&gt;</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;constexpr <span class="keywordtype">bool</span> general_span&lt;T, Traits&gt;::iterator::operator!=(<span class="keyword">const</span> iterator&amp; r) <span class="keyword">const</span> noexcept</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;constexpr <span class="keywordtype">bool</span> generic_span&lt;T, Traits&gt;::iterator::operator!=(<span class="keyword">const</span> iterator&amp; r) <span class="keyword">const</span> noexcept</div>
 <div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;{</div>
 <div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    <span class="keywordflow">return</span> !operator==(r);</div>
 <div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;}</div>
 <div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160; </div>
 <div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> T, <span class="keyword">class</span> Traits&gt;</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;constexpr <span class="keywordtype">bool</span> general_span&lt;T, Traits&gt;::iterator::operator==(<span class="keyword">const</span> iterator&amp; r) <span class="keyword">const</span> noexcept</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;constexpr <span class="keywordtype">bool</span> generic_span&lt;T, Traits&gt;::iterator::operator==(<span class="keyword">const</span> iterator&amp; r) <span class="keyword">const</span> noexcept</div>
 <div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;{</div>
 <div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    <span class="keywordflow">return</span> m_Generator &amp;&amp; r.m_Generator || !m_Generator &amp;&amp; !r.m_Generator;</div>
 <div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;}</div>
 <div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160; </div>
 <div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> T, <span class="keyword">class</span> Traits&gt;</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;constexpr general_span&lt;T, Traits&gt;::iterator::operator <span class="keywordtype">void</span>*() noexcept</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;constexpr generic_span&lt;T, Traits&gt;::iterator::operator <span class="keywordtype">void</span>*() noexcept</div>
 <div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;{</div>
 <div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;    <span class="keyword">auto</span> generator = m_Generator;</div>
 <div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    <span class="keywordflow">return</span> generator();</div>
@@ -145,7 +145,7 @@ $(function() {
 <div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160; </div>
 <div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> T, <span class="keyword">class</span> Traits&gt;</div>
 <div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> Container&gt;</div>
-<div class="line"><a name="l00077"></a><span class="lineno"><a class="line" href="classqx_1_1general__span.html#a5289026f1d91c978f7eabe9f64f65c50">   77</a></span>&#160;<span class="keyword">inline</span> <a class="code" href="classqx_1_1general__span.html#a1ab6ac6bbb9c3c1199ff674e80664dc1">general_span&lt;T, Traits&gt;::general_span</a>(Container&amp; container) noexcept</div>
+<div class="line"><a name="l00077"></a><span class="lineno"><a class="line" href="classqx_1_1generic__span.html#a2ee91d6ea9260bb88f1145c94528af51">   77</a></span>&#160;<span class="keyword">inline</span> <a class="code" href="classqx_1_1generic__span.html#a926600644eceb28520781990c1f8a8c5">generic_span&lt;T, Traits&gt;::generic_span</a>(Container&amp; container) noexcept</div>
 <div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;    : m_InitialGenerator(</div>
 <div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;        [it = container.begin(), &amp;container]() <span class="keyword">mutable</span></div>
 <div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;        {</div>
@@ -164,7 +164,7 @@ $(function() {
 <div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160; </div>
 <div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> T, <span class="keyword">class</span> Traits&gt;</div>
 <div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> Container&gt;</div>
-<div class="line"><a name="l00096"></a><span class="lineno"><a class="line" href="classqx_1_1general__span.html#a6e1a6756e91afbce61a541f839eb7311">   96</a></span>&#160;<span class="keyword">inline</span> <a class="code" href="classqx_1_1general__span.html#a1ab6ac6bbb9c3c1199ff674e80664dc1">general_span&lt;T, Traits&gt;::general_span</a>(</div>
+<div class="line"><a name="l00096"></a><span class="lineno"><a class="line" href="classqx_1_1generic__span.html#aea51a55a99beee358b0988f4f1f661a0">   96</a></span>&#160;<span class="keyword">inline</span> <a class="code" href="classqx_1_1generic__span.html#a926600644eceb28520781990c1f8a8c5">generic_span&lt;T, Traits&gt;::generic_span</a>(</div>
 <div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;    Container&amp;                                                        container,</div>
 <div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;    function_type&lt;T*(<span class="keyword">typename</span> Container::value_type&amp; containerValue)&gt; valueAdapter) noexcept</div>
 <div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;    : m_InitialGenerator(</div>
@@ -184,36 +184,36 @@ $(function() {
 <div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;}</div>
 <div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160; </div>
 <div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> T, <span class="keyword">class</span> Traits&gt;</div>
-<div class="line"><a name="l00116"></a><span class="lineno"><a class="line" href="classqx_1_1general__span.html#a17625a85ee5efdb8e0048a8b18e033a7">  116</a></span>&#160;<span class="keyword">inline</span> <span class="keyword">typename</span> <a class="code" href="classqx_1_1general__span_1_1iterator.html">general_span&lt;T, Traits&gt;::iterator</a> <a class="code" href="classqx_1_1general__span.html#a17625a85ee5efdb8e0048a8b18e033a7">general_span&lt;T, Traits&gt;::begin</a>() const noexcept</div>
+<div class="line"><a name="l00116"></a><span class="lineno"><a class="line" href="classqx_1_1generic__span.html#a0bfb482b314ac4da3bf14785611d99a7">  116</a></span>&#160;<span class="keyword">inline</span> <span class="keyword">typename</span> <a class="code" href="classqx_1_1generic__span_1_1iterator.html">generic_span&lt;T, Traits&gt;::iterator</a> <a class="code" href="classqx_1_1generic__span.html#a0bfb482b314ac4da3bf14785611d99a7">generic_span&lt;T, Traits&gt;::begin</a>() const noexcept</div>
 <div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;{</div>
-<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="classqx_1_1general__span_1_1iterator.html">iterator</a>(m_InitialGenerator);</div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="classqx_1_1generic__span_1_1iterator.html">iterator</a>(m_InitialGenerator);</div>
 <div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;}</div>
 <div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160; </div>
 <div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> T, <span class="keyword">class</span> Traits&gt;</div>
-<div class="line"><a name="l00122"></a><span class="lineno"><a class="line" href="classqx_1_1general__span.html#a8bbcc7133651177509c73cfb6e1a94ab">  122</a></span>&#160;<span class="keyword">inline</span> <span class="keyword">typename</span> <a class="code" href="classqx_1_1general__span_1_1iterator.html">general_span&lt;T, Traits&gt;::iterator</a> <a class="code" href="classqx_1_1general__span.html#a8bbcc7133651177509c73cfb6e1a94ab">general_span&lt;T, Traits&gt;::end</a>() const noexcept</div>
+<div class="line"><a name="l00122"></a><span class="lineno"><a class="line" href="classqx_1_1generic__span.html#a0c51f6fe0eb11c1238fda9a76eeea863">  122</a></span>&#160;<span class="keyword">inline</span> <span class="keyword">typename</span> <a class="code" href="classqx_1_1generic__span_1_1iterator.html">generic_span&lt;T, Traits&gt;::iterator</a> <a class="code" href="classqx_1_1generic__span.html#a0c51f6fe0eb11c1238fda9a76eeea863">generic_span&lt;T, Traits&gt;::end</a>() const noexcept</div>
 <div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;{</div>
-<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="classqx_1_1general__span_1_1iterator.html">iterator</a>(<span class="keyword">nullptr</span>);</div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="classqx_1_1generic__span_1_1iterator.html">iterator</a>(<span class="keyword">nullptr</span>);</div>
 <div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;}</div>
 <div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160; </div>
 <div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> T, <span class="keyword">class</span> Traits&gt;</div>
-<div class="line"><a name="l00128"></a><span class="lineno"><a class="line" href="classqx_1_1general__span.html#a8a26891f76683da81f40548202f6db08">  128</a></span>&#160;<span class="keyword">inline</span> <span class="keyword">typename</span> <a class="code" href="classqx_1_1general__span_1_1iterator.html">general_span&lt;T, Traits&gt;::iterator</a> <a class="code" href="classqx_1_1general__span.html#a8a26891f76683da81f40548202f6db08">general_span&lt;T, Traits&gt;::cbegin</a>() const noexcept</div>
+<div class="line"><a name="l00128"></a><span class="lineno"><a class="line" href="classqx_1_1generic__span.html#a1c78b0888f48df508df06e6f6df377ee">  128</a></span>&#160;<span class="keyword">inline</span> <span class="keyword">typename</span> <a class="code" href="classqx_1_1generic__span_1_1iterator.html">generic_span&lt;T, Traits&gt;::iterator</a> <a class="code" href="classqx_1_1generic__span.html#a1c78b0888f48df508df06e6f6df377ee">generic_span&lt;T, Traits&gt;::cbegin</a>() const noexcept</div>
 <div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;{</div>
 <div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;    <span class="keywordflow">return</span> begin();</div>
 <div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;}</div>
 <div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160; </div>
 <div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> T, <span class="keyword">class</span> Traits&gt;</div>
-<div class="line"><a name="l00134"></a><span class="lineno"><a class="line" href="classqx_1_1general__span.html#aab229b024be89d92ab0a3847cf9578cc">  134</a></span>&#160;<span class="keyword">inline</span> <span class="keyword">typename</span> <a class="code" href="classqx_1_1general__span_1_1iterator.html">general_span&lt;T, Traits&gt;::iterator</a> <a class="code" href="classqx_1_1general__span.html#aab229b024be89d92ab0a3847cf9578cc">general_span&lt;T, Traits&gt;::cend</a>() const noexcept</div>
+<div class="line"><a name="l00134"></a><span class="lineno"><a class="line" href="classqx_1_1generic__span.html#ae6db201c4c7852c3a9aaaa798e8d5813">  134</a></span>&#160;<span class="keyword">inline</span> <span class="keyword">typename</span> <a class="code" href="classqx_1_1generic__span_1_1iterator.html">generic_span&lt;T, Traits&gt;::iterator</a> <a class="code" href="classqx_1_1generic__span.html#ae6db201c4c7852c3a9aaaa798e8d5813">generic_span&lt;T, Traits&gt;::cend</a>() const noexcept</div>
 <div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;{</div>
 <div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;    <span class="keywordflow">return</span> end();</div>
 <div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;}</div>
 <div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160; </div>
 <div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;} <span class="comment">// namespace qx</span></div>
-<div class="ttc" id="aclassqx_1_1general__span_1_1iterator_html"><div class="ttname"><a href="classqx_1_1general__span_1_1iterator.html">qx::general_span::iterator</a></div><div class="ttdef"><b>Definition:</b> <a href="general__span_8h_source.html#l00047">general_span.h:48</a></div></div>
-<div class="ttc" id="aclassqx_1_1general__span_html_a17625a85ee5efdb8e0048a8b18e033a7"><div class="ttname"><a href="classqx_1_1general__span.html#a17625a85ee5efdb8e0048a8b18e033a7">qx::general_span::begin</a></div><div class="ttdeci">iterator begin() const noexcept</div><div class="ttdoc">Return iterator to beginning.</div><div class="ttdef"><b>Definition:</b> <a href="general__span_8inl_source.html#l00116">general_span.inl:116</a></div></div>
-<div class="ttc" id="aclassqx_1_1general__span_html_a1ab6ac6bbb9c3c1199ff674e80664dc1"><div class="ttname"><a href="classqx_1_1general__span.html#a1ab6ac6bbb9c3c1199ff674e80664dc1">qx::general_span::general_span</a></div><div class="ttdeci">general_span() noexcept=default</div><div class="ttdoc">general_span object constructor</div></div>
-<div class="ttc" id="aclassqx_1_1general__span_html_a8a26891f76683da81f40548202f6db08"><div class="ttname"><a href="classqx_1_1general__span.html#a8a26891f76683da81f40548202f6db08">qx::general_span::cbegin</a></div><div class="ttdeci">iterator cbegin() const noexcept</div><div class="ttdoc">Return const iterator to beginning.</div><div class="ttdef"><b>Definition:</b> <a href="general__span_8inl_source.html#l00128">general_span.inl:128</a></div></div>
-<div class="ttc" id="aclassqx_1_1general__span_html_a8bbcc7133651177509c73cfb6e1a94ab"><div class="ttname"><a href="classqx_1_1general__span.html#a8bbcc7133651177509c73cfb6e1a94ab">qx::general_span::end</a></div><div class="ttdeci">iterator end() const noexcept</div><div class="ttdoc">Return iterator to end.</div><div class="ttdef"><b>Definition:</b> <a href="general__span_8inl_source.html#l00122">general_span.inl:122</a></div></div>
-<div class="ttc" id="aclassqx_1_1general__span_html_aab229b024be89d92ab0a3847cf9578cc"><div class="ttname"><a href="classqx_1_1general__span.html#aab229b024be89d92ab0a3847cf9578cc">qx::general_span::cend</a></div><div class="ttdeci">iterator cend() const noexcept</div><div class="ttdoc">Return const iterator to end.</div><div class="ttdef"><b>Definition:</b> <a href="general__span_8inl_source.html#l00134">general_span.inl:134</a></div></div>
+<div class="ttc" id="aclassqx_1_1generic__span_1_1iterator_html"><div class="ttname"><a href="classqx_1_1generic__span_1_1iterator.html">qx::generic_span::iterator</a></div><div class="ttdef"><b>Definition:</b> <a href="generic__span_8h_source.html#l00047">generic_span.h:48</a></div></div>
+<div class="ttc" id="aclassqx_1_1generic__span_html_a0bfb482b314ac4da3bf14785611d99a7"><div class="ttname"><a href="classqx_1_1generic__span.html#a0bfb482b314ac4da3bf14785611d99a7">qx::generic_span::begin</a></div><div class="ttdeci">iterator begin() const noexcept</div><div class="ttdoc">Return iterator to beginning.</div><div class="ttdef"><b>Definition:</b> <a href="generic__span_8inl_source.html#l00116">generic_span.inl:116</a></div></div>
+<div class="ttc" id="aclassqx_1_1generic__span_html_a0c51f6fe0eb11c1238fda9a76eeea863"><div class="ttname"><a href="classqx_1_1generic__span.html#a0c51f6fe0eb11c1238fda9a76eeea863">qx::generic_span::end</a></div><div class="ttdeci">iterator end() const noexcept</div><div class="ttdoc">Return iterator to end.</div><div class="ttdef"><b>Definition:</b> <a href="generic__span_8inl_source.html#l00122">generic_span.inl:122</a></div></div>
+<div class="ttc" id="aclassqx_1_1generic__span_html_a1c78b0888f48df508df06e6f6df377ee"><div class="ttname"><a href="classqx_1_1generic__span.html#a1c78b0888f48df508df06e6f6df377ee">qx::generic_span::cbegin</a></div><div class="ttdeci">iterator cbegin() const noexcept</div><div class="ttdoc">Return const iterator to beginning.</div><div class="ttdef"><b>Definition:</b> <a href="generic__span_8inl_source.html#l00128">generic_span.inl:128</a></div></div>
+<div class="ttc" id="aclassqx_1_1generic__span_html_a926600644eceb28520781990c1f8a8c5"><div class="ttname"><a href="classqx_1_1generic__span.html#a926600644eceb28520781990c1f8a8c5">qx::generic_span::generic_span</a></div><div class="ttdeci">generic_span() noexcept=default</div><div class="ttdoc">generic_span object constructor</div></div>
+<div class="ttc" id="aclassqx_1_1generic__span_html_ae6db201c4c7852c3a9aaaa798e8d5813"><div class="ttname"><a href="classqx_1_1generic__span.html#ae6db201c4c7852c3a9aaaa798e8d5813">qx::generic_span::cend</a></div><div class="ttdeci">iterator cend() const noexcept</div><div class="ttdoc">Return const iterator to end.</div><div class="ttdef"><b>Definition:</b> <a href="generic__span_8inl_source.html#l00134">generic_span.inl:134</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
