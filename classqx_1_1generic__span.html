@@ -100,10 +100,14 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a2ee91d6ea9260bb88f1145c94528af51"><td class="memTemplItemLeft" align="right" valign="top">&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classqx_1_1generic__span.html#a2ee91d6ea9260bb88f1145c94528af51">generic_span</a> (Container &amp;container) noexcept</td></tr>
 <tr class="memdesc:a2ee91d6ea9260bb88f1145c94528af51"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classqx_1_1generic__span.html" title="Same as std::span, but may be used with containers with forward iterators.">generic_span</a> object constructor  <a href="classqx_1_1generic__span.html#a2ee91d6ea9260bb88f1145c94528af51">More...</a><br /></td></tr>
 <tr class="separator:a2ee91d6ea9260bb88f1145c94528af51"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aea51a55a99beee358b0988f4f1f661a0"><td class="memTemplParams" colspan="2">template&lt;class Container &gt; </td></tr>
-<tr class="memitem:aea51a55a99beee358b0988f4f1f661a0"><td class="memTemplItemLeft" align="right" valign="top">&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classqx_1_1generic__span.html#aea51a55a99beee358b0988f4f1f661a0">generic_span</a> (Container &amp;container, function_type&lt; T *(typename Container::value_type &amp;containerValue)&gt; valueAdapter) noexcept</td></tr>
-<tr class="memdesc:aea51a55a99beee358b0988f4f1f661a0"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classqx_1_1generic__span.html" title="Same as std::span, but may be used with containers with forward iterators.">generic_span</a> object constructor  <a href="classqx_1_1generic__span.html#aea51a55a99beee358b0988f4f1f661a0">More...</a><br /></td></tr>
-<tr class="separator:aea51a55a99beee358b0988f4f1f661a0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aacfa294b82da28bcfee599c404a6183b"><td class="memTemplParams" colspan="2">template&lt;class Container &gt; </td></tr>
+<tr class="memitem:aacfa294b82da28bcfee599c404a6183b"><td class="memTemplItemLeft" align="right" valign="top">&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classqx_1_1generic__span.html#aacfa294b82da28bcfee599c404a6183b">generic_span</a> (Container &amp;container, function_type&lt; pointer(container_value&lt; Container &gt; &amp;)&gt; valueAdapter) noexcept</td></tr>
+<tr class="memdesc:aacfa294b82da28bcfee599c404a6183b"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classqx_1_1generic__span.html" title="Same as std::span, but may be used with containers with forward iterators.">generic_span</a> object constructor  <a href="classqx_1_1generic__span.html#aacfa294b82da28bcfee599c404a6183b">More...</a><br /></td></tr>
+<tr class="separator:aacfa294b82da28bcfee599c404a6183b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2fe73c50068715b6fcaea7967b04123c"><td class="memTemplParams" colspan="2">template&lt;class Container &gt; </td></tr>
+<tr class="memitem:a2fe73c50068715b6fcaea7967b04123c"><td class="memTemplItemLeft" align="right" valign="top">&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classqx_1_1generic__span.html#a2fe73c50068715b6fcaea7967b04123c">generic_span</a> (const Container &amp;container, function_type&lt; pointer(container_value&lt; Container &gt; &amp;)&gt; valueAdapter) noexcept</td></tr>
+<tr class="memdesc:a2fe73c50068715b6fcaea7967b04123c"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classqx_1_1generic__span.html" title="Same as std::span, but may be used with containers with forward iterators.">generic_span</a> object constructor  <a href="classqx_1_1generic__span.html#a2fe73c50068715b6fcaea7967b04123c">More...</a><br /></td></tr>
+<tr class="separator:a2fe73c50068715b6fcaea7967b04123c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a89a3c0059e019a8a70771c4d6dde457b"><td class="memTemplParams" colspan="2">template&lt;class Container &gt; </td></tr>
 <tr class="memitem:a89a3c0059e019a8a70771c4d6dde457b"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classqx_1_1generic__span.html">generic_span</a> &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classqx_1_1generic__span.html#a89a3c0059e019a8a70771c4d6dde457b">operator=</a> (Container &amp;container) noexcept</td></tr>
 <tr class="memdesc:a89a3c0059e019a8a70771c4d6dde457b"><td class="mdescLeft">&#160;</td><td class="mdescRight">operator=  <a href="classqx_1_1generic__span.html#a89a3c0059e019a8a70771c4d6dde457b">More...</a><br /></td></tr>
@@ -147,7 +151,7 @@ class qx::generic_span&lt; T, Traits &gt;</h3>
 <p class="definition">Definition at line <a class="el" href="generic__span_8h_source.html#l00039">39</a> of file <a class="el" href="generic__span_8h_source.html">generic_span.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="accf914c306ae5627e1823aa2c9976389"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#accf914c306ae5627e1823aa2c9976389">&#9670;&nbsp;</a></span>generic_span() <span class="overload">[1/4]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#accf914c306ae5627e1823aa2c9976389">&#9670;&nbsp;</a></span>generic_span() <span class="overload">[1/5]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -183,7 +187,7 @@ template&lt;class T , class Traits  = default_generic_span_traits&gt; </div>
 </div>
 </div>
 <a id="ac9f75623c19e484f47f5e389b1622a2e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac9f75623c19e484f47f5e389b1622a2e">&#9670;&nbsp;</a></span>generic_span() <span class="overload">[2/4]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#ac9f75623c19e484f47f5e389b1622a2e">&#9670;&nbsp;</a></span>generic_span() <span class="overload">[2/5]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -219,7 +223,7 @@ template&lt;class T , class Traits  = default_generic_span_traits&gt; </div>
 </div>
 </div>
 <a id="a2ee91d6ea9260bb88f1145c94528af51"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2ee91d6ea9260bb88f1145c94528af51">&#9670;&nbsp;</a></span>generic_span() <span class="overload">[3/4]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a2ee91d6ea9260bb88f1145c94528af51">&#9670;&nbsp;</a></span>generic_span() <span class="overload">[3/5]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -264,8 +268,8 @@ template&lt;class Container &gt; </div>
 
 </div>
 </div>
-<a id="aea51a55a99beee358b0988f4f1f661a0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aea51a55a99beee358b0988f4f1f661a0">&#9670;&nbsp;</a></span>generic_span() <span class="overload">[4/4]</span></h2>
+<a id="aacfa294b82da28bcfee599c404a6183b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aacfa294b82da28bcfee599c404a6183b">&#9670;&nbsp;</a></span>generic_span() <span class="overload">[4/5]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -286,7 +290,7 @@ template&lt;class Container &gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">function_type&lt; T *(typename Container::value_type &amp;containerValue)&gt;&#160;</td>
+          <td class="paramtype">function_type&lt; pointer(container_value&lt; Container &gt; &amp;)&gt;&#160;</td>
           <td class="paramname"><em>valueAdapter</em>&#160;</td>
         </tr>
         <tr>
@@ -312,12 +316,69 @@ template&lt;class Container &gt; </div>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">container</td><td>- container instance. container must not be edited until adapter death </td></tr>
-    <tr><td class="paramname">valueAdapter</td><td>- function which transforms Container::value_type to T </td></tr>
+    <tr><td class="paramname">valueAdapter</td><td>- function which transforms Container::value_type to T* </td></tr>
   </table>
   </dd>
 </dl>
 
 <p class="definition">Definition at line <a class="el" href="generic__span_8inl_source.html#l00098">98</a> of file <a class="el" href="generic__span_8inl_source.html">generic_span.inl</a>.</p>
+
+</div>
+</div>
+<a id="a2fe73c50068715b6fcaea7967b04123c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2fe73c50068715b6fcaea7967b04123c">&#9670;&nbsp;</a></span>generic_span() <span class="overload">[5/5]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T , class Traits &gt; </div>
+<div class="memtemplate">
+template&lt;class Container &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classqx_1_1generic__span.html">qx::generic_span</a>&lt; T, Traits &gt;::<a class="el" href="classqx_1_1generic__span.html">generic_span</a> </td>
+          <td>(</td>
+          <td class="paramtype">const Container &amp;&#160;</td>
+          <td class="paramname"><em>container</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">function_type&lt; pointer(container_value&lt; Container &gt; &amp;)&gt;&#160;</td>
+          <td class="paramname"><em>valueAdapter</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p><a class="el" href="classqx_1_1generic__span.html" title="Same as std::span, but may be used with containers with forward iterators.">generic_span</a> object constructor </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Container</td><td>- any container, which adapter satisfies forward iterator concept </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">container</td><td>- container instance. container must not be edited until adapter death </td></tr>
+    <tr><td class="paramname">valueAdapter</td><td>- function which transforms Container::value_type to T* </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="generic__span_8inl_source.html#l00107">107</a> of file <a class="el" href="generic__span_8inl_source.html">generic_span.inl</a>.</p>
 
 </div>
 </div>
@@ -352,7 +413,7 @@ template&lt;class T , class Traits &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="generic__span_8inl_source.html#l00134">134</a> of file <a class="el" href="generic__span_8inl_source.html">generic_span.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="generic__span_8inl_source.html#l00129">129</a> of file <a class="el" href="generic__span_8inl_source.html">generic_span.inl</a>.</p>
 
 </div>
 </div>
@@ -386,7 +447,7 @@ template&lt;class T , class Traits &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="generic__span_8inl_source.html#l00146">146</a> of file <a class="el" href="generic__span_8inl_source.html">generic_span.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="generic__span_8inl_source.html#l00141">141</a> of file <a class="el" href="generic__span_8inl_source.html">generic_span.inl</a>.</p>
 
 </div>
 </div>
@@ -420,7 +481,7 @@ template&lt;class T , class Traits &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="generic__span_8inl_source.html#l00152">152</a> of file <a class="el" href="generic__span_8inl_source.html">generic_span.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="generic__span_8inl_source.html#l00147">147</a> of file <a class="el" href="generic__span_8inl_source.html">generic_span.inl</a>.</p>
 
 </div>
 </div>
@@ -454,7 +515,7 @@ template&lt;class T , class Traits &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="generic__span_8inl_source.html#l00128">128</a> of file <a class="el" href="generic__span_8inl_source.html">generic_span.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="generic__span_8inl_source.html#l00123">123</a> of file <a class="el" href="generic__span_8inl_source.html">generic_span.inl</a>.</p>
 
 </div>
 </div>
@@ -488,7 +549,7 @@ template&lt;class T , class Traits &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="generic__span_8inl_source.html#l00140">140</a> of file <a class="el" href="generic__span_8inl_source.html">generic_span.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="generic__span_8inl_source.html#l00135">135</a> of file <a class="el" href="generic__span_8inl_source.html">generic_span.inl</a>.</p>
 
 </div>
 </div>
