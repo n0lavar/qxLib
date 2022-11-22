@@ -44,6 +44,16 @@ public:
     using function_type  = typename Traits::template function_type<Args...>;
     using generator_type = function_type<T*()>;
 
+    template<class Container>
+    using container_value = decltype(*std::declval<Container>().begin());
+
+    using element_type    = T;
+    using value_type      = std::remove_cv_t<T>;
+    using pointer         = T*;
+    using const_pointer   = const T*;
+    using reference       = T&;
+    using const_reference = const T&;
+
     class iterator
     {
     public:
@@ -101,12 +111,19 @@ public:
         @brief  generic_span object constructor
         @tparam Container    - any container, which adapter satisfies forward iterator concept
         @param  container    - container instance. container must not be edited until adapter death
-        @param  valueAdapter - function which transforms Container::value_type to T
+        @param  valueAdapter - function which transforms Container::value_type to T*
     **/
     template<class Container>
-    generic_span(
-        Container&                                                        container,
-        function_type<T*(typename Container::value_type& containerValue)> valueAdapter) noexcept;
+    generic_span(Container& container, function_type<pointer(container_value<Container>&)> valueAdapter) noexcept;
+
+    /**
+        @brief  generic_span object constructor
+        @tparam Container    - any container, which adapter satisfies forward iterator concept
+        @param  container    - container instance. container must not be edited until adapter death
+        @param  valueAdapter - function which transforms Container::value_type to T*
+    **/
+    template<class Container>
+    generic_span(const Container& container, function_type<pointer(container_value<Container>&)> valueAdapter) noexcept;
 
     /**
         @brief  operator=
@@ -160,6 +177,18 @@ public:
         @retval  - const iterator to end
     **/
     iterator cend() const noexcept;
+
+private:
+    /**
+        @brief  Create initial generator
+        @tparam Container - any container, which adapter satisfies forward iterator concept
+        @tparam Adapter   - adapter callable type
+        @param  container - container instance. container must not be edited until adapter death
+        @param  adapter   - function which transforms Container::value_type to T*
+        @retval           - values generator
+    **/
+    template<class Container, class Adapter>
+    static generator_type create_initial_generator(Container&& container, Adapter adapter) noexcept;
 
 private:
     generator_type m_InitialGenerator;

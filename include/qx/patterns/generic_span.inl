@@ -96,23 +96,18 @@ inline generic_span<T, Traits>::generic_span(Container& container) noexcept
 template<class T, class Traits>
 template<class Container>
 inline generic_span<T, Traits>::generic_span(
-    Container&                                                        container,
-    function_type<T*(typename Container::value_type& containerValue)> valueAdapter) noexcept
-    : m_InitialGenerator(
-        container.begin() != container.end() 
-        ? [it = container.begin(), &container, _adapter = std::move(valueAdapter)]() mutable
-          {
-              T* pRet = nullptr;
-          
-              if (it != container.end())
-              {
-                  pRet = _adapter(*it);
-                  ++it;
-              }
-          
-              return pRet;
-          } 
-        : generator_type(nullptr))
+    Container&                                          container,
+    function_type<pointer(container_value<Container>&)> valueAdapter) noexcept
+    : m_InitialGenerator(create_initial_generator(container, std::move(valueAdapter)))
+{
+}
+
+template<class T, class Traits>
+template<class Container>
+inline generic_span<T, Traits>::generic_span(
+    const Container&                                    container,
+    function_type<pointer(container_value<Container>&)> valueAdapter) noexcept
+    : m_InitialGenerator(create_initial_generator(container, std::move(valueAdapter)))
 {
 }
 
@@ -152,6 +147,28 @@ template<class T, class Traits>
 inline typename generic_span<T, Traits>::iterator generic_span<T, Traits>::cend() const noexcept
 {
     return end();
+}
+
+template<class T, class Traits>
+template<class Container, class Adapter>
+typename generic_span<T, Traits>::generator_type generic_span<T, Traits>::create_initial_generator(
+    Container&& container,
+    Adapter     adapter) noexcept
+{
+    return container.begin() != container.end() 
+            ? [it = container.begin(), _adapter = std::move(adapter), &container]() mutable
+              {
+                  T* pRet = nullptr;
+          
+                  if (it != container.end())
+                  {
+                      pRet = _adapter(*it);
+                      ++it;
+                  }
+          
+                  return pRet;
+              } 
+            : generator_type(nullptr);
 }
 
 } // namespace qx

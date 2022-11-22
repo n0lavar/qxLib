@@ -106,7 +106,7 @@ link<T>::link(std::nullptr_t) noexcept
 template<class T>
 typename link<T>::lock_ptr link<T>::lock() const noexcept
 {
-    return lock_ptr(std::move(m_pWeak.lock()));
+    return lock_ptr(m_pWeak.lock());
 }
 
 template<class T>
