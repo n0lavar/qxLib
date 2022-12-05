@@ -100,10 +100,10 @@ Public Member Functions</h2></td></tr>
 virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1base__logger__stream.html#a19753b3ad41e31765763b19d0b801bad">~base_logger_stream</a> ()=default</td></tr>
 <tr class="memdesc:a19753b3ad41e31765763b19d0b801bad"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classqx_1_1base__logger__stream.html" title="Base class for logger streams.">base_logger_stream</a> object destructor <br /></td></tr>
 <tr class="separator:a19753b3ad41e31765763b19d0b801bad"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2ab8a7a0ba62f0e1961309aff3271093"><td class="memTemplParams" colspan="2">template&lt;class char_type &gt; </td></tr>
-<tr class="memitem:a2ab8a7a0ba62f0e1961309aff3271093"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classqx_1_1base__logger__stream.html#a2ab8a7a0ba62f0e1961309aff3271093">log</a> (log_level eLogLevel, const char_type *pszFormat, const char *pszTag, const char *pszFile, const char *pszFunction, int nLine, va_list args)</td></tr>
-<tr class="memdesc:a2ab8a7a0ba62f0e1961309aff3271093"><td class="mdescLeft">&#160;</td><td class="mdescRight">Output to stream.  <a href="classqx_1_1base__logger__stream.html#a2ab8a7a0ba62f0e1961309aff3271093">More...</a><br /></td></tr>
-<tr class="separator:a2ab8a7a0ba62f0e1961309aff3271093"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a21c813d6b6f31618137e34d8b31a35fb"><td class="memTemplParams" colspan="2">template&lt;class char_type &gt; </td></tr>
+<tr class="memitem:a21c813d6b6f31618137e34d8b31a35fb"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classqx_1_1base__logger__stream.html#a21c813d6b6f31618137e34d8b31a35fb">log</a> (log_level eLogLevel, const char_type *pszFormat, const char *pszCategory, const char *pszFile, const char *pszFunction, int nLine, va_list args)</td></tr>
+<tr class="memdesc:a21c813d6b6f31618137e34d8b31a35fb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Output to stream.  <a href="classqx_1_1base__logger__stream.html#a21c813d6b6f31618137e34d8b31a35fb">More...</a><br /></td></tr>
+<tr class="separator:a21c813d6b6f31618137e34d8b31a35fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a99637f11420d3b811336fc05fd63b987"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1base__logger__stream.html#a99637f11420d3b811336fc05fd63b987">register_unit</a> (std::string_view svUnitName, const <a class="el" href="structqx_1_1log__unit__info.html">log_unit_info</a> &amp;unit) noexcept</td></tr>
 <tr class="memdesc:a99637f11420d3b811336fc05fd63b987"><td class="mdescLeft">&#160;</td><td class="mdescRight">Register logger unit.  <a href="classqx_1_1base__logger__stream.html#a99637f11420d3b811336fc05fd63b987">More...</a><br /></td></tr>
 <tr class="separator:a99637f11420d3b811336fc05fd63b987"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -130,7 +130,7 @@ Protected Member Functions</h2></td></tr>
 <p>~ </p><dl class="section author"><dt>Author</dt><dd>Khrapov </dd></dl>
 <dl class="section date"><dt>Date</dt><dd>28.07.2021 </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="base__logger__stream_8h_source.html#l00086">86</a> of file <a class="el" href="base__logger__stream_8h_source.html">base_logger_stream.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="base__logger__stream_8h_source.html#l00087">87</a> of file <a class="el" href="base__logger__stream_8h_source.html">base_logger_stream.h</a>.</p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="a9f1a63558efd0f219661b9fe05556b92"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a9f1a63558efd0f219661b9fe05556b92">&#9670;&nbsp;</a></span>deregister_unit()</h2>
@@ -159,12 +159,12 @@ Protected Member Functions</h2></td></tr>
 <p>Deregister logger unit. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">svUnitName</td><td>- unit name (tag, file or function) </td></tr>
+    <tr><td class="paramname">svUnitName</td><td>- unit name (category name, file or function) </td></tr>
   </table>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="base__logger__stream_8inl_source.html#l00087">87</a> of file <a class="el" href="base__logger__stream_8inl_source.html">base_logger_stream.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="base__logger__stream_8inl_source.html#l00089">89</a> of file <a class="el" href="base__logger__stream_8inl_source.html">base_logger_stream.inl</a>.</p>
 
 </div>
 </div>
@@ -208,7 +208,7 @@ template&lt;class char_type &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="base__logger__stream_8inl_source.html#l00093">93</a> of file <a class="el" href="base__logger__stream_8inl_source.html">base_logger_stream.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="base__logger__stream_8inl_source.html#l00095">95</a> of file <a class="el" href="base__logger__stream_8inl_source.html">base_logger_stream.inl</a>.</p>
 
 </div>
 </div>
@@ -248,12 +248,12 @@ template&lt;class char_type &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="base__logger__stream_8inl_source.html#l00111">111</a> of file <a class="el" href="base__logger__stream_8inl_source.html">base_logger_stream.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="base__logger__stream_8inl_source.html#l00113">113</a> of file <a class="el" href="base__logger__stream_8inl_source.html">base_logger_stream.inl</a>.</p>
 
 </div>
 </div>
-<a id="a2ab8a7a0ba62f0e1961309aff3271093"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2ab8a7a0ba62f0e1961309aff3271093">&#9670;&nbsp;</a></span>log()</h2>
+<a id="a21c813d6b6f31618137e34d8b31a35fb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a21c813d6b6f31618137e34d8b31a35fb">&#9670;&nbsp;</a></span>log()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -279,7 +279,7 @@ template&lt;class char_type &gt; </div>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">const char *&#160;</td>
-          <td class="paramname"><em>pszTag</em>, </td>
+          <td class="paramname"><em>pszCategory</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -329,7 +329,7 @@ template&lt;class char_type &gt; </div>
   <table class="params">
     <tr><td class="paramname">eLogLevel</td><td>- log level </td></tr>
     <tr><td class="paramname">pszFormat</td><td>- format string </td></tr>
-    <tr><td class="paramname">pszTag</td><td>- tracing tag </td></tr>
+    <tr><td class="paramname">pszCategory</td><td>- code category name </td></tr>
     <tr><td class="paramname">pszFile</td><td>- file name string </td></tr>
     <tr><td class="paramname">pszFunction</td><td>- function name string </td></tr>
     <tr><td class="paramname">nLine</td><td>- code line number </td></tr>
@@ -379,13 +379,13 @@ template&lt;class char_type &gt; </div>
 <p>Register logger unit. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">svUnitName</td><td>- unit name (tag, file or function) </td></tr>
+    <tr><td class="paramname">svUnitName</td><td>- unit name (category name, file or function) </td></tr>
     <tr><td class="paramname">unit</td><td>- unit info </td></tr>
   </table>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="base__logger__stream_8inl_source.html#l00081">81</a> of file <a class="el" href="base__logger__stream_8inl_source.html">base_logger_stream.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="base__logger__stream_8inl_source.html#l00083">83</a> of file <a class="el" href="base__logger__stream_8inl_source.html">base_logger_stream.inl</a>.</p>
 
 </div>
 </div>

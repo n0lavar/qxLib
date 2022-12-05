@@ -1,16 +1,17 @@
 var searchData=
 [
-  ['char_5ftraits_685',['char_traits',['../structqx_1_1char__traits.html',1,'qx']]],
-  ['char_5ftraits_3c_20char_20_3e_686',['char_traits&lt; char &gt;',['../structqx_1_1char__traits_3_01char_01_4.html',1,'qx']]],
-  ['char_5ftraits_3c_20wchar_5ft_20_3e_687',['char_traits&lt; wchar_t &gt;',['../structqx_1_1char__traits_3_01wchar__t_01_4.html',1,'qx']]],
-  ['color_688',['color',['../classqx_1_1color.html',1,'qx']]],
-  ['common_5fchar_5ftraits_689',['common_char_traits',['../structqx_1_1common__char__traits.html',1,'qx']]],
-  ['common_5fchar_5ftraits_3c_20char_20_3e_690',['common_char_traits&lt; char &gt;',['../structqx_1_1common__char__traits.html',1,'qx']]],
-  ['common_5fchar_5ftraits_3c_20wchar_5ft_20_3e_691',['common_char_traits&lt; wchar_t &gt;',['../structqx_1_1common__char__traits.html',1,'qx']]],
-  ['components_692',['components',['../classqx_1_1components.html',1,'qx']]],
-  ['const_5fiterator_693',['const_iterator',['../classqx_1_1components_1_1const__iterator.html',1,'qx::components&lt; TBaseComponent &gt;::const_iterator&lt; TSuperClass &gt;'],['../classqx_1_1const__iterator.html',1,'qx::const_iterator&lt; C &gt;'],['../classqx_1_1list__se_1_1const__iterator.html',1,'qx::list_se&lt; T &gt;::const_iterator']]],
-  ['const_5freverse_5fiterator_694',['const_reverse_iterator',['../classqx_1_1const__reverse__iterator.html',1,'qx']]],
-  ['constexpr_5fflag_695',['constexpr_flag',['../classqx_1_1constexpr__flag.html',1,'qx']]],
-  ['constexpr_5fsequence_696',['constexpr_sequence',['../classqx_1_1constexpr__sequence.html',1,'qx']]],
-  ['cout_5flogger_5fstream_697',['cout_logger_stream',['../classqx_1_1cout__logger__stream.html',1,'qx']]]
+  ['category_688',['category',['../classqx_1_1category.html',1,'qx']]],
+  ['char_5ftraits_689',['char_traits',['../structqx_1_1char__traits.html',1,'qx']]],
+  ['char_5ftraits_3c_20char_20_3e_690',['char_traits&lt; char &gt;',['../structqx_1_1char__traits_3_01char_01_4.html',1,'qx']]],
+  ['char_5ftraits_3c_20wchar_5ft_20_3e_691',['char_traits&lt; wchar_t &gt;',['../structqx_1_1char__traits_3_01wchar__t_01_4.html',1,'qx']]],
+  ['color_692',['color',['../classqx_1_1color.html',1,'qx']]],
+  ['common_5fchar_5ftraits_693',['common_char_traits',['../structqx_1_1common__char__traits.html',1,'qx']]],
+  ['common_5fchar_5ftraits_3c_20char_20_3e_694',['common_char_traits&lt; char &gt;',['../structqx_1_1common__char__traits.html',1,'qx']]],
+  ['common_5fchar_5ftraits_3c_20wchar_5ft_20_3e_695',['common_char_traits&lt; wchar_t &gt;',['../structqx_1_1common__char__traits.html',1,'qx']]],
+  ['components_696',['components',['../classqx_1_1components.html',1,'qx']]],
+  ['const_5fiterator_697',['const_iterator',['../classqx_1_1components_1_1const__iterator.html',1,'qx::components&lt; TBaseComponent &gt;::const_iterator&lt; TSuperClass &gt;'],['../classqx_1_1const__iterator.html',1,'qx::const_iterator&lt; C &gt;'],['../classqx_1_1list__se_1_1const__iterator.html',1,'qx::list_se&lt; T &gt;::const_iterator']]],
+  ['const_5freverse_5fiterator_698',['const_reverse_iterator',['../classqx_1_1const__reverse__iterator.html',1,'qx']]],
+  ['constexpr_5fflag_699',['constexpr_flag',['../classqx_1_1constexpr__flag.html',1,'qx']]],
+  ['constexpr_5fsequence_700',['constexpr_sequence',['../classqx_1_1constexpr__sequence.html',1,'qx']]],
+  ['cout_5flogger_5fstream_701',['cout_logger_stream',['../classqx_1_1cout__logger__stream.html',1,'qx']]]
 ];
