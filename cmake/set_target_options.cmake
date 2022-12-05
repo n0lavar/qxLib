@@ -56,6 +56,8 @@ function(set_target_options _target)
             $<$<CONFIG:Release>:        /MT /DNDEBUG>
             $<$<CONFIG:RelWithDebInfo>: /MT /DNDEBUG>
             $<$<CONFIG:MinSizeRel>:     /MT /DNDEBUG>
+
+            /MP # multithreaded compilation
         )
         
         target_link_options(${_target} PRIVATE 

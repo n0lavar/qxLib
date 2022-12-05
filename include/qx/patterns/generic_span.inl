@@ -151,7 +151,7 @@ inline typename generic_span<T, Traits>::iterator generic_span<T, Traits>::cend(
 
 template<class T, class Traits>
 template<class Container, class Adapter>
-typename generic_span<T, Traits>::generator_type generic_span<T, Traits>::create_initial_generator(
+inline typename generic_span<T, Traits>::generator_type generic_span<T, Traits>::create_initial_generator(
     Container&& container,
     Adapter     adapter) noexcept
 {
