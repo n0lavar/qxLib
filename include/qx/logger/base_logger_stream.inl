@@ -28,16 +28,18 @@ template<class char_type>
 inline void base_logger_stream::log(
     log_level        eLogLevel,
     const char_type* pszFormat,
-    const char*      pszTag,
+    const char*      pszCategory,
     const char*      pszFile,
     const char*      pszFunction,
     int              nLine,
     va_list          args)
 {
-    if (const auto optLogUnit = get_unit_info(pszTag, pszFile, pszFunction))
+    if (const auto optLogUnit = get_unit_info(pszCategory, pszFile, pszFunction))
     {
         if (eLogLevel >= optLogUnit->pUnitInfo->eMinLogLevel)
         {
+            std::lock_guard lock(m_Mutex);
+
             auto& buffers = get_string_buffers<char_type>();
             buffers.sMessage.clear();
 
@@ -50,12 +52,12 @@ inline void base_logger_stream::log(
 
             if constexpr (std::is_same_v<char_type, char>)
             {
-                formatFunc(buffers, eLogLevel, pszFormat, pszTag, pszFile, pszFunction, nLine, argsCopy);
+                formatFunc(buffers, eLogLevel, pszFormat, pszCategory, pszFile, pszFunction, nLine, argsCopy);
             }
             else
             {
-                if (pszTag)
-                    buffers.sTag = to_wstring(pszTag);
+                if (pszCategory)
+                    buffers.sCategory = to_wstring(pszCategory);
                 buffers.sFile     = to_wstring(pszFile);
                 buffers.sFunction = to_wstring(pszFunction);
 
@@ -63,7 +65,7 @@ inline void base_logger_stream::log(
                     buffers,
                     eLogLevel,
                     pszFormat,
-                    pszTag ? buffers.sTag.c_str() : nullptr,
+                    pszCategory ? buffers.sCategory.c_str() : nullptr,
                     buffers.sFile.c_str(),
                     buffers.sFunction.c_str(),
                     nLine,
@@ -117,7 +119,7 @@ inline logger_buffers<char_type>& base_logger_stream::get_string_buffers() noexc
 }
 
 inline std::optional<log_unit> base_logger_stream::get_unit_info(
-    const char* pszTag,
+    const char* pszCategory,
     const char* pszFile,
     const char* pszFunction) noexcept
 {
@@ -129,8 +131,8 @@ inline std::optional<log_unit> base_logger_stream::get_unit_info(
     std::optional<log_unit> logUnit = std::nullopt;
 
     auto it = m_Units.end();
-    if (it = find_unit(pszTag); it != m_Units.end())
-        logUnit = { &it->second, pszTag };
+    if (it = find_unit(pszCategory); it != m_Units.end())
+        logUnit = { &it->second, pszCategory };
     else if (it = find_unit(pszFile); it != m_Units.end())
         logUnit = { &it->second, pszFile };
     else if (it = find_unit(pszFunction); it != m_Units.end())
@@ -146,7 +148,7 @@ inline void base_logger_stream::format_line(
     logger_buffers<char_type>& buffers,
     log_level                  eLogLevel,
     const char_type*           pszFormat,
-    const char_type*           pszTag,
+    const char_type*           pszCategory,
     const char_type*           pszFile,
     const char_type*           pszFunction,
     int                        nLine,
@@ -190,14 +192,14 @@ inline void base_logger_stream::format_line(
     constexpr auto pszStringFormatSpecifier = get_format_specifier<char_type, const char_type*>();
     buffers.sFormat += QX_STR_PREFIX(char_type, "][");
     buffers.sFormat += pszStringFormatSpecifier;
-    if (pszTag)
+    if (pszCategory)
         buffers.sFormat += QX_STR_PREFIX(char_type, "][");
     buffers.sFormat += pszStringFormatSpecifier;
     buffers.sFormat += QX_STR_PREFIX(char_type, "::");
     buffers.sFormat += pszStringFormatSpecifier;
     buffers.sFormat += QX_STR_PREFIX(char_type, "::%d] ");
     buffers.sFormat += buffers.sMessage;
-    buffers.sMessage.sprintf(buffers.sFormat.c_str(), pszTag ? pszTag : "", pszFile, pszFunction, nLine);
+    buffers.sMessage.sprintf(buffers.sFormat.c_str(), pszCategory ? pszCategory : "", pszFile, pszFunction, nLine);
     buffers.sMessage += QX_CHAR_PREFIX(char_type, '\n');
 }
 

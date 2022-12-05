@@ -9,33 +9,33 @@
 **/
 #pragma once
 
+#include <qx/category.h>
 #include <qx/logger/base_logger_stream.h>
 #include <qx/patterns/singleton.h>
 
 #include <memory>
-#include <mutex>
 
 /**
     @def   QX_LOG_COMMON
     @brief Common macro for logging. Prefer using QX_TLOG or QX_LOG
     @param loggerInstance - logger instance 
-    @param pszTag         - tag, can be used to manage output 
+    @param category       - category to be used to manage output 
     @param eLogLevel      - logging level 
     @param format         - format string
     @param ...            - additional args for formatting
 **/
-#define QX_LOG_COMMON(loggerInstance, pszTag, eLogLevel, format, ...) \
-    loggerInstance.log(eLogLevel, format, pszTag, QX_SHORT_FILE, __FUNCTION__, __LINE__, ##__VA_ARGS__)
+#define QX_LOG_COMMON(loggerInstance, category, eLogLevel, format, ...) \
+    loggerInstance.log(eLogLevel, format, category, QX_SHORT_FILE, __FUNCTION__, __LINE__, ##__VA_ARGS__)
 
 /**
-    @brief Log with tag
-    @param pszTag    - tag, can be used to manage output
+    @brief Log with category
+    @param category  - category to be used to manage output
     @param eLogLevel - logging level
     @param format    - format string
     @param ...       - additional args for formatting
 **/
-#define QX_TLOG(pszTag, eLogLevel, format, ...) \
-    QX_LOG_COMMON(qx::logger_singleton::get_instance(), pszTag, eLogLevel, format, ##__VA_ARGS__)
+#define QX_LOG_C(category, eLogLevel, format, ...) \
+    QX_LOG_COMMON(qx::logger_singleton::get_instance(), category, eLogLevel, format, ##__VA_ARGS__)
 
 /**
     @def   QX_LOG
@@ -44,50 +44,10 @@
     @param format    - format string
     @param ...       - additional args for formatting
 **/
-#define QX_LOG(eLogLevel, format, ...) QX_TLOG(qx::log_tag(nullptr), eLogLevel, format, ##__VA_ARGS__)
-
-/**
-    @brief Define a log tag that may be used in QX_TLOG macro
-    @param name - log tag name
-**/
-#define QX_DEFINE_LOG_TAG(name) constexpr qx::log_tag name(#name);
-
+#define QX_LOG(eLogLevel, format, ...) QX_LOG_C(qx::category(nullptr), eLogLevel, format, ##__VA_ARGS__)
 
 namespace qx
 {
-
-/**
-
-    @class   log_tag
-    @brief   Class for identifying log tags
-    @details ~
-    @author  Khrapov
-    @date    12.11.2022
-
-**/
-class log_tag
-{
-public:
-    /**
-        @brief log_tag object constructor
-    **/
-    constexpr explicit log_tag(const char* pszName) : m_pszName(pszName)
-    {
-    }
-
-    /**
-        @brief  Get tag name
-        @retval tag name
-    **/
-    constexpr const char* get_name() const
-    {
-        return m_pszName;
-    }
-
-private:
-    const char* m_pszName = nullptr;
-};
-
 
 /**
 
@@ -106,7 +66,7 @@ public:
         @tparam char_type   - char type, typically char or wchar_t
         @param  eLogLevel   - log level
         @param  pszFormat   - format string
-        @param  tag         - logging tag
+        @param  category    - code category
         @param  pszFile     - file name string
         @param  pszFunction - function name string
         @param  nLine       - code line number
@@ -116,7 +76,7 @@ public:
     void log(
         log_level        eLogLevel,
         const char_type* pszFormat,
-        log_tag          tag,
+        category         category,
         const char*      pszFile,
         const char*      pszFunction,
         int              nLine,
@@ -127,7 +87,7 @@ public:
         @tparam char_type   - char type, typically char or wchar_t
         @param  eLogLevel   - log level
         @param  sFormat     - format string
-        @param  tag      - logging tag
+        @param  category    - code category
         @param  pszFile     - file name string
         @param  pszFunction - function name string
         @param  nLine       - code line number
@@ -137,7 +97,7 @@ public:
     void log(
         log_level                      eLogLevel,
         const basic_string<char_type>& sFormat,
-        log_tag                        tag,
+        category                       category,
         const char*                    pszFile,
         const char*                    pszFunction,
         int                            nLine,
@@ -155,7 +115,7 @@ private:
         @tparam char_type   - char type, typically char or wchar_t
         @param  eLogLevel   - log level
         @param  pszFormat   - format string
-        @param  pszTag      - logging tag
+        @param  pszCategory - code category name
         @param  pszFile     - file name string
         @param  pszFunction - function name string
         @param  nLine       - code line number
@@ -165,7 +125,7 @@ private:
     void do_log(
         log_level        eLogLevel,
         const char_type* pszFormat,
-        const char*      pszTag,
+        const char*      pszCategory,
         const char*      pszFile,
         const char*      pszFunction,
         int              nLine,
@@ -173,10 +133,6 @@ private:
 
 private:
     std::vector<std::unique_ptr<base_logger_stream>> m_Streams;
-
-    // simple synchronization so far
-    // may be improved if it will become a problem
-    std::mutex m_Mutex;
 };
 
 /**

@@ -14,6 +14,7 @@
 
 #include <ctime>
 #include <functional>
+#include <mutex>
 #include <unordered_map>
 
 namespace qx
@@ -36,7 +37,7 @@ struct logger_buffers
 {
     basic_string<char_type> sMessage; // result message (output)
     basic_string<char_type> sFormat;
-    basic_string<char_type> sTag;
+    basic_string<char_type> sCategory;
     basic_string<char_type> sFile;
     basic_string<char_type> sFunction;
 };
@@ -48,7 +49,7 @@ struct log_unit_info
         logger_buffers<char_type>& buffers,
         log_level                  eLogLevel,   // log level
         const char_type*           pszFormat,   // format string
-        const char_type*           pszTag,      // tracing tag
+        const char_type*           pszCategory, // code category name
         const char_type*           pszFile,     // file name
         const char_type*           pszFunction, // function name
         int                        nLine,       // code line number
@@ -104,7 +105,7 @@ public:
         @tparam char_type   - char type, typically char or wchar_t
         @param  eLogLevel   - log level
         @param  pszFormat   - format string
-        @param  pszTag      - tracing tag
+        @param  pszCategory - code category name
         @param  pszFile     - file name string
         @param  pszFunction - function name string
         @param  nLine       - code line number
@@ -114,7 +115,7 @@ public:
     void log(
         log_level        eLogLevel,
         const char_type* pszFormat,
-        const char*      pszTag,
+        const char*      pszCategory,
         const char*      pszFile,
         const char*      pszFunction,
         int              nLine,
@@ -122,14 +123,14 @@ public:
 
     /**
         @brief Register logger unit
-        @param svUnitName - unit name (tag, file or function) 
+        @param svUnitName - unit name (category name, file or function) 
         @param unit       - unit info 
     **/
     void register_unit(std::string_view svUnitName, const log_unit_info& unit) noexcept;
 
     /**
         @brief Deregister logger unit
-        @param svUnitName - unit name (tag, file or function)
+        @param svUnitName - unit name (category name, file or function)
     **/
     void deregister_unit(std::string_view svUnitName) noexcept;
 
@@ -169,12 +170,15 @@ private:
 
     /**
         @brief  Try to find log unit info based on trace location info
-        @param  pszTag      - tag string
+        @param  pszCategory - code category name
         @param  pszFile     - file string
         @param  pszFunction - function string
         @retval             - log unit info if found
     **/
-    std::optional<log_unit> get_unit_info(const char* pszTag, const char* pszFile, const char* pszFunction) noexcept;
+    std::optional<log_unit> get_unit_info(
+        const char* pszCategory,
+        const char* pszFile,
+        const char* pszFunction) noexcept;
 
     /**
         @brief Format logger line
@@ -182,7 +186,7 @@ private:
         @param  buffers     - string buffers to reduce num of allocations
         @param  eLogLevel   - log level
         @param  pszFormat   - format string
-        @param  pszTag      - tracing tag or nullptr
+        @param  pszCategory - code category name or nullptr
         @param  pszFile     - file name string
         @param  pszFunction - function name string
         @param  nLine       - code line number
@@ -193,7 +197,7 @@ private:
         logger_buffers<char_type>& buffers,
         log_level                  eLogLevel,
         const char_type*           pszFormat,
-        const char_type*           pszTag,
+        const char_type*           pszCategory,
         const char_type*           pszFile,
         const char_type*           pszFunction,
         int                        nLine,
@@ -203,6 +207,7 @@ private:
     std::unordered_map<string_hash, log_unit_info> m_Units;
     logger_buffers<char>                           m_BuffersChar;
     logger_buffers<wchar_t>                        m_BuffersWChar;
+    std::mutex                                     m_Mutex;
 };
 
 } // namespace qx

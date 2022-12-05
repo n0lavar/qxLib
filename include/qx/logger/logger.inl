@@ -14,7 +14,7 @@ template<class char_type>
 inline void logger::log(
     log_level        eLogLevel,
     const char_type* pszFormat,
-    log_tag          tag,
+    category         category,
     const char*      pszFile,
     const char*      pszFunction,
     int              nLine,
@@ -26,7 +26,7 @@ inline void logger::log(
     va_list args;
     va_start(args, nLine);
 
-    do_log(eLogLevel, pszFormat, tag.get_name(), pszFile, pszFunction, nLine, args);
+    do_log(eLogLevel, pszFormat, category.get_name(), pszFile, pszFunction, nLine, args);
 
     va_end(args);
 }
@@ -35,7 +35,7 @@ template<class char_type>
 inline void logger::log(
     log_level                      eLogLevel,
     const basic_string<char_type>& sFormat,
-    log_tag                        tag,
+    category                       category,
     const char*                    pszFile,
     const char*                    pszFunction,
     int                            nLine,
@@ -44,7 +44,7 @@ inline void logger::log(
     va_list args;
     va_start(args, nLine);
 
-    do_log(eLogLevel, sFormat.c_str(), tag.get_name(), pszFile, pszFunction, nLine, args);
+    do_log(eLogLevel, sFormat.c_str(), category.get_name(), pszFile, pszFunction, nLine, args);
 
     va_end(args);
 }
@@ -53,7 +53,7 @@ template<class char_type>
 inline void logger::do_log(
     log_level        eLogLevel,
     const char_type* pszFormat,
-    const char*      pszTag,
+    const char*      pszCategory,
     const char*      pszFile,
     const char*      pszFunction,
     int              nLine,
@@ -62,9 +62,8 @@ inline void logger::do_log(
     va_list argsCopy;
     va_copy(argsCopy, args);
 
-    std::lock_guard lock(m_Mutex);
     for (const auto& stream : m_Streams)
-        stream->log(eLogLevel, pszFormat, pszTag, pszFile, pszFunction, nLine, argsCopy);
+        stream->log(eLogLevel, pszFormat, pszCategory, pszFile, pszFunction, nLine, argsCopy);
 
     va_end(argsCopy);
 }
