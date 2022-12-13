@@ -60,43 +60,50 @@ inline void cout_logger_stream::log_cout(
     const log_unit&                   logUnit,
     log_level                         eLogLevel)
 {
+    auto& cout = get_cout<char_type>();
+
     if (m_bUsingColors)
     {
-        std::string_view svColor;
+        std::optional<qx::color> terminalColor;
         switch (eLogLevel)
         {
         case log_level::very_verbose:
         case log_level::verbose:
-            svColor = auto_terminal_color::font_dark_gray;
+            terminalColor = color::gray();
             break;
 
         case log_level::log:
-            svColor = auto_terminal_color::font_bright_white;
+            terminalColor = color::white();
             break;
 
         case log_level::important:
-            svColor = auto_terminal_color::font_bright_yellow;
+            terminalColor = color::khaki();
             break;
 
         case log_level::warning:
-            svColor = auto_terminal_color::font_yellow;
+            terminalColor = color::orange();
             break;
 
         case log_level::error:
-            svColor = auto_terminal_color::font_bright_red;
+            terminalColor = color::crimson();
             break;
 
         case log_level::critical:
-            svColor = auto_terminal_color::font_red;
+            terminalColor = color::dark_red();
             break;
         }
 
-        auto_terminal_color atc(svColor);
-        get_cout<char_type>() << svMessage;
+        if (terminalColor)
+            cout << terminal_color::font(*terminalColor);
+
+        cout << svMessage;
+
+        if (terminalColor)
+            cout << terminal_color::reset();
     }
     else
     {
-        get_cout<char_type>() << svMessage;
+        cout << svMessage;
     }
 }
 
