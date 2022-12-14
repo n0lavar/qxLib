@@ -5,7 +5,7 @@ var searchData=
   ['abs_3',['abs',['../math_2common_8h.html#ab465ef7b0d8760b14b3893514deeb8fd',1,'qx']]],
   ['add_4',['add',['../classqx_1_1components.html#ac4f33cdd7982e0ddff2d7572965d3966',1,'qx::components::add(std::unique_ptr&lt; TComponent &gt; pComponent)'],['../classqx_1_1components.html#ae17469b30a968bd2d9cc50dc59fe4fb1',1,'qx::components::add(Args &amp;&amp;... args)']]],
   ['add_2eh_5',['add.h',['../add_8h.html',1,'']]],
-  ['add_5fstream_6',['add_stream',['../classqx_1_1logger.html#a1f42b31b5c1648d6a28433bab15ef0b1',1,'qx::logger']]],
+  ['add_5fstream_6',['add_stream',['../classqx_1_1logger.html#abec0212ef10bb7feb65d6f587a989b61',1,'qx::logger']]],
   ['add_5fto_7',['add_to',['../classqx_1_1components.html#a238096007f620ba20efa2a51e4c4f338',1,'qx::components']]],
   ['add_5funique_8',['add_unique',['../add_8h.html#a9086baacc55be4df28b4fa211770597b',1,'qx']]],
   ['add_5funique_5fif_9',['add_unique_if',['../add_8h.html#a384340f231e422d69953da198c57d69c',1,'qx']]],
