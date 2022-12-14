@@ -10,7 +10,7 @@ var searchData=
   ['find_5fprime_5ffactors_992',['find_prime_factors',['../prime_8h.html#aab3f10fce9f921f99e04ab5407a38fc5',1,'qx']]],
   ['find_5fprimes_993',['find_primes',['../prime_8h.html#a0ec4c5edc263dd60ba02a7ce9d973d29',1,'qx']]],
   ['finish_994',['finish',['../classqx_1_1base__easing__element.html#a817dce8acd1d365b19f8e965dc4e7907',1,'qx::base_easing_element']]],
-  ['font_995',['font',['../classqx_1_1terminal__color.html#af296b6cc9ae12a683638fbb8a9eee40c',1,'qx::terminal_color']]],
+  ['font_995',['font',['../classqx_1_1terminal__color.html#a892a9091e6b4763aee54f6e83b7eafde',1,'qx::terminal_color']]],
   ['format_5ftime_5fstring_996',['format_time_string',['../classqx_1_1base__logger__stream.html#afde430836cbdcaa4a1d5bc85165f000a',1,'qx::base_logger_stream']]],
   ['free_997',['free',['../classqx_1_1basic__string.html#a817e8b625f8660b6dbeb18e8333f5017',1,'qx::basic_string::free()'],['../classqx_1_1string__data.html#a7778fbc6c2e656464d683c8f2e49dd32',1,'qx::string_data::free()'],['../classqx_1_1triangular__vector.html#a25cc8becd2609c9550808753f057dee5',1,'qx::triangular_vector::free()'],['../classqx_1_1vector2d.html#a1a559ba946f3a325ee2082bf52e98a73',1,'qx::vector2d::free()']]],
   ['from_998',['from',['../classqx_1_1basic__string.html#a59de4892bc4b926b3f72160d2cfdb7d3',1,'qx::basic_string']]],

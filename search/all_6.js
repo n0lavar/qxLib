@@ -16,7 +16,7 @@ var searchData=
   ['find_5fprimes_188',['find_primes',['../prime_8h.html#a0ec4c5edc263dd60ba02a7ce9d973d29',1,'qx']]],
   ['finish_189',['finish',['../classqx_1_1base__easing__element.html#a817dce8acd1d365b19f8e965dc4e7907',1,'qx::base_easing_element']]],
   ['folder_5ftime_190',['folder_time',['../file__logger__stream_8h.html#aaab6d2d26ae57b1521451921e1273220ae72f74ae2df7352c6eab42af73af67a2',1,'qx']]],
-  ['font_191',['font',['../classqx_1_1terminal__color.html#af296b6cc9ae12a683638fbb8a9eee40c',1,'qx::terminal_color']]],
+  ['font_191',['font',['../classqx_1_1terminal__color.html#a892a9091e6b4763aee54f6e83b7eafde',1,'qx::terminal_color']]],
   ['format_5ftime_5fstring_192',['format_time_string',['../classqx_1_1base__logger__stream.html#afde430836cbdcaa4a1d5bc85165f000a',1,'qx::base_logger_stream']]],
   ['frag_193',['frag',['../shaders_8h.html#ae891b980e1f40a70e11e8bfc320d898ea43cf0c43c2b82750b67586fe559677a1',1,'qx']]],
   ['free_194',['free',['../classqx_1_1vector2d.html#a1a559ba946f3a325ee2082bf52e98a73',1,'qx::vector2d::free()'],['../classqx_1_1triangular__vector.html#a25cc8becd2609c9550808753f057dee5',1,'qx::triangular_vector::free()'],['../classqx_1_1string__data.html#a7778fbc6c2e656464d683c8f2e49dd32',1,'qx::string_data::free()'],['../classqx_1_1basic__string.html#a817e8b625f8660b6dbeb18e8333f5017',1,'qx::basic_string::free() noexcept']]],

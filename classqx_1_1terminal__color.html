@@ -80,12 +80,12 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
-<tr class="memitem:af296b6cc9ae12a683638fbb8a9eee40c"><td class="memItemLeft" align="right" valign="top">static constexpr <a class="el" href="classqx_1_1terminal__color.html">terminal_color</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1terminal__color.html#af296b6cc9ae12a683638fbb8a9eee40c">font</a> (const <a class="el" href="classqx_1_1color.html">color</a> &amp;<a class="el" href="classqx_1_1color.html">color</a>) noexcept</td></tr>
-<tr class="memdesc:af296b6cc9ae12a683638fbb8a9eee40c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set font color.  <a href="classqx_1_1terminal__color.html#af296b6cc9ae12a683638fbb8a9eee40c">More...</a><br /></td></tr>
-<tr class="separator:af296b6cc9ae12a683638fbb8a9eee40c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8c51c6b3d3d40ac115eef227521a46e9"><td class="memItemLeft" align="right" valign="top">static constexpr <a class="el" href="classqx_1_1terminal__color.html">terminal_color</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1terminal__color.html#a8c51c6b3d3d40ac115eef227521a46e9">back</a> (const <a class="el" href="classqx_1_1color.html">color</a> &amp;<a class="el" href="classqx_1_1color.html">color</a>) noexcept</td></tr>
-<tr class="memdesc:a8c51c6b3d3d40ac115eef227521a46e9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set background color.  <a href="classqx_1_1terminal__color.html#a8c51c6b3d3d40ac115eef227521a46e9">More...</a><br /></td></tr>
-<tr class="separator:a8c51c6b3d3d40ac115eef227521a46e9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a892a9091e6b4763aee54f6e83b7eafde"><td class="memItemLeft" align="right" valign="top">static constexpr <a class="el" href="classqx_1_1terminal__color.html">terminal_color</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1terminal__color.html#a892a9091e6b4763aee54f6e83b7eafde">font</a> (const <a class="el" href="classqx_1_1color.html">color</a> &amp;fontColor) noexcept</td></tr>
+<tr class="memdesc:a892a9091e6b4763aee54f6e83b7eafde"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set font color.  <a href="classqx_1_1terminal__color.html#a892a9091e6b4763aee54f6e83b7eafde">More...</a><br /></td></tr>
+<tr class="separator:a892a9091e6b4763aee54f6e83b7eafde"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae9fb7dde44b497fbc0465dc6e68dc5cb"><td class="memItemLeft" align="right" valign="top">static constexpr <a class="el" href="classqx_1_1terminal__color.html">terminal_color</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1terminal__color.html#ae9fb7dde44b497fbc0465dc6e68dc5cb">back</a> (const <a class="el" href="classqx_1_1color.html">color</a> &amp;bgColor) noexcept</td></tr>
+<tr class="memdesc:ae9fb7dde44b497fbc0465dc6e68dc5cb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set background color.  <a href="classqx_1_1terminal__color.html#ae9fb7dde44b497fbc0465dc6e68dc5cb">More...</a><br /></td></tr>
+<tr class="separator:ae9fb7dde44b497fbc0465dc6e68dc5cb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a712277ca54e216847f8aaa11ccb473ea"><td class="memItemLeft" align="right" valign="top">static constexpr <a class="el" href="classqx_1_1terminal__color.html">terminal_color</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1terminal__color.html#a712277ca54e216847f8aaa11ccb473ea">reset</a> () noexcept</td></tr>
 <tr class="memdesc:a712277ca54e216847f8aaa11ccb473ea"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reset all colors.  <a href="classqx_1_1terminal__color.html#a712277ca54e216847f8aaa11ccb473ea">More...</a><br /></td></tr>
 <tr class="separator:a712277ca54e216847f8aaa11ccb473ea"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -98,14 +98,14 @@ static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hre
 <div class="textblock"><p>Class for colors manipulating in terminal. </p>
 <p>Always check which colors are available in your machine, for ex. with <a class="el" href="classqx_1_1terminal__color.html#a5d530ea00dcb1331f39eece0965fb5b8" title="Output colors available in qx::color to test if terminal color work.">qx::terminal_color::test_colors()</a> </p><dl class="section author"><dt>Author</dt><dd>Khrapov </dd></dl>
 <dl class="section date"><dt>Date</dt><dd>13.12.2022</dd></dl>
-<div class="fragment"><div class="line">std::cout &lt;&lt; <a class="code" href="classqx_1_1terminal__color.html#af296b6cc9ae12a683638fbb8a9eee40c">qx::terminal_color::font</a>(qx::color::green()) &lt;&lt; <span class="stringliteral">&quot;green&quot;</span> &lt;&lt; <a class="code" href="classqx_1_1terminal__color.html#a712277ca54e216847f8aaa11ccb473ea">qx::terminal_color::reset</a>() &lt;&lt; std::endl;</div>
+<div class="fragment"><div class="line">std::cout &lt;&lt; <a class="code" href="classqx_1_1terminal__color.html#a892a9091e6b4763aee54f6e83b7eafde">qx::terminal_color::font</a>(qx::color::green()) &lt;&lt; <span class="stringliteral">&quot;green&quot;</span> &lt;&lt; <a class="code" href="classqx_1_1terminal__color.html#a712277ca54e216847f8aaa11ccb473ea">qx::terminal_color::reset</a>() &lt;&lt; std::endl;</div>
 <div class="ttc" id="aclassqx_1_1terminal__color_html_a712277ca54e216847f8aaa11ccb473ea"><div class="ttname"><a href="classqx_1_1terminal__color.html#a712277ca54e216847f8aaa11ccb473ea">qx::terminal_color::reset</a></div><div class="ttdeci">static constexpr terminal_color reset() noexcept</div><div class="ttdoc">Reset all colors.</div><div class="ttdef"><b>Definition:</b> <a href="terminal__color_8inl_source.html#l00055">terminal_color.inl:55</a></div></div>
-<div class="ttc" id="aclassqx_1_1terminal__color_html_af296b6cc9ae12a683638fbb8a9eee40c"><div class="ttname"><a href="classqx_1_1terminal__color.html#af296b6cc9ae12a683638fbb8a9eee40c">qx::terminal_color::font</a></div><div class="ttdeci">static constexpr terminal_color font(const color &amp;color) noexcept</div><div class="ttdoc">Set font color.</div><div class="ttdef"><b>Definition:</b> <a href="terminal__color_8inl_source.html#l00045">terminal_color.inl:45</a></div></div>
+<div class="ttc" id="aclassqx_1_1terminal__color_html_a892a9091e6b4763aee54f6e83b7eafde"><div class="ttname"><a href="classqx_1_1terminal__color.html#a892a9091e6b4763aee54f6e83b7eafde">qx::terminal_color::font</a></div><div class="ttdeci">static constexpr terminal_color font(const color &amp;fontColor) noexcept</div><div class="ttdoc">Set font color.</div><div class="ttdef"><b>Definition:</b> <a href="terminal__color_8inl_source.html#l00045">terminal_color.inl:45</a></div></div>
 </div><!-- fragment --> 
 <p class="definition">Definition at line <a class="el" href="terminal__color_8h_source.html#l00047">47</a> of file <a class="el" href="terminal__color_8h_source.html">terminal_color.h</a>.</p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
-<a id="a8c51c6b3d3d40ac115eef227521a46e9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8c51c6b3d3d40ac115eef227521a46e9">&#9670;&nbsp;</a></span>back()</h2>
+<a id="ae9fb7dde44b497fbc0465dc6e68dc5cb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae9fb7dde44b497fbc0465dc6e68dc5cb">&#9670;&nbsp;</a></span>back()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -117,7 +117,7 @@ static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hre
           <td class="memname">constexpr <a class="el" href="classqx_1_1terminal__color.html">terminal_color</a> qx::terminal_color::back </td>
           <td>(</td>
           <td class="paramtype">const <a class="el" href="classqx_1_1color.html">color</a> &amp;&#160;</td>
-          <td class="paramname"><em>color</em></td><td>)</td>
+          <td class="paramname"><em>bgColor</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -131,7 +131,7 @@ static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hre
 <p>Set background color. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">color</td><td>- new background color </td></tr>
+    <tr><td class="paramname">bgColor</td><td>- new background color </td></tr>
   </table>
   </dd>
 </dl>
@@ -146,8 +146,8 @@ static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hre
 
 </div>
 </div>
-<a id="af296b6cc9ae12a683638fbb8a9eee40c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af296b6cc9ae12a683638fbb8a9eee40c">&#9670;&nbsp;</a></span>font()</h2>
+<a id="a892a9091e6b4763aee54f6e83b7eafde"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a892a9091e6b4763aee54f6e83b7eafde">&#9670;&nbsp;</a></span>font()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -159,7 +159,7 @@ static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hre
           <td class="memname">constexpr <a class="el" href="classqx_1_1terminal__color.html">terminal_color</a> qx::terminal_color::font </td>
           <td>(</td>
           <td class="paramtype">const <a class="el" href="classqx_1_1color.html">color</a> &amp;&#160;</td>
-          <td class="paramname"><em>color</em></td><td>)</td>
+          <td class="paramname"><em>fontColor</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -173,7 +173,7 @@ static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hre
 <p>Set font color. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">color</td><td>- new font color </td></tr>
+    <tr><td class="paramname">fontColor</td><td>- new font color </td></tr>
   </table>
   </dd>
 </dl>
