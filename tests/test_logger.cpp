@@ -117,19 +117,19 @@ protected:
             pFileLoggerStream->register_unit(
                 Traits::GetCategory(),
                 { qx::log_level::log,
-                  [](qx::logger_buffers<char>& buffers,
+                  [](qx::logger_buffer<char>& buffers,
                      qx::log_level,
-                     const char*      pszFormat,
-                     std::string_view svCategory,
-                     std::string_view,
-                     std::string_view,
+                     const qx::category& category,
+                     const char*         pszFormat,
+                     const char*,
+                     const char*,
                      int,
                      va_list args)
                   {
                       buffers.sMessage.vsprintf(pszFormat, args);
                       qx::base_logger_stream::format_time_string(buffers.sFormat);
-                      buffers.sMessage =
-                          qx::string("   [") + buffers.sFormat + "][" + svCategory + "] " + buffers.sMessage + '\n';
+                      buffers.sMessage = qx::string("   [") + buffers.sFormat + "][" + category.get_name() + "] "
+                                         + buffers.sMessage + '\n';
                   } });
 
             pFileLoggerStream->register_file(Traits::GetCategory(), Traits::GetLogsFile());

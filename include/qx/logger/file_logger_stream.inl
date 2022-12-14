@@ -12,7 +12,7 @@ namespace qx
 
 inline file_logger_stream::file_logger_stream()
 {
-    string& sTime = get_string_buffers<char>().sFormat;
+    string& sTime = get_log_buffer<char>().sFormat;
     format_time_string(sTime);
     m_sSessionTime = sTime + '/';
 }
@@ -33,12 +33,20 @@ inline file_logger_stream::~file_logger_stream()
     }
 }
 
-inline void file_logger_stream::do_log(std::string_view svMessage, const log_unit& logUnit, log_level eLogLevel)
+inline void file_logger_stream::do_log(
+    std::string_view                       svMessage,
+    const log_unit&                        logUnit,
+    const std::vector<logger_color_range>& colors,
+    log_level                              eLogLevel)
 {
     log_file(svMessage, logUnit, eLogLevel);
 }
 
-inline void file_logger_stream::do_log(std::wstring_view svMessage, const log_unit& logUnit, log_level eLogLevel)
+inline void file_logger_stream::do_log(
+    std::wstring_view                      svMessage,
+    const log_unit&                        logUnit,
+    const std::vector<logger_color_range>& colors,
+    log_level                              eLogLevel)
 {
     log_file(svMessage, logUnit, eLogLevel);
 }

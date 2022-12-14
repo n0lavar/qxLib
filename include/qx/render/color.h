@@ -312,10 +312,8 @@ public:
     **/
     constexpr static color brighten(const color& other, float fPercent) noexcept;
 
-    /// @addtogroup color_functions
     /// Color functions
     /// @see https://www.cssportal.com/html-colors/x11-colors.php
-    /// @{
 
     // clang-format off
     static constexpr auto alice_blue             (float fAlpha = 1.f) noexcept { return color(240, 248, 255, float_to_dec(fAlpha)); }
@@ -459,8 +457,6 @@ public:
     static constexpr auto yellow                 (float fAlpha = 1.f) noexcept { return color(255, 255, 0, float_to_dec(fAlpha)); }
     static constexpr auto yellow_green           (float fAlpha = 1.f) noexcept { return color(154, 205, 50, float_to_dec(fAlpha)); }
     // clang-format on
-
-    /// @}
 
     /**
         @brief   Get empty color (0, 0, 0, 0)

@@ -30,14 +30,22 @@ inline cout_logger_stream::cout_logger_stream(bool bUseColors, bool bDisableStdi
     }
 }
 
-inline void cout_logger_stream::do_log(std::string_view svMessage, const log_unit& logUnit, log_level eLogLevel)
+inline void cout_logger_stream::do_log(
+    std::string_view                       svMessage,
+    const log_unit&                        logUnit,
+    const std::vector<logger_color_range>& colors,
+    log_level                              eLogLevel)
 {
-    log_cout(svMessage, logUnit, eLogLevel);
+    log_cout(svMessage, logUnit, colors, eLogLevel);
 }
 
-inline void cout_logger_stream::do_log(std::wstring_view svMessage, const log_unit& logUnit, log_level eLogLevel)
+inline void cout_logger_stream::do_log(
+    std::wstring_view                      svMessage,
+    const log_unit&                        logUnit,
+    const std::vector<logger_color_range>& colors,
+    log_level                              eLogLevel)
 {
-    log_cout(svMessage, logUnit, eLogLevel);
+    log_cout(svMessage, logUnit, colors, eLogLevel);
 }
 
 inline void cout_logger_stream::set_using_colors(bool bUsingColors) noexcept
@@ -56,50 +64,61 @@ inline std::basic_ostream<char_type>& cout_logger_stream::get_cout() noexcept
 
 template<class char_type>
 inline void cout_logger_stream::log_cout(
-    std::basic_string_view<char_type> svMessage,
-    const log_unit&                   logUnit,
-    log_level                         eLogLevel)
+    std::basic_string_view<char_type>      svMessage,
+    const log_unit&                        logUnit,
+    const std::vector<logger_color_range>& colors,
+    log_level                              eLogLevel)
 {
     auto& cout = get_cout<char_type>();
 
     if (m_bUsingColors)
     {
-        std::optional<qx::color> terminalColor;
+        color commonColor = color::white();
         switch (eLogLevel)
         {
         case log_level::very_verbose:
         case log_level::verbose:
-            terminalColor = color::gray();
+            commonColor = color::gray();
             break;
 
         case log_level::log:
-            terminalColor = color::white();
+            commonColor = color::white();
             break;
 
         case log_level::important:
-            terminalColor = color::khaki();
+            commonColor = color::khaki();
             break;
 
         case log_level::warning:
-            terminalColor = color::orange();
+            commonColor = color::orange();
             break;
 
         case log_level::error:
-            terminalColor = color::crimson();
+            commonColor = color::crimson();
             break;
 
         case log_level::critical:
-            terminalColor = color::dark_red();
+            commonColor = color::dark_red();
             break;
         }
 
-        if (terminalColor)
-            cout << terminal_color::font(*terminalColor);
+        auto cout_colorized = [&cout, svMessage](size_t nStart, size_t nEnd, const color& color)
+        {
+            cout << terminal_color::font(color)
+                 << std::basic_string_view<char_type> { svMessage.data() + nStart, nEnd - nStart }
+                 << terminal_color::reset();
+        };
 
-        cout << svMessage;
+        cout_colorized(0, colors.empty() ? svMessage.size() : colors.front().range.first, commonColor);
 
-        if (terminalColor)
-            cout << terminal_color::reset();
+        for (size_t i = 0; i < colors.size(); ++i)
+        {
+            cout_colorized(colors[i].range.first, colors[i].range.second, colors[i].color);
+            cout_colorized(
+                colors[i].range.second,
+                i + 1 < colors.size() ? colors[i + 1].range.first : svMessage.size(),
+                commonColor);
+        }
     }
     else
     {

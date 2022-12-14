@@ -9,6 +9,7 @@
 **/
 #pragma once
 
+#include <qx/category.h>
 #include <qx/containers/string/string_converters.h>
 #include <qx/macros/suppress_warnings.h>
 
@@ -22,38 +23,57 @@ namespace qx
 
 enum class log_level
 {
-    very_verbose,
-    verbose,
-    log,
-    important,
-    warning,
-    error,
-    critical,
-    none,
+    very_verbose, // very frequently repeated messages, for example, on every update
+    verbose,      // messages you don't want to be displayed by default
+    log,          // default level
+    important,    // same as log but highlighted if possible
+    warning,      // not yet an error, but something to look out for
+    error,        // an error after which it is possible to continue the program
+    critical,     // an error that makes it impossible to continue the program
+    none,         // message is not displayed
+};
+
+struct logger_color_range
+{
+    std::pair<size_t, size_t> range { 0, 0 };
+    color                     color = color::white();
 };
 
 template<class char_type>
-struct logger_buffers
+struct logger_buffer
 {
     basic_string<char_type> sMessage; // result message (output)
     basic_string<char_type> sFormat;
-    basic_string<char_type> sCategory;
     basic_string<char_type> sFile;
     basic_string<char_type> sFunction;
+    basic_string<char_type> sCategory;
+
+    // ranges must not intersect and must increase
+    std::vector<logger_color_range> colors;
+
+    void clear()
+    {
+        sMessage.clear();
+        sFormat.clear();
+        sFile.clear();
+        sFunction.clear();
+        sCategory.clear();
+        colors.clear();
+    }
 };
 
 struct log_unit_info
 {
     template<class char_type>
     using format_func = std::function<void(
-        logger_buffers<char_type>& buffers,
-        log_level                  eLogLevel,   // log level
-        const char_type*           pszFormat,   // format string
-        const char_type*           pszCategory, // code category name
-        const char_type*           pszFile,     // file name
-        const char_type*           pszFunction, // function name
-        int                        nLine,       // code line number
-        va_list                    args         // additional args for format
+        logger_buffer<char_type>& buffers,
+        log_level                 eLogLevel,   // log level
+        const category&           category,    // code category
+        const char_type*          pszFormat,   // format string
+        const char_type*          pszFile,     // file name
+        const char_type*          pszFunction, // function name
+        int                       nLine,       // code line number
+        va_list                   args         // additional args for format
         )>;
 
     /**
@@ -105,7 +125,7 @@ public:
         @tparam char_type   - char type, typically char or wchar_t
         @param  eLogLevel   - log level
         @param  pszFormat   - format string
-        @param  pszCategory - code category name
+        @param  category    - code category
         @param  pszFile     - file name string
         @param  pszFunction - function name string
         @param  nLine       - code line number
@@ -115,7 +135,7 @@ public:
     void log(
         log_level        eLogLevel,
         const char_type* pszFormat,
-        const char*      pszCategory,
+        const category&  category,
         const char*      pszFile,
         const char*      pszFunction,
         int              nLine,
@@ -149,24 +169,34 @@ protected:
         @retval           - string buffers
     **/
     template<class char_type>
-    logger_buffers<char_type>& get_string_buffers() noexcept;
+    logger_buffer<char_type>& get_log_buffer() noexcept;
 
 private:
     /**
         @brief Proceed stream logging
         @param svMessage - message string
         @param logUnit   - log unit info
+        @param colors    - color ranges to colorize output
         @param eLogLevel - this message log level
     **/
-    virtual void do_log(std::string_view svMessage, const log_unit& logUnit, log_level eLogLevel) = 0;
+    virtual void do_log(
+        std::string_view                       svMessage,
+        const log_unit&                        logUnit,
+        const std::vector<logger_color_range>& colors,
+        log_level                              eLogLevel) = 0;
 
     /**
         @brief Proceed stream logging
         @param svMessage - message string
         @param logUnit   - log unit info
+        @param colors    - color ranges to colorize output
         @param eLogLevel - this message log level
     **/
-    virtual void do_log(std::wstring_view svMessage, const log_unit& logUnit, log_level eLogLevel) = 0;
+    virtual void do_log(
+        std::wstring_view                      svMessage,
+        const log_unit&                        logUnit,
+        const std::vector<logger_color_range>& colors,
+        log_level                              eLogLevel) = 0;
 
     /**
         @brief  Try to find log unit info based on trace location info
@@ -185,8 +215,8 @@ private:
         @tparam char_type   - char type, typically char or wchar_t
         @param  buffers     - string buffers to reduce num of allocations
         @param  eLogLevel   - log level
+        @param  category    - code category
         @param  pszFormat   - format string
-        @param  pszCategory - code category name or nullptr
         @param  pszFile     - file name string
         @param  pszFunction - function name string
         @param  nLine       - code line number
@@ -194,19 +224,19 @@ private:
     **/
     template<class char_type>
     static void format_line(
-        logger_buffers<char_type>& buffers,
-        log_level                  eLogLevel,
-        const char_type*           pszFormat,
-        const char_type*           pszCategory,
-        const char_type*           pszFile,
-        const char_type*           pszFunction,
-        int                        nLine,
-        va_list                    args) noexcept;
+        logger_buffer<char_type>& buffers,
+        log_level                 eLogLevel,
+        const category&           category,
+        const char_type*          pszFormat,
+        const char_type*          pszFile,
+        const char_type*          pszFunction,
+        int                       nLine,
+        va_list                   args) noexcept;
 
 private:
     std::unordered_map<string_hash, log_unit_info> m_Units;
-    logger_buffers<char>                           m_BuffersChar;
-    logger_buffers<wchar_t>                        m_BuffersWChar;
+    logger_buffer<char>                            m_BufferChar;
+    logger_buffer<wchar_t>                         m_BufferWChar;
     std::mutex                                     m_Mutex;
 };
 

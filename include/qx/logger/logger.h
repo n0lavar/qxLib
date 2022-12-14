@@ -9,7 +9,6 @@
 **/
 #pragma once
 
-#include <qx/category.h>
 #include <qx/logger/base_logger_stream.h>
 #include <qx/patterns/singleton.h>
 
@@ -76,7 +75,7 @@ public:
     void log(
         log_level        eLogLevel,
         const char_type* pszFormat,
-        category         category,
+        const category&  category,
         const char*      pszFile,
         const char*      pszFunction,
         int              nLine,
@@ -97,7 +96,7 @@ public:
     void log(
         log_level                      eLogLevel,
         const basic_string<char_type>& sFormat,
-        category                       category,
+        const category&                category,
         const char*                    pszFile,
         const char*                    pszFunction,
         int                            nLine,
@@ -115,7 +114,7 @@ private:
         @tparam char_type   - char type, typically char or wchar_t
         @param  eLogLevel   - log level
         @param  pszFormat   - format string
-        @param  pszCategory - code category name
+        @param  category    - code category
         @param  pszFile     - file name string
         @param  pszFunction - function name string
         @param  nLine       - code line number
@@ -125,7 +124,7 @@ private:
     void do_log(
         log_level        eLogLevel,
         const char_type* pszFormat,
-        const char*      pszCategory,
+        const category&  category,
         const char*      pszFile,
         const char*      pszFunction,
         int              nLine,

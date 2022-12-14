@@ -41,17 +41,27 @@ public:
         @brief Output to std::cout
         @param svMessage - message string
         @param logUnit   - log unit info
+        @param colors    - color ranges to colorize output
         @param eLogLevel - this message log level
     **/
-    virtual void do_log(std::string_view svMessage, const log_unit& logUnit, log_level eLogLevel) override;
+    virtual void do_log(
+        std::string_view                       svMessage,
+        const log_unit&                        logUnit,
+        const std::vector<logger_color_range>& colors,
+        log_level                              eLogLevel) override;
 
     /**
         @brief Output to std::wcout
         @param svMessage - message string
         @param logUnit   - log unit info
+        @param colors    - color ranges to colorize output
         @param eLogLevel - this message log level
     **/
-    virtual void do_log(std::wstring_view svMessage, const log_unit& logUnit, log_level eLogLevel) override;
+    virtual void do_log(
+        std::wstring_view                      svMessage,
+        const log_unit&                        logUnit,
+        const std::vector<logger_color_range>& colors,
+        log_level                              eLogLevel) override;
 
     /**
         @brief Set whether cout output should be colored
@@ -73,10 +83,15 @@ private:
         @tparam char_type - char type
         @param  svMessage - message string
         @param  logUnit   - log unit info
+        @param  colors    - color ranges to colorize output
         @param  eLogLevel - this message log level
     **/
     template<class char_type>
-    void log_cout(std::basic_string_view<char_type> svMessage, const log_unit& logUnit, log_level eLogLevel);
+    void log_cout(
+        std::basic_string_view<char_type>      svMessage,
+        const log_unit&                        logUnit,
+        const std::vector<logger_color_range>& colors,
+        log_level                              eLogLevel);
 
 private:
     bool m_bUsingColors = true;

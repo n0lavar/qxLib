@@ -59,17 +59,27 @@ public:
         @brief Output to file
         @param svMessage - message string 
         @param logUnit   - log unit info
+        @param colors    - color ranges to colorize output
         @param eLogLevel - this message log level
     **/
-    virtual void do_log(std::string_view svMessage, const log_unit& logUnit, log_level eLogLevel) override;
+    virtual void do_log(
+        std::string_view                       svMessage,
+        const log_unit&                        logUnit,
+        const std::vector<logger_color_range>& colors,
+        log_level                              eLogLevel) override;
 
     /**
         @brief Output to file
         @param svMessage - message string 
         @param logUnit   - log unit info
+        @param colors    - color ranges to colorize output
         @param eLogLevel - this message log level
     **/
-    virtual void do_log(std::wstring_view svMessage, const log_unit& logUnit, log_level eLogLevel) override;
+    virtual void do_log(
+        std::wstring_view                      svMessage,
+        const log_unit&                        logUnit,
+        const std::vector<logger_color_range>& colors,
+        log_level                              eLogLevel) override;
 
     /**
         @brief Set logs folder
