@@ -32,21 +32,21 @@ inline void base_shader_program::AttachShader(shader_base<ShaderType>* pShader) 
     glAttachShader(m_nProgram, pShader->GetID());
 }
 
-inline bool base_shader_program::Link() noexcept
+inline string base_shader_program::Link() noexcept
 {
+    string sError;
+
     glLinkProgram(m_nProgram);
     const GLint bSuccess = GetParameter(GL_LINK_STATUS);
 
     if (bSuccess != GL_TRUE)
     {
         const GLsizei nLogLength = GetParameter(GL_INFO_LOG_LENGTH);
-        string        sError(nLogLength, '\0');
+        sError                   = string(nLogLength, '\0');
         glGetProgramInfoLog(m_nProgram, nLogLength, nullptr, sError.data());
-
-        QX_LIB_EXPECT_MSG(0, sError.data());
     }
 
-    return bSuccess == GL_TRUE;
+    return sError;
 }
 
 inline void base_shader_program::Use() const noexcept
@@ -208,9 +208,7 @@ inline void base_shader_program::SetUniform(const GLchar* pszName, const T& valu
 
 inline GLint base_shader_program::GetUniformLocation(const GLchar* pszName) const noexcept
 {
-    const GLint nLocation = glGetUniformLocation(m_nProgram, pszName);
-    QX_LIB_EXPECT_MSG(nLocation >= 0, "Cant find uniform \"%s\"", pszName);
-    return nLocation;
+    return glGetUniformLocation(m_nProgram, pszName);
 }
 
 inline bool base_shader_program::AddInclude(

@@ -10,7 +10,6 @@
 #pragma once
 
 #include <qx/gl/shaders.h>
-#include <qx/lib_config/lib_asserts.h>
 
 #include <glew.h>
 #include <glm/gtc/type_ptr.hpp>
@@ -63,9 +62,9 @@ public:
 
     /**
         @brief  Link attached shaders
-        @retval - true if success
+        @retval - error string or empty string if success
     **/
-    bool Link() noexcept;
+    string Link() noexcept;
 
     /**
         @brief Use shader program

@@ -38,13 +38,12 @@ inline string shader_base<ShaderType>::Init(const GLchar* pszShaderCode)
             {
                 sError.assign(nErrorStringLength, '\0');
                 glGetShaderInfoLog(m_nShader, nErrorStringLength, nullptr, sError.data());
-                QX_LIB_EXPECT_MSG(0, sError.data());
             }
         }
     }
     else
     {
-        QX_LIB_EXPECT_MSG(0, "Nullptr passed as shader text pointer");
+        sError = "Nullptr passed as shader text pointer";
     }
 
     return sError;

@@ -9,7 +9,7 @@
 **/
 #pragma once
 
-#include <qx/lib_config/lib_asserts.h>
+#include <qx/containers/string/string.h>
 #include <qx/macros/copyable_movable.h>
 
 #include <glew.h>
@@ -54,10 +54,6 @@ public:
     **/
     ~shader_base();
 
-    /**
-        @brief Init (compile) shader
-        @param pszShaderCode - string with shader code
-    **/
     /**
         @brief  Init (compile) shader
         @param  pszShaderCode - string with shader code

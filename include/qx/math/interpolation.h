@@ -10,7 +10,6 @@
 **/
 #pragma once
 
-#include <qx/lib_config/lib_asserts.h>
 #include <qx/math/common.h>
 
 QX_PUSH_SUPPRESS_ALL_WARNINGS
@@ -29,7 +28,9 @@ namespace qx
 **/
 inline double linear_interpolation(const glm::dvec2& p0, const glm::dvec2& p1, double x)
 {
-    QX_LIB_EXPECT_RETURN(!epsilon_equal(p1.x, p0.x) && "Two x are equal, result is nan", p0.y);
+    if (epsilon_equal(p1.x, p0.x))
+        return p0.y;
+
     return p0.y + (p1.y - p0.y) * (x - p0.x) / (p1.x - p0.x);
 }
 
