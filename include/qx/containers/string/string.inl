@@ -80,10 +80,10 @@ inline void basic_string<char_type, traits_type>::assign(size_type nSymbols, val
 }
 
 template<class char_type, class traits_type>
-inline void basic_string<char_type, traits_type>::assign(const_pointer pSource, size_type nSymbols) noexcept
+inline void basic_string<char_type, traits_type>::assign(const_pointer pszSource, size_type nSymbols) noexcept
 {
-    if (_resize(nSymbols))
-        std::memmove(data(), pSource, nSymbols * sizeof(value_type));
+    if (pszSource && _resize(nSymbols))
+        std::memmove(data(), pszSource, nSymbols * sizeof(value_type));
 }
 
 template<class char_type, class traits_type>
@@ -134,22 +134,28 @@ inline void basic_string<char_type, traits_type>::assign(const string_type& sAno
 template<class char_type, class traits_type>
 void basic_string<char_type, traits_type>::sprintf(const_pointer pszFormat, ...) noexcept
 {
-    va_list args;
-    va_start(args, pszFormat);
-    this->vsprintf(pszFormat, args);
-    va_end(args);
+    if (pszFormat)
+    {
+        va_list args;
+        va_start(args, pszFormat);
+        this->vsprintf(pszFormat, args);
+        va_end(args);
+    }
 }
 
 template<class char_type, class traits_type>
 inline void basic_string<char_type, traits_type>::vsprintf(const_pointer pszFormat, va_list args) noexcept
 {
-    va_list argsCopy;
-    va_copy(argsCopy, args);
-    int nLength = traits_type::vsnprintf(nullptr, 0, pszFormat, argsCopy);
-    va_end(argsCopy);
+    if (pszFormat)
+    {
+        va_list argsCopy;
+        va_copy(argsCopy, args);
+        int nLength = traits_type::vsnprintf(nullptr, 0, pszFormat, argsCopy);
+        va_end(argsCopy);
 
-    if (nLength > 0 && _resize(static_cast<size_type>(nLength)))
-        traits_type::vsnprintf(data(), static_cast<size_type>(nLength) + 1, pszFormat, args);
+        if (nLength > 0 && _resize(static_cast<size_type>(nLength)))
+            traits_type::vsnprintf(data(), static_cast<size_type>(nLength) + 1, pszFormat, args);
+    }
 }
 
 template<class char_type, class traits_type>
@@ -160,30 +166,34 @@ inline basic_string<char_type, traits_type> basic_string<char_type, traits_type>
 {
     basic_string sTemp;
     sTemp.sprintf(pszFormat, args...);
-    return std::move(sTemp);
+    return sTemp;
 }
 
 template<class char_type, class traits_type>
 inline void basic_string<char_type, traits_type>::append_sprintf(const_pointer pszFormat, ...) noexcept
 {
-    va_list args;
-    va_start(args, pszFormat);
-    append_vsprintf(pszFormat, args);
-    va_end(args);
+    if (pszFormat)
+    {
+        va_list args;
+        va_start(args, pszFormat);
+        append_vsprintf(pszFormat, args);
+        va_end(args);
+    }
 }
 
 template<class char_type, class traits_type>
 inline void basic_string<char_type, traits_type>::append_vsprintf(const_pointer pszFormat, va_list args) noexcept
 {
-    va_list argsCopy;
-    va_copy(argsCopy, args);
-    int nLength = traits_type::vsnprintf(nullptr, 0, pszFormat, argsCopy);
-    va_end(argsCopy);
-
-    const size_type nSize = size();
-    if (nLength > 0 && _resize(nSize + static_cast<size_type>(nLength)))
+    if (pszFormat)
     {
-        traits_type::vsnprintf(data() + nSize, static_cast<size_type>(nLength) + 1, pszFormat, args);
+        va_list argsCopy;
+        va_copy(argsCopy, args);
+        int nLength = traits_type::vsnprintf(nullptr, 0, pszFormat, argsCopy);
+        va_end(argsCopy);
+
+        const size_type nSize = size();
+        if (nLength > 0 && _resize(nSize + static_cast<size_type>(nLength)))
+            traits_type::vsnprintf(data() + nSize, static_cast<size_type>(nLength) + 1, pszFormat, args);
     }
 }
 
@@ -402,11 +412,14 @@ inline void basic_string<char_type, traits_type>::append(value_type chSymbol) no
 template<class char_type, class traits_type>
 inline void basic_string<char_type, traits_type>::append(const_pointer pszStr, size_type nSymbols) noexcept
 {
-    const size_type nSize       = size();
-    const size_type nSizeSource = nSymbols == npos ? traits_type::length(pszStr) : nSymbols;
+    if (pszStr)
+    {
+        const size_type nSize       = size();
+        const size_type nSizeSource = nSymbols == npos ? traits_type::length(pszStr) : nSymbols;
 
-    if (_resize(nSize + nSizeSource))
-        std::memcpy(data() + nSize, pszStr, nSizeSource * sizeof(value_type));
+        if (_resize(nSize + nSizeSource))
+            std::memcpy(data() + nSize, pszStr, nSizeSource * sizeof(value_type));
+    }
 }
 
 template<class char_type, class traits_type>
@@ -444,19 +457,20 @@ inline typename basic_string<char_type, traits_type>::size_type basic_string<cha
     const_pointer pszWhat,
     size_type     nSymbols) noexcept
 {
-    const size_type nSize       = size();
-    const size_type nSizeSource = nSymbols == npos ? traits_type::length(pszWhat) : nSymbols;
+    if (pszWhat)
+    {
+        const size_type nSize       = size();
+        const size_type nSizeSource = nSymbols == npos ? traits_type::length(pszWhat) : nSymbols;
 
-    if (nSizeSource > 0 && _resize(nSize + nSizeSource))
-    {
-        std::memmove(data() + nPos + nSizeSource, data() + nPos, (nSize - nPos) * sizeof(value_type));
-        std::memcpy(data() + nPos, pszWhat, nSizeSource * sizeof(value_type));
-        return nPos + nSizeSource;
+        if (nSizeSource > 0 && _resize(nSize + nSizeSource))
+        {
+            std::memmove(data() + nPos + nSizeSource, data() + nPos, (nSize - nPos) * sizeof(value_type));
+            std::memcpy(data() + nPos, pszWhat, nSizeSource * sizeof(value_type));
+            return nPos + nSizeSource;
+        }
     }
-    else
-    {
-        return npos;
-    }
+
+    return npos;
 }
 
 template<class char_type, class traits_type>
@@ -652,33 +666,47 @@ template<class char_type, class traits_type>
 inline typename basic_string<char_type, traits_type>::size_type basic_string<char_type, traits_type>::trim_left(
     const_pointer pszStr) noexcept
 {
-    return _trim_left(
-        [pszStr](value_type ch)
-        {
-            for (size_type j = 0; pszStr[j] != QX_CHAR_PREFIX(value_type, '\0'); ++j)
+    if (pszStr)
+    {
+        return _trim_left(
+            [pszStr](value_type ch)
             {
-                if (pszStr[j] == ch)
-                    return true;
-            }
+                for (size_type j = 0; pszStr[j] != QX_CHAR_PREFIX(value_type, '\0'); ++j)
+                {
+                    if (pszStr[j] == ch)
+                        return true;
+                }
 
-            return false;
-        });
+                return false;
+            });
+    }
+    else
+    {
+        return 0;
+    }
 }
 
 template<class char_type, class traits_type>
 inline typename basic_string<char_type, traits_type>::size_type basic_string<char_type, traits_type>::trim_left(
-    const_pointer pStr,
+    const_pointer pszStr,
     size_type     nStrSize) noexcept
 {
-    return _trim_left(
-        [pStr, nStrSize](value_type ch)
-        {
-            for (size_type j = 0; j < nStrSize; ++j)
-                if (pStr[j] == ch)
-                    return true;
+    if (pszStr)
+    {
+        return _trim_left(
+            [pszStr, nStrSize](value_type ch)
+            {
+                for (size_type j = 0; j < nStrSize; ++j)
+                    if (pszStr[j] == ch)
+                        return true;
 
-            return false;
-        });
+                return false;
+            });
+    }
+    else
+    {
+        return 0;
+    }
 }
 
 template<class char_type, class traits_type>
@@ -739,33 +767,47 @@ template<class char_type, class traits_type>
 inline typename basic_string<char_type, traits_type>::size_type basic_string<char_type, traits_type>::trim_right(
     const_pointer pszStr) noexcept
 {
-    return _trim_right(
-        [pszStr](value_type ch)
-        {
-            for (size_type j = 0; pszStr[j] != QX_CHAR_PREFIX(value_type, '\0'); ++j)
+    if (pszStr)
+    {
+        return _trim_right(
+            [pszStr](value_type ch)
             {
-                if (pszStr[j] == ch)
-                    return true;
-            }
+                for (size_type j = 0; pszStr[j] != QX_CHAR_PREFIX(value_type, '\0'); ++j)
+                {
+                    if (pszStr[j] == ch)
+                        return true;
+                }
 
-            return false;
-        });
+                return false;
+            });
+    }
+    else
+    {
+        return 0;
+    }
 }
 
 template<class char_type, class traits_type>
 inline typename basic_string<char_type, traits_type>::size_type basic_string<char_type, traits_type>::trim_right(
-    const_pointer pStr,
+    const_pointer pszStr,
     size_type     nStrSize) noexcept
 {
-    return _trim_right(
-        [pStr, nStrSize](value_type ch)
-        {
-            for (size_type j = 0; j < nStrSize; ++j)
-                if (pStr[j] == ch)
-                    return true;
+    if (pszStr)
+    {
+        return _trim_right(
+            [pszStr, nStrSize](value_type ch)
+            {
+                for (size_type j = 0; j < nStrSize; ++j)
+                    if (pszStr[j] == ch)
+                        return true;
 
-            return false;
-        });
+                return false;
+            });
+    }
+    else
+    {
+        return 0;
+    }
 }
 
 template<class char_type, class traits_type>
@@ -826,33 +868,47 @@ template<class char_type, class traits_type>
 inline typename basic_string<char_type, traits_type>::size_type basic_string<char_type, traits_type>::trim(
     const_pointer pszStr) noexcept
 {
-    return _trim(
-        [pszStr](value_type ch)
-        {
-            for (size_type j = 0; pszStr[j] != QX_CHAR_PREFIX(value_type, '\0'); ++j)
+    if (pszStr)
+    {
+        return _trim(
+            [pszStr](value_type ch)
             {
-                if (pszStr[j] == ch)
-                    return true;
-            }
+                for (size_type j = 0; pszStr[j] != QX_CHAR_PREFIX(value_type, '\0'); ++j)
+                {
+                    if (pszStr[j] == ch)
+                        return true;
+                }
 
-            return false;
-        });
+                return false;
+            });
+    }
+    else
+    {
+        return 0;
+    }
 }
 
 template<class char_type, class traits_type>
 inline typename basic_string<char_type, traits_type>::size_type basic_string<char_type, traits_type>::trim(
-    const_pointer pStr,
+    const_pointer pszStr,
     size_type     nStrSize) noexcept
 {
-    return _trim(
-        [pStr, nStrSize](value_type ch)
-        {
-            for (size_type j = 0; j < nStrSize; ++j)
-                if (pStr[j] == ch)
-                    return true;
+    if (pszStr)
+    {
+        return _trim(
+            [pszStr, nStrSize](value_type ch)
+            {
+                for (size_type j = 0; j < nStrSize; ++j)
+                    if (pszStr[j] == ch)
+                        return true;
 
-            return false;
-        });
+                return false;
+            });
+    }
+    else
+    {
+        return 0;
+    }
 }
 
 template<class char_type, class traits_type>
@@ -908,14 +964,20 @@ inline typename basic_string<char_type, traits_type>::size_type basic_string<cha
     size_type     nEnd,
     size_type     nStrSize) noexcept
 {
-    const size_type nLocalStrSize = nStrSize != npos ? nStrSize : traits_type::length(pszStr);
+    if (pszStr)
+    {
+        const size_type nLocalStrSize = nStrSize != npos ? nStrSize : traits_type::length(pszStr);
+        const size_type nPos          = find(pszStr, nBegin, nLocalStrSize, nEnd);
 
-    const size_type nPos = find(pszStr, nBegin, nLocalStrSize, nEnd);
+        if (nPos != npos)
+            erase(nPos, nLocalStrSize);
 
-    if (nPos != npos)
-        erase(nPos, nLocalStrSize);
-
-    return nPos;
+        return nPos;
+    }
+    else
+    {
+        return npos;
+    }
 }
 
 template<class char_type, class traits_type>
@@ -965,9 +1027,9 @@ inline bool basic_string<char_type, traits_type>::remove_prefix(value_type chSym
 }
 
 template<class char_type, class traits_type>
-inline bool basic_string<char_type, traits_type>::remove_prefix(const_pointer pStr, size_type nStrSize) noexcept
+inline bool basic_string<char_type, traits_type>::remove_prefix(const_pointer pszStr, size_type nStrSize) noexcept
 {
-    return remove(pStr, static_cast<size_type>(0), nStrSize, nStrSize) != npos;
+    return remove(pszStr, static_cast<size_type>(0), nStrSize, nStrSize) != npos;
 }
 
 template<class char_type, class traits_type>
@@ -999,12 +1061,19 @@ inline bool basic_string<char_type, traits_type>::remove_suffix(value_type chSym
 }
 
 template<class char_type, class traits_type>
-inline bool basic_string<char_type, traits_type>::remove_suffix(const_pointer pStr, size_type nStrSize) noexcept
+inline bool basic_string<char_type, traits_type>::remove_suffix(const_pointer pszStr, size_type nStrSize) noexcept
 {
-    const size_type nSize         = size();
-    const size_type nLocalStrSize = nStrSize != npos ? nStrSize : traits_type::length(pStr);
+    if (pszStr)
+    {
+        const size_type nSize         = size();
+        const size_type nLocalStrSize = nStrSize != npos ? nStrSize : traits_type::length(pszStr);
 
-    return remove(pStr, nSize - nLocalStrSize, nSize, nLocalStrSize) != npos;
+        return remove(pszStr, nSize - nLocalStrSize, nSize, nLocalStrSize) != npos;
+    }
+    else
+    {
+        return false;
+    }
 }
 
 template<class char_type, class traits_type>
@@ -1048,21 +1117,28 @@ inline typename basic_string<char_type, traits_type>::size_type basic_string<cha
 
 template<class char_type, class traits_type>
 inline typename basic_string<char_type, traits_type>::size_type basic_string<char_type, traits_type>::remove_all(
-    const_pointer pStr,
+    const_pointer pszStr,
     size_type     nBegin,
     size_type     nEnd,
     size_type     nStrSize) noexcept
 {
-    size_type nOccurrences       = 0;
-    size_type nLastOccurrencePos = nBegin;
-
-    do
+    if (pszStr)
     {
-        ++nOccurrences;
-        nLastOccurrencePos = remove(pStr, nLastOccurrencePos, nEnd, nStrSize);
-    } while (nLastOccurrencePos != npos);
+        size_type nOccurrences       = 0;
+        size_type nLastOccurrencePos = nBegin;
 
-    return nOccurrences - 1;
+        do
+        {
+            ++nOccurrences;
+            nLastOccurrencePos = remove(pszStr, nLastOccurrencePos, nEnd, nStrSize);
+        } while (nLastOccurrencePos != npos);
+
+        return nOccurrences - 1;
+    }
+    else
+    {
+        return 0;
+    }
 }
 
 template<class char_type, class traits_type>
@@ -1208,7 +1284,7 @@ inline int basic_string<char_type, traits_type>::compare(value_type chSymbol) co
 }
 
 template<class char_type, class traits_type>
-inline int qx::basic_string<char_type, traits_type>::compare(const_pointer pszStr) const noexcept
+inline int basic_string<char_type, traits_type>::compare(const_pointer pszStr) const noexcept
 {
     return traits_type::compare(data(), pszStr);
 }
@@ -1261,15 +1337,22 @@ inline typename basic_string<char_type, traits_type>::size_type basic_string<cha
     size_type     nWhatSize,
     size_type     nEnd) const noexcept
 {
-    const size_type nLocalWhatSize = nWhatSize != npos ? nWhatSize : traits_type::length(pszWhat);
+    if (pszWhat)
+    {
+        const size_type nLocalWhatSize = nWhatSize != npos ? nWhatSize : traits_type::length(pszWhat);
 
-    return _find(
-        nBegin,
-        nEnd,
-        [pszWhat, nLocalWhatSize](const_pointer pCurrentChar)
-        {
-            return !traits_type::compare_n(pszWhat, pCurrentChar, nLocalWhatSize);
-        });
+        return _find(
+            nBegin,
+            nEnd,
+            [pszWhat, nLocalWhatSize](const_pointer pCurrentChar)
+            {
+                return !traits_type::compare_n(pszWhat, pCurrentChar, nLocalWhatSize);
+            });
+    }
+    else
+    {
+        return npos;
+    }
 }
 
 template<class char_type, class traits_type>
@@ -1334,15 +1417,22 @@ inline typename basic_string<char_type, traits_type>::size_type basic_string<cha
     size_type     nWhatSize,
     size_type     nEnd) const noexcept
 {
-    const size_type nLocalWhatSize = nWhatSize != npos ? nWhatSize : traits_type::length(pszWhat);
+    if (pszWhat)
+    {
+        const size_type nLocalWhatSize = nWhatSize != npos ? nWhatSize : traits_type::length(pszWhat);
 
-    return _rfind(
-        nBegin,
-        nEnd,
-        [pszWhat, nLocalWhatSize](const_pointer pCurrentChar)
-        {
-            return !traits_type::compare_n(pszWhat, pCurrentChar, nLocalWhatSize);
-        });
+        return _rfind(
+            nBegin,
+            nEnd,
+            [pszWhat, nLocalWhatSize](const_pointer pCurrentChar)
+            {
+                return !traits_type::compare_n(pszWhat, pCurrentChar, nLocalWhatSize);
+            });
+    }
+    else
+    {
+        return npos;
+    }
 }
 
 template<class char_type, class traits_type>
@@ -1399,14 +1489,21 @@ inline typename basic_string<char_type, traits_type>::size_type basic_string<cha
     size_type     nBegin,
     size_type     nWhatSize) const noexcept
 {
-    return _find_first_of(
-        pszWhat,
-        pszWhat + nWhatSize,
-        nBegin,
-        [](const_pointer pChar)
-        {
-            return pChar + 1;
-        });
+    if (pszWhat)
+    {
+        return _find_first_of(
+            pszWhat,
+            pszWhat + nWhatSize,
+            nBegin,
+            [](const_pointer pChar)
+            {
+                return pChar + 1;
+            });
+    }
+    else
+    {
+        return npos;
+    }
 }
 
 template<class char_type, class traits_type>
@@ -1414,14 +1511,21 @@ inline typename basic_string<char_type, traits_type>::size_type basic_string<cha
     const_pointer pszWhat,
     size_type     nBegin) const noexcept
 {
-    return _find_first_of(
-        pszWhat,
-        static_cast<const_pointer>(nullptr),
-        nBegin,
-        [](const_pointer pChar)
-        {
-            return *(pChar + 1) != QX_CHAR_PREFIX(value_type, '\0') ? pChar + 1 : nullptr;
-        });
+    if (pszWhat)
+    {
+        return _find_first_of(
+            pszWhat,
+            static_cast<const_pointer>(nullptr),
+            nBegin,
+            [](const_pointer pChar)
+            {
+                return *(pChar + 1) != QX_CHAR_PREFIX(value_type, '\0') ? pChar + 1 : nullptr;
+            });
+    }
+    else
+    {
+        return npos;
+    }
 }
 
 template<class char_type, class traits_type>
@@ -1472,14 +1576,21 @@ inline typename basic_string<char_type, traits_type>::size_type basic_string<cha
     size_type     nEnd,
     size_type     nWhatSize) const noexcept
 {
-    return _find_last_of(
-        pszWhat,
-        pszWhat + nWhatSize,
-        nEnd,
-        [](const_pointer pChar)
-        {
-            return pChar + 1;
-        });
+    if (pszWhat)
+    {
+        return _find_last_of(
+            pszWhat,
+            pszWhat + nWhatSize,
+            nEnd,
+            [](const_pointer pChar)
+            {
+                return pChar + 1;
+            });
+    }
+    else
+    {
+        return npos;
+    }
 }
 
 template<class char_type, class traits_type>
@@ -1487,14 +1598,21 @@ inline typename basic_string<char_type, traits_type>::size_type basic_string<cha
     const_pointer pszWhat,
     size_type     nEnd) const noexcept
 {
-    return _find_last_of(
-        pszWhat,
-        static_cast<const_pointer>(nullptr),
-        nEnd,
-        [](const_pointer pChar)
-        {
-            return *(pChar + 1) != QX_CHAR_PREFIX(value_type, '\0') ? pChar + 1 : nullptr;
-        });
+    if (pszWhat)
+    {
+        return _find_last_of(
+            pszWhat,
+            static_cast<const_pointer>(nullptr),
+            nEnd,
+            [](const_pointer pChar)
+            {
+                return *(pChar + 1) != QX_CHAR_PREFIX(value_type, '\0') ? pChar + 1 : nullptr;
+            });
+    }
+    else
+    {
+        return npos;
+    }
 }
 
 template<class char_type, class traits_type>
@@ -1551,14 +1669,21 @@ inline typename basic_string<char_type, traits_type>::size_type basic_string<cha
     size_type     nBegin,
     size_type     nWhatSize) const noexcept
 {
-    return _find_first_not_of(
-        pszWhat,
-        pszWhat + nWhatSize,
-        nBegin,
-        [](const_pointer pChar)
-        {
-            return pChar + 1;
-        });
+    if (pszWhat)
+    {
+        return _find_first_not_of(
+            pszWhat,
+            pszWhat + nWhatSize,
+            nBegin,
+            [](const_pointer pChar)
+            {
+                return pChar + 1;
+            });
+    }
+    else
+    {
+        return npos;
+    }
 }
 
 template<class char_type, class traits_type>
@@ -1566,14 +1691,21 @@ inline typename basic_string<char_type, traits_type>::size_type basic_string<cha
     const_pointer pszWhat,
     size_type     nBegin) const noexcept
 {
-    return _find_first_not_of(
-        pszWhat,
-        static_cast<const_pointer>(nullptr),
-        nBegin,
-        [](const_pointer pChar)
-        {
-            return *(pChar + 1) != QX_CHAR_PREFIX(value_type, '\0') ? pChar + 1 : nullptr;
-        });
+    if (pszWhat)
+    {
+        return _find_first_not_of(
+            pszWhat,
+            static_cast<const_pointer>(nullptr),
+            nBegin,
+            [](const_pointer pChar)
+            {
+                return *(pChar + 1) != QX_CHAR_PREFIX(value_type, '\0') ? pChar + 1 : nullptr;
+            });
+    }
+    else
+    {
+        return npos;
+    }
 }
 
 template<class char_type, class traits_type>
@@ -1630,14 +1762,21 @@ inline typename basic_string<char_type, traits_type>::size_type basic_string<cha
     size_type     nEnd,
     size_type     nWhatSize) const noexcept
 {
-    return _find_last_not_of(
-        pszWhat,
-        pszWhat + nWhatSize,
-        nEnd,
-        [](const_pointer pChar)
-        {
-            return pChar + 1;
-        });
+    if (pszWhat)
+    {
+        return _find_last_not_of(
+            pszWhat,
+            pszWhat + nWhatSize,
+            nEnd,
+            [](const_pointer pChar)
+            {
+                return pChar + 1;
+            });
+    }
+    else
+    {
+        return npos;
+    }
 }
 
 template<class char_type, class traits_type>
@@ -1645,14 +1784,21 @@ inline typename basic_string<char_type, traits_type>::size_type basic_string<cha
     const_pointer pszWhat,
     size_type     nEnd) const noexcept
 {
-    return _find_last_not_of(
-        pszWhat,
-        static_cast<const_pointer>(nullptr),
-        nEnd,
-        [](const_pointer pChar)
-        {
-            return *(pChar + 1) != QX_CHAR_PREFIX(value_type, '\0') ? pChar + 1 : nullptr;
-        });
+    if (pszWhat)
+    {
+        return _find_last_not_of(
+            pszWhat,
+            static_cast<const_pointer>(nullptr),
+            nEnd,
+            [](const_pointer pChar)
+            {
+                return *(pChar + 1) != QX_CHAR_PREFIX(value_type, '\0') ? pChar + 1 : nullptr;
+            });
+    }
+    else
+    {
+        return npos;
+    }
 }
 
 template<class char_type, class traits_type>
@@ -1717,6 +1863,9 @@ inline typename basic_string<char_type, traits_type>::views basic_string<char_ty
     size_type     nSepLen) const noexcept
 {
     views tokens;
+
+    if (!pszSeparator)
+        return tokens;
 
     if (nSepLen == npos)
         nSepLen = traits_type::length(pszSeparator);
@@ -1786,13 +1935,16 @@ inline bool basic_string<char_type, traits_type>::starts_with(value_type chSymbo
 template<class char_type, class traits_type>
 inline bool basic_string<char_type, traits_type>::starts_with(const_pointer pszStr, size_type nStrSize) const noexcept
 {
-    if (size_type nThisSize = size(); nThisSize > 0)
+    if (pszStr)
     {
-        if (nStrSize == npos)
-            nStrSize = traits_type::length(pszStr);
+        if (size_type nThisSize = size(); nThisSize > 0)
+        {
+            if (nStrSize == npos)
+                nStrSize = traits_type::length(pszStr);
 
-        if (nStrSize <= nThisSize)
-            return traits_type::compare_n(data(), pszStr, nStrSize) == 0;
+            if (nStrSize <= nThisSize)
+                return traits_type::compare_n(data(), pszStr, nStrSize) == 0;
+        }
     }
 
     return false;
@@ -1832,13 +1984,16 @@ inline bool basic_string<char_type, traits_type>::ends_with(value_type chSymbol)
 template<class char_type, class traits_type>
 inline bool basic_string<char_type, traits_type>::ends_with(const_pointer pszStr, size_type nStrSize) const noexcept
 {
-    if (size_type nThisSize = size(); nThisSize > 0)
+    if (pszStr)
     {
-        if (nStrSize == npos)
-            nStrSize = traits_type::length(pszStr);
+        if (size_type nThisSize = size(); nThisSize > 0)
+        {
+            if (nStrSize == npos)
+                nStrSize = traits_type::length(pszStr);
 
-        if (nStrSize <= nThisSize)
-            return traits_type::compare_n(data() + nThisSize - nStrSize, pszStr, nStrSize) == 0;
+            if (nStrSize <= nThisSize)
+                return traits_type::compare_n(data() + nThisSize - nStrSize, pszStr, nStrSize) == 0;
+        }
     }
 
     return false;

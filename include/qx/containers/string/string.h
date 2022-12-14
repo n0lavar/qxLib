@@ -169,10 +169,10 @@ public:
 
     /**
         @brief  Assign by char sequence
-        @param  pSource  - pointer to char sequence
-        @param  nSymbols - num of chars
+        @param  pszSource - pointer to char sequence
+        @param  nSymbols  - num of chars
     **/
-    void assign(const_pointer pSource, size_type nSymbols) noexcept;
+    void assign(const_pointer pszSource, size_type nSymbols) noexcept;
 
     /**
         @brief  Assign by psz
@@ -562,11 +562,11 @@ public:
 
     /**
         @brief  Trim the string to the left
-        @param  pStr     - string with symbols to delete
+        @param  pszStr   - string with symbols to delete
         @param  nStrSize - string size
         @retval          - number of deleted symbols
     **/
-    size_type trim_left(const_pointer pStr, size_type nStrSize) noexcept;
+    size_type trim_left(const_pointer pszStr, size_type nStrSize) noexcept;
 
     /**
         @brief  Trim the string to the left
@@ -616,11 +616,11 @@ public:
 
     /**
         @brief  Trim the string to the right
-        @param  pStr     - string with symbols to delete
+        @param  pszStr   - string with symbols to delete
         @param  nStrSize - string size
         @retval          - number of deleted symbols
     **/
-    size_type trim_right(const_pointer pStr, size_type nStrSize) noexcept;
+    size_type trim_right(const_pointer pszStr, size_type nStrSize) noexcept;
 
     /**
         @brief  Trim the string to the right
@@ -670,11 +670,11 @@ public:
 
     /**
         @brief  Trim the string to the both sides
-        @param  pStr     - string with symbols to delete
+        @param  pszStr   - string with symbols to delete
         @param  nStrSize - string size
         @retval          - number of deleted symbols
     **/
-    size_type trim(const_pointer pStr, size_type nStrSize) noexcept;
+    size_type trim(const_pointer pszStr, size_type nStrSize) noexcept;
 
     /**
         @brief  Trim the string to the both sides
@@ -766,11 +766,11 @@ public:
 
     /**
         @brief  Remove string prefix if matches
-        @param  pStr     - string to remove
+        @param  pszStr   - string to remove
         @param  nStrSize - string size
         @retval          - true if removed
     **/
-    bool remove_prefix(const_pointer pStr, size_type nStrSize = npos) noexcept;
+    bool remove_prefix(const_pointer pszStr, size_type nStrSize = npos) noexcept;
 
     /**
         @brief  Remove string prefix if matches
@@ -807,11 +807,11 @@ public:
 
     /**
         @brief  Remove string suffix if matches
-        @param  pStr     - string to remove
+        @param  pszStr   - string to remove
         @param  nStrSize - string size
         @retval          - true if removed
     **/
-    bool remove_suffix(const_pointer pStr, size_type nStrSize = npos) noexcept;
+    bool remove_suffix(const_pointer pszStr, size_type nStrSize = npos) noexcept;
 
     /**
         @brief  Remove string suffix if matches
@@ -850,14 +850,14 @@ public:
 
     /**
         @brief  Remove all occurrences of a substring in a string
-        @param  pStr     - string to remove
+        @param  pszStr   - string to remove
         @param  nBegin   - start searching index
         @param  nEnd     - end searching index
         @param  nStrSize - string size
         @retval          - number of deleted occurrences
     **/
     size_type remove_all(
-        const_pointer pStr,
+        const_pointer pszStr,
         size_type     nBegin   = 0,
         size_type     nEnd     = npos,
         size_type     nStrSize = npos) noexcept;
@@ -941,7 +941,7 @@ public:
 
     /**
         @brief  Performs a binary comparison of the characters
-        @param  pszStr - string to compare
+        @param  pszStr - string to compare. must not be nullptr
         @retval        - < 0 the first character that does not match has
                              a lower value in this than in chSymbol
                          = 0 the contents of both strings are equal
@@ -952,7 +952,7 @@ public:
 
     /**
         @brief  Performs a binary comparison of the characters
-        @param  pStr     - string to compare
+        @param  pStr     - string to compare. must not be nullptr
         @param  nStrSize - number of symbols to compare
         @retval          - < 0 the first character that does not match has
                                a lower value in this than in chSymbol
