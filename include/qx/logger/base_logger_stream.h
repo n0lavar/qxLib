@@ -36,7 +36,7 @@ enum class log_level
 struct logger_color_range
 {
     std::pair<size_t, size_t> range { 0, 0 };
-    color                     color = color::white();
+    color                     rangeColor = color::white();
 };
 
 template<class char_type>

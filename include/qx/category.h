@@ -40,12 +40,12 @@ public:
     /**
         @brief  category object constructor
         @param  pszName        - category name. For ex. CatRendering or CatWidgets
-        @param  color          - color to be used if supported
+        @param  categoryColor  - color to be used if supported
         @param  pszDescription - category description
     **/
     constexpr explicit category(
         const char*  pszName,
-        const color& color          = kDefaultColor,
+        const color& categoryColor  = kDefaultColor,
         const char*  pszDescription = nullptr) noexcept;
 
     /**
@@ -72,8 +72,8 @@ private:
     const char* const m_pszDescription = nullptr;
 };
 
-constexpr category::category(const char* pszName, const color& color, const char* pszDescription) noexcept
-    : m_Color(color)
+constexpr category::category(const char* pszName, const color& categoryColor, const char* pszDescription) noexcept
+    : m_Color(categoryColor)
     , m_pszName(pszName)
     , m_pszDescription(pszDescription)
 {

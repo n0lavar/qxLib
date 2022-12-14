@@ -42,14 +42,14 @@ std::basic_ostream<char_type>& operator<<(std::basic_ostream<char_type>& os, con
 namespace qx
 {
 
-constexpr terminal_color terminal_color::font(const color& color) noexcept
+constexpr terminal_color terminal_color::font(const color& fontColor) noexcept
 {
-    return terminal_color { color, type::font };
+    return terminal_color { fontColor, type::font };
 }
 
-constexpr terminal_color terminal_color::back(const color& color) noexcept
+constexpr terminal_color terminal_color::back(const color& bgColor) noexcept
 {
-    return terminal_color { color, type::back };
+    return terminal_color { bgColor, type::back };
 }
 
 constexpr terminal_color terminal_color::reset() noexcept
@@ -57,7 +57,7 @@ constexpr terminal_color terminal_color::reset() noexcept
     return terminal_color { type::reset };
 }
 
-constexpr terminal_color::terminal_color(const color& color, type eType) noexcept : m_Color(color), m_eType(eType)
+constexpr terminal_color::terminal_color(const color& inColor, type eType) noexcept : m_Color(inColor), m_eType(eType)
 {
 }
 

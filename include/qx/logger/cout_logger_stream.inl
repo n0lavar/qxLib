@@ -102,9 +102,9 @@ inline void cout_logger_stream::log_cout(
             break;
         }
 
-        auto cout_colorized = [&cout, svMessage](size_t nStart, size_t nEnd, const color& color)
+        auto cout_colorized = [&cout, svMessage](size_t nStart, size_t nEnd, const color& rangeColor)
         {
-            cout << terminal_color::font(color)
+            cout << terminal_color::font(rangeColor)
                  << std::basic_string_view<char_type> { svMessage.data() + nStart, nEnd - nStart }
                  << terminal_color::reset();
         };
@@ -113,7 +113,7 @@ inline void cout_logger_stream::log_cout(
 
         for (size_t i = 0; i < colors.size(); ++i)
         {
-            cout_colorized(colors[i].range.first, colors[i].range.second, colors[i].color);
+            cout_colorized(colors[i].range.first, colors[i].range.second, colors[i].rangeColor);
             cout_colorized(
                 colors[i].range.second,
                 i + 1 < colors.size() ? colors[i + 1].range.first : svMessage.size(),

@@ -61,17 +61,17 @@ class terminal_color
 public:
     /**
         @brief  Set font color
-        @param  color - new font color
-        @retval       - terminal_color instance to pass to the ostream
+        @param  fontColor - new font color
+        @retval           - terminal_color instance to pass to the ostream
     **/
-    static constexpr terminal_color font(const color& color) noexcept;
+    static constexpr terminal_color font(const color& fontColor) noexcept;
 
     /**
         @brief  Set background color
-        @param  color - new background color
-        @retval       - terminal_color instance to pass to the ostream
+        @param  bgColor - new background color
+        @retval         - terminal_color instance to pass to the ostream
     **/
-    static constexpr terminal_color back(const color& color) noexcept;
+    static constexpr terminal_color back(const color& bgColor) noexcept;
 
     /**
         @brief  Reset all colors
@@ -87,10 +87,10 @@ public:
 private:
     /**
         @brief terminal_color object constructor
-        @param color - color to set
-        @param eType - output type
+        @param inColor - color to set
+        @param eType   - output type
     **/
-    constexpr terminal_color(const color& color, type eType) noexcept;
+    constexpr terminal_color(const color& inColor, type eType) noexcept;
 
     /**
         @brief terminal_color object constructor
