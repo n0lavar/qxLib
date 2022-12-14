@@ -10,8 +10,13 @@
 namespace qx
 {
 
-inline cout_logger_stream::cout_logger_stream(bool bUseColors, bool bDisableStdioSync, bool bUntieCin)
-    : m_bUsingColors(bUseColors)
+inline cout_logger_stream::cout_logger_stream(
+    bool bAlwaysFlush,
+    bool bUseColors,
+    bool bDisableStdioSync,
+    bool bUntieCin)
+    : base_logger_stream(bAlwaysFlush)
+    , m_bUsingColors(bUseColors)
 {
     if (bDisableStdioSync)
     {
@@ -28,6 +33,12 @@ inline cout_logger_stream::cout_logger_stream(bool bUseColors, bool bDisableStdi
         std::cin.tie(nullptr);
         std::wcin.tie(nullptr);
     }
+}
+
+inline void cout_logger_stream::flush()
+{
+    std::cout << std::flush;
+    std::wcout << std::flush;
 }
 
 inline void cout_logger_stream::do_log(
@@ -125,6 +136,5 @@ inline void cout_logger_stream::log_cout(
         cout << svMessage;
     }
 }
-
 
 } // namespace qx

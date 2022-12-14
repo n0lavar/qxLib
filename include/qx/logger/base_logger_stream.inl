@@ -19,7 +19,7 @@ const log_unit_info::format_func<char_type>& log_unit_info::get_format_func()
         return formatFuncWChar;
 }
 
-inline base_logger_stream::base_logger_stream()
+inline base_logger_stream::base_logger_stream(bool bAlwaysFlush) : m_bAlwaysFlush(bAlwaysFlush)
 {
     register_unit(k_svDefaultUnit, { log_level::log });
 }
@@ -76,6 +76,9 @@ inline void base_logger_stream::log(
 
             if (!buffers.sMessage.empty())
                 do_log(buffers.sMessage, *optLogUnit, buffers.colors, eLogLevel);
+
+            if (m_bAlwaysFlush)
+                flush();
         }
     }
 }
@@ -92,7 +95,10 @@ inline void base_logger_stream::deregister_unit(std::string_view svUnitName) noe
 }
 
 template<class char_type>
-inline void base_logger_stream::format_time_string(basic_string<char_type>& sTime) noexcept
+inline void base_logger_stream::format_time_string(
+    basic_string<char_type>& sTime,
+    char_type                chDateDelimiter,
+    char_type                chTimeDelimiter) noexcept
 {
     std::time_t t = std::time(nullptr);
     QX_PUSH_SUPPRESS_MSVC_WARNINGS(4996)
@@ -100,12 +106,16 @@ inline void base_logger_stream::format_time_string(basic_string<char_type>& sTim
     QX_POP_SUPPRESS_WARNINGS
 
     sTime.sprintf(
-        QX_STR_PREFIX(char_type, "%02d-%02d-%04d_%02d-%02d-%02d"),
+        QX_STR_PREFIX(char_type, "%02d%c%02d%c%04d_%02d%c%02d%c%02d"),
         now->tm_mday,
+        chDateDelimiter,
         now->tm_mon,
+        chDateDelimiter,
         now->tm_year + 1900,
         now->tm_hour,
+        chTimeDelimiter,
         now->tm_min,
+        chTimeDelimiter,
         now->tm_sec);
 }
 
@@ -156,7 +166,7 @@ inline void base_logger_stream::format_line(
 {
     buffers.sMessage.vsprintf(pszFormat, args);
 
-    format_time_string(buffers.sFormat);
+    format_time_string(buffers.sFormat, QX_CHAR_PREFIX(char_type, '.'), QX_CHAR_PREFIX(char_type, ':'));
 
     switch (eLogLevel)
     {

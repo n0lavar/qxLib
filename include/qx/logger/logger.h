@@ -103,10 +103,20 @@ public:
         ...);
 
     /**
+        @brief Flush all streams
+    **/
+    void flush();
+
+    /**
         @brief Add output stream to the logger
         @param pStream - stream unique pointer
     **/
-    void add_stream(std::unique_ptr<base_logger_stream> pStream);
+    void add_stream(std::unique_ptr<base_logger_stream> pStream) noexcept;
+
+    /**
+        @brief Reset logger and clear all streams
+    **/
+    void reset() noexcept;
 
 private:
     /**

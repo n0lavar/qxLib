@@ -31,11 +31,21 @@ class cout_logger_stream : public base_logger_stream
 public:
     /**
         @brief cout_logger_stream object constructor
+        @param bAlwaysFlush      - true if need to flush after every output, decreases performance
         @param bUseColors        - use color when output is not info
         @param bDisableStdioSync - don't synchronize to the standard C streams after each input/output operation
         @param bUntieCin         - untie cin from cout
     **/
-    cout_logger_stream(bool bUseColors = true, bool bDisableStdioSync = true, bool bUntieCin = true);
+    cout_logger_stream(
+        bool bAlwaysFlush      = false,
+        bool bUseColors        = true,
+        bool bDisableStdioSync = true,
+        bool bUntieCin         = true);
+
+    /**
+        @brief Flush stream
+    **/
+    virtual void flush() override;
 
     /**
         @brief Output to std::cout

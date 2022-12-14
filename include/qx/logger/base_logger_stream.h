@@ -112,13 +112,19 @@ public:
 public:
     /**
         @brief base_logger_stream object constructor
+        @param bAlwaysFlush - true if need to flush after every output, decreases performance
     **/
-    base_logger_stream();
+    base_logger_stream(bool bAlwaysFlush);
 
     /**
         @brief base_logger_stream object destructor
     **/
     virtual ~base_logger_stream() = default;
+
+    /**
+        @brief Flush stream
+    **/
+    virtual void flush() = 0;
 
     /**
         @brief  Output to stream
@@ -156,11 +162,16 @@ public:
 
     /**
         @brief  Format time string to the buffer
-        @tparam char_type - char type
-        @param  sTime - output time buffer
+        @tparam char_type       - char type
+        @param  sTime           - output time buffer
+        @param  chDateDelimiter - char to use as delimiter in date part
+        @param  chTimeDelimiter - char to use as delimiter in time part
     **/
     template<class char_type>
-    static void format_time_string(basic_string<char_type>& sTime) noexcept;
+    static void format_time_string(
+        basic_string<char_type>& sTime,
+        char_type                chDateDelimiter,
+        char_type                chTimeDelimiter) noexcept;
 
 protected:
     /**
@@ -238,6 +249,7 @@ private:
     logger_buffer<char>                            m_BufferChar;
     logger_buffer<wchar_t>                         m_BufferWChar;
     std::mutex                                     m_Mutex;
+    bool                                           m_bAlwaysFlush = false;
 };
 
 } // namespace qx

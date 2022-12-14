@@ -68,9 +68,20 @@ inline void logger::do_log(
     va_end(argsCopy);
 }
 
-inline void logger::add_stream(std::unique_ptr<base_logger_stream> pStream)
+inline void logger::flush()
+{
+    for (const auto& stream : m_Streams)
+        stream->flush();
+}
+
+inline void logger::add_stream(std::unique_ptr<base_logger_stream> pStream) noexcept
 {
     m_Streams.push_back(std::move(pStream));
+}
+
+inline void logger::reset() noexcept
+{
+    m_Streams.clear();
 }
 
 } // namespace qx

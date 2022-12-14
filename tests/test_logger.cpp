@@ -16,23 +16,15 @@
 #include <qx/logger/cout_logger_stream.h>
 #include <qx/logger/file_logger_stream.h>
 
+#include <filesystem>
 #include <regex>
 
 QX_PUSH_SUPPRESS_MSVC_WARNINGS(5233)
 
-template<
-    const char sLogsFolder[],
-    const char sLogsFile[],
-    const char sUnit[],
-    const char sTraceFile[],
-    const char sCategory[]>
+template<const wchar_t sLogsFile[], const char sUnit[], const char sTraceFile[], const char sCategory[]>
 struct LoggerTraits
 {
-    constexpr static std::string_view GetLogsFolder()
-    {
-        return sLogsFolder;
-    }
-    constexpr static std::string_view GetLogsFile()
+    constexpr static std::wstring_view GetLogsFile()
     {
         return sLogsFile;
     }
@@ -50,11 +42,7 @@ struct LoggerTraits
     }
 };
 
-constexpr char LOGS_FOLDER_ROOT[] = "";
-constexpr char LOGS_FOLDER_LOGS[] = "logs";
-constexpr char LOGS_FOLDER_KEKW[] = "KEKW";
-
-constexpr char LOGS_FILE_DEFAULT[] = "default.log";
+constexpr wchar_t LOGS_FILE_DEFAULT[] = L"default";
 
 constexpr char UNIT_DEFAULT[] = "default";
 constexpr char UNIT_FILE[]    = "file.h";
@@ -69,15 +57,15 @@ constexpr char LOG_CATEGORY_TAG1[]    = "tag1";
 constexpr char LOG_CATEGORY_TAG2[]    = "tag2";
 
 using Implementations = ::testing::Types<
-    LoggerTraits<LOGS_FOLDER_ROOT, LOGS_FILE_DEFAULT, UNIT_DEFAULT, LOG_FILE_H, LOG_CATEGORY_NULLPTR>,
-    LoggerTraits<LOGS_FOLDER_ROOT, LOGS_FILE_DEFAULT, UNIT_FILE, LOG_FILE_H, LOG_CATEGORY_NULLPTR>,
-    LoggerTraits<LOGS_FOLDER_ROOT, LOGS_FILE_DEFAULT, UNIT_FUNC, LOG_FILE_H, LOG_CATEGORY_NULLPTR>,
-    LoggerTraits<LOGS_FOLDER_LOGS, LOGS_FILE_DEFAULT, UNIT_DEFAULT, LOG_FILE_H, LOG_CATEGORY_NULLPTR>,
-    LoggerTraits<LOGS_FOLDER_KEKW, LOGS_FILE_DEFAULT, UNIT_DEFAULT, LOG_FILE_H, LOG_CATEGORY_NULLPTR>,
-    LoggerTraits<LOGS_FOLDER_ROOT, LOGS_FILE_DEFAULT, UNIT_DEFAULT, LOG_FILE_CPP, LOG_CATEGORY_NULLPTR>,
-    LoggerTraits<LOGS_FOLDER_ROOT, LOGS_FILE_DEFAULT, UNIT_DEFAULT, LOG_FILE_INL, LOG_CATEGORY_NULLPTR>,
-    LoggerTraits<LOGS_FOLDER_ROOT, LOGS_FILE_DEFAULT, UNIT_DEFAULT, LOG_FILE_H, LOG_CATEGORY_TAG1>,
-    LoggerTraits<LOGS_FOLDER_ROOT, LOGS_FILE_DEFAULT, UNIT_DEFAULT, LOG_FILE_H, LOG_CATEGORY_TAG2>>;
+    LoggerTraits<LOGS_FILE_DEFAULT, UNIT_DEFAULT, LOG_FILE_H, LOG_CATEGORY_NULLPTR>,
+    LoggerTraits<LOGS_FILE_DEFAULT, UNIT_FILE, LOG_FILE_H, LOG_CATEGORY_NULLPTR>,
+    LoggerTraits<LOGS_FILE_DEFAULT, UNIT_FUNC, LOG_FILE_H, LOG_CATEGORY_NULLPTR>,
+    LoggerTraits<LOGS_FILE_DEFAULT, UNIT_DEFAULT, LOG_FILE_H, LOG_CATEGORY_NULLPTR>,
+    LoggerTraits<LOGS_FILE_DEFAULT, UNIT_DEFAULT, LOG_FILE_H, LOG_CATEGORY_NULLPTR>,
+    LoggerTraits<LOGS_FILE_DEFAULT, UNIT_DEFAULT, LOG_FILE_CPP, LOG_CATEGORY_NULLPTR>,
+    LoggerTraits<LOGS_FILE_DEFAULT, UNIT_DEFAULT, LOG_FILE_INL, LOG_CATEGORY_NULLPTR>,
+    LoggerTraits<LOGS_FILE_DEFAULT, UNIT_DEFAULT, LOG_FILE_H, LOG_CATEGORY_TAG1>,
+    LoggerTraits<LOGS_FILE_DEFAULT, UNIT_DEFAULT, LOG_FILE_H, LOG_CATEGORY_TAG2>>;
 
 template<typename Traits>
 class TestLogger : public ::testing::Test
@@ -86,14 +74,8 @@ protected:
     /* init protected members here */
     TestLogger()
     {
-        m_sLogFilePath = Traits::GetLogsFolder();
-        if (!m_sLogFilePath.empty())
-        {
-            m_sLogFilePath += '/';
-            m_sLogFilePath += Traits::GetLogsFile();
-        }
-        else
-            m_sLogFilePath = Traits::GetLogsFile();
+        m_sLogFilePath = Traits::GetLogsFile();
+        m_sLogFilePath += L".log";
     }
 
     /* called before every test */
@@ -106,11 +88,12 @@ protected:
         pConsoleLoggerStream->deregister_unit(qx::base_logger_stream::k_svDefaultUnit);
         pConsoleLoggerStream->register_unit(Traits::GetUnit(), { qx::log_level::none });
 
-        auto pFileLoggerStream = std::make_unique<qx::file_logger_stream>();
-        pFileLoggerStream->set_logs_folder(Traits::GetLogsFolder());
+        auto pFileLoggerStream = std::make_unique<qx::file_logger_stream>(
+            true,
+            qx::log_file_policy::clear_then_uppend,
+            Traits::GetLogsFile());
         pFileLoggerStream->deregister_unit(qx::base_logger_stream::k_svDefaultUnit);
         pFileLoggerStream->register_unit(Traits::GetUnit(), { qx::log_level::log });
-        pFileLoggerStream->register_file(Traits::GetUnit(), Traits::GetLogsFile());
 
         if constexpr (Traits::GetCategory() == LOG_CATEGORY_TAG1)
         {
@@ -127,12 +110,10 @@ protected:
                      va_list args)
                   {
                       buffers.sMessage.vsprintf(pszFormat, args);
-                      qx::base_logger_stream::format_time_string(buffers.sFormat);
+                      qx::base_logger_stream::format_time_string(buffers.sFormat, '.', ':');
                       buffers.sMessage = qx::string("   [") + buffers.sFormat + "][" + category.get_name() + "] "
                                          + buffers.sMessage + '\n';
                   } });
-
-            pFileLoggerStream->register_file(Traits::GetCategory(), Traits::GetLogsFile());
         }
 
         m_pLogger->add_stream(std::move(pConsoleLoggerStream));
@@ -146,7 +127,6 @@ protected:
             || Traits::GetUnit() == UNIT_FILE && Traits::GetUnit() == Traits::GetTraceFile()
             || Traits::GetUnit() == UNIT_FUNC && m_bFunction)
         {
-            ASSERT_TRUE(std::filesystem::exists(m_sLogFilePath.data()));
             std::ifstream ifs(m_sLogFilePath.data());
 
             std::string sLine(512, '\0');
@@ -159,8 +139,8 @@ protected:
             constexpr const char* pszWarning = "\\[W\\]";
             constexpr const char* pszError   = "\\[E\\]";
             constexpr const char* pszAssert  = "\\[C\\]";
-            constexpr const char* pszDate    = "\\[\\d{2}-\\d{2}-\\d{4}_";
-            constexpr const char* pszTime    = "\\d{2}-\\d{2}-\\d{2}\\]";
+            constexpr const char* pszDate    = "\\[\\d{2}.\\d{2}.\\d{4}_";
+            constexpr const char* pszTime    = "\\d{2}:\\d{2}:\\d{2}\\]";
 
             auto CheckRegex = [&regex, &match](const qx::string& sMatch, const std::string& sText)
             {
@@ -168,8 +148,6 @@ protected:
                 EXPECT_TRUE(std::regex_search(sText, match, regex))
                     << "regex:           " << sMatch.data() << std::endl
                     << "line:            " << sText.data() << std::endl
-                    << "logs folder:     " << Traits::GetLogsFolder() << std::endl
-                    << "logs file:       " << Traits::GetLogsFile() << std::endl
                     << "logs unit:       " << Traits::GetUnit() << std::endl
                     << "logs trace file: " << Traits::GetTraceFile();
             };
@@ -267,13 +245,6 @@ protected:
             CheckStringCommon(pszInfo, " End test");
 
             ifs.close();
-
-            std::error_code ec;
-            EXPECT_TRUE(std::filesystem::remove(m_sLogFilePath.data(), ec)) << ec.message().data();
-        }
-        else
-        {
-            EXPECT_FALSE(std::filesystem::exists(m_sLogFilePath.data()));
         }
 
         m_bFunction = false;
@@ -282,7 +253,7 @@ protected:
 protected:
     std::unique_ptr<qx::logger> m_pLogger;
     bool                        m_bFunction = false;
-    qx::string                  m_sLogFilePath;
+    qx::wstring                 m_sLogFilePath;
 };
 
 TYPED_TEST_SUITE(TestLogger, Implementations);

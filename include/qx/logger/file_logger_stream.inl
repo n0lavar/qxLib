@@ -10,27 +10,53 @@
 namespace qx
 {
 
-inline file_logger_stream::file_logger_stream()
+inline file_logger_stream::file_logger_stream(
+    bool              bAlwaysFlush,
+    log_file_policy   eLogFilePolicy,
+    std::wstring_view svFileName)
+    : base_logger_stream(bAlwaysFlush)
 {
-    string& sTime = get_log_buffer<char>().sFormat;
-    format_time_string(sTime);
-    m_sSessionTime = sTime + '/';
+    wstring                 sLogFile    = svFileName;
+    std::ios_base::openmode openingMode = std::ios_base::app;
+    switch (eLogFilePolicy)
+    {
+    case log_file_policy::clear_then_uppend:
+    {
+        openingMode = std::ios_base::trunc;
+    }
+    break;
+
+    case log_file_policy::time_name:
+    {
+        wstring& sTime = get_log_buffer<wchar_t>().sFormat;
+        format_time_string(sTime, L'-', L'-');
+        sLogFile += L'_';
+        sLogFile += sTime;
+    }
+    break;
+    }
+
+    sLogFile += L".log";
+
+    m_CharFile = std::basic_ofstream<char>(sLogFile.c_str(), openingMode);
+    if (!m_CharFile)
+        std::wcerr << L"Can't create log file " << sLogFile;
+
+    m_WCharFile = std::basic_ofstream<wchar_t>(sLogFile.c_str(), openingMode);
+    if (!m_WCharFile)
+        std::wcerr << L"Can't create log file " << sLogFile;
 }
 
 inline file_logger_stream::~file_logger_stream()
 {
-    for (const auto& file : m_Files)
-    {
-        if (file.second.bWroteToFile)
-        {
-            fill_file_folder(file.second.eLogPolicy, m_sBufferPath);
-            m_sBufferPath += file.second.sFileName;
+    if (m_CharFile)
+        m_CharFile << "\n\n\n" << std::flush;
+}
 
-            std::ofstream ofs(m_sBufferPath.data(), std::ofstream::app);
-            if (ofs)
-                ofs << "\n\n\n" << std::flush;
-        }
-    }
+inline void file_logger_stream::flush()
+{
+    m_CharFile << std::flush;
+    m_WCharFile << std::flush;
 }
 
 inline void file_logger_stream::do_log(
@@ -51,82 +77,16 @@ inline void file_logger_stream::do_log(
     log_file(svMessage, logUnit, eLogLevel);
 }
 
-inline void file_logger_stream::set_logs_folder(std::string_view svFolder) noexcept
-{
-    m_sFolder = svFolder;
-    if (!m_sFolder.empty() && !m_sFolder.ends_with('/'))
-        m_sFolder += '/';
-}
-
-inline void file_logger_stream::register_file(
-    std::string_view svUnitName,
-    std::string_view svFileName,
-    log_file_policy  eLogPolicy)
-{
-    if (!svUnitName.empty() && !svFileName.empty())
-        m_Files[svUnitName] = { svFileName, eLogPolicy };
-}
-
 template<class char_type>
 inline void file_logger_stream::log_file(
     std::basic_string_view<char_type> svMessage,
     const log_unit&                   logUnit,
     log_level                         eLogLevel)
 {
-    using ofstream = std::basic_ofstream<char_type>;
-
-    std::string_view        svFileName;
-    log_file_policy         eLogFilePolicy = log_file_policy::append;
-    std::ios_base::openmode ofstreamMode   = ofstream::app;
-
-    if (const auto it = m_Files.find(logUnit.svUnitName); it != m_Files.cend())
-    {
-        svFileName     = it->second.sFileName;
-        eLogFilePolicy = it->second.eLogPolicy;
-
-        if (!it->second.bWroteToFile && eLogFilePolicy == log_file_policy::clear_then_uppend)
-            ofstreamMode = ofstream::out | ofstream::trunc;
-
-        it->second.bWroteToFile = true;
-    }
+    if constexpr (std::is_same_v<char_type, char>)
+        m_CharFile << svMessage;
     else
-    {
-        svFileName = DEFAULT_FILE;
-    }
-
-    fill_file_folder(eLogFilePolicy, m_sBufferPath);
-
-    if (!m_sFolder.empty())
-        std::filesystem::create_directories(m_sBufferPath.data());
-
-    m_sBufferPath += svFileName;
-
-    if (auto ofs = ofstream(m_sBufferPath.data(), ofstreamMode))
-    {
-        ofs << svMessage;
-        ofs.close();
-    }
-    else
-    {
-        std::cerr << "output_to_file error: file " << svFileName;
-    }
-}
-
-
-inline void file_logger_stream::fill_file_folder(log_file_policy eLogFilePolicy, string& sFileFolder) const noexcept
-{
-    switch (eLogFilePolicy)
-    {
-    case log_file_policy::folder_time:
-        sFileFolder = m_sFolder + m_sSessionTime;
-        break;
-
-    case log_file_policy::append:
-    case log_file_policy::clear_then_uppend:
-    default:
-        sFileFolder = m_sFolder;
-        break;
-    }
+        m_WCharFile << svMessage;
 }
 
 } // namespace qx
