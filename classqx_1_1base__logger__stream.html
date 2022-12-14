@@ -100,10 +100,10 @@ Public Member Functions</h2></td></tr>
 virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1base__logger__stream.html#a19753b3ad41e31765763b19d0b801bad">~base_logger_stream</a> ()=default</td></tr>
 <tr class="memdesc:a19753b3ad41e31765763b19d0b801bad"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classqx_1_1base__logger__stream.html" title="Base class for logger streams.">base_logger_stream</a> object destructor <br /></td></tr>
 <tr class="separator:a19753b3ad41e31765763b19d0b801bad"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a21c813d6b6f31618137e34d8b31a35fb"><td class="memTemplParams" colspan="2">template&lt;class char_type &gt; </td></tr>
-<tr class="memitem:a21c813d6b6f31618137e34d8b31a35fb"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classqx_1_1base__logger__stream.html#a21c813d6b6f31618137e34d8b31a35fb">log</a> (log_level eLogLevel, const char_type *pszFormat, const char *pszCategory, const char *pszFile, const char *pszFunction, int nLine, va_list args)</td></tr>
-<tr class="memdesc:a21c813d6b6f31618137e34d8b31a35fb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Output to stream.  <a href="classqx_1_1base__logger__stream.html#a21c813d6b6f31618137e34d8b31a35fb">More...</a><br /></td></tr>
-<tr class="separator:a21c813d6b6f31618137e34d8b31a35fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ade524d5309d3e442d4e0bae516225f6d"><td class="memTemplParams" colspan="2">template&lt;class char_type &gt; </td></tr>
+<tr class="memitem:ade524d5309d3e442d4e0bae516225f6d"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classqx_1_1base__logger__stream.html#ade524d5309d3e442d4e0bae516225f6d">log</a> (log_level eLogLevel, const char_type *pszFormat, const <a class="el" href="classqx_1_1category.html">category</a> &amp;<a class="el" href="classqx_1_1category.html">category</a>, const char *pszFile, const char *pszFunction, int nLine, va_list args)</td></tr>
+<tr class="memdesc:ade524d5309d3e442d4e0bae516225f6d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Output to stream.  <a href="classqx_1_1base__logger__stream.html#ade524d5309d3e442d4e0bae516225f6d">More...</a><br /></td></tr>
+<tr class="separator:ade524d5309d3e442d4e0bae516225f6d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a99637f11420d3b811336fc05fd63b987"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1base__logger__stream.html#a99637f11420d3b811336fc05fd63b987">register_unit</a> (std::string_view svUnitName, const <a class="el" href="structqx_1_1log__unit__info.html">log_unit_info</a> &amp;unit) noexcept</td></tr>
 <tr class="memdesc:a99637f11420d3b811336fc05fd63b987"><td class="mdescLeft">&#160;</td><td class="mdescRight">Register logger unit.  <a href="classqx_1_1base__logger__stream.html#a99637f11420d3b811336fc05fd63b987">More...</a><br /></td></tr>
 <tr class="separator:a99637f11420d3b811336fc05fd63b987"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -120,17 +120,17 @@ Static Public Member Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
-<tr class="memitem:a2ec2fe5a3a744c0a9f46b1192c27d98e"><td class="memTemplParams" colspan="2">template&lt;class char_type &gt; </td></tr>
-<tr class="memitem:a2ec2fe5a3a744c0a9f46b1192c27d98e"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="structqx_1_1logger__buffers.html">logger_buffers</a>&lt; char_type &gt; &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classqx_1_1base__logger__stream.html#a2ec2fe5a3a744c0a9f46b1192c27d98e">get_string_buffers</a> () noexcept</td></tr>
-<tr class="memdesc:a2ec2fe5a3a744c0a9f46b1192c27d98e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get string buffers.  <a href="classqx_1_1base__logger__stream.html#a2ec2fe5a3a744c0a9f46b1192c27d98e">More...</a><br /></td></tr>
-<tr class="separator:a2ec2fe5a3a744c0a9f46b1192c27d98e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2a457b6681673674430f90ac323f73b5"><td class="memTemplParams" colspan="2">template&lt;class char_type &gt; </td></tr>
+<tr class="memitem:a2a457b6681673674430f90ac323f73b5"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="structqx_1_1logger__buffer.html">logger_buffer</a>&lt; char_type &gt; &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classqx_1_1base__logger__stream.html#a2a457b6681673674430f90ac323f73b5">get_log_buffer</a> () noexcept</td></tr>
+<tr class="memdesc:a2a457b6681673674430f90ac323f73b5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get string buffers.  <a href="classqx_1_1base__logger__stream.html#a2a457b6681673674430f90ac323f73b5">More...</a><br /></td></tr>
+<tr class="separator:a2a457b6681673674430f90ac323f73b5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Base class for logger streams. </p>
 <p>~ </p><dl class="section author"><dt>Author</dt><dd>Khrapov </dd></dl>
 <dl class="section date"><dt>Date</dt><dd>28.07.2021 </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="base__logger__stream_8h_source.html#l00087">87</a> of file <a class="el" href="base__logger__stream_8h_source.html">base_logger_stream.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="base__logger__stream_8h_source.html#l00107">107</a> of file <a class="el" href="base__logger__stream_8h_source.html">base_logger_stream.h</a>.</p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="a9f1a63558efd0f219661b9fe05556b92"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a9f1a63558efd0f219661b9fe05556b92">&#9670;&nbsp;</a></span>deregister_unit()</h2>
@@ -212,8 +212,8 @@ template&lt;class char_type &gt; </div>
 
 </div>
 </div>
-<a id="a2ec2fe5a3a744c0a9f46b1192c27d98e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2ec2fe5a3a744c0a9f46b1192c27d98e">&#9670;&nbsp;</a></span>get_string_buffers()</h2>
+<a id="a2a457b6681673674430f90ac323f73b5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2a457b6681673674430f90ac323f73b5">&#9670;&nbsp;</a></span>get_log_buffer()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -224,7 +224,7 @@ template&lt;class char_type &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="structqx_1_1logger__buffers.html">logger_buffers</a>&lt; char_type &gt; &amp; qx::base_logger_stream::get_string_buffers</td>
+          <td class="memname"><a class="el" href="structqx_1_1logger__buffer.html">logger_buffer</a>&lt; char_type &gt; &amp; qx::base_logger_stream::get_log_buffer</td>
         </tr>
       </table>
   </td>
@@ -252,8 +252,8 @@ template&lt;class char_type &gt; </div>
 
 </div>
 </div>
-<a id="a21c813d6b6f31618137e34d8b31a35fb"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a21c813d6b6f31618137e34d8b31a35fb">&#9670;&nbsp;</a></span>log()</h2>
+<a id="ade524d5309d3e442d4e0bae516225f6d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ade524d5309d3e442d4e0bae516225f6d">&#9670;&nbsp;</a></span>log()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -278,8 +278,8 @@ template&lt;class char_type &gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const char *&#160;</td>
-          <td class="paramname"><em>pszCategory</em>, </td>
+          <td class="paramtype">const <a class="el" href="classqx_1_1category.html">category</a> &amp;&#160;</td>
+          <td class="paramname"><em>category</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -329,7 +329,7 @@ template&lt;class char_type &gt; </div>
   <table class="params">
     <tr><td class="paramname">eLogLevel</td><td>- log level </td></tr>
     <tr><td class="paramname">pszFormat</td><td>- format string </td></tr>
-    <tr><td class="paramname">pszCategory</td><td>- code category name </td></tr>
+    <tr><td class="paramname">category</td><td>- code category </td></tr>
     <tr><td class="paramname">pszFile</td><td>- file name string </td></tr>
     <tr><td class="paramname">pszFunction</td><td>- function name string </td></tr>
     <tr><td class="paramname">nLine</td><td>- code line number </td></tr>

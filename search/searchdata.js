@@ -8,8 +8,7 @@ var indexSectionsWithContent =
   5: "imu",
   6: "ls",
   7: "acfgtv",
-  8: "q",
-  9: "c"
+  8: "q"
 };
 
 var indexSectionNames =
@@ -22,8 +21,7 @@ var indexSectionNames =
   5: "typedefs",
   6: "enums",
   7: "enumvalues",
-  8: "defines",
-  9: "groups"
+  8: "defines"
 };
 
 var indexSectionLabels =
@@ -36,7 +34,6 @@ var indexSectionLabels =
   5: "Typedefs",
   6: "Enumerations",
   7: "Enumerator",
-  8: "Macros",
-  9: "Modules"
+  8: "Macros"
 };
 

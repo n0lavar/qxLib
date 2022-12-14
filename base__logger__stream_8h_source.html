@@ -80,225 +80,259 @@ $(function() {
 <div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="comment">**/</span></div>
 <div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#pragma once</span></div>
 <div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160; </div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="string__converters_8h.html">qx/containers/string/string_converters.h</a>&gt;</span></div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="suppress__warnings_8h.html">qx/macros/suppress_warnings.h</a>&gt;</span></div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160; </div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="preprocessor">#include &lt;ctime&gt;</span></div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="preprocessor">#include &lt;functional&gt;</span></div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="preprocessor">#include &lt;mutex&gt;</span></div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="preprocessor">#include &lt;unordered_map&gt;</span></div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160; </div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="keyword">namespace </span>qx</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;{</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160; </div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="keyword">enum class</span> log_level</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;{</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    very_verbose,</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    verbose,</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    log,</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    important,</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    warning,</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    error,</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    critical,</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    none,</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;};</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160; </div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> <span class="keywordtype">char</span>_type&gt;</div>
-<div class="line"><a name="l00036"></a><span class="lineno"><a class="line" href="structqx_1_1logger__buffers.html">   36</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structqx_1_1logger__buffers.html">logger_buffers</a></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="category_8h.html">qx/category.h</a>&gt;</span></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="string__converters_8h.html">qx/containers/string/string_converters.h</a>&gt;</span></div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="suppress__warnings_8h.html">qx/macros/suppress_warnings.h</a>&gt;</span></div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160; </div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="preprocessor">#include &lt;ctime&gt;</span></div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="preprocessor">#include &lt;functional&gt;</span></div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="preprocessor">#include &lt;mutex&gt;</span></div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="preprocessor">#include &lt;unordered_map&gt;</span></div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160; </div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="keyword">namespace </span>qx</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;{</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160; </div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="keyword">enum class</span> log_level</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;{</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    very_verbose, <span class="comment">// very frequently repeated messages, for example, on every update</span></div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    verbose,      <span class="comment">// messages you don&#39;t want to be displayed by default</span></div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    log,          <span class="comment">// default level</span></div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    important,    <span class="comment">// same as log but highlighted if possible</span></div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    warning,      <span class="comment">// not yet an error, but something to look out for</span></div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    error,        <span class="comment">// an error after which it is possible to continue the program</span></div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    critical,     <span class="comment">// an error that makes it impossible to continue the program</span></div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    none,         <span class="comment">// message is not displayed</span></div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;};</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160; </div>
+<div class="line"><a name="l00036"></a><span class="lineno"><a class="line" href="structqx_1_1logger__color__range.html">   36</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structqx_1_1logger__color__range.html">logger_color_range</a></div>
 <div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;{</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    <a class="code" href="classqx_1_1basic__string.html">basic_string&lt;char_type&gt;</a> sMessage; <span class="comment">// result message (output)</span></div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    <a class="code" href="classqx_1_1basic__string.html">basic_string&lt;char_type&gt;</a> sFormat;</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    <a class="code" href="classqx_1_1basic__string.html">basic_string&lt;char_type&gt;</a> sCategory;</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    <a class="code" href="classqx_1_1basic__string.html">basic_string&lt;char_type&gt;</a> sFile;</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    <a class="code" href="classqx_1_1basic__string.html">basic_string&lt;char_type&gt;</a> sFunction;</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;};</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160; </div>
-<div class="line"><a name="l00045"></a><span class="lineno"><a class="line" href="structqx_1_1log__unit__info.html">   45</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structqx_1_1log__unit__info.html">log_unit_info</a></div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;{</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    <span class="keyword">template</span>&lt;<span class="keyword">class</span> <span class="keywordtype">char</span>_type&gt;</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    <span class="keyword">using</span> format_func = std::function&lt;void(</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;        <a class="code" href="structqx_1_1logger__buffers.html">logger_buffers&lt;char_type&gt;</a>&amp; buffers,</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;        log_level                  eLogLevel,   <span class="comment">// log level</span></div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;        <span class="keyword">const</span> char_type*           pszFormat,   <span class="comment">// format string</span></div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;        <span class="keyword">const</span> char_type*           pszCategory, <span class="comment">// code category name</span></div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;        <span class="keyword">const</span> char_type*           pszFile,     <span class="comment">// file name</span></div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;        <span class="keyword">const</span> char_type*           pszFunction, <span class="comment">// function name</span></div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;        <span class="keywordtype">int</span>                        nLine,       <span class="comment">// code line number</span></div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;        va_list                    args         <span class="comment">// additional args for format</span></div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;        )&gt;;</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;<span class="comment">    /**</span></div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;<span class="comment">        @brief  Get format func corresponding to char type</span></div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;<span class="comment">        @tparam char_type - char type</span></div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;<span class="comment">        @retval           - format func</span></div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;<span class="comment">    **/</span></div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    <span class="keyword">template</span>&lt;<span class="keyword">class</span> <span class="keywordtype">char</span>_type&gt;</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    <span class="keyword">const</span> format_func&lt;char_type&gt;&amp; <a class="code" href="structqx_1_1log__unit__info.html#a355b9352c50a0dda8c925fc23eca874d">get_format_func</a>();</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160; </div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    log_level            eMinLogLevel = log_level::log;</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;    format_func&lt;char&gt;    formatFuncChar;</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    format_func&lt;wchar_t&gt; formatFuncWChar;</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;};</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160; </div>
-<div class="line"><a name="l00072"></a><span class="lineno"><a class="line" href="structqx_1_1log__unit.html">   72</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structqx_1_1log__unit.html">log_unit</a></div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;{</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    <a class="code" href="structqx_1_1log__unit__info.html">log_unit_info</a>*   pUnitInfo = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    std::string_view svUnitName;</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;};</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;<span class="comment">/**</span></div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;<span class="comment">    @class   base_logger_stream</span></div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;<span class="comment">    @brief   Base class for logger streams</span></div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;<span class="comment">    @details ~</span></div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;<span class="comment">    @author  Khrapov</span></div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;<span class="comment">    @date    28.07.2021</span></div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;<span class="comment">**/</span></div>
-<div class="line"><a name="l00087"></a><span class="lineno"><a class="line" href="classqx_1_1base__logger__stream.html">   87</a></span>&#160;<span class="keyword">class </span><a class="code" href="classqx_1_1base__logger__stream.html">base_logger_stream</a></div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;{</div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;    <span class="keyword">static</span> constexpr <span class="keyword">const</span> <span class="keywordtype">char</span>* k_svDefaultUnit = <span class="stringliteral">&quot;default&quot;</span>;</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    std::pair&lt;size_t, size_t&gt; range { 0, 0 };</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    <a class="code" href="classqx_1_1color.html">color</a>                     <a class="code" href="classqx_1_1color.html">color</a> = color::white();</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;};</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160; </div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> <span class="keywordtype">char</span>_type&gt;</div>
+<div class="line"><a name="l00043"></a><span class="lineno"><a class="line" href="structqx_1_1logger__buffer.html">   43</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structqx_1_1logger__buffer.html">logger_buffer</a></div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;{</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    <a class="code" href="classqx_1_1basic__string.html">basic_string&lt;char_type&gt;</a> sMessage; <span class="comment">// result message (output)</span></div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    <a class="code" href="classqx_1_1basic__string.html">basic_string&lt;char_type&gt;</a> sFormat;</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    <a class="code" href="classqx_1_1basic__string.html">basic_string&lt;char_type&gt;</a> sFile;</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    <a class="code" href="classqx_1_1basic__string.html">basic_string&lt;char_type&gt;</a> sFunction;</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    <a class="code" href="classqx_1_1basic__string.html">basic_string&lt;char_type&gt;</a> sCategory;</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160; </div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    <span class="comment">// ranges must not intersect and must increase</span></div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    std::vector&lt;logger_color_range&gt; colors;</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160; </div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    <span class="keywordtype">void</span> clear()</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    {</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;        sMessage.clear();</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;        sFormat.clear();</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;        sFile.clear();</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;        sFunction.clear();</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;        sCategory.clear();</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;        colors.clear();</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    }</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;};</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160; </div>
+<div class="line"><a name="l00065"></a><span class="lineno"><a class="line" href="structqx_1_1log__unit__info.html">   65</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structqx_1_1log__unit__info.html">log_unit_info</a></div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;{</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    <span class="keyword">template</span>&lt;<span class="keyword">class</span> <span class="keywordtype">char</span>_type&gt;</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;    <span class="keyword">using</span> format_func = std::function&lt;void(</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;        <a class="code" href="structqx_1_1logger__buffer.html">logger_buffer&lt;char_type&gt;</a>&amp; buffers,</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;        log_level                 eLogLevel,   <span class="comment">// log level</span></div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;        <span class="keyword">const</span> <a class="code" href="classqx_1_1category.html">category</a>&amp;           <a class="code" href="classqx_1_1category.html">category</a>,    <span class="comment">// code category</span></div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;        <span class="keyword">const</span> char_type*          pszFormat,   <span class="comment">// format string</span></div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;        <span class="keyword">const</span> char_type*          pszFile,     <span class="comment">// file name</span></div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;        <span class="keyword">const</span> char_type*          pszFunction, <span class="comment">// function name</span></div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;        <span class="keywordtype">int</span>                       nLine,       <span class="comment">// code line number</span></div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;        va_list                   args         <span class="comment">// additional args for format</span></div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;        )&gt;;</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;<span class="comment">    /**</span></div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;<span class="comment">        @brief  Get format func corresponding to char type</span></div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;<span class="comment">        @tparam char_type - char type</span></div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;<span class="comment">        @retval           - format func</span></div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;<span class="comment">    **/</span></div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;    <span class="keyword">template</span>&lt;<span class="keyword">class</span> <span class="keywordtype">char</span>_type&gt;</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;    <span class="keyword">const</span> format_func&lt;char_type&gt;&amp; <a class="code" href="structqx_1_1log__unit__info.html#a355b9352c50a0dda8c925fc23eca874d">get_format_func</a>();</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160; </div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;    log_level            eMinLogLevel = log_level::log;</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;    format_func&lt;char&gt;    formatFuncChar;</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;    format_func&lt;wchar_t&gt; formatFuncWChar;</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;};</div>
 <div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160; </div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;<span class="keyword">public</span>:<span class="comment"></span></div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;<span class="comment">    /**</span></div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;<span class="comment">        @brief base_logger_stream object constructor</span></div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;<span class="comment">    **/</span></div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;    <a class="code" href="classqx_1_1base__logger__stream.html#ac909889551a450d2302b29dec55b1d8b">base_logger_stream</a>();</div>
+<div class="line"><a name="l00092"></a><span class="lineno"><a class="line" href="structqx_1_1log__unit.html">   92</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structqx_1_1log__unit.html">log_unit</a></div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;{</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;    <a class="code" href="structqx_1_1log__unit__info.html">log_unit_info</a>*   pUnitInfo = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;    std::string_view svUnitName;</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;};</div>
 <div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;<span class="comment">    /**</span></div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;<span class="comment">        @brief base_logger_stream object destructor</span></div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;<span class="comment">    **/</span></div>
-<div class="line"><a name="l00101"></a><span class="lineno"><a class="line" href="classqx_1_1base__logger__stream.html#a19753b3ad41e31765763b19d0b801bad">  101</a></span>&#160;    <span class="keyword">virtual</span> <a class="code" href="classqx_1_1base__logger__stream.html#a19753b3ad41e31765763b19d0b801bad">~base_logger_stream</a>() = <span class="keywordflow">default</span>;</div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;<span class="comment">    /**</span></div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;<span class="comment">        @brief  Output to stream</span></div>
-<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;<span class="comment">        @tparam char_type   - char type, typically char or wchar_t</span></div>
-<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;<span class="comment">        @param  eLogLevel   - log level</span></div>
-<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;<span class="comment">        @param  pszFormat   - format string</span></div>
-<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;<span class="comment">        @param  pszCategory - code category name</span></div>
-<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;<span class="comment">        @param  pszFile     - file name string</span></div>
-<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;<span class="comment">        @param  pszFunction - function name string</span></div>
-<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;<span class="comment">        @param  nLine       - code line number</span></div>
-<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;<span class="comment">        @param  args        - additional args for format</span></div>
-<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;<span class="comment">    **/</span></div>
-<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;    <span class="keyword">template</span>&lt;<span class="keyword">class</span> <span class="keywordtype">char</span>_type&gt;</div>
-<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classqx_1_1base__logger__stream.html#a21c813d6b6f31618137e34d8b31a35fb">log</a>(</div>
-<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;        log_level        eLogLevel,</div>
-<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;        <span class="keyword">const</span> char_type* pszFormat,</div>
-<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;        <span class="keyword">const</span> <span class="keywordtype">char</span>*      pszCategory,</div>
-<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;        <span class="keyword">const</span> <span class="keywordtype">char</span>*      pszFile,</div>
-<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;        <span class="keyword">const</span> <span class="keywordtype">char</span>*      pszFunction,</div>
-<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;        <span class="keywordtype">int</span>              nLine,</div>
-<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;        va_list          args);</div>
-<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;<span class="comment">    /**</span></div>
-<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;<span class="comment">        @brief Register logger unit</span></div>
-<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;<span class="comment">        @param svUnitName - unit name (category name, file or function) </span></div>
-<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;<span class="comment">        @param unit       - unit info </span></div>
-<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;<span class="comment">    **/</span></div>
-<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classqx_1_1base__logger__stream.html#a99637f11420d3b811336fc05fd63b987">register_unit</a>(std::string_view svUnitName, <span class="keyword">const</span> <a class="code" href="structqx_1_1log__unit__info.html">log_unit_info</a>&amp; unit) noexcept;</div>
-<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;<span class="comment">    /**</span></div>
-<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;<span class="comment">        @brief Deregister logger unit</span></div>
-<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;<span class="comment">        @param svUnitName - unit name (category name, file or function)</span></div>
-<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;<span class="comment">    **/</span></div>
-<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classqx_1_1base__logger__stream.html#a9f1a63558efd0f219661b9fe05556b92">deregister_unit</a>(std::string_view svUnitName) noexcept;</div>
-<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;<span class="comment">    /**</span></div>
-<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;<span class="comment">        @brief  Format time string to the buffer</span></div>
-<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;<span class="comment">        @tparam char_type - char type</span></div>
-<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;<span class="comment">        @param  sTime - output time buffer</span></div>
-<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;<span class="comment">    **/</span></div>
-<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;    <span class="keyword">template</span>&lt;<span class="keyword">class</span> <span class="keywordtype">char</span>_type&gt;</div>
-<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;    <span class="keyword">static</span> <span class="keywordtype">void</span> <a class="code" href="classqx_1_1base__logger__stream.html#afde430836cbdcaa4a1d5bc85165f000a">format_time_string</a>(<a class="code" href="classqx_1_1basic__string.html">basic_string&lt;char_type&gt;</a>&amp; sTime) noexcept;</div>
-<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160; </div>
-<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;<span class="keyword">protected</span>:<span class="comment"></span></div>
-<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;<span class="comment">    /**</span></div>
-<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;<span class="comment">        @brief  Get string buffers</span></div>
-<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;<span class="comment">        @tparam char_type - char type</span></div>
-<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;<span class="comment">        @retval           - string buffers</span></div>
-<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;<span class="comment">    **/</span></div>
-<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;    <span class="keyword">template</span>&lt;<span class="keyword">class</span> <span class="keywordtype">char</span>_type&gt;</div>
-<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;    <a class="code" href="structqx_1_1logger__buffers.html">logger_buffers&lt;char_type&gt;</a>&amp; <a class="code" href="classqx_1_1base__logger__stream.html#a2ec2fe5a3a744c0a9f46b1192c27d98e">get_string_buffers</a>() noexcept;</div>
-<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160; </div>
-<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;private:<span class="comment"></span></div>
-<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;<span class="comment">    /**</span></div>
-<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;<span class="comment">        @brief Proceed stream logging</span></div>
-<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;<span class="comment">        @param svMessage - message string</span></div>
-<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;<span class="comment">        @param logUnit   - log unit info</span></div>
-<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;<span class="comment">        @param eLogLevel - this message log level</span></div>
-<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;<span class="comment">    **/</span></div>
-<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;    virtual <span class="keywordtype">void</span> do_log(std::string_view svMessage, const <a class="code" href="structqx_1_1log__unit.html">log_unit</a>&amp; logUnit, log_level eLogLevel) = 0;</div>
-<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;<span class="comment">    /**</span></div>
-<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;<span class="comment">        @brief Proceed stream logging</span></div>
-<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;<span class="comment">        @param svMessage - message string</span></div>
-<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;<span class="comment">        @param logUnit   - log unit info</span></div>
-<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;<span class="comment">        @param eLogLevel - this message log level</span></div>
-<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;<span class="comment">    **/</span></div>
-<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;    virtual <span class="keywordtype">void</span> do_log(std::wstring_view svMessage, const <a class="code" href="structqx_1_1log__unit.html">log_unit</a>&amp; logUnit, log_level eLogLevel) = 0;</div>
-<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;<span class="comment">    /**</span></div>
-<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;<span class="comment">        @brief  Try to find log unit info based on trace location info</span></div>
-<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;<span class="comment">        @param  pszCategory - code category name</span></div>
-<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;<span class="comment">        @param  pszFile     - file string</span></div>
-<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;<span class="comment">        @param  pszFunction - function string</span></div>
-<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;<span class="comment">        @retval             - log unit info if found</span></div>
-<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;<span class="comment">    **/</span></div>
-<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;    std::optional&lt;<a class="code" href="structqx_1_1log__unit.html">log_unit</a>&gt; get_unit_info(</div>
-<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;        const <span class="keywordtype">char</span>* pszCategory,</div>
-<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;        const <span class="keywordtype">char</span>* pszFile,</div>
-<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;        const <span class="keywordtype">char</span>* pszFunction) noexcept;</div>
-<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;<span class="comment">    /**</span></div>
-<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;<span class="comment">        @brief Format logger line</span></div>
-<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;<span class="comment">        @tparam char_type   - char type, typically char or wchar_t</span></div>
-<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;<span class="comment">        @param  buffers     - string buffers to reduce num of allocations</span></div>
-<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;<span class="comment">        @param  eLogLevel   - log level</span></div>
-<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;<span class="comment">        @param  pszFormat   - format string</span></div>
-<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;<span class="comment">        @param  pszCategory - code category name or nullptr</span></div>
-<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;<span class="comment">        @param  pszFile     - file name string</span></div>
-<div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;<span class="comment">        @param  pszFunction - function name string</span></div>
-<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;<span class="comment">        @param  nLine       - code line number</span></div>
-<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;<span class="comment">        @param  args        - additional args for format</span></div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;<span class="comment">/**</span></div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;<span class="comment">    @class   base_logger_stream</span></div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;<span class="comment">    @brief   Base class for logger streams</span></div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;<span class="comment">    @details ~</span></div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;<span class="comment">    @author  Khrapov</span></div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;<span class="comment">    @date    28.07.2021</span></div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;<span class="comment">**/</span></div>
+<div class="line"><a name="l00107"></a><span class="lineno"><a class="line" href="classqx_1_1base__logger__stream.html">  107</a></span>&#160;<span class="keyword">class </span><a class="code" href="classqx_1_1base__logger__stream.html">base_logger_stream</a></div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;{</div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;    <span class="keyword">static</span> constexpr <span class="keyword">const</span> <span class="keywordtype">char</span>* k_svDefaultUnit = <span class="stringliteral">&quot;default&quot;</span>;</div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160; </div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;<span class="keyword">public</span>:<span class="comment"></span></div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;<span class="comment">    /**</span></div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;<span class="comment">        @brief base_logger_stream object constructor</span></div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;<span class="comment">    **/</span></div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;    <a class="code" href="classqx_1_1base__logger__stream.html#ac909889551a450d2302b29dec55b1d8b">base_logger_stream</a>();</div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;<span class="comment">    /**</span></div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;<span class="comment">        @brief base_logger_stream object destructor</span></div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;<span class="comment">    **/</span></div>
+<div class="line"><a name="l00121"></a><span class="lineno"><a class="line" href="classqx_1_1base__logger__stream.html#a19753b3ad41e31765763b19d0b801bad">  121</a></span>&#160;    <span class="keyword">virtual</span> <a class="code" href="classqx_1_1base__logger__stream.html#a19753b3ad41e31765763b19d0b801bad">~base_logger_stream</a>() = <span class="keywordflow">default</span>;</div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;<span class="comment">    /**</span></div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;<span class="comment">        @brief  Output to stream</span></div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;<span class="comment">        @tparam char_type   - char type, typically char or wchar_t</span></div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;<span class="comment">        @param  eLogLevel   - log level</span></div>
+<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;<span class="comment">        @param  pszFormat   - format string</span></div>
+<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;<span class="comment">        @param  category    - code category</span></div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;<span class="comment">        @param  pszFile     - file name string</span></div>
+<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;<span class="comment">        @param  pszFunction - function name string</span></div>
+<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;<span class="comment">        @param  nLine       - code line number</span></div>
+<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;<span class="comment">        @param  args        - additional args for format</span></div>
+<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;<span class="comment">    **/</span></div>
+<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;    <span class="keyword">template</span>&lt;<span class="keyword">class</span> <span class="keywordtype">char</span>_type&gt;</div>
+<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classqx_1_1base__logger__stream.html#ade524d5309d3e442d4e0bae516225f6d">log</a>(</div>
+<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;        log_level        eLogLevel,</div>
+<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;        <span class="keyword">const</span> char_type* pszFormat,</div>
+<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;        <span class="keyword">const</span> <a class="code" href="classqx_1_1category.html">category</a>&amp;  <a class="code" href="classqx_1_1category.html">category</a>,</div>
+<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;        <span class="keyword">const</span> <span class="keywordtype">char</span>*      pszFile,</div>
+<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;        <span class="keyword">const</span> <span class="keywordtype">char</span>*      pszFunction,</div>
+<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;        <span class="keywordtype">int</span>              nLine,</div>
+<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;        va_list          args);</div>
+<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;<span class="comment">    /**</span></div>
+<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;<span class="comment">        @brief Register logger unit</span></div>
+<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;<span class="comment">        @param svUnitName - unit name (category name, file or function) </span></div>
+<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;<span class="comment">        @param unit       - unit info </span></div>
+<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;<span class="comment">    **/</span></div>
+<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classqx_1_1base__logger__stream.html#a99637f11420d3b811336fc05fd63b987">register_unit</a>(std::string_view svUnitName, <span class="keyword">const</span> <a class="code" href="structqx_1_1log__unit__info.html">log_unit_info</a>&amp; unit) noexcept;</div>
+<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;<span class="comment">    /**</span></div>
+<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;<span class="comment">        @brief Deregister logger unit</span></div>
+<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;<span class="comment">        @param svUnitName - unit name (category name, file or function)</span></div>
+<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;<span class="comment">    **/</span></div>
+<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classqx_1_1base__logger__stream.html#a9f1a63558efd0f219661b9fe05556b92">deregister_unit</a>(std::string_view svUnitName) noexcept;</div>
+<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;<span class="comment">    /**</span></div>
+<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;<span class="comment">        @brief  Format time string to the buffer</span></div>
+<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;<span class="comment">        @tparam char_type - char type</span></div>
+<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;<span class="comment">        @param  sTime - output time buffer</span></div>
+<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;<span class="comment">    **/</span></div>
+<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;    <span class="keyword">template</span>&lt;<span class="keyword">class</span> <span class="keywordtype">char</span>_type&gt;</div>
+<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;    <span class="keyword">static</span> <span class="keywordtype">void</span> <a class="code" href="classqx_1_1base__logger__stream.html#afde430836cbdcaa4a1d5bc85165f000a">format_time_string</a>(<a class="code" href="classqx_1_1basic__string.html">basic_string&lt;char_type&gt;</a>&amp; sTime) noexcept;</div>
+<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160; </div>
+<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;<span class="keyword">protected</span>:<span class="comment"></span></div>
+<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;<span class="comment">    /**</span></div>
+<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;<span class="comment">        @brief  Get string buffers</span></div>
+<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;<span class="comment">        @tparam char_type - char type</span></div>
+<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;<span class="comment">        @retval           - string buffers</span></div>
+<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;<span class="comment">    **/</span></div>
+<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;    <span class="keyword">template</span>&lt;<span class="keyword">class</span> <span class="keywordtype">char</span>_type&gt;</div>
+<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;    <a class="code" href="structqx_1_1logger__buffer.html">logger_buffer&lt;char_type&gt;</a>&amp; <a class="code" href="classqx_1_1base__logger__stream.html#a2a457b6681673674430f90ac323f73b5">get_log_buffer</a>() noexcept;</div>
+<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160; </div>
+<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;private:<span class="comment"></span></div>
+<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;<span class="comment">    /**</span></div>
+<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;<span class="comment">        @brief Proceed stream logging</span></div>
+<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;<span class="comment">        @param svMessage - message string</span></div>
+<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;<span class="comment">        @param logUnit   - log unit info</span></div>
+<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;<span class="comment">        @param colors    - color ranges to colorize output</span></div>
+<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;<span class="comment">        @param eLogLevel - this message log level</span></div>
+<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;<span class="comment">    **/</span></div>
+<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;    virtual <span class="keywordtype">void</span> do_log(</div>
+<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;        std::string_view                       svMessage,</div>
+<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;        const <a class="code" href="structqx_1_1log__unit.html">log_unit</a>&amp;                        logUnit,</div>
+<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;        const std::vector&lt;<a class="code" href="structqx_1_1logger__color__range.html">logger_color_range</a>&gt;&amp; colors,</div>
+<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;        log_level                              eLogLevel) = 0;</div>
+<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;<span class="comment">    /**</span></div>
+<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;<span class="comment">        @brief Proceed stream logging</span></div>
+<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;<span class="comment">        @param svMessage - message string</span></div>
+<div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;<span class="comment">        @param logUnit   - log unit info</span></div>
+<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;<span class="comment">        @param colors    - color ranges to colorize output</span></div>
+<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;<span class="comment">        @param eLogLevel - this message log level</span></div>
 <div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;<span class="comment">    **/</span></div>
-<div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;    template&lt;class char_type&gt;</div>
-<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;    static <span class="keywordtype">void</span> format_line(</div>
-<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;        <a class="code" href="structqx_1_1logger__buffers.html">logger_buffers</a>&lt;char_type&gt;&amp; buffers,</div>
-<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;        log_level                  eLogLevel,</div>
-<div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160;        const char_type*           pszFormat,</div>
-<div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160;        const char_type*           pszCategory,</div>
-<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160;        const char_type*           pszFile,</div>
-<div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160;        const char_type*           pszFunction,</div>
-<div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160;        <span class="keywordtype">int</span>                        nLine,</div>
-<div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;        va_list                    args) noexcept;</div>
-<div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160; </div>
-<div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160;private:</div>
-<div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160;    std::unordered_map&lt;<a class="code" href="classqx_1_1basic__string__hash.html">string_hash</a>, <a class="code" href="structqx_1_1log__unit__info.html">log_unit_info</a>&gt; m_Units;</div>
-<div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160;    <a class="code" href="structqx_1_1logger__buffers.html">logger_buffers</a>&lt;<span class="keywordtype">char</span>&gt;                           m_BuffersChar;</div>
-<div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160;    <a class="code" href="structqx_1_1logger__buffers.html">logger_buffers</a>&lt;<span class="keywordtype">wchar_t</span>&gt;                        m_BuffersWChar;</div>
-<div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160;    std::mutex                                     m_Mutex;</div>
-<div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160;};</div>
-<div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160; </div>
-<div class="line"><a name="l00213"></a><span class="lineno">  213</span>&#160;} <span class="comment">// namespace qx</span></div>
-<div class="line"><a name="l00214"></a><span class="lineno">  214</span>&#160; </div>
-<div class="line"><a name="l00215"></a><span class="lineno">  215</span>&#160;<span class="preprocessor">#include &lt;qx/logger/base_logger_stream.inl&gt;</span></div>
-<div class="ttc" id="aclassqx_1_1base__logger__stream_html"><div class="ttname"><a href="classqx_1_1base__logger__stream.html">qx::base_logger_stream</a></div><div class="ttdoc">Base class for logger streams.</div><div class="ttdef"><b>Definition:</b> <a href="base__logger__stream_8h_source.html#l00087">base_logger_stream.h:88</a></div></div>
+<div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;    virtual <span class="keywordtype">void</span> do_log(</div>
+<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;        std::wstring_view                      svMessage,</div>
+<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;        const <a class="code" href="structqx_1_1log__unit.html">log_unit</a>&amp;                        logUnit,</div>
+<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;        const std::vector&lt;<a class="code" href="structqx_1_1logger__color__range.html">logger_color_range</a>&gt;&amp; colors,</div>
+<div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160;        log_level                              eLogLevel) = 0;</div>
+<div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160;<span class="comment">    /**</span></div>
+<div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160;<span class="comment">        @brief  Try to find log unit info based on trace location info</span></div>
+<div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160;<span class="comment">        @param  pszCategory - code category name</span></div>
+<div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;<span class="comment">        @param  pszFile     - file string</span></div>
+<div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;<span class="comment">        @param  pszFunction - function string</span></div>
+<div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160;<span class="comment">        @retval             - log unit info if found</span></div>
+<div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160;<span class="comment">    **/</span></div>
+<div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160;    std::optional&lt;<a class="code" href="structqx_1_1log__unit.html">log_unit</a>&gt; get_unit_info(</div>
+<div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160;        const <span class="keywordtype">char</span>* pszCategory,</div>
+<div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160;        const <span class="keywordtype">char</span>* pszFile,</div>
+<div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160;        const <span class="keywordtype">char</span>* pszFunction) noexcept;</div>
+<div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00213"></a><span class="lineno">  213</span>&#160;<span class="comment">    /**</span></div>
+<div class="line"><a name="l00214"></a><span class="lineno">  214</span>&#160;<span class="comment">        @brief Format logger line</span></div>
+<div class="line"><a name="l00215"></a><span class="lineno">  215</span>&#160;<span class="comment">        @tparam char_type   - char type, typically char or wchar_t</span></div>
+<div class="line"><a name="l00216"></a><span class="lineno">  216</span>&#160;<span class="comment">        @param  buffers     - string buffers to reduce num of allocations</span></div>
+<div class="line"><a name="l00217"></a><span class="lineno">  217</span>&#160;<span class="comment">        @param  eLogLevel   - log level</span></div>
+<div class="line"><a name="l00218"></a><span class="lineno">  218</span>&#160;<span class="comment">        @param  category    - code category</span></div>
+<div class="line"><a name="l00219"></a><span class="lineno">  219</span>&#160;<span class="comment">        @param  pszFormat   - format string</span></div>
+<div class="line"><a name="l00220"></a><span class="lineno">  220</span>&#160;<span class="comment">        @param  pszFile     - file name string</span></div>
+<div class="line"><a name="l00221"></a><span class="lineno">  221</span>&#160;<span class="comment">        @param  pszFunction - function name string</span></div>
+<div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160;<span class="comment">        @param  nLine       - code line number</span></div>
+<div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160;<span class="comment">        @param  args        - additional args for format</span></div>
+<div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160;<span class="comment">    **/</span></div>
+<div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160;    template&lt;class char_type&gt;</div>
+<div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160;    static <span class="keywordtype">void</span> format_line(</div>
+<div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160;        <a class="code" href="structqx_1_1logger__buffer.html">logger_buffer</a>&lt;char_type&gt;&amp; buffers,</div>
+<div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160;        log_level                 eLogLevel,</div>
+<div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160;        const <a class="code" href="classqx_1_1category.html">category</a>&amp;           <a class="code" href="classqx_1_1category.html">category</a>,</div>
+<div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160;        const char_type*          pszFormat,</div>
+<div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160;        const char_type*          pszFile,</div>
+<div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160;        const char_type*          pszFunction,</div>
+<div class="line"><a name="l00233"></a><span class="lineno">  233</span>&#160;        <span class="keywordtype">int</span>                       nLine,</div>
+<div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160;        va_list                   args) noexcept;</div>
+<div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160; </div>
+<div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160;private:</div>
+<div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;    std::unordered_map&lt;<a class="code" href="classqx_1_1basic__string__hash.html">string_hash</a>, <a class="code" href="structqx_1_1log__unit__info.html">log_unit_info</a>&gt; m_Units;</div>
+<div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160;    <a class="code" href="structqx_1_1logger__buffer.html">logger_buffer</a>&lt;<span class="keywordtype">char</span>&gt;                            m_BufferChar;</div>
+<div class="line"><a name="l00239"></a><span class="lineno">  239</span>&#160;    <a class="code" href="structqx_1_1logger__buffer.html">logger_buffer</a>&lt;<span class="keywordtype">wchar_t</span>&gt;                         m_BufferWChar;</div>
+<div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160;    std::mutex                                     m_Mutex;</div>
+<div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160;};</div>
+<div class="line"><a name="l00242"></a><span class="lineno">  242</span>&#160; </div>
+<div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160;} <span class="comment">// namespace qx</span></div>
+<div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160; </div>
+<div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160;<span class="preprocessor">#include &lt;qx/logger/base_logger_stream.inl&gt;</span></div>
+<div class="ttc" id="acategory_8h_html"><div class="ttname"><a href="category_8h.html">category.h</a></div><div class="ttdoc">Contains category class.</div></div>
+<div class="ttc" id="aclassqx_1_1base__logger__stream_html"><div class="ttname"><a href="classqx_1_1base__logger__stream.html">qx::base_logger_stream</a></div><div class="ttdoc">Base class for logger streams.</div><div class="ttdef"><b>Definition:</b> <a href="base__logger__stream_8h_source.html#l00107">base_logger_stream.h:108</a></div></div>
 <div class="ttc" id="aclassqx_1_1base__logger__stream_html_a19753b3ad41e31765763b19d0b801bad"><div class="ttname"><a href="classqx_1_1base__logger__stream.html#a19753b3ad41e31765763b19d0b801bad">qx::base_logger_stream::~base_logger_stream</a></div><div class="ttdeci">virtual ~base_logger_stream()=default</div><div class="ttdoc">base_logger_stream object destructor</div></div>
-<div class="ttc" id="aclassqx_1_1base__logger__stream_html_a21c813d6b6f31618137e34d8b31a35fb"><div class="ttname"><a href="classqx_1_1base__logger__stream.html#a21c813d6b6f31618137e34d8b31a35fb">qx::base_logger_stream::log</a></div><div class="ttdeci">void log(log_level eLogLevel, const char_type *pszFormat, const char *pszCategory, const char *pszFile, const char *pszFunction, int nLine, va_list args)</div><div class="ttdoc">Output to stream.</div><div class="ttdef"><b>Definition:</b> <a href="base__logger__stream_8inl_source.html#l00028">base_logger_stream.inl:28</a></div></div>
-<div class="ttc" id="aclassqx_1_1base__logger__stream_html_a2ec2fe5a3a744c0a9f46b1192c27d98e"><div class="ttname"><a href="classqx_1_1base__logger__stream.html#a2ec2fe5a3a744c0a9f46b1192c27d98e">qx::base_logger_stream::get_string_buffers</a></div><div class="ttdeci">logger_buffers&lt; char_type &gt; &amp; get_string_buffers() noexcept</div><div class="ttdoc">Get string buffers.</div><div class="ttdef"><b>Definition:</b> <a href="base__logger__stream_8inl_source.html#l00113">base_logger_stream.inl:113</a></div></div>
+<div class="ttc" id="aclassqx_1_1base__logger__stream_html_a2a457b6681673674430f90ac323f73b5"><div class="ttname"><a href="classqx_1_1base__logger__stream.html#a2a457b6681673674430f90ac323f73b5">qx::base_logger_stream::get_log_buffer</a></div><div class="ttdeci">logger_buffer&lt; char_type &gt; &amp; get_log_buffer() noexcept</div><div class="ttdoc">Get string buffers.</div><div class="ttdef"><b>Definition:</b> <a href="base__logger__stream_8inl_source.html#l00113">base_logger_stream.inl:113</a></div></div>
 <div class="ttc" id="aclassqx_1_1base__logger__stream_html_a99637f11420d3b811336fc05fd63b987"><div class="ttname"><a href="classqx_1_1base__logger__stream.html#a99637f11420d3b811336fc05fd63b987">qx::base_logger_stream::register_unit</a></div><div class="ttdeci">void register_unit(std::string_view svUnitName, const log_unit_info &amp;unit) noexcept</div><div class="ttdoc">Register logger unit.</div><div class="ttdef"><b>Definition:</b> <a href="base__logger__stream_8inl_source.html#l00083">base_logger_stream.inl:83</a></div></div>
 <div class="ttc" id="aclassqx_1_1base__logger__stream_html_a9f1a63558efd0f219661b9fe05556b92"><div class="ttname"><a href="classqx_1_1base__logger__stream.html#a9f1a63558efd0f219661b9fe05556b92">qx::base_logger_stream::deregister_unit</a></div><div class="ttdeci">void deregister_unit(std::string_view svUnitName) noexcept</div><div class="ttdoc">Deregister logger unit.</div><div class="ttdef"><b>Definition:</b> <a href="base__logger__stream_8inl_source.html#l00089">base_logger_stream.inl:89</a></div></div>
 <div class="ttc" id="aclassqx_1_1base__logger__stream_html_ac909889551a450d2302b29dec55b1d8b"><div class="ttname"><a href="classqx_1_1base__logger__stream.html#ac909889551a450d2302b29dec55b1d8b">qx::base_logger_stream::base_logger_stream</a></div><div class="ttdeci">base_logger_stream()</div><div class="ttdoc">base_logger_stream object constructor</div><div class="ttdef"><b>Definition:</b> <a href="base__logger__stream_8inl_source.html#l00022">base_logger_stream.inl:22</a></div></div>
+<div class="ttc" id="aclassqx_1_1base__logger__stream_html_ade524d5309d3e442d4e0bae516225f6d"><div class="ttname"><a href="classqx_1_1base__logger__stream.html#ade524d5309d3e442d4e0bae516225f6d">qx::base_logger_stream::log</a></div><div class="ttdeci">void log(log_level eLogLevel, const char_type *pszFormat, const category &amp;category, const char *pszFile, const char *pszFunction, int nLine, va_list args)</div><div class="ttdoc">Output to stream.</div><div class="ttdef"><b>Definition:</b> <a href="base__logger__stream_8inl_source.html#l00028">base_logger_stream.inl:28</a></div></div>
 <div class="ttc" id="aclassqx_1_1base__logger__stream_html_afde430836cbdcaa4a1d5bc85165f000a"><div class="ttname"><a href="classqx_1_1base__logger__stream.html#afde430836cbdcaa4a1d5bc85165f000a">qx::base_logger_stream::format_time_string</a></div><div class="ttdeci">static void format_time_string(basic_string&lt; char_type &gt; &amp;sTime) noexcept</div><div class="ttdoc">Format time string to the buffer.</div><div class="ttdef"><b>Definition:</b> <a href="base__logger__stream_8inl_source.html#l00095">base_logger_stream.inl:95</a></div></div>
 <div class="ttc" id="aclassqx_1_1basic__string__hash_html"><div class="ttname"><a href="classqx_1_1basic__string__hash.html">qx::basic_string_hash</a></div><div class="ttdoc">String hash object.</div><div class="ttdef"><b>Definition:</b> <a href="string__hash_8h_source.html#l00044">string_hash.h:45</a></div></div>
 <div class="ttc" id="aclassqx_1_1basic__string_html"><div class="ttname"><a href="classqx_1_1basic__string.html">qx::basic_string&lt; char_type &gt;</a></div></div>
+<div class="ttc" id="aclassqx_1_1category_html"><div class="ttname"><a href="classqx_1_1category.html">qx::category</a></div><div class="ttdoc">A category is a class that identifies a particular piece of code. This code can be located in differe...</div><div class="ttdef"><b>Definition:</b> <a href="category_8h_source.html#l00035">category.h:36</a></div></div>
+<div class="ttc" id="aclassqx_1_1color_html"><div class="ttname"><a href="classqx_1_1color.html">qx::color</a></div><div class="ttdoc">RGBA color.</div><div class="ttdef"><b>Definition:</b> <a href="color_8h_source.html#l00034">color.h:35</a></div></div>
 <div class="ttc" id="astring__converters_8h_html"><div class="ttname"><a href="string__converters_8h.html">string_converters.h</a></div><div class="ttdoc">Contains string converters.</div></div>
-<div class="ttc" id="astructqx_1_1log__unit__info_html"><div class="ttname"><a href="structqx_1_1log__unit__info.html">qx::log_unit_info</a></div><div class="ttdef"><b>Definition:</b> <a href="base__logger__stream_8h_source.html#l00045">base_logger_stream.h:46</a></div></div>
+<div class="ttc" id="astructqx_1_1log__unit__info_html"><div class="ttname"><a href="structqx_1_1log__unit__info.html">qx::log_unit_info</a></div><div class="ttdef"><b>Definition:</b> <a href="base__logger__stream_8h_source.html#l00065">base_logger_stream.h:66</a></div></div>
 <div class="ttc" id="astructqx_1_1log__unit__info_html_a355b9352c50a0dda8c925fc23eca874d"><div class="ttname"><a href="structqx_1_1log__unit__info.html#a355b9352c50a0dda8c925fc23eca874d">qx::log_unit_info::get_format_func</a></div><div class="ttdeci">const format_func&lt; char_type &gt; &amp; get_format_func()</div><div class="ttdoc">Get format func corresponding to char type.</div><div class="ttdef"><b>Definition:</b> <a href="base__logger__stream_8inl_source.html#l00014">base_logger_stream.inl:14</a></div></div>
-<div class="ttc" id="astructqx_1_1log__unit_html"><div class="ttname"><a href="structqx_1_1log__unit.html">qx::log_unit</a></div><div class="ttdef"><b>Definition:</b> <a href="base__logger__stream_8h_source.html#l00072">base_logger_stream.h:73</a></div></div>
-<div class="ttc" id="astructqx_1_1logger__buffers_html"><div class="ttname"><a href="structqx_1_1logger__buffers.html">qx::logger_buffers</a></div><div class="ttdef"><b>Definition:</b> <a href="base__logger__stream_8h_source.html#l00036">base_logger_stream.h:37</a></div></div>
+<div class="ttc" id="astructqx_1_1log__unit_html"><div class="ttname"><a href="structqx_1_1log__unit.html">qx::log_unit</a></div><div class="ttdef"><b>Definition:</b> <a href="base__logger__stream_8h_source.html#l00092">base_logger_stream.h:93</a></div></div>
+<div class="ttc" id="astructqx_1_1logger__buffer_html"><div class="ttname"><a href="structqx_1_1logger__buffer.html">qx::logger_buffer</a></div><div class="ttdef"><b>Definition:</b> <a href="base__logger__stream_8h_source.html#l00043">base_logger_stream.h:44</a></div></div>
+<div class="ttc" id="astructqx_1_1logger__color__range_html"><div class="ttname"><a href="structqx_1_1logger__color__range.html">qx::logger_color_range</a></div><div class="ttdef"><b>Definition:</b> <a href="base__logger__stream_8h_source.html#l00036">base_logger_stream.h:37</a></div></div>
 <div class="ttc" id="asuppress__warnings_8h_html"><div class="ttname"><a href="suppress__warnings_8h.html">suppress_warnings.h</a></div><div class="ttdoc">Suppress warnings macros.</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
