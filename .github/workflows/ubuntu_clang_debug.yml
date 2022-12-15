@@ -10,10 +10,9 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-      - uses: egor-tensin/setup-clang@v1
+      - uses: KyleMayes/install-llvm-action@v1
         with:
-          version: 14
-          platform: x64
+          version: "14.0"
       - uses: ./.github/actions/linux/install_dependencies
         with:
           build_type: Debug
