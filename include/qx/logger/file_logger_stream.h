@@ -11,6 +11,7 @@
 
 #include <qx/logger/base_logger_stream.h>
 
+#include <filesystem>
 #include <fstream>
 
 namespace qx

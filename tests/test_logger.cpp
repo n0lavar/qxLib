@@ -127,7 +127,8 @@ protected:
             || Traits::GetUnit() == UNIT_FILE && Traits::GetUnit() == Traits::GetTraceFile()
             || Traits::GetUnit() == UNIT_FUNC && m_bFunction)
         {
-            std::ifstream ifs(m_sLogFilePath.data());
+            const std::filesystem::path path(m_sLogFilePath.c_str());
+            std::ifstream               ifs(path);
 
             std::string sLine(512, '\0');
             std::smatch match;

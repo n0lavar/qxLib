@@ -38,13 +38,15 @@ inline file_logger_stream::file_logger_stream(
 
     sLogFile += L".log";
 
-    m_CharFile = std::basic_ofstream<char>(sLogFile.c_str(), openingMode);
-    if (!m_CharFile)
-        std::wcerr << L"Can't create log file " << sLogFile;
+    const std::filesystem::path path(sLogFile.c_str());
 
-    m_WCharFile = std::basic_ofstream<wchar_t>(sLogFile.c_str(), openingMode);
+    m_CharFile = std::basic_ofstream<char>(path, openingMode);
+    if (!m_CharFile)
+        std::wcerr << L"Can't open log file " << sLogFile;
+
+    m_WCharFile = std::basic_ofstream<wchar_t>(path, openingMode);
     if (!m_WCharFile)
-        std::wcerr << L"Can't create log file " << sLogFile;
+        std::wcerr << L"Can't open log file " << sLogFile;
 }
 
 inline file_logger_stream::~file_logger_stream()
