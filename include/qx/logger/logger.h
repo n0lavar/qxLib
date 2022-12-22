@@ -14,17 +14,9 @@
 
 #include <memory>
 
-/**
-    @def   QX_LOG_COMMON
-    @brief Common macro for logging. Prefer using QX_TLOG or QX_LOG
-    @param loggerInstance - logger instance 
-    @param category       - category to be used to manage output 
-    @param eLogLevel      - logging level 
-    @param format         - format string
-    @param ...            - additional args for formatting
-**/
-#define QX_LOG_COMMON(loggerInstance, category, eLogLevel, format, ...) \
-    loggerInstance.log(eLogLevel, format, category, QX_SHORT_FILE, __FUNCTION__, __LINE__, ##__VA_ARGS__)
+#ifndef QX_LOGGER_INSTANCE
+    #define QX_LOGGER_INSTANCE qx::logger_singleton::get_instance()
+#endif
 
 /**
     @brief Log with category
@@ -34,7 +26,7 @@
     @param ...       - additional args for formatting
 **/
 #define QX_LOG_C(category, eLogLevel, format, ...) \
-    QX_LOG_COMMON(qx::logger_singleton::get_instance(), category, eLogLevel, format, ##__VA_ARGS__)
+    QX_LOGGER_INSTANCE.log(eLogLevel, format, category, QX_SHORT_FILE, __FUNCTION__, __LINE__, ##__VA_ARGS__)
 
 /**
     @def   QX_LOG
