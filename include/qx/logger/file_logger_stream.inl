@@ -57,6 +57,8 @@ inline file_logger_stream::~file_logger_stream()
 
 inline void file_logger_stream::flush()
 {
+    QX_PERF_SCOPE(CatLogger, "Flush to the file");
+
     m_CharFile << std::flush;
     m_WCharFile << std::flush;
 }
@@ -85,6 +87,8 @@ inline void file_logger_stream::log_file(
     const log_unit&                   logUnit,
     log_level                         eLogLevel)
 {
+    QX_PERF_SCOPE(CatLogger, "Log to the file");
+
     if constexpr (std::is_same_v<char_type, char>)
         m_CharFile << svMessage;
     else

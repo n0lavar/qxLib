@@ -42,6 +42,8 @@ inline void base_logger_stream::log(
         {
             std::lock_guard lock(m_Mutex);
 
+            QX_PERF_SCOPE(CatLogger, "Log");
+
             auto& buffers = get_log_buffer<char_type>();
             buffers.clear();
 

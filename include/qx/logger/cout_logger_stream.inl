@@ -32,11 +32,15 @@ inline cout_logger_stream::cout_logger_stream(
         // before each I/O operation on the other stream
         std::cin.tie(nullptr);
         std::wcin.tie(nullptr);
+        std::cout.tie(nullptr);
+        std::wcout.tie(nullptr);
     }
 }
 
 inline void cout_logger_stream::flush()
 {
+    QX_PERF_SCOPE(CatLogger, "Flush to cout");
+
     std::cout << std::flush;
     std::wcout << std::flush;
 }
@@ -80,6 +84,8 @@ inline void cout_logger_stream::log_cout(
     const std::vector<logger_color_range>& colors,
     log_level                              eLogLevel)
 {
+    QX_PERF_SCOPE(CatLogger, "Log to cout");
+
     auto& cout = get_cout<char_type>();
 
     if (m_bUsingColors)

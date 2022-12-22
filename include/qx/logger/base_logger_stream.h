@@ -11,12 +11,15 @@
 
 #include <qx/category.h>
 #include <qx/containers/string/string_converters.h>
+#include <qx/internal/perf_scope.h>
 #include <qx/macros/suppress_warnings.h>
 
 #include <ctime>
 #include <functional>
 #include <mutex>
 #include <unordered_map>
+
+QX_DEFINE_CATEGORY(CatLogger);
 
 namespace qx
 {
