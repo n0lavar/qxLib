@@ -3,14 +3,14 @@
     @file      test_threads_shared.cpp
     @author    Khrapov
     @date      4.03.2021
-    @copyright © Nick Khrapov, 2021. All right reserved.
+    @copyright ï¿½ Nick Khrapov, 2021. All right reserved.
 
 **/
 #include <common.h>
 
 //V_EXCLUDE_PATH *threads_shared.cpp
 
-#include <qx/thread/threads_shared.h>
+#include <qx/threads_shared.h>
 
 #include <chrono>
 #include <list>
