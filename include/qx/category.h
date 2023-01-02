@@ -10,6 +10,8 @@
 **/
 #pragma once
 
+#include <qx/containers/string/string_utils.h>
+#include <qx/macros/common.h>
 #include <qx/render/color.h>
 
 /**
@@ -17,7 +19,26 @@
     @param name - category name
     @param ...  - optional category color and description
 **/
-#define QX_DEFINE_CATEGORY(name, ...) constexpr qx::category name(#name, ##__VA_ARGS__);
+#define QX_DEFINE_CATEGORY(name, ...) constexpr qx::category name(#name, ##__VA_ARGS__)
+
+/**
+    @brief Define file category
+           You can access this value via QX_FILE_CATEGORY()
+           This category will not be exported via #include
+    @param _category - category to use in this file
+**/
+#define QX_DEFINE_FILE_CATEGORY(_category)                                                                    \
+    template<>                                                                                                \
+    constexpr const qx::category& qx::details::get_file_category<qx::djb2a_hash(QX_SHORT_FILE, 0)>() noexcept \
+    {                                                                                                         \
+        return _category;                                                                                     \
+    }
+
+/**
+    @brief Get category defined in QX_DEFINE_FILE_CATEGORY
+           If there is none, CatDefault will be used
+**/
+#define QX_FILE_CATEGORY() qx::details::get_file_category<qx::djb2a_hash(QX_SHORT_FILE, 0)>()
 
 namespace qx
 {
@@ -72,26 +93,6 @@ private:
     const char* const m_pszDescription = nullptr;
 };
 
-constexpr category::category(const char* pszName, const color& categoryColor, const char* pszDescription) noexcept
-    : m_Color(categoryColor)
-    , m_pszName(pszName)
-    , m_pszDescription(pszDescription)
-{
-}
-
-constexpr const char* category::get_name() const noexcept
-{
-    return m_pszName;
-}
-
-constexpr const char* category::get_description() const noexcept
-{
-    return m_pszDescription;
-}
-
-constexpr const color& category::get_color() const noexcept
-{
-    return m_Color;
-}
-
 } // namespace qx
+
+#include <qx/category.inl>

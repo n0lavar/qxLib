@@ -94,7 +94,7 @@ constexpr const float* color::data() const noexcept
     return &(m_Color.x);
 }
 
-constexpr unsigned int color::hex() const noexcept
+constexpr unsigned int color::hex_rgba() const noexcept
 {
     const unsigned int r = static_cast<unsigned int>(float_to_dec(m_Color.x));
     const unsigned int g = static_cast<unsigned int>(float_to_dec(m_Color.y));
@@ -102,6 +102,16 @@ constexpr unsigned int color::hex() const noexcept
     const unsigned int a = static_cast<unsigned int>(float_to_dec(m_Color.w));
 
     return ((r & 0xff) << 24) + ((g & 0xff) << 16) + ((b & 0xff) << 8) + (a & 0xff);
+}
+
+constexpr unsigned int color::hex_argb() const noexcept
+{
+    const unsigned int r = static_cast<unsigned int>(float_to_dec(m_Color.x));
+    const unsigned int g = static_cast<unsigned int>(float_to_dec(m_Color.y));
+    const unsigned int b = static_cast<unsigned int>(float_to_dec(m_Color.z));
+    const unsigned int a = static_cast<unsigned int>(float_to_dec(m_Color.w));
+
+    return ((a & 0xff) << 24) + ((r & 0xff) << 16) + ((g & 0xff) << 8) + (b & 0xff);
 }
 
 constexpr bool color::operator==(const color& other) const noexcept

@@ -14,6 +14,8 @@
 
 #ifndef QX_PERF_SCOPE
     // ... is category + name
+    // ... or category
+    // ... or name
     //     or empty
     #define QX_PERF_SCOPE(category, name) QX_EMPTY_MACRO
 #endif

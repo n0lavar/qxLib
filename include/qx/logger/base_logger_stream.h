@@ -19,7 +19,7 @@
 #include <mutex>
 #include <unordered_map>
 
-QX_DEFINE_CATEGORY(CatLogger);
+QX_DEFINE_CATEGORY(CatLogger, qx::color::dark_turquoise());
 
 namespace qx
 {

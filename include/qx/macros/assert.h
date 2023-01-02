@@ -14,10 +14,6 @@
 
 #include <exception>
 
-// default assert/expect category
-// should only be used in file macros
-QX_DEFINE_CATEGORY(CatAssert);
-
 #if QX_MSVC
     #define _QX_DEBUG_BREAK __debugbreak()
 #elif QX_CLANG
@@ -34,31 +30,35 @@ namespace qx::details
 
 template<log_level eLogLevel, class... ArgsType>
 void resolve_assert_proceeding(
-    const char* pszFunction,
-    const char* pszFile,
-    int         nLine,
-    const char* pszCondition,
+    const category& fileCategory,
+    const char*     pszFunction,
+    const char*     pszFile,
+    int             nLine,
+    const char*     pszCondition,
     ArgsType&&... args)
 {
-    QX_LOGGER_INSTANCE.log(eLogLevel, "[%s] ", CatAssert, pszFile, pszFunction, nLine, pszCondition, args...);
+    QX_LOGGER_INSTANCE.log(eLogLevel, "[%s] ", fileCategory, pszFile, pszFunction, nLine, pszCondition, args...);
 }
 
 template<log_level eLogLevel, class... ArgsType>
 void resolve_assert_proceeding(
-    const char* pszFunction,
-    const char* pszFile,
-    int         nLine,
-    const char* pszCondition,
-    const char* pszFormat,
+    const category& fileCategory,
+    const char*     pszFunction,
+    const char*     pszFile,
+    int             nLine,
+    const char*     pszCondition,
+    const char*     pszFormat,
     ArgsType&&... args)
 {
     string sFormat("[%s] ");
     sFormat += pszFormat;
-    QX_LOGGER_INSTANCE.log(eLogLevel, sFormat.c_str(), CatAssert, pszFile, pszFunction, nLine, pszCondition, args...);
+    QX_LOGGER_INSTANCE
+        .log(eLogLevel, sFormat.c_str(), fileCategory, pszFile, pszFunction, nLine, pszCondition, args...);
 }
 
 template<log_level eLogLevel, class... ArgsType>
 void resolve_assert_proceeding(
+    const category& fileCategory,
     const char*     pszFunction,
     const char*     pszFile,
     int             nLine,
@@ -83,6 +83,7 @@ void resolve_assert_proceeding(
 #ifndef QX_EXPECT_BEFORE_DEBUG_BREAK
     #define QX_EXPECT_BEFORE_DEBUG_BREAK(condition, ...)              \
         qx::details::resolve_assert_proceeding<qx::log_level::error>( \
+            QX_FILE_CATEGORY(),                                       \
             __FUNCTION__,                                             \
             QX_SHORT_FILE,                                            \
             __LINE__,                                                 \
@@ -105,6 +106,7 @@ void resolve_assert_proceeding(
 #ifndef QX_ASSERT_BEFORE_DEBUG_BREAK
     #define QX_ASSERT_BEFORE_DEBUG_BREAK(condition, ...)                 \
         qx::details::resolve_assert_proceeding<qx::log_level::critical>( \
+            QX_FILE_CATEGORY(),                                          \
             __FUNCTION__,                                                \
             QX_SHORT_FILE,                                               \
             __LINE__,                                                    \
