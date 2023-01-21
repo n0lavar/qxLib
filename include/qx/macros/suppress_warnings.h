@@ -20,19 +20,19 @@
     **/
     #define QX_PUSH_SUPPRESS_MSVC_WARNINGS(warnings) \
         __pragma(warning(push));                     \
-        __pragma(warning(disable : warnings));
+        __pragma(warning(disable : warnings))
 
     /**
         @def   QX_PUSH_SUPPRESS_ALL_WARNINGS
         @brief Disable all warnings
     **/
-    #define QX_PUSH_SUPPRESS_ALL_WARNINGS __pragma(warning(push, 0));
+    #define QX_PUSH_SUPPRESS_ALL_WARNINGS() __pragma(warning(push, 0))
 
     /**
         @def   QX_POP_SUPPRESS_WARNINGS
         @brief Enable all warnings
     **/
-    #define QX_POP_SUPPRESS_WARNINGS __pragma(warning(pop));
+    #define QX_POP_SUPPRESS_WARNINGS() __pragma(warning(pop))
 
     /**
         @brief Force disable MSVC warnings, including all nested header includes
@@ -50,8 +50,8 @@
 #else
 
     #define QX_PUSH_SUPPRESS_MSVC_WARNINGS(warnings)
-    #define QX_PUSH_SUPPRESS_ALL_WARNINGS
-    #define QX_POP_SUPPRESS_WARNINGS
+    #define QX_PUSH_SUPPRESS_ALL_WARNINGS()
+    #define QX_POP_SUPPRESS_WARNINGS()
     #define QX_DISABLE_MSVC_WARNINGS(warnings)
     #define QX_RESTORE_MSVC_WARNINGS(warnings)
 

@@ -241,7 +241,7 @@ inline I maxpot(I nValue)
 // trick to determine if an integer is between two integers (inclusive)
 // with only one comparison/branch
 // https://stackoverflow.com/a/17095534/8021662
-QX_DISABLE_MSVC_WARNINGS(4018 4388)
+QX_DISABLE_MSVC_WARNINGS(4018 4388);
 
 /**
     @brief  Checks if value is between left and right
@@ -277,7 +277,7 @@ constexpr bool between(T left, T value, T right, Compare compare)
     }
 }
 
-QX_RESTORE_MSVC_WARNINGS(4018 4388)
+QX_RESTORE_MSVC_WARNINGS(4018 4388);
 
 /**
     @brief   Checks if value is between left and right
@@ -292,9 +292,9 @@ QX_RESTORE_MSVC_WARNINGS(4018 4388)
 template<typename T, typename Compare = std::less_equal<>>
 constexpr bool between(T left, T value, T right)
 {
-    QX_PUSH_SUPPRESS_MSVC_WARNINGS(4388)
+    QX_PUSH_SUPPRESS_MSVC_WARNINGS(4388);
     return between(left, value, right, Compare());
-    QX_POP_SUPPRESS_WARNINGS
+    QX_POP_SUPPRESS_WARNINGS();
 }
 
 } // namespace qx

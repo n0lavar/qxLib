@@ -15,9 +15,9 @@
 #include <qx/macros/copyable_movable.h>
 #include <qx/math/common.h>
 
-QX_PUSH_SUPPRESS_ALL_WARNINGS
+QX_PUSH_SUPPRESS_ALL_WARNINGS();
 #include <glm/vec2.hpp>
-QX_POP_SUPPRESS_WARNINGS
+QX_POP_SUPPRESS_WARNINGS();
 
 namespace qx
 {

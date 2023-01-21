@@ -103,9 +103,9 @@ inline void base_logger_stream::format_time_string(
     char_type                chTimeDelimiter) noexcept
 {
     std::time_t t = std::time(nullptr);
-    QX_PUSH_SUPPRESS_MSVC_WARNINGS(4996)
+    QX_PUSH_SUPPRESS_MSVC_WARNINGS(4996);
     std::tm* now = std::localtime(&t);
-    QX_POP_SUPPRESS_WARNINGS
+    QX_POP_SUPPRESS_WARNINGS();
 
     sTime.sprintf(
         QX_STR_PREFIX(char_type, "%02d%c%02d%c%04d_%02d%c%02d%c%02d"),

@@ -15,7 +15,7 @@
 
 #include <qx/macros/assert.h>
 
-QX_PUSH_SUPPRESS_MSVC_WARNINGS(4702)
+QX_PUSH_SUPPRESS_MSVC_WARNINGS(4702);
 
 void Foo()
 {
@@ -1162,7 +1162,7 @@ TEST(qx_assert, expect_return_c_macro_compilation)
     Check();
 }
 
-QX_POP_SUPPRESS_WARNINGS
+QX_POP_SUPPRESS_WARNINGS();
 
 TEST(qx_assert, assert_macros)
 {

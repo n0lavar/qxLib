@@ -17,7 +17,7 @@
 
 #include <algorithm>
 
-QX_PUSH_SUPPRESS_MSVC_WARNINGS(5233)
+QX_PUSH_SUPPRESS_MSVC_WARNINGS(5233);
 
 template<typename StringTraits>
 class TestStringHashTyped : public ::testing::Test
@@ -58,7 +58,7 @@ TYPED_TEST(TestStringHashTyped, hashes_inequality)
                                   StringHashType(STR("random string")),
                                   StringHashType(STR("KEKW")) };
 
-    QX_PUSH_SUPPRESS_MSVC_WARNINGS(5258)
+    QX_PUSH_SUPPRESS_MSVC_WARNINGS(5258);
     const bool bAllDifferent = std::all_of(
         hashes.cbegin() + 1,
         hashes.cend(),
@@ -66,7 +66,7 @@ TYPED_TEST(TestStringHashTyped, hashes_inequality)
         {
             return hash != hashes[0];
         });
-    QX_POP_SUPPRESS_WARNINGS
+    QX_POP_SUPPRESS_WARNINGS();
 
     EXPECT_TRUE(bAllDifferent);
 }
@@ -88,4 +88,4 @@ TEST(TestStringHash, operator_)
     }
 }
 
-QX_POP_SUPPRESS_WARNINGS
+QX_POP_SUPPRESS_WARNINGS();

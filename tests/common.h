@@ -12,8 +12,8 @@
 #include <qx/macros/suppress_warnings.h>
 #include <qx/pvs_config.h>
 
-QX_PUSH_SUPPRESS_ALL_WARNINGS
+QX_PUSH_SUPPRESS_ALL_WARNINGS();
 #include <gtest/gtest.h>
-QX_POP_SUPPRESS_WARNINGS
+QX_POP_SUPPRESS_WARNINGS();
 
 #define GTEST_SINGLE_ARGUMENT(...) (__VA_ARGS__)

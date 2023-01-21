@@ -51,10 +51,10 @@ inline string to_string(std::wstring_view str, const std::locale& locale = std::
 **/
 inline wstring utf8_to_wstring(const char* pszUtf8)
 {
-    QX_PUSH_SUPPRESS_ALL_WARNINGS
+    QX_PUSH_SUPPRESS_ALL_WARNINGS();
     std::wstring_convert<std::codecvt_utf8_utf16<wchar_t>> converter;
     return converter.from_bytes(pszUtf8);
-    QX_POP_SUPPRESS_WARNINGS
+    QX_POP_SUPPRESS_WARNINGS();
 }
 
 /**

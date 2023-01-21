@@ -131,21 +131,19 @@ void resolve_assert_proceeding(
 #define _QX_ASSERT(before_debug_break, debug_break, after_debug_break, condition, ...) \
     [&]()                                                                              \
     {                                                                                  \
+        QX_PUSH_SUPPRESS_MSVC_WARNINGS(4702);                                          \
         if (!(condition)) [[unlikely]]                                                 \
         {                                                                              \
             before_debug_break(condition, ##__VA_ARGS__);                              \
             debug_break;                                                               \
             after_debug_break(condition, ##__VA_ARGS__);                               \
-            QX_PUSH_SUPPRESS_MSVC_WARNINGS(4702)                                       \
             return false;                                                              \
-            QX_POP_SUPPRESS_WARNINGS                                                   \
         }                                                                              \
         else                                                                           \
         {                                                                              \
-            QX_PUSH_SUPPRESS_MSVC_WARNINGS(4702)                                       \
             return true;                                                               \
-            QX_POP_SUPPRESS_WARNINGS                                                   \
         }                                                                              \
+        QX_POP_SUPPRESS_WARNINGS();                                                    \
     }()
 
 #define _QX_ASSERT_NO_ENTRY(before_debug_break, debug_break, after_debug_break, ...) \

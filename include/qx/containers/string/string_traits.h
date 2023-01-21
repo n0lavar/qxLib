@@ -100,9 +100,9 @@ struct char_traits<char> : public common_char_traits<char>
     template<class... Args>
     static int sscanf(const_pointer pszString, const_pointer pszFormat, Args... args) noexcept
     {
-        QX_PUSH_SUPPRESS_ALL_WARNINGS
+        QX_PUSH_SUPPRESS_ALL_WARNINGS();
         return std::sscanf(pszString, pszFormat, args...);
-        QX_POP_SUPPRESS_WARNINGS
+        QX_POP_SUPPRESS_WARNINGS();
     }
 };
 
@@ -183,9 +183,9 @@ struct char_traits<wchar_t> : public common_char_traits<wchar_t>
     template<class... Args>
     static int sscanf(const_pointer pszString, const_pointer pszFormat, Args... args) noexcept
     {
-        QX_PUSH_SUPPRESS_ALL_WARNINGS
+        QX_PUSH_SUPPRESS_ALL_WARNINGS();
         return std::swscanf(pszString, pszFormat, args...);
-        QX_POP_SUPPRESS_WARNINGS
+        QX_POP_SUPPRESS_WARNINGS();
     }
 };
 

@@ -14,9 +14,9 @@
 
 #include <random>
 
-QX_PUSH_SUPPRESS_ALL_WARNINGS
+QX_PUSH_SUPPRESS_ALL_WARNINGS();
 #include <glm/glm.hpp>
-QX_POP_SUPPRESS_WARNINGS
+QX_POP_SUPPRESS_WARNINGS();
 
 namespace qx
 {

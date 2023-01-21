@@ -17,7 +17,7 @@
 #include <list>
 #include <unordered_map>
 
-QX_PUSH_SUPPRESS_MSVC_WARNINGS(5233)
+QX_PUSH_SUPPRESS_MSVC_WARNINGS(5233);
 
 template<typename StringTraits>
 class TestQxString : public ::testing::Test
@@ -2153,4 +2153,4 @@ TYPED_TEST(TestQxString, rfind)
     test(sStdStr.cbegin(), sStdStr.cend());
 }
 
-QX_POP_SUPPRESS_WARNINGS
+QX_POP_SUPPRESS_WARNINGS();
