@@ -363,9 +363,9 @@ $(function() {
 <div class="line"><a name="l00292"></a><span class="lineno">  292</span>&#160;template&lt;typename T, typename Compare = std::less_equal&lt;&gt;&gt;</div>
 <div class="line"><a name="l00293"></a><span class="lineno"><a class="line" href="math_2common_8h.html#a55c30568a7ce6ec5ca535aa6a4e9ddbe">  293</a></span>&#160;constexpr <span class="keywordtype">bool</span> between(T left, T value, T right)</div>
 <div class="line"><a name="l00294"></a><span class="lineno">  294</span>&#160;{</div>
-<div class="line"><a name="l00295"></a><span class="lineno">  295</span>&#160;    QX_PUSH_SUPPRESS_MSVC_WARNINGS(4388)</div>
+<div class="line"><a name="l00295"></a><span class="lineno">  295</span>&#160;    QX_PUSH_SUPPRESS_MSVC_WARNINGS(4388);</div>
 <div class="line"><a name="l00296"></a><span class="lineno">  296</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="math_2common_8h.html#a2986ab33c946935721e51f4564ea9a08">between</a>(left, value, right, Compare());</div>
-<div class="line"><a name="l00297"></a><span class="lineno">  297</span>&#160;    QX_POP_SUPPRESS_WARNINGS</div>
+<div class="line"><a name="l00297"></a><span class="lineno">  297</span>&#160;    QX_POP_SUPPRESS_WARNINGS();</div>
 <div class="line"><a name="l00298"></a><span class="lineno">  298</span>&#160;}</div>
 <div class="line"><a name="l00299"></a><span class="lineno">  299</span>&#160; </div>
 <div class="line"><a name="l00300"></a><span class="lineno">  300</span>&#160;} <span class="comment">// namespace qx</span></div>

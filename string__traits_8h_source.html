@@ -171,9 +171,9 @@ $(function() {
 <div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;    <span class="keyword">template</span>&lt;<span class="keyword">class</span>... Args&gt;</div>
 <div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;    <span class="keyword">static</span> <span class="keywordtype">int</span> sscanf(const_pointer pszString, const_pointer pszFormat, Args... args) noexcept</div>
 <div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;    {</div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;        QX_PUSH_SUPPRESS_ALL_WARNINGS</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;        QX_PUSH_SUPPRESS_ALL_WARNINGS();</div>
 <div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;        <span class="keywordflow">return</span> std::sscanf(pszString, pszFormat, args...);</div>
-<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;        QX_POP_SUPPRESS_WARNINGS</div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;        QX_POP_SUPPRESS_WARNINGS();</div>
 <div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;    }</div>
 <div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;};</div>
 <div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160; </div>
@@ -254,9 +254,9 @@ $(function() {
 <div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;    <span class="keyword">template</span>&lt;<span class="keyword">class</span>... Args&gt;</div>
 <div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;    <span class="keyword">static</span> <span class="keywordtype">int</span> sscanf(const_pointer pszString, const_pointer pszFormat, Args... args) noexcept</div>
 <div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;    {</div>
-<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;        QX_PUSH_SUPPRESS_ALL_WARNINGS</div>
+<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;        QX_PUSH_SUPPRESS_ALL_WARNINGS();</div>
 <div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;        <span class="keywordflow">return</span> std::swscanf(pszString, pszFormat, args...);</div>
-<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;        QX_POP_SUPPRESS_WARNINGS</div>
+<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;        QX_POP_SUPPRESS_WARNINGS();</div>
 <div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;    }</div>
 <div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;};</div>
 <div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160; </div>

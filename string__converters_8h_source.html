@@ -122,10 +122,10 @@ $(function() {
 <div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="comment">**/</span></div>
 <div class="line"><a name="l00052"></a><span class="lineno"><a class="line" href="string__converters_8h.html#a30847adf8f3f3abb2b93591c4038d6b6">   52</a></span>&#160;<span class="keyword">inline</span> <a class="code" href="classqx_1_1basic__string.html">wstring</a> <a class="code" href="string__converters_8h.html#a30847adf8f3f3abb2b93591c4038d6b6">utf8_to_wstring</a>(<span class="keyword">const</span> <span class="keywordtype">char</span>* pszUtf8)</div>
 <div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;{</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    QX_PUSH_SUPPRESS_ALL_WARNINGS</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    QX_PUSH_SUPPRESS_ALL_WARNINGS();</div>
 <div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    std::wstring_convert&lt;std::codecvt_utf8_utf16&lt;wchar_t&gt;&gt; converter;</div>
 <div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    <span class="keywordflow">return</span> converter.from_bytes(pszUtf8);</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    QX_POP_SUPPRESS_WARNINGS</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    QX_POP_SUPPRESS_WARNINGS();</div>
 <div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;}</div>
 <div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;<span class="comment"></span> </div>
 <div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;<span class="comment">/**</span></div>

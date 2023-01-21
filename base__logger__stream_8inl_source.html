@@ -174,9 +174,9 @@ $(function() {
 <div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;    char_type                chTimeDelimiter) noexcept</div>
 <div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;{</div>
 <div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;    std::time_t t = std::time(<span class="keyword">nullptr</span>);</div>
-<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;    QX_PUSH_SUPPRESS_MSVC_WARNINGS(4996)</div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;    QX_PUSH_SUPPRESS_MSVC_WARNINGS(4996);</div>
 <div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;    std::tm* now = std::localtime(&amp;t);</div>
-<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;    QX_POP_SUPPRESS_WARNINGS</div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;    QX_POP_SUPPRESS_WARNINGS();</div>
 <div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160; </div>
 <div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;    sTime.sprintf(</div>
 <div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;        <a class="code" href="string__utils_8h.html#ac188ca5f0d584a897b5e2a443c574729">QX_STR_PREFIX</a>(char_type, <span class="stringliteral">&quot;%02d%c%02d%c%04d_%02d%c%02d%c%02d&quot;</span>),</div>
