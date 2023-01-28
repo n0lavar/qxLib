@@ -134,7 +134,7 @@ public:
         return &(*m_pCollection).at(m_nIndex);
     }
 
-private:
+protected:
     size_type m_nIndex      = 0u;
     C*        m_pCollection = nullptr;
 };
@@ -263,7 +263,7 @@ public:
         return &(*m_pCollection).at(m_nIndex);
     }
 
-private:
+protected:
     size_type m_nIndex      = 0u;
     const C*  m_pCollection = nullptr;
 };
@@ -396,7 +396,7 @@ public:
         return &(*m_pCollection).at(m_nIndex);
     }
 
-private:
+protected:
     size_type m_nIndex      = 0u;
     C*        m_pCollection = nullptr;
 };
@@ -529,7 +529,7 @@ public:
         return &(*m_pCollection).at(m_nIndex);
     }
 
-private:
+protected:
     size_type m_nIndex      = 0u;
     const C*  m_pCollection = nullptr;
 };
@@ -541,5 +541,56 @@ constexpr const_reverse_iterator<C> operator+(
 {
     return it += n;
 }
+
+/**
+
+    @class   base_return_object_iterator
+    @brief   This kind of iterator returns value and not reference in access methods
+    @details ~
+    @tparam  C            - container type
+    @tparam  BaseIterator - base iterator type
+    @author  Khrapov
+    @date    28.01.2023
+
+**/
+template<class C, class BaseIterator>
+class base_return_object_iterator : public BaseIterator
+{
+public:
+    using value_type        = typename C::value_type;
+    using pointer           = typename C::const_pointer;
+    using reference         = typename C::const_reference;
+    using difference_type   = typename C::difference_type;
+    using size_type         = typename C::size_type;
+    using iterator_category = std::contiguous_iterator_tag;
+    using iterator_concept  = std::contiguous_iterator_tag;
+
+    using BaseIterator::BaseIterator;
+
+    [[nodiscard]] constexpr value_type operator*() const noexcept
+    {
+        return (*BaseIterator::m_pCollection).at(BaseIterator::m_nIndex);
+    }
+    [[nodiscard]] constexpr value_type operator->() const noexcept
+    {
+        return (*BaseIterator::m_pCollection).at(BaseIterator::m_nIndex);
+    }
+    [[nodiscard]] constexpr value_type operator[](size_type m) const noexcept
+    {
+        return (*BaseIterator::m_pCollection).at(BaseIterator::m_nIndex + m);
+    }
+};
+
+template<class C>
+using return_object_iterator = base_return_object_iterator<C, iterator<C>>;
+
+template<class C>
+using const_return_object_iterator = base_return_object_iterator<C, const_iterator<C>>;
+
+template<class C>
+using reverse_return_object_iterator = base_return_object_iterator<C, reverse_iterator<C>>;
+
+template<class C>
+using const_reverse_return_object_iterator = base_return_object_iterator<C, const_return_object_iterator<C>>;
 
 } // namespace qx
