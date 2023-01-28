@@ -95,9 +95,6 @@ Macros</h2></td></tr>
 <tr class="memitem:a8b36634eb91cfdc0b9d7ed59249f0853"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="macros_2common_8h.html#a8b36634eb91cfdc0b9d7ed59249f0853">QX_SINGLE_ARGUMENT</a>(...)&#160;&#160;&#160;__VA_ARGS__</td></tr>
 <tr class="memdesc:a8b36634eb91cfdc0b9d7ed59249f0853"><td class="mdescLeft">&#160;</td><td class="mdescRight">Let macro param containing commas work fine "#define FOO(type, name) type name" FOO(QX_SINGLE_ARGUMENT(std::map&lt;int, int&gt;), map_var);.  <a href="macros_2common_8h.html#a8b36634eb91cfdc0b9d7ed59249f0853">More...</a><br /></td></tr>
 <tr class="separator:a8b36634eb91cfdc0b9d7ed59249f0853"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7a73fab5264de55ef55d54f3a6cd2a8f"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="macros_2common_8h.html#a7a73fab5264de55ef55d54f3a6cd2a8f">QX_ENUM_CLASS</a>(TypeName, ...)</td></tr>
-<tr class="memdesc:a7a73fab5264de55ef55d54f3a6cd2a8f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Macro for generating "enum class"-like class or struct with additional data/methods.  <a href="macros_2common_8h.html#a7a73fab5264de55ef55d54f3a6cd2a8f">More...</a><br /></td></tr>
-<tr class="separator:a7a73fab5264de55ef55d54f3a6cd2a8f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Useful macros. </p>
@@ -123,46 +120,6 @@ Macros</h2></td></tr>
 <p>Has no effect and work correctly with "if else" </p>
 
 <p class="definition">Definition at line <a class="el" href="macros_2common_8h_source.html#l00017">17</a> of file <a class="el" href="macros_2common_8h_source.html">common.h</a>.</p>
-
-</div>
-</div>
-<a id="a7a73fab5264de55ef55d54f3a6cd2a8f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7a73fab5264de55ef55d54f3a6cd2a8f">&#9670;&nbsp;</a></span>QX_ENUM_CLASS</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define QX_ENUM_CLASS</td>
-          <td>(</td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname">TypeName, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname"><em>...</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Macro for generating "enum class"-like class or struct with additional data/methods. </p>
-<dl class="section note"><dt>Note</dt><dd>Default value is one corresponds to 0 </dd></dl>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">TypeName</td><td>- class/struct name </td></tr>
-    <tr><td class="paramname">...</td><td>- enum values </td></tr>
-  </table>
-  </dd>
-</dl>
-
-<p class="definition">Definition at line <a class="el" href="macros_2common_8h_source.html#l00077">77</a> of file <a class="el" href="macros_2common_8h_source.html">common.h</a>.</p>
 
 </div>
 </div>
