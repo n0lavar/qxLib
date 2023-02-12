@@ -1,6 +1,5 @@
 # qxLib
 
-Some compilers may not support the latest features of C++20
 | Compiler (at least) | Debug | Release |
 | :---: | :---: | :---: |
 | Clang 14.0.6 | ![ubuntu_clang_debug](https://github.com/n0lavar/qxLib/workflows/ubuntu_clang_debug/badge.svg)  | ![ubuntu_clang_release](https://github.com/n0lavar/qxLib/workflows/ubuntu_clang_release/badge.svg)  |
@@ -15,9 +14,14 @@ Some compilers may not support the latest features of C++20
 A few useful things for developing your own game engine
 
 ## Dependencies:
+
+Required:
 + C++20
-+ glm for gl module and some algorithms
-+ glew if you want to use gl module
+
+Optional:
++ glm (/gl, /render, /math)
++ glew (/gl)
++ boost (qx::unique_objects_pool)
   
 ## Documentation
 See [doxygen documentation](https://n0lavar.github.io/qxLib/files.html)
