@@ -32,10 +32,18 @@ source_group(
 # ================================================================
 # Setup
 
+if(NOT DEFINED BOOST_ROOT)
+    set (BOOST_ROOT "${CMAKE_SOURCE_DIR}/../../external/boost_1_79_0")
+    message("Default BOOST_ROOT: ${BOOST_ROOT}")
+else()
+    message("Predefined BOOST_ROOT: ${BOOST_ROOT}")
+endif()
+
 find_package(GTEST)
 find_package(Threads REQUIRED)
 find_package(GLEW)
 find_package(GLM)
+find_package(Boost)
 
 include_directories(
     ${GTEST_INCLUDE_DIR}
@@ -45,10 +53,17 @@ include_directories(
     "${CMAKE_CURRENT_LIST_DIR}/tests/"
 )
 
+if(Boost_FOUND)
+    include_directories(${Boost_INCLUDE_DIRS}) 
+endif()
+
 add_executable(qxLib ${FILES_HEADERS} ${FILES_SOURCES} ${FILES_INLINES})
 set_target_options(qxLib)
 set_qxlib_target_options(qxLib)
 
+if(Boost_FOUND)
+    target_link_libraries(qxLib ${Boost_LIBRARIES})
+endif()
 
 # ================================================================
 # Add tests

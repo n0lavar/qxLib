@@ -8,10 +8,12 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-      - uses: ./.github/actions/windows/install_dependencies
+      - id: install_dependencies
+        uses: ./.github/actions/windows/install_dependencies
         with:
           build_type: Release
       - uses: ./.github/actions/windows/build
         with:
           build_type: Release
+          BOOST_ROOT: ${{ steps.install_dependencies.outputs.BOOST_ROOT }}
       - uses: ./.github/actions/windows/run_tests

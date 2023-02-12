@@ -2,6 +2,9 @@ name: Install dependencies
 inputs:
   build_type:
     required: true
+outputs:
+  BOOST_ROOT:
+    value: ${{ steps.install_boost.outputs.BOOST_ROOT }}
 
 runs:
   using: composite        
@@ -27,3 +30,8 @@ runs:
         elif [ "$RUNNER_OS" = "macOS" ]; then
           brew install glm;
         fi  
+    - name: Install boost
+      uses: MarkusJx/install-boost@v2.4.1
+      id: install_boost
+      with:
+        boost_version: 1.79.0

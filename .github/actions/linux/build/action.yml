@@ -2,6 +2,8 @@ name: Build
 inputs:
   build_type:
     required: true
+  BOOST_ROOT:
+    required: true
 
 runs:
   using: composite
@@ -11,5 +13,5 @@ runs:
       run: |
         mkdir build
         cd build
-        cmake -DGENERATE_TESTS=1 .. -DCMAKE_BUILD_TYPE=${{ inputs.build_type }}
+        cmake -DGENERATE_TESTS=1 .. -DCMAKE_BUILD_TYPE=${{ inputs.build_type }} -DBOOST_ROOT=${{ inputs.BOOST_ROOT }}
         cmake --build . -j $(nproc)

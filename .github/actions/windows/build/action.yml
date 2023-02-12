@@ -2,6 +2,8 @@ name: Build
 inputs:
   build_type:
     required: true
+  BOOST_ROOT:
+    required: true
 
 runs:
   using: composite
@@ -11,5 +13,5 @@ runs:
       run: |
         mkdir build
         cd build
-        cmake -DGENERATE_TESTS=1 ..
+        cmake -DGENERATE_TESTS=1 .. -DBOOST_ROOT=${{ inputs.BOOST_ROOT }}
         cmake --build .  --config ${{ inputs.build_type }} -j %NUMBER_OF_PROCESSORS%

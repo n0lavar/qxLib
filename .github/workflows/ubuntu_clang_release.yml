@@ -13,10 +13,12 @@ jobs:
       - uses: KyleMayes/install-llvm-action@v1
         with:
           version: "14.0"
-      - uses: ./.github/actions/linux/install_dependencies
+      - id: install_dependencies
+        uses: ./.github/actions/linux/install_dependencies
         with:
           build_type: Release
       - uses: ./.github/actions/linux/build
         with:
           build_type: Release
+          BOOST_ROOT: ${{ steps.install_dependencies.outputs.BOOST_ROOT }}
       - uses: ./.github/actions/linux/run_tests
