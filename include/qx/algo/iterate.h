@@ -28,7 +28,7 @@ constexpr auto no_change = []<class T>(T&& value)
 namespace iterate_filters
 {
 
-constexpr auto always_true = [](const auto&)
+constexpr auto always_true = [](const auto&...)
 {
     return true;
 };
