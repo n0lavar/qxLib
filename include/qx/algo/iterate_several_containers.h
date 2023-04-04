@@ -20,16 +20,16 @@ namespace qx
     @param  func           - iteration callable
     @param  containers     - containers to iterate
 **/
-template<typename FuncType, typename... ContainersType>
-void iterate_several_containers(FuncType&& func, ContainersType&&... containers)
+template<class FuncType, class... ContainersType>
+void iterate_several_containers(const FuncType& func, const ContainersType&... containers)
 {
-    auto iteration_func = [&]<class Container>(Container&& container)
+    auto iteration_func = [&]<class Container>(const Container& container)
     {
-        for (auto&& elem : std::forward<Container>(container))
-            std::invoke(func, std::forward<decltype(elem)>(elem));
+        for (const auto& elem : container)
+            func(elem);
     };
 
-    (iteration_func(std::forward<ContainersType>(containers)), ...);
+    (iteration_func(containers), ...);
 }
 
 } // namespace qx
