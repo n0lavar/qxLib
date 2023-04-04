@@ -13,7 +13,7 @@ namespace qx
 template<class T>
 inline unique_objects_pool<T>::token::token(const token& otherToken) noexcept
 {
-    *this = token(otherToken);
+    *this = otherToken;
 }
 
 template<class T>
