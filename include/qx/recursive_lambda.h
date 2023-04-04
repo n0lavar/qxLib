@@ -23,6 +23,12 @@ struct recursive_lambda
     LambdaType lambda;
 
     template<class... Args>
+    decltype(auto) operator()(Args&&... args)
+    {
+        return lambda(*this, std::forward<Args>(args)...);
+    }
+
+    template<class... Args>
     decltype(auto) operator()(Args&&... args) const
     {
         return lambda(*this, std::forward<Args>(args)...);
