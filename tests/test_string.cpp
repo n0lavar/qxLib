@@ -112,6 +112,12 @@ TYPED_TEST(TestQxString, construct)
     EXPECT_FALSE(str11.empty());
     EXPECT_EQ(str11.size(), 11);
 
+    // from non-const char*
+    StringTypeTn str12(StdString(STR("Hello world")).data());
+    EXPECT_STREQ(str12.data(), STR("Hello world"));
+    EXPECT_FALSE(str12.empty());
+    EXPECT_EQ(str12.size(), 11);
+
     // should not compile
     //StringTypeTn str12(nullptr);
 }

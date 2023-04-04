@@ -87,6 +87,10 @@ public:
     QX_IMPL_CONTAINER(basic_string);
 
 public:
+    // prevent implicit conversions
+    template<class T>
+    basic_string(T) = delete;
+
     /**
         @brief basic_string object constructor
     **/
@@ -120,6 +124,12 @@ public:
 
     /**
         @brief basic_string object constructor
+        @param pszSource - source string pointer
+    **/
+    basic_string(pointer pszSource) noexcept;
+
+    /**
+        @brief basic_string object constructor
         @param sAnother - another string rvalue ref
     **/
     basic_string(basic_string&& sAnother) noexcept;
@@ -147,12 +157,14 @@ public:
     template<string_convertable string_type>
     basic_string(const string_type& sAnother) noexcept;
 
-    basic_string(std::nullptr_t) = delete;
-
     /**
         @brief basic_string object destructor
     **/
     ~basic_string() noexcept;
+
+    // prevent implicit conversions
+    template<class T>
+    void assign(T) = delete;
 
     /**
         @brief  Assign by single char
@@ -179,6 +191,12 @@ public:
         @param  pszSource - pointer to zero terminated char sequence
     **/
     void assign(const_pointer pszSource) noexcept;
+
+    /**
+        @brief Assign by psz
+        @param pszSource - pointer to zero terminated char sequence
+    **/
+    void assign(pointer pszSource) noexcept;
 
     /**
         @brief  Assign by moving from another string

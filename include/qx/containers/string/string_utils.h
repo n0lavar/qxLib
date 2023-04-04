@@ -23,7 +23,7 @@ namespace qx
     @param  nLen       - string length
     @retval            - 32bit unsigned value
 **/
-template<typename value_type>
+template<class value_type>
 constexpr size_t djb2a_hash(const value_type* pszStr, size_t nSeed, size_t nLen)
 {
     size_t nHash = nSeed;
@@ -41,7 +41,7 @@ constexpr size_t djb2a_hash(const value_type* pszStr, size_t nSeed, size_t nLen)
     @param  nSeed      - seed for hashing
     @retval            - 32bit unsigned value
 **/
-template<typename value_type>
+template<class value_type>
 constexpr size_t djb2a_hash(const value_type* pszStr, size_t nSeed)
 {
     size_t nHash = nSeed;
@@ -62,7 +62,7 @@ constexpr size_t djb2a_hash(const value_type* pszStr, size_t nSeed)
     @param   nLen       - string length
     @retval             - 32bit unsigned value
 **/
-template<typename value_type>
+template<class value_type>
 constexpr size_t murmur_32_hash(const value_type* pStr, size_t nSeed, size_t nLen) noexcept
 {
     size_t nHash = nSeed;
@@ -176,7 +176,7 @@ constexpr int iter_strcmp(FwdIt1 itBegin1, FwdIt1 itEnd1, FwdIt2 itBegin2, FwdIt
                             0 the contents of both strings are equal
                           > 0 the first character that does not match has a greater value in ptr1 than in ptr2
 **/
-template<typename value_type>
+template<class value_type>
 constexpr int strcmp(const value_type* pszLeft, const value_type* pszRight)
 {
     while (*pszLeft && (*pszLeft == *pszRight))
@@ -190,7 +190,7 @@ constexpr int strcmp(const value_type* pszLeft, const value_type* pszRight)
 namespace detail
 {
 
-template<typename value_type>
+template<class value_type>
 constexpr const value_type* const choose_str_prefix(const char* const, const wchar_t* const) noexcept;
 
 template<>
@@ -205,7 +205,7 @@ constexpr const wchar_t* const choose_str_prefix<wchar_t>(const char* const, con
     return w;
 }
 
-template<typename value_type>
+template<class value_type>
 constexpr value_type choose_char_prefix(char, wchar_t) noexcept;
 
 template<>
@@ -274,7 +274,7 @@ namespace qx
     @tparam T          - target type
     @retval            - format specifier or nullptr
 **/
-template<typename value_type, typename T>
+template<class value_type, class T>
 constexpr auto get_format_specifier() noexcept
 {
     const value_type* pszFormat = nullptr;
@@ -359,7 +359,7 @@ constexpr auto get_format_specifier() noexcept
     @param  psz        - pointer to string zero terminated
     @retval            - string length
 **/
-template<typename value_type>
+template<class value_type>
 constexpr std::size_t strlen(const value_type* psz)
 {
     std::size_t nLen = 0;

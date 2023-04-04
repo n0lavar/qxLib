@@ -35,6 +35,12 @@ inline basic_string<char_type, traits_type>::basic_string(const_pointer pszSourc
 }
 
 template<class char_type, class traits_type>
+inline basic_string<char_type, traits_type>::basic_string(pointer pszSource) noexcept
+{
+    assign(pszSource);
+}
+
+template<class char_type, class traits_type>
 inline basic_string<char_type, traits_type>::basic_string(basic_string&& sAnother) noexcept
 {
     assign(std::move(sAnother));
@@ -88,6 +94,13 @@ inline void basic_string<char_type, traits_type>::assign(const_pointer pszSource
 
 template<class char_type, class traits_type>
 inline void basic_string<char_type, traits_type>::assign(const_pointer pszSource) noexcept
+{
+    if (pszSource != data())
+        assign(pszSource, traits_type::length(pszSource));
+}
+
+template<class char_type, class traits_type>
+inline void basic_string<char_type, traits_type>::assign(pointer pszSource) noexcept
 {
     if (pszSource != data())
         assign(pszSource, traits_type::length(pszSource));
