@@ -11,12 +11,6 @@ namespace qx
 {
 
 template<class char_type, class traits_type>
-inline basic_string<char_type, traits_type>::basic_string(value_type chSymbol) noexcept
-{
-    assign(chSymbol);
-}
-
-template<class char_type, class traits_type>
 inline basic_string<char_type, traits_type>::basic_string(size_type nSymbols, value_type chSymbol) noexcept
 {
     assign(nSymbols, chSymbol);
@@ -30,12 +24,6 @@ inline basic_string<char_type, traits_type>::basic_string(const_pointer pszSourc
 
 template<class char_type, class traits_type>
 inline basic_string<char_type, traits_type>::basic_string(const_pointer pszSource) noexcept
-{
-    assign(pszSource);
-}
-
-template<class char_type, class traits_type>
-inline basic_string<char_type, traits_type>::basic_string(pointer pszSource) noexcept
 {
     assign(pszSource);
 }
@@ -73,12 +61,6 @@ inline basic_string<char_type, traits_type>::~basic_string() noexcept
 }
 
 template<class char_type, class traits_type>
-inline void basic_string<char_type, traits_type>::assign(value_type chSymbol) noexcept
-{
-    assign(&chSymbol, 1);
-}
-
-template<class char_type, class traits_type>
 inline void basic_string<char_type, traits_type>::assign(size_type nSymbols, value_type chSymbol) noexcept
 {
     if (_resize(nSymbols))
@@ -94,13 +76,6 @@ inline void basic_string<char_type, traits_type>::assign(const_pointer pszSource
 
 template<class char_type, class traits_type>
 inline void basic_string<char_type, traits_type>::assign(const_pointer pszSource) noexcept
-{
-    if (pszSource != data())
-        assign(pszSource, traits_type::length(pszSource));
-}
-
-template<class char_type, class traits_type>
-inline void basic_string<char_type, traits_type>::assign(pointer pszSource) noexcept
 {
     if (pszSource != data())
         assign(pszSource, traits_type::length(pszSource));
@@ -2066,14 +2041,6 @@ inline bool basic_string<char_type, traits_type>::contains(const string_type& sS
 
 template<class char_type, class traits_type>
 inline basic_string<char_type, traits_type>& basic_string<char_type, traits_type>::operator=(
-    value_type chSymbol) noexcept
-{
-    assign(chSymbol);
-    return *this;
-}
-
-template<class char_type, class traits_type>
-inline basic_string<char_type, traits_type>& basic_string<char_type, traits_type>::operator=(
     const_pointer pszSource) noexcept
 {
     assign(pszSource);
@@ -2586,7 +2553,7 @@ basic_string<char_type, traits_type> operator+(
     typename traits_type::value_type            lhs,
     const basic_string<char_type, traits_type>& rhs) noexcept
 {
-    basic_string<char_type, traits_type> str(lhs);
+    basic_string<char_type, traits_type> str(&lhs, 1);
     str += rhs;
     return str;
 }

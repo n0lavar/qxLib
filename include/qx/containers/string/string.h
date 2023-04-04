@@ -87,20 +87,10 @@ public:
     QX_IMPL_CONTAINER(basic_string);
 
 public:
-    // prevent implicit conversions
-    template<class T>
-    basic_string(T) = delete;
-
     /**
         @brief basic_string object constructor
     **/
     basic_string() noexcept = default;
-
-    /**
-        @brief basic_string object constructor
-        @param chSymbol - char to assign
-    **/
-    basic_string(value_type chSymbol) noexcept;
 
     /**
         @brief basic_string object constructor
@@ -121,12 +111,6 @@ public:
         @param pszSource - source string pointer
     **/
     basic_string(const_pointer pszSource) noexcept;
-
-    /**
-        @brief basic_string object constructor
-        @param pszSource - source string pointer
-    **/
-    basic_string(pointer pszSource) noexcept;
 
     /**
         @brief basic_string object constructor
@@ -162,16 +146,6 @@ public:
     **/
     ~basic_string() noexcept;
 
-    // prevent implicit conversions
-    template<class T>
-    void assign(T) = delete;
-
-    /**
-        @brief  Assign by single char
-        @param  chSymbol - char to assign
-    **/
-    void assign(value_type chSymbol) noexcept;
-
     /**
         @brief  Assign by filling 
         @param  nSymbols - number of same chars
@@ -191,12 +165,6 @@ public:
         @param  pszSource - pointer to zero terminated char sequence
     **/
     void assign(const_pointer pszSource) noexcept;
-
-    /**
-        @brief Assign by psz
-        @param pszSource - pointer to zero terminated char sequence
-    **/
-    void assign(pointer pszSource) noexcept;
 
     /**
         @brief  Assign by moving from another string
@@ -1513,13 +1481,6 @@ public:
     **/
     template<string_convertable string_type>
     bool contains(const string_type& sStr) const noexcept;
-
-    /**
-        @brief  operator=
-        @param  chSymbol - char to assign
-        @retval          - this object reference
-    **/
-    basic_string& operator=(value_type chSymbol) noexcept;
 
     /**
         @brief  operator=

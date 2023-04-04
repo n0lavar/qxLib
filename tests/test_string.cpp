@@ -65,12 +65,6 @@ TYPED_TEST(TestQxString, construct)
     EXPECT_TRUE(str1.empty());
     EXPECT_EQ(str1.size(), 0);
 
-    // from char
-    StringTypeTn str4(CH('q'));
-    EXPECT_STREQ(str4.data(), STR("q"));
-    EXPECT_FALSE(str4.empty());
-    EXPECT_EQ(str4.size(), 1);
-
     // from multiple chars
     StringTypeTn str5(10, CH('q'));
     EXPECT_STREQ(str5.data(), STR("qqqqqqqqqq"));
@@ -150,13 +144,6 @@ TYPED_TEST(TestQxString, assign)
     EXPECT_TRUE(str1.empty());
     EXPECT_EQ(str1.size(), 0);
 
-    // from char
-    StringTypeTn str4;
-    str4.assign(CH('q'));
-    EXPECT_STREQ(str4.data(), STR("q"));
-    EXPECT_FALSE(str4.empty());
-    EXPECT_EQ(str4.size(), 1);
-
     // from multiple chars
     StringTypeTn str5;
     str5.assign(10, CH('q'));
@@ -214,11 +201,6 @@ TYPED_TEST(TestQxString, operator_assign)
     EXPECT_STREQ(str.data(), STR("Hello world"));
     EXPECT_FALSE(str.empty());
     EXPECT_EQ(str.size(), 11);
-
-    str = CH('q');
-    EXPECT_STREQ(str.data(), STR("q"));
-    EXPECT_FALSE(str.empty());
-    EXPECT_EQ(str.size(), 1);
 
     StringTypeTn tmpStr(STR("Hello world"));
     str = tmpStr;
@@ -2017,7 +1999,7 @@ TYPED_TEST(TestQxString, trim)
 
 TYPED_TEST(TestQxString, compare)
 {
-    StringTypeTn str(CH('5'));
+    StringTypeTn str(STR("5"));
 
     EXPECT_GT(str.compare(CH('4')), 0);
     EXPECT_EQ(str.compare(CH('5')), 0);
