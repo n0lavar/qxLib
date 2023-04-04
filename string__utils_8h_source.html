@@ -94,7 +94,7 @@ $(function() {
 <div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="comment">    @param  nLen       - string length</span></div>
 <div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="comment">    @retval            - 32bit unsigned value</span></div>
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="comment">**/</span></div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> value_type&gt;</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> value_type&gt;</div>
 <div class="line"><a name="l00027"></a><span class="lineno"><a class="line" href="string__utils_8h.html#a49ac0e2f7b72f7474a2470d56fc61e94">   27</a></span>&#160;constexpr <span class="keywordtype">size_t</span> <a class="code" href="string__utils_8h.html#a49ac0e2f7b72f7474a2470d56fc61e94">djb2a_hash</a>(<span class="keyword">const</span> value_type* pszStr, <span class="keywordtype">size_t</span> nSeed, <span class="keywordtype">size_t</span> nLen)</div>
 <div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;{</div>
 <div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    <span class="keywordtype">size_t</span> nHash = nSeed;</div>
@@ -112,7 +112,7 @@ $(function() {
 <div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="comment">    @param  nSeed      - seed for hashing</span></div>
 <div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="comment">    @retval            - 32bit unsigned value</span></div>
 <div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="comment">**/</span></div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> value_type&gt;</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> value_type&gt;</div>
 <div class="line"><a name="l00045"></a><span class="lineno"><a class="line" href="string__utils_8h.html#ae563089fcdc4bc5a62fae34498d94e74">   45</a></span>&#160;constexpr <span class="keywordtype">size_t</span> <a class="code" href="string__utils_8h.html#a49ac0e2f7b72f7474a2470d56fc61e94">djb2a_hash</a>(<span class="keyword">const</span> value_type* pszStr, <span class="keywordtype">size_t</span> nSeed)</div>
 <div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;{</div>
 <div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    <span class="keywordtype">size_t</span> nHash = nSeed;</div>
@@ -133,7 +133,7 @@ $(function() {
 <div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;<span class="comment">    @param   nLen       - string length</span></div>
 <div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;<span class="comment">    @retval             - 32bit unsigned value</span></div>
 <div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;<span class="comment">**/</span></div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> value_type&gt;</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> value_type&gt;</div>
 <div class="line"><a name="l00066"></a><span class="lineno"><a class="line" href="string__utils_8h.html#a1eb12d2223725f5a5e77213e01e54626">   66</a></span>&#160;constexpr <span class="keywordtype">size_t</span> <a class="code" href="string__utils_8h.html#a1eb12d2223725f5a5e77213e01e54626">murmur_32_hash</a>(<span class="keyword">const</span> value_type* pStr, <span class="keywordtype">size_t</span> nSeed, <span class="keywordtype">size_t</span> nLen) noexcept</div>
 <div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;{</div>
 <div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;    <span class="keywordtype">size_t</span> nHash = nSeed;</div>
@@ -247,7 +247,7 @@ $(function() {
 <div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;<span class="comment">                            0 the contents of both strings are equal</span></div>
 <div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;<span class="comment">                          &gt; 0 the first character that does not match has a greater value in ptr1 than in ptr2</span></div>
 <div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;<span class="comment">**/</span></div>
-<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> value_type&gt;</div>
+<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> value_type&gt;</div>
 <div class="line"><a name="l00180"></a><span class="lineno"><a class="line" href="string__utils_8h.html#a4ec6630ad6d65fe8bb53d5c1ed2ac711">  180</a></span>&#160;constexpr <span class="keywordtype">int</span> <a class="code" href="string__utils_8h.html#a4ec6630ad6d65fe8bb53d5c1ed2ac711">strcmp</a>(<span class="keyword">const</span> value_type* pszLeft, <span class="keyword">const</span> value_type* pszRight)</div>
 <div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;{</div>
 <div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;    <span class="keywordflow">while</span> (*pszLeft &amp;&amp; (*pszLeft == *pszRight))</div>
@@ -261,7 +261,7 @@ $(function() {
 <div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;<span class="keyword">namespace </span>detail</div>
 <div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;{</div>
 <div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160; </div>
-<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> value_type&gt;</div>
+<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> value_type&gt;</div>
 <div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;constexpr <span class="keyword">const</span> value_type* <span class="keyword">const</span> choose_str_prefix(<span class="keyword">const</span> <span class="keywordtype">char</span>* <span class="keyword">const</span>, <span class="keyword">const</span> <span class="keywordtype">wchar_t</span>* <span class="keyword">const</span>) noexcept;</div>
 <div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160; </div>
 <div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;<span class="keyword">template</span>&lt;&gt;</div>
@@ -276,7 +276,7 @@ $(function() {
 <div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;    <span class="keywordflow">return</span> w;</div>
 <div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160;}</div>
 <div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160; </div>
-<div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> value_type&gt;</div>
+<div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> value_type&gt;</div>
 <div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160;constexpr value_type choose_char_prefix(<span class="keywordtype">char</span>, <span class="keywordtype">wchar_t</span>) noexcept;</div>
 <div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160; </div>
 <div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160;<span class="keyword">template</span>&lt;&gt;</div>
@@ -345,7 +345,7 @@ $(function() {
 <div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160;<span class="comment">    @tparam T          - target type</span></div>
 <div class="line"><a name="l00275"></a><span class="lineno">  275</span>&#160;<span class="comment">    @retval            - format specifier or nullptr</span></div>
 <div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160;<span class="comment">**/</span></div>
-<div class="line"><a name="l00277"></a><span class="lineno">  277</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> value_type, <span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a name="l00277"></a><span class="lineno">  277</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> value_type, <span class="keyword">class</span> T&gt;</div>
 <div class="line"><a name="l00278"></a><span class="lineno"><a class="line" href="string__utils_8h.html#a8c51be95bedbc7e6a1f1612d2a45e29b">  278</a></span>&#160;constexpr <span class="keyword">auto</span> <a class="code" href="string__utils_8h.html#a8c51be95bedbc7e6a1f1612d2a45e29b">get_format_specifier</a>() noexcept</div>
 <div class="line"><a name="l00279"></a><span class="lineno">  279</span>&#160;{</div>
 <div class="line"><a name="l00280"></a><span class="lineno">  280</span>&#160;    <span class="keyword">const</span> value_type* pszFormat = <span class="keyword">nullptr</span>;</div>
@@ -430,7 +430,7 @@ $(function() {
 <div class="line"><a name="l00359"></a><span class="lineno">  359</span>&#160;<span class="comment">    @param  psz        - pointer to string zero terminated</span></div>
 <div class="line"><a name="l00360"></a><span class="lineno">  360</span>&#160;<span class="comment">    @retval            - string length</span></div>
 <div class="line"><a name="l00361"></a><span class="lineno">  361</span>&#160;<span class="comment">**/</span></div>
-<div class="line"><a name="l00362"></a><span class="lineno">  362</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> value_type&gt;</div>
+<div class="line"><a name="l00362"></a><span class="lineno">  362</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> value_type&gt;</div>
 <div class="line"><a name="l00363"></a><span class="lineno"><a class="line" href="string__utils_8h.html#a8e0efa61531960b546130958f6e42cf4">  363</a></span>&#160;constexpr std::size_t <a class="code" href="string__utils_8h.html#a8e0efa61531960b546130958f6e42cf4">strlen</a>(<span class="keyword">const</span> value_type* psz)</div>
 <div class="line"><a name="l00364"></a><span class="lineno">  364</span>&#160;{</div>
 <div class="line"><a name="l00365"></a><span class="lineno">  365</span>&#160;    std::size_t nLen = 0;</div>
