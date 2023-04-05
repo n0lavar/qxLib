@@ -296,15 +296,20 @@ $(function() {
 <div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160;    buffers.sFormat += pszStringFormatSpecifier;</div>
 <div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160;    buffers.sFormat += <a class="code" href="string__utils_8h.html#ac188ca5f0d584a897b5e2a443c574729">QX_STR_PREFIX</a>(char_type, <span class="stringliteral">&quot;::%d] &quot;</span>);</div>
 <div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160;    buffers.sFormat += buffers.sMessage;</div>
-<div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160;    buffers.sMessage.sprintf(buffers.sFormat.c_str(), pszCategory ? pszCategory : <span class="stringliteral">&quot;&quot;</span>, pszFile, pszFunction, nLine);</div>
-<div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160;    buffers.sMessage += <a class="code" href="string__utils_8h.html#ab4cfe02c348ccce78db4519f9758e672">QX_CHAR_PREFIX</a>(char_type, <span class="charliteral">&#39;\n&#39;</span>);</div>
-<div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160; </div>
-<div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160;    <span class="keywordflow">if</span> (pszCategory)</div>
-<div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160;        <span class="keywordflow">if</span> (<span class="keyword">auto</span> nPos = buffers.sMessage.find(pszCategory); nPos != string::npos)</div>
-<div class="line"><a name="l00233"></a><span class="lineno">  233</span>&#160;            buffers.colors.push_back({ { nPos, nPos + <a class="code" href="string__utils_8h.html#a8e0efa61531960b546130958f6e42cf4">qx::strlen</a>(pszCategory) }, category.get_color() });</div>
-<div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160;}</div>
+<div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160;    buffers.sMessage.sprintf(</div>
+<div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160;        buffers.sFormat.c_str(),</div>
+<div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160;        pszCategory ? pszCategory : <a class="code" href="string__utils_8h.html#ac188ca5f0d584a897b5e2a443c574729">QX_STR_PREFIX</a>(char_type, <span class="stringliteral">&quot;&quot;</span>),</div>
+<div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160;        pszFile,</div>
+<div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160;        pszFunction,</div>
+<div class="line"><a name="l00233"></a><span class="lineno">  233</span>&#160;        nLine);</div>
+<div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160;    buffers.sMessage += <a class="code" href="string__utils_8h.html#ab4cfe02c348ccce78db4519f9758e672">QX_CHAR_PREFIX</a>(char_type, <span class="charliteral">&#39;\n&#39;</span>);</div>
 <div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160; </div>
-<div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160;} <span class="comment">// namespace qx</span></div>
+<div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160;    <span class="keywordflow">if</span> (pszCategory)</div>
+<div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;        <span class="keywordflow">if</span> (<span class="keyword">auto</span> nPos = buffers.sMessage.find(pszCategory); nPos != string::npos)</div>
+<div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160;            buffers.colors.push_back({ { nPos, nPos + <a class="code" href="string__utils_8h.html#a8e0efa61531960b546130958f6e42cf4">qx::strlen</a>(pszCategory) }, category.get_color() });</div>
+<div class="line"><a name="l00239"></a><span class="lineno">  239</span>&#160;}</div>
+<div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160; </div>
+<div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160;} <span class="comment">// namespace qx</span></div>
 <div class="ttc" id="aclassqx_1_1base__logger__stream_html_a2a457b6681673674430f90ac323f73b5"><div class="ttname"><a href="classqx_1_1base__logger__stream.html#a2a457b6681673674430f90ac323f73b5">qx::base_logger_stream::get_log_buffer</a></div><div class="ttdeci">logger_buffer&lt; char_type &gt; &amp; get_log_buffer() noexcept</div><div class="ttdoc">Get string buffers.</div><div class="ttdef"><b>Definition:</b> <a href="base__logger__stream_8inl_source.html#l00125">base_logger_stream.inl:125</a></div></div>
 <div class="ttc" id="aclassqx_1_1base__logger__stream_html_a305b21a54aa598b33d1ddb8ce23bc595"><div class="ttname"><a href="classqx_1_1base__logger__stream.html#a305b21a54aa598b33d1ddb8ce23bc595">qx::base_logger_stream::flush</a></div><div class="ttdeci">virtual void flush()=0</div><div class="ttdoc">Flush stream.</div></div>
 <div class="ttc" id="aclassqx_1_1base__logger__stream_html_a99637f11420d3b811336fc05fd63b987"><div class="ttname"><a href="classqx_1_1base__logger__stream.html#a99637f11420d3b811336fc05fd63b987">qx::base_logger_stream::register_unit</a></div><div class="ttdeci">void register_unit(std::string_view svUnitName, const log_unit_info &amp;unit) noexcept</div><div class="ttdoc">Register logger unit.</div><div class="ttdef"><b>Definition:</b> <a href="base__logger__stream_8inl_source.html#l00088">base_logger_stream.inl:88</a></div></div>
