@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['generic_5fspan_697',['generic_span',['../classqx_1_1generic__span.html',1,'qx']]],
-  ['geometry_698',['geometry',['../structqx_1_1geometry.html',1,'qx']]]
+  ['generic_5fspan_699',['generic_span',['../classqx_1_1generic__span.html',1,'qx']]],
+  ['geometry_700',['geometry',['../structqx_1_1geometry.html',1,'qx']]]
 ];

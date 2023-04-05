@@ -91,7 +91,7 @@ $(function() {
 <div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;{</div>
 <div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;}</div>
 <div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160; </div>
-<div class="line"><a name="l00023"></a><span class="lineno"><a class="line" href="classqx_1_1color.html#a7b58de102a3fc9f0a63f00fd66ac15a3">   23</a></span>&#160;constexpr <a class="code" href="classqx_1_1color.html#a697bf27b7773d7ecc744adedf3c466a6">color::color</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> nHexValue) noexcept</div>
+<div class="line"><a name="l00023"></a><span class="lineno"><a class="line" href="classqx_1_1color.html#ac409d62f410853a260f63778f1e46d4d">   23</a></span>&#160;constexpr <a class="code" href="classqx_1_1color.html#a697bf27b7773d7ecc744adedf3c466a6">color::color</a>(<a class="code" href="typedefs_8h.html#a1af9f95651e921615e75917a6dd1b574">u64</a> nHexValue) noexcept</div>
 <div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    : <a class="code" href="classqx_1_1color.html">color</a>(</div>
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;        dec_to_float(nHexValue &gt;&gt; 24 &amp; 0xFF),</div>
 <div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;        dec_to_float(nHexValue &gt;&gt; 16 &amp; 0xFF),</div>
@@ -306,50 +306,122 @@ $(function() {
 <div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160;    <span class="keywordflow">return</span> ret;</div>
 <div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160;}</div>
 <div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160; </div>
-<div class="line"><a name="l00238"></a><span class="lineno"><a class="line" href="classqx_1_1color.html#a76b77e9e9b1a324bac4b8df930358731">  238</a></span>&#160;constexpr <a class="code" href="classqx_1_1color.html">color</a> <a class="code" href="classqx_1_1color.html#a76b77e9e9b1a324bac4b8df930358731">color::empty</a>() noexcept</div>
-<div class="line"><a name="l00239"></a><span class="lineno">  239</span>&#160;{</div>
-<div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="classqx_1_1color.html#a697bf27b7773d7ecc744adedf3c466a6">color</a>(0, 0, 0, 0);</div>
-<div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160;}</div>
-<div class="line"><a name="l00242"></a><span class="lineno">  242</span>&#160; </div>
-<div class="line"><a name="l00243"></a><span class="lineno"><a class="line" href="classqx_1_1color.html#abb14ac204181c15f5cc5c72828bca4a1">  243</a></span>&#160;constexpr <span class="keywordtype">size_t</span> <a class="code" href="classqx_1_1color.html#abb14ac204181c15f5cc5c72828bca4a1">color::size</a>() noexcept</div>
+<div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> TChar&gt;</div>
+<div class="line"><a name="l00239"></a><span class="lineno">  239</span>&#160;<span class="keyword">inline</span> <span class="keywordtype">bool</span> color::add_color_to_mapping(</div>
+<div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160;    std::basic_string_view&lt;TChar&gt; svColorName,</div>
+<div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160;    <span class="keywordtype">int</span>                           nRed,</div>
+<div class="line"><a name="l00242"></a><span class="lineno">  242</span>&#160;    <span class="keywordtype">int</span>                           nGreen,</div>
+<div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160;    <span class="keywordtype">int</span>                           nBlue) noexcept</div>
 <div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160;{</div>
-<div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160;    <span class="keywordflow">return</span> 4;</div>
-<div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160;}</div>
+<div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160;    <a class="code" href="classqx_1_1basic__string.html">basic_string&lt;TChar&gt;</a> sName                                                 = svColorName;</div>
+<div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160;    k_StringToColor[<a class="code" href="classqx_1_1basic__string__hash.html">basic_string_hash&lt;fast_hash_string_traits&lt;TChar&gt;</a>&gt;(sName)] = <a class="code" href="classqx_1_1color.html">color</a>(nRed, nGreen, nBlue);</div>
 <div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160; </div>
-<div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160;constexpr <span class="keywordtype">float</span> color::clamp_value(<span class="keywordtype">float</span> fValue) noexcept</div>
-<div class="line"><a name="l00249"></a><span class="lineno">  249</span>&#160;{</div>
-<div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160;    <span class="keywordflow">return</span> std::clamp(fValue, 0.f, 1.f);</div>
-<div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160;}</div>
-<div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160; </div>
-<div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160;constexpr <span class="keywordtype">float</span> color::dec_to_float(<span class="keywordtype">int</span> nValue) noexcept</div>
-<div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160;{</div>
-<div class="line"><a name="l00255"></a><span class="lineno">  255</span>&#160;    <span class="keywordflow">return</span> <span class="keyword">static_cast&lt;</span><span class="keywordtype">float</span><span class="keyword">&gt;</span>(nValue) / 255.f;</div>
-<div class="line"><a name="l00256"></a><span class="lineno">  256</span>&#160;}</div>
-<div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160; </div>
-<div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160;constexpr <span class="keywordtype">int</span> color::float_to_dec(<span class="keywordtype">float</span> fValue) noexcept</div>
-<div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160;{</div>
-<div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160;    <span class="keywordflow">return</span> <span class="keyword">static_cast&lt;</span><span class="keywordtype">int</span><span class="keyword">&gt;</span>(fValue * 255.f);</div>
-<div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160;}</div>
+<div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160;    sName.<a class="code" href="classqx_1_1basic__string.html#abce43bf1b90183253f461346b3ba310b">remove_all</a>(<a class="code" href="string__utils_8h.html#ab4cfe02c348ccce78db4519f9758e672">QX_CHAR_PREFIX</a>(TChar, <span class="charliteral">&#39;_&#39;</span>));</div>
+<div class="line"><a name="l00249"></a><span class="lineno">  249</span>&#160;    k_StringToColor[<a class="code" href="classqx_1_1basic__string__hash.html">basic_string_hash&lt;fast_hash_string_traits&lt;TChar&gt;</a>&gt;(sName)] = <a class="code" href="classqx_1_1color.html">color</a>(nRed, nGreen, nBlue);</div>
+<div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160; </div>
+<div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160;    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160;}</div>
+<div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160; </div>
+<div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> TChar&gt;</div>
+<div class="line"><a name="l00255"></a><span class="lineno"><a class="line" href="classqx_1_1color.html#a3063906febfb38845ac708dcead85889">  255</a></span>&#160;<span class="keyword">inline</span> std::optional&lt;color&gt; <a class="code" href="classqx_1_1color.html#a3063906febfb38845ac708dcead85889">color::from_string</a>(std::basic_string_view&lt;TChar&gt; svColorName) noexcept</div>
+<div class="line"><a name="l00256"></a><span class="lineno">  256</span>&#160;{</div>
+<div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160;    <span class="keywordflow">if</span> (<span class="keyword">const</span> <span class="keyword">auto</span> it = k_StringToColor.find(<a class="code" href="classqx_1_1basic__string__hash.html">basic_string_hash</a>&lt;<a class="code" href="structqx_1_1fast__hash__string__traits.html">fast_hash_string_traits&lt;TChar&gt;</a>&gt;(svColorName));</div>
+<div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160;        it != k_StringToColor.end())</div>
+<div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160;    {</div>
+<div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160;        <span class="keywordflow">return</span> it-&gt;second;</div>
+<div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160;    }</div>
 <div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160; </div>
-<div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160;constexpr <span class="keywordtype">void</span> color::assign_checked(<span class="keyword">const</span> glm::vec4&amp; other) noexcept</div>
-<div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160;{</div>
-<div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160;    assign_component_checked(m_Color.x, other.x);</div>
-<div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160;    assign_component_checked(m_Color.y, other.y);</div>
-<div class="line"><a name="l00267"></a><span class="lineno">  267</span>&#160;    assign_component_checked(m_Color.z, other.z);</div>
-<div class="line"><a name="l00268"></a><span class="lineno">  268</span>&#160;    assign_component_checked(m_Color.w, other.w);</div>
-<div class="line"><a name="l00269"></a><span class="lineno">  269</span>&#160;}</div>
-<div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160; </div>
-<div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160;constexpr <span class="keywordtype">void</span> color::assign_component_checked(<span class="keywordtype">float</span>&amp; pComponent, <span class="keywordtype">float</span> fValue) noexcept</div>
-<div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160;{</div>
-<div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160;    pComponent = clamp_value(fValue);</div>
-<div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160;}</div>
+<div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160;    std::optional&lt;color&gt; optColor;</div>
+<div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160; </div>
+<div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160;    <span class="keyword">const</span> <span class="keywordtype">bool</span> bStartsWith0x =</div>
+<div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160;        svColorName.starts_with(<a class="code" href="string__utils_8h.html#ac188ca5f0d584a897b5e2a443c574729">QX_STR_PREFIX</a>(TChar, <span class="stringliteral">&quot;0x&quot;</span>)) &amp;&amp; (svColorName.size() == 8 || svColorName.size() == 10);</div>
+<div class="line"><a name="l00267"></a><span class="lineno">  267</span>&#160; </div>
+<div class="line"><a name="l00268"></a><span class="lineno">  268</span>&#160;    <span class="keywordflow">if</span> (bStartsWith0x || svColorName.starts_with(<a class="code" href="string__utils_8h.html#ac188ca5f0d584a897b5e2a443c574729">QX_STR_PREFIX</a>(TChar, <span class="stringliteral">&quot;#&quot;</span>)) &amp;&amp; svColorName.size() == 7)</div>
+<div class="line"><a name="l00269"></a><span class="lineno">  269</span>&#160;    {</div>
+<div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160;        <span class="comment">// TODO no conversion method for string view so far</span></div>
+<div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160;        <span class="comment">// but with SSO this should be fine</span></div>
+<div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160;        <span class="keyword">const</span> <span class="keywordtype">size_t</span>        nOffset = bStartsWith0x ? 2 : 1;</div>
+<div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160;        <a class="code" href="classqx_1_1basic__string.html">basic_string&lt;TChar&gt;</a> sColorName =</div>
+<div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160;            std::basic_string_view&lt;TChar&gt;(svColorName.data() + nOffset, svColorName.size() - nOffset);</div>
 <div class="line"><a name="l00275"></a><span class="lineno">  275</span>&#160; </div>
-<div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160;} <span class="comment">// namespace qx</span></div>
-<div class="ttc" id="aclassqx_1_1color_html"><div class="ttname"><a href="classqx_1_1color.html">qx::color</a></div><div class="ttdoc">RGBA color.</div><div class="ttdef"><b>Definition:</b> <a href="color_8h_source.html#l00034">color.h:35</a></div></div>
+<div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160;        <span class="keyword">auto</span> ReadHex = [](<a class="code" href="classqx_1_1basic__string.html">basic_string&lt;TChar&gt;</a>&amp; s) -&gt; std::optional&lt;color&gt;</div>
+<div class="line"><a name="l00277"></a><span class="lineno">  277</span>&#160;        {</div>
+<div class="line"><a name="l00278"></a><span class="lineno">  278</span>&#160;            s.to_lower();</div>
+<div class="line"><a name="l00279"></a><span class="lineno">  279</span>&#160;            <span class="keywordflow">if</span> (<span class="keyword">const</span> <span class="keyword">auto</span> optInt = s.template to&lt;u64&gt;(<a class="code" href="string__utils_8h.html#ac188ca5f0d584a897b5e2a443c574729">QX_STR_PREFIX</a>(TChar, <span class="stringliteral">&quot;%llx&quot;</span>)))</div>
+<div class="line"><a name="l00280"></a><span class="lineno">  280</span>&#160;                <span class="keywordflow">return</span> <a class="code" href="classqx_1_1color.html">color</a>(*optInt);</div>
+<div class="line"><a name="l00281"></a><span class="lineno">  281</span>&#160; </div>
+<div class="line"><a name="l00282"></a><span class="lineno">  282</span>&#160;            <span class="keywordflow">return</span> std::nullopt;</div>
+<div class="line"><a name="l00283"></a><span class="lineno">  283</span>&#160;        };</div>
+<div class="line"><a name="l00284"></a><span class="lineno">  284</span>&#160; </div>
+<div class="line"><a name="l00285"></a><span class="lineno">  285</span>&#160;        <span class="keywordflow">if</span> (sColorName.<a class="code" href="classqx_1_1basic__string.html#aa7020d2d5c4947b3abdfa85c71120da1">length</a>() == 6)</div>
+<div class="line"><a name="l00286"></a><span class="lineno">  286</span>&#160;        {</div>
+<div class="line"><a name="l00287"></a><span class="lineno">  287</span>&#160;            sColorName += <a class="code" href="string__utils_8h.html#ac188ca5f0d584a897b5e2a443c574729">QX_STR_PREFIX</a>(TChar, <span class="stringliteral">&quot;FF&quot;</span>);</div>
+<div class="line"><a name="l00288"></a><span class="lineno">  288</span>&#160;            optColor = ReadHex(sColorName);</div>
+<div class="line"><a name="l00289"></a><span class="lineno">  289</span>&#160;        }</div>
+<div class="line"><a name="l00290"></a><span class="lineno">  290</span>&#160;        <span class="keywordflow">else</span> <span class="keywordflow">if</span> (sColorName.<a class="code" href="classqx_1_1basic__string.html#aa7020d2d5c4947b3abdfa85c71120da1">length</a>() == 8)</div>
+<div class="line"><a name="l00291"></a><span class="lineno">  291</span>&#160;        {</div>
+<div class="line"><a name="l00292"></a><span class="lineno">  292</span>&#160;            optColor = ReadHex(sColorName);</div>
+<div class="line"><a name="l00293"></a><span class="lineno">  293</span>&#160;        }</div>
+<div class="line"><a name="l00294"></a><span class="lineno">  294</span>&#160;    }</div>
+<div class="line"><a name="l00295"></a><span class="lineno">  295</span>&#160; </div>
+<div class="line"><a name="l00296"></a><span class="lineno">  296</span>&#160;    <span class="keywordflow">return</span> optColor;</div>
+<div class="line"><a name="l00297"></a><span class="lineno">  297</span>&#160;}</div>
+<div class="line"><a name="l00298"></a><span class="lineno">  298</span>&#160; </div>
+<div class="line"><a name="l00299"></a><span class="lineno">  299</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> TChar&gt;</div>
+<div class="line"><a name="l00300"></a><span class="lineno"><a class="line" href="classqx_1_1color.html#a1dff59d1f263ae715ba2b7239faa3926">  300</a></span>&#160;<span class="keyword">inline</span> std::optional&lt;color&gt; <a class="code" href="classqx_1_1color.html#a3063906febfb38845ac708dcead85889">color::from_string</a>(<span class="keyword">const</span> TChar* pszColorName) noexcept</div>
+<div class="line"><a name="l00301"></a><span class="lineno">  301</span>&#160;{</div>
+<div class="line"><a name="l00302"></a><span class="lineno">  302</span>&#160;    <span class="keywordflow">return</span> from_string(std::basic_string_view&lt;TChar&gt;(pszColorName));</div>
+<div class="line"><a name="l00303"></a><span class="lineno">  303</span>&#160;}</div>
+<div class="line"><a name="l00304"></a><span class="lineno">  304</span>&#160; </div>
+<div class="line"><a name="l00305"></a><span class="lineno"><a class="line" href="classqx_1_1color.html#a76b77e9e9b1a324bac4b8df930358731">  305</a></span>&#160;constexpr <a class="code" href="classqx_1_1color.html">color</a> <a class="code" href="classqx_1_1color.html#a76b77e9e9b1a324bac4b8df930358731">color::empty</a>() noexcept</div>
+<div class="line"><a name="l00306"></a><span class="lineno">  306</span>&#160;{</div>
+<div class="line"><a name="l00307"></a><span class="lineno">  307</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="classqx_1_1color.html#a697bf27b7773d7ecc744adedf3c466a6">color</a>(0, 0, 0, 0);</div>
+<div class="line"><a name="l00308"></a><span class="lineno">  308</span>&#160;}</div>
+<div class="line"><a name="l00309"></a><span class="lineno">  309</span>&#160; </div>
+<div class="line"><a name="l00310"></a><span class="lineno"><a class="line" href="classqx_1_1color.html#abb14ac204181c15f5cc5c72828bca4a1">  310</a></span>&#160;constexpr <span class="keywordtype">size_t</span> <a class="code" href="classqx_1_1color.html#abb14ac204181c15f5cc5c72828bca4a1">color::size</a>() noexcept</div>
+<div class="line"><a name="l00311"></a><span class="lineno">  311</span>&#160;{</div>
+<div class="line"><a name="l00312"></a><span class="lineno">  312</span>&#160;    <span class="keywordflow">return</span> 4;</div>
+<div class="line"><a name="l00313"></a><span class="lineno">  313</span>&#160;}</div>
+<div class="line"><a name="l00314"></a><span class="lineno">  314</span>&#160; </div>
+<div class="line"><a name="l00315"></a><span class="lineno">  315</span>&#160;constexpr <span class="keywordtype">float</span> color::clamp_value(<span class="keywordtype">float</span> fValue) noexcept</div>
+<div class="line"><a name="l00316"></a><span class="lineno">  316</span>&#160;{</div>
+<div class="line"><a name="l00317"></a><span class="lineno">  317</span>&#160;    <span class="keywordflow">return</span> std::clamp(fValue, 0.f, 1.f);</div>
+<div class="line"><a name="l00318"></a><span class="lineno">  318</span>&#160;}</div>
+<div class="line"><a name="l00319"></a><span class="lineno">  319</span>&#160; </div>
+<div class="line"><a name="l00320"></a><span class="lineno">  320</span>&#160;constexpr <span class="keywordtype">float</span> color::dec_to_float(<span class="keywordtype">int</span> nValue) noexcept</div>
+<div class="line"><a name="l00321"></a><span class="lineno">  321</span>&#160;{</div>
+<div class="line"><a name="l00322"></a><span class="lineno">  322</span>&#160;    <span class="keywordflow">return</span> <span class="keyword">static_cast&lt;</span><span class="keywordtype">float</span><span class="keyword">&gt;</span>(nValue) / 255.f;</div>
+<div class="line"><a name="l00323"></a><span class="lineno">  323</span>&#160;}</div>
+<div class="line"><a name="l00324"></a><span class="lineno">  324</span>&#160; </div>
+<div class="line"><a name="l00325"></a><span class="lineno">  325</span>&#160;constexpr <span class="keywordtype">int</span> color::float_to_dec(<span class="keywordtype">float</span> fValue) noexcept</div>
+<div class="line"><a name="l00326"></a><span class="lineno">  326</span>&#160;{</div>
+<div class="line"><a name="l00327"></a><span class="lineno">  327</span>&#160;    <span class="keywordflow">return</span> <span class="keyword">static_cast&lt;</span><span class="keywordtype">int</span><span class="keyword">&gt;</span>(fValue * 255.f);</div>
+<div class="line"><a name="l00328"></a><span class="lineno">  328</span>&#160;}</div>
+<div class="line"><a name="l00329"></a><span class="lineno">  329</span>&#160; </div>
+<div class="line"><a name="l00330"></a><span class="lineno">  330</span>&#160;constexpr <span class="keywordtype">void</span> color::assign_checked(<span class="keyword">const</span> glm::vec4&amp; other) noexcept</div>
+<div class="line"><a name="l00331"></a><span class="lineno">  331</span>&#160;{</div>
+<div class="line"><a name="l00332"></a><span class="lineno">  332</span>&#160;    assign_component_checked(m_Color.x, other.x);</div>
+<div class="line"><a name="l00333"></a><span class="lineno">  333</span>&#160;    assign_component_checked(m_Color.y, other.y);</div>
+<div class="line"><a name="l00334"></a><span class="lineno">  334</span>&#160;    assign_component_checked(m_Color.z, other.z);</div>
+<div class="line"><a name="l00335"></a><span class="lineno">  335</span>&#160;    assign_component_checked(m_Color.w, other.w);</div>
+<div class="line"><a name="l00336"></a><span class="lineno">  336</span>&#160;}</div>
+<div class="line"><a name="l00337"></a><span class="lineno">  337</span>&#160; </div>
+<div class="line"><a name="l00338"></a><span class="lineno">  338</span>&#160;constexpr <span class="keywordtype">void</span> color::assign_component_checked(<span class="keywordtype">float</span>&amp; pComponent, <span class="keywordtype">float</span> fValue) noexcept</div>
+<div class="line"><a name="l00339"></a><span class="lineno">  339</span>&#160;{</div>
+<div class="line"><a name="l00340"></a><span class="lineno">  340</span>&#160;    pComponent = clamp_value(fValue);</div>
+<div class="line"><a name="l00341"></a><span class="lineno">  341</span>&#160;}</div>
+<div class="line"><a name="l00342"></a><span class="lineno">  342</span>&#160; </div>
+<div class="line"><a name="l00343"></a><span class="lineno">  343</span>&#160;} <span class="comment">// namespace qx</span></div>
+<div class="ttc" id="aclassqx_1_1basic__string__hash_html"><div class="ttname"><a href="classqx_1_1basic__string__hash.html">qx::basic_string_hash</a></div><div class="ttdoc">String hash object.</div><div class="ttdef"><b>Definition:</b> <a href="string__hash_8h_source.html#l00044">string_hash.h:45</a></div></div>
+<div class="ttc" id="aclassqx_1_1basic__string_html"><div class="ttname"><a href="classqx_1_1basic__string.html">qx::basic_string</a></div><div class="ttdoc">String class.</div><div class="ttdef"><b>Definition:</b> <a href="string_8h_source.html#l00065">string.h:66</a></div></div>
+<div class="ttc" id="aclassqx_1_1basic__string_html_aa7020d2d5c4947b3abdfa85c71120da1"><div class="ttname"><a href="classqx_1_1basic__string.html#aa7020d2d5c4947b3abdfa85c71120da1">qx::basic_string::length</a></div><div class="ttdeci">size_type length() const noexcept</div><div class="ttdoc">Get string length.</div><div class="ttdef"><b>Definition:</b> <a href="string_8inl_source.html#l00254">string.inl:254</a></div></div>
+<div class="ttc" id="aclassqx_1_1basic__string_html_abce43bf1b90183253f461346b3ba310b"><div class="ttname"><a href="classqx_1_1basic__string.html#abce43bf1b90183253f461346b3ba310b">qx::basic_string::remove_all</a></div><div class="ttdeci">size_type remove_all(value_type chSymbol, size_type nBegin=0, size_type nEnd=npos) noexcept</div><div class="ttdoc">Remove all occurrences of a substring in a string.</div><div class="ttdef"><b>Definition:</b> <a href="string_8inl_source.html#l01089">string.inl:1089</a></div></div>
+<div class="ttc" id="aclassqx_1_1color_html"><div class="ttname"><a href="classqx_1_1color.html">qx::color</a></div><div class="ttdoc">RGBA color.</div><div class="ttdef"><b>Definition:</b> <a href="color_8h_source.html#l00036">color.h:37</a></div></div>
 <div class="ttc" id="aclassqx_1_1color_html_a04a0ca6331aded52b49bd1e3991f6083"><div class="ttname"><a href="classqx_1_1color.html#a04a0ca6331aded52b49bd1e3991f6083">qx::color::g</a></div><div class="ttdeci">constexpr float g() const noexcept</div><div class="ttdoc">Get green component.</div><div class="ttdef"><b>Definition:</b> <a href="color_8inl_source.html#l00047">color.inl:47</a></div></div>
 <div class="ttc" id="aclassqx_1_1color_html_a120868dd6deb189aedd5ee9cc64e3fc5"><div class="ttname"><a href="classqx_1_1color.html#a120868dd6deb189aedd5ee9cc64e3fc5">qx::color::update_r_dec</a></div><div class="ttdeci">constexpr void update_r_dec(int nDeltaValue) noexcept</div><div class="ttdoc">Add value to red component.</div><div class="ttdef"><b>Definition:</b> <a href="color_8inl_source.html#l00152">color.inl:152</a></div></div>
 <div class="ttc" id="aclassqx_1_1color_html_a12ef8da127f482e6d811ad7e6a0d77b9"><div class="ttname"><a href="classqx_1_1color.html#a12ef8da127f482e6d811ad7e6a0d77b9">qx::color::update_a</a></div><div class="ttdeci">constexpr void update_a(float fDeltaValue) noexcept</div><div class="ttdoc">Add value to alpha component.</div><div class="ttdef"><b>Definition:</b> <a href="color_8inl_source.html#l00147">color.inl:147</a></div></div>
 <div class="ttc" id="aclassqx_1_1color_html_a1fd1646aba373bb80c407d65df46b08e"><div class="ttname"><a href="classqx_1_1color.html#a1fd1646aba373bb80c407d65df46b08e">qx::color::r_dec</a></div><div class="ttdeci">constexpr int r_dec() const noexcept</div><div class="ttdoc">Get red component as decimal.</div><div class="ttdef"><b>Definition:</b> <a href="color_8inl_source.html#l00072">color.inl:72</a></div></div>
+<div class="ttc" id="aclassqx_1_1color_html_a3063906febfb38845ac708dcead85889"><div class="ttname"><a href="classqx_1_1color.html#a3063906febfb38845ac708dcead85889">qx::color::from_string</a></div><div class="ttdeci">static std::optional&lt; color &gt; from_string(std::basic_string_view&lt; TChar &gt; svColorName) noexcept</div><div class="ttdoc">Try to create color from string.</div><div class="ttdef"><b>Definition:</b> <a href="color_8inl_source.html#l00255">color.inl:255</a></div></div>
 <div class="ttc" id="aclassqx_1_1color_html_a41ff4c6c5906c1d81ab47e212ff54df5"><div class="ttname"><a href="classqx_1_1color.html#a41ff4c6c5906c1d81ab47e212ff54df5">qx::color::update_g</a></div><div class="ttdeci">constexpr void update_g(float fDeltaValue) noexcept</div><div class="ttdoc">Add value to green component.</div><div class="ttdef"><b>Definition:</b> <a href="color_8inl_source.html#l00137">color.inl:137</a></div></div>
 <div class="ttc" id="aclassqx_1_1color_html_a4f4cc04ad98f542c628585f45938d1c4"><div class="ttname"><a href="classqx_1_1color.html#a4f4cc04ad98f542c628585f45938d1c4">qx::color::update_b</a></div><div class="ttdeci">constexpr void update_b(float fDeltaValue) noexcept</div><div class="ttdoc">Add value to blue component.</div><div class="ttdef"><b>Definition:</b> <a href="color_8inl_source.html#l00142">color.inl:142</a></div></div>
 <div class="ttc" id="aclassqx_1_1color_html_a505659586a351bfd81a87cfb58428630"><div class="ttname"><a href="classqx_1_1color.html#a505659586a351bfd81a87cfb58428630">qx::color::darken</a></div><div class="ttdeci">constexpr void darken(float fPercent) noexcept</div><div class="ttdoc">Make color darker.</div><div class="ttdef"><b>Definition:</b> <a href="color_8inl_source.html#l00212">color.inl:212</a></div></div>
@@ -363,14 +435,14 @@ $(function() {
 <div class="ttc" id="aclassqx_1_1color_html_a64f7f76813ef54e95a0f34fe253f2776"><div class="ttname"><a href="classqx_1_1color.html#a64f7f76813ef54e95a0f34fe253f2776">qx::color::set_b</a></div><div class="ttdeci">constexpr void set_b(float fValue) noexcept</div><div class="ttdoc">Set new value of blue component.</div><div class="ttdef"><b>Definition:</b> <a href="color_8inl_source.html#l00182">color.inl:182</a></div></div>
 <div class="ttc" id="aclassqx_1_1color_html_a697bf27b7773d7ecc744adedf3c466a6"><div class="ttname"><a href="classqx_1_1color.html#a697bf27b7773d7ecc744adedf3c466a6">qx::color::color</a></div><div class="ttdeci">constexpr color() noexcept=default</div><div class="ttdoc">color object constructor</div></div>
 <div class="ttc" id="aclassqx_1_1color_html_a6b007c290d0994a5d3d55d09fa935e5c"><div class="ttname"><a href="classqx_1_1color.html#a6b007c290d0994a5d3d55d09fa935e5c">qx::color::b_dec</a></div><div class="ttdeci">constexpr int b_dec() const noexcept</div><div class="ttdoc">Get blue component as decimal.</div><div class="ttdef"><b>Definition:</b> <a href="color_8inl_source.html#l00082">color.inl:82</a></div></div>
-<div class="ttc" id="aclassqx_1_1color_html_a76b77e9e9b1a324bac4b8df930358731"><div class="ttname"><a href="classqx_1_1color.html#a76b77e9e9b1a324bac4b8df930358731">qx::color::empty</a></div><div class="ttdeci">static constexpr color empty() noexcept</div><div class="ttdoc">Get empty color (0, 0, 0, 0)</div><div class="ttdef"><b>Definition:</b> <a href="color_8inl_source.html#l00238">color.inl:238</a></div></div>
+<div class="ttc" id="aclassqx_1_1color_html_a76b77e9e9b1a324bac4b8df930358731"><div class="ttname"><a href="classqx_1_1color.html#a76b77e9e9b1a324bac4b8df930358731">qx::color::empty</a></div><div class="ttdeci">static constexpr color empty() noexcept</div><div class="ttdoc">Get empty color (0, 0, 0, 0)</div><div class="ttdef"><b>Definition:</b> <a href="color_8inl_source.html#l00305">color.inl:305</a></div></div>
 <div class="ttc" id="aclassqx_1_1color_html_a84df8abff04d108a1336e0835a5575e7"><div class="ttname"><a href="classqx_1_1color.html#a84df8abff04d108a1336e0835a5575e7">qx::color::update_g_dec</a></div><div class="ttdeci">constexpr void update_g_dec(int nDeltaValue) noexcept</div><div class="ttdoc">Add value to green component.</div><div class="ttdef"><b>Definition:</b> <a href="color_8inl_source.html#l00157">color.inl:157</a></div></div>
 <div class="ttc" id="aclassqx_1_1color_html_a8e7542125b7735869f14ece9976fcf73"><div class="ttname"><a href="classqx_1_1color.html#a8e7542125b7735869f14ece9976fcf73">qx::color::set_r</a></div><div class="ttdeci">constexpr void set_r(float fValue) noexcept</div><div class="ttdoc">Set new value of red component.</div><div class="ttdef"><b>Definition:</b> <a href="color_8inl_source.html#l00172">color.inl:172</a></div></div>
 <div class="ttc" id="aclassqx_1_1color_html_a937322121901c91b4cfac50788de295b"><div class="ttname"><a href="classqx_1_1color.html#a937322121901c91b4cfac50788de295b">qx::color::hex_rgba</a></div><div class="ttdeci">constexpr unsigned int hex_rgba() const noexcept</div><div class="ttdoc">Get color as hex.</div><div class="ttdef"><b>Definition:</b> <a href="color_8inl_source.html#l00097">color.inl:97</a></div></div>
 <div class="ttc" id="aclassqx_1_1color_html_aa4c7d1eca308c20717847e11c06f3ef2"><div class="ttname"><a href="classqx_1_1color.html#aa4c7d1eca308c20717847e11c06f3ef2">qx::color::update_r</a></div><div class="ttdeci">constexpr void update_r(float fDeltaValue) noexcept</div><div class="ttdoc">Add value to red component.</div><div class="ttdef"><b>Definition:</b> <a href="color_8inl_source.html#l00132">color.inl:132</a></div></div>
 <div class="ttc" id="aclassqx_1_1color_html_aa5594ec36ae6857163551f2b2ec5c77c"><div class="ttname"><a href="classqx_1_1color.html#aa5594ec36ae6857163551f2b2ec5c77c">qx::color::a_dec</a></div><div class="ttdeci">constexpr int a_dec() const noexcept</div><div class="ttdoc">Get alpha component as decimal.</div><div class="ttdef"><b>Definition:</b> <a href="color_8inl_source.html#l00087">color.inl:87</a></div></div>
 <div class="ttc" id="aclassqx_1_1color_html_aa9d5a8a12174458a8ef5c6f2d5f7fee7"><div class="ttname"><a href="classqx_1_1color.html#aa9d5a8a12174458a8ef5c6f2d5f7fee7">qx::color::set_g_dec</a></div><div class="ttdeci">constexpr void set_g_dec(int nValue) noexcept</div><div class="ttdoc">Set new value of green component.</div><div class="ttdef"><b>Definition:</b> <a href="color_8inl_source.html#l00197">color.inl:197</a></div></div>
-<div class="ttc" id="aclassqx_1_1color_html_abb14ac204181c15f5cc5c72828bca4a1"><div class="ttname"><a href="classqx_1_1color.html#abb14ac204181c15f5cc5c72828bca4a1">qx::color::size</a></div><div class="ttdeci">static constexpr size_t size() noexcept</div><div class="ttdoc">Get number of float components.</div><div class="ttdef"><b>Definition:</b> <a href="color_8inl_source.html#l00243">color.inl:243</a></div></div>
+<div class="ttc" id="aclassqx_1_1color_html_abb14ac204181c15f5cc5c72828bca4a1"><div class="ttname"><a href="classqx_1_1color.html#abb14ac204181c15f5cc5c72828bca4a1">qx::color::size</a></div><div class="ttdeci">static constexpr size_t size() noexcept</div><div class="ttdoc">Get number of float components.</div><div class="ttdef"><b>Definition:</b> <a href="color_8inl_source.html#l00310">color.inl:310</a></div></div>
 <div class="ttc" id="aclassqx_1_1color_html_ad24bfb7b85b9d02d481974fcebc5b560"><div class="ttname"><a href="classqx_1_1color.html#ad24bfb7b85b9d02d481974fcebc5b560">qx::color::brighten</a></div><div class="ttdeci">constexpr void brighten(float fPercent) noexcept</div><div class="ttdoc">Make color brighter.</div><div class="ttdef"><b>Definition:</b> <a href="color_8inl_source.html#l00217">color.inl:217</a></div></div>
 <div class="ttc" id="aclassqx_1_1color_html_ad2b012c258ee97b24736d5ad7f6bdb32"><div class="ttname"><a href="classqx_1_1color.html#ad2b012c258ee97b24736d5ad7f6bdb32">qx::color::operator==</a></div><div class="ttdeci">constexpr bool operator==(const color &amp;other) const noexcept</div><div class="ttdoc">operator==</div><div class="ttdef"><b>Definition:</b> <a href="color_8inl_source.html#l00117">color.inl:117</a></div></div>
 <div class="ttc" id="aclassqx_1_1color_html_ae069abc6248294ef1e37495ca6c0be08"><div class="ttname"><a href="classqx_1_1color.html#ae069abc6248294ef1e37495ca6c0be08">qx::color::hex_argb</a></div><div class="ttdeci">constexpr unsigned int hex_argb() const noexcept</div><div class="ttdoc">Get color as hex.</div><div class="ttdef"><b>Definition:</b> <a href="color_8inl_source.html#l00107">color.inl:107</a></div></div>
@@ -380,6 +452,10 @@ $(function() {
 <div class="ttc" id="aclassqx_1_1color_html_af6243d72e3c2fbaf4c082c99382264c1"><div class="ttname"><a href="classqx_1_1color.html#af6243d72e3c2fbaf4c082c99382264c1">qx::color::update_a_dec</a></div><div class="ttdeci">constexpr void update_a_dec(int nDeltaValue) noexcept</div><div class="ttdoc">Add value to alpha component.</div><div class="ttdef"><b>Definition:</b> <a href="color_8inl_source.html#l00167">color.inl:167</a></div></div>
 <div class="ttc" id="aclassqx_1_1color_html_af660c3bb84699b1318a5439797e02c6a"><div class="ttname"><a href="classqx_1_1color.html#af660c3bb84699b1318a5439797e02c6a">qx::color::set_a</a></div><div class="ttdeci">constexpr void set_a(float fValue) noexcept</div><div class="ttdoc">Set new value of alpha component.</div><div class="ttdef"><b>Definition:</b> <a href="color_8inl_source.html#l00187">color.inl:187</a></div></div>
 <div class="ttc" id="aclassqx_1_1color_html_afec98962905ed5a335354a5410cf6bb0"><div class="ttname"><a href="classqx_1_1color.html#afec98962905ed5a335354a5410cf6bb0">qx::color::set_a_dec</a></div><div class="ttdeci">constexpr void set_a_dec(int nValue) noexcept</div><div class="ttdoc">Set new value of alpha component.</div><div class="ttdef"><b>Definition:</b> <a href="color_8inl_source.html#l00207">color.inl:207</a></div></div>
+<div class="ttc" id="astring__utils_8h_html_ab4cfe02c348ccce78db4519f9758e672"><div class="ttname"><a href="string__utils_8h.html#ab4cfe02c348ccce78db4519f9758e672">QX_CHAR_PREFIX</a></div><div class="ttdeci">#define QX_CHAR_PREFIX(value_type, ch)</div><div class="ttdoc">Chose witch of prefixes add to char : L or none.</div><div class="ttdef"><b>Definition:</b> <a href="string__utils_8h_source.html#l00252">string_utils.h:252</a></div></div>
+<div class="ttc" id="astring__utils_8h_html_ac188ca5f0d584a897b5e2a443c574729"><div class="ttname"><a href="string__utils_8h.html#ac188ca5f0d584a897b5e2a443c574729">QX_STR_PREFIX</a></div><div class="ttdeci">#define QX_STR_PREFIX(value_type, str)</div><div class="ttdoc">Chose witch of prefixes add to string : L or none.</div><div class="ttdef"><b>Definition:</b> <a href="string__utils_8h_source.html#l00244">string_utils.h:244</a></div></div>
+<div class="ttc" id="astructqx_1_1fast__hash__string__traits_html"><div class="ttname"><a href="structqx_1_1fast__hash__string__traits.html">qx::fast_hash_string_traits</a></div><div class="ttdef"><b>Definition:</b> <a href="string__hash_8h_source.html#l00092">string_hash.h:93</a></div></div>
+<div class="ttc" id="atypedefs_8h_html_a1af9f95651e921615e75917a6dd1b574"><div class="ttname"><a href="typedefs_8h.html#a1af9f95651e921615e75917a6dd1b574">u64</a></div><div class="ttdeci">uint64_t u64</div><div class="ttdef"><b>Definition:</b> <a href="typedefs_8h_source.html#l00026">typedefs.h:28</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
