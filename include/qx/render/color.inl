@@ -10,6 +10,53 @@
 namespace qx
 {
 
+namespace detail
+{
+
+/**
+
+    @class   string_to_color_converter
+    @brief   Helper class for string -> color conversion
+    @details The only purpose of this class is to hide the map from a user
+    @author  Khrapov
+    @date    5.04.2023
+
+**/
+class string_to_color_converter
+{
+    QX_SINGLETON(string_to_color_converter);
+    friend color;
+
+private:
+    /**
+        @brief Add new color to the mapping
+        @param nNameHash - color name hash
+        @param color     - color
+    **/
+    void add(size_t nNameHash, color color)
+    {
+        m_StringToColor[nNameHash] = color;
+    }
+
+    /**
+        @brief  Try to get color from the color name
+        @param  nNameHash - color name hash
+        @retval           - color or nullopt
+    **/
+    std::optional<color> get(size_t nNameHash) const
+    {
+        if (const auto it = m_StringToColor.find(nNameHash); it != m_StringToColor.end())
+            return it->second;
+
+        return std::nullopt;
+    }
+
+private:
+    std::unordered_map<size_t, color> m_StringToColor;
+};
+
+} // namespace detail
+
 constexpr color::color(float fRed, float fGreen, float fBlue, float fAlpha) noexcept
 {
     assign_checked({ fRed, fGreen, fBlue, fAlpha });
@@ -20,7 +67,7 @@ constexpr color::color(int nRed, int nGreen, int nBlue, int nAlpha) noexcept
 {
 }
 
-constexpr color::color(unsigned int nHexValue) noexcept
+constexpr color::color(u64 nHexValue) noexcept
     : color(
         dec_to_float(nHexValue >> 24 & 0xFF),
         dec_to_float(nHexValue >> 16 & 0xFF),
@@ -233,6 +280,77 @@ constexpr color color::brighten(const color& other, float fPercent) noexcept
     color ret = other;
     ret.brighten(fPercent);
     return ret;
+}
+
+template<class TChar>
+inline bool color::add_color_to_mapping(
+    std::basic_string_view<TChar> svColorName,
+    int                           nRed,
+    int                           nGreen,
+    int                           nBlue) noexcept
+{
+    basic_string<TChar> sName = svColorName;
+    detail::string_to_color_converter::get_instance().add(
+        basic_string_hash<fast_hash_string_traits<TChar>>(sName),
+        color(nRed, nGreen, nBlue));
+
+    sName.remove_all(QX_CHAR_PREFIX(TChar, '_'));
+    detail::string_to_color_converter::get_instance().add(
+        basic_string_hash<fast_hash_string_traits<TChar>>(sName),
+        color(nRed, nGreen, nBlue));
+
+    return true;
+}
+
+template<class TChar>
+inline std::optional<color> color::from_string(std::basic_string_view<TChar> svColorName) noexcept
+{
+    if (const auto optColor = detail::string_to_color_converter::get_instance().get(
+            basic_string_hash<fast_hash_string_traits<TChar>>(svColorName)))
+    {
+        return *optColor;
+    }
+
+    std::optional<color> optColor;
+
+    const bool bStartsWith0x =
+        svColorName.starts_with(QX_STR_PREFIX(TChar, "0x")) && (svColorName.size() == 8 || svColorName.size() == 10);
+
+    if (bStartsWith0x || svColorName.starts_with(QX_STR_PREFIX(TChar, "#")) && svColorName.size() == 7)
+    {
+        // TODO no conversion method for string view so far
+        // but with SSO this should be fine
+        const size_t        nOffset = bStartsWith0x ? 2 : 1;
+        basic_string<TChar> sColorName =
+            std::basic_string_view<TChar>(svColorName.data() + nOffset, svColorName.size() - nOffset);
+
+        auto ReadHex = [](basic_string<TChar>& s) -> std::optional<color>
+        {
+            s.to_lower();
+            if (const auto optInt = s.template to<u64>(QX_STR_PREFIX(TChar, "%llx")))
+                return color(*optInt);
+
+            return std::nullopt;
+        };
+
+        if (sColorName.length() == 6)
+        {
+            sColorName += QX_STR_PREFIX(TChar, "FF");
+            optColor = ReadHex(sColorName);
+        }
+        else if (sColorName.length() == 8)
+        {
+            optColor = ReadHex(sColorName);
+        }
+    }
+
+    return optColor;
+}
+
+template<class TChar>
+inline std::optional<color> color::from_string(const TChar* pszColorName) noexcept
+{
+    return from_string(std::basic_string_view<TChar>(pszColorName));
 }
 
 constexpr color color::empty() noexcept
