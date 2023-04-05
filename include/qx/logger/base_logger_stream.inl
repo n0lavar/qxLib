@@ -225,7 +225,12 @@ inline void base_logger_stream::format_line(
     buffers.sFormat += pszStringFormatSpecifier;
     buffers.sFormat += QX_STR_PREFIX(char_type, "::%d] ");
     buffers.sFormat += buffers.sMessage;
-    buffers.sMessage.sprintf(buffers.sFormat.c_str(), pszCategory ? pszCategory : "", pszFile, pszFunction, nLine);
+    buffers.sMessage.sprintf(
+        buffers.sFormat.c_str(),
+        pszCategory ? pszCategory : QX_STR_PREFIX(char_type, ""),
+        pszFile,
+        pszFunction,
+        nLine);
     buffers.sMessage += QX_CHAR_PREFIX(char_type, '\n');
 
     if (pszCategory)

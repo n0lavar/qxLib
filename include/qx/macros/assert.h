@@ -38,6 +38,7 @@ void resolve_assert_proceeding(
     ArgsType&&... args)
 {
     QX_LOGGER_INSTANCE.log(eLogLevel, "[%s] ", fileCategory, pszFile, pszFunction, nLine, pszCondition, args...);
+    QX_LOGGER_INSTANCE.flush();
 }
 
 template<log_level eLogLevel, class... ArgsType>
@@ -54,6 +55,33 @@ void resolve_assert_proceeding(
     sFormat += pszFormat;
     QX_LOGGER_INSTANCE
         .log(eLogLevel, sFormat.c_str(), fileCategory, pszFile, pszFunction, nLine, pszCondition, args...);
+
+    QX_LOGGER_INSTANCE.flush();
+}
+
+template<log_level eLogLevel, class... ArgsType>
+void resolve_assert_proceeding(
+    const category& fileCategory,
+    const char*     pszFunction,
+    const char*     pszFile,
+    int             nLine,
+    const char*     pszCondition,
+    const wchar_t*  pszFormat,
+    ArgsType&&... args)
+{
+    wstring sFormat(L"[%ls] ");
+    sFormat += pszFormat;
+    QX_LOGGER_INSTANCE.log(
+        eLogLevel,
+        sFormat.c_str(),
+        fileCategory,
+        pszFile,
+        pszFunction,
+        nLine,
+        to_wstring(pszCondition).c_str(),
+        args...);
+
+    QX_LOGGER_INSTANCE.flush();
 }
 
 template<log_level eLogLevel, class... ArgsType>
@@ -70,6 +98,34 @@ void resolve_assert_proceeding(
     string sFormat("[%s] ");
     sFormat += pszFormat;
     QX_LOGGER_INSTANCE.log(eLogLevel, sFormat.c_str(), category, pszFile, pszFunction, nLine, pszCondition, args...);
+
+    QX_LOGGER_INSTANCE.flush();
+}
+
+template<log_level eLogLevel, class... ArgsType>
+void resolve_assert_proceeding(
+    const category& fileCategory,
+    const char*     pszFunction,
+    const char*     pszFile,
+    int             nLine,
+    const char*     pszCondition,
+    const category& category,
+    const wchar_t*  pszFormat,
+    ArgsType&&... args)
+{
+    wstring sFormat(L"[%ls] ");
+    sFormat += pszFormat;
+    QX_LOGGER_INSTANCE.log(
+        eLogLevel,
+        sFormat.c_str(),
+        category,
+        pszFile,
+        pszFunction,
+        nLine,
+        to_wstring(pszCondition).c_str(),
+        args...);
+
+    QX_LOGGER_INSTANCE.flush();
 }
 
 } // namespace qx::details
