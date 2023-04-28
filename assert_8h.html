@@ -85,13 +85,13 @@ Macros</h2></td></tr>
 <tr class="memitem:add53bee6a19170a3d73bc82e00d522e8"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="assert_8h.html#add53bee6a19170a3d73bc82e00d522e8">QX_ASSERT</a>(condition, ...)</td></tr>
 <tr class="memdesc:add53bee6a19170a3d73bc82e00d522e8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Verifies that condition is true.  <a href="assert_8h.html#add53bee6a19170a3d73bc82e00d522e8">More...</a><br /></td></tr>
 <tr class="separator:add53bee6a19170a3d73bc82e00d522e8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4776fd61bf606b5e0bf0d569ae055c2c"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="assert_8h.html#a4776fd61bf606b5e0bf0d569ae055c2c">QX_ASSERT_NO_ENTRY</a>(...)</td></tr>
+<tr class="memitem:a4776fd61bf606b5e0bf0d569ae055c2c"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="assert_8h.html#a4776fd61bf606b5e0bf0d569ae055c2c">QX_ASSERT_NO_ENTRY</a>(...)&#160;&#160;&#160;    _QX_ASSERT_NO_ENTRY(QX_ASSERT_BEFORE_DEBUG_BREAK, QX_ASSERT_DEBUG_BREAK, QX_ASSERT_AFTER_DEBUG_BREAK, ##__VA_ARGS__)</td></tr>
 <tr class="memdesc:a4776fd61bf606b5e0bf0d569ae055c2c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fails unconditionally if this code should not be executed.  <a href="assert_8h.html#a4776fd61bf606b5e0bf0d569ae055c2c">More...</a><br /></td></tr>
 <tr class="separator:a4776fd61bf606b5e0bf0d569ae055c2c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a72dff4b1cddb7b4567611c9ca21fe012"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="assert_8h.html#a72dff4b1cddb7b4567611c9ca21fe012">QX_EXPECT</a>(condition, ...)</td></tr>
 <tr class="memdesc:a72dff4b1cddb7b4567611c9ca21fe012"><td class="mdescLeft">&#160;</td><td class="mdescRight">Verifies that condition is true.  <a href="assert_8h.html#a72dff4b1cddb7b4567611c9ca21fe012">More...</a><br /></td></tr>
 <tr class="separator:a72dff4b1cddb7b4567611c9ca21fe012"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a279031921ccf8062222a34016ed48492"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="assert_8h.html#a279031921ccf8062222a34016ed48492">QX_EXPECT_NO_ENTRY</a>(...)</td></tr>
+<tr class="memitem:a279031921ccf8062222a34016ed48492"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="assert_8h.html#a279031921ccf8062222a34016ed48492">QX_EXPECT_NO_ENTRY</a>(...)&#160;&#160;&#160;    _QX_ASSERT_NO_ENTRY(QX_EXPECT_BEFORE_DEBUG_BREAK, QX_EXPECT_DEBUG_BREAK, QX_EXPECT_AFTER_DEBUG_BREAK, ##__VA_ARGS__)</td></tr>
 <tr class="memdesc:a279031921ccf8062222a34016ed48492"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fails unconditionally if this code should not be executed.  <a href="assert_8h.html#a279031921ccf8062222a34016ed48492">More...</a><br /></td></tr>
 <tr class="separator:a279031921ccf8062222a34016ed48492"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af77466a4f6526d719f8e004f94c8af49"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="assert_8h.html#af77466a4f6526d719f8e004f94c8af49">QX_EXPECT_CONTINUE</a>(condition, ...)</td></tr>
@@ -177,17 +177,11 @@ Macros</h2></td></tr>
           <td>(</td>
           <td class="paramtype">&#160;</td>
           <td class="paramname"><em>...</em></td><td>)</td>
-          <td></td>
+          <td>&#160;&#160;&#160;    _QX_ASSERT_NO_ENTRY(QX_ASSERT_BEFORE_DEBUG_BREAK, QX_ASSERT_DEBUG_BREAK, QX_ASSERT_AFTER_DEBUG_BREAK, ##__VA_ARGS__)</td>
         </tr>
       </table>
 </div><div class="memdoc">
-<b>Value:</b><div class="fragment"><div class="line">    _QX_ASSERT_NO_ENTRY(              \</div>
-<div class="line">        QX_ASSERT_BEFORE_DEBUG_BREAK, \</div>
-<div class="line">        QX_ASSERT_DEBUG_BREAK,        \</div>
-<div class="line">        QX_ASSERT_AFTER_DEBUG_BREAK,  \</div>
-<div class="line">        <span class="stringliteral">&quot;No entry&quot;</span>,                   \</div>
-<div class="line">        ##__VA_ARGS__)</div>
-</div><!-- fragment -->
+
 <p>Fails unconditionally if this code should not be executed. </p>
 <p>ASSERT macros generate fatal failures and abort the program execution </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
@@ -241,7 +235,7 @@ Macros</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="assert_8h_source.html#l00280">280</a> of file <a class="el" href="assert_8h_source.html">assert.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="assert_8h_source.html#l00275">275</a> of file <a class="el" href="assert_8h_source.html">assert.h</a>.</p>
 
 </div>
 </div>
@@ -286,7 +280,7 @@ Macros</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="assert_8h_source.html#l00333">333</a> of file <a class="el" href="assert_8h_source.html">assert.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="assert_8h_source.html#l00323">323</a> of file <a class="el" href="assert_8h_source.html">assert.h</a>.</p>
 
 </div>
 </div>
@@ -340,7 +334,7 @@ Macros</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="assert_8h_source.html#l00393">393</a> of file <a class="el" href="assert_8h_source.html">assert.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="assert_8h_source.html#l00383">383</a> of file <a class="el" href="assert_8h_source.html">assert.h</a>.</p>
 
 </div>
 </div>
@@ -387,7 +381,7 @@ Macros</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="assert_8h_source.html#l00413">413</a> of file <a class="el" href="assert_8h_source.html">assert.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="assert_8h_source.html#l00403">403</a> of file <a class="el" href="assert_8h_source.html">assert.h</a>.</p>
 
 </div>
 </div>
@@ -432,7 +426,7 @@ Macros</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="assert_8h_source.html#l00315">315</a> of file <a class="el" href="assert_8h_source.html">assert.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="assert_8h_source.html#l00305">305</a> of file <a class="el" href="assert_8h_source.html">assert.h</a>.</p>
 
 </div>
 </div>
@@ -447,17 +441,11 @@ Macros</h2></td></tr>
           <td>(</td>
           <td class="paramtype">&#160;</td>
           <td class="paramname"><em>...</em></td><td>)</td>
-          <td></td>
+          <td>&#160;&#160;&#160;    _QX_ASSERT_NO_ENTRY(QX_EXPECT_BEFORE_DEBUG_BREAK, QX_EXPECT_DEBUG_BREAK, QX_EXPECT_AFTER_DEBUG_BREAK, ##__VA_ARGS__)</td>
         </tr>
       </table>
 </div><div class="memdoc">
-<b>Value:</b><div class="fragment"><div class="line">    _QX_ASSERT_NO_ENTRY(              \</div>
-<div class="line">        QX_EXPECT_BEFORE_DEBUG_BREAK, \</div>
-<div class="line">        QX_EXPECT_DEBUG_BREAK,        \</div>
-<div class="line">        QX_EXPECT_AFTER_DEBUG_BREAK,  \</div>
-<div class="line">        <span class="stringliteral">&quot;No entry&quot;</span>,                   \</div>
-<div class="line">        ##__VA_ARGS__)</div>
-</div><!-- fragment -->
+
 <p>Fails unconditionally if this code should not be executed. </p>
 <p>EXPECT macros generate nonfatal failures and allow to continue running </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
@@ -466,7 +454,7 @@ Macros</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="assert_8h_source.html#l00297">297</a> of file <a class="el" href="assert_8h_source.html">assert.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="assert_8h_source.html#l00292">292</a> of file <a class="el" href="assert_8h_source.html">assert.h</a>.</p>
 
 </div>
 </div>
@@ -520,7 +508,7 @@ Macros</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="assert_8h_source.html#l00352">352</a> of file <a class="el" href="assert_8h_source.html">assert.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="assert_8h_source.html#l00342">342</a> of file <a class="el" href="assert_8h_source.html">assert.h</a>.</p>
 
 </div>
 </div>
@@ -567,7 +555,7 @@ Macros</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="assert_8h_source.html#l00372">372</a> of file <a class="el" href="assert_8h_source.html">assert.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="assert_8h_source.html#l00362">362</a> of file <a class="el" href="assert_8h_source.html">assert.h</a>.</p>
 
 </div>
 </div>
