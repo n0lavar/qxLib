@@ -203,7 +203,7 @@ void resolve_assert_proceeding(
     }()
 
 #define _QX_ASSERT_NO_ENTRY(before_debug_break, debug_break, after_debug_break, ...) \
-    _QX_ASSERT(before_debug_break, debug_break, after_debug_break, false, ##__VA_ARGS__)
+    _QX_ASSERT(before_debug_break, debug_break, after_debug_break, !"No entry", ##__VA_ARGS__)
 
 #define _QX_ASSERT_CONTINUE(before_debug_break, debug_break, after_debug_break, condition, ...)                 \
     if (!_QX_ASSERT(before_debug_break, debug_break, after_debug_break, condition, ##__VA_ARGS__)) [[unlikely]] \
@@ -259,13 +259,8 @@ void resolve_assert_proceeding(
                  or "format string"
                  or "category"
 **/
-#define QX_ASSERT_NO_ENTRY(...)       \
-    _QX_ASSERT_NO_ENTRY(              \
-        QX_ASSERT_BEFORE_DEBUG_BREAK, \
-        QX_ASSERT_DEBUG_BREAK,        \
-        QX_ASSERT_AFTER_DEBUG_BREAK,  \
-        "No entry",                   \
-        ##__VA_ARGS__)
+#define QX_ASSERT_NO_ENTRY(...) \
+    _QX_ASSERT_NO_ENTRY(QX_ASSERT_BEFORE_DEBUG_BREAK, QX_ASSERT_DEBUG_BREAK, QX_ASSERT_AFTER_DEBUG_BREAK, ##__VA_ARGS__)
 
 /**
     @brief   Verifies that condition is true
@@ -294,13 +289,8 @@ void resolve_assert_proceeding(
                  or "format string"
                  or "category"
 **/
-#define QX_EXPECT_NO_ENTRY(...)       \
-    _QX_ASSERT_NO_ENTRY(              \
-        QX_EXPECT_BEFORE_DEBUG_BREAK, \
-        QX_EXPECT_DEBUG_BREAK,        \
-        QX_EXPECT_AFTER_DEBUG_BREAK,  \
-        "No entry",                   \
-        ##__VA_ARGS__)
+#define QX_EXPECT_NO_ENTRY(...) \
+    _QX_ASSERT_NO_ENTRY(QX_EXPECT_BEFORE_DEBUG_BREAK, QX_EXPECT_DEBUG_BREAK, QX_EXPECT_AFTER_DEBUG_BREAK, ##__VA_ARGS__)
 
 /**
     @brief   Verifies that condition is true and continues loop if false
