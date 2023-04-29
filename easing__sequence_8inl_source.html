@@ -290,13 +290,13 @@ $(function() {
 <div class="line"><a name="l00219"></a><span class="lineno">  219</span>&#160;}</div>
 <div class="line"><a name="l00220"></a><span class="lineno">  220</span>&#160; </div>
 <div class="line"><a name="l00221"></a><span class="lineno">  221</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> T&gt;</div>
-<div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160;<span class="keyword">inline</span> <span class="keyword">class </span><a class="code" href="classqx_1_1base__easing__sequence.html">base_easing_sequence</a>&lt;T&gt;::easing_element_type* <a class="code" href="classqx_1_1base__easing__sequence.html">base_easing_sequence</a>&lt;T&gt;::get_current_element() noexcept</div>
+<div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160;<span class="keyword">inline</span> <span class="keyword">typename</span> <a class="code" href="classqx_1_1base__easing__element.html">base_easing_sequence&lt;T&gt;::easing_element_type</a>* <a class="code" href="classqx_1_1base__easing__sequence.html">base_easing_sequence&lt;T&gt;::get_current_element</a>() noexcept</div>
 <div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160;{</div>
 <div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160;    <span class="keywordflow">return</span> m_nCurrentElement &lt; m_ElementsSequence.size() ? &amp;m_ElementsSequence[m_nCurrentElement] : <span class="keyword">nullptr</span>;</div>
 <div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160;}</div>
 <div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160; </div>
 <div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> T&gt;</div>
-<div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160;<span class="keyword">inline</span> <span class="keyword">const</span> <span class="keyword">class </span>base_easing_sequence&lt;T&gt;::easing_element_type* base_easing_sequence&lt;T&gt;::get_current_element()</div>
+<div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160;<span class="keyword">inline</span> <span class="keyword">const</span> <span class="keyword">typename</span> base_easing_sequence&lt;T&gt;::easing_element_type* base_easing_sequence&lt;T&gt;::get_current_element()</div>
 <div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160;    const noexcept</div>
 <div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160;{</div>
 <div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160;    <span class="keywordflow">return</span> <span class="keyword">const_cast&lt;</span>base_easing_sequence*<span class="keyword">&gt;</span>(<span class="keyword">static_cast&lt;</span><span class="keyword">const </span>base_easing_sequence*<span class="keyword">&gt;</span>(<span class="keyword">this</span>))-&gt;get_current_element();</div>
