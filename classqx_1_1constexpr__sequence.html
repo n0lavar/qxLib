@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>qxLib: qx::constexpr_sequence&lt; Tag, T, Start, Func &gt; Class Template Reference</title>
+<title>qxLib: qx::constexpr_sequence&lt; tag_t, T, Start, Func &gt; Class Template Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -70,7 +70,7 @@ $(function() {
 <a href="#pub-static-methods">Static Public Member Functions</a> &#124;
 <a href="classqx_1_1constexpr__sequence-members.html">List of all members</a>  </div>
   <div class="headertitle">
-<div class="title">qx::constexpr_sequence&lt; Tag, T, Start, Func &gt; Class Template Reference</div>  </div>
+<div class="title">qx::constexpr_sequence&lt; tag_t, T, Start, Func &gt; Class Template Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
@@ -81,25 +81,25 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
-<tr class="memitem:a2f4a362a520a0e6569e6298789888e8e"><td class="memTemplParams" colspan="2">template&lt;size_t nIndex = CheckerWrapper&lt;0&gt; {}.index(), T _value = Element&lt;nIndex&gt; {}.value()&gt; </td></tr>
-<tr class="memitem:a2f4a362a520a0e6569e6298789888e8e"><td class="memTemplItemLeft" align="right" valign="top">static constexpr T&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classqx_1_1constexpr__sequence.html#a2f4a362a520a0e6569e6298789888e8e">value</a> () noexcept</td></tr>
-<tr class="memdesc:a2f4a362a520a0e6569e6298789888e8e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get current sequence value.  <a href="classqx_1_1constexpr__sequence.html#a2f4a362a520a0e6569e6298789888e8e">More...</a><br /></td></tr>
-<tr class="separator:a2f4a362a520a0e6569e6298789888e8e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae642e2ac21cd653cc9936bca1dd77f56"><td class="memTemplParams" colspan="2">template&lt;size_t nIndex = CheckerWrapper&lt;0&gt; {}.index(), T _value = Element&lt;nIndex&gt; {}.value(), bool bStub = TElementFlag&lt;nIndex&gt; {}.test_and_set()&gt; </td></tr>
-<tr class="memitem:ae642e2ac21cd653cc9936bca1dd77f56"><td class="memTemplItemLeft" align="right" valign="top">static constexpr T&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classqx_1_1constexpr__sequence.html#ae642e2ac21cd653cc9936bca1dd77f56">next</a> () noexcept</td></tr>
-<tr class="memdesc:ae642e2ac21cd653cc9936bca1dd77f56"><td class="mdescLeft">&#160;</td><td class="mdescRight">Change value by Func and return new value ¹details As function works through generating new template instance each time, return value will be the same for one code line. That means in loops you will get same value each time. Use macros like BOOST_PP_REPEAT to simplify the code.  <a href="classqx_1_1constexpr__sequence.html#ae642e2ac21cd653cc9936bca1dd77f56">More...</a><br /></td></tr>
-<tr class="separator:ae642e2ac21cd653cc9936bca1dd77f56"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4197375e107c9c5dd0bc6db278b32378"><td class="memTemplParams" colspan="2">template&lt;size_t nIndex = checker_wrapper&lt;0&gt; {}.index(), T _value = element&lt;nIndex&gt; {}.value()&gt; </td></tr>
+<tr class="memitem:a4197375e107c9c5dd0bc6db278b32378"><td class="memTemplItemLeft" align="right" valign="top">static constexpr T&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classqx_1_1constexpr__sequence.html#a4197375e107c9c5dd0bc6db278b32378">value</a> () noexcept</td></tr>
+<tr class="memdesc:a4197375e107c9c5dd0bc6db278b32378"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get current sequence value.  <a href="classqx_1_1constexpr__sequence.html#a4197375e107c9c5dd0bc6db278b32378">More...</a><br /></td></tr>
+<tr class="separator:a4197375e107c9c5dd0bc6db278b32378"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8b3f5045a1c919e9476fdf9729e35710"><td class="memTemplParams" colspan="2">template&lt;size_t nIndex = checker_wrapper&lt;0&gt; {}.index(), T _value = element&lt;nIndex&gt; {}.value(), bool bStub = element_flag&lt;nIndex&gt; {}.test_and_set()&gt; </td></tr>
+<tr class="memitem:a8b3f5045a1c919e9476fdf9729e35710"><td class="memTemplItemLeft" align="right" valign="top">static constexpr T&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classqx_1_1constexpr__sequence.html#a8b3f5045a1c919e9476fdf9729e35710">next</a> () noexcept</td></tr>
+<tr class="memdesc:a8b3f5045a1c919e9476fdf9729e35710"><td class="mdescLeft">&#160;</td><td class="mdescRight">Change value by Func and return new value ¹details As function works through generating new template instance each time, return value will be the same for one code line. That means in loops you will get same value each time. Use macros like BOOST_PP_REPEAT to simplify the code.  <a href="classqx_1_1constexpr__sequence.html#a8b3f5045a1c919e9476fdf9729e35710">More...</a><br /></td></tr>
+<tr class="separator:a8b3f5045a1c919e9476fdf9729e35710"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><h3>template&lt;class Tag, typename T, T Start, T  Func&gt;<br />
-class qx::constexpr_sequence&lt; Tag, T, Start, Func &gt;</h3>
+<div class="textblock"><h3>template&lt;class tag_t, class T, T Start, T  Func&gt;<br />
+class qx::constexpr_sequence&lt; tag_t, T, Start, Func &gt;</h3>
 
 <p>Constexpr sequence. use unique tag for different instances. </p>
 <p>Modified version of Anthony Williams constexpr counter <a href="https://stackoverflow.com/a/58200261/8021662">https://stackoverflow.com/a/58200261/8021662</a> </p><dl class="section see"><dt>See also</dt><dd>examples in tests\test_constexpr_sequence.cpp </dd></dl>
 <dl class="section note"><dt>Note</dt><dd>that you can't vary other template parameters with same Tag prefer using "using my_sequence = qx::constexpr_sequence&lt;...&gt;" </dd></dl>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
-    <tr><td class="paramname">Tag</td><td>- tag for unique instances </td></tr>
+    <tr><td class="paramname">tag_t</td><td>- tag for unique instances </td></tr>
     <tr><td class="paramname">T</td><td>- value type </td></tr>
     <tr><td class="paramname">Start</td><td>- start value </td></tr>
     <tr><td class="paramname">Func</td><td>- function that modifies value </td></tr>
@@ -111,21 +111,21 @@ class qx::constexpr_sequence&lt; Tag, T, Start, Func &gt;</h3>
 
 <p class="definition">Definition at line <a class="el" href="constexpr__sequence_8h_source.html#l00043">43</a> of file <a class="el" href="constexpr__sequence_8h_source.html">constexpr_sequence.h</a>.</p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
-<a id="ae642e2ac21cd653cc9936bca1dd77f56"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae642e2ac21cd653cc9936bca1dd77f56">&#9670;&nbsp;</a></span>next()</h2>
+<a id="a8b3f5045a1c919e9476fdf9729e35710"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8b3f5045a1c919e9476fdf9729e35710">&#9670;&nbsp;</a></span>next()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class Tag , typename T , T Start, T  Func&gt; </div>
+template&lt;class tag_t , class T , T Start, T  Func&gt; </div>
 <div class="memtemplate">
-template&lt;size_t nIndex = CheckerWrapper&lt;0&gt; {}.index(), T _value = Element&lt;nIndex&gt; {}.value(), bool bStub = TElementFlag&lt;nIndex&gt; {}.test_and_set()&gt; </div>
+template&lt;size_t nIndex = checker_wrapper&lt;0&gt; {}.index(), T _value = element&lt;nIndex&gt; {}.value(), bool bStub = element_flag&lt;nIndex&gt; {}.test_and_set()&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">static constexpr T <a class="el" href="classqx_1_1constexpr__sequence.html">qx::constexpr_sequence</a>&lt; Tag, T, Start, Func &gt;::next </td>
+          <td class="memname">static constexpr T <a class="el" href="classqx_1_1constexpr__sequence.html">qx::constexpr_sequence</a>&lt; tag_t, T, Start, Func &gt;::next </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -158,21 +158,21 @@ template&lt;size_t nIndex = CheckerWrapper&lt;0&gt; {}.index(), T _value = Eleme
 
 </div>
 </div>
-<a id="a2f4a362a520a0e6569e6298789888e8e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2f4a362a520a0e6569e6298789888e8e">&#9670;&nbsp;</a></span>value()</h2>
+<a id="a4197375e107c9c5dd0bc6db278b32378"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4197375e107c9c5dd0bc6db278b32378">&#9670;&nbsp;</a></span>value()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class Tag , typename T , T Start, T  Func&gt; </div>
+template&lt;class tag_t , class T , T Start, T  Func&gt; </div>
 <div class="memtemplate">
-template&lt;size_t nIndex = CheckerWrapper&lt;0&gt; {}.index(), T _value = Element&lt;nIndex&gt; {}.value()&gt; </div>
+template&lt;size_t nIndex = checker_wrapper&lt;0&gt; {}.index(), T _value = element&lt;nIndex&gt; {}.value()&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">static constexpr T <a class="el" href="classqx_1_1constexpr__sequence.html">qx::constexpr_sequence</a>&lt; Tag, T, Start, Func &gt;::value </td>
+          <td class="memname">static constexpr T <a class="el" href="classqx_1_1constexpr__sequence.html">qx::constexpr_sequence</a>&lt; tag_t, T, Start, Func &gt;::value </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>

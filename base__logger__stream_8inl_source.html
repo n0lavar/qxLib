@@ -81,10 +81,10 @@ $(function() {
 <div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="keyword">namespace </span>qx</div>
 <div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;{</div>
 <div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160; </div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> <span class="keywordtype">char</span>_type&gt;</div>
-<div class="line"><a name="l00014"></a><span class="lineno"><a class="line" href="structqx_1_1log__unit__info.html#a355b9352c50a0dda8c925fc23eca874d">   14</a></span>&#160;<span class="keyword">const</span> log_unit_info::format_func&lt;char_type&gt;&amp; <a class="code" href="structqx_1_1log__unit__info.html#a355b9352c50a0dda8c925fc23eca874d">log_unit_info::get_format_func</a>()</div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> <span class="keywordtype">char</span>_t&gt;</div>
+<div class="line"><a name="l00014"></a><span class="lineno"><a class="line" href="structqx_1_1log__unit__info.html#a68cfd639b863dbef96182f56c168aaef">   14</a></span>&#160;<span class="keyword">const</span> log_unit_info::format_func&lt;char_t&gt;&amp; <a class="code" href="structqx_1_1log__unit__info.html#a68cfd639b863dbef96182f56c168aaef">log_unit_info::get_format_func</a>()</div>
 <div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;{</div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;    <span class="keywordflow">if</span> constexpr (std::is_same_v&lt;char_type, char&gt;)</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;    <span class="keywordflow">if</span> constexpr (std::is_same_v&lt;char_t, char&gt;)</div>
 <div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;        <span class="keywordflow">return</span> formatFuncChar;</div>
 <div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    <span class="keywordflow">else</span></div>
 <div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;        <span class="keywordflow">return</span> formatFuncWChar;</div>
@@ -95,15 +95,15 @@ $(function() {
 <div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    <a class="code" href="classqx_1_1base__logger__stream.html#a99637f11420d3b811336fc05fd63b987">register_unit</a>(k_svDefaultUnit, { log_level::log });</div>
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;}</div>
 <div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160; </div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> <span class="keywordtype">char</span>_type&gt;</div>
-<div class="line"><a name="l00028"></a><span class="lineno"><a class="line" href="classqx_1_1base__logger__stream.html#ade524d5309d3e442d4e0bae516225f6d">   28</a></span>&#160;<span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="classqx_1_1base__logger__stream.html#ade524d5309d3e442d4e0bae516225f6d">base_logger_stream::log</a>(</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    log_level        eLogLevel,</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    <span class="keyword">const</span> char_type* pszFormat,</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    <span class="keyword">const</span> <a class="code" href="classqx_1_1category.html">category</a>&amp;  <a class="code" href="classqx_1_1category.html">category</a>,</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    <span class="keyword">const</span> <span class="keywordtype">char</span>*      pszFile,</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    <span class="keyword">const</span> <span class="keywordtype">char</span>*      pszFunction,</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    <span class="keywordtype">int</span>              nLine,</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    va_list          args)</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> <span class="keywordtype">char</span>_t&gt;</div>
+<div class="line"><a name="l00028"></a><span class="lineno"><a class="line" href="classqx_1_1base__logger__stream.html#a235ac88590f57b8fd58a6554f28fb595">   28</a></span>&#160;<span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="classqx_1_1base__logger__stream.html#a235ac88590f57b8fd58a6554f28fb595">base_logger_stream::log</a>(</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    log_level       eLogLevel,</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    <span class="keyword">const</span> char_t*   pszFormat,</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    <span class="keyword">const</span> <a class="code" href="classqx_1_1category.html">category</a>&amp; <a class="code" href="classqx_1_1category.html">category</a>,</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    <span class="keyword">const</span> <span class="keywordtype">char</span>*     pszFile,</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    <span class="keyword">const</span> <span class="keywordtype">char</span>*     pszFunction,</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    <span class="keywordtype">int</span>             nLine,</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    va_list         args)</div>
 <div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;{</div>
 <div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    <span class="keyword">const</span> <span class="keywordtype">char</span>* pszCategory = <a class="code" href="classqx_1_1category.html">category</a>.<a class="code" href="classqx_1_1category.html#ad86f301df6e0f7e0ff73c90bcb105677">get_name</a>();</div>
 <div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160; </div>
@@ -115,17 +115,17 @@ $(function() {
 <div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160; </div>
 <div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;            QX_PERF_SCOPE(CatLogger, <span class="stringliteral">&quot;Log&quot;</span>);</div>
 <div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160; </div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;            <span class="keyword">auto</span>&amp; buffers = get_log_buffer&lt;char_type&gt;();</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;            <span class="keyword">auto</span>&amp; buffers = get_log_buffer&lt;char_t&gt;();</div>
 <div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;            buffers.clear();</div>
 <div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160; </div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;            <span class="keyword">auto</span> formatFunc = optLogUnit-&gt;pUnitInfo-&gt;get_format_func&lt;char_type&gt;();</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;            <span class="keyword">auto</span> formatFunc = optLogUnit-&gt;pUnitInfo-&gt;get_format_func&lt;char_t&gt;();</div>
 <div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;            <span class="keywordflow">if</span> (!formatFunc)</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;                formatFunc = format_line&lt;char_type&gt;;</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;                formatFunc = format_line&lt;char_t&gt;;</div>
 <div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160; </div>
 <div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;            va_list argsCopy;</div>
 <div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;            va_copy(argsCopy, args);</div>
 <div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160; </div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;            <span class="keywordflow">if</span> constexpr (std::is_same_v&lt;char_type, char&gt;)</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;            <span class="keywordflow">if</span> constexpr (std::is_same_v&lt;char_t, char&gt;)</div>
 <div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;            {</div>
 <div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;                formatFunc(buffers, eLogLevel, <a class="code" href="classqx_1_1category.html">category</a>, pszFormat, pszFile, pszFunction, nLine, argsCopy);</div>
 <div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;            }</div>
@@ -167,11 +167,11 @@ $(function() {
 <div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;    m_Units.erase(<a class="code" href="classqx_1_1basic__string__hash.html">string_hash</a>(svUnitName));</div>
 <div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;}</div>
 <div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160; </div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> <span class="keywordtype">char</span>_type&gt;</div>
-<div class="line"><a name="l00100"></a><span class="lineno"><a class="line" href="classqx_1_1base__logger__stream.html#aed756e307015768e20721c664f590cac">  100</a></span>&#160;<span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="classqx_1_1base__logger__stream.html#aed756e307015768e20721c664f590cac">base_logger_stream::format_time_string</a>(</div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;    <a class="code" href="classqx_1_1basic__string.html">basic_string&lt;char_type&gt;</a>&amp; sTime,</div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;    char_type                chDateDelimiter,</div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;    char_type                chTimeDelimiter) noexcept</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> <span class="keywordtype">char</span>_t&gt;</div>
+<div class="line"><a name="l00100"></a><span class="lineno"><a class="line" href="classqx_1_1base__logger__stream.html#aa838a5999c6ad5c20183ed5bbdfb23d3">  100</a></span>&#160;<span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="classqx_1_1base__logger__stream.html#aa838a5999c6ad5c20183ed5bbdfb23d3">base_logger_stream::format_time_string</a>(</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;    <a class="code" href="classqx_1_1basic__string.html">basic_string&lt;char_t&gt;</a>&amp; sTime,</div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;    char_t                chDateDelimiter,</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;    char_t                chTimeDelimiter) noexcept</div>
 <div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;{</div>
 <div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;    std::time_t t = std::time(<span class="keyword">nullptr</span>);</div>
 <div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;    QX_PUSH_SUPPRESS_MSVC_WARNINGS(4996);</div>
@@ -179,7 +179,7 @@ $(function() {
 <div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;    QX_POP_SUPPRESS_WARNINGS();</div>
 <div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160; </div>
 <div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;    sTime.sprintf(</div>
-<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;        <a class="code" href="string__utils_8h.html#ac188ca5f0d584a897b5e2a443c574729">QX_STR_PREFIX</a>(char_type, <span class="stringliteral">&quot;%02d%c%02d%c%04d_%02d%c%02d%c%02d&quot;</span>),</div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;        <a class="code" href="string__utils_8h.html#ae4f688084b037e2e7a63a13eaf539a02">QX_STR_PREFIX</a>(char_t, <span class="stringliteral">&quot;%02d%c%02d%c%04d_%02d%c%02d%c%02d&quot;</span>),</div>
 <div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;        now-&gt;tm_mday,</div>
 <div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;        chDateDelimiter,</div>
 <div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;        now-&gt;tm_mon,</div>
@@ -192,10 +192,10 @@ $(function() {
 <div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;        now-&gt;tm_sec);</div>
 <div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;}</div>
 <div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160; </div>
-<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> <span class="keywordtype">char</span>_type&gt;</div>
-<div class="line"><a name="l00125"></a><span class="lineno"><a class="line" href="classqx_1_1base__logger__stream.html#a2a457b6681673674430f90ac323f73b5">  125</a></span>&#160;<span class="keyword">inline</span> <a class="code" href="structqx_1_1logger__buffer.html">logger_buffer&lt;char_type&gt;</a>&amp; <a class="code" href="classqx_1_1base__logger__stream.html#a2a457b6681673674430f90ac323f73b5">base_logger_stream::get_log_buffer</a>() noexcept</div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> <span class="keywordtype">char</span>_t&gt;</div>
+<div class="line"><a name="l00125"></a><span class="lineno"><a class="line" href="classqx_1_1base__logger__stream.html#a46843359ddc9336c8d02848b3071e416">  125</a></span>&#160;<span class="keyword">inline</span> <a class="code" href="structqx_1_1logger__buffer.html">logger_buffer&lt;char_t&gt;</a>&amp; <a class="code" href="classqx_1_1base__logger__stream.html#a46843359ddc9336c8d02848b3071e416">base_logger_stream::get_log_buffer</a>() noexcept</div>
 <div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;{</div>
-<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;    <span class="keywordflow">if</span> constexpr (std::is_same_v&lt;char_type, char&gt;)</div>
+<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;    <span class="keywordflow">if</span> constexpr (std::is_same_v&lt;char_t, char&gt;)</div>
 <div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;        <span class="keywordflow">return</span> m_BufferChar;</div>
 <div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;    <span class="keywordflow">else</span></div>
 <div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;        <span class="keywordflow">return</span> m_BufferWChar;</div>
@@ -226,56 +226,56 @@ $(function() {
 <div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;    <span class="keywordflow">return</span> logUnit;</div>
 <div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;}</div>
 <div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160; </div>
-<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> <span class="keywordtype">char</span>_type&gt;</div>
+<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> <span class="keywordtype">char</span>_t&gt;</div>
 <div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;<span class="keyword">inline</span> <span class="keywordtype">void</span> base_logger_stream::format_line(</div>
-<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;    logger_buffer&lt;char_type&gt;&amp; buffers,</div>
-<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;    log_level                 eLogLevel,</div>
-<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;    <span class="keyword">const</span> category&amp;           category,</div>
-<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;    <span class="keyword">const</span> char_type*          pszFormat,</div>
-<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;    <span class="keyword">const</span> char_type*          pszFile,</div>
-<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;    <span class="keyword">const</span> char_type*          pszFunction,</div>
-<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;    <span class="keywordtype">int</span>                       nLine,</div>
-<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;    va_list                   args) noexcept</div>
+<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;    logger_buffer&lt;char_t&gt;&amp; buffers,</div>
+<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;    log_level              eLogLevel,</div>
+<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;    <span class="keyword">const</span> category&amp;        category,</div>
+<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;    <span class="keyword">const</span> char_t*          pszFormat,</div>
+<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;    <span class="keyword">const</span> char_t*          pszFile,</div>
+<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;    <span class="keyword">const</span> char_t*          pszFunction,</div>
+<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;    <span class="keywordtype">int</span>                    nLine,</div>
+<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;    va_list                args) noexcept</div>
 <div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;{</div>
 <div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;    buffers.sMessage.vsprintf(pszFormat, args);</div>
 <div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160; </div>
-<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;    format_time_string(buffers.sFormat, <a class="code" href="string__utils_8h.html#ab4cfe02c348ccce78db4519f9758e672">QX_CHAR_PREFIX</a>(char_type, <span class="charliteral">&#39;.&#39;</span>), <a class="code" href="string__utils_8h.html#ab4cfe02c348ccce78db4519f9758e672">QX_CHAR_PREFIX</a>(char_type, <span class="charliteral">&#39;:&#39;</span>));</div>
+<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;    format_time_string(buffers.sFormat, <a class="code" href="string__utils_8h.html#a57911e62bb82593665bf09e4ea834904">QX_CHAR_PREFIX</a>(char_t, <span class="charliteral">&#39;.&#39;</span>), <a class="code" href="string__utils_8h.html#a57911e62bb82593665bf09e4ea834904">QX_CHAR_PREFIX</a>(char_t, <span class="charliteral">&#39;:&#39;</span>));</div>
 <div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160; </div>
 <div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;    <span class="keywordflow">switch</span> (eLogLevel)</div>
 <div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;    {</div>
 <div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;    <span class="keywordflow">case</span> log_level::very_verbose:</div>
-<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;        buffers.sFormat = <a class="code" href="string__utils_8h.html#ac188ca5f0d584a897b5e2a443c574729">QX_STR_PREFIX</a>(char_type, <span class="stringliteral">&quot;[VV][&quot;</span>) + buffers.sFormat;</div>
+<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;        buffers.sFormat = <a class="code" href="string__utils_8h.html#ae4f688084b037e2e7a63a13eaf539a02">QX_STR_PREFIX</a>(char_t, <span class="stringliteral">&quot;[VV][&quot;</span>) + buffers.sFormat;</div>
 <div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;        <span class="keywordflow">break</span>;</div>
 <div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160; </div>
 <div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;    <span class="keywordflow">case</span> log_level::verbose:</div>
-<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;        buffers.sFormat = <a class="code" href="string__utils_8h.html#ac188ca5f0d584a897b5e2a443c574729">QX_STR_PREFIX</a>(char_type, <span class="stringliteral">&quot;[V][&quot;</span>) + buffers.sFormat;</div>
+<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;        buffers.sFormat = <a class="code" href="string__utils_8h.html#ae4f688084b037e2e7a63a13eaf539a02">QX_STR_PREFIX</a>(char_t, <span class="stringliteral">&quot;[V][&quot;</span>) + buffers.sFormat;</div>
 <div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;        <span class="keywordflow">break</span>;</div>
 <div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160; </div>
 <div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;    <span class="keywordflow">case</span> log_level::important:</div>
-<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;        buffers.sFormat = <a class="code" href="string__utils_8h.html#ac188ca5f0d584a897b5e2a443c574729">QX_STR_PREFIX</a>(char_type, <span class="stringliteral">&quot;[I][&quot;</span>) + buffers.sFormat;</div>
+<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;        buffers.sFormat = <a class="code" href="string__utils_8h.html#ae4f688084b037e2e7a63a13eaf539a02">QX_STR_PREFIX</a>(char_t, <span class="stringliteral">&quot;[I][&quot;</span>) + buffers.sFormat;</div>
 <div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;        <span class="keywordflow">break</span>;</div>
 <div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160; </div>
 <div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;    <span class="keywordflow">case</span> log_level::warning:</div>
-<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;        buffers.sFormat = <a class="code" href="string__utils_8h.html#ac188ca5f0d584a897b5e2a443c574729">QX_STR_PREFIX</a>(char_type, <span class="stringliteral">&quot;[W][&quot;</span>) + buffers.sFormat;</div>
+<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;        buffers.sFormat = <a class="code" href="string__utils_8h.html#ae4f688084b037e2e7a63a13eaf539a02">QX_STR_PREFIX</a>(char_t, <span class="stringliteral">&quot;[W][&quot;</span>) + buffers.sFormat;</div>
 <div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;        <span class="keywordflow">break</span>;</div>
 <div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160; </div>
 <div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;    <span class="keywordflow">case</span> log_level::error:</div>
-<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;        buffers.sFormat = <a class="code" href="string__utils_8h.html#ac188ca5f0d584a897b5e2a443c574729">QX_STR_PREFIX</a>(char_type, <span class="stringliteral">&quot;[E][&quot;</span>) + buffers.sFormat;</div>
+<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;        buffers.sFormat = <a class="code" href="string__utils_8h.html#ae4f688084b037e2e7a63a13eaf539a02">QX_STR_PREFIX</a>(char_t, <span class="stringliteral">&quot;[E][&quot;</span>) + buffers.sFormat;</div>
 <div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;        <span class="keywordflow">break</span>;</div>
 <div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160; </div>
 <div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;    <span class="keywordflow">case</span> log_level::critical:</div>
-<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;        buffers.sFormat = <a class="code" href="string__utils_8h.html#ac188ca5f0d584a897b5e2a443c574729">QX_STR_PREFIX</a>(char_type, <span class="stringliteral">&quot;[C][&quot;</span>) + buffers.sFormat;</div>
+<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;        buffers.sFormat = <a class="code" href="string__utils_8h.html#ae4f688084b037e2e7a63a13eaf539a02">QX_STR_PREFIX</a>(char_t, <span class="stringliteral">&quot;[C][&quot;</span>) + buffers.sFormat;</div>
 <div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;        <span class="keywordflow">break</span>;</div>
 <div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160; </div>
 <div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160;    <span class="keywordflow">default</span>:</div>
-<div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160;        buffers.sFormat = <a class="code" href="string__utils_8h.html#ac188ca5f0d584a897b5e2a443c574729">QX_STR_PREFIX</a>(char_type, <span class="stringliteral">&quot;   [&quot;</span>) + buffers.sFormat;</div>
+<div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160;        buffers.sFormat = <a class="code" href="string__utils_8h.html#ae4f688084b037e2e7a63a13eaf539a02">QX_STR_PREFIX</a>(char_t, <span class="stringliteral">&quot;   [&quot;</span>) + buffers.sFormat;</div>
 <div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160;        <span class="keywordflow">break</span>;</div>
 <div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160;    }</div>
 <div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160; </div>
-<div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;    <span class="keyword">const</span> char_type* pszCategory = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;    <span class="keyword">const</span> char_t* pszCategory = <span class="keyword">nullptr</span>;</div>
 <div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;    <span class="keywordflow">if</span> (category.get_name())</div>
 <div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160;    {</div>
-<div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160;        <span class="keywordflow">if</span> constexpr (std::is_same_v&lt;char_type, char&gt;)</div>
+<div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160;        <span class="keywordflow">if</span> constexpr (std::is_same_v&lt;char_t, char&gt;)</div>
 <div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160;        {</div>
 <div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160;            pszCategory = category.get_name();</div>
 <div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160;        }</div>
@@ -286,47 +286,47 @@ $(function() {
 <div class="line"><a name="l00215"></a><span class="lineno">  215</span>&#160;        }</div>
 <div class="line"><a name="l00216"></a><span class="lineno">  216</span>&#160;    }</div>
 <div class="line"><a name="l00217"></a><span class="lineno">  217</span>&#160; </div>
-<div class="line"><a name="l00218"></a><span class="lineno">  218</span>&#160;    constexpr <span class="keyword">auto</span> pszStringFormatSpecifier = get_format_specifier&lt;char_type, const char_type*&gt;();</div>
-<div class="line"><a name="l00219"></a><span class="lineno">  219</span>&#160;    buffers.sFormat += <a class="code" href="string__utils_8h.html#ac188ca5f0d584a897b5e2a443c574729">QX_STR_PREFIX</a>(char_type, <span class="stringliteral">&quot;][&quot;</span>);</div>
+<div class="line"><a name="l00218"></a><span class="lineno">  218</span>&#160;    constexpr <span class="keyword">auto</span> pszStringFormatSpecifier = get_format_specifier&lt;char_t, const char_t*&gt;();</div>
+<div class="line"><a name="l00219"></a><span class="lineno">  219</span>&#160;    buffers.sFormat += <a class="code" href="string__utils_8h.html#ae4f688084b037e2e7a63a13eaf539a02">QX_STR_PREFIX</a>(char_t, <span class="stringliteral">&quot;][&quot;</span>);</div>
 <div class="line"><a name="l00220"></a><span class="lineno">  220</span>&#160;    buffers.sFormat += pszStringFormatSpecifier;</div>
 <div class="line"><a name="l00221"></a><span class="lineno">  221</span>&#160;    <span class="keywordflow">if</span> (pszCategory)</div>
-<div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160;        buffers.sFormat += <a class="code" href="string__utils_8h.html#ac188ca5f0d584a897b5e2a443c574729">QX_STR_PREFIX</a>(char_type, <span class="stringliteral">&quot;][&quot;</span>);</div>
+<div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160;        buffers.sFormat += <a class="code" href="string__utils_8h.html#ae4f688084b037e2e7a63a13eaf539a02">QX_STR_PREFIX</a>(char_t, <span class="stringliteral">&quot;][&quot;</span>);</div>
 <div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160;    buffers.sFormat += pszStringFormatSpecifier;</div>
-<div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160;    buffers.sFormat += <a class="code" href="string__utils_8h.html#ac188ca5f0d584a897b5e2a443c574729">QX_STR_PREFIX</a>(char_type, <span class="stringliteral">&quot;::&quot;</span>);</div>
+<div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160;    buffers.sFormat += <a class="code" href="string__utils_8h.html#ae4f688084b037e2e7a63a13eaf539a02">QX_STR_PREFIX</a>(char_t, <span class="stringliteral">&quot;::&quot;</span>);</div>
 <div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160;    buffers.sFormat += pszStringFormatSpecifier;</div>
-<div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160;    buffers.sFormat += <a class="code" href="string__utils_8h.html#ac188ca5f0d584a897b5e2a443c574729">QX_STR_PREFIX</a>(char_type, <span class="stringliteral">&quot;::%d] &quot;</span>);</div>
+<div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160;    buffers.sFormat += <a class="code" href="string__utils_8h.html#ae4f688084b037e2e7a63a13eaf539a02">QX_STR_PREFIX</a>(char_t, <span class="stringliteral">&quot;::%d] &quot;</span>);</div>
 <div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160;    buffers.sFormat += buffers.sMessage;</div>
 <div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160;    buffers.sMessage.sprintf(</div>
 <div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160;        buffers.sFormat.c_str(),</div>
-<div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160;        pszCategory ? pszCategory : <a class="code" href="string__utils_8h.html#ac188ca5f0d584a897b5e2a443c574729">QX_STR_PREFIX</a>(char_type, <span class="stringliteral">&quot;&quot;</span>),</div>
+<div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160;        pszCategory ? pszCategory : <a class="code" href="string__utils_8h.html#ae4f688084b037e2e7a63a13eaf539a02">QX_STR_PREFIX</a>(char_t, <span class="stringliteral">&quot;&quot;</span>),</div>
 <div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160;        pszFile,</div>
 <div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160;        pszFunction,</div>
 <div class="line"><a name="l00233"></a><span class="lineno">  233</span>&#160;        nLine);</div>
-<div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160;    buffers.sMessage += <a class="code" href="string__utils_8h.html#ab4cfe02c348ccce78db4519f9758e672">QX_CHAR_PREFIX</a>(char_type, <span class="charliteral">&#39;\n&#39;</span>);</div>
+<div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160;    buffers.sMessage += <a class="code" href="string__utils_8h.html#a57911e62bb82593665bf09e4ea834904">QX_CHAR_PREFIX</a>(char_t, <span class="charliteral">&#39;\n&#39;</span>);</div>
 <div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160; </div>
 <div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160;    <span class="keywordflow">if</span> (pszCategory)</div>
 <div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;        <span class="keywordflow">if</span> (<span class="keyword">auto</span> nPos = buffers.sMessage.find(pszCategory); nPos != string::npos)</div>
-<div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160;            buffers.colors.push_back({ { nPos, nPos + <a class="code" href="string__utils_8h.html#a8e0efa61531960b546130958f6e42cf4">qx::strlen</a>(pszCategory) }, category.get_color() });</div>
+<div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160;            buffers.colors.push_back({ { nPos, nPos + <a class="code" href="string__utils_8h.html#aa1f7d3648d28dcef62c0db015730218d">qx::strlen</a>(pszCategory) }, category.get_color() });</div>
 <div class="line"><a name="l00239"></a><span class="lineno">  239</span>&#160;}</div>
 <div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160; </div>
 <div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160;} <span class="comment">// namespace qx</span></div>
-<div class="ttc" id="aclassqx_1_1base__logger__stream_html_a2a457b6681673674430f90ac323f73b5"><div class="ttname"><a href="classqx_1_1base__logger__stream.html#a2a457b6681673674430f90ac323f73b5">qx::base_logger_stream::get_log_buffer</a></div><div class="ttdeci">logger_buffer&lt; char_type &gt; &amp; get_log_buffer() noexcept</div><div class="ttdoc">Get string buffers.</div><div class="ttdef"><b>Definition:</b> <a href="base__logger__stream_8inl_source.html#l00125">base_logger_stream.inl:125</a></div></div>
+<div class="ttc" id="aclassqx_1_1base__logger__stream_html_a235ac88590f57b8fd58a6554f28fb595"><div class="ttname"><a href="classqx_1_1base__logger__stream.html#a235ac88590f57b8fd58a6554f28fb595">qx::base_logger_stream::log</a></div><div class="ttdeci">void log(log_level eLogLevel, const char_t *pszFormat, const category &amp;category, const char *pszFile, const char *pszFunction, int nLine, va_list args)</div><div class="ttdoc">Output to stream.</div><div class="ttdef"><b>Definition:</b> <a href="base__logger__stream_8inl_source.html#l00028">base_logger_stream.inl:28</a></div></div>
 <div class="ttc" id="aclassqx_1_1base__logger__stream_html_a305b21a54aa598b33d1ddb8ce23bc595"><div class="ttname"><a href="classqx_1_1base__logger__stream.html#a305b21a54aa598b33d1ddb8ce23bc595">qx::base_logger_stream::flush</a></div><div class="ttdeci">virtual void flush()=0</div><div class="ttdoc">Flush stream.</div></div>
+<div class="ttc" id="aclassqx_1_1base__logger__stream_html_a46843359ddc9336c8d02848b3071e416"><div class="ttname"><a href="classqx_1_1base__logger__stream.html#a46843359ddc9336c8d02848b3071e416">qx::base_logger_stream::get_log_buffer</a></div><div class="ttdeci">logger_buffer&lt; char_t &gt; &amp; get_log_buffer() noexcept</div><div class="ttdoc">Get string buffers.</div><div class="ttdef"><b>Definition:</b> <a href="base__logger__stream_8inl_source.html#l00125">base_logger_stream.inl:125</a></div></div>
 <div class="ttc" id="aclassqx_1_1base__logger__stream_html_a99637f11420d3b811336fc05fd63b987"><div class="ttname"><a href="classqx_1_1base__logger__stream.html#a99637f11420d3b811336fc05fd63b987">qx::base_logger_stream::register_unit</a></div><div class="ttdeci">void register_unit(std::string_view svUnitName, const log_unit_info &amp;unit) noexcept</div><div class="ttdoc">Register logger unit.</div><div class="ttdef"><b>Definition:</b> <a href="base__logger__stream_8inl_source.html#l00088">base_logger_stream.inl:88</a></div></div>
 <div class="ttc" id="aclassqx_1_1base__logger__stream_html_a9f1a63558efd0f219661b9fe05556b92"><div class="ttname"><a href="classqx_1_1base__logger__stream.html#a9f1a63558efd0f219661b9fe05556b92">qx::base_logger_stream::deregister_unit</a></div><div class="ttdeci">void deregister_unit(std::string_view svUnitName) noexcept</div><div class="ttdoc">Deregister logger unit.</div><div class="ttdef"><b>Definition:</b> <a href="base__logger__stream_8inl_source.html#l00094">base_logger_stream.inl:94</a></div></div>
+<div class="ttc" id="aclassqx_1_1base__logger__stream_html_aa838a5999c6ad5c20183ed5bbdfb23d3"><div class="ttname"><a href="classqx_1_1base__logger__stream.html#aa838a5999c6ad5c20183ed5bbdfb23d3">qx::base_logger_stream::format_time_string</a></div><div class="ttdeci">static void format_time_string(basic_string&lt; char_t &gt; &amp;sTime, char_t chDateDelimiter, char_t chTimeDelimiter) noexcept</div><div class="ttdoc">Format time string to the buffer.</div><div class="ttdef"><b>Definition:</b> <a href="base__logger__stream_8inl_source.html#l00100">base_logger_stream.inl:100</a></div></div>
 <div class="ttc" id="aclassqx_1_1base__logger__stream_html_ac017a360e802b6b15f5dad540b33ecba"><div class="ttname"><a href="classqx_1_1base__logger__stream.html#ac017a360e802b6b15f5dad540b33ecba">qx::base_logger_stream::base_logger_stream</a></div><div class="ttdeci">base_logger_stream(bool bAlwaysFlush)</div><div class="ttdoc">base_logger_stream object constructor</div><div class="ttdef"><b>Definition:</b> <a href="base__logger__stream_8inl_source.html#l00022">base_logger_stream.inl:22</a></div></div>
-<div class="ttc" id="aclassqx_1_1base__logger__stream_html_ade524d5309d3e442d4e0bae516225f6d"><div class="ttname"><a href="classqx_1_1base__logger__stream.html#ade524d5309d3e442d4e0bae516225f6d">qx::base_logger_stream::log</a></div><div class="ttdeci">void log(log_level eLogLevel, const char_type *pszFormat, const category &amp;category, const char *pszFile, const char *pszFunction, int nLine, va_list args)</div><div class="ttdoc">Output to stream.</div><div class="ttdef"><b>Definition:</b> <a href="base__logger__stream_8inl_source.html#l00028">base_logger_stream.inl:28</a></div></div>
-<div class="ttc" id="aclassqx_1_1base__logger__stream_html_aed756e307015768e20721c664f590cac"><div class="ttname"><a href="classqx_1_1base__logger__stream.html#aed756e307015768e20721c664f590cac">qx::base_logger_stream::format_time_string</a></div><div class="ttdeci">static void format_time_string(basic_string&lt; char_type &gt; &amp;sTime, char_type chDateDelimiter, char_type chTimeDelimiter) noexcept</div><div class="ttdoc">Format time string to the buffer.</div><div class="ttdef"><b>Definition:</b> <a href="base__logger__stream_8inl_source.html#l00100">base_logger_stream.inl:100</a></div></div>
-<div class="ttc" id="aclassqx_1_1basic__string__hash_html"><div class="ttname"><a href="classqx_1_1basic__string__hash.html">qx::basic_string_hash</a></div><div class="ttdoc">String hash object.</div><div class="ttdef"><b>Definition:</b> <a href="string__hash_8h_source.html#l00044">string_hash.h:45</a></div></div>
-<div class="ttc" id="aclassqx_1_1basic__string_html"><div class="ttname"><a href="classqx_1_1basic__string.html">qx::basic_string&lt; char_type &gt;</a></div></div>
+<div class="ttc" id="aclassqx_1_1basic__string__hash_html"><div class="ttname"><a href="classqx_1_1basic__string__hash.html">qx::basic_string_hash</a></div><div class="ttdoc">String hash object.</div><div class="ttdef"><b>Definition:</b> <a href="string__hash_8h_source.html#l00043">string_hash.h:44</a></div></div>
+<div class="ttc" id="aclassqx_1_1basic__string_html"><div class="ttname"><a href="classqx_1_1basic__string.html">qx::basic_string&lt; char_t &gt;</a></div></div>
 <div class="ttc" id="aclassqx_1_1category_html"><div class="ttname"><a href="classqx_1_1category.html">qx::category</a></div><div class="ttdoc">A category is a class that identifies a particular piece of code. This code can be located in differe...</div><div class="ttdef"><b>Definition:</b> <a href="category_8h_source.html#l00056">category.h:57</a></div></div>
 <div class="ttc" id="aclassqx_1_1category_html_ad86f301df6e0f7e0ff73c90bcb105677"><div class="ttname"><a href="classqx_1_1category.html#ad86f301df6e0f7e0ff73c90bcb105677">qx::category::get_name</a></div><div class="ttdeci">constexpr const char * get_name() const noexcept</div><div class="ttdoc">Get category name.</div><div class="ttdef"><b>Definition:</b> <a href="category_8inl_source.html#l00020">category.inl:20</a></div></div>
 <div class="ttc" id="astring__converters_8h_html_aa203fa26e66091ce0c1f4ffff0c4e7dc"><div class="ttname"><a href="string__converters_8h.html#aa203fa26e66091ce0c1f4ffff0c4e7dc">qx::to_wstring</a></div><div class="ttdeci">wstring to_wstring(std::string_view str, const std::locale &amp;locale=std::locale())</div><div class="ttdoc">convert string to wstring</div><div class="ttdef"><b>Definition:</b> <a href="string__converters_8h_source.html#l00026">string_converters.h:26</a></div></div>
-<div class="ttc" id="astring__utils_8h_html_a8e0efa61531960b546130958f6e42cf4"><div class="ttname"><a href="string__utils_8h.html#a8e0efa61531960b546130958f6e42cf4">qx::strlen</a></div><div class="ttdeci">constexpr std::size_t strlen(const value_type *psz)</div><div class="ttdoc">Constexpr string length.</div><div class="ttdef"><b>Definition:</b> <a href="string__utils_8h_source.html#l00363">string_utils.h:363</a></div></div>
-<div class="ttc" id="astring__utils_8h_html_ab4cfe02c348ccce78db4519f9758e672"><div class="ttname"><a href="string__utils_8h.html#ab4cfe02c348ccce78db4519f9758e672">QX_CHAR_PREFIX</a></div><div class="ttdeci">#define QX_CHAR_PREFIX(value_type, ch)</div><div class="ttdoc">Chose witch of prefixes add to char : L or none.</div><div class="ttdef"><b>Definition:</b> <a href="string__utils_8h_source.html#l00252">string_utils.h:252</a></div></div>
-<div class="ttc" id="astring__utils_8h_html_ac188ca5f0d584a897b5e2a443c574729"><div class="ttname"><a href="string__utils_8h.html#ac188ca5f0d584a897b5e2a443c574729">QX_STR_PREFIX</a></div><div class="ttdeci">#define QX_STR_PREFIX(value_type, str)</div><div class="ttdoc">Chose witch of prefixes add to string : L or none.</div><div class="ttdef"><b>Definition:</b> <a href="string__utils_8h_source.html#l00244">string_utils.h:244</a></div></div>
+<div class="ttc" id="astring__utils_8h_html_a57911e62bb82593665bf09e4ea834904"><div class="ttname"><a href="string__utils_8h.html#a57911e62bb82593665bf09e4ea834904">QX_CHAR_PREFIX</a></div><div class="ttdeci">#define QX_CHAR_PREFIX(value_t, ch)</div><div class="ttdoc">Chose witch of prefixes add to char : L or none.</div><div class="ttdef"><b>Definition:</b> <a href="string__utils_8h_source.html#l00252">string_utils.h:252</a></div></div>
+<div class="ttc" id="astring__utils_8h_html_aa1f7d3648d28dcef62c0db015730218d"><div class="ttname"><a href="string__utils_8h.html#aa1f7d3648d28dcef62c0db015730218d">qx::strlen</a></div><div class="ttdeci">constexpr std::size_t strlen(const value_t *psz)</div><div class="ttdoc">Constexpr string length.</div><div class="ttdef"><b>Definition:</b> <a href="string__utils_8h_source.html#l00363">string_utils.h:363</a></div></div>
+<div class="ttc" id="astring__utils_8h_html_ae4f688084b037e2e7a63a13eaf539a02"><div class="ttname"><a href="string__utils_8h.html#ae4f688084b037e2e7a63a13eaf539a02">QX_STR_PREFIX</a></div><div class="ttdeci">#define QX_STR_PREFIX(value_t, str)</div><div class="ttdoc">Chose witch of prefixes add to string : L or none.</div><div class="ttdef"><b>Definition:</b> <a href="string__utils_8h_source.html#l00244">string_utils.h:244</a></div></div>
 <div class="ttc" id="astructqx_1_1log__unit__info_html"><div class="ttname"><a href="structqx_1_1log__unit__info.html">qx::log_unit_info</a></div><div class="ttdef"><b>Definition:</b> <a href="base__logger__stream_8h_source.html#l00068">base_logger_stream.h:69</a></div></div>
-<div class="ttc" id="astructqx_1_1log__unit__info_html_a355b9352c50a0dda8c925fc23eca874d"><div class="ttname"><a href="structqx_1_1log__unit__info.html#a355b9352c50a0dda8c925fc23eca874d">qx::log_unit_info::get_format_func</a></div><div class="ttdeci">const format_func&lt; char_type &gt; &amp; get_format_func()</div><div class="ttdoc">Get format func corresponding to char type.</div><div class="ttdef"><b>Definition:</b> <a href="base__logger__stream_8inl_source.html#l00014">base_logger_stream.inl:14</a></div></div>
+<div class="ttc" id="astructqx_1_1log__unit__info_html_a68cfd639b863dbef96182f56c168aaef"><div class="ttname"><a href="structqx_1_1log__unit__info.html#a68cfd639b863dbef96182f56c168aaef">qx::log_unit_info::get_format_func</a></div><div class="ttdeci">const format_func&lt; char_t &gt; &amp; get_format_func()</div><div class="ttdoc">Get format func corresponding to char type.</div><div class="ttdef"><b>Definition:</b> <a href="base__logger__stream_8inl_source.html#l00014">base_logger_stream.inl:14</a></div></div>
 <div class="ttc" id="astructqx_1_1logger__buffer_html"><div class="ttname"><a href="structqx_1_1logger__buffer.html">qx::logger_buffer</a></div><div class="ttdef"><b>Definition:</b> <a href="base__logger__stream_8h_source.html#l00046">base_logger_stream.h:47</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->

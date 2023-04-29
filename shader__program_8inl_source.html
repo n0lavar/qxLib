@@ -142,7 +142,7 @@ $(function() {
 <div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;    <span class="keywordflow">return</span> m_nProgram;</div>
 <div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;}</div>
 <div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160; </div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> T&gt;</div>
 <div class="line"><a name="l00075"></a><span class="lineno"><a class="line" href="classqx_1_1base__shader__program.html#a18d6afbe8cacd51c5b2027f2fe43e909">   75</a></span>&#160;<span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="classqx_1_1base__shader__program.html#a18d6afbe8cacd51c5b2027f2fe43e909">base_shader_program::SetUniform</a>(GLint nUniformLocation, <span class="keyword">const</span> T* pValue, GLsizei nCount) noexcept</div>
 <div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;{</div>
 <div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;    <span class="keywordflow">if</span> constexpr (std::is_same_v&lt;T, GLfloat&gt;)</div>
@@ -239,13 +239,13 @@ $(function() {
 <div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;    }</div>
 <div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;}</div>
 <div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160; </div>
-<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> T&gt;</div>
 <div class="line"><a name="l00172"></a><span class="lineno"><a class="line" href="classqx_1_1base__shader__program.html#a33ab271f77d2b3e7bcc3c53daf03b44d">  172</a></span>&#160;<span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="classqx_1_1base__shader__program.html#a18d6afbe8cacd51c5b2027f2fe43e909">base_shader_program::SetUniform</a>(<span class="keyword">const</span> GLchar* pszName, <span class="keyword">const</span> T* pValue, GLsizei nCount) noexcept</div>
 <div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;{</div>
 <div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;    SetUniform(GetUniformLocation(pszName), pValue, nCount);</div>
 <div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;}</div>
 <div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160; </div>
-<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> T&gt;</div>
 <div class="line"><a name="l00178"></a><span class="lineno"><a class="line" href="classqx_1_1base__shader__program.html#a84faa2883196f4b8702a8b33f240e404">  178</a></span>&#160;<span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="classqx_1_1base__shader__program.html#a18d6afbe8cacd51c5b2027f2fe43e909">base_shader_program::SetUniform</a>(GLint nUniformLocation, <span class="keyword">const</span> T&amp; value) noexcept</div>
 <div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;{</div>
 <div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;    <span class="keyword">using</span> type = std::remove_cvref_t&lt;T&gt;;</div>
@@ -271,7 +271,7 @@ $(function() {
 <div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160;        SetUniform(nUniformLocation, &amp;value, 1);</div>
 <div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160;}</div>
 <div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160; </div>
-<div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> T&gt;</div>
 <div class="line"><a name="l00204"></a><span class="lineno"><a class="line" href="classqx_1_1base__shader__program.html#a5ecddfadefd4ea8c9ae60d7d91d6d4e1">  204</a></span>&#160;<span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="classqx_1_1base__shader__program.html#a18d6afbe8cacd51c5b2027f2fe43e909">base_shader_program::SetUniform</a>(<span class="keyword">const</span> GLchar* pszName, <span class="keyword">const</span> T&amp; value) noexcept</div>
 <div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;{</div>
 <div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160;    SetUniform(GetUniformLocation(pszName), value);</div>
@@ -330,8 +330,8 @@ $(function() {
 <div class="ttc" id="aclassqx_1_1base__shader__program_html_ab791367d99d140d23fbcd47ee7a1a1fc"><div class="ttname"><a href="classqx_1_1base__shader__program.html#ab791367d99d140d23fbcd47ee7a1a1fc">qx::base_shader_program::~base_shader_program</a></div><div class="ttdeci">~base_shader_program() noexcept</div><div class="ttdoc">base_shader_program object destructor</div><div class="ttdef"><b>Definition:</b> <a href="shader__program_8inl_source.html#l00018">shader_program.inl:18</a></div></div>
 <div class="ttc" id="aclassqx_1_1base__shader__program_html_acd3665402a1cd7cf4c2b2e18a7c8afd8"><div class="ttname"><a href="classqx_1_1base__shader__program.html#acd3665402a1cd7cf4c2b2e18a7c8afd8">qx::base_shader_program::operator==</a></div><div class="ttdeci">bool operator==(const base_shader_program &amp;other) const noexcept</div><div class="ttdoc">operator==</div><div class="ttdef"><b>Definition:</b> <a href="shader__program_8inl_source.html#l00234">shader_program.inl:234</a></div></div>
 <div class="ttc" id="aclassqx_1_1base__shader__program_html_ae66925f196df50ce85a5aae6f5c6999f"><div class="ttname"><a href="classqx_1_1base__shader__program.html#ae66925f196df50ce85a5aae6f5c6999f">qx::base_shader_program::GetUniformLocation</a></div><div class="ttdeci">GLint GetUniformLocation(const GLchar *pszName) const noexcept</div><div class="ttdoc">Get uniform location based on it's name.</div><div class="ttdef"><b>Definition:</b> <a href="shader__program_8inl_source.html#l00209">shader_program.inl:209</a></div></div>
-<div class="ttc" id="aclassqx_1_1basic__string_html"><div class="ttname"><a href="classqx_1_1basic__string.html">qx::basic_string</a></div><div class="ttdoc">String class.</div><div class="ttdef"><b>Definition:</b> <a href="string_8h_source.html#l00065">string.h:66</a></div></div>
-<div class="ttc" id="aclassqx_1_1shader__base_html"><div class="ttname"><a href="classqx_1_1shader__base.html">qx::shader_base</a></div><div class="ttdoc">OpenGL base shader.</div><div class="ttdef"><b>Definition:</b> <a href="shaders_8h_source.html#l00041">shaders.h:42</a></div></div>
+<div class="ttc" id="aclassqx_1_1basic__string_html"><div class="ttname"><a href="classqx_1_1basic__string.html">qx::basic_string</a></div><div class="ttdoc">String class.</div><div class="ttdef"><b>Definition:</b> <a href="string_8h_source.html#l00063">string.h:64</a></div></div>
+<div class="ttc" id="aclassqx_1_1shader__base_html"><div class="ttname"><a href="classqx_1_1shader__base.html">qx::shader_base</a></div><div class="ttdoc">OpenGL base shader.</div><div class="ttdef"><b>Definition:</b> <a href="shaders_8h_source.html#l00043">shaders.h:44</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

@@ -88,20 +88,20 @@ $(function() {
 <div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="comment"></span> </div>
 <div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="comment">/**</span></div>
 <div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="comment">    @brief  std::remove_if with index instead of data reference</span></div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="comment">    @tparam FwdItType     - iterator type</span></div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="comment">    @tparam PredicateType - predicate type</span></div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="comment">    @param  itBegin       - the range of elements begin iterator</span></div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="comment">    @param  itEnd         - the range of elements end iterator</span></div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="comment">    @param  predicate     - unary predicate which returns ​true if the element should be removed</span></div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="comment">    @param  nStartIndex   - we can&#39;t find out the index of itBegin so you should specify it</span></div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="comment">    @retval               - past-the-end iterator for the new range of values</span></div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="comment">    @tparam fwd_it_t    - iterator type</span></div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="comment">    @tparam predicate_t - predicate type</span></div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="comment">    @param  itBegin     - the range of elements begin iterator</span></div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="comment">    @param  itEnd       - the range of elements end iterator</span></div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="comment">    @param  predicate   - unary predicate which returns ​true if the element should be removed</span></div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="comment">    @param  nStartIndex - we can&#39;t find out the index of itBegin so you should specify it</span></div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="comment">    @retval             - past-the-end iterator for the new range of values</span></div>
 <div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="comment">**/</span></div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> FwdItType, <span class="keyword">class</span> PredicateType&gt;</div>
-<div class="line"><a name="l00029"></a><span class="lineno"><a class="line" href="remove_8h.html#a6abf067740ce2d8eb572f879aa21a73b">   29</a></span>&#160;FwdItType <a class="code" href="remove_8h.html#a6abf067740ce2d8eb572f879aa21a73b">remove_if_i</a>(FwdItType itBegin, FwdItType itEnd, <span class="keyword">const</span> PredicateType&amp; predicate, <span class="keywordtype">size_t</span> nStartIndex = 0)</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> fwd_it_t, <span class="keyword">class</span> predicate_t&gt;</div>
+<div class="line"><a name="l00029"></a><span class="lineno"><a class="line" href="remove_8h.html#a54298bab713b102ef609c07e1031475e">   29</a></span>&#160;fwd_it_t <a class="code" href="remove_8h.html#a54298bab713b102ef609c07e1031475e">remove_if_i</a>(fwd_it_t itBegin, fwd_it_t itEnd, <span class="keyword">const</span> predicate_t&amp; predicate, <span class="keywordtype">size_t</span> nStartIndex = 0)</div>
 <div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;{</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    FwdItType itDest = itBegin;</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    <span class="keywordtype">size_t</span>    i      = nStartIndex;</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    <span class="keywordflow">for</span> (FwdItType it = itBegin; it != itEnd; ++it)</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    fwd_it_t itDest = itBegin;</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    <span class="keywordtype">size_t</span>   i      = nStartIndex;</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    <span class="keywordflow">for</span> (fwd_it_t it = itBegin; it != itEnd; ++it)</div>
 <div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    {</div>
 <div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;        <span class="keywordflow">if</span> (!predicate(i))</div>
 <div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;            *itDest++ = std::move(*it);</div>
@@ -113,20 +113,20 @@ $(function() {
 <div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="comment"></span> </div>
 <div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="comment">/**</span></div>
 <div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="comment">    @brief  std::remove_if with index instead of data reference</span></div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="comment">    @tparam ContainerType - container type</span></div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="comment">    @tparam PredicateType - predicate type</span></div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="comment">    @param  container     - the range of elements</span></div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="comment">    @param  predicate     - unary predicate which returns ​true if the element should be removed</span></div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="comment">    @retval               - past-the-end iterator for the new range of values</span></div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="comment">    @tparam container_t - container type</span></div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="comment">    @tparam predicate_t - predicate type</span></div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="comment">    @param  container   - the range of elements</span></div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="comment">    @param  predicate   - unary predicate which returns ​true if the element should be removed</span></div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="comment">    @retval             - past-the-end iterator for the new range of values</span></div>
 <div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="comment">**/</span></div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> ContainerType, <span class="keyword">class</span> PredicateType&gt;</div>
-<div class="line"><a name="l00052"></a><span class="lineno"><a class="line" href="remove_8h.html#ab23bebf6ca67c642d8d779c15026f9e9">   52</a></span>&#160;<span class="keyword">auto</span> <a class="code" href="remove_8h.html#a6abf067740ce2d8eb572f879aa21a73b">remove_if_i</a>(ContainerType&amp; container, <span class="keyword">const</span> PredicateType&amp; predicate)</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> container_t, <span class="keyword">class</span> predicate_t&gt;</div>
+<div class="line"><a name="l00052"></a><span class="lineno"><a class="line" href="remove_8h.html#ab19f2a47bbc9f0388c6a0a33c17fd0af">   52</a></span>&#160;<span class="keyword">auto</span> <a class="code" href="remove_8h.html#a54298bab713b102ef609c07e1031475e">remove_if_i</a>(container_t&amp; container, <span class="keyword">const</span> predicate_t&amp; predicate)</div>
 <div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;{</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="remove_8h.html#a6abf067740ce2d8eb572f879aa21a73b">remove_if_i</a>(container.begin(), container.end(), predicate, 0);</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="remove_8h.html#a54298bab713b102ef609c07e1031475e">remove_if_i</a>(container.begin(), container.end(), predicate, 0);</div>
 <div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;}</div>
 <div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160; </div>
 <div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;} <span class="comment">// namespace qx</span></div>
-<div class="ttc" id="aremove_8h_html_a6abf067740ce2d8eb572f879aa21a73b"><div class="ttname"><a href="remove_8h.html#a6abf067740ce2d8eb572f879aa21a73b">qx::remove_if_i</a></div><div class="ttdeci">FwdItType remove_if_i(FwdItType itBegin, FwdItType itEnd, const PredicateType &amp;predicate, size_t nStartIndex=0)</div><div class="ttdoc">std::remove_if with index instead of data reference</div><div class="ttdef"><b>Definition:</b> <a href="remove_8h_source.html#l00029">remove.h:29</a></div></div>
+<div class="ttc" id="aremove_8h_html_a54298bab713b102ef609c07e1031475e"><div class="ttname"><a href="remove_8h.html#a54298bab713b102ef609c07e1031475e">qx::remove_if_i</a></div><div class="ttdeci">fwd_it_t remove_if_i(fwd_it_t itBegin, fwd_it_t itEnd, const predicate_t &amp;predicate, size_t nStartIndex=0)</div><div class="ttdoc">std::remove_if with index instead of data reference</div><div class="ttdef"><b>Definition:</b> <a href="remove_8h_source.html#l00029">remove.h:29</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

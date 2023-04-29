@@ -81,22 +81,22 @@ $(function() {
 <div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="keyword">namespace </span>qx</div>
 <div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;{</div>
 <div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160; </div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> T&gt;</div>
 <div class="line"><a name="l00014"></a><span class="lineno"><a class="line" href="classqx_1_1base__easing__sequence.html#afea409d3f3c13700c613a0970fec577e">   14</a></span>&#160;<span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="classqx_1_1base__easing__sequence.html#afea409d3f3c13700c613a0970fec577e">base_easing_sequence&lt;T&gt;::push_back</a>(<a class="code" href="classqx_1_1base__easing__element.html">easing_element_type</a> element) noexcept</div>
 <div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;{</div>
 <div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;    m_ElementsSequence.push_back(std::move(element));</div>
 <div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;    update_total_time();</div>
 <div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;}</div>
 <div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160; </div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span>... Args&gt;</div>
-<div class="line"><a name="l00022"></a><span class="lineno"><a class="line" href="classqx_1_1base__easing__sequence.html#a496703638c694a35e15a7d27b11533f3">   22</a></span>&#160;<span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="classqx_1_1base__easing__sequence.html#a496703638c694a35e15a7d27b11533f3">base_easing_sequence&lt;T&gt;::emplace_back</a>(Args&amp;&amp;... args) noexcept</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> T&gt;</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span>... args_t&gt;</div>
+<div class="line"><a name="l00022"></a><span class="lineno"><a class="line" href="classqx_1_1base__easing__sequence.html#a837b2a396dd81f9fca9020441920995c">   22</a></span>&#160;<span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="classqx_1_1base__easing__sequence.html#a837b2a396dd81f9fca9020441920995c">base_easing_sequence&lt;T&gt;::emplace_back</a>(args_t&amp;&amp;... args) noexcept</div>
 <div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;{</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    m_ElementsSequence.emplace_back(std::forward&lt;Args&gt;(args)...);</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    m_ElementsSequence.emplace_back(std::forward&lt;args_t&gt;(args)...);</div>
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    update_total_time();</div>
 <div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;}</div>
 <div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160; </div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> T&gt;</div>
 <div class="line"><a name="l00029"></a><span class="lineno"><a class="line" href="classqx_1_1base__easing__sequence.html#a5015b834a95e8974ffa7721fadebc3a5">   29</a></span>&#160;<span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="classqx_1_1base__easing__sequence.html#a5015b834a95e8974ffa7721fadebc3a5">base_easing_sequence&lt;T&gt;::clear</a>() noexcept</div>
 <div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;{</div>
 <div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    m_ElementsSequence.clear();</div>
@@ -104,7 +104,7 @@ $(function() {
 <div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    m_fCurrentTime    = T(0.f);</div>
 <div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;}</div>
 <div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160; </div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> T&gt;</div>
 <div class="line"><a name="l00037"></a><span class="lineno"><a class="line" href="classqx_1_1base__easing__sequence.html#a4cb29b5fd44f8e816b9b13b63b301029">   37</a></span>&#160;<span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="classqx_1_1base__easing__sequence.html#a4cb29b5fd44f8e816b9b13b63b301029">base_easing_sequence&lt;T&gt;::start</a>() noexcept</div>
 <div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;{</div>
 <div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    reset();</div>
@@ -112,21 +112,21 @@ $(function() {
 <div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;        pCurrentElement-&gt;start();</div>
 <div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;}</div>
 <div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160; </div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> T&gt;</div>
 <div class="line"><a name="l00045"></a><span class="lineno"><a class="line" href="classqx_1_1base__easing__sequence.html#a526d8425e5c6f6ff1ab3aab7da65eb75">   45</a></span>&#160;<span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="classqx_1_1base__easing__sequence.html#a526d8425e5c6f6ff1ab3aab7da65eb75">base_easing_sequence&lt;T&gt;::pause</a>() noexcept</div>
 <div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;{</div>
 <div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    <span class="keywordflow">if</span> (<span class="keyword">auto</span> pCurrentElement = get_current_element())</div>
 <div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;        pCurrentElement-&gt;pause();</div>
 <div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;}</div>
 <div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160; </div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> T&gt;</div>
 <div class="line"><a name="l00052"></a><span class="lineno"><a class="line" href="classqx_1_1base__easing__sequence.html#a7877285c7ed2c17dca6edb6849284aca">   52</a></span>&#160;<span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="classqx_1_1base__easing__sequence.html#a7877285c7ed2c17dca6edb6849284aca">base_easing_sequence&lt;T&gt;::resume</a>() noexcept</div>
 <div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;{</div>
 <div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    <span class="keywordflow">if</span> (<span class="keyword">auto</span> pCurrentElement = get_current_element())</div>
 <div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;        pCurrentElement-&gt;resume();</div>
 <div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;}</div>
 <div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160; </div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> T&gt;</div>
 <div class="line"><a name="l00059"></a><span class="lineno"><a class="line" href="classqx_1_1base__easing__sequence.html#a6db34f14608012434745387150610bdc">   59</a></span>&#160;<span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="classqx_1_1base__easing__sequence.html#a6db34f14608012434745387150610bdc">base_easing_sequence&lt;T&gt;::skip</a>() noexcept</div>
 <div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;{</div>
 <div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    <span class="keywordflow">if</span> (<span class="keyword">auto</span> pCurrentElement = get_current_element())</div>
@@ -136,7 +136,7 @@ $(function() {
 <div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    }</div>
 <div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;}</div>
 <div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160; </div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> T&gt;</div>
 <div class="line"><a name="l00069"></a><span class="lineno"><a class="line" href="classqx_1_1base__easing__sequence.html#ab3b6703f1946e8be561571df8d215a0d">   69</a></span>&#160;<span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="classqx_1_1base__easing__sequence.html#ab3b6703f1946e8be561571df8d215a0d">base_easing_sequence&lt;T&gt;::reset</a>() noexcept</div>
 <div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;{</div>
 <div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;    m_nCurrentElement = 0;</div>
@@ -145,7 +145,7 @@ $(function() {
 <div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;        element.reset();</div>
 <div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;}</div>
 <div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160; </div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> T&gt;</div>
 <div class="line"><a name="l00078"></a><span class="lineno"><a class="line" href="classqx_1_1base__easing__sequence.html#a3dc96f234b71408b68a3bd7b14b42304">   78</a></span>&#160;<span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="classqx_1_1base__easing__sequence.html#a3dc96f234b71408b68a3bd7b14b42304">base_easing_sequence&lt;T&gt;::update</a>(T fDeltaTime) noexcept</div>
 <div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;{</div>
 <div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;    <span class="keywordflow">if</span> (<span class="keyword">auto</span> pCurrentElement = get_current_element())</div>
@@ -171,19 +171,19 @@ $(function() {
 <div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;    }</div>
 <div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;}</div>
 <div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160; </div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> T&gt;</div>
 <div class="line"><a name="l00104"></a><span class="lineno"><a class="line" href="classqx_1_1base__easing__sequence.html#aa32d584790db2f863fc8bac6b34873a7">  104</a></span>&#160;<span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="classqx_1_1base__easing__sequence.html#aa32d584790db2f863fc8bac6b34873a7">base_easing_sequence&lt;T&gt;::set_looped</a>(<span class="keywordtype">bool</span> bLooped) noexcept</div>
 <div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;{</div>
 <div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;    m_bLoop = bLooped;</div>
 <div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;}</div>
 <div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160; </div>
-<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> T&gt;</div>
 <div class="line"><a name="l00110"></a><span class="lineno"><a class="line" href="classqx_1_1base__easing__sequence.html#ae617c829c6ab25f52b155257c1757d5c">  110</a></span>&#160;<span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="classqx_1_1base__easing__sequence.html#ae617c829c6ab25f52b155257c1757d5c">base_easing_sequence&lt;T&gt;::set_speed</a>(T fSpeed) noexcept</div>
 <div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;{</div>
 <div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;    m_fSpeed = fSpeed;</div>
 <div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;}</div>
 <div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160; </div>
-<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> T&gt;</div>
 <div class="line"><a name="l00116"></a><span class="lineno"><a class="line" href="classqx_1_1base__easing__sequence.html#a856ea260b423d3bc81407b5429ed59de">  116</a></span>&#160;<span class="keyword">inline</span> T <a class="code" href="classqx_1_1base__easing__sequence.html#a856ea260b423d3bc81407b5429ed59de">base_easing_sequence&lt;T&gt;::get</a>() const noexcept</div>
 <div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;{</div>
 <div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;    <span class="keywordflow">if</span> (<span class="keyword">auto</span> pCurrentElement = get_current_element())</div>
@@ -200,7 +200,7 @@ $(function() {
 <div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;    }</div>
 <div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;}</div>
 <div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160; </div>
-<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> T&gt;</div>
 <div class="line"><a name="l00133"></a><span class="lineno"><a class="line" href="classqx_1_1base__easing__sequence.html#a74778fb4700bbda22d9f4fe1c0be1ffc">  133</a></span>&#160;<span class="keyword">inline</span> T <a class="code" href="classqx_1_1base__easing__sequence.html#a74778fb4700bbda22d9f4fe1c0be1ffc">base_easing_sequence&lt;T&gt;::get_fraction</a>() const noexcept</div>
 <div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;{</div>
 <div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;    <span class="keywordflow">if</span> (<span class="keyword">auto</span> pCurrentElement = get_current_element())</div>
@@ -217,13 +217,13 @@ $(function() {
 <div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;    }</div>
 <div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;}</div>
 <div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160; </div>
-<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> T&gt;</div>
 <div class="line"><a name="l00150"></a><span class="lineno"><a class="line" href="classqx_1_1base__easing__sequence.html#a26eb577551755bedd5e4624b5f52d01c">  150</a></span>&#160;<span class="keyword">inline</span> T <a class="code" href="classqx_1_1base__easing__sequence.html#a26eb577551755bedd5e4624b5f52d01c">base_easing_sequence&lt;T&gt;::get_speed</a>() const noexcept</div>
 <div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;{</div>
 <div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;    <span class="keywordflow">return</span> m_fSpeed;</div>
 <div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;}</div>
 <div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160; </div>
-<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> T&gt;</div>
 <div class="line"><a name="l00156"></a><span class="lineno"><a class="line" href="classqx_1_1base__easing__sequence.html#ad0cf8d863661e1dadcb61e66f7634cec">  156</a></span>&#160;<span class="keyword">inline</span> <span class="keywordtype">bool</span> <a class="code" href="classqx_1_1base__easing__sequence.html#ad0cf8d863661e1dadcb61e66f7634cec">base_easing_sequence&lt;T&gt;::is_not_started</a>() const noexcept</div>
 <div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;{</div>
 <div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;    <span class="keywordflow">if</span> (<span class="keyword">auto</span> pCurrentElement = get_current_element())</div>
@@ -240,7 +240,7 @@ $(function() {
 <div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;    }</div>
 <div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;}</div>
 <div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160; </div>
-<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> T&gt;</div>
 <div class="line"><a name="l00173"></a><span class="lineno"><a class="line" href="classqx_1_1base__easing__sequence.html#a18be4aff9cd7c1b9a7afac40b4259cd2">  173</a></span>&#160;<span class="keyword">inline</span> <span class="keywordtype">bool</span> <a class="code" href="classqx_1_1base__easing__sequence.html#a18be4aff9cd7c1b9a7afac40b4259cd2">base_easing_sequence&lt;T&gt;::is_started</a>() const noexcept</div>
 <div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;{</div>
 <div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;    <span class="keywordflow">if</span> (<span class="keyword">auto</span> pCurrentElement = get_current_element())</div>
@@ -257,7 +257,7 @@ $(function() {
 <div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;    }</div>
 <div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;}</div>
 <div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160; </div>
-<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> T&gt;</div>
 <div class="line"><a name="l00190"></a><span class="lineno"><a class="line" href="classqx_1_1base__easing__sequence.html#a71e62d78845bd7f1fe82f791423dce8d">  190</a></span>&#160;<span class="keyword">inline</span> <span class="keywordtype">bool</span> <a class="code" href="classqx_1_1base__easing__sequence.html#a71e62d78845bd7f1fe82f791423dce8d">base_easing_sequence&lt;T&gt;::is_paused</a>() const noexcept</div>
 <div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;{</div>
 <div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;    <span class="keywordflow">if</span> (<span class="keyword">auto</span> pCurrentElement = get_current_element())</div>
@@ -266,7 +266,7 @@ $(function() {
 <div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;        <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
 <div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;}</div>
 <div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160; </div>
-<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> T&gt;</div>
 <div class="line"><a name="l00199"></a><span class="lineno"><a class="line" href="classqx_1_1base__easing__sequence.html#a7397333480dd2fba6c04723946fa16e7">  199</a></span>&#160;<span class="keyword">inline</span> <span class="keywordtype">bool</span> <a class="code" href="classqx_1_1base__easing__sequence.html#a7397333480dd2fba6c04723946fa16e7">base_easing_sequence&lt;T&gt;::is_finished</a>() const noexcept</div>
 <div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160;{</div>
 <div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160;    <span class="keywordflow">if</span> (<span class="keyword">auto</span> pCurrentElement = get_current_element())</div>
@@ -283,26 +283,26 @@ $(function() {
 <div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160;    }</div>
 <div class="line"><a name="l00213"></a><span class="lineno">  213</span>&#160;}</div>
 <div class="line"><a name="l00214"></a><span class="lineno">  214</span>&#160; </div>
-<div class="line"><a name="l00215"></a><span class="lineno">  215</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a name="l00215"></a><span class="lineno">  215</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> T&gt;</div>
 <div class="line"><a name="l00216"></a><span class="lineno"><a class="line" href="classqx_1_1base__easing__sequence.html#af6c2af341051a23518017de8b9ec92ce">  216</a></span>&#160;<span class="keyword">inline</span> <span class="keywordtype">bool</span> <a class="code" href="classqx_1_1base__easing__sequence.html#af6c2af341051a23518017de8b9ec92ce">base_easing_sequence&lt;T&gt;::is_looped</a>() const noexcept</div>
 <div class="line"><a name="l00217"></a><span class="lineno">  217</span>&#160;{</div>
 <div class="line"><a name="l00218"></a><span class="lineno">  218</span>&#160;    <span class="keywordflow">return</span> m_bLoop;</div>
 <div class="line"><a name="l00219"></a><span class="lineno">  219</span>&#160;}</div>
 <div class="line"><a name="l00220"></a><span class="lineno">  220</span>&#160; </div>
-<div class="line"><a name="l00221"></a><span class="lineno">  221</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160;<span class="keyword">inline</span> <span class="keyword">typename</span> <a class="code" href="classqx_1_1base__easing__element.html">base_easing_sequence&lt;T&gt;::easing_element_type</a>* <a class="code" href="classqx_1_1base__easing__sequence.html">base_easing_sequence&lt;T&gt;::get_current_element</a>() noexcept</div>
+<div class="line"><a name="l00221"></a><span class="lineno">  221</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> T&gt;</div>
+<div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160;<span class="keyword">inline</span> <span class="keyword">class </span><a class="code" href="classqx_1_1base__easing__sequence.html">base_easing_sequence</a>&lt;T&gt;::easing_element_type* <a class="code" href="classqx_1_1base__easing__sequence.html">base_easing_sequence</a>&lt;T&gt;::get_current_element() noexcept</div>
 <div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160;{</div>
 <div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160;    <span class="keywordflow">return</span> m_nCurrentElement &lt; m_ElementsSequence.size() ? &amp;m_ElementsSequence[m_nCurrentElement] : <span class="keyword">nullptr</span>;</div>
 <div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160;}</div>
 <div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160; </div>
-<div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160;<span class="keyword">inline</span> <span class="keyword">const</span> <span class="keyword">typename</span> base_easing_sequence&lt;T&gt;::easing_element_type* base_easing_sequence&lt;T&gt;::get_current_element()</div>
+<div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> T&gt;</div>
+<div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160;<span class="keyword">inline</span> <span class="keyword">const</span> <span class="keyword">class </span>base_easing_sequence&lt;T&gt;::easing_element_type* base_easing_sequence&lt;T&gt;::get_current_element()</div>
 <div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160;    const noexcept</div>
 <div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160;{</div>
 <div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160;    <span class="keywordflow">return</span> <span class="keyword">const_cast&lt;</span>base_easing_sequence*<span class="keyword">&gt;</span>(<span class="keyword">static_cast&lt;</span><span class="keyword">const </span>base_easing_sequence*<span class="keyword">&gt;</span>(<span class="keyword">this</span>))-&gt;get_current_element();</div>
 <div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160;}</div>
 <div class="line"><a name="l00233"></a><span class="lineno">  233</span>&#160; </div>
-<div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> T&gt;</div>
 <div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160;<span class="keyword">inline</span> <span class="keywordtype">void</span> base_easing_sequence&lt;T&gt;::update_total_time() noexcept</div>
 <div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160;{</div>
 <div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;    m_fTotalTime += T(1.f) / m_ElementsSequence.back().<a class="code" href="classqx_1_1base__easing__element.html#af2d434633f68aa722b0a8da6a38e9f9c">get_speed</a>();</div>
@@ -315,7 +315,6 @@ $(function() {
 <div class="ttc" id="aclassqx_1_1base__easing__sequence_html_a18be4aff9cd7c1b9a7afac40b4259cd2"><div class="ttname"><a href="classqx_1_1base__easing__sequence.html#a18be4aff9cd7c1b9a7afac40b4259cd2">qx::base_easing_sequence::is_started</a></div><div class="ttdeci">bool is_started() const noexcept</div><div class="ttdoc">Is sequence started.</div><div class="ttdef"><b>Definition:</b> <a href="easing__sequence_8inl_source.html#l00173">easing_sequence.inl:173</a></div></div>
 <div class="ttc" id="aclassqx_1_1base__easing__sequence_html_a26eb577551755bedd5e4624b5f52d01c"><div class="ttname"><a href="classqx_1_1base__easing__sequence.html#a26eb577551755bedd5e4624b5f52d01c">qx::base_easing_sequence::get_speed</a></div><div class="ttdeci">T get_speed() const noexcept</div><div class="ttdoc">Get updating speed value.</div><div class="ttdef"><b>Definition:</b> <a href="easing__sequence_8inl_source.html#l00150">easing_sequence.inl:150</a></div></div>
 <div class="ttc" id="aclassqx_1_1base__easing__sequence_html_a3dc96f234b71408b68a3bd7b14b42304"><div class="ttname"><a href="classqx_1_1base__easing__sequence.html#a3dc96f234b71408b68a3bd7b14b42304">qx::base_easing_sequence::update</a></div><div class="ttdeci">void update(T fDeltaTime) noexcept</div><div class="ttdoc">Update easing element sequence.</div><div class="ttdef"><b>Definition:</b> <a href="easing__sequence_8inl_source.html#l00078">easing_sequence.inl:78</a></div></div>
-<div class="ttc" id="aclassqx_1_1base__easing__sequence_html_a496703638c694a35e15a7d27b11533f3"><div class="ttname"><a href="classqx_1_1base__easing__sequence.html#a496703638c694a35e15a7d27b11533f3">qx::base_easing_sequence::emplace_back</a></div><div class="ttdeci">void emplace_back(Args &amp;&amp;... args) noexcept</div><div class="ttdoc">Add easing element to queue by constructing in-place.</div><div class="ttdef"><b>Definition:</b> <a href="easing__sequence_8inl_source.html#l00022">easing_sequence.inl:22</a></div></div>
 <div class="ttc" id="aclassqx_1_1base__easing__sequence_html_a4cb29b5fd44f8e816b9b13b63b301029"><div class="ttname"><a href="classqx_1_1base__easing__sequence.html#a4cb29b5fd44f8e816b9b13b63b301029">qx::base_easing_sequence::start</a></div><div class="ttdeci">void start() noexcept</div><div class="ttdoc">Start easing element sequence playing.</div><div class="ttdef"><b>Definition:</b> <a href="easing__sequence_8inl_source.html#l00037">easing_sequence.inl:37</a></div></div>
 <div class="ttc" id="aclassqx_1_1base__easing__sequence_html_a5015b834a95e8974ffa7721fadebc3a5"><div class="ttname"><a href="classqx_1_1base__easing__sequence.html#a5015b834a95e8974ffa7721fadebc3a5">qx::base_easing_sequence::clear</a></div><div class="ttdeci">void clear() noexcept</div><div class="ttdoc">Clear elements queue.</div><div class="ttdef"><b>Definition:</b> <a href="easing__sequence_8inl_source.html#l00029">easing_sequence.inl:29</a></div></div>
 <div class="ttc" id="aclassqx_1_1base__easing__sequence_html_a526d8425e5c6f6ff1ab3aab7da65eb75"><div class="ttname"><a href="classqx_1_1base__easing__sequence.html#a526d8425e5c6f6ff1ab3aab7da65eb75">qx::base_easing_sequence::pause</a></div><div class="ttdeci">void pause() noexcept</div><div class="ttdoc">Pause easing element sequence playing.</div><div class="ttdef"><b>Definition:</b> <a href="easing__sequence_8inl_source.html#l00045">easing_sequence.inl:45</a></div></div>
@@ -324,6 +323,7 @@ $(function() {
 <div class="ttc" id="aclassqx_1_1base__easing__sequence_html_a7397333480dd2fba6c04723946fa16e7"><div class="ttname"><a href="classqx_1_1base__easing__sequence.html#a7397333480dd2fba6c04723946fa16e7">qx::base_easing_sequence::is_finished</a></div><div class="ttdeci">bool is_finished() const noexcept</div><div class="ttdoc">Is sequence finished.</div><div class="ttdef"><b>Definition:</b> <a href="easing__sequence_8inl_source.html#l00199">easing_sequence.inl:199</a></div></div>
 <div class="ttc" id="aclassqx_1_1base__easing__sequence_html_a74778fb4700bbda22d9f4fe1c0be1ffc"><div class="ttname"><a href="classqx_1_1base__easing__sequence.html#a74778fb4700bbda22d9f4fe1c0be1ffc">qx::base_easing_sequence::get_fraction</a></div><div class="ttdeci">T get_fraction() const noexcept</div><div class="ttdoc">Get a fraction indicating how much of the sequence has played.</div><div class="ttdef"><b>Definition:</b> <a href="easing__sequence_8inl_source.html#l00133">easing_sequence.inl:133</a></div></div>
 <div class="ttc" id="aclassqx_1_1base__easing__sequence_html_a7877285c7ed2c17dca6edb6849284aca"><div class="ttname"><a href="classqx_1_1base__easing__sequence.html#a7877285c7ed2c17dca6edb6849284aca">qx::base_easing_sequence::resume</a></div><div class="ttdeci">void resume() noexcept</div><div class="ttdoc">Resume easing element sequence playing.</div><div class="ttdef"><b>Definition:</b> <a href="easing__sequence_8inl_source.html#l00052">easing_sequence.inl:52</a></div></div>
+<div class="ttc" id="aclassqx_1_1base__easing__sequence_html_a837b2a396dd81f9fca9020441920995c"><div class="ttname"><a href="classqx_1_1base__easing__sequence.html#a837b2a396dd81f9fca9020441920995c">qx::base_easing_sequence::emplace_back</a></div><div class="ttdeci">void emplace_back(args_t &amp;&amp;... args) noexcept</div><div class="ttdoc">Add easing element to queue by constructing in-place.</div><div class="ttdef"><b>Definition:</b> <a href="easing__sequence_8inl_source.html#l00022">easing_sequence.inl:22</a></div></div>
 <div class="ttc" id="aclassqx_1_1base__easing__sequence_html_a856ea260b423d3bc81407b5429ed59de"><div class="ttname"><a href="classqx_1_1base__easing__sequence.html#a856ea260b423d3bc81407b5429ed59de">qx::base_easing_sequence::get</a></div><div class="ttdeci">T get() const noexcept</div><div class="ttdoc">Get value of current sequence element.</div><div class="ttdef"><b>Definition:</b> <a href="easing__sequence_8inl_source.html#l00116">easing_sequence.inl:116</a></div></div>
 <div class="ttc" id="aclassqx_1_1base__easing__sequence_html_aa32d584790db2f863fc8bac6b34873a7"><div class="ttname"><a href="classqx_1_1base__easing__sequence.html#aa32d584790db2f863fc8bac6b34873a7">qx::base_easing_sequence::set_looped</a></div><div class="ttdeci">void set_looped(bool bLooped) noexcept</div><div class="ttdoc">Set loop state.</div><div class="ttdef"><b>Definition:</b> <a href="easing__sequence_8inl_source.html#l00104">easing_sequence.inl:104</a></div></div>
 <div class="ttc" id="aclassqx_1_1base__easing__sequence_html_ab3b6703f1946e8be561571df8d215a0d"><div class="ttname"><a href="classqx_1_1base__easing__sequence.html#ab3b6703f1946e8be561571df8d215a0d">qx::base_easing_sequence::reset</a></div><div class="ttdeci">void reset() noexcept</div><div class="ttdoc">Reset sequence.</div><div class="ttdef"><b>Definition:</b> <a href="easing__sequence_8inl_source.html#l00069">easing_sequence.inl:69</a></div></div>

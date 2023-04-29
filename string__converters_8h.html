@@ -91,10 +91,10 @@ Functions</h2></td></tr>
 <tr class="memitem:a30847adf8f3f3abb2b93591c4038d6b6"><td class="memItemLeft" align="right" valign="top">wstring&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="string__converters_8h.html#a30847adf8f3f3abb2b93591c4038d6b6">qx::utf8_to_wstring</a> (const char *pszUtf8)</td></tr>
 <tr class="memdesc:a30847adf8f3f3abb2b93591c4038d6b6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert const char* representing UTF8 to wstring.  <a href="string__converters_8h.html#a30847adf8f3f3abb2b93591c4038d6b6">More...</a><br /></td></tr>
 <tr class="separator:a30847adf8f3f3abb2b93591c4038d6b6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abae43e12d9d47cc45926f2599f74b792"><td class="memTemplParams" colspan="2">template&lt;typename value_type &gt; </td></tr>
-<tr class="memitem:abae43e12d9d47cc45926f2599f74b792"><td class="memTemplItemLeft" align="right" valign="top">const value_type *&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="string__converters_8h.html#abae43e12d9d47cc45926f2599f74b792">qx::to_char_pointer</a> (std::basic_string_view&lt; value_type &gt; stringView)</td></tr>
-<tr class="memdesc:abae43e12d9d47cc45926f2599f74b792"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert string_view to the null terminated chars array.  <a href="string__converters_8h.html#abae43e12d9d47cc45926f2599f74b792">More...</a><br /></td></tr>
-<tr class="separator:abae43e12d9d47cc45926f2599f74b792"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a57324acc061571f74116b4ea84b79872"><td class="memTemplParams" colspan="2">template&lt;class value_t &gt; </td></tr>
+<tr class="memitem:a57324acc061571f74116b4ea84b79872"><td class="memTemplItemLeft" align="right" valign="top">const value_t *&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="string__converters_8h.html#a57324acc061571f74116b4ea84b79872">qx::to_char_pointer</a> (std::basic_string_view&lt; value_t &gt; stringView)</td></tr>
+<tr class="memdesc:a57324acc061571f74116b4ea84b79872"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert string_view to the null terminated chars array.  <a href="string__converters_8h.html#a57324acc061571f74116b4ea84b79872">More...</a><br /></td></tr>
+<tr class="separator:a57324acc061571f74116b4ea84b79872"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Contains string converters. </p>
@@ -104,21 +104,21 @@ Functions</h2></td></tr>
 
 <p class="definition">Definition in file <a class="el" href="string__converters_8h_source.html">string_converters.h</a>.</p>
 </div><h2 class="groupheader">Function Documentation</h2>
-<a id="abae43e12d9d47cc45926f2599f74b792"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#abae43e12d9d47cc45926f2599f74b792">&#9670;&nbsp;</a></span>to_char_pointer()</h2>
+<a id="a57324acc061571f74116b4ea84b79872"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a57324acc061571f74116b4ea84b79872">&#9670;&nbsp;</a></span>to_char_pointer()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename value_type &gt; </div>
+template&lt;class value_t &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">const value_type* qx::to_char_pointer </td>
+          <td class="memname">const value_t* qx::to_char_pointer </td>
           <td>(</td>
-          <td class="paramtype">std::basic_string_view&lt; value_type &gt;&#160;</td>
+          <td class="paramtype">std::basic_string_view&lt; value_t &gt;&#160;</td>
           <td class="paramname"><em>stringView</em></td><td>)</td>
           <td></td>
         </tr>
@@ -133,7 +133,7 @@ template&lt;typename value_type &gt; </div>
 <p>Convert string_view to the null terminated chars array. </p>
 <p>Some libraries or even c++ types can't deal with std::string_view (for ex. std::ifstream). This function allows to reduce number of allocations, but still leads to overhead due to chars copying </p><dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
-    <tr><td class="paramname">value_type</td><td>- string value type </td></tr>
+    <tr><td class="paramname">value_t</td><td>- string value type </td></tr>
   </table>
   </dd>
 </dl>

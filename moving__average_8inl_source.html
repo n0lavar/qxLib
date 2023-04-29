@@ -81,13 +81,13 @@ $(function() {
 <div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="keyword">namespace </span>qx</div>
 <div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;{</div>
 <div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160; </div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> T&gt;</div>
 <div class="line"><a name="l00014"></a><span class="lineno"><a class="line" href="moving__average_8h.html#aada43078b79dc6e196f944105ac62eda">   14</a></span>&#160;<span class="keyword">inline</span> std::vector&lt;T&gt; <a class="code" href="moving__average_8h.html#aada43078b79dc6e196f944105ac62eda">get_moving_average_simple_weights</a>(<span class="keywordtype">size_t</span> nEntries)</div>
 <div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;{</div>
 <div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;    <span class="keywordflow">return</span> std::vector&lt;T&gt;(nEntries, T(1.f) / <span class="keyword">static_cast&lt;</span>T<span class="keyword">&gt;</span>(nEntries));</div>
 <div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;}</div>
 <div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160; </div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> T&gt;</div>
 <div class="line"><a name="l00020"></a><span class="lineno"><a class="line" href="moving__average_8h.html#aafcd27954378738a4df732eb2c5704c4">   20</a></span>&#160;<span class="keyword">inline</span> std::vector&lt;T&gt; <a class="code" href="moving__average_8h.html#aafcd27954378738a4df732eb2c5704c4">get_moving_average_linear_weights</a>(<span class="keywordtype">size_t</span> nEntries)</div>
 <div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;{</div>
 <div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    std::vector&lt;T&gt; weights(nEntries, 0.f);</div>
@@ -100,7 +100,7 @@ $(function() {
 <div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    <span class="keywordflow">return</span> weights;</div>
 <div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;}</div>
 <div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160; </div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> T&gt;</div>
 <div class="line"><a name="l00033"></a><span class="lineno"><a class="line" href="moving__average_8h.html#aad98af413f8a5bec6733a1c0560a14c9">   33</a></span>&#160;<span class="keyword">inline</span> std::vector&lt;T&gt; <a class="code" href="moving__average_8h.html#aad98af413f8a5bec6733a1c0560a14c9">get_moving_average_exp_weights</a>(<span class="keywordtype">size_t</span> nEntries)</div>
 <div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;{</div>
 <div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    std::vector&lt;T&gt; weights(nEntries, 0.f);</div>
@@ -116,7 +116,7 @@ $(function() {
 <div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    <span class="keywordflow">return</span> weights;</div>
 <div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;}</div>
 <div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160; </div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> T&gt;</div>
 <div class="line"><a name="l00049"></a><span class="lineno"><a class="line" href="classqx_1_1moving__average.html#a4e9b0115aaaffd7e8926a83ea95f4469">   49</a></span>&#160;<span class="keyword">inline</span> <a class="code" href="classqx_1_1moving__average.html#a4e9b0115aaaffd7e8926a83ea95f4469">moving_average&lt;T&gt;::moving_average</a>(<span class="keywordtype">size_t</span> nEntries, T startValue, moving_average_weights_func&lt;T&gt; func)</div>
 <div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    : m_Value(startValue)</div>
 <div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    , m_Entries(nEntries, startValue)</div>
@@ -124,7 +124,7 @@ $(function() {
 <div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;{</div>
 <div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;}</div>
 <div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160; </div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> T&gt;</div>
 <div class="line"><a name="l00057"></a><span class="lineno"><a class="line" href="classqx_1_1moving__average.html#a91cdac3a2cde43391571cce3608eb9ac">   57</a></span>&#160;<span class="keyword">inline</span> T <a class="code" href="classqx_1_1moving__average.html#a91cdac3a2cde43391571cce3608eb9ac">moving_average&lt;T&gt;::update</a>(T value)</div>
 <div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;{</div>
 <div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    m_Entries.pop_front();</div>
@@ -137,13 +137,13 @@ $(function() {
 <div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    <span class="keywordflow">return</span> m_Value;</div>
 <div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;}</div>
 <div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160; </div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> T&gt;</div>
 <div class="line"><a name="l00070"></a><span class="lineno"><a class="line" href="classqx_1_1moving__average.html#aa86c676030171048234b82f58aa67c89">   70</a></span>&#160;<span class="keyword">inline</span> T <a class="code" href="classqx_1_1moving__average.html#aa86c676030171048234b82f58aa67c89">moving_average&lt;T&gt;::get</a>()<span class="keyword"> const</span></div>
 <div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;<span class="keyword"></span>{</div>
 <div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    <span class="keywordflow">return</span> m_Value;</div>
 <div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;}</div>
 <div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160; </div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> T&gt;</div>
 <div class="line"><a name="l00076"></a><span class="lineno"><a class="line" href="classqx_1_1moving__average.html#a21a2e82dbb4ce2fd748fb2d97738f932">   76</a></span>&#160;<span class="keyword">inline</span> <span class="keywordtype">size_t</span> <a class="code" href="classqx_1_1moving__average.html#a21a2e82dbb4ce2fd748fb2d97738f932">moving_average&lt;T&gt;::get_num_entries</a>()<span class="keyword"> const</span></div>
 <div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;<span class="keyword"></span>{</div>
 <div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;    <span class="keywordflow">return</span> m_Entries.size();</div>

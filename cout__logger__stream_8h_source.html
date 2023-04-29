@@ -153,23 +153,23 @@ $(function() {
 <div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;<span class="keyword">private</span>:<span class="comment"></span></div>
 <div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;<span class="comment">    /**</span></div>
 <div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;<span class="comment">        @brief  Get cout by char type</span></div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;<span class="comment">        @tparam char_type - char type</span></div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;<span class="comment">        @retval           - cout ref</span></div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;<span class="comment">        @tparam char_t - char type</span></div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;<span class="comment">        @retval        - cout ref</span></div>
 <div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;<span class="comment">    **/</span></div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;    <span class="keyword">template</span>&lt;<span class="keyword">class</span> <span class="keywordtype">char</span>_type&gt;</div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;    <span class="keyword">static</span> std::basic_ostream&lt;char_type&gt;&amp; get_cout() noexcept;</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;    <span class="keyword">template</span>&lt;<span class="keyword">class</span> <span class="keywordtype">char</span>_t&gt;</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;    <span class="keyword">static</span> std::basic_ostream&lt;char_t&gt;&amp; get_cout() noexcept;</div>
 <div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;<span class="comment"></span> </div>
 <div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;<span class="comment">    /**</span></div>
 <div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;<span class="comment">        @brief  Output to std::basic_ostream </span></div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;<span class="comment">        @tparam char_type - char type</span></div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;<span class="comment">        @tparam char_t    - char type</span></div>
 <div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;<span class="comment">        @param  svMessage - message string</span></div>
 <div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;<span class="comment">        @param  logUnit   - log unit info</span></div>
 <div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;<span class="comment">        @param  colors    - color ranges to colorize output</span></div>
 <div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;<span class="comment">        @param  eLogLevel - this message log level</span></div>
 <div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;<span class="comment">    **/</span></div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;    <span class="keyword">template</span>&lt;<span class="keyword">class</span> <span class="keywordtype">char</span>_type&gt;</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;    <span class="keyword">template</span>&lt;<span class="keyword">class</span> <span class="keywordtype">char</span>_t&gt;</div>
 <div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;    <span class="keywordtype">void</span> log_cout(</div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;        std::basic_string_view&lt;char_type&gt;      svMessage,</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;        std::basic_string_view&lt;char_t&gt;         svMessage,</div>
 <div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;        <span class="keyword">const</span> <a class="code" href="structqx_1_1log__unit.html">log_unit</a>&amp;                        logUnit,</div>
 <div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;        <span class="keyword">const</span> std::vector&lt;logger_color_range&gt;&amp; colors,</div>
 <div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;        log_level                              eLogLevel);</div>

@@ -77,27 +77,28 @@ $(function() {
 <div class="textblock"><code>#include &lt;<a class="el" href="recursive__lambda_8h_source.html">qx/recursive_lambda.h</a>&gt;</code><br />
 <code>#include &lt;random&gt;</code><br />
 <code>#include &lt;glm/glm.hpp&gt;</code><br />
+<code>#include &lt;<a class="el" href="integration_8inl_source.html">qx/math/integration.inl</a>&gt;</code><br />
 </div>
 <p><a href="integration_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a642d025a9dadd8f512828eaef8204db7"><td class="memTemplParams" colspan="2">template&lt;class Function2dType &gt; </td></tr>
-<tr class="memitem:a642d025a9dadd8f512828eaef8204db7"><td class="memTemplItemLeft" align="right" valign="top">double&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="integration_8h.html#a642d025a9dadd8f512828eaef8204db7">qx::integrate_rectangle_rule</a> (const Function2dType &amp;func, double x0, double x1, size_t nIntervalsPer1=10)</td></tr>
-<tr class="memdesc:a642d025a9dadd8f512828eaef8204db7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Integrate using rectangle rule.  <a href="integration_8h.html#a642d025a9dadd8f512828eaef8204db7">More...</a><br /></td></tr>
-<tr class="separator:a642d025a9dadd8f512828eaef8204db7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2f75baf20ea5209cab1d4ab937421cbb"><td class="memTemplParams" colspan="2">template&lt;class Function2dType &gt; </td></tr>
-<tr class="memitem:a2f75baf20ea5209cab1d4ab937421cbb"><td class="memTemplItemLeft" align="right" valign="top">double&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="integration_8h.html#a2f75baf20ea5209cab1d4ab937421cbb">qx::integrate_trapezoid_rule</a> (const Function2dType &amp;func, double x0, double x1, size_t nIntervalsPer1=10)</td></tr>
-<tr class="memdesc:a2f75baf20ea5209cab1d4ab937421cbb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Integrate using trapezoid rule.  <a href="integration_8h.html#a2f75baf20ea5209cab1d4ab937421cbb">More...</a><br /></td></tr>
-<tr class="separator:a2f75baf20ea5209cab1d4ab937421cbb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afee843abc3ec1aa34dc707d35df1252b"><td class="memTemplParams" colspan="2">template&lt;class Function2dType &gt; </td></tr>
-<tr class="memitem:afee843abc3ec1aa34dc707d35df1252b"><td class="memTemplItemLeft" align="right" valign="top">double&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="integration_8h.html#afee843abc3ec1aa34dc707d35df1252b">qx::integrate_adaptive_midpoint</a> (const Function2dType &amp;func, double x0, double x1, double fMaxSliceError, size_t nIntervalsPer1=10, size_t nMaxRecursion=300)</td></tr>
-<tr class="memdesc:afee843abc3ec1aa34dc707d35df1252b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Integrate using adaptive midpoint.  <a href="integration_8h.html#afee843abc3ec1aa34dc707d35df1252b">More...</a><br /></td></tr>
-<tr class="separator:afee843abc3ec1aa34dc707d35df1252b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a85e8918b37fe749e50ab7b4a6380da61"><td class="memTemplParams" colspan="2">template&lt;class Function2dType &gt; </td></tr>
-<tr class="memitem:a85e8918b37fe749e50ab7b4a6380da61"><td class="memTemplItemLeft" align="right" valign="top">double&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="integration_8h.html#a85e8918b37fe749e50ab7b4a6380da61">qx::integrate_monte_carlo</a> (const Function2dType &amp;funcIsInside, glm::dvec2 pos0, glm::dvec2 pos1, size_t nPointsPerOneSquare=1000)</td></tr>
-<tr class="memdesc:a85e8918b37fe749e50ab7b4a6380da61"><td class="mdescLeft">&#160;</td><td class="mdescRight">Integrate using probabilistic algorithm Monte Carlo.  <a href="integration_8h.html#a85e8918b37fe749e50ab7b4a6380da61">More...</a><br /></td></tr>
-<tr class="separator:a85e8918b37fe749e50ab7b4a6380da61"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa10e7f79d8b684767a945d0353d1ba2e"><td class="memTemplParams" colspan="2">template&lt;class function_2d_t &gt; </td></tr>
+<tr class="memitem:aa10e7f79d8b684767a945d0353d1ba2e"><td class="memTemplItemLeft" align="right" valign="top">double&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="integration_8h.html#aa10e7f79d8b684767a945d0353d1ba2e">qx::integrate_rectangle_rule</a> (const function_2d_t &amp;func, double x0, double x1, size_t nIntervalsPer1=10)</td></tr>
+<tr class="memdesc:aa10e7f79d8b684767a945d0353d1ba2e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Integrate using rectangle rule.  <a href="integration_8h.html#aa10e7f79d8b684767a945d0353d1ba2e">More...</a><br /></td></tr>
+<tr class="separator:aa10e7f79d8b684767a945d0353d1ba2e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a36c244f3b2d7d1e2daf09c167f197ffb"><td class="memTemplParams" colspan="2">template&lt;class function_2d_t &gt; </td></tr>
+<tr class="memitem:a36c244f3b2d7d1e2daf09c167f197ffb"><td class="memTemplItemLeft" align="right" valign="top">double&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="integration_8h.html#a36c244f3b2d7d1e2daf09c167f197ffb">qx::integrate_trapezoid_rule</a> (const function_2d_t &amp;func, double x0, double x1, size_t nIntervalsPer1=10)</td></tr>
+<tr class="memdesc:a36c244f3b2d7d1e2daf09c167f197ffb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Integrate using trapezoid rule.  <a href="integration_8h.html#a36c244f3b2d7d1e2daf09c167f197ffb">More...</a><br /></td></tr>
+<tr class="separator:a36c244f3b2d7d1e2daf09c167f197ffb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acb28484ebee4df395c50529fc1e1a783"><td class="memTemplParams" colspan="2">template&lt;class function_2d_t &gt; </td></tr>
+<tr class="memitem:acb28484ebee4df395c50529fc1e1a783"><td class="memTemplItemLeft" align="right" valign="top">double&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="integration_8h.html#acb28484ebee4df395c50529fc1e1a783">qx::integrate_adaptive_midpoint</a> (const function_2d_t &amp;func, double x0, double x1, double fMaxSliceError, size_t nIntervalsPer1=10, size_t nMaxRecursion=300)</td></tr>
+<tr class="memdesc:acb28484ebee4df395c50529fc1e1a783"><td class="mdescLeft">&#160;</td><td class="mdescRight">Integrate using adaptive midpoint.  <a href="integration_8h.html#acb28484ebee4df395c50529fc1e1a783">More...</a><br /></td></tr>
+<tr class="separator:acb28484ebee4df395c50529fc1e1a783"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af485291e29f2798ba4c6ed32902e3fa8"><td class="memTemplParams" colspan="2">template&lt;class function_2d_t &gt; </td></tr>
+<tr class="memitem:af485291e29f2798ba4c6ed32902e3fa8"><td class="memTemplItemLeft" align="right" valign="top">double&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="integration_8h.html#af485291e29f2798ba4c6ed32902e3fa8">qx::integrate_monte_carlo</a> (const function_2d_t &amp;funcIsInside, glm::dvec2 pos0, glm::dvec2 pos1, size_t nPointsPerOneSquare=1000)</td></tr>
+<tr class="memdesc:af485291e29f2798ba4c6ed32902e3fa8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Integrate using probabilistic algorithm Monte Carlo.  <a href="integration_8h.html#af485291e29f2798ba4c6ed32902e3fa8">More...</a><br /></td></tr>
+<tr class="separator:af485291e29f2798ba4c6ed32902e3fa8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Contains integration algorithms. </p>
@@ -107,13 +108,13 @@ Functions</h2></td></tr>
 
 <p class="definition">Definition in file <a class="el" href="integration_8h_source.html">integration.h</a>.</p>
 </div><h2 class="groupheader">Function Documentation</h2>
-<a id="afee843abc3ec1aa34dc707d35df1252b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#afee843abc3ec1aa34dc707d35df1252b">&#9670;&nbsp;</a></span>integrate_adaptive_midpoint()</h2>
+<a id="acb28484ebee4df395c50529fc1e1a783"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acb28484ebee4df395c50529fc1e1a783">&#9670;&nbsp;</a></span>integrate_adaptive_midpoint()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class Function2dType &gt; </div>
+template&lt;class function_2d_t &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -121,7 +122,7 @@ template&lt;class Function2dType &gt; </div>
         <tr>
           <td class="memname">double qx::integrate_adaptive_midpoint </td>
           <td>(</td>
-          <td class="paramtype">const Function2dType &amp;&#160;</td>
+          <td class="paramtype">const function_2d_t &amp;&#160;</td>
           <td class="paramname"><em>func</em>, </td>
         </tr>
         <tr>
@@ -181,7 +182,7 @@ template&lt;class Function2dType &gt; </div>
 </dl>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
-    <tr><td class="paramname">Function2dType</td><td>- function that takes double and returns double </td></tr>
+    <tr><td class="paramname">function_2d_t</td><td>- function that takes double and returns double </td></tr>
   </table>
   </dd>
 </dl>
@@ -192,17 +193,17 @@ template&lt;class Function2dType &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="integration_8h_source.html#l00091">91</a> of file <a class="el" href="integration_8h_source.html">integration.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="integration_8inl_source.html#l00050">50</a> of file <a class="el" href="integration_8inl_source.html">integration.inl</a>.</p>
 
 </div>
 </div>
-<a id="a85e8918b37fe749e50ab7b4a6380da61"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a85e8918b37fe749e50ab7b4a6380da61">&#9670;&nbsp;</a></span>integrate_monte_carlo()</h2>
+<a id="af485291e29f2798ba4c6ed32902e3fa8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af485291e29f2798ba4c6ed32902e3fa8">&#9670;&nbsp;</a></span>integrate_monte_carlo()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class Function2dType &gt; </div>
+template&lt;class function_2d_t &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -210,7 +211,7 @@ template&lt;class Function2dType &gt; </div>
         <tr>
           <td class="memname">double qx::integrate_monte_carlo </td>
           <td>(</td>
-          <td class="paramtype">const Function2dType &amp;&#160;</td>
+          <td class="paramtype">const function_2d_t &amp;&#160;</td>
           <td class="paramname"><em>funcIsInside</em>, </td>
         </tr>
         <tr>
@@ -256,7 +257,7 @@ template&lt;class Function2dType &gt; </div>
 </dl>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
-    <tr><td class="paramname">Function2dType</td><td>- function that takes double and returns double </td></tr>
+    <tr><td class="paramname">function_2d_t</td><td>- function that takes double and returns double </td></tr>
   </table>
   </dd>
 </dl>
@@ -267,17 +268,17 @@ template&lt;class Function2dType &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="integration_8h_source.html#l00160">160</a> of file <a class="el" href="integration_8h_source.html">integration.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="integration_8inl_source.html#l00107">107</a> of file <a class="el" href="integration_8inl_source.html">integration.inl</a>.</p>
 
 </div>
 </div>
-<a id="a642d025a9dadd8f512828eaef8204db7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a642d025a9dadd8f512828eaef8204db7">&#9670;&nbsp;</a></span>integrate_rectangle_rule()</h2>
+<a id="aa10e7f79d8b684767a945d0353d1ba2e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa10e7f79d8b684767a945d0353d1ba2e">&#9670;&nbsp;</a></span>integrate_rectangle_rule()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class Function2dType &gt; </div>
+template&lt;class function_2d_t &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -285,7 +286,7 @@ template&lt;class Function2dType &gt; </div>
         <tr>
           <td class="memname">double qx::integrate_rectangle_rule </td>
           <td>(</td>
-          <td class="paramtype">const Function2dType &amp;&#160;</td>
+          <td class="paramtype">const function_2d_t &amp;&#160;</td>
           <td class="paramname"><em>func</em>, </td>
         </tr>
         <tr>
@@ -331,7 +332,7 @@ template&lt;class Function2dType &gt; </div>
 </dl>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
-    <tr><td class="paramname">Function2dType</td><td>- function that takes double and returns double </td></tr>
+    <tr><td class="paramname">function_2d_t</td><td>- function that takes double and returns double </td></tr>
   </table>
   </dd>
 </dl>
@@ -342,17 +343,17 @@ template&lt;class Function2dType &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="integration_8h_source.html#l00035">35</a> of file <a class="el" href="integration_8h_source.html">integration.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="integration_8inl_source.html#l00014">14</a> of file <a class="el" href="integration_8inl_source.html">integration.inl</a>.</p>
 
 </div>
 </div>
-<a id="a2f75baf20ea5209cab1d4ab937421cbb"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2f75baf20ea5209cab1d4ab937421cbb">&#9670;&nbsp;</a></span>integrate_trapezoid_rule()</h2>
+<a id="a36c244f3b2d7d1e2daf09c167f197ffb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a36c244f3b2d7d1e2daf09c167f197ffb">&#9670;&nbsp;</a></span>integrate_trapezoid_rule()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class Function2dType &gt; </div>
+template&lt;class function_2d_t &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -360,7 +361,7 @@ template&lt;class Function2dType &gt; </div>
         <tr>
           <td class="memname">double qx::integrate_trapezoid_rule </td>
           <td>(</td>
-          <td class="paramtype">const Function2dType &amp;&#160;</td>
+          <td class="paramtype">const function_2d_t &amp;&#160;</td>
           <td class="paramname"><em>func</em>, </td>
         </tr>
         <tr>
@@ -406,7 +407,7 @@ template&lt;class Function2dType &gt; </div>
 </dl>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
-    <tr><td class="paramname">Function2dType</td><td>- function that takes double and returns double </td></tr>
+    <tr><td class="paramname">function_2d_t</td><td>- function that takes double and returns double </td></tr>
   </table>
   </dd>
 </dl>
@@ -417,7 +418,7 @@ template&lt;class Function2dType &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="integration_8h_source.html#l00062">62</a> of file <a class="el" href="integration_8h_source.html">integration.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="integration_8inl_source.html#l00032">32</a> of file <a class="el" href="integration_8inl_source.html">integration.inl</a>.</p>
 
 </div>
 </div>

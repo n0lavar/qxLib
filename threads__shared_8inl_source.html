@@ -83,10 +83,10 @@ $(function() {
 <div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160; </div>
 <div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="comment">//-------------------------------- shared_proxy --------------------------------</span></div>
 <div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160; </div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> Data, <span class="keyword">class</span> SynchronizationPrimitive&gt;</div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="keyword">inline</span> shared_proxy&lt;Data, SynchronizationPrimitive&gt;::shared_proxy(</div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;    Data*                     pData,</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    SynchronizationPrimitive* pSynchronizationPrimitive,</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> data_t, <span class="keyword">class</span> synchronization_primitive_t&gt;</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="keyword">inline</span> shared_proxy&lt;data_t, synchronization_primitive_t&gt;::shared_proxy(</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;    data_t*                     pData,</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    synchronization_primitive_t* pSynchronizationPrimitive,</div>
 <div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    <span class="keywordtype">bool</span>                      bTryLock)</div>
 <div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    : m_pSynchronizationPrimitive(pSynchronizationPrimitive)</div>
 <div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    , m_pData(pData)</div>
@@ -105,15 +105,15 @@ $(function() {
 <div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    }</div>
 <div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;}</div>
 <div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160; </div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> Data, <span class="keyword">class</span> SynchronizationPrimitive&gt;</div>
-<div class="line"><a name="l00038"></a><span class="lineno"><a class="line" href="classqx_1_1shared__proxy.html#a7b2d50fcb2659397066da8873a1e93db">   38</a></span>&#160;<span class="keyword">inline</span> <a class="code" href="classqx_1_1shared__proxy.html">shared_proxy&lt;Data, SynchronizationPrimitive&gt;::shared_proxy</a>(<a class="code" href="classqx_1_1shared__proxy.html">shared_proxy</a>&amp;&amp; other) noexcept</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> data_t, <span class="keyword">class</span> synchronization_primitive_t&gt;</div>
+<div class="line"><a name="l00038"></a><span class="lineno"><a class="line" href="classqx_1_1shared__proxy.html#a19697b472428434039c9db41b23ba69b">   38</a></span>&#160;<span class="keyword">inline</span> <a class="code" href="classqx_1_1shared__proxy.html">shared_proxy&lt;data_t, synchronization_primitive_t&gt;::shared_proxy</a>(<a class="code" href="classqx_1_1shared__proxy.html">shared_proxy</a>&amp;&amp; other) noexcept</div>
 <div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;{</div>
 <div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    std::swap(m_pSynchronizationPrimitive, other.m_pSynchronizationPrimitive);</div>
 <div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    std::swap(m_pData, other.m_pData);</div>
 <div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;}</div>
 <div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160; </div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> Data, <span class="keyword">class</span> SynchronizationPrimitive&gt;</div>
-<div class="line"><a name="l00045"></a><span class="lineno"><a class="line" href="classqx_1_1shared__proxy.html#aaaab8fcb8545855635c0ffa21acf1cde">   45</a></span>&#160;<span class="keyword">inline</span> <a class="code" href="classqx_1_1shared__proxy.html">shared_proxy&lt;Data, SynchronizationPrimitive&gt;</a>&amp; <a class="code" href="classqx_1_1shared__proxy.html">shared_proxy&lt;Data, SynchronizationPrimitive&gt;::operator=</a>(</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> data_t, <span class="keyword">class</span> synchronization_primitive_t&gt;</div>
+<div class="line"><a name="l00045"></a><span class="lineno"><a class="line" href="classqx_1_1shared__proxy.html#a388db686b8595812a1c7dc092ac0f388">   45</a></span>&#160;<span class="keyword">inline</span> <a class="code" href="classqx_1_1shared__proxy.html">shared_proxy&lt;data_t, synchronization_primitive_t&gt;</a>&amp; <a class="code" href="classqx_1_1shared__proxy.html">shared_proxy&lt;data_t, synchronization_primitive_t&gt;::operator=</a>(</div>
 <div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    <a class="code" href="classqx_1_1shared__proxy.html">shared_proxy</a>&amp;&amp; other) noexcept</div>
 <div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;{</div>
 <div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    std::swap(m_pSynchronizationPrimitive, other.m_pSynchronizationPrimitive);</div>
@@ -121,33 +121,33 @@ $(function() {
 <div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
 <div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;}</div>
 <div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160; </div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> Data, <span class="keyword">class</span> SynchronizationPrimitive&gt;</div>
-<div class="line"><a name="l00054"></a><span class="lineno"><a class="line" href="classqx_1_1shared__proxy.html#a1c2c58f704380f2c5b7c381e116290e6">   54</a></span>&#160;<span class="keyword">inline</span> <a class="code" href="classqx_1_1shared__proxy.html">shared_proxy&lt;Data, SynchronizationPrimitive&gt;::~shared_proxy</a>()</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> data_t, <span class="keyword">class</span> synchronization_primitive_t&gt;</div>
+<div class="line"><a name="l00054"></a><span class="lineno"><a class="line" href="classqx_1_1shared__proxy.html#a4f24ec5992fce7f9a31b2e851e439892">   54</a></span>&#160;<span class="keyword">inline</span> <a class="code" href="classqx_1_1shared__proxy.html">shared_proxy&lt;data_t, synchronization_primitive_t&gt;::~shared_proxy</a>()</div>
 <div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;{</div>
 <div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    <span class="keywordflow">if</span> (m_pSynchronizationPrimitive &amp;&amp; m_pData)</div>
 <div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;        unlock_synchronization_primitive(m_pSynchronizationPrimitive);</div>
 <div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;}</div>
 <div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160; </div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> Data, <span class="keyword">class</span> SynchronizationPrimitive&gt;</div>
-<div class="line"><a name="l00061"></a><span class="lineno"><a class="line" href="classqx_1_1shared__proxy.html#a325ffa73c5dfe590a5c5bc74d5d508af">   61</a></span>&#160;<span class="keyword">inline</span> Data* <a class="code" href="classqx_1_1shared__proxy.html">shared_proxy&lt;Data, SynchronizationPrimitive&gt;::operator-&gt;</a>(<span class="keywordtype">void</span>) noexcept</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> data_t, <span class="keyword">class</span> synchronization_primitive_t&gt;</div>
+<div class="line"><a name="l00061"></a><span class="lineno"><a class="line" href="classqx_1_1shared__proxy.html#a2ba2427b33805b46d318cf4b3ac01b19">   61</a></span>&#160;<span class="keyword">inline</span> data_t* <a class="code" href="classqx_1_1shared__proxy.html">shared_proxy&lt;data_t, synchronization_primitive_t&gt;::operator-&gt;</a>(<span class="keywordtype">void</span>) noexcept</div>
 <div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;{</div>
 <div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    <span class="keywordflow">return</span> m_pData;</div>
 <div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;}</div>
 <div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160; </div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> Data, <span class="keyword">class</span> SynchronizationPrimitive&gt;</div>
-<div class="line"><a name="l00067"></a><span class="lineno"><a class="line" href="classqx_1_1shared__proxy.html#afb552714a078deb9b9fbf306779194e4">   67</a></span>&#160;<span class="keyword">inline</span> <span class="keyword">const</span> Data* <a class="code" href="classqx_1_1shared__proxy.html">shared_proxy&lt;Data, SynchronizationPrimitive&gt;::operator-&gt;</a>(<span class="keywordtype">void</span>) <span class="keyword">const</span> noexcept</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> data_t, <span class="keyword">class</span> synchronization_primitive_t&gt;</div>
+<div class="line"><a name="l00067"></a><span class="lineno"><a class="line" href="classqx_1_1shared__proxy.html#ad69af0121664c5f771817309fd758d9b">   67</a></span>&#160;<span class="keyword">inline</span> <span class="keyword">const</span> data_t* <a class="code" href="classqx_1_1shared__proxy.html">shared_proxy&lt;data_t, synchronization_primitive_t&gt;::operator-&gt;</a>(<span class="keywordtype">void</span>) <span class="keyword">const</span> noexcept</div>
 <div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;{</div>
 <div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    <span class="keywordflow">return</span> m_pData;</div>
 <div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;}</div>
 <div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160; </div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> Data, <span class="keyword">class</span> SynchronizationPrimitive&gt;</div>
-<div class="line"><a name="l00073"></a><span class="lineno"><a class="line" href="classqx_1_1shared__proxy.html#a8f3fc76c16e66f26d53f232f8d20e131">   73</a></span>&#160;<span class="keyword">inline</span> Data&amp; <a class="code" href="classqx_1_1shared__proxy.html">shared_proxy&lt;Data, SynchronizationPrimitive&gt;::operator*</a>(<span class="keywordtype">void</span>) noexcept</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> data_t, <span class="keyword">class</span> synchronization_primitive_t&gt;</div>
+<div class="line"><a name="l00073"></a><span class="lineno"><a class="line" href="classqx_1_1shared__proxy.html#aa8a616e18a7c58e7fcf05902724f1c98">   73</a></span>&#160;<span class="keyword">inline</span> data_t&amp; <a class="code" href="classqx_1_1shared__proxy.html">shared_proxy&lt;data_t, synchronization_primitive_t&gt;::operator*</a>(<span class="keywordtype">void</span>) noexcept</div>
 <div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;{</div>
 <div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    <span class="keywordflow">return</span> *m_pData;</div>
 <div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;}</div>
 <div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160; </div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> Data, <span class="keyword">class</span> SynchronizationPrimitive&gt;</div>
-<div class="line"><a name="l00079"></a><span class="lineno"><a class="line" href="classqx_1_1shared__proxy.html#a8ca5600a751fe2735e1c7cf029bae109">   79</a></span>&#160;<span class="keyword">inline</span> <span class="keyword">const</span> Data&amp; <a class="code" href="classqx_1_1shared__proxy.html">shared_proxy&lt;Data, SynchronizationPrimitive&gt;::operator*</a>(<span class="keywordtype">void</span>) <span class="keyword">const</span> noexcept</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> data_t, <span class="keyword">class</span> synchronization_primitive_t&gt;</div>
+<div class="line"><a name="l00079"></a><span class="lineno"><a class="line" href="classqx_1_1shared__proxy.html#accfd4d4c4af733d9f83c182efc97dc0f">   79</a></span>&#160;<span class="keyword">inline</span> <span class="keyword">const</span> data_t&amp; <a class="code" href="classqx_1_1shared__proxy.html">shared_proxy&lt;data_t, synchronization_primitive_t&gt;::operator*</a>(<span class="keywordtype">void</span>) <span class="keyword">const</span> noexcept</div>
 <div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;{</div>
 <div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;    <span class="keywordflow">return</span> *m_pData;</div>
 <div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;}</div>
@@ -156,20 +156,20 @@ $(function() {
 <div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160; </div>
 <div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;<span class="comment">//----------------------- synchronization_primitive_raii -----------------------</span></div>
 <div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160; </div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> Data, <span class="keyword">class</span> SynchronizationPrimitive&gt;</div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;<span class="keyword">inline</span> <a class="code" href="classqx_1_1threads__shared.html">threads_shared&lt;Data, SynchronizationPrimitive&gt;::synchronization_primitive_raii::synchronization_primitive_raii</a>()</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> data_t, <span class="keyword">class</span> synchronization_primitive_t&gt;</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;<span class="keyword">inline</span> <a class="code" href="classqx_1_1threads__shared.html">threads_shared&lt;data_t, synchronization_primitive_t&gt;::synchronization_primitive_raii::synchronization_primitive_raii</a>()</div>
 <div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;{</div>
 <div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;    lock_synchronization_primitive(&amp;sp);</div>
 <div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;}</div>
 <div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160; </div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> Data, <span class="keyword">class</span> SynchronizationPrimitive&gt;</div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;<span class="keyword">inline</span> threads_shared&lt;Data, SynchronizationPrimitive&gt;::synchronization_primitive_raii::~synchronization_primitive_raii()</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> data_t, <span class="keyword">class</span> synchronization_primitive_t&gt;</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;<span class="keyword">inline</span> threads_shared&lt;data_t, synchronization_primitive_t&gt;::synchronization_primitive_raii::~synchronization_primitive_raii()</div>
 <div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;{</div>
 <div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;    unlock_synchronization_primitive(&amp;sp);</div>
 <div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;}</div>
 <div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160; </div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> Data, <span class="keyword">class</span> SynchronizationPrimitive&gt;</div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;<span class="keyword">inline</span> SynchronizationPrimitive* threads_shared&lt;Data, SynchronizationPrimitive&gt;::synchronization_primitive_raii::</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> data_t, <span class="keyword">class</span> synchronization_primitive_t&gt;</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;<span class="keyword">inline</span> synchronization_primitive_t* threads_shared&lt;data_t, synchronization_primitive_t&gt;::synchronization_primitive_raii::</div>
 <div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;    get_object() noexcept</div>
 <div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;{</div>
 <div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;    <span class="keywordflow">return</span> &amp;sp;</div>
@@ -179,18 +179,18 @@ $(function() {
 <div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160; </div>
 <div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;<span class="comment">//------------------------------- threads_shared -------------------------------</span></div>
 <div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160; </div>
-<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> Data, <span class="keyword">class</span> SynchronizationPrimitive&gt;</div>
-<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span>... Args&gt;</div>
-<div class="line"><a name="l00113"></a><span class="lineno"><a class="line" href="classqx_1_1threads__shared.html#afc27e6a9e5e17b083f3f01c27d173bdc">  113</a></span>&#160;<span class="keyword">inline</span> <a class="code" href="classqx_1_1threads__shared.html">threads_shared&lt;Data, SynchronizationPrimitive&gt;::threads_shared</a>(Args&amp;&amp;... args)</div>
-<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;    : m_Data(std::forward&lt;Args&gt;(args)...)</div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> data_t, <span class="keyword">class</span> synchronization_primitive_t&gt;</div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span>... args_t&gt;</div>
+<div class="line"><a name="l00113"></a><span class="lineno"><a class="line" href="classqx_1_1threads__shared.html#a7744f653665454d72922a61a31e5d501">  113</a></span>&#160;<span class="keyword">inline</span> <a class="code" href="classqx_1_1threads__shared.html">threads_shared&lt;data_t, synchronization_primitive_t&gt;::threads_shared</a>(args_t&amp;&amp;... args)</div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;    : m_Data(std::forward&lt;args_t&gt;(args)...)</div>
 <div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;{</div>
 <div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;    <span class="comment">// unlock the state that was locked in</span></div>
 <div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;    <span class="comment">// synchronization_primitive_raii::synchronization_primitive_raii()</span></div>
 <div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;    unlock_synchronization_primitive(m_SynchronizationPrimitiveRAII.get_object());</div>
 <div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;}</div>
 <div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160; </div>
-<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> Data, <span class="keyword">class</span> SynchronizationPrimitive&gt;</div>
-<div class="line"><a name="l00122"></a><span class="lineno"><a class="line" href="classqx_1_1threads__shared.html#abddcb486e3d24cba3d752ec1ee23dec9">  122</a></span>&#160;<span class="keyword">inline</span> <a class="code" href="classqx_1_1threads__shared.html#abddcb486e3d24cba3d752ec1ee23dec9">threads_shared&lt;Data, SynchronizationPrimitive&gt;::~threads_shared</a>()</div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> data_t, <span class="keyword">class</span> synchronization_primitive_t&gt;</div>
+<div class="line"><a name="l00122"></a><span class="lineno"><a class="line" href="classqx_1_1threads__shared.html#a8b59d7cabb8782e641948e5cfb98bf53">  122</a></span>&#160;<span class="keyword">inline</span> <a class="code" href="classqx_1_1threads__shared.html#a8b59d7cabb8782e641948e5cfb98bf53">threads_shared&lt;data_t, synchronization_primitive_t&gt;::~threads_shared</a>()</div>
 <div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;{</div>
 <div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;    <span class="comment">// wait for the rest of the threads to finish working</span></div>
 <div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;    <span class="comment">// unlocking will be carried out in</span></div>
@@ -198,17 +198,17 @@ $(function() {
 <div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;    lock_synchronization_primitive(m_SynchronizationPrimitiveRAII.get_object());</div>
 <div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;}</div>
 <div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160; </div>
-<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> Data, <span class="keyword">class</span> SynchronizationPrimitive&gt;</div>
-<div class="line"><a name="l00131"></a><span class="lineno"><a class="line" href="classqx_1_1threads__shared.html#ab7224be96c0026a5f693c7bf37d39405">  131</a></span>&#160;<span class="keyword">inline</span> <span class="keyword">typename</span> <a class="code" href="classqx_1_1shared__proxy.html">threads_shared&lt;Data, SynchronizationPrimitive&gt;::proxy</a> <a class="code" href="classqx_1_1threads__shared.html#ab7224be96c0026a5f693c7bf37d39405">threads_shared&lt;Data, SynchronizationPrimitive&gt;::</a></div>
-<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;<a class="code" href="classqx_1_1threads__shared.html#ab7224be96c0026a5f693c7bf37d39405">    lock</a>()</div>
+<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> data_t, <span class="keyword">class</span> synchronization_primitive_t&gt;</div>
+<div class="line"><a name="l00131"></a><span class="lineno"><a class="line" href="classqx_1_1threads__shared.html#a1540b252169d22fef4f4fb61ff9aec5f">  131</a></span>&#160;<span class="keyword">inline</span> <span class="keyword">typename</span> <a class="code" href="classqx_1_1shared__proxy.html">threads_shared&lt;data_t, synchronization_primitive_t&gt;::proxy</a> <a class="code" href="classqx_1_1threads__shared.html#a1540b252169d22fef4f4fb61ff9aec5f">threads_shared&lt;data_t, synchronization_primitive_t&gt;::</a></div>
+<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;<a class="code" href="classqx_1_1threads__shared.html#a1540b252169d22fef4f4fb61ff9aec5f">    lock</a>()</div>
 <div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;{</div>
 <div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="classqx_1_1shared__proxy.html">proxy</a>(&amp;m_Data, m_SynchronizationPrimitiveRAII.get_object(), <span class="keyword">false</span>);</div>
 <div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;}</div>
 <div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160; </div>
-<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> Data, <span class="keyword">class</span> SynchronizationPrimitive&gt;</div>
-<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;<span class="keyword">inline</span> std::optional&lt;typename threads_shared&lt;Data, SynchronizationPrimitive&gt;::proxy&gt; <a class="code" href="classqx_1_1threads__shared.html">threads_shared</a>&lt;</div>
-<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;    Data,</div>
-<div class="line"><a name="l00140"></a><span class="lineno"><a class="line" href="classqx_1_1threads__shared.html#a9edb9fe0308c2a522847b7d90756a756">  140</a></span>&#160;    SynchronizationPrimitive&gt;::try_lock()</div>
+<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> data_t, <span class="keyword">class</span> synchronization_primitive_t&gt;</div>
+<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;<span class="keyword">inline</span> std::optional&lt;typename threads_shared&lt;data_t, synchronization_primitive_t&gt;::proxy&gt; <a class="code" href="classqx_1_1threads__shared.html">threads_shared</a>&lt;</div>
+<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;    data_t,</div>
+<div class="line"><a name="l00140"></a><span class="lineno"><a class="line" href="classqx_1_1threads__shared.html#a1a1698724f64de68c7d6f62c16d1a57d">  140</a></span>&#160;    synchronization_primitive_t&gt;::try_lock()</div>
 <div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;{</div>
 <div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;    <span class="keyword">auto</span> <span class="keywordtype">object</span> = <a class="code" href="classqx_1_1shared__proxy.html">proxy</a>(&amp;m_Data, m_SynchronizationPrimitiveRAII.get_object(), <span class="keyword">true</span>);</div>
 <div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;    <span class="keywordflow">if</span> (<span class="keywordtype">object</span>.m_pSynchronizationPrimitive &amp;&amp; <span class="keywordtype">object</span>.m_pData)</div>
@@ -218,10 +218,10 @@ $(function() {
 <div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;}</div>
 <div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160; </div>
 <div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;} <span class="comment">// namespace qx</span></div>
-<div class="ttc" id="aclassqx_1_1shared__proxy_html"><div class="ttname"><a href="classqx_1_1shared__proxy.html">qx::shared_proxy</a></div><div class="ttdoc">A proxy class that provides access to an object stored in threads_shared and provides raii for synchr...</div><div class="ttdef"><b>Definition:</b> <a href="threads__shared_8h_source.html#l00037">threads_shared.h:38</a></div></div>
-<div class="ttc" id="aclassqx_1_1threads__shared_html"><div class="ttname"><a href="classqx_1_1threads__shared.html">qx::threads_shared</a></div><div class="ttdoc">A class that provides thread-safe access to an object, including construction and destruction.</div><div class="ttdef"><b>Definition:</b> <a href="threads__shared_8h_source.html#l00115">threads_shared.h:116</a></div></div>
-<div class="ttc" id="aclassqx_1_1threads__shared_html_ab7224be96c0026a5f693c7bf37d39405"><div class="ttname"><a href="classqx_1_1threads__shared.html#ab7224be96c0026a5f693c7bf37d39405">qx::threads_shared::lock</a></div><div class="ttdeci">proxy lock()</div><div class="ttdoc">Wait for other threads to finish work with data object and retrieve proxy object.</div><div class="ttdef"><b>Definition:</b> <a href="threads__shared_8inl_source.html#l00131">threads_shared.inl:132</a></div></div>
-<div class="ttc" id="aclassqx_1_1threads__shared_html_abddcb486e3d24cba3d752ec1ee23dec9"><div class="ttname"><a href="classqx_1_1threads__shared.html#abddcb486e3d24cba3d752ec1ee23dec9">qx::threads_shared::~threads_shared</a></div><div class="ttdeci">~threads_shared()</div><div class="ttdoc">threads_shared object destructor</div><div class="ttdef"><b>Definition:</b> <a href="threads__shared_8inl_source.html#l00122">threads_shared.inl:122</a></div></div>
+<div class="ttc" id="aclassqx_1_1shared__proxy_html"><div class="ttname"><a href="classqx_1_1shared__proxy.html">qx::shared_proxy</a></div><div class="ttdoc">A proxy class that provides access to an object stored in threads_shared and provides raii for synchr...</div><div class="ttdef"><b>Definition:</b> <a href="threads__shared_8h_source.html#l00036">threads_shared.h:37</a></div></div>
+<div class="ttc" id="aclassqx_1_1threads__shared_html"><div class="ttname"><a href="classqx_1_1threads__shared.html">qx::threads_shared</a></div><div class="ttdoc">A class that provides thread-safe access to an object, including construction and destruction.</div><div class="ttdef"><b>Definition:</b> <a href="threads__shared_8h_source.html#l00113">threads_shared.h:114</a></div></div>
+<div class="ttc" id="aclassqx_1_1threads__shared_html_a1540b252169d22fef4f4fb61ff9aec5f"><div class="ttname"><a href="classqx_1_1threads__shared.html#a1540b252169d22fef4f4fb61ff9aec5f">qx::threads_shared::lock</a></div><div class="ttdeci">proxy lock()</div><div class="ttdoc">Wait for other threads to finish work with data object and retrieve proxy object.</div><div class="ttdef"><b>Definition:</b> <a href="threads__shared_8inl_source.html#l00131">threads_shared.inl:132</a></div></div>
+<div class="ttc" id="aclassqx_1_1threads__shared_html_a8b59d7cabb8782e641948e5cfb98bf53"><div class="ttname"><a href="classqx_1_1threads__shared.html#a8b59d7cabb8782e641948e5cfb98bf53">qx::threads_shared::~threads_shared</a></div><div class="ttdeci">~threads_shared()</div><div class="ttdoc">threads_shared object destructor</div><div class="ttdef"><b>Definition:</b> <a href="threads__shared_8inl_source.html#l00122">threads_shared.inl:122</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

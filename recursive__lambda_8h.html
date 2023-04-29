@@ -80,15 +80,15 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Classes</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structqx_1_1recursive__lambda.html">qx::recursive_lambda&lt; LambdaType &gt;</a></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structqx_1_1recursive__lambda.html">qx::recursive_lambda&lt; lambda_t &gt;</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a0705b9078465c3c0d0c847e391a09b08"><td class="memTemplParams" colspan="2">template&lt;class LambdaType &gt; </td></tr>
-<tr class="memitem:a0705b9078465c3c0d0c847e391a09b08"><td class="memTemplItemLeft" align="right" valign="top">recursive_lambda&lt; std::decay_t&lt; LambdaType &gt; &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="recursive__lambda_8h.html#a0705b9078465c3c0d0c847e391a09b08">qx::make_recursive_lambda</a> (LambdaType &amp;&amp;lambda)</td></tr>
-<tr class="memdesc:a0705b9078465c3c0d0c847e391a09b08"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create lambda that can be called recursively.  <a href="recursive__lambda_8h.html#a0705b9078465c3c0d0c847e391a09b08">More...</a><br /></td></tr>
-<tr class="separator:a0705b9078465c3c0d0c847e391a09b08"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a73292882c1c12fa4c95b7d8eec980ec1"><td class="memTemplParams" colspan="2">template&lt;class lambda_t &gt; </td></tr>
+<tr class="memitem:a73292882c1c12fa4c95b7d8eec980ec1"><td class="memTemplItemLeft" align="right" valign="top">recursive_lambda&lt; std::decay_t&lt; lambda_t &gt; &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="recursive__lambda_8h.html#a73292882c1c12fa4c95b7d8eec980ec1">qx::make_recursive_lambda</a> (lambda_t &amp;&amp;lambda)</td></tr>
+<tr class="memdesc:a73292882c1c12fa4c95b7d8eec980ec1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create lambda that can be called recursively.  <a href="recursive__lambda_8h.html#a73292882c1c12fa4c95b7d8eec980ec1">More...</a><br /></td></tr>
+<tr class="separator:a73292882c1c12fa4c95b7d8eec980ec1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Contains qx::make_recursive_lambda function. </p>
@@ -98,18 +98,18 @@ Functions</h2></td></tr>
 
 <p class="definition">Definition in file <a class="el" href="recursive__lambda_8h_source.html">recursive_lambda.h</a>.</p>
 </div><h2 class="groupheader">Function Documentation</h2>
-<a id="a0705b9078465c3c0d0c847e391a09b08"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0705b9078465c3c0d0c847e391a09b08">&#9670;&nbsp;</a></span>make_recursive_lambda()</h2>
+<a id="a73292882c1c12fa4c95b7d8eec980ec1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a73292882c1c12fa4c95b7d8eec980ec1">&#9670;&nbsp;</a></span>make_recursive_lambda()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class LambdaType &gt; </div>
+template&lt;class lambda_t &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">recursive_lambda&lt;std::decay_t&lt;LambdaType&gt; &gt; qx::make_recursive_lambda </td>
+          <td class="memname">recursive_lambda&lt;std::decay_t&lt;lambda_t&gt; &gt; qx::make_recursive_lambda </td>
           <td>(</td>
-          <td class="paramtype">LambdaType &amp;&amp;&#160;</td>
+          <td class="paramtype">lambda_t &amp;&amp;&#160;</td>
           <td class="paramname"><em>lambda</em></td><td>)</td>
           <td></td>
         </tr>
@@ -119,7 +119,7 @@ template&lt;class LambdaType &gt; </div>
 <p>Create lambda that can be called recursively. </p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
-    <tr><td class="paramname">LambdaType</td><td>- lambda type: see code example </td></tr>
+    <tr><td class="paramname">lambda_t</td><td>- lambda type: see code example </td></tr>
   </table>
   </dd>
 </dl>
@@ -135,7 +135,7 @@ template&lt;class LambdaType &gt; </div>
   </table>
   </dd>
 </dl>
-<div class="fragment"><div class="line"><span class="keyword">auto</span> calc_fibonacci = <a class="code" href="recursive__lambda_8h.html#a0705b9078465c3c0d0c847e391a09b08">qx::make_recursive_lambda</a>(</div>
+<div class="fragment"><div class="line"><span class="keyword">auto</span> calc_fibonacci = <a class="code" href="recursive__lambda_8h.html#a73292882c1c12fa4c95b7d8eec980ec1">qx::make_recursive_lambda</a>(</div>
 <div class="line">    [](<span class="keyword">const</span> <span class="keyword">auto</span>&amp; calc_fibonacci, <span class="keywordtype">int</span> n) -&gt; <span class="keywordtype">int</span> <span class="comment">// return value is required</span></div>
 <div class="line">    {</div>
 <div class="line">        <span class="keywordflow">if</span> (n == 1 || n == 2)</div>
@@ -148,7 +148,7 @@ template&lt;class LambdaType &gt; </div>
 <div class="line">    });</div>
 <div class="line"> </div>
 <div class="line"><span class="keywordtype">int</span> nResult = calc_fibonacci(6);</div>
-<div class="ttc" id="arecursive__lambda_8h_html_a0705b9078465c3c0d0c847e391a09b08"><div class="ttname"><a href="recursive__lambda_8h.html#a0705b9078465c3c0d0c847e391a09b08">qx::make_recursive_lambda</a></div><div class="ttdeci">recursive_lambda&lt; std::decay_t&lt; LambdaType &gt; &gt; make_recursive_lambda(LambdaType &amp;&amp;lambda)</div><div class="ttdoc">Create lambda that can be called recursively.</div><div class="ttdef"><b>Definition:</b> <a href="recursive__lambda_8h_source.html#l00061">recursive_lambda.h:61</a></div></div>
+<div class="ttc" id="arecursive__lambda_8h_html_a73292882c1c12fa4c95b7d8eec980ec1"><div class="ttname"><a href="recursive__lambda_8h.html#a73292882c1c12fa4c95b7d8eec980ec1">qx::make_recursive_lambda</a></div><div class="ttdeci">recursive_lambda&lt; std::decay_t&lt; lambda_t &gt; &gt; make_recursive_lambda(lambda_t &amp;&amp;lambda)</div><div class="ttdoc">Create lambda that can be called recursively.</div><div class="ttdef"><b>Definition:</b> <a href="recursive__lambda_8h_source.html#l00061">recursive_lambda.h:61</a></div></div>
 </div><!-- fragment --> 
 <p class="definition">Definition at line <a class="el" href="recursive__lambda_8h_source.html#l00061">61</a> of file <a class="el" href="recursive__lambda_8h_source.html">recursive_lambda.h</a>.</p>
 

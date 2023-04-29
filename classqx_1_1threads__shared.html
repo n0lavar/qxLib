@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>qxLib: qx::threads_shared&lt; Data, SynchronizationPrimitive &gt; Class Template Reference</title>
+<title>qxLib: qx::threads_shared&lt; data_t, synchronization_primitive_t &gt; Class Template Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -70,7 +70,7 @@ $(function() {
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="classqx_1_1threads__shared-members.html">List of all members</a>  </div>
   <div class="headertitle">
-<div class="title">qx::threads_shared&lt; Data, SynchronizationPrimitive &gt; Class Template Reference</div>  </div>
+<div class="title">qx::threads_shared&lt; data_t, synchronization_primitive_t &gt; Class Template Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
@@ -81,55 +81,55 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:afc27e6a9e5e17b083f3f01c27d173bdc"><td class="memTemplParams" colspan="2">template&lt;class... Args&gt; </td></tr>
-<tr class="memitem:afc27e6a9e5e17b083f3f01c27d173bdc"><td class="memTemplItemLeft" align="right" valign="top">&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classqx_1_1threads__shared.html#afc27e6a9e5e17b083f3f01c27d173bdc">threads_shared</a> (Args &amp;&amp;... args)</td></tr>
-<tr class="memdesc:afc27e6a9e5e17b083f3f01c27d173bdc"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classqx_1_1threads__shared.html" title="A class that provides thread-safe access to an object, including construction and destruction.">threads_shared</a> object constructor  <a href="classqx_1_1threads__shared.html#afc27e6a9e5e17b083f3f01c27d173bdc">More...</a><br /></td></tr>
-<tr class="separator:afc27e6a9e5e17b083f3f01c27d173bdc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abddcb486e3d24cba3d752ec1ee23dec9"><td class="memItemLeft" align="right" valign="top"><a id="abddcb486e3d24cba3d752ec1ee23dec9"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1threads__shared.html#abddcb486e3d24cba3d752ec1ee23dec9">~threads_shared</a> ()</td></tr>
-<tr class="memdesc:abddcb486e3d24cba3d752ec1ee23dec9"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classqx_1_1threads__shared.html" title="A class that provides thread-safe access to an object, including construction and destruction.">threads_shared</a> object destructor <br /></td></tr>
-<tr class="separator:abddcb486e3d24cba3d752ec1ee23dec9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab7224be96c0026a5f693c7bf37d39405"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classqx_1_1shared__proxy.html">proxy</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1threads__shared.html#ab7224be96c0026a5f693c7bf37d39405">lock</a> ()</td></tr>
-<tr class="memdesc:ab7224be96c0026a5f693c7bf37d39405"><td class="mdescLeft">&#160;</td><td class="mdescRight">Wait for other threads to finish work with data object and retrieve proxy object.  <a href="classqx_1_1threads__shared.html#ab7224be96c0026a5f693c7bf37d39405">More...</a><br /></td></tr>
-<tr class="separator:ab7224be96c0026a5f693c7bf37d39405"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9edb9fe0308c2a522847b7d90756a756"><td class="memItemLeft" align="right" valign="top">std::optional&lt; <a class="el" href="classqx_1_1shared__proxy.html">proxy</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1threads__shared.html#a9edb9fe0308c2a522847b7d90756a756">try_lock</a> ()</td></tr>
-<tr class="memdesc:a9edb9fe0308c2a522847b7d90756a756"><td class="mdescLeft">&#160;</td><td class="mdescRight">Try to lock synchronization primitive and get proxy.  <a href="classqx_1_1threads__shared.html#a9edb9fe0308c2a522847b7d90756a756">More...</a><br /></td></tr>
-<tr class="separator:a9edb9fe0308c2a522847b7d90756a756"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7744f653665454d72922a61a31e5d501"><td class="memTemplParams" colspan="2">template&lt;class... args_t&gt; </td></tr>
+<tr class="memitem:a7744f653665454d72922a61a31e5d501"><td class="memTemplItemLeft" align="right" valign="top">&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classqx_1_1threads__shared.html#a7744f653665454d72922a61a31e5d501">threads_shared</a> (args_t &amp;&amp;... args)</td></tr>
+<tr class="memdesc:a7744f653665454d72922a61a31e5d501"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classqx_1_1threads__shared.html" title="A class that provides thread-safe access to an object, including construction and destruction.">threads_shared</a> object constructor  <a href="classqx_1_1threads__shared.html#a7744f653665454d72922a61a31e5d501">More...</a><br /></td></tr>
+<tr class="separator:a7744f653665454d72922a61a31e5d501"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8b59d7cabb8782e641948e5cfb98bf53"><td class="memItemLeft" align="right" valign="top"><a id="a8b59d7cabb8782e641948e5cfb98bf53"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1threads__shared.html#a8b59d7cabb8782e641948e5cfb98bf53">~threads_shared</a> ()</td></tr>
+<tr class="memdesc:a8b59d7cabb8782e641948e5cfb98bf53"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classqx_1_1threads__shared.html" title="A class that provides thread-safe access to an object, including construction and destruction.">threads_shared</a> object destructor <br /></td></tr>
+<tr class="separator:a8b59d7cabb8782e641948e5cfb98bf53"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1540b252169d22fef4f4fb61ff9aec5f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classqx_1_1shared__proxy.html">proxy</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1threads__shared.html#a1540b252169d22fef4f4fb61ff9aec5f">lock</a> ()</td></tr>
+<tr class="memdesc:a1540b252169d22fef4f4fb61ff9aec5f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Wait for other threads to finish work with data object and retrieve proxy object.  <a href="classqx_1_1threads__shared.html#a1540b252169d22fef4f4fb61ff9aec5f">More...</a><br /></td></tr>
+<tr class="separator:a1540b252169d22fef4f4fb61ff9aec5f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1a1698724f64de68c7d6f62c16d1a57d"><td class="memItemLeft" align="right" valign="top">std::optional&lt; <a class="el" href="classqx_1_1shared__proxy.html">proxy</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1threads__shared.html#a1a1698724f64de68c7d6f62c16d1a57d">try_lock</a> ()</td></tr>
+<tr class="memdesc:a1a1698724f64de68c7d6f62c16d1a57d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Try to lock synchronization primitive and get proxy.  <a href="classqx_1_1threads__shared.html#a1a1698724f64de68c7d6f62c16d1a57d">More...</a><br /></td></tr>
+<tr class="separator:a1a1698724f64de68c7d6f62c16d1a57d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><h3>template&lt;class Data, class SynchronizationPrimitive = std::mutex&gt;<br />
-class qx::threads_shared&lt; Data, SynchronizationPrimitive &gt;</h3>
+<div class="textblock"><h3>template&lt;class data_t, class synchronization_primitive_t = std::mutex&gt;<br />
+class qx::threads_shared&lt; data_t, synchronization_primitive_t &gt;</h3>
 
 <p>A class that provides thread-safe access to an object, including construction and destruction. </p>
-<p>~ </p><dl class="tparams"><dt>Template Parameters</dt><dd>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
-    <tr><td class="paramname">Data</td><td>- data type </td></tr>
-    <tr><td class="paramname">SynchronizationPrimitive</td><td>- synchronization primitive type </td></tr>
+    <tr><td class="paramname">data_t</td><td>- data type </td></tr>
+    <tr><td class="paramname">synchronization_primitive_t</td><td>- synchronization primitive type </td></tr>
   </table>
   </dd>
 </dl>
 <dl class="section author"><dt>Author</dt><dd>Khrapov </dd></dl>
 <dl class="section date"><dt>Date</dt><dd>20.08.2021 </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="threads__shared_8h_source.html#l00115">115</a> of file <a class="el" href="threads__shared_8h_source.html">threads_shared.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="threads__shared_8h_source.html#l00113">113</a> of file <a class="el" href="threads__shared_8h_source.html">threads_shared.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="afc27e6a9e5e17b083f3f01c27d173bdc"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#afc27e6a9e5e17b083f3f01c27d173bdc">&#9670;&nbsp;</a></span>threads_shared()</h2>
+<a id="a7744f653665454d72922a61a31e5d501"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7744f653665454d72922a61a31e5d501">&#9670;&nbsp;</a></span>threads_shared()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class Data , class SynchronizationPrimitive &gt; </div>
+template&lt;class data_t , class synchronization_primitive_t &gt; </div>
 <div class="memtemplate">
-template&lt;class... Args&gt; </div>
+template&lt;class... args_t&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classqx_1_1threads__shared.html">qx::threads_shared</a>&lt; Data, SynchronizationPrimitive &gt;::<a class="el" href="classqx_1_1threads__shared.html">threads_shared</a> </td>
+          <td class="memname"><a class="el" href="classqx_1_1threads__shared.html">qx::threads_shared</a>&lt; data_t, synchronization_primitive_t &gt;::<a class="el" href="classqx_1_1threads__shared.html">threads_shared</a> </td>
           <td>(</td>
-          <td class="paramtype">Args &amp;&amp;...&#160;</td>
+          <td class="paramtype">args_t &amp;&amp;...&#160;</td>
           <td class="paramname"><em>args</em></td><td>)</td>
           <td></td>
         </tr>
@@ -144,7 +144,7 @@ template&lt;class... Args&gt; </div>
 <p><a class="el" href="classqx_1_1threads__shared.html" title="A class that provides thread-safe access to an object, including construction and destruction.">threads_shared</a> object constructor </p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
-    <tr><td class="paramname">Args</td><td>- template parameter pack type </td></tr>
+    <tr><td class="paramname">args_t</td><td>- template parameter pack type </td></tr>
   </table>
   </dd>
 </dl>
@@ -160,19 +160,19 @@ template&lt;class... Args&gt; </div>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="ab7224be96c0026a5f693c7bf37d39405"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab7224be96c0026a5f693c7bf37d39405">&#9670;&nbsp;</a></span>lock()</h2>
+<a id="a1540b252169d22fef4f4fb61ff9aec5f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1540b252169d22fef4f4fb61ff9aec5f">&#9670;&nbsp;</a></span>lock()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class Data , class SynchronizationPrimitive &gt; </div>
+template&lt;class data_t , class synchronization_primitive_t &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classqx_1_1threads__shared.html">threads_shared</a>&lt; Data, SynchronizationPrimitive &gt;::<a class="el" href="classqx_1_1shared__proxy.html">proxy</a> <a class="el" href="classqx_1_1threads__shared.html">qx::threads_shared</a>&lt; Data, SynchronizationPrimitive &gt;::lock</td>
+          <td class="memname"><a class="el" href="classqx_1_1threads__shared.html">threads_shared</a>&lt; data_t, synchronization_primitive_t &gt;::<a class="el" href="classqx_1_1shared__proxy.html">proxy</a> <a class="el" href="classqx_1_1threads__shared.html">qx::threads_shared</a>&lt; data_t, synchronization_primitive_t &gt;::lock</td>
         </tr>
       </table>
   </td>
@@ -194,19 +194,19 @@ template&lt;class Data , class SynchronizationPrimitive &gt; </div>
 
 </div>
 </div>
-<a id="a9edb9fe0308c2a522847b7d90756a756"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9edb9fe0308c2a522847b7d90756a756">&#9670;&nbsp;</a></span>try_lock()</h2>
+<a id="a1a1698724f64de68c7d6f62c16d1a57d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1a1698724f64de68c7d6f62c16d1a57d">&#9670;&nbsp;</a></span>try_lock()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class Data , class SynchronizationPrimitive &gt; </div>
+template&lt;class data_t , class synchronization_primitive_t &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">std::optional&lt; typename <a class="el" href="classqx_1_1threads__shared.html">threads_shared</a>&lt; Data, SynchronizationPrimitive &gt;::<a class="el" href="classqx_1_1shared__proxy.html">proxy</a> &gt; <a class="el" href="classqx_1_1threads__shared.html">qx::threads_shared</a>&lt; Data, SynchronizationPrimitive &gt;::try_lock</td>
+          <td class="memname">std::optional&lt; typename <a class="el" href="classqx_1_1threads__shared.html">threads_shared</a>&lt; data_t, synchronization_primitive_t &gt;::<a class="el" href="classqx_1_1shared__proxy.html">proxy</a> &gt; <a class="el" href="classqx_1_1threads__shared.html">qx::threads_shared</a>&lt; data_t, synchronization_primitive_t &gt;::try_lock</td>
         </tr>
       </table>
   </td>

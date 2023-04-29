@@ -80,14 +80,14 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a6abf067740ce2d8eb572f879aa21a73b"><td class="memTemplParams" colspan="2">template&lt;class FwdItType , class PredicateType &gt; </td></tr>
-<tr class="memitem:a6abf067740ce2d8eb572f879aa21a73b"><td class="memTemplItemLeft" align="right" valign="top">FwdItType&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="remove_8h.html#a6abf067740ce2d8eb572f879aa21a73b">qx::remove_if_i</a> (FwdItType itBegin, FwdItType itEnd, const PredicateType &amp;predicate, size_t nStartIndex=0)</td></tr>
-<tr class="memdesc:a6abf067740ce2d8eb572f879aa21a73b"><td class="mdescLeft">&#160;</td><td class="mdescRight">std::remove_if with index instead of data reference  <a href="remove_8h.html#a6abf067740ce2d8eb572f879aa21a73b">More...</a><br /></td></tr>
-<tr class="separator:a6abf067740ce2d8eb572f879aa21a73b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab23bebf6ca67c642d8d779c15026f9e9"><td class="memTemplParams" colspan="2">template&lt;class ContainerType , class PredicateType &gt; </td></tr>
-<tr class="memitem:ab23bebf6ca67c642d8d779c15026f9e9"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="remove_8h.html#ab23bebf6ca67c642d8d779c15026f9e9">qx::remove_if_i</a> (ContainerType &amp;container, const PredicateType &amp;predicate)</td></tr>
-<tr class="memdesc:ab23bebf6ca67c642d8d779c15026f9e9"><td class="mdescLeft">&#160;</td><td class="mdescRight">std::remove_if with index instead of data reference  <a href="remove_8h.html#ab23bebf6ca67c642d8d779c15026f9e9">More...</a><br /></td></tr>
-<tr class="separator:ab23bebf6ca67c642d8d779c15026f9e9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a54298bab713b102ef609c07e1031475e"><td class="memTemplParams" colspan="2">template&lt;class fwd_it_t , class predicate_t &gt; </td></tr>
+<tr class="memitem:a54298bab713b102ef609c07e1031475e"><td class="memTemplItemLeft" align="right" valign="top">fwd_it_t&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="remove_8h.html#a54298bab713b102ef609c07e1031475e">qx::remove_if_i</a> (fwd_it_t itBegin, fwd_it_t itEnd, const predicate_t &amp;predicate, size_t nStartIndex=0)</td></tr>
+<tr class="memdesc:a54298bab713b102ef609c07e1031475e"><td class="mdescLeft">&#160;</td><td class="mdescRight">std::remove_if with index instead of data reference  <a href="remove_8h.html#a54298bab713b102ef609c07e1031475e">More...</a><br /></td></tr>
+<tr class="separator:a54298bab713b102ef609c07e1031475e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab19f2a47bbc9f0388c6a0a33c17fd0af"><td class="memTemplParams" colspan="2">template&lt;class container_t , class predicate_t &gt; </td></tr>
+<tr class="memitem:ab19f2a47bbc9f0388c6a0a33c17fd0af"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="remove_8h.html#ab19f2a47bbc9f0388c6a0a33c17fd0af">qx::remove_if_i</a> (container_t &amp;container, const predicate_t &amp;predicate)</td></tr>
+<tr class="memdesc:ab19f2a47bbc9f0388c6a0a33c17fd0af"><td class="mdescLeft">&#160;</td><td class="mdescRight">std::remove_if with index instead of data reference  <a href="remove_8h.html#ab19f2a47bbc9f0388c6a0a33c17fd0af">More...</a><br /></td></tr>
+<tr class="separator:ab19f2a47bbc9f0388c6a0a33c17fd0af"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Contains std::remove extensions. </p>
@@ -97,24 +97,24 @@ Functions</h2></td></tr>
 
 <p class="definition">Definition in file <a class="el" href="remove_8h_source.html">remove.h</a>.</p>
 </div><h2 class="groupheader">Function Documentation</h2>
-<a id="ab23bebf6ca67c642d8d779c15026f9e9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab23bebf6ca67c642d8d779c15026f9e9">&#9670;&nbsp;</a></span>remove_if_i() <span class="overload">[1/2]</span></h2>
+<a id="ab19f2a47bbc9f0388c6a0a33c17fd0af"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab19f2a47bbc9f0388c6a0a33c17fd0af">&#9670;&nbsp;</a></span>remove_if_i() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class ContainerType , class PredicateType &gt; </div>
+template&lt;class container_t , class predicate_t &gt; </div>
       <table class="memname">
         <tr>
           <td class="memname">auto qx::remove_if_i </td>
           <td>(</td>
-          <td class="paramtype">ContainerType &amp;&#160;</td>
+          <td class="paramtype">container_t &amp;&#160;</td>
           <td class="paramname"><em>container</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const PredicateType &amp;&#160;</td>
+          <td class="paramtype">const predicate_t &amp;&#160;</td>
           <td class="paramname"><em>predicate</em>&#160;</td>
         </tr>
         <tr>
@@ -128,8 +128,8 @@ template&lt;class ContainerType , class PredicateType &gt; </div>
 <p>std::remove_if with index instead of data reference </p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
-    <tr><td class="paramname">ContainerType</td><td>- container type </td></tr>
-    <tr><td class="paramname">PredicateType</td><td>- predicate type </td></tr>
+    <tr><td class="paramname">container_t</td><td>- container type </td></tr>
+    <tr><td class="paramname">predicate_t</td><td>- predicate type </td></tr>
   </table>
   </dd>
 </dl>
@@ -151,30 +151,30 @@ template&lt;class ContainerType , class PredicateType &gt; </div>
 
 </div>
 </div>
-<a id="a6abf067740ce2d8eb572f879aa21a73b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6abf067740ce2d8eb572f879aa21a73b">&#9670;&nbsp;</a></span>remove_if_i() <span class="overload">[2/2]</span></h2>
+<a id="a54298bab713b102ef609c07e1031475e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a54298bab713b102ef609c07e1031475e">&#9670;&nbsp;</a></span>remove_if_i() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class FwdItType , class PredicateType &gt; </div>
+template&lt;class fwd_it_t , class predicate_t &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">FwdItType qx::remove_if_i </td>
+          <td class="memname">fwd_it_t qx::remove_if_i </td>
           <td>(</td>
-          <td class="paramtype">FwdItType&#160;</td>
+          <td class="paramtype">fwd_it_t&#160;</td>
           <td class="paramname"><em>itBegin</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">FwdItType&#160;</td>
+          <td class="paramtype">fwd_it_t&#160;</td>
           <td class="paramname"><em>itEnd</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const PredicateType &amp;&#160;</td>
+          <td class="paramtype">const predicate_t &amp;&#160;</td>
           <td class="paramname"><em>predicate</em>, </td>
         </tr>
         <tr>
@@ -194,8 +194,8 @@ template&lt;class FwdItType , class PredicateType &gt; </div>
 <p>std::remove_if with index instead of data reference </p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
-    <tr><td class="paramname">FwdItType</td><td>- iterator type </td></tr>
-    <tr><td class="paramname">PredicateType</td><td>- predicate type </td></tr>
+    <tr><td class="paramname">fwd_it_t</td><td>- iterator type </td></tr>
+    <tr><td class="paramname">predicate_t</td><td>- predicate type </td></tr>
   </table>
   </dd>
 </dl>

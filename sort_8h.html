@@ -80,107 +80,108 @@ $(function() {
 <code>#include &lt;algorithm&gt;</code><br />
 <code>#include &lt;functional&gt;</code><br />
 <code>#include &lt;vector&gt;</code><br />
+<code>#include &lt;<a class="el" href="sort_8inl_source.html">qx/algo/sort.inl</a>&gt;</code><br />
 </div>
 <p><a href="sort_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a43f96a6bacd4410b5a430b6ce90fe298"><td class="memTemplParams" colspan="2">template&lt;typename RandomIt &gt; </td></tr>
-<tr class="memitem:a43f96a6bacd4410b5a430b6ce90fe298"><td class="memTemplItemLeft" align="right" valign="top">bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="sort_8h.html#a43f96a6bacd4410b5a430b6ce90fe298">qx::sort_required</a> (RandomIt begin, RandomIt end)</td></tr>
-<tr class="memdesc:a43f96a6bacd4410b5a430b6ce90fe298"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if sort really needed.  <a href="sort_8h.html#a43f96a6bacd4410b5a430b6ce90fe298">More...</a><br /></td></tr>
-<tr class="separator:a43f96a6bacd4410b5a430b6ce90fe298"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab378affcd38bd6981a53cda88cbebbf4"><td class="memTemplParams" colspan="2">template&lt;typename RandomIt , typename Compare  = std::less&lt;&gt;&gt; </td></tr>
-<tr class="memitem:ab378affcd38bd6981a53cda88cbebbf4"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="sort_8h.html#ab378affcd38bd6981a53cda88cbebbf4">qx::sort_insertion</a> (RandomIt begin, RandomIt end, Compare compare=Compare())</td></tr>
-<tr class="memdesc:ab378affcd38bd6981a53cda88cbebbf4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Insertion sort.  <a href="sort_8h.html#ab378affcd38bd6981a53cda88cbebbf4">More...</a><br /></td></tr>
-<tr class="separator:ab378affcd38bd6981a53cda88cbebbf4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af96e8fad66e5ec957f1a5fe451511624"><td class="memTemplParams" colspan="2">template&lt;typename Container , typename Compare  = std::less&lt;&gt;&gt; </td></tr>
-<tr class="memitem:af96e8fad66e5ec957f1a5fe451511624"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="sort_8h.html#af96e8fad66e5ec957f1a5fe451511624">qx::sort_insertion</a> (Container &amp;cont, Compare compare=Compare())</td></tr>
-<tr class="memdesc:af96e8fad66e5ec957f1a5fe451511624"><td class="mdescLeft">&#160;</td><td class="mdescRight">Insertion sort.  <a href="sort_8h.html#af96e8fad66e5ec957f1a5fe451511624">More...</a><br /></td></tr>
-<tr class="separator:af96e8fad66e5ec957f1a5fe451511624"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae4ea6a820c9da3c11ad8a6b235c731eb"><td class="memTemplParams" colspan="2">template&lt;typename RandomIt , typename Compare  = std::less&lt;&gt;&gt; </td></tr>
-<tr class="memitem:ae4ea6a820c9da3c11ad8a6b235c731eb"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="sort_8h.html#ae4ea6a820c9da3c11ad8a6b235c731eb">qx::sort_selection</a> (RandomIt begin, RandomIt end, Compare compare=Compare())</td></tr>
-<tr class="memdesc:ae4ea6a820c9da3c11ad8a6b235c731eb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Selection sort.  <a href="sort_8h.html#ae4ea6a820c9da3c11ad8a6b235c731eb">More...</a><br /></td></tr>
-<tr class="separator:ae4ea6a820c9da3c11ad8a6b235c731eb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae56ecad4837157c73688c2b9bdafedad"><td class="memTemplParams" colspan="2">template&lt;typename Container , typename Compare  = std::less&lt;&gt;&gt; </td></tr>
-<tr class="memitem:ae56ecad4837157c73688c2b9bdafedad"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="sort_8h.html#ae56ecad4837157c73688c2b9bdafedad">qx::sort_selection</a> (Container &amp;cont, Compare compare=Compare())</td></tr>
-<tr class="memdesc:ae56ecad4837157c73688c2b9bdafedad"><td class="mdescLeft">&#160;</td><td class="mdescRight">Selection sort.  <a href="sort_8h.html#ae56ecad4837157c73688c2b9bdafedad">More...</a><br /></td></tr>
-<tr class="separator:ae56ecad4837157c73688c2b9bdafedad"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a64f09dc7b96163d0e89decd573660aec"><td class="memTemplParams" colspan="2">template&lt;typename RandomIt , typename Compare  = std::less&lt;&gt;&gt; </td></tr>
-<tr class="memitem:a64f09dc7b96163d0e89decd573660aec"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="sort_8h.html#a64f09dc7b96163d0e89decd573660aec">qx::sort_bubble</a> (RandomIt begin, RandomIt end, Compare compare=Compare())</td></tr>
-<tr class="memdesc:a64f09dc7b96163d0e89decd573660aec"><td class="mdescLeft">&#160;</td><td class="mdescRight">Bubble sort.  <a href="sort_8h.html#a64f09dc7b96163d0e89decd573660aec">More...</a><br /></td></tr>
-<tr class="separator:a64f09dc7b96163d0e89decd573660aec"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a857d672dbda289a095e9bb32fec09d11"><td class="memTemplParams" colspan="2">template&lt;typename Container , typename Compare  = std::less&lt;&gt;&gt; </td></tr>
-<tr class="memitem:a857d672dbda289a095e9bb32fec09d11"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="sort_8h.html#a857d672dbda289a095e9bb32fec09d11">qx::sort_bubble</a> (Container &amp;cont, Compare compare=Compare())</td></tr>
-<tr class="memdesc:a857d672dbda289a095e9bb32fec09d11"><td class="mdescLeft">&#160;</td><td class="mdescRight">Bubble sort.  <a href="sort_8h.html#a857d672dbda289a095e9bb32fec09d11">More...</a><br /></td></tr>
-<tr class="separator:a857d672dbda289a095e9bb32fec09d11"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad8980dfb200a955a9453f9aa235b6cf2"><td class="memTemplParams" colspan="2">template&lt;typename RandomIt , typename Compare &gt; </td></tr>
-<tr class="memitem:ad8980dfb200a955a9453f9aa235b6cf2"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="sort_8h.html#ad8980dfb200a955a9453f9aa235b6cf2">qx::adjust_heap</a> (RandomIt begin, size_t nHeapSize, size_t nPosition, Compare compare=Compare())</td></tr>
-<tr class="memdesc:ad8980dfb200a955a9453f9aa235b6cf2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adjust heap.  <a href="sort_8h.html#ad8980dfb200a955a9453f9aa235b6cf2">More...</a><br /></td></tr>
-<tr class="separator:ad8980dfb200a955a9453f9aa235b6cf2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab8aed768192e446d4c386d04be1cbc75"><td class="memTemplParams" colspan="2">template&lt;typename RandomIt , typename Compare &gt; </td></tr>
-<tr class="memitem:ab8aed768192e446d4c386d04be1cbc75"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="sort_8h.html#ab8aed768192e446d4c386d04be1cbc75">qx::make_heap</a> (RandomIt begin, RandomIt end, Compare compare=Compare())</td></tr>
-<tr class="memdesc:ab8aed768192e446d4c386d04be1cbc75"><td class="mdescLeft">&#160;</td><td class="mdescRight">Make heap at range.  <a href="sort_8h.html#ab8aed768192e446d4c386d04be1cbc75">More...</a><br /></td></tr>
-<tr class="separator:ab8aed768192e446d4c386d04be1cbc75"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac59f81406782f080db3fc09b72305e0a"><td class="memTemplParams" colspan="2">template&lt;typename RandomIt , typename Compare  = std::less&lt;&gt;&gt; </td></tr>
-<tr class="memitem:ac59f81406782f080db3fc09b72305e0a"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="sort_8h.html#ac59f81406782f080db3fc09b72305e0a">qx::sort_heap</a> (RandomIt begin, RandomIt end, Compare compare=Compare())</td></tr>
-<tr class="memdesc:ac59f81406782f080db3fc09b72305e0a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Heap sort.  <a href="sort_8h.html#ac59f81406782f080db3fc09b72305e0a">More...</a><br /></td></tr>
-<tr class="separator:ac59f81406782f080db3fc09b72305e0a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a44f88ff086bc506f5f6a912e58898467"><td class="memTemplParams" colspan="2">template&lt;typename Container , typename Compare  = std::less&lt;&gt;&gt; </td></tr>
-<tr class="memitem:a44f88ff086bc506f5f6a912e58898467"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="sort_8h.html#a44f88ff086bc506f5f6a912e58898467">qx::sort_heap</a> (Container &amp;cont, Compare compare=Compare())</td></tr>
-<tr class="memdesc:a44f88ff086bc506f5f6a912e58898467"><td class="mdescLeft">&#160;</td><td class="mdescRight">Heap sort.  <a href="sort_8h.html#a44f88ff086bc506f5f6a912e58898467">More...</a><br /></td></tr>
-<tr class="separator:a44f88ff086bc506f5f6a912e58898467"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a93747e47ac964fbbef5c1d75aecd7483"><td class="memTemplParams" colspan="2">template&lt;typename RandomIt , typename Compare  = std::less&lt;&gt;&gt; </td></tr>
-<tr class="memitem:a93747e47ac964fbbef5c1d75aecd7483"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="sort_8h.html#a93747e47ac964fbbef5c1d75aecd7483">qx::sort_quick_hoare</a> (RandomIt begin, RandomIt end, Compare compare=Compare())</td></tr>
-<tr class="memdesc:a93747e47ac964fbbef5c1d75aecd7483"><td class="mdescLeft">&#160;</td><td class="mdescRight">Quick sort based on Hoare partitioning.  <a href="sort_8h.html#a93747e47ac964fbbef5c1d75aecd7483">More...</a><br /></td></tr>
-<tr class="separator:a93747e47ac964fbbef5c1d75aecd7483"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6424a40f2001e416e6d9f6f7d1f423d5"><td class="memTemplParams" colspan="2">template&lt;typename Container , typename Compare  = std::less&lt;&gt;&gt; </td></tr>
-<tr class="memitem:a6424a40f2001e416e6d9f6f7d1f423d5"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="sort_8h.html#a6424a40f2001e416e6d9f6f7d1f423d5">qx::sort_quick_hoare</a> (Container &amp;cont, Compare compare=Compare())</td></tr>
-<tr class="memdesc:a6424a40f2001e416e6d9f6f7d1f423d5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Quick sort based on Hoare partitioning.  <a href="sort_8h.html#a6424a40f2001e416e6d9f6f7d1f423d5">More...</a><br /></td></tr>
-<tr class="separator:a6424a40f2001e416e6d9f6f7d1f423d5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5628961bbbbcaaebff6ca606f99a4ac1"><td class="memTemplParams" colspan="2">template&lt;typename RandomIt , typename Compare  = std::less&lt;&gt;&gt; </td></tr>
-<tr class="memitem:a5628961bbbbcaaebff6ca606f99a4ac1"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="sort_8h.html#a5628961bbbbcaaebff6ca606f99a4ac1">qx::sort_quick_three_way</a> (RandomIt begin, RandomIt end, Compare compare=Compare())</td></tr>
-<tr class="memdesc:a5628961bbbbcaaebff6ca606f99a4ac1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Quick sort based on three-way partitioning.  <a href="sort_8h.html#a5628961bbbbcaaebff6ca606f99a4ac1">More...</a><br /></td></tr>
-<tr class="separator:a5628961bbbbcaaebff6ca606f99a4ac1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae46a9add097440b439202c4563ba94ce"><td class="memTemplParams" colspan="2">template&lt;typename Container , typename Compare  = std::less&lt;&gt;&gt; </td></tr>
-<tr class="memitem:ae46a9add097440b439202c4563ba94ce"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="sort_8h.html#ae46a9add097440b439202c4563ba94ce">qx::sort_quick_three_way</a> (Container &amp;cont, Compare compare=Compare())</td></tr>
-<tr class="memdesc:ae46a9add097440b439202c4563ba94ce"><td class="mdescLeft">&#160;</td><td class="mdescRight">Quick sort based on three-way partitioning.  <a href="sort_8h.html#ae46a9add097440b439202c4563ba94ce">More...</a><br /></td></tr>
-<tr class="separator:ae46a9add097440b439202c4563ba94ce"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a03307bc785d09cf9d4e6486116a2004b"><td class="memTemplParams" colspan="2">template&lt;typename RandomIt , typename Compare  = std::less&lt;&gt;&gt; </td></tr>
-<tr class="memitem:a03307bc785d09cf9d4e6486116a2004b"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="sort_8h.html#a03307bc785d09cf9d4e6486116a2004b">qx::sort_quick_dual_pivot</a> (RandomIt begin, RandomIt end, Compare compare=Compare())</td></tr>
-<tr class="memdesc:a03307bc785d09cf9d4e6486116a2004b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Quick sort based on dual-pivot partitioning.  <a href="sort_8h.html#a03307bc785d09cf9d4e6486116a2004b">More...</a><br /></td></tr>
-<tr class="separator:a03307bc785d09cf9d4e6486116a2004b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a88c6296016d38da61dd295f7f9e897f7"><td class="memTemplParams" colspan="2">template&lt;typename Container , typename Compare  = std::less&lt;&gt;&gt; </td></tr>
-<tr class="memitem:a88c6296016d38da61dd295f7f9e897f7"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="sort_8h.html#a88c6296016d38da61dd295f7f9e897f7">qx::sort_quick_dual_pivot</a> (Container &amp;cont, Compare compare=Compare())</td></tr>
-<tr class="memdesc:a88c6296016d38da61dd295f7f9e897f7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Quick sort based on dual-pivot partitioning.  <a href="sort_8h.html#a88c6296016d38da61dd295f7f9e897f7">More...</a><br /></td></tr>
-<tr class="separator:a88c6296016d38da61dd295f7f9e897f7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a71990eee89b947bb251bd6c6578520de"><td class="memTemplParams" colspan="2">template&lt;typename RandomIt , typename Compare  = std::less&lt;&gt;&gt; </td></tr>
-<tr class="memitem:a71990eee89b947bb251bd6c6578520de"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="sort_8h.html#a71990eee89b947bb251bd6c6578520de">qx::merge</a> (RandomIt begin, RandomIt end, Compare compare=Compare(), vector_of_values&lt; RandomIt &gt; *pPreallocatedBuffer=nullptr)</td></tr>
-<tr class="memdesc:a71990eee89b947bb251bd6c6578520de"><td class="mdescLeft">&#160;</td><td class="mdescRight">Merge with temp vector.  <a href="sort_8h.html#a71990eee89b947bb251bd6c6578520de">More...</a><br /></td></tr>
-<tr class="separator:a71990eee89b947bb251bd6c6578520de"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac8aab079241db7d7834111af09166388"><td class="memTemplParams" colspan="2">template&lt;typename RandomIt , typename Compare  = std::less&lt;&gt;&gt; </td></tr>
-<tr class="memitem:ac8aab079241db7d7834111af09166388"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="sort_8h.html#ac8aab079241db7d7834111af09166388">qx::sort_merge</a> (RandomIt begin, RandomIt end, Compare compare=Compare(), vector_of_values&lt; RandomIt &gt; *pPreallocatedBuffer=nullptr)</td></tr>
-<tr class="memdesc:ac8aab079241db7d7834111af09166388"><td class="mdescLeft">&#160;</td><td class="mdescRight">Merge sort based on merge with temp vector.  <a href="sort_8h.html#ac8aab079241db7d7834111af09166388">More...</a><br /></td></tr>
-<tr class="separator:ac8aab079241db7d7834111af09166388"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aea13af00ce476baa0be7d6a4586ba6f5"><td class="memTemplParams" colspan="2">template&lt;typename Container , typename Compare  = std::less&lt;&gt;&gt; </td></tr>
-<tr class="memitem:aea13af00ce476baa0be7d6a4586ba6f5"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="sort_8h.html#aea13af00ce476baa0be7d6a4586ba6f5">qx::sort_merge</a> (Container &amp;cont, Compare compare=Compare(), vector_of_values&lt; typename Container::iterator &gt; *pPreallocatedBuffer=nullptr)</td></tr>
-<tr class="memdesc:aea13af00ce476baa0be7d6a4586ba6f5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Merge sort based on merge with temp vector.  <a href="sort_8h.html#aea13af00ce476baa0be7d6a4586ba6f5">More...</a><br /></td></tr>
-<tr class="separator:aea13af00ce476baa0be7d6a4586ba6f5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9827d80e3121b7d10b8fdd0df04dc236"><td class="memTemplParams" colspan="2">template&lt;typename RandomIt , typename Compare  = std::less&lt;&gt;&gt; </td></tr>
-<tr class="memitem:a9827d80e3121b7d10b8fdd0df04dc236"><td class="memTemplItemLeft" align="right" valign="top">bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="sort_8h.html#a9827d80e3121b7d10b8fdd0df04dc236">qx::sort_counting</a> (RandomIt begin, RandomIt end, Compare compare=Compare(), size_t nMaxBufferSize=SORT_COUNTING_MAX_BUFFER_SIZE)</td></tr>
-<tr class="memdesc:a9827d80e3121b7d10b8fdd0df04dc236"><td class="mdescLeft">&#160;</td><td class="mdescRight">Counting sort for integral values.  <a href="sort_8h.html#a9827d80e3121b7d10b8fdd0df04dc236">More...</a><br /></td></tr>
-<tr class="separator:a9827d80e3121b7d10b8fdd0df04dc236"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad84997eb486faf97d81a6f8c3b9a2674"><td class="memTemplParams" colspan="2">template&lt;typename Container , typename Compare  = std::less&lt;&gt;&gt; </td></tr>
-<tr class="memitem:ad84997eb486faf97d81a6f8c3b9a2674"><td class="memTemplItemLeft" align="right" valign="top">bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="sort_8h.html#ad84997eb486faf97d81a6f8c3b9a2674">qx::sort_counting</a> (Container &amp;cont, Compare compare=Compare(), size_t nMaxBufferSize=SORT_COUNTING_MAX_BUFFER_SIZE)</td></tr>
-<tr class="memdesc:ad84997eb486faf97d81a6f8c3b9a2674"><td class="mdescLeft">&#160;</td><td class="mdescRight">Counting sort for integral values.  <a href="sort_8h.html#ad84997eb486faf97d81a6f8c3b9a2674">More...</a><br /></td></tr>
-<tr class="separator:ad84997eb486faf97d81a6f8c3b9a2674"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afef53c7f1eb1da77ee42a5932a420182"><td class="memTemplParams" colspan="2">template&lt;typename RandomIt , typename Compare  = std::less&lt;&gt;&gt; </td></tr>
-<tr class="memitem:afef53c7f1eb1da77ee42a5932a420182"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="sort_8h.html#afef53c7f1eb1da77ee42a5932a420182">qx::sort</a> (RandomIt begin, RandomIt end, Compare compare=Compare())</td></tr>
-<tr class="memdesc:afef53c7f1eb1da77ee42a5932a420182"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sort by the most suitable algorithm.  <a href="sort_8h.html#afef53c7f1eb1da77ee42a5932a420182">More...</a><br /></td></tr>
-<tr class="separator:afef53c7f1eb1da77ee42a5932a420182"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5c2b60ab7713af45cf5effb608f260b4"><td class="memTemplParams" colspan="2">template&lt;typename Container , typename Compare  = std::less&lt;&gt;&gt; </td></tr>
-<tr class="memitem:a5c2b60ab7713af45cf5effb608f260b4"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="sort_8h.html#a5c2b60ab7713af45cf5effb608f260b4">qx::sort</a> (Container &amp;cont, Compare compare=Compare())</td></tr>
-<tr class="memdesc:a5c2b60ab7713af45cf5effb608f260b4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sort by the most suitable algorithm.  <a href="sort_8h.html#a5c2b60ab7713af45cf5effb608f260b4">More...</a><br /></td></tr>
-<tr class="separator:a5c2b60ab7713af45cf5effb608f260b4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8df817949492b0f240bf39468fcdeeaa"><td class="memTemplParams" colspan="2">template&lt;class random_it_t &gt; </td></tr>
+<tr class="memitem:a8df817949492b0f240bf39468fcdeeaa"><td class="memTemplItemLeft" align="right" valign="top">bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="sort_8h.html#a8df817949492b0f240bf39468fcdeeaa">qx::sort_required</a> (random_it_t begin, random_it_t end)</td></tr>
+<tr class="memdesc:a8df817949492b0f240bf39468fcdeeaa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if sort really needed.  <a href="sort_8h.html#a8df817949492b0f240bf39468fcdeeaa">More...</a><br /></td></tr>
+<tr class="separator:a8df817949492b0f240bf39468fcdeeaa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3b8c0b67c715a47cc149287e8918bdbd"><td class="memTemplParams" colspan="2">template&lt;class random_it_t , class compare_t  = std::less&lt;&gt;&gt; </td></tr>
+<tr class="memitem:a3b8c0b67c715a47cc149287e8918bdbd"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="sort_8h.html#a3b8c0b67c715a47cc149287e8918bdbd">qx::sort_insertion</a> (random_it_t begin, random_it_t end, compare_t compare=compare_t())</td></tr>
+<tr class="memdesc:a3b8c0b67c715a47cc149287e8918bdbd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Insertion sort.  <a href="sort_8h.html#a3b8c0b67c715a47cc149287e8918bdbd">More...</a><br /></td></tr>
+<tr class="separator:a3b8c0b67c715a47cc149287e8918bdbd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a79937542772ec07a8fa78fb13ee46a37"><td class="memTemplParams" colspan="2">template&lt;class container_t , class compare_t  = std::less&lt;&gt;&gt; </td></tr>
+<tr class="memitem:a79937542772ec07a8fa78fb13ee46a37"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="sort_8h.html#a79937542772ec07a8fa78fb13ee46a37">qx::sort_insertion</a> (container_t &amp;cont, compare_t compare=compare_t())</td></tr>
+<tr class="memdesc:a79937542772ec07a8fa78fb13ee46a37"><td class="mdescLeft">&#160;</td><td class="mdescRight">Insertion sort.  <a href="sort_8h.html#a79937542772ec07a8fa78fb13ee46a37">More...</a><br /></td></tr>
+<tr class="separator:a79937542772ec07a8fa78fb13ee46a37"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2cd37aaef27df84d68f684e7dd6bf563"><td class="memTemplParams" colspan="2">template&lt;class random_it_t , class compare_t  = std::less&lt;&gt;&gt; </td></tr>
+<tr class="memitem:a2cd37aaef27df84d68f684e7dd6bf563"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="sort_8h.html#a2cd37aaef27df84d68f684e7dd6bf563">qx::sort_selection</a> (random_it_t begin, random_it_t end, compare_t compare=compare_t())</td></tr>
+<tr class="memdesc:a2cd37aaef27df84d68f684e7dd6bf563"><td class="mdescLeft">&#160;</td><td class="mdescRight">Selection sort.  <a href="sort_8h.html#a2cd37aaef27df84d68f684e7dd6bf563">More...</a><br /></td></tr>
+<tr class="separator:a2cd37aaef27df84d68f684e7dd6bf563"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a45c6526ec7c325ce33de360aea1623ff"><td class="memTemplParams" colspan="2">template&lt;class container_t , class compare_t  = std::less&lt;&gt;&gt; </td></tr>
+<tr class="memitem:a45c6526ec7c325ce33de360aea1623ff"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="sort_8h.html#a45c6526ec7c325ce33de360aea1623ff">qx::sort_selection</a> (container_t &amp;cont, compare_t compare=compare_t())</td></tr>
+<tr class="memdesc:a45c6526ec7c325ce33de360aea1623ff"><td class="mdescLeft">&#160;</td><td class="mdescRight">Selection sort.  <a href="sort_8h.html#a45c6526ec7c325ce33de360aea1623ff">More...</a><br /></td></tr>
+<tr class="separator:a45c6526ec7c325ce33de360aea1623ff"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4ab109c9cafa6d25acca448167dc244c"><td class="memTemplParams" colspan="2">template&lt;class random_it_t , class compare_t  = std::less&lt;&gt;&gt; </td></tr>
+<tr class="memitem:a4ab109c9cafa6d25acca448167dc244c"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="sort_8h.html#a4ab109c9cafa6d25acca448167dc244c">qx::sort_bubble</a> (random_it_t begin, random_it_t end, compare_t compare=compare_t())</td></tr>
+<tr class="memdesc:a4ab109c9cafa6d25acca448167dc244c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Bubble sort.  <a href="sort_8h.html#a4ab109c9cafa6d25acca448167dc244c">More...</a><br /></td></tr>
+<tr class="separator:a4ab109c9cafa6d25acca448167dc244c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a75845b227d08f9b659b824de4598d55d"><td class="memTemplParams" colspan="2">template&lt;class container_t , class compare_t  = std::less&lt;&gt;&gt; </td></tr>
+<tr class="memitem:a75845b227d08f9b659b824de4598d55d"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="sort_8h.html#a75845b227d08f9b659b824de4598d55d">qx::sort_bubble</a> (container_t &amp;cont, compare_t compare=compare_t())</td></tr>
+<tr class="memdesc:a75845b227d08f9b659b824de4598d55d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Bubble sort.  <a href="sort_8h.html#a75845b227d08f9b659b824de4598d55d">More...</a><br /></td></tr>
+<tr class="separator:a75845b227d08f9b659b824de4598d55d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a85e7f9217cd51d75a7e9d608fc1b487c"><td class="memTemplParams" colspan="2">template&lt;class random_it_t , class compare_t &gt; </td></tr>
+<tr class="memitem:a85e7f9217cd51d75a7e9d608fc1b487c"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="sort_8h.html#a85e7f9217cd51d75a7e9d608fc1b487c">qx::adjust_heap</a> (random_it_t begin, size_t nHeapSize, size_t nPosition, compare_t compare=compare_t())</td></tr>
+<tr class="memdesc:a85e7f9217cd51d75a7e9d608fc1b487c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adjust heap.  <a href="sort_8h.html#a85e7f9217cd51d75a7e9d608fc1b487c">More...</a><br /></td></tr>
+<tr class="separator:a85e7f9217cd51d75a7e9d608fc1b487c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab3d6150a96d1e3da666d93caa53ad844"><td class="memTemplParams" colspan="2">template&lt;class random_it_t , class compare_t &gt; </td></tr>
+<tr class="memitem:ab3d6150a96d1e3da666d93caa53ad844"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="sort_8h.html#ab3d6150a96d1e3da666d93caa53ad844">qx::make_heap</a> (random_it_t begin, random_it_t end, compare_t compare=compare_t())</td></tr>
+<tr class="memdesc:ab3d6150a96d1e3da666d93caa53ad844"><td class="mdescLeft">&#160;</td><td class="mdescRight">Make heap at range.  <a href="sort_8h.html#ab3d6150a96d1e3da666d93caa53ad844">More...</a><br /></td></tr>
+<tr class="separator:ab3d6150a96d1e3da666d93caa53ad844"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4a148394d31d0451b0033cb09374c061"><td class="memTemplParams" colspan="2">template&lt;class random_it_t , class compare_t  = std::less&lt;&gt;&gt; </td></tr>
+<tr class="memitem:a4a148394d31d0451b0033cb09374c061"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="sort_8h.html#a4a148394d31d0451b0033cb09374c061">qx::sort_heap</a> (random_it_t begin, random_it_t end, compare_t compare=compare_t())</td></tr>
+<tr class="memdesc:a4a148394d31d0451b0033cb09374c061"><td class="mdescLeft">&#160;</td><td class="mdescRight">Heap sort.  <a href="sort_8h.html#a4a148394d31d0451b0033cb09374c061">More...</a><br /></td></tr>
+<tr class="separator:a4a148394d31d0451b0033cb09374c061"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae6cb48d00b5ad4bef7ea46b68e612037"><td class="memTemplParams" colspan="2">template&lt;class container_t , class compare_t  = std::less&lt;&gt;&gt; </td></tr>
+<tr class="memitem:ae6cb48d00b5ad4bef7ea46b68e612037"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="sort_8h.html#ae6cb48d00b5ad4bef7ea46b68e612037">qx::sort_heap</a> (container_t &amp;cont, compare_t compare=compare_t())</td></tr>
+<tr class="memdesc:ae6cb48d00b5ad4bef7ea46b68e612037"><td class="mdescLeft">&#160;</td><td class="mdescRight">Heap sort.  <a href="sort_8h.html#ae6cb48d00b5ad4bef7ea46b68e612037">More...</a><br /></td></tr>
+<tr class="separator:ae6cb48d00b5ad4bef7ea46b68e612037"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab1c186b6792d8ff584ad281bf447b0b0"><td class="memTemplParams" colspan="2">template&lt;class random_it_t , class compare_t  = std::less&lt;&gt;&gt; </td></tr>
+<tr class="memitem:ab1c186b6792d8ff584ad281bf447b0b0"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="sort_8h.html#ab1c186b6792d8ff584ad281bf447b0b0">qx::sort_quick_hoare</a> (random_it_t begin, random_it_t end, compare_t compare=compare_t())</td></tr>
+<tr class="memdesc:ab1c186b6792d8ff584ad281bf447b0b0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Quick sort based on Hoare partitioning.  <a href="sort_8h.html#ab1c186b6792d8ff584ad281bf447b0b0">More...</a><br /></td></tr>
+<tr class="separator:ab1c186b6792d8ff584ad281bf447b0b0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8b7c3d8b7029462db58eaefe99302bd3"><td class="memTemplParams" colspan="2">template&lt;class container_t , class compare_t  = std::less&lt;&gt;&gt; </td></tr>
+<tr class="memitem:a8b7c3d8b7029462db58eaefe99302bd3"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="sort_8h.html#a8b7c3d8b7029462db58eaefe99302bd3">qx::sort_quick_hoare</a> (container_t &amp;cont, compare_t compare=compare_t())</td></tr>
+<tr class="memdesc:a8b7c3d8b7029462db58eaefe99302bd3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Quick sort based on Hoare partitioning.  <a href="sort_8h.html#a8b7c3d8b7029462db58eaefe99302bd3">More...</a><br /></td></tr>
+<tr class="separator:a8b7c3d8b7029462db58eaefe99302bd3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3755ca32953236961845385379c1eba5"><td class="memTemplParams" colspan="2">template&lt;class random_it_t , class compare_t  = std::less&lt;&gt;&gt; </td></tr>
+<tr class="memitem:a3755ca32953236961845385379c1eba5"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="sort_8h.html#a3755ca32953236961845385379c1eba5">qx::sort_quick_three_way</a> (random_it_t begin, random_it_t end, compare_t compare=compare_t())</td></tr>
+<tr class="memdesc:a3755ca32953236961845385379c1eba5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Quick sort based on three-way partitioning.  <a href="sort_8h.html#a3755ca32953236961845385379c1eba5">More...</a><br /></td></tr>
+<tr class="separator:a3755ca32953236961845385379c1eba5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4f6ae0517a56ff89ec5c9d5849ef140f"><td class="memTemplParams" colspan="2">template&lt;class container_t , class compare_t  = std::less&lt;&gt;&gt; </td></tr>
+<tr class="memitem:a4f6ae0517a56ff89ec5c9d5849ef140f"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="sort_8h.html#a4f6ae0517a56ff89ec5c9d5849ef140f">qx::sort_quick_three_way</a> (container_t &amp;cont, compare_t compare=compare_t())</td></tr>
+<tr class="memdesc:a4f6ae0517a56ff89ec5c9d5849ef140f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Quick sort based on three-way partitioning.  <a href="sort_8h.html#a4f6ae0517a56ff89ec5c9d5849ef140f">More...</a><br /></td></tr>
+<tr class="separator:a4f6ae0517a56ff89ec5c9d5849ef140f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab891774c07ce86f1fa8039f5d189a68b"><td class="memTemplParams" colspan="2">template&lt;class random_it_t , class compare_t  = std::less&lt;&gt;&gt; </td></tr>
+<tr class="memitem:ab891774c07ce86f1fa8039f5d189a68b"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="sort_8h.html#ab891774c07ce86f1fa8039f5d189a68b">qx::sort_quick_dual_pivot</a> (random_it_t begin, random_it_t end, compare_t compare=compare_t())</td></tr>
+<tr class="memdesc:ab891774c07ce86f1fa8039f5d189a68b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Quick sort based on dual-pivot partitioning.  <a href="sort_8h.html#ab891774c07ce86f1fa8039f5d189a68b">More...</a><br /></td></tr>
+<tr class="separator:ab891774c07ce86f1fa8039f5d189a68b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a74d4c0b96fea81c421a19e43fb51d806"><td class="memTemplParams" colspan="2">template&lt;class container_t , class compare_t  = std::less&lt;&gt;&gt; </td></tr>
+<tr class="memitem:a74d4c0b96fea81c421a19e43fb51d806"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="sort_8h.html#a74d4c0b96fea81c421a19e43fb51d806">qx::sort_quick_dual_pivot</a> (container_t &amp;cont, compare_t compare=compare_t())</td></tr>
+<tr class="memdesc:a74d4c0b96fea81c421a19e43fb51d806"><td class="mdescLeft">&#160;</td><td class="mdescRight">Quick sort based on dual-pivot partitioning.  <a href="sort_8h.html#a74d4c0b96fea81c421a19e43fb51d806">More...</a><br /></td></tr>
+<tr class="separator:a74d4c0b96fea81c421a19e43fb51d806"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab767bf0234b5ca684e10d5bee9f0d1a0"><td class="memTemplParams" colspan="2">template&lt;class random_it_t , class compare_t  = std::less&lt;&gt;&gt; </td></tr>
+<tr class="memitem:ab767bf0234b5ca684e10d5bee9f0d1a0"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="sort_8h.html#ab767bf0234b5ca684e10d5bee9f0d1a0">qx::merge</a> (random_it_t begin, random_it_t end, compare_t compare=compare_t(), vector_of_values&lt; random_it_t &gt; *pPreallocatedBuffer=nullptr)</td></tr>
+<tr class="memdesc:ab767bf0234b5ca684e10d5bee9f0d1a0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Merge with temp vector.  <a href="sort_8h.html#ab767bf0234b5ca684e10d5bee9f0d1a0">More...</a><br /></td></tr>
+<tr class="separator:ab767bf0234b5ca684e10d5bee9f0d1a0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae0ead4b89831b13d335ce1b8d4dd0645"><td class="memTemplParams" colspan="2">template&lt;class random_it_t , class compare_t  = std::less&lt;&gt;&gt; </td></tr>
+<tr class="memitem:ae0ead4b89831b13d335ce1b8d4dd0645"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="sort_8h.html#ae0ead4b89831b13d335ce1b8d4dd0645">qx::sort_merge</a> (random_it_t begin, random_it_t end, compare_t compare=compare_t(), vector_of_values&lt; random_it_t &gt; *pPreallocatedBuffer=nullptr)</td></tr>
+<tr class="memdesc:ae0ead4b89831b13d335ce1b8d4dd0645"><td class="mdescLeft">&#160;</td><td class="mdescRight">Merge sort based on merge with temp vector.  <a href="sort_8h.html#ae0ead4b89831b13d335ce1b8d4dd0645">More...</a><br /></td></tr>
+<tr class="separator:ae0ead4b89831b13d335ce1b8d4dd0645"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aac2ea764f3afd485e56690e87e105d00"><td class="memTemplParams" colspan="2">template&lt;class container_t , class compare_t  = std::less&lt;&gt;&gt; </td></tr>
+<tr class="memitem:aac2ea764f3afd485e56690e87e105d00"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="sort_8h.html#aac2ea764f3afd485e56690e87e105d00">qx::sort_merge</a> (container_t &amp;cont, compare_t compare=compare_t(), vector_of_values&lt; class container_t::iterator &gt; *pPreallocatedBuffer=nullptr)</td></tr>
+<tr class="memdesc:aac2ea764f3afd485e56690e87e105d00"><td class="mdescLeft">&#160;</td><td class="mdescRight">Merge sort based on merge with temp vector.  <a href="sort_8h.html#aac2ea764f3afd485e56690e87e105d00">More...</a><br /></td></tr>
+<tr class="separator:aac2ea764f3afd485e56690e87e105d00"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a65ff4b19aeee985756190fd4fa7c1d87"><td class="memTemplParams" colspan="2">template&lt;class random_it_t , class compare_t  = std::less&lt;&gt;&gt; </td></tr>
+<tr class="memitem:a65ff4b19aeee985756190fd4fa7c1d87"><td class="memTemplItemLeft" align="right" valign="top">bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="sort_8h.html#a65ff4b19aeee985756190fd4fa7c1d87">qx::sort_counting</a> (random_it_t begin, random_it_t end, compare_t compare=compare_t(), size_t nMaxBufferSize=SORT_COUNTING_MAX_BUFFER_SIZE)</td></tr>
+<tr class="memdesc:a65ff4b19aeee985756190fd4fa7c1d87"><td class="mdescLeft">&#160;</td><td class="mdescRight">Counting sort for integral values.  <a href="sort_8h.html#a65ff4b19aeee985756190fd4fa7c1d87">More...</a><br /></td></tr>
+<tr class="separator:a65ff4b19aeee985756190fd4fa7c1d87"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aad8c793c00cc06e2fcd54af7d6e71cce"><td class="memTemplParams" colspan="2">template&lt;class container_t , class compare_t  = std::less&lt;&gt;&gt; </td></tr>
+<tr class="memitem:aad8c793c00cc06e2fcd54af7d6e71cce"><td class="memTemplItemLeft" align="right" valign="top">bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="sort_8h.html#aad8c793c00cc06e2fcd54af7d6e71cce">qx::sort_counting</a> (container_t &amp;cont, compare_t compare=compare_t(), size_t nMaxBufferSize=SORT_COUNTING_MAX_BUFFER_SIZE)</td></tr>
+<tr class="memdesc:aad8c793c00cc06e2fcd54af7d6e71cce"><td class="mdescLeft">&#160;</td><td class="mdescRight">Counting sort for integral values.  <a href="sort_8h.html#aad8c793c00cc06e2fcd54af7d6e71cce">More...</a><br /></td></tr>
+<tr class="separator:aad8c793c00cc06e2fcd54af7d6e71cce"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a56e84ae28c8b16102d3dcddc8990931b"><td class="memTemplParams" colspan="2">template&lt;class random_it_t , class compare_t  = std::less&lt;&gt;&gt; </td></tr>
+<tr class="memitem:a56e84ae28c8b16102d3dcddc8990931b"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="sort_8h.html#a56e84ae28c8b16102d3dcddc8990931b">qx::sort</a> (random_it_t begin, random_it_t end, compare_t compare=compare_t())</td></tr>
+<tr class="memdesc:a56e84ae28c8b16102d3dcddc8990931b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sort by the most suitable algorithm.  <a href="sort_8h.html#a56e84ae28c8b16102d3dcddc8990931b">More...</a><br /></td></tr>
+<tr class="separator:a56e84ae28c8b16102d3dcddc8990931b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af276c2fdaacfc0d50c0cb41770e4de2a"><td class="memTemplParams" colspan="2">template&lt;class container_t , class compare_t  = std::less&lt;&gt;&gt; </td></tr>
+<tr class="memitem:af276c2fdaacfc0d50c0cb41770e4de2a"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="sort_8h.html#af276c2fdaacfc0d50c0cb41770e4de2a">qx::sort</a> (container_t &amp;cont, compare_t compare=compare_t())</td></tr>
+<tr class="memdesc:af276c2fdaacfc0d50c0cb41770e4de2a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sort by the most suitable algorithm.  <a href="sort_8h.html#af276c2fdaacfc0d50c0cb41770e4de2a">More...</a><br /></td></tr>
+<tr class="separator:af276c2fdaacfc0d50c0cb41770e4de2a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
 Variables</h2></td></tr>
@@ -197,13 +198,13 @@ constexpr size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el
 
 <p class="definition">Definition in file <a class="el" href="sort_8h_source.html">sort.h</a>.</p>
 </div><h2 class="groupheader">Function Documentation</h2>
-<a id="ad8980dfb200a955a9453f9aa235b6cf2"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad8980dfb200a955a9453f9aa235b6cf2">&#9670;&nbsp;</a></span>adjust_heap()</h2>
+<a id="a85e7f9217cd51d75a7e9d608fc1b487c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a85e7f9217cd51d75a7e9d608fc1b487c">&#9670;&nbsp;</a></span>adjust_heap()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename RandomIt , typename Compare &gt; </div>
+template&lt;class random_it_t , class compare_t &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -211,7 +212,7 @@ template&lt;typename RandomIt , typename Compare &gt; </div>
         <tr>
           <td class="memname">void qx::adjust_heap </td>
           <td>(</td>
-          <td class="paramtype">RandomIt&#160;</td>
+          <td class="paramtype">random_it_t&#160;</td>
           <td class="paramname"><em>begin</em>, </td>
         </tr>
         <tr>
@@ -229,8 +230,8 @@ template&lt;typename RandomIt , typename Compare &gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">Compare&#160;</td>
-          <td class="paramname"><em>compare</em> = <code>Compare()</code>&#160;</td>
+          <td class="paramtype">compare_t&#160;</td>
+          <td class="paramname"><em>compare</em> = <code>compare_t()</code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -249,14 +250,14 @@ template&lt;typename RandomIt , typename Compare &gt; </div>
 <dl class="section user"><dt>Complexity:</dt><dd>O(log(N)) </dd></dl>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
-    <tr><td class="paramname">RandomIt</td><td>- random access iterator </td></tr>
-    <tr><td class="paramname">Compare</td><td>- function object type satisfying binary predicate requirements </td></tr>
+    <tr><td class="paramname">random_it_t</td><td>- random access iterator </td></tr>
+    <tr><td class="paramname">compare_t</td><td>- function object type satisfying binary predicate requirements </td></tr>
   </table>
   </dd>
 </dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">begin</td><td>- whole heap root RandomIt </td></tr>
+    <tr><td class="paramname">begin</td><td>- whole heap root random_it_type </td></tr>
     <tr><td class="paramname">nHeapSize</td><td>- whole heap size for out of range check </td></tr>
     <tr><td class="paramname">nPosition</td><td>- current root nPosition </td></tr>
     <tr><td class="paramname">compare</td><td>- comparison function </td></tr>
@@ -264,17 +265,17 @@ template&lt;typename RandomIt , typename Compare &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="sort_8h_source.html#l00180">180</a> of file <a class="el" href="sort_8h_source.html">sort.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sort_8inl_source.html#l00090">90</a> of file <a class="el" href="sort_8inl_source.html">sort.inl</a>.</p>
 
 </div>
 </div>
-<a id="ab8aed768192e446d4c386d04be1cbc75"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab8aed768192e446d4c386d04be1cbc75">&#9670;&nbsp;</a></span>make_heap()</h2>
+<a id="ab3d6150a96d1e3da666d93caa53ad844"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab3d6150a96d1e3da666d93caa53ad844">&#9670;&nbsp;</a></span>make_heap()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename RandomIt , typename Compare &gt; </div>
+template&lt;class random_it_t , class compare_t &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -282,20 +283,20 @@ template&lt;typename RandomIt , typename Compare &gt; </div>
         <tr>
           <td class="memname">void qx::make_heap </td>
           <td>(</td>
-          <td class="paramtype">RandomIt&#160;</td>
+          <td class="paramtype">random_it_t&#160;</td>
           <td class="paramname"><em>begin</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">RandomIt&#160;</td>
+          <td class="paramtype">random_it_t&#160;</td>
           <td class="paramname"><em>end</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">Compare&#160;</td>
-          <td class="paramname"><em>compare</em> = <code>Compare()</code>&#160;</td>
+          <td class="paramtype">compare_t&#160;</td>
+          <td class="paramname"><em>compare</em> = <code>compare_t()</code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -313,8 +314,8 @@ template&lt;typename RandomIt , typename Compare &gt; </div>
 <p>Make heap at range. </p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
-    <tr><td class="paramname">RandomIt</td><td>- random access iterator </td></tr>
-    <tr><td class="paramname">Compare</td><td>- function object type satisfying binary predicate requirements </td></tr>
+    <tr><td class="paramname">random_it_t</td><td>- random access iterator </td></tr>
+    <tr><td class="paramname">compare_t</td><td>- function object type satisfying binary predicate requirements </td></tr>
   </table>
   </dd>
 </dl>
@@ -327,17 +328,17 @@ template&lt;typename RandomIt , typename Compare &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="sort_8h_source.html#l00219">219</a> of file <a class="el" href="sort_8h_source.html">sort.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sort_8inl_source.html#l00121">121</a> of file <a class="el" href="sort_8inl_source.html">sort.inl</a>.</p>
 
 </div>
 </div>
-<a id="a71990eee89b947bb251bd6c6578520de"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a71990eee89b947bb251bd6c6578520de">&#9670;&nbsp;</a></span>merge()</h2>
+<a id="ab767bf0234b5ca684e10d5bee9f0d1a0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab767bf0234b5ca684e10d5bee9f0d1a0">&#9670;&nbsp;</a></span>merge()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename RandomIt , typename Compare  = std::less&lt;&gt;&gt; </div>
+template&lt;class random_it_t , class compare_t  = std::less&lt;&gt;&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -345,25 +346,25 @@ template&lt;typename RandomIt , typename Compare  = std::less&lt;&gt;&gt; </div>
         <tr>
           <td class="memname">void qx::merge </td>
           <td>(</td>
-          <td class="paramtype">RandomIt&#160;</td>
+          <td class="paramtype">random_it_t&#160;</td>
           <td class="paramname"><em>begin</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">RandomIt&#160;</td>
+          <td class="paramtype">random_it_t&#160;</td>
           <td class="paramname"><em>end</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">Compare&#160;</td>
-          <td class="paramname"><em>compare</em> = <code>Compare()</code>, </td>
+          <td class="paramtype">compare_t&#160;</td>
+          <td class="paramname"><em>compare</em> = <code>compare_t()</code>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">vector_of_values&lt; RandomIt &gt; *&#160;</td>
+          <td class="paramtype">vector_of_values&lt; random_it_t &gt; *&#160;</td>
           <td class="paramname"><em>pPreallocatedBuffer</em> = <code>nullptr</code>&#160;</td>
         </tr>
         <tr>
@@ -383,8 +384,8 @@ template&lt;typename RandomIt , typename Compare  = std::less&lt;&gt;&gt; </div>
 <dl class="section user"><dt>Complexity:</dt><dd>O(N), O(N) memory </dd></dl>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
-    <tr><td class="paramname">RandomIt</td><td>- random access iterator </td></tr>
-    <tr><td class="paramname">Compare</td><td>- function object type satisfying binary predicate requirements </td></tr>
+    <tr><td class="paramname">random_it_t</td><td>- random access iterator </td></tr>
+    <tr><td class="paramname">compare_t</td><td>- function object type satisfying binary predicate requirements </td></tr>
   </table>
   </dd>
 </dl>
@@ -398,17 +399,17 @@ template&lt;typename RandomIt , typename Compare  = std::less&lt;&gt;&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="sort_8h_source.html#l00570">570</a> of file <a class="el" href="sort_8h_source.html">sort.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sort_8inl_source.html#l00386">386</a> of file <a class="el" href="sort_8inl_source.html">sort.inl</a>.</p>
 
 </div>
 </div>
-<a id="a5c2b60ab7713af45cf5effb608f260b4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5c2b60ab7713af45cf5effb608f260b4">&#9670;&nbsp;</a></span>sort() <span class="overload">[1/2]</span></h2>
+<a id="af276c2fdaacfc0d50c0cb41770e4de2a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af276c2fdaacfc0d50c0cb41770e4de2a">&#9670;&nbsp;</a></span>sort() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename Container , typename Compare  = std::less&lt;&gt;&gt; </div>
+template&lt;class container_t , class compare_t  = std::less&lt;&gt;&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -416,14 +417,14 @@ template&lt;typename Container , typename Compare  = std::less&lt;&gt;&gt; </div
         <tr>
           <td class="memname">void qx::sort </td>
           <td>(</td>
-          <td class="paramtype">Container &amp;&#160;</td>
+          <td class="paramtype">container_t &amp;&#160;</td>
           <td class="paramname"><em>cont</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">Compare&#160;</td>
-          <td class="paramname"><em>compare</em> = <code>Compare()</code>&#160;</td>
+          <td class="paramtype">compare_t&#160;</td>
+          <td class="paramname"><em>compare</em> = <code>compare_t()</code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -441,8 +442,8 @@ template&lt;typename Container , typename Compare  = std::less&lt;&gt;&gt; </div
 <p>Sort by the most suitable algorithm. </p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
-    <tr><td class="paramname">Container</td><td>- container type </td></tr>
-    <tr><td class="paramname">Compare</td><td>- function object type satisfying binary predicate requirements </td></tr>
+    <tr><td class="paramname">container_t</td><td>- container type </td></tr>
+    <tr><td class="paramname">compare_t</td><td>- function object type satisfying binary predicate requirements </td></tr>
   </table>
   </dd>
 </dl>
@@ -454,17 +455,17 @@ template&lt;typename Container , typename Compare  = std::less&lt;&gt;&gt; </div
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="sort_8h_source.html#l00793">793</a> of file <a class="el" href="sort_8h_source.html">sort.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sort_8inl_source.html#l00541">541</a> of file <a class="el" href="sort_8inl_source.html">sort.inl</a>.</p>
 
 </div>
 </div>
-<a id="afef53c7f1eb1da77ee42a5932a420182"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#afef53c7f1eb1da77ee42a5932a420182">&#9670;&nbsp;</a></span>sort() <span class="overload">[2/2]</span></h2>
+<a id="a56e84ae28c8b16102d3dcddc8990931b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a56e84ae28c8b16102d3dcddc8990931b">&#9670;&nbsp;</a></span>sort() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename RandomIt , typename Compare  = std::less&lt;&gt;&gt; </div>
+template&lt;class random_it_t , class compare_t  = std::less&lt;&gt;&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -472,20 +473,20 @@ template&lt;typename RandomIt , typename Compare  = std::less&lt;&gt;&gt; </div>
         <tr>
           <td class="memname">void qx::sort </td>
           <td>(</td>
-          <td class="paramtype">RandomIt&#160;</td>
+          <td class="paramtype">random_it_t&#160;</td>
           <td class="paramname"><em>begin</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">RandomIt&#160;</td>
+          <td class="paramtype">random_it_t&#160;</td>
           <td class="paramname"><em>end</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">Compare&#160;</td>
-          <td class="paramname"><em>compare</em> = <code>Compare()</code>&#160;</td>
+          <td class="paramtype">compare_t&#160;</td>
+          <td class="paramname"><em>compare</em> = <code>compare_t()</code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -503,8 +504,8 @@ template&lt;typename RandomIt , typename Compare  = std::less&lt;&gt;&gt; </div>
 <p>Sort by the most suitable algorithm. </p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
-    <tr><td class="paramname">RandomIt</td><td>- random access iterator </td></tr>
-    <tr><td class="paramname">Compare</td><td>- function object type satisfying binary predicate requirements </td></tr>
+    <tr><td class="paramname">random_it_t</td><td>- random access iterator </td></tr>
+    <tr><td class="paramname">compare_t</td><td>- function object type satisfying binary predicate requirements </td></tr>
   </table>
   </dd>
 </dl>
@@ -517,17 +518,17 @@ template&lt;typename RandomIt , typename Compare  = std::less&lt;&gt;&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="sort_8h_source.html#l00767">767</a> of file <a class="el" href="sort_8h_source.html">sort.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sort_8inl_source.html#l00522">522</a> of file <a class="el" href="sort_8inl_source.html">sort.inl</a>.</p>
 
 </div>
 </div>
-<a id="a857d672dbda289a095e9bb32fec09d11"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a857d672dbda289a095e9bb32fec09d11">&#9670;&nbsp;</a></span>sort_bubble() <span class="overload">[1/2]</span></h2>
+<a id="a75845b227d08f9b659b824de4598d55d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a75845b227d08f9b659b824de4598d55d">&#9670;&nbsp;</a></span>sort_bubble() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename Container , typename Compare  = std::less&lt;&gt;&gt; </div>
+template&lt;class container_t , class compare_t  = std::less&lt;&gt;&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -535,14 +536,14 @@ template&lt;typename Container , typename Compare  = std::less&lt;&gt;&gt; </div
         <tr>
           <td class="memname">void qx::sort_bubble </td>
           <td>(</td>
-          <td class="paramtype">Container &amp;&#160;</td>
+          <td class="paramtype">container_t &amp;&#160;</td>
           <td class="paramname"><em>cont</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">Compare&#160;</td>
-          <td class="paramname"><em>compare</em> = <code>Compare()</code>&#160;</td>
+          <td class="paramtype">compare_t&#160;</td>
+          <td class="paramname"><em>compare</em> = <code>compare_t()</code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -561,8 +562,8 @@ template&lt;typename Container , typename Compare  = std::less&lt;&gt;&gt; </div
 <p>Stable </p><dl class="section user"><dt>Complexity:</dt><dd>O(N^2) </dd></dl>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
-    <tr><td class="paramname">Container</td><td>- container type </td></tr>
-    <tr><td class="paramname">Compare</td><td>- function object type satisfying binary predicate requirements </td></tr>
+    <tr><td class="paramname">container_t</td><td>- container type </td></tr>
+    <tr><td class="paramname">compare_t</td><td>- function object type satisfying binary predicate requirements </td></tr>
   </table>
   </dd>
 </dl>
@@ -574,17 +575,17 @@ template&lt;typename Container , typename Compare  = std::less&lt;&gt;&gt; </div
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="sort_8h_source.html#l00164">164</a> of file <a class="el" href="sort_8h_source.html">sort.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sort_8inl_source.html#l00084">84</a> of file <a class="el" href="sort_8inl_source.html">sort.inl</a>.</p>
 
 </div>
 </div>
-<a id="a64f09dc7b96163d0e89decd573660aec"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a64f09dc7b96163d0e89decd573660aec">&#9670;&nbsp;</a></span>sort_bubble() <span class="overload">[2/2]</span></h2>
+<a id="a4ab109c9cafa6d25acca448167dc244c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4ab109c9cafa6d25acca448167dc244c">&#9670;&nbsp;</a></span>sort_bubble() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename RandomIt , typename Compare  = std::less&lt;&gt;&gt; </div>
+template&lt;class random_it_t , class compare_t  = std::less&lt;&gt;&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -592,20 +593,20 @@ template&lt;typename RandomIt , typename Compare  = std::less&lt;&gt;&gt; </div>
         <tr>
           <td class="memname">void qx::sort_bubble </td>
           <td>(</td>
-          <td class="paramtype">RandomIt&#160;</td>
+          <td class="paramtype">random_it_t&#160;</td>
           <td class="paramname"><em>begin</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">RandomIt&#160;</td>
+          <td class="paramtype">random_it_t&#160;</td>
           <td class="paramname"><em>end</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">Compare&#160;</td>
-          <td class="paramname"><em>compare</em> = <code>Compare()</code>&#160;</td>
+          <td class="paramtype">compare_t&#160;</td>
+          <td class="paramname"><em>compare</em> = <code>compare_t()</code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -624,8 +625,8 @@ template&lt;typename RandomIt , typename Compare  = std::less&lt;&gt;&gt; </div>
 <p>Stable </p><dl class="section user"><dt>Complexity:</dt><dd>O(N^2) </dd></dl>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
-    <tr><td class="paramname">RandomIt</td><td>- random access iterator </td></tr>
-    <tr><td class="paramname">Compare</td><td>- function object type satisfying binary predicate requirements </td></tr>
+    <tr><td class="paramname">random_it_t</td><td>- random access iterator </td></tr>
+    <tr><td class="paramname">compare_t</td><td>- function object type satisfying binary predicate requirements </td></tr>
   </table>
   </dd>
 </dl>
@@ -638,17 +639,17 @@ template&lt;typename RandomIt , typename Compare  = std::less&lt;&gt;&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="sort_8h_source.html#l00134">134</a> of file <a class="el" href="sort_8h_source.html">sort.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sort_8inl_source.html#l00063">63</a> of file <a class="el" href="sort_8inl_source.html">sort.inl</a>.</p>
 
 </div>
 </div>
-<a id="ad84997eb486faf97d81a6f8c3b9a2674"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad84997eb486faf97d81a6f8c3b9a2674">&#9670;&nbsp;</a></span>sort_counting() <span class="overload">[1/2]</span></h2>
+<a id="aad8c793c00cc06e2fcd54af7d6e71cce"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aad8c793c00cc06e2fcd54af7d6e71cce">&#9670;&nbsp;</a></span>sort_counting() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename Container , typename Compare  = std::less&lt;&gt;&gt; </div>
+template&lt;class container_t , class compare_t  = std::less&lt;&gt;&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -656,14 +657,14 @@ template&lt;typename Container , typename Compare  = std::less&lt;&gt;&gt; </div
         <tr>
           <td class="memname">bool qx::sort_counting </td>
           <td>(</td>
-          <td class="paramtype">Container &amp;&#160;</td>
+          <td class="paramtype">container_t &amp;&#160;</td>
           <td class="paramname"><em>cont</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">Compare&#160;</td>
-          <td class="paramname"><em>compare</em> = <code>Compare()</code>, </td>
+          <td class="paramtype">compare_t&#160;</td>
+          <td class="paramname"><em>compare</em> = <code>compare_t()</code>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -688,8 +689,8 @@ template&lt;typename Container , typename Compare  = std::less&lt;&gt;&gt; </div
 <dl class="section user"><dt>Complexity:</dt><dd>O(M + 2 * N), O(M) memory, where M = max - min + 1 </dd></dl>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
-    <tr><td class="paramname">Container</td><td>- container type </td></tr>
-    <tr><td class="paramname">Compare</td><td>- function object type satisfying binary predicate requirements </td></tr>
+    <tr><td class="paramname">container_t</td><td>- container type </td></tr>
+    <tr><td class="paramname">compare_t</td><td>- function object type satisfying binary predicate requirements </td></tr>
   </table>
   </dd>
 </dl>
@@ -708,17 +709,17 @@ template&lt;typename Container , typename Compare  = std::less&lt;&gt;&gt; </div
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="sort_8h_source.html#l00750">750</a> of file <a class="el" href="sort_8h_source.html">sort.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sort_8inl_source.html#l00516">516</a> of file <a class="el" href="sort_8inl_source.html">sort.inl</a>.</p>
 
 </div>
 </div>
-<a id="a9827d80e3121b7d10b8fdd0df04dc236"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9827d80e3121b7d10b8fdd0df04dc236">&#9670;&nbsp;</a></span>sort_counting() <span class="overload">[2/2]</span></h2>
+<a id="a65ff4b19aeee985756190fd4fa7c1d87"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a65ff4b19aeee985756190fd4fa7c1d87">&#9670;&nbsp;</a></span>sort_counting() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename RandomIt , typename Compare  = std::less&lt;&gt;&gt; </div>
+template&lt;class random_it_t , class compare_t  = std::less&lt;&gt;&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -726,20 +727,20 @@ template&lt;typename RandomIt , typename Compare  = std::less&lt;&gt;&gt; </div>
         <tr>
           <td class="memname">bool qx::sort_counting </td>
           <td>(</td>
-          <td class="paramtype">RandomIt&#160;</td>
+          <td class="paramtype">random_it_t&#160;</td>
           <td class="paramname"><em>begin</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">RandomIt&#160;</td>
+          <td class="paramtype">random_it_t&#160;</td>
           <td class="paramname"><em>end</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">Compare&#160;</td>
-          <td class="paramname"><em>compare</em> = <code>Compare()</code>, </td>
+          <td class="paramtype">compare_t&#160;</td>
+          <td class="paramname"><em>compare</em> = <code>compare_t()</code>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -764,8 +765,8 @@ template&lt;typename RandomIt , typename Compare  = std::less&lt;&gt;&gt; </div>
 <dl class="section user"><dt>Complexity:</dt><dd>O(M + 2 * N), O(M) memory, where M = max - min + 1 </dd></dl>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
-    <tr><td class="paramname">RandomIt</td><td>- random access iterator </td></tr>
-    <tr><td class="paramname">Compare</td><td>- function object type satisfying binary predicate requirements </td></tr>
+    <tr><td class="paramname">random_it_t</td><td>- random access iterator </td></tr>
+    <tr><td class="paramname">compare_t</td><td>- function object type satisfying binary predicate requirements </td></tr>
   </table>
   </dd>
 </dl>
@@ -785,17 +786,17 @@ template&lt;typename RandomIt , typename Compare  = std::less&lt;&gt;&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="sort_8h_source.html#l00697">697</a> of file <a class="el" href="sort_8h_source.html">sort.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sort_8inl_source.html#l00477">477</a> of file <a class="el" href="sort_8inl_source.html">sort.inl</a>.</p>
 
 </div>
 </div>
-<a id="a44f88ff086bc506f5f6a912e58898467"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a44f88ff086bc506f5f6a912e58898467">&#9670;&nbsp;</a></span>sort_heap() <span class="overload">[1/2]</span></h2>
+<a id="ae6cb48d00b5ad4bef7ea46b68e612037"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae6cb48d00b5ad4bef7ea46b68e612037">&#9670;&nbsp;</a></span>sort_heap() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename Container , typename Compare  = std::less&lt;&gt;&gt; </div>
+template&lt;class container_t , class compare_t  = std::less&lt;&gt;&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -803,14 +804,14 @@ template&lt;typename Container , typename Compare  = std::less&lt;&gt;&gt; </div
         <tr>
           <td class="memname">void qx::sort_heap </td>
           <td>(</td>
-          <td class="paramtype">Container &amp;&#160;</td>
+          <td class="paramtype">container_t &amp;&#160;</td>
           <td class="paramname"><em>cont</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">Compare&#160;</td>
-          <td class="paramname"><em>compare</em> = <code>Compare()</code>&#160;</td>
+          <td class="paramtype">compare_t&#160;</td>
+          <td class="paramname"><em>compare</em> = <code>compare_t()</code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -829,8 +830,8 @@ template&lt;typename Container , typename Compare  = std::less&lt;&gt;&gt; </div
 <p>Unstable </p><dl class="section user"><dt>Complexity:</dt><dd>O(Nlog(N)) </dd></dl>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
-    <tr><td class="paramname">Container</td><td>- container type </td></tr>
-    <tr><td class="paramname">Compare</td><td>- function object type satisfying binary predicate requirements </td></tr>
+    <tr><td class="paramname">container_t</td><td>- container type </td></tr>
+    <tr><td class="paramname">compare_t</td><td>- function object type satisfying binary predicate requirements </td></tr>
   </table>
   </dd>
 </dl>
@@ -842,17 +843,17 @@ template&lt;typename Container , typename Compare  = std::less&lt;&gt;&gt; </div
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="sort_8h_source.html#l00269">269</a> of file <a class="el" href="sort_8h_source.html">sort.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sort_8inl_source.html#l00152">152</a> of file <a class="el" href="sort_8inl_source.html">sort.inl</a>.</p>
 
 </div>
 </div>
-<a id="ac59f81406782f080db3fc09b72305e0a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac59f81406782f080db3fc09b72305e0a">&#9670;&nbsp;</a></span>sort_heap() <span class="overload">[2/2]</span></h2>
+<a id="a4a148394d31d0451b0033cb09374c061"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4a148394d31d0451b0033cb09374c061">&#9670;&nbsp;</a></span>sort_heap() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename RandomIt , typename Compare  = std::less&lt;&gt;&gt; </div>
+template&lt;class random_it_t , class compare_t  = std::less&lt;&gt;&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -860,20 +861,20 @@ template&lt;typename RandomIt , typename Compare  = std::less&lt;&gt;&gt; </div>
         <tr>
           <td class="memname">void qx::sort_heap </td>
           <td>(</td>
-          <td class="paramtype">RandomIt&#160;</td>
+          <td class="paramtype">random_it_t&#160;</td>
           <td class="paramname"><em>begin</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">RandomIt&#160;</td>
+          <td class="paramtype">random_it_t&#160;</td>
           <td class="paramname"><em>end</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">Compare&#160;</td>
-          <td class="paramname"><em>compare</em> = <code>Compare()</code>&#160;</td>
+          <td class="paramtype">compare_t&#160;</td>
+          <td class="paramname"><em>compare</em> = <code>compare_t()</code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -892,8 +893,8 @@ template&lt;typename RandomIt , typename Compare  = std::less&lt;&gt;&gt; </div>
 <p>Unstable </p><dl class="section user"><dt>Complexity:</dt><dd>O(Nlog(N)) </dd></dl>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
-    <tr><td class="paramname">RandomIt</td><td>- random access iterator </td></tr>
-    <tr><td class="paramname">Compare</td><td>- function object type satisfying binary predicate requirements </td></tr>
+    <tr><td class="paramname">random_it_t</td><td>- random access iterator </td></tr>
+    <tr><td class="paramname">compare_t</td><td>- function object type satisfying binary predicate requirements </td></tr>
   </table>
   </dd>
 </dl>
@@ -906,17 +907,17 @@ template&lt;typename RandomIt , typename Compare  = std::less&lt;&gt;&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="sort_8h_source.html#l00243">243</a> of file <a class="el" href="sort_8h_source.html">sort.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sort_8inl_source.html#l00135">135</a> of file <a class="el" href="sort_8inl_source.html">sort.inl</a>.</p>
 
 </div>
 </div>
-<a id="af96e8fad66e5ec957f1a5fe451511624"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af96e8fad66e5ec957f1a5fe451511624">&#9670;&nbsp;</a></span>sort_insertion() <span class="overload">[1/2]</span></h2>
+<a id="a79937542772ec07a8fa78fb13ee46a37"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a79937542772ec07a8fa78fb13ee46a37">&#9670;&nbsp;</a></span>sort_insertion() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename Container , typename Compare  = std::less&lt;&gt;&gt; </div>
+template&lt;class container_t , class compare_t  = std::less&lt;&gt;&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -924,14 +925,14 @@ template&lt;typename Container , typename Compare  = std::less&lt;&gt;&gt; </div
         <tr>
           <td class="memname">void qx::sort_insertion </td>
           <td>(</td>
-          <td class="paramtype">Container &amp;&#160;</td>
+          <td class="paramtype">container_t &amp;&#160;</td>
           <td class="paramname"><em>cont</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">Compare&#160;</td>
-          <td class="paramname"><em>compare</em> = <code>Compare()</code>&#160;</td>
+          <td class="paramtype">compare_t&#160;</td>
+          <td class="paramname"><em>compare</em> = <code>compare_t()</code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -950,8 +951,8 @@ template&lt;typename Container , typename Compare  = std::less&lt;&gt;&gt; </div
 <p>Stable </p><dl class="section user"><dt>Complexity:</dt><dd>O(N^2) </dd></dl>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
-    <tr><td class="paramname">Container</td><td>- container type </td></tr>
-    <tr><td class="paramname">Compare</td><td>- function object type satisfying binary predicate requirements </td></tr>
+    <tr><td class="paramname">container_t</td><td>- container type </td></tr>
+    <tr><td class="paramname">compare_t</td><td>- function object type satisfying binary predicate requirements </td></tr>
   </table>
   </dd>
 </dl>
@@ -963,17 +964,17 @@ template&lt;typename Container , typename Compare  = std::less&lt;&gt;&gt; </div
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="sort_8h_source.html#l00076">76</a> of file <a class="el" href="sort_8h_source.html">sort.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sort_8inl_source.html#l00034">34</a> of file <a class="el" href="sort_8inl_source.html">sort.inl</a>.</p>
 
 </div>
 </div>
-<a id="ab378affcd38bd6981a53cda88cbebbf4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab378affcd38bd6981a53cda88cbebbf4">&#9670;&nbsp;</a></span>sort_insertion() <span class="overload">[2/2]</span></h2>
+<a id="a3b8c0b67c715a47cc149287e8918bdbd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3b8c0b67c715a47cc149287e8918bdbd">&#9670;&nbsp;</a></span>sort_insertion() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename RandomIt , typename Compare  = std::less&lt;&gt;&gt; </div>
+template&lt;class random_it_t , class compare_t  = std::less&lt;&gt;&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -981,20 +982,20 @@ template&lt;typename RandomIt , typename Compare  = std::less&lt;&gt;&gt; </div>
         <tr>
           <td class="memname">void qx::sort_insertion </td>
           <td>(</td>
-          <td class="paramtype">RandomIt&#160;</td>
+          <td class="paramtype">random_it_t&#160;</td>
           <td class="paramname"><em>begin</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">RandomIt&#160;</td>
+          <td class="paramtype">random_it_t&#160;</td>
           <td class="paramname"><em>end</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">Compare&#160;</td>
-          <td class="paramname"><em>compare</em> = <code>Compare()</code>&#160;</td>
+          <td class="paramtype">compare_t&#160;</td>
+          <td class="paramname"><em>compare</em> = <code>compare_t()</code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -1013,8 +1014,8 @@ template&lt;typename RandomIt , typename Compare  = std::less&lt;&gt;&gt; </div>
 <p>Stable </p><dl class="section user"><dt>Complexity:</dt><dd>O(N^2) </dd></dl>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
-    <tr><td class="paramname">RandomIt</td><td>- random access iterator </td></tr>
-    <tr><td class="paramname">Compare</td><td>- function object type satisfying binary predicate requirements </td></tr>
+    <tr><td class="paramname">random_it_t</td><td>- random access iterator </td></tr>
+    <tr><td class="paramname">compare_t</td><td>- function object type satisfying binary predicate requirements </td></tr>
   </table>
   </dd>
 </dl>
@@ -1027,17 +1028,17 @@ template&lt;typename RandomIt , typename Compare  = std::less&lt;&gt;&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="sort_8h_source.html#l00056">56</a> of file <a class="el" href="sort_8h_source.html">sort.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sort_8inl_source.html#l00023">23</a> of file <a class="el" href="sort_8inl_source.html">sort.inl</a>.</p>
 
 </div>
 </div>
-<a id="aea13af00ce476baa0be7d6a4586ba6f5"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aea13af00ce476baa0be7d6a4586ba6f5">&#9670;&nbsp;</a></span>sort_merge() <span class="overload">[1/2]</span></h2>
+<a id="aac2ea764f3afd485e56690e87e105d00"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aac2ea764f3afd485e56690e87e105d00">&#9670;&nbsp;</a></span>sort_merge() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename Container , typename Compare  = std::less&lt;&gt;&gt; </div>
+template&lt;class container_t , class compare_t  = std::less&lt;&gt;&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -1045,19 +1046,19 @@ template&lt;typename Container , typename Compare  = std::less&lt;&gt;&gt; </div
         <tr>
           <td class="memname">void qx::sort_merge </td>
           <td>(</td>
-          <td class="paramtype">Container &amp;&#160;</td>
+          <td class="paramtype">container_t &amp;&#160;</td>
           <td class="paramname"><em>cont</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">Compare&#160;</td>
-          <td class="paramname"><em>compare</em> = <code>Compare()</code>, </td>
+          <td class="paramtype">compare_t&#160;</td>
+          <td class="paramname"><em>compare</em> = <code>compare_t()</code>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">vector_of_values&lt; typename Container::iterator &gt; *&#160;</td>
+          <td class="paramtype">vector_of_values&lt; class container_t::iterator &gt; *&#160;</td>
           <td class="paramname"><em>pPreallocatedBuffer</em> = <code>nullptr</code>&#160;</td>
         </tr>
         <tr>
@@ -1077,8 +1078,8 @@ template&lt;typename Container , typename Compare  = std::less&lt;&gt;&gt; </div
 <p>Stable </p><dl class="section user"><dt>Complexity:</dt><dd>O(Nlog(N)), O(N) memory </dd></dl>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
-    <tr><td class="paramname">Container</td><td>- container type </td></tr>
-    <tr><td class="paramname">Compare</td><td>- function object type satisfying binary predicate requirements </td></tr>
+    <tr><td class="paramname">container_t</td><td>- container type </td></tr>
+    <tr><td class="paramname">compare_t</td><td>- function object type satisfying binary predicate requirements </td></tr>
   </table>
   </dd>
 </dl>
@@ -1091,17 +1092,15 @@ template&lt;typename Container , typename Compare  = std::less&lt;&gt;&gt; </div
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="sort_8h_source.html#l00677">677</a> of file <a class="el" href="sort_8h_source.html">sort.h</a>.</p>
-
 </div>
 </div>
-<a id="ac8aab079241db7d7834111af09166388"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac8aab079241db7d7834111af09166388">&#9670;&nbsp;</a></span>sort_merge() <span class="overload">[2/2]</span></h2>
+<a id="ae0ead4b89831b13d335ce1b8d4dd0645"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae0ead4b89831b13d335ce1b8d4dd0645">&#9670;&nbsp;</a></span>sort_merge() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename RandomIt , typename Compare  = std::less&lt;&gt;&gt; </div>
+template&lt;class random_it_t , class compare_t  = std::less&lt;&gt;&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -1109,25 +1108,25 @@ template&lt;typename RandomIt , typename Compare  = std::less&lt;&gt;&gt; </div>
         <tr>
           <td class="memname">void qx::sort_merge </td>
           <td>(</td>
-          <td class="paramtype">RandomIt&#160;</td>
+          <td class="paramtype">random_it_t&#160;</td>
           <td class="paramname"><em>begin</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">RandomIt&#160;</td>
+          <td class="paramtype">random_it_t&#160;</td>
           <td class="paramname"><em>end</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">Compare&#160;</td>
-          <td class="paramname"><em>compare</em> = <code>Compare()</code>, </td>
+          <td class="paramtype">compare_t&#160;</td>
+          <td class="paramname"><em>compare</em> = <code>compare_t()</code>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">vector_of_values&lt; RandomIt &gt; *&#160;</td>
+          <td class="paramtype">vector_of_values&lt; random_it_t &gt; *&#160;</td>
           <td class="paramname"><em>pPreallocatedBuffer</em> = <code>nullptr</code>&#160;</td>
         </tr>
         <tr>
@@ -1147,8 +1146,8 @@ template&lt;typename RandomIt , typename Compare  = std::less&lt;&gt;&gt; </div>
 <p>Stable </p><dl class="section user"><dt>Complexity:</dt><dd>O(Nlog(N)), O(N) memory </dd></dl>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
-    <tr><td class="paramname">RandomIt</td><td>- random access iterator </td></tr>
-    <tr><td class="paramname">Compare</td><td>- function object type satisfying binary predicate requirements </td></tr>
+    <tr><td class="paramname">random_it_t</td><td>- random access iterator </td></tr>
+    <tr><td class="paramname">compare_t</td><td>- function object type satisfying binary predicate requirements </td></tr>
   </table>
   </dd>
 </dl>
@@ -1162,17 +1161,17 @@ template&lt;typename RandomIt , typename Compare  = std::less&lt;&gt;&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="sort_8h_source.html#l00640">640</a> of file <a class="el" href="sort_8h_source.html">sort.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sort_8inl_source.html#l00441">441</a> of file <a class="el" href="sort_8inl_source.html">sort.inl</a>.</p>
 
 </div>
 </div>
-<a id="a88c6296016d38da61dd295f7f9e897f7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a88c6296016d38da61dd295f7f9e897f7">&#9670;&nbsp;</a></span>sort_quick_dual_pivot() <span class="overload">[1/2]</span></h2>
+<a id="a74d4c0b96fea81c421a19e43fb51d806"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a74d4c0b96fea81c421a19e43fb51d806">&#9670;&nbsp;</a></span>sort_quick_dual_pivot() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename Container , typename Compare  = std::less&lt;&gt;&gt; </div>
+template&lt;class container_t , class compare_t  = std::less&lt;&gt;&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -1180,14 +1179,14 @@ template&lt;typename Container , typename Compare  = std::less&lt;&gt;&gt; </div
         <tr>
           <td class="memname">void qx::sort_quick_dual_pivot </td>
           <td>(</td>
-          <td class="paramtype">Container &amp;&#160;</td>
+          <td class="paramtype">container_t &amp;&#160;</td>
           <td class="paramname"><em>cont</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">Compare&#160;</td>
-          <td class="paramname"><em>compare</em> = <code>Compare()</code>&#160;</td>
+          <td class="paramtype">compare_t&#160;</td>
+          <td class="paramname"><em>compare</em> = <code>compare_t()</code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -1206,8 +1205,8 @@ template&lt;typename Container , typename Compare  = std::less&lt;&gt;&gt; </div
 <p>Unstable </p><dl class="section user"><dt>Complexity:</dt><dd>O(Nlog(N)) </dd></dl>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
-    <tr><td class="paramname">Container</td><td>- container type </td></tr>
-    <tr><td class="paramname">Compare</td><td>- function object type satisfying binary predicate requirements </td></tr>
+    <tr><td class="paramname">container_t</td><td>- container type </td></tr>
+    <tr><td class="paramname">compare_t</td><td>- function object type satisfying binary predicate requirements </td></tr>
   </table>
   </dd>
 </dl>
@@ -1219,17 +1218,17 @@ template&lt;typename Container , typename Compare  = std::less&lt;&gt;&gt; </div
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="sort_8h_source.html#l00554">554</a> of file <a class="el" href="sort_8h_source.html">sort.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sort_8inl_source.html#l00380">380</a> of file <a class="el" href="sort_8inl_source.html">sort.inl</a>.</p>
 
 </div>
 </div>
-<a id="a03307bc785d09cf9d4e6486116a2004b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a03307bc785d09cf9d4e6486116a2004b">&#9670;&nbsp;</a></span>sort_quick_dual_pivot() <span class="overload">[2/2]</span></h2>
+<a id="ab891774c07ce86f1fa8039f5d189a68b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab891774c07ce86f1fa8039f5d189a68b">&#9670;&nbsp;</a></span>sort_quick_dual_pivot() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename RandomIt , typename Compare  = std::less&lt;&gt;&gt; </div>
+template&lt;class random_it_t , class compare_t  = std::less&lt;&gt;&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -1237,20 +1236,20 @@ template&lt;typename RandomIt , typename Compare  = std::less&lt;&gt;&gt; </div>
         <tr>
           <td class="memname">void qx::sort_quick_dual_pivot </td>
           <td>(</td>
-          <td class="paramtype">RandomIt&#160;</td>
+          <td class="paramtype">random_it_t&#160;</td>
           <td class="paramname"><em>begin</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">RandomIt&#160;</td>
+          <td class="paramtype">random_it_t&#160;</td>
           <td class="paramname"><em>end</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">Compare&#160;</td>
-          <td class="paramname"><em>compare</em> = <code>Compare()</code>&#160;</td>
+          <td class="paramtype">compare_t&#160;</td>
+          <td class="paramname"><em>compare</em> = <code>compare_t()</code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -1269,8 +1268,8 @@ template&lt;typename RandomIt , typename Compare  = std::less&lt;&gt;&gt; </div>
 <p>Unstable </p><dl class="section user"><dt>Complexity:</dt><dd>O(Nlog(N)) </dd></dl>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
-    <tr><td class="paramname">RandomIt</td><td>- random access iterator </td></tr>
-    <tr><td class="paramname">Compare</td><td>- function object type satisfying binary predicate requirements </td></tr>
+    <tr><td class="paramname">random_it_t</td><td>- random access iterator </td></tr>
+    <tr><td class="paramname">compare_t</td><td>- function object type satisfying binary predicate requirements </td></tr>
   </table>
   </dd>
 </dl>
@@ -1283,17 +1282,17 @@ template&lt;typename RandomIt , typename Compare  = std::less&lt;&gt;&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="sort_8h_source.html#l00443">443</a> of file <a class="el" href="sort_8h_source.html">sort.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sort_8inl_source.html#l00278">278</a> of file <a class="el" href="sort_8inl_source.html">sort.inl</a>.</p>
 
 </div>
 </div>
-<a id="a6424a40f2001e416e6d9f6f7d1f423d5"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6424a40f2001e416e6d9f6f7d1f423d5">&#9670;&nbsp;</a></span>sort_quick_hoare() <span class="overload">[1/2]</span></h2>
+<a id="a8b7c3d8b7029462db58eaefe99302bd3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8b7c3d8b7029462db58eaefe99302bd3">&#9670;&nbsp;</a></span>sort_quick_hoare() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename Container , typename Compare  = std::less&lt;&gt;&gt; </div>
+template&lt;class container_t , class compare_t  = std::less&lt;&gt;&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -1301,14 +1300,14 @@ template&lt;typename Container , typename Compare  = std::less&lt;&gt;&gt; </div
         <tr>
           <td class="memname">void qx::sort_quick_hoare </td>
           <td>(</td>
-          <td class="paramtype">Container &amp;&#160;</td>
+          <td class="paramtype">container_t &amp;&#160;</td>
           <td class="paramname"><em>cont</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">Compare&#160;</td>
-          <td class="paramname"><em>compare</em> = <code>Compare()</code>&#160;</td>
+          <td class="paramtype">compare_t&#160;</td>
+          <td class="paramname"><em>compare</em> = <code>compare_t()</code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -1327,8 +1326,8 @@ template&lt;typename Container , typename Compare  = std::less&lt;&gt;&gt; </div
 <p>Unstable </p><dl class="section user"><dt>Complexity:</dt><dd>O(Nlog(N)) </dd></dl>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
-    <tr><td class="paramname">Container</td><td>- container type </td></tr>
-    <tr><td class="paramname">Compare</td><td>- function object type satisfying binary predicate requirements </td></tr>
+    <tr><td class="paramname">container_t</td><td>- container type </td></tr>
+    <tr><td class="paramname">compare_t</td><td>- function object type satisfying binary predicate requirements </td></tr>
   </table>
   </dd>
 </dl>
@@ -1340,17 +1339,17 @@ template&lt;typename Container , typename Compare  = std::less&lt;&gt;&gt; </div
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="sort_8h_source.html#l00324">324</a> of file <a class="el" href="sort_8h_source.html">sort.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sort_8inl_source.html#l00188">188</a> of file <a class="el" href="sort_8inl_source.html">sort.inl</a>.</p>
 
 </div>
 </div>
-<a id="a93747e47ac964fbbef5c1d75aecd7483"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a93747e47ac964fbbef5c1d75aecd7483">&#9670;&nbsp;</a></span>sort_quick_hoare() <span class="overload">[2/2]</span></h2>
+<a id="ab1c186b6792d8ff584ad281bf447b0b0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab1c186b6792d8ff584ad281bf447b0b0">&#9670;&nbsp;</a></span>sort_quick_hoare() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename RandomIt , typename Compare  = std::less&lt;&gt;&gt; </div>
+template&lt;class random_it_t , class compare_t  = std::less&lt;&gt;&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -1358,20 +1357,20 @@ template&lt;typename RandomIt , typename Compare  = std::less&lt;&gt;&gt; </div>
         <tr>
           <td class="memname">void qx::sort_quick_hoare </td>
           <td>(</td>
-          <td class="paramtype">RandomIt&#160;</td>
+          <td class="paramtype">random_it_t&#160;</td>
           <td class="paramname"><em>begin</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">RandomIt&#160;</td>
+          <td class="paramtype">random_it_t&#160;</td>
           <td class="paramname"><em>end</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">Compare&#160;</td>
-          <td class="paramname"><em>compare</em> = <code>Compare()</code>&#160;</td>
+          <td class="paramtype">compare_t&#160;</td>
+          <td class="paramname"><em>compare</em> = <code>compare_t()</code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -1390,8 +1389,8 @@ template&lt;typename RandomIt , typename Compare  = std::less&lt;&gt;&gt; </div>
 <p>Unstable </p><dl class="section user"><dt>Complexity:</dt><dd>O(Nlog(N)) </dd></dl>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
-    <tr><td class="paramname">RandomIt</td><td>- random access iterator </td></tr>
-    <tr><td class="paramname">Compare</td><td>- function object type satisfying binary predicate requirements </td></tr>
+    <tr><td class="paramname">random_it_t</td><td>- random access iterator </td></tr>
+    <tr><td class="paramname">compare_t</td><td>- function object type satisfying binary predicate requirements </td></tr>
   </table>
   </dd>
 </dl>
@@ -1404,17 +1403,17 @@ template&lt;typename RandomIt , typename Compare  = std::less&lt;&gt;&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="sort_8h_source.html#l00285">285</a> of file <a class="el" href="sort_8h_source.html">sort.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sort_8inl_source.html#l00158">158</a> of file <a class="el" href="sort_8inl_source.html">sort.inl</a>.</p>
 
 </div>
 </div>
-<a id="ae46a9add097440b439202c4563ba94ce"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae46a9add097440b439202c4563ba94ce">&#9670;&nbsp;</a></span>sort_quick_three_way() <span class="overload">[1/2]</span></h2>
+<a id="a4f6ae0517a56ff89ec5c9d5849ef140f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4f6ae0517a56ff89ec5c9d5849ef140f">&#9670;&nbsp;</a></span>sort_quick_three_way() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename Container , typename Compare  = std::less&lt;&gt;&gt; </div>
+template&lt;class container_t , class compare_t  = std::less&lt;&gt;&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -1422,14 +1421,14 @@ template&lt;typename Container , typename Compare  = std::less&lt;&gt;&gt; </div
         <tr>
           <td class="memname">void qx::sort_quick_three_way </td>
           <td>(</td>
-          <td class="paramtype">Container &amp;&#160;</td>
+          <td class="paramtype">container_t &amp;&#160;</td>
           <td class="paramname"><em>cont</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">Compare&#160;</td>
-          <td class="paramname"><em>compare</em> = <code>Compare()</code>&#160;</td>
+          <td class="paramtype">compare_t&#160;</td>
+          <td class="paramname"><em>compare</em> = <code>compare_t()</code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -1448,8 +1447,8 @@ template&lt;typename Container , typename Compare  = std::less&lt;&gt;&gt; </div
 <p>Unstable </p><dl class="section user"><dt>Complexity:</dt><dd>O(Nlog(N)) </dd></dl>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
-    <tr><td class="paramname">Container</td><td>- container type </td></tr>
-    <tr><td class="paramname">Compare</td><td>- function object type satisfying binary predicate requirements </td></tr>
+    <tr><td class="paramname">container_t</td><td>- container type </td></tr>
+    <tr><td class="paramname">compare_t</td><td>- function object type satisfying binary predicate requirements </td></tr>
   </table>
   </dd>
 </dl>
@@ -1461,17 +1460,17 @@ template&lt;typename Container , typename Compare  = std::less&lt;&gt;&gt; </div
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="sort_8h_source.html#l00427">427</a> of file <a class="el" href="sort_8h_source.html">sort.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sort_8inl_source.html#l00272">272</a> of file <a class="el" href="sort_8inl_source.html">sort.inl</a>.</p>
 
 </div>
 </div>
-<a id="a5628961bbbbcaaebff6ca606f99a4ac1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5628961bbbbcaaebff6ca606f99a4ac1">&#9670;&nbsp;</a></span>sort_quick_three_way() <span class="overload">[2/2]</span></h2>
+<a id="a3755ca32953236961845385379c1eba5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3755ca32953236961845385379c1eba5">&#9670;&nbsp;</a></span>sort_quick_three_way() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename RandomIt , typename Compare  = std::less&lt;&gt;&gt; </div>
+template&lt;class random_it_t , class compare_t  = std::less&lt;&gt;&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -1479,20 +1478,20 @@ template&lt;typename RandomIt , typename Compare  = std::less&lt;&gt;&gt; </div>
         <tr>
           <td class="memname">void qx::sort_quick_three_way </td>
           <td>(</td>
-          <td class="paramtype">RandomIt&#160;</td>
+          <td class="paramtype">random_it_t&#160;</td>
           <td class="paramname"><em>begin</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">RandomIt&#160;</td>
+          <td class="paramtype">random_it_t&#160;</td>
           <td class="paramname"><em>end</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">Compare&#160;</td>
-          <td class="paramname"><em>compare</em> = <code>Compare()</code>&#160;</td>
+          <td class="paramtype">compare_t&#160;</td>
+          <td class="paramname"><em>compare</em> = <code>compare_t()</code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -1511,8 +1510,8 @@ template&lt;typename RandomIt , typename Compare  = std::less&lt;&gt;&gt; </div>
 <p>Unstable </p><dl class="section user"><dt>Complexity:</dt><dd>O(Nlog(N)) </dd></dl>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
-    <tr><td class="paramname">RandomIt</td><td>- random access iterator </td></tr>
-    <tr><td class="paramname">Compare</td><td>- function object type satisfying binary predicate requirements </td></tr>
+    <tr><td class="paramname">random_it_t</td><td>- random access iterator </td></tr>
+    <tr><td class="paramname">compare_t</td><td>- function object type satisfying binary predicate requirements </td></tr>
   </table>
   </dd>
 </dl>
@@ -1525,17 +1524,17 @@ template&lt;typename RandomIt , typename Compare  = std::less&lt;&gt;&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="sort_8h_source.html#l00340">340</a> of file <a class="el" href="sort_8h_source.html">sort.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sort_8inl_source.html#l00194">194</a> of file <a class="el" href="sort_8inl_source.html">sort.inl</a>.</p>
 
 </div>
 </div>
-<a id="a43f96a6bacd4410b5a430b6ce90fe298"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a43f96a6bacd4410b5a430b6ce90fe298">&#9670;&nbsp;</a></span>sort_required()</h2>
+<a id="a8df817949492b0f240bf39468fcdeeaa"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8df817949492b0f240bf39468fcdeeaa">&#9670;&nbsp;</a></span>sort_required()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename RandomIt &gt; </div>
+template&lt;class random_it_t &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -1543,13 +1542,13 @@ template&lt;typename RandomIt &gt; </div>
         <tr>
           <td class="memname">bool qx::sort_required </td>
           <td>(</td>
-          <td class="paramtype">RandomIt&#160;</td>
+          <td class="paramtype">random_it_t&#160;</td>
           <td class="paramname"><em>begin</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">RandomIt&#160;</td>
+          <td class="paramtype">random_it_t&#160;</td>
           <td class="paramname"><em>end</em>&#160;</td>
         </tr>
         <tr>
@@ -1569,7 +1568,7 @@ template&lt;typename RandomIt &gt; </div>
 <dl class="section user"><dt>Complexity:</dt><dd>O(1) </dd></dl>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
-    <tr><td class="paramname">RandomIt</td><td>- random access iterator </td></tr>
+    <tr><td class="paramname">random_it_t</td><td>- random access iterator </td></tr>
   </table>
   </dd>
 </dl>
@@ -1587,17 +1586,17 @@ template&lt;typename RandomIt &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="sort_8h_source.html#l00037">37</a> of file <a class="el" href="sort_8h_source.html">sort.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sort_8inl_source.html#l00014">14</a> of file <a class="el" href="sort_8inl_source.html">sort.inl</a>.</p>
 
 </div>
 </div>
-<a id="ae56ecad4837157c73688c2b9bdafedad"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae56ecad4837157c73688c2b9bdafedad">&#9670;&nbsp;</a></span>sort_selection() <span class="overload">[1/2]</span></h2>
+<a id="a45c6526ec7c325ce33de360aea1623ff"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a45c6526ec7c325ce33de360aea1623ff">&#9670;&nbsp;</a></span>sort_selection() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename Container , typename Compare  = std::less&lt;&gt;&gt; </div>
+template&lt;class container_t , class compare_t  = std::less&lt;&gt;&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -1605,14 +1604,14 @@ template&lt;typename Container , typename Compare  = std::less&lt;&gt;&gt; </div
         <tr>
           <td class="memname">void qx::sort_selection </td>
           <td>(</td>
-          <td class="paramtype">Container &amp;&#160;</td>
+          <td class="paramtype">container_t &amp;&#160;</td>
           <td class="paramname"><em>cont</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">Compare&#160;</td>
-          <td class="paramname"><em>compare</em> = <code>Compare()</code>&#160;</td>
+          <td class="paramtype">compare_t&#160;</td>
+          <td class="paramname"><em>compare</em> = <code>compare_t()</code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -1631,8 +1630,8 @@ template&lt;typename Container , typename Compare  = std::less&lt;&gt;&gt; </div
 <p>Unstable </p><dl class="section user"><dt>Complexity:</dt><dd>O(N^2) </dd></dl>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
-    <tr><td class="paramname">Container</td><td>- container type </td></tr>
-    <tr><td class="paramname">Compare</td><td>- function object type satisfying binary predicate requirements </td></tr>
+    <tr><td class="paramname">container_t</td><td>- container type </td></tr>
+    <tr><td class="paramname">compare_t</td><td>- function object type satisfying binary predicate requirements </td></tr>
   </table>
   </dd>
 </dl>
@@ -1644,17 +1643,17 @@ template&lt;typename Container , typename Compare  = std::less&lt;&gt;&gt; </div
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="sort_8h_source.html#l00118">118</a> of file <a class="el" href="sort_8h_source.html">sort.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sort_8inl_source.html#l00057">57</a> of file <a class="el" href="sort_8inl_source.html">sort.inl</a>.</p>
 
 </div>
 </div>
-<a id="ae4ea6a820c9da3c11ad8a6b235c731eb"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae4ea6a820c9da3c11ad8a6b235c731eb">&#9670;&nbsp;</a></span>sort_selection() <span class="overload">[2/2]</span></h2>
+<a id="a2cd37aaef27df84d68f684e7dd6bf563"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2cd37aaef27df84d68f684e7dd6bf563">&#9670;&nbsp;</a></span>sort_selection() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename RandomIt , typename Compare  = std::less&lt;&gt;&gt; </div>
+template&lt;class random_it_t , class compare_t  = std::less&lt;&gt;&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -1662,20 +1661,20 @@ template&lt;typename RandomIt , typename Compare  = std::less&lt;&gt;&gt; </div>
         <tr>
           <td class="memname">void qx::sort_selection </td>
           <td>(</td>
-          <td class="paramtype">RandomIt&#160;</td>
+          <td class="paramtype">random_it_t&#160;</td>
           <td class="paramname"><em>begin</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">RandomIt&#160;</td>
+          <td class="paramtype">random_it_t&#160;</td>
           <td class="paramname"><em>end</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">Compare&#160;</td>
-          <td class="paramname"><em>compare</em> = <code>Compare()</code>&#160;</td>
+          <td class="paramtype">compare_t&#160;</td>
+          <td class="paramname"><em>compare</em> = <code>compare_t()</code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -1694,8 +1693,8 @@ template&lt;typename RandomIt , typename Compare  = std::less&lt;&gt;&gt; </div>
 <p>Unstable </p><dl class="section user"><dt>Complexity:</dt><dd>O(N^2) </dd></dl>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
-    <tr><td class="paramname">RandomIt</td><td>- random access iterator </td></tr>
-    <tr><td class="paramname">Compare</td><td>- function object type satisfying binary predicate requirements </td></tr>
+    <tr><td class="paramname">random_it_t</td><td>- random access iterator </td></tr>
+    <tr><td class="paramname">compare_t</td><td>- function object type satisfying binary predicate requirements </td></tr>
   </table>
   </dd>
 </dl>
@@ -1708,7 +1707,7 @@ template&lt;typename RandomIt , typename Compare  = std::less&lt;&gt;&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="sort_8h_source.html#l00092">92</a> of file <a class="el" href="sort_8h_source.html">sort.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sort_8inl_source.html#l00040">40</a> of file <a class="el" href="sort_8inl_source.html">sort.inl</a>.</p>
 
 </div>
 </div>

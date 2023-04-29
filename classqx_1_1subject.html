@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>qxLib: qx::subject&lt; TObserver &gt; Class Template Reference</title>
+<title>qxLib: qx::subject&lt; observer_t &gt; Class Template Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -70,7 +70,7 @@ $(function() {
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="classqx_1_1subject-members.html">List of all members</a>  </div>
   <div class="headertitle">
-<div class="title">qx::subject&lt; TObserver &gt; Class Template Reference</div>  </div>
+<div class="title">qx::subject&lt; observer_t &gt; Class Template Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
@@ -79,70 +79,70 @@ $(function() {
 
 <p><code>#include &lt;<a class="el" href="observer_8h_source.html">observer.h</a>&gt;</code></p>
 <div class="dynheader">
-Inheritance diagram for qx::subject&lt; TObserver &gt;:</div>
+Inheritance diagram for qx::subject&lt; observer_t &gt;:</div>
 <div class="dyncontent">
  <div class="center">
-  <img src="classqx_1_1subject.png" usemap="#qx::subject_3C_20TObserver_20_3E_map" alt=""/>
-  <map id="qx::subject_3C_20TObserver_20_3E_map" name="qx::subject_3C_20TObserver_20_3E_map">
+  <img src="classqx_1_1subject.png" usemap="#qx::subject_3C_20observer_5Ft_20_3E_map" alt=""/>
+  <map id="qx::subject_3C_20observer_5Ft_20_3E_map" name="qx::subject_3C_20observer_5Ft_20_3E_map">
 <area href="classqx_1_1base__subject.html" title="Base subject class." alt="qx::base_subject" shape="rect" coords="0,0,155,24"/>
   </map>
 </div></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:acbab112508bbb43a9a0770c8a1ac195c"><td class="memItemLeft" align="right" valign="top"><a id="acbab112508bbb43a9a0770c8a1ac195c"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1subject.html#acbab112508bbb43a9a0770c8a1ac195c">subject</a> ()=default</td></tr>
-<tr class="memdesc:acbab112508bbb43a9a0770c8a1ac195c"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classqx_1_1base__subject.html" title="Base subject class.">base_subject</a> object constructor <br /></td></tr>
-<tr class="separator:acbab112508bbb43a9a0770c8a1ac195c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a24b3cdf6d13e912f6d31cdd7a51a67eb"><td class="memItemLeft" align="right" valign="top"><a id="a24b3cdf6d13e912f6d31cdd7a51a67eb"></a>
-virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1subject.html#a24b3cdf6d13e912f6d31cdd7a51a67eb">~subject</a> () override</td></tr>
-<tr class="memdesc:a24b3cdf6d13e912f6d31cdd7a51a67eb"><td class="mdescLeft">&#160;</td><td class="mdescRight">subject object destructor <br /></td></tr>
-<tr class="separator:a24b3cdf6d13e912f6d31cdd7a51a67eb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a34fce9cad9b0f3c45574049e2002f1c9"><td class="memItemLeft" align="right" valign="top">observer_token&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1subject.html#a34fce9cad9b0f3c45574049e2002f1c9">attach</a> (TObserver *pObserver) noexcept</td></tr>
-<tr class="memdesc:a34fce9cad9b0f3c45574049e2002f1c9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Attach observer to this subject.  <a href="classqx_1_1subject.html#a34fce9cad9b0f3c45574049e2002f1c9">More...</a><br /></td></tr>
-<tr class="separator:a34fce9cad9b0f3c45574049e2002f1c9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aea3b74aad10b993fd343e6dd92c640f9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1subject.html#aea3b74aad10b993fd343e6dd92c640f9">notify</a> (const notify_func &amp;notifyFunc) const noexcept</td></tr>
-<tr class="memdesc:aea3b74aad10b993fd343e6dd92c640f9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Notify all observers.  <a href="classqx_1_1subject.html#aea3b74aad10b993fd343e6dd92c640f9">More...</a><br /></td></tr>
-<tr class="separator:aea3b74aad10b993fd343e6dd92c640f9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a339e4e832421650d2eae548b844c9586"><td class="memItemLeft" align="right" valign="top">iterator&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1subject.html#a339e4e832421650d2eae548b844c9586">begin</a> ()</td></tr>
-<tr class="memdesc:a339e4e832421650d2eae548b844c9586"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return iterator to beginning.  <a href="classqx_1_1subject.html#a339e4e832421650d2eae548b844c9586">More...</a><br /></td></tr>
-<tr class="separator:a339e4e832421650d2eae548b844c9586"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aecb2d35649dba41a5624a3e1123813b4"><td class="memItemLeft" align="right" valign="top">const_iterator&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1subject.html#aecb2d35649dba41a5624a3e1123813b4">begin</a> () const</td></tr>
-<tr class="memdesc:aecb2d35649dba41a5624a3e1123813b4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return iterator to beginning.  <a href="classqx_1_1subject.html#aecb2d35649dba41a5624a3e1123813b4">More...</a><br /></td></tr>
-<tr class="separator:aecb2d35649dba41a5624a3e1123813b4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7084dbe72dda51598aad61dba0a48e92"><td class="memItemLeft" align="right" valign="top">const_iterator&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1subject.html#a7084dbe72dda51598aad61dba0a48e92">cbegin</a> () const</td></tr>
-<tr class="memdesc:a7084dbe72dda51598aad61dba0a48e92"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return const iterator to beginning.  <a href="classqx_1_1subject.html#a7084dbe72dda51598aad61dba0a48e92">More...</a><br /></td></tr>
-<tr class="separator:a7084dbe72dda51598aad61dba0a48e92"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae1b3dfc01308e3e85f3d6c97272d0c22"><td class="memItemLeft" align="right" valign="top">iterator&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1subject.html#ae1b3dfc01308e3e85f3d6c97272d0c22">end</a> ()</td></tr>
-<tr class="memdesc:ae1b3dfc01308e3e85f3d6c97272d0c22"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return iterator to end.  <a href="classqx_1_1subject.html#ae1b3dfc01308e3e85f3d6c97272d0c22">More...</a><br /></td></tr>
-<tr class="separator:ae1b3dfc01308e3e85f3d6c97272d0c22"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab88e67bf0e682fbba6cd496b3bd6d84e"><td class="memItemLeft" align="right" valign="top">const_iterator&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1subject.html#ab88e67bf0e682fbba6cd496b3bd6d84e">end</a> () const</td></tr>
-<tr class="memdesc:ab88e67bf0e682fbba6cd496b3bd6d84e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return iterator to end.  <a href="classqx_1_1subject.html#ab88e67bf0e682fbba6cd496b3bd6d84e">More...</a><br /></td></tr>
-<tr class="separator:ab88e67bf0e682fbba6cd496b3bd6d84e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aec9aa2c75f1e202b56442f55dd24c14b"><td class="memItemLeft" align="right" valign="top">const_iterator&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1subject.html#aec9aa2c75f1e202b56442f55dd24c14b">cend</a> () const</td></tr>
-<tr class="memdesc:aec9aa2c75f1e202b56442f55dd24c14b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return const iterator to end.  <a href="classqx_1_1subject.html#aec9aa2c75f1e202b56442f55dd24c14b">More...</a><br /></td></tr>
-<tr class="separator:aec9aa2c75f1e202b56442f55dd24c14b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a527dc7d2d9c24329017527db64e3e9ce"><td class="memItemLeft" align="right" valign="top">reverse_iterator&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1subject.html#a527dc7d2d9c24329017527db64e3e9ce">rbegin</a> ()</td></tr>
-<tr class="memdesc:a527dc7d2d9c24329017527db64e3e9ce"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return reverse iterator to reverse beginning.  <a href="classqx_1_1subject.html#a527dc7d2d9c24329017527db64e3e9ce">More...</a><br /></td></tr>
-<tr class="separator:a527dc7d2d9c24329017527db64e3e9ce"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5d91bc84adc1fab70e066b0a05d75bc3"><td class="memItemLeft" align="right" valign="top">const_reverse_iterator&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1subject.html#a5d91bc84adc1fab70e066b0a05d75bc3">rbegin</a> () const</td></tr>
-<tr class="memdesc:a5d91bc84adc1fab70e066b0a05d75bc3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return reverse iterator to reverse beginning.  <a href="classqx_1_1subject.html#a5d91bc84adc1fab70e066b0a05d75bc3">More...</a><br /></td></tr>
-<tr class="separator:a5d91bc84adc1fab70e066b0a05d75bc3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a53e4755cdc10f536fe6f899c1d20070b"><td class="memItemLeft" align="right" valign="top">const_reverse_iterator&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1subject.html#a53e4755cdc10f536fe6f899c1d20070b">crbegin</a> () const</td></tr>
-<tr class="memdesc:a53e4755cdc10f536fe6f899c1d20070b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return const reverse iterator to reverse beginning.  <a href="classqx_1_1subject.html#a53e4755cdc10f536fe6f899c1d20070b">More...</a><br /></td></tr>
-<tr class="separator:a53e4755cdc10f536fe6f899c1d20070b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afd8d98deba336f00b555af2c7fcf895c"><td class="memItemLeft" align="right" valign="top">reverse_iterator&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1subject.html#afd8d98deba336f00b555af2c7fcf895c">rend</a> ()</td></tr>
-<tr class="memdesc:afd8d98deba336f00b555af2c7fcf895c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return reverse iterator to reverse end.  <a href="classqx_1_1subject.html#afd8d98deba336f00b555af2c7fcf895c">More...</a><br /></td></tr>
-<tr class="separator:afd8d98deba336f00b555af2c7fcf895c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a52e11b609af63e3bb4ba175f3501c4d1"><td class="memItemLeft" align="right" valign="top">const_reverse_iterator&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1subject.html#a52e11b609af63e3bb4ba175f3501c4d1">rend</a> () const</td></tr>
-<tr class="memdesc:a52e11b609af63e3bb4ba175f3501c4d1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return reverse iterator to reverse end.  <a href="classqx_1_1subject.html#a52e11b609af63e3bb4ba175f3501c4d1">More...</a><br /></td></tr>
-<tr class="separator:a52e11b609af63e3bb4ba175f3501c4d1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abd619eae21b8789c76c319c465945482"><td class="memItemLeft" align="right" valign="top">const_reverse_iterator&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1subject.html#abd619eae21b8789c76c319c465945482">crend</a> () const</td></tr>
-<tr class="memdesc:abd619eae21b8789c76c319c465945482"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return const reverse iterator to reverse end.  <a href="classqx_1_1subject.html#abd619eae21b8789c76c319c465945482">More...</a><br /></td></tr>
-<tr class="separator:abd619eae21b8789c76c319c465945482"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a95efd3cf73da504fccd537c730b70e27"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1subject.html#a95efd3cf73da504fccd537c730b70e27">get_num_observers</a> () const noexcept</td></tr>
-<tr class="memdesc:a95efd3cf73da504fccd537c730b70e27"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get number of observers attached to this subject.  <a href="classqx_1_1subject.html#a95efd3cf73da504fccd537c730b70e27">More...</a><br /></td></tr>
-<tr class="separator:a95efd3cf73da504fccd537c730b70e27"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab202aacebd5869344a5ebac2ab65987f"><td class="memItemLeft" align="right" valign="top"><a id="ab202aacebd5869344a5ebac2ab65987f"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1subject.html#ab202aacebd5869344a5ebac2ab65987f">subject</a> ()=default</td></tr>
+<tr class="memdesc:ab202aacebd5869344a5ebac2ab65987f"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classqx_1_1base__subject.html" title="Base subject class.">base_subject</a> object constructor <br /></td></tr>
+<tr class="separator:ab202aacebd5869344a5ebac2ab65987f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8a7d6c7a19f4d2bacb568554f8dd7563"><td class="memItemLeft" align="right" valign="top"><a id="a8a7d6c7a19f4d2bacb568554f8dd7563"></a>
+virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1subject.html#a8a7d6c7a19f4d2bacb568554f8dd7563">~subject</a> () override</td></tr>
+<tr class="memdesc:a8a7d6c7a19f4d2bacb568554f8dd7563"><td class="mdescLeft">&#160;</td><td class="mdescRight">subject object destructor <br /></td></tr>
+<tr class="separator:a8a7d6c7a19f4d2bacb568554f8dd7563"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5f4cfbc96d15b50dc9f328d5bdd280a7"><td class="memItemLeft" align="right" valign="top">observer_token&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1subject.html#a5f4cfbc96d15b50dc9f328d5bdd280a7">attach</a> (observer_t *pObserver) noexcept</td></tr>
+<tr class="memdesc:a5f4cfbc96d15b50dc9f328d5bdd280a7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Attach observer to this subject.  <a href="classqx_1_1subject.html#a5f4cfbc96d15b50dc9f328d5bdd280a7">More...</a><br /></td></tr>
+<tr class="separator:a5f4cfbc96d15b50dc9f328d5bdd280a7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acaa4f354b33930beff8b791d89d449e8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1subject.html#acaa4f354b33930beff8b791d89d449e8">notify</a> (const notify_func &amp;notifyFunc) const noexcept</td></tr>
+<tr class="memdesc:acaa4f354b33930beff8b791d89d449e8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Notify all observers.  <a href="classqx_1_1subject.html#acaa4f354b33930beff8b791d89d449e8">More...</a><br /></td></tr>
+<tr class="separator:acaa4f354b33930beff8b791d89d449e8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2f6c9a5a04734ed26757cd47492e5b45"><td class="memItemLeft" align="right" valign="top">iterator&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1subject.html#a2f6c9a5a04734ed26757cd47492e5b45">begin</a> ()</td></tr>
+<tr class="memdesc:a2f6c9a5a04734ed26757cd47492e5b45"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return iterator to beginning.  <a href="classqx_1_1subject.html#a2f6c9a5a04734ed26757cd47492e5b45">More...</a><br /></td></tr>
+<tr class="separator:a2f6c9a5a04734ed26757cd47492e5b45"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad687512f2bd1b9590f072c1ba1c42ce0"><td class="memItemLeft" align="right" valign="top">const_iterator&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1subject.html#ad687512f2bd1b9590f072c1ba1c42ce0">begin</a> () const</td></tr>
+<tr class="memdesc:ad687512f2bd1b9590f072c1ba1c42ce0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return iterator to beginning.  <a href="classqx_1_1subject.html#ad687512f2bd1b9590f072c1ba1c42ce0">More...</a><br /></td></tr>
+<tr class="separator:ad687512f2bd1b9590f072c1ba1c42ce0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0030507ca75f989cfb0537bd9908e61d"><td class="memItemLeft" align="right" valign="top">const_iterator&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1subject.html#a0030507ca75f989cfb0537bd9908e61d">cbegin</a> () const</td></tr>
+<tr class="memdesc:a0030507ca75f989cfb0537bd9908e61d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return const iterator to beginning.  <a href="classqx_1_1subject.html#a0030507ca75f989cfb0537bd9908e61d">More...</a><br /></td></tr>
+<tr class="separator:a0030507ca75f989cfb0537bd9908e61d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a61e33332e5d7928427356b936b9adfaf"><td class="memItemLeft" align="right" valign="top">iterator&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1subject.html#a61e33332e5d7928427356b936b9adfaf">end</a> ()</td></tr>
+<tr class="memdesc:a61e33332e5d7928427356b936b9adfaf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return iterator to end.  <a href="classqx_1_1subject.html#a61e33332e5d7928427356b936b9adfaf">More...</a><br /></td></tr>
+<tr class="separator:a61e33332e5d7928427356b936b9adfaf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a86b89e8dc1a5460e619681dccad4066d"><td class="memItemLeft" align="right" valign="top">const_iterator&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1subject.html#a86b89e8dc1a5460e619681dccad4066d">end</a> () const</td></tr>
+<tr class="memdesc:a86b89e8dc1a5460e619681dccad4066d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return iterator to end.  <a href="classqx_1_1subject.html#a86b89e8dc1a5460e619681dccad4066d">More...</a><br /></td></tr>
+<tr class="separator:a86b89e8dc1a5460e619681dccad4066d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3820b1f78dcec53122e38e176dc7f227"><td class="memItemLeft" align="right" valign="top">const_iterator&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1subject.html#a3820b1f78dcec53122e38e176dc7f227">cend</a> () const</td></tr>
+<tr class="memdesc:a3820b1f78dcec53122e38e176dc7f227"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return const iterator to end.  <a href="classqx_1_1subject.html#a3820b1f78dcec53122e38e176dc7f227">More...</a><br /></td></tr>
+<tr class="separator:a3820b1f78dcec53122e38e176dc7f227"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7d61e27da98c0711386da07b40fe37ec"><td class="memItemLeft" align="right" valign="top">reverse_iterator&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1subject.html#a7d61e27da98c0711386da07b40fe37ec">rbegin</a> ()</td></tr>
+<tr class="memdesc:a7d61e27da98c0711386da07b40fe37ec"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return reverse iterator to reverse beginning.  <a href="classqx_1_1subject.html#a7d61e27da98c0711386da07b40fe37ec">More...</a><br /></td></tr>
+<tr class="separator:a7d61e27da98c0711386da07b40fe37ec"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab9072c9f810ebfa08e1dfffb9ceb900d"><td class="memItemLeft" align="right" valign="top">const_reverse_iterator&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1subject.html#ab9072c9f810ebfa08e1dfffb9ceb900d">rbegin</a> () const</td></tr>
+<tr class="memdesc:ab9072c9f810ebfa08e1dfffb9ceb900d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return reverse iterator to reverse beginning.  <a href="classqx_1_1subject.html#ab9072c9f810ebfa08e1dfffb9ceb900d">More...</a><br /></td></tr>
+<tr class="separator:ab9072c9f810ebfa08e1dfffb9ceb900d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af884daad1a45b5902b0e4d467a529b53"><td class="memItemLeft" align="right" valign="top">const_reverse_iterator&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1subject.html#af884daad1a45b5902b0e4d467a529b53">crbegin</a> () const</td></tr>
+<tr class="memdesc:af884daad1a45b5902b0e4d467a529b53"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return const reverse iterator to reverse beginning.  <a href="classqx_1_1subject.html#af884daad1a45b5902b0e4d467a529b53">More...</a><br /></td></tr>
+<tr class="separator:af884daad1a45b5902b0e4d467a529b53"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae6dc6a4e35ff8a04274defbe0e5b9bbe"><td class="memItemLeft" align="right" valign="top">reverse_iterator&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1subject.html#ae6dc6a4e35ff8a04274defbe0e5b9bbe">rend</a> ()</td></tr>
+<tr class="memdesc:ae6dc6a4e35ff8a04274defbe0e5b9bbe"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return reverse iterator to reverse end.  <a href="classqx_1_1subject.html#ae6dc6a4e35ff8a04274defbe0e5b9bbe">More...</a><br /></td></tr>
+<tr class="separator:ae6dc6a4e35ff8a04274defbe0e5b9bbe"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3f64c9a9015b3475e93a00df8d21a789"><td class="memItemLeft" align="right" valign="top">const_reverse_iterator&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1subject.html#a3f64c9a9015b3475e93a00df8d21a789">rend</a> () const</td></tr>
+<tr class="memdesc:a3f64c9a9015b3475e93a00df8d21a789"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return reverse iterator to reverse end.  <a href="classqx_1_1subject.html#a3f64c9a9015b3475e93a00df8d21a789">More...</a><br /></td></tr>
+<tr class="separator:a3f64c9a9015b3475e93a00df8d21a789"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adedbfc9e571e36120a13f0cb2e414405"><td class="memItemLeft" align="right" valign="top">const_reverse_iterator&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1subject.html#adedbfc9e571e36120a13f0cb2e414405">crend</a> () const</td></tr>
+<tr class="memdesc:adedbfc9e571e36120a13f0cb2e414405"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return const reverse iterator to reverse end.  <a href="classqx_1_1subject.html#adedbfc9e571e36120a13f0cb2e414405">More...</a><br /></td></tr>
+<tr class="separator:adedbfc9e571e36120a13f0cb2e414405"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8ff686586fdc96d469fd6de3ec50dc62"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1subject.html#a8ff686586fdc96d469fd6de3ec50dc62">get_num_observers</a> () const noexcept</td></tr>
+<tr class="memdesc:a8ff686586fdc96d469fd6de3ec50dc62"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get number of observers attached to this subject.  <a href="classqx_1_1subject.html#a8ff686586fdc96d469fd6de3ec50dc62">More...</a><br /></td></tr>
+<tr class="separator:a8ff686586fdc96d469fd6de3ec50dc62"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="inherited"></a>
 Additional Inherited Members</h2></td></tr>
@@ -153,13 +153,13 @@ virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="c
 <tr class="separator:ac5420b7cd84f7807d3d3830d02942e1f inherit pro_methods_classqx_1_1base__subject"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><h3>template&lt;class TObserver&gt;<br />
-class qx::subject&lt; TObserver &gt;</h3>
+<div class="textblock"><h3>template&lt;class observer_t&gt;<br />
+class qx::subject&lt; observer_t &gt;</h3>
 
 <p>Class maintains a list of its dependents, called observers, and notifies them automatically of any state changes. </p>
 <p>~ </p><dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
-    <tr><td class="paramname">TObserver</td><td>- observer type </td></tr>
+    <tr><td class="paramname">observer_t</td><td>- observer type </td></tr>
   </table>
   </dd>
 </dl>
@@ -168,21 +168,21 @@ class qx::subject&lt; TObserver &gt;</h3>
 
 <p class="definition">Definition at line <a class="el" href="observer_8h_source.html#l00140">140</a> of file <a class="el" href="observer_8h_source.html">observer.h</a>.</p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
-<a id="a34fce9cad9b0f3c45574049e2002f1c9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a34fce9cad9b0f3c45574049e2002f1c9">&#9670;&nbsp;</a></span>attach()</h2>
+<a id="a5f4cfbc96d15b50dc9f328d5bdd280a7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5f4cfbc96d15b50dc9f328d5bdd280a7">&#9670;&nbsp;</a></span>attach()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class TObserver &gt; </div>
+template&lt;class observer_t &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">observer_token <a class="el" href="classqx_1_1subject.html">qx::subject</a>&lt; TObserver &gt;::attach </td>
+          <td class="memname">observer_token <a class="el" href="classqx_1_1subject.html">qx::subject</a>&lt; observer_t &gt;::attach </td>
           <td>(</td>
-          <td class="paramtype">TObserver *&#160;</td>
+          <td class="paramtype">observer_t *&#160;</td>
           <td class="paramname"><em>pObserver</em></td><td>)</td>
           <td></td>
         </tr>
@@ -208,23 +208,23 @@ template&lt;class TObserver &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="observer_8inl_source.html#l00158">158</a> of file <a class="el" href="observer_8inl_source.html">observer.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="observer_8inl_source.html#l00159">159</a> of file <a class="el" href="observer_8inl_source.html">observer.inl</a>.</p>
 
 </div>
 </div>
-<a id="a339e4e832421650d2eae548b844c9586"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a339e4e832421650d2eae548b844c9586">&#9670;&nbsp;</a></span>begin() <span class="overload">[1/2]</span></h2>
+<a id="a2f6c9a5a04734ed26757cd47492e5b45"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2f6c9a5a04734ed26757cd47492e5b45">&#9670;&nbsp;</a></span>begin() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class TObserver &gt; </div>
+template&lt;class observer_t &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classqx_1_1subject.html">subject</a>&lt; TObserver &gt;::const_iterator <a class="el" href="classqx_1_1subject.html">qx::subject</a>&lt; TObserver &gt;::begin </td>
+          <td class="memname"><a class="el" href="classqx_1_1subject.html">subject</a>&lt; observer_t &gt;::const_iterator <a class="el" href="classqx_1_1subject.html">qx::subject</a>&lt; observer_t &gt;::begin </td>
           <td>(</td>
           <td class="paramtype">void&#160;</td>
           <td class="paramname"></td><td>)</td>
@@ -246,20 +246,20 @@ template&lt;class TObserver &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="observer_8inl_source.html#l00181">181</a> of file <a class="el" href="observer_8inl_source.html">observer.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="observer_8inl_source.html#l00182">182</a> of file <a class="el" href="observer_8inl_source.html">observer.inl</a>.</p>
 
 </div>
 </div>
-<a id="aecb2d35649dba41a5624a3e1123813b4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aecb2d35649dba41a5624a3e1123813b4">&#9670;&nbsp;</a></span>begin() <span class="overload">[2/2]</span></h2>
+<a id="ad687512f2bd1b9590f072c1ba1c42ce0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad687512f2bd1b9590f072c1ba1c42ce0">&#9670;&nbsp;</a></span>begin() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class TObserver &gt; </div>
+template&lt;class observer_t &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">const_iterator <a class="el" href="classqx_1_1subject.html">qx::subject</a>&lt; TObserver &gt;::begin </td>
+          <td class="memname">const_iterator <a class="el" href="classqx_1_1subject.html">qx::subject</a>&lt; observer_t &gt;::begin </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -277,19 +277,19 @@ template&lt;class TObserver &gt; </div>
 
 </div>
 </div>
-<a id="a7084dbe72dda51598aad61dba0a48e92"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7084dbe72dda51598aad61dba0a48e92">&#9670;&nbsp;</a></span>cbegin()</h2>
+<a id="a0030507ca75f989cfb0537bd9908e61d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0030507ca75f989cfb0537bd9908e61d">&#9670;&nbsp;</a></span>cbegin()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class TObserver &gt; </div>
+template&lt;class observer_t &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classqx_1_1subject.html">subject</a>&lt; TObserver &gt;::const_iterator <a class="el" href="classqx_1_1subject.html">qx::subject</a>&lt; TObserver &gt;::cbegin </td>
+          <td class="memname"><a class="el" href="classqx_1_1subject.html">subject</a>&lt; observer_t &gt;::const_iterator <a class="el" href="classqx_1_1subject.html">qx::subject</a>&lt; observer_t &gt;::cbegin </td>
           <td>(</td>
           <td class="paramtype">void&#160;</td>
           <td class="paramname"></td><td>)</td>
@@ -311,23 +311,23 @@ template&lt;class TObserver &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="observer_8inl_source.html#l00193">193</a> of file <a class="el" href="observer_8inl_source.html">observer.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="observer_8inl_source.html#l00194">194</a> of file <a class="el" href="observer_8inl_source.html">observer.inl</a>.</p>
 
 </div>
 </div>
-<a id="aec9aa2c75f1e202b56442f55dd24c14b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aec9aa2c75f1e202b56442f55dd24c14b">&#9670;&nbsp;</a></span>cend()</h2>
+<a id="a3820b1f78dcec53122e38e176dc7f227"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3820b1f78dcec53122e38e176dc7f227">&#9670;&nbsp;</a></span>cend()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class TObserver &gt; </div>
+template&lt;class observer_t &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classqx_1_1subject.html">subject</a>&lt; TObserver &gt;::const_iterator <a class="el" href="classqx_1_1subject.html">qx::subject</a>&lt; TObserver &gt;::cend </td>
+          <td class="memname"><a class="el" href="classqx_1_1subject.html">subject</a>&lt; observer_t &gt;::const_iterator <a class="el" href="classqx_1_1subject.html">qx::subject</a>&lt; observer_t &gt;::cend </td>
           <td>(</td>
           <td class="paramtype">void&#160;</td>
           <td class="paramname"></td><td>)</td>
@@ -349,23 +349,23 @@ template&lt;class TObserver &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="observer_8inl_source.html#l00211">211</a> of file <a class="el" href="observer_8inl_source.html">observer.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="observer_8inl_source.html#l00212">212</a> of file <a class="el" href="observer_8inl_source.html">observer.inl</a>.</p>
 
 </div>
 </div>
-<a id="a53e4755cdc10f536fe6f899c1d20070b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a53e4755cdc10f536fe6f899c1d20070b">&#9670;&nbsp;</a></span>crbegin()</h2>
+<a id="af884daad1a45b5902b0e4d467a529b53"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af884daad1a45b5902b0e4d467a529b53">&#9670;&nbsp;</a></span>crbegin()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class TObserver &gt; </div>
+template&lt;class observer_t &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classqx_1_1subject.html">subject</a>&lt; TObserver &gt;::const_reverse_iterator <a class="el" href="classqx_1_1subject.html">qx::subject</a>&lt; TObserver &gt;::crbegin</td>
+          <td class="memname"><a class="el" href="classqx_1_1subject.html">subject</a>&lt; observer_t &gt;::const_reverse_iterator <a class="el" href="classqx_1_1subject.html">qx::subject</a>&lt; observer_t &gt;::crbegin</td>
         </tr>
       </table>
   </td>
@@ -383,23 +383,23 @@ template&lt;class TObserver &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="observer_8inl_source.html#l00229">229</a> of file <a class="el" href="observer_8inl_source.html">observer.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="observer_8inl_source.html#l00230">230</a> of file <a class="el" href="observer_8inl_source.html">observer.inl</a>.</p>
 
 </div>
 </div>
-<a id="abd619eae21b8789c76c319c465945482"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#abd619eae21b8789c76c319c465945482">&#9670;&nbsp;</a></span>crend()</h2>
+<a id="adedbfc9e571e36120a13f0cb2e414405"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adedbfc9e571e36120a13f0cb2e414405">&#9670;&nbsp;</a></span>crend()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class TObserver &gt; </div>
+template&lt;class observer_t &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classqx_1_1subject.html">subject</a>&lt; TObserver &gt;::const_reverse_iterator <a class="el" href="classqx_1_1subject.html">qx::subject</a>&lt; TObserver &gt;::crend</td>
+          <td class="memname"><a class="el" href="classqx_1_1subject.html">subject</a>&lt; observer_t &gt;::const_reverse_iterator <a class="el" href="classqx_1_1subject.html">qx::subject</a>&lt; observer_t &gt;::crend</td>
         </tr>
       </table>
   </td>
@@ -417,23 +417,23 @@ template&lt;class TObserver &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="observer_8inl_source.html#l00247">247</a> of file <a class="el" href="observer_8inl_source.html">observer.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="observer_8inl_source.html#l00248">248</a> of file <a class="el" href="observer_8inl_source.html">observer.inl</a>.</p>
 
 </div>
 </div>
-<a id="ae1b3dfc01308e3e85f3d6c97272d0c22"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae1b3dfc01308e3e85f3d6c97272d0c22">&#9670;&nbsp;</a></span>end() <span class="overload">[1/2]</span></h2>
+<a id="a61e33332e5d7928427356b936b9adfaf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a61e33332e5d7928427356b936b9adfaf">&#9670;&nbsp;</a></span>end() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class TObserver &gt; </div>
+template&lt;class observer_t &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classqx_1_1subject.html">subject</a>&lt; TObserver &gt;::const_iterator <a class="el" href="classqx_1_1subject.html">qx::subject</a>&lt; TObserver &gt;::end </td>
+          <td class="memname"><a class="el" href="classqx_1_1subject.html">subject</a>&lt; observer_t &gt;::const_iterator <a class="el" href="classqx_1_1subject.html">qx::subject</a>&lt; observer_t &gt;::end </td>
           <td>(</td>
           <td class="paramtype">void&#160;</td>
           <td class="paramname"></td><td>)</td>
@@ -455,20 +455,20 @@ template&lt;class TObserver &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="observer_8inl_source.html#l00199">199</a> of file <a class="el" href="observer_8inl_source.html">observer.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="observer_8inl_source.html#l00200">200</a> of file <a class="el" href="observer_8inl_source.html">observer.inl</a>.</p>
 
 </div>
 </div>
-<a id="ab88e67bf0e682fbba6cd496b3bd6d84e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab88e67bf0e682fbba6cd496b3bd6d84e">&#9670;&nbsp;</a></span>end() <span class="overload">[2/2]</span></h2>
+<a id="a86b89e8dc1a5460e619681dccad4066d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a86b89e8dc1a5460e619681dccad4066d">&#9670;&nbsp;</a></span>end() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class TObserver &gt; </div>
+template&lt;class observer_t &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">const_iterator <a class="el" href="classqx_1_1subject.html">qx::subject</a>&lt; TObserver &gt;::end </td>
+          <td class="memname">const_iterator <a class="el" href="classqx_1_1subject.html">qx::subject</a>&lt; observer_t &gt;::end </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -486,19 +486,19 @@ template&lt;class TObserver &gt; </div>
 
 </div>
 </div>
-<a id="a95efd3cf73da504fccd537c730b70e27"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a95efd3cf73da504fccd537c730b70e27">&#9670;&nbsp;</a></span>get_num_observers()</h2>
+<a id="a8ff686586fdc96d469fd6de3ec50dc62"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8ff686586fdc96d469fd6de3ec50dc62">&#9670;&nbsp;</a></span>get_num_observers()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class TObserver &gt; </div>
+template&lt;class observer_t &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">size_t <a class="el" href="classqx_1_1subject.html">qx::subject</a>&lt; TObserver &gt;::get_num_observers</td>
+          <td class="memname">size_t <a class="el" href="classqx_1_1subject.html">qx::subject</a>&lt; observer_t &gt;::get_num_observers</td>
         </tr>
       </table>
   </td>
@@ -516,23 +516,23 @@ template&lt;class TObserver &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="observer_8inl_source.html#l00253">253</a> of file <a class="el" href="observer_8inl_source.html">observer.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="observer_8inl_source.html#l00254">254</a> of file <a class="el" href="observer_8inl_source.html">observer.inl</a>.</p>
 
 </div>
 </div>
-<a id="aea3b74aad10b993fd343e6dd92c640f9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aea3b74aad10b993fd343e6dd92c640f9">&#9670;&nbsp;</a></span>notify()</h2>
+<a id="acaa4f354b33930beff8b791d89d449e8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acaa4f354b33930beff8b791d89d449e8">&#9670;&nbsp;</a></span>notify()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class TObserver &gt; </div>
+template&lt;class observer_t &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="classqx_1_1subject.html">qx::subject</a>&lt; TObserver &gt;::notify </td>
+          <td class="memname">void <a class="el" href="classqx_1_1subject.html">qx::subject</a>&lt; observer_t &gt;::notify </td>
           <td>(</td>
           <td class="paramtype">const notify_func &amp;&#160;</td>
           <td class="paramname"><em>notifyFunc</em></td><td>)</td>
@@ -554,23 +554,23 @@ template&lt;class TObserver &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="observer_8inl_source.html#l00174">174</a> of file <a class="el" href="observer_8inl_source.html">observer.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="observer_8inl_source.html#l00175">175</a> of file <a class="el" href="observer_8inl_source.html">observer.inl</a>.</p>
 
 </div>
 </div>
-<a id="a527dc7d2d9c24329017527db64e3e9ce"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a527dc7d2d9c24329017527db64e3e9ce">&#9670;&nbsp;</a></span>rbegin() <span class="overload">[1/2]</span></h2>
+<a id="a7d61e27da98c0711386da07b40fe37ec"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7d61e27da98c0711386da07b40fe37ec">&#9670;&nbsp;</a></span>rbegin() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class TObserver &gt; </div>
+template&lt;class observer_t &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classqx_1_1subject.html">subject</a>&lt; TObserver &gt;::const_reverse_iterator <a class="el" href="classqx_1_1subject.html">qx::subject</a>&lt; TObserver &gt;::rbegin </td>
+          <td class="memname"><a class="el" href="classqx_1_1subject.html">subject</a>&lt; observer_t &gt;::const_reverse_iterator <a class="el" href="classqx_1_1subject.html">qx::subject</a>&lt; observer_t &gt;::rbegin </td>
           <td>(</td>
           <td class="paramtype">void&#160;</td>
           <td class="paramname"></td><td>)</td>
@@ -592,20 +592,20 @@ template&lt;class TObserver &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="observer_8inl_source.html#l00217">217</a> of file <a class="el" href="observer_8inl_source.html">observer.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="observer_8inl_source.html#l00218">218</a> of file <a class="el" href="observer_8inl_source.html">observer.inl</a>.</p>
 
 </div>
 </div>
-<a id="a5d91bc84adc1fab70e066b0a05d75bc3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5d91bc84adc1fab70e066b0a05d75bc3">&#9670;&nbsp;</a></span>rbegin() <span class="overload">[2/2]</span></h2>
+<a id="ab9072c9f810ebfa08e1dfffb9ceb900d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab9072c9f810ebfa08e1dfffb9ceb900d">&#9670;&nbsp;</a></span>rbegin() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class TObserver &gt; </div>
+template&lt;class observer_t &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">const_reverse_iterator <a class="el" href="classqx_1_1subject.html">qx::subject</a>&lt; TObserver &gt;::rbegin </td>
+          <td class="memname">const_reverse_iterator <a class="el" href="classqx_1_1subject.html">qx::subject</a>&lt; observer_t &gt;::rbegin </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -623,19 +623,19 @@ template&lt;class TObserver &gt; </div>
 
 </div>
 </div>
-<a id="afd8d98deba336f00b555af2c7fcf895c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#afd8d98deba336f00b555af2c7fcf895c">&#9670;&nbsp;</a></span>rend() <span class="overload">[1/2]</span></h2>
+<a id="ae6dc6a4e35ff8a04274defbe0e5b9bbe"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae6dc6a4e35ff8a04274defbe0e5b9bbe">&#9670;&nbsp;</a></span>rend() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class TObserver &gt; </div>
+template&lt;class observer_t &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classqx_1_1subject.html">subject</a>&lt; TObserver &gt;::const_reverse_iterator <a class="el" href="classqx_1_1subject.html">qx::subject</a>&lt; TObserver &gt;::rend </td>
+          <td class="memname"><a class="el" href="classqx_1_1subject.html">subject</a>&lt; observer_t &gt;::const_reverse_iterator <a class="el" href="classqx_1_1subject.html">qx::subject</a>&lt; observer_t &gt;::rend </td>
           <td>(</td>
           <td class="paramtype">void&#160;</td>
           <td class="paramname"></td><td>)</td>
@@ -657,20 +657,20 @@ template&lt;class TObserver &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="observer_8inl_source.html#l00235">235</a> of file <a class="el" href="observer_8inl_source.html">observer.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="observer_8inl_source.html#l00236">236</a> of file <a class="el" href="observer_8inl_source.html">observer.inl</a>.</p>
 
 </div>
 </div>
-<a id="a52e11b609af63e3bb4ba175f3501c4d1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a52e11b609af63e3bb4ba175f3501c4d1">&#9670;&nbsp;</a></span>rend() <span class="overload">[2/2]</span></h2>
+<a id="a3f64c9a9015b3475e93a00df8d21a789"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3f64c9a9015b3475e93a00df8d21a789">&#9670;&nbsp;</a></span>rend() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class TObserver &gt; </div>
+template&lt;class observer_t &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">const_reverse_iterator <a class="el" href="classqx_1_1subject.html">qx::subject</a>&lt; TObserver &gt;::rend </td>
+          <td class="memname">const_reverse_iterator <a class="el" href="classqx_1_1subject.html">qx::subject</a>&lt; observer_t &gt;::rend </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>

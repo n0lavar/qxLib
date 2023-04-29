@@ -80,10 +80,10 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:ad2ab072ca032ca34e6c1f405e1cc7f23"><td class="memTemplParams" colspan="2">template&lt;class FunctionType , class DerivativeFunctionType &gt; </td></tr>
-<tr class="memitem:ad2ab072ca032ca34e6c1f405e1cc7f23"><td class="memTemplItemLeft" align="right" valign="top">double&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="newtons__method_8h.html#ad2ab072ca032ca34e6c1f405e1cc7f23">qx::newtons_method</a> (const FunctionType &amp;func, const DerivativeFunctionType &amp;derivativeFunc, double fInitialGuess, double fMaxError=0.0001, size_t nMaxIterations=10000)</td></tr>
-<tr class="memdesc:ad2ab072ca032ca34e6c1f405e1cc7f23"><td class="mdescLeft">&#160;</td><td class="mdescRight">Find root of the equation using Newtons method.  <a href="newtons__method_8h.html#ad2ab072ca032ca34e6c1f405e1cc7f23">More...</a><br /></td></tr>
-<tr class="separator:ad2ab072ca032ca34e6c1f405e1cc7f23"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3c06385a0d9462f922ade663bb54d7ba"><td class="memTemplParams" colspan="2">template&lt;class function_t , class derivative_function_t &gt; </td></tr>
+<tr class="memitem:a3c06385a0d9462f922ade663bb54d7ba"><td class="memTemplItemLeft" align="right" valign="top">double&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="newtons__method_8h.html#a3c06385a0d9462f922ade663bb54d7ba">qx::newtons_method</a> (const function_t &amp;func, const derivative_function_t &amp;derivativeFunc, double fInitialGuess, double fMaxError=0.0001, size_t nMaxIterations=10000)</td></tr>
+<tr class="memdesc:a3c06385a0d9462f922ade663bb54d7ba"><td class="mdescLeft">&#160;</td><td class="mdescRight">Find root of the equation using Newtons method.  <a href="newtons__method_8h.html#a3c06385a0d9462f922ade663bb54d7ba">More...</a><br /></td></tr>
+<tr class="separator:a3c06385a0d9462f922ade663bb54d7ba"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Contains Newtons method. </p>
@@ -93,13 +93,13 @@ Functions</h2></td></tr>
 
 <p class="definition">Definition in file <a class="el" href="newtons__method_8h_source.html">newtons_method.h</a>.</p>
 </div><h2 class="groupheader">Function Documentation</h2>
-<a id="ad2ab072ca032ca34e6c1f405e1cc7f23"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad2ab072ca032ca34e6c1f405e1cc7f23">&#9670;&nbsp;</a></span>newtons_method()</h2>
+<a id="a3c06385a0d9462f922ade663bb54d7ba"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3c06385a0d9462f922ade663bb54d7ba">&#9670;&nbsp;</a></span>newtons_method()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class FunctionType , class DerivativeFunctionType &gt; </div>
+template&lt;class function_t , class derivative_function_t &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -107,13 +107,13 @@ template&lt;class FunctionType , class DerivativeFunctionType &gt; </div>
         <tr>
           <td class="memname">double qx::newtons_method </td>
           <td>(</td>
-          <td class="paramtype">const FunctionType &amp;&#160;</td>
+          <td class="paramtype">const function_t &amp;&#160;</td>
           <td class="paramname"><em>func</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const DerivativeFunctionType &amp;&#160;</td>
+          <td class="paramtype">const derivative_function_t &amp;&#160;</td>
           <td class="paramname"><em>derivativeFunc</em>, </td>
         </tr>
         <tr>
@@ -160,8 +160,8 @@ template&lt;class FunctionType , class DerivativeFunctionType &gt; </div>
 </dl>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
-    <tr><td class="paramname">FunctionType</td><td>- function that takes double and returns double </td></tr>
-    <tr><td class="paramname">DerivativeFunctionType</td><td>- function that takes double and returns double </td></tr>
+    <tr><td class="paramname">function_t</td><td>- function that takes double and returns double </td></tr>
+    <tr><td class="paramname">derivative_function_t</td><td>- function that takes double and returns double </td></tr>
   </table>
   </dd>
 </dl>

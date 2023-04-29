@@ -91,11 +91,11 @@ $(function() {
 <div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="comment"></span> </div>
 <div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="comment">/**</span></div>
 <div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="comment">    @struct  is_array_of_t</span></div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="comment">    @detaild Check if TArray is an array of TElement</span></div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="comment">    @tparam  TArray   - possible array type</span></div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="comment">    @tparam  TElement - array element type</span></div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="comment">    @detaild Check if array_t is an array of T</span></div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="comment">    @tparam  array_t - possible array type</span></div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="comment">    @tparam  T       - array element type</span></div>
 <div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="comment">**/</span></div>
-<div class="line"><a name="l00027"></a><span class="lineno"><a class="line" href="structqx_1_1is__array__of__t.html">   27</a></span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> TArray, <span class="keyword">class</span> TElement&gt; <span class="keyword">struct </span><a class="code" href="structqx_1_1is__array__of__t.html">is_array_of_t</a>                 : std::false_type { };</div>
+<div class="line"><a name="l00027"></a><span class="lineno"><a class="line" href="structqx_1_1is__array__of__t.html">   27</a></span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> array_t, <span class="keyword">class</span> T&gt; <span class="keyword">struct </span><a class="code" href="structqx_1_1is__array__of__t.html">is_array_of_t</a>                       : std::false_type { };</div>
 <div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;                                   </div>
 <div class="line"><a name="l00029"></a><span class="lineno"><a class="line" href="structqx_1_1is__array__of__t_3_01_t_0f_0e_00_01_t_01_4.html">   29</a></span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> T&gt;           <span class="keyword">struct </span><a class="code" href="structqx_1_1is__array__of__t.html">is_array_of_t</a>&lt;               T[],     T&gt; : std::true_type  { };</div>
 <div class="line"><a name="l00030"></a><span class="lineno"><a class="line" href="structqx_1_1is__array__of__t_3_01const_01_t_0f_0e_00_01_t_01_4.html">   30</a></span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> T&gt;           <span class="keyword">struct </span><a class="code" href="structqx_1_1is__array__of__t.html">is_array_of_t</a>&lt;const          T[],     T&gt; : std::true_type  { };</div>
@@ -114,8 +114,8 @@ $(function() {
 <div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160; </div>
 <div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="comment">// clang-format on</span></div>
 <div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160; </div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> TArray, <span class="keyword">class</span> TElement&gt;</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;constexpr <span class="keywordtype">bool</span> is_array_of_t_v = <a class="code" href="structqx_1_1is__array__of__t.html">is_array_of_t&lt;TArray, TElement&gt;::value</a>;</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> array_t, <span class="keyword">class</span> T&gt;</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;constexpr <span class="keywordtype">bool</span> is_array_of_t_v = <a class="code" href="structqx_1_1is__array__of__t.html">is_array_of_t&lt;array_t, T&gt;::value</a>;</div>
 <div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160; </div>
 <div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;} <span class="comment">// namespace qx</span></div>
 <div class="ttc" id="astructqx_1_1is__array__of__t_html"><div class="ttname"><a href="structqx_1_1is__array__of__t.html">qx::is_array_of_t</a></div><div class="ttdef"><b>Definition:</b> <a href="is__array__of__t_8h_source.html#l00027">is_array_of_t.h:27</a></div></div>

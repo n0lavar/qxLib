@@ -89,86 +89,86 @@ $(function() {
 <div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="keyword">namespace </span>qx::detail</div>
 <div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;{</div>
 <div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160; </div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="keyword">template</span>&lt;auto A, auto B, <span class="keyword">typename</span> Compare&gt;</div>
-<div class="line"><a name="l00022"></a><span class="lineno"><a class="line" href="structqx_1_1detail_1_1_static_assert_two.html">   22</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structqx_1_1detail_1_1_static_assert_two.html">StaticAssertTwo</a></div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="keyword">template</span>&lt;auto left, auto right, <span class="keyword">typename</span> compare_t&gt;</div>
+<div class="line"><a name="l00022"></a><span class="lineno"><a class="line" href="structqx_1_1detail_1_1static__assert__two.html">   22</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structqx_1_1detail_1_1static__assert__two.html">static_assert_two</a></div>
 <div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;{</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    static_assert(Compare()(A, B));</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    static_assert(compare_t()(left, right));</div>
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;};</div>
 <div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160; </div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="keyword">template</span>&lt;auto A, auto B&gt;</div>
-<div class="line"><a name="l00028"></a><span class="lineno"><a class="line" href="structqx_1_1detail_1_1_static_assert_two_3_01_a_00_01_b_00_01std_1_1equal__to_3_4_01_4.html">   28</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structqx_1_1detail_1_1_static_assert_two.html">StaticAssertTwo</a>&lt;A, B, std::equal_to&lt;&gt;&gt;</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="keyword">template</span>&lt;auto left, auto right&gt;</div>
+<div class="line"><a name="l00028"></a><span class="lineno"><a class="line" href="structqx_1_1detail_1_1static__assert__two_3_01left_00_01right_00_01std_1_1equal__to_3_4_01_4.html">   28</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structqx_1_1detail_1_1static__assert__two.html">static_assert_two</a>&lt;left, right, std::equal_to&lt;&gt;&gt;</div>
 <div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;{</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    static_assert(std::equal_to&lt;&gt;()(A, B), <span class="stringliteral">&quot;!(A == B)&quot;</span>);</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    static_assert(std::equal_to&lt;&gt;()(left, right), <span class="stringliteral">&quot;!(left == right)&quot;</span>);</div>
 <div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;};</div>
 <div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160; </div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="keyword">template</span>&lt;auto A, auto B&gt;</div>
-<div class="line"><a name="l00034"></a><span class="lineno"><a class="line" href="structqx_1_1detail_1_1_static_assert_two_3_01_a_00_01_b_00_01std_1_1not__equal__to_3_4_01_4.html">   34</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structqx_1_1detail_1_1_static_assert_two.html">StaticAssertTwo</a>&lt;A, B, std::not_equal_to&lt;&gt;&gt;</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="keyword">template</span>&lt;auto left, auto right&gt;</div>
+<div class="line"><a name="l00034"></a><span class="lineno"><a class="line" href="structqx_1_1detail_1_1static__assert__two_3_01left_00_01right_00_01std_1_1not__equal__to_3_4_01_4.html">   34</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structqx_1_1detail_1_1static__assert__two.html">static_assert_two</a>&lt;left, right, std::not_equal_to&lt;&gt;&gt;</div>
 <div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;{</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    static_assert(std::not_equal_to&lt;&gt;()(A, B), <span class="stringliteral">&quot;!(A != B)&quot;</span>);</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    static_assert(std::not_equal_to&lt;&gt;()(left, right), <span class="stringliteral">&quot;!(left != right)&quot;</span>);</div>
 <div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;};</div>
 <div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160; </div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="keyword">template</span>&lt;auto A, auto B&gt;</div>
-<div class="line"><a name="l00040"></a><span class="lineno"><a class="line" href="structqx_1_1detail_1_1_static_assert_two_3_01_a_00_01_b_00_01std_1_1less_3_4_01_4.html">   40</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structqx_1_1detail_1_1_static_assert_two.html">StaticAssertTwo</a>&lt;A, B, std::less&lt;&gt;&gt;</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="keyword">template</span>&lt;auto left, auto right&gt;</div>
+<div class="line"><a name="l00040"></a><span class="lineno"><a class="line" href="structqx_1_1detail_1_1static__assert__two_3_01left_00_01right_00_01std_1_1less_3_4_01_4.html">   40</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structqx_1_1detail_1_1static__assert__two.html">static_assert_two</a>&lt;left, right, std::less&lt;&gt;&gt;</div>
 <div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;{</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    static_assert(std::less&lt;&gt;()(A, B), <span class="stringliteral">&quot;!(A &lt; B)&quot;</span>);</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    static_assert(std::less&lt;&gt;()(left, right), <span class="stringliteral">&quot;!(left &lt; right)&quot;</span>);</div>
 <div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;};</div>
 <div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160; </div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="keyword">template</span>&lt;auto A, auto B&gt;</div>
-<div class="line"><a name="l00046"></a><span class="lineno"><a class="line" href="structqx_1_1detail_1_1_static_assert_two_3_01_a_00_01_b_00_01std_1_1less__equal_3_4_01_4.html">   46</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structqx_1_1detail_1_1_static_assert_two.html">StaticAssertTwo</a>&lt;A, B, std::less_equal&lt;&gt;&gt;</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="keyword">template</span>&lt;auto left, auto right&gt;</div>
+<div class="line"><a name="l00046"></a><span class="lineno"><a class="line" href="structqx_1_1detail_1_1static__assert__two_3_01left_00_01right_00_01std_1_1less__equal_3_4_01_4.html">   46</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structqx_1_1detail_1_1static__assert__two.html">static_assert_two</a>&lt;left, right, std::less_equal&lt;&gt;&gt;</div>
 <div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;{</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    static_assert(std::less_equal&lt;&gt;()(A, B), <span class="stringliteral">&quot;!(A &lt;= B)&quot;</span>);</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    static_assert(std::less_equal&lt;&gt;()(left, right), <span class="stringliteral">&quot;!(left &lt;= right)&quot;</span>);</div>
 <div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;};</div>
 <div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160; </div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="keyword">template</span>&lt;auto A, auto B&gt;</div>
-<div class="line"><a name="l00052"></a><span class="lineno"><a class="line" href="structqx_1_1detail_1_1_static_assert_two_3_01_a_00_01_b_00_01std_1_1greater_3_4_01_4.html">   52</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structqx_1_1detail_1_1_static_assert_two.html">StaticAssertTwo</a>&lt;A, B, std::greater&lt;&gt;&gt;</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="keyword">template</span>&lt;auto left, auto right&gt;</div>
+<div class="line"><a name="l00052"></a><span class="lineno"><a class="line" href="structqx_1_1detail_1_1static__assert__two_3_01left_00_01right_00_01std_1_1greater_3_4_01_4.html">   52</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structqx_1_1detail_1_1static__assert__two.html">static_assert_two</a>&lt;left, right, std::greater&lt;&gt;&gt;</div>
 <div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;{</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    static_assert(std::greater&lt;&gt;()(A, B), <span class="stringliteral">&quot;!(A &gt; B)&quot;</span>);</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    static_assert(std::greater&lt;&gt;()(left, right), <span class="stringliteral">&quot;!(left &gt; right)&quot;</span>);</div>
 <div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;};</div>
 <div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160; </div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;<span class="keyword">template</span>&lt;auto A, auto B&gt;</div>
-<div class="line"><a name="l00058"></a><span class="lineno"><a class="line" href="structqx_1_1detail_1_1_static_assert_two_3_01_a_00_01_b_00_01std_1_1greater__equal_3_4_01_4.html">   58</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structqx_1_1detail_1_1_static_assert_two.html">StaticAssertTwo</a>&lt;A, B, std::greater_equal&lt;&gt;&gt;</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;<span class="keyword">template</span>&lt;auto left, auto right&gt;</div>
+<div class="line"><a name="l00058"></a><span class="lineno"><a class="line" href="structqx_1_1detail_1_1static__assert__two_3_01left_00_01right_00_01std_1_1greater__equal_3_4_01_4.html">   58</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structqx_1_1detail_1_1static__assert__two.html">static_assert_two</a>&lt;left, right, std::greater_equal&lt;&gt;&gt;</div>
 <div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;{</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    static_assert(std::greater_equal&lt;&gt;()(A, B), <span class="stringliteral">&quot;!(A &gt;= B)&quot;</span>);</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    static_assert(std::greater_equal&lt;&gt;()(left, right), <span class="stringliteral">&quot;!(left &gt;= right)&quot;</span>);</div>
 <div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;};</div>
 <div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160; </div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;<span class="keyword">template</span>&lt;auto L, auto V, auto R&gt;</div>
-<div class="line"><a name="l00064"></a><span class="lineno"><a class="line" href="structqx_1_1detail_1_1_static_assert_between.html">   64</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structqx_1_1detail_1_1_static_assert_between.html">StaticAssertBetween</a></div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;<span class="keyword">template</span>&lt;auto left, auto value, auto right&gt;</div>
+<div class="line"><a name="l00064"></a><span class="lineno"><a class="line" href="structqx_1_1detail_1_1static__assert__between.html">   64</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structqx_1_1detail_1_1static__assert__between.html">static_assert_between</a></div>
 <div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;{</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    static_assert(<a class="code" href="math_2common_8h.html#a2986ab33c946935721e51f4564ea9a08">qx::between</a>(L, V, R), <span class="stringliteral">&quot;V is not between R and L&quot;</span>);</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    static_assert(<a class="code" href="math_2common_8h.html#a0cea1fc43418a3cfd756c96121ea5de7">qx::between</a>(left, value, right), <span class="stringliteral">&quot;value is not between right and left&quot;</span>);</div>
 <div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;};</div>
 <div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160; </div>
 <div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;} <span class="comment">// namespace qx::detail</span></div>
 <div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160; </div>
 <div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;<span class="comment">/*</span></div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;<span class="comment">    Static assertions that shows A and B in error msg</span></div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;<span class="comment">    Static assertions that shows left and right in error msg</span></div>
 <div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;<span class="comment">*/</span></div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;<span class="preprocessor">#define QX_STATIC_ASSERT_EQ(a, b) \</span></div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;<span class="preprocessor">    constexpr qx::detail::StaticAssertTwo&lt;(a), (b), std::equal_to&lt;&gt;&gt; QX_LINE_NAME(_static_assert_eq_)</span></div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;<span class="preprocessor">#define QX_STATIC_ASSERT_EQ(left, right) \</span></div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;<span class="preprocessor">    constexpr qx::detail::static_assert_two&lt;(left), (right), std::equal_to&lt;&gt;&gt; QX_LINE_NAME(_static_assert_eq_)</span></div>
 <div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160; </div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;<span class="preprocessor">#define QX_STATIC_ASSERT_NE(a, b) \</span></div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;<span class="preprocessor">    constexpr qx::detail::StaticAssertTwo&lt;(a), (b), std::not_equal_to&lt;&gt;&gt; QX_LINE_NAME(_static_assert_nq_)</span></div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;<span class="preprocessor">#define QX_STATIC_ASSERT_NE(left, right) \</span></div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;<span class="preprocessor">    constexpr qx::detail::static_assert_two&lt;(left), (right), std::not_equal_to&lt;&gt;&gt; QX_LINE_NAME(_static_assert_nq_)</span></div>
 <div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160; </div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;<span class="preprocessor">#define QX_STATIC_ASSERT_LT(a, b) \</span></div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;<span class="preprocessor">    constexpr qx::detail::StaticAssertTwo&lt;(a), (b), std::less&lt;&gt;&gt; QX_LINE_NAME(_static_assert_lt_)</span></div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;<span class="preprocessor">#define QX_STATIC_ASSERT_LT(left, right) \</span></div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;<span class="preprocessor">    constexpr qx::detail::static_assert_two&lt;(left), (right), std::less&lt;&gt;&gt; QX_LINE_NAME(_static_assert_lt_)</span></div>
 <div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160; </div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;<span class="preprocessor">#define QX_STATIC_ASSERT_LE(a, b) \</span></div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;<span class="preprocessor">    constexpr qx::detail::StaticAssertTwo&lt;(a), (b), std::less_equal&lt;&gt;&gt; QX_LINE_NAME(_static_assert_le_)</span></div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;<span class="preprocessor">#define QX_STATIC_ASSERT_LE(left, right) \</span></div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;<span class="preprocessor">    constexpr qx::detail::static_assert_two&lt;(left), (right), std::less_equal&lt;&gt;&gt; QX_LINE_NAME(_static_assert_le_)</span></div>
 <div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160; </div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;<span class="preprocessor">#define QX_STATIC_ASSERT_GT(a, b) \</span></div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;<span class="preprocessor">    constexpr qx::detail::StaticAssertTwo&lt;(a), (b), std::greater&lt;&gt;&gt; QX_LINE_NAME(_static_assert_gt_)</span></div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;<span class="preprocessor">#define QX_STATIC_ASSERT_GT(left, right) \</span></div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;<span class="preprocessor">    constexpr qx::detail::static_assert_two&lt;(left), (right), std::greater&lt;&gt;&gt; QX_LINE_NAME(_static_assert_gt_)</span></div>
 <div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160; </div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;<span class="preprocessor">#define QX_STATIC_ASSERT_GE(a, b) \</span></div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;<span class="preprocessor">    constexpr qx::detail::StaticAssertTwo&lt;(a), (b), std::greater_equal&lt;&gt;&gt; QX_LINE_NAME(_static_assert_ge_)</span></div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;<span class="preprocessor">#define QX_STATIC_ASSERT_GE(left, right) \</span></div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;<span class="preprocessor">    constexpr qx::detail::static_assert_two&lt;(left), (right), std::greater_equal&lt;&gt;&gt; QX_LINE_NAME(_static_assert_ge_)</span></div>
 <div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;<span class="comment"></span> </div>
 <div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;<span class="comment">/**</span></div>
 <div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;<span class="comment">    @def   QX_STATIC_ASSERT_BETWEEN</span></div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;<span class="comment">    @brief Shows L, V and R in error msg</span></div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;<span class="comment">    @param L - left value</span></div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;<span class="comment">    @param V - value to check</span></div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;<span class="comment">    @param R - right value</span></div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;<span class="comment">    @brief Shows left, value and right in error msg</span></div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;<span class="comment">    @param left  - left value</span></div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;<span class="comment">    @param value - value to check</span></div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;<span class="comment">    @param right - right value</span></div>
 <div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;<span class="comment">**/</span></div>
-<div class="line"><a name="l00099"></a><span class="lineno"><a class="line" href="static__assert_8h.html#a06c64a5f786d6ed8416e6a90502eaa86">   99</a></span>&#160;<span class="preprocessor">#define QX_STATIC_ASSERT_BETWEEN(L, V, R) \</span></div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;<span class="preprocessor">    qx::detail::StaticAssertBetween&lt;(L), (V), (R)&gt; QX_LINE_NAME(static_assert_between_)</span></div>
+<div class="line"><a name="l00099"></a><span class="lineno"><a class="line" href="static__assert_8h.html#a03064acf0d8eb17f0cd74a34aa1ba4eb">   99</a></span>&#160;<span class="preprocessor">#define QX_STATIC_ASSERT_BETWEEN(left, value, right) \</span></div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;<span class="preprocessor">    qx::detail::static_assert_between&lt;(left), (value), (right)&gt; QX_LINE_NAME(static_assert_between_)</span></div>
 <div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;<span class="comment"></span> </div>
 <div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;<span class="comment">/**</span></div>
 <div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;<span class="comment">    @brief This static assert will fail if block it placed in must not be instantiated</span></div>
@@ -207,9 +207,9 @@ $(function() {
 <div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;<span class="preprocessor">    ()</span></div>
 <div class="ttc" id="amacros_2common_8h_html"><div class="ttname"><a href="macros_2common_8h.html">common.h</a></div><div class="ttdoc">Useful macros.</div></div>
 <div class="ttc" id="amath_2common_8h_html"><div class="ttname"><a href="math_2common_8h.html">common.h</a></div><div class="ttdoc">Contains common math functions.</div></div>
-<div class="ttc" id="amath_2common_8h_html_a2986ab33c946935721e51f4564ea9a08"><div class="ttname"><a href="math_2common_8h.html#a2986ab33c946935721e51f4564ea9a08">qx::between</a></div><div class="ttdeci">constexpr bool between(T left, T value, T right, Compare compare)</div><div class="ttdoc">Checks if value is between left and right.</div><div class="ttdef"><b>Definition:</b> <a href="math_2common_8h_source.html#l00257">common.h:257</a></div></div>
-<div class="ttc" id="astructqx_1_1detail_1_1_static_assert_between_html"><div class="ttname"><a href="structqx_1_1detail_1_1_static_assert_between.html">qx::detail::StaticAssertBetween</a></div><div class="ttdef"><b>Definition:</b> <a href="static__assert_8h_source.html#l00064">static_assert.h:65</a></div></div>
-<div class="ttc" id="astructqx_1_1detail_1_1_static_assert_two_html"><div class="ttname"><a href="structqx_1_1detail_1_1_static_assert_two.html">qx::detail::StaticAssertTwo</a></div><div class="ttdef"><b>Definition:</b> <a href="static__assert_8h_source.html#l00022">static_assert.h:23</a></div></div>
+<div class="ttc" id="amath_2common_8h_html_a0cea1fc43418a3cfd756c96121ea5de7"><div class="ttname"><a href="math_2common_8h.html#a0cea1fc43418a3cfd756c96121ea5de7">qx::between</a></div><div class="ttdeci">constexpr bool between(T left, T value, T right, compare_t compare)</div><div class="ttdoc">Checks if value is between left and right.</div><div class="ttdef"><b>Definition:</b> <a href="common_8inl_source.html#l00153">common.inl:153</a></div></div>
+<div class="ttc" id="astructqx_1_1detail_1_1static__assert__between_html"><div class="ttname"><a href="structqx_1_1detail_1_1static__assert__between.html">qx::detail::static_assert_between</a></div><div class="ttdef"><b>Definition:</b> <a href="static__assert_8h_source.html#l00064">static_assert.h:65</a></div></div>
+<div class="ttc" id="astructqx_1_1detail_1_1static__assert__two_html"><div class="ttname"><a href="structqx_1_1detail_1_1static__assert__two.html">qx::detail::static_assert_two</a></div><div class="ttdef"><b>Definition:</b> <a href="static__assert_8h_source.html#l00022">static_assert.h:23</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

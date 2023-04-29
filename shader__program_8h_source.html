@@ -169,7 +169,7 @@ $(function() {
 <div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;<span class="comment">                                   used to update the specified uniform variable.</span></div>
 <div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;<span class="comment">        @param  nCount           - number of values that are to be modified.</span></div>
 <div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;<span class="comment">    **/</span></div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;    template&lt;typename T&gt;</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;    template&lt;class T&gt;</div>
 <div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classqx_1_1base__shader__program.html#a18d6afbe8cacd51c5b2027f2fe43e909">SetUniform</a>(GLint nUniformLocation, const T* pValue, GLsizei nCount) noexcept;</div>
 <div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;<span class="comment"></span> </div>
 <div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;<span class="comment">    /**</span></div>
@@ -180,7 +180,7 @@ $(function() {
 <div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;<span class="comment">                          used to update the specified uniform variable.</span></div>
 <div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;<span class="comment">        @param  nCount  - number of values that are to be modified.</span></div>
 <div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;<span class="comment">    **/</span></div>
-<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;    template&lt;typename T&gt;</div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;    template&lt;class T&gt;</div>
 <div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classqx_1_1base__shader__program.html#a18d6afbe8cacd51c5b2027f2fe43e909">SetUniform</a>(const GLchar* pszName, const T* pValue, GLsizei nCount) noexcept;</div>
 <div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;<span class="comment"></span> </div>
 <div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;<span class="comment">    /**</span></div>
@@ -189,7 +189,7 @@ $(function() {
 <div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;<span class="comment">        @param  nUniformLocation - the location of the uniform variable to be modified</span></div>
 <div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;<span class="comment">        @param  value            - the value of a uniform variable</span></div>
 <div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;<span class="comment">    **/</span></div>
-<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;    template&lt;typename T&gt;</div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;    template&lt;class T&gt;</div>
 <div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classqx_1_1base__shader__program.html#a18d6afbe8cacd51c5b2027f2fe43e909">SetUniform</a>(GLint nUniformLocation, const T&amp; value) noexcept;</div>
 <div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;<span class="comment"></span> </div>
 <div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;<span class="comment">    /**</span></div>
@@ -198,7 +198,7 @@ $(function() {
 <div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;<span class="comment">        @param  pszName - the name of the uniform variable to be modified </span></div>
 <div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;<span class="comment">        @param  value   - the value of a uniform variable. </span></div>
 <div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;<span class="comment">    **/</span></div>
-<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;    template&lt;typename T&gt;</div>
+<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;    template&lt;class T&gt;</div>
 <div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classqx_1_1base__shader__program.html#a18d6afbe8cacd51c5b2027f2fe43e909">SetUniform</a>(const GLchar* pszName, const T&amp; value) noexcept;</div>
 <div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;<span class="comment"></span> </div>
 <div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;<span class="comment">    /**</span></div>
@@ -271,7 +271,7 @@ $(function() {
 <div class="ttc" id="aclassqx_1_1base__shader__program_html_ab42949735e79acef38898f6d77414034"><div class="ttname"><a href="classqx_1_1base__shader__program.html#ab42949735e79acef38898f6d77414034">qx::base_shader_program::Link</a></div><div class="ttdeci">string Link() noexcept</div><div class="ttdoc">Link attached shaders.</div><div class="ttdef"><b>Definition:</b> <a href="shader__program_8inl_source.html#l00035">shader_program.inl:35</a></div></div>
 <div class="ttc" id="aclassqx_1_1base__shader__program_html_ab791367d99d140d23fbcd47ee7a1a1fc"><div class="ttname"><a href="classqx_1_1base__shader__program.html#ab791367d99d140d23fbcd47ee7a1a1fc">qx::base_shader_program::~base_shader_program</a></div><div class="ttdeci">~base_shader_program() noexcept</div><div class="ttdoc">base_shader_program object destructor</div><div class="ttdef"><b>Definition:</b> <a href="shader__program_8inl_source.html#l00018">shader_program.inl:18</a></div></div>
 <div class="ttc" id="aclassqx_1_1base__shader__program_html_ae66925f196df50ce85a5aae6f5c6999f"><div class="ttname"><a href="classqx_1_1base__shader__program.html#ae66925f196df50ce85a5aae6f5c6999f">qx::base_shader_program::GetUniformLocation</a></div><div class="ttdeci">GLint GetUniformLocation(const GLchar *pszName) const noexcept</div><div class="ttdoc">Get uniform location based on it's name.</div><div class="ttdef"><b>Definition:</b> <a href="shader__program_8inl_source.html#l00209">shader_program.inl:209</a></div></div>
-<div class="ttc" id="aclassqx_1_1shader__base_html"><div class="ttname"><a href="classqx_1_1shader__base.html">qx::shader_base</a></div><div class="ttdoc">OpenGL base shader.</div><div class="ttdef"><b>Definition:</b> <a href="shaders_8h_source.html#l00041">shaders.h:42</a></div></div>
+<div class="ttc" id="aclassqx_1_1shader__base_html"><div class="ttname"><a href="classqx_1_1shader__base.html">qx::shader_base</a></div><div class="ttdoc">OpenGL base shader.</div><div class="ttdef"><b>Definition:</b> <a href="shaders_8h_source.html#l00043">shaders.h:44</a></div></div>
 <div class="ttc" id="ashaders_8h_html"><div class="ttname"><a href="shaders_8h.html">shaders.h</a></div><div class="ttdoc">Contains shaders classes.</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->

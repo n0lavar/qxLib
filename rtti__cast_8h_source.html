@@ -88,8 +88,8 @@ $(function() {
 <div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="keyword">namespace </span>detail</div>
 <div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;{</div>
 <div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160; </div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T, <span class="keyword">typename</span> From&gt;</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;concept has_is_derived_from = requires(T* t) { t-&gt;template is_derived_from&lt;From&gt;(); };</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> T, <span class="keyword">class</span> from_t&gt;</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;concept has_is_derived_from = requires(T* t) { t-&gt;template is_derived_from&lt;from_t&gt;(); };</div>
 <div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160; </div>
 <div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;} <span class="comment">// namespace detail</span></div>
 <div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="comment"></span> </div>
@@ -100,7 +100,7 @@ $(function() {
 <div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="comment">    @param   pointer - unique or shared pointer</span></div>
 <div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="comment">    @retval          - Y* if Y is inherited from pointer class, otherwise nullptr</span></div>
 <div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="comment">**/</span></div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> Y&gt;</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> Y&gt;</div>
 <div class="line"><a name="l00033"></a><span class="lineno"><a class="line" href="rtti__cast_8h.html#a1af8d1c717e312349e5cd36f39cf16fa">   33</a></span>&#160;Y* <a class="code" href="rtti__cast_8h.html#a1af8d1c717e312349e5cd36f39cf16fa">rtti_cast</a>(<span class="keyword">auto</span>&amp; pointer)</div>
 <div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;{</div>
 <div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    <span class="keyword">using</span> smart_pointer_t = <span class="keyword">typename</span> std::remove_reference_t&lt;decltype(pointer)&gt;::element_type;</div>
@@ -119,7 +119,7 @@ $(function() {
 <div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="comment">    @param   pointer - raw pointer</span></div>
 <div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="comment">    @retval          - Y* if Y is inherited from pointer class, otherwise nullptr</span></div>
 <div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="comment">**/</span></div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> Y, <span class="keyword">typename</span> X&gt;</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> Y, <span class="keyword">class</span> X&gt;</div>
 <div class="line"><a name="l00052"></a><span class="lineno"><a class="line" href="rtti__cast_8h.html#af902ef7984c2e7134318854e38c7fa46">   52</a></span>&#160;Y* <a class="code" href="rtti__cast_8h.html#a1af8d1c717e312349e5cd36f39cf16fa">rtti_cast</a>(X* pointer)</div>
 <div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;{</div>
 <div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    <span class="keywordflow">if</span> constexpr (detail::has_is_derived_from&lt;X, Y&gt;)</div>

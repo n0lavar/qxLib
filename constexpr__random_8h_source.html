@@ -93,56 +93,57 @@ $(function() {
 <div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="comment">/**</span></div>
 <div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="comment">    @brief  An algorithm that yields a sequence of pseudo-randomized numbers</span></div>
 <div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="comment">            calculated with a discontinuous piecewise linear equation</span></div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="comment">    @tparam MOD   - the &quot;modulus&quot; value</span></div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="comment">    @tparam MULT  - the &quot;multiplier&quot; value</span></div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="comment">    @tparam INC   - the &quot;increment&quot; value</span></div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="comment">    @param  nPrev - prev value of sequence</span></div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="comment">    @retval       - next value of sequence</span></div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="comment">    @tparam nModulus    - the &quot;modulus&quot; value</span></div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="comment">    @tparam nMultiplier - the &quot;multiplier&quot; value</span></div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="comment">    @tparam nIncrement  - the &quot;increment&quot; value</span></div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="comment">    @param  nPrev       - prev value of sequence</span></div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="comment">    @retval             - next value of sequence</span></div>
 <div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="comment">**/</span></div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="keyword">template</span>&lt;u32 MOD, u32 MULT, u32 INC&gt;</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="keyword">template</span>&lt;u32 nModulus, u32 nMultiplier, u32 nIncrement&gt;</div>
 <div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;constexpr <a class="code" href="typedefs_8h.html#a70c1fcc1a4e96af8f6580f708657cd41">u32</a> linear_congruential_generator(<a class="code" href="typedefs_8h.html#a70c1fcc1a4e96af8f6580f708657cd41">u32</a> nPrev)</div>
 <div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;{</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    <span class="keywordflow">return</span> (MULT * nPrev + INC) % MOD;</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    <span class="keywordflow">return</span> (nMultiplier * nPrev + nIncrement) % nModulus;</div>
 <div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;}</div>
 <div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="comment"></span> </div>
 <div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="comment">/**</span></div>
 <div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="comment">    @brief  Linear_congruential_generator limited to MIN and MAX</span></div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="comment">    @tparam MIN   - min distribution value (including)</span></div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="comment">    @tparam MAX   - man distribution value (excluding)</span></div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="comment">    @tparam MOD   - the &quot;modulus&quot; value</span></div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="comment">    @tparam MULT  - the &quot;multiplier&quot; value</span></div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="comment">    @tparam INC   - the &quot;increment&quot; value</span></div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="comment">    @param  nPrev - prev value of sequence </span></div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="comment">    @retval       - next value of sequence </span></div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="comment">    @tparam nMin        - min distribution value (including)</span></div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="comment">    @tparam nMax        - man distribution value (excluding)</span></div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="comment">    @tparam nModulus    - the &quot;modulus&quot; value</span></div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="comment">    @tparam nMultiplier - the &quot;multiplier&quot; value</span></div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="comment">    @tparam nIncrement  - the &quot;increment&quot; value</span></div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="comment">    @param  nPrev      - prev value of sequence </span></div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="comment">    @retval            - next value of sequence </span></div>
 <div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="comment">**/</span></div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="keyword">template</span>&lt;u32 MIN, u32 MAX, u32 MOD, u32 MULT, u32 INC&gt;</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="keyword">template</span>&lt;u32 nMin, u32 nMax, u32 nModulus, u32 nMultiplier, u32 nIncrement&gt;</div>
 <div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;constexpr <a class="code" href="typedefs_8h.html#a70c1fcc1a4e96af8f6580f708657cd41">u32</a> uniform_distribution(<a class="code" href="typedefs_8h.html#a70c1fcc1a4e96af8f6580f708657cd41">u32</a> nPrev)</div>
 <div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;{</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    <span class="keywordflow">return</span> MIN + linear_congruential_generator&lt;MOD, MULT, INC&gt;(nPrev) % MAX;</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    <span class="keywordflow">return</span> nMin + linear_congruential_generator&lt;nModulus, nMultiplier, nIncrement&gt;(nPrev) % nMax;</div>
 <div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;}</div>
 <div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160; </div>
 <div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<span class="comment">// returns preudo random number of uniform distribution with each next() call</span></div>
 <div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;<span class="keyword">template</span>&lt;</div>
 <div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    <span class="keyword">typename</span> Tag,</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    <a class="code" href="typedefs_8h.html#a70c1fcc1a4e96af8f6580f708657cd41">u32</a> SEED = 0u,</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    <a class="code" href="typedefs_8h.html#a70c1fcc1a4e96af8f6580f708657cd41">u32</a> MIN  = std::numeric_limits&lt;u32&gt;::min(),</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    <a class="code" href="typedefs_8h.html#a70c1fcc1a4e96af8f6580f708657cd41">u32</a> MAX  = std::numeric_limits&lt;u32&gt;::max(),</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    <a class="code" href="typedefs_8h.html#a70c1fcc1a4e96af8f6580f708657cd41">u32</a> MOD  = 2147483648u,</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    <a class="code" href="typedefs_8h.html#a70c1fcc1a4e96af8f6580f708657cd41">u32</a> MULT = 1103515245u,</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    <a class="code" href="typedefs_8h.html#a70c1fcc1a4e96af8f6580f708657cd41">u32</a> INC  = 12345u&gt;</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;<span class="keyword">using</span> constexpr_random = constexpr_sequence&lt;Tag, u32, SEED, uniform_distribution&lt;MIN, MAX, MOD, MULT, INC&gt; &gt;;</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160; </div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;} <span class="comment">// namespace qx</span></div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160; </div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;<span class="comment">/**</span></div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;<span class="comment">    @def   QX_UNIQUE_SEED</span></div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;<span class="comment">    @brief Creates unique u32 seed for current: file, date, time (seconds) and line number</span></div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;<span class="comment">**/</span></div>
-<div class="line"><a name="l00072"></a><span class="lineno"><a class="line" href="constexpr__random_8h.html#a3e05af8678b42a682039a4f067861de7">   72</a></span>&#160;<span class="preprocessor">#define QX_UNIQUE_SEED \</span></div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;<span class="preprocessor">    static_cast&lt;u32&gt;(  \</span></div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;<span class="preprocessor">        (qx::murmur_32_hash(__FILE__ __DATE__ __TIME__, 42u, qx::strlen(__FILE__ __DATE__ __TIME__)) + __LINE__))</span></div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    <a class="code" href="typedefs_8h.html#a70c1fcc1a4e96af8f6580f708657cd41">u32</a> nSeed       = 0u,</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    <a class="code" href="typedefs_8h.html#a70c1fcc1a4e96af8f6580f708657cd41">u32</a> nMin        = std::numeric_limits&lt;u32&gt;::min(),</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    <a class="code" href="typedefs_8h.html#a70c1fcc1a4e96af8f6580f708657cd41">u32</a> nMax        = std::numeric_limits&lt;u32&gt;::max(),</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    <a class="code" href="typedefs_8h.html#a70c1fcc1a4e96af8f6580f708657cd41">u32</a> nModulus    = 2147483648u,</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    <a class="code" href="typedefs_8h.html#a70c1fcc1a4e96af8f6580f708657cd41">u32</a> nMultiplier = 1103515245u,</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    <a class="code" href="typedefs_8h.html#a70c1fcc1a4e96af8f6580f708657cd41">u32</a> nIncrement  = 12345u&gt;</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;<span class="keyword">using</span> constexpr_random =</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    constexpr_sequence&lt;Tag, u32, nSeed, uniform_distribution&lt;nMin, nMax, nModulus, nMultiplier, nIncrement&gt; &gt;;</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160; </div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;} <span class="comment">// namespace qx</span></div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160; </div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;<span class="comment">/**</span></div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;<span class="comment">    @def   QX_UNIQUE_SEED</span></div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;<span class="comment">    @brief Creates unique u32 seed for current: file, date, time (seconds) and line number</span></div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;<span class="comment">**/</span></div>
+<div class="line"><a name="l00073"></a><span class="lineno"><a class="line" href="constexpr__random_8h.html#a3e05af8678b42a682039a4f067861de7">   73</a></span>&#160;<span class="preprocessor">#define QX_UNIQUE_SEED \</span></div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;<span class="preprocessor">    static_cast&lt;u32&gt;(  \</span></div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;<span class="preprocessor">        (qx::murmur_32_hash(__FILE__ __DATE__ __TIME__, 42u, qx::strlen(__FILE__ __DATE__ __TIME__)) + __LINE__))</span></div>
 <div class="ttc" id="aconstexpr__sequence_8h_html"><div class="ttname"><a href="constexpr__sequence_8h.html">constexpr_sequence.h</a></div><div class="ttdoc">Contains qx::constexpr_sequence class.</div></div>
 <div class="ttc" id="astring__utils_8h_html"><div class="ttname"><a href="string__utils_8h.html">string_utils.h</a></div><div class="ttdoc">String functions.</div></div>
 <div class="ttc" id="atypedefs_8h_html"><div class="ttname"><a href="typedefs_8h.html">typedefs.h</a></div><div class="ttdoc">Project typedefs.</div></div>

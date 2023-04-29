@@ -85,43 +85,43 @@ Macros</h2></td></tr>
 <tr class="memitem:a6b22a06d00ce06f575913fec486bd955"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="string__utils_8h.html#a6b22a06d00ce06f575913fec486bd955">QX_TO_WSTRING</a>(str)&#160;&#160;&#160;_QX_TO_WSTRING(str)</td></tr>
 <tr class="memdesc:a6b22a06d00ce06f575913fec486bd955"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert char* to wchar_t*.  <a href="string__utils_8h.html#a6b22a06d00ce06f575913fec486bd955">More...</a><br /></td></tr>
 <tr class="separator:a6b22a06d00ce06f575913fec486bd955"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac188ca5f0d584a897b5e2a443c574729"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="string__utils_8h.html#ac188ca5f0d584a897b5e2a443c574729">QX_STR_PREFIX</a>(value_type,  str)&#160;&#160;&#160;qx::detail::choose_str_prefix&lt;value_type&gt;(str, <a class="el" href="string__utils_8h.html#a6b22a06d00ce06f575913fec486bd955">QX_TO_WSTRING</a>(str))</td></tr>
-<tr class="memdesc:ac188ca5f0d584a897b5e2a443c574729"><td class="mdescLeft">&#160;</td><td class="mdescRight">Chose witch of prefixes add to string : L or none.  <a href="string__utils_8h.html#ac188ca5f0d584a897b5e2a443c574729">More...</a><br /></td></tr>
-<tr class="separator:ac188ca5f0d584a897b5e2a443c574729"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab4cfe02c348ccce78db4519f9758e672"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="string__utils_8h.html#ab4cfe02c348ccce78db4519f9758e672">QX_CHAR_PREFIX</a>(value_type,  ch)&#160;&#160;&#160;qx::detail::choose_char_prefix&lt;value_type&gt;(ch, <a class="el" href="string__utils_8h.html#a6b22a06d00ce06f575913fec486bd955">QX_TO_WSTRING</a>(ch))</td></tr>
-<tr class="memdesc:ab4cfe02c348ccce78db4519f9758e672"><td class="mdescLeft">&#160;</td><td class="mdescRight">Chose witch of prefixes add to char : L or none.  <a href="string__utils_8h.html#ab4cfe02c348ccce78db4519f9758e672">More...</a><br /></td></tr>
-<tr class="separator:ab4cfe02c348ccce78db4519f9758e672"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae4f688084b037e2e7a63a13eaf539a02"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="string__utils_8h.html#ae4f688084b037e2e7a63a13eaf539a02">QX_STR_PREFIX</a>(value_t,  str)&#160;&#160;&#160;qx::detail::choose_str_prefix&lt;value_t&gt;(str, <a class="el" href="string__utils_8h.html#a6b22a06d00ce06f575913fec486bd955">QX_TO_WSTRING</a>(str))</td></tr>
+<tr class="memdesc:ae4f688084b037e2e7a63a13eaf539a02"><td class="mdescLeft">&#160;</td><td class="mdescRight">Chose witch of prefixes add to string : L or none.  <a href="string__utils_8h.html#ae4f688084b037e2e7a63a13eaf539a02">More...</a><br /></td></tr>
+<tr class="separator:ae4f688084b037e2e7a63a13eaf539a02"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a57911e62bb82593665bf09e4ea834904"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="string__utils_8h.html#a57911e62bb82593665bf09e4ea834904">QX_CHAR_PREFIX</a>(value_t,  ch)&#160;&#160;&#160;qx::detail::choose_char_prefix&lt;value_t&gt;(ch, <a class="el" href="string__utils_8h.html#a6b22a06d00ce06f575913fec486bd955">QX_TO_WSTRING</a>(ch))</td></tr>
+<tr class="memdesc:a57911e62bb82593665bf09e4ea834904"><td class="mdescLeft">&#160;</td><td class="mdescRight">Chose witch of prefixes add to char : L or none.  <a href="string__utils_8h.html#a57911e62bb82593665bf09e4ea834904">More...</a><br /></td></tr>
+<tr class="separator:a57911e62bb82593665bf09e4ea834904"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a49ac0e2f7b72f7474a2470d56fc61e94"><td class="memTemplParams" colspan="2">template&lt;class value_type &gt; </td></tr>
-<tr class="memitem:a49ac0e2f7b72f7474a2470d56fc61e94"><td class="memTemplItemLeft" align="right" valign="top">constexpr size_t&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="string__utils_8h.html#a49ac0e2f7b72f7474a2470d56fc61e94">qx::djb2a_hash</a> (const value_type *pszStr, size_t nSeed, size_t nLen)</td></tr>
-<tr class="memdesc:a49ac0e2f7b72f7474a2470d56fc61e94"><td class="mdescLeft">&#160;</td><td class="mdescRight">djb2a hash  <a href="string__utils_8h.html#a49ac0e2f7b72f7474a2470d56fc61e94">More...</a><br /></td></tr>
-<tr class="separator:a49ac0e2f7b72f7474a2470d56fc61e94"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae563089fcdc4bc5a62fae34498d94e74"><td class="memTemplParams" colspan="2">template&lt;class value_type &gt; </td></tr>
-<tr class="memitem:ae563089fcdc4bc5a62fae34498d94e74"><td class="memTemplItemLeft" align="right" valign="top">constexpr size_t&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="string__utils_8h.html#ae563089fcdc4bc5a62fae34498d94e74">qx::djb2a_hash</a> (const value_type *pszStr, size_t nSeed)</td></tr>
-<tr class="memdesc:ae563089fcdc4bc5a62fae34498d94e74"><td class="mdescLeft">&#160;</td><td class="mdescRight">djb2a hash  <a href="string__utils_8h.html#ae563089fcdc4bc5a62fae34498d94e74">More...</a><br /></td></tr>
-<tr class="separator:ae563089fcdc4bc5a62fae34498d94e74"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1eb12d2223725f5a5e77213e01e54626"><td class="memTemplParams" colspan="2">template&lt;class value_type &gt; </td></tr>
-<tr class="memitem:a1eb12d2223725f5a5e77213e01e54626"><td class="memTemplItemLeft" align="right" valign="top">constexpr size_t&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="string__utils_8h.html#a1eb12d2223725f5a5e77213e01e54626">qx::murmur_32_hash</a> (const value_type *pStr, size_t nSeed, size_t nLen) noexcept</td></tr>
-<tr class="memdesc:a1eb12d2223725f5a5e77213e01e54626"><td class="mdescLeft">&#160;</td><td class="mdescRight">Murmur nHash.  <a href="string__utils_8h.html#a1eb12d2223725f5a5e77213e01e54626">More...</a><br /></td></tr>
-<tr class="separator:a1eb12d2223725f5a5e77213e01e54626"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab782a017121b127b12b2b118a938d61b"><td class="memTemplParams" colspan="2">template&lt;class FwdIt1 , class FwdIt2 &gt; </td></tr>
-<tr class="memitem:ab782a017121b127b12b2b118a938d61b"><td class="memTemplItemLeft" align="right" valign="top">constexpr int&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="string__utils_8h.html#ab782a017121b127b12b2b118a938d61b">qx::iter_strcmp</a> (FwdIt1 itBegin1, FwdIt1 itEnd1, FwdIt2 itBegin2, FwdIt2 itEnd2) noexcept</td></tr>
-<tr class="memdesc:ab782a017121b127b12b2b118a938d61b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compares string 1 with string 2.  <a href="string__utils_8h.html#ab782a017121b127b12b2b118a938d61b">More...</a><br /></td></tr>
-<tr class="separator:ab782a017121b127b12b2b118a938d61b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4ec6630ad6d65fe8bb53d5c1ed2ac711"><td class="memTemplParams" colspan="2">template&lt;class value_type &gt; </td></tr>
-<tr class="memitem:a4ec6630ad6d65fe8bb53d5c1ed2ac711"><td class="memTemplItemLeft" align="right" valign="top">constexpr int&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="string__utils_8h.html#a4ec6630ad6d65fe8bb53d5c1ed2ac711">qx::strcmp</a> (const value_type *pszLeft, const value_type *pszRight)</td></tr>
-<tr class="memdesc:a4ec6630ad6d65fe8bb53d5c1ed2ac711"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constexpr compare two strings.  <a href="string__utils_8h.html#a4ec6630ad6d65fe8bb53d5c1ed2ac711">More...</a><br /></td></tr>
-<tr class="separator:a4ec6630ad6d65fe8bb53d5c1ed2ac711"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8c51be95bedbc7e6a1f1612d2a45e29b"><td class="memTemplParams" colspan="2">template&lt;class value_type , class T &gt; </td></tr>
+<tr class="memitem:a3d321a74f68c1be9613ca451a464ec53"><td class="memTemplParams" colspan="2">template&lt;class value_t &gt; </td></tr>
+<tr class="memitem:a3d321a74f68c1be9613ca451a464ec53"><td class="memTemplItemLeft" align="right" valign="top">constexpr size_t&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="string__utils_8h.html#a3d321a74f68c1be9613ca451a464ec53">qx::djb2a_hash</a> (const value_t *pszStr, size_t nSeed, size_t nLen)</td></tr>
+<tr class="memdesc:a3d321a74f68c1be9613ca451a464ec53"><td class="mdescLeft">&#160;</td><td class="mdescRight">djb2a hash  <a href="string__utils_8h.html#a3d321a74f68c1be9613ca451a464ec53">More...</a><br /></td></tr>
+<tr class="separator:a3d321a74f68c1be9613ca451a464ec53"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a95071e58176b91c2268d6f7842843fb1"><td class="memTemplParams" colspan="2">template&lt;class value_t &gt; </td></tr>
+<tr class="memitem:a95071e58176b91c2268d6f7842843fb1"><td class="memTemplItemLeft" align="right" valign="top">constexpr size_t&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="string__utils_8h.html#a95071e58176b91c2268d6f7842843fb1">qx::djb2a_hash</a> (const value_t *pszStr, size_t nSeed)</td></tr>
+<tr class="memdesc:a95071e58176b91c2268d6f7842843fb1"><td class="mdescLeft">&#160;</td><td class="mdescRight">djb2a hash  <a href="string__utils_8h.html#a95071e58176b91c2268d6f7842843fb1">More...</a><br /></td></tr>
+<tr class="separator:a95071e58176b91c2268d6f7842843fb1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8eb00080d60f696d550f8f9800b88222"><td class="memTemplParams" colspan="2">template&lt;class value_t &gt; </td></tr>
+<tr class="memitem:a8eb00080d60f696d550f8f9800b88222"><td class="memTemplItemLeft" align="right" valign="top">constexpr size_t&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="string__utils_8h.html#a8eb00080d60f696d550f8f9800b88222">qx::murmur_32_hash</a> (const value_t *pStr, size_t nSeed, size_t nLen) noexcept</td></tr>
+<tr class="memdesc:a8eb00080d60f696d550f8f9800b88222"><td class="mdescLeft">&#160;</td><td class="mdescRight">Murmur nHash.  <a href="string__utils_8h.html#a8eb00080d60f696d550f8f9800b88222">More...</a><br /></td></tr>
+<tr class="separator:a8eb00080d60f696d550f8f9800b88222"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5d2e428ea861df8de50dbdc77b2608a9"><td class="memTemplParams" colspan="2">template&lt;class fwd_it_1_t , class fwd_it_2_t &gt; </td></tr>
+<tr class="memitem:a5d2e428ea861df8de50dbdc77b2608a9"><td class="memTemplItemLeft" align="right" valign="top">constexpr int&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="string__utils_8h.html#a5d2e428ea861df8de50dbdc77b2608a9">qx::iter_strcmp</a> (fwd_it_1_t itBegin1, fwd_it_1_t itEnd1, fwd_it_2_t itBegin2, fwd_it_2_t itEnd2) noexcept</td></tr>
+<tr class="memdesc:a5d2e428ea861df8de50dbdc77b2608a9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compares string 1 with string 2.  <a href="string__utils_8h.html#a5d2e428ea861df8de50dbdc77b2608a9">More...</a><br /></td></tr>
+<tr class="separator:a5d2e428ea861df8de50dbdc77b2608a9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a93d16f8e89afc3d74d493084557b2c84"><td class="memTemplParams" colspan="2">template&lt;class value_t &gt; </td></tr>
+<tr class="memitem:a93d16f8e89afc3d74d493084557b2c84"><td class="memTemplItemLeft" align="right" valign="top">constexpr int&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="string__utils_8h.html#a93d16f8e89afc3d74d493084557b2c84">qx::strcmp</a> (const value_t *pszLeft, const value_t *pszRight)</td></tr>
+<tr class="memdesc:a93d16f8e89afc3d74d493084557b2c84"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constexpr compare two strings.  <a href="string__utils_8h.html#a93d16f8e89afc3d74d493084557b2c84">More...</a><br /></td></tr>
+<tr class="separator:a93d16f8e89afc3d74d493084557b2c84"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8c51be95bedbc7e6a1f1612d2a45e29b"><td class="memTemplParams" colspan="2">template&lt;class value_t , class T &gt; </td></tr>
 <tr class="memitem:a8c51be95bedbc7e6a1f1612d2a45e29b"><td class="memTemplItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="string__utils_8h.html#a8c51be95bedbc7e6a1f1612d2a45e29b">qx::get_format_specifier</a> () noexcept</td></tr>
 <tr class="memdesc:a8c51be95bedbc7e6a1f1612d2a45e29b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get format specifier for type.  <a href="string__utils_8h.html#a8c51be95bedbc7e6a1f1612d2a45e29b">More...</a><br /></td></tr>
 <tr class="separator:a8c51be95bedbc7e6a1f1612d2a45e29b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8e0efa61531960b546130958f6e42cf4"><td class="memTemplParams" colspan="2">template&lt;class value_type &gt; </td></tr>
-<tr class="memitem:a8e0efa61531960b546130958f6e42cf4"><td class="memTemplItemLeft" align="right" valign="top">constexpr std::size_t&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="string__utils_8h.html#a8e0efa61531960b546130958f6e42cf4">qx::strlen</a> (const value_type *psz)</td></tr>
-<tr class="memdesc:a8e0efa61531960b546130958f6e42cf4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constexpr string length.  <a href="string__utils_8h.html#a8e0efa61531960b546130958f6e42cf4">More...</a><br /></td></tr>
-<tr class="separator:a8e0efa61531960b546130958f6e42cf4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa1f7d3648d28dcef62c0db015730218d"><td class="memTemplParams" colspan="2">template&lt;class value_t &gt; </td></tr>
+<tr class="memitem:aa1f7d3648d28dcef62c0db015730218d"><td class="memTemplItemLeft" align="right" valign="top">constexpr std::size_t&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="string__utils_8h.html#aa1f7d3648d28dcef62c0db015730218d">qx::strlen</a> (const value_t *psz)</td></tr>
+<tr class="memdesc:aa1f7d3648d28dcef62c0db015730218d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constexpr string length.  <a href="string__utils_8h.html#aa1f7d3648d28dcef62c0db015730218d">More...</a><br /></td></tr>
+<tr class="separator:aa1f7d3648d28dcef62c0db015730218d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>String functions. </p>
@@ -131,8 +131,8 @@ Functions</h2></td></tr>
 
 <p class="definition">Definition in file <a class="el" href="string__utils_8h_source.html">string_utils.h</a>.</p>
 </div><h2 class="groupheader">Macro Definition Documentation</h2>
-<a id="ab4cfe02c348ccce78db4519f9758e672"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab4cfe02c348ccce78db4519f9758e672">&#9670;&nbsp;</a></span>QX_CHAR_PREFIX</h2>
+<a id="a57911e62bb82593665bf09e4ea834904"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a57911e62bb82593665bf09e4ea834904">&#9670;&nbsp;</a></span>QX_CHAR_PREFIX</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -141,7 +141,7 @@ Functions</h2></td></tr>
           <td class="memname">#define QX_CHAR_PREFIX</td>
           <td>(</td>
           <td class="paramtype">&#160;</td>
-          <td class="paramname">value_type, </td>
+          <td class="paramname">value_t, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -152,7 +152,7 @@ Functions</h2></td></tr>
         <tr>
           <td></td>
           <td>)</td>
-          <td></td><td>&#160;&#160;&#160;qx::detail::choose_char_prefix&lt;value_type&gt;(ch, <a class="el" href="string__utils_8h.html#a6b22a06d00ce06f575913fec486bd955">QX_TO_WSTRING</a>(ch))</td>
+          <td></td><td>&#160;&#160;&#160;qx::detail::choose_char_prefix&lt;value_t&gt;(ch, <a class="el" href="string__utils_8h.html#a6b22a06d00ce06f575913fec486bd955">QX_TO_WSTRING</a>(ch))</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -160,7 +160,7 @@ Functions</h2></td></tr>
 <p>Chose witch of prefixes add to char : L or none. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">value_type</td><td>- char type </td></tr>
+    <tr><td class="paramname">value_t</td><td>- char type </td></tr>
     <tr><td class="paramname">ch</td><td>- string to apply </td></tr>
   </table>
   </dd>
@@ -170,8 +170,8 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="ac188ca5f0d584a897b5e2a443c574729"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac188ca5f0d584a897b5e2a443c574729">&#9670;&nbsp;</a></span>QX_STR_PREFIX</h2>
+<a id="ae4f688084b037e2e7a63a13eaf539a02"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae4f688084b037e2e7a63a13eaf539a02">&#9670;&nbsp;</a></span>QX_STR_PREFIX</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -180,7 +180,7 @@ Functions</h2></td></tr>
           <td class="memname">#define QX_STR_PREFIX</td>
           <td>(</td>
           <td class="paramtype">&#160;</td>
-          <td class="paramname">value_type, </td>
+          <td class="paramname">value_t, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -191,7 +191,7 @@ Functions</h2></td></tr>
         <tr>
           <td></td>
           <td>)</td>
-          <td></td><td>&#160;&#160;&#160;qx::detail::choose_str_prefix&lt;value_type&gt;(str, <a class="el" href="string__utils_8h.html#a6b22a06d00ce06f575913fec486bd955">QX_TO_WSTRING</a>(str))</td>
+          <td></td><td>&#160;&#160;&#160;qx::detail::choose_str_prefix&lt;value_t&gt;(str, <a class="el" href="string__utils_8h.html#a6b22a06d00ce06f575913fec486bd955">QX_TO_WSTRING</a>(str))</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -199,7 +199,7 @@ Functions</h2></td></tr>
 <p>Chose witch of prefixes add to string : L or none. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">value_type</td><td>- char type </td></tr>
+    <tr><td class="paramname">value_t</td><td>- char type </td></tr>
     <tr><td class="paramname">str</td><td>- string to apply </td></tr>
   </table>
   </dd>
@@ -238,13 +238,13 @@ Functions</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Function Documentation</h2>
-<a id="ae563089fcdc4bc5a62fae34498d94e74"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae563089fcdc4bc5a62fae34498d94e74">&#9670;&nbsp;</a></span>djb2a_hash() <span class="overload">[1/2]</span></h2>
+<a id="a95071e58176b91c2268d6f7842843fb1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a95071e58176b91c2268d6f7842843fb1">&#9670;&nbsp;</a></span>djb2a_hash() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class value_type &gt; </div>
+template&lt;class value_t &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -252,7 +252,7 @@ template&lt;class value_type &gt; </div>
         <tr>
           <td class="memname">constexpr size_t qx::djb2a_hash </td>
           <td>(</td>
-          <td class="paramtype">const value_type *&#160;</td>
+          <td class="paramtype">const value_t *&#160;</td>
           <td class="paramname"><em>pszStr</em>, </td>
         </tr>
         <tr>
@@ -277,7 +277,7 @@ template&lt;class value_type &gt; </div>
 <p>djb2a hash </p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
-    <tr><td class="paramname">value_type</td><td>- char type </td></tr>
+    <tr><td class="paramname">value_t</td><td>- char type </td></tr>
   </table>
   </dd>
 </dl>
@@ -299,13 +299,13 @@ template&lt;class value_type &gt; </div>
 
 </div>
 </div>
-<a id="a49ac0e2f7b72f7474a2470d56fc61e94"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a49ac0e2f7b72f7474a2470d56fc61e94">&#9670;&nbsp;</a></span>djb2a_hash() <span class="overload">[2/2]</span></h2>
+<a id="a3d321a74f68c1be9613ca451a464ec53"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3d321a74f68c1be9613ca451a464ec53">&#9670;&nbsp;</a></span>djb2a_hash() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class value_type &gt; </div>
+template&lt;class value_t &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -313,7 +313,7 @@ template&lt;class value_type &gt; </div>
         <tr>
           <td class="memname">constexpr size_t qx::djb2a_hash </td>
           <td>(</td>
-          <td class="paramtype">const value_type *&#160;</td>
+          <td class="paramtype">const value_t *&#160;</td>
           <td class="paramname"><em>pszStr</em>, </td>
         </tr>
         <tr>
@@ -344,7 +344,7 @@ template&lt;class value_type &gt; </div>
 <p>djb2a hash </p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
-    <tr><td class="paramname">value_type</td><td>- char type </td></tr>
+    <tr><td class="paramname">value_t</td><td>- char type </td></tr>
   </table>
   </dd>
 </dl>
@@ -373,7 +373,7 @@ template&lt;class value_type &gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class value_type , class T &gt; </div>
+template&lt;class value_t , class T &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -395,7 +395,7 @@ template&lt;class value_type , class T &gt; </div>
 <p>Get format specifier for type. </p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
-    <tr><td class="paramname">value_type</td><td>- char type </td></tr>
+    <tr><td class="paramname">value_t</td><td>- char type </td></tr>
     <tr><td class="paramname">T</td><td>- target type </td></tr>
   </table>
   </dd>
@@ -411,13 +411,13 @@ template&lt;class value_type , class T &gt; </div>
 
 </div>
 </div>
-<a id="ab782a017121b127b12b2b118a938d61b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab782a017121b127b12b2b118a938d61b">&#9670;&nbsp;</a></span>iter_strcmp()</h2>
+<a id="a5d2e428ea861df8de50dbdc77b2608a9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5d2e428ea861df8de50dbdc77b2608a9">&#9670;&nbsp;</a></span>iter_strcmp()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class FwdIt1 , class FwdIt2 &gt; </div>
+template&lt;class fwd_it_1_t , class fwd_it_2_t &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -425,25 +425,25 @@ template&lt;class FwdIt1 , class FwdIt2 &gt; </div>
         <tr>
           <td class="memname">constexpr int qx::iter_strcmp </td>
           <td>(</td>
-          <td class="paramtype">FwdIt1&#160;</td>
+          <td class="paramtype">fwd_it_1_t&#160;</td>
           <td class="paramname"><em>itBegin1</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">FwdIt1&#160;</td>
+          <td class="paramtype">fwd_it_1_t&#160;</td>
           <td class="paramname"><em>itEnd1</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">FwdIt2&#160;</td>
+          <td class="paramtype">fwd_it_2_t&#160;</td>
           <td class="paramname"><em>itBegin2</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">FwdIt2&#160;</td>
+          <td class="paramtype">fwd_it_2_t&#160;</td>
           <td class="paramname"><em>itEnd2</em>&#160;</td>
         </tr>
         <tr>
@@ -462,8 +462,8 @@ template&lt;class FwdIt1 , class FwdIt2 &gt; </div>
 <p>Compares string 1 with string 2. </p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
-    <tr><td class="paramname">FwdIt1</td><td>- string 1 iterator type </td></tr>
-    <tr><td class="paramname">FwdIt2</td><td>- string 2 iterator type </td></tr>
+    <tr><td class="paramname">fwd_it_1_t</td><td>- string 1 iterator type </td></tr>
+    <tr><td class="paramname">fwd_it_2_t</td><td>- string 2 iterator type </td></tr>
   </table>
   </dd>
 </dl>
@@ -487,13 +487,13 @@ template&lt;class FwdIt1 , class FwdIt2 &gt; </div>
 
 </div>
 </div>
-<a id="a1eb12d2223725f5a5e77213e01e54626"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1eb12d2223725f5a5e77213e01e54626">&#9670;&nbsp;</a></span>murmur_32_hash()</h2>
+<a id="a8eb00080d60f696d550f8f9800b88222"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8eb00080d60f696d550f8f9800b88222">&#9670;&nbsp;</a></span>murmur_32_hash()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class value_type &gt; </div>
+template&lt;class value_t &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -501,7 +501,7 @@ template&lt;class value_type &gt; </div>
         <tr>
           <td class="memname">constexpr size_t qx::murmur_32_hash </td>
           <td>(</td>
-          <td class="paramtype">const value_type *&#160;</td>
+          <td class="paramtype">const value_t *&#160;</td>
           <td class="paramname"><em>pStr</em>, </td>
         </tr>
         <tr>
@@ -532,7 +532,7 @@ template&lt;class value_type &gt; </div>
 <p>Murmur nHash. </p>
 <p><a href="https://en.wikipedia.org/wiki/MurmurHash">https://en.wikipedia.org/wiki/MurmurHash</a> <a href="https://softwareengineering.stackexchange.com/questions/49550/which-hashing-algorithm-is-best-for-uniqueness-and-speed">https://softwareengineering.stackexchange.com/questions/49550/which-hashing-algorithm-is-best-for-uniqueness-and-speed</a> </p><dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
-    <tr><td class="paramname">value_type</td><td>- char type </td></tr>
+    <tr><td class="paramname">value_t</td><td>- char type </td></tr>
   </table>
   </dd>
 </dl>
@@ -555,13 +555,13 @@ template&lt;class value_type &gt; </div>
 
 </div>
 </div>
-<a id="a4ec6630ad6d65fe8bb53d5c1ed2ac711"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4ec6630ad6d65fe8bb53d5c1ed2ac711">&#9670;&nbsp;</a></span>strcmp()</h2>
+<a id="a93d16f8e89afc3d74d493084557b2c84"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a93d16f8e89afc3d74d493084557b2c84">&#9670;&nbsp;</a></span>strcmp()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class value_type &gt; </div>
+template&lt;class value_t &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -569,13 +569,13 @@ template&lt;class value_type &gt; </div>
         <tr>
           <td class="memname">constexpr int qx::strcmp </td>
           <td>(</td>
-          <td class="paramtype">const value_type *&#160;</td>
+          <td class="paramtype">const value_t *&#160;</td>
           <td class="paramname"><em>pszLeft</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const value_type *&#160;</td>
+          <td class="paramtype">const value_t *&#160;</td>
           <td class="paramname"><em>pszRight</em>&#160;</td>
         </tr>
         <tr>
@@ -594,7 +594,7 @@ template&lt;class value_type &gt; </div>
 <p>Constexpr compare two strings. </p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
-    <tr><td class="paramname">value_type</td><td>- char type </td></tr>
+    <tr><td class="paramname">value_t</td><td>- char type </td></tr>
   </table>
   </dd>
 </dl>
@@ -616,13 +616,13 @@ template&lt;class value_type &gt; </div>
 
 </div>
 </div>
-<a id="a8e0efa61531960b546130958f6e42cf4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8e0efa61531960b546130958f6e42cf4">&#9670;&nbsp;</a></span>strlen()</h2>
+<a id="aa1f7d3648d28dcef62c0db015730218d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa1f7d3648d28dcef62c0db015730218d">&#9670;&nbsp;</a></span>strlen()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class value_type &gt; </div>
+template&lt;class value_t &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -630,7 +630,7 @@ template&lt;class value_type &gt; </div>
         <tr>
           <td class="memname">constexpr std::size_t qx::strlen </td>
           <td>(</td>
-          <td class="paramtype">const value_type *&#160;</td>
+          <td class="paramtype">const value_t *&#160;</td>
           <td class="paramname"><em>psz</em></td><td>)</td>
           <td></td>
         </tr>
@@ -645,7 +645,7 @@ template&lt;class value_type &gt; </div>
 <p>Constexpr string length. </p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
-    <tr><td class="paramname">value_type</td><td>- char type </td></tr>
+    <tr><td class="paramname">value_t</td><td>- char type </td></tr>
   </table>
   </dd>
 </dl>

@@ -80,10 +80,10 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a645bc055a73817ca2a097f12fa04a305"><td class="memTemplParams" colspan="2">template&lt;class Container , class Callable , class Filter  = decltype(iterate_filters::always_true), class Adapter  = decltype(iterate_adapters::no_change)&gt; </td></tr>
-<tr class="memitem:a645bc055a73817ca2a097f12fa04a305"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="iterate_8h.html#a645bc055a73817ca2a097f12fa04a305">qx::iterate</a> (const Container &amp;container, const Callable &amp;callable, const Filter &amp;filter=iterate_filters::always_true, const Adapter &amp;adapter=iterate_adapters::no_change)</td></tr>
-<tr class="memdesc:a645bc055a73817ca2a097f12fa04a305"><td class="mdescLeft">&#160;</td><td class="mdescRight">Iterate container with filter.  <a href="iterate_8h.html#a645bc055a73817ca2a097f12fa04a305">More...</a><br /></td></tr>
-<tr class="separator:a645bc055a73817ca2a097f12fa04a305"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2013ab035e6d8c6af59a3dfe12170351"><td class="memTemplParams" colspan="2">template&lt;class container_t , class callable_t , class filter_t  = decltype(iterate_filters::always_true), class adapter_t  = decltype(iterate_adapters::no_change)&gt; </td></tr>
+<tr class="memitem:a2013ab035e6d8c6af59a3dfe12170351"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="iterate_8h.html#a2013ab035e6d8c6af59a3dfe12170351">qx::iterate</a> (const container_t &amp;container, const callable_t &amp;callable, const filter_t &amp;filter=iterate_filters::always_true, const adapter_t &amp;adapter=iterate_adapters::no_change)</td></tr>
+<tr class="memdesc:a2013ab035e6d8c6af59a3dfe12170351"><td class="mdescLeft">&#160;</td><td class="mdescRight">Iterate container with filter.  <a href="iterate_8h.html#a2013ab035e6d8c6af59a3dfe12170351">More...</a><br /></td></tr>
+<tr class="separator:a2013ab035e6d8c6af59a3dfe12170351"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Contains qx::iterate functions along with default filters and adapters for him. </p>
@@ -93,36 +93,36 @@ Functions</h2></td></tr>
 
 <p class="definition">Definition in file <a class="el" href="iterate_8h_source.html">iterate.h</a>.</p>
 </div><h2 class="groupheader">Function Documentation</h2>
-<a id="a645bc055a73817ca2a097f12fa04a305"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a645bc055a73817ca2a097f12fa04a305">&#9670;&nbsp;</a></span>iterate()</h2>
+<a id="a2013ab035e6d8c6af59a3dfe12170351"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2013ab035e6d8c6af59a3dfe12170351">&#9670;&nbsp;</a></span>iterate()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class Container , class Callable , class Filter  = decltype(iterate_filters::always_true), class Adapter  = decltype(iterate_adapters::no_change)&gt; </div>
+template&lt;class container_t , class callable_t , class filter_t  = decltype(iterate_filters::always_true), class adapter_t  = decltype(iterate_adapters::no_change)&gt; </div>
       <table class="memname">
         <tr>
           <td class="memname">void qx::iterate </td>
           <td>(</td>
-          <td class="paramtype">const Container &amp;&#160;</td>
+          <td class="paramtype">const container_t &amp;&#160;</td>
           <td class="paramname"><em>container</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const Callable &amp;&#160;</td>
+          <td class="paramtype">const callable_t &amp;&#160;</td>
           <td class="paramname"><em>callable</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const Filter &amp;&#160;</td>
+          <td class="paramtype">const filter_t &amp;&#160;</td>
           <td class="paramname"><em>filter</em> = <code>iterate_filters::always_true</code>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const Adapter &amp;&#160;</td>
+          <td class="paramtype">const adapter_t &amp;&#160;</td>
           <td class="paramname"><em>adapter</em> = <code>iterate_adapters::no_change</code>&#160;</td>
         </tr>
         <tr>
@@ -140,10 +140,10 @@ template&lt;class Container , class Callable , class Filter  = decltype(iterate_
 <li>you want the client to be able to iterate only over a part of the value of an element of the vector <dl class="section see"><dt>See also</dt><dd>code examples in test_iterate.cpp </dd></dl>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
-    <tr><td class="paramname">Container</td><td>- container of elements type </td></tr>
-    <tr><td class="paramname">Callable</td><td>- callable type. if callable returns false, iteration breaks </td></tr>
-    <tr><td class="paramname">Filter</td><td>- filter type. if filter returns true, callable is applied </td></tr>
-    <tr><td class="paramname">Adapter</td><td>- adapter type. converts container element type to another type for callable and filter </td></tr>
+    <tr><td class="paramname">container_t</td><td>- container of elements type </td></tr>
+    <tr><td class="paramname">callable_t</td><td>- callable type. if callable returns false, iteration breaks </td></tr>
+    <tr><td class="paramname">filter_t</td><td>- filter type. if filter returns true, callable is applied </td></tr>
+    <tr><td class="paramname">adapter_t</td><td>- adapter type. converts container element type to another type for callable and filter </td></tr>
   </table>
   </dd>
 </dl>

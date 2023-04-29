@@ -89,17 +89,17 @@ $(function() {
 <div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="comment"></span> </div>
 <div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="comment">/**</span></div>
 <div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="comment">    @brief  Call destructors</span></div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="comment">    @tparam iterator - iterator type</span></div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="comment">    @param  start    - start iterator</span></div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="comment">    @param  end      - end iterator</span></div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="comment">    @tparam iterator_t - iterator type</span></div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="comment">    @param  itStart      - start iterator</span></div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="comment">    @param  itEnd        - end iterator</span></div>
 <div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="comment">**/</span></div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> iterator&gt;</div>
-<div class="line"><a name="l00026"></a><span class="lineno"><a class="line" href="utils_8h.html#a567475c55a5a56c634d471de261b0428">   26</a></span>&#160;<span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="utils_8h.html#a567475c55a5a56c634d471de261b0428">destruct</a>(<a class="code" href="classqx_1_1iterator.html">iterator</a> start, <a class="code" href="classqx_1_1iterator.html">iterator</a> end)</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> iterator_t&gt;</div>
+<div class="line"><a name="l00026"></a><span class="lineno"><a class="line" href="utils_8h.html#a0708d6ca8dda3583a2d00c60c6d87141">   26</a></span>&#160;<span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="utils_8h.html#a0708d6ca8dda3583a2d00c60c6d87141">destruct</a>(iterator_t itStart, iterator_t itEnd)</div>
 <div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;{</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    <span class="keyword">using</span> T = <span class="keyword">typename</span> iterator::value_type;</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    <span class="keyword">using</span> T = <span class="keyword">typename</span> iterator_t::value_type;</div>
 <div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    <span class="keywordflow">if</span> constexpr (std::is_compound_v&lt;T&gt;)</div>
 <div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    {</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;        <span class="keywordflow">for</span> (<span class="keyword">auto</span> it = start; it != end; ++it)</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;        <span class="keywordflow">for</span> (<span class="keyword">auto</span> it = itStart; it != itEnd; ++it)</div>
 <div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;            it-&gt;~T();</div>
 <div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    }</div>
 <div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;}</div>
@@ -111,7 +111,7 @@ $(function() {
 <div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="comment">    @param  init_val - init value</span></div>
 <div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="comment">    @retval          - filled array</span></div>
 <div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="comment">**/</span></div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="keyword">template</span>&lt;<span class="keywordtype">size_t</span> N, <span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="keyword">template</span>&lt;<span class="keywordtype">size_t</span> N, <span class="keyword">class</span> T&gt;</div>
 <div class="line"><a name="l00044"></a><span class="lineno"><a class="line" href="utils_8h.html#a9d6faba90a6874d7629cf440bdd4092c">   44</a></span>&#160;constexpr <span class="keyword">auto</span> <a class="code" href="utils_8h.html#a9d6faba90a6874d7629cf440bdd4092c">make_array</a>(T init_val = T())</div>
 <div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;{</div>
 <div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    std::array&lt;T, N&gt; ret;</div>
@@ -128,7 +128,7 @@ $(function() {
 <div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;<span class="comment">    @param  lhs         - right array</span></div>
 <div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;<span class="comment">    @retval             - new array where elements from the right array placed after elements from the left array</span></div>
 <div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;<span class="comment">**/</span></div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T, std::<span class="keywordtype">size_t</span> LeftLength, std::<span class="keywordtype">size_t</span> RightLength&gt;</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> T, std::<span class="keywordtype">size_t</span> LeftLength, std::<span class="keywordtype">size_t</span> RightLength&gt;</div>
 <div class="line"><a name="l00061"></a><span class="lineno"><a class="line" href="utils_8h.html#aeccf764444fb66cff5690d7570fdefc2">   61</a></span>&#160;constexpr std::array&lt;T, LeftLength + RightLength&gt; <a class="code" href="utils_8h.html#aeccf764444fb66cff5690d7570fdefc2">join_arrays</a>(</div>
 <div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    std::array&lt;T, LeftLength&gt;  rhs,</div>
 <div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    std::array&lt;T, RightLength&gt; lhs)</div>
@@ -142,40 +142,39 @@ $(function() {
 <div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;<span class="comment">/**</span></div>
 <div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;<span class="comment">    @brief  Create a container by constructing each element from the corresponding</span></div>
 <div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;<span class="comment">            element of the original container</span></div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;<span class="comment">    @tparam ContainerTo   - target container type, must support value_type and push_back</span></div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;<span class="comment">    @tparam ContainerFrom - original container type, must support forward iteration</span></div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;<span class="comment">    @param  from          - original container</span></div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;<span class="comment">    @retval               - target container</span></div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;<span class="comment">    @tparam result_container_t - target container type, must support value_type and push_back</span></div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;<span class="comment">    @tparam container_t        - original container type, must support forward iteration</span></div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;<span class="comment">    @param  from               - original container</span></div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;<span class="comment">    @retval                    - target container</span></div>
 <div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;<span class="comment">**/</span></div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> ContainerTo, <span class="keyword">class</span> ContainerFrom&gt;</div>
-<div class="line"><a name="l00080"></a><span class="lineno"><a class="line" href="utils_8h.html#a840e9d0a6b6ed606ce3048a3abc6bb81">   80</a></span>&#160;ContainerTo <a class="code" href="utils_8h.html#a840e9d0a6b6ed606ce3048a3abc6bb81">create_container</a>(<span class="keyword">const</span> ContainerFrom&amp; from)</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> result_container_t, <span class="keyword">class</span> container_t&gt;</div>
+<div class="line"><a name="l00080"></a><span class="lineno"><a class="line" href="utils_8h.html#abd7ce410374e16233bf7c028afd34302">   80</a></span>&#160;result_container_t <a class="code" href="utils_8h.html#abd7ce410374e16233bf7c028afd34302">make_container</a>(<span class="keyword">const</span> container_t&amp; from)</div>
 <div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;{</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;    ContainerTo container;</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;    result_container_t container;</div>
 <div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160; </div>
 <div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;    <span class="keywordflow">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span>&amp; item : from)</div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;        container.insert(container.end(), <span class="keyword">typename</span> ContainerTo::value_type(item));</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;        container.insert(container.end(), <span class="keyword">typename</span> result_container_t::value_type(item));</div>
 <div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160; </div>
 <div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;    <span class="keywordflow">return</span> container;</div>
 <div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;}</div>
 <div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;<span class="comment"></span> </div>
 <div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;<span class="comment">/**</span></div>
 <div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;<span class="comment">    @brief  Get the size of memory allocated for container elements</span></div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;<span class="comment">    @tparam Container - container type</span></div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;<span class="comment">    @param  container - container const ref</span></div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;<span class="comment">    @retval           - the size of memory allocated for container elements</span></div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;<span class="comment">    @tparam container_t - container type</span></div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;<span class="comment">    @param  container   - container const ref</span></div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;<span class="comment">    @retval             - the size of memory allocated for container elements</span></div>
 <div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;<span class="comment">**/</span></div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> Container&gt;</div>
-<div class="line"><a name="l00097"></a><span class="lineno"><a class="line" href="utils_8h.html#a23356c78dace0fc62401e0c85d2c455a">   97</a></span>&#160;constexpr <span class="keywordtype">size_t</span> <a class="code" href="utils_8h.html#a23356c78dace0fc62401e0c85d2c455a">bytes_size</a>(<span class="keyword">const</span> Container&amp; container)</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> container_t&gt;</div>
+<div class="line"><a name="l00097"></a><span class="lineno"><a class="line" href="utils_8h.html#a8a23a76a4737044b9b17017f632306fc">   97</a></span>&#160;constexpr <span class="keywordtype">size_t</span> <a class="code" href="utils_8h.html#a8a23a76a4737044b9b17017f632306fc">bytes_size</a>(<span class="keyword">const</span> container_t&amp; container)</div>
 <div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;{</div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;    <span class="keywordflow">return</span> container.size() * <span class="keyword">sizeof</span>(<span class="keyword">typename</span> Container::value_type);</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;    <span class="keywordflow">return</span> container.size() * <span class="keyword">sizeof</span>(<span class="keyword">typename</span> container_t::value_type);</div>
 <div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;}</div>
 <div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160; </div>
 <div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;} <span class="comment">// namespace qx</span></div>
-<div class="ttc" id="aclassqx_1_1iterator_html"><div class="ttname"><a href="classqx_1_1iterator.html">qx::iterator</a></div><div class="ttdoc">Non-const random access iterator type.</div><div class="ttdef"><b>Definition:</b> <a href="iterator_8h_source.html#l00032">iterator.h:33</a></div></div>
-<div class="ttc" id="autils_8h_html_a23356c78dace0fc62401e0c85d2c455a"><div class="ttname"><a href="utils_8h.html#a23356c78dace0fc62401e0c85d2c455a">qx::bytes_size</a></div><div class="ttdeci">constexpr size_t bytes_size(const Container &amp;container)</div><div class="ttdoc">Get the size of memory allocated for container elements.</div><div class="ttdef"><b>Definition:</b> <a href="utils_8h_source.html#l00097">utils.h:97</a></div></div>
-<div class="ttc" id="autils_8h_html_a567475c55a5a56c634d471de261b0428"><div class="ttname"><a href="utils_8h.html#a567475c55a5a56c634d471de261b0428">qx::destruct</a></div><div class="ttdeci">void destruct(iterator start, iterator end)</div><div class="ttdoc">Call destructors.</div><div class="ttdef"><b>Definition:</b> <a href="utils_8h_source.html#l00026">utils.h:26</a></div></div>
-<div class="ttc" id="autils_8h_html_a840e9d0a6b6ed606ce3048a3abc6bb81"><div class="ttname"><a href="utils_8h.html#a840e9d0a6b6ed606ce3048a3abc6bb81">qx::create_container</a></div><div class="ttdeci">ContainerTo create_container(const ContainerFrom &amp;from)</div><div class="ttdoc">Create a container by constructing each element from the corresponding element of the original contai...</div><div class="ttdef"><b>Definition:</b> <a href="utils_8h_source.html#l00080">utils.h:80</a></div></div>
+<div class="ttc" id="autils_8h_html_a0708d6ca8dda3583a2d00c60c6d87141"><div class="ttname"><a href="utils_8h.html#a0708d6ca8dda3583a2d00c60c6d87141">qx::destruct</a></div><div class="ttdeci">void destruct(iterator_t itStart, iterator_t itEnd)</div><div class="ttdoc">Call destructors.</div><div class="ttdef"><b>Definition:</b> <a href="utils_8h_source.html#l00026">utils.h:26</a></div></div>
+<div class="ttc" id="autils_8h_html_a8a23a76a4737044b9b17017f632306fc"><div class="ttname"><a href="utils_8h.html#a8a23a76a4737044b9b17017f632306fc">qx::bytes_size</a></div><div class="ttdeci">constexpr size_t bytes_size(const container_t &amp;container)</div><div class="ttdoc">Get the size of memory allocated for container elements.</div><div class="ttdef"><b>Definition:</b> <a href="utils_8h_source.html#l00097">utils.h:97</a></div></div>
 <div class="ttc" id="autils_8h_html_a9d6faba90a6874d7629cf440bdd4092c"><div class="ttname"><a href="utils_8h.html#a9d6faba90a6874d7629cf440bdd4092c">qx::make_array</a></div><div class="ttdeci">constexpr auto make_array(T init_val=T())</div><div class="ttdoc">Fill array with value in constructor.</div><div class="ttdef"><b>Definition:</b> <a href="utils_8h_source.html#l00044">utils.h:44</a></div></div>
+<div class="ttc" id="autils_8h_html_abd7ce410374e16233bf7c028afd34302"><div class="ttname"><a href="utils_8h.html#abd7ce410374e16233bf7c028afd34302">qx::make_container</a></div><div class="ttdeci">result_container_t make_container(const container_t &amp;from)</div><div class="ttdoc">Create a container by constructing each element from the corresponding element of the original contai...</div><div class="ttdef"><b>Definition:</b> <a href="utils_8h_source.html#l00080">utils.h:80</a></div></div>
 <div class="ttc" id="autils_8h_html_aeccf764444fb66cff5690d7570fdefc2"><div class="ttname"><a href="utils_8h.html#aeccf764444fb66cff5690d7570fdefc2">qx::join_arrays</a></div><div class="ttdeci">constexpr std::array&lt; T, LeftLength+RightLength &gt; join_arrays(std::array&lt; T, LeftLength &gt; rhs, std::array&lt; T, RightLength &gt; lhs)</div><div class="ttdoc">Join arrays at compile-time.</div><div class="ttdef"><b>Definition:</b> <a href="utils_8h_source.html#l00061">utils.h:61</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->

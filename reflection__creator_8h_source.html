@@ -100,18 +100,18 @@ $(function() {
 <div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="comment">    @details Performs registration of classes inherited from BaseClass</span></div>
 <div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="comment">             and creates their instances by their ID and name.</span></div>
 <div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="comment">             Allocates memory.</span></div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="comment">    @tparam  BaseClass - base class type</span></div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="comment">    @tparam  SmartPtr  - smart pointer class type</span></div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="comment">    @tparam  Args      - args for type creation</span></div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="comment">    @tparam  base_class_t - base class type</span></div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="comment">    @tparam  smart_ptr_t  - smart pointer class type</span></div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="comment">    @tparam  args_t       - args for type creation</span></div>
 <div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="comment">    @author  Khrapov</span></div>
 <div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="comment">    @date    7.09.2021</span></div>
 <div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="comment"></span> </div>
 <div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="comment">**/</span></div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> BaseClass, <span class="keyword">template</span>&lt;<span class="keyword">class</span>&gt; <span class="keyword">class </span>SmartPtr, <span class="keyword">class</span>... Args&gt;</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> base_<span class="keyword">class</span>_t, <span class="keyword">template</span>&lt;<span class="keyword">class</span>&gt; <span class="keyword">class </span>smart_ptr_t, <span class="keyword">class</span>... args_t&gt;</div>
 <div class="line"><a name="l00040"></a><span class="lineno"><a class="line" href="classqx_1_1reflection__creator.html">   40</a></span>&#160;<span class="keyword">class </span><a class="code" href="classqx_1_1reflection__creator.html">reflection_creator</a></div>
 <div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;{</div>
 <div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    <span class="keyword">using</span> factory = std::function&lt;SmartPtr&lt;BaseClass&gt;(Args...)&gt;;</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    <span class="keyword">using</span> factory = std::function&lt;smart_ptr_t&lt;base_class_t&gt;(args_t...)&gt;;</div>
 <div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160; </div>
 <div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="keyword">public</span>:<span class="comment"></span></div>
 <div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="comment">    /**</span></div>
@@ -120,10 +120,10 @@ $(function() {
 <div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="comment">        @param  args - template parameter pack</span></div>
 <div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="comment">        @retval      - class instance or nullptr if can&#39;t find factory or can&#39;t create</span></div>
 <div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="comment">    **/</span></div>
-<div class="line"><a name="l00052"></a><span class="lineno"><a class="line" href="classqx_1_1reflection__creator.html#ad011237d42e327c85a98d97e8f51e2bb">   52</a></span>&#160;    [[nodiscard]] <span class="keyword">static</span> SmartPtr&lt;BaseClass&gt; <a class="code" href="classqx_1_1reflection__creator.html#ad011237d42e327c85a98d97e8f51e2bb">create_object</a>(class_identificator <span class="keywordtype">id</span>, Args&amp;&amp;... args)</div>
+<div class="line"><a name="l00052"></a><span class="lineno"><a class="line" href="classqx_1_1reflection__creator.html#a20d29919606c20ccc429bf4d3b23b331">   52</a></span>&#160;    [[nodiscard]] <span class="keyword">static</span> smart_ptr_t&lt;base_class_t&gt; <a class="code" href="classqx_1_1reflection__creator.html#a20d29919606c20ccc429bf4d3b23b331">create_object</a>(class_identificator <span class="keywordtype">id</span>, args_t&amp;&amp;... args)</div>
 <div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    {</div>
 <div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;        <span class="keywordflow">if</span> (<span class="keyword">auto</span> it = m_FactoriesById.find(<span class="keywordtype">id</span>); it != m_FactoriesById.end())</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;            <span class="keywordflow">return</span> it-&gt;second(std::forward&lt;Args&gt;(args)...);</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;            <span class="keywordflow">return</span> it-&gt;second(std::forward&lt;args_t&gt;(args)...);</div>
 <div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160; </div>
 <div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;        <span class="keywordflow">return</span> <span class="keyword">nullptr</span>;</div>
 <div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    }</div>
@@ -134,11 +134,11 @@ $(function() {
 <div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;<span class="comment">        @param  args        - template parameter pack</span></div>
 <div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;<span class="comment">        @retval             - class instance or nullptr if can&#39;t find factory or can&#39;t create</span></div>
 <div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;<span class="comment">    **/</span></div>
-<div class="line"><a name="l00066"></a><span class="lineno"><a class="line" href="classqx_1_1reflection__creator.html#ad9a2291e02aaa3f626ec01fe132b7aa2">   66</a></span>&#160;    [[nodiscard]] <span class="keyword">static</span> SmartPtr&lt;BaseClass&gt; <a class="code" href="classqx_1_1reflection__creator.html#ad9a2291e02aaa3f626ec01fe132b7aa2">create_object</a>(std::string_view svClassName, Args&amp;&amp;... args)</div>
+<div class="line"><a name="l00066"></a><span class="lineno"><a class="line" href="classqx_1_1reflection__creator.html#a93dece66a1b9afac5181e11ea0929050">   66</a></span>&#160;    [[nodiscard]] <span class="keyword">static</span> smart_ptr_t&lt;base_class_t&gt; <a class="code" href="classqx_1_1reflection__creator.html#a93dece66a1b9afac5181e11ea0929050">create_object</a>(std::string_view svClassName, args_t&amp;&amp;... args)</div>
 <div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    {</div>
 <div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;        <span class="keywordflow">if</span> (<span class="keyword">auto</span> it = m_FactoriesByName.find(svClassName); it != m_FactoriesByName.end())</div>
 <div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;        {</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;            <span class="keywordflow">return</span> it-&gt;second(std::forward&lt;Args&gt;(args)...);</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;            <span class="keywordflow">return</span> it-&gt;second(std::forward&lt;args_t&gt;(args)...);</div>
 <div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;        }</div>
 <div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160; </div>
 <div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;        <span class="keywordflow">return</span> <span class="keyword">nullptr</span>;</div>
@@ -151,7 +151,7 @@ $(function() {
 <div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;<span class="comment">        @param  svClassName - class name</span></div>
 <div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;<span class="comment">        @retval             - true if registered</span></div>
 <div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;<span class="comment">    **/</span></div>
-<div class="line"><a name="l00083"></a><span class="lineno"><a class="line" href="classqx_1_1reflection__creator.html#a90dc12542233b4e1224a5c5942a5ecb7">   83</a></span>&#160;    <span class="keyword">static</span> <span class="keywordtype">bool</span> <a class="code" href="classqx_1_1reflection__creator.html#a90dc12542233b4e1224a5c5942a5ecb7">_register_class</a>(factory factory, class_identificator <span class="keywordtype">id</span>, std::string_view svClassName)</div>
+<div class="line"><a name="l00083"></a><span class="lineno"><a class="line" href="classqx_1_1reflection__creator.html#a9952c8a60c4adfa503b16548b6a6cba6">   83</a></span>&#160;    <span class="keyword">static</span> <span class="keywordtype">bool</span> <a class="code" href="classqx_1_1reflection__creator.html#a9952c8a60c4adfa503b16548b6a6cba6">_register_class</a>(factory factory, class_identificator <span class="keywordtype">id</span>, std::string_view svClassName)</div>
 <div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;    {</div>
 <div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;        <span class="keywordflow">if</span> (factory &amp;&amp; !svClassName.empty())</div>
 <div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;        {</div>
@@ -173,20 +173,20 @@ $(function() {
 <div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;<span class="keyword">namespace </span>detail</div>
 <div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;{</div>
 <div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160; </div>
-<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class </span>BaseClass, <span class="keyword">class </span>T, <span class="keyword">class</span>... Args&gt;</div>
-<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;<span class="keyword">static</span> std::unique_ptr&lt;BaseClass&gt; create_unique(Args&amp;&amp;... args)</div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class </span>base_class_t, <span class="keyword">class </span>T, <span class="keyword">class</span>... args_t&gt;</div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;<span class="keyword">static</span> std::unique_ptr&lt;base_class_t&gt; create_unique(args_t&amp;&amp;... args)</div>
 <div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;{</div>
-<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;    <span class="keywordflow">if</span> constexpr (std::is_constructible_v&lt;T, Args...&gt;)</div>
-<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;        <span class="keywordflow">return</span> std::make_unique&lt;T&gt;(std::forward&lt;Args&gt;(args)...);</div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;    <span class="keywordflow">if</span> constexpr (std::is_constructible_v&lt;T, args_t...&gt;)</div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;        <span class="keywordflow">return</span> std::make_unique&lt;T&gt;(std::forward&lt;args_t&gt;(args)...);</div>
 <div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;    <span class="keywordflow">else</span></div>
 <div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;        <span class="keywordflow">return</span> <span class="keyword">nullptr</span>;</div>
 <div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;}</div>
 <div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160; </div>
-<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class </span>BaseClass, <span class="keyword">class </span>T, <span class="keyword">class</span>... Args&gt;</div>
-<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;<span class="keyword">static</span> std::shared_ptr&lt;BaseClass&gt; create_shared(Args&amp;&amp;... args)</div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class </span>base_class_t, <span class="keyword">class </span>T, <span class="keyword">class</span>... args_t&gt;</div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;<span class="keyword">static</span> std::shared_ptr&lt;base_class_t&gt; create_shared(args_t&amp;&amp;... args)</div>
 <div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;{</div>
-<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;    <span class="keywordflow">if</span> constexpr (std::is_constructible_v&lt;T, Args...&gt;)</div>
-<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;        <span class="keywordflow">return</span> std::make_shared&lt;T&gt;(std::forward&lt;Args&gt;(args)...);</div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;    <span class="keywordflow">if</span> constexpr (std::is_constructible_v&lt;T, args_t...&gt;)</div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;        <span class="keywordflow">return</span> std::make_shared&lt;T&gt;(std::forward&lt;args_t&gt;(args)...);</div>
 <div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;    <span class="keywordflow">else</span></div>
 <div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;        <span class="keywordflow">return</span> <span class="keyword">nullptr</span>;</div>
 <div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;}</div>
@@ -246,9 +246,9 @@ $(function() {
 <div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;} <span class="comment">// namespace qx</span></div>
 <div class="ttc" id="aclass__identificator_8h_html"><div class="ttname"><a href="class__identificator_8h.html">class_identificator.h</a></div><div class="ttdoc">Contains qx::class_identificator.</div></div>
 <div class="ttc" id="aclassqx_1_1reflection__creator_html"><div class="ttname"><a href="classqx_1_1reflection__creator.html">qx::reflection_creator</a></div><div class="ttdoc">Reflection creator.</div><div class="ttdef"><b>Definition:</b> <a href="reflection__creator_8h_source.html#l00040">reflection_creator.h:41</a></div></div>
-<div class="ttc" id="aclassqx_1_1reflection__creator_html_a90dc12542233b4e1224a5c5942a5ecb7"><div class="ttname"><a href="classqx_1_1reflection__creator.html#a90dc12542233b4e1224a5c5942a5ecb7">qx::reflection_creator::_register_class</a></div><div class="ttdeci">static bool _register_class(factory factory, class_identificator id, std::string_view svClassName)</div><div class="ttdoc">Register class so it can be constructed by creator.</div><div class="ttdef"><b>Definition:</b> <a href="reflection__creator_8h_source.html#l00083">reflection_creator.h:83</a></div></div>
-<div class="ttc" id="aclassqx_1_1reflection__creator_html_ad011237d42e327c85a98d97e8f51e2bb"><div class="ttname"><a href="classqx_1_1reflection__creator.html#ad011237d42e327c85a98d97e8f51e2bb">qx::reflection_creator::create_object</a></div><div class="ttdeci">static SmartPtr&lt; BaseClass &gt; create_object(class_identificator id, Args &amp;&amp;... args)</div><div class="ttdoc">Create object based on class id.</div><div class="ttdef"><b>Definition:</b> <a href="reflection__creator_8h_source.html#l00052">reflection_creator.h:52</a></div></div>
-<div class="ttc" id="aclassqx_1_1reflection__creator_html_ad9a2291e02aaa3f626ec01fe132b7aa2"><div class="ttname"><a href="classqx_1_1reflection__creator.html#ad9a2291e02aaa3f626ec01fe132b7aa2">qx::reflection_creator::create_object</a></div><div class="ttdeci">static SmartPtr&lt; BaseClass &gt; create_object(std::string_view svClassName, Args &amp;&amp;... args)</div><div class="ttdoc">Create object based on class name.</div><div class="ttdef"><b>Definition:</b> <a href="reflection__creator_8h_source.html#l00066">reflection_creator.h:66</a></div></div>
+<div class="ttc" id="aclassqx_1_1reflection__creator_html_a20d29919606c20ccc429bf4d3b23b331"><div class="ttname"><a href="classqx_1_1reflection__creator.html#a20d29919606c20ccc429bf4d3b23b331">qx::reflection_creator::create_object</a></div><div class="ttdeci">static smart_ptr_t&lt; base_class_t &gt; create_object(class_identificator id, args_t &amp;&amp;... args)</div><div class="ttdoc">Create object based on class id.</div><div class="ttdef"><b>Definition:</b> <a href="reflection__creator_8h_source.html#l00052">reflection_creator.h:52</a></div></div>
+<div class="ttc" id="aclassqx_1_1reflection__creator_html_a93dece66a1b9afac5181e11ea0929050"><div class="ttname"><a href="classqx_1_1reflection__creator.html#a93dece66a1b9afac5181e11ea0929050">qx::reflection_creator::create_object</a></div><div class="ttdeci">static smart_ptr_t&lt; base_class_t &gt; create_object(std::string_view svClassName, args_t &amp;&amp;... args)</div><div class="ttdoc">Create object based on class name.</div><div class="ttdef"><b>Definition:</b> <a href="reflection__creator_8h_source.html#l00066">reflection_creator.h:66</a></div></div>
+<div class="ttc" id="aclassqx_1_1reflection__creator_html_a9952c8a60c4adfa503b16548b6a6cba6"><div class="ttname"><a href="classqx_1_1reflection__creator.html#a9952c8a60c4adfa503b16548b6a6cba6">qx::reflection_creator::_register_class</a></div><div class="ttdeci">static bool _register_class(factory factory, class_identificator id, std::string_view svClassName)</div><div class="ttdoc">Register class so it can be constructed by creator.</div><div class="ttdef"><b>Definition:</b> <a href="reflection__creator_8h_source.html#l00083">reflection_creator.h:83</a></div></div>
 <div class="ttc" id="amacros_2common_8h_html"><div class="ttname"><a href="macros_2common_8h.html">common.h</a></div><div class="ttdoc">Useful macros.</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->

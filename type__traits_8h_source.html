@@ -91,19 +91,19 @@ $(function() {
 <div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;{</div>
 <div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;};</div>
 <div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160; </div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class </span>S, <span class="keyword">class </span>T, <span class="keyword">class</span>... Ts&gt;</div>
-<div class="line"><a name="l00024"></a><span class="lineno"><a class="line" href="structqx_1_1are__same_3_01_s_00_01_t_00_01_ts_8_8_8_01_4.html">   24</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structqx_1_1are__same.html">are_same</a>&lt;S, T, Ts...&gt; : std::false_type</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class </span>first_t, <span class="keyword">class </span>second_t, <span class="keyword">class</span>... rest_t&gt;</div>
+<div class="line"><a name="l00024"></a><span class="lineno"><a class="line" href="structqx_1_1are__same_3_01first__t_00_01second__t_00_01rest__t_8_8_8_01_4.html">   24</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structqx_1_1are__same.html">are_same</a>&lt;first_t, second_t, rest_t...&gt; : std::false_type</div>
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;{</div>
 <div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;};</div>
 <div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160; </div>
 <div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="comment">// check if all of variadic arguments are same type</span></div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class </span>T, <span class="keyword">class</span>... Ts&gt;</div>
-<div class="line"><a name="l00030"></a><span class="lineno"><a class="line" href="structqx_1_1are__same_3_01_t_00_01_t_00_01_ts_8_8_8_01_4.html">   30</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structqx_1_1are__same.html">are_same</a>&lt;T, T, Ts...&gt; : <a class="code" href="structqx_1_1are__same.html">are_same</a>&lt;T, Ts...&gt;</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class </span>first_t, <span class="keyword">class</span>... rest_ty&gt;</div>
+<div class="line"><a name="l00030"></a><span class="lineno"><a class="line" href="structqx_1_1are__same_3_01first__t_00_01first__t_00_01rest__ty_8_8_8_01_4.html">   30</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structqx_1_1are__same.html">are_same</a>&lt;first_t, first_t, rest_ty...&gt; : <a class="code" href="structqx_1_1are__same.html">are_same</a>&lt;first_t, rest_ty...&gt;</div>
 <div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;{</div>
 <div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;};</div>
 <div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160; </div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span>... Ts&gt;</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;constexpr <span class="keywordtype">bool</span> are_same_v = <a class="code" href="structqx_1_1are__same.html">are_same</a>&lt;Ts...&gt;::value;</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span>... args_t&gt;</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;constexpr <span class="keywordtype">bool</span> are_same_v = <a class="code" href="structqx_1_1are__same.html">are_same</a>&lt;args_t...&gt;::value;</div>
 <div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160; </div>
 <div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160; </div>
 <div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160; </div>
@@ -138,75 +138,77 @@ $(function() {
 <div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160; </div>
 <div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;<span class="keyword">namespace </span>detail</div>
 <div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;{</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> T, std::<span class="keywordtype">size_t</span> = sizeof(T)&gt;</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;std::true_type is_specialization_exist_impl(T*);</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160; </div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;std::false_type is_specialization_exist_impl(...);</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;} <span class="comment">// namespace detail</span></div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160; </div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> T, std::<span class="keywordtype">size_t</span> = sizeof(T)&gt;</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;std::true_type is_specialization_exist_impl(T*);</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160; </div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;std::false_type is_specialization_exist_impl(...);</div>
 <div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160; </div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;<span class="comment">// decide if a struct/class specialization exist</span></div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> T&gt;</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;<span class="keyword">using</span> is_specialization_exist = decltype(detail::is_specialization_exist_impl(std::declval&lt;T*&gt;()));</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160; </div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> T&gt;</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;constexpr <span class="keywordtype">bool</span> is_specialization_exist_v = is_specialization_exist&lt;T&gt;::value;</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160; </div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160; </div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;} <span class="comment">// namespace detail</span></div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160; </div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;<span class="comment">// decide if a struct/class specialization exist</span></div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> T&gt;</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;<span class="keyword">using</span> is_specialization_exist = decltype(detail::is_specialization_exist_impl(std::declval&lt;T*&gt;()));</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160; </div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> T&gt;</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;constexpr <span class="keywordtype">bool</span> is_specialization_exist_v = is_specialization_exist&lt;T&gt;::value;</div>
 <div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160; </div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;<span class="comment">//---------------------------- is_specialization_of ----------------------------</span></div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160; </div>
 <div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160; </div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class </span>Test, <span class="keyword">template</span>&lt;<span class="keyword">class</span>...&gt; <span class="keyword">class </span>Ref&gt;</div>
-<div class="line"><a name="l00088"></a><span class="lineno"><a class="line" href="structqx_1_1is__specialization__of.html">   88</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structqx_1_1is__specialization__of.html">is_specialization_of</a> : std::false_type</div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;{</div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;};</div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160; </div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">template</span>&lt;<span class="keyword">class</span>...&gt; <span class="keyword">class </span>Ref, <span class="keyword">class</span>... Args&gt;</div>
-<div class="line"><a name="l00093"></a><span class="lineno"><a class="line" href="structqx_1_1is__specialization__of_3_01_ref_3_01_args_8_8_8_01_4_00_01_ref_01_4.html">   93</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structqx_1_1is__specialization__of.html">is_specialization_of</a>&lt;Ref&lt;Args...&gt;, Ref&gt; : std::true_type</div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;{</div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;};</div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160; </div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;<span class="comment">// ----------------------------- qx::visit_overload ----------------------------</span></div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;<span class="comment">/**</span></div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;<span class="comment">    @struct  visit_overload</span></div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;<span class="comment">    @details This struct allows to visit std::variant with lambdas</span></div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;<span class="comment">    @note    https://www.cppstories.com/2018/09/visit-variants/</span></div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;<span class="comment">    @tparam  Ts - lambda types</span></div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;<span class="comment">    @code</span></div>
-<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;<span class="comment">    struct Fluid { };</span></div>
-<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;<span class="comment">    struct LightItem { };</span></div>
-<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;<span class="comment">    struct HeavyItem { };</span></div>
-<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;<span class="comment">    struct FragileItem { };</span></div>
-<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;<span class="comment">    int main() {</span></div>
-<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;<span class="comment">        std::variant&lt;Fluid, LightItem, HeavyItem, FragileItem&gt; package;</span></div>
-<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;<span class="comment">        std::visit(qx::visit_overload</span></div>
-<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;<span class="comment">            {</span></div>
-<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;<span class="comment">                [](const Fluid&amp; )     { std::cout &lt;&lt; &quot;fluid\n&quot;; },</span></div>
-<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;<span class="comment">                [](const LightItem&amp; ) { std::cout &lt;&lt; &quot;light item\n&quot;; },</span></div>
-<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;<span class="comment">                [](const auto&amp;)       { std::cout &lt;&lt; &quot;default\n&quot;; }</span></div>
-<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;<span class="comment">            },</span></div>
-<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;<span class="comment">            package);</span></div>
-<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;<span class="comment">    }</span></div>
-<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;<span class="comment">    @endcode </span></div>
-<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;<span class="comment">**/</span></div>
-<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span>... Ts&gt;</div>
-<div class="line"><a name="l00125"></a><span class="lineno"><a class="line" href="structqx_1_1visit__overload.html">  125</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structqx_1_1visit__overload.html">visit_overload</a> : Ts...</div>
-<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;{</div>
-<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;    <span class="keyword">using</span> Ts::operator()...;</div>
-<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;};</div>
-<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160; </div>
-<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span>... Ts&gt;</div>
-<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;<a class="code" href="structqx_1_1visit__overload.html">visit_overload</a>(Ts...) -&gt; <a class="code" href="structqx_1_1visit__overload.html">visit_overload</a>&lt;Ts...&gt;;</div>
-<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160; </div>
-<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;} <span class="comment">// namespace qx</span></div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;<span class="comment">//---------------------------- is_specialization_of ----------------------------</span></div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160; </div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class </span>test_t, <span class="keyword">template</span>&lt;<span class="keyword">class</span>...&gt; <span class="keyword">class </span>reference_t&gt;</div>
+<div class="line"><a name="l00090"></a><span class="lineno"><a class="line" href="structqx_1_1is__specialization__of.html">   90</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structqx_1_1is__specialization__of.html">is_specialization_of</a> : std::false_type</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;{</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;};</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160; </div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">template</span>&lt;<span class="keyword">class</span>...&gt; <span class="keyword">class </span>reference_t, <span class="keyword">class</span>... args_t&gt;</div>
+<div class="line"><a name="l00095"></a><span class="lineno"><a class="line" href="structqx_1_1is__specialization__of_3_01reference__t_3_01args__t_8_8_8_01_4_00_01reference__t_01_4.html">   95</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structqx_1_1is__specialization__of.html">is_specialization_of</a>&lt;reference_t&lt;args_t...&gt;, reference_t&gt; : std::true_type</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;{</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;};</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160; </div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;<span class="comment">// ----------------------------- qx::visit_overload ----------------------------</span></div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;<span class="comment">/**</span></div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;<span class="comment">    @struct  visit_overload</span></div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;<span class="comment">    @details This struct allows to visit std::variant with lambdas</span></div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;<span class="comment">    @note    https://www.cppstories.com/2018/09/visit-variants/</span></div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;<span class="comment">    @tparam  args_t - lambda types</span></div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;<span class="comment">    @code</span></div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;<span class="comment">    struct Fluid { };</span></div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;<span class="comment">    struct LightItem { };</span></div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;<span class="comment">    struct HeavyItem { };</span></div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;<span class="comment">    struct FragileItem { };</span></div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;<span class="comment">    int main() {</span></div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;<span class="comment">        std::variant&lt;Fluid, LightItem, HeavyItem, FragileItem&gt; package;</span></div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;<span class="comment">        std::visit(qx::visit_overload</span></div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;<span class="comment">            {</span></div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;<span class="comment">                [](const Fluid&amp; )     { std::cout &lt;&lt; &quot;fluid\n&quot;; },</span></div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;<span class="comment">                [](const LightItem&amp; ) { std::cout &lt;&lt; &quot;light item\n&quot;; },</span></div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;<span class="comment">                [](const auto&amp;)       { std::cout &lt;&lt; &quot;default\n&quot;; }</span></div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;<span class="comment">            },</span></div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;<span class="comment">            package);</span></div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;<span class="comment">    }</span></div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;<span class="comment">    @endcode </span></div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;<span class="comment">**/</span></div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span>... args_t&gt;</div>
+<div class="line"><a name="l00127"></a><span class="lineno"><a class="line" href="structqx_1_1visit__overload.html">  127</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structqx_1_1visit__overload.html">visit_overload</a> : args_t...</div>
+<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;{</div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;    <span class="keyword">using</span> args_t::operator()...;</div>
+<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;};</div>
+<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160; </div>
+<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span>... args_t&gt;</div>
+<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;<a class="code" href="structqx_1_1visit__overload.html">visit_overload</a>(args_t...) -&gt; <a class="code" href="structqx_1_1visit__overload.html">visit_overload</a>&lt;args_t...&gt;;</div>
+<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160; </div>
+<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;} <span class="comment">// namespace qx</span></div>
 <div class="ttc" id="aconcepts_8h_html"><div class="ttname"><a href="concepts_8h.html">concepts.h</a></div><div class="ttdoc">Concepts not included in std yet.</div></div>
 <div class="ttc" id="astructqx_1_1are__same_html"><div class="ttname"><a href="structqx_1_1are__same.html">qx::are_same</a></div><div class="ttdef"><b>Definition:</b> <a href="type__traits_8h_source.html#l00019">type_traits.h:20</a></div></div>
-<div class="ttc" id="astructqx_1_1is__specialization__of_html"><div class="ttname"><a href="structqx_1_1is__specialization__of.html">qx::is_specialization_of</a></div><div class="ttdef"><b>Definition:</b> <a href="type__traits_8h_source.html#l00088">type_traits.h:89</a></div></div>
+<div class="ttc" id="astructqx_1_1is__specialization__of_html"><div class="ttname"><a href="structqx_1_1is__specialization__of.html">qx::is_specialization_of</a></div><div class="ttdef"><b>Definition:</b> <a href="type__traits_8h_source.html#l00090">type_traits.h:91</a></div></div>
 <div class="ttc" id="astructqx_1_1iterator__value_html"><div class="ttname"><a href="structqx_1_1iterator__value.html">qx::iterator_value</a></div><div class="ttdef"><b>Definition:</b> <a href="type__traits_8h_source.html#l00043">type_traits.h:44</a></div></div>
-<div class="ttc" id="astructqx_1_1visit__overload_html"><div class="ttname"><a href="structqx_1_1visit__overload.html">qx::visit_overload</a></div><div class="ttdef"><b>Definition:</b> <a href="type__traits_8h_source.html#l00125">type_traits.h:126</a></div></div>
+<div class="ttc" id="astructqx_1_1visit__overload_html"><div class="ttname"><a href="structqx_1_1visit__overload.html">qx::visit_overload</a></div><div class="ttdef"><b>Definition:</b> <a href="type__traits_8h_source.html#l00127">type_traits.h:128</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
