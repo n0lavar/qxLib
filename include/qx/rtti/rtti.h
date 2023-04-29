@@ -24,7 +24,7 @@ namespace qx
 namespace detail
 {
 
-template<typename T>
+template<class T>
 concept has_get_class_id_static = requires(T t) { T::get_class_id_static(); };
 
 } // namespace detail
@@ -53,31 +53,31 @@ inline class_identificator get_class_id() noexcept
     @brief   RTTI root class
     @details All other classes must be inherited from this class
              to allow you to use RTTI functions
-    @tparam  _DerivedBase     - derived class type
-    @tparam  _NamingStrategy  - \see rtti_naming_strategy.h
+    @tparam  derived_base_t    - derived class type
+    @tparam  naming_strategy_t - \see rtti_naming_strategy.h
     @author  Khrapov
     @date    10.09.2021
 
 **/
-template<class _DerivedBase, template<string_literal> class _NamingStrategy = rtti_naming_strategy_class_name>
+template<class derived_base_t, template<string_literal> class naming_strategy_t = rtti_naming_strategy_class_name>
 class rtti_root
 {
 public:
-    using BaseClass  = _DerivedBase;
-    using SuperClass = _DerivedBase;
-    using ThisClass  = _DerivedBase;
+    using BaseClass  = derived_base_t;
+    using SuperClass = derived_base_t;
+    using ThisClass  = derived_base_t;
 
 public:
-    template<typename RTTI_TYPE>
+    template<class rtti_type>
     bool is_derived_from() const noexcept
     {
-        return _is_base_id(qx::get_class_id<RTTI_TYPE>()) || qx::get_class_id<RTTI_TYPE>() == get_class_id();
+        return _is_base_id(qx::get_class_id<rtti_type>()) || qx::get_class_id<rtti_type>() == get_class_id();
     }
 
-    template<typename RTTI_TYPE>
+    template<class rtti_type>
     bool is() const noexcept
     {
-        return get_class_id() == RTTI_TYPE::get_class_id_static();
+        return get_class_id() == rtti_type::get_class_id_static();
     }
 
     virtual bool is_derived_from_id(class_identificator id) const noexcept
@@ -124,7 +124,7 @@ protected:
     template<string_literal DerivedName>
     static constexpr std::string_view _get_class_name_by_strategy() noexcept
     {
-        return _NamingStrategy<DerivedName>::get_name();
+        return naming_strategy_t<DerivedName>::get_name();
     }
 };
 

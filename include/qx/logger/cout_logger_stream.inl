@@ -68,25 +68,25 @@ inline void cout_logger_stream::set_using_colors(bool bUsingColors) noexcept
     m_bUsingColors = bUsingColors;
 }
 
-template<class char_type>
-inline std::basic_ostream<char_type>& cout_logger_stream::get_cout() noexcept
+template<class char_t>
+inline std::basic_ostream<char_t>& cout_logger_stream::get_cout() noexcept
 {
-    if constexpr (std::is_same_v<char_type, char>)
+    if constexpr (std::is_same_v<char_t, char>)
         return std::cout;
     else
         return std::wcout;
 }
 
-template<class char_type>
+template<class char_t>
 inline void cout_logger_stream::log_cout(
-    std::basic_string_view<char_type>      svMessage,
+    std::basic_string_view<char_t>         svMessage,
     const log_unit&                        logUnit,
     const std::vector<logger_color_range>& colors,
     log_level                              eLogLevel)
 {
     QX_PERF_SCOPE(CatLogger, "Log to cout");
 
-    auto& cout = get_cout<char_type>();
+    auto& cout = get_cout<char_t>();
 
     if (m_bUsingColors)
     {
@@ -122,7 +122,7 @@ inline void cout_logger_stream::log_cout(
         auto cout_colorized = [&cout, svMessage](size_t nStart, size_t nEnd, const color& rangeColor)
         {
             cout << terminal_color::font(rangeColor)
-                 << std::basic_string_view<char_type> { svMessage.data() + nStart, nEnd - nStart }
+                 << std::basic_string_view<char_t> { svMessage.data() + nStart, nEnd - nStart }
                  << terminal_color::reset();
         };
 

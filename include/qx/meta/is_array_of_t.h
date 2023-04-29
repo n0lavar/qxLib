@@ -20,11 +20,11 @@ namespace qx
 
 /**
     @struct  is_array_of_t
-    @detaild Check if TArray is an array of TElement
-    @tparam  TArray   - possible array type
-    @tparam  TElement - array element type
+    @detaild Check if array_t is an array of T
+    @tparam  array_t - possible array type
+    @tparam  T       - array element type
 **/
-template <class TArray, class TElement> struct is_array_of_t                 : std::false_type { };
+template <class array_t, class T> struct is_array_of_t                       : std::false_type { };
                                    
 template <class T>           struct is_array_of_t<               T[],     T> : std::true_type  { };
 template <class T>           struct is_array_of_t<const          T[],     T> : std::true_type  { };
@@ -43,7 +43,7 @@ template <class T, size_t N> struct is_array_of_t<const volatile T(&)[N], T> : s
 
 // clang-format on
 
-template<class TArray, class TElement>
-constexpr bool is_array_of_t_v = is_array_of_t<TArray, TElement>::value;
+template<class array_t, class T>
+constexpr bool is_array_of_t_v = is_array_of_t<array_t, T>::value;
 
 } // namespace qx

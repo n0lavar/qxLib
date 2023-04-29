@@ -10,8 +10,8 @@
 namespace qx
 {
 
-template<class Traits>
-typename string_data<Traits>::pointer string_data<Traits>::data() noexcept
+template<class traits_t>
+typename string_data<traits_t>::pointer string_data<traits_t>::data() noexcept
 {
     if (is_small())
         return m_Buffer.data();
@@ -19,8 +19,8 @@ typename string_data<Traits>::pointer string_data<Traits>::data() noexcept
         return m_pData;
 }
 
-template<class Traits>
-void string_data<Traits>::free() noexcept
+template<class traits_t>
+void string_data<traits_t>::free() noexcept
 {
     if (!is_small())
     {
@@ -32,12 +32,13 @@ void string_data<Traits>::free() noexcept
     m_nAllocatedSize = 0;
 }
 
-template<class Traits>
-bool string_data<Traits>::resize(size_type nSymbols, size_type nAlign, string_resize_type eType) noexcept
+template<class traits_t>
+bool string_data<traits_t>::resize(size_type nSymbols, size_type nAlign, string_resize_type eType) noexcept
 {
     bool bRet = true;
 
-    typename Traits::size_type nSymbolsToAllocate = nAlign > 0 ? nAlign * ((nSymbols + 1) / nAlign + 1) : nSymbols + 1;
+    typename traits_t::size_type nSymbolsToAllocate =
+        nAlign > 0 ? nAlign * ((nSymbols + 1) / nAlign + 1) : nSymbols + 1;
 
     if (eType == string_resize_type::shrink_to_fit // need to decrease size
         || size() == 0                             // string is empty
@@ -50,7 +51,8 @@ bool string_data<Traits>::resize(size_type nSymbols, size_type nAlign, string_re
 
         if (nSymbolsToAllocate <= m_Buffer.size())
         {
-            if (!bSmallAtStart && (Traits::shrink_to_fit_when_small() || eType == string_resize_type::shrink_to_fit))
+            if (!bSmallAtStart
+                && (traits_t::shrink_to_fit_when_small() || eType == string_resize_type::shrink_to_fit))
             {
                 // free allocated memory and move string to buffer
                 std::memmove(buff.data(), m_pData, nNewSize);
@@ -72,7 +74,7 @@ bool string_data<Traits>::resize(size_type nSymbols, size_type nAlign, string_re
             if (void* pNewBlock = std::realloc(bSmallAtStart ? nullptr : m_pData, nNewSize))
             {
                 m_nAllocatedSize = nSymbolsToAllocate;
-                m_pData          = static_cast<typename Traits::value_type*>(pNewBlock);
+                m_pData          = static_cast<typename traits_t::value_type*>(pNewBlock);
 
                 if (bSmallAtStart)
                     std::memmove(m_pData, buff.data(), nStartSize);
@@ -90,14 +92,14 @@ bool string_data<Traits>::resize(size_type nSymbols, size_type nAlign, string_re
     return bRet;
 }
 
-template<class Traits>
-typename string_data<Traits>::size_type string_data<Traits>::size(void) const noexcept
+template<class traits_t>
+typename string_data<traits_t>::size_type string_data<traits_t>::size() const noexcept
 {
     return m_nSize;
 }
 
-template<class Traits>
-typename string_data<Traits>::size_type string_data<Traits>::capacity(void) const noexcept
+template<class traits_t>
+typename string_data<traits_t>::size_type string_data<traits_t>::capacity() const noexcept
 {
     if (is_small())
         return m_Buffer.size();
@@ -105,8 +107,8 @@ typename string_data<Traits>::size_type string_data<Traits>::capacity(void) cons
         return m_nAllocatedSize;
 }
 
-template<class Traits>
-bool string_data<Traits>::is_small() const noexcept
+template<class traits_t>
+bool string_data<traits_t>::is_small() const noexcept
 {
     return m_nAllocatedSize == 0;
 }

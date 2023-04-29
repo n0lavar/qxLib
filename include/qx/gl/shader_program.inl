@@ -71,7 +71,7 @@ inline GLuint base_shader_program::GetBufferName() const noexcept
     return m_nProgram;
 }
 
-template<typename T>
+template<class T>
 inline void base_shader_program::SetUniform(GLint nUniformLocation, const T* pValue, GLsizei nCount) noexcept
 {
     if constexpr (std::is_same_v<T, GLfloat>)
@@ -168,13 +168,13 @@ inline void base_shader_program::SetUniform(GLint nUniformLocation, const T* pVa
     }
 }
 
-template<typename T>
+template<class T>
 inline void base_shader_program::SetUniform(const GLchar* pszName, const T* pValue, GLsizei nCount) noexcept
 {
     SetUniform(GetUniformLocation(pszName), pValue, nCount);
 }
 
-template<typename T>
+template<class T>
 inline void base_shader_program::SetUniform(GLint nUniformLocation, const T& value) noexcept
 {
     using type = std::remove_cvref_t<T>;
@@ -200,7 +200,7 @@ inline void base_shader_program::SetUniform(GLint nUniformLocation, const T& val
         SetUniform(nUniformLocation, &value, 1);
 }
 
-template<typename T>
+template<class T>
 inline void base_shader_program::SetUniform(const GLchar* pszName, const T& value) noexcept
 {
     SetUniform(GetUniformLocation(pszName), value);

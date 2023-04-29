@@ -17,7 +17,7 @@
 namespace qx
 {
 
-template<class Data, class SynchronizationPrimitive>
+template<class data_t, class synchronization_primitive_t>
 class threads_shared;
 
 /**
@@ -25,18 +25,17 @@ class threads_shared;
     @class   shared_proxy
     @brief   A proxy class that provides access to an object stored in
              threads_shared and provides raii for synchronization primitives
-    @details Locks synchronization primitive in constructor and unlocks
-             in destructor
-    @tparam  Data                     - data type
-    @tparam  SynchronizationPrimitive - synchronization primitive type
+    @details Locks synchronization primitive in constructor and unlocks in destructor
+    @tparam  data_t                      - data type
+    @tparam  synchronization_primitive_t - synchronization primitive type
     @author  Khrapov
     @date    4.03.2021
 
 **/
-template<class Data, class SynchronizationPrimitive>
+template<class data_t, class synchronization_primitive_t>
 class shared_proxy
 {
-    friend threads_shared<Data, SynchronizationPrimitive>;
+    friend threads_shared<data_t, synchronization_primitive_t>;
 
 private:
     /**
@@ -47,7 +46,7 @@ private:
                                            threads to unlock the sp and will construct
                                            shared_proxy with nullptrs
     **/
-    shared_proxy(Data* pData, SynchronizationPrimitive* pSynchronizationPrimitive, bool bTryLock);
+    shared_proxy(data_t* pData, synchronization_primitive_t* pSynchronizationPrimitive, bool bTryLock);
 
 public:
     QX_NONCOPYABLE(shared_proxy);
@@ -74,29 +73,29 @@ public:
         @brief  operator->
         @retval - data pointer
     **/
-    [[nodiscard]] Data* operator->() noexcept;
+    [[nodiscard]] data_t* operator->() noexcept;
 
     /**
         @brief  operator->
         @retval - data const pointer
     **/
-    [[nodiscard]] const Data* operator->() const noexcept;
+    [[nodiscard]] const data_t* operator->() const noexcept;
 
     /**
         @brief  operator*
         @retval - data reference
     **/
-    [[nodiscard]] Data& operator*() noexcept;
+    [[nodiscard]] data_t& operator*() noexcept;
 
     /**
         @brief  operator*
         @retval - data const reference
     **/
-    [[nodiscard]] const Data& operator*() const noexcept;
+    [[nodiscard]] const data_t& operator*() const noexcept;
 
 private:
-    SynchronizationPrimitive* m_pSynchronizationPrimitive = nullptr;
-    Data*                     m_pData                     = nullptr;
+    synchronization_primitive_t* m_pSynchronizationPrimitive = nullptr;
+    data_t*                      m_pData                     = nullptr;
 };
 
 /**
@@ -104,14 +103,13 @@ private:
     @class   threads_shared
     @brief   A class that provides thread-safe access to an object,
              including construction and destruction
-    @details ~
-    @tparam  Data                     - data type
-    @tparam  SynchronizationPrimitive - synchronization primitive type
+    @tparam  data_t                      - data type
+    @tparam  synchronization_primitive_t - synchronization primitive type
     @author  Khrapov
     @date    20.08.2021
 
 **/
-template<class Data, class SynchronizationPrimitive = std::mutex>
+template<class data_t, class synchronization_primitive_t = std::mutex>
 class threads_shared
 {
     /**
@@ -140,24 +138,24 @@ class threads_shared
             @brief  Get synchronization primitive stored in proxy
             @retval - synchronization primitive
         **/
-        SynchronizationPrimitive* get_object() noexcept;
+        synchronization_primitive_t* get_object() noexcept;
 
     private:
-        SynchronizationPrimitive sp;
+        synchronization_primitive_t sp;
     };
 
 public:
-    using proxy = shared_proxy<Data, SynchronizationPrimitive>;
+    using proxy = shared_proxy<data_t, synchronization_primitive_t>;
 
     QX_NONCOPYMOVABLE(threads_shared);
 
     /**
         @brief  threads_shared object constructor
-        @tparam Args - template parameter pack type
-        @param  args - arguments to constructing Data object
+        @tparam args_t - template parameter pack type
+        @param  args   - arguments to constructing Data object
     **/
-    template<class... Args>
-    threads_shared(Args&&... args);
+    template<class... args_t>
+    threads_shared(args_t&&... args);
 
     /**
         @brief threads_shared object destructor
@@ -181,23 +179,23 @@ public:
 
 private:
     synchronization_primitive_raii m_SynchronizationPrimitiveRAII;
-    Data                           m_Data;
+    data_t                         m_Data;
 };
 
-template<class SynchronizationPrimitive>
-inline void lock_synchronization_primitive(SynchronizationPrimitive* pSP)
+template<class synchronization_primitive_t>
+inline void lock_synchronization_primitive(synchronization_primitive_t* pSP)
 {
     pSP->lock();
 }
 
-template<class SynchronizationPrimitive>
-inline void unlock_synchronization_primitive(SynchronizationPrimitive* pSP)
+template<class synchronization_primitive_t>
+inline void unlock_synchronization_primitive(synchronization_primitive_t* pSP)
 {
     pSP->unlock();
 }
 
-template<class SynchronizationPrimitive>
-inline bool try_lock_synchronization_primitive(SynchronizationPrimitive* pSP)
+template<class synchronization_primitive_t>
+inline bool try_lock_synchronization_primitive(synchronization_primitive_t* pSP)
 {
     return pSP->try_lock();
 }

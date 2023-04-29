@@ -27,11 +27,8 @@ namespace qx
     @param  value - value
     @retval       - absolute value
 **/
-template<typename T>
-constexpr T abs(T value)
-{
-    return value < 0 ? -value : value;
-}
+template<class T>
+constexpr T abs(T value);
 
 /**
     @brief  Constexpr comparison function for a user defined epsilon values
@@ -41,11 +38,8 @@ constexpr T abs(T value)
     @param  eps   - epsilon value
     @retval       - true if |left - right| < eps
 **/
-template<typename T>
-constexpr bool epsilon_equal(T left, T right, T eps = std::numeric_limits<T>::epsilon())
-{
-    return abs(left - right) < eps;
-}
+template<class T>
+constexpr bool epsilon_equal(T left, T right, T eps = std::numeric_limits<T>::epsilon());
 
 /**
     @brief  Constexpr comparison with zero for a user defined epsilon values
@@ -54,11 +48,8 @@ constexpr bool epsilon_equal(T left, T right, T eps = std::numeric_limits<T>::ep
     @param  eps   - epsilon value
     @retval       - true if |value| < eps
 **/
-template<typename T>
-constexpr bool epsilon_zero(T value, T eps = std::numeric_limits<T>::epsilon())
-{
-    return abs(value) < eps;
-}
+template<class T>
+constexpr bool epsilon_zero(T value, T eps = std::numeric_limits<T>::epsilon());
 
 /**
     @brief  Constexpr comparison function for a user defined epsilon values
@@ -68,11 +59,8 @@ constexpr bool epsilon_zero(T value, T eps = std::numeric_limits<T>::epsilon())
     @param  eps   - epsilon value
     @retval       - true if left < right or |left - right| < eps
 **/
-template<typename T>
-constexpr bool epsilon_less_equal(T left, T right, T eps = std::numeric_limits<T>::epsilon())
-{
-    return left < right || epsilon_equal(left, right, eps);
-}
+template<class T>
+constexpr bool epsilon_less_equal(T left, T right, T eps = std::numeric_limits<T>::epsilon());
 
 /**
     @brief  Constexpr comparison function for a user defined epsilon values
@@ -82,11 +70,8 @@ constexpr bool epsilon_less_equal(T left, T right, T eps = std::numeric_limits<T
     @param  eps   - epsilon value
     @retval       - true if left > right or |left - right| < eps
 **/
-template<typename T>
-constexpr bool epsilon_greater_equal(T left, T right, T eps = std::numeric_limits<T>::epsilon())
-{
-    return left > right || epsilon_equal(left, right, eps);
-}
+template<class T>
+constexpr bool epsilon_greater_equal(T left, T right, T eps = std::numeric_limits<T>::epsilon());
 
 /**
     @brief  Check if value is odd
@@ -95,10 +80,7 @@ constexpr bool epsilon_greater_equal(T left, T right, T eps = std::numeric_limit
     @retval     - true if value is odd
 **/
 template<std::integral T>
-constexpr bool is_odd(T val)
-{
-    return (val & 1) == 1;
-}
+constexpr bool is_odd(T val);
 
 /**
     @brief  Check if value is even
@@ -107,10 +89,7 @@ constexpr bool is_odd(T val)
     @retval     - true if value is even
 **/
 template<std::integral T>
-constexpr bool is_even(T val)
-{
-    return (val & 1) == 0;
-}
+constexpr bool is_even(T val);
 
 /**
     @brief      Greatest common divisor
@@ -121,20 +100,7 @@ constexpr bool is_even(T val)
     @param      nSecond - second num
     @retval             - greatest common divisor if first and second > 0, otherwise 0
 **/
-constexpr int gcd(int nFirst, int nSecond)
-{
-    if (nFirst == 0 || nSecond == 0)
-        return 0;
-
-    while (nSecond != 0)
-    {
-        const int nRemainder = nFirst % nSecond;
-        nFirst               = nSecond;
-        nSecond              = nRemainder;
-    }
-
-    return abs(nFirst);
-}
+constexpr int gcd(int nFirst, int nSecond);
 
 /**
     @brief      Least common multiple
@@ -143,16 +109,7 @@ constexpr int gcd(int nFirst, int nSecond)
     @param      nSecond - second num
     @retval             - least common multiple if first and second > 0, otherwise 0
 **/
-constexpr int lcm(int nFirst, int nSecond)
-{
-    if (nFirst == 0 || nSecond == 0)
-        return 0;
-
-    nFirst  = abs(nFirst);
-    nSecond = abs(nSecond);
-
-    return nFirst / gcd(nFirst, nSecond) * nSecond;
-}
+constexpr int lcm(int nFirst, int nSecond);
 
 /**
     @brief      Power function for integer power
@@ -166,54 +123,8 @@ constexpr int lcm(int nFirst, int nSecond)
     @param      nPower - integral power
     @retval            - number ^ power
 **/
-template<typename T>
-inline double pow(T number, int nPower)
-{
-    static_assert(std::is_integral_v<T> || std::is_floating_point_v<T>, "Integral or floating point required");
-
-    const bool   bNegativePower = nPower < 0;
-    const size_t nPositivePower = static_cast<size_t>(std::abs(nPower));
-
-    double fResult = 1.0;
-    switch (nPositivePower)
-    {
-    case 0:
-        break;
-
-    case 1:
-        fResult = static_cast<double>(number);
-        break;
-
-    case 2:
-        fResult = static_cast<double>(number * number);
-        break;
-
-    default:
-        const std::bitset<std::numeric_limits<int>::digits> powerBitSet(nPositivePower);
-
-        std::array<double, std::numeric_limits<int>::digits> powers;
-
-        powers[0] = static_cast<double>(number);
-
-        size_t nCurPower = 1;
-        size_t nCurIndex = 1;
-
-        while (nCurPower < nPositivePower)
-        {
-            powers[nCurIndex] = powers[nCurIndex - 1] * powers[nCurIndex - 1];
-            nCurPower *= 2;
-            nCurIndex++;
-        }
-
-        for (size_t i = 0; i < nCurIndex; ++i)
-            if (powerBitSet.test(i))
-                fResult *= powers[i];
-
-        break;
-    }
-
-    return bNegativePower ? 1.0 / fResult : fResult;
-}
+template<class T>
+inline double pow(T number, int nPower);
 
 /**
     @brief  Max power of two in integer
@@ -222,79 +133,34 @@ inline double pow(T number, int nPower)
     @retval        - max power of two in number
 **/
 template<std::integral I>
-inline I maxpot(I nValue)
-{
-    static_assert(std::is_integral_v<I>, "Integral required");
-
-    if (nValue == 0)
-        return 0;
-
-    std::bitset<std::numeric_limits<I>::digits> powers(static_cast<size_t>(abs(nValue)));
-
-    I nPow = static_cast<I>(std::numeric_limits<I>::digits - 1);
-    while (!powers.test(static_cast<size_t>(nPow)))
-        --nPow;
-
-    return nPow;
-}
-
-// trick to determine if an integer is between two integers (inclusive)
-// with only one comparison/branch
-// https://stackoverflow.com/a/17095534/8021662
-QX_DISABLE_MSVC_WARNINGS(4018 4388);
+inline I maxpot(I nValue);
 
 /**
     @brief  Checks if value is between left and right
-    @tparam T       - value type
-    @tparam Compare - comparator type
-    @param  left    - left value
-    @param  value   - value
-    @param  right   - right value
-    @param  compare - comparator function
-    @retval         - true, left <= value <= right
+    @tparam T         - value type
+    @tparam compare_t - comparator type
+    @param  left      - left value
+    @param  value     - value
+    @param  right     - right value
+    @param  compare   - comparator function
+    @retval           - true, left <= value <= right
 **/
-template<typename T, typename Compare = std::less_equal<>>
-constexpr bool between(T left, T value, T right, Compare compare)
-{
-    if constexpr (std::is_enum_v<T>)
-    {
-        i64 l = static_cast<i64>(left);
-        i64 r = static_cast<i64>(right);
-        i64 v = static_cast<i64>(value);
-        return between(l, v, r, compare);
-    }
-    else if constexpr (std::is_integral_v<T> && std::is_same_v<Compare, std::less_equal<>>)
-    {
-        return compare(static_cast<size_t>(value - left), right - left);
-    }
-    else if constexpr (std::is_floating_point_v<T> && std::is_same_v<Compare, std::less_equal<>>)
-    {
-        return epsilon_less_equal(left, value) && epsilon_less_equal(value, right);
-    }
-    else
-    {
-        return compare(left, value) && compare(value, right);
-    }
-}
-
-QX_RESTORE_MSVC_WARNINGS(4018 4388);
+template<class T, class compare_t = std::less_equal<>>
+constexpr bool between(T left, T value, T right, compare_t compare);
 
 /**
     @brief   Checks if value is between left and right
     @details Overloading for disabling 4388 warning with Compare instantiation
-    @tparam  T       - value type
-    @tparam  Compare - comparator type
-    @param   left    - left value
-    @param   value   - value
-    @param   right   - right value
-    @retval          - true, left <= value <= right
+    @tparam  T         - value type
+    @tparam  compare_t - comparator type
+    @param   left      - left value
+    @param   value     - value
+    @param   right     - right value
+    @retval            - true, left <= value <= right
 **/
-template<typename T, typename Compare = std::less_equal<>>
-constexpr bool between(T left, T value, T right)
-{
-    QX_PUSH_SUPPRESS_MSVC_WARNINGS(4388);
-    return between(left, value, right, Compare());
-    QX_POP_SUPPRESS_WARNINGS();
-}
+template<class T, class compare_t = std::less_equal<>>
+constexpr bool between(T left, T value, T right);
 
 } // namespace qx
+
+#include <qx/math/common.inl>

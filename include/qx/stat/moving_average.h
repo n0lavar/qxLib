@@ -17,7 +17,7 @@
 namespace qx
 {
 
-template<typename T>
+template<class T>
 using moving_average_weights_func = std::function<std::vector<T>(size_t nEntries)>;
 
 /**
@@ -26,7 +26,7 @@ using moving_average_weights_func = std::function<std::vector<T>(size_t nEntries
     @param  nEntries - number of entries in moving_average
     @retval          - weights
 **/
-template<typename T>
+template<class T>
 inline std::vector<T> get_moving_average_simple_weights(size_t nEntries);
 
 /**
@@ -36,7 +36,7 @@ inline std::vector<T> get_moving_average_simple_weights(size_t nEntries);
     @param  nEntries - number of entries in moving_average
     @retval          - weights
 **/
-template<typename T>
+template<class T>
 inline std::vector<T> get_moving_average_linear_weights(size_t nEntries);
 
 /**
@@ -46,7 +46,7 @@ inline std::vector<T> get_moving_average_linear_weights(size_t nEntries);
     @param  nEntries - number of entries in moving_average
     @retval          - weights
 **/
-template<typename T>
+template<class T>
 inline std::vector<T> get_moving_average_exp_weights(size_t nEntries);
 
 /**
@@ -63,7 +63,7 @@ inline std::vector<T> get_moving_average_exp_weights(size_t nEntries);
     @date    1.06.2021
 
 **/
-template<typename T>
+template<class T>
 class moving_average
 {
 public:

@@ -67,14 +67,14 @@ using Implementations = ::testing::Types<
     LoggerTraits<LOGS_FILE_DEFAULT, UNIT_DEFAULT, LOG_FILE_H, LOG_CATEGORY_TAG1>,
     LoggerTraits<LOGS_FILE_DEFAULT, UNIT_DEFAULT, LOG_FILE_H, LOG_CATEGORY_TAG2>>;
 
-template<typename Traits>
+template<class traits_t>
 class TestLogger : public ::testing::Test
 {
 protected:
     /* init protected members here */
     TestLogger()
     {
-        m_sLogFilePath = Traits::GetLogsFile();
+        m_sLogFilePath = traits_t::GetLogsFile();
         m_sLogFilePath += L".log";
     }
 
@@ -86,19 +86,19 @@ protected:
 
         auto pConsoleLoggerStream = std::make_unique<qx::cout_logger_stream>();
         pConsoleLoggerStream->deregister_unit(qx::base_logger_stream::k_svDefaultUnit);
-        pConsoleLoggerStream->register_unit(Traits::GetUnit(), { qx::log_level::none });
+        pConsoleLoggerStream->register_unit(traits_t::GetUnit(), { qx::log_level::none });
 
         auto pFileLoggerStream = std::make_unique<qx::file_logger_stream>(
             true,
             qx::log_file_policy::clear_then_uppend,
-            Traits::GetLogsFile());
+            traits_t::GetLogsFile());
         pFileLoggerStream->deregister_unit(qx::base_logger_stream::k_svDefaultUnit);
-        pFileLoggerStream->register_unit(Traits::GetUnit(), { qx::log_level::log });
+        pFileLoggerStream->register_unit(traits_t::GetUnit(), { qx::log_level::log });
 
-        if constexpr (Traits::GetCategory() == LOG_CATEGORY_TAG1)
+        if constexpr (traits_t::GetCategory() == LOG_CATEGORY_TAG1)
         {
             pFileLoggerStream->register_unit(
-                Traits::GetCategory(),
+                traits_t::GetCategory(),
                 { qx::log_level::log,
                   [](qx::logger_buffer<char>& buffers,
                      qx::log_level,
@@ -123,9 +123,9 @@ protected:
     /* called after every test */
     virtual void TearDown() override
     {
-        if (Traits::GetUnit() == UNIT_DEFAULT
-            || Traits::GetUnit() == UNIT_FILE && Traits::GetUnit() == Traits::GetTraceFile()
-            || Traits::GetUnit() == UNIT_FUNC && m_bFunction)
+        if (traits_t::GetUnit() == UNIT_DEFAULT
+            || traits_t::GetUnit() == UNIT_FILE && traits_t::GetUnit() == traits_t::GetTraceFile()
+            || traits_t::GetUnit() == UNIT_FUNC && m_bFunction)
         {
             const std::filesystem::path path(m_sLogFilePath.c_str());
             std::ifstream               ifs(path);
@@ -149,8 +149,8 @@ protected:
                 EXPECT_TRUE(std::regex_search(sText, match, regex))
                     << "regex:           " << sMatch.data() << std::endl
                     << "line:            " << sText.data() << std::endl
-                    << "logs unit:       " << Traits::GetUnit() << std::endl
-                    << "logs trace file: " << Traits::GetTraceFile();
+                    << "logs unit:       " << traits_t::GetUnit() << std::endl
+                    << "logs trace file: " << traits_t::GetTraceFile();
             };
 
             auto CheckStringCommon = [&sFormat, &sFile, &ifs, &sLine, &CheckRegex](
@@ -160,10 +160,10 @@ protected:
             {
                 sFile.sprintf(
                     "%s\\[%s::",
-                    bCategory && Traits::GetCategory()
-                        ? qx::string::static_sprintf("\\[%s\\]", Traits::GetCategory()).c_str()
+                    bCategory && traits_t::GetCategory()
+                        ? qx::string::static_sprintf("\\[%s\\]", traits_t::GetCategory()).c_str()
                         : "",
-                    Traits::GetTraceFile());
+                    traits_t::GetTraceFile());
 
                 constexpr const char* pszFunc = "(.*?)"; // compiler-dependent
                 constexpr const char* pszLine = "::\\d+\\]";
@@ -185,7 +185,8 @@ protected:
 
             auto CheckStringCategory = [&sFormat, &ifs, &sLine, &CheckRegex](const char* pszStringEnding)
             {
-                sFormat.sprintf("%s%s%s\\[%s\\]%s", pszInfo, pszDate, pszTime, Traits::GetCategory(), pszStringEnding);
+                sFormat
+                    .sprintf("%s%s%s\\[%s\\]%s", pszInfo, pszDate, pszTime, traits_t::GetCategory(), pszStringEnding);
                 ifs.getline(sLine.data(), static_cast<std::streamsize>(sLine.size()));
                 CheckRegex(sFormat, sLine);
             };
@@ -224,7 +225,7 @@ protected:
             CheckStringCommon(pszAssert, " \\[false\\] 1.000000 4 three");
             CheckStringCommon(pszAssert, " \\[false\\] 1.000000 5 three");
 
-            if constexpr (LOG_CATEGORY_TAG1 == Traits::GetCategory())
+            if constexpr (LOG_CATEGORY_TAG1 == traits_t::GetCategory())
             {
                 CheckStringCategory(" 1.000000");
                 CheckStringCategory(" 1.000000 1");

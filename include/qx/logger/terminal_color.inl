@@ -7,16 +7,16 @@
 
 **/
 
-template<class char_type>
-std::basic_ostream<char_type>& operator<<(std::basic_ostream<char_type>& os, const qx::terminal_color& terminalColor)
+template<class char_t>
+std::basic_ostream<char_t>& operator<<(std::basic_ostream<char_t>& os, const qx::terminal_color& terminalColor)
 {
-    auto& sBuffer = qx::static_buffer::get_instance().get_buffer<qx::basic_string<char_type>>();
+    auto& sBuffer = qx::static_buffer::get_instance().get_buffer<qx::basic_string<char_t>>();
 
     switch (terminalColor.m_eType)
     {
     case qx::terminal_color::type::font:
         sBuffer.sprintf(
-            QX_STR_PREFIX(char_type, "\033[38;2;%d;%d;%dm"),
+            QX_STR_PREFIX(char_t, "\033[38;2;%d;%d;%dm"),
             terminalColor.m_Color.r_dec(),
             terminalColor.m_Color.g_dec(),
             terminalColor.m_Color.b_dec());
@@ -24,14 +24,14 @@ std::basic_ostream<char_type>& operator<<(std::basic_ostream<char_type>& os, con
 
     case qx::terminal_color::type::back:
         sBuffer.sprintf(
-            QX_STR_PREFIX(char_type, "\033[48;2;%d;%d;%dm"),
+            QX_STR_PREFIX(char_t, "\033[48;2;%d;%d;%dm"),
             terminalColor.m_Color.r_dec(),
             terminalColor.m_Color.g_dec(),
             terminalColor.m_Color.b_dec());
         break;
 
     case qx::terminal_color::type::reset:
-        sBuffer = QX_STR_PREFIX(char_type, "\033[0m");
+        sBuffer = QX_STR_PREFIX(char_t, "\033[0m");
         break;
     }
 

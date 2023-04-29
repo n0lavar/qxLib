@@ -110,9 +110,9 @@ constexpr std::string_view type_strings<T>::create_name()
 }
 
 template<class T>
-constexpr typename type_strings<T>::TemplateParametersContainer type_strings<T>::create_template_parameters()
+constexpr typename type_strings<T>::template_parameters_container type_strings<T>::create_template_parameters()
 {
-    TemplateParametersContainer tokens;
+    template_parameters_container tokens;
 
     const std::string_view svSignature = create_signature();
 
@@ -198,7 +198,7 @@ constexpr std::string_view type_strings<T>::get_name()
 }
 
 template<class T>
-constexpr typename type_strings<T>::TemplateParametersContainer type_strings<T>::get_template_parameters()
+constexpr typename type_strings<T>::template_parameters_container type_strings<T>::get_template_parameters()
 {
     return m_kTemplateParameters;
 }

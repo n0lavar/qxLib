@@ -28,20 +28,20 @@
 namespace qx::details
 {
 
-template<log_level eLogLevel, class... ArgsType>
+template<log_level eLogLevel, class... args_t>
 void resolve_assert_proceeding(
     const category& fileCategory,
     const char*     pszFunction,
     const char*     pszFile,
     int             nLine,
     const char*     pszCondition,
-    ArgsType&&... args)
+    args_t&&... args)
 {
     QX_LOGGER_INSTANCE.log(eLogLevel, "[%s] ", fileCategory, pszFile, pszFunction, nLine, pszCondition, args...);
     QX_LOGGER_INSTANCE.flush();
 }
 
-template<log_level eLogLevel, class... ArgsType>
+template<log_level eLogLevel, class... args_t>
 void resolve_assert_proceeding(
     const category& fileCategory,
     const char*     pszFunction,
@@ -49,7 +49,7 @@ void resolve_assert_proceeding(
     int             nLine,
     const char*     pszCondition,
     const char*     pszFormat,
-    ArgsType&&... args)
+    args_t&&... args)
 {
     string sFormat("[%s] ");
     sFormat += pszFormat;
@@ -59,7 +59,7 @@ void resolve_assert_proceeding(
     QX_LOGGER_INSTANCE.flush();
 }
 
-template<log_level eLogLevel, class... ArgsType>
+template<log_level eLogLevel, class... args_t>
 void resolve_assert_proceeding(
     const category& fileCategory,
     const char*     pszFunction,
@@ -67,7 +67,7 @@ void resolve_assert_proceeding(
     int             nLine,
     const char*     pszCondition,
     const wchar_t*  pszFormat,
-    ArgsType&&... args)
+    args_t&&... args)
 {
     wstring sFormat(L"[%ls] ");
     sFormat += pszFormat;
@@ -84,7 +84,7 @@ void resolve_assert_proceeding(
     QX_LOGGER_INSTANCE.flush();
 }
 
-template<log_level eLogLevel, class... ArgsType>
+template<log_level eLogLevel, class... args_t>
 void resolve_assert_proceeding(
     const category& fileCategory,
     const char*     pszFunction,
@@ -93,7 +93,7 @@ void resolve_assert_proceeding(
     const char*     pszCondition,
     const category& category,
     const char*     pszFormat,
-    ArgsType&&... args)
+    args_t&&... args)
 {
     string sFormat("[%s] ");
     sFormat += pszFormat;
@@ -102,7 +102,7 @@ void resolve_assert_proceeding(
     QX_LOGGER_INSTANCE.flush();
 }
 
-template<log_level eLogLevel, class... ArgsType>
+template<log_level eLogLevel, class... args_t>
 void resolve_assert_proceeding(
     const category& fileCategory,
     const char*     pszFunction,
@@ -111,7 +111,7 @@ void resolve_assert_proceeding(
     const char*     pszCondition,
     const category& category,
     const wchar_t*  pszFormat,
-    ArgsType&&... args)
+    args_t&&... args)
 {
     wstring sFormat(L"[%ls] ");
     sFormat += pszFormat;

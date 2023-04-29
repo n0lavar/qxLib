@@ -24,7 +24,7 @@ namespace qx
     @param      nValue - number for search
     @retval            - all prime factors vector
 **/
-template<typename I>
+template<class I>
 inline std::vector<I> find_prime_factors(I nValue)
 {
     static_assert(std::is_integral_v<I>, "Integral required");
@@ -82,7 +82,7 @@ inline std::vector<I> find_prime_factors(I nValue)
     @param      nMaxNumber - max number for search
     @retval                - all primes vector
 **/
-template<typename I>
+template<class I>
 inline std::vector<I> find_primes(I nMaxNumber)
 {
     static_assert(std::is_integral_v<I>, "Integral required");

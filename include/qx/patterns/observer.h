@@ -21,7 +21,7 @@ namespace qx
 
 class base_subject;
 
-template<class TObserver>
+template<class observer_t>
 class subject;
 
 /**
@@ -131,16 +131,16 @@ protected:
     @brief   Class maintains a list of its dependents, called observers,
              and notifies them automatically of any state changes
     @details ~
-    @tparam  TObserver - observer type
+    @tparam  observer_t - observer type
     @author  Khrapov
     @date    6.03.2021
 
 **/
-template<class TObserver>
+template<class observer_t>
 class subject : public base_subject
 {
-    template<class TBaseIterator>
-    class base_iterator : public TBaseIterator
+    template<class base_iterator_t>
+    class base_iterator : public base_iterator_t
     {
     public:
         /**
@@ -153,7 +153,7 @@ class subject : public base_subject
             @param other    - base class iterator object 
             @param pSubject - subject class pointer 
         **/
-        base_iterator(const TBaseIterator& other, subject* pSubject) noexcept;
+        base_iterator(const base_iterator_t& other, subject* pSubject) noexcept;
 
         /**
             @brief base_iterator object constructor
@@ -183,13 +183,13 @@ class subject : public base_subject
             @brief  operator->
             @retval - observer object pointer
         **/
-        TObserver* operator->() noexcept;
+        observer_t* operator->() noexcept;
 
         /**
             @brief  operator*
             @retval - observer object ref
         **/
-        TObserver& operator*() noexcept;
+        observer_t& operator*() noexcept;
 
     private:
         /**
@@ -201,8 +201,8 @@ class subject : public base_subject
         subject* m_pSubject = nullptr;
     };
 
-    template<class TBaseIterator>
-    class const_base_iterator : public TBaseIterator
+    template<class base_iterator_t>
+    class const_base_iterator : public base_iterator_t
     {
     public:
         /**
@@ -226,28 +226,28 @@ class subject : public base_subject
             @brief const_base_iterator object constructor
             @param other - other const_base_iterator object ref
         **/
-        const_base_iterator(const TBaseIterator& other) noexcept;
+        const_base_iterator(const base_iterator_t& other) noexcept;
 
         /**
             @brief  operator->
             @retval - observer object const pointer
         **/
-        const TObserver* operator->() const noexcept;
+        const observer_t* operator->() const noexcept;
 
         /**
             @brief  operator*
             @retval - observer object const ref
         **/
-        const TObserver& operator*() const noexcept;
+        const observer_t& operator*() const noexcept;
     };
 
 public:
-    using observers_container    = std::vector<TObserver*>;
+    using observers_container    = std::vector<observer_t*>;
     using iterator               = base_iterator<typename observers_container::iterator>;
     using const_iterator         = const_base_iterator<typename observers_container::const_iterator>;
     using reverse_iterator       = base_iterator<typename observers_container::reverse_iterator>;
     using const_reverse_iterator = const_base_iterator<typename observers_container::const_reverse_iterator>;
-    using notify_func            = std::function<void(TObserver*)>;
+    using notify_func            = std::function<void(observer_t*)>;
 
 public:
     QX_NONCOPYABLE(subject);
@@ -268,7 +268,7 @@ public:
         @param  pObserver - observer pointer 
         @retval           - observer_token for auto detaching observer from this subject 
     **/
-    [[nodiscard]] observer_token attach(TObserver* pObserver) noexcept;
+    [[nodiscard]] observer_token attach(observer_t* pObserver) noexcept;
 
     /**
         @brief Notify all observers

@@ -86,13 +86,13 @@ public:
 private:
     /**
         @brief  Log to file
-        @tparam char_type - char type
+        @tparam char_t    - char type
         @param  svMessage - message to log
         @param  logUnit   - log unit info
         @param  eLogLevel - this message log level
     **/
-    template<class char_type>
-    void log_file(std::basic_string_view<char_type> svMessage, const log_unit& logUnit, log_level eLogLevel);
+    template<class char_t>
+    void log_file(std::basic_string_view<char_t> svMessage, const log_unit& logUnit, log_level eLogLevel);
 
 private:
     std::basic_ofstream<char>    m_CharFile;

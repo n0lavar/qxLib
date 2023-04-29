@@ -12,7 +12,7 @@
 
 #include <qx/render/rect.h>
 
-template<typename VectorType>
+template<class vector_t>
 class TestRect : public ::testing::Test
 {
 };
@@ -21,15 +21,15 @@ using Implementations = ::testing::Types<glm::vec2, glm::dvec2>;
 
 TYPED_TEST_SUITE(TestRect, Implementations);
 
-template<class Rect>
+template<class rect_t>
 void CheckRect(
-    const Rect&               rect,
-    typename Rect::value_type fWidth,
-    typename Rect::value_type fHeight,
-    typename Rect::value_type fX1,
-    typename Rect::value_type fX2)
+    const rect_t&               rect,
+    typename rect_t::value_type fWidth,
+    typename rect_t::value_type fHeight,
+    typename rect_t::value_type fX1,
+    typename rect_t::value_type fX2)
 {
-    using VectorType = typename Rect::vector_type;
+    using VectorType = typename rect_t::vector_type;
 
     EXPECT_DOUBLE_EQ(rect.width(), fWidth);
     EXPECT_DOUBLE_EQ(rect.height(), fHeight);
@@ -44,7 +44,7 @@ void CheckRect(
     EXPECT_EQ(rect.max(), VectorType(fX1 + fWidth, fX2 + fHeight));
     EXPECT_EQ(
         rect.center(),
-        VectorType(fX1, fX2) + VectorType(fWidth, fHeight) / static_cast<typename Rect::value_type>(2.0));
+        VectorType(fX1, fX2) + VectorType(fWidth, fHeight) / static_cast<typename rect_t::value_type>(2.0));
     EXPECT_EQ(!rect.empty(), fWidth * fHeight > 0.0);
 }
 

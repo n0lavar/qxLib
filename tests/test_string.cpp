@@ -19,7 +19,7 @@
 
 QX_PUSH_SUPPRESS_MSVC_WARNINGS(5233);
 
-template<typename StringTraits>
+template<class string_traits_t>
 class TestQxString : public ::testing::Test
 {
 };
@@ -375,18 +375,18 @@ TYPED_TEST(TestQxString, erase)
     EXPECT_STREQ(erasingStr.data(), STR("can some of"));
 }
 
-template<typename Arg>
+template<class arg_t>
 auto insert = [](auto& str, auto pos, auto pszStr)
 {
     using TChar = std::remove_const_t<std::remove_pointer_t<decltype(pszStr)>>;
 
-    if constexpr (qx::is_random_access_iterator<Arg>)
+    if constexpr (qx::is_random_access_iterator<arg_t>)
     {
         // random access iterator
         std::basic_string<TChar> iter_str = pszStr;
         return str.insert(pos, iter_str.begin(), iter_str.end());
     }
-    else if constexpr (qx::is_specialization_of<Arg, std::list>::value)
+    else if constexpr (qx::is_specialization_of<arg_t, std::list>::value)
     {
         // forward iterator
         std::list<TChar> iter_str;
@@ -401,7 +401,7 @@ auto insert = [](auto& str, auto pos, auto pszStr)
     else
     {
         // other types
-        return str.insert(pos, Arg(pszStr));
+        return str.insert(pos, arg_t(pszStr));
     }
 };
 
@@ -828,10 +828,10 @@ struct SNotPod
     int nData = 42;
 };
 
-template<typename TChar>
-std::basic_istream<TChar, std::char_traits<TChar>>& operator>>(
-    std::basic_istream<TChar, std::char_traits<TChar>>& is,
-    SNotPod&                                            obj)
+template<class char_t>
+std::basic_istream<char_t, std::char_traits<char_t>>& operator>>(
+    std::basic_istream<char_t, std::char_traits<char_t>>& is,
+    SNotPod&                                              obj)
 {
     obj = SNotPod(128);
     return is;

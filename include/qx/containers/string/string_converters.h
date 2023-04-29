@@ -62,15 +62,15 @@ inline wstring utf8_to_wstring(const char* pszUtf8)
     @details Some libraries or even c++ types can't deal with std::string_view
              (for ex. std::ifstream). This function allows to reduce number of
              allocations, but still leads to overhead due to chars copying
-    @tparam  value_type - string value type
+    @tparam  value_t    - string value type
     @param   stringView - string view to convert
     @retval             - null terminated string with stringView convent
                           valid until the next to_char_pointer call
 **/
-template<typename value_type>
-inline const value_type* to_char_pointer(std::basic_string_view<value_type> stringView)
+template<class value_t>
+inline const value_t* to_char_pointer(std::basic_string_view<value_t> stringView)
 {
-    thread_local basic_string<value_type> sBuffer;
+    thread_local basic_string<value_t> sBuffer;
     sBuffer = stringView;
     return sBuffer.c_str();
 }

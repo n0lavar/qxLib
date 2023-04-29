@@ -59,59 +59,59 @@ inline observer_token_data::operator bool() const noexcept
 
 // --------------------------- subject::base_iterator --------------------------
 
-template<class TObserver>
-template<class TBaseIterator>
-inline subject<TObserver>::base_iterator<TBaseIterator>::base_iterator(
-    const TBaseIterator& other,
-    subject*             pSubject) noexcept
-    : TBaseIterator(other)
+template<class observer_t>
+template<class base_iterator_t>
+inline subject<observer_t>::base_iterator<base_iterator_t>::base_iterator(
+    const base_iterator_t& other,
+    subject*               pSubject) noexcept
+    : base_iterator_t(other)
     , m_pSubject(pSubject)
 {
     init();
 }
 
-template<class TObserver>
-template<class TBaseIterator>
-inline subject<TObserver>::base_iterator<TBaseIterator>::base_iterator(const base_iterator& other) noexcept
-    : TBaseIterator(other)
+template<class observer_t>
+template<class base_iterator_t>
+inline subject<observer_t>::base_iterator<base_iterator_t>::base_iterator(const base_iterator& other) noexcept
+    : base_iterator_t(other)
     , m_pSubject(other.m_pSubject)
 {
     init();
 }
 
-template<class TObserver>
-template<class TBaseIterator>
-inline subject<TObserver>::base_iterator<TBaseIterator>::~base_iterator() noexcept
+template<class observer_t>
+template<class base_iterator_t>
+inline subject<observer_t>::base_iterator<base_iterator_t>::~base_iterator() noexcept
 {
     m_pSubject->on_iterator_destructed();
 }
 
-template<class TObserver>
-template<class TBaseIterator>
-inline typename subject<TObserver>::template base_iterator<TBaseIterator>& subject<TObserver>::base_iterator<
-    TBaseIterator>::operator=(const base_iterator& other) noexcept
+template<class observer_t>
+template<class base_iterator_t>
+inline typename subject<observer_t>::template base_iterator<base_iterator_t>& subject<observer_t>::base_iterator<
+    base_iterator_t>::operator=(const base_iterator& other) noexcept
 {
     *this = std::move(base_iterator(other));
     return *this;
 }
 
-template<class TObserver>
-template<class TBaseIterator>
-inline TObserver* subject<TObserver>::base_iterator<TBaseIterator>::operator->(void) noexcept
+template<class observer_t>
+template<class base_iterator_t>
+inline observer_t* subject<observer_t>::base_iterator<base_iterator_t>::operator->(void) noexcept
 {
-    return static_cast<TObserver*>(*TBaseIterator::operator->());
+    return static_cast<observer_t*>(*base_iterator_t::operator->());
 }
 
-template<class TObserver>
-template<class TBaseIterator>
-inline TObserver& subject<TObserver>::base_iterator<TBaseIterator>::operator*(void) noexcept
+template<class observer_t>
+template<class base_iterator_t>
+inline observer_t& subject<observer_t>::base_iterator<base_iterator_t>::operator*(void) noexcept
 {
-    return static_cast<TObserver&>(*TBaseIterator::operator*());
+    return static_cast<observer_t&>(*base_iterator_t::operator*());
 }
 
-template<class TObserver>
-template<class TBaseIterator>
-inline void subject<TObserver>::base_iterator<TBaseIterator>::init() noexcept
+template<class observer_t>
+template<class base_iterator_t>
+inline void subject<observer_t>::base_iterator<base_iterator_t>::init() noexcept
 {
     m_pSubject->on_iterator_constructed();
 }
@@ -120,33 +120,34 @@ inline void subject<TObserver>::base_iterator<TBaseIterator>::init() noexcept
 
 // ------------------------ subject::const_base_iterator -----------------------
 
-template<class TObserver>
-template<class TBaseIterator>
-inline subject<TObserver>::const_base_iterator<TBaseIterator>::const_base_iterator(const TBaseIterator& other) noexcept
-    : TBaseIterator(other)
+template<class observer_t>
+template<class base_iterator_t>
+inline subject<observer_t>::const_base_iterator<base_iterator_t>::const_base_iterator(
+    const base_iterator_t& other) noexcept
+    : base_iterator_t(other)
 {
 }
 
-template<class TObserver>
-template<class TBaseIterator>
-const TObserver* subject<TObserver>::const_base_iterator<TBaseIterator>::operator->() const noexcept
+template<class observer_t>
+template<class base_iterator_t>
+const observer_t* subject<observer_t>::const_base_iterator<base_iterator_t>::operator->() const noexcept
 {
-    return static_cast<const TObserver*>(*TBaseIterator::operator->());
+    return static_cast<const observer_t*>(*base_iterator_t::operator->());
 }
 
-template<class TObserver>
-template<class TBaseIterator>
-const TObserver& subject<TObserver>::const_base_iterator<TBaseIterator>::operator*() const noexcept
+template<class observer_t>
+template<class base_iterator_t>
+const observer_t& subject<observer_t>::const_base_iterator<base_iterator_t>::operator*() const noexcept
 {
-    return static_cast<const TObserver&>(*TBaseIterator::operator*());
+    return static_cast<const observer_t&>(*base_iterator_t::operator*());
 }
 
 
 
 // ---------------------------------- subject ----------------------------------
 
-template<class TObserver>
-inline subject<TObserver>::~subject()
+template<class observer_t>
+inline subject<observer_t>::~subject()
 {
     // temp vector because reset will erase elements from m_Tokens
     const auto tokens = m_Tokens;
@@ -154,8 +155,8 @@ inline subject<TObserver>::~subject()
         pToken->reset();
 }
 
-template<class TObserver>
-inline observer_token subject<TObserver>::attach(TObserver* pObserver) noexcept
+template<class observer_t>
+inline observer_token subject<observer_t>::attach(observer_t* pObserver) noexcept
 {
     if (std::find(m_Observers.begin(), m_Observers.end(), pObserver) == m_Observers.end())
     {
@@ -170,93 +171,93 @@ inline observer_token subject<TObserver>::attach(TObserver* pObserver) noexcept
     }
 }
 
-template<class TObserver>
-inline void subject<TObserver>::notify(const notify_func& notifyFunc) const noexcept
+template<class observer_t>
+inline void subject<observer_t>::notify(const notify_func& notifyFunc) const noexcept
 {
     for (auto pObserver : m_Observers)
         notifyFunc(pObserver);
 }
 
-template<class TObserver>
-inline typename subject<TObserver>::iterator subject<TObserver>::begin()
+template<class observer_t>
+inline typename subject<observer_t>::iterator subject<observer_t>::begin()
 {
     return iterator(m_Observers.begin(), this);
 }
 
-template<class TObserver>
-inline typename subject<TObserver>::const_iterator subject<TObserver>::begin(void) const
+template<class observer_t>
+inline typename subject<observer_t>::const_iterator subject<observer_t>::begin(void) const
 {
     return const_iterator(m_Observers.cbegin());
 }
 
-template<class TObserver>
-inline typename subject<TObserver>::const_iterator subject<TObserver>::cbegin(void) const
+template<class observer_t>
+inline typename subject<observer_t>::const_iterator subject<observer_t>::cbegin(void) const
 {
     return const_iterator(m_Observers.cbegin());
 }
 
-template<class TObserver>
-inline typename subject<TObserver>::iterator subject<TObserver>::end()
+template<class observer_t>
+inline typename subject<observer_t>::iterator subject<observer_t>::end()
 {
     return iterator(m_Observers.end(), this);
 }
 
-template<class TObserver>
-inline typename subject<TObserver>::const_iterator subject<TObserver>::end(void) const
+template<class observer_t>
+inline typename subject<observer_t>::const_iterator subject<observer_t>::end(void) const
 {
     return const_iterator(m_Observers.cend());
 }
 
-template<class TObserver>
-inline typename subject<TObserver>::const_iterator subject<TObserver>::cend(void) const
+template<class observer_t>
+inline typename subject<observer_t>::const_iterator subject<observer_t>::cend(void) const
 {
     return const_iterator(m_Observers.cend());
 }
 
-template<class TObserver>
-inline typename subject<TObserver>::reverse_iterator subject<TObserver>::rbegin(void)
+template<class observer_t>
+inline typename subject<observer_t>::reverse_iterator subject<observer_t>::rbegin(void)
 {
     return reverse_iterator(m_Observers.rbegin(), this);
 }
 
-template<class TObserver>
-inline typename subject<TObserver>::const_reverse_iterator subject<TObserver>::rbegin() const
+template<class observer_t>
+inline typename subject<observer_t>::const_reverse_iterator subject<observer_t>::rbegin() const
 {
     return const_reverse_iterator(m_Observers.crbegin());
 }
 
-template<class TObserver>
-inline typename subject<TObserver>::const_reverse_iterator subject<TObserver>::crbegin() const
+template<class observer_t>
+inline typename subject<observer_t>::const_reverse_iterator subject<observer_t>::crbegin() const
 {
     return const_reverse_iterator(m_Observers.crbegin());
 }
 
-template<class TObserver>
-inline typename subject<TObserver>::reverse_iterator subject<TObserver>::rend(void)
+template<class observer_t>
+inline typename subject<observer_t>::reverse_iterator subject<observer_t>::rend(void)
 {
     return reverse_iterator(m_Observers.rend(), this);
 }
 
-template<class TObserver>
-inline typename subject<TObserver>::const_reverse_iterator subject<TObserver>::rend() const
+template<class observer_t>
+inline typename subject<observer_t>::const_reverse_iterator subject<observer_t>::rend() const
 {
     return const_reverse_iterator(m_Observers.crend());
 }
 
-template<class TObserver>
-inline typename subject<TObserver>::const_reverse_iterator subject<TObserver>::crend() const
+template<class observer_t>
+inline typename subject<observer_t>::const_reverse_iterator subject<observer_t>::crend() const
 {
     return const_reverse_iterator(m_Observers.crend());
 }
 
-template<class TObserver>
-inline size_t subject<TObserver>::get_num_observers() const noexcept
+template<class observer_t>
+inline size_t subject<observer_t>::get_num_observers() const noexcept
 {
     return m_Observers.size();
 }
 
-template<class TObserver>
-inline void subject<TObserver>::detach(void* pObserver) noexcept
+template<class observer_t>
+inline void subject<observer_t>::detach(void* pObserver) noexcept
 {
     if (m_nIterators == 0)
     {
@@ -283,13 +284,13 @@ inline void subject<TObserver>::detach(void* pObserver) noexcept
         std::replace(
             m_Observers.begin(),
             m_Observers.end(),
-            static_cast<TObserver*>(pObserver),
-            static_cast<TObserver*>(nullptr));
+            static_cast<observer_t*>(pObserver),
+            static_cast<observer_t*>(nullptr));
     }
 }
 
-template<class TObserver>
-inline void subject<TObserver>::on_iterator_destructed() noexcept
+template<class observer_t>
+inline void subject<observer_t>::on_iterator_destructed() noexcept
 {
     m_nIterators--;
     if (m_nIterators == 0)
@@ -300,8 +301,8 @@ inline void subject<TObserver>::on_iterator_destructed() noexcept
     }
 }
 
-template<class TObserver>
-inline void subject<TObserver>::on_iterator_constructed() noexcept
+template<class observer_t>
+inline void subject<observer_t>::on_iterator_constructed() noexcept
 {
     m_nIterators++;
 }

@@ -14,7 +14,7 @@
 namespace qx
 {
 
-template<class C>
+template<class container_t>
 class const_iterator;
 
 /**
@@ -22,29 +22,29 @@ class const_iterator;
     @class   iterator
     @brief   Non-const random access iterator type
     @details Use it for range-based loops and std algorithms
-             C have to provide at(size_t)
-    @tparam  C - container type
+             container_t have to provide at(size_t)
+    @tparam  container_t - container type
     @author  Khrapov
     @date    27.07.2019
 
 **/
-template<class C>
+template<class container_t>
 class iterator
 {
-    friend class const_iterator<C>;
+    friend class const_iterator<container_t>;
 
 public:
-    using value_type        = typename C::value_type;
-    using pointer           = typename C::pointer;
-    using reference         = typename C::reference;
-    using difference_type   = typename C::difference_type;
-    using size_type         = typename C::size_type;
+    using value_type        = typename container_t::value_type;
+    using pointer           = typename container_t::pointer;
+    using reference         = typename container_t::reference;
+    using difference_type   = typename container_t::difference_type;
+    using size_type         = typename container_t::size_type;
     using iterator_category = std::contiguous_iterator_tag;
     using iterator_concept  = std::contiguous_iterator_tag;
 
 public:
     constexpr iterator() noexcept = default;
-    constexpr iterator(C* c, size_type i) noexcept : m_nIndex(i), m_pCollection(c)
+    constexpr iterator(container_t* c, size_type i) noexcept : m_nIndex(i), m_pCollection(c)
     {
     }
     [[nodiscard]] constexpr reference operator*() const noexcept
@@ -135,12 +135,14 @@ public:
     }
 
 protected:
-    size_type m_nIndex      = 0u;
-    C*        m_pCollection = nullptr;
+    size_type    m_nIndex      = 0u;
+    container_t* m_pCollection = nullptr;
 };
 
-template<class C>
-constexpr iterator<C> operator+(typename iterator<C>::size_type n, iterator<C> it) noexcept
+template<class container_t>
+constexpr iterator<container_t> operator+(
+    typename iterator<container_t>::size_type n,
+    iterator<container_t>                     it) noexcept
 {
     return it += n;
 }
@@ -150,30 +152,32 @@ constexpr iterator<C> operator+(typename iterator<C>::size_type n, iterator<C> i
     @class   const_iterator
     @brief   Const random access iterator type
     @details Use it for range-based loops and std algorithms
-             C have to provide at(size_t)
-    @tparam  C - container type
+             container_t have to provide at(size_t)
+    @tparam  container_t - container type
     @author  Khrapov
     @date    27.07.2019
 
 **/
-template<class C>
+template<class container_t>
 class const_iterator
 {
 public:
-    using value_type        = typename C::value_type;
-    using pointer           = typename C::const_pointer;
-    using reference         = typename C::const_reference;
-    using difference_type   = typename C::difference_type;
-    using size_type         = typename C::size_type;
+    using value_type        = typename container_t::value_type;
+    using pointer           = typename container_t::const_pointer;
+    using reference         = typename container_t::const_reference;
+    using difference_type   = typename container_t::difference_type;
+    using size_type         = typename container_t::size_type;
     using iterator_category = std::contiguous_iterator_tag;
     using iterator_concept  = std::contiguous_iterator_tag;
 
 public:
     constexpr const_iterator() noexcept = default;
-    constexpr const_iterator(const C* c, size_type i) noexcept : m_nIndex(i), m_pCollection(c)
+    constexpr const_iterator(const container_t* c, size_type i) noexcept : m_nIndex(i), m_pCollection(c)
     {
     }
-    constexpr const_iterator(const iterator<C>& it) noexcept : m_nIndex(it.m_nIndex), m_pCollection(it.m_pCollection)
+    constexpr const_iterator(const iterator<container_t>& it) noexcept
+        : m_nIndex(it.m_nIndex)
+        , m_pCollection(it.m_pCollection)
     {
     }
     [[nodiscard]] constexpr reference operator*() const noexcept
@@ -264,17 +268,19 @@ public:
     }
 
 protected:
-    size_type m_nIndex      = 0u;
-    const C*  m_pCollection = nullptr;
+    size_type          m_nIndex      = 0u;
+    const container_t* m_pCollection = nullptr;
 };
 
-template<class C>
-constexpr const_iterator<C> operator+(typename const_iterator<C>::size_type n, const_iterator<C> it) noexcept
+template<class container_t>
+constexpr const_iterator<container_t> operator+(
+    typename const_iterator<container_t>::size_type n,
+    const_iterator<container_t>                     it) noexcept
 {
     return it += n;
 }
 
-template<class C>
+template<class container_t>
 class const_reverse_iterator;
 
 /**
@@ -282,29 +288,29 @@ class const_reverse_iterator;
     @class   reverse_iterator
     @brief   Non-const random access reverse iterator type
     @details Use it for range-based loops and std algorithms
-             C have to provide at(size_t)
-    @tparam  C - container type
+             container_t have to provide at(size_t)
+    @tparam  container_t - container type
     @author  Khrapov
     @date    27.07.2019
 
 **/
-template<class C>
+template<class container_t>
 class reverse_iterator
 {
-    friend class const_reverse_iterator<C>;
+    friend class const_reverse_iterator<container_t>;
 
 public:
-    using value_type        = typename C::value_type;
-    using pointer           = typename C::pointer;
-    using reference         = typename C::reference;
-    using difference_type   = typename C::difference_type;
-    using size_type         = typename C::size_type;
+    using value_type        = typename container_t::value_type;
+    using pointer           = typename container_t::pointer;
+    using reference         = typename container_t::reference;
+    using difference_type   = typename container_t::difference_type;
+    using size_type         = typename container_t::size_type;
     using iterator_category = std::contiguous_iterator_tag;
     using iterator_concept  = std::contiguous_iterator_tag;
 
 public:
     constexpr reverse_iterator() noexcept = default;
-    constexpr reverse_iterator(C* c, size_type i) noexcept : m_nIndex(i), m_pCollection(c)
+    constexpr reverse_iterator(container_t* c, size_type i) noexcept : m_nIndex(i), m_pCollection(c)
     {
     }
     [[nodiscard]] constexpr reference operator*() const noexcept
@@ -397,12 +403,14 @@ public:
     }
 
 protected:
-    size_type m_nIndex      = 0u;
-    C*        m_pCollection = nullptr;
+    size_type    m_nIndex      = 0u;
+    container_t* m_pCollection = nullptr;
 };
 
-template<class C>
-constexpr reverse_iterator<C> operator+(typename reverse_iterator<C>::size_type n, reverse_iterator<C> it) noexcept
+template<class container_t>
+constexpr reverse_iterator<container_t> operator+(
+    typename reverse_iterator<container_t>::size_type n,
+    reverse_iterator<container_t>                     it) noexcept
 {
     return it += n;
 }
@@ -412,30 +420,30 @@ constexpr reverse_iterator<C> operator+(typename reverse_iterator<C>::size_type 
     @class   const_reverse_iterator
     @brief   Const reverse random access iterator type
     @details Use it for range-based loops and std algorithms
-             C have to provide at(size_t)
-    @tparam  C - container type
+             container_t have to provide at(size_t)
+    @tparam  container_t - container type
     @author  Khrapov
     @date    19.03.2020
 
 **/
-template<class C>
+template<class container_t>
 class const_reverse_iterator
 {
 public:
-    using value_type        = typename C::value_type;
-    using pointer           = typename C::const_pointer;
-    using reference         = typename C::const_reference;
-    using difference_type   = typename C::difference_type;
-    using size_type         = typename C::size_type;
+    using value_type        = typename container_t::value_type;
+    using pointer           = typename container_t::const_pointer;
+    using reference         = typename container_t::const_reference;
+    using difference_type   = typename container_t::difference_type;
+    using size_type         = typename container_t::size_type;
     using iterator_category = std::contiguous_iterator_tag;
     using iterator_concept  = std::contiguous_iterator_tag;
 
 public:
     constexpr const_reverse_iterator() noexcept = default;
-    constexpr const_reverse_iterator(const C* c, size_type i) noexcept : m_nIndex(i), m_pCollection(c)
+    constexpr const_reverse_iterator(const container_t* c, size_type i) noexcept : m_nIndex(i), m_pCollection(c)
     {
     }
-    constexpr const_reverse_iterator(const reverse_iterator<C>& it) noexcept
+    constexpr const_reverse_iterator(const reverse_iterator<container_t>& it) noexcept
         : m_nIndex(it.m_nIndex)
         , m_pCollection(it.m_pCollection)
     {
@@ -530,14 +538,14 @@ public:
     }
 
 protected:
-    size_type m_nIndex      = 0u;
-    const C*  m_pCollection = nullptr;
+    size_type          m_nIndex      = 0u;
+    const container_t* m_pCollection = nullptr;
 };
 
-template<class C>
-constexpr const_reverse_iterator<C> operator+(
-    typename const_reverse_iterator<C>::size_type n,
-    const_reverse_iterator<C>                     it) noexcept
+template<class container_t>
+constexpr const_reverse_iterator<container_t> operator+(
+    typename const_reverse_iterator<container_t>::size_type n,
+    const_reverse_iterator<container_t>                     it) noexcept
 {
     return it += n;
 }
@@ -547,50 +555,51 @@ constexpr const_reverse_iterator<C> operator+(
     @class   base_return_object_iterator
     @brief   This kind of iterator returns value and not reference in access methods
     @details ~
-    @tparam  C            - container type
-    @tparam  BaseIterator - base iterator type
+    @tparam  container_t     - container type
+    @tparam  base_iterator_t - base iterator type
     @author  Khrapov
     @date    28.01.2023
 
 **/
-template<class C, class BaseIterator>
-class base_return_object_iterator : public BaseIterator
+template<class container_t, class base_iterator_t>
+class base_return_object_iterator : public base_iterator_t
 {
 public:
-    using value_type        = typename C::value_type;
-    using pointer           = typename C::const_pointer;
-    using reference         = typename C::const_reference;
-    using difference_type   = typename C::difference_type;
-    using size_type         = typename C::size_type;
+    using value_type        = typename container_t::value_type;
+    using pointer           = typename container_t::const_pointer;
+    using reference         = typename container_t::const_reference;
+    using difference_type   = typename container_t::difference_type;
+    using size_type         = typename container_t::size_type;
     using iterator_category = std::contiguous_iterator_tag;
     using iterator_concept  = std::contiguous_iterator_tag;
 
-    using BaseIterator::BaseIterator;
+    using base_iterator_t::BaseIterator;
 
     [[nodiscard]] constexpr value_type operator*() const noexcept
     {
-        return (*BaseIterator::m_pCollection).at(BaseIterator::m_nIndex);
+        return (*base_iterator_t::m_pCollection).at(base_iterator_t::m_nIndex);
     }
     [[nodiscard]] constexpr value_type operator->() const noexcept
     {
-        return (*BaseIterator::m_pCollection).at(BaseIterator::m_nIndex);
+        return (*base_iterator_t::m_pCollection).at(base_iterator_t::m_nIndex);
     }
     [[nodiscard]] constexpr value_type operator[](size_type m) const noexcept
     {
-        return (*BaseIterator::m_pCollection).at(BaseIterator::m_nIndex + m);
+        return (*base_iterator_t::m_pCollection).at(base_iterator_t::m_nIndex + m);
     }
 };
 
-template<class C>
-using return_object_iterator = base_return_object_iterator<C, iterator<C>>;
+template<class container_t>
+using return_object_iterator = base_return_object_iterator<container_t, iterator<container_t>>;
 
-template<class C>
-using const_return_object_iterator = base_return_object_iterator<C, const_iterator<C>>;
+template<class container_t>
+using const_return_object_iterator = base_return_object_iterator<container_t, const_iterator<container_t>>;
 
-template<class C>
-using reverse_return_object_iterator = base_return_object_iterator<C, reverse_iterator<C>>;
+template<class container_t>
+using reverse_return_object_iterator = base_return_object_iterator<container_t, reverse_iterator<container_t>>;
 
-template<class C>
-using const_reverse_return_object_iterator = base_return_object_iterator<C, const_return_object_iterator<C>>;
+template<class container_t>
+using const_reverse_return_object_iterator =
+    base_return_object_iterator<container_t, const_return_object_iterator<container_t>>;
 
 } // namespace qx

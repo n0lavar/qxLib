@@ -27,14 +27,14 @@ public:
     {
     }
 
-    template<class Callable, class Filter = decltype(qx::iterate_filters::always_true)>
-    void Iterate(const Callable& callable, const Filter& filter = qx::iterate_filters::always_true) const
+    template<class callable_t, class filter_t = decltype(qx::iterate_filters::always_true)>
+    void Iterate(const callable_t& callable, const filter_t& filter = qx::iterate_filters::always_true) const
     {
         qx::iterate(m_Vector, callable, filter);
     }
 
-    template<class Callable, class Filter = decltype(qx::iterate_filters::always_true)>
-    void IterateInteger(const Callable& callable, const Filter& filter = qx::iterate_filters::always_true) const
+    template<class callable_t, class filter_t = decltype(qx::iterate_filters::always_true)>
+    void IterateInteger(const callable_t& callable, const filter_t& filter = qx::iterate_filters::always_true) const
     {
         qx::iterate(
             m_Vector,

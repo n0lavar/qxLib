@@ -43,25 +43,25 @@ constexpr auto always_true = [](const auto&...)
              2. you don't want the client to know what type of container you are using
              3. you want the client to be able to iterate only over a part of the value of an element of the vector
     @see     code examples in test_iterate.cpp
-    @tparam  Container - container of elements type
-    @tparam  Callable  - callable type. if callable returns false, iteration breaks
-    @tparam  Filter    - filter type. if filter returns true, callable is applied
-    @tparam  Adapter   - adapter type. converts container element type to another type for callable and filter
-    @param   container - container object
-    @param   callable  - callable object
-    @param   filter    - filter object
-    @param   adapter   - adapter object
+    @tparam  container_t - container of elements type
+    @tparam  callable_t  - callable type. if callable returns false, iteration breaks
+    @tparam  filter_t    - filter type. if filter returns true, callable is applied
+    @tparam  adapter_t   - adapter type. converts container element type to another type for callable and filter
+    @param   container   - container object
+    @param   callable    - callable object
+    @param   filter      - filter object
+    @param   adapter     - adapter object
 **/
 template<
-    class Container,
-    class Callable,
-    class Filter  = decltype(iterate_filters::always_true),
-    class Adapter = decltype(iterate_adapters::no_change)>
+    class container_t,
+    class callable_t,
+    class filter_t  = decltype(iterate_filters::always_true),
+    class adapter_t = decltype(iterate_adapters::no_change)>
 void iterate(
-    const Container& container,
-    const Callable&  callable,
-    const Filter&    filter  = iterate_filters::always_true,
-    const Adapter&   adapter = iterate_adapters::no_change)
+    const container_t& container,
+    const callable_t&  callable,
+    const filter_t&    filter  = iterate_filters::always_true,
+    const adapter_t&   adapter = iterate_adapters::no_change)
 {
     for (const auto& element : container)
     {

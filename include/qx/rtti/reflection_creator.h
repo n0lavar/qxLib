@@ -29,18 +29,18 @@ namespace qx
     @details Performs registration of classes inherited from BaseClass
              and creates their instances by their ID and name.
              Allocates memory.
-    @tparam  BaseClass - base class type
-    @tparam  SmartPtr  - smart pointer class type
-    @tparam  Args      - args for type creation
+    @tparam  base_class_t - base class type
+    @tparam  smart_ptr_t  - smart pointer class type
+    @tparam  args_t       - args for type creation
     @author  Khrapov
     @date    7.09.2021
 
 **/
-template<class BaseClass, template<class> class SmartPtr, class... Args>
+template<class base_class_t, template<class> class smart_ptr_t, class... args_t>
 class reflection_creator
 {
 public:
-    using factory = std::function<SmartPtr<BaseClass>(Args...)>;
+    using factory = std::function<smart_ptr_t<base_class_t>(args_t...)>;
 
 public:
     /**
@@ -49,10 +49,10 @@ public:
         @param  args - template parameter pack
         @retval      - class instance or nullptr if can't find factory or can't create
     **/
-    [[nodiscard]] static SmartPtr<BaseClass> create_object(class_identificator id, Args&&... args)
+    [[nodiscard]] static smart_ptr_t<base_class_t> create_object(class_identificator id, args_t&&... args)
     {
         if (auto it = m_FactoriesById.find(id); it != m_FactoriesById.end())
-            return it->second(std::forward<Args>(args)...);
+            return it->second(std::forward<args_t>(args)...);
 
         return nullptr;
     }
@@ -63,11 +63,11 @@ public:
         @param  args        - template parameter pack
         @retval             - class instance or nullptr if can't find factory or can't create
     **/
-    [[nodiscard]] static SmartPtr<BaseClass> create_object(std::string_view svClassName, Args&&... args)
+    [[nodiscard]] static smart_ptr_t<base_class_t> create_object(std::string_view svClassName, args_t&&... args)
     {
         if (auto it = m_FactoriesByName.find(svClassName); it != m_FactoriesByName.end())
         {
-            return it->second(std::forward<Args>(args)...);
+            return it->second(std::forward<args_t>(args)...);
         }
 
         return nullptr;
@@ -102,20 +102,20 @@ private:
 namespace detail
 {
 
-template<class BaseClass, class T, class... Args>
-static std::unique_ptr<BaseClass> create_unique(Args&&... args)
+template<class base_class_t, class T, class... args_t>
+static std::unique_ptr<base_class_t> create_unique(args_t&&... args)
 {
-    if constexpr (std::is_constructible_v<T, Args...>)
-        return std::make_unique<T>(std::forward<Args>(args)...);
+    if constexpr (std::is_constructible_v<T, args_t...>)
+        return std::make_unique<T>(std::forward<args_t>(args)...);
     else
         return nullptr;
 }
 
-template<class BaseClass, class T, class... Args>
-static std::shared_ptr<BaseClass> create_shared(Args&&... args)
+template<class base_class_t, class T, class... args_t>
+static std::shared_ptr<base_class_t> create_shared(args_t&&... args)
 {
-    if constexpr (std::is_constructible_v<T, Args...>)
-        return std::make_shared<T>(std::forward<Args>(args)...);
+    if constexpr (std::is_constructible_v<T, args_t...>)
+        return std::make_shared<T>(std::forward<args_t>(args)...);
     else
         return nullptr;
 }

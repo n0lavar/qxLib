@@ -18,10 +18,10 @@
 #include <unordered_set>
 #include <vector>
 
-template<class ContainerType>
-void CheckAddUnique()
+template<class container_t>
+void check_add_unique()
 {
-    ContainerType container { 'a', 'b', 'c', 'd', 'e', 'f', 'u' };
+    container_t container { 'a', 'b', 'c', 'd', 'e', 'f', 'u' };
     EXPECT_FALSE(qx::add_unique(container, 'a'));
     EXPECT_FALSE(qx::add_unique(container, 'b'));
     EXPECT_FALSE(qx::add_unique(container, 'c'));
@@ -37,21 +37,21 @@ void CheckAddUnique()
 
 TEST(add, add_unique)
 {
-    CheckAddUnique<std::vector<char>>();
-    CheckAddUnique<std::deque<char>>();
-    CheckAddUnique<std::list<char>>();
-    CheckAddUnique<std::set<char>>();
-    CheckAddUnique<std::multiset<char>>();
-    CheckAddUnique<std::unordered_set<char>>();
-    CheckAddUnique<std::unordered_multiset<char>>();
-    CheckAddUnique<std::basic_string<char>>();
+    check_add_unique<std::vector<char>>();
+    check_add_unique<std::deque<char>>();
+    check_add_unique<std::list<char>>();
+    check_add_unique<std::set<char>>();
+    check_add_unique<std::multiset<char>>();
+    check_add_unique<std::unordered_set<char>>();
+    check_add_unique<std::unordered_multiset<char>>();
+    check_add_unique<std::basic_string<char>>();
 }
 
-template<class ContainerType>
-void CheckAddIf()
+template<class container_t>
+void check_add_if()
 {
-    ContainerType container { 'a', 'b', 'c', 'd', 'e', 'f', 'u' };
-    const auto    predicate = [](int existing, int value)
+    container_t container { 'a', 'b', 'c', 'd', 'e', 'f', 'u' };
+    const auto  predicate = [](int existing, int value)
     {
         return existing == value;
     };
@@ -71,12 +71,12 @@ void CheckAddIf()
 
 TEST(add, add_if)
 {
-    CheckAddIf<std::vector<char>>();
-    CheckAddIf<std::deque<char>>();
-    CheckAddIf<std::list<char>>();
-    CheckAddIf<std::set<char>>();
-    CheckAddIf<std::multiset<char>>();
-    CheckAddIf<std::unordered_set<char>>();
-    CheckAddIf<std::unordered_multiset<char>>();
-    CheckAddIf<std::basic_string<char>>();
+    check_add_if<std::vector<char>>();
+    check_add_if<std::deque<char>>();
+    check_add_if<std::list<char>>();
+    check_add_if<std::set<char>>();
+    check_add_if<std::multiset<char>>();
+    check_add_if<std::unordered_set<char>>();
+    check_add_if<std::unordered_multiset<char>>();
+    check_add_if<std::basic_string<char>>();
 }

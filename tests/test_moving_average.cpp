@@ -17,7 +17,7 @@
 #include <numeric>
 #include <random>
 
-template<typename T, size_t ENTRIES, size_t START_VALUE, std::vector<T> FUNC(size_t nEntries)>
+template<class T, size_t ENTRIES, size_t START_VALUE, std::vector<T> FUNC(size_t nEntries)>
 class MovingAverageTraits
 {
 public:
@@ -27,12 +27,12 @@ public:
     static constexpr auto func        = FUNC;
 };
 
-template<typename Traits>
+template<class traits_t>
 class TestMovingAverageClass : public ::testing::Test
 {
 protected:
     /* init protected members here */
-    TestMovingAverageClass() : m_MovingAverage(Traits::nEntries, Traits::fStartValue, Traits::func)
+    TestMovingAverageClass() : m_MovingAverage(traits_t::nEntries, traits_t::fStartValue, traits_t::func)
     {
     }
 
@@ -47,7 +47,7 @@ protected:
     }
 
 protected:
-    qx::moving_average<typename Traits::type> m_MovingAverage;
+    qx::moving_average<typename traits_t::type> m_MovingAverage;
 };
 
 using Implementations = ::testing::Types<

@@ -17,20 +17,20 @@ namespace qx
 
 /**
     @brief  std::remove_if with index instead of data reference
-    @tparam FwdItType     - iterator type
-    @tparam PredicateType - predicate type
-    @param  itBegin       - the range of elements begin iterator
-    @param  itEnd         - the range of elements end iterator
-    @param  predicate     - unary predicate which returns ​true if the element should be removed
-    @param  nStartIndex   - we can't find out the index of itBegin so you should specify it
-    @retval               - past-the-end iterator for the new range of values
+    @tparam fwd_it_t    - iterator type
+    @tparam predicate_t - predicate type
+    @param  itBegin     - the range of elements begin iterator
+    @param  itEnd       - the range of elements end iterator
+    @param  predicate   - unary predicate which returns ​true if the element should be removed
+    @param  nStartIndex - we can't find out the index of itBegin so you should specify it
+    @retval             - past-the-end iterator for the new range of values
 **/
-template<class FwdItType, class PredicateType>
-FwdItType remove_if_i(FwdItType itBegin, FwdItType itEnd, const PredicateType& predicate, size_t nStartIndex = 0)
+template<class fwd_it_t, class predicate_t>
+fwd_it_t remove_if_i(fwd_it_t itBegin, fwd_it_t itEnd, const predicate_t& predicate, size_t nStartIndex = 0)
 {
-    FwdItType itDest = itBegin;
-    size_t    i      = nStartIndex;
-    for (FwdItType it = itBegin; it != itEnd; ++it)
+    fwd_it_t itDest = itBegin;
+    size_t   i      = nStartIndex;
+    for (fwd_it_t it = itBegin; it != itEnd; ++it)
     {
         if (!predicate(i))
             *itDest++ = std::move(*it);
@@ -42,14 +42,14 @@ FwdItType remove_if_i(FwdItType itBegin, FwdItType itEnd, const PredicateType& p
 
 /**
     @brief  std::remove_if with index instead of data reference
-    @tparam ContainerType - container type
-    @tparam PredicateType - predicate type
-    @param  container     - the range of elements
-    @param  predicate     - unary predicate which returns ​true if the element should be removed
-    @retval               - past-the-end iterator for the new range of values
+    @tparam container_t - container type
+    @tparam predicate_t - predicate type
+    @param  container   - the range of elements
+    @param  predicate   - unary predicate which returns ​true if the element should be removed
+    @retval             - past-the-end iterator for the new range of values
 **/
-template<class ContainerType, class PredicateType>
-auto remove_if_i(ContainerType& container, const PredicateType& predicate)
+template<class container_t, class predicate_t>
+auto remove_if_i(container_t& container, const predicate_t& predicate)
 {
     return remove_if_i(container.begin(), container.end(), predicate, 0);
 }

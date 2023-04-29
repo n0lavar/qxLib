@@ -27,18 +27,18 @@ enum class string_resize_type
     @class   string_data
     @brief   Represents string data
     @details Implements small string optimization
-    @tparam  Traits - char traits. \see string_traits.h
+    @tparam  traits_t - char traits. \see string_traits.h
     @author  Khrapov
     @date    8.11.2020
 
 **/
-template<class Traits>
+template<class traits_t>
 class string_data
 {
-    using value_type = typename Traits::value_type;
-    using pointer    = typename Traits::pointer;
-    using size_type  = typename Traits::size_type;
-    using buffer     = std::array<value_type, Traits::small_string_size()>;
+    using value_type = typename traits_t::value_type;
+    using pointer    = typename traits_t::pointer;
+    using size_type  = typename traits_t::size_type;
+    using buffer     = std::array<value_type, traits_t::small_string_size()>;
 
 public:
     /**

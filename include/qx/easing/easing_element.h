@@ -26,7 +26,7 @@ namespace qx
     @date    04.05.2021
 
 **/
-template<typename T>
+template<class T>
 class base_easing_element
 {
 public:

@@ -19,7 +19,7 @@
 
 QX_PUSH_SUPPRESS_MSVC_WARNINGS(5233);
 
-template<typename StringTraits>
+template<class string_traits_t>
 class TestStringHashTyped : public ::testing::Test
 {
 };

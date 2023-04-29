@@ -31,7 +31,7 @@ namespace qx
              \see examples in tests\test_constexpr_sequence.cpp
              \note that you can't vary other template parameters with same Tag
              prefer using "using my_sequence = qx::constexpr_sequence<...>"
-    @tparam  Tag   - tag for unique instances
+    @tparam  tag_t - tag for unique instances
     @tparam  T     - value type
     @tparam  Start - start value
     @tparam  Func  - function that modifies value
@@ -39,12 +39,12 @@ namespace qx
     @date    25.08.2020
 
 **/
-template<class Tag, typename T, T Start, T Func(T)>
+template<class tag_t, class T, T Start, T Func(T)>
 class constexpr_sequence
 {
 private:
     template<size_t nIndex>
-    struct Element
+    struct element
     {
         static constexpr T value() noexcept
         {
@@ -58,10 +58,10 @@ private:
     };
 
     template<size_t nIndex>
-    using TElementFlag = constexpr_flag<Element<nIndex>>;
+    using element_flag = constexpr_flag<element<nIndex>>;
 
     template<size_t nCurrent, bool bWasSet /* = false */>
-    struct CheckerSetter
+    struct checker_setter
     {
         static constexpr size_t index() noexcept
         {
@@ -70,11 +70,11 @@ private:
     };
 
     template<size_t nCurrent>
-    struct CheckerWrapper
+    struct checker_wrapper
     {
         template<
-            bool   bWasSet = TElementFlag<nCurrent> {}.test(),
-            size_t nNext   = CheckerSetter<nCurrent, bWasSet> {}.index()>
+            bool   bWasSet = element_flag<nCurrent> {}.test(),
+            size_t nNext   = checker_setter<nCurrent, bWasSet> {}.index()>
         static constexpr size_t index() noexcept
         {
             return nNext;
@@ -82,9 +82,9 @@ private:
     };
 
     template<size_t nCurrent>
-    struct CheckerSetter<nCurrent, /* bool bWasSet = */ true>
+    struct checker_setter<nCurrent, /* bool bWasSet = */ true>
     {
-        template<size_t nNext = CheckerWrapper<nCurrent + 1> {}.index()>
+        template<size_t nNext = checker_wrapper<nCurrent + 1> {}.index()>
         static constexpr size_t index() noexcept
         {
             return nNext;
@@ -102,7 +102,7 @@ public:
         @tparam  _value - current sequence value
         @retval         - current sequence value
     **/
-    template<size_t nIndex = CheckerWrapper<0> {}.index(), T _value = Element<nIndex> {}.value()>
+    template<size_t nIndex = checker_wrapper<0> {}.index(), T _value = element<nIndex> {}.value()>
     static constexpr T value() noexcept
     {
         return _value;
@@ -120,9 +120,9 @@ public:
         @retval         - next sequence value
     **/
     template<
-        size_t nIndex = CheckerWrapper<0> {}.index(),
-        T      _value = Element<nIndex> {}.value(),
-        bool   bStub  = TElementFlag<nIndex> {}.test_and_set()>
+        size_t nIndex = checker_wrapper<0> {}.index(),
+        T      _value = element<nIndex> {}.value(),
+        bool   bStub  = element_flag<nIndex> {}.test_and_set()>
     static constexpr T next() noexcept
     {
         return Func(_value);
@@ -132,25 +132,25 @@ public:
 namespace detail
 {
 
-template<typename T, T INC>
+template<class T, T Term>
 constexpr T increase(T val)
 {
-    return val + INC;
+    return val + Term;
 }
 
-template<typename T, T MULT>
+template<class T, T Multiplier>
 constexpr T multiply(T val)
 {
-    return val * MULT;
+    return val * Multiplier;
 }
 
 } // namespace detail
 
-template<typename Tag = struct CounterTag, typename T = int, T Start = 0, T Inc = 1>
-using constexpr_counter = constexpr_sequence<Tag, T, Start, detail::increase<T, Inc>>;
+template<class tag_t = struct counter_tag, class T = int, T Start = 0, T Term = 1>
+using constexpr_counter = constexpr_sequence<tag_t, T, Start, detail::increase<T, Term>>;
 
-template<typename Tag = struct MultiplierTag, typename T = int, T Start = 1, T Mult = 2>
-using constexpr_multiplier = constexpr_sequence<Tag, T, Start, detail::multiply<T, Mult>>;
+template<class tag_t = struct multiplier_tag, class T = int, T Start = 1, T Multiplier = 2>
+using constexpr_multiplier = constexpr_sequence<tag_t, T, Start, detail::multiply<T, Multiplier>>;
 
 } // namespace qx
 

@@ -19,18 +19,18 @@ namespace qx
 
 /**
     @brief  Add an element to the container if it doesn't already contain one 
-    @tparam ContainerType - container type
-    @tparam ValueType     - value type
-    @param  container     - container to add to
-    @param  value         - value to check and add
-    @retval               - true if value was added
+    @tparam container_t - container type
+    @tparam value_t     - value type
+    @param  container   - container to add to
+    @param  value       - value to check and add
+    @retval             - true if value was added
 **/
-template<class ContainerType, class ValueType>
-bool add_unique(ContainerType& container, ValueType&& value)
+template<class container_t, class value_t>
+bool add_unique(container_t& container, value_t&& value)
 {
     if (!contains(container, value))
     {
-        container.insert(container.end(), std::forward<ValueType>(value));
+        container.insert(container.end(), std::forward<value_t>(value));
         return true;
     }
     else
@@ -41,20 +41,20 @@ bool add_unique(ContainerType& container, ValueType&& value)
 
 /**
     @brief  Add an element to the container if all elements do not satisfy the predicate
-    @tparam ContainerType - container type
-    @tparam ValueType     - value type
-    @tparam PredicateType - predicate type which can be called with (element, value) or (element) only
-    @param  container     - container to add to
-    @param  value         - value to check and add
-    @param  predicate     - predicate object
-    @retval               - true if value was added
+    @tparam container_t - container type
+    @tparam value_t     - value type
+    @tparam predicate_t - predicate type which can be called with (element, value) or (element) only
+    @param  container   - container to add to
+    @param  value       - value to check and add
+    @param  predicate   - predicate object
+    @retval             - true if value was added
 **/
-template<class ContainerType, class ValueType, class PredicateType>
-bool add_unique_if(ContainerType& container, ValueType&& value, const PredicateType& predicate)
+template<class container_t, class value_t, class predicate_t>
+bool add_unique_if(container_t& container, value_t&& value, const predicate_t& predicate)
 {
     for (const auto& element : container)
     {
-        if constexpr (std::is_invocable_v<PredicateType, decltype(element), const ValueType&>)
+        if constexpr (std::is_invocable_v<predicate_t, decltype(element), const value_t&>)
         {
             if (predicate(element, value))
                 return false;
@@ -66,7 +66,7 @@ bool add_unique_if(ContainerType& container, ValueType&& value, const PredicateT
         }
     }
 
-    container.insert(container.end(), std::forward<ValueType>(value));
+    container.insert(container.end(), std::forward<value_t>(value));
     return true;
 }
 

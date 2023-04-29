@@ -12,7 +12,7 @@
 
 #include <qx/easing/easing_functions.h>
 
-template<typename T>
+template<class T>
 class TestEasingFunctions : public ::testing::Test
 {
 protected:

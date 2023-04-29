@@ -10,13 +10,13 @@
 namespace qx
 {
 
-template<typename T>
+template<class T>
 inline std::vector<T> get_moving_average_simple_weights(size_t nEntries)
 {
     return std::vector<T>(nEntries, T(1.f) / static_cast<T>(nEntries));
 }
 
-template<typename T>
+template<class T>
 inline std::vector<T> get_moving_average_linear_weights(size_t nEntries)
 {
     std::vector<T> weights(nEntries, 0.f);
@@ -29,7 +29,7 @@ inline std::vector<T> get_moving_average_linear_weights(size_t nEntries)
     return weights;
 }
 
-template<typename T>
+template<class T>
 inline std::vector<T> get_moving_average_exp_weights(size_t nEntries)
 {
     std::vector<T> weights(nEntries, 0.f);
@@ -45,7 +45,7 @@ inline std::vector<T> get_moving_average_exp_weights(size_t nEntries)
     return weights;
 }
 
-template<typename T>
+template<class T>
 inline moving_average<T>::moving_average(size_t nEntries, T startValue, moving_average_weights_func<T> func)
     : m_Value(startValue)
     , m_Entries(nEntries, startValue)
@@ -53,7 +53,7 @@ inline moving_average<T>::moving_average(size_t nEntries, T startValue, moving_a
 {
 }
 
-template<typename T>
+template<class T>
 inline T moving_average<T>::update(T value)
 {
     m_Entries.pop_front();
@@ -66,13 +66,13 @@ inline T moving_average<T>::update(T value)
     return m_Value;
 }
 
-template<typename T>
+template<class T>
 inline T moving_average<T>::get() const
 {
     return m_Value;
 }
 
-template<typename T>
+template<class T>
 inline size_t moving_average<T>::get_num_entries() const
 {
     return m_Entries.size();

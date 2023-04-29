@@ -15,29 +15,29 @@ namespace qx
 
 /**
     @struct recursive_lambda
-    @tparam LambdaType - lambda type
+    @tparam lambda_t - lambda type
 **/
-template<class LambdaType>
+template<class lambda_t>
 struct recursive_lambda
 {
-    LambdaType lambda;
+    lambda_t lambda;
 
-    template<class... Args>
-    decltype(auto) operator()(Args&&... args)
+    template<class... args_t>
+    decltype(auto) operator()(args_t&&... args)
     {
-        return lambda(*this, std::forward<Args>(args)...);
+        return lambda(*this, std::forward<args_t>(args)...);
     }
 
-    template<class... Args>
-    decltype(auto) operator()(Args&&... args) const
+    template<class... args_t>
+    decltype(auto) operator()(args_t&&... args) const
     {
-        return lambda(*this, std::forward<Args>(args)...);
+        return lambda(*this, std::forward<args_t>(args)...);
     }
 };
 
 /**
     @brief  Create lambda that can be called recursively 
-    @tparam LambdaType - lambda type: see code example
+    @tparam lambda_t - lambda type: see code example
     @param  lambda     - lambda object
     @retval            - lambda that can be called recursively
 
@@ -57,10 +57,10 @@ struct recursive_lambda
     int nResult = calc_fibonacci(6);
     @endcode
 **/
-template<class LambdaType>
-recursive_lambda<std::decay_t<LambdaType>> make_recursive_lambda(LambdaType&& lambda)
+template<class lambda_t>
+recursive_lambda<std::decay_t<lambda_t>> make_recursive_lambda(lambda_t&& lambda)
 {
-    return { std::forward<LambdaType>(lambda) };
+    return { std::forward<lambda_t>(lambda) };
 }
 
 } // namespace qx

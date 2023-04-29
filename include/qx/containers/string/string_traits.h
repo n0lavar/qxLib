@@ -27,7 +27,7 @@ namespace qx
     @tparam T - char type
     @date   25.01.2021
 **/
-template<typename T>
+template<class T>
 struct common_char_traits
 {
     using value_type      = T;
@@ -48,7 +48,7 @@ struct common_char_traits
     }
 };
 
-template<typename value_type>
+template<class value_t>
 struct char_traits;
 
 template<>
@@ -97,8 +97,8 @@ struct char_traits<char> : public common_char_traits<char>
     {
         return std::vsnprintf(pszDest, nBuffer, pszFormat, args);
     }
-    template<class... Args>
-    static int sscanf(const_pointer pszString, const_pointer pszFormat, Args... args) noexcept
+    template<class... args_t>
+    static int sscanf(const_pointer pszString, const_pointer pszFormat, args_t... args) noexcept
     {
         QX_PUSH_SUPPRESS_ALL_WARNINGS();
         return std::sscanf(pszString, pszFormat, args...);
@@ -180,8 +180,8 @@ struct char_traits<wchar_t> : public common_char_traits<wchar_t>
         return size;
 #endif
     }
-    template<class... Args>
-    static int sscanf(const_pointer pszString, const_pointer pszFormat, Args... args) noexcept
+    template<class... args_t>
+    static int sscanf(const_pointer pszString, const_pointer pszFormat, args_t... args) noexcept
     {
         QX_PUSH_SUPPRESS_ALL_WARNINGS();
         return std::swscanf(pszString, pszFormat, args...);

@@ -20,19 +20,19 @@ struct are_same : std::true_type
 {
 };
 
-template<class S, class T, class... Ts>
-struct are_same<S, T, Ts...> : std::false_type
+template<class first_t, class second_t, class... rest_t>
+struct are_same<first_t, second_t, rest_t...> : std::false_type
 {
 };
 
 // check if all of variadic arguments are same type
-template<class T, class... Ts>
-struct are_same<T, T, Ts...> : are_same<T, Ts...>
+template<class first_t, class... rest_ty>
+struct are_same<first_t, first_t, rest_ty...> : are_same<first_t, rest_ty...>
 {
 };
 
-template<class... Ts>
-constexpr bool are_same_v = are_same<Ts...>::value;
+template<class... args_t>
+constexpr bool are_same_v = are_same<args_t...>::value;
 
 
 
@@ -67,10 +67,12 @@ using iterator_value_t = typename iterator_value<T>::type;
 
 namespace detail
 {
+
 template<class T, std::size_t = sizeof(T)>
 std::true_type is_specialization_exist_impl(T*);
 
 std::false_type is_specialization_exist_impl(...);
+
 } // namespace detail
 
 // decide if a struct/class specialization exist
@@ -84,13 +86,13 @@ constexpr bool is_specialization_exist_v = is_specialization_exist<T>::value;
 
 //---------------------------- is_specialization_of ----------------------------
 
-template<class Test, template<class...> class Ref>
+template<class test_t, template<class...> class reference_t>
 struct is_specialization_of : std::false_type
 {
 };
 
-template<template<class...> class Ref, class... Args>
-struct is_specialization_of<Ref<Args...>, Ref> : std::true_type
+template<template<class...> class reference_t, class... args_t>
+struct is_specialization_of<reference_t<args_t...>, reference_t> : std::true_type
 {
 };
 
@@ -100,7 +102,7 @@ struct is_specialization_of<Ref<Args...>, Ref> : std::true_type
     @struct  visit_overload
     @details This struct allows to visit std::variant with lambdas
     @note    https://www.cppstories.com/2018/09/visit-variants/
-    @tparam  Ts - lambda types
+    @tparam  args_t - lambda types
 
     @code
     struct Fluid { };
@@ -121,13 +123,13 @@ struct is_specialization_of<Ref<Args...>, Ref> : std::true_type
     }
     @endcode 
 **/
-template<class... Ts>
-struct visit_overload : Ts...
+template<class... args_t>
+struct visit_overload : args_t...
 {
-    using Ts::operator()...;
+    using args_t::operator()...;
 };
 
-template<class... Ts>
-visit_overload(Ts...) -> visit_overload<Ts...>;
+template<class... args_t>
+visit_overload(args_t...) -> visit_overload<args_t...>;
 
 } // namespace qx

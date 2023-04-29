@@ -17,14 +17,14 @@ namespace qx
 namespace detail
 {
 
-template<typename T>
+template<class T>
 concept has_zero_termonated_hash_func_overload =
     requires(typename T::const_pointer pszString, size_t nSeed) { T::hash_function(pszString, nSeed); };
 
 } // namespace detail
 
 
-template<typename T>
+template<class T>
 concept string_convertable = requires(T t) {
     t.cbegin();
     t.cend();
@@ -34,18 +34,17 @@ concept string_convertable = requires(T t) {
 
     @class   basic_string_hash
     @brief   String hash object
-    @details ~
-    @tparam  Traits - char traits. \see string_traits.h
+    @tparam  traits_t - char traits. \see string_traits.h
     @author  Khrapov
     @date    13.11.2020
 
 **/
-template<class Traits>
+template<class traits_t>
 class basic_string_hash
 {
 public:
-    using const_pointer = typename Traits::const_pointer;
-    using size_type     = typename Traits::size_type;
+    using const_pointer = typename traits_t::const_pointer;
+    using size_type     = typename traits_t::size_type;
 
     constexpr basic_string_hash() noexcept = default;
 
@@ -64,11 +63,11 @@ public:
 
     /**
         @brief  basic_string_hash object constructor
-        @tparam String  - string-ish type, satisfying the "string_convertable" concept
-        @param  sString - string-ish container
+        @tparam string_t - string-ish type, satisfying the "string_convertable" concept
+        @param  sString  - string-ish container
     **/
-    template<string_convertable String>
-    constexpr basic_string_hash(const String& sString) noexcept;
+    template<string_convertable string_t>
+    constexpr basic_string_hash(const string_t& sString) noexcept;
 
     /**
         @brief  operator size_t
@@ -85,11 +84,11 @@ using wstring_hash = basic_string_hash<char_traits<wchar_t>>;
 
 /**
     @struct fast_hash_string_traits
-    @tparam value_type - char type
+    @tparam value_t - char type
     @date   25.01.2021
 **/
-template<typename value_type>
-struct fast_hash_string_traits : public char_traits<value_type>
+template<class value_t>
+struct fast_hash_string_traits : public char_traits<value_t>
 {
     /**
         @brief  Hash function realization
@@ -98,10 +97,10 @@ struct fast_hash_string_traits : public char_traits<value_type>
         @param  nLen  - string size
         @retval       - hash 
     **/
-    static constexpr typename char_traits<value_type>::size_type hash_function(
-        typename char_traits<value_type>::const_pointer sStr,
-        size_t                                          nSeed,
-        typename char_traits<value_type>::size_type     nLen) noexcept;
+    static constexpr typename char_traits<value_t>::size_type hash_function(
+        typename char_traits<value_t>::const_pointer sStr,
+        size_t                                       nSeed,
+        typename char_traits<value_t>::size_type     nLen) noexcept;
 
     /**
         @brief  Hash function realization
@@ -109,9 +108,9 @@ struct fast_hash_string_traits : public char_traits<value_type>
         @param  nSeed  - hash seed
         @retval        - hash
     **/
-    static constexpr typename char_traits<value_type>::size_type hash_function(
-        typename char_traits<value_type>::const_pointer pszStr,
-        size_t                                          nSeed) noexcept;
+    static constexpr typename char_traits<value_t>::size_type hash_function(
+        typename char_traits<value_t>::const_pointer pszStr,
+        size_t                                       nSeed) noexcept;
 };
 
 using fast_string_hash  = basic_string_hash<fast_hash_string_traits<char>>;

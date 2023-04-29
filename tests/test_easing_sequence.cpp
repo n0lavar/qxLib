@@ -14,7 +14,7 @@
 
 #define TYPE typename TypeParam::type
 
-template<typename T>
+template<class T>
 class TestEasingSequence : public ::testing::Test
 {
 protected:

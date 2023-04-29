@@ -15,15 +15,15 @@ namespace qx
 
 /**
     @brief  Iterate several containers in a row with one func
-    @tparam FuncType       - callable type
-    @tparam ContainersType - containers types pack
-    @param  func           - iteration callable
-    @param  containers     - containers to iterate
+    @tparam func_t       - callable type
+    @tparam containers_t - containers types pack
+    @param  func         - iteration callable
+    @param  containers   - containers to iterate
 **/
-template<class FuncType, class... ContainersType>
-void iterate_several_containers(const FuncType& func, const ContainersType&... containers)
+template<class func_t, class... containers_t>
+void iterate_several_containers(const func_t& func, const containers_t&... containers)
 {
-    auto iteration_func = [&]<class Container>(const Container& container)
+    auto iteration_func = [&]<class container_t>(const container_t& container)
     {
         for (const auto& elem : container)
             func(elem);

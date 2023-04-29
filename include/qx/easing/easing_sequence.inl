@@ -10,22 +10,22 @@
 namespace qx
 {
 
-template<typename T>
+template<class T>
 inline void base_easing_sequence<T>::push_back(easing_element_type element) noexcept
 {
     m_ElementsSequence.push_back(std::move(element));
     update_total_time();
 }
 
-template<typename T>
-template<typename... Args>
-inline void base_easing_sequence<T>::emplace_back(Args&&... args) noexcept
+template<class T>
+template<class... args_t>
+inline void base_easing_sequence<T>::emplace_back(args_t&&... args) noexcept
 {
-    m_ElementsSequence.emplace_back(std::forward<Args>(args)...);
+    m_ElementsSequence.emplace_back(std::forward<args_t>(args)...);
     update_total_time();
 }
 
-template<typename T>
+template<class T>
 inline void base_easing_sequence<T>::clear() noexcept
 {
     m_ElementsSequence.clear();
@@ -33,7 +33,7 @@ inline void base_easing_sequence<T>::clear() noexcept
     m_fCurrentTime    = T(0.f);
 }
 
-template<typename T>
+template<class T>
 inline void base_easing_sequence<T>::start() noexcept
 {
     reset();
@@ -41,21 +41,21 @@ inline void base_easing_sequence<T>::start() noexcept
         pCurrentElement->start();
 }
 
-template<typename T>
+template<class T>
 inline void base_easing_sequence<T>::pause() noexcept
 {
     if (auto pCurrentElement = get_current_element())
         pCurrentElement->pause();
 }
 
-template<typename T>
+template<class T>
 inline void base_easing_sequence<T>::resume() noexcept
 {
     if (auto pCurrentElement = get_current_element())
         pCurrentElement->resume();
 }
 
-template<typename T>
+template<class T>
 inline void base_easing_sequence<T>::skip() noexcept
 {
     if (auto pCurrentElement = get_current_element())
@@ -65,7 +65,7 @@ inline void base_easing_sequence<T>::skip() noexcept
     }
 }
 
-template<typename T>
+template<class T>
 inline void base_easing_sequence<T>::reset() noexcept
 {
     m_nCurrentElement = 0;
@@ -74,7 +74,7 @@ inline void base_easing_sequence<T>::reset() noexcept
         element.reset();
 }
 
-template<typename T>
+template<class T>
 inline void base_easing_sequence<T>::update(T fDeltaTime) noexcept
 {
     if (auto pCurrentElement = get_current_element())
@@ -100,19 +100,19 @@ inline void base_easing_sequence<T>::update(T fDeltaTime) noexcept
     }
 }
 
-template<typename T>
+template<class T>
 inline void base_easing_sequence<T>::set_looped(bool bLooped) noexcept
 {
     m_bLoop = bLooped;
 }
 
-template<typename T>
+template<class T>
 inline void base_easing_sequence<T>::set_speed(T fSpeed) noexcept
 {
     m_fSpeed = fSpeed;
 }
 
-template<typename T>
+template<class T>
 inline T base_easing_sequence<T>::get() const noexcept
 {
     if (auto pCurrentElement = get_current_element())
@@ -129,7 +129,7 @@ inline T base_easing_sequence<T>::get() const noexcept
     }
 }
 
-template<typename T>
+template<class T>
 inline T base_easing_sequence<T>::get_fraction() const noexcept
 {
     if (auto pCurrentElement = get_current_element())
@@ -146,13 +146,13 @@ inline T base_easing_sequence<T>::get_fraction() const noexcept
     }
 }
 
-template<typename T>
+template<class T>
 inline T base_easing_sequence<T>::get_speed() const noexcept
 {
     return m_fSpeed;
 }
 
-template<typename T>
+template<class T>
 inline bool base_easing_sequence<T>::is_not_started() const noexcept
 {
     if (auto pCurrentElement = get_current_element())
@@ -169,7 +169,7 @@ inline bool base_easing_sequence<T>::is_not_started() const noexcept
     }
 }
 
-template<typename T>
+template<class T>
 inline bool base_easing_sequence<T>::is_started() const noexcept
 {
     if (auto pCurrentElement = get_current_element())
@@ -186,7 +186,7 @@ inline bool base_easing_sequence<T>::is_started() const noexcept
     }
 }
 
-template<typename T>
+template<class T>
 inline bool base_easing_sequence<T>::is_paused() const noexcept
 {
     if (auto pCurrentElement = get_current_element())
@@ -195,7 +195,7 @@ inline bool base_easing_sequence<T>::is_paused() const noexcept
         return false;
 }
 
-template<typename T>
+template<class T>
 inline bool base_easing_sequence<T>::is_finished() const noexcept
 {
     if (auto pCurrentElement = get_current_element())
@@ -212,26 +212,26 @@ inline bool base_easing_sequence<T>::is_finished() const noexcept
     }
 }
 
-template<typename T>
+template<class T>
 inline bool base_easing_sequence<T>::is_looped() const noexcept
 {
     return m_bLoop;
 }
 
-template<typename T>
+template<class T>
 inline typename base_easing_sequence<T>::easing_element_type* base_easing_sequence<T>::get_current_element() noexcept
 {
     return m_nCurrentElement < m_ElementsSequence.size() ? &m_ElementsSequence[m_nCurrentElement] : nullptr;
 }
 
-template<typename T>
+template<class T>
 inline const typename base_easing_sequence<T>::easing_element_type* base_easing_sequence<T>::get_current_element()
     const noexcept
 {
     return const_cast<base_easing_sequence*>(static_cast<const base_easing_sequence*>(this))->get_current_element();
 }
 
-template<typename T>
+template<class T>
 inline void base_easing_sequence<T>::update_total_time() noexcept
 {
     m_fTotalTime += T(1.f) / m_ElementsSequence.back().get_speed();

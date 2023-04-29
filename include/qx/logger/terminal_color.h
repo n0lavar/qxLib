@@ -23,8 +23,8 @@ class terminal_color;
 
 }
 
-template<class char_type>
-std::basic_ostream<char_type>& operator<<(std::basic_ostream<char_type>& os, const qx::terminal_color& terminalColor);
+template<class char_t>
+std::basic_ostream<char_t>& operator<<(std::basic_ostream<char_t>& os, const qx::terminal_color& terminalColor);
 
 namespace qx
 {
@@ -46,10 +46,10 @@ namespace qx
 **/
 class terminal_color
 {
-    template<class char_type>
-    friend std::basic_ostream<char_type>& ::operator<<(
-        std::basic_ostream<char_type>& is,
-        const terminal_color&          terminalColor);
+    template<class char_t>
+    friend std::basic_ostream<char_t>& ::operator<<(
+        std::basic_ostream<char_t>& is,
+        const terminal_color&       terminalColor);
 
     enum class type
     {

@@ -27,14 +27,11 @@ template<class T>
 concept is_random_access_iterator =
     is_iterator<T> && std::derived_from<typename T::iterator_category, std::random_access_iterator_tag>;
 
-// clang-format off
-
-template<class T, class RetVal = void, class ...Args>
-concept callable = requires(T t, Args&&... args)
-{
-    { t(std::forward<Args>(args)...) } -> std::convertible_to<RetVal>;
+template<class T, class return_t = void, class... args_t>
+concept callable = requires(T t, args_t&&... args) {
+    {
+        t(std::forward<args_t>(args)...)
+    } -> std::convertible_to<return_t>;
 };
-
-// clang-format on
 
 } // namespace qx

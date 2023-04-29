@@ -31,11 +31,11 @@ namespace qx
     @date    12.11.2021
 
 **/
-template<class VectorType>
+template<class vector_t>
 class basic_rect
 {
 public:
-    using vector_type = VectorType;
+    using vector_type = vector_t;
     using value_type  = typename vector_type::value_type;
 
 public:
@@ -51,7 +51,7 @@ public:
         @param size - rect size
         @param pos  - upper left corner pos
     **/
-    constexpr explicit basic_rect(vector_type size, vector_type pos = vector_type(value_type(0.f))) noexcept;
+    constexpr explicit basic_rect(vector_t size, vector_t pos = vector_t(value_type(0.f))) noexcept;
 
     /**
         @brief basic_rect object constructor
@@ -70,56 +70,56 @@ public:
         @brief Expand rect
         @param dSize - size to expand
     **/
-    constexpr void expand(const vector_type& dSize) noexcept;
+    constexpr void expand(const vector_t& dSize) noexcept;
 
     /**
         @brief Contract rect
         @param dSize - size to contract
     **/
-    constexpr void contract(const vector_type& dSize) noexcept;
+    constexpr void contract(const vector_t& dSize) noexcept;
 
     /**
         @brief Change rect size
         @param size - new size
     **/
-    constexpr void set_size(const vector_type& size) noexcept;
+    constexpr void set_size(const vector_t& size) noexcept;
 
     /**
         @brief Set rect position
         @param pos - rect position
     **/
-    constexpr void set_pos(const vector_type& pos) noexcept;
+    constexpr void set_pos(const vector_t& pos) noexcept;
 
     /**
         @brief Shift rect position
         @param dPos - position delta
     **/
-    constexpr void shift(const vector_type& dPos) noexcept;
+    constexpr void shift(const vector_t& dPos) noexcept;
 
     /**
         @brief  Get upper left corner pos
         @retval - upper left corner pos
     **/
-    constexpr const vector_type& pos() const noexcept;
+    constexpr const vector_t& pos() const noexcept;
 
     /**
         @brief   Get min rect pos
         @details same as pos()
         @retval  - min rect pos
     **/
-    constexpr const vector_type& min() const noexcept;
+    constexpr const vector_t& min() const noexcept;
 
     /**
         @brief  Get max rect pos
         @retval - max rect pos
     **/
-    constexpr vector_type max() const noexcept;
+    constexpr vector_t max() const noexcept;
 
     /**
         @brief  Get rect size
         @retval - rect size
     **/
-    constexpr const vector_type& size() const noexcept;
+    constexpr const vector_t& size() const noexcept;
 
     /**
         @brief  Get rect width
@@ -161,7 +161,7 @@ public:
         @brief  Get rect center pos
         @retval - rect center pos
     **/
-    constexpr vector_type center() const noexcept;
+    constexpr vector_t center() const noexcept;
 
     /**
         @brief  Is rect empty
@@ -181,7 +181,7 @@ public:
         @param  originPos - coordinate system center pos
         @retval           - true if pos is inside rect
     **/
-    constexpr bool contains(const vector_type& pos, const vector_type& originPos = vector_type(0.f)) const noexcept;
+    constexpr bool contains(const vector_t& pos, const vector_t& originPos = vector_t(0.f)) const noexcept;
 
     /**
         @brief  Is other rect inside this rect
@@ -189,7 +189,7 @@ public:
         @param  originPos - coordinate system center pos
         @retval           - true if other rect is inside this rect
     **/
-    constexpr bool contains(const basic_rect& other, const vector_type& originPos = vector_type(0.f)) const noexcept;
+    constexpr bool contains(const basic_rect& other, const vector_t& originPos = vector_t(0.f)) const noexcept;
 
     /**
         @brief  Is this rect overlaps other rect
@@ -224,11 +224,11 @@ private:
         @brief Check new size and assign if size is positive
         @param size - new size
     **/
-    constexpr void check_and_assign_size(const vector_type& size) noexcept;
+    constexpr void check_and_assign_size(const vector_t& size) noexcept;
 
 private:
-    vector_type m_Size = vector_type(0.f);
-    vector_type m_Pos  = vector_type(0.f);
+    vector_t m_Size = vector_t(0.f);
+    vector_t m_Pos  = vector_t(0.f);
 };
 
 using rect  = basic_rect<glm::vec2>;

@@ -54,7 +54,7 @@ struct B
 {
 };
 
-template<typename T>
+template<class T>
 struct C;
 
 template<>

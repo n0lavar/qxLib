@@ -81,15 +81,15 @@ inline void file_logger_stream::do_log(
     log_file(svMessage, logUnit, eLogLevel);
 }
 
-template<class char_type>
+template<class char_t>
 inline void file_logger_stream::log_file(
-    std::basic_string_view<char_type> svMessage,
-    const log_unit&                   logUnit,
-    log_level                         eLogLevel)
+    std::basic_string_view<char_t> svMessage,
+    const log_unit&                logUnit,
+    log_level                      eLogLevel)
 {
     QX_PERF_SCOPE(CatLogger, "Log to the file");
 
-    if constexpr (std::is_same_v<char_type, char>)
+    if constexpr (std::is_same_v<char_t, char>)
         m_CharFile << svMessage;
     else
         m_WCharFile << svMessage;

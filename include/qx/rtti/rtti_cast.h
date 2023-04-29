@@ -17,8 +17,8 @@ namespace qx
 namespace detail
 {
 
-template<typename T, typename From>
-concept has_is_derived_from = requires(T* t) { t->template is_derived_from<From>(); };
+template<class T, class from_t>
+concept has_is_derived_from = requires(T* t) { t->template is_derived_from<from_t>(); };
 
 } // namespace detail
 
@@ -29,7 +29,7 @@ concept has_is_derived_from = requires(T* t) { t->template is_derived_from<From>
     @param   pointer - unique or shared pointer
     @retval          - Y* if Y is inherited from pointer class, otherwise nullptr
 **/
-template<typename Y>
+template<class Y>
 Y* rtti_cast(auto& pointer)
 {
     using smart_pointer_t = typename std::remove_reference_t<decltype(pointer)>::element_type;
@@ -48,7 +48,7 @@ Y* rtti_cast(auto& pointer)
     @param   pointer - raw pointer
     @retval          - Y* if Y is inherited from pointer class, otherwise nullptr
 **/
-template<typename Y, typename X>
+template<class Y, class X>
 Y* rtti_cast(X* pointer)
 {
     if constexpr (detail::has_is_derived_from<X, Y>)

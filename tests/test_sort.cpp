@@ -21,30 +21,30 @@
 constexpr int INT_MAX = std::numeric_limits<int>::max();
 constexpr int INT_MIN = std::numeric_limits<int>::min();
 
-template<typename Compare, int64_t minElement, int64_t maxElement, size_t arraySize>
+template<class compare_t, int64_t nMinElement, int64_t nMaxElement, size_t nArraySize>
 struct TestTraits
 {
-    static constexpr Compare compare()
+    static constexpr compare_t compare()
     {
-        return Compare();
+        return compare_t();
     }
     static constexpr int64_t min_element()
     {
-        return minElement;
+        return nMinElement;
     }
     static constexpr int64_t max_element()
     {
-        return maxElement;
+        return nMaxElement;
     }
     static constexpr size_t array_size()
     {
-        return arraySize;
+        return nArraySize;
     }
 };
 
 
 
-template<typename Traits>
+template<class traits>
 class TestQxSort : public ::testing::Test
 {
 protected:
@@ -52,14 +52,14 @@ protected:
     TestQxSort()
     {
         std::default_random_engine             generator(static_cast<unsigned>(time(0)));
-        std::uniform_int_distribution<int64_t> fillDistribution(Traits::min_element(), Traits::max_element());
+        std::uniform_int_distribution<int64_t> fillDistribution(traits::min_element(), traits::max_element());
 
         for (size_t i = 0; i < m_Unsorted.size(); i++)
             m_Unsorted[i] = fillDistribution(generator);
 
         // assume std::sort always right
         m_SortedStd = m_Unsorted;
-        std::sort(m_SortedStd.begin(), m_SortedStd.end(), Traits::compare());
+        std::sort(m_SortedStd.begin(), m_SortedStd.end(), traits::compare());
     }
 
     /* called before every test */
@@ -74,9 +74,9 @@ protected:
         ASSERT_EQ(m_SortedStd, m_SortedTest);
     }
 
-    std::array<int64_t, Traits::array_size()> m_Unsorted {};
-    std::array<int64_t, Traits::array_size()> m_SortedStd {};
-    std::array<int64_t, Traits::array_size()> m_SortedTest {};
+    std::array<int64_t, traits::array_size()> m_Unsorted {};
+    std::array<int64_t, traits::array_size()> m_SortedStd {};
+    std::array<int64_t, traits::array_size()> m_SortedTest {};
 };
 
 //---------------------------- small signed range ----------------------------

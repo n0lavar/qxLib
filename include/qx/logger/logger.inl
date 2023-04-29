@@ -10,14 +10,14 @@
 namespace qx
 {
 
-template<class char_type>
+template<class char_t>
 inline void logger::log(
-    log_level        eLogLevel,
-    const char_type* pszFormat,
-    const category&  category,
-    const char*      pszFile,
-    const char*      pszFunction,
-    int              nLine,
+    log_level       eLogLevel,
+    const char_t*   pszFormat,
+    const category& category,
+    const char*     pszFile,
+    const char*     pszFunction,
+    int             nLine,
     ...)
 {
     if (eLogLevel == log_level::none)
@@ -31,14 +31,14 @@ inline void logger::log(
     va_end(args);
 }
 
-template<class char_type>
+template<class char_t>
 inline void logger::log(
-    log_level                      eLogLevel,
-    const basic_string<char_type>& sFormat,
-    const category&                category,
-    const char*                    pszFile,
-    const char*                    pszFunction,
-    int                            nLine,
+    log_level                   eLogLevel,
+    const basic_string<char_t>& sFormat,
+    const category&             category,
+    const char*                 pszFile,
+    const char*                 pszFunction,
+    int                         nLine,
     ...)
 {
     va_list args;
@@ -49,15 +49,15 @@ inline void logger::log(
     va_end(args);
 }
 
-template<class char_type>
+template<class char_t>
 inline void logger::do_log(
-    log_level        eLogLevel,
-    const char_type* pszFormat,
-    const category&  category,
-    const char*      pszFile,
-    const char*      pszFunction,
-    int              nLine,
-    va_list          args)
+    log_level       eLogLevel,
+    const char_t*   pszFormat,
+    const category& category,
+    const char*     pszFile,
+    const char*     pszFunction,
+    int             nLine,
+    va_list         args)
 {
     va_list argsCopy;
     va_copy(argsCopy, args);

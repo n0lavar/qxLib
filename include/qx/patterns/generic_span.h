@@ -17,8 +17,8 @@ namespace qx
 
 struct default_generic_span_traits
 {
-    template<class... Args>
-    using function_type = std::function<Args...>;
+    template<class... args_t>
+    using function_type = std::function<args_t...>;
 };
 
 /**
@@ -29,23 +29,24 @@ struct default_generic_span_traits
              Useful when used in virtual methods
              Does not own the container
              The container should not be changed until the end of the iteration
-             May be much slower then std::span
+             May be much slower then std::span when the size of sbo is smaller then sizeof 2 iterators of this container
+             (libcpp: 16, ligcxx: 16, MSVC: 56)
     @tparam  T - container value type
     @author  Khrapov
     @date    20.11.2022
 
 **/
-template<class T, class Traits = default_generic_span_traits>
+template<class T, class traits_t = default_generic_span_traits>
 class generic_span
 {
 public:
-    using traits_type = Traits;
-    template<class... Args>
-    using function_type  = typename Traits::template function_type<Args...>;
+    using traits = traits_t;
+    template<class... args_t>
+    using function_type  = typename traits_t::template function_type<args_t...>;
     using generator_type = function_type<T*()>;
 
-    template<class Container>
-    using container_value = decltype(*std::declval<Container>().begin());
+    template<class container_t>
+    using container_value = decltype(*std::declval<container_t>().begin());
 
     using element_type    = T;
     using value_type      = std::remove_cv_t<T>;
@@ -75,7 +76,7 @@ public:
         [[nodiscard]] constexpr iterator  operator++(int) noexcept;
         constexpr bool                    operator!=(const iterator& r) const noexcept;
         constexpr bool                    operator==(const iterator& r) const noexcept;
-        constexpr                         operator void*() noexcept;
+        constexpr                         operator void*() const noexcept;
 
     private:
         generator_type m_Generator;
@@ -101,38 +102,40 @@ public:
 
     /**
         @brief  generic_span object constructor
-        @tparam Container - any container, which adapter satisfies forward iterator concept
-        @param  container - container instance. container must not be edited until adapter death
+        @tparam container_t - any container, which adapter satisfies forward iterator concept
+        @param  container   - container instance. container must not be edited until adapter death
     **/
-    template<class Container>
-    generic_span(Container& container) noexcept;
+    template<class container_t>
+    generic_span(container_t& container) noexcept;
 
     /**
         @brief  generic_span object constructor
-        @tparam Container    - any container, which adapter satisfies forward iterator concept
+        @tparam container_t  - any container, which adapter satisfies forward iterator concept
         @param  container    - container instance. container must not be edited until adapter death
         @param  valueAdapter - function which transforms Container::value_type to T*
     **/
-    template<class Container>
-    generic_span(Container& container, function_type<pointer(container_value<Container>&)> valueAdapter) noexcept;
+    template<class container_t>
+    generic_span(container_t& container, function_type<pointer(container_value<container_t>&)> valueAdapter) noexcept;
 
     /**
         @brief  generic_span object constructor
-        @tparam Container    - any container, which adapter satisfies forward iterator concept
-        @param  container    - container instance. container must not be edited until adapter death
-        @param  valueAdapter - function which transforms Container::value_type to T*
+        @tparam container_t - any container, which adapter satisfies forward iterator concept
+        @param  container      - container instance. container must not be edited until adapter death
+        @param  valueAdapter   - function which transforms Container::value_type to T*
     **/
-    template<class Container>
-    generic_span(const Container& container, function_type<pointer(container_value<Container>&)> valueAdapter) noexcept;
+    template<class container_t>
+    generic_span(
+        const container_t&                                    container,
+        function_type<pointer(container_value<container_t>&)> valueAdapter) noexcept;
 
     /**
         @brief  operator=
-        @tparam Container - any container, which adapter satisfies forward iterator concept
-        @param  container - container instance. container must not be edited until adapter death
-        @retval           - this object reference
+        @tparam container_t - any container, which adapter satisfies forward iterator concept
+        @param  container   - container instance. container must not be edited until adapter death
+        @retval             - this object reference
     **/
-    template<class Container>
-    generic_span& operator=(Container& container) noexcept;
+    template<class container_t>
+    generic_span& operator=(container_t& container) noexcept;
 
     /**
         @brief  operator=
@@ -181,14 +184,14 @@ public:
 private:
     /**
         @brief  Create initial generator
-        @tparam Container - any container, which adapter satisfies forward iterator concept
-        @tparam Adapter   - adapter callable type
-        @param  container - container instance. container must not be edited until adapter death
-        @param  adapter   - function which transforms Container::value_type to T*
-        @retval           - values generator
+        @tparam container_t - any container, which adapter satisfies forward iterator concept
+        @tparam adapter_t   - adapter callable type
+        @param  container   - container instance. container must not be edited until adapter death
+        @param  adapter     - function which transforms Container::value_type to T*
+        @retval             - values generator
     **/
-    template<class Container, class Adapter>
-    static generator_type create_initial_generator(Container&& container, Adapter adapter) noexcept;
+    template<class container_t, class adapter_t>
+    static generator_type create_initial_generator(container_t&& container, adapter_t adapter) noexcept;
 
 private:
     generator_type m_InitialGenerator;

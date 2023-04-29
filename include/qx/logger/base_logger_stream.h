@@ -42,14 +42,14 @@ struct logger_color_range
     color                     rangeColor = color::white();
 };
 
-template<class char_type>
+template<class char_t>
 struct logger_buffer
 {
-    basic_string<char_type> sMessage; // result message (output)
-    basic_string<char_type> sFormat;
-    basic_string<char_type> sFile;
-    basic_string<char_type> sFunction;
-    basic_string<char_type> sCategory;
+    basic_string<char_t> sMessage; // result message (output)
+    basic_string<char_t> sFormat;
+    basic_string<char_t> sFile;
+    basic_string<char_t> sFunction;
+    basic_string<char_t> sCategory;
 
     // ranges must not intersect and must increase
     std::vector<logger_color_range> colors;
@@ -67,25 +67,25 @@ struct logger_buffer
 
 struct log_unit_info
 {
-    template<class char_type>
+    template<class char_t>
     using format_func = std::function<void(
-        logger_buffer<char_type>& buffers,
-        log_level                 eLogLevel,   // log level
-        const category&           category,    // code category
-        const char_type*          pszFormat,   // format string
-        const char_type*          pszFile,     // file name
-        const char_type*          pszFunction, // function name
-        int                       nLine,       // code line number
-        va_list                   args         // additional args for format
+        logger_buffer<char_t>& buffers,
+        log_level              eLogLevel,   // log level
+        const category&        category,    // code category
+        const char_t*          pszFormat,   // format string
+        const char_t*          pszFile,     // file name
+        const char_t*          pszFunction, // function name
+        int                    nLine,       // code line number
+        va_list                args         // additional args for format
         )>;
 
     /**
         @brief  Get format func corresponding to char type
-        @tparam char_type - char type
-        @retval           - format func
+        @tparam char_t - char type
+        @retval        - format func
     **/
-    template<class char_type>
-    const format_func<char_type>& get_format_func();
+    template<class char_t>
+    const format_func<char_t>& get_format_func();
 
     log_level            eMinLogLevel = log_level::log;
     format_func<char>    formatFuncChar;
@@ -131,7 +131,7 @@ public:
 
     /**
         @brief  Output to stream
-        @tparam char_type   - char type, typically char or wchar_t
+        @tparam char_t      - char type, typically char or wchar_t
         @param  eLogLevel   - log level
         @param  pszFormat   - format string
         @param  category    - code category
@@ -140,15 +140,15 @@ public:
         @param  nLine       - code line number
         @param  args        - additional args for format
     **/
-    template<class char_type>
+    template<class char_t>
     void log(
-        log_level        eLogLevel,
-        const char_type* pszFormat,
-        const category&  category,
-        const char*      pszFile,
-        const char*      pszFunction,
-        int              nLine,
-        va_list          args);
+        log_level       eLogLevel,
+        const char_t*   pszFormat,
+        const category& category,
+        const char*     pszFile,
+        const char*     pszFunction,
+        int             nLine,
+        va_list         args);
 
     /**
         @brief Register logger unit
@@ -165,25 +165,25 @@ public:
 
     /**
         @brief  Format time string to the buffer
-        @tparam char_type       - char type
+        @tparam char_t          - char type
         @param  sTime           - output time buffer
         @param  chDateDelimiter - char to use as delimiter in date part
         @param  chTimeDelimiter - char to use as delimiter in time part
     **/
-    template<class char_type>
+    template<class char_t>
     static void format_time_string(
-        basic_string<char_type>& sTime,
-        char_type                chDateDelimiter,
-        char_type                chTimeDelimiter) noexcept;
+        basic_string<char_t>& sTime,
+        char_t                chDateDelimiter,
+        char_t                chTimeDelimiter) noexcept;
 
 protected:
     /**
         @brief  Get string buffers
-        @tparam char_type - char type
-        @retval           - string buffers
+        @tparam char_t - char type
+        @retval        - string buffers
     **/
-    template<class char_type>
-    logger_buffer<char_type>& get_log_buffer() noexcept;
+    template<class char_t>
+    logger_buffer<char_t>& get_log_buffer() noexcept;
 
 private:
     /**
@@ -226,7 +226,7 @@ private:
 
     /**
         @brief Format logger line
-        @tparam char_type   - char type, typically char or wchar_t
+        @tparam char_t      - char type, typically char or wchar_t
         @param  buffers     - string buffers to reduce num of allocations
         @param  eLogLevel   - log level
         @param  category    - code category
@@ -236,16 +236,16 @@ private:
         @param  nLine       - code line number
         @param  args        - additional args for format
     **/
-    template<class char_type>
+    template<class char_t>
     static void format_line(
-        logger_buffer<char_type>& buffers,
-        log_level                 eLogLevel,
-        const category&           category,
-        const char_type*          pszFormat,
-        const char_type*          pszFile,
-        const char_type*          pszFunction,
-        int                       nLine,
-        va_list                   args) noexcept;
+        logger_buffer<char_t>& buffers,
+        log_level              eLogLevel,
+        const category&        category,
+        const char_t*          pszFormat,
+        const char_t*          pszFile,
+        const char_t*          pszFunction,
+        int                    nLine,
+        va_list                args) noexcept;
 
 private:
     std::unordered_map<string_hash, log_unit_info> m_Units;

@@ -17,7 +17,7 @@ namespace qx
     @class   constexpr_flag
     @brief   Constexpr flag class
     @details Returns "Start" at the beginning(test), "Start" with test_and_set and "End" after
-    @tparam  Tag   - tag for unique instances 
+    @tparam  tag_t - tag for unique instances 
     @tparam  T     - value type 
     @tparam  Start - start value 
     @tparam  End   - end value
@@ -25,45 +25,45 @@ namespace qx
     @date    14.09.2020
 
 **/
-template<typename Tag, typename T = bool, T Start = false, T End = true>
+template<class tag_t, class T = bool, T Start = false, T End = true>
 class constexpr_flag
 {
 private:
-    struct Dummy
+    struct dummy
     {
-        friend constexpr void adl_flag(Dummy) noexcept;
+        friend constexpr void adl_flag(dummy) noexcept;
     };
 
     template<T>
-    struct Writer
+    struct writer
     {
-        friend constexpr void adl_flag(Dummy) noexcept
+        friend constexpr void adl_flag(dummy) noexcept
         {
         }
     };
 
-    template<class Dummy, int = (adl_flag(Dummy {}), 0)>
+    template<class dummy_t, int = (adl_flag(dummy_t {}), 0)>
     static constexpr T check(int) noexcept
     {
         return End;
     }
 
-    template<class Dummy>
+    template<class dummy_t>
     static constexpr T check(short) noexcept
     {
         return Start;
     }
 
 public:
-    template<class Dummy = Dummy, T Value = check<Dummy>(0)>
+    template<class dummy_t = dummy, T Value = check<dummy_t>(0)>
     static constexpr T test_and_set() noexcept
     {
-        Writer<Value && 0> tmp {};
+        writer<Value && 0> tmp {};
         (void)tmp;
         return Value;
     }
 
-    template<class Dummy = Dummy, T Value = check<Dummy>(0)>
+    template<class dummy_t = dummy, T Value = check<dummy_t>(0)>
     static constexpr T test() noexcept
     {
         return Value;

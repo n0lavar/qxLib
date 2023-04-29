@@ -324,19 +324,19 @@ public:
 private:
     /**
         @brief  Add color for string -> color mapping
-        @tparam TChar       - char type
+        @tparam char_t      - char type
         @param  svColorName - color name
         @param  nRed        - red component
         @param  nGreen      - green component
         @param  nBlue       - blue component
         @retval             - always true
     **/
-    template<class TChar>
+    template<class char_t>
     static bool add_color_to_mapping(
-        std::basic_string_view<TChar> svColorName,
-        int                           nRed,
-        int                           nGreen,
-        int                           nBlue) noexcept;
+        std::basic_string_view<char_t> svColorName,
+        int                            nRed,
+        int                            nGreen,
+        int                            nBlue) noexcept;
 
 #define _QX_DEFINE_COLOR(snakeCaseName, pascalCaseName, r, g, b)                                                   \
     static constexpr auto snakeCaseName(float fAlpha = 1.f) noexcept                                               \
@@ -498,21 +498,21 @@ public:
 
     /**
         @brief  Try to create color from string
-        @tparam TChar       - char type
+        @tparam char_t      - char type
         @param  svColorName - color name: css style (alice_blue, AliceBlue, aliceblue) or #F0F8FF or 0xF0F8FFFF(0xRRGGBBAA) or 0xF0F8FF(0xRRGGBB)
         @retval             - found color or nullopt
     **/
-    template<class TChar>
-    static std::optional<color> from_string(std::basic_string_view<TChar> svColorName) noexcept;
+    template<class char_t>
+    static std::optional<color> from_string(std::basic_string_view<char_t> svColorName) noexcept;
 
     /**
         @brief  Try to create color from string
-        @tparam TChar        - char type
+        @tparam char_t       - char type
         @param  pszColorName - color name: css style (alice_blue, AliceBlue, aliceblue) or #F0F8FF or 0xF0F8FFFF(0xRRGGBBAA) or 0xF0F8FF(0xRRGGBB)
         @retval              - found color or nullopt
     **/
-    template<class TChar>
-    static std::optional<color> from_string(const TChar* pszColorName) noexcept;
+    template<class char_t>
+    static std::optional<color> from_string(const char_t* pszColorName) noexcept;
 
     /**
         @brief   Get empty color (0, 0, 0, 0)

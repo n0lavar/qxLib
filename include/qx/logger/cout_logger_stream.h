@@ -82,23 +82,23 @@ public:
 private:
     /**
         @brief  Get cout by char type
-        @tparam char_type - char type
-        @retval           - cout ref
+        @tparam char_t - char type
+        @retval        - cout ref
     **/
-    template<class char_type>
-    static std::basic_ostream<char_type>& get_cout() noexcept;
+    template<class char_t>
+    static std::basic_ostream<char_t>& get_cout() noexcept;
 
     /**
         @brief  Output to std::basic_ostream 
-        @tparam char_type - char type
+        @tparam char_t    - char type
         @param  svMessage - message string
         @param  logUnit   - log unit info
         @param  colors    - color ranges to colorize output
         @param  eLogLevel - this message log level
     **/
-    template<class char_type>
+    template<class char_t>
     void log_cout(
-        std::basic_string_view<char_type>      svMessage,
+        std::basic_string_view<char_t>         svMessage,
         const log_unit&                        logUnit,
         const std::vector<logger_color_range>& colors,
         log_level                              eLogLevel);

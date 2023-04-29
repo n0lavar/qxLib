@@ -26,7 +26,7 @@ namespace qx
     @date    04.05.2021
 
 **/
-template<typename T>
+template<class T>
 class base_easing_sequence
 {
 public:
@@ -42,11 +42,11 @@ public:
 
     /**
         @brief  Add easing element to queue by constructing in-place
-        @tparam Args - template parameter pack type
-        @param  args - arguments for constructing
+        @tparam args_t - template parameter pack type
+        @param  args   - arguments for constructing
     **/
-    template<typename... Args>
-    void emplace_back(Args&&... args) noexcept;
+    template<class... args_t>
+    void emplace_back(args_t&&... args) noexcept;
 
     /**
         @brief Clear elements queue

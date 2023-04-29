@@ -27,7 +27,7 @@ namespace qx
     @date    10.09.2021
 
 **/
-template<typename T, size_t N>
+template<class T, size_t N>
 struct string_literal
 {
     constexpr string_literal(const T (&str)[N]) noexcept

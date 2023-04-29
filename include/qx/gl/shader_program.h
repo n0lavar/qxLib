@@ -98,7 +98,7 @@ public:
                                    used to update the specified uniform variable.
         @param  nCount           - number of values that are to be modified.
     **/
-    template<typename T>
+    template<class T>
     void SetUniform(GLint nUniformLocation, const T* pValue, GLsizei nCount) noexcept;
 
     /**
@@ -109,7 +109,7 @@ public:
                           used to update the specified uniform variable.
         @param  nCount  - number of values that are to be modified.
     **/
-    template<typename T>
+    template<class T>
     void SetUniform(const GLchar* pszName, const T* pValue, GLsizei nCount) noexcept;
 
     /**
@@ -118,7 +118,7 @@ public:
         @param  nUniformLocation - the location of the uniform variable to be modified
         @param  value            - the value of a uniform variable
     **/
-    template<typename T>
+    template<class T>
     void SetUniform(GLint nUniformLocation, const T& value) noexcept;
 
     /**
@@ -127,7 +127,7 @@ public:
         @param  pszName - the name of the uniform variable to be modified 
         @param  value   - the value of a uniform variable. 
     **/
-    template<typename T>
+    template<class T>
     void SetUniform(const GLchar* pszName, const T& value) noexcept;
 
     /**

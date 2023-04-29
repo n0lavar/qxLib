@@ -37,8 +37,8 @@ private:
     static constexpr size_t           get_num_template_parameters();
     static constexpr std::string_view create_signature();
     static constexpr std::string_view create_name();
-    using TemplateParametersContainer = std::array<std::string_view, get_num_template_parameters()>;
-    static constexpr TemplateParametersContainer create_template_parameters();
+    using template_parameters_container = std::array<std::string_view, get_num_template_parameters()>;
+    static constexpr template_parameters_container create_template_parameters();
 
     static constexpr auto m_kSignature          = create_signature();
     static constexpr auto m_kName               = create_name();
@@ -61,7 +61,7 @@ public:
         @brief  Get type template parameters
         @retval  - template parameters
     **/
-    static constexpr TemplateParametersContainer get_template_parameters();
+    static constexpr template_parameters_container get_template_parameters();
 };
 
 } // namespace qx

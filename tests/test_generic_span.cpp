@@ -21,16 +21,16 @@
 
 static_assert(std::forward_iterator<qx::generic_span<char>::iterator>);
 
-template<class T, template<class...> class Container>
+template<class T, template<class...> class container_t>
 void TestContainer()
 {
-    Container<std::remove_const_t<T>> container { 'a', 'b', 'c', 'd' };
-    qx::generic_span<T>               span;
+    container_t<std::remove_const_t<T>> container { 'a', 'b', 'c', 'd' };
+    qx::generic_span<T>                 span;
     EXPECT_TRUE(span.empty());
     span = container;
     EXPECT_FALSE(span.empty());
 
-    Container<std::remove_const_t<T>> newContainer;
+    container_t<std::remove_const_t<T>> newContainer;
     for (T value : span)
         newContainer.insert(newContainer.end(), value);
 
@@ -67,11 +67,11 @@ struct std::hash<NotT<T>>
     }
 };
 
-template<class T, template<class...> class Container>
+template<class T, template<class...> class container_t>
 void TestContainerWithAdapter()
 {
     using _NotT = NotT<T>;
-    Container<_NotT>    container { _NotT { 'a' }, _NotT { 'b' }, _NotT { 'c' }, _NotT { 'd' } };
+    container_t<_NotT>  container { _NotT { 'a' }, _NotT { 'b' }, _NotT { 'c' }, _NotT { 'd' } };
     qx::generic_span<T> span(
         container,
         [](_NotT& notT)
@@ -80,7 +80,7 @@ void TestContainerWithAdapter()
         });
     EXPECT_FALSE(span.empty());
 
-    Container<_NotT> newContainer;
+    container_t<_NotT> newContainer;
     for (T value : span)
         newContainer.insert(newContainer.end(), _NotT { value });
 

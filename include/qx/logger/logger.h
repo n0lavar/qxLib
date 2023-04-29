@@ -54,7 +54,7 @@ class logger
 public:
     /**
         @brief  Log to all streams
-        @tparam char_type   - char type, typically char or wchar_t
+        @tparam char_t      - char type, typically char or wchar_t
         @param  eLogLevel   - log level
         @param  pszFormat   - format string
         @param  category    - code category
@@ -63,19 +63,19 @@ public:
         @param  nLine       - code line number
         @param  ...         - additional args for format
     **/
-    template<class char_type>
+    template<class char_t>
     void log(
-        log_level        eLogLevel,
-        const char_type* pszFormat,
-        const category&  category,
-        const char*      pszFile,
-        const char*      pszFunction,
-        int              nLine,
+        log_level       eLogLevel,
+        const char_t*   pszFormat,
+        const category& category,
+        const char*     pszFile,
+        const char*     pszFunction,
+        int             nLine,
         ...);
 
     /**
         @brief  Log to all streams
-        @tparam char_type   - char type, typically char or wchar_t
+        @tparam char_t      - char type, typically char or wchar_t
         @param  eLogLevel   - log level
         @param  sFormat     - format string
         @param  category    - code category
@@ -84,14 +84,14 @@ public:
         @param  nLine       - code line number
         @param  ...         - additional args for format
     **/
-    template<class char_type>
+    template<class char_t>
     void log(
-        log_level                      eLogLevel,
-        const basic_string<char_type>& sFormat,
-        const category&                category,
-        const char*                    pszFile,
-        const char*                    pszFunction,
-        int                            nLine,
+        log_level                   eLogLevel,
+        const basic_string<char_t>& sFormat,
+        const category&             category,
+        const char*                 pszFile,
+        const char*                 pszFunction,
+        int                         nLine,
         ...);
 
     /**
@@ -113,7 +113,7 @@ public:
 private:
     /**
         @brief  Common method for logging
-        @tparam char_type   - char type, typically char or wchar_t
+        @tparam char_t      - char type, typically char or wchar_t
         @param  eLogLevel   - log level
         @param  pszFormat   - format string
         @param  category    - code category
@@ -122,15 +122,15 @@ private:
         @param  nLine       - code line number
         @param  args        - template parameter pack
     **/
-    template<class char_type>
+    template<class char_t>
     void do_log(
-        log_level        eLogLevel,
-        const char_type* pszFormat,
-        const category&  category,
-        const char*      pszFile,
-        const char*      pszFunction,
-        int              nLine,
-        va_list          args);
+        log_level       eLogLevel,
+        const char_t*   pszFormat,
+        const category& category,
+        const char*     pszFile,
+        const char*     pszFunction,
+        int             nLine,
+        va_list         args);
 
 private:
     std::vector<std::unique_ptr<base_logger_stream>> m_Streams;
