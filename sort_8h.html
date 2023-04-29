@@ -162,10 +162,10 @@ Functions</h2></td></tr>
 <tr class="memitem:ae0ead4b89831b13d335ce1b8d4dd0645"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="sort_8h.html#ae0ead4b89831b13d335ce1b8d4dd0645">qx::sort_merge</a> (random_it_t begin, random_it_t end, compare_t compare=compare_t(), vector_of_values&lt; random_it_t &gt; *pPreallocatedBuffer=nullptr)</td></tr>
 <tr class="memdesc:ae0ead4b89831b13d335ce1b8d4dd0645"><td class="mdescLeft">&#160;</td><td class="mdescRight">Merge sort based on merge with temp vector.  <a href="sort_8h.html#ae0ead4b89831b13d335ce1b8d4dd0645">More...</a><br /></td></tr>
 <tr class="separator:ae0ead4b89831b13d335ce1b8d4dd0645"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aac2ea764f3afd485e56690e87e105d00"><td class="memTemplParams" colspan="2">template&lt;class container_t , class compare_t  = std::less&lt;&gt;&gt; </td></tr>
-<tr class="memitem:aac2ea764f3afd485e56690e87e105d00"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="sort_8h.html#aac2ea764f3afd485e56690e87e105d00">qx::sort_merge</a> (container_t &amp;cont, compare_t compare=compare_t(), vector_of_values&lt; class container_t::iterator &gt; *pPreallocatedBuffer=nullptr)</td></tr>
-<tr class="memdesc:aac2ea764f3afd485e56690e87e105d00"><td class="mdescLeft">&#160;</td><td class="mdescRight">Merge sort based on merge with temp vector.  <a href="sort_8h.html#aac2ea764f3afd485e56690e87e105d00">More...</a><br /></td></tr>
-<tr class="separator:aac2ea764f3afd485e56690e87e105d00"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a383080cbb7962eae576bf43f76c05dd8"><td class="memTemplParams" colspan="2">template&lt;class container_t , class compare_t  = std::less&lt;&gt;&gt; </td></tr>
+<tr class="memitem:a383080cbb7962eae576bf43f76c05dd8"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="sort_8h.html#a383080cbb7962eae576bf43f76c05dd8">qx::sort_merge</a> (container_t &amp;cont, compare_t compare=compare_t(), vector_of_values&lt; typename container_t::iterator &gt; *pPreallocatedBuffer=nullptr)</td></tr>
+<tr class="memdesc:a383080cbb7962eae576bf43f76c05dd8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Merge sort based on merge with temp vector.  <a href="sort_8h.html#a383080cbb7962eae576bf43f76c05dd8">More...</a><br /></td></tr>
+<tr class="separator:a383080cbb7962eae576bf43f76c05dd8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a65ff4b19aeee985756190fd4fa7c1d87"><td class="memTemplParams" colspan="2">template&lt;class random_it_t , class compare_t  = std::less&lt;&gt;&gt; </td></tr>
 <tr class="memitem:a65ff4b19aeee985756190fd4fa7c1d87"><td class="memTemplItemLeft" align="right" valign="top">bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="sort_8h.html#a65ff4b19aeee985756190fd4fa7c1d87">qx::sort_counting</a> (random_it_t begin, random_it_t end, compare_t compare=compare_t(), size_t nMaxBufferSize=SORT_COUNTING_MAX_BUFFER_SIZE)</td></tr>
 <tr class="memdesc:a65ff4b19aeee985756190fd4fa7c1d87"><td class="mdescLeft">&#160;</td><td class="mdescRight">Counting sort for integral values.  <a href="sort_8h.html#a65ff4b19aeee985756190fd4fa7c1d87">More...</a><br /></td></tr>
@@ -1032,8 +1032,8 @@ template&lt;class random_it_t , class compare_t  = std::less&lt;&gt;&gt; </div>
 
 </div>
 </div>
-<a id="aac2ea764f3afd485e56690e87e105d00"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aac2ea764f3afd485e56690e87e105d00">&#9670;&nbsp;</a></span>sort_merge() <span class="overload">[1/2]</span></h2>
+<a id="a383080cbb7962eae576bf43f76c05dd8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a383080cbb7962eae576bf43f76c05dd8">&#9670;&nbsp;</a></span>sort_merge() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1058,7 +1058,7 @@ template&lt;class container_t , class compare_t  = std::less&lt;&gt;&gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">vector_of_values&lt; class container_t::iterator &gt; *&#160;</td>
+          <td class="paramtype">vector_of_values&lt; typename container_t::iterator &gt; *&#160;</td>
           <td class="paramname"><em>pPreallocatedBuffer</em> = <code>nullptr</code>&#160;</td>
         </tr>
         <tr>
@@ -1091,6 +1091,8 @@ template&lt;class container_t , class compare_t  = std::less&lt;&gt;&gt; </div>
   </table>
   </dd>
 </dl>
+
+<p class="definition">Definition at line <a class="el" href="sort_8inl_source.html#l00468">468</a> of file <a class="el" href="sort_8inl_source.html">sort.inl</a>.</p>
 
 </div>
 </div>
