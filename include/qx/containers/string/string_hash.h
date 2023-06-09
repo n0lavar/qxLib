@@ -51,7 +51,7 @@ public:
     /**
         @brief basic_string_hash object constructor
         @param pszString - string first char pointer
-        @param nSize   - string size
+        @param nSize     - string size
     **/
     constexpr basic_string_hash(const_pointer pszString, size_type nSize) noexcept;
 
@@ -122,16 +122,16 @@ namespace literals
 /**
     @brief  String hash literal for constexpr converting. Can be used with switch-case
     @param  pszStr - literal text pointer
-    @param  nSize   - literal text size
-    @retval         - text hash value
+    @param  nSize  - literal text size
+    @retval        - text hash value
 **/
 constexpr basic_string_hash<fast_hash_string_traits<char>> operator"" _sh(const char* pszStr, size_t nSize);
 
 /**
     @brief  String hash literal for constexpr converting. Can be used with switch-case
     @param  pszStr - literal text pointer
-    @param  nSize   - literal text size
-    @retval         - text hash value
+    @param  nSize  - literal text size
+    @retval        - text hash value
 **/
 constexpr basic_string_hash<fast_hash_string_traits<wchar_t>> operator"" _sh(const wchar_t* pszStr, size_t nSize);
 

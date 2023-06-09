@@ -10,6 +10,7 @@
 #pragma once
 
 #include <type_traits>
+#include <utility>
 
 namespace qx
 {
@@ -27,8 +28,8 @@ template<class T>
 concept is_random_access_iterator =
     is_iterator<T> && std::derived_from<typename T::iterator_category, std::random_access_iterator_tag>;
 
-template<class T, class return_t = void, class... args_t>
-concept callable = requires(T t, args_t&&... args) {
+template<class T, class return_t, class... args_t>
+concept callable_c = requires(T t, args_t&&... args) {
     {
         t(std::forward<args_t>(args)...)
     } -> std::convertible_to<return_t>;

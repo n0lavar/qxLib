@@ -573,7 +573,7 @@ public:
     using iterator_category = std::contiguous_iterator_tag;
     using iterator_concept  = std::contiguous_iterator_tag;
 
-    using base_iterator_t::BaseIterator;
+    using base_iterator_t::base_iterator_t;
 
     [[nodiscard]] constexpr value_type operator*() const noexcept
     {

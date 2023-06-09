@@ -47,9 +47,9 @@ inline file_logger_stream::file_logger_stream(
     }
     else
     {
-        QX_PUSH_SUPPRESS_ALL_WARNINGS();
+        QX_DISABLE_MSVC_WARNINGS(4996);
         m_WCharFile.imbue(std::locale(std::locale(), new std::codecvt_utf8<wchar_t>));
-        QX_POP_SUPPRESS_WARNINGS();
+        QX_RESTORE_MSVC_WARNINGS(4996);
     }
 }
 

@@ -111,21 +111,21 @@ struct test2
 };
 
 // clang-format off
-static_assert(qx::callable<std::function<void()>>);
-static_assert(!qx::callable<std::function<void(test1)>>);
-static_assert(qx::callable<std::function<void(test1)>, void, test1>);
-static_assert(!qx::callable<std::function<test2(test1)>, void, test1>);
-static_assert(qx::callable<std::function<test2(test1)>, test2, test1>);
+static_assert(qx::callable_c<std::function<void()>, void>);
+static_assert(!qx::callable_c<std::function<void(test1)>, void>);
+static_assert(qx::callable_c<std::function<void(test1)>, void, test1>);
+static_assert(!qx::callable_c<std::function<test2(test1)>, void, test1>);
+static_assert(qx::callable_c<std::function<test2(test1)>, test2, test1>);
 
-static_assert(qx::callable<void()>);
-static_assert(!qx::callable<void(test1)>);
-static_assert(qx::callable<void(test1), void, test1>);
-static_assert(!qx::callable<test2(test1), void, test1>);
-static_assert(qx::callable<test2(test1), test2, test1>);
+static_assert(qx::callable_c<void(), void>);
+static_assert(!qx::callable_c<void(test1), void>);
+static_assert(qx::callable_c<void(test1), void, test1>);
+static_assert(!qx::callable_c<test2(test1), void, test1>);
+static_assert(qx::callable_c<test2(test1), test2, test1>);
 
-static_assert(qx::callable<decltype([](){})>);
-static_assert(!qx::callable<decltype([](test1){})>);
-static_assert(qx::callable<decltype([](test1){}), void, test1>);
-static_assert(!qx::callable<decltype([](test1){ return test2(); }), void, test1>);
-static_assert(qx::callable<decltype([](test1){ return test2(); }), test2, test1>);
+static_assert(qx::callable_c<decltype([](){}), void>);
+static_assert(!qx::callable_c<decltype([](test1){}), void>);
+static_assert(qx::callable_c<decltype([](test1){}), void, test1>);
+static_assert(!qx::callable_c<decltype([](test1){ return test2(); }), void, test1>);
+static_assert(qx::callable_c<decltype([](test1){ return test2(); }), test2, test1>);
 // clang-format on

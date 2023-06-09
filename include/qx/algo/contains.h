@@ -39,7 +39,7 @@ bool contains(fwd_it_t itBegin, fwd_it_t itEnd, const T& value)
     @retval             - true if container contains value
 **/
 template<class container_t, class T>
-bool contains(container_t& container, const T& value)
+bool contains(const container_t& container, const T& value)
 {
     return contains(container.begin(), container.end(), value);
 }
@@ -68,7 +68,7 @@ bool contains_if(fwd_it_t itBegin, fwd_it_t itEnd, const predicate_t& predicate)
     @retval             - true if at least one of container elements satisfies predicate
 **/
 template<class container_t, class predicate_t>
-bool contains_if(container_t& container, const predicate_t& predicate)
+bool contains_if(const container_t& container, const predicate_t& predicate)
 {
     return contains_if(container.begin(), container.end(), predicate);
 }
