@@ -19,7 +19,7 @@ namespace detail
 
 template<class T>
 concept has_zero_termonated_hash_func_overload =
-    requires(typename T::const_pointer pszString, size_t nSeed) { T::hash_function(pszString, nSeed); };
+    requires(typename T::const_pointer pszStr, size_t nSeed) { T::hash_function(pszStr, nSeed); };
 
 } // namespace detail
 
@@ -50,10 +50,10 @@ public:
 
     /**
         @brief basic_string_hash object constructor
-        @param pString - string first char pointer
+        @param pszString - string first char pointer
         @param nSize   - string size
     **/
-    constexpr basic_string_hash(const_pointer pString, size_type nSize) noexcept;
+    constexpr basic_string_hash(const_pointer pszString, size_type nSize) noexcept;
 
     /**
         @brief basic_string_hash object constructor
@@ -92,13 +92,13 @@ struct fast_hash_string_traits : public char_traits<value_t>
 {
     /**
         @brief  Hash function realization
-        @param  sStr  - string first char pointer
+        @param  pszStr  - string first char pointer
         @param  nSeed - hash seed
         @param  nLen  - string size
         @retval       - hash 
     **/
     static constexpr typename char_traits<value_t>::size_type hash_function(
-        typename char_traits<value_t>::const_pointer sStr,
+        typename char_traits<value_t>::const_pointer pszStr,
         size_t                                       nSeed,
         typename char_traits<value_t>::size_type     nLen) noexcept;
 
@@ -121,19 +121,19 @@ namespace literals
 
 /**
     @brief  String hash literal for constexpr converting. Can be used with switch-case
-    @param  pszText - literal text pointer
+    @param  pszStr - literal text pointer
     @param  nSize   - literal text size
     @retval         - text hash value
 **/
-constexpr basic_string_hash<fast_hash_string_traits<char>> operator"" _sh(const char* pszText, size_t nSize);
+constexpr basic_string_hash<fast_hash_string_traits<char>> operator"" _sh(const char* pszStr, size_t nSize);
 
 /**
     @brief  String hash literal for constexpr converting. Can be used with switch-case
-    @param  pszText - literal text pointer
+    @param  pszStr - literal text pointer
     @param  nSize   - literal text size
     @retval         - text hash value
 **/
-constexpr basic_string_hash<fast_hash_string_traits<wchar_t>> operator"" _sh(const wchar_t* pszText, size_t nSize);
+constexpr basic_string_hash<fast_hash_string_traits<wchar_t>> operator"" _sh(const wchar_t* pszStr, size_t nSize);
 
 } // namespace literals
 
