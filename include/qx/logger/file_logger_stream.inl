@@ -40,26 +40,28 @@ inline file_logger_stream::file_logger_stream(
 
     const std::filesystem::path path(sLogFile.c_str());
 
-    m_CharFile = std::basic_ofstream<char>(path, openingMode);
-    if (!m_CharFile)
-        std::wcerr << L"Can't open log file " << sLogFile;
-
     m_WCharFile = std::basic_ofstream<wchar_t>(path, openingMode);
     if (!m_WCharFile)
+    {
         std::wcerr << L"Can't open log file " << sLogFile;
+    }
+    else
+    {
+        QX_PUSH_SUPPRESS_ALL_WARNINGS();
+        m_WCharFile.imbue(std::locale(std::locale(), new std::codecvt_utf8<wchar_t>));
+        QX_POP_SUPPRESS_WARNINGS();
+    }
 }
 
 inline file_logger_stream::~file_logger_stream()
 {
-    if (m_CharFile)
-        m_CharFile << "\n\n\n" << std::flush;
+    if (m_WCharFile)
+        m_WCharFile << L"\n\n\n" << std::flush;
 }
 
 inline void file_logger_stream::flush()
 {
     QX_PERF_SCOPE(CatLogger, "Flush to the file");
-
-    m_CharFile << std::flush;
     m_WCharFile << std::flush;
 }
 
@@ -90,7 +92,7 @@ inline void file_logger_stream::log_file(
     QX_PERF_SCOPE(CatLogger, "Log to the file");
 
     if constexpr (std::is_same_v<char_t, char>)
-        m_CharFile << svMessage;
+        m_WCharFile << qx::to_wstring(svMessage);
     else
         m_WCharFile << svMessage;
 }

@@ -95,7 +95,6 @@ private:
     void log_file(std::basic_string_view<char_t> svMessage, const log_unit& logUnit, log_level eLogLevel);
 
 private:
-    std::basic_ofstream<char>    m_CharFile;
     std::basic_ofstream<wchar_t> m_WCharFile;
 };
 
