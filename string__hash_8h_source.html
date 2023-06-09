@@ -90,7 +90,7 @@ $(function() {
 <div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160; </div>
 <div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> T&gt;</div>
 <div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;concept has_zero_termonated_hash_func_overload =</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    requires(<span class="keyword">typename</span> T::const_pointer pszString, <span class="keywordtype">size_t</span> nSeed) { T::hash_function(pszString, nSeed); };</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    requires(<span class="keyword">typename</span> T::const_pointer pszStr, <span class="keywordtype">size_t</span> nSeed) { T::hash_function(pszStr, nSeed); };</div>
 <div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160; </div>
 <div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;} <span class="comment">// namespace detail</span></div>
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160; </div>
@@ -121,10 +121,10 @@ $(function() {
 <div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="comment"></span> </div>
 <div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="comment">    /**</span></div>
 <div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<span class="comment">        @brief basic_string_hash object constructor</span></div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<span class="comment">        @param pString - string first char pointer</span></div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<span class="comment">        @param pszString - string first char pointer</span></div>
 <div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;<span class="comment">        @param nSize   - string size</span></div>
 <div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="comment">    **/</span></div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    constexpr <a class="code" href="classqx_1_1basic__string__hash.html">basic_string_hash</a>(const_pointer pString, size_type nSize) noexcept;</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    constexpr <a class="code" href="classqx_1_1basic__string__hash.html">basic_string_hash</a>(const_pointer pszString, size_type nSize) noexcept;</div>
 <div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;<span class="comment"></span> </div>
 <div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;<span class="comment">    /**</span></div>
 <div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;<span class="comment">        @brief basic_string_hash object constructor</span></div>
@@ -163,13 +163,13 @@ $(function() {
 <div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;{<span class="comment"></span></div>
 <div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;<span class="comment">    /**</span></div>
 <div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;<span class="comment">        @brief  Hash function realization</span></div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;<span class="comment">        @param  sStr  - string first char pointer</span></div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;<span class="comment">        @param  pszStr  - string first char pointer</span></div>
 <div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;<span class="comment">        @param  nSeed - hash seed</span></div>
 <div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;<span class="comment">        @param  nLen  - string size</span></div>
 <div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;<span class="comment">        @retval       - hash </span></div>
 <div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;<span class="comment">    **/</span></div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;    <span class="keyword">static</span> constexpr <span class="keyword">typename</span> <a class="code" href="structqx_1_1char__traits.html">char_traits&lt;value_t&gt;::size_type</a> <a class="code" href="structqx_1_1fast__hash__string__traits.html#a579b37a8dcdf4d5f7132a8671d786ee3">hash_function</a>(</div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;        <span class="keyword">typename</span> <a class="code" href="structqx_1_1char__traits.html">char_traits&lt;value_t&gt;::const_pointer</a> sStr,</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;    <span class="keyword">static</span> constexpr <span class="keyword">typename</span> <a class="code" href="structqx_1_1char__traits.html">char_traits&lt;value_t&gt;::size_type</a> <a class="code" href="structqx_1_1fast__hash__string__traits.html#a0489ee09df7e38d25caf9c8c2a5c730b">hash_function</a>(</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;        <span class="keyword">typename</span> <a class="code" href="structqx_1_1char__traits.html">char_traits&lt;value_t&gt;::const_pointer</a> pszStr,</div>
 <div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;        <span class="keywordtype">size_t</span>                                       nSeed,</div>
 <div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;        <span class="keyword">typename</span> <a class="code" href="structqx_1_1char__traits.html">char_traits&lt;value_t&gt;::size_type</a>     nLen) noexcept;</div>
 <div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;<span class="comment"></span> </div>
@@ -179,7 +179,7 @@ $(function() {
 <div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;<span class="comment">        @param  nSeed  - hash seed</span></div>
 <div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;<span class="comment">        @retval        - hash</span></div>
 <div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;<span class="comment">    **/</span></div>
-<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;    <span class="keyword">static</span> constexpr <span class="keyword">typename</span> <a class="code" href="structqx_1_1char__traits.html">char_traits&lt;value_t&gt;::size_type</a> <a class="code" href="structqx_1_1fast__hash__string__traits.html#a579b37a8dcdf4d5f7132a8671d786ee3">hash_function</a>(</div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;    <span class="keyword">static</span> constexpr <span class="keyword">typename</span> <a class="code" href="structqx_1_1char__traits.html">char_traits&lt;value_t&gt;::size_type</a> <a class="code" href="structqx_1_1fast__hash__string__traits.html#a0489ee09df7e38d25caf9c8c2a5c730b">hash_function</a>(</div>
 <div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;        <span class="keyword">typename</span> <a class="code" href="structqx_1_1char__traits.html">char_traits&lt;value_t&gt;::const_pointer</a> pszStr,</div>
 <div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;        <span class="keywordtype">size_t</span>                                       nSeed) noexcept;</div>
 <div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;};</div>
@@ -192,19 +192,19 @@ $(function() {
 <div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;<span class="comment"></span> </div>
 <div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;<span class="comment">/**</span></div>
 <div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;<span class="comment">    @brief  String hash literal for constexpr converting. Can be used with switch-case</span></div>
-<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;<span class="comment">    @param  pszText - literal text pointer</span></div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;<span class="comment">    @param  pszStr - literal text pointer</span></div>
 <div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;<span class="comment">    @param  nSize   - literal text size</span></div>
 <div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;<span class="comment">    @retval         - text hash value</span></div>
 <div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;<span class="comment">**/</span></div>
-<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;constexpr <a class="code" href="classqx_1_1basic__string__hash.html">basic_string_hash&lt;fast_hash_string_traits&lt;char&gt;</a>&gt; <span class="keyword">operator</span><span class="stringliteral">&quot;&quot;</span> _sh(<span class="keyword">const</span> <span class="keywordtype">char</span>* pszText, <span class="keywordtype">size_t</span> nSize);</div>
+<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;constexpr <a class="code" href="classqx_1_1basic__string__hash.html">basic_string_hash&lt;fast_hash_string_traits&lt;char&gt;</a>&gt; <span class="keyword">operator</span><span class="stringliteral">&quot;&quot;</span> _sh(<span class="keyword">const</span> <span class="keywordtype">char</span>* pszStr, <span class="keywordtype">size_t</span> nSize);</div>
 <div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;<span class="comment"></span> </div>
 <div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;<span class="comment">/**</span></div>
 <div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;<span class="comment">    @brief  String hash literal for constexpr converting. Can be used with switch-case</span></div>
-<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;<span class="comment">    @param  pszText - literal text pointer</span></div>
+<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;<span class="comment">    @param  pszStr - literal text pointer</span></div>
 <div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;<span class="comment">    @param  nSize   - literal text size</span></div>
 <div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;<span class="comment">    @retval         - text hash value</span></div>
 <div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;<span class="comment">**/</span></div>
-<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;constexpr <a class="code" href="classqx_1_1basic__string__hash.html">basic_string_hash&lt;fast_hash_string_traits&lt;wchar_t&gt;</a>&gt; <span class="keyword">operator</span><span class="stringliteral">&quot;&quot;</span> _sh(<span class="keyword">const</span> <span class="keywordtype">wchar_t</span>* pszText, <span class="keywordtype">size_t</span> nSize);</div>
+<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;constexpr <a class="code" href="classqx_1_1basic__string__hash.html">basic_string_hash&lt;fast_hash_string_traits&lt;wchar_t&gt;</a>&gt; <span class="keyword">operator</span><span class="stringliteral">&quot;&quot;</span> _sh(<span class="keyword">const</span> <span class="keywordtype">wchar_t</span>* pszStr, <span class="keywordtype">size_t</span> nSize);</div>
 <div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160; </div>
 <div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;} <span class="comment">// namespace literals</span></div>
 <div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160; </div>
@@ -216,7 +216,7 @@ $(function() {
 <div class="ttc" id="astring__traits_8h_html"><div class="ttname"><a href="string__traits_8h.html">string_traits.h</a></div><div class="ttdoc">Contains traits for qx::string.</div></div>
 <div class="ttc" id="astructqx_1_1char__traits_html"><div class="ttname"><a href="structqx_1_1char__traits.html">qx::char_traits</a></div><div class="ttdef"><b>Definition:</b> <a href="string__traits_8h_source.html#l00052">string_traits.h:52</a></div></div>
 <div class="ttc" id="astructqx_1_1fast__hash__string__traits_html"><div class="ttname"><a href="structqx_1_1fast__hash__string__traits.html">qx::fast_hash_string_traits</a></div><div class="ttdef"><b>Definition:</b> <a href="string__hash_8h_source.html#l00091">string_hash.h:92</a></div></div>
-<div class="ttc" id="astructqx_1_1fast__hash__string__traits_html_a579b37a8dcdf4d5f7132a8671d786ee3"><div class="ttname"><a href="structqx_1_1fast__hash__string__traits.html#a579b37a8dcdf4d5f7132a8671d786ee3">qx::fast_hash_string_traits::hash_function</a></div><div class="ttdeci">static constexpr char_traits&lt; value_t &gt;::size_type hash_function(typename char_traits&lt; value_t &gt;::const_pointer sStr, size_t nSeed, typename char_traits&lt; value_t &gt;::size_type nLen) noexcept</div><div class="ttdoc">Hash function realization.</div><div class="ttdef"><b>Definition:</b> <a href="string__hash_8inl_source.html#l00052">string_hash.inl:52</a></div></div>
+<div class="ttc" id="astructqx_1_1fast__hash__string__traits_html_a0489ee09df7e38d25caf9c8c2a5c730b"><div class="ttname"><a href="structqx_1_1fast__hash__string__traits.html#a0489ee09df7e38d25caf9c8c2a5c730b">qx::fast_hash_string_traits::hash_function</a></div><div class="ttdeci">static constexpr char_traits&lt; value_t &gt;::size_type hash_function(typename char_traits&lt; value_t &gt;::const_pointer pszStr, size_t nSeed, typename char_traits&lt; value_t &gt;::size_type nLen) noexcept</div><div class="ttdoc">Hash function realization.</div><div class="ttdef"><b>Definition:</b> <a href="string__hash_8inl_source.html#l00052">string_hash.inl:52</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
