@@ -122,7 +122,7 @@ $(function() {
 <div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="comment">    /**</span></div>
 <div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<span class="comment">        @brief basic_string_hash object constructor</span></div>
 <div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<span class="comment">        @param pszString - string first char pointer</span></div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;<span class="comment">        @param nSize   - string size</span></div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;<span class="comment">        @param nSize     - string size</span></div>
 <div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="comment">    **/</span></div>
 <div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    constexpr <a class="code" href="classqx_1_1basic__string__hash.html">basic_string_hash</a>(const_pointer pszString, size_type nSize) noexcept;</div>
 <div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;<span class="comment"></span> </div>
@@ -193,16 +193,16 @@ $(function() {
 <div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;<span class="comment">/**</span></div>
 <div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;<span class="comment">    @brief  String hash literal for constexpr converting. Can be used with switch-case</span></div>
 <div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;<span class="comment">    @param  pszStr - literal text pointer</span></div>
-<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;<span class="comment">    @param  nSize   - literal text size</span></div>
-<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;<span class="comment">    @retval         - text hash value</span></div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;<span class="comment">    @param  nSize  - literal text size</span></div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;<span class="comment">    @retval        - text hash value</span></div>
 <div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;<span class="comment">**/</span></div>
 <div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;constexpr <a class="code" href="classqx_1_1basic__string__hash.html">basic_string_hash&lt;fast_hash_string_traits&lt;char&gt;</a>&gt; <span class="keyword">operator</span><span class="stringliteral">&quot;&quot;</span> _sh(<span class="keyword">const</span> <span class="keywordtype">char</span>* pszStr, <span class="keywordtype">size_t</span> nSize);</div>
 <div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;<span class="comment"></span> </div>
 <div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;<span class="comment">/**</span></div>
 <div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;<span class="comment">    @brief  String hash literal for constexpr converting. Can be used with switch-case</span></div>
 <div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;<span class="comment">    @param  pszStr - literal text pointer</span></div>
-<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;<span class="comment">    @param  nSize   - literal text size</span></div>
-<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;<span class="comment">    @retval         - text hash value</span></div>
+<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;<span class="comment">    @param  nSize  - literal text size</span></div>
+<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;<span class="comment">    @retval        - text hash value</span></div>
 <div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;<span class="comment">**/</span></div>
 <div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;constexpr <a class="code" href="classqx_1_1basic__string__hash.html">basic_string_hash&lt;fast_hash_string_traits&lt;wchar_t&gt;</a>&gt; <span class="keyword">operator</span><span class="stringliteral">&quot;&quot;</span> _sh(<span class="keyword">const</span> <span class="keywordtype">wchar_t</span>* pszStr, <span class="keywordtype">size_t</span> nSize);</div>
 <div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160; </div>
