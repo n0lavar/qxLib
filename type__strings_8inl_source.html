@@ -118,7 +118,7 @@ $(function() {
 <div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    <span class="keywordtype">size_t</span> nEndMarker = functionSignature.find(endMarker, nStart);</div>
 <div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    <span class="keywordtype">size_t</span> nEnd       = nEndMarker != string_view::npos ? nEndMarker : functionSignature.size();</div>
 <div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160; </div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    <span class="keywordflow">return</span> string_view(functionSignature.data() + nStart, functionSignature.data() + nEnd);</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    <span class="keywordflow">return</span> string_view(functionSignature.data() + nStart, nEnd - nStart);</div>
 <div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;}</div>
 <div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160; </div>
 <div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> T&gt;</div>
@@ -181,89 +181,87 @@ $(function() {
 <div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;    <span class="keywordflow">if</span> (nStartMarker != string_view::npos &amp;&amp; svSignature.find(lambdaMarker, nStartMarker) == nStartMarker + 1)</div>
 <div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;        nStartMarker = string_view::npos;</div>
 <div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160; </div>
-<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;    <span class="keywordflow">return</span> string_view(</div>
-<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;        svSignature.data(),</div>
-<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;        svSignature.data() + (nStartMarker != string_view::npos ? nStartMarker : svSignature.size()));</div>
-<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;}</div>
-<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160; </div>
-<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> T&gt;</div>
-<div class="line"><a name="l00119"></a><span class="lineno"><a class="line" href="classqx_1_1type__strings.html#a1b21097ea01ca20e6ed39584bec78d2d">  119</a></span>&#160;constexpr <span class="keyword">auto</span> <a class="code" href="classqx_1_1type__strings.html#a1b21097ea01ca20e6ed39584bec78d2d">type_strings&lt;T&gt;::get_template_parameters</a>()</div>
-<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;{</div>
-<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;    std::array&lt;string_view, get_num_template_parameters()&gt; tokens;</div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;    <span class="keywordflow">return</span> string_view(svSignature.data(), nStartMarker != string_view::npos ? nStartMarker : svSignature.size());</div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;}</div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160; </div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> T&gt;</div>
+<div class="line"><a name="l00117"></a><span class="lineno"><a class="line" href="classqx_1_1type__strings.html#a1b21097ea01ca20e6ed39584bec78d2d">  117</a></span>&#160;constexpr <span class="keyword">auto</span> <a class="code" href="classqx_1_1type__strings.html#a1b21097ea01ca20e6ed39584bec78d2d">type_strings&lt;T&gt;::get_template_parameters</a>()</div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;{</div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;    std::array&lt;string_view, get_num_template_parameters()&gt; tokens;</div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160; </div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;    <span class="keyword">const</span> string_view svSignature = create_signature();</div>
 <div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160; </div>
-<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;    <span class="keyword">const</span> string_view svSignature = create_signature();</div>
-<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160; </div>
-<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;    <span class="keywordtype">size_t</span> nTokenStart   = 0;</div>
-<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;    <span class="keywordtype">size_t</span> nBraceCounter = 0;</div>
-<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;    <span class="keywordtype">size_t</span> nParam        = 0;</div>
-<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160; </div>
-<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;    <span class="keyword">const</span> <span class="keyword">auto</span> add_token = [&amp;tokens, &amp;svSignature](<span class="keywordtype">size_t</span> nToken, <span class="keywordtype">size_t</span> nStart, <span class="keywordtype">size_t</span> nEnd)</div>
-<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;    {</div>
-<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;        <span class="keywordflow">while</span> (svSignature[nStart] == QX_TEXT(<span class="charliteral">&#39; &#39;</span>))</div>
-<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;            ++nStart;</div>
-<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160; </div>
-<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;        <span class="keywordflow">while</span> (svSignature[nEnd] == QX_TEXT(<span class="charliteral">&#39; &#39;</span>))</div>
-<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;            --nEnd;</div>
-<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160; </div>
-<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;        constexpr char_type classMarker[] = QX_TEXT(<span class="stringliteral">&quot;class &quot;</span>);</div>
-<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;        <span class="keywordflow">if</span> (string_view(svSignature.data() + nStart, svSignature.data() + nEnd).starts_with(classMarker))</div>
-<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;            nStart += <a class="code" href="string__utils_8h.html#aa1f7d3648d28dcef62c0db015730218d">qx::strlen</a>(classMarker);</div>
-<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160; </div>
-<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;        tokens[nToken] = string_view(svSignature.data() + nStart, svSignature.data() + nEnd + 1);</div>
-<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;    };</div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;    <span class="keywordtype">size_t</span> nTokenStart   = 0;</div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;    <span class="keywordtype">size_t</span> nBraceCounter = 0;</div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;    <span class="keywordtype">size_t</span> nParam        = 0;</div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160; </div>
+<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;    <span class="keyword">const</span> <span class="keyword">auto</span> add_token = [&amp;tokens, &amp;svSignature](<span class="keywordtype">size_t</span> nToken, <span class="keywordtype">size_t</span> nStart, <span class="keywordtype">size_t</span> nEnd)</div>
+<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;    {</div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;        <span class="keywordflow">while</span> (svSignature[nStart] == QX_TEXT(<span class="charliteral">&#39; &#39;</span>))</div>
+<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;            ++nStart;</div>
+<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160; </div>
+<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;        <span class="keywordflow">while</span> (svSignature[nEnd] == QX_TEXT(<span class="charliteral">&#39; &#39;</span>))</div>
+<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;            --nEnd;</div>
+<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160; </div>
+<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;        constexpr char_type classMarker[] = QX_TEXT(<span class="stringliteral">&quot;class &quot;</span>);</div>
+<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;        <span class="keywordflow">if</span> (string_view(svSignature.data() + nStart, nEnd - nStart).starts_with(classMarker))</div>
+<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;            nStart += <a class="code" href="string__utils_8h.html#aa1f7d3648d28dcef62c0db015730218d">qx::strlen</a>(classMarker);</div>
+<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160; </div>
+<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;        tokens[nToken] = string_view(svSignature.data() + nStart, nEnd + 1 - nStart);</div>
+<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;    };</div>
+<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160; </div>
+<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;    <span class="keywordtype">bool</span> bLambda = <span class="keyword">false</span>;</div>
 <div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160; </div>
-<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;    <span class="keywordtype">bool</span> bLambda = <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160; </div>
-<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = 0; i &lt; svSignature.size(); ++i)</div>
-<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;    {</div>
-<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;        <span class="keywordflow">switch</span> (svSignature[i])</div>
-<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;        {</div>
-<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;        <span class="keywordflow">case</span> QX_TEXT(<span class="charliteral">&#39;&lt;&#39;</span>):</div>
-<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;            ++nBraceCounter;</div>
-<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160; </div>
-<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;            <span class="keywordflow">if</span> (nTokenStart == 0)</div>
-<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;                nTokenStart = i + 1;</div>
-<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;            <span class="keywordflow">else</span> <span class="keywordflow">if</span> (!bLambda &amp;&amp; svSignature.find(lambdaMarker, i + 1) == i + 1)</div>
-<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;                bLambda = <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = 0; i &lt; svSignature.size(); ++i)</div>
+<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;    {</div>
+<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;        <span class="keywordflow">switch</span> (svSignature[i])</div>
+<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;        {</div>
+<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;        <span class="keywordflow">case</span> QX_TEXT(<span class="charliteral">&#39;&lt;&#39;</span>):</div>
+<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;            ++nBraceCounter;</div>
+<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160; </div>
+<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;            <span class="keywordflow">if</span> (nTokenStart == 0)</div>
+<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;                nTokenStart = i + 1;</div>
+<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;            <span class="keywordflow">else</span> <span class="keywordflow">if</span> (!bLambda &amp;&amp; svSignature.find(lambdaMarker, i + 1) == i + 1)</div>
+<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;                bLambda = <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160; </div>
+<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;            <span class="keywordflow">break</span>;</div>
 <div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160; </div>
-<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;            <span class="keywordflow">break</span>;</div>
-<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160; </div>
-<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;        <span class="keywordflow">case</span> QX_TEXT(<span class="charliteral">&#39;&gt;&#39;</span>):</div>
-<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;            --nBraceCounter;</div>
-<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;            <span class="keywordflow">if</span> (bLambda)</div>
-<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;                bLambda = <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;        <span class="keywordflow">case</span> QX_TEXT(<span class="charliteral">&#39;&gt;&#39;</span>):</div>
+<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;            --nBraceCounter;</div>
+<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;            <span class="keywordflow">if</span> (bLambda)</div>
+<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;                bLambda = <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160; </div>
+<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;            <span class="keywordflow">break</span>;</div>
 <div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160; </div>
-<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;            <span class="keywordflow">break</span>;</div>
-<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160; </div>
-<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;        <span class="keywordflow">case</span> QX_TEXT(<span class="charliteral">&#39;,&#39;</span>):</div>
-<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;            <span class="keywordflow">if</span> (nBraceCounter == 1)</div>
-<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;            {</div>
-<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;                add_token(nParam, nTokenStart, i - 1);</div>
-<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;                nTokenStart = i + 1;</div>
-<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;                ++nParam;</div>
-<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;            }</div>
-<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;            <span class="keywordflow">break</span>;</div>
-<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;        }</div>
-<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;    }</div>
-<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160; </div>
-<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;    <span class="keywordflow">if</span> (tokens.size() &gt; 0)</div>
-<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;    {</div>
-<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;        <span class="keywordtype">size_t</span> nTokenEnd = svSignature.size() - 1;</div>
-<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160; </div>
-<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;        <span class="keywordflow">if</span> (svSignature[nTokenEnd] == QX_TEXT(<span class="charliteral">&#39; &#39;</span>))</div>
-<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;            --nTokenEnd;</div>
-<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160; </div>
-<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;        <span class="keywordflow">if</span> (svSignature[nTokenEnd] == QX_TEXT(<span class="charliteral">&#39;&gt;&#39;</span>))</div>
-<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;            --nTokenEnd;</div>
-<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160; </div>
-<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;        add_token(nParam, nTokenStart, nTokenEnd);</div>
-<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;    }</div>
-<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160; </div>
-<div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;    <span class="keywordflow">return</span> tokens;</div>
-<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;}</div>
-<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160; </div>
-<div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;} <span class="comment">// namespace qx</span></div>
-<div class="ttc" id="aclassqx_1_1type__strings_html_a1b21097ea01ca20e6ed39584bec78d2d"><div class="ttname"><a href="classqx_1_1type__strings.html#a1b21097ea01ca20e6ed39584bec78d2d">qx::type_strings::get_template_parameters</a></div><div class="ttdeci">static constexpr auto get_template_parameters()</div><div class="ttdoc">Get type template parameters.</div><div class="ttdef"><b>Definition:</b> <a href="type__strings_8inl_source.html#l00119">type_strings.inl:119</a></div></div>
+<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;        <span class="keywordflow">case</span> QX_TEXT(<span class="charliteral">&#39;,&#39;</span>):</div>
+<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;            <span class="keywordflow">if</span> (nBraceCounter == 1)</div>
+<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;            {</div>
+<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;                add_token(nParam, nTokenStart, i - 1);</div>
+<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;                nTokenStart = i + 1;</div>
+<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;                ++nParam;</div>
+<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;            }</div>
+<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;            <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;        }</div>
+<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;    }</div>
+<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160; </div>
+<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;    <span class="keywordflow">if</span> (tokens.size() &gt; 0)</div>
+<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;    {</div>
+<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;        <span class="keywordtype">size_t</span> nTokenEnd = svSignature.size() - 1;</div>
+<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160; </div>
+<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;        <span class="keywordflow">if</span> (svSignature[nTokenEnd] == QX_TEXT(<span class="charliteral">&#39; &#39;</span>))</div>
+<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;            --nTokenEnd;</div>
+<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160; </div>
+<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;        <span class="keywordflow">if</span> (svSignature[nTokenEnd] == QX_TEXT(<span class="charliteral">&#39;&gt;&#39;</span>))</div>
+<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;            --nTokenEnd;</div>
+<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160; </div>
+<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;        add_token(nParam, nTokenStart, nTokenEnd);</div>
+<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;    }</div>
+<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160; </div>
+<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;    <span class="keywordflow">return</span> tokens;</div>
+<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;}</div>
+<div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160; </div>
+<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;} <span class="comment">// namespace qx</span></div>
+<div class="ttc" id="aclassqx_1_1type__strings_html_a1b21097ea01ca20e6ed39584bec78d2d"><div class="ttname"><a href="classqx_1_1type__strings.html#a1b21097ea01ca20e6ed39584bec78d2d">qx::type_strings::get_template_parameters</a></div><div class="ttdeci">static constexpr auto get_template_parameters()</div><div class="ttdoc">Get type template parameters.</div><div class="ttdef"><b>Definition:</b> <a href="type__strings_8inl_source.html#l00117">type_strings.inl:117</a></div></div>
 <div class="ttc" id="aclassqx_1_1type__strings_html_a2b0f85eb1a7376081540b6227cf17a72"><div class="ttname"><a href="classqx_1_1type__strings.html#a2b0f85eb1a7376081540b6227cf17a72">qx::type_strings::get_name</a></div><div class="ttdeci">static constexpr string_view get_name()</div><div class="ttdoc">Get type name (short name without template parameters)</div><div class="ttdef"><b>Definition:</b> <a href="type__strings_8inl_source.html#l00104">type_strings.inl:104</a></div></div>
 <div class="ttc" id="aclassqx_1_1type__strings_html_aac577cf90dae3c128a80dddd3688258d"><div class="ttname"><a href="classqx_1_1type__strings.html#aac577cf90dae3c128a80dddd3688258d">qx::type_strings::get_signature</a></div><div class="ttdeci">static constexpr string_view get_signature()</div><div class="ttdoc">Get type signature (full name with template parameters)</div><div class="ttdef"><b>Definition:</b> <a href="type__strings_8inl_source.html#l00098">type_strings.inl:98</a></div></div>
 <div class="ttc" id="astring__utils_8h_html_aa1f7d3648d28dcef62c0db015730218d"><div class="ttname"><a href="string__utils_8h.html#aa1f7d3648d28dcef62c0db015730218d">qx::strlen</a></div><div class="ttdeci">constexpr std::size_t strlen(const value_t *psz)</div><div class="ttdoc">Constexpr string length.</div><div class="ttdef"><b>Definition:</b> <a href="string__utils_8h_source.html#l00363">string_utils.h:363</a></div></div>
