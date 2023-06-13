@@ -90,7 +90,7 @@ $(function() {
 <div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="keyword">template</span>&lt;GLenum ShaderType&gt;</div>
 <div class="line"><a name="l00020"></a><span class="lineno"><a class="line" href="classqx_1_1shader__base.html#aadcf8a92cde30efadfeb8bd0ecae726d">   20</a></span>&#160;<span class="keyword">inline</span> <span class="keywordtype">string</span> <a class="code" href="classqx_1_1shader__base.html#aadcf8a92cde30efadfeb8bd0ecae726d">shader_base&lt;ShaderType&gt;::Init</a>(<span class="keyword">const</span> GLchar* pszShaderCode)</div>
 <div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;{</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    <span class="keywordtype">string</span> sError;</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    <a class="code" href="classqx_1_1basic__string.html">cstring</a> sError;</div>
 <div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160; </div>
 <div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    <span class="keywordflow">if</span> (pszShaderCode)</div>
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    {</div>
@@ -117,7 +117,7 @@ $(function() {
 <div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;        sError = <span class="stringliteral">&quot;Nullptr passed as shader text pointer&quot;</span>;</div>
 <div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    }</div>
 <div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160; </div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    <span class="keywordflow">return</span> sError;</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="string__converters_8h.html#aa79990874c6134def8c164e7d34a158c">qx::to_string</a>(sError);</div>
 <div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;}</div>
 <div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160; </div>
 <div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160; </div>
@@ -136,11 +136,13 @@ $(function() {
 <div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;}</div>
 <div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160; </div>
 <div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;} <span class="comment">// namespace qx</span></div>
+<div class="ttc" id="aclassqx_1_1basic__string_html"><div class="ttname"><a href="classqx_1_1basic__string.html">qx::basic_string</a></div><div class="ttdoc">String class.</div><div class="ttdef"><b>Definition:</b> <a href="string_8h_source.html#l00064">string.h:65</a></div></div>
 <div class="ttc" id="aclassqx_1_1basic__string_html_a652ef7b38f73741db1e265dd2b96ddff"><div class="ttname"><a href="classqx_1_1basic__string.html#a652ef7b38f73741db1e265dd2b96ddff">qx::basic_string::assign</a></div><div class="ttdeci">void assign(size_type nSymbols, value_type chSymbol) noexcept</div><div class="ttdoc">Assign by filling.</div><div class="ttdef"><b>Definition:</b> <a href="string_8inl_source.html#l00064">string.inl:64</a></div></div>
 <div class="ttc" id="aclassqx_1_1shader__base_html_a1551c275ea5622d62a7cd0c2f7fc022b"><div class="ttname"><a href="classqx_1_1shader__base.html#a1551c275ea5622d62a7cd0c2f7fc022b">qx::shader_base::~shader_base</a></div><div class="ttdeci">~shader_base()</div><div class="ttdoc">shader_base object destructor</div><div class="ttdef"><b>Definition:</b> <a href="shaders_8inl_source.html#l00014">shaders.inl:14</a></div></div>
 <div class="ttc" id="aclassqx_1_1shader__base_html_a2b6adadaeb2ef4919c3c379e5170eb11"><div class="ttname"><a href="classqx_1_1shader__base.html#a2b6adadaeb2ef4919c3c379e5170eb11">qx::shader_base::GetID</a></div><div class="ttdeci">GLuint GetID() const</div><div class="ttdoc">Get shader name.</div><div class="ttdef"><b>Definition:</b> <a href="shaders_8inl_source.html#l00054">shaders.inl:54</a></div></div>
 <div class="ttc" id="aclassqx_1_1shader__base_html_a2e87b997d73eed388b96f4ccc1a04fc2"><div class="ttname"><a href="classqx_1_1shader__base.html#a2e87b997d73eed388b96f4ccc1a04fc2">qx::shader_base::GetParameter</a></div><div class="ttdeci">GLint GetParameter(GLenum eParameter) const</div><div class="ttdoc">Get shader parameter.</div><div class="ttdef"><b>Definition:</b> <a href="shaders_8inl_source.html#l00060">shaders.inl:60</a></div></div>
 <div class="ttc" id="aclassqx_1_1shader__base_html_aadcf8a92cde30efadfeb8bd0ecae726d"><div class="ttname"><a href="classqx_1_1shader__base.html#aadcf8a92cde30efadfeb8bd0ecae726d">qx::shader_base::Init</a></div><div class="ttdeci">string Init(const GLchar *pszShaderCode)</div><div class="ttdoc">Init (compile) shader.</div><div class="ttdef"><b>Definition:</b> <a href="shaders_8inl_source.html#l00020">shaders.inl:20</a></div></div>
+<div class="ttc" id="astring__converters_8h_html_aa79990874c6134def8c164e7d34a158c"><div class="ttname"><a href="string__converters_8h.html#aa79990874c6134def8c164e7d34a158c">qx::to_string</a></div><div class="ttdeci">string to_string(qx::cstring_view stringView, const std::locale &amp;locale=std::locale())</div><div class="ttdoc">Convert a char string to common string type.</div><div class="ttdef"><b>Definition:</b> <a href="string__converters_8h_source.html#l00081">string_converters.h:81</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

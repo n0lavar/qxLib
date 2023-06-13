@@ -105,7 +105,7 @@ $(function() {
 <div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160; </div>
 <div class="line"><a name="l00035"></a><span class="lineno"><a class="line" href="classqx_1_1base__shader__program.html#ab42949735e79acef38898f6d77414034">   35</a></span>&#160;<span class="keyword">inline</span> <span class="keywordtype">string</span> <a class="code" href="classqx_1_1base__shader__program.html#ab42949735e79acef38898f6d77414034">base_shader_program::Link</a>() noexcept</div>
 <div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;{</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    <span class="keywordtype">string</span> sError;</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    <a class="code" href="classqx_1_1basic__string.html">cstring</a> sError;</div>
 <div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160; </div>
 <div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    glLinkProgram(m_nProgram);</div>
 <div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    <span class="keyword">const</span> GLint bSuccess = <a class="code" href="classqx_1_1base__shader__program.html#aa0fdce7f1d798b3489a1ee5c86cb16a6">GetParameter</a>(GL_LINK_STATUS);</div>
@@ -113,11 +113,11 @@ $(function() {
 <div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    <span class="keywordflow">if</span> (bSuccess != GL_TRUE)</div>
 <div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    {</div>
 <div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;        <span class="keyword">const</span> GLsizei nLogLength = <a class="code" href="classqx_1_1base__shader__program.html#aa0fdce7f1d798b3489a1ee5c86cb16a6">GetParameter</a>(GL_INFO_LOG_LENGTH);</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;        sError                   = <a class="code" href="classqx_1_1basic__string.html">string</a>(nLogLength, <span class="charliteral">&#39;\0&#39;</span>);</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;        sError                   = <a class="code" href="classqx_1_1basic__string.html">cstring</a>(nLogLength, <span class="charliteral">&#39;\0&#39;</span>);</div>
 <div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;        glGetProgramInfoLog(m_nProgram, nLogLength, <span class="keyword">nullptr</span>, sError.data());</div>
 <div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    }</div>
 <div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160; </div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    <span class="keywordflow">return</span> sError;</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="string__converters_8h.html#aa79990874c6134def8c164e7d34a158c">qx::to_string</a>(sError);</div>
 <div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;}</div>
 <div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160; </div>
 <div class="line"><a name="l00052"></a><span class="lineno"><a class="line" href="classqx_1_1base__shader__program.html#aa5ea134409e615efce3ff3fcd3c44d8d">   52</a></span>&#160;<span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="classqx_1_1base__shader__program.html#aa5ea134409e615efce3ff3fcd3c44d8d">base_shader_program::Use</a>() const noexcept</div>
@@ -330,8 +330,9 @@ $(function() {
 <div class="ttc" id="aclassqx_1_1base__shader__program_html_ab791367d99d140d23fbcd47ee7a1a1fc"><div class="ttname"><a href="classqx_1_1base__shader__program.html#ab791367d99d140d23fbcd47ee7a1a1fc">qx::base_shader_program::~base_shader_program</a></div><div class="ttdeci">~base_shader_program() noexcept</div><div class="ttdoc">base_shader_program object destructor</div><div class="ttdef"><b>Definition:</b> <a href="shader__program_8inl_source.html#l00018">shader_program.inl:18</a></div></div>
 <div class="ttc" id="aclassqx_1_1base__shader__program_html_acd3665402a1cd7cf4c2b2e18a7c8afd8"><div class="ttname"><a href="classqx_1_1base__shader__program.html#acd3665402a1cd7cf4c2b2e18a7c8afd8">qx::base_shader_program::operator==</a></div><div class="ttdeci">bool operator==(const base_shader_program &amp;other) const noexcept</div><div class="ttdoc">operator==</div><div class="ttdef"><b>Definition:</b> <a href="shader__program_8inl_source.html#l00234">shader_program.inl:234</a></div></div>
 <div class="ttc" id="aclassqx_1_1base__shader__program_html_ae66925f196df50ce85a5aae6f5c6999f"><div class="ttname"><a href="classqx_1_1base__shader__program.html#ae66925f196df50ce85a5aae6f5c6999f">qx::base_shader_program::GetUniformLocation</a></div><div class="ttdeci">GLint GetUniformLocation(const GLchar *pszName) const noexcept</div><div class="ttdoc">Get uniform location based on it's name.</div><div class="ttdef"><b>Definition:</b> <a href="shader__program_8inl_source.html#l00209">shader_program.inl:209</a></div></div>
-<div class="ttc" id="aclassqx_1_1basic__string_html"><div class="ttname"><a href="classqx_1_1basic__string.html">qx::basic_string</a></div><div class="ttdoc">String class.</div><div class="ttdef"><b>Definition:</b> <a href="string_8h_source.html#l00063">string.h:64</a></div></div>
+<div class="ttc" id="aclassqx_1_1basic__string_html"><div class="ttname"><a href="classqx_1_1basic__string.html">qx::basic_string</a></div><div class="ttdoc">String class.</div><div class="ttdef"><b>Definition:</b> <a href="string_8h_source.html#l00064">string.h:65</a></div></div>
 <div class="ttc" id="aclassqx_1_1shader__base_html"><div class="ttname"><a href="classqx_1_1shader__base.html">qx::shader_base</a></div><div class="ttdoc">OpenGL base shader.</div><div class="ttdef"><b>Definition:</b> <a href="shaders_8h_source.html#l00043">shaders.h:44</a></div></div>
+<div class="ttc" id="astring__converters_8h_html_aa79990874c6134def8c164e7d34a158c"><div class="ttname"><a href="string__converters_8h.html#aa79990874c6134def8c164e7d34a158c">qx::to_string</a></div><div class="ttdeci">string to_string(qx::cstring_view stringView, const std::locale &amp;locale=std::locale())</div><div class="ttdoc">Convert a char string to common string type.</div><div class="ttdef"><b>Definition:</b> <a href="string__converters_8h_source.html#l00081">string_converters.h:81</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

@@ -213,14 +213,9 @@ Static Public Member Functions</h2></td></tr>
 <tr class="memitem:a4081e601a2e380e26e9784f931692ae4"><td class="memItemLeft" align="right" valign="top">constexpr static <a class="el" href="classqx_1_1color.html">color</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1color.html#a4081e601a2e380e26e9784f931692ae4">brighten</a> (const <a class="el" href="classqx_1_1color.html">color</a> &amp;other, float fPercent) noexcept</td></tr>
 <tr class="memdesc:a4081e601a2e380e26e9784f931692ae4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Make brighter color.  <a href="classqx_1_1color.html#a4081e601a2e380e26e9784f931692ae4">More...</a><br /></td></tr>
 <tr class="separator:a4081e601a2e380e26e9784f931692ae4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab70c055e76fe8cd2f2f86deda2205498"><td class="memTemplParams" colspan="2">template&lt;class char_t &gt; </td></tr>
-<tr class="memitem:ab70c055e76fe8cd2f2f86deda2205498"><td class="memTemplItemLeft" align="right" valign="top">static std::optional&lt; <a class="el" href="classqx_1_1color.html">color</a> &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classqx_1_1color.html#ab70c055e76fe8cd2f2f86deda2205498">from_string</a> (std::basic_string_view&lt; char_t &gt; svColorName) noexcept</td></tr>
-<tr class="memdesc:ab70c055e76fe8cd2f2f86deda2205498"><td class="mdescLeft">&#160;</td><td class="mdescRight">Try to create color from string.  <a href="classqx_1_1color.html#ab70c055e76fe8cd2f2f86deda2205498">More...</a><br /></td></tr>
-<tr class="separator:ab70c055e76fe8cd2f2f86deda2205498"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a92fbf8b996060b124a956962209ab262"><td class="memTemplParams" colspan="2">template&lt;class char_t &gt; </td></tr>
-<tr class="memitem:a92fbf8b996060b124a956962209ab262"><td class="memTemplItemLeft" align="right" valign="top">static std::optional&lt; <a class="el" href="classqx_1_1color.html">color</a> &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classqx_1_1color.html#a92fbf8b996060b124a956962209ab262">from_string</a> (const char_t *pszColorName) noexcept</td></tr>
-<tr class="memdesc:a92fbf8b996060b124a956962209ab262"><td class="mdescLeft">&#160;</td><td class="mdescRight">Try to create color from string.  <a href="classqx_1_1color.html#a92fbf8b996060b124a956962209ab262">More...</a><br /></td></tr>
-<tr class="separator:a92fbf8b996060b124a956962209ab262"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a318805eba93a07abe904b37ae29fd531"><td class="memItemLeft" align="right" valign="top">static std::optional&lt; <a class="el" href="classqx_1_1color.html">color</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1color.html#a318805eba93a07abe904b37ae29fd531">from_string</a> (string_view svColorName) noexcept</td></tr>
+<tr class="memdesc:a318805eba93a07abe904b37ae29fd531"><td class="mdescLeft">&#160;</td><td class="mdescRight">Try to create color from string.  <a href="classqx_1_1color.html#a318805eba93a07abe904b37ae29fd531">More...</a><br /></td></tr>
+<tr class="separator:a318805eba93a07abe904b37ae29fd531"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a76b77e9e9b1a324bac4b8df930358731"><td class="memItemLeft" align="right" valign="top">static constexpr <a class="el" href="classqx_1_1color.html">color</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1color.html#a76b77e9e9b1a324bac4b8df930358731">empty</a> () noexcept</td></tr>
 <tr class="memdesc:a76b77e9e9b1a324bac4b8df930358731"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get empty color (0, 0, 0, 0)  <a href="classqx_1_1color.html#a76b77e9e9b1a324bac4b8df930358731">More...</a><br /></td></tr>
 <tr class="separator:a76b77e9e9b1a324bac4b8df930358731"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -233,7 +228,7 @@ Static Public Member Functions</h2></td></tr>
 <p>~ </p><dl class="section author"><dt>Author</dt><dd>Khrapov </dd></dl>
 <dl class="section date"><dt>Date</dt><dd>10.04.2021 </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="color_8h_source.html#l00037">37</a> of file <a class="el" href="color_8h_source.html">color.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="color_8h_source.html#l00038">38</a> of file <a class="el" href="color_8h_source.html">color.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="ac4b3d1b317dabde61609482c013ce297"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ac4b3d1b317dabde61609482c013ce297">&#9670;&nbsp;</a></span>color() <span class="overload">[1/5]</span></h2>
@@ -900,17 +895,15 @@ Static Public Member Functions</h2></td></tr>
 </li>
 </ul>
 
-<p class="definition">Definition at line <a class="el" href="color_8inl_source.html#l00356">356</a> of file <a class="el" href="color_8inl_source.html">color.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="color_8inl_source.html#l00336">336</a> of file <a class="el" href="color_8inl_source.html">color.inl</a>.</p>
 
 </div>
 </div>
-<a id="a92fbf8b996060b124a956962209ab262"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a92fbf8b996060b124a956962209ab262">&#9670;&nbsp;</a></span>from_string() <span class="overload">[1/2]</span></h2>
+<a id="a318805eba93a07abe904b37ae29fd531"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a318805eba93a07abe904b37ae29fd531">&#9670;&nbsp;</a></span>from_string()</h2>
 
 <div class="memitem">
 <div class="memproto">
-<div class="memtemplate">
-template&lt;class char_t &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -918,57 +911,7 @@ template&lt;class char_t &gt; </div>
         <tr>
           <td class="memname">std::optional&lt; <a class="el" href="classqx_1_1color.html">color</a> &gt; qx::color::from_string </td>
           <td>(</td>
-          <td class="paramtype">const char_t *&#160;</td>
-          <td class="paramname"><em>pszColorName</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span><span class="mlabel">noexcept</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Try to create color from string. </p>
-<dl class="tparams"><dt>Template Parameters</dt><dd>
-  <table class="tparams">
-    <tr><td class="paramname">char_t</td><td>- char type </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">pszColorName</td><td>- color name: css style (alice_blue, AliceBlue, aliceblue) or #F0F8FF or 0xF0F8FFFF(0xRRGGBBAA) or 0xF0F8FF(0xRRGGBB) </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="retval"><dt>Return values</dt><dd>
-  <table class="retval">
-    <tr><td class="paramname">-</td><td>found color or nullopt </td></tr>
-  </table>
-  </dd>
-</dl>
-
-<p class="definition">Definition at line <a class="el" href="color_8inl_source.html#l00351">351</a> of file <a class="el" href="color_8inl_source.html">color.inl</a>.</p>
-
-</div>
-</div>
-<a id="ab70c055e76fe8cd2f2f86deda2205498"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab70c055e76fe8cd2f2f86deda2205498">&#9670;&nbsp;</a></span>from_string() <span class="overload">[2/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class char_t &gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">std::optional&lt; <a class="el" href="classqx_1_1color.html">color</a> &gt; qx::color::from_string </td>
-          <td>(</td>
-          <td class="paramtype">std::basic_string_view&lt; char_t &gt;&#160;</td>
+          <td class="paramtype">string_view&#160;</td>
           <td class="paramname"><em>svColorName</em></td><td>)</td>
           <td></td>
         </tr>
@@ -981,12 +924,6 @@ template&lt;class char_t &gt; </div>
 </div><div class="memdoc">
 
 <p>Try to create color from string. </p>
-<dl class="tparams"><dt>Template Parameters</dt><dd>
-  <table class="tparams">
-    <tr><td class="paramname">char_t</td><td>- char type </td></tr>
-  </table>
-  </dd>
-</dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">svColorName</td><td>- color name: css style (alice_blue, AliceBlue, aliceblue) or #F0F8FF or 0xF0F8FFFF(0xRRGGBBAA) or 0xF0F8FF(0xRRGGBB) </td></tr>
@@ -1000,7 +937,7 @@ template&lt;class char_t &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="color_8inl_source.html#l00306">306</a> of file <a class="el" href="color_8inl_source.html">color.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="color_8inl_source.html#l00296">296</a> of file <a class="el" href="color_8inl_source.html">color.inl</a>.</p>
 
 </div>
 </div>
@@ -1729,7 +1666,7 @@ template&lt;class char_t &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="color_8inl_source.html#l00361">361</a> of file <a class="el" href="color_8inl_source.html">color.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="color_8inl_source.html#l00341">341</a> of file <a class="el" href="color_8inl_source.html">color.inl</a>.</p>
 
 </div>
 </div>

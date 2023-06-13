@@ -81,88 +81,46 @@ $(function() {
 <div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="keyword">namespace </span>qx</div>
 <div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;{</div>
 <div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160; </div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> <span class="keywordtype">char</span>_t&gt;</div>
-<div class="line"><a name="l00014"></a><span class="lineno"><a class="line" href="classqx_1_1logger.html#a2a179460972fa2d19cdcc425d1c06521">   14</a></span>&#160;<span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="classqx_1_1logger.html#a2a179460972fa2d19cdcc425d1c06521">logger::log</a>(</div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;    log_level       eLogLevel,</div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;    <span class="keyword">const</span> char_t*   pszFormat,</div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;    <span class="keyword">const</span> <a class="code" href="classqx_1_1category.html">category</a>&amp; <a class="code" href="classqx_1_1category.html">category</a>,</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    <span class="keyword">const</span> <span class="keywordtype">char</span>*     pszFile,</div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    <span class="keyword">const</span> <span class="keywordtype">char</span>*     pszFunction,</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    <span class="keywordtype">int</span>             nLine,</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    ...)</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;{</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    <span class="keywordflow">if</span> (eLogLevel == log_level::none)</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;        <span class="keywordflow">return</span>;</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160; </div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    va_list args;</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    va_start(args, nLine);</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160; </div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    do_log(eLogLevel, pszFormat, <a class="code" href="classqx_1_1category.html">category</a>, pszFile, pszFunction, nLine, args);</div>
+<div class="line"><a name="l00013"></a><span class="lineno"><a class="line" href="classqx_1_1logger.html#a0f3ad21a55f2984759f50963fa878ffe">   13</a></span>&#160;<span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="classqx_1_1logger.html#a0f3ad21a55f2984759f50963fa878ffe">logger::log</a>(</div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;    log_level       eLogLevel,</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;    string_view     svFormat,</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;    <span class="keyword">const</span> <a class="code" href="classqx_1_1category.html">category</a>&amp; <a class="code" href="classqx_1_1category.html">category</a>,</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;    string_view     svFile,</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    string_view     svFunction,</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    <span class="keywordtype">int</span>             nLine,</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    ...)</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;{</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    va_list args;</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    va_start(args, nLine);</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160; </div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    <span class="keywordflow">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span>&amp; stream : m_Streams)</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;        stream-&gt;log(eLogLevel, svFormat, <a class="code" href="classqx_1_1category.html">category</a>, svFile, svFunction, nLine, args);</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160; </div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    va_end(args);</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;}</div>
 <div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160; </div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    va_end(args);</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;}</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160; </div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> <span class="keywordtype">char</span>_t&gt;</div>
-<div class="line"><a name="l00035"></a><span class="lineno"><a class="line" href="classqx_1_1logger.html#a6af42ca286a8153595c002f5bb41910e">   35</a></span>&#160;<span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="classqx_1_1logger.html#a2a179460972fa2d19cdcc425d1c06521">logger::log</a>(</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    log_level                   eLogLevel,</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    <span class="keyword">const</span> <a class="code" href="classqx_1_1basic__string.html">basic_string&lt;char_t&gt;</a>&amp; sFormat,</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    <span class="keyword">const</span> <a class="code" href="classqx_1_1category.html">category</a>&amp;             <a class="code" href="classqx_1_1category.html">category</a>,</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    <span class="keyword">const</span> <span class="keywordtype">char</span>*                 pszFile,</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    <span class="keyword">const</span> <span class="keywordtype">char</span>*                 pszFunction,</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    <span class="keywordtype">int</span>                         nLine,</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    ...)</div>
+<div class="line"><a name="l00031"></a><span class="lineno"><a class="line" href="classqx_1_1logger.html#af975c6169624a47a72ae8995161e140f">   31</a></span>&#160;<span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="classqx_1_1logger.html#af975c6169624a47a72ae8995161e140f">logger::flush</a>()</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;{</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    <span class="keywordflow">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span>&amp; stream : m_Streams)</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;        stream-&gt;flush();</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;}</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160; </div>
+<div class="line"><a name="l00037"></a><span class="lineno"><a class="line" href="classqx_1_1logger.html#abec0212ef10bb7feb65d6f587a989b61">   37</a></span>&#160;<span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="classqx_1_1logger.html#abec0212ef10bb7feb65d6f587a989b61">logger::add_stream</a>(std::unique_ptr&lt;base_logger_stream&gt; pStream) noexcept</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;{</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    m_Streams.push_back(std::move(pStream));</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;}</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160; </div>
+<div class="line"><a name="l00042"></a><span class="lineno"><a class="line" href="classqx_1_1logger.html#acbd37fc0636753a6061a745ca1ab8f9e">   42</a></span>&#160;<span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="classqx_1_1logger.html#acbd37fc0636753a6061a745ca1ab8f9e">logger::reset</a>() noexcept</div>
 <div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;{</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    va_list args;</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    va_start(args, nLine);</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    m_Streams.clear();</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;}</div>
 <div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160; </div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    do_log(eLogLevel, sFormat.<a class="code" href="classqx_1_1basic__string.html#ac98fc25780d542fd98864eb544752b2a">c_str</a>(), <a class="code" href="classqx_1_1category.html">category</a>, pszFile, pszFunction, nLine, args);</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160; </div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    va_end(args);</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;}</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160; </div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> <span class="keywordtype">char</span>_t&gt;</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<span class="keyword">inline</span> <span class="keywordtype">void</span> logger::do_log(</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    log_level       eLogLevel,</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    <span class="keyword">const</span> char_t*   pszFormat,</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    <span class="keyword">const</span> <a class="code" href="classqx_1_1category.html">category</a>&amp; <a class="code" href="classqx_1_1category.html">category</a>,</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    <span class="keyword">const</span> <span class="keywordtype">char</span>*     pszFile,</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    <span class="keyword">const</span> <span class="keywordtype">char</span>*     pszFunction,</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    <span class="keywordtype">int</span>             nLine,</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    va_list         args)</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;{</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    va_list argsCopy;</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    va_copy(argsCopy, args);</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160; </div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    <span class="keywordflow">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span>&amp; stream : m_Streams)</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;        stream-&gt;log(eLogLevel, pszFormat, <a class="code" href="classqx_1_1category.html">category</a>, pszFile, pszFunction, nLine, argsCopy);</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160; </div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;    va_end(argsCopy);</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;}</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160; </div>
-<div class="line"><a name="l00071"></a><span class="lineno"><a class="line" href="classqx_1_1logger.html#af975c6169624a47a72ae8995161e140f">   71</a></span>&#160;<span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="classqx_1_1logger.html#af975c6169624a47a72ae8995161e140f">logger::flush</a>()</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;{</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;    <span class="keywordflow">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span>&amp; stream : m_Streams)</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;        stream-&gt;flush();</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;}</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160; </div>
-<div class="line"><a name="l00077"></a><span class="lineno"><a class="line" href="classqx_1_1logger.html#abec0212ef10bb7feb65d6f587a989b61">   77</a></span>&#160;<span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="classqx_1_1logger.html#abec0212ef10bb7feb65d6f587a989b61">logger::add_stream</a>(std::unique_ptr&lt;base_logger_stream&gt; pStream) noexcept</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;{</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;    m_Streams.push_back(std::move(pStream));</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;}</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160; </div>
-<div class="line"><a name="l00082"></a><span class="lineno"><a class="line" href="classqx_1_1logger.html#acbd37fc0636753a6061a745ca1ab8f9e">   82</a></span>&#160;<span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="classqx_1_1logger.html#acbd37fc0636753a6061a745ca1ab8f9e">logger::reset</a>() noexcept</div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;{</div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;    m_Streams.clear();</div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;}</div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160; </div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;} <span class="comment">// namespace qx</span></div>
-<div class="ttc" id="aclassqx_1_1basic__string_html"><div class="ttname"><a href="classqx_1_1basic__string.html">qx::basic_string&lt; char_t &gt;</a></div></div>
-<div class="ttc" id="aclassqx_1_1basic__string_html_ac98fc25780d542fd98864eb544752b2a"><div class="ttname"><a href="classqx_1_1basic__string.html#ac98fc25780d542fd98864eb544752b2a">qx::basic_string::c_str</a></div><div class="ttdeci">const_pointer c_str() const noexcept</div><div class="ttdoc">Get pointer to string zero terminated.</div><div class="ttdef"><b>Definition:</b> <a href="string_8inl_source.html#l00258">string.inl:258</a></div></div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;} <span class="comment">// namespace qx</span></div>
 <div class="ttc" id="aclassqx_1_1category_html"><div class="ttname"><a href="classqx_1_1category.html">qx::category</a></div><div class="ttdoc">A category is a class that identifies a particular piece of code. This code can be located in differe...</div><div class="ttdef"><b>Definition:</b> <a href="category_8h_source.html#l00056">category.h:57</a></div></div>
-<div class="ttc" id="aclassqx_1_1logger_html_a2a179460972fa2d19cdcc425d1c06521"><div class="ttname"><a href="classqx_1_1logger.html#a2a179460972fa2d19cdcc425d1c06521">qx::logger::log</a></div><div class="ttdeci">void log(log_level eLogLevel, const char_t *pszFormat, const category &amp;category, const char *pszFile, const char *pszFunction, int nLine,...)</div><div class="ttdoc">Log to all streams.</div><div class="ttdef"><b>Definition:</b> <a href="logger_8inl_source.html#l00014">logger.inl:14</a></div></div>
-<div class="ttc" id="aclassqx_1_1logger_html_abec0212ef10bb7feb65d6f587a989b61"><div class="ttname"><a href="classqx_1_1logger.html#abec0212ef10bb7feb65d6f587a989b61">qx::logger::add_stream</a></div><div class="ttdeci">void add_stream(std::unique_ptr&lt; base_logger_stream &gt; pStream) noexcept</div><div class="ttdoc">Add output stream to the logger.</div><div class="ttdef"><b>Definition:</b> <a href="logger_8inl_source.html#l00077">logger.inl:77</a></div></div>
-<div class="ttc" id="aclassqx_1_1logger_html_acbd37fc0636753a6061a745ca1ab8f9e"><div class="ttname"><a href="classqx_1_1logger.html#acbd37fc0636753a6061a745ca1ab8f9e">qx::logger::reset</a></div><div class="ttdeci">void reset() noexcept</div><div class="ttdoc">Reset logger and clear all streams.</div><div class="ttdef"><b>Definition:</b> <a href="logger_8inl_source.html#l00082">logger.inl:82</a></div></div>
-<div class="ttc" id="aclassqx_1_1logger_html_af975c6169624a47a72ae8995161e140f"><div class="ttname"><a href="classqx_1_1logger.html#af975c6169624a47a72ae8995161e140f">qx::logger::flush</a></div><div class="ttdeci">void flush()</div><div class="ttdoc">Flush all streams.</div><div class="ttdef"><b>Definition:</b> <a href="logger_8inl_source.html#l00071">logger.inl:71</a></div></div>
+<div class="ttc" id="aclassqx_1_1logger_html_a0f3ad21a55f2984759f50963fa878ffe"><div class="ttname"><a href="classqx_1_1logger.html#a0f3ad21a55f2984759f50963fa878ffe">qx::logger::log</a></div><div class="ttdeci">void log(log_level eLogLevel, string_view svFormat, const category &amp;category, string_view svFile, string_view svFunction, int nLine,...)</div><div class="ttdoc">Log to all streams.</div><div class="ttdef"><b>Definition:</b> <a href="logger_8inl_source.html#l00013">logger.inl:13</a></div></div>
+<div class="ttc" id="aclassqx_1_1logger_html_abec0212ef10bb7feb65d6f587a989b61"><div class="ttname"><a href="classqx_1_1logger.html#abec0212ef10bb7feb65d6f587a989b61">qx::logger::add_stream</a></div><div class="ttdeci">void add_stream(std::unique_ptr&lt; base_logger_stream &gt; pStream) noexcept</div><div class="ttdoc">Add output stream to the logger.</div><div class="ttdef"><b>Definition:</b> <a href="logger_8inl_source.html#l00037">logger.inl:37</a></div></div>
+<div class="ttc" id="aclassqx_1_1logger_html_acbd37fc0636753a6061a745ca1ab8f9e"><div class="ttname"><a href="classqx_1_1logger.html#acbd37fc0636753a6061a745ca1ab8f9e">qx::logger::reset</a></div><div class="ttdeci">void reset() noexcept</div><div class="ttdoc">Reset logger and clear all streams.</div><div class="ttdef"><b>Definition:</b> <a href="logger_8inl_source.html#l00042">logger.inl:42</a></div></div>
+<div class="ttc" id="aclassqx_1_1logger_html_af975c6169624a47a72ae8995161e140f"><div class="ttname"><a href="classqx_1_1logger.html#af975c6169624a47a72ae8995161e140f">qx::logger::flush</a></div><div class="ttdeci">void flush()</div><div class="ttdoc">Flush all streams.</div><div class="ttdef"><b>Definition:</b> <a href="logger_8inl_source.html#l00031">logger.inl:31</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

@@ -75,6 +75,7 @@ $(function() {
 <p>Contains string converters.  
 <a href="#details">More...</a></p>
 <div class="textblock"><code>#include &lt;<a class="el" href="string_8h_source.html">qx/containers/string/string.h</a>&gt;</code><br />
+<code>#include &lt;<a class="el" href="string__view_8h_source.html">qx/containers/string/string_view.h</a>&gt;</code><br />
 <code>#include &lt;codecvt&gt;</code><br />
 <code>#include &lt;locale&gt;</code><br />
 </div>
@@ -82,19 +83,27 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:aa203fa26e66091ce0c1f4ffff0c4e7dc"><td class="memItemLeft" align="right" valign="top">wstring&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="string__converters_8h.html#aa203fa26e66091ce0c1f4ffff0c4e7dc">qx::to_wstring</a> (std::string_view str, const std::locale &amp;locale=std::locale())</td></tr>
-<tr class="memdesc:aa203fa26e66091ce0c1f4ffff0c4e7dc"><td class="mdescLeft">&#160;</td><td class="mdescRight">convert string to wstring  <a href="string__converters_8h.html#aa203fa26e66091ce0c1f4ffff0c4e7dc">More...</a><br /></td></tr>
-<tr class="separator:aa203fa26e66091ce0c1f4ffff0c4e7dc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3e1f4e7844477718e8e50adb0a7bbfb6"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="string__converters_8h.html#a3e1f4e7844477718e8e50adb0a7bbfb6">qx::to_string</a> (std::wstring_view str, const std::locale &amp;locale=std::locale())</td></tr>
-<tr class="memdesc:a3e1f4e7844477718e8e50adb0a7bbfb6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert wstring to string.  <a href="string__converters_8h.html#a3e1f4e7844477718e8e50adb0a7bbfb6">More...</a><br /></td></tr>
-<tr class="separator:a3e1f4e7844477718e8e50adb0a7bbfb6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aba77dc8e85f959e8b5d43aec09f08e4b"><td class="memItemLeft" align="right" valign="top">wstring&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="string__converters_8h.html#aba77dc8e85f959e8b5d43aec09f08e4b">qx::to_wstring</a> (qx::cstring_view stringView, const std::locale &amp;locale=std::locale())</td></tr>
+<tr class="memdesc:aba77dc8e85f959e8b5d43aec09f08e4b"><td class="mdescLeft">&#160;</td><td class="mdescRight">convert cstring to wstring  <a href="string__converters_8h.html#aba77dc8e85f959e8b5d43aec09f08e4b">More...</a><br /></td></tr>
+<tr class="separator:aba77dc8e85f959e8b5d43aec09f08e4b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a89c81f35662a9bca3545dbfc4f3f16b0"><td class="memItemLeft" align="right" valign="top">wstring&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="string__converters_8h.html#a89c81f35662a9bca3545dbfc4f3f16b0">qx::to_wstring</a> (qx::wstring_view stringView, const std::locale &amp;locale=std::locale())</td></tr>
+<tr class="memdesc:a89c81f35662a9bca3545dbfc4f3f16b0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert wstring to wstring (stub)  <a href="string__converters_8h.html#a89c81f35662a9bca3545dbfc4f3f16b0">More...</a><br /></td></tr>
+<tr class="separator:a89c81f35662a9bca3545dbfc4f3f16b0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad39b4180502855314af9fa8850862169"><td class="memItemLeft" align="right" valign="top">cstring&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="string__converters_8h.html#ad39b4180502855314af9fa8850862169">qx::to_cstring</a> (qx::wstring_view stringView, const std::locale &amp;locale=std::locale())</td></tr>
+<tr class="memdesc:ad39b4180502855314af9fa8850862169"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert wstring to cstring.  <a href="string__converters_8h.html#ad39b4180502855314af9fa8850862169">More...</a><br /></td></tr>
+<tr class="separator:ad39b4180502855314af9fa8850862169"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa534379d8683ac126e7cf22130ab4fd5"><td class="memItemLeft" align="right" valign="top">cstring&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="string__converters_8h.html#aa534379d8683ac126e7cf22130ab4fd5">qx::to_cstring</a> (qx::cstring_view stringView, const std::locale &amp;locale=std::locale())</td></tr>
+<tr class="memdesc:aa534379d8683ac126e7cf22130ab4fd5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert string to string (stub)  <a href="string__converters_8h.html#aa534379d8683ac126e7cf22130ab4fd5">More...</a><br /></td></tr>
+<tr class="separator:aa534379d8683ac126e7cf22130ab4fd5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa79990874c6134def8c164e7d34a158c"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="string__converters_8h.html#aa79990874c6134def8c164e7d34a158c">qx::to_string</a> (qx::cstring_view stringView, const std::locale &amp;locale=std::locale())</td></tr>
+<tr class="memdesc:aa79990874c6134def8c164e7d34a158c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert a char string to common string type.  <a href="string__converters_8h.html#aa79990874c6134def8c164e7d34a158c">More...</a><br /></td></tr>
+<tr class="separator:aa79990874c6134def8c164e7d34a158c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a75a7d197faec9637ba91e760934c025f"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="string__converters_8h.html#a75a7d197faec9637ba91e760934c025f">qx::to_string</a> (std::wstring_view stringView, const std::locale &amp;locale=std::locale())</td></tr>
+<tr class="memdesc:a75a7d197faec9637ba91e760934c025f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert a wchar_t string to common string type.  <a href="string__converters_8h.html#a75a7d197faec9637ba91e760934c025f">More...</a><br /></td></tr>
+<tr class="separator:a75a7d197faec9637ba91e760934c025f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a30847adf8f3f3abb2b93591c4038d6b6"><td class="memItemLeft" align="right" valign="top">wstring&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="string__converters_8h.html#a30847adf8f3f3abb2b93591c4038d6b6">qx::utf8_to_wstring</a> (const char *pszUtf8)</td></tr>
 <tr class="memdesc:a30847adf8f3f3abb2b93591c4038d6b6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert const char* representing UTF8 to wstring.  <a href="string__converters_8h.html#a30847adf8f3f3abb2b93591c4038d6b6">More...</a><br /></td></tr>
 <tr class="separator:a30847adf8f3f3abb2b93591c4038d6b6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a57324acc061571f74116b4ea84b79872"><td class="memTemplParams" colspan="2">template&lt;class value_t &gt; </td></tr>
-<tr class="memitem:a57324acc061571f74116b4ea84b79872"><td class="memTemplItemLeft" align="right" valign="top">const value_t *&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="string__converters_8h.html#a57324acc061571f74116b4ea84b79872">qx::to_char_pointer</a> (std::basic_string_view&lt; value_t &gt; stringView)</td></tr>
-<tr class="memdesc:a57324acc061571f74116b4ea84b79872"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert string_view to the null terminated chars array.  <a href="string__converters_8h.html#a57324acc061571f74116b4ea84b79872">More...</a><br /></td></tr>
-<tr class="separator:a57324acc061571f74116b4ea84b79872"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Contains string converters. </p>
@@ -104,58 +113,8 @@ Functions</h2></td></tr>
 
 <p class="definition">Definition in file <a class="el" href="string__converters_8h_source.html">string_converters.h</a>.</p>
 </div><h2 class="groupheader">Function Documentation</h2>
-<a id="a57324acc061571f74116b4ea84b79872"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a57324acc061571f74116b4ea84b79872">&#9670;&nbsp;</a></span>to_char_pointer()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class value_t &gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">const value_t* qx::to_char_pointer </td>
-          <td>(</td>
-          <td class="paramtype">std::basic_string_view&lt; value_t &gt;&#160;</td>
-          <td class="paramname"><em>stringView</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Convert string_view to the null terminated chars array. </p>
-<p>Some libraries or even c++ types can't deal with std::string_view (for ex. std::ifstream). This function allows to reduce number of allocations, but still leads to overhead due to chars copying </p><dl class="tparams"><dt>Template Parameters</dt><dd>
-  <table class="tparams">
-    <tr><td class="paramname">value_t</td><td>- string value type </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">stringView</td><td>- string view to convert </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="retval"><dt>Return values</dt><dd>
-  <table class="retval">
-    <tr><td class="paramname">-</td><td>null terminated string with stringView convent valid until the next to_char_pointer call </td></tr>
-  </table>
-  </dd>
-</dl>
-
-<p class="definition">Definition at line <a class="el" href="string__converters_8h_source.html#l00071">71</a> of file <a class="el" href="string__converters_8h_source.html">string_converters.h</a>.</p>
-
-</div>
-</div>
-<a id="a3e1f4e7844477718e8e50adb0a7bbfb6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3e1f4e7844477718e8e50adb0a7bbfb6">&#9670;&nbsp;</a></span>to_string()</h2>
+<a id="aa534379d8683ac126e7cf22130ab4fd5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa534379d8683ac126e7cf22130ab4fd5">&#9670;&nbsp;</a></span>to_cstring() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -164,10 +123,10 @@ template&lt;class value_t &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">string qx::to_string </td>
+          <td class="memname">cstring qx::to_cstring </td>
           <td>(</td>
-          <td class="paramtype">std::wstring_view&#160;</td>
-          <td class="paramname"><em>str</em>, </td>
+          <td class="paramtype">qx::cstring_view&#160;</td>
+          <td class="paramname"><em>stringView</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -188,10 +147,10 @@ template&lt;class value_t &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Convert wstring to string. </p>
-<p>'?' is default character </p><dl class="params"><dt>Parameters</dt><dd>
+<p>Convert string to string (stub) </p>
+<dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">str</td><td>- wchar_t string view </td></tr>
+    <tr><td class="paramname">stringView</td><td>- char string view </td></tr>
     <tr><td class="paramname">locale</td><td>- locale to use </td></tr>
   </table>
   </dd>
@@ -203,12 +162,12 @@ template&lt;class value_t &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="string__converters_8h_source.html#l00040">40</a> of file <a class="el" href="string__converters_8h_source.html">string_converters.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="string__converters_8h_source.html#l00070">70</a> of file <a class="el" href="string__converters_8h_source.html">string_converters.h</a>.</p>
 
 </div>
 </div>
-<a id="aa203fa26e66091ce0c1f4ffff0c4e7dc"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa203fa26e66091ce0c1f4ffff0c4e7dc">&#9670;&nbsp;</a></span>to_wstring()</h2>
+<a id="ad39b4180502855314af9fa8850862169"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad39b4180502855314af9fa8850862169">&#9670;&nbsp;</a></span>to_cstring() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -217,10 +176,10 @@ template&lt;class value_t &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">wstring qx::to_wstring </td>
+          <td class="memname">cstring qx::to_cstring </td>
           <td>(</td>
-          <td class="paramtype">std::string_view&#160;</td>
-          <td class="paramname"><em>str</em>, </td>
+          <td class="paramtype">qx::wstring_view&#160;</td>
+          <td class="paramname"><em>stringView</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -241,10 +200,169 @@ template&lt;class value_t &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>convert string to wstring </p>
+<p>Convert wstring to cstring. </p>
+<p>'?' is a default character </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">stringView</td><td>- wchar_t string view </td></tr>
+    <tr><td class="paramname">locale</td><td>- locale to use </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Return values</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">-</td><td>char string </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="string__converters_8h_source.html#l00056">56</a> of file <a class="el" href="string__converters_8h_source.html">string_converters.h</a>.</p>
+
+</div>
+</div>
+<a id="aa79990874c6134def8c164e7d34a158c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa79990874c6134def8c164e7d34a158c">&#9670;&nbsp;</a></span>to_string() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">string qx::to_string </td>
+          <td>(</td>
+          <td class="paramtype">qx::cstring_view&#160;</td>
+          <td class="paramname"><em>stringView</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::locale &amp;&#160;</td>
+          <td class="paramname"><em>locale</em> = <code>std::locale()</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Convert a char string to common string type. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">str</td><td>- char string view </td></tr>
+    <tr><td class="paramname">stringView</td><td>- char string </td></tr>
+    <tr><td class="paramname">locale</td><td>- locale to use </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Return values</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">-</td><td>common string type </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="string__converters_8h_source.html#l00081">81</a> of file <a class="el" href="string__converters_8h_source.html">string_converters.h</a>.</p>
+
+</div>
+</div>
+<a id="a75a7d197faec9637ba91e760934c025f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a75a7d197faec9637ba91e760934c025f">&#9670;&nbsp;</a></span>to_string() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">string qx::to_string </td>
+          <td>(</td>
+          <td class="paramtype">std::wstring_view&#160;</td>
+          <td class="paramname"><em>stringView</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::locale &amp;&#160;</td>
+          <td class="paramname"><em>locale</em> = <code>std::locale()</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Convert a wchar_t string to common string type. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">stringView</td><td>- wchar_t string </td></tr>
+    <tr><td class="paramname">locale</td><td>- locale to use </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Return values</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">-</td><td>common string type </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="string__converters_8h_source.html#l00095">95</a> of file <a class="el" href="string__converters_8h_source.html">string_converters.h</a>.</p>
+
+</div>
+</div>
+<a id="aba77dc8e85f959e8b5d43aec09f08e4b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aba77dc8e85f959e8b5d43aec09f08e4b">&#9670;&nbsp;</a></span>to_wstring() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">wstring qx::to_wstring </td>
+          <td>(</td>
+          <td class="paramtype">qx::cstring_view&#160;</td>
+          <td class="paramname"><em>stringView</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::locale &amp;&#160;</td>
+          <td class="paramname"><em>locale</em> = <code>std::locale()</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>convert cstring to wstring </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">stringView</td><td>- char string view </td></tr>
     <tr><td class="paramname">locale</td><td>- locale to use </td></tr>
   </table>
   </dd>
@@ -256,7 +374,60 @@ template&lt;class value_t &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="string__converters_8h_source.html#l00026">26</a> of file <a class="el" href="string__converters_8h_source.html">string_converters.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="string__converters_8h_source.html#l00027">27</a> of file <a class="el" href="string__converters_8h_source.html">string_converters.h</a>.</p>
+
+</div>
+</div>
+<a id="a89c81f35662a9bca3545dbfc4f3f16b0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a89c81f35662a9bca3545dbfc4f3f16b0">&#9670;&nbsp;</a></span>to_wstring() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">wstring qx::to_wstring </td>
+          <td>(</td>
+          <td class="paramtype">qx::wstring_view&#160;</td>
+          <td class="paramname"><em>stringView</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::locale &amp;&#160;</td>
+          <td class="paramname"><em>locale</em> = <code>std::locale()</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Convert wstring to wstring (stub) </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">stringView</td><td>- wchar_t string view </td></tr>
+    <tr><td class="paramname">locale</td><td>- locale to use </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Return values</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">-</td><td>wchar_t string </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="string__converters_8h_source.html#l00044">44</a> of file <a class="el" href="string__converters_8h_source.html">string_converters.h</a>.</p>
 
 </div>
 </div>
@@ -298,7 +469,7 @@ template&lt;class value_t &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="string__converters_8h_source.html#l00052">52</a> of file <a class="el" href="string__converters_8h_source.html">string_converters.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="string__converters_8h_source.html#l00108">108</a> of file <a class="el" href="string__converters_8h_source.html">string_converters.h</a>.</p>
 
 </div>
 </div>

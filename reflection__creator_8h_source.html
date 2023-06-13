@@ -82,13 +82,13 @@ $(function() {
 <div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="comment">**/</span></div>
 <div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#pragma once</span></div>
 <div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160; </div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="macros_2common_8h.html">qx/macros/common.h</a>&gt;</span></div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="class__identificator_8h.html">qx/rtti/class_identificator.h</a>&gt;</span></div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160; </div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="preprocessor">#include &lt;functional&gt;</span></div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="preprocessor">#include &lt;map&gt;</span></div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="preprocessor">#include &lt;memory&gt;</span></div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="preprocessor">#include &lt;string_view&gt;</span></div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="string__view_8h.html">qx/containers/string/string_view.h</a>&gt;</span></div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="macros_2common_8h.html">qx/macros/common.h</a>&gt;</span></div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="class__identificator_8h.html">qx/rtti/class_identificator.h</a>&gt;</span></div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160; </div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="preprocessor">#include &lt;functional&gt;</span></div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="preprocessor">#include &lt;map&gt;</span></div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="preprocessor">#include &lt;memory&gt;</span></div>
 <div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160; </div>
 <div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="keyword">namespace </span>qx</div>
 <div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;{</div>
@@ -134,7 +134,7 @@ $(function() {
 <div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;<span class="comment">        @param  args        - template parameter pack</span></div>
 <div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;<span class="comment">        @retval             - class instance or nullptr if can&#39;t find factory or can&#39;t create</span></div>
 <div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;<span class="comment">    **/</span></div>
-<div class="line"><a name="l00066"></a><span class="lineno"><a class="line" href="classqx_1_1reflection__creator.html#a93dece66a1b9afac5181e11ea0929050">   66</a></span>&#160;    [[nodiscard]] <span class="keyword">static</span> smart_ptr_t&lt;base_class_t&gt; <a class="code" href="classqx_1_1reflection__creator.html#a93dece66a1b9afac5181e11ea0929050">create_object</a>(std::string_view svClassName, args_t&amp;&amp;... args)</div>
+<div class="line"><a name="l00066"></a><span class="lineno"><a class="line" href="classqx_1_1reflection__creator.html#a88ff6a0c572bc4c23c87a495045a1408">   66</a></span>&#160;    [[nodiscard]] <span class="keyword">static</span> smart_ptr_t&lt;base_class_t&gt; <a class="code" href="classqx_1_1reflection__creator.html#a88ff6a0c572bc4c23c87a495045a1408">create_object</a>(string_view svClassName, args_t&amp;&amp;... args)</div>
 <div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    {</div>
 <div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;        <span class="keywordflow">if</span> (<span class="keyword">auto</span> it = m_FactoriesByName.find(svClassName); it != m_FactoriesByName.end())</div>
 <div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;        {</div>
@@ -151,7 +151,7 @@ $(function() {
 <div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;<span class="comment">        @param  svClassName - class name</span></div>
 <div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;<span class="comment">        @retval             - true if registered</span></div>
 <div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;<span class="comment">    **/</span></div>
-<div class="line"><a name="l00083"></a><span class="lineno"><a class="line" href="classqx_1_1reflection__creator.html#a9952c8a60c4adfa503b16548b6a6cba6">   83</a></span>&#160;    <span class="keyword">static</span> <span class="keywordtype">bool</span> <a class="code" href="classqx_1_1reflection__creator.html#a9952c8a60c4adfa503b16548b6a6cba6">_register_class</a>(factory factory, class_identificator <span class="keywordtype">id</span>, std::string_view svClassName)</div>
+<div class="line"><a name="l00083"></a><span class="lineno"><a class="line" href="classqx_1_1reflection__creator.html#aa689c28e5516771184771a208041d817">   83</a></span>&#160;    <span class="keyword">static</span> <span class="keywordtype">bool</span> <a class="code" href="classqx_1_1reflection__creator.html#aa689c28e5516771184771a208041d817">_register_class</a>(factory factory, class_identificator <span class="keywordtype">id</span>, string_view svClassName)</div>
 <div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;    {</div>
 <div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;        <span class="keywordflow">if</span> (factory &amp;&amp; !svClassName.empty())</div>
 <div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;        {</div>
@@ -167,7 +167,7 @@ $(function() {
 <div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160; </div>
 <div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;<span class="keyword">private</span>:</div>
 <div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;    <span class="keyword">static</span> <span class="keyword">inline</span> std::map&lt;class_identificator, factory&gt; m_FactoriesById;</div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;    <span class="keyword">static</span> <span class="keyword">inline</span> std::map&lt;std::string_view, factory&gt;    m_FactoriesByName;</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;    <span class="keyword">static</span> <span class="keyword">inline</span> std::map&lt;string_view, factory&gt;         m_FactoriesByName;</div>
 <div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;};</div>
 <div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160; </div>
 <div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;<span class="keyword">namespace </span>detail</div>
@@ -247,9 +247,10 @@ $(function() {
 <div class="ttc" id="aclass__identificator_8h_html"><div class="ttname"><a href="class__identificator_8h.html">class_identificator.h</a></div><div class="ttdoc">Contains qx::class_identificator.</div></div>
 <div class="ttc" id="aclassqx_1_1reflection__creator_html"><div class="ttname"><a href="classqx_1_1reflection__creator.html">qx::reflection_creator</a></div><div class="ttdoc">Reflection creator.</div><div class="ttdef"><b>Definition:</b> <a href="reflection__creator_8h_source.html#l00040">reflection_creator.h:41</a></div></div>
 <div class="ttc" id="aclassqx_1_1reflection__creator_html_a20d29919606c20ccc429bf4d3b23b331"><div class="ttname"><a href="classqx_1_1reflection__creator.html#a20d29919606c20ccc429bf4d3b23b331">qx::reflection_creator::create_object</a></div><div class="ttdeci">static smart_ptr_t&lt; base_class_t &gt; create_object(class_identificator id, args_t &amp;&amp;... args)</div><div class="ttdoc">Create object based on class id.</div><div class="ttdef"><b>Definition:</b> <a href="reflection__creator_8h_source.html#l00052">reflection_creator.h:52</a></div></div>
-<div class="ttc" id="aclassqx_1_1reflection__creator_html_a93dece66a1b9afac5181e11ea0929050"><div class="ttname"><a href="classqx_1_1reflection__creator.html#a93dece66a1b9afac5181e11ea0929050">qx::reflection_creator::create_object</a></div><div class="ttdeci">static smart_ptr_t&lt; base_class_t &gt; create_object(std::string_view svClassName, args_t &amp;&amp;... args)</div><div class="ttdoc">Create object based on class name.</div><div class="ttdef"><b>Definition:</b> <a href="reflection__creator_8h_source.html#l00066">reflection_creator.h:66</a></div></div>
-<div class="ttc" id="aclassqx_1_1reflection__creator_html_a9952c8a60c4adfa503b16548b6a6cba6"><div class="ttname"><a href="classqx_1_1reflection__creator.html#a9952c8a60c4adfa503b16548b6a6cba6">qx::reflection_creator::_register_class</a></div><div class="ttdeci">static bool _register_class(factory factory, class_identificator id, std::string_view svClassName)</div><div class="ttdoc">Register class so it can be constructed by creator.</div><div class="ttdef"><b>Definition:</b> <a href="reflection__creator_8h_source.html#l00083">reflection_creator.h:83</a></div></div>
+<div class="ttc" id="aclassqx_1_1reflection__creator_html_a88ff6a0c572bc4c23c87a495045a1408"><div class="ttname"><a href="classqx_1_1reflection__creator.html#a88ff6a0c572bc4c23c87a495045a1408">qx::reflection_creator::create_object</a></div><div class="ttdeci">static smart_ptr_t&lt; base_class_t &gt; create_object(string_view svClassName, args_t &amp;&amp;... args)</div><div class="ttdoc">Create object based on class name.</div><div class="ttdef"><b>Definition:</b> <a href="reflection__creator_8h_source.html#l00066">reflection_creator.h:66</a></div></div>
+<div class="ttc" id="aclassqx_1_1reflection__creator_html_aa689c28e5516771184771a208041d817"><div class="ttname"><a href="classqx_1_1reflection__creator.html#aa689c28e5516771184771a208041d817">qx::reflection_creator::_register_class</a></div><div class="ttdeci">static bool _register_class(factory factory, class_identificator id, string_view svClassName)</div><div class="ttdoc">Register class so it can be constructed by creator.</div><div class="ttdef"><b>Definition:</b> <a href="reflection__creator_8h_source.html#l00083">reflection_creator.h:83</a></div></div>
 <div class="ttc" id="amacros_2common_8h_html"><div class="ttname"><a href="macros_2common_8h.html">common.h</a></div><div class="ttdoc">Useful macros.</div></div>
+<div class="ttc" id="astring__view_8h_html"><div class="ttname"><a href="string__view_8h.html">string_view.h</a></div><div class="ttdoc">Contains string_view classes/usings.</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

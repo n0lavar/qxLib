@@ -117,65 +117,43 @@ $(function() {
 <div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160; </div>
 <div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160; </div>
 <div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160; </div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="comment">// -------------------------- fast_hash_string_traits --------------------------</span></div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="comment">// ------------------------------- operator&quot;&quot; _sh ------------------------------</span></div>
 <div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160; </div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> value_t&gt;</div>
-<div class="line"><a name="l00052"></a><span class="lineno"><a class="line" href="structqx_1_1fast__hash__string__traits.html#a0489ee09df7e38d25caf9c8c2a5c730b">   52</a></span>&#160;constexpr <span class="keyword">typename</span> <a class="code" href="structqx_1_1char__traits.html">char_traits&lt;value_t&gt;::size_type</a> <a class="code" href="structqx_1_1fast__hash__string__traits.html#a0489ee09df7e38d25caf9c8c2a5c730b">fast_hash_string_traits&lt;value_t&gt;::hash_function</a>(</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    <span class="keyword">typename</span> <a class="code" href="structqx_1_1char__traits.html">char_traits&lt;value_t&gt;::const_pointer</a> pszStr,</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    <span class="keywordtype">size_t</span>                                       nSeed,</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    <span class="keyword">typename</span> <a class="code" href="structqx_1_1char__traits.html">char_traits&lt;value_t&gt;::size_type</a>     nLen) noexcept</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;{</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="string__utils_8h.html#a3d321a74f68c1be9613ca451a464ec53">djb2a_hash</a>(pszStr, nSeed, nLen);</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;}</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160; </div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> value_t&gt;</div>
-<div class="line"><a name="l00061"></a><span class="lineno"><a class="line" href="structqx_1_1fast__hash__string__traits.html#a89ccbfb3ac60ef509218823e8c6f0f8d">   61</a></span>&#160;constexpr <span class="keyword">typename</span> <a class="code" href="structqx_1_1char__traits.html">char_traits&lt;value_t&gt;::size_type</a> <a class="code" href="structqx_1_1fast__hash__string__traits.html#a0489ee09df7e38d25caf9c8c2a5c730b">fast_hash_string_traits&lt;value_t&gt;::hash_function</a>(</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    <span class="keyword">typename</span> <a class="code" href="structqx_1_1char__traits.html">char_traits&lt;value_t&gt;::const_pointer</a> pszStr,</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    <span class="keywordtype">size_t</span>                                       nSeed) noexcept</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;{</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="string__utils_8h.html#a3d321a74f68c1be9613ca451a464ec53">djb2a_hash</a>(pszStr, nSeed);</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;}</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="keyword">namespace </span>literals</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;{</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160; </div>
+<div class="line"><a name="l00054"></a><span class="lineno"><a class="line" href="string__hash_8h.html#a45b1ed5c3ffd903fbcbb278d70311aee">   54</a></span>&#160;constexpr <a class="code" href="classqx_1_1basic__string__hash.html">basic_string_hash&lt;char_traits&lt;char&gt;</a>&gt; <span class="keyword">operator</span><span class="stringliteral">&quot;&quot;</span> _sh(<span class="keyword">const</span> <span class="keywordtype">char</span>* pszStr, <span class="keywordtype">size_t</span> nSize)</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;{</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="classqx_1_1basic__string__hash.html">basic_string_hash&lt;char_traits&lt;char&gt;</a>&gt;(pszStr, nSize);</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;}</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160; </div>
+<div class="line"><a name="l00059"></a><span class="lineno"><a class="line" href="string__hash_8h.html#aa2742895d79f901f32d97eedadf4ce79">   59</a></span>&#160;constexpr <a class="code" href="classqx_1_1basic__string__hash.html">basic_string_hash&lt;char_traits&lt;wchar_t&gt;</a>&gt; <span class="keyword">operator</span><span class="stringliteral">&quot;&quot;</span> _sh(<span class="keyword">const</span> <span class="keywordtype">wchar_t</span>* pszStr, <span class="keywordtype">size_t</span> nSize)</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;{</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="classqx_1_1basic__string__hash.html">basic_string_hash&lt;char_traits&lt;wchar_t&gt;</a>&gt;(pszStr, nSize);</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;}</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160; </div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;} <span class="comment">// namespace literals</span></div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160; </div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;} <span class="comment">// namespace qx</span></div>
 <div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160; </div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;<span class="comment">// ------------------------------- operator&quot;&quot; _sh ------------------------------</span></div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160; </div>
 <div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160; </div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;<span class="keyword">namespace </span>literals</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;{</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160; </div>
-<div class="line"><a name="l00073"></a><span class="lineno"><a class="line" href="string__hash_8h.html#a44a83815f8d4300705720fdd16304d06">   73</a></span>&#160;constexpr <a class="code" href="classqx_1_1basic__string__hash.html">basic_string_hash&lt;fast_hash_string_traits&lt;char&gt;</a>&gt; <span class="keyword">operator</span><span class="stringliteral">&quot;&quot;</span> _sh(<span class="keyword">const</span> <span class="keywordtype">char</span>* pszStr, <span class="keywordtype">size_t</span> nSize)</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;{</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="classqx_1_1basic__string__hash.html">basic_string_hash&lt;fast_hash_string_traits&lt;char&gt;</a>&gt;(pszStr, nSize);</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;}</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160; </div>
-<div class="line"><a name="l00078"></a><span class="lineno"><a class="line" href="string__hash_8h.html#a4d20c2954ec444c943a7277f2d8622ed">   78</a></span>&#160;constexpr <a class="code" href="classqx_1_1basic__string__hash.html">basic_string_hash&lt;fast_hash_string_traits&lt;wchar_t&gt;</a>&gt; <span class="keyword">operator</span><span class="stringliteral">&quot;&quot;</span> _sh(<span class="keyword">const</span> <span class="keywordtype">wchar_t</span>* pszStr, <span class="keywordtype">size_t</span> nSize)</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;{</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="classqx_1_1basic__string__hash.html">basic_string_hash&lt;fast_hash_string_traits&lt;wchar_t&gt;</a>&gt;(pszStr, nSize);</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;}</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160; </div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;} <span class="comment">// namespace literals</span></div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160; </div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;} <span class="comment">// namespace qx</span></div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160; </div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160; </div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160; </div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;<span class="comment">// --------------------------------- std::hash ---------------------------------</span></div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160; </div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;<span class="keyword">namespace </span>std</div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;{</div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160; </div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> traits_t&gt;</div>
-<div class="line"><a name="l00095"></a><span class="lineno"><a class="line" href="structstd_1_1hash_3_01qx_1_1basic__string__hash_3_01traits__t_01_4_01_4.html">   95</a></span>&#160;<span class="keyword">struct </span>hash&lt;qx::basic_string_hash&lt;traits_t&gt;&gt;</div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;{</div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;    <span class="keywordtype">size_t</span> operator()(<span class="keyword">const</span> <a class="code" href="classqx_1_1basic__string__hash.html">qx::basic_string_hash&lt;traits_t&gt;</a>&amp; hash)<span class="keyword"> const</span></div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;<span class="keyword">    </span>{</div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;        <span class="keywordflow">return</span> hash;</div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;    }</div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;};</div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160; </div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;} <span class="comment">// namespace std</span></div>
-<div class="ttc" id="aclassqx_1_1basic__string__hash_html"><div class="ttname"><a href="classqx_1_1basic__string__hash.html">qx::basic_string_hash</a></div><div class="ttdoc">String hash object.</div><div class="ttdef"><b>Definition:</b> <a href="string__hash_8h_source.html#l00043">string_hash.h:44</a></div></div>
-<div class="ttc" id="astring__utils_8h_html_a3d321a74f68c1be9613ca451a464ec53"><div class="ttname"><a href="string__utils_8h.html#a3d321a74f68c1be9613ca451a464ec53">qx::djb2a_hash</a></div><div class="ttdeci">constexpr size_t djb2a_hash(const value_t *pszStr, size_t nSeed, size_t nLen)</div><div class="ttdoc">djb2a hash</div><div class="ttdef"><b>Definition:</b> <a href="string__utils_8h_source.html#l00027">string_utils.h:27</a></div></div>
-<div class="ttc" id="astructqx_1_1char__traits_html"><div class="ttname"><a href="structqx_1_1char__traits.html">qx::char_traits</a></div><div class="ttdef"><b>Definition:</b> <a href="string__traits_8h_source.html#l00052">string_traits.h:52</a></div></div>
-<div class="ttc" id="astructqx_1_1fast__hash__string__traits_html_a0489ee09df7e38d25caf9c8c2a5c730b"><div class="ttname"><a href="structqx_1_1fast__hash__string__traits.html#a0489ee09df7e38d25caf9c8c2a5c730b">qx::fast_hash_string_traits::hash_function</a></div><div class="ttdeci">static constexpr char_traits&lt; value_t &gt;::size_type hash_function(typename char_traits&lt; value_t &gt;::const_pointer pszStr, size_t nSeed, typename char_traits&lt; value_t &gt;::size_type nLen) noexcept</div><div class="ttdoc">Hash function realization.</div><div class="ttdef"><b>Definition:</b> <a href="string__hash_8inl_source.html#l00052">string_hash.inl:52</a></div></div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;<span class="comment">// --------------------------------- std::hash ---------------------------------</span></div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160; </div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;<span class="keyword">namespace </span>std</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;{</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160; </div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> traits_t&gt;</div>
+<div class="line"><a name="l00076"></a><span class="lineno"><a class="line" href="structstd_1_1hash_3_01qx_1_1basic__string__hash_3_01traits__t_01_4_01_4.html">   76</a></span>&#160;<span class="keyword">struct </span>hash&lt;qx::basic_string_hash&lt;traits_t&gt;&gt;</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;{</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;    <span class="keywordtype">size_t</span> operator()(<span class="keyword">const</span> <a class="code" href="classqx_1_1basic__string__hash.html">qx::basic_string_hash&lt;traits_t&gt;</a>&amp; hash)<span class="keyword"> const</span></div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;<span class="keyword">    </span>{</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;        <span class="keywordflow">return</span> hash;</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;    }</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;};</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160; </div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;} <span class="comment">// namespace std</span></div>
+<div class="ttc" id="aclassqx_1_1basic__string__hash_html"><div class="ttname"><a href="classqx_1_1basic__string__hash.html">qx::basic_string_hash</a></div><div class="ttdoc">String hash object.</div><div class="ttdef"><b>Definition:</b> <a href="string__hash_8h_source.html#l00044">string_hash.h:45</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
