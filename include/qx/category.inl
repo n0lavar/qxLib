@@ -10,19 +10,22 @@
 namespace qx
 {
 
-constexpr category::category(const char* pszName, const color& categoryColor, const char* pszDescription) noexcept
+constexpr category::category(
+    const char_type* pszName,
+    const color&     categoryColor,
+    const char_type* pszDescription) noexcept
     : m_Color(categoryColor)
     , m_pszName(pszName)
     , m_pszDescription(pszDescription)
 {
 }
 
-constexpr const char* category::get_name() const noexcept
+constexpr const char_type* category::get_name() const noexcept
 {
     return m_pszName;
 }
 
-constexpr const char* category::get_description() const noexcept
+constexpr const char_type* category::get_description() const noexcept
 {
     return m_pszDescription;
 }

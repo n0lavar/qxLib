@@ -43,59 +43,26 @@ public:
         @param svFileName     - log file name
     **/
     file_logger_stream(
-        bool              bAlwaysFlush   = false,
-        log_file_policy   eLogFilePolicy = log_file_policy::append,
-        std::wstring_view svFileName     = L"application");
+        bool            bAlwaysFlush   = false,
+        log_file_policy eLogFilePolicy = log_file_policy::append,
+        string_view     svFileName     = L"application");
 
     /**
         @brief file_logger_stream object destructor
     **/
     virtual ~file_logger_stream() override;
 
-    /**
-        @brief Flush stream
-    **/
+    // base_logger_stream
+    //
     virtual void flush() override;
-
-    /**
-        @brief Output to file
-        @param svMessage - message string 
-        @param logUnit   - log unit info
-        @param colors    - color ranges to colorize output
-        @param eLogLevel - this message log level
-    **/
     virtual void do_log(
-        std::string_view                       svMessage,
-        const log_unit&                        logUnit,
-        const std::vector<logger_color_range>& colors,
-        log_level                              eLogLevel) override;
-
-    /**
-        @brief Output to file
-        @param svMessage - message string 
-        @param logUnit   - log unit info
-        @param colors    - color ranges to colorize output
-        @param eLogLevel - this message log level
-    **/
-    virtual void do_log(
-        std::wstring_view                      svMessage,
+        string_view                            svMessage,
         const log_unit&                        logUnit,
         const std::vector<logger_color_range>& colors,
         log_level                              eLogLevel) override;
 
 private:
-    /**
-        @brief  Log to file
-        @tparam char_t    - char type
-        @param  svMessage - message to log
-        @param  logUnit   - log unit info
-        @param  eLogLevel - this message log level
-    **/
-    template<class char_t>
-    void log_file(std::basic_string_view<char_t> svMessage, const log_unit& logUnit, log_level eLogLevel);
-
-private:
-    std::basic_ofstream<wchar_t> m_WCharFile;
+    std::wofstream m_File;
 };
 
 } // namespace qx

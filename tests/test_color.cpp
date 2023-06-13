@@ -73,9 +73,9 @@ void TestColor(const qx::color& color, const Args&... args)
     // EXPECT_EQ(qx::color(hex), color);
 }
 
-#define EXPAND_ARGS(snakeName, pascalName, lowerName, hashName, name0x, name0xXX)                                 \
-    qx::color::snakeName(), #snakeName, L## #snakeName, #pascalName, L## #pascalName, #lowerName, L## #lowerName, \
-        hashName, L##hashName, name0x, L##name0x, name0xXX, L##name0xXX
+#define EXPAND_ARGS(snakeName, pascalName, lowerName, hashName, name0x, name0xXX)                              \
+    qx::color::snakeName(), QX_TEXT(#snakeName), QX_TEXT(#pascalName), QX_TEXT(#lowerName), QX_TEXT(hashName), \
+        QX_TEXT(name0x), QX_TEXT(name0xXX)
 
 TEST(color, colors)
 {

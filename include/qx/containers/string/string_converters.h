@@ -10,6 +10,7 @@
 #pragma once
 
 #include <qx/containers/string/string.h>
+#include <qx/containers/string/string_view.h>
 
 #include <codecvt>
 #include <locale>
@@ -18,30 +19,85 @@ namespace qx
 {
 
 /**
-    @brief  convert string to wstring
-    @param  str    - char string view
-    @param  locale - locale to use
-    @retval        - wchar_t string
+    @brief  convert cstring to wstring
+    @param  stringView - char string view
+    @param  locale     - locale to use
+    @retval            - wchar_t string
 **/
-inline wstring to_wstring(std::string_view str, const std::locale& locale = std::locale())
+inline wstring to_wstring(cstring_view stringView, const std::locale& locale = std::locale())
 {
-    std::vector<wchar_t> buf(str.size());
-    std::use_facet<std::ctype<wchar_t>>(locale).widen(str.data(), str.data() + str.size(), buf.data());
+    std::vector<wchar_t> buf(stringView.size());
+    std::use_facet<std::ctype<wchar_t>>(locale).widen(
+        stringView.data(),
+        stringView.data() + stringView.size(),
+        buf.data());
+
     return wstring(buf.data(), buf.size());
 }
 
 /**
-    @brief   Convert wstring to string
-    @details '?' is default character
-    @param   str    - wchar_t string view
-    @param   locale - locale to use
-    @retval         - char string
+    @brief  Convert wstring to wstring (stub)
+    @param  stringView - wchar_t string view
+    @param  locale     - locale to use
+    @retval            - wchar_t string
 **/
-inline string to_string(std::wstring_view str, const std::locale& locale = std::locale())
+inline wstring to_wstring(wstring_view stringView, const std::locale& locale = std::locale())
 {
-    std::vector<char> buf(str.size());
-    std::use_facet<std::ctype<wchar_t>>(locale).narrow(str.data(), str.data() + str.size(), '?', buf.data());
-    return string(buf.data(), buf.size());
+    return stringView;
+}
+
+/**
+    @brief   Convert wstring to cstring
+    @details '?' is a default character
+    @param   stringView - wchar_t string view
+    @param   locale     - locale to use
+    @retval             - char string
+**/
+inline cstring to_cstring(wstring_view stringView, const std::locale& locale = std::locale())
+{
+    std::vector<char> buf(stringView.size());
+    std::use_facet<std::ctype<wchar_t>>(locale)
+        .narrow(stringView.data(), stringView.data() + stringView.size(), '?', buf.data());
+    return cstring(buf.data(), buf.size());
+}
+
+/**
+    @brief  Convert string to string (stub)
+    @param  stringView - char string view
+    @param  locale     - locale to use
+    @retval            - char string
+**/
+inline cstring to_cstring(cstring_view stringView, const std::locale& locale = std::locale())
+{
+    return stringView;
+}
+
+/**
+    @brief  Convert a char string to common string type
+    @param  stringView - char string
+    @param  locale     - locale to use
+    @retval            - common string type
+**/
+inline string to_string(cstring_view stringView, const std::locale& locale = std::locale())
+{
+    if constexpr (std::is_same_v<char_type, char>)
+        return stringView;
+    else if constexpr (std::is_same_v<char_type, wchar_t>)
+        return to_wstring(stringView, locale);
+}
+
+/**
+    @brief  Convert a wchar_t string to common string type
+    @param  stringView - wchar_t string
+    @param  locale     - locale to use
+    @retval            - common string type
+**/
+inline string to_string(wstring_view stringView, const std::locale& locale = std::locale())
+{
+    if constexpr (std::is_same_v<char_type, char>)
+        return to_cstring(stringView, locale);
+    else if constexpr (std::is_same_v<char_type, wchar_t>)
+        return stringView;
 }
 
 /**
@@ -55,24 +111,6 @@ inline wstring utf8_to_wstring(const char* pszUtf8)
     std::wstring_convert<std::codecvt_utf8_utf16<wchar_t>> converter;
     return converter.from_bytes(pszUtf8);
     QX_POP_SUPPRESS_WARNINGS();
-}
-
-/**
-    @brief   Convert string_view to the null terminated chars array
-    @details Some libraries or even c++ types can't deal with std::string_view
-             (for ex. std::ifstream). This function allows to reduce number of
-             allocations, but still leads to overhead due to chars copying
-    @tparam  value_t    - string value type
-    @param   stringView - string view to convert
-    @retval             - null terminated string with stringView convent
-                          valid until the next to_char_pointer call
-**/
-template<class value_t>
-inline const value_t* to_char_pointer(std::basic_string_view<value_t> stringView)
-{
-    thread_local basic_string<value_t> sBuffer;
-    sBuffer = stringView;
-    return sBuffer.c_str();
 }
 
 } // namespace qx

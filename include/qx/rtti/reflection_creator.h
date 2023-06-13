@@ -11,13 +11,13 @@
 **/
 #pragma once
 
+#include <qx/containers/string/string_view.h>
 #include <qx/macros/common.h>
 #include <qx/rtti/class_identificator.h>
 
 #include <functional>
 #include <map>
 #include <memory>
-#include <string_view>
 
 namespace qx
 {
@@ -63,7 +63,7 @@ public:
         @param  args        - template parameter pack
         @retval             - class instance or nullptr if can't find factory or can't create
     **/
-    [[nodiscard]] static smart_ptr_t<base_class_t> create_object(std::string_view svClassName, args_t&&... args)
+    [[nodiscard]] static smart_ptr_t<base_class_t> create_object(string_view svClassName, args_t&&... args)
     {
         if (auto it = m_FactoriesByName.find(svClassName); it != m_FactoriesByName.end())
         {
@@ -80,7 +80,7 @@ public:
         @param  svClassName - class name
         @retval             - true if registered
     **/
-    static bool _register_class(factory factory, class_identificator id, std::string_view svClassName)
+    static bool _register_class(factory factory, class_identificator id, string_view svClassName)
     {
         if (factory && !svClassName.empty())
         {
@@ -96,7 +96,7 @@ public:
 
 private:
     static inline std::map<class_identificator, factory> m_FactoriesById;
-    static inline std::map<std::string_view, factory>    m_FactoriesByName;
+    static inline std::map<string_view, factory>         m_FactoriesByName;
 };
 
 namespace detail

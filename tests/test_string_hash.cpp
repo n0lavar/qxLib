@@ -24,11 +24,7 @@ class TestStringHashTyped : public ::testing::Test
 {
 };
 
-using Implementations = ::testing::Types<
-    qx::char_traits<char>,
-    qx::char_traits<wchar_t>,
-    qx::fast_hash_string_traits<char>,
-    qx::fast_hash_string_traits<wchar_t>>;
+using Implementations = ::testing::Types<qx::char_traits<char>, qx::char_traits<wchar_t>>;
 
 TYPED_TEST_SUITE(TestStringHashTyped, Implementations);
 
@@ -76,14 +72,20 @@ TEST(TestStringHash, operator_)
     using namespace qx::literals;
 
     {
-        qx::fast_string_hash hash0("Hello world");
-        qx::fast_string_hash hash1 = "Hello world"_sh;
+        qx::string_hash hash0(QX_TEXT("Hello world"));
+        qx::string_hash hash1 = QX_STRING_HASH("Hello world");
         EXPECT_EQ(hash0, hash1);
     }
 
     {
-        qx::fast_wstring_hash hash0(L"Hello world");
-        qx::fast_wstring_hash hash1 = L"Hello world"_sh;
+        qx::cstring_hash hash0("Hello world");
+        qx::cstring_hash hash1 = "Hello world"_sh;
+        EXPECT_EQ(hash0, hash1);
+    }
+
+    {
+        qx::wstring_hash hash0(L"Hello world");
+        qx::wstring_hash hash1 = L"Hello world"_sh;
         EXPECT_EQ(hash0, hash1);
     }
 }

@@ -9,8 +9,9 @@
 **/
 #pragma once
 
+#include <qx/containers/string/string_view.h>
+
 #include <algorithm>
-#include <string_view>
 
 namespace qx
 {
@@ -45,9 +46,9 @@ struct string_literal
         return &value[0];
     }
 
-    constexpr std::basic_string_view<T> view() const noexcept
+    constexpr basic_string_view<T> view() const noexcept
     {
-        return std::basic_string_view<T>(data());
+        return basic_string_view<T>(data());
     }
 
     T value[N];

@@ -17,7 +17,7 @@ template<qx::string_literal text>
 class StringTemplateClass
 {
 public:
-    static constexpr std::string_view as_view()
+    static constexpr qx::cstring_view as_view()
     {
         return text.view();
     }
@@ -34,7 +34,7 @@ public:
 };
 
 constexpr StringTemplateClass<"Text"> stringTemplateClass;
-constexpr std::string_view            svText = stringTemplateClass.as_view();
+constexpr qx::cstring_view            svText = stringTemplateClass.as_view();
 QX_STATIC_ASSERT_STR_EQ(svText.data(), "Text");
 QX_STATIC_ASSERT_STR_EQ(stringTemplateClass.as_as_pointer(), "Text");
 static_assert(stringTemplateClass.size() == 5);

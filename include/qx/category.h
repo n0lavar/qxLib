@@ -19,7 +19,7 @@
     @param name - category name
     @param ...  - optional category color and description
 **/
-#define QX_DEFINE_CATEGORY(name, ...) constexpr qx::category name(#name, ##__VA_ARGS__)
+#define QX_DEFINE_CATEGORY(name, ...) constexpr qx::category name(QX_TEXT(#name), ##__VA_ARGS__)
 
 /**
     @brief Define file category
@@ -65,21 +65,21 @@ public:
         @param  pszDescription - category description
     **/
     constexpr explicit category(
-        const char*  pszName,
-        const color& categoryColor  = kDefaultColor,
-        const char*  pszDescription = nullptr) noexcept;
+        const char_type* pszName,
+        const color&     categoryColor  = kDefaultColor,
+        const char_type* pszDescription = nullptr) noexcept;
 
     /**
         @brief  Get category name
         @retval  -category  name
     **/
-    constexpr const char* get_name() const noexcept;
+    constexpr const char_type* get_name() const noexcept;
 
     /**
         @brief  Get category description
         @retval  - category description
     **/
-    constexpr const char* get_description() const noexcept;
+    constexpr const char_type* get_description() const noexcept;
 
     /**
         @brief  Get category color
@@ -88,9 +88,9 @@ public:
     constexpr const color& get_color() const noexcept;
 
 private:
-    const color       m_Color          = kDefaultColor;
-    const char* const m_pszName        = nullptr;
-    const char* const m_pszDescription = nullptr;
+    const color            m_Color          = kDefaultColor;
+    const char_type* const m_pszName        = nullptr;
+    const char_type* const m_pszDescription = nullptr;
 };
 
 } // namespace qx

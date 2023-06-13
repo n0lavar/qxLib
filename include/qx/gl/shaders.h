@@ -9,7 +9,7 @@
 **/
 #pragma once
 
-#include <qx/containers/string/string.h>
+#include <qx/containers/string/string_converters.h>
 #include <qx/macros/copyable_movable.h>
 
 #include <glew.h>

@@ -10,6 +10,7 @@
 #pragma once
 
 #include <qx/containers/string/string.h>
+#include <qx/containers/string/string_view.h>
 #include <qx/macros/copyable_movable.h>
 #include <qx/macros/suppress_warnings.h>
 #include <qx/patterns/singleton.h>
@@ -324,30 +325,21 @@ public:
 private:
     /**
         @brief  Add color for string -> color mapping
-        @tparam char_t      - char type
         @param  svColorName - color name
         @param  nRed        - red component
         @param  nGreen      - green component
         @param  nBlue       - blue component
         @retval             - always true
     **/
-    template<class char_t>
-    static bool add_color_to_mapping(
-        std::basic_string_view<char_t> svColorName,
-        int                            nRed,
-        int                            nGreen,
-        int                            nBlue) noexcept;
+    static bool add_color_to_mapping(string_view svColorName, int nRed, int nGreen, int nBlue) noexcept;
 
-#define _QX_DEFINE_COLOR(snakeCaseName, pascalCaseName, r, g, b)                                                   \
-    static constexpr auto snakeCaseName(float fAlpha = 1.f) noexcept                                               \
-    {                                                                                                              \
-        return color(r, g, b, float_to_dec(fAlpha));                                                               \
-    }                                                                                                              \
-    inline static const volatile bool QX_LINE_NAME(_stub1) = add_color_to_mapping<char>(#snakeCaseName, r, g, b);  \
-    inline static const volatile bool QX_LINE_NAME(_stub2) =                                                       \
-        add_color_to_mapping<wchar_t>(L## #snakeCaseName, r, g, b);                                                \
-    inline static const volatile bool QX_LINE_NAME(_stub3) = add_color_to_mapping<char>(#pascalCaseName, r, g, b); \
-    inline static const volatile bool QX_LINE_NAME(_stub4) = add_color_to_mapping<wchar_t>(L## #pascalCaseName, r, g, b)
+#define _QX_DEFINE_COLOR(snakeCaseName, pascalCaseName, r, g, b)                                                     \
+    static constexpr auto snakeCaseName(float fAlpha = 1.f) noexcept                                                 \
+    {                                                                                                                \
+        return color(r, g, b, float_to_dec(fAlpha));                                                                 \
+    }                                                                                                                \
+    inline static const volatile bool QX_LINE_NAME(_stub1) = add_color_to_mapping(QX_TEXT(#snakeCaseName), r, g, b); \
+    inline static const volatile bool QX_LINE_NAME(_stub2) = add_color_to_mapping(QX_TEXT(#pascalCaseName), r, g, b)
 
 public:
     /// Color functions
@@ -498,21 +490,10 @@ public:
 
     /**
         @brief  Try to create color from string
-        @tparam char_t      - char type
         @param  svColorName - color name: css style (alice_blue, AliceBlue, aliceblue) or #F0F8FF or 0xF0F8FFFF(0xRRGGBBAA) or 0xF0F8FF(0xRRGGBB)
         @retval             - found color or nullopt
     **/
-    template<class char_t>
-    static std::optional<color> from_string(std::basic_string_view<char_t> svColorName) noexcept;
-
-    /**
-        @brief  Try to create color from string
-        @tparam char_t       - char type
-        @param  pszColorName - color name: css style (alice_blue, AliceBlue, aliceblue) or #F0F8FF or 0xF0F8FFFF(0xRRGGBBAA) or 0xF0F8FF(0xRRGGBB)
-        @retval              - found color or nullopt
-    **/
-    template<class char_t>
-    static std::optional<color> from_string(const char_t* pszColorName) noexcept;
+    static std::optional<color> from_string(string_view svColorName) noexcept;
 
     /**
         @brief   Get empty color (0, 0, 0, 0)

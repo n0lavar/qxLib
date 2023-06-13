@@ -11,7 +11,9 @@
 //V_EXCLUDE_PATH *test_string.cpp
 
 #include <qx/containers/string/string.h>
+#include <qx/containers/string/string_view.h>
 #include <qx/macros/static_assert.h>
+
 #include <string_test_helpers.h>
 
 #include <list>
@@ -1465,9 +1467,9 @@ TYPED_TEST(TestQxString, operator_stream_in)
 
 TYPED_TEST(TestQxString, string_view)
 {
-    StringTypeTn                                                   qx_str = STR("qx_str");
-    std::basic_string_view<ValueType, std::char_traits<ValueType>> view1(qx_str);
-    std::basic_string_view<ValueType, std::char_traits<ValueType>> view2 = qx_str;
+    StringTypeTn                                                  qx_str = STR("qx_str");
+    qx::basic_string_view<ValueType, std::char_traits<ValueType>> view1(qx_str);
+    qx::basic_string_view<ValueType, std::char_traits<ValueType>> view2 = qx_str;
 }
 
 TYPED_TEST(TestQxString, small_string_optimization)

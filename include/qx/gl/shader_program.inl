@@ -34,7 +34,7 @@ inline void base_shader_program::AttachShader(shader_base<ShaderType>* pShader) 
 
 inline string base_shader_program::Link() noexcept
 {
-    string sError;
+    cstring sError;
 
     glLinkProgram(m_nProgram);
     const GLint bSuccess = GetParameter(GL_LINK_STATUS);
@@ -42,11 +42,11 @@ inline string base_shader_program::Link() noexcept
     if (bSuccess != GL_TRUE)
     {
         const GLsizei nLogLength = GetParameter(GL_INFO_LOG_LENGTH);
-        sError                   = string(nLogLength, '\0');
+        sError                   = cstring(nLogLength, '\0');
         glGetProgramInfoLog(m_nProgram, nLogLength, nullptr, sError.data());
     }
 
-    return sError;
+    return qx::to_string(sError);
 }
 
 inline void base_shader_program::Use() const noexcept

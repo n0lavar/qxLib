@@ -282,52 +282,38 @@ constexpr color color::brighten(const color& other, float fPercent) noexcept
     return ret;
 }
 
-template<class char_t>
-inline bool color::add_color_to_mapping(
-    std::basic_string_view<char_t> svColorName,
-    int                            nRed,
-    int                            nGreen,
-    int                            nBlue) noexcept
+inline bool color::add_color_to_mapping(string_view svColorName, int nRed, int nGreen, int nBlue) noexcept
 {
-    basic_string<char_t> sName = svColorName;
-    detail::string_to_color_converter::get_instance().add(
-        basic_string_hash<fast_hash_string_traits<char_t>>(sName),
-        color(nRed, nGreen, nBlue));
+    string sName = svColorName;
+    detail::string_to_color_converter::get_instance().add(string_hash(sName), color(nRed, nGreen, nBlue));
 
-    sName.remove_all(QX_CHAR_PREFIX(char_t, '_'));
-    detail::string_to_color_converter::get_instance().add(
-        basic_string_hash<fast_hash_string_traits<char_t>>(sName),
-        color(nRed, nGreen, nBlue));
+    sName.remove_all(QX_TEXT('_'));
+    detail::string_to_color_converter::get_instance().add(string_hash(sName), color(nRed, nGreen, nBlue));
 
     return true;
 }
 
-template<class char_t>
-inline std::optional<color> color::from_string(std::basic_string_view<char_t> svColorName) noexcept
+inline std::optional<color> color::from_string(string_view svColorName) noexcept
 {
-    if (const auto optColor = detail::string_to_color_converter::get_instance().get(
-            basic_string_hash<fast_hash_string_traits<char_t>>(svColorName)))
-    {
+    if (const auto optColor = detail::string_to_color_converter::get_instance().get(string_hash(svColorName)))
         return *optColor;
-    }
 
     std::optional<color> optColor;
 
     const bool bStartsWith0x =
-        svColorName.starts_with(QX_STR_PREFIX(char_t, "0x")) && (svColorName.size() == 8 || svColorName.size() == 10);
+        svColorName.starts_with(QX_TEXT("0x")) && (svColorName.size() == 8 || svColorName.size() == 10);
 
-    if (bStartsWith0x || svColorName.starts_with(QX_STR_PREFIX(char_t, "#")) && svColorName.size() == 7)
+    if (bStartsWith0x || svColorName.starts_with(QX_TEXT("#")) && svColorName.size() == 7)
     {
         // TODO no conversion method for string view so far
         // but with SSO this should be fine
-        const size_t         nOffset = bStartsWith0x ? 2 : 1;
-        basic_string<char_t> sColorName =
-            std::basic_string_view<char_t>(svColorName.data() + nOffset, svColorName.size() - nOffset);
+        const size_t nOffset    = bStartsWith0x ? 2 : 1;
+        string       sColorName = string_view(svColorName.data() + nOffset, svColorName.size() - nOffset);
 
-        auto ReadHex = [](basic_string<char_t>& s) -> std::optional<color>
+        auto ReadHex = [](string& s) -> std::optional<color>
         {
             s.to_lower();
-            if (const auto optInt = s.template to<u64>(QX_STR_PREFIX(char_t, "%llx")))
+            if (const auto optInt = s.template to<u64>(QX_TEXT("%llx")))
                 return color(*optInt);
 
             return std::nullopt;
@@ -335,7 +321,7 @@ inline std::optional<color> color::from_string(std::basic_string_view<char_t> sv
 
         if (sColorName.length() == 6)
         {
-            sColorName += QX_STR_PREFIX(char_t, "FF");
+            sColorName += QX_TEXT("FF");
             optColor = ReadHex(sColorName);
         }
         else if (sColorName.length() == 8)
@@ -345,12 +331,6 @@ inline std::optional<color> color::from_string(std::basic_string_view<char_t> sv
     }
 
     return optColor;
-}
-
-template<class char_t>
-inline std::optional<color> color::from_string(const char_t* pszColorName) noexcept
-{
-    return from_string(std::basic_string_view<char_t>(pszColorName));
 }
 
 constexpr color color::empty() noexcept

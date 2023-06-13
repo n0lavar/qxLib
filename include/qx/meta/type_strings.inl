@@ -11,19 +11,49 @@ namespace qx
 {
 
 template<class T>
-constexpr std::string_view type_strings<T>::create_full_signature()
+constexpr string_view type_strings<T>::create_full_signature()
 {
-#if defined(_MSC_VER)
-    return __FUNCSIG__;
-#elif defined(__clang__) || defined(__GNUG__)
-    return __PRETTY_FUNCTION__;
+#if QX_MSVC
+    return QX_TEXT(__FUNCSIG__);
+#elif QX_CLANG || QX_GNU
+    return QX_TEXT(__PRETTY_FUNCTION__);
 #endif
+}
+
+template<class T>
+constexpr string_view type_strings<T>::create_signature()
+{
+    auto functionSignature = create_full_signature();
+
+#if QX_MSVC
+    constexpr char_type startMarker[] = QX_TEXT("type_strings<");
+    constexpr char_type endMarker[]   = QX_TEXT(">::create_full_signature(");
+#elif QX_CLANG
+    constexpr char_type startMarker[] = QX_TEXT("T = ");
+    constexpr char_type endMarker[]   = QX_TEXT("]");
+#elif QX_GNU
+    constexpr char_type startMarker[] = QX_TEXT("T = ");
+    constexpr char_type endMarker[]   = QX_TEXT(";");
+#endif
+
+    size_t nStartMarker = functionSignature.find(startMarker);
+    size_t nStart       = nStartMarker != string_view::npos ? (nStartMarker + qx::strlen(startMarker)) : 0;
+
+    constexpr char_type classMarker[] = QX_TEXT("class ");
+    size_t              nClassMarker  = functionSignature.find(classMarker, nStart);
+    if (nClassMarker != string_view::npos)
+        nStart = nClassMarker + qx::strlen(classMarker);
+
+    size_t nEndMarker = functionSignature.find(endMarker, nStart);
+    size_t nEnd       = nEndMarker != string_view::npos ? nEndMarker : functionSignature.size();
+
+    return string_view(functionSignature.data() + nStart, nEnd - nStart);
 }
 
 template<class T>
 constexpr size_t type_strings<T>::get_num_template_parameters()
 {
-    const std::string_view svSignature = create_signature();
+    const string_view svSignature = create_signature();
 
     size_t nBraceCounter = 0;
     size_t nParams       = 0;
@@ -33,7 +63,7 @@ constexpr size_t type_strings<T>::get_num_template_parameters()
     {
         switch (svSignature[i])
         {
-        case '<':
+        case QX_TEXT('<'):
             if (!bLambda)
             {
                 ++nBraceCounter;
@@ -45,7 +75,7 @@ constexpr size_t type_strings<T>::get_num_template_parameters()
             }
             break;
 
-        case '>':
+        case QX_TEXT('>'):
             --nBraceCounter;
 
             if (bLambda)
@@ -53,7 +83,7 @@ constexpr size_t type_strings<T>::get_num_template_parameters()
 
             break;
 
-        case ',':
+        case QX_TEXT(','):
             if (nBraceCounter == 1)
                 ++nParams;
 
@@ -65,56 +95,30 @@ constexpr size_t type_strings<T>::get_num_template_parameters()
 }
 
 template<class T>
-constexpr std::string_view type_strings<T>::create_signature()
+constexpr string_view type_strings<T>::get_signature()
 {
-    std::string_view svFuncSignature = create_full_signature();
-
-#if defined(_MSC_VER)
-    constexpr char startMarker[] = "type_strings<";
-    constexpr char endMarker[]   = ">::create_full_signature(";
-#elif defined(__clang__)
-    constexpr char startMarker[] = "T = ";
-    constexpr char endMarker[]   = "]";
-#elif defined(__GNUG__)
-    constexpr char startMarker[] = "T = ";
-    constexpr char endMarker[]   = ";";
-#endif
-
-    size_t nStartMarker = svFuncSignature.find(startMarker);
-    size_t nStart       = nStartMarker != std::string_view::npos ? (nStartMarker + sizeof(startMarker) - 1) : 0;
-
-    constexpr char classMarker[] = "class ";
-    size_t         nClassMarker  = svFuncSignature.find(classMarker, nStart);
-    if (nClassMarker != std::string_view::npos)
-        nStart = nClassMarker + sizeof(classMarker) - 1;
-
-    size_t nEndMarker = svFuncSignature.find(endMarker, nStart);
-    size_t nEnd       = nEndMarker != std::string_view::npos ? nEndMarker : svFuncSignature.size();
-
-    return std::string_view(svFuncSignature.data() + nStart, svFuncSignature.data() + nEnd);
+    return create_signature();
 }
 
 template<class T>
-constexpr std::string_view type_strings<T>::create_name()
+constexpr string_view type_strings<T>::get_name()
 {
-    constexpr char         startMarker[] = "<";
-    const std::string_view svSignature   = create_signature();
-    size_t                 nStartMarker  = svSignature.find(startMarker);
+    constexpr char_type startMarker[] = QX_TEXT("<");
+    const string_view   svSignature   = create_signature();
+    size_t              nStartMarker  = svSignature.find(startMarker);
 
-    if (nStartMarker != std::string_view::npos && svSignature.find(lambdaMarker, nStartMarker) == nStartMarker + 1)
-        nStartMarker = std::string_view::npos;
+    if (nStartMarker != string_view::npos && svSignature.find(lambdaMarker, nStartMarker) == nStartMarker + 1)
+        nStartMarker = string_view::npos;
 
-    return std::string_view(
-        svSignature.data(),
-        svSignature.data() + (nStartMarker != std::string_view::npos ? nStartMarker : svSignature.size()));
+    return string_view(svSignature.data(), nStartMarker != string_view::npos ? nStartMarker : svSignature.size());
 }
 
 template<class T>
-constexpr typename type_strings<T>::template_parameters_container type_strings<T>::create_template_parameters()
+constexpr auto type_strings<T>::get_template_parameters()
 {
-    template_parameters_container tokens;
+    std::array<string_view, get_num_template_parameters()> tokens;
 
-    const std::string_view svSignature = create_signature();
+    const string_view svSignature = create_signature();
 
     size_t nTokenStart   = 0;
     size_t nBraceCounter = 0;
@@ -122,17 +126,17 @@ constexpr typename type_strings<T>::template_parameters_container type_strings<T
 
     const auto add_token = [&tokens, &svSignature](size_t nToken, size_t nStart, size_t nEnd)
     {
-        while (svSignature[nStart] == ' ')
+        while (svSignature[nStart] == QX_TEXT(' '))
             ++nStart;
 
-        while (svSignature[nEnd] == ' ')
+        while (svSignature[nEnd] == QX_TEXT(' '))
             --nEnd;
 
-        constexpr char classMarker[] = "class ";
-        if (std::string_view(svSignature.data() + nStart, svSignature.data() + nEnd).starts_with(classMarker))
-            nStart += sizeof(classMarker) - 1;
+        constexpr char_type classMarker[] = QX_TEXT("class ");
+        if (string_view(svSignature.data() + nStart, nEnd - nStart).starts_with(classMarker))
+            nStart += qx::strlen(classMarker);
 
-        tokens[nToken] = std::string_view(svSignature.data() + nStart, svSignature.data() + nEnd + 1);
+        tokens[nToken] = string_view(svSignature.data() + nStart, nEnd + 1 - nStart);
     };
 
     bool bLambda = false;
@@ -141,7 +145,7 @@ constexpr typename type_strings<T>::template_parameters_container type_strings<T
     {
         switch (svSignature[i])
         {
-        case '<':
+        case QX_TEXT('<'):
             ++nBraceCounter;
 
             if (nTokenStart == 0)
@@ -151,14 +155,14 @@ constexpr typename type_strings<T>::template_parameters_container type_strings<T
 
             break;
 
-        case '>':
+        case QX_TEXT('>'):
             --nBraceCounter;
             if (bLambda)
                 bLambda = false;
 
             break;
 
-        case ',':
+        case QX_TEXT(','):
             if (nBraceCounter == 1)
             {
                 add_token(nParam, nTokenStart, i - 1);
@@ -173,34 +177,16 @@ constexpr typename type_strings<T>::template_parameters_container type_strings<T
     {
         size_t nTokenEnd = svSignature.size() - 1;
 
-        if (svSignature[nTokenEnd] == ' ')
+        if (svSignature[nTokenEnd] == QX_TEXT(' '))
             --nTokenEnd;
 
-        if (svSignature[nTokenEnd] == '>')
+        if (svSignature[nTokenEnd] == QX_TEXT('>'))
             --nTokenEnd;
 
         add_token(nParam, nTokenStart, nTokenEnd);
     }
 
     return tokens;
-}
-
-template<class T>
-constexpr std::string_view type_strings<T>::get_signature()
-{
-    return m_kSignature;
-}
-
-template<class T>
-constexpr std::string_view type_strings<T>::get_name()
-{
-    return m_kName;
-}
-
-template<class T>
-constexpr typename type_strings<T>::template_parameters_container type_strings<T>::get_template_parameters()
-{
-    return m_kTemplateParameters;
 }
 
 } // namespace qx

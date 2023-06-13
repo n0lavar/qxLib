@@ -42,14 +42,13 @@ struct logger_color_range
     color                     rangeColor = color::white();
 };
 
-template<class char_t>
 struct logger_buffer
 {
-    basic_string<char_t> sMessage; // result message (output)
-    basic_string<char_t> sFormat;
-    basic_string<char_t> sFile;
-    basic_string<char_t> sFunction;
-    basic_string<char_t> sCategory;
+    string sMessage; // result message (output)
+    string sFormat;
+    string sFile;
+    string sFunction;
+    string sCategory;
 
     // ranges must not intersect and must increase
     std::vector<logger_color_range> colors;
@@ -67,35 +66,25 @@ struct logger_buffer
 
 struct log_unit_info
 {
-    template<class char_t>
     using format_func = std::function<void(
-        logger_buffer<char_t>& buffers,
-        log_level              eLogLevel,   // log level
-        const category&        category,    // code category
-        const char_t*          pszFormat,   // format string
-        const char_t*          pszFile,     // file name
-        const char_t*          pszFunction, // function name
-        int                    nLine,       // code line number
-        va_list                args         // additional args for format
+        logger_buffer&  buffers,
+        log_level       eLogLevel,  // log level
+        const category& category,   // code category
+        string_view     svFormat,   // format string
+        string_view     svFile,     // file name
+        string_view     svFunction, // function name
+        int             nLine,      // code line number
+        va_list         args        // additional args for format
         )>;
 
-    /**
-        @brief  Get format func corresponding to char type
-        @tparam char_t - char type
-        @retval        - format func
-    **/
-    template<class char_t>
-    const format_func<char_t>& get_format_func();
-
-    log_level            eMinLogLevel = log_level::log;
-    format_func<char>    formatFuncChar;
-    format_func<wchar_t> formatFuncWChar;
+    log_level   eMinLogLevel = log_level::log;
+    format_func formatFunc;
 };
 
 struct log_unit
 {
-    log_unit_info*   pUnitInfo = nullptr;
-    std::string_view svUnitName;
+    log_unit_info* pUnitInfo = nullptr;
+    string_view    svUnitName;
 };
 
 /**
@@ -110,7 +99,7 @@ struct log_unit
 class base_logger_stream
 {
 public:
-    static constexpr const char* k_svDefaultUnit = "default";
+    static constexpr const char_type* k_svDefaultUnit = QX_TEXT("default");
 
 public:
     /**
@@ -133,20 +122,19 @@ public:
         @brief  Output to stream
         @tparam char_t      - char type, typically char or wchar_t
         @param  eLogLevel   - log level
-        @param  pszFormat   - format string
+        @param  svFormat    - format string
         @param  category    - code category
-        @param  pszFile     - file name string
-        @param  pszFunction - function name string
+        @param  svFile      - file name string
+        @param  svFunction  - function name string
         @param  nLine       - code line number
         @param  args        - additional args for format
     **/
-    template<class char_t>
     void log(
         log_level       eLogLevel,
-        const char_t*   pszFormat,
+        string_view     svFormat,
         const category& category,
-        const char*     pszFile,
-        const char*     pszFunction,
+        string_view     svFile,
+        string_view     svFunction,
         int             nLine,
         va_list         args);
 
@@ -155,35 +143,28 @@ public:
         @param svUnitName - unit name (category name, file or function) 
         @param unit       - unit info 
     **/
-    void register_unit(std::string_view svUnitName, const log_unit_info& unit) noexcept;
+    void register_unit(string_view svUnitName, const log_unit_info& unit) noexcept;
 
     /**
         @brief Deregister logger unit
         @param svUnitName - unit name (category name, file or function)
     **/
-    void deregister_unit(std::string_view svUnitName) noexcept;
+    void deregister_unit(string_view svUnitName) noexcept;
 
     /**
         @brief  Format time string to the buffer
-        @tparam char_t          - char type
         @param  sTime           - output time buffer
         @param  chDateDelimiter - char to use as delimiter in date part
         @param  chTimeDelimiter - char to use as delimiter in time part
     **/
-    template<class char_t>
-    static void format_time_string(
-        basic_string<char_t>& sTime,
-        char_t                chDateDelimiter,
-        char_t                chTimeDelimiter) noexcept;
+    static void format_time_string(string& sTime, char_type chDateDelimiter, char_type chTimeDelimiter) noexcept;
 
 protected:
     /**
         @brief  Get string buffers
-        @tparam char_t - char type
         @retval        - string buffers
     **/
-    template<class char_t>
-    logger_buffer<char_t>& get_log_buffer() noexcept;
+    logger_buffer& get_log_buffer() noexcept;
 
 private:
     /**
@@ -194,63 +175,44 @@ private:
         @param eLogLevel - this message log level
     **/
     virtual void do_log(
-        std::string_view                       svMessage,
-        const log_unit&                        logUnit,
-        const std::vector<logger_color_range>& colors,
-        log_level                              eLogLevel) = 0;
-
-    /**
-        @brief Proceed stream logging
-        @param svMessage - message string
-        @param logUnit   - log unit info
-        @param colors    - color ranges to colorize output
-        @param eLogLevel - this message log level
-    **/
-    virtual void do_log(
-        std::wstring_view                      svMessage,
+        string_view                            svMessage,
         const log_unit&                        logUnit,
         const std::vector<logger_color_range>& colors,
         log_level                              eLogLevel) = 0;
 
     /**
         @brief  Try to find log unit info based on trace location info
-        @param  pszCategory - code category name
-        @param  pszFile     - file string
-        @param  pszFunction - function string
-        @retval             - log unit info if found
+        @param  svCategory - code category name
+        @param  svFile     - file string
+        @param  svFunction - function string
+        @retval            - log unit info if found
     **/
-    std::optional<log_unit> get_unit_info(
-        const char* pszCategory,
-        const char* pszFile,
-        const char* pszFunction) noexcept;
+    std::optional<log_unit> get_unit_info(string_view svCategory, string_view svFile, string_view svFunction) noexcept;
 
     /**
         @brief Format logger line
-        @tparam char_t      - char type, typically char or wchar_t
-        @param  buffers     - string buffers to reduce num of allocations
-        @param  eLogLevel   - log level
-        @param  category    - code category
-        @param  pszFormat   - format string
-        @param  pszFile     - file name string
-        @param  pszFunction - function name string
-        @param  nLine       - code line number
-        @param  args        - additional args for format
+        @param  buffers    - string buffers to reduce num of allocations
+        @param  eLogLevel  - log level
+        @param  category   - code category
+        @param  svFormat   - format string
+        @param  svFile     - file name string
+        @param  svFunction - function name string
+        @param  nLine      - code line number
+        @param  args       - additional args for format
     **/
-    template<class char_t>
     static void format_line(
-        logger_buffer<char_t>& buffers,
-        log_level              eLogLevel,
-        const category&        category,
-        const char_t*          pszFormat,
-        const char_t*          pszFile,
-        const char_t*          pszFunction,
-        int                    nLine,
-        va_list                args) noexcept;
+        logger_buffer&  buffers,
+        log_level       eLogLevel,
+        const category& category,
+        string_view     svFormat,
+        string_view     svFile,
+        string_view     svFunction,
+        int             nLine,
+        va_list         args) noexcept;
 
 private:
     std::unordered_map<string_hash, log_unit_info> m_Units;
-    logger_buffer<char>                            m_BufferChar;
-    logger_buffer<wchar_t>                         m_BufferWChar;
+    logger_buffer                                  m_Buffer;
     std::mutex                                     m_Mutex;
     bool                                           m_bAlwaysFlush = false;
 };

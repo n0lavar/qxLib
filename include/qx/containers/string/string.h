@@ -12,6 +12,7 @@
 #include <qx/containers/container.h>
 #include <qx/containers/string/string_data.h>
 #include <qx/containers/string/string_hash.h>
+#include <qx/containers/string/string_setup.h>
 #include <qx/macros/static_assert.h>
 #include <qx/meta/type_traits.h>
 
@@ -30,10 +31,10 @@ namespace detail
 {
 
 template<class char_t>
-using ostream = std::basic_ostream<char_t, std::char_traits<char_t>>;
+using ostream = std::basic_ostream<char_t>;
 
 template<class char_t>
-using istream = std::basic_istream<char_t, std::char_traits<char_t>>;
+using istream = std::basic_istream<char_t>;
 
 } // namespace detail
 
@@ -1865,8 +1866,9 @@ private:
     string_data<traits_t> m_Data;
 };
 
-using string  = basic_string<char>;
+using cstring = basic_string<char>;
 using wstring = basic_string<wchar_t>;
+using string  = basic_string<char_type>;
 
 } // namespace qx
 

@@ -46,38 +46,19 @@ constexpr basic_string_hash<traits_t>::operator size_t() const noexcept
 
 
 
-// -------------------------- fast_hash_string_traits --------------------------
-
-template<class value_t>
-constexpr typename char_traits<value_t>::size_type fast_hash_string_traits<value_t>::hash_function(
-    typename char_traits<value_t>::const_pointer pszStr,
-    size_t                                       nSeed,
-    typename char_traits<value_t>::size_type     nLen) noexcept
-{
-    return djb2a_hash(pszStr, nSeed, nLen);
-}
-
-template<class value_t>
-constexpr typename char_traits<value_t>::size_type fast_hash_string_traits<value_t>::hash_function(
-    typename char_traits<value_t>::const_pointer pszStr,
-    size_t                                       nSeed) noexcept
-{
-    return djb2a_hash(pszStr, nSeed);
-}
-
 // ------------------------------- operator"" _sh ------------------------------
 
 namespace literals
 {
 
-constexpr basic_string_hash<fast_hash_string_traits<char>> operator"" _sh(const char* pszStr, size_t nSize)
+constexpr basic_string_hash<char_traits<char>> operator"" _sh(const char* pszStr, size_t nSize)
 {
-    return basic_string_hash<fast_hash_string_traits<char>>(pszStr, nSize);
+    return basic_string_hash<char_traits<char>>(pszStr, nSize);
 }
 
-constexpr basic_string_hash<fast_hash_string_traits<wchar_t>> operator"" _sh(const wchar_t* pszStr, size_t nSize)
+constexpr basic_string_hash<char_traits<wchar_t>> operator"" _sh(const wchar_t* pszStr, size_t nSize)
 {
-    return basic_string_hash<fast_hash_string_traits<wchar_t>>(pszStr, nSize);
+    return basic_string_hash<char_traits<wchar_t>>(pszStr, nSize);
 }
 
 } // namespace literals

@@ -42,33 +42,11 @@ public:
         bool bDisableStdioSync = true,
         bool bUntieCin         = true);
 
-    /**
-        @brief Flush stream
-    **/
+    // base_logger_stream
+    //
     virtual void flush() override;
-
-    /**
-        @brief Output to std::cout
-        @param svMessage - message string
-        @param logUnit   - log unit info
-        @param colors    - color ranges to colorize output
-        @param eLogLevel - this message log level
-    **/
     virtual void do_log(
-        std::string_view                       svMessage,
-        const log_unit&                        logUnit,
-        const std::vector<logger_color_range>& colors,
-        log_level                              eLogLevel) override;
-
-    /**
-        @brief Output to std::wcout
-        @param svMessage - message string
-        @param logUnit   - log unit info
-        @param colors    - color ranges to colorize output
-        @param eLogLevel - this message log level
-    **/
-    virtual void do_log(
-        std::wstring_view                      svMessage,
+        string_view                            svMessage,
         const log_unit&                        logUnit,
         const std::vector<logger_color_range>& colors,
         log_level                              eLogLevel) override;
@@ -78,30 +56,6 @@ public:
         @param bUsingColors - true if cout output should be colored
     **/
     void set_using_colors(bool bUsingColors) noexcept;
-
-private:
-    /**
-        @brief  Get cout by char type
-        @tparam char_t - char type
-        @retval        - cout ref
-    **/
-    template<class char_t>
-    static std::basic_ostream<char_t>& get_cout() noexcept;
-
-    /**
-        @brief  Output to std::basic_ostream 
-        @tparam char_t    - char type
-        @param  svMessage - message string
-        @param  logUnit   - log unit info
-        @param  colors    - color ranges to colorize output
-        @param  eLogLevel - this message log level
-    **/
-    template<class char_t>
-    void log_cout(
-        std::basic_string_view<char_t>         svMessage,
-        const log_unit&                        logUnit,
-        const std::vector<logger_color_range>& colors,
-        log_level                              eLogLevel);
 
 private:
     bool m_bUsingColors = true;

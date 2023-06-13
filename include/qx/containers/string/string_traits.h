@@ -40,7 +40,7 @@ struct common_char_traits
 
     static constexpr size_type hash_function(const_pointer pszStr, size_t nSeed, size_type nLen) noexcept
     {
-        return murmur_32_hash(pszStr, nSeed, nLen);
+        return djb2a_hash(pszStr, nSeed, nLen);
     }
     static constexpr bool shrink_to_fit_when_small() noexcept
     {

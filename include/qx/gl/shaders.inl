@@ -19,7 +19,7 @@ inline shader_base<ShaderType>::~shader_base()
 template<GLenum ShaderType>
 inline string shader_base<ShaderType>::Init(const GLchar* pszShaderCode)
 {
-    string sError;
+    cstring sError;
 
     if (pszShaderCode)
     {
@@ -46,7 +46,7 @@ inline string shader_base<ShaderType>::Init(const GLchar* pszShaderCode)
         sError = "Nullptr passed as shader text pointer";
     }
 
-    return sError;
+    return qx::to_string(sError);
 }
 
 

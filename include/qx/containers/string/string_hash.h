@@ -9,6 +9,7 @@
 **/
 #pragma once
 
+#include <qx/containers/string/string_setup.h>
 #include <qx/containers/string/string_traits.h>
 
 namespace qx
@@ -79,42 +80,11 @@ private:
     size_t m_nHash = 0;
 };
 
-using string_hash  = basic_string_hash<char_traits<char>>;
+using cstring_hash = basic_string_hash<char_traits<char>>;
 using wstring_hash = basic_string_hash<char_traits<wchar_t>>;
+using string_hash  = basic_string_hash<char_traits<char_type>>;
 
-/**
-    @struct fast_hash_string_traits
-    @tparam value_t - char type
-    @date   25.01.2021
-**/
-template<class value_t>
-struct fast_hash_string_traits : public char_traits<value_t>
-{
-    /**
-        @brief  Hash function realization
-        @param  pszStr  - string first char pointer
-        @param  nSeed - hash seed
-        @param  nLen  - string size
-        @retval       - hash 
-    **/
-    static constexpr typename char_traits<value_t>::size_type hash_function(
-        typename char_traits<value_t>::const_pointer pszStr,
-        size_t                                       nSeed,
-        typename char_traits<value_t>::size_type     nLen) noexcept;
-
-    /**
-        @brief  Hash function realization
-        @param  pszStr - pointer to string zero terminated
-        @param  nSeed  - hash seed
-        @retval        - hash
-    **/
-    static constexpr typename char_traits<value_t>::size_type hash_function(
-        typename char_traits<value_t>::const_pointer pszStr,
-        size_t                                       nSeed) noexcept;
-};
-
-using fast_string_hash  = basic_string_hash<fast_hash_string_traits<char>>;
-using fast_wstring_hash = basic_string_hash<fast_hash_string_traits<wchar_t>>;
+#define QX_STRING_HASH(quote) qx::string_hash(QX_TEXT(quote))
 
 namespace literals
 {
@@ -125,7 +95,7 @@ namespace literals
     @param  nSize  - literal text size
     @retval        - text hash value
 **/
-constexpr basic_string_hash<fast_hash_string_traits<char>> operator"" _sh(const char* pszStr, size_t nSize);
+constexpr basic_string_hash<char_traits<char>> operator"" _sh(const char* pszStr, size_t nSize);
 
 /**
     @brief  String hash literal for constexpr converting. Can be used with switch-case
@@ -133,7 +103,7 @@ constexpr basic_string_hash<fast_hash_string_traits<char>> operator"" _sh(const 
     @param  nSize  - literal text size
     @retval        - text hash value
 **/
-constexpr basic_string_hash<fast_hash_string_traits<wchar_t>> operator"" _sh(const wchar_t* pszStr, size_t nSize);
+constexpr basic_string_hash<char_traits<wchar_t>> operator"" _sh(const wchar_t* pszStr, size_t nSize);
 
 } // namespace literals
 

@@ -10,8 +10,10 @@
 **/
 #pragma once
 
+#include <qx/containers/string/string_view.h>
+#include <qx/macros/config.h>
+
 #include <array>
-#include <string_view>
 
 namespace qx
 {
@@ -32,36 +34,29 @@ template<class T>
 class type_strings
 {
 private:
-    static constexpr char             lambdaMarker[] = "lambda";
-    static constexpr std::string_view create_full_signature();
-    static constexpr size_t           get_num_template_parameters();
-    static constexpr std::string_view create_signature();
-    static constexpr std::string_view create_name();
-    using template_parameters_container = std::array<std::string_view, get_num_template_parameters()>;
-    static constexpr template_parameters_container create_template_parameters();
-
-    static constexpr auto m_kSignature          = create_signature();
-    static constexpr auto m_kName               = create_name();
-    static constexpr auto m_kTemplateParameters = create_template_parameters();
+    static constexpr char_type   lambdaMarker[] = QX_TEXT("lambda");
+    static constexpr string_view create_full_signature();
+    static constexpr string_view create_signature();
+    static constexpr size_t      get_num_template_parameters();
 
 public:
     /**
         @brief  Get type signature (full name with template parameters)
         @retval  - type signature
     **/
-    static constexpr std::string_view get_signature();
+    static constexpr string_view get_signature();
 
     /**
         @brief  Get type name (short name without template parameters)
         @retval  - type name
     **/
-    static constexpr std::string_view get_name();
+    static constexpr string_view get_name();
 
     /**
         @brief  Get type template parameters
         @retval  - template parameters
     **/
-    static constexpr template_parameters_container get_template_parameters();
+    static constexpr auto get_template_parameters();
 };
 
 } // namespace qx

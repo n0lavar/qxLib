@@ -10,62 +10,22 @@
 namespace qx
 {
 
-template<class char_t>
 inline void logger::log(
     log_level       eLogLevel,
-    const char_t*   pszFormat,
+    string_view     svFormat,
     const category& category,
-    const char*     pszFile,
-    const char*     pszFunction,
+    string_view     svFile,
+    string_view     svFunction,
     int             nLine,
-    ...)
-{
-    if (eLogLevel == log_level::none)
-        return;
-
-    va_list args;
-    va_start(args, nLine);
-
-    do_log(eLogLevel, pszFormat, category, pszFile, pszFunction, nLine, args);
-
-    va_end(args);
-}
-
-template<class char_t>
-inline void logger::log(
-    log_level                   eLogLevel,
-    const basic_string<char_t>& sFormat,
-    const category&             category,
-    const char*                 pszFile,
-    const char*                 pszFunction,
-    int                         nLine,
     ...)
 {
     va_list args;
     va_start(args, nLine);
-
-    do_log(eLogLevel, sFormat.c_str(), category, pszFile, pszFunction, nLine, args);
-
-    va_end(args);
-}
-
-template<class char_t>
-inline void logger::do_log(
-    log_level       eLogLevel,
-    const char_t*   pszFormat,
-    const category& category,
-    const char*     pszFile,
-    const char*     pszFunction,
-    int             nLine,
-    va_list         args)
-{
-    va_list argsCopy;
-    va_copy(argsCopy, args);
 
     for (const auto& stream : m_Streams)
-        stream->log(eLogLevel, pszFormat, category, pszFile, pszFunction, nLine, argsCopy);
+        stream->log(eLogLevel, svFormat, category, svFile, svFunction, nLine, args);
 
-    va_end(argsCopy);
+    va_end(args);
 }
 
 inline void logger::flush()

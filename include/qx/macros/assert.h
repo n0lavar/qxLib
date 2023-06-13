@@ -31,100 +31,46 @@ namespace qx::details
 template<log_level eLogLevel, class... args_t>
 void resolve_assert_proceeding(
     const category& fileCategory,
-    const char*     pszFunction,
-    const char*     pszFile,
+    string_view     svFunction,
+    string_view     svFile,
     int             nLine,
-    const char*     pszCondition,
-    args_t&&... args)
+    string_view     svCondition,
+    const args_t&... args)
 {
-    QX_LOGGER_INSTANCE.log(eLogLevel, "[%s] ", fileCategory, pszFile, pszFunction, nLine, pszCondition, args...);
+    QX_LOGGER_INSTANCE.log(eLogLevel, QX_TEXT("[%ls] "), fileCategory, svFile, svFunction, nLine, svCondition, args...);
     QX_LOGGER_INSTANCE.flush();
 }
 
 template<log_level eLogLevel, class... args_t>
 void resolve_assert_proceeding(
     const category& fileCategory,
-    const char*     pszFunction,
-    const char*     pszFile,
+    string_view     svFunction,
+    string_view     svFile,
     int             nLine,
-    const char*     pszCondition,
-    const char*     pszFormat,
-    args_t&&... args)
+    string_view     svCondition,
+    string_view     svFormat,
+    const args_t&... args)
 {
-    string sFormat("[%s] ");
-    sFormat += pszFormat;
-    QX_LOGGER_INSTANCE
-        .log(eLogLevel, sFormat.c_str(), fileCategory, pszFile, pszFunction, nLine, pszCondition, args...);
-
+    string sFormat(QX_TEXT("[%ls] "));
+    sFormat += svFormat;
+    QX_LOGGER_INSTANCE.log(eLogLevel, sFormat.c_str(), fileCategory, svFile, svFunction, nLine, svCondition, args...);
     QX_LOGGER_INSTANCE.flush();
 }
 
 template<log_level eLogLevel, class... args_t>
 void resolve_assert_proceeding(
     const category& fileCategory,
-    const char*     pszFunction,
-    const char*     pszFile,
+    string_view     svFunction,
+    string_view     svFile,
     int             nLine,
-    const char*     pszCondition,
-    const wchar_t*  pszFormat,
-    args_t&&... args)
-{
-    wstring sFormat(L"[%ls] ");
-    sFormat += pszFormat;
-    QX_LOGGER_INSTANCE.log(
-        eLogLevel,
-        sFormat.c_str(),
-        fileCategory,
-        pszFile,
-        pszFunction,
-        nLine,
-        to_wstring(pszCondition).c_str(),
-        args...);
-
-    QX_LOGGER_INSTANCE.flush();
-}
-
-template<log_level eLogLevel, class... args_t>
-void resolve_assert_proceeding(
-    const category& fileCategory,
-    const char*     pszFunction,
-    const char*     pszFile,
-    int             nLine,
-    const char*     pszCondition,
+    string_view     svCondition,
     const category& category,
-    const char*     pszFormat,
-    args_t&&... args)
+    string_view     svFormat,
+    const args_t&... args)
 {
-    string sFormat("[%s] ");
-    sFormat += pszFormat;
-    QX_LOGGER_INSTANCE.log(eLogLevel, sFormat.c_str(), category, pszFile, pszFunction, nLine, pszCondition, args...);
-
-    QX_LOGGER_INSTANCE.flush();
-}
-
-template<log_level eLogLevel, class... args_t>
-void resolve_assert_proceeding(
-    const category& fileCategory,
-    const char*     pszFunction,
-    const char*     pszFile,
-    int             nLine,
-    const char*     pszCondition,
-    const category& category,
-    const wchar_t*  pszFormat,
-    args_t&&... args)
-{
-    wstring sFormat(L"[%ls] ");
-    sFormat += pszFormat;
-    QX_LOGGER_INSTANCE.log(
-        eLogLevel,
-        sFormat.c_str(),
-        category,
-        pszFile,
-        pszFunction,
-        nLine,
-        to_wstring(pszCondition).c_str(),
-        args...);
-
+    wstring sFormat(QX_TEXT("[%ls] "));
+    sFormat += svFormat;
+    QX_LOGGER_INSTANCE.log(eLogLevel, sFormat.c_str(), category, svFile, svFunction, nLine, svCondition, args...);
     QX_LOGGER_INSTANCE.flush();
 }
 
@@ -140,10 +86,10 @@ void resolve_assert_proceeding(
     #define QX_EXPECT_BEFORE_DEBUG_BREAK(condition, ...)              \
         qx::details::resolve_assert_proceeding<qx::log_level::error>( \
             QX_FILE_CATEGORY(),                                       \
-            __FUNCTION__,                                             \
+            qx::to_string(__FUNCTION__),                              \
             QX_SHORT_FILE,                                            \
             __LINE__,                                                 \
-            #condition,                                               \
+            QX_TEXT(#condition),                                      \
             ##__VA_ARGS__)
 #endif
 
@@ -163,10 +109,10 @@ void resolve_assert_proceeding(
     #define QX_ASSERT_BEFORE_DEBUG_BREAK(condition, ...)                 \
         qx::details::resolve_assert_proceeding<qx::log_level::critical>( \
             QX_FILE_CATEGORY(),                                          \
-            __FUNCTION__,                                                \
+            qx::to_string(__FUNCTION__),                                 \
             QX_SHORT_FILE,                                               \
             __LINE__,                                                    \
-            #condition,                                                  \
+            QX_TEXT(#condition),                                         \
             ##__VA_ARGS__)
 #endif
 

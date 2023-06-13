@@ -10,69 +10,43 @@
 namespace qx
 {
 
-template<class char_t>
-const log_unit_info::format_func<char_t>& log_unit_info::get_format_func()
-{
-    if constexpr (std::is_same_v<char_t, char>)
-        return formatFuncChar;
-    else
-        return formatFuncWChar;
-}
-
 inline base_logger_stream::base_logger_stream(bool bAlwaysFlush) : m_bAlwaysFlush(bAlwaysFlush)
 {
     register_unit(k_svDefaultUnit, { log_level::log });
 }
 
-template<class char_t>
 inline void base_logger_stream::log(
     log_level       eLogLevel,
-    const char_t*   pszFormat,
+    string_view     svFormat,
     const category& category,
-    const char*     pszFile,
-    const char*     pszFunction,
+    string_view     svFile,
+    string_view     svFunction,
     int             nLine,
     va_list         args)
 {
-    const char* pszCategory = category.get_name();
+    const char_type* pszCategory = category.get_name();
 
-    if (const auto optLogUnit = get_unit_info(pszCategory, pszFile, pszFunction); optLogUnit && optLogUnit->pUnitInfo)
+    if (const auto optLogUnit =
+            get_unit_info(pszCategory ? qx::string_view(pszCategory) : qx::string_view(), svFile, svFunction);
+        optLogUnit && optLogUnit->pUnitInfo)
     {
         if (eLogLevel >= optLogUnit->pUnitInfo->eMinLogLevel)
         {
-            std::lock_guard lock(m_Mutex);
-
             QX_PERF_SCOPE(CatLogger, "Log");
 
-            auto& buffers = get_log_buffer<char_t>();
+            std::lock_guard lock(m_Mutex);
+
+            auto& buffers = get_log_buffer();
             buffers.clear();
 
-            auto formatFunc = optLogUnit->pUnitInfo->get_format_func<char_t>();
+            auto formatFunc = optLogUnit->pUnitInfo->formatFunc;
             if (!formatFunc)
-                formatFunc = format_line<char_t>;
+                formatFunc = format_line;
 
             va_list argsCopy;
             va_copy(argsCopy, args);
 
-            if constexpr (std::is_same_v<char_t, char>)
-            {
-                formatFunc(buffers, eLogLevel, category, pszFormat, pszFile, pszFunction, nLine, argsCopy);
-            }
-            else
-            {
-                buffers.sFile     = to_wstring(pszFile);
-                buffers.sFunction = to_wstring(pszFunction);
-
-                formatFunc(
-                    buffers,
-                    eLogLevel,
-                    category,
-                    pszFormat,
-                    buffers.sFile.c_str(),
-                    buffers.sFunction.c_str(),
-                    nLine,
-                    argsCopy);
-            }
+            formatFunc(buffers, eLogLevel, category, svFormat, svFile, svFunction, nLine, argsCopy);
 
             va_end(argsCopy);
 
@@ -85,22 +59,21 @@ inline void base_logger_stream::log(
     }
 }
 
-inline void base_logger_stream::register_unit(std::string_view svUnitName, const log_unit_info& unit) noexcept
+inline void base_logger_stream::register_unit(string_view svUnitName, const log_unit_info& unit) noexcept
 {
     if (!svUnitName.empty())
         m_Units.emplace(string_hash(svUnitName), unit);
 }
 
-inline void base_logger_stream::deregister_unit(std::string_view svUnitName) noexcept
+inline void base_logger_stream::deregister_unit(string_view svUnitName) noexcept
 {
     m_Units.erase(string_hash(svUnitName));
 }
 
-template<class char_t>
 inline void base_logger_stream::format_time_string(
-    basic_string<char_t>& sTime,
-    char_t                chDateDelimiter,
-    char_t                chTimeDelimiter) noexcept
+    string&   sTime,
+    char_type chDateDelimiter,
+    char_type chTimeDelimiter) noexcept
 {
     std::time_t t = std::time(nullptr);
     QX_PUSH_SUPPRESS_MSVC_WARNINGS(4996);
@@ -108,7 +81,7 @@ inline void base_logger_stream::format_time_string(
     QX_POP_SUPPRESS_WARNINGS();
 
     sTime.sprintf(
-        QX_STR_PREFIX(char_t, "%02d%c%02d%c%04d_%02d%c%02d%c%02d"),
+        QX_TEXT("%02d%c%02d%c%04d_%02d%c%02d%c%02d"),
         now->tm_mday,
         chDateDelimiter,
         now->tm_mon,
@@ -121,117 +94,100 @@ inline void base_logger_stream::format_time_string(
         now->tm_sec);
 }
 
-template<class char_t>
-inline logger_buffer<char_t>& base_logger_stream::get_log_buffer() noexcept
+inline logger_buffer& base_logger_stream::get_log_buffer() noexcept
 {
-    if constexpr (std::is_same_v<char_t, char>)
-        return m_BufferChar;
-    else
-        return m_BufferWChar;
+    return m_Buffer;
 }
 
 inline std::optional<log_unit> base_logger_stream::get_unit_info(
-    const char* pszCategory,
-    const char* pszFile,
-    const char* pszFunction) noexcept
+    string_view svCategory,
+    string_view svFile,
+    string_view svFunction) noexcept
 {
-    auto find_unit = [this](const char* pszUnit)
+    auto find_unit = [this](string_view svUnit)
     {
-        return pszUnit ? m_Units.find(string_hash(pszUnit)) : m_Units.end();
+        return !svUnit.empty() ? m_Units.find(string_hash(svUnit)) : m_Units.end();
     };
 
     std::optional<log_unit> logUnit = std::nullopt;
 
     auto it = m_Units.end();
-    if (it = find_unit(pszCategory); it != m_Units.end())
-        logUnit = { &it->second, pszCategory };
-    else if (it = find_unit(pszFile); it != m_Units.end())
-        logUnit = { &it->second, pszFile };
-    else if (it = find_unit(pszFunction); it != m_Units.end())
-        logUnit = { &it->second, pszFunction };
+    if (it = find_unit(svCategory); it != m_Units.end())
+        logUnit = { &it->second, svCategory };
+    else if (it = find_unit(svFile); it != m_Units.end())
+        logUnit = { &it->second, svFile };
+    else if (it = find_unit(svFunction); it != m_Units.end())
+        logUnit = { &it->second, svFunction };
     else if (it = find_unit(k_svDefaultUnit); it != m_Units.end())
         logUnit = { &it->second, k_svDefaultUnit };
 
     return logUnit;
 }
 
-template<class char_t>
 inline void base_logger_stream::format_line(
-    logger_buffer<char_t>& buffers,
-    log_level              eLogLevel,
-    const category&        category,
-    const char_t*          pszFormat,
-    const char_t*          pszFile,
-    const char_t*          pszFunction,
-    int                    nLine,
-    va_list                args) noexcept
+    logger_buffer&  buffers,
+    log_level       eLogLevel,
+    const category& category,
+    string_view     svFormat,
+    string_view     svFile,
+    string_view     svFunction,
+    int             nLine,
+    va_list         args) noexcept
 {
-    buffers.sMessage.vsprintf(pszFormat, args);
+    buffers.sMessage.vsprintf(qx::string(svFormat).c_str(), args);
 
-    format_time_string(buffers.sFormat, QX_CHAR_PREFIX(char_t, '.'), QX_CHAR_PREFIX(char_t, ':'));
+    format_time_string(buffers.sFormat, QX_TEXT('.'), QX_TEXT(':'));
 
     switch (eLogLevel)
     {
     case log_level::very_verbose:
-        buffers.sFormat = QX_STR_PREFIX(char_t, "[VV][") + buffers.sFormat;
+        buffers.sFormat = QX_TEXT("[VV][") + buffers.sFormat;
         break;
 
     case log_level::verbose:
-        buffers.sFormat = QX_STR_PREFIX(char_t, "[V][") + buffers.sFormat;
+        buffers.sFormat = QX_TEXT("[V][") + buffers.sFormat;
         break;
 
     case log_level::important:
-        buffers.sFormat = QX_STR_PREFIX(char_t, "[I][") + buffers.sFormat;
+        buffers.sFormat = QX_TEXT("[I][") + buffers.sFormat;
         break;
 
     case log_level::warning:
-        buffers.sFormat = QX_STR_PREFIX(char_t, "[W][") + buffers.sFormat;
+        buffers.sFormat = QX_TEXT("[W][") + buffers.sFormat;
         break;
 
     case log_level::error:
-        buffers.sFormat = QX_STR_PREFIX(char_t, "[E][") + buffers.sFormat;
+        buffers.sFormat = QX_TEXT("[E][") + buffers.sFormat;
         break;
 
     case log_level::critical:
-        buffers.sFormat = QX_STR_PREFIX(char_t, "[C][") + buffers.sFormat;
+        buffers.sFormat = QX_TEXT("[C][") + buffers.sFormat;
         break;
 
     default:
-        buffers.sFormat = QX_STR_PREFIX(char_t, "   [") + buffers.sFormat;
+        buffers.sFormat = QX_TEXT("   [") + buffers.sFormat;
         break;
     }
 
-    const char_t* pszCategory = nullptr;
-    if (category.get_name())
-    {
-        if constexpr (std::is_same_v<char_t, char>)
-        {
-            pszCategory = category.get_name();
-        }
-        else
-        {
-            buffers.sCategory = to_wstring(category.get_name());
-            pszCategory       = buffers.sCategory.c_str();
-        }
-    }
+    const char_type* pszCategory = category.get_name();
 
-    constexpr auto pszStringFormatSpecifier = get_format_specifier<char_t, const char_t*>();
-    buffers.sFormat += QX_STR_PREFIX(char_t, "][");
+    constexpr auto pszStringFormatSpecifier = get_format_specifier<char_type, const char_type*>();
+    buffers.sFormat += QX_TEXT("][");
     buffers.sFormat += pszStringFormatSpecifier;
     if (pszCategory)
-        buffers.sFormat += QX_STR_PREFIX(char_t, "][");
+        buffers.sFormat += QX_TEXT("][");
     buffers.sFormat += pszStringFormatSpecifier;
-    buffers.sFormat += QX_STR_PREFIX(char_t, "::");
+    buffers.sFormat += QX_TEXT("::");
     buffers.sFormat += pszStringFormatSpecifier;
-    buffers.sFormat += QX_STR_PREFIX(char_t, "::%d] ");
+    buffers.sFormat += QX_TEXT("::%d] ");
     buffers.sFormat += buffers.sMessage;
     buffers.sMessage.sprintf(
         buffers.sFormat.c_str(),
-        pszCategory ? pszCategory : QX_STR_PREFIX(char_t, ""),
-        pszFile,
-        pszFunction,
+        pszCategory ? pszCategory : QX_TEXT(""),
+        qx::string(svFile).c_str(),
+        qx::string(svFunction).c_str(),
         nLine);
-    buffers.sMessage += QX_CHAR_PREFIX(char_t, '\n');
+    buffers.sMessage += QX_TEXT('\n');
 
     if (pszCategory)
         if (auto nPos = buffers.sMessage.find(pszCategory); nPos != string::npos)

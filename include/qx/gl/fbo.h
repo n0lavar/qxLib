@@ -9,6 +9,7 @@
 **/
 #pragma once
 
+#include <qx/containers/string/string_view.h>
 #include <qx/gl/rbo.h>
 #include <qx/gl/texture.h>
 
@@ -67,7 +68,7 @@ public:
         @brief  Check framebuffer status
         @retval - framebuffer error or empty if success  
     **/
-    std::string_view CheckStatus() const;
+    qx::string_view CheckStatus() const;
 
 private:
     GLuint m_nBuffer = std::numeric_limits<GLuint>::max();

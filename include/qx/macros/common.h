@@ -9,6 +9,8 @@
 **/
 #pragma once
 
+#include <qx/containers/string/string_setup.h>
+
 /**
     @def     QX_EMPTY_MACRO
     @brief   Placeholder for disabled macros
@@ -37,15 +39,15 @@
 namespace qx::detail
 {
 
-constexpr const char* last_slash(const char* str)
+constexpr const char_type* last_slash(const char_type* str)
 {
-    const char* pszLastSlash = str;
-    while (str && *str != '\0')
+    const char_type* pszLastSlash = str;
+    while (str && *str != QX_TEXT('\0'))
     {
-        if (*str == '\\' || *str == '/')
+        if (*str == QX_TEXT('\\') || *str == QX_TEXT('/'))
             pszLastSlash = str;
 
-        str++;
+        ++str;
     }
     return pszLastSlash + 1;
 }
@@ -57,7 +59,7 @@ constexpr const char* last_slash(const char* str)
     @brief Cuts full absolute path to the file name only
            ex: "C:\folder1\foler2\file.h"  =>  "file.h"
 **/
-#define QX_SHORT_FILE qx::detail::last_slash(__FILE__)
+#define QX_SHORT_FILE qx::detail::last_slash(QX_TEXT(__FILE__))
 
 /**
     @def   QX_SINGLE_ARGUMENT

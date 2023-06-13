@@ -2254,7 +2254,7 @@ template<class char_t, class traits_t>
 inline basic_string<char_t, traits_t>::operator std::basic_string_view<
     typename basic_string<char_t, traits_t>::value_type>() const noexcept
 {
-    return std::basic_string_view<value_type, std::char_traits<value_type>>(data(), size());
+    return string_view(data(), size());
 }
 
 template<class char_t, class traits_t>

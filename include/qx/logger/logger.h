@@ -26,7 +26,8 @@
     @param ...       - additional args for formatting
 **/
 #define QX_LOG_C(category, eLogLevel, format, ...) \
-    QX_LOGGER_INSTANCE.log(eLogLevel, format, category, QX_SHORT_FILE, __FUNCTION__, __LINE__, ##__VA_ARGS__)
+    QX_LOGGER_INSTANCE                             \
+        .log(eLogLevel, format, category, QX_SHORT_FILE, qx::to_string(__FUNCTION__), __LINE__, ##__VA_ARGS__)
 
 /**
     @def   QX_LOG
@@ -54,44 +55,22 @@ class logger
 public:
     /**
         @brief  Log to all streams
-        @tparam char_t      - char type, typically char or wchar_t
-        @param  eLogLevel   - log level
-        @param  pszFormat   - format string
-        @param  category    - code category
-        @param  pszFile     - file name string
-        @param  pszFunction - function name string
-        @param  nLine       - code line number
-        @param  ...         - additional args for format
+        @tparam char_t     - char type, typically char or wchar_t
+        @param  eLogLevel  - log level
+        @param  svFormat   - format string
+        @param  category   - code category
+        @param  svFile     - file name string
+        @param  svFunction - function name string
+        @param  nLine      - code line number
+        @param  ...        - additional args for format
     **/
-    template<class char_t>
     void log(
         log_level       eLogLevel,
-        const char_t*   pszFormat,
+        string_view     svFormat,
         const category& category,
-        const char*     pszFile,
-        const char*     pszFunction,
+        string_view     svFile,
+        string_view     svFunction,
         int             nLine,
-        ...);
-
-    /**
-        @brief  Log to all streams
-        @tparam char_t      - char type, typically char or wchar_t
-        @param  eLogLevel   - log level
-        @param  sFormat     - format string
-        @param  category    - code category
-        @param  pszFile     - file name string
-        @param  pszFunction - function name string
-        @param  nLine       - code line number
-        @param  ...         - additional args for format
-    **/
-    template<class char_t>
-    void log(
-        log_level                   eLogLevel,
-        const basic_string<char_t>& sFormat,
-        const category&             category,
-        const char*                 pszFile,
-        const char*                 pszFunction,
-        int                         nLine,
         ...);
 
     /**
@@ -109,28 +88,6 @@ public:
         @brief Reset logger and clear all streams
     **/
     void reset() noexcept;
-
-private:
-    /**
-        @brief  Common method for logging
-        @tparam char_t      - char type, typically char or wchar_t
-        @param  eLogLevel   - log level
-        @param  pszFormat   - format string
-        @param  category    - code category
-        @param  pszFile     - file name string
-        @param  pszFunction - function name string
-        @param  nLine       - code line number
-        @param  args        - template parameter pack
-    **/
-    template<class char_t>
-    void do_log(
-        log_level       eLogLevel,
-        const char_t*   pszFormat,
-        const category& category,
-        const char*     pszFile,
-        const char*     pszFunction,
-        int             nLine,
-        va_list         args);
 
 private:
     std::vector<std::unique_ptr<base_logger_stream>> m_Streams;
