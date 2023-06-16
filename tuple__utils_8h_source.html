@@ -99,8 +99,8 @@ $(function() {
 <div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    <span class="keyword">using</span> type = std::tuple&lt;first_pack_t..., second_pack_t...&gt;;</div>
 <div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;};</div>
 <div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160; </div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span>... args_t&gt;</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="keyword">using</span> join_t = <a class="code" href="structqx_1_1tuple_1_1join.html">join</a>&lt;args_t...&gt;::type;</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span>... first_pack_t, <span class="keyword">class</span>... second_pack_t&gt;</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="keyword">using</span> join_t = <span class="keyword">typename</span> <a class="code" href="structqx_1_1tuple_1_1join.html">join</a>&lt;first_pack_t..., second_pack_t...&gt;::type;</div>
 <div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160; </div>
 <div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="comment">// ------------------------------------------------------- remove ------------------------------------------------------</span></div>
 <div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160; </div>
@@ -148,7 +148,7 @@ $(function() {
 <div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;};</div>
 <div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160; </div>
 <div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span>... args_t&gt;</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;<span class="keyword">using</span> remove_t = <a class="code" href="structqx_1_1tuple_1_1remove.html">remove</a>&lt;args_t...&gt;::type;</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;<span class="keyword">using</span> remove_t = <span class="keyword">typename</span> <a class="code" href="structqx_1_1tuple_1_1remove.html">remove</a>&lt;args_t...&gt;::type;</div>
 <div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160; </div>
 <div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;<span class="comment">// ------------------------------------------------------ contains -----------------------------------------------------</span></div>
 <div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160; </div>
@@ -178,8 +178,8 @@ $(function() {
 <div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> tuple_t, <span class="keyword">class</span> T&gt;</div>
 <div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;<span class="keyword">using</span> <a class="code" href="structqx_1_1tuple_1_1detail_1_1contains.html">contains</a> = <a class="code" href="structqx_1_1tuple_1_1detail_1_1contains.html">detail::contains&lt;T, tuple_t&gt;</a>;</div>
 <div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160; </div>
-<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span>... args_t&gt;</div>
-<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;<span class="keyword">static</span> constexpr <span class="keywordtype">bool</span> contains_v = <a class="code" href="structqx_1_1tuple_1_1detail_1_1contains.html">contains</a>&lt;args_t...&gt;::value;</div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> tuple_t, <span class="keyword">class</span> T&gt;</div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;<span class="keyword">static</span> constexpr <span class="keywordtype">bool</span> contains_v = <a class="code" href="structqx_1_1tuple_1_1detail_1_1contains.html">contains&lt;tuple_t, T&gt;::value</a>;</div>
 <div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160; </div>
 <div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;} <span class="comment">// namespace qx::tuple</span></div>
 <div class="ttc" id="astructqx_1_1tuple_1_1detail_1_1contains_html"><div class="ttname"><a href="structqx_1_1tuple_1_1detail_1_1contains.html">qx::tuple::detail::contains</a></div><div class="ttdef"><b>Definition:</b> <a href="tuple__utils_8h_source.html#l00088">tuple_utils.h:88</a></div></div>
