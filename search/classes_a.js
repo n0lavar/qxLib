@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['observer_5ftoken_5fdata_721',['observer_token_data',['../classqx_1_1observer__token__data.html',1,'qx']]]
+  ['moving_5faverage_739',['moving_average',['../classqx_1_1moving__average.html',1,'qx']]]
 ];

@@ -96,7 +96,7 @@ $(function() {
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="comment">    @retval          - true if range contains value</span></div>
 <div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="comment">**/</span></div>
 <div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> fwd_it_t, <span class="keyword">class</span> T&gt;</div>
-<div class="line"><a name="l00028"></a><span class="lineno"><a class="line" href="contains_8h.html#af2d49efbd3de8fc5e05ab1ec9106ac48">   28</a></span>&#160;<span class="keywordtype">bool</span> <a class="code" href="contains_8h.html#af2d49efbd3de8fc5e05ab1ec9106ac48">contains</a>(fwd_it_t itBegin, fwd_it_t itEnd, <span class="keyword">const</span> T&amp; value)</div>
+<div class="line"><a name="l00028"></a><span class="lineno"><a class="line" href="contains_8h.html#af2d49efbd3de8fc5e05ab1ec9106ac48">   28</a></span>&#160;<span class="keywordtype">bool</span> contains(fwd_it_t itBegin, fwd_it_t itEnd, <span class="keyword">const</span> T&amp; value)</div>
 <div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;{</div>
 <div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    <span class="keywordflow">return</span> std::find(itBegin, itEnd, value) != itEnd;</div>
 <div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;}</div>
@@ -110,9 +110,9 @@ $(function() {
 <div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="comment">    @retval             - true if container contains value</span></div>
 <div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="comment">**/</span></div>
 <div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> container_t, <span class="keyword">class</span> T&gt;</div>
-<div class="line"><a name="l00042"></a><span class="lineno"><a class="line" href="contains_8h.html#a6daaac6c1da8ba6728a1148811074087">   42</a></span>&#160;<span class="keywordtype">bool</span> <a class="code" href="contains_8h.html#af2d49efbd3de8fc5e05ab1ec9106ac48">contains</a>(<span class="keyword">const</span> container_t&amp; container, <span class="keyword">const</span> T&amp; value)</div>
+<div class="line"><a name="l00042"></a><span class="lineno"><a class="line" href="contains_8h.html#a6daaac6c1da8ba6728a1148811074087">   42</a></span>&#160;<span class="keywordtype">bool</span> contains(<span class="keyword">const</span> container_t&amp; container, <span class="keyword">const</span> T&amp; value)</div>
 <div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;{</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="contains_8h.html#af2d49efbd3de8fc5e05ab1ec9106ac48">contains</a>(container.begin(), container.end(), value);</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    <span class="keywordflow">return</span> contains(container.begin(), container.end(), value);</div>
 <div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;}</div>
 <div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="comment"></span> </div>
 <div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="comment">/**</span></div>
@@ -146,7 +146,6 @@ $(function() {
 <div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160; </div>
 <div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;} <span class="comment">// namespace qx</span></div>
 <div class="ttc" id="acontains_8h_html_a6d6544d79558649a87ccaa597c4e99ec"><div class="ttname"><a href="contains_8h.html#a6d6544d79558649a87ccaa597c4e99ec">qx::contains_if</a></div><div class="ttdeci">bool contains_if(fwd_it_t itBegin, fwd_it_t itEnd, const predicate_t &amp;predicate)</div><div class="ttdoc">Check if at least one of range elements satisfies predicate.</div><div class="ttdef"><b>Definition:</b> <a href="contains_8h_source.html#l00057">contains.h:57</a></div></div>
-<div class="ttc" id="acontains_8h_html_af2d49efbd3de8fc5e05ab1ec9106ac48"><div class="ttname"><a href="contains_8h.html#af2d49efbd3de8fc5e05ab1ec9106ac48">qx::contains</a></div><div class="ttdeci">bool contains(fwd_it_t itBegin, fwd_it_t itEnd, const T &amp;value)</div><div class="ttdoc">Check if range contains value.</div><div class="ttdef"><b>Definition:</b> <a href="contains_8h_source.html#l00028">contains.h:28</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
