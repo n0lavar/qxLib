@@ -36,17 +36,13 @@
     @param format    - format string
     @param ...       - additional args for formatting
 **/
-#define QX_LOG(eLogLevel, format, ...) QX_LOG_C(qx::category(nullptr), eLogLevel, format, ##__VA_ARGS__)
+#define QX_LOG(eLogLevel, format, ...) QX_LOG_C(CatDefault, eLogLevel, format, ##__VA_ARGS__)
 
 namespace qx
 {
 
-// clang-format off
 template<class... args_t>
-concept log_acceptable_args = 
-    sizeof...(args_t) == 0
-    || !(qx::tuple::contains_v<forbidden_char_types, std::remove_cv_t<std::remove_pointer_t<std::decay_t<args_t>>>> || ...);
-// clang-format on
+concept log_acceptable_args = (sizeof...(args_t) > 0 && format_acceptable_args<char_type, args_t...>);
 
 /**
 
@@ -62,14 +58,12 @@ class logger
 public:
     /**
         @brief  Log to all streams
-        @tparam char_t     - char type, typically char or wchar_t
         @param  eLogLevel  - log level
         @param  svFormat   - format string
         @param  category   - code category
         @param  svFile     - file name string
         @param  svFunction - function name string
         @param  nLine      - code line number
-        @param  ...        - additional args for format
     **/
     void log(
         log_level       eLogLevel,
@@ -77,8 +71,29 @@ public:
         const category& category,
         string_view     svFile,
         string_view     svFunction,
-        int             nLine,
-        ...);
+        int             nLine);
+
+    /**
+        @brief  Log to all streams
+        @tparam args_t     - template parameter pack type
+        @param  eLogLevel  - log level
+        @param  sFormat    - format string
+        @param  category   - code category
+        @param  svFile     - file name string
+        @param  svFunction - function name string
+        @param  nLine      - code line number
+        @param  args       - additional args for format
+    **/
+    template<class... args_t>
+        requires(log_acceptable_args<args_t...>)
+    void log(
+        log_level                eLogLevel,
+        format_string<args_t...> sFormat,
+        const category&          category,
+        string_view              svFile,
+        string_view              svFunction,
+        int                      nLine,
+        const args_t&... args);
 
     /**
         @brief Flush all streams

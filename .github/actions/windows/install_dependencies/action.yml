@@ -1,5 +1,9 @@
 name: Install dependencies
 inputs:
+  cxx_flags:
+    required: false
+  cxx_linker_flags:
+    required: false
   build_type:
     required: true
 outputs:
@@ -22,7 +26,7 @@ runs:
         cd googletest
         mkdir build
         cd build
-        cmake ..
+        cmake .. -DCMAKE_CXX_FLAGS="${{ inputs.cxx_flags }}" -DCMAKE_EXE_LINKER_FLAGS="${{ inputs.cxx_linker_flags }}" 
         cmake --build .  --config ${{ inputs.build_type }} -j %NUMBER_OF_PROCESSORS%
         cd ..
         cd ..
@@ -30,4 +34,4 @@ runs:
       uses: MarkusJx/install-boost@v2.4.1
       id: install_boost
       with:
-        boost_version: 1.79.0
+        boost_version: 1.81.0

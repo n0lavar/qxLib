@@ -10,9 +10,9 @@
 #pragma once
 
 #include <qx/containers/container.h>
+#include <qx/containers/string/format_string.h>
 #include <qx/containers/string/string_data.h>
 #include <qx/containers/string/string_hash.h>
-#include <qx/containers/string/string_setup.h>
 #include <qx/macros/static_assert.h>
 #include <qx/meta/type_traits.h>
 
@@ -80,6 +80,9 @@ public:
     using string_view     = std::basic_string_view<value_type>;
     using sstream_type    = std::basic_stringstream<value_type>;
     using views           = std::vector<string_view>;
+
+    template<class... args_t>
+    using format_string_type = basic_format_string<value_type, std::type_identity_t<args_t>...>;
 
     static constexpr size_type npos = std::numeric_limits<size_type>::max();
 
@@ -195,42 +198,72 @@ public:
     void assign(const string_t& str) noexcept;
 
     /**
-        @brief  Format string (c-style printf)
-        @param  pszFormat - format pattern. this str as pszFormat is UB
-        @param  ...       - format arguments
+        @brief   Clear the string and format it with the format string and the args
+        @details Format string will be checked at compile time
+        @tparam  args_t  - template parameter pack type
+        @param   sFormat - format string
+        @param   args    - format arguments
     **/
-    void sprintf(const_pointer pszFormat, ...) noexcept;
+    template<class... args_t>
+        requires format_acceptable_args<char_t, args_t...>
+    void format(format_string_type<args_t...> sFormat, const args_t&... args);
 
     /**
-        @brief  Format string with given va_args (c-style printf)
-        @param  pszFormat - format pattern. this str as pszFormat is UB
-        @param  args      - args pack
+        @brief   Create a string by formatting it with the format string and the args
+        @details Format string will be checked at compile time
+        @tparam  args_t  - template parameter pack type
+        @param   sFormat - format string
+        @param   args    - format arguments
+        @retval          - formatted string
     **/
-    void vsprintf(const_pointer pszFormat, va_list args) noexcept;
+    template<class... args_t>
+        requires format_acceptable_args<char_t, args_t...>
+    static basic_string static_format(format_string_type<args_t...> sFormat, const args_t&... args);
 
     /**
-        @brief  Static format string (c-style printf)
-        @tparam args_t    - template parameter pack type
-        @param  pszFormat - format pattern
-        @param  args      - format arguments
+        @brief   Append the formatted string to the current one
+        @details Format string will be checked at compile time
+        @tparam  args_t  - template parameter pack type
+        @param   sFormat - format string
+        @param   args    - format arguments
+    **/
+    template<class... args_t>
+        requires format_acceptable_args<char_t, args_t...>
+    void append_format(format_string_type<args_t...> sFormat, const args_t&... args);
+
+    /**
+        @brief   Clear the string and format it with the format string and the args
+        @details No compile time checks, method will throw is something is wrong with the format string
+        @tparam  args_t   - template parameter pack type
+        @param   svFormat - format string
+        @param   args     - format arguments
+    **/
+    template<class... args_t>
+        requires format_acceptable_args<char_t, args_t...>
+    void vformat(string_view svFormat, const args_t&... args);
+
+    /**
+        @brief   Create a string by formatting it with the format string and the args
+        @details No compile time checks, method will throw is something is wrong with the format string
+        @tparam  args_t   - template parameter pack type
+        @param   svFormat - format string
+        @param   args     - format arguments
         @retval           - formatted string
     **/
     template<class... args_t>
-    static basic_string static_sprintf(const_pointer pszFormat, args_t... args) noexcept;
+        requires format_acceptable_args<char_t, args_t...>
+    static basic_string static_vformat(string_view svFormat, const args_t&... args);
 
     /**
-        @brief  Format string (c-style printf) and append to the current string
-        @param  pszFormat - format pattern
-        @param  ...       - format arguments
+        @brief   Append the formatted string to the current one
+        @details No compile time checks, method will throw is something is wrong with the format string
+        @tparam  args_t   - template parameter pack type
+        @param   svFormat - format string
+        @param   args     - format arguments
     **/
-    void append_sprintf(const_pointer pszFormat, ...) noexcept;
-
-    /**
-        @brief  Format string (c-style printf) and append to the current string
-        @param  pszFormat - format pattern
-        @param  args      - format arguments
-    **/
-    void append_vsprintf(const_pointer pszFormat, va_list args) noexcept;
+    template<class... args_t>
+        requires format_acceptable_args<char_t, args_t...>
+    void append_vformat(string_view svFormat, const args_t&... args);
 
     /**
         @brief  Swap this str and other
@@ -311,10 +344,14 @@ public:
     static constexpr size_type max_size() noexcept;
 
     /**
-        @brief  Convert string to specified type
-        @tparam to_t      - type to convert
-        @param  pszFormat - format string
-        @retval           - converted value or std::nullopt
+        @brief   Convert string to specified type
+        @warning This function currently uses unsafe scanf functions from the c library,
+                 since the current implementation of the standard library
+                 does not have an implementation of fmt::scan (https://github.com/fmtlib/fmt/blob/master/test/scan.h).
+                 This will be fixed in the future when possible.
+        @tparam  to_t      - type to convert
+        @param   pszFormat - format string (according to https://en.cppreference.com/w/c/io/fscanf)
+        @retval            - converted value or std::nullopt
     **/
     template<class to_t>
     std::optional<to_t> to(const_pointer pszFormat = nullptr) const noexcept;
@@ -330,22 +367,20 @@ public:
 
     /**
         @brief  Construct string from custom type
-        @tparam from_t    - type to convert from
-        @param  data      - data of type from_type
-        @param  pszFormat - format string if default is not enough
+        @tparam from_t - type to convert from
+        @param  data   - data of type from_type
     **/
     template<class from_t>
-    void from(const from_t& data, const_pointer pszFormat = nullptr) noexcept;
+    void from(const from_t& data);
 
     /**
         @brief  Construct string from custom type and get it
-        @tparam from_t    - type to convert from
-        @param  data      - data of type from_type
-        @param  pszFormat - format string if default is not enough
-        @retval           - constructed string
+        @tparam from_t - type to convert from
+        @param  data   - data of type from_type
+        @retval        - constructed string
     **/
     template<class from_t>
-    static basic_string static_from(const from_t& data, const_pointer pszFormat = nullptr) noexcept;
+    static basic_string static_from(const from_t& data);
 
     /**
         @brief  Append char

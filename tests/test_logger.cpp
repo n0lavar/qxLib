@@ -19,7 +19,6 @@
 #include <filesystem>
 #include <regex>
 
-static_assert(qx::log_acceptable_args<>);
 static_assert(qx::log_acceptable_args<int>);
 static_assert(qx::log_acceptable_args<float>);
 static_assert(qx::log_acceptable_args<int, float>);
@@ -142,16 +141,14 @@ protected:
                   [](qx::logger_buffer& buffers,
                      qx::log_level,
                      const qx::category& category,
-                     qx::string_view     svFormat,
                      qx::string_view,
                      qx::string_view,
                      int,
-                     va_list args)
+                     qx::string_view swLogMessage)
                   {
-                      buffers.sMessage.vsprintf(qx::string(svFormat).c_str(), args);
-                      qx::base_logger_stream::format_time_string(buffers.sFormat, QX_TEXT('.'), QX_TEXT(':'));
-                      buffers.sMessage = qx::string(QX_TEXT("   [")) + buffers.sFormat + QX_TEXT("][")
-                                         + category.get_name() + QX_TEXT("] ") + buffers.sMessage + QX_TEXT('\n');
+                      buffers.sMessage = QX_TEXT("   [");
+                      qx::base_logger_stream::append_time_string(buffers.sMessage, QX_TEXT('.'), QX_TEXT(':'));
+                      buffers.sMessage.append_format(QX_TEXT("][{}] {}\n"), category.get_name(), swLogMessage);
                   } });
         }
 
@@ -242,55 +239,55 @@ protected:
 
             CheckStringCommon(pszInfo, QX_TEXT(" Start test"));
 
-            CheckStringCommon(pszInfo, QX_TEXT(" 1.000000"));
-            CheckStringCommon(pszInfo, QX_TEXT(" 1.000000 1"));
-            CheckStringCommon(pszInfo, QX_TEXT(" 1.000000 2"));
-            CheckStringCommon(pszInfo, QX_TEXT(" 1.000000 3"));
-            CheckStringCommon(pszInfo, QX_TEXT(" 1.000000 4"));
-            CheckStringCommon(pszInfo, QX_TEXT(" 1.000000 5"));
+            CheckStringCommon(pszInfo, QX_TEXT(" 1.2"));
+            CheckStringCommon(pszInfo, QX_TEXT(" 1.2 1"));
+            CheckStringCommon(pszInfo, QX_TEXT(" 1.2 2"));
+            CheckStringCommon(pszInfo, QX_TEXT(" 1.2 3"));
+            CheckStringCommon(pszInfo, QX_TEXT(" 1.2 4"));
+            CheckStringCommon(pszInfo, QX_TEXT(" 1.2 5"));
 
-            CheckStringCommon(pszWarning, QX_TEXT(" 1.000000"));
-            CheckStringCommon(pszWarning, QX_TEXT(" 1.000000 1"));
-            CheckStringCommon(pszWarning, QX_TEXT(" 1.000000 2"));
-            CheckStringCommon(pszWarning, QX_TEXT(" 1.000000 3"));
-            CheckStringCommon(pszWarning, QX_TEXT(" 1.000000 4"));
-            CheckStringCommon(pszWarning, QX_TEXT(" 1.000000 5"));
+            CheckStringCommon(pszWarning, QX_TEXT(" 1.2"));
+            CheckStringCommon(pszWarning, QX_TEXT(" 1.2 1"));
+            CheckStringCommon(pszWarning, QX_TEXT(" 1.2 2"));
+            CheckStringCommon(pszWarning, QX_TEXT(" 1.2 3"));
+            CheckStringCommon(pszWarning, QX_TEXT(" 1.2 4"));
+            CheckStringCommon(pszWarning, QX_TEXT(" 1.2 5"));
 
-            CheckStringCommon(pszError, QX_TEXT(" 1.000000 1"));
-            CheckStringCommon(pszError, QX_TEXT(" 1.000000 2"));
-            CheckStringCommon(pszError, QX_TEXT(" 1.000000 3"));
-            CheckStringCommon(pszError, QX_TEXT(" 1.000000 4"));
-            CheckStringCommon(pszError, QX_TEXT(" 1.000000 5"));
+            CheckStringCommon(pszError, QX_TEXT(" 1.2 1"));
+            CheckStringCommon(pszError, QX_TEXT(" 1.2 2"));
+            CheckStringCommon(pszError, QX_TEXT(" 1.2 3"));
+            CheckStringCommon(pszError, QX_TEXT(" 1.2 4"));
+            CheckStringCommon(pszError, QX_TEXT(" 1.2 5"));
 
-            CheckStringCommon(pszAssert, QX_TEXT(" \\[false\\] 1.000000 1"));
-            CheckStringCommon(pszAssert, QX_TEXT(" \\[false\\] 1.000000 2"));
-            CheckStringCommon(pszAssert, QX_TEXT(" \\[false\\] 1.000000 3"));
-            CheckStringCommon(pszAssert, QX_TEXT(" \\[false\\] 1.000000 4"));
-            CheckStringCommon(pszAssert, QX_TEXT(" \\[false\\] 1.000000 5"));
+            CheckStringCommon(pszAssert, QX_TEXT(" \\[false\\] 1.2 1"));
+            CheckStringCommon(pszAssert, QX_TEXT(" \\[false\\] 1.2 2"));
+            CheckStringCommon(pszAssert, QX_TEXT(" \\[false\\] 1.2 3"));
+            CheckStringCommon(pszAssert, QX_TEXT(" \\[false\\] 1.2 4"));
+            CheckStringCommon(pszAssert, QX_TEXT(" \\[false\\] 1.2 5"));
 
-            CheckStringCommon(pszAssert, QX_TEXT(" \\[false\\] 1.000000 1 three"));
-            CheckStringCommon(pszAssert, QX_TEXT(" \\[false\\] 1.000000 2 three"));
-            CheckStringCommon(pszAssert, QX_TEXT(" \\[false\\] 1.000000 3 three"));
-            CheckStringCommon(pszAssert, QX_TEXT(" \\[false\\] 1.000000 4 three"));
-            CheckStringCommon(pszAssert, QX_TEXT(" \\[false\\] 1.000000 5 three"));
+            CheckStringCommon(pszAssert, QX_TEXT(" \\[false\\] 1.2 1 three"));
+            CheckStringCommon(pszAssert, QX_TEXT(" \\[false\\] 1.2 2 three"));
+            CheckStringCommon(pszAssert, QX_TEXT(" \\[false\\] 1.2 3 three"));
+            CheckStringCommon(pszAssert, QX_TEXT(" \\[false\\] 1.2 4 three"));
+            CheckStringCommon(pszAssert, QX_TEXT(" \\[false\\] 1.2 5 three"));
 
             if constexpr (LOG_CATEGORY_TAG1 == traits_t::GetCategory())
             {
-                CheckStringCategory(QX_TEXT(" 1.000000"));
-                CheckStringCategory(QX_TEXT(" 1.000000 1"));
-                CheckStringCategory(QX_TEXT(" 1.000000 2"));
-                CheckStringCategory(QX_TEXT(" 1.000000 3"));
-                CheckStringCategory(QX_TEXT(" 1.000000 4"));
-                CheckStringCategory(QX_TEXT(" 1.000000 5"));
+                CheckStringCategory(QX_TEXT(" 1.2"));
+                CheckStringCategory(QX_TEXT(" 1.2 1"));
+                CheckStringCategory(QX_TEXT(" 1.2 2"));
+                CheckStringCategory(QX_TEXT(" 1.2 3"));
+                CheckStringCategory(QX_TEXT(" 1.2 4"));
+                CheckStringCategory(QX_TEXT(" 1.2 5"));
             }
             else
             {
-                CheckStringCommon(pszInfo, QX_TEXT(" 1.000000"), true);
-                CheckStringCommon(pszInfo, QX_TEXT(" 1.000000 1"), true);
-                CheckStringCommon(pszInfo, QX_TEXT(" 1.000000 2"), true);
-                CheckStringCommon(pszInfo, QX_TEXT(" 1.000000 3"), true);
-                CheckStringCommon(pszInfo, QX_TEXT(" 1.000000 4"), true);
-                CheckStringCommon(pszInfo, QX_TEXT(" 1.000000 5"), true);
+                CheckStringCommon(pszInfo, QX_TEXT(" 1.2"), true);
+                CheckStringCommon(pszInfo, QX_TEXT(" 1.2 1"), true);
+                CheckStringCommon(pszInfo, QX_TEXT(" 1.2 2"), true);
+                CheckStringCommon(pszInfo, QX_TEXT(" 1.2 3"), true);
+                CheckStringCommon(pszInfo, QX_TEXT(" 1.2 4"), true);
+                CheckStringCommon(pszInfo, QX_TEXT(" 1.2 5"), true);
             }
 
             CheckStringCommon(pszInfo, QX_TEXT(" End test"));
@@ -310,20 +307,14 @@ protected:
 TYPED_TEST_SUITE(TestLogger, Implementations);
 
 #define TEST_LOG(traceFile, format, ...) \
-    myLogger.log(                        \
-        qx::log_level::log,              \
-        format,                          \
-        qx::category { nullptr },        \
-        traceFile,                       \
-        qx::to_string(__FUNCTION__),     \
-        __LINE__,                        \
-        ##__VA_ARGS__)
+    myLogger                             \
+        .log(qx::log_level::log, format, CatDefault, traceFile, qx::to_string(__FUNCTION__), __LINE__, ##__VA_ARGS__)
 
 #define TEST_LOG_WARNING(traceFile, format, ...) \
     myLogger.log(                                \
         qx::log_level::warning,                  \
         format,                                  \
-        qx::category { nullptr },                \
+        CatDefault,                              \
         traceFile,                               \
         qx::to_string(__FUNCTION__),             \
         __LINE__,                                \
@@ -343,101 +334,65 @@ TYPED_TEST_SUITE(TestLogger, Implementations);
     myLogger.log(                              \
         qx::log_level::error,                  \
         format,                                \
-        qx::category { nullptr },              \
+        CatDefault,                            \
         traceFile,                             \
         qx::to_string(__FUNCTION__),           \
         __LINE__,                              \
         ##__VA_ARGS__)
 
-#define TEST_LOG_ASSERT(traceFile, expr, format, ...)                                                              \
-    myLogger.log(                                                                                                  \
-        qx::log_level::critical,                                                                                   \
-        qx::string(QX_TEXT("[")) + qx::get_format_specifier<qx::char_type, const qx::char_type*>() + QX_TEXT("] ") \
-            + format,                                                                                              \
-        qx::category { nullptr },                                                                                  \
-        traceFile,                                                                                                 \
-        qx::to_string(__FUNCTION__),                                                                               \
-        __LINE__,                                                                                                  \
-        QX_TEXT(#expr),                                                                                            \
+#define TEST_LOG_ASSERT(traceFile, expr, format, ...) \
+    myLogger.log(                                     \
+        qx::log_level::critical,                      \
+        QX_TEXT("[{}] ") format,                      \
+        CatDefault,                                   \
+        traceFile,                                    \
+        qx::to_string(__FUNCTION__),                  \
+        __LINE__,                                     \
+        QX_TEXT(#expr),                               \
         ##__VA_ARGS__)
 
-#define TEST_LOGGER(traceFile, _category)                                                          \
-    TEST_LOG(traceFile, QX_TEXT("Start test"));                                                    \
-                                                                                                   \
-    TEST_LOG(traceFile, QX_TEXT("%f"), 1.f);                                                       \
-    TEST_LOG(traceFile, QX_TEXT("%f %d"), 1.f, 1);                                                 \
-    TEST_LOG(traceFile, QX_TEXT("%f %d"), 1.f, 2);                                                 \
-    TEST_LOG(traceFile, QX_TEXT("%f %d"), 1.f, 3);                                                 \
-    TEST_LOG(traceFile, QX_TEXT("%f %d"), 1.f, 4);                                                 \
-    TEST_LOG(traceFile, QX_TEXT("%f %d"), 1.f, 5);                                                 \
-                                                                                                   \
-    TEST_LOG_WARNING(traceFile, QX_TEXT("%f"), 1.f);                                               \
-    TEST_LOG_WARNING(traceFile, QX_TEXT("%f %d"), 1.f, 1);                                         \
-    TEST_LOG_WARNING(traceFile, QX_TEXT("%f %d"), 1.f, 2);                                         \
-    TEST_LOG_WARNING(traceFile, QX_TEXT("%f %d"), 1.f, 3);                                         \
-    TEST_LOG_WARNING(traceFile, QX_TEXT("%f %d"), 1.f, 4);                                         \
-    TEST_LOG_WARNING(traceFile, QX_TEXT("%f %d"), 1.f, 5);                                         \
-                                                                                                   \
-    TEST_LOG_ERROR(traceFile, QX_TEXT("%f %d"), 1.f, 1);                                           \
-    TEST_LOG_ERROR(traceFile, QX_TEXT("%f %d"), 1.f, 2);                                           \
-    TEST_LOG_ERROR(traceFile, QX_TEXT("%f %d"), 1.f, 3);                                           \
-    TEST_LOG_ERROR(traceFile, QX_TEXT("%f %d"), 1.f, 4);                                           \
-    TEST_LOG_ERROR(traceFile, QX_TEXT("%f %d"), 1.f, 5);                                           \
-                                                                                                   \
-    TEST_LOG_ASSERT(traceFile, false, QX_TEXT("%f %d"), 1.f, 1);                                   \
-    TEST_LOG_ASSERT(traceFile, false, QX_TEXT("%f %d"), 1.f, 2);                                   \
-    TEST_LOG_ASSERT(traceFile, false, QX_TEXT("%f %d"), 1.f, 3);                                   \
-    TEST_LOG_ASSERT(traceFile, false, QX_TEXT("%f %d"), 1.f, 4);                                   \
-    TEST_LOG_ASSERT(traceFile, false, QX_TEXT("%f %d"), 1.f, 5);                                   \
-                                                                                                   \
-    TEST_LOG_ASSERT(                                                                               \
-        traceFile,                                                                                 \
-        false,                                                                                     \
-        qx::string(QX_TEXT("%f %d "))                                                              \
-            + QX_SINGLE_ARGUMENT(qx::get_format_specifier<qx::char_type, const qx::char_type*>()), \
-        1.f,                                                                                       \
-        1,                                                                                         \
-        QX_TEXT("three"));                                                                         \
-    TEST_LOG_ASSERT(                                                                               \
-        traceFile,                                                                                 \
-        false,                                                                                     \
-        qx::string(QX_TEXT("%f %d "))                                                              \
-            + QX_SINGLE_ARGUMENT(qx::get_format_specifier<qx::char_type, const qx::char_type*>()), \
-        1.f,                                                                                       \
-        2,                                                                                         \
-        QX_TEXT("three"));                                                                         \
-    TEST_LOG_ASSERT(                                                                               \
-        traceFile,                                                                                 \
-        false,                                                                                     \
-        qx::string(QX_TEXT("%f %d "))                                                              \
-            + QX_SINGLE_ARGUMENT(qx::get_format_specifier<qx::char_type, const qx::char_type*>()), \
-        1.f,                                                                                       \
-        3,                                                                                         \
-        QX_TEXT("three"));                                                                         \
-    TEST_LOG_ASSERT(                                                                               \
-        traceFile,                                                                                 \
-        false,                                                                                     \
-        qx::string(QX_TEXT("%f %d "))                                                              \
-            + QX_SINGLE_ARGUMENT(qx::get_format_specifier<qx::char_type, const qx::char_type*>()), \
-        1.f,                                                                                       \
-        4,                                                                                         \
-        QX_TEXT("three"));                                                                         \
-    TEST_LOG_ASSERT(                                                                               \
-        traceFile,                                                                                 \
-        false,                                                                                     \
-        qx::string(QX_TEXT("%f %d "))                                                              \
-            + QX_SINGLE_ARGUMENT(qx::get_format_specifier<qx::char_type, const qx::char_type*>()), \
-        1.f,                                                                                       \
-        5,                                                                                         \
-        QX_TEXT("three"));                                                                         \
-                                                                                                   \
-    TEST_LOG_CATEGORY(traceFile, _category, QX_TEXT("%f"), 1.f);                                   \
-    TEST_LOG_CATEGORY(traceFile, _category, QX_TEXT("%f %d"), 1.f, 1);                             \
-    TEST_LOG_CATEGORY(traceFile, _category, QX_TEXT("%f %d"), 1.f, 2);                             \
-    TEST_LOG_CATEGORY(traceFile, _category, QX_TEXT("%f %d"), 1.f, 3);                             \
-    TEST_LOG_CATEGORY(traceFile, _category, QX_TEXT("%f %d"), 1.f, 4);                             \
-    TEST_LOG_CATEGORY(traceFile, _category, QX_TEXT("%f %d"), 1.f, 5);                             \
-                                                                                                   \
+#define TEST_LOGGER(traceFile, _category)                                              \
+    TEST_LOG(traceFile, QX_TEXT("Start test"));                                        \
+                                                                                       \
+    TEST_LOG(traceFile, QX_TEXT("{}"), 1.2f);                                          \
+    TEST_LOG(traceFile, QX_TEXT("{} {}"), 1.2f, 1);                                    \
+    TEST_LOG(traceFile, QX_TEXT("{} {}"), 1.2f, 2);                                    \
+    TEST_LOG(traceFile, QX_TEXT("{} {}"), 1.2f, 3);                                    \
+    TEST_LOG(traceFile, QX_TEXT("{} {}"), 1.2f, 4);                                    \
+    TEST_LOG(traceFile, QX_TEXT("{} {}"), 1.2f, 5);                                    \
+                                                                                       \
+    TEST_LOG_WARNING(traceFile, QX_TEXT("{}"), 1.2f);                                  \
+    TEST_LOG_WARNING(traceFile, QX_TEXT("{} {}"), 1.2f, 1);                            \
+    TEST_LOG_WARNING(traceFile, QX_TEXT("{} {}"), 1.2f, 2);                            \
+    TEST_LOG_WARNING(traceFile, QX_TEXT("{} {}"), 1.2f, 3);                            \
+    TEST_LOG_WARNING(traceFile, QX_TEXT("{} {}"), 1.2f, 4);                            \
+    TEST_LOG_WARNING(traceFile, QX_TEXT("{} {}"), 1.2f, 5);                            \
+                                                                                       \
+    TEST_LOG_ERROR(traceFile, QX_TEXT("{} {}"), 1.2f, 1);                              \
+    TEST_LOG_ERROR(traceFile, QX_TEXT("{} {}"), 1.2f, 2);                              \
+    TEST_LOG_ERROR(traceFile, QX_TEXT("{} {}"), 1.2f, 3);                              \
+    TEST_LOG_ERROR(traceFile, QX_TEXT("{} {}"), 1.2f, 4);                              \
+    TEST_LOG_ERROR(traceFile, QX_TEXT("{} {}"), 1.2f, 5);                              \
+                                                                                       \
+    TEST_LOG_ASSERT(traceFile, false, QX_TEXT("{} {}"), 1.2f, 1);                      \
+    TEST_LOG_ASSERT(traceFile, false, QX_TEXT("{} {}"), 1.2f, 2);                      \
+    TEST_LOG_ASSERT(traceFile, false, QX_TEXT("{} {}"), 1.2f, 3);                      \
+    TEST_LOG_ASSERT(traceFile, false, QX_TEXT("{} {}"), 1.2f, 4);                      \
+    TEST_LOG_ASSERT(traceFile, false, QX_TEXT("{} {}"), 1.2f, 5);                      \
+                                                                                       \
+    TEST_LOG_ASSERT(traceFile, false, QX_TEXT("{} {} {}"), 1.2f, 1, QX_TEXT("three")); \
+    TEST_LOG_ASSERT(traceFile, false, QX_TEXT("{} {} {}"), 1.2f, 2, QX_TEXT("three")); \
+    TEST_LOG_ASSERT(traceFile, false, QX_TEXT("{} {} {}"), 1.2f, 3, QX_TEXT("three")); \
+    TEST_LOG_ASSERT(traceFile, false, QX_TEXT("{} {} {}"), 1.2f, 4, QX_TEXT("three")); \
+    TEST_LOG_ASSERT(traceFile, false, QX_TEXT("{} {} {}"), 1.2f, 5, QX_TEXT("three")); \
+                                                                                       \
+    TEST_LOG_CATEGORY(traceFile, _category, QX_TEXT("{}"), 1.2f);                      \
+    TEST_LOG_CATEGORY(traceFile, _category, QX_TEXT("{} {}"), 1.2f, 1);                \
+    TEST_LOG_CATEGORY(traceFile, _category, QX_TEXT("{} {}"), 1.2f, 2);                \
+    TEST_LOG_CATEGORY(traceFile, _category, QX_TEXT("{} {}"), 1.2f, 3);                \
+    TEST_LOG_CATEGORY(traceFile, _category, QX_TEXT("{} {}"), 1.2f, 4);                \
+    TEST_LOG_CATEGORY(traceFile, _category, QX_TEXT("{} {}"), 1.2f, 5);                \
+                                                                                       \
     TEST_LOG(traceFile, QX_TEXT("End test\n"));
 
 void TestLoggerFunction(qx::logger& myLogger, const qx::char_type* pszTraceFile, const qx::char_type* pszCategory)

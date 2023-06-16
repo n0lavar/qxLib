@@ -120,69 +120,59 @@ inline void basic_string<char_t, traits_t>::assign(const string_t& sAnother) noe
 }
 
 template<class char_t, class traits_t>
-void basic_string<char_t, traits_t>::sprintf(const_pointer pszFormat, ...) noexcept
+template<class... args_t>
+    requires format_acceptable_args<char_t, args_t...>
+void basic_string<char_t, traits_t>::format(format_string_type<args_t...> sFormat, const args_t&... args)
 {
-    if (pszFormat)
-    {
-        va_list args;
-        va_start(args, pszFormat);
-        this->vsprintf(pszFormat, args);
-        va_end(args);
-    }
-}
-
-template<class char_t, class traits_t>
-inline void basic_string<char_t, traits_t>::vsprintf(const_pointer pszFormat, va_list args) noexcept
-{
-    if (pszFormat)
-    {
-        va_list argsCopy;
-        va_copy(argsCopy, args);
-        int nLength = traits_t::vsnprintf(nullptr, 0, pszFormat, argsCopy);
-        va_end(argsCopy);
-
-        if (nLength > 0 && _resize(static_cast<size_type>(nLength)))
-            traits_t::vsnprintf(data(), static_cast<size_type>(nLength) + 1, pszFormat, args);
-    }
+    vformat(sFormat.get(), args...);
 }
 
 template<class char_t, class traits_t>
 template<class... args_t>
-inline basic_string<char_t, traits_t> basic_string<char_t, traits_t>::static_sprintf(
-    const_pointer pszFormat,
-    args_t... args) noexcept
+    requires format_acceptable_args<char_t, args_t...>
+basic_string<char_t, traits_t> basic_string<char_t, traits_t>::static_format(
+    format_string_type<args_t...> sFormat,
+    const args_t&... args)
+{
+    return static_vformat(sFormat.get(), args...);
+}
+
+template<class char_t, class traits_t>
+template<class... args_t>
+    requires format_acceptable_args<char_t, args_t...>
+void basic_string<char_t, traits_t>::append_format(format_string_type<args_t...> sFormat, const args_t&... args)
+{
+    append_vformat(sFormat.get(), args...);
+}
+
+template<class char_t, class traits_t>
+template<class... args_t>
+    requires format_acceptable_args<char_t, args_t...>
+void basic_string<char_t, traits_t>::vformat(string_view svFormat, const args_t&... args)
+{
+    clear();
+    append_vformat(svFormat, args...);
+}
+
+template<class char_t, class traits_t>
+template<class... args_t>
+    requires format_acceptable_args<char_t, args_t...>
+inline basic_string<char_t, traits_t> basic_string<char_t, traits_t>::static_vformat(
+    string_view svFormat,
+    const args_t&... args)
 {
     basic_string sTemp;
-    sTemp.sprintf(pszFormat, args...);
+    sTemp.vformat(svFormat, args...);
     return sTemp;
 }
 
 template<class char_t, class traits_t>
-inline void basic_string<char_t, traits_t>::append_sprintf(const_pointer pszFormat, ...) noexcept
+template<class... args_t>
+    requires format_acceptable_args<char_t, args_t...>
+inline void basic_string<char_t, traits_t>::append_vformat(string_view svFormat, const args_t&... args)
 {
-    if (pszFormat)
-    {
-        va_list args;
-        va_start(args, pszFormat);
-        append_vsprintf(pszFormat, args);
-        va_end(args);
-    }
-}
-
-template<class char_t, class traits_t>
-inline void basic_string<char_t, traits_t>::append_vsprintf(const_pointer pszFormat, va_list args) noexcept
-{
-    if (pszFormat)
-    {
-        va_list argsCopy;
-        va_copy(argsCopy, args);
-        int nLength = traits_t::vsnprintf(nullptr, 0, pszFormat, argsCopy);
-        va_end(argsCopy);
-
-        const size_type nSize = size();
-        if (nLength > 0 && _resize(nSize + static_cast<size_type>(nLength)))
-            traits_t::vsnprintf(data() + nSize, static_cast<size_type>(nLength) + 1, pszFormat, args);
-    }
+    if (!svFormat.empty())
+        traits_t::format_to(std::back_inserter(*this), svFormat, args...);
 }
 
 template<class char_t, class traits_t>
@@ -340,31 +330,26 @@ inline typename basic_string<char_t, traits_t>::size_type basic_string<char_t, t
 
 template<class char_t, class traits_t>
 template<class from_t>
-inline void basic_string<char_t, traits_t>::from(const from_t& data, const_pointer pszFormat) noexcept
+inline void basic_string<char_t, traits_t>::from(const from_t& data)
 {
     if constexpr (
         std::is_trivial_v<from_t> && std::is_standard_layout_v<from_t> || std::is_pointer_v<from_t>
         || std::is_same_v<from_t, std::nullptr_t>)
     {
-        if (!pszFormat)
+        if constexpr (std::is_same_v<from_t, std::nullptr_t>)
         {
-            if constexpr (std::is_same_v<from_t, std::nullptr_t>)
-            {
-                pszFormat = QX_STR_PREFIX(typename traits_t::value_type, "nullptr");
-            }
-            else if constexpr (std::is_same_v<from_t, bool>)
-            {
-                pszFormat = data ? QX_STR_PREFIX(typename traits_t::value_type, "true")
-                                 : QX_STR_PREFIX(typename traits_t::value_type, "false");
-            }
-            else
-            {
-                pszFormat = get_format_specifier<value_type, from_t>();
-            }
+            assign(QX_STR_PREFIX(typename traits_t::value_type, "nullptr"));
         }
-
-        if (pszFormat)
-            sprintf(pszFormat, data);
+        else if constexpr (std::is_same_v<from_t, bool>)
+        {
+            assign(
+                data ? QX_STR_PREFIX(typename traits_t::value_type, "true")
+                     : QX_STR_PREFIX(typename traits_t::value_type, "false"));
+        }
+        else
+        {
+            format(QX_STR_PREFIX(typename traits_t::value_type, "{}"), data);
+        }
     }
     else
     {
@@ -376,12 +361,10 @@ inline void basic_string<char_t, traits_t>::from(const from_t& data, const_point
 
 template<class char_t, class traits_t>
 template<class from_t>
-inline basic_string<char_t, traits_t> basic_string<char_t, traits_t>::static_from(
-    const from_t& data,
-    const_pointer pszFormat) noexcept
+inline basic_string<char_t, traits_t> basic_string<char_t, traits_t>::static_from(const from_t& data)
 {
     basic_string sTemp;
-    sTemp.from(data, pszFormat);
+    sTemp.from(data);
     return std::move(sTemp);
 }
 
@@ -2067,7 +2050,9 @@ inline basic_string<char_t, traits_t>& basic_string<char_t, traits_t>::operator+
 template<class char_t, class traits_t>
 inline basic_string<char_t, traits_t>& basic_string<char_t, traits_t>::operator+=(const_pointer pszSource) noexcept
 {
-    append(pszSource, traits_t::length(pszSource));
+    if (pszSource)
+        append(pszSource, traits_t::length(pszSource));
+
     return *this;
 }
 

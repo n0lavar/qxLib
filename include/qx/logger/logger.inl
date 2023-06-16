@@ -16,16 +16,26 @@ inline void logger::log(
     const category& category,
     string_view     svFile,
     string_view     svFunction,
-    int             nLine,
-    ...)
+    int             nLine)
 {
-    va_list args;
-    va_start(args, nLine);
-
     for (const auto& stream : m_Streams)
-        stream->log(eLogLevel, svFormat, category, svFile, svFunction, nLine, args);
+        stream->log(eLogLevel, category, svFile, svFunction, nLine, svFormat);
+}
 
-    va_end(args);
+template<class... args_t>
+    requires(log_acceptable_args<args_t...>)
+inline void logger::log(
+    log_level                eLogLevel,
+    format_string<args_t...> sFormat,
+    const category&          category,
+    string_view              svFile,
+    string_view              svFunction,
+    int                      nLine,
+    const args_t&... args)
+{
+    const auto sLogMessage = qx::string::static_format(sFormat, args...);
+    for (const auto& stream : m_Streams)
+        stream->log(eLogLevel, category, svFile, svFunction, nLine, sLogMessage);
 }
 
 inline void logger::flush()

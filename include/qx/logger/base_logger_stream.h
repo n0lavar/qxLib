@@ -45,10 +45,6 @@ struct logger_color_range
 struct logger_buffer
 {
     string sMessage; // result message (output)
-    string sFormat;
-    string sFile;
-    string sFunction;
-    string sCategory;
 
     // ranges must not intersect and must increase
     std::vector<logger_color_range> colors;
@@ -56,10 +52,6 @@ struct logger_buffer
     void clear()
     {
         sMessage.clear();
-        sFormat.clear();
-        sFile.clear();
-        sFunction.clear();
-        sCategory.clear();
         colors.clear();
     }
 };
@@ -68,13 +60,12 @@ struct log_unit_info
 {
     using format_func = std::function<void(
         logger_buffer&  buffers,
-        log_level       eLogLevel,  // log level
-        const category& category,   // code category
-        string_view     svFormat,   // format string
-        string_view     svFile,     // file name
-        string_view     svFunction, // function name
-        int             nLine,      // code line number
-        va_list         args        // additional args for format
+        log_level       eLogLevel,   // log level
+        const category& category,    // code category
+        string_view     svFile,      // file name
+        string_view     svFunction,  // function name
+        int             nLine,       // code line number
+        string_view     swLogMessage // log message
         )>;
 
     log_level   eMinLogLevel = log_level::log;
@@ -120,23 +111,21 @@ public:
 
     /**
         @brief  Output to stream
-        @tparam char_t      - char type, typically char or wchar_t
-        @param  eLogLevel   - log level
-        @param  svFormat    - format string
-        @param  category    - code category
-        @param  svFile      - file name string
-        @param  svFunction  - function name string
-        @param  nLine       - code line number
-        @param  args        - additional args for format
+        @tparam char_t       - char type, typically char or wchar_t
+        @param  eLogLevel    - log level
+        @param  category     - code category
+        @param  svFile       - file name string
+        @param  svFunction   - function name string
+        @param  nLine        - code line number
+        @param  swLogMessage - formatted log line
     **/
     void log(
         log_level       eLogLevel,
-        string_view     svFormat,
         const category& category,
         string_view     svFile,
         string_view     svFunction,
         int             nLine,
-        va_list         args);
+        string_view     swLogMessage);
 
     /**
         @brief Register logger unit
@@ -157,7 +146,7 @@ public:
         @param  chDateDelimiter - char to use as delimiter in date part
         @param  chTimeDelimiter - char to use as delimiter in time part
     **/
-    static void format_time_string(string& sTime, char_type chDateDelimiter, char_type chTimeDelimiter) noexcept;
+    static void append_time_string(string& sTime, char_type chDateDelimiter, char_type chTimeDelimiter) noexcept;
 
 protected:
     /**
@@ -165,6 +154,25 @@ protected:
         @retval        - string buffers
     **/
     logger_buffer& get_log_buffer() noexcept;
+
+    /**
+        @brief Format logger line
+        @param  buffers      - string buffers to reduce num of allocations
+        @param  eLogLevel    - log level
+        @param  category     - code category
+        @param  svFile       - file name string
+        @param  svFunction   - function name string
+        @param  nLine        - code line number
+        @param  swLogMessage - formatted log line
+    **/
+    virtual void format_line(
+        logger_buffer&  buffers,
+        log_level       eLogLevel,
+        const category& category,
+        string_view     svFile,
+        string_view     svFunction,
+        int             nLine,
+        string_view     swLogMessage) noexcept;
 
 private:
     /**
@@ -188,27 +196,6 @@ private:
         @retval            - log unit info if found
     **/
     std::optional<log_unit> get_unit_info(string_view svCategory, string_view svFile, string_view svFunction) noexcept;
-
-    /**
-        @brief Format logger line
-        @param  buffers    - string buffers to reduce num of allocations
-        @param  eLogLevel  - log level
-        @param  category   - code category
-        @param  svFormat   - format string
-        @param  svFile     - file name string
-        @param  svFunction - function name string
-        @param  nLine      - code line number
-        @param  args       - additional args for format
-    **/
-    static void format_line(
-        logger_buffer&  buffers,
-        log_level       eLogLevel,
-        const category& category,
-        string_view     svFormat,
-        string_view     svFile,
-        string_view     svFunction,
-        int             nLine,
-        va_list         args) noexcept;
 
 private:
     std::unordered_map<string_hash, log_unit_info> m_Units;

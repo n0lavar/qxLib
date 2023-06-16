@@ -1,5 +1,9 @@
 name: Build
 inputs:
+  cxx_flags:
+    required: false
+  cxx_linker_flags:
+    required: false
   build_type:
     required: true
   BOOST_ROOT:
@@ -13,5 +17,5 @@ runs:
       run: |
         mkdir build
         cd build
-        cmake -DGENERATE_TESTS=1 .. -DCMAKE_BUILD_TYPE=${{ inputs.build_type }} -DBOOST_ROOT=${{ inputs.BOOST_ROOT }}
+        cmake -DCMAKE_CXX_FLAGS="${{ inputs.cxx_flags }}" -DCMAKE_EXE_LINKER_FLAGS="${{ inputs.cxx_linker_flags }}" -DGENERATE_TESTS=1 .. -DCMAKE_BUILD_TYPE=${{ inputs.build_type }} -DBOOST_ROOT=${{ inputs.BOOST_ROOT }}
         cmake --build . -j $(nproc)

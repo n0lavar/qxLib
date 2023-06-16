@@ -12,13 +12,17 @@ jobs:
       - uses: actions/checkout@v2
       - uses: KyleMayes/install-llvm-action@v1
         with:
-          version: "14.0"
+          version: "16.0.4"
       - id: install_dependencies
         uses: ./.github/actions/linux/install_dependencies
         with:
+          # libc++ and experimental are required by std::format with clang 16.0.4, which is the latest available version with github actions
+          cxx_flags: -stdlib=libc++ -fexperimental-library
           build_type: Release
       - uses: ./.github/actions/linux/build
         with:
+          # libc++ and experimental are required by std::format with clang 16.0.4, which is the latest available version with github actions
+          cxx_flags: -stdlib=libc++ -fexperimental-library
           build_type: Release
           BOOST_ROOT: ${{ steps.install_dependencies.outputs.BOOST_ROOT }}
       - uses: ./.github/actions/linux/run_tests

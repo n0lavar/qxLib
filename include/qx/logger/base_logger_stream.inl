@@ -17,12 +17,11 @@ inline base_logger_stream::base_logger_stream(bool bAlwaysFlush) : m_bAlwaysFlus
 
 inline void base_logger_stream::log(
     log_level       eLogLevel,
-    string_view     svFormat,
     const category& category,
     string_view     svFile,
     string_view     svFunction,
     int             nLine,
-    va_list         args)
+    string_view     swLogMessage)
 {
     const char_type* pszCategory = category.get_name();
 
@@ -41,20 +40,28 @@ inline void base_logger_stream::log(
 
             auto formatFunc = optLogUnit->pUnitInfo->formatFunc;
             if (!formatFunc)
-                formatFunc = format_line;
+            {
+                formatFunc = [this](
+                                 logger_buffer&      buffers,
+                                 log_level           eLogLevel,
+                                 const qx::category& category,
+                                 string_view         svFile,
+                                 string_view         svFunction,
+                                 int                 nLine,
+                                 string_view         swLogMessage)
+                {
+                    format_line(buffers, eLogLevel, category, svFile, svFunction, nLine, swLogMessage);
+                };
+            }
 
-            va_list argsCopy;
-            va_copy(argsCopy, args);
-
-            formatFunc(buffers, eLogLevel, category, svFormat, svFile, svFunction, nLine, argsCopy);
-
-            va_end(argsCopy);
+            formatFunc(buffers, eLogLevel, category, svFile, svFunction, nLine, swLogMessage);
 
             if (!buffers.sMessage.empty())
+            {
                 do_log(buffers.sMessage, *optLogUnit, buffers.colors, eLogLevel);
-
-            if (m_bAlwaysFlush)
-                flush();
+                if (m_bAlwaysFlush)
+                    flush();
+            }
         }
     }
 }
@@ -70,7 +77,7 @@ inline void base_logger_stream::deregister_unit(string_view svUnitName) noexcept
     m_Units.erase(string_hash(svUnitName));
 }
 
-inline void base_logger_stream::format_time_string(
+inline void base_logger_stream::append_time_string(
     string&   sTime,
     char_type chDateDelimiter,
     char_type chTimeDelimiter) noexcept
@@ -80,8 +87,8 @@ inline void base_logger_stream::format_time_string(
     std::tm* now = std::localtime(&t);
     QX_POP_SUPPRESS_WARNINGS();
 
-    sTime.sprintf(
-        QX_TEXT("%02d%c%02d%c%04d_%02d%c%02d%c%02d"),
+    sTime.append_format(
+        QX_TEXT("{:02}{}{:02}{}{:04}_{:02}{}{:02}{}{:02}"),
         now->tm_mday,
         chDateDelimiter,
         now->tm_mon,
@@ -97,6 +104,63 @@ inline void base_logger_stream::format_time_string(
 inline logger_buffer& base_logger_stream::get_log_buffer() noexcept
 {
     return m_Buffer;
+}
+
+inline void base_logger_stream::format_line(
+    logger_buffer&  buffers,
+    log_level       eLogLevel,
+    const category& category,
+    string_view     svFile,
+    string_view     svFunction,
+    int             nLine,
+    string_view     swLogMessage) noexcept
+{
+    switch (eLogLevel)
+    {
+    case log_level::very_verbose:
+        buffers.sMessage = QX_TEXT("[VV][");
+        break;
+
+    case log_level::verbose:
+        buffers.sMessage = QX_TEXT("[V][");
+        break;
+
+    case log_level::important:
+        buffers.sMessage = QX_TEXT("[I][");
+        break;
+
+    case log_level::warning:
+        buffers.sMessage = QX_TEXT("[W][");
+        break;
+
+    case log_level::error:
+        buffers.sMessage = QX_TEXT("[E][");
+        break;
+
+    case log_level::critical:
+        buffers.sMessage = QX_TEXT("[C][");
+        break;
+
+    default:
+        buffers.sMessage = QX_TEXT("   [");
+        break;
+    }
+
+    append_time_string(buffers.sMessage, QX_TEXT('.'), QX_TEXT(':'));
+    buffers.sMessage += QX_TEXT("][");
+
+    const char_type* pszCategory = category.get_name();
+    if (pszCategory)
+    {
+        buffers.sMessage += pszCategory;
+        buffers.sMessage += QX_TEXT("][");
+    }
+
+    buffers.sMessage.append_format(QX_TEXT("{}::{}::{}] {}\n"), svFile, svFunction, nLine, swLogMessage);
+
+    if (pszCategory)
+        if (auto nPos = buffers.sMessage.find(pszCategory); nPos != string::npos)
+            buffers.colors.push_back({ { nPos, nPos + qx::strlen(pszCategory) }, category.get_color() });
 }
 
 inline std::optional<log_unit> base_logger_stream::get_unit_info(
@@ -122,76 +186,6 @@ inline std::optional<log_unit> base_logger_stream::get_unit_info(
         logUnit = { &it->second, k_svDefaultUnit };
 
     return logUnit;
-}
-
-inline void base_logger_stream::format_line(
-    logger_buffer&  buffers,
-    log_level       eLogLevel,
-    const category& category,
-    string_view     svFormat,
-    string_view     svFile,
-    string_view     svFunction,
-    int             nLine,
-    va_list         args) noexcept
-{
-    buffers.sMessage.vsprintf(qx::string(svFormat).c_str(), args);
-
-    format_time_string(buffers.sFormat, QX_TEXT('.'), QX_TEXT(':'));
-
-    switch (eLogLevel)
-    {
-    case log_level::very_verbose:
-        buffers.sFormat = QX_TEXT("[VV][") + buffers.sFormat;
-        break;
-
-    case log_level::verbose:
-        buffers.sFormat = QX_TEXT("[V][") + buffers.sFormat;
-        break;
-
-    case log_level::important:
-        buffers.sFormat = QX_TEXT("[I][") + buffers.sFormat;
-        break;
-
-    case log_level::warning:
-        buffers.sFormat = QX_TEXT("[W][") + buffers.sFormat;
-        break;
-
-    case log_level::error:
-        buffers.sFormat = QX_TEXT("[E][") + buffers.sFormat;
-        break;
-
-    case log_level::critical:
-        buffers.sFormat = QX_TEXT("[C][") + buffers.sFormat;
-        break;
-
-    default:
-        buffers.sFormat = QX_TEXT("   [") + buffers.sFormat;
-        break;
-    }
-
-    const char_type* pszCategory = category.get_name();
-
-    constexpr auto pszStringFormatSpecifier = get_format_specifier<char_type, const char_type*>();
-    buffers.sFormat += QX_TEXT("][");
-    buffers.sFormat += pszStringFormatSpecifier;
-    if (pszCategory)
-        buffers.sFormat += QX_TEXT("][");
-    buffers.sFormat += pszStringFormatSpecifier;
-    buffers.sFormat += QX_TEXT("::");
-    buffers.sFormat += pszStringFormatSpecifier;
-    buffers.sFormat += QX_TEXT("::%d] ");
-    buffers.sFormat += buffers.sMessage;
-    buffers.sMessage.sprintf(
-        buffers.sFormat.c_str(),
-        pszCategory ? pszCategory : QX_TEXT(""),
-        qx::string(svFile).c_str(),
-        qx::string(svFunction).c_str(),
-        nLine);
-    buffers.sMessage += QX_TEXT('\n');
-
-    if (pszCategory)
-        if (auto nPos = buffers.sMessage.find(pszCategory); nPos != string::npos)
-            buffers.colors.push_back({ { nPos, nPos + qx::strlen(pszCategory) }, category.get_color() });
 }
 
 } // namespace qx

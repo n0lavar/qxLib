@@ -10,6 +10,7 @@
 #pragma once
 
 #include <qx/containers/string/string_utils.h>
+#include <qx/containers/string/string_view.h>
 #include <qx/macros/config.h>
 #include <qx/macros/suppress_warnings.h>
 
@@ -17,6 +18,7 @@
 #include <cstdarg>
 #include <cstring>
 #include <cwctype>
+#include <format>
 #include <sstream>
 
 namespace qx
@@ -30,13 +32,14 @@ namespace qx
 template<class T>
 struct common_char_traits
 {
-    using value_type      = T;
-    using pointer         = T*;
-    using const_pointer   = const T*;
-    using reference       = T&;
-    using const_reference = const T&;
-    using difference_type = std::ptrdiff_t;
-    using size_type       = size_t;
+    using value_type       = T;
+    using pointer          = T*;
+    using const_pointer    = const T*;
+    using reference        = T&;
+    using const_reference  = const T&;
+    using difference_type  = std::ptrdiff_t;
+    using size_type        = size_t;
+    using string_view_type = basic_string_view<T>;
 
     static constexpr size_type hash_function(const_pointer pszStr, size_t nSeed, size_type nLen) noexcept
     {
@@ -97,16 +100,17 @@ struct char_traits<char> : public common_char_traits<char>
     {
         return std::strncmp(pszFirst, pszSecond, nCount);
     }
-    static int vsnprintf(pointer pszDest, size_type nBuffer, const_pointer pszFormat, va_list args) noexcept
-    {
-        return std::vsnprintf(pszDest, nBuffer, pszFormat, args);
-    }
     template<class... args_t>
     static int sscanf(const_pointer pszString, const_pointer pszFormat, args_t... args) noexcept
     {
         QX_PUSH_SUPPRESS_ALL_WARNINGS();
         return std::sscanf(pszString, pszFormat, args...);
         QX_POP_SUPPRESS_WARNINGS();
+    }
+    template<class output_it_t, class... args_t>
+    static void format_to(output_it_t itOutput, string_view_type svFormat, const args_t&... args)
+    {
+        std::vformat_to(itOutput, svFormat, std::make_format_args(args...));
     }
 };
 
@@ -162,38 +166,17 @@ struct char_traits<wchar_t> : public common_char_traits<wchar_t>
     {
         return std::wcsncmp(pszFirst, pszSecond, nCount);
     }
-    static int vsnprintf(pointer pszDest, size_type nBuffer, const_pointer pszFormat, va_list args) noexcept
-    {
-// MVSC's std::swprintf returns required size if nullptr and 0 passed as pDest and nBuffer,
-// while other compilers returns -1
-#if QX_MSVC
-        return std::vswprintf(pszDest, nBuffer, pszFormat, args);
-#else
-        int size = -1;
-
-        if (nBuffer <= 0)
-        {
-            // opening a dummy file to /dev/null and printing to that file to retrieve the required size
-            if (FILE* pDummyFile = std::fopen("/dev/null", "w"))
-            {
-                size = std::vfwprintf(pDummyFile, pszFormat, args);
-                std::fclose(pDummyFile);
-            }
-        }
-        else
-        {
-            size = std::vswprintf(pszDest, nBuffer, pszFormat, args);
-        }
-
-        return size;
-#endif
-    }
     template<class... args_t>
     static int sscanf(const_pointer pszString, const_pointer pszFormat, args_t... args) noexcept
     {
         QX_PUSH_SUPPRESS_ALL_WARNINGS();
         return std::swscanf(pszString, pszFormat, args...);
         QX_POP_SUPPRESS_WARNINGS();
+    }
+    template<class output_it_t, class... args_t>
+    static void format_to(output_it_t itOutput, string_view_type svFormat, const args_t&... args)
+    {
+        std::vformat_to(itOutput, svFormat, std::make_wformat_args(args...));
     }
 };
 

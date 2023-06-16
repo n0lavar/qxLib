@@ -30,8 +30,6 @@ using Implementations = ::testing::Types<qx::char_traits<char>, qx::char_traits<
 
 TYPED_TEST_SUITE(TestQxString, Implementations);
 
-
-
 TYPED_TEST(TestQxString, class_size)
 {
     QX_STATIC_ASSERT_EQ(sizeof(StringType), 64u);
@@ -237,41 +235,37 @@ TYPED_TEST(TestQxString, operator_assign)
 TYPED_TEST(TestQxString, format)
 {
     StringTypeTn str0;
-    str0.sprintf(STR("The half of %d is %f"), 75, 75.f / 2);
-    EXPECT_STREQ(str0.data(), STR("The half of 75 is 37.500000"));
+    str0.format(STR("The half of {} is {}"), 75, 75.f / 2);
+    EXPECT_STREQ(str0.data(), STR("The half of 75 is 37.5"));
     EXPECT_FALSE(str0.empty());
-    EXPECT_EQ(str0.size(), 27);
+    EXPECT_EQ(str0.size(), 22);
 
-    StringTypeTn str1 = StringType::static_sprintf(STR("The half of %d is %f"), 75, 75.f / 2);
-    EXPECT_STREQ(str1.data(), STR("The half of 75 is 37.500000"));
+    StringTypeTn str1 = StringType::static_format(STR("The half of {} is {}"), 75, 75.f / 2);
+    EXPECT_STREQ(str1.data(), STR("The half of 75 is 37.5"));
     EXPECT_FALSE(str0.empty());
-    EXPECT_EQ(str1.size(), 27);
+    EXPECT_EQ(str1.size(), 22);
 
     StringTypeTn str2;
-    StringTypeTn format;
 
-    str2.sprintf(STR("%f"), 1.f);
-    EXPECT_STREQ(str2.data(), STR("1.000000"));
+    str2.format(STR("{}"), 1.f);
+    EXPECT_STREQ(str2.data(), STR("1"));
     EXPECT_FALSE(str2.empty());
-    EXPECT_EQ(str2.size(), 8);
+    EXPECT_EQ(str2.size(), 1);
 
-    str2.sprintf(STR("%f %d"), 1.f, 2);
-    EXPECT_STREQ(str2.data(), STR("1.000000 2"));
+    str2.format(STR("{} {}"), 1.f, 2);
+    EXPECT_STREQ(str2.data(), STR("1 2"));
     EXPECT_FALSE(str2.empty());
-    EXPECT_EQ(str2.size(), 10);
+    EXPECT_EQ(str2.size(), 3);
 
-    format += STR("%f %d ");
-    format += get_string_format_specifier<typename TypeParam::value_type>();
-    str2.sprintf(format.data(), 1.f, 2, STR("three"));
-    EXPECT_STREQ(str2.data(), STR("1.000000 2 three"));
+    str2.format(STR("{} {} {}"), 1.f, 2, STR("three"));
+    EXPECT_STREQ(str2.data(), STR("1 2 three"));
     EXPECT_FALSE(str2.empty());
-    EXPECT_EQ(str2.size(), 16);
+    EXPECT_EQ(str2.size(), 9);
 
-    format += STR(" %u");
-    str2.sprintf(format.data(), 1.f, 2, STR("three"), 4u);
-    EXPECT_STREQ(str2.data(), STR("1.000000 2 three 4"));
+    str2.format(STR("{} {} {} {}"), 1.f, 2, STR("three"), 4u);
+    EXPECT_STREQ(str2.data(), STR("1 2 three 4"));
     EXPECT_FALSE(str2.empty());
-    EXPECT_EQ(str2.size(), 18);
+    EXPECT_EQ(str2.size(), 11);
 }
 
 TYPED_TEST(TestQxString, size)
@@ -1185,8 +1179,8 @@ TYPED_TEST(TestQxString, from)
     {
         StringTypeTn str;
 
-        str = fromFunc(static_cast<char>(10));
-        EXPECT_STREQ(str.data(), STR("10"));
+        str = fromFunc(CH('x'));
+        EXPECT_STREQ(str.data(), STR("x"));
 
         str = fromFunc(static_cast<unsigned char>(20));
         EXPECT_STREQ(str.data(), STR("20"));
@@ -1215,14 +1209,14 @@ TYPED_TEST(TestQxString, from)
         str = fromFunc(100ull);
         EXPECT_STREQ(str.data(), STR("100"));
 
-        str = fromFunc(110.f);
-        EXPECT_STREQ(str.data(), STR("110.000000"));
+        str = fromFunc(110.4f);
+        EXPECT_STREQ(str.data(), STR("110.4"));
 
-        str = fromFunc(120.0);
-        EXPECT_STREQ(str.data(), STR("120.000000"));
+        str = fromFunc(120.5);
+        EXPECT_STREQ(str.data(), STR("120.5"));
 
-        str = fromFunc(static_cast<long double>(130.0));
-        EXPECT_STREQ(str.data(), STR("130.000000"));
+        str = fromFunc(130.7l);
+        EXPECT_STREQ(str.data(), STR("130.7"));
 
         str = fromFunc(nullptr);
         EXPECT_STREQ(str.data(), STR("nullptr"));
@@ -2067,17 +2061,17 @@ TYPED_TEST(TestQxString, append_format)
 {
     StringTypeTn str;
 
-    str.append_sprintf(STR("%d"), 99);
+    str.append_format(STR("{}"), 99);
     EXPECT_STREQ(str.data(), STR("99"));
     EXPECT_EQ(str.size(), 2);
 
-    str.append_sprintf(STR(" %f"), 0.f);
-    EXPECT_STREQ(str.data(), STR("99 0.000000"));
-    EXPECT_EQ(str.size(), 11);
+    str.append_format(STR(" {}"), 0.f);
+    EXPECT_STREQ(str.data(), STR("99 0"));
+    EXPECT_EQ(str.size(), 4);
 
-    str.append_sprintf(STR("%f"), 2.f);
-    EXPECT_STREQ(str.data(), STR("99 0.0000002.000000"));
-    EXPECT_EQ(str.size(), 19);
+    str.append_format(STR("{}"), 2.f);
+    EXPECT_STREQ(str.data(), STR("99 02"));
+    EXPECT_EQ(str.size(), 5);
 }
 
 TYPED_TEST(TestQxString, copy)

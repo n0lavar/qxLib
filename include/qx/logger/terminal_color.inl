@@ -15,16 +15,16 @@ std::basic_ostream<char_t>& operator<<(std::basic_ostream<char_t>& os, const qx:
     switch (terminalColor.m_eType)
     {
     case qx::terminal_color::type::font:
-        sBuffer.sprintf(
-            QX_STR_PREFIX(char_t, "\033[38;2;%d;%d;%dm"),
+        sBuffer.format(
+            QX_STR_PREFIX(char_t, "\033[38;2;{};{};{}m"),
             terminalColor.m_Color.r_dec(),
             terminalColor.m_Color.g_dec(),
             terminalColor.m_Color.b_dec());
         break;
 
     case qx::terminal_color::type::back:
-        sBuffer.sprintf(
-            QX_STR_PREFIX(char_t, "\033[48;2;%d;%d;%dm"),
+        sBuffer.format(
+            QX_STR_PREFIX(char_t, "\033[48;2;{};{};{}m"),
             terminalColor.m_Color.r_dec(),
             terminalColor.m_Color.g_dec(),
             terminalColor.m_Color.b_dec());
