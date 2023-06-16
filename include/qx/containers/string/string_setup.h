@@ -9,9 +9,19 @@
 **/
 #pragma once
 
+#include <qx/meta/tuple_utils.h>
+
 #if !defined(QX_CONF_USE_CHAR) && !defined(QX_CONF_USE_WCHAR)
     #define QX_CONF_USE_WCHAR
 #endif
+
+namespace qx::detail
+{
+
+using all_char_types = std::tuple<char, wchar_t>;
+
+}
+
 
 #ifdef QX_CONF_USE_CHAR
 
@@ -30,6 +40,7 @@
 namespace qx
 {
 
-using char_type = QX_CHAR_TYPE;
+using char_type            = QX_CHAR_TYPE;
+using forbidden_char_types = tuple::remove_t<detail::all_char_types, std::tuple<char_type>>;
 
 } // namespace qx

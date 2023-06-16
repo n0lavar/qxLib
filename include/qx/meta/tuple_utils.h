@@ -29,7 +29,7 @@ struct join<std::tuple<first_pack_t...>, std::tuple<second_pack_t...>>
 };
 
 template<class... args_t>
-using join_t = join<args_t...>::type;
+using join_t = typename join<args_t...>::type;
 
 // ------------------------------------------------------- remove ------------------------------------------------------
 
@@ -77,7 +77,7 @@ struct remove<std::tuple<types_t...>, std::tuple<target_t, remaining_targets_t..
 };
 
 template<class... args_t>
-using remove_t = remove<args_t...>::type;
+using remove_t = typename remove<args_t...>::type;
 
 // ------------------------------------------------------ contains -----------------------------------------------------
 
@@ -107,7 +107,7 @@ struct contains<T, std::tuple<T, Ts...>> : std::true_type
 template<class tuple_t, class T>
 using contains = detail::contains<T, tuple_t>;
 
-template<class... args_t>
-static constexpr bool contains_v = contains<args_t...>::value;
+template<class tuple_t, class T>
+static constexpr bool contains_v = contains<tuple_t, T>::value;
 
 } // namespace qx::tuple

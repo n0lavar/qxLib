@@ -41,6 +41,13 @@
 namespace qx
 {
 
+// clang-format off
+template<class... args_t>
+concept log_acceptable_args = 
+    sizeof...(args_t) == 0
+    || !(qx::tuple::contains_v<forbidden_char_types, std::remove_cv_t<std::remove_pointer_t<std::decay_t<args_t>>>> || ...);
+// clang-format on
+
 /**
 
     @class   logger

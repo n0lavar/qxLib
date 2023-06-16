@@ -29,48 +29,74 @@ namespace qx::details
 {
 
 template<log_level eLogLevel, class... args_t>
+    requires log_acceptable_args<args_t...>
 void resolve_assert_proceeding(
+    // macro args
     const category& fileCategory,
     string_view     svFunction,
     string_view     svFile,
     int             nLine,
     string_view     svCondition,
-    const args_t&... args)
-{
-    QX_LOGGER_INSTANCE.log(eLogLevel, QX_TEXT("[%ls] "), fileCategory, svFile, svFunction, nLine, svCondition, args...);
-    QX_LOGGER_INSTANCE.flush();
-}
-
-template<log_level eLogLevel, class... args_t>
-void resolve_assert_proceeding(
-    const category& fileCategory,
-    string_view     svFunction,
-    string_view     svFile,
-    int             nLine,
-    string_view     svCondition,
+    // ... args
+    const category& category,
     string_view     svFormat,
     const args_t&... args)
 {
     string sFormat(QX_TEXT("[%ls] "));
     sFormat += svFormat;
-    QX_LOGGER_INSTANCE.log(eLogLevel, sFormat.c_str(), fileCategory, svFile, svFunction, nLine, svCondition, args...);
+    QX_LOGGER_INSTANCE
+        .log(eLogLevel, sFormat.c_str(), category, svFile, svFunction, nLine, string(svCondition).c_str(), args...);
     QX_LOGGER_INSTANCE.flush();
 }
 
-template<log_level eLogLevel, class... args_t>
+template<log_level eLogLevel>
 void resolve_assert_proceeding(
+    // macro args
     const category& fileCategory,
     string_view     svFunction,
     string_view     svFile,
     int             nLine,
     string_view     svCondition,
-    const category& category,
-    string_view     svFormat,
+    // ... args
+    const category& category)
+{
+    string sFormat(QX_TEXT("[%ls] "));
+    QX_LOGGER_INSTANCE
+        .log(eLogLevel, sFormat.c_str(), category, svFile, svFunction, nLine, string(svCondition).c_str());
+    QX_LOGGER_INSTANCE.flush();
+}
+
+template<log_level eLogLevel, class... args_t>
+    requires log_acceptable_args<args_t...>
+void resolve_assert_proceeding(
+    // macro args
+    const category& fileCategory,
+    string_view     svFunction,
+    string_view     svFile,
+    int             nLine,
+    string_view     svCondition,
+    // ... args
+    string_view svFormat,
     const args_t&... args)
 {
-    wstring sFormat(QX_TEXT("[%ls] "));
+    string sFormat(QX_TEXT("[%ls] "));
     sFormat += svFormat;
-    QX_LOGGER_INSTANCE.log(eLogLevel, sFormat.c_str(), category, svFile, svFunction, nLine, svCondition, args...);
+    QX_LOGGER_INSTANCE
+        .log(eLogLevel, sFormat.c_str(), fileCategory, svFile, svFunction, nLine, string(svCondition).c_str(), args...);
+    QX_LOGGER_INSTANCE.flush();
+}
+
+template<log_level eLogLevel>
+void resolve_assert_proceeding(
+    // macro args
+    const category& fileCategory,
+    string_view     svFunction,
+    string_view     svFile,
+    int             nLine,
+    string_view     svCondition)
+{
+    QX_LOGGER_INSTANCE
+        .log(eLogLevel, QX_TEXT("[%ls] "), fileCategory, svFile, svFunction, nLine, string(svCondition).c_str());
     QX_LOGGER_INSTANCE.flush();
 }
 
@@ -149,7 +175,7 @@ void resolve_assert_proceeding(
     }()
 
 #define _QX_ASSERT_NO_ENTRY(before_debug_break, debug_break, after_debug_break, ...) \
-    _QX_ASSERT(before_debug_break, debug_break, after_debug_break, !"No entry", ##__VA_ARGS__)
+    _QX_ASSERT(before_debug_break, debug_break, after_debug_break, !QX_TEXT("No entry"), ##__VA_ARGS__)
 
 #define _QX_ASSERT_CONTINUE(before_debug_break, debug_break, after_debug_break, condition, ...)                 \
     if (!_QX_ASSERT(before_debug_break, debug_break, after_debug_break, condition, ##__VA_ARGS__)) [[unlikely]] \

@@ -70,6 +70,10 @@ struct char_traits<char> : public common_char_traits<char>
     {
         return std::isspace(static_cast<int>(ch)) != 0;
     }
+    static bool is_digit(value_type ch) noexcept
+    {
+        return std::isdigit(ch) != 0;
+    }
     static constexpr size_type length(const_pointer pszStr) noexcept
     {
         if (std::is_constant_evaluated())
@@ -130,6 +134,10 @@ struct char_traits<wchar_t> : public common_char_traits<wchar_t>
     static bool is_space(value_type ch) noexcept
     {
         return std::iswspace(static_cast<wint_t>(ch)) != 0;
+    }
+    static bool is_digit(value_type ch) noexcept
+    {
+        return std::iswdigit(ch) != 0;
     }
     static constexpr size_type length(const_pointer pszStr) noexcept
     {

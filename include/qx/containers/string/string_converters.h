@@ -105,12 +105,15 @@ inline string to_string(wstring_view stringView, const std::locale& locale = std
     @param  pszUtf8 - UTF8 string
     @retval         - wstring value
 **/
-inline wstring utf8_to_wstring(const char* pszUtf8)
+inline string utf8_to_string(const char* pszUtf8)
 {
-    QX_PUSH_SUPPRESS_ALL_WARNINGS();
-    std::wstring_convert<std::codecvt_utf8_utf16<wchar_t>> converter;
-    return converter.from_bytes(pszUtf8);
-    QX_POP_SUPPRESS_WARNINGS();
+    if constexpr (std::is_same_v<char_type, wchar_t>)
+    {
+        QX_PUSH_SUPPRESS_ALL_WARNINGS();
+        std::wstring_convert<std::codecvt_utf8_utf16<wchar_t>> converter;
+        return converter.from_bytes(pszUtf8);
+        QX_POP_SUPPRESS_WARNINGS();
+    }
 }
 
 } // namespace qx
