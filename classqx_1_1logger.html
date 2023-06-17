@@ -89,9 +89,13 @@ Inheritance diagram for qx::logger:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a0f3ad21a55f2984759f50963fa878ffe"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1logger.html#a0f3ad21a55f2984759f50963fa878ffe">log</a> (log_level eLogLevel, string_view svFormat, const <a class="el" href="classqx_1_1category.html">category</a> &amp;<a class="el" href="classqx_1_1category.html">category</a>, string_view svFile, string_view svFunction, int nLine,...)</td></tr>
-<tr class="memdesc:a0f3ad21a55f2984759f50963fa878ffe"><td class="mdescLeft">&#160;</td><td class="mdescRight">Log to all streams.  <a href="classqx_1_1logger.html#a0f3ad21a55f2984759f50963fa878ffe">More...</a><br /></td></tr>
-<tr class="separator:a0f3ad21a55f2984759f50963fa878ffe"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ada5dae55e329009dac6c8da9eabc295d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1logger.html#ada5dae55e329009dac6c8da9eabc295d">log</a> (log_level eLogLevel, string_view svFormat, const <a class="el" href="classqx_1_1category.html">category</a> &amp;<a class="el" href="classqx_1_1category.html">category</a>, string_view svFile, string_view svFunction, int nLine)</td></tr>
+<tr class="memdesc:ada5dae55e329009dac6c8da9eabc295d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Log to all streams.  <a href="classqx_1_1logger.html#ada5dae55e329009dac6c8da9eabc295d">More...</a><br /></td></tr>
+<tr class="separator:ada5dae55e329009dac6c8da9eabc295d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7d7a38034ea752ea38b237468d4660b3"><td class="memTemplParams" colspan="2">template&lt;class... args_t&gt; </td></tr>
+<tr class="memitem:a7d7a38034ea752ea38b237468d4660b3"><td class="memTemplItemLeft" align="right" valign="top">requires log_acceptable_args&lt; args_t &gt; void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classqx_1_1logger.html#a7d7a38034ea752ea38b237468d4660b3">log</a> (log_level eLogLevel, <a class="el" href="structqx_1_1basic__format__string.html">format_string</a>&lt; args_t... &gt; sFormat, const <a class="el" href="classqx_1_1category.html">category</a> &amp;<a class="el" href="classqx_1_1category.html">category</a>, string_view svFile, string_view svFunction, int nLine, const args_t &amp;... args)</td></tr>
+<tr class="memdesc:a7d7a38034ea752ea38b237468d4660b3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Log to all streams.  <a href="classqx_1_1logger.html#a7d7a38034ea752ea38b237468d4660b3">More...</a><br /></td></tr>
+<tr class="separator:a7d7a38034ea752ea38b237468d4660b3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af975c6169624a47a72ae8995161e140f"><td class="memItemLeft" align="right" valign="top"><a id="af975c6169624a47a72ae8995161e140f"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1logger.html#af975c6169624a47a72ae8995161e140f">flush</a> ()</td></tr>
 <tr class="memdesc:af975c6169624a47a72ae8995161e140f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Flush all streams. <br /></td></tr>
@@ -109,7 +113,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 <p>~ </p><dl class="section author"><dt>Author</dt><dd>Khrapov </dd></dl>
 <dl class="section date"><dt>Date</dt><dd>10.01.2020 </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="logger_8h_source.html#l00060">60</a> of file <a class="el" href="logger_8h_source.html">logger.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="logger_8h_source.html#l00056">56</a> of file <a class="el" href="logger_8h_source.html">logger.h</a>.</p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="abec0212ef10bb7feb65d6f587a989b61"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#abec0212ef10bb7feb65d6f587a989b61">&#9670;&nbsp;</a></span>add_stream()</h2>
@@ -143,12 +147,92 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="logger_8inl_source.html#l00037">37</a> of file <a class="el" href="logger_8inl_source.html">logger.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="logger_8inl_source.html#l00047">47</a> of file <a class="el" href="logger_8inl_source.html">logger.inl</a>.</p>
 
 </div>
 </div>
-<a id="a0f3ad21a55f2984759f50963fa878ffe"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0f3ad21a55f2984759f50963fa878ffe">&#9670;&nbsp;</a></span>log()</h2>
+<a id="a7d7a38034ea752ea38b237468d4660b3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7d7a38034ea752ea38b237468d4660b3">&#9670;&nbsp;</a></span>log() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class... args_t&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">requires log_acceptable_args&lt;args_t&gt; void qx::logger::log </td>
+          <td>(</td>
+          <td class="paramtype">log_level&#160;</td>
+          <td class="paramname"><em>eLogLevel</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structqx_1_1basic__format__string.html">format_string</a>&lt; args_t... &gt;&#160;</td>
+          <td class="paramname"><em>sFormat</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classqx_1_1category.html">category</a> &amp;&#160;</td>
+          <td class="paramname"><em>category</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">string_view&#160;</td>
+          <td class="paramname"><em>svFile</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">string_view&#160;</td>
+          <td class="paramname"><em>svFunction</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>nLine</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const args_t &amp;...&#160;</td>
+          <td class="paramname"><em>args</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Log to all streams. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">args_t</td><td>- template parameter pack type </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">eLogLevel</td><td>- log level </td></tr>
+    <tr><td class="paramname">sFormat</td><td>- format string </td></tr>
+    <tr><td class="paramname">category</td><td>- code category </td></tr>
+    <tr><td class="paramname">svFile</td><td>- file name string </td></tr>
+    <tr><td class="paramname">svFunction</td><td>- function name string </td></tr>
+    <tr><td class="paramname">nLine</td><td>- code line number </td></tr>
+    <tr><td class="paramname">args</td><td>- additional args for format </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ada5dae55e329009dac6c8da9eabc295d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ada5dae55e329009dac6c8da9eabc295d">&#9670;&nbsp;</a></span>log() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -190,13 +274,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>nLine</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname"><em>...</em>&#160;</td>
+          <td class="paramname"><em>nLine</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -212,12 +290,6 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 </div><div class="memdoc">
 
 <p>Log to all streams. </p>
-<dl class="tparams"><dt>Template Parameters</dt><dd>
-  <table class="tparams">
-    <tr><td class="paramname">char_t</td><td>- char type, typically char or wchar_t </td></tr>
-  </table>
-  </dd>
-</dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">eLogLevel</td><td>- log level </td></tr>
@@ -226,7 +298,6 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
     <tr><td class="paramname">svFile</td><td>- file name string </td></tr>
     <tr><td class="paramname">svFunction</td><td>- function name string </td></tr>
     <tr><td class="paramname">nLine</td><td>- code line number </td></tr>
-    <tr><td class="paramname">...</td><td>- additional args for format </td></tr>
   </table>
   </dd>
 </dl>

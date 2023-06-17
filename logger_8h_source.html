@@ -107,97 +107,116 @@ $(function() {
 <div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="comment">    @param format    - format string</span></div>
 <div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="comment">    @param ...       - additional args for formatting</span></div>
 <div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="comment">**/</span></div>
-<div class="line"><a name="l00039"></a><span class="lineno"><a class="line" href="logger_8h.html#a9169f09308c1212078ba87b7c645f065">   39</a></span>&#160;<span class="preprocessor">#define QX_LOG(eLogLevel, format, ...) QX_LOG_C(qx::category(nullptr), eLogLevel, format, ##__VA_ARGS__)</span></div>
+<div class="line"><a name="l00039"></a><span class="lineno"><a class="line" href="logger_8h.html#a9169f09308c1212078ba87b7c645f065">   39</a></span>&#160;<span class="preprocessor">#define QX_LOG(eLogLevel, format, ...) QX_LOG_C(CatDefault, eLogLevel, format, ##__VA_ARGS__)</span></div>
 <div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160; </div>
 <div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="keyword">namespace </span>qx</div>
 <div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;{</div>
 <div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160; </div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="comment">// clang-format off</span></div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span>... args_t&gt;</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;concept log_acceptable_args = </div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    <span class="keyword">sizeof</span>...(args_t) == 0</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    || !(qx::tuple::contains_v&lt;forbidden_char_types, std::remove_cv_t&lt;std::remove_pointer_t&lt;std::decay_t&lt;args_t&gt;&gt;&gt;&gt; || ...);</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="comment">// clang-format on</span></div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="comment">/**</span></div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<span class="comment">    @class   logger</span></div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;<span class="comment">    @brief   Logger class</span></div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="comment">    @details ~</span></div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;<span class="comment">    @author  Khrapov</span></div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;<span class="comment">    @date    10.01.2020</span></div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;<span class="comment">**/</span></div>
-<div class="line"><a name="l00060"></a><span class="lineno"><a class="line" href="classqx_1_1logger.html">   60</a></span>&#160;<span class="keyword">class </span><a class="code" href="classqx_1_1logger.html">logger</a></div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;{</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;<span class="keyword">public</span>:<span class="comment"></span></div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;<span class="comment">    /**</span></div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;<span class="comment">        @brief  Log to all streams</span></div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;<span class="comment">        @tparam char_t     - char type, typically char or wchar_t</span></div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;<span class="comment">        @param  eLogLevel  - log level</span></div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;<span class="comment">        @param  svFormat   - format string</span></div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;<span class="comment">        @param  category   - code category</span></div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;<span class="comment">        @param  svFile     - file name string</span></div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;<span class="comment">        @param  svFunction - function name string</span></div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;<span class="comment">        @param  nLine      - code line number</span></div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;<span class="comment">        @param  ...        - additional args for format</span></div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;<span class="comment">    **/</span></div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classqx_1_1logger.html#a0f3ad21a55f2984759f50963fa878ffe">log</a>(</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;        log_level       eLogLevel,</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;        string_view     svFormat,</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;        <span class="keyword">const</span> <a class="code" href="classqx_1_1category.html">category</a>&amp; <a class="code" href="classqx_1_1category.html">category</a>,</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;        string_view     svFile,</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;        string_view     svFunction,</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;        <span class="keywordtype">int</span>             nLine,</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;        ...);</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;<span class="comment">    /**</span></div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;<span class="comment">        @brief Flush all streams</span></div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;<span class="comment">    **/</span></div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classqx_1_1logger.html#af975c6169624a47a72ae8995161e140f">flush</a>();</div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;<span class="comment">    /**</span></div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;<span class="comment">        @brief Add output stream to the logger</span></div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;<span class="comment">        @param pStream - stream unique pointer</span></div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;<span class="comment">    **/</span></div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classqx_1_1logger.html#abec0212ef10bb7feb65d6f587a989b61">add_stream</a>(std::unique_ptr&lt;base_logger_stream&gt; pStream) noexcept;</div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;<span class="comment">    /**</span></div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;<span class="comment">        @brief Reset logger and clear all streams</span></div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;<span class="comment">    **/</span></div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classqx_1_1logger.html#acbd37fc0636753a6061a745ca1ab8f9e">reset</a>() noexcept;</div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160; </div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;    std::vector&lt;std::unique_ptr&lt;base_logger_stream&gt;&gt; m_Streams;</div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;};</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span>... args_t&gt;</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;concept log_acceptable_args = (<span class="keyword">sizeof</span>...(args_t) &gt; 0 &amp;&amp; format_acceptable_args&lt;char_type, args_t...&gt;);</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="comment">/**</span></div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="comment">    @class   logger</span></div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="comment">    @brief   Logger class</span></div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="comment">    @details ~</span></div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<span class="comment">    @author  Khrapov</span></div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<span class="comment">    @date    10.01.2020</span></div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="comment">**/</span></div>
+<div class="line"><a name="l00056"></a><span class="lineno"><a class="line" href="classqx_1_1logger.html">   56</a></span>&#160;<span class="keyword">class </span><a class="code" href="classqx_1_1logger.html">logger</a></div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;{</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;<span class="keyword">public</span>:<span class="comment"></span></div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;<span class="comment">    /**</span></div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;<span class="comment">        @brief  Log to all streams</span></div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;<span class="comment">        @param  eLogLevel  - log level</span></div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;<span class="comment">        @param  svFormat   - format string</span></div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;<span class="comment">        @param  category   - code category</span></div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;<span class="comment">        @param  svFile     - file name string</span></div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;<span class="comment">        @param  svFunction - function name string</span></div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;<span class="comment">        @param  nLine      - code line number</span></div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;<span class="comment">    **/</span></div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classqx_1_1logger.html#ada5dae55e329009dac6c8da9eabc295d">log</a>(</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;        log_level       eLogLevel,</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;        string_view     svFormat,</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;        <span class="keyword">const</span> <a class="code" href="classqx_1_1category.html">category</a>&amp; <a class="code" href="classqx_1_1category.html">category</a>,</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;        string_view     svFile,</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;        string_view     svFunction,</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;        <span class="keywordtype">int</span>             nLine);</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;<span class="comment">    /**</span></div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;<span class="comment">        @brief  Log to all streams</span></div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;<span class="comment">        @tparam args_t     - template parameter pack type</span></div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;<span class="comment">        @param  eLogLevel  - log level</span></div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;<span class="comment">        @param  sFormat    - format string</span></div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;<span class="comment">        @param  category   - code category</span></div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;<span class="comment">        @param  svFile     - file name string</span></div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;<span class="comment">        @param  svFunction - function name string</span></div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;<span class="comment">        @param  nLine      - code line number</span></div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;<span class="comment">        @param  args       - additional args for format</span></div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;<span class="comment">    **/</span></div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;    <span class="keyword">template</span>&lt;<span class="keyword">class</span>... args_t&gt;</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;        requires log_acceptable_args&lt;args_t&gt;</div>
+<div class="line"><a name="l00089"></a><span class="lineno"><a class="line" href="classqx_1_1logger.html#a7d7a38034ea752ea38b237468d4660b3">   89</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classqx_1_1logger.html#a7d7a38034ea752ea38b237468d4660b3">log</a>(</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;        log_level                eLogLevel,</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;        <a class="code" href="structqx_1_1basic__format__string.html">format_string&lt;args_t...&gt;</a> sFormat,</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;        <span class="keyword">const</span> <a class="code" href="classqx_1_1category.html">category</a>&amp;          <a class="code" href="classqx_1_1category.html">category</a>,</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;        string_view              svFile,</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;        string_view              svFunction,</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;        <span class="keywordtype">int</span>                      nLine,</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;        <span class="keyword">const</span> args_t&amp;... args);</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;<span class="comment">    /**</span></div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;<span class="comment">        @brief Flush all streams</span></div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;<span class="comment">    **/</span></div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classqx_1_1logger.html#af975c6169624a47a72ae8995161e140f">flush</a>();</div>
 <div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;<span class="comment">/**</span></div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;<span class="comment">    @class   logger_singleton</span></div>
-<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;<span class="comment">    @brief   Default logger instance</span></div>
-<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;<span class="comment">    @details ~</span></div>
-<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;<span class="comment">    @author  Khrapov</span></div>
-<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;<span class="comment">    @date    19.08.2021</span></div>
-<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;<span class="comment">**/</span></div>
-<div class="line"><a name="l00112"></a><span class="lineno"><a class="line" href="classqx_1_1logger__singleton.html">  112</a></span>&#160;<span class="keyword">class </span><a class="code" href="classqx_1_1logger__singleton.html">logger_singleton</a> : <span class="keyword">public</span> <a class="code" href="classqx_1_1logger.html">logger</a></div>
-<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;{</div>
-<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;    QX_SINGLETON(<a class="code" href="classqx_1_1logger__singleton.html">logger_singleton</a>);</div>
-<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;};</div>
-<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160; </div>
-<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;} <span class="comment">// namespace qx</span></div>
-<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160; </div>
-<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="logger_8inl.html">qx/logger/logger.inl</a>&gt;</span></div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;<span class="comment">    /**</span></div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;<span class="comment">        @brief Add output stream to the logger</span></div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;<span class="comment">        @param pStream - stream unique pointer</span></div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;<span class="comment">    **/</span></div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classqx_1_1logger.html#abec0212ef10bb7feb65d6f587a989b61">add_stream</a>(std::unique_ptr&lt;base_logger_stream&gt; pStream) noexcept;</div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;<span class="comment">    /**</span></div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;<span class="comment">        @brief Reset logger and clear all streams</span></div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;<span class="comment">    **/</span></div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classqx_1_1logger.html#acbd37fc0636753a6061a745ca1ab8f9e">reset</a>() noexcept;</div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160; </div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;private:</div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;    std::vector&lt;std::unique_ptr&lt;<a class="code" href="classqx_1_1base__logger__stream.html">base_logger_stream</a>&gt;&gt; m_Streams;</div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;};</div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;<span class="comment">/**</span></div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;<span class="comment">    @class   logger_singleton</span></div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;<span class="comment">    @brief   Default logger instance</span></div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;<span class="comment">    @details ~</span></div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;<span class="comment">    @author  Khrapov</span></div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;<span class="comment">    @date    19.08.2021</span></div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;<span class="comment">**/</span></div>
+<div class="line"><a name="l00127"></a><span class="lineno"><a class="line" href="classqx_1_1logger__singleton.html">  127</a></span>&#160;class <a class="code" href="classqx_1_1logger__singleton.html">logger_singleton</a> : public <a class="code" href="classqx_1_1logger.html">logger</a></div>
+<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;{</div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;    <a class="code" href="singleton_8h.html#a63d33417ea5425173513e0ac6e8e3a14">QX_SINGLETON</a>(<a class="code" href="classqx_1_1logger__singleton.html">logger_singleton</a>);</div>
+<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;};</div>
+<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160; </div>
+<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;} <span class="comment">// namespace qx</span></div>
+<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160; </div>
+<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="logger_8inl.html">qx/logger/logger.inl</a>&gt;</span></div>
 <div class="ttc" id="abase__logger__stream_8h_html"><div class="ttname"><a href="base__logger__stream_8h.html">base_logger_stream.h</a></div><div class="ttdoc">Contains qx::base_logger_stream class.</div></div>
+<div class="ttc" id="aclassqx_1_1base__logger__stream_html"><div class="ttname"><a href="classqx_1_1base__logger__stream.html">qx::base_logger_stream</a></div><div class="ttdoc">Base class for logger streams.</div><div class="ttdef"><b>Definition:</b> <a href="base__logger__stream_8h_source.html#l00090">base_logger_stream.h:91</a></div></div>
 <div class="ttc" id="aclassqx_1_1category_html"><div class="ttname"><a href="classqx_1_1category.html">qx::category</a></div><div class="ttdoc">A category is a class that identifies a particular piece of code. This code can be located in differe...</div><div class="ttdef"><b>Definition:</b> <a href="category_8h_source.html#l00056">category.h:57</a></div></div>
-<div class="ttc" id="aclassqx_1_1logger__singleton_html"><div class="ttname"><a href="classqx_1_1logger__singleton.html">qx::logger_singleton</a></div><div class="ttdoc">Default logger instance.</div><div class="ttdef"><b>Definition:</b> <a href="logger_8h_source.html#l00112">logger.h:113</a></div></div>
-<div class="ttc" id="aclassqx_1_1logger_html"><div class="ttname"><a href="classqx_1_1logger.html">qx::logger</a></div><div class="ttdoc">Logger class.</div><div class="ttdef"><b>Definition:</b> <a href="logger_8h_source.html#l00060">logger.h:61</a></div></div>
-<div class="ttc" id="aclassqx_1_1logger_html_a0f3ad21a55f2984759f50963fa878ffe"><div class="ttname"><a href="classqx_1_1logger.html#a0f3ad21a55f2984759f50963fa878ffe">qx::logger::log</a></div><div class="ttdeci">void log(log_level eLogLevel, string_view svFormat, const category &amp;category, string_view svFile, string_view svFunction, int nLine,...)</div><div class="ttdoc">Log to all streams.</div><div class="ttdef"><b>Definition:</b> <a href="logger_8inl_source.html#l00013">logger.inl:13</a></div></div>
-<div class="ttc" id="aclassqx_1_1logger_html_abec0212ef10bb7feb65d6f587a989b61"><div class="ttname"><a href="classqx_1_1logger.html#abec0212ef10bb7feb65d6f587a989b61">qx::logger::add_stream</a></div><div class="ttdeci">void add_stream(std::unique_ptr&lt; base_logger_stream &gt; pStream) noexcept</div><div class="ttdoc">Add output stream to the logger.</div><div class="ttdef"><b>Definition:</b> <a href="logger_8inl_source.html#l00037">logger.inl:37</a></div></div>
-<div class="ttc" id="aclassqx_1_1logger_html_acbd37fc0636753a6061a745ca1ab8f9e"><div class="ttname"><a href="classqx_1_1logger.html#acbd37fc0636753a6061a745ca1ab8f9e">qx::logger::reset</a></div><div class="ttdeci">void reset() noexcept</div><div class="ttdoc">Reset logger and clear all streams.</div><div class="ttdef"><b>Definition:</b> <a href="logger_8inl_source.html#l00042">logger.inl:42</a></div></div>
-<div class="ttc" id="aclassqx_1_1logger_html_af975c6169624a47a72ae8995161e140f"><div class="ttname"><a href="classqx_1_1logger.html#af975c6169624a47a72ae8995161e140f">qx::logger::flush</a></div><div class="ttdeci">void flush()</div><div class="ttdoc">Flush all streams.</div><div class="ttdef"><b>Definition:</b> <a href="logger_8inl_source.html#l00031">logger.inl:31</a></div></div>
+<div class="ttc" id="aclassqx_1_1logger__singleton_html"><div class="ttname"><a href="classqx_1_1logger__singleton.html">qx::logger_singleton</a></div><div class="ttdoc">Default logger instance.</div><div class="ttdef"><b>Definition:</b> <a href="logger_8h_source.html#l00127">logger.h:128</a></div></div>
+<div class="ttc" id="aclassqx_1_1logger_html"><div class="ttname"><a href="classqx_1_1logger.html">qx::logger</a></div><div class="ttdoc">Logger class.</div><div class="ttdef"><b>Definition:</b> <a href="logger_8h_source.html#l00056">logger.h:57</a></div></div>
+<div class="ttc" id="aclassqx_1_1logger_html_a7d7a38034ea752ea38b237468d4660b3"><div class="ttname"><a href="classqx_1_1logger.html#a7d7a38034ea752ea38b237468d4660b3">qx::logger::log</a></div><div class="ttdeci">requires log_acceptable_args&lt; args_t &gt; void log(log_level eLogLevel, format_string&lt; args_t... &gt; sFormat, const category &amp;category, string_view svFile, string_view svFunction, int nLine, const args_t &amp;... args)</div><div class="ttdoc">Log to all streams.</div></div>
+<div class="ttc" id="aclassqx_1_1logger_html_abec0212ef10bb7feb65d6f587a989b61"><div class="ttname"><a href="classqx_1_1logger.html#abec0212ef10bb7feb65d6f587a989b61">qx::logger::add_stream</a></div><div class="ttdeci">void add_stream(std::unique_ptr&lt; base_logger_stream &gt; pStream) noexcept</div><div class="ttdoc">Add output stream to the logger.</div><div class="ttdef"><b>Definition:</b> <a href="logger_8inl_source.html#l00047">logger.inl:47</a></div></div>
+<div class="ttc" id="aclassqx_1_1logger_html_acbd37fc0636753a6061a745ca1ab8f9e"><div class="ttname"><a href="classqx_1_1logger.html#acbd37fc0636753a6061a745ca1ab8f9e">qx::logger::reset</a></div><div class="ttdeci">void reset() noexcept</div><div class="ttdoc">Reset logger and clear all streams.</div><div class="ttdef"><b>Definition:</b> <a href="logger_8inl_source.html#l00052">logger.inl:52</a></div></div>
+<div class="ttc" id="aclassqx_1_1logger_html_ada5dae55e329009dac6c8da9eabc295d"><div class="ttname"><a href="classqx_1_1logger.html#ada5dae55e329009dac6c8da9eabc295d">qx::logger::log</a></div><div class="ttdeci">void log(log_level eLogLevel, string_view svFormat, const category &amp;category, string_view svFile, string_view svFunction, int nLine)</div><div class="ttdoc">Log to all streams.</div><div class="ttdef"><b>Definition:</b> <a href="logger_8inl_source.html#l00013">logger.inl:13</a></div></div>
+<div class="ttc" id="aclassqx_1_1logger_html_af975c6169624a47a72ae8995161e140f"><div class="ttname"><a href="classqx_1_1logger.html#af975c6169624a47a72ae8995161e140f">qx::logger::flush</a></div><div class="ttdeci">void flush()</div><div class="ttdoc">Flush all streams.</div><div class="ttdef"><b>Definition:</b> <a href="logger_8inl_source.html#l00041">logger.inl:41</a></div></div>
 <div class="ttc" id="alogger_8inl_html"><div class="ttname"><a href="logger_8inl.html">logger.inl</a></div></div>
 <div class="ttc" id="asingleton_8h_html"><div class="ttname"><a href="singleton_8h.html">singleton.h</a></div><div class="ttdoc">Singleton implementation.</div></div>
+<div class="ttc" id="asingleton_8h_html_a63d33417ea5425173513e0ac6e8e3a14"><div class="ttname"><a href="singleton_8h.html#a63d33417ea5425173513e0ac6e8e3a14">QX_SINGLETON</a></div><div class="ttdeci">#define QX_SINGLETON(T)</div><div class="ttdoc">Simple Meyer's singleton.</div><div class="ttdef"><b>Definition:</b> <a href="singleton_8h_source.html#l00091">singleton.h:91</a></div></div>
+<div class="ttc" id="astructqx_1_1basic__format__string_html"><div class="ttname"><a href="structqx_1_1basic__format__string.html">qx::basic_format_string</a></div><div class="ttdoc">std::basic_format_string wrapper that performs additional compile time checks</div><div class="ttdef"><b>Definition:</b> <a href="format__string_8h_source.html#l00027">format_string.h:28</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
