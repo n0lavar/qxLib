@@ -211,7 +211,7 @@ $(function() {
 <div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;<span class="comment">        @tparam string_t - string-ish type, satisfying the &quot;string_convertable&quot; concept</span></div>
 <div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;<span class="comment">        @param  sAnother - string-ish container</span></div>
 <div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;<span class="comment">    **/</span></div>
-<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;    template&lt;string_convertable string_t&gt;</div>
+<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;    template&lt;string_convertable&lt;char_t&gt; string_t&gt;</div>
 <div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;    <a class="code" href="classqx_1_1basic__string.html">basic_string</a>(const string_t&amp; sAnother) noexcept;</div>
 <div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;<span class="comment"></span> </div>
 <div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;<span class="comment">    /**</span></div>
@@ -265,7 +265,7 @@ $(function() {
 <div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;<span class="comment">        @tparam string_t - string-ish type, satisfying the &quot;string_convertable&quot; concept</span></div>
 <div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;<span class="comment">        @param  str      - char container</span></div>
 <div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;<span class="comment">    **/</span></div>
-<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;    template&lt;string_convertable string_t&gt;</div>
+<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;    template&lt;string_convertable&lt;char_t&gt; string_t&gt;</div>
 <div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classqx_1_1basic__string.html#a652ef7b38f73741db1e265dd2b96ddff">assign</a>(const string_t&amp; str) noexcept;</div>
 <div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160;<span class="comment"></span> </div>
 <div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160;<span class="comment">    /**</span></div>
@@ -486,7 +486,7 @@ $(function() {
 <div class="line"><a name="l00415"></a><span class="lineno">  415</span>&#160;<span class="comment">        @tparam string_t - string-ish type, satisfying the &quot;string_convertable&quot; concept</span></div>
 <div class="line"><a name="l00416"></a><span class="lineno">  416</span>&#160;<span class="comment">        @param  sStr     - source char container</span></div>
 <div class="line"><a name="l00417"></a><span class="lineno">  417</span>&#160;<span class="comment">    **/</span></div>
-<div class="line"><a name="l00418"></a><span class="lineno">  418</span>&#160;    template&lt;string_convertable string_t&gt;</div>
+<div class="line"><a name="l00418"></a><span class="lineno">  418</span>&#160;    template&lt;string_convertable&lt;char_t&gt; string_t&gt;</div>
 <div class="line"><a name="l00419"></a><span class="lineno">  419</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classqx_1_1basic__string.html#a77ff2592fec39103a874a3265b7f0197">append</a>(const string_t&amp; sStr) noexcept;</div>
 <div class="line"><a name="l00420"></a><span class="lineno">  420</span>&#160;<span class="comment"></span> </div>
 <div class="line"><a name="l00421"></a><span class="lineno">  421</span>&#160;<span class="comment">    /**</span></div>
@@ -532,7 +532,7 @@ $(function() {
 <div class="line"><a name="l00461"></a><span class="lineno">  461</span>&#160;<span class="comment">        @param  sWhat    - source string</span></div>
 <div class="line"><a name="l00462"></a><span class="lineno">  462</span>&#160;<span class="comment">        @retval          - pos of char after last char of inserted string or npos</span></div>
 <div class="line"><a name="l00463"></a><span class="lineno">  463</span>&#160;<span class="comment">    **/</span></div>
-<div class="line"><a name="l00464"></a><span class="lineno">  464</span>&#160;    template&lt;string_convertable string_t&gt;</div>
+<div class="line"><a name="l00464"></a><span class="lineno">  464</span>&#160;    template&lt;string_convertable&lt;char_t&gt; string_t&gt;</div>
 <div class="line"><a name="l00465"></a><span class="lineno">  465</span>&#160;    size_type <a class="code" href="classqx_1_1basic__string.html#ac469a4fa4d6d2a9cd84c89feed2149ab">insert</a>(size_type nPos, string_t sWhat) noexcept;</div>
 <div class="line"><a name="l00466"></a><span class="lineno">  466</span>&#160;<span class="comment"></span> </div>
 <div class="line"><a name="l00467"></a><span class="lineno">  467</span>&#160;<span class="comment">    /**</span></div>
@@ -578,7 +578,7 @@ $(function() {
 <div class="line"><a name="l00507"></a><span class="lineno">  507</span>&#160;<span class="comment">        @param  sWhat    - source string</span></div>
 <div class="line"><a name="l00508"></a><span class="lineno">  508</span>&#160;<span class="comment">        @retval          - pos of char after last char of inserted string or npos</span></div>
 <div class="line"><a name="l00509"></a><span class="lineno">  509</span>&#160;<span class="comment">    **/</span></div>
-<div class="line"><a name="l00510"></a><span class="lineno">  510</span>&#160;    template&lt;string_convertable string_t&gt;</div>
+<div class="line"><a name="l00510"></a><span class="lineno">  510</span>&#160;    template&lt;string_convertable&lt;char_t&gt; string_t&gt;</div>
 <div class="line"><a name="l00511"></a><span class="lineno">  511</span>&#160;    size_type <a class="code" href="classqx_1_1basic__string.html#ac469a4fa4d6d2a9cd84c89feed2149ab">insert</a>(<a class="code" href="classqx_1_1const__iterator.html">const_iterator</a> itPos, string_t sWhat) noexcept;</div>
 <div class="line"><a name="l00512"></a><span class="lineno">  512</span>&#160;<span class="comment"></span> </div>
 <div class="line"><a name="l00513"></a><span class="lineno">  513</span>&#160;<span class="comment">    /**</span></div>
@@ -682,7 +682,7 @@ $(function() {
 <div class="line"><a name="l00611"></a><span class="lineno">  611</span>&#160;<span class="comment">        @param  sStr     - string with symbols to delete </span></div>
 <div class="line"><a name="l00612"></a><span class="lineno">  612</span>&#160;<span class="comment">        @retval          - number of deleted symbols</span></div>
 <div class="line"><a name="l00613"></a><span class="lineno">  613</span>&#160;<span class="comment">    **/</span></div>
-<div class="line"><a name="l00614"></a><span class="lineno">  614</span>&#160;    template&lt;string_convertable string_t&gt;</div>
+<div class="line"><a name="l00614"></a><span class="lineno">  614</span>&#160;    template&lt;string_convertable&lt;char_t&gt; string_t&gt;</div>
 <div class="line"><a name="l00615"></a><span class="lineno">  615</span>&#160;    size_type <a class="code" href="classqx_1_1basic__string.html#a9758e1abebd07074c8b280d952954c03">trim_left</a>(const string_t&amp; sStr) noexcept;</div>
 <div class="line"><a name="l00616"></a><span class="lineno">  616</span>&#160;<span class="comment"></span> </div>
 <div class="line"><a name="l00617"></a><span class="lineno">  617</span>&#160;<span class="comment">    /**</span></div>
@@ -736,7 +736,7 @@ $(function() {
 <div class="line"><a name="l00665"></a><span class="lineno">  665</span>&#160;<span class="comment">        @param  sStr     - string with symbols to delete</span></div>
 <div class="line"><a name="l00666"></a><span class="lineno">  666</span>&#160;<span class="comment">        @retval          - number of deleted symbols</span></div>
 <div class="line"><a name="l00667"></a><span class="lineno">  667</span>&#160;<span class="comment">    **/</span></div>
-<div class="line"><a name="l00668"></a><span class="lineno">  668</span>&#160;    template&lt;string_convertable string_t&gt;</div>
+<div class="line"><a name="l00668"></a><span class="lineno">  668</span>&#160;    template&lt;string_convertable&lt;char_t&gt; string_t&gt;</div>
 <div class="line"><a name="l00669"></a><span class="lineno">  669</span>&#160;    size_type <a class="code" href="classqx_1_1basic__string.html#a5f1d52089c1a9bb263daee02294e52a6">trim_right</a>(const string_t&amp; sStr) noexcept;</div>
 <div class="line"><a name="l00670"></a><span class="lineno">  670</span>&#160;<span class="comment"></span> </div>
 <div class="line"><a name="l00671"></a><span class="lineno">  671</span>&#160;<span class="comment">    /**</span></div>
@@ -790,7 +790,7 @@ $(function() {
 <div class="line"><a name="l00719"></a><span class="lineno">  719</span>&#160;<span class="comment">        @param  sStr     - string with symbols to delete</span></div>
 <div class="line"><a name="l00720"></a><span class="lineno">  720</span>&#160;<span class="comment">        @retval          - number of deleted symbols</span></div>
 <div class="line"><a name="l00721"></a><span class="lineno">  721</span>&#160;<span class="comment">    **/</span></div>
-<div class="line"><a name="l00722"></a><span class="lineno">  722</span>&#160;    template&lt;string_convertable string_t&gt;</div>
+<div class="line"><a name="l00722"></a><span class="lineno">  722</span>&#160;    template&lt;string_convertable&lt;char_t&gt; string_t&gt;</div>
 <div class="line"><a name="l00723"></a><span class="lineno">  723</span>&#160;    size_type <a class="code" href="classqx_1_1basic__string.html#a7f1de4891e51af3de704255e5aaa8d4c">trim</a>(const string_t&amp; sStr) noexcept;</div>
 <div class="line"><a name="l00724"></a><span class="lineno">  724</span>&#160;<span class="comment"></span> </div>
 <div class="line"><a name="l00725"></a><span class="lineno">  725</span>&#160;<span class="comment">    /**</span></div>
@@ -845,7 +845,7 @@ $(function() {
 <div class="line"><a name="l00774"></a><span class="lineno">  774</span>&#160;<span class="comment">        @param  nEnd     - end searching index</span></div>
 <div class="line"><a name="l00775"></a><span class="lineno">  775</span>&#160;<span class="comment">        @retval          - position where the first occurrence was or npos</span></div>
 <div class="line"><a name="l00776"></a><span class="lineno">  776</span>&#160;<span class="comment">    **/</span></div>
-<div class="line"><a name="l00777"></a><span class="lineno">  777</span>&#160;    template&lt;string_convertable string_t&gt;</div>
+<div class="line"><a name="l00777"></a><span class="lineno">  777</span>&#160;    template&lt;string_convertable&lt;char_t&gt; string_t&gt;</div>
 <div class="line"><a name="l00778"></a><span class="lineno">  778</span>&#160;    size_type <a class="code" href="classqx_1_1basic__string.html#acf56f044cfe9ba3a604089fb1ea814fc">remove</a>(const string_t&amp; sStr, size_type nBegin = 0, size_type nEnd = npos) noexcept;</div>
 <div class="line"><a name="l00779"></a><span class="lineno">  779</span>&#160;<span class="comment"></span> </div>
 <div class="line"><a name="l00780"></a><span class="lineno">  780</span>&#160;<span class="comment">    /**</span></div>
@@ -886,7 +886,7 @@ $(function() {
 <div class="line"><a name="l00815"></a><span class="lineno">  815</span>&#160;<span class="comment">        @param  sStr     - string to remove</span></div>
 <div class="line"><a name="l00816"></a><span class="lineno">  816</span>&#160;<span class="comment">        @retval          - true if removed</span></div>
 <div class="line"><a name="l00817"></a><span class="lineno">  817</span>&#160;<span class="comment">    **/</span></div>
-<div class="line"><a name="l00818"></a><span class="lineno">  818</span>&#160;    template&lt;string_convertable string_t&gt;</div>
+<div class="line"><a name="l00818"></a><span class="lineno">  818</span>&#160;    template&lt;string_convertable&lt;char_t&gt; string_t&gt;</div>
 <div class="line"><a name="l00819"></a><span class="lineno">  819</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="classqx_1_1basic__string.html#a134f084442a548a0c1bfa817743abee0">remove_prefix</a>(const string_t&amp; sStr) noexcept;</div>
 <div class="line"><a name="l00820"></a><span class="lineno">  820</span>&#160;<span class="comment"></span> </div>
 <div class="line"><a name="l00821"></a><span class="lineno">  821</span>&#160;<span class="comment">    /**</span></div>
@@ -927,7 +927,7 @@ $(function() {
 <div class="line"><a name="l00856"></a><span class="lineno">  856</span>&#160;<span class="comment">        @param  sStr     - string to remove</span></div>
 <div class="line"><a name="l00857"></a><span class="lineno">  857</span>&#160;<span class="comment">        @retval          - true if removed</span></div>
 <div class="line"><a name="l00858"></a><span class="lineno">  858</span>&#160;<span class="comment">    **/</span></div>
-<div class="line"><a name="l00859"></a><span class="lineno">  859</span>&#160;    template&lt;string_convertable string_t&gt;</div>
+<div class="line"><a name="l00859"></a><span class="lineno">  859</span>&#160;    template&lt;string_convertable&lt;char_t&gt; string_t&gt;</div>
 <div class="line"><a name="l00860"></a><span class="lineno">  860</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="classqx_1_1basic__string.html#ac8272715a6f5c4eca6a9e41811b8916a">remove_suffix</a>(const string_t&amp; sStr) noexcept;</div>
 <div class="line"><a name="l00861"></a><span class="lineno">  861</span>&#160;<span class="comment"></span> </div>
 <div class="line"><a name="l00862"></a><span class="lineno">  862</span>&#160;<span class="comment">    /**</span></div>
@@ -982,7 +982,7 @@ $(function() {
 <div class="line"><a name="l00911"></a><span class="lineno">  911</span>&#160;<span class="comment">        @param  nEnd     - end searching index</span></div>
 <div class="line"><a name="l00912"></a><span class="lineno">  912</span>&#160;<span class="comment">        @retval          - number of deleted occurrences</span></div>
 <div class="line"><a name="l00913"></a><span class="lineno">  913</span>&#160;<span class="comment">    **/</span></div>
-<div class="line"><a name="l00914"></a><span class="lineno">  914</span>&#160;    template&lt;string_convertable string_t&gt;</div>
+<div class="line"><a name="l00914"></a><span class="lineno">  914</span>&#160;    template&lt;string_convertable&lt;char_t&gt; string_t&gt;</div>
 <div class="line"><a name="l00915"></a><span class="lineno">  915</span>&#160;    size_type <a class="code" href="classqx_1_1basic__string.html#a24a9e08d73369431b0ef8538a2d11a9d">remove_all</a>(const string_t&amp; sStr, size_type nBegin = 0, size_type nEnd = npos) noexcept;</div>
 <div class="line"><a name="l00916"></a><span class="lineno">  916</span>&#160;<span class="comment"></span> </div>
 <div class="line"><a name="l00917"></a><span class="lineno">  917</span>&#160;<span class="comment">    /**</span></div>
@@ -1088,7 +1088,7 @@ $(function() {
 <div class="line"><a name="l01017"></a><span class="lineno"> 1017</span>&#160;<span class="comment">                           &gt; 0 the first character that does not match has</span></div>
 <div class="line"><a name="l01018"></a><span class="lineno"> 1018</span>&#160;<span class="comment">                               a greater value in this than in chSymbol</span></div>
 <div class="line"><a name="l01019"></a><span class="lineno"> 1019</span>&#160;<span class="comment">    **/</span></div>
-<div class="line"><a name="l01020"></a><span class="lineno"> 1020</span>&#160;    template&lt;string_convertable string_t&gt;</div>
+<div class="line"><a name="l01020"></a><span class="lineno"> 1020</span>&#160;    template&lt;string_convertable&lt;char_t&gt; string_t&gt;</div>
 <div class="line"><a name="l01021"></a><span class="lineno"> 1021</span>&#160;    <span class="keywordtype">int</span> <a class="code" href="classqx_1_1basic__string.html#a3ad03f0711f489bb775eca6dbb0d7892">compare</a>(const string_t&amp; sStr) const noexcept;</div>
 <div class="line"><a name="l01022"></a><span class="lineno"> 1022</span>&#160;<span class="comment"></span> </div>
 <div class="line"><a name="l01023"></a><span class="lineno"> 1023</span>&#160;<span class="comment">    /**</span></div>
@@ -1141,7 +1141,7 @@ $(function() {
 <div class="line"><a name="l01070"></a><span class="lineno"> 1070</span>&#160;<span class="comment">        @param  nEnd     - end searching index</span></div>
 <div class="line"><a name="l01071"></a><span class="lineno"> 1071</span>&#160;<span class="comment">        @retval          - substring index or npos if not found</span></div>
 <div class="line"><a name="l01072"></a><span class="lineno"> 1072</span>&#160;<span class="comment">    **/</span></div>
-<div class="line"><a name="l01073"></a><span class="lineno"> 1073</span>&#160;    template&lt;string_convertable string_t&gt;</div>
+<div class="line"><a name="l01073"></a><span class="lineno"> 1073</span>&#160;    template&lt;string_convertable&lt;char_t&gt; string_t&gt;</div>
 <div class="line"><a name="l01074"></a><span class="lineno"> 1074</span>&#160;    size_type <a class="code" href="classqx_1_1basic__string.html#a0afee154ed98a5ef6bcce0d938b93dcf">find</a>(string_t sWhat, size_type nBegin = 0, size_type nEnd = npos) const noexcept;</div>
 <div class="line"><a name="l01075"></a><span class="lineno"> 1075</span>&#160;<span class="comment"></span> </div>
 <div class="line"><a name="l01076"></a><span class="lineno"> 1076</span>&#160;<span class="comment">    /**</span></div>
@@ -1199,7 +1199,7 @@ $(function() {
 <div class="line"><a name="l01128"></a><span class="lineno"> 1128</span>&#160;<span class="comment">                           (if nBegin &lt; end, result is equivalent of find(...))</span></div>
 <div class="line"><a name="l01129"></a><span class="lineno"> 1129</span>&#160;<span class="comment">        @retval          - substring index or npos if not found</span></div>
 <div class="line"><a name="l01130"></a><span class="lineno"> 1130</span>&#160;<span class="comment">    **/</span></div>
-<div class="line"><a name="l01131"></a><span class="lineno"> 1131</span>&#160;    template&lt;string_convertable string_t&gt;</div>
+<div class="line"><a name="l01131"></a><span class="lineno"> 1131</span>&#160;    template&lt;string_convertable&lt;char_t&gt; string_t&gt;</div>
 <div class="line"><a name="l01132"></a><span class="lineno"> 1132</span>&#160;    size_type <a class="code" href="classqx_1_1basic__string.html#a53439a3fb571ad6dfaaef4b2b1cece83">rfind</a>(string_t sWhat, size_type nBegin = npos, size_type nEnd = 0) const noexcept;</div>
 <div class="line"><a name="l01133"></a><span class="lineno"> 1133</span>&#160;<span class="comment"></span> </div>
 <div class="line"><a name="l01134"></a><span class="lineno"> 1134</span>&#160;<span class="comment">    /**</span></div>
@@ -1253,7 +1253,7 @@ $(function() {
 <div class="line"><a name="l01182"></a><span class="lineno"> 1182</span>&#160;<span class="comment">        @param  nBegin   - position at which the search is to begin</span></div>
 <div class="line"><a name="l01183"></a><span class="lineno"> 1183</span>&#160;<span class="comment">        @retval          - symbol index or npos</span></div>
 <div class="line"><a name="l01184"></a><span class="lineno"> 1184</span>&#160;<span class="comment">    **/</span></div>
-<div class="line"><a name="l01185"></a><span class="lineno"> 1185</span>&#160;    template&lt;string_convertable string_t&gt;</div>
+<div class="line"><a name="l01185"></a><span class="lineno"> 1185</span>&#160;    template&lt;string_convertable&lt;char_t&gt; string_t&gt;</div>
 <div class="line"><a name="l01186"></a><span class="lineno"> 1186</span>&#160;    size_type <a class="code" href="classqx_1_1basic__string.html#ae8fc2ea118225d5e1b409d5b5ae29973">find_first_of</a>(string_t sWhat, size_type nBegin = 0) const noexcept;</div>
 <div class="line"><a name="l01187"></a><span class="lineno"> 1187</span>&#160;<span class="comment"></span> </div>
 <div class="line"><a name="l01188"></a><span class="lineno"> 1188</span>&#160;<span class="comment">    /**</span></div>
@@ -1307,7 +1307,7 @@ $(function() {
 <div class="line"><a name="l01236"></a><span class="lineno"> 1236</span>&#160;<span class="comment">        @param  nEnd     - position at which the search is to finish</span></div>
 <div class="line"><a name="l01237"></a><span class="lineno"> 1237</span>&#160;<span class="comment">        @retval          - symbol index or npos</span></div>
 <div class="line"><a name="l01238"></a><span class="lineno"> 1238</span>&#160;<span class="comment">    **/</span></div>
-<div class="line"><a name="l01239"></a><span class="lineno"> 1239</span>&#160;    template&lt;string_convertable string_t&gt;</div>
+<div class="line"><a name="l01239"></a><span class="lineno"> 1239</span>&#160;    template&lt;string_convertable&lt;char_t&gt; string_t&gt;</div>
 <div class="line"><a name="l01240"></a><span class="lineno"> 1240</span>&#160;    size_type <a class="code" href="classqx_1_1basic__string.html#a3f91c999aa9e4938b8571aedcf87bbff">find_last_of</a>(string_t sWhat, size_type nEnd = 0) const noexcept;</div>
 <div class="line"><a name="l01241"></a><span class="lineno"> 1241</span>&#160;<span class="comment"></span> </div>
 <div class="line"><a name="l01242"></a><span class="lineno"> 1242</span>&#160;<span class="comment">    /**</span></div>
@@ -1361,7 +1361,7 @@ $(function() {
 <div class="line"><a name="l01290"></a><span class="lineno"> 1290</span>&#160;<span class="comment">        @param  nBegin   - position at which the search is to begin </span></div>
 <div class="line"><a name="l01291"></a><span class="lineno"> 1291</span>&#160;<span class="comment">        @retval          - symbol index or npos</span></div>
 <div class="line"><a name="l01292"></a><span class="lineno"> 1292</span>&#160;<span class="comment">    **/</span></div>
-<div class="line"><a name="l01293"></a><span class="lineno"> 1293</span>&#160;    template&lt;string_convertable string_t&gt;</div>
+<div class="line"><a name="l01293"></a><span class="lineno"> 1293</span>&#160;    template&lt;string_convertable&lt;char_t&gt; string_t&gt;</div>
 <div class="line"><a name="l01294"></a><span class="lineno"> 1294</span>&#160;    size_type <a class="code" href="classqx_1_1basic__string.html#afd790ad4161bc113ea61ccdbefa71b0a">find_first_not_of</a>(string_t sWhat, size_type nBegin = 0) const noexcept;</div>
 <div class="line"><a name="l01295"></a><span class="lineno"> 1295</span>&#160;<span class="comment"></span> </div>
 <div class="line"><a name="l01296"></a><span class="lineno"> 1296</span>&#160;<span class="comment">    /**</span></div>
@@ -1415,7 +1415,7 @@ $(function() {
 <div class="line"><a name="l01344"></a><span class="lineno"> 1344</span>&#160;<span class="comment">        @param  nEnd     - position at which the search is to finish </span></div>
 <div class="line"><a name="l01345"></a><span class="lineno"> 1345</span>&#160;<span class="comment">        @retval          - symbol index or npos</span></div>
 <div class="line"><a name="l01346"></a><span class="lineno"> 1346</span>&#160;<span class="comment">    **/</span></div>
-<div class="line"><a name="l01347"></a><span class="lineno"> 1347</span>&#160;    template&lt;string_convertable string_t&gt;</div>
+<div class="line"><a name="l01347"></a><span class="lineno"> 1347</span>&#160;    template&lt;string_convertable&lt;char_t&gt; string_t&gt;</div>
 <div class="line"><a name="l01348"></a><span class="lineno"> 1348</span>&#160;    size_type <a class="code" href="classqx_1_1basic__string.html#a974ab11e7d866d43b4f10c832dac0b67">find_last_not_of</a>(string_t sWhat, size_type nEnd = 0) const noexcept;</div>
 <div class="line"><a name="l01349"></a><span class="lineno"> 1349</span>&#160;<span class="comment"></span> </div>
 <div class="line"><a name="l01350"></a><span class="lineno"> 1350</span>&#160;<span class="comment">    /**</span></div>
@@ -1456,7 +1456,7 @@ $(function() {
 <div class="line"><a name="l01385"></a><span class="lineno"> 1385</span>&#160;<span class="comment">        @param  sSeparator  - separator string</span></div>
 <div class="line"><a name="l01386"></a><span class="lineno"> 1386</span>&#160;<span class="comment">        @retval             - string_view container</span></div>
 <div class="line"><a name="l01387"></a><span class="lineno"> 1387</span>&#160;<span class="comment">    **/</span></div>
-<div class="line"><a name="l01388"></a><span class="lineno"> 1388</span>&#160;    template&lt;string_convertable string_t&gt;</div>
+<div class="line"><a name="l01388"></a><span class="lineno"> 1388</span>&#160;    template&lt;string_convertable&lt;char_t&gt; string_t&gt;</div>
 <div class="line"><a name="l01389"></a><span class="lineno"> 1389</span>&#160;    views <a class="code" href="classqx_1_1basic__string.html#a4cb6e4861b756535082ede790daaae2a">split</a>(const string_t&amp; sSeparator) const noexcept;</div>
 <div class="line"><a name="l01390"></a><span class="lineno"> 1390</span>&#160;<span class="comment"></span> </div>
 <div class="line"><a name="l01391"></a><span class="lineno"> 1391</span>&#160;<span class="comment">    /**</span></div>
@@ -1497,7 +1497,7 @@ $(function() {
 <div class="line"><a name="l01426"></a><span class="lineno"> 1426</span>&#160;<span class="comment">        @param  sStr     - string container to check</span></div>
 <div class="line"><a name="l01427"></a><span class="lineno"> 1427</span>&#160;<span class="comment">        @retval          - true if starts with string</span></div>
 <div class="line"><a name="l01428"></a><span class="lineno"> 1428</span>&#160;<span class="comment">    **/</span></div>
-<div class="line"><a name="l01429"></a><span class="lineno"> 1429</span>&#160;    template&lt;string_convertable string_t&gt;</div>
+<div class="line"><a name="l01429"></a><span class="lineno"> 1429</span>&#160;    template&lt;string_convertable&lt;char_t&gt; string_t&gt;</div>
 <div class="line"><a name="l01430"></a><span class="lineno"> 1430</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="classqx_1_1basic__string.html#ad9f7a75304c2ba958a47c7da87b88d7f">starts_with</a>(const string_t&amp; sStr) const noexcept;</div>
 <div class="line"><a name="l01431"></a><span class="lineno"> 1431</span>&#160;<span class="comment"></span> </div>
 <div class="line"><a name="l01432"></a><span class="lineno"> 1432</span>&#160;<span class="comment">    /**</span></div>
@@ -1538,7 +1538,7 @@ $(function() {
 <div class="line"><a name="l01467"></a><span class="lineno"> 1467</span>&#160;<span class="comment">        @param  sStr     - string container to check</span></div>
 <div class="line"><a name="l01468"></a><span class="lineno"> 1468</span>&#160;<span class="comment">        @retval          - true if starts with string</span></div>
 <div class="line"><a name="l01469"></a><span class="lineno"> 1469</span>&#160;<span class="comment">    **/</span></div>
-<div class="line"><a name="l01470"></a><span class="lineno"> 1470</span>&#160;    template&lt;string_convertable string_t&gt;</div>
+<div class="line"><a name="l01470"></a><span class="lineno"> 1470</span>&#160;    template&lt;string_convertable&lt;char_t&gt; string_t&gt;</div>
 <div class="line"><a name="l01471"></a><span class="lineno"> 1471</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="classqx_1_1basic__string.html#a70d4ead013fa2fd11cb560ff66f5180d">ends_with</a>(const string_t&amp; sStr) const noexcept;</div>
 <div class="line"><a name="l01472"></a><span class="lineno"> 1472</span>&#160;<span class="comment"></span> </div>
 <div class="line"><a name="l01473"></a><span class="lineno"> 1473</span>&#160;<span class="comment">    /**</span></div>
@@ -1584,7 +1584,7 @@ $(function() {
 <div class="line"><a name="l01513"></a><span class="lineno"> 1513</span>&#160;<span class="comment">        @param   sStr     - string to check</span></div>
 <div class="line"><a name="l01514"></a><span class="lineno"> 1514</span>&#160;<span class="comment">        @retval           - true if this string contains substring</span></div>
 <div class="line"><a name="l01515"></a><span class="lineno"> 1515</span>&#160;<span class="comment">    **/</span></div>
-<div class="line"><a name="l01516"></a><span class="lineno"> 1516</span>&#160;    template&lt;string_convertable string_t&gt;</div>
+<div class="line"><a name="l01516"></a><span class="lineno"> 1516</span>&#160;    template&lt;string_convertable&lt;char_t&gt; string_t&gt;</div>
 <div class="line"><a name="l01517"></a><span class="lineno"> 1517</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="classqx_1_1basic__string.html#a7adaed350ef51a1d08654037c0d5f559">contains</a>(const string_t&amp; sStr) const noexcept;</div>
 <div class="line"><a name="l01518"></a><span class="lineno"> 1518</span>&#160;<span class="comment"></span> </div>
 <div class="line"><a name="l01519"></a><span class="lineno"> 1519</span>&#160;<span class="comment">    /**</span></div>
@@ -1614,7 +1614,7 @@ $(function() {
 <div class="line"><a name="l01543"></a><span class="lineno"> 1543</span>&#160;<span class="comment">        @param  sStr     - string to assign</span></div>
 <div class="line"><a name="l01544"></a><span class="lineno"> 1544</span>&#160;<span class="comment">        @retval          - this object reference</span></div>
 <div class="line"><a name="l01545"></a><span class="lineno"> 1545</span>&#160;<span class="comment">    **/</span></div>
-<div class="line"><a name="l01546"></a><span class="lineno"> 1546</span>&#160;    template&lt;string_convertable string_t&gt;</div>
+<div class="line"><a name="l01546"></a><span class="lineno"> 1546</span>&#160;    template&lt;string_convertable&lt;char_t&gt; string_t&gt;</div>
 <div class="line"><a name="l01547"></a><span class="lineno"><a class="line" href="classqx_1_1basic__string.html#a9132e9138017a0e1c8ba4b30f12966b1"> 1547</a></span>&#160;    <a class="code" href="classqx_1_1basic__string.html">basic_string</a>&amp; operator=(const string_t&amp; sStr) noexcept;</div>
 <div class="line"><a name="l01548"></a><span class="lineno"> 1548</span>&#160;<span class="comment"></span> </div>
 <div class="line"><a name="l01549"></a><span class="lineno"> 1549</span>&#160;<span class="comment">    /**</span></div>
@@ -1644,7 +1644,7 @@ $(function() {
 <div class="line"><a name="l01573"></a><span class="lineno"> 1573</span>&#160;<span class="comment">        @param  sStr     - string to concat</span></div>
 <div class="line"><a name="l01574"></a><span class="lineno"> 1574</span>&#160;<span class="comment">        @retval          - this object reference</span></div>
 <div class="line"><a name="l01575"></a><span class="lineno"> 1575</span>&#160;<span class="comment">    **/</span></div>
-<div class="line"><a name="l01576"></a><span class="lineno"> 1576</span>&#160;    template&lt;string_convertable string_t&gt;</div>
+<div class="line"><a name="l01576"></a><span class="lineno"> 1576</span>&#160;    template&lt;string_convertable&lt;char_t&gt; string_t&gt;</div>
 <div class="line"><a name="l01577"></a><span class="lineno"><a class="line" href="classqx_1_1basic__string.html#abe62d22b65daf65e76a935456f51af9e"> 1577</a></span>&#160;    <a class="code" href="classqx_1_1basic__string.html">basic_string</a>&amp; operator+=(const string_t&amp; sStr) noexcept;</div>
 <div class="line"><a name="l01578"></a><span class="lineno"> 1578</span>&#160;<span class="comment"></span> </div>
 <div class="line"><a name="l01579"></a><span class="lineno"> 1579</span>&#160;<span class="comment">    /**</span></div>
@@ -1674,7 +1674,7 @@ $(function() {
 <div class="line"><a name="l01603"></a><span class="lineno"> 1603</span>&#160;<span class="comment">        @param  sStr     - string to compare</span></div>
 <div class="line"><a name="l01604"></a><span class="lineno"> 1604</span>&#160;<span class="comment">        @retval          - true, if objects are equal</span></div>
 <div class="line"><a name="l01605"></a><span class="lineno"> 1605</span>&#160;<span class="comment">    **/</span></div>
-<div class="line"><a name="l01606"></a><span class="lineno"> 1606</span>&#160;    template&lt;string_convertable string_t&gt;</div>
+<div class="line"><a name="l01606"></a><span class="lineno"> 1606</span>&#160;    template&lt;string_convertable&lt;char_t&gt; string_t&gt;</div>
 <div class="line"><a name="l01607"></a><span class="lineno"> 1607</span>&#160;    <span class="keywordtype">bool</span> operator==(const string_t&amp; sStr) const noexcept;</div>
 <div class="line"><a name="l01608"></a><span class="lineno"> 1608</span>&#160;<span class="comment"></span> </div>
 <div class="line"><a name="l01609"></a><span class="lineno"> 1609</span>&#160;<span class="comment">    /**</span></div>
@@ -1704,7 +1704,7 @@ $(function() {
 <div class="line"><a name="l01633"></a><span class="lineno"> 1633</span>&#160;<span class="comment">        @param  sStr     - string to compare</span></div>
 <div class="line"><a name="l01634"></a><span class="lineno"> 1634</span>&#160;<span class="comment">        @retval          - true, if objects are not equal</span></div>
 <div class="line"><a name="l01635"></a><span class="lineno"> 1635</span>&#160;<span class="comment">    **/</span></div>
-<div class="line"><a name="l01636"></a><span class="lineno"> 1636</span>&#160;    template&lt;string_convertable string_t&gt;</div>
+<div class="line"><a name="l01636"></a><span class="lineno"> 1636</span>&#160;    template&lt;string_convertable&lt;char_t&gt; string_t&gt;</div>
 <div class="line"><a name="l01637"></a><span class="lineno"> 1637</span>&#160;    <span class="keywordtype">bool</span> operator!=(const string_t&amp; sStr) const noexcept;</div>
 <div class="line"><a name="l01638"></a><span class="lineno"> 1638</span>&#160;<span class="comment"></span> </div>
 <div class="line"><a name="l01639"></a><span class="lineno"> 1639</span>&#160;<span class="comment">    /**</span></div>
@@ -1734,7 +1734,7 @@ $(function() {
 <div class="line"><a name="l01663"></a><span class="lineno"> 1663</span>&#160;<span class="comment">        @param  sStr     - string to compare</span></div>
 <div class="line"><a name="l01664"></a><span class="lineno"> 1664</span>&#160;<span class="comment">        @retval          - true, if left object is less than right</span></div>
 <div class="line"><a name="l01665"></a><span class="lineno"> 1665</span>&#160;<span class="comment">    **/</span></div>
-<div class="line"><a name="l01666"></a><span class="lineno"> 1666</span>&#160;    template&lt;string_convertable string_t&gt;</div>
+<div class="line"><a name="l01666"></a><span class="lineno"> 1666</span>&#160;    template&lt;string_convertable&lt;char_t&gt; string_t&gt;</div>
 <div class="line"><a name="l01667"></a><span class="lineno"> 1667</span>&#160;    <span class="keywordtype">bool</span> operator&lt;(const string_t&amp; sStr) const noexcept;</div>
 <div class="line"><a name="l01668"></a><span class="lineno"> 1668</span>&#160;<span class="comment"></span> </div>
 <div class="line"><a name="l01669"></a><span class="lineno"> 1669</span>&#160;<span class="comment">    /**</span></div>
@@ -1764,7 +1764,7 @@ $(function() {
 <div class="line"><a name="l01693"></a><span class="lineno"> 1693</span>&#160;<span class="comment">        @param  sStr     - string to compare</span></div>
 <div class="line"><a name="l01694"></a><span class="lineno"> 1694</span>&#160;<span class="comment">        @retval          - true, if left object is less or equal than right</span></div>
 <div class="line"><a name="l01695"></a><span class="lineno"> 1695</span>&#160;<span class="comment">    **/</span></div>
-<div class="line"><a name="l01696"></a><span class="lineno"> 1696</span>&#160;    template&lt;string_convertable string_t&gt;</div>
+<div class="line"><a name="l01696"></a><span class="lineno"> 1696</span>&#160;    template&lt;string_convertable&lt;char_t&gt; string_t&gt;</div>
 <div class="line"><a name="l01697"></a><span class="lineno"> 1697</span>&#160;    <span class="keywordtype">bool</span> operator&lt;=(const string_t&amp; sStr) const noexcept;</div>
 <div class="line"><a name="l01698"></a><span class="lineno"> 1698</span>&#160;<span class="comment"></span> </div>
 <div class="line"><a name="l01699"></a><span class="lineno"> 1699</span>&#160;<span class="comment">    /**</span></div>
@@ -1794,7 +1794,7 @@ $(function() {
 <div class="line"><a name="l01723"></a><span class="lineno"> 1723</span>&#160;<span class="comment">        @param  sStr     - string to compare</span></div>
 <div class="line"><a name="l01724"></a><span class="lineno"> 1724</span>&#160;<span class="comment">        @retval          - true, if left object is greater than right</span></div>
 <div class="line"><a name="l01725"></a><span class="lineno"> 1725</span>&#160;<span class="comment">    **/</span></div>
-<div class="line"><a name="l01726"></a><span class="lineno"> 1726</span>&#160;    template&lt;string_convertable string_t&gt;</div>
+<div class="line"><a name="l01726"></a><span class="lineno"> 1726</span>&#160;    template&lt;string_convertable&lt;char_t&gt; string_t&gt;</div>
 <div class="line"><a name="l01727"></a><span class="lineno"> 1727</span>&#160;    <span class="keywordtype">bool</span> operator&gt;(const string_t&amp; sStr) const noexcept;</div>
 <div class="line"><a name="l01728"></a><span class="lineno"> 1728</span>&#160;<span class="comment"></span> </div>
 <div class="line"><a name="l01729"></a><span class="lineno"> 1729</span>&#160;<span class="comment">    /**</span></div>
@@ -1824,7 +1824,7 @@ $(function() {
 <div class="line"><a name="l01753"></a><span class="lineno"> 1753</span>&#160;<span class="comment">        @param  sStr     - string to compare</span></div>
 <div class="line"><a name="l01754"></a><span class="lineno"> 1754</span>&#160;<span class="comment">        @retval          - true, if left object is greater or equal than right</span></div>
 <div class="line"><a name="l01755"></a><span class="lineno"> 1755</span>&#160;<span class="comment">    **/</span></div>
-<div class="line"><a name="l01756"></a><span class="lineno"> 1756</span>&#160;    template&lt;string_convertable string_t&gt;</div>
+<div class="line"><a name="l01756"></a><span class="lineno"> 1756</span>&#160;    template&lt;string_convertable&lt;char_t&gt; string_t&gt;</div>
 <div class="line"><a name="l01757"></a><span class="lineno"> 1757</span>&#160;    <span class="keywordtype">bool</span> operator&gt;=(const string_t&amp; sStr) const noexcept;</div>
 <div class="line"><a name="l01758"></a><span class="lineno"> 1758</span>&#160;<span class="comment"></span> </div>
 <div class="line"><a name="l01759"></a><span class="lineno"> 1759</span>&#160;<span class="comment">    /**</span></div>
