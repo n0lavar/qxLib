@@ -94,7 +94,7 @@ $(function() {
 <div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;}</div>
 <div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160; </div>
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span>... args_t&gt;</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    requires log_acceptable_args&lt;args_t...&gt;</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    requires(log_acceptable_args&lt;args_t...&gt;)</div>
 <div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="classqx_1_1logger.html#ada5dae55e329009dac6c8da9eabc295d">logger::log</a>(</div>
 <div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    log_level                eLogLevel,</div>
 <div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    <a class="code" href="structqx_1_1basic__format__string.html">format_string&lt;args_t...&gt;</a> sFormat,</div>
