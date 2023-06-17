@@ -180,7 +180,7 @@ $(function() {
 <div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;<span class="comment">**/</span></div>
 <div class="line"><a name="l00110"></a><span class="lineno"><a class="line" href="string__converters_8h.html#a8504ea7c466080dc3bae7dc326a5cc52">  110</a></span>&#160;<span class="keyword">inline</span> <span class="keywordtype">string</span> <a class="code" href="string__converters_8h.html#a8504ea7c466080dc3bae7dc326a5cc52">utf8_to_string</a>(<span class="keyword">const</span> <span class="keywordtype">char</span>* pszUtf8)</div>
 <div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;{</div>
-<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;<span class="preprocessor">#ifdef QX_CONF_USE_CHAR</span></div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;<span class="preprocessor">#ifdef QX_CONF_USE_WCHAR</span></div>
 <div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;    QX_PUSH_SUPPRESS_ALL_WARNINGS();</div>
 <div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;    std::wstring_convert&lt;std::codecvt_utf8_utf16&lt;wchar_t&gt;&gt; converter;</div>
 <div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;    <span class="keywordflow">return</span> converter.from_bytes(pszUtf8);</div>
