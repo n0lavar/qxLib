@@ -80,10 +80,11 @@ inline cstring to_cstring(cstring_view stringView, const std::locale& locale = s
 **/
 inline string to_string(cstring_view stringView, const std::locale& locale = std::locale())
 {
-    if constexpr (std::is_same_v<char_type, char>)
-        return stringView;
-    else if constexpr (std::is_same_v<char_type, wchar_t>)
-        return to_wstring(stringView, locale);
+#ifdef QX_CONF_USE_CHAR
+    return stringView;
+#elif defined(QX_CONF_USE_WCHAR)
+    return to_wstring(stringView, locale);
+#endif
 }
 
 /**
@@ -94,10 +95,11 @@ inline string to_string(cstring_view stringView, const std::locale& locale = std
 **/
 inline string to_string(wstring_view stringView, const std::locale& locale = std::locale())
 {
-    if constexpr (std::is_same_v<char_type, char>)
-        return to_cstring(stringView, locale);
-    else if constexpr (std::is_same_v<char_type, wchar_t>)
-        return stringView;
+#ifdef QX_CONF_USE_CHAR
+    return to_cstring(stringView, locale);
+#elif defined(QX_CONF_USE_WCHAR)
+    return stringView;
+#endif
 }
 
 /**
@@ -107,13 +109,12 @@ inline string to_string(wstring_view stringView, const std::locale& locale = std
 **/
 inline string utf8_to_string(const char* pszUtf8)
 {
-    if constexpr (std::is_same_v<char_type, wchar_t>)
-    {
-        QX_PUSH_SUPPRESS_ALL_WARNINGS();
-        std::wstring_convert<std::codecvt_utf8_utf16<wchar_t>> converter;
-        return converter.from_bytes(pszUtf8);
-        QX_POP_SUPPRESS_WARNINGS();
-    }
+#ifdef QX_CONF_USE_WCHAR
+    QX_PUSH_SUPPRESS_ALL_WARNINGS();
+    std::wstring_convert<std::codecvt_utf8_utf16<wchar_t>> converter;
+    return converter.from_bytes(pszUtf8);
+    QX_POP_SUPPRESS_WARNINGS();
+#endif
 }
 
 } // namespace qx

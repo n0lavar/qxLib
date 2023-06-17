@@ -32,7 +32,7 @@ constexpr basic_string_hash<traits_t>::basic_string_hash(const_pointer pszString
 }
 
 template<class traits_t>
-template<string_convertable string_t>
+template<string_convertable<typename traits_t::value_type> string_t>
 constexpr basic_string_hash<traits_t>::basic_string_hash(const string_t& sString) noexcept
     : m_nHash(traits_t::hash_function(sString.data(), traits_t::hash_seed(), sString.size()))
 {

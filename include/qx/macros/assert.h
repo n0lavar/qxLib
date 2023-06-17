@@ -59,6 +59,7 @@ void resolve_assert_proceeding(
 }
 
 template<log_level eLogLevel, class... args_t>
+    requires log_acceptable_args<args_t...>
 void resolve_assert_proceeding(
     // macro args
     const category& fileCategory,
@@ -77,7 +78,25 @@ void resolve_assert_proceeding(
     QX_LOGGER_INSTANCE.flush();
 }
 
+template<log_level eLogLevel>
+void resolve_assert_proceeding(
+    // macro args
+    const category& fileCategory,
+    string_view     svFunction,
+    string_view     svFile,
+    int             nLine,
+    string_view     svCondition,
+    // ... args
+    string_view svMessage)
+{
+    string sMessage;
+    sMessage.append_format(QX_TEXT("[{}] {}"), svCondition, svMessage);
+    QX_LOGGER_INSTANCE.log(eLogLevel, sMessage, fileCategory, svFile, svFunction, nLine);
+    QX_LOGGER_INSTANCE.flush();
+}
+
 template<log_level eLogLevel, class... args_t>
+    requires log_acceptable_args<args_t...>
 void resolve_assert_proceeding(
     // macro args
     const category& fileCategory,
@@ -93,6 +112,24 @@ void resolve_assert_proceeding(
     string sMessage;
     sMessage.append_format(QX_TEXT("[{}] "), svCondition);
     sMessage.append_format(sFormat, args...);
+    QX_LOGGER_INSTANCE.log(eLogLevel, sMessage, category, svFile, svFunction, nLine);
+    QX_LOGGER_INSTANCE.flush();
+}
+
+template<log_level eLogLevel>
+void resolve_assert_proceeding(
+    // macro args
+    const category& fileCategory,
+    string_view     svFunction,
+    string_view     svFile,
+    int             nLine,
+    string_view     svCondition,
+    // ... args
+    const category& category,
+    string_view     svMessage)
+{
+    string sMessage;
+    sMessage.append_format(QX_TEXT("[{}] {}"), svCondition, svMessage);
     QX_LOGGER_INSTANCE.log(eLogLevel, sMessage, category, svFile, svFunction, nLine);
     QX_LOGGER_INSTANCE.flush();
 }

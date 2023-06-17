@@ -140,7 +140,7 @@ public:
         @tparam string_t - string-ish type, satisfying the "string_convertable" concept
         @param  sAnother - string-ish container
     **/
-    template<string_convertable string_t>
+    template<string_convertable<char_t> string_t>
     basic_string(const string_t& sAnother) noexcept;
 
     /**
@@ -194,7 +194,7 @@ public:
         @tparam string_t - string-ish type, satisfying the "string_convertable" concept
         @param  str      - char container
     **/
-    template<string_convertable string_t>
+    template<string_convertable<char_t> string_t>
     void assign(const string_t& str) noexcept;
 
     /**
@@ -415,7 +415,7 @@ public:
         @tparam string_t - string-ish type, satisfying the "string_convertable" concept
         @param  sStr     - source char container
     **/
-    template<string_convertable string_t>
+    template<string_convertable<char_t> string_t>
     void append(const string_t& sStr) noexcept;
 
     /**
@@ -461,7 +461,7 @@ public:
         @param  sWhat    - source string
         @retval          - pos of char after last char of inserted string or npos
     **/
-    template<string_convertable string_t>
+    template<string_convertable<char_t> string_t>
     size_type insert(size_type nPos, string_t sWhat) noexcept;
 
     /**
@@ -507,7 +507,7 @@ public:
         @param  sWhat    - source string
         @retval          - pos of char after last char of inserted string or npos
     **/
-    template<string_convertable string_t>
+    template<string_convertable<char_t> string_t>
     size_type insert(const_iterator itPos, string_t sWhat) noexcept;
 
     /**
@@ -611,7 +611,7 @@ public:
         @param  sStr     - string with symbols to delete 
         @retval          - number of deleted symbols
     **/
-    template<string_convertable string_t>
+    template<string_convertable<char_t> string_t>
     size_type trim_left(const string_t& sStr) noexcept;
 
     /**
@@ -665,7 +665,7 @@ public:
         @param  sStr     - string with symbols to delete
         @retval          - number of deleted symbols
     **/
-    template<string_convertable string_t>
+    template<string_convertable<char_t> string_t>
     size_type trim_right(const string_t& sStr) noexcept;
 
     /**
@@ -719,7 +719,7 @@ public:
         @param  sStr     - string with symbols to delete
         @retval          - number of deleted symbols
     **/
-    template<string_convertable string_t>
+    template<string_convertable<char_t> string_t>
     size_type trim(const string_t& sStr) noexcept;
 
     /**
@@ -774,7 +774,7 @@ public:
         @param  nEnd     - end searching index
         @retval          - position where the first occurrence was or npos
     **/
-    template<string_convertable string_t>
+    template<string_convertable<char_t> string_t>
     size_type remove(const string_t& sStr, size_type nBegin = 0, size_type nEnd = npos) noexcept;
 
     /**
@@ -815,7 +815,7 @@ public:
         @param  sStr     - string to remove
         @retval          - true if removed
     **/
-    template<string_convertable string_t>
+    template<string_convertable<char_t> string_t>
     bool remove_prefix(const string_t& sStr) noexcept;
 
     /**
@@ -856,7 +856,7 @@ public:
         @param  sStr     - string to remove
         @retval          - true if removed
     **/
-    template<string_convertable string_t>
+    template<string_convertable<char_t> string_t>
     bool remove_suffix(const string_t& sStr) noexcept;
 
     /**
@@ -911,7 +911,7 @@ public:
         @param  nEnd     - end searching index
         @retval          - number of deleted occurrences
     **/
-    template<string_convertable string_t>
+    template<string_convertable<char_t> string_t>
     size_type remove_all(const string_t& sStr, size_type nBegin = 0, size_type nEnd = npos) noexcept;
 
     /**
@@ -1017,7 +1017,7 @@ public:
                            > 0 the first character that does not match has
                                a greater value in this than in chSymbol
     **/
-    template<string_convertable string_t>
+    template<string_convertable<char_t> string_t>
     int compare(const string_t& sStr) const noexcept;
 
     /**
@@ -1070,7 +1070,7 @@ public:
         @param  nEnd     - end searching index
         @retval          - substring index or npos if not found
     **/
-    template<string_convertable string_t>
+    template<string_convertable<char_t> string_t>
     size_type find(string_t sWhat, size_type nBegin = 0, size_type nEnd = npos) const noexcept;
 
     /**
@@ -1128,7 +1128,7 @@ public:
                            (if nBegin < end, result is equivalent of find(...))
         @retval          - substring index or npos if not found
     **/
-    template<string_convertable string_t>
+    template<string_convertable<char_t> string_t>
     size_type rfind(string_t sWhat, size_type nBegin = npos, size_type nEnd = 0) const noexcept;
 
     /**
@@ -1182,7 +1182,7 @@ public:
         @param  nBegin   - position at which the search is to begin
         @retval          - symbol index or npos
     **/
-    template<string_convertable string_t>
+    template<string_convertable<char_t> string_t>
     size_type find_first_of(string_t sWhat, size_type nBegin = 0) const noexcept;
 
     /**
@@ -1236,7 +1236,7 @@ public:
         @param  nEnd     - position at which the search is to finish
         @retval          - symbol index or npos
     **/
-    template<string_convertable string_t>
+    template<string_convertable<char_t> string_t>
     size_type find_last_of(string_t sWhat, size_type nEnd = 0) const noexcept;
 
     /**
@@ -1290,7 +1290,7 @@ public:
         @param  nBegin   - position at which the search is to begin 
         @retval          - symbol index or npos
     **/
-    template<string_convertable string_t>
+    template<string_convertable<char_t> string_t>
     size_type find_first_not_of(string_t sWhat, size_type nBegin = 0) const noexcept;
 
     /**
@@ -1344,7 +1344,7 @@ public:
         @param  nEnd     - position at which the search is to finish 
         @retval          - symbol index or npos
     **/
-    template<string_convertable string_t>
+    template<string_convertable<char_t> string_t>
     size_type find_last_not_of(string_t sWhat, size_type nEnd = 0) const noexcept;
 
     /**
@@ -1385,7 +1385,7 @@ public:
         @param  sSeparator  - separator string
         @retval             - string_view container
     **/
-    template<string_convertable string_t>
+    template<string_convertable<char_t> string_t>
     views split(const string_t& sSeparator) const noexcept;
 
     /**
@@ -1426,7 +1426,7 @@ public:
         @param  sStr     - string container to check
         @retval          - true if starts with string
     **/
-    template<string_convertable string_t>
+    template<string_convertable<char_t> string_t>
     bool starts_with(const string_t& sStr) const noexcept;
 
     /**
@@ -1467,7 +1467,7 @@ public:
         @param  sStr     - string container to check
         @retval          - true if starts with string
     **/
-    template<string_convertable string_t>
+    template<string_convertable<char_t> string_t>
     bool ends_with(const string_t& sStr) const noexcept;
 
     /**
@@ -1513,7 +1513,7 @@ public:
         @param   sStr     - string to check
         @retval           - true if this string contains substring
     **/
-    template<string_convertable string_t>
+    template<string_convertable<char_t> string_t>
     bool contains(const string_t& sStr) const noexcept;
 
     /**
@@ -1543,7 +1543,7 @@ public:
         @param  sStr     - string to assign
         @retval          - this object reference
     **/
-    template<string_convertable string_t>
+    template<string_convertable<char_t> string_t>
     basic_string& operator=(const string_t& sStr) noexcept;
 
     /**
@@ -1573,7 +1573,7 @@ public:
         @param  sStr     - string to concat
         @retval          - this object reference
     **/
-    template<string_convertable string_t>
+    template<string_convertable<char_t> string_t>
     basic_string& operator+=(const string_t& sStr) noexcept;
 
     /**
@@ -1603,7 +1603,7 @@ public:
         @param  sStr     - string to compare
         @retval          - true, if objects are equal
     **/
-    template<string_convertable string_t>
+    template<string_convertable<char_t> string_t>
     bool operator==(const string_t& sStr) const noexcept;
 
     /**
@@ -1633,7 +1633,7 @@ public:
         @param  sStr     - string to compare
         @retval          - true, if objects are not equal
     **/
-    template<string_convertable string_t>
+    template<string_convertable<char_t> string_t>
     bool operator!=(const string_t& sStr) const noexcept;
 
     /**
@@ -1663,7 +1663,7 @@ public:
         @param  sStr     - string to compare
         @retval          - true, if left object is less than right
     **/
-    template<string_convertable string_t>
+    template<string_convertable<char_t> string_t>
     bool operator<(const string_t& sStr) const noexcept;
 
     /**
@@ -1693,7 +1693,7 @@ public:
         @param  sStr     - string to compare
         @retval          - true, if left object is less or equal than right
     **/
-    template<string_convertable string_t>
+    template<string_convertable<char_t> string_t>
     bool operator<=(const string_t& sStr) const noexcept;
 
     /**
@@ -1723,7 +1723,7 @@ public:
         @param  sStr     - string to compare
         @retval          - true, if left object is greater than right
     **/
-    template<string_convertable string_t>
+    template<string_convertable<char_t> string_t>
     bool operator>(const string_t& sStr) const noexcept;
 
     /**
@@ -1753,7 +1753,7 @@ public:
         @param  sStr     - string to compare
         @retval          - true, if left object is greater or equal than right
     **/
-    template<string_convertable string_t>
+    template<string_convertable<char_t> string_t>
     bool operator>=(const string_t& sStr) const noexcept;
 
     /**

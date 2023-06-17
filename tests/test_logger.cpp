@@ -163,14 +163,14 @@ protected:
             || traits_t::GetUnit() == UNIT_FILE && traits_t::GetUnit() == traits_t::GetTraceFile()
             || traits_t::GetUnit() == UNIT_FUNC && m_bFunction)
         {
-            const std::filesystem::path path(m_sLogFilePath.c_str());
-            std::ifstream               ifs(path);
+            const std::filesystem::path        path(m_sLogFilePath.c_str());
+            std::basic_ifstream<qx::char_type> ifs(path);
 
-            std::string                                   sLine(512, QX_TEXT('\0'));
+            std::basic_string<qx::char_type>              sLine(512, QX_TEXT('\0'));
             std::match_results<qx::string::const_pointer> match;
-            qx::string                                    sFormat;
+            std::basic_string<qx::char_type>              sFormat;
             std::basic_regex<qx::char_type>               regex;
-            qx::string                                    sFile;
+            std::basic_string<qx::char_type>              sFile;
 
             constexpr const qx::char_type* pszInfo    = QX_TEXT("   ");
             constexpr const qx::char_type* pszWarning = QX_TEXT("\\[W\\]");
