@@ -83,22 +83,25 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a41d3a567ba3148eb291741db61055821"><td class="memItemLeft" align="right" valign="top">constexpr&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1category.html#a41d3a567ba3148eb291741db61055821">category</a> (const char_type *pszName, const <a class="el" href="classqx_1_1color.html">color</a> &amp;categoryColor=kDefaultColor) noexcept</td></tr>
 <tr class="memdesc:a41d3a567ba3148eb291741db61055821"><td class="mdescLeft">&#160;</td><td class="mdescRight">category object constructor  <a href="classqx_1_1category.html#a41d3a567ba3148eb291741db61055821">More...</a><br /></td></tr>
 <tr class="separator:a41d3a567ba3148eb291741db61055821"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1534af0fb56e2dbc91f6f05ba88b96be"><td class="memItemLeft" align="right" valign="top">constexpr <a class="el" href="classqx_1_1category.html">category</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1category.html#a1534af0fb56e2dbc91f6f05ba88b96be">set_verbosity</a> (verbosity eVerbosity) const noexcept</td></tr>
+<tr class="memdesc:a1534af0fb56e2dbc91f6f05ba88b96be"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create new category from this one with custom verbosity.  <a href="classqx_1_1category.html#a1534af0fb56e2dbc91f6f05ba88b96be">More...</a><br /></td></tr>
+<tr class="separator:a1534af0fb56e2dbc91f6f05ba88b96be"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aac01a735c58c63c74182a5faaf0b4dfc"><td class="memItemLeft" align="right" valign="top">constexpr const char_type *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1category.html#aac01a735c58c63c74182a5faaf0b4dfc">get_name</a> () const noexcept</td></tr>
 <tr class="memdesc:aac01a735c58c63c74182a5faaf0b4dfc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get category name.  <a href="classqx_1_1category.html#aac01a735c58c63c74182a5faaf0b4dfc">More...</a><br /></td></tr>
 <tr class="separator:aac01a735c58c63c74182a5faaf0b4dfc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac282577d3c0820332ded571024bb5ddf"><td class="memItemLeft" align="right" valign="top">constexpr const char_type *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1category.html#ac282577d3c0820332ded571024bb5ddf">get_description</a> () const noexcept</td></tr>
-<tr class="memdesc:ac282577d3c0820332ded571024bb5ddf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get category description.  <a href="classqx_1_1category.html#ac282577d3c0820332ded571024bb5ddf">More...</a><br /></td></tr>
-<tr class="separator:ac282577d3c0820332ded571024bb5ddf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a45f05eea5cdc8a8030b3233748bbcef2"><td class="memItemLeft" align="right" valign="top">constexpr const <a class="el" href="classqx_1_1color.html">color</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1category.html#a45f05eea5cdc8a8030b3233748bbcef2">get_color</a> () const noexcept</td></tr>
 <tr class="memdesc:a45f05eea5cdc8a8030b3233748bbcef2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get category color.  <a href="classqx_1_1category.html#a45f05eea5cdc8a8030b3233748bbcef2">More...</a><br /></td></tr>
 <tr class="separator:a45f05eea5cdc8a8030b3233748bbcef2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6dcb4e8efe067e7a397c89c916e8d722"><td class="memItemLeft" align="right" valign="top">constexpr verbosity&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1category.html#a6dcb4e8efe067e7a397c89c916e8d722">get_verbosity</a> () const noexcept</td></tr>
+<tr class="memdesc:a6dcb4e8efe067e7a397c89c916e8d722"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get category verbosity.  <a href="classqx_1_1category.html#a6dcb4e8efe067e7a397c89c916e8d722">More...</a><br /></td></tr>
+<tr class="separator:a6dcb4e8efe067e7a397c89c916e8d722"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>A category is a class that identifies a particular piece of code. This code can be located in different files, but united by one functionality. Objects of this class can be used in logging, asserts and profiling. </p>
 <dl class="section author"><dt>Author</dt><dd>Khrapov </dd></dl>
 <dl class="section date"><dt>Date</dt><dd>5.12.2022 </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="category_8h_source.html#l00056">56</a> of file <a class="el" href="category_8h_source.html">category.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="category_8h_source.html#l00057">57</a> of file <a class="el" href="category_8h_source.html">category.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a41d3a567ba3148eb291741db61055821"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a41d3a567ba3148eb291741db61055821">&#9670;&nbsp;</a></span>category()</h2>
@@ -179,42 +182,7 @@ Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="category_8inl_source.html#l00029">29</a> of file <a class="el" href="category_8inl_source.html">category.inl</a>.</p>
-
-</div>
-</div>
-<a id="ac282577d3c0820332ded571024bb5ddf"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac282577d3c0820332ded571024bb5ddf">&#9670;&nbsp;</a></span>get_description()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">constexpr const char_type * qx::category::get_description </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Get category description. </p>
-<dl class="retval"><dt>Return values</dt><dd>
-  <table class="retval">
-    <tr><td class="paramname">-</td><td>category description </td></tr>
-  </table>
-  </dd>
-</dl>
-
-<p class="definition">Definition at line <a class="el" href="category_8inl_source.html#l00024">24</a> of file <a class="el" href="category_8inl_source.html">category.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="category_8inl_source.html#l00031">31</a> of file <a class="el" href="category_8inl_source.html">category.inl</a>.</p>
 
 </div>
 </div>
@@ -245,6 +213,83 @@ Public Member Functions</h2></td></tr>
 <dl class="retval"><dt>Return values</dt><dd>
   <table class="retval">
     <tr><td class="paramname">-category</td><td>name </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="category_8inl_source.html#l00026">26</a> of file <a class="el" href="category_8inl_source.html">category.inl</a>.</p>
+
+</div>
+</div>
+<a id="a6dcb4e8efe067e7a397c89c916e8d722"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6dcb4e8efe067e7a397c89c916e8d722">&#9670;&nbsp;</a></span>get_verbosity()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr verbosity qx::category::get_verbosity </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Get category verbosity. </p>
+<dl class="retval"><dt>Return values</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">-</td><td>category verbosity User code will use this category with top priority and perform compile time checks if possible </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="category_8inl_source.html#l00036">36</a> of file <a class="el" href="category_8inl_source.html">category.inl</a>.</p>
+
+</div>
+</div>
+<a id="a1534af0fb56e2dbc91f6f05ba88b96be"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1534af0fb56e2dbc91f6f05ba88b96be">&#9670;&nbsp;</a></span>set_verbosity()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr <a class="el" href="classqx_1_1category.html">category</a> qx::category::set_verbosity </td>
+          <td>(</td>
+          <td class="paramtype">verbosity&#160;</td>
+          <td class="paramname"><em>eVerbosity</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Create new category from this one with custom verbosity. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">eVerbosity</td><td>- category verbosity. User code will use this category with top priority and perform compile time checks if possible </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Return values</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">-</td><td>new category </td></tr>
   </table>
   </dd>
 </dl>

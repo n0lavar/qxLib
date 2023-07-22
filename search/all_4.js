@@ -11,6 +11,6 @@ var searchData=
   ['disablevertexarrtibarray_153',['DisableVertexArrtibArray',['../classqx_1_1base__vao.html#a72a3833997538c341c13b7a24bcd9c41',1,'qx::base_vao']]],
   ['dispatchcompute_154',['DispatchCompute',['../classqx_1_1base__shader__program.html#a2663d683f43579fae0f515a4bc7f6715',1,'qx::base_shader_program']]],
   ['djb2a_5fhash_155',['djb2a_hash',['../string__utils_8h.html#a3d321a74f68c1be9613ca451a464ec53',1,'qx::djb2a_hash(const value_t *pszStr, size_t nSeed, size_t nLen)'],['../string__utils_8h.html#a95071e58176b91c2268d6f7842843fb1',1,'qx::djb2a_hash(const value_t *pszStr, size_t nSeed)']]],
-  ['do_5flog_156',['do_log',['../classqx_1_1cout__logger__stream.html#a99e4972f8b7be57b16996ec27176392f',1,'qx::cout_logger_stream::do_log()'],['../classqx_1_1file__logger__stream.html#a9ebc3bdcc978581afac257e4f1e58889',1,'qx::file_logger_stream::do_log()']]],
+  ['do_5flog_156',['do_log',['../classqx_1_1cout__logger__stream.html#a5af0cbd00d994380e2abde66ce2fc54f',1,'qx::cout_logger_stream::do_log()'],['../classqx_1_1file__logger__stream.html#a7247455995f1bc404890fbf0c6e5b0b4',1,'qx::file_logger_stream::do_log()']]],
   ['draw_5fmode_2eh_157',['draw_mode.h',['../draw__mode_8h.html',1,'']]]
 ];

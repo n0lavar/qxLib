@@ -103,9 +103,9 @@ virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="c
 virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1base__logger__stream.html#a305b21a54aa598b33d1ddb8ce23bc595">flush</a> ()=0</td></tr>
 <tr class="memdesc:a305b21a54aa598b33d1ddb8ce23bc595"><td class="mdescLeft">&#160;</td><td class="mdescRight">Flush stream. <br /></td></tr>
 <tr class="separator:a305b21a54aa598b33d1ddb8ce23bc595"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5fda62085628b1bce49a2a3b2d507bf4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1base__logger__stream.html#a5fda62085628b1bce49a2a3b2d507bf4">log</a> (log_level eLogLevel, const <a class="el" href="classqx_1_1category.html">category</a> &amp;<a class="el" href="classqx_1_1category.html">category</a>, string_view svFile, string_view svFunction, int nLine, string_view swLogMessage)</td></tr>
-<tr class="memdesc:a5fda62085628b1bce49a2a3b2d507bf4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Output to stream.  <a href="classqx_1_1base__logger__stream.html#a5fda62085628b1bce49a2a3b2d507bf4">More...</a><br /></td></tr>
-<tr class="separator:a5fda62085628b1bce49a2a3b2d507bf4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1871771347c41f90b84bb0706d5da56f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1base__logger__stream.html#a1871771347c41f90b84bb0706d5da56f">log</a> (verbosity eVerbosity, const <a class="el" href="classqx_1_1category.html">category</a> &amp;<a class="el" href="classqx_1_1category.html">category</a>, string_view svFile, string_view svFunction, int nLine, string_view swLogMessage)</td></tr>
+<tr class="memdesc:a1871771347c41f90b84bb0706d5da56f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Output to stream.  <a href="classqx_1_1base__logger__stream.html#a1871771347c41f90b84bb0706d5da56f">More...</a><br /></td></tr>
+<tr class="separator:a1871771347c41f90b84bb0706d5da56f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ace92fe548f73af42ac5a5ebebd47f8db"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1base__logger__stream.html#ace92fe548f73af42ac5a5ebebd47f8db">register_unit</a> (string_view svUnitName, const <a class="el" href="structqx_1_1log__unit__info.html">log_unit_info</a> &amp;unit) noexcept</td></tr>
 <tr class="memdesc:ace92fe548f73af42ac5a5ebebd47f8db"><td class="mdescLeft">&#160;</td><td class="mdescRight">Register logger unit.  <a href="classqx_1_1base__logger__stream.html#ace92fe548f73af42ac5a5ebebd47f8db">More...</a><br /></td></tr>
 <tr class="separator:ace92fe548f73af42ac5a5ebebd47f8db"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -124,16 +124,16 @@ Protected Member Functions</h2></td></tr>
 <tr class="memitem:a2a5cdad5dcf92486e5832953315100d7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structqx_1_1logger__buffer.html">logger_buffer</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1base__logger__stream.html#a2a5cdad5dcf92486e5832953315100d7">get_log_buffer</a> () noexcept</td></tr>
 <tr class="memdesc:a2a5cdad5dcf92486e5832953315100d7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get string buffers.  <a href="classqx_1_1base__logger__stream.html#a2a5cdad5dcf92486e5832953315100d7">More...</a><br /></td></tr>
 <tr class="separator:a2a5cdad5dcf92486e5832953315100d7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af8e1819a08c3fca0e19f2d378c5a10cf"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1base__logger__stream.html#af8e1819a08c3fca0e19f2d378c5a10cf">format_line</a> (<a class="el" href="structqx_1_1logger__buffer.html">logger_buffer</a> &amp;buffers, log_level eLogLevel, const <a class="el" href="classqx_1_1category.html">category</a> &amp;<a class="el" href="classqx_1_1category.html">category</a>, string_view svFile, string_view svFunction, int nLine, string_view swLogMessage) noexcept</td></tr>
-<tr class="memdesc:af8e1819a08c3fca0e19f2d378c5a10cf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Format logger line.  <a href="classqx_1_1base__logger__stream.html#af8e1819a08c3fca0e19f2d378c5a10cf">More...</a><br /></td></tr>
-<tr class="separator:af8e1819a08c3fca0e19f2d378c5a10cf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad55c3e6907fa2fb2b5f8ba4f29558883"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1base__logger__stream.html#ad55c3e6907fa2fb2b5f8ba4f29558883">format_line</a> (<a class="el" href="structqx_1_1logger__buffer.html">logger_buffer</a> &amp;buffers, verbosity eVerbosity, const <a class="el" href="classqx_1_1category.html">category</a> &amp;<a class="el" href="classqx_1_1category.html">category</a>, string_view svFile, string_view svFunction, int nLine, string_view swLogMessage) noexcept</td></tr>
+<tr class="memdesc:ad55c3e6907fa2fb2b5f8ba4f29558883"><td class="mdescLeft">&#160;</td><td class="mdescRight">Format logger line.  <a href="classqx_1_1base__logger__stream.html#ad55c3e6907fa2fb2b5f8ba4f29558883">More...</a><br /></td></tr>
+<tr class="separator:ad55c3e6907fa2fb2b5f8ba4f29558883"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Base class for logger streams. </p>
 <p>~ </p><dl class="section author"><dt>Author</dt><dd>Khrapov </dd></dl>
 <dl class="section date"><dt>Date</dt><dd>28.07.2021 </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="base__logger__stream_8h_source.html#l00090">90</a> of file <a class="el" href="base__logger__stream_8h_source.html">base_logger_stream.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="base__logger__stream_8h_source.html#l00078">78</a> of file <a class="el" href="base__logger__stream_8h_source.html">base_logger_stream.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="ac017a360e802b6b15f5dad540b33ecba"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ac017a360e802b6b15f5dad540b33ecba">&#9670;&nbsp;</a></span>base_logger_stream()</h2>
@@ -262,8 +262,8 @@ Protected Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="af8e1819a08c3fca0e19f2d378c5a10cf"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af8e1819a08c3fca0e19f2d378c5a10cf">&#9670;&nbsp;</a></span>format_line()</h2>
+<a id="ad55c3e6907fa2fb2b5f8ba4f29558883"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad55c3e6907fa2fb2b5f8ba4f29558883">&#9670;&nbsp;</a></span>format_line()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -280,8 +280,8 @@ Protected Member Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">log_level&#160;</td>
-          <td class="paramname"><em>eLogLevel</em>, </td>
+          <td class="paramtype">verbosity&#160;</td>
+          <td class="paramname"><em>eVerbosity</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -330,7 +330,7 @@ Protected Member Functions</h2></td></tr>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">buffers</td><td>- string buffers to reduce num of allocations </td></tr>
-    <tr><td class="paramname">eLogLevel</td><td>- log level </td></tr>
+    <tr><td class="paramname">eVerbosity</td><td>- message verbosity </td></tr>
     <tr><td class="paramname">category</td><td>- code category </td></tr>
     <tr><td class="paramname">svFile</td><td>- file name string </td></tr>
     <tr><td class="paramname">svFunction</td><td>- function name string </td></tr>
@@ -379,8 +379,8 @@ Protected Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a5fda62085628b1bce49a2a3b2d507bf4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5fda62085628b1bce49a2a3b2d507bf4">&#9670;&nbsp;</a></span>log()</h2>
+<a id="a1871771347c41f90b84bb0706d5da56f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1871771347c41f90b84bb0706d5da56f">&#9670;&nbsp;</a></span>log()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -391,8 +391,8 @@ Protected Member Functions</h2></td></tr>
         <tr>
           <td class="memname">void qx::base_logger_stream::log </td>
           <td>(</td>
-          <td class="paramtype">log_level&#160;</td>
-          <td class="paramname"><em>eLogLevel</em>, </td>
+          <td class="paramtype">verbosity&#160;</td>
+          <td class="paramname"><em>eVerbosity</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -446,7 +446,7 @@ Protected Member Functions</h2></td></tr>
 </dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">eLogLevel</td><td>- log level </td></tr>
+    <tr><td class="paramname">eVerbosity</td><td>message verbosity </td></tr>
     <tr><td class="paramname">category</td><td>- code category </td></tr>
     <tr><td class="paramname">svFile</td><td>- file name string </td></tr>
     <tr><td class="paramname">svFunction</td><td>- function name string </td></tr>

@@ -89,13 +89,13 @@ Inheritance diagram for qx::logger:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:ada5dae55e329009dac6c8da9eabc295d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1logger.html#ada5dae55e329009dac6c8da9eabc295d">log</a> (log_level eLogLevel, string_view svFormat, const <a class="el" href="classqx_1_1category.html">category</a> &amp;<a class="el" href="classqx_1_1category.html">category</a>, string_view svFile, string_view svFunction, int nLine)</td></tr>
-<tr class="memdesc:ada5dae55e329009dac6c8da9eabc295d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Log to all streams.  <a href="classqx_1_1logger.html#ada5dae55e329009dac6c8da9eabc295d">More...</a><br /></td></tr>
-<tr class="separator:ada5dae55e329009dac6c8da9eabc295d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4730ae521340f73d575c92e4b78468bb"><td class="memTemplParams" colspan="2">template&lt;class... args_t&gt; </td></tr>
-<tr class="memitem:a4730ae521340f73d575c92e4b78468bb"><td class="memTemplItemLeft" align="right" valign="top">&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classqx_1_1logger.html#a4730ae521340f73d575c92e4b78468bb">requires</a> (log_acceptable_args&lt; args_t... &gt;) void <a class="el" href="classqx_1_1logger.html#ada5dae55e329009dac6c8da9eabc295d">log</a>(log_level eLogLevel</td></tr>
-<tr class="memdesc:a4730ae521340f73d575c92e4b78468bb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Log to all streams.  <a href="classqx_1_1logger.html#a4730ae521340f73d575c92e4b78468bb">More...</a><br /></td></tr>
-<tr class="separator:a4730ae521340f73d575c92e4b78468bb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4cff54543c3ad632c33a6baefd6fec55"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1logger.html#a4cff54543c3ad632c33a6baefd6fec55">log</a> (verbosity eVerbosity, string_view svFormat, const <a class="el" href="classqx_1_1category.html">category</a> &amp;<a class="el" href="classqx_1_1category.html">category</a>, string_view svFile, string_view svFunction, int nLine)</td></tr>
+<tr class="memdesc:a4cff54543c3ad632c33a6baefd6fec55"><td class="mdescLeft">&#160;</td><td class="mdescRight">Log to all streams.  <a href="classqx_1_1logger.html#a4cff54543c3ad632c33a6baefd6fec55">More...</a><br /></td></tr>
+<tr class="separator:a4cff54543c3ad632c33a6baefd6fec55"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac9a4c397d39262a9c0ddb253cf111389"><td class="memTemplParams" colspan="2">template&lt;class... args_t&gt; </td></tr>
+<tr class="memitem:ac9a4c397d39262a9c0ddb253cf111389"><td class="memTemplItemLeft" align="right" valign="top">&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classqx_1_1logger.html#ac9a4c397d39262a9c0ddb253cf111389">requires</a> (log_acceptable_args&lt; args_t... &gt;) void <a class="el" href="classqx_1_1logger.html#a4cff54543c3ad632c33a6baefd6fec55">log</a>(verbosity eVerbosity</td></tr>
+<tr class="memdesc:ac9a4c397d39262a9c0ddb253cf111389"><td class="mdescLeft">&#160;</td><td class="mdescRight">Log to all streams.  <a href="classqx_1_1logger.html#ac9a4c397d39262a9c0ddb253cf111389">More...</a><br /></td></tr>
+<tr class="separator:ac9a4c397d39262a9c0ddb253cf111389"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af975c6169624a47a72ae8995161e140f"><td class="memItemLeft" align="right" valign="top"><a id="af975c6169624a47a72ae8995161e140f"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1logger.html#af975c6169624a47a72ae8995161e140f">flush</a> ()</td></tr>
 <tr class="memdesc:af975c6169624a47a72ae8995161e140f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Flush all streams. <br /></td></tr>
@@ -151,8 +151,8 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 
 </div>
 </div>
-<a id="ada5dae55e329009dac6c8da9eabc295d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ada5dae55e329009dac6c8da9eabc295d">&#9670;&nbsp;</a></span>log()</h2>
+<a id="a4cff54543c3ad632c33a6baefd6fec55"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4cff54543c3ad632c33a6baefd6fec55">&#9670;&nbsp;</a></span>log()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -163,8 +163,8 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
         <tr>
           <td class="memname">void qx::logger::log </td>
           <td>(</td>
-          <td class="paramtype">log_level&#160;</td>
-          <td class="paramname"><em>eLogLevel</em>, </td>
+          <td class="paramtype">verbosity&#160;</td>
+          <td class="paramname"><em>eVerbosity</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -212,7 +212,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 <p>Log to all streams. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">eLogLevel</td><td>- log level </td></tr>
+    <tr><td class="paramname">eVerbosity</td><td>- message verbosity </td></tr>
     <tr><td class="paramname">svFormat</td><td>- format string </td></tr>
     <tr><td class="paramname">category</td><td>- code category </td></tr>
     <tr><td class="paramname">svFile</td><td>- file name string </td></tr>
@@ -226,8 +226,8 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 
 </div>
 </div>
-<a id="a4730ae521340f73d575c92e4b78468bb"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4730ae521340f73d575c92e4b78468bb">&#9670;&nbsp;</a></span>requires()</h2>
+<a id="ac9a4c397d39262a9c0ddb253cf111389"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac9a4c397d39262a9c0ddb253cf111389">&#9670;&nbsp;</a></span>requires()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -253,7 +253,7 @@ template&lt;class... args_t&gt; </div>
 </dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">eLogLevel</td><td>- log level </td></tr>
+    <tr><td class="paramname">eVerbosity</td><td>- message verbosity </td></tr>
     <tr><td class="paramname">sFormat</td><td>- format string </td></tr>
     <tr><td class="paramname">category</td><td>- code category </td></tr>
     <tr><td class="paramname">svFile</td><td>- file name string </td></tr>
