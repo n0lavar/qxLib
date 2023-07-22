@@ -13,13 +13,14 @@
 #include <qx/containers/string/string_utils.h>
 #include <qx/macros/common.h>
 #include <qx/render/color.h>
+#include <qx/verbosity.h>
 
 /**
     @brief Define a category
     @param name - category name
-    @param ...  - optional category color and description
+    @param ...  - optional category color
 **/
-#define QX_DEFINE_CATEGORY(name, ...) constexpr qx::category name(QX_TEXT(#name), ##__VA_ARGS__)
+#define QX_DEFINE_CATEGORY(name, ...) constexpr qx::category name = qx::category(QX_TEXT(#name), ##__VA_ARGS__)
 
 /**
     @brief Define file category
@@ -66,16 +67,18 @@ public:
     constexpr explicit category(const char_type* pszName, const color& categoryColor = kDefaultColor) noexcept;
 
     /**
+        @brief  Create new category from this one with custom verbosity
+        @param  eVerbosity - category verbosity.
+                User code will use this category with top priority and perform compile time checks if possible
+        @retval            - new category
+    **/
+    constexpr category set_verbosity(verbosity eVerbosity) const noexcept;
+
+    /**
         @brief  Get category name
         @retval  -category  name
     **/
     constexpr const char_type* get_name() const noexcept;
-
-    /**
-        @brief  Get category description
-        @retval  - category description
-    **/
-    constexpr const char_type* get_description() const noexcept;
 
     /**
         @brief  Get category color
@@ -83,10 +86,17 @@ public:
     **/
     constexpr const color& get_color() const noexcept;
 
+    /**
+        @brief  Get category verbosity
+        @retval  - category verbosity
+                   User code will use this category with top priority and perform compile time checks if possible
+    **/
+    constexpr verbosity get_verbosity() const noexcept;
+
 private:
-    const color            m_Color          = kDefaultColor;
-    const char_type* const m_pszName        = nullptr;
-    const char_type* const m_pszDescription = nullptr;
+    const color            m_Color     = kDefaultColor;
+    const char_type* const m_pszName   = nullptr;
+    verbosity              m_Verbosity = verbosity::very_verbose;
 };
 
 } // namespace qx
