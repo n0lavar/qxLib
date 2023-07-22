@@ -16,6 +16,10 @@
 #include <codecvt>
 #include <locale>
 
+#if QX_WIN
+    #include <windows.h>
+#endif
+
 namespace qx
 {
 
@@ -112,15 +116,27 @@ inline string to_string(wstring_view stringView, const std::locale& locale = std
     @param  pszUtf8 - UTF8 string
     @retval         - wstring value
 **/
-inline string utf8_to_string(const char* pszUtf8)
+inline string utf8_to_string(cstring_view pszUtf8)
 {
     QX_PERF_SCOPE();
 
 #ifdef QX_CONF_USE_WCHAR
+    #if QX_WIN
+
+    // much faster on windows
+    const int nLength = MultiByteToWideChar(CP_UTF8, 0, pszUtf8.data(), static_cast<int>(pszUtf8.size()), nullptr, 0);
+    string    sRet(nLength, QX_TEXT('\n'));
+    MultiByteToWideChar(CP_UTF8, 0, pszUtf8.data(), static_cast<int>(pszUtf8.size()), sRet.data(), nLength);
+    return sRet;
+
+    #else
+
     QX_PUSH_SUPPRESS_ALL_WARNINGS();
     std::wstring_convert<std::codecvt_utf8_utf16<wchar_t>> converter;
-    return converter.from_bytes(pszUtf8);
+    return converter.from_bytes(pszUtf8.data(), pszUtf8.data() + pszUtf8.size());
     QX_POP_SUPPRESS_WARNINGS();
+
+    #endif
 #endif
 }
 
