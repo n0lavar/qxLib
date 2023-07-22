@@ -124,22 +124,22 @@ protected:
 
         auto pConsoleLoggerStream = std::make_unique<qx::cout_logger_stream>();
         pConsoleLoggerStream->deregister_unit(qx::base_logger_stream::k_svDefaultUnit);
-        pConsoleLoggerStream->register_unit(traits_t::GetUnit(), { qx::log_level::none });
+        pConsoleLoggerStream->register_unit(traits_t::GetUnit(), { qx::verbosity::none });
 
         auto pFileLoggerStream = std::make_unique<qx::file_logger_stream>(
             true,
             qx::log_file_policy::clear_then_uppend,
             traits_t::GetLogsFile());
         pFileLoggerStream->deregister_unit(qx::base_logger_stream::k_svDefaultUnit);
-        pFileLoggerStream->register_unit(traits_t::GetUnit(), { qx::log_level::log });
+        pFileLoggerStream->register_unit(traits_t::GetUnit(), { qx::verbosity::log });
 
         if constexpr (traits_t::GetCategory() == LOG_CATEGORY_TAG1)
         {
             pFileLoggerStream->register_unit(
                 traits_t::GetCategory(),
-                { qx::log_level::log,
+                { qx::verbosity::log,
                   [](qx::logger_buffer& buffers,
-                     qx::log_level,
+                     qx::verbosity,
                      const qx::category& category,
                      qx::string_view,
                      qx::string_view,
@@ -308,11 +308,11 @@ TYPED_TEST_SUITE(TestLogger, Implementations);
 
 #define TEST_LOG(traceFile, format, ...) \
     myLogger                             \
-        .log(qx::log_level::log, format, CatDefault, traceFile, qx::to_string(__FUNCTION__), __LINE__, ##__VA_ARGS__)
+        .log(qx::verbosity::log, format, CatDefault, traceFile, qx::to_string(__FUNCTION__), __LINE__, ##__VA_ARGS__)
 
 #define TEST_LOG_WARNING(traceFile, format, ...) \
     myLogger.log(                                \
-        qx::log_level::warning,                  \
+        qx::verbosity::warning,                  \
         format,                                  \
         CatDefault,                              \
         traceFile,                               \
@@ -322,7 +322,7 @@ TYPED_TEST_SUITE(TestLogger, Implementations);
 
 #define TEST_LOG_CATEGORY(traceFile, _category, format, ...) \
     myLogger.log(                                            \
-        qx::log_level::log,                                  \
+        qx::verbosity::log,                                  \
         format,                                              \
         qx::category { _category },                          \
         traceFile,                                           \
@@ -332,7 +332,7 @@ TYPED_TEST_SUITE(TestLogger, Implementations);
 
 #define TEST_LOG_ERROR(traceFile, format, ...) \
     myLogger.log(                              \
-        qx::log_level::error,                  \
+        qx::verbosity::error,                  \
         format,                                \
         CatDefault,                            \
         traceFile,                             \
@@ -342,7 +342,7 @@ TYPED_TEST_SUITE(TestLogger, Implementations);
 
 #define TEST_LOG_ASSERT(traceFile, expr, format, ...) \
     myLogger.log(                                     \
-        qx::log_level::critical,                      \
+        qx::verbosity::critical,                      \
         QX_TEXT("[{}] ") format,                      \
         CatDefault,                                   \
         traceFile,                                    \
