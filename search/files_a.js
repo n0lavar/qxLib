@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['newtons_5fmethod_2eh_855',['newtons_method.h',['../newtons__method_8h.html',1,'']]]
+  ['newtons_5fmethod_2eh_857',['newtons_method.h',['../newtons__method_8h.html',1,'']]]
 ];

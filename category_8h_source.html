@@ -133,46 +133,42 @@ $(function() {
 <div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;<span class="comment">        @brief  category object constructor</span></div>
 <div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;<span class="comment">        @param  pszName        - category name. For ex. CatRendering or CatWidgets</span></div>
 <div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;<span class="comment">        @param  categoryColor  - color to be used if supported</span></div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;<span class="comment">        @param  pszDescription - category description</span></div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;<span class="comment">    **/</span></div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    constexpr <span class="keyword">explicit</span> <a class="code" href="classqx_1_1category.html#a940ed09afe39cb927e0b5739dea4c14f">category</a>(</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;        <span class="keyword">const</span> char_type* pszName,</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;        <span class="keyword">const</span> <a class="code" href="classqx_1_1color.html">color</a>&amp;     categoryColor  = kDefaultColor,</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;        <span class="keyword">const</span> char_type* pszDescription = <span class="keyword">nullptr</span>) noexcept;</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;<span class="comment">    /**</span></div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;<span class="comment">        @brief  Get category name</span></div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;<span class="comment">        @retval  -category  name</span></div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;<span class="comment">    **/</span></div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    constexpr <span class="keyword">const</span> char_type* <a class="code" href="classqx_1_1category.html#aac01a735c58c63c74182a5faaf0b4dfc">get_name</a>() <span class="keyword">const</span> noexcept;</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;<span class="comment">    /**</span></div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;<span class="comment">        @brief  Get category description</span></div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;<span class="comment">        @retval  - category description</span></div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;<span class="comment">    **/</span></div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;    constexpr <span class="keyword">const</span> char_type* <a class="code" href="classqx_1_1category.html#ac282577d3c0820332ded571024bb5ddf">get_description</a>() <span class="keyword">const</span> noexcept;</div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;<span class="comment">    /**</span></div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;<span class="comment">        @brief  Get category color</span></div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;<span class="comment">        @retval  - category color</span></div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;<span class="comment">    **/</span></div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;    constexpr <span class="keyword">const</span> <a class="code" href="classqx_1_1color.html">color</a>&amp; <a class="code" href="classqx_1_1category.html#a45f05eea5cdc8a8030b3233748bbcef2">get_color</a>() <span class="keyword">const</span> noexcept;</div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160; </div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;    <span class="keyword">const</span> <a class="code" href="classqx_1_1color.html">color</a>            m_Color          = kDefaultColor;</div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;    <span class="keyword">const</span> char_type* <span class="keyword">const</span> m_pszName        = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;    <span class="keyword">const</span> char_type* <span class="keyword">const</span> m_pszDescription = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;};</div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160; </div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;} <span class="comment">// namespace qx</span></div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160; </div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="category_8inl.html">qx/category.inl</a>&gt;</span></div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;<span class="comment">    **/</span></div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    constexpr <span class="keyword">explicit</span> <a class="code" href="classqx_1_1category.html#a41d3a567ba3148eb291741db61055821">category</a>(<span class="keyword">const</span> char_type* pszName, <span class="keyword">const</span> <a class="code" href="classqx_1_1color.html">color</a>&amp; categoryColor = kDefaultColor) noexcept;</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;<span class="comment">    /**</span></div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;<span class="comment">        @brief  Get category name</span></div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;<span class="comment">        @retval  -category  name</span></div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;<span class="comment">    **/</span></div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    constexpr <span class="keyword">const</span> char_type* <a class="code" href="classqx_1_1category.html#aac01a735c58c63c74182a5faaf0b4dfc">get_name</a>() <span class="keyword">const</span> noexcept;</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;<span class="comment">    /**</span></div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;<span class="comment">        @brief  Get category description</span></div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;<span class="comment">        @retval  - category description</span></div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;<span class="comment">    **/</span></div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;    constexpr <span class="keyword">const</span> char_type* <a class="code" href="classqx_1_1category.html#ac282577d3c0820332ded571024bb5ddf">get_description</a>() <span class="keyword">const</span> noexcept;</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;<span class="comment">    /**</span></div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;<span class="comment">        @brief  Get category color</span></div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;<span class="comment">        @retval  - category color</span></div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;<span class="comment">    **/</span></div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;    constexpr <span class="keyword">const</span> <a class="code" href="classqx_1_1color.html">color</a>&amp; <a class="code" href="classqx_1_1category.html#a45f05eea5cdc8a8030b3233748bbcef2">get_color</a>() <span class="keyword">const</span> noexcept;</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160; </div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;    <span class="keyword">const</span> <a class="code" href="classqx_1_1color.html">color</a>            m_Color          = kDefaultColor;</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;    <span class="keyword">const</span> char_type* <span class="keyword">const</span> m_pszName        = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;    <span class="keyword">const</span> char_type* <span class="keyword">const</span> m_pszDescription = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;};</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160; </div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;} <span class="comment">// namespace qx</span></div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160; </div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="category_8inl.html">qx/category.inl</a>&gt;</span></div>
 <div class="ttc" id="acategory_8inl_html"><div class="ttname"><a href="category_8inl.html">category.inl</a></div></div>
 <div class="ttc" id="aclassqx_1_1category_html"><div class="ttname"><a href="classqx_1_1category.html">qx::category</a></div><div class="ttdoc">A category is a class that identifies a particular piece of code. This code can be located in differe...</div><div class="ttdef"><b>Definition:</b> <a href="category_8h_source.html#l00056">category.h:57</a></div></div>
-<div class="ttc" id="aclassqx_1_1category_html_a45f05eea5cdc8a8030b3233748bbcef2"><div class="ttname"><a href="classqx_1_1category.html#a45f05eea5cdc8a8030b3233748bbcef2">qx::category::get_color</a></div><div class="ttdeci">constexpr const color &amp; get_color() const noexcept</div><div class="ttdoc">Get category color.</div><div class="ttdef"><b>Definition:</b> <a href="category_8inl_source.html#l00033">category.inl:33</a></div></div>
-<div class="ttc" id="aclassqx_1_1category_html_a940ed09afe39cb927e0b5739dea4c14f"><div class="ttname"><a href="classqx_1_1category.html#a940ed09afe39cb927e0b5739dea4c14f">qx::category::category</a></div><div class="ttdeci">constexpr category(const char_type *pszName, const color &amp;categoryColor=kDefaultColor, const char_type *pszDescription=nullptr) noexcept</div><div class="ttdoc">category object constructor</div><div class="ttdef"><b>Definition:</b> <a href="category_8inl_source.html#l00013">category.inl:13</a></div></div>
-<div class="ttc" id="aclassqx_1_1category_html_aac01a735c58c63c74182a5faaf0b4dfc"><div class="ttname"><a href="classqx_1_1category.html#aac01a735c58c63c74182a5faaf0b4dfc">qx::category::get_name</a></div><div class="ttdeci">constexpr const char_type * get_name() const noexcept</div><div class="ttdoc">Get category name.</div><div class="ttdef"><b>Definition:</b> <a href="category_8inl_source.html#l00023">category.inl:23</a></div></div>
-<div class="ttc" id="aclassqx_1_1category_html_ac282577d3c0820332ded571024bb5ddf"><div class="ttname"><a href="classqx_1_1category.html#ac282577d3c0820332ded571024bb5ddf">qx::category::get_description</a></div><div class="ttdeci">constexpr const char_type * get_description() const noexcept</div><div class="ttdoc">Get category description.</div><div class="ttdef"><b>Definition:</b> <a href="category_8inl_source.html#l00028">category.inl:28</a></div></div>
+<div class="ttc" id="aclassqx_1_1category_html_a41d3a567ba3148eb291741db61055821"><div class="ttname"><a href="classqx_1_1category.html#a41d3a567ba3148eb291741db61055821">qx::category::category</a></div><div class="ttdeci">constexpr category(const char_type *pszName, const color &amp;categoryColor=kDefaultColor) noexcept</div><div class="ttdoc">category object constructor</div><div class="ttdef"><b>Definition:</b> <a href="category_8inl_source.html#l00013">category.inl:13</a></div></div>
+<div class="ttc" id="aclassqx_1_1category_html_a45f05eea5cdc8a8030b3233748bbcef2"><div class="ttname"><a href="classqx_1_1category.html#a45f05eea5cdc8a8030b3233748bbcef2">qx::category::get_color</a></div><div class="ttdeci">constexpr const color &amp; get_color() const noexcept</div><div class="ttdoc">Get category color.</div><div class="ttdef"><b>Definition:</b> <a href="category_8inl_source.html#l00029">category.inl:29</a></div></div>
+<div class="ttc" id="aclassqx_1_1category_html_aac01a735c58c63c74182a5faaf0b4dfc"><div class="ttname"><a href="classqx_1_1category.html#aac01a735c58c63c74182a5faaf0b4dfc">qx::category::get_name</a></div><div class="ttdeci">constexpr const char_type * get_name() const noexcept</div><div class="ttdoc">Get category name.</div><div class="ttdef"><b>Definition:</b> <a href="category_8inl_source.html#l00019">category.inl:19</a></div></div>
+<div class="ttc" id="aclassqx_1_1category_html_ac282577d3c0820332ded571024bb5ddf"><div class="ttname"><a href="classqx_1_1category.html#ac282577d3c0820332ded571024bb5ddf">qx::category::get_description</a></div><div class="ttdeci">constexpr const char_type * get_description() const noexcept</div><div class="ttdoc">Get category description.</div><div class="ttdef"><b>Definition:</b> <a href="category_8inl_source.html#l00024">category.inl:24</a></div></div>
 <div class="ttc" id="aclassqx_1_1color_html"><div class="ttname"><a href="classqx_1_1color.html">qx::color</a></div><div class="ttdoc">RGBA color.</div><div class="ttdef"><b>Definition:</b> <a href="color_8h_source.html#l00038">color.h:39</a></div></div>
 <div class="ttc" id="acolor_8h_html"><div class="ttname"><a href="color_8h.html">color.h</a></div><div class="ttdoc">Contains qx::color class.</div></div>
 <div class="ttc" id="amacros_2common_8h_html"><div class="ttname"><a href="macros_2common_8h.html">common.h</a></div><div class="ttdoc">Useful macros.</div></div>
