@@ -10,13 +10,9 @@
 namespace qx
 {
 
-constexpr category::category(
-    const char_type* pszName,
-    const color&     categoryColor,
-    const char_type* pszDescription) noexcept
+constexpr category::category(const char_type* pszName, const color& categoryColor) noexcept
     : m_Color(categoryColor)
     , m_pszName(pszName)
-    , m_pszDescription(pszDescription)
 {
 }
 

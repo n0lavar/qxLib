@@ -137,10 +137,10 @@ public:
 
     /**
         @brief  basic_string object constructor
-        @tparam string_t - string-ish type, satisfying the "string_convertable" concept
+        @tparam string_t - string-ish type, satisfying the "range_of_t_c" concept
         @param  sAnother - string-ish container
     **/
-    template<string_convertable<char_t> string_t>
+    template<range_of_t_c<char_t> string_t>
     basic_string(const string_t& sAnother) noexcept;
 
     /**
@@ -191,10 +191,10 @@ public:
 
     /**
         @brief  Assign by char container
-        @tparam string_t - string-ish type, satisfying the "string_convertable" concept
+        @tparam string_t - string-ish type, satisfying the "range_of_t_c" concept
         @param  str      - char container
     **/
-    template<string_convertable<char_t> string_t>
+    template<range_of_t_c<char_t> string_t>
     void assign(const string_t& str) noexcept;
 
     /**
@@ -348,6 +348,7 @@ public:
         @warning This function currently uses unsafe scanf functions from the c library,
                  since the current implementation of the standard library
                  does not have an implementation of fmt::scan (https://github.com/fmtlib/fmt/blob/master/test/scan.h).
+                 Status: https://github.com/cplusplus/papers/issues/493
                  This will be fixed in the future when possible.
         @tparam  to_t      - type to convert
         @param   pszFormat - format string (according to https://en.cppreference.com/w/c/io/fscanf)
@@ -412,10 +413,10 @@ public:
 
     /**
         @brief  Append string
-        @tparam string_t - string-ish type, satisfying the "string_convertable" concept
+        @tparam string_t - string-ish type, satisfying the "range_of_t_c" concept
         @param  sStr     - source char container
     **/
-    template<string_convertable<char_t> string_t>
+    template<range_of_t_c<char_t> string_t>
     void append(const string_t& sStr) noexcept;
 
     /**
@@ -456,12 +457,12 @@ public:
 
     /**
         @brief  Insert substring
-        @tparam string_t - string-ish type, satisfying the "string_convertable" concept
+        @tparam string_t - string-ish type, satisfying the "range_of_t_c" concept
         @param  nPos     - first char index
         @param  sWhat    - source string
         @retval          - pos of char after last char of inserted string or npos
     **/
-    template<string_convertable<char_t> string_t>
+    template<range_of_t_c<char_t> string_t>
     size_type insert(size_type nPos, string_t sWhat) noexcept;
 
     /**
@@ -502,12 +503,12 @@ public:
 
     /**
         @brief  Insert substring
-        @tparam string_t - string-ish type, satisfying the "string_convertable" concept
+        @tparam string_t - string-ish type, satisfying the "range_of_t_c" concept
         @param  itPos    - first char iterator
         @param  sWhat    - source string
         @retval          - pos of char after last char of inserted string or npos
     **/
-    template<string_convertable<char_t> string_t>
+    template<range_of_t_c<char_t> string_t>
     size_type insert(const_iterator itPos, string_t sWhat) noexcept;
 
     /**
@@ -607,11 +608,11 @@ public:
 
     /**
         @brief  Trim the string to the left
-        @tparam string_t - string-ish type, satisfying the "string_convertable" concept
+        @tparam string_t - string-ish type, satisfying the "range_of_t_c" concept
         @param  sStr     - string with symbols to delete 
         @retval          - number of deleted symbols
     **/
-    template<string_convertable<char_t> string_t>
+    template<range_of_t_c<char_t> string_t>
     size_type trim_left(const string_t& sStr) noexcept;
 
     /**
@@ -661,11 +662,11 @@ public:
 
     /**
         @brief  Trim the string to the right
-        @tparam string_t - string-ish type, satisfying the "string_convertable" concept
+        @tparam string_t - string-ish type, satisfying the "range_of_t_c" concept
         @param  sStr     - string with symbols to delete
         @retval          - number of deleted symbols
     **/
-    template<string_convertable<char_t> string_t>
+    template<range_of_t_c<char_t> string_t>
     size_type trim_right(const string_t& sStr) noexcept;
 
     /**
@@ -715,11 +716,11 @@ public:
 
     /**
         @brief  Trim the string to the both sides
-        @tparam string_t - string-ish type, satisfying the "string_convertable" concept
+        @tparam string_t - string-ish type, satisfying the "range_of_t_c" concept
         @param  sStr     - string with symbols to delete
         @retval          - number of deleted symbols
     **/
-    template<string_convertable<char_t> string_t>
+    template<range_of_t_c<char_t> string_t>
     size_type trim(const string_t& sStr) noexcept;
 
     /**
@@ -768,13 +769,13 @@ public:
 
     /**
         @brief  Remove the first occurrence of a substring in a string
-        @tparam string_t - string-ish type, satisfying the "string_convertable" concept
+        @tparam string_t - string-ish type, satisfying the "range_of_t_c" concept
         @param  sStr     - string to remove
         @param  nBegin   - start searching index
         @param  nEnd     - end searching index
         @retval          - position where the first occurrence was or npos
     **/
-    template<string_convertable<char_t> string_t>
+    template<range_of_t_c<char_t> string_t>
     size_type remove(const string_t& sStr, size_type nBegin = 0, size_type nEnd = npos) noexcept;
 
     /**
@@ -811,11 +812,11 @@ public:
 
     /**
         @brief  Remove string prefix if matches
-        @tparam string_t - string-ish type, satisfying the "string_convertable" concept
+        @tparam string_t - string-ish type, satisfying the "range_of_t_c" concept
         @param  sStr     - string to remove
         @retval          - true if removed
     **/
-    template<string_convertable<char_t> string_t>
+    template<range_of_t_c<char_t> string_t>
     bool remove_prefix(const string_t& sStr) noexcept;
 
     /**
@@ -852,11 +853,11 @@ public:
 
     /**
         @brief  Remove string suffix if matches
-        @tparam string_t - string-ish type, satisfying the "string_convertable" concept
+        @tparam string_t - string-ish type, satisfying the "range_of_t_c" concept
         @param  sStr     - string to remove
         @retval          - true if removed
     **/
-    template<string_convertable<char_t> string_t>
+    template<range_of_t_c<char_t> string_t>
     bool remove_suffix(const string_t& sStr) noexcept;
 
     /**
@@ -905,13 +906,13 @@ public:
 
     /**
         @brief  Remove all occurrences of a substring in a string
-        @tparam string_t - string-ish type, satisfying the "string_convertable" concept
+        @tparam string_t - string-ish type, satisfying the "range_of_t_c" concept
         @param  sStr     - string to remove
         @param  nBegin   - start searching index
         @param  nEnd     - end searching index
         @retval          - number of deleted occurrences
     **/
-    template<string_convertable<char_t> string_t>
+    template<range_of_t_c<char_t> string_t>
     size_type remove_all(const string_t& sStr, size_type nBegin = 0, size_type nEnd = npos) noexcept;
 
     /**
@@ -1009,7 +1010,7 @@ public:
 
     /**
         @brief  Performs a binary comparison of the characters
-        @tparam string_t - string-ish type, satisfying the "string_convertable" concept
+        @tparam string_t - string-ish type, satisfying the "range_of_t_c" concept
         @param  sStr     - string to compare
         @retval          - < 0 the first character that does not match has
                                a lower value in this than in chSymbol
@@ -1017,7 +1018,7 @@ public:
                            > 0 the first character that does not match has
                                a greater value in this than in chSymbol
     **/
-    template<string_convertable<char_t> string_t>
+    template<range_of_t_c<char_t> string_t>
     int compare(const string_t& sStr) const noexcept;
 
     /**
@@ -1064,13 +1065,13 @@ public:
 
     /**
         @brief  Find substring
-        @tparam string_t - string-ish type, satisfying the "string_convertable" concept
+        @tparam string_t - string-ish type, satisfying the "range_of_t_c" concept
         @param  sWhat    - substring
         @param  nBegin   - start searching index
         @param  nEnd     - end searching index
         @retval          - substring index or npos if not found
     **/
-    template<string_convertable<char_t> string_t>
+    template<range_of_t_c<char_t> string_t>
     size_type find(string_t sWhat, size_type nBegin = 0, size_type nEnd = npos) const noexcept;
 
     /**
@@ -1121,14 +1122,14 @@ public:
 
     /**
         @brief  Find substring (reverse direction)
-        @tparam string_t - string-ish type, satisfying the "string_convertable" concept
+        @tparam string_t - string-ish type, satisfying the "range_of_t_c" concept
         @param  sWhat    - substring
         @param  nBegin   - start searching index
         @param  nEnd     - end searching index
                            (if nBegin < end, result is equivalent of find(...))
         @retval          - substring index or npos if not found
     **/
-    template<string_convertable<char_t> string_t>
+    template<range_of_t_c<char_t> string_t>
     size_type rfind(string_t sWhat, size_type nBegin = npos, size_type nEnd = 0) const noexcept;
 
     /**
@@ -1177,12 +1178,12 @@ public:
 
     /**
         @brief  Finds the first character equal to one of characters in the given character sequence
-        @tparam string_t - string-ish type, satisfying the "string_convertable" concept
+        @tparam string_t - string-ish type, satisfying the "range_of_t_c" concept
         @param  sWhat    - string identifying characters to search for
         @param  nBegin   - position at which the search is to begin
         @retval          - symbol index or npos
     **/
-    template<string_convertable<char_t> string_t>
+    template<range_of_t_c<char_t> string_t>
     size_type find_first_of(string_t sWhat, size_type nBegin = 0) const noexcept;
 
     /**
@@ -1231,12 +1232,12 @@ public:
 
     /**
         @brief  Finds the last character equal to one of characters in the given character sequence
-        @tparam string_t - string-ish type, satisfying the "string_convertable" concept
+        @tparam string_t - string-ish type, satisfying the "range_of_t_c" concept
         @param  sWhat    - string identifying characters to search for
         @param  nEnd     - position at which the search is to finish
         @retval          - symbol index or npos
     **/
-    template<string_convertable<char_t> string_t>
+    template<range_of_t_c<char_t> string_t>
     size_type find_last_of(string_t sWhat, size_type nEnd = 0) const noexcept;
 
     /**
@@ -1285,12 +1286,12 @@ public:
 
     /**
         @brief  Finds the first character equal to none of the characters in the given character sequence
-        @tparam string_t - string-ish type, satisfying the "string_convertable" concept
+        @tparam string_t - string-ish type, satisfying the "range_of_t_c" concept
         @param  sWhat    - string identifying characters to search for 
         @param  nBegin   - position at which the search is to begin 
         @retval          - symbol index or npos
     **/
-    template<string_convertable<char_t> string_t>
+    template<range_of_t_c<char_t> string_t>
     size_type find_first_not_of(string_t sWhat, size_type nBegin = 0) const noexcept;
 
     /**
@@ -1339,12 +1340,12 @@ public:
 
     /**
         @brief  Finds the last character equal to none of the characters in the given character sequence
-        @tparam string_t - string-ish type, satisfying the "string_convertable" concept
+        @tparam string_t - string-ish type, satisfying the "range_of_t_c" concept
         @param  sWhat    - string identifying characters to search for 
         @param  nEnd     - position at which the search is to finish 
         @retval          - symbol index or npos
     **/
-    template<string_convertable<char_t> string_t>
+    template<range_of_t_c<char_t> string_t>
     size_type find_last_not_of(string_t sWhat, size_type nEnd = 0) const noexcept;
 
     /**
@@ -1381,11 +1382,11 @@ public:
 
     /**
         @brief  Split string by separator
-        @tparam string_t    - string-ish type, satisfying the "string_convertable" concept
+        @tparam string_t    - string-ish type, satisfying the "range_of_t_c" concept
         @param  sSeparator  - separator string
         @retval             - string_view container
     **/
-    template<string_convertable<char_t> string_t>
+    template<range_of_t_c<char_t> string_t>
     views split(const string_t& sSeparator) const noexcept;
 
     /**
@@ -1422,11 +1423,11 @@ public:
 
     /**
         @brief  Check if current string starts with string
-        @tparam string_t - string-ish type, satisfying the "string_convertable" concept
+        @tparam string_t - string-ish type, satisfying the "range_of_t_c" concept
         @param  sStr     - string container to check
         @retval          - true if starts with string
     **/
-    template<string_convertable<char_t> string_t>
+    template<range_of_t_c<char_t> string_t>
     bool starts_with(const string_t& sStr) const noexcept;
 
     /**
@@ -1463,11 +1464,11 @@ public:
 
     /**
         @brief  Check if current string ends with string
-        @tparam string_t - string-ish type, satisfying the "string_convertable" concept
+        @tparam string_t - string-ish type, satisfying the "range_of_t_c" concept
         @param  sStr     - string container to check
         @retval          - true if starts with string
     **/
-    template<string_convertable<char_t> string_t>
+    template<range_of_t_c<char_t> string_t>
     bool ends_with(const string_t& sStr) const noexcept;
 
     /**
@@ -1509,11 +1510,11 @@ public:
     /**
         @brief   Check if string contains substring
         @details Equal to find != npos
-        @tparam  string_t - string-ish type, satisfying the "string_convertable" concept
+        @tparam  string_t - string-ish type, satisfying the "range_of_t_c" concept
         @param   sStr     - string to check
         @retval           - true if this string contains substring
     **/
-    template<string_convertable<char_t> string_t>
+    template<range_of_t_c<char_t> string_t>
     bool contains(const string_t& sStr) const noexcept;
 
     /**
@@ -1539,11 +1540,11 @@ public:
 
     /**
         @brief  operator=
-        @tparam string_t - string-ish type, satisfying the "string_convertable" concept
+        @tparam string_t - string-ish type, satisfying the "range_of_t_c" concept
         @param  sStr     - string to assign
         @retval          - this object reference
     **/
-    template<string_convertable<char_t> string_t>
+    template<range_of_t_c<char_t> string_t>
     basic_string& operator=(const string_t& sStr) noexcept;
 
     /**
@@ -1569,11 +1570,11 @@ public:
 
     /**
         @brief  operator+=
-        @tparam string_t - string-ish type, satisfying the "string_convertable" concept
+        @tparam string_t - string-ish type, satisfying the "range_of_t_c" concept
         @param  sStr     - string to concat
         @retval          - this object reference
     **/
-    template<string_convertable<char_t> string_t>
+    template<range_of_t_c<char_t> string_t>
     basic_string& operator+=(const string_t& sStr) noexcept;
 
     /**
@@ -1599,11 +1600,11 @@ public:
 
     /**
         @brief  operator==
-        @tparam string_t - string-ish type, satisfying the "string_convertable" concept
+        @tparam string_t - string-ish type, satisfying the "range_of_t_c" concept
         @param  sStr     - string to compare
         @retval          - true, if objects are equal
     **/
-    template<string_convertable<char_t> string_t>
+    template<range_of_t_c<char_t> string_t>
     bool operator==(const string_t& sStr) const noexcept;
 
     /**
@@ -1629,11 +1630,11 @@ public:
 
     /**
         @brief  operator!=
-        @tparam string_t - string-ish type, satisfying the "string_convertable" concept
+        @tparam string_t - string-ish type, satisfying the "range_of_t_c" concept
         @param  sStr     - string to compare
         @retval          - true, if objects are not equal
     **/
-    template<string_convertable<char_t> string_t>
+    template<range_of_t_c<char_t> string_t>
     bool operator!=(const string_t& sStr) const noexcept;
 
     /**
@@ -1659,11 +1660,11 @@ public:
 
     /**
         @brief  operator<
-        @tparam string_t - string-ish type, satisfying the "string_convertable" concept
+        @tparam string_t - string-ish type, satisfying the "range_of_t_c" concept
         @param  sStr     - string to compare
         @retval          - true, if left object is less than right
     **/
-    template<string_convertable<char_t> string_t>
+    template<range_of_t_c<char_t> string_t>
     bool operator<(const string_t& sStr) const noexcept;
 
     /**
@@ -1689,11 +1690,11 @@ public:
 
     /**
         @brief  operator<=
-        @tparam string_t - string-ish type, satisfying the "string_convertable" concept
+        @tparam string_t - string-ish type, satisfying the "range_of_t_c" concept
         @param  sStr     - string to compare
         @retval          - true, if left object is less or equal than right
     **/
-    template<string_convertable<char_t> string_t>
+    template<range_of_t_c<char_t> string_t>
     bool operator<=(const string_t& sStr) const noexcept;
 
     /**
@@ -1719,11 +1720,11 @@ public:
 
     /**
         @brief  operator>
-        @tparam string_t - string-ish type, satisfying the "string_convertable" concept
+        @tparam string_t - string-ish type, satisfying the "range_of_t_c" concept
         @param  sStr     - string to compare
         @retval          - true, if left object is greater than right
     **/
-    template<string_convertable<char_t> string_t>
+    template<range_of_t_c<char_t> string_t>
     bool operator>(const string_t& sStr) const noexcept;
 
     /**
@@ -1749,11 +1750,11 @@ public:
 
     /**
         @brief  operator>=
-        @tparam string_t - string-ish type, satisfying the "string_convertable" concept
+        @tparam string_t - string-ish type, satisfying the "range_of_t_c" concept
         @param  sStr     - string to compare
         @retval          - true, if left object is greater or equal than right
     **/
-    template<string_convertable<char_t> string_t>
+    template<range_of_t_c<char_t> string_t>
     bool operator>=(const string_t& sStr) const noexcept;
 
     /**

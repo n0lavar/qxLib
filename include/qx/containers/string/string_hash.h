@@ -11,6 +11,7 @@
 
 #include <qx/containers/string/string_setup.h>
 #include <qx/containers/string/string_traits.h>
+#include <qx/meta/concepts.h>
 
 namespace qx
 {
@@ -22,31 +23,7 @@ template<class T>
 concept has_zero_termonated_hash_func_overload =
     requires(typename T::const_pointer pszStr, size_t nSeed) { T::hash_function(pszStr, nSeed); };
 
-template<class T, class char_t>
-concept is_iterator_arrow_operator_char = requires(T t) {
-    {
-        t.begin().operator->()
-    } -> std::convertible_to<const char_t*>;
-    {
-        t.end().operator->()
-    } -> std::convertible_to<const char_t*>;
 };
-
-template<class T, class char_t>
-concept is_iterator_char_pointer = requires(T t) {
-    {
-        t.begin()
-    } -> std::convertible_to<const char_t*>;
-    {
-        t.end()
-    } -> std::convertible_to<const char_t*>;
-};
-
-} // namespace detail
-
-template<class T, class char_t>
-concept string_convertable =
-    detail::is_iterator_arrow_operator_char<T, char_t> || detail::is_iterator_char_pointer<T, char_t>;
 
 /**
 
@@ -81,10 +58,10 @@ public:
 
     /**
         @brief  basic_string_hash object constructor
-        @tparam string_t - string-ish type, satisfying the "string_convertable" concept
+        @tparam string_t - string-ish type, satisfying the "range_of_t_c" concept
         @param  sString  - string-ish container
     **/
-    template<string_convertable<typename traits_t::value_type> string_t>
+    template<range_of_t_c<typename traits_t::value_type> string_t>
     constexpr basic_string_hash(const string_t& sString) noexcept;
 
     /**

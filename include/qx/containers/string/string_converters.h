@@ -11,6 +11,7 @@
 
 #include <qx/containers/string/string.h>
 #include <qx/containers/string/string_view.h>
+#include <qx/internal/perf_scope.h>
 
 #include <codecvt>
 #include <locale>
@@ -26,6 +27,8 @@ namespace qx
 **/
 inline wstring to_wstring(cstring_view stringView, const std::locale& locale = std::locale())
 {
+    QX_PERF_SCOPE();
+
     std::vector<wchar_t> buf(stringView.size());
     std::use_facet<std::ctype<wchar_t>>(locale).widen(
         stringView.data(),
@@ -55,6 +58,8 @@ inline wstring to_wstring(wstring_view stringView, const std::locale& locale = s
 **/
 inline cstring to_cstring(wstring_view stringView, const std::locale& locale = std::locale())
 {
+    QX_PERF_SCOPE();
+
     std::vector<char> buf(stringView.size());
     std::use_facet<std::ctype<wchar_t>>(locale)
         .narrow(stringView.data(), stringView.data() + stringView.size(), '?', buf.data());
@@ -109,6 +114,8 @@ inline string to_string(wstring_view stringView, const std::locale& locale = std
 **/
 inline string utf8_to_string(const char* pszUtf8)
 {
+    QX_PERF_SCOPE();
+
 #ifdef QX_CONF_USE_WCHAR
     QX_PUSH_SUPPRESS_ALL_WARNINGS();
     std::wstring_convert<std::codecvt_utf8_utf16<wchar_t>> converter;

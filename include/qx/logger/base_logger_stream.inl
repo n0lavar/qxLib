@@ -7,6 +7,8 @@
 
 **/
 
+QX_DEFINE_FILE_CATEGORY(CatLogger);
+
 namespace qx
 {
 
@@ -23,6 +25,8 @@ inline void base_logger_stream::log(
     int             nLine,
     string_view     swLogMessage)
 {
+    QX_PERF_SCOPE("Log");
+
     const char_type* pszCategory = category.get_name();
 
     if (const auto optLogUnit =
@@ -31,7 +35,7 @@ inline void base_logger_stream::log(
     {
         if (eLogLevel >= optLogUnit->pUnitInfo->eMinLogLevel)
         {
-            QX_PERF_SCOPE(CatLogger, "Log");
+            QX_PERF_SCOPE("Log lock");
 
             std::lock_guard lock(m_Mutex);
 
@@ -54,7 +58,10 @@ inline void base_logger_stream::log(
                 };
             }
 
-            formatFunc(buffers, eLogLevel, category, svFile, svFunction, nLine, swLogMessage);
+            {
+                QX_PERF_SCOPE("Log formatting");
+                formatFunc(buffers, eLogLevel, category, svFile, svFunction, nLine, swLogMessage);
+            }
 
             if (!buffers.sMessage.empty())
             {
@@ -168,6 +175,8 @@ inline std::optional<log_unit> base_logger_stream::get_unit_info(
     string_view svFile,
     string_view svFunction) noexcept
 {
+    QX_PERF_SCOPE();
+
     auto find_unit = [this](string_view svUnit)
     {
         return !svUnit.empty() ? m_Units.find(string_hash(svUnit)) : m_Units.end();

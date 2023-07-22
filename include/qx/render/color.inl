@@ -141,6 +141,15 @@ constexpr const float* color::data() const noexcept
     return &(m_Color.x);
 }
 
+constexpr unsigned int color::hex_rgb() const noexcept
+{
+    const unsigned int r = static_cast<unsigned int>(float_to_dec(m_Color.x));
+    const unsigned int g = static_cast<unsigned int>(float_to_dec(m_Color.y));
+    const unsigned int b = static_cast<unsigned int>(float_to_dec(m_Color.z));
+
+    return ((r & 0xff) << 16) + ((g & 0xff) << 8) + ((b & 0xff) << 0);
+}
+
 constexpr unsigned int color::hex_rgba() const noexcept
 {
     const unsigned int r = static_cast<unsigned int>(float_to_dec(m_Color.x));

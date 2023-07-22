@@ -153,6 +153,12 @@ public:
 
     /**
         @brief  Get color as hex
+        @retval - hex color value in 0xRRGGBB format
+    **/
+    constexpr unsigned int hex_rgb() const noexcept;
+
+    /**
+        @brief  Get color as hex
         @retval - hex color value in 0xRRGGBBAA format
     **/
     constexpr unsigned int hex_rgba() const noexcept;

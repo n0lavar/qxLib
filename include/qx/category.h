@@ -62,12 +62,8 @@ public:
         @brief  category object constructor
         @param  pszName        - category name. For ex. CatRendering or CatWidgets
         @param  categoryColor  - color to be used if supported
-        @param  pszDescription - category description
     **/
-    constexpr explicit category(
-        const char_type* pszName,
-        const color&     categoryColor  = kDefaultColor,
-        const char_type* pszDescription = nullptr) noexcept;
+    constexpr explicit category(const char_type* pszName, const color& categoryColor = kDefaultColor) noexcept;
 
     /**
         @brief  Get category name

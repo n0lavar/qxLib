@@ -340,6 +340,7 @@ inline void sort(random_it_t begin, random_it_t end, compare_t compare = compare
 **/
 template<class container_t, class compare_t = std::less<>>
 inline void sort(container_t& cont, compare_t compare = compare_t());
+
 } // namespace qx
 
 #include <qx/algo/sort.inl>

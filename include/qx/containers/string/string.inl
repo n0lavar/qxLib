@@ -48,7 +48,7 @@ inline basic_string<char_t, traits_t>::basic_string(fwd_it_t itFirst, fwd_it_t i
 }
 
 template<class char_t, class traits_t>
-template<string_convertable<char_t> string_t>
+template<range_of_t_c<char_t> string_t>
 inline basic_string<char_t, traits_t>::basic_string(const string_t& sAnother) noexcept
 {
     assign(sAnother);
@@ -113,7 +113,7 @@ inline void basic_string<char_t, traits_t>::assign(fwd_it_t itFirst, fwd_it_t it
 }
 
 template<class char_t, class traits_t>
-template<string_convertable<char_t> string_t>
+template<range_of_t_c<char_t> string_t>
 inline void basic_string<char_t, traits_t>::assign(const string_t& sAnother) noexcept
 {
     assign(sAnother.cbegin(), sAnother.cend());
@@ -402,7 +402,7 @@ inline void basic_string<char_t, traits_t>::append(fwd_it_t itBegin, fwd_it_t it
 }
 
 template<class char_t, class traits_t>
-template<string_convertable<char_t> string_t>
+template<range_of_t_c<char_t> string_t>
 inline void basic_string<char_t, traits_t>::append(const string_t& sStr) noexcept
 {
     append(sStr.cbegin(), sStr.cend());
@@ -485,7 +485,7 @@ inline typename basic_string<char_t, traits_t>::size_type basic_string<char_t, t
 }
 
 template<class char_t, class traits_t>
-template<string_convertable<char_t> string_t>
+template<range_of_t_c<char_t> string_t>
 inline typename basic_string<char_t, traits_t>::size_type basic_string<char_t, traits_t>::insert(
     size_type nPos,
     string_t  sWhat) noexcept
@@ -529,7 +529,7 @@ inline typename basic_string<char_t, traits_t>::size_type basic_string<char_t, t
 }
 
 template<class char_t, class traits_t>
-template<string_convertable<char_t> string_t>
+template<range_of_t_c<char_t> string_t>
 inline typename basic_string<char_t, traits_t>::size_type basic_string<char_t, traits_t>::insert(
     const_iterator itPos,
     string_t       sWhat) noexcept
@@ -696,7 +696,7 @@ inline typename basic_string<char_t, traits_t>::size_type basic_string<char_t, t
 }
 
 template<class char_t, class traits_t>
-template<string_convertable<char_t> string_t>
+template<range_of_t_c<char_t> string_t>
 inline typename basic_string<char_t, traits_t>::size_type basic_string<char_t, traits_t>::trim_left(
     const string_t& sStr) noexcept
 {
@@ -796,7 +796,7 @@ inline typename basic_string<char_t, traits_t>::size_type basic_string<char_t, t
 }
 
 template<class char_t, class traits_t>
-template<string_convertable<char_t> string_t>
+template<range_of_t_c<char_t> string_t>
 inline typename basic_string<char_t, traits_t>::size_type basic_string<char_t, traits_t>::trim_right(
     const string_t& sStr) noexcept
 {
@@ -896,7 +896,7 @@ inline typename basic_string<char_t, traits_t>::size_type basic_string<char_t, t
 }
 
 template<class char_t, class traits_t>
-template<string_convertable<char_t> string_t>
+template<range_of_t_c<char_t> string_t>
 inline typename basic_string<char_t, traits_t>::size_type basic_string<char_t, traits_t>::trim(
     const string_t& sStr) noexcept
 {
@@ -971,7 +971,7 @@ inline typename basic_string<char_t, traits_t>::size_type basic_string<char_t, t
 }
 
 template<class char_t, class traits_t>
-template<string_convertable<char_t> string_t>
+template<range_of_t_c<char_t> string_t>
 inline typename basic_string<char_t, traits_t>::size_type basic_string<char_t, traits_t>::remove(
     const string_t& sStr,
     size_type       nBegin,
@@ -1007,7 +1007,7 @@ inline bool basic_string<char_t, traits_t>::remove_prefix(fwd_it_t itBegin, fwd_
 }
 
 template<class char_t, class traits_t>
-template<string_convertable<char_t> string_t>
+template<range_of_t_c<char_t> string_t>
 inline bool basic_string<char_t, traits_t>::remove_prefix(const string_t& sStr) noexcept
 {
     return remove_prefix(sStr.cbegin(), sStr.cend());
@@ -1051,7 +1051,7 @@ inline bool basic_string<char_t, traits_t>::remove_suffix(fwd_it_t itBegin, fwd_
 }
 
 template<class char_t, class traits_t>
-template<string_convertable<char_t> string_t>
+template<range_of_t_c<char_t> string_t>
 inline bool basic_string<char_t, traits_t>::remove_suffix(const string_t& sStr) noexcept
 {
     return remove_suffix(sStr.cbegin(), sStr.cend());
@@ -1131,7 +1131,7 @@ inline typename basic_string<char_t, traits_t>::size_type basic_string<char_t, t
 }
 
 template<class char_t, class traits_t>
-template<string_convertable<char_t> string_t>
+template<range_of_t_c<char_t> string_t>
 inline typename basic_string<char_t, traits_t>::size_type basic_string<char_t, traits_t>::remove_all(
     const string_t& sStr,
     size_type       nBegin,
@@ -1158,7 +1158,7 @@ inline typename basic_string<char_t, traits_t>::size_type basic_string<char_t, t
         {
             return traits_t::length(val);
         }
-        else if constexpr (string_convertable<T, char_t>)
+        else if constexpr (range_of_t_c<T, char_t>)
         {
             return val.size();
         }
@@ -1179,7 +1179,7 @@ inline typename basic_string<char_t, traits_t>::size_type basic_string<char_t, t
         {
             return val;
         }
-        else if constexpr (string_convertable<T, char_t>)
+        else if constexpr (range_of_t_c<T, char_t>)
         {
             return val.data();
         }
@@ -1269,7 +1269,7 @@ inline int basic_string<char_t, traits_t>::compare(fwd_it_t itBegin, fwd_it_t it
 }
 
 template<class char_t, class traits_t>
-template<string_convertable<char_t> string_t>
+template<range_of_t_c<char_t> string_t>
 inline int basic_string<char_t, traits_t>::compare(const string_t& sStr) const noexcept
 {
     return compare(sStr.cbegin(), sStr.cend());
@@ -1346,7 +1346,7 @@ inline typename basic_string<char_t, traits_t>::size_type basic_string<char_t, t
 }
 
 template<class char_t, class traits_t>
-template<string_convertable<char_t> string_t>
+template<range_of_t_c<char_t> string_t>
 inline typename basic_string<char_t, traits_t>::size_type basic_string<char_t, traits_t>::find(
     string_t  sWhat,
     size_type nBegin,
@@ -1426,7 +1426,7 @@ inline typename basic_string<char_t, traits_t>::size_type basic_string<char_t, t
 }
 
 template<class char_t, class traits_t>
-template<string_convertable<char_t> string_t>
+template<range_of_t_c<char_t> string_t>
 inline typename basic_string<char_t, traits_t>::size_type basic_string<char_t, traits_t>::rfind(
     string_t  sWhat,
     size_type nBegin,
@@ -1514,7 +1514,7 @@ inline typename basic_string<char_t, traits_t>::size_type basic_string<char_t, t
 }
 
 template<class char_t, class traits_t>
-template<string_convertable<char_t> string_t>
+template<range_of_t_c<char_t> string_t>
 inline typename basic_string<char_t, traits_t>::size_type basic_string<char_t, traits_t>::find_first_of(
     string_t  sWhat,
     size_type nBegin) const noexcept
@@ -1601,7 +1601,7 @@ inline typename basic_string<char_t, traits_t>::size_type basic_string<char_t, t
 }
 
 template<class char_t, class traits_t>
-template<string_convertable<char_t> string_t>
+template<range_of_t_c<char_t> string_t>
 inline typename basic_string<char_t, traits_t>::size_type basic_string<char_t, traits_t>::find_last_of(
     string_t  sWhat,
     size_type nEnd) const noexcept
@@ -1694,7 +1694,7 @@ inline typename basic_string<char_t, traits_t>::size_type basic_string<char_t, t
 }
 
 template<class char_t, class traits_t>
-template<string_convertable<char_t> string_t>
+template<range_of_t_c<char_t> string_t>
 inline typename basic_string<char_t, traits_t>::size_type basic_string<char_t, traits_t>::find_first_not_of(
     string_t  sWhat,
     size_type nBegin) const noexcept
@@ -1787,7 +1787,7 @@ inline typename basic_string<char_t, traits_t>::size_type basic_string<char_t, t
 }
 
 template<class char_t, class traits_t>
-template<string_convertable<char_t> string_t>
+template<range_of_t_c<char_t> string_t>
 inline typename basic_string<char_t, traits_t>::size_type basic_string<char_t, traits_t>::find_last_not_of(
     string_t  sWhat,
     size_type nEnd) const noexcept
@@ -1876,7 +1876,7 @@ inline typename basic_string<char_t, traits_t>::views basic_string<char_t, trait
 }
 
 template<class char_t, class traits_t>
-template<string_convertable<char_t> string_t>
+template<range_of_t_c<char_t> string_t>
 inline typename basic_string<char_t, traits_t>::views basic_string<char_t, traits_t>::split(
     const string_t& sSeparator) const noexcept
 {
@@ -1925,7 +1925,7 @@ inline bool basic_string<char_t, traits_t>::starts_with(fwd_it_t itBegin, fwd_it
 }
 
 template<class char_t, class traits_t>
-template<string_convertable<char_t> string_t>
+template<range_of_t_c<char_t> string_t>
 inline bool basic_string<char_t, traits_t>::starts_with(const string_t& sStr) const noexcept
 {
     return starts_with(sStr.cbegin(), sStr.cend());
@@ -1973,7 +1973,7 @@ inline bool basic_string<char_t, traits_t>::ends_with(fwd_it_t itBegin, fwd_it_t
 }
 
 template<class char_t, class traits_t>
-template<string_convertable<char_t> string_t>
+template<range_of_t_c<char_t> string_t>
 inline bool basic_string<char_t, traits_t>::ends_with(const string_t& sStr) const noexcept
 {
     return ends_with(sStr.cbegin(), sStr.cend());
@@ -2005,7 +2005,7 @@ inline bool basic_string<char_t, traits_t>::contains(fwd_it_t itBegin, fwd_it_t 
 }
 
 template<class char_t, class traits_t>
-template<string_convertable<char_t> string_t>
+template<range_of_t_c<char_t> string_t>
 inline bool basic_string<char_t, traits_t>::contains(const string_t& sStr) const noexcept
 {
     return find(sStr) != npos;
@@ -2033,7 +2033,7 @@ inline basic_string<char_t, traits_t>& basic_string<char_t, traits_t>::operator=
 }
 
 template<class char_t, class traits_t>
-template<string_convertable<char_t> string_t>
+template<range_of_t_c<char_t> string_t>
 inline basic_string<char_t, traits_t>& basic_string<char_t, traits_t>::operator=(const string_t& sStr) noexcept
 {
     assign(sStr);
@@ -2064,7 +2064,7 @@ inline basic_string<char_t, traits_t>& basic_string<char_t, traits_t>::operator+
 }
 
 template<class char_t, class traits_t>
-template<string_convertable<char_t> string_t>
+template<range_of_t_c<char_t> string_t>
 inline basic_string<char_t, traits_t>& basic_string<char_t, traits_t>::operator+=(const string_t& sStr) noexcept
 {
     append(sStr.cbegin(), sStr.cend());
@@ -2090,7 +2090,7 @@ inline bool basic_string<char_t, traits_t>::operator==(const basic_string& sStr)
 }
 
 template<class char_t, class traits_t>
-template<string_convertable<char_t> string_t>
+template<range_of_t_c<char_t> string_t>
 inline bool basic_string<char_t, traits_t>::operator==(const string_t& sStr) const noexcept
 {
     return iter_strcmp(cbegin(), cend(), sStr.cbegin(), sStr.cend()) == 0;
@@ -2115,7 +2115,7 @@ inline bool basic_string<char_t, traits_t>::operator!=(const basic_string& sStr)
 }
 
 template<class char_t, class traits_t>
-template<string_convertable<char_t> string_t>
+template<range_of_t_c<char_t> string_t>
 inline bool basic_string<char_t, traits_t>::operator!=(const string_t& sStr) const noexcept
 {
     return !operator==(sStr);
@@ -2140,7 +2140,7 @@ inline bool basic_string<char_t, traits_t>::operator<(const basic_string& sStr) 
 }
 
 template<class char_t, class traits_t>
-template<string_convertable<char_t> string_t>
+template<range_of_t_c<char_t> string_t>
 inline bool basic_string<char_t, traits_t>::operator<(const string_t& sStr) const noexcept
 {
     return iter_strcmp(cbegin(), cend(), sStr.cbegin(), sStr.cend()) < 0;
@@ -2165,7 +2165,7 @@ inline bool basic_string<char_t, traits_t>::operator<=(const basic_string& sStr)
 }
 
 template<class char_t, class traits_t>
-template<string_convertable<char_t> string_t>
+template<range_of_t_c<char_t> string_t>
 inline bool basic_string<char_t, traits_t>::operator<=(const string_t& sStr) const noexcept
 {
     return iter_strcmp(cbegin(), cend(), sStr.cbegin(), sStr.cend()) <= 0;
@@ -2190,7 +2190,7 @@ inline bool basic_string<char_t, traits_t>::operator>(const basic_string& sStr) 
 }
 
 template<class char_t, class traits_t>
-template<string_convertable<char_t> string_t>
+template<range_of_t_c<char_t> string_t>
 inline bool basic_string<char_t, traits_t>::operator>(const string_t& sStr) const noexcept
 {
     return iter_strcmp(cbegin(), cend(), sStr.cbegin(), sStr.cend()) > 0;
@@ -2215,7 +2215,7 @@ inline bool basic_string<char_t, traits_t>::operator>=(const basic_string& sStr)
 }
 
 template<class char_t, class traits_t>
-template<string_convertable<char_t> string_t>
+template<range_of_t_c<char_t> string_t>
 inline bool basic_string<char_t, traits_t>::operator>=(const string_t& sStr) const noexcept
 {
     return iter_strcmp(cbegin(), cend(), sStr.cbegin(), sStr.cend()) >= 0;
@@ -2526,7 +2526,7 @@ basic_string<char_t, traits_t> operator+(
     return str;
 }
 
-template<class char_t, class traits_t, string_convertable<char_t> string_t>
+template<class char_t, class traits_t, range_of_t_c<char_t> string_t>
 basic_string<char_t, traits_t> operator+(const basic_string<char_t, traits_t>& lhs, const string_t& rhs) noexcept
 {
     basic_string<char_t, traits_t> str(lhs);
@@ -2534,7 +2534,7 @@ basic_string<char_t, traits_t> operator+(const basic_string<char_t, traits_t>& l
     return str;
 }
 
-template<class char_t, class traits_t, string_convertable<char_t> string_t>
+template<class char_t, class traits_t, range_of_t_c<char_t> string_t>
 basic_string<char_t, traits_t> operator+(basic_string<char_t, traits_t>&& lhs, const string_t& rhs) noexcept
 {
     basic_string<char_t, traits_t> str(std::move(lhs));
@@ -2542,7 +2542,7 @@ basic_string<char_t, traits_t> operator+(basic_string<char_t, traits_t>&& lhs, c
     return str;
 }
 
-template<class char_t, class traits_t, string_convertable<char_t> string_t>
+template<class char_t, class traits_t, range_of_t_c<char_t> string_t>
 basic_string<char_t, traits_t> operator+(const string_t& lhs, const basic_string<char_t, traits_t>& rhs) noexcept
 {
     basic_string<char_t, traits_t> str(lhs);
@@ -2594,7 +2594,7 @@ inline void basic_string<char_t, traits_t>::clear() noexcept
 
 
 
-//------------------------------------ hash ------------------------------------
+// -------------------------------------------------------- hash -------------------------------------------------------
 
 namespace std
 {
@@ -2608,14 +2608,7 @@ struct hash<qx::basic_string<char_t, traits_t>>
     }
 };
 
-} // namespace std
-
-
-
-//------------------------------------ swap ------------------------------------
-
-namespace std //-V1061
-{
+// -------------------------------------------------------- swap -------------------------------------------------------
 
 template<class char_t, class traits_t>
 void swap(qx::basic_string<char_t, traits_t>& lhs, qx::basic_string<char_t, traits_t>& rhs) noexcept
@@ -2623,11 +2616,28 @@ void swap(qx::basic_string<char_t, traits_t>& lhs, qx::basic_string<char_t, trai
     lhs.swap(rhs);
 }
 
+// ----------------------------------------------------- formatter -----------------------------------------------------
+
+template<class char_t, class traits_t>
+struct formatter<qx::basic_string<char_t, traits_t>, char_t>
+{
+    template<class format_parse_context_type>
+    constexpr auto parse(format_parse_context_type& ctx)
+    {
+        return ctx.begin();
+    }
+
+    template<class format_context_type>
+    constexpr auto format(const qx::basic_string<char_t, traits_t>& value, format_context_type& ctx)
+    {
+        return format_to(ctx.out(), QX_STR_PREFIX(char_t, "{}"), value.c_str());
+    }
+};
+
 } // namespace std
 
 
-
-//----------------------- istream / ostream overloading ----------------------
+// ------------------------------------------- istream / ostream overloading -------------------------------------------
 
 template<class char_t, class traits_t>
 qx::detail::ostream<char_t>& operator<<(qx::detail::ostream<char_t>& os, const qx::basic_string<char_t, traits_t>& str)
@@ -2641,7 +2651,7 @@ qx::detail::istream<char_t>& operator>>(qx::detail::istream<char_t>& is, qx::bas
 {
     typename qx::detail::istream<traits_t>::iostate ret_bit = qx::detail::istream<traits_t>::goodbit;
 
-    auto try_push_back = [&str, &is, &ret_bit](char_t ch) -> bool
+    auto try_push_back = [&str, &is, &ret_bit](char_t ch)
     {
         typename traits_t::size_type nCurrentSize = str.size();
         if (str._resize(nCurrentSize + 1))
