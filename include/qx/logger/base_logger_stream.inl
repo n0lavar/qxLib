@@ -14,11 +14,11 @@ namespace qx
 
 inline base_logger_stream::base_logger_stream(bool bAlwaysFlush) : m_bAlwaysFlush(bAlwaysFlush)
 {
-    register_unit(k_svDefaultUnit, { log_level::log });
+    register_unit(k_svDefaultUnit, { verbosity::log });
 }
 
 inline void base_logger_stream::log(
-    log_level       eLogLevel,
+    verbosity       eVerbosity,
     const category& category,
     string_view     svFile,
     string_view     svFunction,
@@ -33,7 +33,7 @@ inline void base_logger_stream::log(
             get_unit_info(pszCategory ? qx::string_view(pszCategory) : qx::string_view(), svFile, svFunction);
         optLogUnit && optLogUnit->pUnitInfo)
     {
-        if (eLogLevel >= optLogUnit->pUnitInfo->eMinLogLevel)
+        if (eVerbosity >= optLogUnit->pUnitInfo->eMinVerbosity)
         {
             QX_PERF_SCOPE("Log lock");
 
@@ -47,25 +47,25 @@ inline void base_logger_stream::log(
             {
                 formatFunc = [this](
                                  logger_buffer&      buffers,
-                                 log_level           eLogLevel,
+                                 verbosity           eVerbosity,
                                  const qx::category& category,
                                  string_view         svFile,
                                  string_view         svFunction,
                                  int                 nLine,
                                  string_view         swLogMessage)
                 {
-                    format_line(buffers, eLogLevel, category, svFile, svFunction, nLine, swLogMessage);
+                    format_line(buffers, eVerbosity, category, svFile, svFunction, nLine, swLogMessage);
                 };
             }
 
             {
                 QX_PERF_SCOPE("Log formatting");
-                formatFunc(buffers, eLogLevel, category, svFile, svFunction, nLine, swLogMessage);
+                formatFunc(buffers, eVerbosity, category, svFile, svFunction, nLine, swLogMessage);
             }
 
             if (!buffers.sMessage.empty())
             {
-                do_log(buffers.sMessage, *optLogUnit, buffers.colors, eLogLevel);
+                do_log(buffers.sMessage, *optLogUnit, buffers.colors, eVerbosity);
                 if (m_bAlwaysFlush)
                     flush();
             }
@@ -115,36 +115,36 @@ inline logger_buffer& base_logger_stream::get_log_buffer() noexcept
 
 inline void base_logger_stream::format_line(
     logger_buffer&  buffers,
-    log_level       eLogLevel,
+    verbosity       eVerbosity,
     const category& category,
     string_view     svFile,
     string_view     svFunction,
     int             nLine,
     string_view     swLogMessage) noexcept
 {
-    switch (eLogLevel)
+    switch (eVerbosity)
     {
-    case log_level::very_verbose:
+    case verbosity::very_verbose:
         buffers.sMessage = QX_TEXT("[VV][");
         break;
 
-    case log_level::verbose:
+    case verbosity::verbose:
         buffers.sMessage = QX_TEXT("[V][");
         break;
 
-    case log_level::important:
+    case verbosity::important:
         buffers.sMessage = QX_TEXT("[I][");
         break;
 
-    case log_level::warning:
+    case verbosity::warning:
         buffers.sMessage = QX_TEXT("[W][");
         break;
 
-    case log_level::error:
+    case verbosity::error:
         buffers.sMessage = QX_TEXT("[E][");
         break;
 
-    case log_level::critical:
+    case verbosity::critical:
         buffers.sMessage = QX_TEXT("[C][");
         break;
 

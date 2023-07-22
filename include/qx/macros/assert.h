@@ -28,7 +28,7 @@
 namespace qx::details
 {
 
-template<log_level eLogLevel>
+template<verbosity eVerbosity>
 void resolve_assert_proceeding(
     // macro args
     const category& fileCategory,
@@ -37,11 +37,11 @@ void resolve_assert_proceeding(
     int             nLine,
     string_view     svCondition)
 {
-    QX_LOGGER_INSTANCE.log(eLogLevel, QX_TEXT("[{}] "), fileCategory, svFile, svFunction, nLine, svCondition);
+    QX_LOGGER_INSTANCE.log(eVerbosity, QX_TEXT("[{}] "), fileCategory, svFile, svFunction, nLine, svCondition);
     QX_LOGGER_INSTANCE.flush();
 }
 
-template<log_level eLogLevel>
+template<verbosity eVerbosity>
 void resolve_assert_proceeding(
     // macro args
     const category& fileCategory,
@@ -54,11 +54,11 @@ void resolve_assert_proceeding(
 {
     string sMessage;
     sMessage.append_format(QX_TEXT("[{}] "), svCondition);
-    QX_LOGGER_INSTANCE.log(eLogLevel, sMessage, category, svFile, svFunction, nLine);
+    QX_LOGGER_INSTANCE.log(eVerbosity, sMessage, category, svFile, svFunction, nLine);
     QX_LOGGER_INSTANCE.flush();
 }
 
-template<log_level eLogLevel, class... args_t>
+template<verbosity eVerbosity, class... args_t>
     requires log_acceptable_args<args_t...>
 void resolve_assert_proceeding(
     // macro args
@@ -74,11 +74,11 @@ void resolve_assert_proceeding(
     string sMessage;
     sMessage.append_format(QX_TEXT("[{}] "), svCondition);
     sMessage.append_format(sFormat, args...);
-    QX_LOGGER_INSTANCE.log(eLogLevel, sMessage, fileCategory, svFile, svFunction, nLine);
+    QX_LOGGER_INSTANCE.log(eVerbosity, sMessage, fileCategory, svFile, svFunction, nLine);
     QX_LOGGER_INSTANCE.flush();
 }
 
-template<log_level eLogLevel>
+template<verbosity eVerbosity>
 void resolve_assert_proceeding(
     // macro args
     const category& fileCategory,
@@ -91,11 +91,11 @@ void resolve_assert_proceeding(
 {
     string sMessage;
     sMessage.append_format(QX_TEXT("[{}] {}"), svCondition, svMessage);
-    QX_LOGGER_INSTANCE.log(eLogLevel, sMessage, fileCategory, svFile, svFunction, nLine);
+    QX_LOGGER_INSTANCE.log(eVerbosity, sMessage, fileCategory, svFile, svFunction, nLine);
     QX_LOGGER_INSTANCE.flush();
 }
 
-template<log_level eLogLevel, class... args_t>
+template<verbosity eVerbosity, class... args_t>
     requires log_acceptable_args<args_t...>
 void resolve_assert_proceeding(
     // macro args
@@ -112,11 +112,11 @@ void resolve_assert_proceeding(
     string sMessage;
     sMessage.append_format(QX_TEXT("[{}] "), svCondition);
     sMessage.append_format(sFormat, args...);
-    QX_LOGGER_INSTANCE.log(eLogLevel, sMessage, category, svFile, svFunction, nLine);
+    QX_LOGGER_INSTANCE.log(eVerbosity, sMessage, category, svFile, svFunction, nLine);
     QX_LOGGER_INSTANCE.flush();
 }
 
-template<log_level eLogLevel>
+template<verbosity eVerbosity>
 void resolve_assert_proceeding(
     // macro args
     const category& fileCategory,
@@ -130,7 +130,7 @@ void resolve_assert_proceeding(
 {
     string sMessage;
     sMessage.append_format(QX_TEXT("[{}] {}"), svCondition, svMessage);
-    QX_LOGGER_INSTANCE.log(eLogLevel, sMessage, category, svFile, svFunction, nLine);
+    QX_LOGGER_INSTANCE.log(eVerbosity, sMessage, category, svFile, svFunction, nLine);
     QX_LOGGER_INSTANCE.flush();
 }
 
@@ -144,7 +144,7 @@ void resolve_assert_proceeding(
 
 #ifndef QX_EXPECT_BEFORE_DEBUG_BREAK
     #define QX_EXPECT_BEFORE_DEBUG_BREAK(condition, ...)              \
-        qx::details::resolve_assert_proceeding<qx::log_level::error>( \
+        qx::details::resolve_assert_proceeding<qx::verbosity::error>( \
             QX_FILE_CATEGORY(),                                       \
             qx::to_string(__FUNCTION__),                              \
             QX_SHORT_FILE,                                            \
@@ -167,7 +167,7 @@ void resolve_assert_proceeding(
 
 #ifndef QX_ASSERT_BEFORE_DEBUG_BREAK
     #define QX_ASSERT_BEFORE_DEBUG_BREAK(condition, ...)                 \
-        qx::details::resolve_assert_proceeding<qx::log_level::critical>( \
+        qx::details::resolve_assert_proceeding<qx::verbosity::critical>( \
             QX_FILE_CATEGORY(),                                          \
             qx::to_string(__FUNCTION__),                                 \
             QX_SHORT_FILE,                                               \

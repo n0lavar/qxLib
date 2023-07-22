@@ -68,7 +68,7 @@ inline void file_logger_stream::do_log(
     string_view                            svMessage,
     const log_unit&                        logUnit,
     const std::vector<logger_color_range>& colors,
-    log_level                              eLogLevel)
+    verbosity                              eVerbosity)
 {
     QX_PERF_SCOPE(CatLogger, "Log to the file");
     m_File << qx::to_wstring(svMessage);

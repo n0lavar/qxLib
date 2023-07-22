@@ -49,7 +49,7 @@ public:
         string_view                            svMessage,
         const log_unit&                        logUnit,
         const std::vector<logger_color_range>& colors,
-        log_level                              eLogLevel) override;
+        verbosity                              eVerbosity) override;
 
     /**
         @brief Set whether cout output should be colored

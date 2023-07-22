@@ -13,6 +13,7 @@
 #include <qx/containers/string/string_converters.h>
 #include <qx/internal/perf_scope.h>
 #include <qx/macros/suppress_warnings.h>
+#include <qx/verbosity.h>
 
 #include <ctime>
 #include <functional>
@@ -23,18 +24,6 @@ QX_DEFINE_CATEGORY(CatLogger, qx::color::dark_turquoise());
 
 namespace qx
 {
-
-enum class log_level
-{
-    very_verbose, // very frequently repeated messages, for example, on every update
-    verbose,      // messages you don't want to be displayed by default
-    log,          // default level
-    important,    // same as log but highlighted if possible
-    warning,      // not yet an error, but something to look out for
-    error,        // an error after which it is possible to continue the program
-    critical,     // an error that makes it impossible to continue the program
-    none,         // message is not displayed
-};
 
 struct logger_color_range
 {
@@ -60,15 +49,14 @@ struct log_unit_info
 {
     using format_func = std::function<void(
         logger_buffer&  buffers,
-        log_level       eLogLevel,   // log level
-        const category& category,    // code category
-        string_view     svFile,      // file name
-        string_view     svFunction,  // function name
-        int             nLine,       // code line number
-        string_view     swLogMessage // log message
-        )>;
+        verbosity       eVerbosity,
+        const category& category,
+        string_view     svFile,
+        string_view     svFunction,
+        int             nLine,
+        string_view     swLogMessage)>;
 
-    log_level   eMinLogLevel = log_level::log;
+    verbosity   eMinVerbosity = verbosity::log;
     format_func formatFunc;
 };
 
@@ -112,7 +100,7 @@ public:
     /**
         @brief  Output to stream
         @tparam char_t       - char type, typically char or wchar_t
-        @param  eLogLevel    - log level
+        @param  eVerbosity     message verbosity
         @param  category     - code category
         @param  svFile       - file name string
         @param  svFunction   - function name string
@@ -120,7 +108,7 @@ public:
         @param  swLogMessage - formatted log line
     **/
     void log(
-        log_level       eLogLevel,
+        verbosity       eVerbosity,
         const category& category,
         string_view     svFile,
         string_view     svFunction,
@@ -158,7 +146,7 @@ protected:
     /**
         @brief Format logger line
         @param  buffers      - string buffers to reduce num of allocations
-        @param  eLogLevel    - log level
+        @param  eVerbosity   - message verbosity
         @param  category     - code category
         @param  svFile       - file name string
         @param  svFunction   - function name string
@@ -167,7 +155,7 @@ protected:
     **/
     virtual void format_line(
         logger_buffer&  buffers,
-        log_level       eLogLevel,
+        verbosity       eVerbosity,
         const category& category,
         string_view     svFile,
         string_view     svFunction,
@@ -177,16 +165,16 @@ protected:
 private:
     /**
         @brief Proceed stream logging
-        @param svMessage - message string
-        @param logUnit   - log unit info
-        @param colors    - color ranges to colorize output
-        @param eLogLevel - this message log level
+        @param svMessage  - message string
+        @param logUnit    - log unit info
+        @param colors     - color ranges to colorize output
+        @param eVerbosity - this message verbosity
     **/
     virtual void do_log(
         string_view                            svMessage,
         const log_unit&                        logUnit,
         const std::vector<logger_color_range>& colors,
-        log_level                              eLogLevel) = 0;
+        verbosity                              eVerbosity) = 0;
 
     /**
         @brief  Try to find log unit info based on trace location info

@@ -46,7 +46,7 @@ inline void cout_logger_stream::do_log(
     string_view                            svMessage,
     const log_unit&                        logUnit,
     const std::vector<logger_color_range>& colors,
-    log_level                              eLogLevel)
+    verbosity                              eVerbosity)
 {
     QX_PERF_SCOPE(CatLogger, "Log to cout");
 
@@ -55,30 +55,30 @@ inline void cout_logger_stream::do_log(
     if (m_bUsingColors)
     {
         color commonColor = color::white();
-        switch (eLogLevel)
+        switch (eVerbosity)
         {
-        case log_level::very_verbose:
-        case log_level::verbose:
+        case verbosity::very_verbose:
+        case verbosity::verbose:
             commonColor = color::gray();
             break;
 
-        case log_level::log:
+        case verbosity::log:
             commonColor = color::white();
             break;
 
-        case log_level::important:
+        case verbosity::important:
             commonColor = color::khaki();
             break;
 
-        case log_level::warning:
+        case verbosity::warning:
             commonColor = color::orange();
             break;
 
-        case log_level::error:
+        case verbosity::error:
             commonColor = color::crimson();
             break;
 
-        case log_level::critical:
+        case verbosity::critical:
             commonColor = color::dark_red();
             break;
         }

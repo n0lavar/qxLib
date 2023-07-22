@@ -59,7 +59,7 @@ public:
         string_view                            svMessage,
         const log_unit&                        logUnit,
         const std::vector<logger_color_range>& colors,
-        log_level                              eLogLevel) override;
+        verbosity                              eVerbosity) override;
 
 private:
     std::wofstream m_File;

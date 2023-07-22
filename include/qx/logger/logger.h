@@ -20,23 +20,23 @@
 
 /**
     @brief Log with category
-    @param category  - category to be used to manage output
-    @param eLogLevel - logging level
-    @param format    - format string
-    @param ...       - additional args for formatting
+    @param category   - category to be used to manage output
+    @param eVerbosity - message verbosity
+    @param format     - format string
+    @param ...        - additional args for formatting
 **/
-#define QX_LOG_C(category, eLogLevel, format, ...) \
-    QX_LOGGER_INSTANCE                             \
-        .log(eLogLevel, format, category, QX_SHORT_FILE, qx::to_string(__FUNCTION__), __LINE__, ##__VA_ARGS__)
+#define QX_LOG_C(category, eVerbosity, format, ...) \
+    QX_LOGGER_INSTANCE                              \
+        .log(eVerbosity, format, category, QX_SHORT_FILE, qx::to_string(__FUNCTION__), __LINE__, ##__VA_ARGS__)
 
 /**
     @def   QX_LOG
     @brief Log message
-    @param eLogLevel - logging level 
-    @param format    - format string
-    @param ...       - additional args for formatting
+    @param eVerbosity - message verbosity 
+    @param format     - format string
+    @param ...        - additional args for formatting
 **/
-#define QX_LOG(eLogLevel, format, ...) QX_LOG_C(CatDefault, eLogLevel, format, ##__VA_ARGS__)
+#define QX_LOG(eVerbosity, format, ...) QX_LOG_C(CatDefault, eVerbosity, format, ##__VA_ARGS__)
 
 namespace qx
 {
@@ -58,7 +58,7 @@ class logger
 public:
     /**
         @brief  Log to all streams
-        @param  eLogLevel  - log level
+        @param  eVerbosity - message verbosity
         @param  svFormat   - format string
         @param  category   - code category
         @param  svFile     - file name string
@@ -66,7 +66,7 @@ public:
         @param  nLine      - code line number
     **/
     void log(
-        log_level       eLogLevel,
+        verbosity       eVerbosity,
         string_view     svFormat,
         const category& category,
         string_view     svFile,
@@ -76,7 +76,7 @@ public:
     /**
         @brief  Log to all streams
         @tparam args_t     - template parameter pack type
-        @param  eLogLevel  - log level
+        @param  eVerbosity - message verbosity
         @param  sFormat    - format string
         @param  category   - code category
         @param  svFile     - file name string
@@ -87,7 +87,7 @@ public:
     template<class... args_t>
         requires(log_acceptable_args<args_t...>)
     void log(
-        log_level                eLogLevel,
+        verbosity                eVerbosity,
         format_string<args_t...> sFormat,
         const category&          category,
         string_view              svFile,

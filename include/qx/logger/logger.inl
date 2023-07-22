@@ -11,7 +11,7 @@ namespace qx
 {
 
 inline void logger::log(
-    log_level       eLogLevel,
+    verbosity       eVerbosity,
     string_view     svFormat,
     const category& category,
     string_view     svFile,
@@ -19,13 +19,13 @@ inline void logger::log(
     int             nLine)
 {
     for (const auto& stream : m_Streams)
-        stream->log(eLogLevel, category, svFile, svFunction, nLine, svFormat);
+        stream->log(eVerbosity, category, svFile, svFunction, nLine, svFormat);
 }
 
 template<class... args_t>
     requires(log_acceptable_args<args_t...>)
 inline void logger::log(
-    log_level                eLogLevel,
+    verbosity                eVerbosity,
     format_string<args_t...> sFormat,
     const category&          category,
     string_view              svFile,
@@ -35,7 +35,7 @@ inline void logger::log(
 {
     const auto sLogMessage = qx::string::static_format(sFormat, args...);
     for (const auto& stream : m_Streams)
-        stream->log(eLogLevel, category, svFile, svFunction, nLine, sLogMessage);
+        stream->log(eVerbosity, category, svFile, svFunction, nLine, sLogMessage);
 }
 
 inline void logger::flush()
