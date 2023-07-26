@@ -37,7 +37,7 @@ inline void base_logger_stream::log(
         {
             QX_PERF_SCOPE("Log lock");
 
-            std::lock_guard lock(m_Mutex);
+            std::lock_guard lock(m_LoggerStreamMutex);
 
             auto& buffers = get_log_buffer();
             buffers.clear();

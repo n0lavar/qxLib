@@ -218,9 +218,9 @@ private:
 private:
     const bool m_bAutoShrink = true;
 
-    mutable std::shared_mutex m_Mutex;
-    values_set                m_Pool;
-    u64                       m_nCurrentId = 1;
+    QX_PERF_SHARED_MUTEX(m_UniqueObjectsPoolMutex);
+    values_set m_Pool;
+    u64        m_nCurrentId = 1;
 };
 
 } // namespace qx

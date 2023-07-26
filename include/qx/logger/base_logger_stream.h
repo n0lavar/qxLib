@@ -188,8 +188,8 @@ private:
 private:
     std::unordered_map<string_hash, log_unit_info> m_Units;
     logger_buffer                                  m_Buffer;
-    std::mutex                                     m_Mutex;
-    bool                                           m_bAlwaysFlush = false;
+    QX_PERF_MUTEX(m_LoggerStreamMutex);
+    bool m_bAlwaysFlush = false;
 };
 
 } // namespace qx

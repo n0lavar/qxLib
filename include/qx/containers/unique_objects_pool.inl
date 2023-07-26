@@ -100,7 +100,7 @@ inline typename unique_objects_pool<T>::token unique_objects_pool<T>::get_or_cre
 
     token result;
 
-    std::unique_lock lock(m_Mutex);
+    std::unique_lock lock(m_UniqueObjectsPoolMutex);
     data_by_value&   set = m_Pool.template get<value_tag>();
     if (auto it = set.find(std::as_const(value)); it != set.end())
     {
@@ -130,7 +130,7 @@ inline void unique_objects_pool<T>::shrink()
     if (m_bAutoShrink)
         return;
 
-    std::unique_lock lock(m_Mutex);
+    std::unique_lock lock(m_UniqueObjectsPoolMutex);
     data_by_id&      set = m_Pool.template get<id_tag>();
     do
     {
@@ -154,7 +154,7 @@ inline size_t unique_objects_pool<T>::size() const
 {
     QX_PERF_SCOPE();
 
-    std::shared_lock lock(m_Mutex);
+    std::shared_lock lock(m_UniqueObjectsPoolMutex);
     return m_Pool.size();
 }
 
@@ -171,7 +171,7 @@ inline void unique_objects_pool<T>::increase_counter(u64 nId) noexcept
 {
     QX_PERF_SCOPE();
 
-    std::unique_lock lock(m_Mutex);
+    std::unique_lock lock(m_UniqueObjectsPoolMutex);
     data_by_id&      set = m_Pool.template get<id_tag>();
     if (auto it = set.find(nId); it != set.end())
     {
@@ -189,7 +189,7 @@ inline void unique_objects_pool<T>::decrease_counter(u64 nId) noexcept
 {
     QX_PERF_SCOPE();
 
-    std::unique_lock lock(m_Mutex);
+    std::unique_lock lock(m_UniqueObjectsPoolMutex);
     data_by_id&      set = m_Pool.template get<id_tag>();
     if (auto it = set.find(nId); it != set.end())
     {
@@ -214,7 +214,7 @@ inline const T& unique_objects_pool<T>::get_value(u64 nId) noexcept
 {
     QX_PERF_SCOPE();
 
-    std::shared_lock lock(m_Mutex);
+    std::shared_lock lock(m_UniqueObjectsPoolMutex);
     data_by_id&      set = m_Pool.template get<id_tag>();
 
     // only tokens can access this method -> object always exists
