@@ -108,7 +108,7 @@ $(function() {
 <div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;        {</div>
 <div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;            QX_PERF_SCOPE(<span class="stringliteral">&quot;Log lock&quot;</span>);</div>
 <div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160; </div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;            std::lock_guard lock(m_Mutex);</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;            std::lock_guard lock(m_LoggerStreamMutex);</div>
 <div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160; </div>
 <div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;            <span class="keyword">auto</span>&amp; buffers = <a class="code" href="classqx_1_1base__logger__stream.html#a2a5cdad5dcf92486e5832953315100d7">get_log_buffer</a>();</div>
 <div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;            buffers.clear();</div>
