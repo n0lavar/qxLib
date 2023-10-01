@@ -1,7 +1,6 @@
 /**
 
     @file      shader_program.h
-    @brief     Contains qx::base_shader_program class
     @author    Khrapov
     @date      16.01.2020
     @copyright © Nick Khrapov, 2021. All right reserved.
@@ -31,20 +30,8 @@ class base_shader_program
 public:
     QX_NONCOPYABLE(base_shader_program);
 
-    /**
-        @brief base_shader_program object constructor
-    **/
     base_shader_program() = default;
-
-    /**
-        @brief base_shader_program object constructor
-        @param baseShaderProgram - shader program rvalue ref
-    **/
     base_shader_program(base_shader_program&& baseShaderProgram) noexcept;
-
-    /**
-        @brief base_shader_program object destructor
-    **/
     ~base_shader_program() noexcept;
 
     /**
@@ -161,21 +148,8 @@ public:
     **/
     static void DispatchCompute(GLuint nGroupsX, GLuint nGroupsY, GLuint nGroupsZ) noexcept;
 
-    /**
-        @brief  operator==
-        @param  other - other shader program
-        @retval       - true, if objects are equal
-    **/
-    bool operator==(const base_shader_program& other) const noexcept;
-
-    /**
-        @brief  operator=
-        @param  baseShaderProgram - shader program rvalue ref
-        @retval                   - this object reference
-    **/
+    bool                 operator==(const base_shader_program& other) const noexcept;
     base_shader_program& operator=(base_shader_program&& baseShaderProgram) noexcept;
-
-
 
 private:
     GLuint m_nProgram = std::numeric_limits<GLuint>::max();

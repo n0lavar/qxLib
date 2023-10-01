@@ -1,7 +1,6 @@
 /**
 
     @file      ssbo.h
-    @brief     Contains qx::base_ssbo class
     @author    Khrapov
     @date      9.01.2020
     @copyright © Nick Khrapov, 2021. All right reserved.
@@ -26,9 +25,6 @@ namespace qx
 class base_ssbo : public buffer_binding_point_base
 {
 public:
-    /**
-        @brief base_ssbo object constructor
-    **/
     base_ssbo() = default;
 
     /**

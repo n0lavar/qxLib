@@ -1,7 +1,6 @@
 /**
 
     @file      observer.h
-    @brief     Contains qx::subject and qx::observer_token classes
     @author    Khrapov
     @date      6.03.2021
     @copyright © Nick Khrapov, 2021. All right reserved.
@@ -42,9 +41,6 @@ class observer_token_data
     friend class subject;
 
 public:
-    /**
-        @brief observer_token object constructor
-    **/
     observer_token_data() noexcept = default;
 
     /**
@@ -60,9 +56,6 @@ public:
     **/
     observer_token_data(observer_token_data&& other) noexcept;
 
-    /**
-        @brief observer_token object destructor
-    **/
     ~observer_token_data() noexcept;
 
     /**
@@ -71,19 +64,8 @@ public:
     **/
     void reset() noexcept;
 
-    /**
-        @brief  operator=
-        @param  other - other observer_token object rvalue ref
-        @retval       - this object reference
-    **/
     observer_token_data& operator=(observer_token_data&& other) noexcept;
-
-    /**
-        @brief  operator==
-        @param  other - other observer_token object
-        @retval       - true, if objects are equal
-    **/
-    bool operator==(const observer_token_data& other) const noexcept;
+    bool                 operator==(const observer_token_data& other) const noexcept;
 
     /**
         @brief  operator bool
@@ -113,9 +95,6 @@ class base_subject
     friend observer_token_data;
 
 protected:
-    /**
-        @brief base_subject object destructor
-    **/
     virtual ~base_subject() noexcept = default;
 
     /**
@@ -143,9 +122,6 @@ class subject : public base_subject
     class base_iterator : public base_iterator_t
     {
     public:
-        /**
-            @brief base_iterator object constructor
-        **/
         base_iterator() noexcept = default;
 
         /**
@@ -155,41 +131,13 @@ class subject : public base_subject
         **/
         base_iterator(const base_iterator_t& other, subject* pSubject) noexcept;
 
-        /**
-            @brief base_iterator object constructor
-            @param other - other object
-        **/
         base_iterator(const base_iterator& other) noexcept;
-
-        /**
-            @brief base_iterator object constructor
-            @param  - other base_iterator object rvalue ref
-        **/
         base_iterator(base_iterator&&) noexcept = default;
-
-        /**
-            @brief base_iterator object destructor
-        **/
         ~base_iterator() noexcept;
 
-        /**
-            @brief  operator=
-            @param  other - other object
-            @retval       - this object reference
-        **/
         base_iterator& operator=(const base_iterator& other) noexcept;
-
-        /**
-            @brief  operator->
-            @retval - observer object pointer
-        **/
-        observer_t* operator->() noexcept;
-
-        /**
-            @brief  operator*
-            @retval - observer object ref
-        **/
-        observer_t& operator*() noexcept;
+        observer_t*    operator->() noexcept;
+        observer_t&    operator*() noexcept;
 
     private:
         /**
@@ -205,39 +153,12 @@ class subject : public base_subject
     class const_base_iterator : public base_iterator_t
     {
     public:
-        /**
-            @brief const_base_iterator object constructor
-        **/
-        const_base_iterator() noexcept = default;
-
-        /**
-            @brief const_base_iterator object constructor
-            @param - other const_base_iterator object ref
-        **/
+        const_base_iterator() noexcept                           = default;
         const_base_iterator(const const_base_iterator&) noexcept = default;
-
-        /**
-            @brief const_base_iterator object constructor
-            @param  - other const_base_iterator object rvalue ref
-        **/
-        const_base_iterator(const_base_iterator&&) noexcept = default;
-
-        /**
-            @brief const_base_iterator object constructor
-            @param other - other const_base_iterator object ref
-        **/
+        const_base_iterator(const_base_iterator&&) noexcept      = default;
         const_base_iterator(const base_iterator_t& other) noexcept;
 
-        /**
-            @brief  operator->
-            @retval - observer object const pointer
-        **/
         const observer_t* operator->() const noexcept;
-
-        /**
-            @brief  operator*
-            @retval - observer object const ref
-        **/
         const observer_t& operator*() const noexcept;
     };
 
@@ -253,14 +174,7 @@ public:
     QX_NONCOPYABLE(subject);
     QX_MOVABLE(subject);
 
-    /**
-        @brief base_subject object constructor
-    **/
     subject() = default;
-
-    /**
-        @brief subject object destructor
-    **/
     virtual ~subject() override;
 
     /**

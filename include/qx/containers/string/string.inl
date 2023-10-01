@@ -2640,16 +2640,16 @@ struct formatter<qx::basic_string<char_t, traits_t>, char_t>
 // ------------------------------------------- istream / ostream overloading -------------------------------------------
 
 template<class char_t, class traits_t>
-qx::detail::ostream<char_t>& operator<<(qx::detail::ostream<char_t>& os, const qx::basic_string<char_t, traits_t>& str)
+qx::details::ostream<char_t>& operator<<(qx::details::ostream<char_t>& os, const qx::basic_string<char_t, traits_t>& str)
 {
     os << str.data();
     return os;
 }
 
 template<class char_t, class traits_t>
-qx::detail::istream<char_t>& operator>>(qx::detail::istream<char_t>& is, qx::basic_string<char_t, traits_t>& str)
+qx::details::istream<char_t>& operator>>(qx::details::istream<char_t>& is, qx::basic_string<char_t, traits_t>& str)
 {
-    typename qx::detail::istream<traits_t>::iostate ret_bit = qx::detail::istream<traits_t>::goodbit;
+    typename qx::details::istream<traits_t>::iostate ret_bit = qx::details::istream<traits_t>::goodbit;
 
     auto try_push_back = [&str, &is, &ret_bit](char_t ch)
     {
@@ -2662,7 +2662,7 @@ qx::detail::istream<char_t>& operator>>(qx::detail::istream<char_t>& is, qx::bas
         else
         {
             is.unget();
-            ret_bit |= qx::detail::istream<traits_t>::failbit;
+            ret_bit |= qx::details::istream<traits_t>::failbit;
             return false;
         }
     };

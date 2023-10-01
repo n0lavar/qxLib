@@ -1,7 +1,6 @@
 /**
 
     @file      vao.h
-    @brief     Contains qx::base_vao class
     @author    Khrapov
     @date      19.01.2020
     @copyright © Nick Khrapov, 2021. All right reserved.
@@ -27,14 +26,7 @@ namespace qx
 class base_vao : IBuffer
 {
 public:
-    /**
-        @brief base_vao object constructor
-    **/
     base_vao() = default;
-
-    /**
-        @brief base_vao object destructor
-    **/
     virtual ~base_vao();
 
     QX_DECL_IBUFFER

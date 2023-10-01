@@ -1,8 +1,6 @@
 /**
 
     @file      unique_objects_pool.h
-    @brief     Contains qx::unique_objects_pool class
-    @details   ~
     @author    Khrapov
     @date      11.02.2023
     @copyright © Nick Khrapov, 2023. All right reserved.
@@ -81,40 +79,13 @@ public:
         static constexpr u64 kInvalidId = static_cast<u64>(-1);
 
     public:
-        /**
-            @brief token object constructor
-        **/
         token() noexcept = default;
-
-        /**
-            @brief token object constructor
-            @param otherToken - other token
-        **/
         token(const token& otherToken) noexcept;
-
-        /**
-            @brief token object constructor
-            @param otherToken - other token
-        **/
         token(token&& otherToken) noexcept;
 
-        /**
-            @brief  operator=
-            @param  otherToken - other token
-            @retval            - this object reference
-        **/
         token& operator=(const token& otherToken) noexcept;
-
-        /**
-            @brief  operator=
-            @param  otherToken - other token
-            @retval            - this object reference
-        **/
         token& operator=(token&& otherToken) noexcept;
 
-        /**
-            @brief token object destructor
-        **/
         ~token() noexcept;
 
         /**
@@ -130,24 +101,9 @@ public:
         **/
         explicit operator bool() const noexcept;
 
-        /**
-            @brief  operator*
-            @retval  - this object reference
-        **/
         const T& operator*() const noexcept;
-
-        /**
-            @brief  operator->
-            @retval  - this object pointer
-        **/
         const T* operator->() const noexcept;
-
-        /**
-            @brief  operator==
-            @param  other - other token
-            @retval       - true, if objects are equal
-        **/
-        bool operator==(const token& other) const noexcept;
+        bool     operator==(const token& other) const noexcept;
 
     private:
         /**

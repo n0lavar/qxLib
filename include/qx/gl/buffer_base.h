@@ -1,7 +1,6 @@
 /**
 
     @file      buffer_base.h
-    @brief     Contains qx::buffer_base class
     @author    Khrapov
     @date      19.01.2020
     @copyright © Nick Khrapov, 2021. All right reserved.
@@ -27,9 +26,6 @@ namespace qx
 class buffer_base : public IBuffer
 {
 public:
-    /**
-        @brief buffer_base object destructor
-    **/
     virtual ~buffer_base();
 
     QX_DECL_IBUFFER

@@ -1,8 +1,6 @@
 /**
 
     @file      static_buffer.h
-    @brief     Contains qx::static_buffer class
-    @details   ~
     @author    Khrapov
     @date      15.08.2022
     @copyright © Nick Khrapov, 2022. All right reserved.

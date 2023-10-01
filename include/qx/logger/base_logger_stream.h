@@ -1,7 +1,6 @@
 /**
 
     @file      base_logger_stream.h
-    @brief     Contains qx::base_logger_stream class
     @author    Khrapov
     @date      28.07.2021
     @copyright © Nick Khrapov, 2021. All right reserved.
@@ -87,9 +86,6 @@ public:
     **/
     base_logger_stream(bool bAlwaysFlush);
 
-    /**
-        @brief base_logger_stream object destructor
-    **/
     virtual ~base_logger_stream() = default;
 
     /**

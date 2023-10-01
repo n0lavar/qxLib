@@ -1,7 +1,6 @@
 /**
 
     @file      vector2d.h
-    @brief     Contains qx::vector2d class
     @author    Khrapov
     @date      17.02.2020
     @copyright © Nick Khrapov, 2021. All right reserved.
@@ -43,17 +42,7 @@ public:
 
 public:
     vector2d() = default;
-
-    /**
-        @brief vector2d object constructor
-        @param other - other vector rvalue ref
-    **/
     vector2d(vector2d&& other) noexcept;
-
-    /**
-        @brief vector2d object constructor
-        @param other - other vector
-    **/
     vector2d(const vector2d& other);
 
     /**
@@ -72,23 +61,9 @@ public:
     **/
     vector2d(size_type rows, size_type cols, const_reference data);
 
-    /**
-        @brief vector2d object destructor
-    **/
     ~vector2d();
 
-    /**
-        @brief  operator=
-        @param  other - other vector rvalue ref
-        @retval       - this object reference
-    **/
     const vector2d& operator=(vector2d&& other) noexcept;
-
-    /**
-        @brief  operator=
-        @param  other - another vector
-        @retval       - this object reference
-    **/
     const vector2d& operator=(const vector2d& other);
 
     /**

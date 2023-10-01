@@ -1,7 +1,6 @@
 /**
 
     @file      triangular_vector.h
-    @brief     Contains qx::triangular_vector class
     @author    Khrapov
     @date      23.02.2020
     @copyright © Nick Khrapov, 2021. All right reserved.
@@ -48,17 +47,7 @@ public:
 
 public:
     triangular_vector() = default;
-
-    /**
-        @brief triangular_vector object constructor
-        @param other - triangular_vector rvalue ref
-    **/
     triangular_vector(triangular_vector&& other) noexcept;
-
-    /**
-        @brief triangular_vector object constructor
-        @param other - other triangular_vector
-    **/
     triangular_vector(const triangular_vector& other);
 
     /**
@@ -74,23 +63,9 @@ public:
     **/
     triangular_vector(size_type nSideSize, const_reference data);
 
-    /**
-        @brief triangular_vector object destructor
-    **/
     ~triangular_vector();
 
-    /**
-        @brief  operator=
-        @param  other - triangular_vector rvalue ref
-        @retval       - this object reference
-    **/
     const triangular_vector& operator=(triangular_vector&& other) noexcept;
-
-    /**
-        @brief  operator=
-        @param  other - other triangular_vector
-        @retval       - this object reference
-    **/
     const triangular_vector& operator=(const triangular_vector& other);
 
     /**

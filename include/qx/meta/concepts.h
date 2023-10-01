@@ -1,7 +1,6 @@
 /**
 
     @file      concepts.h
-    @brief     Concepts not included in std yet
     @author    Khrapov
     @date      2.11.2021
     @copyright © Nick Khrapov, 2021. All right reserved.
@@ -35,7 +34,7 @@ concept callable_c = requires(T t, args_t&&... args) {
     } -> std::convertible_to<return_t>;
 };
 
-namespace detail
+namespace details
 {
 
 template<class range_t, class T>
@@ -58,10 +57,10 @@ concept is_iterator_t_pointer = requires(range_t t) {
     } -> std::convertible_to<const T*>;
 };
 
-} // namespace detail
+} // namespace details
 
 template<class range_t, class T>
 concept range_of_t_c =
-    detail::is_iterator_arrow_operator_of_t_type<range_t, T> || detail::is_iterator_t_pointer<range_t, T>;
+    details::is_iterator_arrow_operator_of_t_type<range_t, T> || details::is_iterator_t_pointer<range_t, T>;
 
 } // namespace qx

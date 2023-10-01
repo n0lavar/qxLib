@@ -1,7 +1,6 @@
 /**
 
     @file      constexpr_sequence.h
-    @brief     Contains qx::constexpr_sequence class
     @author    Khrapov
     @date      25.08.2020
     @copyright © Nick Khrapov, 2021. All right reserved.
@@ -129,7 +128,7 @@ public:
     }
 };
 
-namespace detail
+namespace details
 {
 
 template<class T, T Term>
@@ -144,13 +143,13 @@ constexpr T multiply(T val)
     return val * Multiplier;
 }
 
-} // namespace detail
+} // namespace details
 
 template<class tag_t = struct counter_tag, class T = int, T Start = 0, T Term = 1>
-using constexpr_counter = constexpr_sequence<tag_t, T, Start, detail::increase<T, Term>>;
+using constexpr_counter = constexpr_sequence<tag_t, T, Start, details::increase<T, Term>>;
 
 template<class tag_t = struct multiplier_tag, class T = int, T Start = 1, T Multiplier = 2>
-using constexpr_multiplier = constexpr_sequence<tag_t, T, Start, detail::multiply<T, Multiplier>>;
+using constexpr_multiplier = constexpr_sequence<tag_t, T, Start, details::multiply<T, Multiplier>>;
 
 } // namespace qx
 

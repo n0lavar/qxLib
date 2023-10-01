@@ -10,7 +10,7 @@
 namespace qx
 {
 
-namespace detail
+namespace details
 {
 
 inline vertex create_vertex(const glm::vec3& pos, bool bUnitLengthPosNormal = false)
@@ -112,7 +112,7 @@ inline geometry create_parallelogram(
                                                                 { fHalfSide1, fHalfSide2, fHalfSide3 },
                                                                 { -fHalfSide1, fHalfSide2, fHalfSide3 } } };
 
-    return detail::create_figure(
+    return details::create_figure(
         parallelogramPositions,
         shape_indices::parallelogram,
         { fHalfSide1, fHalfSide2, fHalfSide3 },
@@ -120,7 +120,7 @@ inline geometry create_parallelogram(
         bUnitLengthPosNormal);
 }
 
-} // namespace detail
+} // namespace details
 
 inline glm::vec3 create_tangent(const glm::vec3& normal)
 {
@@ -150,7 +150,7 @@ inline indices transform_triangle_indices_to_lines(indices_view triangles)
 
 inline geometry create_parallelogram(float fSide1, float fSide2, float fSide3, bool bFlatNormals)
 {
-    return detail::create_parallelogram(fSide1, fSide2, fSide3, bFlatNormals, true);
+    return details::create_parallelogram(fSide1, fSide2, fSide3, bFlatNormals, true);
 }
 
 inline geometry create_parallelogram_lines(float fSide1, float fSide2, float fSide3)
@@ -164,7 +164,7 @@ inline geometry create_parallelogram_lines(float fSide1, float fSide2, float fSi
 
 inline geometry create_cube(float fSide, bool bFlatNormals)
 {
-    return detail::create_parallelogram(fSide, fSide, fSide, bFlatNormals, false);
+    return details::create_parallelogram(fSide, fSide, fSide, bFlatNormals, false);
 }
 
 inline geometry create_cube_lines(float fSide)
@@ -178,8 +178,8 @@ inline geometry create_cube_lines(float fSide)
 
 inline geometry create_icosahedron(float fRadius, bool bFlatNormals)
 {
-    return detail::create_figure(
-        detail::create_icosahedron_positions(fRadius),
+    return details::create_figure(
+        details::create_icosahedron_positions(fRadius),
         shape_indices::icosahedron,
         { fRadius, fRadius, fRadius },
         bFlatNormals);
@@ -196,7 +196,7 @@ inline geometry create_icosahedron_lines(float fRadius)
 
 inline geometry create_icosphere(float fRadius, size_t nDivides, bool bFlatNormals)
 {
-    const auto icosahedronPositions = detail::create_icosahedron_positions(fRadius);
+    const auto icosahedronPositions = details::create_icosahedron_positions(fRadius);
 
     std::vector<glm::vec3> icospherePositions = std::vector(icosahedronPositions.cbegin(), icosahedronPositions.cend());
 
@@ -264,7 +264,7 @@ inline geometry create_icosphere(float fRadius, size_t nDivides, bool bFlatNorma
         prevLevelIndices = std::move(thisLevelIndices);
     }
 
-    return detail::create_figure(icospherePositions, prevLevelIndices, { fRadius, fRadius, fRadius }, bFlatNormals);
+    return details::create_figure(icospherePositions, prevLevelIndices, { fRadius, fRadius, fRadius }, bFlatNormals);
 }
 
 inline geometry create_icosphere_lines(float fRadius, size_t nDivides)
@@ -281,10 +281,10 @@ inline geometry create_rect(float fWidth, float fHeight)
     const float fHalfWidth  = fWidth / 2.f;
     const float fHalfHeight = fHeight / 2.f;
 
-    return { { { detail::create_vertex({ fHalfWidth, fHalfHeight, 0.f }),
-                 detail::create_vertex({ fHalfWidth, -fHalfHeight, 0.f }),
-                 detail::create_vertex({ -fHalfWidth, -fHalfHeight, 0.f }),
-                 detail::create_vertex({ -fHalfWidth, fHalfHeight, 0.f }) } },
+    return { { { details::create_vertex({ fHalfWidth, fHalfHeight, 0.f }),
+                 details::create_vertex({ fHalfWidth, -fHalfHeight, 0.f }),
+                 details::create_vertex({ -fHalfWidth, -fHalfHeight, 0.f }),
+                 details::create_vertex({ -fHalfWidth, fHalfHeight, 0.f }) } },
              std::vector(shape_indices::rect.cbegin(), shape_indices::rect.cend()),
              { fHalfWidth, fHalfHeight, 0.f },
              draw_mode::triangles_list };
@@ -299,11 +299,11 @@ inline geometry create_rect_lines(float fWidth, float fHeight)
     const float fHalfHeight = fLinesHeight / 2.f;
 
     // one additional line for missing corner pixel fix
-    return { { { detail::create_vertex({ fHalfWidth, fHalfHeight, 0.f }),
-                 detail::create_vertex({ fHalfWidth, -fHalfHeight, 0.f }),
-                 detail::create_vertex({ -fHalfWidth, -fHalfHeight, 0.f }),
-                 detail::create_vertex({ -fHalfWidth, -fHalfHeight - 1.f, 0.f }),
-                 detail::create_vertex({ -fHalfWidth, fHalfHeight, 0.f }) } },
+    return { { { details::create_vertex({ fHalfWidth, fHalfHeight, 0.f }),
+                 details::create_vertex({ fHalfWidth, -fHalfHeight, 0.f }),
+                 details::create_vertex({ -fHalfWidth, -fHalfHeight, 0.f }),
+                 details::create_vertex({ -fHalfWidth, -fHalfHeight - 1.f, 0.f }),
+                 details::create_vertex({ -fHalfWidth, fHalfHeight, 0.f }) } },
              { 0, 1, 2, 3, 4, 0 },
              { fHalfWidth + 1.f, fHalfHeight + 1.f, 0.f },
              draw_mode::lines_strip };
@@ -330,13 +330,13 @@ inline geometry create_ellipse(float fHorRadius, float fVertRadius, size_t nSide
     ret.geomVertices.reserve(nVertices);
 
     ret.geomIndices.push_back(0);
-    ret.geomVertices.emplace_back(detail::create_vertex({ 0.f, 0.f, 0.f }));
+    ret.geomVertices.emplace_back(details::create_vertex({ 0.f, 0.f, 0.f }));
 
     for (size_t i = 1; i < nVertices; ++i)
     {
         ret.geomIndices.push_back(static_cast<index_type>(i));
         ret.geomVertices.emplace_back(
-            detail::create_vertex({ fHorRadius * std::cos(static_cast<float>(i) * f2Pi / fSides),
+            details::create_vertex({ fHorRadius * std::cos(static_cast<float>(i) * f2Pi / fSides),
                                     fVertRadius * std::sin(static_cast<float>(i) * f2Pi / fSides),
                                     0.f }));
     }

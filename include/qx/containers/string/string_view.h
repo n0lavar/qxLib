@@ -1,7 +1,6 @@
 /**
 
     @file      string_view.h
-    @brief     Contains string_view classes/usings
     @author    Khrapov
     @date      11.06.2023
     @copyright © Nick Khrapov, 2023. All right reserved.

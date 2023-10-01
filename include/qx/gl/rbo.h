@@ -1,7 +1,6 @@
 /**
 
     @file      rbo.h
-    @brief     Contains qx::base_rbo class
     @author    Khrapov
     @date      20.01.2020
     @copyright © Nick Khrapov, 2021. All right reserved.
@@ -27,9 +26,6 @@ namespace qx
 class base_rbo : IBuffer
 {
 public:
-    /**
-        @brief base_rbo object destructor
-    **/
     virtual ~base_rbo();
 
     /**

@@ -1,7 +1,6 @@
 /**
 
     @file      shaders.h
-    @brief     Contains shaders classes
     @author    Khrapov
     @date      17.06.2019
     @copyright © Nick Khrapov, 2021. All right reserved.
@@ -46,14 +45,7 @@ public:
     QX_NONCOPYABLE(shader_base);
     QX_MOVABLE(shader_base);
 
-    /**
-        @brief shader_base object constructor
-    **/
     shader_base() = default;
-
-    /**
-        @brief shader_base object destructor
-    **/
     ~shader_base();
 
     /**

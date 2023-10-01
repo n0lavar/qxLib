@@ -1,7 +1,6 @@
 /**
 
     @file      singleton.h
-    @brief     Singleton implementation
     @author    Khrapov
     @date      17.06.2019
     @copyright © Nick Khrapov, 2021. All right reserved.

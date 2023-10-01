@@ -1,7 +1,6 @@
 /**
 
     @file      rect.h
-    @brief     Contains qx::rect class
     @author    Khrapov
     @date      12.11.2021
     @copyright © Nick Khrapov, 2021. All right reserved.
@@ -41,9 +40,6 @@ public:
 public:
     QX_COPYMOVABLE(basic_rect);
 
-    /**
-        @brief basic_rect object constructor
-    **/
     constexpr basic_rect() noexcept = default;
 
     /**
@@ -205,18 +201,7 @@ public:
     **/
     constexpr std::optional<basic_rect> overlap(const basic_rect& other) const noexcept;
 
-    /**
-        @brief  operator==
-        @param  other - other rect
-        @retval       - true, if objects are equal
-    **/
     constexpr bool operator==(const basic_rect& other) const noexcept;
-
-    /**
-        @brief  operator!=
-        @param  other - other rect
-        @retval       - true, if objects are not equal
-    **/
     constexpr bool operator!=(const basic_rect& other) const noexcept;
 
 private:

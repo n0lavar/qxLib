@@ -1,8 +1,6 @@
 /**
 
     @file      utils.h
-    @brief     Contains various utils for containers
-    @details   ~
     @author    Khrapov
     @date      6.08.2022
     @copyright © Nick Khrapov, 2022. All right reserved.
@@ -23,15 +21,7 @@ namespace qx
     @param  itEnd        - end iterator
 **/
 template<class iterator_t>
-inline void destruct(iterator_t itStart, iterator_t itEnd)
-{
-    using T = typename iterator_t::value_type;
-    if constexpr (std::is_compound_v<T>)
-    {
-        for (auto it = itStart; it != itEnd; ++it)
-            it->~T();
-    }
-}
+inline void destruct(iterator_t itStart, iterator_t itEnd);
 
 /**
     @brief  Fill array with value in constructor
@@ -41,12 +31,7 @@ inline void destruct(iterator_t itStart, iterator_t itEnd)
     @retval          - filled array
 **/
 template<size_t N, class T>
-constexpr auto make_array(T init_val = T())
-{
-    std::array<T, N> ret;
-    ret.fill(init_val);
-    return ret;
-}
+constexpr auto make_array(T init_val = T());
 
 /**
     @brief  Join arrays at compile-time
@@ -60,13 +45,7 @@ constexpr auto make_array(T init_val = T())
 template<class T, std::size_t LeftLength, std::size_t RightLength>
 constexpr std::array<T, LeftLength + RightLength> join_arrays(
     std::array<T, LeftLength>  rhs,
-    std::array<T, RightLength> lhs)
-{
-    std::array<T, LeftLength + RightLength> res;
-    auto                                    current = std::copy(rhs.begin(), rhs.end(), res.begin());
-    std::copy(lhs.begin(), lhs.end(), current);
-    return res;
-}
+    std::array<T, RightLength> lhs);
 
 /**
     @brief  Create a container by constructing each element from the corresponding
@@ -77,15 +56,7 @@ constexpr std::array<T, LeftLength + RightLength> join_arrays(
     @retval                    - target container
 **/
 template<class result_container_t, class container_t>
-result_container_t make_container(const container_t& from)
-{
-    result_container_t container;
-
-    for (const auto& item : from)
-        container.insert(container.end(), typename result_container_t::value_type(item));
-
-    return container;
-}
+result_container_t make_container(const container_t& from);
 
 /**
     @brief  Get the size of memory allocated for container elements
@@ -94,9 +65,8 @@ result_container_t make_container(const container_t& from)
     @retval             - the size of memory allocated for container elements
 **/
 template<class container_t>
-constexpr size_t bytes_size(const container_t& container)
-{
-    return container.size() * sizeof(typename container_t::value_type);
-}
+constexpr size_t bytes_size(const container_t& container);
 
 } // namespace qx
+
+#include <qx/containers/utils.inl>

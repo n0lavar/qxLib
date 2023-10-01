@@ -21,13 +21,13 @@
 namespace qx
 {
 
-namespace detail
+namespace details
 {
 
 template<class T>
 concept has_get_class_id_static = requires(T t) { T::get_class_id_static(); };
 
-} // namespace detail
+} // namespace details
 
 /**
     @brief  Get class id if C is supported qx RTTI system
@@ -37,7 +37,7 @@ concept has_get_class_id_static = requires(T t) { T::get_class_id_static(); };
 template<class C>
 inline class_identificator get_class_id() noexcept
 {
-    if constexpr (detail::has_get_class_id_static<C>)
+    if constexpr (details::has_get_class_id_static<C>)
     {
         return C::get_class_id_static();
     }
@@ -78,6 +78,11 @@ public:
     bool is() const noexcept
     {
         return get_class_id() == rtti_type::get_class_id_static();
+    }
+
+    bool is(string_view svClassName) const noexcept
+    {
+        return svClassName == get_class_name();
     }
 
     virtual bool is_derived_from_id(class_identificator id) const noexcept

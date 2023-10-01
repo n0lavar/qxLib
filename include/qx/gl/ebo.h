@@ -1,7 +1,6 @@
 /**
 
     @file      ebo.h
-    @brief     Contains qx::base_ebo class
     @author    Khrapov
     @date      19.01.2020
     @copyright © Nick Khrapov, 2021. All right reserved.

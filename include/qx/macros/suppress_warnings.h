@@ -1,7 +1,6 @@
 /**
 
     @file      suppress_warnings.h
-    @brief     Suppress warnings macros
     @author    Khrapov
     @date      11.11.2020
     @copyright © Nick Khrapov, 2021. All right reserved.

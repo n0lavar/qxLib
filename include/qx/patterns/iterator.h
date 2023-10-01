@@ -1,7 +1,6 @@
 /**
 
     @file      iterator.h
-    @brief     Contains random access iterator classes
     @author    Khrapov
     @date      27.07.2019
     @copyright © Nick Khrapov, 2021. All right reserved.

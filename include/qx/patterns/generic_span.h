@@ -1,8 +1,6 @@
 /**
 
     @file      generic_span.h
-    @brief     Contains qx::generic_span class
-    @details   ~
     @author    Khrapov
     @date      20.11.2022
     @copyright © Nick Khrapov, 2022. All right reserved.
@@ -10,7 +8,12 @@
 **/
 #pragma once
 
-#include <functional>
+#include <qx/meta/copy_qualifiers.h>
+
+#ifndef QX_CONF_GENERIC_SPAN_FUNCTION
+    #include <functional>
+    #define QX_CONF_GENERIC_SPAN_FUNCTION std::function
+#endif
 
 namespace qx
 {
@@ -18,7 +21,7 @@ namespace qx
 struct default_generic_span_traits
 {
     template<class... args_t>
-    using function_type = std::function<args_t...>;
+    using function_type = QX_CONF_GENERIC_SPAN_FUNCTION<args_t...>;
 };
 
 /**
@@ -39,21 +42,22 @@ struct default_generic_span_traits
 template<class T, class traits_t = default_generic_span_traits>
 class generic_span
 {
+    template<class container_t>
+    using container_value = std::remove_reference_t<decltype(*std::declval<container_t>().begin())>;
+
+    template<class target_t>
+    using qualified_type = copy_qualifiers_t<std::remove_reference_t<std::remove_pointer_t<T>>, target_t>;
+
 public:
     using traits = traits_t;
     template<class... args_t>
     using function_type  = typename traits_t::template function_type<args_t...>;
     using generator_type = function_type<T*()>;
 
-    template<class container_t>
-    using container_value = decltype(*std::declval<container_t>().begin());
-
-    using element_type    = T;
-    using value_type      = std::remove_cv_t<T>;
-    using pointer         = T*;
-    using const_pointer   = const T*;
-    using reference       = T&;
-    using const_reference = const T&;
+    using element_type = T;
+    using value_type   = std::remove_cv_t<T>;
+    using pointer      = T*;
+    using reference    = T&;
 
     class iterator
     {
@@ -69,7 +73,7 @@ public:
     public:
         constexpr iterator() noexcept                = default;
         constexpr iterator(const iterator&) noexcept = default;
-        constexpr iterator(generator_type generator) noexcept;
+        constexpr iterator(generator_type generator, size_type nIndex) noexcept;
         [[nodiscard]] constexpr reference operator*() const noexcept;
         [[nodiscard]] constexpr pointer   operator->() const noexcept;
         constexpr iterator&               operator++() noexcept;
@@ -80,24 +84,12 @@ public:
 
     private:
         generator_type m_Generator;
+        size_type      m_nIndex = 0;
     };
 
 public:
-    /**
-        @brief generic_span object constructor
-    **/
-    generic_span() noexcept = default;
-
-    /**
-        @brief generic_span object constructor
-        @param  - other span
-    **/
-    generic_span(generic_span&&) noexcept = default;
-
-    /**
-        @brief generic_span object constructor
-        @param  - other span
-    **/
+    generic_span() noexcept                    = default;
+    generic_span(generic_span&&) noexcept      = default;
     generic_span(const generic_span&) noexcept = default;
 
     /**
@@ -115,18 +107,9 @@ public:
         @param  valueAdapter - function which transforms Container::value_type to T*
     **/
     template<class container_t>
-    generic_span(container_t& container, function_type<pointer(container_value<container_t>&)> valueAdapter) noexcept;
-
-    /**
-        @brief  generic_span object constructor
-        @tparam container_t - any container, which adapter satisfies forward iterator concept
-        @param  container      - container instance. container must not be edited until adapter death
-        @param  valueAdapter   - function which transforms Container::value_type to T*
-    **/
-    template<class container_t>
     generic_span(
-        const container_t&                                    container,
-        function_type<pointer(container_value<container_t>&)> valueAdapter) noexcept;
+        container_t&                                                            container,
+        function_type<reference(qualified_type<container_value<container_t>>&)> valueAdapter) noexcept;
 
     /**
         @brief  operator=
@@ -137,18 +120,7 @@ public:
     template<class container_t>
     generic_span& operator=(container_t& container) noexcept;
 
-    /**
-        @brief  operator=
-        @param   - other span
-        @retval  - this object reference
-    **/
-    generic_span& operator=(generic_span&&) noexcept = default;
-
-    /**
-        @brief  operator=
-        @param   - other span
-        @retval  - this object reference
-    **/
+    generic_span& operator=(generic_span&&) noexcept      = default;
     generic_span& operator=(const generic_span&) noexcept = default;
 
     /**

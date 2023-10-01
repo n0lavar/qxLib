@@ -10,7 +10,7 @@
 namespace qx
 {
 
-namespace detail
+namespace details
 {
 
 /**
@@ -55,7 +55,7 @@ private:
     std::unordered_map<size_t, color> m_StringToColor;
 };
 
-} // namespace detail
+} // namespace details
 
 constexpr color::color(float fRed, float fGreen, float fBlue, float fAlpha) noexcept
 {
@@ -294,17 +294,17 @@ constexpr color color::brighten(const color& other, float fPercent) noexcept
 inline bool color::add_color_to_mapping(string_view svColorName, int nRed, int nGreen, int nBlue) noexcept
 {
     string sName = svColorName;
-    detail::string_to_color_converter::get_instance().add(string_hash(sName), color(nRed, nGreen, nBlue));
+    details::string_to_color_converter::get_instance().add(string_hash(sName), color(nRed, nGreen, nBlue));
 
     sName.remove_all(QX_TEXT('_'));
-    detail::string_to_color_converter::get_instance().add(string_hash(sName), color(nRed, nGreen, nBlue));
+    details::string_to_color_converter::get_instance().add(string_hash(sName), color(nRed, nGreen, nBlue));
 
     return true;
 }
 
 inline std::optional<color> color::from_string(string_view svColorName) noexcept
 {
-    if (const auto optColor = detail::string_to_color_converter::get_instance().get(string_hash(svColorName)))
+    if (const auto optColor = details::string_to_color_converter::get_instance().get(string_hash(svColorName)))
         return *optColor;
 
     std::optional<color> optColor;

@@ -99,7 +99,7 @@ private:
     static inline std::map<string_view, factory>         m_FactoriesByName;
 };
 
-namespace detail
+namespace details
 {
 
 template<class base_class_t, class T, class... args_t>
@@ -120,7 +120,7 @@ static std::shared_ptr<base_class_t> create_shared(args_t&&... args)
         return nullptr;
 }
 
-} // namespace detail
+} // namespace details
 
 /**
     @def     QX_REGISTER_UNIQUE_CREATOR
@@ -141,7 +141,7 @@ static std::shared_ptr<base_class_t> create_shared(args_t&&... args)
 #define QX_REGISTER_UNIQUE_CONSTRUCTOR(...)                                             \
 private:                                                                                \
     static inline volatile bool QX_LINE_NAME(s_bRegistered) = Creator::_register_class( \
-        qx::detail::create_unique<CreatorRoot, ThisClass, __VA_ARGS__>,                 \
+        qx::details::create_unique<CreatorRoot, ThisClass, __VA_ARGS__>,                 \
         get_class_id_static(),                                                          \
         get_class_name_static())
 
@@ -165,7 +165,7 @@ protected:                              \
 #define QX_REGISTER_SHARED_CONSTRUCTOR(...)                                             \
 private:                                                                                \
     static inline volatile bool QX_LINE_NAME(s_bRegistered) = Creator::_register_class( \
-        qx::detail::create_shared<CreatorRoot, ThisClass, __VA_ARGS__>,                 \
+        qx::details::create_shared<CreatorRoot, ThisClass, __VA_ARGS__>,                 \
         get_class_id_static(),                                                          \
         get_class_name_static())
 

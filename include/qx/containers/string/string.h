@@ -1,7 +1,6 @@
 /**
 
     @file      string.h
-    @brief     Contains qx::string class
     @author    Khrapov
     @date      4.09.2019
     @copyright © Nick Khrapov, 2021. All right reserved.
@@ -27,7 +26,7 @@ namespace qx
 template<class char_t, class traits_t = char_traits<char_t>>
 class basic_string;
 
-namespace detail
+namespace details
 {
 
 template<class char_t>
@@ -36,12 +35,12 @@ using ostream = std::basic_ostream<char_t>;
 template<class char_t>
 using istream = std::basic_istream<char_t>;
 
-} // namespace detail
+} // namespace details
 
 } // namespace qx
 
 template<class char_t, class traits_t>
-qx::detail::istream<char_t>& operator>>(qx::detail::istream<char_t>& is, qx::basic_string<char_t, traits_t>& str);
+qx::details::istream<char_t>& operator>>(qx::details::istream<char_t>& is, qx::basic_string<char_t, traits_t>& str);
 
 namespace qx
 {
@@ -64,8 +63,8 @@ template<class char_t, class traits_t>
 class basic_string
 {
     template<class _char_t, class _traits_t>
-    friend qx::detail::istream<_char_t>& ::operator>>(
-        qx::detail::istream<_char_t>&     is,
+    friend qx::details::istream<_char_t>& ::operator>>(
+        qx::details::istream<_char_t>&    is,
         basic_string<_char_t, _traits_t>& str);
 
 public:
@@ -89,9 +88,6 @@ public:
     QX_IMPL_CONTAINER(basic_string);
 
 public:
-    /**
-        @brief basic_string object constructor
-    **/
     basic_string() noexcept = default;
 
     /**
@@ -143,9 +139,6 @@ public:
     template<range_of_t_c<char_t> string_t>
     basic_string(const string_t& sAnother) noexcept;
 
-    /**
-        @brief basic_string object destructor
-    **/
     ~basic_string() noexcept;
 
     /**
@@ -1517,270 +1510,59 @@ public:
     template<range_of_t_c<char_t> string_t>
     bool contains(const string_t& sStr) const noexcept;
 
-    /**
-        @brief  operator=
-        @param  pszSource - psz to assign
-        @retval           - this object reference
-    **/
     basic_string& operator=(const_pointer pszSource) noexcept;
-
-    /**
-        @brief  operator=
-        @param  sStr - string to assign
-        @retval      - this object reference
-    **/
     basic_string& operator=(basic_string&& sStr) noexcept;
-
-    /**
-        @brief  operator=
-        @param  sStr - string to assign
-        @retval      - this object reference
-    **/
     basic_string& operator=(const basic_string& sStr) noexcept;
-
-    /**
-        @brief  operator=
-        @tparam string_t - string-ish type, satisfying the "range_of_t_c" concept
-        @param  sStr     - string to assign
-        @retval          - this object reference
-    **/
     template<range_of_t_c<char_t> string_t>
     basic_string& operator=(const string_t& sStr) noexcept;
 
-    /**
-        @brief  operator+=
-        @param  chSymbol - char to concat
-        @retval          - this object reference
-    **/
     basic_string& operator+=(value_type chSymbol) noexcept;
-
-    /**
-        @brief  operator+=
-        @param  pszSource - psz to concat
-        @retval           - this object reference
-    **/
     basic_string& operator+=(const_pointer pszSource) noexcept;
-
-    /**
-        @brief  operator+=
-        @param  sStr - string to concat
-        @retval      - this object reference
-    **/
     basic_string& operator+=(const basic_string& sStr) noexcept;
-
-    /**
-        @brief  operator+=
-        @tparam string_t - string-ish type, satisfying the "range_of_t_c" concept
-        @param  sStr     - string to concat
-        @retval          - this object reference
-    **/
     template<range_of_t_c<char_t> string_t>
     basic_string& operator+=(const string_t& sStr) noexcept;
 
-    /**
-        @brief  operator==
-        @param  chSymbol - char to compare
-        @retval          - true, if objects are equal
-    **/
     bool operator==(value_type chSymbol) const noexcept;
-
-    /**
-        @brief  operator==
-        @param  pszSource - psz to compare
-        @retval           - true, if objects are equal
-    **/
     bool operator==(const_pointer pszSource) const noexcept;
-
-    /**
-        @brief  operator==
-        @param  sStr - string to compare
-        @retval      - true, if objects are equal
-    **/
     bool operator==(const basic_string& sStr) const noexcept;
-
-    /**
-        @brief  operator==
-        @tparam string_t - string-ish type, satisfying the "range_of_t_c" concept
-        @param  sStr     - string to compare
-        @retval          - true, if objects are equal
-    **/
     template<range_of_t_c<char_t> string_t>
     bool operator==(const string_t& sStr) const noexcept;
 
-    /**
-        @brief  operator!=
-        @param  chSymbol - char to compare
-        @retval          - true, if objects are not equal
-    **/
     bool operator!=(value_type chSymbol) const noexcept;
-
-    /**
-        @brief  operator!=
-        @param  pszSource - psz to compare
-        @retval           - true, if objects are not equal
-    **/
     bool operator!=(const_pointer pszSource) const noexcept;
-
-    /**
-        @brief  operator!=
-        @param  sStr - string to compare
-        @retval      - true, if objects are not equal
-    **/
     bool operator!=(const basic_string& sStr) const noexcept;
-
-    /**
-        @brief  operator!=
-        @tparam string_t - string-ish type, satisfying the "range_of_t_c" concept
-        @param  sStr     - string to compare
-        @retval          - true, if objects are not equal
-    **/
     template<range_of_t_c<char_t> string_t>
     bool operator!=(const string_t& sStr) const noexcept;
 
-    /**
-        @brief  operator<
-        @param  chSymbol - char to compare
-        @retval          - true, if left object is less than right
-    **/
     bool operator<(value_type chSymbol) const noexcept;
-
-    /**
-        @brief  operator<
-        @param  pszSource - psz to compare
-        @retval           - true, if left object is less than right
-    **/
     bool operator<(const_pointer pszSource) const noexcept;
-
-    /**
-        @brief  operator<
-        @param  sStr - string to compare
-        @retval      - true, if left object is less than right
-    **/
     bool operator<(const basic_string& sStr) const noexcept;
-
-    /**
-        @brief  operator<
-        @tparam string_t - string-ish type, satisfying the "range_of_t_c" concept
-        @param  sStr     - string to compare
-        @retval          - true, if left object is less than right
-    **/
     template<range_of_t_c<char_t> string_t>
     bool operator<(const string_t& sStr) const noexcept;
 
-    /**
-        @brief  operator<=
-        @param  chSymbol - char to compare
-        @retval          - true, if left object is less or equal than right
-    **/
     bool operator<=(value_type chSymbol) const noexcept;
-
-    /**
-        @brief  operator<=
-        @param  pszSource - psz to compare
-        @retval           - true, if left object is less or equal than right
-    **/
     bool operator<=(const_pointer pszSource) const noexcept;
-
-    /**
-        @brief  operator<=
-        @param  sStr - string to compare
-        @retval      - true, if left object is less or equal than right
-    **/
     bool operator<=(const basic_string& sStr) const noexcept;
-
-    /**
-        @brief  operator<=
-        @tparam string_t - string-ish type, satisfying the "range_of_t_c" concept
-        @param  sStr     - string to compare
-        @retval          - true, if left object is less or equal than right
-    **/
     template<range_of_t_c<char_t> string_t>
     bool operator<=(const string_t& sStr) const noexcept;
 
-    /**
-        @brief  operator>
-        @param  chSymbol - char to compare
-        @retval          - true, if left object is greater than right
-    **/
     bool operator>(value_type chSymbol) const noexcept;
-
-    /**
-        @brief  operator>
-        @param  pszSource - psz to compare
-        @retval           - true, if left object is greater than right
-    **/
     bool operator>(const_pointer pszSource) const noexcept;
-
-    /**
-        @brief  operator>
-        @param  sStr - string to compare
-        @retval      - true, if left object is greater than right
-    **/
     bool operator>(const basic_string& sStr) const noexcept;
-
-    /**
-        @brief  operator>
-        @tparam string_t - string-ish type, satisfying the "range_of_t_c" concept
-        @param  sStr     - string to compare
-        @retval          - true, if left object is greater than right
-    **/
     template<range_of_t_c<char_t> string_t>
     bool operator>(const string_t& sStr) const noexcept;
 
-    /**
-        @brief  operator>=
-        @param  chSymbol - char to compare
-        @retval          - true, if left object is greater or equal than right
-    **/
     bool operator>=(value_type chSymbol) const noexcept;
-
-    /**
-        @brief  operator>=
-        @param  pszSource - psz to compare
-        @retval           - true, if left object is greater or equal than right
-    **/
     bool operator>=(const_pointer pszSource) const noexcept;
-
-    /**
-        @brief  operator>=
-        @param  sStr - string to compare
-        @retval      - true, if left object is greater or equal than right
-    **/
     bool operator>=(const basic_string& sStr) const noexcept;
-
-    /**
-        @brief  operator>=
-        @tparam string_t - string-ish type, satisfying the "range_of_t_c" concept
-        @param  sStr     - string to compare
-        @retval          - true, if left object is greater or equal than right
-    **/
     template<range_of_t_c<char_t> string_t>
     bool operator>=(const string_t& sStr) const noexcept;
 
-    /**
-        @brief  operator[]
-        @param  nSymbol - number of char in the string
-        @retval         - char on nSymbol position
-    **/
-    reference operator[](size_type nSymbol) noexcept;
-
-    /**
-        @brief  operator[]
-        @param  nSymbol - number of char in the string
-        @retval         - char on nSymbol position
-    **/
+    reference       operator[](size_type nSymbol) noexcept;
     const_reference operator[](size_type nSymbol) const noexcept;
 
-    /**
-        @brief  operator string_view
-        @retval string_view of this string
-    **/
     operator string_view() const noexcept;
 
-    /**
-        @brief  operator bool
-        @retval  - true if string is not empty
-    **/
     explicit operator bool() const noexcept;
 
 private:

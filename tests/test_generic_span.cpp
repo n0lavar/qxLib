@@ -74,14 +74,14 @@ void TestContainerWithAdapter()
     container_t<_NotT>  container { _NotT { 'a' }, _NotT { 'b' }, _NotT { 'c' }, _NotT { 'd' } };
     qx::generic_span<T> span(
         container,
-        [](_NotT& notT)
+        [](_NotT& notT) -> T&
         {
-            return &notT.value;
+            return notT.value;
         });
     EXPECT_FALSE(span.empty());
 
     container_t<_NotT> newContainer;
-    for (T value : span)
+    for (qx::copy_qualifiers_t<decltype(container), T>& value : span)
         newContainer.insert(newContainer.end(), _NotT { value });
 
     EXPECT_EQ(container, newContainer);

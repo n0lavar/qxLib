@@ -1,7 +1,6 @@
 /**
 
     @file      components.h
-    @brief     Contains qx::components class
     @author    Khrapov
     @date      7.03.2021
     @copyright © Nick Khrapov, 2021. All right reserved.
@@ -40,7 +39,7 @@ public:
     /**
 
         @class   iterator
-        @brief   Iterator to hide dereference implementation detail 
+        @brief   Iterator to hide dereference implementation details 
         @tparam  super_class_t - super class type
         @author  Khrapov
         @date    8.08.2021
@@ -61,7 +60,7 @@ public:
     /**
 
         @class   const_iterator
-        @brief   Const iterator to hide dereference implementation detail
+        @brief   Const iterator to hide dereference implementation details
         @tparam  super_class_t - super class type
         @author  Khrapov
         @date    8.08.2021

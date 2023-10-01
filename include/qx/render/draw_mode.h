@@ -1,7 +1,6 @@
 /**
 
     @file      draw_mode.h
-    @brief     Contains qx::draw_mode enum
     @author    Khrapov
     @date      9.04.2021
     @copyright © Nick Khrapov, 2021. All right reserved.

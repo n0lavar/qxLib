@@ -1,8 +1,6 @@
 /**
 
     @file      contains.h
-    @brief     Contains "contains" functions (ba-dam-tss)
-    @details   ~
     @author    Khrapov
     @date      6.08.2022
     @copyright © Nick Khrapov, 2022. All right reserved.

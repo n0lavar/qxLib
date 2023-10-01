@@ -1,8 +1,6 @@
 /**
 
     @file      copyable_movable.h
-    @brief     Contains macros to set class as copyable/movable
-    @details   ~
     @author    Khrapov
     @date      7.08.2022
     @copyright © Nick Khrapov, 2022. All right reserved.

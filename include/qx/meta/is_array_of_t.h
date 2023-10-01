@@ -1,8 +1,6 @@
 /**
 
     @file      is_array_of_t.h
-    @brief     Contains qx::is_array_of_t trait
-    @details   ~
     @author    Khrapov
     @date      20.12.2022
     @copyright © Nick Khrapov, 2022. All right reserved.
@@ -20,7 +18,7 @@ namespace qx
 
 /**
     @struct  is_array_of_t
-    @detaild Check if array_t is an array of T
+    @details Check if array_t is an array of T
     @tparam  array_t - possible array type
     @tparam  T       - array element type
 **/

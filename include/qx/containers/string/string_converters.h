@@ -1,7 +1,6 @@
 /**
 
     @file      string_converters.h
-    @brief     Contains string converters
     @author    Khrapov
     @date      24.11.2021
     @copyright © Nick Khrapov, 2021. All right reserved.

@@ -1,7 +1,6 @@
 /**
 
     @file      common.h
-    @brief     Useful macros
     @author    Khrapov
     @date      17.06.2019
     @copyright © Nick Khrapov, 2021. All right reserved.
@@ -36,7 +35,7 @@
 #define _QX_JOIN(symbol1, symbol2)    _QX_DO_JOIN(symbol1, symbol2)
 #define _QX_DO_JOIN(symbol1, symbol2) symbol1##symbol2
 
-namespace qx::detail
+namespace qx::details
 {
 
 constexpr const char_type* last_slash(const char_type* str)
@@ -52,14 +51,14 @@ constexpr const char_type* last_slash(const char_type* str)
     return pszLastSlash + 1;
 }
 
-} // namespace qx::detail
+} // namespace qx::details
 
 /**
     @def   QX_SHORT_FILE
     @brief Cuts full absolute path to the file name only
            ex: "C:\folder1\foler2\file.h"  =>  "file.h"
 **/
-#define QX_SHORT_FILE qx::detail::last_slash(QX_TEXT(__FILE__))
+#define QX_SHORT_FILE qx::details::last_slash(QX_TEXT(__FILE__))
 
 /**
     @def   QX_SINGLE_ARGUMENT

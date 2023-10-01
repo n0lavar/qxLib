@@ -1,7 +1,6 @@
 /**
 
     @file      config.h
-    @brief     Config macros
     @author    Khrapov
     @date      25.09.2020
     @copyright © Nick Khrapov, 2021. All right reserved.

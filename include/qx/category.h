@@ -1,8 +1,6 @@
 /**
 
     @file      category.h
-    @brief     Contains category class
-    @details   ~
     @author    Khrapov
     @date      5.12.2022
     @copyright © Nick Khrapov, 2022. All right reserved.
@@ -59,6 +57,12 @@ class category
     static constexpr auto kDefaultColor = color::white();
 
 public:
+    constexpr category()                           = default;
+    constexpr category(const category&)            = default;
+    constexpr category(category&&)                 = default;
+    constexpr category& operator=(const category&) = default;
+    constexpr category& operator=(category&&)      = default;
+
     /**
         @brief  category object constructor
         @param  pszName        - category name. For ex. CatRendering or CatWidgets
@@ -76,7 +80,7 @@ public:
 
     /**
         @brief  Get category name
-        @retval  -category  name
+        @retval - category name
     **/
     constexpr const char_type* get_name() const noexcept;
 
@@ -94,9 +98,9 @@ public:
     constexpr verbosity get_verbosity() const noexcept;
 
 private:
-    const color            m_Color     = kDefaultColor;
-    const char_type* const m_pszName   = nullptr;
-    verbosity              m_Verbosity = verbosity::very_verbose;
+    color            m_Color     = kDefaultColor;
+    const char_type* m_pszName   = nullptr;
+    verbosity        m_Verbosity = verbosity::log;
 };
 
 } // namespace qx

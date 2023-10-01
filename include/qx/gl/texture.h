@@ -1,7 +1,6 @@
 /**
 
     @file      texture.h
-    @brief     Contains qx::base_texture class
     @author    Khrapov
     @date      23.01.2020
     @copyright © Nick Khrapov, 2021. All right reserved.
@@ -28,14 +27,7 @@ namespace qx
 class base_texture : public IBuffer
 {
 public:
-    /**
-        @brief base_texture object constructor
-    **/
     base_texture() = default;
-
-    /**
-        @brief base_texture object destructor
-    **/
     virtual ~base_texture();
 
     QX_DECL_IBUFFER

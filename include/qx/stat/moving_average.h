@@ -1,7 +1,6 @@
 /**
 
     @file      moving_average.h
-    @brief     Contains qx::moving_average class
     @author    Khrapov
     @date      1.06.2021
     @copyright © Nick Khrapov, 2021. All right reserved.

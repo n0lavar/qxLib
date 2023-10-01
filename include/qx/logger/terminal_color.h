@@ -1,8 +1,6 @@
 /**
 
     @file      terminal_color.h
-    @brief     Contains qx::terminal_color class
-    @details   ~
     @author    Khrapov
     @date      10.12.2022
     @copyright © Nick Khrapov, 2022. All right reserved.

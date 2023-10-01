@@ -1,7 +1,6 @@
 /**
 
     @file      constexpr_random.h
-    @brief     Contains qx::constexpr_random and the corresponding functions
     @author    Khrapov
     @date      11.09.2020
     @copyright © Nick Khrapov, 2021. All right reserved.

@@ -1,7 +1,6 @@
 /**
 
     @file      cout_logger_stream.h
-    @brief     Contains qx::cout_logger_stream class
     @author    Khrapov
     @date      28.07.2021
     @copyright © Nick Khrapov, 2021. All right reserved.

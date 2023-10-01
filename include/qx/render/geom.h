@@ -1,7 +1,6 @@
 /**
 
     @file      geom.h
-    @brief     Contains functions for creating primitives geometry
     @author    Khrapov
     @date      4.04.2021
     @copyright © Nick Khrapov, 2021. All right reserved.

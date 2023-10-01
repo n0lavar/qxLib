@@ -33,7 +33,7 @@ using join_t = typename join<args_t...>::type;
 
 // ------------------------------------------------------- remove ------------------------------------------------------
 
-namespace detail
+namespace details
 {
 
 template<class...>
@@ -55,7 +55,7 @@ struct remove_single<target_t, std::tuple<parameter_t, pack_t...>>
         typename remove_single<target_t, std::tuple<pack_t...>>::type>::type;
 };
 
-} // namespace detail
+} // namespace details
 
 template<class... pack_t>
 struct remove
@@ -71,7 +71,7 @@ struct remove<std::tuple<types_t...>, std::tuple<>>
 template<class target_t, class... remaining_targets_t, class... types_t>
 struct remove<std::tuple<types_t...>, std::tuple<target_t, remaining_targets_t...>>
 {
-    using type = typename detail::remove_single<
+    using type = typename details::remove_single<
         target_t,
         typename remove<std::tuple<types_t...>, std::tuple<remaining_targets_t...>>::type>::type;
 };
@@ -81,7 +81,7 @@ using remove_t = typename remove<args_t...>::type;
 
 // ------------------------------------------------------ contains -----------------------------------------------------
 
-namespace detail
+namespace details
 {
 
 template<class T, class tuple_t>
@@ -102,10 +102,10 @@ struct contains<T, std::tuple<T, Ts...>> : std::true_type
 {
 };
 
-} // namespace detail
+} // namespace details
 
 template<class tuple_t, class T>
-using contains = detail::contains<T, tuple_t>;
+using contains = details::contains<T, tuple_t>;
 
 template<class tuple_t, class T>
 static constexpr bool contains_v = contains<tuple_t, T>::value;

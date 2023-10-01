@@ -1,7 +1,6 @@
 /**
 
     @file      link.h
-    @brief     Contains qx::link class
     @author    Khrapov
     @date      21.11.2021
     @copyright © Nick Khrapov, 2021. All right reserved.
@@ -54,16 +53,7 @@ public:
     public:
         QX_NONCOPYMOVABLE(lock_ptr);
 
-        /**
-            @brief  operator->
-            @retval - T object pointer
-        **/
         T* operator->() const noexcept;
-
-        /**
-            @brief  operator*
-            @retval - T object reference
-        **/
         T& operator*() const noexcept;
 
         /**
@@ -108,9 +98,6 @@ public:
     };
 
 public:
-    /**
-        @brief link object constructor
-    **/
     link() noexcept = default;
 
     /**
@@ -200,7 +187,6 @@ public:
 
     template<class U>
     bool operator==(const link<U>&) const noexcept = delete;
-
     template<class U>
     bool operator!=(const link<U>&) const noexcept = delete;
 

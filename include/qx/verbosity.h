@@ -1,7 +1,6 @@
 /**
 
     @file      verbosity.h
-    @brief     Contains qx::verbosity enum
     @author    Khrapov
     @date      23.07.2023
     @copyright © Nick Khrapov, 2023. All right reserved.

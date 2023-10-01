@@ -1,7 +1,6 @@
 ﻿/**
 
     @file      typedefs.h
-    @brief     Project typedefs
     @author    Khrapov
     @date      18.06.2019
     @copyright © Nick Khrapov, 2021. All right reserved.

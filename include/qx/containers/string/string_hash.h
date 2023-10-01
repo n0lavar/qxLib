@@ -1,7 +1,6 @@
 /**
 
     @file      string_hash.h
-    @brief     Contains qx::basic_string_hash class
     @author    Khrapov
     @date      13.11.2020
     @copyright © Nick Khrapov, 2021. All right reserved.
@@ -16,7 +15,7 @@
 namespace qx
 {
 
-namespace detail
+namespace details
 {
 
 template<class T>

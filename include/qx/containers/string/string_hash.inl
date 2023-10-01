@@ -21,7 +21,7 @@ constexpr basic_string_hash<traits_t>::basic_string_hash(const_pointer pszString
 template<class traits_t>
 constexpr basic_string_hash<traits_t>::basic_string_hash(const_pointer pszString) noexcept
 {
-    if constexpr (detail::has_zero_termonated_hash_func_overload<traits_t>)
+    if constexpr (details::has_zero_termonated_hash_func_overload<traits_t>)
     {
         m_nHash = traits_t::hash_function(pszString, traits_t::hash_seed());
     }

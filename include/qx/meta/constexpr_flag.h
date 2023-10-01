@@ -1,7 +1,6 @@
 /**
 
     @file      constexpr_flag.h
-    @brief     Contains qx::constexpr_flag class
     @author    Khrapov
     @date      16.09.2020
     @copyright © Nick Khrapov, 2021. All right reserved.

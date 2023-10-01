@@ -1,7 +1,6 @@
 /**
 
     @file      assert.h
-    @brief     Expect and assert macros
     @author    Khrapov
     @date      29.10.2020
     @copyright © Nick Khrapov, 2021. All right reserved.

@@ -1,8 +1,8 @@
 /**
 
     @file      type_traits.h
-    @brief     Type traits
-    @author    Khrapov10.09.202020.08.2021
+    @author    Khrapov
+    @data      10.09.2020
     @copyright © Nick Khrapov, 2021. All right reserved.
 
 **/
@@ -65,7 +65,7 @@ using iterator_value_t = typename iterator_value<T>::type;
 
 //--------------------------- is_specialization_exist --------------------------
 
-namespace detail
+namespace details
 {
 
 template<class T, std::size_t = sizeof(T)>
@@ -73,11 +73,11 @@ std::true_type is_specialization_exist_impl(T*);
 
 std::false_type is_specialization_exist_impl(...);
 
-} // namespace detail
+} // namespace details
 
 // decide if a struct/class specialization exist
 template<class T>
-using is_specialization_exist = decltype(detail::is_specialization_exist_impl(std::declval<T*>()));
+using is_specialization_exist = decltype(details::is_specialization_exist_impl(std::declval<T*>()));
 
 template<class T>
 constexpr bool is_specialization_exist_v = is_specialization_exist<T>::value;

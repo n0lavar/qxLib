@@ -1,7 +1,6 @@
 /**
 
     @file      string_utils.h
-    @brief     String functions
     @author    Khrapov
     @date      17.10.2020
     @copyright © Nick Khrapov, 2021. All right reserved.
@@ -187,7 +186,7 @@ constexpr int strcmp(const value_t* pszLeft, const value_t* pszRight)
     return *pszLeft - *pszRight;
 }
 
-namespace detail
+namespace details
 {
 
 template<class value_t>
@@ -220,7 +219,7 @@ constexpr wchar_t choose_char_prefix<wchar_t>(char, wchar_t w) noexcept
     return w;
 }
 
-} // namespace detail
+} // namespace details
 
 } // namespace qx
 
@@ -241,7 +240,7 @@ constexpr wchar_t choose_char_prefix<wchar_t>(char, wchar_t w) noexcept
     @param value_t - char type
     @param str        - string to apply
 **/
-#define QX_STR_PREFIX(value_t, str) qx::detail::choose_str_prefix<value_t>(str, QX_TO_WSTRING(str))
+#define QX_STR_PREFIX(value_t, str) qx::details::choose_str_prefix<value_t>(str, QX_TO_WSTRING(str))
 
 /**
     @def   QX_CHAR_PREFIX
@@ -249,7 +248,7 @@ constexpr wchar_t choose_char_prefix<wchar_t>(char, wchar_t w) noexcept
     @param value_t - char type
     @param ch         - string to apply
 **/
-#define QX_CHAR_PREFIX(value_t, ch) qx::detail::choose_char_prefix<value_t>(ch, QX_TO_WSTRING(ch))
+#define QX_CHAR_PREFIX(value_t, ch) qx::details::choose_char_prefix<value_t>(ch, QX_TO_WSTRING(ch))
 
 //==============================================================================
 

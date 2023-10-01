@@ -1,7 +1,6 @@
 /**
 
     @file      threads_shared.h
-    @brief     Contains qx::threads_shared class
     @author    Khrapov
     @date      4.03.2021
     @copyright © Nick Khrapov, 2021. All right reserved.
@@ -51,46 +50,15 @@ private:
 public:
     QX_NONCOPYABLE(shared_proxy);
 
-    /**
-        @brief shared_proxy object constructor
-        @param other - other shared_proxy rvalue ref
-    **/
     shared_proxy(shared_proxy&& other) noexcept;
-
-    /**
-        @brief  operator=
-        @param  other - Assign by other shared_proxy
-        @retval       - this object rvalue ref
-    **/
     shared_proxy& operator=(shared_proxy&& other) noexcept;
 
-    /**
-        @brief shared_proxy object destructor
-    **/
     ~shared_proxy();
 
-    /**
-        @brief  operator->
-        @retval - data pointer
-    **/
-    [[nodiscard]] data_t* operator->() noexcept;
-
-    /**
-        @brief  operator->
-        @retval - data const pointer
-    **/
+    [[nodiscard]] data_t*       operator->() noexcept;
     [[nodiscard]] const data_t* operator->() const noexcept;
 
-    /**
-        @brief  operator*
-        @retval - data reference
-    **/
-    [[nodiscard]] data_t& operator*() noexcept;
-
-    /**
-        @brief  operator*
-        @retval - data const reference
-    **/
+    [[nodiscard]] data_t&       operator*() noexcept;
     [[nodiscard]] const data_t& operator*() const noexcept;
 
 private:
@@ -124,14 +92,7 @@ class threads_shared
     class synchronization_primitive_raii
     {
     public:
-        /**
-            @brief synchronization_primitive_raii object constructor
-        **/
         synchronization_primitive_raii();
-
-        /**
-            @brief synchronization_primitive_raii object destructor
-        **/
         ~synchronization_primitive_raii();
 
         /**

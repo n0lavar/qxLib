@@ -1,7 +1,6 @@
 /**
 
     @file      ubo.h
-    @brief     Contains qx::base_ubo class
     @author    Khrapov
     @date      9.01.2020
     @copyright © Nick Khrapov, 2021. All right reserved.
@@ -28,9 +27,6 @@ namespace qx
 class base_ubo : public buffer_binding_point_base
 {
 public:
-    /**
-        @brief base_ubo object constructor
-    **/
     base_ubo() = default;
 
     /**

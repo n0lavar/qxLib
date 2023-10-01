@@ -1,7 +1,6 @@
 /**
 
     @file      benchmark.h
-    @brief     Contains qx::benchmark class
     @author    Khrapov
     @date      2.02.2020
     @copyright © Nick Khrapov, 2021. All right reserved.

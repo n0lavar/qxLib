@@ -1,7 +1,6 @@
 /**
 
     @file      destruction_callback.h
-    @brief     Contains qx::test_destruction_callback class
     @author    Khrapov
     @date      12.12.2021
     @copyright © Nick Khrapov, 2021. All right reserved.
@@ -31,9 +30,6 @@ public:
     QX_NONCOPYABLE(destruction_callback);
     QX_MOVABLE(destruction_callback);
 
-    /**
-        @brief destruction_callback object constructor
-    **/
     destruction_callback() noexcept = default;
 
     /**
@@ -44,9 +40,6 @@ public:
     {
     }
 
-    /**
-        @brief destruction_callback object destructor
-    **/
     ~destruction_callback()
     {
         if (m_Destroyer)

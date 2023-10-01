@@ -1,8 +1,6 @@
 /**
 
     @file      recursive_lambda.h
-    @brief     Contains qx::make_recursive_lambda function
-    @details   ~
     @author    Khrapov
     @date      3.08.2022
     @copyright © Nick Khrapov, 2022. All right reserved.

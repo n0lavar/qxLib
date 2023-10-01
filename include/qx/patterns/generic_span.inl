@@ -10,8 +10,9 @@
 namespace qx
 {
 template<class T, class traits_t>
-constexpr generic_span<T, traits_t>::iterator::iterator(generator_type generator) noexcept
+constexpr generic_span<T, traits_t>::iterator::iterator(generator_type generator, size_type nIndex) noexcept
     : m_Generator(std::move(generator))
+    , m_nIndex(nIndex)
 {
 }
 
@@ -36,8 +37,15 @@ constexpr typename generic_span<T, traits_t>::iterator& generic_span<T, traits_t
 {
     m_Generator();
 
-    if (operator->() == nullptr)
+    if (operator->() != nullptr)
+    {
+        ++m_nIndex;
+    }
+    else
+    {
         m_Generator = nullptr;
+        m_nIndex    = std::numeric_limits<size_type>::max();
+    }
 
     return *this;
 }
@@ -46,10 +54,7 @@ template<class T, class traits_t>
 constexpr typename generic_span<T, traits_t>::iterator generic_span<T, traits_t>::iterator::operator++(int) noexcept
 {
     iterator r(*this);
-
-    if (operator->() == nullptr)
-        m_Generator = nullptr;
-
+             operator++()();
     return r;
 }
 
@@ -62,7 +67,7 @@ constexpr bool generic_span<T, traits_t>::iterator::operator!=(const iterator& r
 template<class T, class traits_t>
 constexpr bool generic_span<T, traits_t>::iterator::operator==(const iterator& r) const noexcept
 {
-    return m_Generator && r.m_Generator || !m_Generator && !r.m_Generator;
+    return m_nIndex == r.m_nIndex;
 }
 
 template<class T, class traits_t>
@@ -96,17 +101,8 @@ inline generic_span<T, traits_t>::generic_span(container_t& container) noexcept
 template<class T, class traits_t>
 template<class container_t>
 inline generic_span<T, traits_t>::generic_span(
-    container_t&                                          container,
-    function_type<pointer(container_value<container_t>&)> valueAdapter) noexcept
-    : m_InitialGenerator(create_initial_generator(container, std::move(valueAdapter)))
-{
-}
-
-template<class T, class traits_t>
-template<class container_t>
-inline generic_span<T, traits_t>::generic_span(
-    const container_t&                                    container,
-    function_type<pointer(container_value<container_t>&)> valueAdapter) noexcept
+    container_t&                                                            container,
+    function_type<reference(qualified_type<container_value<container_t>>&)> valueAdapter) noexcept
     : m_InitialGenerator(create_initial_generator(container, std::move(valueAdapter)))
 {
 }
@@ -128,13 +124,13 @@ inline bool generic_span<T, traits_t>::empty() const noexcept
 template<class T, class traits_t>
 inline typename generic_span<T, traits_t>::iterator generic_span<T, traits_t>::begin() const noexcept
 {
-    return iterator(m_InitialGenerator);
+    return m_InitialGenerator ? iterator(m_InitialGenerator, 0) : end();
 }
 
 template<class T, class traits_t>
 inline typename generic_span<T, traits_t>::iterator generic_span<T, traits_t>::end() const noexcept
 {
-    return iterator(nullptr);
+    return iterator(nullptr, std::numeric_limits<typename iterator::size_type>::max());
 }
 
 template<class T, class traits_t>
@@ -162,7 +158,7 @@ inline typename generic_span<T, traits_t>::generator_type generic_span<T, traits
           
                   if (it != container.end())
                   {
-                      pRet = _adapter(*it);
+                      pRet = &_adapter(*it);
                       ++it;
                   }
           

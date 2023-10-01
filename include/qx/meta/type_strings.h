@@ -1,8 +1,6 @@
 /**
 
     @file      type_strings.h
-    @brief     Contains qx::type_strings class
-    @details   ~
     @author    Khrapov
     @date      24.09.2022
     @copyright © Nick Khrapov, 2022. All right reserved.

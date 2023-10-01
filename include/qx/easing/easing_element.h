@@ -1,7 +1,6 @@
 /**
 
     @file      easing_element.h
-    @brief     Contains qx::base_easing_element class
     @author    Khrapov
     @date      4.05.2021
     @copyright © Nick Khrapov, 2021. All right reserved.

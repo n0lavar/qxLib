@@ -1,7 +1,6 @@
 /**
 
     @file      string_setup.h
-    @brief     Types and macros used for a work with a defaul selected char type
     @author    Khrapov
     @date      10.06.2023
     @copyright © Nick Khrapov, 2023. All right reserved.
@@ -15,7 +14,7 @@
     #define QX_CONF_USE_WCHAR
 #endif
 
-namespace qx::detail
+namespace qx::details
 {
 
 using all_char_types = std::tuple<char, wchar_t>;
@@ -41,6 +40,6 @@ namespace qx
 {
 
 using char_type            = QX_CHAR_TYPE;
-using forbidden_char_types = tuple::remove_t<detail::all_char_types, std::tuple<char_type>>;
+using forbidden_char_types = tuple::remove_t<details::all_char_types, std::tuple<char_type>>;
 
 } // namespace qx

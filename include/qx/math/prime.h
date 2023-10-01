@@ -1,8 +1,6 @@
 /**
 
     @file      prime.h
-    @brief     Contains prime numbers algorithms
-    @details   ~
     @author    Khrapov
     @date      6.08.2022
     @copyright © Nick Khrapov, 2022. All right reserved.

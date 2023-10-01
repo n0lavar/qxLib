@@ -1,8 +1,6 @@
 /**
 
     @file      iterate.h
-    @brief     Contains qx::iterate functions along with default filters and adapters for him
-    @details   ~
     @author    Khrapov
     @date      23.08.2022
     @copyright © Nick Khrapov, 2022. All right reserved.

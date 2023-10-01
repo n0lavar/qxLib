@@ -1,7 +1,6 @@
 /**
 
     @file      sort.h
-    @brief     Sorting algorithms
     @author    Khrapov
     @date      1.03.2020
     @copyright © Nick Khrapov, 2021. All right reserved.

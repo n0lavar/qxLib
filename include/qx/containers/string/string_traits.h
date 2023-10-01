@@ -1,7 +1,6 @@
 /**
 
     @file      string_traits.h
-    @brief     Contains traits for qx::string
     @author    Khrapov
     @date      24.03.2020
     @copyright © Nick Khrapov, 2021. All right reserved.

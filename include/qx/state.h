@@ -1,7 +1,6 @@
 /**
 
     @file      state.h
-    @brief     Contains qx::state class
     @author    Khrapov
     @date      26.04.2021
     @copyright © Nick Khrapov, 2021. All right reserved.
@@ -32,9 +31,6 @@ class state
 public:
     QX_COPYMOVABLE(state);
 
-    /**
-        @brief basic_state object constructor
-    **/
     state() noexcept = default;
 
     /**
@@ -50,49 +46,15 @@ public:
     **/
     state(const T& value, const T& defaultValue) noexcept;
 
-    /**
-        @brief  operator=
-        @param  value - new state value
-        @retval       - this object reference
-    **/
     state& operator=(const T& value) noexcept;
 
-    /**
-        @brief  operator==
-        @param   - other state
-        @retval  - true, if objects are equal
-    **/
     bool operator==(const state&) const noexcept = default;
-
-    /**
-        @brief  operator==
-        @param  value - state value
-        @retval       - true, if objects are equal
-    **/
     bool operator==(const T& value) const noexcept;
 
-    /**
-        @brief  operator->
-        @retval - state object pointer
-    **/
-    T* operator->() noexcept;
-
-    /**
-        @brief  operator->
-        @retval - state object pointer
-    **/
+    T*       operator->() noexcept;
     const T* operator->() const noexcept;
 
-    /**
-        @brief  operator*
-        @retval - state object reference
-    **/
-    T& operator*() noexcept;
-
-    /**
-        @brief  operator*
-        @retval - state object reference
-    **/
+    T&       operator*() noexcept;
     const T& operator*() const noexcept;
 
     /**

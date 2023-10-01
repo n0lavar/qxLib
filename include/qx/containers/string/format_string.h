@@ -1,7 +1,6 @@
 /**
 
     @file      format_string.h
-    @brief     Contains basic_format_string class
     @author    Khrapov
     @date      16.06.2023
     @copyright © Nick Khrapov, 2023. All right reserved.
@@ -51,7 +50,7 @@ using format_string = basic_format_string<char_type, std::type_identity_t<args_t
 template<class char_t, class... args_t>
 concept format_acceptable_args =
     !(qx::tuple::contains_v<
-          tuple::remove_t<detail::all_char_types, std::tuple<char_t>>,
+          tuple::remove_t<details::all_char_types, std::tuple<char_t>>,
           std::remove_cv_t<std::remove_pointer_t<std::decay_t<args_t>>>>
       || ...);
 

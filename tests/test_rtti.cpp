@@ -200,7 +200,7 @@ void TestDerivedFrom(const auto& pClass, bool bExpect)
 {
     EXPECT_EQ(pClass->template is_derived_from<T>(), bExpect);
 
-    if constexpr (qx::detail::has_get_class_id_static<T>)
+    if constexpr (qx::details::has_get_class_id_static<T>)
     {
         EXPECT_EQ(pClass->is_derived_from_id(T::get_class_id_static()), bExpect);
     }

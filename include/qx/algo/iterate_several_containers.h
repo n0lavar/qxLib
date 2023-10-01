@@ -1,8 +1,6 @@
 /**
 
     @file      iterate_several_containers.h
-    @brief     Contains qx::iterate_several_containers function
-    @details   ~
     @author    Khrapov
     @date      26.08.2022
     @copyright © Nick Khrapov, 2022. All right reserved.

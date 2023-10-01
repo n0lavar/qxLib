@@ -1,7 +1,6 @@
 /**
 
     @file      vbo.h
-    @brief     Contains qx::base_vbo class
     @author    Khrapov
     @date      19.01.2020
     @copyright © Nick Khrapov, 2021. All right reserved.

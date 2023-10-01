@@ -1,7 +1,6 @@
 /**
 
     @file      ibuffer.h
-    @brief     Contains qx::IBuffer interface
     @author    Khrapov
     @date      22.01.2020
     @copyright © Nick Khrapov, 2021. All right reserved.
@@ -26,9 +25,6 @@ namespace qx
 class IBuffer
 {
 public:
-    /**
-        @brief IBuffer object destructor
-    **/
     virtual ~IBuffer() = default;
 
     /**

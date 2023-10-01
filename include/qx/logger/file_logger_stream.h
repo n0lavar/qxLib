@@ -1,7 +1,6 @@
 /**
 
     @file      file_logger_stream.h
-    @brief     Contains qx::file_logger_stream class
     @author    Khrapov
     @date      28.07.2021
     @copyright © Nick Khrapov, 2021. All right reserved.
@@ -47,9 +46,6 @@ public:
         log_file_policy eLogFilePolicy = log_file_policy::append,
         string_view     svFileName     = L"application");
 
-    /**
-        @brief file_logger_stream object destructor
-    **/
     virtual ~file_logger_stream() override;
 
     // base_logger_stream

@@ -1,7 +1,6 @@
 /**
 
     @file      color.h
-    @brief     Contains qx::color class
     @author    Khrapov
     @date      2.11.2020
     @copyright © Nick Khrapov, 2021. All right reserved.
@@ -40,9 +39,6 @@ class color
 public:
     QX_COPYMOVABLE(color);
 
-    /**
-        @brief color object constructor
-    **/
     constexpr color() noexcept = default;
 
     /**
@@ -169,24 +165,9 @@ public:
     **/
     constexpr unsigned int hex_argb() const noexcept;
 
-    /**
-        @brief  operator==
-        @param  other - other color
-        @retval       - true, if objects are equal
-    **/
     constexpr bool operator==(const color& other) const noexcept;
-
-    /**
-        @brief  operator glm::vec3
-        @retval - color as vec3
-    **/
-    constexpr operator glm::vec3() const noexcept;
-
-    /**
-        @brief  operator glm::vec4
-        @retval - color as vec4
-    **/
-    constexpr operator glm::vec4() const noexcept;
+    constexpr      operator glm::vec3() const noexcept;
+    constexpr      operator glm::vec4() const noexcept;
 
     /**
         @brief   Add value to red component

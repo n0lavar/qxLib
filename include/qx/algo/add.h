@@ -1,8 +1,6 @@
 /**
 
     @file      add.h
-    @brief     Contains add algorithms
-    @details   ~
     @author    Khrapov
     @date      14.08.2022
     @copyright © Nick Khrapov, 2022. All right reserved.

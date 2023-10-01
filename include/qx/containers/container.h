@@ -1,7 +1,6 @@
 /**
 
     @file      container.h
-    @brief     Contains macro for random access containers with common functions
     @author    Khrapov
     @date      8.08.2021
     @copyright © Nick Khrapov, 2021. All right reserved.

@@ -1,7 +1,6 @@
 /**
 
     @file      fbo.h
-    @brief     Contains qx::base_fbo class
     @author    Khrapov
     @date      20.01.2020
     @copyright © Nick Khrapov, 2021. All right reserved.
@@ -28,9 +27,6 @@ namespace qx
 class base_fbo : public IBuffer
 {
 public:
-    /**
-        @brief base_fbo object destructor
-    **/
     virtual ~base_fbo();
 
     QX_DECL_IBUFFER

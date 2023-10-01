@@ -1,7 +1,6 @@
 /**
 
     @file      buffer_binding_point_base.h
-    @brief     Contains qx::buffer_binding_point_base class
     @author    Khrapov
     @date      10.07.2020
     @copyright © Nick Khrapov, 2021. All right reserved.
