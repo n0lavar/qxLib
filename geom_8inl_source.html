@@ -81,7 +81,7 @@ $(function() {
 <div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="keyword">namespace </span>qx</div>
 <div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;{</div>
 <div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160; </div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="keyword">namespace </span>detail</div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="keyword">namespace </span>details</div>
 <div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;{</div>
 <div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160; </div>
 <div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="keyword">inline</span> vertex create_vertex(<span class="keyword">const</span> glm::vec3&amp; pos, <span class="keywordtype">bool</span> bUnitLengthPosNormal = <span class="keyword">false</span>)</div>
@@ -183,7 +183,7 @@ $(function() {
 <div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;                                                                { fHalfSide1, fHalfSide2, fHalfSide3 },</div>
 <div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;                                                                { -fHalfSide1, fHalfSide2, fHalfSide3 } } };</div>
 <div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160; </div>
-<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;    <span class="keywordflow">return</span> detail::create_figure(</div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;    <span class="keywordflow">return</span> details::create_figure(</div>
 <div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;        parallelogramPositions,</div>
 <div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;        shape_indices::parallelogram,</div>
 <div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;        { fHalfSide1, fHalfSide2, fHalfSide3 },</div>
@@ -191,7 +191,7 @@ $(function() {
 <div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;        bUnitLengthPosNormal);</div>
 <div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;}</div>
 <div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160; </div>
-<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;} <span class="comment">// namespace detail</span></div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;} <span class="comment">// namespace details</span></div>
 <div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160; </div>
 <div class="line"><a name="l00125"></a><span class="lineno"><a class="line" href="geom_8h.html#a68858cdb447bd3044c3c31832a9550da">  125</a></span>&#160;<span class="keyword">inline</span> glm::vec3 <a class="code" href="geom_8h.html#a68858cdb447bd3044c3c31832a9550da">create_tangent</a>(<span class="keyword">const</span> glm::vec3&amp; normal)</div>
 <div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;{</div>
@@ -221,7 +221,7 @@ $(function() {
 <div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160; </div>
 <div class="line"><a name="l00151"></a><span class="lineno"><a class="line" href="geom_8h.html#a6bba172163dadc0246a0553848328509">  151</a></span>&#160;<span class="keyword">inline</span> <a class="code" href="structqx_1_1geometry.html">geometry</a> <a class="code" href="geom_8h.html#a6bba172163dadc0246a0553848328509">create_parallelogram</a>(<span class="keywordtype">float</span> fSide1, <span class="keywordtype">float</span> fSide2, <span class="keywordtype">float</span> fSide3, <span class="keywordtype">bool</span> bFlatNormals)</div>
 <div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;{</div>
-<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;    <span class="keywordflow">return</span> detail::create_parallelogram(fSide1, fSide2, fSide3, bFlatNormals, <span class="keyword">true</span>);</div>
+<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;    <span class="keywordflow">return</span> details::create_parallelogram(fSide1, fSide2, fSide3, bFlatNormals, <span class="keyword">true</span>);</div>
 <div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;}</div>
 <div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160; </div>
 <div class="line"><a name="l00156"></a><span class="lineno"><a class="line" href="geom_8h.html#a3517af8feed4720fe64653a1c8f7d9c6">  156</a></span>&#160;<span class="keyword">inline</span> <a class="code" href="structqx_1_1geometry.html">geometry</a> <a class="code" href="geom_8h.html#a3517af8feed4720fe64653a1c8f7d9c6">create_parallelogram_lines</a>(<span class="keywordtype">float</span> fSide1, <span class="keywordtype">float</span> fSide2, <span class="keywordtype">float</span> fSide3)</div>
@@ -235,7 +235,7 @@ $(function() {
 <div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160; </div>
 <div class="line"><a name="l00165"></a><span class="lineno"><a class="line" href="geom_8h.html#a08c05863505c6898d5468be45678af38">  165</a></span>&#160;<span class="keyword">inline</span> <a class="code" href="structqx_1_1geometry.html">geometry</a> <a class="code" href="geom_8h.html#a08c05863505c6898d5468be45678af38">create_cube</a>(<span class="keywordtype">float</span> fSide, <span class="keywordtype">bool</span> bFlatNormals)</div>
 <div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;{</div>
-<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;    <span class="keywordflow">return</span> detail::create_parallelogram(fSide, fSide, fSide, bFlatNormals, <span class="keyword">false</span>);</div>
+<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;    <span class="keywordflow">return</span> details::create_parallelogram(fSide, fSide, fSide, bFlatNormals, <span class="keyword">false</span>);</div>
 <div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;}</div>
 <div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160; </div>
 <div class="line"><a name="l00170"></a><span class="lineno"><a class="line" href="geom_8h.html#a9f2651a09a8b23be05d32c310d2f4cec">  170</a></span>&#160;<span class="keyword">inline</span> <a class="code" href="structqx_1_1geometry.html">geometry</a> <a class="code" href="geom_8h.html#a9f2651a09a8b23be05d32c310d2f4cec">create_cube_lines</a>(<span class="keywordtype">float</span> fSide)</div>
@@ -249,8 +249,8 @@ $(function() {
 <div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160; </div>
 <div class="line"><a name="l00179"></a><span class="lineno"><a class="line" href="geom_8h.html#a28e96ef8677009f2a11a4a2381010efe">  179</a></span>&#160;<span class="keyword">inline</span> <a class="code" href="structqx_1_1geometry.html">geometry</a> <a class="code" href="geom_8h.html#a28e96ef8677009f2a11a4a2381010efe">create_icosahedron</a>(<span class="keywordtype">float</span> fRadius, <span class="keywordtype">bool</span> bFlatNormals)</div>
 <div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;{</div>
-<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;    <span class="keywordflow">return</span> detail::create_figure(</div>
-<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;        detail::create_icosahedron_positions(fRadius),</div>
+<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;    <span class="keywordflow">return</span> details::create_figure(</div>
+<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;        details::create_icosahedron_positions(fRadius),</div>
 <div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;        shape_indices::icosahedron,</div>
 <div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;        { fRadius, fRadius, fRadius },</div>
 <div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;        bFlatNormals);</div>
@@ -267,7 +267,7 @@ $(function() {
 <div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160; </div>
 <div class="line"><a name="l00197"></a><span class="lineno"><a class="line" href="geom_8h.html#acff375b015e5af55f688e621278819b6">  197</a></span>&#160;<span class="keyword">inline</span> <a class="code" href="structqx_1_1geometry.html">geometry</a> <a class="code" href="geom_8h.html#acff375b015e5af55f688e621278819b6">create_icosphere</a>(<span class="keywordtype">float</span> fRadius, <span class="keywordtype">size_t</span> nDivides, <span class="keywordtype">bool</span> bFlatNormals)</div>
 <div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;{</div>
-<div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160;    <span class="keyword">const</span> <span class="keyword">auto</span> icosahedronPositions = detail::create_icosahedron_positions(fRadius);</div>
+<div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160;    <span class="keyword">const</span> <span class="keyword">auto</span> icosahedronPositions = details::create_icosahedron_positions(fRadius);</div>
 <div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160; </div>
 <div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160;    std::vector&lt;glm::vec3&gt; icospherePositions = std::vector(icosahedronPositions.cbegin(), icosahedronPositions.cend());</div>
 <div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160; </div>
@@ -335,7 +335,7 @@ $(function() {
 <div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160;        prevLevelIndices = std::move(thisLevelIndices);</div>
 <div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160;    }</div>
 <div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160; </div>
-<div class="line"><a name="l00267"></a><span class="lineno">  267</span>&#160;    <span class="keywordflow">return</span> detail::create_figure(icospherePositions, prevLevelIndices, { fRadius, fRadius, fRadius }, bFlatNormals);</div>
+<div class="line"><a name="l00267"></a><span class="lineno">  267</span>&#160;    <span class="keywordflow">return</span> details::create_figure(icospherePositions, prevLevelIndices, { fRadius, fRadius, fRadius }, bFlatNormals);</div>
 <div class="line"><a name="l00268"></a><span class="lineno">  268</span>&#160;}</div>
 <div class="line"><a name="l00269"></a><span class="lineno">  269</span>&#160; </div>
 <div class="line"><a name="l00270"></a><span class="lineno"><a class="line" href="geom_8h.html#a400186cef6bd1c97bab9845b22d26bae">  270</a></span>&#160;<span class="keyword">inline</span> <a class="code" href="structqx_1_1geometry.html">geometry</a> <a class="code" href="geom_8h.html#a400186cef6bd1c97bab9845b22d26bae">create_icosphere_lines</a>(<span class="keywordtype">float</span> fRadius, <span class="keywordtype">size_t</span> nDivides)</div>
@@ -352,10 +352,10 @@ $(function() {
 <div class="line"><a name="l00281"></a><span class="lineno">  281</span>&#160;    <span class="keyword">const</span> <span class="keywordtype">float</span> fHalfWidth  = fWidth / 2.f;</div>
 <div class="line"><a name="l00282"></a><span class="lineno">  282</span>&#160;    <span class="keyword">const</span> <span class="keywordtype">float</span> fHalfHeight = fHeight / 2.f;</div>
 <div class="line"><a name="l00283"></a><span class="lineno">  283</span>&#160; </div>
-<div class="line"><a name="l00284"></a><span class="lineno">  284</span>&#160;    <span class="keywordflow">return</span> { { { detail::create_vertex({ fHalfWidth, fHalfHeight, 0.f }),</div>
-<div class="line"><a name="l00285"></a><span class="lineno">  285</span>&#160;                 detail::create_vertex({ fHalfWidth, -fHalfHeight, 0.f }),</div>
-<div class="line"><a name="l00286"></a><span class="lineno">  286</span>&#160;                 detail::create_vertex({ -fHalfWidth, -fHalfHeight, 0.f }),</div>
-<div class="line"><a name="l00287"></a><span class="lineno">  287</span>&#160;                 detail::create_vertex({ -fHalfWidth, fHalfHeight, 0.f }) } },</div>
+<div class="line"><a name="l00284"></a><span class="lineno">  284</span>&#160;    <span class="keywordflow">return</span> { { { details::create_vertex({ fHalfWidth, fHalfHeight, 0.f }),</div>
+<div class="line"><a name="l00285"></a><span class="lineno">  285</span>&#160;                 details::create_vertex({ fHalfWidth, -fHalfHeight, 0.f }),</div>
+<div class="line"><a name="l00286"></a><span class="lineno">  286</span>&#160;                 details::create_vertex({ -fHalfWidth, -fHalfHeight, 0.f }),</div>
+<div class="line"><a name="l00287"></a><span class="lineno">  287</span>&#160;                 details::create_vertex({ -fHalfWidth, fHalfHeight, 0.f }) } },</div>
 <div class="line"><a name="l00288"></a><span class="lineno">  288</span>&#160;             std::vector(shape_indices::rect.cbegin(), shape_indices::rect.cend()),</div>
 <div class="line"><a name="l00289"></a><span class="lineno">  289</span>&#160;             { fHalfWidth, fHalfHeight, 0.f },</div>
 <div class="line"><a name="l00290"></a><span class="lineno">  290</span>&#160;             draw_mode::triangles_list };</div>
@@ -370,11 +370,11 @@ $(function() {
 <div class="line"><a name="l00299"></a><span class="lineno">  299</span>&#160;    <span class="keyword">const</span> <span class="keywordtype">float</span> fHalfHeight = fLinesHeight / 2.f;</div>
 <div class="line"><a name="l00300"></a><span class="lineno">  300</span>&#160; </div>
 <div class="line"><a name="l00301"></a><span class="lineno">  301</span>&#160;    <span class="comment">// one additional line for missing corner pixel fix</span></div>
-<div class="line"><a name="l00302"></a><span class="lineno">  302</span>&#160;    <span class="keywordflow">return</span> { { { detail::create_vertex({ fHalfWidth, fHalfHeight, 0.f }),</div>
-<div class="line"><a name="l00303"></a><span class="lineno">  303</span>&#160;                 detail::create_vertex({ fHalfWidth, -fHalfHeight, 0.f }),</div>
-<div class="line"><a name="l00304"></a><span class="lineno">  304</span>&#160;                 detail::create_vertex({ -fHalfWidth, -fHalfHeight, 0.f }),</div>
-<div class="line"><a name="l00305"></a><span class="lineno">  305</span>&#160;                 detail::create_vertex({ -fHalfWidth, -fHalfHeight - 1.f, 0.f }),</div>
-<div class="line"><a name="l00306"></a><span class="lineno">  306</span>&#160;                 detail::create_vertex({ -fHalfWidth, fHalfHeight, 0.f }) } },</div>
+<div class="line"><a name="l00302"></a><span class="lineno">  302</span>&#160;    <span class="keywordflow">return</span> { { { details::create_vertex({ fHalfWidth, fHalfHeight, 0.f }),</div>
+<div class="line"><a name="l00303"></a><span class="lineno">  303</span>&#160;                 details::create_vertex({ fHalfWidth, -fHalfHeight, 0.f }),</div>
+<div class="line"><a name="l00304"></a><span class="lineno">  304</span>&#160;                 details::create_vertex({ -fHalfWidth, -fHalfHeight, 0.f }),</div>
+<div class="line"><a name="l00305"></a><span class="lineno">  305</span>&#160;                 details::create_vertex({ -fHalfWidth, -fHalfHeight - 1.f, 0.f }),</div>
+<div class="line"><a name="l00306"></a><span class="lineno">  306</span>&#160;                 details::create_vertex({ -fHalfWidth, fHalfHeight, 0.f }) } },</div>
 <div class="line"><a name="l00307"></a><span class="lineno">  307</span>&#160;             { 0, 1, 2, 3, 4, 0 },</div>
 <div class="line"><a name="l00308"></a><span class="lineno">  308</span>&#160;             { fHalfWidth + 1.f, fHalfHeight + 1.f, 0.f },</div>
 <div class="line"><a name="l00309"></a><span class="lineno">  309</span>&#160;             draw_mode::lines_strip };</div>
@@ -401,13 +401,13 @@ $(function() {
 <div class="line"><a name="l00330"></a><span class="lineno">  330</span>&#160;    ret.<a class="code" href="structqx_1_1geometry.html#ab318107b02ed7911918dbba32081c8e7">geomVertices</a>.reserve(nVertices);</div>
 <div class="line"><a name="l00331"></a><span class="lineno">  331</span>&#160; </div>
 <div class="line"><a name="l00332"></a><span class="lineno">  332</span>&#160;    ret.<a class="code" href="structqx_1_1geometry.html#a3ac921469ef6662d7617d1ba07b70494">geomIndices</a>.push_back(0);</div>
-<div class="line"><a name="l00333"></a><span class="lineno">  333</span>&#160;    ret.<a class="code" href="structqx_1_1geometry.html#ab318107b02ed7911918dbba32081c8e7">geomVertices</a>.emplace_back(detail::create_vertex({ 0.f, 0.f, 0.f }));</div>
+<div class="line"><a name="l00333"></a><span class="lineno">  333</span>&#160;    ret.<a class="code" href="structqx_1_1geometry.html#ab318107b02ed7911918dbba32081c8e7">geomVertices</a>.emplace_back(details::create_vertex({ 0.f, 0.f, 0.f }));</div>
 <div class="line"><a name="l00334"></a><span class="lineno">  334</span>&#160; </div>
 <div class="line"><a name="l00335"></a><span class="lineno">  335</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = 1; i &lt; nVertices; ++i)</div>
 <div class="line"><a name="l00336"></a><span class="lineno">  336</span>&#160;    {</div>
 <div class="line"><a name="l00337"></a><span class="lineno">  337</span>&#160;        ret.<a class="code" href="structqx_1_1geometry.html#a3ac921469ef6662d7617d1ba07b70494">geomIndices</a>.push_back(<span class="keyword">static_cast&lt;</span>index_type<span class="keyword">&gt;</span>(i));</div>
 <div class="line"><a name="l00338"></a><span class="lineno">  338</span>&#160;        ret.<a class="code" href="structqx_1_1geometry.html#ab318107b02ed7911918dbba32081c8e7">geomVertices</a>.emplace_back(</div>
-<div class="line"><a name="l00339"></a><span class="lineno">  339</span>&#160;            detail::create_vertex({ fHorRadius * std::cos(<span class="keyword">static_cast&lt;</span><span class="keywordtype">float</span><span class="keyword">&gt;</span>(i) * f2Pi / fSides),</div>
+<div class="line"><a name="l00339"></a><span class="lineno">  339</span>&#160;            details::create_vertex({ fHorRadius * std::cos(<span class="keyword">static_cast&lt;</span><span class="keywordtype">float</span><span class="keyword">&gt;</span>(i) * f2Pi / fSides),</div>
 <div class="line"><a name="l00340"></a><span class="lineno">  340</span>&#160;                                    fVertRadius * std::sin(<span class="keyword">static_cast&lt;</span><span class="keywordtype">float</span><span class="keyword">&gt;</span>(i) * f2Pi / fSides),</div>
 <div class="line"><a name="l00341"></a><span class="lineno">  341</span>&#160;                                    0.f }));</div>
 <div class="line"><a name="l00342"></a><span class="lineno">  342</span>&#160;    }</div>
@@ -456,11 +456,11 @@ $(function() {
 <div class="ttc" id="ageom_8h_html_af093b2b495cb81dec4eaa780ed3783dc"><div class="ttname"><a href="geom_8h.html#af093b2b495cb81dec4eaa780ed3783dc">qx::create_rect</a></div><div class="ttdeci">geometry create_rect(float fWidth, float fHeight)</div><div class="ttdoc">Create rectangle geometry.</div><div class="ttdef"><b>Definition:</b> <a href="geom_8inl_source.html#l00279">geom.inl:279</a></div></div>
 <div class="ttc" id="ageom_8h_html_afdad071adf812984dab8ca69bc1ea7d4"><div class="ttname"><a href="geom_8h.html#afdad071adf812984dab8ca69bc1ea7d4">qx::create_rect_lines</a></div><div class="ttdeci">geometry create_rect_lines(float fWidth, float fHeight)</div><div class="ttdoc">Create rectangle geometry for lines drawing.</div><div class="ttdef"><b>Definition:</b> <a href="geom_8inl_source.html#l00293">geom.inl:293</a></div></div>
 <div class="ttc" id="ashaders_8h_html_ae891b980e1f40a70e11e8bfc320d898eadd992be5859bfc12e59d4c15b4c17cf8"><div class="ttname"><a href="shaders_8h.html#ae891b980e1f40a70e11e8bfc320d898eadd992be5859bfc12e59d4c15b4c17cf8">qx::shader_type::geom</a></div><div class="ttdeci">@ geom</div><div class="ttdoc">geometry</div></div>
-<div class="ttc" id="astructqx_1_1geometry_html"><div class="ttname"><a href="structqx_1_1geometry.html">qx::geometry</a></div><div class="ttdef"><b>Definition:</b> <a href="geom_8h_source.html#l00040">geom.h:41</a></div></div>
-<div class="ttc" id="astructqx_1_1geometry_html_a3ac921469ef6662d7617d1ba07b70494"><div class="ttname"><a href="structqx_1_1geometry.html#a3ac921469ef6662d7617d1ba07b70494">qx::geometry::geomIndices</a></div><div class="ttdeci">indices geomIndices</div><div class="ttdoc">indices array</div><div class="ttdef"><b>Definition:</b> <a href="geom_8h_source.html#l00043">geom.h:43</a></div></div>
-<div class="ttc" id="astructqx_1_1geometry_html_ab318107b02ed7911918dbba32081c8e7"><div class="ttname"><a href="structqx_1_1geometry.html#ab318107b02ed7911918dbba32081c8e7">qx::geometry::geomVertices</a></div><div class="ttdeci">vertices geomVertices</div><div class="ttdoc">vertices array</div><div class="ttdef"><b>Definition:</b> <a href="geom_8h_source.html#l00042">geom.h:42</a></div></div>
-<div class="ttc" id="astructqx_1_1geometry_html_ac89f02a8a1192e71e9369f4168a33db8"><div class="ttname"><a href="structqx_1_1geometry.html#ac89f02a8a1192e71e9369f4168a33db8">qx::geometry::offset</a></div><div class="ttdeci">glm::vec3 offset</div><div class="ttdoc">offset of the center</div><div class="ttdef"><b>Definition:</b> <a href="geom_8h_source.html#l00044">geom.h:44</a></div></div>
-<div class="ttc" id="astructqx_1_1geometry_html_adc29d28859b1f9557a7cb88cf59fa045"><div class="ttname"><a href="structqx_1_1geometry.html#adc29d28859b1f9557a7cb88cf59fa045">qx::geometry::eDrawMode</a></div><div class="ttdeci">draw_mode eDrawMode</div><div class="ttdoc">draw mode</div><div class="ttdef"><b>Definition:</b> <a href="geom_8h_source.html#l00045">geom.h:45</a></div></div>
+<div class="ttc" id="astructqx_1_1geometry_html"><div class="ttname"><a href="structqx_1_1geometry.html">qx::geometry</a></div><div class="ttdef"><b>Definition:</b> <a href="geom_8h_source.html#l00039">geom.h:40</a></div></div>
+<div class="ttc" id="astructqx_1_1geometry_html_a3ac921469ef6662d7617d1ba07b70494"><div class="ttname"><a href="structqx_1_1geometry.html#a3ac921469ef6662d7617d1ba07b70494">qx::geometry::geomIndices</a></div><div class="ttdeci">indices geomIndices</div><div class="ttdoc">indices array</div><div class="ttdef"><b>Definition:</b> <a href="geom_8h_source.html#l00042">geom.h:42</a></div></div>
+<div class="ttc" id="astructqx_1_1geometry_html_ab318107b02ed7911918dbba32081c8e7"><div class="ttname"><a href="structqx_1_1geometry.html#ab318107b02ed7911918dbba32081c8e7">qx::geometry::geomVertices</a></div><div class="ttdeci">vertices geomVertices</div><div class="ttdoc">vertices array</div><div class="ttdef"><b>Definition:</b> <a href="geom_8h_source.html#l00041">geom.h:41</a></div></div>
+<div class="ttc" id="astructqx_1_1geometry_html_ac89f02a8a1192e71e9369f4168a33db8"><div class="ttname"><a href="structqx_1_1geometry.html#ac89f02a8a1192e71e9369f4168a33db8">qx::geometry::offset</a></div><div class="ttdeci">glm::vec3 offset</div><div class="ttdoc">offset of the center</div><div class="ttdef"><b>Definition:</b> <a href="geom_8h_source.html#l00043">geom.h:43</a></div></div>
+<div class="ttc" id="astructqx_1_1geometry_html_adc29d28859b1f9557a7cb88cf59fa045"><div class="ttname"><a href="structqx_1_1geometry.html#adc29d28859b1f9557a7cb88cf59fa045">qx::geometry::eDrawMode</a></div><div class="ttdeci">draw_mode eDrawMode</div><div class="ttdoc">draw mode</div><div class="ttdef"><b>Definition:</b> <a href="geom_8h_source.html#l00044">geom.h:44</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

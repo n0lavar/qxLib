@@ -72,8 +72,8 @@ $(function() {
 <a href="type__traits_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">/**</span></div>
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment"></span> </div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment">    @file      type_traits.h</span></div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment">    @brief     Type traits</span></div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment">    @author    Khrapov10.09.202020.08.2021</span></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment">    @author    Khrapov</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment">    @data      10.09.2020</span></div>
 <div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="comment">    @copyright © Nick Khrapov, 2021. All right reserved.</span></div>
 <div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="comment"></span> </div>
 <div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="comment">**/</span></div>
@@ -136,7 +136,7 @@ $(function() {
 <div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160; </div>
 <div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;<span class="comment">//--------------------------- is_specialization_exist --------------------------</span></div>
 <div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160; </div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;<span class="keyword">namespace </span>detail</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;<span class="keyword">namespace </span>details</div>
 <div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;{</div>
 <div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160; </div>
 <div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> T, std::<span class="keywordtype">size_t</span> = sizeof(T)&gt;</div>
@@ -144,11 +144,11 @@ $(function() {
 <div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160; </div>
 <div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;std::false_type is_specialization_exist_impl(...);</div>
 <div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160; </div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;} <span class="comment">// namespace detail</span></div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;} <span class="comment">// namespace details</span></div>
 <div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160; </div>
 <div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;<span class="comment">// decide if a struct/class specialization exist</span></div>
 <div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> T&gt;</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;<span class="keyword">using</span> is_specialization_exist = decltype(detail::is_specialization_exist_impl(std::declval&lt;T*&gt;()));</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;<span class="keyword">using</span> is_specialization_exist = decltype(details::is_specialization_exist_impl(std::declval&lt;T*&gt;()));</div>
 <div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160; </div>
 <div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> T&gt;</div>
 <div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;constexpr <span class="keywordtype">bool</span> is_specialization_exist_v = is_specialization_exist&lt;T&gt;::value;</div>
@@ -204,7 +204,7 @@ $(function() {
 <div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;<a class="code" href="structqx_1_1visit__overload.html">visit_overload</a>(args_t...) -&gt; <a class="code" href="structqx_1_1visit__overload.html">visit_overload</a>&lt;args_t...&gt;;</div>
 <div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160; </div>
 <div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;} <span class="comment">// namespace qx</span></div>
-<div class="ttc" id="aconcepts_8h_html"><div class="ttname"><a href="concepts_8h.html">concepts.h</a></div><div class="ttdoc">Concepts not included in std yet.</div></div>
+<div class="ttc" id="aconcepts_8h_html"><div class="ttname"><a href="concepts_8h.html">concepts.h</a></div></div>
 <div class="ttc" id="astructqx_1_1are__same_html"><div class="ttname"><a href="structqx_1_1are__same.html">qx::are_same</a></div><div class="ttdef"><b>Definition:</b> <a href="type__traits_8h_source.html#l00019">type_traits.h:20</a></div></div>
 <div class="ttc" id="astructqx_1_1is__specialization__of_html"><div class="ttname"><a href="structqx_1_1is__specialization__of.html">qx::is_specialization_of</a></div><div class="ttdef"><b>Definition:</b> <a href="type__traits_8h_source.html#l00090">type_traits.h:91</a></div></div>
 <div class="ttc" id="astructqx_1_1iterator__value_html"><div class="ttname"><a href="structqx_1_1iterator__value.html">qx::iterator_value</a></div><div class="ttdef"><b>Definition:</b> <a href="type__traits_8h_source.html#l00043">type_traits.h:44</a></div></div>

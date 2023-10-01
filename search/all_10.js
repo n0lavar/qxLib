@@ -1,5 +1,7 @@
 var searchData=
 [
+  ['qx_5fapply_5fcomma_393',['QX_APPLY_COMMA',['../apply_8h.html#a5655598f9e75cad88e59bcf895d318fe',1,'apply.h']]],
+  ['qx_5fapply_5fsemicolon_394',['QX_APPLY_SEMICOLON',['../apply_8h.html#a52c2e59e23679af142a8d2812d881cf6',1,'apply.h']]],
   ['qx_5fassert_395',['QX_ASSERT',['../assert_8h.html#add53bee6a19170a3d73bc82e00d522e8',1,'assert.h']]],
   ['qx_5fassert_5fno_5fentry_396',['QX_ASSERT_NO_ENTRY',['../assert_8h.html#a4776fd61bf606b5e0bf0d569ae055c2c',1,'assert.h']]],
   ['qx_5fchar_5fprefix_397',['QX_CHAR_PREFIX',['../string__utils_8h.html#a57911e62bb82593665bf09e4ea834904',1,'string_utils.h']]],

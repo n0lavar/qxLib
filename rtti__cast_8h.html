@@ -71,71 +71,70 @@ $(function() {
 <div class="title">rtti_cast.h File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
-
-<p>Contains cast functions for qx RTTI system.  
-<a href="#details">More...</a></p>
-<div class="textblock"><code>#include &lt;type_traits&gt;</code><br />
+<div class="textblock"><code>#include &lt;<a class="el" href="type__traits_8h_source.html">qx/meta/type_traits.h</a>&gt;</code><br />
+<code>#include &lt;memory&gt;</code><br />
+<code>#include &lt;type_traits&gt;</code><br />
 </div>
 <p><a href="rtti__cast_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a1af8d1c717e312349e5cd36f39cf16fa"><td class="memTemplParams" colspan="2">template&lt;class Y &gt; </td></tr>
-<tr class="memitem:a1af8d1c717e312349e5cd36f39cf16fa"><td class="memTemplItemLeft" align="right" valign="top">Y *&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="rtti__cast_8h.html#a1af8d1c717e312349e5cd36f39cf16fa">qx::rtti_cast</a> (auto &amp;pointer)</td></tr>
-<tr class="memdesc:a1af8d1c717e312349e5cd36f39cf16fa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns Y* if Y is inherited from pointer class, otherwise nullptr.  <a href="rtti__cast_8h.html#a1af8d1c717e312349e5cd36f39cf16fa">More...</a><br /></td></tr>
-<tr class="separator:a1af8d1c717e312349e5cd36f39cf16fa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab91745c6cdfdd361c1f0c684b343fd70"><td class="memTemplParams" colspan="2">template&lt;class Y , class X &gt; </td></tr>
+<tr class="memitem:ab91745c6cdfdd361c1f0c684b343fd70"><td class="memTemplItemLeft" align="right" valign="top">Y *&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="rtti__cast_8h.html#ab91745c6cdfdd361c1f0c684b343fd70">qx::rtti_cast</a> (X &amp;value)</td></tr>
+<tr class="memdesc:ab91745c6cdfdd361c1f0c684b343fd70"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns Y* if X or element_type of X is inherited from Y, otherwise nullptr.  <a href="rtti__cast_8h.html#ab91745c6cdfdd361c1f0c684b343fd70">More...</a><br /></td></tr>
+<tr class="separator:ab91745c6cdfdd361c1f0c684b343fd70"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af902ef7984c2e7134318854e38c7fa46"><td class="memTemplParams" colspan="2">template&lt;class Y , class X &gt; </td></tr>
 <tr class="memitem:af902ef7984c2e7134318854e38c7fa46"><td class="memTemplItemLeft" align="right" valign="top">Y *&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="rtti__cast_8h.html#af902ef7984c2e7134318854e38c7fa46">qx::rtti_cast</a> (X *pointer)</td></tr>
-<tr class="memdesc:af902ef7984c2e7134318854e38c7fa46"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns Y* if Y is inherited from pointer class, otherwise nullptr.  <a href="rtti__cast_8h.html#af902ef7984c2e7134318854e38c7fa46">More...</a><br /></td></tr>
+<tr class="memdesc:af902ef7984c2e7134318854e38c7fa46"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns Y* if X is inherited from Y, otherwise nullptr.  <a href="rtti__cast_8h.html#af902ef7984c2e7134318854e38c7fa46">More...</a><br /></td></tr>
 <tr class="separator:af902ef7984c2e7134318854e38c7fa46"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Contains cast functions for qx RTTI system. </p>
-<dl class="section author"><dt>Author</dt><dd>Khrapov </dd></dl>
+<div class="textblock"><dl class="section author"><dt>Author</dt><dd>Khrapov </dd></dl>
 <dl class="section date"><dt>Date</dt><dd>9.09.2021 </dd></dl>
 <dl class="section copyright"><dt>Copyright</dt><dd>© Nick Khrapov, 2021. All right reserved. </dd></dl>
 
 <p class="definition">Definition in file <a class="el" href="rtti__cast_8h_source.html">rtti_cast.h</a>.</p>
 </div><h2 class="groupheader">Function Documentation</h2>
-<a id="a1af8d1c717e312349e5cd36f39cf16fa"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1af8d1c717e312349e5cd36f39cf16fa">&#9670;&nbsp;</a></span>rtti_cast() <span class="overload">[1/2]</span></h2>
+<a id="ab91745c6cdfdd361c1f0c684b343fd70"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab91745c6cdfdd361c1f0c684b343fd70">&#9670;&nbsp;</a></span>rtti_cast() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class Y &gt; </div>
+template&lt;class Y , class X &gt; </div>
       <table class="memname">
         <tr>
           <td class="memname">Y* qx::rtti_cast </td>
           <td>(</td>
-          <td class="paramtype">auto &amp;&#160;</td>
-          <td class="paramname"><em>pointer</em></td><td>)</td>
+          <td class="paramtype">X &amp;&#160;</td>
+          <td class="paramname"><em>value</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Returns Y* if Y is inherited from pointer class, otherwise nullptr. </p>
+<p>Returns Y* if X or element_type of X is inherited from Y, otherwise nullptr. </p>
 <p>Pointer class should contain QX_RTTI_CLASS </p><dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
     <tr><td class="paramname">Y</td><td>- type to cast to </td></tr>
+    <tr><td class="paramname">X</td><td>- smart pointer type or some class to test type </td></tr>
   </table>
   </dd>
 </dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">pointer</td><td>- unique or shared pointer </td></tr>
+    <tr><td class="paramname">value</td><td>- smart pointer object or some class to test object </td></tr>
   </table>
   </dd>
 </dl>
 <dl class="retval"><dt>Return values</dt><dd>
   <table class="retval">
-    <tr><td class="paramname">-</td><td>Y* if Y is inherited from pointer class, otherwise nullptr </td></tr>
+    <tr><td class="paramname">-</td><td>Y* if X or element_type of X is inherited from Y, otherwise nullptr </td></tr>
   </table>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="rtti__cast_8h_source.html#l00033">33</a> of file <a class="el" href="rtti__cast_8h_source.html">rtti_cast.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="rtti__cast_8h_source.html#l00036">36</a> of file <a class="el" href="rtti__cast_8h_source.html">rtti_cast.h</a>.</p>
 
 </div>
 </div>
@@ -157,7 +156,7 @@ template&lt;class Y , class X &gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p>Returns Y* if Y is inherited from pointer class, otherwise nullptr. </p>
+<p>Returns Y* if X is inherited from Y, otherwise nullptr. </p>
 <p>Pointer class should contain QX_RTTI_CLASS </p><dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
     <tr><td class="paramname">Y</td><td>- type to cast to </td></tr>
@@ -173,12 +172,12 @@ template&lt;class Y , class X &gt; </div>
 </dl>
 <dl class="retval"><dt>Return values</dt><dd>
   <table class="retval">
-    <tr><td class="paramname">-</td><td>Y* if Y is inherited from pointer class, otherwise nullptr </td></tr>
+    <tr><td class="paramname">-</td><td>Y* if X is inherited from pointer class, otherwise nullptr </td></tr>
   </table>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="rtti__cast_8h_source.html#l00052">52</a> of file <a class="el" href="rtti__cast_8h_source.html">rtti_cast.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="rtti__cast_8h_source.html#l00065">65</a> of file <a class="el" href="rtti__cast_8h_source.html">rtti_cast.h</a>.</p>
 
 </div>
 </div>

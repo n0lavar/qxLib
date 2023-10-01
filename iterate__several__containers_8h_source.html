@@ -72,39 +72,37 @@ $(function() {
 <a href="iterate__several__containers_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">/**</span></div>
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment"></span> </div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment">    @file      iterate_several_containers.h</span></div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment">    @brief     Contains qx::iterate_several_containers function</span></div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment">    @details   ~</span></div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="comment">    @author    Khrapov</span></div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="comment">    @date      26.08.2022</span></div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="comment">    @copyright © Nick Khrapov, 2022. All right reserved.</span></div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="comment">**/</span></div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#pragma once</span></div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160; </div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="keyword">namespace </span>qx</div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;{</div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="comment">/**</span></div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="comment">    @brief  Iterate several containers in a row with one func</span></div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="comment">    @tparam func_t       - callable type</span></div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="comment">    @tparam containers_t - containers types pack</span></div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="comment">    @param  func         - iteration callable</span></div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="comment">    @param  containers   - containers to iterate</span></div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="comment">**/</span></div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class </span>func_t, <span class="keyword">class</span>... containers_t&gt;</div>
-<div class="line"><a name="l00024"></a><span class="lineno"><a class="line" href="iterate__several__containers_8h.html#a9e3c1cd9d078ddfc91d280fc776f2e87">   24</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="iterate__several__containers_8h.html#a9e3c1cd9d078ddfc91d280fc776f2e87">iterate_several_containers</a>(<span class="keyword">const</span> func_t&amp; func, <span class="keyword">const</span> containers_t&amp;... containers)</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;{</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    <span class="keyword">auto</span> iteration_func = [&amp;]&lt;<span class="keyword">class </span>container_t&gt;(const container_t&amp; container)</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    {</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;        <span class="keywordflow">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span>&amp; elem : container)</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;            func(elem);</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    };</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160; </div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    (iteration_func(containers), ...);</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;}</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160; </div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;} <span class="comment">// namespace qx</span></div>
-<div class="ttc" id="aiterate__several__containers_8h_html_a9e3c1cd9d078ddfc91d280fc776f2e87"><div class="ttname"><a href="iterate__several__containers_8h.html#a9e3c1cd9d078ddfc91d280fc776f2e87">qx::iterate_several_containers</a></div><div class="ttdeci">void iterate_several_containers(const func_t &amp;func, const containers_t &amp;... containers)</div><div class="ttdoc">Iterate several containers in a row with one func.</div><div class="ttdef"><b>Definition:</b> <a href="iterate__several__containers_8h_source.html#l00024">iterate_several_containers.h:24</a></div></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment">    @author    Khrapov</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment">    @date      26.08.2022</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="comment">    @copyright © Nick Khrapov, 2022. All right reserved.</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="comment">**/</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#pragma once</span></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160; </div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="keyword">namespace </span>qx</div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;{</div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="comment">/**</span></div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="comment">    @brief  Iterate several containers in a row with one func</span></div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="comment">    @tparam func_t       - callable type</span></div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="comment">    @tparam containers_t - containers types pack</span></div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="comment">    @param  func         - iteration callable</span></div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="comment">    @param  containers   - containers to iterate</span></div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="comment">**/</span></div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class </span>func_t, <span class="keyword">class</span>... containers_t&gt;</div>
+<div class="line"><a name="l00022"></a><span class="lineno"><a class="line" href="iterate__several__containers_8h.html#a9e3c1cd9d078ddfc91d280fc776f2e87">   22</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="iterate__several__containers_8h.html#a9e3c1cd9d078ddfc91d280fc776f2e87">iterate_several_containers</a>(<span class="keyword">const</span> func_t&amp; func, <span class="keyword">const</span> containers_t&amp;... containers)</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;{</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    <span class="keyword">auto</span> iteration_func = [&amp;]&lt;<span class="keyword">class </span>container_t&gt;(const container_t&amp; container)</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    {</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;        <span class="keywordflow">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span>&amp; elem : container)</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;            func(elem);</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    };</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160; </div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    (iteration_func(containers), ...);</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;}</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160; </div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;} <span class="comment">// namespace qx</span></div>
+<div class="ttc" id="aiterate__several__containers_8h_html_a9e3c1cd9d078ddfc91d280fc776f2e87"><div class="ttname"><a href="iterate__several__containers_8h.html#a9e3c1cd9d078ddfc91d280fc776f2e87">qx::iterate_several_containers</a></div><div class="ttdeci">void iterate_several_containers(const func_t &amp;func, const containers_t &amp;... containers)</div><div class="ttdoc">Iterate several containers in a row with one func.</div><div class="ttdef"><b>Definition:</b> <a href="iterate__several__containers_8h_source.html#l00022">iterate_several_containers.h:22</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

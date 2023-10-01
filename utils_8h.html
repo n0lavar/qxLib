@@ -71,11 +71,9 @@ $(function() {
 <div class="title">utils.h File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
-
-<p>Contains various utils for containers.  
-<a href="#details">More...</a></p>
 <div class="textblock"><code>#include &lt;algorithm&gt;</code><br />
 <code>#include &lt;array&gt;</code><br />
+<code>#include &lt;<a class="el" href="utils_8inl_source.html">qx/containers/utils.inl</a>&gt;</code><br />
 </div>
 <p><a href="utils_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
@@ -89,10 +87,10 @@ Functions</h2></td></tr>
 <tr class="memitem:a9d6faba90a6874d7629cf440bdd4092c"><td class="memTemplItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="utils_8h.html#a9d6faba90a6874d7629cf440bdd4092c">qx::make_array</a> (T init_val=T())</td></tr>
 <tr class="memdesc:a9d6faba90a6874d7629cf440bdd4092c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fill array with value in constructor.  <a href="utils_8h.html#a9d6faba90a6874d7629cf440bdd4092c">More...</a><br /></td></tr>
 <tr class="separator:a9d6faba90a6874d7629cf440bdd4092c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aeccf764444fb66cff5690d7570fdefc2"><td class="memTemplParams" colspan="2">template&lt;class T , std::size_t LeftLength, std::size_t RightLength&gt; </td></tr>
-<tr class="memitem:aeccf764444fb66cff5690d7570fdefc2"><td class="memTemplItemLeft" align="right" valign="top">constexpr std::array&lt; T, LeftLength+RightLength &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="utils_8h.html#aeccf764444fb66cff5690d7570fdefc2">qx::join_arrays</a> (std::array&lt; T, LeftLength &gt; rhs, std::array&lt; T, RightLength &gt; lhs)</td></tr>
-<tr class="memdesc:aeccf764444fb66cff5690d7570fdefc2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Join arrays at compile-time.  <a href="utils_8h.html#aeccf764444fb66cff5690d7570fdefc2">More...</a><br /></td></tr>
-<tr class="separator:aeccf764444fb66cff5690d7570fdefc2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad87f567ad1eb4cd1c4a5187839530b48"><td class="memTemplParams" colspan="2">template&lt;class T , std::size_t LeftLength, std::size_t RightLength&gt; </td></tr>
+<tr class="memitem:ad87f567ad1eb4cd1c4a5187839530b48"><td class="memTemplItemLeft" align="right" valign="top">constexpr std::array&lt; T, LeftLength+RightLength &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="utils_8h.html#ad87f567ad1eb4cd1c4a5187839530b48">qx::join_arrays</a> (std::array&lt; T, LeftLength &gt; rhs, std::array&lt; T, RightLength &gt; lhs)</td></tr>
+<tr class="memdesc:ad87f567ad1eb4cd1c4a5187839530b48"><td class="mdescLeft">&#160;</td><td class="mdescRight">Join arrays at compile-time.  <a href="utils_8h.html#ad87f567ad1eb4cd1c4a5187839530b48">More...</a><br /></td></tr>
+<tr class="separator:ad87f567ad1eb4cd1c4a5187839530b48"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abd7ce410374e16233bf7c028afd34302"><td class="memTemplParams" colspan="2">template&lt;class result_container_t , class container_t &gt; </td></tr>
 <tr class="memitem:abd7ce410374e16233bf7c028afd34302"><td class="memTemplItemLeft" align="right" valign="top">result_container_t&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="utils_8h.html#abd7ce410374e16233bf7c028afd34302">qx::make_container</a> (const container_t &amp;from)</td></tr>
 <tr class="memdesc:abd7ce410374e16233bf7c028afd34302"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a container by constructing each element from the corresponding element of the original container.  <a href="utils_8h.html#abd7ce410374e16233bf7c028afd34302">More...</a><br /></td></tr>
@@ -103,8 +101,7 @@ Functions</h2></td></tr>
 <tr class="separator:a8a23a76a4737044b9b17017f632306fc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Contains various utils for containers. </p>
-<p>~ </p><dl class="section author"><dt>Author</dt><dd>Khrapov </dd></dl>
+<div class="textblock"><dl class="section author"><dt>Author</dt><dd>Khrapov </dd></dl>
 <dl class="section date"><dt>Date</dt><dd>6.08.2022 </dd></dl>
 <dl class="section copyright"><dt>Copyright</dt><dd>© Nick Khrapov, 2022. All right reserved. </dd></dl>
 
@@ -156,7 +153,7 @@ template&lt;class container_t &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="utils_8h_source.html#l00097">97</a> of file <a class="el" href="utils_8h_source.html">utils.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="utils_8inl_source.html#l00055">55</a> of file <a class="el" href="utils_8inl_source.html">utils.inl</a>.</p>
 
 </div>
 </div>
@@ -211,12 +208,12 @@ template&lt;class iterator_t &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="utils_8h_source.html#l00026">26</a> of file <a class="el" href="utils_8h_source.html">utils.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="utils_8inl_source.html#l00014">14</a> of file <a class="el" href="utils_8inl_source.html">utils.inl</a>.</p>
 
 </div>
 </div>
-<a id="aeccf764444fb66cff5690d7570fdefc2"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aeccf764444fb66cff5690d7570fdefc2">&#9670;&nbsp;</a></span>join_arrays()</h2>
+<a id="ad87f567ad1eb4cd1c4a5187839530b48"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad87f567ad1eb4cd1c4a5187839530b48">&#9670;&nbsp;</a></span>join_arrays()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -227,7 +224,7 @@ template&lt;class T , std::size_t LeftLength, std::size_t RightLength&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">constexpr std::array&lt;T, LeftLength + RightLength&gt; qx::join_arrays </td>
+          <td class="memname">constexpr std::array&lt; T, LeftLength+RightLength &gt; qx::join_arrays </td>
           <td>(</td>
           <td class="paramtype">std::array&lt; T, LeftLength &gt;&#160;</td>
           <td class="paramname"><em>rhs</em>, </td>
@@ -274,7 +271,7 @@ template&lt;class T , std::size_t LeftLength, std::size_t RightLength&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="utils_8h_source.html#l00061">61</a> of file <a class="el" href="utils_8h_source.html">utils.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="utils_8inl_source.html#l00033">33</a> of file <a class="el" href="utils_8inl_source.html">utils.inl</a>.</p>
 
 </div>
 </div>
@@ -325,7 +322,7 @@ template&lt;size_t N, class T &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="utils_8h_source.html#l00044">44</a> of file <a class="el" href="utils_8h_source.html">utils.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="utils_8inl_source.html#l00025">25</a> of file <a class="el" href="utils_8inl_source.html">utils.inl</a>.</p>
 
 </div>
 </div>
@@ -368,7 +365,7 @@ template&lt;class result_container_t , class container_t &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="utils_8h_source.html#l00080">80</a> of file <a class="el" href="utils_8h_source.html">utils.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="utils_8inl_source.html#l00044">44</a> of file <a class="el" href="utils_8inl_source.html">utils.inl</a>.</p>
 
 </div>
 </div>
