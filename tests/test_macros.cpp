@@ -11,12 +11,13 @@
 //V_EXCLUDE_PATH *test_macros.cpp
 
 #include <qx/containers/string/string_utils.h>
+#include <qx/macros/apply.h>
 #include <qx/macros/common.h>
 #include <qx/macros/static_assert.h>
 
 #include <map>
 
-//------------------------------- QX_EMPTY_MACRO -------------------------------
+// --------------------------------------------------- QX_EMPTY_MACRO --------------------------------------------------
 
 #define EMPTY1 QX_EMPTY_MACRO
 #define EMPTY2 QX_EMPTY_MACRO
@@ -38,7 +39,7 @@ TEST(macros, empty_macro)
 
 
 
-//-------------------------------- QX_STRINGIFY --------------------------------
+// ---------------------------------------------------- QX_STRINGIFY ---------------------------------------------------
 
 constexpr int  val     = 0;
 constexpr auto pszName = QX_STRINGIFY(val);
@@ -46,21 +47,21 @@ QX_STATIC_ASSERT_STR_EQ(pszName, "val");
 
 
 
-//-------------------------------- QX_LINE_NAME --------------------------------
+// ---------------------------------------------------- QX_LINE_NAME ---------------------------------------------------
 
 constexpr int QX_LINE_NAME(test) = 5;
-static_assert(test51 == 5);
+static_assert(test52 == 5);
 
 
 
-//-------------------------------- QX_SHORT_FILE -------------------------------
+// --------------------------------------------------- QX_SHORT_FILE ---------------------------------------------------
 
 constexpr auto pszFileName = QX_SHORT_FILE;
 QX_STATIC_ASSERT_STR_EQ(pszFileName, QX_TEXT("test_macros.cpp"));
 
 
 
-//----------------------------- QX_SINGLE_ARGUMENT -----------------------------
+// ------------------------------------------------- QX_SINGLE_ARGUMENT ------------------------------------------------
 
 #define MACRO_WITH_2_ARGS(a, b) \
     if (a != b)                 \
@@ -74,7 +75,7 @@ TEST(macros, single_argument)
 
 
 
-//----------------------------- QX_STATIC_ASSERT_XX ----------------------------
+// ------------------------------------------------ QX_STATIC_ASSERT_XX ------------------------------------------------
 
 QX_STATIC_ASSERT_EQ(0, 0);
 QX_STATIC_ASSERT_EQ(1, 1);
@@ -102,7 +103,7 @@ QX_STATIC_ASSERT_GE(2, 1);
 
 
 
-//--------------------------- QX_STATIC_ASSERT_STR_XX --------------------------
+// ---------------------------------------------- QX_STATIC_ASSERT_STR_XX ----------------------------------------------
 
 QX_STATIC_ASSERT_STR_EQ("", "");
 QX_STATIC_ASSERT_STR_EQ("string", "string");
@@ -129,24 +130,60 @@ QX_STATIC_ASSERT_STR_GE("2", "1");
 QX_STATIC_ASSERT_STR_GE("1", "1");
 QX_STATIC_ASSERT_STR_GE("", "");
 
-//-------------------------- QX_STATIC_ASSERT_BETWEEN --------------------------
+
+
+// ---------------------------------------------- QX_STATIC_ASSERT_BETWEEN ---------------------------------------------
 
 QX_STATIC_ASSERT_BETWEEN(0, 0, 0);
 QX_STATIC_ASSERT_BETWEEN(0, 0, 1);
 QX_STATIC_ASSERT_BETWEEN(0, 1, 2);
 QX_STATIC_ASSERT_BETWEEN(0, 2, 2);
 
-//-------------------------------- QX_STR_PREFIX -------------------------------
+
+
+// --------------------------------------------------- QX_STR_PREFIX ---------------------------------------------------
 
 constexpr const char*    psz  = QX_STR_PREFIX(char, "string");
 constexpr const wchar_t* pwsz = QX_STR_PREFIX(wchar_t, "wstring");
 
 
 
-//------------------------------- QX_CHAR_PREFIX -------------------------------
+// --------------------------------------------------- QX_CHAR_PREFIX --------------------------------------------------
 
 constexpr char ch = QX_CHAR_PREFIX(char, 'c');
 static_assert(ch == 'c');
 
 constexpr wchar_t wch = QX_CHAR_PREFIX(wchar_t, 'w');
 static_assert(wch == L'w');
+
+
+
+// ---------------------------------------------------- QX_APPLY_XXX ---------------------------------------------------
+
+static int Foo(int nNumber)
+{
+    return nNumber;
+}
+
+template<class... ArgsType>
+int Sum(ArgsType... args)
+{
+    return (args + ...);
+}
+
+TEST(macros, QX_APPLY_COMMA)
+{
+    EXPECT_EQ(Sum(QX_APPLY_COMMA(Foo, 1, 2, 3)), 6);
+}
+
+int         g_nSum = 0;
+static void Bar(int nNumber)
+{
+    g_nSum += nNumber;
+}
+
+TEST(macros, QX_APPLY_SEMICOLON)
+{
+    QX_APPLY_SEMICOLON(Bar, 1, 2, 3);
+    EXPECT_EQ(g_nSum, 6);
+}
