@@ -15,3 +15,4 @@
 #include <qx/algo/iterate_several_containers.h>
 #include <qx/algo/remove.h>
 #include <qx/algo/sort.h>
+#include <qx/algo/transform.h>

@@ -36,6 +36,13 @@ constexpr bool are_same_v = are_same<args_t...>::value;
 
 
 
+//------------------------------- are_specific_v -------------------------------
+
+template<class T, class... args_t>
+static constexpr bool are_specific_v = std::conjunction_v<std::is_same<T, args_t>...>;
+
+
+
 //------------------------------- iterator_value -------------------------------
 
 // get value type of iterator
