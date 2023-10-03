@@ -27,49 +27,41 @@ inline void base_logger_stream::log(
 {
     QX_PERF_SCOPE("Log");
 
-    const char_type* pszCategory = category.get_name();
+    const auto optLogUnit = get_unit_info(category, eVerbosity, svFile, svFunction);
+    if (!optLogUnit)
+        return;
 
-    if (const auto optLogUnit =
-            get_unit_info(pszCategory ? qx::string_view(pszCategory) : qx::string_view(), svFile, svFunction);
-        optLogUnit && optLogUnit->pUnitInfo)
+    std::lock_guard lock(m_LoggerStreamMutex);
+
+    auto& buffers = get_log_buffer();
+    buffers.clear();
+
+    auto formatFunc = optLogUnit->pUnitInfo->formatFunc;
+    if (!formatFunc)
     {
-        if (eVerbosity >= optLogUnit->pUnitInfo->eMinVerbosity)
+        formatFunc = [this](
+                         logger_buffer&      buffers,
+                         verbosity           eVerbosity,
+                         const qx::category& category,
+                         string_view         svFile,
+                         string_view         svFunction,
+                         int                 nLine,
+                         string_view         swLogMessage)
         {
-            QX_PERF_SCOPE("Log lock");
+            format_line(buffers, eVerbosity, category, svFile, svFunction, nLine, swLogMessage);
+        };
+    }
 
-            std::lock_guard lock(m_LoggerStreamMutex);
+    {
+        QX_PERF_SCOPE("Log formatting");
+        formatFunc(buffers, eVerbosity, category, svFile, svFunction, nLine, swLogMessage);
+    }
 
-            auto& buffers = get_log_buffer();
-            buffers.clear();
-
-            auto formatFunc = optLogUnit->pUnitInfo->formatFunc;
-            if (!formatFunc)
-            {
-                formatFunc = [this](
-                                 logger_buffer&      buffers,
-                                 verbosity           eVerbosity,
-                                 const qx::category& category,
-                                 string_view         svFile,
-                                 string_view         svFunction,
-                                 int                 nLine,
-                                 string_view         swLogMessage)
-                {
-                    format_line(buffers, eVerbosity, category, svFile, svFunction, nLine, swLogMessage);
-                };
-            }
-
-            {
-                QX_PERF_SCOPE("Log formatting");
-                formatFunc(buffers, eVerbosity, category, svFile, svFunction, nLine, swLogMessage);
-            }
-
-            if (!buffers.sMessage.empty())
-            {
-                do_log(buffers.sMessage, *optLogUnit, buffers.colors, eVerbosity);
-                if (m_bAlwaysFlush)
-                    flush();
-            }
-        }
+    if (!buffers.sMessage.empty())
+    {
+        do_log(buffers.sMessage, *optLogUnit, buffers.colors, eVerbosity);
+        if (m_bAlwaysFlush)
+            flush();
     }
 }
 
@@ -82,6 +74,36 @@ inline void base_logger_stream::register_unit(string_view svUnitName, const log_
 inline void base_logger_stream::deregister_unit(string_view svUnitName) noexcept
 {
     m_Units.erase(string_hash(svUnitName));
+}
+
+inline std::optional<log_unit> base_logger_stream::get_unit_info(
+    const category& category,
+    verbosity       eVerbosity,
+    string_view     svFile,
+    string_view     svFunction) const noexcept
+{
+    QX_PERF_SCOPE();
+
+    auto find_unit = [this](string_view svUnit)
+    {
+        return !svUnit.empty() ? m_Units.find(string_hash(svUnit)) : m_Units.cend();
+    };
+
+    std::optional<log_unit> optLogUnit = std::nullopt;
+
+    if (auto it = find_unit(category.get_name()); it != m_Units.cend())
+        optLogUnit = { &it->second, category.get_name() };
+    else if (it = find_unit(svFile); it != m_Units.cend())
+        optLogUnit = { &it->second, svFile };
+    else if (it = find_unit(svFunction); it != m_Units.cend())
+        optLogUnit = { &it->second, svFunction };
+    else if (it = find_unit(k_svDefaultUnit); it != m_Units.cend())
+        optLogUnit = { &it->second, k_svDefaultUnit };
+
+    if (optLogUnit && optLogUnit->pUnitInfo && eVerbosity >= optLogUnit->pUnitInfo->eMinVerbosity)
+        return optLogUnit;
+    else
+        return std::nullopt;
 }
 
 inline void base_logger_stream::append_time_string(
@@ -156,45 +178,18 @@ inline void base_logger_stream::format_line(
     append_time_string(buffers.sMessage, QX_TEXT('.'), QX_TEXT(':'));
     buffers.sMessage += QX_TEXT("][");
 
-    const char_type* pszCategory = category.get_name();
-    if (pszCategory)
+    string_view svCategory = category.get_name();
+    if (!svCategory.empty())
     {
-        buffers.sMessage += pszCategory;
+        buffers.sMessage += svCategory;
         buffers.sMessage += QX_TEXT("][");
     }
 
     buffers.sMessage.append_format(QX_TEXT("{}::{}::{}] {}\n"), svFile, svFunction, nLine, swLogMessage);
 
-    if (pszCategory)
-        if (auto nPos = buffers.sMessage.find(pszCategory); nPos != string::npos)
-            buffers.colors.push_back({ { nPos, nPos + qx::strlen(pszCategory) }, category.get_color() });
-}
-
-inline std::optional<log_unit> base_logger_stream::get_unit_info(
-    string_view svCategory,
-    string_view svFile,
-    string_view svFunction) noexcept
-{
-    QX_PERF_SCOPE();
-
-    auto find_unit = [this](string_view svUnit)
-    {
-        return !svUnit.empty() ? m_Units.find(string_hash(svUnit)) : m_Units.end();
-    };
-
-    std::optional<log_unit> logUnit = std::nullopt;
-
-    auto it = m_Units.end();
-    if (it = find_unit(svCategory); it != m_Units.end())
-        logUnit = { &it->second, svCategory };
-    else if (it = find_unit(svFile); it != m_Units.end())
-        logUnit = { &it->second, svFile };
-    else if (it = find_unit(svFunction); it != m_Units.end())
-        logUnit = { &it->second, svFunction };
-    else if (it = find_unit(k_svDefaultUnit); it != m_Units.end())
-        logUnit = { &it->second, k_svDefaultUnit };
-
-    return logUnit;
+    if (!svCategory.empty())
+        if (auto nPos = buffers.sMessage.find(svCategory); nPos != string::npos)
+            buffers.colors.push_back({ { nPos, nPos + svCategory.size() }, category.get_color() });
 }
 
 } // namespace qx

@@ -65,10 +65,10 @@ public:
 
     /**
         @brief  category object constructor
-        @param  pszName        - category name. For ex. CatRendering or CatWidgets
+        @param  svName         - category name. For ex. CatRendering or CatWidgets
         @param  categoryColor  - color to be used if supported
     **/
-    constexpr explicit category(const char_type* pszName, const color& categoryColor = kDefaultColor) noexcept;
+    constexpr explicit category(string_view svName, const color& categoryColor = kDefaultColor) noexcept;
 
     /**
         @brief  Create new category from this one with custom verbosity
@@ -82,7 +82,7 @@ public:
         @brief  Get category name
         @retval - category name
     **/
-    constexpr const char_type* get_name() const noexcept;
+    constexpr string_view get_name() const noexcept;
 
     /**
         @brief  Get category color
@@ -98,9 +98,9 @@ public:
     constexpr verbosity get_verbosity() const noexcept;
 
 private:
-    color            m_Color     = kDefaultColor;
-    const char_type* m_pszName   = nullptr;
-    verbosity        m_Verbosity = verbosity::log;
+    color       m_Color = kDefaultColor;
+    string_view m_svName;
+    verbosity   m_Verbosity = QX_CONF_COMPILE_TIME_VERBOSITY;
 };
 
 } // namespace qx

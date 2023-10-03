@@ -61,8 +61,8 @@ struct log_unit_info
 
 struct log_unit
 {
-    log_unit_info* pUnitInfo = nullptr;
-    string_view    svUnitName;
+    const log_unit_info* pUnitInfo = nullptr;
+    string_view          svUnitName;
 };
 
 /**
@@ -125,6 +125,20 @@ public:
     void deregister_unit(string_view svUnitName) noexcept;
 
     /**
+        @brief  Try to find log unit info based on trace location info
+        @param  category   - code category
+        @param  eVerbosity - message verbosity
+        @param  svFile     - file string
+        @param  svFunction - function string
+        @retval            - log unit info if found
+    **/
+    std::optional<log_unit> get_unit_info(
+        const category& category,
+        verbosity       eVerbosity,
+        string_view     svFile,
+        string_view     svFunction) const noexcept;
+
+    /**
         @brief  Format time string to the buffer
         @param  sTime           - output time buffer
         @param  chDateDelimiter - char to use as delimiter in date part
@@ -171,15 +185,6 @@ private:
         const log_unit&                        logUnit,
         const std::vector<logger_color_range>& colors,
         verbosity                              eVerbosity) = 0;
-
-    /**
-        @brief  Try to find log unit info based on trace location info
-        @param  svCategory - code category name
-        @param  svFile     - file string
-        @param  svFunction - function string
-        @retval            - log unit info if found
-    **/
-    std::optional<log_unit> get_unit_info(string_view svCategory, string_view svFile, string_view svFunction) noexcept;
 
 private:
     std::unordered_map<string_hash, log_unit_info> m_Units;

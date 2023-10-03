@@ -110,6 +110,22 @@ public:
     **/
     void reset() noexcept;
 
+    /**
+        @brief   Returns true if any of streams will accept this message
+        @details Typically you don't want to use it
+                 It may be useful with async logging to avoid unnecessary formatting and queueing
+        @param   category   - code category
+        @param   eVerbosity - message verbosity
+        @param   svFile     - file name string
+        @param   svFunction - function name string
+        @retval             - true if any of streams will accept this message
+    **/
+    bool will_any_stream_accept(
+        const category& category,
+        verbosity       eVerbosity,
+        string_view     svFile,
+        string_view     svFunction) const noexcept;
+
 private:
     std::vector<std::unique_ptr<base_logger_stream>> m_Streams;
 };

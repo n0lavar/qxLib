@@ -51,8 +51,7 @@ bool string_data<traits_t>::resize(size_type nSymbols, size_type nAlign, string_
 
         if (nSymbolsToAllocate <= m_Buffer.size())
         {
-            if (!bSmallAtStart
-                && (traits_t::shrink_to_fit_when_small() || eType == string_resize_type::shrink_to_fit))
+            if (!bSmallAtStart && (traits_t::shrink_to_fit_when_small() || eType == string_resize_type::shrink_to_fit))
             {
                 // free allocated memory and move string to buffer
                 std::memmove(buff.data(), m_pData, nNewSize);

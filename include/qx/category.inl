@@ -10,9 +10,9 @@
 namespace qx
 {
 
-constexpr category::category(const char_type* pszName, const color& categoryColor) noexcept
+constexpr category::category(string_view svName, const color& categoryColor) noexcept
     : m_Color(categoryColor)
-    , m_pszName(pszName)
+    , m_svName(svName)
 {
 }
 
@@ -23,9 +23,9 @@ constexpr category category::set_verbosity(verbosity eVerbosity) const noexcept
     return category_;
 }
 
-constexpr const char_type* category::get_name() const noexcept
+constexpr string_view category::get_name() const noexcept
 {
-    return m_pszName;
+    return m_svName;
 }
 
 constexpr const color& category::get_color() const noexcept
@@ -40,7 +40,7 @@ constexpr verbosity category::get_verbosity() const noexcept
 
 } // namespace qx
 
-constexpr qx::category CatDefault(nullptr, qx::color::empty());
+constexpr qx::category CatDefault = qx::category(L"", qx::color::white());
 
 namespace qx::details
 {

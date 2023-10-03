@@ -8,6 +8,10 @@
 **/
 #pragma once
 
+#ifndef QX_CONF_COMPILE_TIME_VERBOSITY
+    #define QX_CONF_COMPILE_TIME_VERBOSITY qx::verbosity::very_verbose
+#endif
+
 namespace qx
 {
 

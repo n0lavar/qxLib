@@ -14,9 +14,9 @@ namespace qx
 
 template<class data_t, class synchronization_primitive_t>
 inline shared_proxy<data_t, synchronization_primitive_t>::shared_proxy(
-    data_t*                     pData,
+    data_t*                      pData,
     synchronization_primitive_t* pSynchronizationPrimitive,
-    bool                      bTryLock)
+    bool                         bTryLock)
     : m_pSynchronizationPrimitive(pSynchronizationPrimitive)
     , m_pData(pData)
 {
@@ -86,20 +86,22 @@ inline const data_t& shared_proxy<data_t, synchronization_primitive_t>::operator
 //----------------------- synchronization_primitive_raii -----------------------
 
 template<class data_t, class synchronization_primitive_t>
-inline threads_shared<data_t, synchronization_primitive_t>::synchronization_primitive_raii::synchronization_primitive_raii()
+inline threads_shared<data_t, synchronization_primitive_t>::synchronization_primitive_raii::
+    synchronization_primitive_raii()
 {
     lock_synchronization_primitive(&sp);
 }
 
 template<class data_t, class synchronization_primitive_t>
-inline threads_shared<data_t, synchronization_primitive_t>::synchronization_primitive_raii::~synchronization_primitive_raii()
+inline threads_shared<data_t, synchronization_primitive_t>::synchronization_primitive_raii::
+    ~synchronization_primitive_raii()
 {
     unlock_synchronization_primitive(&sp);
 }
 
 template<class data_t, class synchronization_primitive_t>
-inline synchronization_primitive_t* threads_shared<data_t, synchronization_primitive_t>::synchronization_primitive_raii::
-    get_object() noexcept
+inline synchronization_primitive_t* threads_shared<data_t, synchronization_primitive_t>::
+    synchronization_primitive_raii::get_object() noexcept
 {
     return &sp;
 }
@@ -128,8 +130,9 @@ inline threads_shared<data_t, synchronization_primitive_t>::~threads_shared()
 }
 
 template<class data_t, class synchronization_primitive_t>
-inline typename threads_shared<data_t, synchronization_primitive_t>::proxy threads_shared<data_t, synchronization_primitive_t>::
-    lock()
+inline typename threads_shared<data_t, synchronization_primitive_t>::proxy threads_shared<
+    data_t,
+    synchronization_primitive_t>::lock()
 {
     return proxy(&m_Data, m_SynchronizationPrimitiveRAII.get_object(), false);
 }

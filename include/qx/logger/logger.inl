@@ -54,4 +54,17 @@ inline void logger::reset() noexcept
     m_Streams.clear();
 }
 
+inline bool logger::will_any_stream_accept(
+    const category& category,
+    verbosity       eVerbosity,
+    string_view     svFile,
+    string_view     svFunction) const noexcept
+{
+    for (const auto& stream : m_Streams)
+        if (stream->get_unit_info(category, eVerbosity, svFile, svFunction))
+            return true;
+
+    return false;
+}
+
 } // namespace qx

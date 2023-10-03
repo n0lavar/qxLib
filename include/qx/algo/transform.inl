@@ -50,4 +50,4 @@ auto transform_return(input_container_t&& input, const transform_callable_t& tra
     return result;
 }
 
-}
+} // namespace qx

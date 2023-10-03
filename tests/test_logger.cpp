@@ -74,9 +74,9 @@ struct LoggerTraits
     {
         return sTraceFile;
     }
-    constexpr static const qx::char_type* GetCategory()
+    constexpr static qx::string_view GetCategory()
     {
-        return sCategory[0] == QX_TEXT('\0') ? nullptr : sCategory;
+        return sCategory;
     }
 };
 
@@ -90,18 +90,18 @@ constexpr qx::char_type LOG_FILE_H[]   = QX_TEXT("file.h");
 constexpr qx::char_type LOG_FILE_CPP[] = QX_TEXT("file.cpp");
 constexpr qx::char_type LOG_FILE_INL[] = QX_TEXT("file.inl");
 
-constexpr qx::char_type LOG_CATEGORY_NULLPTR[] = QX_TEXT("");
-constexpr qx::char_type LOG_CATEGORY_TAG1[]    = QX_TEXT("tag1");
-constexpr qx::char_type LOG_CATEGORY_TAG2[]    = QX_TEXT("tag2");
+constexpr qx::char_type LOG_CATEGORY_EMPTY[] = QX_TEXT("");
+constexpr qx::char_type LOG_CATEGORY_TAG1[]  = QX_TEXT("tag1");
+constexpr qx::char_type LOG_CATEGORY_TAG2[]  = QX_TEXT("tag2");
 
 using Implementations = ::testing::Types<
-    LoggerTraits<LOGS_FILE_DEFAULT, UNIT_DEFAULT, LOG_FILE_H, LOG_CATEGORY_NULLPTR>,
-    LoggerTraits<LOGS_FILE_DEFAULT, UNIT_FILE, LOG_FILE_H, LOG_CATEGORY_NULLPTR>,
-    LoggerTraits<LOGS_FILE_DEFAULT, UNIT_FUNC, LOG_FILE_H, LOG_CATEGORY_NULLPTR>,
-    LoggerTraits<LOGS_FILE_DEFAULT, UNIT_DEFAULT, LOG_FILE_H, LOG_CATEGORY_NULLPTR>,
-    LoggerTraits<LOGS_FILE_DEFAULT, UNIT_DEFAULT, LOG_FILE_H, LOG_CATEGORY_NULLPTR>,
-    LoggerTraits<LOGS_FILE_DEFAULT, UNIT_DEFAULT, LOG_FILE_CPP, LOG_CATEGORY_NULLPTR>,
-    LoggerTraits<LOGS_FILE_DEFAULT, UNIT_DEFAULT, LOG_FILE_INL, LOG_CATEGORY_NULLPTR>,
+    LoggerTraits<LOGS_FILE_DEFAULT, UNIT_DEFAULT, LOG_FILE_H, LOG_CATEGORY_EMPTY>,
+    LoggerTraits<LOGS_FILE_DEFAULT, UNIT_FILE, LOG_FILE_H, LOG_CATEGORY_EMPTY>,
+    LoggerTraits<LOGS_FILE_DEFAULT, UNIT_FUNC, LOG_FILE_H, LOG_CATEGORY_EMPTY>,
+    LoggerTraits<LOGS_FILE_DEFAULT, UNIT_DEFAULT, LOG_FILE_H, LOG_CATEGORY_EMPTY>,
+    LoggerTraits<LOGS_FILE_DEFAULT, UNIT_DEFAULT, LOG_FILE_H, LOG_CATEGORY_EMPTY>,
+    LoggerTraits<LOGS_FILE_DEFAULT, UNIT_DEFAULT, LOG_FILE_CPP, LOG_CATEGORY_EMPTY>,
+    LoggerTraits<LOGS_FILE_DEFAULT, UNIT_DEFAULT, LOG_FILE_INL, LOG_CATEGORY_EMPTY>,
     LoggerTraits<LOGS_FILE_DEFAULT, UNIT_DEFAULT, LOG_FILE_H, LOG_CATEGORY_TAG1>,
     LoggerTraits<LOGS_FILE_DEFAULT, UNIT_DEFAULT, LOG_FILE_H, LOG_CATEGORY_TAG2>>;
 
@@ -195,7 +195,7 @@ protected:
                                          bool                 bCategory = false)
             {
                 sFile.clear();
-                if (bCategory && traits_t::GetCategory())
+                if (bCategory && !traits_t::GetCategory().empty())
                 {
                     sFile += QX_TEXT("\\[");
                     sFile += traits_t::GetCategory();
@@ -395,9 +395,9 @@ TYPED_TEST_SUITE(TestLogger, Implementations);
                                                                                        \
     TEST_LOG(traceFile, QX_TEXT("End test\n"));
 
-void TestLoggerFunction(qx::logger& myLogger, const qx::char_type* pszTraceFile, const qx::char_type* pszCategory)
+void TestLoggerFunction(qx::logger& myLogger, const qx::char_type* pszTraceFile, qx::string_view svCategory)
 {
-    TEST_LOGGER(pszTraceFile, pszCategory);
+    TEST_LOGGER(pszTraceFile, svCategory);
 }
 
 TYPED_TEST(TestLogger, logger_function)

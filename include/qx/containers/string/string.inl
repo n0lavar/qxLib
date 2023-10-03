@@ -2640,7 +2640,9 @@ struct formatter<qx::basic_string<char_t, traits_t>, char_t>
 // ------------------------------------------- istream / ostream overloading -------------------------------------------
 
 template<class char_t, class traits_t>
-qx::details::ostream<char_t>& operator<<(qx::details::ostream<char_t>& os, const qx::basic_string<char_t, traits_t>& str)
+qx::details::ostream<char_t>& operator<<(
+    qx::details::ostream<char_t>&             os,
+    const qx::basic_string<char_t, traits_t>& str)
 {
     os << str.data();
     return os;
