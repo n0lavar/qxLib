@@ -80,15 +80,15 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a41d3a567ba3148eb291741db61055821"><td class="memItemLeft" align="right" valign="top">constexpr&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1category.html#a41d3a567ba3148eb291741db61055821">category</a> (const char_type *pszName, const <a class="el" href="classqx_1_1color.html">color</a> &amp;categoryColor=kDefaultColor) noexcept</td></tr>
-<tr class="memdesc:a41d3a567ba3148eb291741db61055821"><td class="mdescLeft">&#160;</td><td class="mdescRight">category object constructor  <a href="classqx_1_1category.html#a41d3a567ba3148eb291741db61055821">More...</a><br /></td></tr>
-<tr class="separator:a41d3a567ba3148eb291741db61055821"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a17ea4679d87ad6a7cc60585bde22578d"><td class="memItemLeft" align="right" valign="top">constexpr&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1category.html#a17ea4679d87ad6a7cc60585bde22578d">category</a> (string_view svName, const <a class="el" href="classqx_1_1color.html">color</a> &amp;categoryColor=kDefaultColor) noexcept</td></tr>
+<tr class="memdesc:a17ea4679d87ad6a7cc60585bde22578d"><td class="mdescLeft">&#160;</td><td class="mdescRight">category object constructor  <a href="classqx_1_1category.html#a17ea4679d87ad6a7cc60585bde22578d">More...</a><br /></td></tr>
+<tr class="separator:a17ea4679d87ad6a7cc60585bde22578d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1534af0fb56e2dbc91f6f05ba88b96be"><td class="memItemLeft" align="right" valign="top">constexpr <a class="el" href="classqx_1_1category.html">category</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1category.html#a1534af0fb56e2dbc91f6f05ba88b96be">set_verbosity</a> (verbosity eVerbosity) const noexcept</td></tr>
 <tr class="memdesc:a1534af0fb56e2dbc91f6f05ba88b96be"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create new category from this one with custom verbosity.  <a href="classqx_1_1category.html#a1534af0fb56e2dbc91f6f05ba88b96be">More...</a><br /></td></tr>
 <tr class="separator:a1534af0fb56e2dbc91f6f05ba88b96be"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aac01a735c58c63c74182a5faaf0b4dfc"><td class="memItemLeft" align="right" valign="top">constexpr const char_type *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1category.html#aac01a735c58c63c74182a5faaf0b4dfc">get_name</a> () const noexcept</td></tr>
-<tr class="memdesc:aac01a735c58c63c74182a5faaf0b4dfc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get category name.  <a href="classqx_1_1category.html#aac01a735c58c63c74182a5faaf0b4dfc">More...</a><br /></td></tr>
-<tr class="separator:aac01a735c58c63c74182a5faaf0b4dfc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0b2b93e7b142f4a34cf90ceaa304177f"><td class="memItemLeft" align="right" valign="top">constexpr string_view&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1category.html#a0b2b93e7b142f4a34cf90ceaa304177f">get_name</a> () const noexcept</td></tr>
+<tr class="memdesc:a0b2b93e7b142f4a34cf90ceaa304177f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get category name.  <a href="classqx_1_1category.html#a0b2b93e7b142f4a34cf90ceaa304177f">More...</a><br /></td></tr>
+<tr class="separator:a0b2b93e7b142f4a34cf90ceaa304177f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a45f05eea5cdc8a8030b3233748bbcef2"><td class="memItemLeft" align="right" valign="top">constexpr const <a class="el" href="classqx_1_1color.html">color</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1category.html#a45f05eea5cdc8a8030b3233748bbcef2">get_color</a> () const noexcept</td></tr>
 <tr class="memdesc:a45f05eea5cdc8a8030b3233748bbcef2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get category color.  <a href="classqx_1_1category.html#a45f05eea5cdc8a8030b3233748bbcef2">More...</a><br /></td></tr>
 <tr class="separator:a45f05eea5cdc8a8030b3233748bbcef2"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -103,8 +103,8 @@ Public Member Functions</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="category_8h_source.html#l00055">55</a> of file <a class="el" href="category_8h_source.html">category.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="a41d3a567ba3148eb291741db61055821"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a41d3a567ba3148eb291741db61055821">&#9670;&nbsp;</a></span>category()</h2>
+<a id="a17ea4679d87ad6a7cc60585bde22578d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a17ea4679d87ad6a7cc60585bde22578d">&#9670;&nbsp;</a></span>category()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -115,8 +115,8 @@ Public Member Functions</h2></td></tr>
         <tr>
           <td class="memname">constexpr qx::category::category </td>
           <td>(</td>
-          <td class="paramtype">const char_type *&#160;</td>
-          <td class="paramname"><em>pszName</em>, </td>
+          <td class="paramtype">string_view&#160;</td>
+          <td class="paramname"><em>svName</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -140,7 +140,7 @@ Public Member Functions</h2></td></tr>
 <p>category object constructor </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">pszName</td><td>- category name. For ex. CatRendering or CatWidgets </td></tr>
+    <tr><td class="paramname">svName</td><td>- category name. For ex. CatRendering or CatWidgets </td></tr>
     <tr><td class="paramname">categoryColor</td><td>- color to be used if supported </td></tr>
   </table>
   </dd>
@@ -186,8 +186,8 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="aac01a735c58c63c74182a5faaf0b4dfc"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aac01a735c58c63c74182a5faaf0b4dfc">&#9670;&nbsp;</a></span>get_name()</h2>
+<a id="a0b2b93e7b142f4a34cf90ceaa304177f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0b2b93e7b142f4a34cf90ceaa304177f">&#9670;&nbsp;</a></span>get_name()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -196,7 +196,7 @@ Public Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">constexpr const char_type * qx::category::get_name </td>
+          <td class="memname">constexpr string_view qx::category::get_name </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>

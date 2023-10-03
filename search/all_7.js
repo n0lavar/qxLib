@@ -27,7 +27,7 @@ var searchData=
   ['get_5fmoving_5faverage_5fexp_5fweights_241',['get_moving_average_exp_weights',['../moving__average_8h.html#aad98af413f8a5bec6733a1c0560a14c9',1,'qx']]],
   ['get_5fmoving_5faverage_5flinear_5fweights_242',['get_moving_average_linear_weights',['../moving__average_8h.html#aafcd27954378738a4df732eb2c5704c4',1,'qx']]],
   ['get_5fmoving_5faverage_5fsimple_5fweights_243',['get_moving_average_simple_weights',['../moving__average_8h.html#aada43078b79dc6e196f944105ac62eda',1,'qx']]],
-  ['get_5fname_244',['get_name',['../classqx_1_1category.html#aac01a735c58c63c74182a5faaf0b4dfc',1,'qx::category::get_name()'],['../classqx_1_1type__strings.html#a2b0f85eb1a7376081540b6227cf17a72',1,'qx::type_strings::get_name()']]],
+  ['get_5fname_244',['get_name',['../classqx_1_1category.html#a0b2b93e7b142f4a34cf90ceaa304177f',1,'qx::category::get_name()'],['../classqx_1_1type__strings.html#a2b0f85eb1a7376081540b6227cf17a72',1,'qx::type_strings::get_name()']]],
   ['get_5fnum_5fentries_245',['get_num_entries',['../classqx_1_1moving__average.html#a21a2e82dbb4ce2fd748fb2d97738f932',1,'qx::moving_average']]],
   ['get_5fnum_5fobservers_246',['get_num_observers',['../classqx_1_1subject.html#a8ff686586fdc96d469fd6de3ec50dc62',1,'qx::subject']]],
   ['get_5for_5fcreate_247',['get_or_create',['../classqx_1_1unique__objects__pool.html#a8f8aeebe0e0000629ffeff39309379ed',1,'qx::unique_objects_pool']]],

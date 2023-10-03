@@ -136,10 +136,10 @@ $(function() {
 <div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;<span class="comment"></span> </div>
 <div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;<span class="comment">    /**</span></div>
 <div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;<span class="comment">        @brief  category object constructor</span></div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;<span class="comment">        @param  pszName        - category name. For ex. CatRendering or CatWidgets</span></div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;<span class="comment">        @param  svName         - category name. For ex. CatRendering or CatWidgets</span></div>
 <div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;<span class="comment">        @param  categoryColor  - color to be used if supported</span></div>
 <div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;<span class="comment">    **/</span></div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;    constexpr <span class="keyword">explicit</span> <a class="code" href="classqx_1_1category.html">category</a>(<span class="keyword">const</span> char_type* pszName, <span class="keyword">const</span> <a class="code" href="classqx_1_1color.html">color</a>&amp; categoryColor = kDefaultColor) noexcept;</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;    constexpr <span class="keyword">explicit</span> <a class="code" href="classqx_1_1category.html">category</a>(string_view svName, <span class="keyword">const</span> <a class="code" href="classqx_1_1color.html">color</a>&amp; categoryColor = kDefaultColor) noexcept;</div>
 <div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;<span class="comment"></span> </div>
 <div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;<span class="comment">    /**</span></div>
 <div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;<span class="comment">        @brief  Create new category from this one with custom verbosity</span></div>
@@ -153,7 +153,7 @@ $(function() {
 <div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;<span class="comment">        @brief  Get category name</span></div>
 <div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;<span class="comment">        @retval - category name</span></div>
 <div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;<span class="comment">    **/</span></div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;    constexpr <span class="keyword">const</span> char_type* <a class="code" href="classqx_1_1category.html#aac01a735c58c63c74182a5faaf0b4dfc">get_name</a>() <span class="keyword">const</span> noexcept;</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;    constexpr string_view <a class="code" href="classqx_1_1category.html#a0b2b93e7b142f4a34cf90ceaa304177f">get_name</a>() <span class="keyword">const</span> noexcept;</div>
 <div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;<span class="comment"></span> </div>
 <div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;<span class="comment">    /**</span></div>
 <div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;<span class="comment">        @brief  Get category color</span></div>
@@ -169,23 +169,20 @@ $(function() {
 <div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;    constexpr verbosity <a class="code" href="classqx_1_1category.html#a6dcb4e8efe067e7a397c89c916e8d722">get_verbosity</a>() <span class="keyword">const</span> noexcept;</div>
 <div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160; </div>
 <div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;    <a class="code" href="classqx_1_1color.html">color</a>            m_Color     = kDefaultColor;</div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;    <span class="keyword">const</span> char_type* m_pszName   = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;    verbosity        m_Verbosity = QX_CONF_COMPILE_TIME_VERBOSITY;</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;    <a class="code" href="classqx_1_1color.html">color</a>       m_Color = kDefaultColor;</div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;    string_view m_svName;</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;    verbosity   m_Verbosity = QX_CONF_COMPILE_TIME_VERBOSITY;</div>
 <div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;};</div>
 <div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160; </div>
 <div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;} <span class="comment">// namespace qx</span></div>
 <div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160; </div>
-<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;<a class="code" href="category_8h.html#abdf761e9200c7013ddfee39ea8d39e78">QX_DEFINE_CATEGORY</a>(CatDefault, qx::color::white());</div>
-<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160; </div>
-<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="category_8inl.html">qx/category.inl</a>&gt;</span></div>
-<div class="ttc" id="acategory_8h_html_abdf761e9200c7013ddfee39ea8d39e78"><div class="ttname"><a href="category_8h.html#abdf761e9200c7013ddfee39ea8d39e78">QX_DEFINE_CATEGORY</a></div><div class="ttdeci">#define QX_DEFINE_CATEGORY(name,...)</div><div class="ttdoc">Define a category.</div><div class="ttdef"><b>Definition:</b> <a href="category_8h_source.html#l00021">category.h:21</a></div></div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="category_8inl.html">qx/category.inl</a>&gt;</span></div>
 <div class="ttc" id="acategory_8inl_html"><div class="ttname"><a href="category_8inl.html">category.inl</a></div></div>
 <div class="ttc" id="aclassqx_1_1category_html"><div class="ttname"><a href="classqx_1_1category.html">qx::category</a></div><div class="ttdoc">A category is a class that identifies a particular piece of code. This code can be located in differe...</div><div class="ttdef"><b>Definition:</b> <a href="category_8h_source.html#l00055">category.h:56</a></div></div>
+<div class="ttc" id="aclassqx_1_1category_html_a0b2b93e7b142f4a34cf90ceaa304177f"><div class="ttname"><a href="classqx_1_1category.html#a0b2b93e7b142f4a34cf90ceaa304177f">qx::category::get_name</a></div><div class="ttdeci">constexpr string_view get_name() const noexcept</div><div class="ttdoc">Get category name.</div><div class="ttdef"><b>Definition:</b> <a href="category_8inl_source.html#l00026">category.inl:26</a></div></div>
 <div class="ttc" id="aclassqx_1_1category_html_a1534af0fb56e2dbc91f6f05ba88b96be"><div class="ttname"><a href="classqx_1_1category.html#a1534af0fb56e2dbc91f6f05ba88b96be">qx::category::set_verbosity</a></div><div class="ttdeci">constexpr category set_verbosity(verbosity eVerbosity) const noexcept</div><div class="ttdoc">Create new category from this one with custom verbosity.</div><div class="ttdef"><b>Definition:</b> <a href="category_8inl_source.html#l00019">category.inl:19</a></div></div>
 <div class="ttc" id="aclassqx_1_1category_html_a45f05eea5cdc8a8030b3233748bbcef2"><div class="ttname"><a href="classqx_1_1category.html#a45f05eea5cdc8a8030b3233748bbcef2">qx::category::get_color</a></div><div class="ttdeci">constexpr const color &amp; get_color() const noexcept</div><div class="ttdoc">Get category color.</div><div class="ttdef"><b>Definition:</b> <a href="category_8inl_source.html#l00031">category.inl:31</a></div></div>
 <div class="ttc" id="aclassqx_1_1category_html_a6dcb4e8efe067e7a397c89c916e8d722"><div class="ttname"><a href="classqx_1_1category.html#a6dcb4e8efe067e7a397c89c916e8d722">qx::category::get_verbosity</a></div><div class="ttdeci">constexpr verbosity get_verbosity() const noexcept</div><div class="ttdoc">Get category verbosity.</div><div class="ttdef"><b>Definition:</b> <a href="category_8inl_source.html#l00036">category.inl:36</a></div></div>
-<div class="ttc" id="aclassqx_1_1category_html_aac01a735c58c63c74182a5faaf0b4dfc"><div class="ttname"><a href="classqx_1_1category.html#aac01a735c58c63c74182a5faaf0b4dfc">qx::category::get_name</a></div><div class="ttdeci">constexpr const char_type * get_name() const noexcept</div><div class="ttdoc">Get category name.</div><div class="ttdef"><b>Definition:</b> <a href="category_8inl_source.html#l00026">category.inl:26</a></div></div>
 <div class="ttc" id="aclassqx_1_1color_html"><div class="ttname"><a href="classqx_1_1color.html">qx::color</a></div><div class="ttdoc">RGBA color.</div><div class="ttdef"><b>Definition:</b> <a href="color_8h_source.html#l00037">color.h:38</a></div></div>
 <div class="ttc" id="acolor_8h_html"><div class="ttname"><a href="color_8h.html">color.h</a></div></div>
 <div class="ttc" id="amacros_2common_8h_html"><div class="ttname"><a href="macros_2common_8h.html">common.h</a></div></div>
