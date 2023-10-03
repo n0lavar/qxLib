@@ -408,8 +408,8 @@ $(function() {
 <div class="line"><a name="l00337"></a><span class="lineno">  337</span>&#160;        ret.<a class="code" href="structqx_1_1geometry.html#a3ac921469ef6662d7617d1ba07b70494">geomIndices</a>.push_back(<span class="keyword">static_cast&lt;</span>index_type<span class="keyword">&gt;</span>(i));</div>
 <div class="line"><a name="l00338"></a><span class="lineno">  338</span>&#160;        ret.<a class="code" href="structqx_1_1geometry.html#ab318107b02ed7911918dbba32081c8e7">geomVertices</a>.emplace_back(</div>
 <div class="line"><a name="l00339"></a><span class="lineno">  339</span>&#160;            details::create_vertex({ fHorRadius * std::cos(<span class="keyword">static_cast&lt;</span><span class="keywordtype">float</span><span class="keyword">&gt;</span>(i) * f2Pi / fSides),</div>
-<div class="line"><a name="l00340"></a><span class="lineno">  340</span>&#160;                                    fVertRadius * std::sin(<span class="keyword">static_cast&lt;</span><span class="keywordtype">float</span><span class="keyword">&gt;</span>(i) * f2Pi / fSides),</div>
-<div class="line"><a name="l00341"></a><span class="lineno">  341</span>&#160;                                    0.f }));</div>
+<div class="line"><a name="l00340"></a><span class="lineno">  340</span>&#160;                                     fVertRadius * std::sin(<span class="keyword">static_cast&lt;</span><span class="keywordtype">float</span><span class="keyword">&gt;</span>(i) * f2Pi / fSides),</div>
+<div class="line"><a name="l00341"></a><span class="lineno">  341</span>&#160;                                     0.f }));</div>
 <div class="line"><a name="l00342"></a><span class="lineno">  342</span>&#160;    }</div>
 <div class="line"><a name="l00343"></a><span class="lineno">  343</span>&#160; </div>
 <div class="line"><a name="l00344"></a><span class="lineno">  344</span>&#160;    ret.<a class="code" href="structqx_1_1geometry.html#adc29d28859b1f9557a7cb88cf59fa045">eDrawMode</a> = draw_mode::triangles_fan;</div>

@@ -66,7 +66,8 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="summary">
-<a href="#nested-classes">Classes</a>  </div>
+<a href="#nested-classes">Classes</a> &#124;
+<a href="#define-members">Macros</a>  </div>
   <div class="headertitle">
 <div class="title">flags.h File Reference</div>  </div>
 </div><!--header-->
@@ -83,6 +84,12 @@ Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1flags.html">qx::flags&lt; enum_t &gt;</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Wrapper for enumerations to be used as a list of flags.  <a href="classqx_1_1flags.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
+Macros</h2></td></tr>
+<tr class="memitem:aeb4b6ad4ab87514030d6416e07e210a7"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="flags_8h.html#aeb4b6ad4ab87514030d6416e07e210a7">QX_FLAGS_ENUM_CLASS</a>(enumName)</td></tr>
+<tr class="memdesc:aeb4b6ad4ab87514030d6416e07e210a7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Define to let to use this enum class in different binary operations returning <a class="el" href="classqx_1_1flags.html" title="Wrapper for enumerations to be used as a list of flags.">qx::flags</a>.  <a href="flags_8h.html#aeb4b6ad4ab87514030d6416e07e210a7">More...</a><br /></td></tr>
+<tr class="separator:aeb4b6ad4ab87514030d6416e07e210a7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><dl class="section author"><dt>Author</dt><dd>Khrapov </dd></dl>
@@ -90,7 +97,49 @@ Classes</h2></td></tr>
 <dl class="section copyright"><dt>Copyright</dt><dd>© Nick Khrapov, 2023. All right reserved. </dd></dl>
 
 <p class="definition">Definition in file <a class="el" href="flags_8h_source.html">flags.h</a>.</p>
-</div></div><!-- contents -->
+</div><h2 class="groupheader">Macro Definition Documentation</h2>
+<a id="aeb4b6ad4ab87514030d6416e07e210a7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aeb4b6ad4ab87514030d6416e07e210a7">&#9670;&nbsp;</a></span>QX_FLAGS_ENUM_CLASS</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define QX_FLAGS_ENUM_CLASS</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">enumName</td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Value:</b><div class="fragment"><div class="line">    <span class="keyword">inline</span> <a class="code" href="classqx_1_1flags.html">qx::flags&lt;enumName&gt;</a> operator|(enumName left, enumName right) \</div>
+<div class="line">    {                                                                   \</div>
+<div class="line">        return <a class="code" href="classqx_1_1flags.html">qx::flags</a>(left) | right;                                 \</div>
+<div class="line">    }                                                                   \</div>
+<div class="line">    inline <a class="code" href="classqx_1_1flags.html">qx::flags&lt;enumName&gt;</a> operator&amp;(enumName left, enumName right) \</div>
+<div class="line">    {                                                                   \</div>
+<div class="line">        return <a class="code" href="classqx_1_1flags.html">qx::flags</a>(left) &amp; right;                                 \</div>
+<div class="line">    }                                                                   \</div>
+<div class="line">    inline <a class="code" href="classqx_1_1flags.html">qx::flags&lt;enumName&gt;</a> operator^(enumName left, enumName right) \</div>
+<div class="line">    {                                                                   \</div>
+<div class="line">        return <a class="code" href="classqx_1_1flags.html">qx::flags</a>(left) ^ right;                                 \</div>
+<div class="line">    }</div>
+<div class="ttc" id="aclassqx_1_1flags_html"><div class="ttname"><a href="classqx_1_1flags.html">qx::flags</a></div><div class="ttdoc">Wrapper for enumerations to be used as a list of flags.</div><div class="ttdef"><b>Definition:</b> <a href="flags_8h_source.html#l00059">flags.h:60</a></div></div>
+</div><!-- fragment -->
+<p>Define to let to use this enum class in different binary operations returning <a class="el" href="classqx_1_1flags.html" title="Wrapper for enumerations to be used as a list of flags.">qx::flags</a>. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">enumName</td><td>- enum class name </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="flags_8h_source.html#l00020">20</a> of file <a class="el" href="flags_8h_source.html">flags.h</a>.</p>
+
+</div>
+</div>
+</div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1

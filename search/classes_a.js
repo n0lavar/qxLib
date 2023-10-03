@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['moving_5faverage_749',['moving_average',['../classqx_1_1moving__average.html',1,'qx']]]
+  ['moving_5faverage_757',['moving_average',['../classqx_1_1moving__average.html',1,'qx']]]
 ];

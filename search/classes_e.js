@@ -1,8 +1,8 @@
 var searchData=
 [
-  ['terminal_5fcolor_782',['terminal_color',['../classqx_1_1terminal__color.html',1,'qx']]],
-  ['threads_5fshared_783',['threads_shared',['../classqx_1_1threads__shared.html',1,'qx']]],
-  ['token_784',['token',['../classqx_1_1unique__objects__pool_1_1token.html',1,'qx::unique_objects_pool']]],
-  ['triangular_5fvector_785',['triangular_vector',['../classqx_1_1triangular__vector.html',1,'qx']]],
-  ['type_5fstrings_786',['type_strings',['../classqx_1_1type__strings.html',1,'qx']]]
+  ['terminal_5fcolor_790',['terminal_color',['../classqx_1_1terminal__color.html',1,'qx']]],
+  ['threads_5fshared_791',['threads_shared',['../classqx_1_1threads__shared.html',1,'qx']]],
+  ['token_792',['token',['../classqx_1_1unique__objects__pool_1_1token.html',1,'qx::unique_objects_pool']]],
+  ['triangular_5fvector_793',['triangular_vector',['../classqx_1_1triangular__vector.html',1,'qx']]],
+  ['type_5fstrings_794',['type_strings',['../classqx_1_1type__strings.html',1,'qx']]]
 ];

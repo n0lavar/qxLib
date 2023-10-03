@@ -171,12 +171,15 @@ $(function() {
 <div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;<span class="keyword">private</span>:</div>
 <div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;    <a class="code" href="classqx_1_1color.html">color</a>            m_Color     = kDefaultColor;</div>
 <div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;    <span class="keyword">const</span> char_type* m_pszName   = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;    verbosity        m_Verbosity = verbosity::log;</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;    verbosity        m_Verbosity = QX_CONF_COMPILE_TIME_VERBOSITY;</div>
 <div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;};</div>
 <div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160; </div>
 <div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;} <span class="comment">// namespace qx</span></div>
 <div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160; </div>
-<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="category_8inl.html">qx/category.inl</a>&gt;</span></div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;<a class="code" href="category_8h.html#abdf761e9200c7013ddfee39ea8d39e78">QX_DEFINE_CATEGORY</a>(CatDefault, qx::color::white());</div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160; </div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="category_8inl.html">qx/category.inl</a>&gt;</span></div>
+<div class="ttc" id="acategory_8h_html_abdf761e9200c7013ddfee39ea8d39e78"><div class="ttname"><a href="category_8h.html#abdf761e9200c7013ddfee39ea8d39e78">QX_DEFINE_CATEGORY</a></div><div class="ttdeci">#define QX_DEFINE_CATEGORY(name,...)</div><div class="ttdoc">Define a category.</div><div class="ttdef"><b>Definition:</b> <a href="category_8h_source.html#l00021">category.h:21</a></div></div>
 <div class="ttc" id="acategory_8inl_html"><div class="ttname"><a href="category_8inl.html">category.inl</a></div></div>
 <div class="ttc" id="aclassqx_1_1category_html"><div class="ttname"><a href="classqx_1_1category.html">qx::category</a></div><div class="ttdoc">A category is a class that identifies a particular piece of code. This code can be located in differe...</div><div class="ttdef"><b>Definition:</b> <a href="category_8h_source.html#l00055">category.h:56</a></div></div>
 <div class="ttc" id="aclassqx_1_1category_html_a1534af0fb56e2dbc91f6f05ba88b96be"><div class="ttname"><a href="classqx_1_1category.html#a1534af0fb56e2dbc91f6f05ba88b96be">qx::category::set_verbosity</a></div><div class="ttdeci">constexpr category set_verbosity(verbosity eVerbosity) const noexcept</div><div class="ttdoc">Create new category from this one with custom verbosity.</div><div class="ttdef"><b>Definition:</b> <a href="category_8inl_source.html#l00019">category.inl:19</a></div></div>
