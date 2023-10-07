@@ -23,7 +23,7 @@
 namespace qx
 {
 
-template<class char_t, class traits_t = char_traits<char_t>>
+template<class char_t, class traits_t = string_traits::traits<char_t>>
 class basic_string;
 
 namespace details

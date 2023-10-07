@@ -73,9 +73,9 @@ private:
     size_t m_nHash = 0;
 };
 
-using cstring_hash = basic_string_hash<char_traits<char>>;
-using wstring_hash = basic_string_hash<char_traits<wchar_t>>;
-using string_hash  = basic_string_hash<char_traits<char_type>>;
+using cstring_hash = basic_string_hash<string_traits::traits<char>>;
+using wstring_hash = basic_string_hash<string_traits::traits<wchar_t>>;
+using string_hash  = basic_string_hash<string_traits::traits<char_type>>;
 
 #define QX_STRING_HASH(quote) qx::string_hash(QX_TEXT(quote))
 
@@ -88,7 +88,7 @@ namespace literals
     @param  nSize  - literal text size
     @retval        - text hash value
 **/
-constexpr basic_string_hash<char_traits<char>> operator"" _sh(const char* pszStr, size_t nSize);
+constexpr basic_string_hash<string_traits::traits<char>> operator"" _sh(const char* pszStr, size_t nSize);
 
 /**
     @brief  String hash literal for constexpr converting. Can be used with switch-case
@@ -96,7 +96,7 @@ constexpr basic_string_hash<char_traits<char>> operator"" _sh(const char* pszStr
     @param  nSize  - literal text size
     @retval        - text hash value
 **/
-constexpr basic_string_hash<char_traits<wchar_t>> operator"" _sh(const wchar_t* pszStr, size_t nSize);
+constexpr basic_string_hash<string_traits::traits<wchar_t>> operator"" _sh(const wchar_t* pszStr, size_t nSize);
 
 } // namespace literals
 

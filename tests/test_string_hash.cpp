@@ -24,7 +24,7 @@ class TestStringHashTyped : public ::testing::Test
 {
 };
 
-using Implementations = ::testing::Types<qx::char_traits<char>, qx::char_traits<wchar_t>>;
+using Implementations = ::testing::Types<qx::string_traits::traits<char>, qx::string_traits::traits<wchar_t>>;
 
 TYPED_TEST_SUITE(TestStringHashTyped, Implementations);
 

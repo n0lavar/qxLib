@@ -227,31 +227,31 @@ inline void basic_string<char_t, traits_t>::to_upper() noexcept
 }
 
 template<class char_t, class traits_t>
-inline typename basic_string<char_t, traits_t>::value_type basic_string<char_t, traits_t>::front(void) const noexcept
+inline typename basic_string<char_t, traits_t>::value_type basic_string<char_t, traits_t>::front() const noexcept
 {
     return at(0);
 }
 
 template<class char_t, class traits_t>
-inline typename basic_string<char_t, traits_t>::value_type basic_string<char_t, traits_t>::back(void) const noexcept
+inline typename basic_string<char_t, traits_t>::value_type basic_string<char_t, traits_t>::back() const noexcept
 {
     return at(size() - 1);
 }
 
 template<class char_t, class traits_t>
-inline typename basic_string<char_t, traits_t>::size_type basic_string<char_t, traits_t>::length(void) const noexcept
+inline typename basic_string<char_t, traits_t>::size_type basic_string<char_t, traits_t>::length() const noexcept
 {
     return size();
 }
 
 template<class char_t, class traits_t>
-inline typename basic_string<char_t, traits_t>::const_pointer basic_string<char_t, traits_t>::c_str(void) const noexcept
+inline typename basic_string<char_t, traits_t>::const_pointer basic_string<char_t, traits_t>::c_str() const noexcept
 {
     return data();
 }
 
 template<class char_t, class traits_t>
-inline typename basic_string<char_t, traits_t>::size_type basic_string<char_t, traits_t>::capacity(void) const noexcept
+inline typename basic_string<char_t, traits_t>::size_type basic_string<char_t, traits_t>::capacity() const noexcept
 {
     return m_Data.capacity();
 }
@@ -588,7 +588,7 @@ inline void basic_string<char_t, traits_t>::erase(size_type nPos, size_type nSym
 }
 
 template<class char_t, class traits_t>
-inline typename basic_string<char_t, traits_t>::value_type basic_string<char_t, traits_t>::pop_back(void) noexcept
+inline typename basic_string<char_t, traits_t>::value_type basic_string<char_t, traits_t>::pop_back() noexcept
 {
     value_type chRet = back();
     erase(size() - 1);
@@ -604,7 +604,7 @@ inline typename basic_string<char_t, traits_t>::value_type basic_string<char_t, 
 }
 
 template<class char_t, class traits_t>
-inline typename basic_string<char_t, traits_t>::size_type basic_string<char_t, traits_t>::trim_left(void) noexcept
+inline typename basic_string<char_t, traits_t>::size_type basic_string<char_t, traits_t>::trim_left() noexcept
 {
     return _trim_left(
         [](value_type ch)
@@ -804,7 +804,7 @@ inline typename basic_string<char_t, traits_t>::size_type basic_string<char_t, t
 }
 
 template<class char_t, class traits_t>
-inline typename basic_string<char_t, traits_t>::size_type basic_string<char_t, traits_t>::trim(void) noexcept
+inline typename basic_string<char_t, traits_t>::size_type basic_string<char_t, traits_t>::trim() noexcept
 {
     return _trim(
         [](value_type ch)
@@ -2555,7 +2555,7 @@ basic_string<char_t, traits_t> operator+(const string_t& lhs, const basic_string
     @retval - string size (excluding null terminator)
 **/
 template<class char_t, class traits_t>
-inline typename basic_string<char_t, traits_t>::size_type basic_string<char_t, traits_t>::size(void) const noexcept
+inline typename basic_string<char_t, traits_t>::size_type basic_string<char_t, traits_t>::size() const noexcept
 {
     return m_Data.size();
 }
@@ -2565,7 +2565,7 @@ inline typename basic_string<char_t, traits_t>::size_type basic_string<char_t, t
     @retval - c-string
 **/
 template<class char_t, class traits_t>
-inline typename basic_string<char_t, traits_t>::pointer basic_string<char_t, traits_t>::data(void) noexcept
+inline typename basic_string<char_t, traits_t>::pointer basic_string<char_t, traits_t>::data() noexcept
 {
     return m_Data.data();
 }

@@ -13,6 +13,11 @@ namespace qx
 template<class traits_t>
 typename string_data<traits_t>::pointer string_data<traits_t>::data() noexcept
 {
+    static_assert(
+        sizeof(string_data) == 32 || sizeof(string_data) == 64 || sizeof(string_data) == 128
+            || sizeof(string_data) == 256 || sizeof(string_data) > 256,
+        "The buffer size should be such that the final size of the structure is aligned");
+
     if (is_small())
         return m_Buffer.data();
     else

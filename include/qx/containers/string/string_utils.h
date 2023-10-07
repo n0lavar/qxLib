@@ -353,7 +353,8 @@ constexpr auto get_format_specifier() noexcept
 }
 
 /**
-    @brief  Constexpr string length
+    @brief  Naive but constexpr string length algorithm,
+            for runtime prefer std::strlen as there are may be a lot of optimizations
     @tparam value_t - char type
     @param  psz     - pointer to string zero terminated
     @retval         - string length
@@ -361,8 +362,11 @@ constexpr auto get_format_specifier() noexcept
 template<class value_t>
 constexpr std::size_t strlen(const value_t* psz)
 {
+    if (!psz)
+        return 0;
+
     std::size_t nLen = 0;
-    while (psz && *psz != QX_CHAR_PREFIX(value_t, '\0'))
+    while (*psz != QX_CHAR_PREFIX(value_t, '\0'))
     {
         ++psz;
         nLen++;

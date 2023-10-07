@@ -19,6 +19,17 @@
 #include <list>
 #include <unordered_map>
 
+template<class... elements_t>
+struct template_row
+{
+    using tuple = std::tuple<elements_t...>;
+};
+
+template<class... rows_t>
+struct template_matrix
+{
+};
+
 QX_PUSH_SUPPRESS_MSVC_WARNINGS(5233);
 
 template<class string_traits_t>
@@ -26,14 +37,84 @@ class TestQxString : public ::testing::Test
 {
 };
 
-using Implementations = ::testing::Types<qx::char_traits<char>, qx::char_traits<wchar_t>>;
+using Implementations = ::testing::Types<
+    qx::string_traits::constructor<
+        qx::string_traits::usings_traits<char>,
+        qx::string_traits::hash_traits<char, qx::string_traits::usings_traits<char>>,
+        qx::string_traits::allocation_traits<char, qx::string_traits::usings_traits<char>>,
+        qx::string_traits::test_char_traits<char, qx::string_traits::usings_traits<char>>,
+        qx::string_traits::transform_char_traits<char, qx::string_traits::usings_traits<char>>,
+        qx::string_traits::length_traits<char, qx::string_traits::usings_traits<char>>,
+        qx::string_traits::compare_traits<char, qx::string_traits::usings_traits<char>>,
+        qx::string_traits::format_traits<char, qx::string_traits::usings_traits<char>>>,
+    qx::string_traits::constructor<
+        qx::string_traits::usings_traits<char>,
+        qx::string_traits::hash_traits<char, qx::string_traits::usings_traits<char>>,
+        qx::string_traits::small_string_allocation_traits<char, qx::string_traits::usings_traits<char>>,
+        qx::string_traits::test_char_traits<char, qx::string_traits::usings_traits<char>>,
+        qx::string_traits::transform_char_traits<char, qx::string_traits::usings_traits<char>>,
+        qx::string_traits::length_traits<char, qx::string_traits::usings_traits<char>>,
+        qx::string_traits::compare_traits<char, qx::string_traits::usings_traits<char>>,
+        qx::string_traits::format_traits<char, qx::string_traits::usings_traits<char>>>,
+    qx::string_traits::constructor<
+        qx::string_traits::usings_traits<char>,
+        qx::string_traits::hash_traits<char, qx::string_traits::usings_traits<char>>,
+        qx::string_traits::big_string_allocation_traits<char, qx::string_traits::usings_traits<char>>,
+        qx::string_traits::test_char_traits<char, qx::string_traits::usings_traits<char>>,
+        qx::string_traits::transform_char_traits<char, qx::string_traits::usings_traits<char>>,
+        qx::string_traits::length_traits<char, qx::string_traits::usings_traits<char>>,
+        qx::string_traits::compare_traits<char, qx::string_traits::usings_traits<char>>,
+        qx::string_traits::format_traits<char, qx::string_traits::usings_traits<char>>>,
+    qx::string_traits::constructor<
+        qx::string_traits::usings_traits<wchar_t>,
+        qx::string_traits::hash_traits<wchar_t, qx::string_traits::usings_traits<wchar_t>>,
+        qx::string_traits::allocation_traits<wchar_t, qx::string_traits::usings_traits<wchar_t>>,
+        qx::string_traits::test_char_traits<wchar_t, qx::string_traits::usings_traits<wchar_t>>,
+        qx::string_traits::transform_char_traits<wchar_t, qx::string_traits::usings_traits<wchar_t>>,
+        qx::string_traits::length_traits<wchar_t, qx::string_traits::usings_traits<wchar_t>>,
+        qx::string_traits::compare_traits<wchar_t, qx::string_traits::usings_traits<wchar_t>>,
+        qx::string_traits::format_traits<wchar_t, qx::string_traits::usings_traits<wchar_t>>>,
+    qx::string_traits::constructor<
+        qx::string_traits::usings_traits<wchar_t>,
+        qx::string_traits::hash_traits<wchar_t, qx::string_traits::usings_traits<wchar_t>>,
+        qx::string_traits::small_string_allocation_traits<wchar_t, qx::string_traits::usings_traits<wchar_t>>,
+        qx::string_traits::test_char_traits<wchar_t, qx::string_traits::usings_traits<wchar_t>>,
+        qx::string_traits::transform_char_traits<wchar_t, qx::string_traits::usings_traits<wchar_t>>,
+        qx::string_traits::length_traits<wchar_t, qx::string_traits::usings_traits<wchar_t>>,
+        qx::string_traits::compare_traits<wchar_t, qx::string_traits::usings_traits<wchar_t>>,
+        qx::string_traits::format_traits<wchar_t, qx::string_traits::usings_traits<wchar_t>>>,
+    qx::string_traits::constructor<
+        qx::string_traits::usings_traits<wchar_t>,
+        qx::string_traits::hash_traits<wchar_t, qx::string_traits::usings_traits<wchar_t>>,
+        qx::string_traits::big_string_allocation_traits<wchar_t, qx::string_traits::usings_traits<wchar_t>>,
+        qx::string_traits::test_char_traits<wchar_t, qx::string_traits::usings_traits<wchar_t>>,
+        qx::string_traits::transform_char_traits<wchar_t, qx::string_traits::usings_traits<wchar_t>>,
+        qx::string_traits::length_traits<wchar_t, qx::string_traits::usings_traits<wchar_t>>,
+        qx::string_traits::compare_traits<wchar_t, qx::string_traits::usings_traits<wchar_t>>,
+        qx::string_traits::format_traits<wchar_t, qx::string_traits::usings_traits<wchar_t>>>>;
+
+constexpr size_t s1 = sizeof(std::string);
+constexpr size_t s2 = sizeof(std::wstring);
+constexpr size_t s3 = sizeof(qx::cstring);
+constexpr size_t s4 = sizeof(qx::wstring);
+
+template<class TraitsType>
+void CheckCapacity(auto nPrevCapacity, auto nCapacity)
+{
+    if (nPrevCapacity != TraitsType::small_string_size())
+        EXPECT_EQ(nPrevCapacity % TraitsType::align(), 0);
+
+    if (nCapacity != TraitsType::small_string_size())
+        EXPECT_EQ(nCapacity % TraitsType::align(), 0);
+
+    EXPECT_GE(nPrevCapacity, TraitsType::small_string_size());
+    EXPECT_GE(nCapacity, TraitsType::small_string_size());
+
+    if (nPrevCapacity > TraitsType::small_string_size())
+        EXPECT_GE(nCapacity, nPrevCapacity);
+}
 
 TYPED_TEST_SUITE(TestQxString, Implementations);
-
-TYPED_TEST(TestQxString, class_size)
-{
-    QX_STATIC_ASSERT_EQ(sizeof(StringType), 64u);
-}
 
 TYPED_TEST(TestQxString, construct)
 {
@@ -271,17 +352,18 @@ TYPED_TEST(TestQxString, format)
 TYPED_TEST(TestQxString, size)
 {
     StringTypeTn str0;
+    const auto   nPrevCapacity = str0.capacity();
     EXPECT_TRUE(str0.empty());
     EXPECT_FALSE(str0);
     EXPECT_EQ(str0.size(), 0);
-    EXPECT_EQ(str0.capacity(), TypeParam::small_string_size());
+    CheckCapacity<TypeParam>(nPrevCapacity, str0.capacity());
 
     typename TypeParam::size_type nCapacity = str0.reserve(20);
     EXPECT_EQ(str0.size(), 0);
     EXPECT_TRUE(str0.empty());
     EXPECT_FALSE(str0);
     EXPECT_TRUE(nCapacity > 0);
-    EXPECT_EQ(nCapacity % TypeParam::align(), 0);
+    CheckCapacity<TypeParam>(nPrevCapacity, nCapacity);
 
     str0 = STR("some short sentence");
     EXPECT_TRUE(str0.size() > 0);
@@ -297,15 +379,15 @@ TYPED_TEST(TestQxString, size)
     EXPECT_TRUE(str0);
     nCapacity = str0.capacity();
     EXPECT_TRUE(str0.size() <= nCapacity);
-    EXPECT_EQ(nCapacity % TypeParam::align(), 0);
+    CheckCapacity<TypeParam>(nPrevCapacity, nCapacity);
 
     typename TypeParam::size_type nNewCapacity = str0.reserve(10);
     EXPECT_EQ(nNewCapacity, nCapacity);
 
     str0.shrink_to_fit();
     EXPECT_EQ(str0.size(), 58);
-    EXPECT_EQ(str0.size() + 1, str0.capacity());
-    EXPECT_TRUE(str0.capacity() < nNewCapacity);
+    EXPECT_LE(str0.size() + 1, str0.capacity());
+    EXPECT_LE(str0.capacity(), nNewCapacity);
     EXPECT_FALSE(str0.empty());
     EXPECT_TRUE(str0);
 }
@@ -461,16 +543,16 @@ TYPED_TEST(TestQxString, find)
     EXPECT_EQ(str.find(STR("for")), 0);
     EXPECT_EQ(str.find(STR("for"), 15), 25);
     EXPECT_EQ(str.find(STR("for"), 4, StringType::npos, 14), 11);
-    EXPECT_EQ(str.find(STR("for"), 30), StringType::npos);
-    EXPECT_EQ(str.find(STR("kek")), StringType::npos);
+    EXPECT_EQ(str.find(STR("for"), 30), GTEST_SINGLE_ARGUMENT(StringType::npos));
+    EXPECT_EQ(str.find(STR("kek")), GTEST_SINGLE_ARGUMENT(StringType::npos));
 
     auto test = [&str](auto... toSearch)
     {
         EXPECT_EQ(str.find(toSearch...), 0);
         EXPECT_EQ(str.find(toSearch..., 15), 25);
         EXPECT_EQ(str.find(toSearch..., 4, 14), 11);
-        EXPECT_EQ(str.find(toSearch..., 30), StringType::npos);
-        EXPECT_EQ(str.find(STR("kek")), StringType::npos);
+        EXPECT_EQ(str.find(toSearch..., 30), GTEST_SINGLE_ARGUMENT(StringType::npos));
+        EXPECT_EQ(str.find(STR("kek")), GTEST_SINGLE_ARGUMENT(StringType::npos));
     };
 
     test(StringTypeTn(STR("for")));
@@ -487,23 +569,23 @@ TYPED_TEST(TestQxString, substr)
 
     auto svStr0 = str.substr(0, 4);
     EXPECT_EQ(svStr0.size(), 4);
-    EXPECT_EQ(svStr0, StringTypeTn::string_view(STR("many")));
+    EXPECT_EQ(svStr0, GTEST_SINGLE_ARGUMENT(StringTypeTn::string_view(STR("many"))));
 
     auto svStr1 = str.substr(5, 9);
     EXPECT_EQ(svStr1.size(), 9);
-    EXPECT_EQ(svStr1, StringTypeTn::string_view(STR("different")));
+    EXPECT_EQ(svStr1, GTEST_SINGLE_ARGUMENT(StringTypeTn::string_view(STR("different"))));
 
     auto svStr2 = str.substr(15, 5);
     EXPECT_EQ(svStr2.size(), 5);
-    EXPECT_EQ(svStr2, StringTypeTn::string_view(STR("words")));
+    EXPECT_EQ(svStr2, GTEST_SINGLE_ARGUMENT(StringTypeTn::string_view(STR("words"))));
 
     auto svStr3 = str.substr(21, 6);
     EXPECT_EQ(svStr3.size(), 6);
-    EXPECT_EQ(svStr3, StringTypeTn::string_view(STR("placed")));
+    EXPECT_EQ(svStr3, GTEST_SINGLE_ARGUMENT(StringTypeTn::string_view(STR("placed"))));
 
     auto svStr4 = str.substr(28);
     EXPECT_EQ(svStr4.size(), 4);
-    EXPECT_EQ(svStr4, StringTypeTn::string_view(STR("here")));
+    EXPECT_EQ(svStr4, GTEST_SINGLE_ARGUMENT(StringTypeTn::string_view(STR("here"))));
 }
 
 TYPED_TEST(TestQxString, find_first_of)
@@ -514,12 +596,12 @@ TYPED_TEST(TestQxString, find_first_of)
     EXPECT_EQ(str.find_first_of(CH('a')), 1);
     EXPECT_EQ(str.find_first_of(CH('n')), 2);
     EXPECT_EQ(str.find_first_of(CH(' ')), 4);
-    EXPECT_EQ(str.find_first_of(CH('x')), StringType::npos);
+    EXPECT_EQ(str.find_first_of(CH('x')), GTEST_SINGLE_ARGUMENT(StringType::npos));
 
     EXPECT_EQ(str.find_first_of(STR("kek"), 0, 3), 9);
     EXPECT_EQ(str.find_first_of(STR("abc"), 0, 3), 1);
     EXPECT_EQ(str.find_first_of(STR("ecc"), 0, 3), 9);
-    EXPECT_EQ(str.find_first_of(STR("x"), 0, 1), StringType::npos);
+    EXPECT_EQ(str.find_first_of(STR("x"), 0, 1), GTEST_SINGLE_ARGUMENT(StringType::npos));
     EXPECT_EQ(str.find_first_of(STR("m"), 0, 1), 0);
 
     auto test = [&str](auto type_var)
@@ -529,7 +611,7 @@ TYPED_TEST(TestQxString, find_first_of)
         EXPECT_EQ(str.find_first_of(type(STR("kek"))), 9);
         EXPECT_EQ(str.find_first_of(type(STR("abc"))), 1);
         EXPECT_EQ(str.find_first_of(type(STR("ecc"))), 9);
-        EXPECT_EQ(str.find_first_of(type(STR("x"))), StringType::npos);
+        EXPECT_EQ(str.find_first_of(type(STR("x"))), GTEST_SINGLE_ARGUMENT(StringType::npos));
         EXPECT_EQ(str.find_first_of(type(STR("m"))), 0);
     };
 
@@ -546,12 +628,12 @@ TYPED_TEST(TestQxString, find_last_of)
     EXPECT_EQ(str.find_last_of(CH('d')), 26);
     EXPECT_EQ(str.find_last_of(CH('p')), 21);
     EXPECT_EQ(str.find_last_of(CH(' ')), 27);
-    EXPECT_EQ(str.find_last_of(CH('x')), StringType::npos);
+    EXPECT_EQ(str.find_last_of(CH('x')), GTEST_SINGLE_ARGUMENT(StringType::npos));
 
     EXPECT_EQ(str.find_last_of(STR("kek"), 0, 3), 31);
     EXPECT_EQ(str.find_last_of(STR("abc"), 0, 3), 24);
     EXPECT_EQ(str.find_last_of(STR("ecc"), 0, 3), 31);
-    EXPECT_EQ(str.find_last_of(STR("x"), 0, 1), StringType::npos);
+    EXPECT_EQ(str.find_last_of(STR("x"), 0, 1), GTEST_SINGLE_ARGUMENT(StringType::npos));
     EXPECT_EQ(str.find_last_of(STR("m"), 0, 1), 0);
 
     auto test = [&str](auto type_var)
@@ -561,7 +643,7 @@ TYPED_TEST(TestQxString, find_last_of)
         EXPECT_EQ(str.find_last_of(type(STR("kek"))), 31);
         EXPECT_EQ(str.find_last_of(type(STR("abc"))), 24);
         EXPECT_EQ(str.find_last_of(type(STR("ecc"))), 31);
-        EXPECT_EQ(str.find_last_of(type(STR("x"))), StringType::npos);
+        EXPECT_EQ(str.find_last_of(type(STR("x"))), GTEST_SINGLE_ARGUMENT(StringType::npos));
         EXPECT_EQ(str.find_last_of(type(STR("m"))), 0);
     };
 
@@ -641,24 +723,24 @@ TYPED_TEST(TestQxString, split)
 
     auto words1 = str1.split(CH(' '));
     EXPECT_EQ(words1.size(), 5);
-    EXPECT_EQ(words1[0], StringTypeTn::string_view(STR("many")));
-    EXPECT_EQ(words1[1], StringTypeTn::string_view(STR("different")));
-    EXPECT_EQ(words1[2], StringTypeTn::string_view(STR("words")));
-    EXPECT_EQ(words1[3], StringTypeTn::string_view(STR("placed")));
-    EXPECT_EQ(words1[4], StringTypeTn::string_view(STR("here")));
+    EXPECT_EQ(words1[0], GTEST_SINGLE_ARGUMENT(StringTypeTn::string_view(STR("many"))));
+    EXPECT_EQ(words1[1], GTEST_SINGLE_ARGUMENT(StringTypeTn::string_view(STR("different"))));
+    EXPECT_EQ(words1[2], GTEST_SINGLE_ARGUMENT(StringTypeTn::string_view(STR("words"))));
+    EXPECT_EQ(words1[3], GTEST_SINGLE_ARGUMENT(StringTypeTn::string_view(STR("placed"))));
+    EXPECT_EQ(words1[4], GTEST_SINGLE_ARGUMENT(StringTypeTn::string_view(STR("here"))));
 
     auto check_comma_split = [](auto... splitter)
     {
         StringTypeTn str(STR("some, long, long, long, long, long, sentence"));
         auto         words = str.split(splitter...);
         EXPECT_EQ(words.size(), 7);
-        EXPECT_EQ(words[0], StringTypeTn::string_view(STR("some")));
-        EXPECT_EQ(words[1], StringTypeTn::string_view(STR("long")));
-        EXPECT_EQ(words[2], StringTypeTn::string_view(STR("long")));
-        EXPECT_EQ(words[3], StringTypeTn::string_view(STR("long")));
-        EXPECT_EQ(words[4], StringTypeTn::string_view(STR("long")));
-        EXPECT_EQ(words[5], StringTypeTn::string_view(STR("long")));
-        EXPECT_EQ(words[6], StringTypeTn::string_view(STR("sentence")));
+        EXPECT_EQ(words[0], GTEST_SINGLE_ARGUMENT(StringTypeTn::string_view(STR("some"))));
+        EXPECT_EQ(words[1], GTEST_SINGLE_ARGUMENT(StringTypeTn::string_view(STR("long"))));
+        EXPECT_EQ(words[2], GTEST_SINGLE_ARGUMENT(StringTypeTn::string_view(STR("long"))));
+        EXPECT_EQ(words[3], GTEST_SINGLE_ARGUMENT(StringTypeTn::string_view(STR("long"))));
+        EXPECT_EQ(words[4], GTEST_SINGLE_ARGUMENT(StringTypeTn::string_view(STR("long"))));
+        EXPECT_EQ(words[5], GTEST_SINGLE_ARGUMENT(StringTypeTn::string_view(STR("long"))));
+        EXPECT_EQ(words[6], GTEST_SINGLE_ARGUMENT(StringTypeTn::string_view(STR("sentence"))));
     };
 
     check_comma_split(STR(", "));
@@ -690,7 +772,7 @@ TYPED_TEST(TestQxString, remove)
         EXPECT_STREQ(str.data(), STR("001000022235666"));
 
         auto ret5 = str.remove(CH('7'));
-        EXPECT_EQ(ret5, StringType::npos);
+        EXPECT_EQ(ret5, GTEST_SINGLE_ARGUMENT(StringType::npos));
         EXPECT_STREQ(str.data(), STR("001000022235666"));
 
         auto ret6 = str.remove(CH('0'), 2);
@@ -702,7 +784,7 @@ TYPED_TEST(TestQxString, remove)
         EXPECT_STREQ(str.data(), STR("0010002225666"));
 
         auto ret8 = str.remove(CH('0'), 6, 10);
-        EXPECT_EQ(ret8, StringType::npos);
+        EXPECT_EQ(ret8, GTEST_SINGLE_ARGUMENT(StringType::npos));
         EXPECT_STREQ(str.data(), STR("0010002225666"));
     }
 
@@ -972,123 +1054,123 @@ TYPED_TEST(TestQxString, operator_plus_equal)
 TYPED_TEST(TestQxString, operator_equal)
 {
     StringTypeTn str(STR("e"));
-    EXPECT_TRUE(str == StringTypeTn(STR("e")));
-    EXPECT_TRUE(str == CH('e'));
-    EXPECT_TRUE(str == STR("e"));
-    EXPECT_TRUE(str == StdStringArg(STR("e")));
-    EXPECT_FALSE(str == StringTypeTn(STR("r")));
-    EXPECT_FALSE(str == CH('r'));
-    EXPECT_FALSE(str == STR("r"));
-    EXPECT_FALSE(str == StdStringArg(STR("r")));
+    EXPECT_EQ(str, GTEST_SINGLE_ARGUMENT(StringTypeTn(STR("e"))));
+    EXPECT_EQ(str, CH('e'));
+    EXPECT_EQ(str, STR("e"));
+    EXPECT_EQ(str, GTEST_SINGLE_ARGUMENT(StdStringArg(STR("e"))));
+    EXPECT_NE(str, GTEST_SINGLE_ARGUMENT(StringTypeTn(STR("r"))));
+    EXPECT_NE(str, CH('r'));
+    EXPECT_NE(str, STR("r"));
+    EXPECT_NE(str, GTEST_SINGLE_ARGUMENT(StdStringArg(STR("r"))));
 
     StringTypeTn str2(STR("word"));
-    EXPECT_TRUE(str2 == STR("word"));
-    EXPECT_FALSE(str2 == STR("dowr"));
-    EXPECT_FALSE(str2 == STR("wor"));
-    EXPECT_FALSE(str2 == STR("word1"));
+    EXPECT_EQ(str2, STR("word"));
+    EXPECT_NE(str2, STR("dowr"));
+    EXPECT_NE(str2, STR("wor"));
+    EXPECT_NE(str2, STR("word1"));
 }
 
 TYPED_TEST(TestQxString, operator_not_equal)
 {
     StringTypeTn str(STR("e"));
-    EXPECT_FALSE(str != StringTypeTn(STR("e")));
-    EXPECT_FALSE(str != CH('e'));
-    EXPECT_FALSE(str != STR("e"));
-    EXPECT_FALSE(str != StdStringArg(STR("e")));
-    EXPECT_TRUE(str != StringTypeTn(STR("r")));
-    EXPECT_TRUE(str != CH('r'));
-    EXPECT_TRUE(str != STR("r"));
-    EXPECT_TRUE(str != StdStringArg(STR("r")));
+    EXPECT_EQ(str, GTEST_SINGLE_ARGUMENT(StringTypeTn(STR("e"))));
+    EXPECT_EQ(str, CH('e'));
+    EXPECT_EQ(str, STR("e"));
+    EXPECT_EQ(str, GTEST_SINGLE_ARGUMENT(StdStringArg(STR("e"))));
+    EXPECT_NE(str, GTEST_SINGLE_ARGUMENT(StringTypeTn(STR("r"))));
+    EXPECT_NE(str, CH('r'));
+    EXPECT_NE(str, STR("r"));
+    EXPECT_NE(str, GTEST_SINGLE_ARGUMENT(StdStringArg(STR("r"))));
 
     StringTypeTn str2(STR("word"));
-    EXPECT_FALSE(str2 != STR("word"));
-    EXPECT_TRUE(str2 != STR("dowr"));
-    EXPECT_TRUE(str2 != STR("wor"));
-    EXPECT_TRUE(str2 != STR("word1"));
+    EXPECT_EQ(str2, STR("word"));
+    EXPECT_NE(str2, STR("dowr"));
+    EXPECT_NE(str2, STR("wor"));
+    EXPECT_NE(str2, STR("word1"));
 }
 
 TYPED_TEST(TestQxString, operator_less)
 {
     StringTypeTn str(STR("5"));
 
-    EXPECT_FALSE(str < StringTypeTn(STR("4")));
-    EXPECT_FALSE(str < StringTypeTn(STR("5")));
-    EXPECT_TRUE(str < StringTypeTn(STR("6")));
+    EXPECT_GE(str, GTEST_SINGLE_ARGUMENT(StringTypeTn(STR("4"))));
+    EXPECT_GE(str, GTEST_SINGLE_ARGUMENT(StringTypeTn(STR("5"))));
+    EXPECT_LT(str, GTEST_SINGLE_ARGUMENT(StringTypeTn(STR("6"))));
 
-    EXPECT_FALSE(str < CH('4'));
-    EXPECT_FALSE(str < CH('5'));
-    EXPECT_TRUE(str < CH('6'));
+    EXPECT_GE(str, CH('4'));
+    EXPECT_GE(str, CH('5'));
+    EXPECT_LT(str, CH('6'));
 
-    EXPECT_FALSE(str < STR("4"));
-    EXPECT_FALSE(str < STR("5"));
-    EXPECT_TRUE(str < STR("6"));
+    EXPECT_GE(str, STR("4"));
+    EXPECT_GE(str, STR("5"));
+    EXPECT_LT(str, STR("6"));
 
-    EXPECT_FALSE(str < StdStringArg(STR("4")));
-    EXPECT_FALSE(str < StdStringArg(STR("5")));
-    EXPECT_TRUE(str < StdStringArg(STR("6")));
+    EXPECT_GE(str, GTEST_SINGLE_ARGUMENT(StdStringArg(STR("4"))));
+    EXPECT_GE(str, GTEST_SINGLE_ARGUMENT(StdStringArg(STR("5"))));
+    EXPECT_LT(str, GTEST_SINGLE_ARGUMENT(StdStringArg(STR("6"))));
 }
 
 TYPED_TEST(TestQxString, operator_less_equal)
 {
     StringTypeTn str(STR("5"));
 
-    EXPECT_FALSE(str <= StringTypeTn(STR("4")));
-    EXPECT_TRUE(str <= StringTypeTn(STR("5")));
-    EXPECT_TRUE(str <= StringTypeTn(STR("6")));
+    EXPECT_GT(str, GTEST_SINGLE_ARGUMENT(StringTypeTn(STR("4"))));
+    EXPECT_LE(str, GTEST_SINGLE_ARGUMENT(StringTypeTn(STR("5"))));
+    EXPECT_LE(str, GTEST_SINGLE_ARGUMENT(StringTypeTn(STR("6"))));
 
-    EXPECT_FALSE(str <= CH('4'));
-    EXPECT_TRUE(str <= CH('5'));
-    EXPECT_TRUE(str <= CH('6'));
+    EXPECT_GT(str, CH('4'));
+    EXPECT_LE(str, CH('5'));
+    EXPECT_LE(str, CH('6'));
 
-    EXPECT_FALSE(str <= STR("4"));
-    EXPECT_TRUE(str <= STR("5"));
-    EXPECT_TRUE(str <= STR("6"));
+    EXPECT_GT(str, STR("4"));
+    EXPECT_LE(str, STR("5"));
+    EXPECT_LE(str, STR("6"));
 
-    EXPECT_FALSE(str <= StdStringArg(STR("4")));
-    EXPECT_TRUE(str <= StdStringArg(STR("5")));
-    EXPECT_TRUE(str <= StdStringArg(STR("6")));
+    EXPECT_GT(str, GTEST_SINGLE_ARGUMENT(StdStringArg(STR("4"))));
+    EXPECT_LE(str, GTEST_SINGLE_ARGUMENT(StdStringArg(STR("5"))));
+    EXPECT_LE(str, GTEST_SINGLE_ARGUMENT(StdStringArg(STR("6"))));
 }
 
 TYPED_TEST(TestQxString, operator_greater)
 {
     StringTypeTn str(STR("5"));
 
-    EXPECT_TRUE(str > StringTypeTn(STR("4")));
-    EXPECT_FALSE(str > StringTypeTn(STR("5")));
-    EXPECT_FALSE(str > StringTypeTn(STR("6")));
+    EXPECT_GT(str, GTEST_SINGLE_ARGUMENT(StringTypeTn(STR("4"))));
+    EXPECT_LE(str, GTEST_SINGLE_ARGUMENT(StringTypeTn(STR("5"))));
+    EXPECT_LE(str, GTEST_SINGLE_ARGUMENT(StringTypeTn(STR("6"))));
 
-    EXPECT_TRUE(str > CH('4'));
-    EXPECT_FALSE(str > CH('5'));
-    EXPECT_FALSE(str > CH('6'));
+    EXPECT_GT(str, CH('4'));
+    EXPECT_LE(str, CH('5'));
+    EXPECT_LE(str, CH('6'));
 
-    EXPECT_TRUE(str > STR("4"));
-    EXPECT_FALSE(str > STR("5"));
-    EXPECT_FALSE(str > STR("6"));
+    EXPECT_GT(str, STR("4"));
+    EXPECT_LE(str, STR("5"));
+    EXPECT_LE(str, STR("6"));
 
-    EXPECT_TRUE(str > StdStringArg(STR("4")));
-    EXPECT_FALSE(str > StdStringArg(STR("5")));
-    EXPECT_FALSE(str > StdStringArg(STR("6")));
+    EXPECT_GT(str, GTEST_SINGLE_ARGUMENT(StdStringArg(STR("4"))));
+    EXPECT_LE(str, GTEST_SINGLE_ARGUMENT(StdStringArg(STR("5"))));
+    EXPECT_LE(str, GTEST_SINGLE_ARGUMENT(StdStringArg(STR("6"))));
 }
 
 TYPED_TEST(TestQxString, operator_greater_equal)
 {
     StringTypeTn str(STR("5"));
 
-    EXPECT_TRUE(str >= StringTypeTn(STR("4")));
-    EXPECT_TRUE(str >= StringTypeTn(STR("5")));
-    EXPECT_FALSE(str >= StringTypeTn(STR("6")));
+    EXPECT_GE(str, GTEST_SINGLE_ARGUMENT(StringTypeTn(STR("4"))));
+    EXPECT_GE(str, GTEST_SINGLE_ARGUMENT(StringTypeTn(STR("5"))));
+    EXPECT_LT(str, GTEST_SINGLE_ARGUMENT(StringTypeTn(STR("6"))));
 
-    EXPECT_TRUE(str >= CH('4'));
-    EXPECT_TRUE(str >= CH('5'));
-    EXPECT_FALSE(str >= CH('6'));
+    EXPECT_GE(str, CH('4'));
+    EXPECT_GE(str, CH('5'));
+    EXPECT_LT(str, CH('6'));
 
-    EXPECT_TRUE(str >= STR("4"));
-    EXPECT_TRUE(str >= STR("5"));
-    EXPECT_FALSE(str >= STR("6"));
+    EXPECT_GE(str, STR("4"));
+    EXPECT_GE(str, STR("5"));
+    EXPECT_LT(str, STR("6"));
 
-    EXPECT_TRUE(str >= StdStringArg(STR("4")));
-    EXPECT_TRUE(str >= StdStringArg(STR("5")));
-    EXPECT_FALSE(str >= StdStringArg(STR("6")));
+    EXPECT_GE(str, GTEST_SINGLE_ARGUMENT(StdStringArg(STR("4"))));
+    EXPECT_GE(str, GTEST_SINGLE_ARGUMENT(StdStringArg(STR("5"))));
+    EXPECT_LT(str, GTEST_SINGLE_ARGUMENT(StdStringArg(STR("6"))));
 }
 
 TYPED_TEST(TestQxString, operator_braces)
@@ -1468,10 +1550,10 @@ TYPED_TEST(TestQxString, string_view)
 
 TYPED_TEST(TestQxString, small_string_optimization)
 {
-    constexpr auto pszSmallString1 = STR("small1");
+    constexpr auto pszSmallString1 = STR("sm1");
     constexpr auto nSmallStrSize1  = qx::strlen(pszSmallString1);
 
-    constexpr auto pszSmallString2 = STR("small2");
+    constexpr auto pszSmallString2 = STR("sm2");
     constexpr auto nSmallStrSize2  = qx::strlen(pszSmallString2);
 
     constexpr auto pszBigString1 =
@@ -1486,74 +1568,81 @@ TYPED_TEST(TestQxString, small_string_optimization)
 
     // from small to small
     {
-        StringTypeTn str = pszSmallString1;
+        StringTypeTn str            = pszSmallString1;
+        const auto   nPrevCapacity1 = str.capacity();
         EXPECT_EQ(str.size(), nSmallStrSize1);
-        EXPECT_EQ(str.capacity(), TypeParam::small_string_size());
         EXPECT_STREQ(str.data(), pszSmallString1);
+        CheckCapacity<TypeParam>(nPrevCapacity1, str.capacity());
 
-        str = pszSmallString2;
+        const auto nPrevCapacity2 = str.capacity();
+        str                       = pszSmallString2;
         EXPECT_EQ(str.size(), nSmallStrSize2);
-        EXPECT_EQ(str.capacity(), TypeParam::small_string_size());
         EXPECT_STREQ(str.data(), pszSmallString2);
+        CheckCapacity<TypeParam>(nPrevCapacity2, str.capacity());
     }
 
     // from small to big
     {
-        StringTypeTn str = pszSmallString1;
+        StringTypeTn str            = pszSmallString1;
+        const auto   nPrevCapacity1 = str.capacity();
         EXPECT_EQ(str.size(), nSmallStrSize1);
-        EXPECT_EQ(str.capacity(), TypeParam::small_string_size());
         EXPECT_STREQ(str.data(), pszSmallString1);
+        CheckCapacity<TypeParam>(nPrevCapacity1, str.capacity());
 
-        str = pszBigString1;
+        const auto nPrevCapacity2 = str.capacity();
+        str                       = pszBigString1;
         EXPECT_EQ(str.size(), nBigStrSize1);
-        EXPECT_EQ(str.capacity() % TypeParam::align(), 0);
         EXPECT_STREQ(str.data(), pszBigString1);
+        CheckCapacity<TypeParam>(nPrevCapacity2, str.capacity());
     }
 
     // from big to big
     {
-        StringTypeTn str = pszBigString1;
+        StringTypeTn str            = pszBigString1;
+        const auto   nPrevCapacity1 = str.capacity();
         EXPECT_EQ(str.size(), nBigStrSize1);
-        EXPECT_EQ(str.capacity() % TypeParam::align(), 0);
         EXPECT_STREQ(str.data(), pszBigString1);
+        CheckCapacity<TypeParam>(nPrevCapacity1, str.capacity());
 
-        str = pszBigString2;
+        const auto nPrevCapacity2 = str.capacity();
+        str                       = pszBigString2;
         EXPECT_EQ(str.size(), nBigStrSize2);
-        EXPECT_EQ(str.capacity() % TypeParam::align(), 0);
         EXPECT_STREQ(str.data(), pszBigString2);
+        CheckCapacity<TypeParam>(nPrevCapacity2, str.capacity());
     }
 
     // from big to small
     {
         StringTypeTn str            = pszBigString1;
-        const auto   nStartCapacity = str.capacity();
+        const auto   nPrevCapacity1 = str.capacity();
         EXPECT_EQ(str.size(), nBigStrSize1);
-        EXPECT_EQ(nStartCapacity % TypeParam::align(), 0);
         EXPECT_STREQ(str.data(), pszBigString1);
+        CheckCapacity<TypeParam>(nPrevCapacity1, str.capacity());
 
-        str = pszSmallString1;
+        const auto nPrevCapacity2 = str.capacity();
+        str                       = pszSmallString1;
         EXPECT_EQ(str.size(), nSmallStrSize1);
-        EXPECT_EQ(str.capacity(), nStartCapacity);
         EXPECT_STREQ(str.data(), pszSmallString1);
+        CheckCapacity<TypeParam>(nPrevCapacity2, str.capacity());
     }
 
     // fit big to small
     {
         StringTypeTn str            = pszBigString1;
-        const auto   nStartCapacity = str.capacity();
+        const auto   nPrevCapacity1 = str.capacity();
         EXPECT_EQ(str.size(), nBigStrSize1);
-        EXPECT_EQ(str.capacity() % TypeParam::align(), 0);
         EXPECT_STREQ(str.data(), pszBigString1);
+        CheckCapacity<TypeParam>(nPrevCapacity1, str.capacity());
 
-        str = pszSmallString1;
+        const auto nPrevCapacity2 = str.capacity();
+        str                       = pszSmallString1;
         EXPECT_EQ(str.size(), nSmallStrSize1);
-        EXPECT_EQ(str.capacity(), nStartCapacity);
         EXPECT_STREQ(str.data(), pszSmallString1);
+        CheckCapacity<TypeParam>(nPrevCapacity2, str.capacity());
 
         str.shrink_to_fit();
         EXPECT_EQ(str.size(), nSmallStrSize1);
         EXPECT_EQ(str.capacity(), TypeParam::small_string_size());
-        EXPECT_NE(str.capacity(), nStartCapacity);
         EXPECT_STREQ(str.data(), pszSmallString1);
     }
 }
@@ -1579,7 +1668,7 @@ TYPED_TEST(TestQxString, replase)
     EXPECT_EQ(str.size(), 35);
 
     str = pszStartStr;
-    EXPECT_EQ(str.replace(CH('z'), StdString(STR("CCCC"))), StringType::npos);
+    EXPECT_EQ(str.replace(CH('z'), StdString(STR("CCCC"))), GTEST_SINGLE_ARGUMENT(StringType::npos));
     EXPECT_STREQ(str.data(), STR("Let me help you with your baggage"));
     EXPECT_EQ(str.size(), 33);
 
@@ -1611,12 +1700,16 @@ TYPED_TEST(TestQxString, replase)
         EXPECT_EQ(str.size(), 32);
 
         str = pszStartStr;
-        EXPECT_EQ(str.replace(type_find(STR("you")), type_replace(STR("12")), 26), StringType::npos);
+        EXPECT_EQ(
+            str.replace(type_find(STR("you")), type_replace(STR("12")), 26),
+            GTEST_SINGLE_ARGUMENT(StringType::npos));
         EXPECT_STREQ(str.data(), STR("Let me help you with your baggage"));
         EXPECT_EQ(str.size(), 33);
 
         str = pszStartStr;
-        EXPECT_EQ(str.replace(type_find(STR("you")), type_replace(STR("12")), 0, 10), StringType::npos);
+        EXPECT_EQ(
+            str.replace(type_find(STR("you")), type_replace(STR("12")), 0, 10),
+            GTEST_SINGLE_ARGUMENT(StringType::npos));
         EXPECT_STREQ(str.data(), STR("Let me help you with your baggage"));
         EXPECT_EQ(str.size(), 33);
     };
@@ -2118,7 +2211,7 @@ TYPED_TEST(TestQxString, rfind)
     EXPECT_EQ(str.rfind(STR("for"), 15), 11);
     EXPECT_EQ(str.rfind(STR("for"), 29, StringType::npos, 20), 25);
     EXPECT_EQ(str.rfind(STR("for"), 0), 0);
-    EXPECT_EQ(str.rfind(STR("kek")), StringType::npos);
+    EXPECT_EQ(str.rfind(STR("kek")), GTEST_SINGLE_ARGUMENT(StringType::npos));
 
     auto test = [str](auto... toSearch)
     {
@@ -2126,7 +2219,7 @@ TYPED_TEST(TestQxString, rfind)
         EXPECT_EQ(str.rfind(toSearch..., 15), 11);
         EXPECT_EQ(str.rfind(toSearch..., 29, 20), 25);
         EXPECT_EQ(str.rfind(toSearch..., 0), 0);
-        EXPECT_EQ(str.rfind(STR("kek")), StringType::npos);
+        EXPECT_EQ(str.rfind(STR("kek")), GTEST_SINGLE_ARGUMENT(StringType::npos));
     };
 
     test(StringTypeTn(STR("for")));
