@@ -33,7 +33,7 @@ source_group(
 # Setup
 
 if(NOT DEFINED BOOST_ROOT)
-    set (BOOST_ROOT "${CMAKE_SOURCE_DIR}/../../external/boost_1_79_0")
+    set (BOOST_ROOT "${CMAKE_SOURCE_DIR}/../external/boost_1_79_0")
     message("Default BOOST_ROOT: ${BOOST_ROOT}")
 else()
     message("Predefined BOOST_ROOT: ${BOOST_ROOT}")
@@ -57,7 +57,7 @@ if(Boost_FOUND)
     include_directories(${Boost_INCLUDE_DIRS}) 
 endif()
 
-add_executable(qxLib ${FILES_HEADERS} ${FILES_SOURCES} ${FILES_INLINES})
+add_library(qxLib ${FILES_HEADERS} ${FILES_SOURCES} ${FILES_INLINES})
 set_target_options(qxLib)
 set_qxlib_target_options(qxLib)
 

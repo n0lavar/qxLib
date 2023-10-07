@@ -38,18 +38,25 @@ inline file_logger_stream::file_logger_stream(bool bAlwaysFlush, log_file_policy
 
     const wstring               sWideLogFile = to_wstring(sLogFile);
     const std::filesystem::path path(sWideLogFile.c_str());
+    if (path.has_parent_path() && !std::filesystem::exists(path.parent_path()))
+    {
+        if (!std::filesystem::create_directory(path.parent_path()))
+        {
+            std::wcerr << L"Can't create output folder " << sWideLogFile;
+            return;
+        }
+    }
 
     m_File = std::basic_ofstream<wchar_t>(path, openingMode);
     if (!m_File)
     {
         std::wcerr << L"Can't open log file " << sWideLogFile;
+        return;
     }
-    else
-    {
-        QX_DISABLE_MSVC_WARNINGS(4996);
-        m_File.imbue(std::locale(std::locale(), new std::codecvt_utf8<wchar_t>));
-        QX_RESTORE_MSVC_WARNINGS(4996);
-    }
+
+    QX_DISABLE_MSVC_WARNINGS(4996);
+    m_File.imbue(std::locale(std::locale(), new std::codecvt_utf8<wchar_t>));
+    QX_RESTORE_MSVC_WARNINGS(4996);
 }
 
 inline file_logger_stream::~file_logger_stream()
