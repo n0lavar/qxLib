@@ -144,9 +144,9 @@ $(function() {
 <div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;    <span class="keywordtype">size_t</span> m_nHash = 0;</div>
 <div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;};</div>
 <div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160; </div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;<span class="keyword">using</span> <a class="code" href="classqx_1_1basic__string__hash.html">cstring_hash</a> = <a class="code" href="classqx_1_1basic__string__hash.html">basic_string_hash&lt;char_traits&lt;char&gt;</a>&gt;;</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;<span class="keyword">using</span> <a class="code" href="classqx_1_1basic__string__hash.html">wstring_hash</a> = <a class="code" href="classqx_1_1basic__string__hash.html">basic_string_hash&lt;char_traits&lt;wchar_t&gt;</a>&gt;;</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;<span class="keyword">using</span> <a class="code" href="classqx_1_1basic__string__hash.html">string_hash</a>  = <a class="code" href="classqx_1_1basic__string__hash.html">basic_string_hash&lt;char_traits&lt;char_type&gt;</a>&gt;;</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;<span class="keyword">using</span> <a class="code" href="classqx_1_1basic__string__hash.html">cstring_hash</a> = <a class="code" href="classqx_1_1basic__string__hash.html">basic_string_hash&lt;string_traits::traits&lt;char&gt;</a>&gt;;</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;<span class="keyword">using</span> <a class="code" href="classqx_1_1basic__string__hash.html">wstring_hash</a> = <a class="code" href="classqx_1_1basic__string__hash.html">basic_string_hash&lt;string_traits::traits&lt;wchar_t&gt;</a>&gt;;</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;<span class="keyword">using</span> <a class="code" href="classqx_1_1basic__string__hash.html">string_hash</a>  = <a class="code" href="classqx_1_1basic__string__hash.html">basic_string_hash&lt;string_traits::traits&lt;char_type&gt;</a>&gt;;</div>
 <div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160; </div>
 <div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;<span class="preprocessor">#define QX_STRING_HASH(quote) qx::string_hash(QX_TEXT(quote))</span></div>
 <div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160; </div>
@@ -159,7 +159,7 @@ $(function() {
 <div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;<span class="comment">    @param  nSize  - literal text size</span></div>
 <div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;<span class="comment">    @retval        - text hash value</span></div>
 <div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;<span class="comment">**/</span></div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;constexpr <a class="code" href="classqx_1_1basic__string__hash.html">basic_string_hash&lt;char_traits&lt;char&gt;</a>&gt; <span class="keyword">operator</span><span class="stringliteral">&quot;&quot;</span> _sh(<span class="keyword">const</span> <span class="keywordtype">char</span>* pszStr, <span class="keywordtype">size_t</span> nSize);</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;constexpr <a class="code" href="classqx_1_1basic__string__hash.html">basic_string_hash&lt;string_traits::traits&lt;char&gt;</a>&gt; <span class="keyword">operator</span><span class="stringliteral">&quot;&quot;</span> _sh(<span class="keyword">const</span> <span class="keywordtype">char</span>* pszStr, <span class="keywordtype">size_t</span> nSize);</div>
 <div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;<span class="comment"></span> </div>
 <div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;<span class="comment">/**</span></div>
 <div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;<span class="comment">    @brief  String hash literal for constexpr converting. Can be used with switch-case</span></div>
@@ -167,7 +167,7 @@ $(function() {
 <div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;<span class="comment">    @param  nSize  - literal text size</span></div>
 <div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;<span class="comment">    @retval        - text hash value</span></div>
 <div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;<span class="comment">**/</span></div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;constexpr <a class="code" href="classqx_1_1basic__string__hash.html">basic_string_hash&lt;char_traits&lt;wchar_t&gt;</a>&gt; <span class="keyword">operator</span><span class="stringliteral">&quot;&quot;</span> _sh(<span class="keyword">const</span> <span class="keywordtype">wchar_t</span>* pszStr, <span class="keywordtype">size_t</span> nSize);</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;constexpr <a class="code" href="classqx_1_1basic__string__hash.html">basic_string_hash&lt;string_traits::traits&lt;wchar_t&gt;</a>&gt; <span class="keyword">operator</span><span class="stringliteral">&quot;&quot;</span> _sh(<span class="keyword">const</span> <span class="keywordtype">wchar_t</span>* pszStr, <span class="keywordtype">size_t</span> nSize);</div>
 <div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160; </div>
 <div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;} <span class="comment">// namespace literals</span></div>
 <div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160; </div>

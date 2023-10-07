@@ -117,7 +117,7 @@ Functions</h2></td></tr>
 <tr class="separator:a8c51be95bedbc7e6a1f1612d2a45e29b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa1f7d3648d28dcef62c0db015730218d"><td class="memTemplParams" colspan="2">template&lt;class value_t &gt; </td></tr>
 <tr class="memitem:aa1f7d3648d28dcef62c0db015730218d"><td class="memTemplItemLeft" align="right" valign="top">constexpr std::size_t&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="string__utils_8h.html#aa1f7d3648d28dcef62c0db015730218d">qx::strlen</a> (const value_t *psz)</td></tr>
-<tr class="memdesc:aa1f7d3648d28dcef62c0db015730218d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constexpr string length.  <a href="string__utils_8h.html#aa1f7d3648d28dcef62c0db015730218d">More...</a><br /></td></tr>
+<tr class="memdesc:aa1f7d3648d28dcef62c0db015730218d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Naive but constexpr string length algorithm, for runtime prefer std::strlen as there are may be a lot of optimizations.  <a href="string__utils_8h.html#aa1f7d3648d28dcef62c0db015730218d">More...</a><br /></td></tr>
 <tr class="separator:aa1f7d3648d28dcef62c0db015730218d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
@@ -638,7 +638,7 @@ template&lt;class value_t &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Constexpr string length. </p>
+<p>Naive but constexpr string length algorithm, for runtime prefer std::strlen as there are may be a lot of optimizations. </p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
     <tr><td class="paramname">value_t</td><td>- char type </td></tr>
@@ -658,7 +658,7 @@ template&lt;class value_t &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="string__utils_8h_source.html#l00362">362</a> of file <a class="el" href="string__utils_8h_source.html">string_utils.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="string__utils_8h_source.html#l00363">363</a> of file <a class="el" href="string__utils_8h_source.html">string_utils.h</a>.</p>
 
 </div>
 </div>

@@ -424,25 +424,29 @@ $(function() {
 <div class="line"><a name="l00353"></a><span class="lineno">  353</span>&#160;}</div>
 <div class="line"><a name="l00354"></a><span class="lineno">  354</span>&#160;<span class="comment"></span> </div>
 <div class="line"><a name="l00355"></a><span class="lineno">  355</span>&#160;<span class="comment">/**</span></div>
-<div class="line"><a name="l00356"></a><span class="lineno">  356</span>&#160;<span class="comment">    @brief  Constexpr string length</span></div>
-<div class="line"><a name="l00357"></a><span class="lineno">  357</span>&#160;<span class="comment">    @tparam value_t - char type</span></div>
-<div class="line"><a name="l00358"></a><span class="lineno">  358</span>&#160;<span class="comment">    @param  psz     - pointer to string zero terminated</span></div>
-<div class="line"><a name="l00359"></a><span class="lineno">  359</span>&#160;<span class="comment">    @retval         - string length</span></div>
-<div class="line"><a name="l00360"></a><span class="lineno">  360</span>&#160;<span class="comment">**/</span></div>
-<div class="line"><a name="l00361"></a><span class="lineno">  361</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> value_t&gt;</div>
-<div class="line"><a name="l00362"></a><span class="lineno"><a class="line" href="string__utils_8h.html#aa1f7d3648d28dcef62c0db015730218d">  362</a></span>&#160;constexpr std::size_t <a class="code" href="string__utils_8h.html#aa1f7d3648d28dcef62c0db015730218d">strlen</a>(<span class="keyword">const</span> value_t* psz)</div>
-<div class="line"><a name="l00363"></a><span class="lineno">  363</span>&#160;{</div>
-<div class="line"><a name="l00364"></a><span class="lineno">  364</span>&#160;    std::size_t nLen = 0;</div>
-<div class="line"><a name="l00365"></a><span class="lineno">  365</span>&#160;    <span class="keywordflow">while</span> (psz &amp;&amp; *psz != <a class="code" href="string__utils_8h.html#a57911e62bb82593665bf09e4ea834904">QX_CHAR_PREFIX</a>(value_t, <span class="charliteral">&#39;\0&#39;</span>))</div>
-<div class="line"><a name="l00366"></a><span class="lineno">  366</span>&#160;    {</div>
-<div class="line"><a name="l00367"></a><span class="lineno">  367</span>&#160;        ++psz;</div>
-<div class="line"><a name="l00368"></a><span class="lineno">  368</span>&#160;        nLen++;</div>
-<div class="line"><a name="l00369"></a><span class="lineno">  369</span>&#160;    }</div>
-<div class="line"><a name="l00370"></a><span class="lineno">  370</span>&#160; </div>
-<div class="line"><a name="l00371"></a><span class="lineno">  371</span>&#160;    <span class="keywordflow">return</span> nLen;</div>
-<div class="line"><a name="l00372"></a><span class="lineno">  372</span>&#160;}</div>
-<div class="line"><a name="l00373"></a><span class="lineno">  373</span>&#160; </div>
-<div class="line"><a name="l00374"></a><span class="lineno">  374</span>&#160;} <span class="comment">// namespace qx</span></div>
+<div class="line"><a name="l00356"></a><span class="lineno">  356</span>&#160;<span class="comment">    @brief  Naive but constexpr string length algorithm,</span></div>
+<div class="line"><a name="l00357"></a><span class="lineno">  357</span>&#160;<span class="comment">            for runtime prefer std::strlen as there are may be a lot of optimizations</span></div>
+<div class="line"><a name="l00358"></a><span class="lineno">  358</span>&#160;<span class="comment">    @tparam value_t - char type</span></div>
+<div class="line"><a name="l00359"></a><span class="lineno">  359</span>&#160;<span class="comment">    @param  psz     - pointer to string zero terminated</span></div>
+<div class="line"><a name="l00360"></a><span class="lineno">  360</span>&#160;<span class="comment">    @retval         - string length</span></div>
+<div class="line"><a name="l00361"></a><span class="lineno">  361</span>&#160;<span class="comment">**/</span></div>
+<div class="line"><a name="l00362"></a><span class="lineno">  362</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> value_t&gt;</div>
+<div class="line"><a name="l00363"></a><span class="lineno"><a class="line" href="string__utils_8h.html#aa1f7d3648d28dcef62c0db015730218d">  363</a></span>&#160;constexpr std::size_t <a class="code" href="string__utils_8h.html#aa1f7d3648d28dcef62c0db015730218d">strlen</a>(<span class="keyword">const</span> value_t* psz)</div>
+<div class="line"><a name="l00364"></a><span class="lineno">  364</span>&#160;{</div>
+<div class="line"><a name="l00365"></a><span class="lineno">  365</span>&#160;    <span class="keywordflow">if</span> (!psz)</div>
+<div class="line"><a name="l00366"></a><span class="lineno">  366</span>&#160;        <span class="keywordflow">return</span> 0;</div>
+<div class="line"><a name="l00367"></a><span class="lineno">  367</span>&#160; </div>
+<div class="line"><a name="l00368"></a><span class="lineno">  368</span>&#160;    std::size_t nLen = 0;</div>
+<div class="line"><a name="l00369"></a><span class="lineno">  369</span>&#160;    <span class="keywordflow">while</span> (*psz != <a class="code" href="string__utils_8h.html#a57911e62bb82593665bf09e4ea834904">QX_CHAR_PREFIX</a>(value_t, <span class="charliteral">&#39;\0&#39;</span>))</div>
+<div class="line"><a name="l00370"></a><span class="lineno">  370</span>&#160;    {</div>
+<div class="line"><a name="l00371"></a><span class="lineno">  371</span>&#160;        ++psz;</div>
+<div class="line"><a name="l00372"></a><span class="lineno">  372</span>&#160;        nLen++;</div>
+<div class="line"><a name="l00373"></a><span class="lineno">  373</span>&#160;    }</div>
+<div class="line"><a name="l00374"></a><span class="lineno">  374</span>&#160; </div>
+<div class="line"><a name="l00375"></a><span class="lineno">  375</span>&#160;    <span class="keywordflow">return</span> nLen;</div>
+<div class="line"><a name="l00376"></a><span class="lineno">  376</span>&#160;}</div>
+<div class="line"><a name="l00377"></a><span class="lineno">  377</span>&#160; </div>
+<div class="line"><a name="l00378"></a><span class="lineno">  378</span>&#160;} <span class="comment">// namespace qx</span></div>
 <div class="ttc" id="aconfig_8h_html"><div class="ttname"><a href="config_8h.html">config.h</a></div></div>
 <div class="ttc" id="astring__utils_8h_html_a3d321a74f68c1be9613ca451a464ec53"><div class="ttname"><a href="string__utils_8h.html#a3d321a74f68c1be9613ca451a464ec53">qx::djb2a_hash</a></div><div class="ttdeci">constexpr size_t djb2a_hash(const value_t *pszStr, size_t nSeed, size_t nLen)</div><div class="ttdoc">djb2a hash</div><div class="ttdef"><b>Definition:</b> <a href="string__utils_8h_source.html#l00026">string_utils.h:26</a></div></div>
 <div class="ttc" id="astring__utils_8h_html_a57911e62bb82593665bf09e4ea834904"><div class="ttname"><a href="string__utils_8h.html#a57911e62bb82593665bf09e4ea834904">QX_CHAR_PREFIX</a></div><div class="ttdeci">#define QX_CHAR_PREFIX(value_t, ch)</div><div class="ttdoc">Chose witch of prefixes add to char : L or none.</div><div class="ttdef"><b>Definition:</b> <a href="string__utils_8h_source.html#l00251">string_utils.h:251</a></div></div>
@@ -450,7 +454,7 @@ $(function() {
 <div class="ttc" id="astring__utils_8h_html_a8c51be95bedbc7e6a1f1612d2a45e29b"><div class="ttname"><a href="string__utils_8h.html#a8c51be95bedbc7e6a1f1612d2a45e29b">qx::get_format_specifier</a></div><div class="ttdeci">constexpr auto get_format_specifier() noexcept</div><div class="ttdoc">Get format specifier for type.</div><div class="ttdef"><b>Definition:</b> <a href="string__utils_8h_source.html#l00277">string_utils.h:277</a></div></div>
 <div class="ttc" id="astring__utils_8h_html_a8eb00080d60f696d550f8f9800b88222"><div class="ttname"><a href="string__utils_8h.html#a8eb00080d60f696d550f8f9800b88222">qx::murmur_32_hash</a></div><div class="ttdeci">constexpr size_t murmur_32_hash(const value_t *pStr, size_t nSeed, size_t nLen) noexcept</div><div class="ttdoc">Murmur nHash.</div><div class="ttdef"><b>Definition:</b> <a href="string__utils_8h_source.html#l00065">string_utils.h:65</a></div></div>
 <div class="ttc" id="astring__utils_8h_html_a93d16f8e89afc3d74d493084557b2c84"><div class="ttname"><a href="string__utils_8h.html#a93d16f8e89afc3d74d493084557b2c84">qx::strcmp</a></div><div class="ttdeci">constexpr int strcmp(const value_t *pszLeft, const value_t *pszRight)</div><div class="ttdoc">Constexpr compare two strings.</div><div class="ttdef"><b>Definition:</b> <a href="string__utils_8h_source.html#l00179">string_utils.h:179</a></div></div>
-<div class="ttc" id="astring__utils_8h_html_aa1f7d3648d28dcef62c0db015730218d"><div class="ttname"><a href="string__utils_8h.html#aa1f7d3648d28dcef62c0db015730218d">qx::strlen</a></div><div class="ttdeci">constexpr std::size_t strlen(const value_t *psz)</div><div class="ttdoc">Constexpr string length.</div><div class="ttdef"><b>Definition:</b> <a href="string__utils_8h_source.html#l00362">string_utils.h:362</a></div></div>
+<div class="ttc" id="astring__utils_8h_html_aa1f7d3648d28dcef62c0db015730218d"><div class="ttname"><a href="string__utils_8h.html#aa1f7d3648d28dcef62c0db015730218d">qx::strlen</a></div><div class="ttdeci">constexpr std::size_t strlen(const value_t *psz)</div><div class="ttdoc">Naive but constexpr string length algorithm, for runtime prefer std::strlen as there are may be a lot...</div><div class="ttdef"><b>Definition:</b> <a href="string__utils_8h_source.html#l00363">string_utils.h:363</a></div></div>
 <div class="ttc" id="astring__utils_8h_html_ae4f688084b037e2e7a63a13eaf539a02"><div class="ttname"><a href="string__utils_8h.html#ae4f688084b037e2e7a63a13eaf539a02">QX_STR_PREFIX</a></div><div class="ttdeci">#define QX_STR_PREFIX(value_t, str)</div><div class="ttdoc">Chose witch of prefixes add to string : L or none.</div><div class="ttdef"><b>Definition:</b> <a href="string__utils_8h_source.html#l00243">string_utils.h:243</a></div></div>
 <div class="ttc" id="atypedefs_8h_html"><div class="ttname"><a href="typedefs_8h.html">typedefs.h</a></div></div>
 <div class="ttc" id="atypedefs_8h_html_a6dbf9516e516c901604625282c174aa4"><div class="ttname"><a href="typedefs_8h.html#a6dbf9516e516c901604625282c174aa4">u16</a></div><div class="ttdeci">uint16_t u16</div><div class="ttdoc">0 .. 4 294 967 295</div><div class="ttdef"><b>Definition:</b> <a href="typedefs_8h_source.html#l00021">typedefs.h:22</a></div></div>
