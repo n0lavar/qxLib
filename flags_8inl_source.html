@@ -139,43 +139,43 @@ $(function() {
 <div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160; </div>
 <div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;<span class="keyword">template</span>&lt;enumeration_c enum_t&gt;</div>
 <div class="line"><a name="l00070"></a><span class="lineno"><a class="line" href="classqx_1_1flags.html#ad0ce43217fc43b81aa04f5142e1529b2">   70</a></span>&#160;constexpr <a class="code" href="classqx_1_1flags.html">flags&lt;enum_t&gt;::flags</a>(enum_t eFlag) noexcept : m_EnumFlags(underlying_type(eFlag))</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;{</div>
+<div class="line"><a name="l00071"></a><span class="lineno"><a class="line" href="classqx_1_1flags.html#aaa67208820f4ce4e91ed493fb8315b3c">   71</a></span>&#160;{</div>
 <div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;}</div>
 <div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160; </div>
 <div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;<span class="keyword">template</span>&lt;enumeration_c enum_t&gt;</div>
 <div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span>... args_t&gt;</div>
 <div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    requires(<span class="keyword">sizeof</span>...(args_t) &gt;= 2 &amp;&amp; are_specific_v&lt;enum_t, args_t...&gt;)</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;constexpr <a class="code" href="classqx_1_1flags.html">flags&lt;enum_t&gt;::flags</a>(args_t... <a class="code" href="classqx_1_1flags.html">flags</a>) noexcept</div>
+<div class="line"><a name="l00077"></a><span class="lineno"><a class="line" href="classqx_1_1flags.html#a899fb0d98970d2d1fb120971854b3c86">   77</a></span>&#160;constexpr <a class="code" href="classqx_1_1flags.html">flags</a>&lt;enum_t&gt;::<a class="code" href="classqx_1_1flags.html">flags</a>(args_t... <a class="code" href="classqx_1_1flags.html">flags</a>) noexcept</div>
 <div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;{</div>
 <div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;    add(<a class="code" href="classqx_1_1flags.html">flags</a>...);</div>
 <div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;}</div>
 <div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160; </div>
 <div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;<span class="keyword">template</span>&lt;enumeration_c enum_t&gt;</div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span>... args_t&gt;</div>
+<div class="line"><a name="l00083"></a><span class="lineno"><a class="line" href="classqx_1_1flags.html#ac25b77ed3fe2aa474031d4814aab8601">   83</a></span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span>... args_t&gt;</div>
 <div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;    requires(<span class="keyword">sizeof</span>...(args_t) &gt;= 1 &amp;&amp; are_specific_v&lt;enum_t, args_t...&gt;)</div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;constexpr <span class="keywordtype">void</span> <a class="code" href="classqx_1_1flags.html#a9f60eb813350475c17a270c40c1499f8">flags&lt;enum_t&gt;::add</a>(args_t... flags) noexcept</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;constexpr <span class="keywordtype">void</span> <a class="code" href="classqx_1_1flags.html#a9f60eb813350475c17a270c40c1499f8">flags&lt;enum_t&gt;::add</a>(args_t... <a class="code" href="classqx_1_1flags.html">flags</a>) noexcept</div>
 <div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;{</div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;    ((m_EnumFlags |= underlying_type(flags)), ...);</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;    ((m_EnumFlags |= underlying_type(<a class="code" href="classqx_1_1flags.html">flags</a>)), ...);</div>
 <div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;}</div>
 <div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160; </div>
 <div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;<span class="keyword">template</span>&lt;enumeration_c enum_t&gt;</div>
 <div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span>... args_t&gt;</div>
 <div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;    requires(<span class="keyword">sizeof</span>...(args_t) &gt;= 1 &amp;&amp; are_specific_v&lt;enum_t, args_t...&gt;)</div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;constexpr <span class="keywordtype">void</span> <a class="code" href="classqx_1_1flags.html#a772319741e55bfea4eb510085786273a">flags&lt;enum_t&gt;::remove</a>(args_t... flags) noexcept</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;constexpr <span class="keywordtype">void</span> <a class="code" href="classqx_1_1flags.html#a772319741e55bfea4eb510085786273a">flags&lt;enum_t&gt;::remove</a>(args_t... <a class="code" href="classqx_1_1flags.html">flags</a>) noexcept</div>
 <div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;{</div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;    ((m_EnumFlags &amp;= ~underlying_type(flags)), ...);</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;    ((m_EnumFlags &amp;= ~underlying_type(<a class="code" href="classqx_1_1flags.html">flags</a>)), ...);</div>
 <div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;}</div>
 <div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160; </div>
 <div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;<span class="keyword">template</span>&lt;enumeration_c enum_t&gt;</div>
 <div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span>... args_t&gt;</div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;    requires(<span class="keyword">sizeof</span>...(args_t) &gt;= 1 &amp;&amp; are_specific_v&lt;enum_t, args_t...&gt;)</div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;constexpr <span class="keywordtype">void</span> <a class="code" href="classqx_1_1flags.html#a98f58dd898e11493db981a68ee123e85">flags&lt;enum_t&gt;::xor_</a>(args_t... flags) noexcept</div>
+<div class="line"><a name="l00100"></a><span class="lineno"><a class="line" href="classqx_1_1flags.html#ad0ce43217fc43b81aa04f5142e1529b2">  100</a></span>&#160;    requires(<span class="keyword">sizeof</span>...(args_t) &gt;= 1 &amp;&amp; are_specific_v&lt;enum_t, args_t...&gt;)</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;constexpr <span class="keywordtype">void</span> <a class="code" href="classqx_1_1flags.html#a98f58dd898e11493db981a68ee123e85">flags&lt;enum_t&gt;::xor_</a>(args_t... <a class="code" href="classqx_1_1flags.html">flags</a>) noexcept</div>
 <div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;{</div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;    ((m_EnumFlags ^= underlying_type(flags)), ...);</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;    ((m_EnumFlags ^= underlying_type(<a class="code" href="classqx_1_1flags.html">flags</a>)), ...);</div>
 <div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;}</div>
 <div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160; </div>
 <div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;<span class="keyword">template</span>&lt;enumeration_c enum_t&gt;</div>
-<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;constexpr <span class="keyword">auto</span> flags&lt;enum_t&gt;::operator&lt;=&gt;(enum_t eFlag) <span class="keyword">const</span> noexcept</div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;constexpr <span class="keyword">auto</span> <a class="code" href="classqx_1_1flags.html">flags&lt;enum_t&gt;::operator&lt;=&gt;</a>(enum_t eFlag) <span class="keyword">const</span> noexcept</div>
 <div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;{</div>
 <div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;    <span class="keywordflow">return</span> underlying_type(m_EnumFlags) &lt;=&gt; underlying_type(eFlag);</div>
 <div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;}</div>
