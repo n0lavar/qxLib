@@ -8,7 +8,10 @@
 **/
 #pragma once
 
+#include <qx/macros/config.h>
 #include <qx/meta/tuple_utils.h>
+
+#define QX_ALL_CHAR_TYPES char, wchar_t
 
 #if !defined(QX_CONF_USE_CHAR) && !defined(QX_CONF_USE_WCHAR)
     #define QX_CONF_USE_WCHAR
@@ -17,7 +20,7 @@
 namespace qx::details
 {
 
-using all_char_types = std::tuple<char, wchar_t>;
+using all_char_types = std::tuple<QX_ALL_CHAR_TYPES>;
 
 }
 
@@ -31,6 +34,10 @@ using all_char_types = std::tuple<char, wchar_t>;
 
     #define QX_CHAR_TYPE    wchar_t
     #define _QX_TEXT(quote) L##quote
+
+    #if !defined(QX_CONF_DISABLE_UNICODE_MACRO) && QX_WIN
+        #define UNICODE
+    #endif
 
 #endif
 

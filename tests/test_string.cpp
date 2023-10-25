@@ -19,17 +19,6 @@
 #include <list>
 #include <unordered_map>
 
-template<class... elements_t>
-struct template_row
-{
-    using tuple = std::tuple<elements_t...>;
-};
-
-template<class... rows_t>
-struct template_matrix
-{
-};
-
 QX_PUSH_SUPPRESS_MSVC_WARNINGS(5233);
 
 template<class string_traits_t>
@@ -92,11 +81,6 @@ using Implementations = ::testing::Types<
         qx::string_traits::length_traits<wchar_t, qx::string_traits::usings_traits<wchar_t>>,
         qx::string_traits::compare_traits<wchar_t, qx::string_traits::usings_traits<wchar_t>>,
         qx::string_traits::format_traits<wchar_t, qx::string_traits::usings_traits<wchar_t>>>>;
-
-constexpr size_t s1 = sizeof(std::string);
-constexpr size_t s2 = sizeof(std::wstring);
-constexpr size_t s3 = sizeof(qx::cstring);
-constexpr size_t s4 = sizeof(qx::wstring);
 
 template<class TraitsType>
 void CheckCapacity(auto nPrevCapacity, auto nCapacity)
