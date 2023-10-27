@@ -119,6 +119,8 @@ Classes</h2></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structqx_1_1string__traits_1_1compare__traits_3_01wchar__t_00_01usings__char__traits__t_01_4.html">qx::string_traits::compare_traits&lt; wchar_t, usings_char_traits_t &gt;</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structqx_1_1string__traits_1_1format__string__traits.html">qx::string_traits::format_string_traits&lt; value_t, usings_char_traits_t &gt;</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structqx_1_1string__traits_1_1format__traits_3_01char_00_01usings__char__traits__t_01_4.html">qx::string_traits::format_traits&lt; char, usings_char_traits_t &gt;</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structqx_1_1string__traits_1_1format__traits_3_01wchar__t_00_01usings__char__traits__t_01_4.html">qx::string_traits::format_traits&lt; wchar_t, usings_char_traits_t &gt;</a></td></tr>
@@ -128,10 +130,10 @@ Classes</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
 Typedefs</h2></td></tr>
-<tr class="memitem:a36bc5339a95c8c483bc783de0f4ab62e"><td class="memTemplParams" colspan="2">template&lt;class value_t &gt; </td></tr>
-<tr class="memitem:a36bc5339a95c8c483bc783de0f4ab62e"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="string__traits_8h.html#a36bc5339a95c8c483bc783de0f4ab62e">qx::string_traits::traits</a> = constructor&lt; usings_traits&lt; value_t &gt;, hash_traits&lt; value_t, usings_traits&lt; value_t &gt; &gt;, allocation_traits&lt; value_t, usings_traits&lt; value_t &gt; &gt;, test_char_traits&lt; value_t, usings_traits&lt; value_t &gt; &gt;, transform_char_traits&lt; value_t, usings_traits&lt; value_t &gt; &gt;, length_traits&lt; value_t, usings_traits&lt; value_t &gt; &gt;, compare_traits&lt; value_t, usings_traits&lt; value_t &gt; &gt;, format_traits&lt; value_t, usings_traits&lt; value_t &gt; &gt;&gt;</td></tr>
-<tr class="memdesc:a36bc5339a95c8c483bc783de0f4ab62e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Common string traits type. User may use it with user-defined traits to override the required behaviour.  <a href="string__traits_8h.html#a36bc5339a95c8c483bc783de0f4ab62e">More...</a><br /></td></tr>
-<tr class="separator:a36bc5339a95c8c483bc783de0f4ab62e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aba75295416d82c4641e5d88c9e53a98b"><td class="memTemplParams" colspan="2">template&lt;class value_t &gt; </td></tr>
+<tr class="memitem:aba75295416d82c4641e5d88c9e53a98b"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="string__traits_8h.html#aba75295416d82c4641e5d88c9e53a98b">qx::string_traits::traits</a> = constructor&lt; usings_traits&lt; value_t &gt;, hash_traits&lt; value_t, usings_traits&lt; value_t &gt; &gt;, allocation_traits&lt; value_t, usings_traits&lt; value_t &gt; &gt;, test_char_traits&lt; value_t, usings_traits&lt; value_t &gt; &gt;, transform_char_traits&lt; value_t, usings_traits&lt; value_t &gt; &gt;, length_traits&lt; value_t, usings_traits&lt; value_t &gt; &gt;, compare_traits&lt; value_t, usings_traits&lt; value_t &gt; &gt;, format_string_traits&lt; value_t, usings_traits&lt; value_t &gt; &gt;, format_traits&lt; value_t, usings_traits&lt; value_t &gt; &gt;&gt;</td></tr>
+<tr class="memdesc:aba75295416d82c4641e5d88c9e53a98b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Common string traits type. User may use it with user-defined traits to override the required behaviour.  <a href="string__traits_8h.html#aba75295416d82c4641e5d88c9e53a98b">More...</a><br /></td></tr>
+<tr class="separator:aba75295416d82c4641e5d88c9e53a98b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><dl class="section author"><dt>Author</dt><dd>Khrapov </dd></dl>
@@ -140,8 +142,8 @@ Typedefs</h2></td></tr>
 
 <p class="definition">Definition in file <a class="el" href="string__traits_8h_source.html">string_traits.h</a>.</p>
 </div><h2 class="groupheader">Typedef Documentation</h2>
-<a id="a36bc5339a95c8c483bc783de0f4ab62e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a36bc5339a95c8c483bc783de0f4ab62e">&#9670;&nbsp;</a></span>traits</h2>
+<a id="aba75295416d82c4641e5d88c9e53a98b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aba75295416d82c4641e5d88c9e53a98b">&#9670;&nbsp;</a></span>traits</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -149,7 +151,7 @@ Typedefs</h2></td></tr>
 template&lt;class value_t &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">using <a class="el" href="string__traits_8h.html#a36bc5339a95c8c483bc783de0f4ab62e">qx::string_traits::traits</a> = typedef constructor&lt; usings_traits&lt;value_t&gt;, hash_traits&lt;value_t, usings_traits&lt;value_t&gt; &gt;, allocation_traits&lt;value_t, usings_traits&lt;value_t&gt; &gt;, test_char_traits&lt;value_t, usings_traits&lt;value_t&gt; &gt;, transform_char_traits&lt;value_t, usings_traits&lt;value_t&gt; &gt;, length_traits&lt;value_t, usings_traits&lt;value_t&gt; &gt;, compare_traits&lt;value_t, usings_traits&lt;value_t&gt; &gt;, format_traits&lt;value_t, usings_traits&lt;value_t&gt; &gt;&gt;</td>
+          <td class="memname">using <a class="el" href="string__traits_8h.html#aba75295416d82c4641e5d88c9e53a98b">qx::string_traits::traits</a> = typedef constructor&lt; usings_traits&lt;value_t&gt;, hash_traits&lt;value_t, usings_traits&lt;value_t&gt; &gt;, allocation_traits&lt;value_t, usings_traits&lt;value_t&gt; &gt;, test_char_traits&lt;value_t, usings_traits&lt;value_t&gt; &gt;, transform_char_traits&lt;value_t, usings_traits&lt;value_t&gt; &gt;, length_traits&lt;value_t, usings_traits&lt;value_t&gt; &gt;, compare_traits&lt;value_t, usings_traits&lt;value_t&gt; &gt;, format_string_traits&lt;value_t, usings_traits&lt;value_t&gt; &gt;, format_traits&lt;value_t, usings_traits&lt;value_t&gt; &gt;&gt;</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -162,7 +164,7 @@ template&lt;class value_t &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="string__traits_8h_source.html#l00392">392</a> of file <a class="el" href="string__traits_8h_source.html">string_traits.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="string__traits_8h_source.html#l00403">403</a> of file <a class="el" href="string__traits_8h_source.html">string_traits.h</a>.</p>
 
 </div>
 </div>

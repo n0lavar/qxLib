@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['traits_1354',['traits',['../string__traits_8h.html#a36bc5339a95c8c483bc783de0f4ab62e',1,'qx::string_traits']]]
+  ['traits_1356',['traits',['../string__traits_8h.html#aba75295416d82c4641e5d88c9e53a98b',1,'qx::string_traits']]]
 ];

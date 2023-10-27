@@ -96,12 +96,12 @@ $(function() {
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span>... args_t&gt;</div>
 <div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    requires(log_acceptable_args&lt;args_t...&gt;)</div>
 <div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="classqx_1_1logger.html#a4cff54543c3ad632c33a6baefd6fec55">logger::log</a>(</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    verbosity                eVerbosity,</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    <a class="code" href="structqx_1_1basic__format__string.html">format_string&lt;args_t...&gt;</a> sFormat,</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    <span class="keyword">const</span> <a class="code" href="classqx_1_1category.html">category</a>&amp;          <a class="code" href="classqx_1_1category.html">category</a>,</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    string_view              svFile,</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    string_view              svFunction,</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    <span class="keywordtype">int</span>                      nLine,</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    verbosity                              eVerbosity,</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    <a class="code" href="structqx_1_1basic__format__string__strong__checks.html">format_string_strong_checks&lt;args_t...&gt;</a> sFormat,</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    <span class="keyword">const</span> <a class="code" href="classqx_1_1category.html">category</a>&amp;                        <a class="code" href="classqx_1_1category.html">category</a>,</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    string_view                            svFile,</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    string_view                            svFunction,</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    <span class="keywordtype">int</span>                                    nLine,</div>
 <div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    <span class="keyword">const</span> args_t&amp;... args)</div>
 <div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;{</div>
 <div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    <span class="keyword">const</span> <span class="keyword">auto</span> sLogMessage = <a class="code" href="classqx_1_1basic__string.html#a8f5f405d16cbcf49cdd0ce5ff538d185">qx::string::static_format</a>(sFormat, args...);</div>
@@ -146,7 +146,7 @@ $(function() {
 <div class="ttc" id="aclassqx_1_1logger_html_abec0212ef10bb7feb65d6f587a989b61"><div class="ttname"><a href="classqx_1_1logger.html#abec0212ef10bb7feb65d6f587a989b61">qx::logger::add_stream</a></div><div class="ttdeci">void add_stream(std::unique_ptr&lt; base_logger_stream &gt; pStream) noexcept</div><div class="ttdoc">Add output stream to the logger.</div><div class="ttdef"><b>Definition:</b> <a href="logger_8inl_source.html#l00047">logger.inl:47</a></div></div>
 <div class="ttc" id="aclassqx_1_1logger_html_acbd37fc0636753a6061a745ca1ab8f9e"><div class="ttname"><a href="classqx_1_1logger.html#acbd37fc0636753a6061a745ca1ab8f9e">qx::logger::reset</a></div><div class="ttdeci">void reset() noexcept</div><div class="ttdoc">Reset logger and clear all streams.</div><div class="ttdef"><b>Definition:</b> <a href="logger_8inl_source.html#l00052">logger.inl:52</a></div></div>
 <div class="ttc" id="aclassqx_1_1logger_html_af975c6169624a47a72ae8995161e140f"><div class="ttname"><a href="classqx_1_1logger.html#af975c6169624a47a72ae8995161e140f">qx::logger::flush</a></div><div class="ttdeci">void flush()</div><div class="ttdoc">Flush all streams.</div><div class="ttdef"><b>Definition:</b> <a href="logger_8inl_source.html#l00041">logger.inl:41</a></div></div>
-<div class="ttc" id="astructqx_1_1basic__format__string_html"><div class="ttname"><a href="structqx_1_1basic__format__string.html">qx::basic_format_string</a></div><div class="ttdoc">std::basic_format_string wrapper that performs additional compile time checks</div><div class="ttdef"><b>Definition:</b> <a href="format__string_8h_source.html#l00026">format_string.h:27</a></div></div>
+<div class="ttc" id="astructqx_1_1basic__format__string__strong__checks_html"><div class="ttname"><a href="structqx_1_1basic__format__string__strong__checks.html">qx::basic_format_string_strong_checks</a></div><div class="ttdoc">std::basic_format_string wrapper that performs additional compile time checks</div><div class="ttdef"><b>Definition:</b> <a href="format__string_8h_source.html#l00028">format_string.h:29</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

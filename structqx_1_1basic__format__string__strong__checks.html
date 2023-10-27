@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>qxLib: qx::basic_format_string&lt; char_t, args_t &gt; Struct Template Reference</title>
+<title>qxLib: qx::basic_format_string_strong_checks&lt; char_t, args_t &gt; Struct Template Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -61,50 +61,50 @@ $(function() {
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><b>qx</b></li><li class="navelem"><a class="el" href="structqx_1_1basic__format__string.html">basic_format_string</a></li>  </ul>
+<li class="navelem"><b>qx</b></li><li class="navelem"><a class="el" href="structqx_1_1basic__format__string__strong__checks.html">basic_format_string_strong_checks</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pub-static-methods">Static Public Member Functions</a> &#124;
-<a href="structqx_1_1basic__format__string-members.html">List of all members</a>  </div>
+<a href="structqx_1_1basic__format__string__strong__checks-members.html">List of all members</a>  </div>
   <div class="headertitle">
-<div class="title">qx::basic_format_string&lt; char_t, args_t &gt; Struct Template Reference</div>  </div>
+<div class="title">qx::basic_format_string_strong_checks&lt; char_t, args_t &gt; Struct Template Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
 <p>std::basic_format_string wrapper that performs additional compile time checks  
- <a href="structqx_1_1basic__format__string.html#details">More...</a></p>
+ <a href="structqx_1_1basic__format__string__strong__checks.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="format__string_8h_source.html">format_string.h</a>&gt;</code></p>
 <div class="dynheader">
-Inheritance diagram for qx::basic_format_string&lt; char_t, args_t &gt;:</div>
+Inheritance diagram for qx::basic_format_string_strong_checks&lt; char_t, args_t &gt;:</div>
 <div class="dyncontent">
  <div class="center">
-  <img src="structqx_1_1basic__format__string.png" alt=""/>
+  <img src="structqx_1_1basic__format__string__strong__checks.png" alt=""/>
  </div></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a954f65e1f7b79c302066d1b685854cb3"><td class="memTemplParams" colspan="2">template&lt;class T &gt; </td></tr>
-<tr class="memitem:a954f65e1f7b79c302066d1b685854cb3"><td class="memTemplItemLeft" align="right" valign="top">requires std::convertible_to&lt; const T &amp;, qx::basic_string_view&lt; char_t &gt; &gt; consteval&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="structqx_1_1basic__format__string.html#a954f65e1f7b79c302066d1b685854cb3">basic_format_string</a> (const T &amp;value)</td></tr>
-<tr class="memdesc:a954f65e1f7b79c302066d1b685854cb3"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="structqx_1_1basic__format__string.html" title="std::basic_format_string wrapper that performs additional compile time checks">basic_format_string</a> object constructor  <a href="structqx_1_1basic__format__string.html#a954f65e1f7b79c302066d1b685854cb3">More...</a><br /></td></tr>
-<tr class="separator:a954f65e1f7b79c302066d1b685854cb3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0305dbe05d14d28e04a95a3f27c69ba0"><td class="memTemplParams" colspan="2">template&lt;class T &gt; </td></tr>
+<tr class="memitem:a0305dbe05d14d28e04a95a3f27c69ba0"><td class="memTemplItemLeft" align="right" valign="top">requires std::convertible_to&lt; const T &amp;, qx::basic_string_view&lt; char_t &gt; &gt; consteval&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="structqx_1_1basic__format__string__strong__checks.html#a0305dbe05d14d28e04a95a3f27c69ba0">basic_format_string_strong_checks</a> (const T &amp;value)</td></tr>
+<tr class="memdesc:a0305dbe05d14d28e04a95a3f27c69ba0"><td class="mdescLeft">&#160;</td><td class="mdescRight">basic_format_string object constructor  <a href="structqx_1_1basic__format__string__strong__checks.html#a0305dbe05d14d28e04a95a3f27c69ba0">More...</a><br /></td></tr>
+<tr class="separator:a0305dbe05d14d28e04a95a3f27c69ba0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
-<tr class="memitem:aa6c4114a32dc5d581765110998a4b177"><td class="memTemplParams" colspan="2">template&lt;class T &gt; </td></tr>
-<tr class="memitem:aa6c4114a32dc5d581765110998a4b177"><td class="memTemplItemLeft" align="right" valign="top">static consteval const T &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="structqx_1_1basic__format__string.html#aa6c4114a32dc5d581765110998a4b177">parse_format_string</a> (const T &amp;value)</td></tr>
-<tr class="memdesc:aa6c4114a32dc5d581765110998a4b177"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check braces balance and args num.  <a href="structqx_1_1basic__format__string.html#aa6c4114a32dc5d581765110998a4b177">More...</a><br /></td></tr>
-<tr class="separator:aa6c4114a32dc5d581765110998a4b177"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a89abcf0177a45360c41e9f12a06f6308"><td class="memTemplParams" colspan="2">template&lt;class T &gt; </td></tr>
+<tr class="memitem:a89abcf0177a45360c41e9f12a06f6308"><td class="memTemplItemLeft" align="right" valign="top">static consteval const T &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="structqx_1_1basic__format__string__strong__checks.html#a89abcf0177a45360c41e9f12a06f6308">parse_format_string</a> (const T &amp;value)</td></tr>
+<tr class="memdesc:a89abcf0177a45360c41e9f12a06f6308"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check braces balance and args num.  <a href="structqx_1_1basic__format__string__strong__checks.html#a89abcf0177a45360c41e9f12a06f6308">More...</a><br /></td></tr>
+<tr class="separator:a89abcf0177a45360c41e9f12a06f6308"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><h3>template&lt;class char_t, class... args_t&gt;<br />
-struct qx::basic_format_string&lt; char_t, args_t &gt;</h3>
+struct qx::basic_format_string_strong_checks&lt; char_t, args_t &gt;</h3>
 
 <p>std::basic_format_string wrapper that performs additional compile time checks </p>
-<dl class="tparams"><dt>Template Parameters</dt><dd>
+<p>Checks braces balance and matching pairs of braces to the number of arguments in exchange for some format features, such as nested replacement fields </p><dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
     <tr><td class="paramname">char_t</td><td>- char type </td></tr>
     <tr><td class="paramname">args_t</td><td>- template parameter pack type </td></tr>
@@ -112,10 +112,10 @@ struct qx::basic_format_string&lt; char_t, args_t &gt;</h3>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="format__string_8h_source.html#l00026">26</a> of file <a class="el" href="format__string_8h_source.html">format_string.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="format__string_8h_source.html#l00028">28</a> of file <a class="el" href="format__string_8h_source.html">format_string.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="a954f65e1f7b79c302066d1b685854cb3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a954f65e1f7b79c302066d1b685854cb3">&#9670;&nbsp;</a></span>basic_format_string()</h2>
+<a id="a0305dbe05d14d28e04a95a3f27c69ba0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0305dbe05d14d28e04a95a3f27c69ba0">&#9670;&nbsp;</a></span>basic_format_string_strong_checks()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -125,7 +125,7 @@ template&lt;class char_t , class... args_t&gt; </div>
 template&lt;class T &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">requires std::convertible_to&lt; const T &amp;, qx::basic_string_view&lt; char_t &gt; &gt; consteval <a class="el" href="structqx_1_1basic__format__string.html">qx::basic_format_string</a>&lt; char_t, args_t &gt;::<a class="el" href="structqx_1_1basic__format__string.html">basic_format_string</a> </td>
+          <td class="memname">requires std::convertible_to&lt; const T &amp;, qx::basic_string_view&lt; char_t &gt; &gt; consteval <a class="el" href="structqx_1_1basic__format__string__strong__checks.html">qx::basic_format_string_strong_checks</a>&lt; char_t, args_t &gt;::<a class="el" href="structqx_1_1basic__format__string__strong__checks.html">basic_format_string_strong_checks</a> </td>
           <td>(</td>
           <td class="paramtype">const T &amp;&#160;</td>
           <td class="paramname"><em>value</em></td><td>)</td>
@@ -134,7 +134,7 @@ template&lt;class T &gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p><a class="el" href="structqx_1_1basic__format__string.html" title="std::basic_format_string wrapper that performs additional compile time checks">basic_format_string</a> object constructor </p>
+<p>basic_format_string object constructor </p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
     <tr><td class="paramname">T</td><td>- string view convertible type </td></tr>
@@ -153,8 +153,8 @@ template&lt;class T &gt; </div>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="aa6c4114a32dc5d581765110998a4b177"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa6c4114a32dc5d581765110998a4b177">&#9670;&nbsp;</a></span>parse_format_string()</h2>
+<a id="a89abcf0177a45360c41e9f12a06f6308"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a89abcf0177a45360c41e9f12a06f6308">&#9670;&nbsp;</a></span>parse_format_string()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -167,7 +167,7 @@ template&lt;class T &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">consteval const T &amp; <a class="el" href="structqx_1_1basic__format__string.html">qx::basic_format_string</a>&lt; char_t, args_t &gt;::parse_format_string </td>
+          <td class="memname">consteval const T &amp; <a class="el" href="structqx_1_1basic__format__string__strong__checks.html">qx::basic_format_string_strong_checks</a>&lt; char_t, args_t &gt;::parse_format_string </td>
           <td>(</td>
           <td class="paramtype">const T &amp;&#160;</td>
           <td class="paramname"><em>value</em></td><td>)</td>
