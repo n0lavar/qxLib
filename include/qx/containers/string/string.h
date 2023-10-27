@@ -79,9 +79,8 @@ public:
     using string_view     = std::basic_string_view<value_type>;
     using sstream_type    = std::basic_stringstream<value_type>;
     using views           = std::vector<string_view>;
-
     template<class... args_t>
-    using format_string_type = basic_format_string<value_type, std::type_identity_t<args_t>...>;
+    using format_string_type = typename traits_type::template format_string<std::type_identity_t<args_t>...>;
 
     static constexpr size_type npos = std::numeric_limits<size_type>::max();
 

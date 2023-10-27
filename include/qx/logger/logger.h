@@ -86,12 +86,12 @@ public:
     template<class... args_t>
         requires(log_acceptable_args<args_t...>)
     void log(
-        verbosity                eVerbosity,
-        format_string<args_t...> sFormat,
-        const category&          category,
-        string_view              svFile,
-        string_view              svFunction,
-        int                      nLine,
+        verbosity                              eVerbosity,
+        format_string_strong_checks<args_t...> sFormat,
+        const category&                        category,
+        string_view                            svFile,
+        string_view                            svFunction,
+        int                                    nLine,
         const args_t&... args);
 
     /**

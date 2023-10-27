@@ -35,6 +35,7 @@ using Implementations = ::testing::Types<
         qx::string_traits::transform_char_traits<char, qx::string_traits::usings_traits<char>>,
         qx::string_traits::length_traits<char, qx::string_traits::usings_traits<char>>,
         qx::string_traits::compare_traits<char, qx::string_traits::usings_traits<char>>,
+        qx::string_traits::format_string_traits<char, qx::string_traits::usings_traits<char>>,
         qx::string_traits::format_traits<char, qx::string_traits::usings_traits<char>>>,
     qx::string_traits::constructor<
         qx::string_traits::usings_traits<char>,
@@ -44,6 +45,7 @@ using Implementations = ::testing::Types<
         qx::string_traits::transform_char_traits<char, qx::string_traits::usings_traits<char>>,
         qx::string_traits::length_traits<char, qx::string_traits::usings_traits<char>>,
         qx::string_traits::compare_traits<char, qx::string_traits::usings_traits<char>>,
+        qx::string_traits::format_string_traits<char, qx::string_traits::usings_traits<char>>,
         qx::string_traits::format_traits<char, qx::string_traits::usings_traits<char>>>,
     qx::string_traits::constructor<
         qx::string_traits::usings_traits<char>,
@@ -53,6 +55,7 @@ using Implementations = ::testing::Types<
         qx::string_traits::transform_char_traits<char, qx::string_traits::usings_traits<char>>,
         qx::string_traits::length_traits<char, qx::string_traits::usings_traits<char>>,
         qx::string_traits::compare_traits<char, qx::string_traits::usings_traits<char>>,
+        qx::string_traits::format_string_traits<char, qx::string_traits::usings_traits<char>>,
         qx::string_traits::format_traits<char, qx::string_traits::usings_traits<char>>>,
     qx::string_traits::constructor<
         qx::string_traits::usings_traits<wchar_t>,
@@ -62,6 +65,7 @@ using Implementations = ::testing::Types<
         qx::string_traits::transform_char_traits<wchar_t, qx::string_traits::usings_traits<wchar_t>>,
         qx::string_traits::length_traits<wchar_t, qx::string_traits::usings_traits<wchar_t>>,
         qx::string_traits::compare_traits<wchar_t, qx::string_traits::usings_traits<wchar_t>>,
+        qx::string_traits::format_string_traits<wchar_t, qx::string_traits::usings_traits<wchar_t>>,
         qx::string_traits::format_traits<wchar_t, qx::string_traits::usings_traits<wchar_t>>>,
     qx::string_traits::constructor<
         qx::string_traits::usings_traits<wchar_t>,
@@ -71,6 +75,7 @@ using Implementations = ::testing::Types<
         qx::string_traits::transform_char_traits<wchar_t, qx::string_traits::usings_traits<wchar_t>>,
         qx::string_traits::length_traits<wchar_t, qx::string_traits::usings_traits<wchar_t>>,
         qx::string_traits::compare_traits<wchar_t, qx::string_traits::usings_traits<wchar_t>>,
+        qx::string_traits::format_string_traits<wchar_t, qx::string_traits::usings_traits<wchar_t>>,
         qx::string_traits::format_traits<wchar_t, qx::string_traits::usings_traits<wchar_t>>>,
     qx::string_traits::constructor<
         qx::string_traits::usings_traits<wchar_t>,
@@ -80,6 +85,7 @@ using Implementations = ::testing::Types<
         qx::string_traits::transform_char_traits<wchar_t, qx::string_traits::usings_traits<wchar_t>>,
         qx::string_traits::length_traits<wchar_t, qx::string_traits::usings_traits<wchar_t>>,
         qx::string_traits::compare_traits<wchar_t, qx::string_traits::usings_traits<wchar_t>>,
+        qx::string_traits::format_string_traits<wchar_t, qx::string_traits::usings_traits<wchar_t>>,
         qx::string_traits::format_traits<wchar_t, qx::string_traits::usings_traits<wchar_t>>>>;
 
 template<class TraitsType>

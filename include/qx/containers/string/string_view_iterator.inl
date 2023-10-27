@@ -104,4 +104,5 @@ constexpr void string_view_iterator<char_t>::next() noexcept
 
     *this = end();
 }
+
 } // namespace qx

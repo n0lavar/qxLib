@@ -67,7 +67,7 @@ void resolve_assert_proceeding(
     int             nLine,
     string_view     svCondition,
     // ... args
-    format_string<args_t...> sFormat,
+    format_string_strong_checks<args_t...> sFormat,
     const args_t&... args)
 {
     string sMessage;
@@ -105,7 +105,7 @@ void resolve_assert_proceeding(
     string_view     svCondition,
     // ... args
     const category&          category,
-    format_string<args_t...> sFormat,
+    format_string_strong_checks<args_t...> sFormat,
     const args_t&... args)
 {
     string sMessage;

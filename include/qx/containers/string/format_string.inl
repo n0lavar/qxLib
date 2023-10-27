@@ -13,14 +13,14 @@ namespace qx
 template<class char_t, class... args_t>
 template<class T>
     requires std::convertible_to<const T&, qx::basic_string_view<char_t>>
-consteval basic_format_string<char_t, args_t...>::basic_format_string(const T& value)
+consteval basic_format_string_strong_checks<char_t, args_t...>::basic_format_string_strong_checks(const T& value)
     : std::basic_format_string<char_t, args_t...>(parse_format_string(value))
 {
 }
 
 template<class char_t, class... args_t>
 template<class T>
-consteval const T& basic_format_string<char_t, args_t...>::parse_format_string(const T& value)
+consteval const T& basic_format_string_strong_checks<char_t, args_t...>::parse_format_string(const T& value)
 {
     int                       nBracesBalance  = 0;
     size_t                    nNumBracesPairs = 0;

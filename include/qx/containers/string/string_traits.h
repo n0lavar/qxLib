@@ -326,6 +326,17 @@ struct compare_traits<wchar_t, usings_char_traits_t>
 
 
 
+// ------------------------------------------------ format_string_traits -----------------------------------------------
+
+template<class value_t, class usings_char_traits_t>
+struct format_string_traits
+{
+    template<class... args_t>
+    using format_string = std::basic_format_string<value_t, args_t...>;
+};
+
+
+
 // --------------------------------------------------- format_traits ---------------------------------------------------
 
 template<class value_t, class usings_char_traits_t>
@@ -397,6 +408,7 @@ using traits = constructor<
     transform_char_traits<value_t, usings_traits<value_t>>,
     length_traits<value_t, usings_traits<value_t>>,
     compare_traits<value_t, usings_traits<value_t>>,
+    format_string_traits<value_t, usings_traits<value_t>>,
     format_traits<value_t, usings_traits<value_t>>>;
 
 } // namespace qx::string_traits
