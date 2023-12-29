@@ -34,6 +34,8 @@ function(set_target_options _target)
             /wd4061 # enumerator 'identifier' in switch of enum 'enumeration' is not explicitly handled by a case label
             /wd4062 # enumerator 'identifier' in switch of enum 'enumeration' is not handled
             /wd4100 # 'identifier' : unreferenced formal parameter
+            /wd4263 # 'function' : member function does not override any base class virtual member function
+            /wd4264 # 'virtual_function' : no override available for virtual member function from base 'class'; function is hidden
             /wd4355 # 'this' : used in base member initializer list
             /wd4365 # 'action' : conversion from 'type_1' to 'type_2', signed/unsigned mismatch: MVSC headers warnings
             /wd4514 # 'function' : unreferenced inline function has been removed
