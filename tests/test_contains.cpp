@@ -76,3 +76,38 @@ TEST(contains, contains_if)
 
     EXPECT_FALSE(qx::contains_if(ARRAY_2.begin(), ARRAY_2.begin() + 4, predicate));
 }
+
+TEST(contains, contains_any)
+{
+    std::array         ARRAY_0 { 0, 1, 2, 3, 4 };
+    std::array         ARRAY_1 { 0, 1, 2, 3, 4, 5 };
+    std::array         ARRAY_2 { 5, 6, 7, 8, 9 };
+    std::array<int, 0> ARRAY_3 {};
+
+    EXPECT_TRUE(qx::contains_any(ARRAY_0, ARRAY_0));
+    EXPECT_TRUE(qx::contains_any(ARRAY_0.begin(), ARRAY_0.end(), ARRAY_0.begin(), ARRAY_0.end()));
+
+    EXPECT_TRUE(qx::contains_any(ARRAY_0, ARRAY_1));
+    EXPECT_TRUE(qx::contains_any(ARRAY_0.begin(), ARRAY_0.end(), ARRAY_1.begin(), ARRAY_1.end()));
+
+    EXPECT_FALSE(qx::contains_any(ARRAY_0, ARRAY_2));
+    EXPECT_FALSE(qx::contains_any(ARRAY_0.begin(), ARRAY_0.end(), ARRAY_2.begin(), ARRAY_2.end()));
+
+    EXPECT_FALSE(qx::contains_any(ARRAY_0, ARRAY_3));
+    EXPECT_FALSE(qx::contains_any(ARRAY_0.begin(), ARRAY_0.end(), ARRAY_3.begin(), ARRAY_3.end()));
+
+    EXPECT_TRUE(qx::contains_any(ARRAY_1, ARRAY_1));
+    EXPECT_TRUE(qx::contains_any(ARRAY_1.begin(), ARRAY_1.end(), ARRAY_1.begin(), ARRAY_1.end()));
+
+    EXPECT_TRUE(qx::contains_any(ARRAY_1, ARRAY_2));
+    EXPECT_TRUE(qx::contains_any(ARRAY_1.begin(), ARRAY_1.end(), ARRAY_2.begin(), ARRAY_2.end()));
+
+    EXPECT_FALSE(qx::contains_any(ARRAY_1, ARRAY_3));
+    EXPECT_FALSE(qx::contains_any(ARRAY_1.begin(), ARRAY_1.end(), ARRAY_3.begin(), ARRAY_3.end()));
+
+    EXPECT_TRUE(qx::contains_any(ARRAY_2, ARRAY_2));
+    EXPECT_TRUE(qx::contains_any(ARRAY_2.begin(), ARRAY_2.end(), ARRAY_2.begin(), ARRAY_2.end()));
+
+    EXPECT_FALSE(qx::contains_any(ARRAY_2, ARRAY_3));
+    EXPECT_FALSE(qx::contains_any(ARRAY_2.begin(), ARRAY_2.end(), ARRAY_3.begin(), ARRAY_3.end()));
+}
