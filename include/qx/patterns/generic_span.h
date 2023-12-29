@@ -8,12 +8,9 @@
 **/
 #pragma once
 
-#include <qx/meta/copy_qualifiers.h>
+#include <qx/meta/qualifiers.h>
 
-#ifndef QX_CONF_GENERIC_SPAN_FUNCTION
-    #include <functional>
-    #define QX_CONF_GENERIC_SPAN_FUNCTION std::function
-#endif
+#include <functional>
 
 namespace qx
 {
@@ -21,7 +18,7 @@ namespace qx
 struct default_generic_span_traits
 {
     template<class... args_t>
-    using function_type = QX_CONF_GENERIC_SPAN_FUNCTION<args_t...>;
+    using function_type = std::function<args_t...>;
 };
 
 /**
