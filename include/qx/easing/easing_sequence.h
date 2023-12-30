@@ -9,6 +9,7 @@
 #pragma once
 
 #include <qx/easing/easing_element.h>
+#include <qx/macros/common.h>
 
 #include <vector>
 

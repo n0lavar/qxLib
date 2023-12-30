@@ -9,6 +9,7 @@
 #pragma once
 
 #include <qx/containers/string/string_setup.h>
+#include <qx/meta/qualifiers.h>
 
 /**
     @def     QX_EMPTY_MACRO
@@ -68,3 +69,21 @@ constexpr const char_type* last_slash(const char_type* str)
     @param ... - param containing commas
 **/
 #define QX_SINGLE_ARGUMENT(...) __VA_ARGS__
+
+/**
+    @def     QX_CONST_CAST_THIS
+    @brief   This macro is made for situations where you have a const method and you need exactly the same method but non-const
+    @warning You can also use it in vice-versa situations, but be careful as it will break your const guarantees
+
+    @code
+    int foo() const
+    {
+        // some complicated stuff
+    }
+    int foo()
+    {
+        QX_CONST_CAST_THIS()->foo();
+    }
+    @endcode 
+**/
+#define QX_CONST_CAST_THIS() const_cast<qx::switch_const_t<std::remove_pointer_t<decltype(this)>>*>(this)

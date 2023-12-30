@@ -228,7 +228,7 @@ template<class T>
 inline const typename base_easing_sequence<T>::easing_element_type* base_easing_sequence<T>::get_current_element()
     const noexcept
 {
-    return const_cast<base_easing_sequence*>(static_cast<const base_easing_sequence*>(this))->get_current_element();
+    return QX_CONST_CAST_THIS()->get_current_element();
 }
 
 template<class T>
