@@ -3,7 +3,7 @@
     @file      string_setup.h
     @author    Khrapov
     @date      10.06.2023
-    @copyright © Nick Khrapov, 2023. All right reserved.
+    @copyright ï¿½ Nick Khrapov, 2023. All right reserved.
 
 **/
 #pragma once
@@ -35,7 +35,11 @@ using all_char_types = std::tuple<QX_ALL_CHAR_TYPES>;
     #define QX_CHAR_TYPE    wchar_t
     #define _QX_TEXT(quote) L##quote
 
-    #if !defined(QX_CONF_DISABLE_UNICODE_MACRO) && QX_WIN
+    #if !defined(QX_CONF_UNICODE_MACRO)
+        #define QX_CONF_UNICODE_MACRO 1
+    #endif
+
+    #if QX_CONF_UNICODE_MACRO && QX_WIN
         #define UNICODE
     #endif
 
