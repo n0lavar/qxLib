@@ -2619,14 +2619,8 @@ void swap(qx::basic_string<char_t, traits_t>& lhs, qx::basic_string<char_t, trai
 // ----------------------------------------------------- formatter -----------------------------------------------------
 
 template<class char_t, class traits_t>
-struct formatter<qx::basic_string<char_t, traits_t>, char_t>
+struct formatter<qx::basic_string<char_t, traits_t>, char_t> : qx::basic_formatter
 {
-    template<class format_parse_context_type>
-    constexpr auto parse(format_parse_context_type& ctx)
-    {
-        return ctx.begin();
-    }
-
     template<class format_context_type>
     constexpr auto format(const qx::basic_string<char_t, traits_t>& value, format_context_type& ctx)
     {

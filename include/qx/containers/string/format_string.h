@@ -56,6 +56,15 @@ concept format_acceptable_args =
           std::remove_cv_t<std::remove_pointer_t<std::decay_t<args_t>>>>
       || ...);
 
+struct basic_formatter
+{
+    template<class format_parse_context_type>
+    constexpr auto parse(format_parse_context_type& pc)
+    {
+        return pc.begin();
+    }
+};
+
 } // namespace qx
 
 #include <qx/containers/string/format_string.inl>
