@@ -8,6 +8,8 @@
 **/
 #pragma once
 
+#include <qx/algo/filters.h>
+
 #include <utility>
 
 namespace qx
@@ -22,16 +24,6 @@ constexpr auto no_change = []<class T>(T&& value)
 };
 
 } // namespace iterate_adapters
-
-namespace iterate_filters
-{
-
-constexpr auto always_true = [](const auto&...)
-{
-    return true;
-};
-
-} // namespace iterate_filters
 
 /**
     @brief   Iterate container with filter
@@ -53,12 +45,12 @@ constexpr auto always_true = [](const auto&...)
 template<
     class container_t,
     class callable_t,
-    class filter_t  = decltype(iterate_filters::always_true),
+    class filter_t  = decltype(filters::always_true),
     class adapter_t = decltype(iterate_adapters::no_change)>
 void iterate(
     const container_t& container,
     const callable_t&  callable,
-    const filter_t&    filter  = iterate_filters::always_true,
+    const filter_t&    filter  = filters::always_true,
     const adapter_t&   adapter = iterate_adapters::no_change)
 {
     for (const auto& element : container)
