@@ -21,7 +21,7 @@ namespace qx
     @date    12.12.2021
 
 **/
-class destruction_callback
+class [[nodiscard]] destruction_callback
 {
 public:
     using destroyer = std::function<void()>;
