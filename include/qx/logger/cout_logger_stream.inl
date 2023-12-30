@@ -50,7 +50,8 @@ inline void cout_logger_stream::do_log(
 {
     QX_PERF_SCOPE(CatLogger, "Log to cout");
 
-    wstring sWideMessage = to_wstring(svMessage);
+    thread_local wstring sWideMessage;
+    sWideMessage = to_wstring(svMessage);
 
     if (m_bUsingColors)
     {
@@ -83,7 +84,7 @@ inline void cout_logger_stream::do_log(
             break;
         }
 
-        auto cout_colorized = [&sWideMessage](size_t nStart, size_t nEnd, const color& rangeColor)
+        auto cout_colorized = [](size_t nStart, size_t nEnd, const color& rangeColor)
         {
             std::wcout << terminal_color::font(rangeColor)
                        << qx::wstring_view { sWideMessage.data() + nStart, nEnd - nStart } << terminal_color::reset();
