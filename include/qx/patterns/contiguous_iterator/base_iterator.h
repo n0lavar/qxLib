@@ -16,12 +16,6 @@
 namespace qx
 {
 
-template<class container_t, class derived_t>
-class base_forward_iterator;
-
-template<class container_t, class derived_t>
-class base_reverse_iterator;
-
 /**
 
     @class   base_iterator
@@ -37,8 +31,11 @@ template<class container_t>
 class base_iterator
 {
 public:
-    friend base_forward_iterator;
-    friend base_reverse_iterator;
+    template<class container_t_, class derived_t_>
+    friend class base_forward_iterator;
+
+    template<class container_t_, class derived_t_>
+    friend class base_reverse_iterator;
 
     using difference_type = typename container_t::difference_type;
     using size_type       = typename container_t::size_type;

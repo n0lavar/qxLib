@@ -38,7 +38,7 @@ component_t* components<base_component_t>::add(
         pRawComponent,
         [ePriority, statusFlags, pRawComponent](SClassData& classData)
         {
-            classData.priorityCache.emplace(ePriority, SClassData::SCacheData(pRawComponent, statusFlags));
+            classData.priorityCache.emplace(ePriority, typename SClassData::SCacheData(pRawComponent, statusFlags));
         });
     classData.components.push_back(std::move(pComponent));
     return pRawComponent;

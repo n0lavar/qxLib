@@ -15,8 +15,8 @@
 #pragma once
 
 #include <qx/containers/string/string_hash.h>
-#include <qx/macros/common.h>
 #include <qx/meta/tuple_utils.h>
+#include <qx/meta/type_strings.h>
 #include <qx/rtti/class_identificator.h>
 #include <qx/rtti/rtti_naming_strategy.h>
 
@@ -25,32 +25,6 @@
 
 namespace qx
 {
-
-namespace details
-{
-
-template<class T>
-concept has_get_class_id_static = requires(T t) { T::get_class_id_static(); };
-
-} // namespace details
-
-/**
-    @brief  Get class id if C is supported qx RTTI system
-    @tparam C - class to identify
-    @retval   - class id
-**/
-template<class C>
-inline class_identificator get_class_id() noexcept
-{
-    if constexpr (details::has_get_class_id_static<C>)
-    {
-        return C::get_class_id_static();
-    }
-    else
-    {
-        return std::numeric_limits<class_identificator>::max();
-    }
-}
 
 // utility class to let you use std::derived_from
 class rtti_pure_base
@@ -65,36 +39,37 @@ public:
     @brief   RTTI root class
     @details All other classes must be inherited from this class
              to allow you to use RTTI functions
-    @tparam  derived_base_t    - derived class type
     @tparam  naming_strategy_t - \see rtti_naming_strategy.h
     @author  Khrapov
     @date    10.09.2021
 
 **/
-template<class derived_base_t, template<string_literal> class naming_strategy_t = rtti_naming_strategy_class_name>
+template<class naming_strategy_t = rtti_naming_strategy_class_name>
 class rtti_root : public rtti_pure_base
 {
 public:
-    using base_class_type   = derived_base_t;
-    using super_class_type  = derived_base_t;
-    using this_class_type   = derived_base_t;
-    using inheritance_tuple = std::tuple<rtti_root>;
+    using base_class_type      = rtti_root;
+    using super_class_type     = rtti_root;
+    using this_class_type      = rtti_root;
+    using inheritance_tuple    = std::tuple<this_class_type>;
+    using naming_strategy_type = naming_strategy_t;
 
 public:
     rtti_root() noexcept                 = default;
     rtti_root(const rtti_root&) noexcept = default;
     rtti_root(rtti_root&&) noexcept      = default;
 
-    template<class rtti_type>
+    template<class T>
     bool is_derived_from() const noexcept
     {
-        return _is_base_id(qx::get_class_id<rtti_type>()) || qx::get_class_id<rtti_type>() == get_class_id();
+        constexpr class_identificator T_id = T::get_class_id_static();
+        return _is_base_id(T_id) || T_id == get_class_id();
     }
 
-    template<class rtti_type>
+    template<class T>
     bool is() const noexcept
     {
-        return get_class_id() == rtti_type::get_class_id_static();
+        return get_class_id() == T::get_class_id_static();
     }
 
     bool is(string_view svClassName) const noexcept
@@ -114,7 +89,7 @@ public:
 
     static constexpr string_view get_class_name_static() noexcept
     {
-        return _get_class_name_by_strategy<QX_TEXT(QX_STRINGIFY(rtti_root))>();
+        return naming_strategy_type::get_name(type_strings<this_class_type>::get_signature());
     }
 
     virtual string_view get_class_name() const noexcept
@@ -124,7 +99,7 @@ public:
 
     static constexpr class_identificator get_class_id_static() noexcept
     {
-        return 0;
+        return cstring_hash(type_strings<this_class_type, char>::get_signature());
     }
 
     virtual class_identificator get_class_id() const noexcept
@@ -142,12 +117,6 @@ protected:
     virtual bool _is_base_id(class_identificator idBase) const noexcept
     {
         return idBase == get_class_id_static();
-    }
-
-    template<string_literal DerivedName>
-    static constexpr string_view _get_class_name_by_strategy() noexcept
-    {
-        return naming_strategy_t<DerivedName>::get_name();
     }
 };
 
@@ -172,7 +141,7 @@ public:                                                                         
     }                                                                                                           \
     static constexpr qx::string_view get_class_name_static() noexcept                                           \
     {                                                                                                           \
-        return base_class_type::template _get_class_name_by_strategy<QX_TEXT(QX_STRINGIFY(thisClass))>();       \
+        return naming_strategy_type::get_name(qx::type_strings<this_class_type>::get_signature());              \
     }                                                                                                           \
     virtual qx::class_identificator get_class_id() const noexcept override                                      \
     {                                                                                                           \
@@ -180,7 +149,7 @@ public:                                                                         
     }                                                                                                           \
     static constexpr qx::class_identificator get_class_id_static() noexcept                                     \
     {                                                                                                           \
-        return QX_STRING_HASH(#thisClass);                                                                      \
+        return qx::cstring_hash(qx::type_strings<this_class_type, char>::get_signature());                      \
     }                                                                                                           \
     virtual qx::string_view get_class_name() const noexcept override                                            \
     {                                                                                                           \
@@ -204,7 +173,7 @@ public:                                                                         
 protected:                                                                                                      \
     virtual bool _is_base_id(qx::class_identificator base_id) const noexcept override                           \
     {                                                                                                           \
-        return base_id == qx::get_class_id<super_class_type>() || super_class_type::_is_base_id(base_id);       \
+        return base_id == super_class_type::get_class_id_static() || super_class_type::_is_base_id(base_id);    \
     }                                                                                                           \
                                                                                                                 \
 private:

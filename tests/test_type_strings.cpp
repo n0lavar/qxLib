@@ -6,8 +6,6 @@
     @copyright © Nick Khrapov, 2023. All right reserved.
 
 **/
-#define QX_CONF_USE_CHAR
-
 #include <common.h>
 
 #include <qx/containers/string/string_converters.h>
@@ -20,31 +18,27 @@
 TEST(type_strings, main)
 {
     {
-        using type_strings = qx::type_strings<int>;
-        EXPECT_EQ(type_strings::get_name(), QX_TEXT("int")) << qx::to_cstring(type_strings::get_name()).c_str();
-        EXPECT_EQ(type_strings::get_signature(), QX_TEXT("int"))
-            << qx::to_cstring(type_strings::get_signature()).c_str();
+        using type_strings = qx::type_strings<int, char>;
+        EXPECT_EQ(type_strings::get_name(), "int") << type_strings::get_name();
+        EXPECT_EQ(type_strings::get_signature(), "int") << type_strings::get_signature();
         EXPECT_EQ(type_strings::get_template_parameters().size(), 0);
     }
 
     {
-        using type_strings = qx::type_strings<std::array<int, 5>>;
-        EXPECT_EQ(type_strings::get_name(), QX_TEXT("std::array")) << qx::to_cstring(type_strings::get_name()).c_str();
-
+        using type_strings = qx::type_strings<std::array<int, 5>, char>;
+        EXPECT_EQ(type_strings::get_name(), "std::array") << type_strings::get_name();
 #if QX_MSVC
-        EXPECT_EQ(type_strings::get_signature(), QX_TEXT("std::array<int,5> "))
-            << qx::to_cstring(type_strings::get_signature()).c_str();
+        EXPECT_EQ(type_strings::get_signature(), "std::array<int,5>") << type_strings::get_signature();
 #else
-        EXPECT_EQ(type_strings::get_signature(), QX_TEXT("std::array<int, 5>"))
-            << qx::to_cstring(type_strings::get_signature()).c_str();
+        EXPECT_EQ(type_strings::get_signature(), "std::array<int, 5>") << type_strings::get_signature();
 #endif
 
         constexpr auto templateParameters = type_strings::get_template_parameters();
         static_assert(templateParameters.size() == 2);
         if constexpr (templateParameters.size() == 2)
         {
-            EXPECT_EQ(templateParameters[0], QX_TEXT("int")) << qx::to_cstring(templateParameters[0]).c_str();
-            EXPECT_EQ(templateParameters[1], QX_TEXT("5")) << qx::to_cstring(templateParameters[1]).c_str();
+            EXPECT_EQ(templateParameters[0], "int") << templateParameters[0];
+            EXPECT_EQ(templateParameters[1], "5") << templateParameters[1];
         }
     }
 }

@@ -147,4 +147,4 @@ class C3 : public C1<float>
 
 static_assert(qx::derived_from_template_c<C2, C1>);
 static_assert(qx::derived_from_template_c<C3, C1>);
-static_assert(!qx::derived_from_template_c<C, C1>);
+static_assert(!qx::derived_from_template_c<C<int>, C1>);

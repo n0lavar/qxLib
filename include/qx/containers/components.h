@@ -8,6 +8,7 @@
 **/
 #pragma once
 
+#include <qx/macros/common.h>
 #include <qx/priority.h>
 #include <qx/rtti/rtti.h>
 

@@ -225,7 +225,13 @@ constexpr wchar_t choose_char_prefix<wchar_t>(char, wchar_t w) noexcept
 
 //==============================================================================
 
-#define _QX_TO_WSTRING(x) L##x
+#define _QX_TO_WCHAR(x) L##x
+
+#if QX_MSVC
+    #define _QX_TO_WSTRING(x) __LPREFIX(x)
+#else
+    #define _QX_TO_WSTRING(x) _QX_TO_WCHAR(x)
+#endif
 
 /**
     @def   QX_TO_WSTRING
@@ -248,7 +254,7 @@ constexpr wchar_t choose_char_prefix<wchar_t>(char, wchar_t w) noexcept
     @param value_t - char type
     @param ch         - string to apply
 **/
-#define QX_CHAR_PREFIX(value_t, ch) qx::details::choose_char_prefix<value_t>(ch, QX_TO_WSTRING(ch))
+#define QX_CHAR_PREFIX(value_t, ch) qx::details::choose_char_prefix<value_t>(ch, _QX_TO_WCHAR(ch))
 
 //==============================================================================
 

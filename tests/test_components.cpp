@@ -10,14 +10,17 @@
 
 //V_EXCLUDE_PATH *test_components.cpp
 
+#define QX_CONF_USE_CHAR
+
 #include <qx/containers/components.h>
 
+#include <algorithm>
 #include <array>
 #include <string>
 
-class ABaseTestComponent : public qx::rtti_root<ABaseTestComponent>
+class ABaseTestComponent : public qx::rtti_root<>
 {
-    QX_RTTI_CLASS(ABaseTestComponent, qx::rtti_root<ABaseTestComponent>);
+    QX_RTTI_CLASS(ABaseTestComponent, qx::rtti_root<>);
 
 public:
     virtual int GetData() const = 0;
