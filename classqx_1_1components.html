@@ -79,106 +79,71 @@ $(function() {
 
 <p><code>#include &lt;<a class="el" href="components_8h_source.html">components.h</a>&gt;</code></p>
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
-Classes</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1components_1_1const__iterator.html">const_iterator</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Const iterator to hide dereference implementation details.  <a href="classqx_1_1components_1_1const__iterator.html#details">More...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1components_1_1iterator.html">iterator</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Iterator to hide dereference implementation details.  <a href="classqx_1_1components_1_1iterator.html#details">More...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:abd8de2b2268a36a81439c8d02556f6a6"><td class="memTemplParams" colspan="2">template&lt;class component_t , class... args_t&gt; </td></tr>
-<tr class="memitem:abd8de2b2268a36a81439c8d02556f6a6"><td class="memTemplItemLeft" align="right" valign="top">component_t *&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classqx_1_1components.html#abd8de2b2268a36a81439c8d02556f6a6">add</a> (args_t &amp;&amp;... args)</td></tr>
-<tr class="memdesc:abd8de2b2268a36a81439c8d02556f6a6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add component by constructing in place.  <a href="classqx_1_1components.html#abd8de2b2268a36a81439c8d02556f6a6">More...</a><br /></td></tr>
-<tr class="separator:abd8de2b2268a36a81439c8d02556f6a6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad3ce41cd2fa57f7086427a9b397fbb94"><td class="memTemplParams" colspan="2">template&lt;class component_t &gt; </td></tr>
-<tr class="memitem:ad3ce41cd2fa57f7086427a9b397fbb94"><td class="memTemplItemLeft" align="right" valign="top">component_t *&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classqx_1_1components.html#ad3ce41cd2fa57f7086427a9b397fbb94">add</a> (std::unique_ptr&lt; component_t &gt; pComponent)</td></tr>
-<tr class="memdesc:ad3ce41cd2fa57f7086427a9b397fbb94"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add component.  <a href="classqx_1_1components.html#ad3ce41cd2fa57f7086427a9b397fbb94">More...</a><br /></td></tr>
-<tr class="separator:ad3ce41cd2fa57f7086427a9b397fbb94"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5a669ad9126314ca79966ea69e1f78d0"><td class="memTemplParams" colspan="2">template&lt;class component_t &gt; </td></tr>
-<tr class="memitem:a5a669ad9126314ca79966ea69e1f78d0"><td class="memTemplItemLeft" align="right" valign="top">component_t *&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classqx_1_1components.html#a5a669ad9126314ca79966ea69e1f78d0">get</a> () const</td></tr>
-<tr class="memdesc:a5a669ad9126314ca79966ea69e1f78d0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get first component with TKeyComponent key.  <a href="classqx_1_1components.html#a5a669ad9126314ca79966ea69e1f78d0">More...</a><br /></td></tr>
-<tr class="separator:a5a669ad9126314ca79966ea69e1f78d0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a10c1b3547ff8de29bfbaa918dd0d4fcb"><td class="memItemLeft" align="right" valign="top">base_component_t *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1components.html#a10c1b3547ff8de29bfbaa918dd0d4fcb">get_by_id</a> (class_identificator id) const</td></tr>
-<tr class="memdesc:a10c1b3547ff8de29bfbaa918dd0d4fcb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get first component with "class_identificator" key.  <a href="classqx_1_1components.html#a10c1b3547ff8de29bfbaa918dd0d4fcb">More...</a><br /></td></tr>
-<tr class="separator:a10c1b3547ff8de29bfbaa918dd0d4fcb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a929ce89c88f76374a12897a40e8c07dd"><td class="memTemplParams" colspan="2">template&lt;class component_t &gt; </td></tr>
-<tr class="memitem:a929ce89c88f76374a12897a40e8c07dd"><td class="memTemplItemLeft" align="right" valign="top">component_t *&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classqx_1_1components.html#a929ce89c88f76374a12897a40e8c07dd">add_to</a> (pointer pComponent)</td></tr>
-<tr class="memdesc:a929ce89c88f76374a12897a40e8c07dd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add component with TKeyComponent id.  <a href="classqx_1_1components.html#a929ce89c88f76374a12897a40e8c07dd">More...</a><br /></td></tr>
-<tr class="separator:a929ce89c88f76374a12897a40e8c07dd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a82ebca7bb18cbb3643c9aabf2eb89eb3"><td class="memTemplParams" colspan="2">template&lt;class component_t &gt; </td></tr>
-<tr class="memitem:a82ebca7bb18cbb3643c9aabf2eb89eb3"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classqx_1_1components.html#a82ebca7bb18cbb3643c9aabf2eb89eb3">get_all</a> () const</td></tr>
-<tr class="memdesc:a82ebca7bb18cbb3643c9aabf2eb89eb3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get all components with TKeyComponent key.  <a href="classqx_1_1components.html#a82ebca7bb18cbb3643c9aabf2eb89eb3">More...</a><br /></td></tr>
-<tr class="separator:a82ebca7bb18cbb3643c9aabf2eb89eb3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1e71fd4d5e9d765e5f43c4108518fcf3"><td class="memItemLeft" align="right" valign="top">auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1components.html#a1e71fd4d5e9d765e5f43c4108518fcf3">get_all_by_id</a> (class_identificator id) const</td></tr>
-<tr class="memdesc:a1e71fd4d5e9d765e5f43c4108518fcf3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get all components with "class_identificator" key.  <a href="classqx_1_1components.html#a1e71fd4d5e9d765e5f43c4108518fcf3">More...</a><br /></td></tr>
-<tr class="separator:a1e71fd4d5e9d765e5f43c4108518fcf3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a853a333057af5eba03c54197f1a94b13"><td class="memTemplParams" colspan="2">template&lt;class component_t &gt; </td></tr>
-<tr class="memitem:a853a333057af5eba03c54197f1a94b13"><td class="memTemplItemLeft" align="right" valign="top">pointer&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classqx_1_1components.html#a853a333057af5eba03c54197f1a94b13">extract</a> ()</td></tr>
-<tr class="memdesc:a853a333057af5eba03c54197f1a94b13"><td class="mdescLeft">&#160;</td><td class="mdescRight">Extract component from container.  <a href="classqx_1_1components.html#a853a333057af5eba03c54197f1a94b13">More...</a><br /></td></tr>
-<tr class="separator:a853a333057af5eba03c54197f1a94b13"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acd2522cd0cc6b886928655d762a0f7d7"><td class="memTemplParams" colspan="2">template&lt;class component_t &gt; </td></tr>
-<tr class="memitem:acd2522cd0cc6b886928655d762a0f7d7"><td class="memTemplItemLeft" align="right" valign="top">bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classqx_1_1components.html#acd2522cd0cc6b886928655d762a0f7d7">remove</a> ()</td></tr>
-<tr class="memdesc:acd2522cd0cc6b886928655d762a0f7d7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Remove component from container.  <a href="classqx_1_1components.html#acd2522cd0cc6b886928655d762a0f7d7">More...</a><br /></td></tr>
-<tr class="separator:acd2522cd0cc6b886928655d762a0f7d7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a47c3757426ffd1759eac3316a08f6fcf"><td class="memTemplParams" colspan="2">template&lt;class component_t &gt; </td></tr>
-<tr class="memitem:a47c3757426ffd1759eac3316a08f6fcf"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classqx_1_1components.html#a47c3757426ffd1759eac3316a08f6fcf">remove_all</a> ()</td></tr>
-<tr class="memdesc:a47c3757426ffd1759eac3316a08f6fcf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Remove all components with "type" key from container.  <a href="classqx_1_1components.html#a47c3757426ffd1759eac3316a08f6fcf">More...</a><br /></td></tr>
-<tr class="separator:a47c3757426ffd1759eac3316a08f6fcf"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a20d9594ff193d4446f9c944cde6083fc"><td class="memTemplParams" colspan="2">template&lt;class component_t &gt; </td></tr>
-<tr class="memitem:a20d9594ff193d4446f9c944cde6083fc"><td class="memTemplItemLeft" align="right" valign="top">bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classqx_1_1components.html#a20d9594ff193d4446f9c944cde6083fc">contains</a> () const</td></tr>
-<tr class="memdesc:a20d9594ff193d4446f9c944cde6083fc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Is container contains value with TKeyComponent key.  <a href="classqx_1_1components.html#a20d9594ff193d4446f9c944cde6083fc">More...</a><br /></td></tr>
-<tr class="separator:a20d9594ff193d4446f9c944cde6083fc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aef7d406531f8e2edd1d4360ba839b321"><td class="memItemLeft" align="right" valign="top">auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1components.html#aef7d406531f8e2edd1d4360ba839b321">begin</a> () noexcept</td></tr>
-<tr class="memdesc:aef7d406531f8e2edd1d4360ba839b321"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return iterator to beginning.  <a href="classqx_1_1components.html#aef7d406531f8e2edd1d4360ba839b321">More...</a><br /></td></tr>
-<tr class="separator:aef7d406531f8e2edd1d4360ba839b321"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a63fcc62ff80acbde05e650a23d15f779"><td class="memItemLeft" align="right" valign="top">auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1components.html#a63fcc62ff80acbde05e650a23d15f779">end</a> () noexcept</td></tr>
-<tr class="memdesc:a63fcc62ff80acbde05e650a23d15f779"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return iterator to end.  <a href="classqx_1_1components.html#a63fcc62ff80acbde05e650a23d15f779">More...</a><br /></td></tr>
-<tr class="separator:a63fcc62ff80acbde05e650a23d15f779"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6b8dc568c662d9aa32af7bfb29e71253"><td class="memItemLeft" align="right" valign="top">auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1components.html#a6b8dc568c662d9aa32af7bfb29e71253">begin</a> () const noexcept</td></tr>
-<tr class="memdesc:a6b8dc568c662d9aa32af7bfb29e71253"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return iterator to beginning.  <a href="classqx_1_1components.html#a6b8dc568c662d9aa32af7bfb29e71253">More...</a><br /></td></tr>
-<tr class="separator:a6b8dc568c662d9aa32af7bfb29e71253"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3d5abd337e79a6b25c94bf1c9fb85bba"><td class="memItemLeft" align="right" valign="top">auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1components.html#a3d5abd337e79a6b25c94bf1c9fb85bba">end</a> () const noexcept</td></tr>
-<tr class="memdesc:a3d5abd337e79a6b25c94bf1c9fb85bba"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return iterator to end.  <a href="classqx_1_1components.html#a3d5abd337e79a6b25c94bf1c9fb85bba">More...</a><br /></td></tr>
-<tr class="separator:a3d5abd337e79a6b25c94bf1c9fb85bba"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0b01c3e0369af120e0bae041bc31a6d2"><td class="memItemLeft" align="right" valign="top">auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1components.html#a0b01c3e0369af120e0bae041bc31a6d2">cbegin</a> () const noexcept</td></tr>
-<tr class="memdesc:a0b01c3e0369af120e0bae041bc31a6d2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return const iterator to beginning.  <a href="classqx_1_1components.html#a0b01c3e0369af120e0bae041bc31a6d2">More...</a><br /></td></tr>
-<tr class="separator:a0b01c3e0369af120e0bae041bc31a6d2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a77454ffb7e71858d2a4b4bac132463ec"><td class="memItemLeft" align="right" valign="top">auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1components.html#a77454ffb7e71858d2a4b4bac132463ec">cend</a> () const noexcept</td></tr>
-<tr class="memdesc:a77454ffb7e71858d2a4b4bac132463ec"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return const iterator to end.  <a href="classqx_1_1components.html#a77454ffb7e71858d2a4b4bac132463ec">More...</a><br /></td></tr>
-<tr class="separator:a77454ffb7e71858d2a4b4bac132463ec"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8243c142d922c2057e8ae391c453b206"><td class="memItemLeft" align="right" valign="top">auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1components.html#a8243c142d922c2057e8ae391c453b206">rbegin</a> () noexcept</td></tr>
-<tr class="memdesc:a8243c142d922c2057e8ae391c453b206"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return reverse iterator to reverse beginning.  <a href="classqx_1_1components.html#a8243c142d922c2057e8ae391c453b206">More...</a><br /></td></tr>
-<tr class="separator:a8243c142d922c2057e8ae391c453b206"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a683ca15a6345435c068187cbf4eb9de8"><td class="memItemLeft" align="right" valign="top">auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1components.html#a683ca15a6345435c068187cbf4eb9de8">rend</a> () noexcept</td></tr>
-<tr class="memdesc:a683ca15a6345435c068187cbf4eb9de8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return reverse iterator to reverse end.  <a href="classqx_1_1components.html#a683ca15a6345435c068187cbf4eb9de8">More...</a><br /></td></tr>
-<tr class="separator:a683ca15a6345435c068187cbf4eb9de8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5012b1b1505235ba8a36f4e2baba282e"><td class="memItemLeft" align="right" valign="top">auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1components.html#a5012b1b1505235ba8a36f4e2baba282e">crbegin</a> () const noexcept</td></tr>
-<tr class="memdesc:a5012b1b1505235ba8a36f4e2baba282e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return const reverse iterator to reverse beginning.  <a href="classqx_1_1components.html#a5012b1b1505235ba8a36f4e2baba282e">More...</a><br /></td></tr>
-<tr class="separator:a5012b1b1505235ba8a36f4e2baba282e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acf42c61a4138b9a3ff0e3148c54a8c9b"><td class="memItemLeft" align="right" valign="top">auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1components.html#acf42c61a4138b9a3ff0e3148c54a8c9b">crend</a> () const noexcept</td></tr>
-<tr class="memdesc:acf42c61a4138b9a3ff0e3148c54a8c9b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return const reverse iterator to reverse end.  <a href="classqx_1_1components.html#acf42c61a4138b9a3ff0e3148c54a8c9b">More...</a><br /></td></tr>
-<tr class="separator:acf42c61a4138b9a3ff0e3148c54a8c9b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad14db6f9ccd88d6556d7ce50fd402bb5"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1components.html#ad14db6f9ccd88d6556d7ce50fd402bb5">size</a> () const noexcept</td></tr>
-<tr class="memdesc:ad14db6f9ccd88d6556d7ce50fd402bb5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get number of components in container.  <a href="classqx_1_1components.html#ad14db6f9ccd88d6556d7ce50fd402bb5">More...</a><br /></td></tr>
-<tr class="separator:ad14db6f9ccd88d6556d7ce50fd402bb5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1000a0a0e58e61e53686dfecadf4ef06"><td class="memTemplParams" colspan="2">template&lt;std::derived_from&lt; base_component_t &gt; component_t&gt; </td></tr>
+<tr class="memitem:a1000a0a0e58e61e53686dfecadf4ef06"><td class="memTemplItemLeft" align="right" valign="top">component_t *&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classqx_1_1components.html#a1000a0a0e58e61e53686dfecadf4ef06">add</a> (std::unique_ptr&lt; component_t &gt; pComponent, <a class="el" href="priority_8h.html#a596815b7b01439344e1858a12743c8ec">priority</a> ePriority=priority::normal, <a class="el" href="classqx_1_1flags.html">flags</a>&lt; status &gt; statusFlags=status::default_value) noexcept</td></tr>
+<tr class="memdesc:a1000a0a0e58e61e53686dfecadf4ef06"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add a component.  <a href="classqx_1_1components.html#a1000a0a0e58e61e53686dfecadf4ef06">More...</a><br /></td></tr>
+<tr class="separator:a1000a0a0e58e61e53686dfecadf4ef06"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a32a6c5ce85888ab9da83d09749325602"><td class="memItemLeft" align="right" valign="top">std::unique_ptr&lt; base_component_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1components.html#a32a6c5ce85888ab9da83d09749325602">remove</a> (const base_component_t *pRawComponent) noexcept</td></tr>
+<tr class="memdesc:a32a6c5ce85888ab9da83d09749325602"><td class="mdescLeft">&#160;</td><td class="mdescRight">Remove the component from the container.  <a href="classqx_1_1components.html#a32a6c5ce85888ab9da83d09749325602">More...</a><br /></td></tr>
+<tr class="separator:a32a6c5ce85888ab9da83d09749325602"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a60a4050544b0694e378e176e01089d4d"><td class="memTemplParams" colspan="2">template&lt;std::derived_from&lt; base_component_t &gt; component_t&gt; </td></tr>
+<tr class="memitem:a60a4050544b0694e378e176e01089d4d"><td class="memTemplItemLeft" align="right" valign="top">component_t *&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classqx_1_1components.html#a60a4050544b0694e378e176e01089d4d">try_get</a> () noexcept</td></tr>
+<tr class="memdesc:a60a4050544b0694e378e176e01089d4d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Try to get a component of the given type with the highest priority.  <a href="classqx_1_1components.html#a60a4050544b0694e378e176e01089d4d">More...</a><br /></td></tr>
+<tr class="separator:a60a4050544b0694e378e176e01089d4d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9d595c639d2c6ef34a6ff023b3ba2708"><td class="memTemplParams" colspan="2">template&lt;std::derived_from&lt; base_component_t &gt; component_t&gt; </td></tr>
+<tr class="memitem:a9d595c639d2c6ef34a6ff023b3ba2708"><td class="memTemplItemLeft" align="right" valign="top">const component_t *&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classqx_1_1components.html#a9d595c639d2c6ef34a6ff023b3ba2708">try_get</a> () const noexcept</td></tr>
+<tr class="memdesc:a9d595c639d2c6ef34a6ff023b3ba2708"><td class="mdescLeft">&#160;</td><td class="mdescRight">Try to get a component of the given type with the highest priority.  <a href="classqx_1_1components.html#a9d595c639d2c6ef34a6ff023b3ba2708">More...</a><br /></td></tr>
+<tr class="separator:a9d595c639d2c6ef34a6ff023b3ba2708"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad73334195fe4f049ea8ad6eb213f5c4d"><td class="memItemLeft" align="right" valign="top">base_component_t *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1components.html#ad73334195fe4f049ea8ad6eb213f5c4d">try_get</a> (class_identificator id) noexcept</td></tr>
+<tr class="memdesc:ad73334195fe4f049ea8ad6eb213f5c4d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Try to get a component of the given type id with the highest priority.  <a href="classqx_1_1components.html#ad73334195fe4f049ea8ad6eb213f5c4d">More...</a><br /></td></tr>
+<tr class="separator:ad73334195fe4f049ea8ad6eb213f5c4d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8119788912d5542d14bd7c90efe53578"><td class="memItemLeft" align="right" valign="top">const base_component_t *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1components.html#a8119788912d5542d14bd7c90efe53578">try_get</a> (class_identificator id) const noexcept</td></tr>
+<tr class="memdesc:a8119788912d5542d14bd7c90efe53578"><td class="mdescLeft">&#160;</td><td class="mdescRight">Try to get a component of the given type id with the highest priority.  <a href="classqx_1_1components.html#a8119788912d5542d14bd7c90efe53578">More...</a><br /></td></tr>
+<tr class="separator:a8119788912d5542d14bd7c90efe53578"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aced96f5243a619d1db27b2f751f2ad3c"><td class="memTemplParams" colspan="2">template&lt;std::derived_from&lt; base_component_t &gt; component_t&gt; </td></tr>
+<tr class="memitem:aced96f5243a619d1db27b2f751f2ad3c"><td class="memTemplItemLeft" align="right" valign="top">component_t &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classqx_1_1components.html#aced96f5243a619d1db27b2f751f2ad3c">get</a> () noexcept</td></tr>
+<tr class="memdesc:aced96f5243a619d1db27b2f751f2ad3c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get a component of the given type with the highest priority (no existence checks are performed)  <a href="classqx_1_1components.html#aced96f5243a619d1db27b2f751f2ad3c">More...</a><br /></td></tr>
+<tr class="separator:aced96f5243a619d1db27b2f751f2ad3c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aacc4f35aa1b72b4430f241163ca05b48"><td class="memTemplParams" colspan="2">template&lt;std::derived_from&lt; base_component_t &gt; component_t&gt; </td></tr>
+<tr class="memitem:aacc4f35aa1b72b4430f241163ca05b48"><td class="memTemplItemLeft" align="right" valign="top">const component_t &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classqx_1_1components.html#aacc4f35aa1b72b4430f241163ca05b48">get</a> () const noexcept</td></tr>
+<tr class="memdesc:aacc4f35aa1b72b4430f241163ca05b48"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get a component of the given type with the highest priority (no existence checks are performed)  <a href="classqx_1_1components.html#aacc4f35aa1b72b4430f241163ca05b48">More...</a><br /></td></tr>
+<tr class="separator:aacc4f35aa1b72b4430f241163ca05b48"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa958b4902c458ed09661be9126a22ed0"><td class="memTemplParams" colspan="2">template&lt;std::derived_from&lt; base_component_t &gt; component_t = base_component_t&gt; </td></tr>
+<tr class="memitem:aa958b4902c458ed09661be9126a22ed0"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classqx_1_1components.html#aa958b4902c458ed09661be9126a22ed0">view</a> () noexcept</td></tr>
+<tr class="memdesc:aa958b4902c458ed09661be9126a22ed0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get a view which may be used in a ranged-based for loop and consists of components of a given type with decreasing non-disabled priority.  <a href="classqx_1_1components.html#aa958b4902c458ed09661be9126a22ed0">More...</a><br /></td></tr>
+<tr class="separator:aa958b4902c458ed09661be9126a22ed0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac35f1f6652c15018363a439391f49ae4"><td class="memTemplParams" colspan="2">template&lt;std::derived_from&lt; base_component_t &gt; component_t = base_component_t&gt; </td></tr>
+<tr class="memitem:ac35f1f6652c15018363a439391f49ae4"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classqx_1_1components.html#ac35f1f6652c15018363a439391f49ae4">view</a> () const noexcept</td></tr>
+<tr class="memdesc:ac35f1f6652c15018363a439391f49ae4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get a view which may be used in a ranged-based for loop and consists of components of a given type with decreasing non-disabled priority.  <a href="classqx_1_1components.html#ac35f1f6652c15018363a439391f49ae4">More...</a><br /></td></tr>
+<tr class="separator:ac35f1f6652c15018363a439391f49ae4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a639da139940938b530f187177f85540a"><td class="memItemLeft" align="right" valign="top">std::optional&lt; <a class="el" href="priority_8h.html#a596815b7b01439344e1858a12743c8ec">priority</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1components.html#a639da139940938b530f187177f85540a">get_priority</a> (const base_component_t *pRawComponent) const noexcept</td></tr>
+<tr class="memdesc:a639da139940938b530f187177f85540a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get a priority of a given component.  <a href="classqx_1_1components.html#a639da139940938b530f187177f85540a">More...</a><br /></td></tr>
+<tr class="separator:a639da139940938b530f187177f85540a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a49749a130a1d7c1f50606a84c29fc4b9"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1components.html#a49749a130a1d7c1f50606a84c29fc4b9">set_priority</a> (const base_component_t *pRawComponent, <a class="el" href="priority_8h.html#a596815b7b01439344e1858a12743c8ec">priority</a> ePriority) noexcept</td></tr>
+<tr class="memdesc:a49749a130a1d7c1f50606a84c29fc4b9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set a priority of a given component.  <a href="classqx_1_1components.html#a49749a130a1d7c1f50606a84c29fc4b9">More...</a><br /></td></tr>
+<tr class="separator:a49749a130a1d7c1f50606a84c29fc4b9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abe0e3e7b3a40167f5ccd16e07aa363ec"><td class="memItemLeft" align="right" valign="top">std::optional&lt; <a class="el" href="classqx_1_1flags.html">flags</a>&lt; status &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1components.html#abe0e3e7b3a40167f5ccd16e07aa363ec">get_status</a> (const base_component_t *pRawComponent) const noexcept</td></tr>
+<tr class="memdesc:abe0e3e7b3a40167f5ccd16e07aa363ec"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get a status of a given component.  <a href="classqx_1_1components.html#abe0e3e7b3a40167f5ccd16e07aa363ec">More...</a><br /></td></tr>
+<tr class="separator:abe0e3e7b3a40167f5ccd16e07aa363ec"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad0c912d973b5eddafbe000df2680bbe8"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1components.html#ad0c912d973b5eddafbe000df2680bbe8">set_status</a> (const base_component_t *pRawComponent, <a class="el" href="classqx_1_1flags.html">flags</a>&lt; status &gt; status) noexcept</td></tr>
+<tr class="memdesc:ad0c912d973b5eddafbe000df2680bbe8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set a status of a given component.  <a href="classqx_1_1components.html#ad0c912d973b5eddafbe000df2680bbe8">More...</a><br /></td></tr>
+<tr class="separator:ad0c912d973b5eddafbe000df2680bbe8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aacf7a81b3e394f26390ed0c6291340e5"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1components.html#aacf7a81b3e394f26390ed0c6291340e5">empty</a> () const noexcept</td></tr>
-<tr class="memdesc:aacf7a81b3e394f26390ed0c6291340e5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Is component empty.  <a href="classqx_1_1components.html#aacf7a81b3e394f26390ed0c6291340e5">More...</a><br /></td></tr>
+<tr class="memdesc:aacf7a81b3e394f26390ed0c6291340e5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if container doesn't have any components.  <a href="classqx_1_1components.html#aacf7a81b3e394f26390ed0c6291340e5">More...</a><br /></td></tr>
 <tr class="separator:aacf7a81b3e394f26390ed0c6291340e5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8747245ba5ea5c4ac6393cc5bc1d8948"><td class="memItemLeft" align="right" valign="top"><a id="a8747245ba5ea5c4ac6393cc5bc1d8948"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1components.html#a8747245ba5ea5c4ac6393cc5bc1d8948">clear</a> () noexcept</td></tr>
-<tr class="memdesc:a8747245ba5ea5c4ac6393cc5bc1d8948"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clear container. <br /></td></tr>
+<tr class="memdesc:a8747245ba5ea5c4ac6393cc5bc1d8948"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clear the container, e.g. remove all the components. <br /></td></tr>
 <tr class="separator:a8747245ba5ea5c4ac6393cc5bc1d8948"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><h3>template&lt;class base_component_t&gt;<br />
+<div class="textblock"><h3>template&lt;std::derived_from&lt; rtti_pure_base &gt; base_component_t&gt;<br />
 class qx::components&lt; base_component_t &gt;</h3>
 
 <p>Container for components system. </p>
-<p>Stores components and allows them to be accessed by template argument Iterators allows to access components in the order in which they are added </p><dl class="tparams"><dt>Template Parameters</dt><dd>
+<p>Stores components and allows them to be accessed by a template argument or a class id. Each component has a priority, which is used to iterate through a sequence of objects of a type (final or any super type) or to use getter methods, where a component with the highest priority will be given. You can use qx::priority::disabled to exclude the component from iteration or getters result. </p><dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
     <tr><td class="paramname">base_component_t</td><td>- base component type </td></tr>
   </table>
@@ -187,70 +152,17 @@ class qx::components&lt; base_component_t &gt;</h3>
 <dl class="section author"><dt>Author</dt><dd>Khrapov </dd></dl>
 <dl class="section date"><dt>Date</dt><dd>9.03.2021 </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="components_8h_source.html#l00032">32</a> of file <a class="el" href="components_8h_source.html">components.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="components_8h_source.html#l00036">36</a> of file <a class="el" href="components_8h_source.html">components.h</a>.</p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
-<a id="abd8de2b2268a36a81439c8d02556f6a6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#abd8de2b2268a36a81439c8d02556f6a6">&#9670;&nbsp;</a></span>add() <span class="overload">[1/2]</span></h2>
+<a id="a1000a0a0e58e61e53686dfecadf4ef06"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1000a0a0e58e61e53686dfecadf4ef06">&#9670;&nbsp;</a></span>add()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class base_component_t &gt; </div>
+template&lt;std::derived_from&lt; rtti_pure_base &gt; base_component_t&gt; </div>
 <div class="memtemplate">
-template&lt;class component_t , class... args_t&gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">component_t * <a class="el" href="classqx_1_1components.html">qx::components</a>&lt; base_component_t &gt;::add </td>
-          <td>(</td>
-          <td class="paramtype">args_t &amp;&amp;...&#160;</td>
-          <td class="paramname"><em>args</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Add component by constructing in place. </p>
-<dl class="tparams"><dt>Template Parameters</dt><dd>
-  <table class="tparams">
-    <tr><td class="paramname">component_t</td><td>- component type </td></tr>
-    <tr><td class="paramname">args_t</td><td>- type of variadic args for component construction </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">args</td><td>- variadic args for component construction </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="retval"><dt>Return values</dt><dd>
-  <table class="retval">
-    <tr><td class="paramname">-</td><td>component pointer </td></tr>
-  </table>
-  </dd>
-</dl>
-
-<p class="definition">Definition at line <a class="el" href="components_8inl_source.html#l00057">57</a> of file <a class="el" href="components_8inl_source.html">components.inl</a>.</p>
-
-</div>
-</div>
-<a id="ad3ce41cd2fa57f7086427a9b397fbb94"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad3ce41cd2fa57f7086427a9b397fbb94">&#9670;&nbsp;</a></span>add() <span class="overload">[2/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class base_component_t &gt; </div>
-<div class="memtemplate">
-template&lt;class component_t &gt; </div>
+template&lt;std::derived_from&lt; base_component_t &gt; component_t&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -259,336 +171,56 @@ template&lt;class component_t &gt; </div>
           <td class="memname">component_t * <a class="el" href="classqx_1_1components.html">qx::components</a>&lt; base_component_t &gt;::add </td>
           <td>(</td>
           <td class="paramtype">std::unique_ptr&lt; component_t &gt;&#160;</td>
-          <td class="paramname"><em>pComponent</em></td><td>)</td>
+          <td class="paramname"><em>pComponent</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype"><a class="el" href="priority_8h.html#a596815b7b01439344e1858a12743c8ec">priority</a>&#160;</td>
+          <td class="paramname"><em>ePriority</em> = <code>priority::normal</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classqx_1_1flags.html">flags</a>&lt; status &gt;&#160;</td>
+          <td class="paramname"><em>statusFlags</em> = <code>status::default_value</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p>Add component. </p>
+<p>Add a component. </p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
-    <tr><td class="paramname">component_t</td><td>- component type </td></tr>
+    <tr><td class="paramname">component_t</td><td>- component type which doesn't have to be a final class type, may be any base or super type </td></tr>
   </table>
   </dd>
 </dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">pComponent</td><td>- component unique pointer </td></tr>
+    <tr><td class="paramname">pComponent</td><td>- component object </td></tr>
+    <tr><td class="paramname">ePriority</td><td>- initial component priority </td></tr>
+    <tr><td class="paramname">statusFlags</td><td>- initial component status </td></tr>
   </table>
   </dd>
 </dl>
 <dl class="retval"><dt>Return values</dt><dd>
   <table class="retval">
-    <tr><td class="paramname">-</td><td>component pointer </td></tr>
+    <tr><td class="paramname">-</td><td>raw component pointer which acts like a component's handle </td></tr>
   </table>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="components_8inl_source.html#l00064">64</a> of file <a class="el" href="components_8inl_source.html">components.inl</a>.</p>
-
-</div>
-</div>
-<a id="a929ce89c88f76374a12897a40e8c07dd"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a929ce89c88f76374a12897a40e8c07dd">&#9670;&nbsp;</a></span>add_to()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class base_component_t &gt; </div>
-<div class="memtemplate">
-template&lt;class component_t &gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">component_t * <a class="el" href="classqx_1_1components.html">qx::components</a>&lt; base_component_t &gt;::add_to </td>
-          <td>(</td>
-          <td class="paramtype">pointer&#160;</td>
-          <td class="paramname"><em>pComponent</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Add component with TKeyComponent id. </p>
-<dl class="tparams"><dt>Template Parameters</dt><dd>
-  <table class="tparams">
-    <tr><td class="paramname">component_t</td><td>- the type-identifier that will be used when searching for component </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">pComponent</td><td>- component unique pointer </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="retval"><dt>Return values</dt><dd>
-  <table class="retval">
-    <tr><td class="paramname">-</td><td>component pointer </td></tr>
-  </table>
-  </dd>
-</dl>
-
-<p class="definition">Definition at line <a class="el" href="components_8inl_source.html#l00085">85</a> of file <a class="el" href="components_8inl_source.html">components.inl</a>.</p>
-
-</div>
-</div>
-<a id="a6b8dc568c662d9aa32af7bfb29e71253"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6b8dc568c662d9aa32af7bfb29e71253">&#9670;&nbsp;</a></span>begin() <span class="overload">[1/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class base_component_t &gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">auto <a class="el" href="classqx_1_1components.html">qx::components</a>&lt; base_component_t &gt;::begin</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Return iterator to beginning. </p>
-<dl class="retval"><dt>Return values</dt><dd>
-  <table class="retval">
-    <tr><td class="paramname">-</td><td>iterator to beginning </td></tr>
-  </table>
-  </dd>
-</dl>
-
-<p class="definition">Definition at line <a class="el" href="components_8inl_source.html#l00171">171</a> of file <a class="el" href="components_8inl_source.html">components.inl</a>.</p>
-
-</div>
-</div>
-<a id="aef7d406531f8e2edd1d4360ba839b321"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aef7d406531f8e2edd1d4360ba839b321">&#9670;&nbsp;</a></span>begin() <span class="overload">[2/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class base_component_t &gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">auto <a class="el" href="classqx_1_1components.html">qx::components</a>&lt; base_component_t &gt;::begin</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Return iterator to beginning. </p>
-<dl class="retval"><dt>Return values</dt><dd>
-  <table class="retval">
-    <tr><td class="paramname">-</td><td>iterator to beginning </td></tr>
-  </table>
-  </dd>
-</dl>
-
-<p class="definition">Definition at line <a class="el" href="components_8inl_source.html#l00159">159</a> of file <a class="el" href="components_8inl_source.html">components.inl</a>.</p>
-
-</div>
-</div>
-<a id="a0b01c3e0369af120e0bae041bc31a6d2"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0b01c3e0369af120e0bae041bc31a6d2">&#9670;&nbsp;</a></span>cbegin()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class base_component_t &gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">auto <a class="el" href="classqx_1_1components.html">qx::components</a>&lt; base_component_t &gt;::cbegin</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Return const iterator to beginning. </p>
-<dl class="retval"><dt>Return values</dt><dd>
-  <table class="retval">
-    <tr><td class="paramname">-</td><td>const iterator to beginning </td></tr>
-  </table>
-  </dd>
-</dl>
-
-<p class="definition">Definition at line <a class="el" href="components_8inl_source.html#l00183">183</a> of file <a class="el" href="components_8inl_source.html">components.inl</a>.</p>
-
-</div>
-</div>
-<a id="a77454ffb7e71858d2a4b4bac132463ec"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a77454ffb7e71858d2a4b4bac132463ec">&#9670;&nbsp;</a></span>cend()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class base_component_t &gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">auto <a class="el" href="classqx_1_1components.html">qx::components</a>&lt; base_component_t &gt;::cend</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Return const iterator to end. </p>
-<dl class="retval"><dt>Return values</dt><dd>
-  <table class="retval">
-    <tr><td class="paramname">-</td><td>const iterator to end </td></tr>
-  </table>
-  </dd>
-</dl>
-
-<p class="definition">Definition at line <a class="el" href="components_8inl_source.html#l00189">189</a> of file <a class="el" href="components_8inl_source.html">components.inl</a>.</p>
-
-</div>
-</div>
-<a id="a20d9594ff193d4446f9c944cde6083fc"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a20d9594ff193d4446f9c944cde6083fc">&#9670;&nbsp;</a></span>contains()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class base_component_t &gt; </div>
-<div class="memtemplate">
-template&lt;class component_t &gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool <a class="el" href="classqx_1_1components.html">qx::components</a>&lt; base_component_t &gt;::contains</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Is container contains value with TKeyComponent key. </p>
-<dl class="tparams"><dt>Template Parameters</dt><dd>
-  <table class="tparams">
-    <tr><td class="paramname">component_t</td><td>- the type-identifier that was used when adding the component </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="retval"><dt>Return values</dt><dd>
-  <table class="retval">
-    <tr><td class="paramname">-</td><td>true if contains </td></tr>
-  </table>
-  </dd>
-</dl>
-
-<p class="definition">Definition at line <a class="el" href="components_8inl_source.html#l00153">153</a> of file <a class="el" href="components_8inl_source.html">components.inl</a>.</p>
-
-</div>
-</div>
-<a id="a5012b1b1505235ba8a36f4e2baba282e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5012b1b1505235ba8a36f4e2baba282e">&#9670;&nbsp;</a></span>crbegin()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class base_component_t &gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">auto <a class="el" href="classqx_1_1components.html">qx::components</a>&lt; base_component_t &gt;::crbegin</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Return const reverse iterator to reverse beginning. </p>
-<dl class="retval"><dt>Return values</dt><dd>
-  <table class="retval">
-    <tr><td class="paramname">-</td><td>const reverse iterator to reverse beginning </td></tr>
-  </table>
-  </dd>
-</dl>
-
-<p class="definition">Definition at line <a class="el" href="components_8inl_source.html#l00207">207</a> of file <a class="el" href="components_8inl_source.html">components.inl</a>.</p>
-
-</div>
-</div>
-<a id="acf42c61a4138b9a3ff0e3148c54a8c9b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#acf42c61a4138b9a3ff0e3148c54a8c9b">&#9670;&nbsp;</a></span>crend()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class base_component_t &gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">auto <a class="el" href="classqx_1_1components.html">qx::components</a>&lt; base_component_t &gt;::crend</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Return const reverse iterator to reverse end. </p>
-<dl class="retval"><dt>Return values</dt><dd>
-  <table class="retval">
-    <tr><td class="paramname">-</td><td>const reverse iterator to reverse end </td></tr>
-  </table>
-  </dd>
-</dl>
-
-<p class="definition">Definition at line <a class="el" href="components_8inl_source.html#l00213">213</a> of file <a class="el" href="components_8inl_source.html">components.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="components_8inl_source.html#l00028">28</a> of file <a class="el" href="components_8inl_source.html">components.inl</a>.</p>
 
 </div>
 </div>
@@ -598,7 +230,7 @@ template&lt;class base_component_t &gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class base_component_t &gt; </div>
+template&lt;std::derived_from&lt; rtti_pure_base &gt; base_component_t&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -614,31 +246,33 @@ template&lt;class base_component_t &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Is component empty. </p>
+<p>Check if container doesn't have any components. </p>
 <dl class="retval"><dt>Return values</dt><dd>
   <table class="retval">
-    <tr><td class="paramname">-</td><td>true if component empty </td></tr>
+    <tr><td class="paramname">-</td><td>true if container doesn't have any components </td></tr>
   </table>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="components_8inl_source.html#l00225">225</a> of file <a class="el" href="components_8inl_source.html">components.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="components_8inl_source.html#l00284">284</a> of file <a class="el" href="components_8inl_source.html">components.inl</a>.</p>
 
 </div>
 </div>
-<a id="a3d5abd337e79a6b25c94bf1c9fb85bba"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3d5abd337e79a6b25c94bf1c9fb85bba">&#9670;&nbsp;</a></span>end() <span class="overload">[1/2]</span></h2>
+<a id="aacc4f35aa1b72b4430f241163ca05b48"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aacc4f35aa1b72b4430f241163ca05b48">&#9670;&nbsp;</a></span>get() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class base_component_t &gt; </div>
+template&lt;std::derived_from&lt; rtti_pure_base &gt; base_component_t&gt; </div>
+<div class="memtemplate">
+template&lt;std::derived_from&lt; base_component_t &gt; component_t&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">auto <a class="el" href="classqx_1_1components.html">qx::components</a>&lt; base_component_t &gt;::end</td>
+          <td class="memname">const component_t &amp; <a class="el" href="classqx_1_1components.html">qx::components</a>&lt; base_component_t &gt;::get</td>
         </tr>
       </table>
   </td>
@@ -648,31 +282,39 @@ template&lt;class base_component_t &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Return iterator to end. </p>
+<p>Get a component of the given type with the highest priority (no existence checks are performed) </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">component_t</td><td>- component type which doesn't have to be a final class type, may be any base or super type </td></tr>
+  </table>
+  </dd>
+</dl>
 <dl class="retval"><dt>Return values</dt><dd>
   <table class="retval">
-    <tr><td class="paramname">-</td><td>iterator to end </td></tr>
+    <tr><td class="paramname">-</td><td>component reference </td></tr>
   </table>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="components_8inl_source.html#l00177">177</a> of file <a class="el" href="components_8inl_source.html">components.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="components_8inl_source.html#l00141">141</a> of file <a class="el" href="components_8inl_source.html">components.inl</a>.</p>
 
 </div>
 </div>
-<a id="a63fcc62ff80acbde05e650a23d15f779"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a63fcc62ff80acbde05e650a23d15f779">&#9670;&nbsp;</a></span>end() <span class="overload">[2/2]</span></h2>
+<a id="aced96f5243a619d1db27b2f751f2ad3c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aced96f5243a619d1db27b2f751f2ad3c">&#9670;&nbsp;</a></span>get() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class base_component_t &gt; </div>
+template&lt;std::derived_from&lt; rtti_pure_base &gt; base_component_t&gt; </div>
+<div class="memtemplate">
+template&lt;std::derived_from&lt; base_component_t &gt; component_t&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">auto <a class="el" href="classqx_1_1components.html">qx::components</a>&lt; base_component_t &gt;::end</td>
+          <td class="memname">component_t &amp; <a class="el" href="classqx_1_1components.html">qx::components</a>&lt; base_component_t &gt;::get</td>
         </tr>
       </table>
   </td>
@@ -682,158 +324,363 @@ template&lt;class base_component_t &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Return iterator to end. </p>
+<p>Get a component of the given type with the highest priority (no existence checks are performed) </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">component_t</td><td>- component type which doesn't have to be a final class type, may be any base or super type </td></tr>
+  </table>
+  </dd>
+</dl>
 <dl class="retval"><dt>Return values</dt><dd>
   <table class="retval">
-    <tr><td class="paramname">-</td><td>iterator to end </td></tr>
+    <tr><td class="paramname">-</td><td>component reference </td></tr>
   </table>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="components_8inl_source.html#l00165">165</a> of file <a class="el" href="components_8inl_source.html">components.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="components_8inl_source.html#l00126">126</a> of file <a class="el" href="components_8inl_source.html">components.inl</a>.</p>
 
 </div>
 </div>
-<a id="a853a333057af5eba03c54197f1a94b13"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a853a333057af5eba03c54197f1a94b13">&#9670;&nbsp;</a></span>extract()</h2>
+<a id="a639da139940938b530f187177f85540a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a639da139940938b530f187177f85540a">&#9670;&nbsp;</a></span>get_priority()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class base_component_t &gt; </div>
-<div class="memtemplate">
-template&lt;class component_t &gt; </div>
+template&lt;std::derived_from&lt; rtti_pure_base &gt; base_component_t&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classqx_1_1components.html">components</a>&lt; base_component_t &gt;::pointer <a class="el" href="classqx_1_1components.html">qx::components</a>&lt; base_component_t &gt;::extract</td>
+          <td class="memname">std::optional&lt; <a class="el" href="priority_8h.html#a596815b7b01439344e1858a12743c8ec">priority</a> &gt; <a class="el" href="classqx_1_1components.html">qx::components</a>&lt; base_component_t &gt;::get_priority </td>
+          <td>(</td>
+          <td class="paramtype">const base_component_t *&#160;</td>
+          <td class="paramname"><em>pRawComponent</em></td><td>)</td>
+          <td> const</td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p>Extract component from container. </p>
-<dl class="tparams"><dt>Template Parameters</dt><dd>
-  <table class="tparams">
-    <tr><td class="paramname">component_t</td><td>- the type-identifier that was used when adding the component </td></tr>
+<p>Get a priority of a given component. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">pRawComponent</td><td>- raw component pointer which acts like a component's handle </td></tr>
   </table>
   </dd>
 </dl>
 <dl class="retval"><dt>Return values</dt><dd>
   <table class="retval">
-    <tr><td class="paramname">-</td><td>component unique pointer or nullptr if not found </td></tr>
+    <tr><td class="paramname">-</td><td>component's priority or nullopt if can't find the component </td></tr>
   </table>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="components_8inl_source.html#l00111">111</a> of file <a class="el" href="components_8inl_source.html">components.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="components_8inl_source.html#l00185">185</a> of file <a class="el" href="components_8inl_source.html">components.inl</a>.</p>
 
 </div>
 </div>
-<a id="a5a669ad9126314ca79966ea69e1f78d0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5a669ad9126314ca79966ea69e1f78d0">&#9670;&nbsp;</a></span>get()</h2>
+<a id="abe0e3e7b3a40167f5ccd16e07aa363ec"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abe0e3e7b3a40167f5ccd16e07aa363ec">&#9670;&nbsp;</a></span>get_status()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class base_component_t &gt; </div>
-<div class="memtemplate">
-template&lt;class component_t &gt; </div>
+template&lt;std::derived_from&lt; rtti_pure_base &gt; base_component_t&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">component_t * <a class="el" href="classqx_1_1components.html">qx::components</a>&lt; base_component_t &gt;::get</td>
+          <td class="memname">std::optional&lt; <a class="el" href="classqx_1_1flags.html">flags</a>&lt; status &gt; &gt; <a class="el" href="classqx_1_1components.html">qx::components</a>&lt; base_component_t &gt;::get_status </td>
+          <td>(</td>
+          <td class="paramtype">const base_component_t *&#160;</td>
+          <td class="paramname"><em>pRawComponent</em></td><td>)</td>
+          <td> const</td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p>Get first component with TKeyComponent key. </p>
-<dl class="section note"><dt>Note</dt><dd>"founded first" is not "added first" </dd></dl>
-<dl class="tparams"><dt>Template Parameters</dt><dd>
-  <table class="tparams">
-    <tr><td class="paramname">component_t</td><td>- the type-identifier that was used when adding the component </td></tr>
+<p>Get a status of a given component. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">pRawComponent</td><td>- raw component pointer which acts like a component's handle </td></tr>
   </table>
   </dd>
 </dl>
 <dl class="retval"><dt>Return values</dt><dd>
   <table class="retval">
-    <tr><td class="paramname">-</td><td>component pointer or nullptr if not found </td></tr>
+    <tr><td class="paramname">-</td><td>status </td></tr>
   </table>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="components_8inl_source.html#l00071">71</a> of file <a class="el" href="components_8inl_source.html">components.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="components_8inl_source.html#l00236">236</a> of file <a class="el" href="components_8inl_source.html">components.inl</a>.</p>
 
 </div>
 </div>
-<a id="a82ebca7bb18cbb3643c9aabf2eb89eb3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a82ebca7bb18cbb3643c9aabf2eb89eb3">&#9670;&nbsp;</a></span>get_all()</h2>
+<a id="a32a6c5ce85888ab9da83d09749325602"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a32a6c5ce85888ab9da83d09749325602">&#9670;&nbsp;</a></span>remove()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class base_component_t &gt; </div>
-<div class="memtemplate">
-template&lt;class component_t &gt; </div>
+template&lt;std::derived_from&lt; rtti_pure_base &gt; base_component_t&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">auto <a class="el" href="classqx_1_1components.html">qx::components</a>&lt; base_component_t &gt;::get_all</td>
+          <td class="memname">std::unique_ptr&lt; base_component_t &gt; <a class="el" href="classqx_1_1components.html">qx::components</a>&lt; base_component_t &gt;::remove </td>
+          <td>(</td>
+          <td class="paramtype">const base_component_t *&#160;</td>
+          <td class="paramname"><em>pRawComponent</em></td><td>)</td>
+          <td></td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p>Get all components with TKeyComponent key. </p>
-<dl class="tparams"><dt>Template Parameters</dt><dd>
-  <table class="tparams">
-    <tr><td class="paramname">component_t</td><td>- the type-identifier that was used when adding the component </td></tr>
+<p>Remove the component from the container. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">pRawComponent</td><td>- raw component pointer which acts like a component's handle </td></tr>
   </table>
   </dd>
 </dl>
 <dl class="retval"><dt>Return values</dt><dd>
   <table class="retval">
-    <tr><td class="paramname">-</td><td>components range </td></tr>
+    <tr><td class="paramname">-</td><td>component object </td></tr>
   </table>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="components_8inl_source.html#l00098">98</a> of file <a class="el" href="components_8inl_source.html">components.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="components_8inl_source.html#l00048">48</a> of file <a class="el" href="components_8inl_source.html">components.inl</a>.</p>
 
 </div>
 </div>
-<a id="a1e71fd4d5e9d765e5f43c4108518fcf3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1e71fd4d5e9d765e5f43c4108518fcf3">&#9670;&nbsp;</a></span>get_all_by_id()</h2>
+<a id="a49749a130a1d7c1f50606a84c29fc4b9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a49749a130a1d7c1f50606a84c29fc4b9">&#9670;&nbsp;</a></span>set_priority()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class base_component_t &gt; </div>
+template&lt;std::derived_from&lt; rtti_pure_base &gt; base_component_t&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">auto <a class="el" href="classqx_1_1components.html">qx::components</a>&lt; base_component_t &gt;::get_all_by_id </td>
+          <td class="memname">bool <a class="el" href="classqx_1_1components.html">qx::components</a>&lt; base_component_t &gt;::set_priority </td>
+          <td>(</td>
+          <td class="paramtype">const base_component_t *&#160;</td>
+          <td class="paramname"><em>pRawComponent</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="priority_8h.html#a596815b7b01439344e1858a12743c8ec">priority</a>&#160;</td>
+          <td class="paramname"><em>ePriority</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Set a priority of a given component. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">pRawComponent</td><td>- raw component pointer which acts like a component's handle </td></tr>
+    <tr><td class="paramname">ePriority</td><td>- new component's priority </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Return values</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">-</td><td>true if the component is found and a priority was set </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="components_8inl_source.html#l00202">202</a> of file <a class="el" href="components_8inl_source.html">components.inl</a>.</p>
+
+</div>
+</div>
+<a id="ad0c912d973b5eddafbe000df2680bbe8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad0c912d973b5eddafbe000df2680bbe8">&#9670;&nbsp;</a></span>set_status()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;std::derived_from&lt; rtti_pure_base &gt; base_component_t&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool <a class="el" href="classqx_1_1components.html">qx::components</a>&lt; base_component_t &gt;::set_status </td>
+          <td>(</td>
+          <td class="paramtype">const base_component_t *&#160;</td>
+          <td class="paramname"><em>pRawComponent</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classqx_1_1flags.html">flags</a>&lt; status &gt;&#160;</td>
+          <td class="paramname"><em>status</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Set a status of a given component. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">pRawComponent</td><td>- raw component pointer which acts like a component's handle </td></tr>
+    <tr><td class="paramname">status</td><td>- new component's status </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Return values</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">-</td><td>true if the component is found and a status was set </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="components_8inl_source.html#l00254">254</a> of file <a class="el" href="components_8inl_source.html">components.inl</a>.</p>
+
+</div>
+</div>
+<a id="a9d595c639d2c6ef34a6ff023b3ba2708"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9d595c639d2c6ef34a6ff023b3ba2708">&#9670;&nbsp;</a></span>try_get() <span class="overload">[1/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;std::derived_from&lt; rtti_pure_base &gt; base_component_t&gt; </div>
+<div class="memtemplate">
+template&lt;std::derived_from&lt; base_component_t &gt; component_t&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const component_t * <a class="el" href="classqx_1_1components.html">qx::components</a>&lt; base_component_t &gt;::try_get</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Try to get a component of the given type with the highest priority. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">component_t</td><td>- component type which doesn't have to be a final class type, may be any base or super type </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Return values</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">-</td><td>component pointer or nullptr </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="components_8inl_source.html#l00097">97</a> of file <a class="el" href="components_8inl_source.html">components.inl</a>.</p>
+
+</div>
+</div>
+<a id="a60a4050544b0694e378e176e01089d4d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a60a4050544b0694e378e176e01089d4d">&#9670;&nbsp;</a></span>try_get() <span class="overload">[2/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;std::derived_from&lt; rtti_pure_base &gt; base_component_t&gt; </div>
+<div class="memtemplate">
+template&lt;std::derived_from&lt; base_component_t &gt; component_t&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">component_t * <a class="el" href="classqx_1_1components.html">qx::components</a>&lt; base_component_t &gt;::try_get</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Try to get a component of the given type with the highest priority. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">component_t</td><td>- component type which doesn't have to be a final class type, may be any base or super type </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Return values</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">-</td><td>component pointer or nullptr </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="components_8inl_source.html#l00082">82</a> of file <a class="el" href="components_8inl_source.html">components.inl</a>.</p>
+
+</div>
+</div>
+<a id="a8119788912d5542d14bd7c90efe53578"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8119788912d5542d14bd7c90efe53578">&#9670;&nbsp;</a></span>try_get() <span class="overload">[3/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;std::derived_from&lt; rtti_pure_base &gt; base_component_t&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const base_component_t * <a class="el" href="classqx_1_1components.html">qx::components</a>&lt; base_component_t &gt;::try_get </td>
           <td>(</td>
           <td class="paramtype">class_identificator&#160;</td>
           <td class="paramname"><em>id</em></td><td>)</td>
@@ -842,87 +689,88 @@ template&lt;class base_component_t &gt; </div>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p>Get all components with "class_identificator" key. </p>
+<p>Try to get a component of the given type id with the highest priority. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">id</td><td>- class id </td></tr>
+    <tr><td class="paramname">id</td><td>- type id </td></tr>
   </table>
   </dd>
 </dl>
 <dl class="retval"><dt>Return values</dt><dd>
   <table class="retval">
-    <tr><td class="paramname">-</td><td>components range </td></tr>
+    <tr><td class="paramname">-</td><td>component pointer or nullptr </td></tr>
   </table>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="components_8inl_source.html#l00104">104</a> of file <a class="el" href="components_8inl_source.html">components.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="components_8inl_source.html#l00119">119</a> of file <a class="el" href="components_8inl_source.html">components.inl</a>.</p>
 
 </div>
 </div>
-<a id="a10c1b3547ff8de29bfbaa918dd0d4fcb"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a10c1b3547ff8de29bfbaa918dd0d4fcb">&#9670;&nbsp;</a></span>get_by_id()</h2>
+<a id="ad73334195fe4f049ea8ad6eb213f5c4d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad73334195fe4f049ea8ad6eb213f5c4d">&#9670;&nbsp;</a></span>try_get() <span class="overload">[4/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class base_component_t &gt; </div>
+template&lt;std::derived_from&lt; rtti_pure_base &gt; base_component_t&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">base_component_t * <a class="el" href="classqx_1_1components.html">qx::components</a>&lt; base_component_t &gt;::get_by_id </td>
+          <td class="memname">base_component_t * <a class="el" href="classqx_1_1components.html">qx::components</a>&lt; base_component_t &gt;::try_get </td>
           <td>(</td>
           <td class="paramtype">class_identificator&#160;</td>
           <td class="paramname"><em>id</em></td><td>)</td>
-          <td> const</td>
+          <td></td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p>Get first component with "class_identificator" key. </p>
-<dl class="section note"><dt>Note</dt><dd>"founded first" is not "added first" </dd></dl>
+<p>Try to get a component of the given type id with the highest priority. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">id</td><td>- class id </td></tr>
+    <tr><td class="paramname">id</td><td>- type id </td></tr>
   </table>
   </dd>
 </dl>
 <dl class="retval"><dt>Return values</dt><dd>
   <table class="retval">
-    <tr><td class="paramname">-</td><td>component pointer or nullptr if not found </td></tr>
+    <tr><td class="paramname">-</td><td>component pointer or nullptr </td></tr>
   </table>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="components_8inl_source.html#l00077">77</a> of file <a class="el" href="components_8inl_source.html">components.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="components_8inl_source.html#l00103">103</a> of file <a class="el" href="components_8inl_source.html">components.inl</a>.</p>
 
 </div>
 </div>
-<a id="a8243c142d922c2057e8ae391c453b206"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8243c142d922c2057e8ae391c453b206">&#9670;&nbsp;</a></span>rbegin()</h2>
+<a id="ac35f1f6652c15018363a439391f49ae4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac35f1f6652c15018363a439391f49ae4">&#9670;&nbsp;</a></span>view() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class base_component_t &gt; </div>
+template&lt;std::derived_from&lt; rtti_pure_base &gt; base_component_t&gt; </div>
+<div class="memtemplate">
+template&lt;std::derived_from&lt; base_component_t &gt; component_t&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">auto <a class="el" href="classqx_1_1components.html">qx::components</a>&lt; base_component_t &gt;::rbegin</td>
+          <td class="memname">auto <a class="el" href="classqx_1_1components.html">qx::components</a>&lt; base_component_t &gt;::view</td>
         </tr>
       </table>
   </td>
@@ -932,161 +780,63 @@ template&lt;class base_component_t &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Return reverse iterator to reverse beginning. </p>
-<dl class="retval"><dt>Return values</dt><dd>
-  <table class="retval">
-    <tr><td class="paramname">-</td><td>reverse iterator to reverse beginning </td></tr>
-  </table>
-  </dd>
-</dl>
-
-<p class="definition">Definition at line <a class="el" href="components_8inl_source.html#l00195">195</a> of file <a class="el" href="components_8inl_source.html">components.inl</a>.</p>
-
-</div>
-</div>
-<a id="acd2522cd0cc6b886928655d762a0f7d7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#acd2522cd0cc6b886928655d762a0f7d7">&#9670;&nbsp;</a></span>remove()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class base_component_t &gt; </div>
-<div class="memtemplate">
-template&lt;class component_t &gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool <a class="el" href="classqx_1_1components.html">qx::components</a>&lt; base_component_t &gt;::remove</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Remove component from container. </p>
+<p>Get a view which may be used in a ranged-based for loop and consists of components of a given type with decreasing non-disabled priority. </p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
-    <tr><td class="paramname">component_t</td><td>- the type-identifier that was used when adding the component </td></tr>
+    <tr><td class="paramname">component_t</td><td>- component type which doesn't have to be a final class type, may be any base or super type </td></tr>
   </table>
   </dd>
 </dl>
 <dl class="retval"><dt>Return values</dt><dd>
   <table class="retval">
-    <tr><td class="paramname">-</td><td>true if removed </td></tr>
+    <tr><td class="paramname">-</td><td>view of components </td></tr>
   </table>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="components_8inl_source.html#l00138">138</a> of file <a class="el" href="components_8inl_source.html">components.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="components_8inl_source.html#l00167">167</a> of file <a class="el" href="components_8inl_source.html">components.inl</a>.</p>
 
 </div>
 </div>
-<a id="a47c3757426ffd1759eac3316a08f6fcf"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a47c3757426ffd1759eac3316a08f6fcf">&#9670;&nbsp;</a></span>remove_all()</h2>
+<a id="aa958b4902c458ed09661be9126a22ed0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa958b4902c458ed09661be9126a22ed0">&#9670;&nbsp;</a></span>view() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class base_component_t &gt; </div>
+template&lt;std::derived_from&lt; rtti_pure_base &gt; base_component_t&gt; </div>
 <div class="memtemplate">
-template&lt;class component_t &gt; </div>
+template&lt;std::derived_from&lt; base_component_t &gt; component_t&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="classqx_1_1components.html">qx::components</a>&lt; base_component_t &gt;::remove_all</td>
+          <td class="memname">auto <a class="el" href="classqx_1_1components.html">qx::components</a>&lt; base_component_t &gt;::view</td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p>Remove all components with "type" key from container. </p>
+<p>Get a view which may be used in a ranged-based for loop and consists of components of a given type with decreasing non-disabled priority. </p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
-    <tr><td class="paramname">component_t</td><td>- the type-identifier that was used when adding the component </td></tr>
+    <tr><td class="paramname">component_t</td><td>- component type which doesn't have to be a final class type, may be any base or super type </td></tr>
   </table>
   </dd>
 </dl>
-
-<p class="definition">Definition at line <a class="el" href="components_8inl_source.html#l00145">145</a> of file <a class="el" href="components_8inl_source.html">components.inl</a>.</p>
-
-</div>
-</div>
-<a id="a683ca15a6345435c068187cbf4eb9de8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a683ca15a6345435c068187cbf4eb9de8">&#9670;&nbsp;</a></span>rend()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class base_component_t &gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">auto <a class="el" href="classqx_1_1components.html">qx::components</a>&lt; base_component_t &gt;::rend</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Return reverse iterator to reverse end. </p>
 <dl class="retval"><dt>Return values</dt><dd>
   <table class="retval">
-    <tr><td class="paramname">-</td><td>reverse iterator to reverse end </td></tr>
+    <tr><td class="paramname">-</td><td>view of components </td></tr>
   </table>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="components_8inl_source.html#l00201">201</a> of file <a class="el" href="components_8inl_source.html">components.inl</a>.</p>
-
-</div>
-</div>
-<a id="ad14db6f9ccd88d6556d7ce50fd402bb5"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad14db6f9ccd88d6556d7ce50fd402bb5">&#9670;&nbsp;</a></span>size()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class base_component_t &gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">size_t <a class="el" href="classqx_1_1components.html">qx::components</a>&lt; base_component_t &gt;::size</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Get number of components in container. </p>
-<dl class="retval"><dt>Return values</dt><dd>
-  <table class="retval">
-    <tr><td class="paramname">-</td><td>number of components in container </td></tr>
-  </table>
-  </dd>
-</dl>
-
-<p class="definition">Definition at line <a class="el" href="components_8inl_source.html#l00219">219</a> of file <a class="el" href="components_8inl_source.html">components.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="components_8inl_source.html#l00148">148</a> of file <a class="el" href="components_8inl_source.html">components.inl</a>.</p>
 
 </div>
 </div>

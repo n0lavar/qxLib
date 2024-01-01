@@ -105,36 +105,44 @@ $(function() {
 <div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    } -&gt; std::convertible_to&lt;return_t&gt;;</div>
 <div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;};</div>
 <div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160; </div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="keyword">namespace </span>details</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;{</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160; </div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> range_t, <span class="keyword">class</span> T&gt;</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;concept is_iterator_arrow_operator_of_t_type = requires(range_t t) {</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    {</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;        t.begin().operator-&gt;()</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    } -&gt; std::convertible_to&lt;const T*&gt;;</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    {</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;        t.end().operator-&gt;()</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    } -&gt; std::convertible_to&lt;const T*&gt;;</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;};</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160; </div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> range_t, <span class="keyword">class</span> T&gt;</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;concept is_iterator_t_pointer = requires(range_t t) {</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    {</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;        t.begin()</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    } -&gt; std::convertible_to&lt;const T*&gt;;</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    {</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;        t.end()</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    } -&gt; std::convertible_to&lt;const T*&gt;;</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;};</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160; </div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;} <span class="comment">// namespace details</span></div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160; </div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> range_t, <span class="keyword">class</span> T&gt;</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;concept range_of_t_c =</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    details::is_iterator_arrow_operator_of_t_type&lt;range_t, T&gt; || details::is_iterator_t_pointer&lt;range_t, T&gt;;</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160; </div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;} <span class="comment">// namespace qx</span></div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="comment">// won&#39;t work for base_args_t containing template template or type template parameters</span></div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class </span>derived_t, <span class="keyword">template</span>&lt;<span class="keyword">class</span>... base_args_t&gt; <span class="keyword">class </span>base_t, class... partial_specialization_args_t&gt;</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;concept derived_from_template_c = requires(<span class="keyword">const</span> derived_t&amp; derived) {</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    []&lt;<span class="keyword">class</span>... base_args_t&gt;(<span class="keyword">const</span> base_t&lt;partial_specialization_args_t..., base_args_t...&gt;&amp;)</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    {</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    }(derived);</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;};</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160; </div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="keyword">namespace </span>details</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;{</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160; </div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> range_t, <span class="keyword">class</span> T&gt;</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;concept is_iterator_arrow_operator_of_t_type = requires(range_t t) {</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    {</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;        t.begin().operator-&gt;()</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    } -&gt; std::convertible_to&lt;const T*&gt;;</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    {</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;        t.end().operator-&gt;()</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    } -&gt; std::convertible_to&lt;const T*&gt;;</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;};</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160; </div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> range_t, <span class="keyword">class</span> T&gt;</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;concept is_iterator_t_pointer = requires(range_t t) {</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    {</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;        t.begin()</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    } -&gt; std::convertible_to&lt;const T*&gt;;</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    {</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;        t.end()</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    } -&gt; std::convertible_to&lt;const T*&gt;;</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;};</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160; </div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;} <span class="comment">// namespace details</span></div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160; </div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> range_t, <span class="keyword">class</span> T&gt;</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;concept range_of_t_c =</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    details::is_iterator_arrow_operator_of_t_type&lt;range_t, T&gt; || details::is_iterator_t_pointer&lt;range_t, T&gt;;</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160; </div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;} <span class="comment">// namespace qx</span></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

@@ -97,7 +97,7 @@ $(function() {
 <div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> container_t, <span class="keyword">class</span> value_t&gt;</div>
 <div class="line"><a name="l00027"></a><span class="lineno"><a class="line" href="add_8h.html#a2793e147664ac9ed1d4d9bcafe3d5e22">   27</a></span>&#160;<span class="keywordtype">bool</span> <a class="code" href="add_8h.html#a2793e147664ac9ed1d4d9bcafe3d5e22">add_unique</a>(container_t&amp; container, value_t&amp;&amp; value)</div>
 <div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;{</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    <span class="keywordflow">if</span> (!contains(container, value))</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    <span class="keywordflow">if</span> (!<a class="code" href="structcontains.html">contains</a>(container, value))</div>
 <div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    {</div>
 <div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;        container.insert(container.end(), std::forward&lt;value_t&gt;(value));</div>
 <div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;        <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
@@ -143,6 +143,7 @@ $(function() {
 <div class="ttc" id="aadd_8h_html_a2793e147664ac9ed1d4d9bcafe3d5e22"><div class="ttname"><a href="add_8h.html#a2793e147664ac9ed1d4d9bcafe3d5e22">qx::add_unique</a></div><div class="ttdeci">bool add_unique(container_t &amp;container, value_t &amp;&amp;value)</div><div class="ttdoc">Add an element to the container if it doesn't already contain one.</div><div class="ttdef"><b>Definition:</b> <a href="add_8h_source.html#l00027">add.h:27</a></div></div>
 <div class="ttc" id="aadd_8h_html_ab75e5db429f1de0a4ea8b94bc4effb51"><div class="ttname"><a href="add_8h.html#ab75e5db429f1de0a4ea8b94bc4effb51">qx::add_unique_if</a></div><div class="ttdeci">bool add_unique_if(container_t &amp;container, value_t &amp;&amp;value, const predicate_t &amp;predicate)</div><div class="ttdoc">Add an element to the container if all elements do not satisfy the predicate.</div><div class="ttdef"><b>Definition:</b> <a href="add_8h_source.html#l00051">add.h:51</a></div></div>
 <div class="ttc" id="acontains_8h_html"><div class="ttname"><a href="contains_8h.html">contains.h</a></div></div>
+<div class="ttc" id="astructcontains_html"><div class="ttname"><a href="structcontains.html">contains</a></div><div class="ttdoc">Check that tuple type contains T.</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

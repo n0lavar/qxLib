@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>qxLib: qx::reverse_iterator&lt; container_t &gt; Class Template Reference</title>
+<title>qxLib: qx::reverse_iterator&lt; container_t, derived_t &gt; Class Template Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -68,7 +68,7 @@ $(function() {
   <div class="summary">
 <a href="classqx_1_1reverse__iterator-members.html">List of all members</a>  </div>
   <div class="headertitle">
-<div class="title">qx::reverse_iterator&lt; container_t &gt; Class Template Reference</div>  </div>
+<div class="title">qx::reverse_iterator&lt; container_t, derived_t &gt; Class Template Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
@@ -76,9 +76,23 @@ $(function() {
  <a href="classqx_1_1reverse__iterator.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="iterator_8h_source.html">iterator.h</a>&gt;</code></p>
+<div class="dynheader">
+Inheritance diagram for qx::reverse_iterator&lt; container_t, derived_t &gt;:</div>
+<div class="dyncontent">
+ <div class="center">
+  <img src="classqx_1_1reverse__iterator.png" usemap="#qx::reverse_5Fiterator_3C_20container_5Ft_2C_20derived_5Ft_20_3E_map" alt=""/>
+  <map id="qx::reverse_5Fiterator_3C_20container_5Ft_2C_20derived_5Ft_20_3E_map" name="qx::reverse_5Fiterator_3C_20container_5Ft_2C_20derived_5Ft_20_3E_map">
+<area href="classqx_1_1base__reverse__iterator.html" alt="qx::base_reverse_iterator&lt; container_t, std::conditional_t&lt; std::same_as&lt; void, void &gt;, reverse_iterator&lt; container_t &gt;, void &gt; &gt;" shape="rect" coords="375,56,1115,80"/>
+<area href="classqx_1_1base__iterator.html" title="Base contiguous iterator with a container pointer and an index." alt="qx::base_iterator&lt; container_t &gt;" shape="rect" coords="375,0,1115,24"/>
+<area href="classqx_1_1base__dereference__iterator.html" alt="qx::base_dereference_iterator&lt; reverse_iterator&lt; container_t, reverse_dereference_iterator&lt; container_t &gt; &gt; &gt;" shape="rect" coords="0,168,740,192"/>
+<area href="classqx_1_1base__return__object__iterator.html" alt="qx::base_return_object_iterator&lt; reverse_iterator&lt; container_t, reverse_return_object_iterator&lt; container_t &gt; &gt; &gt;" shape="rect" coords="750,168,1490,192"/>
+<area href="classqx_1_1reverse__dereference__iterator.html" alt="qx::reverse_dereference_iterator&lt; container_t &gt;" shape="rect" coords="0,224,740,248"/>
+<area href="classqx_1_1reverse__return__object__iterator.html" alt="qx::reverse_return_object_iterator&lt; container_t &gt;" shape="rect" coords="750,224,1490,248"/>
+  </map>
+</div></div>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><h3>template&lt;class container_t&gt;<br />
-class qx::reverse_iterator&lt; container_t &gt;</h3>
+<div class="textblock"><h3>template&lt;class container_t, class derived_t = void&gt;<br />
+class qx::reverse_iterator&lt; container_t, derived_t &gt;</h3>
 
 <p>Non-const random access reverse iterator type. </p>
 <p>Use it for range-based loops and std algorithms container_t have to provide at(size_t) </p><dl class="tparams"><dt>Template Parameters</dt><dd>
@@ -90,9 +104,9 @@ class qx::reverse_iterator&lt; container_t &gt;</h3>
 <dl class="section author"><dt>Author</dt><dd>Khrapov </dd></dl>
 <dl class="section date"><dt>Date</dt><dd>27.07.2019 </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="iterator_8h_source.html#l00297">297</a> of file <a class="el" href="iterator_8h_source.html">iterator.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="iterator_8h_source.html#l00115">115</a> of file <a class="el" href="iterator_8h_source.html">iterator.h</a>.</p>
 </div><hr/>The documentation for this class was generated from the following file:<ul>
-<li>include/qx/patterns/<a class="el" href="iterator_8h_source.html">iterator.h</a></li>
+<li>include/qx/patterns/contiguous_iterator/<a class="el" href="iterator_8h_source.html">iterator.h</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

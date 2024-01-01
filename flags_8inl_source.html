@@ -306,7 +306,7 @@ $(function() {
 <div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160;    requires(<span class="keyword">sizeof</span>...(args_t) &gt;= 2 &amp;&amp; are_specific_v&lt;enum_t, args_t...&gt;)</div>
 <div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160;constexpr <span class="keywordtype">bool</span> flags&lt;enum_t&gt;::contains_all(args_t... flags) <span class="keyword">const</span> noexcept</div>
 <div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;{</div>
-<div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160;    <span class="keywordflow">return</span> (contains(flags) &amp;&amp; ...);</div>
+<div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160;    <span class="keywordflow">return</span> (<a class="code" href="structcontains.html">contains</a>(flags) &amp;&amp; ...);</div>
 <div class="line"><a name="l00239"></a><span class="lineno">  239</span>&#160;}</div>
 <div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160; </div>
 <div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160;<span class="keyword">template</span>&lt;enumeration_c enum_t&gt;</div>
@@ -314,7 +314,7 @@ $(function() {
 <div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160;    requires(<span class="keyword">sizeof</span>...(args_t) &gt;= 2 &amp;&amp; are_specific_v&lt;enum_t, args_t...&gt;)</div>
 <div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160;constexpr <span class="keywordtype">bool</span> flags&lt;enum_t&gt;::contains_any(args_t... flags) <span class="keyword">const</span> noexcept</div>
 <div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160;{</div>
-<div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160;    <span class="keywordflow">return</span> (contains(flags) || ...);</div>
+<div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160;    <span class="keywordflow">return</span> (<a class="code" href="structcontains.html">contains</a>(flags) || ...);</div>
 <div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160;}</div>
 <div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160; </div>
 <div class="line"><a name="l00249"></a><span class="lineno">  249</span>&#160;<span class="keyword">template</span>&lt;enumeration_c enum_t&gt;</div>
@@ -333,6 +333,7 @@ $(function() {
 <div class="ttc" id="aclassqx_1_1flags_html_aaa67208820f4ce4e91ed493fb8315b3c"><div class="ttname"><a href="classqx_1_1flags.html#aaa67208820f4ce4e91ed493fb8315b3c">qx::flags::reverse</a></div><div class="ttdeci">constexpr void reverse() noexcept</div><div class="ttdoc">Reverse (or logically negotiate) all bits.</div><div class="ttdef"><b>Definition:</b> <a href="flags_8inl_source.html#l00014">flags.inl:14</a></div></div>
 <div class="ttc" id="aclassqx_1_1flags_html_ac25b77ed3fe2aa474031d4814aab8601"><div class="ttname"><a href="classqx_1_1flags.html#ac25b77ed3fe2aa474031d4814aab8601">qx::flags::shift_right</a></div><div class="ttdeci">constexpr void shift_right(size_t nShift) noexcept</div><div class="ttdoc">Shift bits to the right.</div><div class="ttdef"><b>Definition:</b> <a href="flags_8inl_source.html#l00026">flags.inl:26</a></div></div>
 <div class="ttc" id="aclassqx_1_1flags_html_afe078e3579f482a55bdbd62a77c32bbf"><div class="ttname"><a href="classqx_1_1flags.html#afe078e3579f482a55bdbd62a77c32bbf">qx::flags::to_integer</a></div><div class="ttdeci">constexpr underlying_type to_integer() const noexcept</div><div class="ttdoc">Convert to the corresponding integer value.</div></div>
+<div class="ttc" id="astructcontains_html"><div class="ttname"><a href="structcontains.html">contains</a></div><div class="ttdoc">Check that tuple type contains T.</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

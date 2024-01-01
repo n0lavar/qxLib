@@ -87,12 +87,20 @@ Functions</h2></td></tr>
 <tr class="separator:a6daaac6c1da8ba6728a1148811074087"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6d6544d79558649a87ccaa597c4e99ec"><td class="memTemplParams" colspan="2">template&lt;class fwd_it_t , class predicate_t &gt; </td></tr>
 <tr class="memitem:a6d6544d79558649a87ccaa597c4e99ec"><td class="memTemplItemLeft" align="right" valign="top">bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="contains_8h.html#a6d6544d79558649a87ccaa597c4e99ec">qx::contains_if</a> (fwd_it_t itBegin, fwd_it_t itEnd, const predicate_t &amp;predicate)</td></tr>
-<tr class="memdesc:a6d6544d79558649a87ccaa597c4e99ec"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if at least one of range elements satisfies predicate.  <a href="contains_8h.html#a6d6544d79558649a87ccaa597c4e99ec">More...</a><br /></td></tr>
+<tr class="memdesc:a6d6544d79558649a87ccaa597c4e99ec"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if at least one of range's elements satisfies a predicate.  <a href="contains_8h.html#a6d6544d79558649a87ccaa597c4e99ec">More...</a><br /></td></tr>
 <tr class="separator:a6d6544d79558649a87ccaa597c4e99ec"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8417abd30836a0cc5acb1e48a93be86c"><td class="memTemplParams" colspan="2">template&lt;class container_t , class predicate_t &gt; </td></tr>
 <tr class="memitem:a8417abd30836a0cc5acb1e48a93be86c"><td class="memTemplItemLeft" align="right" valign="top">bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="contains_8h.html#a8417abd30836a0cc5acb1e48a93be86c">qx::contains_if</a> (const container_t &amp;container, const predicate_t &amp;predicate)</td></tr>
-<tr class="memdesc:a8417abd30836a0cc5acb1e48a93be86c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if at least one of container elements satisfies predicate.  <a href="contains_8h.html#a8417abd30836a0cc5acb1e48a93be86c">More...</a><br /></td></tr>
+<tr class="memdesc:a8417abd30836a0cc5acb1e48a93be86c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if at least one of range's elements satisfies a predicate.  <a href="contains_8h.html#a8417abd30836a0cc5acb1e48a93be86c">More...</a><br /></td></tr>
 <tr class="separator:a8417abd30836a0cc5acb1e48a93be86c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a033251099d2096e0a16a137d0c537cd2"><td class="memTemplParams" colspan="2">template&lt;class where_fwd_it_t , class what_fwd_it_t &gt; </td></tr>
+<tr class="memitem:a033251099d2096e0a16a137d0c537cd2"><td class="memTemplItemLeft" align="right" valign="top">constexpr bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="contains_8h.html#a033251099d2096e0a16a137d0c537cd2">qx::contains_any</a> (where_fwd_it_t itWhereBegin, where_fwd_it_t itWhereEnd, what_fwd_it_t itWhatBegin, what_fwd_it_t itWhatEnd)</td></tr>
+<tr class="memdesc:a033251099d2096e0a16a137d0c537cd2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check that at least one element from the first range is equal to at least one element from the second range.  <a href="contains_8h.html#a033251099d2096e0a16a137d0c537cd2">More...</a><br /></td></tr>
+<tr class="separator:a033251099d2096e0a16a137d0c537cd2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6acc2da0539ae07a8245d9e240e0e952"><td class="memTemplParams" colspan="2">template&lt;class where_container_t , class what_container_t &gt; </td></tr>
+<tr class="memitem:a6acc2da0539ae07a8245d9e240e0e952"><td class="memTemplItemLeft" align="right" valign="top">constexpr bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="contains_8h.html#a6acc2da0539ae07a8245d9e240e0e952">qx::contains_any</a> (const where_container_t &amp;whereContainer, const what_container_t &amp;whatContainer)</td></tr>
+<tr class="memdesc:a6acc2da0539ae07a8245d9e240e0e952"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check that at least one element from the first range is equal to at least one element from the second range.  <a href="contains_8h.html#a6acc2da0539ae07a8245d9e240e0e952">More...</a><br /></td></tr>
+<tr class="separator:a6acc2da0539ae07a8245d9e240e0e952"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><dl class="section author"><dt>Author</dt><dd>Khrapov </dd></dl>
@@ -216,6 +224,144 @@ template&lt;class fwd_it_t , class T &gt; </div>
 
 </div>
 </div>
+<a id="a6acc2da0539ae07a8245d9e240e0e952"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6acc2da0539ae07a8245d9e240e0e952">&#9670;&nbsp;</a></span>contains_any() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class where_container_t , class what_container_t &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr bool qx::contains_any </td>
+          <td>(</td>
+          <td class="paramtype">const where_container_t &amp;&#160;</td>
+          <td class="paramname"><em>whereContainer</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const what_container_t &amp;&#160;</td>
+          <td class="paramname"><em>whatContainer</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Check that at least one element from the first range is equal to at least one element from the second range. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">where_container_t</td><td>- first range's type </td></tr>
+    <tr><td class="paramname">what_container_t</td><td>- second range's type </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">whereContainer</td><td>- first range </td></tr>
+    <tr><td class="paramname">whatContainer</td><td>- second range </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Return values</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">-</td><td>true if found </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="contains_8h_source.html#l00107">107</a> of file <a class="el" href="contains_8h_source.html">contains.h</a>.</p>
+
+</div>
+</div>
+<a id="a033251099d2096e0a16a137d0c537cd2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a033251099d2096e0a16a137d0c537cd2">&#9670;&nbsp;</a></span>contains_any() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class where_fwd_it_t , class what_fwd_it_t &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr bool qx::contains_any </td>
+          <td>(</td>
+          <td class="paramtype">where_fwd_it_t&#160;</td>
+          <td class="paramname"><em>itWhereBegin</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">where_fwd_it_t&#160;</td>
+          <td class="paramname"><em>itWhereEnd</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">what_fwd_it_t&#160;</td>
+          <td class="paramname"><em>itWhatBegin</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">what_fwd_it_t&#160;</td>
+          <td class="paramname"><em>itWhatEnd</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Check that at least one element from the first range is equal to at least one element from the second range. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">where_fwd_it_t</td><td>- first range's iterator type </td></tr>
+    <tr><td class="paramname">what_fwd_it_t</td><td>- second range's iterator type </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">itWhereBegin</td><td>- first range's start iterator </td></tr>
+    <tr><td class="paramname">itWhereEnd</td><td>- first range's end iterator </td></tr>
+    <tr><td class="paramname">itWhatBegin</td><td>- second range's start iterator </td></tr>
+    <tr><td class="paramname">itWhatEnd</td><td>- second range's end iterator </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Return values</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">-</td><td>true if found </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="contains_8h_source.html#l00085">85</a> of file <a class="el" href="contains_8h_source.html">contains.h</a>.</p>
+
+</div>
+</div>
 <a id="a8417abd30836a0cc5acb1e48a93be86c"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a8417abd30836a0cc5acb1e48a93be86c">&#9670;&nbsp;</a></span>contains_if() <span class="overload">[1/2]</span></h2>
 
@@ -244,7 +390,7 @@ template&lt;class container_t , class predicate_t &gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p>Check if at least one of container elements satisfies predicate. </p>
+<p>Check if at least one of range's elements satisfies a predicate. </p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
     <tr><td class="paramname">container_t</td><td>- container type </td></tr>
@@ -304,7 +450,7 @@ template&lt;class fwd_it_t , class predicate_t &gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p>Check if at least one of range elements satisfies predicate. </p>
+<p>Check if at least one of range's elements satisfies a predicate. </p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
     <tr><td class="paramname">fwd_it_t</td><td>- forward iterator type </td></tr>
@@ -322,7 +468,7 @@ template&lt;class fwd_it_t , class predicate_t &gt; </div>
 </dl>
 <dl class="retval"><dt>Return values</dt><dd>
   <table class="retval">
-    <tr><td class="paramname">-</td><td>true if at least one of range elements satisfies predicate </td></tr>
+    <tr><td class="paramname">-</td><td>true if at least one of range elements satisfies a predicate </td></tr>
   </table>
   </dd>
 </dl>

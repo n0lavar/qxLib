@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>qxLib: include/qx/patterns/iterator.h File Reference</title>
+<title>qxLib: include/qx/patterns/contiguous_iterator/iterator.h File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -61,7 +61,7 @@ $(function() {
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="dir_6159fad94d64d847460e6e9a559e7dc6.html">qx</a></li><li class="navelem"><a class="el" href="dir_ac13e90c66f93b2c9892fc43a6530af6.html">patterns</a></li>  </ul>
+<li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="dir_6159fad94d64d847460e6e9a559e7dc6.html">qx</a></li><li class="navelem"><a class="el" href="dir_ac13e90c66f93b2c9892fc43a6530af6.html">patterns</a></li><li class="navelem"><a class="el" href="dir_a025a63e18c6ed56f13987ec87763926.html">contiguous_iterator</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
@@ -71,32 +71,29 @@ $(function() {
 <div class="title">iterator.h File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><code>#include &lt;iterator&gt;</code><br />
+<div class="textblock"><code>#include &lt;<a class="el" href="base__iterator_8h_source.html">qx/patterns/contiguous_iterator/base_iterator.h</a>&gt;</code><br />
 </div>
 <p><a href="iterator_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Classes</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1iterator.html">qx::iterator&lt; container_t &gt;</a></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1iterator.html">qx::iterator&lt; container_t, derived_t &gt;</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Non-const random access iterator type.  <a href="classqx_1_1iterator.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1const__iterator.html">qx::const_iterator&lt; container_t &gt;</a></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1const__iterator.html">qx::const_iterator&lt; container_t, derived_t &gt;</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Const random access iterator type.  <a href="classqx_1_1const__iterator.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1reverse__iterator.html">qx::reverse_iterator&lt; container_t &gt;</a></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1reverse__iterator.html">qx::reverse_iterator&lt; container_t, derived_t &gt;</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Non-const random access reverse iterator type.  <a href="classqx_1_1reverse__iterator.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1const__reverse__iterator.html">qx::const_reverse_iterator&lt; container_t &gt;</a></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1const__reverse__iterator.html">qx::const_reverse_iterator&lt; container_t, derived_t &gt;</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Const reverse random access iterator type.  <a href="classqx_1_1const__reverse__iterator.html#details">More...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1base__return__object__iterator.html">qx::base_return_object_iterator&lt; container_t, base_iterator_t &gt;</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">This kind of iterator returns value and not reference in access methods.  <a href="classqx_1_1base__return__object__iterator.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><dl class="section author"><dt>Author</dt><dd>Khrapov </dd></dl>
-<dl class="section date"><dt>Date</dt><dd>27.07.2019 </dd></dl>
-<dl class="section copyright"><dt>Copyright</dt><dd>© Nick Khrapov, 2021. All right reserved. </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>2.12.2023 </dd></dl>
+<dl class="section copyright"><dt>Copyright</dt><dd>© Nick Khrapov, 2023. All right reserved. </dd></dl>
 
 <p class="definition">Definition in file <a class="el" href="iterator_8h_source.html">iterator.h</a>.</p>
 </div></div><!-- contents -->

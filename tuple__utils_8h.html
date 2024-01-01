@@ -66,7 +66,8 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="summary">
-<a href="#nested-classes">Classes</a>  </div>
+<a href="#nested-classes">Classes</a> &#124;
+<a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
 <div class="title">tuple_utils.h File Reference</div>  </div>
 </div><!--header-->
@@ -82,8 +83,11 @@ $(function() {
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structqx_1_1tuple_1_1join.html">qx::tuple::join&lt;... &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Appends types or another tuple to tuple.  <a href="structqx_1_1tuple_1_1join.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structqx_1_1tuple_1_1join_3_01std_1_1tuple_3_01first__pack__t_8_8_8_01_4_00_01std_1_1tuple_3_01second__pack__t_8_8_8_01_4_01_4.html">qx::tuple::join&lt; std::tuple&lt; first_pack_t... &gt;, std::tuple&lt; second_pack_t... &gt; &gt;</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structqx_1_1tuple_1_1join_3_01std_1_1tuple_3_01first__pack__t_8_8_8_01_4_00_01second__t_00_01optional__args__t_8_8_8_01_4.html">qx::tuple::join&lt; std::tuple&lt; first_pack_t... &gt;, second_t, optional_args_t... &gt;</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structqx_1_1tuple_1_1details_1_1remove__single.html">qx::tuple::details::remove_single&lt;... &gt;</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -91,7 +95,8 @@ Classes</h2></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structqx_1_1tuple_1_1details_1_1remove__single_3_01target__t_00_01std_1_1tuple_3_01parameter__t_00_01pack__t_8_8_8_01_4_01_4.html">qx::tuple::details::remove_single&lt; target_t, std::tuple&lt; parameter_t, pack_t... &gt; &gt;</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structqx_1_1tuple_1_1remove.html">qx::tuple::remove&lt; pack_t &gt;</a></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structqx_1_1tuple_1_1remove.html">qx::tuple::remove&lt;... &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Removes all types from the second argument from the first tuple.  <a href="structqx_1_1tuple_1_1remove.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structqx_1_1tuple_1_1remove_3_01std_1_1tuple_3_01types__t_8_8_8_01_4_00_01std_1_1tuple_3_4_01_4.html">qx::tuple::remove&lt; std::tuple&lt; types_t... &gt;, std::tuple&lt;&gt; &gt;</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -99,10 +104,23 @@ Classes</h2></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structqx_1_1tuple_1_1details_1_1contains_3_01_t_00_01std_1_1tuple_3_4_01_4.html">qx::tuple::details::contains&lt; T, std::tuple&lt;&gt; &gt;</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structqx_1_1tuple_1_1details_1_1contains_3_01_t_00_01std_1_1tuple_3_01_u_00_01_ts_8_8_8_01_4_01_4.html">qx::tuple::details::contains&lt; T, std::tuple&lt; U, Ts... &gt; &gt;</a></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structqx_1_1tuple_1_1details_1_1contains_3_01_t_00_01std_1_1tuple_3_01_u_00_01args__t_8_8_8_01_4_01_4.html">qx::tuple::details::contains&lt; T, std::tuple&lt; U, args_t... &gt; &gt;</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structqx_1_1tuple_1_1details_1_1contains_3_01_t_00_01std_1_1tuple_3_01_t_00_01_ts_8_8_8_01_4_01_4.html">qx::tuple::details::contains&lt; T, std::tuple&lt; T, Ts... &gt; &gt;</a></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structqx_1_1tuple_1_1details_1_1contains_3_01_t_00_01std_1_1tuple_3_01_t_00_01args__t_8_8_8_01_4_01_4.html">qx::tuple::details::contains&lt; T, std::tuple&lt; T, args_t... &gt; &gt;</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structqx_1_1tuple_1_1transform_3_01std_1_1tuple_3_01args__t_8_8_8_01_4_00_01transformation__t_01_4.html">qx::tuple::transform&lt; std::tuple&lt; args_t... &gt;, transformation_t &gt;</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structqx_1_1tuple_1_1index_3_01std_1_1tuple_3_01_t_00_01args__t_8_8_8_01_4_00_01_t_01_4.html">qx::tuple::index&lt; std::tuple&lt; T, args_t... &gt;, T &gt;</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structqx_1_1tuple_1_1index_3_01std_1_1tuple_3_01_u_00_01args__t_8_8_8_01_4_00_01_t_01_4.html">qx::tuple::index&lt; std::tuple&lt; U, args_t... &gt;, T &gt;</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:a5da2d2c56fee120b8e7fa51f578adf78"><td class="memTemplParams" colspan="2">template&lt;class tuple_t , class type_callable_t &gt; </td></tr>
+<tr class="memitem:a5da2d2c56fee120b8e7fa51f578adf78"><td class="memTemplItemLeft" align="right" valign="top">constexpr void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="tuple__utils_8h.html#a5da2d2c56fee120b8e7fa51f578adf78">qx::tuple::iterate</a> (const type_callable_t &amp;callable)</td></tr>
+<tr class="memdesc:a5da2d2c56fee120b8e7fa51f578adf78"><td class="mdescLeft">&#160;</td><td class="mdescRight">Iterate over a tuple with a callable that receives a type along with a its index.  <a href="tuple__utils_8h.html#a5da2d2c56fee120b8e7fa51f578adf78">More...</a><br /></td></tr>
+<tr class="separator:a5da2d2c56fee120b8e7fa51f578adf78"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Contains utils for working with std::tuple. </p>
@@ -111,7 +129,59 @@ Classes</h2></td></tr>
 <dl class="section copyright"><dt>Copyright</dt><dd>© Nick Khrapov, 2023. All right reserved. </dd></dl>
 
 <p class="definition">Definition in file <a class="el" href="tuple__utils_8h_source.html">tuple_utils.h</a>.</p>
-</div></div><!-- contents -->
+</div><h2 class="groupheader">Function Documentation</h2>
+<a id="a5da2d2c56fee120b8e7fa51f578adf78"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5da2d2c56fee120b8e7fa51f578adf78">&#9670;&nbsp;</a></span>iterate()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class tuple_t , class type_callable_t &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr void qx::tuple::iterate </td>
+          <td>(</td>
+          <td class="paramtype">const type_callable_t &amp;&#160;</td>
+          <td class="paramname"><em>callable</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Iterate over a tuple with a callable that receives a type along with a its index. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">tuple_t</td><td>- std::tuple&lt;&gt; type </td></tr>
+    <tr><td class="paramname">type_callable_t</td><td>- callable type </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">callable</td><td>- callable object</td></tr>
+  </table>
+  </dd>
+</dl>
+<div class="fragment"><div class="line"><span class="keyword">using</span> tuple_type = std::tuple&lt;float, int, std::string, unsigned, size_t&gt;;</div>
+<div class="line">qx::tuple::iterate&lt;tuple_type&gt;(</div>
+<div class="line">    []&lt;<span class="keyword">class</span> T, <span class="keywordtype">size_t</span> I&gt;()</div>
+<div class="line">    {</div>
+<div class="line">        <span class="comment">// ...</span></div>
+<div class="line">    });</div>
+</div><!-- fragment --> 
+<p class="definition">Definition at line <a class="el" href="tuple__utils_8h_source.html#l00197">197</a> of file <a class="el" href="tuple__utils_8h_source.html">tuple_utils.h</a>.</p>
+
+</div>
+</div>
+</div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1

@@ -130,10 +130,10 @@ Macros</h2></td></tr>
 </div><div class="memdoc">
 <b>Value:</b><div class="fragment"><div class="line"><span class="keyword">private</span>:                                                                                \</div>
 <div class="line">    static <span class="keyword">inline</span> <span class="keyword">volatile</span> <span class="keywordtype">bool</span> <a class="code" href="macros_2common_8h.html#a8f51bd935768d1845211352e225739ed">QX_LINE_NAME</a>(s_bRegistered) = Creator::_register_class( \</div>
-<div class="line">        qx::details::create_shared&lt;CreatorRoot, ThisClass, __VA_ARGS__&gt;,                \</div>
+<div class="line">        qx::details::create_shared&lt;CreatorRoot, this_class_type, __VA_ARGS__&gt;,          \</div>
 <div class="line">        get_class_id_static(),                                                          \</div>
 <div class="line">        get_class_name_static())</div>
-<div class="ttc" id="amacros_2common_8h_html_a8f51bd935768d1845211352e225739ed"><div class="ttname"><a href="macros_2common_8h.html#a8f51bd935768d1845211352e225739ed">QX_LINE_NAME</a></div><div class="ttdeci">#define QX_LINE_NAME(prefix)</div><div class="ttdoc">Do magic! Creates a unique name using the line number.</div><div class="ttdef"><b>Definition:</b> <a href="macros_2common_8h_source.html#l00034">common.h:34</a></div></div>
+<div class="ttc" id="amacros_2common_8h_html_a8f51bd935768d1845211352e225739ed"><div class="ttname"><a href="macros_2common_8h.html#a8f51bd935768d1845211352e225739ed">QX_LINE_NAME</a></div><div class="ttdeci">#define QX_LINE_NAME(prefix)</div><div class="ttdoc">Do magic! Creates a unique name using the line number.</div><div class="ttdef"><b>Definition:</b> <a href="macros_2common_8h_source.html#l00035">common.h:35</a></div></div>
 </div><!-- fragment -->
 <p>Macro for all classes inherited from base class. </p>
 <p>std::shared_ptr version </p><dl class="params"><dt>Parameters</dt><dd>
@@ -162,8 +162,8 @@ Macros</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<b>Value:</b><div class="fragment"><div class="line"><span class="keyword">protected</span>:                              \</div>
-<div class="line">    using CreatorRoot = ThisClass;      \</div>
+<b>Value:</b><div class="fragment"><div class="line"><span class="keyword">protected</span>:                               \</div>
+<div class="line">    using CreatorRoot = this_class_type; \</div>
 <div class="line">    using Creator     = <a class="code" href="classqx_1_1reflection__creator.html">qx::reflection_creator&lt;CreatorRoot, std::shared_ptr, __VA_ARGS__&gt;</a></div>
 <div class="ttc" id="aclassqx_1_1reflection__creator_html"><div class="ttname"><a href="classqx_1_1reflection__creator.html">qx::reflection_creator</a></div><div class="ttdoc">Reflection creator.</div><div class="ttdef"><b>Definition:</b> <a href="reflection__creator_8h_source.html#l00040">reflection_creator.h:41</a></div></div>
 </div><!-- fragment -->
@@ -196,7 +196,7 @@ Macros</h2></td></tr>
 </div><div class="memdoc">
 <b>Value:</b><div class="fragment"><div class="line"><span class="keyword">private</span>:                                                                                \</div>
 <div class="line">    static <span class="keyword">inline</span> <span class="keyword">volatile</span> <span class="keywordtype">bool</span> <a class="code" href="macros_2common_8h.html#a8f51bd935768d1845211352e225739ed">QX_LINE_NAME</a>(s_bRegistered) = Creator::_register_class( \</div>
-<div class="line">        qx::details::create_unique&lt;CreatorRoot, ThisClass, __VA_ARGS__&gt;,                \</div>
+<div class="line">        qx::details::create_unique&lt;CreatorRoot, this_class_type, __VA_ARGS__&gt;,          \</div>
 <div class="line">        get_class_id_static(),                                                          \</div>
 <div class="line">        get_class_name_static())</div>
 </div><!-- fragment -->
@@ -227,7 +227,7 @@ Macros</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<b>Value:</b><div class="fragment"><div class="line">    <span class="keyword">using</span> CreatorRoot = ThisClass;      \</div>
+<b>Value:</b><div class="fragment"><div class="line">    <span class="keyword">using</span> CreatorRoot = this_class_type; \</div>
 <div class="line">    using Creator     = <a class="code" href="classqx_1_1reflection__creator.html">qx::reflection_creator&lt;CreatorRoot, std::unique_ptr, __VA_ARGS__&gt;</a></div>
 </div><!-- fragment -->
 <p>Macro for base class. Use YourClass::Creator::create_object. </p>
