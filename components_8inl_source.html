@@ -109,7 +109,7 @@ $(function() {
 <div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;        pRawComponent,</div>
 <div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;        [ePriority, statusFlags, pRawComponent](SClassData&amp; classData)</div>
 <div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;        {</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;            classData.priorityCache.emplace(ePriority, <a class="code" href="structqx_1_1components_1_1_s_class_data_1_1_s_cache_data.html">SClassData::SCacheData</a>(pRawComponent, statusFlags));</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;            classData.priorityCache.emplace(ePriority, <span class="keyword">typename</span> <a class="code" href="structqx_1_1components_1_1_s_class_data_1_1_s_cache_data.html">SClassData::SCacheData</a>(pRawComponent, statusFlags));</div>
 <div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;        });</div>
 <div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    classData.components.push_back(std::move(pComponent));</div>
 <div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    <span class="keywordflow">return</span> pRawComponent;</div>
