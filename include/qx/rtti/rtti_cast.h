@@ -11,7 +11,6 @@
 #include <qx/meta/type_traits.h>
 
 #include <memory>
-#include <type_traits>
 
 namespace qx
 {

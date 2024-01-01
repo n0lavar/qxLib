@@ -11,6 +11,6 @@
 namespace qx
 {
 
-using class_identificator = int;
+using class_identificator = size_t;
 
 }

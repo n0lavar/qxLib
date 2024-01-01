@@ -12,34 +12,31 @@
 
 #include <qx/containers/components.h>
 
+#include <array>
 #include <string>
 
-class BaseTestComponent : public qx::rtti_root<BaseTestComponent>
+class ABaseTestComponent : public qx::rtti_root<ABaseTestComponent>
 {
-    QX_RTTI_CLASS(BaseTestComponent, qx::rtti_root<BaseTestComponent>);
+    QX_RTTI_CLASS(ABaseTestComponent, qx::rtti_root<ABaseTestComponent>);
 
 public:
-    virtual ~BaseTestComponent(void) = default;
-
-    bool GetConst() const
-    {
-        return true;
-    }
-    bool GetNonConst()
-    {
-        return true;
-    }
+    virtual int GetData() const = 0;
+    virtual int GetData()       = 0;
 };
 
-class TestComponent : public BaseTestComponent
+class CTestComponent1 : public ABaseTestComponent
 {
-    QX_RTTI_CLASS(TestComponent, BaseTestComponent)
+    QX_RTTI_CLASS(CTestComponent1, ABaseTestComponent)
 
 public:
-    explicit TestComponent(char ch) : m_TestData(ch)
+    explicit CTestComponent1(char ch) : m_TestData(ch)
     {
     }
-    char GetTestComponentData() const
+    virtual int GetData() const override
+    {
+        return m_TestData;
+    }
+    virtual int GetData() override
     {
         return m_TestData;
     }
@@ -48,20 +45,24 @@ private:
     char m_TestData = 'x';
 };
 
-class ITestComponent : public BaseTestComponent
+class ATestComponent2 : public ABaseTestComponent
 {
-    QX_RTTI_CLASS(ITestComponent, BaseTestComponent)
+    QX_RTTI_CLASS(ATestComponent2, ABaseTestComponent)
 };
 
-class TestComponent1 : public ITestComponent
+class CTestComponent21 : public ATestComponent2
 {
-    QX_RTTI_CLASS(TestComponent1, ITestComponent)
+    QX_RTTI_CLASS(CTestComponent21, ATestComponent2)
 
 public:
-    explicit TestComponent1(int nTestData) : m_nTestData(nTestData)
+    explicit CTestComponent21(int nTestData) : m_nTestData(nTestData)
     {
     }
-    int GetTestComponent1Data() const
+    virtual int GetData() const override
+    {
+        return m_nTestData;
+    }
+    virtual int GetData() override
     {
         return m_nTestData;
     }
@@ -70,143 +71,267 @@ private:
     int m_nTestData = 0;
 };
 
-class TestComponent2 : public ITestComponent
+class CTestComponent22 : public ATestComponent2
 {
-    QX_RTTI_CLASS(TestComponent2, ITestComponent)
+    QX_RTTI_CLASS(CTestComponent22, ATestComponent2)
 
 public:
-    explicit TestComponent2(double fTestData) : m_fTestData(fTestData)
+    explicit CTestComponent22(double fTestData) : m_fTestData(fTestData)
     {
     }
-    double GetTestComponent2Data() const
+    virtual int GetData() const override
     {
-        return m_fTestData;
+        return static_cast<int>(m_fTestData);
+    }
+    virtual int GetData() override
+    {
+        return static_cast<int>(m_fTestData);
     }
 
 private:
     double m_fTestData = 0.0;
 };
 
-class TestComponent3 : public ITestComponent
+class CTestComponent23 : public ATestComponent2
 {
-    QX_RTTI_CLASS(TestComponent3, ITestComponent)
+    QX_RTTI_CLASS(CTestComponent23, ATestComponent2)
 
 public:
-    explicit TestComponent3(std::string sTestData) : m_sTestData(sTestData)
+    explicit CTestComponent23(std::string sTestData) : m_sTestData(std::move(sTestData))
     {
     }
-    std::string GetTestComponent3Data() const
+    virtual int GetData() const override
     {
-        return m_sTestData;
+        return std::stoi(m_sTestData);
+    }
+    virtual int GetData() override
+    {
+        return std::stoi(m_sTestData);
     }
 
 private:
     std::string m_sTestData;
 };
 
-TEST(components, main)
+struct SComponents
 {
-    qx::components<BaseTestComponent> container;
-    EXPECT_EQ(container.size(), 0);
-    EXPECT_TRUE(container.empty());
+    qx::components<ABaseTestComponent> components;
 
-    container.add<TestComponent>('y');
-    container.add<TestComponent>('t');
-    EXPECT_EQ(container.size(), 2);
-    EXPECT_FALSE(container.empty());
-    container.clear();
-    EXPECT_EQ(container.size(), 0);
-    EXPECT_TRUE(container.empty());
+    CTestComponent1* pComponent1 = nullptr;
 
-    // variadic arguments add
-    TestComponent* pTestComponentAdd1 = container.add<TestComponent>('a');
-    EXPECT_TRUE(pTestComponentAdd1);
-    EXPECT_EQ(container.size(), 1);
-    EXPECT_FALSE(container.empty());
+    CTestComponent21* pComponent21_1 = nullptr;
+    CTestComponent21* pComponent21_2 = nullptr;
 
-    // unique ptr add
-    TestComponent* pTestComponentAdd2 = container.add(std::make_unique<TestComponent>('b'));
-    EXPECT_TRUE(pTestComponentAdd2);
-    EXPECT_EQ(container.size(), 2);
+    CTestComponent22* pComponent22_1 = nullptr;
+    CTestComponent22* pComponent22_2 = nullptr;
 
-    // add first with own key "ITestComponent"
-    ITestComponent* pTestComponent1Add = container.add_to<ITestComponent>(std::make_unique<TestComponent1>(4));
-    EXPECT_TRUE(pTestComponent1Add);
-    EXPECT_EQ(container.size(), 3);
+    CTestComponent23* pComponent23_1 = nullptr;
+    CTestComponent23* pComponent23_2 = nullptr;
+    CTestComponent23* pComponent23_3 = nullptr;
+};
 
-    // add second with own key "ITestComponent"
-    ITestComponent* pTestComponent2Add = container.add_to<ITestComponent>(std::make_unique<TestComponent2>(5.0));
-    EXPECT_TRUE(pTestComponent2Add);
-    EXPECT_EQ(container.size(), 4);
+SComponents CreateComponents()
+{
+    SComponents components;
 
-    ITestComponent* pTestComponent3Add = container.add_to<ITestComponent>(std::make_unique<TestComponent2>(2.0));
-    EXPECT_TRUE(pTestComponent3Add);
-    EXPECT_EQ(container.size(), 5);
+    components.pComponent1 = components.components.add(std::make_unique<CTestComponent1>('0'), qx::priority::normal);
 
-    // order
-    EXPECT_EQ(pTestComponentAdd1, *(container.begin() + 0));
-    EXPECT_EQ(pTestComponentAdd2, *(container.begin() + 1));
-    EXPECT_EQ(pTestComponent1Add, *(container.begin() + 2));
-    EXPECT_EQ(pTestComponent2Add, *(container.begin() + 3));
-    EXPECT_EQ(pTestComponent3Add, *(container.begin() + 4));
+    components.pComponent21_1 = components.components.add(std::make_unique<CTestComponent21>(1), qx::priority::low);
+    components.pComponent21_2 = components.components.add(std::make_unique<CTestComponent21>(2), qx::priority::high);
 
-    EXPECT_EQ(pTestComponentAdd1, *(container.rbegin() + 4));
-    EXPECT_EQ(pTestComponentAdd2, *(container.rbegin() + 3));
-    EXPECT_EQ(pTestComponent1Add, *(container.rbegin() + 2));
-    EXPECT_EQ(pTestComponent2Add, *(container.rbegin() + 1));
-    EXPECT_EQ(pTestComponent3Add, *(container.rbegin() + 0));
+    components.pComponent22_1 =
+        components.components.add(std::make_unique<CTestComponent22>(3.0), qx::priority::very_low);
+    components.pComponent22_2 =
+        components.components.add(std::make_unique<CTestComponent22>(4.0), qx::priority::normal);
 
-    // get
-    TestComponent* pTestComponent = container.get<TestComponent>();
-    EXPECT_TRUE(pTestComponentAdd1 == pTestComponent || pTestComponentAdd2 == pTestComponent);
-    EXPECT_EQ(pTestComponentAdd1->GetTestComponentData(), 'a');
-    EXPECT_EQ(container.size(), 5);
+    components.pComponent23_1 =
+        components.components.add(std::make_unique<CTestComponent23>("5"), qx::priority::normal);
+    components.pComponent23_2 =
+        components.components.add(std::make_unique<CTestComponent23>("6"), qx::priority::very_high);
+    components.pComponent23_3 =
+        components.components.add(std::make_unique<CTestComponent23>("7"), qx::priority::normal, qx::status::disabled);
 
-    // get_all
-    auto range = container.get_all<ITestComponent>();
-    EXPECT_EQ(std::distance(range.first, range.second), 3);
-    for (auto it = range.first; it != range.second; ++it)
+    return components;
+}
+
+TEST(components, remove)
+{
+    SComponents components = CreateComponents();
+
+    auto pRawComponent1 = components.components.try_get<CTestComponent1>();
+    EXPECT_EQ(pRawComponent1, components.pComponent1);
+
+    const auto pComponent1 = components.components.remove(components.pComponent1);
+    EXPECT_EQ(pComponent1.get(), components.pComponent1);
+
+    pRawComponent1 = components.components.try_get<CTestComponent1>();
+    EXPECT_EQ(pRawComponent1, nullptr);
+}
+
+static void TestTryGetTemplate(auto&& components)
+{
+    EXPECT_EQ(components.components.template try_get<ABaseTestComponent>(), components.pComponent23_2);
+    EXPECT_EQ(components.components.template try_get<CTestComponent1>(), components.pComponent1);
+    EXPECT_EQ(components.components.template try_get<ATestComponent2>(), components.pComponent23_2);
+    EXPECT_EQ(components.components.template try_get<CTestComponent21>(), components.pComponent21_2);
+    EXPECT_EQ(components.components.template try_get<CTestComponent22>(), components.pComponent22_2);
+    EXPECT_EQ(components.components.template try_get<CTestComponent23>(), components.pComponent23_2);
+};
+
+TEST(components, try_get_template)
+{
+    SComponents components = CreateComponents();
+    TestTryGetTemplate(components);
+    TestTryGetTemplate(std::as_const(components));
+}
+
+TEST(components, get_template)
+{
+    constexpr auto Test = [](auto&& components)
     {
-        EXPECT_TRUE(
-            it->second.get() == pTestComponent1Add || it->second.get() == pTestComponent2Add
-            || it->second.get() == pTestComponent3Add);
-    }
-    EXPECT_EQ(container.size(), 5);
+        EXPECT_EQ(components.components.template get<ABaseTestComponent>(), *components.pComponent23_2);
+        EXPECT_EQ(components.components.template get<CTestComponent1>(), *components.pComponent1);
+        EXPECT_EQ(components.components.template get<ATestComponent2>(), *components.pComponent23_2);
+        EXPECT_EQ(components.components.template get<CTestComponent21>(), *components.pComponent21_2);
+        EXPECT_EQ(components.components.template get<CTestComponent22>(), *components.pComponent22_2);
+        EXPECT_EQ(components.components.template get<CTestComponent23>(), *components.pComponent23_2);
+    };
 
-    // iterators
-    for (auto it = container.begin(); it != container.end(); ++it)
-        EXPECT_TRUE(it->GetNonConst());
+    SComponents components = CreateComponents();
+    Test(components);
+    Test(std::as_const(components));
+}
 
-    for (auto it = container.cbegin(); it != container.cend(); ++it)
-        EXPECT_TRUE(it->GetConst());
+TEST(components, try_get_id)
+{
+    constexpr auto Test = [](auto&& components)
+    {
+        EXPECT_EQ(components.components.try_get(ABaseTestComponent::get_class_id_static()), components.pComponent23_2);
+        EXPECT_EQ(components.components.try_get(CTestComponent1::get_class_id_static()), components.pComponent1);
+        EXPECT_EQ(components.components.try_get(ATestComponent2::get_class_id_static()), components.pComponent23_2);
+        EXPECT_EQ(components.components.try_get(CTestComponent21::get_class_id_static()), components.pComponent21_2);
+        EXPECT_EQ(components.components.try_get(CTestComponent22::get_class_id_static()), components.pComponent22_2);
+        EXPECT_EQ(components.components.try_get(CTestComponent23::get_class_id_static()), components.pComponent23_2);
+    };
 
-    for (auto it = container.rbegin(); it != container.rend(); ++it)
-        EXPECT_TRUE(it->GetNonConst());
+    SComponents components = CreateComponents();
+    Test(components);
+    Test(std::as_const(components));
+}
 
-    for (auto it = container.crbegin(); it != container.crend(); ++it)
-        EXPECT_TRUE(it->GetConst());
+constexpr bool RefPointerComparator(const ABaseTestComponent* pLeft, const ABaseTestComponent& right)
+{
+    return pLeft == &right;
+}
 
-    for (auto& it : container)
-        EXPECT_TRUE(it.GetNonConst());
+TEST(components, view)
+{
+    constexpr auto Test = [](auto&& components)
+    {
+        const std::array<ABaseTestComponent*, 7> ABaseTestComponent_objects {
+            components.pComponent23_2, components.pComponent21_2, components.pComponent1,   components.pComponent22_2,
+            components.pComponent23_1, components.pComponent21_1, components.pComponent22_1
+        };
+        EXPECT_TRUE(std::ranges::equal(ABaseTestComponent_objects, components.components.view(), RefPointerComparator));
+        EXPECT_TRUE(std::ranges::equal(
+            ABaseTestComponent_objects,
+            components.components.template view<ABaseTestComponent>(),
+            RefPointerComparator));
 
-    for (const auto& it : container)
-        EXPECT_TRUE(it.GetConst());
+        const std::array<CTestComponent1*, 1> CTestComponent1_objects { components.pComponent1 };
+        EXPECT_TRUE(std::ranges::equal(
+            CTestComponent1_objects,
+            components.components.template view<CTestComponent1>(),
+            RefPointerComparator));
 
-    // extract
-    qx::components<BaseTestComponent>::pointer pTestComponentOwner = container.extract<TestComponent>();
+        const std::array<ATestComponent2*, 6> ATestComponent2_objects {
+            components.pComponent23_2, components.pComponent21_2, components.pComponent22_2,
+            components.pComponent23_1, components.pComponent21_1, components.pComponent22_1
+        };
+        EXPECT_TRUE(std::ranges::equal(
+            ATestComponent2_objects,
+            components.components.template view<ATestComponent2>(),
+            RefPointerComparator));
 
-    EXPECT_EQ(pTestComponentOwner.get(), pTestComponent);
-    EXPECT_EQ(container.size(), 4);
+        const std::array<CTestComponent21*, 2> CTestComponent21_objects { components.pComponent21_2,
+                                                                          components.pComponent21_1 };
+        EXPECT_TRUE(std::ranges::equal(
+            CTestComponent21_objects,
+            components.components.template view<CTestComponent21>(),
+            RefPointerComparator));
 
-    // remove
-    EXPECT_TRUE(container.remove<TestComponent>());
-    EXPECT_EQ(container.size(), 3);
+        const std::array<CTestComponent22*, 2> CTestComponent22_objects { components.pComponent22_2,
+                                                                          components.pComponent22_1 };
+        EXPECT_TRUE(std::ranges::equal(
+            CTestComponent22_objects,
+            components.components.template view<CTestComponent22>(),
+            RefPointerComparator));
 
-    EXPECT_FALSE(container.remove<TestComponent>());
-    EXPECT_EQ(container.size(), 3);
+        const std::array<CTestComponent23*, 2> CTestComponent23_objects { components.pComponent23_2,
+                                                                          components.pComponent23_1 };
+        EXPECT_TRUE(std::ranges::equal(
+            CTestComponent23_objects,
+            components.components.template view<CTestComponent23>(),
+            RefPointerComparator));
+    };
 
-    // remove_all
-    container.remove_all<ITestComponent>();
-    EXPECT_EQ(container.size(), 0);
-    EXPECT_TRUE(container.empty());
+    SComponents components = CreateComponents();
+    Test(components);
+    Test(std::as_const(components));
+}
+
+TEST(components, priority)
+{
+    SComponents components = CreateComponents();
+
+    components.components.set_priority(components.pComponent22_2, qx::priority::lowest);
+    const std::optional<qx::flags<qx::priority>> ePriority =
+        components.components.get_priority(components.pComponent22_2);
+    ASSERT_TRUE(ePriority);
+    EXPECT_EQ(*ePriority, qx::priority::lowest);
+
+    const std::array<ABaseTestComponent*, 7> ABaseTestComponent_objects {
+        components.pComponent23_2, components.pComponent21_2, components.pComponent1,   components.pComponent23_1,
+        components.pComponent21_1, components.pComponent22_1, components.pComponent22_2
+    };
+    EXPECT_TRUE(std::ranges::equal(ABaseTestComponent_objects, components.components.view(), RefPointerComparator));
+}
+
+TEST(components, status)
+{
+    SComponents components = CreateComponents();
+
+    EXPECT_EQ(components.components.get_status(components.pComponent23_3), qx::status::disabled);
+    const std::array<ABaseTestComponent*, 7> ABaseTestComponent_objectsBefore {
+        components.pComponent23_2, components.pComponent21_2, components.pComponent1,   components.pComponent22_2,
+        components.pComponent23_1, components.pComponent21_1, components.pComponent22_1
+    };
+    EXPECT_TRUE(
+        std::ranges::equal(ABaseTestComponent_objectsBefore, components.components.view(), RefPointerComparator));
+
+    components.components.set_status(components.pComponent23_3, qx::status::default_value);
+    EXPECT_EQ(components.components.get_status(components.pComponent23_3), qx::status::default_value);
+    const std::array<ABaseTestComponent*, 8> ABaseTestComponent_objectsAfter {
+        components.pComponent23_2, components.pComponent21_2, components.pComponent1,    components.pComponent22_2,
+        components.pComponent23_1, components.pComponent23_3, components.pComponent21_1, components.pComponent22_1
+    };
+    EXPECT_TRUE(
+        std::ranges::equal(ABaseTestComponent_objectsAfter, components.components.view(), RefPointerComparator));
+}
+
+TEST(components, clear)
+{
+    SComponents components = CreateComponents();
+    EXPECT_FALSE(components.components.empty());
+    components.components.clear();
+    EXPECT_TRUE(components.components.empty());
+    components.pComponent1    = nullptr;
+    components.pComponent21_1 = nullptr;
+    components.pComponent21_2 = nullptr;
+    components.pComponent22_1 = nullptr;
+    components.pComponent22_2 = nullptr;
+    components.pComponent23_1 = nullptr;
+    components.pComponent23_2 = nullptr;
+    components.pComponent23_3 = nullptr;
+    TestTryGetTemplate(components);
 }

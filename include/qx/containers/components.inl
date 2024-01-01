@@ -10,228 +10,288 @@
 namespace qx
 {
 
-template<class base_component_t>
-template<class super_class_t>
-inline components<base_component_t>::iterator<super_class_t>::iterator(const super_class_t& other) noexcept
-    : super_class_t(other)
+template<std::derived_from<rtti_pure_base> base_component_t>
+typename components<base_component_t>::SClassData& components<base_component_t>::SClassData::get_or_add_class_data(
+    class_identificator id) noexcept
 {
+    if (const auto it = derivedClasses.find(id); it != derivedClasses.end())
+        return *it->second.get();
+
+    auto pClassData    = std::make_unique<SClassData>();
+    auto pRawClassData = pClassData.get();
+    derivedClasses[id] = std::move(pClassData);
+    return *pRawClassData;
 }
 
-template<class base_component_t>
-template<class super_class_t>
-inline auto* components<base_component_t>::iterator<super_class_t>::operator->(void) noexcept
+template<std::derived_from<rtti_pure_base> base_component_t>
+template<std::derived_from<base_component_t> component_t>
+component_t* components<base_component_t>::add(
+    std::unique_ptr<component_t> pComponent,
+    priority                     ePriority,
+    flags<status>                statusFlags) noexcept
 {
-    return *super_class_t::operator->();
-}
-
-template<class base_component_t>
-template<class super_class_t>
-inline auto& components<base_component_t>::iterator<super_class_t>::operator*(void) noexcept
-{
-    return *super_class_t::operator*();
-}
-
-template<class base_component_t>
-template<class super_class_t>
-inline components<base_component_t>::const_iterator<super_class_t>::const_iterator(const super_class_t& other) noexcept
-    : super_class_t(other)
-{
-}
-
-template<class base_component_t>
-template<class super_class_t>
-inline const auto* components<base_component_t>::const_iterator<super_class_t>::operator->() const noexcept
-{
-    return *super_class_t::operator->();
-}
-
-template<class base_component_t>
-template<class super_class_t>
-inline const auto& components<base_component_t>::const_iterator<super_class_t>::operator*() const noexcept
-{
-    return *super_class_t::operator*();
-}
-
-template<class base_component_t>
-template<class component_t, class... args_t>
-inline component_t* components<base_component_t>::add(args_t&&... args)
-{
-    return add_to<component_t>(std::make_unique<component_t>(std::forward<args_t>(args)...));
-}
-
-template<class base_component_t>
-template<class component_t>
-inline component_t* components<base_component_t>::add(std::unique_ptr<component_t> pComponent)
-{
-    return add_to<component_t>(std::move(pComponent));
-}
-
-template<class base_component_t>
-template<class component_t>
-inline component_t* components<base_component_t>::get() const
-{
-    return static_cast<component_t*>(get_by_id(component_t::get_class_id_static()));
-}
-
-template<class base_component_t>
-inline base_component_t* components<base_component_t>::get_by_id(class_identificator id) const
-{
-    auto it = m_Components.find(id);
-    return it != m_Components.end() ? it->second.get() : nullptr;
-}
-
-template<class base_component_t>
-template<class component_t>
-inline component_t* components<base_component_t>::add_to(pointer pComponent)
-{
-    auto pRawComponent = pComponent.get();
-
-    m_Components.emplace(component_t::get_class_id_static(), std::move(pComponent));
-
-    m_InsertionOrderComponents.push_back(pRawComponent);
-
-    return static_cast<component_t*>(pRawComponent);
-}
-
-template<class base_component_t>
-template<class component_t>
-inline auto components<base_component_t>::get_all() const
-{
-    return get_all_by_id(component_t::get_class_id_static());
-}
-
-template<class base_component_t>
-inline auto components<base_component_t>::get_all_by_id(class_identificator id) const
-{
-    return m_Components.equal_range(id);
-}
-
-template<class base_component_t>
-template<class component_t>
-inline typename components<base_component_t>::pointer components<base_component_t>::extract()
-{
-    if (auto it = m_Components.find(component_t::get_class_id_static()); it != m_Components.end())
-    {
-        auto pComponent = std::move(it->second);
-        m_Components.erase(it);
-
-        m_InsertionOrderComponents.erase(
-            std::remove_if(
-                m_InsertionOrderComponents.begin(),
-                m_InsertionOrderComponents.end(),
-                [&pComponent](auto pVectorComponent)
-                {
-                    return pVectorComponent == pComponent.get();
-                }),
-            m_InsertionOrderComponents.end());
-
-        return pComponent;
-    }
-    else
-    {
+    if (!pComponent)
         return nullptr;
-    }
+
+    auto        pRawComponent = pComponent.get();
+    SClassData& classData     = get_or_add_class_data(
+        pRawComponent,
+        [ePriority, statusFlags, pRawComponent](SClassData& classData)
+        {
+            classData.priorityCache.emplace(ePriority, SClassData::SCacheData(pRawComponent, statusFlags));
+        });
+    classData.components.push_back(std::move(pComponent));
+    return pRawComponent;
 }
 
-template<class base_component_t>
-template<class component_t>
-inline bool components<base_component_t>::remove()
+template<std::derived_from<rtti_pure_base> base_component_t>
+std::unique_ptr<base_component_t> components<base_component_t>::remove(const base_component_t* pRawComponent) noexcept
 {
-    return extract<component_t>().get() != nullptr;
+    if (!pRawComponent)
+        return nullptr;
+
+    SClassData& classData = get_or_add_class_data(
+        pRawComponent,
+        [pRawComponent](SClassData& classData)
+        {
+            std::erase_if(
+                classData.priorityCache,
+                [pRawComponent](const auto& pair)
+                {
+                    return pair.second.pComponent == pRawComponent;
+                });
+        });
+
+    const auto it = std::ranges::find_if(
+        classData.components,
+        [pRawComponent](const pointer_type& pointer)
+        {
+            return pointer.get() == pRawComponent;
+        });
+
+    if (it == classData.components.end())
+        return nullptr;
+
+    std::unique_ptr<base_component_t> pComponent = std::move(*it);
+    classData.components.erase(it);
+    return pComponent;
 }
 
-template<class base_component_t>
-template<class component_t>
-inline void components<base_component_t>::remove_all()
+template<std::derived_from<rtti_pure_base> base_component_t>
+template<std::derived_from<base_component_t> component_t>
+component_t* components<base_component_t>::try_get() noexcept
 {
-    while (remove<component_t>())
-        ;
+    SClassData& classData = get_or_add_class_data<component_t>();
+    const auto  it        = std::ranges::find_if(
+        classData.priorityCache,
+        [](const auto& pair)
+        {
+            return !pair.second.statusFlags.contains(status::disabled);
+        });
+
+    return it != classData.priorityCache.end() ? static_cast<component_t*>(it->second.pComponent) : nullptr;
 }
 
-template<class base_component_t>
-template<class component_t>
-inline bool components<base_component_t>::contains() const
+template<std::derived_from<rtti_pure_base> base_component_t>
+template<std::derived_from<base_component_t> component_t>
+const component_t* components<base_component_t>::try_get() const noexcept
 {
-    return get<component_t>() != nullptr;
+    return QX_CONST_CAST_THIS()->template try_get<component_t>();
 }
 
-template<class base_component_t>
-auto components<base_component_t>::begin() noexcept
+template<std::derived_from<rtti_pure_base> base_component_t>
+base_component_t* components<base_component_t>::try_get(class_identificator id) noexcept
 {
-    return iterator<typename order_container::iterator>(m_InsertionOrderComponents.begin());
+    // we could improve it from O(N) to O(log(N)) if we could use id->is_derived_from(id) without an object itself
+    // we will do it when a reflection system is fully implemented
+    const auto it = std::ranges::find_if(
+        m_RootClass.priorityCache,
+        [id](const auto& pair)
+        {
+            return !pair.second.statusFlags.contains(status::disabled)
+                   && pair.second.pComponent->is_derived_from_id(id);
+        });
+
+    return it != m_RootClass.priorityCache.end() ? it->second.pComponent : nullptr;
 }
 
-template<class base_component_t>
-auto components<base_component_t>::end() noexcept
+template<std::derived_from<rtti_pure_base> base_component_t>
+const base_component_t* components<base_component_t>::try_get(class_identificator id) const noexcept
 {
-    return iterator<typename order_container::iterator>(m_InsertionOrderComponents.end());
+    return QX_CONST_CAST_THIS()->try_get(id);
 }
 
-template<class base_component_t>
-auto components<base_component_t>::begin() const noexcept
+template<std::derived_from<rtti_pure_base> base_component_t>
+template<std::derived_from<base_component_t> component_t>
+component_t& components<base_component_t>::get() noexcept
 {
-    return const_iterator<typename order_container::const_iterator>(m_InsertionOrderComponents.begin());
+    SClassData& classData = get_or_add_class_data<component_t>();
+    const auto  it        = std::ranges::find_if(
+        classData.priorityCache,
+        [](const auto& pair)
+        {
+            return !pair.second.statusFlags.contains(status::disabled);
+        });
+
+    return *static_cast<component_t*>(it->second.pComponent);
 }
 
-template<class base_component_t>
-auto components<base_component_t>::end() const noexcept
+template<std::derived_from<rtti_pure_base> base_component_t>
+template<std::derived_from<base_component_t> component_t>
+const component_t& components<base_component_t>::get() const noexcept
 {
-    return const_iterator<typename order_container::const_iterator>(m_InsertionOrderComponents.end());
+    return QX_CONST_CAST_THIS()->template get<component_t>();
 }
 
-template<class base_component_t>
-auto components<base_component_t>::cbegin() const noexcept
+template<std::derived_from<rtti_pure_base> base_component_t>
+template<std::derived_from<base_component_t> component_t>
+auto components<base_component_t>::view() noexcept
 {
-    return const_iterator<typename order_container::const_iterator>(m_InsertionOrderComponents.cbegin());
+    SClassData& classData = get_or_add_class_data<component_t>();
+    return classData.priorityCache
+           | std::views::filter(
+               [](const auto& pair)
+               {
+                   return pair.second.pComponent->template is_derived_from<component_t>()
+                          && !pair.second.statusFlags.contains(status::disabled);
+               })
+           | std::views::transform(
+               [](auto& pair) -> component_t&
+               {
+                   return *static_cast<component_t*>(pair.second.pComponent);
+               });
 }
 
-template<class base_component_t>
-auto components<base_component_t>::cend() const noexcept
+template<std::derived_from<rtti_pure_base> base_component_t>
+template<std::derived_from<base_component_t> component_t>
+auto components<base_component_t>::view() const noexcept
 {
-    return const_iterator<typename order_container::const_iterator>(m_InsertionOrderComponents.cend());
+    const SClassData& classData = get_or_add_class_data<component_t>();
+    return classData.priorityCache
+           | std::views::filter(
+               [](const auto& pair)
+               {
+                   return pair.second.pComponent->template is_derived_from<component_t>()
+                          && !pair.second.statusFlags.contains(status::disabled);
+               })
+           | std::views::transform(
+               [](const auto& pair) -> const component_t&
+               {
+                   return *static_cast<const component_t*>(pair.second.pComponent);
+               });
 }
 
-template<class base_component_t>
-auto components<base_component_t>::rbegin() noexcept
+template<std::derived_from<rtti_pure_base> base_component_t>
+std::optional<priority> components<base_component_t>::get_priority(const base_component_t* pRawComponent) const noexcept
 {
-    return iterator<typename order_container::reverse_iterator>(m_InsertionOrderComponents.rbegin());
+    if (!pRawComponent)
+        return std::nullopt;
+
+    auto it = std::ranges::find_if(
+        m_RootClass.priorityCache,
+        [pRawComponent](const auto& pair)
+        {
+            return pair.second.pComponent == pRawComponent;
+        });
+
+    return it != m_RootClass.priorityCache.end() ? std::optional<priority>(it->first) : std::nullopt;
 }
 
-template<class base_component_t>
-auto components<base_component_t>::rend() noexcept
+
+template<std::derived_from<rtti_pure_base> base_component_t>
+bool components<base_component_t>::set_priority(const base_component_t* pRawComponent, priority ePriority) noexcept
 {
-    return iterator<typename order_container::reverse_iterator>(m_InsertionOrderComponents.rend());
+    if (!pRawComponent)
+        return false;
+
+    bool bChanged = true;
+    get_or_add_class_data(
+        pRawComponent,
+        [pRawComponent, ePriority, &bChanged](SClassData& classData)
+        {
+            const auto it = std::ranges::find_if(
+                classData.priorityCache,
+                [pRawComponent](const auto& pair)
+                {
+                    return pair.second.pComponent == pRawComponent;
+                });
+
+            if (it == classData.priorityCache.end())
+            {
+                bChanged = false;
+                return;
+            }
+
+            if (it->first != ePriority)
+            {
+                classData.priorityCache.emplace(ePriority, it->second);
+                classData.priorityCache.erase(it);
+            }
+        });
+
+    return bChanged;
 }
 
-template<class base_component_t>
-auto components<base_component_t>::crbegin() const noexcept
+template<std::derived_from<rtti_pure_base> base_component_t>
+std::optional<flags<status>> components<base_component_t>::get_status(
+    const base_component_t* pRawComponent) const noexcept
 {
-    return const_iterator<typename order_container::const_reverse_iterator>(m_InsertionOrderComponents.crbegin());
+    if (!pRawComponent)
+        return std::nullopt;
+
+    auto it = std::ranges::find_if(
+        m_RootClass.priorityCache,
+        [pRawComponent](const auto& pair)
+        {
+            return pair.second.pComponent == pRawComponent;
+        });
+
+    return it != m_RootClass.priorityCache.end() ? std::optional<flags<status>>(it->second.statusFlags) : std::nullopt;
 }
 
-template<class base_component_t>
-auto components<base_component_t>::crend() const noexcept
+
+template<std::derived_from<rtti_pure_base> base_component_t>
+bool components<base_component_t>::set_status(const base_component_t* pRawComponent, flags<status> status) noexcept
 {
-    return const_iterator<typename order_container::const_reverse_iterator>(m_InsertionOrderComponents.crend());
+    if (!pRawComponent)
+        return false;
+
+    bool bChanged = true;
+    get_or_add_class_data(
+        pRawComponent,
+        [pRawComponent, status, &bChanged](SClassData& classData)
+        {
+            const auto it = std::ranges::find_if(
+                classData.priorityCache,
+                [pRawComponent](const auto& pair)
+                {
+                    return pair.second.pComponent == pRawComponent;
+                });
+
+            if (it == classData.priorityCache.end())
+            {
+                bChanged = false;
+                return;
+            }
+
+            it->second.statusFlags = status;
+        });
+
+    return bChanged;
 }
 
-template<class base_component_t>
-size_t components<base_component_t>::size() const noexcept
-{
-    return m_Components.size();
-}
-
-template<class base_component_t>
+template<std::derived_from<rtti_pure_base> base_component_t>
 bool components<base_component_t>::empty() const noexcept
 {
-    return m_Components.empty();
+    return m_RootClass.priorityCache.empty();
 }
 
-template<class base_component_t>
+template<std::derived_from<rtti_pure_base> base_component_t>
 void components<base_component_t>::clear() noexcept
 {
-    m_Components.clear();
-    m_InsertionOrderComponents.clear();
+    m_RootClass.derivedClasses.clear();
+    m_RootClass.components.clear();
+    m_RootClass.priorityCache.clear();
 }
 
 } // namespace qx

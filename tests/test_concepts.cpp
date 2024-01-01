@@ -37,7 +37,7 @@ struct C<float>
 {
 };
 
-//---------------------------------- iterator --------------------------------
+// ------------------------------------------------------ iterator -----------------------------------------------------
 
 static_assert(qx::is_iterator<std::map<int, int>::iterator>);
 static_assert(qx::is_iterator<std::unordered_map<int, int>::iterator>);
@@ -57,7 +57,7 @@ static_assert(!qx::is_iterator<int>);
 static_assert(!qx::is_iterator<void>);
 static_assert(!qx::is_iterator<std::vector<int>>);
 
-//------------------------- is_random_access_iterator_v ------------------------
+// -------------------------------------------- is_random_access_iterator_v --------------------------------------------
 
 static_assert(!qx::is_random_access_iterator<std::map<int, int>::iterator>);
 static_assert(!qx::is_random_access_iterator<std::unordered_map<int, int>::iterator>);
@@ -77,7 +77,7 @@ static_assert(!qx::is_random_access_iterator<int>);
 static_assert(!qx::is_random_access_iterator<void>);
 static_assert(!qx::is_random_access_iterator<std::vector<int>>);
 
-// -------------------------------- enumeration --------------------------------
+// ---------------------------------------------------- enumeration ----------------------------------------------------
 
 enum ETest1
 {
@@ -101,7 +101,7 @@ static_assert(!qx::is_enumeration<vec_float>);
 static_assert(!qx::is_enumeration<C<int>>);
 static_assert(!qx::is_enumeration<S>);
 
-// ---------------------------------- callable ---------------------------------
+// ------------------------------------------------------ callable -----------------------------------------------------
 
 struct test1
 {
@@ -129,3 +129,22 @@ static_assert(qx::callable_c<decltype([](test1){}), void, test1>);
 static_assert(!qx::callable_c<decltype([](test1){ return test2(); }), void, test1>);
 static_assert(qx::callable_c<decltype([](test1){ return test2(); }), test2, test1>);
 // clang-format on
+
+// ---------------------------------------------- derived_from_template_c ----------------------------------------------
+
+template<class T>
+class C1
+{
+};
+
+class C2 : public C1<int>
+{
+};
+
+class C3 : public C1<float>
+{
+};
+
+static_assert(qx::derived_from_template_c<C2, C1>);
+static_assert(qx::derived_from_template_c<C3, C1>);
+static_assert(!qx::derived_from_template_c<C, C1>);

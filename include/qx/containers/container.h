@@ -8,7 +8,8 @@
 **/
 #pragma once
 
-#include <qx/patterns/iterator.h>
+#include <qx/macros/common.h>
+#include <qx/patterns/contiguous_iterator/iterator.h>
 
 /**
     @def   QX_IMPL_CONTAINER
@@ -93,14 +94,14 @@
                                                                           \
     const_pointer data() const noexcept                                   \
     {                                                                     \
-        return const_cast<container*>(this)->data();                      \
+        return QX_CONST_CAST_THIS()->data();                              \
     }                                                                     \
                                                                           \
     /* implement */ reference at(size_type ind) noexcept;                 \
                                                                           \
     const_reference at(size_type ind) const noexcept                      \
     {                                                                     \
-        return const_cast<container*>(this)->at(ind);                     \
+        return QX_CONST_CAST_THIS()->at(ind);                             \
     }                                                                     \
                                                                           \
     /* implement */ void clear() noexcept;

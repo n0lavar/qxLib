@@ -26,7 +26,7 @@ class CClass2
 
 class CRttiBase : public qx::rtti_root<CRttiBase>
 {
-    QX_RTTI_CLASS(CRttiBase, rtti_root<CRttiBase>);
+    QX_RTTI_CLASS(CRttiBase, qx::rtti_root<CRttiBase>);
 };
 
 class CBase1 : public CRttiBase
@@ -112,41 +112,41 @@ const std::unique_ptr<CDerived1_3>   p1_3   = std::make_unique<CDerived1_3>();
 
 //----------------------------------- usings -----------------------------------
 
-static_assert(std::is_same_v<CDerived1_1::BaseClass, CRttiBase>);
-static_assert(std::is_same_v<CDerived1_2::BaseClass, CRttiBase>);
-static_assert(std::is_same_v<CDerived1_21::BaseClass, CRttiBase>);
-static_assert(std::is_same_v<CDerived1_22::BaseClass, CRttiBase>);
-static_assert(std::is_same_v<CDerived1_3::BaseClass, CRttiBase>);
+static_assert(std::is_same_v<CDerived1_1::base_class_type, CRttiBase>);
+static_assert(std::is_same_v<CDerived1_2::base_class_type, CRttiBase>);
+static_assert(std::is_same_v<CDerived1_21::base_class_type, CRttiBase>);
+static_assert(std::is_same_v<CDerived1_22::base_class_type, CRttiBase>);
+static_assert(std::is_same_v<CDerived1_3::base_class_type, CRttiBase>);
 
-static_assert(std::is_same_v<CDerived2_1::BaseClass, CRttiBase>);
-static_assert(std::is_same_v<CDerived2_2::BaseClass, CRttiBase>);
-static_assert(std::is_same_v<CDerived2_3::BaseClass, CRttiBase>);
-static_assert(std::is_same_v<CDerived2_31::BaseClass, CRttiBase>);
-static_assert(std::is_same_v<CDerived2_32::BaseClass, CRttiBase>);
+static_assert(std::is_same_v<CDerived2_1::base_class_type, CRttiBase>);
+static_assert(std::is_same_v<CDerived2_2::base_class_type, CRttiBase>);
+static_assert(std::is_same_v<CDerived2_3::base_class_type, CRttiBase>);
+static_assert(std::is_same_v<CDerived2_31::base_class_type, CRttiBase>);
+static_assert(std::is_same_v<CDerived2_32::base_class_type, CRttiBase>);
 
-static_assert(std::is_same_v<CDerived1_1::SuperClass, CBase1>);
-static_assert(std::is_same_v<CDerived1_2::SuperClass, CBase1>);
-static_assert(std::is_same_v<CDerived1_21::SuperClass, CDerived1_2>);
-static_assert(std::is_same_v<CDerived1_22::SuperClass, CDerived1_2>);
-static_assert(std::is_same_v<CDerived1_3::SuperClass, CBase1>);
+static_assert(std::is_same_v<CDerived1_1::super_class_type, CBase1>);
+static_assert(std::is_same_v<CDerived1_2::super_class_type, CBase1>);
+static_assert(std::is_same_v<CDerived1_21::super_class_type, CDerived1_2>);
+static_assert(std::is_same_v<CDerived1_22::super_class_type, CDerived1_2>);
+static_assert(std::is_same_v<CDerived1_3::super_class_type, CBase1>);
 
-static_assert(std::is_same_v<CDerived2_1::SuperClass, CBase2>);
-static_assert(std::is_same_v<CDerived2_2::SuperClass, CBase2>);
-static_assert(std::is_same_v<CDerived2_3::SuperClass, CBase2>);
-static_assert(std::is_same_v<CDerived2_31::SuperClass, CDerived2_3>);
-static_assert(std::is_same_v<CDerived2_32::SuperClass, CDerived2_3>);
+static_assert(std::is_same_v<CDerived2_1::super_class_type, CBase2>);
+static_assert(std::is_same_v<CDerived2_2::super_class_type, CBase2>);
+static_assert(std::is_same_v<CDerived2_3::super_class_type, CBase2>);
+static_assert(std::is_same_v<CDerived2_31::super_class_type, CDerived2_3>);
+static_assert(std::is_same_v<CDerived2_32::super_class_type, CDerived2_3>);
 
-static_assert(std::is_same_v<CDerived1_1::ThisClass, CDerived1_1>);
-static_assert(std::is_same_v<CDerived1_2::ThisClass, CDerived1_2>);
-static_assert(std::is_same_v<CDerived1_21::ThisClass, CDerived1_21>);
-static_assert(std::is_same_v<CDerived1_22::ThisClass, CDerived1_22>);
-static_assert(std::is_same_v<CDerived1_3::ThisClass, CDerived1_3>);
+static_assert(std::is_same_v<CDerived1_1::this_class_type, CDerived1_1>);
+static_assert(std::is_same_v<CDerived1_2::this_class_type, CDerived1_2>);
+static_assert(std::is_same_v<CDerived1_21::this_class_type, CDerived1_21>);
+static_assert(std::is_same_v<CDerived1_22::this_class_type, CDerived1_22>);
+static_assert(std::is_same_v<CDerived1_3::this_class_type, CDerived1_3>);
 
-static_assert(std::is_same_v<CDerived2_1::ThisClass, CDerived2_1>);
-static_assert(std::is_same_v<CDerived2_2::ThisClass, CDerived2_2>);
-static_assert(std::is_same_v<CDerived2_3::ThisClass, CDerived2_3>);
-static_assert(std::is_same_v<CDerived2_31::ThisClass, CDerived2_31>);
-static_assert(std::is_same_v<CDerived2_32::ThisClass, CDerived2_32>);
+static_assert(std::is_same_v<CDerived2_1::this_class_type, CDerived2_1>);
+static_assert(std::is_same_v<CDerived2_2::this_class_type, CDerived2_2>);
+static_assert(std::is_same_v<CDerived2_3::this_class_type, CDerived2_3>);
+static_assert(std::is_same_v<CDerived2_31::this_class_type, CDerived2_31>);
+static_assert(std::is_same_v<CDerived2_32::this_class_type, CDerived2_32>);
 
 
 
@@ -172,8 +172,8 @@ TEST(rtti, class_id)
     EXPECT_TRUE(static_cast<CDerived1_2*>(p1_21.get())->get_class_id() == qx::get_class_id<CDerived1_21>());
     EXPECT_TRUE(p1_21->get_class_id() == qx::get_class_id<CDerived1_21>());
 
-    std::set<int> ids;
-    auto          CheckId = [&ids](int id)
+    std::set<qx::class_identificator> ids;
+    auto                              CheckId = [&ids](qx::class_identificator id)
     {
         EXPECT_GE(id, 0) << "existing id must be greater or equal then 0";
         auto ret = ids.insert(id);

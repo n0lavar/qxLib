@@ -31,7 +31,7 @@ template<string_literal ClassName>
 class rtti_naming_strategy_nullptr
 {
 public:
-    static constexpr qx::string_view get_name() noexcept
+    static constexpr string_view get_name() noexcept
     {
         return nullptr;
     }
@@ -52,7 +52,7 @@ template<string_literal ClassName>
 class rtti_naming_strategy_empty
 {
 public:
-    static constexpr qx::string_view get_name() noexcept
+    static constexpr string_view get_name() noexcept
     {
         return QX_TEXT("");
     }
@@ -72,7 +72,7 @@ template<string_literal ClassName>
 class rtti_naming_strategy_class_name
 {
 public:
-    static constexpr qx::string_view get_name() noexcept
+    static constexpr string_view get_name() noexcept
     {
         return ClassName.view();
     }

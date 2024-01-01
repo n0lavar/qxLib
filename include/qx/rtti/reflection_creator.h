@@ -26,7 +26,7 @@ namespace qx
 
     @class   reflection_creator
     @brief   Reflection creator
-    @details Performs registration of classes inherited from BaseClass
+    @details Performs registration of classes inherited from base_class_t
              and creates their instances by their ID and name.
              Allocates memory.
     @tparam  base_class_t - base class type
@@ -128,8 +128,8 @@ static std::shared_ptr<base_class_t> create_shared(args_t&&... args)
     @details std::unique_ptr version
     @param   ... - constructor args types
 **/
-#define QX_REGISTER_UNIQUE_CREATOR(...) \
-    using CreatorRoot = ThisClass;      \
+#define QX_REGISTER_UNIQUE_CREATOR(...)  \
+    using CreatorRoot = this_class_type; \
     using Creator     = qx::reflection_creator<CreatorRoot, std::unique_ptr, __VA_ARGS__>
 
 /**
@@ -141,7 +141,7 @@ static std::shared_ptr<base_class_t> create_shared(args_t&&... args)
 #define QX_REGISTER_UNIQUE_CONSTRUCTOR(...)                                             \
 private:                                                                                \
     static inline volatile bool QX_LINE_NAME(s_bRegistered) = Creator::_register_class( \
-        qx::details::create_unique<CreatorRoot, ThisClass, __VA_ARGS__>,                \
+        qx::details::create_unique<CreatorRoot, this_class_type, __VA_ARGS__>,          \
         get_class_id_static(),                                                          \
         get_class_name_static())
 
@@ -151,9 +151,9 @@ private:                                                                        
     @details std::shared_ptr version
     @param   ... - constructor args types
 **/
-#define QX_REGISTER_SHARED_CREATOR(...) \
-protected:                              \
-    using CreatorRoot = ThisClass;      \
+#define QX_REGISTER_SHARED_CREATOR(...)  \
+protected:                               \
+    using CreatorRoot = this_class_type; \
     using Creator     = qx::reflection_creator<CreatorRoot, std::shared_ptr, __VA_ARGS__>
 
 /**
@@ -165,7 +165,7 @@ protected:                              \
 #define QX_REGISTER_SHARED_CONSTRUCTOR(...)                                             \
 private:                                                                                \
     static inline volatile bool QX_LINE_NAME(s_bRegistered) = Creator::_register_class( \
-        qx::details::create_shared<CreatorRoot, ThisClass, __VA_ARGS__>,                \
+        qx::details::create_shared<CreatorRoot, this_class_type, __VA_ARGS__>,          \
         get_class_id_static(),                                                          \
         get_class_name_static())
 

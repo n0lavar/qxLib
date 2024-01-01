@@ -34,6 +34,14 @@ concept callable_c = requires(T t, args_t&&... args) {
     } -> std::convertible_to<return_t>;
 };
 
+// won't work for base_args_t containing template template or type template parameters
+template<class derived_t, template<class... base_args_t> class base_t, class... partial_specialization_args_t>
+concept derived_from_template_c = requires(const derived_t& derived) {
+    []<class... base_args_t>(const base_t<partial_specialization_args_t..., base_args_t...>&)
+    {
+    }(derived);
+};
+
 namespace details
 {
 

@@ -8,6 +8,7 @@
 **/
 #pragma once
 
+#include <qx/containers/flags.h>
 #include <qx/typedefs.h>
 
 namespace qx
@@ -23,8 +24,7 @@ namespace qx
 **/
 enum class priority : u8
 {
-    disabled  = 0,
-    lowest    = 1,
+    lowest    = 0,
     very_low  = 32,
     low       = 64,
     normal    = 128,
@@ -33,9 +33,17 @@ enum class priority : u8
     highest   = 255,
 };
 
+enum class status
+{
+    default_value = 0,
+    disabled      = 1 << 0,
+};
+
 } // namespace qx
 
 constexpr auto operator<=>(qx::priority eLeft, qx::priority eRight)
 {
     return static_cast<u8>(eLeft) <=> static_cast<u8>(eRight);
 }
+
+QX_FLAGS_ENUM_CLASS(qx::priority);
