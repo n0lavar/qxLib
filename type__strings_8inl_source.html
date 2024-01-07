@@ -97,37 +97,37 @@ $(function() {
 <div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> T, <span class="keyword">class</span> <span class="keywordtype">char</span>_t&gt;</div>
 <div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;constexpr <span class="keyword">typename</span> type_strings&lt;T, char_t&gt;::string_view_type type_strings&lt;T, char_t&gt;::create_signature()</div>
 <div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;{</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    <span class="keyword">auto</span> functionSignature = create_full_signature();</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    constexpr string_view_type svFunctionSignature = create_full_signature();</div>
 <div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160; </div>
 <div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="preprocessor">#if QX_MSVC</span></div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    constexpr string_view_type startMarker = <a class="code" href="string__utils_8h.html#ae4f688084b037e2e7a63a13eaf539a02">QX_STR_PREFIX</a>(char_t, <span class="stringliteral">&quot;type_strings&lt;&quot;</span>);</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    constexpr string_view_type endMarker   = <a class="code" href="string__utils_8h.html#ae4f688084b037e2e7a63a13eaf539a02">QX_STR_PREFIX</a>(char_t, <span class="stringliteral">&quot;&gt;::create_full_signature(&quot;</span>);</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    constexpr string_view_type svStartMarker = <a class="code" href="string__utils_8h.html#ae4f688084b037e2e7a63a13eaf539a02">QX_STR_PREFIX</a>(char_t, <span class="stringliteral">&quot;type_strings&lt;&quot;</span>);</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    constexpr string_view_type svEndMarker   = <a class="code" href="string__utils_8h.html#ae4f688084b037e2e7a63a13eaf539a02">QX_STR_PREFIX</a>(char_t, <span class="stringliteral">&quot;&gt;::create_full_signature(&quot;</span>);</div>
 <div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="preprocessor">#elif QX_CLANG</span></div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    constexpr string_view_type startMarker = <a class="code" href="string__utils_8h.html#ae4f688084b037e2e7a63a13eaf539a02">QX_STR_PREFIX</a>(char_t, <span class="stringliteral">&quot;T = &quot;</span>);</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    constexpr string_view_type endMarker   = <a class="code" href="string__utils_8h.html#ae4f688084b037e2e7a63a13eaf539a02">QX_STR_PREFIX</a>(char_t, <span class="stringliteral">&quot;, char_t = &quot;</span>);</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    constexpr string_view_type svStartMarker = <a class="code" href="string__utils_8h.html#ae4f688084b037e2e7a63a13eaf539a02">QX_STR_PREFIX</a>(char_t, <span class="stringliteral">&quot;T = &quot;</span>);</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    constexpr string_view_type svEndMarker   = <a class="code" href="string__utils_8h.html#ae4f688084b037e2e7a63a13eaf539a02">QX_STR_PREFIX</a>(char_t, <span class="stringliteral">&quot;, char_t = &quot;</span>);</div>
 <div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="preprocessor">#elif QX_GNU</span></div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    constexpr string_view_type startMarker = <a class="code" href="string__utils_8h.html#ae4f688084b037e2e7a63a13eaf539a02">QX_STR_PREFIX</a>(char_t, <span class="stringliteral">&quot;T = &quot;</span>);</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    constexpr string_view_type endMarker   = <a class="code" href="string__utils_8h.html#ae4f688084b037e2e7a63a13eaf539a02">QX_STR_PREFIX</a>(char_t, <span class="stringliteral">&quot;;&quot;</span>);</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    constexpr string_view_type svStartMarker = <a class="code" href="string__utils_8h.html#ae4f688084b037e2e7a63a13eaf539a02">QX_STR_PREFIX</a>(char_t, <span class="stringliteral">&quot;T = &quot;</span>);</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    constexpr string_view_type svEndMarker   = <a class="code" href="string__utils_8h.html#ae4f688084b037e2e7a63a13eaf539a02">QX_STR_PREFIX</a>(char_t, <span class="stringliteral">&quot;;&quot;</span>);</div>
 <div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="preprocessor">#endif</span></div>
 <div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160; </div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    <span class="keywordtype">size_t</span> nStartMarker = functionSignature.find(startMarker);</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    <span class="keywordtype">size_t</span> nStart       = nStartMarker != string_view_type::npos ? (nStartMarker + startMarker.size()) : 0;</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    <span class="keywordtype">size_t</span> nStartMarker = svFunctionSignature.find(svStartMarker);</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    <span class="keywordtype">size_t</span> nStart       = nStartMarker != string_view_type::npos ? (nStartMarker + svStartMarker.size()) : 0;</div>
 <div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160; </div>
 <div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    constexpr string_view_type classMarker  = <a class="code" href="string__utils_8h.html#ae4f688084b037e2e7a63a13eaf539a02">QX_STR_PREFIX</a>(char_t, <span class="stringliteral">&quot;class &quot;</span>);</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    <span class="keywordtype">size_t</span>                     nClassMarker = functionSignature.find(classMarker, nStart);</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    <span class="keywordtype">size_t</span>                     nClassMarker = svFunctionSignature.find(classMarker, nStart);</div>
 <div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    <span class="keywordflow">if</span> (nClassMarker != string_view_type::npos)</div>
 <div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;        nStart = nClassMarker + classMarker.size();</div>
 <div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160; </div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    <span class="keywordtype">size_t</span> nEndMarker = functionSignature.find(endMarker, nStart);</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    <span class="keywordtype">size_t</span> nEnd       = nEndMarker != string_view_type::npos ? nEndMarker : functionSignature.size();</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    <span class="keywordtype">size_t</span> nEndMarker = svFunctionSignature.find(svEndMarker, nStart);</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    <span class="keywordtype">size_t</span> nEnd       = nEndMarker != string_view_type::npos ? nEndMarker : svFunctionSignature.size();</div>
 <div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160; </div>
 <div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<span class="preprocessor">#if QX_MSVC</span></div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    <span class="keywordtype">size_t</span> nCharCommaMarker = functionSignature.rfind(<a class="code" href="string__utils_8h.html#a57911e62bb82593665bf09e4ea834904">QX_CHAR_PREFIX</a>(char_t, <span class="charliteral">&#39;,&#39;</span>), nEnd);</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    <span class="keywordtype">size_t</span> nCharCommaMarker = svFunctionSignature.rfind(<a class="code" href="string__utils_8h.html#a57911e62bb82593665bf09e4ea834904">QX_CHAR_PREFIX</a>(char_t, <span class="charliteral">&#39;,&#39;</span>), nEnd);</div>
 <div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    <span class="keywordflow">if</span> (nCharCommaMarker != string_view_type::npos)</div>
 <div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;        nEnd = nCharCommaMarker;</div>
 <div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;<span class="preprocessor">#endif</span></div>
 <div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160; </div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    <span class="keywordflow">return</span> string_view_type(functionSignature.data() + nStart, nEnd - nStart);</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    <span class="keywordflow">return</span> string_view_type(svFunctionSignature.data() + nStart, nEnd - nStart);</div>
 <div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;}</div>
 <div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160; </div>
 <div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> T, <span class="keyword">class</span> <span class="keywordtype">char</span>_t&gt;</div>
@@ -183,9 +183,9 @@ $(function() {
 <div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> T, <span class="keyword">class</span> <span class="keywordtype">char</span>_t&gt;</div>
 <div class="line"><a name="l00113"></a><span class="lineno"><a class="line" href="classqx_1_1type__strings.html#a67fcba098d991e6513fdbcf91f6ef0b1">  113</a></span>&#160;constexpr <span class="keyword">typename</span> type_strings&lt;T, char_t&gt;::string_view_type <a class="code" href="classqx_1_1type__strings.html#a67fcba098d991e6513fdbcf91f6ef0b1">type_strings&lt;T, char_t&gt;::get_name</a>()</div>
 <div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;{</div>
-<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;    constexpr string_view_type startMarker  = <a class="code" href="string__utils_8h.html#ae4f688084b037e2e7a63a13eaf539a02">QX_STR_PREFIX</a>(char_t, <span class="stringliteral">&quot;&lt;&quot;</span>);</div>
-<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;    <span class="keyword">const</span> string_view_type     svSignature  = create_signature();</div>
-<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;    <span class="keywordtype">size_t</span>                     nStartMarker = svSignature.find(startMarker);</div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;    constexpr string_view_type svStartMarker = <a class="code" href="string__utils_8h.html#ae4f688084b037e2e7a63a13eaf539a02">QX_STR_PREFIX</a>(char_t, <span class="stringliteral">&quot;&lt;&quot;</span>);</div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;    <span class="keyword">const</span> string_view_type     svSignature   = create_signature();</div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;    <span class="keywordtype">size_t</span>                     nStartMarker  = svSignature.find(svStartMarker);</div>
 <div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160; </div>
 <div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;    <span class="keywordflow">if</span> (nStartMarker != string_view_type::npos &amp;&amp; svSignature.find(lambdaMarker, nStartMarker) == nStartMarker + 1)</div>
 <div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;        nStartMarker = string_view_type::npos;</div>
