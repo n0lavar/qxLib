@@ -88,7 +88,7 @@ $(function() {
 <div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="string__utils_8h.html#ae4f688084b037e2e7a63a13eaf539a02">QX_STR_PREFIX</a>(char_t, __FUNCSIG__);</div>
 <div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="preprocessor">#elif QX_CLANG || QX_GNU</span></div>
 <div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    static_assert(</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;        !std::is_constant_evaluated || std::is_same_v&lt;char_t, char&gt;,</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;        std::is_same_v&lt;char_t, char&gt;,</div>
 <div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;        <span class="stringliteral">&quot;Can&#39;t use __PRETTY_FUNCTION__ with wchar_t as it is not a macro but a function&quot;</span>);</div>
 <div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160; </div>
 <div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    <span class="keywordflow">return</span> __PRETTY_FUNCTION__;</div>
