@@ -171,7 +171,7 @@ $(function() {
 <div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160; </div>
 <div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;    <span class="keyword">static</span> constexpr class_identificator get_class_id_static() noexcept</div>
 <div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;    {</div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;        <span class="keywordflow">return</span> QX_STRING_HASH(<a class="code" href="macros_2common_8h.html#aafbad02364b98b20fd2de0a4afedc06d">QX_STRINGIFY</a>(<a class="code" href="classqx_1_1rtti__root.html">rtti_root</a>));</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;        <span class="keywordflow">return</span> <a class="code" href="classqx_1_1basic__string__hash.html">cstring_hash</a>(<a class="code" href="classqx_1_1type__strings.html">type_strings&lt;this_class_type, char&gt;::get_signature</a>());</div>
 <div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;    }</div>
 <div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160; </div>
 <div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;    <span class="keyword">virtual</span> class_identificator get_class_id() <span class="keyword">const</span> noexcept</div>
@@ -183,7 +183,7 @@ $(function() {
 <div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160; </div>
 <div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;    <span class="keyword">auto</span> operator&lt;=&gt;(<span class="keyword">const</span> <a class="code" href="classqx_1_1rtti__root.html">rtti_root</a>&amp;) <span class="keyword">const</span> = <span class="keywordflow">default</span>;</div>
 <div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160; </div>
-<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;    <span class="comment">//protected:</span></div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;<span class="keyword">protected</span>:</div>
 <div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;    <span class="keyword">virtual</span> ~<a class="code" href="classqx_1_1rtti__root.html">rtti_root</a>() noexcept = <span class="keywordflow">default</span>;</div>
 <div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160; </div>
 <div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">bool</span> _is_base_id(class_identificator idBase) <span class="keyword">const</span> noexcept</div>
@@ -248,7 +248,7 @@ $(function() {
 <div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;<span class="preprocessor">        return ids;                                                                                                 \</span></div>
 <div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;<span class="preprocessor">    }                                                                                                               \</span></div>
 <div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;<span class="preprocessor">                                                                                                                    \</span></div>
-<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;<span class="preprocessor">    </span><span class="comment">/*protected:*/</span><span class="preprocessor">                                                                                                  \</span></div>
+<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;<span class="preprocessor">protected:                                                                                                          \</span></div>
 <div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;<span class="preprocessor">    virtual bool _is_base_id(qx::class_identificator base_id) const noexcept override                               \</span></div>
 <div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;<span class="preprocessor">    {                                                                                                               \</span></div>
 <div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;<span class="preprocessor">        return base_id == super_class_type::get_class_id_static() || super_class_type::_is_base_id(base_id);        \</span></div>
@@ -258,11 +258,12 @@ $(function() {
 <div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160; </div>
 <div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;} <span class="comment">// namespace qx</span></div>
 <div class="ttc" id="aclass__identificator_8h_html"><div class="ttname"><a href="class__identificator_8h.html">class_identificator.h</a></div></div>
+<div class="ttc" id="aclassqx_1_1basic__string__hash_html"><div class="ttname"><a href="classqx_1_1basic__string__hash.html">qx::basic_string_hash</a></div><div class="ttdoc">String hash object.</div><div class="ttdef"><b>Definition:</b> <a href="string__hash_8h_source.html#l00037">string_hash.h:38</a></div></div>
 <div class="ttc" id="aclassqx_1_1rtti__naming__strategy__class__name_html"><div class="ttname"><a href="classqx_1_1rtti__naming__strategy__class__name.html">qx::rtti_naming_strategy_class_name</a></div><div class="ttdoc">Returns class name string_view in get_name.</div><div class="ttdef"><b>Definition:</b> <a href="rtti__naming__strategy_8h_source.html#l00072">rtti_naming_strategy.h:73</a></div></div>
 <div class="ttc" id="aclassqx_1_1rtti__pure__base_html"><div class="ttname"><a href="classqx_1_1rtti__pure__base.html">qx::rtti_pure_base</a></div><div class="ttdef"><b>Definition:</b> <a href="rtti_8h_source.html#l00031">rtti.h:32</a></div></div>
 <div class="ttc" id="aclassqx_1_1rtti__root_html"><div class="ttname"><a href="classqx_1_1rtti__root.html">qx::rtti_root</a></div><div class="ttdoc">RTTI root class.</div><div class="ttdef"><b>Definition:</b> <a href="rtti_8h_source.html#l00050">rtti.h:51</a></div></div>
+<div class="ttc" id="aclassqx_1_1type__strings_html"><div class="ttname"><a href="classqx_1_1type__strings.html">qx::type_strings</a></div><div class="ttdoc">The class allows you to get strings with information about the type, including its full name,...</div><div class="ttdef"><b>Definition:</b> <a href="type__strings_8h_source.html#l00034">type_strings.h:35</a></div></div>
 <div class="ttc" id="amacros_2common_8h_html"><div class="ttname"><a href="macros_2common_8h.html">common.h</a></div></div>
-<div class="ttc" id="amacros_2common_8h_html_aafbad02364b98b20fd2de0a4afedc06d"><div class="ttname"><a href="macros_2common_8h.html#aafbad02364b98b20fd2de0a4afedc06d">QX_STRINGIFY</a></div><div class="ttdeci">#define QX_STRINGIFY(name)</div><div class="ttdoc">Macro can be used to turn any text in your code into a string, but only the exact text between the pa...</div><div class="ttdef"><b>Definition:</b> <a href="macros_2common_8h_source.html#l00028">common.h:28</a></div></div>
 <div class="ttc" id="artti__naming__strategy_8h_html"><div class="ttname"><a href="rtti__naming__strategy_8h.html">rtti_naming_strategy.h</a></div><div class="ttdoc">Contains naming strategies for qx::rtti_root class.</div></div>
 <div class="ttc" id="astring__hash_8h_html"><div class="ttname"><a href="string__hash_8h.html">string_hash.h</a></div></div>
 <div class="ttc" id="atuple__utils_8h_html"><div class="ttname"><a href="tuple__utils_8h.html">tuple_utils.h</a></div><div class="ttdoc">Contains utils for working with std::tuple.</div></div>
