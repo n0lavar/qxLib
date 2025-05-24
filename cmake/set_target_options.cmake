@@ -43,6 +43,7 @@ function(set_target_options _target)
             /wd4623 # 'derived class' : default constructor was implicitly defined as deleted because a base class default constructor is inaccessible or deleted
             /wd4625 # 'type': move assignment operator was implicitly defined as deleted
             /wd4626 # 'derived class' : assignment operator was implicitly defined as deleted because a base class assignment operator is inaccessible or deleted
+            /wd4702 # unreachable code
             /wd4710 # 'function' : function not inlined
             /wd4711 # 'function' selected for inline expansion. Inlining is performed at the compiler's discretion
             /wd4820 # 'bytes' bytes padding added after construct 'member_name'

@@ -1,5 +1,9 @@
 build/*
-scripts/*
+!build/*.DotSettings
+!build/*.DotSettings.user
+!build/
+
+*/__pycache__/*
 html/*
 latex/*
 .TMP
