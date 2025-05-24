@@ -72,7 +72,8 @@ $(function() {
 <div class="title">singleton.h File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
-
+<div class="textblock"><code>#include &lt;<a class="el" href="macros_2common_8h_source.html">qx/macros/common.h</a>&gt;</code><br />
+</div>
 <p><a href="singleton_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
@@ -120,7 +121,7 @@ Macros</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="singleton_8h_source.html#l00090">90</a> of file <a class="el" href="singleton_8h_source.html">singleton.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="singleton_8h_source.html#l00093">93</a> of file <a class="el" href="singleton_8h_source.html">singleton.h</a>.</p>
 
 </div>
 </div>
@@ -173,11 +174,12 @@ Macros</h2></td></tr>
 <div class="line">        return instance;                                \</div>
 <div class="line">    }                                                   \</div>
 <div class="line">                                                        \</div>
-<div class="line">private:</div>
-<div class="ttc" id="astructqx_1_1singleton__traits_html"><div class="ttname"><a href="structqx_1_1singleton__traits.html">qx::singleton_traits</a></div><div class="ttdef"><b>Definition:</b> <a href="singleton_8h_source.html#l00019">singleton.h:20</a></div></div>
-<div class="ttc" id="astructqx_1_1singleton__traits_html_a4c1c0de2bf9b3cf56179d0656092e840"><div class="ttname"><a href="structqx_1_1singleton__traits.html#a4c1c0de2bf9b3cf56179d0656092e840">qx::singleton_traits::on_getter</a></div><div class="ttdeci">static void on_getter(T &amp;instance)</div><div class="ttdoc">Called when singleton proceeds getter.</div><div class="ttdef"><b>Definition:</b> <a href="singleton_8h_source.html#l00033">singleton.h:33</a></div></div>
-<div class="ttc" id="astructqx_1_1singleton__traits_html_a86e04ea5e8e6b42d78d8745667348bd2"><div class="ttname"><a href="structqx_1_1singleton__traits.html#a86e04ea5e8e6b42d78d8745667348bd2">qx::singleton_traits::on_destructed</a></div><div class="ttdeci">static void on_destructed(T &amp;instance)</div><div class="ttdoc">Called before singleton destructed.</div><div class="ttdef"><b>Definition:</b> <a href="singleton_8h_source.html#l00041">singleton.h:41</a></div></div>
-<div class="ttc" id="astructqx_1_1singleton__traits_html_a975794f5058a67e55bd334657d21575b"><div class="ttname"><a href="structqx_1_1singleton__traits.html#a975794f5058a67e55bd334657d21575b">qx::singleton_traits::on_constructed</a></div><div class="ttdeci">static void on_constructed(T &amp;instance)</div><div class="ttdoc">Called when singleton constructed.</div><div class="ttdef"><b>Definition:</b> <a href="singleton_8h_source.html#l00025">singleton.h:25</a></div></div>
+<div class="line">private:                                                \</div>
+<div class="line">    QX_EMPTY_MACRO</div>
+<div class="ttc" id="astructqx_1_1singleton__traits_html"><div class="ttname"><a href="structqx_1_1singleton__traits.html">qx::singleton_traits</a></div><div class="ttdef"><b>Definition:</b> <a href="singleton_8h_source.html#l00021">singleton.h:22</a></div></div>
+<div class="ttc" id="astructqx_1_1singleton__traits_html_a4c1c0de2bf9b3cf56179d0656092e840"><div class="ttname"><a href="structqx_1_1singleton__traits.html#a4c1c0de2bf9b3cf56179d0656092e840">qx::singleton_traits::on_getter</a></div><div class="ttdeci">static void on_getter(T &amp;instance)</div><div class="ttdoc">Called when singleton proceeds getter.</div><div class="ttdef"><b>Definition:</b> <a href="singleton_8h_source.html#l00035">singleton.h:35</a></div></div>
+<div class="ttc" id="astructqx_1_1singleton__traits_html_a86e04ea5e8e6b42d78d8745667348bd2"><div class="ttname"><a href="structqx_1_1singleton__traits.html#a86e04ea5e8e6b42d78d8745667348bd2">qx::singleton_traits::on_destructed</a></div><div class="ttdeci">static void on_destructed(T &amp;instance)</div><div class="ttdoc">Called before singleton destructed.</div><div class="ttdef"><b>Definition:</b> <a href="singleton_8h_source.html#l00043">singleton.h:43</a></div></div>
+<div class="ttc" id="astructqx_1_1singleton__traits_html_a975794f5058a67e55bd334657d21575b"><div class="ttname"><a href="structqx_1_1singleton__traits.html#a975794f5058a67e55bd334657d21575b">qx::singleton_traits::on_constructed</a></div><div class="ttdeci">static void on_constructed(T &amp;instance)</div><div class="ttdoc">Called when singleton constructed.</div><div class="ttdef"><b>Definition:</b> <a href="singleton_8h_source.html#l00027">singleton.h:27</a></div></div>
 </div><!-- fragment -->
 <p>Simple Meyer's singleton. </p>
 <p>Implement singleton_traits for your type to change creation, getting and destruction behaviour </p><dl class="params"><dt>Parameters</dt><dd>
@@ -188,7 +190,7 @@ Macros</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="singleton_8h_source.html#l00056">56</a> of file <a class="el" href="singleton_8h_source.html">singleton.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="singleton_8h_source.html#l00058">58</a> of file <a class="el" href="singleton_8h_source.html">singleton.h</a>.</p>
 
 </div>
 </div>

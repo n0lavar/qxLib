@@ -431,7 +431,7 @@ $(function() {
 <div class="line"><a name="l00360"></a><span class="lineno">  360</span>&#160;    <span class="keyword">static</span> <span class="keywordtype">void</span> format_to(</div>
 <div class="line"><a name="l00361"></a><span class="lineno">  361</span>&#160;        output_it_t                                     itOutput,</div>
 <div class="line"><a name="l00362"></a><span class="lineno">  362</span>&#160;        <span class="keyword">typename</span> usings_char_traits_t::string_view_type svFormat,</div>
-<div class="line"><a name="l00363"></a><span class="lineno">  363</span>&#160;        <span class="keyword">const</span> args_t&amp;... args)</div>
+<div class="line"><a name="l00363"></a><span class="lineno">  363</span>&#160;        args_t&amp;&amp;... args)</div>
 <div class="line"><a name="l00364"></a><span class="lineno">  364</span>&#160;    {</div>
 <div class="line"><a name="l00365"></a><span class="lineno">  365</span>&#160;        std::vformat_to(itOutput, svFormat, std::make_format_args(args...));</div>
 <div class="line"><a name="l00366"></a><span class="lineno">  366</span>&#160;    }</div>
@@ -455,7 +455,7 @@ $(function() {
 <div class="line"><a name="l00384"></a><span class="lineno">  384</span>&#160;    <span class="keyword">static</span> <span class="keywordtype">void</span> format_to(</div>
 <div class="line"><a name="l00385"></a><span class="lineno">  385</span>&#160;        output_it_t                                     itOutput,</div>
 <div class="line"><a name="l00386"></a><span class="lineno">  386</span>&#160;        <span class="keyword">typename</span> usings_char_traits_t::string_view_type svFormat,</div>
-<div class="line"><a name="l00387"></a><span class="lineno">  387</span>&#160;        <span class="keyword">const</span> args_t&amp;... args)</div>
+<div class="line"><a name="l00387"></a><span class="lineno">  387</span>&#160;        args_t&amp;&amp;... args)</div>
 <div class="line"><a name="l00388"></a><span class="lineno">  388</span>&#160;    {</div>
 <div class="line"><a name="l00389"></a><span class="lineno">  389</span>&#160;        std::vformat_to(itOutput, svFormat, std::make_wformat_args(args...));</div>
 <div class="line"><a name="l00390"></a><span class="lineno">  390</span>&#160;    }</div>

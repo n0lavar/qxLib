@@ -71,21 +71,34 @@ $(function() {
 <div class="title">rtti_cast.h File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><code>#include &lt;<a class="el" href="type__traits_8h_source.html">qx/meta/type_traits.h</a>&gt;</code><br />
+<div class="textblock"><code>#include &lt;<a class="el" href="link_8h_source.html">qx/link.h</a>&gt;</code><br />
+<code>#include &lt;<a class="el" href="rtti_8h_source.html">qx/rtti/rtti.h</a>&gt;</code><br />
 <code>#include &lt;memory&gt;</code><br />
 </div>
 <p><a href="rtti__cast_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:ab91745c6cdfdd361c1f0c684b343fd70"><td class="memTemplParams" colspan="2">template&lt;class Y , class X &gt; </td></tr>
-<tr class="memitem:ab91745c6cdfdd361c1f0c684b343fd70"><td class="memTemplItemLeft" align="right" valign="top">Y *&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="rtti__cast_8h.html#ab91745c6cdfdd361c1f0c684b343fd70">qx::rtti_cast</a> (X &amp;value)</td></tr>
-<tr class="memdesc:ab91745c6cdfdd361c1f0c684b343fd70"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns Y* if X or element_type of X is inherited from Y, otherwise nullptr.  <a href="rtti__cast_8h.html#ab91745c6cdfdd361c1f0c684b343fd70">More...</a><br /></td></tr>
-<tr class="separator:ab91745c6cdfdd361c1f0c684b343fd70"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af902ef7984c2e7134318854e38c7fa46"><td class="memTemplParams" colspan="2">template&lt;class Y , class X &gt; </td></tr>
-<tr class="memitem:af902ef7984c2e7134318854e38c7fa46"><td class="memTemplItemLeft" align="right" valign="top">Y *&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="rtti__cast_8h.html#af902ef7984c2e7134318854e38c7fa46">qx::rtti_cast</a> (X *pointer)</td></tr>
-<tr class="memdesc:af902ef7984c2e7134318854e38c7fa46"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns Y* if X is inherited from Y, otherwise nullptr.  <a href="rtti__cast_8h.html#af902ef7984c2e7134318854e38c7fa46">More...</a><br /></td></tr>
-<tr class="separator:af902ef7984c2e7134318854e38c7fa46"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4466e3d8615df28dc46f50fe4676dd5a"><td class="memTemplParams" colspan="2">template&lt;class to_t , class from_t &gt; </td></tr>
+<tr class="memitem:a4466e3d8615df28dc46f50fe4676dd5a"><td class="memTemplItemLeft" align="right" valign="top">requires std::derived_from&lt; from_t, rtti_pure_base &gt; &amp;&amp;std::derived_from&lt; to_t, rtti_pure_base &gt; to_t *&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="rtti__cast_8h.html#a4466e3d8615df28dc46f50fe4676dd5a">qx::rtti_cast</a> (from_t *pointer)</td></tr>
+<tr class="memdesc:a4466e3d8615df28dc46f50fe4676dd5a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns to_t* if from_t is inherited from Y, otherwise nullptr.  <a href="rtti__cast_8h.html#a4466e3d8615df28dc46f50fe4676dd5a">More...</a><br /></td></tr>
+<tr class="separator:a4466e3d8615df28dc46f50fe4676dd5a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a371310e85aad965ebf2243f6c98e1361"><td class="memTemplParams" colspan="2">template&lt;class to_t , class from_t &gt; </td></tr>
+<tr class="memitem:a371310e85aad965ebf2243f6c98e1361"><td class="memTemplItemLeft" align="right" valign="top">requires std::derived_from&lt; from_t, rtti_pure_base &gt; &amp;&amp;std::derived_from&lt; to_t, rtti_pure_base &gt; to_t *&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="rtti__cast_8h.html#a371310e85aad965ebf2243f6c98e1361">qx::rtti_cast</a> (const std::shared_ptr&lt; from_t &gt; &amp;pValue)</td></tr>
+<tr class="memdesc:a371310e85aad965ebf2243f6c98e1361"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns to_t* if from_t is inherited from Y, otherwise nullptr.  <a href="rtti__cast_8h.html#a371310e85aad965ebf2243f6c98e1361">More...</a><br /></td></tr>
+<tr class="separator:a371310e85aad965ebf2243f6c98e1361"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abb62189f04f30c9a1efbb70c164409e4"><td class="memTemplParams" colspan="2">template&lt;class to_t , class from_t &gt; </td></tr>
+<tr class="memitem:abb62189f04f30c9a1efbb70c164409e4"><td class="memTemplItemLeft" align="right" valign="top">requires std::derived_from&lt; from_t, rtti_pure_base &gt; &amp;&amp;std::derived_from&lt; to_t, rtti_pure_base &gt; to_t *&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="rtti__cast_8h.html#abb62189f04f30c9a1efbb70c164409e4">qx::rtti_cast</a> (const std::unique_ptr&lt; from_t &gt; &amp;pValue)</td></tr>
+<tr class="memdesc:abb62189f04f30c9a1efbb70c164409e4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns to_t* if from_t is inherited from Y, otherwise nullptr.  <a href="rtti__cast_8h.html#abb62189f04f30c9a1efbb70c164409e4">More...</a><br /></td></tr>
+<tr class="separator:abb62189f04f30c9a1efbb70c164409e4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0cccf1c15c761a4bc99a8ec45da9d5ed"><td class="memTemplParams" colspan="2">template&lt;class to_t , class from_t &gt; </td></tr>
+<tr class="memitem:a0cccf1c15c761a4bc99a8ec45da9d5ed"><td class="memTemplItemLeft" align="right" valign="top">requires std::derived_from&lt; from_t, rtti_pure_base &gt; &amp;&amp;std::derived_from&lt; to_t, rtti_pure_base &gt; to_t *&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="rtti__cast_8h.html#a0cccf1c15c761a4bc99a8ec45da9d5ed">qx::rtti_cast</a> (const link&lt; from_t &gt; &amp;pValueLink)</td></tr>
+<tr class="memdesc:a0cccf1c15c761a4bc99a8ec45da9d5ed"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns to_t* if from_t is inherited from Y, otherwise nullptr.  <a href="rtti__cast_8h.html#a0cccf1c15c761a4bc99a8ec45da9d5ed">More...</a><br /></td></tr>
+<tr class="separator:a0cccf1c15c761a4bc99a8ec45da9d5ed"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aadd7702c61b86ef2b3fc1056e3d57d25"><td class="memTemplParams" colspan="2">template&lt;class to_t , class from_t &gt; </td></tr>
+<tr class="memitem:aadd7702c61b86ef2b3fc1056e3d57d25"><td class="memTemplItemLeft" align="right" valign="top">requires std::derived_from&lt; from_t, rtti_pure_base &gt; &amp;&amp;std::derived_from&lt; to_t, rtti_pure_base &gt; to_t *&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="rtti__cast_8h.html#aadd7702c61b86ef2b3fc1056e3d57d25">qx::rtti_cast</a> (from_t &amp;value)</td></tr>
+<tr class="memdesc:aadd7702c61b86ef2b3fc1056e3d57d25"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns to_t* if from_t is inherited from Y, otherwise nullptr.  <a href="rtti__cast_8h.html#aadd7702c61b86ef2b3fc1056e3d57d25">More...</a><br /></td></tr>
+<tr class="separator:aadd7702c61b86ef2b3fc1056e3d57d25"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><dl class="section author"><dt>Author</dt><dd>Khrapov </dd></dl>
@@ -94,89 +107,218 @@ Functions</h2></td></tr>
 
 <p class="definition">Definition in file <a class="el" href="rtti__cast_8h_source.html">rtti_cast.h</a>.</p>
 </div><h2 class="groupheader">Function Documentation</h2>
-<a id="ab91745c6cdfdd361c1f0c684b343fd70"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab91745c6cdfdd361c1f0c684b343fd70">&#9670;&nbsp;</a></span>rtti_cast() <span class="overload">[1/2]</span></h2>
+<a id="a0cccf1c15c761a4bc99a8ec45da9d5ed"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0cccf1c15c761a4bc99a8ec45da9d5ed">&#9670;&nbsp;</a></span>rtti_cast() <span class="overload">[1/5]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class Y , class X &gt; </div>
+template&lt;class to_t , class from_t &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">Y* qx::rtti_cast </td>
+          <td class="memname">requires std::derived_from&lt;from_t, rtti_pure_base&gt;&amp;&amp; std::derived_from&lt;to_t, rtti_pure_base&gt; to_t* qx::rtti_cast </td>
           <td>(</td>
-          <td class="paramtype">X &amp;&#160;</td>
+          <td class="paramtype">const <a class="el" href="classqx_1_1link.html">link</a>&lt; from_t &gt; &amp;&#160;</td>
+          <td class="paramname"><em>pValueLink</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Returns to_t* if from_t is inherited from Y, otherwise nullptr. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">to_t</td><td>- type to cast to </td></tr>
+    <tr><td class="paramname">from_t</td><td>- type to cast from </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">pValueLink</td><td>- a pointer to test </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Return values</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">-</td><td>to_t* if from_t is inherited from Y, otherwise nullptr </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="rtti__cast_8h_source.html#l00079">79</a> of file <a class="el" href="rtti__cast_8h_source.html">rtti_cast.h</a>.</p>
+
+</div>
+</div>
+<a id="a371310e85aad965ebf2243f6c98e1361"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a371310e85aad965ebf2243f6c98e1361">&#9670;&nbsp;</a></span>rtti_cast() <span class="overload">[2/5]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class to_t , class from_t &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">requires std::derived_from&lt;from_t, rtti_pure_base&gt;&amp;&amp; std::derived_from&lt;to_t, rtti_pure_base&gt; to_t* qx::rtti_cast </td>
+          <td>(</td>
+          <td class="paramtype">const std::shared_ptr&lt; from_t &gt; &amp;&#160;</td>
+          <td class="paramname"><em>pValue</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Returns to_t* if from_t is inherited from Y, otherwise nullptr. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">to_t</td><td>- type to cast to </td></tr>
+    <tr><td class="paramname">from_t</td><td>- type to cast from </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">pValue</td><td>- a pointer to test </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Return values</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">-</td><td>to_t* if from_t is inherited from Y, otherwise nullptr </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="rtti__cast_8h_source.html#l00045">45</a> of file <a class="el" href="rtti__cast_8h_source.html">rtti_cast.h</a>.</p>
+
+</div>
+</div>
+<a id="abb62189f04f30c9a1efbb70c164409e4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abb62189f04f30c9a1efbb70c164409e4">&#9670;&nbsp;</a></span>rtti_cast() <span class="overload">[3/5]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class to_t , class from_t &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">requires std::derived_from&lt;from_t, rtti_pure_base&gt;&amp;&amp; std::derived_from&lt;to_t, rtti_pure_base&gt; to_t* qx::rtti_cast </td>
+          <td>(</td>
+          <td class="paramtype">const std::unique_ptr&lt; from_t &gt; &amp;&#160;</td>
+          <td class="paramname"><em>pValue</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Returns to_t* if from_t is inherited from Y, otherwise nullptr. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">to_t</td><td>- type to cast to </td></tr>
+    <tr><td class="paramname">from_t</td><td>- type to cast from </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">pValue</td><td>- a pointer to test </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Return values</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">-</td><td>to_t* if from_t is inherited from Y, otherwise nullptr </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="rtti__cast_8h_source.html#l00062">62</a> of file <a class="el" href="rtti__cast_8h_source.html">rtti_cast.h</a>.</p>
+
+</div>
+</div>
+<a id="aadd7702c61b86ef2b3fc1056e3d57d25"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aadd7702c61b86ef2b3fc1056e3d57d25">&#9670;&nbsp;</a></span>rtti_cast() <span class="overload">[4/5]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class to_t , class from_t &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">requires std::derived_from&lt;from_t, rtti_pure_base&gt;&amp;&amp; std::derived_from&lt;to_t, rtti_pure_base&gt; to_t* qx::rtti_cast </td>
+          <td>(</td>
+          <td class="paramtype">from_t &amp;&#160;</td>
           <td class="paramname"><em>value</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Returns Y* if X or element_type of X is inherited from Y, otherwise nullptr. </p>
+<p>Returns to_t* if from_t is inherited from Y, otherwise nullptr. </p>
 <p>Pointer class should contain QX_RTTI_CLASS </p><dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
-    <tr><td class="paramname">Y</td><td>- type to cast to </td></tr>
-    <tr><td class="paramname">X</td><td>- smart pointer type or some class to test type </td></tr>
+    <tr><td class="paramname">to_t</td><td>- type to cast to </td></tr>
+    <tr><td class="paramname">from_t</td><td>- type to cast from </td></tr>
   </table>
   </dd>
 </dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">value</td><td>- smart pointer object or some class to test object </td></tr>
+    <tr><td class="paramname">value</td><td>- a value to test </td></tr>
   </table>
   </dd>
 </dl>
 <dl class="retval"><dt>Return values</dt><dd>
   <table class="retval">
-    <tr><td class="paramname">-</td><td>Y* if X or element_type of X is inherited from Y, otherwise nullptr </td></tr>
+    <tr><td class="paramname">-</td><td>to_t* if from_t is inherited from Y, otherwise nullptr </td></tr>
   </table>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="rtti__cast_8h_source.html#l00035">35</a> of file <a class="el" href="rtti__cast_8h_source.html">rtti_cast.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="rtti__cast_8h_source.html#l00098">98</a> of file <a class="el" href="rtti__cast_8h_source.html">rtti_cast.h</a>.</p>
 
 </div>
 </div>
-<a id="af902ef7984c2e7134318854e38c7fa46"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af902ef7984c2e7134318854e38c7fa46">&#9670;&nbsp;</a></span>rtti_cast() <span class="overload">[2/2]</span></h2>
+<a id="a4466e3d8615df28dc46f50fe4676dd5a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4466e3d8615df28dc46f50fe4676dd5a">&#9670;&nbsp;</a></span>rtti_cast() <span class="overload">[5/5]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class Y , class X &gt; </div>
+template&lt;class to_t , class from_t &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">Y* qx::rtti_cast </td>
+          <td class="memname">requires std::derived_from&lt;from_t, rtti_pure_base&gt;&amp;&amp; std::derived_from&lt;to_t, rtti_pure_base&gt; to_t* qx::rtti_cast </td>
           <td>(</td>
-          <td class="paramtype">X *&#160;</td>
+          <td class="paramtype">from_t *&#160;</td>
           <td class="paramname"><em>pointer</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Returns Y* if X is inherited from Y, otherwise nullptr. </p>
-<p>Pointer class should contain QX_RTTI_CLASS </p><dl class="tparams"><dt>Template Parameters</dt><dd>
+<p>Returns to_t* if from_t is inherited from Y, otherwise nullptr. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
-    <tr><td class="paramname">Y</td><td>- type to cast to </td></tr>
-    <tr><td class="paramname">X</td><td>- type to cast from </td></tr>
+    <tr><td class="paramname">to_t</td><td>- type to cast to </td></tr>
+    <tr><td class="paramname">from_t</td><td>- type to cast from </td></tr>
   </table>
   </dd>
 </dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">pointer</td><td>- raw pointer </td></tr>
+    <tr><td class="paramname">pointer</td><td>- a pointer to test </td></tr>
   </table>
   </dd>
 </dl>
 <dl class="retval"><dt>Return values</dt><dd>
   <table class="retval">
-    <tr><td class="paramname">-</td><td>Y* if X is inherited from pointer class, otherwise nullptr </td></tr>
+    <tr><td class="paramname">-</td><td>to_t* if from_t is inherited from pointer class, otherwise nullptr </td></tr>
   </table>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="rtti__cast_8h_source.html#l00064">64</a> of file <a class="el" href="rtti__cast_8h_source.html">rtti_cast.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="rtti__cast_8h_source.html#l00028">28</a> of file <a class="el" href="rtti__cast_8h_source.html">rtti_cast.h</a>.</p>
 
 </div>
 </div>

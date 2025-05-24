@@ -127,22 +127,22 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a0400a656b10e9ad29c8307e47db75bfb"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classqx_1_1basic__string.html#a0400a656b10e9ad29c8307e47db75bfb">assign</a> (const string_t &amp;str) noexcept</td></tr>
 <tr class="memdesc:a0400a656b10e9ad29c8307e47db75bfb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Assign by char container.  <a href="classqx_1_1basic__string.html#a0400a656b10e9ad29c8307e47db75bfb">More...</a><br /></td></tr>
 <tr class="separator:a0400a656b10e9ad29c8307e47db75bfb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac18b528e0fd57bfa6d368aff3cd4d6f0"><td class="memTemplParams" colspan="2">template&lt;class... args_t&gt; </td></tr>
-<tr class="memitem:ac18b528e0fd57bfa6d368aff3cd4d6f0"><td class="memTemplItemLeft" align="right" valign="top">requires format_acceptable_args&lt; char_t, args_t... &gt; void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classqx_1_1basic__string.html#ac18b528e0fd57bfa6d368aff3cd4d6f0">format</a> (format_string_type&lt; args_t... &gt; sFormat, const args_t &amp;... args)</td></tr>
-<tr class="memdesc:ac18b528e0fd57bfa6d368aff3cd4d6f0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clear the string and format it with the format string and the args.  <a href="classqx_1_1basic__string.html#ac18b528e0fd57bfa6d368aff3cd4d6f0">More...</a><br /></td></tr>
-<tr class="separator:ac18b528e0fd57bfa6d368aff3cd4d6f0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1d6489f25469f18402bf713cbf4e63d2"><td class="memTemplParams" colspan="2">template&lt;class... args_t&gt; </td></tr>
-<tr class="memitem:a1d6489f25469f18402bf713cbf4e63d2"><td class="memTemplItemLeft" align="right" valign="top">requires format_acceptable_args&lt; char_t, args_t... &gt; void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classqx_1_1basic__string.html#a1d6489f25469f18402bf713cbf4e63d2">append_format</a> (format_string_type&lt; args_t... &gt; sFormat, const args_t &amp;... args)</td></tr>
-<tr class="memdesc:a1d6489f25469f18402bf713cbf4e63d2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Append the formatted string to the current one.  <a href="classqx_1_1basic__string.html#a1d6489f25469f18402bf713cbf4e63d2">More...</a><br /></td></tr>
-<tr class="separator:a1d6489f25469f18402bf713cbf4e63d2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afc11ece02c210ac204850bea802fbd40"><td class="memTemplParams" colspan="2">template&lt;class... args_t&gt; </td></tr>
-<tr class="memitem:afc11ece02c210ac204850bea802fbd40"><td class="memTemplItemLeft" align="right" valign="top">requires format_acceptable_args&lt; char_t, args_t... &gt; void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classqx_1_1basic__string.html#afc11ece02c210ac204850bea802fbd40">vformat</a> (string_view svFormat, const args_t &amp;... args)</td></tr>
-<tr class="memdesc:afc11ece02c210ac204850bea802fbd40"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clear the string and format it with the format string and the args.  <a href="classqx_1_1basic__string.html#afc11ece02c210ac204850bea802fbd40">More...</a><br /></td></tr>
-<tr class="separator:afc11ece02c210ac204850bea802fbd40"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3c4202568a17e11244fe4155689e5e4a"><td class="memTemplParams" colspan="2">template&lt;class... args_t&gt; </td></tr>
-<tr class="memitem:a3c4202568a17e11244fe4155689e5e4a"><td class="memTemplItemLeft" align="right" valign="top">requires format_acceptable_args&lt; char_t, args_t... &gt; void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classqx_1_1basic__string.html#a3c4202568a17e11244fe4155689e5e4a">append_vformat</a> (string_view svFormat, const args_t &amp;... args)</td></tr>
-<tr class="memdesc:a3c4202568a17e11244fe4155689e5e4a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Append the formatted string to the current one.  <a href="classqx_1_1basic__string.html#a3c4202568a17e11244fe4155689e5e4a">More...</a><br /></td></tr>
-<tr class="separator:a3c4202568a17e11244fe4155689e5e4a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acef9726f9442f1bfb521a67052dcb7bb"><td class="memTemplParams" colspan="2">template&lt;class... args_t&gt; </td></tr>
+<tr class="memitem:acef9726f9442f1bfb521a67052dcb7bb"><td class="memTemplItemLeft" align="right" valign="top">requires format_acceptable_args&lt; char_t, args_t... &gt; void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classqx_1_1basic__string.html#acef9726f9442f1bfb521a67052dcb7bb">format</a> (const format_string_type&lt; std::type_identity_t&lt; args_t &gt;... &gt; sFormat, args_t &amp;&amp;... args)</td></tr>
+<tr class="memdesc:acef9726f9442f1bfb521a67052dcb7bb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clear the string and format it with the format string and the args.  <a href="classqx_1_1basic__string.html#acef9726f9442f1bfb521a67052dcb7bb">More...</a><br /></td></tr>
+<tr class="separator:acef9726f9442f1bfb521a67052dcb7bb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af0622444e8d3ae178f99e61f1407f9ef"><td class="memTemplParams" colspan="2">template&lt;class... args_t&gt; </td></tr>
+<tr class="memitem:af0622444e8d3ae178f99e61f1407f9ef"><td class="memTemplItemLeft" align="right" valign="top">requires format_acceptable_args&lt; char_t, args_t... &gt; void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classqx_1_1basic__string.html#af0622444e8d3ae178f99e61f1407f9ef">append_format</a> (const format_string_type&lt; std::type_identity_t&lt; args_t &gt;... &gt; sFormat, args_t &amp;&amp;... args)</td></tr>
+<tr class="memdesc:af0622444e8d3ae178f99e61f1407f9ef"><td class="mdescLeft">&#160;</td><td class="mdescRight">Append the formatted string to the current one.  <a href="classqx_1_1basic__string.html#af0622444e8d3ae178f99e61f1407f9ef">More...</a><br /></td></tr>
+<tr class="separator:af0622444e8d3ae178f99e61f1407f9ef"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a686657d51f4d95b4896ae52095870922"><td class="memTemplParams" colspan="2">template&lt;class... args_t&gt; </td></tr>
+<tr class="memitem:a686657d51f4d95b4896ae52095870922"><td class="memTemplItemLeft" align="right" valign="top">requires format_acceptable_args&lt; char_t, args_t... &gt; void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classqx_1_1basic__string.html#a686657d51f4d95b4896ae52095870922">vformat</a> (string_view svFormat, args_t &amp;&amp;... args)</td></tr>
+<tr class="memdesc:a686657d51f4d95b4896ae52095870922"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clear the string and format it with the format string and the args.  <a href="classqx_1_1basic__string.html#a686657d51f4d95b4896ae52095870922">More...</a><br /></td></tr>
+<tr class="separator:a686657d51f4d95b4896ae52095870922"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acbba3d1cdf0dec54aff81f9d623b35d5"><td class="memTemplParams" colspan="2">template&lt;class... args_t&gt; </td></tr>
+<tr class="memitem:acbba3d1cdf0dec54aff81f9d623b35d5"><td class="memTemplItemLeft" align="right" valign="top">requires format_acceptable_args&lt; char_t, args_t... &gt; void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classqx_1_1basic__string.html#acbba3d1cdf0dec54aff81f9d623b35d5">append_vformat</a> (string_view svFormat, args_t &amp;&amp;... args)</td></tr>
+<tr class="memdesc:acbba3d1cdf0dec54aff81f9d623b35d5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Append the formatted string to the current one.  <a href="classqx_1_1basic__string.html#acbba3d1cdf0dec54aff81f9d623b35d5">More...</a><br /></td></tr>
+<tr class="separator:acbba3d1cdf0dec54aff81f9d623b35d5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7299c2ce3342083355a900209f5fbf7a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1basic__string.html#a7299c2ce3342083355a900209f5fbf7a">swap</a> (<a class="el" href="classqx_1_1basic__string.html">basic_string</a> &amp;sOther) noexcept</td></tr>
 <tr class="memdesc:a7299c2ce3342083355a900209f5fbf7a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Swap this str and other.  <a href="classqx_1_1basic__string.html#a7299c2ce3342083355a900209f5fbf7a">More...</a><br /></td></tr>
 <tr class="separator:a7299c2ce3342083355a900209f5fbf7a"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -619,14 +619,14 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
-<tr class="memitem:a8f5f405d16cbcf49cdd0ce5ff538d185"><td class="memTemplParams" colspan="2">template&lt;class... args_t&gt; </td></tr>
-<tr class="memitem:a8f5f405d16cbcf49cdd0ce5ff538d185"><td class="memTemplItemLeft" align="right" valign="top">requires static format_acceptable_args&lt; char_t, args_t... &gt; <a class="el" href="classqx_1_1basic__string.html">basic_string</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classqx_1_1basic__string.html#a8f5f405d16cbcf49cdd0ce5ff538d185">static_format</a> (format_string_type&lt; args_t... &gt; sFormat, const args_t &amp;... args)</td></tr>
-<tr class="memdesc:a8f5f405d16cbcf49cdd0ce5ff538d185"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a string by formatting it with the format string and the args.  <a href="classqx_1_1basic__string.html#a8f5f405d16cbcf49cdd0ce5ff538d185">More...</a><br /></td></tr>
-<tr class="separator:a8f5f405d16cbcf49cdd0ce5ff538d185"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a419b1e88438307eb7efab7fa10d37b2b"><td class="memTemplParams" colspan="2">template&lt;class... args_t&gt; </td></tr>
-<tr class="memitem:a419b1e88438307eb7efab7fa10d37b2b"><td class="memTemplItemLeft" align="right" valign="top">requires static format_acceptable_args&lt; char_t, args_t... &gt; <a class="el" href="classqx_1_1basic__string.html">basic_string</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classqx_1_1basic__string.html#a419b1e88438307eb7efab7fa10d37b2b">static_vformat</a> (string_view svFormat, const args_t &amp;... args)</td></tr>
-<tr class="memdesc:a419b1e88438307eb7efab7fa10d37b2b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a string by formatting it with the format string and the args.  <a href="classqx_1_1basic__string.html#a419b1e88438307eb7efab7fa10d37b2b">More...</a><br /></td></tr>
-<tr class="separator:a419b1e88438307eb7efab7fa10d37b2b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7ef01cf586ce7b0070e620aab7c0b53d"><td class="memTemplParams" colspan="2">template&lt;class... args_t&gt; </td></tr>
+<tr class="memitem:a7ef01cf586ce7b0070e620aab7c0b53d"><td class="memTemplItemLeft" align="right" valign="top">requires static format_acceptable_args&lt; char_t, args_t... &gt; <a class="el" href="classqx_1_1basic__string.html">basic_string</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classqx_1_1basic__string.html#a7ef01cf586ce7b0070e620aab7c0b53d">static_format</a> (const format_string_type&lt; std::type_identity_t&lt; args_t &gt;... &gt; sFormat, args_t &amp;&amp;... args)</td></tr>
+<tr class="memdesc:a7ef01cf586ce7b0070e620aab7c0b53d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a string by formatting it with the format string and the args.  <a href="classqx_1_1basic__string.html#a7ef01cf586ce7b0070e620aab7c0b53d">More...</a><br /></td></tr>
+<tr class="separator:a7ef01cf586ce7b0070e620aab7c0b53d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a360484aa5483e54757a6e7263fe20555"><td class="memTemplParams" colspan="2">template&lt;class... args_t&gt; </td></tr>
+<tr class="memitem:a360484aa5483e54757a6e7263fe20555"><td class="memTemplItemLeft" align="right" valign="top">requires static format_acceptable_args&lt; char_t, args_t... &gt; <a class="el" href="classqx_1_1basic__string.html">basic_string</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classqx_1_1basic__string.html#a360484aa5483e54757a6e7263fe20555">static_vformat</a> (string_view svFormat, args_t &amp;&amp;... args)</td></tr>
+<tr class="memdesc:a360484aa5483e54757a6e7263fe20555"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a string by formatting it with the format string and the args.  <a href="classqx_1_1basic__string.html#a360484aa5483e54757a6e7263fe20555">More...</a><br /></td></tr>
+<tr class="separator:a360484aa5483e54757a6e7263fe20555"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad9e495e149354a944f0999fe7e115697"><td class="memItemLeft" align="right" valign="top">static constexpr size_type&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1basic__string.html#ad9e495e149354a944f0999fe7e115697">max_size</a> () noexcept</td></tr>
 <tr class="memdesc:ad9e495e149354a944f0999fe7e115697"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the theoretical maximum of string size.  <a href="classqx_1_1basic__string.html#ad9e495e149354a944f0999fe7e115697">More...</a><br /></td></tr>
 <tr class="separator:ad9e495e149354a944f0999fe7e115697"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -1003,7 +1003,7 @@ template&lt;class char_t , class traits_t &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l00391">391</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l00395">395</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
 
 </div>
 </div>
@@ -1049,7 +1049,7 @@ template&lt;range_of_t_c&lt; char_t &gt; string_t&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l00406">406</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l00410">410</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
 
 </div>
 </div>
@@ -1098,7 +1098,7 @@ template&lt;class char_t , class traits_t &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l00378">378</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l00382">382</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
 
 </div>
 </div>
@@ -1155,7 +1155,7 @@ template&lt;class fwd_it_t &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l00398">398</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l00402">402</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
 
 </div>
 </div>
@@ -1193,12 +1193,12 @@ template&lt;class char_t , class traits_t &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l00372">372</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l00376">376</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
 
 </div>
 </div>
-<a id="a1d6489f25469f18402bf713cbf4e63d2"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1d6489f25469f18402bf713cbf4e63d2">&#9670;&nbsp;</a></span>append_format()</h2>
+<a id="af0622444e8d3ae178f99e61f1407f9ef"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af0622444e8d3ae178f99e61f1407f9ef">&#9670;&nbsp;</a></span>append_format()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1210,13 +1210,13 @@ template&lt;class... args_t&gt; </div>
         <tr>
           <td class="memname">requires format_acceptable_args&lt; char_t, args_t... &gt; void <a class="el" href="classqx_1_1basic__string.html">qx::basic_string</a>&lt; char_t, traits_t &gt;::append_format </td>
           <td>(</td>
-          <td class="paramtype">format_string_type&lt; args_t... &gt;&#160;</td>
+          <td class="paramtype">const format_string_type&lt; std::type_identity_t&lt; args_t &gt;... &gt;&#160;</td>
           <td class="paramname"><em>sFormat</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const args_t &amp;...&#160;</td>
+          <td class="paramtype">args_t &amp;&amp;...&#160;</td>
           <td class="paramname"><em>args</em>&#160;</td>
         </tr>
         <tr>
@@ -1242,12 +1242,12 @@ template&lt;class... args_t&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l00143">143</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l00145">145</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
 
 </div>
 </div>
-<a id="a3c4202568a17e11244fe4155689e5e4a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3c4202568a17e11244fe4155689e5e4a">&#9670;&nbsp;</a></span>append_vformat()</h2>
+<a id="acbba3d1cdf0dec54aff81f9d623b35d5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acbba3d1cdf0dec54aff81f9d623b35d5">&#9670;&nbsp;</a></span>append_vformat()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1268,7 +1268,7 @@ template&lt;class... args_t&gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const args_t &amp;...&#160;</td>
+          <td class="paramtype">args_t &amp;&amp;...&#160;</td>
           <td class="paramname"><em>args</em>&#160;</td>
         </tr>
         <tr>
@@ -1299,7 +1299,7 @@ template&lt;class... args_t&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l00172">172</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l00176">176</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
 
 </div>
 </div>
@@ -1648,7 +1648,7 @@ template&lt;class char_t , class traits_t &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l00236">236</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l00240">240</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
 
 </div>
 </div>
@@ -1682,7 +1682,7 @@ template&lt;class char_t , class traits_t &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l00248">248</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l00252">252</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
 
 </div>
 </div>
@@ -1716,7 +1716,7 @@ template&lt;class char_t , class traits_t &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l00254">254</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l00258">258</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
 
 </div>
 </div>
@@ -1760,7 +1760,7 @@ template&lt;class char_t , class traits_t &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l01259">1259</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l01263">1263</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
 
 </div>
 </div>
@@ -1812,7 +1812,7 @@ template&lt;range_of_t_c&lt; char_t &gt; string_t&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l01273">1273</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l01277">1277</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
 
 </div>
 </div>
@@ -1867,7 +1867,7 @@ template&lt;class char_t , class traits_t &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l01253">1253</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l01257">1257</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
 
 </div>
 </div>
@@ -1911,7 +1911,7 @@ template&lt;class char_t , class traits_t &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l01247">1247</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l01251">1251</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
 
 </div>
 </div>
@@ -1974,7 +1974,7 @@ template&lt;class fwd_it_t &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l01266">1266</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l01270">1270</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
 
 </div>
 </div>
@@ -2018,7 +2018,7 @@ template&lt;class char_t , class traits_t &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l01241">1241</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l01245">1245</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
 
 </div>
 </div>
@@ -2062,7 +2062,7 @@ template&lt;class char_t , class traits_t &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l01995">1995</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l01999">1999</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
 
 </div>
 </div>
@@ -2114,7 +2114,7 @@ template&lt;range_of_t_c&lt; char_t &gt; string_t&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l02009">2009</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l02013">2013</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
 
 </div>
 </div>
@@ -2169,7 +2169,7 @@ template&lt;class char_t , class traits_t &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l01989">1989</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l01993">1993</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
 
 </div>
 </div>
@@ -2232,7 +2232,7 @@ template&lt;class fwd_it_t &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l02002">2002</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l02006">2006</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
 
 </div>
 </div>
@@ -2276,7 +2276,7 @@ template&lt;class char_t , class traits_t &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l01983">1983</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l01987">1987</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
 
 </div>
 </div>
@@ -2338,7 +2338,7 @@ template&lt;class char_t , class traits_t &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l00315">315</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l00319">319</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
 
 </div>
 </div>
@@ -2382,7 +2382,7 @@ template&lt;class char_t , class traits_t &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l01963">1963</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l01967">1967</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
 
 </div>
 </div>
@@ -2434,7 +2434,7 @@ template&lt;range_of_t_c&lt; char_t &gt; string_t&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l01977">1977</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l01981">1981</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
 
 </div>
 </div>
@@ -2489,7 +2489,7 @@ template&lt;class char_t , class traits_t &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l01945">1945</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l01949">1949</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
 
 </div>
 </div>
@@ -2552,7 +2552,7 @@ template&lt;class fwd_it_t &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l01970">1970</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l01974">1974</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
 
 </div>
 </div>
@@ -2596,7 +2596,7 @@ template&lt;class char_t , class traits_t &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l01935">1935</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l01939">1939</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
 
 </div>
 </div>
@@ -2645,7 +2645,7 @@ template&lt;class char_t , class traits_t &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l00553">553</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l00557">557</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
 
 </div>
 </div>
@@ -2683,7 +2683,7 @@ template&lt;class char_t , class traits_t &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l00573">573</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l00577">577</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
 
 </div>
 </div>
@@ -2721,7 +2721,7 @@ template&lt;class char_t , class traits_t &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l00579">579</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l00583">583</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
 
 </div>
 </div>
@@ -2770,7 +2770,7 @@ template&lt;class char_t , class traits_t &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l00585">585</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l00589">589</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
 
 </div>
 </div>
@@ -2832,7 +2832,7 @@ template&lt;class char_t , class traits_t &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l01319">1319</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l01323">1323</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
 
 </div>
 </div>
@@ -2901,7 +2901,7 @@ template&lt;class char_t , class traits_t &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l01294">1294</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l01298">1298</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
 
 </div>
 </div>
@@ -2978,7 +2978,7 @@ template&lt;class fwd_it_t &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l01329">1329</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l01333">1333</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
 
 </div>
 </div>
@@ -3048,7 +3048,7 @@ template&lt;range_of_t_c&lt; char_t &gt; string_t&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l01350">1350</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l01354">1354</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
 
 </div>
 </div>
@@ -3110,7 +3110,7 @@ template&lt;class char_t , class traits_t &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l01279">1279</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l01283">1283</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
 
 </div>
 </div>
@@ -3165,7 +3165,7 @@ template&lt;class char_t , class traits_t &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l01672">1672</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l01676">1676</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
 
 </div>
 </div>
@@ -3227,7 +3227,7 @@ template&lt;class char_t , class traits_t &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l01627">1627</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l01631">1631</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
 
 </div>
 </div>
@@ -3282,7 +3282,7 @@ template&lt;class char_t , class traits_t &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l01650">1650</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l01654">1654</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
 
 </div>
 </div>
@@ -3352,7 +3352,7 @@ template&lt;class fwd_it_t &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l01681">1681</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l01685">1685</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
 
 </div>
 </div>
@@ -3415,7 +3415,7 @@ template&lt;range_of_t_c&lt; char_t &gt; string_t&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l01698">1698</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l01702">1702</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
 
 </div>
 </div>
@@ -3470,7 +3470,7 @@ template&lt;class char_t , class traits_t &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l01613">1613</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l01617">1617</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
 
 </div>
 </div>
@@ -3525,7 +3525,7 @@ template&lt;class char_t , class traits_t &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l01492">1492</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l01496">1496</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
 
 </div>
 </div>
@@ -3587,7 +3587,7 @@ template&lt;class char_t , class traits_t &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l01447">1447</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l01451">1451</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
 
 </div>
 </div>
@@ -3642,7 +3642,7 @@ template&lt;class char_t , class traits_t &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l01470">1470</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l01474">1474</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
 
 </div>
 </div>
@@ -3712,7 +3712,7 @@ template&lt;class fwd_it_t &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l01501">1501</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l01505">1505</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
 
 </div>
 </div>
@@ -3775,7 +3775,7 @@ template&lt;range_of_t_c&lt; char_t &gt; string_t&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l01518">1518</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l01522">1522</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
 
 </div>
 </div>
@@ -3830,7 +3830,7 @@ template&lt;class char_t , class traits_t &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l01439">1439</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l01443">1443</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
 
 </div>
 </div>
@@ -3885,7 +3885,7 @@ template&lt;class char_t , class traits_t &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l01765">1765</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l01769">1769</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
 
 </div>
 </div>
@@ -3947,7 +3947,7 @@ template&lt;class char_t , class traits_t &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l01720">1720</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l01724">1724</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
 
 </div>
 </div>
@@ -4002,7 +4002,7 @@ template&lt;class char_t , class traits_t &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l01743">1743</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l01747">1747</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
 
 </div>
 </div>
@@ -4072,7 +4072,7 @@ template&lt;class fwd_it_t &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l01774">1774</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l01778">1778</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
 
 </div>
 </div>
@@ -4135,7 +4135,7 @@ template&lt;range_of_t_c&lt; char_t &gt; string_t&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l01791">1791</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l01795">1795</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
 
 </div>
 </div>
@@ -4190,7 +4190,7 @@ template&lt;class char_t , class traits_t &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l01706">1706</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l01710">1710</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
 
 </div>
 </div>
@@ -4245,7 +4245,7 @@ template&lt;class char_t , class traits_t &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l01579">1579</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l01583">1583</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
 
 </div>
 </div>
@@ -4307,7 +4307,7 @@ template&lt;class char_t , class traits_t &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l01534">1534</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l01538">1538</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
 
 </div>
 </div>
@@ -4362,7 +4362,7 @@ template&lt;class char_t , class traits_t &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l01557">1557</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l01561">1561</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
 
 </div>
 </div>
@@ -4432,7 +4432,7 @@ template&lt;class fwd_it_t &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l01588">1588</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l01592">1592</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
 
 </div>
 </div>
@@ -4495,7 +4495,7 @@ template&lt;range_of_t_c&lt; char_t &gt; string_t&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l01605">1605</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l01609">1609</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
 
 </div>
 </div>
@@ -4550,12 +4550,12 @@ template&lt;class char_t , class traits_t &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l01526">1526</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l01530">1530</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
 
 </div>
 </div>
-<a id="ac18b528e0fd57bfa6d368aff3cd4d6f0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac18b528e0fd57bfa6d368aff3cd4d6f0">&#9670;&nbsp;</a></span>format()</h2>
+<a id="acef9726f9442f1bfb521a67052dcb7bb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acef9726f9442f1bfb521a67052dcb7bb">&#9670;&nbsp;</a></span>format()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -4567,13 +4567,13 @@ template&lt;class... args_t&gt; </div>
         <tr>
           <td class="memname">requires format_acceptable_args&lt; char_t, args_t... &gt; void <a class="el" href="classqx_1_1basic__string.html">qx::basic_string</a>&lt; char_t, traits_t &gt;::format </td>
           <td>(</td>
-          <td class="paramtype">format_string_type&lt; args_t... &gt;&#160;</td>
+          <td class="paramtype">const format_string_type&lt; std::type_identity_t&lt; args_t &gt;... &gt;&#160;</td>
           <td class="paramname"><em>sFormat</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const args_t &amp;...&#160;</td>
+          <td class="paramtype">args_t &amp;&amp;...&#160;</td>
           <td class="paramname"><em>args</em>&#160;</td>
         </tr>
         <tr>
@@ -4645,7 +4645,7 @@ template&lt;class from_t &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l00333">333</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l00337">337</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
 
 </div>
 </div>
@@ -4679,7 +4679,7 @@ template&lt;class char_t , class traits_t &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l00230">230</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l00234">234</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
 
 </div>
 </div>
@@ -4734,7 +4734,7 @@ template&lt;class char_t , class traits_t &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l00514">514</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l00518">518</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
 
 </div>
 </div>
@@ -4796,7 +4796,7 @@ template&lt;class char_t , class traits_t &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l00505">505</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l00509">509</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
 
 </div>
 </div>
@@ -4866,7 +4866,7 @@ template&lt;class fwd_it_t &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l00523">523</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l00527">527</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
 
 </div>
 </div>
@@ -4929,7 +4929,7 @@ template&lt;range_of_t_c&lt; char_t &gt; string_t&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l00533">533</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l00537">537</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
 
 </div>
 </div>
@@ -4984,7 +4984,7 @@ template&lt;class char_t , class traits_t &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l00497">497</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l00501">501</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
 
 </div>
 </div>
@@ -5039,7 +5039,7 @@ template&lt;class char_t , class traits_t &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l00480">480</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l00484">484</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
 
 </div>
 </div>
@@ -5101,7 +5101,7 @@ template&lt;class char_t , class traits_t &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l00420">420</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l00424">424</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
 
 </div>
 </div>
@@ -5171,7 +5171,7 @@ template&lt;class fwd_it_t &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l00443">443</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l00447">447</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
 
 </div>
 </div>
@@ -5234,7 +5234,7 @@ template&lt;range_of_t_c&lt; char_t &gt; string_t&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l00489">489</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l00493">493</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
 
 </div>
 </div>
@@ -5289,7 +5289,7 @@ template&lt;class char_t , class traits_t &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l00412">412</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l00416">416</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
 
 </div>
 </div>
@@ -5323,7 +5323,7 @@ template&lt;class char_t , class traits_t &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l00242">242</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l00246">246</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
 
 </div>
 </div>
@@ -5357,7 +5357,7 @@ template&lt;class char_t , class traits_t &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l00260">260</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l00264">264</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
 
 </div>
 </div>
@@ -5391,7 +5391,7 @@ template&lt;class char_t , class traits_t &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l00591">591</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l00595">595</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
 
 </div>
 </div>
@@ -5425,7 +5425,7 @@ template&lt;class char_t , class traits_t &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l00599">599</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l00603">603</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
 
 </div>
 </div>
@@ -5463,7 +5463,7 @@ template&lt;class char_t , class traits_t &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l00541">541</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l00545">545</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
 
 </div>
 </div>
@@ -5501,7 +5501,7 @@ template&lt;class char_t , class traits_t &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l00547">547</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l00551">551</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
 
 </div>
 </div>
@@ -5563,7 +5563,7 @@ template&lt;class char_t , class traits_t &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l00944">944</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l00948">948</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
 
 </div>
 </div>
@@ -5633,7 +5633,7 @@ template&lt;range_of_t_c&lt; char_t &gt; string_t&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l00975">975</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l00979">979</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
 
 </div>
 </div>
@@ -5702,7 +5702,7 @@ template&lt;class char_t , class traits_t &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l00921">921</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l00925">925</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
 
 </div>
 </div>
@@ -5779,7 +5779,7 @@ template&lt;class fwd_it_t &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l00959">959</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l00963">963</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
 
 </div>
 </div>
@@ -5841,7 +5841,7 @@ template&lt;class char_t , class traits_t &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l00907">907</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l00911">911</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
 
 </div>
 </div>
@@ -5903,7 +5903,7 @@ template&lt;class char_t , class traits_t &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l01105">1105</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l01109">1109</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
 
 </div>
 </div>
@@ -5973,7 +5973,7 @@ template&lt;range_of_t_c&lt; char_t &gt; string_t&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l01135">1135</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l01139">1139</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
 
 </div>
 </div>
@@ -6042,7 +6042,7 @@ template&lt;class char_t , class traits_t &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l01079">1079</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l01083">1083</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
 
 </div>
 </div>
@@ -6119,7 +6119,7 @@ template&lt;class fwd_it_t &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l01115">1115</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l01119">1119</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
 
 </div>
 </div>
@@ -6181,7 +6181,7 @@ template&lt;class char_t , class traits_t &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l01061">1061</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l01065">1065</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
 
 </div>
 </div>
@@ -6225,7 +6225,7 @@ template&lt;class char_t , class traits_t &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l00996">996</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l01000">1000</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
 
 </div>
 </div>
@@ -6277,7 +6277,7 @@ template&lt;range_of_t_c&lt; char_t &gt; string_t&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l01011">1011</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l01015">1015</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
 
 </div>
 </div>
@@ -6332,7 +6332,7 @@ template&lt;class char_t , class traits_t &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l00990">990</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l00994">994</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
 
 </div>
 </div>
@@ -6395,7 +6395,7 @@ template&lt;class fwd_it_t &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l01003">1003</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l01007">1007</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
 
 </div>
 </div>
@@ -6439,7 +6439,7 @@ template&lt;class char_t , class traits_t &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l00984">984</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l00988">988</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
 
 </div>
 </div>
@@ -6483,7 +6483,7 @@ template&lt;class char_t , class traits_t &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l01040">1040</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l01044">1044</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
 
 </div>
 </div>
@@ -6535,7 +6535,7 @@ template&lt;range_of_t_c&lt; char_t &gt; string_t&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l01055">1055</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l01059">1059</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
 
 </div>
 </div>
@@ -6590,7 +6590,7 @@ template&lt;class char_t , class traits_t &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l01024">1024</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l01028">1028</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
 
 </div>
 </div>
@@ -6653,7 +6653,7 @@ template&lt;class fwd_it_t &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l01047">1047</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l01051">1051</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
 
 </div>
 </div>
@@ -6697,7 +6697,7 @@ template&lt;class char_t , class traits_t &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l01017">1017</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l01021">1021</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
 
 </div>
 </div>
@@ -6775,7 +6775,7 @@ template&lt;class find_string_t , class replace_string_t &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l01145">1145</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l01149">1149</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
 
 </div>
 </div>
@@ -6853,7 +6853,7 @@ template&lt;class find_string_t , class replace_string_t &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l01221">1221</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l01225">1225</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
 
 </div>
 </div>
@@ -6897,7 +6897,7 @@ template&lt;class char_t , class traits_t &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l00185">185</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l00189">189</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
 
 </div>
 </div>
@@ -6959,7 +6959,7 @@ template&lt;class char_t , class traits_t &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l01399">1399</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l01403">1403</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
 
 </div>
 </div>
@@ -7028,7 +7028,7 @@ template&lt;class char_t , class traits_t &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l01374">1374</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l01378">1378</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
 
 </div>
 </div>
@@ -7105,7 +7105,7 @@ template&lt;class fwd_it_t &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l01409">1409</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l01413">1413</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
 
 </div>
 </div>
@@ -7175,7 +7175,7 @@ template&lt;range_of_t_c&lt; char_t &gt; string_t&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l01430">1430</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l01434">1434</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
 
 </div>
 </div>
@@ -7237,7 +7237,7 @@ template&lt;class char_t , class traits_t &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l01359">1359</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l01363">1363</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
 
 </div>
 </div>
@@ -7281,7 +7281,7 @@ template&lt;class char_t , class traits_t &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l01850">1850</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l01854">1854</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
 
 </div>
 </div>
@@ -7333,7 +7333,7 @@ template&lt;range_of_t_c&lt; char_t &gt; string_t&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l01880">1880</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l01884">1884</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
 
 </div>
 </div>
@@ -7377,7 +7377,7 @@ template&lt;class char_t , class traits_t &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l01799">1799</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l01803">1803</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
 
 </div>
 </div>
@@ -7432,7 +7432,7 @@ template&lt;class char_t , class traits_t &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l01821">1821</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l01825">1825</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
 
 </div>
 </div>
@@ -7495,7 +7495,7 @@ template&lt;class fwd_it_t &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l01858">1858</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l01862">1862</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
 
 </div>
 </div>
@@ -7539,7 +7539,7 @@ template&lt;class char_t , class traits_t &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l01914">1914</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l01918">1918</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
 
 </div>
 </div>
@@ -7591,7 +7591,7 @@ template&lt;range_of_t_c&lt; char_t &gt; string_t&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l01929">1929</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l01933">1933</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
 
 </div>
 </div>
@@ -7646,7 +7646,7 @@ template&lt;class char_t , class traits_t &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l01896">1896</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l01900">1900</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
 
 </div>
 </div>
@@ -7709,7 +7709,7 @@ template&lt;class fwd_it_t &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l01921">1921</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l01925">1925</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
 
 </div>
 </div>
@@ -7753,12 +7753,12 @@ template&lt;class char_t , class traits_t &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l01887">1887</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l01891">1891</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
 
 </div>
 </div>
-<a id="a8f5f405d16cbcf49cdd0ce5ff538d185"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8f5f405d16cbcf49cdd0ce5ff538d185">&#9670;&nbsp;</a></span>static_format()</h2>
+<a id="a7ef01cf586ce7b0070e620aab7c0b53d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7ef01cf586ce7b0070e620aab7c0b53d">&#9670;&nbsp;</a></span>static_format()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -7773,13 +7773,13 @@ template&lt;class... args_t&gt; </div>
         <tr>
           <td class="memname">requires static format_acceptable_args&lt;char_t, args_t...&gt; <a class="el" href="classqx_1_1basic__string.html">basic_string</a> <a class="el" href="classqx_1_1basic__string.html">qx::basic_string</a>&lt; char_t, traits_t &gt;::static_format </td>
           <td>(</td>
-          <td class="paramtype">format_string_type&lt; args_t... &gt;&#160;</td>
+          <td class="paramtype">const format_string_type&lt; std::type_identity_t&lt; args_t &gt;... &gt;&#160;</td>
           <td class="paramname"><em>sFormat</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const args_t &amp;...&#160;</td>
+          <td class="paramtype">args_t &amp;&amp;...&#160;</td>
           <td class="paramname"><em>args</em>&#160;</td>
         </tr>
         <tr>
@@ -7868,8 +7868,8 @@ template&lt;class from_t &gt; </div>
 
 </div>
 </div>
-<a id="a419b1e88438307eb7efab7fa10d37b2b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a419b1e88438307eb7efab7fa10d37b2b">&#9670;&nbsp;</a></span>static_vformat()</h2>
+<a id="a360484aa5483e54757a6e7263fe20555"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a360484aa5483e54757a6e7263fe20555">&#9670;&nbsp;</a></span>static_vformat()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -7890,7 +7890,7 @@ template&lt;class... args_t&gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const args_t &amp;...&#160;</td>
+          <td class="paramtype">args_t &amp;&amp;...&#160;</td>
           <td class="paramname"><em>args</em>&#160;</td>
         </tr>
         <tr>
@@ -7980,7 +7980,7 @@ template&lt;class char_t , class traits_t &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l00208">208</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l00212">212</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
 
 </div>
 </div>
@@ -8018,7 +8018,7 @@ template&lt;class char_t , class traits_t &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l00179">179</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l00183">183</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
 
 </div>
 </div>
@@ -8071,7 +8071,7 @@ template&lt;class to_t &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l00268">268</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l00272">272</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
 
 </div>
 </div>
@@ -8105,7 +8105,7 @@ template&lt;class char_t , class traits_t &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l00807">807</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l00811">811</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
 
 </div>
 </div>
@@ -8149,7 +8149,7 @@ template&lt;class char_t , class traits_t &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l00875">875</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l00879">879</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
 
 </div>
 </div>
@@ -8201,7 +8201,7 @@ template&lt;range_of_t_c&lt; char_t &gt; string_t&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l00900">900</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l00904">904</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
 
 </div>
 </div>
@@ -8245,7 +8245,7 @@ template&lt;class char_t , class traits_t &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l00828">828</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l00832">832</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
 
 </div>
 </div>
@@ -8300,7 +8300,7 @@ template&lt;class char_t , class traits_t &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l00852">852</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l00856">856</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
 
 </div>
 </div>
@@ -8363,7 +8363,7 @@ template&lt;class fwd_it_t &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l00883">883</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l00887">887</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
 
 </div>
 </div>
@@ -8407,7 +8407,7 @@ template&lt;class char_t , class traits_t &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l00817">817</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l00821">821</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
 
 </div>
 </div>
@@ -8441,7 +8441,7 @@ template&lt;class char_t , class traits_t &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l00607">607</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l00611">611</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
 
 </div>
 </div>
@@ -8485,7 +8485,7 @@ template&lt;class char_t , class traits_t &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l00675">675</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l00679">679</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
 
 </div>
 </div>
@@ -8537,7 +8537,7 @@ template&lt;range_of_t_c&lt; char_t &gt; string_t&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l00700">700</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l00704">704</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
 
 </div>
 </div>
@@ -8581,7 +8581,7 @@ template&lt;class char_t , class traits_t &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l00628">628</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l00632">632</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
 
 </div>
 </div>
@@ -8636,7 +8636,7 @@ template&lt;class char_t , class traits_t &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l00652">652</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l00656">656</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
 
 </div>
 </div>
@@ -8699,7 +8699,7 @@ template&lt;class fwd_it_t &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l00683">683</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l00687">687</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
 
 </div>
 </div>
@@ -8743,7 +8743,7 @@ template&lt;class char_t , class traits_t &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l00617">617</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l00621">621</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
 
 </div>
 </div>
@@ -8777,7 +8777,7 @@ template&lt;class char_t , class traits_t &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l00707">707</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l00711">711</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
 
 </div>
 </div>
@@ -8821,7 +8821,7 @@ template&lt;class char_t , class traits_t &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l00775">775</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l00779">779</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
 
 </div>
 </div>
@@ -8873,7 +8873,7 @@ template&lt;range_of_t_c&lt; char_t &gt; string_t&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l00800">800</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l00804">804</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
 
 </div>
 </div>
@@ -8917,7 +8917,7 @@ template&lt;class char_t , class traits_t &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l00728">728</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l00732">732</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
 
 </div>
 </div>
@@ -8972,7 +8972,7 @@ template&lt;class char_t , class traits_t &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l00752">752</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l00756">756</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
 
 </div>
 </div>
@@ -9035,7 +9035,7 @@ template&lt;class fwd_it_t &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l00783">783</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l00787">787</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
 
 </div>
 </div>
@@ -9079,12 +9079,12 @@ template&lt;class char_t , class traits_t &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l00717">717</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l00721">721</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
 
 </div>
 </div>
-<a id="afc11ece02c210ac204850bea802fbd40"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#afc11ece02c210ac204850bea802fbd40">&#9670;&nbsp;</a></span>vformat()</h2>
+<a id="a686657d51f4d95b4896ae52095870922"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a686657d51f4d95b4896ae52095870922">&#9670;&nbsp;</a></span>vformat()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -9102,7 +9102,7 @@ template&lt;class... args_t&gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const args_t &amp;...&#160;</td>
+          <td class="paramtype">args_t &amp;&amp;...&#160;</td>
           <td class="paramname"><em>args</em>&#160;</td>
         </tr>
         <tr>
@@ -9128,7 +9128,7 @@ template&lt;class... args_t&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l00151">151</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l00155">155</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
 
 </div>
 </div>

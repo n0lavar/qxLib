@@ -111,28 +111,37 @@ $(function() {
 <div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    <span class="keywordflow">return</span> res;</div>
 <div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;}</div>
 <div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160; </div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> result_container_t, <span class="keyword">class</span> container_t&gt;</div>
-<div class="line"><a name="l00044"></a><span class="lineno"><a class="line" href="utils_8h.html#abd7ce410374e16233bf7c028afd34302">   44</a></span>&#160;result_container_t <a class="code" href="utils_8h.html#abd7ce410374e16233bf7c028afd34302">make_container</a>(<span class="keyword">const</span> container_t&amp; from)</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="keyword">template</span>&lt;std::<span class="keywordtype">size_t</span> N, <span class="keyword">class</span> T&gt;</div>
+<div class="line"><a name="l00044"></a><span class="lineno"><a class="line" href="utils_8h.html#a33a377750abf6a5eebd67f31df69cafc">   44</a></span>&#160;constexpr std::array&lt;T, N&gt; <a class="code" href="utils_8h.html#a33a377750abf6a5eebd67f31df69cafc">span_to_array</a>(<span class="keyword">const</span> std::span&lt;T, N&gt;&amp; span)</div>
 <div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;{</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    result_container_t container;</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160; </div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    <span class="keywordflow">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span>&amp; item : from)</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;        container.insert(container.end(), <span class="keyword">typename</span> result_container_t::value_type(item));</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    std::array&lt;T, N&gt; array;</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    std::copy(span.begin(), span.end(), array.begin());</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    <span class="keywordflow">return</span> array;</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;}</div>
 <div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160; </div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    <span class="keywordflow">return</span> container;</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;}</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160; </div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> container_t&gt;</div>
-<div class="line"><a name="l00055"></a><span class="lineno"><a class="line" href="utils_8h.html#a8a23a76a4737044b9b17017f632306fc">   55</a></span>&#160;constexpr <span class="keywordtype">size_t</span> <a class="code" href="utils_8h.html#a8a23a76a4737044b9b17017f632306fc">bytes_size</a>(<span class="keyword">const</span> container_t&amp; container)</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;{</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    <span class="keywordflow">return</span> container.size() * <span class="keyword">sizeof</span>(<span class="keyword">typename</span> container_t::value_type);</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;}</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160; </div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;} <span class="comment">// namespace qx</span></div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> result_container_t, <span class="keyword">class</span> container_t&gt;</div>
+<div class="line"><a name="l00052"></a><span class="lineno"><a class="line" href="utils_8h.html#abd7ce410374e16233bf7c028afd34302">   52</a></span>&#160;result_container_t <a class="code" href="utils_8h.html#abd7ce410374e16233bf7c028afd34302">make_container</a>(<span class="keyword">const</span> container_t&amp; from)</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;{</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    result_container_t container;</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160; </div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    <span class="keywordflow">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span>&amp; item : from)</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;        container.insert(container.end(), <span class="keyword">typename</span> result_container_t::value_type(item));</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160; </div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    <span class="keywordflow">return</span> container;</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;}</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160; </div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> container_t&gt;</div>
+<div class="line"><a name="l00063"></a><span class="lineno"><a class="line" href="utils_8h.html#a8a23a76a4737044b9b17017f632306fc">   63</a></span>&#160;constexpr <span class="keywordtype">size_t</span> <a class="code" href="utils_8h.html#a8a23a76a4737044b9b17017f632306fc">bytes_size</a>(<span class="keyword">const</span> container_t&amp; container)</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;{</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    <span class="keywordflow">return</span> container.size() * <span class="keyword">sizeof</span>(<span class="keyword">typename</span> container_t::value_type);</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;}</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160; </div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;} <span class="comment">// namespace qx</span></div>
 <div class="ttc" id="autils_8h_html_a0708d6ca8dda3583a2d00c60c6d87141"><div class="ttname"><a href="utils_8h.html#a0708d6ca8dda3583a2d00c60c6d87141">qx::destruct</a></div><div class="ttdeci">void destruct(iterator_t itStart, iterator_t itEnd)</div><div class="ttdoc">Call destructors.</div><div class="ttdef"><b>Definition:</b> <a href="utils_8inl_source.html#l00014">utils.inl:14</a></div></div>
-<div class="ttc" id="autils_8h_html_a8a23a76a4737044b9b17017f632306fc"><div class="ttname"><a href="utils_8h.html#a8a23a76a4737044b9b17017f632306fc">qx::bytes_size</a></div><div class="ttdeci">constexpr size_t bytes_size(const container_t &amp;container)</div><div class="ttdoc">Get the size of memory allocated for container elements.</div><div class="ttdef"><b>Definition:</b> <a href="utils_8inl_source.html#l00055">utils.inl:55</a></div></div>
+<div class="ttc" id="autils_8h_html_a33a377750abf6a5eebd67f31df69cafc"><div class="ttname"><a href="utils_8h.html#a33a377750abf6a5eebd67f31df69cafc">qx::span_to_array</a></div><div class="ttdeci">constexpr std::array&lt; T, N &gt; span_to_array(const std::span&lt; T, N &gt; &amp;span)</div><div class="ttdoc">Convert a span to an array.</div><div class="ttdef"><b>Definition:</b> <a href="utils_8inl_source.html#l00044">utils.inl:44</a></div></div>
+<div class="ttc" id="autils_8h_html_a8a23a76a4737044b9b17017f632306fc"><div class="ttname"><a href="utils_8h.html#a8a23a76a4737044b9b17017f632306fc">qx::bytes_size</a></div><div class="ttdeci">constexpr size_t bytes_size(const container_t &amp;container)</div><div class="ttdoc">Get the size of memory allocated for container elements.</div><div class="ttdef"><b>Definition:</b> <a href="utils_8inl_source.html#l00063">utils.inl:63</a></div></div>
 <div class="ttc" id="autils_8h_html_a9d6faba90a6874d7629cf440bdd4092c"><div class="ttname"><a href="utils_8h.html#a9d6faba90a6874d7629cf440bdd4092c">qx::make_array</a></div><div class="ttdeci">constexpr auto make_array(T init_val=T())</div><div class="ttdoc">Fill array with value in constructor.</div><div class="ttdef"><b>Definition:</b> <a href="utils_8inl_source.html#l00025">utils.inl:25</a></div></div>
-<div class="ttc" id="autils_8h_html_abd7ce410374e16233bf7c028afd34302"><div class="ttname"><a href="utils_8h.html#abd7ce410374e16233bf7c028afd34302">qx::make_container</a></div><div class="ttdeci">result_container_t make_container(const container_t &amp;from)</div><div class="ttdoc">Create a container by constructing each element from the corresponding element of the original contai...</div><div class="ttdef"><b>Definition:</b> <a href="utils_8inl_source.html#l00044">utils.inl:44</a></div></div>
+<div class="ttc" id="autils_8h_html_abd7ce410374e16233bf7c028afd34302"><div class="ttname"><a href="utils_8h.html#abd7ce410374e16233bf7c028afd34302">qx::make_container</a></div><div class="ttdeci">result_container_t make_container(const container_t &amp;from)</div><div class="ttdoc">Create a container by constructing each element from the corresponding element of the original contai...</div><div class="ttdef"><b>Definition:</b> <a href="utils_8inl_source.html#l00052">utils.inl:52</a></div></div>
 <div class="ttc" id="autils_8h_html_ad87f567ad1eb4cd1c4a5187839530b48"><div class="ttname"><a href="utils_8h.html#ad87f567ad1eb4cd1c4a5187839530b48">qx::join_arrays</a></div><div class="ttdeci">constexpr std::array&lt; T, LeftLength+RightLength &gt; join_arrays(std::array&lt; T, LeftLength &gt; rhs, std::array&lt; T, RightLength &gt; lhs)</div><div class="ttdoc">Join arrays at compile-time.</div><div class="ttdef"><b>Definition:</b> <a href="utils_8inl_source.html#l00033">utils.inl:33</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->

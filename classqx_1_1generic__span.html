@@ -74,7 +74,7 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p>Same as std::span, but may be used with containers with forward iterators.  
+<p>Same as std::span, but may be used with any container with forward iterators.  
  <a href="classqx_1_1generic__span.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="generic__span_8h_source.html">generic_span.h</a>&gt;</code></p>
@@ -88,11 +88,11 @@ Classes</h2></td></tr>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a66ba93d2185e52db6eedcccb78930541"><td class="memTemplParams" colspan="2">template&lt;class container_t &gt; </td></tr>
 <tr class="memitem:a66ba93d2185e52db6eedcccb78930541"><td class="memTemplItemLeft" align="right" valign="top">&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classqx_1_1generic__span.html#a66ba93d2185e52db6eedcccb78930541">generic_span</a> (container_t &amp;container) noexcept</td></tr>
-<tr class="memdesc:a66ba93d2185e52db6eedcccb78930541"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classqx_1_1generic__span.html" title="Same as std::span, but may be used with containers with forward iterators.">generic_span</a> object constructor  <a href="classqx_1_1generic__span.html#a66ba93d2185e52db6eedcccb78930541">More...</a><br /></td></tr>
+<tr class="memdesc:a66ba93d2185e52db6eedcccb78930541"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classqx_1_1generic__span.html" title="Same as std::span, but may be used with any container with forward iterators.">generic_span</a> object constructor  <a href="classqx_1_1generic__span.html#a66ba93d2185e52db6eedcccb78930541">More...</a><br /></td></tr>
 <tr class="separator:a66ba93d2185e52db6eedcccb78930541"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae3ba0c0386bae415840c1c737af31a9e"><td class="memTemplParams" colspan="2">template&lt;class container_t &gt; </td></tr>
 <tr class="memitem:ae3ba0c0386bae415840c1c737af31a9e"><td class="memTemplItemLeft" align="right" valign="top">&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classqx_1_1generic__span.html#ae3ba0c0386bae415840c1c737af31a9e">generic_span</a> (container_t &amp;container, function_type&lt; reference(qualified_type&lt; container_value&lt; container_t &gt;&gt; &amp;)&gt; valueAdapter) noexcept</td></tr>
-<tr class="memdesc:ae3ba0c0386bae415840c1c737af31a9e"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classqx_1_1generic__span.html" title="Same as std::span, but may be used with containers with forward iterators.">generic_span</a> object constructor  <a href="classqx_1_1generic__span.html#ae3ba0c0386bae415840c1c737af31a9e">More...</a><br /></td></tr>
+<tr class="memdesc:ae3ba0c0386bae415840c1c737af31a9e"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classqx_1_1generic__span.html" title="Same as std::span, but may be used with any container with forward iterators.">generic_span</a> object constructor  <a href="classqx_1_1generic__span.html#ae3ba0c0386bae415840c1c737af31a9e">More...</a><br /></td></tr>
 <tr class="separator:ae3ba0c0386bae415840c1c737af31a9e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a160b709ac3f50366381019fd06174a5f"><td class="memTemplParams" colspan="2">template&lt;class container_t &gt; </td></tr>
 <tr class="memitem:a160b709ac3f50366381019fd06174a5f"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classqx_1_1generic__span.html">generic_span</a> &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classqx_1_1generic__span.html#a160b709ac3f50366381019fd06174a5f">operator=</a> (container_t &amp;container) noexcept</td></tr>
@@ -118,8 +118,8 @@ Public Member Functions</h2></td></tr>
 <div class="textblock"><h3>template&lt;class T, class traits_t = default_generic_span_traits&gt;<br />
 class qx::generic_span&lt; T, traits_t &gt;</h3>
 
-<p>Same as std::span, but may be used with containers with forward iterators. </p>
-<p>The class can be used to use any container to iterate over its elements Useful when used in virtual methods Does not own the container The container should not be changed until the end of the iteration May be much slower then std::span when the size of sbo is smaller then sizeof 2 iterators of this container (libcpp: 16, ligcxx: 16, MSVC: 56) </p><dl class="tparams"><dt>Template Parameters</dt><dd>
+<p>Same as std::span, but may be used with any container with forward iterators. </p>
+<p>The class can be used to use any container to iterate over its elements Useful when used in virtual methods Does not own the container The container should not be changed until the end of the iteration May be much slower then std::span when the size of sbo of std::function is smaller then sizeof 2 iterators of this container (libcpp: 16, ligcxx: 16, MSVC: 56) </p><dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
     <tr><td class="paramname">T</td><td>- container value type </td></tr>
   </table>
@@ -128,7 +128,7 @@ class qx::generic_span&lt; T, traits_t &gt;</h3>
 <dl class="section author"><dt>Author</dt><dd>Khrapov </dd></dl>
 <dl class="section date"><dt>Date</dt><dd>20.11.2022 </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="generic__span_8h_source.html#l00040">40</a> of file <a class="el" href="generic__span_8h_source.html">generic_span.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="generic__span_8h_source.html#l00041">41</a> of file <a class="el" href="generic__span_8h_source.html">generic_span.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a66ba93d2185e52db6eedcccb78930541"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a66ba93d2185e52db6eedcccb78930541">&#9670;&nbsp;</a></span>generic_span() <span class="overload">[1/2]</span></h2>
@@ -158,7 +158,7 @@ template&lt;class container_t &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p><a class="el" href="classqx_1_1generic__span.html" title="Same as std::span, but may be used with containers with forward iterators.">generic_span</a> object constructor </p>
+<p><a class="el" href="classqx_1_1generic__span.html" title="Same as std::span, but may be used with any container with forward iterators.">generic_span</a> object constructor </p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
     <tr><td class="paramname">container_t</td><td>- any container, which adapter satisfies forward iterator concept </td></tr>
@@ -214,7 +214,7 @@ template&lt;class container_t &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p><a class="el" href="classqx_1_1generic__span.html" title="Same as std::span, but may be used with containers with forward iterators.">generic_span</a> object constructor </p>
+<p><a class="el" href="classqx_1_1generic__span.html" title="Same as std::span, but may be used with any container with forward iterators.">generic_span</a> object constructor </p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
     <tr><td class="paramname">container_t</td><td>- any container, which adapter satisfies forward iterator concept </td></tr>

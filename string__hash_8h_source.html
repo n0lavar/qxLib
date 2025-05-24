@@ -93,7 +93,7 @@ $(function() {
 <div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;concept has_zero_termonated_hash_func_overload =</div>
 <div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    requires(<span class="keyword">typename</span> T::const_pointer pszStr, <span class="keywordtype">size_t</span> nSeed) { T::hash_function(pszStr, nSeed); };</div>
 <div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160; </div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;};</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;}; <span class="comment">// namespace details</span></div>
 <div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="comment"></span> </div>
 <div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="comment">/**</span></div>
 <div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="comment"></span> </div>
@@ -167,7 +167,7 @@ $(function() {
 <div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;<span class="comment">    @param  nSize  - literal text size</span></div>
 <div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;<span class="comment">    @retval        - text hash value</span></div>
 <div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;<span class="comment">**/</span></div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;constexpr <a class="code" href="classqx_1_1basic__string__hash.html">basic_string_hash&lt;string_traits::traits&lt;wchar_t&gt;</a>&gt; <span class="keyword">operator</span><span class="stringliteral">&quot;&quot;</span> _sh(<span class="keyword">const</span> <span class="keywordtype">wchar_t</span>* pszStr, <span class="keywordtype">size_t</span> nSize);</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;constexpr <a class="code" href="classqx_1_1basic__string__hash.html">basic_string_hash&lt;string_traits::traits&lt;wchar_t&gt;</a>&gt; <span class="keyword">operator</span><span class="stringliteral">&quot;&quot;</span> _sh(<span class="keyword">const</span> <span class="keywordtype">wchar_t</span> * pszStr, <span class="keywordtype">size_t</span> nSize);</div>
 <div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160; </div>
 <div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;} <span class="comment">// namespace literals</span></div>
 <div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160; </div>
