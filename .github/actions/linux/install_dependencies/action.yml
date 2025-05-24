@@ -6,6 +6,7 @@ inputs:
     required: false
   build_type:
     required: true
+  
 outputs:
   BOOST_ROOT:
     value: ${{ steps.install_boost.outputs.BOOST_ROOT }}
@@ -16,24 +17,13 @@ runs:
     - name: Install dependencies
       shell: bash
       run: |
-        # gtest 1.12.1
-        sudo wget https://github.com/google/googletest/archive/refs/tags/release-1.12.1.tar.gz
-        tar xf release-1.12.1.tar.gz
-        cd googletest-release-1.12.1
-        cmake . -DCMAKE_CXX_FLAGS="${{ inputs.cxx_flags }}" -DCMAKE_EXE_LINKER_FLAGS="${{ inputs.cxx_linker_flags }}" -DCMAKE_BUILD_TYPE=${{ inputs.build_type }} -DCMAKE_DEBUG_POSTFIX=d
-        cmake --build . -j $(nproc)
-        sudo cp -a googletest/include/gtest /usr/local/include
-        sudo cp -a lib/*.a /usr/local/lib/
-        cd ..  
-        rm -r googletest-release-1.12.1
-        rm release-1.12.1.tar.gz
-        
-        # glm
         if [ "$RUNNER_OS" = "Linux" ]; then
+          sudo apt-get install libgtest-dev;
           sudo apt-get install libglm-dev;
         elif [ "$RUNNER_OS" = "macOS" ]; then
+          brew install googletest;
           brew install glm;
-        fi  
+        fi
     - name: Install boost
       uses: MarkusJx/install-boost@v2.4.1
       id: install_boost

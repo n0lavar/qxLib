@@ -1,6 +1,11 @@
 name: ubuntu_gcc_release
 
-on: push
+on:
+  push:
+    paths-ignore:
+      - .clang-format
+      - .gitignore
+      - README.md
 
 jobs:
   ubuntu_gcc_release:

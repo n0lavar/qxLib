@@ -1,6 +1,11 @@
 name: windows_msvc_debug
 
-on: push
+on:
+  push:
+    paths-ignore:
+      - .clang-format
+      - .gitignore
+      - README.md
 
 jobs:
   windows_msvc_debug:
@@ -12,6 +17,7 @@ jobs:
         uses: ./.github/actions/windows/install_dependencies
         with:
           build_type: Debug
+          msvc_runtime_library: MultiThreadedDebug
       - uses: ./.github/actions/windows/build
         with:
           build_type: Debug

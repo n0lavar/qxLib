@@ -6,6 +6,9 @@ inputs:
     required: false
   build_type:
     required: true
+  msvc_runtime_library:
+    required: true
+
 outputs:
   BOOST_ROOT:
     value: ${{ steps.install_boost.outputs.BOOST_ROOT }}
@@ -26,7 +29,7 @@ runs:
         cd googletest
         mkdir build
         cd build
-        cmake .. -DCMAKE_CXX_FLAGS="${{ inputs.cxx_flags }}" -DCMAKE_EXE_LINKER_FLAGS="${{ inputs.cxx_linker_flags }}" 
+        cmake .. -DCMAKE_CXX_FLAGS="${{ inputs.cxx_flags }}" -DCMAKE_EXE_LINKER_FLAGS="${{ inputs.cxx_linker_flags }}" -DCMAKE_MSVC_RUNTIME_LIBRARY="${{ inputs.msvc_runtime_library }}"
         cmake --build .  --config ${{ inputs.build_type }} -j %NUMBER_OF_PROCESSORS%
         cd ..
         cd ..

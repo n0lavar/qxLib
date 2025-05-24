@@ -38,10 +38,15 @@ if(GTEST_FOUND)
             optimized   "${GTEST_INCLUDE_DIR}/../../build/lib/Release/gtest.lib"
             debug       "${GTEST_INCLUDE_DIR}/../../build/lib/Debug/gtest.lib"
         )    
-    else ()
+    elseif(APPLE) 
         set(GTEST_LIBRARIES
-            optimized   "/usr/local/lib/libgtest.a"
-            debug       "/usr/local/lib/libgtestd.a"
+            optimized   "${GTEST_INCLUDE_DIR}/../lib/libgtest.a"
+            debug       "${GTEST_INCLUDE_DIR}/../lib/libgtest.a"
+        )   
+    else()
+        set(GTEST_LIBRARIES
+            optimized   "${GTEST_INCLUDE_DIR}/../lib/x86_64-linux-gnu/libgtest.a"
+            debug       "${GTEST_INCLUDE_DIR}/../lib/x86_64-linux-gnu/libgtest.a"
         )    
     endif()
 

@@ -13,18 +13,18 @@
     @brief Define class as default copyable
     @param className - class name
 **/
-#define QX_COPYABLE(className)                                  \
-    constexpr className(const className&)            = default; \
-    constexpr className& operator=(const className&) = default
+#define QX_COPYABLE(className)                        \
+    className(const className&)            = default; \
+    className& operator=(const className&) = default
 
 /**
     @def   QX_MOVABLE
     @brief Define class as default movable
     @param className - class name
 **/
-#define QX_MOVABLE(className)                                       \
-    constexpr className(className&&) noexcept            = default; \
-    constexpr className& operator=(className&&) noexcept = default
+#define QX_MOVABLE(className)                             \
+    className(className&&) noexcept            = default; \
+    className& operator=(className&&) noexcept = default
 
 /**
     @def   QX_COPYMOVABLE

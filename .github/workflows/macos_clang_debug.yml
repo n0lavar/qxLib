@@ -1,6 +1,11 @@
 name: macos_clang_debug
 
-on: push
+on:
+  push:
+    paths-ignore:
+      - .clang-format
+      - .gitignore
+      - README.md
 
 jobs:
   macos_clang_debug:
