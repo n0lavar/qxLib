@@ -147,7 +147,7 @@ inline void base_logger_stream::format_line(
     switch (eVerbosity)
     {
     case verbosity::very_verbose:
-        buffers.sMessage = QX_TEXT("[VV][");
+        buffers.sMessage = QX_TEXT("[W][");
         break;
 
     case verbosity::verbose:

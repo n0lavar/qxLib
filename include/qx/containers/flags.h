@@ -8,9 +8,11 @@
 **/
 #pragma once
 
+#include <qx/macros/copyable_movable.h>
 #include <qx/meta/concepts.h>
-#include "qx/macros/copyable_movable.h"
-#include "qx/meta/type_traits.h"
+#include <qx/meta/type_traits.h>
+
+#include <limits>
 
 /**
     @def   QX_FLAGS_ENUM_CLASS
@@ -95,7 +97,7 @@ public:
     /**
         @brief   flags object constructor
         @details Separate method for 1 arg to allow type deduction
-        @param   eFlag - 
+        @param   eFlag - flag to add at construction
     **/
     constexpr flags(enum_t eFlag) noexcept;
 
@@ -198,6 +200,13 @@ public:
     constexpr bool contains_all(args_t... flags) const noexcept;
 
     /**
+        @brief  Check if all the specified flags are present
+        @param  other - flags to check
+        @retval       - true if all the specified flags are present
+    **/
+    constexpr bool contains_all(flags other) const noexcept;
+
+    /**
         @brief  Check if any of the specified flags is present
         @tparam args_t... - template parameters pack, all types should be same as enum_t
         @param  flags     - flags to check
@@ -208,10 +217,23 @@ public:
     constexpr bool contains_any(args_t... flags) const noexcept;
 
     /**
+        @brief  Check if any of the specified flags is present
+        @param  other - flags to check
+        @retval       - true if any of the specified flags is present
+    **/
+    constexpr bool contains_any(flags other) const noexcept;
+
+    /**
         @brief  Convert to the corresponding integer value
         @retval  - integer value
     **/
     constexpr underlying_type to_integer() const noexcept;
+
+    /**
+        @brief  Get a flags with all bits equal 1
+        @retval  - flags with all bits equal 1
+    **/
+    static constexpr flags all_flags() noexcept;
 
 private:
     underlying_type m_EnumFlags = 0;

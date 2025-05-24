@@ -163,8 +163,7 @@ inline void base_shader_program::SetUniform(GLint nUniformLocation, const T* pVa
         []<bool flag = false>()
         {
             static_assert(flag, "Uniform type is not supported");
-        }
-        ();
+        }();
     }
 }
 

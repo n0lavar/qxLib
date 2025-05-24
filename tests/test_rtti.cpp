@@ -19,14 +19,6 @@
 #include <memory>
 #include <source_location>
 
-class CClass1
-{
-};
-
-class CClass2
-{
-};
-
 class CRttiBase : public qx::rtti_root<>
 {
     QX_RTTI_CLASS(CRttiBase, qx::rtti_root<>);
@@ -172,10 +164,9 @@ TEST(rtti, class_id)
     EXPECT_TRUE(static_cast<CDerived1_2*>(p1_21.get())->get_class_id() == CDerived1_21::get_class_id_static());
     EXPECT_TRUE(p1_21->get_class_id() == CDerived1_21::get_class_id_static());
 
-    std::set<qx::class_identificator> ids;
-    auto                              CheckId = [&ids](qx::class_identificator id)
+    std::set<qx::class_id> ids;
+    auto                   CheckId = [&ids](qx::class_id id)
     {
-        EXPECT_GE(id, 0) << "existing id must be greater or equal then 0";
         auto ret = ids.insert(id);
         EXPECT_TRUE(ret.second) << "existing id must be unique";
     };
@@ -198,9 +189,10 @@ TEST(rtti, class_id)
 template<class T>
 void TestDerivedFrom(const auto& pClass, bool bExpect, std::source_location sr = std::source_location::current())
 {
-    constexpr qx::class_identificator T_id = T::get_class_id_static();
+    constexpr qx::class_id T_id = T::get_class_id_static();
     EXPECT_EQ(pClass->template is_derived_from<T>(), bExpect)
-        << "Line: " << sr.line() << ", pClass's id: " << pClass->get_class_id() << ", T id: " << T_id;
+        << "Line: " << sr.line() << ", pClass's T: " << pClass->get_class_id().get_class_name()
+        << ", T: " << T_id.get_class_name();
     EXPECT_EQ(pClass->is_derived_from_id(T::get_class_id_static()), bExpect);
 }
 
@@ -336,16 +328,12 @@ TEST(rtti, get_class_name)
 
 TEST(rtti, rtti_cast)
 {
-    auto     sharedPtr = std::make_shared<CBase1>();
-    auto     rawPtr    = sharedPtr.get();
-    CClass1  c1;
-    CClass1* pc1 = nullptr;
+    auto sharedPtr = std::make_shared<CBase1>();
+    auto rawPtr    = sharedPtr.get();
 
     EXPECT_TRUE(qx::rtti_cast<CBase1>(sharedPtr));
     EXPECT_TRUE(qx::rtti_cast<CBase1>(rawPtr));
     EXPECT_TRUE(qx::rtti_cast<CBase1>(sharedPtr.get()));
-    EXPECT_FALSE(qx::rtti_cast<CBase1>(&c1));
-    EXPECT_FALSE(qx::rtti_cast<CBase1>(pc1));
 
     EXPECT_TRUE(qx::rtti_cast<CBase1>(p1));
     EXPECT_TRUE(qx::rtti_cast<CBase1>(p1_1));

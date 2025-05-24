@@ -43,7 +43,7 @@ public:
     using difference_type = std::ptrdiff_t;
     using size_type       = size_t;
 
-    QX_IMPL_CONTAINER(triangular_vector)
+    QX_IMPL_CONTAINER(triangular_vector);
 
 public:
     triangular_vector() = default;

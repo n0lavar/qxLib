@@ -54,7 +54,7 @@ template<class T, class traits_t>
 constexpr typename generic_span<T, traits_t>::iterator generic_span<T, traits_t>::iterator::operator++(int) noexcept
 {
     iterator r(*this);
-             operator++()();
+    operator++();
     return r;
 }
 

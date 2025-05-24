@@ -28,7 +28,6 @@ class subject;
     @class   observer_token_data
     @brief   Tokens are used to automatically detach observer when the observer
              object is destroyed
-    @details ~
     @author  Khrapov
     @date    10.03.2021
 
@@ -85,7 +84,6 @@ using observer_token = std::unique_ptr<observer_token_data>;
     @class   base_subject
     @brief   Base subject class
     @details Allows to avoid template parameter for base logic
-    @details ~
     @author  Khrapov
     @date    17.11.2021
 
@@ -109,7 +107,6 @@ protected:
     @class   subject
     @brief   Class maintains a list of its dependents, called observers,
              and notifies them automatically of any state changes
-    @details ~
     @tparam  observer_t - observer type
     @author  Khrapov
     @date    6.03.2021

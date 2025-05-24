@@ -17,7 +17,6 @@ namespace qx
 
     @class   base_ssbo
     @brief   Base SSBO class
-    @details ~
     @author  Khrapov
     @date    18.01.2020
 

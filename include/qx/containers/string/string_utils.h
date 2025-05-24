@@ -124,7 +124,7 @@ constexpr size_t murmur_32_hash(const value_t* pStr, size_t nSeed, size_t nLen) 
         nHash ^= k;
     }
 
-    nHash ^= nLen;       //-V103
+    nHash ^= nLen; //-V103
     nHash ^= nHash >> 16;
     nHash *= 0x85ebca6b; //-V101
     nHash ^= nHash >> 13;

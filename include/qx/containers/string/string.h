@@ -80,7 +80,7 @@ public:
     using sstream_type    = std::basic_stringstream<value_type>;
     using views           = std::vector<string_view>;
     template<class... args_t>
-    using format_string_type = typename traits_type::template format_string<std::type_identity_t<args_t>...>;
+    using format_string_type = typename traits_type::template format_string<args_t...>;
 
     static constexpr size_type npos = std::numeric_limits<size_type>::max();
 
@@ -198,7 +198,7 @@ public:
     **/
     template<class... args_t>
         requires format_acceptable_args<char_t, args_t...>
-    void format(format_string_type<args_t...> sFormat, const args_t&... args);
+    void format(const format_string_type<std::type_identity_t<args_t>...> sFormat, args_t&&... args);
 
     /**
         @brief   Create a string by formatting it with the format string and the args
@@ -210,7 +210,9 @@ public:
     **/
     template<class... args_t>
         requires format_acceptable_args<char_t, args_t...>
-    static basic_string static_format(format_string_type<args_t...> sFormat, const args_t&... args);
+    static basic_string static_format(
+        const format_string_type<std::type_identity_t<args_t>...> sFormat,
+        args_t&&... args);
 
     /**
         @brief   Append the formatted string to the current one
@@ -221,7 +223,7 @@ public:
     **/
     template<class... args_t>
         requires format_acceptable_args<char_t, args_t...>
-    void append_format(format_string_type<args_t...> sFormat, const args_t&... args);
+    void append_format(const format_string_type<std::type_identity_t<args_t>...> sFormat, args_t&&... args);
 
     /**
         @brief   Clear the string and format it with the format string and the args
@@ -232,7 +234,7 @@ public:
     **/
     template<class... args_t>
         requires format_acceptable_args<char_t, args_t...>
-    void vformat(string_view svFormat, const args_t&... args);
+    void vformat(string_view svFormat, args_t&&... args);
 
     /**
         @brief   Create a string by formatting it with the format string and the args
@@ -244,7 +246,7 @@ public:
     **/
     template<class... args_t>
         requires format_acceptable_args<char_t, args_t...>
-    static basic_string static_vformat(string_view svFormat, const args_t&... args);
+    static basic_string static_vformat(string_view svFormat, args_t&&... args);
 
     /**
         @brief   Append the formatted string to the current one
@@ -255,7 +257,7 @@ public:
     **/
     template<class... args_t>
         requires format_acceptable_args<char_t, args_t...>
-    void append_vformat(string_view svFormat, const args_t&... args);
+    void append_vformat(string_view svFormat, args_t&&... args);
 
     /**
         @brief  Swap this str and other
@@ -1613,7 +1615,7 @@ private:
     size_type _find(size_type nBegin, size_type nEnd, const comparator_t& comparator) const noexcept;
 
     /**
-        @brief  
+        @brief  Common algorithm for finding substring, starting from the end
         @tparam comparator_t - "comparator" type
         @param  nBegin       - start searching index 
         @param  nEnd         - end searching index 

@@ -18,7 +18,6 @@ namespace qx
 
     @class   base_rbo
     @brief   Base RBO class
-    @details ~
     @author  Khrapov
     @date    10.07.2020
 

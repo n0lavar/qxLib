@@ -18,7 +18,6 @@ namespace qx
 
     @class   buffer_base
     @brief   Base OpenGL buffer object class
-    @details ~
     @author  Khrapov
     @date    10.07.2020
 

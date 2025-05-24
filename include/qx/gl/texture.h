@@ -19,7 +19,6 @@ namespace qx
 
     @class   base_texture
     @brief   Base texture class
-    @details ~
     @author  Khrapov
     @date    10.07.2020
 

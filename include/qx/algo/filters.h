@@ -8,7 +8,14 @@
 **/
 #pragma once
 
-namespace qx::filters
+#include <functional>
+
+namespace qx
+{
+template<class T>
+using filter = std::function<bool(const T&)>;
+
+namespace filters
 {
 
 constexpr auto always_true = [](const auto&...)
@@ -16,4 +23,6 @@ constexpr auto always_true = [](const auto&...)
     return true;
 };
 
-} // namespace qx::filters
+} // namespace filters
+
+} // namespace qx

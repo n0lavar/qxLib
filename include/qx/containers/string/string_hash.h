@@ -22,7 +22,7 @@ template<class T>
 concept has_zero_termonated_hash_func_overload =
     requires(typename T::const_pointer pszStr, size_t nSeed) { T::hash_function(pszStr, nSeed); };
 
-};
+}; // namespace details
 
 /**
 
@@ -96,7 +96,7 @@ constexpr basic_string_hash<string_traits::traits<char>> operator"" _sh(const ch
     @param  nSize  - literal text size
     @retval        - text hash value
 **/
-constexpr basic_string_hash<string_traits::traits<wchar_t>> operator"" _sh(const wchar_t* pszStr, size_t nSize);
+constexpr basic_string_hash<string_traits::traits<wchar_t>> operator"" _sh(const wchar_t * pszStr, size_t nSize);
 
 } // namespace literals
 

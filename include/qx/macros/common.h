@@ -15,8 +15,9 @@
     @def     QX_EMPTY_MACRO
     @brief   Placeholder for disabled macros
     @details Has no effect and work correctly with "if else"
+             You can use it in the end of a macro to enforce user to add ; after it
 **/
-#define QX_EMPTY_MACRO ((void*)0)
+#define QX_EMPTY_MACRO static_assert(true)
 
 /**
     @def   QX_STRINGIFY
@@ -27,14 +28,21 @@
 **/
 #define QX_STRINGIFY(name) #name
 
+#define _QX_JOIN(symbol1, symbol2)    _QX_DO_JOIN(symbol1, symbol2)
+#define _QX_DO_JOIN(symbol1, symbol2) symbol1##symbol2
+
 /**
     @def   QX_LINE_NAME
     @brief Do magic! Creates a unique name using the line number
     @param prefix - name prefix
 **/
-#define QX_LINE_NAME(prefix)          _QX_JOIN(prefix, __LINE__)
-#define _QX_JOIN(symbol1, symbol2)    _QX_DO_JOIN(symbol1, symbol2)
-#define _QX_DO_JOIN(symbol1, symbol2) symbol1##symbol2
+#define QX_LINE_NAME(prefix) _QX_JOIN(prefix, __LINE__)
+
+/**
+    @brief Same as __LINE__, but fixes some problems when using it in constexpr context
+**/
+#define QX_LINE int(_QX_JOIN(__LINE__, U))
+
 
 namespace qx::details
 {
@@ -87,3 +95,42 @@ constexpr const char_type* last_slash(const char_type* str)
     @endcode 
 **/
 #define QX_CONST_CAST_THIS() const_cast<qx::switch_const_t<std::remove_pointer_t<decltype(this)>>*>(this)
+
+namespace qx::details
+{
+
+template<class lambda_type>
+class call_before_main_invoker
+{
+public:
+    call_before_main_invoker(lambda_type lambda) : m_Lambda(std::move(lambda))
+    {
+        m_Lambda();
+    }
+
+private:
+    lambda_type m_Lambda;
+};
+
+} // namespace qx::details
+
+/**
+    @def   QX_CALL_BEFORE_MAIN
+    @brief Calls this lambda before the main invocation
+    @note  This function must be in an object file, that is actually linked to your exe
+
+    @code
+    QX_CALL_BEFORE_MAIN = []()
+        {
+        };
+    @endcode 
+**/
+#define QX_CALL_BEFORE_MAIN inline volatile qx::details::call_before_main_invoker QX_LINE_NAME(_stubCallBeforeMain)
+
+#if QX_MSVC
+    #define QX_DISABLE_OPTIMIZATIONS() __pragma(optimize("", off))
+    #define QX_ENABLE_OPTIMIZATIONS()  __pragma(optimize("", on))
+#else
+    #define QX_DISABLE_OPTIMIZATIONS()
+    #define QX_ENABLE_OPTIMIZATIONS()
+#endif

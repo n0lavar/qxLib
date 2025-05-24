@@ -20,7 +20,6 @@ namespace qx
 
     @class   cout_logger_stream
     @brief   Logger stream for std::cout output
-    @details ~
     @author  Khrapov
     @date    28.07.2021
 

@@ -8,6 +8,8 @@
 **/
 #pragma once
 
+#include <qx/macros/common.h>
+
 namespace qx
 {
 
@@ -78,7 +80,8 @@ public:                                                 \
         return instance;                                \
     }                                                   \
                                                         \
-private:
+private:                                                \
+    QX_EMPTY_MACRO
 
 /**
     @def     QX_SINGLETON

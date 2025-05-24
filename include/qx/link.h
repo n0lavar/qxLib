@@ -37,7 +37,6 @@ public:
 
         @class   lock_ptr
         @brief   std::shared_ptr wrapper 
-        @details ~
         @author  Khrapov
         @date    23.11.2021
 
@@ -121,6 +120,11 @@ public:
     **/
     template<class U>
     link(const std::shared_ptr<U>& pStrong) noexcept;
+
+    // I don't want to take the ownership. What if it's the last shared ptr alive?
+    // Use std::as_const(pStrong) if you are sure it's not.
+    template<class U>
+    link(std::shared_ptr<U>&& pStrong) noexcept = delete;
 
     /**
         @brief  link object constructor

@@ -10,6 +10,7 @@
 
 #include <algorithm>
 #include <array>
+#include <span>
 
 namespace qx
 {
@@ -46,6 +47,16 @@ template<class T, std::size_t LeftLength, std::size_t RightLength>
 constexpr std::array<T, LeftLength + RightLength> join_arrays(
     std::array<T, LeftLength>  rhs,
     std::array<T, RightLength> lhs);
+
+/**
+    @brief  Convert a span to an array
+    @tparam N    - span and array compile time size
+    @tparam T    - span and array type
+    @param  span - span object
+    @retval      - array object
+**/
+template<std::size_t N, class T>
+constexpr std::array<T, N> span_to_array(const std::span<T, N>& span);
 
 /**
     @brief  Create a container by constructing each element from the corresponding

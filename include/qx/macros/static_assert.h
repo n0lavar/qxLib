@@ -131,5 +131,4 @@ struct static_assert_between
     []<bool flag = false>()                        \
     {                                              \
         static_assert(flag, Message);              \
-    }                                              \
-    ()
+    }()

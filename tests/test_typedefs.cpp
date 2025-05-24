@@ -3,7 +3,7 @@
     @file      test_typedefs.cpp
     @author    Khrapov
     @date      26.09.2020
-    @copyright © Nick Khrapov, 2021. All right reserved.
+    @copyright ï¿½ Nick Khrapov, 2021. All right reserved.
 
 **/
 #include <common.h>
@@ -20,3 +20,6 @@ static_assert(sizeof(i8) == 1);
 static_assert(sizeof(i16) == 2);
 static_assert(sizeof(i32) == 4);
 static_assert(sizeof(i64) == 8);
+
+static_assert(sizeof(f32) == 4);
+static_assert(sizeof(f64) == 8);

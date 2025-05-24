@@ -30,7 +30,6 @@ enum class shader_type
 
     @class   shader_base
     @brief   OpenGL base shader
-    @details ~
     @tparam  ShaderType - GL_VERTEX_SHADER, GL_TESS_CONTROL_SHADER,
                           GL_TESS_EVALUATION_SHADER, GL_GEOMETRY_SHADER,
                           GL_FRAGMENT_SHADER, GL_COMPUTE_SHADER

@@ -17,7 +17,6 @@ namespace qx
 
     @class   base_ebo
     @brief   Base EBO class
-    @details ~
     @author  Khrapov
     @date    10.07.2020
 

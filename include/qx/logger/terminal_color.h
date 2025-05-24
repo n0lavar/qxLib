@@ -47,7 +47,8 @@ class terminal_color
     template<class char_t>
     friend std::basic_ostream<char_t>& ::operator<<(
         std::basic_ostream<char_t>& is,
-        const terminal_color&       terminalColor);
+        const terminal_color
+        & terminalColor);
 
     enum class type
     {

@@ -53,8 +53,7 @@ namespace qx
     @retval                         - container with transformed elements
 **/
 template<
-    template<class...>
-    class result_container_t,
+    template<class...> class result_container_t,
     class input_container_t,
     class transform_callable_t,
     class... result_container_rest_t>

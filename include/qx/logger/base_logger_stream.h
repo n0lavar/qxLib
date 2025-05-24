@@ -69,7 +69,6 @@ struct log_unit
 
     @class   base_logger_stream
     @brief   Base class for logger streams
-    @details ~
     @author  Khrapov
     @date    28.07.2021
 

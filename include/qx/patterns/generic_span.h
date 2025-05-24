@@ -24,12 +24,13 @@ struct default_generic_span_traits
 /**
 
     @class   generic_span
-    @brief   Same as std::span, but may be used with containers with forward iterators
+    @brief   Same as std::span, but may be used with any container with forward iterators
     @details The class can be used to use any container to iterate over its elements
              Useful when used in virtual methods
              Does not own the container
              The container should not be changed until the end of the iteration
-             May be much slower then std::span when the size of sbo is smaller then sizeof 2 iterators of this container
+             May be much slower then std::span when the size of sbo of std::function
+             is smaller then sizeof 2 iterators of this container
              (libcpp: 16, ligcxx: 16, MSVC: 56)
     @tparam  T - container value type
     @author  Khrapov

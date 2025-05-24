@@ -56,7 +56,7 @@ constexpr basic_string_hash<string_traits::traits<char>> operator"" _sh(const ch
     return basic_string_hash<string_traits::traits<char>>(pszStr, nSize);
 }
 
-constexpr basic_string_hash<string_traits::traits<wchar_t>> operator"" _sh(const wchar_t* pszStr, size_t nSize)
+constexpr basic_string_hash<string_traits::traits<wchar_t>> operator"" _sh(const wchar_t * pszStr, size_t nSize)
 {
     return basic_string_hash<string_traits::traits<wchar_t>>(pszStr, nSize);
 }

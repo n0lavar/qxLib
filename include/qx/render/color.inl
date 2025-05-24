@@ -69,10 +69,10 @@ constexpr color::color(int nRed, int nGreen, int nBlue, int nAlpha) noexcept
 
 constexpr color::color(u64 nHexValue) noexcept
     : color(
-        dec_to_float(nHexValue >> 24 & 0xFF),
-        dec_to_float(nHexValue >> 16 & 0xFF),
-        dec_to_float(nHexValue >> 8 & 0xFF),
-        dec_to_float(nHexValue >> 0 & 0xFF))
+          dec_to_float(nHexValue >> 24 & 0xFF),
+          dec_to_float(nHexValue >> 16 & 0xFF),
+          dec_to_float(nHexValue >> 8 & 0xFF),
+          dec_to_float(nHexValue >> 0 & 0xFF))
 {
 }
 

@@ -170,7 +170,7 @@ constexpr void flags<enum_t>::add(flags flags_) noexcept
 template<enumeration_c enum_t>
 constexpr void flags<enum_t>::remove(flags flags_) noexcept
 {
-    m_EnumFlags &= flags_.m_EnumFlags;
+    m_EnumFlags &= ~flags_.m_EnumFlags;
 }
 
 template<enumeration_c enum_t>
@@ -239,6 +239,12 @@ constexpr bool flags<enum_t>::contains_all(args_t... flags) const noexcept
 }
 
 template<enumeration_c enum_t>
+constexpr bool flags<enum_t>::contains_all(flags other) const noexcept
+{
+    return (m_EnumFlags & other.m_EnumFlags) == other.m_EnumFlags;
+}
+
+template<enumeration_c enum_t>
 template<class... args_t>
     requires(sizeof...(args_t) >= 2 && are_specific_v<enum_t, args_t...>)
 constexpr bool flags<enum_t>::contains_any(args_t... flags) const noexcept
@@ -247,9 +253,23 @@ constexpr bool flags<enum_t>::contains_any(args_t... flags) const noexcept
 }
 
 template<enumeration_c enum_t>
+constexpr bool flags<enum_t>::contains_any(flags other) const noexcept
+{
+    return (m_EnumFlags & other.m_EnumFlags) != 0;
+}
+
+template<enumeration_c enum_t>
 constexpr typename flags<enum_t>::underlying_type flags<enum_t>::to_integer() const noexcept
 {
     return m_EnumFlags;
+}
+
+template<enumeration_c enum_t>
+constexpr flags<enum_t> flags<enum_t>::all_flags() noexcept
+{
+    flags flags;
+    flags.m_EnumFlags = std::numeric_limits<underlying_type>::max();
+    return flags;
 }
 
 } // namespace qx

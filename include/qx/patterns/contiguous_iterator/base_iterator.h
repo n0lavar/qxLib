@@ -20,7 +20,6 @@ namespace qx
 
     @class   base_iterator
     @brief   Base contiguous iterator with a container pointer and an index
-    @details ~
     @tparam  container_t - container satisfying std::ranges::contiguous_range concept
     @author  Khrapov
     @date    2.12.2023
@@ -83,7 +82,6 @@ private:
 
     @class   base_forward_iterator
     @brief   Basic contiguous forward iterator, meaning that incrementing an iterator will lead it moving forward
-    @details ~
     @tparam  container_t - container satisfying std::ranges::contiguous_range concept
     @tparam  derived_t   - derived iterator type
     @author  Khrapov
@@ -184,7 +182,6 @@ constexpr iterator_t operator+(typename iterator_t::size_type n, iterator_t it) 
 
     @class   base_reverse_iterator
     @brief   Basic contiguous reverse iterator, meaning that incrementing an iterator will lead it moving backward
-    @details ~
     @tparam  container_t - container satisfying std::ranges::contiguous_range concept
     @tparam  derived_t   - derived iterator type
     @author  Khrapov

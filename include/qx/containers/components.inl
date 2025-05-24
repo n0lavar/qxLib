@@ -11,13 +11,13 @@ namespace qx
 {
 
 template<std::derived_from<rtti_pure_base> base_component_t>
-typename components<base_component_t>::SClassData& components<base_component_t>::SClassData::get_or_add_class_data(
-    class_identificator id) noexcept
+typename components<base_component_t>::class_data& components<base_component_t>::class_data::get_or_add_class_data(
+    class_id id) noexcept
 {
     if (const auto it = derivedClasses.find(id); it != derivedClasses.end())
         return *it->second.get();
 
-    auto pClassData    = std::make_unique<SClassData>();
+    auto pClassData    = std::make_unique<class_data>();
     auto pRawClassData = pClassData.get();
     derivedClasses[id] = std::move(pClassData);
     return *pRawClassData;
@@ -28,17 +28,19 @@ template<std::derived_from<base_component_t> component_t>
 component_t* components<base_component_t>::add(
     std::unique_ptr<component_t> pComponent,
     priority                     ePriority,
-    flags<status>                statusFlags) noexcept
+    flags<component_status>      statusFlags) noexcept
 {
     if (!pComponent)
         return nullptr;
 
     auto        pRawComponent = pComponent.get();
-    SClassData& classData     = get_or_add_class_data(
+    class_data& classData     = get_or_add_class_data(
         pRawComponent,
-        [ePriority, statusFlags, pRawComponent](SClassData& classData)
+        [ePriority, statusFlags, pRawComponent](class_data& classData)
         {
-            classData.priorityCache.emplace(ePriority, typename SClassData::SCacheData(pRawComponent, statusFlags));
+            classData.priorityCache.emplace(
+                status { .ePriority = ePriority, .statusFlags = statusFlags },
+                pRawComponent);
         });
     classData.components.push_back(std::move(pComponent));
     return pRawComponent;
@@ -50,15 +52,15 @@ std::unique_ptr<base_component_t> components<base_component_t>::remove(const bas
     if (!pRawComponent)
         return nullptr;
 
-    SClassData& classData = get_or_add_class_data(
+    class_data& classData = get_or_add_class_data(
         pRawComponent,
-        [pRawComponent](SClassData& classData)
+        [pRawComponent](class_data& classData)
         {
             std::erase_if(
                 classData.priorityCache,
                 [pRawComponent](const auto& pair)
                 {
-                    return pair.second.pComponent == pRawComponent;
+                    return pair.second == pRawComponent;
                 });
         });
 
@@ -79,86 +81,94 @@ std::unique_ptr<base_component_t> components<base_component_t>::remove(const bas
 
 template<std::derived_from<rtti_pure_base> base_component_t>
 template<std::derived_from<base_component_t> component_t>
-component_t* components<base_component_t>::try_get() noexcept
+component_t* components<base_component_t>::try_get(bool bIncludeDisabled) noexcept
 {
-    SClassData& classData = get_or_add_class_data<component_t>();
+    class_data& classData = get_or_add_class_data<component_t>();
     const auto  it        = std::ranges::find_if(
         classData.priorityCache,
-        [](const auto& pair)
+        [bIncludeDisabled](const auto& pair)
         {
-            return !pair.second.statusFlags.contains(status::disabled);
+            return bIncludeDisabled || !pair.first.statusFlags.contains(component_status::disabled);
         });
 
-    return it != classData.priorityCache.end() ? static_cast<component_t*>(it->second.pComponent) : nullptr;
+    return it != classData.priorityCache.end() ? static_cast<component_t*>(it->second) : nullptr;
 }
 
 template<std::derived_from<rtti_pure_base> base_component_t>
 template<std::derived_from<base_component_t> component_t>
-const component_t* components<base_component_t>::try_get() const noexcept
+const component_t* components<base_component_t>::try_get(bool bIncludeDisabled) const noexcept
 {
-    return QX_CONST_CAST_THIS()->template try_get<component_t>();
+    return QX_CONST_CAST_THIS()->template try_get<component_t>(bIncludeDisabled);
 }
 
 template<std::derived_from<rtti_pure_base> base_component_t>
-base_component_t* components<base_component_t>::try_get(class_identificator id) noexcept
+template<std::derived_from<base_component_t> component_t>
+component_t* components<base_component_t>::try_get(class_id id, bool bIncludeDisabled) noexcept
 {
     // we could improve it from O(N) to O(log(N)) if we could use id->is_derived_from(id) without an object itself
     // we will do it when a reflection system is fully implemented
     const auto it = std::ranges::find_if(
         m_RootClass.priorityCache,
-        [id](const auto& pair)
+        [id, bIncludeDisabled](const auto& pair)
         {
-            return !pair.second.statusFlags.contains(status::disabled)
-                   && pair.second.pComponent->is_derived_from_id(id);
+            return (bIncludeDisabled || !pair.first.statusFlags.contains(component_status::disabled))
+                   && pair.second->is_derived_from_id(id);
         });
 
-    return it != m_RootClass.priorityCache.end() ? it->second.pComponent : nullptr;
-}
-
-template<std::derived_from<rtti_pure_base> base_component_t>
-const base_component_t* components<base_component_t>::try_get(class_identificator id) const noexcept
-{
-    return QX_CONST_CAST_THIS()->try_get(id);
+    return it != m_RootClass.priorityCache.end() ? rtti_cast<component_t>(it->second) : nullptr;
 }
 
 template<std::derived_from<rtti_pure_base> base_component_t>
 template<std::derived_from<base_component_t> component_t>
-component_t& components<base_component_t>::get() noexcept
+const component_t* components<base_component_t>::try_get(class_id id, bool bIncludeDisabled) const noexcept
 {
-    SClassData& classData = get_or_add_class_data<component_t>();
-    const auto  it        = std::ranges::find_if(
-        classData.priorityCache,
-        [](const auto& pair)
-        {
-            return !pair.second.statusFlags.contains(status::disabled);
-        });
-
-    return *static_cast<component_t*>(it->second.pComponent);
+    return QX_CONST_CAST_THIS()->template try_get<component_t>(id, bIncludeDisabled);
 }
 
 template<std::derived_from<rtti_pure_base> base_component_t>
 template<std::derived_from<base_component_t> component_t>
-const component_t& components<base_component_t>::get() const noexcept
+component_t& components<base_component_t>::get(bool bIncludeDisabled) noexcept
 {
-    return QX_CONST_CAST_THIS()->template get<component_t>();
+    return *try_get<component_t>(bIncludeDisabled);
+}
+
+template<std::derived_from<rtti_pure_base> base_component_t>
+template<std::derived_from<base_component_t> component_t>
+const component_t& components<base_component_t>::get(bool bIncludeDisabled) const noexcept
+{
+    return QX_CONST_CAST_THIS()->template get<component_t>(bIncludeDisabled);
+}
+
+template<std::derived_from<rtti_pure_base> base_component_t>
+template<std::derived_from<base_component_t> component_t>
+base_component_t& components<base_component_t>::get(class_id id, bool bIncludeDisabled) noexcept
+{
+    return *try_get<component_t>(id, bIncludeDisabled);
+}
+
+template<std::derived_from<rtti_pure_base> base_component_t>
+template<std::derived_from<base_component_t> component_t>
+const base_component_t& components<base_component_t>::get(class_id id, bool bIncludeDisabled) const noexcept
+{
+    return QX_CONST_CAST_THIS()->template get<component_t>(id, bIncludeDisabled);
 }
 
 template<std::derived_from<rtti_pure_base> base_component_t>
 template<std::derived_from<base_component_t> component_t>
 auto components<base_component_t>::view() noexcept
 {
-    SClassData& classData = get_or_add_class_data<component_t>();
+    class_data& classData = get_or_add_class_data<component_t>();
     return classData.priorityCache
            | std::views::filter(
                [](const auto& pair)
                {
-                   return pair.second.pComponent->template is_derived_from<component_t>()
-                          && !pair.second.statusFlags.contains(status::disabled);
+                   return pair.second->template is_derived_from<component_t>()
+                          && !pair.first.statusFlags.contains(component_status::disabled);
                })
            | std::views::transform(
                [](auto& pair) -> component_t&
                {
-                   return *static_cast<component_t*>(pair.second.pComponent);
+                   return *static_cast<component_t*>(pair.second);
                });
 }
 
@@ -166,118 +176,87 @@ template<std::derived_from<rtti_pure_base> base_component_t>
 template<std::derived_from<base_component_t> component_t>
 auto components<base_component_t>::view() const noexcept
 {
-    const SClassData& classData = get_or_add_class_data<component_t>();
+    const class_data& classData = get_or_add_class_data<component_t>();
     return classData.priorityCache
            | std::views::filter(
                [](const auto& pair)
                {
-                   return pair.second.pComponent->template is_derived_from<component_t>()
-                          && !pair.second.statusFlags.contains(status::disabled);
+                   return pair.second->template is_derived_from<component_t>()
+                          && !pair.first.statusFlags.contains(component_status::disabled);
                })
            | std::views::transform(
                [](const auto& pair) -> const component_t&
                {
-                   return *static_cast<const component_t*>(pair.second.pComponent);
+                   return *static_cast<const component_t*>(pair.second);
                });
 }
 
 template<std::derived_from<rtti_pure_base> base_component_t>
-std::optional<priority> components<base_component_t>::get_priority(const base_component_t* pRawComponent) const noexcept
-{
-    if (!pRawComponent)
-        return std::nullopt;
-
-    auto it = std::ranges::find_if(
-        m_RootClass.priorityCache,
-        [pRawComponent](const auto& pair)
-        {
-            return pair.second.pComponent == pRawComponent;
-        });
-
-    return it != m_RootClass.priorityCache.end() ? std::optional<priority>(it->first) : std::nullopt;
-}
-
-
-template<std::derived_from<rtti_pure_base> base_component_t>
-bool components<base_component_t>::set_priority(const base_component_t* pRawComponent, priority ePriority) noexcept
-{
-    if (!pRawComponent)
-        return false;
-
-    bool bChanged = true;
-    get_or_add_class_data(
-        pRawComponent,
-        [pRawComponent, ePriority, &bChanged](SClassData& classData)
-        {
-            const auto it = std::ranges::find_if(
-                classData.priorityCache,
-                [pRawComponent](const auto& pair)
-                {
-                    return pair.second.pComponent == pRawComponent;
-                });
-
-            if (it == classData.priorityCache.end())
-            {
-                bChanged = false;
-                return;
-            }
-
-            if (it->first != ePriority)
-            {
-                classData.priorityCache.emplace(ePriority, it->second);
-                classData.priorityCache.erase(it);
-            }
-        });
-
-    return bChanged;
-}
-
-template<std::derived_from<rtti_pure_base> base_component_t>
-std::optional<flags<status>> components<base_component_t>::get_status(
+std::optional<flags<component_status>> components<base_component_t>::get_component_status(
     const base_component_t* pRawComponent) const noexcept
 {
-    if (!pRawComponent)
-        return std::nullopt;
-
-    auto it = std::ranges::find_if(
-        m_RootClass.priorityCache,
-        [pRawComponent](const auto& pair)
-        {
-            return pair.second.pComponent == pRawComponent;
-        });
-
-    return it != m_RootClass.priorityCache.end() ? std::optional<flags<status>>(it->second.statusFlags) : std::nullopt;
+    std::optional<status> optComponentStatus = get_status(pRawComponent);
+    return optComponentStatus ? std::optional(optComponentStatus->statusFlags) : std::nullopt;
 }
 
-
 template<std::derived_from<rtti_pure_base> base_component_t>
-bool components<base_component_t>::set_status(const base_component_t* pRawComponent, flags<status> status) noexcept
+bool components<base_component_t>::set_component_status(
+    const base_component_t* pRawComponent,
+    flags<component_status> newStatus) noexcept
 {
-    if (!pRawComponent)
+    std::optional<status> optComponentStatus = get_status(pRawComponent);
+    if (!optComponentStatus)
         return false;
 
-    bool bChanged = true;
-    get_or_add_class_data(
-        pRawComponent,
-        [pRawComponent, status, &bChanged](SClassData& classData)
-        {
-            const auto it = std::ranges::find_if(
-                classData.priorityCache,
-                [pRawComponent](const auto& pair)
-                {
-                    return pair.second.pComponent == pRawComponent;
-                });
+    optComponentStatus->statusFlags = newStatus;
+    return set_status(pRawComponent, *optComponentStatus);
+}
 
-            if (it == classData.priorityCache.end())
-            {
-                bChanged = false;
-                return;
-            }
+template<std::derived_from<rtti_pure_base> base_component_t>
+bool components<base_component_t>::add_component_status(
+    const base_component_t* pRawComponent,
+    flags<component_status> newStatuses) noexcept
+{
+    std::optional<flags<component_status>> optComponentStatus = get_component_status(pRawComponent);
+    if (!optComponentStatus)
+        return false;
 
-            it->second.statusFlags = status;
-        });
+    optComponentStatus->add(newStatuses);
+    return set_component_status(pRawComponent, *optComponentStatus);
+}
 
-    return bChanged;
+template<std::derived_from<rtti_pure_base> base_component_t>
+bool components<base_component_t>::remove_component_status(
+    const base_component_t* pRawComponent,
+    flags<component_status> statusesToRemove) noexcept
+{
+    std::optional<flags<component_status>> optComponentStatus = get_component_status(pRawComponent);
+    if (!optComponentStatus)
+        return false;
+
+    optComponentStatus->remove(statusesToRemove);
+    return set_component_status(pRawComponent, *optComponentStatus);
+}
+
+template<std::derived_from<rtti_pure_base> base_component_t>
+std::optional<priority> components<base_component_t>::get_component_priority(
+    const base_component_t* pRawComponent) const noexcept
+{
+    std::optional<status> optComponentStatus = get_status(pRawComponent);
+    return optComponentStatus ? std::optional(optComponentStatus->ePriority) : std::nullopt;
+}
+
+template<std::derived_from<rtti_pure_base> base_component_t>
+bool components<base_component_t>::set_component_priority(
+    const base_component_t* pRawComponent,
+    priority                eNewComponentPriority) noexcept
+{
+    std::optional<status> optComponentStatus = get_status(pRawComponent);
+    if (!optComponentStatus)
+        return false;
+
+    optComponentStatus->ePriority = eNewComponentPriority;
+    return set_status(pRawComponent, *optComponentStatus);
 }
 
 template<std::derived_from<rtti_pure_base> base_component_t>
@@ -292,6 +271,58 @@ void components<base_component_t>::clear() noexcept
     m_RootClass.derivedClasses.clear();
     m_RootClass.components.clear();
     m_RootClass.priorityCache.clear();
+}
+
+template<std::derived_from<rtti_pure_base> base_component_t>
+std::optional<typename components<base_component_t>::status> components<base_component_t>::get_status(
+    const base_component_t* pRawComponent) const noexcept
+{
+    if (!pRawComponent)
+        return std::nullopt;
+
+    auto it = std::ranges::find_if(
+        m_RootClass.priorityCache,
+        [pRawComponent](const auto& pair)
+        {
+            return pair.second == pRawComponent;
+        });
+
+    return it != m_RootClass.priorityCache.end() ? std::optional<status>(it->first) : std::nullopt;
+}
+
+
+template<std::derived_from<rtti_pure_base> base_component_t>
+bool components<base_component_t>::set_status(const base_component_t* pRawComponent, status status) noexcept
+{
+    if (!pRawComponent)
+        return false;
+
+    bool bChanged = true;
+    get_or_add_class_data(
+        pRawComponent,
+        [pRawComponent, status, &bChanged](class_data& classData)
+        {
+            const auto it = std::ranges::find_if(
+                classData.priorityCache,
+                [pRawComponent](const auto& pair)
+                {
+                    return pair.second == pRawComponent;
+                });
+
+            if (it == classData.priorityCache.end())
+            {
+                bChanged = false;
+                return;
+            }
+
+            if (it->first != status)
+            {
+                classData.priorityCache.emplace(status, it->second);
+                classData.priorityCache.erase(it);
+            }
+        });
+
+    return bChanged;
 }
 
 } // namespace qx

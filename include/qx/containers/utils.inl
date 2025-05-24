@@ -40,6 +40,14 @@ constexpr std::array<T, LeftLength + RightLength> join_arrays(
     return res;
 }
 
+template<std::size_t N, class T>
+constexpr std::array<T, N> span_to_array(const std::span<T, N>& span)
+{
+    std::array<T, N> array;
+    std::copy(span.begin(), span.end(), array.begin());
+    return array;
+}
+
 template<class result_container_t, class container_t>
 result_container_t make_container(const container_t& from)
 {

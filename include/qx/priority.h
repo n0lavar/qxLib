@@ -33,17 +33,9 @@ enum class priority : u8
     highest   = 255,
 };
 
-enum class status
-{
-    default_value = 0,
-    disabled      = 1 << 0,
-};
-
 } // namespace qx
 
 constexpr auto operator<=>(qx::priority eLeft, qx::priority eRight)
 {
     return static_cast<u8>(eLeft) <=> static_cast<u8>(eRight);
 }
-
-QX_FLAGS_ENUM_CLASS(qx::priority);

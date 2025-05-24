@@ -32,3 +32,7 @@ using i16 = int16_t;
 using i32 = int32_t;
 //!< − 9 223 372 036 854 775 808 .. 9 223 372 036 854 775 807
 using i64 = int64_t;
+
+
+using f32 = float_t;
+using f64 = double_t;

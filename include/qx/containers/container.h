@@ -104,4 +104,5 @@
         return QX_CONST_CAST_THIS()->at(ind);                             \
     }                                                                     \
                                                                           \
-    /* implement */ void clear() noexcept;
+    /* implement */ void clear() noexcept;                                \
+    QX_EMPTY_MACRO

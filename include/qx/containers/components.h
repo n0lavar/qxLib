@@ -11,7 +11,9 @@
 #include <qx/macros/common.h>
 #include <qx/priority.h>
 #include <qx/rtti/rtti.h>
+#include <qx/rtti/rtti_cast.h>
 
+#include <atomic>
 #include <map>
 #include <optional>
 #include <ranges>
@@ -19,6 +21,12 @@
 
 namespace qx
 {
+
+enum class component_status
+{
+    default_value = 0,
+    disabled      = 1 << 0,
+};
 
 /**
 
@@ -40,19 +48,32 @@ public:
     using pointer_type = std::unique_ptr<base_component_t>;
 
 private:
-    struct SClassData
+    struct status
     {
-        struct SCacheData
+        priority                ePriority   = priority::normal;
+        flags<component_status> statusFlags = component_status::default_value;
+        size_t                  nId         = ++nIdCounter;
+
+        constexpr bool operator==(const status&) const noexcept = default;
+        constexpr auto operator>(const status& other) const noexcept
         {
-            base_component_t* pComponent  = nullptr;
-            flags<status>     statusFlags = status::default_value;
-        };
+            if (ePriority != other.ePriority)
+                return ePriority > other.ePriority;
+            else
+                return nId < other.nId;
+        }
 
-        std::unordered_map<class_identificator, std::unique_ptr<SClassData>> derivedClasses;
-        std::vector<pointer_type>                                            components;
-        std::multimap<priority, SCacheData, std::greater<priority>>          priorityCache;
+    private:
+        static inline std::atomic_size_t nIdCounter { 0 };
+    };
 
-        [[nodiscard]] SClassData& get_or_add_class_data(class_identificator id) noexcept;
+    struct class_data
+    {
+        std::unordered_map<class_id, std::unique_ptr<class_data>>      derivedClasses;
+        std::vector<pointer_type>                                      components;
+        std::multimap<status, base_component_t*, std::greater<status>> priorityCache;
+
+        [[nodiscard]] class_data& get_or_add_class_data(class_id id) noexcept;
     };
 
     static constexpr auto stub_callback = [](auto&&...)
@@ -72,7 +93,7 @@ public:
     [[maybe_unused]] component_t* add(
         std::unique_ptr<component_t> pComponent,
         priority                     ePriority   = priority::normal,
-        flags<status>                statusFlags = status::default_value) noexcept;
+        flags<component_status>      statusFlags = component_status::default_value) noexcept;
 
     /**
         @brief  Remove the component from the container
@@ -83,49 +104,79 @@ public:
 
     /**
         @brief  Try to get a component of the given type with the highest priority
-        @tparam component_t - component type which doesn't have to be a final class type, may be any base or super type
-        @retval             - component pointer or nullptr
+        @tparam component_t      - component type which doesn't have to be a final class type, may be any base or super type
+        @param  bIncludeDisabled - true if a search should include disabled components
+        @retval                  - component pointer or nullptr
     **/
     template<std::derived_from<base_component_t> component_t>
-    [[nodiscard]] component_t* try_get() noexcept;
+    [[nodiscard]] component_t* try_get(bool bIncludeDisabled = false) noexcept;
 
     /**
         @brief  Try to get a component of the given type with the highest priority
-        @tparam component_t - component type which doesn't have to be a final class type, may be any base or super type
-        @retval             - component pointer or nullptr
+        @tparam component_t      - component type which doesn't have to be a final class type, may be any base or super type
+        @param  bIncludeDisabled - true if a search should include disabled components
+        @retval                  - component pointer or nullptr
     **/
     template<std::derived_from<base_component_t> component_t>
-    [[nodiscard]] const component_t* try_get() const noexcept;
+    [[nodiscard]] const component_t* try_get(bool bIncludeDisabled = false) const noexcept;
 
     /**
         @brief  Try to get a component of the given type id with the highest priority
-        @param  id - type id
-        @retval    - component pointer or nullptr
+        @tparam component_t      - component type which doesn't have to be a final class type, may be any base or super type
+        @param  id               - type id
+        @param  bIncludeDisabled - true if a search should include disabled components
+        @retval                  - component pointer or nullptr
     **/
-    [[nodiscard]] base_component_t* try_get(class_identificator id) noexcept;
+    template<std::derived_from<base_component_t> component_t = base_component_t>
+    [[nodiscard]] component_t* try_get(class_id id, bool bIncludeDisabled = false) noexcept;
 
     /**
         @brief  Try to get a component of the given type id with the highest priority
-        @param  id - type id
-        @retval    - component pointer or nullptr
+        @tparam component_t      - component type which doesn't have to be a final class type, may be any base or super type
+        @param  id               - type id
+        @param  bIncludeDisabled - true if a search should include disabled components
+        @retval                  - component pointer or nullptr
     **/
-    [[nodiscard]] const base_component_t* try_get(class_identificator id) const noexcept;
+    template<std::derived_from<base_component_t> component_t = base_component_t>
+    [[nodiscard]] const component_t* try_get(class_id id, bool bIncludeDisabled = false) const noexcept;
 
     /**
         @brief  Get a component of the given type with the highest priority (no existence checks are performed)
-        @tparam component_t - component type which doesn't have to be a final class type, may be any base or super type
-        @retval             - component reference
+        @tparam component_t      - component type which doesn't have to be a final class type, may be any base or super type
+        @param  bIncludeDisabled - true if a search should include disabled components
+        @retval                  - component reference
     **/
     template<std::derived_from<base_component_t> component_t>
-    [[nodiscard]] component_t& get() noexcept;
+    [[nodiscard]] component_t& get(bool bIncludeDisabled = false) noexcept;
 
     /**
         @brief  Get a component of the given type with the highest priority (no existence checks are performed)
-        @tparam component_t - component type which doesn't have to be a final class type, may be any base or super type
-        @retval             - component reference
+        @tparam component_t      - component type which doesn't have to be a final class type, may be any base or super type
+        @param  bIncludeDisabled - true if a search should include disabled components
+        @retval                  - component reference
     **/
     template<std::derived_from<base_component_t> component_t>
-    [[nodiscard]] const component_t& get() const noexcept;
+    [[nodiscard]] const component_t& get(bool bIncludeDisabled = false) const noexcept;
+
+    /**
+        @brief  Get a component of the given type with the highest priority (no existence checks are performed)
+        @tparam component_t      - component type which doesn't have to be a final class type, may be any base or super type
+        @param  id               - type id
+        @param  bIncludeDisabled - true if a search should include disabled components
+        @retval                  - component reference
+    **/
+    template<std::derived_from<base_component_t> component_t = base_component_t>
+    [[nodiscard]] base_component_t& get(class_id id, bool bIncludeDisabled = false) noexcept;
+
+    /**
+        @brief  Get a component of the given type with the highest priority (no existence checks are performed)
+        @tparam component_t      - component type which doesn't have to be a final class type, may be any base or super type
+        @param  id               - type id
+        @param  bIncludeDisabled - true if a search should include disabled components
+        @retval                  - component reference
+    **/
+    template<std::derived_from<base_component_t> component_t = base_component_t>
+    [[nodiscard]] const base_component_t& get(class_id id, bool bIncludeDisabled = false) const noexcept;
 
     /**
         @brief  Get a view which may be used in a ranged-based for loop and consists of components of a given type with decreasing non-disabled priority
@@ -144,34 +195,59 @@ public:
     [[nodiscard]] auto view() const noexcept;
 
     /**
-        @brief  Get a priority of a given component
+        @brief  Get component status
         @param  pRawComponent - raw component pointer which acts like a component's handle
-        @retval               - component's priority or nullopt if can't find the component
+        @retval               - component status
     **/
-    [[nodiscard]] std::optional<priority> get_priority(const base_component_t* pRawComponent) const noexcept;
+    [[nodiscard]] std::optional<flags<component_status>> get_component_status(
+        const base_component_t* pRawComponent) const noexcept;
 
     /**
-        @brief  Set a priority of a given component
+        @brief  Set (override) a component status
         @param  pRawComponent - raw component pointer which acts like a component's handle
-        @param  ePriority     - new component's priority
-        @retval               - true if the component is found and a priority was set
+        @param  newStatus     - new component status
+        @retval               - true if a component has been found and a new value has been set
     **/
-    [[maybe_unused]] bool set_priority(const base_component_t* pRawComponent, priority ePriority) noexcept;
+    [[maybe_unused]] bool set_component_status(
+        const base_component_t* pRawComponent,
+        flags<component_status> newStatus) noexcept;
 
     /**
-        @brief  Get a status of a given component
+        @brief  Add new component status flags to the current ones
         @param  pRawComponent - raw component pointer which acts like a component's handle
-        @retval               - status
+        @param  newStatuses   - new component status flags 
+        @retval               - true if a component has been found and a new value has been set
     **/
-    [[nodiscard]] std::optional<flags<status>> get_status(const base_component_t* pRawComponent) const noexcept;
+    [[maybe_unused]] bool add_component_status(
+        const base_component_t* pRawComponent,
+        flags<component_status> newStatuses) noexcept;
 
     /**
-        @brief  Set a status of a given component
-        @param  pRawComponent - raw component pointer which acts like a component's handle
-        @param  status        - new component's status
-        @retval               - true if the component is found and a status was set
+        @brief  Add component status flags from the current ones
+        @param  pRawComponent    - raw component pointer which acts like a component's handle
+        @param  statusesToRemove - component status flags to remove
+        @retval                  - true if a component has been found and a new value has been set
     **/
-    [[maybe_unused]] bool set_status(const base_component_t* pRawComponent, flags<status> status) noexcept;
+    [[maybe_unused]] bool remove_component_status(
+        const base_component_t* pRawComponent,
+        flags<component_status> statusesToRemove) noexcept;
+
+    /**
+        @brief  Get component priority
+        @param  pRawComponent - raw component pointer which acts like a component's handle
+        @retval               - component priority
+    **/
+    [[nodiscard]] std::optional<priority> get_component_priority(const base_component_t* pRawComponent) const noexcept;
+
+    /**
+        @brief  Set component priority
+        @param  pRawComponent         - raw component pointer which acts like a component's handle
+        @param  eNewComponentPriority - new component priority
+        @retval                       - true if a component has been found and a new value has been set
+    **/
+    [[maybe_unused]] bool set_component_priority(
+        const base_component_t* pRawComponent,
+        priority                eNewComponentPriority) noexcept;
 
     /**
         @brief  Check if container doesn't have any components 
@@ -186,6 +262,22 @@ public:
 
 private:
     /**
+        @brief  Get a status of a given component
+        @param  pRawComponent - raw component pointer which acts like a component's handle
+        @retval               - status
+    **/
+    [[nodiscard]] std::optional<status> get_status(const base_component_t* pRawComponent) const noexcept;
+
+    /**
+        @brief   Set a status of a given component
+        @warning This method may change the container, and you shall not use it while iterating over it
+        @param   pRawComponent - raw component pointer which acts like a component's handle
+        @param   status        - new component's status
+        @retval                - true if the component is found and a status was set
+    **/
+    [[maybe_unused]] bool set_status(const base_component_t* pRawComponent, status status) noexcept;
+
+    /**
         @brief  Get or add class data of a given type
         @tparam component_t              - final class type
         @tparam callable_t               - a callable that takes a class data
@@ -194,8 +286,8 @@ private:
     **/
     template<
         std::derived_from<base_component_t> component_t,
-        callable_c<void, SClassData&>       callable_t = decltype(stub_callback)>
-    SClassData& get_or_add_class_data(callable_t iterateClassDataFunction = stub_callback) noexcept
+        callable_c<void, class_data&>       callable_t = decltype(stub_callback)>
+    class_data& get_or_add_class_data(callable_t iterateClassDataFunction = stub_callback) noexcept
     {
         /*
             |    | rtti_base | c1 | base_component_t | c2 | c3 | component_t |
@@ -203,11 +295,11 @@ private:
             | t2 | <===============================>                         |
             | t3 |                                    <====================> |
         */
-        using t1 = typename component_t::inheritance_tuple;
-        using t2 = typename base_component_t::inheritance_tuple;
+        using t1 = typename component_t::inheritance_tuple_type;
+        using t2 = typename base_component_t::inheritance_tuple_type;
         using t3 = tuple::remove_t<t1, t2>;
 
-        SClassData* pClassData = &m_RootClass;
+        class_data* pClassData = &m_RootClass;
         iterateClassDataFunction(*pClassData);
 
         tuple::iterate<t3>(
@@ -229,8 +321,8 @@ private:
     **/
     template<
         std::derived_from<base_component_t> component_t,
-        callable_c<void, SClassData&>       callable_t = decltype(stub_callback)>
-    const SClassData& get_or_add_class_data(callable_t iterateClassDataFunction = stub_callback) const noexcept
+        callable_c<void, class_data&>       callable_t = decltype(stub_callback)>
+    const class_data& get_or_add_class_data(callable_t iterateClassDataFunction = stub_callback) const noexcept
     {
         return QX_CONST_CAST_THIS()->template get_or_add_class_data<component_t>(std::move(iterateClassDataFunction));
     }
@@ -242,16 +334,16 @@ private:
         @param  iterateClassDataFunction - a function that iterates over a class data from base_component_t + 1 to component_t
         @retval                          - or add class data
     **/
-    template<callable_c<void, SClassData&> callable_t = decltype(stub_callback)>
-    SClassData& get_or_add_class_data(
+    template<callable_c<void, class_data&> callable_t = decltype(stub_callback)>
+    class_data& get_or_add_class_data(
         const base_component_t* pRawComponent,
         callable_t              iterateClassDataFunction = stub_callback) noexcept
     {
-        SClassData* pClassData = &m_RootClass;
+        class_data* pClassData = &m_RootClass;
         iterateClassDataFunction(*pClassData);
 
-        std::span<const class_identificator> allIds = pRawComponent->get_inheritance_sequence();
-        std::span<const class_identificator> baseClassIds(
+        std::span<const class_id> allIds = pRawComponent->get_inheritance_sequence();
+        std::span<const class_id> baseClassIds(
             std::ranges::find(allIds, base_component_t::get_class_id_static()),
             allIds.end());
 
@@ -271,8 +363,8 @@ private:
         @param  iterateClassDataFunction - a function that iterates over a class data from base_component_t + 1 to component_t
         @retval                          - or add class data
     **/
-    template<callable_c<void, SClassData&> callable_t = decltype(stub_callback)>
-    const SClassData& get_or_add_class_data(
+    template<callable_c<void, class_data&> callable_t = decltype(stub_callback)>
+    const class_data& get_or_add_class_data(
         const base_component_t* pRawComponent,
         callable_t              iterateClassDataFunction = stub_callback) const noexcept
     {
@@ -280,7 +372,7 @@ private:
     }
 
 private:
-    SClassData m_RootClass;
+    class_data m_RootClass;
 };
 
 } // namespace qx

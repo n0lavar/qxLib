@@ -71,4 +71,4 @@ using constexpr_random =
 **/
 #define QX_UNIQUE_SEED \
     static_cast<u32>(  \
-        (qx::murmur_32_hash(__FILE__ __DATE__ __TIME__, 42u, qx::strlen(__FILE__ __DATE__ __TIME__)) + __LINE__))
+        (qx::murmur_32_hash(__FILE__ __DATE__ __TIME__, 42u, qx::strlen(__FILE__ __DATE__ __TIME__)) + QX_LINE))

@@ -25,7 +25,6 @@ namespace qx
 
     @class   rect
     @brief   Rectangle class
-    @details ~
     @author  Khrapov
     @date    12.11.2021
 

@@ -18,7 +18,6 @@ namespace qx
 
     @class   base_vao
     @brief   Base VAO class
-    @details ~
     @author  Khrapov
     @date    19.01.2020
 

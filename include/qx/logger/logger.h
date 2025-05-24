@@ -26,7 +26,7 @@
 **/
 #define QX_LOG_C(category, eVerbosity, format, ...) \
     QX_LOGGER_INSTANCE                              \
-        .log(eVerbosity, format, category, QX_SHORT_FILE, qx::to_string(__FUNCTION__), __LINE__, ##__VA_ARGS__)
+        .log(eVerbosity, format, category, QX_SHORT_FILE, qx::to_string(__FUNCTION__), QX_LINE, ##__VA_ARGS__)
 
 /**
     @def   QX_LOG
@@ -47,7 +47,6 @@ concept log_acceptable_args = (sizeof...(args_t) > 0 && format_acceptable_args<c
 
     @class   logger
     @brief   Logger class
-    @details ~
     @author  Khrapov
     @date    10.01.2020
 
@@ -92,7 +91,7 @@ public:
         string_view                            svFile,
         string_view                            svFunction,
         int                                    nLine,
-        const args_t&... args);
+        args_t&&... args);
 
     /**
         @brief Flush all streams
@@ -134,7 +133,6 @@ private:
 
     @class   logger_singleton
     @brief   Default logger instance
-    @details ~
     @author  Khrapov
     @date    19.08.2021
 

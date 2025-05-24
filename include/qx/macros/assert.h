@@ -68,11 +68,11 @@ void resolve_assert_proceeding(
     string_view     svCondition,
     // ... args
     format_string_strong_checks<args_t...> sFormat,
-    const args_t&... args)
+    args_t&&... args)
 {
     string sMessage;
     sMessage.append_format(QX_TEXT("[{}] "), svCondition);
-    sMessage.append_format(sFormat, args...);
+    sMessage.append_format(sFormat, std::forward<args_t>(args)...);
     QX_LOGGER_INSTANCE.log(eVerbosity, sMessage, fileCategory, svFile, svFunction, nLine);
     QX_LOGGER_INSTANCE.flush();
 }
@@ -104,13 +104,13 @@ void resolve_assert_proceeding(
     int             nLine,
     string_view     svCondition,
     // ... args
-    const category&          category,
+    const category&                        category,
     format_string_strong_checks<args_t...> sFormat,
-    const args_t&... args)
+    args_t&&... args)
 {
     string sMessage;
     sMessage.append_format(QX_TEXT("[{}] "), svCondition);
-    sMessage.append_format(sFormat, args...);
+    sMessage.append_format(sFormat, std::forward<args_t>(args)...);
     QX_LOGGER_INSTANCE.log(eVerbosity, sMessage, category, svFile, svFunction, nLine);
     QX_LOGGER_INSTANCE.flush();
 }
@@ -147,7 +147,7 @@ void resolve_assert_proceeding(
             QX_FILE_CATEGORY(),                                       \
             qx::to_string(__FUNCTION__),                              \
             QX_SHORT_FILE,                                            \
-            __LINE__,                                                 \
+            QX_LINE,                                                  \
             QX_TEXT(#condition),                                      \
             ##__VA_ARGS__)
 #endif
@@ -170,7 +170,7 @@ void resolve_assert_proceeding(
             QX_FILE_CATEGORY(),                                          \
             qx::to_string(__FUNCTION__),                                 \
             QX_SHORT_FILE,                                               \
-            __LINE__,                                                    \
+            QX_LINE,                                                     \
             QX_TEXT(#condition),                                         \
             ##__VA_ARGS__)
 #endif
@@ -209,6 +209,9 @@ void resolve_assert_proceeding(
 
 #define _QX_ASSERT_NO_ENTRY(before_debug_break, debug_break, after_debug_break, ...) \
     _QX_ASSERT(before_debug_break, debug_break, after_debug_break, !QX_TEXT("No entry"), ##__VA_ARGS__)
+
+#define _QX_ASSERT_NOT_IMPLEMENTED(before_debug_break, debug_break, after_debug_break, ...) \
+    _QX_ASSERT(before_debug_break, debug_break, after_debug_break, !QX_TEXT("Not implemented"), ##__VA_ARGS__)
 
 #define _QX_ASSERT_CONTINUE(before_debug_break, debug_break, after_debug_break, condition, ...)                 \
     if (!_QX_ASSERT(before_debug_break, debug_break, after_debug_break, condition, ##__VA_ARGS__)) [[unlikely]] \
@@ -258,14 +261,22 @@ void resolve_assert_proceeding(
 /**
     @brief   Fails unconditionally if this code should not be executed
     @details ASSERT macros generate fatal failures and abort the program execution
-    @param   ...  - "category + format string + format arguments"
-                 or "category + format string"
-                 or "format string + format arguments"
-                 or "format string"
-                 or "category"
+    @param   ...  - nothing or "category"
 **/
 #define QX_ASSERT_NO_ENTRY(...) \
     _QX_ASSERT_NO_ENTRY(QX_ASSERT_BEFORE_DEBUG_BREAK, QX_ASSERT_DEBUG_BREAK, QX_ASSERT_AFTER_DEBUG_BREAK, ##__VA_ARGS__)
+
+/**
+    @brief   Fails unconditionally if this code should not be executed with "Not implemented" message
+    @details ASSERT macros generate fatal failures and abort the program execution
+    @param   ...  - nothing or "category"
+**/
+#define QX_ASSERT_NOT_IMPLEMENTED(...) \
+    _QX_ASSERT_NOT_IMPLEMENTED(        \
+        QX_ASSERT_BEFORE_DEBUG_BREAK,  \
+        QX_ASSERT_DEBUG_BREAK,         \
+        QX_ASSERT_AFTER_DEBUG_BREAK,   \
+        ##__VA_ARGS__)
 
 /**
     @brief   Verifies that condition is true
@@ -288,14 +299,22 @@ void resolve_assert_proceeding(
 /**
     @brief   Fails unconditionally if this code should not be executed
     @details EXPECT macros generate nonfatal failures and allow to continue running
-    @param   ...  - "category + format string + format arguments"
-                 or "category + format string"
-                 or "format string + format arguments"
-                 or "format string"
-                 or "category"
+    @param   ...  - nothing or "category"
 **/
 #define QX_EXPECT_NO_ENTRY(...) \
     _QX_ASSERT_NO_ENTRY(QX_EXPECT_BEFORE_DEBUG_BREAK, QX_EXPECT_DEBUG_BREAK, QX_EXPECT_AFTER_DEBUG_BREAK, ##__VA_ARGS__)
+
+/**
+    @brief   Fails unconditionally if this code should not be executed with "Not implemented" message
+    @details EXPECT macros generate nonfatal failures and allow to continue running
+    @param   ...  - nothing or "category"
+**/
+#define QX_EXPECT_NOT_IMPLEMENTED(...) \
+    _QX_ASSERT_NOT_IMPLEMENTED(        \
+        QX_EXPECT_BEFORE_DEBUG_BREAK,  \
+        QX_EXPECT_DEBUG_BREAK,         \
+        QX_EXPECT_AFTER_DEBUG_BREAK,   \
+        ##__VA_ARGS__)
 
 /**
     @brief   Verifies that condition is true and continues loop if false
@@ -414,3 +433,30 @@ void resolve_assert_proceeding(
         condition,                               \
         ,                                        \
         ##__VA_ARGS__)
+
+namespace qx::details
+{
+
+inline bool hit_once(bool& bHit)
+{
+    const bool bReturn = bHit;
+    bHit               = true;
+    return bReturn;
+}
+
+} // namespace qx::details
+
+/**
+    @def   QX_PREDICATE_HIT_ONCE
+    @brief Predicate to add to a condition in any EXPECT macro. When added, a macro will only hit once.
+    @note  It must be after the actual condition.
+    @code
+    QX_EXPECT((a > b || b == 0) || QX_PREDICATE_HIT_ONCE());
+    @endcode
+**/
+#define QX_PREDICATE_HIT_ONCE()          \
+    []()                                 \
+    {                                    \
+        static bool h = false;           \
+        return qx::details::hit_once(h); \
+    }()

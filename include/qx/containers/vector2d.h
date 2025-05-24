@@ -38,7 +38,7 @@ public:
     using difference_type = std::ptrdiff_t;
     using size_type       = size_t;
 
-    QX_IMPL_CONTAINER(vector2d)
+    QX_IMPL_CONTAINER(vector2d);
 
 public:
     vector2d() = default;

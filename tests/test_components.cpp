@@ -151,8 +151,10 @@ SComponents CreateComponents()
         components.components.add(std::make_unique<CTestComponent23>("5"), qx::priority::normal);
     components.pComponent23_2 =
         components.components.add(std::make_unique<CTestComponent23>("6"), qx::priority::very_high);
-    components.pComponent23_3 =
-        components.components.add(std::make_unique<CTestComponent23>("7"), qx::priority::normal, qx::status::disabled);
+    components.pComponent23_3 = components.components.add(
+        std::make_unique<CTestComponent23>("7"),
+        qx::priority::normal,
+        qx::component_status::disabled);
 
     return components;
 }
@@ -287,11 +289,11 @@ TEST(components, priority)
 {
     SComponents components = CreateComponents();
 
-    components.components.set_priority(components.pComponent22_2, qx::priority::lowest);
-    const std::optional<qx::flags<qx::priority>> ePriority =
-        components.components.get_priority(components.pComponent22_2);
-    ASSERT_TRUE(ePriority);
-    EXPECT_EQ(*ePriority, qx::priority::lowest);
+    components.components.set_component_priority(components.pComponent22_2, qx::priority::lowest);
+    const std::optional<qx::priority> optStatus =
+        components.components.get_component_priority(components.pComponent22_2);
+    ASSERT_TRUE(optStatus);
+    EXPECT_EQ(*optStatus, qx::priority::lowest);
 
     const std::array<ABaseTestComponent*, 7> ABaseTestComponent_objects {
         components.pComponent23_2, components.pComponent21_2, components.pComponent1,   components.pComponent23_1,
@@ -304,7 +306,10 @@ TEST(components, status)
 {
     SComponents components = CreateComponents();
 
-    EXPECT_EQ(components.components.get_status(components.pComponent23_3), qx::status::disabled);
+    const std::optional<qx::flags<qx::component_status>> optStatus1 =
+        components.components.get_component_status(components.pComponent23_3);
+    ASSERT_TRUE(optStatus1);
+    EXPECT_EQ(*optStatus1, qx::component_status::disabled);
     const std::array<ABaseTestComponent*, 7> ABaseTestComponent_objectsBefore {
         components.pComponent23_2, components.pComponent21_2, components.pComponent1,   components.pComponent22_2,
         components.pComponent23_1, components.pComponent21_1, components.pComponent22_1
@@ -312,8 +317,11 @@ TEST(components, status)
     EXPECT_TRUE(
         std::ranges::equal(ABaseTestComponent_objectsBefore, components.components.view(), RefPointerComparator));
 
-    components.components.set_status(components.pComponent23_3, qx::status::default_value);
-    EXPECT_EQ(components.components.get_status(components.pComponent23_3), qx::status::default_value);
+    components.components.set_component_status(components.pComponent23_3, qx::component_status::default_value);
+    const std::optional<qx::flags<qx::component_status>> optStatus2 =
+        components.components.get_component_status(components.pComponent23_3);
+    ASSERT_TRUE(optStatus2);
+    EXPECT_EQ(*optStatus2, qx::component_status::default_value);
     const std::array<ABaseTestComponent*, 8> ABaseTestComponent_objectsAfter {
         components.pComponent23_2, components.pComponent21_2, components.pComponent1,    components.pComponent22_2,
         components.pComponent23_1, components.pComponent23_3, components.pComponent21_1, components.pComponent22_1

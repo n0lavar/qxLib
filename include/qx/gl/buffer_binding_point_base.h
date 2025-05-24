@@ -17,7 +17,6 @@ namespace qx
 
     @class   buffer_binding_point_base
     @brief   Base class for buffers with binding points
-    @details ~
     @author  Khrapov
     @date    10.07.2020
 

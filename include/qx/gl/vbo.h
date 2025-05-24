@@ -17,7 +17,6 @@ namespace qx
 
     @class   base_vbo
     @brief   Base VBO class
-    @details ~
     @author  Khrapov
     @date    10.07.2020
 

@@ -22,7 +22,6 @@ namespace qx
 
     @class   debugger_logger_stream
     @brief   Logger stream for a debugger output (VS: output window)
-    @details ~
     @author  Khrapov
     @date    12.11.2023
 

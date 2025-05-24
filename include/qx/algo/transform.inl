@@ -15,23 +15,18 @@ namespace details
 
 template<class T>
 concept has_reserve_func = requires(T t) {
-    {
-        t.reserve(size_t())
-    };
+    { t.reserve(size_t()) };
 };
 
 template<class T>
 concept has_size_func = requires(T t) {
-    {
-        t.size()
-    } -> std::convertible_to<size_t>;
+    { t.size() } -> std::convertible_to<size_t>;
 };
 
 } // namespace details
 
 template<
-    template<class...>
-    class result_container_t,
+    template<class...> class result_container_t,
     class input_container_t,
     class transform_callable_t,
     class... result_container_rest_t>

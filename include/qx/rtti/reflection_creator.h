@@ -49,7 +49,7 @@ public:
         @param  args - template parameter pack
         @retval      - class instance or nullptr if can't find factory or can't create
     **/
-    [[nodiscard]] static smart_ptr_t<base_class_t> create_object(class_identificator id, args_t&&... args)
+    [[nodiscard]] static smart_ptr_t<base_class_t> create_object(class_id id, args_t&&... args)
     {
         if (auto it = m_FactoriesById.find(id); it != m_FactoriesById.end())
             return it->second(std::forward<args_t>(args)...);
@@ -80,7 +80,7 @@ public:
         @param  svClassName - class name
         @retval             - true if registered
     **/
-    static bool _register_class(factory factory, class_identificator id, string_view svClassName)
+    static bool _register_class(factory factory, class_id id, string_view svClassName)
     {
         if (factory && !svClassName.empty())
         {
@@ -95,8 +95,8 @@ public:
     }
 
 private:
-    static inline std::map<class_identificator, factory> m_FactoriesById;
-    static inline std::map<string_view, factory>         m_FactoriesByName;
+    static inline std::map<class_id, factory>    m_FactoriesById;
+    static inline std::map<string_view, factory> m_FactoriesByName;
 };
 
 namespace details

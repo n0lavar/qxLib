@@ -17,7 +17,6 @@ namespace qx
 
     @class   base_return_object_iterator
     @brief   This kind of iterator returns value and not reference in access methods
-    @details ~
     @tparam  base_iterator_t - base iterator type
     @author  Khrapov
     @date    28.01.2023

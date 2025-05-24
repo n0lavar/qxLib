@@ -17,7 +17,6 @@ namespace qx
 
     @class   IBuffer
     @brief   OpenGL buffer interface
-    @details ~
     @author  Khrapov
     @date    22.01.2020
 

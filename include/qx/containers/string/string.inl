@@ -122,36 +122,40 @@ inline void basic_string<char_t, traits_t>::assign(const string_t& sAnother) noe
 template<class char_t, class traits_t>
 template<class... args_t>
     requires format_acceptable_args<char_t, args_t...>
-void basic_string<char_t, traits_t>::format(format_string_type<args_t...> sFormat, const args_t&... args)
+void basic_string<char_t, traits_t>::format(
+    const format_string_type<std::type_identity_t<args_t>...> sFormat,
+    args_t&&... args)
 {
-    vformat(sFormat.get(), args...);
+    vformat(sFormat.get(), std::forward<args_t>(args)...);
 }
 
 template<class char_t, class traits_t>
 template<class... args_t>
     requires format_acceptable_args<char_t, args_t...>
 basic_string<char_t, traits_t> basic_string<char_t, traits_t>::static_format(
-    format_string_type<args_t...> sFormat,
-    const args_t&... args)
+    const format_string_type<std::type_identity_t<args_t>...> sFormat,
+    args_t&&... args)
 {
-    return static_vformat(sFormat.get(), args...);
+    return static_vformat(sFormat.get(), std::forward<args_t>(args)...);
 }
 
 template<class char_t, class traits_t>
 template<class... args_t>
     requires format_acceptable_args<char_t, args_t...>
-void basic_string<char_t, traits_t>::append_format(format_string_type<args_t...> sFormat, const args_t&... args)
+void basic_string<char_t, traits_t>::append_format(
+    const format_string_type<std::type_identity_t<args_t>...> sFormat,
+    args_t&&... args)
 {
-    append_vformat(sFormat.get(), args...);
+    append_vformat(sFormat.get(), std::forward<args_t>(args)...);
 }
 
 template<class char_t, class traits_t>
 template<class... args_t>
     requires format_acceptable_args<char_t, args_t...>
-void basic_string<char_t, traits_t>::vformat(string_view svFormat, const args_t&... args)
+void basic_string<char_t, traits_t>::vformat(string_view svFormat, args_t&&... args)
 {
     clear();
-    append_vformat(svFormat, args...);
+    append_vformat(svFormat, std::forward<args_t>(args)...);
 }
 
 template<class char_t, class traits_t>
@@ -159,20 +163,20 @@ template<class... args_t>
     requires format_acceptable_args<char_t, args_t...>
 inline basic_string<char_t, traits_t> basic_string<char_t, traits_t>::static_vformat(
     string_view svFormat,
-    const args_t&... args)
+    args_t&&... args)
 {
     basic_string sTemp;
-    sTemp.vformat(svFormat, args...);
+    sTemp.vformat(svFormat, std::forward<args_t>(args)...);
     return sTemp;
 }
 
 template<class char_t, class traits_t>
 template<class... args_t>
     requires format_acceptable_args<char_t, args_t...>
-inline void basic_string<char_t, traits_t>::append_vformat(string_view svFormat, const args_t&... args)
+inline void basic_string<char_t, traits_t>::append_vformat(string_view svFormat, args_t&&... args)
 {
     if (!svFormat.empty())
-        traits_t::format_to(std::back_inserter(*this), svFormat, args...);
+        traits_t::format_to(std::back_inserter(*this), svFormat, std::forward<args_t>(args)...);
 }
 
 template<class char_t, class traits_t>
@@ -1154,7 +1158,7 @@ inline typename basic_string<char_t, traits_t>::size_type basic_string<char_t, t
         {
             return 1;
         }
-        else if constexpr (std::is_same_v<T, const_pointer>)
+        else if constexpr (std::is_convertible_v<T, const_pointer>)
         {
             return traits_t::length(val);
         }
@@ -1175,7 +1179,7 @@ inline typename basic_string<char_t, traits_t>::size_type basic_string<char_t, t
         {
             return &val;
         }
-        else if constexpr (std::is_same_v<T, const_pointer>)
+        else if constexpr (std::is_convertible_v<T, const_pointer>)
         {
             return val;
         }
@@ -2622,7 +2626,7 @@ template<class char_t, class traits_t>
 struct formatter<qx::basic_string<char_t, traits_t>, char_t> : qx::basic_formatter
 {
     template<class format_context_type>
-    constexpr auto format(const qx::basic_string<char_t, traits_t>& value, format_context_type& ctx)
+    constexpr auto format(const qx::basic_string<char_t, traits_t>& value, format_context_type& ctx) const
     {
         return format_to(ctx.out(), QX_STR_PREFIX(char_t, "{}"), value.c_str());
     }

@@ -360,7 +360,7 @@ struct format_traits<char, usings_char_traits_t>
     static void format_to(
         output_it_t                                     itOutput,
         typename usings_char_traits_t::string_view_type svFormat,
-        const args_t&... args)
+        args_t&&... args)
     {
         std::vformat_to(itOutput, svFormat, std::make_format_args(args...));
     }
@@ -384,7 +384,7 @@ struct format_traits<wchar_t, usings_char_traits_t>
     static void format_to(
         output_it_t                                     itOutput,
         typename usings_char_traits_t::string_view_type svFormat,
-        const args_t&... args)
+        args_t&&... args)
     {
         std::vformat_to(itOutput, svFormat, std::make_wformat_args(args...));
     }
