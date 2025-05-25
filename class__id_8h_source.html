@@ -149,7 +149,7 @@ $(function() {
 <div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;constexpr <a class="code" href="classqx_1_1class__id.html">class_id</a> <a class="code" href="classqx_1_1class__id.html#a1736fdae179584b4124595a5da3f93df">class_id::create</a>()</div>
 <div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;{</div>
 <div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;    <a class="code" href="classqx_1_1class__id.html">class_id</a> result;</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;    result.m_svClassName = <a class="code" href="classqx_1_1type__strings.html#aea00ff94b4d75449bc0a6684f81c80bd">type_strings&lt;char_type&gt;::get_signature</a>();</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;    result.m_svClassName = <a class="code" href="classqx_1_1type__strings.html#aea00ff94b4d75449bc0a6684f81c80bd">type_strings&lt;T, char_type&gt;::get_signature</a>();</div>
 <div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;    result.m_nId         = <a class="code" href="classqx_1_1basic__string__hash.html">string_hash</a>(result.m_svClassName);</div>
 <div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;    <span class="keywordflow">return</span> result;</div>
 <div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;}</div>
