@@ -2,7 +2,7 @@ var searchData=
 [
   ['category_2eh_962',['category.h',['../category_8h.html',1,'']]],
   ['category_2einl_963',['category.inl',['../category_8inl.html',1,'']]],
-  ['class_5fidentificator_2eh_964',['class_identificator.h',['../class__identificator_8h.html',1,'']]],
+  ['class_5fid_2eh_964',['class_id.h',['../class__id_8h.html',1,'']]],
   ['color_2eh_965',['color.h',['../color_8h.html',1,'']]],
   ['color_2einl_966',['color.inl',['../color_8inl.html',1,'']]],
   ['common_2eh_967',['common.h',['../macros_2common_8h.html',1,'(Global Namespace)'],['../math_2common_8h.html',1,'(Global Namespace)']]],
