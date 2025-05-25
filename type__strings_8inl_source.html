@@ -107,8 +107,8 @@ $(function() {
 <div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    }</div>
 <div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    <span class="keywordflow">else</span></div>
 <div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    {</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;        <span class="keyword">static</span> constexpr <span class="keyword">auto</span> char_array =</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;            to_char_array&lt;char_t&gt;(std::span&lt;<span class="keyword">const</span> <span class="keywordtype">char</span>, <a class="code" href="string__utils_8h.html#aa1f7d3648d28dcef62c0db015730218d">strlen</a>(__PRETTY_FUNCTION__) + 1&gt;(__PRETTY_FUNCTION__));</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;        constexpr <span class="keyword">auto</span> char_array =</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;            details::to_char_array&lt;char_t&gt;(std::span&lt;<span class="keyword">const</span> <span class="keywordtype">char</span>, <a class="code" href="string__utils_8h.html#aa1f7d3648d28dcef62c0db015730218d">strlen</a>(__PRETTY_FUNCTION__) + 1&gt;(__PRETTY_FUNCTION__));</div>
 <div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;        <span class="keywordflow">return</span> string_view_type(char_array.data());</div>
 <div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    }</div>
 <div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="preprocessor">#endif</span></div>
