@@ -8,8 +8,8 @@
 **/
 #pragma once
 
-#include <qx/link.h>
 #include <qx/rtti/rtti.h>
+#include <qx/smart_ptr/link.h>
 
 #include <memory>
 

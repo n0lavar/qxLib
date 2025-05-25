@@ -11,7 +11,7 @@
 
 //V_EXCLUDE_PATH *test_link.cpp
 
-#include <qx/link.h>
+#include <qx/smart_ptr/link.h>
 
 struct STest
 {

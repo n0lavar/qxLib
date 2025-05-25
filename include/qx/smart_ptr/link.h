@@ -200,4 +200,4 @@ private:
 
 } // namespace qx
 
-#include <qx/link.inl>
+#include <qx/smart_ptr/link.inl>

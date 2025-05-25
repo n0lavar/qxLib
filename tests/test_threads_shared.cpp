@@ -10,7 +10,7 @@
 
 //V_EXCLUDE_PATH *threads_shared.cpp
 
-#include <qx/threads_shared.h>
+#include <qx/smart_ptr/threads_shared.h>
 
 #include <chrono>
 #include <list>
