@@ -1,8 +1,8 @@
 var searchData=
 [
-  ['i16_308',['i16',['../typedefs_8h.html#a977685259fe8059c48e92450967d46a8',1,'typedefs.h']]],
-  ['i32_309',['i32',['../typedefs_8h.html#aec41e5f8e4b7aef2540e84268692fa84',1,'typedefs.h']]],
-  ['i8_310',['i8',['../typedefs_8h.html#a196513547113c3f96a078ee3e658a6ef',1,'typedefs.h']]],
+  ['i16_308',['i16',['../typedefs_8h.html#aa9061c03e78b5c69a2e90542f956b1b9',1,'typedefs.h']]],
+  ['i32_309',['i32',['../typedefs_8h.html#aec4a1429cc91fb7ff41599b263c348cc',1,'typedefs.h']]],
+  ['i8_310',['i8',['../typedefs_8h.html#a090e14ab721404d80f4404634d5c79cc',1,'typedefs.h']]],
   ['ibuffer_311',['IBuffer',['../classqx_1_1_i_buffer.html',1,'qx']]],
   ['ibuffer_2eh_312',['ibuffer.h',['../ibuffer_8h.html',1,'']]],
   ['index_313',['index',['../structqx_1_1tuple_1_1index.html',1,'qx::tuple']]],

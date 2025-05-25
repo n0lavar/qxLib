@@ -115,8 +115,8 @@ $(function() {
 <div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    <span class="keyword">struct </span>data</div>
 <div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    {</div>
 <div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;        T   value;</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;        <a class="code" href="typedefs_8h.html#a1af9f95651e921615e75917a6dd1b574">u64</a> nId      = 0;</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;        <a class="code" href="typedefs_8h.html#a1af9f95651e921615e75917a6dd1b574">u64</a> nCounter = 0;</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;        <a class="code" href="typedefs_8h.html#a66e1d499241ccae9a18a20a1f4f0590d">u64</a> nId      = 0;</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;        <a class="code" href="typedefs_8h.html#a66e1d499241ccae9a18a20a1f4f0590d">u64</a> nCounter = 0;</div>
 <div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    };</div>
 <div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160; </div>
 <div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    <span class="keyword">struct </span>value_tag;</div>
@@ -147,7 +147,7 @@ $(function() {
 <div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    {</div>
 <div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;        <span class="keyword">friend</span> <a class="code" href="classqx_1_1unique__objects__pool.html">unique_objects_pool</a>;</div>
 <div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160; </div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;        <span class="keyword">static</span> constexpr <a class="code" href="typedefs_8h.html#a1af9f95651e921615e75917a6dd1b574">u64</a> kInvalidId = <span class="keyword">static_cast&lt;</span><a class="code" href="typedefs_8h.html#a1af9f95651e921615e75917a6dd1b574">u64</a><span class="keyword">&gt;</span>(-1);</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;        <span class="keyword">static</span> constexpr <a class="code" href="typedefs_8h.html#a66e1d499241ccae9a18a20a1f4f0590d">u64</a> kInvalidId = <span class="keyword">static_cast&lt;</span><a class="code" href="typedefs_8h.html#a66e1d499241ccae9a18a20a1f4f0590d">u64</a><span class="keyword">&gt;</span>(-1);</div>
 <div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160; </div>
 <div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;    <span class="keyword">public</span>:</div>
 <div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;        <a class="code" href="classqx_1_1unique__objects__pool_1_1token.html">token</a>() noexcept = <span class="keywordflow">default</span>;</div>
@@ -182,10 +182,10 @@ $(function() {
 <div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;<span class="comment">            @param nId   - object id</span></div>
 <div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;<span class="comment">            @param pPool - pool pointer</span></div>
 <div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;<span class="comment">        **/</span></div>
-<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;        <a class="code" href="classqx_1_1unique__objects__pool_1_1token.html">token</a>(<a class="code" href="typedefs_8h.html#a1af9f95651e921615e75917a6dd1b574">u64</a> nId, <a class="code" href="classqx_1_1unique__objects__pool.html">unique_objects_pool</a>* pPool) noexcept;</div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;        <a class="code" href="classqx_1_1unique__objects__pool_1_1token.html">token</a>(<a class="code" href="typedefs_8h.html#a66e1d499241ccae9a18a20a1f4f0590d">u64</a> nId, <a class="code" href="classqx_1_1unique__objects__pool.html">unique_objects_pool</a>* pPool) noexcept;</div>
 <div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160; </div>
 <div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;    <span class="keyword">private</span>:</div>
-<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;        <a class="code" href="typedefs_8h.html#a1af9f95651e921615e75917a6dd1b574">u64</a>                  m_nId   = kInvalidId;</div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;        <a class="code" href="typedefs_8h.html#a66e1d499241ccae9a18a20a1f4f0590d">u64</a>                  m_nId   = kInvalidId;</div>
 <div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;        <a class="code" href="classqx_1_1unique__objects__pool.html">unique_objects_pool</a>* m_pPool = <span class="keyword">nullptr</span>;</div>
 <div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;    };</div>
 <div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160; </div>
@@ -227,27 +227,27 @@ $(function() {
 <div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;<span class="comment">        @brief Increase the usage counter of the object with the specified id</span></div>
 <div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;<span class="comment">        @param nId - object id</span></div>
 <div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;<span class="comment">    **/</span></div>
-<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;    <span class="keywordtype">void</span> increase_counter(<a class="code" href="typedefs_8h.html#a1af9f95651e921615e75917a6dd1b574">u64</a> nId) noexcept;</div>
+<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;    <span class="keywordtype">void</span> increase_counter(<a class="code" href="typedefs_8h.html#a66e1d499241ccae9a18a20a1f4f0590d">u64</a> nId) noexcept;</div>
 <div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;<span class="comment"></span> </div>
 <div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;<span class="comment">    /**</span></div>
 <div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;<span class="comment">        @brief Decrease the usage counter of the object with the specified id</span></div>
 <div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;<span class="comment">        @param nId - object id</span></div>
 <div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;<span class="comment">    **/</span></div>
-<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;    <span class="keywordtype">void</span> decrease_counter(<a class="code" href="typedefs_8h.html#a1af9f95651e921615e75917a6dd1b574">u64</a> nId) noexcept;</div>
+<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;    <span class="keywordtype">void</span> decrease_counter(<a class="code" href="typedefs_8h.html#a66e1d499241ccae9a18a20a1f4f0590d">u64</a> nId) noexcept;</div>
 <div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;<span class="comment"></span> </div>
 <div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;<span class="comment">    /**</span></div>
 <div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;<span class="comment">        @brief  Get value of the object with the specified id</span></div>
 <div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;<span class="comment">        @param  nId - object id</span></div>
 <div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;<span class="comment">        @retval     - object value</span></div>
 <div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;<span class="comment">    **/</span></div>
-<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;    const T&amp; get_value(<a class="code" href="typedefs_8h.html#a1af9f95651e921615e75917a6dd1b574">u64</a> nId) noexcept;</div>
+<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;    const T&amp; get_value(<a class="code" href="typedefs_8h.html#a66e1d499241ccae9a18a20a1f4f0590d">u64</a> nId) noexcept;</div>
 <div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160; </div>
 <div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;private:</div>
 <div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;    const <span class="keywordtype">bool</span> m_bAutoShrink = true;</div>
 <div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160; </div>
 <div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;    QX_PERF_SHARED_MUTEX(m_UniqueObjectsPoolMutex);</div>
 <div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;    values_set m_Pool;</div>
-<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;    <a class="code" href="typedefs_8h.html#a1af9f95651e921615e75917a6dd1b574">u64</a>        m_nCurrentId = 1;</div>
+<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;    <a class="code" href="typedefs_8h.html#a66e1d499241ccae9a18a20a1f4f0590d">u64</a>        m_nCurrentId = 1;</div>
 <div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;};</div>
 <div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160; </div>
 <div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;} <span class="comment">// namespace qx</span></div>
@@ -266,7 +266,7 @@ $(function() {
 <div class="ttc" id="aperf__scope_8h_html"><div class="ttname"><a href="perf__scope_8h.html">perf_scope.h</a></div><div class="ttdoc">Contains perf scope macros for profiler (for internal usage only, but user may override them)</div></div>
 <div class="ttc" id="asuppress__warnings_8h_html"><div class="ttname"><a href="suppress__warnings_8h.html">suppress_warnings.h</a></div></div>
 <div class="ttc" id="atypedefs_8h_html"><div class="ttname"><a href="typedefs_8h.html">typedefs.h</a></div></div>
-<div class="ttc" id="atypedefs_8h_html_a1af9f95651e921615e75917a6dd1b574"><div class="ttname"><a href="typedefs_8h.html#a1af9f95651e921615e75917a6dd1b574">u64</a></div><div class="ttdeci">uint64_t u64</div><div class="ttdef"><b>Definition:</b> <a href="typedefs_8h_source.html#l00025">typedefs.h:27</a></div></div>
+<div class="ttc" id="atypedefs_8h_html_a66e1d499241ccae9a18a20a1f4f0590d"><div class="ttname"><a href="typedefs_8h.html#a66e1d499241ccae9a18a20a1f4f0590d">u64</a></div><div class="ttdeci">std::uint64_t u64</div><div class="ttdef"><b>Definition:</b> <a href="typedefs_8h_source.html#l00024">typedefs.h:26</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

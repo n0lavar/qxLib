@@ -147,28 +147,28 @@ $(function() {
 <div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;            <span class="comment">// constexpr version of std::memcpy(&amp;k, pszStr, sizeof(u32));</span></div>
 <div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;            static_assert(<span class="keyword">sizeof</span>(value_t) == 1 || <span class="keyword">sizeof</span>(value_t) == 2 || <span class="keyword">sizeof</span>(value_t) == 4);</div>
 <div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160; </div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;            <span class="keywordflow">if</span> constexpr (<span class="keyword">sizeof</span>(value_t) == <span class="keyword">sizeof</span>(<a class="code" href="typedefs_8h.html#a70c1fcc1a4e96af8f6580f708657cd41">u32</a>))</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;            <span class="keywordflow">if</span> constexpr (<span class="keyword">sizeof</span>(value_t) == <span class="keyword">sizeof</span>(<a class="code" href="typedefs_8h.html#a65cf28726f89e62ccf2f1354bc2716df">u32</a>))</div>
 <div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;            {</div>
 <div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;                k += *(pStr + 0);</div>
 <div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;            }</div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;            <span class="keywordflow">else</span> <span class="keywordflow">if</span> constexpr (<span class="keyword">sizeof</span>(value_t) == <span class="keyword">sizeof</span>(<a class="code" href="typedefs_8h.html#a6dbf9516e516c901604625282c174aa4">u16</a>))</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;            <span class="keywordflow">else</span> <span class="keywordflow">if</span> constexpr (<span class="keyword">sizeof</span>(value_t) == <span class="keyword">sizeof</span>(<a class="code" href="typedefs_8h.html#a917e58b0692c2df778a27350534cbfe7">u16</a>))</div>
 <div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;            {</div>
 <div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;                k += *(pStr + 0);</div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;                k &lt;&lt;= <span class="keyword">sizeof</span>(<a class="code" href="typedefs_8h.html#a6dbf9516e516c901604625282c174aa4">u16</a>);</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;                k &lt;&lt;= <span class="keyword">sizeof</span>(<a class="code" href="typedefs_8h.html#a917e58b0692c2df778a27350534cbfe7">u16</a>);</div>
 <div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;                k += *(pStr + 1);</div>
 <div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;            }</div>
 <div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;            <span class="keywordflow">else</span></div>
 <div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;            {</div>
 <div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;                k += *(pStr + 0);</div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;                k &lt;&lt;= <span class="keyword">sizeof</span>(<a class="code" href="typedefs_8h.html#a987e4d6cf789cb59dbb390728271e4d6">u8</a>);</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;                k &lt;&lt;= <span class="keyword">sizeof</span>(<a class="code" href="typedefs_8h.html#a254d32383658e016368673396e7afc1b">u8</a>);</div>
 <div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;                k += *(pStr + 1);</div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;                k &lt;&lt;= <span class="keyword">sizeof</span>(<a class="code" href="typedefs_8h.html#a987e4d6cf789cb59dbb390728271e4d6">u8</a>);</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;                k &lt;&lt;= <span class="keyword">sizeof</span>(<a class="code" href="typedefs_8h.html#a254d32383658e016368673396e7afc1b">u8</a>);</div>
 <div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;                k += *(pStr + 2);</div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;                k &lt;&lt;= <span class="keyword">sizeof</span>(<a class="code" href="typedefs_8h.html#a987e4d6cf789cb59dbb390728271e4d6">u8</a>);</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;                k &lt;&lt;= <span class="keyword">sizeof</span>(<a class="code" href="typedefs_8h.html#a254d32383658e016368673396e7afc1b">u8</a>);</div>
 <div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;                k += *(pStr + 3);</div>
 <div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;            }</div>
 <div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160; </div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;            pStr += <span class="keyword">sizeof</span>(<a class="code" href="typedefs_8h.html#a70c1fcc1a4e96af8f6580f708657cd41">u32</a>);</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;            pStr += <span class="keyword">sizeof</span>(<a class="code" href="typedefs_8h.html#a65cf28726f89e62ccf2f1354bc2716df">u32</a>);</div>
 <div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160; </div>
 <div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;            k *= 0xcc9e2d51; <span class="comment">//-V101</span></div>
 <div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;            k = (k &lt;&lt; 15) | (k &gt;&gt; 17);</div>
@@ -463,9 +463,9 @@ $(function() {
 <div class="ttc" id="astring__utils_8h_html_aa1f7d3648d28dcef62c0db015730218d"><div class="ttname"><a href="string__utils_8h.html#aa1f7d3648d28dcef62c0db015730218d">qx::strlen</a></div><div class="ttdeci">constexpr std::size_t strlen(const value_t *psz)</div><div class="ttdoc">Naive but constexpr string length algorithm, for runtime prefer std::strlen as there are may be a lot...</div><div class="ttdef"><b>Definition:</b> <a href="string__utils_8h_source.html#l00369">string_utils.h:369</a></div></div>
 <div class="ttc" id="astring__utils_8h_html_ae4f688084b037e2e7a63a13eaf539a02"><div class="ttname"><a href="string__utils_8h.html#ae4f688084b037e2e7a63a13eaf539a02">QX_STR_PREFIX</a></div><div class="ttdeci">#define QX_STR_PREFIX(value_t, str)</div><div class="ttdoc">Chose witch of prefixes add to string : L or none.</div><div class="ttdef"><b>Definition:</b> <a href="string__utils_8h_source.html#l00249">string_utils.h:249</a></div></div>
 <div class="ttc" id="atypedefs_8h_html"><div class="ttname"><a href="typedefs_8h.html">typedefs.h</a></div></div>
-<div class="ttc" id="atypedefs_8h_html_a6dbf9516e516c901604625282c174aa4"><div class="ttname"><a href="typedefs_8h.html#a6dbf9516e516c901604625282c174aa4">u16</a></div><div class="ttdeci">uint16_t u16</div><div class="ttdoc">0 .. 4 294 967 295</div><div class="ttdef"><b>Definition:</b> <a href="typedefs_8h_source.html#l00021">typedefs.h:22</a></div></div>
-<div class="ttc" id="atypedefs_8h_html_a70c1fcc1a4e96af8f6580f708657cd41"><div class="ttname"><a href="typedefs_8h.html#a70c1fcc1a4e96af8f6580f708657cd41">u32</a></div><div class="ttdeci">uint32_t u32</div><div class="ttdoc">0 .. 18 446 744 073 709 551 615</div><div class="ttdef"><b>Definition:</b> <a href="typedefs_8h_source.html#l00023">typedefs.h:24</a></div></div>
-<div class="ttc" id="atypedefs_8h_html_a987e4d6cf789cb59dbb390728271e4d6"><div class="ttname"><a href="typedefs_8h.html#a987e4d6cf789cb59dbb390728271e4d6">u8</a></div><div class="ttdeci">uint8_t u8</div><div class="ttdoc">0 .. 65 535</div><div class="ttdef"><b>Definition:</b> <a href="typedefs_8h_source.html#l00019">typedefs.h:20</a></div></div>
+<div class="ttc" id="atypedefs_8h_html_a254d32383658e016368673396e7afc1b"><div class="ttname"><a href="typedefs_8h.html#a254d32383658e016368673396e7afc1b">u8</a></div><div class="ttdeci">std::uint8_t u8</div><div class="ttdoc">0 .. 65 535</div><div class="ttdef"><b>Definition:</b> <a href="typedefs_8h_source.html#l00018">typedefs.h:19</a></div></div>
+<div class="ttc" id="atypedefs_8h_html_a65cf28726f89e62ccf2f1354bc2716df"><div class="ttname"><a href="typedefs_8h.html#a65cf28726f89e62ccf2f1354bc2716df">u32</a></div><div class="ttdeci">std::uint32_t u32</div><div class="ttdoc">0 .. 18 446 744 073 709 551 615</div><div class="ttdef"><b>Definition:</b> <a href="typedefs_8h_source.html#l00022">typedefs.h:23</a></div></div>
+<div class="ttc" id="atypedefs_8h_html_a917e58b0692c2df778a27350534cbfe7"><div class="ttname"><a href="typedefs_8h.html#a917e58b0692c2df778a27350534cbfe7">u16</a></div><div class="ttdeci">std::uint16_t u16</div><div class="ttdoc">0 .. 4 294 967 295</div><div class="ttdef"><b>Definition:</b> <a href="typedefs_8h_source.html#l00020">typedefs.h:21</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
