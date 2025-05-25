@@ -15,8 +15,9 @@
 #pragma once
 
 #include <qx/containers/string/string_hash.h>
+#include <qx/macros/common.h>
 #include <qx/meta/tuple_utils.h>
-#include <qx/rtti/class_identificator.h>
+#include <qx/rtti/class_id.h>
 #include <qx/rtti/rtti_naming_strategy.h>
 
 #include <array>
@@ -206,6 +207,7 @@ protected:                                                                      
         return base_id == super_class_type::get_class_id_static() || super_class_type::_is_base_id(base_id);        \
     }                                                                                                               \
                                                                                                                     \
-private:
+private:                                                                                                            \
+    QX_EMPTY_MACRO
 
 } // namespace qx

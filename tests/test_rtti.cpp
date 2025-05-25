@@ -10,8 +10,6 @@
 
 //V_EXCLUDE_PATH *test_rtti.cpp
 
-#define QX_CONF_USE_CHAR
-
 #include <qx/containers/string/string_utils.h>
 #include <qx/rtti/rtti.h>
 #include <qx/rtti/rtti_cast.h>
@@ -189,10 +187,7 @@ TEST(rtti, class_id)
 template<class T>
 void TestDerivedFrom(const auto& pClass, bool bExpect, std::source_location sr = std::source_location::current())
 {
-    constexpr qx::class_id T_id = T::get_class_id_static();
-    EXPECT_EQ(pClass->template is_derived_from<T>(), bExpect)
-        << "Line: " << sr.line() << ", pClass's T: " << pClass->get_class_id().get_class_name()
-        << ", T: " << T_id.get_class_name();
+    EXPECT_EQ(pClass->template is_derived_from<T>(), bExpect);
     EXPECT_EQ(pClass->is_derived_from_id(T::get_class_id_static()), bExpect);
 }
 

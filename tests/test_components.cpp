@@ -29,7 +29,7 @@ public:
 
 class CTestComponent1 : public ABaseTestComponent
 {
-    QX_RTTI_CLASS(CTestComponent1, ABaseTestComponent)
+    QX_RTTI_CLASS(CTestComponent1, ABaseTestComponent);
 
 public:
     explicit CTestComponent1(char ch) : m_TestData(ch)
@@ -50,12 +50,12 @@ private:
 
 class ATestComponent2 : public ABaseTestComponent
 {
-    QX_RTTI_CLASS(ATestComponent2, ABaseTestComponent)
+    QX_RTTI_CLASS(ATestComponent2, ABaseTestComponent);
 };
 
 class CTestComponent21 : public ATestComponent2
 {
-    QX_RTTI_CLASS(CTestComponent21, ATestComponent2)
+    QX_RTTI_CLASS(CTestComponent21, ATestComponent2);
 
 public:
     explicit CTestComponent21(int nTestData) : m_nTestData(nTestData)
@@ -76,7 +76,7 @@ private:
 
 class CTestComponent22 : public ATestComponent2
 {
-    QX_RTTI_CLASS(CTestComponent22, ATestComponent2)
+    QX_RTTI_CLASS(CTestComponent22, ATestComponent2);
 
 public:
     explicit CTestComponent22(double fTestData) : m_fTestData(fTestData)
@@ -97,7 +97,7 @@ private:
 
 class CTestComponent23 : public ATestComponent2
 {
-    QX_RTTI_CLASS(CTestComponent23, ATestComponent2)
+    QX_RTTI_CLASS(CTestComponent23, ATestComponent2);
 
 public:
     explicit CTestComponent23(std::string sTestData) : m_sTestData(std::move(sTestData))

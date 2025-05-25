@@ -8,7 +8,7 @@ The library contains various classes, functions and macros that can be useful wh
 The code is designed to be as performant, extensible and generic as possible. It follows the style of the standard library in terms of code style, use of iterators, traits, etc. The library is intended to extend the functionality of the standard library and not copy it.
 
 Some examples:
-* Implementations of observer, singleton, generic iterator patterns;
+* Implementations of observer, singleton, generic iterator, double dispatch and other patterns;
 * A string that fully follows the std::string interface and supports compile-time configuration of a large number of parameters (SSO size, alignment, hashing algorithms, comparison, formatting, etc.) and contains additional methods (`format(), to_lower()/to_upper(), to<T>(), from<T>(), trim()/trim_right()/trim_left(), remove_prefix()/remove_suffix(), split()` etc.);
 * Extension of standard library algorithms;
 * Macro based RTTI system;

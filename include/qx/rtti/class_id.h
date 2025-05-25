@@ -1,6 +1,6 @@
 /**
 
-    @file      class_identificator.h
+    @file      class_id.h
     @author    Khrapov
     @date      11.09.2021
     @copyright © Nick Khrapov, 2021. All right reserved.
@@ -78,8 +78,8 @@ template<class T>
 constexpr class_id class_id::create()
 {
     class_id result;
-    result.m_svClassName = type_strings<T>::get_signature();
-    result.m_nId         = cstring_hash(type_strings<T, char>::get_signature());
+    result.m_svClassName = type_strings<T, char_type>::get_signature();
+    result.m_nId         = string_hash(result.m_svClassName);
     return result;
 }
 

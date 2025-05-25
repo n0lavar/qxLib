@@ -9,12 +9,14 @@ on:
 
 jobs:
   macos_clang_release:
-    runs-on: macos-latest
+    runs-on: macos-15-large
     env:
-      CXX: clang++
+      CXX: $(brew --prefix llvm@18)/bin/clang++
 
     steps:
       - uses: actions/checkout@v2
+      - name: Install LLVM 18
+        run: brew install llvm@18
       - id: install_dependencies
         uses: ./.github/actions/linux/install_dependencies
         with:

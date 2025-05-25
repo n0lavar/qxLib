@@ -21,16 +21,16 @@ namespace qx
     @brief   Literal wrapper for a constant expression string
     @details Uses implicit conversion to allow templates to *seemingly*
              accept constant strings like IsAnswer<"42">()
-    @tparam  T - char type
-    @tparam  N - char array length
+    @tparam  char_t - char type
+    @tparam  N      - char array length
     @author  Khrapov
     @date    10.09.2021
 
 **/
-template<class T, size_t N>
+template<class char_t, size_t N>
 struct string_literal
 {
-    constexpr string_literal(const T (&str)[N]) noexcept
+    constexpr string_literal(const char_t (&str)[N]) noexcept
     {
         std::copy_n(str, N, value);
     }
@@ -40,17 +40,17 @@ struct string_literal
         return N;
     }
 
-    constexpr const T* data() const noexcept
+    constexpr const char_t* data() const noexcept
     {
         return &value[0];
     }
 
-    constexpr basic_string_view<T> view() const noexcept
+    constexpr basic_string_view<char_t> view() const noexcept
     {
-        return basic_string_view<T>(data());
+        return basic_string_view<char_t>(data());
     }
 
-    T value[N];
+    char_t value[N];
 };
 
 } // namespace qx
