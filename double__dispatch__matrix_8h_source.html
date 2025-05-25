@@ -168,8 +168,8 @@ $(function() {
 <div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;<span class="comment">    **/</span></div>
 <div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;    <span class="keyword">template</span>&lt;<span class="keyword">class</span> first_derived_t, <span class="keyword">class</span> second_derived_t&gt;</div>
 <div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;        requires(</div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;            std::is_base_of_v&lt;double_dispatch_matrix&lt;method_ptr_t&gt;::base_type, first_derived_t&gt;</div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;            &amp;&amp; std::is_base_of_v&lt;double_dispatch_matrix&lt;method_ptr_t&gt;::base_type, second_derived_t&gt;)</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;            std::is_base_of_v&lt;<span class="keyword">typename</span> double_dispatch_matrix&lt;method_ptr_t&gt;::base_type, first_derived_t&gt;</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;            &amp;&amp; std::is_base_of_v&lt;<span class="keyword">typename</span> double_dispatch_matrix&lt;method_ptr_t&gt;::base_type, second_derived_t&gt;)</div>
 <div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;    void register_function(</div>
 <div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;        std::function&lt;return_type(const first_derived_t&amp;, const second_derived_t&amp;)&gt; function) noexcept;</div>
 <div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;<span class="comment"></span> </div>
