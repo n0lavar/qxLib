@@ -118,11 +118,11 @@ $(function() {
 <div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="comment">        @brief  Get class name</span></div>
 <div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="comment">        @retval  - class name</span></div>
 <div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="comment">    **/</span></div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    constexpr cstring_view <a class="code" href="classqx_1_1class__id.html#af4e318039204751f33922652282436a6">get_class_name</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    constexpr string_view <a class="code" href="classqx_1_1class__id.html#adec9b19931184b04e03f764cf1ba79f5">get_class_name</a>() <span class="keyword">const</span>;</div>
 <div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160; </div>
 <div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    cstring_view m_svClassName = <span class="stringliteral">&quot;Empty name&quot;</span>;</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    <span class="keywordtype">size_t</span>       m_nId         = 0;</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    string_view m_svClassName = QX_TEXT(<span class="stringliteral">&quot;Empty name&quot;</span>);</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    <span class="keywordtype">size_t</span>      m_nId         = 0;</div>
 <div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;};</div>
 <div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160; </div>
 <div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;constexpr <span class="keywordtype">bool</span> class_id::operator==(<span class="keyword">const</span> <a class="code" href="classqx_1_1class__id.html">class_id</a>&amp; other) <span class="keyword">const</span> noexcept</div>
@@ -140,7 +140,7 @@ $(function() {
 <div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    <span class="keywordflow">return</span> m_nId &lt; other.m_nId;</div>
 <div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;}</div>
 <div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160; </div>
-<div class="line"><a name="l00072"></a><span class="lineno"><a class="line" href="classqx_1_1class__id.html#af4e318039204751f33922652282436a6">   72</a></span>&#160;constexpr cstring_view <a class="code" href="classqx_1_1class__id.html#af4e318039204751f33922652282436a6">class_id::get_class_name</a>()<span class="keyword"> const</span></div>
+<div class="line"><a name="l00072"></a><span class="lineno"><a class="line" href="classqx_1_1class__id.html#adec9b19931184b04e03f764cf1ba79f5">   72</a></span>&#160;constexpr string_view <a class="code" href="classqx_1_1class__id.html#adec9b19931184b04e03f764cf1ba79f5">class_id::get_class_name</a>()<span class="keyword"> const</span></div>
 <div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;<span class="keyword"></span>{</div>
 <div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    <span class="keywordflow">return</span> m_svClassName;</div>
 <div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;}</div>
@@ -149,8 +149,8 @@ $(function() {
 <div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;constexpr <a class="code" href="classqx_1_1class__id.html">class_id</a> <a class="code" href="classqx_1_1class__id.html#a1736fdae179584b4124595a5da3f93df">class_id::create</a>()</div>
 <div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;{</div>
 <div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;    <a class="code" href="classqx_1_1class__id.html">class_id</a> result;</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;    result.m_svClassName = <a class="code" href="classqx_1_1type__strings.html#aea00ff94b4d75449bc0a6684f81c80bd">type_strings&lt;T, char&gt;::get_signature</a>();</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;    result.m_nId         = <a class="code" href="classqx_1_1basic__string__hash.html">cstring_hash</a>(<a class="code" href="classqx_1_1type__strings.html">type_strings&lt;T, char&gt;::get_signature</a>());</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;    result.m_svClassName = <a class="code" href="classqx_1_1type__strings.html#aea00ff94b4d75449bc0a6684f81c80bd">type_strings&lt;char_type&gt;::get_signature</a>();</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;    result.m_nId         = <a class="code" href="classqx_1_1basic__string__hash.html">string_hash</a>(result.m_svClassName);</div>
 <div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;    <span class="keywordflow">return</span> result;</div>
 <div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;}</div>
 <div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160; </div>
@@ -177,8 +177,7 @@ $(function() {
 <div class="ttc" id="aclassqx_1_1basic__string__hash_html"><div class="ttname"><a href="classqx_1_1basic__string__hash.html">qx::basic_string_hash</a></div><div class="ttdoc">String hash object.</div><div class="ttdef"><b>Definition:</b> <a href="string__hash_8h_source.html#l00037">string_hash.h:38</a></div></div>
 <div class="ttc" id="aclassqx_1_1class__id_html"><div class="ttname"><a href="classqx_1_1class__id.html">qx::class_id</a></div><div class="ttdoc">Class id, unique for each class using qx rtti system.</div><div class="ttdef"><b>Definition:</b> <a href="class__id_8h_source.html#l00026">class_id.h:27</a></div></div>
 <div class="ttc" id="aclassqx_1_1class__id_html_a1736fdae179584b4124595a5da3f93df"><div class="ttname"><a href="classqx_1_1class__id.html#a1736fdae179584b4124595a5da3f93df">qx::class_id::create</a></div><div class="ttdeci">constexpr static class_id create()</div><div class="ttdoc">Create a class id for a given type (the type doesn't require to use qx rtti system)</div></div>
-<div class="ttc" id="aclassqx_1_1class__id_html_af4e318039204751f33922652282436a6"><div class="ttname"><a href="classqx_1_1class__id.html#af4e318039204751f33922652282436a6">qx::class_id::get_class_name</a></div><div class="ttdeci">constexpr cstring_view get_class_name() const</div><div class="ttdoc">Get class name.</div><div class="ttdef"><b>Definition:</b> <a href="class__id_8h_source.html#l00072">class_id.h:72</a></div></div>
-<div class="ttc" id="aclassqx_1_1type__strings_html"><div class="ttname"><a href="classqx_1_1type__strings.html">qx::type_strings</a></div><div class="ttdoc">The class allows you to get strings with information about the type, including its full name,...</div><div class="ttdef"><b>Definition:</b> <a href="type__strings_8h_source.html#l00036">type_strings.h:37</a></div></div>
+<div class="ttc" id="aclassqx_1_1class__id_html_adec9b19931184b04e03f764cf1ba79f5"><div class="ttname"><a href="classqx_1_1class__id.html#adec9b19931184b04e03f764cf1ba79f5">qx::class_id::get_class_name</a></div><div class="ttdeci">constexpr string_view get_class_name() const</div><div class="ttdoc">Get class name.</div><div class="ttdef"><b>Definition:</b> <a href="class__id_8h_source.html#l00072">class_id.h:72</a></div></div>
 <div class="ttc" id="aclassqx_1_1type__strings_html_aea00ff94b4d75449bc0a6684f81c80bd"><div class="ttname"><a href="classqx_1_1type__strings.html#aea00ff94b4d75449bc0a6684f81c80bd">qx::type_strings::get_signature</a></div><div class="ttdeci">static constexpr string_view_type get_signature()</div><div class="ttdoc">Get type signature (full name with template parameters)</div><div class="ttdef"><b>Definition:</b> <a href="type__strings_8inl_source.html#l00132">type_strings.inl:132</a></div></div>
 <div class="ttc" id="acopyable__movable_8h_html"><div class="ttname"><a href="copyable__movable_8h.html">copyable_movable.h</a></div></div>
 <div class="ttc" id="aformat__string_8h_html"><div class="ttname"><a href="format__string_8h.html">format_string.h</a></div></div>
