@@ -84,18 +84,18 @@ $(function() {
 <div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="comment">    @brief Define class as default copyable</span></div>
 <div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="comment">    @param className - class name</span></div>
 <div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="comment">**/</span></div>
-<div class="line"><a name="l00016"></a><span class="lineno"><a class="line" href="copyable__movable_8h.html#a775ebdb19552321e43799631ae882445">   16</a></span>&#160;<span class="preprocessor">#define QX_COPYABLE(className)                                  \</span></div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="preprocessor">    constexpr className(const className&amp;)            = default; \</span></div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="preprocessor">    constexpr className&amp; operator=(const className&amp;) = default</span></div>
+<div class="line"><a name="l00016"></a><span class="lineno"><a class="line" href="copyable__movable_8h.html#a775ebdb19552321e43799631ae882445">   16</a></span>&#160;<span class="preprocessor">#define QX_COPYABLE(className)                        \</span></div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="preprocessor">    className(const className&amp;)            = default; \</span></div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="preprocessor">    className&amp; operator=(const className&amp;) = default</span></div>
 <div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="comment"></span> </div>
 <div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="comment">/**</span></div>
 <div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="comment">    @def   QX_MOVABLE</span></div>
 <div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="comment">    @brief Define class as default movable</span></div>
 <div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="comment">    @param className - class name</span></div>
 <div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="comment">**/</span></div>
-<div class="line"><a name="l00025"></a><span class="lineno"><a class="line" href="copyable__movable_8h.html#afed226a730f800b62503840460223830">   25</a></span>&#160;<span class="preprocessor">#define QX_MOVABLE(className)                                       \</span></div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="preprocessor">    constexpr className(className&amp;&amp;) noexcept            = default; \</span></div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="preprocessor">    constexpr className&amp; operator=(className&amp;&amp;) noexcept = default</span></div>
+<div class="line"><a name="l00025"></a><span class="lineno"><a class="line" href="copyable__movable_8h.html#afed226a730f800b62503840460223830">   25</a></span>&#160;<span class="preprocessor">#define QX_MOVABLE(className)                             \</span></div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="preprocessor">    className(className&amp;&amp;) noexcept            = default; \</span></div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="preprocessor">    className&amp; operator=(className&amp;&amp;) noexcept = default</span></div>
 <div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="comment"></span> </div>
 <div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="comment">/**</span></div>
 <div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="comment">    @def   QX_COPYMOVABLE</span></div>
