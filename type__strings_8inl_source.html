@@ -84,10 +84,10 @@ $(function() {
 <div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="keyword">namespace </span>details</div>
 <div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;{</div>
 <div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160; </div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="keyword">template</span>&lt;<span class="keywordtype">size_t</span> N&gt;</div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;constexpr std::array&lt;wchar_t, N&gt; to_wchar_array(std::span&lt;const char, N&gt; svChar)</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> <span class="keywordtype">char</span>_t, <span class="keywordtype">size_t</span> N&gt;</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;constexpr std::array&lt;char_t, N&gt; to_char_array(std::span&lt;const char, N&gt; svChar)</div>
 <div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;{</div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    std::array&lt;wchar_t, N&gt; result;</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    std::array&lt;char_t, N&gt; result;</div>
 <div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = 0; i &lt; N; ++i)</div>
 <div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;        result[i] = svChar[i];</div>
 <div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    <span class="keywordflow">return</span> result;</div>
@@ -107,9 +107,9 @@ $(function() {
 <div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    }</div>
 <div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    <span class="keywordflow">else</span></div>
 <div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    {</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;        <span class="keyword">static</span> constexpr <span class="keyword">auto</span> wchar_array =</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;            to_wchar_array(std::span&lt;<span class="keyword">const</span> <span class="keywordtype">char</span>, <a class="code" href="string__utils_8h.html#aa1f7d3648d28dcef62c0db015730218d">strlen</a>(__PRETTY_FUNCTION__) + 1&gt;(__PRETTY_FUNCTION__));</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;        <span class="keywordflow">return</span> string_view_type&lt;char_t&gt;(wchar_array.data());</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;        <span class="keyword">static</span> constexpr <span class="keyword">auto</span> char_array =</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;            to_char_array&lt;char_t&gt;(std::span&lt;<span class="keyword">const</span> <span class="keywordtype">char</span>, <a class="code" href="string__utils_8h.html#aa1f7d3648d28dcef62c0db015730218d">strlen</a>(__PRETTY_FUNCTION__) + 1&gt;(__PRETTY_FUNCTION__));</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;        <span class="keywordflow">return</span> string_view_type(char_array.data());</div>
 <div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    }</div>
 <div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="preprocessor">#endif</span></div>
 <div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;}</div>
