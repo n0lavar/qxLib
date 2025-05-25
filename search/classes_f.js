@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['unique_5fobjects_5fpool_946',['unique_objects_pool',['../classqx_1_1unique__objects__pool.html',1,'qx']]],
-  ['usings_5ftraits_947',['usings_traits',['../structqx_1_1string__traits_1_1usings__traits.html',1,'qx::string_traits']]]
+  ['unique_5fobjects_5fpool_975',['unique_objects_pool',['../classqx_1_1unique__objects__pool.html',1,'qx']]],
+  ['usings_5ftraits_976',['usings_traits',['../structqx_1_1string__traits_1_1usings__traits.html',1,'qx::string_traits']]]
 ];
