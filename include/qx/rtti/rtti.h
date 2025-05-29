@@ -168,6 +168,7 @@ public:                                                                         
     }                                                                                                               \
     virtual bool is_derived_from_id(qx::class_id id) const noexcept override                                        \
     {                                                                                                               \
+        static_assert(std::is_same_v<std::remove_cvref_t<decltype(*this)>, this_class_type>);                       \
         return is_derived_from_id_static(id);                                                                       \
     }                                                                                                               \
     static constexpr qx::string_view get_class_name_static() noexcept                                               \

@@ -24,7 +24,7 @@ namespace qx
 class [[nodiscard]] destruction_callback
 {
 public:
-    using destroyer = std::function<void()>;
+    using destroyer_type = std::function<void()>;
 
 public:
     QX_NONCOPYABLE(destruction_callback);
@@ -33,10 +33,12 @@ public:
     destruction_callback() noexcept = default;
 
     /**
-        @brief destruction_callback object constructor
-        @param _destroyer - functor that will be called when object will be destroyed
+        @brief  destruction_callback object constructor
+        @tparam destroyer_t - callable type
+        @param  destroyer   - functor that will be called when object is destroyed
     **/
-    destruction_callback(destroyer _destroyer) : m_Destroyer(std::move(_destroyer))
+    template<class destroyer_t>
+    destruction_callback(destroyer_t destroyer) : m_Destroyer(std::move(destroyer))
     {
     }
 
@@ -47,7 +49,7 @@ public:
     }
 
 private:
-    destroyer m_Destroyer;
+    destroyer_type m_Destroyer;
 };
 
 } // namespace qx

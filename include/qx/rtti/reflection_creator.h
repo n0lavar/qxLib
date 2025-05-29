@@ -13,7 +13,7 @@
 
 #include <qx/containers/string/string_view.h>
 #include <qx/macros/common.h>
-#include <qx/rtti/class_identificator.h>
+#include <qx/rtti/class_id.h>
 
 #include <functional>
 #include <map>
