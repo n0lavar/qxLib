@@ -36,7 +36,6 @@ Required:
 
 Optional:
 + glm (/gl, /render, /math)
-+ glew (/gl)
 + boost (qx::unique_objects_pool)
   
 ## License
