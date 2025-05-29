@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['frag_1521',['frag',['../shaders_8h.html#ae891b980e1f40a70e11e8bfc320d898ea43cf0c43c2b82750b67586fe559677a1',1,'qx']]]
+  ['time_5fname_1355',['time_name',['../file__logger__stream_8h.html#aaab6d2d26ae57b1521451921e1273220a941d28bbdfbc0fd385176cb153bf336c',1,'qx']]]
 ];
