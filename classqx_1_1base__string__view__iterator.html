@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>qxLib: qx::string_view_iterator&lt; char_t &gt; Class Template Reference</title>
+<title>qxLib: qx::base_string_view_iterator&lt; char_t, bForwardIterator &gt; Class Template Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -61,41 +61,41 @@ $(function() {
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><b>qx</b></li><li class="navelem"><a class="el" href="classqx_1_1string__view__iterator.html">string_view_iterator</a></li>  </ul>
+<li class="navelem"><b>qx</b></li><li class="navelem"><a class="el" href="classqx_1_1base__string__view__iterator.html">base_string_view_iterator</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
   <div class="summary">
-<a href="#pub-static-methods">Static Public Member Functions</a> &#124;
-<a href="classqx_1_1string__view__iterator-members.html">List of all members</a>  </div>
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="classqx_1_1base__string__view__iterator-members.html">List of all members</a>  </div>
   <div class="headertitle">
-<div class="title">qx::string_view_iterator&lt; char_t &gt; Class Template Reference</div>  </div>
+<div class="title">qx::base_string_view_iterator&lt; char_t, bForwardIterator &gt; Class Template Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
 <p>Iterator class that allows to iterate over a string view using a delimiter character.  
- <a href="classqx_1_1string__view__iterator.html#details">More...</a></p>
+ <a href="classqx_1_1base__string__view__iterator.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="string__view__iterator_8h_source.html">string_view_iterator.h</a>&gt;</code></p>
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
-Static Public Member Functions</h2></td></tr>
-<tr class="memitem:a18563470c23e49f18e5f37557d027188"><td class="memItemLeft" align="right" valign="top">static constexpr <a class="el" href="classqx_1_1string__view__iterator.html">string_view_iterator</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1string__view__iterator.html#a18563470c23e49f18e5f37557d027188">begin</a> (value_type svFull, char_t chDelimiter, <a class="el" href="classqx_1_1flags.html">flags</a>&lt; delimiter_inclusion_flags &gt; eDelimiterInclusionFlags=delimiter_inclusion_flags::none)</td></tr>
-<tr class="memdesc:a18563470c23e49f18e5f37557d027188"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return iterator to beginning.  <a href="classqx_1_1string__view__iterator.html#a18563470c23e49f18e5f37557d027188">More...</a><br /></td></tr>
-<tr class="separator:a18563470c23e49f18e5f37557d027188"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acb9ee49d2fcf01d923cbe3fe1844ce67"><td class="memItemLeft" align="right" valign="top">static constexpr <a class="el" href="classqx_1_1string__view__iterator.html">string_view_iterator</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1string__view__iterator.html#acb9ee49d2fcf01d923cbe3fe1844ce67">end</a> ()</td></tr>
-<tr class="memdesc:acb9ee49d2fcf01d923cbe3fe1844ce67"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return iterator to end.  <a href="classqx_1_1string__view__iterator.html#acb9ee49d2fcf01d923cbe3fe1844ce67">More...</a><br /></td></tr>
-<tr class="separator:acb9ee49d2fcf01d923cbe3fe1844ce67"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:a2dc671f5dec0f867c24965c97b200fdb"><td class="memItemLeft" align="right" valign="top">constexpr&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1base__string__view__iterator.html#a2dc671f5dec0f867c24965c97b200fdb">base_string_view_iterator</a> (value_type svFull, char_t chDelimiter, <a class="el" href="classqx_1_1flags.html">flags</a>&lt; delimiter_inclusion_flags &gt; eDelimiterInclusionFlags=delimiter_inclusion_flags::none) noexcept</td></tr>
+<tr class="memdesc:a2dc671f5dec0f867c24965c97b200fdb"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classqx_1_1base__string__view__iterator.html" title="Iterator class that allows to iterate over a string view using a delimiter character.">base_string_view_iterator</a> object constructor  <a href="classqx_1_1base__string__view__iterator.html#a2dc671f5dec0f867c24965c97b200fdb">More...</a><br /></td></tr>
+<tr class="separator:a2dc671f5dec0f867c24965c97b200fdb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a02f89a923de628b26ea28a18b94f34c5"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1base__string__view__iterator.html#a02f89a923de628b26ea28a18b94f34c5">operator bool</a> () const noexcept</td></tr>
+<tr class="memdesc:a02f89a923de628b26ea28a18b94f34c5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if this iterator is valid (i.e. it didn't reach the end of the sequence)  <a href="classqx_1_1base__string__view__iterator.html#a02f89a923de628b26ea28a18b94f34c5">More...</a><br /></td></tr>
+<tr class="separator:a02f89a923de628b26ea28a18b94f34c5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><h3>template&lt;class char_t&gt;<br />
-class qx::string_view_iterator&lt; char_t &gt;</h3>
+<div class="textblock"><h3>template&lt;class char_t, bool bForwardIterator&gt;<br />
+class qx::base_string_view_iterator&lt; char_t, bForwardIterator &gt;</h3>
 
 <p>Iterator class that allows to iterate over a string view using a delimiter character. </p>
-<p>This class is not supposed to use manually, </p><dl class="section see"><dt>See also</dt><dd><a class="el" href="classqx_1_1string__view__view.html" title="Class that allows to iterate over a string view using a delimiter character.">string_view_view</a> </dd></dl>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
     <tr><td class="paramname">char_t</td><td>- char type </td></tr>
+    <tr><td class="paramname">bForwardIterator</td><td>- false if this is a reverse iterator </td></tr>
   </table>
   </dd>
 </dl>
@@ -103,20 +103,20 @@ class qx::string_view_iterator&lt; char_t &gt;</h3>
 <dl class="section date"><dt>Date</dt><dd>24.10.2023 </dd></dl>
 
 <p class="definition">Definition at line <a class="el" href="string__view__iterator_8h_source.html#l00037">37</a> of file <a class="el" href="string__view__iterator_8h_source.html">string_view_iterator.h</a>.</p>
-</div><h2 class="groupheader">Member Function Documentation</h2>
-<a id="a18563470c23e49f18e5f37557d027188"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a18563470c23e49f18e5f37557d027188">&#9670;&nbsp;</a></span>begin()</h2>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a2dc671f5dec0f867c24965c97b200fdb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2dc671f5dec0f867c24965c97b200fdb">&#9670;&nbsp;</a></span>base_string_view_iterator()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class char_t &gt; </div>
+template&lt;class char_t , bool bForwardIterator&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">constexpr <a class="el" href="classqx_1_1string__view__iterator.html">string_view_iterator</a>&lt; char_t &gt; <a class="el" href="classqx_1_1string__view__iterator.html">qx::string_view_iterator</a>&lt; char_t &gt;::begin </td>
+          <td class="memname">constexpr <a class="el" href="classqx_1_1base__string__view__iterator.html">qx::base_string_view_iterator</a>&lt; char_t, bForwardIterator &gt;::<a class="el" href="classqx_1_1base__string__view__iterator.html">base_string_view_iterator</a> </td>
           <td>(</td>
           <td class="paramtype">value_type&#160;</td>
           <td class="paramname"><em>svFull</em>, </td>
@@ -141,12 +141,12 @@ template&lt;class char_t &gt; </div>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">constexpr</span></span>  </td>
+<span class="mlabels"><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p>Return iterator to beginning. </p>
+<p><a class="el" href="classqx_1_1base__string__view__iterator.html" title="Iterator class that allows to iterate over a string view using a delimiter character.">base_string_view_iterator</a> object constructor </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">svFull</td><td>- string to iterate </td></tr>
@@ -155,48 +155,43 @@ template&lt;class char_t &gt; </div>
   </table>
   </dd>
 </dl>
-<dl class="retval"><dt>Return values</dt><dd>
-  <table class="retval">
-    <tr><td class="paramname">-</td><td>iterator to beginning </td></tr>
-  </table>
-  </dd>
-</dl>
 
 <p class="definition">Definition at line <a class="el" href="string__view__iterator_8inl_source.html#l00014">14</a> of file <a class="el" href="string__view__iterator_8inl_source.html">string_view_iterator.inl</a>.</p>
 
 </div>
 </div>
-<a id="acb9ee49d2fcf01d923cbe3fe1844ce67"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#acb9ee49d2fcf01d923cbe3fe1844ce67">&#9670;&nbsp;</a></span>end()</h2>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a02f89a923de628b26ea28a18b94f34c5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a02f89a923de628b26ea28a18b94f34c5">&#9670;&nbsp;</a></span>operator bool()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class char_t &gt; </div>
+template&lt;class char_t , bool bForwardIterator&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">constexpr <a class="el" href="classqx_1_1string__view__iterator.html">string_view_iterator</a>&lt; char_t &gt; <a class="el" href="classqx_1_1string__view__iterator.html">qx::string_view_iterator</a>&lt; char_t &gt;::end</td>
+          <td class="memname"><a class="el" href="classqx_1_1base__string__view__iterator.html">qx::base_string_view_iterator</a>&lt; char_t, bForwardIterator &gt;::operator bool</td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">constexpr</span></span>  </td>
+<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p>Return iterator to end. </p>
+<p>Check if this iterator is valid (i.e. it didn't reach the end of the sequence) </p>
 <dl class="retval"><dt>Return values</dt><dd>
   <table class="retval">
-    <tr><td class="paramname">-</td><td>iterator to end </td></tr>
+    <tr><td class="paramname">-</td><td>true if this iterator is valid </td></tr>
   </table>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="string__view__iterator_8inl_source.html#l00023">23</a> of file <a class="el" href="string__view__iterator_8inl_source.html">string_view_iterator.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="string__view__iterator_8inl_source.html#l00028">28</a> of file <a class="el" href="string__view__iterator_8inl_source.html">string_view_iterator.inl</a>.</p>
 
 </div>
 </div>
