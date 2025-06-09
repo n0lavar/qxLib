@@ -16,7 +16,7 @@ constexpr base_string_view_iterator<char_t, bForwardIterator>::base_string_view_
     char_t                           chDelimiter,
     flags<delimiter_inclusion_flags> eDelimiterInclusionFlags) noexcept
     : m_svFull(svFull)
-    , m_nCurrentBegin(bForwardIterator ? (!m_svFull.empty() ? 0 : -1) : (!m_svFull.empty() ? m_svFull.size() - 1 : -1))
+    , m_nCurrentBegin(bForwardIterator ? 0 : m_svFull.size())
     , m_nCurrentEnd(m_nCurrentBegin)
     , m_chDelimiter(chDelimiter)
     , m_eDelimiterInclusionFlags(eDelimiterInclusionFlags)
@@ -25,9 +25,26 @@ constexpr base_string_view_iterator<char_t, bForwardIterator>::base_string_view_
 }
 
 template<class char_t, bool bForwardIterator>
-base_string_view_iterator<char_t, bForwardIterator>::operator bool() const noexcept
+constexpr base_string_view_iterator<char_t, bForwardIterator>::operator bool() const noexcept
 {
     return m_nCurrentBegin != m_nCurrentEnd;
+}
+
+template<class char_t, bool bForwardIterator>
+constexpr base_string_view_iterator<char_t, bForwardIterator> base_string_view_iterator<char_t, bForwardIterator>::
+    begin(value_type svFull, char_t chDelimiter, flags<delimiter_inclusion_flags> eDelimiterInclusionFlags) noexcept
+{
+    return base_string_view_iterator(svFull, chDelimiter, eDelimiterInclusionFlags);
+}
+
+template<class char_t, bool bForwardIterator>
+constexpr base_string_view_iterator<char_t, bForwardIterator> base_string_view_iterator<char_t, bForwardIterator>::end(
+    value_type                       svFull,
+    char_t                           chDelimiter,
+    flags<delimiter_inclusion_flags> eDelimiterInclusionFlags) noexcept
+{
+    size_t nEnd = bForwardIterator ? svFull.size() : 0;
+    return base_string_view_iterator(svFull, nEnd, nEnd, chDelimiter, eDelimiterInclusionFlags);
 }
 
 template<class char_t, bool bForwardIterator>
@@ -35,12 +52,12 @@ constexpr typename base_string_view_iterator<char_t, bForwardIterator>::value_ty
     char_t,
     bForwardIterator>::operator*() const noexcept
 {
-    auto itBegin = m_svFull.cbegin() + (bForwardIterator ? m_nCurrentBegin : m_nCurrentEnd + 1);
+    auto itBegin = m_svFull.cbegin() + m_nCurrentBegin;
     if (m_eDelimiterInclusionFlags.contains(delimiter_inclusion_flags::begin))
         while (itBegin != m_svFull.cbegin() && *(itBegin - 1) == m_chDelimiter)
             --itBegin;
 
-    auto itEnd = m_svFull.cbegin() + (bForwardIterator ? m_nCurrentEnd : m_nCurrentBegin + 1);
+    auto itEnd = m_svFull.cbegin() + m_nCurrentEnd;
     if (m_eDelimiterInclusionFlags.contains(delimiter_inclusion_flags::end))
         while (itEnd != m_svFull.cend() && *(itEnd) == m_chDelimiter)
             ++itEnd;
@@ -83,30 +100,70 @@ constexpr base_string_view_iterator<char_t, bForwardIterator> base_string_view_i
 }
 
 template<class char_t, bool bForwardIterator>
+constexpr base_string_view_iterator<char_t, bForwardIterator>::base_string_view_iterator(
+    value_type                       svFull,
+    size_t                           nCurrentBegin,
+    size_t                           nCurrentEnd,
+    char_t                           chDelimiter,
+    flags<delimiter_inclusion_flags> eDelimiterInclusionFlags) noexcept
+    : m_svFull(svFull)
+    , m_nCurrentBegin(nCurrentBegin)
+    , m_nCurrentEnd(nCurrentEnd)
+    , m_chDelimiter(chDelimiter)
+    , m_eDelimiterInclusionFlags(eDelimiterInclusionFlags)
+{
+}
+
+template<class char_t, bool bForwardIterator>
 constexpr void base_string_view_iterator<char_t, bForwardIterator>::next(bool bForwardDirection) noexcept
 {
-    const bool   bRealDirectionIsForward = bForwardIterator == bForwardDirection;
-    const size_t nEnd                    = bRealDirectionIsForward ? (!m_svFull.empty() ? m_svFull.size() : -1) : -1;
+    const bool       bRealDirectionIsForward = bForwardIterator == bForwardDirection;
+    const size_t     nForwardEnd             = m_svFull.size();
+    constexpr size_t nBackwardEnd            = static_cast<size_t>(-1);
+    const size_t     nEnd                    = bRealDirectionIsForward ? nForwardEnd : nBackwardEnd;
 
-    size_t nNewStart = m_nCurrentEnd;
-    while (nNewStart != nEnd && m_svFull[nNewStart] == m_chDelimiter)
+    auto move_next = [bRealDirectionIsForward](size_t nPos) -> size_t
     {
-        nNewStart = bRealDirectionIsForward ? nNewStart + 1 : nNewStart - 1;
+        return bRealDirectionIsForward ? nPos + 1 : nPos - 1;
+    };
+
+    size_t nSearchStart = bRealDirectionIsForward ? m_nCurrentEnd : m_nCurrentBegin - 1;
+
+    // if *this == end() and we move to begin(), shift from end()
+    if (bRealDirectionIsForward && nSearchStart == nBackwardEnd
+        || !bRealDirectionIsForward && nSearchStart == nForwardEnd)
+    {
+        nSearchStart = move_next(nSearchStart);
     }
 
-    size_t nNewEnd = nEnd;
-    if (nNewStart != nEnd)
+    // skip all "start" delimiters
+    while (nSearchStart != nEnd && m_svFull[nSearchStart] == m_chDelimiter)
     {
-        if (const size_t nDelimiterPos = bRealDirectionIsForward ? m_svFull.find(m_chDelimiter, nNewStart)
-                                                                 : m_svFull.rfind(m_chDelimiter, nNewStart);
+        nSearchStart = move_next(nSearchStart);
+    }
+
+    // find the "end" delimiter if any
+    size_t nSearchPos = nEnd;
+    if (nSearchStart != nEnd)
+    {
+        if (const size_t nDelimiterPos = bRealDirectionIsForward ? m_svFull.find(m_chDelimiter, nSearchStart)
+                                                                 : m_svFull.rfind(m_chDelimiter, nSearchStart);
             nDelimiterPos != value_type::npos)
         {
-            nNewEnd = nDelimiterPos;
+            nSearchPos = nDelimiterPos;
         }
     }
 
-    m_nCurrentBegin = nNewStart;
-    m_nCurrentEnd   = nNewEnd;
+    if (bRealDirectionIsForward)
+    {
+        m_nCurrentBegin = nSearchStart;
+        m_nCurrentEnd   = nSearchPos;
+    }
+    else
+    {
+        m_nCurrentBegin = nSearchPos + 1;
+        m_nCurrentEnd   = nSearchStart + 1;
+    }
 }
 
 } // namespace qx

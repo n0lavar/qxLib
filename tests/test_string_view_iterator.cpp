@@ -11,7 +11,7 @@
 //V_EXCLUDE_PATH *test_string_view_iterator.cpp
 
 #include <qx/containers/string/string_utils.h>
-#include <qx/containers/string/string_view_iterator.h>
+#include <qx/containers/string/string_view_view.h>
 
 #include <array>
 #include <span>
@@ -48,7 +48,7 @@ static void test_part(
 }
 
 template<class char_t, bool bForwardIterator>
-static void test_iterator(
+static void test_iterator_bool(
     qx::basic_string_view<char_t>                  svFull,
     char_t                                         chDelimiter,
     qx::flags<qx::delimiter_inclusion_flags>       eDelimiterInclusionFlags,
@@ -61,7 +61,8 @@ static void test_iterator(
          it;
          ++it)
     {
-        test_part(svFull, chDelimiter, eDelimiterInclusionFlags, *it, parts[i]);
+        qx::basic_string_view<char_t> svPart = *it;
+        test_part(svFull, chDelimiter, eDelimiterInclusionFlags, svPart, parts[i]);
         i = bForwardIterator ? i + 1 : i - 1;
     }
 
@@ -69,19 +70,93 @@ static void test_iterator(
 }
 
 template<class char_t, bool bForwardIterator>
+static void test_iterator_begin_end(
+    qx::basic_string_view<char_t>                  svFull,
+    char_t                                         chDelimiter,
+    qx::flags<qx::delimiter_inclusion_flags>       eDelimiterInclusionFlags,
+    std::span<const qx::basic_string_view<char_t>> parts)
+{
+    const size_t nStartI = bForwardIterator ? 0 : parts.size() - 1;
+    size_t       i       = nStartI;
+
+    auto itBegin =
+        qx::base_string_view_iterator<char_t, bForwardIterator>::begin(svFull, chDelimiter, eDelimiterInclusionFlags);
+    auto itEnd =
+        qx::base_string_view_iterator<char_t, bForwardIterator>::end(svFull, chDelimiter, eDelimiterInclusionFlags);
+    for (auto it = itBegin; it != itEnd; ++it)
+    {
+        qx::basic_string_view<char_t> svPart = *it;
+        test_part(svFull, chDelimiter, eDelimiterInclusionFlags, svPart, parts[i]);
+        i = bForwardIterator ? i + 1 : i - 1;
+    }
+
+    EXPECT_TRUE(i != nStartI || svFull.empty());
+}
+
+template<class char_t>
+static void test_view(
+    qx::basic_string_view<char_t>                  svFull,
+    char_t                                         chDelimiter,
+    qx::flags<qx::delimiter_inclusion_flags>       eDelimiterInclusionFlags,
+    std::span<const qx::basic_string_view<char_t>> parts)
+{
+    size_t i = 0;
+    for (qx::basic_string_view<char_t> svPart : qx::string_view_view(svFull, chDelimiter, eDelimiterInclusionFlags))
+    {
+        test_part(svFull, chDelimiter, eDelimiterInclusionFlags, svPart, parts[i]);
+        ++i;
+    }
+
+    EXPECT_TRUE(i != 0 || svFull.empty());
+}
+
+template<class char_t, bool bForwardIterator>
 static void test_inclusion_flags(
     qx::basic_string_view<char_t>                  svFull,
     char_t                                         chDelimiter,
-    std::span<const qx::basic_string_view<char_t>> parts)
+    std::span<const qx::basic_string_view<char_t>> expectedParts)
 {
-    test_iterator<char_t, bForwardIterator>(svFull, chDelimiter, qx::delimiter_inclusion_flags::none, parts);
-    test_iterator<char_t, bForwardIterator>(svFull, chDelimiter, qx::delimiter_inclusion_flags::begin, parts);
-    test_iterator<char_t, bForwardIterator>(svFull, chDelimiter, qx::delimiter_inclusion_flags::end, parts);
-    test_iterator<char_t, bForwardIterator>(
+    test_iterator_bool<char_t, bForwardIterator>(
+        svFull,
+        chDelimiter,
+        qx::delimiter_inclusion_flags::none,
+        expectedParts);
+    test_iterator_bool<char_t, bForwardIterator>(
+        svFull,
+        chDelimiter,
+        qx::delimiter_inclusion_flags::begin,
+        expectedParts);
+    test_iterator_bool<char_t, bForwardIterator>(
+        svFull,
+        chDelimiter,
+        qx::delimiter_inclusion_flags::end,
+        expectedParts);
+    test_iterator_bool<char_t, bForwardIterator>(
         svFull,
         chDelimiter,
         qx::delimiter_inclusion_flags::begin | qx::delimiter_inclusion_flags::end,
-        parts);
+        expectedParts);
+
+    test_iterator_begin_end<char_t, bForwardIterator>(
+        svFull,
+        chDelimiter,
+        qx::delimiter_inclusion_flags::none,
+        expectedParts);
+    test_iterator_begin_end<char_t, bForwardIterator>(
+        svFull,
+        chDelimiter,
+        qx::delimiter_inclusion_flags::begin,
+        expectedParts);
+    test_iterator_begin_end<char_t, bForwardIterator>(
+        svFull,
+        chDelimiter,
+        qx::delimiter_inclusion_flags::end,
+        expectedParts);
+    test_iterator_begin_end<char_t, bForwardIterator>(
+        svFull,
+        chDelimiter,
+        qx::delimiter_inclusion_flags::begin | qx::delimiter_inclusion_flags::end,
+        expectedParts);
 }
 
 template<class char_t>
@@ -90,10 +165,19 @@ static void test_common(
     char_t                                         chDelimiter,
     std::span<const qx::basic_string_view<char_t>> expectedParts)
 {
-    for (qx::basic_string_view<char_t> fullString : fullStrings)
+    for (qx::basic_string_view<char_t> svFull : fullStrings)
     {
-        test_inclusion_flags<char_t, true>(fullString, chDelimiter, expectedParts);
-        test_inclusion_flags<char_t, false>(fullString, chDelimiter, expectedParts);
+        test_inclusion_flags<char_t, true>(svFull, chDelimiter, expectedParts);
+        test_inclusion_flags<char_t, false>(svFull, chDelimiter, expectedParts);
+
+        test_view<char_t>(svFull, chDelimiter, qx::delimiter_inclusion_flags::none, expectedParts);
+        test_view<char_t>(svFull, chDelimiter, qx::delimiter_inclusion_flags::begin, expectedParts);
+        test_view<char_t>(svFull, chDelimiter, qx::delimiter_inclusion_flags::end, expectedParts);
+        test_view<char_t>(
+            svFull,
+            chDelimiter,
+            qx::delimiter_inclusion_flags::begin | qx::delimiter_inclusion_flags::end,
+            expectedParts);
     }
 }
 
@@ -130,9 +214,44 @@ TYPED_TEST(test_string_view_iterator, zero_parts)
         std::array<qx::basic_string_view<TypeParam>, 0> {});
 }
 
+TYPED_TEST(test_string_view_iterator, random_directions)
+{
+    qx::basic_string_view<TypeParam> svValue     = QX_STR_PREFIX(TypeParam, "/a/bb/ccc/dddd/");
+    const TypeParam                  chDelimiter = QX_CHAR_PREFIX(TypeParam, '/');
+
+    auto it = qx::string_view_iterator(svValue, chDelimiter);
+    EXPECT_EQ(*it, QX_STR_PREFIX(TypeParam, "a"));
+    ++it;
+    EXPECT_EQ(*it, QX_STR_PREFIX(TypeParam, "bb"));
+    ++it;
+    EXPECT_EQ(*it, QX_STR_PREFIX(TypeParam, "ccc"));
+    ++it;
+    EXPECT_EQ(*it, QX_STR_PREFIX(TypeParam, "dddd"));
+    ++it;
+    EXPECT_FALSE(it);
+    --it;
+    EXPECT_EQ(*it, QX_STR_PREFIX(TypeParam, "dddd"));
+    --it;
+    EXPECT_EQ(*it, QX_STR_PREFIX(TypeParam, "ccc"));
+    --it;
+    EXPECT_EQ(*it, QX_STR_PREFIX(TypeParam, "bb"));
+    --it;
+    EXPECT_EQ(*it, QX_STR_PREFIX(TypeParam, "a"));
+    --it;
+    EXPECT_FALSE(it);
+    ++it;
+    EXPECT_EQ(*it, QX_STR_PREFIX(TypeParam, "a"));
+    ++it;
+    EXPECT_EQ(*it, QX_STR_PREFIX(TypeParam, "bb"));
+    --it;
+    EXPECT_EQ(*it, QX_STR_PREFIX(TypeParam, "a"));
+    --it;
+    EXPECT_FALSE(it);
+}
+
+#if 0
 TYPED_TEST(test_string_view_iterator, print)
 {
-#if 0
     if constexpr (std::is_same_v<TypeParam, wchar_t>)
     {
         qx::basic_string_view<TypeParam> svFull0     = QX_STR_PREFIX(TypeParam, "/a/bb/ccc/dddd/");
@@ -222,5 +341,5 @@ TYPED_TEST(test_string_view_iterator, print)
         iterate_reverse(svFull2, qx::delimiter_inclusion_flags::begin | qx::delimiter_inclusion_flags::end);
         iterate_reverse(svFull3, qx::delimiter_inclusion_flags::begin | qx::delimiter_inclusion_flags::end);
     }
-#endif
 }
+#endif

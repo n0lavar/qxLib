@@ -32,6 +32,22 @@ QX_FLAGS_ENUM_CLASS(delimiter_inclusion_flags);
     @author  Khrapov
     @date    24.10.2023
 
+    @code
+    // usage 1, convenient way
+    for (auto it = qx::string_view_iterator("/a/bb/ccc/dddd/", `/`); it; ++it)
+        std::print("{}", *it);
+    @endcode
+
+    @code
+    // usage 2, view adapter friendly way
+    auto itBegin = qx::string_view_iterator::begin("/a/bb/ccc/dddd/", `/`);
+    auto itEnd = qx::string_view_iterator::end("/a/bb/ccc/dddd/", `/`);
+    for (auto it = itBegin; it != itEnd; ++it)
+    {
+        std::print("{}", *it);
+    }
+    @endcode 
+
 **/
 template<class char_t, bool bForwardIterator>
 class base_string_view_iterator
@@ -58,7 +74,31 @@ public:
         @brief  Check if this iterator is valid (i.e. it didn't reach the end of the sequence)
         @retval  - true if this iterator is valid
     **/
-    operator bool() const noexcept;
+    constexpr operator bool() const noexcept;
+
+    /**
+        @brief  Return iterator to beginning
+        @param  svFull                   - string to iterate
+        @param  chDelimiter              - delimiter character
+        @param  eDelimiterInclusionFlags - flags that determine whether to include delimiters in parts when iterating
+        @retval                          - iterator to beginning
+    **/
+    constexpr static base_string_view_iterator begin(
+        value_type                       svFull,
+        char_t                           chDelimiter,
+        flags<delimiter_inclusion_flags> eDelimiterInclusionFlags = delimiter_inclusion_flags::none) noexcept;
+
+    /**
+        @brief  Return iterator to end
+        @param  svFull                   - string to iterate
+        @param  chDelimiter              - delimiter character
+        @param  eDelimiterInclusionFlags - flags that determine whether to include delimiters in parts when iterating
+        @retval                          - iterator to end
+    **/
+    constexpr static base_string_view_iterator end(
+        value_type                       svFull,
+        char_t                           chDelimiter,
+        flags<delimiter_inclusion_flags> eDelimiterInclusionFlags = delimiter_inclusion_flags::none) noexcept;
 
     [[nodiscard]] constexpr value_type                operator*() const noexcept;
     constexpr base_string_view_iterator&              operator++() noexcept;
@@ -69,6 +109,21 @@ public:
     constexpr bool operator!=(const base_string_view_iterator& itOther) const noexcept = default;
 
 private:
+    /**
+        @brief base_string_view_iterator object constructor
+        @param svFull                   - string to iterate
+        @param nCurrentBegin            - current part begin index
+        @param nCurrentEnd              - current part end index (exclusively)
+        @param chDelimiter              - delimiter character
+        @param eDelimiterInclusionFlags - flags that determine whether to include delimiters in parts when iterating
+    **/
+    constexpr base_string_view_iterator(
+        value_type                       svFull,
+        size_t                           nCurrentBegin,
+        size_t                           nCurrentEnd,
+        char_t                           chDelimiter,
+        flags<delimiter_inclusion_flags> eDelimiterInclusionFlags) noexcept;
+
     /**
         @brief Go to the next part
         @param bForwardDirection - true if this is a forward direction for the current bForwardIterator
