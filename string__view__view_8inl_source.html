@@ -101,7 +101,7 @@ $(function() {
 <div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> <span class="keywordtype">char</span>_t&gt;</div>
 <div class="line"><a name="l00031"></a><span class="lineno"><a class="line" href="classqx_1_1string__view__view.html#a61b54b709c84af6bb379c8cb17ec1c9d">   31</a></span>&#160;<a class="code" href="classqx_1_1base__string__view__iterator.html">string_view_iterator&lt;char_t&gt;</a> <a class="code" href="classqx_1_1string__view__view.html#a61b54b709c84af6bb379c8cb17ec1c9d">string_view_view&lt;char_t&gt;::end</a>() const noexcept</div>
 <div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;{</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="classqx_1_1base__string__view__iterator.html#a0c6ae53e1c11baa7d498043e9175fe98">string_view_iterator&lt;char_t&gt;::end</a>();</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="classqx_1_1base__string__view__iterator.html#a0c6ae53e1c11baa7d498043e9175fe98">string_view_iterator&lt;char_t&gt;::end</a>(m_svFull, m_chDelimiter, m_eDelimiterInclusionFlags);</div>
 <div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;}</div>
 <div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160; </div>
 <div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;} <span class="comment">// namespace qx</span></div>
