@@ -33,6 +33,29 @@ enum class priority : u8
     highest   = 255,
 };
 
+/**
+    @struct time_ordered_priority_key
+    @brief  A structure that can be used as a key in ordered containers
+            so that items are ordered in descending order of priority but ascending order of creation time.
+**/
+struct time_ordered_priority_key
+{
+    priority ePriority = priority::normal;
+    size_t   nId       = ++nIdCounter;
+
+    constexpr bool operator==(const time_ordered_priority_key&) const noexcept = default;
+    constexpr auto operator<(const time_ordered_priority_key& other) const noexcept
+    {
+        if (ePriority != other.ePriority)
+            return ePriority > other.ePriority;
+        else
+            return nId < other.nId;
+    }
+
+private:
+    static inline std::atomic_size_t nIdCounter { 0 };
+};
+
 } // namespace qx
 
 constexpr auto operator<=>(qx::priority eLeft, qx::priority eRight)

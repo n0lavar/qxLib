@@ -48,30 +48,19 @@ public:
     using pointer_type = std::unique_ptr<base_component_t>;
 
 private:
-    struct status
+    struct status : time_ordered_priority_key
     {
-        priority                ePriority   = priority::normal;
         flags<component_status> statusFlags = component_status::default_value;
-        size_t                  nId         = ++nIdCounter;
 
+        using time_ordered_priority_key::operator<;
         constexpr bool operator==(const status&) const noexcept = default;
-        constexpr auto operator>(const status& other) const noexcept
-        {
-            if (ePriority != other.ePriority)
-                return ePriority > other.ePriority;
-            else
-                return nId < other.nId;
-        }
-
-    private:
-        static inline std::atomic_size_t nIdCounter { 0 };
     };
 
     struct class_data
     {
-        std::unordered_map<class_id, std::unique_ptr<class_data>>      derivedClasses;
-        std::vector<pointer_type>                                      components;
-        std::multimap<status, base_component_t*, std::greater<status>> priorityCache;
+        std::unordered_map<class_id, std::unique_ptr<class_data>> derivedClasses;
+        std::vector<pointer_type>                                 components;
+        std::multimap<status, base_component_t*>                  priorityCache;
 
         [[nodiscard]] class_data& get_or_add_class_data(class_id id) noexcept;
     };
