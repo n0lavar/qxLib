@@ -14,6 +14,7 @@ include(cmake/set_target_options.cmake)
 # Options
 
 option(GENERATE_TESTS "Generate tests projects? Enabling this requires gtest" OFF)
+option(TEST_DEBUG_BREAKS "Should gtest hit a debug break when condition fails?" OFF)
 
 
 # ================================================================
@@ -80,7 +81,21 @@ if (${GENERATE_TESTS})
             set_target_options(${_test_name})
             set_qxlib_target_options(${_test_name})
             add_test(${_test_name} ${_test_name})
-            set_target_properties (${_test_name} PROPERTIES FOLDER qxLibTests)
+            set_target_properties (${_test_name} PROPERTIES 
+                FOLDER qxLibTests
+                VS_DEBUGGER_COMMAND_ARGUMENTS "$<$<BOOL:${TEST_DEBUG_BREAKS}>:--gtest_break_on_failure>"
+            )
         endif()
     endforeach()
+endif()
+
+if (CMAKE_SOURCE_DIR STREQUAL CMAKE_CURRENT_SOURCE_DIR)
+    find_package(Python3 REQUIRED COMPONENTS Interpreter)
+
+    add_custom_target(RegenerateSolution
+        COMMAND ${Python3_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/Tools/generate_sln.py
+    )
+    set_target_properties(RegenerateSolution PROPERTIES
+        FOLDER "Tools"
+    )
 endif()

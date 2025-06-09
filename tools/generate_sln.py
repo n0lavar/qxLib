@@ -27,7 +27,7 @@ def clean_build_folder(build_folder: Path):
 def run_cmake(cpp_compiler_flags: str, cmake_flags: str, sources_folder: Path, build_folder: Path, cmake_generator: str, arch: str) -> int:
     cmake_command: List[str] = [
         "cmake",
-        cmake_flags,
+        *cmake_flags.split(),
         f"-DCMAKE_CXX_FLAGS={cpp_compiler_flags}",
         "-S", sources_folder,
         "-B", build_folder,
@@ -47,7 +47,7 @@ def create_parser():
     parser.add_argument("--build_folder", default="../build")
     parser.add_argument("--cmake_generator", default="Visual Studio 17 2022")
     parser.add_argument("--arch", default="x64")
-    parser.add_argument("--cmake_flags", default="-DGENERATE_TESTS=1")
+    parser.add_argument("--cmake_flags", default="-DGENERATE_TESTS=1 -DTEST_DEBUG_BREAKS=1")
     parser.add_argument("--cpp_compiler_flags", default="")
     return parser
 
