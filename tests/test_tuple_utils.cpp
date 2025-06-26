@@ -204,3 +204,66 @@ TEST(tuple, iterate)
 
     EXPECT_EQ(nInvocations, 5);
 }
+
+// ---------------------------------------------- qx::tuple::permutations ----------------------------------------------
+
+class A
+{
+};
+class B
+{
+};
+class C
+{
+};
+
+using permutationsAB = qx::tuple::permutations_t<A, B>;
+static_assert(std::tuple_size_v<permutationsAB> == 6);
+static_assert(std::is_same_v<std::tuple_element_t<0, permutationsAB>, std::tuple<A>>);
+static_assert(std::is_same_v<std::tuple_element_t<1, permutationsAB>, std::tuple<B>>);
+static_assert(std::is_same_v<std::tuple_element_t<2, permutationsAB>, std::tuple<A, A>>);
+static_assert(std::is_same_v<std::tuple_element_t<3, permutationsAB>, std::tuple<A, B>>);
+static_assert(std::is_same_v<std::tuple_element_t<4, permutationsAB>, std::tuple<B, A>>);
+static_assert(std::is_same_v<std::tuple_element_t<5, permutationsAB>, std::tuple<B, B>>);
+
+using permutationsABC = qx::tuple::permutations_t<A, B, C>;
+static_assert(std::tuple_size_v<permutationsABC> == 39);
+static_assert(std::is_same_v<std::tuple_element_t<0, permutationsABC>, std::tuple<A>>);
+static_assert(std::is_same_v<std::tuple_element_t<1, permutationsABC>, std::tuple<B>>);
+static_assert(std::is_same_v<std::tuple_element_t<2, permutationsABC>, std::tuple<C>>);
+static_assert(std::is_same_v<std::tuple_element_t<3, permutationsABC>, std::tuple<A, A>>);
+static_assert(std::is_same_v<std::tuple_element_t<4, permutationsABC>, std::tuple<A, B>>);
+static_assert(std::is_same_v<std::tuple_element_t<5, permutationsABC>, std::tuple<A, C>>);
+static_assert(std::is_same_v<std::tuple_element_t<6, permutationsABC>, std::tuple<B, A>>);
+static_assert(std::is_same_v<std::tuple_element_t<7, permutationsABC>, std::tuple<B, B>>);
+static_assert(std::is_same_v<std::tuple_element_t<8, permutationsABC>, std::tuple<B, C>>);
+static_assert(std::is_same_v<std::tuple_element_t<9, permutationsABC>, std::tuple<C, A>>);
+static_assert(std::is_same_v<std::tuple_element_t<10, permutationsABC>, std::tuple<C, B>>);
+static_assert(std::is_same_v<std::tuple_element_t<11, permutationsABC>, std::tuple<C, C>>);
+static_assert(std::is_same_v<std::tuple_element_t<12, permutationsABC>, std::tuple<A, A, A>>);
+static_assert(std::is_same_v<std::tuple_element_t<13, permutationsABC>, std::tuple<A, A, B>>);
+static_assert(std::is_same_v<std::tuple_element_t<14, permutationsABC>, std::tuple<A, A, C>>);
+static_assert(std::is_same_v<std::tuple_element_t<15, permutationsABC>, std::tuple<A, B, A>>);
+static_assert(std::is_same_v<std::tuple_element_t<16, permutationsABC>, std::tuple<A, B, B>>);
+static_assert(std::is_same_v<std::tuple_element_t<17, permutationsABC>, std::tuple<A, B, C>>);
+static_assert(std::is_same_v<std::tuple_element_t<18, permutationsABC>, std::tuple<A, C, A>>);
+static_assert(std::is_same_v<std::tuple_element_t<19, permutationsABC>, std::tuple<A, C, B>>);
+static_assert(std::is_same_v<std::tuple_element_t<20, permutationsABC>, std::tuple<A, C, C>>);
+static_assert(std::is_same_v<std::tuple_element_t<21, permutationsABC>, std::tuple<B, A, A>>);
+static_assert(std::is_same_v<std::tuple_element_t<22, permutationsABC>, std::tuple<B, A, B>>);
+static_assert(std::is_same_v<std::tuple_element_t<23, permutationsABC>, std::tuple<B, A, C>>);
+static_assert(std::is_same_v<std::tuple_element_t<24, permutationsABC>, std::tuple<B, B, A>>);
+static_assert(std::is_same_v<std::tuple_element_t<25, permutationsABC>, std::tuple<B, B, B>>);
+static_assert(std::is_same_v<std::tuple_element_t<26, permutationsABC>, std::tuple<B, B, C>>);
+static_assert(std::is_same_v<std::tuple_element_t<27, permutationsABC>, std::tuple<B, C, A>>);
+static_assert(std::is_same_v<std::tuple_element_t<28, permutationsABC>, std::tuple<B, C, B>>);
+static_assert(std::is_same_v<std::tuple_element_t<29, permutationsABC>, std::tuple<B, C, C>>);
+static_assert(std::is_same_v<std::tuple_element_t<30, permutationsABC>, std::tuple<C, A, A>>);
+static_assert(std::is_same_v<std::tuple_element_t<31, permutationsABC>, std::tuple<C, A, B>>);
+static_assert(std::is_same_v<std::tuple_element_t<32, permutationsABC>, std::tuple<C, A, C>>);
+static_assert(std::is_same_v<std::tuple_element_t<33, permutationsABC>, std::tuple<C, B, A>>);
+static_assert(std::is_same_v<std::tuple_element_t<34, permutationsABC>, std::tuple<C, B, B>>);
+static_assert(std::is_same_v<std::tuple_element_t<35, permutationsABC>, std::tuple<C, B, C>>);
+static_assert(std::is_same_v<std::tuple_element_t<36, permutationsABC>, std::tuple<C, C, A>>);
+static_assert(std::is_same_v<std::tuple_element_t<37, permutationsABC>, std::tuple<C, C, B>>);
+static_assert(std::is_same_v<std::tuple_element_t<38, permutationsABC>, std::tuple<C, C, C>>);

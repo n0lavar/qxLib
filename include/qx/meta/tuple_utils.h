@@ -179,7 +179,7 @@ constexpr size_t index_v = index<tuple_t, T>::value;
 // ------------------------------------------------------ iterate ------------------------------------------------------
 
 /**
-    @brief  Iterate over a tuple with a callable that receives a type along with a its index 
+    @brief  Iterate over a tuple with a callable that receives a type along with its index 
     @tparam tuple_t         - std::tuple<> type
     @tparam type_callable_t - callable type
     @param  callable        - callable object
@@ -196,7 +196,7 @@ constexpr size_t index_v = index<tuple_t, T>::value;
 template<class tuple_t, class type_callable_t>
 constexpr void iterate(const type_callable_t& callable)
 {
-    // we need to add a pointer because we can't compile a tuple with an abstract class type
+    // we need to add a pointer because we can'permutationsAB compile a tuple with an abstract class type
     using tuple_pointer_type = transform_t<tuple_t, std::add_pointer>;
 
     auto temp_callable = [&callable]<class T>(const T&)
@@ -211,5 +211,105 @@ constexpr void iterate(const type_callable_t& callable)
         },
         tuple_pointer_type());
 }
+
+// ---------------------------------------------------- combinations ---------------------------------------------------
+
+namespace details
+{
+constexpr size_t pow(size_t n1, size_t n2)
+{
+    size_t nResult = 1;
+    for (size_t i = 0; i < n2; ++i)
+        nResult *= n1;
+
+    return nResult;
+}
+
+template<class... tuples_t>
+struct merge_tuples;
+
+template<class... args_t>
+struct merge_tuples<std::tuple<args_t...>>
+{
+    using type = std::tuple<args_t...>;
+};
+
+template<class... args_1_t, class... args_2_t, class... args_rest_t>
+struct merge_tuples<std::tuple<args_1_t...>, std::tuple<args_2_t...>, args_rest_t...>
+{
+    using type = typename merge_tuples<std::tuple<args_1_t..., args_2_t...>, args_rest_t...>::type;
+};
+
+template<class inner_tuples_tuple_t, class... all_types_t>
+struct generate_layer;
+
+template<class... inner_tuples_t, class... all_types_t>
+struct generate_layer<std::tuple<inner_tuples_t...>, all_types_t...>
+{
+private:
+    template<class inner_tuple_t>
+    struct generator
+    {
+        using type = std::tuple<typename tuple::join<inner_tuple_t, all_types_t>::type...>;
+    };
+
+public:
+    using type = typename merge_tuples<typename generator<inner_tuples_t>::type...>::type;
+};
+
+template<class all_tuples_t, class prev_new_tuples_t, size_t nCombinations, class... all_types_t>
+struct combine;
+
+template<bool bBreak /* = true */, class all_tuples_t, class new_tuples_t, size_t nCombinations, class... all_types_t>
+struct break_or_combine
+{
+    using type = all_tuples_t;
+};
+
+template<class all_tuples_t, class new_tuples_t, size_t nCombinations, class... all_types_t>
+struct break_or_combine</* bool bBreak = */ false, all_tuples_t, new_tuples_t, nCombinations, all_types_t...>
+{
+    using type =
+        typename combine<tuple::join_t<all_tuples_t, new_tuples_t>, new_tuples_t, nCombinations, all_types_t...>::type;
+};
+
+template<class all_tuples_t, class prev_new_tuples_t, size_t nCombinations, class... all_types_t>
+struct combine
+{
+    using new_tuples_t = typename generate_layer<prev_new_tuples_t, all_types_t...>::type;
+
+    using type = typename break_or_combine<
+        nCombinations == std::tuple_size_v<all_tuples_t>,
+        all_tuples_t,
+        new_tuples_t,
+        nCombinations,
+        all_types_t...>::type;
+};
+
+} // namespace details
+
+/**
+    @struct permutations
+    @brief  Generates k-permutations with repetition for all_types_t
+    @tparam all_types_t - types for permutations
+
+    @code
+    using t = qx::tuple::permutations_t<A, B>;
+    static_assert(std::is_same_v<
+        t,
+        std::tuple<std::tuple<A>, std::tuple<B>, std::tuple<A, A>, std::tuple<A, B>, std::tuple<B, A>, std::tuple<B, B>>>);
+    @endcode 
+**/
+template<class... all_types_t>
+struct permutations
+{
+    static constexpr size_t nTypes        = sizeof...(all_types_t);
+    static constexpr size_t nCombinations = nTypes * (details::pow(nTypes, nTypes) - 1) / (nTypes - 1);
+    using start_tuples_t                  = std::tuple<std::tuple<all_types_t>...>;
+    using type = typename details::combine<start_tuples_t, start_tuples_t, nCombinations, all_types_t...>::type;
+};
+
+template<class... all_types_t>
+using permutations_t = typename permutations<all_types_t...>::type;
 
 } // namespace qx::tuple
