@@ -145,7 +145,7 @@ public:
 };
 
 template<class get_get_result_t, qx::delegate_return_c return_t>
-class method_component<get_get_result_t, return_t, std::tuple<void>>
+class method_component<get_get_result_t, return_t, std::tuple<std::type_identity<void>>>
 {
 public:
     return_t callback()
@@ -272,15 +272,29 @@ struct get_get_result<return_t, void>
 
 // ------------------------------------------------------- traits ------------------------------------------------------
 
+// gcc and clang have a compiler bug not allowing to compile std::shared_ptr<T<std::tuple<void>>>
+template<class T>
+struct replace_void
+{
+    using type = T;
+};
+
+template<>
+struct replace_void<void>
+{
+    using type = std::type_identity<void>;
+};
+
 template<qx::delegate_return_c return_t, class... args_t>
 struct delegate_fixture_traits
 {
-    using return_type           = return_t;
-    using args_tuple_type       = std::tuple<args_t...>;
-    using delegate_type         = qx::delegate<return_t, args_t...>;
-    using get_get_result_type   = get_get_result<return_t, args_t...>;
-    using method_component_type = method_component<get_get_result_type, return_type, args_tuple_type>;
-    using execute_generator     = execute_generator<return_t, args_t...>;
+    using return_type         = return_t;
+    using args_tuple_type     = std::tuple<args_t...>;
+    using delegate_type       = qx::delegate<return_t, args_t...>;
+    using get_get_result_type = get_get_result<return_t, args_t...>;
+    using method_component_type =
+        method_component<get_get_result_type, return_type, std::tuple<typename replace_void<args_t>::type...>>;
+    using execute_generator = execute_generator<return_t, args_t...>;
 };
 
 using implementations_type = ::testing::Types<
