@@ -131,9 +131,9 @@ $(function() {
 <div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;<span class="keyword">template</span>&lt;enumeration_c enum_t&gt;</div>
 <div class="line"><a name="l00061"></a><span class="lineno"><a class="line" href="classqx_1_1flags.html">   61</a></span>&#160;<span class="keyword">class </span><a class="code" href="classqx_1_1flags.html">flags</a></div>
 <div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;{</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    <span class="keyword">using</span> underlying_type = std::underlying_type_t&lt;enum_t&gt;;</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160; </div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    <span class="keyword">using</span> underlying_type = std::underlying_type_t&lt;enum_t&gt;;</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160; </div>
 <div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    <span class="comment">// ------------------------------------------------ common operators -----------------------------------------------</span></div>
 <div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160; </div>
 <div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;    constexpr <a class="code" href="classqx_1_1flags.html">flags</a>() noexcept = <span class="keywordflow">default</span>;</div>
@@ -312,7 +312,16 @@ $(function() {
 <div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160; </div>
 <div class="line"><a name="l00242"></a><span class="lineno">  242</span>&#160;} <span class="comment">// namespace qx</span></div>
 <div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160; </div>
-<div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160;<span class="preprocessor">#include &lt;qx/containers/flags.inl&gt;</span></div>
+<div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160;template&lt;qx::enumeration_c enum_t&gt;</div>
+<div class="line"><a name="l00245"></a><span class="lineno"><a class="line" href="structstd_1_1hash_3_01qx_1_1flags_3_01enum__t_01_4_01_4.html">  245</a></span>&#160;struct std::hash&lt;qx::flags&lt;enum_t&gt;&gt;</div>
+<div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160;{</div>
+<div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160;    <span class="keywordtype">size_t</span> operator()(<span class="keyword">const</span> <a class="code" href="classqx_1_1flags.html">qx::flags&lt;enum_t&gt;</a>&amp; eFlags) <span class="keyword">const</span> noexcept</div>
+<div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160;    {</div>
+<div class="line"><a name="l00249"></a><span class="lineno">  249</span>&#160;        <span class="keywordflow">return</span> std::hash&lt;typename qx::flags&lt;enum_t&gt;::underlying_type&gt;()(eFlags.<a class="code" href="classqx_1_1flags.html#afe078e3579f482a55bdbd62a77c32bbf">to_integer</a>());</div>
+<div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160;    }</div>
+<div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160;};</div>
+<div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160; </div>
+<div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="flags_8inl.html">qx/containers/flags.inl</a>&gt;</span></div>
 <div class="ttc" id="aclassqx_1_1flags_html"><div class="ttname"><a href="classqx_1_1flags.html">qx::flags</a></div><div class="ttdoc">Wrapper for enumerations to be used as a list of flags.</div><div class="ttdef"><b>Definition:</b> <a href="flags_8h_source.html#l00061">flags.h:62</a></div></div>
 <div class="ttc" id="aclassqx_1_1flags_html_a0b246dc4d37e1e34a52c69a368de12b5"><div class="ttname"><a href="classqx_1_1flags.html#a0b246dc4d37e1e34a52c69a368de12b5">qx::flags::requires</a></div><div class="ttdeci">requires(sizeof...(args_t) &gt;=1 &amp;&amp;are_specific_v&lt; enum_t, args_t... &gt;) const expr void add(args_t... flags) noexcept</div><div class="ttdoc">Add all the flags specified.</div></div>
 <div class="ttc" id="aclassqx_1_1flags_html_a3941d692b540f704b40bea9ceb10e0cc"><div class="ttname"><a href="classqx_1_1flags.html#a3941d692b540f704b40bea9ceb10e0cc">qx::flags::requires</a></div><div class="ttdeci">requires(sizeof...(args_t) &gt;=2 &amp;&amp;are_specific_v&lt; enum_t, args_t... &gt;) const expr flags(args_t... flags) noexcept</div><div class="ttdoc">flags object constructor</div></div>
@@ -333,6 +342,7 @@ $(function() {
 <div class="ttc" id="aclassqx_1_1flags_html_afe078e3579f482a55bdbd62a77c32bbf"><div class="ttname"><a href="classqx_1_1flags.html#afe078e3579f482a55bdbd62a77c32bbf">qx::flags::to_integer</a></div><div class="ttdeci">constexpr underlying_type to_integer() const noexcept</div><div class="ttdoc">Convert to the corresponding integer value.</div></div>
 <div class="ttc" id="aconcepts_8h_html"><div class="ttname"><a href="concepts_8h.html">concepts.h</a></div></div>
 <div class="ttc" id="acopyable__movable_8h_html"><div class="ttname"><a href="copyable__movable_8h.html">copyable_movable.h</a></div></div>
+<div class="ttc" id="aflags_8inl_html"><div class="ttname"><a href="flags_8inl.html">flags.inl</a></div></div>
 <div class="ttc" id="atype__traits_8h_html"><div class="ttname"><a href="type__traits_8h.html">type_traits.h</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->

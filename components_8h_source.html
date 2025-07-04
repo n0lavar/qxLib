@@ -357,12 +357,12 @@ $(function() {
 <div class="line"><a name="l00286"></a><span class="lineno">  286</span>&#160;<span class="comment">        */</span></div>
 <div class="line"><a name="l00287"></a><span class="lineno">  287</span>&#160;        <span class="keyword">using</span> t1 = <span class="keyword">typename</span> component_t::inheritance_tuple_type;</div>
 <div class="line"><a name="l00288"></a><span class="lineno">  288</span>&#160;        <span class="keyword">using</span> t2 = <span class="keyword">typename</span> base_component_t::inheritance_tuple_type;</div>
-<div class="line"><a name="l00289"></a><span class="lineno">  289</span>&#160;        <span class="keyword">using</span> t3 = tuple::remove_t&lt;t1, t2&gt;;</div>
+<div class="line"><a name="l00289"></a><span class="lineno">  289</span>&#160;        <span class="keyword">using</span> t3 = tuple_utils::remove_t&lt;t1, t2&gt;;</div>
 <div class="line"><a name="l00290"></a><span class="lineno">  290</span>&#160; </div>
 <div class="line"><a name="l00291"></a><span class="lineno">  291</span>&#160;        class_data* pClassData = &amp;m_RootClass;</div>
 <div class="line"><a name="l00292"></a><span class="lineno">  292</span>&#160;        iterateClassDataFunction(*pClassData);</div>
 <div class="line"><a name="l00293"></a><span class="lineno">  293</span>&#160; </div>
-<div class="line"><a name="l00294"></a><span class="lineno">  294</span>&#160;        tuple::iterate&lt;t3&gt;(</div>
+<div class="line"><a name="l00294"></a><span class="lineno">  294</span>&#160;        tuple_utils::iterate&lt;t3&gt;(</div>
 <div class="line"><a name="l00295"></a><span class="lineno">  295</span>&#160;            [&amp;pClassData, &amp;iterateClassDataFunction]&lt;<span class="keyword">class</span> T, <span class="keywordtype">size_t</span> I&gt;()</div>
 <div class="line"><a name="l00296"></a><span class="lineno">  296</span>&#160;            {</div>
 <div class="line"><a name="l00297"></a><span class="lineno">  297</span>&#160;                pClassData = &amp;pClassData-&gt;get_or_add_class_data(T::get_class_id_static());</div>

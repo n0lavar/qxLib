@@ -111,28 +111,38 @@ $(function() {
 <div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="comment">**/</span></div>
 <div class="line"><a name="l00041"></a><span class="lineno"><a class="line" href="structqx_1_1time__ordered__priority__key.html">   41</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structqx_1_1time__ordered__priority__key.html">time_ordered_priority_key</a></div>
 <div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;{</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    <a class="code" href="priority_8h.html#a596815b7b01439344e1858a12743c8ec">priority</a> ePriority = priority::normal;</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    <span class="keywordtype">size_t</span>   nId       = ++nIdCounter;</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160; </div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    constexpr <span class="keywordtype">bool</span> operator==(<span class="keyword">const</span> <a class="code" href="structqx_1_1time__ordered__priority__key.html">time_ordered_priority_key</a>&amp;) <span class="keyword">const</span> noexcept = <span class="keywordflow">default</span>;</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    constexpr <span class="keyword">auto</span> operator&lt;(<span class="keyword">const</span> <a class="code" href="structqx_1_1time__ordered__priority__key.html">time_ordered_priority_key</a>&amp; other) <span class="keyword">const</span> noexcept</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    {</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;        <span class="keywordflow">if</span> (ePriority != other.ePriority)</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;            <span class="keywordflow">return</span> ePriority &gt; other.ePriority;</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;        <span class="keywordflow">else</span></div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;            <span class="keywordflow">return</span> nId &lt; other.nId;</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    }</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    constexpr <a class="code" href="structqx_1_1time__ordered__priority__key.html">time_ordered_priority_key</a>() noexcept = <span class="keywordflow">default</span>;</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    <a class="code" href="structqx_1_1time__ordered__priority__key.html">time_ordered_priority_key</a>(<a class="code" href="priority_8h.html#a596815b7b01439344e1858a12743c8ec">priority</a> ePriority) noexcept;</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    constexpr <span class="keywordtype">bool</span> operator==(<span class="keyword">const</span> <a class="code" href="structqx_1_1time__ordered__priority__key.html">time_ordered_priority_key</a>&amp;) <span class="keyword">const</span> noexcept = <span class="keywordflow">default</span>;</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    constexpr <span class="keyword">auto</span> operator&lt;(<span class="keyword">const</span> <a class="code" href="structqx_1_1time__ordered__priority__key.html">time_ordered_priority_key</a>&amp; other) <span class="keyword">const</span> noexcept;</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160; </div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    <a class="code" href="priority_8h.html#a596815b7b01439344e1858a12743c8ec">priority</a> ePriority = priority::normal;</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    <span class="keywordtype">size_t</span>   nId       = 0;</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160; </div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    <span class="keyword">static</span> <span class="keyword">inline</span> std::atomic_size_t nIdCounter { 0 };</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;};</div>
 <div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160; </div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    <span class="keyword">static</span> <span class="keyword">inline</span> std::atomic_size_t nIdCounter { 0 };</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;};</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160; </div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;} <span class="comment">// namespace qx</span></div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="keyword">inline</span> time_ordered_priority_key::time_ordered_priority_key(<a class="code" href="priority_8h.html#a596815b7b01439344e1858a12743c8ec">priority</a> ePriority) noexcept</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    : ePriority(ePriority)</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    , nId(++nIdCounter)</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;{</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;}</div>
 <div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160; </div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;constexpr <span class="keyword">auto</span> operator&lt;=&gt;(<a class="code" href="priority_8h.html#a596815b7b01439344e1858a12743c8ec">qx::priority</a> eLeft, <a class="code" href="priority_8h.html#a596815b7b01439344e1858a12743c8ec">qx::priority</a> eRight)</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;constexpr <span class="keyword">auto</span> time_ordered_priority_key::operator&lt;(<span class="keyword">const</span> time_ordered_priority_key&amp; other) <span class="keyword">const</span> noexcept</div>
 <div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;{</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    <span class="keywordflow">return</span> <span class="keyword">static_cast&lt;</span><a class="code" href="typedefs_8h.html#a254d32383658e016368673396e7afc1b">u8</a><span class="keyword">&gt;</span>(eLeft) &lt;=&gt; <span class="keyword">static_cast&lt;</span><a class="code" href="typedefs_8h.html#a254d32383658e016368673396e7afc1b">u8</a><span class="keyword">&gt;</span>(eRight);</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;}</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    <span class="keywordflow">if</span> (ePriority != other.ePriority)</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;        <span class="keywordflow">return</span> ePriority &gt; other.ePriority;</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    <span class="keywordflow">else</span></div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;        <span class="keywordflow">return</span> nId &lt; other.nId;</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;}</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160; </div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;} <span class="comment">// namespace qx</span></div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160; </div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;constexpr <span class="keyword">auto</span> operator&lt;=&gt;(<a class="code" href="priority_8h.html#a596815b7b01439344e1858a12743c8ec">qx::priority</a> eLeft, <a class="code" href="priority_8h.html#a596815b7b01439344e1858a12743c8ec">qx::priority</a> eRight)</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;{</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;    <span class="keywordflow">return</span> <span class="keyword">static_cast&lt;</span><a class="code" href="typedefs_8h.html#a254d32383658e016368673396e7afc1b">u8</a><span class="keyword">&gt;</span>(eLeft) &lt;=&gt; <span class="keyword">static_cast&lt;</span><a class="code" href="typedefs_8h.html#a254d32383658e016368673396e7afc1b">u8</a><span class="keyword">&gt;</span>(eRight);</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;}</div>
 <div class="ttc" id="aflags_8h_html"><div class="ttname"><a href="flags_8h.html">flags.h</a></div></div>
 <div class="ttc" id="apriority_8h_html_a596815b7b01439344e1858a12743c8ec"><div class="ttname"><a href="priority_8h.html#a596815b7b01439344e1858a12743c8ec">qx::priority</a></div><div class="ttdeci">priority</div><div class="ttdoc">User may use the predefined values or the custom ones, for ex. &quot;normal - 1&quot;, this type is supposed to...</div><div class="ttdef"><b>Definition:</b> <a href="priority_8h_source.html#l00025">priority.h:26</a></div></div>
 <div class="ttc" id="astructqx_1_1time__ordered__priority__key_html"><div class="ttname"><a href="structqx_1_1time__ordered__priority__key.html">qx::time_ordered_priority_key</a></div><div class="ttdoc">A structure that can be used as a key in ordered containers so that items are ordered in descending o...</div><div class="ttdef"><b>Definition:</b> <a href="priority_8h_source.html#l00041">priority.h:42</a></div></div>
