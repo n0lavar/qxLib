@@ -8,7 +8,7 @@ The library contains various classes, functions and macros that can be useful wh
 The code is designed to be as performant, extensible and generic as possible. It follows the style of the standard library in terms of code style, use of iterators, traits, etc. The library is intended to extend the functionality of the standard library and not copy it.
 
 Some examples:
-* Implementations of observer, singleton, generic iterator, double dispatch and other patterns;
+* Implementations of observer, delegate, singleton, generic iterator, double dispatch and other patterns;
 * A string that fully follows the std::string interface and supports compile-time configuration of a large number of parameters (SSO size, alignment, hashing algorithms, comparison, formatting, etc.) and contains additional methods (`format(), to_lower()/to_upper(), to<T>(), from<T>(), trim()/trim_right()/trim_left(), remove_prefix()/remove_suffix(), split()` etc.);
 * Extension of standard library algorithms;
 * Macro based RTTI system;
@@ -27,7 +27,6 @@ Feel free to suggest any improvements.
 | Clang | ![ubuntu_clang_debug](https://github.com/n0lavar/qxLib/workflows/ubuntu_clang_debug/badge.svg)  | ![ubuntu_clang_release](https://github.com/n0lavar/qxLib/workflows/ubuntu_clang_release/badge.svg)  |
 | GCC | ![ubuntu_gcc_debug](https://github.com/n0lavar/qxLib/workflows/ubuntu_gcc_debug/badge.svg)  | ![ubuntu_gcc_release](https://github.com/n0lavar/qxLib/workflows/ubuntu_gcc_release/badge.svg)  |
 | MSVC | ![windows_msvc_debug](https://github.com/n0lavar/qxLib/workflows/windows_msvc_debug/badge.svg) | ![windows_msvc_release](https://github.com/n0lavar/qxLib/workflows/windows_msvc_release/badge.svg) |
-| Apple Clang | ![macos_clang_debug](https://github.com/n0lavar/qxLib/workflows/macos_clang_debug/badge.svg) | ![macos_clang_release](https://github.com/n0lavar/qxLib/workflows/macos_clang_release/badge.svg) |
 
 ## Dependencies:
 
@@ -35,7 +34,7 @@ Required:
 + C++20
 
 Optional:
-+ glm (/gl, /render, /math)
++ glm (/render, /math)
 + boost (qx::unique_objects_pool)
   
 ## License

@@ -9,6 +9,8 @@ on:
 
 jobs:
   macos_clang_release:
+    # disabled as github doesn't have free runs for a compiler version the lib requires
+    if: false
     runs-on: macos-15-large
     env:
       CXX: $(brew --prefix llvm@18)/bin/clang++
