@@ -159,7 +159,7 @@ public:                                                                         
     using super_class_type = __VA_ARGS__;                                                                           \
     using base_class_type  = typename super_class_type::base_class_type;                                            \
     using inheritance_tuple_type =                                                                                  \
-        qx::tuple::join_t<typename super_class_type::inheritance_tuple_type, this_class_type>;                      \
+        qx::tuple_utils::join_t<typename super_class_type::inheritance_tuple_type, this_class_type>;                \
                                                                                                                     \
 public:                                                                                                             \
     static constexpr bool is_derived_from_id_static(qx::class_id id) noexcept                                       \
@@ -192,7 +192,7 @@ public:                                                                         
         static constexpr auto ids = []()                                                                            \
         {                                                                                                           \
             std::array<qx::class_id, std::tuple_size_v<inheritance_tuple_type>> ids_;                               \
-            qx::tuple::iterate<inheritance_tuple_type>(                                                             \
+            qx::tuple_utils::iterate<inheritance_tuple_type>(                                                       \
                 [&ids_]<class T, size_t I>()                                                                        \
                 {                                                                                                   \
                     ids_[I] = T::get_class_id_static();                                                             \

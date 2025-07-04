@@ -286,12 +286,12 @@ private:
         */
         using t1 = typename component_t::inheritance_tuple_type;
         using t2 = typename base_component_t::inheritance_tuple_type;
-        using t3 = tuple::remove_t<t1, t2>;
+        using t3 = tuple_utils::remove_t<t1, t2>;
 
         class_data* pClassData = &m_RootClass;
         iterateClassDataFunction(*pClassData);
 
-        tuple::iterate<t3>(
+        tuple_utils::iterate<t3>(
             [&pClassData, &iterateClassDataFunction]<class T, size_t I>()
             {
                 pClassData = &pClassData->get_or_add_class_data(T::get_class_id_static());

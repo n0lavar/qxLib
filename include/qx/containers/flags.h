@@ -60,9 +60,9 @@ namespace qx
 template<enumeration_c enum_t>
 class flags
 {
+public:
     using underlying_type = std::underlying_type_t<enum_t>;
 
-public:
     // ------------------------------------------------ common operators -----------------------------------------------
 
     constexpr flags() noexcept = default;
@@ -240,5 +240,14 @@ private:
 };
 
 } // namespace qx
+
+template<qx::enumeration_c enum_t>
+struct std::hash<qx::flags<enum_t>>
+{
+    size_t operator()(const qx::flags<enum_t>& eFlags) const noexcept
+    {
+        return std::hash<typename qx::flags<enum_t>::underlying_type>()(eFlags.to_integer());
+    }
+};
 
 #include <qx/containers/flags.inl>

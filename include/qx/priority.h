@@ -40,21 +40,31 @@ enum class priority : u8
 **/
 struct time_ordered_priority_key
 {
-    priority ePriority = priority::normal;
-    size_t   nId       = ++nIdCounter;
-
+    constexpr time_ordered_priority_key() noexcept = default;
+    time_ordered_priority_key(priority ePriority) noexcept;
     constexpr bool operator==(const time_ordered_priority_key&) const noexcept = default;
-    constexpr auto operator<(const time_ordered_priority_key& other) const noexcept
-    {
-        if (ePriority != other.ePriority)
-            return ePriority > other.ePriority;
-        else
-            return nId < other.nId;
-    }
+    constexpr auto operator<(const time_ordered_priority_key& other) const noexcept;
+
+    priority ePriority = priority::normal;
+    size_t   nId       = 0;
 
 private:
     static inline std::atomic_size_t nIdCounter { 0 };
 };
+
+inline time_ordered_priority_key::time_ordered_priority_key(priority ePriority) noexcept
+    : ePriority(ePriority)
+    , nId(++nIdCounter)
+{
+}
+
+constexpr auto time_ordered_priority_key::operator<(const time_ordered_priority_key& other) const noexcept
+{
+    if (ePriority != other.ePriority)
+        return ePriority > other.ePriority;
+    else
+        return nId < other.nId;
+}
 
 } // namespace qx
 

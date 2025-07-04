@@ -12,7 +12,7 @@
 #include <tuple>
 #include <type_traits>
 
-namespace qx::tuple
+namespace qx::tuple_utils
 {
 
 // -------------------------------------------------------- join -------------------------------------------------------
@@ -40,6 +40,9 @@ struct join<std::tuple<first_pack_t...>, second_t, optional_args_t...>
 
 template<class... args_t>
 using join_t = typename join<args_t...>::type;
+
+
+
 
 // ------------------------------------------------------- remove ------------------------------------------------------
 
@@ -93,6 +96,9 @@ struct remove<std::tuple<types_t...>, std::tuple<target_t, remaining_targets_t..
 template<class... args_t>
 using remove_t = typename remove<args_t...>::type;
 
+
+
+
 // ------------------------------------------------------ contains -----------------------------------------------------
 
 namespace details
@@ -130,6 +136,9 @@ using contains = details::contains<T, tuple_t>;
 template<class tuple_t, class T>
 static constexpr bool contains_v = contains<tuple_t, T>::value;
 
+
+
+
 // ----------------------------------------------------- transform -----------------------------------------------------
 
 /**
@@ -149,6 +158,9 @@ struct transform<std::tuple<args_t...>, transformation_t>
 
 template<class tuple_t, template<class T> class transformation_t>
 using transform_t = typename transform<tuple_t, transformation_t>::type;
+
+
+
 
 // ------------------------------------------------------- index -------------------------------------------------------
 
@@ -175,6 +187,9 @@ struct index<std::tuple<U, args_t...>, T>
 
 template<class tuple_t, class T>
 constexpr size_t index_v = index<tuple_t, T>::value;
+
+
+
 
 // ------------------------------------------------------ iterate ------------------------------------------------------
 
@@ -212,9 +227,12 @@ constexpr void iterate(const type_callable_t& callable)
         tuple_pointer_type());
 }
 
-// ---------------------------------------------------- combinations ---------------------------------------------------
 
-namespace details
+
+
+// ---------------------------------------------------- permutations ---------------------------------------------------
+
+namespace permutations_details
 {
 constexpr size_t pow(size_t n1, size_t n2)
 {
@@ -250,7 +268,7 @@ private:
     template<class inner_tuple_t>
     struct generator
     {
-        using type = std::tuple<typename tuple::join<inner_tuple_t, all_types_t>::type...>;
+        using type = std::tuple<typename join<inner_tuple_t, all_types_t>::type...>;
     };
 
 public:
@@ -270,14 +288,16 @@ template<class all_tuples_t, class new_tuples_t, size_t nCombinations, class... 
 struct break_or_combine</* bool bBreak = */ false, all_tuples_t, new_tuples_t, nCombinations, all_types_t...>
 {
     using type =
-        typename combine<tuple::join_t<all_tuples_t, new_tuples_t>, new_tuples_t, nCombinations, all_types_t...>::type;
+        typename combine<join_t<all_tuples_t, new_tuples_t>, new_tuples_t, nCombinations, all_types_t...>::type;
 };
 
 template<class all_tuples_t, class prev_new_tuples_t, size_t nCombinations, class... all_types_t>
 struct combine
 {
+private:
     using new_tuples_t = typename generate_layer<prev_new_tuples_t, all_types_t...>::type;
 
+public:
     using type = typename break_or_combine<
         nCombinations == std::tuple_size_v<all_tuples_t>,
         all_tuples_t,
@@ -286,7 +306,7 @@ struct combine
         all_types_t...>::type;
 };
 
-} // namespace details
+} // namespace permutations_details
 
 /**
     @struct permutations
@@ -304,12 +324,110 @@ template<class... all_types_t>
 struct permutations
 {
     static constexpr size_t nTypes        = sizeof...(all_types_t);
-    static constexpr size_t nCombinations = nTypes * (details::pow(nTypes, nTypes) - 1) / (nTypes - 1);
+    static constexpr size_t nCombinations = nTypes * (permutations_details::pow(nTypes, nTypes) - 1) / (nTypes - 1);
     using start_tuples_t                  = std::tuple<std::tuple<all_types_t>...>;
-    using type = typename details::combine<start_tuples_t, start_tuples_t, nCombinations, all_types_t...>::type;
+    using type =
+        typename permutations_details::combine<start_tuples_t, start_tuples_t, nCombinations, all_types_t...>::type;
 };
 
 template<class... all_types_t>
 using permutations_t = typename permutations<all_types_t...>::type;
 
-} // namespace qx::tuple
+
+
+
+// ------------------------------------------------- cartesian product -------------------------------------------------
+
+namespace cartesian_product_details
+{
+
+template<class prefix_t, class tuple_t>
+struct prepend_to_all;
+
+template<class prefix_t, class... rest_types_t>
+struct prepend_to_all<prefix_t, std::tuple<rest_types_t...>>
+{
+    using type = std::tuple<typename join<std::tuple<prefix_t>, rest_types_t>::type...>;
+};
+
+template<class... tuples_t>
+struct flatten;
+
+template<>
+struct flatten<>
+{
+    using type = std::tuple<>;
+};
+
+template<class... first_tuple_args_t>
+struct flatten<std::tuple<first_tuple_args_t...>>
+{
+    using type = std::tuple<first_tuple_args_t...>;
+};
+
+template<class... first_tuple_args_t, class... second_tuple_args_t, class... rest_tuples_t>
+struct flatten<std::tuple<first_tuple_args_t...>, std::tuple<second_tuple_args_t...>, rest_tuples_t...>
+{
+    using type = typename flatten<std::tuple<first_tuple_args_t..., second_tuple_args_t...>, rest_tuples_t...>::type;
+};
+
+} // namespace cartesian_product_details
+
+template<class... input_tuples_t>
+struct cartesian_product;
+
+template<>
+struct cartesian_product<>
+{
+    using type = std::tuple<std::tuple<>>;
+};
+
+template<class first_input_tuple_t, class... rest_input_tuples_t>
+struct cartesian_product<first_input_tuple_t, rest_input_tuples_t...>
+{
+private:
+    using tail_product_type = typename cartesian_product<rest_input_tuples_t...>::type;
+
+    template<class element_t>
+    struct expand
+    {
+        using type = typename cartesian_product_details::prepend_to_all<element_t, tail_product_type>::type;
+    };
+
+    template<class... elements_t>
+    struct expand_all;
+
+    template<class... elements_t>
+    struct expand_all<std::tuple<elements_t...>>
+    {
+        using type = typename cartesian_product_details::flatten<typename expand<elements_t>::type...>::type;
+    };
+
+public:
+    using type = typename expand_all<first_input_tuple_t>::type;
+};
+
+template<class... tuples_args_t>
+using cartesian_product_t = typename cartesian_product<tuples_args_t...>::type;
+
+
+
+
+// ------------------------------------------------------- all of ------------------------------------------------------
+
+template<template<class> class predicate_t, class... args_t>
+concept all_of_c = (predicate_t<args_t>::value && ...);
+
+template<template<class> class predicate_t, class tuple_t>
+struct all_of;
+
+template<template<class> class predicate_t, class... args_t>
+struct all_of<predicate_t, std::tuple<args_t...>>
+{
+    static constexpr bool value = all_of_c<predicate_t, args_t...>;
+};
+
+template<template<class> class predicate_t, class... args_t>
+constexpr bool all_of_v = all_of<predicate_t, args_t...>::value;
+
+} // namespace qx::tuple_utils

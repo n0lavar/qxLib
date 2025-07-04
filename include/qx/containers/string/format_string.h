@@ -51,8 +51,8 @@ using format_string_strong_checks = basic_format_string_strong_checks<char_type,
 
 template<class char_t, class... args_t>
 concept format_acceptable_args =
-    !(qx::tuple::contains_v<
-          tuple::remove_t<details::all_char_types, std::tuple<char_t>>,
+    !(qx::tuple_utils::contains_v<
+          tuple_utils::remove_t<details::all_char_types, std::tuple<char_t>>,
           std::remove_cv_t<std::remove_pointer_t<std::decay_t<args_t>>>>
       || ...);
 

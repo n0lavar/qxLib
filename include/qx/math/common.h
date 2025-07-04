@@ -114,7 +114,7 @@ constexpr int lcm(int nFirst, int nSecond);
     @details    About 2.22 times (positive powers)
                       1.7  times (positive and negative powers)
                       2.33 times (negative powers)
-                      faster then std::pow
+                      faster than std::pow
     @complexity O(log(power))
     @tparam     T      - Integral or floating point type
     @param      number - integral of floating point value
@@ -128,7 +128,7 @@ inline double pow(T number, int nPower);
     @brief  Max power of two in integer
     @tparam I      - Integral type
     @param  nValue - number
-    @retval        - max power of two in number
+    @retval        - max power of two in the number
 **/
 template<std::integral I>
 inline I maxpot(I nValue);

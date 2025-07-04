@@ -51,6 +51,6 @@ namespace qx
 {
 
 using char_type            = QX_CHAR_TYPE;
-using forbidden_char_types = tuple::remove_t<details::all_char_types, std::tuple<char_type>>;
+using forbidden_char_types = tuple_utils::remove_t<details::all_char_types, std::tuple<char_type>>;
 
 } // namespace qx

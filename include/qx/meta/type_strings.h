@@ -25,7 +25,7 @@ namespace qx
     @brief   The class allows you to get strings with information about the type,
              including its full name, name without template parameters
              and a list of template parameters separately
-    @details Strings are COMPILER IMPLEMENTATION DEPENDENT but can be used for a human readable output
+    @details Strings are COMPILER IMPLEMENTATION DEPENDENT but can be used for a human-readable output
     @tparam  T      - type to get information for
     @tparam  char_t - char type to use
     @author  Khrapov
