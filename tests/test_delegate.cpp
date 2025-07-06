@@ -273,6 +273,7 @@ struct get_get_result<return_t, void>
 // ------------------------------------------------------- traits ------------------------------------------------------
 
 // gcc and clang have a compiler bug not allowing to compile std::shared_ptr<T<std::tuple<void>>>
+// https://stackoverflow.com/questions/78068095/making-shared-pointer-of-template-class-using-stdtuplevoid-tries-to-form-a-r
 template<class T>
 struct replace_void
 {

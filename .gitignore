@@ -1,7 +1,5 @@
 build/*
 !build/*.DotSettings
-!build/*.DotSettings.user
-!build/
 
 */__pycache__/*
 html/*
