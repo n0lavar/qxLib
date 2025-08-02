@@ -312,7 +312,7 @@ $(function() {
 <div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160;    <span class="keywordflow">return</span> this-&gt;execute_internal(</div>
 <div class="line"><a name="l00242"></a><span class="lineno">  242</span>&#160;        [&amp;args...](<span class="keyword">const</span> <span class="keyword">typename</span> super_type::function_type&amp; <span class="keyword">function</span>)</div>
 <div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160;        {</div>
-<div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160;            return function(std::move(args)...);</div>
+<div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160;            return function(std::forward&lt;args_t&gt;(args)...);</div>
 <div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160;        },</div>
 <div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160;        [&amp;args...](<span class="keyword">const</span> <span class="keyword">typename</span> super_type::function_type&amp; <span class="keyword">function</span>)</div>
 <div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160;        {</div>
