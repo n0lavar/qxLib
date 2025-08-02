@@ -27,11 +27,10 @@ endif(GTEST_ROOT_DIR)
 # locate header
 find_path(GTEST_INCLUDE_DIR "gtest/gtest.h" PATHS ${_GTEST_HEADER_SEARCH_DIRS})
 include(FindPackageHandleStandardArgs)
-find_package_handle_standard_args(GTEST DEFAULT_MSG GTEST_INCLUDE_DIR)
+find_package_handle_standard_args(GTest DEFAULT_MSG GTEST_INCLUDE_DIR)
 
 if(GTEST_FOUND)
 	set(GTEST_INCLUDE_DIRS "${GTEST_INCLUDE_DIR}")
-    message(STATUS "GTEST_INCLUDE_DIR = ${GTEST_INCLUDE_DIR}")
     
     if (WIN32)
         set(GTEST_LIBRARIES
@@ -49,6 +48,4 @@ if(GTEST_FOUND)
             debug       "${GTEST_INCLUDE_DIR}/../lib/x86_64-linux-gnu/libgtest.a"
         )    
     endif()
-
-
 endif(GTEST_FOUND)

@@ -910,6 +910,29 @@ public:
     size_type remove_all(const string_t& sStr, size_type nBegin = 0, size_type nEnd = npos) noexcept;
 
     /**
+        @brief  Replace a substring with a given string
+        @todo   tests
+        @param  nBegin       - substring start index
+        @param  nSize        - substring size
+        @param  pszReplace   - new substring pointer
+        @param  nReplaceSize - new substring suze
+        @retval              - pos of char after last char of replaced string or npos
+    **/
+    size_type replace(size_type nBegin, size_type nSize, const_pointer pszReplace, size_t nReplaceSize) noexcept;
+
+    /**
+        @brief  Replace a substring with a given string
+        @todo   tests
+        @tparam replace_string_t - new substring type
+        @param  nBegin           - substring start index
+        @param  nSize            - substring size
+        @param  sReplace         - new substring
+        @retval                  - pos of char after last char of replaced string or npos
+    **/
+    template<class replace_string_t>
+    size_type replace(size_type nBegin, size_type nSize, const replace_string_t& sReplace) noexcept;
+
+    /**
         @brief  Replace first occurrence of sFind with sReplace
         @tparam find_string_t    - find string type
         @tparam replace_string_t - replace string type
@@ -1366,7 +1389,7 @@ public:
 
     /**
         @brief  Split string by separator
-        @tparam fwd_it_t    - forward iterator type
+        @tparam fwd_it_t   - forward iterator type
         @param  itSepFirst - separator begin iterator 
         @param  itSepLast  - separator end iterator 
         @retval            - string_view container
@@ -1680,6 +1703,24 @@ private:
     template<class incrementer_t, class fwd_it_t>
     size_type _find_last_not_of(fwd_it_t itBegin, fwd_it_t itEnd, size_type nEnd, const incrementer_t& incrementer)
         const noexcept;
+
+    /**
+        @brief  Get the size of a string like type object
+        @tparam string_view_like_t - string like type
+        @param  sValue             - string like type object
+        @retval                    - string like type object size
+    **/
+    template<class string_view_like_t>
+    static size_type _get_string_view_like_size(const string_view_like_t& sValue) noexcept;
+
+    /**
+        @brief  Get the data of a string like type object
+        @tparam string_view_like_t - string like type
+        @param  sValue             - string like type object
+        @retval                    - string like type object data
+    **/
+    template<class string_view_like_t>
+    static const_pointer _get_string_view_like_data(const string_view_like_t& sValue) noexcept;
 
 private:
     string_data<traits_t> m_Data;

@@ -10,6 +10,7 @@
 #pragma once
 
 #include <qx/macros/common.h>
+#include <qx/macros/names.h>
 #include <qx/math/common.h>
 
 #include <functional>

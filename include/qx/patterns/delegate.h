@@ -20,7 +20,7 @@
 namespace qx
 {
 
-// default constructible pipe element must not change the state of a pipe
+// default constructed pipe element must not change the state of a pipe
 template<class T>
 concept delegate_pipe_c = std::is_default_constructible_v<T> && !std::is_arithmetic_v<T> && requires(T t) {
     { t | t } -> std::convertible_to<T>;

@@ -241,7 +241,7 @@ return_t delegate<return_t, args_t...>::execute(args_t... args) const noexcept
     return this->execute_internal(
         [&args...](const typename super_type::function_type& function)
         {
-            return function(std::move(args)...);
+            return function(std::forward<args_t>(args)...);
         },
         [&args...](const typename super_type::function_type& function)
         {

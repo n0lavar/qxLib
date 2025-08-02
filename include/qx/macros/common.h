@@ -11,6 +11,9 @@
 #include <qx/containers/string/string_setup.h>
 #include <qx/meta/qualifiers.h>
 
+#define _QX_JOIN(symbol1, symbol2)    _QX_DO_JOIN(symbol1, symbol2)
+#define _QX_DO_JOIN(symbol1, symbol2) symbol1##symbol2
+
 /**
     @def     QX_EMPTY_MACRO
     @brief   Placeholder for disabled macros
@@ -18,25 +21,6 @@
              You can use it in the end of a macro to enforce user to add ; after it
 **/
 #define QX_EMPTY_MACRO static_assert(true)
-
-/**
-    @def   QX_STRINGIFY
-    @brief Macro can be used to turn any text in your code into a string,
-           but only the exact text between the parentheses
-           There are no variable dereferencing or macro substitutions or any other sort of thing done.
-    @param name - name to convert to the string
-**/
-#define QX_STRINGIFY(name) #name
-
-#define _QX_JOIN(symbol1, symbol2)    _QX_DO_JOIN(symbol1, symbol2)
-#define _QX_DO_JOIN(symbol1, symbol2) symbol1##symbol2
-
-/**
-    @def   QX_LINE_NAME
-    @brief Do magic! Creates a unique name using the line number
-    @param prefix - name prefix
-**/
-#define QX_LINE_NAME(prefix) _QX_JOIN(prefix, __LINE__)
 
 /**
     @brief Same as __LINE__, but fixes some problems when using it in constexpr context

@@ -41,7 +41,11 @@ public:
 
     constexpr bool operator==(const class_id& other) const noexcept;
     constexpr bool operator!=(const class_id& other) const noexcept;
+
+    // makes no sense except for use in ordered containers
     constexpr bool operator<(const class_id& other) const noexcept;
+    // makes no sense except for use in switch
+    constexpr operator size_t() const noexcept;
 
     /**
         @brief  Get class name
@@ -50,8 +54,8 @@ public:
     constexpr string_view get_class_name() const;
 
 private:
-    string_view m_svClassName = QX_TEXT("Empty name");
-    size_t      m_nId         = 0;
+    string_view m_svClassName;
+    size_t      m_nId = 0;
 };
 
 constexpr bool class_id::operator==(const class_id& other) const noexcept
@@ -67,6 +71,11 @@ constexpr bool class_id::operator!=(const class_id& other) const noexcept
 constexpr bool class_id::operator<(const class_id& other) const noexcept
 {
     return m_nId < other.m_nId;
+}
+
+constexpr class_id::operator size_t() const noexcept
+{
+    return m_nId;
 }
 
 constexpr string_view class_id::get_class_name() const

@@ -11,6 +11,7 @@
 #include <qx/containers/string/string.h>
 #include <qx/containers/string/string_view.h>
 #include <qx/macros/copyable_movable.h>
+#include <qx/macros/names.h>
 #include <qx/macros/suppress_warnings.h>
 #include <qx/patterns/singleton.h>
 

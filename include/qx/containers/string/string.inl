@@ -1145,6 +1145,40 @@ inline typename basic_string<char_t, traits_t>::size_type basic_string<char_t, t
 }
 
 template<class char_t, class traits_t>
+typename basic_string<char_t, traits_t>::size_type basic_string<char_t, traits_t>::replace(
+    size_type     nBegin,
+    size_type     nSize,
+    const_pointer pszReplace,
+    size_t        nReplaceSize) noexcept
+{
+    const size_type nStartSize = size();
+    const size_type nNewSize   = nStartSize - nSize + nReplaceSize;
+
+    _resize(nNewSize, string_resize_type::reserve);
+
+    std::memmove(
+        data() + nBegin + nReplaceSize,
+        data() + nBegin + nSize,
+        (nStartSize - nBegin - nSize) * sizeof(value_type));
+
+    std::memcpy(data() + nBegin, pszReplace, nReplaceSize * sizeof(value_type));
+
+    _resize(nNewSize);
+
+    return nBegin + nReplaceSize;
+}
+
+template<class char_t, class traits_t>
+template<class replace_string_t>
+typename basic_string<char_t, traits_t>::size_type basic_string<char_t, traits_t>::replace(
+    size_type               nBegin,
+    size_type               nSize,
+    const replace_string_t& sReplace) noexcept
+{
+    return replace(nBegin, nSize, _get_string_view_like_data(sReplace), _get_string_view_like_size(sReplace));
+}
+
+template<class char_t, class traits_t>
 template<class find_string_t, class replace_string_t>
 inline typename basic_string<char_t, traits_t>::size_type basic_string<char_t, traits_t>::replace(
     const find_string_t&    sFind,
@@ -1152,67 +1186,13 @@ inline typename basic_string<char_t, traits_t>::size_type basic_string<char_t, t
     size_type               nBegin,
     size_type               nEnd) noexcept
 {
-    auto get_size = []<class T>(const T& val) -> size_type
-    {
-        if constexpr (std::is_same_v<T, value_type>)
-        {
-            return 1;
-        }
-        else if constexpr (std::is_convertible_v<T, const_pointer>)
-        {
-            return traits_t::length(val);
-        }
-        else if constexpr (range_of_t_c<T, char_t>)
-        {
-            return val.size();
-        }
-        else
-        {
-            QX_STATIC_ASSERT_NO_INSTANTIATION("Unexpected type");
-            return 0;
-        }
-    };
-
-    auto get_data = []<class T>(const T& val) -> const_pointer
-    {
-        if constexpr (std::is_same_v<T, value_type>)
-        {
-            return &val;
-        }
-        else if constexpr (std::is_convertible_v<T, const_pointer>)
-        {
-            return val;
-        }
-        else if constexpr (range_of_t_c<T, char_t>)
-        {
-            return val.data();
-        }
-        else
-        {
-            QX_STATIC_ASSERT_NO_INSTANTIATION("Unexpected type");
-            return nullptr;
-        }
-    };
-
     if (size_type nPos = find(sFind, nBegin, nEnd); nPos != npos)
     {
-        const size_type nStartSize   = size();
-        const size_type nFindSize    = get_size(sFind);
-        const size_type nReplaceSize = get_size(sReplace);
-        const size_type nNewSize     = nStartSize - nFindSize + nReplaceSize;
-
-        _resize(nNewSize, string_resize_type::reserve);
-
-        std::memmove(
-            data() + nPos + nReplaceSize,
-            data() + nPos + nFindSize,
-            (nStartSize - nPos - nFindSize) * sizeof(value_type));
-
-        std::memcpy(data() + nPos, get_data(sReplace), nReplaceSize * sizeof(value_type));
-
-        _resize(nNewSize);
-
-        return nPos + nReplaceSize;
+        return replace(
+            nPos,
+            _get_string_view_like_size(sFind),
+            _get_string_view_like_data(sReplace),
+            _get_string_view_like_size(sReplace));
     }
     else
     {
@@ -2448,6 +2428,54 @@ inline typename basic_string<char_t, traits_t>::size_type basic_string<char_t, t
     }
 
     return npos;
+}
+
+template<class char_t, class traits_t>
+template<class string_view_like_t>
+inline typename basic_string<char_t, traits_t>::size_type basic_string<char_t, traits_t>::_get_string_view_like_size(
+    const string_view_like_t& sValue) noexcept
+{
+    if constexpr (std::is_same_v<string_view_like_t, value_type>)
+    {
+        return 1;
+    }
+    else if constexpr (std::is_convertible_v<string_view_like_t, const_pointer>)
+    {
+        return traits_t::length(sValue);
+    }
+    else if constexpr (range_of_t_c<string_view_like_t, char_t>)
+    {
+        return sValue.size();
+    }
+    else
+    {
+        QX_STATIC_ASSERT_NO_INSTANTIATION("Unexpected type");
+        return 0;
+    }
+}
+
+template<class char_t, class traits_t>
+template<class string_view_like_t>
+inline typename basic_string<char_t, traits_t>::const_pointer basic_string<char_t, traits_t>::
+    _get_string_view_like_data(const string_view_like_t& sValue) noexcept
+{
+    if constexpr (std::is_same_v<string_view_like_t, value_type>)
+    {
+        return &sValue;
+    }
+    else if constexpr (std::is_convertible_v<string_view_like_t, const_pointer>)
+    {
+        return sValue;
+    }
+    else if constexpr (range_of_t_c<string_view_like_t, char_t>)
+    {
+        return sValue.data();
+    }
+    else
+    {
+        QX_STATIC_ASSERT_NO_INSTANTIATION("Unexpected type");
+        return nullptr;
+    }
 }
 
 template<class char_t, class traits_t>

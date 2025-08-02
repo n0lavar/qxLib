@@ -13,6 +13,7 @@
 #include <qx/macros/common.h>
 #include <qx/macros/config.h>
 #include <qx/macros/copyable_movable.h>
+#include <qx/macros/names.h>
 #include <qx/macros/property.h>
 #include <qx/macros/static_assert.h>
 #include <qx/macros/suppress_warnings.h>
