@@ -23,7 +23,7 @@ inline void logger::log(
 }
 
 template<class... args_t>
-    requires(log_acceptable_args<args_t...>)
+    requires(log_acceptable_args_c<args_t...>)
 inline void logger::log(
     verbosity                              eVerbosity,
     format_string_strong_checks<args_t...> sFormat,

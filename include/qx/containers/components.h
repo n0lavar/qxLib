@@ -48,12 +48,43 @@ public:
     using pointer_type = std::unique_ptr<base_component_t>;
 
 private:
-    struct status : time_ordered_priority_key
+    /**
+
+        @class   status
+        @brief   A class that acts like time_ordered_priority_key but has a status field
+        @author  Khrapov
+        @date    10.08.2025
+
+    **/
+    class status : public time_ordered_priority_key
     {
-        flags<component_status> statusFlags = component_status::default_value;
+    public:
+        constexpr status() noexcept = default;
+
+        /**
+            @brief status object constructor
+            @param ePriority    - key priority
+            @param eStatusFlags - object status
+        **/
+        status(priority ePriority, flags<component_status> eStatusFlags) noexcept;
+
+        /**
+            @brief  Get object status
+            @retval  - object status
+        **/
+        constexpr flags<component_status> get_status_flags() const noexcept;
+
+        /**
+            @brief Set object status
+            @param eStatusFlags - object status
+        **/
+        constexpr void set_status_flags(flags<component_status> eStatusFlags) noexcept;
 
         using time_ordered_priority_key::operator<;
         constexpr bool operator==(const status&) const noexcept = default;
+
+    private:
+        flags<component_status> m_eStatusFlags = component_status::default_value;
     };
 
     struct class_data

@@ -122,7 +122,7 @@ constexpr int lcm(int nFirst, int nSecond);
     @retval            - number ^ power
 **/
 template<class T>
-inline double pow(T number, int nPower);
+constexpr double pow(T number, int nPower);
 
 /**
     @brief  Max power of two in integer

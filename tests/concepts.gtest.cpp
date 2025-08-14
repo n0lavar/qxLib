@@ -77,30 +77,6 @@ static_assert(!qx::is_random_access_iterator<int>);
 static_assert(!qx::is_random_access_iterator<void>);
 static_assert(!qx::is_random_access_iterator<std::vector<int>>);
 
-// ---------------------------------------------------- enumeration ----------------------------------------------------
-
-enum ETest1
-{
-    a,
-    b
-};
-
-enum class ETest2
-{
-    a,
-    b
-};
-
-struct S;
-
-static_assert(qx::is_enumeration<ETest1>);
-static_assert(qx::is_enumeration<ETest2>);
-static_assert(!qx::is_enumeration<int>);
-static_assert(!qx::is_enumeration<vec_int>);
-static_assert(!qx::is_enumeration<vec_float>);
-static_assert(!qx::is_enumeration<C<int>>);
-static_assert(!qx::is_enumeration<S>);
-
 // ------------------------------------------------------ callable -----------------------------------------------------
 
 struct test1

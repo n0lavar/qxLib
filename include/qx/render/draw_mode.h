@@ -72,4 +72,15 @@ enum class draw_mode
     triangles_fan,
 };
 
+/**
+    @brief  Returns true if the specified draw mode draws triangles
+    @param  eDrawMode - draw mode to check
+    @retval           - true if the specified draw mode draws triangles
+**/
+constexpr bool is_triandles(draw_mode eDrawMode)
+{
+    return eDrawMode == draw_mode::triangles_list || eDrawMode == draw_mode::triangles_strip
+           || eDrawMode == draw_mode::triangles_fan;
 }
+
+} // namespace qx

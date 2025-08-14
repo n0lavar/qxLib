@@ -29,6 +29,8 @@ namespace qx
 template<class T>
 class link
 {
+    QX_COPYMOVABLE(link);
+
     // friend templated link class
     friend class link;
 

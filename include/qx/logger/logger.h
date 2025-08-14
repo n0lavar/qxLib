@@ -1,9 +1,9 @@
-/**
+﻿/**
 
     @file      logger.h
     @author    Khrapov
     @date      17.06.2019
-    @copyright � Nick Khrapov, 2021. All right reserved.
+    @copyright © Nick Khrapov, 2021. All right reserved.
 
 **/
 #pragma once
@@ -41,7 +41,7 @@ namespace qx
 {
 
 template<class... args_t>
-concept log_acceptable_args = (sizeof...(args_t) > 0 && format_acceptable_args<char_type, args_t...>);
+concept log_acceptable_args_c = (sizeof...(args_t) > 0 && format_acceptable_args_c<char_type, args_t...>);
 
 /**
 
@@ -83,7 +83,7 @@ public:
         @param  args       - additional args for format
     **/
     template<class... args_t>
-        requires(log_acceptable_args<args_t...>)
+        requires(log_acceptable_args_c<args_t...>)
     void log(
         verbosity                              eVerbosity,
         format_string_strong_checks<args_t...> sFormat,

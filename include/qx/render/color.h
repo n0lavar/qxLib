@@ -36,9 +36,9 @@ namespace qx
 **/
 class color
 {
-public:
     QX_COPYMOVABLE(color);
 
+public:
     constexpr color() noexcept = default;
 
     /**

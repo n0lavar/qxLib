@@ -40,4 +40,4 @@
     @param methodName - method name
 **/
 #define QX_FULL_METHOD_NAME(className, methodName) \
-    ((void)sizeof(&className::methodName), QX_STRINGIFY(className) "::" QX_STRINGIFY(methodName)))
+    ((void)sizeof(&className::methodName), QX_STRINGIFY(className) "::" QX_STRINGIFY(methodName))

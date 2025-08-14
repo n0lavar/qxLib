@@ -8,14 +8,20 @@
 **/
 #pragma once
 
+#include <qx/macros/common.h>
+
 /**
     @def   QX_COPYABLE
     @brief Define class as default copyable
     @param className - class name
 **/
 #define QX_COPYABLE(className)                        \
+public:                                               \
     className(const className&)            = default; \
-    className& operator=(const className&) = default
+    className& operator=(const className&) = default; \
+                                                      \
+private:                                              \
+    QX_EMPTY_MACRO
 
 /**
     @def   QX_MOVABLE
@@ -23,8 +29,12 @@
     @param className - class name
 **/
 #define QX_MOVABLE(className)                             \
+public:                                                   \
     className(className&&) noexcept            = default; \
-    className& operator=(className&&) noexcept = default
+    className& operator=(className&&) noexcept = default; \
+                                                          \
+private:                                                  \
+    QX_EMPTY_MACRO
 
 /**
     @def   QX_COPYMOVABLE

@@ -115,6 +115,9 @@ protected:
 template<class observer_t>
 class subject : public base_subject
 {
+    QX_NONCOPYABLE(subject);
+    QX_MOVABLE(subject);
+
     template<class base_iterator_t>
     class base_iterator : public base_iterator_t
     {
@@ -168,9 +171,6 @@ public:
     using notify_func            = std::function<void(observer_t*)>;
 
 public:
-    QX_NONCOPYABLE(subject);
-    QX_MOVABLE(subject);
-
     subject() = default;
     virtual ~subject() override;
 

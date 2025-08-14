@@ -26,6 +26,9 @@ public:
     base_smart_ptr_ref_adapter()               = delete;
     base_smart_ptr_ref_adapter(std::nullptr_t) = delete;
 
+    operator T&() noexcept;
+    operator const T&() const noexcept;
+
 protected:
     base_smart_ptr_ref_adapter(base_smart_ptr_ref_adapter&&) noexcept            = default;
     base_smart_ptr_ref_adapter& operator=(base_smart_ptr_ref_adapter&&) noexcept = default;
@@ -50,7 +53,7 @@ public:
     using pointer               = typename super::pointer;
     using reference             = typename super::reference;
 
-    super::reference get() const noexcept;
+    typename super::reference get() const noexcept;
 
 protected:
     overload_functions_smart_ptr_ref_adapter(overload_functions_smart_ptr_ref_adapter&&) noexcept            = default;

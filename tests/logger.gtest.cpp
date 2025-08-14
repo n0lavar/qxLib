@@ -19,39 +19,39 @@
 #include <filesystem>
 #include <regex>
 
-static_assert(qx::log_acceptable_args<int>);
-static_assert(qx::log_acceptable_args<float>);
-static_assert(qx::log_acceptable_args<int, float>);
+static_assert(qx::log_acceptable_args_c<int>);
+static_assert(qx::log_acceptable_args_c<float>);
+static_assert(qx::log_acceptable_args_c<int, float>);
 
 using allowed_type = qx::char_type;
-static_assert(qx::log_acceptable_args<allowed_type>);
-static_assert(qx::log_acceptable_args<const allowed_type>);
-static_assert(qx::log_acceptable_args<allowed_type*>);
-static_assert(qx::log_acceptable_args<const allowed_type*>);
-static_assert(qx::log_acceptable_args<allowed_type[10]>);
-static_assert(qx::log_acceptable_args<const allowed_type[10]>);
+static_assert(qx::log_acceptable_args_c<allowed_type>);
+static_assert(qx::log_acceptable_args_c<const allowed_type>);
+static_assert(qx::log_acceptable_args_c<allowed_type*>);
+static_assert(qx::log_acceptable_args_c<const allowed_type*>);
+static_assert(qx::log_acceptable_args_c<allowed_type[10]>);
+static_assert(qx::log_acceptable_args_c<const allowed_type[10]>);
 
-static_assert(qx::log_acceptable_args<int, float, allowed_type>);
-static_assert(qx::log_acceptable_args<int, float, const allowed_type>);
-static_assert(qx::log_acceptable_args<int, float, allowed_type*>);
-static_assert(qx::log_acceptable_args<int, float, const allowed_type*>);
-static_assert(qx::log_acceptable_args<int, float, allowed_type[10]>);
-static_assert(qx::log_acceptable_args<int, float, const allowed_type[10]>);
+static_assert(qx::log_acceptable_args_c<int, float, allowed_type>);
+static_assert(qx::log_acceptable_args_c<int, float, const allowed_type>);
+static_assert(qx::log_acceptable_args_c<int, float, allowed_type*>);
+static_assert(qx::log_acceptable_args_c<int, float, const allowed_type*>);
+static_assert(qx::log_acceptable_args_c<int, float, allowed_type[10]>);
+static_assert(qx::log_acceptable_args_c<int, float, const allowed_type[10]>);
 
 using forbidden_type = std::tuple_element_t<0, qx::forbidden_char_types>;
-static_assert(!qx::log_acceptable_args<forbidden_type>);
-static_assert(!qx::log_acceptable_args<const forbidden_type>);
-static_assert(!qx::log_acceptable_args<forbidden_type*>);
-static_assert(!qx::log_acceptable_args<const forbidden_type*>);
-static_assert(!qx::log_acceptable_args<forbidden_type[10]>);
-static_assert(!qx::log_acceptable_args<const forbidden_type[10]>);
+static_assert(!qx::log_acceptable_args_c<forbidden_type>);
+static_assert(!qx::log_acceptable_args_c<const forbidden_type>);
+static_assert(!qx::log_acceptable_args_c<forbidden_type*>);
+static_assert(!qx::log_acceptable_args_c<const forbidden_type*>);
+static_assert(!qx::log_acceptable_args_c<forbidden_type[10]>);
+static_assert(!qx::log_acceptable_args_c<const forbidden_type[10]>);
 
-static_assert(!qx::log_acceptable_args<int, float, forbidden_type>);
-static_assert(!qx::log_acceptable_args<int, float, const forbidden_type>);
-static_assert(!qx::log_acceptable_args<int, float, forbidden_type*>);
-static_assert(!qx::log_acceptable_args<int, float, const forbidden_type*>);
-static_assert(!qx::log_acceptable_args<int, float, forbidden_type[10]>);
-static_assert(!qx::log_acceptable_args<int, float, const forbidden_type[10]>);
+static_assert(!qx::log_acceptable_args_c<int, float, forbidden_type>);
+static_assert(!qx::log_acceptable_args_c<int, float, const forbidden_type>);
+static_assert(!qx::log_acceptable_args_c<int, float, forbidden_type*>);
+static_assert(!qx::log_acceptable_args_c<int, float, const forbidden_type*>);
+static_assert(!qx::log_acceptable_args_c<int, float, forbidden_type[10]>);
+static_assert(!qx::log_acceptable_args_c<int, float, const forbidden_type[10]>);
 
 QX_PUSH_SUPPRESS_MSVC_WARNINGS(4866 5233);
 

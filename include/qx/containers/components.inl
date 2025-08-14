@@ -11,6 +11,25 @@ namespace qx
 {
 
 template<std::derived_from<rtti_pure_base> base_component_t>
+components<base_component_t>::status::status(priority ePriority, flags<component_status> eStatusFlags) noexcept
+    : time_ordered_priority_key(ePriority)
+    , m_eStatusFlags(eStatusFlags)
+{
+}
+
+template<std::derived_from<rtti_pure_base> base_component_t>
+constexpr flags<component_status> components<base_component_t>::status::get_status_flags() const noexcept
+{
+    return m_eStatusFlags;
+}
+
+template<std::derived_from<rtti_pure_base> base_component_t>
+constexpr void components<base_component_t>::status::set_status_flags(flags<component_status> eStatusFlags) noexcept
+{
+    m_eStatusFlags = eStatusFlags;
+}
+
+template<std::derived_from<rtti_pure_base> base_component_t>
 typename components<base_component_t>::class_data& components<base_component_t>::class_data::get_or_add_class_data(
     class_id id) noexcept
 {
@@ -38,10 +57,7 @@ component_t* components<base_component_t>::add(
         pRawComponent,
         [ePriority, statusFlags, pRawComponent](class_data& classData)
         {
-            status status;
-            status.ePriority   = ePriority;
-            status.statusFlags = statusFlags;
-            classData.priorityCache.emplace(status, pRawComponent);
+            classData.priorityCache.emplace(status(ePriority, statusFlags), pRawComponent);
         });
     classData.components.push_back(std::move(pComponent));
     return pRawComponent;
@@ -89,7 +105,7 @@ component_t* components<base_component_t>::try_get(bool bIncludeDisabled) noexce
         classData.priorityCache,
         [bIncludeDisabled](const auto& pair)
         {
-            return bIncludeDisabled || !pair.first.statusFlags.contains(component_status::disabled);
+            return bIncludeDisabled || !pair.first.get_status_flags().contains(component_status::disabled);
         });
 
     return it != classData.priorityCache.end() ? static_cast<component_t*>(it->second) : nullptr;
@@ -112,7 +128,7 @@ component_t* components<base_component_t>::try_get(class_id id, bool bIncludeDis
         m_RootClass.priorityCache,
         [id, bIncludeDisabled](const auto& pair)
         {
-            return (bIncludeDisabled || !pair.first.statusFlags.contains(component_status::disabled))
+            return (bIncludeDisabled || !pair.first.get_status_flags().contains(component_status::disabled))
                    && pair.second->is_derived_from_id(id);
         });
 
@@ -164,7 +180,7 @@ auto components<base_component_t>::view() noexcept
                [](const auto& pair)
                {
                    return pair.second->template is_derived_from<component_t>()
-                          && !pair.first.statusFlags.contains(component_status::disabled);
+                          && !pair.first.get_status_flags().contains(component_status::disabled);
                })
            | std::views::transform(
                [](auto& pair) -> component_t&
@@ -183,7 +199,7 @@ auto components<base_component_t>::view() const noexcept
                [](const auto& pair)
                {
                    return pair.second->template is_derived_from<component_t>()
-                          && !pair.first.statusFlags.contains(component_status::disabled);
+                          && !pair.first.get_status_flags().contains(component_status::disabled);
                })
            | std::views::transform(
                [](const auto& pair) -> const component_t&
@@ -197,7 +213,7 @@ std::optional<flags<component_status>> components<base_component_t>::get_compone
     const base_component_t* pRawComponent) const noexcept
 {
     std::optional<status> optComponentStatus = get_status(pRawComponent);
-    return optComponentStatus ? std::optional(optComponentStatus->statusFlags) : std::nullopt;
+    return optComponentStatus ? std::optional(optComponentStatus->get_status_flags()) : std::nullopt;
 }
 
 template<std::derived_from<rtti_pure_base> base_component_t>
@@ -209,7 +225,7 @@ bool components<base_component_t>::set_component_status(
     if (!optComponentStatus)
         return false;
 
-    optComponentStatus->statusFlags = newStatus;
+    optComponentStatus->set_status_flags(newStatus);
     return set_status(pRawComponent, *optComponentStatus);
 }
 
@@ -244,7 +260,7 @@ std::optional<priority> components<base_component_t>::get_component_priority(
     const base_component_t* pRawComponent) const noexcept
 {
     std::optional<status> optComponentStatus = get_status(pRawComponent);
-    return optComponentStatus ? std::optional(optComponentStatus->ePriority) : std::nullopt;
+    return optComponentStatus ? std::optional(optComponentStatus->get_priority()) : std::nullopt;
 }
 
 template<std::derived_from<rtti_pure_base> base_component_t>
@@ -256,7 +272,7 @@ bool components<base_component_t>::set_component_priority(
     if (!optComponentStatus)
         return false;
 
-    optComponentStatus->ePriority = eNewComponentPriority;
+    optComponentStatus->set_priority(eNewComponentPriority);
     return set_status(pRawComponent, *optComponentStatus);
 }
 

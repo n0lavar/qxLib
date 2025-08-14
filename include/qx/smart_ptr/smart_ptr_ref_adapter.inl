@@ -11,6 +11,18 @@ namespace qx::details
 {
 
 template<template<class, class...> class pointer_t, class T, class... args_t>
+base_smart_ptr_ref_adapter<pointer_t, T, args_t...>::operator T&() noexcept
+{
+    return *get();
+}
+
+template<template<class, class...> class pointer_t, class T, class... args_t>
+base_smart_ptr_ref_adapter<pointer_t, T, args_t...>::operator const T&() const noexcept
+{
+    return *get();
+}
+
+template<template<class, class...> class pointer_t, class T, class... args_t>
 template<class... constructor_args_t>
 base_smart_ptr_ref_adapter<pointer_t, T, args_t...>::base_smart_ptr_ref_adapter(constructor_args_t&&... args)
     : original_pointer_type(std::forward<constructor_args_t>(args)...)

@@ -32,13 +32,13 @@ namespace qx
 template<class vector_t>
 class basic_rect
 {
+    QX_COPYMOVABLE(basic_rect);
+
 public:
     using vector_type = vector_t;
     using value_type  = typename vector_type::value_type;
 
 public:
-    QX_COPYMOVABLE(basic_rect);
-
     constexpr basic_rect() noexcept = default;
 
     /**

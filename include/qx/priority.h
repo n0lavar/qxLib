@@ -34,36 +34,68 @@ enum class priority : u8
 };
 
 /**
-    @struct time_ordered_priority_key
-    @brief  A structure that can be used as a key in ordered containers
-            so that items are ordered in descending order of priority but ascending order of creation time.
+
+    @class   time_ordered_priority_key
+    @brief   A class that can be used as a key in ordered containers
+             so that items are ordered in descending order of priority but ascending order of creation time.
+    @author  Khrapov
+    @date    10.08.2025
+
 **/
-struct time_ordered_priority_key
+class time_ordered_priority_key
 {
+public:
     constexpr time_ordered_priority_key() noexcept = default;
+
+    /**
+        @brief time_ordered_priority_key object constructor
+        @param ePriority - key priority
+    **/
     time_ordered_priority_key(priority ePriority) noexcept;
+
+    /**
+        @brief  Get key priority
+        @retval  - key priority
+    **/
+    priority get_priority() const noexcept;
+
+    /**
+        @brief Set key priority
+        @param ePriority - key priority
+    **/
+    constexpr void set_priority(priority ePriority) noexcept;
+
     constexpr bool operator==(const time_ordered_priority_key&) const noexcept = default;
     constexpr auto operator<(const time_ordered_priority_key& other) const noexcept;
 
-    priority ePriority = priority::normal;
-    size_t   nId       = 0;
-
 private:
-    static inline std::atomic_size_t nIdCounter { 0 };
+    static inline std::atomic_size_t m_nIdCounter { 0 };
+    priority                         m_ePriority = priority::normal;
+    size_t                           m_nId       = 0;
 };
 
 inline time_ordered_priority_key::time_ordered_priority_key(priority ePriority) noexcept
-    : ePriority(ePriority)
-    , nId(++nIdCounter)
+    : m_ePriority(ePriority)
+    , m_nId(++m_nIdCounter)
 {
+}
+
+inline priority time_ordered_priority_key::get_priority() const noexcept
+{
+    return m_ePriority;
+}
+
+constexpr void time_ordered_priority_key::set_priority(priority ePriority) noexcept
+{
+    m_ePriority = ePriority;
 }
 
 constexpr auto time_ordered_priority_key::operator<(const time_ordered_priority_key& other) const noexcept
 {
-    if (ePriority != other.ePriority)
-        return ePriority > other.ePriority;
+    if (m_ePriority != other.m_ePriority)
+        return m_ePriority > other.m_ePriority;
     else
-        return nId < other.nId;
+        return m_nId < other.m_nId;
 }
 
 } // namespace qx

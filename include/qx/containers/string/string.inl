@@ -1,9 +1,9 @@
-/**
+﻿/**
 
     @file      string.inl
     @author    Khrapov
     @date      4.09.2019
-    @copyright � Nick Khrapov, 2021. All right reserved.
+    @copyright © Nick Khrapov, 2021. All right reserved.
 
 **/
 
@@ -121,7 +121,7 @@ inline void basic_string<char_t, traits_t>::assign(const string_t& sAnother) noe
 
 template<class char_t, class traits_t>
 template<class... args_t>
-    requires format_acceptable_args<char_t, args_t...>
+    requires format_acceptable_args_c<char_t, args_t...>
 void basic_string<char_t, traits_t>::format(
     const format_string_type<std::type_identity_t<args_t>...> sFormat,
     args_t&&... args)
@@ -131,7 +131,7 @@ void basic_string<char_t, traits_t>::format(
 
 template<class char_t, class traits_t>
 template<class... args_t>
-    requires format_acceptable_args<char_t, args_t...>
+    requires format_acceptable_args_c<char_t, args_t...>
 basic_string<char_t, traits_t> basic_string<char_t, traits_t>::static_format(
     const format_string_type<std::type_identity_t<args_t>...> sFormat,
     args_t&&... args)
@@ -141,7 +141,7 @@ basic_string<char_t, traits_t> basic_string<char_t, traits_t>::static_format(
 
 template<class char_t, class traits_t>
 template<class... args_t>
-    requires format_acceptable_args<char_t, args_t...>
+    requires format_acceptable_args_c<char_t, args_t...>
 void basic_string<char_t, traits_t>::append_format(
     const format_string_type<std::type_identity_t<args_t>...> sFormat,
     args_t&&... args)
@@ -151,7 +151,7 @@ void basic_string<char_t, traits_t>::append_format(
 
 template<class char_t, class traits_t>
 template<class... args_t>
-    requires format_acceptable_args<char_t, args_t...>
+    requires format_acceptable_args_c<char_t, args_t...>
 void basic_string<char_t, traits_t>::vformat(string_view svFormat, args_t&&... args)
 {
     clear();
@@ -160,7 +160,7 @@ void basic_string<char_t, traits_t>::vformat(string_view svFormat, args_t&&... a
 
 template<class char_t, class traits_t>
 template<class... args_t>
-    requires format_acceptable_args<char_t, args_t...>
+    requires format_acceptable_args_c<char_t, args_t...>
 inline basic_string<char_t, traits_t> basic_string<char_t, traits_t>::static_vformat(
     string_view svFormat,
     args_t&&... args)
@@ -172,7 +172,7 @@ inline basic_string<char_t, traits_t> basic_string<char_t, traits_t>::static_vfo
 
 template<class char_t, class traits_t>
 template<class... args_t>
-    requires format_acceptable_args<char_t, args_t...>
+    requires format_acceptable_args_c<char_t, args_t...>
 inline void basic_string<char_t, traits_t>::append_vformat(string_view svFormat, args_t&&... args)
 {
     if (!svFormat.empty())

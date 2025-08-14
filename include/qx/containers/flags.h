@@ -60,6 +60,8 @@ namespace qx
 template<enumeration_c enum_t>
 class flags
 {
+    QX_COPYMOVABLE(flags);
+
 public:
     using underlying_type = std::underlying_type_t<enum_t>;
 
@@ -149,8 +151,6 @@ public:
     constexpr flags operator^(enum_t eFlag) const noexcept;
 
     // ------------------------------------------------ flags operators ------------------------------------------------
-
-    QX_COPYMOVABLE(flags);
 
     /**
         @brief  Add all the flags specified

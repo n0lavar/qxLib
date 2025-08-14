@@ -8,7 +8,7 @@
 **/
 #pragma once
 
-#include <qx/macros/config.h>
+#include <qx/macros/common.h>
 
 #if QX_WIN
 
@@ -18,33 +18,32 @@
         @param warnings - MSVC warnings numbers separated by space
     **/
     #define QX_PUSH_SUPPRESS_MSVC_WARNINGS(warnings) \
-        __pragma(warning(push));                     \
-        __pragma(warning(disable : warnings))
+        __pragma(warning(push)) __pragma(warning(disable : warnings)) QX_EMPTY_MACRO
 
     /**
         @def   QX_PUSH_SUPPRESS_ALL_WARNINGS
         @brief Disable all warnings
     **/
-    #define QX_PUSH_SUPPRESS_ALL_WARNINGS() __pragma(warning(push, 0))
+    #define QX_PUSH_SUPPRESS_ALL_WARNINGS() __pragma(warning(push, 0)) QX_EMPTY_MACRO
 
     /**
         @def   QX_POP_SUPPRESS_WARNINGS
         @brief Enable all warnings
     **/
-    #define QX_POP_SUPPRESS_WARNINGS() __pragma(warning(pop))
+    #define QX_POP_SUPPRESS_WARNINGS() __pragma(warning(pop)) QX_EMPTY_MACRO
 
     /**
         @brief Force disable MSVC warnings, including all nested header includes
         @note  Prefer using QX_PUSH_SUPPRESS_MSVC_WARNINGS and QX_POP_SUPPRESS_WARNINGS
         @param warnings - MSVC warnings numbers separated by space
     **/
-    #define QX_DISABLE_MSVC_WARNINGS(warnings) __pragma(warning(disable : warnings))
+    #define QX_DISABLE_MSVC_WARNINGS(warnings) __pragma(warning(disable : warnings)) QX_EMPTY_MACRO
 
     /**
         @brief Enable warnings after QX_DISABLE_MSVC_WARNINGS
         @param warnings - MSVC warnings numbers separated by space
     **/
-    #define QX_RESTORE_MSVC_WARNINGS(warnings) __pragma(warning(default : warnings))
+    #define QX_RESTORE_MSVC_WARNINGS(warnings) __pragma(warning(default : warnings)) QX_EMPTY_MACRO
 
 #else
 

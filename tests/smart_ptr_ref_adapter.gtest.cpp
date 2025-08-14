@@ -48,8 +48,10 @@ static void test_adapter(
 {
     EXPECT_EQ(test_class::get_objects_alive(), 2);
 
-    std::string dataObject1 = object1->get_data();
-    std::string dataObject2 = object2.get().get_data();
+    std::string dataObject1  = object1->get_data();
+    std::string dataObject21 = object2.get().get_data();
+    std::string dataObject22 = static_cast<T&>(object2).get_data();
+    EXPECT_EQ(dataObject21, dataObject22);
 
     const size_t object1Hash        = std::hash<qx::details::smart_ptr_ref_adapter<pointer_t, T, args_t...>>()(object1);
     const size_t object1PointerHash = std::hash<T*>()(&object1.get());
@@ -60,17 +62,17 @@ static void test_adapter(
     EXPECT_EQ(object2Hash, object2PointerHash);
 
     EXPECT_FALSE(dataObject1.empty());
-    EXPECT_FALSE(dataObject2.empty());
+    EXPECT_FALSE(dataObject21.empty());
 
     object1.swap(object2);
     EXPECT_EQ(test_class::get_objects_alive(), 2);
     EXPECT_EQ(dataObject1, object2->get_data());
-    EXPECT_EQ(dataObject2, object1->get_data());
+    EXPECT_EQ(dataObject21, object1->get_data());
 
     std::swap(object1, object2);
     EXPECT_EQ(test_class::get_objects_alive(), 2);
     EXPECT_EQ(dataObject1, object1->get_data());
-    EXPECT_EQ(dataObject2, object2->get_data());
+    EXPECT_EQ(dataObject21, object2->get_data());
 
 #if 0 // should not compile (ptr constructor)
     pointer_t<T, args_t...> ptr1;
@@ -92,7 +94,7 @@ static void test_adapter(
 #endif
 
     object1.reset(std::move(object2));
-    EXPECT_EQ(dataObject2, object1->get_data());
+    EXPECT_EQ(dataObject21, object1->get_data());
     EXPECT_EQ(test_class::get_objects_alive(), 1);
 }
 

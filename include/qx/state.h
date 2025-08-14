@@ -26,11 +26,11 @@ namespace qx
 template<class T>
 class state
 {
+    QX_COPYMOVABLE(state);
+
     friend struct std::hash<state<T>>;
 
 public:
-    QX_COPYMOVABLE(state);
-
     state() noexcept = default;
 
     /**

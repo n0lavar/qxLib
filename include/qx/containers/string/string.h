@@ -1,9 +1,9 @@
-/**
+﻿/**
 
     @file      string.h
     @author    Khrapov
     @date      4.09.2019
-    @copyright � Nick Khrapov, 2021. All right reserved.
+    @copyright © Nick Khrapov, 2021. All right reserved.
 
 **/
 #pragma once
@@ -197,7 +197,7 @@ public:
         @param   args    - format arguments
     **/
     template<class... args_t>
-        requires format_acceptable_args<char_t, args_t...>
+        requires format_acceptable_args_c<char_t, args_t...>
     void format(const format_string_type<std::type_identity_t<args_t>...> sFormat, args_t&&... args);
 
     /**
@@ -209,7 +209,7 @@ public:
         @retval          - formatted string
     **/
     template<class... args_t>
-        requires format_acceptable_args<char_t, args_t...>
+        requires format_acceptable_args_c<char_t, args_t...>
     static basic_string static_format(
         const format_string_type<std::type_identity_t<args_t>...> sFormat,
         args_t&&... args);
@@ -222,7 +222,7 @@ public:
         @param   args    - format arguments
     **/
     template<class... args_t>
-        requires format_acceptable_args<char_t, args_t...>
+        requires format_acceptable_args_c<char_t, args_t...>
     void append_format(const format_string_type<std::type_identity_t<args_t>...> sFormat, args_t&&... args);
 
     /**
@@ -233,7 +233,7 @@ public:
         @param   args     - format arguments
     **/
     template<class... args_t>
-        requires format_acceptable_args<char_t, args_t...>
+        requires format_acceptable_args_c<char_t, args_t...>
     void vformat(string_view svFormat, args_t&&... args);
 
     /**
@@ -245,7 +245,7 @@ public:
         @retval           - formatted string
     **/
     template<class... args_t>
-        requires format_acceptable_args<char_t, args_t...>
+        requires format_acceptable_args_c<char_t, args_t...>
     static basic_string static_vformat(string_view svFormat, args_t&&... args);
 
     /**
@@ -256,7 +256,7 @@ public:
         @param   args     - format arguments
     **/
     template<class... args_t>
-        requires format_acceptable_args<char_t, args_t...>
+        requires format_acceptable_args_c<char_t, args_t...>
     void append_vformat(string_view svFormat, args_t&&... args);
 
     /**

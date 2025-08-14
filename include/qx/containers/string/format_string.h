@@ -50,7 +50,7 @@ template<class... args_t>
 using format_string_strong_checks = basic_format_string_strong_checks<char_type, std::type_identity_t<args_t>...>;
 
 template<class char_t, class... args_t>
-concept format_acceptable_args =
+concept format_acceptable_args_c =
     !(qx::tuple_utils::contains_v<
           tuple_utils::remove_t<details::all_char_types, std::tuple<char_t>>,
           std::remove_cv_t<std::remove_pointer_t<std::decay_t<args_t>>>>
@@ -58,8 +58,8 @@ concept format_acceptable_args =
 
 struct basic_formatter
 {
-    template<class format_parse_context_type>
-    constexpr auto parse(format_parse_context_type& pc)
+    template<class format_parse_context_t>
+    constexpr auto parse(format_parse_context_t& pc)
     {
         return pc.begin();
     }

@@ -79,52 +79,63 @@ constexpr int lcm(int nFirst, int nSecond)
 }
 
 template<class T>
-inline double pow(T number, int nPower)
+constexpr double pow(T number, int nPower)
 {
     static_assert(std::is_integral_v<T> || std::is_floating_point_v<T>, "Integral or floating point required");
 
-    const bool   bNegativePower = nPower < 0;
-    const size_t nPositivePower = static_cast<size_t>(std::abs(nPower));
-
-    double fResult = 1.0;
-    switch (nPositivePower)
+    if (!std::is_constant_evaluated())
     {
-    case 0:
-        break;
+        const bool   bNegativePower = nPower < 0;
+        const size_t nPositivePower = static_cast<size_t>(std::abs(nPower));
 
-    case 1:
-        fResult = static_cast<double>(number);
-        break;
-
-    case 2:
-        fResult = static_cast<double>(number * number);
-        break;
-
-    default:
-        const std::bitset<std::numeric_limits<int>::digits> powerBitSet(nPositivePower);
-
-        std::array<double, std::numeric_limits<int>::digits> powers;
-
-        powers[0] = static_cast<double>(number);
-
-        size_t nCurPower = 1;
-        size_t nCurIndex = 1;
-
-        while (nCurPower < nPositivePower)
+        double fResult = 1.0;
+        switch (nPositivePower)
         {
-            powers[nCurIndex] = powers[nCurIndex - 1] * powers[nCurIndex - 1];
-            nCurPower *= 2;
-            nCurIndex++;
+        case 0:
+            break;
+
+        case 1:
+            fResult = static_cast<double>(number);
+            break;
+
+        case 2:
+            fResult = static_cast<double>(number * number);
+            break;
+
+        default:
+            const std::bitset<std::numeric_limits<int>::digits> powerBitSet(nPositivePower);
+
+            std::array<double, std::numeric_limits<int>::digits> powers;
+
+            powers[0] = static_cast<double>(number);
+
+            size_t nCurPower = 1;
+            size_t nCurIndex = 1;
+
+            while (nCurPower < nPositivePower)
+            {
+                powers[nCurIndex] = powers[nCurIndex - 1] * powers[nCurIndex - 1];
+                nCurPower *= 2;
+                nCurIndex++;
+            }
+
+            for (size_t i = 0; i < nCurIndex; ++i)
+                if (powerBitSet.test(i))
+                    fResult *= powers[i];
+
+            break;
         }
 
-        for (size_t i = 0; i < nCurIndex; ++i)
-            if (powerBitSet.test(i))
-                fResult *= powers[i];
-
-        break;
+        return bNegativePower ? 1.0 / fResult : fResult;
     }
+    else
+    {
+        double fResult = 1.0;
+        for (int i = 0; i < nPower; ++i)
+            fResult *= number;
 
-    return bNegativePower ? 1.0 / fResult : fResult;
+        return fResult;
+    }
 }
 
 template<std::integral I>

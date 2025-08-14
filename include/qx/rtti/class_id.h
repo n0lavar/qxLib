@@ -25,11 +25,12 @@ namespace qx
 **/
 class class_id
 {
+    QX_COPYMOVABLE(class_id);
+
     friend std::hash<class_id>;
 
 public:
     constexpr class_id() noexcept = default;
-    QX_COPYMOVABLE(class_id);
 
     /**
         @brief  Create a class id for a given type (the type doesn't require to use qx rtti system)

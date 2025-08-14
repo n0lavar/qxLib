@@ -34,7 +34,7 @@ runs:
         cd ..
         cd ..
     - name: Install boost
-      uses: MarkusJx/install-boost@v2.4.1
+      uses: MarkusJx/install-boost@v2.5.0
       id: install_boost
       with:
         boost_version: 1.81.0

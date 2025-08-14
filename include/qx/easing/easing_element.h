@@ -27,6 +27,8 @@ namespace qx
 template<class T>
 class base_easing_element
 {
+    QX_COPYMOVABLE(base_easing_element);
+
 public:
     enum class status
     {
@@ -39,8 +41,6 @@ public:
     using type = T;
 
 public:
-    QX_COPYMOVABLE(base_easing_element);
-
     /**
         @brief base_easing_element object constructor
         @param func   - easing function

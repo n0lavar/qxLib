@@ -14,11 +14,22 @@
 namespace qx
 {
 
-template<class T>
-concept is_enumeration = std::is_enum_v<T>;
+// ---------------------------------------------------- std wrappers ---------------------------------------------------
 
 template<class T>
-concept enumeration_c = is_enumeration<T>;
+concept enumeration_c = std::is_enum_v<T>;
+
+template<class T>
+concept arithmetic_c = std::is_arithmetic_v<T>;
+
+template<class T>
+concept floating_point_c = std::is_floating_point_v<T>;
+
+template<class T>
+concept integral_c = std::is_integral_v<T>;
+
+
+
 
 template<class T>
 concept is_iterator = requires(T) { typename T::iterator_category; };

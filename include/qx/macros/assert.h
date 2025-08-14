@@ -58,7 +58,7 @@ void resolve_assert_proceeding(
 }
 
 template<verbosity eVerbosity, class... args_t>
-    requires log_acceptable_args<args_t...>
+    requires log_acceptable_args_c<args_t...>
 void resolve_assert_proceeding(
     // macro args
     const category& fileCategory,
@@ -95,7 +95,7 @@ void resolve_assert_proceeding(
 }
 
 template<verbosity eVerbosity, class... args_t>
-    requires log_acceptable_args<args_t...>
+    requires log_acceptable_args_c<args_t...>
 void resolve_assert_proceeding(
     // macro args
     const category& fileCategory,
