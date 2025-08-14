@@ -186,62 +186,62 @@ $(function() {
 <div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> observer_t&gt;</div>
 <div class="line"><a name="l00116"></a><span class="lineno"><a class="line" href="classqx_1_1subject.html">  116</a></span>&#160;<span class="keyword">class </span><a class="code" href="classqx_1_1subject.html">subject</a> : <span class="keyword">public</span> <a class="code" href="classqx_1_1base__subject.html">base_subject</a></div>
 <div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;{</div>
-<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;    <span class="keyword">template</span>&lt;<span class="keyword">class</span> base_iterator_t&gt;</div>
-<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;    <span class="keyword">class </span>base_iterator : <span class="keyword">public</span> base_iterator_t</div>
-<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;    {</div>
-<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;    <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;        base_iterator() noexcept = <span class="keywordflow">default</span>;</div>
-<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;<span class="comment">        /**</span></div>
-<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;<span class="comment">            @brief base_iterator object constructor</span></div>
-<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;<span class="comment">            @param other    - base class iterator object </span></div>
-<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;<span class="comment">            @param pSubject - subject class pointer </span></div>
-<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;<span class="comment">        **/</span></div>
-<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;        base_iterator(<span class="keyword">const</span> base_iterator_t&amp; other, <a class="code" href="classqx_1_1subject.html">subject</a>* pSubject) noexcept;</div>
-<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160; </div>
-<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;        base_iterator(<span class="keyword">const</span> base_iterator&amp; other) noexcept;</div>
-<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;        base_iterator(base_iterator&amp;&amp;) noexcept = <span class="keywordflow">default</span>;</div>
-<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;        ~base_iterator() noexcept;</div>
-<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160; </div>
-<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;        base_iterator&amp; operator=(<span class="keyword">const</span> base_iterator&amp; other) noexcept;</div>
-<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;        observer_t*    operator-&gt;() noexcept;</div>
-<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;        observer_t&amp;    operator*() noexcept;</div>
-<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160; </div>
-<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;    <span class="keyword">private</span>:<span class="comment"></span></div>
-<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;<span class="comment">        /**</span></div>
-<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;<span class="comment">            @brief Init iterator by calling subject callback</span></div>
-<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;<span class="comment">        **/</span></div>
-<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;        <span class="keywordtype">void</span> init() noexcept;</div>
-<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160; </div>
-<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;    <span class="keyword">private</span>:</div>
-<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;        <a class="code" href="classqx_1_1subject.html">subject</a>* m_pSubject = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;    };</div>
-<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160; </div>
-<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;    <span class="keyword">template</span>&lt;<span class="keyword">class</span> base_iterator_t&gt;</div>
-<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;    <span class="keyword">class </span>const_base_iterator : <span class="keyword">public</span> base_iterator_t</div>
-<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;    {</div>
-<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;    <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;        const_base_iterator() noexcept                           = <span class="keywordflow">default</span>;</div>
-<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;        const_base_iterator(<span class="keyword">const</span> const_base_iterator&amp;) noexcept = <span class="keywordflow">default</span>;</div>
-<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;        const_base_iterator(const_base_iterator&amp;&amp;) noexcept      = <span class="keywordflow">default</span>;</div>
-<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;        const_base_iterator(<span class="keyword">const</span> base_iterator_t&amp; other) noexcept;</div>
-<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160; </div>
-<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;        <span class="keyword">const</span> observer_t* operator-&gt;() <span class="keyword">const</span> noexcept;</div>
-<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;        <span class="keyword">const</span> observer_t&amp; operator*() <span class="keyword">const</span> noexcept;</div>
-<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;    };</div>
-<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160; </div>
-<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;    <span class="keyword">using</span> observers_container    = std::vector&lt;observer_t*&gt;;</div>
-<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;    <span class="keyword">using</span> iterator               = base_iterator&lt;typename observers_container::iterator&gt;;</div>
-<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;    <span class="keyword">using</span> const_iterator         = const_base_iterator&lt;typename observers_container::const_iterator&gt;;</div>
-<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;    <span class="keyword">using</span> reverse_iterator       = base_iterator&lt;typename observers_container::reverse_iterator&gt;;</div>
-<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;    <span class="keyword">using</span> const_reverse_iterator = const_base_iterator&lt;typename observers_container::const_reverse_iterator&gt;;</div>
-<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;    <span class="keyword">using</span> notify_func            = std::function&lt;void(observer_t*)&gt;;</div>
-<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160; </div>
-<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;    QX_NONCOPYABLE(<a class="code" href="classqx_1_1subject.html">subject</a>);</div>
-<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;    QX_MOVABLE(<a class="code" href="classqx_1_1subject.html">subject</a>);</div>
-<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160; </div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;    QX_NONCOPYABLE(<a class="code" href="classqx_1_1subject.html">subject</a>);</div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;    QX_MOVABLE(<a class="code" href="classqx_1_1subject.html">subject</a>);</div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160; </div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;    <span class="keyword">template</span>&lt;<span class="keyword">class</span> base_iterator_t&gt;</div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;    <span class="keyword">class </span>base_iterator : <span class="keyword">public</span> base_iterator_t</div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;    {</div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;    <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;        base_iterator() noexcept = <span class="keywordflow">default</span>;</div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;<span class="comment">        /**</span></div>
+<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;<span class="comment">            @brief base_iterator object constructor</span></div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;<span class="comment">            @param other    - base class iterator object </span></div>
+<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;<span class="comment">            @param pSubject - subject class pointer </span></div>
+<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;<span class="comment">        **/</span></div>
+<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;        base_iterator(<span class="keyword">const</span> base_iterator_t&amp; other, <a class="code" href="classqx_1_1subject.html">subject</a>* pSubject) noexcept;</div>
+<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160; </div>
+<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;        base_iterator(<span class="keyword">const</span> base_iterator&amp; other) noexcept;</div>
+<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;        base_iterator(base_iterator&amp;&amp;) noexcept = <span class="keywordflow">default</span>;</div>
+<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;        ~base_iterator() noexcept;</div>
+<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160; </div>
+<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;        base_iterator&amp; operator=(<span class="keyword">const</span> base_iterator&amp; other) noexcept;</div>
+<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;        observer_t*    operator-&gt;() noexcept;</div>
+<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;        observer_t&amp;    operator*() noexcept;</div>
+<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160; </div>
+<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;    <span class="keyword">private</span>:<span class="comment"></span></div>
+<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;<span class="comment">        /**</span></div>
+<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;<span class="comment">            @brief Init iterator by calling subject callback</span></div>
+<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;<span class="comment">        **/</span></div>
+<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;        <span class="keywordtype">void</span> init() noexcept;</div>
+<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160; </div>
+<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;    <span class="keyword">private</span>:</div>
+<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;        <a class="code" href="classqx_1_1subject.html">subject</a>* m_pSubject = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;    };</div>
+<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160; </div>
+<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;    <span class="keyword">template</span>&lt;<span class="keyword">class</span> base_iterator_t&gt;</div>
+<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;    <span class="keyword">class </span>const_base_iterator : <span class="keyword">public</span> base_iterator_t</div>
+<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;    {</div>
+<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;    <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;        const_base_iterator() noexcept                           = <span class="keywordflow">default</span>;</div>
+<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;        const_base_iterator(<span class="keyword">const</span> const_base_iterator&amp;) noexcept = <span class="keywordflow">default</span>;</div>
+<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;        const_base_iterator(const_base_iterator&amp;&amp;) noexcept      = <span class="keywordflow">default</span>;</div>
+<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;        const_base_iterator(<span class="keyword">const</span> base_iterator_t&amp; other) noexcept;</div>
+<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160; </div>
+<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;        <span class="keyword">const</span> observer_t* operator-&gt;() <span class="keyword">const</span> noexcept;</div>
+<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;        <span class="keyword">const</span> observer_t&amp; operator*() <span class="keyword">const</span> noexcept;</div>
+<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;    };</div>
+<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160; </div>
+<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;    <span class="keyword">using</span> observers_container    = std::vector&lt;observer_t*&gt;;</div>
+<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;    <span class="keyword">using</span> iterator               = base_iterator&lt;typename observers_container::iterator&gt;;</div>
+<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;    <span class="keyword">using</span> const_iterator         = const_base_iterator&lt;typename observers_container::const_iterator&gt;;</div>
+<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;    <span class="keyword">using</span> reverse_iterator       = base_iterator&lt;typename observers_container::reverse_iterator&gt;;</div>
+<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;    <span class="keyword">using</span> const_reverse_iterator = const_base_iterator&lt;typename observers_container::const_reverse_iterator&gt;;</div>
+<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;    <span class="keyword">using</span> notify_func            = std::function&lt;void(observer_t*)&gt;;</div>
+<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160; </div>
+<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;<span class="keyword">public</span>:</div>
 <div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;    <a class="code" href="classqx_1_1subject.html">subject</a>() = <span class="keywordflow">default</span>;</div>
 <div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;    <span class="keyword">virtual</span> ~<a class="code" href="classqx_1_1subject.html">subject</a>() <span class="keyword">override</span>;</div>
 <div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;<span class="comment"></span> </div>

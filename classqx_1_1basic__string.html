@@ -127,22 +127,22 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a0400a656b10e9ad29c8307e47db75bfb"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classqx_1_1basic__string.html#a0400a656b10e9ad29c8307e47db75bfb">assign</a> (const string_t &amp;str) noexcept</td></tr>
 <tr class="memdesc:a0400a656b10e9ad29c8307e47db75bfb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Assign by char container.  <a href="classqx_1_1basic__string.html#a0400a656b10e9ad29c8307e47db75bfb">More...</a><br /></td></tr>
 <tr class="separator:a0400a656b10e9ad29c8307e47db75bfb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acef9726f9442f1bfb521a67052dcb7bb"><td class="memTemplParams" colspan="2">template&lt;class... args_t&gt; </td></tr>
-<tr class="memitem:acef9726f9442f1bfb521a67052dcb7bb"><td class="memTemplItemLeft" align="right" valign="top">requires format_acceptable_args&lt; char_t, args_t... &gt; void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classqx_1_1basic__string.html#acef9726f9442f1bfb521a67052dcb7bb">format</a> (const format_string_type&lt; std::type_identity_t&lt; args_t &gt;... &gt; sFormat, args_t &amp;&amp;... args)</td></tr>
-<tr class="memdesc:acef9726f9442f1bfb521a67052dcb7bb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clear the string and format it with the format string and the args.  <a href="classqx_1_1basic__string.html#acef9726f9442f1bfb521a67052dcb7bb">More...</a><br /></td></tr>
-<tr class="separator:acef9726f9442f1bfb521a67052dcb7bb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af0622444e8d3ae178f99e61f1407f9ef"><td class="memTemplParams" colspan="2">template&lt;class... args_t&gt; </td></tr>
-<tr class="memitem:af0622444e8d3ae178f99e61f1407f9ef"><td class="memTemplItemLeft" align="right" valign="top">requires format_acceptable_args&lt; char_t, args_t... &gt; void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classqx_1_1basic__string.html#af0622444e8d3ae178f99e61f1407f9ef">append_format</a> (const format_string_type&lt; std::type_identity_t&lt; args_t &gt;... &gt; sFormat, args_t &amp;&amp;... args)</td></tr>
-<tr class="memdesc:af0622444e8d3ae178f99e61f1407f9ef"><td class="mdescLeft">&#160;</td><td class="mdescRight">Append the formatted string to the current one.  <a href="classqx_1_1basic__string.html#af0622444e8d3ae178f99e61f1407f9ef">More...</a><br /></td></tr>
-<tr class="separator:af0622444e8d3ae178f99e61f1407f9ef"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a686657d51f4d95b4896ae52095870922"><td class="memTemplParams" colspan="2">template&lt;class... args_t&gt; </td></tr>
-<tr class="memitem:a686657d51f4d95b4896ae52095870922"><td class="memTemplItemLeft" align="right" valign="top">requires format_acceptable_args&lt; char_t, args_t... &gt; void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classqx_1_1basic__string.html#a686657d51f4d95b4896ae52095870922">vformat</a> (string_view svFormat, args_t &amp;&amp;... args)</td></tr>
-<tr class="memdesc:a686657d51f4d95b4896ae52095870922"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clear the string and format it with the format string and the args.  <a href="classqx_1_1basic__string.html#a686657d51f4d95b4896ae52095870922">More...</a><br /></td></tr>
-<tr class="separator:a686657d51f4d95b4896ae52095870922"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acbba3d1cdf0dec54aff81f9d623b35d5"><td class="memTemplParams" colspan="2">template&lt;class... args_t&gt; </td></tr>
-<tr class="memitem:acbba3d1cdf0dec54aff81f9d623b35d5"><td class="memTemplItemLeft" align="right" valign="top">requires format_acceptable_args&lt; char_t, args_t... &gt; void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classqx_1_1basic__string.html#acbba3d1cdf0dec54aff81f9d623b35d5">append_vformat</a> (string_view svFormat, args_t &amp;&amp;... args)</td></tr>
-<tr class="memdesc:acbba3d1cdf0dec54aff81f9d623b35d5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Append the formatted string to the current one.  <a href="classqx_1_1basic__string.html#acbba3d1cdf0dec54aff81f9d623b35d5">More...</a><br /></td></tr>
-<tr class="separator:acbba3d1cdf0dec54aff81f9d623b35d5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac16dd8878ade020cf2212878e7f3eb15"><td class="memTemplParams" colspan="2">template&lt;class... args_t&gt; </td></tr>
+<tr class="memitem:ac16dd8878ade020cf2212878e7f3eb15"><td class="memTemplItemLeft" align="right" valign="top">requires format_acceptable_args_c&lt; char_t, args_t... &gt; void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classqx_1_1basic__string.html#ac16dd8878ade020cf2212878e7f3eb15">format</a> (const format_string_type&lt; std::type_identity_t&lt; args_t &gt;... &gt; sFormat, args_t &amp;&amp;... args)</td></tr>
+<tr class="memdesc:ac16dd8878ade020cf2212878e7f3eb15"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clear the string and format it with the format string and the args.  <a href="classqx_1_1basic__string.html#ac16dd8878ade020cf2212878e7f3eb15">More...</a><br /></td></tr>
+<tr class="separator:ac16dd8878ade020cf2212878e7f3eb15"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aafe7ce31d8e869d691c89f6bbffba0a9"><td class="memTemplParams" colspan="2">template&lt;class... args_t&gt; </td></tr>
+<tr class="memitem:aafe7ce31d8e869d691c89f6bbffba0a9"><td class="memTemplItemLeft" align="right" valign="top">requires format_acceptable_args_c&lt; char_t, args_t... &gt; void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classqx_1_1basic__string.html#aafe7ce31d8e869d691c89f6bbffba0a9">append_format</a> (const format_string_type&lt; std::type_identity_t&lt; args_t &gt;... &gt; sFormat, args_t &amp;&amp;... args)</td></tr>
+<tr class="memdesc:aafe7ce31d8e869d691c89f6bbffba0a9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Append the formatted string to the current one.  <a href="classqx_1_1basic__string.html#aafe7ce31d8e869d691c89f6bbffba0a9">More...</a><br /></td></tr>
+<tr class="separator:aafe7ce31d8e869d691c89f6bbffba0a9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a600a39e931344896c6d276bccc7bbb7d"><td class="memTemplParams" colspan="2">template&lt;class... args_t&gt; </td></tr>
+<tr class="memitem:a600a39e931344896c6d276bccc7bbb7d"><td class="memTemplItemLeft" align="right" valign="top">requires format_acceptable_args_c&lt; char_t, args_t... &gt; void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classqx_1_1basic__string.html#a600a39e931344896c6d276bccc7bbb7d">vformat</a> (string_view svFormat, args_t &amp;&amp;... args)</td></tr>
+<tr class="memdesc:a600a39e931344896c6d276bccc7bbb7d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clear the string and format it with the format string and the args.  <a href="classqx_1_1basic__string.html#a600a39e931344896c6d276bccc7bbb7d">More...</a><br /></td></tr>
+<tr class="separator:a600a39e931344896c6d276bccc7bbb7d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9e556b17b8fb9bde8aa9df38f1d46100"><td class="memTemplParams" colspan="2">template&lt;class... args_t&gt; </td></tr>
+<tr class="memitem:a9e556b17b8fb9bde8aa9df38f1d46100"><td class="memTemplItemLeft" align="right" valign="top">requires format_acceptable_args_c&lt; char_t, args_t... &gt; void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classqx_1_1basic__string.html#a9e556b17b8fb9bde8aa9df38f1d46100">append_vformat</a> (string_view svFormat, args_t &amp;&amp;... args)</td></tr>
+<tr class="memdesc:a9e556b17b8fb9bde8aa9df38f1d46100"><td class="mdescLeft">&#160;</td><td class="mdescRight">Append the formatted string to the current one.  <a href="classqx_1_1basic__string.html#a9e556b17b8fb9bde8aa9df38f1d46100">More...</a><br /></td></tr>
+<tr class="separator:a9e556b17b8fb9bde8aa9df38f1d46100"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7299c2ce3342083355a900209f5fbf7a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1basic__string.html#a7299c2ce3342083355a900209f5fbf7a">swap</a> (<a class="el" href="classqx_1_1basic__string.html">basic_string</a> &amp;sOther) noexcept</td></tr>
 <tr class="memdesc:a7299c2ce3342083355a900209f5fbf7a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Swap this str and other.  <a href="classqx_1_1basic__string.html#a7299c2ce3342083355a900209f5fbf7a">More...</a><br /></td></tr>
 <tr class="separator:a7299c2ce3342083355a900209f5fbf7a"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -626,14 +626,14 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
-<tr class="memitem:a7ef01cf586ce7b0070e620aab7c0b53d"><td class="memTemplParams" colspan="2">template&lt;class... args_t&gt; </td></tr>
-<tr class="memitem:a7ef01cf586ce7b0070e620aab7c0b53d"><td class="memTemplItemLeft" align="right" valign="top">requires static format_acceptable_args&lt; char_t, args_t... &gt; <a class="el" href="classqx_1_1basic__string.html">basic_string</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classqx_1_1basic__string.html#a7ef01cf586ce7b0070e620aab7c0b53d">static_format</a> (const format_string_type&lt; std::type_identity_t&lt; args_t &gt;... &gt; sFormat, args_t &amp;&amp;... args)</td></tr>
-<tr class="memdesc:a7ef01cf586ce7b0070e620aab7c0b53d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a string by formatting it with the format string and the args.  <a href="classqx_1_1basic__string.html#a7ef01cf586ce7b0070e620aab7c0b53d">More...</a><br /></td></tr>
-<tr class="separator:a7ef01cf586ce7b0070e620aab7c0b53d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a360484aa5483e54757a6e7263fe20555"><td class="memTemplParams" colspan="2">template&lt;class... args_t&gt; </td></tr>
-<tr class="memitem:a360484aa5483e54757a6e7263fe20555"><td class="memTemplItemLeft" align="right" valign="top">requires static format_acceptable_args&lt; char_t, args_t... &gt; <a class="el" href="classqx_1_1basic__string.html">basic_string</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classqx_1_1basic__string.html#a360484aa5483e54757a6e7263fe20555">static_vformat</a> (string_view svFormat, args_t &amp;&amp;... args)</td></tr>
-<tr class="memdesc:a360484aa5483e54757a6e7263fe20555"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a string by formatting it with the format string and the args.  <a href="classqx_1_1basic__string.html#a360484aa5483e54757a6e7263fe20555">More...</a><br /></td></tr>
-<tr class="separator:a360484aa5483e54757a6e7263fe20555"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae691d641ae64e0d7246c3f35eb2e9fbb"><td class="memTemplParams" colspan="2">template&lt;class... args_t&gt; </td></tr>
+<tr class="memitem:ae691d641ae64e0d7246c3f35eb2e9fbb"><td class="memTemplItemLeft" align="right" valign="top">requires static format_acceptable_args_c&lt; char_t, args_t... &gt; <a class="el" href="classqx_1_1basic__string.html">basic_string</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classqx_1_1basic__string.html#ae691d641ae64e0d7246c3f35eb2e9fbb">static_format</a> (const format_string_type&lt; std::type_identity_t&lt; args_t &gt;... &gt; sFormat, args_t &amp;&amp;... args)</td></tr>
+<tr class="memdesc:ae691d641ae64e0d7246c3f35eb2e9fbb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a string by formatting it with the format string and the args.  <a href="classqx_1_1basic__string.html#ae691d641ae64e0d7246c3f35eb2e9fbb">More...</a><br /></td></tr>
+<tr class="separator:ae691d641ae64e0d7246c3f35eb2e9fbb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acdb398a0ba1c994021cdc44b2a726400"><td class="memTemplParams" colspan="2">template&lt;class... args_t&gt; </td></tr>
+<tr class="memitem:acdb398a0ba1c994021cdc44b2a726400"><td class="memTemplItemLeft" align="right" valign="top">requires static format_acceptable_args_c&lt; char_t, args_t... &gt; <a class="el" href="classqx_1_1basic__string.html">basic_string</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classqx_1_1basic__string.html#acdb398a0ba1c994021cdc44b2a726400">static_vformat</a> (string_view svFormat, args_t &amp;&amp;... args)</td></tr>
+<tr class="memdesc:acdb398a0ba1c994021cdc44b2a726400"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a string by formatting it with the format string and the args.  <a href="classqx_1_1basic__string.html#acdb398a0ba1c994021cdc44b2a726400">More...</a><br /></td></tr>
+<tr class="separator:acdb398a0ba1c994021cdc44b2a726400"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad9e495e149354a944f0999fe7e115697"><td class="memItemLeft" align="right" valign="top">static constexpr size_type&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1basic__string.html#ad9e495e149354a944f0999fe7e115697">max_size</a> () noexcept</td></tr>
 <tr class="memdesc:ad9e495e149354a944f0999fe7e115697"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the theoretical maximum of string size.  <a href="classqx_1_1basic__string.html#ad9e495e149354a944f0999fe7e115697">More...</a><br /></td></tr>
 <tr class="separator:ad9e495e149354a944f0999fe7e115697"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -1204,8 +1204,8 @@ template&lt;class char_t , class traits_t &gt; </div>
 
 </div>
 </div>
-<a id="af0622444e8d3ae178f99e61f1407f9ef"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af0622444e8d3ae178f99e61f1407f9ef">&#9670;&nbsp;</a></span>append_format()</h2>
+<a id="aafe7ce31d8e869d691c89f6bbffba0a9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aafe7ce31d8e869d691c89f6bbffba0a9">&#9670;&nbsp;</a></span>append_format()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1215,7 +1215,7 @@ template&lt;class char_t , class traits_t &gt; </div>
 template&lt;class... args_t&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">requires format_acceptable_args&lt; char_t, args_t... &gt; void <a class="el" href="classqx_1_1basic__string.html">qx::basic_string</a>&lt; char_t, traits_t &gt;::append_format </td>
+          <td class="memname">requires format_acceptable_args_c&lt; char_t, args_t... &gt; void <a class="el" href="classqx_1_1basic__string.html">qx::basic_string</a>&lt; char_t, traits_t &gt;::append_format </td>
           <td>(</td>
           <td class="paramtype">const format_string_type&lt; std::type_identity_t&lt; args_t &gt;... &gt;&#160;</td>
           <td class="paramname"><em>sFormat</em>, </td>
@@ -1253,8 +1253,8 @@ template&lt;class... args_t&gt; </div>
 
 </div>
 </div>
-<a id="acbba3d1cdf0dec54aff81f9d623b35d5"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#acbba3d1cdf0dec54aff81f9d623b35d5">&#9670;&nbsp;</a></span>append_vformat()</h2>
+<a id="a9e556b17b8fb9bde8aa9df38f1d46100"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9e556b17b8fb9bde8aa9df38f1d46100">&#9670;&nbsp;</a></span>append_vformat()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1267,7 +1267,7 @@ template&lt;class... args_t&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">requires format_acceptable_args&lt; char_t, args_t... &gt; void <a class="el" href="classqx_1_1basic__string.html">qx::basic_string</a>&lt; char_t, traits_t &gt;::append_vformat </td>
+          <td class="memname">requires format_acceptable_args_c&lt; char_t, args_t... &gt; void <a class="el" href="classqx_1_1basic__string.html">qx::basic_string</a>&lt; char_t, traits_t &gt;::append_vformat </td>
           <td>(</td>
           <td class="paramtype">string_view&#160;</td>
           <td class="paramname"><em>svFormat</em>, </td>
@@ -4561,8 +4561,8 @@ template&lt;class char_t , class traits_t &gt; </div>
 
 </div>
 </div>
-<a id="acef9726f9442f1bfb521a67052dcb7bb"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#acef9726f9442f1bfb521a67052dcb7bb">&#9670;&nbsp;</a></span>format()</h2>
+<a id="ac16dd8878ade020cf2212878e7f3eb15"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac16dd8878ade020cf2212878e7f3eb15">&#9670;&nbsp;</a></span>format()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -4572,7 +4572,7 @@ template&lt;class char_t , class traits_t &gt; </div>
 template&lt;class... args_t&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">requires format_acceptable_args&lt; char_t, args_t... &gt; void <a class="el" href="classqx_1_1basic__string.html">qx::basic_string</a>&lt; char_t, traits_t &gt;::format </td>
+          <td class="memname">requires format_acceptable_args_c&lt; char_t, args_t... &gt; void <a class="el" href="classqx_1_1basic__string.html">qx::basic_string</a>&lt; char_t, traits_t &gt;::format </td>
           <td>(</td>
           <td class="paramtype">const format_string_type&lt; std::type_identity_t&lt; args_t &gt;... &gt;&#160;</td>
           <td class="paramname"><em>sFormat</em>, </td>
@@ -7905,8 +7905,8 @@ template&lt;class char_t , class traits_t &gt; </div>
 
 </div>
 </div>
-<a id="a7ef01cf586ce7b0070e620aab7c0b53d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7ef01cf586ce7b0070e620aab7c0b53d">&#9670;&nbsp;</a></span>static_format()</h2>
+<a id="ae691d641ae64e0d7246c3f35eb2e9fbb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae691d641ae64e0d7246c3f35eb2e9fbb">&#9670;&nbsp;</a></span>static_format()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -7919,7 +7919,7 @@ template&lt;class... args_t&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">requires static format_acceptable_args&lt;char_t, args_t...&gt; <a class="el" href="classqx_1_1basic__string.html">basic_string</a> <a class="el" href="classqx_1_1basic__string.html">qx::basic_string</a>&lt; char_t, traits_t &gt;::static_format </td>
+          <td class="memname">requires static format_acceptable_args_c&lt;char_t, args_t...&gt; <a class="el" href="classqx_1_1basic__string.html">basic_string</a> <a class="el" href="classqx_1_1basic__string.html">qx::basic_string</a>&lt; char_t, traits_t &gt;::static_format </td>
           <td>(</td>
           <td class="paramtype">const format_string_type&lt; std::type_identity_t&lt; args_t &gt;... &gt;&#160;</td>
           <td class="paramname"><em>sFormat</em>, </td>
@@ -8016,8 +8016,8 @@ template&lt;class from_t &gt; </div>
 
 </div>
 </div>
-<a id="a360484aa5483e54757a6e7263fe20555"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a360484aa5483e54757a6e7263fe20555">&#9670;&nbsp;</a></span>static_vformat()</h2>
+<a id="acdb398a0ba1c994021cdc44b2a726400"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acdb398a0ba1c994021cdc44b2a726400">&#9670;&nbsp;</a></span>static_vformat()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -8030,7 +8030,7 @@ template&lt;class... args_t&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">requires static format_acceptable_args&lt;char_t, args_t...&gt; <a class="el" href="classqx_1_1basic__string.html">basic_string</a> <a class="el" href="classqx_1_1basic__string.html">qx::basic_string</a>&lt; char_t, traits_t &gt;::static_vformat </td>
+          <td class="memname">requires static format_acceptable_args_c&lt;char_t, args_t...&gt; <a class="el" href="classqx_1_1basic__string.html">basic_string</a> <a class="el" href="classqx_1_1basic__string.html">qx::basic_string</a>&lt; char_t, traits_t &gt;::static_vformat </td>
           <td>(</td>
           <td class="paramtype">string_view&#160;</td>
           <td class="paramname"><em>svFormat</em>, </td>
@@ -9231,8 +9231,8 @@ template&lt;class char_t , class traits_t &gt; </div>
 
 </div>
 </div>
-<a id="a686657d51f4d95b4896ae52095870922"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a686657d51f4d95b4896ae52095870922">&#9670;&nbsp;</a></span>vformat()</h2>
+<a id="a600a39e931344896c6d276bccc7bbb7d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a600a39e931344896c6d276bccc7bbb7d">&#9670;&nbsp;</a></span>vformat()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -9242,7 +9242,7 @@ template&lt;class char_t , class traits_t &gt; </div>
 template&lt;class... args_t&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">requires format_acceptable_args&lt; char_t, args_t... &gt; void <a class="el" href="classqx_1_1basic__string.html">qx::basic_string</a>&lt; char_t, traits_t &gt;::vformat </td>
+          <td class="memname">requires format_acceptable_args_c&lt; char_t, args_t... &gt; void <a class="el" href="classqx_1_1basic__string.html">qx::basic_string</a>&lt; char_t, traits_t &gt;::vformat </td>
           <td>(</td>
           <td class="paramtype">string_view&#160;</td>
           <td class="paramname"><em>svFormat</em>, </td>

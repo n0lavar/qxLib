@@ -71,7 +71,8 @@ $(function() {
 <div class="title">copyable_movable.h File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
-
+<div class="textblock"><code>#include &lt;<a class="el" href="macros_2common_8h_source.html">qx/macros/common.h</a>&gt;</code><br />
+</div>
 <p><a href="copyable__movable_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
@@ -117,8 +118,12 @@ Macros</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<b>Value:</b><div class="fragment"><div class="line">    className(<span class="keyword">const</span> className&amp;)            = <span class="keywordflow">default</span>; \</div>
-<div class="line">    className&amp; operator=(<span class="keyword">const</span> className&amp;) = <span class="keywordflow">default</span></div>
+<b>Value:</b><div class="fragment"><div class="line"><span class="keyword">public</span>:                                               \</div>
+<div class="line">    className(<span class="keyword">const</span> className&amp;)            = <span class="keywordflow">default</span>; \</div>
+<div class="line">    className&amp; operator=(<span class="keyword">const</span> className&amp;) = <span class="keywordflow">default</span>; \</div>
+<div class="line">                                                      \</div>
+<div class="line">private:                                              \</div>
+<div class="line">    QX_EMPTY_MACRO</div>
 </div><!-- fragment -->
 <p>Define class as default copyable. </p>
 <dl class="params"><dt>Parameters</dt><dd>
@@ -128,7 +133,7 @@ Macros</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="copyable__movable_8h_source.html#l00016">16</a> of file <a class="el" href="copyable__movable_8h_source.html">copyable_movable.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="copyable__movable_8h_source.html#l00018">18</a> of file <a class="el" href="copyable__movable_8h_source.html">copyable_movable.h</a>.</p>
 
 </div>
 </div>
@@ -149,7 +154,7 @@ Macros</h2></td></tr>
 </div><div class="memdoc">
 <b>Value:</b><div class="fragment"><div class="line">    <a class="code" href="copyable__movable_8h.html#a775ebdb19552321e43799631ae882445">QX_COPYABLE</a>(className);       \</div>
 <div class="line">    QX_MOVABLE(className)</div>
-<div class="ttc" id="acopyable__movable_8h_html_a775ebdb19552321e43799631ae882445"><div class="ttname"><a href="copyable__movable_8h.html#a775ebdb19552321e43799631ae882445">QX_COPYABLE</a></div><div class="ttdeci">#define QX_COPYABLE(className)</div><div class="ttdoc">Define class as default copyable.</div><div class="ttdef"><b>Definition:</b> <a href="copyable__movable_8h_source.html#l00016">copyable_movable.h:16</a></div></div>
+<div class="ttc" id="acopyable__movable_8h_html_a775ebdb19552321e43799631ae882445"><div class="ttname"><a href="copyable__movable_8h.html#a775ebdb19552321e43799631ae882445">QX_COPYABLE</a></div><div class="ttdeci">#define QX_COPYABLE(className)</div><div class="ttdoc">Define class as default copyable.</div><div class="ttdef"><b>Definition:</b> <a href="copyable__movable_8h_source.html#l00018">copyable_movable.h:18</a></div></div>
 </div><!-- fragment -->
 <p>Define class as default copyable and movable. </p>
 <dl class="params"><dt>Parameters</dt><dd>
@@ -159,7 +164,7 @@ Macros</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="copyable__movable_8h_source.html#l00034">34</a> of file <a class="el" href="copyable__movable_8h_source.html">copyable_movable.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="copyable__movable_8h_source.html#l00044">44</a> of file <a class="el" href="copyable__movable_8h_source.html">copyable_movable.h</a>.</p>
 
 </div>
 </div>
@@ -178,8 +183,13 @@ Macros</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<b>Value:</b><div class="fragment"><div class="line">    className(className&amp;&amp;) noexcept            = default; \</div>
-<div class="line">    className&amp; operator=(className&amp;&amp;) noexcept = default</div>
+<b>Value:</b><div class="fragment"><div class="line"><span class="keyword">public</span>:                                                   \</div>
+<div class="line">    className(className&amp;&amp;) noexcept            = default; \</div>
+<div class="line">    className&amp; operator=(className&amp;&amp;) noexcept = default; \</div>
+<div class="line">                                                          \</div>
+<div class="line">private:                                                  \</div>
+<div class="line">    <a class="code" href="macros_2common_8h.html#abff5c48c8f5e30fdb8643308a9b3eaf7">QX_EMPTY_MACRO</a></div>
+<div class="ttc" id="amacros_2common_8h_html_abff5c48c8f5e30fdb8643308a9b3eaf7"><div class="ttname"><a href="macros_2common_8h.html#abff5c48c8f5e30fdb8643308a9b3eaf7">QX_EMPTY_MACRO</a></div><div class="ttdeci">#define QX_EMPTY_MACRO</div><div class="ttdoc">Placeholder for disabled macros.</div><div class="ttdef"><b>Definition:</b> <a href="macros_2common_8h_source.html#l00023">common.h:23</a></div></div>
 </div><!-- fragment -->
 <p>Define class as default movable. </p>
 <dl class="params"><dt>Parameters</dt><dd>
@@ -189,7 +199,7 @@ Macros</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="copyable__movable_8h_source.html#l00025">25</a> of file <a class="el" href="copyable__movable_8h_source.html">copyable_movable.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="copyable__movable_8h_source.html#l00031">31</a> of file <a class="el" href="copyable__movable_8h_source.html">copyable_movable.h</a>.</p>
 
 </div>
 </div>
@@ -219,7 +229,7 @@ Macros</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="copyable__movable_8h_source.html#l00043">43</a> of file <a class="el" href="copyable__movable_8h_source.html">copyable_movable.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="copyable__movable_8h_source.html#l00053">53</a> of file <a class="el" href="copyable__movable_8h_source.html">copyable_movable.h</a>.</p>
 
 </div>
 </div>
@@ -240,7 +250,7 @@ Macros</h2></td></tr>
 </div><div class="memdoc">
 <b>Value:</b><div class="fragment"><div class="line">    <a class="code" href="copyable__movable_8h.html#a37fb240669bedfbab5705feaa1973471">QX_NONCOPYABLE</a>(className);       \</div>
 <div class="line">    QX_NONMOVABLE(className)</div>
-<div class="ttc" id="acopyable__movable_8h_html_a37fb240669bedfbab5705feaa1973471"><div class="ttname"><a href="copyable__movable_8h.html#a37fb240669bedfbab5705feaa1973471">QX_NONCOPYABLE</a></div><div class="ttdeci">#define QX_NONCOPYABLE(className)</div><div class="ttdoc">Define class as non copyable.</div><div class="ttdef"><b>Definition:</b> <a href="copyable__movable_8h_source.html#l00043">copyable_movable.h:43</a></div></div>
+<div class="ttc" id="acopyable__movable_8h_html_a37fb240669bedfbab5705feaa1973471"><div class="ttname"><a href="copyable__movable_8h.html#a37fb240669bedfbab5705feaa1973471">QX_NONCOPYABLE</a></div><div class="ttdeci">#define QX_NONCOPYABLE(className)</div><div class="ttdoc">Define class as non copyable.</div><div class="ttdef"><b>Definition:</b> <a href="copyable__movable_8h_source.html#l00053">copyable_movable.h:53</a></div></div>
 </div><!-- fragment -->
 <p>Define class as non copyable and non movable. </p>
 <dl class="params"><dt>Parameters</dt><dd>
@@ -250,7 +260,7 @@ Macros</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="copyable__movable_8h_source.html#l00061">61</a> of file <a class="el" href="copyable__movable_8h_source.html">copyable_movable.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="copyable__movable_8h_source.html#l00071">71</a> of file <a class="el" href="copyable__movable_8h_source.html">copyable_movable.h</a>.</p>
 
 </div>
 </div>
@@ -280,7 +290,7 @@ Macros</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="copyable__movable_8h_source.html#l00052">52</a> of file <a class="el" href="copyable__movable_8h_source.html">copyable_movable.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="copyable__movable_8h_source.html#l00062">62</a> of file <a class="el" href="copyable__movable_8h_source.html">copyable_movable.h</a>.</p>
 
 </div>
 </div>

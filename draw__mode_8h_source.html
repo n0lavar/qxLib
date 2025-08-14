@@ -142,8 +142,20 @@ $(function() {
 <div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;<span class="comment">    */</span></div>
 <div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    triangles_fan,</div>
 <div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;};</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160; </div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;}</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;<span class="comment">/**</span></div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;<span class="comment">    @brief  Returns true if the specified draw mode draws triangles</span></div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;<span class="comment">    @param  eDrawMode - draw mode to check</span></div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;<span class="comment">    @retval           - true if the specified draw mode draws triangles</span></div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;<span class="comment">**/</span></div>
+<div class="line"><a name="l00080"></a><span class="lineno"><a class="line" href="draw__mode_8h.html#a0002d9ed898b5b8040584766a3b6efb7">   80</a></span>&#160;constexpr <span class="keywordtype">bool</span> <a class="code" href="draw__mode_8h.html#a0002d9ed898b5b8040584766a3b6efb7">is_triandles</a>(draw_mode eDrawMode)</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;{</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;    <span class="keywordflow">return</span> eDrawMode == draw_mode::triangles_list || eDrawMode == draw_mode::triangles_strip</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;           || eDrawMode == draw_mode::triangles_fan;</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;}</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160; </div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;} <span class="comment">// namespace qx</span></div>
+<div class="ttc" id="adraw__mode_8h_html_a0002d9ed898b5b8040584766a3b6efb7"><div class="ttname"><a href="draw__mode_8h.html#a0002d9ed898b5b8040584766a3b6efb7">qx::is_triandles</a></div><div class="ttdeci">constexpr bool is_triandles(draw_mode eDrawMode)</div><div class="ttdoc">Returns true if the specified draw mode draws triangles.</div><div class="ttdef"><b>Definition:</b> <a href="draw__mode_8h_source.html#l00080">draw_mode.h:80</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

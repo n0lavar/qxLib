@@ -346,7 +346,7 @@ $(function() {
 <div class="line"><a name="l00275"></a><span class="lineno">  275</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> T&gt;</div>
 <div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160;<span class="keyword">inline</span> T exponential_in_func(T x) noexcept</div>
 <div class="line"><a name="l00277"></a><span class="lineno">  277</span>&#160;{</div>
-<div class="line"><a name="l00278"></a><span class="lineno">  278</span>&#160;    <span class="keywordflow">return</span> x &lt;= T(0.0f) ? T(0.0f) : std::<a class="code" href="math_2common_8h.html#afe4bdb02a5ad40922f5cf9af4b66e7ce">pow</a>(T(2.0f), T(10.0f) * (x - T(1.0f)));</div>
+<div class="line"><a name="l00278"></a><span class="lineno">  278</span>&#160;    <span class="keywordflow">return</span> x &lt;= T(0.0f) ? T(0.0f) : std::<a class="code" href="math_2common_8h.html#af2e3d64764a1eddcd124a65d3e7166b0">pow</a>(T(2.0f), T(10.0f) * (x - T(1.0f)));</div>
 <div class="line"><a name="l00279"></a><span class="lineno">  279</span>&#160;}</div>
 <div class="line"><a name="l00280"></a><span class="lineno">  280</span>&#160;constexpr <span class="keyword">auto</span> exponential_in = exponential_in_func&lt;float&gt;;</div>
 <div class="line"><a name="l00281"></a><span class="lineno">  281</span>&#160; </div>
@@ -355,7 +355,7 @@ $(function() {
 <div class="line"><a name="l00284"></a><span class="lineno">  284</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> T&gt;</div>
 <div class="line"><a name="l00285"></a><span class="lineno">  285</span>&#160;<span class="keyword">inline</span> T exponential_out_func(T x) noexcept</div>
 <div class="line"><a name="l00286"></a><span class="lineno">  286</span>&#160;{</div>
-<div class="line"><a name="l00287"></a><span class="lineno">  287</span>&#160;    <span class="keywordflow">return</span> x &gt;= T(1.0f) ? T(1.0f) : T(1.0f) - std::<a class="code" href="math_2common_8h.html#afe4bdb02a5ad40922f5cf9af4b66e7ce">pow</a>(T(2.0f), -T(10.0f) * x);</div>
+<div class="line"><a name="l00287"></a><span class="lineno">  287</span>&#160;    <span class="keywordflow">return</span> x &gt;= T(1.0f) ? T(1.0f) : T(1.0f) - std::<a class="code" href="math_2common_8h.html#af2e3d64764a1eddcd124a65d3e7166b0">pow</a>(T(2.0f), -T(10.0f) * x);</div>
 <div class="line"><a name="l00288"></a><span class="lineno">  288</span>&#160;}</div>
 <div class="line"><a name="l00289"></a><span class="lineno">  289</span>&#160;constexpr <span class="keyword">auto</span> exponential_out = exponential_out_func&lt;float&gt;;</div>
 <div class="line"><a name="l00290"></a><span class="lineno">  290</span>&#160; </div>
@@ -501,7 +501,7 @@ $(function() {
 <div class="ttc" id="amath_2common_8h_html"><div class="ttname"><a href="math_2common_8h.html">common.h</a></div></div>
 <div class="ttc" id="amath_2common_8h_html_a2db6d38ad44aebd45809cb9a06774ffd"><div class="ttname"><a href="math_2common_8h.html#a2db6d38ad44aebd45809cb9a06774ffd">qx::epsilon_greater_equal</a></div><div class="ttdeci">constexpr bool epsilon_greater_equal(T left, T right, T eps=std::numeric_limits&lt; T &gt;::epsilon())</div><div class="ttdoc">Constexpr comparison function for a user defined epsilon values.</div><div class="ttdef"><b>Definition:</b> <a href="common_8inl_source.html#l00038">common.inl:38</a></div></div>
 <div class="ttc" id="amath_2common_8h_html_abc0bd064c0a27a488aabf1d2f2e2fcfa"><div class="ttname"><a href="math_2common_8h.html#abc0bd064c0a27a488aabf1d2f2e2fcfa">qx::epsilon_less_equal</a></div><div class="ttdeci">constexpr bool epsilon_less_equal(T left, T right, T eps=std::numeric_limits&lt; T &gt;::epsilon())</div><div class="ttdoc">Constexpr comparison function for a user defined epsilon values.</div><div class="ttdef"><b>Definition:</b> <a href="common_8inl_source.html#l00032">common.inl:32</a></div></div>
-<div class="ttc" id="amath_2common_8h_html_afe4bdb02a5ad40922f5cf9af4b66e7ce"><div class="ttname"><a href="math_2common_8h.html#afe4bdb02a5ad40922f5cf9af4b66e7ce">qx::pow</a></div><div class="ttdeci">double pow(T number, int nPower)</div><div class="ttdoc">Power function for integer power.</div><div class="ttdef"><b>Definition:</b> <a href="common_8inl_source.html#l00082">common.inl:82</a></div></div>
+<div class="ttc" id="amath_2common_8h_html_af2e3d64764a1eddcd124a65d3e7166b0"><div class="ttname"><a href="math_2common_8h.html#af2e3d64764a1eddcd124a65d3e7166b0">qx::pow</a></div><div class="ttdeci">constexpr double pow(T number, int nPower)</div><div class="ttdoc">Power function for integer power.</div><div class="ttdef"><b>Definition:</b> <a href="common_8inl_source.html#l00082">common.inl:82</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

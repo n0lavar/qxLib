@@ -136,10 +136,10 @@ $(function() {
 <div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    }</div>
 <div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;}</div>
 <div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160; </div>
-<div class="line"><a name="l00068"></a><span class="lineno"><a class="line" href="classqx_1_1base__logger__stream.html#ace92fe548f73af42ac5a5ebebd47f8db">   68</a></span>&#160;<span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="classqx_1_1base__logger__stream.html#ace92fe548f73af42ac5a5ebebd47f8db">base_logger_stream::register_unit</a>(string_view svUnitName, <span class="keyword">const</span> <a class="code" href="structqx_1_1log__unit__info.html">log_unit_info</a>&amp; unit) noexcept</div>
+<div class="line"><a name="l00068"></a><span class="lineno"><a class="line" href="classqx_1_1base__logger__stream.html#ace92fe548f73af42ac5a5ebebd47f8db">   68</a></span>&#160;<span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="classqx_1_1base__logger__stream.html#ace92fe548f73af42ac5a5ebebd47f8db">base_logger_stream::register_unit</a>(string_view svUnitName, <span class="keyword">const</span> <a class="code" href="structqx_1_1log__unit__info.html">log_unit_info</a>&amp; <a class="code" href="structqx_1_1unit.html">unit</a>) noexcept</div>
 <div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;{</div>
 <div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;    <span class="keywordflow">if</span> (!svUnitName.empty())</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;        m_Units.emplace(<a class="code" href="classqx_1_1basic__string__hash.html">string_hash</a>(svUnitName), unit);</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;        m_Units.emplace(<a class="code" href="classqx_1_1basic__string__hash.html">string_hash</a>(svUnitName), <a class="code" href="structqx_1_1unit.html">unit</a>);</div>
 <div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;}</div>
 <div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160; </div>
 <div class="line"><a name="l00074"></a><span class="lineno"><a class="line" href="classqx_1_1base__logger__stream.html#a5148e9b2f86df61963b9b56ab69a9d61">   74</a></span>&#160;<span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="classqx_1_1base__logger__stream.html#a5148e9b2f86df61963b9b56ab69a9d61">base_logger_stream::deregister_unit</a>(string_view svUnitName) noexcept</div>
@@ -280,6 +280,7 @@ $(function() {
 <div class="ttc" id="aclassqx_1_1category_html_a45f05eea5cdc8a8030b3233748bbcef2"><div class="ttname"><a href="classqx_1_1category.html#a45f05eea5cdc8a8030b3233748bbcef2">qx::category::get_color</a></div><div class="ttdeci">constexpr const color &amp; get_color() const noexcept</div><div class="ttdoc">Get category color.</div><div class="ttdef"><b>Definition:</b> <a href="category_8inl_source.html#l00031">category.inl:31</a></div></div>
 <div class="ttc" id="astructqx_1_1log__unit__info_html"><div class="ttname"><a href="structqx_1_1log__unit__info.html">qx::log_unit_info</a></div><div class="ttdef"><b>Definition:</b> <a href="base__logger__stream_8h_source.html#l00047">base_logger_stream.h:48</a></div></div>
 <div class="ttc" id="astructqx_1_1logger__buffer_html"><div class="ttname"><a href="structqx_1_1logger__buffer.html">qx::logger_buffer</a></div><div class="ttdef"><b>Definition:</b> <a href="base__logger__stream_8h_source.html#l00033">base_logger_stream.h:34</a></div></div>
+<div class="ttc" id="astructqx_1_1unit_html"><div class="ttname"><a href="structqx_1_1unit.html">qx::unit</a></div><div class="ttdef"><b>Definition:</b> <a href="base_8h_source.html#l00037">base.h:38</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

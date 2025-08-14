@@ -159,7 +159,7 @@ $(function() {
 <div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;<span class="comment">        @retval             - a token that can be used to remove this callable from the delegate</span></div>
 <div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;<span class="comment">    **/</span></div>
 <div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;    <span class="keyword">template</span>&lt;callable_c&lt;return_t, args_t...&gt; callable_t&gt;</div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;    [[maybe_unused]] <a class="code" href="structqx_1_1time__ordered__priority__key.html">delegate_token_type</a> <a class="code" href="classqx_1_1base__delegate.html#ab9f7ebfb1083b6d78aaac30ee3534f22">add_free</a>(callable_t callable, <a class="code" href="priority_8h.html#a596815b7b01439344e1858a12743c8ec">priority</a> ePriority = priority::normal) noexcept;</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;    [[maybe_unused]] <a class="code" href="classqx_1_1time__ordered__priority__key.html">delegate_token_type</a> <a class="code" href="classqx_1_1base__delegate.html#ab9f7ebfb1083b6d78aaac30ee3534f22">add_free</a>(callable_t callable, <a class="code" href="priority_8h.html#a596815b7b01439344e1858a12743c8ec">priority</a> ePriority = priority::normal) noexcept;</div>
 <div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;<span class="comment"></span> </div>
 <div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;<span class="comment">    /**</span></div>
 <div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;<span class="comment">        @brief  Add a callable that will be removed from the delegate when its destruction callback is destroyed</span></div>
@@ -200,7 +200,7 @@ $(function() {
 <div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;<span class="comment">        @retval             - a token that can be used to remove this callable from the delegate</span></div>
 <div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;<span class="comment">    **/</span></div>
 <div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;    <span class="keyword">template</span>&lt;<span class="keyword">class </span>object_t, callable_c&lt;return_t, args_t...&gt; callable_t&gt;</div>
-<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;    [[maybe_unused]] <a class="code" href="structqx_1_1time__ordered__priority__key.html">delegate_token_type</a> <a class="code" href="classqx_1_1base__delegate.html#aa891d2eff3af39edb04973de42c091ef">add_weak</a>(</div>
+<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;    [[maybe_unused]] <a class="code" href="classqx_1_1time__ordered__priority__key.html">delegate_token_type</a> <a class="code" href="classqx_1_1base__delegate.html#aa891d2eff3af39edb04973de42c091ef">add_weak</a>(</div>
 <div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;        std::weak_ptr&lt;object_t&gt; pWeakObject,</div>
 <div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;        callable_t              callable,</div>
 <div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;        <a class="code" href="priority_8h.html#a596815b7b01439344e1858a12743c8ec">priority</a>                ePriority = priority::normal) noexcept;</div>
@@ -215,7 +215,7 @@ $(function() {
 <div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;<span class="comment">        @retval             - a token that can be used to remove this callable from the delegate</span></div>
 <div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;<span class="comment">    **/</span></div>
 <div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;    <span class="keyword">template</span>&lt;<span class="keyword">class</span> <span class="keywordtype">object</span>_t&gt;</div>
-<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;    [[maybe_unused]] <a class="code" href="structqx_1_1time__ordered__priority__key.html">delegate_token_type</a> <a class="code" href="classqx_1_1base__delegate.html#aa891d2eff3af39edb04973de42c091ef">add_weak</a>(</div>
+<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;    [[maybe_unused]] <a class="code" href="classqx_1_1time__ordered__priority__key.html">delegate_token_type</a> <a class="code" href="classqx_1_1base__delegate.html#aa891d2eff3af39edb04973de42c091ef">add_weak</a>(</div>
 <div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;        std::weak_ptr&lt;object_t&gt; pWeakObject,</div>
 <div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;        return_t (object_t::*pMethod)(args_t...),</div>
 <div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;        <a class="code" href="priority_8h.html#a596815b7b01439344e1858a12743c8ec">priority</a> ePriority = priority::normal) noexcept;</div>
@@ -225,7 +225,7 @@ $(function() {
 <div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;<span class="comment">        @param  token - callable token</span></div>
 <div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;<span class="comment">        @retval       - true is a callable was deleted</span></div>
 <div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;<span class="comment">    **/</span></div>
-<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="classqx_1_1base__delegate.html#a0fc4da1b2e48491e76b3c9dd0a863e02">remove</a>(<a class="code" href="structqx_1_1time__ordered__priority__key.html">delegate_token_type</a> token) noexcept;</div>
+<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="classqx_1_1base__delegate.html#a0fc4da1b2e48491e76b3c9dd0a863e02">remove</a>(<a class="code" href="classqx_1_1time__ordered__priority__key.html">delegate_token_type</a> token) noexcept;</div>
 <div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;<span class="comment"></span> </div>
 <div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;<span class="comment">    /**</span></div>
 <div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;<span class="comment">        @brief Clear all the callables in this delegate</span></div>
@@ -252,7 +252,7 @@ $(function() {
 <div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;<span class="comment">        @param  value - a function to add</span></div>
 <div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;<span class="comment">        @retval       - a destruction callback</span></div>
 <div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;<span class="comment">    **/</span></div>
-<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;    <a class="code" href="classqx_1_1destruction__callback.html">destruction_callback</a> <a class="code" href="classqx_1_1base__delegate.html#a74e1dd09550b6fe2f5ce23a7f69ed2a7">add_destruction_callback</a>(<a class="code" href="structqx_1_1time__ordered__priority__key.html">time_ordered_priority_key</a> key, function_type value) noexcept;</div>
+<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;    <a class="code" href="classqx_1_1destruction__callback.html">destruction_callback</a> <a class="code" href="classqx_1_1base__delegate.html#a74e1dd09550b6fe2f5ce23a7f69ed2a7">add_destruction_callback</a>(<a class="code" href="classqx_1_1time__ordered__priority__key.html">time_ordered_priority_key</a> key, function_type value) noexcept;</div>
 <div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;<span class="comment"></span> </div>
 <div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;<span class="comment">    /**</span></div>
 <div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;<span class="comment">        @brief  Add a value using the weak object strategy</span></div>
@@ -263,7 +263,7 @@ $(function() {
 <div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;<span class="comment">        @param  callable    - callable_t object</span></div>
 <div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;<span class="comment">    **/</span></div>
 <div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;    <span class="keyword">template</span>&lt;<span class="keyword">class </span>object_t, callable_c&lt;return_t, object_t*, args_t...&gt; callable_t&gt;</div>
-<div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classqx_1_1base__delegate.html#aa891d2eff3af39edb04973de42c091ef">add_weak</a>(<a class="code" href="structqx_1_1time__ordered__priority__key.html">time_ordered_priority_key</a> key, std::weak_ptr&lt;object_t&gt; pWeakObject, callable_t callable) noexcept;</div>
+<div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classqx_1_1base__delegate.html#aa891d2eff3af39edb04973de42c091ef">add_weak</a>(<a class="code" href="classqx_1_1time__ordered__priority__key.html">time_ordered_priority_key</a> key, std::weak_ptr&lt;object_t&gt; pWeakObject, callable_t callable) noexcept;</div>
 <div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160; </div>
 <div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;<span class="keyword">private</span>:</div>
 <div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;    <span class="comment">// todo inline allocator</span></div>
@@ -319,6 +319,7 @@ $(function() {
 <div class="ttc" id="aclassqx_1_1base__delegate_html_ab9f7ebfb1083b6d78aaac30ee3534f22"><div class="ttname"><a href="classqx_1_1base__delegate.html#ab9f7ebfb1083b6d78aaac30ee3534f22">qx::base_delegate::add_free</a></div><div class="ttdeci">delegate_token_type add_free(callable_t callable, priority ePriority=priority::normal) noexcept</div><div class="ttdoc">Add a callable without any protection.</div><div class="ttdef"><b>Definition:</b> <a href="delegate_8inl_source.html#l00077">delegate.inl:77</a></div></div>
 <div class="ttc" id="aclassqx_1_1delegate_html"><div class="ttname"><a href="classqx_1_1delegate.html">qx::delegate</a></div><div class="ttdef"><b>Definition:</b> <a href="delegate_8h_source.html#l00206">delegate.h:206</a></div></div>
 <div class="ttc" id="aclassqx_1_1destruction__callback_html"><div class="ttname"><a href="classqx_1_1destruction__callback.html">qx::destruction_callback</a></div><div class="ttdoc">Class for RAII: functor passed in constructor will be called in destructor.</div><div class="ttdef"><b>Definition:</b> <a href="destruction__callback_8h_source.html#l00024">destruction_callback.h:25</a></div></div>
+<div class="ttc" id="aclassqx_1_1time__ordered__priority__key_html"><div class="ttname"><a href="classqx_1_1time__ordered__priority__key.html">qx::time_ordered_priority_key</a></div><div class="ttdoc">A class that can be used as a key in ordered containers so that items are ordered in descending order...</div><div class="ttdef"><b>Definition:</b> <a href="priority_8h_source.html#l00045">priority.h:46</a></div></div>
 <div class="ttc" id="aconcepts_8h_html"><div class="ttname"><a href="concepts_8h.html">concepts.h</a></div></div>
 <div class="ttc" id="adelegate_8h_html_a2f75badbf060cfadd26e481a67ff0563"><div class="ttname"><a href="delegate_8h.html#a2f75badbf060cfadd26e481a67ff0563">qx::execute</a></div><div class="ttdeci">return_t execute(args_t... args) const noexcept</div><div class="ttdoc">Execute all the callables the delegate has.</div></div>
 <div class="ttc" id="adelegate_8inl_html"><div class="ttname"><a href="delegate_8inl.html">delegate.inl</a></div></div>
@@ -326,7 +327,6 @@ $(function() {
 <div class="ttc" id="apriority_8h_html"><div class="ttname"><a href="priority_8h.html">priority.h</a></div></div>
 <div class="ttc" id="apriority_8h_html_a596815b7b01439344e1858a12743c8ec"><div class="ttname"><a href="priority_8h.html#a596815b7b01439344e1858a12743c8ec">qx::priority</a></div><div class="ttdeci">priority</div><div class="ttdoc">User may use the predefined values or the custom ones, for ex. &quot;normal - 1&quot;, this type is supposed to...</div><div class="ttdef"><b>Definition:</b> <a href="priority_8h_source.html#l00025">priority.h:26</a></div></div>
 <div class="ttc" id="astatic__assert_8h_html"><div class="ttname"><a href="static__assert_8h.html">static_assert.h</a></div><div class="ttdoc">Static assert macros.</div></div>
-<div class="ttc" id="astructqx_1_1time__ordered__priority__key_html"><div class="ttname"><a href="structqx_1_1time__ordered__priority__key.html">qx::time_ordered_priority_key</a></div><div class="ttdoc">A structure that can be used as a key in ordered containers so that items are ordered in descending o...</div><div class="ttdef"><b>Definition:</b> <a href="priority_8h_source.html#l00041">priority.h:42</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
