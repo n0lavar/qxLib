@@ -25,7 +25,7 @@ runs:
           brew install glm;
         fi
     - name: Install boost
-      uses: MarkusJx/install-boost@v2.5.0
+      uses: MarkusJx/install-boost@main
       id: install_boost
       with:
         boost_version: 1.81.0
