@@ -98,20 +98,49 @@ $(function() {
 <div class="line"><a name="l00027"></a><span class="lineno"><a class="line" href="names_8h.html#a8f51bd935768d1845211352e225739ed">   27</a></span>&#160;<span class="preprocessor">#define QX_LINE_NAME(prefix) _QX_JOIN(prefix, __LINE__)</span></div>
 <div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="comment"></span> </div>
 <div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="comment">/**</span></div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="comment">    @brief Get a method name (without className::), while statically verifying that the method exists</span></div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="comment">    @param className  - class name</span></div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="comment">    @param methodName - method name</span></div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="comment">**/</span></div>
-<div class="line"><a name="l00034"></a><span class="lineno"><a class="line" href="names_8h.html#a0d290e77a2a0cbb4b13216748b0954cc">   34</a></span>&#160;<span class="preprocessor">#define QX_METHOD_NAME(className, methodName) \</span></div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="preprocessor">    ((void)sizeof(&amp;className::methodName), QX_STRINGIFY(methodName)))</span></div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="comment">/**</span></div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="comment">    @brief Get a full method name (className::methodName), while statically verifying that the method exists</span></div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="comment">    @param className  - class name</span></div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="comment">    @param methodName - method name</span></div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="comment">**/</span></div>
-<div class="line"><a name="l00042"></a><span class="lineno"><a class="line" href="names_8h.html#a5b8717c5812f35b4855d31744b8a2b88">   42</a></span>&#160;<span class="preprocessor">#define QX_FULL_METHOD_NAME(className, methodName) \</span></div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="preprocessor">    ((void)sizeof(&amp;className::methodName), QX_STRINGIFY(className) &quot;::&quot;</span> QX_STRINGIFY(methodName))</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="comment">    @brief A helper to avoid duplication when converting c libs constants to string literals</span></div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="comment">    @param name - c constant</span></div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="comment">    @code</span></div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="comment">    static const char* GlfwErrorCodeToString(int nErrorCode)</span></div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="comment">    {</span></div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="comment">        switch (nErrorCode)</span></div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="comment">        {</span></div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="comment">            QX_C_CONSTANT_CASE(GLFW_NO_ERROR);</span></div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="comment">            QX_C_CONSTANT_CASE(GLFW_NOT_INITIALIZED);</span></div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="comment">            QX_C_CONSTANT_CASE(GLFW_NO_CURRENT_CONTEXT);</span></div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="comment">            QX_C_CONSTANT_CASE(GLFW_INVALID_ENUM);</span></div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="comment">            QX_C_CONSTANT_CASE(GLFW_INVALID_VALUE);</span></div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="comment">            QX_C_CONSTANT_CASE(GLFW_OUT_OF_MEMORY);</span></div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="comment">            QX_C_CONSTANT_CASE(GLFW_API_UNAVAILABLE);</span></div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="comment">            QX_C_CONSTANT_CASE(GLFW_VERSION_UNAVAILABLE);</span></div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="comment">            QX_C_CONSTANT_CASE(GLFW_PLATFORM_ERROR);</span></div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="comment">            QX_C_CONSTANT_CASE(GLFW_FORMAT_UNAVAILABLE);</span></div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="comment">            QX_C_CONSTANT_CASE(GLFW_NO_WINDOW_CONTEXT);</span></div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="comment">        }</span></div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="comment">        return &quot;GLFW_UNKNOWN_ERROR&quot;;</span></div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="comment">    }</span></div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<span class="comment">    @endcode</span></div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<span class="comment">**/</span></div>
+<div class="line"><a name="l00054"></a><span class="lineno"><a class="line" href="names_8h.html#ab93acde05fa0a20d687f838a134a0d74">   54</a></span>&#160;<span class="preprocessor">#define QX_C_CONSTANT_CASE(name) \</span></div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="preprocessor">    case name:                   \</span></div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;<span class="preprocessor">        return #name</span></div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;<span class="comment">/**</span></div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;<span class="comment">    @brief Get a method name (without className::), while statically verifying that the method exists</span></div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;<span class="comment">    @param className  - class name</span></div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;<span class="comment">    @param methodName - method name</span></div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;<span class="comment">**/</span></div>
+<div class="line"><a name="l00063"></a><span class="lineno"><a class="line" href="names_8h.html#a0d290e77a2a0cbb4b13216748b0954cc">   63</a></span>&#160;<span class="preprocessor">#define QX_METHOD_NAME(className, methodName) \</span></div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;<span class="preprocessor">    ((void)sizeof(&amp;className::methodName), QX_STRINGIFY(methodName)))</span></div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;<span class="comment">/**</span></div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;<span class="comment">    @brief Get a full method name (className::methodName), while statically verifying that the method exists</span></div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;<span class="comment">    @param className  - class name</span></div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;<span class="comment">    @param methodName - method name</span></div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;<span class="comment">**/</span></div>
+<div class="line"><a name="l00071"></a><span class="lineno"><a class="line" href="names_8h.html#a5b8717c5812f35b4855d31744b8a2b88">   71</a></span>&#160;<span class="preprocessor">#define QX_FULL_METHOD_NAME(className, methodName) \</span></div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;<span class="preprocessor">    ((void)sizeof(&amp;className::methodName), QX_STRINGIFY(className) &quot;::&quot;</span> QX_STRINGIFY(methodName))</div>
 <div class="ttc" id="amacros_2common_8h_html"><div class="ttname"><a href="macros_2common_8h.html">common.h</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->

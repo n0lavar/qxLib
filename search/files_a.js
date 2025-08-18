@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['names_2eh_1051',['names.h',['../names_8h.html',1,'']]],
-  ['newtons_5fmethod_2eh_1052',['newtons_method.h',['../newtons__method_8h.html',1,'']]]
+  ['moving_5faverage_2eh_1064',['moving_average.h',['../moving__average_8h.html',1,'']]],
+  ['moving_5faverage_2einl_1065',['moving_average.inl',['../moving__average_8inl.html',1,'']]]
 ];

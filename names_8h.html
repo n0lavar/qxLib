@@ -83,6 +83,9 @@ Macros</h2></td></tr>
 <tr class="memitem:a8f51bd935768d1845211352e225739ed"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="names_8h.html#a8f51bd935768d1845211352e225739ed">QX_LINE_NAME</a>(prefix)&#160;&#160;&#160;_QX_JOIN(prefix, __LINE__)</td></tr>
 <tr class="memdesc:a8f51bd935768d1845211352e225739ed"><td class="mdescLeft">&#160;</td><td class="mdescRight">Do magic! Creates a unique name using the line number.  <a href="names_8h.html#a8f51bd935768d1845211352e225739ed">More...</a><br /></td></tr>
 <tr class="separator:a8f51bd935768d1845211352e225739ed"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab93acde05fa0a20d687f838a134a0d74"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="names_8h.html#ab93acde05fa0a20d687f838a134a0d74">QX_C_CONSTANT_CASE</a>(name)</td></tr>
+<tr class="memdesc:ab93acde05fa0a20d687f838a134a0d74"><td class="mdescLeft">&#160;</td><td class="mdescRight">A helper to avoid duplication when converting c libs constants to string literals.  <a href="names_8h.html#ab93acde05fa0a20d687f838a134a0d74">More...</a><br /></td></tr>
+<tr class="separator:ab93acde05fa0a20d687f838a134a0d74"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0d290e77a2a0cbb4b13216748b0954cc"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="names_8h.html#a0d290e77a2a0cbb4b13216748b0954cc">QX_METHOD_NAME</a>(className,  methodName)&#160;&#160;&#160;    ((void)sizeof(&amp;className::methodName), <a class="el" href="names_8h.html#aafbad02364b98b20fd2de0a4afedc06d">QX_STRINGIFY</a>(methodName)))</td></tr>
 <tr class="memdesc:a0d290e77a2a0cbb4b13216748b0954cc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get a method name (without className::), while statically verifying that the method exists.  <a href="names_8h.html#a0d290e77a2a0cbb4b13216748b0954cc">More...</a><br /></td></tr>
 <tr class="separator:a0d290e77a2a0cbb4b13216748b0954cc"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -97,6 +100,56 @@ Macros</h2></td></tr>
 
 <p class="definition">Definition in file <a class="el" href="names_8h_source.html">names.h</a>.</p>
 </div><h2 class="groupheader">Macro Definition Documentation</h2>
+<a id="ab93acde05fa0a20d687f838a134a0d74"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab93acde05fa0a20d687f838a134a0d74">&#9670;&nbsp;</a></span>QX_C_CONSTANT_CASE</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define QX_C_CONSTANT_CASE</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">name</td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Value:</b><div class="fragment"><div class="line">    <span class="keywordflow">case</span> name:                   \</div>
+<div class="line">        return #name</div>
+</div><!-- fragment -->
+<p>A helper to avoid duplication when converting c libs constants to string literals. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">name</td><td>- c constant <div class="fragment"><div class="line"><span class="keyword">static</span> <span class="keyword">const</span> <span class="keywordtype">char</span>* GlfwErrorCodeToString(<span class="keywordtype">int</span> nErrorCode)</div>
+<div class="line">{</div>
+<div class="line">    <span class="keywordflow">switch</span> (nErrorCode)</div>
+<div class="line">    {</div>
+<div class="line">        <a class="code" href="names_8h.html#ab93acde05fa0a20d687f838a134a0d74">QX_C_CONSTANT_CASE</a>(GLFW_NO_ERROR);</div>
+<div class="line">        <a class="code" href="names_8h.html#ab93acde05fa0a20d687f838a134a0d74">QX_C_CONSTANT_CASE</a>(GLFW_NOT_INITIALIZED);</div>
+<div class="line">        <a class="code" href="names_8h.html#ab93acde05fa0a20d687f838a134a0d74">QX_C_CONSTANT_CASE</a>(GLFW_NO_CURRENT_CONTEXT);</div>
+<div class="line">        <a class="code" href="names_8h.html#ab93acde05fa0a20d687f838a134a0d74">QX_C_CONSTANT_CASE</a>(GLFW_INVALID_ENUM);</div>
+<div class="line">        <a class="code" href="names_8h.html#ab93acde05fa0a20d687f838a134a0d74">QX_C_CONSTANT_CASE</a>(GLFW_INVALID_VALUE);</div>
+<div class="line">        <a class="code" href="names_8h.html#ab93acde05fa0a20d687f838a134a0d74">QX_C_CONSTANT_CASE</a>(GLFW_OUT_OF_MEMORY);</div>
+<div class="line">        <a class="code" href="names_8h.html#ab93acde05fa0a20d687f838a134a0d74">QX_C_CONSTANT_CASE</a>(GLFW_API_UNAVAILABLE);</div>
+<div class="line">        <a class="code" href="names_8h.html#ab93acde05fa0a20d687f838a134a0d74">QX_C_CONSTANT_CASE</a>(GLFW_VERSION_UNAVAILABLE);</div>
+<div class="line">        <a class="code" href="names_8h.html#ab93acde05fa0a20d687f838a134a0d74">QX_C_CONSTANT_CASE</a>(GLFW_PLATFORM_ERROR);</div>
+<div class="line">        <a class="code" href="names_8h.html#ab93acde05fa0a20d687f838a134a0d74">QX_C_CONSTANT_CASE</a>(GLFW_FORMAT_UNAVAILABLE);</div>
+<div class="line">        <a class="code" href="names_8h.html#ab93acde05fa0a20d687f838a134a0d74">QX_C_CONSTANT_CASE</a>(GLFW_NO_WINDOW_CONTEXT);</div>
+<div class="line">    }</div>
+<div class="line"> </div>
+<div class="line">    <span class="keywordflow">return</span> <span class="stringliteral">&quot;GLFW_UNKNOWN_ERROR&quot;</span>;</div>
+<div class="line">}</div>
+<div class="ttc" id="anames_8h_html_ab93acde05fa0a20d687f838a134a0d74"><div class="ttname"><a href="names_8h.html#ab93acde05fa0a20d687f838a134a0d74">QX_C_CONSTANT_CASE</a></div><div class="ttdeci">#define QX_C_CONSTANT_CASE(name)</div><div class="ttdoc">A helper to avoid duplication when converting c libs constants to string literals.</div><div class="ttdef"><b>Definition:</b> <a href="names_8h_source.html#l00054">names.h:54</a></div></div>
+</div><!-- fragment --> </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="names_8h_source.html#l00054">54</a> of file <a class="el" href="names_8h_source.html">names.h</a>.</p>
+
+</div>
+</div>
 <a id="a5b8717c5812f35b4855d31744b8a2b88"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a5b8717c5812f35b4855d31744b8a2b88">&#9670;&nbsp;</a></span>QX_FULL_METHOD_NAME</h2>
 
@@ -132,7 +185,7 @@ Macros</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="names_8h_source.html#l00042">42</a> of file <a class="el" href="names_8h_source.html">names.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="names_8h_source.html#l00071">71</a> of file <a class="el" href="names_8h_source.html">names.h</a>.</p>
 
 </div>
 </div>
@@ -199,7 +252,7 @@ Macros</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="names_8h_source.html#l00034">34</a> of file <a class="el" href="names_8h_source.html">names.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="names_8h_source.html#l00063">63</a> of file <a class="el" href="names_8h_source.html">names.h</a>.</p>
 
 </div>
 </div>
