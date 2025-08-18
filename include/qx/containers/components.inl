@@ -10,21 +10,39 @@
 namespace qx
 {
 
-template<std::derived_from<rtti_pure_base> base_component_t>
-components<base_component_t>::status::status(priority ePriority, flags<component_status> eStatusFlags) noexcept
+namespace details
+{
+
+template<class base_component_t, std::derived_from<base_component_t> component_t>
+struct get_inheritance_sequence
+{
+    /*
+        |    | rtti_base | c1 | base_component_t | c2 | c3 | component_t |
+        | t1 | <=======================================================> |
+        | t2 | <===============================>                         |
+        | t3 |                                    <====================> |
+    */
+    using t1 = typename component_t::inheritance_tuple_type;
+    using t2 = typename base_component_t::inheritance_tuple_type;
+    using t3 = tuple_utils::remove_t<t1, t2>;
+
+    using type = t3;
+};
+
+} // namespace details
+
+inline component_status_key::component_status_key(priority ePriority, flags<component_status> eStatusFlags) noexcept
     : time_ordered_priority_key(ePriority)
     , m_eStatusFlags(eStatusFlags)
 {
 }
 
-template<std::derived_from<rtti_pure_base> base_component_t>
-constexpr flags<component_status> components<base_component_t>::status::get_status_flags() const noexcept
+constexpr flags<component_status> component_status_key::get_status_flags() const noexcept
 {
     return m_eStatusFlags;
 }
 
-template<std::derived_from<rtti_pure_base> base_component_t>
-constexpr void components<base_component_t>::status::set_status_flags(flags<component_status> eStatusFlags) noexcept
+constexpr void component_status_key::set_status_flags(flags<component_status> eStatusFlags) noexcept
 {
     m_eStatusFlags = eStatusFlags;
 }
@@ -53,11 +71,11 @@ component_t* components<base_component_t>::add(
         return nullptr;
 
     auto        pRawComponent = pComponent.get();
-    class_data& classData     = get_or_add_class_data(
+    class_data& classData     = iterate_class_data(
         pRawComponent,
         [ePriority, statusFlags, pRawComponent](class_data& classData)
         {
-            classData.priorityCache.emplace(status(ePriority, statusFlags), pRawComponent);
+            classData.priorityCache.emplace(component_status_key(ePriority, statusFlags), pRawComponent);
         });
     classData.components.push_back(std::move(pComponent));
     return pRawComponent;
@@ -69,7 +87,7 @@ std::unique_ptr<base_component_t> components<base_component_t>::remove(const bas
     if (!pRawComponent)
         return nullptr;
 
-    class_data& classData = get_or_add_class_data(
+    class_data& classData = iterate_class_data(
         pRawComponent,
         [pRawComponent](class_data& classData)
         {
@@ -212,7 +230,7 @@ template<std::derived_from<rtti_pure_base> base_component_t>
 std::optional<flags<component_status>> components<base_component_t>::get_component_status(
     const base_component_t* pRawComponent) const noexcept
 {
-    std::optional<status> optComponentStatus = get_status(pRawComponent);
+    std::optional<component_status_key> optComponentStatus = get_status(pRawComponent);
     return optComponentStatus ? std::optional(optComponentStatus->get_status_flags()) : std::nullopt;
 }
 
@@ -221,7 +239,7 @@ bool components<base_component_t>::set_component_status(
     const base_component_t* pRawComponent,
     flags<component_status> newStatus) noexcept
 {
-    std::optional<status> optComponentStatus = get_status(pRawComponent);
+    std::optional<component_status_key> optComponentStatus = get_status(pRawComponent);
     if (!optComponentStatus)
         return false;
 
@@ -259,7 +277,7 @@ template<std::derived_from<rtti_pure_base> base_component_t>
 std::optional<priority> components<base_component_t>::get_component_priority(
     const base_component_t* pRawComponent) const noexcept
 {
-    std::optional<status> optComponentStatus = get_status(pRawComponent);
+    std::optional<component_status_key> optComponentStatus = get_status(pRawComponent);
     return optComponentStatus ? std::optional(optComponentStatus->get_priority()) : std::nullopt;
 }
 
@@ -268,7 +286,7 @@ bool components<base_component_t>::set_component_priority(
     const base_component_t* pRawComponent,
     priority                eNewComponentPriority) noexcept
 {
-    std::optional<status> optComponentStatus = get_status(pRawComponent);
+    std::optional<component_status_key> optComponentStatus = get_status(pRawComponent);
     if (!optComponentStatus)
         return false;
 
@@ -291,7 +309,7 @@ void components<base_component_t>::clear() noexcept
 }
 
 template<std::derived_from<rtti_pure_base> base_component_t>
-std::optional<typename components<base_component_t>::status> components<base_component_t>::get_status(
+std::optional<component_status_key> components<base_component_t>::get_status(
     const base_component_t* pRawComponent) const noexcept
 {
     if (!pRawComponent)
@@ -304,18 +322,20 @@ std::optional<typename components<base_component_t>::status> components<base_com
             return pair.second == pRawComponent;
         });
 
-    return it != m_RootClass.priorityCache.end() ? std::optional<status>(it->first) : std::nullopt;
+    return it != m_RootClass.priorityCache.end() ? std::optional<component_status_key>(it->first) : std::nullopt;
 }
 
 
 template<std::derived_from<rtti_pure_base> base_component_t>
-bool components<base_component_t>::set_status(const base_component_t* pRawComponent, status status) noexcept
+bool components<base_component_t>::set_status(
+    const base_component_t* pRawComponent,
+    component_status_key    status) noexcept
 {
     if (!pRawComponent)
         return false;
 
     bool bChanged = true;
-    get_or_add_class_data(
+    iterate_class_data(
         pRawComponent,
         [pRawComponent, status, &bChanged](class_data& classData)
         {
@@ -340,6 +360,115 @@ bool components<base_component_t>::set_status(const base_component_t* pRawCompon
         });
 
     return bChanged;
+}
+
+template<std::derived_from<rtti_pure_base> base_component_t>
+template<
+    std::derived_from<base_component_t>                                  component_t,
+    callable_c<void, typename components<base_component_t>::class_data&> callable_t>
+typename components<base_component_t>::class_data& components<base_component_t>::iterate_class_data(
+    callable_t iterateClassDataFunction) noexcept
+{
+    class_data* pClassData = &m_RootClass;
+    iterateClassDataFunction(*pClassData);
+
+    tuple_utils::iterate<typename details::get_inheritance_sequence<base_component_t, component_t>::type>(
+        [&pClassData, &iterateClassDataFunction]<class T, size_t I>()
+        {
+            pClassData = &pClassData->get_or_add_class_data(T::get_class_id_static());
+            iterateClassDataFunction(*pClassData);
+        });
+
+    return *pClassData;
+}
+
+template<std::derived_from<rtti_pure_base> base_component_t>
+template<
+    std::derived_from<base_component_t>                                  component_t,
+    callable_c<void, typename components<base_component_t>::class_data&> callable_t>
+const typename components<base_component_t>::class_data& components<base_component_t>::iterate_class_data(
+    callable_t iterateClassDataFunction) const noexcept
+{
+    return QX_CONST_CAST_THIS()->template iterate_class_data<component_t>(std::move(iterateClassDataFunction));
+}
+
+template<std::derived_from<rtti_pure_base> base_component_t>
+template<std::derived_from<base_component_t> component_t>
+typename components<base_component_t>::class_data& components<base_component_t>::get_or_add_class_data() noexcept
+{
+    class_data* pClassData = &m_RootClass;
+
+    tuple_utils::iterate<typename details::get_inheritance_sequence<base_component_t, component_t>::type>(
+        [&pClassData]<class T, size_t I>()
+        {
+            pClassData = &pClassData->get_or_add_class_data(T::get_class_id_static());
+        });
+
+    return *pClassData;
+}
+
+template<std::derived_from<rtti_pure_base> base_component_t>
+template<std::derived_from<base_component_t> component_t>
+const typename components<base_component_t>::class_data& components<base_component_t>::get_or_add_class_data()
+    const noexcept
+{
+    return QX_CONST_CAST_THIS()->template get_or_add_class_data<component_t>();
+}
+
+template<std::derived_from<rtti_pure_base> base_component_t>
+template<callable_c<void, typename components<base_component_t>::class_data&> callable_t>
+typename components<base_component_t>::class_data& components<base_component_t>::iterate_class_data(
+    const base_component_t* pRawComponent,
+    callable_t              iterateClassDataFunction) noexcept
+{
+    class_data* pClassData = &m_RootClass;
+    iterateClassDataFunction(*pClassData);
+
+    std::span<const class_id> allIds = pRawComponent->get_inheritance_sequence();
+    std::span<const class_id> baseClassIds(
+        std::ranges::find(allIds, base_component_t::get_class_id_static()),
+        allIds.end());
+
+    for (auto it = baseClassIds.begin() + 1; it != baseClassIds.end(); ++it)
+    {
+        pClassData = &pClassData->get_or_add_class_data(*it);
+        iterateClassDataFunction(*pClassData);
+    }
+
+    return *pClassData;
+}
+
+template<std::derived_from<rtti_pure_base> base_component_t>
+template<callable_c<void, typename components<base_component_t>::class_data&> callable_t>
+const typename components<base_component_t>::class_data& components<base_component_t>::iterate_class_data(
+    const base_component_t* pRawComponent,
+    callable_t              iterateClassDataFunction) const noexcept
+{
+    return QX_CONST_CAST_THIS()->iterate_class_data(pRawComponent, std::move(iterateClassDataFunction));
+}
+
+template<std::derived_from<rtti_pure_base> base_component_t>
+typename components<base_component_t>::class_data& components<base_component_t>::get_or_add_class_data(
+    const base_component_t* pRawComponent) noexcept
+{
+    class_data* pClassData = &m_RootClass;
+
+    std::span<const class_id> allIds = pRawComponent->get_inheritance_sequence();
+    std::span<const class_id> baseClassIds(
+        std::ranges::find(allIds, base_component_t::get_class_id_static()),
+        allIds.end());
+
+    for (auto it = baseClassIds.begin() + 1; it != baseClassIds.end(); ++it)
+        pClassData = &pClassData->get_or_add_class_data(*it);
+
+    return *pClassData;
+}
+
+template<std::derived_from<rtti_pure_base> base_component_t>
+const typename components<base_component_t>::class_data& components<base_component_t>::get_or_add_class_data(
+    const base_component_t* pRawComponent) const noexcept
+{
+    return QX_CONST_CAST_THIS()->get_or_add_class_data(pRawComponent);
 }
 
 } // namespace qx

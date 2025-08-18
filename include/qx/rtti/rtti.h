@@ -110,7 +110,8 @@ public:
 
     static constexpr class_id get_class_id_static() noexcept
     {
-        return class_id::create<this_class_type>();
+        constexpr class_id id = class_id::create<this_class_type>();
+        return id;
     }
 
     virtual class_id get_class_id() const noexcept
@@ -181,7 +182,8 @@ public:                                                                         
     }                                                                                                               \
     static constexpr qx::class_id get_class_id_static() noexcept                                                    \
     {                                                                                                               \
-        return qx::class_id::create<this_class_type>();                                                             \
+        constexpr qx::class_id id = qx::class_id::create<this_class_type>();                                        \
+        return id;                                                                                                  \
     }                                                                                                               \
     virtual qx::string_view get_class_name() const noexcept override                                                \
     {                                                                                                               \

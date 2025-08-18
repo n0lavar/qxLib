@@ -13,3 +13,5 @@
 #include <qx/math/interpolation.h>
 #include <qx/math/newtons_method.h>
 #include <qx/math/prime.h>
+
+#include <qx/math/units/data.h>

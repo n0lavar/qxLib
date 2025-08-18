@@ -9,6 +9,7 @@
 #pragma once
 
 #include <qx/containers/flags.h>
+#include <qx/hash.h>
 #include <qx/typedefs.h>
 
 namespace qx
@@ -44,6 +45,8 @@ enum class priority : u8
 **/
 class time_ordered_priority_key
 {
+    friend std::hash<time_ordered_priority_key>;
+
 public:
     constexpr time_ordered_priority_key() noexcept = default;
 
@@ -104,3 +107,15 @@ constexpr auto operator<=>(qx::priority eLeft, qx::priority eRight)
 {
     return static_cast<u8>(eLeft) <=> static_cast<u8>(eRight);
 }
+
+template<>
+struct std::hash<qx::time_ordered_priority_key>
+{
+    constexpr size_t operator()(const qx::time_ordered_priority_key& timeOrderedPriorityKey) const noexcept
+    {
+        size_t nHash = 0;
+        qx::hash_combine(nHash, timeOrderedPriorityKey.m_nId);
+        qx::hash_combine(nHash, timeOrderedPriorityKey.m_ePriority);
+        return nHash;
+    }
+};

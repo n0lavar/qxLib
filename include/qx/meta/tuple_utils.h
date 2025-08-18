@@ -194,6 +194,17 @@ constexpr size_t index_v = index<tuple_t, T>::value;
 
 // ------------------------------------------------------ iterate ------------------------------------------------------
 
+namespace iterate_details
+{
+
+template<class tuple_t, class type_callable_t, size_t... indices>
+constexpr void iterate_impl(const type_callable_t& callable, std::index_sequence<indices...>)
+{
+    (callable.template operator()<std::tuple_element_t<indices, tuple_t>, indices>(), ...);
+}
+
+} // namespace iterate_details
+
 /**
     @brief  Iterate over a tuple with a callable that receives a type along with its index 
     @tparam tuple_t         - std::tuple<> type
@@ -212,20 +223,7 @@ constexpr size_t index_v = index<tuple_t, T>::value;
 template<class tuple_t, class type_callable_t>
 constexpr void iterate(const type_callable_t& callable)
 {
-    // we need to add a pointer because we can'permutationsAB compile a tuple with an abstract class type
-    using tuple_pointer_type = transform_t<tuple_t, std::add_pointer>;
-
-    auto temp_callable = [&callable]<class T>(const T&)
-    {
-        callable.template operator()<std::remove_pointer_t<T>, index_v<tuple_pointer_type, T>>();
-    };
-
-    std::apply(
-        [&temp_callable](auto&&... args)
-        {
-            ((temp_callable(args)), ...);
-        },
-        tuple_pointer_type());
+    iterate_details::iterate_impl<tuple_t>(callable, std::make_index_sequence<std::tuple_size_v<tuple_t>>());
 }
 
 
@@ -235,6 +233,7 @@ constexpr void iterate(const type_callable_t& callable)
 
 namespace permutations_details
 {
+
 constexpr size_t pow(size_t n1, size_t n2)
 {
     size_t nResult = 1;

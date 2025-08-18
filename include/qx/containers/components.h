@@ -30,6 +30,45 @@ enum class component_status
 
 /**
 
+    @class   component_status_key
+    @brief   A class that acts like time_ordered_priority_key but has a status field
+    @author  Khrapov
+    @date    10.08.2025
+
+    **/
+class component_status_key : public time_ordered_priority_key
+{
+public:
+    constexpr component_status_key() noexcept = default;
+
+    /**
+        @brief status object constructor
+        @param ePriority    - key priority
+        @param eStatusFlags - object status
+        **/
+    component_status_key(priority ePriority, flags<component_status> eStatusFlags) noexcept;
+
+    /**
+        @brief  Get object status
+        @retval  - object status
+        **/
+    constexpr flags<component_status> get_status_flags() const noexcept;
+
+    /**
+        @brief Set object status
+        @param eStatusFlags - object status
+        **/
+    constexpr void set_status_flags(flags<component_status> eStatusFlags) noexcept;
+
+    using time_ordered_priority_key::operator<;
+    constexpr bool operator==(const component_status_key&) const noexcept = default;
+
+private:
+    flags<component_status> m_eStatusFlags = component_status::default_value;
+};
+
+/**
+
     @class   components
     @brief   Container for components system
     @details Stores components and allows them to be accessed by a template argument or a class id.
@@ -48,56 +87,13 @@ public:
     using pointer_type = std::unique_ptr<base_component_t>;
 
 private:
-    /**
-
-        @class   status
-        @brief   A class that acts like time_ordered_priority_key but has a status field
-        @author  Khrapov
-        @date    10.08.2025
-
-    **/
-    class status : public time_ordered_priority_key
-    {
-    public:
-        constexpr status() noexcept = default;
-
-        /**
-            @brief status object constructor
-            @param ePriority    - key priority
-            @param eStatusFlags - object status
-        **/
-        status(priority ePriority, flags<component_status> eStatusFlags) noexcept;
-
-        /**
-            @brief  Get object status
-            @retval  - object status
-        **/
-        constexpr flags<component_status> get_status_flags() const noexcept;
-
-        /**
-            @brief Set object status
-            @param eStatusFlags - object status
-        **/
-        constexpr void set_status_flags(flags<component_status> eStatusFlags) noexcept;
-
-        using time_ordered_priority_key::operator<;
-        constexpr bool operator==(const status&) const noexcept = default;
-
-    private:
-        flags<component_status> m_eStatusFlags = component_status::default_value;
-    };
-
     struct class_data
     {
         std::unordered_map<class_id, std::unique_ptr<class_data>> derivedClasses;
         std::vector<pointer_type>                                 components;
-        std::multimap<status, base_component_t*>                  priorityCache;
+        std::multimap<component_status_key, base_component_t*>    priorityCache;
 
         [[nodiscard]] class_data& get_or_add_class_data(class_id id) noexcept;
-    };
-
-    static constexpr auto stub_callback = [](auto&&...)
-    {
     };
 
 public:
@@ -286,7 +282,7 @@ private:
         @param  pRawComponent - raw component pointer which acts like a component's handle
         @retval               - status
     **/
-    [[nodiscard]] std::optional<status> get_status(const base_component_t* pRawComponent) const noexcept;
+    [[nodiscard]] std::optional<component_status_key> get_status(const base_component_t* pRawComponent) const noexcept;
 
     /**
         @brief   Set a status of a given component
@@ -295,106 +291,98 @@ private:
         @param   status        - new component's status
         @retval                - true if the component is found and a status was set
     **/
-    [[maybe_unused]] bool set_status(const base_component_t* pRawComponent, status status) noexcept;
+    [[maybe_unused]] bool set_status(const base_component_t* pRawComponent, component_status_key status) noexcept;
 
     /**
-        @brief  Get or add class data of a given type
+        @brief  Iterate class data of a given type
         @tparam component_t              - final class type
         @tparam callable_t               - a callable that takes a class data
         @param  iterateClassDataFunction - a function that iterates over a class data from base_component_t + 1 to component_t
-        @retval                          - or add class data
+        @retval                          - final class data object
     **/
     template<
-        std::derived_from<base_component_t> component_t,
-        callable_c<void, class_data&>       callable_t = decltype(stub_callback)>
-    class_data& get_or_add_class_data(callable_t iterateClassDataFunction = stub_callback) noexcept
-    {
-        /*
-            |    | rtti_base | c1 | base_component_t | c2 | c3 | component_t |
-            | t1 | <=======================================================> |
-            | t2 | <===============================>                         |
-            | t3 |                                    <====================> |
-        */
-        using t1 = typename component_t::inheritance_tuple_type;
-        using t2 = typename base_component_t::inheritance_tuple_type;
-        using t3 = tuple_utils::remove_t<t1, t2>;
-
-        class_data* pClassData = &m_RootClass;
-        iterateClassDataFunction(*pClassData);
-
-        tuple_utils::iterate<t3>(
-            [&pClassData, &iterateClassDataFunction]<class T, size_t I>()
-            {
-                pClassData = &pClassData->get_or_add_class_data(T::get_class_id_static());
-                iterateClassDataFunction(*pClassData);
-            });
-
-        return *pClassData;
-    }
+        std::derived_from<base_component_t>                                  component_t,
+        callable_c<void, typename components<base_component_t>::class_data&> callable_t>
+    class_data& iterate_class_data(callable_t iterateClassDataFunction) noexcept;
 
     /**
-        @brief  Get or add class data of a given type
+        @brief  Iterate class data of a given type
         @tparam component_t              - final class type
         @tparam callable_t               - a callable that takes a class data
         @param  iterateClassDataFunction - a function that iterates over a class data from base_component_t + 1 to component_t
-        @retval                          - or add class data
+        @retval                          - final class data object
     **/
     template<
-        std::derived_from<base_component_t> component_t,
-        callable_c<void, class_data&>       callable_t = decltype(stub_callback)>
-    const class_data& get_or_add_class_data(callable_t iterateClassDataFunction = stub_callback) const noexcept
-    {
-        return QX_CONST_CAST_THIS()->template get_or_add_class_data<component_t>(std::move(iterateClassDataFunction));
-    }
+        std::derived_from<base_component_t>                                  component_t,
+        callable_c<void, typename components<base_component_t>::class_data&> callable_t>
+    const class_data& iterate_class_data(callable_t iterateClassDataFunction) const noexcept;
 
     /**
-        @brief  Get or add class data of a given type
+        @brief  Get or add class data
+        @tparam component_t - final class type
+        @retval             - final class data object
+    **/
+    template<std::derived_from<base_component_t> component_t>
+    class_data& get_or_add_class_data() noexcept;
+
+    /**
+        @brief  Get or add class data
+        @tparam component_t - final class type
+        @retval             - final class data object
+    **/
+    template<std::derived_from<base_component_t> component_t>
+    const class_data& get_or_add_class_data() const noexcept;
+
+    /**
+        @brief  Iterate class data of a given type
         @tparam callable_t               - a callable that takes a class data
         @param  pRawComponent            - an object used to identify a class type
         @param  iterateClassDataFunction - a function that iterates over a class data from base_component_t + 1 to component_t
-        @retval                          - or add class data
+        @retval                          - final class data object
     **/
-    template<callable_c<void, class_data&> callable_t = decltype(stub_callback)>
-    class_data& get_or_add_class_data(
-        const base_component_t* pRawComponent,
-        callable_t              iterateClassDataFunction = stub_callback) noexcept
-    {
-        class_data* pClassData = &m_RootClass;
-        iterateClassDataFunction(*pClassData);
-
-        std::span<const class_id> allIds = pRawComponent->get_inheritance_sequence();
-        std::span<const class_id> baseClassIds(
-            std::ranges::find(allIds, base_component_t::get_class_id_static()),
-            allIds.end());
-
-        for (auto it = baseClassIds.begin() + 1; it != baseClassIds.end(); ++it)
-        {
-            pClassData = &pClassData->get_or_add_class_data(*it);
-            iterateClassDataFunction(*pClassData);
-        }
-
-        return *pClassData;
-    }
+    template<callable_c<void, typename components<base_component_t>::class_data&> callable_t>
+    class_data& iterate_class_data(const base_component_t* pRawComponent, callable_t iterateClassDataFunction) noexcept;
 
     /**
-        @brief  Get or add class data of a given type
+        @brief  Iterate class data of a given type
         @tparam callable_t               - a callable that takes a class data
         @param  pRawComponent            - an object used to identify a class type
         @param  iterateClassDataFunction - a function that iterates over a class data from base_component_t + 1 to component_t
-        @retval                          - or add class data
+        @retval                          - final class data object
     **/
-    template<callable_c<void, class_data&> callable_t = decltype(stub_callback)>
-    const class_data& get_or_add_class_data(
-        const base_component_t* pRawComponent,
-        callable_t              iterateClassDataFunction = stub_callback) const noexcept
-    {
-        return QX_CONST_CAST_THIS()->get_or_add_class_data(pRawComponent, std::move(iterateClassDataFunction));
-    }
+    template<callable_c<void, typename components<base_component_t>::class_data&> callable_t>
+    const class_data& iterate_class_data(const base_component_t* pRawComponent, callable_t iterateClassDataFunction)
+        const noexcept;
+
+    /**
+        @brief  Get or add class data
+        @param  pRawComponent - an object used to identify a class type
+        @retval               - final class data object
+    **/
+    class_data& get_or_add_class_data(const base_component_t* pRawComponent) noexcept;
+
+    /**
+        @brief  Get or add class data
+        @param  pRawComponent - an object used to identify a class type
+        @retval               - final class data object
+    **/
+    const class_data& get_or_add_class_data(const base_component_t* pRawComponent) const noexcept;
 
 private:
     class_data m_RootClass;
 };
 
 } // namespace qx
+
+template<>
+struct std::hash<qx::component_status_key>
+{
+    constexpr size_t operator()(const qx::component_status_key& status) const noexcept
+    {
+        size_t nHash = qx::get_hash<qx::time_ordered_priority_key>(status);
+        qx::hash_combine(nHash, status.get_status_flags());
+        return nHash;
+    }
+};
 
 #include <qx/containers/components.inl>

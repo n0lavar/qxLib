@@ -87,7 +87,7 @@ template<class lambda_type>
 class call_before_main_invoker
 {
 public:
-    call_before_main_invoker(lambda_type lambda) : m_Lambda(std::move(lambda))
+    constexpr call_before_main_invoker(lambda_type lambda) : m_Lambda(std::move(lambda))
     {
         m_Lambda();
     }
