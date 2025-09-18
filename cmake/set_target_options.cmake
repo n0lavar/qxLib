@@ -1,3 +1,16 @@
+function(add_compile_options_for_configs _target _configs _options)
+    foreach(config IN LISTS _configs)
+        foreach(option IN LISTS _options)
+            message(${_target})
+            message(${config})
+            message(${option})
+
+            target_compile_options(${_target} PRIVATE
+                $<$<CONFIG:${config}>:${option}>
+            )
+        endforeach()
+    endforeach()
+endfunction()
 
 function(set_target_options _target)
 
@@ -22,10 +35,11 @@ function(set_target_options _target)
     elseif(${CMAKE_CXX_COMPILER_ID} STREQUAL MSVC)
 
         string(REGEX REPLACE "bin/.+" "include" MSVC_INCLUDE_PATH ${CMAKE_CXX_COMPILER})
-    
+
         target_compile_options(${_target} PRIVATE
             # exceptions support
             /EHsc 
+
             # enable all warnings and treat them as errors
             /Wall /WX
             # ignore all MSVC headers warnings
@@ -55,14 +69,19 @@ function(set_target_options _target)
             /wd5246 # 'member': the initialization of a subobject should be wrapped in braces
             /wd5262 # 'implicit fall-through occurs here; are you missing a break statement? Use [[fallthrough]] when a break statement is intentionally omitted between cases
             /wd5264 # 'variable-name': 'const' variable is not used
-            
-            $<$<CONFIG:Debug>:          /MTd /ZI /D_DEBUG>
-            $<$<CONFIG:Release>:        /MT /DNDEBUG>
-            $<$<CONFIG:RelWithDebInfo>: /MT /DNDEBUG>
-            $<$<CONFIG:MinSizeRel>:     /MT /DNDEBUG>
+
+            $<$<CONFIG:Debug>: /MTd /ZI /D_DEBUG>
+            $<$<OR:$<CONFIG:Release>,$<CONFIG:RelWithDebInfo>,$<CONFIG:MinSizeRel>>: /MT /DNDEBUG>
 
             /MP # multithreaded compilation
         )
+
+        # disable the following warnings for the Debug configuration
+        set(NON_DEBUG_WARNINGS
+            /wd4505 # 'function' : unreferenced local function has been removed
+            /wd5233 # explicit lambda capture 'identifier' is not used
+        )
+        add_compile_options_for_configs(${_target} "Debug" "${NON_DEBUG_WARNINGS}")
         
         target_link_options(${_target} PRIVATE 
             $<$<CONFIG:Release>: /NODEFAULTLIB:LIBCMTD>
