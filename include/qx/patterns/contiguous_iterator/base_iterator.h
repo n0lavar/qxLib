@@ -64,7 +64,7 @@ protected:
     {
         m_nIndex += nShift;
     }
-    auto&& get(difference_type nShift = 0) const noexcept
+    decltype(auto) get(difference_type nShift = 0) const noexcept
     {
         return (*m_pContainer).at(m_nIndex + nShift);
     }
