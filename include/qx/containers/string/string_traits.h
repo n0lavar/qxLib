@@ -183,8 +183,18 @@ struct big_string_allocation_traits<wchar_t, usings_char_traits_t>
 template<class value_t, class usings_char_traits_t>
 struct test_char_traits;
 
+template<class value_t>
+struct base_test_char_traits
+{
+    static bool is_eng_alpha(value_t ch) noexcept
+    {
+        return (ch >= QX_CHAR_PREFIX(value_t, 'A') && ch <= QX_CHAR_PREFIX(value_t, 'Z'))
+               || (ch >= QX_CHAR_PREFIX(value_t, 'a') && ch <= QX_CHAR_PREFIX(value_t, 'z'));
+    }
+};
+
 template<class usings_char_traits_t>
-struct test_char_traits<char, usings_char_traits_t>
+struct test_char_traits<char, usings_char_traits_t> : base_test_char_traits<char>
 {
     static bool is_space(typename usings_char_traits_t::value_type ch) noexcept
     {
@@ -198,7 +208,7 @@ struct test_char_traits<char, usings_char_traits_t>
 };
 
 template<class usings_char_traits_t>
-struct test_char_traits<wchar_t, usings_char_traits_t>
+struct test_char_traits<wchar_t, usings_char_traits_t> : base_test_char_traits<wchar_t>
 {
     static bool is_space(typename usings_char_traits_t::value_type ch) noexcept
     {
