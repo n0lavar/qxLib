@@ -156,12 +156,12 @@ void resolve_assert_proceeding(
     #if QX_WITH_DEBUG_INFO
         #define QX_EXPECT_DEBUG_BREAK QX_DEBUG_BREAK
     #else
-        #define QX_EXPECT_DEBUG_BREAK QX_EMPTY_MACRO
+        #define QX_EXPECT_DEBUG_BREAK true
     #endif
 #endif
 
 #ifndef QX_EXPECT_AFTER_DEBUG_BREAK
-    #define QX_EXPECT_AFTER_DEBUG_BREAK(condition, ...) QX_EMPTY_MACRO
+    #define QX_EXPECT_AFTER_DEBUG_BREAK(condition, ...) true
 #endif
 
 #ifndef QX_ASSERT_BEFORE_DEBUG_BREAK
@@ -179,7 +179,7 @@ void resolve_assert_proceeding(
     #if QX_WITH_DEBUG_INFO
         #define QX_ASSERT_DEBUG_BREAK QX_DEBUG_BREAK
     #else
-        #define QX_ASSERT_DEBUG_BREAK QX_EMPTY_MACRO
+        #define QX_ASSERT_DEBUG_BREAK true
     #endif
 #endif
 
@@ -190,28 +190,11 @@ void resolve_assert_proceeding(
 // ------------------------------- common macros -------------------------------
 
 #define _QX_ASSERT(before_debug_break, debug_break, after_debug_break, condition, ...) \
-    [&]()                                                                              \
-    {                                                                                  \
-        QX_PUSH_SUPPRESS_MSVC_WARNINGS(4702);                                          \
-        if (!(condition)) [[unlikely]]                                                 \
-        {                                                                              \
-            before_debug_break(condition, ##__VA_ARGS__);                              \
-            debug_break;                                                               \
-            after_debug_break(condition, ##__VA_ARGS__);                               \
-            return false;                                                              \
-        }                                                                              \
-        else                                                                           \
-        {                                                                              \
-            return true;                                                               \
-        }                                                                              \
-        QX_POP_SUPPRESS_WARNINGS();                                                    \
-    }()
-
-#define _QX_ASSERT_NO_ENTRY(before_debug_break, debug_break, after_debug_break, ...) \
-    _QX_ASSERT(before_debug_break, debug_break, after_debug_break, !QX_TEXT("No entry"), ##__VA_ARGS__)
-
-#define _QX_ASSERT_NOT_IMPLEMENTED(before_debug_break, debug_break, after_debug_break, ...) \
-    _QX_ASSERT(before_debug_break, debug_break, after_debug_break, !QX_TEXT("Not implemented"), ##__VA_ARGS__)
+    ((condition)                                                                       \
+     || (before_debug_break(condition, ##__VA_ARGS__),                                 \
+         debug_break,                                                                  \
+         after_debug_break(condition, ##__VA_ARGS__),                                  \
+         false))
 
 #define _QX_ASSERT_CONTINUE(before_debug_break, debug_break, after_debug_break, condition, ...)                 \
     if (!_QX_ASSERT(before_debug_break, debug_break, after_debug_break, condition, ##__VA_ARGS__)) [[unlikely]] \
@@ -259,26 +242,6 @@ void resolve_assert_proceeding(
         ##__VA_ARGS__)
 
 /**
-    @brief   Fails unconditionally if this code should not be executed
-    @details ASSERT macros generate fatal failures and abort the program execution
-    @param   ...  - nothing or "category"
-**/
-#define QX_ASSERT_NO_ENTRY(...) \
-    _QX_ASSERT_NO_ENTRY(QX_ASSERT_BEFORE_DEBUG_BREAK, QX_ASSERT_DEBUG_BREAK, QX_ASSERT_AFTER_DEBUG_BREAK, ##__VA_ARGS__)
-
-/**
-    @brief   Fails unconditionally if this code should not be executed with "Not implemented" message
-    @details ASSERT macros generate fatal failures and abort the program execution
-    @param   ...  - nothing or "category"
-**/
-#define QX_ASSERT_NOT_IMPLEMENTED(...) \
-    _QX_ASSERT_NOT_IMPLEMENTED(        \
-        QX_ASSERT_BEFORE_DEBUG_BREAK,  \
-        QX_ASSERT_DEBUG_BREAK,         \
-        QX_ASSERT_AFTER_DEBUG_BREAK,   \
-        ##__VA_ARGS__)
-
-/**
     @brief   Verifies that condition is true
     @details EXPECT macros generate nonfatal failures and allow to continue running
     @param   condition - condition to check. if false, assert fails
@@ -294,26 +257,6 @@ void resolve_assert_proceeding(
         QX_EXPECT_DEBUG_BREAK,        \
         QX_EXPECT_AFTER_DEBUG_BREAK,  \
         condition,                    \
-        ##__VA_ARGS__)
-
-/**
-    @brief   Fails unconditionally if this code should not be executed
-    @details EXPECT macros generate nonfatal failures and allow to continue running
-    @param   ...  - nothing or "category"
-**/
-#define QX_EXPECT_NO_ENTRY(...) \
-    _QX_ASSERT_NO_ENTRY(QX_EXPECT_BEFORE_DEBUG_BREAK, QX_EXPECT_DEBUG_BREAK, QX_EXPECT_AFTER_DEBUG_BREAK, ##__VA_ARGS__)
-
-/**
-    @brief   Fails unconditionally if this code should not be executed with "Not implemented" message
-    @details EXPECT macros generate nonfatal failures and allow to continue running
-    @param   ...  - nothing or "category"
-**/
-#define QX_EXPECT_NOT_IMPLEMENTED(...) \
-    _QX_ASSERT_NOT_IMPLEMENTED(        \
-        QX_EXPECT_BEFORE_DEBUG_BREAK,  \
-        QX_EXPECT_DEBUG_BREAK,         \
-        QX_EXPECT_AFTER_DEBUG_BREAK,   \
         ##__VA_ARGS__)
 
 /**
@@ -433,6 +376,16 @@ void resolve_assert_proceeding(
         condition,                               \
         ,                                        \
         ##__VA_ARGS__)
+
+/**
+    @brief Use this as a condition in any macro above to indicate that this part of your code must never be executed
+**/
+#define QX_NO_ENTRY !QX_TEXT("No entry")
+
+/**
+    @brief Use this as a condition in any macro above to indicate that this part of your code is not ready yet
+**/
+#define QX_NOT_IMPLEMENTED !QX_TEXT("Not implemented")
 
 namespace qx::details
 {
