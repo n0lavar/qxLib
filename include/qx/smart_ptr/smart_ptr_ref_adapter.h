@@ -30,8 +30,10 @@ public:
     operator const T&() const noexcept;
 
 protected:
-    base_smart_ptr_ref_adapter(base_smart_ptr_ref_adapter&&) noexcept            = default;
-    base_smart_ptr_ref_adapter& operator=(base_smart_ptr_ref_adapter&&) noexcept = default;
+    base_smart_ptr_ref_adapter(base_smart_ptr_ref_adapter&&) noexcept                 = default;
+    base_smart_ptr_ref_adapter& operator=(base_smart_ptr_ref_adapter&&) noexcept      = default;
+    base_smart_ptr_ref_adapter(const base_smart_ptr_ref_adapter&) noexcept            = default;
+    base_smart_ptr_ref_adapter& operator=(const base_smart_ptr_ref_adapter&) noexcept = default;
 
     template<class... constructor_args_t>
     base_smart_ptr_ref_adapter(constructor_args_t&&... args);
@@ -58,6 +60,9 @@ public:
 protected:
     overload_functions_smart_ptr_ref_adapter(overload_functions_smart_ptr_ref_adapter&&) noexcept            = default;
     overload_functions_smart_ptr_ref_adapter& operator=(overload_functions_smart_ptr_ref_adapter&&) noexcept = default;
+    overload_functions_smart_ptr_ref_adapter(const overload_functions_smart_ptr_ref_adapter&) noexcept       = default;
+    overload_functions_smart_ptr_ref_adapter& operator=(const overload_functions_smart_ptr_ref_adapter&) noexcept =
+        default;
 
     template<class... constructor_args_t>
     overload_functions_smart_ptr_ref_adapter(constructor_args_t&&... args);

@@ -16,6 +16,7 @@
 
 #include <qx/containers/string/string_hash.h>
 #include <qx/macros/common.h>
+#include <qx/macros/copyable_movable.h>
 #include <qx/meta/tuple_utils.h>
 #include <qx/rtti/class_id.h>
 #include <qx/rtti/rtti_naming_strategy.h>
@@ -29,13 +30,15 @@ namespace qx
 // utility class to let you use std::derived_from
 class rtti_pure_base
 {
+    QX_COPYMOVABLE(rtti_pure_base);
+
     template<class naming_strategy_t>
     friend class rtti_root;
 
 public:
     auto operator<=>(const rtti_pure_base&) const = default;
 
-protected:
+private:
     rtti_pure_base() = default;
 };
 
@@ -53,6 +56,8 @@ protected:
 template<class naming_strategy_t = rtti_naming_strategy_class_name>
 class rtti_root : public rtti_pure_base
 {
+    QX_COPYMOVABLE(rtti_root);
+
 public:
     using base_class_type        = rtti_root;
     using super_class_type       = rtti_root;
@@ -61,9 +66,9 @@ public:
     using naming_strategy_type   = naming_strategy_t;
 
 public:
-    rtti_root() noexcept                 = default;
-    rtti_root(const rtti_root&) noexcept = default;
-    rtti_root(rtti_root&&) noexcept      = default;
+    rtti_root() noexcept = default;
+
+    auto operator<=>(const rtti_root&) const = default;
 
     template<class T>
     bool is_derived_from() const noexcept
@@ -120,8 +125,6 @@ public:
     }
 
     virtual std::span<const class_id> get_inheritance_sequence() const = 0;
-
-    auto operator<=>(const rtti_root&) const = default;
 
 protected:
     virtual ~rtti_root() noexcept = default;

@@ -54,8 +54,10 @@ public:
     using pointer               = typename super::pointer;
     using reference             = typename super::reference;
 
-    smart_ptr_ref_adapter(smart_ptr_ref_adapter&&) noexcept            = default;
-    smart_ptr_ref_adapter& operator=(smart_ptr_ref_adapter&&) noexcept = default;
+    smart_ptr_ref_adapter(smart_ptr_ref_adapter&&) noexcept                 = default;
+    smart_ptr_ref_adapter& operator=(smart_ptr_ref_adapter&&) noexcept      = default;
+    smart_ptr_ref_adapter(const smart_ptr_ref_adapter&) noexcept            = default;
+    smart_ptr_ref_adapter& operator=(const smart_ptr_ref_adapter&) noexcept = default;
 
     void reset(smart_ptr_ref_adapter other) noexcept;
 
