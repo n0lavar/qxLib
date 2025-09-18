@@ -110,7 +110,7 @@ $(function() {
 <div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    T      value;</div>
 <div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    unit_t type;</div>
 <div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160; </div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    <span class="keyword">operator</span> T() <span class="keyword">const</span> noexcept;</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    constexpr <span class="keyword">operator</span> T() <span class="keyword">const</span> noexcept;</div>
 <div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;};</div>
 <div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="comment"></span> </div>
 <div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="comment">/**</span></div>
@@ -173,8 +173,8 @@ $(function() {
 <div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160; </div>
 <div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;} <span class="comment">// namespace qx</span></div>
 <div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160; </div>
-<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;<span class="keyword">template</span>&lt;qx::arithmetic_c T, qx::enumeration_c unit_t&gt;</div>
-<div class="line"><a name="l00106"></a><span class="lineno"><a class="line" href="structstd_1_1formatter_3_01qx_1_1unit_3_01_t_00_01unit__t_01_4_00_01qx_1_1char__type_01_4.html">  106</a></span>&#160;<span class="keyword">struct </span>std::formatter&lt;qx::unit&lt;T, unit_t&gt;, qx::char_type&gt;</div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;<span class="keyword">template</span>&lt;qx::arithmetic_c T, qx::enumeration_c unit_t, <span class="keyword">class</span> <span class="keywordtype">char</span>_t&gt;</div>
+<div class="line"><a name="l00106"></a><span class="lineno"><a class="line" href="structstd_1_1formatter_3_01qx_1_1unit_3_01_t_00_01unit__t_01_4_00_01char__t_01_4.html">  106</a></span>&#160;<span class="keyword">struct </span>std::formatter&lt;qx::unit&lt;T, unit_t&gt;, char_t&gt;</div>
 <div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;{</div>
 <div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;    <span class="keyword">template</span>&lt;<span class="keyword">class</span> format_parse_context_t&gt;</div>
 <div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;    constexpr <span class="keyword">auto</span> parse(format_parse_context_t&amp; context) noexcept;</div>
@@ -183,7 +183,7 @@ $(function() {
 <div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;    constexpr <span class="keyword">auto</span> format(<span class="keyword">const</span> <a class="code" href="structqx_1_1unit.html">qx::unit&lt;T, unit_t&gt;</a>&amp; unit, format_context_type_t&amp; ctx) <span class="keyword">const</span> noexcept;</div>
 <div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160; </div>
 <div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;    std::formatter&lt;T, qx::char_type&gt; valueFormatter;</div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;    std::formatter&lt;T, char_t&gt; valueFormatter;</div>
 <div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;};</div>
 <div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160; </div>
 <div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="base_8inl.html">qx/math/units/base.inl</a>&gt;</span></div>

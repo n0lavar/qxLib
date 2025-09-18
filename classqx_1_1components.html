@@ -120,14 +120,14 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ac213de07117e1a79aced9954fd14eb42"><td class="memTemplItemLeft" align="right" valign="top">const base_component_t &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classqx_1_1components.html#ac213de07117e1a79aced9954fd14eb42">get</a> (<a class="el" href="classqx_1_1class__id.html">class_id</a> id, bool bIncludeDisabled=false) const noexcept</td></tr>
 <tr class="memdesc:ac213de07117e1a79aced9954fd14eb42"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get a component of the given type with the highest priority (no existence checks are performed)  <a href="classqx_1_1components.html#ac213de07117e1a79aced9954fd14eb42">More...</a><br /></td></tr>
 <tr class="separator:ac213de07117e1a79aced9954fd14eb42"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa958b4902c458ed09661be9126a22ed0"><td class="memTemplParams" colspan="2">template&lt;std::derived_from&lt; base_component_t &gt; component_t = base_component_t&gt; </td></tr>
-<tr class="memitem:aa958b4902c458ed09661be9126a22ed0"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classqx_1_1components.html#aa958b4902c458ed09661be9126a22ed0">view</a> () noexcept</td></tr>
-<tr class="memdesc:aa958b4902c458ed09661be9126a22ed0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get a view which may be used in a ranged-based for loop and consists of components of a given type with decreasing non-disabled priority.  <a href="classqx_1_1components.html#aa958b4902c458ed09661be9126a22ed0">More...</a><br /></td></tr>
-<tr class="separator:aa958b4902c458ed09661be9126a22ed0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac35f1f6652c15018363a439391f49ae4"><td class="memTemplParams" colspan="2">template&lt;std::derived_from&lt; base_component_t &gt; component_t = base_component_t&gt; </td></tr>
-<tr class="memitem:ac35f1f6652c15018363a439391f49ae4"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classqx_1_1components.html#ac35f1f6652c15018363a439391f49ae4">view</a> () const noexcept</td></tr>
-<tr class="memdesc:ac35f1f6652c15018363a439391f49ae4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get a view which may be used in a ranged-based for loop and consists of components of a given type with decreasing non-disabled priority.  <a href="classqx_1_1components.html#ac35f1f6652c15018363a439391f49ae4">More...</a><br /></td></tr>
-<tr class="separator:ac35f1f6652c15018363a439391f49ae4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab58fca48301662b665a0a9b71b3efa43"><td class="memTemplParams" colspan="2">template&lt;std::derived_from&lt; base_component_t &gt; component_t = base_component_t&gt; </td></tr>
+<tr class="memitem:ab58fca48301662b665a0a9b71b3efa43"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classqx_1_1components.html#ab58fca48301662b665a0a9b71b3efa43">view</a> (bool bIncludeDisabled=false) noexcept</td></tr>
+<tr class="memdesc:ab58fca48301662b665a0a9b71b3efa43"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get a view which may be used in a ranged-based for loop and consists of components of a given type with decreasing priority.  <a href="classqx_1_1components.html#ab58fca48301662b665a0a9b71b3efa43">More...</a><br /></td></tr>
+<tr class="separator:ab58fca48301662b665a0a9b71b3efa43"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8ac89ed12bf10b3e84d2deebf790cee7"><td class="memTemplParams" colspan="2">template&lt;std::derived_from&lt; base_component_t &gt; component_t = base_component_t&gt; </td></tr>
+<tr class="memitem:a8ac89ed12bf10b3e84d2deebf790cee7"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classqx_1_1components.html#a8ac89ed12bf10b3e84d2deebf790cee7">view</a> (bool bIncludeDisabled=false) const noexcept</td></tr>
+<tr class="memdesc:a8ac89ed12bf10b3e84d2deebf790cee7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get a view which may be used in a ranged-based for loop and consists of components of a given type with decreasing priority.  <a href="classqx_1_1components.html#a8ac89ed12bf10b3e84d2deebf790cee7">More...</a><br /></td></tr>
+<tr class="separator:a8ac89ed12bf10b3e84d2deebf790cee7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adf0fed76b929e7fd84a6018ff9a88540"><td class="memItemLeft" align="right" valign="top">std::optional&lt; <a class="el" href="classqx_1_1flags.html">flags</a>&lt; component_status &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1components.html#adf0fed76b929e7fd84a6018ff9a88540">get_component_status</a> (const base_component_t *pRawComponent) const noexcept</td></tr>
 <tr class="memdesc:adf0fed76b929e7fd84a6018ff9a88540"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get component status.  <a href="classqx_1_1components.html#adf0fed76b929e7fd84a6018ff9a88540">More...</a><br /></td></tr>
 <tr class="separator:adf0fed76b929e7fd84a6018ff9a88540"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -1086,8 +1086,8 @@ template&lt;std::derived_from&lt; base_component_t &gt; component_t&gt; </div>
 
 </div>
 </div>
-<a id="ac35f1f6652c15018363a439391f49ae4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac35f1f6652c15018363a439391f49ae4">&#9670;&nbsp;</a></span>view() <span class="overload">[1/2]</span></h2>
+<a id="a8ac89ed12bf10b3e84d2deebf790cee7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8ac89ed12bf10b3e84d2deebf790cee7">&#9670;&nbsp;</a></span>view() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1100,7 +1100,11 @@ template&lt;std::derived_from&lt; base_component_t &gt; component_t&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">auto <a class="el" href="classqx_1_1components.html">qx::components</a>&lt; base_component_t &gt;::view</td>
+          <td class="memname">auto <a class="el" href="classqx_1_1components.html">qx::components</a>&lt; base_component_t &gt;::view </td>
+          <td>(</td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>bIncludeDisabled</em> = <code>false</code></td><td>)</td>
+          <td> const</td>
         </tr>
       </table>
   </td>
@@ -1110,10 +1114,16 @@ template&lt;std::derived_from&lt; base_component_t &gt; component_t&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Get a view which may be used in a ranged-based for loop and consists of components of a given type with decreasing non-disabled priority. </p>
+<p>Get a view which may be used in a ranged-based for loop and consists of components of a given type with decreasing priority. </p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
     <tr><td class="paramname">component_t</td><td>- component type which doesn't have to be a final class type, may be any base or super type </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">bIncludeDisabled</td><td>- true if the view should include disabled components </td></tr>
   </table>
   </dd>
 </dl>
@@ -1128,8 +1138,8 @@ template&lt;std::derived_from&lt; base_component_t &gt; component_t&gt; </div>
 
 </div>
 </div>
-<a id="aa958b4902c458ed09661be9126a22ed0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa958b4902c458ed09661be9126a22ed0">&#9670;&nbsp;</a></span>view() <span class="overload">[2/2]</span></h2>
+<a id="ab58fca48301662b665a0a9b71b3efa43"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab58fca48301662b665a0a9b71b3efa43">&#9670;&nbsp;</a></span>view() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1142,7 +1152,11 @@ template&lt;std::derived_from&lt; base_component_t &gt; component_t&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">auto <a class="el" href="classqx_1_1components.html">qx::components</a>&lt; base_component_t &gt;::view</td>
+          <td class="memname">auto <a class="el" href="classqx_1_1components.html">qx::components</a>&lt; base_component_t &gt;::view </td>
+          <td>(</td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>bIncludeDisabled</em> = <code>false</code></td><td>)</td>
+          <td></td>
         </tr>
       </table>
   </td>
@@ -1152,10 +1166,16 @@ template&lt;std::derived_from&lt; base_component_t &gt; component_t&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Get a view which may be used in a ranged-based for loop and consists of components of a given type with decreasing non-disabled priority. </p>
+<p>Get a view which may be used in a ranged-based for loop and consists of components of a given type with decreasing priority. </p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
     <tr><td class="paramname">component_t</td><td>- component type which doesn't have to be a final class type, may be any base or super type </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">bIncludeDisabled</td><td>- true if the view should include disabled components </td></tr>
   </table>
   </dd>
 </dl>
