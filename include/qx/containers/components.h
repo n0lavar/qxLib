@@ -195,20 +195,22 @@ public:
     [[nodiscard]] const base_component_t& get(class_id id, bool bIncludeDisabled = false) const noexcept;
 
     /**
-        @brief  Get a view which may be used in a ranged-based for loop and consists of components of a given type with decreasing non-disabled priority
-        @tparam component_t - component type which doesn't have to be a final class type, may be any base or super type
-        @retval             - view of components
+        @brief  Get a view which may be used in a ranged-based for loop and consists of components of a given type with decreasing priority
+        @tparam component_t      - component type which doesn't have to be a final class type, may be any base or super type
+        @param  bIncludeDisabled - true if the view should include disabled components
+        @retval                  - view of components
     **/
     template<std::derived_from<base_component_t> component_t = base_component_t>
-    [[nodiscard]] auto view() noexcept;
+    [[nodiscard]] auto view(bool bIncludeDisabled = false) noexcept;
 
     /**
-        @brief  Get a view which may be used in a ranged-based for loop and consists of components of a given type with decreasing non-disabled priority
-        @tparam component_t - component type which doesn't have to be a final class type, may be any base or super type
-        @retval             - view of components
+        @brief  Get a view which may be used in a ranged-based for loop and consists of components of a given type with decreasing priority
+        @tparam component_t      - component type which doesn't have to be a final class type, may be any base or super type
+        @param  bIncludeDisabled - true if the view should include disabled components
+        @retval                  - view of components
     **/
     template<std::derived_from<base_component_t> component_t = base_component_t>
-    [[nodiscard]] auto view() const noexcept;
+    [[nodiscard]] auto view(bool bIncludeDisabled = false) const noexcept;
 
     /**
         @brief  Get component status

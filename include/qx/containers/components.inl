@@ -190,15 +190,15 @@ const base_component_t& components<base_component_t>::get(class_id id, bool bInc
 
 template<std::derived_from<rtti_pure_base> base_component_t>
 template<std::derived_from<base_component_t> component_t>
-auto components<base_component_t>::view() noexcept
+auto components<base_component_t>::view(bool bIncludeDisabled) noexcept
 {
     class_data& classData = get_or_add_class_data<component_t>();
     return classData.priorityCache
            | std::views::filter(
-               [](const auto& pair)
+               [bIncludeDisabled](const auto& pair)
                {
                    return pair.second->template is_derived_from<component_t>()
-                          && !pair.first.get_status_flags().contains(component_status::disabled);
+                          && (bIncludeDisabled || !pair.first.get_status_flags().contains(component_status::disabled));
                })
            | std::views::transform(
                [](auto& pair) -> component_t&
@@ -209,15 +209,15 @@ auto components<base_component_t>::view() noexcept
 
 template<std::derived_from<rtti_pure_base> base_component_t>
 template<std::derived_from<base_component_t> component_t>
-auto components<base_component_t>::view() const noexcept
+auto components<base_component_t>::view(bool bIncludeDisabled) const noexcept
 {
     const class_data& classData = get_or_add_class_data<component_t>();
     return classData.priorityCache
            | std::views::filter(
-               [](const auto& pair)
+               [bIncludeDisabled](const auto& pair)
                {
                    return pair.second->template is_derived_from<component_t>()
-                          && !pair.first.get_status_flags().contains(component_status::disabled);
+                          && (bIncludeDisabled || !pair.first.get_status_flags().contains(component_status::disabled));
                })
            | std::views::transform(
                [](const auto& pair) -> const component_t&
