@@ -1726,6 +1726,17 @@ private:
     string_data<traits_t> m_Data;
 };
 
+/**
+    @brief  Converts any type that has a std::formatter overload to qx::basic_string
+    @tparam T        - object type
+    @tparam char_t   - char type (char, wchar_t, etc)
+    @tparam traits_t - char traits. \see string_traits.h
+    @param  value    - object to convert
+    @retval          - qx::basic_string
+**/
+template<class T, class char_t = char_type, class traits_t = string_traits::traits<char_t>>
+basic_string<char_t, traits_t> convert_to_string(const T& value);
+
 using cstring = basic_string<char>;
 using wstring = basic_string<wchar_t>;
 using string  = basic_string<char_type>;

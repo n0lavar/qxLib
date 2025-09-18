@@ -1316,14 +1316,16 @@ inline typename basic_string<char_t, traits_t>::size_type basic_string<char_t, t
     size_type nBegin,
     size_type nEnd) const noexcept
 {
+    const size_t nWhatSize = itWhatEnd - itWhatBegin;
     return _find(
         nBegin,
         nEnd,
-        [this, itWhatBegin, itWhatEnd, nEnd](const_pointer pCurrentChar)
+        [this, itWhatBegin, itWhatEnd, nWhatSize](const_pointer pCurrentChar)
         {
+            const size_t nStart = static_cast<size_type>(pCurrentChar - data());
             return !iter_strcmp(
-                const_iterator(this, static_cast<size_type>(pCurrentChar - data())),
-                const_iterator(this, static_cast<size_type>(nEnd)),
+                const_iterator(this, nStart),
+                const_iterator(this, nStart + nWhatSize),
                 itWhatBegin,
                 itWhatEnd);
         });
@@ -1396,14 +1398,16 @@ inline typename basic_string<char_t, traits_t>::size_type basic_string<char_t, t
     size_type nBegin,
     size_type nEnd) const noexcept
 {
+    const size_t nWhatSize = itWhatEnd - itWhatBegin;
     return _rfind(
         nBegin,
         nEnd,
-        [this, itWhatBegin, itWhatEnd, nEnd](const_pointer pCurrentChar)
+        [this, itWhatBegin, itWhatEnd, nWhatSize](const_pointer pCurrentChar)
         {
+            const size_t nStart = static_cast<size_type>(pCurrentChar - data());
             return !iter_strcmp(
-                const_iterator(this, static_cast<size_type>(pCurrentChar - data())),
-                const_iterator(this, static_cast<size_type>(nEnd)),
+                const_iterator(this, nStart),
+                const_iterator(this, nStart + nWhatSize),
                 itWhatBegin,
                 itWhatEnd);
         });
@@ -2478,6 +2482,12 @@ inline typename basic_string<char_t, traits_t>::const_pointer basic_string<char_
     }
 }
 
+template<class T, class char_t, class traits_t>
+basic_string<char_t, traits_t> convert_to_string(const T& value)
+{
+    return basic_string<char_t, traits_t>::static_format(QX_STR_PREFIX(char_t, "{}"), value);
+}
+
 template<class char_t, class traits_t>
 basic_string<char_t, traits_t> operator+(
     const basic_string<char_t, traits_t>& lhs,
@@ -2651,7 +2661,7 @@ void swap(qx::basic_string<char_t, traits_t>& lhs, qx::basic_string<char_t, trai
 // ----------------------------------------------------- formatter -----------------------------------------------------
 
 template<class char_t, class traits_t>
-struct formatter<qx::basic_string<char_t, traits_t>, char_t> : qx::basic_formatter
+struct formatter<qx::basic_string<char_t, traits_t>, char_t> : qx::basic_formatter<char_t>
 {
     template<class format_context_type>
     constexpr auto format(const qx::basic_string<char_t, traits_t>& value, format_context_type& ctx) const

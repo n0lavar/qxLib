@@ -149,21 +149,25 @@ constexpr size_t murmur_32_hash(const value_t* pStr, size_t nSeed, size_t nLen) 
 template<class fwd_it_1_t, class fwd_it_2_t>
 constexpr int iter_strcmp(fwd_it_1_t itBegin1, fwd_it_1_t itEnd1, fwd_it_2_t itBegin2, fwd_it_2_t itEnd2) noexcept
 {
-    int nRet = 0;
+    auto it1 = itBegin1;
+    auto it2 = itBegin2;
 
-    if (itBegin1 != itEnd1 && itBegin2 != itEnd2)
+    while (it1 != itEnd1 && it2 != itEnd2 && *it1 == *it2)
     {
-        auto it1 = itBegin1;
-        auto it2 = itBegin2;
-        while (it2 != itEnd2 && (*it1 == *it2))
-        {
-            ++it2;
-            ++it1;
-        }
-        nRet = *it1 - (it2 == itEnd2 ? *it1 : *it2);
+        ++it1;
+        ++it2;
     }
 
-    return nRet;
+    if (it1 == itEnd1 && it2 == itEnd2)
+        return 0;
+
+    if (it1 == itEnd1)
+        return -static_cast<int>(*it2);
+
+    if (it2 == itEnd2)
+        return static_cast<int>(*it1);
+
+    return static_cast<int>(*it1) - static_cast<int>(*it2);
 }
 
 /**

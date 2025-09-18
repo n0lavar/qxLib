@@ -39,7 +39,7 @@ struct unit
     T      value;
     unit_t type;
 
-    operator T() const noexcept;
+    constexpr operator T() const noexcept;
 };
 
 /**
@@ -102,8 +102,8 @@ std::optional<unit<T, unit_t>> unit_from_string(basic_string_view<char_t> svValu
 
 } // namespace qx
 
-template<qx::arithmetic_c T, qx::enumeration_c unit_t>
-struct std::formatter<qx::unit<T, unit_t>, qx::char_type>
+template<qx::arithmetic_c T, qx::enumeration_c unit_t, class char_t>
+struct std::formatter<qx::unit<T, unit_t>, char_t>
 {
     template<class format_parse_context_t>
     constexpr auto parse(format_parse_context_t& context) noexcept;
@@ -112,7 +112,7 @@ struct std::formatter<qx::unit<T, unit_t>, qx::char_type>
     constexpr auto format(const qx::unit<T, unit_t>& unit, format_context_type_t& ctx) const noexcept;
 
 private:
-    std::formatter<T, qx::char_type> valueFormatter;
+    std::formatter<T, char_t> valueFormatter;
 };
 
 #include <qx/math/units/base.inl>

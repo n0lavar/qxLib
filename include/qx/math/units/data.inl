@@ -16,8 +16,8 @@ public:
     constexpr unit<T, units::data> to(units::data eTo) const noexcept;
 };
 
-template<>
-struct std::formatter<qx::units::data, qx::char_type> : qx::basic_formatter
+template<class char_t>
+struct std::formatter<qx::units::data, char_t> : qx::basic_formatter<char_t>
 {
     template<class format_context_type_t>
     constexpr auto format(qx::units::data eData, format_context_type_t& ctx) const noexcept;
@@ -99,22 +99,23 @@ constexpr qx::unit<T, qx::units::data> qx::convert<T, qx::units::data>::to(units
     return { units::details::from_bits<T>(bits, eTo), eTo };
 }
 
+template<class char_t>
 template<class format_context_type_t>
-constexpr auto std::formatter<qx::units::data, qx::char_type>::format(qx::units::data eData, format_context_type_t& ctx)
+constexpr auto std::formatter<qx::units::data, char_t>::format(qx::units::data eData, format_context_type_t& ctx)
     const noexcept
 {
     auto out = ctx.out();
 
-    const auto& suffixes = qx::units::details::unit_suffixes<qx::units::data, qx::char_type>::get();
+    const auto& suffixes = qx::units::details::unit_suffixes<qx::units::data, char_t>::get();
 
     auto itName = std::ranges::find_if(
         suffixes,
-        [eData](const std::pair<qx::units::data, qx::string_view>& pair)
+        [eData](const std::pair<qx::units::data, qx::basic_string_view<char_t>>& pair)
         {
             return pair.first == eData;
         });
     if (itName != suffixes.end())
-        out = std::format_to(out, QX_TEXT("{}"), itName->second);
+        out = std::format_to(out, QX_STR_PREFIX(char_t, "{}"), itName->second);
 
     return out;
 }

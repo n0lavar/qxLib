@@ -56,12 +56,45 @@ concept format_acceptable_args_c =
           std::remove_cv_t<std::remove_pointer_t<std::decay_t<args_t>>>>
       || ...);
 
+template<class char_t>
 struct basic_formatter
 {
     template<class format_parse_context_t>
-    constexpr auto parse(format_parse_context_t& pc)
+    constexpr auto parse(format_parse_context_t& ctx)
     {
-        return pc.begin();
+        auto it = ctx.begin();
+
+        if (it != ctx.end() && *it != QX_CHAR_PREFIX(char_t, '}'))
+            throw std::format_error("unknown spec");
+
+        return it;
+    }
+};
+
+// "{:sh}" -> bShort is true
+template<class char_t>
+struct short_info_formatter
+{
+    bool bShort = false;
+
+    template<class format_parse_context_t>
+    constexpr auto parse(format_parse_context_t& ctx)
+    {
+        auto it = ctx.begin();
+        if (it != ctx.end() && *it == QX_CHAR_PREFIX(char_t, 's'))
+        {
+            ++it;
+            if (it != ctx.end() && *it == QX_CHAR_PREFIX(char_t, 'h'))
+            {
+                ++it;
+                bShort = true;
+            }
+        }
+
+        if (it != ctx.end() && *it != QX_CHAR_PREFIX(char_t, '}'))
+            throw std::format_error("unknown spec");
+
+        return it;
     }
 };
 
