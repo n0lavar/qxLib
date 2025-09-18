@@ -10,6 +10,7 @@
 
 #include <type_traits>
 #include <utility>
+#include <variant>
 
 namespace qx
 {
@@ -71,5 +72,22 @@ concept is_iterator_t_pointer = requires(range_t t) {
 template<class range_t, class T>
 concept range_of_t_c =
     details::is_iterator_arrow_operator_of_t_type<range_t, T> || details::is_iterator_t_pointer<range_t, T>;
+
+
+namespace details
+{
+
+template<class T, class variant_t>
+struct is_in_variant;
+
+template<class T, class... args_t>
+struct is_in_variant<T, std::variant<args_t...>> : std::disjunction<std::is_same<T, args_t>...>
+{
+};
+
+} // namespace details
+
+template<class T, class variant_t>
+concept in_variant_c = details::is_in_variant<T, variant_t>::value;
 
 } // namespace qx
