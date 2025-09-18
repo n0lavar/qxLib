@@ -10,7 +10,7 @@
 template<class char_t>
 std::basic_ostream<char_t>& operator<<(std::basic_ostream<char_t>& os, const qx::terminal_color& terminalColor)
 {
-    auto& sBuffer = qx::static_buffer::get_instance().get_buffer<qx::basic_string<char_t>>();
+    static qx::basic_string<char_t> sBuffer;
 
     switch (terminalColor.m_eType)
     {

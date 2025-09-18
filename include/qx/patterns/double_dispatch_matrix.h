@@ -74,10 +74,8 @@ struct double_dispatch_class_method_ptr_traits<method_ptr_t>
 **/
 template<auto method_ptr_t>
     requires is_specialization_exist_v<double_dispatch_class_method_ptr_traits<method_ptr_t>>
-class double_dispatch_matrix
+class double_dispatch_matrix : public singleton<double_dispatch_matrix<method_ptr_t>>
 {
-    QX_SINGLETON(double_dispatch_matrix);
-
     using class_method_ptr_traits_type = double_dispatch_class_method_ptr_traits<method_ptr_t>;
 
 public:

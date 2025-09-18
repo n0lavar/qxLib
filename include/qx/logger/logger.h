@@ -14,7 +14,7 @@
 #include <memory>
 
 #ifndef QX_LOGGER_INSTANCE
-    #define QX_LOGGER_INSTANCE qx::logger_singleton::get_instance()
+    #define QX_LOGGER_INSTANCE qx::logger_singleton::get_instance().get_logger()
 #endif
 
 /**
@@ -137,9 +137,16 @@ private:
     @date    19.08.2021
 
 **/
-class logger_singleton : public logger
+class logger_singleton : public singleton<logger_singleton>
 {
-    QX_SINGLETON(logger_singleton);
+public:
+    logger& get_logger()
+    {
+        return m_Logger;
+    }
+
+private:
+    logger m_Logger;
 };
 
 } // namespace qx

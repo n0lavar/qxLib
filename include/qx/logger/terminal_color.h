@@ -10,7 +10,6 @@
 
 #include <qx/containers/string/string.h>
 #include <qx/render/color.h>
-#include <qx/static_buffer.h>
 
 #include <iostream>
 

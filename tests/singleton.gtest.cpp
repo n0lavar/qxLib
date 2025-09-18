@@ -12,70 +12,69 @@
 
 #include <qx/patterns/singleton.h>
 
-template<>
-struct qx::singleton_traits<class CTestSingleton>
-{
-    static void on_constructed(CTestSingleton& instance);
-    static void on_getter(CTestSingleton& instance);
-    static void on_destructed(CTestSingleton& instance);
-};
+static std::vector<int>* g_pTestNumbers = nullptr;
 
-class CTestSingleton
+class test_singleton_1 : public qx::singleton<test_singleton_1>
 {
-    QX_SINGLETON(CTestSingleton);
-
 public:
-    static int get_counter()
+    virtual void init() override
     {
-        return m_nCounter;
+        g_pTestNumbers->push_back(1);
     }
-    static bool get_created()
+    virtual ~test_singleton_1() override
     {
-        return m_bCreated;
+        g_pTestNumbers->push_back(8);
     }
-    void do_stuff()
-    {
-    }
-
-private:
-    static bool m_bCreated;
-    static int  m_nCounter;
 };
 
-void qx::singleton_traits<CTestSingleton>::on_constructed(CTestSingleton& instance)
+class test_singleton_2 : public qx::singleton<test_singleton_2, test_singleton_1>
 {
-    instance.m_bCreated = true;
-}
-void qx::singleton_traits<CTestSingleton>::on_getter(CTestSingleton& instance)
+public:
+    virtual void init() override
+    {
+        g_pTestNumbers->push_back(2);
+    }
+    virtual ~test_singleton_2() override
+    {
+        g_pTestNumbers->push_back(7);
+    }
+};
+
+class test_singleton_3 : public qx::singleton<test_singleton_3, test_singleton_2>
 {
-    instance.m_nCounter++;
-}
-void qx::singleton_traits<CTestSingleton>::on_destructed(CTestSingleton& instance)
+public:
+    virtual void init() override
+    {
+        g_pTestNumbers->push_back(3);
+    }
+    virtual ~test_singleton_3() override
+    {
+        g_pTestNumbers->push_back(6);
+    }
+};
+
+class test_singleton_4 : public qx::singleton<test_singleton_4, test_singleton_1, test_singleton_3, test_singleton_2>
 {
-    instance.m_bCreated = false;
-}
+public:
+    virtual void init() override
+    {
+        g_pTestNumbers->push_back(4);
+    }
+    virtual ~test_singleton_4() override
+    {
+        g_pTestNumbers->push_back(5);
+    }
+};
 
-
-bool CTestSingleton::m_bCreated = false;
-int  CTestSingleton::m_nCounter = 0;
-
-TEST(singleton, test)
+TEST(singleton, main)
 {
-    ASSERT_EQ(CTestSingleton::get_counter(), 0);
-    ASSERT_EQ(CTestSingleton::get_created(), false);
+    std::atexit(
+        []() noexcept
+        {
+            EXPECT_EQ(*g_pTestNumbers, GTEST_SINGLE_ARGUMENT(std::vector { 1, 2, 3, 4, 5, 6, 7, 8 }));
+            delete g_pTestNumbers;
+        });
 
-    CTestSingleton::get_instance().do_stuff();
-
-    ASSERT_EQ(CTestSingleton::get_counter(), 1);
-    ASSERT_EQ(CTestSingleton::get_created(), true);
-
-    CTestSingleton::get_instance().do_stuff();
-
-    ASSERT_EQ(CTestSingleton::get_counter(), 2);
-    ASSERT_EQ(CTestSingleton::get_created(), true);
-
-    CTestSingleton::get_instance().do_stuff();
-
-    ASSERT_EQ(CTestSingleton::get_counter(), 3);
-    ASSERT_EQ(CTestSingleton::get_created(), true);
+    g_pTestNumbers = new std::vector<int>();
+    test_singleton_4::get_instance();
 }
