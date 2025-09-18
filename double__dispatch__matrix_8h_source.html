@@ -145,69 +145,67 @@ $(function() {
 <div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;<span class="comment">**/</span></div>
 <div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;<span class="keyword">template</span>&lt;auto method_ptr_t&gt;</div>
 <div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    requires is_specialization_exist_v&lt;double_dispatch_class_method_ptr_traits&lt;method_ptr_t&gt;&gt;</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;<span class="keyword">class </span>double_dispatch_matrix</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;<span class="keyword">class </span>double_dispatch_matrix : <span class="keyword">public</span> <a class="code" href="classsingleton.html">singleton</a>&lt;double_dispatch_matrix&lt;method_ptr_t&gt;&gt;</div>
 <div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;{</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;    <a class="code" href="singleton_8h.html#a63d33417ea5425173513e0ac6e8e3a14">QX_SINGLETON</a>(double_dispatch_matrix);</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;    <span class="keyword">using</span> class_method_ptr_traits_type = double_dispatch_class_method_ptr_traits&lt;method_ptr_t&gt;;</div>
 <div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160; </div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;    <span class="keyword">using</span> class_method_ptr_traits_type = double_dispatch_class_method_ptr_traits&lt;method_ptr_t&gt;;</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160; </div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;    <span class="keyword">using</span> base_type     = <span class="keyword">typename</span> class_method_ptr_traits_type::class_type;</div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;    <span class="keyword">using</span> return_type   = <span class="keyword">typename</span> class_method_ptr_traits_type::return_type;</div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;    <span class="keyword">using</span> function_type = std::function&lt;return_type(<span class="keyword">const</span> base_type&amp; first, <span class="keyword">const</span> base_type&amp; second)&gt;;</div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160; </div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;    static_assert(std::derived_from&lt;base_type, rtti_pure_base&gt;);</div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;<span class="comment">    /**</span></div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;<span class="comment">        @brief   Add a function to a matrix</span></div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;<span class="comment">        @details If there was a function it will be overriden</span></div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;<span class="comment">        @tparam  first_derived_t  - the first type for a double dispatching</span></div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;<span class="comment">        @tparam  second_derived_t - the second type for a double dispatching, can be same as first_derived_t</span></div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;<span class="comment">        @param   function         - a function that takes objects of types</span></div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;<span class="comment">                                    first_derived_t and second_derived_t and returns return_type</span></div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;<span class="comment">    **/</span></div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;    <span class="keyword">template</span>&lt;<span class="keyword">class</span> first_derived_t, <span class="keyword">class</span> second_derived_t&gt;</div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;        requires(</div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;            std::is_base_of_v&lt;<span class="keyword">typename</span> double_dispatch_matrix&lt;method_ptr_t&gt;::base_type, first_derived_t&gt;</div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;            &amp;&amp; std::is_base_of_v&lt;<span class="keyword">typename</span> double_dispatch_matrix&lt;method_ptr_t&gt;::base_type, second_derived_t&gt;)</div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;    void register_function(</div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;        std::function&lt;return_type(const first_derived_t&amp;, const second_derived_t&amp;)&gt; function) noexcept;</div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;<span class="comment">    /**</span></div>
-<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;<span class="comment">        @brief  Call a function if there is any</span></div>
-<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;<span class="comment">        @param  first  - first object</span></div>
-<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;<span class="comment">        @param  second - second object</span></div>
-<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;<span class="comment">        @retval        - a return value if a function for these types found, std::nullopt otherwise</span></div>
-<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;<span class="comment">    **/</span></div>
-<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;    std::optional&lt;return_type&gt; invoke(const base_type&amp; first, const base_type&amp; second);</div>
-<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;<span class="comment">    /**</span></div>
-<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;<span class="comment">        @brief  Check that for each registered type there is a match to all other types,</span></div>
-<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;<span class="comment">                including the type itself, and that all these functions are valid. </span></div>
-<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;<span class="comment">        @retval  - true if this symmetric matrix is complete</span></div>
-<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;<span class="comment">    **/</span></div>
-<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;    <span class="keywordtype">bool</span> check_matrix_completeness() const noexcept;</div>
-<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160; </div>
-<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;private:<span class="comment"></span></div>
-<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;<span class="comment">    /**</span></div>
-<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;<span class="comment">        @brief  Get or create a function for two types</span></div>
-<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;<span class="comment">        @param  first  - first type</span></div>
-<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;<span class="comment">        @param  second - second type (can be same as the first type)</span></div>
-<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;<span class="comment">        @retval        - function</span></div>
-<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;<span class="comment">    **/</span></div>
-<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;    function_type&amp; get_function(class_id first, class_id second) noexcept;</div>
-<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160; </div>
-<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;private:</div>
-<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;    std::unordered_map&lt;class_id, std::unordered_map&lt;class_id, function_type&gt;&gt; m_MatrixFunctions;</div>
-<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;};</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;    <span class="keyword">using</span> base_type     = <span class="keyword">typename</span> class_method_ptr_traits_type::class_type;</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;    <span class="keyword">using</span> return_type   = <span class="keyword">typename</span> class_method_ptr_traits_type::return_type;</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;    <span class="keyword">using</span> function_type = std::function&lt;return_type(<span class="keyword">const</span> base_type&amp; first, <span class="keyword">const</span> base_type&amp; second)&gt;;</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160; </div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;    static_assert(std::derived_from&lt;base_type, rtti_pure_base&gt;);</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;<span class="comment">    /**</span></div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;<span class="comment">        @brief   Add a function to a matrix</span></div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;<span class="comment">        @details If there was a function it will be overriden</span></div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;<span class="comment">        @tparam  first_derived_t  - the first type for a double dispatching</span></div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;<span class="comment">        @tparam  second_derived_t - the second type for a double dispatching, can be same as first_derived_t</span></div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;<span class="comment">        @param   function         - a function that takes objects of types</span></div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;<span class="comment">                                    first_derived_t and second_derived_t and returns return_type</span></div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;<span class="comment">    **/</span></div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;    <span class="keyword">template</span>&lt;<span class="keyword">class</span> first_derived_t, <span class="keyword">class</span> second_derived_t&gt;</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;        requires(</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;            std::is_base_of_v&lt;<span class="keyword">typename</span> double_dispatch_matrix&lt;method_ptr_t&gt;::base_type, first_derived_t&gt;</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;            &amp;&amp; std::is_base_of_v&lt;<span class="keyword">typename</span> double_dispatch_matrix&lt;method_ptr_t&gt;::base_type, second_derived_t&gt;)</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;    void register_function(</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;        std::function&lt;return_type(const first_derived_t&amp;, const second_derived_t&amp;)&gt; function) noexcept;</div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;<span class="comment">    /**</span></div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;<span class="comment">        @brief  Call a function if there is any</span></div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;<span class="comment">        @param  first  - first object</span></div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;<span class="comment">        @param  second - second object</span></div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;<span class="comment">        @retval        - a return value if a function for these types found, std::nullopt otherwise</span></div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;<span class="comment">    **/</span></div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;    std::optional&lt;return_type&gt; invoke(const base_type&amp; first, const base_type&amp; second);</div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;<span class="comment">    /**</span></div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;<span class="comment">        @brief  Check that for each registered type there is a match to all other types,</span></div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;<span class="comment">                including the type itself, and that all these functions are valid. </span></div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;<span class="comment">        @retval  - true if this symmetric matrix is complete</span></div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;<span class="comment">    **/</span></div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;    <span class="keywordtype">bool</span> check_matrix_completeness() const noexcept;</div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160; </div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;private:<span class="comment"></span></div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;<span class="comment">    /**</span></div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;<span class="comment">        @brief  Get or create a function for two types</span></div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;<span class="comment">        @param  first  - first type</span></div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;<span class="comment">        @param  second - second type (can be same as the first type)</span></div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;<span class="comment">        @retval        - function</span></div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;<span class="comment">    **/</span></div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;    function_type&amp; get_function(class_id first, class_id second) noexcept;</div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160; </div>
+<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;private:</div>
+<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;    std::unordered_map&lt;class_id, std::unordered_map&lt;class_id, function_type&gt;&gt; m_MatrixFunctions;</div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;};</div>
+<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160; </div>
+<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;} <span class="comment">// namespace qx</span></div>
 <div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160; </div>
-<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;} <span class="comment">// namespace qx</span></div>
-<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160; </div>
-<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;<span class="preprocessor">#include &lt;qx/patterns/double_dispatch_matrix.inl&gt;</span></div>
+<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;<span class="preprocessor">#include &lt;qx/patterns/double_dispatch_matrix.inl&gt;</span></div>
+<div class="ttc" id="aclasssingleton_html"><div class="ttname"><a href="classsingleton.html">singleton</a></div><div class="ttdoc">Inherit the necessary singleton class from this.</div></div>
 <div class="ttc" id="artti_8h_html"><div class="ttname"><a href="rtti_8h.html">rtti.h</a></div><div class="ttdoc">RTTI system based on polymorphism.</div></div>
 <div class="ttc" id="artti__cast_8h_html"><div class="ttname"><a href="rtti__cast_8h.html">rtti_cast.h</a></div></div>
 <div class="ttc" id="asingleton_8h_html"><div class="ttname"><a href="singleton_8h.html">singleton.h</a></div></div>
-<div class="ttc" id="asingleton_8h_html_a63d33417ea5425173513e0ac6e8e3a14"><div class="ttname"><a href="singleton_8h.html#a63d33417ea5425173513e0ac6e8e3a14">QX_SINGLETON</a></div><div class="ttdeci">#define QX_SINGLETON(T)</div><div class="ttdoc">Simple Meyer's singleton.</div><div class="ttdef"><b>Definition:</b> <a href="singleton_8h_source.html#l00093">singleton.h:93</a></div></div>
 <div class="ttc" id="atype__traits_8h_html"><div class="ttname"><a href="type__traits_8h.html">type_traits.h</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->

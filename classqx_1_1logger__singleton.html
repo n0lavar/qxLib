@@ -82,35 +82,9 @@ Inheritance diagram for qx::logger_singleton:</div>
  <div class="center">
   <img src="classqx_1_1logger__singleton.png" usemap="#qx::logger_5Fsingleton_map" alt=""/>
   <map id="qx::logger_5Fsingleton_map" name="qx::logger_5Fsingleton_map">
-<area href="classqx_1_1logger.html" title="Logger class." alt="qx::logger" shape="rect" coords="0,0,123,24"/>
+<area href="classsingleton.html" alt="singleton&lt; logger_singleton &gt;" shape="rect" coords="0,0,179,24"/>
   </map>
 </div></div>
-<table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="inherited"></a>
-Additional Inherited Members</h2></td></tr>
-<tr class="inherit_header pub_methods_classqx_1_1logger"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classqx_1_1logger')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classqx_1_1logger.html">qx::logger</a></td></tr>
-<tr class="memitem:a4cff54543c3ad632c33a6baefd6fec55 inherit pub_methods_classqx_1_1logger"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1logger.html#a4cff54543c3ad632c33a6baefd6fec55">log</a> (verbosity eVerbosity, string_view svFormat, const <a class="el" href="classqx_1_1category.html">category</a> &amp;<a class="el" href="classqx_1_1category.html">category</a>, string_view svFile, string_view svFunction, int nLine)</td></tr>
-<tr class="memdesc:a4cff54543c3ad632c33a6baefd6fec55 inherit pub_methods_classqx_1_1logger"><td class="mdescLeft">&#160;</td><td class="mdescRight">Log to all streams.  <a href="classqx_1_1logger.html#a4cff54543c3ad632c33a6baefd6fec55">More...</a><br /></td></tr>
-<tr class="separator:a4cff54543c3ad632c33a6baefd6fec55 inherit pub_methods_classqx_1_1logger"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af2a735df032a60940f568954f0f489c7 inherit pub_methods_classqx_1_1logger"><td class="memTemplParams" colspan="2">template&lt;class... args_t&gt; </td></tr>
-<tr class="memitem:af2a735df032a60940f568954f0f489c7 inherit pub_methods_classqx_1_1logger"><td class="memTemplItemLeft" align="right" valign="top">&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classqx_1_1logger.html#af2a735df032a60940f568954f0f489c7">requires</a> (log_acceptable_args_c&lt; args_t... &gt;) void <a class="el" href="classqx_1_1logger.html#a4cff54543c3ad632c33a6baefd6fec55">log</a>(verbosity eVerbosity</td></tr>
-<tr class="memdesc:af2a735df032a60940f568954f0f489c7 inherit pub_methods_classqx_1_1logger"><td class="mdescLeft">&#160;</td><td class="mdescRight">Log to all streams.  <a href="classqx_1_1logger.html#af2a735df032a60940f568954f0f489c7">More...</a><br /></td></tr>
-<tr class="separator:af2a735df032a60940f568954f0f489c7 inherit pub_methods_classqx_1_1logger"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af975c6169624a47a72ae8995161e140f inherit pub_methods_classqx_1_1logger"><td class="memItemLeft" align="right" valign="top"><a id="af975c6169624a47a72ae8995161e140f"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1logger.html#af975c6169624a47a72ae8995161e140f">flush</a> ()</td></tr>
-<tr class="memdesc:af975c6169624a47a72ae8995161e140f inherit pub_methods_classqx_1_1logger"><td class="mdescLeft">&#160;</td><td class="mdescRight">Flush all streams. <br /></td></tr>
-<tr class="separator:af975c6169624a47a72ae8995161e140f inherit pub_methods_classqx_1_1logger"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abec0212ef10bb7feb65d6f587a989b61 inherit pub_methods_classqx_1_1logger"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1logger.html#abec0212ef10bb7feb65d6f587a989b61">add_stream</a> (std::unique_ptr&lt; <a class="el" href="classqx_1_1base__logger__stream.html">base_logger_stream</a> &gt; pStream) noexcept</td></tr>
-<tr class="memdesc:abec0212ef10bb7feb65d6f587a989b61 inherit pub_methods_classqx_1_1logger"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add output stream to the logger.  <a href="classqx_1_1logger.html#abec0212ef10bb7feb65d6f587a989b61">More...</a><br /></td></tr>
-<tr class="separator:abec0212ef10bb7feb65d6f587a989b61 inherit pub_methods_classqx_1_1logger"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acbd37fc0636753a6061a745ca1ab8f9e inherit pub_methods_classqx_1_1logger"><td class="memItemLeft" align="right" valign="top"><a id="acbd37fc0636753a6061a745ca1ab8f9e"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1logger.html#acbd37fc0636753a6061a745ca1ab8f9e">reset</a> () noexcept</td></tr>
-<tr class="memdesc:acbd37fc0636753a6061a745ca1ab8f9e inherit pub_methods_classqx_1_1logger"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reset logger and clear all streams. <br /></td></tr>
-<tr class="separator:acbd37fc0636753a6061a745ca1ab8f9e inherit pub_methods_classqx_1_1logger"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8f37040b7ad64f3fac204d1e0742d0fb inherit pub_methods_classqx_1_1logger"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1logger.html#a8f37040b7ad64f3fac204d1e0742d0fb">will_any_stream_accept</a> (const <a class="el" href="classqx_1_1category.html">category</a> &amp;<a class="el" href="classqx_1_1category.html">category</a>, verbosity eVerbosity, string_view svFile, string_view svFunction) const noexcept</td></tr>
-<tr class="memdesc:a8f37040b7ad64f3fac204d1e0742d0fb inherit pub_methods_classqx_1_1logger"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns true if any of streams will accept this message.  <a href="classqx_1_1logger.html#a8f37040b7ad64f3fac204d1e0742d0fb">More...</a><br /></td></tr>
-<tr class="separator:a8f37040b7ad64f3fac204d1e0742d0fb inherit pub_methods_classqx_1_1logger"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Default logger instance. </p>
 <dl class="section author"><dt>Author</dt><dd>Khrapov </dd></dl>
