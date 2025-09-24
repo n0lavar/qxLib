@@ -22,7 +22,7 @@ namespace details
     @date    5.04.2023
 
 **/
-class string_to_color_converter : public singleton<string_to_color_converter>
+class string_to_color_converter final : public singleton<string_to_color_converter>
 {
     friend color;
 

@@ -32,6 +32,10 @@ template<class T, class... dependencies_t>
     requires(std::is_base_of_v<base_singleton, dependencies_t> && ...)
 T& singleton<T, dependencies_t...>::get_instance()
 {
+    static_assert(
+        std::is_final_v<T>,
+        "T must be final in order qx::singleton to be safely used with multiple inheritance");
+
     static std::mutex instanceMutex;
     std::lock_guard   _(instanceMutex);
 

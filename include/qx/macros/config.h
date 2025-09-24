@@ -36,16 +36,22 @@
     #define QX_MSVC 0
 #endif
 
-#ifdef __clang__
+#ifdef __GNUG__
+    #define QX_GNU 1
+#else
+    #define QX_GNU 0
+#endif
+
+#if defined(__clang__) && !defined(__apple_build_version__)
     #define QX_CLANG 1
 #else
     #define QX_CLANG 0
 #endif
 
-#ifdef __GNUG__
-    #define QX_GNU 1
+#if defined(__clang__) && defined(__apple_build_version__)
+    #define QX_APPLE_CLANG 1
 #else
-    #define QX_GNU 0
+    #define QX_APPLE_CLANG 0
 #endif
 
 //------------------------------------ build -----------------------------------

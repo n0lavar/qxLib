@@ -14,7 +14,7 @@
 
 static std::vector<int>* g_pTestNumbers = nullptr;
 
-class test_singleton_1 : public qx::singleton<test_singleton_1>
+class test_singleton_1 final : public qx::singleton<test_singleton_1>
 {
 public:
     virtual void init() override
@@ -27,7 +27,7 @@ public:
     }
 };
 
-class test_singleton_2 : public qx::singleton<test_singleton_2, test_singleton_1>
+class test_singleton_2 final : public qx::singleton<test_singleton_2, test_singleton_1>
 {
 public:
     virtual void init() override
@@ -40,7 +40,7 @@ public:
     }
 };
 
-class test_singleton_3 : public qx::singleton<test_singleton_3, test_singleton_2>
+class test_singleton_3 final : public qx::singleton<test_singleton_3, test_singleton_2>
 {
 public:
     virtual void init() override
@@ -53,7 +53,8 @@ public:
     }
 };
 
-class test_singleton_4 : public qx::singleton<test_singleton_4, test_singleton_1, test_singleton_3, test_singleton_2>
+class test_singleton_4 final
+    : public qx::singleton<test_singleton_4, test_singleton_1, test_singleton_3, test_singleton_2>
 {
 public:
     virtual void init() override

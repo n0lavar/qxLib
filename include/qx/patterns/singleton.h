@@ -84,7 +84,8 @@ private:
 
     @class   singleton
     @brief   Inherit the necessary singleton class from this 
-    @details You can override init() and a destructor
+    @details You can override init() and a destructor to control object creation and destruction events.
+             You can use multiple inheritance with this class, but T must be final.
     @tparam  T              - singleton type
     @tparam  dependencies_t - singleton dependencies, they will be initialized before this one,
                               unless they have already been initialized

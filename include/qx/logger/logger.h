@@ -137,7 +137,7 @@ private:
     @date    19.08.2021
 
 **/
-class logger_singleton : public singleton<logger_singleton>
+class logger_singleton final : public singleton<logger_singleton>
 {
 public:
     logger& get_logger()

@@ -11,8 +11,7 @@
 #include <qx/containers/string/string_setup.h>
 #include <qx/meta/qualifiers.h>
 
-#define _QX_JOIN(symbol1, symbol2)    _QX_DO_JOIN(symbol1, symbol2)
-#define _QX_DO_JOIN(symbol1, symbol2) symbol1##symbol2
+#include <qx/macros/common.inl>
 
 /**
     @def     QX_EMPTY_MACRO
@@ -26,25 +25,6 @@
     @brief Same as __LINE__, but fixes some problems when using it in constexpr context
 **/
 #define QX_LINE int(_QX_JOIN(__LINE__, U))
-
-
-namespace qx::details
-{
-
-constexpr const char_type* last_slash(const char_type* str)
-{
-    const char_type* pszLastSlash = str;
-    while (str && *str != QX_TEXT('\0'))
-    {
-        if (*str == QX_TEXT('\\') || *str == QX_TEXT('/'))
-            pszLastSlash = str;
-
-        ++str;
-    }
-    return pszLastSlash + 1;
-}
-
-} // namespace qx::details
 
 /**
     @def   QX_SHORT_FILE
@@ -80,24 +60,6 @@ constexpr const char_type* last_slash(const char_type* str)
 **/
 #define QX_CONST_CAST_THIS() const_cast<qx::switch_const_t<std::remove_pointer_t<decltype(this)>>*>(this)
 
-namespace qx::details
-{
-
-template<class lambda_type>
-class call_before_main_invoker
-{
-public:
-    constexpr call_before_main_invoker(lambda_type lambda) : m_Lambda(std::move(lambda))
-    {
-        m_Lambda();
-    }
-
-private:
-    lambda_type m_Lambda;
-};
-
-} // namespace qx::details
-
 /**
     @def   QX_CALL_BEFORE_MAIN
     @brief Calls this lambda before the main invocation
@@ -111,10 +73,18 @@ private:
 **/
 #define QX_CALL_BEFORE_MAIN inline volatile qx::details::call_before_main_invoker QX_LINE_NAME(_stubCallBeforeMain)
 
-#if QX_MSVC
-    #define QX_DISABLE_OPTIMIZATIONS() __pragma(optimize("", off))
-    #define QX_ENABLE_OPTIMIZATIONS()  __pragma(optimize("", on))
-#else
-    #define QX_DISABLE_OPTIMIZATIONS()
-    #define QX_ENABLE_OPTIMIZATIONS()
-#endif
+/**
+    @brief Start a block with compiling optimisations disabled.
+           Must be outside of functions and have an appropriate QX_ENABLE_OPTIMIZATIONS().
+**/
+#define QX_DISABLE_OPTIMIZATIONS() _QX_DISABLE_OPTIMIZATIONS()
+
+/**
+    @brief End a block with compiling optimisations disabled.
+**/
+#define QX_ENABLE_OPTIMIZATIONS() _QX_ENABLE_OPTIMIZATIONS()
+
+/**
+    @brief Make this function forcefully inlined (except for QX_DEBUG build)
+**/
+#define QX_FORCE_INLINE _QX_FORCE_INLINE
