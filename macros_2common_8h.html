@@ -66,7 +66,6 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="summary">
-<a href="#nested-classes">Classes</a> &#124;
 <a href="#define-members">Macros</a>  </div>
   <div class="headertitle">
 <div class="title">common.h File Reference</div>  </div>
@@ -74,14 +73,10 @@ $(function() {
 <div class="contents">
 <div class="textblock"><code>#include &lt;<a class="el" href="string__setup_8h_source.html">qx/containers/string/string_setup.h</a>&gt;</code><br />
 <code>#include &lt;<a class="el" href="qualifiers_8h_source.html">qx/meta/qualifiers.h</a>&gt;</code><br />
+<code>#include &lt;<a class="el" href="macros_2common_8inl_source.html">qx/macros/common.inl</a>&gt;</code><br />
 </div>
 <p><a href="macros_2common_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
-Classes</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1details_1_1call__before__main__invoker.html">qx::details::call_before_main_invoker&lt; lambda_type &gt;</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
 Macros</h2></td></tr>
 <tr class="memitem:abff5c48c8f5e30fdb8643308a9b3eaf7"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="macros_2common_8h.html#abff5c48c8f5e30fdb8643308a9b3eaf7">QX_EMPTY_MACRO</a>&#160;&#160;&#160;static_assert(true)</td></tr>
@@ -104,6 +99,18 @@ Macros</h2></td></tr>
 <tr class="memitem:a3d221cef049007c8ee2fe6bab05e1d42"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="macros_2common_8h.html#a3d221cef049007c8ee2fe6bab05e1d42">QX_CALL_BEFORE_MAIN</a>&#160;&#160;&#160;inline volatile <a class="el" href="classqx_1_1details_1_1call__before__main__invoker.html">qx::details::call_before_main_invoker</a> <a class="el" href="names_8h.html#a8f51bd935768d1845211352e225739ed">QX_LINE_NAME</a>(_stubCallBeforeMain)</td></tr>
 <tr class="memdesc:a3d221cef049007c8ee2fe6bab05e1d42"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calls this lambda before the main invocation.  <a href="macros_2common_8h.html#a3d221cef049007c8ee2fe6bab05e1d42">More...</a><br /></td></tr>
 <tr class="separator:a3d221cef049007c8ee2fe6bab05e1d42"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad65786eb199b0dce70f317199a5785df"><td class="memItemLeft" align="right" valign="top"><a id="ad65786eb199b0dce70f317199a5785df"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="macros_2common_8h.html#ad65786eb199b0dce70f317199a5785df">QX_DISABLE_OPTIMIZATIONS</a>()&#160;&#160;&#160;_QX_DISABLE_OPTIMIZATIONS()</td></tr>
+<tr class="memdesc:ad65786eb199b0dce70f317199a5785df"><td class="mdescLeft">&#160;</td><td class="mdescRight">Start a block with compiling optimisations disabled. Must be outside of functions and have an appropriate <a class="el" href="macros_2common_8h.html#a5afea026f2c597d7f88d8ee03f0ba89c" title="End a block with compiling optimisations disabled.">QX_ENABLE_OPTIMIZATIONS()</a>. <br /></td></tr>
+<tr class="separator:ad65786eb199b0dce70f317199a5785df"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5afea026f2c597d7f88d8ee03f0ba89c"><td class="memItemLeft" align="right" valign="top"><a id="a5afea026f2c597d7f88d8ee03f0ba89c"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="macros_2common_8h.html#a5afea026f2c597d7f88d8ee03f0ba89c">QX_ENABLE_OPTIMIZATIONS</a>()&#160;&#160;&#160;_QX_ENABLE_OPTIMIZATIONS()</td></tr>
+<tr class="memdesc:a5afea026f2c597d7f88d8ee03f0ba89c"><td class="mdescLeft">&#160;</td><td class="mdescRight">End a block with compiling optimisations disabled. <br /></td></tr>
+<tr class="separator:a5afea026f2c597d7f88d8ee03f0ba89c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a784c3871b6a50b1e040a68d7bf525d1c"><td class="memItemLeft" align="right" valign="top"><a id="a784c3871b6a50b1e040a68d7bf525d1c"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="macros_2common_8h.html#a784c3871b6a50b1e040a68d7bf525d1c">QX_FORCE_INLINE</a>&#160;&#160;&#160;_QX_FORCE_INLINE</td></tr>
+<tr class="memdesc:a784c3871b6a50b1e040a68d7bf525d1c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Make this function forcefully inlined (except for QX_DEBUG build) <br /></td></tr>
+<tr class="separator:a784c3871b6a50b1e040a68d7bf525d1c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><dl class="section author"><dt>Author</dt><dd>Khrapov </dd></dl>
@@ -129,9 +136,9 @@ Macros</h2></td></tr>
 <div class="fragment"><div class="line"><a class="code" href="macros_2common_8h.html#a3d221cef049007c8ee2fe6bab05e1d42">QX_CALL_BEFORE_MAIN</a> = []()</div>
 <div class="line">    {</div>
 <div class="line">    };</div>
-<div class="ttc" id="amacros_2common_8h_html_a3d221cef049007c8ee2fe6bab05e1d42"><div class="ttname"><a href="macros_2common_8h.html#a3d221cef049007c8ee2fe6bab05e1d42">QX_CALL_BEFORE_MAIN</a></div><div class="ttdeci">#define QX_CALL_BEFORE_MAIN</div><div class="ttdoc">Calls this lambda before the main invocation.</div><div class="ttdef"><b>Definition:</b> <a href="macros_2common_8h_source.html#l00112">common.h:112</a></div></div>
+<div class="ttc" id="amacros_2common_8h_html_a3d221cef049007c8ee2fe6bab05e1d42"><div class="ttname"><a href="macros_2common_8h.html#a3d221cef049007c8ee2fe6bab05e1d42">QX_CALL_BEFORE_MAIN</a></div><div class="ttdeci">#define QX_CALL_BEFORE_MAIN</div><div class="ttdoc">Calls this lambda before the main invocation.</div><div class="ttdef"><b>Definition:</b> <a href="macros_2common_8h_source.html#l00074">common.h:74</a></div></div>
 </div><!-- fragment --> 
-<p class="definition">Definition at line <a class="el" href="macros_2common_8h_source.html#l00112">112</a> of file <a class="el" href="macros_2common_8h_source.html">common.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="macros_2common_8h_source.html#l00074">74</a> of file <a class="el" href="macros_2common_8h_source.html">common.h</a>.</p>
 
 </div>
 </div>
@@ -160,9 +167,9 @@ Macros</h2></td></tr>
 <div class="line">{</div>
 <div class="line">    <a class="code" href="macros_2common_8h.html#a8571a186f383a0af7a487a27de39f144">QX_CONST_CAST_THIS</a>()-&gt;foo();</div>
 <div class="line">}</div>
-<div class="ttc" id="amacros_2common_8h_html_a8571a186f383a0af7a487a27de39f144"><div class="ttname"><a href="macros_2common_8h.html#a8571a186f383a0af7a487a27de39f144">QX_CONST_CAST_THIS</a></div><div class="ttdeci">#define QX_CONST_CAST_THIS()</div><div class="ttdoc">This macro is made for situations where you have a const method and you need exactly the same method ...</div><div class="ttdef"><b>Definition:</b> <a href="macros_2common_8h_source.html#l00081">common.h:81</a></div></div>
+<div class="ttc" id="amacros_2common_8h_html_a8571a186f383a0af7a487a27de39f144"><div class="ttname"><a href="macros_2common_8h.html#a8571a186f383a0af7a487a27de39f144">QX_CONST_CAST_THIS</a></div><div class="ttdeci">#define QX_CONST_CAST_THIS()</div><div class="ttdoc">This macro is made for situations where you have a const method and you need exactly the same method ...</div><div class="ttdef"><b>Definition:</b> <a href="macros_2common_8h_source.html#l00061">common.h:61</a></div></div>
 </div><!-- fragment --> 
-<p class="definition">Definition at line <a class="el" href="macros_2common_8h_source.html#l00081">81</a> of file <a class="el" href="macros_2common_8h_source.html">common.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="macros_2common_8h_source.html#l00061">61</a> of file <a class="el" href="macros_2common_8h_source.html">common.h</a>.</p>
 
 </div>
 </div>
@@ -181,7 +188,7 @@ Macros</h2></td></tr>
 <p>Placeholder for disabled macros. </p>
 <p>Has no effect and work correctly with "if else" You can use it in the end of a macro to enforce user to add ; after it </p>
 
-<p class="definition">Definition at line <a class="el" href="macros_2common_8h_source.html#l00023">23</a> of file <a class="el" href="macros_2common_8h_source.html">common.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="macros_2common_8h_source.html#l00022">22</a> of file <a class="el" href="macros_2common_8h_source.html">common.h</a>.</p>
 
 </div>
 </div>
@@ -209,7 +216,7 @@ Macros</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="macros_2common_8h_source.html#l00063">63</a> of file <a class="el" href="macros_2common_8h_source.html">common.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="macros_2common_8h_source.html#l00043">43</a> of file <a class="el" href="macros_2common_8h_source.html">common.h</a>.</p>
 
 </div>
 </div>
