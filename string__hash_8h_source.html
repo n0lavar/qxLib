@@ -91,7 +91,7 @@ $(function() {
 <div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160; </div>
 <div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> T&gt;</div>
 <div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;concept has_zero_termonated_hash_func_overload =</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    requires(<span class="keyword">typename</span> T::const_pointer pszStr, <span class="keywordtype">size_t</span> nSeed) { T::hash_function(pszStr, nSeed); };</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    <a class="code" href="coalesce_8h.html#af141b284fe289dd9243ddad3f90ddb19">requires</a>(<span class="keyword">typename</span> T::const_pointer pszStr, <span class="keywordtype">size_t</span> nSeed) { T::hash_function(pszStr, nSeed); };</div>
 <div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160; </div>
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;}; <span class="comment">// namespace details</span></div>
 <div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="comment"></span> </div>
@@ -175,6 +175,7 @@ $(function() {
 <div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160; </div>
 <div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="string__hash_8inl.html">qx/containers/string/string_hash.inl</a>&gt;</span></div>
 <div class="ttc" id="aclassqx_1_1basic__string__hash_html"><div class="ttname"><a href="classqx_1_1basic__string__hash.html">qx::basic_string_hash</a></div><div class="ttdoc">String hash object.</div><div class="ttdef"><b>Definition:</b> <a href="string__hash_8h_source.html#l00037">string_hash.h:38</a></div></div>
+<div class="ttc" id="acoalesce_8h_html_af141b284fe289dd9243ddad3f90ddb19"><div class="ttname"><a href="coalesce_8h.html#af141b284fe289dd9243ddad3f90ddb19">qx::requires</a></div><div class="ttdeci">requires(same_variadic_args_v&lt; args_t... &gt;) const expr auto coalesce(args_t &amp;&amp;... args)</div><div class="ttdoc">Coalesce function, C# a ?? b analogue.</div><div class="ttdef"><b>Definition:</b> <a href="coalesce_8inl_source.html#l00057">coalesce.inl:57</a></div></div>
 <div class="ttc" id="aconcepts_8h_html"><div class="ttname"><a href="concepts_8h.html">concepts.h</a></div></div>
 <div class="ttc" id="astring__hash_8inl_html"><div class="ttname"><a href="string__hash_8inl.html">string_hash.inl</a></div></div>
 <div class="ttc" id="astring__setup_8h_html"><div class="ttname"><a href="string__setup_8h.html">string_setup.h</a></div></div>

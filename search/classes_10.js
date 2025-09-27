@@ -1,9 +1,9 @@
 var searchData=
 [
-  ['unique_5fobjects_5fpool_1019',['unique_objects_pool',['../classqx_1_1unique__objects__pool.html',1,'qx']]],
-  ['unit_1020',['unit',['../structqx_1_1unit.html',1,'qx']]],
-  ['unit_5fformatter_1021',['unit_formatter',['../structqx_1_1units_1_1details_1_1unit__formatter.html',1,'qx::units::details']]],
-  ['unit_5fformatter_3c_20qx_3a_3aunits_3a_3adata_2c_20char_5ft_20_3e_1022',['unit_formatter&lt; qx::units::data, char_t &gt;',['../structqx_1_1units_1_1details_1_1unit__formatter.html',1,'qx::units::details']]],
-  ['unit_5fformatter_3c_20qx_3a_3aunits_3a_3adistance_2c_20char_5ft_20_3e_1023',['unit_formatter&lt; qx::units::distance, char_t &gt;',['../structqx_1_1units_1_1details_1_1unit__formatter.html',1,'qx::units::details']]],
-  ['usings_5ftraits_1024',['usings_traits',['../structqx_1_1string__traits_1_1usings__traits.html',1,'qx::string_traits']]]
+  ['unique_5fobjects_5fpool_1032',['unique_objects_pool',['../classqx_1_1unique__objects__pool.html',1,'qx']]],
+  ['unit_1033',['unit',['../structqx_1_1unit.html',1,'qx']]],
+  ['unit_5fformatter_1034',['unit_formatter',['../structqx_1_1units_1_1details_1_1unit__formatter.html',1,'qx::units::details']]],
+  ['unit_5fformatter_3c_20qx_3a_3aunits_3a_3adata_2c_20char_5ft_20_3e_1035',['unit_formatter&lt; qx::units::data, char_t &gt;',['../structqx_1_1units_1_1details_1_1unit__formatter.html',1,'qx::units::details']]],
+  ['unit_5fformatter_3c_20qx_3a_3aunits_3a_3adistance_2c_20char_5ft_20_3e_1036',['unit_formatter&lt; qx::units::distance, char_t &gt;',['../structqx_1_1units_1_1details_1_1unit__formatter.html',1,'qx::units::details']]],
+  ['usings_5ftraits_1037',['usings_traits',['../structqx_1_1string__traits_1_1usings__traits.html',1,'qx::string_traits']]]
 ];

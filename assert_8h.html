@@ -71,7 +71,8 @@ $(function() {
 <div class="title">assert.h File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><code>#include &lt;<a class="el" href="category_8h_source.html">qx/category.h</a>&gt;</code><br />
+<div class="textblock"><code>#include &lt;<a class="el" href="predicates_8h_source.html">qx/algo/predicates.h</a>&gt;</code><br />
+<code>#include &lt;<a class="el" href="category_8h_source.html">qx/category.h</a>&gt;</code><br />
 <code>#include &lt;<a class="el" href="logger_8h_source.html">qx/logger/logger.h</a>&gt;</code><br />
 <code>#include &lt;exception&gt;</code><br />
 </div>
@@ -163,7 +164,7 @@ Macros</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="assert_8h_source.html#l00236">236</a> of file <a class="el" href="assert_8h_source.html">assert.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="assert_8h_source.html#l00237">237</a> of file <a class="el" href="assert_8h_source.html">assert.h</a>.</p>
 
 </div>
 </div>
@@ -208,7 +209,7 @@ Macros</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="assert_8h_source.html#l00254">254</a> of file <a class="el" href="assert_8h_source.html">assert.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="assert_8h_source.html#l00255">255</a> of file <a class="el" href="assert_8h_source.html">assert.h</a>.</p>
 
 </div>
 </div>
@@ -253,7 +254,7 @@ Macros</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="assert_8h_source.html#l00290">290</a> of file <a class="el" href="assert_8h_source.html">assert.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="assert_8h_source.html#l00291">291</a> of file <a class="el" href="assert_8h_source.html">assert.h</a>.</p>
 
 </div>
 </div>
@@ -307,7 +308,7 @@ Macros</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="assert_8h_source.html#l00350">350</a> of file <a class="el" href="assert_8h_source.html">assert.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="assert_8h_source.html#l00351">351</a> of file <a class="el" href="assert_8h_source.html">assert.h</a>.</p>
 
 </div>
 </div>
@@ -354,7 +355,7 @@ Macros</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="assert_8h_source.html#l00370">370</a> of file <a class="el" href="assert_8h_source.html">assert.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="assert_8h_source.html#l00371">371</a> of file <a class="el" href="assert_8h_source.html">assert.h</a>.</p>
 
 </div>
 </div>
@@ -399,7 +400,7 @@ Macros</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="assert_8h_source.html#l00272">272</a> of file <a class="el" href="assert_8h_source.html">assert.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="assert_8h_source.html#l00273">273</a> of file <a class="el" href="assert_8h_source.html">assert.h</a>.</p>
 
 </div>
 </div>
@@ -453,7 +454,7 @@ Macros</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="assert_8h_source.html#l00309">309</a> of file <a class="el" href="assert_8h_source.html">assert.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="assert_8h_source.html#l00310">310</a> of file <a class="el" href="assert_8h_source.html">assert.h</a>.</p>
 
 </div>
 </div>
@@ -500,7 +501,7 @@ Macros</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="assert_8h_source.html#l00329">329</a> of file <a class="el" href="assert_8h_source.html">assert.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="assert_8h_source.html#l00330">330</a> of file <a class="el" href="assert_8h_source.html">assert.h</a>.</p>
 
 </div>
 </div>
@@ -526,11 +527,11 @@ Macros</h2></td></tr>
 </div><!-- fragment -->
 <p>Predicate to add to a condition in any EXPECT macro. When added, a macro will only hit once. </p>
 <dl class="section note"><dt>Note</dt><dd>It must be after the actual condition. <div class="fragment"><div class="line"><a class="code" href="assert_8h.html#a72dff4b1cddb7b4567611c9ca21fe012">QX_EXPECT</a>((a &gt; b || b == 0) || <a class="code" href="assert_8h.html#abc456c8a3872949f1f26d927aa6d56ad">QX_PREDICATE_HIT_ONCE</a>());</div>
-<div class="ttc" id="aassert_8h_html_a72dff4b1cddb7b4567611c9ca21fe012"><div class="ttname"><a href="assert_8h.html#a72dff4b1cddb7b4567611c9ca21fe012">QX_EXPECT</a></div><div class="ttdeci">#define QX_EXPECT(condition,...)</div><div class="ttdoc">Verifies that condition is true.</div><div class="ttdef"><b>Definition:</b> <a href="assert_8h_source.html#l00254">assert.h:254</a></div></div>
-<div class="ttc" id="aassert_8h_html_abc456c8a3872949f1f26d927aa6d56ad"><div class="ttname"><a href="assert_8h.html#abc456c8a3872949f1f26d927aa6d56ad">QX_PREDICATE_HIT_ONCE</a></div><div class="ttdeci">#define QX_PREDICATE_HIT_ONCE()</div><div class="ttdoc">Predicate to add to a condition in any EXPECT macro. When added, a macro will only hit once.</div><div class="ttdef"><b>Definition:</b> <a href="assert_8h_source.html#l00410">assert.h:410</a></div></div>
+<div class="ttc" id="aassert_8h_html_a72dff4b1cddb7b4567611c9ca21fe012"><div class="ttname"><a href="assert_8h.html#a72dff4b1cddb7b4567611c9ca21fe012">QX_EXPECT</a></div><div class="ttdeci">#define QX_EXPECT(condition,...)</div><div class="ttdoc">Verifies that condition is true.</div><div class="ttdef"><b>Definition:</b> <a href="assert_8h_source.html#l00255">assert.h:255</a></div></div>
+<div class="ttc" id="aassert_8h_html_abc456c8a3872949f1f26d927aa6d56ad"><div class="ttname"><a href="assert_8h.html#abc456c8a3872949f1f26d927aa6d56ad">QX_PREDICATE_HIT_ONCE</a></div><div class="ttdeci">#define QX_PREDICATE_HIT_ONCE()</div><div class="ttdoc">Predicate to add to a condition in any EXPECT macro. When added, a macro will only hit once.</div><div class="ttdef"><b>Definition:</b> <a href="assert_8h_source.html#l00411">assert.h:411</a></div></div>
 </div><!-- fragment --> </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="assert_8h_source.html#l00410">410</a> of file <a class="el" href="assert_8h_source.html">assert.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="assert_8h_source.html#l00411">411</a> of file <a class="el" href="assert_8h_source.html">assert.h</a>.</p>
 
 </div>
 </div>

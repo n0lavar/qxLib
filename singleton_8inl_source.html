@@ -100,7 +100,7 @@ $(function() {
 <div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;}</div>
 <div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160; </div>
 <div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class </span>T, <span class="keyword">class</span>... dependencies_t&gt;</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    requires(std::is_base_of_v&lt;base_singleton, dependencies_t&gt; &amp;&amp; ...)</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    <a class="code" href="coalesce_8h.html#af141b284fe289dd9243ddad3f90ddb19">requires</a>(std::is_base_of_v&lt;base_singleton, dependencies_t&gt; &amp;&amp; ...)</div>
 <div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;T&amp; <a class="code" href="classsingleton.html">singleton</a>&lt;T, dependencies_t...&gt;::get_instance()</div>
 <div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;{</div>
 <div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    static_assert(</div>
@@ -125,13 +125,14 @@ $(function() {
 <div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;}</div>
 <div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160; </div>
 <div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class </span>T, <span class="keyword">class</span>... dependencies_t&gt;</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    requires(std::is_base_of_v&lt;base_singleton, dependencies_t&gt; &amp;&amp; ...)</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    <a class="code" href="coalesce_8h.html#af141b284fe289dd9243ddad3f90ddb19">requires</a>(std::is_base_of_v&lt;base_singleton, dependencies_t&gt; &amp;&amp; ...)</div>
 <div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;void <a class="code" href="classsingleton.html">singleton</a>&lt;T, dependencies_t...&gt;::init()</div>
 <div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;{</div>
 <div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;}</div>
 <div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160; </div>
 <div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;} <span class="comment">// namespace qx</span></div>
 <div class="ttc" id="aclasssingleton_html"><div class="ttname"><a href="classsingleton.html">singleton</a></div><div class="ttdoc">Inherit the necessary singleton class from this.</div></div>
+<div class="ttc" id="acoalesce_8h_html_af141b284fe289dd9243ddad3f90ddb19"><div class="ttname"><a href="coalesce_8h.html#af141b284fe289dd9243ddad3f90ddb19">qx::requires</a></div><div class="ttdeci">requires(same_variadic_args_v&lt; args_t... &gt;) const expr auto coalesce(args_t &amp;&amp;... args)</div><div class="ttdoc">Coalesce function, C# a ?? b analogue.</div><div class="ttdef"><b>Definition:</b> <a href="coalesce_8inl_source.html#l00057">coalesce.inl:57</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

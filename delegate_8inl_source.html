@@ -133,9 +133,9 @@ $(function() {
 <div class="line"><a name="l00062"></a><span class="lineno"><a class="line" href="classqx_1_1base__delegate.html#a3a24e59be22f51976010947b22e7b9ad">   62</a></span>&#160;derived_t <a class="code" href="classqx_1_1base__delegate.html#a3a24e59be22f51976010947b22e7b9ad">base_delegate&lt;derived_t, return_t, args_t...&gt;::create_singlecast</a>(creation_args_t... args) noexcept</div>
 <div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;{</div>
 <div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    derived_t <a class="code" href="classqx_1_1delegate.html">delegate</a>;</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    <span class="keywordflow">if</span> constexpr (requires(derived_t d) { d.add_weak(args...); })</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    <span class="keywordflow">if</span> constexpr (<a class="code" href="coalesce_8h.html#af141b284fe289dd9243ddad3f90ddb19">requires</a>(derived_t d) { d.add_weak(args...); })</div>
 <div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;        <a class="code" href="classqx_1_1delegate.html">delegate</a>.add_weak(args...);</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    <span class="keywordflow">if</span> constexpr (requires(derived_t d) { d.add_free(args...); })</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    <span class="keywordflow">if</span> constexpr (<a class="code" href="coalesce_8h.html#af141b284fe289dd9243ddad3f90ddb19">requires</a>(derived_t d) { d.add_free(args...); })</div>
 <div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;        <a class="code" href="classqx_1_1delegate.html">delegate</a>.add_free(args...);</div>
 <div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    <span class="keywordflow">else</span></div>
 <div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;        QX_STATIC_ASSERT_NO_INSTANTIATION(<span class="stringliteral">&quot;No overload that takes these args&quot;</span>);</div>
@@ -306,7 +306,7 @@ $(function() {
 <div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160;}</div>
 <div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160; </div>
 <div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;<span class="keyword">template</span>&lt;delegate_return_c return_t, <span class="keyword">class</span>... args_t&gt;</div>
-<div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160;    requires(<span class="keyword">sizeof</span>...(args_t) &gt; 0 &amp;&amp; (!std::is_void_v&lt;args_t&gt; &amp;&amp; ...))</div>
+<div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160;    <a class="code" href="coalesce_8h.html#af141b284fe289dd9243ddad3f90ddb19">requires</a>(<span class="keyword">sizeof</span>...(args_t) &gt; 0 &amp;&amp; (!std::is_void_v&lt;args_t&gt; &amp;&amp; ...))</div>
 <div class="line"><a name="l00239"></a><span class="lineno">  239</span>&#160;return_t delegate&lt;return_t, args_t...&gt;::execute(args_t... args) const noexcept</div>
 <div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160;{</div>
 <div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160;    <span class="keywordflow">return</span> this-&gt;execute_internal(</div>
@@ -348,6 +348,7 @@ $(function() {
 <div class="ttc" id="aclassqx_1_1details_1_1base__invoker_html"><div class="ttname"><a href="classqx_1_1details_1_1base__invoker.html">qx::details::base_invoker</a></div><div class="ttdef"><b>Definition:</b> <a href="delegate_8inl_source.html#l00017">delegate.inl:18</a></div></div>
 <div class="ttc" id="aclassqx_1_1details_1_1invoker_html"><div class="ttname"><a href="classqx_1_1details_1_1invoker.html">qx::details::invoker</a></div><div class="ttdef"><b>Definition:</b> <a href="delegate_8inl_source.html#l00025">delegate.inl:26</a></div></div>
 <div class="ttc" id="aclassqx_1_1time__ordered__priority__key_html"><div class="ttname"><a href="classqx_1_1time__ordered__priority__key.html">qx::time_ordered_priority_key</a></div><div class="ttdoc">A class that can be used as a key in ordered containers so that items are ordered in descending order...</div><div class="ttdef"><b>Definition:</b> <a href="priority_8h_source.html#l00046">priority.h:47</a></div></div>
+<div class="ttc" id="acoalesce_8h_html_af141b284fe289dd9243ddad3f90ddb19"><div class="ttname"><a href="coalesce_8h.html#af141b284fe289dd9243ddad3f90ddb19">qx::requires</a></div><div class="ttdeci">requires(same_variadic_args_v&lt; args_t... &gt;) const expr auto coalesce(args_t &amp;&amp;... args)</div><div class="ttdoc">Coalesce function, C# a ?? b analogue.</div><div class="ttdef"><b>Definition:</b> <a href="coalesce_8inl_source.html#l00057">coalesce.inl:57</a></div></div>
 <div class="ttc" id="apriority_8h_html_a596815b7b01439344e1858a12743c8ec"><div class="ttname"><a href="priority_8h.html#a596815b7b01439344e1858a12743c8ec">qx::priority</a></div><div class="ttdeci">priority</div><div class="ttdoc">User may use the predefined values or the custom ones, for ex. &quot;normal - 1&quot;, this type is supposed to...</div><div class="ttdef"><b>Definition:</b> <a href="priority_8h_source.html#l00026">priority.h:27</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
