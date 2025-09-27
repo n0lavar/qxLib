@@ -10,8 +10,8 @@
 
 #include <qx/containers/string/string.h>
 #include <qx/containers/string/string_view.h>
+#include <qx/hash.h>
 #include <qx/macros/copyable_movable.h>
-#include <qx/macros/names.h>
 #include <qx/macros/suppress_warnings.h>
 #include <qx/patterns/singleton.h>
 
@@ -23,8 +23,163 @@ QX_PUSH_SUPPRESS_ALL_WARNINGS();
 #include <glm/vec4.hpp>
 QX_POP_SUPPRESS_WARNINGS();
 
+/// @see https://www.cssportal.com/html-colors/x11-colors.php
+// clang-format off
+#define _QX_COLORS(macro)\
+    macro(alice_blue             , AliceBlue            , 240, 248, 255) \
+    macro(antique_white          , AntiqueWhite         , 250, 235, 215) \
+    macro(aqua                   , Aqua                 ,   0, 255, 255) \
+    macro(aquamarine             , Aquamarine           , 127, 255, 212) \
+    macro(azure                  , Azure                , 240, 255, 255) \
+    macro(beige                  , Beige                , 245, 245, 220) \
+    macro(bisque                 , Bisque               , 255, 228, 196) \
+    macro(black                  , Black                ,   0,   0,   0) \
+    macro(blanched_almond        , BlanchedAlmond       , 255, 235, 205) \
+    macro(blue                   , Blue                 ,   0,   0, 255) \
+    macro(blue_violet            , BlueViolet           , 138,  43, 226) \
+    macro(brown                  , Brown                , 165,  42,  42) \
+    macro(burly_wood             , BurlyWood            , 222, 184, 135) \
+    macro(cadet_blue             , CadetBlue            ,  95, 158, 160) \
+    macro(chartreuse             , Chartreuse           , 127, 255,   0) \
+    macro(chocolate              , Chocolate            , 210, 105,  30) \
+    macro(coral                  , Coral                , 255, 127,  80) \
+    macro(cornflower_blue        , CornflowerBlue       , 100, 149, 237) \
+    macro(cornsilk               , Cornsilk             , 255, 248, 220) \
+    macro(crimson                , Crimson              , 220,  20,  60) \
+    macro(cyan                   , Cyan                 ,   0, 255, 255) \
+    macro(dark_blue              , DarkBlue             ,   0,   0, 139) \
+    macro(dark_cyan              , DarkCyan             ,   0, 139, 139) \
+    macro(dark_goldenrod         , DarkGoldenrod        , 184, 134,  11) \
+    macro(dark_gray              , DarkGray             , 169, 169, 169) \
+    macro(dark_green             , DarkGreen            ,   0, 100,  0); \
+    macro(dark_khaki             , DarkKhaki            , 189, 183, 107) \
+    macro(dark_magenta           , DarkMagenta          , 139,   0, 139) \
+    macro(dark_olive_green       , DarkOliveGreen       ,  85, 107,  47) \
+    macro(dark_orange            , DarkOrange           , 255, 140,   0) \
+    macro(dark_orchid            , DarkOrchid           , 153,  50, 204) \
+    macro(dark_red               , DarkRed              , 139,   0,   0) \
+    macro(dark_salmon            , DarkSalmon           , 233, 150, 122) \
+    macro(dark_sea_green         , DarkSeaGreen         , 143, 188, 143) \
+    macro(dark_slate_blue        , DarkSlateBlue        ,  72,  61, 139) \
+    macro(dark_slate_gray        , DarkSlateGray        ,  47,  79,  79) \
+    macro(dark_turquoise         , DarkTurquoise        ,   0, 206, 209) \
+    macro(dark_violet            , DarkViolet           , 148,   0, 211) \
+    macro(deep_pink              , DeepPink             , 255,  20, 147) \
+    macro(deep_sky_blue          , DeepSkyBlue          ,   0, 191, 255) \
+    macro(dim_gray               , DimGray              , 105, 105, 105) \
+    macro(dodger_blue            , DodgerBlue           ,  30, 144, 255) \
+    macro(fire_brick             , FireBrick            , 178,  34,  34) \
+    macro(floral_white           , FloralWhite          , 255, 250, 240) \
+    macro(forest_green           , ForestGreen          ,  34, 139,  34) \
+    macro(fuchsia                , Fuchsia              , 255,   0, 255) \
+    macro(gainsboro              , Gainsboro            , 220, 220, 220) \
+    macro(ghost_white            , GhostWhite           , 248, 248, 255) \
+    macro(gold                   , Gold                 , 255, 215,   0) \
+    macro(goldenrod              , Goldenrod            , 218, 165,  32) \
+    macro(gray                   , Gray                 , 128, 128, 128) \
+    macro(green                  , Green                ,   0, 128,   0) \
+    macro(green_yellow           , GreenYellow          , 173, 255,  47) \
+    macro(honeydew               , Honeydew             , 240, 255, 240) \
+    macro(hot_pink               , HotPink              , 255, 105, 180) \
+    macro(indian_red             , IndianRed            , 205,  92,  92) \
+    macro(indigo                 , Indigo               ,  75,   0, 130) \
+    macro(ivory                  , Ivory                , 255, 255, 240) \
+    macro(khaki                  , Khaki                , 240, 230, 140) \
+    macro(lavender               , Lavender             , 230, 230, 250) \
+    macro(lavender_blush         , LavenderBlush        , 255, 240, 245) \
+    macro(lawn_green             , LawnGreen            , 124, 252,   0) \
+    macro(lemon_chiffon          , LemonChiffon         , 255, 250, 205) \
+    macro(light_blue             , LightBlue            , 173, 216, 230) \
+    macro(light_coral            , LightCoral           , 240, 128, 128) \
+    macro(light_cyan             , LightCyan            , 224, 255, 255) \
+    macro(light_goldenrod_yellow , LightGoldenrodYellow , 250, 250, 210) \
+    macro(light_green            , LightGreen           , 144, 238, 144) \
+    macro(light_grey             , LightGrey            , 211, 211, 211) \
+    macro(light_pink             , LightPink            , 255, 182, 193) \
+    macro(light_salmon           , LightSalmon          , 255, 160, 122) \
+    macro(light_sea_green        , LightSeaGreen        ,  32, 178, 170) \
+    macro(light_sky_blue         , LightSkyBlue         , 135, 206, 250) \
+    macro(light_slate_gray       , LightSlateGray       , 119, 136, 153) \
+    macro(light_steel_blue       , LightSteelBlue       , 176, 196, 222) \
+    macro(light_yellow           , LightYellow          , 255, 255, 224) \
+    macro(lime                   , Lime                 ,   0, 255,   0) \
+    macro(lime_green             , LimeGreen            ,  50, 205,  50) \
+    macro(linen                  , Linen                , 250, 240, 230) \
+    macro(magenta                , Magenta              , 255,   0, 255) \
+    macro(maroon                 , Maroon               , 128,   0,   0) \
+    macro(medium_aquamarine      , MediumAquamarine     , 102, 205, 170) \
+    macro(medium_blue            , MediumBlue           ,   0,   0, 205) \
+    macro(medium_orchid          , MediumOrchid         , 186,  85, 211) \
+    macro(medium_purple          , MediumPurple         , 147, 112, 219) \
+    macro(medium_sea_green       , MediumSeaGreen       ,  60, 179, 113) \
+    macro(medium_slate_blue      , MediumSlateBlue      , 123, 104, 238) \
+    macro(medium_spring_green    , MediumSpringGreen    ,   0, 250, 154) \
+    macro(medium_turquoise       , MediumTurquoise      ,  72, 209, 204) \
+    macro(medium_violet_red      , MediumVioletRed      , 199,  21, 133) \
+    macro(midnight_blue          , MidnightBlue         ,  25,  25, 112) \
+    macro(mint_cream             , MintCream            , 245, 255, 250) \
+    macro(misty_rose             , MistyRose            , 255, 228, 225) \
+    macro(moccasin               , Moccasin             , 255, 228, 181) \
+    macro(navajo_white           , NavajoWhite          , 255, 222, 173) \
+    macro(navy                   , Navy                 ,   0,   0, 128) \
+    macro(old_lace               , OldLace              , 253, 245, 230) \
+    macro(olive                  , Olive                , 128, 128,   0) \
+    macro(olive_drab             , OliveDrab            , 107, 142,  35) \
+    macro(orange                 , Orange               , 255, 165,   0) \
+    macro(orange_red             , OrangeRed            , 255,  69,   0) \
+    macro(orchid                 , Orchid               , 218, 112, 214) \
+    macro(pale_goldenrod         , PaleGoldenrod        , 238, 232, 170) \
+    macro(pale_green             , PaleGreen            , 152, 251, 152) \
+    macro(pale_turquoise         , PaleTurquoise        , 175, 238, 238) \
+    macro(pale_violet_red        , PaleVioletRed        , 219, 112, 147) \
+    macro(papaya_whip            , PapayaWhip           , 255, 239, 213) \
+    macro(peach_puff             , PeachPuff            , 255, 218, 185) \
+    macro(peru                   , Peru                 , 205, 133,  63) \
+    macro(pink                   , Pink                 , 255, 192, 203) \
+    macro(plum                   , Plum                 , 221, 160, 221) \
+    macro(powder_blue            , PowderBlue           , 176, 224, 230) \
+    macro(purple                 , Purple               , 128,   0, 128) \
+    macro(red                    , Red                  , 255,   0,   0) \
+    macro(rosy_brown             , RosyBrown            , 188, 143, 143) \
+    macro(royal_blue             , RoyalBlue            ,  65, 105, 225) \
+    macro(saddle_brown           , SaddleBrown          , 139,  69,  19) \
+    macro(salmon                 , Salmon               , 250, 128, 114) \
+    macro(sandy_brown            , SandyBrown           , 244, 164,  96) \
+    macro(sea_green              , SeaGreen             ,  46, 139,  87) \
+    macro(seashell               , Seashell             , 255, 245, 238) \
+    macro(sienna                 , Sienna               , 160,  82,  45) \
+    macro(silver                 , Silver               , 192, 192, 192) \
+    macro(sky_blue               , SkyBlue              , 135, 206, 235) \
+    macro(slate_blue             , SlateBlue            , 106,  90, 205) \
+    macro(slate_gray             , SlateGray            , 112, 128, 144) \
+    macro(snow                   , Snow                 , 255, 250, 250) \
+    macro(spring_green           , SpringGreen          ,   0, 255, 127) \
+    macro(steel_blue             , SteelBlue            ,  70, 130, 180) \
+    macro(tan                    , Tan                  , 210, 180, 140) \
+    macro(teal                   , Teal                 ,   0, 128, 128) \
+    macro(thistle                , Thistle              , 216, 191, 216) \
+    macro(tomato                 , Tomato               , 255,  99,  71) \
+    macro(turquoise              , Turquoise            ,  64, 224, 208) \
+    macro(violet                 , Violet               , 238, 130, 238) \
+    macro(wheat                  , Wheat                , 245, 222, 179) \
+    macro(white                  , White                , 255, 255, 255) \
+    macro(white_smoke            , WhiteSmoke           , 245, 245, 245) \
+    macro(yellow                 , Yellow               , 255, 255,   0) \
+    macro(yellow_green           , YellowGreen          , 154, 205,  50)
+// clang-format on
+
+
 namespace qx
 {
+
+enum class color_name_type
+{
+    css_snake,  // {:s} alice_blue
+    css_pascal, // {:p} AliceBlue
+    hex_lower,  // {:x[a]} f0f8ff[ff]
+    hex_upper,  // {:X[a]} F0F8FF[FF]
+    rgb,        // {:r[a]} 240,248,255[,255]
+};
 
 /**
 
@@ -309,171 +464,14 @@ public:
     **/
     constexpr static color brighten(const color& other, float fPercent) noexcept;
 
-private:
-    /**
-        @brief  Add color for string -> color mapping
-        @param  svColorName - color name
-        @param  nRed        - red component
-        @param  nGreen      - green component
-        @param  nBlue       - blue component
-        @retval             - always true
-    **/
-    static bool add_color_to_mapping(string_view svColorName, int nRed, int nGreen, int nBlue) noexcept;
+#define _QX_COLOR_METHOD(snakeCaseName, pascalCaseName, r, g, b)     \
+    static constexpr auto snakeCaseName(float fAlpha = 1.f) noexcept \
+    {                                                                \
+        return color(r, g, b, float_to_dec(fAlpha));                 \
+    }
 
-#define _QX_DEFINE_COLOR(snakeCaseName, pascalCaseName, r, g, b)                                                     \
-    static constexpr auto snakeCaseName(float fAlpha = 1.f) noexcept                                                 \
-    {                                                                                                                \
-        return color(r, g, b, float_to_dec(fAlpha));                                                                 \
-    }                                                                                                                \
-    inline static const volatile bool QX_LINE_NAME(_stub1) = add_color_to_mapping(QX_TEXT(#snakeCaseName), r, g, b); \
-    inline static const volatile bool QX_LINE_NAME(_stub2) = add_color_to_mapping(QX_TEXT(#pascalCaseName), r, g, b)
-
-public:
     /// Color functions
-    /// @see https://www.cssportal.com/html-colors/x11-colors.php
-
-    // clang-format off
-    _QX_DEFINE_COLOR(alice_blue             , AliceBlue            , 240, 248, 255);
-    _QX_DEFINE_COLOR(antique_white          , AntiqueWhite         , 250, 235, 215);
-    _QX_DEFINE_COLOR(aqua                   , Aqua                 ,   0, 255, 255);
-    _QX_DEFINE_COLOR(aquamarine             , Aquamarine           , 127, 255, 212);
-    _QX_DEFINE_COLOR(azure                  , Azure                , 240, 255, 255);
-    _QX_DEFINE_COLOR(beige                  , Beige                , 245, 245, 220);
-    _QX_DEFINE_COLOR(bisque                 , Bisque               , 255, 228, 196);
-    _QX_DEFINE_COLOR(black                  , Black                ,   0,   0,   0);
-    _QX_DEFINE_COLOR(blanched_almond        , BlanchedAlmond       , 255, 235, 205);
-    _QX_DEFINE_COLOR(blue                   , Blue                 ,   0,   0, 255);
-    _QX_DEFINE_COLOR(blue_violet            , BlueViolet           , 138,  43, 226);
-    _QX_DEFINE_COLOR(brown                  , Brown                , 165,  42,  42);
-    _QX_DEFINE_COLOR(burly_wood             , BurlyWood            , 222, 184, 135);
-    _QX_DEFINE_COLOR(cadet_blue             , CadetBlue            ,  95, 158, 160);
-    _QX_DEFINE_COLOR(chartreuse             , Chartreuse           , 127, 255,   0);
-    _QX_DEFINE_COLOR(chocolate              , Chocolate            , 210, 105,  30);
-    _QX_DEFINE_COLOR(coral                  , Coral                , 255, 127,  80);
-    _QX_DEFINE_COLOR(cornflower_blue        , CornflowerBlue       , 100, 149, 237);
-    _QX_DEFINE_COLOR(cornsilk               , Cornsilk             , 255, 248, 220);
-    _QX_DEFINE_COLOR(crimson                , Crimson              , 220,  20,  60);
-    _QX_DEFINE_COLOR(cyan                   , Cyan                 ,   0, 255, 255);
-    _QX_DEFINE_COLOR(dark_blue              , DarkBlue             ,   0,   0, 139);
-    _QX_DEFINE_COLOR(dark_cyan              , DarkCyan             ,   0, 139, 139);
-    _QX_DEFINE_COLOR(dark_goldenrod         , DarkGoldenrod        , 184, 134,  11);
-    _QX_DEFINE_COLOR(dark_gray              , DarkGray             , 169, 169, 169);
-    _QX_DEFINE_COLOR(dark_green             , DarkGreen            ,   0, 100,  0);
-    _QX_DEFINE_COLOR(dark_khaki             , DarkKhaki            , 189, 183, 107);
-    _QX_DEFINE_COLOR(dark_magenta           , DarkMagenta          , 139,   0, 139);
-    _QX_DEFINE_COLOR(dark_olive_green       , DarkOliveGreen       ,  85, 107,  47);
-    _QX_DEFINE_COLOR(dark_orange            , DarkOrange           , 255, 140,   0);
-    _QX_DEFINE_COLOR(dark_orchid            , DarkOrchid           , 153,  50, 204);
-    _QX_DEFINE_COLOR(dark_red               , DarkRed              , 139,   0,   0);
-    _QX_DEFINE_COLOR(dark_salmon            , DarkSalmon           , 233, 150, 122);
-    _QX_DEFINE_COLOR(dark_sea_green         , DarkSeaGreen         , 143, 188, 143);
-    _QX_DEFINE_COLOR(dark_slate_blue        , DarkSlateBlue        ,  72,  61, 139);
-    _QX_DEFINE_COLOR(dark_slate_gray        , DarkSlateGray        ,  47,  79,  79);
-    _QX_DEFINE_COLOR(dark_turquoise         , DarkTurquoise        ,   0, 206, 209);
-    _QX_DEFINE_COLOR(dark_violet            , DarkViolet           , 148,   0, 211);
-    _QX_DEFINE_COLOR(deep_pink              , DeepPink             , 255,  20, 147);
-    _QX_DEFINE_COLOR(deep_sky_blue          , DeepSkyBlue          ,   0, 191, 255);
-    _QX_DEFINE_COLOR(dim_gray               , DimGray              , 105, 105, 105);
-    _QX_DEFINE_COLOR(dodger_blue            , DodgerBlue           ,  30, 144, 255);
-    _QX_DEFINE_COLOR(fire_brick             , FireBrick            , 178,  34,  34);
-    _QX_DEFINE_COLOR(floral_white           , FloralWhite          , 255, 250, 240);
-    _QX_DEFINE_COLOR(forest_green           , ForestGreen          ,  34, 139,  34);
-    _QX_DEFINE_COLOR(fuchsia                , Fuchsia              , 255,   0, 255);
-    _QX_DEFINE_COLOR(gainsboro              , Gainsboro            , 220, 220, 220);
-    _QX_DEFINE_COLOR(ghost_white            , GhostWhite           , 248, 248, 255);
-    _QX_DEFINE_COLOR(gold                   , Gold                 , 255, 215,   0);
-    _QX_DEFINE_COLOR(goldenrod              , Goldenrod            , 218, 165,  32);
-    _QX_DEFINE_COLOR(gray                   , Gray                 , 128, 128, 128);
-    _QX_DEFINE_COLOR(green                  , Green                ,   0, 128,   0);
-    _QX_DEFINE_COLOR(green_yellow           , GreenYellow          , 173, 255,  47);
-    _QX_DEFINE_COLOR(honeydew               , Honeydew             , 240, 255, 240);
-    _QX_DEFINE_COLOR(hot_pink               , HotPink              , 255, 105, 180);
-    _QX_DEFINE_COLOR(indian_red             , IndianRed            , 205,  92,  92);
-    _QX_DEFINE_COLOR(indigo                 , Indigo               ,  75,   0, 130);
-    _QX_DEFINE_COLOR(ivory                  , Ivory                , 255, 255, 240);
-    _QX_DEFINE_COLOR(khaki                  , Khaki                , 240, 230, 140);
-    _QX_DEFINE_COLOR(lavender               , Lavender             , 230, 230, 250);
-    _QX_DEFINE_COLOR(lavender_blush         , LavenderBlush        , 255, 240, 245);
-    _QX_DEFINE_COLOR(lawn_green             , LawnGreen            , 124, 252,   0);
-    _QX_DEFINE_COLOR(lemon_chiffon          , LemonChiffon         , 255, 250, 205);
-    _QX_DEFINE_COLOR(light_blue             , LightBlue            , 173, 216, 230);
-    _QX_DEFINE_COLOR(light_coral            , LightCoral           , 240, 128, 128);
-    _QX_DEFINE_COLOR(light_cyan             , LightCyan            , 224, 255, 255);
-    _QX_DEFINE_COLOR(light_goldenrod_yellow , LightGoldenrodYellow , 250, 250, 210);
-    _QX_DEFINE_COLOR(light_green            , LightGreen           , 144, 238, 144);
-    _QX_DEFINE_COLOR(light_grey             , LightGrey            , 211, 211, 211);
-    _QX_DEFINE_COLOR(light_pink             , LightPink            , 255, 182, 193);
-    _QX_DEFINE_COLOR(light_salmon           , LightSalmon          , 255, 160, 122);
-    _QX_DEFINE_COLOR(light_sea_green        , LightSeaGreen        ,  32, 178, 170);
-    _QX_DEFINE_COLOR(light_sky_blue         , LightSkyBlue         , 135, 206, 250);
-    _QX_DEFINE_COLOR(light_slate_gray       , LightSlateGray       , 119, 136, 153);
-    _QX_DEFINE_COLOR(light_steel_blue       , LightSteelBlue       , 176, 196, 222);
-    _QX_DEFINE_COLOR(light_yellow           , LightYellow          , 255, 255, 224);
-    _QX_DEFINE_COLOR(lime                   , Lime                 ,   0, 255,   0);
-    _QX_DEFINE_COLOR(lime_green             , LimeGreen            ,  50, 205,  50);
-    _QX_DEFINE_COLOR(linen                  , Linen                , 250, 240, 230);
-    _QX_DEFINE_COLOR(magenta                , Magenta              , 255,   0, 255);
-    _QX_DEFINE_COLOR(maroon                 , Maroon               , 128,   0,   0);
-    _QX_DEFINE_COLOR(medium_aquamarine      , MediumAquamarine     , 102, 205, 170);
-    _QX_DEFINE_COLOR(medium_blue            , MediumBlue           ,   0,   0, 205);
-    _QX_DEFINE_COLOR(medium_orchid          , MediumOrchid         , 186,  85, 211);
-    _QX_DEFINE_COLOR(medium_purple          , MediumPurple         , 147, 112, 219);
-    _QX_DEFINE_COLOR(medium_sea_green       , MediumSeaGreen       ,  60, 179, 113);
-    _QX_DEFINE_COLOR(medium_slate_blue      , MediumSlateBlue      , 123, 104, 238);
-    _QX_DEFINE_COLOR(medium_spring_green    , MediumSpringGreen    ,   0, 250, 154);
-    _QX_DEFINE_COLOR(medium_turquoise       , MediumTurquoise      ,  72, 209, 204);
-    _QX_DEFINE_COLOR(medium_violet_red      , MediumVioletRed      , 199,  21, 133);
-    _QX_DEFINE_COLOR(midnight_blue          , MidnightBlue         ,  25,  25, 112);
-    _QX_DEFINE_COLOR(mint_cream             , MintCream            , 245, 255, 250);
-    _QX_DEFINE_COLOR(misty_rose             , MistyRose            , 255, 228, 225);
-    _QX_DEFINE_COLOR(moccasin               , Moccasin             , 255, 228, 181);
-    _QX_DEFINE_COLOR(navajo_white           , NavajoWhite          , 255, 222, 173);
-    _QX_DEFINE_COLOR(navy                   , Navy                 ,   0,   0, 128);
-    _QX_DEFINE_COLOR(old_lace               , OldLace              , 253, 245, 230);
-    _QX_DEFINE_COLOR(olive                  , Olive                , 128, 128,   0);
-    _QX_DEFINE_COLOR(olive_drab             , OliveDrab            , 107, 142,  35);
-    _QX_DEFINE_COLOR(orange                 , Orange               , 255, 165,   0);
-    _QX_DEFINE_COLOR(orange_red             , OrangeRed            , 255,  69,   0);
-    _QX_DEFINE_COLOR(orchid                 , Orchid               , 218, 112, 214);
-    _QX_DEFINE_COLOR(pale_goldenrod         , PaleGoldenrod        , 238, 232, 170);
-    _QX_DEFINE_COLOR(pale_green             , PaleGreen            , 152, 251, 152);
-    _QX_DEFINE_COLOR(pale_turquoise         , PaleTurquoise        , 175, 238, 238);
-    _QX_DEFINE_COLOR(pale_violet_red        , PaleVioletRed        , 219, 112, 147);
-    _QX_DEFINE_COLOR(papaya_whip            , PapayaWhip           , 255, 239, 213);
-    _QX_DEFINE_COLOR(peach_puff             , PeachPuff            , 255, 218, 185);
-    _QX_DEFINE_COLOR(peru                   , Peru                 , 205, 133,  63);
-    _QX_DEFINE_COLOR(pink                   , Pink                 , 255, 192, 203);
-    _QX_DEFINE_COLOR(plum                   , Plum                 , 221, 160, 221);
-    _QX_DEFINE_COLOR(powder_blue            , PowderBlue           , 176, 224, 230);
-    _QX_DEFINE_COLOR(purple                 , Purple               , 128,   0, 128);
-    _QX_DEFINE_COLOR(red                    , Red                  , 255,   0,   0);
-    _QX_DEFINE_COLOR(rosy_brown             , RosyBrown            , 188, 143, 143);
-    _QX_DEFINE_COLOR(royal_blue             , RoyalBlue            ,  65, 105, 225);
-    _QX_DEFINE_COLOR(saddle_brown           , SaddleBrown          , 139,  69,  19);
-    _QX_DEFINE_COLOR(salmon                 , Salmon               , 250, 128, 114);
-    _QX_DEFINE_COLOR(sandy_brown            , SandyBrown           , 244, 164,  96);
-    _QX_DEFINE_COLOR(sea_green              , SeaGreen             ,  46, 139,  87);
-    _QX_DEFINE_COLOR(seashell               , Seashell             , 255, 245, 238);
-    _QX_DEFINE_COLOR(sienna                 , Sienna               , 160,  82,  45);
-    _QX_DEFINE_COLOR(silver                 , Silver               , 192, 192, 192);
-    _QX_DEFINE_COLOR(sky_blue               , SkyBlue              , 135, 206, 235);
-    _QX_DEFINE_COLOR(slate_blue             , SlateBlue            , 106,  90, 205);
-    _QX_DEFINE_COLOR(slate_gray             , SlateGray            , 112, 128, 144);
-    _QX_DEFINE_COLOR(snow                   , Snow                 , 255, 250, 250);
-    _QX_DEFINE_COLOR(spring_green           , SpringGreen          ,   0, 255, 127);
-    _QX_DEFINE_COLOR(steel_blue             , SteelBlue            ,  70, 130, 180);
-    _QX_DEFINE_COLOR(tan                    , Tan                  , 210, 180, 140);
-    _QX_DEFINE_COLOR(teal                   , Teal                 ,   0, 128, 128);
-    _QX_DEFINE_COLOR(thistle                , Thistle              , 216, 191, 216);
-    _QX_DEFINE_COLOR(tomato                 , Tomato               , 255,  99,  71);
-    _QX_DEFINE_COLOR(turquoise              , Turquoise            ,  64, 224, 208);
-    _QX_DEFINE_COLOR(violet                 , Violet               , 238, 130, 238);
-    _QX_DEFINE_COLOR(wheat                  , Wheat                , 245, 222, 179);
-    _QX_DEFINE_COLOR(white                  , White                , 255, 255, 255);
-    _QX_DEFINE_COLOR(white_smoke            , WhiteSmoke           , 245, 245, 245);
-    _QX_DEFINE_COLOR(yellow                 , Yellow               , 255, 255,   0);
-    _QX_DEFINE_COLOR(yellow_green           , YellowGreen          , 154, 205,  50);
-    // clang-format on
+    _QX_COLORS(_QX_COLOR_METHOD);
 
     /**
         @brief  Try to create color from string

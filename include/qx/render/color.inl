@@ -7,6 +7,20 @@
 
 **/
 
+template<>
+struct std::hash<qx::color>
+{
+    constexpr size_t operator()(const qx::color& color) const noexcept
+    {
+        size_t nHash = 0;
+        qx::hash_combine(nHash, color.r());
+        qx::hash_combine(nHash, color.g());
+        qx::hash_combine(nHash, color.b());
+        qx::hash_combine(nHash, color.a());
+        return nHash;
+    }
+};
+
 namespace qx
 {
 
@@ -18,40 +32,80 @@ namespace details
     @class   string_to_color_converter
     @brief   Helper class for string -> color conversion
     @details The only purpose of this class is to hide the map from a user
+    @tparam  char_t - string char type
     @author  Khrapov
     @date    5.04.2023
 
 **/
-class string_to_color_converter final : public singleton<string_to_color_converter>
+template<class char_t>
+class string_to_color_converter final : public singleton<string_to_color_converter<char_t>>
 {
     friend color;
 
-private:
-    /**
-        @brief Add new color to the mapping
-        @param nNameHash - color name hash
-        @param color     - color
-    **/
-    void add(size_t nNameHash, color color)
+#define _QX_ADD_COLOR(snakeCaseName, pascalCaseName, r, g, b)                               \
+    add(QX_STR_PREFIX(char_t, #snakeCaseName), color_name_type::css_snake, color(r, g, b)); \
+    add(QX_STR_PREFIX(char_t, #pascalCaseName), color_name_type::css_pascal, color(r, g, b));
+
+public:
+    string_to_color_converter() noexcept
     {
-        m_StringToColor[nNameHash] = color;
+        _QX_COLORS(_QX_ADD_COLOR)
     }
 
     /**
-        @brief  Try to get color from the color name
-        @param  nNameHash - color name hash
-        @retval           - color or nullopt
+        @brief Add new color to the mapping
+        @param sName - color name
+        @param color - color
     **/
-    std::optional<color> get(size_t nNameHash) const
+    void add(basic_string<char_t> sName, color_name_type eColorNameType, color color) noexcept
     {
-        if (const auto it = m_StringToColor.find(nNameHash); it != m_StringToColor.end())
+        if (eColorNameType == color_name_type::css_snake)
+            m_ColorToCssSnake[color] = sName;
+        else if (eColorNameType == color_name_type::css_pascal)
+            m_ColorToCssPascal[color] = sName;
+
+        m_StringToColor[sName] = std::move(color);
+    }
+
+    /**
+        @brief  Try to get ac olor from a color name
+        @param  sName - color name
+        @retval       - color or nullopt
+    **/
+    std::optional<color> get(const basic_string<char_t>& sName) const noexcept
+    {
+        if (const auto it = m_StringToColor.find(sName); it != m_StringToColor.end())
             return it->second;
 
         return std::nullopt;
     }
 
+    /**
+        @brief  Try to a color name get from a color 
+        @param  color          - color
+        @param  eColorNameType - color type to get
+        @retval                - color name or nullopt
+    **/
+    std::optional<basic_string_view<char_t>> get(const color& color, color_name_type eColorNameType) const noexcept
+    {
+        if (eColorNameType == color_name_type::css_snake)
+        {
+            if (const auto it = m_ColorToCssSnake.find(color); it != m_ColorToCssSnake.end())
+                return it->second;
+        }
+        else if (eColorNameType == color_name_type::css_pascal)
+        {
+            if (const auto it = m_ColorToCssPascal.find(color); it != m_ColorToCssPascal.end())
+                return it->second;
+        }
+
+        return std::nullopt;
+    }
+
 private:
-    std::unordered_map<size_t, color> m_StringToColor;
+    std::unordered_map<basic_string<char_t>, color> m_StringToColor;
+    std::unordered_map<color, basic_string<char_t>> m_ColorToCssSnake;
+    std::unordered_map<color, basic_string<char_t>> m_ColorToCssPascal;
 };
 
 } // namespace details
@@ -290,20 +344,9 @@ constexpr color color::brighten(const color& other, float fPercent) noexcept
     return ret;
 }
 
-inline bool color::add_color_to_mapping(string_view svColorName, int nRed, int nGreen, int nBlue) noexcept
-{
-    string sName = svColorName;
-    details::string_to_color_converter::get_instance().add(string_hash(sName), color(nRed, nGreen, nBlue));
-
-    sName.remove_all(QX_TEXT('_'));
-    details::string_to_color_converter::get_instance().add(string_hash(sName), color(nRed, nGreen, nBlue));
-
-    return true;
-}
-
 inline std::optional<color> color::from_string(string_view svColorName) noexcept
 {
-    if (const auto optColor = details::string_to_color_converter::get_instance().get(string_hash(svColorName)))
+    if (const auto optColor = details::string_to_color_converter<char_type>::get_instance().get(svColorName))
         return *optColor;
 
     std::optional<color> optColor;
@@ -380,3 +423,119 @@ constexpr void color::assign_component_checked(float& pComponent, float fValue) 
 }
 
 } // namespace qx
+
+template<class char_t>
+struct std::formatter<qx::color, char_t>
+{
+    template<class format_parse_context_t>
+    constexpr auto parse(format_parse_context_t& ctx)
+    {
+        auto it = ctx.begin();
+        if (it != ctx.end())
+        {
+            if (*it == QX_CHAR_PREFIX(char_t, 's'))
+            {
+                ++it;
+                optColorNameType = qx::color_name_type::css_snake;
+            }
+            else if (*it == QX_CHAR_PREFIX(char_t, 'p'))
+            {
+                ++it;
+                optColorNameType = qx::color_name_type::css_pascal;
+            }
+            else if (*it == QX_CHAR_PREFIX(char_t, 'x'))
+            {
+                ++it;
+                optColorNameType = qx::color_name_type::hex_lower;
+            }
+            else if (*it == QX_CHAR_PREFIX(char_t, 'X'))
+            {
+                ++it;
+                optColorNameType = qx::color_name_type::hex_upper;
+            }
+            else if (*it == QX_CHAR_PREFIX(char_t, 'r'))
+            {
+                ++it;
+                optColorNameType = qx::color_name_type::rgb;
+            }
+
+            if (it != ctx.end())
+            {
+                if (*it == QX_CHAR_PREFIX(char_t, 'a'))
+                {
+                    ++it;
+                    bAddAlpha = true;
+                }
+            }
+        }
+
+        if (it != ctx.end() && *it != QX_CHAR_PREFIX(char_t, '}'))
+            throw std::format_error("unknown spec");
+
+        return it;
+    }
+
+    template<class format_context_t>
+    auto format(const qx::color& color, format_context_t& ctx) const
+    {
+        const qx::color_name_type eColorNameType =
+            optColorNameType ? *optColorNameType : qx::color_name_type::hex_upper;
+
+        std::optional<qx::basic_string_view<char_t>> optResult =
+            qx::details::string_to_color_converter<char_t>::get_instance().get(color, eColorNameType);
+
+        if (optResult)
+        {
+            return std::format_to(ctx.out(), QX_STR_PREFIX(char_t, "{}"), *optResult);
+        }
+        else
+        {
+            if (eColorNameType == qx::color_name_type::rgb)
+            {
+                auto it = std::format_to(
+                    ctx.out(),
+                    QX_STR_PREFIX(char_t, "{},{},{}"),
+                    color.r_dec(),
+                    color.g_dec(),
+                    color.b_dec());
+
+                if (bAddAlpha)
+                    it = std::format_to(ctx.out(), QX_STR_PREFIX(char_t, ",{}"), color.a_dec());
+
+                return it;
+            }
+            else if (eColorNameType == qx::color_name_type::hex_lower)
+            {
+                auto it = std::format_to(
+                    ctx.out(),
+                    QX_STR_PREFIX(char_t, "{:x}{:x}{:x}"),
+                    color.r_dec(),
+                    color.g_dec(),
+                    color.b_dec());
+
+                if (bAddAlpha)
+                    it = std::format_to(ctx.out(), QX_STR_PREFIX(char_t, "{:x}"), color.a_dec());
+
+                return it;
+            }
+            else
+            {
+                // hex_upper as a fallback
+                auto it = std::format_to(
+                    ctx.out(),
+                    QX_STR_PREFIX(char_t, "{:X}{:X}{:X}"),
+                    color.r_dec(),
+                    color.g_dec(),
+                    color.b_dec());
+
+                if (bAddAlpha || !optColorNameType)
+                    it = std::format_to(ctx.out(), QX_STR_PREFIX(char_t, "{:X}"), color.a_dec());
+
+                return it;
+            }
+        }
+    }
+
+    std::optional<qx::color_name_type> optColorNameType;
+    bool                               bAddAlpha = false;
+};
