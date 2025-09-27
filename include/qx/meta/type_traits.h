@@ -13,37 +13,46 @@
 namespace qx
 {
 
-//--------------------------------- are_same ---------------------------------
+// ------------------------------------------------- same_variadic_args ------------------------------------------------
 
 template<class...>
-struct are_same : std::true_type
+struct same_variadic_args;
+
+template<class T>
+struct same_variadic_args<T> : std::true_type
 {
+    using type = T;
 };
 
 template<class first_t, class second_t, class... rest_t>
-struct are_same<first_t, second_t, rest_t...> : std::false_type
+struct same_variadic_args<first_t, second_t, rest_t...> : std::false_type
 {
 };
 
 // check if all of variadic arguments are same type
 template<class first_t, class... rest_ty>
-struct are_same<first_t, first_t, rest_ty...> : are_same<first_t, rest_ty...>
+struct same_variadic_args<first_t, first_t, rest_ty...> : same_variadic_args<first_t, rest_ty...>
 {
 };
 
 template<class... args_t>
-constexpr bool are_same_v = are_same<args_t...>::value;
+constexpr bool same_variadic_args_v = same_variadic_args<args_t...>::value;
 
 
 
-//------------------------------- are_specific_v -------------------------------
+// ----------------------------------------------- specific_variadic_args ----------------------------------------------
 
 template<class T, class... args_t>
-static constexpr bool are_specific_v = std::conjunction_v<std::is_same<T, args_t>...>;
+struct specific_variadic_args
+{
+    static constexpr bool value = std::conjunction_v<std::is_same<T, args_t>...>;
+};
+
+template<class T, class... args_t>
+static constexpr bool specific_variadic_args_v = specific_variadic_args<T, args_t...>::value;
 
 
-
-//------------------------------- iterator_value -------------------------------
+// --------------------------------------------------- iterator_value --------------------------------------------------
 
 // get value type of iterator
 template<class T, class = void>
@@ -70,7 +79,7 @@ using iterator_value_t = typename iterator_value<T>::type;
 
 
 
-//--------------------------- is_specialization_exist --------------------------
+// ---------------------------------------------- is_specialization_exist ----------------------------------------------
 
 namespace details
 {
@@ -91,7 +100,7 @@ constexpr bool is_specialization_exist_v = is_specialization_exist<T>::value;
 
 
 
-//---------------------------- is_specialization_of ----------------------------
+// ------------------------------------------------ is_specialization_of -----------------------------------------------
 
 template<class test_t, template<class...> class reference_t>
 struct is_specialization_of : std::false_type
@@ -103,7 +112,7 @@ struct is_specialization_of<reference_t<args_t...>, reference_t> : std::true_typ
 {
 };
 
-// ----------------------------- qx::visit_overload ----------------------------
+// --------------------------------------------------- visit_overload --------------------------------------------------
 
 /**
     @struct  visit_overload

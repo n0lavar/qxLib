@@ -73,7 +73,7 @@ constexpr flags<enum_t>::flags(enum_t eFlag) noexcept : m_EnumFlags(underlying_t
 
 template<enumeration_c enum_t>
 template<class... args_t>
-    requires(sizeof...(args_t) >= 2 && are_specific_v<enum_t, args_t...>)
+    requires(sizeof...(args_t) >= 2 && specific_variadic_args_v<enum_t, args_t...>)
 constexpr flags<enum_t>::flags(args_t... flags) noexcept
 {
     add(flags...);
@@ -81,7 +81,7 @@ constexpr flags<enum_t>::flags(args_t... flags) noexcept
 
 template<enumeration_c enum_t>
 template<class... args_t>
-    requires(sizeof...(args_t) >= 1 && are_specific_v<enum_t, args_t...>)
+    requires(sizeof...(args_t) >= 1 && specific_variadic_args_v<enum_t, args_t...>)
 constexpr void flags<enum_t>::add(args_t... flags) noexcept
 {
     ((m_EnumFlags |= underlying_type(flags)), ...);
@@ -89,7 +89,7 @@ constexpr void flags<enum_t>::add(args_t... flags) noexcept
 
 template<enumeration_c enum_t>
 template<class... args_t>
-    requires(sizeof...(args_t) >= 1 && are_specific_v<enum_t, args_t...>)
+    requires(sizeof...(args_t) >= 1 && specific_variadic_args_v<enum_t, args_t...>)
 constexpr void flags<enum_t>::remove(args_t... flags) noexcept
 {
     ((m_EnumFlags &= ~underlying_type(flags)), ...);
@@ -97,7 +97,7 @@ constexpr void flags<enum_t>::remove(args_t... flags) noexcept
 
 template<enumeration_c enum_t>
 template<class... args_t>
-    requires(sizeof...(args_t) >= 1 && are_specific_v<enum_t, args_t...>)
+    requires(sizeof...(args_t) >= 1 && specific_variadic_args_v<enum_t, args_t...>)
 constexpr void flags<enum_t>::xor_(args_t... flags) noexcept
 {
     ((m_EnumFlags ^= underlying_type(flags)), ...);
@@ -232,7 +232,7 @@ constexpr bool flags<enum_t>::contains(enum_t eFlag) const noexcept
 
 template<enumeration_c enum_t>
 template<class... args_t>
-    requires(sizeof...(args_t) >= 2 && are_specific_v<enum_t, args_t...>)
+    requires(sizeof...(args_t) >= 2 && specific_variadic_args_v<enum_t, args_t...>)
 constexpr bool flags<enum_t>::contains_all(args_t... flags) const noexcept
 {
     return (contains(flags) && ...);
@@ -246,7 +246,7 @@ constexpr bool flags<enum_t>::contains_all(flags other) const noexcept
 
 template<enumeration_c enum_t>
 template<class... args_t>
-    requires(sizeof...(args_t) >= 2 && are_specific_v<enum_t, args_t...>)
+    requires(sizeof...(args_t) >= 2 && specific_variadic_args_v<enum_t, args_t...>)
 constexpr bool flags<enum_t>::contains_any(args_t... flags) const noexcept
 {
     return (contains(flags) || ...);

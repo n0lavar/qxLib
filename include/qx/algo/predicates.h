@@ -11,9 +11,19 @@
 namespace qx::predicates
 {
 
-constexpr auto is_true = []<class T>(const T& value)
+template<class T>
+struct validator
 {
-    return static_cast<bool>(value);
+    static constexpr bool is_valid(const T& value) noexcept
+    {
+        return static_cast<bool>(value);
+    }
 };
+
+template<class T>
+constexpr bool is_valid(const T& value) noexcept
+{
+    return validator<T>::is_valid(value);
+}
 
 } // namespace qx::predicates

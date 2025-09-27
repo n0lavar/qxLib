@@ -8,6 +8,7 @@
 **/
 #pragma once
 
+#include <qx/algo/predicates.h>
 #include <qx/category.h>
 #include <qx/logger/logger.h>
 
@@ -190,7 +191,7 @@ void resolve_assert_proceeding(
 // ------------------------------- common macros -------------------------------
 
 #define _QX_ASSERT(before_debug_break, debug_break, after_debug_break, condition, ...) \
-    ((condition)                                                                       \
+    (qx::predicates::is_valid(condition)                                               \
      || (before_debug_break(condition, ##__VA_ARGS__),                                 \
          debug_break,                                                                  \
          after_debug_break(condition, ##__VA_ARGS__),                                  \

@@ -21,14 +21,14 @@
 #include <variant>
 #include <vector>
 
-//--------------------------------- are_same ---------------------------------
+//--------------------------------- same_variadic_args ---------------------------------
 
-static_assert(qx::are_same_v<int, int, int>);
-static_assert(qx::are_same_v<char, char, char>);
-static_assert(qx::are_same_v<long, long, long>);
-static_assert(!qx::are_same_v<char, int, int>);
-static_assert(!qx::are_same_v<char, int, char>);
-static_assert(!qx::are_same_v<long, char, long>);
+static_assert(qx::same_variadic_args_v<int, int, int>);
+static_assert(qx::same_variadic_args_v<char, char, char>);
+static_assert(qx::same_variadic_args_v<long, long, long>);
+static_assert(!qx::same_variadic_args_v<char, int, int>);
+static_assert(!qx::same_variadic_args_v<char, int, char>);
+static_assert(!qx::same_variadic_args_v<long, char, long>);
 
 
 

@@ -109,7 +109,7 @@ public:
         @param  flags     - flags to add at construction
     **/
     template<class... args_t>
-        requires(sizeof...(args_t) >= 2 && are_specific_v<enum_t, args_t...>)
+        requires(sizeof...(args_t) >= 2 && specific_variadic_args_v<enum_t, args_t...>)
     constexpr flags(args_t... flags) noexcept;
 
     /**
@@ -118,7 +118,7 @@ public:
         @param  flags     - flags to add
     **/
     template<class... args_t>
-        requires(sizeof...(args_t) >= 1 && are_specific_v<enum_t, args_t...>)
+        requires(sizeof...(args_t) >= 1 && specific_variadic_args_v<enum_t, args_t...>)
     constexpr void add(args_t... flags) noexcept;
 
     /**
@@ -127,7 +127,7 @@ public:
         @param  flags     - flags to remove
     **/
     template<class... args_t>
-        requires(sizeof...(args_t) >= 1 && are_specific_v<enum_t, args_t...>)
+        requires(sizeof...(args_t) >= 1 && specific_variadic_args_v<enum_t, args_t...>)
     constexpr void remove(args_t... flags) noexcept;
 
     /**
@@ -136,7 +136,7 @@ public:
         @param  flags     - flags to apply
     **/
     template<class... args_t>
-        requires(sizeof...(args_t) >= 1 && are_specific_v<enum_t, args_t...>)
+        requires(sizeof...(args_t) >= 1 && specific_variadic_args_v<enum_t, args_t...>)
     constexpr void xor_(args_t... flags) noexcept;
 
     constexpr auto   operator<=>(enum_t eFlag) const noexcept;
@@ -196,7 +196,7 @@ public:
         @retval true if all the specified flags are present
     **/
     template<class... args_t>
-        requires(sizeof...(args_t) >= 2 && are_specific_v<enum_t, args_t...>)
+        requires(sizeof...(args_t) >= 2 && specific_variadic_args_v<enum_t, args_t...>)
     constexpr bool contains_all(args_t... flags) const noexcept;
 
     /**
@@ -213,7 +213,7 @@ public:
         @retval           - true if any of the specified flags is present
     **/
     template<class... args_t>
-        requires(sizeof...(args_t) >= 2 && are_specific_v<enum_t, args_t...>)
+        requires(sizeof...(args_t) >= 2 && specific_variadic_args_v<enum_t, args_t...>)
     constexpr bool contains_any(args_t... flags) const noexcept;
 
     /**
