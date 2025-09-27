@@ -74,7 +74,7 @@ $(function() {
 
 <p><code>#include &lt;<a class="el" href="base_8h_source.html">base.h</a>&gt;</code></p>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><h3>template&lt;arithmetic_c T, enumeration_c unit_t&gt;<br />
+<div class="textblock"><h3>template&lt;arithmetic_c T, unit_enum_c unit_t&gt;<br />
 struct qx::unit&lt; T, unit_t &gt;</h3>
 
 <div class="fragment"><div class="line"><span class="comment">// The things you can do with `qx::unit`:</span></div>
@@ -88,12 +88,12 @@ struct qx::unit&lt; T, unit_t &gt;</h3>
 <div class="line"><span class="comment">// 4. Get the nearest meaningful value (SI units):</span></div>
 <div class="line"><span class="comment">// 2000B -&gt; 1.95KiB</span></div>
 <div class="line"><span class="comment">// 3000B -&gt; 2.92KiB</span></div>
-<div class="line"><a class="code" href="structqx_1_1unit.html">qx::unit</a> converted1 = <a class="code" href="base_8h.html#a60c5ba38bace80fcb1d82d77c4bea83b">qx::normalize_unit</a>(unit);</div>
-<div class="ttc" id="abase_8h_html_a60c5ba38bace80fcb1d82d77c4bea83b"><div class="ttname"><a href="base_8h.html#a60c5ba38bace80fcb1d82d77c4bea83b">qx::normalize_unit</a></div><div class="ttdeci">unit&lt; T, unit_t &gt; normalize_unit(unit&lt; T, unit_t &gt; unit) noexcept</div><div class="ttdoc">The function returns the closest value greater than one from the SI for the unit of measurement.</div></div>
+<div class="line"><a class="code" href="structqx_1_1unit.html">qx::unit</a> converted1 = <a class="code" href="base_8h.html#a536d2f7694801a8f968114e769729270">qx::normalize_unit</a>(unit);</div>
+<div class="ttc" id="abase_8h_html_a536d2f7694801a8f968114e769729270"><div class="ttname"><a href="base_8h.html#a536d2f7694801a8f968114e769729270">qx::normalize_unit</a></div><div class="ttdeci">constexpr unit&lt; T, unit_t &gt; normalize_unit(unit&lt; T, unit_t &gt; unit) noexcept</div><div class="ttdoc">The function returns the closest value greater than one from the SI for the unit of measurement.</div></div>
 <div class="ttc" id="aclassqx_1_1basic__string_html"><div class="ttname"><a href="classqx_1_1basic__string.html">qx::basic_string&lt; char_type &gt;</a></div></div>
 <div class="ttc" id="aclassqx_1_1basic__string_html_ae691d641ae64e0d7246c3f35eb2e9fbb"><div class="ttname"><a href="classqx_1_1basic__string.html#ae691d641ae64e0d7246c3f35eb2e9fbb">qx::basic_string&lt; char_type &gt;::static_format</a></div><div class="ttdeci">requires static format_acceptable_args_c&lt; char_type, args_t... &gt; basic_string static_format(const format_string_type&lt; std::type_identity_t&lt; args_t &gt;... &gt; sFormat, args_t &amp;&amp;... args)</div><div class="ttdoc">Create a string by formatting it with the format string and the args.</div></div>
-<div class="ttc" id="aclassqx_1_1convert_html"><div class="ttname"><a href="classqx_1_1convert.html">qx::convert</a></div><div class="ttdoc">A conversion class.</div><div class="ttdef"><b>Definition:</b> <a href="base_8h_source.html#l00062">base.h:62</a></div></div>
-<div class="ttc" id="astructqx_1_1unit_html"><div class="ttname"><a href="structqx_1_1unit.html">qx::unit</a></div><div class="ttdef"><b>Definition:</b> <a href="base_8h_source.html#l00037">base.h:38</a></div></div>
+<div class="ttc" id="aclassqx_1_1convert_html"><div class="ttname"><a href="classqx_1_1convert.html">qx::convert</a></div><div class="ttdoc">A conversion class.</div><div class="ttdef"><b>Definition:</b> <a href="base_8h_source.html#l00077">base.h:77</a></div></div>
+<div class="ttc" id="astructqx_1_1unit_html"><div class="ttname"><a href="structqx_1_1unit.html">qx::unit</a></div><div class="ttdef"><b>Definition:</b> <a href="base_8h_source.html#l00051">base.h:52</a></div></div>
 </div><!-- fragment --> <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
     <tr><td class="paramname">T</td><td>- floating point or integral type </td></tr>
@@ -102,7 +102,7 @@ struct qx::unit&lt; T, unit_t &gt;</h3>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="base_8h_source.html#l00037">37</a> of file <a class="el" href="base_8h_source.html">base.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="base_8h_source.html#l00051">51</a> of file <a class="el" href="base_8h_source.html">base.h</a>.</p>
 </div><hr/>The documentation for this struct was generated from the following files:<ul>
 <li>include/qx/math/units/<a class="el" href="base_8h_source.html">base.h</a></li>
 <li>include/qx/math/units/<a class="el" href="base_8inl_source.html">base.inl</a></li>

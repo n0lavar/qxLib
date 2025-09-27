@@ -73,7 +73,9 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><code>#include &lt;<a class="el" href="format__string_8h_source.html">qx/containers/string/format_string.h</a>&gt;</code><br />
+<code>#include &lt;<a class="el" href="string_8h_source.html">qx/containers/string/string.h</a>&gt;</code><br />
 <code>#include &lt;<a class="el" href="concepts_8h_source.html">qx/meta/concepts.h</a>&gt;</code><br />
+<code>#include &lt;optional&gt;</code><br />
 <code>#include &lt;<a class="el" href="base_8inl_source.html">qx/math/units/base.inl</a>&gt;</code><br />
 </div>
 <p><a href="base_8h_source.html">Go to the source code of this file.</a></p>
@@ -82,23 +84,29 @@ $(function() {
 Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structqx_1_1unit.html">qx::unit&lt; T, unit_t &gt;</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structstd_1_1formatter_3_01qx_1_1unit_3_01_t_00_01unit__t_01_4_00_01char__t_01_4.html">std::formatter&lt; qx::unit&lt; T, unit_t &gt;, char_t &gt;</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a60c5ba38bace80fcb1d82d77c4bea83b"><td class="memTemplParams" colspan="2">template&lt;arithmetic_c T, enumeration_c unit_t&gt; </td></tr>
-<tr class="memitem:a60c5ba38bace80fcb1d82d77c4bea83b"><td class="memTemplItemLeft" align="right" valign="top">unit&lt; T, unit_t &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="base_8h.html#a60c5ba38bace80fcb1d82d77c4bea83b">qx::normalize_unit</a> (unit&lt; T, unit_t &gt; unit) noexcept</td></tr>
-<tr class="memdesc:a60c5ba38bace80fcb1d82d77c4bea83b"><td class="mdescLeft">&#160;</td><td class="mdescRight">The function returns the closest value greater than one from the SI for the unit of measurement.  <a href="base_8h.html#a60c5ba38bace80fcb1d82d77c4bea83b">More...</a><br /></td></tr>
-<tr class="separator:a60c5ba38bace80fcb1d82d77c4bea83b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a497f300be09561e2e9a26ffbbe30a1e7"><td class="memTemplParams" colspan="2">template&lt;arithmetic_c T, enumeration_c unit_t&gt; </td></tr>
-<tr class="memitem:a497f300be09561e2e9a26ffbbe30a1e7"><td class="memTemplItemLeft" align="right" valign="top">unit&lt; T, unit_t &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="base_8h.html#a497f300be09561e2e9a26ffbbe30a1e7">qx::normalize_unit</a> (T value, unit_t eInitialType) noexcept</td></tr>
-<tr class="memdesc:a497f300be09561e2e9a26ffbbe30a1e7"><td class="mdescLeft">&#160;</td><td class="mdescRight">The function returns the closest value greater than one from the SI for the unit of measurement.  <a href="base_8h.html#a497f300be09561e2e9a26ffbbe30a1e7">More...</a><br /></td></tr>
-<tr class="separator:a497f300be09561e2e9a26ffbbe30a1e7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a59515fbac673d22ff024f978321ee3fb"><td class="memTemplParams" colspan="2">template&lt;arithmetic_c T, enumeration_c unit_t, class char_t &gt; </td></tr>
+<tr class="memitem:a536d2f7694801a8f968114e769729270"><td class="memTemplParams" colspan="2">template&lt;arithmetic_c T, unit_enum_c unit_t&gt; </td></tr>
+<tr class="memitem:a536d2f7694801a8f968114e769729270"><td class="memTemplItemLeft" align="right" valign="top">constexpr unit&lt; T, unit_t &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="base_8h.html#a536d2f7694801a8f968114e769729270">qx::normalize_unit</a> (unit&lt; T, unit_t &gt; unit) noexcept</td></tr>
+<tr class="memdesc:a536d2f7694801a8f968114e769729270"><td class="mdescLeft">&#160;</td><td class="mdescRight">The function returns the closest value greater than one from the SI for the unit of measurement.  <a href="base_8h.html#a536d2f7694801a8f968114e769729270">More...</a><br /></td></tr>
+<tr class="separator:a536d2f7694801a8f968114e769729270"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab5c85b32fc13cfc5455f878eeece72b8"><td class="memTemplParams" colspan="2">template&lt;arithmetic_c T, unit_enum_c unit_t&gt; </td></tr>
+<tr class="memitem:ab5c85b32fc13cfc5455f878eeece72b8"><td class="memTemplItemLeft" align="right" valign="top">constexpr unit&lt; T, unit_t &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="base_8h.html#ab5c85b32fc13cfc5455f878eeece72b8">qx::normalize_unit</a> (T value, unit_t eInitialType) noexcept</td></tr>
+<tr class="memdesc:ab5c85b32fc13cfc5455f878eeece72b8"><td class="mdescLeft">&#160;</td><td class="mdescRight">The function returns the closest value greater than one from the SI for the unit of measurement.  <a href="base_8h.html#ab5c85b32fc13cfc5455f878eeece72b8">More...</a><br /></td></tr>
+<tr class="separator:ab5c85b32fc13cfc5455f878eeece72b8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a59515fbac673d22ff024f978321ee3fb"><td class="memTemplParams" colspan="2">template&lt;arithmetic_c T, unit_enum_c unit_t, class char_t &gt; </td></tr>
 <tr class="memitem:a59515fbac673d22ff024f978321ee3fb"><td class="memTemplItemLeft" align="right" valign="top">std::optional&lt; unit&lt; T, unit_t &gt; &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="base_8h.html#a59515fbac673d22ff024f978321ee3fb">qx::unit_from_string</a> (basic_string_view&lt; char_t &gt; svValue) noexcept</td></tr>
 <tr class="memdesc:a59515fbac673d22ff024f978321ee3fb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a unit from a string.  <a href="base_8h.html#a59515fbac673d22ff024f978321ee3fb">More...</a><br /></td></tr>
 <tr class="separator:a59515fbac673d22ff024f978321ee3fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7011ffff6c85515e7d6e65faf5256437"><td class="memTemplParams" colspan="2">template&lt;arithmetic_c T, unit_enum_c unit_t, class char_t &gt; </td></tr>
+<tr class="memitem:a7011ffff6c85515e7d6e65faf5256437"><td class="memTemplItemLeft" align="right" valign="top">std::optional&lt; unit&lt; T, unit_t &gt; &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="base_8h.html#a7011ffff6c85515e7d6e65faf5256437">qx::unit_from_string</a> (const char_t *pszValue) noexcept</td></tr>
+<tr class="memdesc:a7011ffff6c85515e7d6e65faf5256437"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a unit from a string.  <a href="base_8h.html#a7011ffff6c85515e7d6e65faf5256437">More...</a><br /></td></tr>
+<tr class="separator:a7011ffff6c85515e7d6e65faf5256437"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a61036240b7f3d13901f787b6fcab13b8"><td class="memTemplParams" colspan="2">template&lt;unit_enum_c unit_t, class char_t  = char_type&gt; </td></tr>
+<tr class="memitem:a61036240b7f3d13901f787b6fcab13b8"><td class="memTemplItemLeft" align="right" valign="top">constexpr std::optional&lt; basic_string_view&lt; char_t &gt; &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="base_8h.html#a61036240b7f3d13901f787b6fcab13b8">qx::get_unit_suffix</a> (unit_t eUnit) noexcept</td></tr>
+<tr class="memdesc:a61036240b7f3d13901f787b6fcab13b8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get a unit suffix if exists.  <a href="base_8h.html#a61036240b7f3d13901f787b6fcab13b8">More...</a><br /></td></tr>
+<tr class="separator:a61036240b7f3d13901f787b6fcab13b8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><dl class="section author"><dt>Author</dt><dd>Khrapov </dd></dl>
@@ -107,19 +115,68 @@ Functions</h2></td></tr>
 
 <p class="definition">Definition in file <a class="el" href="base_8h_source.html">base.h</a>.</p>
 </div><h2 class="groupheader">Function Documentation</h2>
-<a id="a497f300be09561e2e9a26ffbbe30a1e7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a497f300be09561e2e9a26ffbbe30a1e7">&#9670;&nbsp;</a></span>normalize_unit() <span class="overload">[1/2]</span></h2>
+<a id="a61036240b7f3d13901f787b6fcab13b8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a61036240b7f3d13901f787b6fcab13b8">&#9670;&nbsp;</a></span>get_unit_suffix()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;arithmetic_c T, enumeration_c unit_t&gt; </div>
+template&lt;unit_enum_c unit_t, class char_t  = char_type&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">unit&lt;T, unit_t&gt; qx::normalize_unit </td>
+          <td class="memname">constexpr std::optional&lt;basic_string_view&lt;char_t&gt; &gt; qx::get_unit_suffix </td>
+          <td>(</td>
+          <td class="paramtype">unit_t&#160;</td>
+          <td class="paramname"><em>eUnit</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Get a unit suffix if exists. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">unit_t</td><td>- unit enum </td></tr>
+    <tr><td class="paramname">char_t</td><td>- result string view char type </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">eUnit</td><td>- unit to search </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Return values</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">-</td><td>unit suffix </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ab5c85b32fc13cfc5455f878eeece72b8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab5c85b32fc13cfc5455f878eeece72b8">&#9670;&nbsp;</a></span>normalize_unit() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;arithmetic_c T, unit_enum_c unit_t&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr unit&lt;T, unit_t&gt; qx::normalize_unit </td>
           <td>(</td>
           <td class="paramtype">T&#160;</td>
           <td class="paramname"><em>value</em>, </td>
@@ -138,7 +195,7 @@ template&lt;arithmetic_c T, enumeration_c unit_t&gt; </div>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -167,19 +224,19 @@ template&lt;arithmetic_c T, enumeration_c unit_t&gt; </div>
 
 </div>
 </div>
-<a id="a60c5ba38bace80fcb1d82d77c4bea83b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a60c5ba38bace80fcb1d82d77c4bea83b">&#9670;&nbsp;</a></span>normalize_unit() <span class="overload">[2/2]</span></h2>
+<a id="a536d2f7694801a8f968114e769729270"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a536d2f7694801a8f968114e769729270">&#9670;&nbsp;</a></span>normalize_unit() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;arithmetic_c T, enumeration_c unit_t&gt; </div>
+template&lt;arithmetic_c T, unit_enum_c unit_t&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">unit&lt;T, unit_t&gt; qx::normalize_unit </td>
+          <td class="memname">constexpr unit&lt;T, unit_t&gt; qx::normalize_unit </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="structqx_1_1unit.html">unit</a>&lt; T, unit_t &gt;&#160;</td>
           <td class="paramname"><em>unit</em></td><td>)</td>
@@ -188,7 +245,7 @@ template&lt;arithmetic_c T, enumeration_c unit_t&gt; </div>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -217,12 +274,12 @@ template&lt;arithmetic_c T, enumeration_c unit_t&gt; </div>
 </div>
 </div>
 <a id="a59515fbac673d22ff024f978321ee3fb"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a59515fbac673d22ff024f978321ee3fb">&#9670;&nbsp;</a></span>unit_from_string()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a59515fbac673d22ff024f978321ee3fb">&#9670;&nbsp;</a></span>unit_from_string() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;arithmetic_c T, enumeration_c unit_t, class char_t &gt; </div>
+template&lt;arithmetic_c T, unit_enum_c unit_t, class char_t &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -254,6 +311,56 @@ template&lt;arithmetic_c T, enumeration_c unit_t, class char_t &gt; </div>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">svValue</td><td>- input string value </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Return values</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">-</td><td>a unit if created successfully or <code>std::nullopt</code> </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a7011ffff6c85515e7d6e65faf5256437"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7011ffff6c85515e7d6e65faf5256437">&#9670;&nbsp;</a></span>unit_from_string() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;arithmetic_c T, unit_enum_c unit_t, class char_t &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::optional&lt;unit&lt;T, unit_t&gt; &gt; qx::unit_from_string </td>
+          <td>(</td>
+          <td class="paramtype">const char_t *&#160;</td>
+          <td class="paramname"><em>pszValue</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Creates a unit from a string. </p>
+<p>Input examples: <code>20KiB</code> <code>20 KiB</code> <code>20 KiB</code> <code>20KiB</code> </p><dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>- expected value type </td></tr>
+    <tr><td class="paramname">unit_t</td><td>- unit enum </td></tr>
+    <tr><td class="paramname">char_t</td><td>- input string char type </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">pszValue</td><td>- input string value </td></tr>
   </table>
   </dd>
 </dl>

@@ -430,10 +430,10 @@ $(function() {
 <div class="line"><a name="l00359"></a><span class="lineno">  359</span>&#160;    <span class="keyword">static</span> <span class="keywordtype">int</span> sscanf(</div>
 <div class="line"><a name="l00360"></a><span class="lineno">  360</span>&#160;        <span class="keyword">typename</span> usings_char_traits_t::const_pointer pszString,</div>
 <div class="line"><a name="l00361"></a><span class="lineno">  361</span>&#160;        <span class="keyword">typename</span> usings_char_traits_t::const_pointer pszFormat,</div>
-<div class="line"><a name="l00362"></a><span class="lineno">  362</span>&#160;        args_t... args) noexcept</div>
+<div class="line"><a name="l00362"></a><span class="lineno">  362</span>&#160;        args_t&amp;&amp;... args) noexcept</div>
 <div class="line"><a name="l00363"></a><span class="lineno">  363</span>&#160;    {</div>
 <div class="line"><a name="l00364"></a><span class="lineno">  364</span>&#160;        QX_PUSH_SUPPRESS_ALL_WARNINGS();</div>
-<div class="line"><a name="l00365"></a><span class="lineno">  365</span>&#160;        <span class="keywordflow">return</span> std::sscanf(pszString, pszFormat, args...);</div>
+<div class="line"><a name="l00365"></a><span class="lineno">  365</span>&#160;        <span class="keywordflow">return</span> std::sscanf(pszString, pszFormat, std::forward&lt;args_t&gt;(args)...);</div>
 <div class="line"><a name="l00366"></a><span class="lineno">  366</span>&#160;        QX_POP_SUPPRESS_WARNINGS();</div>
 <div class="line"><a name="l00367"></a><span class="lineno">  367</span>&#160;    }</div>
 <div class="line"><a name="l00368"></a><span class="lineno">  368</span>&#160; </div>
@@ -454,10 +454,10 @@ $(function() {
 <div class="line"><a name="l00383"></a><span class="lineno">  383</span>&#160;    <span class="keyword">static</span> <span class="keywordtype">int</span> sscanf(</div>
 <div class="line"><a name="l00384"></a><span class="lineno">  384</span>&#160;        <span class="keyword">typename</span> usings_char_traits_t::const_pointer pszString,</div>
 <div class="line"><a name="l00385"></a><span class="lineno">  385</span>&#160;        <span class="keyword">typename</span> usings_char_traits_t::const_pointer pszFormat,</div>
-<div class="line"><a name="l00386"></a><span class="lineno">  386</span>&#160;        args_t... args) noexcept</div>
+<div class="line"><a name="l00386"></a><span class="lineno">  386</span>&#160;        args_t&amp;&amp;... args) noexcept</div>
 <div class="line"><a name="l00387"></a><span class="lineno">  387</span>&#160;    {</div>
 <div class="line"><a name="l00388"></a><span class="lineno">  388</span>&#160;        QX_PUSH_SUPPRESS_ALL_WARNINGS();</div>
-<div class="line"><a name="l00389"></a><span class="lineno">  389</span>&#160;        <span class="keywordflow">return</span> std::swscanf(pszString, pszFormat, args...);</div>
+<div class="line"><a name="l00389"></a><span class="lineno">  389</span>&#160;        <span class="keywordflow">return</span> std::swscanf(pszString, pszFormat, std::forward&lt;args_t&gt;(args)...);</div>
 <div class="line"><a name="l00390"></a><span class="lineno">  390</span>&#160;        QX_POP_SUPPRESS_WARNINGS();</div>
 <div class="line"><a name="l00391"></a><span class="lineno">  391</span>&#160;    }</div>
 <div class="line"><a name="l00392"></a><span class="lineno">  392</span>&#160; </div>

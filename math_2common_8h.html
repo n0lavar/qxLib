@@ -71,12 +71,10 @@ $(function() {
 <div class="title">common.h File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><code>#include &lt;<a class="el" href="suppress__warnings_8h_source.html">qx/macros/suppress_warnings.h</a>&gt;</code><br />
-<code>#include &lt;<a class="el" href="typedefs_8h_source.html">qx/typedefs.h</a>&gt;</code><br />
+<div class="textblock"><code>#include &lt;<a class="el" href="typedefs_8h_source.html">qx/typedefs.h</a>&gt;</code><br />
 <code>#include &lt;array&gt;</code><br />
 <code>#include &lt;bitset&gt;</code><br />
 <code>#include &lt;concepts&gt;</code><br />
-<code>#include &lt;limits&gt;</code><br />
 <code>#include &lt;<a class="el" href="math_2common_8inl_source.html">qx/math/common.inl</a>&gt;</code><br />
 </div>
 <p><a href="math_2common_8h_source.html">Go to the source code of this file.</a></p>
@@ -87,22 +85,6 @@ Functions</h2></td></tr>
 <tr class="memitem:ab465ef7b0d8760b14b3893514deeb8fd"><td class="memTemplItemLeft" align="right" valign="top">constexpr T&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="math_2common_8h.html#ab465ef7b0d8760b14b3893514deeb8fd">qx::abs</a> (T value)</td></tr>
 <tr class="memdesc:ab465ef7b0d8760b14b3893514deeb8fd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constexpr absolute value.  <a href="math_2common_8h.html#ab465ef7b0d8760b14b3893514deeb8fd">More...</a><br /></td></tr>
 <tr class="separator:ab465ef7b0d8760b14b3893514deeb8fd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aea72d2479ff944d13b5eba58651d776f"><td class="memTemplParams" colspan="2">template&lt;class T &gt; </td></tr>
-<tr class="memitem:aea72d2479ff944d13b5eba58651d776f"><td class="memTemplItemLeft" align="right" valign="top">constexpr bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="math_2common_8h.html#aea72d2479ff944d13b5eba58651d776f">qx::epsilon_equal</a> (T left, T right, T eps=std::numeric_limits&lt; T &gt;::epsilon())</td></tr>
-<tr class="memdesc:aea72d2479ff944d13b5eba58651d776f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constexpr comparison function for a user defined epsilon values.  <a href="math_2common_8h.html#aea72d2479ff944d13b5eba58651d776f">More...</a><br /></td></tr>
-<tr class="separator:aea72d2479ff944d13b5eba58651d776f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8e4b02e5e01574b36071ee33cb4f282e"><td class="memTemplParams" colspan="2">template&lt;class T &gt; </td></tr>
-<tr class="memitem:a8e4b02e5e01574b36071ee33cb4f282e"><td class="memTemplItemLeft" align="right" valign="top">constexpr bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="math_2common_8h.html#a8e4b02e5e01574b36071ee33cb4f282e">qx::epsilon_zero</a> (T value, T eps=std::numeric_limits&lt; T &gt;::epsilon())</td></tr>
-<tr class="memdesc:a8e4b02e5e01574b36071ee33cb4f282e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constexpr comparison with zero for a user defined epsilon values.  <a href="math_2common_8h.html#a8e4b02e5e01574b36071ee33cb4f282e">More...</a><br /></td></tr>
-<tr class="separator:a8e4b02e5e01574b36071ee33cb4f282e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abc0bd064c0a27a488aabf1d2f2e2fcfa"><td class="memTemplParams" colspan="2">template&lt;class T &gt; </td></tr>
-<tr class="memitem:abc0bd064c0a27a488aabf1d2f2e2fcfa"><td class="memTemplItemLeft" align="right" valign="top">constexpr bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="math_2common_8h.html#abc0bd064c0a27a488aabf1d2f2e2fcfa">qx::epsilon_less_equal</a> (T left, T right, T eps=std::numeric_limits&lt; T &gt;::epsilon())</td></tr>
-<tr class="memdesc:abc0bd064c0a27a488aabf1d2f2e2fcfa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constexpr comparison function for a user defined epsilon values.  <a href="math_2common_8h.html#abc0bd064c0a27a488aabf1d2f2e2fcfa">More...</a><br /></td></tr>
-<tr class="separator:abc0bd064c0a27a488aabf1d2f2e2fcfa"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2db6d38ad44aebd45809cb9a06774ffd"><td class="memTemplParams" colspan="2">template&lt;class T &gt; </td></tr>
-<tr class="memitem:a2db6d38ad44aebd45809cb9a06774ffd"><td class="memTemplItemLeft" align="right" valign="top">constexpr bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="math_2common_8h.html#a2db6d38ad44aebd45809cb9a06774ffd">qx::epsilon_greater_equal</a> (T left, T right, T eps=std::numeric_limits&lt; T &gt;::epsilon())</td></tr>
-<tr class="memdesc:a2db6d38ad44aebd45809cb9a06774ffd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constexpr comparison function for a user defined epsilon values.  <a href="math_2common_8h.html#a2db6d38ad44aebd45809cb9a06774ffd">More...</a><br /></td></tr>
-<tr class="separator:a2db6d38ad44aebd45809cb9a06774ffd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8662f96933a20e0a8c713191c9e58b2a"><td class="memTemplParams" colspan="2">template&lt;std::integral T&gt; </td></tr>
 <tr class="memitem:a8662f96933a20e0a8c713191c9e58b2a"><td class="memTemplItemLeft" align="right" valign="top">constexpr bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="math_2common_8h.html#a8662f96933a20e0a8c713191c9e58b2a">qx::is_odd</a> (T val)</td></tr>
 <tr class="memdesc:a8662f96933a20e0a8c713191c9e58b2a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if value is odd.  <a href="math_2common_8h.html#a8662f96933a20e0a8c713191c9e58b2a">More...</a><br /></td></tr>
@@ -125,14 +107,6 @@ Functions</h2></td></tr>
 <tr class="memitem:a558b28fe2075e7c4a244b55920b69df7"><td class="memTemplItemLeft" align="right" valign="top">I&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="math_2common_8h.html#a558b28fe2075e7c4a244b55920b69df7">qx::maxpot</a> (I nValue)</td></tr>
 <tr class="memdesc:a558b28fe2075e7c4a244b55920b69df7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Max power of two in integer.  <a href="math_2common_8h.html#a558b28fe2075e7c4a244b55920b69df7">More...</a><br /></td></tr>
 <tr class="separator:a558b28fe2075e7c4a244b55920b69df7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0cea1fc43418a3cfd756c96121ea5de7"><td class="memTemplParams" colspan="2">template&lt;class T , class compare_t  = std::less_equal&lt;&gt;&gt; </td></tr>
-<tr class="memitem:a0cea1fc43418a3cfd756c96121ea5de7"><td class="memTemplItemLeft" align="right" valign="top">constexpr bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="math_2common_8h.html#a0cea1fc43418a3cfd756c96121ea5de7">qx::between</a> (T left, T value, T right, compare_t compare)</td></tr>
-<tr class="memdesc:a0cea1fc43418a3cfd756c96121ea5de7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if value is between left and right.  <a href="math_2common_8h.html#a0cea1fc43418a3cfd756c96121ea5de7">More...</a><br /></td></tr>
-<tr class="separator:a0cea1fc43418a3cfd756c96121ea5de7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a55c30568a7ce6ec5ca535aa6a4e9ddbe"><td class="memTemplParams" colspan="2">template&lt;class T , class compare_t  = std::less_equal&lt;&gt;&gt; </td></tr>
-<tr class="memitem:a55c30568a7ce6ec5ca535aa6a4e9ddbe"><td class="memTemplItemLeft" align="right" valign="top">constexpr bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="math_2common_8h.html#a55c30568a7ce6ec5ca535aa6a4e9ddbe">qx::between</a> (T left, T value, T right)</td></tr>
-<tr class="memdesc:a55c30568a7ce6ec5ca535aa6a4e9ddbe"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if value is between left and right.  <a href="math_2common_8h.html#a55c30568a7ce6ec5ca535aa6a4e9ddbe">More...</a><br /></td></tr>
-<tr class="separator:a55c30568a7ce6ec5ca535aa6a4e9ddbe"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><dl class="section author"><dt>Author</dt><dd>Khrapov </dd></dl>
@@ -191,416 +165,6 @@ template&lt;class T &gt; </div>
 
 </div>
 </div>
-<a id="a55c30568a7ce6ec5ca535aa6a4e9ddbe"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a55c30568a7ce6ec5ca535aa6a4e9ddbe">&#9670;&nbsp;</a></span>between() <span class="overload">[1/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class T , class compare_t  = std::less_equal&lt;&gt;&gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">constexpr bool qx::between </td>
-          <td>(</td>
-          <td class="paramtype">T&#160;</td>
-          <td class="paramname"><em>left</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">T&#160;</td>
-          <td class="paramname"><em>value</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">T&#160;</td>
-          <td class="paramname"><em>right</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Checks if value is between left and right. </p>
-<p>Overloading for disabling 4388 warning with Compare instantiation </p><dl class="tparams"><dt>Template Parameters</dt><dd>
-  <table class="tparams">
-    <tr><td class="paramname">T</td><td>- value type </td></tr>
-    <tr><td class="paramname">compare_t</td><td>- comparator type </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">left</td><td>- left value </td></tr>
-    <tr><td class="paramname">value</td><td>- value </td></tr>
-    <tr><td class="paramname">right</td><td>- right value </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="retval"><dt>Return values</dt><dd>
-  <table class="retval">
-    <tr><td class="paramname">-</td><td>true, left &lt;= value &lt;= right </td></tr>
-  </table>
-  </dd>
-</dl>
-
-<p class="definition">Definition at line <a class="el" href="math_2common_8inl_source.html#l00188">188</a> of file <a class="el" href="math_2common_8inl_source.html">common.inl</a>.</p>
-
-</div>
-</div>
-<a id="a0cea1fc43418a3cfd756c96121ea5de7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0cea1fc43418a3cfd756c96121ea5de7">&#9670;&nbsp;</a></span>between() <span class="overload">[2/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class T , class compare_t  = std::less_equal&lt;&gt;&gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">constexpr bool qx::between </td>
-          <td>(</td>
-          <td class="paramtype">T&#160;</td>
-          <td class="paramname"><em>left</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">T&#160;</td>
-          <td class="paramname"><em>value</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">T&#160;</td>
-          <td class="paramname"><em>right</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">compare_t&#160;</td>
-          <td class="paramname"><em>compare</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Checks if value is between left and right. </p>
-<dl class="tparams"><dt>Template Parameters</dt><dd>
-  <table class="tparams">
-    <tr><td class="paramname">T</td><td>- value type </td></tr>
-    <tr><td class="paramname">compare_t</td><td>- comparator type </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">left</td><td>- left value </td></tr>
-    <tr><td class="paramname">value</td><td>- value </td></tr>
-    <tr><td class="paramname">right</td><td>- right value </td></tr>
-    <tr><td class="paramname">compare</td><td>- comparator function </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="retval"><dt>Return values</dt><dd>
-  <table class="retval">
-    <tr><td class="paramname">-</td><td>true, left &lt;= value &lt;= right </td></tr>
-  </table>
-  </dd>
-</dl>
-
-<p class="definition">Definition at line <a class="el" href="math_2common_8inl_source.html#l00164">164</a> of file <a class="el" href="math_2common_8inl_source.html">common.inl</a>.</p>
-
-</div>
-</div>
-<a id="aea72d2479ff944d13b5eba58651d776f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aea72d2479ff944d13b5eba58651d776f">&#9670;&nbsp;</a></span>epsilon_equal()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class T &gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">constexpr bool qx::epsilon_equal </td>
-          <td>(</td>
-          <td class="paramtype">T&#160;</td>
-          <td class="paramname"><em>left</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">T&#160;</td>
-          <td class="paramname"><em>right</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">T&#160;</td>
-          <td class="paramname"><em>eps</em> = <code>std::numeric_limits&lt;T&gt;::epsilon()</code>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Constexpr comparison function for a user defined epsilon values. </p>
-<dl class="tparams"><dt>Template Parameters</dt><dd>
-  <table class="tparams">
-    <tr><td class="paramname">T</td><td>- value type </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">left</td><td>- left value </td></tr>
-    <tr><td class="paramname">right</td><td>- right value </td></tr>
-    <tr><td class="paramname">eps</td><td>- epsilon value </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="retval"><dt>Return values</dt><dd>
-  <table class="retval">
-    <tr><td class="paramname">-</td><td>true if |left - right| &lt; eps </td></tr>
-  </table>
-  </dd>
-</dl>
-
-<p class="definition">Definition at line <a class="el" href="math_2common_8inl_source.html#l00020">20</a> of file <a class="el" href="math_2common_8inl_source.html">common.inl</a>.</p>
-
-</div>
-</div>
-<a id="a2db6d38ad44aebd45809cb9a06774ffd"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2db6d38ad44aebd45809cb9a06774ffd">&#9670;&nbsp;</a></span>epsilon_greater_equal()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class T &gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">constexpr bool qx::epsilon_greater_equal </td>
-          <td>(</td>
-          <td class="paramtype">T&#160;</td>
-          <td class="paramname"><em>left</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">T&#160;</td>
-          <td class="paramname"><em>right</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">T&#160;</td>
-          <td class="paramname"><em>eps</em> = <code>std::numeric_limits&lt;T&gt;::epsilon()</code>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Constexpr comparison function for a user defined epsilon values. </p>
-<dl class="tparams"><dt>Template Parameters</dt><dd>
-  <table class="tparams">
-    <tr><td class="paramname">T</td><td>- value type </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">left</td><td>- left value </td></tr>
-    <tr><td class="paramname">right</td><td>- right value </td></tr>
-    <tr><td class="paramname">eps</td><td>- epsilon value </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="retval"><dt>Return values</dt><dd>
-  <table class="retval">
-    <tr><td class="paramname">-</td><td>true if left &gt; right or |left - right| &lt; eps </td></tr>
-  </table>
-  </dd>
-</dl>
-
-<p class="definition">Definition at line <a class="el" href="math_2common_8inl_source.html#l00038">38</a> of file <a class="el" href="math_2common_8inl_source.html">common.inl</a>.</p>
-
-</div>
-</div>
-<a id="abc0bd064c0a27a488aabf1d2f2e2fcfa"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#abc0bd064c0a27a488aabf1d2f2e2fcfa">&#9670;&nbsp;</a></span>epsilon_less_equal()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class T &gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">constexpr bool qx::epsilon_less_equal </td>
-          <td>(</td>
-          <td class="paramtype">T&#160;</td>
-          <td class="paramname"><em>left</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">T&#160;</td>
-          <td class="paramname"><em>right</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">T&#160;</td>
-          <td class="paramname"><em>eps</em> = <code>std::numeric_limits&lt;T&gt;::epsilon()</code>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Constexpr comparison function for a user defined epsilon values. </p>
-<dl class="tparams"><dt>Template Parameters</dt><dd>
-  <table class="tparams">
-    <tr><td class="paramname">T</td><td>- value type </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">left</td><td>- left value </td></tr>
-    <tr><td class="paramname">right</td><td>- right value </td></tr>
-    <tr><td class="paramname">eps</td><td>- epsilon value </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="retval"><dt>Return values</dt><dd>
-  <table class="retval">
-    <tr><td class="paramname">-</td><td>true if left &lt; right or |left - right| &lt; eps </td></tr>
-  </table>
-  </dd>
-</dl>
-
-<p class="definition">Definition at line <a class="el" href="math_2common_8inl_source.html#l00032">32</a> of file <a class="el" href="math_2common_8inl_source.html">common.inl</a>.</p>
-
-</div>
-</div>
-<a id="a8e4b02e5e01574b36071ee33cb4f282e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8e4b02e5e01574b36071ee33cb4f282e">&#9670;&nbsp;</a></span>epsilon_zero()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class T &gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">constexpr bool qx::epsilon_zero </td>
-          <td>(</td>
-          <td class="paramtype">T&#160;</td>
-          <td class="paramname"><em>value</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">T&#160;</td>
-          <td class="paramname"><em>eps</em> = <code>std::numeric_limits&lt;T&gt;::epsilon()</code>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Constexpr comparison with zero for a user defined epsilon values. </p>
-<dl class="tparams"><dt>Template Parameters</dt><dd>
-  <table class="tparams">
-    <tr><td class="paramname">T</td><td>- value type </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">value</td><td>- user value </td></tr>
-    <tr><td class="paramname">eps</td><td>- epsilon value </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="retval"><dt>Return values</dt><dd>
-  <table class="retval">
-    <tr><td class="paramname">-</td><td>true if |value| &lt; eps </td></tr>
-  </table>
-  </dd>
-</dl>
-
-<p class="definition">Definition at line <a class="el" href="math_2common_8inl_source.html#l00026">26</a> of file <a class="el" href="math_2common_8inl_source.html">common.inl</a>.</p>
-
-</div>
-</div>
 <a id="aff29488c1ea7390c81dee1c9fed7c23e"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aff29488c1ea7390c81dee1c9fed7c23e">&#9670;&nbsp;</a></span>gcd()</h2>
 
@@ -651,7 +215,7 @@ template&lt;class T &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="math_2common_8inl_source.html#l00055">55</a> of file <a class="el" href="math_2common_8inl_source.html">common.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="math_2common_8inl_source.html#l00031">31</a> of file <a class="el" href="math_2common_8inl_source.html">common.inl</a>.</p>
 
 </div>
 </div>
@@ -701,7 +265,7 @@ template&lt;std::integral T&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="math_2common_8inl_source.html#l00050">50</a> of file <a class="el" href="math_2common_8inl_source.html">common.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="math_2common_8inl_source.html#l00026">26</a> of file <a class="el" href="math_2common_8inl_source.html">common.inl</a>.</p>
 
 </div>
 </div>
@@ -751,7 +315,7 @@ template&lt;std::integral T&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="math_2common_8inl_source.html#l00044">44</a> of file <a class="el" href="math_2common_8inl_source.html">common.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="math_2common_8inl_source.html#l00020">20</a> of file <a class="el" href="math_2common_8inl_source.html">common.inl</a>.</p>
 
 </div>
 </div>
@@ -805,7 +369,7 @@ template&lt;std::integral T&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="math_2common_8inl_source.html#l00070">70</a> of file <a class="el" href="math_2common_8inl_source.html">common.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="math_2common_8inl_source.html#l00046">46</a> of file <a class="el" href="math_2common_8inl_source.html">common.inl</a>.</p>
 
 </div>
 </div>
@@ -855,7 +419,7 @@ template&lt;std::integral I&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="math_2common_8inl_source.html#l00142">142</a> of file <a class="el" href="math_2common_8inl_source.html">common.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="math_2common_8inl_source.html#l00129">129</a> of file <a class="el" href="math_2common_8inl_source.html">common.inl</a>.</p>
 
 </div>
 </div>
@@ -917,7 +481,7 @@ template&lt;class T &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="math_2common_8inl_source.html#l00082">82</a> of file <a class="el" href="math_2common_8inl_source.html">common.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="math_2common_8inl_source.html#l00058">58</a> of file <a class="el" href="math_2common_8inl_source.html">common.inl</a>.</p>
 
 </div>
 </div>
