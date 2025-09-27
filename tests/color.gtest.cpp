@@ -11,7 +11,7 @@
 
 //V_EXCLUDE_PATH *color.gtest.cpp
 
-#include <qx/math/common.h>
+#include <qx/math/between.h>
 #include <qx/render/color.h>
 
 template<class... Args>

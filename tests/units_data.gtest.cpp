@@ -1,6 +1,6 @@
 /**
 
-    @file      converters.gtest.cpp
+    @file      units_data.gtest.cpp
     @author    Khrapov
     @date      11.08.2025
     @copyright © Nick Khrapov, 2025. All right reserved.
@@ -8,45 +8,10 @@
 **/
 #include <common.h>
 
-//V_EXCLUDE_PATH *converters.gtest.cpp
-
-//++
-// bits size_t
+//V_EXCLUDE_PATH *units_data.gtest.cpp
 
 #include <qx/containers/string/string.h>
 #include <qx/math/units/data.h>
-
-template<qx::floating_point_c T>
-static constexpr bool float_compare(T left, T right)
-{
-    if (qx::abs(left - right) <= 1.0e-5)
-        return true;
-
-    return qx::abs(left - right) <= 1.0e-5 * std::max(abs(left), abs(right));
-}
-
-template<qx::floating_point_c T>
-static void expect_equal(T left, T right)
-{
-    EXPECT_TRUE(float_compare(left, right));
-}
-
-template<qx::integral_c T>
-static void expect_equal(T left, T right)
-{
-    EXPECT_EQ(left, right);
-}
-
-template<qx::arithmetic_c T, qx::enumeration_c unit_t>
-static void expect_equal(qx::unit<T, unit_t> left, qx::unit<T, unit_t> right)
-{
-    EXPECT_EQ(left, right);
-}
-
-static void expect_equal(const qx::string& sLeft, const qx::string& sRight)
-{
-    EXPECT_STREQ(sLeft.c_str(), sRight.c_str());
-}
 
 template<class value_t>
 class test_convert_integral : public ::testing::Test
@@ -784,7 +749,7 @@ TEST(data, normalize)
 
 TEST(data, format)
 {
-    expect_equal(qx::string::static_format(QX_TEXT("{}"), qx::unit(200.f, qx::units::data::bits)), QX_TEXT("200b"));
+    expect_equal(qx::convert_to_string(qx::unit(200.f, qx::units::data::bits)), QX_TEXT("200b"));
     expect_equal(
         qx::string::static_format(QX_TEXT("{:.2f}"), qx::unit(2.12345f, qx::units::data::kibibytes)),
         QX_TEXT("2.12KiB"));
@@ -792,23 +757,21 @@ TEST(data, format)
 
 TEST(data, from_string)
 {
-    expect_equal(
-        *qx::unit_from_string<int, qx::units::data, qx::char_type>(QX_TEXT("128b")),
-        qx::unit(128, qx::units::data::bits));
+    expect_equal(*qx::unit_from_string<int, qx::units::data>(QX_TEXT("128b")), qx::unit(128, qx::units::data::bits));
 
     expect_equal(
-        *qx::unit_from_string<int, qx::units::data, qx::char_type>(QX_TEXT("20KiB")),
+        *qx::unit_from_string<int, qx::units::data>(QX_TEXT("20KiB")),
         qx::unit(20, qx::units::data::kibibytes));
 
     expect_equal(
-        *qx::unit_from_string<int, qx::units::data, qx::char_type>(QX_TEXT("666PiB")),
+        *qx::unit_from_string<int, qx::units::data>(QX_TEXT("666PiB")),
         qx::unit(666, qx::units::data::pebibytes));
 
     expect_equal(
-        *qx::unit_from_string<int, qx::units::data, qx::char_type>(QX_TEXT("1000MB")),
+        *qx::unit_from_string<int, qx::units::data>(QX_TEXT("1000MB")),
         qx::unit(1000, qx::units::data::megabytes));
 
     expect_equal(
-        *qx::unit_from_string<int, qx::units::data, qx::char_type>(QX_TEXT("2828nib")),
+        *qx::unit_from_string<int, qx::units::data>(QX_TEXT("2828nib")),
         qx::unit(2828, qx::units::data::nibbles));
 }

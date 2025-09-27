@@ -359,10 +359,10 @@ struct format_traits<char, usings_char_traits_t>
     static int sscanf(
         typename usings_char_traits_t::const_pointer pszString,
         typename usings_char_traits_t::const_pointer pszFormat,
-        args_t... args) noexcept
+        args_t&&... args) noexcept
     {
         QX_PUSH_SUPPRESS_ALL_WARNINGS();
-        return std::sscanf(pszString, pszFormat, args...);
+        return std::sscanf(pszString, pszFormat, std::forward<args_t>(args)...);
         QX_POP_SUPPRESS_WARNINGS();
     }
 
@@ -383,10 +383,10 @@ struct format_traits<wchar_t, usings_char_traits_t>
     static int sscanf(
         typename usings_char_traits_t::const_pointer pszString,
         typename usings_char_traits_t::const_pointer pszFormat,
-        args_t... args) noexcept
+        args_t&&... args) noexcept
     {
         QX_PUSH_SUPPRESS_ALL_WARNINGS();
-        return std::swscanf(pszString, pszFormat, args...);
+        return std::swscanf(pszString, pszFormat, std::forward<args_t>(args)...);
         QX_POP_SUPPRESS_WARNINGS();
     }
 

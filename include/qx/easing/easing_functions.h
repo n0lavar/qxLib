@@ -15,7 +15,7 @@
 **/
 #pragma once
 
-#include <qx/math/common.h>
+#include <qx/math/float_compare.h>
 
 #include <cmath>
 #include <functional>

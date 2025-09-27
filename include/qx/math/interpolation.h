@@ -8,7 +8,7 @@
 **/
 #pragma once
 
-#include <qx/math/common.h>
+#include <qx/math/float_compare.h>
 
 QX_PUSH_SUPPRESS_ALL_WARNINGS();
 #include <glm/glm.hpp>

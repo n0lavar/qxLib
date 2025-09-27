@@ -23,12 +23,6 @@ concept enumeration_c = std::is_enum_v<T>;
 template<class T>
 concept arithmetic_c = std::is_arithmetic_v<T>;
 
-template<class T>
-concept floating_point_c = std::is_floating_point_v<T>;
-
-template<class T>
-concept integral_c = std::is_integral_v<T>;
-
 
 
 

@@ -8,7 +8,9 @@
 **/
 #pragma once
 
+#include <qx/math/between.h>
 #include <qx/math/common.h>
+#include <qx/math/float_compare.h>
 #include <qx/math/integration.h>
 #include <qx/math/interpolation.h>
 #include <qx/math/newtons_method.h>

@@ -926,19 +926,17 @@ TYPED_TEST(TestQxString, to)
     }
 
     {
-        StringTypeTn str(STR("50.f"));
+        StringTypeTn str(STR("50.0"));
 
         auto n0 = str.template to<int>();
-        EXPECT_TRUE(n0.has_value());
-        EXPECT_EQ(n0.value(), 50);
+        EXPECT_TRUE(!n0.has_value());
 
         auto n1 = str.template to<float>();
         EXPECT_TRUE(n1.has_value());
         EXPECT_FLOAT_EQ(n1.value(), 50.f);
 
         auto n2 = str.template to<unsigned>();
-        EXPECT_TRUE(n2.has_value());
-        EXPECT_EQ(n2.value(), 50u);
+        EXPECT_TRUE(!n2.has_value());
     }
 
     {

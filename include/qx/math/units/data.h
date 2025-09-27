@@ -8,9 +8,8 @@
 **/
 #pragma once
 
-#include <qx/math/units/base.h>
-
 #include <qx/math/common.h>
+#include <qx/math/units/base.h>
 
 #include <algorithm>
 
@@ -19,8 +18,7 @@ namespace qx::units
 
 enum class data
 {
-    // binary prefixes
-
+    // binary prefixes (not SI)
     bits      = 0,  // 2^0 bits (1 bit)
     nibbles   = 2,  // 2^1 bits (4 bits)
     bytes     = 3,  // 2^3 bits (8 bits)
@@ -30,17 +28,14 @@ enum class data
     tebibytes = 43, // 2^43 bits (1024 gibibytes)
     pebibytes = 53, // 2^53 bits (1024 tebibytes)
 
-    _last_binary,
+    _first_si,
 
-    // multiplicative prefixes
-
-    kilobytes = _last_binary + 3,  // 10^3 bytes
-    megabytes = _last_binary + 6,  // 10^6 bytes (1000 kilobytes)
-    gigabytes = _last_binary + 9,  // 10^9 bytes (1000 megabytes)
-    terabytes = _last_binary + 12, // 10^12 bytes (1000 gigabytes)
-    petabytes = _last_binary + 15, // 10^15 bytes (1000 terabytes)
-
-    _last_multiplicative
+    // multiplicative prefixes (SI)
+    kilobytes = _first_si + 3,  // 10^3 bytes
+    megabytes = _first_si + 6,  // 10^6 bytes (1000 kilobytes)
+    gigabytes = _first_si + 9,  // 10^9 bytes (1000 megabytes)
+    terabytes = _first_si + 12, // 10^12 bytes (1000 gigabytes)
+    petabytes = _first_si + 15, // 10^15 bytes (1000 terabytes)
 };
 
 } // namespace qx::units

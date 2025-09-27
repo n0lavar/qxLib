@@ -9,10 +9,24 @@
 #pragma once
 
 #include <qx/containers/string/format_string.h>
+#include <qx/containers/string/string.h>
 #include <qx/meta/concepts.h>
+
+#include <optional>
 
 namespace qx
 {
+
+namespace units
+{
+
+template<enumeration_c unit_t>
+struct traits;
+
+}
+
+template<class T>
+concept unit_enum_c = enumeration_c<T> && requires { units::traits<T>(); };
 
 /**
     @struct unit
@@ -33,13 +47,14 @@ namespace qx
     @tparam T      - floating point or integral type
     @tparam unit_t - unit type enum
 **/
-template<arithmetic_c T, enumeration_c unit_t>
+template<arithmetic_c T, unit_enum_c unit_t>
 struct unit
 {
     T      value;
     unit_t type;
 
-    constexpr operator T() const noexcept;
+    constexpr      operator T() const noexcept;
+    constexpr bool operator==(const unit<T, unit_t>& other) const noexcept;
 };
 
 /**
@@ -58,14 +73,8 @@ struct unit
     @date    13.08.2025
 
 **/
-template<arithmetic_c T, enumeration_c unit_t>
+template<arithmetic_c T, unit_enum_c unit_t>
 class convert;
-
-template<arithmetic_c T, enumeration_c unit_t>
-convert(T, unit_t) -> convert<T, unit_t>;
-
-template<arithmetic_c T, enumeration_c unit_t>
-convert(unit<T, unit_t>) -> convert<T, unit_t>;
 
 /**
     @brief  The function returns the closest value greater than one from the SI for the unit of measurement.
@@ -74,8 +83,8 @@ convert(unit<T, unit_t>) -> convert<T, unit_t>;
     @param  unit   - input unit
     @retval        - the closest value greater than one from the SI for the unit of measurement
 **/
-template<arithmetic_c T, enumeration_c unit_t>
-unit<T, unit_t> normalize_unit(unit<T, unit_t> unit) noexcept;
+template<arithmetic_c T, unit_enum_c unit_t>
+constexpr unit<T, unit_t> normalize_unit(unit<T, unit_t> unit) noexcept;
 
 /**
     @brief  The function returns the closest value greater than one from the SI for the unit of measurement.
@@ -85,8 +94,8 @@ unit<T, unit_t> normalize_unit(unit<T, unit_t> unit) noexcept;
     @param  eInitialType - input unit type
     @retval              - the closest value greater than one from the SI for the unit of measurement
 **/
-template<arithmetic_c T, enumeration_c unit_t>
-unit<T, unit_t> normalize_unit(T value, unit_t eInitialType) noexcept;
+template<arithmetic_c T, unit_enum_c unit_t>
+constexpr unit<T, unit_t> normalize_unit(T value, unit_t eInitialType) noexcept;
 
 /**
     @brief   Creates a unit from a string
@@ -97,22 +106,31 @@ unit<T, unit_t> normalize_unit(T value, unit_t eInitialType) noexcept;
     @param   svValue - input string value
     @retval          - a unit if created successfully or `std::nullopt`
 **/
-template<arithmetic_c T, enumeration_c unit_t, class char_t>
+template<arithmetic_c T, unit_enum_c unit_t, class char_t>
 std::optional<unit<T, unit_t>> unit_from_string(basic_string_view<char_t> svValue) noexcept;
 
+/**
+    @brief   Creates a unit from a string
+    @details Input examples: `20KiB` `20 KiB` `20 KiB ` `20KiB `
+    @tparam  T        - expected value type
+    @tparam  unit_t   - unit enum
+    @tparam  char_t   - input string char type
+    @param   pszValue - input string value
+    @retval           - a unit if created successfully or `std::nullopt`
+**/
+template<arithmetic_c T, unit_enum_c unit_t, class char_t>
+std::optional<unit<T, unit_t>> unit_from_string(const char_t* pszValue) noexcept;
+
+/**
+    @brief  Get a unit suffix if exists
+    @tparam unit_t - unit enum
+    @tparam char_t - result string view char type
+    @param  eUnit  - unit to search
+    @retval        - unit suffix
+**/
+template<unit_enum_c unit_t, class char_t = char_type>
+constexpr std::optional<basic_string_view<char_t>> get_unit_suffix(unit_t eUnit) noexcept;
+
 } // namespace qx
-
-template<qx::arithmetic_c T, qx::enumeration_c unit_t, class char_t>
-struct std::formatter<qx::unit<T, unit_t>, char_t>
-{
-    template<class format_parse_context_t>
-    constexpr auto parse(format_parse_context_t& context) noexcept;
-
-    template<class format_context_type_t>
-    constexpr auto format(const qx::unit<T, unit_t>& unit, format_context_type_t& ctx) const noexcept;
-
-private:
-    std::formatter<T, char_t> valueFormatter;
-};
 
 #include <qx/math/units/base.inl>

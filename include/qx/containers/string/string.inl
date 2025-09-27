@@ -297,11 +297,27 @@ inline std::optional<to_t> basic_string<char_t, traits_t>::to(const_pointer pszF
         }
         else if (const auto pszSelectedFormat = pszFormat ? pszFormat : get_format_specifier<value_type, to_t>())
         {
-            to_t      result;
-            const int nConvertedArgs = traits_t::sscanf(data(), pszSelectedFormat, &result);
+            constexpr string_view svNSpecifier(QX_STR_PREFIX(value_type, "%n"));
+            constexpr size_t      nBufferSize = 256;
 
-            if (nConvertedArgs == 1)
-                optResult = result;
+            const size_t nFormatSpecifierLength = traits_t::length(pszSelectedFormat);
+            if (nFormatSpecifierLength <= nBufferSize - svNSpecifier.size() - 1)
+            {
+                value_type formatBuffer[nBufferSize];
+                std::memcpy(formatBuffer, pszSelectedFormat, nFormatSpecifierLength * sizeof(value_type));
+                std::memcpy(
+                    formatBuffer + nFormatSpecifierLength,
+                    svNSpecifier.data(),
+                    svNSpecifier.size() * sizeof(value_type));
+                formatBuffer[nFormatSpecifierLength + svNSpecifier.size()] = QX_CHAR_PREFIX(value_type, '\0');
+
+                to_t      result;
+                int       nSymbolsRead;
+                const int nConvertedArgs = traits_t::sscanf(data(), formatBuffer, &result, &nSymbolsRead);
+
+                if (static_cast<size_type>(nSymbolsRead) == size() && nConvertedArgs == 1)
+                    optResult = result;
+            }
         }
     }
     else

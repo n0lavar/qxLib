@@ -11,6 +11,7 @@
 //V_EXCLUDE_PATH *easing_functions.gtest.cpp
 
 #include <qx/easing/easing_functions.h>
+#include <qx/math/float_compare.h>
 
 template<class T>
 class TestEasingFunctions : public ::testing::Test

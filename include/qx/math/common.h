@@ -8,13 +8,11 @@
 **/
 #pragma once
 
-#include <qx/macros/suppress_warnings.h>
 #include <qx/typedefs.h>
 
 #include <array>
 #include <bitset>
 #include <concepts>
-#include <limits>
 
 namespace qx
 {
@@ -27,49 +25,6 @@ namespace qx
 **/
 template<class T>
 constexpr T abs(T value);
-
-/**
-    @brief  Constexpr comparison function for a user defined epsilon values
-    @tparam T     - value type
-    @param  left  - left value
-    @param  right - right value
-    @param  eps   - epsilon value
-    @retval       - true if |left - right| < eps
-**/
-template<class T>
-constexpr bool epsilon_equal(T left, T right, T eps = std::numeric_limits<T>::epsilon());
-
-/**
-    @brief  Constexpr comparison with zero for a user defined epsilon values
-    @tparam T     - value type
-    @param  value - user value
-    @param  eps   - epsilon value
-    @retval       - true if |value| < eps
-**/
-template<class T>
-constexpr bool epsilon_zero(T value, T eps = std::numeric_limits<T>::epsilon());
-
-/**
-    @brief  Constexpr comparison function for a user defined epsilon values
-    @tparam T     - value type
-    @param  left  - left value
-    @param  right - right value
-    @param  eps   - epsilon value
-    @retval       - true if left < right or |left - right| < eps
-**/
-template<class T>
-constexpr bool epsilon_less_equal(T left, T right, T eps = std::numeric_limits<T>::epsilon());
-
-/**
-    @brief  Constexpr comparison function for a user defined epsilon values
-    @tparam T     - value type
-    @param  left  - left value
-    @param  right - right value
-    @param  eps   - epsilon value
-    @retval       - true if left > right or |left - right| < eps
-**/
-template<class T>
-constexpr bool epsilon_greater_equal(T left, T right, T eps = std::numeric_limits<T>::epsilon());
 
 /**
     @brief  Check if value is odd
@@ -132,32 +87,6 @@ constexpr double pow(T number, int nPower);
 **/
 template<std::integral I>
 inline I maxpot(I nValue);
-
-/**
-    @brief  Checks if value is between left and right
-    @tparam T         - value type
-    @tparam compare_t - comparator type
-    @param  left      - left value
-    @param  value     - value
-    @param  right     - right value
-    @param  compare   - comparator function
-    @retval           - true, left <= value <= right
-**/
-template<class T, class compare_t = std::less_equal<>>
-constexpr bool between(T left, T value, T right, compare_t compare);
-
-/**
-    @brief   Checks if value is between left and right
-    @details Overloading for disabling 4388 warning with Compare instantiation
-    @tparam  T         - value type
-    @tparam  compare_t - comparator type
-    @param   left      - left value
-    @param   value     - value
-    @param   right     - right value
-    @retval            - true, left <= value <= right
-**/
-template<class T, class compare_t = std::less_equal<>>
-constexpr bool between(T left, T value, T right);
 
 } // namespace qx
 

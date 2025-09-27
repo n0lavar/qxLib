@@ -11,6 +11,7 @@
 //V_EXCLUDE_PATH *math_common.gtest.cpp
 
 #include <qx/macros/static_assert.h>
+#include <qx/math/between.h>
 #include <qx/math/common.h>
 
 // ---------------------------------- qx::abs ----------------------------------
@@ -23,37 +24,6 @@ QX_STATIC_ASSERT_EQ(qx::abs(-1), 1);
 QX_STATIC_ASSERT_EQ(qx::abs(-2), 2);
 QX_STATIC_ASSERT_EQ(qx::abs(-3), 3);
 QX_STATIC_ASSERT_EQ(qx::abs(-4), 4);
-
-// ----------------------------- qx::epsilon_equal -----------------------------
-
-static_assert(qx::epsilon_equal(0.5, 0.41, 0.1));
-static_assert(qx::epsilon_equal(0.5, 0.45, 0.1));
-static_assert(qx::epsilon_equal(0.5, 0.48, 0.1));
-static_assert(qx::epsilon_equal(0.5, 0.49, 0.1));
-static_assert(!qx::epsilon_equal(0.5, 0.39, 0.1));
-
-// ------------------------------ qx::epsilon_zero -----------------------------
-
-static_assert(qx::epsilon_zero(0.0));
-static_assert(qx::epsilon_zero(0.f));
-static_assert(!qx::epsilon_zero(0.1));
-static_assert(!qx::epsilon_zero(1.0));
-
-// --------------------------- qx::epsilon_less_equal --------------------------
-
-static_assert(qx::epsilon_less_equal(0.5, 0.41, 0.1));
-static_assert(qx::epsilon_less_equal(0.2, 0.45, 0.1));
-static_assert(qx::epsilon_less_equal(0.0, 0.48, 0.1));
-static_assert(!qx::epsilon_less_equal(0.5, 0.2, 0.1));
-static_assert(!qx::epsilon_less_equal(0.5, 0.39, 0.1));
-
-// ------------------------- qx::epsilon_greater_equal -------------------------
-
-static_assert(qx::epsilon_greater_equal(0.5, 0.41, 0.1));
-static_assert(qx::epsilon_greater_equal(0.5, 0.45, 0.1));
-static_assert(qx::epsilon_greater_equal(0.5, 0.3, 0.1));
-static_assert(!qx::epsilon_greater_equal(0.2, 0.49, 0.1));
-static_assert(!qx::epsilon_greater_equal(0.0, 0.39, 0.1));
 
 // --------------------------------- qx::is_odd --------------------------------
 
