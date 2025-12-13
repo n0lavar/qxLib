@@ -34,6 +34,13 @@ void TestContainer()
     for (T value : span)
         newContainer.insert(newContainer.end(), value);
 
+    auto it1 = std::ranges::find(span, 'b');
+    EXPECT_TRUE(it1);
+    EXPECT_EQ(*it1, 'b');
+
+    auto it2 = std::ranges::find(span, 'u');
+    EXPECT_FALSE(it2);
+
     EXPECT_EQ(container, newContainer);
 }
 
@@ -83,6 +90,13 @@ void TestContainerWithAdapter()
     container_t<_NotT> newContainer;
     for (qx::copy_qualifiers_t<decltype(container), T>& value : span)
         newContainer.insert(newContainer.end(), _NotT { value });
+
+    auto it1 = std::ranges::find(span, 'b');
+    EXPECT_TRUE(it1);
+    EXPECT_EQ(*it1, 'b');
+
+    auto it2 = std::ranges::find(span, 'u');
+    EXPECT_FALSE(it2);
 
     EXPECT_EQ(container, newContainer);
 }

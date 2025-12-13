@@ -18,7 +18,7 @@
     @param name - category name
     @param ...  - optional category color
 **/
-#define QX_DEFINE_CATEGORY(name, ...) constexpr qx::category name = qx::category(QX_TEXT(#name), ##__VA_ARGS__)
+#define QX_DEFINE_CATEGORY(name, ...) constexpr qx::category name(QX_TEXT(#name), ##__VA_ARGS__)
 
 /**
     @brief Define file category

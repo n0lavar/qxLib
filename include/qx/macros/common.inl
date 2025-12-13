@@ -49,9 +49,9 @@ private:
     #define _QX_ENABLE_OPTIMIZATIONS()
 #endif
 
-#if QX_DEBUG && QX_MSVC
+#if !QX_DEBUG && QX_MSVC
     #define _QX_FORCE_INLINE __forceinline
-#elif QX_DEBUG && (QX_GNU || QX_CLANG || QX_APPLE_CLANG)
+#elif !QX_DEBUG && (QX_GNU || QX_CLANG || QX_APPLE_CLANG)
     #define _QX_FORCE_INLINE inline __attribute__((always_inline))
 #else
     #define _QX_FORCE_INLINE inline

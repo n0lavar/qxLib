@@ -10,30 +10,28 @@
 namespace qx
 {
 template<class T, class traits_t>
-constexpr generic_span<T, traits_t>::iterator::iterator(generator_type generator, size_type nIndex) noexcept
+generic_span<T, traits_t>::iterator::iterator(generator_type generator, size_type nIndex) noexcept
     : m_Generator(std::move(generator))
     , m_nIndex(nIndex)
 {
 }
 
 template<class T, class traits_t>
-constexpr typename generic_span<T, traits_t>::iterator::reference generic_span<T, traits_t>::iterator::operator*()
-    const noexcept
+typename generic_span<T, traits_t>::iterator::reference generic_span<T, traits_t>::iterator::operator*() const noexcept
 {
     auto generator = m_Generator;
     return *generator();
 }
 
 template<class T, class traits_t>
-constexpr typename generic_span<T, traits_t>::iterator::pointer generic_span<T, traits_t>::iterator::operator->()
-    const noexcept
+typename generic_span<T, traits_t>::iterator::pointer generic_span<T, traits_t>::iterator::operator->() const noexcept
 {
     auto generator = m_Generator;
     return generator();
 }
 
 template<class T, class traits_t>
-constexpr typename generic_span<T, traits_t>::iterator& generic_span<T, traits_t>::iterator::operator++() noexcept
+typename generic_span<T, traits_t>::iterator& generic_span<T, traits_t>::iterator::operator++() noexcept
 {
     m_Generator();
 
@@ -51,7 +49,7 @@ constexpr typename generic_span<T, traits_t>::iterator& generic_span<T, traits_t
 }
 
 template<class T, class traits_t>
-constexpr typename generic_span<T, traits_t>::iterator generic_span<T, traits_t>::iterator::operator++(int) noexcept
+typename generic_span<T, traits_t>::iterator generic_span<T, traits_t>::iterator::operator++(int) noexcept
 {
     iterator r(*this);
     operator++();
@@ -59,22 +57,28 @@ constexpr typename generic_span<T, traits_t>::iterator generic_span<T, traits_t>
 }
 
 template<class T, class traits_t>
-constexpr bool generic_span<T, traits_t>::iterator::operator!=(const iterator& r) const noexcept
+bool generic_span<T, traits_t>::iterator::operator!=(const iterator& r) const noexcept
 {
     return !operator==(r);
 }
 
 template<class T, class traits_t>
-constexpr bool generic_span<T, traits_t>::iterator::operator==(const iterator& r) const noexcept
+bool generic_span<T, traits_t>::iterator::operator==(const iterator& r) const noexcept
 {
     return m_nIndex == r.m_nIndex;
 }
 
 template<class T, class traits_t>
-constexpr generic_span<T, traits_t>::iterator::operator void*() const noexcept
+generic_span<T, traits_t>::iterator::operator void*() const noexcept
 {
     auto generator = m_Generator;
     return generator();
+}
+
+template<class T, class traits_t>
+generic_span<T, traits_t>::iterator::operator bool() const noexcept
+{
+    return m_Generator && m_nIndex != std::numeric_limits<size_type>::max();
 }
 
 template<class T, class traits_t>

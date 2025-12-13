@@ -21,7 +21,7 @@ namespace qx
     @param   value - object value
     @retval        - object hash
 **/
-template<typename T>
+template<class T>
 constexpr size_t get_hash(const T& value) noexcept
 {
     return std::hash<T>()(value);
@@ -33,7 +33,7 @@ constexpr size_t get_hash(const T& value) noexcept
     @param  seed  - input/output hash value
     @param  value - object to hash
 **/
-template<typename T>
+template<class T>
 constexpr void hash_combine(size_t& seed, const T& value) noexcept
 {
     seed ^= get_hash(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);

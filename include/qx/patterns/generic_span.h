@@ -69,16 +69,17 @@ public:
         using iterator_concept  = std::forward_iterator_tag;
 
     public:
-        constexpr iterator() noexcept                = default;
-        constexpr iterator(const iterator&) noexcept = default;
-        constexpr iterator(generator_type generator, size_type nIndex) noexcept;
-        [[nodiscard]] constexpr reference operator*() const noexcept;
-        [[nodiscard]] constexpr pointer   operator->() const noexcept;
-        constexpr iterator&               operator++() noexcept;
-        [[nodiscard]] constexpr iterator  operator++(int) noexcept;
-        constexpr bool                    operator!=(const iterator& r) const noexcept;
-        constexpr bool                    operator==(const iterator& r) const noexcept;
-        constexpr                         operator void*() const noexcept;
+        iterator() noexcept                = default;
+        iterator(const iterator&) noexcept = default;
+        iterator(generator_type generator, size_type nIndex) noexcept;
+        [[nodiscard]] reference operator*() const noexcept;
+        [[nodiscard]] pointer   operator->() const noexcept;
+        iterator&               operator++() noexcept;
+        [[nodiscard]] iterator  operator++(int) noexcept;
+        bool                    operator!=(const iterator& r) const noexcept;
+        bool                    operator==(const iterator& r) const noexcept;
+        operator void*() const noexcept;
+        operator bool() const noexcept;
 
     private:
         generator_type m_Generator;
