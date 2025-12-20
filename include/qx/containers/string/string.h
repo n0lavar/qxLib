@@ -138,8 +138,6 @@ public:
     template<range_of_t_c<char_t> string_t>
     basic_string(const string_t& sAnother) noexcept;
 
-    ~basic_string() noexcept;
-
     /**
         @brief  Assign by filling 
         @param  nSymbols - number of same chars
@@ -1597,7 +1595,7 @@ private:
         @param   eType    - resize type
         @retval           - true if memory alloc is successful
     **/
-    bool _resize(size_type nSymbols, string_resize_type eType = string_resize_type::common) noexcept;
+    bool _resize(size_type nSymbols, sbo_resize_type eType = sbo_resize_type::common) noexcept;
 
     /**
         @brief  Common algorithm for trimming string to the left

@@ -55,12 +55,6 @@ inline basic_string<char_t, traits_t>::basic_string(const string_t& sAnother) no
 }
 
 template<class char_t, class traits_t>
-inline basic_string<char_t, traits_t>::~basic_string() noexcept
-{
-    free();
-}
-
-template<class char_t, class traits_t>
 inline void basic_string<char_t, traits_t>::assign(size_type nSymbols, value_type chSymbol) noexcept
 {
     if (_resize(nSymbols))
@@ -84,7 +78,7 @@ inline void basic_string<char_t, traits_t>::assign(const_pointer pszSource) noex
 template<class char_t, class traits_t>
 inline void basic_string<char_t, traits_t>::assign(basic_string&& sAnother) noexcept
 {
-    std::swap(m_Data, sAnother.m_Data);
+    swap(sAnother);
 }
 
 template<class char_t, class traits_t>
@@ -190,7 +184,7 @@ inline typename basic_string<char_t, traits_t>::size_type basic_string<char_t, t
     size_type nCapacity) noexcept
 {
     if (nCapacity > capacity())
-        _resize(nCapacity, string_resize_type::reserve);
+        _resize(nCapacity, sbo_resize_type::reserve);
 
     return capacity();
 }
@@ -199,7 +193,7 @@ template<class char_t, class traits_t>
 inline void basic_string<char_t, traits_t>::shrink_to_fit() noexcept
 {
     if (!m_Data.is_small() && capacity() > size())
-        _resize(size(), string_resize_type::shrink_to_fit);
+        _resize(size(), sbo_resize_type::shrink_to_fit);
 }
 
 template<class char_t, class traits_t>
@@ -257,7 +251,7 @@ inline typename basic_string<char_t, traits_t>::const_pointer basic_string<char_
 template<class char_t, class traits_t>
 inline typename basic_string<char_t, traits_t>::size_type basic_string<char_t, traits_t>::capacity() const noexcept
 {
-    return m_Data.capacity();
+    return m_Data.capacity() / sizeof(value_type);
 }
 
 template<class char_t, class traits_t>
@@ -1170,7 +1164,7 @@ typename basic_string<char_t, traits_t>::size_type basic_string<char_t, traits_t
     const size_type nStartSize = size();
     const size_type nNewSize   = nStartSize - nSize + nReplaceSize;
 
-    _resize(nNewSize, string_resize_type::reserve);
+    _resize(nNewSize, sbo_resize_type::reserve);
 
     std::memmove(
         data() + nBegin + nReplaceSize,
@@ -2253,12 +2247,14 @@ inline basic_string<char_t, traits_t>::operator bool() const noexcept
 }
 
 template<class char_t, class traits_t>
-inline bool basic_string<char_t, traits_t>::_resize(size_type nSymbols, string_resize_type eType) noexcept
+inline bool basic_string<char_t, traits_t>::_resize(size_type nSymbols, sbo_resize_type eType) noexcept
 {
-    const bool bRet =
-        m_Data.resize(nSymbols, eType == string_resize_type::shrink_to_fit ? 0 : traits_t::align(), eType);
+    const bool bRet = m_Data.resize(
+        nSymbols * sizeof(value_type),
+        eType == sbo_resize_type::shrink_to_fit ? 0 : traits_t::align(),
+        eType);
 
-    if (bRet && eType == string_resize_type::common)
+    if (bRet && eType == sbo_resize_type::common)
         at(nSymbols) = QX_CHAR_PREFIX(typename traits_t::value_type, '\0');
 
     return bRet;
@@ -2615,7 +2611,7 @@ basic_string<char_t, traits_t> operator+(const string_t& lhs, const basic_string
 template<class char_t, class traits_t>
 inline typename basic_string<char_t, traits_t>::size_type basic_string<char_t, traits_t>::size() const noexcept
 {
-    return m_Data.size();
+    return m_Data.size() / sizeof(value_type);
 }
 
 /**
@@ -2625,7 +2621,7 @@ inline typename basic_string<char_t, traits_t>::size_type basic_string<char_t, t
 template<class char_t, class traits_t>
 inline typename basic_string<char_t, traits_t>::pointer basic_string<char_t, traits_t>::data() noexcept
 {
-    return m_Data.data();
+    return reinterpret_cast<pointer>(m_Data.data());
 }
 
 /**
