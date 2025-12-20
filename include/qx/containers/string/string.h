@@ -13,7 +13,7 @@
 #include <qx/containers/string/string_hash.h>
 #include <qx/macros/static_assert.h>
 #include <qx/meta/type_traits.h>
-#include <qx/sbo/bytes_sbo.h>
+#include <qx/sbo/sbo_bytes.h>
 
 #include <iostream>
 #include <optional>
@@ -1730,7 +1730,7 @@ private:
     static const_pointer _get_string_view_like_data(const string_view_like_t& sValue) noexcept;
 
 private:
-    bytes_sbo<details::string_sbo_traits<traits_t>> m_Data;
+    sbo_bytes<details::string_sbo_traits<traits_t>> m_Data;
 };
 
 /**

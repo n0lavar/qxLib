@@ -1,6 +1,6 @@
 /**
 
-    @file      bytes_sbo.h
+    @file      sbo_bytes.h
     @author    Khrapov
     @date      20.12.2025
     @copyright © Nick Khrapov, 2025. All right reserved.
@@ -10,7 +10,6 @@
 
 #include <array>
 #include <cstddef>
-#include <cstring> // std::memmove
 
 namespace qx
 {
@@ -24,7 +23,7 @@ enum class sbo_resize_type
 
 /**
 
-    @class   bytes_sbo
+    @class   sbo_bytes
     @brief   A type erased small buffer object that works with raw data
     @tparam  traits_t - SBO traits type
     @author  Khrapov
@@ -32,21 +31,22 @@ enum class sbo_resize_type
 
 **/
 template<class traits_t>
-class bytes_sbo
+class sbo_bytes
 {
-    using size_type                                  = typename traits_t::size_type;
-    static constexpr size_type nSBOSize              = traits_t::nSBOSize;
-    static constexpr bool      bShrinkToFitWhenSmall = traits_t::bShrinkToFitWhenSmall;
+    using traits_type                                = traits_t;
+    using size_type                                  = typename traits_type::size_type;
+    static constexpr size_type nSBOSize              = traits_type::nSBOSize;
+    static constexpr bool      bShrinkToFitWhenSmall = traits_type::bShrinkToFitWhenSmall;
 
     using buffer = std::array<std::byte, nSBOSize>;
 
 public:
-    bytes_sbo() noexcept = default;
-    bytes_sbo(bytes_sbo&& other) noexcept;
+    sbo_bytes() noexcept = default;
+    sbo_bytes(sbo_bytes&& other) noexcept;
 
-    ~bytes_sbo() noexcept;
+    ~sbo_bytes() noexcept;
 
-    bytes_sbo& operator=(bytes_sbo&& other) noexcept;
+    sbo_bytes& operator=(sbo_bytes&& other) noexcept;
 
     /**
         @brief  Get SBO data: from a buffer or from a heap
@@ -61,12 +61,17 @@ public:
 
     /**
         @brief  Resize SBO
-        @param  nNewSize - new size (bytes)
-        @param  nAlign   - align (if 16 then size 13->16 16->16 18->32)
-        @param  eType    - resize type
-        @retval          - true if memory alloc is successful
+        @param  nNewSize   - new size (bytes)
+        @param  nAlign     - align (if 16 then size 13->16 16->16 18->32)
+        @param  eType      - resize type
+        @param  moveObject - a function that moves an object from one location to another
+        @retval            - true if memory alloc is successful
     **/
-    bool resize(size_type nNewSize, size_type nAlign, sbo_resize_type eType) noexcept;
+    bool resize(
+        size_type       nNewSize,
+        size_type       nAlign,
+        sbo_resize_type eType,
+        void* (*moveObject)(void* pDest, const void* pSource, std::size_t nSize)) noexcept;
 
     /**
         @brief  Get SBO size (bytes)
@@ -99,4 +104,4 @@ private:
 
 } // namespace qx
 
-#include <qx/sbo/bytes_sbo.inl>
+#include <qx/sbo/sbo_bytes.inl>

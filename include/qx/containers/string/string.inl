@@ -2250,7 +2250,8 @@ inline bool basic_string<char_t, traits_t>::_resize(size_type nSymbols, sbo_resi
     const bool bRet = m_Data.resize(
         (nSymbols + 1) * sizeof(value_type), // + null terminator
         eType == sbo_resize_type::shrink_to_fit ? 0 : traits_t::align() * sizeof(value_type),
-        eType);
+        eType,
+        std::memmove);
 
     if (bRet && eType != sbo_resize_type::reserve)
         (*this)[nSymbols] = QX_CHAR_PREFIX(typename traits_t::value_type, '\0');

@@ -1,6 +1,6 @@
 /**
 
-    @file      bytes_sbo.inl
+    @file      sbo_bytes.inl
     @author    Khrapov
     @date      20.12.2025
     @copyright © Nick Khrapov, 2025. All right reserved.
@@ -11,19 +11,19 @@ namespace qx
 {
 
 template<class traits_t>
-bytes_sbo<traits_t>::bytes_sbo(bytes_sbo&& other) noexcept
+sbo_bytes<traits_t>::sbo_bytes(sbo_bytes&& other) noexcept
 {
     *this = std::move(other);
 }
 
 template<class traits_t>
-bytes_sbo<traits_t>::~bytes_sbo() noexcept
+sbo_bytes<traits_t>::~sbo_bytes() noexcept
 {
     free();
 }
 
 template<class traits_t>
-bytes_sbo<traits_t>& bytes_sbo<traits_t>::operator=(bytes_sbo&& other) noexcept
+sbo_bytes<traits_t>& sbo_bytes<traits_t>::operator=(sbo_bytes&& other) noexcept
 {
     if (!is_small() && !other.is_small())
     {
@@ -53,11 +53,11 @@ bytes_sbo<traits_t>& bytes_sbo<traits_t>::operator=(bytes_sbo&& other) noexcept
 }
 
 template<class traits_t>
-std::byte* bytes_sbo<traits_t>::data() noexcept
+std::byte* sbo_bytes<traits_t>::data() noexcept
 {
     static_assert(
-        sizeof(bytes_sbo) == 32 || sizeof(bytes_sbo) == 64 || sizeof(bytes_sbo) == 128 || sizeof(bytes_sbo) == 256
-            || sizeof(bytes_sbo) > 256,
+        sizeof(sbo_bytes) == 32 || sizeof(sbo_bytes) == 64 || sizeof(sbo_bytes) == 128 || sizeof(sbo_bytes) == 256
+            || sizeof(sbo_bytes) > 256,
         "The buffer size should be such that the final size of the structure is aligned");
 
     if (is_small())
@@ -67,7 +67,7 @@ std::byte* bytes_sbo<traits_t>::data() noexcept
 }
 
 template<class traits_t>
-void bytes_sbo<traits_t>::free() noexcept
+void sbo_bytes<traits_t>::free() noexcept
 {
     if (!is_small())
     {
@@ -80,7 +80,11 @@ void bytes_sbo<traits_t>::free() noexcept
 }
 
 template<class traits_t>
-bool bytes_sbo<traits_t>::resize(size_type nNewSize, size_type nAlign, sbo_resize_type eType) noexcept
+bool sbo_bytes<traits_t>::resize(
+    size_type       nNewSize,
+    size_type       nAlign,
+    sbo_resize_type eType,
+    void* (*moveObject)(void* pDest, const void* pSource, std::size_t nSize)) noexcept
 {
     bool bRet = true;
 
@@ -99,7 +103,7 @@ bool bytes_sbo<traits_t>::resize(size_type nNewSize, size_type nAlign, sbo_resiz
             if (!bSmallAtStart && (bShrinkToFitWhenSmall || eType == sbo_resize_type::shrink_to_fit))
             {
                 // free allocated memory and move SBO to buffer
-                std::memmove(buff.data(), m_pData, nSizeToAllocate);
+                moveObject(buff.data(), m_pData, nSizeToAllocate);
                 free();
                 m_Buffer = buff;
             }
@@ -121,7 +125,7 @@ bool bytes_sbo<traits_t>::resize(size_type nNewSize, size_type nAlign, sbo_resiz
                 m_pData          = static_cast<std::byte*>(pNewBlock);
 
                 if (bSmallAtStart)
-                    std::memmove(m_pData, buff.data(), nStartSize);
+                    moveObject(m_pData, buff.data(), nStartSize);
             }
             else
             {
@@ -137,13 +141,13 @@ bool bytes_sbo<traits_t>::resize(size_type nNewSize, size_type nAlign, sbo_resiz
 }
 
 template<class traits_t>
-typename bytes_sbo<traits_t>::size_type bytes_sbo<traits_t>::size() const noexcept
+typename sbo_bytes<traits_t>::size_type sbo_bytes<traits_t>::size() const noexcept
 {
     return m_nSize;
 }
 
 template<class traits_t>
-typename bytes_sbo<traits_t>::size_type bytes_sbo<traits_t>::capacity() const noexcept
+typename sbo_bytes<traits_t>::size_type sbo_bytes<traits_t>::capacity() const noexcept
 {
     if (is_small())
         return m_Buffer.size();
@@ -152,7 +156,7 @@ typename bytes_sbo<traits_t>::size_type bytes_sbo<traits_t>::capacity() const no
 }
 
 template<class traits_t>
-bool bytes_sbo<traits_t>::is_small() const noexcept
+bool sbo_bytes<traits_t>::is_small() const noexcept
 {
     return m_nAllocatedSize == 0;
 }
