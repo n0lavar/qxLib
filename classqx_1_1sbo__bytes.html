@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>qxLib: qx::bytes_sbo&lt; traits_t &gt; Class Template Reference</title>
+<title>qxLib: qx::sbo_bytes&lt; traits_t &gt; Class Template Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -61,48 +61,48 @@ $(function() {
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><b>qx</b></li><li class="navelem"><a class="el" href="classqx_1_1bytes__sbo.html">bytes_sbo</a></li>  </ul>
+<li class="navelem"><b>qx</b></li><li class="navelem"><a class="el" href="classqx_1_1sbo__bytes.html">sbo_bytes</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
-<a href="classqx_1_1bytes__sbo-members.html">List of all members</a>  </div>
+<a href="classqx_1_1sbo__bytes-members.html">List of all members</a>  </div>
   <div class="headertitle">
-<div class="title">qx::bytes_sbo&lt; traits_t &gt; Class Template Reference</div>  </div>
+<div class="title">qx::sbo_bytes&lt; traits_t &gt; Class Template Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
 <p>A type erased small buffer object that works with raw data.  
- <a href="classqx_1_1bytes__sbo.html#details">More...</a></p>
+ <a href="classqx_1_1sbo__bytes.html#details">More...</a></p>
 
-<p><code>#include &lt;<a class="el" href="bytes__sbo_8h_source.html">bytes_sbo.h</a>&gt;</code></p>
+<p><code>#include &lt;<a class="el" href="sbo__bytes_8h_source.html">sbo_bytes.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a5bd845a12c9486d5d2da089c8cb01f0f"><td class="memItemLeft" align="right" valign="top">std::byte *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1bytes__sbo.html#a5bd845a12c9486d5d2da089c8cb01f0f">data</a> () noexcept</td></tr>
-<tr class="memdesc:a5bd845a12c9486d5d2da089c8cb01f0f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get SBO data: from a buffer or from a heap.  <a href="classqx_1_1bytes__sbo.html#a5bd845a12c9486d5d2da089c8cb01f0f">More...</a><br /></td></tr>
-<tr class="separator:a5bd845a12c9486d5d2da089c8cb01f0f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af3aea833c7f8ca73f609b5a7e86e0951"><td class="memItemLeft" align="right" valign="top"><a id="af3aea833c7f8ca73f609b5a7e86e0951"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1bytes__sbo.html#af3aea833c7f8ca73f609b5a7e86e0951">free</a> () noexcept</td></tr>
-<tr class="memdesc:af3aea833c7f8ca73f609b5a7e86e0951"><td class="mdescLeft">&#160;</td><td class="mdescRight">Free allocated memory. <br /></td></tr>
-<tr class="separator:af3aea833c7f8ca73f609b5a7e86e0951"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a46ec0fb4c3a15f920afe7418e06addf3"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1bytes__sbo.html#a46ec0fb4c3a15f920afe7418e06addf3">resize</a> (size_type nNewSize, size_type nAlign, sbo_resize_type eType) noexcept</td></tr>
-<tr class="memdesc:a46ec0fb4c3a15f920afe7418e06addf3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Resize SBO.  <a href="classqx_1_1bytes__sbo.html#a46ec0fb4c3a15f920afe7418e06addf3">More...</a><br /></td></tr>
-<tr class="separator:a46ec0fb4c3a15f920afe7418e06addf3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a94e14496eb5d58f45e7b2c16a68c9863"><td class="memItemLeft" align="right" valign="top">size_type&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1bytes__sbo.html#a94e14496eb5d58f45e7b2c16a68c9863">size</a> () const noexcept</td></tr>
-<tr class="memdesc:a94e14496eb5d58f45e7b2c16a68c9863"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get SBO size (bytes)  <a href="classqx_1_1bytes__sbo.html#a94e14496eb5d58f45e7b2c16a68c9863">More...</a><br /></td></tr>
-<tr class="separator:a94e14496eb5d58f45e7b2c16a68c9863"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2eafaced9a38afc7a66f04e823f94ee6"><td class="memItemLeft" align="right" valign="top">size_type&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1bytes__sbo.html#a2eafaced9a38afc7a66f04e823f94ee6">capacity</a> () const noexcept</td></tr>
-<tr class="memdesc:a2eafaced9a38afc7a66f04e823f94ee6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get SBO capacity (bytes)  <a href="classqx_1_1bytes__sbo.html#a2eafaced9a38afc7a66f04e823f94ee6">More...</a><br /></td></tr>
-<tr class="separator:a2eafaced9a38afc7a66f04e823f94ee6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2cf79c4de8c2f359befd3723a6d9b33b"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1bytes__sbo.html#a2cf79c4de8c2f359befd3723a6d9b33b">is_small</a> () const noexcept</td></tr>
-<tr class="memdesc:a2cf79c4de8c2f359befd3723a6d9b33b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Is the SBO small and fits into the local buffer.  <a href="classqx_1_1bytes__sbo.html#a2cf79c4de8c2f359befd3723a6d9b33b">More...</a><br /></td></tr>
-<tr class="separator:a2cf79c4de8c2f359befd3723a6d9b33b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aec88056635b3321541d08bc7bdbae264"><td class="memItemLeft" align="right" valign="top">std::byte *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1sbo__bytes.html#aec88056635b3321541d08bc7bdbae264">data</a> () noexcept</td></tr>
+<tr class="memdesc:aec88056635b3321541d08bc7bdbae264"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get SBO data: from a buffer or from a heap.  <a href="classqx_1_1sbo__bytes.html#aec88056635b3321541d08bc7bdbae264">More...</a><br /></td></tr>
+<tr class="separator:aec88056635b3321541d08bc7bdbae264"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8bd6317cc38b445a18967a1c4c243daf"><td class="memItemLeft" align="right" valign="top"><a id="a8bd6317cc38b445a18967a1c4c243daf"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1sbo__bytes.html#a8bd6317cc38b445a18967a1c4c243daf">free</a> () noexcept</td></tr>
+<tr class="memdesc:a8bd6317cc38b445a18967a1c4c243daf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Free allocated memory. <br /></td></tr>
+<tr class="separator:a8bd6317cc38b445a18967a1c4c243daf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad77570ffdd805cbd6ee8ba9950ff7ca5"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1sbo__bytes.html#ad77570ffdd805cbd6ee8ba9950ff7ca5">resize</a> (size_type nNewSize, size_type nAlign, sbo_resize_type eType, void *(*moveObject)(void *pDest, const void *pSource, std::size_t nSize)) noexcept</td></tr>
+<tr class="memdesc:ad77570ffdd805cbd6ee8ba9950ff7ca5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Resize SBO.  <a href="classqx_1_1sbo__bytes.html#ad77570ffdd805cbd6ee8ba9950ff7ca5">More...</a><br /></td></tr>
+<tr class="separator:ad77570ffdd805cbd6ee8ba9950ff7ca5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6fa9d704a7ce66f8aeb8566114b49bec"><td class="memItemLeft" align="right" valign="top">size_type&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1sbo__bytes.html#a6fa9d704a7ce66f8aeb8566114b49bec">size</a> () const noexcept</td></tr>
+<tr class="memdesc:a6fa9d704a7ce66f8aeb8566114b49bec"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get SBO size (bytes)  <a href="classqx_1_1sbo__bytes.html#a6fa9d704a7ce66f8aeb8566114b49bec">More...</a><br /></td></tr>
+<tr class="separator:a6fa9d704a7ce66f8aeb8566114b49bec"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa05535ae19a99e8196605399d0578dd4"><td class="memItemLeft" align="right" valign="top">size_type&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1sbo__bytes.html#aa05535ae19a99e8196605399d0578dd4">capacity</a> () const noexcept</td></tr>
+<tr class="memdesc:aa05535ae19a99e8196605399d0578dd4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get SBO capacity (bytes)  <a href="classqx_1_1sbo__bytes.html#aa05535ae19a99e8196605399d0578dd4">More...</a><br /></td></tr>
+<tr class="separator:aa05535ae19a99e8196605399d0578dd4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adbc1d9b357270724282dde54593c2dc7"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1sbo__bytes.html#adbc1d9b357270724282dde54593c2dc7">is_small</a> () const noexcept</td></tr>
+<tr class="memdesc:adbc1d9b357270724282dde54593c2dc7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Is the SBO small and fits into the local buffer.  <a href="classqx_1_1sbo__bytes.html#adbc1d9b357270724282dde54593c2dc7">More...</a><br /></td></tr>
+<tr class="separator:adbc1d9b357270724282dde54593c2dc7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><h3>template&lt;class traits_t&gt;<br />
-class qx::bytes_sbo&lt; traits_t &gt;</h3>
+class qx::sbo_bytes&lt; traits_t &gt;</h3>
 
 <p>A type erased small buffer object that works with raw data. </p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
@@ -114,10 +114,10 @@ class qx::bytes_sbo&lt; traits_t &gt;</h3>
 <dl class="section author"><dt>Author</dt><dd>Khrapov </dd></dl>
 <dl class="section date"><dt>Date</dt><dd>20.12.2025 </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="bytes__sbo_8h_source.html#l00035">35</a> of file <a class="el" href="bytes__sbo_8h_source.html">bytes_sbo.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sbo__bytes_8h_source.html#l00034">34</a> of file <a class="el" href="sbo__bytes_8h_source.html">sbo_bytes.h</a>.</p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
-<a id="a2eafaced9a38afc7a66f04e823f94ee6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2eafaced9a38afc7a66f04e823f94ee6">&#9670;&nbsp;</a></span>capacity()</h2>
+<a id="aa05535ae19a99e8196605399d0578dd4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa05535ae19a99e8196605399d0578dd4">&#9670;&nbsp;</a></span>capacity()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -128,7 +128,7 @@ template&lt;class traits_t &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classqx_1_1bytes__sbo.html">bytes_sbo</a>&lt; traits_t &gt;::size_type <a class="el" href="classqx_1_1bytes__sbo.html">qx::bytes_sbo</a>&lt; traits_t &gt;::capacity </td>
+          <td class="memname"><a class="el" href="classqx_1_1sbo__bytes.html">sbo_bytes</a>&lt; traits_t &gt;::size_type <a class="el" href="classqx_1_1sbo__bytes.html">qx::sbo_bytes</a>&lt; traits_t &gt;::capacity </td>
           <td>(</td>
           <td class="paramtype">void&#160;</td>
           <td class="paramname"></td><td>)</td>
@@ -150,12 +150,12 @@ template&lt;class traits_t &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="bytes__sbo_8inl_source.html#l00146">146</a> of file <a class="el" href="bytes__sbo_8inl_source.html">bytes_sbo.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sbo__bytes_8inl_source.html#l00150">150</a> of file <a class="el" href="sbo__bytes_8inl_source.html">sbo_bytes.inl</a>.</p>
 
 </div>
 </div>
-<a id="a5bd845a12c9486d5d2da089c8cb01f0f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5bd845a12c9486d5d2da089c8cb01f0f">&#9670;&nbsp;</a></span>data()</h2>
+<a id="aec88056635b3321541d08bc7bdbae264"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aec88056635b3321541d08bc7bdbae264">&#9670;&nbsp;</a></span>data()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -166,7 +166,7 @@ template&lt;class traits_t &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">std::byte * <a class="el" href="classqx_1_1bytes__sbo.html">qx::bytes_sbo</a>&lt; traits_t &gt;::data</td>
+          <td class="memname">std::byte * <a class="el" href="classqx_1_1sbo__bytes.html">qx::sbo_bytes</a>&lt; traits_t &gt;::data</td>
         </tr>
       </table>
   </td>
@@ -184,12 +184,12 @@ template&lt;class traits_t &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="bytes__sbo_8inl_source.html#l00056">56</a> of file <a class="el" href="bytes__sbo_8inl_source.html">bytes_sbo.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sbo__bytes_8inl_source.html#l00056">56</a> of file <a class="el" href="sbo__bytes_8inl_source.html">sbo_bytes.inl</a>.</p>
 
 </div>
 </div>
-<a id="a2cf79c4de8c2f359befd3723a6d9b33b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2cf79c4de8c2f359befd3723a6d9b33b">&#9670;&nbsp;</a></span>is_small()</h2>
+<a id="adbc1d9b357270724282dde54593c2dc7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adbc1d9b357270724282dde54593c2dc7">&#9670;&nbsp;</a></span>is_small()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -200,7 +200,7 @@ template&lt;class traits_t &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">bool <a class="el" href="classqx_1_1bytes__sbo.html">qx::bytes_sbo</a>&lt; traits_t &gt;::is_small</td>
+          <td class="memname">bool <a class="el" href="classqx_1_1sbo__bytes.html">qx::sbo_bytes</a>&lt; traits_t &gt;::is_small</td>
         </tr>
       </table>
   </td>
@@ -218,12 +218,12 @@ template&lt;class traits_t &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="bytes__sbo_8inl_source.html#l00155">155</a> of file <a class="el" href="bytes__sbo_8inl_source.html">bytes_sbo.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sbo__bytes_8inl_source.html#l00159">159</a> of file <a class="el" href="sbo__bytes_8inl_source.html">sbo_bytes.inl</a>.</p>
 
 </div>
 </div>
-<a id="a46ec0fb4c3a15f920afe7418e06addf3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a46ec0fb4c3a15f920afe7418e06addf3">&#9670;&nbsp;</a></span>resize()</h2>
+<a id="ad77570ffdd805cbd6ee8ba9950ff7ca5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad77570ffdd805cbd6ee8ba9950ff7ca5">&#9670;&nbsp;</a></span>resize()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -234,7 +234,7 @@ template&lt;class traits_t &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">bool <a class="el" href="classqx_1_1bytes__sbo.html">qx::bytes_sbo</a>&lt; traits_t &gt;::resize </td>
+          <td class="memname">bool <a class="el" href="classqx_1_1sbo__bytes.html">qx::sbo_bytes</a>&lt; traits_t &gt;::resize </td>
           <td>(</td>
           <td class="paramtype">size_type&#160;</td>
           <td class="paramname"><em>nNewSize</em>, </td>
@@ -249,7 +249,13 @@ template&lt;class traits_t &gt; </div>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">sbo_resize_type&#160;</td>
-          <td class="paramname"><em>eType</em>&#160;</td>
+          <td class="paramname"><em>eType</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">void *(*)(void *pDest, const void *pSource, std::size_t nSize)&#160;</td>
+          <td class="paramname"><em>moveObject</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -270,6 +276,7 @@ template&lt;class traits_t &gt; </div>
     <tr><td class="paramname">nNewSize</td><td>- new size (bytes) </td></tr>
     <tr><td class="paramname">nAlign</td><td>- align (if 16 then size 13-&gt;16 16-&gt;16 18-&gt;32) </td></tr>
     <tr><td class="paramname">eType</td><td>- resize type </td></tr>
+    <tr><td class="paramname">moveObject</td><td>- a function that moves an object from one location to another </td></tr>
   </table>
   </dd>
 </dl>
@@ -280,12 +287,12 @@ template&lt;class traits_t &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="bytes__sbo_8inl_source.html#l00083">83</a> of file <a class="el" href="bytes__sbo_8inl_source.html">bytes_sbo.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sbo__bytes_8inl_source.html#l00083">83</a> of file <a class="el" href="sbo__bytes_8inl_source.html">sbo_bytes.inl</a>.</p>
 
 </div>
 </div>
-<a id="a94e14496eb5d58f45e7b2c16a68c9863"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a94e14496eb5d58f45e7b2c16a68c9863">&#9670;&nbsp;</a></span>size()</h2>
+<a id="a6fa9d704a7ce66f8aeb8566114b49bec"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6fa9d704a7ce66f8aeb8566114b49bec">&#9670;&nbsp;</a></span>size()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -296,7 +303,7 @@ template&lt;class traits_t &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classqx_1_1bytes__sbo.html">bytes_sbo</a>&lt; traits_t &gt;::size_type <a class="el" href="classqx_1_1bytes__sbo.html">qx::bytes_sbo</a>&lt; traits_t &gt;::size</td>
+          <td class="memname"><a class="el" href="classqx_1_1sbo__bytes.html">sbo_bytes</a>&lt; traits_t &gt;::size_type <a class="el" href="classqx_1_1sbo__bytes.html">qx::sbo_bytes</a>&lt; traits_t &gt;::size</td>
         </tr>
       </table>
   </td>
@@ -314,13 +321,13 @@ template&lt;class traits_t &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="bytes__sbo_8inl_source.html#l00140">140</a> of file <a class="el" href="bytes__sbo_8inl_source.html">bytes_sbo.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sbo__bytes_8inl_source.html#l00144">144</a> of file <a class="el" href="sbo__bytes_8inl_source.html">sbo_bytes.inl</a>.</p>
 
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
-<li>include/qx/sbo/<a class="el" href="bytes__sbo_8h_source.html">bytes_sbo.h</a></li>
-<li>include/qx/sbo/<a class="el" href="bytes__sbo_8inl_source.html">bytes_sbo.inl</a></li>
+<li>include/qx/sbo/<a class="el" href="sbo__bytes_8h_source.html">sbo_bytes.h</a></li>
+<li>include/qx/sbo/<a class="el" href="sbo__bytes_8inl_source.html">sbo_bytes.inl</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

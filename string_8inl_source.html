@@ -2321,506 +2321,507 @@ $(function() {
 <div class="line"><a name="l02250"></a><span class="lineno"> 2250</span>&#160;    <span class="keyword">const</span> <span class="keywordtype">bool</span> bRet = m_Data.resize(</div>
 <div class="line"><a name="l02251"></a><span class="lineno"> 2251</span>&#160;        (nSymbols + 1) * <span class="keyword">sizeof</span>(value_type), <span class="comment">// + null terminator</span></div>
 <div class="line"><a name="l02252"></a><span class="lineno"> 2252</span>&#160;        eType == sbo_resize_type::shrink_to_fit ? 0 : traits_t::align() * <span class="keyword">sizeof</span>(value_type),</div>
-<div class="line"><a name="l02253"></a><span class="lineno"> 2253</span>&#160;        eType);</div>
-<div class="line"><a name="l02254"></a><span class="lineno"> 2254</span>&#160; </div>
-<div class="line"><a name="l02255"></a><span class="lineno"> 2255</span>&#160;    <span class="keywordflow">if</span> (bRet &amp;&amp; eType != sbo_resize_type::reserve)</div>
-<div class="line"><a name="l02256"></a><span class="lineno"> 2256</span>&#160;        (*this)[nSymbols] = <a class="code" href="string__utils_8h.html#a57911e62bb82593665bf09e4ea834904">QX_CHAR_PREFIX</a>(<span class="keyword">typename</span> traits_t::value_type, <span class="charliteral">&#39;\0&#39;</span>);</div>
-<div class="line"><a name="l02257"></a><span class="lineno"> 2257</span>&#160; </div>
-<div class="line"><a name="l02258"></a><span class="lineno"> 2258</span>&#160;    <span class="keywordflow">return</span> bRet;</div>
-<div class="line"><a name="l02259"></a><span class="lineno"> 2259</span>&#160;}</div>
-<div class="line"><a name="l02260"></a><span class="lineno"> 2260</span>&#160; </div>
-<div class="line"><a name="l02261"></a><span class="lineno"> 2261</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> <span class="keywordtype">char</span>_t, <span class="keyword">class</span> traits_t&gt;</div>
-<div class="line"><a name="l02262"></a><span class="lineno"> 2262</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> searcher_t&gt;</div>
-<div class="line"><a name="l02263"></a><span class="lineno"> 2263</span>&#160;<span class="keyword">inline</span> <span class="keyword">typename</span> basic_string&lt;char_t, traits_t&gt;::size_type basic_string&lt;char_t, traits_t&gt;::_trim_left(</div>
-<div class="line"><a name="l02264"></a><span class="lineno"> 2264</span>&#160;    <span class="keyword">const</span> searcher_t&amp; searcher) noexcept</div>
-<div class="line"><a name="l02265"></a><span class="lineno"> 2265</span>&#160;{</div>
-<div class="line"><a name="l02266"></a><span class="lineno"> 2266</span>&#160;    size_type nSymbols = 0;</div>
-<div class="line"><a name="l02267"></a><span class="lineno"> 2267</span>&#160; </div>
-<div class="line"><a name="l02268"></a><span class="lineno"> 2268</span>&#160;    <span class="keywordflow">for</span> (size_type i = 0; i &lt; size(); ++i)</div>
-<div class="line"><a name="l02269"></a><span class="lineno"> 2269</span>&#160;    {</div>
-<div class="line"><a name="l02270"></a><span class="lineno"> 2270</span>&#160;        <span class="keywordflow">if</span> (searcher(at(i)))</div>
-<div class="line"><a name="l02271"></a><span class="lineno"> 2271</span>&#160;            ++nSymbols;</div>
-<div class="line"><a name="l02272"></a><span class="lineno"> 2272</span>&#160;        <span class="keywordflow">else</span></div>
-<div class="line"><a name="l02273"></a><span class="lineno"> 2273</span>&#160;            <span class="keywordflow">break</span>;</div>
-<div class="line"><a name="l02274"></a><span class="lineno"> 2274</span>&#160;    }</div>
-<div class="line"><a name="l02275"></a><span class="lineno"> 2275</span>&#160; </div>
-<div class="line"><a name="l02276"></a><span class="lineno"> 2276</span>&#160;    erase(0, nSymbols);</div>
-<div class="line"><a name="l02277"></a><span class="lineno"> 2277</span>&#160;    <span class="keywordflow">return</span> nSymbols;</div>
-<div class="line"><a name="l02278"></a><span class="lineno"> 2278</span>&#160;}</div>
-<div class="line"><a name="l02279"></a><span class="lineno"> 2279</span>&#160; </div>
-<div class="line"><a name="l02280"></a><span class="lineno"> 2280</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> <span class="keywordtype">char</span>_t, <span class="keyword">class</span> traits_t&gt;</div>
-<div class="line"><a name="l02281"></a><span class="lineno"> 2281</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> searcher_t&gt;</div>
-<div class="line"><a name="l02282"></a><span class="lineno"> 2282</span>&#160;<span class="keyword">inline</span> <span class="keyword">typename</span> basic_string&lt;char_t, traits_t&gt;::size_type basic_string&lt;char_t, traits_t&gt;::_trim_right(</div>
-<div class="line"><a name="l02283"></a><span class="lineno"> 2283</span>&#160;    <span class="keyword">const</span> searcher_t&amp; searcher) noexcept</div>
-<div class="line"><a name="l02284"></a><span class="lineno"> 2284</span>&#160;{</div>
-<div class="line"><a name="l02285"></a><span class="lineno"> 2285</span>&#160;    size_type nSymbols = 0;</div>
-<div class="line"><a name="l02286"></a><span class="lineno"> 2286</span>&#160;    size_type nSize    = size();</div>
-<div class="line"><a name="l02287"></a><span class="lineno"> 2287</span>&#160; </div>
-<div class="line"><a name="l02288"></a><span class="lineno"> 2288</span>&#160;    <span class="keywordflow">for</span> (size_type i = nSize - 1; i != std::numeric_limits&lt;size_type&gt;::max(); --i)</div>
-<div class="line"><a name="l02289"></a><span class="lineno"> 2289</span>&#160;    {</div>
-<div class="line"><a name="l02290"></a><span class="lineno"> 2290</span>&#160;        <span class="keywordflow">if</span> (searcher(at(i)))</div>
-<div class="line"><a name="l02291"></a><span class="lineno"> 2291</span>&#160;            ++nSymbols;</div>
-<div class="line"><a name="l02292"></a><span class="lineno"> 2292</span>&#160;        <span class="keywordflow">else</span></div>
-<div class="line"><a name="l02293"></a><span class="lineno"> 2293</span>&#160;            <span class="keywordflow">break</span>;</div>
-<div class="line"><a name="l02294"></a><span class="lineno"> 2294</span>&#160;    }</div>
-<div class="line"><a name="l02295"></a><span class="lineno"> 2295</span>&#160; </div>
-<div class="line"><a name="l02296"></a><span class="lineno"> 2296</span>&#160;    erase(nSize - nSymbols, nSymbols);</div>
-<div class="line"><a name="l02297"></a><span class="lineno"> 2297</span>&#160;    <span class="keywordflow">return</span> nSymbols;</div>
-<div class="line"><a name="l02298"></a><span class="lineno"> 2298</span>&#160;}</div>
-<div class="line"><a name="l02299"></a><span class="lineno"> 2299</span>&#160; </div>
-<div class="line"><a name="l02300"></a><span class="lineno"> 2300</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> <span class="keywordtype">char</span>_t, <span class="keyword">class</span> traits_t&gt;</div>
-<div class="line"><a name="l02301"></a><span class="lineno"> 2301</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> searcher_t&gt;</div>
-<div class="line"><a name="l02302"></a><span class="lineno"> 2302</span>&#160;<span class="keyword">inline</span> <span class="keyword">typename</span> basic_string&lt;char_t, traits_t&gt;::size_type basic_string&lt;char_t, traits_t&gt;::_trim(</div>
-<div class="line"><a name="l02303"></a><span class="lineno"> 2303</span>&#160;    <span class="keyword">const</span> searcher_t&amp; searcher) noexcept</div>
-<div class="line"><a name="l02304"></a><span class="lineno"> 2304</span>&#160;{</div>
-<div class="line"><a name="l02305"></a><span class="lineno"> 2305</span>&#160;    <span class="keyword">const</span> size_type nSize     = size();</div>
-<div class="line"><a name="l02306"></a><span class="lineno"> 2306</span>&#160;    size_type       nStartPos = 0;</div>
-<div class="line"><a name="l02307"></a><span class="lineno"> 2307</span>&#160;    size_type       nEndPos   = nSize;</div>
-<div class="line"><a name="l02308"></a><span class="lineno"> 2308</span>&#160; </div>
-<div class="line"><a name="l02309"></a><span class="lineno"> 2309</span>&#160;    <span class="keywordflow">while</span> (nStartPos &lt; nSize &amp;&amp; searcher(at(nStartPos)))</div>
-<div class="line"><a name="l02310"></a><span class="lineno"> 2310</span>&#160;        ++nStartPos;</div>
-<div class="line"><a name="l02311"></a><span class="lineno"> 2311</span>&#160; </div>
-<div class="line"><a name="l02312"></a><span class="lineno"> 2312</span>&#160;    <span class="keywordflow">while</span> (nEndPos &gt; nStartPos &amp;&amp; searcher(at(nEndPos - 1)))</div>
-<div class="line"><a name="l02313"></a><span class="lineno"> 2313</span>&#160;        --nEndPos;</div>
-<div class="line"><a name="l02314"></a><span class="lineno"> 2314</span>&#160; </div>
-<div class="line"><a name="l02315"></a><span class="lineno"> 2315</span>&#160;    size_type nNewSize = nEndPos - nStartPos;</div>
-<div class="line"><a name="l02316"></a><span class="lineno"> 2316</span>&#160; </div>
-<div class="line"><a name="l02317"></a><span class="lineno"> 2317</span>&#160;    std::memmove(data(), data() + nStartPos, nNewSize * <span class="keyword">sizeof</span>(value_type));</div>
-<div class="line"><a name="l02318"></a><span class="lineno"> 2318</span>&#160; </div>
-<div class="line"><a name="l02319"></a><span class="lineno"> 2319</span>&#160;    _resize(nNewSize);</div>
-<div class="line"><a name="l02320"></a><span class="lineno"> 2320</span>&#160;    <span class="keywordflow">return</span> nSize - nNewSize;</div>
-<div class="line"><a name="l02321"></a><span class="lineno"> 2321</span>&#160;}</div>
-<div class="line"><a name="l02322"></a><span class="lineno"> 2322</span>&#160; </div>
-<div class="line"><a name="l02323"></a><span class="lineno"> 2323</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> <span class="keywordtype">char</span>_t, <span class="keyword">class</span> traits_t&gt;</div>
-<div class="line"><a name="l02324"></a><span class="lineno"> 2324</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> comparator_t&gt;</div>
-<div class="line"><a name="l02325"></a><span class="lineno"> 2325</span>&#160;<span class="keyword">inline</span> <span class="keyword">typename</span> basic_string&lt;char_t, traits_t&gt;::size_type basic_string&lt;char_t, traits_t&gt;::_find(</div>
-<div class="line"><a name="l02326"></a><span class="lineno"> 2326</span>&#160;    size_type           nBegin,</div>
-<div class="line"><a name="l02327"></a><span class="lineno"> 2327</span>&#160;    size_type           nEnd,</div>
-<div class="line"><a name="l02328"></a><span class="lineno"> 2328</span>&#160;    <span class="keyword">const</span> comparator_t&amp; comparator) <span class="keyword">const</span> noexcept</div>
-<div class="line"><a name="l02329"></a><span class="lineno"> 2329</span>&#160;{</div>
-<div class="line"><a name="l02330"></a><span class="lineno"> 2330</span>&#160;    <span class="keywordflow">if</span> (nEnd == npos)</div>
-<div class="line"><a name="l02331"></a><span class="lineno"> 2331</span>&#160;        nEnd = size();</div>
-<div class="line"><a name="l02332"></a><span class="lineno"> 2332</span>&#160; </div>
-<div class="line"><a name="l02333"></a><span class="lineno"> 2333</span>&#160;    const_pointer pData        = data();</div>
-<div class="line"><a name="l02334"></a><span class="lineno"> 2334</span>&#160;    const_pointer pCurrentChar = pData + nBegin;</div>
-<div class="line"><a name="l02335"></a><span class="lineno"> 2335</span>&#160;    const_pointer pEnd         = pData + nEnd;</div>
-<div class="line"><a name="l02336"></a><span class="lineno"> 2336</span>&#160; </div>
-<div class="line"><a name="l02337"></a><span class="lineno"> 2337</span>&#160;    <span class="keywordflow">while</span> (pCurrentChar &lt; pEnd)</div>
-<div class="line"><a name="l02338"></a><span class="lineno"> 2338</span>&#160;    {</div>
-<div class="line"><a name="l02339"></a><span class="lineno"> 2339</span>&#160;        <span class="keywordflow">if</span> (comparator(pCurrentChar))</div>
-<div class="line"><a name="l02340"></a><span class="lineno"> 2340</span>&#160;            <span class="keywordflow">return</span> <span class="keyword">static_cast&lt;</span>size_type<span class="keyword">&gt;</span>(pCurrentChar - pData);</div>
-<div class="line"><a name="l02341"></a><span class="lineno"> 2341</span>&#160;        <span class="keywordflow">else</span></div>
-<div class="line"><a name="l02342"></a><span class="lineno"> 2342</span>&#160;            ++pCurrentChar;</div>
-<div class="line"><a name="l02343"></a><span class="lineno"> 2343</span>&#160;    }</div>
-<div class="line"><a name="l02344"></a><span class="lineno"> 2344</span>&#160; </div>
-<div class="line"><a name="l02345"></a><span class="lineno"> 2345</span>&#160;    <span class="keywordflow">return</span> npos;</div>
-<div class="line"><a name="l02346"></a><span class="lineno"> 2346</span>&#160;}</div>
-<div class="line"><a name="l02347"></a><span class="lineno"> 2347</span>&#160; </div>
-<div class="line"><a name="l02348"></a><span class="lineno"> 2348</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> <span class="keywordtype">char</span>_t, <span class="keyword">class</span> traits_t&gt;</div>
-<div class="line"><a name="l02349"></a><span class="lineno"> 2349</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> comparator_t&gt;</div>
-<div class="line"><a name="l02350"></a><span class="lineno"> 2350</span>&#160;<span class="keyword">inline</span> <span class="keyword">typename</span> basic_string&lt;char_t, traits_t&gt;::size_type basic_string&lt;char_t, traits_t&gt;::_rfind(</div>
-<div class="line"><a name="l02351"></a><span class="lineno"> 2351</span>&#160;    size_type           nBegin,</div>
-<div class="line"><a name="l02352"></a><span class="lineno"> 2352</span>&#160;    size_type           nEnd,</div>
-<div class="line"><a name="l02353"></a><span class="lineno"> 2353</span>&#160;    <span class="keyword">const</span> comparator_t&amp; comparator) <span class="keyword">const</span> noexcept</div>
-<div class="line"><a name="l02354"></a><span class="lineno"> 2354</span>&#160;{</div>
-<div class="line"><a name="l02355"></a><span class="lineno"> 2355</span>&#160;    <span class="keywordflow">if</span> (nBegin == npos)</div>
-<div class="line"><a name="l02356"></a><span class="lineno"> 2356</span>&#160;        nBegin = size() - 1;</div>
-<div class="line"><a name="l02357"></a><span class="lineno"> 2357</span>&#160; </div>
-<div class="line"><a name="l02358"></a><span class="lineno"> 2358</span>&#160;    const_pointer pData        = data();</div>
-<div class="line"><a name="l02359"></a><span class="lineno"> 2359</span>&#160;    const_pointer pCurrentChar = pData + nBegin;</div>
-<div class="line"><a name="l02360"></a><span class="lineno"> 2360</span>&#160;    const_pointer pEnd         = pData + nEnd;</div>
-<div class="line"><a name="l02361"></a><span class="lineno"> 2361</span>&#160; </div>
-<div class="line"><a name="l02362"></a><span class="lineno"> 2362</span>&#160;    <span class="keywordflow">while</span> (pCurrentChar &gt;= pEnd)</div>
-<div class="line"><a name="l02363"></a><span class="lineno"> 2363</span>&#160;    {</div>
-<div class="line"><a name="l02364"></a><span class="lineno"> 2364</span>&#160;        <span class="keywordflow">if</span> (comparator(pCurrentChar))</div>
-<div class="line"><a name="l02365"></a><span class="lineno"> 2365</span>&#160;            <span class="keywordflow">return</span> <span class="keyword">static_cast&lt;</span>size_type<span class="keyword">&gt;</span>(pCurrentChar - pData);</div>
-<div class="line"><a name="l02366"></a><span class="lineno"> 2366</span>&#160;        <span class="keywordflow">else</span></div>
-<div class="line"><a name="l02367"></a><span class="lineno"> 2367</span>&#160;            --pCurrentChar;</div>
-<div class="line"><a name="l02368"></a><span class="lineno"> 2368</span>&#160;    }</div>
-<div class="line"><a name="l02369"></a><span class="lineno"> 2369</span>&#160; </div>
-<div class="line"><a name="l02370"></a><span class="lineno"> 2370</span>&#160;    <span class="keywordflow">return</span> npos;</div>
-<div class="line"><a name="l02371"></a><span class="lineno"> 2371</span>&#160;}</div>
-<div class="line"><a name="l02372"></a><span class="lineno"> 2372</span>&#160; </div>
-<div class="line"><a name="l02373"></a><span class="lineno"> 2373</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> <span class="keywordtype">char</span>_t, <span class="keyword">class</span> traits_t&gt;</div>
-<div class="line"><a name="l02374"></a><span class="lineno"> 2374</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> incrementer_t, <span class="keyword">class</span> fwd_it_t&gt;</div>
-<div class="line"><a name="l02375"></a><span class="lineno"> 2375</span>&#160;<span class="keyword">inline</span> <span class="keyword">typename</span> basic_string&lt;char_t, traits_t&gt;::size_type basic_string&lt;char_t, traits_t&gt;::_find_first_of(</div>
-<div class="line"><a name="l02376"></a><span class="lineno"> 2376</span>&#160;    fwd_it_t             itBegin,</div>
-<div class="line"><a name="l02377"></a><span class="lineno"> 2377</span>&#160;    fwd_it_t             itEnd,</div>
-<div class="line"><a name="l02378"></a><span class="lineno"> 2378</span>&#160;    size_type            nBegin,</div>
-<div class="line"><a name="l02379"></a><span class="lineno"> 2379</span>&#160;    <span class="keyword">const</span> incrementer_t&amp; incrementer) <span class="keyword">const</span> noexcept</div>
-<div class="line"><a name="l02380"></a><span class="lineno"> 2380</span>&#160;{</div>
-<div class="line"><a name="l02381"></a><span class="lineno"> 2381</span>&#160;    <span class="keywordflow">for</span> (size_type i = nBegin; i &lt; size(); ++i)</div>
-<div class="line"><a name="l02382"></a><span class="lineno"> 2382</span>&#160;        <span class="keywordflow">for</span> (fwd_it_t it = itBegin; it != itEnd; it = incrementer(it))</div>
-<div class="line"><a name="l02383"></a><span class="lineno"> 2383</span>&#160;            <span class="keywordflow">if</span> (*it == at(i))</div>
-<div class="line"><a name="l02384"></a><span class="lineno"> 2384</span>&#160;                <span class="keywordflow">return</span> i;</div>
-<div class="line"><a name="l02385"></a><span class="lineno"> 2385</span>&#160; </div>
-<div class="line"><a name="l02386"></a><span class="lineno"> 2386</span>&#160;    <span class="keywordflow">return</span> npos;</div>
-<div class="line"><a name="l02387"></a><span class="lineno"> 2387</span>&#160;}</div>
-<div class="line"><a name="l02388"></a><span class="lineno"> 2388</span>&#160; </div>
-<div class="line"><a name="l02389"></a><span class="lineno"> 2389</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> <span class="keywordtype">char</span>_t, <span class="keyword">class</span> traits_t&gt;</div>
-<div class="line"><a name="l02390"></a><span class="lineno"> 2390</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> incrementer_t, <span class="keyword">class</span> fwd_it_t&gt;</div>
-<div class="line"><a name="l02391"></a><span class="lineno"> 2391</span>&#160;<span class="keyword">inline</span> <span class="keyword">typename</span> basic_string&lt;char_t, traits_t&gt;::size_type basic_string&lt;char_t, traits_t&gt;::_find_last_of(</div>
-<div class="line"><a name="l02392"></a><span class="lineno"> 2392</span>&#160;    fwd_it_t             itBegin,</div>
-<div class="line"><a name="l02393"></a><span class="lineno"> 2393</span>&#160;    fwd_it_t             itEnd,</div>
-<div class="line"><a name="l02394"></a><span class="lineno"> 2394</span>&#160;    size_type            nEnd,</div>
-<div class="line"><a name="l02395"></a><span class="lineno"> 2395</span>&#160;    <span class="keyword">const</span> incrementer_t&amp; incrementer) <span class="keyword">const</span> noexcept</div>
-<div class="line"><a name="l02396"></a><span class="lineno"> 2396</span>&#160;{</div>
-<div class="line"><a name="l02397"></a><span class="lineno"> 2397</span>&#160;    <span class="keywordflow">for</span> (size_type i = size() - 1; i != nEnd - 1; --i)</div>
-<div class="line"><a name="l02398"></a><span class="lineno"> 2398</span>&#160;        <span class="keywordflow">for</span> (fwd_it_t it = itBegin; it != itEnd; it = incrementer(it))</div>
-<div class="line"><a name="l02399"></a><span class="lineno"> 2399</span>&#160;            <span class="keywordflow">if</span> (*it == at(i))</div>
-<div class="line"><a name="l02400"></a><span class="lineno"> 2400</span>&#160;                <span class="keywordflow">return</span> i;</div>
-<div class="line"><a name="l02401"></a><span class="lineno"> 2401</span>&#160; </div>
-<div class="line"><a name="l02402"></a><span class="lineno"> 2402</span>&#160;    <span class="keywordflow">return</span> npos;</div>
-<div class="line"><a name="l02403"></a><span class="lineno"> 2403</span>&#160;}</div>
-<div class="line"><a name="l02404"></a><span class="lineno"> 2404</span>&#160; </div>
-<div class="line"><a name="l02405"></a><span class="lineno"> 2405</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> <span class="keywordtype">char</span>_t, <span class="keyword">class</span> traits_t&gt;</div>
-<div class="line"><a name="l02406"></a><span class="lineno"> 2406</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> incrementer_t, <span class="keyword">class</span> fwd_it_t&gt;</div>
-<div class="line"><a name="l02407"></a><span class="lineno"> 2407</span>&#160;<span class="keyword">inline</span> <span class="keyword">typename</span> basic_string&lt;char_t, traits_t&gt;::size_type basic_string&lt;char_t, traits_t&gt;::_find_first_not_of(</div>
-<div class="line"><a name="l02408"></a><span class="lineno"> 2408</span>&#160;    fwd_it_t             itBegin,</div>
-<div class="line"><a name="l02409"></a><span class="lineno"> 2409</span>&#160;    fwd_it_t             itEnd,</div>
-<div class="line"><a name="l02410"></a><span class="lineno"> 2410</span>&#160;    size_type            nBegin,</div>
-<div class="line"><a name="l02411"></a><span class="lineno"> 2411</span>&#160;    <span class="keyword">const</span> incrementer_t&amp; incrementer) <span class="keyword">const</span> noexcept</div>
-<div class="line"><a name="l02412"></a><span class="lineno"> 2412</span>&#160;{</div>
-<div class="line"><a name="l02413"></a><span class="lineno"> 2413</span>&#160;    <span class="keywordflow">for</span> (size_type i = nBegin; i &lt; size(); ++i)</div>
-<div class="line"><a name="l02414"></a><span class="lineno"> 2414</span>&#160;    {</div>
-<div class="line"><a name="l02415"></a><span class="lineno"> 2415</span>&#160;        <span class="keywordtype">bool</span> bFoundOneOf = <span class="keyword">false</span>;</div>
-<div class="line"><a name="l02416"></a><span class="lineno"> 2416</span>&#160;        <span class="keywordflow">for</span> (fwd_it_t it = itBegin; !bFoundOneOf &amp;&amp; it != itEnd; it = incrementer(it))</div>
-<div class="line"><a name="l02417"></a><span class="lineno"> 2417</span>&#160;            bFoundOneOf |= *it == at(i);</div>
-<div class="line"><a name="l02418"></a><span class="lineno"> 2418</span>&#160; </div>
-<div class="line"><a name="l02419"></a><span class="lineno"> 2419</span>&#160;        <span class="keywordflow">if</span> (!bFoundOneOf)</div>
-<div class="line"><a name="l02420"></a><span class="lineno"> 2420</span>&#160;            <span class="keywordflow">return</span> i;</div>
-<div class="line"><a name="l02421"></a><span class="lineno"> 2421</span>&#160;    }</div>
-<div class="line"><a name="l02422"></a><span class="lineno"> 2422</span>&#160; </div>
-<div class="line"><a name="l02423"></a><span class="lineno"> 2423</span>&#160;    <span class="keywordflow">return</span> npos;</div>
-<div class="line"><a name="l02424"></a><span class="lineno"> 2424</span>&#160;}</div>
-<div class="line"><a name="l02425"></a><span class="lineno"> 2425</span>&#160; </div>
-<div class="line"><a name="l02426"></a><span class="lineno"> 2426</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> <span class="keywordtype">char</span>_t, <span class="keyword">class</span> traits_t&gt;</div>
-<div class="line"><a name="l02427"></a><span class="lineno"> 2427</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> incrementer_t, <span class="keyword">class</span> fwd_it_t&gt;</div>
-<div class="line"><a name="l02428"></a><span class="lineno"> 2428</span>&#160;<span class="keyword">inline</span> <span class="keyword">typename</span> basic_string&lt;char_t, traits_t&gt;::size_type basic_string&lt;char_t, traits_t&gt;::_find_last_not_of(</div>
-<div class="line"><a name="l02429"></a><span class="lineno"> 2429</span>&#160;    fwd_it_t             itBegin,</div>
-<div class="line"><a name="l02430"></a><span class="lineno"> 2430</span>&#160;    fwd_it_t             itEnd,</div>
-<div class="line"><a name="l02431"></a><span class="lineno"> 2431</span>&#160;    size_type            nEnd,</div>
-<div class="line"><a name="l02432"></a><span class="lineno"> 2432</span>&#160;    <span class="keyword">const</span> incrementer_t&amp; incrementer) <span class="keyword">const</span> noexcept</div>
-<div class="line"><a name="l02433"></a><span class="lineno"> 2433</span>&#160;{</div>
-<div class="line"><a name="l02434"></a><span class="lineno"> 2434</span>&#160;    <span class="keywordflow">for</span> (size_type i = size() - 1; i != nEnd - 1; --i)</div>
-<div class="line"><a name="l02435"></a><span class="lineno"> 2435</span>&#160;    {</div>
-<div class="line"><a name="l02436"></a><span class="lineno"> 2436</span>&#160;        <span class="keywordtype">bool</span> bFoundOneOf = <span class="keyword">false</span>;</div>
-<div class="line"><a name="l02437"></a><span class="lineno"> 2437</span>&#160;        <span class="keywordflow">for</span> (fwd_it_t it = itBegin; !bFoundOneOf &amp;&amp; it != itEnd; it = incrementer(it))</div>
-<div class="line"><a name="l02438"></a><span class="lineno"> 2438</span>&#160;            bFoundOneOf |= *it == at(i);</div>
-<div class="line"><a name="l02439"></a><span class="lineno"> 2439</span>&#160; </div>
-<div class="line"><a name="l02440"></a><span class="lineno"> 2440</span>&#160;        <span class="keywordflow">if</span> (!bFoundOneOf)</div>
-<div class="line"><a name="l02441"></a><span class="lineno"> 2441</span>&#160;            <span class="keywordflow">return</span> i;</div>
-<div class="line"><a name="l02442"></a><span class="lineno"> 2442</span>&#160;    }</div>
-<div class="line"><a name="l02443"></a><span class="lineno"> 2443</span>&#160; </div>
-<div class="line"><a name="l02444"></a><span class="lineno"> 2444</span>&#160;    <span class="keywordflow">return</span> npos;</div>
-<div class="line"><a name="l02445"></a><span class="lineno"> 2445</span>&#160;}</div>
-<div class="line"><a name="l02446"></a><span class="lineno"> 2446</span>&#160; </div>
-<div class="line"><a name="l02447"></a><span class="lineno"> 2447</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> <span class="keywordtype">char</span>_t, <span class="keyword">class</span> traits_t&gt;</div>
-<div class="line"><a name="l02448"></a><span class="lineno"> 2448</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> <span class="keywordtype">string</span>_view_like_t&gt;</div>
-<div class="line"><a name="l02449"></a><span class="lineno"> 2449</span>&#160;<span class="keyword">inline</span> <span class="keyword">typename</span> basic_string&lt;char_t, traits_t&gt;::size_type basic_string&lt;char_t, traits_t&gt;::_get_string_view_like_size(</div>
-<div class="line"><a name="l02450"></a><span class="lineno"> 2450</span>&#160;    <span class="keyword">const</span> string_view_like_t&amp; sValue) noexcept</div>
-<div class="line"><a name="l02451"></a><span class="lineno"> 2451</span>&#160;{</div>
-<div class="line"><a name="l02452"></a><span class="lineno"> 2452</span>&#160;    <span class="keywordflow">if</span> constexpr (std::is_same_v&lt;string_view_like_t, value_type&gt;)</div>
-<div class="line"><a name="l02453"></a><span class="lineno"> 2453</span>&#160;    {</div>
-<div class="line"><a name="l02454"></a><span class="lineno"> 2454</span>&#160;        <span class="keywordflow">return</span> 1;</div>
-<div class="line"><a name="l02455"></a><span class="lineno"> 2455</span>&#160;    }</div>
-<div class="line"><a name="l02456"></a><span class="lineno"> 2456</span>&#160;    <span class="keywordflow">else</span> <span class="keywordflow">if</span> constexpr (std::is_convertible_v&lt;string_view_like_t, const_pointer&gt;)</div>
-<div class="line"><a name="l02457"></a><span class="lineno"> 2457</span>&#160;    {</div>
-<div class="line"><a name="l02458"></a><span class="lineno"> 2458</span>&#160;        <span class="keywordflow">return</span> traits_t::length(sValue);</div>
-<div class="line"><a name="l02459"></a><span class="lineno"> 2459</span>&#160;    }</div>
-<div class="line"><a name="l02460"></a><span class="lineno"> 2460</span>&#160;    <span class="keywordflow">else</span> <span class="keywordflow">if</span> constexpr (range_of_t_c&lt;string_view_like_t, char_t&gt;)</div>
-<div class="line"><a name="l02461"></a><span class="lineno"> 2461</span>&#160;    {</div>
-<div class="line"><a name="l02462"></a><span class="lineno"> 2462</span>&#160;        <span class="keywordflow">return</span> sValue.size();</div>
-<div class="line"><a name="l02463"></a><span class="lineno"> 2463</span>&#160;    }</div>
-<div class="line"><a name="l02464"></a><span class="lineno"> 2464</span>&#160;    <span class="keywordflow">else</span></div>
-<div class="line"><a name="l02465"></a><span class="lineno"> 2465</span>&#160;    {</div>
-<div class="line"><a name="l02466"></a><span class="lineno"> 2466</span>&#160;        QX_STATIC_ASSERT_NO_INSTANTIATION(<span class="stringliteral">&quot;Unexpected type&quot;</span>);</div>
-<div class="line"><a name="l02467"></a><span class="lineno"> 2467</span>&#160;        <span class="keywordflow">return</span> 0;</div>
-<div class="line"><a name="l02468"></a><span class="lineno"> 2468</span>&#160;    }</div>
-<div class="line"><a name="l02469"></a><span class="lineno"> 2469</span>&#160;}</div>
-<div class="line"><a name="l02470"></a><span class="lineno"> 2470</span>&#160; </div>
-<div class="line"><a name="l02471"></a><span class="lineno"> 2471</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> <span class="keywordtype">char</span>_t, <span class="keyword">class</span> traits_t&gt;</div>
-<div class="line"><a name="l02472"></a><span class="lineno"> 2472</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> <span class="keywordtype">string</span>_view_like_t&gt;</div>
-<div class="line"><a name="l02473"></a><span class="lineno"> 2473</span>&#160;<span class="keyword">inline</span> <span class="keyword">typename</span> basic_string&lt;char_t, traits_t&gt;::const_pointer basic_string&lt;char_t, traits_t&gt;::</div>
-<div class="line"><a name="l02474"></a><span class="lineno"> 2474</span>&#160;    _get_string_view_like_data(<span class="keyword">const</span> string_view_like_t&amp; sValue) noexcept</div>
-<div class="line"><a name="l02475"></a><span class="lineno"> 2475</span>&#160;{</div>
-<div class="line"><a name="l02476"></a><span class="lineno"> 2476</span>&#160;    <span class="keywordflow">if</span> constexpr (std::is_same_v&lt;string_view_like_t, value_type&gt;)</div>
-<div class="line"><a name="l02477"></a><span class="lineno"> 2477</span>&#160;    {</div>
-<div class="line"><a name="l02478"></a><span class="lineno"> 2478</span>&#160;        <span class="keywordflow">return</span> &amp;sValue;</div>
-<div class="line"><a name="l02479"></a><span class="lineno"> 2479</span>&#160;    }</div>
-<div class="line"><a name="l02480"></a><span class="lineno"> 2480</span>&#160;    <span class="keywordflow">else</span> <span class="keywordflow">if</span> constexpr (std::is_convertible_v&lt;string_view_like_t, const_pointer&gt;)</div>
-<div class="line"><a name="l02481"></a><span class="lineno"> 2481</span>&#160;    {</div>
-<div class="line"><a name="l02482"></a><span class="lineno"> 2482</span>&#160;        <span class="keywordflow">return</span> sValue;</div>
-<div class="line"><a name="l02483"></a><span class="lineno"> 2483</span>&#160;    }</div>
-<div class="line"><a name="l02484"></a><span class="lineno"> 2484</span>&#160;    <span class="keywordflow">else</span> <span class="keywordflow">if</span> constexpr (range_of_t_c&lt;string_view_like_t, char_t&gt;)</div>
-<div class="line"><a name="l02485"></a><span class="lineno"> 2485</span>&#160;    {</div>
-<div class="line"><a name="l02486"></a><span class="lineno"> 2486</span>&#160;        <span class="keywordflow">return</span> sValue.data();</div>
-<div class="line"><a name="l02487"></a><span class="lineno"> 2487</span>&#160;    }</div>
-<div class="line"><a name="l02488"></a><span class="lineno"> 2488</span>&#160;    <span class="keywordflow">else</span></div>
-<div class="line"><a name="l02489"></a><span class="lineno"> 2489</span>&#160;    {</div>
-<div class="line"><a name="l02490"></a><span class="lineno"> 2490</span>&#160;        QX_STATIC_ASSERT_NO_INSTANTIATION(<span class="stringliteral">&quot;Unexpected type&quot;</span>);</div>
-<div class="line"><a name="l02491"></a><span class="lineno"> 2491</span>&#160;        <span class="keywordflow">return</span> <span class="keyword">nullptr</span>;</div>
-<div class="line"><a name="l02492"></a><span class="lineno"> 2492</span>&#160;    }</div>
-<div class="line"><a name="l02493"></a><span class="lineno"> 2493</span>&#160;}</div>
-<div class="line"><a name="l02494"></a><span class="lineno"> 2494</span>&#160; </div>
-<div class="line"><a name="l02495"></a><span class="lineno"> 2495</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> T, <span class="keyword">class</span> <span class="keywordtype">char</span>_t, <span class="keyword">class</span> traits_t&gt;</div>
-<div class="line"><a name="l02496"></a><span class="lineno"><a class="line" href="string_8h.html#ae7bef0fda2664f97b0454290be619fd6"> 2496</a></span>&#160;<a class="code" href="classqx_1_1basic__string.html">basic_string&lt;char_t, traits_t&gt;</a> <a class="code" href="string_8h.html#ae7bef0fda2664f97b0454290be619fd6">convert_to_string</a>(<span class="keyword">const</span> T&amp; value)</div>
-<div class="line"><a name="l02497"></a><span class="lineno"> 2497</span>&#160;{</div>
-<div class="line"><a name="l02498"></a><span class="lineno"> 2498</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="classqx_1_1basic__string.html#ae691d641ae64e0d7246c3f35eb2e9fbb">basic_string&lt;char_t, traits_t&gt;::static_format</a>(<a class="code" href="string__utils_8h.html#ae4f688084b037e2e7a63a13eaf539a02">QX_STR_PREFIX</a>(char_t, <span class="stringliteral">&quot;{}&quot;</span>), value);</div>
-<div class="line"><a name="l02499"></a><span class="lineno"> 2499</span>&#160;}</div>
-<div class="line"><a name="l02500"></a><span class="lineno"> 2500</span>&#160; </div>
-<div class="line"><a name="l02501"></a><span class="lineno"> 2501</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> <span class="keywordtype">char</span>_t, <span class="keyword">class</span> traits_t&gt;</div>
-<div class="line"><a name="l02502"></a><span class="lineno"> 2502</span>&#160;basic_string&lt;char_t, traits_t&gt; operator+(</div>
-<div class="line"><a name="l02503"></a><span class="lineno"> 2503</span>&#160;    <span class="keyword">const</span> basic_string&lt;char_t, traits_t&gt;&amp; lhs,</div>
-<div class="line"><a name="l02504"></a><span class="lineno"> 2504</span>&#160;    <span class="keyword">const</span> basic_string&lt;char_t, traits_t&gt;&amp; rhs) noexcept</div>
-<div class="line"><a name="l02505"></a><span class="lineno"> 2505</span>&#160;{</div>
-<div class="line"><a name="l02506"></a><span class="lineno"> 2506</span>&#160;    basic_string&lt;char_t, traits_t&gt; str(lhs);</div>
-<div class="line"><a name="l02507"></a><span class="lineno"> 2507</span>&#160;    str += rhs;</div>
-<div class="line"><a name="l02508"></a><span class="lineno"> 2508</span>&#160;    <span class="keywordflow">return</span> str;</div>
-<div class="line"><a name="l02509"></a><span class="lineno"> 2509</span>&#160;}</div>
-<div class="line"><a name="l02510"></a><span class="lineno"> 2510</span>&#160; </div>
-<div class="line"><a name="l02511"></a><span class="lineno"> 2511</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> <span class="keywordtype">char</span>_t, <span class="keyword">class</span> traits_t&gt;</div>
-<div class="line"><a name="l02512"></a><span class="lineno"> 2512</span>&#160;basic_string&lt;char_t, traits_t&gt; operator+(</div>
-<div class="line"><a name="l02513"></a><span class="lineno"> 2513</span>&#160;    basic_string&lt;char_t, traits_t&gt;&amp;&amp;      lhs,</div>
-<div class="line"><a name="l02514"></a><span class="lineno"> 2514</span>&#160;    <span class="keyword">const</span> basic_string&lt;char_t, traits_t&gt;&amp; rhs) noexcept</div>
-<div class="line"><a name="l02515"></a><span class="lineno"> 2515</span>&#160;{</div>
-<div class="line"><a name="l02516"></a><span class="lineno"> 2516</span>&#160;    basic_string&lt;char_t, traits_t&gt; str(std::move(lhs));</div>
-<div class="line"><a name="l02517"></a><span class="lineno"> 2517</span>&#160;    str += rhs;</div>
-<div class="line"><a name="l02518"></a><span class="lineno"> 2518</span>&#160;    <span class="keywordflow">return</span> str;</div>
-<div class="line"><a name="l02519"></a><span class="lineno"> 2519</span>&#160;}</div>
-<div class="line"><a name="l02520"></a><span class="lineno"> 2520</span>&#160; </div>
-<div class="line"><a name="l02521"></a><span class="lineno"> 2521</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> <span class="keywordtype">char</span>_t, <span class="keyword">class</span> traits_t&gt;</div>
-<div class="line"><a name="l02522"></a><span class="lineno"> 2522</span>&#160;basic_string&lt;char_t, traits_t&gt; operator+(</div>
-<div class="line"><a name="l02523"></a><span class="lineno"> 2523</span>&#160;    <span class="keyword">const</span> basic_string&lt;char_t, traits_t&gt;&amp; lhs,</div>
-<div class="line"><a name="l02524"></a><span class="lineno"> 2524</span>&#160;    <span class="keyword">typename</span> traits_t::const_pointer      rhs) noexcept</div>
-<div class="line"><a name="l02525"></a><span class="lineno"> 2525</span>&#160;{</div>
-<div class="line"><a name="l02526"></a><span class="lineno"> 2526</span>&#160;    basic_string&lt;char_t, traits_t&gt; str(lhs);</div>
-<div class="line"><a name="l02527"></a><span class="lineno"> 2527</span>&#160;    str += rhs;</div>
-<div class="line"><a name="l02528"></a><span class="lineno"> 2528</span>&#160;    <span class="keywordflow">return</span> str;</div>
-<div class="line"><a name="l02529"></a><span class="lineno"> 2529</span>&#160;}</div>
-<div class="line"><a name="l02530"></a><span class="lineno"> 2530</span>&#160; </div>
-<div class="line"><a name="l02531"></a><span class="lineno"> 2531</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> <span class="keywordtype">char</span>_t, <span class="keyword">class</span> traits_t&gt;</div>
-<div class="line"><a name="l02532"></a><span class="lineno"> 2532</span>&#160;basic_string&lt;char_t, traits_t&gt; operator+(</div>
-<div class="line"><a name="l02533"></a><span class="lineno"> 2533</span>&#160;    basic_string&lt;char_t, traits_t&gt;&amp;&amp; lhs,</div>
-<div class="line"><a name="l02534"></a><span class="lineno"> 2534</span>&#160;    <span class="keyword">typename</span> traits_t::const_pointer rhs) noexcept</div>
-<div class="line"><a name="l02535"></a><span class="lineno"> 2535</span>&#160;{</div>
-<div class="line"><a name="l02536"></a><span class="lineno"> 2536</span>&#160;    basic_string&lt;char_t, traits_t&gt; str(std::move(lhs));</div>
-<div class="line"><a name="l02537"></a><span class="lineno"> 2537</span>&#160;    str += rhs;</div>
-<div class="line"><a name="l02538"></a><span class="lineno"> 2538</span>&#160;    <span class="keywordflow">return</span> str;</div>
-<div class="line"><a name="l02539"></a><span class="lineno"> 2539</span>&#160;}</div>
-<div class="line"><a name="l02540"></a><span class="lineno"> 2540</span>&#160; </div>
-<div class="line"><a name="l02541"></a><span class="lineno"> 2541</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> <span class="keywordtype">char</span>_t, <span class="keyword">class</span> traits_t&gt;</div>
-<div class="line"><a name="l02542"></a><span class="lineno"> 2542</span>&#160;basic_string&lt;char_t, traits_t&gt; operator+(</div>
-<div class="line"><a name="l02543"></a><span class="lineno"> 2543</span>&#160;    <span class="keyword">typename</span> traits_t::const_pointer      lhs,</div>
-<div class="line"><a name="l02544"></a><span class="lineno"> 2544</span>&#160;    <span class="keyword">const</span> basic_string&lt;char_t, traits_t&gt;&amp; rhs) noexcept</div>
-<div class="line"><a name="l02545"></a><span class="lineno"> 2545</span>&#160;{</div>
-<div class="line"><a name="l02546"></a><span class="lineno"> 2546</span>&#160;    basic_string&lt;char_t, traits_t&gt; str(lhs);</div>
-<div class="line"><a name="l02547"></a><span class="lineno"> 2547</span>&#160;    str += rhs;</div>
-<div class="line"><a name="l02548"></a><span class="lineno"> 2548</span>&#160;    <span class="keywordflow">return</span> str;</div>
-<div class="line"><a name="l02549"></a><span class="lineno"> 2549</span>&#160;}</div>
-<div class="line"><a name="l02550"></a><span class="lineno"> 2550</span>&#160; </div>
-<div class="line"><a name="l02551"></a><span class="lineno"> 2551</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> <span class="keywordtype">char</span>_t, <span class="keyword">class</span> traits_t&gt;</div>
-<div class="line"><a name="l02552"></a><span class="lineno"> 2552</span>&#160;basic_string&lt;char_t, traits_t&gt; operator+(</div>
-<div class="line"><a name="l02553"></a><span class="lineno"> 2553</span>&#160;    <span class="keyword">const</span> basic_string&lt;char_t, traits_t&gt;&amp; lhs,</div>
-<div class="line"><a name="l02554"></a><span class="lineno"> 2554</span>&#160;    <span class="keyword">typename</span> traits_t::value_type         rhs) noexcept</div>
-<div class="line"><a name="l02555"></a><span class="lineno"> 2555</span>&#160;{</div>
-<div class="line"><a name="l02556"></a><span class="lineno"> 2556</span>&#160;    basic_string&lt;char_t, traits_t&gt; str(lhs);</div>
-<div class="line"><a name="l02557"></a><span class="lineno"> 2557</span>&#160;    str += rhs;</div>
-<div class="line"><a name="l02558"></a><span class="lineno"> 2558</span>&#160;    <span class="keywordflow">return</span> str;</div>
-<div class="line"><a name="l02559"></a><span class="lineno"> 2559</span>&#160;}</div>
-<div class="line"><a name="l02560"></a><span class="lineno"> 2560</span>&#160; </div>
-<div class="line"><a name="l02561"></a><span class="lineno"> 2561</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> <span class="keywordtype">char</span>_t, <span class="keyword">class</span> traits_t&gt;</div>
-<div class="line"><a name="l02562"></a><span class="lineno"> 2562</span>&#160;basic_string&lt;char_t, traits_t&gt; operator+(</div>
-<div class="line"><a name="l02563"></a><span class="lineno"> 2563</span>&#160;    basic_string&lt;char_t, traits_t&gt;&amp;&amp; lhs,</div>
-<div class="line"><a name="l02564"></a><span class="lineno"> 2564</span>&#160;    <span class="keyword">typename</span> traits_t::value_type    rhs) noexcept</div>
-<div class="line"><a name="l02565"></a><span class="lineno"> 2565</span>&#160;{</div>
-<div class="line"><a name="l02566"></a><span class="lineno"> 2566</span>&#160;    basic_string&lt;char_t, traits_t&gt; str(std::move(lhs));</div>
-<div class="line"><a name="l02567"></a><span class="lineno"> 2567</span>&#160;    str += rhs;</div>
-<div class="line"><a name="l02568"></a><span class="lineno"> 2568</span>&#160;    <span class="keywordflow">return</span> str;</div>
-<div class="line"><a name="l02569"></a><span class="lineno"> 2569</span>&#160;}</div>
-<div class="line"><a name="l02570"></a><span class="lineno"> 2570</span>&#160; </div>
-<div class="line"><a name="l02571"></a><span class="lineno"> 2571</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> <span class="keywordtype">char</span>_t, <span class="keyword">class</span> traits_t&gt;</div>
-<div class="line"><a name="l02572"></a><span class="lineno"> 2572</span>&#160;basic_string&lt;char_t, traits_t&gt; operator+(</div>
-<div class="line"><a name="l02573"></a><span class="lineno"> 2573</span>&#160;    <span class="keyword">typename</span> traits_t::value_type         lhs,</div>
-<div class="line"><a name="l02574"></a><span class="lineno"> 2574</span>&#160;    <span class="keyword">const</span> basic_string&lt;char_t, traits_t&gt;&amp; rhs) noexcept</div>
-<div class="line"><a name="l02575"></a><span class="lineno"> 2575</span>&#160;{</div>
-<div class="line"><a name="l02576"></a><span class="lineno"> 2576</span>&#160;    basic_string&lt;char_t, traits_t&gt; str(&amp;lhs, 1);</div>
-<div class="line"><a name="l02577"></a><span class="lineno"> 2577</span>&#160;    str += rhs;</div>
-<div class="line"><a name="l02578"></a><span class="lineno"> 2578</span>&#160;    <span class="keywordflow">return</span> str;</div>
-<div class="line"><a name="l02579"></a><span class="lineno"> 2579</span>&#160;}</div>
-<div class="line"><a name="l02580"></a><span class="lineno"> 2580</span>&#160; </div>
-<div class="line"><a name="l02581"></a><span class="lineno"> 2581</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> <span class="keywordtype">char</span>_t, <span class="keyword">class</span> traits_t, range_of_t_c&lt;<span class="keywordtype">char</span>_t&gt; <span class="keywordtype">string</span>_t&gt;</div>
-<div class="line"><a name="l02582"></a><span class="lineno"> 2582</span>&#160;basic_string&lt;char_t, traits_t&gt; operator+(<span class="keyword">const</span> basic_string&lt;char_t, traits_t&gt;&amp; lhs, <span class="keyword">const</span> string_t&amp; rhs) noexcept</div>
-<div class="line"><a name="l02583"></a><span class="lineno"> 2583</span>&#160;{</div>
-<div class="line"><a name="l02584"></a><span class="lineno"> 2584</span>&#160;    basic_string&lt;char_t, traits_t&gt; str(lhs);</div>
-<div class="line"><a name="l02585"></a><span class="lineno"> 2585</span>&#160;    str += rhs;</div>
-<div class="line"><a name="l02586"></a><span class="lineno"> 2586</span>&#160;    <span class="keywordflow">return</span> str;</div>
-<div class="line"><a name="l02587"></a><span class="lineno"> 2587</span>&#160;}</div>
-<div class="line"><a name="l02588"></a><span class="lineno"> 2588</span>&#160; </div>
-<div class="line"><a name="l02589"></a><span class="lineno"> 2589</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> <span class="keywordtype">char</span>_t, <span class="keyword">class</span> traits_t, range_of_t_c&lt;<span class="keywordtype">char</span>_t&gt; <span class="keywordtype">string</span>_t&gt;</div>
-<div class="line"><a name="l02590"></a><span class="lineno"> 2590</span>&#160;basic_string&lt;char_t, traits_t&gt; operator+(basic_string&lt;char_t, traits_t&gt;&amp;&amp; lhs, <span class="keyword">const</span> string_t&amp; rhs) noexcept</div>
-<div class="line"><a name="l02591"></a><span class="lineno"> 2591</span>&#160;{</div>
-<div class="line"><a name="l02592"></a><span class="lineno"> 2592</span>&#160;    basic_string&lt;char_t, traits_t&gt; str(std::move(lhs));</div>
-<div class="line"><a name="l02593"></a><span class="lineno"> 2593</span>&#160;    str += rhs;</div>
-<div class="line"><a name="l02594"></a><span class="lineno"> 2594</span>&#160;    <span class="keywordflow">return</span> str;</div>
-<div class="line"><a name="l02595"></a><span class="lineno"> 2595</span>&#160;}</div>
-<div class="line"><a name="l02596"></a><span class="lineno"> 2596</span>&#160; </div>
-<div class="line"><a name="l02597"></a><span class="lineno"> 2597</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> <span class="keywordtype">char</span>_t, <span class="keyword">class</span> traits_t, range_of_t_c&lt;<span class="keywordtype">char</span>_t&gt; <span class="keywordtype">string</span>_t&gt;</div>
-<div class="line"><a name="l02598"></a><span class="lineno"> 2598</span>&#160;basic_string&lt;char_t, traits_t&gt; operator+(<span class="keyword">const</span> string_t&amp; lhs, <span class="keyword">const</span> basic_string&lt;char_t, traits_t&gt;&amp; rhs) noexcept</div>
-<div class="line"><a name="l02599"></a><span class="lineno"> 2599</span>&#160;{</div>
-<div class="line"><a name="l02600"></a><span class="lineno"> 2600</span>&#160;    basic_string&lt;char_t, traits_t&gt; str(lhs);</div>
-<div class="line"><a name="l02601"></a><span class="lineno"> 2601</span>&#160;    str += rhs;</div>
-<div class="line"><a name="l02602"></a><span class="lineno"> 2602</span>&#160;    <span class="keywordflow">return</span> str;</div>
-<div class="line"><a name="l02603"></a><span class="lineno"> 2603</span>&#160;}</div>
-<div class="line"><a name="l02604"></a><span class="lineno"> 2604</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l02605"></a><span class="lineno"> 2605</span>&#160;<span class="comment">/**</span></div>
-<div class="line"><a name="l02606"></a><span class="lineno"> 2606</span>&#160;<span class="comment">    @brief  Get string size (excluding null terminator)</span></div>
-<div class="line"><a name="l02607"></a><span class="lineno"> 2607</span>&#160;<span class="comment">    @retval - string size (excluding null terminator)</span></div>
-<div class="line"><a name="l02608"></a><span class="lineno"> 2608</span>&#160;<span class="comment">**/</span></div>
-<div class="line"><a name="l02609"></a><span class="lineno"> 2609</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> <span class="keywordtype">char</span>_t, <span class="keyword">class</span> traits_t&gt;</div>
-<div class="line"><a name="l02610"></a><span class="lineno"> 2610</span>&#160;<span class="keyword">inline</span> <span class="keyword">typename</span> basic_string&lt;char_t, traits_t&gt;::size_type basic_string&lt;char_t, traits_t&gt;::size() const noexcept</div>
-<div class="line"><a name="l02611"></a><span class="lineno"> 2611</span>&#160;{</div>
-<div class="line"><a name="l02612"></a><span class="lineno"> 2612</span>&#160;    <span class="keyword">const</span> size_type nSize = m_Data.size() / <span class="keyword">sizeof</span>(value_type);</div>
-<div class="line"><a name="l02613"></a><span class="lineno"> 2613</span>&#160;    <span class="keywordflow">return</span> nSize == 0 ? 0 : nSize - 1; <span class="comment">// - null terminator</span></div>
-<div class="line"><a name="l02614"></a><span class="lineno"> 2614</span>&#160;}</div>
-<div class="line"><a name="l02615"></a><span class="lineno"> 2615</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l02616"></a><span class="lineno"> 2616</span>&#160;<span class="comment">/**</span></div>
-<div class="line"><a name="l02617"></a><span class="lineno"> 2617</span>&#160;<span class="comment">    @brief  Get c-string</span></div>
-<div class="line"><a name="l02618"></a><span class="lineno"> 2618</span>&#160;<span class="comment">    @retval - c-string</span></div>
-<div class="line"><a name="l02619"></a><span class="lineno"> 2619</span>&#160;<span class="comment">**/</span></div>
-<div class="line"><a name="l02620"></a><span class="lineno"> 2620</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> <span class="keywordtype">char</span>_t, <span class="keyword">class</span> traits_t&gt;</div>
-<div class="line"><a name="l02621"></a><span class="lineno"> 2621</span>&#160;<span class="keyword">inline</span> <span class="keyword">typename</span> basic_string&lt;char_t, traits_t&gt;::pointer basic_string&lt;char_t, traits_t&gt;::data() noexcept</div>
-<div class="line"><a name="l02622"></a><span class="lineno"> 2622</span>&#160;{</div>
-<div class="line"><a name="l02623"></a><span class="lineno"> 2623</span>&#160;    <span class="keywordflow">return</span> <span class="keyword">reinterpret_cast&lt;</span>pointer<span class="keyword">&gt;</span>(m_Data.data());</div>
-<div class="line"><a name="l02624"></a><span class="lineno"> 2624</span>&#160;}</div>
-<div class="line"><a name="l02625"></a><span class="lineno"> 2625</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l02626"></a><span class="lineno"> 2626</span>&#160;<span class="comment">/**</span></div>
-<div class="line"><a name="l02627"></a><span class="lineno"> 2627</span>&#160;<span class="comment">    @brief  Get char at the ind position</span></div>
-<div class="line"><a name="l02628"></a><span class="lineno"> 2628</span>&#160;<span class="comment">    @param  nIndex - char index</span></div>
-<div class="line"><a name="l02629"></a><span class="lineno"> 2629</span>&#160;<span class="comment">    @retval        - char value</span></div>
-<div class="line"><a name="l02630"></a><span class="lineno"> 2630</span>&#160;<span class="comment">**/</span></div>
-<div class="line"><a name="l02631"></a><span class="lineno"> 2631</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> <span class="keywordtype">char</span>_t, <span class="keyword">class</span> traits_t&gt;</div>
-<div class="line"><a name="l02632"></a><span class="lineno"> 2632</span>&#160;<span class="keyword">inline</span> <span class="keyword">typename</span> basic_string&lt;char_t, traits_t&gt;::reference basic_string&lt;char_t, traits_t&gt;::at(size_type nIndex)</div>
-<div class="line"><a name="l02633"></a><span class="lineno"> 2633</span>&#160;{</div>
-<div class="line"><a name="l02634"></a><span class="lineno"> 2634</span>&#160;    <span class="keywordflow">if</span> (nIndex &gt;= size())</div>
-<div class="line"><a name="l02635"></a><span class="lineno"> 2635</span>&#160;        <span class="keywordflow">throw</span> std::out_of_range(<span class="stringliteral">&quot;invalid string position&quot;</span>);</div>
-<div class="line"><a name="l02636"></a><span class="lineno"> 2636</span>&#160; </div>
-<div class="line"><a name="l02637"></a><span class="lineno"> 2637</span>&#160;    <span class="keywordflow">return</span> data()[nIndex];</div>
-<div class="line"><a name="l02638"></a><span class="lineno"> 2638</span>&#160;}</div>
-<div class="line"><a name="l02639"></a><span class="lineno"> 2639</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l02640"></a><span class="lineno"> 2640</span>&#160;<span class="comment">/**</span></div>
-<div class="line"><a name="l02641"></a><span class="lineno"> 2641</span>&#160;<span class="comment">    @brief Clear string</span></div>
-<div class="line"><a name="l02642"></a><span class="lineno"> 2642</span>&#160;<span class="comment">**/</span></div>
-<div class="line"><a name="l02643"></a><span class="lineno"> 2643</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> <span class="keywordtype">char</span>_t, <span class="keyword">class</span> traits_t&gt;</div>
-<div class="line"><a name="l02644"></a><span class="lineno"> 2644</span>&#160;<span class="keyword">inline</span> <span class="keywordtype">void</span> basic_string&lt;char_t, traits_t&gt;::clear() noexcept</div>
-<div class="line"><a name="l02645"></a><span class="lineno"> 2645</span>&#160;{</div>
-<div class="line"><a name="l02646"></a><span class="lineno"> 2646</span>&#160;    assign(<a class="code" href="string__utils_8h.html#ae4f688084b037e2e7a63a13eaf539a02">QX_STR_PREFIX</a>(<span class="keyword">typename</span> traits_t::value_type, <span class="stringliteral">&quot;&quot;</span>));</div>
-<div class="line"><a name="l02647"></a><span class="lineno"> 2647</span>&#160;}</div>
-<div class="line"><a name="l02648"></a><span class="lineno"> 2648</span>&#160; </div>
-<div class="line"><a name="l02649"></a><span class="lineno"> 2649</span>&#160;} <span class="comment">// namespace qx</span></div>
-<div class="line"><a name="l02650"></a><span class="lineno"> 2650</span>&#160; </div>
+<div class="line"><a name="l02253"></a><span class="lineno"> 2253</span>&#160;        eType,</div>
+<div class="line"><a name="l02254"></a><span class="lineno"> 2254</span>&#160;        std::memmove);</div>
+<div class="line"><a name="l02255"></a><span class="lineno"> 2255</span>&#160; </div>
+<div class="line"><a name="l02256"></a><span class="lineno"> 2256</span>&#160;    <span class="keywordflow">if</span> (bRet &amp;&amp; eType != sbo_resize_type::reserve)</div>
+<div class="line"><a name="l02257"></a><span class="lineno"> 2257</span>&#160;        (*this)[nSymbols] = <a class="code" href="string__utils_8h.html#a57911e62bb82593665bf09e4ea834904">QX_CHAR_PREFIX</a>(<span class="keyword">typename</span> traits_t::value_type, <span class="charliteral">&#39;\0&#39;</span>);</div>
+<div class="line"><a name="l02258"></a><span class="lineno"> 2258</span>&#160; </div>
+<div class="line"><a name="l02259"></a><span class="lineno"> 2259</span>&#160;    <span class="keywordflow">return</span> bRet;</div>
+<div class="line"><a name="l02260"></a><span class="lineno"> 2260</span>&#160;}</div>
+<div class="line"><a name="l02261"></a><span class="lineno"> 2261</span>&#160; </div>
+<div class="line"><a name="l02262"></a><span class="lineno"> 2262</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> <span class="keywordtype">char</span>_t, <span class="keyword">class</span> traits_t&gt;</div>
+<div class="line"><a name="l02263"></a><span class="lineno"> 2263</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> searcher_t&gt;</div>
+<div class="line"><a name="l02264"></a><span class="lineno"> 2264</span>&#160;<span class="keyword">inline</span> <span class="keyword">typename</span> basic_string&lt;char_t, traits_t&gt;::size_type basic_string&lt;char_t, traits_t&gt;::_trim_left(</div>
+<div class="line"><a name="l02265"></a><span class="lineno"> 2265</span>&#160;    <span class="keyword">const</span> searcher_t&amp; searcher) noexcept</div>
+<div class="line"><a name="l02266"></a><span class="lineno"> 2266</span>&#160;{</div>
+<div class="line"><a name="l02267"></a><span class="lineno"> 2267</span>&#160;    size_type nSymbols = 0;</div>
+<div class="line"><a name="l02268"></a><span class="lineno"> 2268</span>&#160; </div>
+<div class="line"><a name="l02269"></a><span class="lineno"> 2269</span>&#160;    <span class="keywordflow">for</span> (size_type i = 0; i &lt; size(); ++i)</div>
+<div class="line"><a name="l02270"></a><span class="lineno"> 2270</span>&#160;    {</div>
+<div class="line"><a name="l02271"></a><span class="lineno"> 2271</span>&#160;        <span class="keywordflow">if</span> (searcher(at(i)))</div>
+<div class="line"><a name="l02272"></a><span class="lineno"> 2272</span>&#160;            ++nSymbols;</div>
+<div class="line"><a name="l02273"></a><span class="lineno"> 2273</span>&#160;        <span class="keywordflow">else</span></div>
+<div class="line"><a name="l02274"></a><span class="lineno"> 2274</span>&#160;            <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l02275"></a><span class="lineno"> 2275</span>&#160;    }</div>
+<div class="line"><a name="l02276"></a><span class="lineno"> 2276</span>&#160; </div>
+<div class="line"><a name="l02277"></a><span class="lineno"> 2277</span>&#160;    erase(0, nSymbols);</div>
+<div class="line"><a name="l02278"></a><span class="lineno"> 2278</span>&#160;    <span class="keywordflow">return</span> nSymbols;</div>
+<div class="line"><a name="l02279"></a><span class="lineno"> 2279</span>&#160;}</div>
+<div class="line"><a name="l02280"></a><span class="lineno"> 2280</span>&#160; </div>
+<div class="line"><a name="l02281"></a><span class="lineno"> 2281</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> <span class="keywordtype">char</span>_t, <span class="keyword">class</span> traits_t&gt;</div>
+<div class="line"><a name="l02282"></a><span class="lineno"> 2282</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> searcher_t&gt;</div>
+<div class="line"><a name="l02283"></a><span class="lineno"> 2283</span>&#160;<span class="keyword">inline</span> <span class="keyword">typename</span> basic_string&lt;char_t, traits_t&gt;::size_type basic_string&lt;char_t, traits_t&gt;::_trim_right(</div>
+<div class="line"><a name="l02284"></a><span class="lineno"> 2284</span>&#160;    <span class="keyword">const</span> searcher_t&amp; searcher) noexcept</div>
+<div class="line"><a name="l02285"></a><span class="lineno"> 2285</span>&#160;{</div>
+<div class="line"><a name="l02286"></a><span class="lineno"> 2286</span>&#160;    size_type nSymbols = 0;</div>
+<div class="line"><a name="l02287"></a><span class="lineno"> 2287</span>&#160;    size_type nSize    = size();</div>
+<div class="line"><a name="l02288"></a><span class="lineno"> 2288</span>&#160; </div>
+<div class="line"><a name="l02289"></a><span class="lineno"> 2289</span>&#160;    <span class="keywordflow">for</span> (size_type i = nSize - 1; i != std::numeric_limits&lt;size_type&gt;::max(); --i)</div>
+<div class="line"><a name="l02290"></a><span class="lineno"> 2290</span>&#160;    {</div>
+<div class="line"><a name="l02291"></a><span class="lineno"> 2291</span>&#160;        <span class="keywordflow">if</span> (searcher(at(i)))</div>
+<div class="line"><a name="l02292"></a><span class="lineno"> 2292</span>&#160;            ++nSymbols;</div>
+<div class="line"><a name="l02293"></a><span class="lineno"> 2293</span>&#160;        <span class="keywordflow">else</span></div>
+<div class="line"><a name="l02294"></a><span class="lineno"> 2294</span>&#160;            <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l02295"></a><span class="lineno"> 2295</span>&#160;    }</div>
+<div class="line"><a name="l02296"></a><span class="lineno"> 2296</span>&#160; </div>
+<div class="line"><a name="l02297"></a><span class="lineno"> 2297</span>&#160;    erase(nSize - nSymbols, nSymbols);</div>
+<div class="line"><a name="l02298"></a><span class="lineno"> 2298</span>&#160;    <span class="keywordflow">return</span> nSymbols;</div>
+<div class="line"><a name="l02299"></a><span class="lineno"> 2299</span>&#160;}</div>
+<div class="line"><a name="l02300"></a><span class="lineno"> 2300</span>&#160; </div>
+<div class="line"><a name="l02301"></a><span class="lineno"> 2301</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> <span class="keywordtype">char</span>_t, <span class="keyword">class</span> traits_t&gt;</div>
+<div class="line"><a name="l02302"></a><span class="lineno"> 2302</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> searcher_t&gt;</div>
+<div class="line"><a name="l02303"></a><span class="lineno"> 2303</span>&#160;<span class="keyword">inline</span> <span class="keyword">typename</span> basic_string&lt;char_t, traits_t&gt;::size_type basic_string&lt;char_t, traits_t&gt;::_trim(</div>
+<div class="line"><a name="l02304"></a><span class="lineno"> 2304</span>&#160;    <span class="keyword">const</span> searcher_t&amp; searcher) noexcept</div>
+<div class="line"><a name="l02305"></a><span class="lineno"> 2305</span>&#160;{</div>
+<div class="line"><a name="l02306"></a><span class="lineno"> 2306</span>&#160;    <span class="keyword">const</span> size_type nSize     = size();</div>
+<div class="line"><a name="l02307"></a><span class="lineno"> 2307</span>&#160;    size_type       nStartPos = 0;</div>
+<div class="line"><a name="l02308"></a><span class="lineno"> 2308</span>&#160;    size_type       nEndPos   = nSize;</div>
+<div class="line"><a name="l02309"></a><span class="lineno"> 2309</span>&#160; </div>
+<div class="line"><a name="l02310"></a><span class="lineno"> 2310</span>&#160;    <span class="keywordflow">while</span> (nStartPos &lt; nSize &amp;&amp; searcher(at(nStartPos)))</div>
+<div class="line"><a name="l02311"></a><span class="lineno"> 2311</span>&#160;        ++nStartPos;</div>
+<div class="line"><a name="l02312"></a><span class="lineno"> 2312</span>&#160; </div>
+<div class="line"><a name="l02313"></a><span class="lineno"> 2313</span>&#160;    <span class="keywordflow">while</span> (nEndPos &gt; nStartPos &amp;&amp; searcher(at(nEndPos - 1)))</div>
+<div class="line"><a name="l02314"></a><span class="lineno"> 2314</span>&#160;        --nEndPos;</div>
+<div class="line"><a name="l02315"></a><span class="lineno"> 2315</span>&#160; </div>
+<div class="line"><a name="l02316"></a><span class="lineno"> 2316</span>&#160;    size_type nNewSize = nEndPos - nStartPos;</div>
+<div class="line"><a name="l02317"></a><span class="lineno"> 2317</span>&#160; </div>
+<div class="line"><a name="l02318"></a><span class="lineno"> 2318</span>&#160;    std::memmove(data(), data() + nStartPos, nNewSize * <span class="keyword">sizeof</span>(value_type));</div>
+<div class="line"><a name="l02319"></a><span class="lineno"> 2319</span>&#160; </div>
+<div class="line"><a name="l02320"></a><span class="lineno"> 2320</span>&#160;    _resize(nNewSize);</div>
+<div class="line"><a name="l02321"></a><span class="lineno"> 2321</span>&#160;    <span class="keywordflow">return</span> nSize - nNewSize;</div>
+<div class="line"><a name="l02322"></a><span class="lineno"> 2322</span>&#160;}</div>
+<div class="line"><a name="l02323"></a><span class="lineno"> 2323</span>&#160; </div>
+<div class="line"><a name="l02324"></a><span class="lineno"> 2324</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> <span class="keywordtype">char</span>_t, <span class="keyword">class</span> traits_t&gt;</div>
+<div class="line"><a name="l02325"></a><span class="lineno"> 2325</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> comparator_t&gt;</div>
+<div class="line"><a name="l02326"></a><span class="lineno"> 2326</span>&#160;<span class="keyword">inline</span> <span class="keyword">typename</span> basic_string&lt;char_t, traits_t&gt;::size_type basic_string&lt;char_t, traits_t&gt;::_find(</div>
+<div class="line"><a name="l02327"></a><span class="lineno"> 2327</span>&#160;    size_type           nBegin,</div>
+<div class="line"><a name="l02328"></a><span class="lineno"> 2328</span>&#160;    size_type           nEnd,</div>
+<div class="line"><a name="l02329"></a><span class="lineno"> 2329</span>&#160;    <span class="keyword">const</span> comparator_t&amp; comparator) <span class="keyword">const</span> noexcept</div>
+<div class="line"><a name="l02330"></a><span class="lineno"> 2330</span>&#160;{</div>
+<div class="line"><a name="l02331"></a><span class="lineno"> 2331</span>&#160;    <span class="keywordflow">if</span> (nEnd == npos)</div>
+<div class="line"><a name="l02332"></a><span class="lineno"> 2332</span>&#160;        nEnd = size();</div>
+<div class="line"><a name="l02333"></a><span class="lineno"> 2333</span>&#160; </div>
+<div class="line"><a name="l02334"></a><span class="lineno"> 2334</span>&#160;    const_pointer pData        = data();</div>
+<div class="line"><a name="l02335"></a><span class="lineno"> 2335</span>&#160;    const_pointer pCurrentChar = pData + nBegin;</div>
+<div class="line"><a name="l02336"></a><span class="lineno"> 2336</span>&#160;    const_pointer pEnd         = pData + nEnd;</div>
+<div class="line"><a name="l02337"></a><span class="lineno"> 2337</span>&#160; </div>
+<div class="line"><a name="l02338"></a><span class="lineno"> 2338</span>&#160;    <span class="keywordflow">while</span> (pCurrentChar &lt; pEnd)</div>
+<div class="line"><a name="l02339"></a><span class="lineno"> 2339</span>&#160;    {</div>
+<div class="line"><a name="l02340"></a><span class="lineno"> 2340</span>&#160;        <span class="keywordflow">if</span> (comparator(pCurrentChar))</div>
+<div class="line"><a name="l02341"></a><span class="lineno"> 2341</span>&#160;            <span class="keywordflow">return</span> <span class="keyword">static_cast&lt;</span>size_type<span class="keyword">&gt;</span>(pCurrentChar - pData);</div>
+<div class="line"><a name="l02342"></a><span class="lineno"> 2342</span>&#160;        <span class="keywordflow">else</span></div>
+<div class="line"><a name="l02343"></a><span class="lineno"> 2343</span>&#160;            ++pCurrentChar;</div>
+<div class="line"><a name="l02344"></a><span class="lineno"> 2344</span>&#160;    }</div>
+<div class="line"><a name="l02345"></a><span class="lineno"> 2345</span>&#160; </div>
+<div class="line"><a name="l02346"></a><span class="lineno"> 2346</span>&#160;    <span class="keywordflow">return</span> npos;</div>
+<div class="line"><a name="l02347"></a><span class="lineno"> 2347</span>&#160;}</div>
+<div class="line"><a name="l02348"></a><span class="lineno"> 2348</span>&#160; </div>
+<div class="line"><a name="l02349"></a><span class="lineno"> 2349</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> <span class="keywordtype">char</span>_t, <span class="keyword">class</span> traits_t&gt;</div>
+<div class="line"><a name="l02350"></a><span class="lineno"> 2350</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> comparator_t&gt;</div>
+<div class="line"><a name="l02351"></a><span class="lineno"> 2351</span>&#160;<span class="keyword">inline</span> <span class="keyword">typename</span> basic_string&lt;char_t, traits_t&gt;::size_type basic_string&lt;char_t, traits_t&gt;::_rfind(</div>
+<div class="line"><a name="l02352"></a><span class="lineno"> 2352</span>&#160;    size_type           nBegin,</div>
+<div class="line"><a name="l02353"></a><span class="lineno"> 2353</span>&#160;    size_type           nEnd,</div>
+<div class="line"><a name="l02354"></a><span class="lineno"> 2354</span>&#160;    <span class="keyword">const</span> comparator_t&amp; comparator) <span class="keyword">const</span> noexcept</div>
+<div class="line"><a name="l02355"></a><span class="lineno"> 2355</span>&#160;{</div>
+<div class="line"><a name="l02356"></a><span class="lineno"> 2356</span>&#160;    <span class="keywordflow">if</span> (nBegin == npos)</div>
+<div class="line"><a name="l02357"></a><span class="lineno"> 2357</span>&#160;        nBegin = size() - 1;</div>
+<div class="line"><a name="l02358"></a><span class="lineno"> 2358</span>&#160; </div>
+<div class="line"><a name="l02359"></a><span class="lineno"> 2359</span>&#160;    const_pointer pData        = data();</div>
+<div class="line"><a name="l02360"></a><span class="lineno"> 2360</span>&#160;    const_pointer pCurrentChar = pData + nBegin;</div>
+<div class="line"><a name="l02361"></a><span class="lineno"> 2361</span>&#160;    const_pointer pEnd         = pData + nEnd;</div>
+<div class="line"><a name="l02362"></a><span class="lineno"> 2362</span>&#160; </div>
+<div class="line"><a name="l02363"></a><span class="lineno"> 2363</span>&#160;    <span class="keywordflow">while</span> (pCurrentChar &gt;= pEnd)</div>
+<div class="line"><a name="l02364"></a><span class="lineno"> 2364</span>&#160;    {</div>
+<div class="line"><a name="l02365"></a><span class="lineno"> 2365</span>&#160;        <span class="keywordflow">if</span> (comparator(pCurrentChar))</div>
+<div class="line"><a name="l02366"></a><span class="lineno"> 2366</span>&#160;            <span class="keywordflow">return</span> <span class="keyword">static_cast&lt;</span>size_type<span class="keyword">&gt;</span>(pCurrentChar - pData);</div>
+<div class="line"><a name="l02367"></a><span class="lineno"> 2367</span>&#160;        <span class="keywordflow">else</span></div>
+<div class="line"><a name="l02368"></a><span class="lineno"> 2368</span>&#160;            --pCurrentChar;</div>
+<div class="line"><a name="l02369"></a><span class="lineno"> 2369</span>&#160;    }</div>
+<div class="line"><a name="l02370"></a><span class="lineno"> 2370</span>&#160; </div>
+<div class="line"><a name="l02371"></a><span class="lineno"> 2371</span>&#160;    <span class="keywordflow">return</span> npos;</div>
+<div class="line"><a name="l02372"></a><span class="lineno"> 2372</span>&#160;}</div>
+<div class="line"><a name="l02373"></a><span class="lineno"> 2373</span>&#160; </div>
+<div class="line"><a name="l02374"></a><span class="lineno"> 2374</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> <span class="keywordtype">char</span>_t, <span class="keyword">class</span> traits_t&gt;</div>
+<div class="line"><a name="l02375"></a><span class="lineno"> 2375</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> incrementer_t, <span class="keyword">class</span> fwd_it_t&gt;</div>
+<div class="line"><a name="l02376"></a><span class="lineno"> 2376</span>&#160;<span class="keyword">inline</span> <span class="keyword">typename</span> basic_string&lt;char_t, traits_t&gt;::size_type basic_string&lt;char_t, traits_t&gt;::_find_first_of(</div>
+<div class="line"><a name="l02377"></a><span class="lineno"> 2377</span>&#160;    fwd_it_t             itBegin,</div>
+<div class="line"><a name="l02378"></a><span class="lineno"> 2378</span>&#160;    fwd_it_t             itEnd,</div>
+<div class="line"><a name="l02379"></a><span class="lineno"> 2379</span>&#160;    size_type            nBegin,</div>
+<div class="line"><a name="l02380"></a><span class="lineno"> 2380</span>&#160;    <span class="keyword">const</span> incrementer_t&amp; incrementer) <span class="keyword">const</span> noexcept</div>
+<div class="line"><a name="l02381"></a><span class="lineno"> 2381</span>&#160;{</div>
+<div class="line"><a name="l02382"></a><span class="lineno"> 2382</span>&#160;    <span class="keywordflow">for</span> (size_type i = nBegin; i &lt; size(); ++i)</div>
+<div class="line"><a name="l02383"></a><span class="lineno"> 2383</span>&#160;        <span class="keywordflow">for</span> (fwd_it_t it = itBegin; it != itEnd; it = incrementer(it))</div>
+<div class="line"><a name="l02384"></a><span class="lineno"> 2384</span>&#160;            <span class="keywordflow">if</span> (*it == at(i))</div>
+<div class="line"><a name="l02385"></a><span class="lineno"> 2385</span>&#160;                <span class="keywordflow">return</span> i;</div>
+<div class="line"><a name="l02386"></a><span class="lineno"> 2386</span>&#160; </div>
+<div class="line"><a name="l02387"></a><span class="lineno"> 2387</span>&#160;    <span class="keywordflow">return</span> npos;</div>
+<div class="line"><a name="l02388"></a><span class="lineno"> 2388</span>&#160;}</div>
+<div class="line"><a name="l02389"></a><span class="lineno"> 2389</span>&#160; </div>
+<div class="line"><a name="l02390"></a><span class="lineno"> 2390</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> <span class="keywordtype">char</span>_t, <span class="keyword">class</span> traits_t&gt;</div>
+<div class="line"><a name="l02391"></a><span class="lineno"> 2391</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> incrementer_t, <span class="keyword">class</span> fwd_it_t&gt;</div>
+<div class="line"><a name="l02392"></a><span class="lineno"> 2392</span>&#160;<span class="keyword">inline</span> <span class="keyword">typename</span> basic_string&lt;char_t, traits_t&gt;::size_type basic_string&lt;char_t, traits_t&gt;::_find_last_of(</div>
+<div class="line"><a name="l02393"></a><span class="lineno"> 2393</span>&#160;    fwd_it_t             itBegin,</div>
+<div class="line"><a name="l02394"></a><span class="lineno"> 2394</span>&#160;    fwd_it_t             itEnd,</div>
+<div class="line"><a name="l02395"></a><span class="lineno"> 2395</span>&#160;    size_type            nEnd,</div>
+<div class="line"><a name="l02396"></a><span class="lineno"> 2396</span>&#160;    <span class="keyword">const</span> incrementer_t&amp; incrementer) <span class="keyword">const</span> noexcept</div>
+<div class="line"><a name="l02397"></a><span class="lineno"> 2397</span>&#160;{</div>
+<div class="line"><a name="l02398"></a><span class="lineno"> 2398</span>&#160;    <span class="keywordflow">for</span> (size_type i = size() - 1; i != nEnd - 1; --i)</div>
+<div class="line"><a name="l02399"></a><span class="lineno"> 2399</span>&#160;        <span class="keywordflow">for</span> (fwd_it_t it = itBegin; it != itEnd; it = incrementer(it))</div>
+<div class="line"><a name="l02400"></a><span class="lineno"> 2400</span>&#160;            <span class="keywordflow">if</span> (*it == at(i))</div>
+<div class="line"><a name="l02401"></a><span class="lineno"> 2401</span>&#160;                <span class="keywordflow">return</span> i;</div>
+<div class="line"><a name="l02402"></a><span class="lineno"> 2402</span>&#160; </div>
+<div class="line"><a name="l02403"></a><span class="lineno"> 2403</span>&#160;    <span class="keywordflow">return</span> npos;</div>
+<div class="line"><a name="l02404"></a><span class="lineno"> 2404</span>&#160;}</div>
+<div class="line"><a name="l02405"></a><span class="lineno"> 2405</span>&#160; </div>
+<div class="line"><a name="l02406"></a><span class="lineno"> 2406</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> <span class="keywordtype">char</span>_t, <span class="keyword">class</span> traits_t&gt;</div>
+<div class="line"><a name="l02407"></a><span class="lineno"> 2407</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> incrementer_t, <span class="keyword">class</span> fwd_it_t&gt;</div>
+<div class="line"><a name="l02408"></a><span class="lineno"> 2408</span>&#160;<span class="keyword">inline</span> <span class="keyword">typename</span> basic_string&lt;char_t, traits_t&gt;::size_type basic_string&lt;char_t, traits_t&gt;::_find_first_not_of(</div>
+<div class="line"><a name="l02409"></a><span class="lineno"> 2409</span>&#160;    fwd_it_t             itBegin,</div>
+<div class="line"><a name="l02410"></a><span class="lineno"> 2410</span>&#160;    fwd_it_t             itEnd,</div>
+<div class="line"><a name="l02411"></a><span class="lineno"> 2411</span>&#160;    size_type            nBegin,</div>
+<div class="line"><a name="l02412"></a><span class="lineno"> 2412</span>&#160;    <span class="keyword">const</span> incrementer_t&amp; incrementer) <span class="keyword">const</span> noexcept</div>
+<div class="line"><a name="l02413"></a><span class="lineno"> 2413</span>&#160;{</div>
+<div class="line"><a name="l02414"></a><span class="lineno"> 2414</span>&#160;    <span class="keywordflow">for</span> (size_type i = nBegin; i &lt; size(); ++i)</div>
+<div class="line"><a name="l02415"></a><span class="lineno"> 2415</span>&#160;    {</div>
+<div class="line"><a name="l02416"></a><span class="lineno"> 2416</span>&#160;        <span class="keywordtype">bool</span> bFoundOneOf = <span class="keyword">false</span>;</div>
+<div class="line"><a name="l02417"></a><span class="lineno"> 2417</span>&#160;        <span class="keywordflow">for</span> (fwd_it_t it = itBegin; !bFoundOneOf &amp;&amp; it != itEnd; it = incrementer(it))</div>
+<div class="line"><a name="l02418"></a><span class="lineno"> 2418</span>&#160;            bFoundOneOf |= *it == at(i);</div>
+<div class="line"><a name="l02419"></a><span class="lineno"> 2419</span>&#160; </div>
+<div class="line"><a name="l02420"></a><span class="lineno"> 2420</span>&#160;        <span class="keywordflow">if</span> (!bFoundOneOf)</div>
+<div class="line"><a name="l02421"></a><span class="lineno"> 2421</span>&#160;            <span class="keywordflow">return</span> i;</div>
+<div class="line"><a name="l02422"></a><span class="lineno"> 2422</span>&#160;    }</div>
+<div class="line"><a name="l02423"></a><span class="lineno"> 2423</span>&#160; </div>
+<div class="line"><a name="l02424"></a><span class="lineno"> 2424</span>&#160;    <span class="keywordflow">return</span> npos;</div>
+<div class="line"><a name="l02425"></a><span class="lineno"> 2425</span>&#160;}</div>
+<div class="line"><a name="l02426"></a><span class="lineno"> 2426</span>&#160; </div>
+<div class="line"><a name="l02427"></a><span class="lineno"> 2427</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> <span class="keywordtype">char</span>_t, <span class="keyword">class</span> traits_t&gt;</div>
+<div class="line"><a name="l02428"></a><span class="lineno"> 2428</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> incrementer_t, <span class="keyword">class</span> fwd_it_t&gt;</div>
+<div class="line"><a name="l02429"></a><span class="lineno"> 2429</span>&#160;<span class="keyword">inline</span> <span class="keyword">typename</span> basic_string&lt;char_t, traits_t&gt;::size_type basic_string&lt;char_t, traits_t&gt;::_find_last_not_of(</div>
+<div class="line"><a name="l02430"></a><span class="lineno"> 2430</span>&#160;    fwd_it_t             itBegin,</div>
+<div class="line"><a name="l02431"></a><span class="lineno"> 2431</span>&#160;    fwd_it_t             itEnd,</div>
+<div class="line"><a name="l02432"></a><span class="lineno"> 2432</span>&#160;    size_type            nEnd,</div>
+<div class="line"><a name="l02433"></a><span class="lineno"> 2433</span>&#160;    <span class="keyword">const</span> incrementer_t&amp; incrementer) <span class="keyword">const</span> noexcept</div>
+<div class="line"><a name="l02434"></a><span class="lineno"> 2434</span>&#160;{</div>
+<div class="line"><a name="l02435"></a><span class="lineno"> 2435</span>&#160;    <span class="keywordflow">for</span> (size_type i = size() - 1; i != nEnd - 1; --i)</div>
+<div class="line"><a name="l02436"></a><span class="lineno"> 2436</span>&#160;    {</div>
+<div class="line"><a name="l02437"></a><span class="lineno"> 2437</span>&#160;        <span class="keywordtype">bool</span> bFoundOneOf = <span class="keyword">false</span>;</div>
+<div class="line"><a name="l02438"></a><span class="lineno"> 2438</span>&#160;        <span class="keywordflow">for</span> (fwd_it_t it = itBegin; !bFoundOneOf &amp;&amp; it != itEnd; it = incrementer(it))</div>
+<div class="line"><a name="l02439"></a><span class="lineno"> 2439</span>&#160;            bFoundOneOf |= *it == at(i);</div>
+<div class="line"><a name="l02440"></a><span class="lineno"> 2440</span>&#160; </div>
+<div class="line"><a name="l02441"></a><span class="lineno"> 2441</span>&#160;        <span class="keywordflow">if</span> (!bFoundOneOf)</div>
+<div class="line"><a name="l02442"></a><span class="lineno"> 2442</span>&#160;            <span class="keywordflow">return</span> i;</div>
+<div class="line"><a name="l02443"></a><span class="lineno"> 2443</span>&#160;    }</div>
+<div class="line"><a name="l02444"></a><span class="lineno"> 2444</span>&#160; </div>
+<div class="line"><a name="l02445"></a><span class="lineno"> 2445</span>&#160;    <span class="keywordflow">return</span> npos;</div>
+<div class="line"><a name="l02446"></a><span class="lineno"> 2446</span>&#160;}</div>
+<div class="line"><a name="l02447"></a><span class="lineno"> 2447</span>&#160; </div>
+<div class="line"><a name="l02448"></a><span class="lineno"> 2448</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> <span class="keywordtype">char</span>_t, <span class="keyword">class</span> traits_t&gt;</div>
+<div class="line"><a name="l02449"></a><span class="lineno"> 2449</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> <span class="keywordtype">string</span>_view_like_t&gt;</div>
+<div class="line"><a name="l02450"></a><span class="lineno"> 2450</span>&#160;<span class="keyword">inline</span> <span class="keyword">typename</span> basic_string&lt;char_t, traits_t&gt;::size_type basic_string&lt;char_t, traits_t&gt;::_get_string_view_like_size(</div>
+<div class="line"><a name="l02451"></a><span class="lineno"> 2451</span>&#160;    <span class="keyword">const</span> string_view_like_t&amp; sValue) noexcept</div>
+<div class="line"><a name="l02452"></a><span class="lineno"> 2452</span>&#160;{</div>
+<div class="line"><a name="l02453"></a><span class="lineno"> 2453</span>&#160;    <span class="keywordflow">if</span> constexpr (std::is_same_v&lt;string_view_like_t, value_type&gt;)</div>
+<div class="line"><a name="l02454"></a><span class="lineno"> 2454</span>&#160;    {</div>
+<div class="line"><a name="l02455"></a><span class="lineno"> 2455</span>&#160;        <span class="keywordflow">return</span> 1;</div>
+<div class="line"><a name="l02456"></a><span class="lineno"> 2456</span>&#160;    }</div>
+<div class="line"><a name="l02457"></a><span class="lineno"> 2457</span>&#160;    <span class="keywordflow">else</span> <span class="keywordflow">if</span> constexpr (std::is_convertible_v&lt;string_view_like_t, const_pointer&gt;)</div>
+<div class="line"><a name="l02458"></a><span class="lineno"> 2458</span>&#160;    {</div>
+<div class="line"><a name="l02459"></a><span class="lineno"> 2459</span>&#160;        <span class="keywordflow">return</span> traits_t::length(sValue);</div>
+<div class="line"><a name="l02460"></a><span class="lineno"> 2460</span>&#160;    }</div>
+<div class="line"><a name="l02461"></a><span class="lineno"> 2461</span>&#160;    <span class="keywordflow">else</span> <span class="keywordflow">if</span> constexpr (range_of_t_c&lt;string_view_like_t, char_t&gt;)</div>
+<div class="line"><a name="l02462"></a><span class="lineno"> 2462</span>&#160;    {</div>
+<div class="line"><a name="l02463"></a><span class="lineno"> 2463</span>&#160;        <span class="keywordflow">return</span> sValue.size();</div>
+<div class="line"><a name="l02464"></a><span class="lineno"> 2464</span>&#160;    }</div>
+<div class="line"><a name="l02465"></a><span class="lineno"> 2465</span>&#160;    <span class="keywordflow">else</span></div>
+<div class="line"><a name="l02466"></a><span class="lineno"> 2466</span>&#160;    {</div>
+<div class="line"><a name="l02467"></a><span class="lineno"> 2467</span>&#160;        QX_STATIC_ASSERT_NO_INSTANTIATION(<span class="stringliteral">&quot;Unexpected type&quot;</span>);</div>
+<div class="line"><a name="l02468"></a><span class="lineno"> 2468</span>&#160;        <span class="keywordflow">return</span> 0;</div>
+<div class="line"><a name="l02469"></a><span class="lineno"> 2469</span>&#160;    }</div>
+<div class="line"><a name="l02470"></a><span class="lineno"> 2470</span>&#160;}</div>
+<div class="line"><a name="l02471"></a><span class="lineno"> 2471</span>&#160; </div>
+<div class="line"><a name="l02472"></a><span class="lineno"> 2472</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> <span class="keywordtype">char</span>_t, <span class="keyword">class</span> traits_t&gt;</div>
+<div class="line"><a name="l02473"></a><span class="lineno"> 2473</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> <span class="keywordtype">string</span>_view_like_t&gt;</div>
+<div class="line"><a name="l02474"></a><span class="lineno"> 2474</span>&#160;<span class="keyword">inline</span> <span class="keyword">typename</span> basic_string&lt;char_t, traits_t&gt;::const_pointer basic_string&lt;char_t, traits_t&gt;::</div>
+<div class="line"><a name="l02475"></a><span class="lineno"> 2475</span>&#160;    _get_string_view_like_data(<span class="keyword">const</span> string_view_like_t&amp; sValue) noexcept</div>
+<div class="line"><a name="l02476"></a><span class="lineno"> 2476</span>&#160;{</div>
+<div class="line"><a name="l02477"></a><span class="lineno"> 2477</span>&#160;    <span class="keywordflow">if</span> constexpr (std::is_same_v&lt;string_view_like_t, value_type&gt;)</div>
+<div class="line"><a name="l02478"></a><span class="lineno"> 2478</span>&#160;    {</div>
+<div class="line"><a name="l02479"></a><span class="lineno"> 2479</span>&#160;        <span class="keywordflow">return</span> &amp;sValue;</div>
+<div class="line"><a name="l02480"></a><span class="lineno"> 2480</span>&#160;    }</div>
+<div class="line"><a name="l02481"></a><span class="lineno"> 2481</span>&#160;    <span class="keywordflow">else</span> <span class="keywordflow">if</span> constexpr (std::is_convertible_v&lt;string_view_like_t, const_pointer&gt;)</div>
+<div class="line"><a name="l02482"></a><span class="lineno"> 2482</span>&#160;    {</div>
+<div class="line"><a name="l02483"></a><span class="lineno"> 2483</span>&#160;        <span class="keywordflow">return</span> sValue;</div>
+<div class="line"><a name="l02484"></a><span class="lineno"> 2484</span>&#160;    }</div>
+<div class="line"><a name="l02485"></a><span class="lineno"> 2485</span>&#160;    <span class="keywordflow">else</span> <span class="keywordflow">if</span> constexpr (range_of_t_c&lt;string_view_like_t, char_t&gt;)</div>
+<div class="line"><a name="l02486"></a><span class="lineno"> 2486</span>&#160;    {</div>
+<div class="line"><a name="l02487"></a><span class="lineno"> 2487</span>&#160;        <span class="keywordflow">return</span> sValue.data();</div>
+<div class="line"><a name="l02488"></a><span class="lineno"> 2488</span>&#160;    }</div>
+<div class="line"><a name="l02489"></a><span class="lineno"> 2489</span>&#160;    <span class="keywordflow">else</span></div>
+<div class="line"><a name="l02490"></a><span class="lineno"> 2490</span>&#160;    {</div>
+<div class="line"><a name="l02491"></a><span class="lineno"> 2491</span>&#160;        QX_STATIC_ASSERT_NO_INSTANTIATION(<span class="stringliteral">&quot;Unexpected type&quot;</span>);</div>
+<div class="line"><a name="l02492"></a><span class="lineno"> 2492</span>&#160;        <span class="keywordflow">return</span> <span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l02493"></a><span class="lineno"> 2493</span>&#160;    }</div>
+<div class="line"><a name="l02494"></a><span class="lineno"> 2494</span>&#160;}</div>
+<div class="line"><a name="l02495"></a><span class="lineno"> 2495</span>&#160; </div>
+<div class="line"><a name="l02496"></a><span class="lineno"> 2496</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> T, <span class="keyword">class</span> <span class="keywordtype">char</span>_t, <span class="keyword">class</span> traits_t&gt;</div>
+<div class="line"><a name="l02497"></a><span class="lineno"><a class="line" href="string_8h.html#ae7bef0fda2664f97b0454290be619fd6"> 2497</a></span>&#160;<a class="code" href="classqx_1_1basic__string.html">basic_string&lt;char_t, traits_t&gt;</a> <a class="code" href="string_8h.html#ae7bef0fda2664f97b0454290be619fd6">convert_to_string</a>(<span class="keyword">const</span> T&amp; value)</div>
+<div class="line"><a name="l02498"></a><span class="lineno"> 2498</span>&#160;{</div>
+<div class="line"><a name="l02499"></a><span class="lineno"> 2499</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="classqx_1_1basic__string.html#ae691d641ae64e0d7246c3f35eb2e9fbb">basic_string&lt;char_t, traits_t&gt;::static_format</a>(<a class="code" href="string__utils_8h.html#ae4f688084b037e2e7a63a13eaf539a02">QX_STR_PREFIX</a>(char_t, <span class="stringliteral">&quot;{}&quot;</span>), value);</div>
+<div class="line"><a name="l02500"></a><span class="lineno"> 2500</span>&#160;}</div>
+<div class="line"><a name="l02501"></a><span class="lineno"> 2501</span>&#160; </div>
+<div class="line"><a name="l02502"></a><span class="lineno"> 2502</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> <span class="keywordtype">char</span>_t, <span class="keyword">class</span> traits_t&gt;</div>
+<div class="line"><a name="l02503"></a><span class="lineno"> 2503</span>&#160;basic_string&lt;char_t, traits_t&gt; operator+(</div>
+<div class="line"><a name="l02504"></a><span class="lineno"> 2504</span>&#160;    <span class="keyword">const</span> basic_string&lt;char_t, traits_t&gt;&amp; lhs,</div>
+<div class="line"><a name="l02505"></a><span class="lineno"> 2505</span>&#160;    <span class="keyword">const</span> basic_string&lt;char_t, traits_t&gt;&amp; rhs) noexcept</div>
+<div class="line"><a name="l02506"></a><span class="lineno"> 2506</span>&#160;{</div>
+<div class="line"><a name="l02507"></a><span class="lineno"> 2507</span>&#160;    basic_string&lt;char_t, traits_t&gt; str(lhs);</div>
+<div class="line"><a name="l02508"></a><span class="lineno"> 2508</span>&#160;    str += rhs;</div>
+<div class="line"><a name="l02509"></a><span class="lineno"> 2509</span>&#160;    <span class="keywordflow">return</span> str;</div>
+<div class="line"><a name="l02510"></a><span class="lineno"> 2510</span>&#160;}</div>
+<div class="line"><a name="l02511"></a><span class="lineno"> 2511</span>&#160; </div>
+<div class="line"><a name="l02512"></a><span class="lineno"> 2512</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> <span class="keywordtype">char</span>_t, <span class="keyword">class</span> traits_t&gt;</div>
+<div class="line"><a name="l02513"></a><span class="lineno"> 2513</span>&#160;basic_string&lt;char_t, traits_t&gt; operator+(</div>
+<div class="line"><a name="l02514"></a><span class="lineno"> 2514</span>&#160;    basic_string&lt;char_t, traits_t&gt;&amp;&amp;      lhs,</div>
+<div class="line"><a name="l02515"></a><span class="lineno"> 2515</span>&#160;    <span class="keyword">const</span> basic_string&lt;char_t, traits_t&gt;&amp; rhs) noexcept</div>
+<div class="line"><a name="l02516"></a><span class="lineno"> 2516</span>&#160;{</div>
+<div class="line"><a name="l02517"></a><span class="lineno"> 2517</span>&#160;    basic_string&lt;char_t, traits_t&gt; str(std::move(lhs));</div>
+<div class="line"><a name="l02518"></a><span class="lineno"> 2518</span>&#160;    str += rhs;</div>
+<div class="line"><a name="l02519"></a><span class="lineno"> 2519</span>&#160;    <span class="keywordflow">return</span> str;</div>
+<div class="line"><a name="l02520"></a><span class="lineno"> 2520</span>&#160;}</div>
+<div class="line"><a name="l02521"></a><span class="lineno"> 2521</span>&#160; </div>
+<div class="line"><a name="l02522"></a><span class="lineno"> 2522</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> <span class="keywordtype">char</span>_t, <span class="keyword">class</span> traits_t&gt;</div>
+<div class="line"><a name="l02523"></a><span class="lineno"> 2523</span>&#160;basic_string&lt;char_t, traits_t&gt; operator+(</div>
+<div class="line"><a name="l02524"></a><span class="lineno"> 2524</span>&#160;    <span class="keyword">const</span> basic_string&lt;char_t, traits_t&gt;&amp; lhs,</div>
+<div class="line"><a name="l02525"></a><span class="lineno"> 2525</span>&#160;    <span class="keyword">typename</span> traits_t::const_pointer      rhs) noexcept</div>
+<div class="line"><a name="l02526"></a><span class="lineno"> 2526</span>&#160;{</div>
+<div class="line"><a name="l02527"></a><span class="lineno"> 2527</span>&#160;    basic_string&lt;char_t, traits_t&gt; str(lhs);</div>
+<div class="line"><a name="l02528"></a><span class="lineno"> 2528</span>&#160;    str += rhs;</div>
+<div class="line"><a name="l02529"></a><span class="lineno"> 2529</span>&#160;    <span class="keywordflow">return</span> str;</div>
+<div class="line"><a name="l02530"></a><span class="lineno"> 2530</span>&#160;}</div>
+<div class="line"><a name="l02531"></a><span class="lineno"> 2531</span>&#160; </div>
+<div class="line"><a name="l02532"></a><span class="lineno"> 2532</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> <span class="keywordtype">char</span>_t, <span class="keyword">class</span> traits_t&gt;</div>
+<div class="line"><a name="l02533"></a><span class="lineno"> 2533</span>&#160;basic_string&lt;char_t, traits_t&gt; operator+(</div>
+<div class="line"><a name="l02534"></a><span class="lineno"> 2534</span>&#160;    basic_string&lt;char_t, traits_t&gt;&amp;&amp; lhs,</div>
+<div class="line"><a name="l02535"></a><span class="lineno"> 2535</span>&#160;    <span class="keyword">typename</span> traits_t::const_pointer rhs) noexcept</div>
+<div class="line"><a name="l02536"></a><span class="lineno"> 2536</span>&#160;{</div>
+<div class="line"><a name="l02537"></a><span class="lineno"> 2537</span>&#160;    basic_string&lt;char_t, traits_t&gt; str(std::move(lhs));</div>
+<div class="line"><a name="l02538"></a><span class="lineno"> 2538</span>&#160;    str += rhs;</div>
+<div class="line"><a name="l02539"></a><span class="lineno"> 2539</span>&#160;    <span class="keywordflow">return</span> str;</div>
+<div class="line"><a name="l02540"></a><span class="lineno"> 2540</span>&#160;}</div>
+<div class="line"><a name="l02541"></a><span class="lineno"> 2541</span>&#160; </div>
+<div class="line"><a name="l02542"></a><span class="lineno"> 2542</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> <span class="keywordtype">char</span>_t, <span class="keyword">class</span> traits_t&gt;</div>
+<div class="line"><a name="l02543"></a><span class="lineno"> 2543</span>&#160;basic_string&lt;char_t, traits_t&gt; operator+(</div>
+<div class="line"><a name="l02544"></a><span class="lineno"> 2544</span>&#160;    <span class="keyword">typename</span> traits_t::const_pointer      lhs,</div>
+<div class="line"><a name="l02545"></a><span class="lineno"> 2545</span>&#160;    <span class="keyword">const</span> basic_string&lt;char_t, traits_t&gt;&amp; rhs) noexcept</div>
+<div class="line"><a name="l02546"></a><span class="lineno"> 2546</span>&#160;{</div>
+<div class="line"><a name="l02547"></a><span class="lineno"> 2547</span>&#160;    basic_string&lt;char_t, traits_t&gt; str(lhs);</div>
+<div class="line"><a name="l02548"></a><span class="lineno"> 2548</span>&#160;    str += rhs;</div>
+<div class="line"><a name="l02549"></a><span class="lineno"> 2549</span>&#160;    <span class="keywordflow">return</span> str;</div>
+<div class="line"><a name="l02550"></a><span class="lineno"> 2550</span>&#160;}</div>
+<div class="line"><a name="l02551"></a><span class="lineno"> 2551</span>&#160; </div>
+<div class="line"><a name="l02552"></a><span class="lineno"> 2552</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> <span class="keywordtype">char</span>_t, <span class="keyword">class</span> traits_t&gt;</div>
+<div class="line"><a name="l02553"></a><span class="lineno"> 2553</span>&#160;basic_string&lt;char_t, traits_t&gt; operator+(</div>
+<div class="line"><a name="l02554"></a><span class="lineno"> 2554</span>&#160;    <span class="keyword">const</span> basic_string&lt;char_t, traits_t&gt;&amp; lhs,</div>
+<div class="line"><a name="l02555"></a><span class="lineno"> 2555</span>&#160;    <span class="keyword">typename</span> traits_t::value_type         rhs) noexcept</div>
+<div class="line"><a name="l02556"></a><span class="lineno"> 2556</span>&#160;{</div>
+<div class="line"><a name="l02557"></a><span class="lineno"> 2557</span>&#160;    basic_string&lt;char_t, traits_t&gt; str(lhs);</div>
+<div class="line"><a name="l02558"></a><span class="lineno"> 2558</span>&#160;    str += rhs;</div>
+<div class="line"><a name="l02559"></a><span class="lineno"> 2559</span>&#160;    <span class="keywordflow">return</span> str;</div>
+<div class="line"><a name="l02560"></a><span class="lineno"> 2560</span>&#160;}</div>
+<div class="line"><a name="l02561"></a><span class="lineno"> 2561</span>&#160; </div>
+<div class="line"><a name="l02562"></a><span class="lineno"> 2562</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> <span class="keywordtype">char</span>_t, <span class="keyword">class</span> traits_t&gt;</div>
+<div class="line"><a name="l02563"></a><span class="lineno"> 2563</span>&#160;basic_string&lt;char_t, traits_t&gt; operator+(</div>
+<div class="line"><a name="l02564"></a><span class="lineno"> 2564</span>&#160;    basic_string&lt;char_t, traits_t&gt;&amp;&amp; lhs,</div>
+<div class="line"><a name="l02565"></a><span class="lineno"> 2565</span>&#160;    <span class="keyword">typename</span> traits_t::value_type    rhs) noexcept</div>
+<div class="line"><a name="l02566"></a><span class="lineno"> 2566</span>&#160;{</div>
+<div class="line"><a name="l02567"></a><span class="lineno"> 2567</span>&#160;    basic_string&lt;char_t, traits_t&gt; str(std::move(lhs));</div>
+<div class="line"><a name="l02568"></a><span class="lineno"> 2568</span>&#160;    str += rhs;</div>
+<div class="line"><a name="l02569"></a><span class="lineno"> 2569</span>&#160;    <span class="keywordflow">return</span> str;</div>
+<div class="line"><a name="l02570"></a><span class="lineno"> 2570</span>&#160;}</div>
+<div class="line"><a name="l02571"></a><span class="lineno"> 2571</span>&#160; </div>
+<div class="line"><a name="l02572"></a><span class="lineno"> 2572</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> <span class="keywordtype">char</span>_t, <span class="keyword">class</span> traits_t&gt;</div>
+<div class="line"><a name="l02573"></a><span class="lineno"> 2573</span>&#160;basic_string&lt;char_t, traits_t&gt; operator+(</div>
+<div class="line"><a name="l02574"></a><span class="lineno"> 2574</span>&#160;    <span class="keyword">typename</span> traits_t::value_type         lhs,</div>
+<div class="line"><a name="l02575"></a><span class="lineno"> 2575</span>&#160;    <span class="keyword">const</span> basic_string&lt;char_t, traits_t&gt;&amp; rhs) noexcept</div>
+<div class="line"><a name="l02576"></a><span class="lineno"> 2576</span>&#160;{</div>
+<div class="line"><a name="l02577"></a><span class="lineno"> 2577</span>&#160;    basic_string&lt;char_t, traits_t&gt; str(&amp;lhs, 1);</div>
+<div class="line"><a name="l02578"></a><span class="lineno"> 2578</span>&#160;    str += rhs;</div>
+<div class="line"><a name="l02579"></a><span class="lineno"> 2579</span>&#160;    <span class="keywordflow">return</span> str;</div>
+<div class="line"><a name="l02580"></a><span class="lineno"> 2580</span>&#160;}</div>
+<div class="line"><a name="l02581"></a><span class="lineno"> 2581</span>&#160; </div>
+<div class="line"><a name="l02582"></a><span class="lineno"> 2582</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> <span class="keywordtype">char</span>_t, <span class="keyword">class</span> traits_t, range_of_t_c&lt;<span class="keywordtype">char</span>_t&gt; <span class="keywordtype">string</span>_t&gt;</div>
+<div class="line"><a name="l02583"></a><span class="lineno"> 2583</span>&#160;basic_string&lt;char_t, traits_t&gt; operator+(<span class="keyword">const</span> basic_string&lt;char_t, traits_t&gt;&amp; lhs, <span class="keyword">const</span> string_t&amp; rhs) noexcept</div>
+<div class="line"><a name="l02584"></a><span class="lineno"> 2584</span>&#160;{</div>
+<div class="line"><a name="l02585"></a><span class="lineno"> 2585</span>&#160;    basic_string&lt;char_t, traits_t&gt; str(lhs);</div>
+<div class="line"><a name="l02586"></a><span class="lineno"> 2586</span>&#160;    str += rhs;</div>
+<div class="line"><a name="l02587"></a><span class="lineno"> 2587</span>&#160;    <span class="keywordflow">return</span> str;</div>
+<div class="line"><a name="l02588"></a><span class="lineno"> 2588</span>&#160;}</div>
+<div class="line"><a name="l02589"></a><span class="lineno"> 2589</span>&#160; </div>
+<div class="line"><a name="l02590"></a><span class="lineno"> 2590</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> <span class="keywordtype">char</span>_t, <span class="keyword">class</span> traits_t, range_of_t_c&lt;<span class="keywordtype">char</span>_t&gt; <span class="keywordtype">string</span>_t&gt;</div>
+<div class="line"><a name="l02591"></a><span class="lineno"> 2591</span>&#160;basic_string&lt;char_t, traits_t&gt; operator+(basic_string&lt;char_t, traits_t&gt;&amp;&amp; lhs, <span class="keyword">const</span> string_t&amp; rhs) noexcept</div>
+<div class="line"><a name="l02592"></a><span class="lineno"> 2592</span>&#160;{</div>
+<div class="line"><a name="l02593"></a><span class="lineno"> 2593</span>&#160;    basic_string&lt;char_t, traits_t&gt; str(std::move(lhs));</div>
+<div class="line"><a name="l02594"></a><span class="lineno"> 2594</span>&#160;    str += rhs;</div>
+<div class="line"><a name="l02595"></a><span class="lineno"> 2595</span>&#160;    <span class="keywordflow">return</span> str;</div>
+<div class="line"><a name="l02596"></a><span class="lineno"> 2596</span>&#160;}</div>
+<div class="line"><a name="l02597"></a><span class="lineno"> 2597</span>&#160; </div>
+<div class="line"><a name="l02598"></a><span class="lineno"> 2598</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> <span class="keywordtype">char</span>_t, <span class="keyword">class</span> traits_t, range_of_t_c&lt;<span class="keywordtype">char</span>_t&gt; <span class="keywordtype">string</span>_t&gt;</div>
+<div class="line"><a name="l02599"></a><span class="lineno"> 2599</span>&#160;basic_string&lt;char_t, traits_t&gt; operator+(<span class="keyword">const</span> string_t&amp; lhs, <span class="keyword">const</span> basic_string&lt;char_t, traits_t&gt;&amp; rhs) noexcept</div>
+<div class="line"><a name="l02600"></a><span class="lineno"> 2600</span>&#160;{</div>
+<div class="line"><a name="l02601"></a><span class="lineno"> 2601</span>&#160;    basic_string&lt;char_t, traits_t&gt; str(lhs);</div>
+<div class="line"><a name="l02602"></a><span class="lineno"> 2602</span>&#160;    str += rhs;</div>
+<div class="line"><a name="l02603"></a><span class="lineno"> 2603</span>&#160;    <span class="keywordflow">return</span> str;</div>
+<div class="line"><a name="l02604"></a><span class="lineno"> 2604</span>&#160;}</div>
+<div class="line"><a name="l02605"></a><span class="lineno"> 2605</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l02606"></a><span class="lineno"> 2606</span>&#160;<span class="comment">/**</span></div>
+<div class="line"><a name="l02607"></a><span class="lineno"> 2607</span>&#160;<span class="comment">    @brief  Get string size (excluding null terminator)</span></div>
+<div class="line"><a name="l02608"></a><span class="lineno"> 2608</span>&#160;<span class="comment">    @retval - string size (excluding null terminator)</span></div>
+<div class="line"><a name="l02609"></a><span class="lineno"> 2609</span>&#160;<span class="comment">**/</span></div>
+<div class="line"><a name="l02610"></a><span class="lineno"> 2610</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> <span class="keywordtype">char</span>_t, <span class="keyword">class</span> traits_t&gt;</div>
+<div class="line"><a name="l02611"></a><span class="lineno"> 2611</span>&#160;<span class="keyword">inline</span> <span class="keyword">typename</span> basic_string&lt;char_t, traits_t&gt;::size_type basic_string&lt;char_t, traits_t&gt;::size() const noexcept</div>
+<div class="line"><a name="l02612"></a><span class="lineno"> 2612</span>&#160;{</div>
+<div class="line"><a name="l02613"></a><span class="lineno"> 2613</span>&#160;    <span class="keyword">const</span> size_type nSize = m_Data.size() / <span class="keyword">sizeof</span>(value_type);</div>
+<div class="line"><a name="l02614"></a><span class="lineno"> 2614</span>&#160;    <span class="keywordflow">return</span> nSize == 0 ? 0 : nSize - 1; <span class="comment">// - null terminator</span></div>
+<div class="line"><a name="l02615"></a><span class="lineno"> 2615</span>&#160;}</div>
+<div class="line"><a name="l02616"></a><span class="lineno"> 2616</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l02617"></a><span class="lineno"> 2617</span>&#160;<span class="comment">/**</span></div>
+<div class="line"><a name="l02618"></a><span class="lineno"> 2618</span>&#160;<span class="comment">    @brief  Get c-string</span></div>
+<div class="line"><a name="l02619"></a><span class="lineno"> 2619</span>&#160;<span class="comment">    @retval - c-string</span></div>
+<div class="line"><a name="l02620"></a><span class="lineno"> 2620</span>&#160;<span class="comment">**/</span></div>
+<div class="line"><a name="l02621"></a><span class="lineno"> 2621</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> <span class="keywordtype">char</span>_t, <span class="keyword">class</span> traits_t&gt;</div>
+<div class="line"><a name="l02622"></a><span class="lineno"> 2622</span>&#160;<span class="keyword">inline</span> <span class="keyword">typename</span> basic_string&lt;char_t, traits_t&gt;::pointer basic_string&lt;char_t, traits_t&gt;::data() noexcept</div>
+<div class="line"><a name="l02623"></a><span class="lineno"> 2623</span>&#160;{</div>
+<div class="line"><a name="l02624"></a><span class="lineno"> 2624</span>&#160;    <span class="keywordflow">return</span> <span class="keyword">reinterpret_cast&lt;</span>pointer<span class="keyword">&gt;</span>(m_Data.data());</div>
+<div class="line"><a name="l02625"></a><span class="lineno"> 2625</span>&#160;}</div>
+<div class="line"><a name="l02626"></a><span class="lineno"> 2626</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l02627"></a><span class="lineno"> 2627</span>&#160;<span class="comment">/**</span></div>
+<div class="line"><a name="l02628"></a><span class="lineno"> 2628</span>&#160;<span class="comment">    @brief  Get char at the ind position</span></div>
+<div class="line"><a name="l02629"></a><span class="lineno"> 2629</span>&#160;<span class="comment">    @param  nIndex - char index</span></div>
+<div class="line"><a name="l02630"></a><span class="lineno"> 2630</span>&#160;<span class="comment">    @retval        - char value</span></div>
+<div class="line"><a name="l02631"></a><span class="lineno"> 2631</span>&#160;<span class="comment">**/</span></div>
+<div class="line"><a name="l02632"></a><span class="lineno"> 2632</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> <span class="keywordtype">char</span>_t, <span class="keyword">class</span> traits_t&gt;</div>
+<div class="line"><a name="l02633"></a><span class="lineno"> 2633</span>&#160;<span class="keyword">inline</span> <span class="keyword">typename</span> basic_string&lt;char_t, traits_t&gt;::reference basic_string&lt;char_t, traits_t&gt;::at(size_type nIndex)</div>
+<div class="line"><a name="l02634"></a><span class="lineno"> 2634</span>&#160;{</div>
+<div class="line"><a name="l02635"></a><span class="lineno"> 2635</span>&#160;    <span class="keywordflow">if</span> (nIndex &gt;= size())</div>
+<div class="line"><a name="l02636"></a><span class="lineno"> 2636</span>&#160;        <span class="keywordflow">throw</span> std::out_of_range(<span class="stringliteral">&quot;invalid string position&quot;</span>);</div>
+<div class="line"><a name="l02637"></a><span class="lineno"> 2637</span>&#160; </div>
+<div class="line"><a name="l02638"></a><span class="lineno"> 2638</span>&#160;    <span class="keywordflow">return</span> data()[nIndex];</div>
+<div class="line"><a name="l02639"></a><span class="lineno"> 2639</span>&#160;}</div>
+<div class="line"><a name="l02640"></a><span class="lineno"> 2640</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l02641"></a><span class="lineno"> 2641</span>&#160;<span class="comment">/**</span></div>
+<div class="line"><a name="l02642"></a><span class="lineno"> 2642</span>&#160;<span class="comment">    @brief Clear string</span></div>
+<div class="line"><a name="l02643"></a><span class="lineno"> 2643</span>&#160;<span class="comment">**/</span></div>
+<div class="line"><a name="l02644"></a><span class="lineno"> 2644</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> <span class="keywordtype">char</span>_t, <span class="keyword">class</span> traits_t&gt;</div>
+<div class="line"><a name="l02645"></a><span class="lineno"> 2645</span>&#160;<span class="keyword">inline</span> <span class="keywordtype">void</span> basic_string&lt;char_t, traits_t&gt;::clear() noexcept</div>
+<div class="line"><a name="l02646"></a><span class="lineno"> 2646</span>&#160;{</div>
+<div class="line"><a name="l02647"></a><span class="lineno"> 2647</span>&#160;    assign(<a class="code" href="string__utils_8h.html#ae4f688084b037e2e7a63a13eaf539a02">QX_STR_PREFIX</a>(<span class="keyword">typename</span> traits_t::value_type, <span class="stringliteral">&quot;&quot;</span>));</div>
+<div class="line"><a name="l02648"></a><span class="lineno"> 2648</span>&#160;}</div>
+<div class="line"><a name="l02649"></a><span class="lineno"> 2649</span>&#160; </div>
+<div class="line"><a name="l02650"></a><span class="lineno"> 2650</span>&#160;} <span class="comment">// namespace qx</span></div>
 <div class="line"><a name="l02651"></a><span class="lineno"> 2651</span>&#160; </div>
 <div class="line"><a name="l02652"></a><span class="lineno"> 2652</span>&#160; </div>
-<div class="line"><a name="l02653"></a><span class="lineno"> 2653</span>&#160;<span class="comment">// -------------------------------------------------------- hash -------------------------------------------------------</span></div>
-<div class="line"><a name="l02654"></a><span class="lineno"> 2654</span>&#160; </div>
-<div class="line"><a name="l02655"></a><span class="lineno"> 2655</span>&#160;<span class="keyword">namespace </span>std</div>
-<div class="line"><a name="l02656"></a><span class="lineno"> 2656</span>&#160;{</div>
-<div class="line"><a name="l02657"></a><span class="lineno"> 2657</span>&#160; </div>
-<div class="line"><a name="l02658"></a><span class="lineno"> 2658</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> <span class="keywordtype">char</span>_t, <span class="keyword">class</span> traits_t&gt;</div>
-<div class="line"><a name="l02659"></a><span class="lineno"><a class="line" href="structstd_1_1hash_3_01qx_1_1basic__string_3_01char__t_00_01traits__t_01_4_01_4.html"> 2659</a></span>&#160;<span class="keyword">struct </span>hash&lt;qx::basic_string&lt;char_t, traits_t&gt;&gt;</div>
-<div class="line"><a name="l02660"></a><span class="lineno"> 2660</span>&#160;{</div>
-<div class="line"><a name="l02661"></a><span class="lineno"> 2661</span>&#160;    <span class="keywordtype">size_t</span> operator()(<span class="keyword">const</span> <a class="code" href="classqx_1_1basic__string.html">qx::basic_string&lt;char_t, traits_t&gt;</a>&amp; str) <span class="keyword">const</span> noexcept</div>
-<div class="line"><a name="l02662"></a><span class="lineno"> 2662</span>&#160;    {</div>
-<div class="line"><a name="l02663"></a><span class="lineno"> 2663</span>&#160;        <span class="keywordflow">return</span> traits_t::hash_function(str.data(), traits_t::hash_seed(), str.size());</div>
-<div class="line"><a name="l02664"></a><span class="lineno"> 2664</span>&#160;    }</div>
-<div class="line"><a name="l02665"></a><span class="lineno"> 2665</span>&#160;};</div>
-<div class="line"><a name="l02666"></a><span class="lineno"> 2666</span>&#160; </div>
-<div class="line"><a name="l02667"></a><span class="lineno"> 2667</span>&#160;<span class="comment">// -------------------------------------------------------- swap -------------------------------------------------------</span></div>
-<div class="line"><a name="l02668"></a><span class="lineno"> 2668</span>&#160; </div>
-<div class="line"><a name="l02669"></a><span class="lineno"> 2669</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> <span class="keywordtype">char</span>_t, <span class="keyword">class</span> traits_t&gt;</div>
-<div class="line"><a name="l02670"></a><span class="lineno"> 2670</span>&#160;<span class="keywordtype">void</span> swap(<a class="code" href="classqx_1_1basic__string.html">qx::basic_string&lt;char_t, traits_t&gt;</a>&amp; lhs, <a class="code" href="classqx_1_1basic__string.html">qx::basic_string&lt;char_t, traits_t&gt;</a>&amp; rhs) noexcept</div>
-<div class="line"><a name="l02671"></a><span class="lineno"> 2671</span>&#160;{</div>
-<div class="line"><a name="l02672"></a><span class="lineno"> 2672</span>&#160;    lhs.swap(rhs);</div>
-<div class="line"><a name="l02673"></a><span class="lineno"> 2673</span>&#160;}</div>
-<div class="line"><a name="l02674"></a><span class="lineno"> 2674</span>&#160; </div>
-<div class="line"><a name="l02675"></a><span class="lineno"> 2675</span>&#160;<span class="comment">// ----------------------------------------------------- formatter -----------------------------------------------------</span></div>
-<div class="line"><a name="l02676"></a><span class="lineno"> 2676</span>&#160; </div>
-<div class="line"><a name="l02677"></a><span class="lineno"> 2677</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> <span class="keywordtype">char</span>_t, <span class="keyword">class</span> traits_t&gt;</div>
-<div class="line"><a name="l02678"></a><span class="lineno"><a class="line" href="structstd_1_1formatter_3_01qx_1_1basic__string_3_01char__t_00_01traits__t_01_4_00_01char__t_01_4.html"> 2678</a></span>&#160;<span class="keyword">struct </span>formatter&lt;qx::basic_string&lt;char_t, traits_t&gt;, char_t&gt; : <a class="code" href="structqx_1_1basic__formatter.html">qx::basic_formatter</a>&lt;char_t&gt;</div>
-<div class="line"><a name="l02679"></a><span class="lineno"> 2679</span>&#160;{</div>
-<div class="line"><a name="l02680"></a><span class="lineno"> 2680</span>&#160;    <span class="keyword">template</span>&lt;<span class="keyword">class</span> format_context_type&gt;</div>
-<div class="line"><a name="l02681"></a><span class="lineno"> 2681</span>&#160;    constexpr <span class="keyword">auto</span> format(<span class="keyword">const</span> <a class="code" href="classqx_1_1basic__string.html">qx::basic_string&lt;char_t, traits_t&gt;</a>&amp; value, format_context_type&amp; ctx)<span class="keyword"> const</span></div>
-<div class="line"><a name="l02682"></a><span class="lineno"> 2682</span>&#160;<span class="keyword">    </span>{</div>
-<div class="line"><a name="l02683"></a><span class="lineno"> 2683</span>&#160;        <span class="keywordflow">return</span> format_to(ctx.out(), <a class="code" href="string__utils_8h.html#ae4f688084b037e2e7a63a13eaf539a02">QX_STR_PREFIX</a>(char_t, <span class="stringliteral">&quot;{}&quot;</span>), value.<a class="code" href="classqx_1_1basic__string.html#ac98fc25780d542fd98864eb544752b2a">c_str</a>());</div>
-<div class="line"><a name="l02684"></a><span class="lineno"> 2684</span>&#160;    }</div>
-<div class="line"><a name="l02685"></a><span class="lineno"> 2685</span>&#160;};</div>
-<div class="line"><a name="l02686"></a><span class="lineno"> 2686</span>&#160; </div>
-<div class="line"><a name="l02687"></a><span class="lineno"> 2687</span>&#160;} <span class="comment">// namespace std</span></div>
-<div class="line"><a name="l02688"></a><span class="lineno"> 2688</span>&#160; </div>
+<div class="line"><a name="l02653"></a><span class="lineno"> 2653</span>&#160; </div>
+<div class="line"><a name="l02654"></a><span class="lineno"> 2654</span>&#160;<span class="comment">// -------------------------------------------------------- hash -------------------------------------------------------</span></div>
+<div class="line"><a name="l02655"></a><span class="lineno"> 2655</span>&#160; </div>
+<div class="line"><a name="l02656"></a><span class="lineno"> 2656</span>&#160;<span class="keyword">namespace </span>std</div>
+<div class="line"><a name="l02657"></a><span class="lineno"> 2657</span>&#160;{</div>
+<div class="line"><a name="l02658"></a><span class="lineno"> 2658</span>&#160; </div>
+<div class="line"><a name="l02659"></a><span class="lineno"> 2659</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> <span class="keywordtype">char</span>_t, <span class="keyword">class</span> traits_t&gt;</div>
+<div class="line"><a name="l02660"></a><span class="lineno"><a class="line" href="structstd_1_1hash_3_01qx_1_1basic__string_3_01char__t_00_01traits__t_01_4_01_4.html"> 2660</a></span>&#160;<span class="keyword">struct </span>hash&lt;qx::basic_string&lt;char_t, traits_t&gt;&gt;</div>
+<div class="line"><a name="l02661"></a><span class="lineno"> 2661</span>&#160;{</div>
+<div class="line"><a name="l02662"></a><span class="lineno"> 2662</span>&#160;    <span class="keywordtype">size_t</span> operator()(<span class="keyword">const</span> <a class="code" href="classqx_1_1basic__string.html">qx::basic_string&lt;char_t, traits_t&gt;</a>&amp; str) <span class="keyword">const</span> noexcept</div>
+<div class="line"><a name="l02663"></a><span class="lineno"> 2663</span>&#160;    {</div>
+<div class="line"><a name="l02664"></a><span class="lineno"> 2664</span>&#160;        <span class="keywordflow">return</span> traits_t::hash_function(str.data(), traits_t::hash_seed(), str.size());</div>
+<div class="line"><a name="l02665"></a><span class="lineno"> 2665</span>&#160;    }</div>
+<div class="line"><a name="l02666"></a><span class="lineno"> 2666</span>&#160;};</div>
+<div class="line"><a name="l02667"></a><span class="lineno"> 2667</span>&#160; </div>
+<div class="line"><a name="l02668"></a><span class="lineno"> 2668</span>&#160;<span class="comment">// -------------------------------------------------------- swap -------------------------------------------------------</span></div>
+<div class="line"><a name="l02669"></a><span class="lineno"> 2669</span>&#160; </div>
+<div class="line"><a name="l02670"></a><span class="lineno"> 2670</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> <span class="keywordtype">char</span>_t, <span class="keyword">class</span> traits_t&gt;</div>
+<div class="line"><a name="l02671"></a><span class="lineno"> 2671</span>&#160;<span class="keywordtype">void</span> swap(<a class="code" href="classqx_1_1basic__string.html">qx::basic_string&lt;char_t, traits_t&gt;</a>&amp; lhs, <a class="code" href="classqx_1_1basic__string.html">qx::basic_string&lt;char_t, traits_t&gt;</a>&amp; rhs) noexcept</div>
+<div class="line"><a name="l02672"></a><span class="lineno"> 2672</span>&#160;{</div>
+<div class="line"><a name="l02673"></a><span class="lineno"> 2673</span>&#160;    lhs.swap(rhs);</div>
+<div class="line"><a name="l02674"></a><span class="lineno"> 2674</span>&#160;}</div>
+<div class="line"><a name="l02675"></a><span class="lineno"> 2675</span>&#160; </div>
+<div class="line"><a name="l02676"></a><span class="lineno"> 2676</span>&#160;<span class="comment">// ----------------------------------------------------- formatter -----------------------------------------------------</span></div>
+<div class="line"><a name="l02677"></a><span class="lineno"> 2677</span>&#160; </div>
+<div class="line"><a name="l02678"></a><span class="lineno"> 2678</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> <span class="keywordtype">char</span>_t, <span class="keyword">class</span> traits_t&gt;</div>
+<div class="line"><a name="l02679"></a><span class="lineno"><a class="line" href="structstd_1_1formatter_3_01qx_1_1basic__string_3_01char__t_00_01traits__t_01_4_00_01char__t_01_4.html"> 2679</a></span>&#160;<span class="keyword">struct </span>formatter&lt;qx::basic_string&lt;char_t, traits_t&gt;, char_t&gt; : <a class="code" href="structqx_1_1basic__formatter.html">qx::basic_formatter</a>&lt;char_t&gt;</div>
+<div class="line"><a name="l02680"></a><span class="lineno"> 2680</span>&#160;{</div>
+<div class="line"><a name="l02681"></a><span class="lineno"> 2681</span>&#160;    <span class="keyword">template</span>&lt;<span class="keyword">class</span> format_context_type&gt;</div>
+<div class="line"><a name="l02682"></a><span class="lineno"> 2682</span>&#160;    constexpr <span class="keyword">auto</span> format(<span class="keyword">const</span> <a class="code" href="classqx_1_1basic__string.html">qx::basic_string&lt;char_t, traits_t&gt;</a>&amp; value, format_context_type&amp; ctx)<span class="keyword"> const</span></div>
+<div class="line"><a name="l02683"></a><span class="lineno"> 2683</span>&#160;<span class="keyword">    </span>{</div>
+<div class="line"><a name="l02684"></a><span class="lineno"> 2684</span>&#160;        <span class="keywordflow">return</span> format_to(ctx.out(), <a class="code" href="string__utils_8h.html#ae4f688084b037e2e7a63a13eaf539a02">QX_STR_PREFIX</a>(char_t, <span class="stringliteral">&quot;{}&quot;</span>), value.<a class="code" href="classqx_1_1basic__string.html#ac98fc25780d542fd98864eb544752b2a">c_str</a>());</div>
+<div class="line"><a name="l02685"></a><span class="lineno"> 2685</span>&#160;    }</div>
+<div class="line"><a name="l02686"></a><span class="lineno"> 2686</span>&#160;};</div>
+<div class="line"><a name="l02687"></a><span class="lineno"> 2687</span>&#160; </div>
+<div class="line"><a name="l02688"></a><span class="lineno"> 2688</span>&#160;} <span class="comment">// namespace std</span></div>
 <div class="line"><a name="l02689"></a><span class="lineno"> 2689</span>&#160; </div>
-<div class="line"><a name="l02690"></a><span class="lineno"> 2690</span>&#160;<span class="comment">// ------------------------------------------- istream / ostream overloading -------------------------------------------</span></div>
-<div class="line"><a name="l02691"></a><span class="lineno"> 2691</span>&#160; </div>
-<div class="line"><a name="l02692"></a><span class="lineno"> 2692</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> <span class="keywordtype">char</span>_t, <span class="keyword">class</span> traits_t&gt;</div>
-<div class="line"><a name="l02693"></a><span class="lineno"> 2693</span>&#160;qx::details::ostream&lt;char_t&gt;&amp; operator&lt;&lt;(</div>
-<div class="line"><a name="l02694"></a><span class="lineno"> 2694</span>&#160;    qx::details::ostream&lt;char_t&gt;&amp;             os,</div>
-<div class="line"><a name="l02695"></a><span class="lineno"> 2695</span>&#160;    <span class="keyword">const</span> <a class="code" href="classqx_1_1basic__string.html">qx::basic_string&lt;char_t, traits_t&gt;</a>&amp; str)</div>
-<div class="line"><a name="l02696"></a><span class="lineno"> 2696</span>&#160;{</div>
-<div class="line"><a name="l02697"></a><span class="lineno"> 2697</span>&#160;    os &lt;&lt; str.data();</div>
-<div class="line"><a name="l02698"></a><span class="lineno"> 2698</span>&#160;    <span class="keywordflow">return</span> os;</div>
-<div class="line"><a name="l02699"></a><span class="lineno"> 2699</span>&#160;}</div>
-<div class="line"><a name="l02700"></a><span class="lineno"> 2700</span>&#160; </div>
-<div class="line"><a name="l02701"></a><span class="lineno"> 2701</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> <span class="keywordtype">char</span>_t, <span class="keyword">class</span> traits_t&gt;</div>
-<div class="line"><a name="l02702"></a><span class="lineno"> 2702</span>&#160;qx::details::istream&lt;char_t&gt;&amp; operator&gt;&gt;(qx::details::istream&lt;char_t&gt;&amp; is, <a class="code" href="classqx_1_1basic__string.html">qx::basic_string&lt;char_t, traits_t&gt;</a>&amp; str)</div>
-<div class="line"><a name="l02703"></a><span class="lineno"> 2703</span>&#160;{</div>
-<div class="line"><a name="l02704"></a><span class="lineno"> 2704</span>&#160;    <span class="keyword">typename</span> qx::details::istream&lt;traits_t&gt;::iostate ret_bit = qx::details::istream&lt;traits_t&gt;::goodbit;</div>
-<div class="line"><a name="l02705"></a><span class="lineno"> 2705</span>&#160; </div>
-<div class="line"><a name="l02706"></a><span class="lineno"> 2706</span>&#160;    <span class="keyword">auto</span> try_push_back = [&amp;str, &amp;is, &amp;ret_bit](char_t ch)</div>
-<div class="line"><a name="l02707"></a><span class="lineno"> 2707</span>&#160;    {</div>
-<div class="line"><a name="l02708"></a><span class="lineno"> 2708</span>&#160;        <span class="keyword">typename</span> traits_t::size_type nCurrentSize = str.size();</div>
-<div class="line"><a name="l02709"></a><span class="lineno"> 2709</span>&#160;        <span class="keywordflow">if</span> (str._resize(nCurrentSize + 1))</div>
-<div class="line"><a name="l02710"></a><span class="lineno"> 2710</span>&#160;        {</div>
-<div class="line"><a name="l02711"></a><span class="lineno"> 2711</span>&#160;            str[nCurrentSize] = ch;</div>
-<div class="line"><a name="l02712"></a><span class="lineno"> 2712</span>&#160;            <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
-<div class="line"><a name="l02713"></a><span class="lineno"> 2713</span>&#160;        }</div>
-<div class="line"><a name="l02714"></a><span class="lineno"> 2714</span>&#160;        <span class="keywordflow">else</span></div>
-<div class="line"><a name="l02715"></a><span class="lineno"> 2715</span>&#160;        {</div>
-<div class="line"><a name="l02716"></a><span class="lineno"> 2716</span>&#160;            is.unget();</div>
-<div class="line"><a name="l02717"></a><span class="lineno"> 2717</span>&#160;            ret_bit |= qx::details::istream&lt;traits_t&gt;::failbit;</div>
-<div class="line"><a name="l02718"></a><span class="lineno"> 2718</span>&#160;            <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a name="l02719"></a><span class="lineno"> 2719</span>&#160;        }</div>
-<div class="line"><a name="l02720"></a><span class="lineno"> 2720</span>&#160;    };</div>
-<div class="line"><a name="l02721"></a><span class="lineno"> 2721</span>&#160; </div>
-<div class="line"><a name="l02722"></a><span class="lineno"> 2722</span>&#160;    str.clear();</div>
-<div class="line"><a name="l02723"></a><span class="lineno"> 2723</span>&#160;    char_t ch;</div>
-<div class="line"><a name="l02724"></a><span class="lineno"> 2724</span>&#160; </div>
-<div class="line"><a name="l02725"></a><span class="lineno"> 2725</span>&#160;    <span class="comment">// skip all space symbols and add first symbol is any</span></div>
-<div class="line"><a name="l02726"></a><span class="lineno"> 2726</span>&#160;    <span class="keywordflow">while</span> (is.get(ch))</div>
-<div class="line"><a name="l02727"></a><span class="lineno"> 2727</span>&#160;    {</div>
-<div class="line"><a name="l02728"></a><span class="lineno"> 2728</span>&#160;        <span class="keywordflow">if</span> (!traits_t::is_space(ch))</div>
-<div class="line"><a name="l02729"></a><span class="lineno"> 2729</span>&#160;        {</div>
-<div class="line"><a name="l02730"></a><span class="lineno"> 2730</span>&#160;            try_push_back(ch);</div>
-<div class="line"><a name="l02731"></a><span class="lineno"> 2731</span>&#160;            <span class="keywordflow">break</span>;</div>
-<div class="line"><a name="l02732"></a><span class="lineno"> 2732</span>&#160;        }</div>
-<div class="line"><a name="l02733"></a><span class="lineno"> 2733</span>&#160;    }</div>
-<div class="line"><a name="l02734"></a><span class="lineno"> 2734</span>&#160; </div>
-<div class="line"><a name="l02735"></a><span class="lineno"> 2735</span>&#160;    <span class="comment">// add other symbols until space symbol</span></div>
-<div class="line"><a name="l02736"></a><span class="lineno"> 2736</span>&#160;    <span class="keywordflow">while</span> (is.get(ch))</div>
-<div class="line"><a name="l02737"></a><span class="lineno"> 2737</span>&#160;    {</div>
-<div class="line"><a name="l02738"></a><span class="lineno"> 2738</span>&#160;        <span class="keywordflow">if</span> (!traits_t::is_space(ch))</div>
-<div class="line"><a name="l02739"></a><span class="lineno"> 2739</span>&#160;        {</div>
-<div class="line"><a name="l02740"></a><span class="lineno"> 2740</span>&#160;            <span class="keywordflow">if</span> (!try_push_back(ch))</div>
-<div class="line"><a name="l02741"></a><span class="lineno"> 2741</span>&#160;                <span class="keywordflow">break</span>;</div>
-<div class="line"><a name="l02742"></a><span class="lineno"> 2742</span>&#160;        }</div>
-<div class="line"><a name="l02743"></a><span class="lineno"> 2743</span>&#160;        <span class="keywordflow">else</span></div>
-<div class="line"><a name="l02744"></a><span class="lineno"> 2744</span>&#160;        {</div>
-<div class="line"><a name="l02745"></a><span class="lineno"> 2745</span>&#160;            is.unget();</div>
-<div class="line"><a name="l02746"></a><span class="lineno"> 2746</span>&#160;            <span class="keywordflow">break</span>;</div>
-<div class="line"><a name="l02747"></a><span class="lineno"> 2747</span>&#160;        }</div>
-<div class="line"><a name="l02748"></a><span class="lineno"> 2748</span>&#160;    }</div>
-<div class="line"><a name="l02749"></a><span class="lineno"> 2749</span>&#160; </div>
-<div class="line"><a name="l02750"></a><span class="lineno"> 2750</span>&#160;    is.setstate(ret_bit);</div>
-<div class="line"><a name="l02751"></a><span class="lineno"> 2751</span>&#160;    <span class="keywordflow">return</span> is;</div>
-<div class="line"><a name="l02752"></a><span class="lineno"> 2752</span>&#160;}</div>
+<div class="line"><a name="l02690"></a><span class="lineno"> 2690</span>&#160; </div>
+<div class="line"><a name="l02691"></a><span class="lineno"> 2691</span>&#160;<span class="comment">// ------------------------------------------- istream / ostream overloading -------------------------------------------</span></div>
+<div class="line"><a name="l02692"></a><span class="lineno"> 2692</span>&#160; </div>
+<div class="line"><a name="l02693"></a><span class="lineno"> 2693</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> <span class="keywordtype">char</span>_t, <span class="keyword">class</span> traits_t&gt;</div>
+<div class="line"><a name="l02694"></a><span class="lineno"> 2694</span>&#160;qx::details::ostream&lt;char_t&gt;&amp; operator&lt;&lt;(</div>
+<div class="line"><a name="l02695"></a><span class="lineno"> 2695</span>&#160;    qx::details::ostream&lt;char_t&gt;&amp;             os,</div>
+<div class="line"><a name="l02696"></a><span class="lineno"> 2696</span>&#160;    <span class="keyword">const</span> <a class="code" href="classqx_1_1basic__string.html">qx::basic_string&lt;char_t, traits_t&gt;</a>&amp; str)</div>
+<div class="line"><a name="l02697"></a><span class="lineno"> 2697</span>&#160;{</div>
+<div class="line"><a name="l02698"></a><span class="lineno"> 2698</span>&#160;    os &lt;&lt; str.data();</div>
+<div class="line"><a name="l02699"></a><span class="lineno"> 2699</span>&#160;    <span class="keywordflow">return</span> os;</div>
+<div class="line"><a name="l02700"></a><span class="lineno"> 2700</span>&#160;}</div>
+<div class="line"><a name="l02701"></a><span class="lineno"> 2701</span>&#160; </div>
+<div class="line"><a name="l02702"></a><span class="lineno"> 2702</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> <span class="keywordtype">char</span>_t, <span class="keyword">class</span> traits_t&gt;</div>
+<div class="line"><a name="l02703"></a><span class="lineno"> 2703</span>&#160;qx::details::istream&lt;char_t&gt;&amp; operator&gt;&gt;(qx::details::istream&lt;char_t&gt;&amp; is, <a class="code" href="classqx_1_1basic__string.html">qx::basic_string&lt;char_t, traits_t&gt;</a>&amp; str)</div>
+<div class="line"><a name="l02704"></a><span class="lineno"> 2704</span>&#160;{</div>
+<div class="line"><a name="l02705"></a><span class="lineno"> 2705</span>&#160;    <span class="keyword">typename</span> qx::details::istream&lt;traits_t&gt;::iostate ret_bit = qx::details::istream&lt;traits_t&gt;::goodbit;</div>
+<div class="line"><a name="l02706"></a><span class="lineno"> 2706</span>&#160; </div>
+<div class="line"><a name="l02707"></a><span class="lineno"> 2707</span>&#160;    <span class="keyword">auto</span> try_push_back = [&amp;str, &amp;is, &amp;ret_bit](char_t ch)</div>
+<div class="line"><a name="l02708"></a><span class="lineno"> 2708</span>&#160;    {</div>
+<div class="line"><a name="l02709"></a><span class="lineno"> 2709</span>&#160;        <span class="keyword">typename</span> traits_t::size_type nCurrentSize = str.size();</div>
+<div class="line"><a name="l02710"></a><span class="lineno"> 2710</span>&#160;        <span class="keywordflow">if</span> (str._resize(nCurrentSize + 1))</div>
+<div class="line"><a name="l02711"></a><span class="lineno"> 2711</span>&#160;        {</div>
+<div class="line"><a name="l02712"></a><span class="lineno"> 2712</span>&#160;            str[nCurrentSize] = ch;</div>
+<div class="line"><a name="l02713"></a><span class="lineno"> 2713</span>&#160;            <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><a name="l02714"></a><span class="lineno"> 2714</span>&#160;        }</div>
+<div class="line"><a name="l02715"></a><span class="lineno"> 2715</span>&#160;        <span class="keywordflow">else</span></div>
+<div class="line"><a name="l02716"></a><span class="lineno"> 2716</span>&#160;        {</div>
+<div class="line"><a name="l02717"></a><span class="lineno"> 2717</span>&#160;            is.unget();</div>
+<div class="line"><a name="l02718"></a><span class="lineno"> 2718</span>&#160;            ret_bit |= qx::details::istream&lt;traits_t&gt;::failbit;</div>
+<div class="line"><a name="l02719"></a><span class="lineno"> 2719</span>&#160;            <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a name="l02720"></a><span class="lineno"> 2720</span>&#160;        }</div>
+<div class="line"><a name="l02721"></a><span class="lineno"> 2721</span>&#160;    };</div>
+<div class="line"><a name="l02722"></a><span class="lineno"> 2722</span>&#160; </div>
+<div class="line"><a name="l02723"></a><span class="lineno"> 2723</span>&#160;    str.clear();</div>
+<div class="line"><a name="l02724"></a><span class="lineno"> 2724</span>&#160;    char_t ch;</div>
+<div class="line"><a name="l02725"></a><span class="lineno"> 2725</span>&#160; </div>
+<div class="line"><a name="l02726"></a><span class="lineno"> 2726</span>&#160;    <span class="comment">// skip all space symbols and add first symbol is any</span></div>
+<div class="line"><a name="l02727"></a><span class="lineno"> 2727</span>&#160;    <span class="keywordflow">while</span> (is.get(ch))</div>
+<div class="line"><a name="l02728"></a><span class="lineno"> 2728</span>&#160;    {</div>
+<div class="line"><a name="l02729"></a><span class="lineno"> 2729</span>&#160;        <span class="keywordflow">if</span> (!traits_t::is_space(ch))</div>
+<div class="line"><a name="l02730"></a><span class="lineno"> 2730</span>&#160;        {</div>
+<div class="line"><a name="l02731"></a><span class="lineno"> 2731</span>&#160;            try_push_back(ch);</div>
+<div class="line"><a name="l02732"></a><span class="lineno"> 2732</span>&#160;            <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l02733"></a><span class="lineno"> 2733</span>&#160;        }</div>
+<div class="line"><a name="l02734"></a><span class="lineno"> 2734</span>&#160;    }</div>
+<div class="line"><a name="l02735"></a><span class="lineno"> 2735</span>&#160; </div>
+<div class="line"><a name="l02736"></a><span class="lineno"> 2736</span>&#160;    <span class="comment">// add other symbols until space symbol</span></div>
+<div class="line"><a name="l02737"></a><span class="lineno"> 2737</span>&#160;    <span class="keywordflow">while</span> (is.get(ch))</div>
+<div class="line"><a name="l02738"></a><span class="lineno"> 2738</span>&#160;    {</div>
+<div class="line"><a name="l02739"></a><span class="lineno"> 2739</span>&#160;        <span class="keywordflow">if</span> (!traits_t::is_space(ch))</div>
+<div class="line"><a name="l02740"></a><span class="lineno"> 2740</span>&#160;        {</div>
+<div class="line"><a name="l02741"></a><span class="lineno"> 2741</span>&#160;            <span class="keywordflow">if</span> (!try_push_back(ch))</div>
+<div class="line"><a name="l02742"></a><span class="lineno"> 2742</span>&#160;                <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l02743"></a><span class="lineno"> 2743</span>&#160;        }</div>
+<div class="line"><a name="l02744"></a><span class="lineno"> 2744</span>&#160;        <span class="keywordflow">else</span></div>
+<div class="line"><a name="l02745"></a><span class="lineno"> 2745</span>&#160;        {</div>
+<div class="line"><a name="l02746"></a><span class="lineno"> 2746</span>&#160;            is.unget();</div>
+<div class="line"><a name="l02747"></a><span class="lineno"> 2747</span>&#160;            <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l02748"></a><span class="lineno"> 2748</span>&#160;        }</div>
+<div class="line"><a name="l02749"></a><span class="lineno"> 2749</span>&#160;    }</div>
+<div class="line"><a name="l02750"></a><span class="lineno"> 2750</span>&#160; </div>
+<div class="line"><a name="l02751"></a><span class="lineno"> 2751</span>&#160;    is.setstate(ret_bit);</div>
+<div class="line"><a name="l02752"></a><span class="lineno"> 2752</span>&#160;    <span class="keywordflow">return</span> is;</div>
+<div class="line"><a name="l02753"></a><span class="lineno"> 2753</span>&#160;}</div>
 <div class="ttc" id="aclassqx_1_1basic__string_html"><div class="ttname"><a href="classqx_1_1basic__string.html">qx::basic_string</a></div><div class="ttdoc">String class.</div><div class="ttdef"><b>Definition:</b> <a href="string_8h_source.html#l00072">string.h:73</a></div></div>
 <div class="ttc" id="aclassqx_1_1basic__string_html_a02be4528e498e62b53a24465f637631b"><div class="ttname"><a href="classqx_1_1basic__string.html#a02be4528e498e62b53a24465f637631b">qx::basic_string::push_back</a></div><div class="ttdeci">void push_back(value_type chSymbol) noexcept</div><div class="ttdoc">Insert char in the end of the string.</div><div class="ttdef"><b>Definition:</b> <a href="string_8inl_source.html#l00555">string.inl:555</a></div></div>
 <div class="ttc" id="aclassqx_1_1basic__string_html_a0836a282c29940103131ee8e7c323ef6"><div class="ttname"><a href="classqx_1_1basic__string.html#a0836a282c29940103131ee8e7c323ef6">qx::basic_string::erase</a></div><div class="ttdeci">void erase(iterator itFirst, iterator itLast) noexcept</div><div class="ttdoc">Erase substring.</div><div class="ttdef"><b>Definition:</b> <a href="string_8inl_source.html#l00567">string.inl:567</a></div></div>
@@ -2877,7 +2878,7 @@ $(function() {
 <div class="ttc" id="aclassqx_1_1iterator_html"><div class="ttname"><a href="classqx_1_1iterator.html">qx::iterator</a></div><div class="ttdoc">Non-const random access iterator type.</div><div class="ttdef"><b>Definition:</b> <a href="iterator_8h_source.html#l00031">iterator.h:35</a></div></div>
 <div class="ttc" id="acoalesce_8h_html_af141b284fe289dd9243ddad3f90ddb19"><div class="ttname"><a href="coalesce_8h.html#af141b284fe289dd9243ddad3f90ddb19">qx::requires</a></div><div class="ttdeci">requires(same_variadic_args_v&lt; args_t... &gt;) const expr auto coalesce(args_t &amp;&amp;... args)</div><div class="ttdoc">Coalesce function, C# a ?? b analogue.</div><div class="ttdef"><b>Definition:</b> <a href="coalesce_8inl_source.html#l00057">coalesce.inl:57</a></div></div>
 <div class="ttc" id="afile__logger__stream_8h_html_aaab6d2d26ae57b1521451921e1273220a9516dfb15f51c7ee19a4d46b8c0dbe1d"><div class="ttname"><a href="file__logger__stream_8h.html#aaab6d2d26ae57b1521451921e1273220a9516dfb15f51c7ee19a4d46b8c0dbe1d">qx::log_file_policy::append</a></div><div class="ttdeci">@ append</div><div class="ttdoc">append all</div></div>
-<div class="ttc" id="astring_8h_html_ae7bef0fda2664f97b0454290be619fd6"><div class="ttname"><a href="string_8h.html#ae7bef0fda2664f97b0454290be619fd6">qx::convert_to_string</a></div><div class="ttdeci">basic_string&lt; char_t, traits_t &gt; convert_to_string(const T &amp;value)</div><div class="ttdoc">Converts any type that has a std::formatter overload to qx::basic_string.</div><div class="ttdef"><b>Definition:</b> <a href="string_8inl_source.html#l02496">string.inl:2496</a></div></div>
+<div class="ttc" id="astring_8h_html_ae7bef0fda2664f97b0454290be619fd6"><div class="ttname"><a href="string_8h.html#ae7bef0fda2664f97b0454290be619fd6">qx::convert_to_string</a></div><div class="ttdeci">basic_string&lt; char_t, traits_t &gt; convert_to_string(const T &amp;value)</div><div class="ttdoc">Converts any type that has a std::formatter overload to qx::basic_string.</div><div class="ttdef"><b>Definition:</b> <a href="string_8inl_source.html#l02497">string.inl:2497</a></div></div>
 <div class="ttc" id="astring__utils_8h_html_a57911e62bb82593665bf09e4ea834904"><div class="ttname"><a href="string__utils_8h.html#a57911e62bb82593665bf09e4ea834904">QX_CHAR_PREFIX</a></div><div class="ttdeci">#define QX_CHAR_PREFIX(value_t, ch)</div><div class="ttdoc">Chose witch of prefixes add to char : L or none.</div><div class="ttdef"><b>Definition:</b> <a href="string__utils_8h_source.html#l00261">string_utils.h:261</a></div></div>
 <div class="ttc" id="astring__utils_8h_html_a5d2e428ea861df8de50dbdc77b2608a9"><div class="ttname"><a href="string__utils_8h.html#a5d2e428ea861df8de50dbdc77b2608a9">qx::iter_strcmp</a></div><div class="ttdeci">constexpr int iter_strcmp(fwd_it_1_t itBegin1, fwd_it_1_t itEnd1, fwd_it_2_t itBegin2, fwd_it_2_t itEnd2) noexcept</div><div class="ttdoc">Compares string 1 with string 2.</div><div class="ttdef"><b>Definition:</b> <a href="string__utils_8h_source.html#l00150">string_utils.h:150</a></div></div>
 <div class="ttc" id="astring__utils_8h_html_ae4f688084b037e2e7a63a13eaf539a02"><div class="ttname"><a href="string__utils_8h.html#ae4f688084b037e2e7a63a13eaf539a02">QX_STR_PREFIX</a></div><div class="ttdeci">#define QX_STR_PREFIX(value_t, str)</div><div class="ttdoc">Chose witch of prefixes add to string : L or none.</div><div class="ttdef"><b>Definition:</b> <a href="string__utils_8h_source.html#l00253">string_utils.h:253</a></div></div>
