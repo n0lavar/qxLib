@@ -10,10 +10,10 @@
 
 #include <qx/containers/container.h>
 #include <qx/containers/string/format_string.h>
-#include <qx/containers/string/string_data.h>
 #include <qx/containers/string/string_hash.h>
 #include <qx/macros/static_assert.h>
 #include <qx/meta/type_traits.h>
+#include <qx/sbo/bytes_sbo.h>
 
 #include <iostream>
 #include <optional>
@@ -28,6 +28,15 @@ class basic_string;
 
 namespace details
 {
+
+template<class string_traits_t>
+struct string_sbo_traits
+{
+    using size_type = typename string_traits_t::size_type;
+    static constexpr size_type nSBOSize =
+        sizeof(typename string_traits_t::value_type) * string_traits_t::small_string_size();
+    static constexpr bool bShrinkToFitWhenSmall = string_traits_t::shrink_to_fit_when_small();
+};
 
 template<class char_t>
 using ostream = std::basic_ostream<char_t>;
@@ -1721,7 +1730,7 @@ private:
     static const_pointer _get_string_view_like_data(const string_view_like_t& sValue) noexcept;
 
 private:
-    string_data<traits_t> m_Data;
+    bytes_sbo<details::string_sbo_traits<traits_t>> m_Data;
 };
 
 /**

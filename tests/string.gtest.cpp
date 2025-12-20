@@ -91,16 +91,16 @@ using Implementations = ::testing::Types<
 template<class TraitsType>
 void CheckCapacity(auto nPrevCapacity, auto nCapacity)
 {
-    if (nPrevCapacity != TraitsType::small_string_size())
-        EXPECT_EQ(nPrevCapacity % TraitsType::align(), 0);
+    if ((nPrevCapacity + 1) != TraitsType::small_string_size())  // null terminator
+        EXPECT_EQ((nPrevCapacity + 1) % TraitsType::align(), 0); // null terminator
 
-    if (nCapacity != TraitsType::small_string_size())
-        EXPECT_EQ(nCapacity % TraitsType::align(), 0);
+    if ((nCapacity + 1) != TraitsType::small_string_size())  // null terminator
+        EXPECT_EQ((nCapacity + 1) % TraitsType::align(), 0); // null terminator
 
-    EXPECT_GE(nPrevCapacity, TraitsType::small_string_size());
-    EXPECT_GE(nCapacity, TraitsType::small_string_size());
+    EXPECT_GE((nPrevCapacity + 1), TraitsType::small_string_size()); // null terminator
+    EXPECT_GE((nCapacity + 1), TraitsType::small_string_size());     // null terminator
 
-    if (nPrevCapacity > TraitsType::small_string_size())
+    if ((nPrevCapacity + 1) > TraitsType::small_string_size()) // null terminator
         EXPECT_GE(nCapacity, nPrevCapacity);
 }
 
@@ -288,7 +288,7 @@ TYPED_TEST(TestQxString, operator_assign)
     str.free();
     EXPECT_TRUE(str.empty());
     EXPECT_EQ(str.size(), 0);
-    EXPECT_EQ(str.capacity(), TypeParam::small_string_size());
+    EXPECT_EQ(str.capacity(), TypeParam::small_string_size() - 1); // null terminator
 
     str = std::move(tmpStr);
     EXPECT_STREQ(str.data(), STR("Hello world"));
@@ -376,7 +376,7 @@ TYPED_TEST(TestQxString, size)
 
     str0.shrink_to_fit();
     EXPECT_EQ(str0.size(), 58);
-    EXPECT_LE(str0.size() + 1, str0.capacity());
+    EXPECT_LE(str0.size(), str0.capacity());
     EXPECT_LE(str0.capacity(), nNewCapacity);
     EXPECT_FALSE(str0.empty());
     EXPECT_TRUE(str0);
@@ -1630,7 +1630,7 @@ TYPED_TEST(TestQxString, small_string_optimization)
 
         str.shrink_to_fit();
         EXPECT_EQ(str.size(), nSmallStrSize1);
-        EXPECT_EQ(str.capacity(), TypeParam::small_string_size());
+        EXPECT_EQ(str.capacity() + 1, TypeParam::small_string_size()); // null terminator
         EXPECT_STREQ(str.data(), pszSmallString1);
     }
 }
@@ -1864,13 +1864,12 @@ TYPED_TEST(TestQxString, pop_front)
     str = STR("12345");
     EXPECT_EQ(str.pop_front(), CH('1'));
     EXPECT_STREQ(str.data(), STR("2345"));
+    EXPECT_EQ(str.size(), 4);
 
     str = STR("1");
     EXPECT_EQ(str.pop_front(), CH('1'));
     EXPECT_STREQ(str.data(), STR(""));
-
-    EXPECT_EQ(str.pop_front(), CH('\0'));
-    EXPECT_STREQ(str.data(), STR(""));
+    EXPECT_EQ(str.size(), 0);
 }
 
 TYPED_TEST(TestQxString, trim_left)

@@ -251,7 +251,7 @@ inline typename basic_string<char_t, traits_t>::const_pointer basic_string<char_
 template<class char_t, class traits_t>
 inline typename basic_string<char_t, traits_t>::size_type basic_string<char_t, traits_t>::capacity() const noexcept
 {
-    return m_Data.capacity() / sizeof(value_type);
+    return m_Data.capacity() / sizeof(value_type) - 1; // - null terminator
 }
 
 template<class char_t, class traits_t>
@@ -1942,19 +1942,13 @@ inline bool basic_string<char_t, traits_t>::ends_with(value_type chSymbol) const
 template<class char_t, class traits_t>
 inline bool basic_string<char_t, traits_t>::ends_with(const_pointer pszStr, size_type nStrSize) const noexcept
 {
-    if (pszStr)
-    {
-        if (size_type nThisSize = size(); nThisSize > 0)
-        {
-            if (nStrSize == npos)
-                nStrSize = traits_t::length(pszStr);
+    if (!pszStr)
+        return false;
 
-            if (nStrSize <= nThisSize)
-                return traits_t::compare_n(data() + nThisSize - nStrSize, pszStr, nStrSize) == 0;
-        }
-    }
+    if (nStrSize == npos)
+        nStrSize = traits_t::length(pszStr);
 
-    return false;
+    return ends_with(pszStr, pszStr + nStrSize);
 }
 
 template<class char_t, class traits_t>
@@ -1967,7 +1961,11 @@ template<class char_t, class traits_t>
 template<class fwd_it_t>
 inline bool basic_string<char_t, traits_t>::ends_with(fwd_it_t itBegin, fwd_it_t itEnd) const noexcept
 {
-    return iter_strcmp(cend() - static_cast<size_type>(std::distance(itBegin, itEnd)), cend(), itBegin, itEnd) == 0;
+    const size_t nOtherSize = static_cast<size_type>(std::distance(itBegin, itEnd));
+    if (nOtherSize > size())
+        return false;
+
+    return iter_strcmp(cend() - nOtherSize, cend(), itBegin, itEnd) == 0;
 }
 
 template<class char_t, class traits_t>
@@ -2223,14 +2221,14 @@ template<class char_t, class traits_t>
 inline typename basic_string<char_t, traits_t>::reference basic_string<char_t, traits_t>::operator[](
     size_type nSymbol) noexcept
 {
-    return at(nSymbol);
+    return data()[nSymbol];
 }
 
 template<class char_t, class traits_t>
 inline typename basic_string<char_t, traits_t>::const_reference basic_string<char_t, traits_t>::operator[](
     size_type nSymbol) const noexcept
 {
-    return at(nSymbol);
+    return data()[nSymbol];
 }
 
 template<class char_t, class traits_t>
@@ -2250,12 +2248,12 @@ template<class char_t, class traits_t>
 inline bool basic_string<char_t, traits_t>::_resize(size_type nSymbols, sbo_resize_type eType) noexcept
 {
     const bool bRet = m_Data.resize(
-        nSymbols * sizeof(value_type),
-        eType == sbo_resize_type::shrink_to_fit ? 0 : traits_t::align(),
+        (nSymbols + 1) * sizeof(value_type), // + null terminator
+        eType == sbo_resize_type::shrink_to_fit ? 0 : traits_t::align() * sizeof(value_type),
         eType);
 
-    if (bRet && eType == sbo_resize_type::common)
-        at(nSymbols) = QX_CHAR_PREFIX(typename traits_t::value_type, '\0');
+    if (bRet && eType != sbo_resize_type::reserve)
+        (*this)[nSymbols] = QX_CHAR_PREFIX(typename traits_t::value_type, '\0');
 
     return bRet;
 }
@@ -2611,7 +2609,8 @@ basic_string<char_t, traits_t> operator+(const string_t& lhs, const basic_string
 template<class char_t, class traits_t>
 inline typename basic_string<char_t, traits_t>::size_type basic_string<char_t, traits_t>::size() const noexcept
 {
-    return m_Data.size() / sizeof(value_type);
+    const size_type nSize = m_Data.size() / sizeof(value_type);
+    return nSize == 0 ? 0 : nSize - 1; // - null terminator
 }
 
 /**
@@ -2630,8 +2629,11 @@ inline typename basic_string<char_t, traits_t>::pointer basic_string<char_t, tra
     @retval        - char value
 **/
 template<class char_t, class traits_t>
-inline typename basic_string<char_t, traits_t>::reference basic_string<char_t, traits_t>::at(size_type nIndex) noexcept
+inline typename basic_string<char_t, traits_t>::reference basic_string<char_t, traits_t>::at(size_type nIndex)
 {
+    if (nIndex >= size())
+        throw std::out_of_range("invalid string position");
+
     return data()[nIndex];
 }
 

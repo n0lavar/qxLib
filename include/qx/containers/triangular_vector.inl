@@ -215,8 +215,11 @@ inline typename triangular_vector<T>::pointer triangular_vector<T>::data(void) n
     @retval        - value
 **/
 template<class T>
-inline typename triangular_vector<T>::reference triangular_vector<T>::at(size_type nIndex) noexcept
+inline typename triangular_vector<T>::reference triangular_vector<T>::at(size_type nIndex)
 {
+    if (nIndex >= size())
+        throw std::out_of_range("invalid string position");
+
     return m_pData[nIndex];
 }
 

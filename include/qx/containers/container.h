@@ -97,9 +97,9 @@
         return QX_CONST_CAST_THIS()->data();                              \
     }                                                                     \
                                                                           \
-    /* implement */ reference at(size_type ind) noexcept;                 \
+    /* implement */ reference at(size_type ind);                          \
                                                                           \
-    const_reference at(size_type ind) const noexcept                      \
+    const_reference at(size_type ind) const                               \
     {                                                                     \
         return QX_CONST_CAST_THIS()->at(ind);                             \
     }                                                                     \

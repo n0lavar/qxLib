@@ -237,8 +237,11 @@ inline typename vector2d<T>::pointer vector2d<T>::data() noexcept
     @retval        - element
 **/
 template<class T>
-inline typename vector2d<T>::reference vector2d<T>::at(size_type nIndex) noexcept
+inline typename vector2d<T>::reference vector2d<T>::at(size_type nIndex)
 {
+    if (nIndex >= size())
+        throw std::out_of_range("invalid string position");
+
     return m_pData[nIndex];
 }
 

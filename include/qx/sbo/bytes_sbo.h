@@ -8,12 +8,9 @@
 **/
 #pragma once
 
-#include <qx/meta/type_traits.h>
-
 #include <array>
 #include <cstddef>
 #include <cstring> // std::memmove
-//#include <variant>
 
 namespace qx
 {
@@ -25,6 +22,15 @@ enum class sbo_resize_type
     shrink_to_fit
 };
 
+/**
+
+    @class   bytes_sbo
+    @brief   A type erased small buffer object that works with raw data
+    @tparam  traits_t - SBO traits type
+    @author  Khrapov
+    @date    20.12.2025
+
+**/
 template<class traits_t>
 class bytes_sbo
 {
@@ -32,14 +38,15 @@ class bytes_sbo
     static constexpr size_type nSBOSize              = traits_t::nSBOSize;
     static constexpr bool      bShrinkToFitWhenSmall = traits_t::bShrinkToFitWhenSmall;
 
-    using buffer  = std::array<std::byte, nSBOSize>;
-    using variant = std::variant<std::byte*, buffer>;
+    using buffer = std::array<std::byte, nSBOSize>;
 
 public:
     bytes_sbo() noexcept = default;
     bytes_sbo(bytes_sbo&& other) noexcept;
 
     ~bytes_sbo() noexcept;
+
+    bytes_sbo& operator=(bytes_sbo&& other) noexcept;
 
     /**
         @brief  Get SBO data: from a buffer or from a heap
@@ -80,10 +87,16 @@ public:
     bool is_small() const noexcept;
 
 private:
-    variant   m_Data           = buffer();
+    union
+    {
+        std::byte* m_pData = nullptr;
+        buffer     m_Buffer;
+    };
+
     size_type m_nSize          = 0;
     size_type m_nAllocatedSize = 0;
 };
+
 } // namespace qx
 
 #include <qx/sbo/bytes_sbo.inl>
