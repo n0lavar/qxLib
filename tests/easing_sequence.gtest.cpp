@@ -84,10 +84,10 @@ protected:
     T m_Sequence;
 };
 
-using Implementations = ::testing::
+using implementations_type = ::testing::
     Types<qx::base_easing_sequence<float>, qx::base_easing_sequence<double>, qx::base_easing_sequence<long double> >;
 
-TYPED_TEST_SUITE(TestEasingSequence, Implementations);
+TYPED_TEST_SUITE(TestEasingSequence, implementations_type);
 
 TYPED_TEST(TestEasingSequence, common)
 {

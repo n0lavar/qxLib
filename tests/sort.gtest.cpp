@@ -158,7 +158,7 @@ using TestQxSort_less_100000_elements_big_unsigned_range    = TestTraits<std::le
 using TestQxSort_greater_100000_elements_big_unsigned_range = TestTraits<std::greater<>, 0, INT_MAX, 100000>;
 
 
-using Implementations = ::testing::Types<
+using implementations_type = ::testing::Types<
     TestQxSort_less_0_elements_small_signed_range,
     TestQxSort_greater_0_elements_small_signed_range,
     TestQxSort_less_1_elements_small_signed_range,
@@ -227,7 +227,7 @@ using Implementations = ::testing::Types<
     >;
 
 
-TYPED_TEST_SUITE(TestQxSort, Implementations);
+TYPED_TEST_SUITE(TestQxSort, implementations_type);
 
 
 TYPED_TEST(TestQxSort, sort_insertion_it)

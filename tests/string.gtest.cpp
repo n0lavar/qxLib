@@ -22,11 +22,11 @@
 QX_PUSH_SUPPRESS_MSVC_WARNINGS(5233);
 
 template<class string_traits_t>
-class TestQxString : public ::testing::Test
+class test_qx_string : public ::testing::Test
 {
 };
 
-using Implementations = ::testing::Types<
+using implementations_type = ::testing::Types<
     qx::string_traits::constructor<
         qx::string_traits::usings_traits<char>,
         qx::string_traits::hash_traits<char, qx::string_traits::usings_traits<char>>,
@@ -88,25 +88,35 @@ using Implementations = ::testing::Types<
         qx::string_traits::format_string_traits<wchar_t, qx::string_traits::usings_traits<wchar_t>>,
         qx::string_traits::format_traits<wchar_t, qx::string_traits::usings_traits<wchar_t>>>>;
 
-template<class TraitsType>
-void CheckCapacity(auto nPrevCapacity, auto nCapacity)
+template<class char_t, class size_t>
+static size_t capacity_to_small_string_size(size_t nCapacity)
 {
-    if ((nPrevCapacity + 1) != TraitsType::small_string_size())  // null terminator
-        EXPECT_EQ((nPrevCapacity + 1) % TraitsType::align(), 0); // null terminator
+    return (nCapacity + 1) * sizeof(char_t) + 2 * sizeof(size_t);
+}
 
-    if ((nCapacity + 1) != TraitsType::small_string_size())  // null terminator
-        EXPECT_EQ((nCapacity + 1) % TraitsType::align(), 0); // null terminator
+template<class TypeParam, class size_t>
+static void check_capacity(size_t nPrevCapacity, size_t nCapacity)
+{
+    const size_t nSmallStringBytes    = TypeParam::small_string_size() * sizeof(ValueType);
+    const size_t nPrevSmallStringSize = capacity_to_small_string_size<ValueType>(nPrevCapacity);
+    const size_t nSmallStringSize     = capacity_to_small_string_size<ValueType>(nCapacity);
 
-    EXPECT_GE((nPrevCapacity + 1), TraitsType::small_string_size()); // null terminator
-    EXPECT_GE((nCapacity + 1), TraitsType::small_string_size());     // null terminator
+    if (nPrevSmallStringSize != nSmallStringBytes)
+        EXPECT_EQ((nPrevCapacity + 1) % TypeParam::align(), 0);
 
-    if ((nPrevCapacity + 1) > TraitsType::small_string_size()) // null terminator
+    if (nSmallStringSize != nSmallStringBytes)
+        EXPECT_EQ((nCapacity + 1) % TypeParam::align(), 0);
+
+    EXPECT_GE(nPrevSmallStringSize, nSmallStringBytes);
+    EXPECT_GE(nSmallStringSize, nSmallStringBytes);
+
+    if (nPrevSmallStringSize > nSmallStringBytes)
         EXPECT_GE(nCapacity, nPrevCapacity);
 }
 
-TYPED_TEST_SUITE(TestQxString, Implementations);
+TYPED_TEST_SUITE(test_qx_string, implementations_type);
 
-TYPED_TEST(TestQxString, construct)
+TYPED_TEST(test_qx_string, construct)
 {
     // empty
     StringTypeTn str0;
@@ -187,7 +197,7 @@ TYPED_TEST(TestQxString, construct)
     //StringTypeTn str12(nullptr);
 }
 
-TYPED_TEST(TestQxString, assign)
+TYPED_TEST(test_qx_string, assign)
 {
     // from literal string
     StringTypeTn str1;
@@ -264,7 +274,7 @@ TYPED_TEST(TestQxString, assign)
     EXPECT_EQ(str11.size(), 11);
 }
 
-TYPED_TEST(TestQxString, operator_assign)
+TYPED_TEST(test_qx_string, operator_assign)
 {
     StringTypeTn str;
 
@@ -288,7 +298,9 @@ TYPED_TEST(TestQxString, operator_assign)
     str.free();
     EXPECT_TRUE(str.empty());
     EXPECT_EQ(str.size(), 0);
-    EXPECT_EQ(str.capacity(), TypeParam::small_string_size() - 1); // null terminator
+    EXPECT_EQ(
+        capacity_to_small_string_size<ValueType>(str.capacity()),
+        TypeParam::small_string_size() * sizeof(ValueType));
 
     str = std::move(tmpStr);
     EXPECT_STREQ(str.data(), STR("Hello world"));
@@ -303,7 +315,7 @@ TYPED_TEST(TestQxString, operator_assign)
     EXPECT_EQ(str.size(), 11);
 }
 
-TYPED_TEST(TestQxString, format)
+TYPED_TEST(test_qx_string, format)
 {
     StringTypeTn str0;
     str0.format(STR("The half of {} is {}"), 75, 75.f / 2);
@@ -339,21 +351,21 @@ TYPED_TEST(TestQxString, format)
     EXPECT_EQ(str2.size(), 11);
 }
 
-TYPED_TEST(TestQxString, size)
+TYPED_TEST(test_qx_string, size)
 {
     StringTypeTn str0;
     const auto   nPrevCapacity = str0.capacity();
     EXPECT_TRUE(str0.empty());
     EXPECT_FALSE(str0);
     EXPECT_EQ(str0.size(), 0);
-    CheckCapacity<TypeParam>(nPrevCapacity, str0.capacity());
+    check_capacity<TypeParam>(nPrevCapacity, str0.capacity());
 
     typename TypeParam::size_type nCapacity = str0.reserve(20);
     EXPECT_EQ(str0.size(), 0);
     EXPECT_TRUE(str0.empty());
     EXPECT_FALSE(str0);
     EXPECT_TRUE(nCapacity > 0);
-    CheckCapacity<TypeParam>(nPrevCapacity, nCapacity);
+    check_capacity<TypeParam>(nPrevCapacity, nCapacity);
 
     str0 = STR("some short sentence");
     EXPECT_TRUE(str0.size() > 0);
@@ -369,7 +381,7 @@ TYPED_TEST(TestQxString, size)
     EXPECT_TRUE(str0);
     nCapacity = str0.capacity();
     EXPECT_TRUE(str0.size() <= nCapacity);
-    CheckCapacity<TypeParam>(nPrevCapacity, nCapacity);
+    check_capacity<TypeParam>(nPrevCapacity, nCapacity);
 
     typename TypeParam::size_type nNewCapacity = str0.reserve(10);
     EXPECT_EQ(nNewCapacity, nCapacity);
@@ -382,7 +394,7 @@ TYPED_TEST(TestQxString, size)
     EXPECT_TRUE(str0);
 }
 
-TYPED_TEST(TestQxString, erase)
+TYPED_TEST(test_qx_string, erase)
 {
     StringTypeTn wholeStr = STR("you can erase some of these words");
 
@@ -473,7 +485,7 @@ auto insert = [](auto& str, auto pos, auto pszStr)
     }
 };
 
-TYPED_TEST(TestQxString, insert)
+TYPED_TEST(test_qx_string, insert)
 {
     StringTypeTn str;
     str.reserve(100); // cbegin() must be valid
@@ -526,7 +538,7 @@ TYPED_TEST(TestQxString, insert)
     test_continuous(std::list<ValueType>(), str.cbegin());
 }
 
-TYPED_TEST(TestQxString, find)
+TYPED_TEST(test_qx_string, find)
 {
     StringTypeTn str(STR("for string for words and for searching"));
 
@@ -553,7 +565,7 @@ TYPED_TEST(TestQxString, find)
     test(sStdStr.cbegin(), sStdStr.cend());
 }
 
-TYPED_TEST(TestQxString, substr)
+TYPED_TEST(test_qx_string, substr)
 {
     StringTypeTn str(STR("many different words placed here"));
 
@@ -578,7 +590,7 @@ TYPED_TEST(TestQxString, substr)
     EXPECT_EQ(svStr4, GTEST_SINGLE_ARGUMENT(StringTypeTn::string_view(STR("here"))));
 }
 
-TYPED_TEST(TestQxString, find_first_of)
+TYPED_TEST(test_qx_string, find_first_of)
 {
     StringTypeTn str(STR("many different words placed here"));
 
@@ -610,7 +622,7 @@ TYPED_TEST(TestQxString, find_first_of)
     test(StdString());
 }
 
-TYPED_TEST(TestQxString, find_last_of)
+TYPED_TEST(test_qx_string, find_last_of)
 {
     StringTypeTn str(STR("many different words placed here"));
 
@@ -642,7 +654,7 @@ TYPED_TEST(TestQxString, find_last_of)
     test(StdString());
 }
 
-TYPED_TEST(TestQxString, find_first_not_of)
+TYPED_TEST(test_qx_string, find_first_not_of)
 {
     StringTypeTn str(STR("e many different words placed here"));
 
@@ -674,7 +686,7 @@ TYPED_TEST(TestQxString, find_first_not_of)
     test(StdString());
 }
 
-TYPED_TEST(TestQxString, find_last_not_of)
+TYPED_TEST(test_qx_string, find_last_not_of)
 {
     StringTypeTn str(STR("many different words placed here"));
 
@@ -707,7 +719,7 @@ TYPED_TEST(TestQxString, find_last_not_of)
     test(StdString());
 }
 
-TYPED_TEST(TestQxString, split)
+TYPED_TEST(test_qx_string, split)
 {
     StringTypeTn str1(STR("many different words placed here"));
 
@@ -741,7 +753,7 @@ TYPED_TEST(TestQxString, split)
     check_comma_split(sStdString);
 }
 
-TYPED_TEST(TestQxString, remove)
+TYPED_TEST(test_qx_string, remove)
 {
     constexpr auto STRING = STR("000110000222345666");
 
@@ -812,7 +824,7 @@ TYPED_TEST(TestQxString, remove)
     check_remove_type(StdString());
 }
 
-TYPED_TEST(TestQxString, remove_all)
+TYPED_TEST(test_qx_string, remove_all)
 {
     constexpr auto STRING = STR("000011112222333987");
 
@@ -871,7 +883,7 @@ TYPED_TEST(TestQxString, remove_all)
     check_remove_all_type(StdString());
 }
 
-TYPED_TEST(TestQxString, cases)
+TYPED_TEST(test_qx_string, cases)
 {
     StringTypeTn str(STR("maNy diffeRent words placEd Here. yoU can test,iT. really"));
 
@@ -905,7 +917,7 @@ std::basic_istream<char_t, std::char_traits<char_t>>& operator>>(
     return is;
 }
 
-TYPED_TEST(TestQxString, to)
+TYPED_TEST(test_qx_string, to)
 {
     // clang requires to use 'template' keyword to treat 'to' as a dependent template name
     // you can drop this with MVSC
@@ -1028,7 +1040,7 @@ TYPED_TEST(TestQxString, to)
     }
 }
 
-TYPED_TEST(TestQxString, operator_plus_equal)
+TYPED_TEST(test_qx_string, operator_plus_equal)
 {
     StringTypeTn str(STR("word0 "));
     str += StringTypeTn(STR("word1 "));
@@ -1039,7 +1051,7 @@ TYPED_TEST(TestQxString, operator_plus_equal)
     EXPECT_STREQ(str.data(), STR("word0 word1 word2 word3!"));
 }
 
-TYPED_TEST(TestQxString, operator_equal)
+TYPED_TEST(test_qx_string, operator_equal)
 {
     StringTypeTn str(STR("e"));
     EXPECT_EQ(str, GTEST_SINGLE_ARGUMENT(StringTypeTn(STR("e"))));
@@ -1058,7 +1070,7 @@ TYPED_TEST(TestQxString, operator_equal)
     EXPECT_NE(str2, STR("word1"));
 }
 
-TYPED_TEST(TestQxString, operator_not_equal)
+TYPED_TEST(test_qx_string, operator_not_equal)
 {
     StringTypeTn str(STR("e"));
     EXPECT_EQ(str, GTEST_SINGLE_ARGUMENT(StringTypeTn(STR("e"))));
@@ -1077,7 +1089,7 @@ TYPED_TEST(TestQxString, operator_not_equal)
     EXPECT_NE(str2, STR("word1"));
 }
 
-TYPED_TEST(TestQxString, operator_less)
+TYPED_TEST(test_qx_string, operator_less)
 {
     StringTypeTn str(STR("5"));
 
@@ -1098,7 +1110,7 @@ TYPED_TEST(TestQxString, operator_less)
     EXPECT_LT(str, GTEST_SINGLE_ARGUMENT(StdStringArg(STR("6"))));
 }
 
-TYPED_TEST(TestQxString, operator_less_equal)
+TYPED_TEST(test_qx_string, operator_less_equal)
 {
     StringTypeTn str(STR("5"));
 
@@ -1119,7 +1131,7 @@ TYPED_TEST(TestQxString, operator_less_equal)
     EXPECT_LE(str, GTEST_SINGLE_ARGUMENT(StdStringArg(STR("6"))));
 }
 
-TYPED_TEST(TestQxString, operator_greater)
+TYPED_TEST(test_qx_string, operator_greater)
 {
     StringTypeTn str(STR("5"));
 
@@ -1140,7 +1152,7 @@ TYPED_TEST(TestQxString, operator_greater)
     EXPECT_LE(str, GTEST_SINGLE_ARGUMENT(StdStringArg(STR("6"))));
 }
 
-TYPED_TEST(TestQxString, operator_greater_equal)
+TYPED_TEST(test_qx_string, operator_greater_equal)
 {
     StringTypeTn str(STR("5"));
 
@@ -1161,7 +1173,7 @@ TYPED_TEST(TestQxString, operator_greater_equal)
     EXPECT_LT(str, GTEST_SINGLE_ARGUMENT(StdStringArg(STR("6"))));
 }
 
-TYPED_TEST(TestQxString, operator_braces)
+TYPED_TEST(test_qx_string, operator_braces)
 {
     StringTypeTn str = STR("Hello world");
     EXPECT_EQ(str[0], CH('H'));
@@ -1177,7 +1189,7 @@ TYPED_TEST(TestQxString, operator_braces)
     EXPECT_EQ(str[10], CH('d'));
 }
 
-TYPED_TEST(TestQxString, operator_plus)
+TYPED_TEST(test_qx_string, operator_plus)
 {
     StringTypeTn str;
 
@@ -1222,7 +1234,7 @@ TYPED_TEST(TestQxString, operator_plus)
     EXPECT_STREQ(str.data(), STR("word_std word_move "));
 }
 
-TYPED_TEST(TestQxString, hashes)
+TYPED_TEST(test_qx_string, hashes)
 {
     std::unordered_map<StringTypeTn, int> map;
     EXPECT_EQ(map.size(), 0);
@@ -1232,7 +1244,7 @@ TYPED_TEST(TestQxString, hashes)
     EXPECT_EQ(map[STR("Hello world")], 0);
 }
 
-TYPED_TEST(TestQxString, at)
+TYPED_TEST(test_qx_string, at)
 {
     StringTypeTn str(STR("Hello world!"));
     EXPECT_EQ(str[0], CH('H'));
@@ -1243,7 +1255,7 @@ TYPED_TEST(TestQxString, at)
     EXPECT_EQ(str.front(), CH('H'));
 }
 
-TYPED_TEST(TestQxString, from)
+TYPED_TEST(test_qx_string, from)
 {
     auto test_from = [](auto fromFunc)
     {
@@ -1324,7 +1336,7 @@ TYPED_TEST(TestQxString, from)
         });
 }
 
-TYPED_TEST(TestQxString, ends_with)
+TYPED_TEST(test_qx_string, ends_with)
 {
     StringTypeTn str(STR("0123456789"));
 
@@ -1386,7 +1398,7 @@ TYPED_TEST(TestQxString, ends_with)
     EXPECT_FALSE(str.ends_with(StringTypeTn(STR("trash"))));
 }
 
-TYPED_TEST(TestQxString, starts_with)
+TYPED_TEST(test_qx_string, starts_with)
 {
     StringTypeTn str(STR("0123456789"));
 
@@ -1448,7 +1460,7 @@ TYPED_TEST(TestQxString, starts_with)
     EXPECT_FALSE(str.starts_with(StringTypeTn(STR("trash"))));
 }
 
-TYPED_TEST(TestQxString, contains)
+TYPED_TEST(test_qx_string, contains)
 {
     StringTypeTn str(STR("for string for words and for searching"));
 
@@ -1471,7 +1483,7 @@ TYPED_TEST(TestQxString, contains)
     EXPECT_FALSE(str.contains(sStdStr2.cbegin(), sStdStr2.cend()));
 }
 
-TYPED_TEST(TestQxString, operator_stream_out)
+TYPED_TEST(test_qx_string, operator_stream_out)
 {
     StringTypeTn::sstream_type stream;
     StringTypeTn               in_string(STR("  0 one      two 3 .\t>>\n;;"));
@@ -1500,7 +1512,7 @@ TYPED_TEST(TestQxString, operator_stream_out)
     EXPECT_STREQ(out_string.data(), STR(";;"));
 }
 
-TYPED_TEST(TestQxString, operator_stream_in)
+TYPED_TEST(test_qx_string, operator_stream_in)
 {
     StringTypeTn::sstream_type stream;
     StdString                  in_string(STR("  0 one      two 3 .\t>>\n;;"));
@@ -1529,14 +1541,14 @@ TYPED_TEST(TestQxString, operator_stream_in)
     EXPECT_STREQ(out_string.data(), STR(";;"));
 }
 
-TYPED_TEST(TestQxString, string_view)
+TYPED_TEST(test_qx_string, string_view)
 {
     StringTypeTn                                                  qx_str = STR("qx_str");
     qx::basic_string_view<ValueType, std::char_traits<ValueType>> view1(qx_str);
     qx::basic_string_view<ValueType, std::char_traits<ValueType>> view2 = qx_str;
 }
 
-TYPED_TEST(TestQxString, small_string_optimization)
+TYPED_TEST(test_qx_string, small_string_optimization)
 {
     constexpr auto pszSmallString1 = STR("sm1");
     constexpr auto nSmallStrSize1  = qx::strlen(pszSmallString1);
@@ -1560,13 +1572,13 @@ TYPED_TEST(TestQxString, small_string_optimization)
         const auto   nPrevCapacity1 = str.capacity();
         EXPECT_EQ(str.size(), nSmallStrSize1);
         EXPECT_STREQ(str.data(), pszSmallString1);
-        CheckCapacity<TypeParam>(nPrevCapacity1, str.capacity());
+        check_capacity<TypeParam>(nPrevCapacity1, str.capacity());
 
         const auto nPrevCapacity2 = str.capacity();
         str                       = pszSmallString2;
         EXPECT_EQ(str.size(), nSmallStrSize2);
         EXPECT_STREQ(str.data(), pszSmallString2);
-        CheckCapacity<TypeParam>(nPrevCapacity2, str.capacity());
+        check_capacity<TypeParam>(nPrevCapacity2, str.capacity());
     }
 
     // from small to big
@@ -1575,13 +1587,13 @@ TYPED_TEST(TestQxString, small_string_optimization)
         const auto   nPrevCapacity1 = str.capacity();
         EXPECT_EQ(str.size(), nSmallStrSize1);
         EXPECT_STREQ(str.data(), pszSmallString1);
-        CheckCapacity<TypeParam>(nPrevCapacity1, str.capacity());
+        check_capacity<TypeParam>(nPrevCapacity1, str.capacity());
 
         const auto nPrevCapacity2 = str.capacity();
         str                       = pszBigString1;
         EXPECT_EQ(str.size(), nBigStrSize1);
         EXPECT_STREQ(str.data(), pszBigString1);
-        CheckCapacity<TypeParam>(nPrevCapacity2, str.capacity());
+        check_capacity<TypeParam>(nPrevCapacity2, str.capacity());
     }
 
     // from big to big
@@ -1590,13 +1602,13 @@ TYPED_TEST(TestQxString, small_string_optimization)
         const auto   nPrevCapacity1 = str.capacity();
         EXPECT_EQ(str.size(), nBigStrSize1);
         EXPECT_STREQ(str.data(), pszBigString1);
-        CheckCapacity<TypeParam>(nPrevCapacity1, str.capacity());
+        check_capacity<TypeParam>(nPrevCapacity1, str.capacity());
 
         const auto nPrevCapacity2 = str.capacity();
         str                       = pszBigString2;
         EXPECT_EQ(str.size(), nBigStrSize2);
         EXPECT_STREQ(str.data(), pszBigString2);
-        CheckCapacity<TypeParam>(nPrevCapacity2, str.capacity());
+        check_capacity<TypeParam>(nPrevCapacity2, str.capacity());
     }
 
     // from big to small
@@ -1605,13 +1617,13 @@ TYPED_TEST(TestQxString, small_string_optimization)
         const auto   nPrevCapacity1 = str.capacity();
         EXPECT_EQ(str.size(), nBigStrSize1);
         EXPECT_STREQ(str.data(), pszBigString1);
-        CheckCapacity<TypeParam>(nPrevCapacity1, str.capacity());
+        check_capacity<TypeParam>(nPrevCapacity1, str.capacity());
 
         const auto nPrevCapacity2 = str.capacity();
         str                       = pszSmallString1;
         EXPECT_EQ(str.size(), nSmallStrSize1);
         EXPECT_STREQ(str.data(), pszSmallString1);
-        CheckCapacity<TypeParam>(nPrevCapacity2, str.capacity());
+        check_capacity<TypeParam>(nPrevCapacity2, str.capacity());
     }
 
     // fit big to small
@@ -1620,22 +1632,24 @@ TYPED_TEST(TestQxString, small_string_optimization)
         const auto   nPrevCapacity1 = str.capacity();
         EXPECT_EQ(str.size(), nBigStrSize1);
         EXPECT_STREQ(str.data(), pszBigString1);
-        CheckCapacity<TypeParam>(nPrevCapacity1, str.capacity());
+        check_capacity<TypeParam>(nPrevCapacity1, str.capacity());
 
         const auto nPrevCapacity2 = str.capacity();
         str                       = pszSmallString1;
         EXPECT_EQ(str.size(), nSmallStrSize1);
         EXPECT_STREQ(str.data(), pszSmallString1);
-        CheckCapacity<TypeParam>(nPrevCapacity2, str.capacity());
+        check_capacity<TypeParam>(nPrevCapacity2, str.capacity());
 
         str.shrink_to_fit();
         EXPECT_EQ(str.size(), nSmallStrSize1);
-        EXPECT_EQ(str.capacity() + 1, TypeParam::small_string_size()); // null terminator
+        EXPECT_EQ(
+            capacity_to_small_string_size<ValueType>(str.capacity()),
+            TypeParam::small_string_size() * sizeof(ValueType));
         EXPECT_STREQ(str.data(), pszSmallString1);
     }
 }
 
-TYPED_TEST(TestQxString, replase)
+TYPED_TEST(test_qx_string, replase)
 {
     auto         pszStartStr = STR("Let me help you with your baggage");
     StringTypeTn str;
@@ -1715,7 +1729,7 @@ TYPED_TEST(TestQxString, replase)
     test_replace(StdString(), StdString());
 }
 
-TYPED_TEST(TestQxString, replase_all)
+TYPED_TEST(test_qx_string, replase_all)
 {
     auto test_replace_all = [](auto type_find_var, auto type_replace_var)
     {
@@ -1769,7 +1783,7 @@ TYPED_TEST(TestQxString, replase_all)
     test_replace_all(StdString(), StdString());
 }
 
-TYPED_TEST(TestQxString, remove_prefix)
+TYPED_TEST(test_qx_string, remove_prefix)
 {
     auto         pszStr = STR("12345");
     StringTypeTn str;
@@ -1804,7 +1818,7 @@ TYPED_TEST(TestQxString, remove_prefix)
     test_remove_prefix(StdString());
 }
 
-TYPED_TEST(TestQxString, remove_suffix)
+TYPED_TEST(test_qx_string, remove_suffix)
 {
     auto         pszStr = STR("12345");
     StringTypeTn str;
@@ -1839,12 +1853,12 @@ TYPED_TEST(TestQxString, remove_suffix)
     test_remove_suffix(StdString());
 }
 
-TYPED_TEST(TestQxString, max_size)
+TYPED_TEST(test_qx_string, max_size)
 {
     static_assert(StringType::max_size() == 18'446'744'073'709'551'613u);
 }
 
-TYPED_TEST(TestQxString, pop_back)
+TYPED_TEST(test_qx_string, pop_back)
 {
     StringTypeTn str;
 
@@ -1857,7 +1871,7 @@ TYPED_TEST(TestQxString, pop_back)
     EXPECT_STREQ(str.data(), STR(""));
 }
 
-TYPED_TEST(TestQxString, pop_front)
+TYPED_TEST(test_qx_string, pop_front)
 {
     StringTypeTn str;
 
@@ -1872,7 +1886,7 @@ TYPED_TEST(TestQxString, pop_front)
     EXPECT_EQ(str.size(), 0);
 }
 
-TYPED_TEST(TestQxString, trim_left)
+TYPED_TEST(test_qx_string, trim_left)
 {
     StringTypeTn str;
 
@@ -1939,7 +1953,7 @@ TYPED_TEST(TestQxString, trim_left)
     EXPECT_EQ(str.size(), 0);
 }
 
-TYPED_TEST(TestQxString, trim_right)
+TYPED_TEST(test_qx_string, trim_right)
 {
     StringTypeTn str;
 
@@ -2006,7 +2020,7 @@ TYPED_TEST(TestQxString, trim_right)
     EXPECT_EQ(str.size(), 0);
 }
 
-TYPED_TEST(TestQxString, trim)
+TYPED_TEST(test_qx_string, trim)
 {
     StringTypeTn str;
 
@@ -2073,7 +2087,7 @@ TYPED_TEST(TestQxString, trim)
     EXPECT_EQ(str.size(), 0);
 }
 
-TYPED_TEST(TestQxString, compare)
+TYPED_TEST(test_qx_string, compare)
 {
     StringTypeTn str(STR("5"));
 
@@ -2097,7 +2111,7 @@ TYPED_TEST(TestQxString, compare)
     test_compare_type(StdString(STR("")));
 }
 
-TYPED_TEST(TestQxString, append)
+TYPED_TEST(test_qx_string, append)
 {
     StringTypeTn str;
 
@@ -2137,7 +2151,7 @@ TYPED_TEST(TestQxString, append)
     test_append_type(StdString(STR("")));
 }
 
-TYPED_TEST(TestQxString, append_format)
+TYPED_TEST(test_qx_string, append_format)
 {
     StringTypeTn str;
 
@@ -2154,7 +2168,7 @@ TYPED_TEST(TestQxString, append_format)
     EXPECT_EQ(str.size(), 5);
 }
 
-TYPED_TEST(TestQxString, copy)
+TYPED_TEST(test_qx_string, copy)
 {
     std::vector<ValueType> buffer(10);
     StringTypeTn           str(STR("0123456789"));
@@ -2176,7 +2190,7 @@ TYPED_TEST(TestQxString, copy)
     EXPECT_EQ(str.copy(nullptr, 2, 5), 0);
 }
 
-TYPED_TEST(TestQxString, swap)
+TYPED_TEST(test_qx_string, swap)
 {
     StringTypeTn str1(STR("str1"));
     StringTypeTn str2(STR("str2"));
@@ -2190,7 +2204,7 @@ TYPED_TEST(TestQxString, swap)
     EXPECT_STREQ(str2.data(), STR("str2"));
 }
 
-TYPED_TEST(TestQxString, rfind)
+TYPED_TEST(test_qx_string, rfind)
 {
     StringTypeTn str(STR("for string for words and for searching"));
 

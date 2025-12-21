@@ -33,12 +33,20 @@ enum class sbo_resize_type
 template<class traits_t>
 class sbo_bytes
 {
-    using traits_type                                = traits_t;
-    using size_type                                  = typename traits_type::size_type;
-    static constexpr size_type nSBOSize              = traits_type::nSBOSize;
-    static constexpr bool      bShrinkToFitWhenSmall = traits_type::bShrinkToFitWhenSmall;
+public:
+    using traits_type = traits_t;
+    using size_type   = typename traits_type::size_type;
 
-    using buffer = std::array<std::byte, nSBOSize>;
+    // the final size of the whole sbo_bytes object, including internal data
+    static constexpr size_type nSBOSize = traits_type::nSBOSize;
+    static_assert(nSBOSize >= 16);
+
+    // when the size changes so it becomes less or equal a buffer size, should we free a memory and move back to a buffer?
+    static constexpr bool bShrinkToFitWhenSmall = traits_type::bShrinkToFitWhenSmall;
+
+private:
+    static constexpr size_type nBufferSize = nSBOSize - 2 * sizeof(size_type);
+    using buffer                           = std::array<std::byte, nBufferSize>;
 
 public:
     sbo_bytes() noexcept = default;
@@ -94,8 +102,8 @@ public:
 private:
     union
     {
-        std::byte* m_pData = nullptr;
         buffer     m_Buffer;
+        std::byte* m_pData = nullptr;
     };
 
     size_type m_nSize          = 0;

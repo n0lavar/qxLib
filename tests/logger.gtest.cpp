@@ -94,7 +94,7 @@ constexpr qx::char_type LOG_CATEGORY_EMPTY[] = QX_TEXT("");
 constexpr qx::char_type LOG_CATEGORY_TAG1[]  = QX_TEXT("tag1");
 constexpr qx::char_type LOG_CATEGORY_TAG2[]  = QX_TEXT("tag2");
 
-using Implementations = ::testing::Types<
+using implementations_type = ::testing::Types<
     LoggerTraits<LOGS_FILE_DEFAULT, UNIT_DEFAULT, LOG_FILE_H, LOG_CATEGORY_EMPTY>,
     LoggerTraits<LOGS_FILE_DEFAULT, UNIT_FILE, LOG_FILE_H, LOG_CATEGORY_EMPTY>,
     LoggerTraits<LOGS_FILE_DEFAULT, UNIT_FUNC, LOG_FILE_H, LOG_CATEGORY_EMPTY>,
@@ -304,7 +304,7 @@ protected:
     qx::string                  m_sLogFilePath;
 };
 
-TYPED_TEST_SUITE(TestLogger, Implementations);
+TYPED_TEST_SUITE(TestLogger, implementations_type);
 
 #define TEST_LOG(traceFile, format, ...) \
     myLogger                             \

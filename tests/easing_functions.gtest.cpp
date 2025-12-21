@@ -37,9 +37,9 @@ protected:
     }
 };
 
-using Implementations = ::testing::Types<float, double, long double>;
+using implementations_type = ::testing::Types<float, double, long double>;
 
-TYPED_TEST_SUITE(TestEasingFunctions, Implementations);
+TYPED_TEST_SUITE(TestEasingFunctions, implementations_type);
 
 TYPED_TEST(TestEasingFunctions, common)
 {

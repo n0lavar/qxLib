@@ -77,10 +77,10 @@ protected:
     T m_Element = T(qx::easing::linear_func<typename T::type>);
 };
 
-using Implementations = ::testing::
+using implementations_type = ::testing::
     Types<qx::base_easing_element<float>, qx::base_easing_element<double>, qx::base_easing_element<long double> >;
 
-TYPED_TEST_SUITE(TestEasingElements, Implementations);
+TYPED_TEST_SUITE(TestEasingElements, implementations_type);
 
 TYPED_TEST(TestEasingElements, construct)
 {

@@ -19,6 +19,10 @@ sbo_bytes<traits_t>::sbo_bytes(sbo_bytes&& other) noexcept
 template<class traits_t>
 sbo_bytes<traits_t>::~sbo_bytes() noexcept
 {
+    static_assert(
+        (sizeof(sbo_bytes) & (sizeof(sbo_bytes) - 1)) == 0,
+        "The buffer size should be such that the final size of the structure is aligned");
+
     free();
 }
 
@@ -55,11 +59,6 @@ sbo_bytes<traits_t>& sbo_bytes<traits_t>::operator=(sbo_bytes&& other) noexcept
 template<class traits_t>
 std::byte* sbo_bytes<traits_t>::data() noexcept
 {
-    static_assert(
-        sizeof(sbo_bytes) == 32 || sizeof(sbo_bytes) == 64 || sizeof(sbo_bytes) == 128 || sizeof(sbo_bytes) == 256
-            || sizeof(sbo_bytes) > 256,
-        "The buffer size should be such that the final size of the structure is aligned");
-
     if (is_small())
         return m_Buffer.data();
     else

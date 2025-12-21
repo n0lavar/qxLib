@@ -76,7 +76,7 @@ struct allocation_traits<char, usings_char_traits_t>
 
     static constexpr typename usings_char_traits_t::size_type small_string_size() noexcept
     {
-        return 48;
+        return 64;
     }
 
     static constexpr bool shrink_to_fit_when_small() noexcept
@@ -97,10 +97,10 @@ struct allocation_traits<wchar_t, usings_char_traits_t>
     {
 #if QX_MSVC
         // sizeof(wchar_t) == 2
-        return 24;
+        return 32;
 #else
         // sizeof(wchar_t) == 4
-        return 12;
+        return 16;
 #endif
     }
 
@@ -118,7 +118,7 @@ struct small_string_allocation_traits<char, usings_char_traits_t> : public alloc
 {
     static constexpr typename usings_char_traits_t::size_type small_string_size() noexcept
     {
-        return 16;
+        return 32;
     }
 };
 
@@ -130,10 +130,10 @@ struct small_string_allocation_traits<wchar_t, usings_char_traits_t>
     {
 #if QX_MSVC
         // sizeof(wchar_t) == 2
-        return 8;
+        return 16;
 #else
         // sizeof(wchar_t) == 4
-        return 4;
+        return 8;
 #endif
     }
 };
@@ -151,7 +151,7 @@ struct big_string_allocation_traits<char, usings_char_traits_t> : public allocat
 
     static constexpr typename usings_char_traits_t::size_type small_string_size() noexcept
     {
-        return 240;
+        return 256;
     }
 };
 
@@ -168,10 +168,10 @@ struct big_string_allocation_traits<wchar_t, usings_char_traits_t>
     {
 #if QX_MSVC
         // sizeof(wchar_t) == 2
-        return 120;
+        return 128;
 #else
         // sizeof(wchar_t) == 4
-        return 60;
+        return 64;
 #endif
     }
 };

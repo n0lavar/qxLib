@@ -51,7 +51,7 @@ protected:
     qx::moving_average<typename traits_t::type> m_MovingAverage;
 };
 
-using Implementations = ::testing::Types<
+using implementations_type = ::testing::Types<
     MovingAverageTraits<float, 10, 0, qx::get_moving_average_simple_weights<float>>,
     MovingAverageTraits<float, 10, 0, qx::get_moving_average_linear_weights<float>>,
     MovingAverageTraits<float, 10, 0, qx::get_moving_average_exp_weights<float>>,
@@ -68,7 +68,7 @@ using Implementations = ::testing::Types<
     MovingAverageTraits<double, 15, 0, qx::get_moving_average_linear_weights<double>>,
     MovingAverageTraits<double, 15, 0, qx::get_moving_average_exp_weights<double>>>;
 
-TYPED_TEST_SUITE(TestMovingAverageClass, Implementations);
+TYPED_TEST_SUITE(TestMovingAverageClass, implementations_type);
 
 TYPED_TEST(TestMovingAverageClass, weights_sum)
 {

@@ -17,9 +17,9 @@ class TestRect : public ::testing::Test
 {
 };
 
-using Implementations = ::testing::Types<glm::vec2, glm::dvec2>;
+using implementations_type = ::testing::Types<glm::vec2, glm::dvec2>;
 
-TYPED_TEST_SUITE(TestRect, Implementations);
+TYPED_TEST_SUITE(TestRect, implementations_type);
 
 template<class rect_t>
 void CheckRect(
