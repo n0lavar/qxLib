@@ -104,85 +104,93 @@ $(function() {
 <div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> traits_t&gt;</div>
 <div class="line"><a name="l00034"></a><span class="lineno"><a class="line" href="classqx_1_1sbo__bytes.html">   34</a></span>&#160;<span class="keyword">class </span><a class="code" href="classqx_1_1sbo__bytes.html">sbo_bytes</a></div>
 <div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;{</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    <span class="keyword">using</span> traits_type                                = traits_t;</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    <span class="keyword">using</span> size_type                                  = <span class="keyword">typename</span> traits_type::size_type;</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    <span class="keyword">static</span> constexpr size_type nSBOSize              = traits_type::nSBOSize;</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    <span class="keyword">static</span> constexpr <span class="keywordtype">bool</span>      bShrinkToFitWhenSmall = traits_type::bShrinkToFitWhenSmall;</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160; </div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    <span class="keyword">using</span> buffer = std::array&lt;std::byte, nSBOSize&gt;;</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160; </div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    <a class="code" href="classqx_1_1sbo__bytes.html">sbo_bytes</a>() noexcept = <span class="keywordflow">default</span>;</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    <a class="code" href="classqx_1_1sbo__bytes.html">sbo_bytes</a>(<a class="code" href="classqx_1_1sbo__bytes.html">sbo_bytes</a>&amp;&amp; other) noexcept;</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    <span class="keyword">using</span> traits_type = traits_t;</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    <span class="keyword">using</span> size_type   = <span class="keyword">typename</span> traits_type::size_type;</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160; </div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    <span class="comment">// the final size of the whole sbo_bytes object, including internal data</span></div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    <span class="keyword">static</span> constexpr size_type nSBOSize = traits_type::nSBOSize;</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    static_assert(nSBOSize &gt;= 16);</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160; </div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    <span class="comment">// when the size changes so it becomes less or equal a buffer size, should we free a memory and move back to a buffer?</span></div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    <span class="keyword">static</span> constexpr <span class="keywordtype">bool</span> bShrinkToFitWhenSmall = traits_type::bShrinkToFitWhenSmall;</div>
 <div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160; </div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    ~<a class="code" href="classqx_1_1sbo__bytes.html">sbo_bytes</a>() noexcept;</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160; </div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    <a class="code" href="classqx_1_1sbo__bytes.html">sbo_bytes</a>&amp; operator=(<a class="code" href="classqx_1_1sbo__bytes.html">sbo_bytes</a>&amp;&amp; other) noexcept;</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="comment">    /**</span></div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<span class="comment">        @brief  Get SBO data: from a buffer or from a heap</span></div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<span class="comment">        @retval - string pointer</span></div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;<span class="comment">    **/</span></div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    std::byte* <a class="code" href="classqx_1_1sbo__bytes.html#aec88056635b3321541d08bc7bdbae264">data</a>() noexcept;</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;<span class="comment">    /**</span></div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;<span class="comment">        @brief Free allocated memory</span></div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;<span class="comment">    **/</span></div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classqx_1_1sbo__bytes.html#a8bd6317cc38b445a18967a1c4c243daf">free</a>() noexcept;</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;<span class="comment">    /**</span></div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;<span class="comment">        @brief  Resize SBO</span></div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;<span class="comment">        @param  nNewSize   - new size (bytes)</span></div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;<span class="comment">        @param  nAlign     - align (if 16 then size 13-&gt;16 16-&gt;16 18-&gt;32)</span></div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;<span class="comment">        @param  eType      - resize type</span></div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;<span class="comment">        @param  moveObject - a function that moves an object from one location to another</span></div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;<span class="comment">        @retval            - true if memory alloc is successful</span></div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;<span class="comment">    **/</span></div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="classqx_1_1sbo__bytes.html#ad77570ffdd805cbd6ee8ba9950ff7ca5">resize</a>(</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;        size_type       nNewSize,</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;        size_type       nAlign,</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;        sbo_resize_type eType,</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;        <span class="keywordtype">void</span>* (*moveObject)(<span class="keywordtype">void</span>* pDest, <span class="keyword">const</span> <span class="keywordtype">void</span>* pSource, std::size_t nSize)) noexcept;</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;<span class="comment">    /**</span></div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;<span class="comment">        @brief  Get SBO size (bytes)</span></div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;<span class="comment">        @retval - SBO size (bytes)</span></div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;<span class="comment">    **/</span></div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;    size_type <a class="code" href="classqx_1_1sbo__bytes.html#a6fa9d704a7ce66f8aeb8566114b49bec">size</a>() <span class="keyword">const</span> noexcept;</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;<span class="comment">    /**</span></div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;<span class="comment">        @brief  Get SBO capacity (bytes)</span></div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;<span class="comment">        @retval - SBO capacity (bytes), can&#39;t be less than nSBOSize</span></div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;<span class="comment">    **/</span></div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;    size_type <a class="code" href="classqx_1_1sbo__bytes.html#aa05535ae19a99e8196605399d0578dd4">capacity</a>() <span class="keyword">const</span> noexcept;</div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;<span class="comment">    /**</span></div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;<span class="comment">        @brief  Is the SBO small and fits into the local buffer</span></div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;<span class="comment">        @retval - true if the SBO is small and fits into the local buffer</span></div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;<span class="comment">    **/</span></div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="classqx_1_1sbo__bytes.html#adbc1d9b357270724282dde54593c2dc7">is_small</a>() <span class="keyword">const</span> noexcept;</div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160; </div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;    <span class="keyword">union</span></div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;    {</div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;        std::byte* m_pData = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;        buffer     m_Buffer;</div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;    };</div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160; </div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;    size_type m_nSize          = 0;</div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;    size_type m_nAllocatedSize = 0;</div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;};</div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160; </div>
-<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;} <span class="comment">// namespace qx</span></div>
-<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160; </div>
-<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="sbo__bytes_8inl.html">qx/sbo/sbo_bytes.inl</a>&gt;</span></div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    <span class="keyword">static</span> constexpr size_type nBufferSize = nSBOSize - 2 * <span class="keyword">sizeof</span>(size_type);</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    <span class="keyword">using</span> buffer                           = std::array&lt;std::byte, nBufferSize&gt;;</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160; </div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    <a class="code" href="classqx_1_1sbo__bytes.html">sbo_bytes</a>() noexcept = <span class="keywordflow">default</span>;</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    <a class="code" href="classqx_1_1sbo__bytes.html">sbo_bytes</a>(<a class="code" href="classqx_1_1sbo__bytes.html">sbo_bytes</a>&amp;&amp; other) noexcept;</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160; </div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    ~<a class="code" href="classqx_1_1sbo__bytes.html">sbo_bytes</a>() noexcept;</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160; </div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    <a class="code" href="classqx_1_1sbo__bytes.html">sbo_bytes</a>&amp; operator=(<a class="code" href="classqx_1_1sbo__bytes.html">sbo_bytes</a>&amp;&amp; other) noexcept;</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;<span class="comment">    /**</span></div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;<span class="comment">        @brief  Get SBO data: from a buffer or from a heap</span></div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;<span class="comment">        @retval - string pointer</span></div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;<span class="comment">    **/</span></div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    std::byte* <a class="code" href="classqx_1_1sbo__bytes.html#aec88056635b3321541d08bc7bdbae264">data</a>() noexcept;</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;<span class="comment">    /**</span></div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;<span class="comment">        @brief Free allocated memory</span></div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;<span class="comment">    **/</span></div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classqx_1_1sbo__bytes.html#a8bd6317cc38b445a18967a1c4c243daf">free</a>() noexcept;</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;<span class="comment">    /**</span></div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;<span class="comment">        @brief  Resize SBO</span></div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;<span class="comment">        @param  nNewSize   - new size (bytes)</span></div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;<span class="comment">        @param  nAlign     - align (if 16 then size 13-&gt;16 16-&gt;16 18-&gt;32)</span></div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;<span class="comment">        @param  eType      - resize type</span></div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;<span class="comment">        @param  moveObject - a function that moves an object from one location to another</span></div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;<span class="comment">        @retval            - true if memory alloc is successful</span></div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;<span class="comment">    **/</span></div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="classqx_1_1sbo__bytes.html#ad77570ffdd805cbd6ee8ba9950ff7ca5">resize</a>(</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;        size_type       nNewSize,</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;        size_type       nAlign,</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;        sbo_resize_type eType,</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;        <span class="keywordtype">void</span>* (*moveObject)(<span class="keywordtype">void</span>* pDest, <span class="keyword">const</span> <span class="keywordtype">void</span>* pSource, std::size_t nSize)) noexcept;</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;<span class="comment">    /**</span></div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;<span class="comment">        @brief  Get SBO size (bytes)</span></div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;<span class="comment">        @retval - SBO size (bytes)</span></div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;<span class="comment">    **/</span></div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;    size_type <a class="code" href="classqx_1_1sbo__bytes.html#a6fa9d704a7ce66f8aeb8566114b49bec">size</a>() <span class="keyword">const</span> noexcept;</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;<span class="comment">    /**</span></div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;<span class="comment">        @brief  Get SBO capacity (bytes)</span></div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;<span class="comment">        @retval - SBO capacity (bytes), can&#39;t be less than nSBOSize</span></div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;<span class="comment">    **/</span></div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;    size_type <a class="code" href="classqx_1_1sbo__bytes.html#aa05535ae19a99e8196605399d0578dd4">capacity</a>() <span class="keyword">const</span> noexcept;</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;<span class="comment">    /**</span></div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;<span class="comment">        @brief  Is the SBO small and fits into the local buffer</span></div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;<span class="comment">        @retval - true if the SBO is small and fits into the local buffer</span></div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;<span class="comment">    **/</span></div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="classqx_1_1sbo__bytes.html#adbc1d9b357270724282dde54593c2dc7">is_small</a>() <span class="keyword">const</span> noexcept;</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160; </div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;    <span class="keyword">union</span></div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;    {</div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;        buffer     m_Buffer;</div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;        std::byte* m_pData = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;    };</div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160; </div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;    size_type m_nSize          = 0;</div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;    size_type m_nAllocatedSize = 0;</div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;};</div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160; </div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;} <span class="comment">// namespace qx</span></div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160; </div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="sbo__bytes_8inl.html">qx/sbo/sbo_bytes.inl</a>&gt;</span></div>
 <div class="ttc" id="aclassqx_1_1sbo__bytes_html"><div class="ttname"><a href="classqx_1_1sbo__bytes.html">qx::sbo_bytes</a></div><div class="ttdoc">A type erased small buffer object that works with raw data.</div><div class="ttdef"><b>Definition:</b> <a href="sbo__bytes_8h_source.html#l00034">sbo_bytes.h:35</a></div></div>
-<div class="ttc" id="aclassqx_1_1sbo__bytes_html_a6fa9d704a7ce66f8aeb8566114b49bec"><div class="ttname"><a href="classqx_1_1sbo__bytes.html#a6fa9d704a7ce66f8aeb8566114b49bec">qx::sbo_bytes::size</a></div><div class="ttdeci">size_type size() const noexcept</div><div class="ttdoc">Get SBO size (bytes)</div><div class="ttdef"><b>Definition:</b> <a href="sbo__bytes_8inl_source.html#l00144">sbo_bytes.inl:144</a></div></div>
-<div class="ttc" id="aclassqx_1_1sbo__bytes_html_a8bd6317cc38b445a18967a1c4c243daf"><div class="ttname"><a href="classqx_1_1sbo__bytes.html#a8bd6317cc38b445a18967a1c4c243daf">qx::sbo_bytes::free</a></div><div class="ttdeci">void free() noexcept</div><div class="ttdoc">Free allocated memory.</div><div class="ttdef"><b>Definition:</b> <a href="sbo__bytes_8inl_source.html#l00070">sbo_bytes.inl:70</a></div></div>
-<div class="ttc" id="aclassqx_1_1sbo__bytes_html_aa05535ae19a99e8196605399d0578dd4"><div class="ttname"><a href="classqx_1_1sbo__bytes.html#aa05535ae19a99e8196605399d0578dd4">qx::sbo_bytes::capacity</a></div><div class="ttdeci">size_type capacity() const noexcept</div><div class="ttdoc">Get SBO capacity (bytes)</div><div class="ttdef"><b>Definition:</b> <a href="sbo__bytes_8inl_source.html#l00150">sbo_bytes.inl:150</a></div></div>
-<div class="ttc" id="aclassqx_1_1sbo__bytes_html_ad77570ffdd805cbd6ee8ba9950ff7ca5"><div class="ttname"><a href="classqx_1_1sbo__bytes.html#ad77570ffdd805cbd6ee8ba9950ff7ca5">qx::sbo_bytes::resize</a></div><div class="ttdeci">bool resize(size_type nNewSize, size_type nAlign, sbo_resize_type eType, void *(*moveObject)(void *pDest, const void *pSource, std::size_t nSize)) noexcept</div><div class="ttdoc">Resize SBO.</div><div class="ttdef"><b>Definition:</b> <a href="sbo__bytes_8inl_source.html#l00083">sbo_bytes.inl:83</a></div></div>
-<div class="ttc" id="aclassqx_1_1sbo__bytes_html_adbc1d9b357270724282dde54593c2dc7"><div class="ttname"><a href="classqx_1_1sbo__bytes.html#adbc1d9b357270724282dde54593c2dc7">qx::sbo_bytes::is_small</a></div><div class="ttdeci">bool is_small() const noexcept</div><div class="ttdoc">Is the SBO small and fits into the local buffer.</div><div class="ttdef"><b>Definition:</b> <a href="sbo__bytes_8inl_source.html#l00159">sbo_bytes.inl:159</a></div></div>
-<div class="ttc" id="aclassqx_1_1sbo__bytes_html_aec88056635b3321541d08bc7bdbae264"><div class="ttname"><a href="classqx_1_1sbo__bytes.html#aec88056635b3321541d08bc7bdbae264">qx::sbo_bytes::data</a></div><div class="ttdeci">std::byte * data() noexcept</div><div class="ttdoc">Get SBO data: from a buffer or from a heap.</div><div class="ttdef"><b>Definition:</b> <a href="sbo__bytes_8inl_source.html#l00056">sbo_bytes.inl:56</a></div></div>
+<div class="ttc" id="aclassqx_1_1sbo__bytes_html_a6fa9d704a7ce66f8aeb8566114b49bec"><div class="ttname"><a href="classqx_1_1sbo__bytes.html#a6fa9d704a7ce66f8aeb8566114b49bec">qx::sbo_bytes::size</a></div><div class="ttdeci">size_type size() const noexcept</div><div class="ttdoc">Get SBO size (bytes)</div><div class="ttdef"><b>Definition:</b> <a href="sbo__bytes_8inl_source.html#l00143">sbo_bytes.inl:143</a></div></div>
+<div class="ttc" id="aclassqx_1_1sbo__bytes_html_a8bd6317cc38b445a18967a1c4c243daf"><div class="ttname"><a href="classqx_1_1sbo__bytes.html#a8bd6317cc38b445a18967a1c4c243daf">qx::sbo_bytes::free</a></div><div class="ttdeci">void free() noexcept</div><div class="ttdoc">Free allocated memory.</div><div class="ttdef"><b>Definition:</b> <a href="sbo__bytes_8inl_source.html#l00069">sbo_bytes.inl:69</a></div></div>
+<div class="ttc" id="aclassqx_1_1sbo__bytes_html_aa05535ae19a99e8196605399d0578dd4"><div class="ttname"><a href="classqx_1_1sbo__bytes.html#aa05535ae19a99e8196605399d0578dd4">qx::sbo_bytes::capacity</a></div><div class="ttdeci">size_type capacity() const noexcept</div><div class="ttdoc">Get SBO capacity (bytes)</div><div class="ttdef"><b>Definition:</b> <a href="sbo__bytes_8inl_source.html#l00149">sbo_bytes.inl:149</a></div></div>
+<div class="ttc" id="aclassqx_1_1sbo__bytes_html_ad77570ffdd805cbd6ee8ba9950ff7ca5"><div class="ttname"><a href="classqx_1_1sbo__bytes.html#ad77570ffdd805cbd6ee8ba9950ff7ca5">qx::sbo_bytes::resize</a></div><div class="ttdeci">bool resize(size_type nNewSize, size_type nAlign, sbo_resize_type eType, void *(*moveObject)(void *pDest, const void *pSource, std::size_t nSize)) noexcept</div><div class="ttdoc">Resize SBO.</div><div class="ttdef"><b>Definition:</b> <a href="sbo__bytes_8inl_source.html#l00082">sbo_bytes.inl:82</a></div></div>
+<div class="ttc" id="aclassqx_1_1sbo__bytes_html_adbc1d9b357270724282dde54593c2dc7"><div class="ttname"><a href="classqx_1_1sbo__bytes.html#adbc1d9b357270724282dde54593c2dc7">qx::sbo_bytes::is_small</a></div><div class="ttdeci">bool is_small() const noexcept</div><div class="ttdoc">Is the SBO small and fits into the local buffer.</div><div class="ttdef"><b>Definition:</b> <a href="sbo__bytes_8inl_source.html#l00158">sbo_bytes.inl:158</a></div></div>
+<div class="ttc" id="aclassqx_1_1sbo__bytes_html_aec88056635b3321541d08bc7bdbae264"><div class="ttname"><a href="classqx_1_1sbo__bytes.html#aec88056635b3321541d08bc7bdbae264">qx::sbo_bytes::data</a></div><div class="ttdeci">std::byte * data() noexcept</div><div class="ttdoc">Get SBO data: from a buffer or from a heap.</div><div class="ttdef"><b>Definition:</b> <a href="sbo__bytes_8inl_source.html#l00060">sbo_bytes.inl:60</a></div></div>
 <div class="ttc" id="asbo__bytes_8inl_html"><div class="ttname"><a href="sbo__bytes_8inl.html">sbo_bytes.inl</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
