@@ -100,7 +100,7 @@ $(function() {
 <div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="comment">/**</span></div>
 <div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="comment">    @def   QX_SHORT_FILE</span></div>
 <div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="comment">    @brief Cuts full absolute path to the file name only</span></div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="comment">           ex: &quot;C:\folder1\foler2\file.h&quot;  =&gt;  &quot;file.h&quot;</span></div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="comment">           ex: &quot;C:\folder1\folder2\file.h&quot;  =&gt;  &quot;file.h&quot;</span></div>
 <div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="comment">**/</span></div>
 <div class="line"><a name="l00034"></a><span class="lineno"><a class="line" href="macros_2common_8h.html#ae158b161fec70fada62391b9ffa7d502">   34</a></span>&#160;<span class="preprocessor">#define QX_SHORT_FILE qx::details::last_slash(QX_TEXT(__FILE__))</span></div>
 <div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="comment"></span> </div>
@@ -115,8 +115,8 @@ $(function() {
 <div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="comment"></span> </div>
 <div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="comment">/**</span></div>
 <div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="comment">    @def     QX_CONST_CAST_THIS</span></div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="comment">    @brief   This macro is made for situations where you have a const method and you need exactly the same method but non-const</span></div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="comment">    @warning You can also use it in vice-versa situations, but be careful as it will break your const guarantees</span></div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="comment">    @brief   This macro is made for situations where you have a const method, and you need exactly the same method but non-const</span></div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="comment">    @warning You can also use it in vice versa situations, but be careful as it will break your const guarantees</span></div>
 <div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="comment"></span> </div>
 <div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="comment">    @code</span></div>
 <div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="comment">    int foo() const</span></div>

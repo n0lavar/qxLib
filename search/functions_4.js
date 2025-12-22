@@ -1,7 +1,7 @@
 var searchData=
 [
   ['darken_1282',['darken',['../classqx_1_1color.html#a505659586a351bfd81a87cfb58428630',1,'qx::color::darken(float fPercent) noexcept'],['../classqx_1_1color.html#aa4a300527519ffcbc2b3453f8661c6c5',1,'qx::color::darken(const color &amp;other, float fPercent) noexcept']]],
-  ['data_1283',['data',['../classqx_1_1color.html#a57baa6efd817f4c8f888a8f9a60c32a5',1,'qx::color::data()'],['../classqx_1_1sbo__bytes.html#aec88056635b3321541d08bc7bdbae264',1,'qx::sbo_bytes::data()']]],
+  ['data_1283',['data',['../classqx_1_1color.html#a57baa6efd817f4c8f888a8f9a60c32a5',1,'qx::color::data()'],['../classqx_1_1sbo__bytes.html#aec88056635b3321541d08bc7bdbae264',1,'qx::sbo_bytes::data() noexcept'],['../classqx_1_1sbo__bytes.html#a543dc0bc7a61efcff182982d1b2dd381',1,'qx::sbo_bytes::data() const noexcept']]],
   ['debugger_5flogger_5fstream_1284',['debugger_logger_stream',['../classqx_1_1debugger__logger__stream.html#a8e70fbc04082e486aaa86e7d8c3934e8',1,'qx::debugger_logger_stream']]],
   ['deregister_5funit_1285',['deregister_unit',['../classqx_1_1base__logger__stream.html#a5148e9b2f86df61963b9b56ab69a9d61',1,'qx::base_logger_stream']]],
   ['destruct_1286',['destruct',['../utils_8h.html#a0708d6ca8dda3583a2d00c60c6d87141',1,'qx']]],
