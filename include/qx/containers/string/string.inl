@@ -2249,7 +2249,7 @@ inline bool basic_string<char_t, traits_t>::_resize(size_type nSymbols, sbo_resi
 {
     const bool bRet = m_Data.resize(
         (nSymbols + 1) * sizeof(value_type), // + null terminator
-        eType == sbo_resize_type::shrink_to_fit ? 0 : traits_t::align() * sizeof(value_type),
+        traits_t::align() * sizeof(value_type),
         eType,
         std::memmove);
 

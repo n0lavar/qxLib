@@ -36,6 +36,10 @@ struct string_sbo_traits
     static constexpr size_type nSBOSize =
         sizeof(typename string_traits_t::value_type) * string_traits_t::small_string_size();
     static constexpr bool bShrinkToFitWhenSmall = string_traits_t::shrink_to_fit_when_small();
+
+    static_assert(
+        (nSBOSize & (nSBOSize - 1)) == 0,
+        "The buffer size should be such that the final size of the structure is aligned");
 };
 
 template<class char_t>

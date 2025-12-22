@@ -29,7 +29,7 @@
 /**
     @def   QX_SHORT_FILE
     @brief Cuts full absolute path to the file name only
-           ex: "C:\folder1\foler2\file.h"  =>  "file.h"
+           ex: "C:\folder1\folder2\file.h"  =>  "file.h"
 **/
 #define QX_SHORT_FILE qx::details::last_slash(QX_TEXT(__FILE__))
 
@@ -44,8 +44,8 @@
 
 /**
     @def     QX_CONST_CAST_THIS
-    @brief   This macro is made for situations where you have a const method and you need exactly the same method but non-const
-    @warning You can also use it in vice-versa situations, but be careful as it will break your const guarantees
+    @brief   This macro is made for situations where you have a const method, and you need exactly the same method but non-const
+    @warning You can also use it in vice versa situations, but be careful as it will break your const guarantees
 
     @code
     int foo() const

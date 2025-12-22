@@ -11,6 +11,8 @@
 #include <array>
 #include <cstddef>
 
+#include <qx/macros/common.h>
+
 namespace qx
 {
 
@@ -39,12 +41,11 @@ public:
 
     // the final size of the whole sbo_bytes object, including internal data
     static constexpr size_type nSBOSize = traits_type::nSBOSize;
-    static_assert(nSBOSize >= 16);
+    static_assert(nSBOSize >= 32);
 
     // when the size changes so it becomes less or equal a buffer size, should we free a memory and move back to a buffer?
     static constexpr bool bShrinkToFitWhenSmall = traits_type::bShrinkToFitWhenSmall;
 
-private:
     static constexpr size_type nBufferSize = nSBOSize - 2 * sizeof(size_type);
     using buffer                           = std::array<std::byte, nBufferSize>;
 
@@ -57,10 +58,18 @@ public:
     sbo_bytes& operator=(sbo_bytes&& other) noexcept;
 
     /**
-        @brief  Get SBO data: from a buffer or from a heap
-        @retval - string pointer
+        @brief  Resize SBO
+        @param  nNewSize       - new size (bytes)
+        @param  nAlignment     - alignment (if 16 then size 13->16 16->16 18->32)
+        @param  eSboResizeType - a resize type
+        @param  moveObject     - a function that moves an object from one location to another
+        @retval                - true if memory alloc is successful
     **/
-    std::byte* data() noexcept;
+    bool resize(
+        size_type       nNewSize,
+        size_type       nAlignment,
+        sbo_resize_type eSboResizeType,
+        void* (*moveObject)(void* pDest, const void* pSource, std::size_t nSize)) noexcept;
 
     /**
         @brief Free allocated memory
@@ -68,18 +77,16 @@ public:
     void free() noexcept;
 
     /**
-        @brief  Resize SBO
-        @param  nNewSize   - new size (bytes)
-        @param  nAlign     - align (if 16 then size 13->16 16->16 18->32)
-        @param  eType      - resize type
-        @param  moveObject - a function that moves an object from one location to another
-        @retval            - true if memory alloc is successful
+        @brief  Get SBO data: from a buffer or from a heap
+        @retval - SBO data pointer
     **/
-    bool resize(
-        size_type       nNewSize,
-        size_type       nAlign,
-        sbo_resize_type eType,
-        void* (*moveObject)(void* pDest, const void* pSource, std::size_t nSize)) noexcept;
+    std::byte* data() noexcept;
+
+    /**
+        @brief  Get SBO data: from a buffer or from a heap
+        @retval  - SBO data pointer
+    **/
+    const std::byte* data() const noexcept;
 
     /**
         @brief  Get SBO size (bytes)
