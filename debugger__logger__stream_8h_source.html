@@ -105,20 +105,22 @@ $(function() {
 <div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="comment">    **/</span></div>
 <div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    <a class="code" href="classqx_1_1debugger__logger__stream.html#a8e70fbc04082e486aaa86e7d8c3934e8">debugger_logger_stream</a>();</div>
 <div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160; </div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    <span class="comment">// base_logger_stream</span></div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    <span class="comment">//</span></div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    <span class="keywordtype">void</span> flush() <span class="keyword">override</span>;</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    <span class="keywordtype">void</span> do_log(</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;        string_view                            svMessage,</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;        <span class="keyword">const</span> <a class="code" href="structqx_1_1log__unit.html">log_unit</a>&amp;                        logUnit,</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;        <span class="keyword">const</span> std::vector&lt;logger_color_range&gt;&amp; colors,</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;        verbosity                              eVerbosity) <span class="keyword">override</span>;</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;};</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160; </div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;} <span class="comment">// namespace qx</span></div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    <a class="code" href="classqx_1_1debugger__logger__stream.html#a8e70fbc04082e486aaa86e7d8c3934e8">debugger_logger_stream</a>(<a class="code" href="classqx_1_1debugger__logger__stream.html">debugger_logger_stream</a>&amp;&amp;) noexcept = <span class="keywordflow">default</span>;</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160; </div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    <span class="comment">// base_logger_stream</span></div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    <span class="comment">//</span></div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    <span class="keywordtype">void</span> flush() <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    <span class="keywordtype">void</span> do_log(</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;        string_view                            svMessage,</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;        <span class="keyword">const</span> <a class="code" href="structqx_1_1log__unit.html">log_unit</a>&amp;                        logUnit,</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;        <span class="keyword">const</span> std::vector&lt;logger_color_range&gt;&amp; colors,</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;        verbosity                              eVerbosity) <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;};</div>
 <div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160; </div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="debugger__logger__stream_8inl.html">qx/logger/debugger_logger_stream.inl</a>&gt;</span></div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;} <span class="comment">// namespace qx</span></div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160; </div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="debugger__logger__stream_8inl.html">qx/logger/debugger_logger_stream.inl</a>&gt;</span></div>
 <div class="ttc" id="abase__logger__stream_8h_html"><div class="ttname"><a href="base__logger__stream_8h.html">base_logger_stream.h</a></div></div>
 <div class="ttc" id="aclassqx_1_1base__logger__stream_html"><div class="ttname"><a href="classqx_1_1base__logger__stream.html">qx::base_logger_stream</a></div><div class="ttdoc">Base class for logger streams.</div><div class="ttdef"><b>Definition:</b> <a href="base__logger__stream_8h_source.html#l00076">base_logger_stream.h:77</a></div></div>
 <div class="ttc" id="aclassqx_1_1debugger__logger__stream_html"><div class="ttname"><a href="classqx_1_1debugger__logger__stream.html">qx::debugger_logger_stream</a></div><div class="ttdoc">Logger stream for a debugger output (VS: output window)</div><div class="ttdef"><b>Definition:</b> <a href="debugger__logger__stream_8h_source.html#l00029">debugger_logger_stream.h:30</a></div></div>

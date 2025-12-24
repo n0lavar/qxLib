@@ -102,7 +102,7 @@ $(function() {
 <div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    <span class="keywordflow">if</span> (!optLogUnit)</div>
 <div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;        <span class="keywordflow">return</span>;</div>
 <div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160; </div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    std::lock_guard lock(m_LoggerStreamMutex);</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    std::lock_guard lock(*m_pLoggerStreamMutex);</div>
 <div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160; </div>
 <div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    <span class="keyword">auto</span>&amp; buffers = <a class="code" href="classqx_1_1base__logger__stream.html#a2a5cdad5dcf92486e5832953315100d7">get_log_buffer</a>();</div>
 <div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    buffers.clear();</div>

@@ -7,7 +7,7 @@ var searchData=
   ['add_5fcomponent_5fstatus_1217',['add_component_status',['../classqx_1_1components.html#a676a9070ae562a34b2f808a55f0def78',1,'qx::components']]],
   ['add_5fdestruction_5fcallback_1218',['add_destruction_callback',['../classqx_1_1base__delegate.html#a74e1dd09550b6fe2f5ce23a7f69ed2a7',1,'qx::base_delegate::add_destruction_callback(callable_t callable, priority ePriority=priority::normal) noexcept'],['../classqx_1_1base__delegate.html#a226f4c449dbad75b9b05bd1e44f92390',1,'qx::base_delegate::add_destruction_callback(object_t &amp;object, return_t(object_t::*pMethod)(args_t...), priority ePriority=priority::normal) noexcept']]],
   ['add_5ffree_1219',['add_free',['../classqx_1_1base__delegate.html#ab9f7ebfb1083b6d78aaac30ee3534f22',1,'qx::base_delegate']]],
-  ['add_5fstream_1220',['add_stream',['../classqx_1_1logger.html#abec0212ef10bb7feb65d6f587a989b61',1,'qx::logger']]],
+  ['add_5fstream_1220',['add_stream',['../classqx_1_1logger.html#a4e45ab9c399be9eb0761171f441ab5ea',1,'qx::logger']]],
   ['add_5funique_1221',['add_unique',['../add_8h.html#a2793e147664ac9ed1d4d9bcafe3d5e22',1,'qx']]],
   ['add_5funique_5fif_1222',['add_unique_if',['../add_8h.html#ab75e5db429f1de0a4ea8b94bc4effb51',1,'qx']]],
   ['add_5fweak_1223',['add_weak',['../classqx_1_1base__delegate.html#aa891d2eff3af39edb04973de42c091ef',1,'qx::base_delegate::add_weak(std::weak_ptr&lt; object_t &gt; pWeakObject, callable_t callable, priority ePriority=priority::normal) noexcept'],['../classqx_1_1base__delegate.html#ab416ea899c8137f7677ada98821b7eec',1,'qx::base_delegate::add_weak(std::weak_ptr&lt; object_t &gt; pWeakObject, return_t(object_t::*pMethod)(args_t...), priority ePriority=priority::normal) noexcept']]],
