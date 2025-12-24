@@ -31,7 +31,7 @@ inline void base_logger_stream::log(
     if (!optLogUnit)
         return;
 
-    std::lock_guard lock(m_LoggerStreamMutex);
+    std::lock_guard lock(*m_pLoggerStreamMutex);
 
     auto& buffers = get_log_buffer();
     buffers.clear();

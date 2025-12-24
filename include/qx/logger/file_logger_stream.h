@@ -45,6 +45,8 @@ public:
         log_file_policy eLogFilePolicy = log_file_policy::append,
         string_view     svFileName     = L"application");
 
+    file_logger_stream(file_logger_stream&&) noexcept = default;
+
     virtual ~file_logger_stream() override;
 
     // base_logger_stream

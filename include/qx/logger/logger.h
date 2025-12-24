@@ -10,8 +10,7 @@
 
 #include <qx/logger/base_logger_stream.h>
 #include <qx/patterns/singleton.h>
-
-#include <memory>
+#include <qx/sbo/sbo_poly.h>
 
 #ifndef QX_LOGGER_INSTANCE
     #define QX_LOGGER_INSTANCE qx::logger_singleton::get_instance().get_logger()
@@ -99,10 +98,12 @@ public:
     void flush();
 
     /**
-        @brief Add output stream to the logger
-        @param pStream - stream unique pointer
+        @brief  Add an output stream to the logger
+        @tparam stream_t - stream type, derived from base_logger_stream
+        @param  stream   - stream object
     **/
-    void add_stream(std::unique_ptr<base_logger_stream> pStream) noexcept;
+    template<sbo_poly_assignable_c<base_logger_stream> stream_t>
+    void add_stream(stream_t stream) noexcept;
 
     /**
         @brief Reset logger and clear all streams
@@ -126,7 +127,7 @@ public:
         string_view     svFunction) const noexcept;
 
 private:
-    std::vector<std::unique_ptr<base_logger_stream>> m_Streams;
+    std::vector<sbo_poly<base_logger_stream, 1024>> m_Streams;
 };
 
 /**

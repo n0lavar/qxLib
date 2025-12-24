@@ -85,6 +85,8 @@ public:
     **/
     base_logger_stream(bool bAlwaysFlush);
 
+    base_logger_stream(base_logger_stream&&) noexcept = default;
+
     virtual ~base_logger_stream() = default;
 
     /**
@@ -148,7 +150,7 @@ public:
 protected:
     /**
         @brief  Get string buffers
-        @retval        - string buffers
+        @retval - string buffers
     **/
     logger_buffer& get_log_buffer() noexcept;
 
@@ -188,8 +190,8 @@ private:
 private:
     std::unordered_map<string_hash, log_unit_info> m_Units;
     logger_buffer                                  m_Buffer;
-    QX_PERF_MUTEX(m_LoggerStreamMutex);
-    bool m_bAlwaysFlush = false;
+    std::unique_ptr<std::mutex>                    m_pLoggerStreamMutex = std::make_unique<std::mutex>();
+    bool                                           m_bAlwaysFlush       = false;
 };
 
 } // namespace qx

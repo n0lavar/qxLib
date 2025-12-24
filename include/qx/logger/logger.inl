@@ -18,7 +18,7 @@ inline void logger::log(
     string_view     svFunction,
     int             nLine)
 {
-    for (const auto& stream : m_Streams)
+    for (auto& stream : m_Streams)
         stream->log(eVerbosity, category, svFile, svFunction, nLine, svFormat);
 }
 
@@ -34,19 +34,20 @@ inline void logger::log(
     args_t&&... args)
 {
     const auto sLogMessage = qx::string::static_format(sFormat, std::forward<args_t>(args)...);
-    for (const auto& stream : m_Streams)
+    for (auto& stream : m_Streams)
         stream->log(eVerbosity, category, svFile, svFunction, nLine, sLogMessage);
 }
 
 inline void logger::flush()
 {
-    for (const auto& stream : m_Streams)
+    for (auto& stream : m_Streams)
         stream->flush();
 }
 
-inline void logger::add_stream(std::unique_ptr<base_logger_stream> pStream) noexcept
+template<sbo_poly_assignable_c<base_logger_stream> stream_t>
+inline void logger::add_stream(stream_t stream) noexcept
 {
-    m_Streams.push_back(std::move(pStream));
+    m_Streams.emplace_back(std::move(stream));
 }
 
 inline void logger::reset() noexcept

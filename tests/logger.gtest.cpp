@@ -122,20 +122,17 @@ protected:
         std::filesystem::remove(m_sLogFilePath.data());
         m_pLogger = std::make_unique<qx::logger>();
 
-        auto pConsoleLoggerStream = std::make_unique<qx::cout_logger_stream>();
-        pConsoleLoggerStream->deregister_unit(qx::base_logger_stream::k_svDefaultUnit);
-        pConsoleLoggerStream->register_unit(traits_t::GetUnit(), { qx::verbosity::none });
+        qx::cout_logger_stream consoleLoggerStream;
+        consoleLoggerStream.deregister_unit(qx::base_logger_stream::k_svDefaultUnit);
+        consoleLoggerStream.register_unit(traits_t::GetUnit(), { qx::verbosity::none });
 
-        auto pFileLoggerStream = std::make_unique<qx::file_logger_stream>(
-            true,
-            qx::log_file_policy::clear_then_uppend,
-            traits_t::GetLogsFile());
-        pFileLoggerStream->deregister_unit(qx::base_logger_stream::k_svDefaultUnit);
-        pFileLoggerStream->register_unit(traits_t::GetUnit(), { qx::verbosity::log });
+        qx::file_logger_stream fileLoggerStream(true, qx::log_file_policy::clear_then_uppend, traits_t::GetLogsFile());
+        fileLoggerStream.deregister_unit(qx::base_logger_stream::k_svDefaultUnit);
+        fileLoggerStream.register_unit(traits_t::GetUnit(), { qx::verbosity::log });
 
         if constexpr (traits_t::GetCategory() == LOG_CATEGORY_TAG1)
         {
-            pFileLoggerStream->register_unit(
+            fileLoggerStream.register_unit(
                 traits_t::GetCategory(),
                 { qx::verbosity::log,
                   [](qx::logger_buffer& buffers,
@@ -152,8 +149,8 @@ protected:
                   } });
         }
 
-        m_pLogger->add_stream(std::move(pConsoleLoggerStream));
-        m_pLogger->add_stream(std::move(pFileLoggerStream));
+        m_pLogger->add_stream(std::move(consoleLoggerStream));
+        m_pLogger->add_stream(std::move(fileLoggerStream));
     }
 
     /* called after every test */

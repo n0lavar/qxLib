@@ -40,6 +40,8 @@ public:
         bool bDisableStdioSync = true,
         bool bUntieCin         = true);
 
+    cout_logger_stream(cout_logger_stream&&) noexcept = default;
+
     // base_logger_stream
     //
     virtual void flush() override;

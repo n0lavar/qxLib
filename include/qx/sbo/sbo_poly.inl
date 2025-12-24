@@ -55,15 +55,23 @@ sbo_poly<base_t, nSBOSize_>& sbo_poly<base_t, nSBOSize_>::operator=(sbo_poly&& o
 
         if (m_Data.is_small() && other.m_Data.is_small())
         {
-            m_Assigner(m_Data, temp);
+            if (m_Assigner)
+                m_Assigner(m_Data, temp);
+
             other.m_Assigner(other.m_Data, m_Data);
-            m_Assigner(temp, other.m_Data);
+
+            if (m_Assigner)
+                m_Assigner(temp, other.m_Data);
         }
         else if (m_Data.is_small())
         {
-            m_Assigner(m_Data, temp);
+            if (m_Assigner)
+                m_Assigner(m_Data, temp);
+
             other.m_Data = std::move(m_Data);
-            m_Assigner(temp, other.m_Data);
+
+            if (m_Assigner)
+                m_Assigner(temp, other.m_Data);
         }
         else
         {

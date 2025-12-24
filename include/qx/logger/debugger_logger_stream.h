@@ -34,6 +34,8 @@ public:
     **/
     debugger_logger_stream();
 
+    debugger_logger_stream(debugger_logger_stream&&) noexcept = default;
+
 private:
     // base_logger_stream
     //
