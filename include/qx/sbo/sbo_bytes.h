@@ -62,14 +62,10 @@ public:
         @param  nNewSize       - new size (bytes)
         @param  nAlignment     - alignment (if 16 then size 13->16 16->16 18->32)
         @param  eSboResizeType - a resize type
-        @param  moveObject     - a function that moves an object from one location to another
+        @param  bMemmove       - in case the content is relocated, should we call memmove or the callee will handle the moving?
         @retval                - true if memory alloc is successful
     **/
-    bool resize(
-        size_type       nNewSize,
-        size_type       nAlignment,
-        sbo_resize_type eSboResizeType,
-        void* (*moveObject)(void* pDest, const void* pSource, std::size_t nSize)) noexcept;
+    bool resize(size_type nNewSize, size_type nAlignment, sbo_resize_type eSboResizeType, bool bMemmove) noexcept;
 
     /**
         @brief Free allocated memory

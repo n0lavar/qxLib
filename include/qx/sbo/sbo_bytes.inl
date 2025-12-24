@@ -53,12 +53,13 @@ sbo_bytes<traits_t>& sbo_bytes<traits_t>::operator=(sbo_bytes&& other) noexcept
     return *this;
 }
 
+QX_PUSH_SUPPRESS_MSVC_WARNINGS(4701);
 template<class traits_t>
 bool sbo_bytes<traits_t>::resize(
     size_type       nNewSize,
     size_type       nAlignment,
     sbo_resize_type eSboResizeType,
-    void* (*moveObject)(void* pDest, const void* pSource, std::size_t nSize)) noexcept
+    bool            bMemmove) noexcept
 {
     bool bRet = true;
 
@@ -79,8 +80,12 @@ bool sbo_bytes<traits_t>::resize(
             if (!bSmallAtStart && (bShrinkToFitWhenSmall || eSboResizeType == sbo_resize_type::shrink_to_fit))
             {
                 // free allocated memory and move SBO to buffer
-                moveObject(buff.data(), m_pData, nSizeToAllocate);
+
+                if (bMemmove)
+                    std::memmove(buff.data(), m_pData, nSizeToAllocate);
+
                 free();
+
                 m_Buffer = buff;
             }
 
@@ -100,8 +105,8 @@ bool sbo_bytes<traits_t>::resize(
                 m_nAllocatedSize = nSizeToAllocate;
                 m_pData          = static_cast<std::byte*>(pNewBlock);
 
-                if (bSmallAtStart && m_nSize > 0)
-                    moveObject(m_pData, buff.data(), nStartSize);
+                if (bMemmove && bSmallAtStart && m_nSize > 0)
+                    std::memmove(m_pData, buff.data(), nStartSize);
             }
             else
             {
@@ -115,6 +120,7 @@ bool sbo_bytes<traits_t>::resize(
 
     return bRet;
 }
+QX_POP_SUPPRESS_WARNINGS();
 
 template<class traits_t>
 void sbo_bytes<traits_t>::free() noexcept

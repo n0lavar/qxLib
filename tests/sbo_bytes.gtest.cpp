@@ -10,7 +10,6 @@
 
 //V_EXCLUDE_PATH *sbo_bytes.gtest.cpp
 
-#include <qx/hash.h>
 #include <qx/sbo/sbo_bytes.h>
 
 
@@ -49,7 +48,7 @@ struct test_sbo_bytes_traits
 
 static void set_block(auto& SBO, const auto& block, size_t nAlignment)
 {
-    SBO.resize(block.size(), nAlignment, qx::sbo_resize_type::common, std::memmove);
+    SBO.resize(block.size(), nAlignment, qx::sbo_resize_type::common, true);
     EXPECT_EQ(SBO.size(), block.size());
     EXPECT_EQ(SBO.capacity() % nAlignment, 0);
 }
@@ -159,7 +158,7 @@ TYPED_TEST(test_sbo_bytes_resize, shrink_to_fit)
     this->set_and_check_block(k_BigBytesBlock1);
     this->set_and_check_block(k_SmallBytesBlock1);
 
-    this->m_SBO.resize(this->m_SBO.size(), TypeParam::nAlignment, qx::sbo_resize_type::shrink_to_fit, std::memmove);
+    this->m_SBO.resize(this->m_SBO.size(), TypeParam::nAlignment, qx::sbo_resize_type::shrink_to_fit, true);
     this->test_small();
 }
 
