@@ -81,35 +81,35 @@ $(function() {
 <div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="keyword">namespace </span>qx</div>
 <div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;{</div>
 <div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160; </div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> base_t, <span class="keywordtype">size_t</span> nSBOSize&gt;</div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> base_t, <span class="keywordtype">size_t</span> nSBOSize_&gt;</div>
 <div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="keyword">template</span>&lt;sbo_poly_assignable_c&lt;base_t&gt; derived_t&gt;</div>
-<div class="line"><a name="l00015"></a><span class="lineno"><a class="line" href="classqx_1_1sbo__poly.html#a829b48594efca739ccf4f859289d802f">   15</a></span>&#160;<a class="code" href="classqx_1_1sbo__poly.html#a829b48594efca739ccf4f859289d802f">sbo_poly&lt;base_t, nSBOSize&gt;::sbo_poly</a>(derived_t <span class="keywordtype">object</span>) noexcept</div>
+<div class="line"><a name="l00015"></a><span class="lineno"><a class="line" href="classqx_1_1sbo__poly.html#ad9c8da4d5dde8935b988c663ee0aee41">   15</a></span>&#160;<a class="code" href="classqx_1_1sbo__poly.html#ad9c8da4d5dde8935b988c663ee0aee41">sbo_poly&lt;base_t, nSBOSize_&gt;::sbo_poly</a>(derived_t <span class="keywordtype">object</span>) noexcept</div>
 <div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;{</div>
 <div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;    assign(std::move(<span class="keywordtype">object</span>));</div>
 <div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;}</div>
 <div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160; </div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> base_t, <span class="keywordtype">size_t</span> nSBOSize&gt;</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<a class="code" href="classqx_1_1sbo__poly.html#a829b48594efca739ccf4f859289d802f">sbo_poly&lt;base_t, nSBOSize&gt;::sbo_poly</a>(<a class="code" href="classqx_1_1sbo__poly.html">sbo_poly</a>&amp;&amp; other) noexcept</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> base_t, <span class="keywordtype">size_t</span> nSBOSize_&gt;</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<a class="code" href="classqx_1_1sbo__poly.html#ad9c8da4d5dde8935b988c663ee0aee41">sbo_poly&lt;base_t, nSBOSize_&gt;::sbo_poly</a>(<a class="code" href="classqx_1_1sbo__poly.html">sbo_poly</a>&amp;&amp; other) noexcept</div>
 <div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;{</div>
 <div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    *<span class="keyword">this</span> = std::move(other);</div>
 <div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;}</div>
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160; </div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> base_t, <span class="keywordtype">size_t</span> nSBOSize&gt;</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;sbo_poly&lt;base_t, nSBOSize&gt;::~sbo_poly() noexcept</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> base_t, <span class="keywordtype">size_t</span> nSBOSize_&gt;</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;sbo_poly&lt;base_t, nSBOSize_&gt;::~sbo_poly() noexcept</div>
 <div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;{</div>
 <div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    get().~base_t();</div>
 <div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;}</div>
 <div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160; </div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> base_t, <span class="keywordtype">size_t</span> nSBOSize&gt;</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> base_t, <span class="keywordtype">size_t</span> nSBOSize_&gt;</div>
 <div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="keyword">template</span>&lt;sbo_poly_assignable_c&lt;base_t&gt; derived_t&gt;</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;sbo_poly&lt;base_t, nSBOSize&gt;&amp; <a class="code" href="classqx_1_1sbo__poly.html#aefd20f14edc7a3480a70634ae318c121">sbo_poly&lt;base_t, nSBOSize&gt;::operator=</a>(derived_t <span class="keywordtype">object</span>) noexcept</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;sbo_poly&lt;base_t, nSBOSize_&gt;&amp; <a class="code" href="classqx_1_1sbo__poly.html#af1d972beb3540a0f3b6ce1e4d0cc44ae">sbo_poly&lt;base_t, nSBOSize_&gt;::operator=</a>(derived_t <span class="keywordtype">object</span>) noexcept</div>
 <div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;{</div>
 <div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    assign(std::move(<span class="keywordtype">object</span>));</div>
 <div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
 <div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;}</div>
 <div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160; </div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> base_t, <span class="keywordtype">size_t</span> nSBOSize&gt;</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;sbo_poly&lt;base_t, nSBOSize&gt;&amp; <a class="code" href="classqx_1_1sbo__poly.html#aefd20f14edc7a3480a70634ae318c121">sbo_poly&lt;base_t, nSBOSize&gt;::operator=</a>(sbo_poly&amp;&amp; other) noexcept</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> base_t, <span class="keywordtype">size_t</span> nSBOSize_&gt;</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;sbo_poly&lt;base_t, nSBOSize_&gt;&amp; <a class="code" href="classqx_1_1sbo__poly.html#af1d972beb3540a0f3b6ce1e4d0cc44ae">sbo_poly&lt;base_t, nSBOSize_&gt;::operator=</a>(sbo_poly&amp;&amp; other) noexcept</div>
 <div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;{</div>
 <div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    <span class="keywordflow">if</span> (!m_Data.is_small() &amp;&amp; !other.m_Data.is_small())</div>
 <div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    {</div>
@@ -149,9 +149,9 @@ $(function() {
 <div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;    <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
 <div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;}</div>
 <div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160; </div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> base_t, <span class="keywordtype">size_t</span> nSBOSize&gt;</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> base_t, <span class="keywordtype">size_t</span> nSBOSize_&gt;</div>
 <div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;<span class="keyword">template</span>&lt;sbo_poly_assignable_c&lt;base_t&gt; derived_t&gt;</div>
-<div class="line"><a name="l00083"></a><span class="lineno"><a class="line" href="classqx_1_1sbo__poly.html#a1e5c6cfcd8eb280ea91950e2d4320f30">   83</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classqx_1_1sbo__poly.html#a1e5c6cfcd8eb280ea91950e2d4320f30">sbo_poly&lt;base_t, nSBOSize&gt;::assign</a>(derived_t <span class="keywordtype">object</span>) noexcept</div>
+<div class="line"><a name="l00083"></a><span class="lineno"><a class="line" href="classqx_1_1sbo__poly.html#affb2217752944570c29a17a1b8c06fd1">   83</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classqx_1_1sbo__poly.html#affb2217752944570c29a17a1b8c06fd1">sbo_poly&lt;base_t, nSBOSize_&gt;::assign</a>(derived_t <span class="keywordtype">object</span>) noexcept</div>
 <div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;{</div>
 <div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;    <span class="keywordflow">if</span> (m_Data.size() &gt; 0)</div>
 <div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;        get().~base_t();</div>
@@ -166,26 +166,26 @@ $(function() {
 <div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;    };</div>
 <div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;}</div>
 <div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160; </div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> base_t, <span class="keywordtype">size_t</span> nSBOSize&gt;</div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;base_t* <a class="code" href="classqx_1_1sbo__poly.html">sbo_poly&lt;base_t, nSBOSize&gt;::operator-&gt;</a>() noexcept</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> base_t, <span class="keywordtype">size_t</span> nSBOSize_&gt;</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;base_t* <a class="code" href="classqx_1_1sbo__poly.html">sbo_poly&lt;base_t, nSBOSize_&gt;::operator-&gt;</a>() noexcept</div>
 <div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;{</div>
 <div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;    <span class="keywordflow">return</span> &amp;get();</div>
 <div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;}</div>
 <div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160; </div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> base_t, <span class="keywordtype">size_t</span> nSBOSize&gt;</div>
-<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;<span class="keyword">const</span> base_t* sbo_poly&lt;base_t, nSBOSize&gt;::operator-&gt;() const noexcept</div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> base_t, <span class="keywordtype">size_t</span> nSBOSize_&gt;</div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;<span class="keyword">const</span> base_t* sbo_poly&lt;base_t, nSBOSize_&gt;::operator-&gt;() const noexcept</div>
 <div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;{</div>
 <div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;    <span class="keywordflow">return</span> &amp;get();</div>
 <div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;}</div>
 <div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160; </div>
-<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> base_t, <span class="keywordtype">size_t</span> nSBOSize&gt;</div>
-<div class="line"><a name="l00111"></a><span class="lineno"><a class="line" href="classqx_1_1sbo__poly.html#a4b783debbc8415145519224430a44580">  111</a></span>&#160;base_t&amp; <a class="code" href="classqx_1_1sbo__poly.html#a4b783debbc8415145519224430a44580">sbo_poly&lt;base_t, nSBOSize&gt;::get</a>() noexcept</div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> base_t, <span class="keywordtype">size_t</span> nSBOSize_&gt;</div>
+<div class="line"><a name="l00111"></a><span class="lineno"><a class="line" href="classqx_1_1sbo__poly.html#a12b0fe610fa9249c764566e400330951">  111</a></span>&#160;base_t&amp; <a class="code" href="classqx_1_1sbo__poly.html#a12b0fe610fa9249c764566e400330951">sbo_poly&lt;base_t, nSBOSize_&gt;::get</a>() noexcept</div>
 <div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;{</div>
 <div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;    <span class="keywordflow">return</span> *<span class="keyword">reinterpret_cast&lt;</span>base_t*<span class="keyword">&gt;</span>(m_Data.data());</div>
 <div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;}</div>
 <div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160; </div>
-<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> base_t, <span class="keywordtype">size_t</span> nSBOSize&gt;</div>
-<div class="line"><a name="l00117"></a><span class="lineno"><a class="line" href="classqx_1_1sbo__poly.html#aa0498674713e70da5e54d495630f2864">  117</a></span>&#160;<span class="keyword">const</span> base_t&amp; <a class="code" href="classqx_1_1sbo__poly.html#a4b783debbc8415145519224430a44580">sbo_poly&lt;base_t, nSBOSize&gt;::get</a>() const noexcept</div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> base_t, <span class="keywordtype">size_t</span> nSBOSize_&gt;</div>
+<div class="line"><a name="l00117"></a><span class="lineno"><a class="line" href="classqx_1_1sbo__poly.html#a6d96413386e96a293cc49928f55ee0de">  117</a></span>&#160;<span class="keyword">const</span> base_t&amp; <a class="code" href="classqx_1_1sbo__poly.html#a12b0fe610fa9249c764566e400330951">sbo_poly&lt;base_t, nSBOSize_&gt;::get</a>() const noexcept</div>
 <div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;{</div>
 <div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="macros_2common_8h.html#a8571a186f383a0af7a487a27de39f144">QX_CONST_CAST_THIS</a>()-&gt;get();</div>
 <div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;}</div>
@@ -194,10 +194,10 @@ $(function() {
 <div class="ttc" id="aclassqx_1_1sbo__bytes_html"><div class="ttname"><a href="classqx_1_1sbo__bytes.html">qx::sbo_bytes&lt; sbo_poly_traits &gt;</a></div></div>
 <div class="ttc" id="aclassqx_1_1sbo__bytes_html_aec88056635b3321541d08bc7bdbae264"><div class="ttname"><a href="classqx_1_1sbo__bytes.html#aec88056635b3321541d08bc7bdbae264">qx::sbo_bytes::data</a></div><div class="ttdeci">std::byte * data() noexcept</div><div class="ttdoc">Get SBO data: from a buffer or from a heap.</div><div class="ttdef"><b>Definition:</b> <a href="sbo__bytes_8inl_source.html#l00139">sbo_bytes.inl:139</a></div></div>
 <div class="ttc" id="aclassqx_1_1sbo__poly_html"><div class="ttname"><a href="classqx_1_1sbo__poly.html">qx::sbo_poly</a></div><div class="ttdoc">Small Buffer Object for polymorphic classes.</div><div class="ttdef"><b>Definition:</b> <a href="sbo__poly_8h_source.html#l00035">sbo_poly.h:36</a></div></div>
-<div class="ttc" id="aclassqx_1_1sbo__poly_html_a1e5c6cfcd8eb280ea91950e2d4320f30"><div class="ttname"><a href="classqx_1_1sbo__poly.html#a1e5c6cfcd8eb280ea91950e2d4320f30">qx::sbo_poly::assign</a></div><div class="ttdeci">void assign(derived_t object) noexcept</div><div class="ttdoc">Assign a new object to this SBO.</div><div class="ttdef"><b>Definition:</b> <a href="sbo__poly_8inl_source.html#l00083">sbo_poly.inl:83</a></div></div>
-<div class="ttc" id="aclassqx_1_1sbo__poly_html_a4b783debbc8415145519224430a44580"><div class="ttname"><a href="classqx_1_1sbo__poly.html#a4b783debbc8415145519224430a44580">qx::sbo_poly::get</a></div><div class="ttdeci">base_t &amp; get() noexcept</div><div class="ttdoc">Get object reference. Always valid.</div><div class="ttdef"><b>Definition:</b> <a href="sbo__poly_8inl_source.html#l00111">sbo_poly.inl:111</a></div></div>
-<div class="ttc" id="aclassqx_1_1sbo__poly_html_a829b48594efca739ccf4f859289d802f"><div class="ttname"><a href="classqx_1_1sbo__poly.html#a829b48594efca739ccf4f859289d802f">qx::sbo_poly::sbo_poly</a></div><div class="ttdeci">sbo_poly(derived_t object) noexcept</div><div class="ttdoc">sbo_poly object constructor</div><div class="ttdef"><b>Definition:</b> <a href="sbo__poly_8inl_source.html#l00015">sbo_poly.inl:15</a></div></div>
-<div class="ttc" id="aclassqx_1_1sbo__poly_html_aefd20f14edc7a3480a70634ae318c121"><div class="ttname"><a href="classqx_1_1sbo__poly.html#aefd20f14edc7a3480a70634ae318c121">qx::sbo_poly::operator=</a></div><div class="ttdeci">sbo_poly &amp; operator=(derived_t object) noexcept</div><div class="ttdoc">operator=</div></div>
+<div class="ttc" id="aclassqx_1_1sbo__poly_html_a12b0fe610fa9249c764566e400330951"><div class="ttname"><a href="classqx_1_1sbo__poly.html#a12b0fe610fa9249c764566e400330951">qx::sbo_poly::get</a></div><div class="ttdeci">base_t &amp; get() noexcept</div><div class="ttdoc">Get object reference. Always valid.</div><div class="ttdef"><b>Definition:</b> <a href="sbo__poly_8inl_source.html#l00111">sbo_poly.inl:111</a></div></div>
+<div class="ttc" id="aclassqx_1_1sbo__poly_html_ad9c8da4d5dde8935b988c663ee0aee41"><div class="ttname"><a href="classqx_1_1sbo__poly.html#ad9c8da4d5dde8935b988c663ee0aee41">qx::sbo_poly::sbo_poly</a></div><div class="ttdeci">sbo_poly(derived_t object) noexcept</div><div class="ttdoc">sbo_poly object constructor</div><div class="ttdef"><b>Definition:</b> <a href="sbo__poly_8inl_source.html#l00015">sbo_poly.inl:15</a></div></div>
+<div class="ttc" id="aclassqx_1_1sbo__poly_html_af1d972beb3540a0f3b6ce1e4d0cc44ae"><div class="ttname"><a href="classqx_1_1sbo__poly.html#af1d972beb3540a0f3b6ce1e4d0cc44ae">qx::sbo_poly::operator=</a></div><div class="ttdeci">sbo_poly &amp; operator=(derived_t object) noexcept</div><div class="ttdoc">operator=</div></div>
+<div class="ttc" id="aclassqx_1_1sbo__poly_html_affb2217752944570c29a17a1b8c06fd1"><div class="ttname"><a href="classqx_1_1sbo__poly.html#affb2217752944570c29a17a1b8c06fd1">qx::sbo_poly::assign</a></div><div class="ttdeci">void assign(derived_t object) noexcept</div><div class="ttdoc">Assign a new object to this SBO.</div><div class="ttdef"><b>Definition:</b> <a href="sbo__poly_8inl_source.html#l00083">sbo_poly.inl:83</a></div></div>
 <div class="ttc" id="amacros_2common_8h_html_a8571a186f383a0af7a487a27de39f144"><div class="ttname"><a href="macros_2common_8h.html#a8571a186f383a0af7a487a27de39f144">QX_CONST_CAST_THIS</a></div><div class="ttdeci">#define QX_CONST_CAST_THIS()</div><div class="ttdoc">This macro is made for situations where you have a const method, and you need exactly the same method...</div><div class="ttdef"><b>Definition:</b> <a href="macros_2common_8h_source.html#l00061">common.h:61</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->

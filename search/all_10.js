@@ -51,8 +51,9 @@ var searchData=
   ['qx_5fshort_5ffile_521',['QX_SHORT_FILE',['../macros_2common_8h.html#ae158b161fec70fada62391b9ffa7d502',1,'common.h']]],
   ['qx_5fsingle_5fargument_522',['QX_SINGLE_ARGUMENT',['../macros_2common_8h.html#a8b36634eb91cfdc0b9d7ed59249f0853',1,'common.h']]],
   ['qx_5fstatic_5fassert_5fbetween_523',['QX_STATIC_ASSERT_BETWEEN',['../static__assert_8h.html#a03064acf0d8eb17f0cd74a34aa1ba4eb',1,'static_assert.h']]],
-  ['qx_5fstr_5fprefix_524',['QX_STR_PREFIX',['../string__utils_8h.html#ae4f688084b037e2e7a63a13eaf539a02',1,'string_utils.h']]],
-  ['qx_5fstringify_525',['QX_STRINGIFY',['../names_8h.html#aafbad02364b98b20fd2de0a4afedc06d',1,'names.h']]],
-  ['qx_5fto_5fwstring_526',['QX_TO_WSTRING',['../string__utils_8h.html#a6b22a06d00ce06f575913fec486bd955',1,'string_utils.h']]],
-  ['qx_5funique_5fseed_527',['QX_UNIQUE_SEED',['../constexpr__random_8h.html#a3e05af8678b42a682039a4f067861de7',1,'constexpr_random.h']]]
+  ['qx_5fstatic_5fassert_5fno_5finstantiation_524',['QX_STATIC_ASSERT_NO_INSTANTIATION',['../static__assert_8h.html#ac863db693e59fe16168b9d7c1c3cc2ed',1,'static_assert.h']]],
+  ['qx_5fstr_5fprefix_525',['QX_STR_PREFIX',['../string__utils_8h.html#ae4f688084b037e2e7a63a13eaf539a02',1,'string_utils.h']]],
+  ['qx_5fstringify_526',['QX_STRINGIFY',['../names_8h.html#aafbad02364b98b20fd2de0a4afedc06d',1,'names.h']]],
+  ['qx_5fto_5fwstring_527',['QX_TO_WSTRING',['../string__utils_8h.html#a6b22a06d00ce06f575913fec486bd955',1,'string_utils.h']]],
+  ['qx_5funique_5fseed_528',['QX_UNIQUE_SEED',['../constexpr__random_8h.html#a3e05af8678b42a682039a4f067861de7',1,'constexpr_random.h']]]
 ];

@@ -106,6 +106,9 @@ Macros</h2></td></tr>
 <tr class="memitem:a03064acf0d8eb17f0cd74a34aa1ba4eb"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="static__assert_8h.html#a03064acf0d8eb17f0cd74a34aa1ba4eb">QX_STATIC_ASSERT_BETWEEN</a>(left,  value,  right)&#160;&#160;&#160;    <a class="el" href="structqx_1_1details_1_1static__assert__between.html">qx::details::static_assert_between</a>&lt;(left), (value), (right)&gt; <a class="el" href="names_8h.html#a8f51bd935768d1845211352e225739ed">QX_LINE_NAME</a>(static_assert_between_)</td></tr>
 <tr class="memdesc:a03064acf0d8eb17f0cd74a34aa1ba4eb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Shows left, value and right in error msg.  <a href="static__assert_8h.html#a03064acf0d8eb17f0cd74a34aa1ba4eb">More...</a><br /></td></tr>
 <tr class="separator:a03064acf0d8eb17f0cd74a34aa1ba4eb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac863db693e59fe16168b9d7c1c3cc2ed"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="static__assert_8h.html#ac863db693e59fe16168b9d7c1c3cc2ed">QX_STATIC_ASSERT_NO_INSTANTIATION</a>(Message)</td></tr>
+<tr class="memdesc:ac863db693e59fe16168b9d7c1c3cc2ed"><td class="mdescLeft">&#160;</td><td class="mdescRight">This static assert will fail if block it placed in must not be instantiated.  <a href="static__assert_8h.html#ac863db693e59fe16168b9d7c1c3cc2ed">More...</a><br /></td></tr>
+<tr class="separator:ac863db693e59fe16168b9d7c1c3cc2ed"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Static assert macros. </p>
@@ -158,6 +161,60 @@ Macros</h2></td></tr>
 </dl>
 
 <p class="definition">Definition at line <a class="el" href="static__assert_8h_source.html#l00099">99</a> of file <a class="el" href="static__assert_8h_source.html">static_assert.h</a>.</p>
+
+</div>
+</div>
+<a id="ac863db693e59fe16168b9d7c1c3cc2ed"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac863db693e59fe16168b9d7c1c3cc2ed">&#9670;&nbsp;</a></span>QX_STATIC_ASSERT_NO_INSTANTIATION</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define QX_STATIC_ASSERT_NO_INSTANTIATION</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">Message</td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Value:</b><div class="fragment"><div class="line">    []&lt;<span class="keywordtype">bool</span> flag = <span class="keyword">false</span>&gt;()                        \</div>
+<div class="line">    {                                              \</div>
+<div class="line">        static_assert(flag, Message);              \</div>
+<div class="line">    }()</div>
+</div><!-- fragment -->
+<p>This static assert will fail if block it placed in must not be instantiated. </p>
+<div class="fragment"><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> T&gt;</div>
+<div class="line">constexpr <span class="keywordtype">int</span> GetValue()</div>
+<div class="line">{</div>
+<div class="line">    <span class="keywordflow">if</span> constexpr (std::is_same_v&lt;T, bool&gt;)</div>
+<div class="line">    {</div>
+<div class="line">        <span class="keywordflow">return</span> 0;</div>
+<div class="line">    }</div>
+<div class="line">    <span class="keywordflow">else</span> <span class="keywordflow">if</span> constexpr (std::is_same_v&lt;T, int&gt;)</div>
+<div class="line">    {</div>
+<div class="line">        <span class="keywordflow">return</span> 0;</div>
+<div class="line">    }</div>
+<div class="line">    <span class="keywordflow">else</span></div>
+<div class="line">    {</div>
+<div class="line">        <a class="code" href="static__assert_8h.html#ac863db693e59fe16168b9d7c1c3cc2ed">QX_STATIC_ASSERT_NO_INSTANTIATION</a>(<span class="stringliteral">&quot;T must be bool or int&quot;</span>);</div>
+<div class="line">        <span class="keywordflow">return</span> 0;</div>
+<div class="line">    }</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line">constexpr <span class="keywordtype">int</span> val1 = GetValue&lt;bool&gt;();  <span class="comment">// ok</span></div>
+<div class="line">constexpr <span class="keywordtype">int</span> val2 = GetValue&lt;int&gt;();   <span class="comment">// ok</span></div>
+<div class="line">constexpr <span class="keywordtype">int</span> val3 = GetValue&lt;long&gt;();  <span class="comment">// static_assert failure</span></div>
+<div class="ttc" id="astatic__assert_8h_html_ac863db693e59fe16168b9d7c1c3cc2ed"><div class="ttname"><a href="static__assert_8h.html#ac863db693e59fe16168b9d7c1c3cc2ed">QX_STATIC_ASSERT_NO_INSTANTIATION</a></div><div class="ttdeci">#define QX_STATIC_ASSERT_NO_INSTANTIATION(Message)</div><div class="ttdoc">This static assert will fail if block it placed in must not be instantiated.</div><div class="ttdef"><b>Definition:</b> <a href="static__assert_8h_source.html#l00131">static_assert.h:131</a></div></div>
+</div><!-- fragment --><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">Message</td><td>- static_assert message </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="static__assert_8h_source.html#l00131">131</a> of file <a class="el" href="static__assert_8h_source.html">static_assert.h</a>.</p>
 
 </div>
 </div>
