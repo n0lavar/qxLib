@@ -108,7 +108,7 @@ $(function() {
 <div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    <span class="keywordtype">int</span>             nLine,</div>
 <div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    string_view     svCondition)</div>
 <div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;{</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    QX_LOGGER_INSTANCE.log(eVerbosity, QX_TEXT(<span class="stringliteral">&quot;[{}] &quot;</span>), fileCategory, svFile, svFunction, nLine, svCondition);</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    QX_LOGGER_INSTANCE.log(fileCategory, eVerbosity, svFile, svFunction, nLine, QXT(<span class="stringliteral">&quot;[{}] &quot;</span>), svCondition);</div>
 <div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    QX_LOGGER_INSTANCE.flush();</div>
 <div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;}</div>
 <div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160; </div>
@@ -124,8 +124,8 @@ $(function() {
 <div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    <span class="keyword">const</span> category&amp; category)</div>
 <div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;{</div>
 <div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    <span class="keywordtype">string</span> sMessage;</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    sMessage.append_format(QX_TEXT(<span class="stringliteral">&quot;[{}] &quot;</span>), svCondition);</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    QX_LOGGER_INSTANCE.log(eVerbosity, sMessage, category, svFile, svFunction, nLine);</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    sMessage.append_format(QXT(<span class="stringliteral">&quot;[{}] &quot;</span>), svCondition);</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    QX_LOGGER_INSTANCE.log(category, eVerbosity, svFile, svFunction, nLine, sMessage);</div>
 <div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    QX_LOGGER_INSTANCE.flush();</div>
 <div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;}</div>
 <div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160; </div>
@@ -143,9 +143,9 @@ $(function() {
 <div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    args_t&amp;&amp;... args)</div>
 <div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;{</div>
 <div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    <span class="keywordtype">string</span> sMessage;</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    sMessage.append_format(QX_TEXT(<span class="stringliteral">&quot;[{}] &quot;</span>), svCondition);</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    sMessage.append_format(QXT(<span class="stringliteral">&quot;[{}] &quot;</span>), svCondition);</div>
 <div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    sMessage.append_format(sFormat, std::forward&lt;args_t&gt;(args)...);</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;    QX_LOGGER_INSTANCE.log(eVerbosity, sMessage, fileCategory, svFile, svFunction, nLine);</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;    QX_LOGGER_INSTANCE.log(fileCategory, eVerbosity, svFile, svFunction, nLine, sMessage);</div>
 <div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;    QX_LOGGER_INSTANCE.flush();</div>
 <div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;}</div>
 <div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160; </div>
@@ -161,8 +161,8 @@ $(function() {
 <div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;    string_view svMessage)</div>
 <div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;{</div>
 <div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;    <span class="keywordtype">string</span> sMessage;</div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;    sMessage.append_format(QX_TEXT(<span class="stringliteral">&quot;[{}] {}&quot;</span>), svCondition, svMessage);</div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;    QX_LOGGER_INSTANCE.log(eVerbosity, sMessage, fileCategory, svFile, svFunction, nLine);</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;    sMessage.append_format(QXT(<span class="stringliteral">&quot;[{}] {}&quot;</span>), svCondition, svMessage);</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;    QX_LOGGER_INSTANCE.log(fileCategory, eVerbosity, svFile, svFunction, nLine, sMessage);</div>
 <div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;    QX_LOGGER_INSTANCE.flush();</div>
 <div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;}</div>
 <div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160; </div>
@@ -181,9 +181,9 @@ $(function() {
 <div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;    args_t&amp;&amp;... args)</div>
 <div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;{</div>
 <div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;    <span class="keywordtype">string</span> sMessage;</div>
-<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;    sMessage.append_format(QX_TEXT(<span class="stringliteral">&quot;[{}] &quot;</span>), svCondition);</div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;    sMessage.append_format(QXT(<span class="stringliteral">&quot;[{}] &quot;</span>), svCondition);</div>
 <div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;    sMessage.append_format(sFormat, std::forward&lt;args_t&gt;(args)...);</div>
-<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;    QX_LOGGER_INSTANCE.log(eVerbosity, sMessage, category, svFile, svFunction, nLine);</div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;    QX_LOGGER_INSTANCE.log(category, eVerbosity, svFile, svFunction, nLine, sMessage);</div>
 <div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;    QX_LOGGER_INSTANCE.flush();</div>
 <div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;}</div>
 <div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160; </div>
@@ -200,8 +200,8 @@ $(function() {
 <div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;    string_view     svMessage)</div>
 <div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;{</div>
 <div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;    <span class="keywordtype">string</span> sMessage;</div>
-<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;    sMessage.append_format(QX_TEXT(<span class="stringliteral">&quot;[{}] {}&quot;</span>), svCondition, svMessage);</div>
-<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;    QX_LOGGER_INSTANCE.log(eVerbosity, sMessage, category, svFile, svFunction, nLine);</div>
+<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;    sMessage.append_format(QXT(<span class="stringliteral">&quot;[{}] {}&quot;</span>), svCondition, svMessage);</div>
+<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;    QX_LOGGER_INSTANCE.log(category, eVerbosity, svFile, svFunction, nLine, sMessage);</div>
 <div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;    QX_LOGGER_INSTANCE.flush();</div>
 <div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;}</div>
 <div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160; </div>
@@ -216,11 +216,11 @@ $(function() {
 <div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;<span class="preprocessor">#ifndef QX_EXPECT_BEFORE_DEBUG_BREAK</span></div>
 <div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;<span class="preprocessor">    #define QX_EXPECT_BEFORE_DEBUG_BREAK(condition, ...)              \</span></div>
 <div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;<span class="preprocessor">        qx::details::resolve_assert_proceeding&lt;qx::verbosity::error&gt;( \</span></div>
-<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;<span class="preprocessor">            QX_FILE_CATEGORY(),                                       \</span></div>
+<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;<span class="preprocessor">            QX_GET_FILE_CATEGORY(),                                   \</span></div>
 <div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;<span class="preprocessor">            qx::to_string(__FUNCTION__),                              \</span></div>
 <div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;<span class="preprocessor">            QX_SHORT_FILE,                                            \</span></div>
 <div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;<span class="preprocessor">            QX_LINE,                                                  \</span></div>
-<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;<span class="preprocessor">            QX_TEXT(#condition),                                      \</span></div>
+<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;<span class="preprocessor">            QXT(#condition),                                          \</span></div>
 <div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;<span class="preprocessor">            ##__VA_ARGS__)</span></div>
 <div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;<span class="preprocessor">#endif</span></div>
 <div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160; </div>
@@ -239,11 +239,11 @@ $(function() {
 <div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;<span class="preprocessor">#ifndef QX_ASSERT_BEFORE_DEBUG_BREAK</span></div>
 <div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;<span class="preprocessor">    #define QX_ASSERT_BEFORE_DEBUG_BREAK(condition, ...)                 \</span></div>
 <div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;<span class="preprocessor">        qx::details::resolve_assert_proceeding&lt;qx::verbosity::critical&gt;( \</span></div>
-<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;<span class="preprocessor">            QX_FILE_CATEGORY(),                                          \</span></div>
+<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;<span class="preprocessor">            QX_GET_FILE_CATEGORY(),                                      \</span></div>
 <div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;<span class="preprocessor">            qx::to_string(__FUNCTION__),                                 \</span></div>
 <div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;<span class="preprocessor">            QX_SHORT_FILE,                                               \</span></div>
 <div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;<span class="preprocessor">            QX_LINE,                                                     \</span></div>
-<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;<span class="preprocessor">            QX_TEXT(#condition),                                         \</span></div>
+<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;<span class="preprocessor">            QXT(#condition),                                             \</span></div>
 <div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;<span class="preprocessor">            ##__VA_ARGS__)</span></div>
 <div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;<span class="preprocessor">#endif</span></div>
 <div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160; </div>
@@ -452,12 +452,12 @@ $(function() {
 <div class="line"><a name="l00381"></a><span class="lineno">  381</span>&#160;<span class="comment">/**</span></div>
 <div class="line"><a name="l00382"></a><span class="lineno">  382</span>&#160;<span class="comment">    @brief Use this as a condition in any macro above to indicate that this part of your code must never be executed</span></div>
 <div class="line"><a name="l00383"></a><span class="lineno">  383</span>&#160;<span class="comment">**/</span></div>
-<div class="line"><a name="l00384"></a><span class="lineno"><a class="line" href="assert_8h.html#abc8b1c272a1edbba73d064e9c6304218">  384</a></span>&#160;<span class="preprocessor">#define QX_NO_ENTRY !QX_TEXT(&quot;No entry&quot;</span>)</div>
+<div class="line"><a name="l00384"></a><span class="lineno"><a class="line" href="assert_8h.html#abc8b1c272a1edbba73d064e9c6304218">  384</a></span>&#160;<span class="preprocessor">#define QX_NO_ENTRY !QXT(&quot;No entry&quot;</span>)</div>
 <div class="line"><a name="l00385"></a><span class="lineno">  385</span>&#160;<span class="comment"></span> </div>
 <div class="line"><a name="l00386"></a><span class="lineno">  386</span>&#160;<span class="comment">/**</span></div>
 <div class="line"><a name="l00387"></a><span class="lineno">  387</span>&#160;<span class="comment">    @brief Use this as a condition in any macro above to indicate that this part of your code is not ready yet</span></div>
 <div class="line"><a name="l00388"></a><span class="lineno">  388</span>&#160;<span class="comment">**/</span></div>
-<div class="line"><a name="l00389"></a><span class="lineno"><a class="line" href="assert_8h.html#a37d987acaa5ea6d11804ff98d64ba761">  389</a></span>&#160;<span class="preprocessor">#define QX_NOT_IMPLEMENTED !QX_TEXT(&quot;Not implemented&quot;</span>)</div>
+<div class="line"><a name="l00389"></a><span class="lineno"><a class="line" href="assert_8h.html#a37d987acaa5ea6d11804ff98d64ba761">  389</a></span>&#160;<span class="preprocessor">#define QX_NOT_IMPLEMENTED !QXT(&quot;Not implemented&quot;</span>)</div>
 <div class="line"><a name="l00390"></a><span class="lineno">  390</span>&#160; </div>
 <div class="line"><a name="l00391"></a><span class="lineno">  391</span>&#160;<span class="keyword">namespace </span>qx::details</div>
 <div class="line"><a name="l00392"></a><span class="lineno">  392</span>&#160;{</div>

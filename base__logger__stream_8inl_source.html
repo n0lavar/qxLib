@@ -78,7 +78,7 @@ $(function() {
 <div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="comment"></span> </div>
 <div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="comment">**/</span></div>
 <div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160; </div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<a class="code" href="category_8h.html#ab28a5f3061eb60cd18d5aec69a136852">QX_DEFINE_FILE_CATEGORY</a>(CatLogger);</div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<a class="code" href="category_8h.html#aa6ce57fc027b0e714c9b0b562fd6b0e3">QX_SET_FILE_CATEGORY</a>(CatLogger);</div>
 <div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160; </div>
 <div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="keyword">namespace </span>qx</div>
 <div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;{</div>
@@ -88,9 +88,9 @@ $(function() {
 <div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;    <a class="code" href="classqx_1_1base__logger__stream.html#ace92fe548f73af42ac5a5ebebd47f8db">register_unit</a>(k_svDefaultUnit, { verbosity::log });</div>
 <div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;}</div>
 <div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160; </div>
-<div class="line"><a name="l00020"></a><span class="lineno"><a class="line" href="classqx_1_1base__logger__stream.html#a1871771347c41f90b84bb0706d5da56f">   20</a></span>&#160;<span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="classqx_1_1base__logger__stream.html#a1871771347c41f90b84bb0706d5da56f">base_logger_stream::log</a>(</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    verbosity       eVerbosity,</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    <span class="keyword">const</span> <a class="code" href="classqx_1_1category.html">category</a>&amp; <a class="code" href="classqx_1_1category.html">category</a>,</div>
+<div class="line"><a name="l00020"></a><span class="lineno"><a class="line" href="classqx_1_1base__logger__stream.html#a1e608b8015b6837a69906ad4cc9cdc39">   20</a></span>&#160;<span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="classqx_1_1base__logger__stream.html#a1e608b8015b6837a69906ad4cc9cdc39">base_logger_stream::log</a>(</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    <span class="keyword">const</span> <a class="code" href="classqx_1_1category.html">category</a>&amp; <a class="code" href="classqx_1_1category.html">category</a>,</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    verbosity       eVerbosity,</div>
 <div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    string_view     svFile,</div>
 <div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    string_view     svFunction,</div>
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    <span class="keywordtype">int</span>             nLine,</div>
@@ -188,7 +188,7 @@ $(function() {
 <div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;    QX_POP_SUPPRESS_WARNINGS();</div>
 <div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160; </div>
 <div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;    sTime.append_format(</div>
-<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;        QX_TEXT(<span class="stringliteral">&quot;{:02}{}{:02}{}{:04}_{:02}{}{:02}{}{:02}&quot;</span>),</div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;        QXT(<span class="stringliteral">&quot;{:02}{}{:02}{}{:04}_{:02}{}{:02}{}{:02}&quot;</span>),</div>
 <div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;        now-&gt;tm_mday,</div>
 <div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;        chDateDelimiter,</div>
 <div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;        now-&gt;tm_mon,</div>
@@ -218,45 +218,45 @@ $(function() {
 <div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;    <span class="keywordflow">switch</span> (eVerbosity)</div>
 <div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;    {</div>
 <div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;    <span class="keywordflow">case</span> verbosity::very_verbose:</div>
-<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;        buffers.sMessage = QX_TEXT(<span class="stringliteral">&quot;[W][&quot;</span>);</div>
+<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;        buffers.sMessage = QXT(<span class="stringliteral">&quot;[W][&quot;</span>);</div>
 <div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;        <span class="keywordflow">break</span>;</div>
 <div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160; </div>
 <div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;    <span class="keywordflow">case</span> verbosity::verbose:</div>
-<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;        buffers.sMessage = QX_TEXT(<span class="stringliteral">&quot;[V][&quot;</span>);</div>
+<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;        buffers.sMessage = QXT(<span class="stringliteral">&quot;[V][&quot;</span>);</div>
 <div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;        <span class="keywordflow">break</span>;</div>
 <div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160; </div>
 <div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;    <span class="keywordflow">case</span> verbosity::important:</div>
-<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;        buffers.sMessage = QX_TEXT(<span class="stringliteral">&quot;[I][&quot;</span>);</div>
+<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;        buffers.sMessage = QXT(<span class="stringliteral">&quot;[I][&quot;</span>);</div>
 <div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;        <span class="keywordflow">break</span>;</div>
 <div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160; </div>
 <div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;    <span class="keywordflow">case</span> verbosity::warning:</div>
-<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;        buffers.sMessage = QX_TEXT(<span class="stringliteral">&quot;[W][&quot;</span>);</div>
+<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;        buffers.sMessage = QXT(<span class="stringliteral">&quot;[W][&quot;</span>);</div>
 <div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;        <span class="keywordflow">break</span>;</div>
 <div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160; </div>
 <div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;    <span class="keywordflow">case</span> verbosity::error:</div>
-<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;        buffers.sMessage = QX_TEXT(<span class="stringliteral">&quot;[E][&quot;</span>);</div>
+<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;        buffers.sMessage = QXT(<span class="stringliteral">&quot;[E][&quot;</span>);</div>
 <div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;        <span class="keywordflow">break</span>;</div>
 <div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160; </div>
 <div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;    <span class="keywordflow">case</span> verbosity::critical:</div>
-<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;        buffers.sMessage = QX_TEXT(<span class="stringliteral">&quot;[C][&quot;</span>);</div>
+<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;        buffers.sMessage = QXT(<span class="stringliteral">&quot;[C][&quot;</span>);</div>
 <div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;        <span class="keywordflow">break</span>;</div>
 <div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160; </div>
 <div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;    <span class="keywordflow">default</span>:</div>
-<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;        buffers.sMessage = QX_TEXT(<span class="stringliteral">&quot;   [&quot;</span>);</div>
+<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;        buffers.sMessage = QXT(<span class="stringliteral">&quot;   [&quot;</span>);</div>
 <div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;        <span class="keywordflow">break</span>;</div>
 <div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;    }</div>
 <div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160; </div>
-<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;    append_time_string(buffers.sMessage, QX_TEXT(<span class="charliteral">&#39;.&#39;</span>), QX_TEXT(<span class="charliteral">&#39;:&#39;</span>));</div>
-<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;    buffers.sMessage += QX_TEXT(<span class="stringliteral">&quot;][&quot;</span>);</div>
+<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;    append_time_string(buffers.sMessage, QXT(<span class="charliteral">&#39;.&#39;</span>), QXT(<span class="charliteral">&#39;:&#39;</span>));</div>
+<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;    buffers.sMessage += QXT(<span class="stringliteral">&quot;][&quot;</span>);</div>
 <div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160; </div>
 <div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;    string_view svCategory = <a class="code" href="classqx_1_1category.html">category</a>.<a class="code" href="classqx_1_1category.html#a0b2b93e7b142f4a34cf90ceaa304177f">get_name</a>();</div>
 <div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;    <span class="keywordflow">if</span> (!svCategory.empty())</div>
 <div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;    {</div>
 <div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;        buffers.sMessage += svCategory;</div>
-<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;        buffers.sMessage += QX_TEXT(<span class="stringliteral">&quot;][&quot;</span>);</div>
+<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;        buffers.sMessage += QXT(<span class="stringliteral">&quot;][&quot;</span>);</div>
 <div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;    }</div>
 <div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160; </div>
-<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;    buffers.sMessage.append_format(QX_TEXT(<span class="stringliteral">&quot;{}::{}::{}] {}\n&quot;</span>), svFile, svFunction, nLine, swLogMessage);</div>
+<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;    buffers.sMessage.append_format(QXT(<span class="stringliteral">&quot;{}::{}::{}] {}\n&quot;</span>), svFile, svFunction, nLine, swLogMessage);</div>
 <div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160; </div>
 <div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;    <span class="keywordflow">if</span> (!svCategory.empty())</div>
 <div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;        <span class="keywordflow">if</span> (<span class="keyword">auto</span> nPos = buffers.sMessage.find(svCategory); nPos != string::npos)</div>
@@ -264,10 +264,10 @@ $(function() {
 <div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;}</div>
 <div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160; </div>
 <div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;} <span class="comment">// namespace qx</span></div>
-<div class="ttc" id="acategory_8h_html_ab28a5f3061eb60cd18d5aec69a136852"><div class="ttname"><a href="category_8h.html#ab28a5f3061eb60cd18d5aec69a136852">QX_DEFINE_FILE_CATEGORY</a></div><div class="ttdeci">#define QX_DEFINE_FILE_CATEGORY(_category)</div><div class="ttdoc">Define file category You can access this value via QX_FILE_CATEGORY() This category will not be expor...</div><div class="ttdef"><b>Definition:</b> <a href="category_8h_source.html#l00029">category.h:29</a></div></div>
+<div class="ttc" id="acategory_8h_html_aa6ce57fc027b0e714c9b0b562fd6b0e3"><div class="ttname"><a href="category_8h.html#aa6ce57fc027b0e714c9b0b562fd6b0e3">QX_SET_FILE_CATEGORY</a></div><div class="ttdeci">#define QX_SET_FILE_CATEGORY(_category)</div><div class="ttdoc">Set the file category You can access this value via QX_GET_FILE_CATEGORY() This category will not be ...</div><div class="ttdef"><b>Definition:</b> <a href="category_8h_source.html#l00029">category.h:29</a></div></div>
 <div class="ttc" id="aclassqx_1_1base__logger__stream_html_a185e4fde6d1ee68582320e39d8ab43b6"><div class="ttname"><a href="classqx_1_1base__logger__stream.html#a185e4fde6d1ee68582320e39d8ab43b6">qx::base_logger_stream::append_time_string</a></div><div class="ttdeci">static void append_time_string(string &amp;sTime, char_type chDateDelimiter, char_type chTimeDelimiter) noexcept</div><div class="ttdoc">Format time string to the buffer.</div><div class="ttdef"><b>Definition:</b> <a href="base__logger__stream_8inl_source.html#l00109">base_logger_stream.inl:109</a></div></div>
-<div class="ttc" id="aclassqx_1_1base__logger__stream_html_a1871771347c41f90b84bb0706d5da56f"><div class="ttname"><a href="classqx_1_1base__logger__stream.html#a1871771347c41f90b84bb0706d5da56f">qx::base_logger_stream::log</a></div><div class="ttdeci">void log(verbosity eVerbosity, const category &amp;category, string_view svFile, string_view svFunction, int nLine, string_view swLogMessage)</div><div class="ttdoc">Output to stream.</div><div class="ttdef"><b>Definition:</b> <a href="base__logger__stream_8inl_source.html#l00020">base_logger_stream.inl:20</a></div></div>
 <div class="ttc" id="aclassqx_1_1base__logger__stream_html_a1ca5d7cdb0925fa037842d3e68015ec0"><div class="ttname"><a href="classqx_1_1base__logger__stream.html#a1ca5d7cdb0925fa037842d3e68015ec0">qx::base_logger_stream::get_unit_info</a></div><div class="ttdeci">std::optional&lt; log_unit &gt; get_unit_info(const category &amp;category, verbosity eVerbosity, string_view svFile, string_view svFunction) const noexcept</div><div class="ttdoc">Try to find log unit info based on trace location info.</div><div class="ttdef"><b>Definition:</b> <a href="base__logger__stream_8inl_source.html#l00079">base_logger_stream.inl:79</a></div></div>
+<div class="ttc" id="aclassqx_1_1base__logger__stream_html_a1e608b8015b6837a69906ad4cc9cdc39"><div class="ttname"><a href="classqx_1_1base__logger__stream.html#a1e608b8015b6837a69906ad4cc9cdc39">qx::base_logger_stream::log</a></div><div class="ttdeci">void log(const category &amp;category, verbosity eVerbosity, string_view svFile, string_view svFunction, int nLine, string_view swLogMessage)</div><div class="ttdoc">Output to stream.</div><div class="ttdef"><b>Definition:</b> <a href="base__logger__stream_8inl_source.html#l00020">base_logger_stream.inl:20</a></div></div>
 <div class="ttc" id="aclassqx_1_1base__logger__stream_html_a2a5cdad5dcf92486e5832953315100d7"><div class="ttname"><a href="classqx_1_1base__logger__stream.html#a2a5cdad5dcf92486e5832953315100d7">qx::base_logger_stream::get_log_buffer</a></div><div class="ttdeci">logger_buffer &amp; get_log_buffer() noexcept</div><div class="ttdoc">Get string buffers.</div><div class="ttdef"><b>Definition:</b> <a href="base__logger__stream_8inl_source.html#l00133">base_logger_stream.inl:133</a></div></div>
 <div class="ttc" id="aclassqx_1_1base__logger__stream_html_a305b21a54aa598b33d1ddb8ce23bc595"><div class="ttname"><a href="classqx_1_1base__logger__stream.html#a305b21a54aa598b33d1ddb8ce23bc595">qx::base_logger_stream::flush</a></div><div class="ttdeci">virtual void flush()=0</div><div class="ttdoc">Flush stream.</div></div>
 <div class="ttc" id="aclassqx_1_1base__logger__stream_html_a5148e9b2f86df61963b9b56ab69a9d61"><div class="ttname"><a href="classqx_1_1base__logger__stream.html#a5148e9b2f86df61963b9b56ab69a9d61">qx::base_logger_stream::deregister_unit</a></div><div class="ttdeci">void deregister_unit(string_view svUnitName) noexcept</div><div class="ttdoc">Deregister logger unit.</div><div class="ttdef"><b>Definition:</b> <a href="base__logger__stream_8inl_source.html#l00074">base_logger_stream.inl:74</a></div></div>
@@ -275,7 +275,7 @@ $(function() {
 <div class="ttc" id="aclassqx_1_1base__logger__stream_html_ace92fe548f73af42ac5a5ebebd47f8db"><div class="ttname"><a href="classqx_1_1base__logger__stream.html#ace92fe548f73af42ac5a5ebebd47f8db">qx::base_logger_stream::register_unit</a></div><div class="ttdeci">void register_unit(string_view svUnitName, const log_unit_info &amp;unit) noexcept</div><div class="ttdoc">Register logger unit.</div><div class="ttdef"><b>Definition:</b> <a href="base__logger__stream_8inl_source.html#l00068">base_logger_stream.inl:68</a></div></div>
 <div class="ttc" id="aclassqx_1_1base__logger__stream_html_ad55c3e6907fa2fb2b5f8ba4f29558883"><div class="ttname"><a href="classqx_1_1base__logger__stream.html#ad55c3e6907fa2fb2b5f8ba4f29558883">qx::base_logger_stream::format_line</a></div><div class="ttdeci">virtual void format_line(logger_buffer &amp;buffers, verbosity eVerbosity, const category &amp;category, string_view svFile, string_view svFunction, int nLine, string_view swLogMessage) noexcept</div><div class="ttdoc">Format logger line.</div><div class="ttdef"><b>Definition:</b> <a href="base__logger__stream_8inl_source.html#l00138">base_logger_stream.inl:138</a></div></div>
 <div class="ttc" id="aclassqx_1_1basic__string__hash_html"><div class="ttname"><a href="classqx_1_1basic__string__hash.html">qx::basic_string_hash</a></div><div class="ttdoc">String hash object.</div><div class="ttdef"><b>Definition:</b> <a href="string__hash_8h_source.html#l00037">string_hash.h:38</a></div></div>
-<div class="ttc" id="aclassqx_1_1category_html"><div class="ttname"><a href="classqx_1_1category.html">qx::category</a></div><div class="ttdoc">A category is a class that identifies a particular piece of code. This code can be located in differe...</div><div class="ttdef"><b>Definition:</b> <a href="category_8h_source.html#l00055">category.h:56</a></div></div>
+<div class="ttc" id="aclassqx_1_1category_html"><div class="ttname"><a href="classqx_1_1category.html">qx::category</a></div><div class="ttdoc">A category is a class that identifies a particular piece of code. This code can be located in differe...</div><div class="ttdef"><b>Definition:</b> <a href="category_8h_source.html#l00058">category.h:59</a></div></div>
 <div class="ttc" id="aclassqx_1_1category_html_a0b2b93e7b142f4a34cf90ceaa304177f"><div class="ttname"><a href="classqx_1_1category.html#a0b2b93e7b142f4a34cf90ceaa304177f">qx::category::get_name</a></div><div class="ttdeci">constexpr string_view get_name() const noexcept</div><div class="ttdoc">Get category name.</div><div class="ttdef"><b>Definition:</b> <a href="category_8inl_source.html#l00026">category.inl:26</a></div></div>
 <div class="ttc" id="aclassqx_1_1category_html_a45f05eea5cdc8a8030b3233748bbcef2"><div class="ttname"><a href="classqx_1_1category.html#a45f05eea5cdc8a8030b3233748bbcef2">qx::category::get_color</a></div><div class="ttdeci">constexpr const color &amp; get_color() const noexcept</div><div class="ttdoc">Get category color.</div><div class="ttdef"><b>Definition:</b> <a href="category_8inl_source.html#l00031">category.inl:31</a></div></div>
 <div class="ttc" id="astructqx_1_1log__unit__info_html"><div class="ttname"><a href="structqx_1_1log__unit__info.html">qx::log_unit_info</a></div><div class="ttdef"><b>Definition:</b> <a href="base__logger__stream_8h_source.html#l00047">base_logger_stream.h:48</a></div></div>

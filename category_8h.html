@@ -88,16 +88,16 @@ Classes</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
 Macros</h2></td></tr>
-<tr class="memitem:abdf761e9200c7013ddfee39ea8d39e78"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="category_8h.html#abdf761e9200c7013ddfee39ea8d39e78">QX_DEFINE_CATEGORY</a>(name, ...)&#160;&#160;&#160;constexpr <a class="el" href="classqx_1_1category.html">qx::category</a> name(QX_TEXT(#name), ##__VA_ARGS__)</td></tr>
+<tr class="memitem:abdf761e9200c7013ddfee39ea8d39e78"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="category_8h.html#abdf761e9200c7013ddfee39ea8d39e78">QX_DEFINE_CATEGORY</a>(name, ...)&#160;&#160;&#160;constexpr <a class="el" href="classqx_1_1category.html">qx::category</a> name(QXT(#name), ##__VA_ARGS__)</td></tr>
 <tr class="memdesc:abdf761e9200c7013ddfee39ea8d39e78"><td class="mdescLeft">&#160;</td><td class="mdescRight">Define a category.  <a href="category_8h.html#abdf761e9200c7013ddfee39ea8d39e78">More...</a><br /></td></tr>
 <tr class="separator:abdf761e9200c7013ddfee39ea8d39e78"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab28a5f3061eb60cd18d5aec69a136852"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="category_8h.html#ab28a5f3061eb60cd18d5aec69a136852">QX_DEFINE_FILE_CATEGORY</a>(_category)</td></tr>
-<tr class="memdesc:ab28a5f3061eb60cd18d5aec69a136852"><td class="mdescLeft">&#160;</td><td class="mdescRight">Define file category You can access this value via <a class="el" href="category_8h.html#a1fefdd39c5b172f997a9097b5a7f4139" title="Get category defined in QX_DEFINE_FILE_CATEGORY If there is none, CatDefault will be used.">QX_FILE_CATEGORY()</a> This category will not be exported via #include.  <a href="category_8h.html#ab28a5f3061eb60cd18d5aec69a136852">More...</a><br /></td></tr>
-<tr class="separator:ab28a5f3061eb60cd18d5aec69a136852"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1fefdd39c5b172f997a9097b5a7f4139"><td class="memItemLeft" align="right" valign="top"><a id="a1fefdd39c5b172f997a9097b5a7f4139"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="category_8h.html#a1fefdd39c5b172f997a9097b5a7f4139">QX_FILE_CATEGORY</a>()&#160;&#160;&#160;qx::details::get_file_category&lt;qx::djb2a_hash(<a class="el" href="macros_2common_8h.html#ae158b161fec70fada62391b9ffa7d502">QX_SHORT_FILE</a>, 0)&gt;()</td></tr>
-<tr class="memdesc:a1fefdd39c5b172f997a9097b5a7f4139"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get category defined in QX_DEFINE_FILE_CATEGORY If there is none, CatDefault will be used. <br /></td></tr>
-<tr class="separator:a1fefdd39c5b172f997a9097b5a7f4139"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa6ce57fc027b0e714c9b0b562fd6b0e3"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="category_8h.html#aa6ce57fc027b0e714c9b0b562fd6b0e3">QX_SET_FILE_CATEGORY</a>(_category)</td></tr>
+<tr class="memdesc:aa6ce57fc027b0e714c9b0b562fd6b0e3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the file category You can access this value via <a class="el" href="category_8h.html#adca05f77ff871740e30468a4fc677ee1" title="Get category defined in QX_SET_FILE_CATEGORY If there is none, CatDefault will be used.">QX_GET_FILE_CATEGORY()</a> This category will not be exported via #include.  <a href="category_8h.html#aa6ce57fc027b0e714c9b0b562fd6b0e3">More...</a><br /></td></tr>
+<tr class="separator:aa6ce57fc027b0e714c9b0b562fd6b0e3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adca05f77ff871740e30468a4fc677ee1"><td class="memItemLeft" align="right" valign="top"><a id="adca05f77ff871740e30468a4fc677ee1"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="category_8h.html#adca05f77ff871740e30468a4fc677ee1">QX_GET_FILE_CATEGORY</a>()&#160;&#160;&#160;<a class="el" href="structqx_1_1details_1_1file__category.html">qx::details::file_category</a>&lt;qx::djb2a_hash(<a class="el" href="macros_2common_8h.html#ae158b161fec70fada62391b9ffa7d502">QX_SHORT_FILE</a>, 0)&gt;::get()</td></tr>
+<tr class="memdesc:adca05f77ff871740e30468a4fc677ee1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get category defined in QX_SET_FILE_CATEGORY If there is none, CatDefault will be used. <br /></td></tr>
+<tr class="separator:adca05f77ff871740e30468a4fc677ee1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><dl class="section author"><dt>Author</dt><dd>Khrapov </dd></dl>
@@ -127,7 +127,7 @@ Macros</h2></td></tr>
         <tr>
           <td></td>
           <td>)</td>
-          <td></td><td>&#160;&#160;&#160;constexpr <a class="el" href="classqx_1_1category.html">qx::category</a> name(QX_TEXT(#name), ##__VA_ARGS__)</td>
+          <td></td><td>&#160;&#160;&#160;constexpr <a class="el" href="classqx_1_1category.html">qx::category</a> name(QXT(#name), ##__VA_ARGS__)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -145,14 +145,14 @@ Macros</h2></td></tr>
 
 </div>
 </div>
-<a id="ab28a5f3061eb60cd18d5aec69a136852"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab28a5f3061eb60cd18d5aec69a136852">&#9670;&nbsp;</a></span>QX_DEFINE_FILE_CATEGORY</h2>
+<a id="aa6ce57fc027b0e714c9b0b562fd6b0e3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa6ce57fc027b0e714c9b0b562fd6b0e3">&#9670;&nbsp;</a></span>QX_SET_FILE_CATEGORY</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define QX_DEFINE_FILE_CATEGORY</td>
+          <td class="memname">#define QX_SET_FILE_CATEGORY</td>
           <td>(</td>
           <td class="paramtype">&#160;</td>
           <td class="paramname">_category</td><td>)</td>
@@ -160,14 +160,20 @@ Macros</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<b>Value:</b><div class="fragment"><div class="line">    <span class="keyword">template</span>&lt;&gt;                                                                                                \</div>
-<div class="line">    constexpr <span class="keyword">const</span> <a class="code" href="classqx_1_1category.html">qx::category</a>&amp; qx::details::get_file_category&lt;qx::djb2a_hash(QX_SHORT_FILE, 0)&gt;() noexcept \</div>
-<div class="line">    {                                                                                                         \</div>
-<div class="line">        return _category;                                                                                     \</div>
+<b>Value:</b><div class="fragment"><div class="line">    <span class="keyword">template</span>&lt;&gt;                                                          \</div>
+<div class="line">    struct <a class="code" href="structqx_1_1details_1_1file__category.html">qx::details::file_category</a>&lt;<a class="code" href="string__utils_8h.html#a3d321a74f68c1be9613ca451a464ec53">qx::djb2a_hash</a>(<a class="code" href="macros_2common_8h.html#ae158b161fec70fada62391b9ffa7d502">QX_SHORT_FILE</a>, 0)&gt; \</div>
+<div class="line">    {                                                                   \</div>
+<div class="line">        static constexpr <span class="keyword">const</span> <a class="code" href="classqx_1_1category.html">qx::category</a>&amp; <span class="keyword">get</span>() noexcept             \</div>
+<div class="line">        {                                                               \</div>
+<div class="line">            return _category;                                           \</div>
+<div class="line">        }                                                               \</div>
 <div class="line">    }</div>
-<div class="ttc" id="aclassqx_1_1category_html"><div class="ttname"><a href="classqx_1_1category.html">qx::category</a></div><div class="ttdoc">A category is a class that identifies a particular piece of code. This code can be located in differe...</div><div class="ttdef"><b>Definition:</b> <a href="category_8h_source.html#l00055">category.h:56</a></div></div>
+<div class="ttc" id="aclassqx_1_1category_html"><div class="ttname"><a href="classqx_1_1category.html">qx::category</a></div><div class="ttdoc">A category is a class that identifies a particular piece of code. This code can be located in differe...</div><div class="ttdef"><b>Definition:</b> <a href="category_8h_source.html#l00058">category.h:59</a></div></div>
+<div class="ttc" id="amacros_2common_8h_html_ae158b161fec70fada62391b9ffa7d502"><div class="ttname"><a href="macros_2common_8h.html#ae158b161fec70fada62391b9ffa7d502">QX_SHORT_FILE</a></div><div class="ttdeci">#define QX_SHORT_FILE</div><div class="ttdoc">Cuts full absolute path to the file name only ex: &quot;C:\folder1\folder2\file.h&quot; =&gt; &quot;file....</div><div class="ttdef"><b>Definition:</b> <a href="macros_2common_8h_source.html#l00034">common.h:34</a></div></div>
+<div class="ttc" id="astring__utils_8h_html_a3d321a74f68c1be9613ca451a464ec53"><div class="ttname"><a href="string__utils_8h.html#a3d321a74f68c1be9613ca451a464ec53">qx::djb2a_hash</a></div><div class="ttdeci">constexpr size_t djb2a_hash(const value_t *pszStr, size_t nSeed, size_t nLen)</div><div class="ttdoc">djb2a hash</div><div class="ttdef"><b>Definition:</b> <a href="string__utils_8h_source.html#l00026">string_utils.h:26</a></div></div>
+<div class="ttc" id="astructqx_1_1details_1_1file__category_html"><div class="ttname"><a href="structqx_1_1details_1_1file__category.html">qx::details::file_category</a></div><div class="ttdef"><b>Definition:</b> <a href="category_8inl_source.html#l00047">category.inl:47</a></div></div>
 </div><!-- fragment -->
-<p>Define file category You can access this value via <a class="el" href="category_8h.html#a1fefdd39c5b172f997a9097b5a7f4139" title="Get category defined in QX_DEFINE_FILE_CATEGORY If there is none, CatDefault will be used.">QX_FILE_CATEGORY()</a> This category will not be exported via #include. </p>
+<p>Set the file category You can access this value via <a class="el" href="category_8h.html#adca05f77ff871740e30468a4fc677ee1" title="Get category defined in QX_SET_FILE_CATEGORY If there is none, CatDefault will be used.">QX_GET_FILE_CATEGORY()</a> This category will not be exported via #include. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">_category</td><td>- category to use in this file </td></tr>

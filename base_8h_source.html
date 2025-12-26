@@ -106,10 +106,10 @@ $(function() {
 <div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="comment">    // 1. Convert it using `qx::convert`:</span></div>
 <div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="comment">    qx::unit result = qx::convert(unit).to(qx::units::unit_type::type2);</span></div>
 <div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="comment">    // 2. Format it:</span></div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="comment">    qx::string = qx::string::static_format(QX_TEXT(&quot;{}&quot;), unit); // -&gt; for ex. 20kB</span></div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="comment">    qx::string = qx::string::static_format(QXT(&quot;{}&quot;), unit); // -&gt; for ex. 20kB</span></div>
 <div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="comment">    // 3. Create it from a string:</span></div>
 <div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="comment">    std::optional&lt;qx::unit&lt;int, qx::units::data&gt;&gt; optResult =</span></div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="comment">        qx::unit_from_string&lt;int, qx::units::data, qx::char_type&gt;(QX_TEXT(&quot;20KiB&quot;));</span></div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="comment">        qx::unit_from_string&lt;int, qx::units::data, qx::char_type&gt;(QXT(&quot;20KiB&quot;));</span></div>
 <div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="comment">    // 4. Get the nearest meaningful value (SI units):</span></div>
 <div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="comment">    // 2000B -&gt; 1.95KiB</span></div>
 <div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="comment">    // 3000B -&gt; 2.92KiB</span></div>

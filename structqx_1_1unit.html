@@ -81,10 +81,10 @@ struct qx::unit&lt; T, unit_t &gt;</h3>
 <div class="line"><span class="comment">// 1. Convert it using `qx::convert`:</span></div>
 <div class="line"><a class="code" href="structqx_1_1unit.html">qx::unit</a> result = <a class="code" href="classqx_1_1convert.html">qx::convert</a>(unit).to(qx::units::unit_type::type2);</div>
 <div class="line"><span class="comment">// 2. Format it:</span></div>
-<div class="line"><a class="code" href="classqx_1_1basic__string.html">qx::string</a> = <a class="code" href="classqx_1_1basic__string.html#ae691d641ae64e0d7246c3f35eb2e9fbb">qx::string::static_format</a>(QX_TEXT(<span class="stringliteral">&quot;{}&quot;</span>), unit); <span class="comment">// -&gt; for ex. 20kB</span></div>
+<div class="line"><a class="code" href="classqx_1_1basic__string.html">qx::string</a> = <a class="code" href="classqx_1_1basic__string.html#ae691d641ae64e0d7246c3f35eb2e9fbb">qx::string::static_format</a>(QXT(<span class="stringliteral">&quot;{}&quot;</span>), unit); <span class="comment">// -&gt; for ex. 20kB</span></div>
 <div class="line"><span class="comment">// 3. Create it from a string:</span></div>
 <div class="line">std::optional&lt;qx::unit&lt;int, qx::units::data&gt;&gt; optResult =</div>
-<div class="line">    qx::unit_from_string&lt;int, qx::units::data, qx::char_type&gt;(QX_TEXT(<span class="stringliteral">&quot;20KiB&quot;</span>));</div>
+<div class="line">    qx::unit_from_string&lt;int, qx::units::data, qx::char_type&gt;(QXT(<span class="stringliteral">&quot;20KiB&quot;</span>));</div>
 <div class="line"><span class="comment">// 4. Get the nearest meaningful value (SI units):</span></div>
 <div class="line"><span class="comment">// 2000B -&gt; 1.95KiB</span></div>
 <div class="line"><span class="comment">// 3000B -&gt; 2.92KiB</span></div>
