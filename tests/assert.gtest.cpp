@@ -15,6 +15,8 @@
 
 #include <qx/macros/assert.h>
 
+QX_SET_FILE_CATEGORY(CatDefault);
+
 QX_PUSH_SUPPRESS_MSVC_WARNINGS(4702);
 
 void Foo()
@@ -60,24 +62,24 @@ TEST(qx_assert, expect_f_macro_compilation)
 {
     return;
 
-    QX_EXPECT(false, QX_TEXT("msg {}"), 41);
+    QX_EXPECT(false, QXT("msg {}"), 41);
 
     if (false)
-        QX_EXPECT(false, QX_TEXT("msg {}"), 41);
+        QX_EXPECT(false, QXT("msg {}"), 41);
 
     if (false)
-        QX_EXPECT(false, QX_TEXT("msg {}"), 41);
+        QX_EXPECT(false, QXT("msg {}"), 41);
     else
         Foo();
 
     if (false)
         Foo();
     else
-        QX_EXPECT(false, QX_TEXT("msg {}"), 41);
+        QX_EXPECT(false, QXT("msg {}"), 41);
 
     if (false)
     {
-        QX_EXPECT(false, QX_TEXT("msg {}"), 41);
+        QX_EXPECT(false, QXT("msg {}"), 41);
         Foo();
     }
 
@@ -85,7 +87,7 @@ TEST(qx_assert, expect_f_macro_compilation)
         Foo();
     else
     {
-        QX_EXPECT(false, QX_TEXT("msg {}"), 41);
+        QX_EXPECT(false, QXT("msg {}"), 41);
         Foo();
     }
 }
@@ -94,24 +96,24 @@ TEST(qx_assert, expect_cf_macro_compilation)
 {
     return;
 
-    QX_EXPECT(false, CatDefault, QX_TEXT("msg {}"), 41);
+    QX_EXPECT(false, CatDefault, QXT("msg {}"), 41);
 
     if (false)
-        QX_EXPECT(false, CatDefault, QX_TEXT("msg {}"), 41);
+        QX_EXPECT(false, CatDefault, QXT("msg {}"), 41);
 
     if (false)
-        QX_EXPECT(false, CatDefault, QX_TEXT("msg {}"), 41);
+        QX_EXPECT(false, CatDefault, QXT("msg {}"), 41);
     else
         Foo();
 
     if (false)
         Foo();
     else
-        QX_EXPECT(false, CatDefault, QX_TEXT("msg {}"), 41);
+        QX_EXPECT(false, CatDefault, QXT("msg {}"), 41);
 
     if (false)
     {
-        QX_EXPECT(false, CatDefault, QX_TEXT("msg {}"), 41);
+        QX_EXPECT(false, CatDefault, QXT("msg {}"), 41);
         Foo();
     }
 
@@ -119,7 +121,7 @@ TEST(qx_assert, expect_cf_macro_compilation)
         Foo();
     else
     {
-        QX_EXPECT(false, CatDefault, QX_TEXT("msg {}"), 41);
+        QX_EXPECT(false, CatDefault, QXT("msg {}"), 41);
         Foo();
     }
 }
@@ -196,24 +198,24 @@ TEST(qx_assert, expect_no_entry_f_macro_compilation)
 {
     return;
 
-    QX_EXPECT(QX_NO_ENTRY, QX_TEXT("msg {}"), 41);
+    QX_EXPECT(QX_NO_ENTRY, QXT("msg {}"), 41);
 
     if (false)
-        QX_EXPECT(QX_NO_ENTRY, QX_TEXT("msg {}"), 41);
+        QX_EXPECT(QX_NO_ENTRY, QXT("msg {}"), 41);
 
     if (false)
-        QX_EXPECT(QX_NO_ENTRY, QX_TEXT("msg {}"), 41);
+        QX_EXPECT(QX_NO_ENTRY, QXT("msg {}"), 41);
     else
         Foo();
 
     if (false)
         Foo();
     else
-        QX_EXPECT(QX_NO_ENTRY, QX_TEXT("msg {}"), 41);
+        QX_EXPECT(QX_NO_ENTRY, QXT("msg {}"), 41);
 
     if (false)
     {
-        QX_EXPECT(QX_NO_ENTRY, QX_TEXT("msg {}"), 41);
+        QX_EXPECT(QX_NO_ENTRY, QXT("msg {}"), 41);
         Foo();
     }
 
@@ -221,7 +223,7 @@ TEST(qx_assert, expect_no_entry_f_macro_compilation)
         Foo();
     else
     {
-        QX_EXPECT(QX_NO_ENTRY, QX_TEXT("msg {}"), 41);
+        QX_EXPECT(QX_NO_ENTRY, QXT("msg {}"), 41);
         Foo();
     }
 }
@@ -230,24 +232,24 @@ TEST(qx_assert, expect_no_entry_cf_macro_compilation)
 {
     return;
 
-    QX_EXPECT(QX_NO_ENTRY, CatDefault, QX_TEXT("msg {}"), 41);
+    QX_EXPECT(QX_NO_ENTRY, CatDefault, QXT("msg {}"), 41);
 
     if (false)
-        QX_EXPECT(QX_NO_ENTRY, CatDefault, QX_TEXT("msg {}"), 41);
+        QX_EXPECT(QX_NO_ENTRY, CatDefault, QXT("msg {}"), 41);
 
     if (false)
-        QX_EXPECT(QX_NO_ENTRY, CatDefault, QX_TEXT("msg {}"), 41);
+        QX_EXPECT(QX_NO_ENTRY, CatDefault, QXT("msg {}"), 41);
     else
         Foo();
 
     if (false)
         Foo();
     else
-        QX_EXPECT(QX_NO_ENTRY, CatDefault, QX_TEXT("msg {}"), 41);
+        QX_EXPECT(QX_NO_ENTRY, CatDefault, QXT("msg {}"), 41);
 
     if (false)
     {
-        QX_EXPECT(QX_NO_ENTRY, CatDefault, QX_TEXT("msg {}"), 41);
+        QX_EXPECT(QX_NO_ENTRY, CatDefault, QXT("msg {}"), 41);
         Foo();
     }
 
@@ -255,7 +257,7 @@ TEST(qx_assert, expect_no_entry_cf_macro_compilation)
         Foo();
     else
     {
-        QX_EXPECT(QX_NO_ENTRY, CatDefault, QX_TEXT("msg {}"), 41);
+        QX_EXPECT(QX_NO_ENTRY, CatDefault, QXT("msg {}"), 41);
         Foo();
     }
 }
@@ -337,24 +339,24 @@ TEST(qx_assert, expect_continue_f_macro_compilation)
 
     do
     {
-        QX_EXPECT_CONTINUE(false, QX_TEXT("msg {}"), 41);
+        QX_EXPECT_CONTINUE(false, QXT("msg {}"), 41);
 
         if (false)
-            QX_EXPECT_CONTINUE(false, QX_TEXT("msg {}"), 41);
+            QX_EXPECT_CONTINUE(false, QXT("msg {}"), 41);
 
         if (false)
-            QX_EXPECT_CONTINUE(false, QX_TEXT("msg {}"), 41);
+            QX_EXPECT_CONTINUE(false, QXT("msg {}"), 41);
         else
             Foo();
 
         if (false)
             Foo();
         else
-            QX_EXPECT_CONTINUE(false, QX_TEXT("msg {}"), 41);
+            QX_EXPECT_CONTINUE(false, QXT("msg {}"), 41);
 
         if (false)
         {
-            QX_EXPECT_CONTINUE(false, QX_TEXT("msg {}"), 41);
+            QX_EXPECT_CONTINUE(false, QXT("msg {}"), 41);
             Foo();
         }
 
@@ -362,7 +364,7 @@ TEST(qx_assert, expect_continue_f_macro_compilation)
             Foo();
         else
         {
-            QX_EXPECT_CONTINUE(false, QX_TEXT("msg {}"), 41);
+            QX_EXPECT_CONTINUE(false, QXT("msg {}"), 41);
             Foo();
         }
     } while (false);
@@ -374,24 +376,24 @@ TEST(qx_assert, expect_continue_cf_macro_compilation)
 
     do
     {
-        QX_EXPECT_CONTINUE(false, CatDefault, QX_TEXT("msg {}"), 41);
+        QX_EXPECT_CONTINUE(false, CatDefault, QXT("msg {}"), 41);
 
         if (false)
-            QX_EXPECT_CONTINUE(false, CatDefault, QX_TEXT("msg {}"), 41);
+            QX_EXPECT_CONTINUE(false, CatDefault, QXT("msg {}"), 41);
 
         if (false)
-            QX_EXPECT_CONTINUE(false, CatDefault, QX_TEXT("msg {}"), 41);
+            QX_EXPECT_CONTINUE(false, CatDefault, QXT("msg {}"), 41);
         else
             Foo();
 
         if (false)
             Foo();
         else
-            QX_EXPECT_CONTINUE(false, CatDefault, QX_TEXT("msg {}"), 41);
+            QX_EXPECT_CONTINUE(false, CatDefault, QXT("msg {}"), 41);
 
         if (false)
         {
-            QX_EXPECT_CONTINUE(false, CatDefault, QX_TEXT("msg {}"), 41);
+            QX_EXPECT_CONTINUE(false, CatDefault, QXT("msg {}"), 41);
             Foo();
         }
 
@@ -399,7 +401,7 @@ TEST(qx_assert, expect_continue_cf_macro_compilation)
             Foo();
         else
         {
-            QX_EXPECT_CONTINUE(false, CatDefault, QX_TEXT("msg {}"), 41);
+            QX_EXPECT_CONTINUE(false, CatDefault, QXT("msg {}"), 41);
             Foo();
         }
     } while (false);
@@ -485,24 +487,24 @@ TEST(qx_assert, expect_break_f_macro_compilation)
 
     do
     {
-        QX_EXPECT_BREAK(false, QX_TEXT("msg {}"), 41);
+        QX_EXPECT_BREAK(false, QXT("msg {}"), 41);
 
         if (false)
-            QX_EXPECT_BREAK(false, QX_TEXT("msg {}"), 41);
+            QX_EXPECT_BREAK(false, QXT("msg {}"), 41);
 
         if (false)
-            QX_EXPECT_BREAK(false, QX_TEXT("msg {}"), 41);
+            QX_EXPECT_BREAK(false, QXT("msg {}"), 41);
         else
             Foo();
 
         if (false)
             Foo();
         else
-            QX_EXPECT_BREAK(false, QX_TEXT("msg {}"), 41);
+            QX_EXPECT_BREAK(false, QXT("msg {}"), 41);
 
         if (false)
         {
-            QX_EXPECT_BREAK(false, QX_TEXT("msg {}"), 41);
+            QX_EXPECT_BREAK(false, QXT("msg {}"), 41);
             Foo();
         }
 
@@ -510,7 +512,7 @@ TEST(qx_assert, expect_break_f_macro_compilation)
             Foo();
         else
         {
-            QX_EXPECT_BREAK(false, QX_TEXT("msg {}"), 41);
+            QX_EXPECT_BREAK(false, QXT("msg {}"), 41);
             Foo();
         }
     } while (false);
@@ -522,24 +524,24 @@ TEST(qx_assert, expect_break_cf_macro_compilation)
 
     do
     {
-        QX_EXPECT_BREAK(false, CatDefault, QX_TEXT("msg {}"), 41);
+        QX_EXPECT_BREAK(false, CatDefault, QXT("msg {}"), 41);
 
         if (false)
-            QX_EXPECT_BREAK(false, CatDefault, QX_TEXT("msg {}"), 41);
+            QX_EXPECT_BREAK(false, CatDefault, QXT("msg {}"), 41);
 
         if (false)
-            QX_EXPECT_BREAK(false, CatDefault, QX_TEXT("msg {}"), 41);
+            QX_EXPECT_BREAK(false, CatDefault, QXT("msg {}"), 41);
         else
             Foo();
 
         if (false)
             Foo();
         else
-            QX_EXPECT_BREAK(false, CatDefault, QX_TEXT("msg {}"), 41);
+            QX_EXPECT_BREAK(false, CatDefault, QXT("msg {}"), 41);
 
         if (false)
         {
-            QX_EXPECT_BREAK(false, CatDefault, QX_TEXT("msg {}"), 41);
+            QX_EXPECT_BREAK(false, CatDefault, QXT("msg {}"), 41);
             Foo();
         }
 
@@ -547,7 +549,7 @@ TEST(qx_assert, expect_break_cf_macro_compilation)
             Foo();
         else
         {
-            QX_EXPECT_BREAK(false, CatDefault, QX_TEXT("msg {}"), 41);
+            QX_EXPECT_BREAK(false, CatDefault, QXT("msg {}"), 41);
             Foo();
         }
     } while (false);
@@ -628,24 +630,24 @@ TEST(qx_assert, assert_f_macro_compilation)
 {
     return;
 
-    QX_ASSERT(false, QX_TEXT("msg {}"), 41);
+    QX_ASSERT(false, QXT("msg {}"), 41);
 
     if (false)
-        QX_ASSERT(false, QX_TEXT("msg {}"), 41);
+        QX_ASSERT(false, QXT("msg {}"), 41);
 
     if (false)
-        QX_ASSERT(false, QX_TEXT("msg {}"), 41);
+        QX_ASSERT(false, QXT("msg {}"), 41);
     else
         Foo();
 
     if (false)
         Foo();
     else
-        QX_ASSERT(false, QX_TEXT("msg {}"), 41);
+        QX_ASSERT(false, QXT("msg {}"), 41);
 
     if (false)
     {
-        QX_ASSERT(false, QX_TEXT("msg {}"), 41);
+        QX_ASSERT(false, QXT("msg {}"), 41);
         Foo();
     }
 
@@ -653,7 +655,7 @@ TEST(qx_assert, assert_f_macro_compilation)
         Foo();
     else
     {
-        QX_ASSERT(false, QX_TEXT("msg {}"), 41);
+        QX_ASSERT(false, QXT("msg {}"), 41);
         Foo();
     }
 }
@@ -662,24 +664,24 @@ TEST(qx_assert, assert_cf_macro_compilation)
 {
     return;
 
-    QX_ASSERT(false, CatDefault, QX_TEXT("msg {}"), 41);
+    QX_ASSERT(false, CatDefault, QXT("msg {}"), 41);
 
     if (false)
-        QX_ASSERT(false, CatDefault, QX_TEXT("msg {}"), 41);
+        QX_ASSERT(false, CatDefault, QXT("msg {}"), 41);
 
     if (false)
-        QX_ASSERT(false, CatDefault, QX_TEXT("msg {}"), 41);
+        QX_ASSERT(false, CatDefault, QXT("msg {}"), 41);
     else
         Foo();
 
     if (false)
         Foo();
     else
-        QX_ASSERT(false, CatDefault, QX_TEXT("msg {}"), 41);
+        QX_ASSERT(false, CatDefault, QXT("msg {}"), 41);
 
     if (false)
     {
-        QX_ASSERT(false, CatDefault, QX_TEXT("msg {}"), 41);
+        QX_ASSERT(false, CatDefault, QXT("msg {}"), 41);
         Foo();
     }
 
@@ -687,7 +689,7 @@ TEST(qx_assert, assert_cf_macro_compilation)
         Foo();
     else
     {
-        QX_ASSERT(false, CatDefault, QX_TEXT("msg {}"), 41);
+        QX_ASSERT(false, CatDefault, QXT("msg {}"), 41);
         Foo();
     }
 }
@@ -730,24 +732,24 @@ TEST(qx_assert, assert_no_entry_f_macro_compilation)
 {
     return;
 
-    QX_ASSERT(QX_NO_ENTRY, QX_TEXT("msg {}"), 41);
+    QX_ASSERT(QX_NO_ENTRY, QXT("msg {}"), 41);
 
     if (false)
-        QX_ASSERT(QX_NO_ENTRY, QX_TEXT("msg {}"), 41);
+        QX_ASSERT(QX_NO_ENTRY, QXT("msg {}"), 41);
 
     if (false)
-        QX_ASSERT(QX_NO_ENTRY, QX_TEXT("msg {}"), 41);
+        QX_ASSERT(QX_NO_ENTRY, QXT("msg {}"), 41);
     else
         Foo();
 
     if (false)
         Foo();
     else
-        QX_ASSERT(QX_NO_ENTRY, QX_TEXT("msg {}"), 41);
+        QX_ASSERT(QX_NO_ENTRY, QXT("msg {}"), 41);
 
     if (false)
     {
-        QX_ASSERT(QX_NO_ENTRY, QX_TEXT("msg {}"), 41);
+        QX_ASSERT(QX_NO_ENTRY, QXT("msg {}"), 41);
         Foo();
     }
 
@@ -755,7 +757,7 @@ TEST(qx_assert, assert_no_entry_f_macro_compilation)
         Foo();
     else
     {
-        QX_ASSERT(QX_NO_ENTRY, QX_TEXT("msg {}"), 41);
+        QX_ASSERT(QX_NO_ENTRY, QXT("msg {}"), 41);
         Foo();
     }
 }
@@ -764,24 +766,24 @@ TEST(qx_assert, assert_no_entry_cf_macro_compilation)
 {
     return;
 
-    QX_ASSERT(QX_NO_ENTRY, CatDefault, QX_TEXT("msg {}"), 41);
+    QX_ASSERT(QX_NO_ENTRY, CatDefault, QXT("msg {}"), 41);
 
     if (false)
-        QX_ASSERT(QX_NO_ENTRY, CatDefault, QX_TEXT("msg {}"), 41);
+        QX_ASSERT(QX_NO_ENTRY, CatDefault, QXT("msg {}"), 41);
 
     if (false)
-        QX_ASSERT(QX_NO_ENTRY, CatDefault, QX_TEXT("msg {}"), 41);
+        QX_ASSERT(QX_NO_ENTRY, CatDefault, QXT("msg {}"), 41);
     else
         Foo();
 
     if (false)
         Foo();
     else
-        QX_ASSERT(QX_NO_ENTRY, CatDefault, QX_TEXT("msg {}"), 41);
+        QX_ASSERT(QX_NO_ENTRY, CatDefault, QXT("msg {}"), 41);
 
     if (false)
     {
-        QX_ASSERT(QX_NO_ENTRY, CatDefault, QX_TEXT("msg {}"), 41);
+        QX_ASSERT(QX_NO_ENTRY, CatDefault, QXT("msg {}"), 41);
         Foo();
     }
 
@@ -789,7 +791,7 @@ TEST(qx_assert, assert_no_entry_cf_macro_compilation)
         Foo();
     else
     {
-        QX_ASSERT(QX_NO_ENTRY, CatDefault, QX_TEXT("msg {}"), 41);
+        QX_ASSERT(QX_NO_ENTRY, CatDefault, QXT("msg {}"), 41);
         Foo();
     }
 }
@@ -900,24 +902,24 @@ TEST(qx_assert, expect_return_cf_void_macro_compilation)
 {
     return;
 
-    QX_EXPECT_RETURN_VOID(false, CatDefault, QX_TEXT(""));
+    QX_EXPECT_RETURN_VOID(false, CatDefault, QXT(""));
 
     if (false)
-        QX_EXPECT_RETURN_VOID(false, CatDefault, QX_TEXT(""));
+        QX_EXPECT_RETURN_VOID(false, CatDefault, QXT(""));
 
     if (false)
         Foo();
     else
-        QX_EXPECT_RETURN_VOID(false, CatDefault, QX_TEXT(""));
+        QX_EXPECT_RETURN_VOID(false, CatDefault, QXT(""));
 
     if (false)
-        QX_EXPECT_RETURN_VOID(false, CatDefault, QX_TEXT(""));
+        QX_EXPECT_RETURN_VOID(false, CatDefault, QXT(""));
     else
         Foo();
 
     if (false)
     {
-        QX_EXPECT_RETURN_VOID(false, CatDefault, QX_TEXT(""));
+        QX_EXPECT_RETURN_VOID(false, CatDefault, QXT(""));
         Foo();
     }
 
@@ -925,7 +927,7 @@ TEST(qx_assert, expect_return_cf_void_macro_compilation)
         Foo();
     else
     {
-        QX_EXPECT_RETURN_VOID(false, CatDefault, QX_TEXT(""));
+        QX_EXPECT_RETURN_VOID(false, CatDefault, QXT(""));
         Foo();
     }
 }
@@ -934,24 +936,24 @@ TEST(qx_assert, expect_return_f_void_macro_compilation)
 {
     return;
 
-    QX_EXPECT_RETURN_VOID(false, QX_TEXT(""));
+    QX_EXPECT_RETURN_VOID(false, QXT(""));
 
     if (false)
-        QX_EXPECT_RETURN_VOID(false, QX_TEXT(""));
+        QX_EXPECT_RETURN_VOID(false, QXT(""));
 
     if (false)
         Foo();
     else
-        QX_EXPECT_RETURN_VOID(false, QX_TEXT(""));
+        QX_EXPECT_RETURN_VOID(false, QXT(""));
 
     if (false)
-        QX_EXPECT_RETURN_VOID(false, QX_TEXT(""));
+        QX_EXPECT_RETURN_VOID(false, QXT(""));
     else
         Foo();
 
     if (false)
     {
-        QX_EXPECT_RETURN_VOID(false, QX_TEXT(""));
+        QX_EXPECT_RETURN_VOID(false, QXT(""));
         Foo();
     }
 
@@ -959,7 +961,7 @@ TEST(qx_assert, expect_return_f_void_macro_compilation)
         Foo();
     else
     {
-        QX_EXPECT_RETURN_VOID(false, QX_TEXT(""));
+        QX_EXPECT_RETURN_VOID(false, QXT(""));
         Foo();
     }
 }
@@ -1045,24 +1047,24 @@ TEST(qx_assert, expect_return_cf_macro_compilation)
 
     auto Check = []()
     {
-        QX_EXPECT_RETURN(false, 1, CatDefault, QX_TEXT(""));
+        QX_EXPECT_RETURN(false, 1, CatDefault, QXT(""));
 
         if (false)
-            QX_EXPECT_RETURN(false, 1, CatDefault, QX_TEXT(""));
+            QX_EXPECT_RETURN(false, 1, CatDefault, QXT(""));
 
         if (false)
             Foo();
         else
-            QX_EXPECT_RETURN(false, 1, CatDefault, QX_TEXT(""));
+            QX_EXPECT_RETURN(false, 1, CatDefault, QXT(""));
 
         if (false)
-            QX_EXPECT_RETURN(false, 1, CatDefault, QX_TEXT(""));
+            QX_EXPECT_RETURN(false, 1, CatDefault, QXT(""));
         else
             Foo();
 
         if (false)
         {
-            QX_EXPECT_RETURN(false, 1, CatDefault, QX_TEXT(""));
+            QX_EXPECT_RETURN(false, 1, CatDefault, QXT(""));
             Foo();
         }
 
@@ -1070,7 +1072,7 @@ TEST(qx_assert, expect_return_cf_macro_compilation)
             Foo();
         else
         {
-            QX_EXPECT_RETURN(false, 1, CatDefault, QX_TEXT(""));
+            QX_EXPECT_RETURN(false, 1, CatDefault, QXT(""));
             Foo();
         }
 
@@ -1086,24 +1088,24 @@ TEST(qx_assert, expect_return_f_macro_compilation)
 
     auto Check = []()
     {
-        QX_EXPECT_RETURN(false, 1, QX_TEXT(""));
+        QX_EXPECT_RETURN(false, 1, QXT(""));
 
         if (false)
-            QX_EXPECT_RETURN(false, 1, QX_TEXT(""));
+            QX_EXPECT_RETURN(false, 1, QXT(""));
 
         if (false)
             Foo();
         else
-            QX_EXPECT_RETURN(false, 1, QX_TEXT(""));
+            QX_EXPECT_RETURN(false, 1, QXT(""));
 
         if (false)
-            QX_EXPECT_RETURN(false, 1, QX_TEXT(""));
+            QX_EXPECT_RETURN(false, 1, QXT(""));
         else
             Foo();
 
         if (false)
         {
-            QX_EXPECT_RETURN(false, 1, QX_TEXT(""));
+            QX_EXPECT_RETURN(false, 1, QXT(""));
             Foo();
         }
 
@@ -1111,7 +1113,7 @@ TEST(qx_assert, expect_return_f_macro_compilation)
             Foo();
         else
         {
-            QX_EXPECT_RETURN(false, 1, QX_TEXT(""));
+            QX_EXPECT_RETURN(false, 1, QXT(""));
             Foo();
         }
 
@@ -1167,11 +1169,11 @@ QX_POP_SUPPRESS_WARNINGS();
 TEST(qx_assert, assert_macros)
 {
     EXPECT_DEATH({ QX_ASSERT(0); }, "");
-    EXPECT_DEATH({ QX_ASSERT(0, QX_TEXT("")); }, "");
+    EXPECT_DEATH({ QX_ASSERT(0, QXT("")); }, "");
     EXPECT_DEATH({ QX_ASSERT(0, CatDefault); }, "");
-    EXPECT_DEATH({ QX_ASSERT(0, CatDefault, QX_TEXT("")); }, "");
+    EXPECT_DEATH({ QX_ASSERT(0, CatDefault, QXT("")); }, "");
     EXPECT_DEATH({ QX_ASSERT(QX_NO_ENTRY); }, "");
-    EXPECT_DEATH({ QX_ASSERT(QX_NO_ENTRY, QX_TEXT("{}"), 42); }, "");
+    EXPECT_DEATH({ QX_ASSERT(QX_NO_ENTRY, QXT("{}"), 42); }, "");
     EXPECT_DEATH({ QX_ASSERT(QX_NO_ENTRY, CatDefault); }, "");
-    EXPECT_DEATH({ QX_ASSERT(QX_NO_ENTRY, CatDefault, QX_TEXT("{}"), 42); }, "");
+    EXPECT_DEATH({ QX_ASSERT(QX_NO_ENTRY, CatDefault, QXT("{}"), 42); }, "");
 }

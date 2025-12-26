@@ -644,134 +644,134 @@ TEST(units_distance, normalize_unit)
 
 TEST(units_distance, format)
 {
-    expect_equal(qx::convert_to_string(qx::unit(42, qx::units::distance::nanometers)), QX_TEXT("42nm"));
-    expect_equal(qx::convert_to_string(qx::unit(42, qx::units::distance::micrometers)), QX_TEXT("42um"));
-    expect_equal(qx::convert_to_string(qx::unit(42, qx::units::distance::millimeters)), QX_TEXT("42mm"));
-    expect_equal(qx::convert_to_string(qx::unit(42, qx::units::distance::centimeters)), QX_TEXT("42cm"));
-    expect_equal(qx::convert_to_string(qx::unit(42, qx::units::distance::decimeters)), QX_TEXT("42dm"));
-    expect_equal(qx::convert_to_string(qx::unit(42, qx::units::distance::meters)), QX_TEXT("42m"));
-    expect_equal(qx::convert_to_string(qx::unit(42, qx::units::distance::decameters)), QX_TEXT("42dam"));
-    expect_equal(qx::convert_to_string(qx::unit(42, qx::units::distance::hectometers)), QX_TEXT("42hm"));
-    expect_equal(qx::convert_to_string(qx::unit(42, qx::units::distance::kilometers)), QX_TEXT("42km"));
-    expect_equal(qx::convert_to_string(qx::unit(42, qx::units::distance::megameters)), QX_TEXT("42Mm"));
-    expect_equal(qx::convert_to_string(qx::unit(42, qx::units::distance::gigameters)), QX_TEXT("42Gm"));
-    expect_equal(qx::convert_to_string(qx::unit(42, qx::units::distance::terameters)), QX_TEXT("42Tm"));
-    expect_equal(qx::convert_to_string(qx::unit(42, qx::units::distance::petameters)), QX_TEXT("42Pm"));
+    expect_equal(qx::convert_to_string(qx::unit(42, qx::units::distance::nanometers)), QXT("42nm"));
+    expect_equal(qx::convert_to_string(qx::unit(42, qx::units::distance::micrometers)), QXT("42um"));
+    expect_equal(qx::convert_to_string(qx::unit(42, qx::units::distance::millimeters)), QXT("42mm"));
+    expect_equal(qx::convert_to_string(qx::unit(42, qx::units::distance::centimeters)), QXT("42cm"));
+    expect_equal(qx::convert_to_string(qx::unit(42, qx::units::distance::decimeters)), QXT("42dm"));
+    expect_equal(qx::convert_to_string(qx::unit(42, qx::units::distance::meters)), QXT("42m"));
+    expect_equal(qx::convert_to_string(qx::unit(42, qx::units::distance::decameters)), QXT("42dam"));
+    expect_equal(qx::convert_to_string(qx::unit(42, qx::units::distance::hectometers)), QXT("42hm"));
+    expect_equal(qx::convert_to_string(qx::unit(42, qx::units::distance::kilometers)), QXT("42km"));
+    expect_equal(qx::convert_to_string(qx::unit(42, qx::units::distance::megameters)), QXT("42Mm"));
+    expect_equal(qx::convert_to_string(qx::unit(42, qx::units::distance::gigameters)), QXT("42Gm"));
+    expect_equal(qx::convert_to_string(qx::unit(42, qx::units::distance::terameters)), QXT("42Tm"));
+    expect_equal(qx::convert_to_string(qx::unit(42, qx::units::distance::petameters)), QXT("42Pm"));
 
-    expect_equal(qx::convert_to_string(qx::unit(42, qx::units::distance::mils)), QX_TEXT("42mil"));
-    expect_equal(qx::convert_to_string(qx::unit(42, qx::units::distance::inches)), QX_TEXT("42in"));
-    expect_equal(qx::convert_to_string(qx::unit(42, qx::units::distance::hands)), QX_TEXT("42hh"));
-    expect_equal(qx::convert_to_string(qx::unit(42, qx::units::distance::links)), QX_TEXT("42li"));
-    expect_equal(qx::convert_to_string(qx::unit(42, qx::units::distance::feet)), QX_TEXT("42ft"));
-    expect_equal(qx::convert_to_string(qx::unit(42, qx::units::distance::yards)), QX_TEXT("42yd"));
-    expect_equal(qx::convert_to_string(qx::unit(42, qx::units::distance::rods)), QX_TEXT("42rd"));
-    expect_equal(qx::convert_to_string(qx::unit(42, qx::units::distance::chains)), QX_TEXT("42ch"));
-    expect_equal(qx::convert_to_string(qx::unit(42, qx::units::distance::furlongs)), QX_TEXT("42fur"));
-    expect_equal(qx::convert_to_string(qx::unit(42, qx::units::distance::miles)), QX_TEXT("42mi"));
-    expect_equal(qx::convert_to_string(qx::unit(42, qx::units::distance::leagues)), QX_TEXT("42lea"));
+    expect_equal(qx::convert_to_string(qx::unit(42, qx::units::distance::mils)), QXT("42mil"));
+    expect_equal(qx::convert_to_string(qx::unit(42, qx::units::distance::inches)), QXT("42in"));
+    expect_equal(qx::convert_to_string(qx::unit(42, qx::units::distance::hands)), QXT("42hh"));
+    expect_equal(qx::convert_to_string(qx::unit(42, qx::units::distance::links)), QXT("42li"));
+    expect_equal(qx::convert_to_string(qx::unit(42, qx::units::distance::feet)), QXT("42ft"));
+    expect_equal(qx::convert_to_string(qx::unit(42, qx::units::distance::yards)), QXT("42yd"));
+    expect_equal(qx::convert_to_string(qx::unit(42, qx::units::distance::rods)), QXT("42rd"));
+    expect_equal(qx::convert_to_string(qx::unit(42, qx::units::distance::chains)), QXT("42ch"));
+    expect_equal(qx::convert_to_string(qx::unit(42, qx::units::distance::furlongs)), QXT("42fur"));
+    expect_equal(qx::convert_to_string(qx::unit(42, qx::units::distance::miles)), QXT("42mi"));
+    expect_equal(qx::convert_to_string(qx::unit(42, qx::units::distance::leagues)), QXT("42lea"));
 
-    expect_equal(qx::convert_to_string(qx::unit(42, qx::units::distance::fathoms)), QX_TEXT("42fm"));
-    expect_equal(qx::convert_to_string(qx::unit(42, qx::units::distance::cables)), QX_TEXT("42cables"));
-    expect_equal(qx::convert_to_string(qx::unit(42, qx::units::distance::nautical_miles)), QX_TEXT("42nmi"));
+    expect_equal(qx::convert_to_string(qx::unit(42, qx::units::distance::fathoms)), QXT("42fm"));
+    expect_equal(qx::convert_to_string(qx::unit(42, qx::units::distance::cables)), QXT("42cables"));
+    expect_equal(qx::convert_to_string(qx::unit(42, qx::units::distance::nautical_miles)), QXT("42nmi"));
 
-    expect_equal(qx::convert_to_string(qx::unit(42, qx::units::distance::astronomical_units)), QX_TEXT("42AU"));
-    expect_equal(qx::convert_to_string(qx::unit(42, qx::units::distance::light_years)), QX_TEXT("42ly"));
-    expect_equal(qx::convert_to_string(qx::unit(42, qx::units::distance::parsecs)), QX_TEXT("42pc"));
+    expect_equal(qx::convert_to_string(qx::unit(42, qx::units::distance::astronomical_units)), QXT("42AU"));
+    expect_equal(qx::convert_to_string(qx::unit(42, qx::units::distance::light_years)), QXT("42ly"));
+    expect_equal(qx::convert_to_string(qx::unit(42, qx::units::distance::parsecs)), QXT("42pc"));
 }
 
 TEST(units_distance, from_string)
 {
     expect_equal(
-        *qx::unit_from_string<int, qx::units::distance>(QX_TEXT("42nm")),
+        *qx::unit_from_string<int, qx::units::distance>(QXT("42nm")),
         qx::unit(42, qx::units::distance::nanometers));
     expect_equal(
-        *qx::unit_from_string<int, qx::units::distance>(QX_TEXT("42um")),
+        *qx::unit_from_string<int, qx::units::distance>(QXT("42um")),
         qx::unit(42, qx::units::distance::micrometers));
     expect_equal(
-        *qx::unit_from_string<int, qx::units::distance>(QX_TEXT("42mm")),
+        *qx::unit_from_string<int, qx::units::distance>(QXT("42mm")),
         qx::unit(42, qx::units::distance::millimeters));
     expect_equal(
-        *qx::unit_from_string<int, qx::units::distance>(QX_TEXT("42cm")),
+        *qx::unit_from_string<int, qx::units::distance>(QXT("42cm")),
         qx::unit(42, qx::units::distance::centimeters));
     expect_equal(
-        *qx::unit_from_string<int, qx::units::distance>(QX_TEXT("42dm")),
+        *qx::unit_from_string<int, qx::units::distance>(QXT("42dm")),
         qx::unit(42, qx::units::distance::decimeters));
     expect_equal(
-        *qx::unit_from_string<int, qx::units::distance>(QX_TEXT("42m")),
+        *qx::unit_from_string<int, qx::units::distance>(QXT("42m")),
         qx::unit(42, qx::units::distance::meters));
     expect_equal(
-        *qx::unit_from_string<int, qx::units::distance>(QX_TEXT("42dam")),
+        *qx::unit_from_string<int, qx::units::distance>(QXT("42dam")),
         qx::unit(42, qx::units::distance::decameters));
     expect_equal(
-        *qx::unit_from_string<int, qx::units::distance>(QX_TEXT("42hm")),
+        *qx::unit_from_string<int, qx::units::distance>(QXT("42hm")),
         qx::unit(42, qx::units::distance::hectometers));
     expect_equal(
-        *qx::unit_from_string<int, qx::units::distance>(QX_TEXT("42km")),
+        *qx::unit_from_string<int, qx::units::distance>(QXT("42km")),
         qx::unit(42, qx::units::distance::kilometers));
     expect_equal(
-        *qx::unit_from_string<int, qx::units::distance>(QX_TEXT("42Mm")),
+        *qx::unit_from_string<int, qx::units::distance>(QXT("42Mm")),
         qx::unit(42, qx::units::distance::megameters));
     expect_equal(
-        *qx::unit_from_string<int, qx::units::distance>(QX_TEXT("42Gm")),
+        *qx::unit_from_string<int, qx::units::distance>(QXT("42Gm")),
         qx::unit(42, qx::units::distance::gigameters));
     expect_equal(
-        *qx::unit_from_string<int, qx::units::distance>(QX_TEXT("42Tm")),
+        *qx::unit_from_string<int, qx::units::distance>(QXT("42Tm")),
         qx::unit(42, qx::units::distance::terameters));
     expect_equal(
-        *qx::unit_from_string<int, qx::units::distance>(QX_TEXT("42Pm")),
+        *qx::unit_from_string<int, qx::units::distance>(QXT("42Pm")),
         qx::unit(42, qx::units::distance::petameters));
 
     expect_equal(
-        *qx::unit_from_string<int, qx::units::distance>(QX_TEXT("42mil")),
+        *qx::unit_from_string<int, qx::units::distance>(QXT("42mil")),
         qx::unit(42, qx::units::distance::mils));
     expect_equal(
-        *qx::unit_from_string<int, qx::units::distance>(QX_TEXT("42in")),
+        *qx::unit_from_string<int, qx::units::distance>(QXT("42in")),
         qx::unit(42, qx::units::distance::inches));
     expect_equal(
-        *qx::unit_from_string<int, qx::units::distance>(QX_TEXT("42hh")),
+        *qx::unit_from_string<int, qx::units::distance>(QXT("42hh")),
         qx::unit(42, qx::units::distance::hands));
     expect_equal(
-        *qx::unit_from_string<int, qx::units::distance>(QX_TEXT("42li")),
+        *qx::unit_from_string<int, qx::units::distance>(QXT("42li")),
         qx::unit(42, qx::units::distance::links));
     expect_equal(
-        *qx::unit_from_string<int, qx::units::distance>(QX_TEXT("42ft")),
+        *qx::unit_from_string<int, qx::units::distance>(QXT("42ft")),
         qx::unit(42, qx::units::distance::feet));
     expect_equal(
-        *qx::unit_from_string<int, qx::units::distance>(QX_TEXT("42yd")),
+        *qx::unit_from_string<int, qx::units::distance>(QXT("42yd")),
         qx::unit(42, qx::units::distance::yards));
     expect_equal(
-        *qx::unit_from_string<int, qx::units::distance>(QX_TEXT("42rd")),
+        *qx::unit_from_string<int, qx::units::distance>(QXT("42rd")),
         qx::unit(42, qx::units::distance::rods));
     expect_equal(
-        *qx::unit_from_string<int, qx::units::distance>(QX_TEXT("42ch")),
+        *qx::unit_from_string<int, qx::units::distance>(QXT("42ch")),
         qx::unit(42, qx::units::distance::chains));
     expect_equal(
-        *qx::unit_from_string<int, qx::units::distance>(QX_TEXT("42fur")),
+        *qx::unit_from_string<int, qx::units::distance>(QXT("42fur")),
         qx::unit(42, qx::units::distance::furlongs));
     expect_equal(
-        *qx::unit_from_string<int, qx::units::distance>(QX_TEXT("42mi")),
+        *qx::unit_from_string<int, qx::units::distance>(QXT("42mi")),
         qx::unit(42, qx::units::distance::miles));
     expect_equal(
-        *qx::unit_from_string<int, qx::units::distance>(QX_TEXT("42lea")),
+        *qx::unit_from_string<int, qx::units::distance>(QXT("42lea")),
         qx::unit(42, qx::units::distance::leagues));
 
     expect_equal(
-        *qx::unit_from_string<int, qx::units::distance>(QX_TEXT("42fm")),
+        *qx::unit_from_string<int, qx::units::distance>(QXT("42fm")),
         qx::unit(42, qx::units::distance::fathoms));
     expect_equal(
-        *qx::unit_from_string<int, qx::units::distance>(QX_TEXT("42cables")),
+        *qx::unit_from_string<int, qx::units::distance>(QXT("42cables")),
         qx::unit(42, qx::units::distance::cables));
     expect_equal(
-        *qx::unit_from_string<int, qx::units::distance>(QX_TEXT("42nmi")),
+        *qx::unit_from_string<int, qx::units::distance>(QXT("42nmi")),
         qx::unit(42, qx::units::distance::nautical_miles));
 
     expect_equal(
-        *qx::unit_from_string<int, qx::units::distance>(QX_TEXT("42AU")),
+        *qx::unit_from_string<int, qx::units::distance>(QXT("42AU")),
         qx::unit(42, qx::units::distance::astronomical_units));
     expect_equal(
-        *qx::unit_from_string<int, qx::units::distance>(QX_TEXT("42ly")),
+        *qx::unit_from_string<int, qx::units::distance>(QXT("42ly")),
         qx::unit(42, qx::units::distance::light_years));
     expect_equal(
-        *qx::unit_from_string<int, qx::units::distance>(QX_TEXT("42pc")),
+        *qx::unit_from_string<int, qx::units::distance>(QXT("42pc")),
         qx::unit(42, qx::units::distance::parsecs));
 }

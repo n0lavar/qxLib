@@ -137,11 +137,11 @@ QX_CALL_BEFORE_MAIN = []()
 
 TEST(double_dispatch_matrix, main)
 {
-    storage_string storageString10(QX_TEXT("10"));
+    storage_string storageString10(QXT("10"));
     storage_int    storageInt10(10);
     storage_vector storageVector10({ 1, 2, 3, 4 });
 
-    storage_string storageString6(QX_TEXT("6"));
+    storage_string storageString6(QXT("6"));
     storage_int    storageInt6(6);
     storage_vector storageVector6({ 1, 2, 3 });
 

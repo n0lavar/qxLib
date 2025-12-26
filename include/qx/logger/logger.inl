@@ -11,31 +11,31 @@ namespace qx
 {
 
 inline void logger::log(
-    verbosity       eVerbosity,
-    string_view     svFormat,
     const category& category,
+    verbosity       eVerbosity,
     string_view     svFile,
     string_view     svFunction,
-    int             nLine)
+    int             nLine,
+    string_view     svMessage)
 {
     for (auto& stream : m_Streams)
-        stream->log(eVerbosity, category, svFile, svFunction, nLine, svFormat);
+        stream->log(category, eVerbosity, svFile, svFunction, nLine, svMessage);
 }
 
 template<class... args_t>
     requires(log_acceptable_args_c<args_t...>)
 inline void logger::log(
-    verbosity                              eVerbosity,
-    format_string_strong_checks<args_t...> sFormat,
     const category&                        category,
+    verbosity                              eVerbosity,
     string_view                            svFile,
     string_view                            svFunction,
     int                                    nLine,
+    format_string_strong_checks<args_t...> sFormat,
     args_t&&... args)
 {
     const auto sLogMessage = qx::string::static_format(sFormat, std::forward<args_t>(args)...);
     for (auto& stream : m_Streams)
-        stream->log(eVerbosity, category, svFile, svFunction, nLine, sLogMessage);
+        stream->log(category, eVerbosity, svFile, svFunction, nLine, sLogMessage);
 }
 
 inline void logger::flush()

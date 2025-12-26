@@ -37,7 +37,7 @@ void resolve_assert_proceeding(
     int             nLine,
     string_view     svCondition)
 {
-    QX_LOGGER_INSTANCE.log(eVerbosity, QX_TEXT("[{}] "), fileCategory, svFile, svFunction, nLine, svCondition);
+    QX_LOGGER_INSTANCE.log(fileCategory, eVerbosity, svFile, svFunction, nLine, QXT("[{}] "), svCondition);
     QX_LOGGER_INSTANCE.flush();
 }
 
@@ -53,8 +53,8 @@ void resolve_assert_proceeding(
     const category& category)
 {
     string sMessage;
-    sMessage.append_format(QX_TEXT("[{}] "), svCondition);
-    QX_LOGGER_INSTANCE.log(eVerbosity, sMessage, category, svFile, svFunction, nLine);
+    sMessage.append_format(QXT("[{}] "), svCondition);
+    QX_LOGGER_INSTANCE.log(category, eVerbosity, svFile, svFunction, nLine, sMessage);
     QX_LOGGER_INSTANCE.flush();
 }
 
@@ -72,9 +72,9 @@ void resolve_assert_proceeding(
     args_t&&... args)
 {
     string sMessage;
-    sMessage.append_format(QX_TEXT("[{}] "), svCondition);
+    sMessage.append_format(QXT("[{}] "), svCondition);
     sMessage.append_format(sFormat, std::forward<args_t>(args)...);
-    QX_LOGGER_INSTANCE.log(eVerbosity, sMessage, fileCategory, svFile, svFunction, nLine);
+    QX_LOGGER_INSTANCE.log(fileCategory, eVerbosity, svFile, svFunction, nLine, sMessage);
     QX_LOGGER_INSTANCE.flush();
 }
 
@@ -90,8 +90,8 @@ void resolve_assert_proceeding(
     string_view svMessage)
 {
     string sMessage;
-    sMessage.append_format(QX_TEXT("[{}] {}"), svCondition, svMessage);
-    QX_LOGGER_INSTANCE.log(eVerbosity, sMessage, fileCategory, svFile, svFunction, nLine);
+    sMessage.append_format(QXT("[{}] {}"), svCondition, svMessage);
+    QX_LOGGER_INSTANCE.log(fileCategory, eVerbosity, svFile, svFunction, nLine, sMessage);
     QX_LOGGER_INSTANCE.flush();
 }
 
@@ -110,9 +110,9 @@ void resolve_assert_proceeding(
     args_t&&... args)
 {
     string sMessage;
-    sMessage.append_format(QX_TEXT("[{}] "), svCondition);
+    sMessage.append_format(QXT("[{}] "), svCondition);
     sMessage.append_format(sFormat, std::forward<args_t>(args)...);
-    QX_LOGGER_INSTANCE.log(eVerbosity, sMessage, category, svFile, svFunction, nLine);
+    QX_LOGGER_INSTANCE.log(category, eVerbosity, svFile, svFunction, nLine, sMessage);
     QX_LOGGER_INSTANCE.flush();
 }
 
@@ -129,8 +129,8 @@ void resolve_assert_proceeding(
     string_view     svMessage)
 {
     string sMessage;
-    sMessage.append_format(QX_TEXT("[{}] {}"), svCondition, svMessage);
-    QX_LOGGER_INSTANCE.log(eVerbosity, sMessage, category, svFile, svFunction, nLine);
+    sMessage.append_format(QXT("[{}] {}"), svCondition, svMessage);
+    QX_LOGGER_INSTANCE.log(category, eVerbosity, svFile, svFunction, nLine, sMessage);
     QX_LOGGER_INSTANCE.flush();
 }
 
@@ -145,11 +145,11 @@ void resolve_assert_proceeding(
 #ifndef QX_EXPECT_BEFORE_DEBUG_BREAK
     #define QX_EXPECT_BEFORE_DEBUG_BREAK(condition, ...)              \
         qx::details::resolve_assert_proceeding<qx::verbosity::error>( \
-            QX_FILE_CATEGORY(),                                       \
+            QX_GET_FILE_CATEGORY(),                                   \
             qx::to_string(__FUNCTION__),                              \
             QX_SHORT_FILE,                                            \
             QX_LINE,                                                  \
-            QX_TEXT(#condition),                                      \
+            QXT(#condition),                                          \
             ##__VA_ARGS__)
 #endif
 
@@ -168,11 +168,11 @@ void resolve_assert_proceeding(
 #ifndef QX_ASSERT_BEFORE_DEBUG_BREAK
     #define QX_ASSERT_BEFORE_DEBUG_BREAK(condition, ...)                 \
         qx::details::resolve_assert_proceeding<qx::verbosity::critical>( \
-            QX_FILE_CATEGORY(),                                          \
+            QX_GET_FILE_CATEGORY(),                                      \
             qx::to_string(__FUNCTION__),                                 \
             QX_SHORT_FILE,                                               \
             QX_LINE,                                                     \
-            QX_TEXT(#condition),                                         \
+            QXT(#condition),                                             \
             ##__VA_ARGS__)
 #endif
 
@@ -381,12 +381,12 @@ void resolve_assert_proceeding(
 /**
     @brief Use this as a condition in any macro above to indicate that this part of your code must never be executed
 **/
-#define QX_NO_ENTRY !QX_TEXT("No entry")
+#define QX_NO_ENTRY !QXT("No entry")
 
 /**
     @brief Use this as a condition in any macro above to indicate that this part of your code is not ready yet
 **/
-#define QX_NOT_IMPLEMENTED !QX_TEXT("Not implemented")
+#define QX_NOT_IMPLEMENTED !QXT("Not implemented")
 
 namespace qx::details
 {

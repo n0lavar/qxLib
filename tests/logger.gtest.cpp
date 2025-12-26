@@ -80,30 +80,31 @@ struct LoggerTraits
     }
 };
 
-constexpr qx::char_type LOGS_FILE_DEFAULT[] = QX_TEXT("default");
+constexpr qx::char_type LOGS_FILE_DEFAULT[] = QXT("default");
 
-constexpr qx::char_type UNIT_DEFAULT[] = QX_TEXT("default");
-constexpr qx::char_type UNIT_FILE[]    = QX_TEXT("file.h");
-constexpr qx::char_type UNIT_FUNC[]    = QX_TEXT("TestLoggerFunction");
+constexpr qx::char_type UNIT_DEFAULT[] = QXT("default");
+constexpr qx::char_type UNIT_FILE[]    = QXT("file.h");
+constexpr qx::char_type UNIT_FUNC[]    = QXT("TestLoggerFunction");
 
-constexpr qx::char_type LOG_FILE_H[]   = QX_TEXT("file.h");
-constexpr qx::char_type LOG_FILE_CPP[] = QX_TEXT("file.cpp");
-constexpr qx::char_type LOG_FILE_INL[] = QX_TEXT("file.inl");
+constexpr qx::char_type LOG_FILE_H[]   = QXT("file.h");
+constexpr qx::char_type LOG_FILE_CPP[] = QXT("file.cpp");
+constexpr qx::char_type LOG_FILE_INL[] = QXT("file.inl");
 
-constexpr qx::char_type LOG_CATEGORY_EMPTY[] = QX_TEXT("");
-constexpr qx::char_type LOG_CATEGORY_TAG1[]  = QX_TEXT("tag1");
-constexpr qx::char_type LOG_CATEGORY_TAG2[]  = QX_TEXT("tag2");
+constexpr qx::char_type LOG_CATEGORY_DEFAULT[] = QXT("CatDefault");
+constexpr qx::char_type LOG_CATEGORY_TAG1[]    = QXT("tag1");
+constexpr qx::char_type LOG_CATEGORY_TAG2[]    = QXT("tag2");
 
 using implementations_type = ::testing::Types<
-    LoggerTraits<LOGS_FILE_DEFAULT, UNIT_DEFAULT, LOG_FILE_H, LOG_CATEGORY_EMPTY>,
-    LoggerTraits<LOGS_FILE_DEFAULT, UNIT_FILE, LOG_FILE_H, LOG_CATEGORY_EMPTY>,
-    LoggerTraits<LOGS_FILE_DEFAULT, UNIT_FUNC, LOG_FILE_H, LOG_CATEGORY_EMPTY>,
-    LoggerTraits<LOGS_FILE_DEFAULT, UNIT_DEFAULT, LOG_FILE_H, LOG_CATEGORY_EMPTY>,
-    LoggerTraits<LOGS_FILE_DEFAULT, UNIT_DEFAULT, LOG_FILE_H, LOG_CATEGORY_EMPTY>,
-    LoggerTraits<LOGS_FILE_DEFAULT, UNIT_DEFAULT, LOG_FILE_CPP, LOG_CATEGORY_EMPTY>,
-    LoggerTraits<LOGS_FILE_DEFAULT, UNIT_DEFAULT, LOG_FILE_INL, LOG_CATEGORY_EMPTY>,
+    LoggerTraits<LOGS_FILE_DEFAULT, UNIT_DEFAULT, LOG_FILE_H, LOG_CATEGORY_DEFAULT>,
+    LoggerTraits<LOGS_FILE_DEFAULT, UNIT_FILE, LOG_FILE_H, LOG_CATEGORY_DEFAULT>,
+    LoggerTraits<LOGS_FILE_DEFAULT, UNIT_FUNC, LOG_FILE_H, LOG_CATEGORY_DEFAULT>,
+    LoggerTraits<LOGS_FILE_DEFAULT, UNIT_DEFAULT, LOG_FILE_H, LOG_CATEGORY_DEFAULT>,
+    LoggerTraits<LOGS_FILE_DEFAULT, UNIT_DEFAULT, LOG_FILE_H, LOG_CATEGORY_DEFAULT>,
+    LoggerTraits<LOGS_FILE_DEFAULT, UNIT_DEFAULT, LOG_FILE_CPP, LOG_CATEGORY_DEFAULT>,
+    LoggerTraits<LOGS_FILE_DEFAULT, UNIT_DEFAULT, LOG_FILE_INL, LOG_CATEGORY_DEFAULT>,
     LoggerTraits<LOGS_FILE_DEFAULT, UNIT_DEFAULT, LOG_FILE_H, LOG_CATEGORY_TAG1>,
     LoggerTraits<LOGS_FILE_DEFAULT, UNIT_DEFAULT, LOG_FILE_H, LOG_CATEGORY_TAG2>>;
+
 
 template<class traits_t>
 class TestLogger : public ::testing::Test
@@ -113,7 +114,7 @@ protected:
     TestLogger()
     {
         m_sLogFilePath = traits_t::GetLogsFile();
-        m_sLogFilePath += QX_TEXT(".log");
+        m_sLogFilePath += QXT(".log");
     }
 
     /* called before every test */
@@ -130,25 +131,6 @@ protected:
         fileLoggerStream.deregister_unit(qx::base_logger_stream::k_svDefaultUnit);
         fileLoggerStream.register_unit(traits_t::GetUnit(), { qx::verbosity::log });
 
-        if constexpr (traits_t::GetCategory() == LOG_CATEGORY_TAG1)
-        {
-            fileLoggerStream.register_unit(
-                traits_t::GetCategory(),
-                { qx::verbosity::log,
-                  [](qx::logger_buffer& buffers,
-                     qx::verbosity,
-                     const qx::category& category,
-                     qx::string_view,
-                     qx::string_view,
-                     int,
-                     qx::string_view swLogMessage)
-                  {
-                      buffers.sMessage = QX_TEXT("   [");
-                      qx::base_logger_stream::append_time_string(buffers.sMessage, QX_TEXT('.'), QX_TEXT(':'));
-                      buffers.sMessage.append_format(QX_TEXT("][{}] {}\n"), category.get_name(), swLogMessage);
-                  } });
-        }
-
         m_pLogger->add_stream(std::move(consoleLoggerStream));
         m_pLogger->add_stream(std::move(fileLoggerStream));
     }
@@ -163,20 +145,20 @@ protected:
             const std::filesystem::path        path(m_sLogFilePath.c_str());
             std::basic_ifstream<qx::char_type> ifs(path);
 
-            std::basic_string<qx::char_type>              sLine(512, QX_TEXT('\0'));
+            std::basic_string<qx::char_type>              sLine(512, QXT('\0'));
             std::match_results<qx::string::const_pointer> match;
             std::basic_string<qx::char_type>              sFormat;
             std::basic_regex<qx::char_type>               regex;
             std::basic_string<qx::char_type>              sFile;
 
-            constexpr const qx::char_type* pszInfo    = QX_TEXT("   ");
-            constexpr const qx::char_type* pszWarning = QX_TEXT("\\[W\\]");
-            constexpr const qx::char_type* pszError   = QX_TEXT("\\[E\\]");
-            constexpr const qx::char_type* pszAssert  = QX_TEXT("\\[C\\]");
-            constexpr const qx::char_type* pszDate    = QX_TEXT("\\[\\d{2}.\\d{2}.\\d{4}_");
-            constexpr const qx::char_type* pszTime    = QX_TEXT("\\d{2}:\\d{2}:\\d{2}\\]");
+            constexpr const qx::char_type* pszInfo    = QXT("   ");
+            constexpr const qx::char_type* pszWarning = QXT("\\[W\\]");
+            constexpr const qx::char_type* pszError   = QXT("\\[E\\]");
+            constexpr const qx::char_type* pszAssert  = QXT("\\[C\\]");
+            constexpr const qx::char_type* pszDate    = QXT("\\[\\d{2}.\\d{2}.\\d{4}_");
+            constexpr const qx::char_type* pszTime    = QXT("\\d{2}:\\d{2}:\\d{2}\\]");
 
-            auto CheckRegex = [&regex, &match](const qx::string& sMatch, const qx::string& sText)
+            auto check_regex = [&regex, &match](const qx::string& sMatch, const qx::string& sText)
             {
                 regex = std::basic_regex(sMatch.data());
                 EXPECT_TRUE(std::regex_search(std::basic_string(sText.c_str()).c_str(), match, regex))
@@ -186,24 +168,21 @@ protected:
                     << "logs trace file: " << qx::to_cstring(traits_t::GetTraceFile()).c_str();
             };
 
-            auto CheckStringCommon = [&sFormat, &sFile, &ifs, &sLine, &CheckRegex](
-                                         const qx::char_type* pszStringStarting,
-                                         const qx::char_type* pszStringEnding,
-                                         bool                 bCategory = false)
+            auto check_string = [&sFormat, &sFile, &ifs, &sLine, &check_regex](
+                                    const qx::char_type* pszStringStarting,
+                                    const qx::char_type* pszStringEnding,
+                                    qx::string_view      svCategory = LOG_CATEGORY_DEFAULT)
             {
                 sFile.clear();
-                if (bCategory && !traits_t::GetCategory().empty())
-                {
-                    sFile += QX_TEXT("\\[");
-                    sFile += traits_t::GetCategory();
-                    sFile += QX_TEXT("\\]");
-                }
-                sFile += QX_TEXT("\\[");
+                sFile += QXT("\\[");
+                sFile += svCategory;
+                sFile += QXT("\\]");
+                sFile += QXT("\\[");
                 sFile += traits_t::GetTraceFile();
-                sFile += QX_TEXT("::");
+                sFile += QXT("::");
 
-                constexpr const qx::char_type* pszFunc = QX_TEXT("(.*?)"); // compiler-dependent
-                constexpr const qx::char_type* pszLine = QX_TEXT("::\\d+\\]");
+                constexpr const qx::char_type* pszFunc = QXT("(.*?)"); // compiler-dependent
+                constexpr const qx::char_type* pszLine = QXT("::\\d+\\]");
 
                 sFormat.clear();
                 sFormat += pszStringStarting;
@@ -216,78 +195,51 @@ protected:
 
                 ifs.getline(sLine.data(), static_cast<std::streamsize>(sLine.size()));
 
-                CheckRegex(sFormat, sLine);
+                check_regex(sFormat, sLine);
             };
 
-            auto CheckStringCategory = [&sFormat, &ifs, &sLine, &CheckRegex](const qx::char_type* pszStringEnding)
-            {
-                sFormat.clear();
-                sFormat += pszInfo;
-                sFormat += pszDate;
-                sFormat += pszTime;
-                sFormat += QX_TEXT("\\[");
-                sFormat += traits_t::GetCategory();
-                sFormat += QX_TEXT("\\]");
-                sFormat += pszStringEnding;
+            check_string(pszInfo, QXT(" Start test"));
 
-                ifs.getline(sLine.data(), static_cast<std::streamsize>(sLine.size()));
-                CheckRegex(sFormat, sLine);
-            };
+            check_string(pszInfo, QXT(" 1.2"));
+            check_string(pszInfo, QXT(" 1.2 1"));
+            check_string(pszInfo, QXT(" 1.2 2"));
+            check_string(pszInfo, QXT(" 1.2 3"));
+            check_string(pszInfo, QXT(" 1.2 4"));
+            check_string(pszInfo, QXT(" 1.2 5"));
 
-            CheckStringCommon(pszInfo, QX_TEXT(" Start test"));
+            check_string(pszWarning, QXT(" 1.2"));
+            check_string(pszWarning, QXT(" 1.2 1"));
+            check_string(pszWarning, QXT(" 1.2 2"));
+            check_string(pszWarning, QXT(" 1.2 3"));
+            check_string(pszWarning, QXT(" 1.2 4"));
+            check_string(pszWarning, QXT(" 1.2 5"));
 
-            CheckStringCommon(pszInfo, QX_TEXT(" 1.2"));
-            CheckStringCommon(pszInfo, QX_TEXT(" 1.2 1"));
-            CheckStringCommon(pszInfo, QX_TEXT(" 1.2 2"));
-            CheckStringCommon(pszInfo, QX_TEXT(" 1.2 3"));
-            CheckStringCommon(pszInfo, QX_TEXT(" 1.2 4"));
-            CheckStringCommon(pszInfo, QX_TEXT(" 1.2 5"));
+            check_string(pszError, QXT(" 1.2 1"));
+            check_string(pszError, QXT(" 1.2 2"));
+            check_string(pszError, QXT(" 1.2 3"));
+            check_string(pszError, QXT(" 1.2 4"));
+            check_string(pszError, QXT(" 1.2 5"));
 
-            CheckStringCommon(pszWarning, QX_TEXT(" 1.2"));
-            CheckStringCommon(pszWarning, QX_TEXT(" 1.2 1"));
-            CheckStringCommon(pszWarning, QX_TEXT(" 1.2 2"));
-            CheckStringCommon(pszWarning, QX_TEXT(" 1.2 3"));
-            CheckStringCommon(pszWarning, QX_TEXT(" 1.2 4"));
-            CheckStringCommon(pszWarning, QX_TEXT(" 1.2 5"));
+            check_string(pszAssert, QXT(" \\[false\\] 1.2 1"));
+            check_string(pszAssert, QXT(" \\[false\\] 1.2 2"));
+            check_string(pszAssert, QXT(" \\[false\\] 1.2 3"));
+            check_string(pszAssert, QXT(" \\[false\\] 1.2 4"));
+            check_string(pszAssert, QXT(" \\[false\\] 1.2 5"));
 
-            CheckStringCommon(pszError, QX_TEXT(" 1.2 1"));
-            CheckStringCommon(pszError, QX_TEXT(" 1.2 2"));
-            CheckStringCommon(pszError, QX_TEXT(" 1.2 3"));
-            CheckStringCommon(pszError, QX_TEXT(" 1.2 4"));
-            CheckStringCommon(pszError, QX_TEXT(" 1.2 5"));
+            check_string(pszAssert, QXT(" \\[false\\] 1.2 1 three"));
+            check_string(pszAssert, QXT(" \\[false\\] 1.2 2 three"));
+            check_string(pszAssert, QXT(" \\[false\\] 1.2 3 three"));
+            check_string(pszAssert, QXT(" \\[false\\] 1.2 4 three"));
+            check_string(pszAssert, QXT(" \\[false\\] 1.2 5 three"));
 
-            CheckStringCommon(pszAssert, QX_TEXT(" \\[false\\] 1.2 1"));
-            CheckStringCommon(pszAssert, QX_TEXT(" \\[false\\] 1.2 2"));
-            CheckStringCommon(pszAssert, QX_TEXT(" \\[false\\] 1.2 3"));
-            CheckStringCommon(pszAssert, QX_TEXT(" \\[false\\] 1.2 4"));
-            CheckStringCommon(pszAssert, QX_TEXT(" \\[false\\] 1.2 5"));
+            check_string(pszInfo, QXT(" 1.2"), traits_t::GetCategory());
+            check_string(pszInfo, QXT(" 1.2 1"), traits_t::GetCategory());
+            check_string(pszInfo, QXT(" 1.2 2"), traits_t::GetCategory());
+            check_string(pszInfo, QXT(" 1.2 3"), traits_t::GetCategory());
+            check_string(pszInfo, QXT(" 1.2 4"), traits_t::GetCategory());
+            check_string(pszInfo, QXT(" 1.2 5"), traits_t::GetCategory());
 
-            CheckStringCommon(pszAssert, QX_TEXT(" \\[false\\] 1.2 1 three"));
-            CheckStringCommon(pszAssert, QX_TEXT(" \\[false\\] 1.2 2 three"));
-            CheckStringCommon(pszAssert, QX_TEXT(" \\[false\\] 1.2 3 three"));
-            CheckStringCommon(pszAssert, QX_TEXT(" \\[false\\] 1.2 4 three"));
-            CheckStringCommon(pszAssert, QX_TEXT(" \\[false\\] 1.2 5 three"));
-
-            if constexpr (LOG_CATEGORY_TAG1 == traits_t::GetCategory())
-            {
-                CheckStringCategory(QX_TEXT(" 1.2"));
-                CheckStringCategory(QX_TEXT(" 1.2 1"));
-                CheckStringCategory(QX_TEXT(" 1.2 2"));
-                CheckStringCategory(QX_TEXT(" 1.2 3"));
-                CheckStringCategory(QX_TEXT(" 1.2 4"));
-                CheckStringCategory(QX_TEXT(" 1.2 5"));
-            }
-            else
-            {
-                CheckStringCommon(pszInfo, QX_TEXT(" 1.2"), true);
-                CheckStringCommon(pszInfo, QX_TEXT(" 1.2 1"), true);
-                CheckStringCommon(pszInfo, QX_TEXT(" 1.2 2"), true);
-                CheckStringCommon(pszInfo, QX_TEXT(" 1.2 3"), true);
-                CheckStringCommon(pszInfo, QX_TEXT(" 1.2 4"), true);
-                CheckStringCommon(pszInfo, QX_TEXT(" 1.2 5"), true);
-            }
-
-            CheckStringCommon(pszInfo, QX_TEXT(" End test"));
+            check_string(pszInfo, QXT(" End test"));
 
             ifs.close();
         }
@@ -304,93 +256,99 @@ protected:
 TYPED_TEST_SUITE(TestLogger, implementations_type);
 
 #define TEST_LOG(traceFile, format, ...) \
-    myLogger                             \
-        .log(qx::verbosity::log, format, CatDefault, traceFile, qx::to_string(__FUNCTION__), __LINE__, ##__VA_ARGS__)
+    myLogger.log(                        \
+        CatDefault,                      \
+        qx::verbosity::log,              \
+        traceFile,                       \
+        qx::to_string(__FUNCTION__),     \
+        __LINE__,                        \
+        QXT(format),                     \
+        ##__VA_ARGS__)
 
 #define TEST_LOG_WARNING(traceFile, format, ...) \
     myLogger.log(                                \
-        qx::verbosity::warning,                  \
-        format,                                  \
         CatDefault,                              \
+        qx::verbosity::warning,                  \
         traceFile,                               \
         qx::to_string(__FUNCTION__),             \
         __LINE__,                                \
+        QXT(format),                             \
         ##__VA_ARGS__)
 
 #define TEST_LOG_CATEGORY(traceFile, _category, format, ...) \
     myLogger.log(                                            \
-        qx::verbosity::log,                                  \
-        format,                                              \
         qx::category { _category },                          \
+        qx::verbosity::log,                                  \
         traceFile,                                           \
         qx::to_string(__FUNCTION__),                         \
         __LINE__,                                            \
+        QXT(format),                                         \
         ##__VA_ARGS__)
 
 #define TEST_LOG_ERROR(traceFile, format, ...) \
     myLogger.log(                              \
-        qx::verbosity::error,                  \
-        format,                                \
         CatDefault,                            \
+        qx::verbosity::error,                  \
         traceFile,                             \
         qx::to_string(__FUNCTION__),           \
         __LINE__,                              \
+        QXT(format),                           \
         ##__VA_ARGS__)
 
 #define TEST_LOG_ASSERT(traceFile, expr, format, ...) \
     myLogger.log(                                     \
-        qx::verbosity::critical,                      \
-        QX_TEXT("[{}] ") format,                      \
         CatDefault,                                   \
+        qx::verbosity::critical,                      \
         traceFile,                                    \
         qx::to_string(__FUNCTION__),                  \
         __LINE__,                                     \
-        QX_TEXT(#expr),                               \
+        QXT("[{}] " format),                          \
+        QXT(#expr),                                   \
         ##__VA_ARGS__)
 
-#define TEST_LOGGER(traceFile, _category)                                              \
-    TEST_LOG(traceFile, QX_TEXT("Start test"));                                        \
-                                                                                       \
-    TEST_LOG(traceFile, QX_TEXT("{}"), 1.2f);                                          \
-    TEST_LOG(traceFile, QX_TEXT("{} {}"), 1.2f, 1);                                    \
-    TEST_LOG(traceFile, QX_TEXT("{} {}"), 1.2f, 2);                                    \
-    TEST_LOG(traceFile, QX_TEXT("{} {}"), 1.2f, 3);                                    \
-    TEST_LOG(traceFile, QX_TEXT("{} {}"), 1.2f, 4);                                    \
-    TEST_LOG(traceFile, QX_TEXT("{} {}"), 1.2f, 5);                                    \
-                                                                                       \
-    TEST_LOG_WARNING(traceFile, QX_TEXT("{}"), 1.2f);                                  \
-    TEST_LOG_WARNING(traceFile, QX_TEXT("{} {}"), 1.2f, 1);                            \
-    TEST_LOG_WARNING(traceFile, QX_TEXT("{} {}"), 1.2f, 2);                            \
-    TEST_LOG_WARNING(traceFile, QX_TEXT("{} {}"), 1.2f, 3);                            \
-    TEST_LOG_WARNING(traceFile, QX_TEXT("{} {}"), 1.2f, 4);                            \
-    TEST_LOG_WARNING(traceFile, QX_TEXT("{} {}"), 1.2f, 5);                            \
-                                                                                       \
-    TEST_LOG_ERROR(traceFile, QX_TEXT("{} {}"), 1.2f, 1);                              \
-    TEST_LOG_ERROR(traceFile, QX_TEXT("{} {}"), 1.2f, 2);                              \
-    TEST_LOG_ERROR(traceFile, QX_TEXT("{} {}"), 1.2f, 3);                              \
-    TEST_LOG_ERROR(traceFile, QX_TEXT("{} {}"), 1.2f, 4);                              \
-    TEST_LOG_ERROR(traceFile, QX_TEXT("{} {}"), 1.2f, 5);                              \
-                                                                                       \
-    TEST_LOG_ASSERT(traceFile, false, QX_TEXT("{} {}"), 1.2f, 1);                      \
-    TEST_LOG_ASSERT(traceFile, false, QX_TEXT("{} {}"), 1.2f, 2);                      \
-    TEST_LOG_ASSERT(traceFile, false, QX_TEXT("{} {}"), 1.2f, 3);                      \
-    TEST_LOG_ASSERT(traceFile, false, QX_TEXT("{} {}"), 1.2f, 4);                      \
-    TEST_LOG_ASSERT(traceFile, false, QX_TEXT("{} {}"), 1.2f, 5);                      \
-                                                                                       \
-    TEST_LOG_ASSERT(traceFile, false, QX_TEXT("{} {} {}"), 1.2f, 1, QX_TEXT("three")); \
-    TEST_LOG_ASSERT(traceFile, false, QX_TEXT("{} {} {}"), 1.2f, 2, QX_TEXT("three")); \
-    TEST_LOG_ASSERT(traceFile, false, QX_TEXT("{} {} {}"), 1.2f, 3, QX_TEXT("three")); \
-    TEST_LOG_ASSERT(traceFile, false, QX_TEXT("{} {} {}"), 1.2f, 4, QX_TEXT("three")); \
-    TEST_LOG_ASSERT(traceFile, false, QX_TEXT("{} {} {}"), 1.2f, 5, QX_TEXT("three")); \
-                                                                                       \
-    TEST_LOG_CATEGORY(traceFile, _category, QX_TEXT("{}"), 1.2f);                      \
-    TEST_LOG_CATEGORY(traceFile, _category, QX_TEXT("{} {}"), 1.2f, 1);                \
-    TEST_LOG_CATEGORY(traceFile, _category, QX_TEXT("{} {}"), 1.2f, 2);                \
-    TEST_LOG_CATEGORY(traceFile, _category, QX_TEXT("{} {}"), 1.2f, 3);                \
-    TEST_LOG_CATEGORY(traceFile, _category, QX_TEXT("{} {}"), 1.2f, 4);                \
-    TEST_LOG_CATEGORY(traceFile, _category, QX_TEXT("{} {}"), 1.2f, 5);                \
-                                                                                       \
-    TEST_LOG(traceFile, QX_TEXT("End test\n"));
+#define TEST_LOGGER(traceFile, _category)                                 \
+    TEST_LOG(traceFile, "Start test");                                    \
+                                                                          \
+    TEST_LOG(traceFile, "{}", 1.2f);                                      \
+    TEST_LOG(traceFile, "{} {}", 1.2f, 1);                                \
+    TEST_LOG(traceFile, "{} {}", 1.2f, 2);                                \
+    TEST_LOG(traceFile, "{} {}", 1.2f, 3);                                \
+    TEST_LOG(traceFile, "{} {}", 1.2f, 4);                                \
+    TEST_LOG(traceFile, "{} {}", 1.2f, 5);                                \
+                                                                          \
+    TEST_LOG_WARNING(traceFile, "{}", 1.2f);                              \
+    TEST_LOG_WARNING(traceFile, "{} {}", 1.2f, 1);                        \
+    TEST_LOG_WARNING(traceFile, "{} {}", 1.2f, 2);                        \
+    TEST_LOG_WARNING(traceFile, "{} {}", 1.2f, 3);                        \
+    TEST_LOG_WARNING(traceFile, "{} {}", 1.2f, 4);                        \
+    TEST_LOG_WARNING(traceFile, "{} {}", 1.2f, 5);                        \
+                                                                          \
+    TEST_LOG_ERROR(traceFile, "{} {}", 1.2f, 1);                          \
+    TEST_LOG_ERROR(traceFile, "{} {}", 1.2f, 2);                          \
+    TEST_LOG_ERROR(traceFile, "{} {}", 1.2f, 3);                          \
+    TEST_LOG_ERROR(traceFile, "{} {}", 1.2f, 4);                          \
+    TEST_LOG_ERROR(traceFile, "{} {}", 1.2f, 5);                          \
+                                                                          \
+    TEST_LOG_ASSERT(traceFile, false, "{} {}", 1.2f, 1);                  \
+    TEST_LOG_ASSERT(traceFile, false, "{} {}", 1.2f, 2);                  \
+    TEST_LOG_ASSERT(traceFile, false, "{} {}", 1.2f, 3);                  \
+    TEST_LOG_ASSERT(traceFile, false, "{} {}", 1.2f, 4);                  \
+    TEST_LOG_ASSERT(traceFile, false, "{} {}", 1.2f, 5);                  \
+                                                                          \
+    TEST_LOG_ASSERT(traceFile, false, "{} {} {}", 1.2f, 1, QXT("three")); \
+    TEST_LOG_ASSERT(traceFile, false, "{} {} {}", 1.2f, 2, QXT("three")); \
+    TEST_LOG_ASSERT(traceFile, false, "{} {} {}", 1.2f, 3, QXT("three")); \
+    TEST_LOG_ASSERT(traceFile, false, "{} {} {}", 1.2f, 4, QXT("three")); \
+    TEST_LOG_ASSERT(traceFile, false, "{} {} {}", 1.2f, 5, QXT("three")); \
+                                                                          \
+    TEST_LOG_CATEGORY(traceFile, _category, "{}", 1.2f);                  \
+    TEST_LOG_CATEGORY(traceFile, _category, "{} {}", 1.2f, 1);            \
+    TEST_LOG_CATEGORY(traceFile, _category, "{} {}", 1.2f, 2);            \
+    TEST_LOG_CATEGORY(traceFile, _category, "{} {}", 1.2f, 3);            \
+    TEST_LOG_CATEGORY(traceFile, _category, "{} {}", 1.2f, 4);            \
+    TEST_LOG_CATEGORY(traceFile, _category, "{} {}", 1.2f, 5);            \
+                                                                          \
+    TEST_LOG(traceFile, "End test\n");
 
 void TestLoggerFunction(qx::logger& myLogger, const qx::char_type* pszTraceFile, qx::string_view svCategory)
 {

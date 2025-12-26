@@ -81,8 +81,8 @@ void TestColor(const qx::color& color, int r = -1, int g = -1, int b = -1, const
 }
 
 #define EXPAND_ARGS(snakeName, pascalName, hashName, name0x, name0xXX, r, g, b)                                     \
-    qx::color::snakeName(), r, g, b, QX_TEXT(#snakeName), QX_TEXT(#pascalName), QX_TEXT(hashName), QX_TEXT(name0x), \
-        QX_TEXT(name0xXX)
+    qx::color::snakeName(), r, g, b, QXT(#snakeName), QXT(#pascalName), QXT(hashName), QXT(name0x), \
+        QXT(name0xXX)
 
 TEST(color, colors)
 {
@@ -594,13 +594,13 @@ TEST(color, update_dec)
 TEST(color, format)
 {
     qx::color color = qx::color::alice_blue();
-    expect_equal(qx::string::static_format(QX_TEXT("{}"), color), qx::string(QX_TEXT("F0F8FFFF")));
-    expect_equal(qx::string::static_format(QX_TEXT("{:s}"), color), qx::string(QX_TEXT("alice_blue")));
-    expect_equal(qx::string::static_format(QX_TEXT("{:p}"), color), qx::string(QX_TEXT("AliceBlue")));
-    expect_equal(qx::string::static_format(QX_TEXT("{:x}"), color), qx::string(QX_TEXT("f0f8ff")));
-    expect_equal(qx::string::static_format(QX_TEXT("{:xa}"), color), qx::string(QX_TEXT("f0f8ffff")));
-    expect_equal(qx::string::static_format(QX_TEXT("{:X}"), color), qx::string(QX_TEXT("F0F8FF")));
-    expect_equal(qx::string::static_format(QX_TEXT("{:Xa}"), color), qx::string(QX_TEXT("F0F8FFFF")));
-    expect_equal(qx::string::static_format(QX_TEXT("{:r}"), color), qx::string(QX_TEXT("240,248,255")));
-    expect_equal(qx::string::static_format(QX_TEXT("{:ra}"), color), qx::string(QX_TEXT("240,248,255,255")));
+    expect_equal(qx::string::static_format(QXT("{}"), color), qx::string(QXT("F0F8FFFF")));
+    expect_equal(qx::string::static_format(QXT("{:s}"), color), qx::string(QXT("alice_blue")));
+    expect_equal(qx::string::static_format(QXT("{:p}"), color), qx::string(QXT("AliceBlue")));
+    expect_equal(qx::string::static_format(QXT("{:x}"), color), qx::string(QXT("f0f8ff")));
+    expect_equal(qx::string::static_format(QXT("{:xa}"), color), qx::string(QXT("f0f8ffff")));
+    expect_equal(qx::string::static_format(QXT("{:X}"), color), qx::string(QXT("F0F8FF")));
+    expect_equal(qx::string::static_format(QXT("{:Xa}"), color), qx::string(QXT("F0F8FFFF")));
+    expect_equal(qx::string::static_format(QXT("{:r}"), color), qx::string(QXT("240,248,255")));
+    expect_equal(qx::string::static_format(QXT("{:ra}"), color), qx::string(QXT("240,248,255,255")));
 }

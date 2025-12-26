@@ -352,9 +352,9 @@ inline std::optional<color> color::from_string(string_view svColorName) noexcept
     std::optional<color> optColor;
 
     const bool bStartsWith0x =
-        svColorName.starts_with(QX_TEXT("0x")) && (svColorName.size() == 8 || svColorName.size() == 10);
+        svColorName.starts_with(QXT("0x")) && (svColorName.size() == 8 || svColorName.size() == 10);
 
-    if (bStartsWith0x || svColorName.starts_with(QX_TEXT("#")) && svColorName.size() == 7)
+    if (bStartsWith0x || svColorName.starts_with(QXT("#")) && svColorName.size() == 7)
     {
         // TODO no conversion method for string view so far
         // but with SSO this should be fine
@@ -364,7 +364,7 @@ inline std::optional<color> color::from_string(string_view svColorName) noexcept
         auto ReadHex = [](string& s) -> std::optional<color>
         {
             s.to_lower();
-            if (const auto optInt = s.template to<u64>(QX_TEXT("%llx")))
+            if (const auto optInt = s.template to<u64>(QXT("%llx")))
                 return color(*optInt);
 
             return std::nullopt;
@@ -372,7 +372,7 @@ inline std::optional<color> color::from_string(string_view svColorName) noexcept
 
         if (sColorName.length() == 6)
         {
-            sColorName += QX_TEXT("FF");
+            sColorName += QXT("FF");
             optColor = ReadHex(sColorName);
         }
         else if (sColorName.length() == 8)

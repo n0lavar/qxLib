@@ -76,7 +76,7 @@ struct log_unit
 class base_logger_stream
 {
 public:
-    static constexpr const char_type* k_svDefaultUnit = QX_TEXT("default");
+    static constexpr const char_type* k_svDefaultUnit = QXT("default");
 
 public:
     /**
@@ -97,16 +97,16 @@ public:
     /**
         @brief  Output to stream
         @tparam char_t       - char type, typically char or wchar_t
-        @param  eVerbosity     message verbosity
         @param  category     - code category
+        @param  eVerbosity     message verbosity
         @param  svFile       - file name string
         @param  svFunction   - function name string
         @param  nLine        - code line number
         @param  swLogMessage - formatted log line
     **/
     void log(
-        verbosity       eVerbosity,
         const category& category,
+        verbosity       eVerbosity,
         string_view     svFile,
         string_view     svFunction,
         int             nLine,

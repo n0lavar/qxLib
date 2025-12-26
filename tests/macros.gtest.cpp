@@ -57,7 +57,7 @@ static_assert(test52 == 5);
 // --------------------------------------------------- QX_SHORT_FILE ---------------------------------------------------
 
 constexpr auto pszFileName = QX_SHORT_FILE;
-QX_STATIC_ASSERT_STR_EQ(pszFileName, QX_TEXT("macros.gtest.cpp"));
+QX_STATIC_ASSERT_STR_EQ(pszFileName, QXT("macros.gtest.cpp"));
 
 
 

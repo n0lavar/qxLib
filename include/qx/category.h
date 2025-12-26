@@ -18,26 +18,29 @@
     @param name - category name
     @param ...  - optional category color
 **/
-#define QX_DEFINE_CATEGORY(name, ...) constexpr qx::category name(QX_TEXT(#name), ##__VA_ARGS__)
+#define QX_DEFINE_CATEGORY(name, ...) constexpr qx::category name(QXT(#name), ##__VA_ARGS__)
 
 /**
-    @brief Define file category
-           You can access this value via QX_FILE_CATEGORY()
+    @brief Set the file category
+           You can access this value via QX_GET_FILE_CATEGORY()
            This category will not be exported via #include
     @param _category - category to use in this file
 **/
-#define QX_DEFINE_FILE_CATEGORY(_category)                                                                    \
-    template<>                                                                                                \
-    constexpr const qx::category& qx::details::get_file_category<qx::djb2a_hash(QX_SHORT_FILE, 0)>() noexcept \
-    {                                                                                                         \
-        return _category;                                                                                     \
+#define QX_SET_FILE_CATEGORY(_category)                                 \
+    template<>                                                          \
+    struct qx::details::file_category<qx::djb2a_hash(QX_SHORT_FILE, 0)> \
+    {                                                                   \
+        static constexpr const qx::category& get() noexcept             \
+        {                                                               \
+            return _category;                                           \
+        }                                                               \
     }
 
 /**
-    @brief Get category defined in QX_DEFINE_FILE_CATEGORY
+    @brief Get category defined in QX_SET_FILE_CATEGORY
            If there is none, CatDefault will be used
 **/
-#define QX_FILE_CATEGORY() qx::details::get_file_category<qx::djb2a_hash(QX_SHORT_FILE, 0)>()
+#define QX_GET_FILE_CATEGORY() qx::details::file_category<qx::djb2a_hash(QX_SHORT_FILE, 0)>::get()
 
 namespace qx
 {
@@ -106,3 +109,5 @@ private:
 } // namespace qx
 
 #include <qx/category.inl>
+
+QX_DEFINE_CATEGORY(CatDefault, qx::color::white());

@@ -13,9 +13,9 @@ namespace qx::details
 constexpr const char_type* last_slash(const char_type* str)
 {
     const char_type* pszLastSlash = str;
-    while (str && *str != QX_TEXT('\0'))
+    while (str && *str != QXT('\0'))
     {
-        if (*str == QX_TEXT('\\') || *str == QX_TEXT('/'))
+        if (*str == QXT('\\') || *str == QXT('/'))
             pszLastSlash = str;
 
         ++str;

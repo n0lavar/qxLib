@@ -124,7 +124,7 @@ inline string utf8_to_string(cstring_view pszUtf8)
 
     // much faster on windows
     const int nLength = MultiByteToWideChar(CP_UTF8, 0, pszUtf8.data(), static_cast<int>(pszUtf8.size()), nullptr, 0);
-    string    sRet(nLength, QX_TEXT('\n'));
+    string    sRet(nLength, QXT('\n'));
     MultiByteToWideChar(CP_UTF8, 0, pszUtf8.data(), static_cast<int>(pszUtf8.size()), sRet.data(), nLength);
     return sRet;
 

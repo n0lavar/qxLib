@@ -16,25 +16,35 @@
     #define QX_LOGGER_INSTANCE qx::logger_singleton::get_instance().get_logger()
 #endif
 
-/**
-    @brief Log with category
-    @param category   - category to be used to manage output
-    @param eVerbosity - message verbosity
-    @param format     - format string
-    @param ...        - additional args for formatting
-**/
-#define QX_LOG_C(category, eVerbosity, format, ...) \
-    QX_LOGGER_INSTANCE                              \
-        .log(eVerbosity, format, category, QX_SHORT_FILE, qx::to_string(__FUNCTION__), QX_LINE, ##__VA_ARGS__)
+#ifndef QX_LOG_C
+    /**
+        @brief Log with category
+        @param category   - category to be used to manage output
+        @param eVerbosity - message verbosity
+        @param format     - format string
+        @param ...        - additional args for formatting
+    **/
+    #define QX_LOG_C(category, eVerbosity, format, ...) \
+        QX_LOGGER_INSTANCE.log(                         \
+            eVerbosity,                                 \
+            QXT(format),                                \
+            category,                                   \
+            QX_SHORT_FILE,                              \
+            qx::to_string(__FUNCTION__),                \
+            QX_LINE,                                    \
+            ##__VA_ARGS__)
+#endif
 
-/**
-    @def   QX_LOG
-    @brief Log message
-    @param eVerbosity - message verbosity 
-    @param format     - format string
-    @param ...        - additional args for formatting
-**/
-#define QX_LOG(eVerbosity, format, ...) QX_LOG_C(CatDefault, eVerbosity, format, ##__VA_ARGS__)
+#ifndef QX_LOG
+    /**
+        @def   QX_LOG
+        @brief Log message
+        @param eVerbosity - message verbosity 
+        @param format     - format string
+        @param ...        - additional args for formatting
+    **/
+    #define QX_LOG(eVerbosity, format, ...) QX_LOG_C(CatDefault, eVerbosity, format, ##__VA_ARGS__)
+#endif
 
 namespace qx
 {
@@ -55,41 +65,41 @@ class logger
 public:
     /**
         @brief  Log to all streams
-        @param  eVerbosity - message verbosity
-        @param  svFormat   - format string
         @param  category   - code category
+        @param  eVerbosity - message verbosity
         @param  svFile     - file name string
         @param  svFunction - function name string
         @param  nLine      - code line number
+        @param  svMessage  - message string
     **/
     void log(
-        verbosity       eVerbosity,
-        string_view     svFormat,
         const category& category,
+        verbosity       eVerbosity,
         string_view     svFile,
         string_view     svFunction,
-        int             nLine);
+        int             nLine,
+        string_view     svMessage);
 
     /**
         @brief  Log to all streams
         @tparam args_t     - template parameter pack type
-        @param  eVerbosity - message verbosity
-        @param  sFormat    - format string
         @param  category   - code category
+        @param  eVerbosity - message verbosity
         @param  svFile     - file name string
         @param  svFunction - function name string
         @param  nLine      - code line number
+        @param  sFormat    - format string
         @param  args       - additional args for format
     **/
     template<class... args_t>
         requires(log_acceptable_args_c<args_t...>)
     void log(
-        verbosity                              eVerbosity,
-        format_string_strong_checks<args_t...> sFormat,
         const category&                        category,
+        verbosity                              eVerbosity,
         string_view                            svFile,
         string_view                            svFunction,
         int                                    nLine,
+        format_string_strong_checks<args_t...> sFormat,
         args_t&&... args);
 
     /**

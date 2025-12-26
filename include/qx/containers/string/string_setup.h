@@ -27,13 +27,13 @@ using all_char_types = std::tuple<QX_ALL_CHAR_TYPES>;
 
 #ifdef QX_CONF_USE_CHAR
 
-    #define QX_CHAR_TYPE    char
-    #define _QX_TEXT(quote) quote
+    #define QX_CHAR_TYPE char
+    #define _QXT(quote)  quote
 
 #elif defined(QX_CONF_USE_WCHAR)
 
-    #define QX_CHAR_TYPE    wchar_t
-    #define _QX_TEXT(quote) L##quote
+    #define QX_CHAR_TYPE wchar_t
+    #define _QXT(quote)  L##quote
 
     #if !defined(QX_CONF_UNICODE_MACRO)
         #define QX_CONF_UNICODE_MACRO 1
@@ -45,7 +45,7 @@ using all_char_types = std::tuple<QX_ALL_CHAR_TYPES>;
 
 #endif
 
-#define QX_TEXT(quote) _QX_TEXT(quote)
+#define QXT(quote) _QXT(quote)
 
 namespace qx
 {

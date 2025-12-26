@@ -378,21 +378,21 @@ protected:
 
         sum_pipe result1 = traits_t::execute_generator::execute(m_Delegate, nBroadcast++);
         EXPECT_EQ(result1.nData, bExpectFilled ? 2 : 0);
-        EXPECT_EQ(result1.sData, QX_TEXT(""));
+        EXPECT_EQ(result1.sData, QXT(""));
         EXPECT_EQ(g_Tracker.size(), bExpectFilled ? 1 : 0);
         if (bExpectFilled)
             EXPECT_EQ(g_Tracker.back(), *m_optCallableType);
 
         sum_pipe result2 = traits_t::execute_generator::execute(m_Delegate, nBroadcast++);
         EXPECT_EQ(result2.nData, bExpectFilled ? 4 : 0);
-        EXPECT_EQ(result2.sData, QX_TEXT(""));
+        EXPECT_EQ(result2.sData, QXT(""));
         EXPECT_EQ(g_Tracker.size(), bExpectFilled ? 2 : 0);
         if (bExpectFilled)
             EXPECT_EQ(g_Tracker.back(), *m_optCallableType);
 
         sum_pipe result3 = traits_t::execute_generator::execute(m_Delegate, nBroadcast++);
         EXPECT_EQ(result3.nData, bExpectFilled ? 6 : 0);
-        EXPECT_EQ(result3.sData, QX_TEXT(""));
+        EXPECT_EQ(result3.sData, QXT(""));
         EXPECT_EQ(g_Tracker.size(), bExpectFilled ? 3 : 0);
         if (bExpectFilled)
             EXPECT_EQ(g_Tracker.back(), *m_optCallableType);
@@ -409,21 +409,21 @@ protected:
 
         sum_pipe result1 = traits_t::execute_generator::execute(m_Delegate, nBroadcast++);
         EXPECT_EQ(result1.nData, bExpectFilled ? 2 : 0);
-        EXPECT_EQ(result1.sData, bExpectFilled ? QX_TEXT("2") : QX_TEXT(""));
+        EXPECT_EQ(result1.sData, bExpectFilled ? QXT("2") : QXT(""));
         EXPECT_EQ(g_Tracker.size(), bExpectFilled ? 1 : 0);
         if (bExpectFilled)
             EXPECT_EQ(g_Tracker.back(), *m_optCallableType);
 
         sum_pipe result2 = traits_t::execute_generator::execute(m_Delegate, nBroadcast++);
         EXPECT_EQ(result2.nData, bExpectFilled ? 4 : 0);
-        EXPECT_EQ(result2.sData, bExpectFilled ? QX_TEXT("4") : QX_TEXT(""));
+        EXPECT_EQ(result2.sData, bExpectFilled ? QXT("4") : QXT(""));
         EXPECT_EQ(g_Tracker.size(), bExpectFilled ? 2 : 0);
         if (bExpectFilled)
             EXPECT_EQ(g_Tracker.back(), *m_optCallableType);
 
         sum_pipe result3 = traits_t::execute_generator::execute(m_Delegate, nBroadcast++);
         EXPECT_EQ(result3.nData, bExpectFilled ? 6 : 0);
-        EXPECT_EQ(result3.sData, bExpectFilled ? QX_TEXT("6") : QX_TEXT(""));
+        EXPECT_EQ(result3.sData, bExpectFilled ? QXT("6") : QXT(""));
         EXPECT_EQ(g_Tracker.size(), bExpectFilled ? 3 : 0);
         if (bExpectFilled)
             EXPECT_EQ(g_Tracker.back(), *m_optCallableType);
@@ -627,20 +627,20 @@ TEST_F(delegate_common_tests_fixture, pipe)
 {
     std::vector expectedResult { callable_type::lambda, callable_type::function, callable_type::static_method };
 
-    sum_pipe result1 = m_Delegate.execute(5, QX_TEXT("1"));
+    sum_pipe result1 = m_Delegate.execute(5, QXT("1"));
     EXPECT_EQ(result1.nData, 15);
-    EXPECT_EQ(result1.sData, QX_TEXT("111"));
+    EXPECT_EQ(result1.sData, QXT("111"));
     EXPECT_EQ(g_Tracker, expectedResult);
     g_Tracker.clear();
 
-    sum_pipe result2 = m_Delegate.execute(2, QX_TEXT("//"));
+    sum_pipe result2 = m_Delegate.execute(2, QXT("//"));
     EXPECT_EQ(result2.nData, 6);
-    EXPECT_EQ(result2.sData, QX_TEXT("//////"));
+    EXPECT_EQ(result2.sData, QXT("//////"));
     EXPECT_EQ(g_Tracker, expectedResult);
     g_Tracker.clear();
-    sum_pipe result3 = m_Delegate.execute(0, QX_TEXT("-*/"));
+    sum_pipe result3 = m_Delegate.execute(0, QXT("-*/"));
     EXPECT_EQ(result3.nData, 0);
-    EXPECT_EQ(result3.sData, QX_TEXT("-*/-*/-*/"));
+    EXPECT_EQ(result3.sData, QXT("-*/-*/-*/"));
     EXPECT_EQ(g_Tracker, expectedResult);
     g_Tracker.clear();
 }
@@ -652,45 +652,45 @@ TEST_F(delegate_common_tests_fixture, pipe)
 
 TEST_F(delegate_common_tests_fixture, remove)
 {
-    sum_pipe result1 = m_Delegate.execute(5, QX_TEXT("1"));
+    sum_pipe result1 = m_Delegate.execute(5, QXT("1"));
     EXPECT_EQ(result1.nData, 15);
-    EXPECT_EQ(result1.sData, QX_TEXT("111"));
+    EXPECT_EQ(result1.sData, QXT("111"));
     std::vector expectedResult1 { callable_type::lambda, callable_type::function, callable_type::static_method };
     EXPECT_EQ(g_Tracker, expectedResult1);
     g_Tracker.clear();
 
     EXPECT_TRUE(m_Delegate.remove(m_Token1));
 
-    sum_pipe result2 = m_Delegate.execute(5, QX_TEXT("1"));
+    sum_pipe result2 = m_Delegate.execute(5, QXT("1"));
     EXPECT_EQ(result2.nData, 10);
-    EXPECT_EQ(result2.sData, QX_TEXT("11"));
+    EXPECT_EQ(result2.sData, QXT("11"));
     std::vector expectedResult2 { callable_type::function, callable_type::static_method };
     EXPECT_EQ(g_Tracker, expectedResult2);
     g_Tracker.clear();
 
     EXPECT_TRUE(m_Delegate.remove(m_Token2));
 
-    sum_pipe result3 = m_Delegate.execute(5, QX_TEXT("1"));
+    sum_pipe result3 = m_Delegate.execute(5, QXT("1"));
     EXPECT_EQ(result3.nData, 5);
-    EXPECT_EQ(result3.sData, QX_TEXT("1"));
+    EXPECT_EQ(result3.sData, QXT("1"));
     std::vector expectedResult3 { callable_type::static_method };
     EXPECT_EQ(g_Tracker, expectedResult3);
     g_Tracker.clear();
 
     EXPECT_FALSE(m_Delegate.remove(m_Token2));
 
-    sum_pipe result4 = m_Delegate.execute(5, QX_TEXT("1"));
+    sum_pipe result4 = m_Delegate.execute(5, QXT("1"));
     EXPECT_EQ(result4.nData, 5);
-    EXPECT_EQ(result4.sData, QX_TEXT("1"));
+    EXPECT_EQ(result4.sData, QXT("1"));
     std::vector expectedResult4 { callable_type::static_method };
     EXPECT_EQ(g_Tracker, expectedResult4);
     g_Tracker.clear();
 
     EXPECT_TRUE(m_Delegate.remove(m_Token3));
 
-    sum_pipe result5 = m_Delegate.execute(5, QX_TEXT("1"));
+    sum_pipe result5 = m_Delegate.execute(5, QXT("1"));
     EXPECT_EQ(result5.nData, 0);
-    EXPECT_EQ(result5.sData, QX_TEXT(""));
+    EXPECT_EQ(result5.sData, QXT(""));
     std::vector<callable_type> expectedResult5;
     EXPECT_EQ(g_Tracker, expectedResult5);
     g_Tracker.clear();
@@ -698,18 +698,18 @@ TEST_F(delegate_common_tests_fixture, remove)
 
 TEST_F(delegate_common_tests_fixture, clear)
 {
-    sum_pipe result1 = m_Delegate.execute(5, QX_TEXT("1"));
+    sum_pipe result1 = m_Delegate.execute(5, QXT("1"));
     EXPECT_EQ(result1.nData, 15);
-    EXPECT_EQ(result1.sData, QX_TEXT("111"));
+    EXPECT_EQ(result1.sData, QXT("111"));
     std::vector expectedResult1 { callable_type::lambda, callable_type::function, callable_type::static_method };
     EXPECT_EQ(g_Tracker, expectedResult1);
     g_Tracker.clear();
 
     m_Delegate.clear();
 
-    sum_pipe result2 = m_Delegate.execute(5, QX_TEXT("1"));
+    sum_pipe result2 = m_Delegate.execute(5, QXT("1"));
     EXPECT_EQ(result2.nData, 0);
-    EXPECT_EQ(result2.sData, QX_TEXT(""));
+    EXPECT_EQ(result2.sData, QXT(""));
     std::vector<callable_type> expectedResult2;
     EXPECT_EQ(g_Tracker, expectedResult2);
     g_Tracker.clear();
@@ -731,7 +731,7 @@ TEST_F(delegate_common_tests_fixture, priority)
     m_Delegate.add_free(get_lambda<get_get_result_type, sum_pipe, args_tuple_type>::value, qx::priority::low);
     m_Delegate.add_free(get_function<get_get_result_type, sum_pipe, args_tuple_type>::value, qx::priority::high);
 
-    m_Delegate.execute(5, QX_TEXT("1"));
+    m_Delegate.execute(5, QXT("1"));
 
     std::vector expectedResult { callable_type::lambda,   callable_type::static_method, callable_type::function,
                                  callable_type::lambda,   callable_type::function,      callable_type::static_method,

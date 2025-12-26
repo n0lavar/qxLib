@@ -15,19 +15,19 @@
 TEST(string_converters, to_wstring)
 {
     {
-        qx::string  str(QX_TEXT("Hello world"));
+        qx::string  str(QXT("Hello world"));
         qx::wstring wstr = qx::to_wstring(str);
         EXPECT_STREQ(wstr.data(), L"Hello world");
     }
 
     {
-        qx::string  str(QX_TEXT("0123456789"));
+        qx::string  str(QXT("0123456789"));
         qx::wstring wstr = qx::to_wstring(str);
         EXPECT_STREQ(wstr.data(), L"0123456789");
     }
 
     {
-        qx::string  str(QX_TEXT("!@#$%^&*()_+"));
+        qx::string  str(QXT("!@#$%^&*()_+"));
         qx::wstring wstr = qx::to_wstring(str);
         EXPECT_STREQ(wstr.data(), L"!@#$%^&*()_+");
     }
@@ -38,26 +38,26 @@ TEST(string_converters, to_string)
     {
         qx::wstring wstr(L"Hello world");
         qx::string  str = qx::to_string(wstr);
-        EXPECT_STREQ(str.data(), QX_TEXT("Hello world"));
+        EXPECT_STREQ(str.data(), QXT("Hello world"));
     }
 
     {
         qx::wstring wstr(L"0123456789");
         qx::string  str = qx::to_string(wstr);
-        EXPECT_STREQ(str.data(), QX_TEXT("0123456789"));
+        EXPECT_STREQ(str.data(), QXT("0123456789"));
     }
 
     {
         qx::wstring wstr(L"!@#$%^&*()_+");
         qx::string  str = qx::to_string(wstr);
-        EXPECT_STREQ(str.data(), QX_TEXT("!@#$%^&*()_+"));
+        EXPECT_STREQ(str.data(), QXT("!@#$%^&*()_+"));
     }
 
 #if 0
     {
         qx::wstring wstr(L"Привет мир");
         qx::string  str = qx::to_string(wstr);
-        EXPECT_STREQ(str.data(), QX_TEXT("?????? ???"));
+        EXPECT_STREQ(str.data(), QXT("?????? ???"));
     }
 #endif
 }

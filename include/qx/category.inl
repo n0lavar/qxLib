@@ -40,15 +40,10 @@ constexpr verbosity category::get_verbosity() const noexcept
 
 } // namespace qx
 
-constexpr qx::category CatDefault = qx::category(L"", qx::color::white());
-
 namespace qx::details
 {
 
 template<size_t nHash>
-constexpr const category& get_file_category() noexcept
-{
-    return CatDefault;
-}
+struct file_category;
 
 } // namespace qx::details

@@ -77,7 +77,7 @@ using cstring_hash = basic_string_hash<string_traits::traits<char>>;
 using wstring_hash = basic_string_hash<string_traits::traits<wchar_t>>;
 using string_hash  = basic_string_hash<string_traits::traits<char_type>>;
 
-#define QX_STRING_HASH(quote) qx::string_hash(QX_TEXT(quote))
+#define QX_STRING_HASH(quote) qx::string_hash(QXT(quote))
 
 namespace literals
 {

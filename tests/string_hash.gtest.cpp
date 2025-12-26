@@ -72,7 +72,7 @@ TEST(TestStringHash, operator_)
     using namespace qx::literals;
 
     {
-        qx::string_hash hash0(QX_TEXT("Hello world"));
+        qx::string_hash hash0(QXT("Hello world"));
         qx::string_hash hash1 = QX_STRING_HASH("Hello world");
         EXPECT_EQ(hash0, hash1);
     }

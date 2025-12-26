@@ -7,7 +7,7 @@
 
 **/
 
-QX_DEFINE_FILE_CATEGORY(CatLogger);
+QX_SET_FILE_CATEGORY(CatLogger);
 
 namespace qx
 {
@@ -18,8 +18,8 @@ inline base_logger_stream::base_logger_stream(bool bAlwaysFlush) : m_bAlwaysFlus
 }
 
 inline void base_logger_stream::log(
-    verbosity       eVerbosity,
     const category& category,
+    verbosity       eVerbosity,
     string_view     svFile,
     string_view     svFunction,
     int             nLine,
@@ -117,7 +117,7 @@ inline void base_logger_stream::append_time_string(
     QX_POP_SUPPRESS_WARNINGS();
 
     sTime.append_format(
-        QX_TEXT("{:02}{}{:02}{}{:04}_{:02}{}{:02}{}{:02}"),
+        QXT("{:02}{}{:02}{}{:04}_{:02}{}{:02}{}{:02}"),
         now->tm_mday,
         chDateDelimiter,
         now->tm_mon,
@@ -147,45 +147,45 @@ inline void base_logger_stream::format_line(
     switch (eVerbosity)
     {
     case verbosity::very_verbose:
-        buffers.sMessage = QX_TEXT("[W][");
+        buffers.sMessage = QXT("[W][");
         break;
 
     case verbosity::verbose:
-        buffers.sMessage = QX_TEXT("[V][");
+        buffers.sMessage = QXT("[V][");
         break;
 
     case verbosity::important:
-        buffers.sMessage = QX_TEXT("[I][");
+        buffers.sMessage = QXT("[I][");
         break;
 
     case verbosity::warning:
-        buffers.sMessage = QX_TEXT("[W][");
+        buffers.sMessage = QXT("[W][");
         break;
 
     case verbosity::error:
-        buffers.sMessage = QX_TEXT("[E][");
+        buffers.sMessage = QXT("[E][");
         break;
 
     case verbosity::critical:
-        buffers.sMessage = QX_TEXT("[C][");
+        buffers.sMessage = QXT("[C][");
         break;
 
     default:
-        buffers.sMessage = QX_TEXT("   [");
+        buffers.sMessage = QXT("   [");
         break;
     }
 
-    append_time_string(buffers.sMessage, QX_TEXT('.'), QX_TEXT(':'));
-    buffers.sMessage += QX_TEXT("][");
+    append_time_string(buffers.sMessage, QXT('.'), QXT(':'));
+    buffers.sMessage += QXT("][");
 
     string_view svCategory = category.get_name();
     if (!svCategory.empty())
     {
         buffers.sMessage += svCategory;
-        buffers.sMessage += QX_TEXT("][");
+        buffers.sMessage += QXT("][");
     }
 
-    buffers.sMessage.append_format(QX_TEXT("{}::{}::{}] {}\n"), svFile, svFunction, nLine, swLogMessage);
+    buffers.sMessage.append_format(QXT("{}::{}::{}] {}\n"), svFile, svFunction, nLine, swLogMessage);
 
     if (!svCategory.empty())
         if (auto nPos = buffers.sMessage.find(svCategory); nPos != string::npos)

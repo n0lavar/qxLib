@@ -26,7 +26,7 @@ struct rtti_naming_strategy_empty
 {
     static constexpr string_view get_name(string_view) noexcept
     {
-        return QX_TEXT("");
+        return QXT("");
     }
 };
 

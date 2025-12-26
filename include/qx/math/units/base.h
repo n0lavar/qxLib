@@ -35,10 +35,10 @@ concept unit_enum_c = enumeration_c<T> && requires { units::traits<T>(); };
     // 1. Convert it using `qx::convert`:
     qx::unit result = qx::convert(unit).to(qx::units::unit_type::type2);
     // 2. Format it:
-    qx::string = qx::string::static_format(QX_TEXT("{}"), unit); // -> for ex. 20kB
+    qx::string = qx::string::static_format(QXT("{}"), unit); // -> for ex. 20kB
     // 3. Create it from a string:
     std::optional<qx::unit<int, qx::units::data>> optResult =
-        qx::unit_from_string<int, qx::units::data, qx::char_type>(QX_TEXT("20KiB"));
+        qx::unit_from_string<int, qx::units::data, qx::char_type>(QXT("20KiB"));
     // 4. Get the nearest meaningful value (SI units):
     // 2000B -> 1.95KiB
     // 3000B -> 2.92KiB

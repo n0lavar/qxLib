@@ -31,7 +31,7 @@
     @brief Cuts full absolute path to the file name only
            ex: "C:\folder1\folder2\file.h"  =>  "file.h"
 **/
-#define QX_SHORT_FILE qx::details::last_slash(QX_TEXT(__FILE__))
+#define QX_SHORT_FILE qx::details::last_slash(QXT(__FILE__))
 
 /**
     @def   QX_SINGLE_ARGUMENT

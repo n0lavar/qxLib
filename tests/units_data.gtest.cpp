@@ -749,29 +749,29 @@ TEST(data, normalize)
 
 TEST(data, format)
 {
-    expect_equal(qx::convert_to_string(qx::unit(200.f, qx::units::data::bits)), QX_TEXT("200b"));
+    expect_equal(qx::convert_to_string(qx::unit(200.f, qx::units::data::bits)), QXT("200b"));
     expect_equal(
-        qx::string::static_format(QX_TEXT("{:.2f}"), qx::unit(2.12345f, qx::units::data::kibibytes)),
-        QX_TEXT("2.12KiB"));
+        qx::string::static_format(QXT("{:.2f}"), qx::unit(2.12345f, qx::units::data::kibibytes)),
+        QXT("2.12KiB"));
 }
 
 TEST(data, from_string)
 {
-    expect_equal(*qx::unit_from_string<int, qx::units::data>(QX_TEXT("128b")), qx::unit(128, qx::units::data::bits));
+    expect_equal(*qx::unit_from_string<int, qx::units::data>(QXT("128b")), qx::unit(128, qx::units::data::bits));
 
     expect_equal(
-        *qx::unit_from_string<int, qx::units::data>(QX_TEXT("20KiB")),
+        *qx::unit_from_string<int, qx::units::data>(QXT("20KiB")),
         qx::unit(20, qx::units::data::kibibytes));
 
     expect_equal(
-        *qx::unit_from_string<int, qx::units::data>(QX_TEXT("666PiB")),
+        *qx::unit_from_string<int, qx::units::data>(QXT("666PiB")),
         qx::unit(666, qx::units::data::pebibytes));
 
     expect_equal(
-        *qx::unit_from_string<int, qx::units::data>(QX_TEXT("1000MB")),
+        *qx::unit_from_string<int, qx::units::data>(QXT("1000MB")),
         qx::unit(1000, qx::units::data::megabytes));
 
     expect_equal(
-        *qx::unit_from_string<int, qx::units::data>(QX_TEXT("2828nib")),
+        *qx::unit_from_string<int, qx::units::data>(QXT("2828nib")),
         qx::unit(2828, qx::units::data::nibbles));
 }
