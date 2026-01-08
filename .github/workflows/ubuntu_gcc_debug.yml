@@ -29,3 +29,5 @@ jobs:
           BOOST_ROOT: ${{ steps.install_dependencies.outputs.BOOST_ROOT }}
       - uses: ./.github/actions/linux/run_tests
       - uses: ./.github/actions/linux/calc_code_coverage
+        with:
+          codecov_token: ${{ secrets.CODECOV_TOKEN }}

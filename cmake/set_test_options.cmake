@@ -15,7 +15,7 @@ function(set_test_options _target)
         )
         
         target_compile_options(${_target} PRIVATE
-            $<$<CONFIG:Debug>:--coverage>
+            $<$<CONFIG:Debug>:--coverage -fkeep-inline-functions -fkeep-static-consts>
         )
         
         target_link_libraries(${_target} PRIVATE
