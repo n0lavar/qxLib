@@ -26,12 +26,12 @@
     **/
     #define QX_LOG_C(category, eVerbosity, format, ...) \
         QX_LOGGER_INSTANCE.log(                         \
-            eVerbosity,                                 \
-            QXT(format),                                \
             category,                                   \
+            eVerbosity,                                 \
             QX_SHORT_FILE,                              \
             qx::to_string(__FUNCTION__),                \
             QX_LINE,                                    \
+            QXT(format),                                \
             ##__VA_ARGS__)
 #endif
 

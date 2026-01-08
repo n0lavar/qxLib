@@ -61,20 +61,6 @@ QX_STATIC_ASSERT_STR_EQ(pszFileName, QXT("macros.gtest.cpp"));
 
 
 
-// ------------------------------------------------- QX_SINGLE_ARGUMENT ------------------------------------------------
-
-#define MACRO_WITH_2_ARGS(a, b) \
-    if (a != b)                 \
-        throw std::exception();
-
-TEST(macros, single_argument)
-{
-    // check compilation
-    MACRO_WITH_2_ARGS(QX_SINGLE_ARGUMENT(std::map<int, int>().size()), 0);
-}
-
-
-
 // ------------------------------------------------ QX_STATIC_ASSERT_XX ------------------------------------------------
 
 QX_STATIC_ASSERT_EQ(0, 0);
@@ -187,3 +173,41 @@ TEST(macros, QX_APPLY_SEMICOLON)
     QX_APPLY_SEMICOLON(Bar, 1, 2, 3);
     EXPECT_EQ(g_nSum, 6);
 }
+
+// -------------------------------------------------- QX_VA_ARG_COUNT --------------------------------------------------
+
+// clang-format off
+QX_STATIC_ASSERT_EQ(0,  QX_VA_ARG_COUNT());
+QX_STATIC_ASSERT_EQ(1,  QX_VA_ARG_COUNT(a1));
+QX_STATIC_ASSERT_EQ(2,  QX_VA_ARG_COUNT(a1, a2));
+QX_STATIC_ASSERT_EQ(3,  QX_VA_ARG_COUNT(a1, a2, a3));
+QX_STATIC_ASSERT_EQ(4,  QX_VA_ARG_COUNT(a1, a2, a3, a4));
+QX_STATIC_ASSERT_EQ(5,  QX_VA_ARG_COUNT(a1, a2, a3, a4, a5));
+QX_STATIC_ASSERT_EQ(6,  QX_VA_ARG_COUNT(a1, a2, a3, a4, a5, a6));
+QX_STATIC_ASSERT_EQ(7,  QX_VA_ARG_COUNT(a1, a2, a3, a4, a5, a6, a7));
+QX_STATIC_ASSERT_EQ(8,  QX_VA_ARG_COUNT(a1, a2, a3, a4, a5, a6, a7, a8));
+QX_STATIC_ASSERT_EQ(9,  QX_VA_ARG_COUNT(a1, a2, a3, a4, a5, a6, a7, a8, a9));
+QX_STATIC_ASSERT_EQ(10, QX_VA_ARG_COUNT(a1, a2, a3, a4, a5, a6, a7, a8, a9, a10));
+QX_STATIC_ASSERT_EQ(11, QX_VA_ARG_COUNT(a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11));
+QX_STATIC_ASSERT_EQ(12, QX_VA_ARG_COUNT(a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12));
+QX_STATIC_ASSERT_EQ(13, QX_VA_ARG_COUNT(a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13));
+QX_STATIC_ASSERT_EQ(14, QX_VA_ARG_COUNT(a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14));
+QX_STATIC_ASSERT_EQ(15, QX_VA_ARG_COUNT(a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14, a15));
+QX_STATIC_ASSERT_EQ(16, QX_VA_ARG_COUNT(a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14, a15, a16));
+QX_STATIC_ASSERT_EQ(17, QX_VA_ARG_COUNT(a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14, a15, a16, a17));
+QX_STATIC_ASSERT_EQ(18, QX_VA_ARG_COUNT(a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14, a15, a16, a17, a18));
+QX_STATIC_ASSERT_EQ(19, QX_VA_ARG_COUNT(a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14, a15, a16, a17, a18, a19));
+QX_STATIC_ASSERT_EQ(20, QX_VA_ARG_COUNT(a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14, a15, a16, a17, a18, a19, a20));
+QX_STATIC_ASSERT_EQ(21, QX_VA_ARG_COUNT(a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14, a15, a16, a17, a18, a19, a20, a21));
+QX_STATIC_ASSERT_EQ(22, QX_VA_ARG_COUNT(a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14, a15, a16, a17, a18, a19, a20, a21, a22));
+QX_STATIC_ASSERT_EQ(23, QX_VA_ARG_COUNT(a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14, a15, a16, a17, a18, a19, a20, a21, a22, a23));
+QX_STATIC_ASSERT_EQ(24, QX_VA_ARG_COUNT(a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14, a15, a16, a17, a18, a19, a20, a21, a22, a23, a24));
+QX_STATIC_ASSERT_EQ(25, QX_VA_ARG_COUNT(a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14, a15, a16, a17, a18, a19, a20, a21, a22, a23, a24, a25));
+QX_STATIC_ASSERT_EQ(26, QX_VA_ARG_COUNT(a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14, a15, a16, a17, a18, a19, a20, a21, a22, a23, a24, a25, a26));
+QX_STATIC_ASSERT_EQ(27, QX_VA_ARG_COUNT(a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14, a15, a16, a17, a18, a19, a20, a21, a22, a23, a24, a25, a26, a27));
+QX_STATIC_ASSERT_EQ(28, QX_VA_ARG_COUNT(a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14, a15, a16, a17, a18, a19, a20, a21, a22, a23, a24, a25, a26, a27, a28));
+QX_STATIC_ASSERT_EQ(29, QX_VA_ARG_COUNT(a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14, a15, a16, a17, a18, a19, a20, a21, a22, a23, a24, a25, a26, a27, a28, a29));
+QX_STATIC_ASSERT_EQ(30, QX_VA_ARG_COUNT(a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14, a15, a16, a17, a18, a19, a20, a21, a22, a23, a24, a25, a26, a27, a28, a29, a30));
+QX_STATIC_ASSERT_EQ(31, QX_VA_ARG_COUNT(a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14, a15, a16, a17, a18, a19, a20, a21, a22, a23, a24, a25, a26, a27, a28, a29, a30, a31));
+QX_STATIC_ASSERT_EQ(32, QX_VA_ARG_COUNT(a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14, a15, a16, a17, a18, a19, a20, a21, a22, a23, a24, a25, a26, a27, a28, a29, a30, a31, a32));
+// clang-format on

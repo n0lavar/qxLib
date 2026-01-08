@@ -23,22 +23,21 @@ constexpr const char_type* last_slash(const char_type* str)
     return pszLastSlash + 1;
 }
 
-template<class lambda_type>
+template<class lambda_t>
 class call_before_main_invoker
 {
 public:
-    constexpr call_before_main_invoker(lambda_type lambda) : m_Lambda(std::move(lambda))
+    constexpr call_before_main_invoker(lambda_t lambda) : m_Lambda(std::move(lambda))
     {
         m_Lambda();
     }
 
 private:
-    lambda_type m_Lambda;
+    lambda_t m_Lambda;
 };
 
 } // namespace qx::details
 
-#define _QX_JOIN(symbol1, symbol2)    _QX_DO_JOIN(symbol1, symbol2)
 #define _QX_DO_JOIN(symbol1, symbol2) symbol1##symbol2
 
 #if !QX_RELEASE && QX_MSVC
@@ -56,3 +55,14 @@ private:
 #else
     #define _QX_FORCE_INLINE inline
 #endif
+
+// clang-format off
+#define _QX_PRIVATE_APPEND_VA_ARG_COUNT(prefix, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14, a15, a16, a17, a18, a19, a20, a21, a22, a23, a24, a25, a26, a27, a28, a29, a30, a31, a32, count, ...) prefix##count
+
+#if !defined(_MSVC_TRADITIONAL) || !_MSVC_TRADITIONAL
+    #define _QX_APPEND_VA_ARG_COUNT(prefix, ...) _QX_PRIVATE_APPEND_VA_ARG_COUNT(prefix, ##__VA_ARGS__, 32, 31, 30, 29, 28, 27, 26, 25, 24, 23, 22, 21, 20, 19, 18, 17, 16, 15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0)
+#else
+    #define _QX_APPEND_VA_ARG_COUNT_INVOKE(macro, args_in_parens) QX_EXPAND(macro##args_in_parens)
+	#define _QX_APPEND_VA_ARG_COUNT(prefix, ...) _QX_APPEND_VA_ARG_COUNT_INVOKE(_QX_PRIVATE_APPEND_VA_ARG_COUNT, (prefix, ##__VA_ARGS__, 32, 31, 30, 29, 28, 27, 26, 25, 24, 23, 22, 21, 20, 19, 18, 17, 16, 15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0))
+#endif
+// clang-format on

@@ -124,11 +124,11 @@ protected:
         m_pLogger = std::make_unique<qx::logger>();
 
         qx::cout_logger_stream consoleLoggerStream;
-        consoleLoggerStream.deregister_unit(qx::base_logger_stream::k_svDefaultUnit);
+        consoleLoggerStream.deregister_unit(qx::base_logger_stream::svDefaultUnit);
         consoleLoggerStream.register_unit(traits_t::GetUnit(), { qx::verbosity::none });
 
         qx::file_logger_stream fileLoggerStream(true, qx::log_file_policy::clear_then_uppend, traits_t::GetLogsFile());
-        fileLoggerStream.deregister_unit(qx::base_logger_stream::k_svDefaultUnit);
+        fileLoggerStream.deregister_unit(qx::base_logger_stream::svDefaultUnit);
         fileLoggerStream.register_unit(traits_t::GetUnit(), { qx::verbosity::log });
 
         m_pLogger->add_stream(std::move(consoleLoggerStream));

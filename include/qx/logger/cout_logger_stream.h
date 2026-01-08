@@ -16,6 +16,19 @@
 namespace qx
 {
 
+struct cout_logger_config
+{
+    // true if need to flush after every output, decreases performance
+    bool bAlwaysFlush = false;
+    bool bUseColors   = true;
+    // don't synchronize to the standard C streams after each input/output operation
+    bool bDisableStdioSync = true;
+    // untie cin from cout
+    bool bUntieCin = true;
+    // by default, error and critical messages go to cerr only, this forces them to cout as well
+    bool bDuplicateErrorsToCout = false;
+};
+
 /**
 
     @class   cout_logger_stream
@@ -29,16 +42,9 @@ class cout_logger_stream : public base_logger_stream
 public:
     /**
         @brief cout_logger_stream object constructor
-        @param bAlwaysFlush      - true if need to flush after every output, decreases performance
-        @param bUseColors        - use color when output is not info
-        @param bDisableStdioSync - don't synchronize to the standard C streams after each input/output operation
-        @param bUntieCin         - untie cin from cout
+        @param config - logger stream configuration
     **/
-    cout_logger_stream(
-        bool bAlwaysFlush      = false,
-        bool bUseColors        = true,
-        bool bDisableStdioSync = true,
-        bool bUntieCin         = true);
+    cout_logger_stream(cout_logger_config config = cout_logger_config());
 
     cout_logger_stream(cout_logger_stream&&) noexcept = default;
 
@@ -58,7 +64,8 @@ public:
     void set_using_colors(bool bUsingColors) noexcept;
 
 private:
-    bool m_bUsingColors = true;
+    bool m_bUsingColors           = true;
+    bool m_bDuplicateErrorsToCout = false;
 };
 
 } // namespace qx

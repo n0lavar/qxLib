@@ -66,6 +66,8 @@ public:
     constexpr category& operator=(const category&) = default;
     constexpr category& operator=(category&&)      = default;
 
+    constexpr bool operator==(const category&) const = default;
+
     /**
         @brief  category object constructor
         @param  svName         - category name. For ex. CatRendering or CatWidgets

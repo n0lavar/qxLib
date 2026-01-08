@@ -10,22 +10,19 @@
 namespace qx
 {
 
-inline cout_logger_stream::cout_logger_stream(
-    bool bAlwaysFlush,
-    bool bUseColors,
-    bool bDisableStdioSync,
-    bool bUntieCin)
-    : base_logger_stream(bAlwaysFlush)
-    , m_bUsingColors(bUseColors)
+inline cout_logger_stream::cout_logger_stream(cout_logger_config config)
+    : base_logger_stream(config.bAlwaysFlush)
+    , m_bUsingColors(config.bUseColors)
+    , m_bDuplicateErrorsToCout(config.bDuplicateErrorsToCout)
 {
-    if (bDisableStdioSync)
+    if (config.bDisableStdioSync)
     {
         // Optimization
         // Don't synchronize to the standard C streams after each input/output operation
         std::ios_base::sync_with_stdio(false);
     }
 
-    if (bUntieCin)
+    if (config.bUntieCin)
     {
         // This unties cin from cout.
         // Tied streams ensure that one stream is flushed automatically
@@ -53,7 +50,7 @@ inline void cout_logger_stream::do_log(
     thread_local wstring sWideMessage;
     sWideMessage = to_wstring(svMessage);
 
-    if (m_bUsingColors)
+    if (m_bUsingColors && eVerbosity < verbosity::error)
     {
         color commonColor = color::white();
         switch (eVerbosity)
@@ -101,9 +98,19 @@ inline void cout_logger_stream::do_log(
                 commonColor);
         }
     }
-    else
+    else if (eVerbosity < verbosity::error)
     {
         std::wcout << sWideMessage;
+    }
+    else
+    {
+        std::wcerr << sWideMessage;
+
+        if (m_bDuplicateErrorsToCout)
+        {
+            std::wcout << sWideMessage;
+            flush();
+        }
     }
 }
 

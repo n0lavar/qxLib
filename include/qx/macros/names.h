@@ -24,7 +24,7 @@
     @brief Do magic! Creates a unique name using the line number
     @param prefix - name prefix
 **/
-#define QX_LINE_NAME(prefix) _QX_JOIN(prefix, __LINE__)
+#define QX_LINE_NAME(prefix) QX_JOIN(prefix, __LINE__)
 
 /**
     @brief A helper to avoid duplication when converting c libs constants to string literals

@@ -14,7 +14,7 @@ namespace qx
 
 inline base_logger_stream::base_logger_stream(bool bAlwaysFlush) : m_bAlwaysFlush(bAlwaysFlush)
 {
-    register_unit(k_svDefaultUnit, { verbosity::log });
+    register_unit(svDefaultUnit, { verbosity::log });
 }
 
 inline void base_logger_stream::log(
@@ -97,8 +97,8 @@ inline std::optional<log_unit> base_logger_stream::get_unit_info(
         optLogUnit = { &it->second, svFile };
     else if (it = find_unit(svFunction); it != m_Units.cend())
         optLogUnit = { &it->second, svFunction };
-    else if (it = find_unit(k_svDefaultUnit); it != m_Units.cend())
-        optLogUnit = { &it->second, k_svDefaultUnit };
+    else if (it = find_unit(svDefaultUnit); it != m_Units.cend())
+        optLogUnit = { &it->second, svDefaultUnit };
 
     if (optLogUnit && optLogUnit->pUnitInfo && eVerbosity >= optLogUnit->pUnitInfo->eMinVerbosity)
         return optLogUnit;
