@@ -19,7 +19,7 @@ var searchData=
   ['contract_1300',['contract',['../classqx_1_1basic__rect.html#a63f3c88a3d3b621b4b0a473c95d7c8fe',1,'qx::basic_rect']]],
   ['convert_5fto_5fstring_1301',['convert_to_string',['../string_8h.html#ae7bef0fda2664f97b0454290be619fd6',1,'qx']]],
   ['copy_1302',['copy',['../classqx_1_1basic__string.html#a483943f155ef6b77d8b10985c5b78246',1,'qx::basic_string']]],
-  ['cout_5flogger_5fstream_1303',['cout_logger_stream',['../classqx_1_1cout__logger__stream.html#a389f3917bc33047e3d48600424ee0d89',1,'qx::cout_logger_stream']]],
+  ['cout_5flogger_5fstream_1303',['cout_logger_stream',['../classqx_1_1cout__logger__stream.html#ab5fa98e02e4c4e60148c0b560bff26e8',1,'qx::cout_logger_stream']]],
   ['crbegin_1304',['crbegin',['../classqx_1_1subject.html#af884daad1a45b5902b0e4d467a529b53',1,'qx::subject']]],
   ['create_1305',['create',['../classqx_1_1class__id.html#a1736fdae179584b4124595a5da3f93df',1,'qx::class_id']]],
   ['create_5fcircle_1306',['create_circle',['../geom_8h.html#abce1be1adaae488363bd738a845a1474',1,'qx']]],
