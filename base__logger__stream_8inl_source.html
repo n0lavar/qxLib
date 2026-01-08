@@ -85,7 +85,7 @@ $(function() {
 <div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160; </div>
 <div class="line"><a name="l00015"></a><span class="lineno"><a class="line" href="classqx_1_1base__logger__stream.html#ac017a360e802b6b15f5dad540b33ecba">   15</a></span>&#160;<span class="keyword">inline</span> <a class="code" href="classqx_1_1base__logger__stream.html#ac017a360e802b6b15f5dad540b33ecba">base_logger_stream::base_logger_stream</a>(<span class="keywordtype">bool</span> bAlwaysFlush) : m_bAlwaysFlush(bAlwaysFlush)</div>
 <div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;{</div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;    <a class="code" href="classqx_1_1base__logger__stream.html#ace92fe548f73af42ac5a5ebebd47f8db">register_unit</a>(k_svDefaultUnit, { verbosity::log });</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;    <a class="code" href="classqx_1_1base__logger__stream.html#ace92fe548f73af42ac5a5ebebd47f8db">register_unit</a>(svDefaultUnit, { verbosity::log });</div>
 <div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;}</div>
 <div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160; </div>
 <div class="line"><a name="l00020"></a><span class="lineno"><a class="line" href="classqx_1_1base__logger__stream.html#a1e608b8015b6837a69906ad4cc9cdc39">   20</a></span>&#160;<span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="classqx_1_1base__logger__stream.html#a1e608b8015b6837a69906ad4cc9cdc39">base_logger_stream::log</a>(</div>
@@ -168,8 +168,8 @@ $(function() {
 <div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;        optLogUnit = { &amp;it-&gt;second, svFile };</div>
 <div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;    <span class="keywordflow">else</span> <span class="keywordflow">if</span> (it = find_unit(svFunction); it != m_Units.cend())</div>
 <div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;        optLogUnit = { &amp;it-&gt;second, svFunction };</div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;    <span class="keywordflow">else</span> <span class="keywordflow">if</span> (it = find_unit(k_svDefaultUnit); it != m_Units.cend())</div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;        optLogUnit = { &amp;it-&gt;second, k_svDefaultUnit };</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;    <span class="keywordflow">else</span> <span class="keywordflow">if</span> (it = find_unit(svDefaultUnit); it != m_Units.cend())</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;        optLogUnit = { &amp;it-&gt;second, svDefaultUnit };</div>
 <div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160; </div>
 <div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;    <span class="keywordflow">if</span> (optLogUnit &amp;&amp; optLogUnit-&gt;pUnitInfo &amp;&amp; eVerbosity &gt;= optLogUnit-&gt;pUnitInfo-&gt;eMinVerbosity)</div>
 <div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;        <span class="keywordflow">return</span> optLogUnit;</div>

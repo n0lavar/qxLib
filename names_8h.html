@@ -80,7 +80,7 @@ Macros</h2></td></tr>
 <tr class="memitem:aafbad02364b98b20fd2de0a4afedc06d"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="names_8h.html#aafbad02364b98b20fd2de0a4afedc06d">QX_STRINGIFY</a>(name)&#160;&#160;&#160;#name</td></tr>
 <tr class="memdesc:aafbad02364b98b20fd2de0a4afedc06d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Macro can be used to turn any text in your code into a string, but only the exact text between the parentheses There are no variable dereferencing or macro substitutions or any other sort of thing done.  <a href="names_8h.html#aafbad02364b98b20fd2de0a4afedc06d">More...</a><br /></td></tr>
 <tr class="separator:aafbad02364b98b20fd2de0a4afedc06d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8f51bd935768d1845211352e225739ed"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="names_8h.html#a8f51bd935768d1845211352e225739ed">QX_LINE_NAME</a>(prefix)&#160;&#160;&#160;_QX_JOIN(prefix, __LINE__)</td></tr>
+<tr class="memitem:a8f51bd935768d1845211352e225739ed"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="names_8h.html#a8f51bd935768d1845211352e225739ed">QX_LINE_NAME</a>(prefix)&#160;&#160;&#160;<a class="el" href="macros_2common_8h.html#a2f2065c32d8bf153c55964be64c7a3fb">QX_JOIN</a>(prefix, __LINE__)</td></tr>
 <tr class="memdesc:a8f51bd935768d1845211352e225739ed"><td class="mdescLeft">&#160;</td><td class="mdescRight">Do magic! Creates a unique name using the line number.  <a href="names_8h.html#a8f51bd935768d1845211352e225739ed">More...</a><br /></td></tr>
 <tr class="separator:a8f51bd935768d1845211352e225739ed"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab93acde05fa0a20d687f838a134a0d74"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="names_8h.html#ab93acde05fa0a20d687f838a134a0d74">QX_C_CONSTANT_CASE</a>(name)</td></tr>
@@ -200,7 +200,7 @@ Macros</h2></td></tr>
           <td>(</td>
           <td class="paramtype">&#160;</td>
           <td class="paramname">prefix</td><td>)</td>
-          <td>&#160;&#160;&#160;_QX_JOIN(prefix, __LINE__)</td>
+          <td>&#160;&#160;&#160;<a class="el" href="macros_2common_8h.html#a2f2065c32d8bf153c55964be64c7a3fb">QX_JOIN</a>(prefix, __LINE__)</td>
         </tr>
       </table>
 </div><div class="memdoc">

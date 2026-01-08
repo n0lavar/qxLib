@@ -95,7 +95,7 @@ $(function() {
 <div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="comment">    @brief Do magic! Creates a unique name using the line number</span></div>
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="comment">    @param prefix - name prefix</span></div>
 <div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="comment">**/</span></div>
-<div class="line"><a name="l00027"></a><span class="lineno"><a class="line" href="names_8h.html#a8f51bd935768d1845211352e225739ed">   27</a></span>&#160;<span class="preprocessor">#define QX_LINE_NAME(prefix) _QX_JOIN(prefix, __LINE__)</span></div>
+<div class="line"><a name="l00027"></a><span class="lineno"><a class="line" href="names_8h.html#a8f51bd935768d1845211352e225739ed">   27</a></span>&#160;<span class="preprocessor">#define QX_LINE_NAME(prefix) QX_JOIN(prefix, __LINE__)</span></div>
 <div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="comment"></span> </div>
 <div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="comment">/**</span></div>
 <div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="comment">    @brief A helper to avoid duplication when converting c libs constants to string literals</span></div>
