@@ -145,7 +145,21 @@ Macros</h2></td></tr>
 <dl class="section copyright"><dt>Copyright</dt><dd>© Nick Khrapov, 2025. All right reserved.</dd></dl>
 <h1><a class="anchor" id="qx_assert_table"></a>
 Assert Types Comparison Table</h1>
-<p>assertion | crash | remains in shipping | returns condition | description type | on failure | (can have side effects) | | ——————————|————————————|—————————————————————————|———————————————————|———————————————————————————————————————————————————————————————————————————————— QX_ASSERT | + | - | - | fast fail, similar to assert() QX_VERIFY | + | + | - | critical places: allocation errors, security checks, encryption, anti-cheat, etc. QX_EXPECT | - | + | + | defensive programming QX_ENSURE | - | - | - | possibly heavy checks that will not stay in a fast build </p>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadCenter">Assertion<br  />
+type   </th><th class="markdownTableHeadCenter">Crash<br  />
+on failure   </th><th class="markdownTableHeadCenter">Remains in shipping&lt;br&gt;(can have side effects)   </th><th class="markdownTableHeadCenter">Returns<br  />
+condition   </th><th class="markdownTableHeadNone">Description    </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyCenter">QX_ASSERT   </td><td class="markdownTableBodyCenter">+   </td><td class="markdownTableBodyCenter">-   </td><td class="markdownTableBodyCenter">-   </td><td class="markdownTableBodyNone">Fast fail, similar to <code>assert()</code>    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyCenter">QX_VERIFY   </td><td class="markdownTableBodyCenter">+   </td><td class="markdownTableBodyCenter">+   </td><td class="markdownTableBodyCenter">-   </td><td class="markdownTableBodyNone">Critical places: allocation errors, security checks, encryption, anti-cheat, etc.    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyCenter">QX_EXPECT   </td><td class="markdownTableBodyCenter">-   </td><td class="markdownTableBodyCenter">+   </td><td class="markdownTableBodyCenter">+   </td><td class="markdownTableBodyNone">Defensive programming    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyCenter">QX_ENSURE   </td><td class="markdownTableBodyCenter">-   </td><td class="markdownTableBodyCenter">-   </td><td class="markdownTableBodyCenter">-   </td><td class="markdownTableBodyNone">Possibly heavy checks that will not stay in a fast build   </td></tr>
+</table>
 
 <p class="definition">Definition in file <a class="el" href="asserts_8h_source.html">asserts.h</a>.</p>
 </div><h2 class="groupheader">Macro Definition Documentation</h2>
@@ -184,7 +198,7 @@ Assert Types Comparison Table</h1>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="asserts_8h_source.html#l00040">40</a> of file <a class="el" href="asserts_8h_source.html">asserts.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="asserts_8h_source.html#l00039">39</a> of file <a class="el" href="asserts_8h_source.html">asserts.h</a>.</p>
 
 </div>
 </div>
@@ -230,7 +244,7 @@ Assert Types Comparison Table</h1>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="asserts_8h_source.html#l00032">32</a> of file <a class="el" href="asserts_8h_source.html">asserts.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="asserts_8h_source.html#l00031">31</a> of file <a class="el" href="asserts_8h_source.html">asserts.h</a>.</p>
 
 </div>
 </div>
@@ -269,7 +283,7 @@ Assert Types Comparison Table</h1>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="asserts_8h_source.html#l00217">217</a> of file <a class="el" href="asserts_8h_source.html">asserts.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="asserts_8h_source.html#l00216">216</a> of file <a class="el" href="asserts_8h_source.html">asserts.h</a>.</p>
 
 </div>
 </div>
@@ -315,7 +329,7 @@ Assert Types Comparison Table</h1>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="asserts_8h_source.html#l00209">209</a> of file <a class="el" href="asserts_8h_source.html">asserts.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="asserts_8h_source.html#l00208">208</a> of file <a class="el" href="asserts_8h_source.html">asserts.h</a>.</p>
 
 </div>
 </div>
@@ -360,7 +374,7 @@ Assert Types Comparison Table</h1>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="asserts_8h_source.html#l00090">90</a> of file <a class="el" href="asserts_8h_source.html">asserts.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="asserts_8h_source.html#l00089">89</a> of file <a class="el" href="asserts_8h_source.html">asserts.h</a>.</p>
 
 </div>
 </div>
@@ -399,7 +413,7 @@ Assert Types Comparison Table</h1>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="asserts_8h_source.html#l00124">124</a> of file <a class="el" href="asserts_8h_source.html">asserts.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="asserts_8h_source.html#l00123">123</a> of file <a class="el" href="asserts_8h_source.html">asserts.h</a>.</p>
 
 </div>
 </div>
@@ -445,7 +459,7 @@ Assert Types Comparison Table</h1>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="asserts_8h_source.html#l00116">116</a> of file <a class="el" href="asserts_8h_source.html">asserts.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="asserts_8h_source.html#l00115">115</a> of file <a class="el" href="asserts_8h_source.html">asserts.h</a>.</p>
 
 </div>
 </div>
@@ -504,7 +518,7 @@ Assert Types Comparison Table</h1>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="asserts_8h_source.html#l00074">74</a> of file <a class="el" href="asserts_8h_source.html">asserts.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="asserts_8h_source.html#l00073">73</a> of file <a class="el" href="asserts_8h_source.html">asserts.h</a>.</p>
 
 </div>
 </div>
@@ -543,7 +557,7 @@ Assert Types Comparison Table</h1>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="asserts_8h_source.html#l00179">179</a> of file <a class="el" href="asserts_8h_source.html">asserts.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="asserts_8h_source.html#l00178">178</a> of file <a class="el" href="asserts_8h_source.html">asserts.h</a>.</p>
 
 </div>
 </div>
@@ -589,7 +603,7 @@ Assert Types Comparison Table</h1>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="asserts_8h_source.html#l00171">171</a> of file <a class="el" href="asserts_8h_source.html">asserts.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="asserts_8h_source.html#l00170">170</a> of file <a class="el" href="asserts_8h_source.html">asserts.h</a>.</p>
 
 </div>
 </div>
@@ -642,7 +656,7 @@ Assert Types Comparison Table</h1>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="asserts_8h_source.html#l00189">189</a> of file <a class="el" href="asserts_8h_source.html">asserts.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="asserts_8h_source.html#l00188">188</a> of file <a class="el" href="asserts_8h_source.html">asserts.h</a>.</p>
 
 </div>
 </div>
@@ -688,7 +702,7 @@ Assert Types Comparison Table</h1>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="asserts_8h_source.html#l00199">199</a> of file <a class="el" href="asserts_8h_source.html">asserts.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="asserts_8h_source.html#l00198">198</a> of file <a class="el" href="asserts_8h_source.html">asserts.h</a>.</p>
 
 </div>
 </div>
@@ -727,7 +741,7 @@ Assert Types Comparison Table</h1>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="asserts_8h_source.html#l00107">107</a> of file <a class="el" href="asserts_8h_source.html">asserts.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="asserts_8h_source.html#l00106">106</a> of file <a class="el" href="asserts_8h_source.html">asserts.h</a>.</p>
 
 </div>
 </div>
@@ -773,7 +787,7 @@ Assert Types Comparison Table</h1>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="asserts_8h_source.html#l00099">99</a> of file <a class="el" href="asserts_8h_source.html">asserts.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="asserts_8h_source.html#l00098">98</a> of file <a class="el" href="asserts_8h_source.html">asserts.h</a>.</p>
 
 </div>
 </div>
@@ -812,7 +826,7 @@ Assert Types Comparison Table</h1>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="asserts_8h_source.html#l00141">141</a> of file <a class="el" href="asserts_8h_source.html">asserts.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="asserts_8h_source.html#l00140">140</a> of file <a class="el" href="asserts_8h_source.html">asserts.h</a>.</p>
 
 </div>
 </div>
@@ -858,7 +872,7 @@ Assert Types Comparison Table</h1>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="asserts_8h_source.html#l00133">133</a> of file <a class="el" href="asserts_8h_source.html">asserts.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="asserts_8h_source.html#l00132">132</a> of file <a class="el" href="asserts_8h_source.html">asserts.h</a>.</p>
 
 </div>
 </div>
@@ -911,7 +925,7 @@ Assert Types Comparison Table</h1>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="asserts_8h_source.html#l00151">151</a> of file <a class="el" href="asserts_8h_source.html">asserts.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="asserts_8h_source.html#l00150">150</a> of file <a class="el" href="asserts_8h_source.html">asserts.h</a>.</p>
 
 </div>
 </div>
@@ -957,7 +971,7 @@ Assert Types Comparison Table</h1>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="asserts_8h_source.html#l00161">161</a> of file <a class="el" href="asserts_8h_source.html">asserts.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="asserts_8h_source.html#l00160">160</a> of file <a class="el" href="asserts_8h_source.html">asserts.h</a>.</p>
 
 </div>
 </div>
@@ -996,7 +1010,7 @@ Assert Types Comparison Table</h1>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="asserts_8h_source.html#l00064">64</a> of file <a class="el" href="asserts_8h_source.html">asserts.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="asserts_8h_source.html#l00063">63</a> of file <a class="el" href="asserts_8h_source.html">asserts.h</a>.</p>
 
 </div>
 </div>
@@ -1049,7 +1063,7 @@ Assert Types Comparison Table</h1>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="asserts_8h_source.html#l00049">49</a> of file <a class="el" href="asserts_8h_source.html">asserts.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="asserts_8h_source.html#l00048">48</a> of file <a class="el" href="asserts_8h_source.html">asserts.h</a>.</p>
 
 </div>
 </div>
