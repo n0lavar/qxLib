@@ -1,4 +1,5 @@
 name: Install dependencies
+description: "Installs Linux dependencies required for building and testing the project."
 inputs:
   cxx_flags:
     required: false
@@ -6,16 +7,16 @@ inputs:
     required: false
   build_type:
     required: true
-  
 outputs:
   BOOST_ROOT:
     value: ${{ steps.install_boost.outputs.BOOST_ROOT }}
-
 runs:
   using: composite
   steps:
     - name: Install dependencies
       shell: bash
+      # build gtest manually because the apt-get version is built with an old c++ version
+      # and fails to compile with -fkeep-inline-functions
       run: |
         if [ "$RUNNER_OS" = "Linux" ]; then
           sudo apt-get remove libgtest-dev

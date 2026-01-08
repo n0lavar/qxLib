@@ -1,4 +1,5 @@
 name: Build
+description: "Builds the Windows project using CMake with specified build type and options."
 inputs:
   cxx_flags:
     required: false

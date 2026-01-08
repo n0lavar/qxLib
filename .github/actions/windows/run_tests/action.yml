@@ -1,5 +1,5 @@
 name: Run tests
-
+description: "Runs the test suites using ctest."
 runs:
   using: composite
   steps:

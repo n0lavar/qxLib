@@ -1,5 +1,5 @@
 name: Calc code coverage
-
+description: "Generates coverage reports and sends them to Codecov."
 runs:
   using: composite
   steps:

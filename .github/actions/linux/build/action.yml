@@ -1,4 +1,5 @@
 name: Build
+description: "Builds the Linux project using CMake with specified build type and options."
 inputs:
   cxx_flags:
     required: false
@@ -8,7 +9,6 @@ inputs:
     required: true
   BOOST_ROOT:
     required: true
-
 runs:
   using: composite
   steps:

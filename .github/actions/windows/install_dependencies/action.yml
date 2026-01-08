@@ -1,4 +1,5 @@
 name: Install dependencies
+description: "Installs Windows dependencies required for building and testing the project."
 inputs:
   cxx_flags:
     required: false
