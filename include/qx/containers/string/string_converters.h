@@ -8,6 +8,7 @@
 **/
 #pragma once
 
+#include <qx/category.h>
 #include <qx/containers/string/string.h>
 #include <qx/containers/string/string_view.h>
 #include <qx/internal/perf_scope.h>
@@ -18,6 +19,9 @@
 #if QX_WIN
     #include <windows.h>
 #endif
+
+QX_DEFINE_CATEGORY(CatQxConverters);
+QX_SET_FILE_CATEGORY(CatQxConverters);
 
 namespace qx
 {

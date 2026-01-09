@@ -10,6 +10,7 @@
 
 #include <qx/macros/apply.h>
 #include <qx/macros/asserts/asserts.h>
+#include <qx/macros/asserts/predicates.h>
 #include <qx/macros/common.h>
 #include <qx/macros/config.h>
 #include <qx/macros/copyable_movable.h>

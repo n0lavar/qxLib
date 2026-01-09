@@ -1,6 +1,6 @@
 # qxLib
 [![Donate](https://img.shields.io/badge/Donate-8A2BE2)](https://revolut.me/n0lavar)
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/ab3175ce6af6453284f8a639306a6935)](https://www.codacy.com/manual/n0lavar/qxLib?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=n0lavar/qxLib&amp;utm_campaign=Badge_Grade)
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/ab3175ce6af6453284f8a639306a6935)](https://app.codacy.com/gh/n0lavar/qxLib/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade)
 [![codecov](https://codecov.io/gh/n0lavar/qxLib/branch/master/graph/badge.svg)](https://codecov.io/gh/n0lavar/qxLib)
 [![licence](https://img.shields.io/badge/License-MIT-blue.svg)](https://github.com/n0lavar/qxLib/blob/master/LICENSE)
 

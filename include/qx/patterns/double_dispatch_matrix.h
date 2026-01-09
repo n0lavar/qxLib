@@ -66,7 +66,7 @@ struct double_dispatch_class_method_ptr_traits<method_ptr_t>
         matrix.register_function(...);
         matrix.register_function(...);
         ...
-        QXE_EXPECT(matrix.check_matrix_completeness());
+        QX_EXPECT(matrix.check_matrix_completeness());
     };
     @author  Khrapov
     @date    16.02.2025
