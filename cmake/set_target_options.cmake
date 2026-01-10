@@ -48,6 +48,7 @@ function(set_target_options _target)
             /wd4061 # enumerator 'identifier' in switch of enum 'enumeration' is not explicitly handled by a case label
             /wd4062 # enumerator 'identifier' in switch of enum 'enumeration' is not handled
             /wd4100 # 'identifier' : unreferenced formal parameter
+            /wd4101 # 'identifier' : unreferenced local variable
             /wd4263 # 'function' : member function does not override any base class virtual member function
             /wd4264 # 'virtual_function' : no override available for virtual member function from base 'class'; function is hidden
             /wd4324 # 'structname': structure was padded due to alignment specifier
@@ -70,7 +71,7 @@ function(set_target_options _target)
             /wd5262 # 'implicit fall-through occurs here; are you missing a break statement? Use [[fallthrough]] when a break statement is intentionally omitted between cases
             /wd5264 # 'variable-name': 'const' variable is not used
 
-            $<$<CONFIG:Debug>: /MTd /ZI /D_DEBUG>
+            $<$<CONFIG:Debug>: /MTd /ZI /D_DEBUG /bigobj>
             $<$<OR:$<CONFIG:Release>,$<CONFIG:RelWithDebInfo>,$<CONFIG:MinSizeRel>>: /MT /DNDEBUG>
 
             /MP # multithreaded compilation

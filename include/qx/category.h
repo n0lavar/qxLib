@@ -40,7 +40,7 @@
     @brief Get category defined in QX_SET_FILE_CATEGORY
            If there is none, CatDefault will be used
 **/
-#define QX_GET_FILE_CATEGORY() qx::details::file_category<qx::djb2a_hash(QX_SHORT_FILE, 0)>::get()
+#define QX_GET_FILE_CATEGORY() qx::details::file_category<qx::djb2a_hash(QX_SHORT_FILE)>::get()
 
 namespace qx
 {
@@ -113,3 +113,17 @@ private:
 #include <qx/category.inl>
 
 QX_DEFINE_CATEGORY(CatDefault, qx::color::white());
+
+namespace qx::details
+{
+
+template<size_t nHash>
+struct file_category
+{
+    static constexpr const qx::category& get() noexcept
+    {
+        return CatDefault;
+    }
+};
+
+} // namespace qx::details

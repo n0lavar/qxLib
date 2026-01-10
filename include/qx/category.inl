@@ -39,11 +39,3 @@ constexpr verbosity category::get_verbosity() const noexcept
 }
 
 } // namespace qx
-
-namespace qx::details
-{
-
-template<size_t nHash>
-struct file_category;
-
-} // namespace qx::details

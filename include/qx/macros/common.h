@@ -14,6 +14,12 @@
 #include <qx/macros/common.inl>
 
 /**
+    @brief Suppress unused variable warnings
+    @param ... - one or more variables
+**/
+#define QX_UNUSED(...) ((void)sizeof(__VA_ARGS__))
+
+/**
     @def     QX_EMPTY_MACRO
     @brief   Placeholder for disabled macros
     @details Has no effect and work correctly with "if else"

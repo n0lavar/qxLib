@@ -10,7 +10,7 @@
 
 #include <qx/algo/predicates.h>
 #include <qx/logger/logger.h>
-#include <qx/macros/asserts/details/assert_user_message.h>
+#include <qx/macros/details/macro_user_message.h>
 
 #if QX_WIN
     #include "windows.h"
@@ -136,7 +136,6 @@ private:
     #define QX_DEBUG_BREAK() _QX_DEBUG_BREAK()
 #endif
 
-
 #define _QX_COMMON_ASSERT(condition, category, assert_type, after_debug_break, result_t, ...) \
     static_cast<result_t>(                                                                    \
         qx::predicates::is_valid(condition)                                                   \
@@ -144,7 +143,7 @@ private:
                 QXT(#condition),                                                              \
                 category,                                                                     \
                 assert_type,                                                                  \
-                _QX_ASSERT_USER_MESSAGE(__VA_ARGS__),                                         \
+                _QX_MACRO_USER_MESSAGE(__VA_ARGS__),                                          \
                 qx::to_string(__FUNCTION__),                                                  \
                 QXT(__FILE__),                                                                \
                 QX_LINE)                                                                      \

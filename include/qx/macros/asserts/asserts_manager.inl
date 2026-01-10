@@ -21,10 +21,10 @@ inline bool asserts_manager::do_assert(
 {
     if (m_Config.bLogAssertion)
     {
-        QX_LOG_C(category, m_Config.getVerbosity(eAssertType), "[{}] {}", svCondition, svUserMessage);
+        QX_LOG_REF(category, m_Config.getVerbosity(eAssertType), "[{}] {}", svCondition, svUserMessage);
 
         // the error must present when debug break is called
-        QX_LOGGER_INSTANCE.flush();
+        get_logger().flush();
     }
 
     if (m_Config.onAssertion)

@@ -41,7 +41,7 @@ constexpr size_t djb2a_hash(const value_t* pszStr, size_t nSeed, size_t nLen)
     @retval         - 32bit unsigned value
 **/
 template<class value_t>
-constexpr size_t djb2a_hash(const value_t* pszStr, size_t nSeed)
+constexpr size_t djb2a_hash(const value_t* pszStr, size_t nSeed = 0)
 {
     size_t nHash = nSeed;
 

@@ -9,48 +9,53 @@
 #pragma once
 
 #include <qx/logger/base_logger_stream.h>
+#include <qx/macros/details/macro_user_message.h>
 #include <qx/patterns/singleton.h>
 #include <qx/sbo/sbo_poly.h>
 
-#ifndef QX_LOGGER_INSTANCE
-    #define QX_LOGGER_INSTANCE qx::logger_singleton::get_instance().get_logger()
+#ifndef _QX_LOG_C
+    #define _QX_LOG_C(verbosityCheckKeyword, category, eVerbosity, ...)        \
+        do                                                                     \
+        {                                                                      \
+            verbosityCheckKeyword const auto& _category = category;            \
+            if verbosityCheckKeyword (eVerbosity >= _category.get_verbosity()) \
+            {                                                                  \
+                qx::get_logger().log(                                          \
+                    _category,                                                 \
+                    eVerbosity,                                                \
+                    QX_SHORT_FILE,                                             \
+                    qx::to_string(__FUNCTION__),                               \
+                    QX_LINE,                                                   \
+                    _QX_MACRO_USER_MESSAGE(__VA_ARGS__));                      \
+            }                                                                  \
+        } while (false)
 #endif
 
-#ifndef QX_LOG_C
-    /**
-        @brief Log with category
-        @param category   - category to be used to manage output
-        @param eVerbosity - message verbosity
-        @param format     - format string
-        @param ...        - additional args for formatting
-    **/
-    #define QX_LOG_C(category, eVerbosity, format, ...) \
-        QX_LOGGER_INSTANCE.log(                         \
-            category,                                   \
-            eVerbosity,                                 \
-            QX_SHORT_FILE,                              \
-            qx::to_string(__FUNCTION__),                \
-            QX_LINE,                                    \
-            QXT(format),                                \
-            ##__VA_ARGS__)
-#endif
+/**
+    @brief Log with category
+    @param category   - category to be used to manage output
+    @param eVerbosity - message verbosity
+    @param ...        - user message and its format args. the format string should be without QXT
+**/
+#define QX_LOG_C(category, eVerbosity, ...) _QX_LOG_C(constexpr, category, eVerbosity, ##__VA_ARGS__)
 
-#ifndef QX_LOG
-    /**
-        @def   QX_LOG
-        @brief Log message
-        @param eVerbosity - message verbosity 
-        @param format     - format string
-        @param ...        - additional args for formatting
-    **/
-    #define QX_LOG(eVerbosity, format, ...) QX_LOG_C(CatDefault, eVerbosity, format, ##__VA_ARGS__)
-#endif
+/**
+    @brief Log message
+    @param eVerbosity - message verbosity 
+    @param ...        - user message and its format args. the format string should be without QXT
+**/
+#define QX_LOG(eVerbosity, ...) QX_LOG_C(QX_GET_FILE_CATEGORY(), eVerbosity, ##__VA_ARGS__)
+
+/**
+    @brief Log with category and with non compile time category check
+    @param category   - category to be used to manage output
+    @param eVerbosity - message verbosity
+    @param ...        - user message and its format args. the format string should be without QXT
+**/
+#define QX_LOG_REF(category, eVerbosity, ...) _QX_LOG_C(, category, eVerbosity, ##__VA_ARGS__)
 
 namespace qx
 {
-
-template<class... args_t>
-concept log_acceptable_args_c = (sizeof...(args_t) > 0 && format_acceptable_args_c<char_type, args_t...>);
 
 /**
 
@@ -63,6 +68,8 @@ concept log_acceptable_args_c = (sizeof...(args_t) > 0 && format_acceptable_args
 class logger
 {
 public:
+    virtual ~logger() noexcept = default;
+
     /**
         @brief  Log to all streams
         @param  category   - code category
@@ -72,7 +79,7 @@ public:
         @param  nLine      - code line number
         @param  svMessage  - message string
     **/
-    void log(
+    virtual void log(
         const category& category,
         verbosity       eVerbosity,
         string_view     svFile,
@@ -105,7 +112,7 @@ public:
     /**
         @brief Flush all streams
     **/
-    void flush();
+    virtual void flush();
 
     /**
         @brief  Add an output stream to the logger
@@ -118,7 +125,7 @@ public:
     /**
         @brief Reset logger and clear all streams
     **/
-    void reset() noexcept;
+    virtual void reset() noexcept;
 
     /**
         @brief   Returns true if any of streams will accept this message
@@ -159,6 +166,18 @@ public:
 private:
     logger m_Logger;
 };
+
+// Change this variable to override the logger instance used in QX_LOG macros
+inline logger* g_pGlobalLogger = nullptr;
+
+/**
+    @brief  Get the logger instance used in QX_LOG macros
+    @retval  - logger instance
+**/
+inline logger& get_logger()
+{
+    return g_pGlobalLogger ? *g_pGlobalLogger : logger_singleton::get_instance().get_logger();
+}
 
 } // namespace qx
 

@@ -17,7 +17,7 @@
             void,                                  \
             ##__VA_ARGS__)
 #else
-    #define _QX_ASSERT_C(condition, category, ...) QX_EMPTY_MACRO
+    #define _QX_ASSERT_C(condition, category, ...) QX_UNUSED(condition)
 #endif
 
 #define _QX_EXPECT_ACTION(condition, category, action, ...)            \
@@ -37,5 +37,5 @@
             void,                                   \
             ##__VA_ARGS__)
 #else
-    #define _QX_ENSURE_C(condition, category, ...) QX_EMPTY_MACRO
+    #define _QX_ENSURE_C(condition, category, ...) QX_UNUSED(condition)
 #endif

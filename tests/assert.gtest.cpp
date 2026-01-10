@@ -25,12 +25,12 @@ class assert_exit_tests_fixture : public ::testing::Test
 protected:
     void SetUp() override
     {
-        QX_LOGGER_INSTANCE.add_stream(qx::cout_logger_stream());
+        qx::get_logger().add_stream(qx::cout_logger_stream());
     }
 
     void TearDown() override
     {
-        QX_LOGGER_INSTANCE.reset();
+        qx::get_logger().reset();
     }
 };
 

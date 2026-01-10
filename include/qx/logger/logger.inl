@@ -34,8 +34,7 @@ inline void logger::log(
     args_t&&... args)
 {
     const auto sLogMessage = qx::string::static_format(sFormat, std::forward<args_t>(args)...);
-    for (auto& stream : m_Streams)
-        stream->log(category, eVerbosity, svFile, svFunction, nLine, sLogMessage);
+    log(category, eVerbosity, svFile, svFunction, nLine, sLogMessage);
 }
 
 inline void logger::flush()
