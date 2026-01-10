@@ -95,15 +95,12 @@ Macros</h2></td></tr>
 <tr class="memitem:aaf4a2f8b6afd8cd62dfe64fbfc18b984"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="logger_8h.html#aaf4a2f8b6afd8cd62dfe64fbfc18b984">QX_LOG_C</a>(category,  eVerbosity, ...)&#160;&#160;&#160;_QX_LOG_C(constexpr, category, eVerbosity, ##__VA_ARGS__)</td></tr>
 <tr class="memdesc:aaf4a2f8b6afd8cd62dfe64fbfc18b984"><td class="mdescLeft">&#160;</td><td class="mdescRight">Log with category.  <a href="logger_8h.html#aaf4a2f8b6afd8cd62dfe64fbfc18b984">More...</a><br /></td></tr>
 <tr class="separator:aaf4a2f8b6afd8cd62dfe64fbfc18b984"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2c42d7554eba13621de1eb6a15879213"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="logger_8h.html#a2c42d7554eba13621de1eb6a15879213">QX_LOG_REF_C</a>(category,  eVerbosity, ...)&#160;&#160;&#160;_QX_LOG_C(, category, eVerbosity, ##__VA_ARGS__)</td></tr>
-<tr class="memdesc:a2c42d7554eba13621de1eb6a15879213"><td class="mdescLeft">&#160;</td><td class="mdescRight">Log with category and with non compile time category check.  <a href="logger_8h.html#a2c42d7554eba13621de1eb6a15879213">More...</a><br /></td></tr>
-<tr class="separator:a2c42d7554eba13621de1eb6a15879213"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a79dd4ee569e1f68524cee4ed028f628a"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="logger_8h.html#a79dd4ee569e1f68524cee4ed028f628a">QX_LOG</a>(eVerbosity, ...)&#160;&#160;&#160;<a class="el" href="logger_8h.html#aaf4a2f8b6afd8cd62dfe64fbfc18b984">QX_LOG_C</a>(<a class="el" href="category_8h.html#adca05f77ff871740e30468a4fc677ee1">QX_GET_FILE_CATEGORY</a>(), eVerbosity, ##__VA_ARGS__)</td></tr>
 <tr class="memdesc:a79dd4ee569e1f68524cee4ed028f628a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Log message.  <a href="logger_8h.html#a79dd4ee569e1f68524cee4ed028f628a">More...</a><br /></td></tr>
 <tr class="separator:a79dd4ee569e1f68524cee4ed028f628a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8b72580ef42c0ca6472d5b73d2d9297d"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="logger_8h.html#a8b72580ef42c0ca6472d5b73d2d9297d">QX_LOG_REF</a>(eVerbosity, ...)&#160;&#160;&#160;<a class="el" href="logger_8h.html#a2c42d7554eba13621de1eb6a15879213">QX_LOG_REF_C</a>(<a class="el" href="category_8h.html#adca05f77ff871740e30468a4fc677ee1">QX_GET_FILE_CATEGORY</a>(), eVerbosity, ##__VA_ARGS__)</td></tr>
-<tr class="memdesc:a8b72580ef42c0ca6472d5b73d2d9297d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Log message with non compile time category check.  <a href="logger_8h.html#a8b72580ef42c0ca6472d5b73d2d9297d">More...</a><br /></td></tr>
-<tr class="separator:a8b72580ef42c0ca6472d5b73d2d9297d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8595ab88dbc1ec4bdc0c327eb0fb703d"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="logger_8h.html#a8595ab88dbc1ec4bdc0c327eb0fb703d">QX_LOG_REF</a>(category,  eVerbosity, ...)&#160;&#160;&#160;_QX_LOG_C(, category, eVerbosity, ##__VA_ARGS__)</td></tr>
+<tr class="memdesc:a8595ab88dbc1ec4bdc0c327eb0fb703d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Log with category and with non compile time category check.  <a href="logger_8h.html#a8595ab88dbc1ec4bdc0c327eb0fb703d">More...</a><br /></td></tr>
+<tr class="separator:a8595ab88dbc1ec4bdc0c327eb0fb703d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
@@ -153,7 +150,7 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="logger_8h_source.html#l00055">55</a> of file <a class="el" href="logger_8h_source.html">logger.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="logger_8h_source.html#l00047">47</a> of file <a class="el" href="logger_8h_source.html">logger.h</a>.</p>
 
 </div>
 </div>
@@ -203,53 +200,14 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a8b72580ef42c0ca6472d5b73d2d9297d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8b72580ef42c0ca6472d5b73d2d9297d">&#9670;&nbsp;</a></span>QX_LOG_REF</h2>
+<a id="a8595ab88dbc1ec4bdc0c327eb0fb703d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8595ab88dbc1ec4bdc0c327eb0fb703d">&#9670;&nbsp;</a></span>QX_LOG_REF</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">#define QX_LOG_REF</td>
-          <td>(</td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname">eVerbosity, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname"><em>...</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td>&#160;&#160;&#160;<a class="el" href="logger_8h.html#a2c42d7554eba13621de1eb6a15879213">QX_LOG_REF_C</a>(<a class="el" href="category_8h.html#adca05f77ff871740e30468a4fc677ee1">QX_GET_FILE_CATEGORY</a>(), eVerbosity, ##__VA_ARGS__)</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Log message with non compile time category check. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">eVerbosity</td><td>- message verbosity </td></tr>
-    <tr><td class="paramname">...</td><td>- user message and its format args. the format string should be without QXT </td></tr>
-  </table>
-  </dd>
-</dl>
-
-<p class="definition">Definition at line <a class="el" href="logger_8h_source.html#l00062">62</a> of file <a class="el" href="logger_8h_source.html">logger.h</a>.</p>
-
-</div>
-</div>
-<a id="a2c42d7554eba13621de1eb6a15879213"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2c42d7554eba13621de1eb6a15879213">&#9670;&nbsp;</a></span>QX_LOG_REF_C</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define QX_LOG_REF_C</td>
           <td>(</td>
           <td class="paramtype">&#160;</td>
           <td class="paramname">category, </td>
@@ -284,7 +242,7 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="logger_8h_source.html#l00048">48</a> of file <a class="el" href="logger_8h_source.html">logger.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="logger_8h_source.html#l00055">55</a> of file <a class="el" href="logger_8h_source.html">logger.h</a>.</p>
 
 </div>
 </div>
@@ -320,7 +278,7 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="logger_8h_source.html#l00184">184</a> of file <a class="el" href="logger_8h_source.html">logger.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="logger_8h_source.html#l00177">177</a> of file <a class="el" href="logger_8h_source.html">logger.h</a>.</p>
 
 </div>
 </div>
