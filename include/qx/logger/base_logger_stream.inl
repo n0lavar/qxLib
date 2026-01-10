@@ -23,7 +23,7 @@ inline void base_logger_stream::log(
     string_view     svFile,
     string_view     svFunction,
     int             nLine,
-    string_view     swLogMessage)
+    string_view     svLogMessage)
 {
     QX_PERF_SCOPE("Log");
 
@@ -54,7 +54,7 @@ inline void base_logger_stream::log(
 
     {
         QX_PERF_SCOPE("Log formatting");
-        formatFunc(buffers, eVerbosity, category, svFile, svFunction, nLine, swLogMessage);
+        formatFunc(buffers, eVerbosity, category, svFile, svFunction, nLine, svLogMessage);
     }
 
     if (!buffers.sMessage.empty())

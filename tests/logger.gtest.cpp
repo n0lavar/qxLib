@@ -256,51 +256,30 @@ protected:
 TYPED_TEST_SUITE(TestLogger, implementations_type);
 
 #define TEST_LOG(traceFile, format, ...) \
-    myLogger.log(                        \
-        CatDefault,                      \
-        qx::verbosity::log,              \
-        traceFile,                       \
-        qx::to_string(__FUNCTION__),     \
-        __LINE__,                        \
-        QXT(format),                     \
-        ##__VA_ARGS__)
+    myLogger.log(CatDefault, qx::verbosity::log, traceFile, __FUNCTION__, __LINE__, QXT(format), ##__VA_ARGS__)
 
 #define TEST_LOG_WARNING(traceFile, format, ...) \
-    myLogger.log(                                \
-        CatDefault,                              \
-        qx::verbosity::warning,                  \
-        traceFile,                               \
-        qx::to_string(__FUNCTION__),             \
-        __LINE__,                                \
-        QXT(format),                             \
-        ##__VA_ARGS__)
+    myLogger.log(CatDefault, qx::verbosity::warning, traceFile, __FUNCTION__, __LINE__, QXT(format), ##__VA_ARGS__)
 
 #define TEST_LOG_CATEGORY(traceFile, _category, format, ...) \
     myLogger.log(                                            \
         qx::category { _category },                          \
         qx::verbosity::log,                                  \
         traceFile,                                           \
-        qx::to_string(__FUNCTION__),                         \
+        __FUNCTION__,                                        \
         __LINE__,                                            \
         QXT(format),                                         \
         ##__VA_ARGS__)
 
 #define TEST_LOG_ERROR(traceFile, format, ...) \
-    myLogger.log(                              \
-        CatDefault,                            \
-        qx::verbosity::error,                  \
-        traceFile,                             \
-        qx::to_string(__FUNCTION__),           \
-        __LINE__,                              \
-        QXT(format),                           \
-        ##__VA_ARGS__)
+    myLogger.log(CatDefault, qx::verbosity::error, traceFile, __FUNCTION__, __LINE__, QXT(format), ##__VA_ARGS__)
 
 #define TEST_LOG_ASSERT(traceFile, expr, format, ...) \
     myLogger.log(                                     \
         CatDefault,                                   \
         qx::verbosity::critical,                      \
         traceFile,                                    \
-        qx::to_string(__FUNCTION__),                  \
+        __FUNCTION__,                                 \
         __LINE__,                                     \
         QXT("[{}] " format),                          \
         QXT(#expr),                                   \

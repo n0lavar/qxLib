@@ -14,12 +14,13 @@ inline void logger::log(
     const category& category,
     verbosity       eVerbosity,
     string_view     svFile,
-    string_view     svFunction,
+    cstring_view    svFunction,
     int             nLine,
-    string_view     svMessage)
+    string          sMessage)
 {
+    string sFunction = to_string(svFunction);
     for (auto& stream : m_Streams)
-        stream->log(category, eVerbosity, svFile, svFunction, nLine, svMessage);
+        stream->log(category, eVerbosity, svFile, sFunction, nLine, sMessage);
 }
 
 template<class... args_t>
@@ -28,13 +29,13 @@ inline void logger::log(
     const category&                        category,
     verbosity                              eVerbosity,
     string_view                            svFile,
-    string_view                            svFunction,
+    cstring_view                           svFunction,
     int                                    nLine,
     format_string_strong_checks<args_t...> sFormat,
     args_t&&... args)
 {
-    const auto sLogMessage = qx::string::static_format(sFormat, std::forward<args_t>(args)...);
-    log(category, eVerbosity, svFile, svFunction, nLine, sLogMessage);
+    const auto sMessage = qx::string::static_format(sFormat, std::forward<args_t>(args)...);
+    log(category, eVerbosity, svFile, svFunction, nLine, std::move(sMessage));
 }
 
 inline void logger::flush()
@@ -58,10 +59,11 @@ inline bool logger::will_any_stream_accept(
     const category& category,
     verbosity       eVerbosity,
     string_view     svFile,
-    string_view     svFunction) const noexcept
+    cstring_view    svFunction) const noexcept
 {
+    string sFunction = to_string(svFunction);
     for (const auto& stream : m_Streams)
-        if (stream->get_unit_info(category, eVerbosity, svFile, svFunction))
+        if (stream->get_unit_info(category, eVerbosity, svFile, sFunction))
             return true;
 
     return false;

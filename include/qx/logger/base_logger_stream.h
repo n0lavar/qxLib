@@ -102,7 +102,7 @@ public:
         @param  svFile       - file name string
         @param  svFunction   - function name string
         @param  nLine        - code line number
-        @param  swLogMessage - formatted log line
+        @param  svLogMessage - formatted log line
     **/
     void log(
         const category& category,
@@ -110,7 +110,7 @@ public:
         string_view     svFile,
         string_view     svFunction,
         int             nLine,
-        string_view     swLogMessage);
+        string_view     svLogMessage);
 
     /**
         @brief Register logger unit

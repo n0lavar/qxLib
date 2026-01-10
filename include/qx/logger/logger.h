@@ -24,7 +24,7 @@
                     _category,                                                 \
                     eVerbosity,                                                \
                     QX_SHORT_FILE,                                             \
-                    qx::to_string(__FUNCTION__),                               \
+                    __FUNCTION__,                                              \
                     QX_LINE,                                                   \
                     _QX_MACRO_USER_MESSAGE(__VA_ARGS__));                      \
             }                                                                  \
@@ -71,32 +71,34 @@ public:
     virtual ~logger() noexcept = default;
 
     /**
-        @brief  Log to all streams
-        @param  category   - code category
-        @param  eVerbosity - message verbosity
-        @param  svFile     - file name string
-        @param  svFunction - function name string
-        @param  nLine      - code line number
-        @param  svMessage  - message string
+        @brief   Log to all streams
+        @warning All input args must be ready for async work (i.e. be stable)
+        @param   category   - code category
+        @param   eVerbosity - message verbosity
+        @param   svFile     - file name string
+        @param   svFunction - function name string
+        @param   nLine      - code line number
+        @param   sMessage   - message string
     **/
     virtual void log(
         const category& category,
         verbosity       eVerbosity,
         string_view     svFile,
-        string_view     svFunction,
+        cstring_view    svFunction,
         int             nLine,
-        string_view     svMessage);
+        string          sMessage);
 
     /**
-        @brief  Log to all streams
-        @tparam args_t     - template parameter pack type
-        @param  category   - code category
-        @param  eVerbosity - message verbosity
-        @param  svFile     - file name string
-        @param  svFunction - function name string
-        @param  nLine      - code line number
-        @param  sFormat    - format string
-        @param  args       - additional args for format
+        @brief   Log to all streams
+        @warning All input args (except for sFormat and args) must be ready for async work (i.e. be stable)
+        @tparam  args_t     - template parameter pack type
+        @param   category   - code category
+        @param   eVerbosity - message verbosity
+        @param   svFile     - file name string
+        @param   svFunction - function name string
+        @param   nLine      - code line number
+        @param   sFormat    - format string
+        @param   args       - additional args for format
     **/
     template<class... args_t>
         requires(log_acceptable_args_c<args_t...>)
@@ -104,7 +106,7 @@ public:
         const category&                        category,
         verbosity                              eVerbosity,
         string_view                            svFile,
-        string_view                            svFunction,
+        cstring_view                           svFunction,
         int                                    nLine,
         format_string_strong_checks<args_t...> sFormat,
         args_t&&... args);
@@ -141,7 +143,7 @@ public:
         const category& category,
         verbosity       eVerbosity,
         string_view     svFile,
-        string_view     svFunction) const noexcept;
+        cstring_view    svFunction) const noexcept;
 
 private:
     std::vector<sbo_poly<base_logger_stream, 1024>> m_Streams;
