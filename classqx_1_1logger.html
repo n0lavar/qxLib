@@ -80,11 +80,11 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a6d00859b9cc2abe80dde6bfd18934d6f"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1logger.html#a6d00859b9cc2abe80dde6bfd18934d6f">log</a> (const <a class="el" href="classqx_1_1category.html">category</a> &amp;<a class="el" href="classqx_1_1category.html">category</a>, verbosity eVerbosity, string_view svFile, string_view svFunction, int nLine, string_view svMessage)</td></tr>
-<tr class="memdesc:a6d00859b9cc2abe80dde6bfd18934d6f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Log to all streams.  <a href="classqx_1_1logger.html#a6d00859b9cc2abe80dde6bfd18934d6f">More...</a><br /></td></tr>
-<tr class="separator:a6d00859b9cc2abe80dde6bfd18934d6f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3be60a0860aee6ac8142df136e7d6da2"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1logger.html#a3be60a0860aee6ac8142df136e7d6da2">log</a> (const <a class="el" href="classqx_1_1category.html">category</a> &amp;<a class="el" href="classqx_1_1category.html">category</a>, verbosity eVerbosity, string_view svFile, cstring_view svFunction, int nLine, <a class="el" href="classqx_1_1basic__string.html">string</a> sMessage)</td></tr>
+<tr class="memdesc:a3be60a0860aee6ac8142df136e7d6da2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Log to all streams.  <a href="classqx_1_1logger.html#a3be60a0860aee6ac8142df136e7d6da2">More...</a><br /></td></tr>
+<tr class="separator:a3be60a0860aee6ac8142df136e7d6da2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a041e9728b911d6bc49360ecf4c67869c"><td class="memTemplParams" colspan="2">template&lt;class... args_t&gt; </td></tr>
-<tr class="memitem:a041e9728b911d6bc49360ecf4c67869c"><td class="memTemplItemLeft" align="right" valign="top">&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classqx_1_1logger.html#a041e9728b911d6bc49360ecf4c67869c">requires</a> (log_acceptable_args_c&lt; args_t... &gt;) void <a class="el" href="classqx_1_1logger.html#a6d00859b9cc2abe80dde6bfd18934d6f">log</a>(const <a class="el" href="classqx_1_1category.html">category</a> &amp;<a class="el" href="classqx_1_1category.html">category</a></td></tr>
+<tr class="memitem:a041e9728b911d6bc49360ecf4c67869c"><td class="memTemplItemLeft" align="right" valign="top">&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classqx_1_1logger.html#a041e9728b911d6bc49360ecf4c67869c">requires</a> (log_acceptable_args_c&lt; args_t... &gt;) void <a class="el" href="classqx_1_1logger.html#a3be60a0860aee6ac8142df136e7d6da2">log</a>(const <a class="el" href="classqx_1_1category.html">category</a> &amp;<a class="el" href="classqx_1_1category.html">category</a></td></tr>
 <tr class="memdesc:a041e9728b911d6bc49360ecf4c67869c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Log to all streams.  <a href="classqx_1_1logger.html#a041e9728b911d6bc49360ecf4c67869c">More...</a><br /></td></tr>
 <tr class="separator:a041e9728b911d6bc49360ecf4c67869c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af975c6169624a47a72ae8995161e140f"><td class="memItemLeft" align="right" valign="top"><a id="af975c6169624a47a72ae8995161e140f"></a>
@@ -99,9 +99,9 @@ virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hr
 virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1logger.html#acbd37fc0636753a6061a745ca1ab8f9e">reset</a> () noexcept</td></tr>
 <tr class="memdesc:acbd37fc0636753a6061a745ca1ab8f9e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reset logger and clear all streams. <br /></td></tr>
 <tr class="separator:acbd37fc0636753a6061a745ca1ab8f9e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8f37040b7ad64f3fac204d1e0742d0fb"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1logger.html#a8f37040b7ad64f3fac204d1e0742d0fb">will_any_stream_accept</a> (const <a class="el" href="classqx_1_1category.html">category</a> &amp;<a class="el" href="classqx_1_1category.html">category</a>, verbosity eVerbosity, string_view svFile, string_view svFunction) const noexcept</td></tr>
-<tr class="memdesc:a8f37040b7ad64f3fac204d1e0742d0fb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns true if any of streams will accept this message.  <a href="classqx_1_1logger.html#a8f37040b7ad64f3fac204d1e0742d0fb">More...</a><br /></td></tr>
-<tr class="separator:a8f37040b7ad64f3fac204d1e0742d0fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a40d6f9c5e0598fd1826c025b9253e21d"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1logger.html#a40d6f9c5e0598fd1826c025b9253e21d">will_any_stream_accept</a> (const <a class="el" href="classqx_1_1category.html">category</a> &amp;<a class="el" href="classqx_1_1category.html">category</a>, verbosity eVerbosity, string_view svFile, cstring_view svFunction) const noexcept</td></tr>
+<tr class="memdesc:a40d6f9c5e0598fd1826c025b9253e21d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns true if any of streams will accept this message.  <a href="classqx_1_1logger.html#a40d6f9c5e0598fd1826c025b9253e21d">More...</a><br /></td></tr>
+<tr class="separator:a40d6f9c5e0598fd1826c025b9253e21d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Logger class. </p>
@@ -150,12 +150,12 @@ template&lt;sbo_poly_assignable_c&lt; base_logger_stream &gt; stream_t&gt; </div
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="logger_8inl_source.html#l00047">47</a> of file <a class="el" href="logger_8inl_source.html">logger.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="logger_8inl_source.html#l00048">48</a> of file <a class="el" href="logger_8inl_source.html">logger.inl</a>.</p>
 
 </div>
 </div>
-<a id="a6d00859b9cc2abe80dde6bfd18934d6f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6d00859b9cc2abe80dde6bfd18934d6f">&#9670;&nbsp;</a></span>log()</h2>
+<a id="a3be60a0860aee6ac8142df136e7d6da2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3be60a0860aee6ac8142df136e7d6da2">&#9670;&nbsp;</a></span>log()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -184,7 +184,7 @@ template&lt;sbo_poly_assignable_c&lt; base_logger_stream &gt; stream_t&gt; </div
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">string_view&#160;</td>
+          <td class="paramtype">cstring_view&#160;</td>
           <td class="paramname"><em>svFunction</em>, </td>
         </tr>
         <tr>
@@ -196,8 +196,8 @@ template&lt;sbo_poly_assignable_c&lt; base_logger_stream &gt; stream_t&gt; </div
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">string_view&#160;</td>
-          <td class="paramname"><em>svMessage</em>&#160;</td>
+          <td class="paramtype"><a class="el" href="classqx_1_1basic__string.html">string</a>&#160;</td>
+          <td class="paramname"><em>sMessage</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -213,6 +213,7 @@ template&lt;sbo_poly_assignable_c&lt; base_logger_stream &gt; stream_t&gt; </div
 </div><div class="memdoc">
 
 <p>Log to all streams. </p>
+<dl class="section warning"><dt>Warning</dt><dd>All input args must be ready for async work (i.e. be stable) </dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">category</td><td>- code category </td></tr>
@@ -220,7 +221,7 @@ template&lt;sbo_poly_assignable_c&lt; base_logger_stream &gt; stream_t&gt; </div
     <tr><td class="paramname">svFile</td><td>- file name string </td></tr>
     <tr><td class="paramname">svFunction</td><td>- function name string </td></tr>
     <tr><td class="paramname">nLine</td><td>- code line number </td></tr>
-    <tr><td class="paramname">svMessage</td><td>- message string </td></tr>
+    <tr><td class="paramname">sMessage</td><td>- message string </td></tr>
   </table>
   </dd>
 </dl>
@@ -248,6 +249,7 @@ template&lt;class... args_t&gt; </div>
 </div><div class="memdoc">
 
 <p>Log to all streams. </p>
+<dl class="section warning"><dt>Warning</dt><dd>All input args (except for sFormat and args) must be ready for async work (i.e. be stable) </dd></dl>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
     <tr><td class="paramname">args_t</td><td>- template parameter pack type </td></tr>
@@ -269,8 +271,8 @@ template&lt;class... args_t&gt; </div>
 
 </div>
 </div>
-<a id="a8f37040b7ad64f3fac204d1e0742d0fb"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8f37040b7ad64f3fac204d1e0742d0fb">&#9670;&nbsp;</a></span>will_any_stream_accept()</h2>
+<a id="a40d6f9c5e0598fd1826c025b9253e21d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a40d6f9c5e0598fd1826c025b9253e21d">&#9670;&nbsp;</a></span>will_any_stream_accept()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -299,7 +301,7 @@ template&lt;class... args_t&gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">string_view&#160;</td>
+          <td class="paramtype">cstring_view&#160;</td>
           <td class="paramname"><em>svFunction</em>&#160;</td>
         </tr>
         <tr>
@@ -332,7 +334,7 @@ template&lt;class... args_t&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="logger_8inl_source.html#l00057">57</a> of file <a class="el" href="logger_8inl_source.html">logger.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="logger_8inl_source.html#l00058">58</a> of file <a class="el" href="logger_8inl_source.html">logger.inl</a>.</p>
 
 </div>
 </div>

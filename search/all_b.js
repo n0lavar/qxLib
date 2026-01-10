@@ -13,7 +13,7 @@ var searchData=
   ['link_2einl_411',['link.inl',['../link_8inl.html',1,'']]],
   ['lock_412',['lock',['../classqx_1_1link.html#a24382e977367a817ccddf21d3acd8e34',1,'qx::link::lock()'],['../classqx_1_1threads__shared.html#a1540b252169d22fef4f4fb61ff9aec5f',1,'qx::threads_shared::lock()']]],
   ['lock_5fptr_413',['lock_ptr',['../classqx_1_1link_1_1lock__ptr.html',1,'qx::link']]],
-  ['log_414',['log',['../classqx_1_1base__logger__stream.html#a1e608b8015b6837a69906ad4cc9cdc39',1,'qx::base_logger_stream::log()'],['../classqx_1_1logger.html#a6d00859b9cc2abe80dde6bfd18934d6f',1,'qx::logger::log()']]],
+  ['log_414',['log',['../classqx_1_1base__logger__stream.html#a85b7c70d29a365c25c4730b1c2c838c3',1,'qx::base_logger_stream::log()'],['../classqx_1_1logger.html#a3be60a0860aee6ac8142df136e7d6da2',1,'qx::logger::log()']]],
   ['log_5ffile_5fpolicy_415',['log_file_policy',['../file__logger__stream_8h.html#aaab6d2d26ae57b1521451921e1273220',1,'qx']]],
   ['log_5funit_416',['log_unit',['../structqx_1_1log__unit.html',1,'qx']]],
   ['log_5funit_5finfo_417',['log_unit_info',['../structqx_1_1log__unit__info.html',1,'qx']]],
