@@ -79,6 +79,9 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
 Macros</h2></td></tr>
+<tr class="memitem:a55a92fe9c012b545d2d3fc110df37686"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="macros_2common_8h.html#a55a92fe9c012b545d2d3fc110df37686">QX_UNUSED</a>(...)&#160;&#160;&#160;((void)sizeof(__VA_ARGS__))</td></tr>
+<tr class="memdesc:a55a92fe9c012b545d2d3fc110df37686"><td class="mdescLeft">&#160;</td><td class="mdescRight">Suppress unused variable warnings.  <a href="macros_2common_8h.html#a55a92fe9c012b545d2d3fc110df37686">More...</a><br /></td></tr>
+<tr class="separator:a55a92fe9c012b545d2d3fc110df37686"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abff5c48c8f5e30fdb8643308a9b3eaf7"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="macros_2common_8h.html#abff5c48c8f5e30fdb8643308a9b3eaf7">QX_EMPTY_MACRO</a>&#160;&#160;&#160;static_assert(true)</td></tr>
 <tr class="memdesc:abff5c48c8f5e30fdb8643308a9b3eaf7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Placeholder for disabled macros.  <a href="macros_2common_8h.html#abff5c48c8f5e30fdb8643308a9b3eaf7">More...</a><br /></td></tr>
 <tr class="separator:abff5c48c8f5e30fdb8643308a9b3eaf7"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -161,13 +164,13 @@ Macros</h2></td></tr>
   <table class="params">
     <tr><td class="paramname">prefix</td><td>- preprocessor prefix </td></tr>
     <tr><td class="paramname">...</td><td>- va args to count <div class="fragment"><div class="line"><a class="code" href="macros_2common_8h.html#a961a9e14803f511875675a88adbb6455">QX_APPEND_VA_ARG_COUNT</a>(foo_, 1, 1, 1); <span class="comment">// -&gt; foo_3</span></div>
-<div class="ttc" id="amacros_2common_8h_html_a961a9e14803f511875675a88adbb6455"><div class="ttname"><a href="macros_2common_8h.html#a961a9e14803f511875675a88adbb6455">QX_APPEND_VA_ARG_COUNT</a></div><div class="ttdeci">#define QX_APPEND_VA_ARG_COUNT(prefix,...)</div><div class="ttdoc">Add VA_ARGS count to the preprocessor prefix.</div><div class="ttdef"><b>Definition:</b> <a href="macros_2common_8h_source.html#l00097">common.h:97</a></div></div>
+<div class="ttc" id="amacros_2common_8h_html_a961a9e14803f511875675a88adbb6455"><div class="ttname"><a href="macros_2common_8h.html#a961a9e14803f511875675a88adbb6455">QX_APPEND_VA_ARG_COUNT</a></div><div class="ttdeci">#define QX_APPEND_VA_ARG_COUNT(prefix,...)</div><div class="ttdoc">Add VA_ARGS count to the preprocessor prefix.</div><div class="ttdef"><b>Definition:</b> <a href="macros_2common_8h_source.html#l00103">common.h:103</a></div></div>
 </div><!-- fragment --> </td></tr>
   </table>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="macros_2common_8h_source.html#l00097">97</a> of file <a class="el" href="macros_2common_8h_source.html">common.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="macros_2common_8h_source.html#l00103">103</a> of file <a class="el" href="macros_2common_8h_source.html">common.h</a>.</p>
 
 </div>
 </div>
@@ -188,9 +191,9 @@ Macros</h2></td></tr>
 <div class="fragment"><div class="line"><a class="code" href="macros_2common_8h.html#a3d221cef049007c8ee2fe6bab05e1d42">QX_CALL_BEFORE_MAIN</a> = []()</div>
 <div class="line">    {</div>
 <div class="line">    };</div>
-<div class="ttc" id="amacros_2common_8h_html_a3d221cef049007c8ee2fe6bab05e1d42"><div class="ttname"><a href="macros_2common_8h.html#a3d221cef049007c8ee2fe6bab05e1d42">QX_CALL_BEFORE_MAIN</a></div><div class="ttdeci">#define QX_CALL_BEFORE_MAIN</div><div class="ttdoc">Calls this lambda before the main invocation.</div><div class="ttdef"><b>Definition:</b> <a href="macros_2common_8h_source.html#l00070">common.h:70</a></div></div>
+<div class="ttc" id="amacros_2common_8h_html_a3d221cef049007c8ee2fe6bab05e1d42"><div class="ttname"><a href="macros_2common_8h.html#a3d221cef049007c8ee2fe6bab05e1d42">QX_CALL_BEFORE_MAIN</a></div><div class="ttdeci">#define QX_CALL_BEFORE_MAIN</div><div class="ttdoc">Calls this lambda before the main invocation.</div><div class="ttdef"><b>Definition:</b> <a href="macros_2common_8h_source.html#l00076">common.h:76</a></div></div>
 </div><!-- fragment --> 
-<p class="definition">Definition at line <a class="el" href="macros_2common_8h_source.html#l00070">70</a> of file <a class="el" href="macros_2common_8h_source.html">common.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="macros_2common_8h_source.html#l00076">76</a> of file <a class="el" href="macros_2common_8h_source.html">common.h</a>.</p>
 
 </div>
 </div>
@@ -219,9 +222,9 @@ Macros</h2></td></tr>
 <div class="line">{</div>
 <div class="line">    <a class="code" href="macros_2common_8h.html#a8571a186f383a0af7a487a27de39f144">QX_CONST_CAST_THIS</a>()-&gt;foo();</div>
 <div class="line">}</div>
-<div class="ttc" id="amacros_2common_8h_html_a8571a186f383a0af7a487a27de39f144"><div class="ttname"><a href="macros_2common_8h.html#a8571a186f383a0af7a487a27de39f144">QX_CONST_CAST_THIS</a></div><div class="ttdeci">#define QX_CONST_CAST_THIS()</div><div class="ttdoc">This macro is made for situations where you have a const method, and you need exactly the same method...</div><div class="ttdef"><b>Definition:</b> <a href="macros_2common_8h_source.html#l00057">common.h:57</a></div></div>
+<div class="ttc" id="amacros_2common_8h_html_a8571a186f383a0af7a487a27de39f144"><div class="ttname"><a href="macros_2common_8h.html#a8571a186f383a0af7a487a27de39f144">QX_CONST_CAST_THIS</a></div><div class="ttdeci">#define QX_CONST_CAST_THIS()</div><div class="ttdoc">This macro is made for situations where you have a const method, and you need exactly the same method...</div><div class="ttdef"><b>Definition:</b> <a href="macros_2common_8h_source.html#l00063">common.h:63</a></div></div>
 </div><!-- fragment --> 
-<p class="definition">Definition at line <a class="el" href="macros_2common_8h_source.html#l00057">57</a> of file <a class="el" href="macros_2common_8h_source.html">common.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="macros_2common_8h_source.html#l00063">63</a> of file <a class="el" href="macros_2common_8h_source.html">common.h</a>.</p>
 
 </div>
 </div>
@@ -240,7 +243,35 @@ Macros</h2></td></tr>
 <p>Placeholder for disabled macros. </p>
 <p>Has no effect and work correctly with "if else" You can use it in the end of a macro to enforce user to add ; after it </p>
 
-<p class="definition">Definition at line <a class="el" href="macros_2common_8h_source.html#l00022">22</a> of file <a class="el" href="macros_2common_8h_source.html">common.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="macros_2common_8h_source.html#l00028">28</a> of file <a class="el" href="macros_2common_8h_source.html">common.h</a>.</p>
+
+</div>
+</div>
+<a id="a55a92fe9c012b545d2d3fc110df37686"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a55a92fe9c012b545d2d3fc110df37686">&#9670;&nbsp;</a></span>QX_UNUSED</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define QX_UNUSED</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>...</em></td><td>)</td>
+          <td>&#160;&#160;&#160;((void)sizeof(__VA_ARGS__))</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Suppress unused variable warnings. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">...</td><td>- one or more variables </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="macros_2common_8h_source.html#l00020">20</a> of file <a class="el" href="macros_2common_8h_source.html">common.h</a>.</p>
 
 </div>
 </div>
@@ -264,13 +295,13 @@ Macros</h2></td></tr>
 <p>It supports up to 32 arguments, ranging from 0 (empty parentheses). </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">...</td><td>- va args to count <div class="fragment"><div class="line"><a class="code" href="macros_2common_8h.html#a180aa4aeefb97802da91dd4af67f8e45">QX_VA_ARG_COUNT</a>(1, 1, 1); <span class="comment">// -&gt; 3</span></div>
-<div class="ttc" id="amacros_2common_8h_html_a180aa4aeefb97802da91dd4af67f8e45"><div class="ttname"><a href="macros_2common_8h.html#a180aa4aeefb97802da91dd4af67f8e45">QX_VA_ARG_COUNT</a></div><div class="ttdeci">#define QX_VA_ARG_COUNT(...)</div><div class="ttdoc">Get number of va args.</div><div class="ttdef"><b>Definition:</b> <a href="macros_2common_8h_source.html#l00107">common.h:107</a></div></div>
+<div class="ttc" id="amacros_2common_8h_html_a180aa4aeefb97802da91dd4af67f8e45"><div class="ttname"><a href="macros_2common_8h.html#a180aa4aeefb97802da91dd4af67f8e45">QX_VA_ARG_COUNT</a></div><div class="ttdeci">#define QX_VA_ARG_COUNT(...)</div><div class="ttdoc">Get number of va args.</div><div class="ttdef"><b>Definition:</b> <a href="macros_2common_8h_source.html#l00113">common.h:113</a></div></div>
 </div><!-- fragment --> </td></tr>
   </table>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="macros_2common_8h_source.html#l00107">107</a> of file <a class="el" href="macros_2common_8h_source.html">common.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="macros_2common_8h_source.html#l00113">113</a> of file <a class="el" href="macros_2common_8h_source.html">common.h</a>.</p>
 
 </div>
 </div>

@@ -95,10 +95,10 @@ Functions</h2></td></tr>
 <tr class="memitem:a3d321a74f68c1be9613ca451a464ec53"><td class="memTemplItemLeft" align="right" valign="top">constexpr size_t&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="string__utils_8h.html#a3d321a74f68c1be9613ca451a464ec53">qx::djb2a_hash</a> (const value_t *pszStr, size_t nSeed, size_t nLen)</td></tr>
 <tr class="memdesc:a3d321a74f68c1be9613ca451a464ec53"><td class="mdescLeft">&#160;</td><td class="mdescRight">djb2a hash  <a href="string__utils_8h.html#a3d321a74f68c1be9613ca451a464ec53">More...</a><br /></td></tr>
 <tr class="separator:a3d321a74f68c1be9613ca451a464ec53"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a95071e58176b91c2268d6f7842843fb1"><td class="memTemplParams" colspan="2">template&lt;class value_t &gt; </td></tr>
-<tr class="memitem:a95071e58176b91c2268d6f7842843fb1"><td class="memTemplItemLeft" align="right" valign="top">constexpr size_t&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="string__utils_8h.html#a95071e58176b91c2268d6f7842843fb1">qx::djb2a_hash</a> (const value_t *pszStr, size_t nSeed)</td></tr>
-<tr class="memdesc:a95071e58176b91c2268d6f7842843fb1"><td class="mdescLeft">&#160;</td><td class="mdescRight">djb2a hash  <a href="string__utils_8h.html#a95071e58176b91c2268d6f7842843fb1">More...</a><br /></td></tr>
-<tr class="separator:a95071e58176b91c2268d6f7842843fb1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2c6c211298f238ad0a4dcf646f692515"><td class="memTemplParams" colspan="2">template&lt;class value_t &gt; </td></tr>
+<tr class="memitem:a2c6c211298f238ad0a4dcf646f692515"><td class="memTemplItemLeft" align="right" valign="top">constexpr size_t&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="string__utils_8h.html#a2c6c211298f238ad0a4dcf646f692515">qx::djb2a_hash</a> (const value_t *pszStr, size_t nSeed=0)</td></tr>
+<tr class="memdesc:a2c6c211298f238ad0a4dcf646f692515"><td class="mdescLeft">&#160;</td><td class="mdescRight">djb2a hash  <a href="string__utils_8h.html#a2c6c211298f238ad0a4dcf646f692515">More...</a><br /></td></tr>
+<tr class="separator:a2c6c211298f238ad0a4dcf646f692515"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8eb00080d60f696d550f8f9800b88222"><td class="memTemplParams" colspan="2">template&lt;class value_t &gt; </td></tr>
 <tr class="memitem:a8eb00080d60f696d550f8f9800b88222"><td class="memTemplItemLeft" align="right" valign="top">constexpr size_t&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="string__utils_8h.html#a8eb00080d60f696d550f8f9800b88222">qx::murmur_32_hash</a> (const value_t *pStr, size_t nSeed, size_t nLen) noexcept</td></tr>
 <tr class="memdesc:a8eb00080d60f696d550f8f9800b88222"><td class="mdescLeft">&#160;</td><td class="mdescRight">Murmur nHash.  <a href="string__utils_8h.html#a8eb00080d60f696d550f8f9800b88222">More...</a><br /></td></tr>
@@ -234,69 +234,8 @@ Functions</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Function Documentation</h2>
-<a id="a95071e58176b91c2268d6f7842843fb1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a95071e58176b91c2268d6f7842843fb1">&#9670;&nbsp;</a></span>djb2a_hash() <span class="overload">[1/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class value_t &gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">constexpr size_t qx::djb2a_hash </td>
-          <td>(</td>
-          <td class="paramtype">const value_t *&#160;</td>
-          <td class="paramname"><em>pszStr</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">size_t&#160;</td>
-          <td class="paramname"><em>nSeed</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>djb2a hash </p>
-<dl class="tparams"><dt>Template Parameters</dt><dd>
-  <table class="tparams">
-    <tr><td class="paramname">value_t</td><td>- char type </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">pszStr</td><td>- string for hashing (zero terminated) </td></tr>
-    <tr><td class="paramname">nSeed</td><td>- seed for hashing </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="retval"><dt>Return values</dt><dd>
-  <table class="retval">
-    <tr><td class="paramname">-</td><td>32bit unsigned value </td></tr>
-  </table>
-  </dd>
-</dl>
-
-<p class="definition">Definition at line <a class="el" href="string__utils_8h_source.html#l00044">44</a> of file <a class="el" href="string__utils_8h_source.html">string_utils.h</a>.</p>
-
-</div>
-</div>
 <a id="a3d321a74f68c1be9613ca451a464ec53"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3d321a74f68c1be9613ca451a464ec53">&#9670;&nbsp;</a></span>djb2a_hash() <span class="overload">[2/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a3d321a74f68c1be9613ca451a464ec53">&#9670;&nbsp;</a></span>djb2a_hash() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -360,6 +299,67 @@ template&lt;class value_t &gt; </div>
 </dl>
 
 <p class="definition">Definition at line <a class="el" href="string__utils_8h_source.html#l00026">26</a> of file <a class="el" href="string__utils_8h_source.html">string_utils.h</a>.</p>
+
+</div>
+</div>
+<a id="a2c6c211298f238ad0a4dcf646f692515"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2c6c211298f238ad0a4dcf646f692515">&#9670;&nbsp;</a></span>djb2a_hash() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class value_t &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr size_t qx::djb2a_hash </td>
+          <td>(</td>
+          <td class="paramtype">const value_t *&#160;</td>
+          <td class="paramname"><em>pszStr</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>nSeed</em> = <code>0</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>djb2a hash </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">value_t</td><td>- char type </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">pszStr</td><td>- string for hashing (zero terminated) </td></tr>
+    <tr><td class="paramname">nSeed</td><td>- seed for hashing </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Return values</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">-</td><td>32bit unsigned value </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="string__utils_8h_source.html#l00044">44</a> of file <a class="el" href="string__utils_8h_source.html">string_utils.h</a>.</p>
 
 </div>
 </div>
