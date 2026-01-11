@@ -14,6 +14,7 @@
 #include <qx/logger/logger.h>
 
 #include <qx/logger/cout_logger_stream.h>
+#include <qx/logger/debugger_logger_stream.h>
 #include <qx/logger/file_logger_stream.h>
 
 #include <filesystem>
@@ -124,15 +125,20 @@ protected:
         m_pLogger = std::make_unique<qx::logger>();
 
         qx::cout_logger_stream consoleLoggerStream;
-        consoleLoggerStream.deregister_unit(qx::base_logger_stream::svDefaultUnit);
-        consoleLoggerStream.register_unit(traits_t::GetUnit(), { qx::verbosity::none });
+        //consoleLoggerStream.deregister_unit(qx::base_logger_stream::svDefaultUnit);
+        //consoleLoggerStream.register_unit(traits_t::GetUnit(), { qx::verbosity::log });
 
         qx::file_logger_stream fileLoggerStream(true, qx::log_file_policy::clear_then_uppend, traits_t::GetLogsFile());
-        fileLoggerStream.deregister_unit(qx::base_logger_stream::svDefaultUnit);
-        fileLoggerStream.register_unit(traits_t::GetUnit(), { qx::verbosity::log });
+        //fileLoggerStream.deregister_unit(qx::base_logger_stream::svDefaultUnit);
+        //fileLoggerStream.register_unit(traits_t::GetUnit(), { qx::verbosity::log });
+
+        qx::debugger_logger_stream debugLoggerStream;
+        //debugLoggerStream.deregister_unit(qx::base_logger_stream::svDefaultUnit);
+        //debugLoggerStream.register_unit(traits_t::GetUnit(), { qx::verbosity::log });
 
         m_pLogger->add_stream(std::move(consoleLoggerStream));
         m_pLogger->add_stream(std::move(fileLoggerStream));
+        m_pLogger->add_stream(std::move(debugLoggerStream));
     }
 
     /* called after every test */

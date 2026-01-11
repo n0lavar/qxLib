@@ -9,61 +9,13 @@
 #pragma once
 
 #include <qx/category.h>
-#include <qx/containers/string/string_converters.h>
 #include <qx/internal/perf_scope.h>
-#include <qx/macros/suppress_warnings.h>
 #include <qx/verbosity.h>
-
-#include <ctime>
-#include <functional>
-#include <mutex>
-#include <unordered_map>
 
 QX_DEFINE_CATEGORY(CatLogger, qx::color::dark_turquoise());
 
 namespace qx
 {
-
-struct logger_color_range
-{
-    std::pair<size_t, size_t> range { 0, 0 };
-    color                     rangeColor = color::white();
-};
-
-struct logger_buffer
-{
-    string sMessage; // result message (output)
-
-    // ranges must not intersect and must increase
-    std::vector<logger_color_range> colors;
-
-    void clear()
-    {
-        sMessage.clear();
-        colors.clear();
-    }
-};
-
-struct log_unit_info
-{
-    using format_func = std::function<void(
-        logger_buffer&  buffers,
-        verbosity       eVerbosity,
-        const category& category,
-        string_view     svFile,
-        string_view     svFunction,
-        int             nLine,
-        string_view     swLogMessage)>;
-
-    verbosity   eMinVerbosity = verbosity::log;
-    format_func formatFunc;
-};
-
-struct log_unit
-{
-    const log_unit_info* pUnitInfo = nullptr;
-    string_view          svUnitName;
-};
 
 /**
 
@@ -76,14 +28,11 @@ struct log_unit
 class base_logger_stream
 {
 public:
-    static constexpr const char_type* svDefaultUnit = QXT("default");
-
-public:
     /**
         @brief base_logger_stream object constructor
         @param bAlwaysFlush - true if need to flush after every output, decreases performance
     **/
-    base_logger_stream(bool bAlwaysFlush);
+    base_logger_stream(bool bAlwaysFlush = false);
 
     base_logger_stream(base_logger_stream&&) noexcept = default;
 
@@ -96,102 +45,24 @@ public:
 
     /**
         @brief  Output to stream
-        @tparam char_t       - char type, typically char or wchar_t
-        @param  category     - code category
-        @param  eVerbosity     message verbosity
-        @param  svFile       - file name string
-        @param  svFunction   - function name string
-        @param  nLine        - code line number
-        @param  svLogMessage - formatted log line
-    **/
-    void log(
-        const category& category,
-        verbosity       eVerbosity,
-        string_view     svFile,
-        string_view     svFunction,
-        int             nLine,
-        string_view     svLogMessage);
-
-    /**
-        @brief Register logger unit
-        @param svUnitName - unit name (category name, file or function) 
-        @param unit       - unit info 
-    **/
-    void register_unit(string_view svUnitName, const log_unit_info& unit) noexcept;
-
-    /**
-        @brief Deregister logger unit
-        @param svUnitName - unit name (category name, file or function)
-    **/
-    void deregister_unit(string_view svUnitName) noexcept;
-
-    /**
-        @brief  Try to find log unit info based on trace location info
+        @tparam char_t     - char type, typically char or wchar_t
         @param  category   - code category
-        @param  eVerbosity - message verbosity
-        @param  svFile     - file string
-        @param  svFunction - function string
-        @retval            - log unit info if found
+        @param  eVerbosity   message verbosity
+        @param  svMessage  - formatted log line
     **/
-    std::optional<log_unit> get_unit_info(
-        const category& category,
-        verbosity       eVerbosity,
-        string_view     svFile,
-        string_view     svFunction) const noexcept;
-
-    /**
-        @brief  Format time string to the buffer
-        @param  sTime           - output time buffer
-        @param  chDateDelimiter - char to use as delimiter in date part
-        @param  chTimeDelimiter - char to use as delimiter in time part
-    **/
-    static void append_time_string(string& sTime, char_type chDateDelimiter, char_type chTimeDelimiter) noexcept;
-
-protected:
-    /**
-        @brief  Get string buffers
-        @retval - string buffers
-    **/
-    logger_buffer& get_log_buffer() noexcept;
-
-    /**
-        @brief Format logger line
-        @param  buffers      - string buffers to reduce num of allocations
-        @param  eVerbosity   - message verbosity
-        @param  category     - code category
-        @param  svFile       - file name string
-        @param  svFunction   - function name string
-        @param  nLine        - code line number
-        @param  swLogMessage - formatted log line
-    **/
-    virtual void format_line(
-        logger_buffer&  buffers,
-        verbosity       eVerbosity,
-        const category& category,
-        string_view     svFile,
-        string_view     svFunction,
-        int             nLine,
-        string_view     swLogMessage) noexcept;
+    void log(const category& category, verbosity eVerbosity, string_view svMessage);
 
 private:
     /**
         @brief Proceed stream logging
-        @param svMessage  - message string
-        @param logUnit    - log unit info
-        @param colors     - color ranges to colorize output
         @param eVerbosity - this message verbosity
+        @param category   - code category
+        @param svMessage  - message string
     **/
-    virtual void do_log(
-        string_view                            svMessage,
-        const log_unit&                        logUnit,
-        const std::vector<logger_color_range>& colors,
-        verbosity                              eVerbosity) = 0;
+    virtual void do_log(const category& category, verbosity eVerbosity, string_view svMessage) = 0;
 
 private:
-    std::unordered_map<string_hash, log_unit_info> m_Units;
-    logger_buffer                                  m_Buffer;
-    std::unique_ptr<std::mutex>                    m_pLoggerStreamMutex = std::make_unique<std::mutex>();
-    bool                                           m_bAlwaysFlush       = false;
+    bool m_bAlwaysFlush = false;
 };
 
 } // namespace qx

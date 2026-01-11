@@ -9,6 +9,7 @@
 #pragma once
 
 #include <qx/logger/base_logger_stream.h>
+#include <qx/logger/time_string.h>
 
 #include <filesystem>
 #include <fstream>
@@ -52,11 +53,7 @@ public:
     // base_logger_stream
     //
     virtual void flush() override;
-    virtual void do_log(
-        string_view                            svMessage,
-        const log_unit&                        logUnit,
-        const std::vector<logger_color_range>& colors,
-        verbosity                              eVerbosity) override;
+    virtual void do_log(const category& category, verbosity eVerbosity, string_view svMessage) override;
 
 private:
     std::wofstream m_File;

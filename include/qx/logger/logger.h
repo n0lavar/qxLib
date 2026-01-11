@@ -8,7 +8,9 @@
 **/
 #pragma once
 
+#include <qx/containers/string/string_converters.h>
 #include <qx/logger/base_logger_stream.h>
+#include <qx/logger/time_string.h>
 #include <qx/macros/details/macro_user_message.h>
 #include <qx/patterns/singleton.h>
 #include <qx/sbo/sbo_poly.h>
@@ -144,6 +146,25 @@ public:
         verbosity       eVerbosity,
         string_view     svFile,
         cstring_view    svFunction) const noexcept;
+
+private:
+    /**
+        @brief Format logger line
+        @param  eVerbosity   - message verbosity
+        @param  category     - code category
+        @param  svFile       - file name string
+        @param  svFunction   - function name string
+        @param  nLine        - code line number
+        @param  swLogMessage - formatted log line
+        @retval              - formatted string
+        **/
+    virtual string format_line(
+        verbosity       eVerbosity,
+        const category& category,
+        string_view     svFile,
+        string_view     svFunction,
+        int             nLine,
+        string_view     swLogMessage) noexcept;
 
 private:
     std::vector<sbo_poly<base_logger_stream, 1024>> m_Streams;

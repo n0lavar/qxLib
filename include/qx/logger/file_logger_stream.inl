@@ -25,8 +25,7 @@ inline file_logger_stream::file_logger_stream(bool bAlwaysFlush, log_file_policy
 
     case log_file_policy::time_name:
     {
-        string& sTime = get_log_buffer().sMessage;
-        sTime.clear();
+        string sTime;
         append_time_string(sTime, L'-', L'-');
         sLogFile += L'_';
         sLogFile += sTime;
@@ -71,11 +70,7 @@ inline void file_logger_stream::flush()
     m_File << std::flush;
 }
 
-inline void file_logger_stream::do_log(
-    string_view                            svMessage,
-    const log_unit&                        logUnit,
-    const std::vector<logger_color_range>& colors,
-    verbosity                              eVerbosity)
+inline void file_logger_stream::do_log(const category& category, verbosity eVerbosity, string_view svMessage)
 {
     QX_PERF_SCOPE(CatLogger, "Log to the file");
     m_File << qx::to_wstring(svMessage);

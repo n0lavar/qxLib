@@ -18,11 +18,7 @@ inline void debugger_logger_stream::flush()
 {
 }
 
-inline void debugger_logger_stream::do_log(
-    string_view                            svMessage,
-    const log_unit&                        logUnit,
-    const std::vector<logger_color_range>& colors,
-    verbosity                              eVerbosity)
+inline void debugger_logger_stream::do_log(const category& category, verbosity eVerbosity, string_view svMessage)
 {
 #if QX_WIN
     if (IsDebuggerPresent())

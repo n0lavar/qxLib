@@ -40,11 +40,7 @@ private:
     // base_logger_stream
     //
     void flush() override;
-    void do_log(
-        string_view                            svMessage,
-        const log_unit&                        logUnit,
-        const std::vector<logger_color_range>& colors,
-        verbosity                              eVerbosity) override;
+    void do_log(const category& category, verbosity eVerbosity, string_view svMessage) override;
 };
 
 } // namespace qx

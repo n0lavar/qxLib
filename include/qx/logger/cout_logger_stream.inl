@@ -13,7 +13,6 @@ namespace qx
 inline cout_logger_stream::cout_logger_stream(cout_logger_config config)
     : base_logger_stream(config.bAlwaysFlush)
     , m_bUsingColors(config.bUseColors)
-    , m_bDuplicateErrorsToCout(config.bDuplicateErrorsToCout)
 {
     if (config.bDisableStdioSync)
     {
@@ -39,18 +38,15 @@ inline void cout_logger_stream::flush()
     std::wcout << std::flush;
 }
 
-inline void cout_logger_stream::do_log(
-    string_view                            svMessage,
-    const log_unit&                        logUnit,
-    const std::vector<logger_color_range>& colors,
-    verbosity                              eVerbosity)
+inline void cout_logger_stream::do_log(const category& category, verbosity eVerbosity, string_view svMessage)
 {
     QX_PERF_SCOPE(CatLogger, "Log to cout");
 
-    thread_local wstring sWideMessage;
-    sWideMessage = to_wstring(svMessage);
+    wstring sWideMessage = to_wstring(svMessage);
 
-    if (m_bUsingColors && eVerbosity < verbosity::error)
+    std::wostream& outputStream = eVerbosity < verbosity::error ? std::wcout : std::wcerr;
+
+    if (m_bUsingColors)
     {
         color commonColor = color::white();
         switch (eVerbosity)
@@ -81,11 +77,22 @@ inline void cout_logger_stream::do_log(
             break;
         }
 
-        auto cout_colorized = [](size_t nStart, size_t nEnd, const color& rangeColor)
+        auto cout_colorized = [&outputStream, &sWideMessage](size_t nStart, size_t nEnd, const color& rangeColor)
         {
-            std::wcout << terminal_color::font(rangeColor)
-                       << qx::wstring_view { sWideMessage.data() + nStart, nEnd - nStart } << terminal_color::reset();
+            outputStream << terminal_color::font(rangeColor)
+                         << qx::wstring_view { sWideMessage.data() + nStart, nEnd - nStart } << terminal_color::reset();
         };
+
+        struct logger_color_range
+        {
+            std::pair<size_t, size_t> range { 0, 0 };
+            color                     rangeColor = color::white();
+        };
+
+        std::vector<logger_color_range> colors;
+
+        if (auto nPos = svMessage.find(category.get_name()); nPos != string::npos)
+            colors.push_back({ { nPos, nPos + category.get_name().size() }, category.get_color() });
 
         cout_colorized(0, colors.empty() ? sWideMessage.size() : colors.front().range.first, commonColor);
 
@@ -98,19 +105,9 @@ inline void cout_logger_stream::do_log(
                 commonColor);
         }
     }
-    else if (eVerbosity < verbosity::error)
-    {
-        std::wcout << sWideMessage;
-    }
     else
     {
-        std::wcerr << sWideMessage;
-
-        if (m_bDuplicateErrorsToCout)
-        {
-            std::wcout << sWideMessage;
-            flush();
-        }
+        outputStream << sWideMessage;
     }
 }
 

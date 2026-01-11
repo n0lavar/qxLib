@@ -10,32 +10,33 @@
 template<class char_t>
 std::basic_ostream<char_t>& operator<<(std::basic_ostream<char_t>& os, const qx::terminal_color& terminalColor)
 {
-    static qx::basic_string<char_t> sBuffer;
-
     switch (terminalColor.m_eType)
     {
     case qx::terminal_color::type::font:
-        sBuffer.format(
-            QX_STR_PREFIX(char_t, "\033[38;2;{};{};{}m"),
-            terminalColor.m_Color.r_dec(),
-            terminalColor.m_Color.g_dec(),
-            terminalColor.m_Color.b_dec());
+        os << QX_STR_PREFIX(char_t, "\033[38;2;");
+        os << terminalColor.m_Color.r_dec();
+        os << QX_STR_PREFIX(char_t, ";");
+        os << terminalColor.m_Color.g_dec();
+        os << QX_STR_PREFIX(char_t, ";");
+        os << terminalColor.m_Color.b_dec();
+        os << QX_STR_PREFIX(char_t, "m");
         break;
 
     case qx::terminal_color::type::back:
-        sBuffer.format(
-            QX_STR_PREFIX(char_t, "\033[48;2;{};{};{}m"),
-            terminalColor.m_Color.r_dec(),
-            terminalColor.m_Color.g_dec(),
-            terminalColor.m_Color.b_dec());
+        os << QX_STR_PREFIX(char_t, "\033[48;2;");
+        os << terminalColor.m_Color.r_dec();
+        os << QX_STR_PREFIX(char_t, ";");
+        os << terminalColor.m_Color.g_dec();
+        os << QX_STR_PREFIX(char_t, ";");
+        os << terminalColor.m_Color.b_dec();
+        os << QX_STR_PREFIX(char_t, "m");
         break;
 
     case qx::terminal_color::type::reset:
-        sBuffer = QX_STR_PREFIX(char_t, "\033[0m");
+        os << QX_STR_PREFIX(char_t, "\033[0m");
         break;
     }
 
-    os << sBuffer;
     return os;
 }
 

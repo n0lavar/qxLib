@@ -8,6 +8,7 @@
 **/
 #pragma once
 
+#include <qx/containers/string/string_converters.h>
 #include <qx/logger/base_logger_stream.h>
 #include <qx/logger/terminal_color.h>
 
@@ -25,8 +26,6 @@ struct cout_logger_config
     bool bDisableStdioSync = true;
     // untie cin from cout
     bool bUntieCin = true;
-    // by default, error and critical messages go to cerr only, this forces them to cout as well
-    bool bDuplicateErrorsToCout = false;
 };
 
 /**
@@ -51,11 +50,7 @@ public:
     // base_logger_stream
     //
     virtual void flush() override;
-    virtual void do_log(
-        string_view                            svMessage,
-        const log_unit&                        logUnit,
-        const std::vector<logger_color_range>& colors,
-        verbosity                              eVerbosity) override;
+    virtual void do_log(const category& category, verbosity eVerbosity, string_view svMessage) override;
 
     /**
         @brief Set whether cout output should be colored
@@ -64,8 +59,7 @@ public:
     void set_using_colors(bool bUsingColors) noexcept;
 
 private:
-    bool m_bUsingColors           = true;
-    bool m_bDuplicateErrorsToCout = false;
+    bool m_bUsingColors = true;
 };
 
 } // namespace qx
