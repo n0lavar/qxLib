@@ -8,7 +8,7 @@
 **/
 #pragma once
 
-#include <qx/containers/string/string_literal.h>
+#include <qx/containers/string/string_converters.h>
 #include <qx/containers/string/string_utils.h>
 #include <qx/containers/string/string_view.h>
 #include <qx/macros/config.h>

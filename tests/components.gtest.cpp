@@ -6,11 +6,11 @@
     @copyright © Nick Khrapov, 2021. All right reserved.
 
 **/
+#define QX_CONF_USE_CHAR
+
 #include <common.h>
 
 //V_EXCLUDE_PATH *components.gtest.cpp
-
-#define QX_CONF_USE_CHAR
 
 #include <qx/containers/components.h>
 

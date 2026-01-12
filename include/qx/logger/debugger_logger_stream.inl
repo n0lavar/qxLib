@@ -23,9 +23,9 @@ inline void debugger_logger_stream::do_log(const category& category, verbosity e
 #if QX_WIN
     if (IsDebuggerPresent())
     {
-        thread_local string sMessage;
-        sMessage = svMessage;
-        OutputDebugString(sMessage.c_str());
+        thread_local wstring sMessage;
+        sMessage = to_wstring(svMessage);
+        OutputDebugStringW(sMessage.c_str());
     }
 #endif
 }

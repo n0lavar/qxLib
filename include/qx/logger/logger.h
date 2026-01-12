@@ -16,6 +16,7 @@
 #include <qx/sbo/sbo_poly.h>
 
 #ifndef _QX_LOG_C
+    // __FUNCTION__ isn't a char array on linux, so we need to convert it
     #define _QX_LOG_C(verbosityCheckKeyword, category, eVerbosity, ...)        \
         do                                                                     \
         {                                                                      \
@@ -26,7 +27,7 @@
                     _category,                                                 \
                     eVerbosity,                                                \
                     QX_SHORT_FILE,                                             \
-                    __FUNCTION__,                                              \
+                    qx::convert_string_literal<qx::char_type, __FUNCTION__>(), \
                     QX_LINE,                                                   \
                     _QX_MACRO_USER_MESSAGE(__VA_ARGS__));                      \
             }                                                                  \
@@ -86,32 +87,9 @@ public:
         const category& category,
         verbosity       eVerbosity,
         string_view     svFile,
-        cstring_view    svFunction,
+        string_view     svFunction,
         int             nLine,
         string          sMessage);
-
-    /**
-        @brief   Log to all streams
-        @warning All input args (except for sFormat and args) must be ready for async work (i.e. be stable)
-        @tparam  args_t     - template parameter pack type
-        @param   category   - code category
-        @param   eVerbosity - message verbosity
-        @param   svFile     - file name string
-        @param   svFunction - function name string
-        @param   nLine      - code line number
-        @param   sFormat    - format string
-        @param   args       - additional args for format
-    **/
-    template<class... args_t>
-        requires(log_acceptable_args_c<args_t...>)
-    void log(
-        const category&                        category,
-        verbosity                              eVerbosity,
-        string_view                            svFile,
-        cstring_view                           svFunction,
-        int                                    nLine,
-        format_string_strong_checks<args_t...> sFormat,
-        args_t&&... args);
 
     /**
         @brief Flush all streams
@@ -146,25 +124,6 @@ public:
         verbosity       eVerbosity,
         string_view     svFile,
         cstring_view    svFunction) const noexcept;
-
-private:
-    /**
-        @brief Format logger line
-        @param  eVerbosity   - message verbosity
-        @param  category     - code category
-        @param  svFile       - file name string
-        @param  svFunction   - function name string
-        @param  nLine        - code line number
-        @param  swLogMessage - formatted log line
-        @retval              - formatted string
-        **/
-    virtual string format_line(
-        verbosity       eVerbosity,
-        const category& category,
-        string_view     svFile,
-        string_view     svFunction,
-        int             nLine,
-        string_view     swLogMessage) noexcept;
 
 private:
     std::vector<sbo_poly<base_logger_stream, 1024>> m_Streams;

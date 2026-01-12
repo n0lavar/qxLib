@@ -59,7 +59,7 @@ bool double_dispatch_matrix<method_ptr_t>::check_matrix_completeness() const noe
                        [](const auto& pair)
                        {
                            return static_cast<bool>(pair.second);
-                       });
+                       }); //!<
                })
            && nTotalElements == (m_MatrixFunctions.size() * m_MatrixFunctions.size() + m_MatrixFunctions.size()) / 2;
 }

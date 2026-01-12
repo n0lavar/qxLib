@@ -42,38 +42,39 @@ inline void cout_logger_stream::do_log(const category& category, verbosity eVerb
 {
     QX_PERF_SCOPE(CatLogger, "Log to cout");
 
+    // allocation
     wstring sWideMessage = to_wstring(svMessage);
 
     std::wostream& outputStream = eVerbosity < verbosity::error ? std::wcout : std::wcerr;
 
     if (m_bUsingColors)
     {
-        color commonColor = color::white();
+        color lineColor = color::white();
         switch (eVerbosity)
         {
         case verbosity::very_verbose:
         case verbosity::verbose:
-            commonColor = color::gray();
+            lineColor = color::gray();
             break;
 
         case verbosity::log:
-            commonColor = color::white();
+            lineColor = color::white();
             break;
 
         case verbosity::important:
-            commonColor = color::khaki();
+            lineColor = color::khaki();
             break;
 
         case verbosity::warning:
-            commonColor = color::orange();
+            lineColor = color::orange();
             break;
 
         case verbosity::error:
-            commonColor = color::crimson();
+            lineColor = color::crimson();
             break;
 
         case verbosity::critical:
-            commonColor = color::dark_red();
+            lineColor = color::dark_red();
             break;
         }
 
@@ -89,20 +90,26 @@ inline void cout_logger_stream::do_log(const category& category, verbosity eVerb
             color                     rangeColor = color::white();
         };
 
-        std::vector<logger_color_range> colors;
+        // currently only one color range (category name) is supported
+        // loop is left, so it can be extended later if needed
+        std::array<logger_color_range, 1> colors;
+        size_t                            colorsCount = 0;
 
         if (auto nPos = svMessage.find(category.get_name()); nPos != string::npos)
-            colors.push_back({ { nPos, nPos + category.get_name().size() }, category.get_color() });
+        {
+            colors[0]   = { .range = { nPos, nPos + category.get_name().size() }, .rangeColor = category.get_color() };
+            colorsCount = 1;
+        }
 
-        cout_colorized(0, colors.empty() ? sWideMessage.size() : colors.front().range.first, commonColor);
+        cout_colorized(0, colorsCount == 0 ? sWideMessage.size() : colors.front().range.first, lineColor);
 
-        for (size_t i = 0; i < colors.size(); ++i)
+        for (size_t i = 0; i < colorsCount; ++i)
         {
             cout_colorized(colors[i].range.first, colors[i].range.second, colors[i].rangeColor);
             cout_colorized(
                 colors[i].range.second,
-                i + 1 < colors.size() ? colors[i + 1].range.first : sWideMessage.size(),
-                commonColor);
+                i + 1 < colorsCount ? colors[i + 1].range.first : sWideMessage.size(),
+                lineColor);
         }
     }
     else

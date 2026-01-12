@@ -10,27 +10,6 @@
 namespace qx
 {
 
-namespace details
-{
-
-template<class char_t, size_t N>
-constexpr std::array<char_t, N> to_char_array(std::span<const char, N> svChar)
-{
-    std::array<char_t, N> result;
-    for (size_t i = 0; i < N; ++i)
-        result[i] = svChar[i];
-    return result;
-}
-
-template<class char_t, string_literal array>
-struct char_array_helper
-{
-    static constexpr auto char_array =
-        to_char_array<char_t>(std::span<const char, array.size()>(array.data(), array.data() + array.size()));
-};
-
-} // namespace details
-
 template<class T, class char_t>
 constexpr typename type_strings<T, char_t>::string_view_type type_strings<T, char_t>::create_full_signature()
 {
@@ -38,13 +17,9 @@ constexpr typename type_strings<T, char_t>::string_view_type type_strings<T, cha
     return QX_STR_PREFIX(char_t, __FUNCSIG__);
 #elif QX_CLANG || QX_GNU
     if constexpr (std::is_same_v<char_t, char>)
-    {
         return __PRETTY_FUNCTION__;
-    }
     else
-    {
-        return string_view_type(details::char_array_helper<char_t, __PRETTY_FUNCTION__>::char_array.data());
-    }
+        return convert_string_literal<char_t, __PRETTY_FUNCTION__>());
 #endif
 }
 

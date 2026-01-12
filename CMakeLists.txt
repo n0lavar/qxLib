@@ -22,10 +22,11 @@ include(cmake/add_tests.cmake)
 file(GLOB_RECURSE FILES_HEADERS ${CMAKE_CURRENT_SOURCE_DIR}/include/qx/*.h)
 file(GLOB_RECURSE FILES_SOURCES ${CMAKE_CURRENT_SOURCE_DIR}/include/qx/*.cpp)
 file(GLOB_RECURSE FILES_INLINES ${CMAKE_CURRENT_SOURCE_DIR}/include/qx/*.inl)
+file(GLOB_RECURSE FILES_NATVIS  ${CMAKE_CURRENT_SOURCE_DIR}/include/qx/*.natvis)
 
 source_group(
     TREE ${CMAKE_CURRENT_SOURCE_DIR}/include/qx
-    FILES ${FILES_HEADERS} ${FILES_SOURCES} ${FILES_INLINES}
+    FILES ${FILES_HEADERS} ${FILES_SOURCES} ${FILES_INLINES} ${FILES_NATVIS}
 )
 
 
@@ -37,7 +38,7 @@ find_package(GTest MODULE)
 find_package(Threads REQUIRED)
 find_package(GLM)
 
-add_library(qxLib ${FILES_HEADERS} ${FILES_SOURCES} ${FILES_INLINES})
+add_library(qxLib ${FILES_HEADERS} ${FILES_SOURCES} ${FILES_INLINES} ${FILES_NATVIS})
 
 macro(qx_setup_test_target _target)
     target_include_directories(${_target} PRIVATE

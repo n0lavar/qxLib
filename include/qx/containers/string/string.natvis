@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AutoVisualizer xmlns="http://schemas.microsoft.com/vstudio/debugger/natvis/2010">
+
+	<Type Name="qx::basic_string&lt;char, *&gt;">
+		<Expand>
+			<Item Name="[text]"  Condition="m_Data.m_nAllocatedSize==0">(const char*)m_Data.m_Buffer._Elems,s</Item>
+			<Item Name="[text]"  Condition="m_Data.m_nAllocatedSize!=0">(const char*)m_Data.m_pData,s</Item>
+			<Item Name="[size_chars]">m_Data.m_nSize/sizeof(char)</Item>
+			<Item Name="[allocated_chars]">m_Data.m_nAllocatedSize/sizeof(char)</Item>
+		</Expand>
+	</Type>
+
+	<Type Name="qx::basic_string&lt;wchar_t, *&gt;">
+		<Expand>
+			<Item Name="[text]" Condition="m_Data.m_nAllocatedSize==0">(const wchar_t*)m_Data.m_Buffer._Elems,su</Item>
+			<Item Name="[text]" Condition="m_Data.m_nAllocatedSize!=0">(const wchar_t*)m_Data.m_pData,su</Item>
+			<Item Name="[size_chars]">m_Data.m_nSize/sizeof(wchar_t)</Item>
+			<Item Name="[allocated_chars]">m_Data.m_nAllocatedSize/sizeof(wchar_t)</Item>
+		</Expand>
+	</Type>
+
+</AutoVisualizer>

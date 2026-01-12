@@ -26,7 +26,7 @@ inline file_logger_stream::file_logger_stream(bool bAlwaysFlush, log_file_policy
     case log_file_policy::time_name:
     {
         string sTime;
-        append_time_string(sTime, L'-', L'-');
+        append_time_string(sTime.begin(), L'-', L'-');
         sLogFile += L'_';
         sLogFile += sTime;
     }

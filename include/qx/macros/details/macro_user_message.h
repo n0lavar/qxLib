@@ -45,6 +45,7 @@ string format_macro_user_message(
 }
 
 } // namespace details
+
 } // namespace qx
 
 // clang-format off

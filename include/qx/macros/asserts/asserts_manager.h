@@ -11,10 +11,7 @@
 #include <qx/algo/predicates.h>
 #include <qx/logger/logger.h>
 #include <qx/macros/details/macro_user_message.h>
-
-#if QX_WIN
-    #include "windows.h"
-#endif
+#include <qx/windows.h>
 
 namespace qx
 {
