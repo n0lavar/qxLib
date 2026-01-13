@@ -19,7 +19,7 @@ constexpr typename type_strings<T, char_t>::string_view_type type_strings<T, cha
     if constexpr (std::is_same_v<char_t, char>)
         return __PRETTY_FUNCTION__;
     else
-        return convert_string_literal<char_t, __PRETTY_FUNCTION__>());
+        return convert_string_literal<char_t, __PRETTY_FUNCTION__>();
 #endif
 }
 
