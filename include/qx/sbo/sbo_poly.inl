@@ -26,7 +26,9 @@ sbo_poly<base_t, nSBOSize_>::sbo_poly(sbo_poly&& other) noexcept
 template<class base_t, size_t nSBOSize_>
 sbo_poly<base_t, nSBOSize_>::~sbo_poly() noexcept
 {
-    get().~base_t();
+    // may be empty if an object was moved
+    if (m_Deleter)
+        m_Deleter(m_Data);
 }
 
 template<class base_t, size_t nSBOSize_>
@@ -82,6 +84,7 @@ sbo_poly<base_t, nSBOSize_>& sbo_poly<base_t, nSBOSize_>::operator=(sbo_poly&& o
     }
 
     std::swap(m_Assigner, other.m_Assigner);
+    std::swap(m_Deleter, other.m_Deleter);
 
     return *this;
 }
@@ -100,6 +103,11 @@ void sbo_poly<base_t, nSBOSize_>::assign(derived_t object) noexcept
     {
         to.resize(sizeof(derived_t), std::alignment_of_v<derived_t>, sbo_resize_type::common, false);
         new (to.data()) derived_t(std::move(*reinterpret_cast<derived_t*>(from.data())));
+    };
+
+    m_Deleter = [](sbo_bytes_type& object)
+    {
+        reinterpret_cast<derived_t*>(object.data())->~derived_t();
     };
 }
 

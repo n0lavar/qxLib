@@ -12,7 +12,9 @@
 
 #include <qx/sbo/sbo_poly.h>
 
-static int k_nObjectsCounter = 0;
+static int k_nObjectsCounter             = 0;
+static int k_nDerivedSmallObjectsCounter = 0;
+static int k_nDerivedBigObjectsCounter   = 0;
 
 class base
 {
@@ -68,11 +70,18 @@ class derived_small : public base
 public:
     derived_small(int nIntData, std::string sStringData) : base(nIntData, std::move(sStringData))
     {
+        ++k_nDerivedSmallObjectsCounter;
     }
 
-    derived_small(derived_small&& other) noexcept = default;
+    derived_small(derived_small&& other) noexcept : base(std::move(other))
+    {
+        ++k_nDerivedSmallObjectsCounter;
+    }
 
-private:
+    virtual ~derived_small() override
+    {
+        --k_nDerivedSmallObjectsCounter;
+    }
 };
 QX_STATIC_ASSERT_LE(sizeof(derived_small), sbo_type::sbo_bytes_type::nBufferSize);
 
@@ -83,9 +92,19 @@ public:
         : base(nIntData, std::move(sString))
         , m_ArrayData(arrayData)
     {
+        ++k_nDerivedBigObjectsCounter;
     }
 
-    derived_big(derived_big&& other) noexcept = default;
+    derived_big(derived_big&& other) noexcept : base(std::move(other))
+    {
+        ++k_nDerivedBigObjectsCounter;
+        std::swap(m_ArrayData, other.m_ArrayData);
+    }
+
+    virtual ~derived_big() override
+    {
+        --k_nDerivedBigObjectsCounter;
+    }
 
     const std::array<size_t, 8>& get_array_data() const
     {
@@ -134,21 +153,27 @@ static sbo_type create_big(int nIntData = k_nBigIntData)
 TEST(sbo_poly, lifetime_small)
 {
     EXPECT_EQ(k_nObjectsCounter, 0);
+    EXPECT_EQ(k_nDerivedSmallObjectsCounter, 0);
     {
         sbo_type sbo = create_small();
         EXPECT_EQ(k_nObjectsCounter, 1);
+        EXPECT_EQ(k_nDerivedSmallObjectsCounter, 1);
     }
     EXPECT_EQ(k_nObjectsCounter, 0);
+    EXPECT_EQ(k_nDerivedSmallObjectsCounter, 0);
 }
 
 TEST(sbo_poly, lifetime_big)
 {
     EXPECT_EQ(k_nObjectsCounter, 0);
+    EXPECT_EQ(k_nDerivedBigObjectsCounter, 0);
     {
         sbo_type sbo = create_big();
         EXPECT_EQ(k_nObjectsCounter, 1);
+        EXPECT_EQ(k_nDerivedBigObjectsCounter, 1);
     }
     EXPECT_EQ(k_nObjectsCounter, 0);
+    EXPECT_EQ(k_nDerivedBigObjectsCounter, 0);
 }
 
 TEST(sbo_poly, move_small_to_small)
