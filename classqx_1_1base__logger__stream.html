@@ -67,8 +67,6 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
-<a href="#pub-static-methods">Static Public Member Functions</a> &#124;
-<a href="#pro-methods">Protected Member Functions</a> &#124;
 <a href="classqx_1_1base__logger__stream-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">qx::base_logger_stream Class Reference<span class="mlabels"><span class="mlabel">abstract</span></span></div>  </div>
@@ -93,50 +91,26 @@ Inheritance diagram for qx::base_logger_stream:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:ac017a360e802b6b15f5dad540b33ecba"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1base__logger__stream.html#ac017a360e802b6b15f5dad540b33ecba">base_logger_stream</a> (bool bAlwaysFlush)</td></tr>
-<tr class="memdesc:ac017a360e802b6b15f5dad540b33ecba"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classqx_1_1base__logger__stream.html" title="Base class for logger streams.">base_logger_stream</a> object constructor  <a href="classqx_1_1base__logger__stream.html#ac017a360e802b6b15f5dad540b33ecba">More...</a><br /></td></tr>
-<tr class="separator:ac017a360e802b6b15f5dad540b33ecba"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a55327a3c941404fbc72b22d5b9ec1776"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1base__logger__stream.html#a55327a3c941404fbc72b22d5b9ec1776">base_logger_stream</a> (bool bAlwaysFlush=false)</td></tr>
+<tr class="memdesc:a55327a3c941404fbc72b22d5b9ec1776"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classqx_1_1base__logger__stream.html" title="Base class for logger streams.">base_logger_stream</a> object constructor  <a href="classqx_1_1base__logger__stream.html#a55327a3c941404fbc72b22d5b9ec1776">More...</a><br /></td></tr>
+<tr class="separator:a55327a3c941404fbc72b22d5b9ec1776"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a305b21a54aa598b33d1ddb8ce23bc595"><td class="memItemLeft" align="right" valign="top"><a id="a305b21a54aa598b33d1ddb8ce23bc595"></a>
 virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1base__logger__stream.html#a305b21a54aa598b33d1ddb8ce23bc595">flush</a> ()=0</td></tr>
 <tr class="memdesc:a305b21a54aa598b33d1ddb8ce23bc595"><td class="mdescLeft">&#160;</td><td class="mdescRight">Flush stream. <br /></td></tr>
 <tr class="separator:a305b21a54aa598b33d1ddb8ce23bc595"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a85b7c70d29a365c25c4730b1c2c838c3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1base__logger__stream.html#a85b7c70d29a365c25c4730b1c2c838c3">log</a> (const <a class="el" href="classqx_1_1category.html">category</a> &amp;<a class="el" href="classqx_1_1category.html">category</a>, verbosity eVerbosity, string_view svFile, string_view svFunction, int nLine, string_view svLogMessage)</td></tr>
-<tr class="memdesc:a85b7c70d29a365c25c4730b1c2c838c3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Output to stream.  <a href="classqx_1_1base__logger__stream.html#a85b7c70d29a365c25c4730b1c2c838c3">More...</a><br /></td></tr>
-<tr class="separator:a85b7c70d29a365c25c4730b1c2c838c3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ace92fe548f73af42ac5a5ebebd47f8db"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1base__logger__stream.html#ace92fe548f73af42ac5a5ebebd47f8db">register_unit</a> (string_view svUnitName, const <a class="el" href="structqx_1_1log__unit__info.html">log_unit_info</a> &amp;<a class="el" href="structqx_1_1unit.html">unit</a>) noexcept</td></tr>
-<tr class="memdesc:ace92fe548f73af42ac5a5ebebd47f8db"><td class="mdescLeft">&#160;</td><td class="mdescRight">Register logger unit.  <a href="classqx_1_1base__logger__stream.html#ace92fe548f73af42ac5a5ebebd47f8db">More...</a><br /></td></tr>
-<tr class="separator:ace92fe548f73af42ac5a5ebebd47f8db"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5148e9b2f86df61963b9b56ab69a9d61"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1base__logger__stream.html#a5148e9b2f86df61963b9b56ab69a9d61">deregister_unit</a> (string_view svUnitName) noexcept</td></tr>
-<tr class="memdesc:a5148e9b2f86df61963b9b56ab69a9d61"><td class="mdescLeft">&#160;</td><td class="mdescRight">Deregister logger unit.  <a href="classqx_1_1base__logger__stream.html#a5148e9b2f86df61963b9b56ab69a9d61">More...</a><br /></td></tr>
-<tr class="separator:a5148e9b2f86df61963b9b56ab69a9d61"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1ca5d7cdb0925fa037842d3e68015ec0"><td class="memItemLeft" align="right" valign="top">std::optional&lt; <a class="el" href="structqx_1_1log__unit.html">log_unit</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1base__logger__stream.html#a1ca5d7cdb0925fa037842d3e68015ec0">get_unit_info</a> (const <a class="el" href="classqx_1_1category.html">category</a> &amp;<a class="el" href="classqx_1_1category.html">category</a>, verbosity eVerbosity, string_view svFile, string_view svFunction) const noexcept</td></tr>
-<tr class="memdesc:a1ca5d7cdb0925fa037842d3e68015ec0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Try to find log unit info based on trace location info.  <a href="classqx_1_1base__logger__stream.html#a1ca5d7cdb0925fa037842d3e68015ec0">More...</a><br /></td></tr>
-<tr class="separator:a1ca5d7cdb0925fa037842d3e68015ec0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
-Static Public Member Functions</h2></td></tr>
-<tr class="memitem:a185e4fde6d1ee68582320e39d8ab43b6"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1base__logger__stream.html#a185e4fde6d1ee68582320e39d8ab43b6">append_time_string</a> (<a class="el" href="classqx_1_1basic__string.html">string</a> &amp;sTime, char_type chDateDelimiter, char_type chTimeDelimiter) noexcept</td></tr>
-<tr class="memdesc:a185e4fde6d1ee68582320e39d8ab43b6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Format time string to the buffer.  <a href="classqx_1_1base__logger__stream.html#a185e4fde6d1ee68582320e39d8ab43b6">More...</a><br /></td></tr>
-<tr class="separator:a185e4fde6d1ee68582320e39d8ab43b6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
-Protected Member Functions</h2></td></tr>
-<tr class="memitem:a2a5cdad5dcf92486e5832953315100d7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structqx_1_1logger__buffer.html">logger_buffer</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1base__logger__stream.html#a2a5cdad5dcf92486e5832953315100d7">get_log_buffer</a> () noexcept</td></tr>
-<tr class="memdesc:a2a5cdad5dcf92486e5832953315100d7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get string buffers.  <a href="classqx_1_1base__logger__stream.html#a2a5cdad5dcf92486e5832953315100d7">More...</a><br /></td></tr>
-<tr class="separator:a2a5cdad5dcf92486e5832953315100d7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad55c3e6907fa2fb2b5f8ba4f29558883"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1base__logger__stream.html#ad55c3e6907fa2fb2b5f8ba4f29558883">format_line</a> (<a class="el" href="structqx_1_1logger__buffer.html">logger_buffer</a> &amp;buffers, verbosity eVerbosity, const <a class="el" href="classqx_1_1category.html">category</a> &amp;<a class="el" href="classqx_1_1category.html">category</a>, string_view svFile, string_view svFunction, int nLine, string_view swLogMessage) noexcept</td></tr>
-<tr class="memdesc:ad55c3e6907fa2fb2b5f8ba4f29558883"><td class="mdescLeft">&#160;</td><td class="mdescRight">Format logger line.  <a href="classqx_1_1base__logger__stream.html#ad55c3e6907fa2fb2b5f8ba4f29558883">More...</a><br /></td></tr>
-<tr class="separator:ad55c3e6907fa2fb2b5f8ba4f29558883"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a17c1b1553f1ae9dd529916745843221f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1base__logger__stream.html#a17c1b1553f1ae9dd529916745843221f">log</a> (const <a class="el" href="classqx_1_1category.html">category</a> &amp;<a class="el" href="classqx_1_1category.html">category</a>, verbosity eVerbosity, string_view svMessage)</td></tr>
+<tr class="memdesc:a17c1b1553f1ae9dd529916745843221f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Output to stream.  <a href="classqx_1_1base__logger__stream.html#a17c1b1553f1ae9dd529916745843221f">More...</a><br /></td></tr>
+<tr class="separator:a17c1b1553f1ae9dd529916745843221f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Base class for logger streams. </p>
 <dl class="section author"><dt>Author</dt><dd>Khrapov </dd></dl>
 <dl class="section date"><dt>Date</dt><dd>28.07.2021 </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="base__logger__stream_8h_source.html#l00076">76</a> of file <a class="el" href="base__logger__stream_8h_source.html">base_logger_stream.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="base__logger__stream_8h_source.html#l00028">28</a> of file <a class="el" href="base__logger__stream_8h_source.html">base_logger_stream.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="ac017a360e802b6b15f5dad540b33ecba"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac017a360e802b6b15f5dad540b33ecba">&#9670;&nbsp;</a></span>base_logger_stream()</h2>
+<a id="a55327a3c941404fbc72b22d5b9ec1776"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a55327a3c941404fbc72b22d5b9ec1776">&#9670;&nbsp;</a></span>base_logger_stream()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -148,7 +122,7 @@ Protected Member Functions</h2></td></tr>
           <td class="memname">qx::base_logger_stream::base_logger_stream </td>
           <td>(</td>
           <td class="paramtype">bool&#160;</td>
-          <td class="paramname"><em>bAlwaysFlush</em></td><td>)</td>
+          <td class="paramname"><em>bAlwaysFlush</em> = <code>false</code></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -172,282 +146,8 @@ Protected Member Functions</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="a185e4fde6d1ee68582320e39d8ab43b6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a185e4fde6d1ee68582320e39d8ab43b6">&#9670;&nbsp;</a></span>append_time_string()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void qx::base_logger_stream::append_time_string </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="classqx_1_1basic__string.html">string</a> &amp;&#160;</td>
-          <td class="paramname"><em>sTime</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">char_type&#160;</td>
-          <td class="paramname"><em>chDateDelimiter</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">char_type&#160;</td>
-          <td class="paramname"><em>chTimeDelimiter</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span><span class="mlabel">noexcept</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Format time string to the buffer. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">sTime</td><td>- output time buffer </td></tr>
-    <tr><td class="paramname">chDateDelimiter</td><td>- char to use as delimiter in date part </td></tr>
-    <tr><td class="paramname">chTimeDelimiter</td><td>- char to use as delimiter in time part </td></tr>
-  </table>
-  </dd>
-</dl>
-
-<p class="definition">Definition at line <a class="el" href="base__logger__stream_8inl_source.html#l00109">109</a> of file <a class="el" href="base__logger__stream_8inl_source.html">base_logger_stream.inl</a>.</p>
-
-</div>
-</div>
-<a id="a5148e9b2f86df61963b9b56ab69a9d61"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5148e9b2f86df61963b9b56ab69a9d61">&#9670;&nbsp;</a></span>deregister_unit()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void qx::base_logger_stream::deregister_unit </td>
-          <td>(</td>
-          <td class="paramtype">string_view&#160;</td>
-          <td class="paramname"><em>svUnitName</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Deregister logger unit. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">svUnitName</td><td>- unit name (category name, file or function) </td></tr>
-  </table>
-  </dd>
-</dl>
-
-<p class="definition">Definition at line <a class="el" href="base__logger__stream_8inl_source.html#l00074">74</a> of file <a class="el" href="base__logger__stream_8inl_source.html">base_logger_stream.inl</a>.</p>
-
-</div>
-</div>
-<a id="ad55c3e6907fa2fb2b5f8ba4f29558883"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad55c3e6907fa2fb2b5f8ba4f29558883">&#9670;&nbsp;</a></span>format_line()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void qx::base_logger_stream::format_line </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="structqx_1_1logger__buffer.html">logger_buffer</a> &amp;&#160;</td>
-          <td class="paramname"><em>buffers</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">verbosity&#160;</td>
-          <td class="paramname"><em>eVerbosity</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="classqx_1_1category.html">category</a> &amp;&#160;</td>
-          <td class="paramname"><em>category</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">string_view&#160;</td>
-          <td class="paramname"><em>svFile</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">string_view&#160;</td>
-          <td class="paramname"><em>svFunction</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>nLine</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">string_view&#160;</td>
-          <td class="paramname"><em>swLogMessage</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span><span class="mlabel">virtual</span><span class="mlabel">noexcept</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Format logger line. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">buffers</td><td>- string buffers to reduce num of allocations </td></tr>
-    <tr><td class="paramname">eVerbosity</td><td>- message verbosity </td></tr>
-    <tr><td class="paramname">category</td><td>- code category </td></tr>
-    <tr><td class="paramname">svFile</td><td>- file name string </td></tr>
-    <tr><td class="paramname">svFunction</td><td>- function name string </td></tr>
-    <tr><td class="paramname">nLine</td><td>- code line number </td></tr>
-    <tr><td class="paramname">swLogMessage</td><td>- formatted log line </td></tr>
-  </table>
-  </dd>
-</dl>
-
-<p class="definition">Definition at line <a class="el" href="base__logger__stream_8inl_source.html#l00138">138</a> of file <a class="el" href="base__logger__stream_8inl_source.html">base_logger_stream.inl</a>.</p>
-
-</div>
-</div>
-<a id="a2a5cdad5dcf92486e5832953315100d7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2a5cdad5dcf92486e5832953315100d7">&#9670;&nbsp;</a></span>get_log_buffer()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="structqx_1_1logger__buffer.html">logger_buffer</a> &amp; qx::base_logger_stream::get_log_buffer </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span><span class="mlabel">noexcept</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Get string buffers. </p>
-<dl class="retval"><dt>Return values</dt><dd>
-  <table class="retval">
-    <tr><td class="paramname">-</td><td>string buffers </td></tr>
-  </table>
-  </dd>
-</dl>
-
-<p class="definition">Definition at line <a class="el" href="base__logger__stream_8inl_source.html#l00133">133</a> of file <a class="el" href="base__logger__stream_8inl_source.html">base_logger_stream.inl</a>.</p>
-
-</div>
-</div>
-<a id="a1ca5d7cdb0925fa037842d3e68015ec0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1ca5d7cdb0925fa037842d3e68015ec0">&#9670;&nbsp;</a></span>get_unit_info()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">std::optional&lt; <a class="el" href="structqx_1_1log__unit.html">log_unit</a> &gt; qx::base_logger_stream::get_unit_info </td>
-          <td>(</td>
-          <td class="paramtype">const <a class="el" href="classqx_1_1category.html">category</a> &amp;&#160;</td>
-          <td class="paramname"><em>category</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">verbosity&#160;</td>
-          <td class="paramname"><em>eVerbosity</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">string_view&#160;</td>
-          <td class="paramname"><em>svFile</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">string_view&#160;</td>
-          <td class="paramname"><em>svFunction</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td> const</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Try to find log unit info based on trace location info. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">category</td><td>- code category </td></tr>
-    <tr><td class="paramname">eVerbosity</td><td>- message verbosity </td></tr>
-    <tr><td class="paramname">svFile</td><td>- file string </td></tr>
-    <tr><td class="paramname">svFunction</td><td>- function string </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="retval"><dt>Return values</dt><dd>
-  <table class="retval">
-    <tr><td class="paramname">-</td><td>log unit info if found </td></tr>
-  </table>
-  </dd>
-</dl>
-
-<p class="definition">Definition at line <a class="el" href="base__logger__stream_8inl_source.html#l00079">79</a> of file <a class="el" href="base__logger__stream_8inl_source.html">base_logger_stream.inl</a>.</p>
-
-</div>
-</div>
-<a id="a85b7c70d29a365c25c4730b1c2c838c3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a85b7c70d29a365c25c4730b1c2c838c3">&#9670;&nbsp;</a></span>log()</h2>
+<a id="a17c1b1553f1ae9dd529916745843221f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a17c1b1553f1ae9dd529916745843221f">&#9670;&nbsp;</a></span>log()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -471,25 +171,7 @@ Protected Member Functions</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">string_view&#160;</td>
-          <td class="paramname"><em>svFile</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">string_view&#160;</td>
-          <td class="paramname"><em>svFunction</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>nLine</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">string_view&#160;</td>
-          <td class="paramname"><em>svLogMessage</em>&#160;</td>
+          <td class="paramname"><em>svMessage</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -515,62 +197,12 @@ Protected Member Functions</h2></td></tr>
   <table class="params">
     <tr><td class="paramname">category</td><td>- code category </td></tr>
     <tr><td class="paramname">eVerbosity</td><td>message verbosity </td></tr>
-    <tr><td class="paramname">svFile</td><td>- file name string </td></tr>
-    <tr><td class="paramname">svFunction</td><td>- function name string </td></tr>
-    <tr><td class="paramname">nLine</td><td>- code line number </td></tr>
-    <tr><td class="paramname">svLogMessage</td><td>- formatted log line </td></tr>
+    <tr><td class="paramname">svMessage</td><td>- formatted log line </td></tr>
   </table>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="base__logger__stream_8inl_source.html#l00020">20</a> of file <a class="el" href="base__logger__stream_8inl_source.html">base_logger_stream.inl</a>.</p>
-
-</div>
-</div>
-<a id="ace92fe548f73af42ac5a5ebebd47f8db"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ace92fe548f73af42ac5a5ebebd47f8db">&#9670;&nbsp;</a></span>register_unit()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void qx::base_logger_stream::register_unit </td>
-          <td>(</td>
-          <td class="paramtype">string_view&#160;</td>
-          <td class="paramname"><em>svUnitName</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="structqx_1_1log__unit__info.html">log_unit_info</a> &amp;&#160;</td>
-          <td class="paramname"><em>unit</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Register logger unit. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">svUnitName</td><td>- unit name (category name, file or function) </td></tr>
-    <tr><td class="paramname">unit</td><td>- unit info </td></tr>
-  </table>
-  </dd>
-</dl>
-
-<p class="definition">Definition at line <a class="el" href="base__logger__stream_8inl_source.html#l00068">68</a> of file <a class="el" href="base__logger__stream_8inl_source.html">base_logger_stream.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="base__logger__stream_8inl_source.html#l00019">19</a> of file <a class="el" href="base__logger__stream_8inl_source.html">base_logger_stream.inl</a>.</p>
 
 </div>
 </div>
