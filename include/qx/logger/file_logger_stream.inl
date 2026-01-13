@@ -10,12 +10,35 @@
 namespace qx
 {
 
-inline file_logger_stream::file_logger_stream(bool bAlwaysFlush, log_file_policy eLogFilePolicy, string_view svFileName)
-    : base_logger_stream(bAlwaysFlush)
+namespace details
 {
-    string                  sLogFile    = svFileName;
+
+template<class char_t /* = char */>
+struct get_cerr
+{
+    static auto& get()
+    {
+        return std::cerr;
+    }
+};
+
+template<>
+struct get_cerr</* class char_t = */ wchar_t>
+{
+    static auto& get()
+    {
+        return std::wcerr;
+    }
+};
+
+} // namespace details
+
+inline file_logger_stream::file_logger_stream(file_logger_config config)
+    : base_logger_stream(config.bProtectLog, config.bAlwaysFlush)
+{
+    string                  sLogFile    = config.svFileName;
     std::ios_base::openmode openingMode = std::ios_base::app;
-    switch (eLogFilePolicy)
+    switch (config.eLogFilePolicy)
     {
     case log_file_policy::clear_then_uppend:
     {
@@ -26,14 +49,14 @@ inline file_logger_stream::file_logger_stream(bool bAlwaysFlush, log_file_policy
     case log_file_policy::time_name:
     {
         string sTime;
-        append_time_string(sTime.begin(), L'-', L'-');
-        sLogFile += L'_';
+        append_time_string(sTime.begin(), QXT('-'), QXT('-'));
+        sLogFile += QXT('_');
         sLogFile += sTime;
     }
     break;
     }
 
-    sLogFile += L".log";
+    sLogFile += QXT(".log");
 
     const wstring               sWideLogFile = to_wstring(sLogFile);
     const std::filesystem::path path(sWideLogFile.c_str());
@@ -41,39 +64,45 @@ inline file_logger_stream::file_logger_stream(bool bAlwaysFlush, log_file_policy
     {
         if (!std::filesystem::create_directory(path.parent_path()))
         {
-            std::wcerr << L"Can't create output folder " << sWideLogFile;
+            details::get_cerr<char_type>::get() << QXT("Can't create output folder ") << sWideLogFile;
             return;
         }
     }
 
-    m_File = std::basic_ofstream<wchar_t>(path, openingMode);
+    m_File = std::basic_ofstream<char_type>(path, openingMode);
     if (!m_File)
     {
-        std::wcerr << L"Can't open log file " << sWideLogFile;
+        details::get_cerr<char_type>::get() << QXT("Can't open log file ") << sWideLogFile;
         return;
     }
 
     QX_DISABLE_MSVC_WARNINGS(4996);
-    m_File.imbue(std::locale(std::locale(), new std::codecvt_utf8<wchar_t>));
+    m_File.imbue(std::locale(std::locale(), new std::codecvt_utf8<char_type>));
     QX_RESTORE_MSVC_WARNINGS(4996);
 }
 
 inline file_logger_stream::~file_logger_stream()
 {
     if (m_File)
-        m_File << L"\n\n\n" << std::flush;
+        m_File << QXT("\n\n\n") << std::flush;
 }
 
 inline void file_logger_stream::flush()
 {
-    QX_PERF_SCOPE(CatLogger, "Flush to the file");
-    m_File << std::flush;
+    if (m_File)
+    {
+        QX_PERF_SCOPE(CatLogger, "Flush to the file");
+        m_File << std::flush;
+    }
 }
 
 inline void file_logger_stream::do_log(const category& category, verbosity eVerbosity, string_view svMessage)
 {
-    QX_PERF_SCOPE(CatLogger, "Log to the file");
-    m_File << qx::to_wstring(svMessage);
+    if (m_File)
+    {
+        QX_PERF_SCOPE(CatLogger, "Log to the file");
+        m_File << svMessage;
+    }
 }
 
 } // namespace qx

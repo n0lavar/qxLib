@@ -12,6 +12,9 @@
 #include <qx/internal/perf_scope.h>
 #include <qx/verbosity.h>
 
+#include <memory>
+#include <mutex>
+
 QX_DEFINE_CATEGORY(CatLogger, qx::color::dark_turquoise());
 
 namespace qx
@@ -30,9 +33,10 @@ class base_logger_stream
 public:
     /**
         @brief base_logger_stream object constructor
-        @param bAlwaysFlush - true if need to flush after every output, decreases performance
+        @param bProtectLog  - if it's required to protect log with a mutex
+        @param bAlwaysFlush - if it's required to flush after every output, decreases performance
     **/
-    base_logger_stream(bool bAlwaysFlush = false);
+    base_logger_stream(bool bProtectLog = true, bool bAlwaysFlush = false);
 
     base_logger_stream(base_logger_stream&&) noexcept = default;
 
@@ -62,7 +66,9 @@ private:
     virtual void do_log(const category& category, verbosity eVerbosity, string_view svMessage) = 0;
 
 private:
-    bool m_bAlwaysFlush = false;
+    std::unique_ptr<std::mutex> m_pMutex;
+    bool                        m_bProtectLog  = true;
+    bool                        m_bAlwaysFlush = false;
 };
 
 } // namespace qx

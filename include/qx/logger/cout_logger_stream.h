@@ -19,11 +19,17 @@ namespace qx
 
 struct cout_logger_config
 {
+    // if it's required to protect log with a mutex
+    bool bProtectLog = false;
+
     // true if need to flush after every output, decreases performance
     bool bAlwaysFlush = false;
-    bool bUseColors   = true;
+
+    bool bUseColors = true;
+
     // don't synchronize to the standard C streams after each input/output operation
     bool bDisableStdioSync = true;
+
     // untie cin from cout
     bool bUntieCin = true;
 };

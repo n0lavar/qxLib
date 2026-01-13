@@ -71,6 +71,16 @@ namespace qx
 class logger
 {
 public:
+    using logger_sbo = sbo_poly<
+        base_logger_stream,
+#if QX_CLANG || QX_APPLE_CLANG || QX_GNU
+        1024
+#else
+        512
+#endif
+        >;
+
+public:
     virtual ~logger() noexcept = default;
 
     /**
@@ -126,7 +136,7 @@ public:
         cstring_view    svFunction) const noexcept;
 
 private:
-    std::vector<sbo_poly<base_logger_stream, 1024>> m_Streams;
+    std::vector<logger_sbo> m_Streams;
 };
 
 /**

@@ -54,6 +54,12 @@ static_assert(!qx::log_acceptable_args_c<int, float, const forbidden_type*>);
 static_assert(!qx::log_acceptable_args_c<int, float, forbidden_type[10]>);
 static_assert(!qx::log_acceptable_args_c<int, float, const forbidden_type[10]>);
 
+static_assert(qx::sbo_poly_fittable_types_v<
+              qx::logger::logger_sbo,
+              qx::cout_logger_stream,
+              qx::file_logger_stream,
+              qx::debugger_logger_stream>);
+
 QX_PUSH_SUPPRESS_MSVC_WARNINGS(4866 5233);
 
 template<
@@ -128,7 +134,10 @@ protected:
         //consoleLoggerStream.deregister_unit(qx::base_logger_stream::svDefaultUnit);
         //consoleLoggerStream.register_unit(traits_t::GetUnit(), { qx::verbosity::log });
 
-        qx::file_logger_stream fileLoggerStream(true, qx::log_file_policy::clear_then_uppend, traits_t::GetLogsFile());
+        qx::file_logger_stream fileLoggerStream({ .bProtectLog    = true,
+                                                  .bAlwaysFlush   = true,
+                                                  .eLogFilePolicy = qx::log_file_policy::clear_then_uppend,
+                                                  .svFileName     = traits_t::GetLogsFile() });
         //fileLoggerStream.deregister_unit(qx::base_logger_stream::svDefaultUnit);
         //fileLoggerStream.register_unit(traits_t::GetUnit(), { qx::verbosity::log });
 

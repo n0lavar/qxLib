@@ -24,6 +24,21 @@ enum class log_file_policy
     time_name,         //!< create new file with time name
 };
 
+struct file_logger_config
+{
+    // if it's required to protect log with a mutex
+    bool bProtectLog = false;
+
+    // if it's required to flush after every output, decreases performance
+    bool bAlwaysFlush = false;
+
+    // policy to use
+    log_file_policy eLogFilePolicy = log_file_policy::append;
+
+    // log file name
+    string_view svFileName = QXT("application");
+};
+
 /**
 
     @class   file_logger_stream
@@ -37,14 +52,9 @@ class file_logger_stream : public base_logger_stream
 public:
     /**
         @brief file_logger_stream object constructor
-        @param bAlwaysFlush   - true if need to flush after every output, decreases performance
-        @param eLogFilePolicy - policy to use
-        @param svFileName     - log file name
+        @param config - file logger configuration
     **/
-    file_logger_stream(
-        bool            bAlwaysFlush   = false,
-        log_file_policy eLogFilePolicy = log_file_policy::append,
-        string_view     svFileName     = L"application");
+    file_logger_stream(file_logger_config config = file_logger_config());
 
     file_logger_stream(file_logger_stream&&) noexcept = default;
 
@@ -56,7 +66,7 @@ public:
     virtual void do_log(const category& category, verbosity eVerbosity, string_view svMessage) override;
 
 private:
-    std::wofstream m_File;
+    std::basic_ofstream<char_type> m_File;
 };
 
 } // namespace qx
