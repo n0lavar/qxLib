@@ -18,7 +18,7 @@ var searchData=
   ['base_5finvoker_50',['base_invoker',['../classqx_1_1details_1_1base__invoker.html',1,'qx::details']]],
   ['base_5fiterator_51',['base_iterator',['../classqx_1_1base__iterator.html',1,'qx']]],
   ['base_5fiterator_2eh_52',['base_iterator.h',['../base__iterator_8h.html',1,'']]],
-  ['base_5flogger_5fstream_53',['base_logger_stream',['../classqx_1_1base__logger__stream.html#a55327a3c941404fbc72b22d5b9ec1776',1,'qx::base_logger_stream::base_logger_stream()'],['../classqx_1_1base__logger__stream.html',1,'qx::base_logger_stream']]],
+  ['base_5flogger_5fstream_53',['base_logger_stream',['../classqx_1_1base__logger__stream.html#abc32686c73a27e0b4252b5cec0ac62e7',1,'qx::base_logger_stream::base_logger_stream()'],['../classqx_1_1base__logger__stream.html',1,'qx::base_logger_stream']]],
   ['base_5flogger_5fstream_2eh_54',['base_logger_stream.h',['../base__logger__stream_8h.html',1,'']]],
   ['base_5flogger_5fstream_2einl_55',['base_logger_stream.inl',['../base__logger__stream_8inl.html',1,'']]],
   ['base_5freturn_5fobject_5fiterator_56',['base_return_object_iterator',['../classqx_1_1base__return__object__iterator.html',1,'qx']]],
