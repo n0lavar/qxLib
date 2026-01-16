@@ -66,6 +66,7 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="summary">
+<a href="#nested-classes">Classes</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="classqx_1_1base__logger__stream-members.html">List of all members</a>  </div>
   <div class="headertitle">
@@ -83,24 +84,32 @@ Inheritance diagram for qx::base_logger_stream:</div>
  <div class="center">
   <img src="classqx_1_1base__logger__stream.png" usemap="#qx::base_5Flogger_5Fstream_map" alt=""/>
   <map id="qx::base_5Flogger_5Fstream_map" name="qx::base_5Flogger_5Fstream_map">
-<area href="classqx_1_1cout__logger__stream.html" title="Logger stream for std::cout output." alt="qx::cout_logger_stream" shape="rect" coords="0,56,171,80"/>
-<area href="classqx_1_1debugger__logger__stream.html" title="Logger stream for a debugger output (VS: output window)" alt="qx::debugger_logger_stream" shape="rect" coords="181,56,352,80"/>
-<area href="classqx_1_1file__logger__stream.html" title="Logger stream for file output." alt="qx::file_logger_stream" shape="rect" coords="362,56,533,80"/>
+<area href="classqx_1_1base__file__logger__stream.html" title="Base class for all file logger streams." alt="qx::base_file_logger_stream" shape="rect" coords="199,56,388,80"/>
+<area href="classqx_1_1cout__logger__stream.html" title="Logger stream for std::cout output." alt="qx::cout_logger_stream" shape="rect" coords="398,56,587,80"/>
+<area href="classqx_1_1debugger__logger__stream.html" title="Logger stream for a debugger output (VS: output window)" alt="qx::debugger_logger_stream" shape="rect" coords="597,56,786,80"/>
+<area href="classqx_1_1file__logger__stream__fopen.html" title="FILE* based file logger stream." alt="qx::file_logger_stream_fopen" shape="rect" coords="0,112,189,136"/>
+<area href="classqx_1_1file__logger__stream__mapping.html" title="Memory-mapped file based logger stream (fast append)" alt="qx::file_logger_stream_mapping" shape="rect" coords="199,112,388,136"/>
+<area href="classqx_1_1file__logger__stream__ofstream.html" title="std::ofstream based file logger stream" alt="qx::file_logger_stream_ofstream" shape="rect" coords="398,112,587,136"/>
   </map>
 </div></div>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
+Classes</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structqx_1_1base__logger__stream_1_1config.html">config</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:abc32686c73a27e0b4252b5cec0ac62e7"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1base__logger__stream.html#abc32686c73a27e0b4252b5cec0ac62e7">base_logger_stream</a> (bool bProtectLog=true, bool bAlwaysFlush=false)</td></tr>
-<tr class="memdesc:abc32686c73a27e0b4252b5cec0ac62e7"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classqx_1_1base__logger__stream.html" title="Base class for logger streams.">base_logger_stream</a> object constructor  <a href="classqx_1_1base__logger__stream.html#abc32686c73a27e0b4252b5cec0ac62e7">More...</a><br /></td></tr>
-<tr class="separator:abc32686c73a27e0b4252b5cec0ac62e7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a305b21a54aa598b33d1ddb8ce23bc595"><td class="memItemLeft" align="right" valign="top"><a id="a305b21a54aa598b33d1ddb8ce23bc595"></a>
-virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1base__logger__stream.html#a305b21a54aa598b33d1ddb8ce23bc595">flush</a> ()=0</td></tr>
-<tr class="memdesc:a305b21a54aa598b33d1ddb8ce23bc595"><td class="mdescLeft">&#160;</td><td class="mdescRight">Flush stream. <br /></td></tr>
-<tr class="separator:a305b21a54aa598b33d1ddb8ce23bc595"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adb44cac4a04ec638c00d9eaf185fa0bf"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1base__logger__stream.html#adb44cac4a04ec638c00d9eaf185fa0bf">base_logger_stream</a> (const <a class="el" href="structqx_1_1base__logger__stream_1_1config.html">config</a> &amp;streamConfig)</td></tr>
+<tr class="memdesc:adb44cac4a04ec638c00d9eaf185fa0bf"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classqx_1_1base__logger__stream.html" title="Base class for logger streams.">base_logger_stream</a> object constructor  <a href="classqx_1_1base__logger__stream.html#adb44cac4a04ec638c00d9eaf185fa0bf">More...</a><br /></td></tr>
+<tr class="separator:adb44cac4a04ec638c00d9eaf185fa0bf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a17c1b1553f1ae9dd529916745843221f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1base__logger__stream.html#a17c1b1553f1ae9dd529916745843221f">log</a> (const <a class="el" href="classqx_1_1category.html">category</a> &amp;<a class="el" href="classqx_1_1category.html">category</a>, verbosity eVerbosity, string_view svMessage)</td></tr>
 <tr class="memdesc:a17c1b1553f1ae9dd529916745843221f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Output to stream.  <a href="classqx_1_1base__logger__stream.html#a17c1b1553f1ae9dd529916745843221f">More...</a><br /></td></tr>
 <tr class="separator:a17c1b1553f1ae9dd529916745843221f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abe1ebfaa9fb68d7a7d2624766f608f6b"><td class="memItemLeft" align="right" valign="top"><a id="abe1ebfaa9fb68d7a7d2624766f608f6b"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1base__logger__stream.html#abe1ebfaa9fb68d7a7d2624766f608f6b">flush</a> ()</td></tr>
+<tr class="memdesc:abe1ebfaa9fb68d7a7d2624766f608f6b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Flush the stream. <br /></td></tr>
+<tr class="separator:abe1ebfaa9fb68d7a7d2624766f608f6b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Base class for logger streams. </p>
@@ -109,8 +118,8 @@ virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hr
 
 <p class="definition">Definition at line <a class="el" href="base__logger__stream_8h_source.html#l00031">31</a> of file <a class="el" href="base__logger__stream_8h_source.html">base_logger_stream.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="abc32686c73a27e0b4252b5cec0ac62e7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#abc32686c73a27e0b4252b5cec0ac62e7">&#9670;&nbsp;</a></span>base_logger_stream()</h2>
+<a id="adb44cac4a04ec638c00d9eaf185fa0bf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adb44cac4a04ec638c00d9eaf185fa0bf">&#9670;&nbsp;</a></span>base_logger_stream()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -121,19 +130,9 @@ virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hr
         <tr>
           <td class="memname">qx::base_logger_stream::base_logger_stream </td>
           <td>(</td>
-          <td class="paramtype">bool&#160;</td>
-          <td class="paramname"><em>bProtectLog</em> = <code>true</code>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
+          <td class="paramtype">const <a class="el" href="structqx_1_1base__logger__stream_1_1config.html">config</a> &amp;&#160;</td>
+          <td class="paramname"><em>streamConfig</em></td><td>)</td>
           <td></td>
-          <td class="paramtype">bool&#160;</td>
-          <td class="paramname"><em>bAlwaysFlush</em> = <code>false</code>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
         </tr>
       </table>
   </td>
@@ -146,8 +145,7 @@ virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hr
 <p><a class="el" href="classqx_1_1base__logger__stream.html" title="Base class for logger streams.">base_logger_stream</a> object constructor </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">bProtectLog</td><td>- if it's required to protect log with a mutex </td></tr>
-    <tr><td class="paramname">bAlwaysFlush</td><td>- if it's required to flush after every output, decreases performance </td></tr>
+    <tr><td class="paramname">streamConfig</td><td>- logger configuration </td></tr>
   </table>
   </dd>
 </dl>

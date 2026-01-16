@@ -83,10 +83,10 @@ $(function() {
 <div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="keyword">namespace </span>qx</div>
 <div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;{</div>
 <div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160; </div>
-<div class="line"><a name="l00015"></a><span class="lineno"><a class="line" href="classqx_1_1base__logger__stream.html#abc32686c73a27e0b4252b5cec0ac62e7">   15</a></span>&#160;<span class="keyword">inline</span> <a class="code" href="classqx_1_1base__logger__stream.html#abc32686c73a27e0b4252b5cec0ac62e7">base_logger_stream::base_logger_stream</a>(<span class="keywordtype">bool</span> bProtectLog, <span class="keywordtype">bool</span> bAlwaysFlush)</div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;    : m_pMutex(std::make_unique&lt;std::mutex&gt;())</div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;    , m_bProtectLog(bProtectLog)</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    , m_bAlwaysFlush(bAlwaysFlush)</div>
+<div class="line"><a name="l00015"></a><span class="lineno"><a class="line" href="classqx_1_1base__logger__stream.html#adb44cac4a04ec638c00d9eaf185fa0bf">   15</a></span>&#160;<span class="keyword">inline</span> <a class="code" href="classqx_1_1base__logger__stream.html#adb44cac4a04ec638c00d9eaf185fa0bf">base_logger_stream::base_logger_stream</a>(<span class="keyword">const</span> <a class="code" href="structqx_1_1base__logger__stream_1_1config.html">config</a>&amp; streamConfig)</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;    : m_pMutex(std::make_unique&lt;std::recursive_mutex&gt;())</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;    , m_bProtectLog(streamConfig.bProtectLog)</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    , m_eMinFlushVerbosity(streamConfig.eMinFlushVerbosity)</div>
 <div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;{</div>
 <div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;}</div>
 <div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160; </div>
@@ -98,19 +98,34 @@ $(function() {
 <div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;        m_pMutex-&gt;lock();</div>
 <div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160; </div>
 <div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    do_log(<a class="code" href="classqx_1_1category.html">category</a>, eVerbosity, svMessage);</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    <span class="keywordflow">if</span> (m_bAlwaysFlush)</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;        <a class="code" href="classqx_1_1base__logger__stream.html#a305b21a54aa598b33d1ddb8ce23bc595">flush</a>();</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160; </div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    <span class="keywordflow">if</span> (m_bProtectLog)</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;        m_pMutex-&gt;unlock();</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;}</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160; </div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;} <span class="comment">// namespace qx</span></div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160; </div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    <span class="keywordflow">if</span> (eVerbosity &gt;= m_eMinFlushVerbosity)</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;        <a class="code" href="classqx_1_1base__logger__stream.html#abe1ebfaa9fb68d7a7d2624766f608f6b">flush</a>();</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160; </div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    <span class="keywordflow">if</span> (m_bProtectLog)</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;        m_pMutex-&gt;unlock();</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;}</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160; </div>
+<div class="line"><a name="l00038"></a><span class="lineno"><a class="line" href="classqx_1_1base__logger__stream.html#abe1ebfaa9fb68d7a7d2624766f608f6b">   38</a></span>&#160;<span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="classqx_1_1base__logger__stream.html#abe1ebfaa9fb68d7a7d2624766f608f6b">base_logger_stream::flush</a>()</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;{</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    QX_PERF_SCOPE(<span class="stringliteral">&quot;Flush&quot;</span>);</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160; </div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    <span class="keywordflow">if</span> (m_bProtectLog)</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;        m_pMutex-&gt;lock();</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160; </div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    do_flush();</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160; </div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    <span class="keywordflow">if</span> (m_bProtectLog)</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;        m_pMutex-&gt;unlock();</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;}</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160; </div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;} <span class="comment">// namespace qx</span></div>
 <div class="ttc" id="acategory_8h_html_aa6ce57fc027b0e714c9b0b562fd6b0e3"><div class="ttname"><a href="category_8h.html#aa6ce57fc027b0e714c9b0b562fd6b0e3">QX_SET_FILE_CATEGORY</a></div><div class="ttdeci">#define QX_SET_FILE_CATEGORY(_category)</div><div class="ttdoc">Set the file category You can access this value via QX_GET_FILE_CATEGORY() This category will not be ...</div><div class="ttdef"><b>Definition:</b> <a href="category_8h_source.html#l00029">category.h:29</a></div></div>
 <div class="ttc" id="aclassqx_1_1base__logger__stream_html_a17c1b1553f1ae9dd529916745843221f"><div class="ttname"><a href="classqx_1_1base__logger__stream.html#a17c1b1553f1ae9dd529916745843221f">qx::base_logger_stream::log</a></div><div class="ttdeci">void log(const category &amp;category, verbosity eVerbosity, string_view svMessage)</div><div class="ttdoc">Output to stream.</div><div class="ttdef"><b>Definition:</b> <a href="base__logger__stream_8inl_source.html#l00022">base_logger_stream.inl:22</a></div></div>
-<div class="ttc" id="aclassqx_1_1base__logger__stream_html_a305b21a54aa598b33d1ddb8ce23bc595"><div class="ttname"><a href="classqx_1_1base__logger__stream.html#a305b21a54aa598b33d1ddb8ce23bc595">qx::base_logger_stream::flush</a></div><div class="ttdeci">virtual void flush()=0</div><div class="ttdoc">Flush stream.</div></div>
-<div class="ttc" id="aclassqx_1_1base__logger__stream_html_abc32686c73a27e0b4252b5cec0ac62e7"><div class="ttname"><a href="classqx_1_1base__logger__stream.html#abc32686c73a27e0b4252b5cec0ac62e7">qx::base_logger_stream::base_logger_stream</a></div><div class="ttdeci">base_logger_stream(bool bProtectLog=true, bool bAlwaysFlush=false)</div><div class="ttdoc">base_logger_stream object constructor</div><div class="ttdef"><b>Definition:</b> <a href="base__logger__stream_8inl_source.html#l00015">base_logger_stream.inl:15</a></div></div>
+<div class="ttc" id="aclassqx_1_1base__logger__stream_html_abe1ebfaa9fb68d7a7d2624766f608f6b"><div class="ttname"><a href="classqx_1_1base__logger__stream.html#abe1ebfaa9fb68d7a7d2624766f608f6b">qx::base_logger_stream::flush</a></div><div class="ttdeci">void flush()</div><div class="ttdoc">Flush the stream.</div><div class="ttdef"><b>Definition:</b> <a href="base__logger__stream_8inl_source.html#l00038">base_logger_stream.inl:38</a></div></div>
+<div class="ttc" id="aclassqx_1_1base__logger__stream_html_adb44cac4a04ec638c00d9eaf185fa0bf"><div class="ttname"><a href="classqx_1_1base__logger__stream.html#adb44cac4a04ec638c00d9eaf185fa0bf">qx::base_logger_stream::base_logger_stream</a></div><div class="ttdeci">base_logger_stream(const config &amp;streamConfig)</div><div class="ttdoc">base_logger_stream object constructor</div><div class="ttdef"><b>Definition:</b> <a href="base__logger__stream_8inl_source.html#l00015">base_logger_stream.inl:15</a></div></div>
 <div class="ttc" id="aclassqx_1_1category_html"><div class="ttname"><a href="classqx_1_1category.html">qx::category</a></div><div class="ttdoc">A category is a class that identifies a particular piece of code. This code can be located in differe...</div><div class="ttdef"><b>Definition:</b> <a href="category_8h_source.html#l00058">category.h:59</a></div></div>
+<div class="ttc" id="astructqx_1_1base__logger__stream_1_1config_html"><div class="ttname"><a href="structqx_1_1base__logger__stream_1_1config.html">qx::base_logger_stream::config</a></div><div class="ttdef"><b>Definition:</b> <a href="base__logger__stream_8h_source.html#l00034">base_logger_stream.h:35</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

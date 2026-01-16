@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>qxLib: include/qx/logger/file_logger_stream.h File Reference</title>
+<title>qxLib: include/qx/logger/base_file_logger_stream.h File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -69,30 +69,29 @@ $(function() {
 <a href="#nested-classes">Classes</a> &#124;
 <a href="#enum-members">Enumerations</a>  </div>
   <div class="headertitle">
-<div class="title">file_logger_stream.h File Reference</div>  </div>
+<div class="title">base_file_logger_stream.h File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><code>#include &lt;<a class="el" href="base__logger__stream_8h_source.html">qx/logger/base_logger_stream.h</a>&gt;</code><br />
 <code>#include &lt;<a class="el" href="time__string_8h_source.html">qx/logger/time_string.h</a>&gt;</code><br />
 <code>#include &lt;filesystem&gt;</code><br />
-<code>#include &lt;fstream&gt;</code><br />
-<code>#include &lt;<a class="el" href="file__logger__stream_8inl_source.html">qx/logger/file_logger_stream.inl</a>&gt;</code><br />
+<code>#include &lt;<a class="el" href="base__file__logger__stream_8inl_source.html">qx/logger/base_file_logger_stream.inl</a>&gt;</code><br />
 </div>
-<p><a href="file__logger__stream_8h_source.html">Go to the source code of this file.</a></p>
+<p><a href="base__file__logger__stream_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Classes</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structqx_1_1file__logger__config.html">qx::file_logger_config</a></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1base__file__logger__stream.html">qx::base_file_logger_stream</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Base class for all file logger streams.  <a href="classqx_1_1base__file__logger__stream.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1file__logger__stream.html">qx::file_logger_stream</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Logger stream for file output.  <a href="classqx_1_1file__logger__stream.html#details">More...</a><br /></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structqx_1_1base__file__logger__stream_1_1config.html">qx::base_file_logger_stream::config</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="enum-members"></a>
 Enumerations</h2></td></tr>
-<tr class="memitem:aaab6d2d26ae57b1521451921e1273220"><td class="memItemLeft" align="right" valign="top">enum class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="file__logger__stream_8h.html#aaab6d2d26ae57b1521451921e1273220">qx::log_file_policy</a> { <a class="el" href="file__logger__stream_8h.html#aaab6d2d26ae57b1521451921e1273220a9516dfb15f51c7ee19a4d46b8c0dbe1d">append</a>
-, <a class="el" href="file__logger__stream_8h.html#aaab6d2d26ae57b1521451921e1273220a10c186e8b29856d1cc7242fce0cb487c">clear_then_uppend</a>
-, <a class="el" href="file__logger__stream_8h.html#aaab6d2d26ae57b1521451921e1273220a941d28bbdfbc0fd385176cb153bf336c">time_name</a>
+<tr class="memitem:aaab6d2d26ae57b1521451921e1273220"><td class="memItemLeft" align="right" valign="top">enum class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="base__file__logger__stream_8h.html#aaab6d2d26ae57b1521451921e1273220">qx::log_file_policy</a> { <a class="el" href="base__file__logger__stream_8h.html#aaab6d2d26ae57b1521451921e1273220a9516dfb15f51c7ee19a4d46b8c0dbe1d">append</a>
+, <a class="el" href="base__file__logger__stream_8h.html#aaab6d2d26ae57b1521451921e1273220a10c186e8b29856d1cc7242fce0cb487c">clear_then_uppend</a>
+, <a class="el" href="base__file__logger__stream_8h.html#aaab6d2d26ae57b1521451921e1273220a941d28bbdfbc0fd385176cb153bf336c">time_name</a>
  }</td></tr>
 <tr class="separator:aaab6d2d26ae57b1521451921e1273220"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
@@ -101,7 +100,7 @@ Enumerations</h2></td></tr>
 <dl class="section date"><dt>Date</dt><dd>28.07.2021 </dd></dl>
 <dl class="section copyright"><dt>Copyright</dt><dd>© Nick Khrapov, 2021. All right reserved. </dd></dl>
 
-<p class="definition">Definition in file <a class="el" href="file__logger__stream_8h_source.html">file_logger_stream.h</a>.</p>
+<p class="definition">Definition in file <a class="el" href="base__file__logger__stream_8h_source.html">base_file_logger_stream.h</a>.</p>
 </div><h2 class="groupheader">Enumeration Type Documentation</h2>
 <a id="aaab6d2d26ae57b1521451921e1273220"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aaab6d2d26ae57b1521451921e1273220">&#9670;&nbsp;</a></span>log_file_policy</h2>
@@ -113,7 +112,7 @@ Enumerations</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">enum <a class="el" href="file__logger__stream_8h.html#aaab6d2d26ae57b1521451921e1273220">qx::log_file_policy</a></td>
+          <td class="memname">enum <a class="el" href="base__file__logger__stream_8h.html#aaab6d2d26ae57b1521451921e1273220">qx::log_file_policy</a></td>
         </tr>
       </table>
   </td>
@@ -131,7 +130,7 @@ Enumerations</h2></td></tr>
 </td></tr>
 </table>
 
-<p class="definition">Definition at line <a class="el" href="file__logger__stream_8h_source.html#l00020">20</a> of file <a class="el" href="file__logger__stream_8h_source.html">file_logger_stream.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="base__file__logger__stream_8h_source.html#l00019">19</a> of file <a class="el" href="base__file__logger__stream_8h_source.html">base_file_logger_stream.h</a>.</p>
 
 </div>
 </div>
