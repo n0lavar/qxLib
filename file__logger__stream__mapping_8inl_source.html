@@ -116,7 +116,7 @@ $(function() {
 <div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    m_nGranularity = ps &gt; 0 ? <span class="keyword">static_cast&lt;</span>uint64_t<span class="keyword">&gt;</span>(ps) : 4096ull;</div>
 <div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160; </div>
 <div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    <span class="keywordtype">int</span> <a class="code" href="classqx_1_1flags.html">flags</a> = O_RDWR | O_CREAT;</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    <span class="keywordflow">if</span> (<a class="code" href="structqx_1_1base__file__logger__stream_1_1config.html">config</a>.eLogFilePolicy == log_file_policy::clear_then_uppend)</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    <span class="keywordflow">if</span> (streamConfig.eLogFilePolicy == log_file_policy::clear_then_uppend)</div>
 <div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;        <a class="code" href="classqx_1_1flags.html">flags</a> |= O_TRUNC;</div>
 <div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160; </div>
 <div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    m_Fd = ::open(path.c_str(), <a class="code" href="classqx_1_1flags.html">flags</a>, 0644);</div>
@@ -264,7 +264,7 @@ $(function() {
 <div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;    <span class="keywordflow">if</span> (!SetEndOfFile(m_hFile))</div>
 <div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;        <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
 <div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;<span class="preprocessor">#else</span></div>
-<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;    <span class="keywordflow">if</span> (::ftruncate(m_Fd, <span class="keyword">static_cast&lt;</span>off_t<span class="keyword">&gt;</span>(newCapBytes)) != 0)</div>
+<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;    <span class="keywordflow">if</span> (::ftruncate(m_Fd, <span class="keyword">static_cast&lt;</span>off_t<span class="keyword">&gt;</span>(newCap)) != 0)</div>
 <div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;        <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
 <div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;<span class="preprocessor">#endif</span></div>
 <div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160; </div>
@@ -280,7 +280,7 @@ $(function() {
 <div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160;    <span class="keywordflow">if</span> (!p)</div>
 <div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160;        <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
 <div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160;<span class="preprocessor">#else</span></div>
-<div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160;    <span class="keywordtype">void</span>* p = ::mmap(<span class="keyword">nullptr</span>, <span class="keyword">static_cast&lt;</span><span class="keywordtype">size_t</span><span class="keyword">&gt;</span>(newCapBytes), PROT_READ | PROT_WRITE, MAP_SHARED, m_Fd, 0);</div>
+<div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160;    <span class="keywordtype">void</span>* p = ::mmap(<span class="keyword">nullptr</span>, <span class="keyword">static_cast&lt;</span><span class="keywordtype">size_t</span><span class="keyword">&gt;</span>(newCap), PROT_READ | PROT_WRITE, MAP_SHARED, m_Fd, 0);</div>
 <div class="line"><a name="l00213"></a><span class="lineno">  213</span>&#160;    <span class="keywordflow">if</span> (p == MAP_FAILED)</div>
 <div class="line"><a name="l00214"></a><span class="lineno">  214</span>&#160;        <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
 <div class="line"><a name="l00215"></a><span class="lineno">  215</span>&#160;<span class="preprocessor">#endif</span></div>
