@@ -10,6 +10,24 @@
 namespace qx
 {
 
+template<sbo_poly_assignable_c<base_logger_stream> stream_t>
+inline void logger::add_stream(stream_t stream) noexcept
+{
+    std::unique_lock _(m_StreamsMutex);
+    m_Streams.emplace_back(std::move(stream));
+}
+
+inline void logger::register_category(const category& category, category_data data) noexcept
+{
+    register_category(category.get_name(), std::move(data));
+}
+
+inline void logger::register_category(string_view svCategoryName, category_data data) noexcept
+{
+    std::unique_lock _(m_RegisteredCategoriesMutex);
+    m_RegisteredCategories.emplace(svCategoryName, std::move(data));
+}
+
 inline void logger::log(
     const category& category,
     verbosity       eVerbosity,
@@ -17,6 +35,64 @@ inline void logger::log(
     string_view     svFunction,
     int             nLine,
     string          sMessage)
+{
+    bool bFormatted = false;
+    {
+        std::shared_lock _(m_RegisteredCategoriesMutex);
+        if (auto itRegisteredCategory = m_RegisteredCategories.find(category.get_name());
+            itRegisteredCategory != m_RegisteredCategories.end())
+        {
+            const category_data& data = itRegisteredCategory->second;
+            sMessage   = data.formatFunction(category, eVerbosity, svFile, svFunction, nLine, std::move(sMessage));
+            bFormatted = true;
+        }
+    }
+
+    if (!bFormatted)
+        sMessage = default_formatter(category, eVerbosity, svFile, svFunction, nLine, std::move(sMessage));
+
+    {
+        std::shared_lock _(m_StreamsMutex);
+        for (auto& stream : m_Streams)
+            stream->log(category, eVerbosity, sMessage);
+    }
+}
+
+inline void logger::flush()
+{
+    std::shared_lock _(m_StreamsMutex);
+    for (auto& stream : m_Streams)
+        stream->flush();
+}
+
+inline void logger::reset() noexcept
+{
+    std::unique_lock _(m_StreamsMutex);
+    m_Streams.clear();
+}
+
+inline bool logger::log_required(const category& category, verbosity eVerbosity) const noexcept
+{
+    std::shared_lock _(m_RegisteredCategoriesMutex);
+
+    if (auto itRegisteredCategory = m_RegisteredCategories.find(category.get_name());
+        itRegisteredCategory != m_RegisteredCategories.end())
+    {
+        const category_data& data = itRegisteredCategory->second;
+        return eVerbosity >= data.eRuntimeVerbosity;
+    }
+
+    // compile time check is in macros
+    return true;
+}
+
+inline string logger::default_formatter(
+    const category& category,
+    verbosity       eVerbosity,
+    string_view     svFile,
+    string_view     svFunction,
+    int             nLine,
+    string          sMessage) noexcept
 {
     // avoid extra allocation, insert prefix inplace
     constexpr size_t nVerbositySize = 4;
@@ -106,42 +182,7 @@ inline void logger::log(
 
     sMessage += QXT('\n');
 
-    for (auto& stream : m_Streams)
-        stream->log(category, eVerbosity, sMessage);
-}
-
-inline void logger::flush()
-{
-    for (auto& stream : m_Streams)
-        stream->flush();
-}
-
-template<sbo_poly_assignable_c<base_logger_stream> stream_t>
-inline void logger::add_stream(stream_t stream) noexcept
-{
-    m_Streams.emplace_back(std::move(stream));
-}
-
-inline void logger::reset() noexcept
-{
-    m_Streams.clear();
-}
-
-inline bool logger::will_any_stream_accept(
-    const category& category,
-    verbosity       eVerbosity,
-    string_view     svFile,
-    cstring_view    svFunction) const noexcept
-{
-#if 0
-    string sFunction = to_string(svFunction);
-    for (const auto& stream : m_Streams)
-        if (stream->get_unit_info(category, eVerbosity, svFile, sFunction))
-            return true;
-
-    return false;
-#endif
-    return true;
+    return sMessage;
 }
 
 } // namespace qx

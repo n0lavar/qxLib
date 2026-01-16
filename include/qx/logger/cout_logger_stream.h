@@ -17,23 +17,6 @@
 namespace qx
 {
 
-struct cout_logger_config
-{
-    // if it's required to protect log with a mutex
-    bool bProtectLog = false;
-
-    // true if need to flush after every output, decreases performance
-    bool bAlwaysFlush = false;
-
-    bool bUseColors = true;
-
-    // don't synchronize to the standard C streams after each input/output operation
-    bool bDisableStdioSync = true;
-
-    // untie cin from cout
-    bool bUntieCin = true;
-};
-
 /**
 
     @class   cout_logger_stream
@@ -45,18 +28,30 @@ struct cout_logger_config
 class cout_logger_stream : public base_logger_stream
 {
 public:
+    struct config : base_logger_stream::config
+    {
+        bool bUseColors = true;
+
+        // don't synchronize to the standard C streams after each input/output operation
+        bool bDisableStdioSync = true;
+
+        // untie cin from cout
+        bool bUntieCin = true;
+    };
+
+public:
     /**
         @brief cout_logger_stream object constructor
-        @param config - logger stream configuration
+        @param optStreamConfig - logger stream configuration
     **/
-    cout_logger_stream(cout_logger_config config = cout_logger_config());
+    cout_logger_stream(std::optional<config> optStreamConfig = {});
 
     cout_logger_stream(cout_logger_stream&&) noexcept = default;
 
     // base_logger_stream
     //
-    virtual void flush() override;
     virtual void do_log(const category& category, verbosity eVerbosity, string_view svMessage) override;
+    virtual void do_flush() override;
 
     /**
         @brief Set whether cout output should be colored

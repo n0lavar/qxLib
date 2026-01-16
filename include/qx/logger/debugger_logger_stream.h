@@ -31,16 +31,17 @@ class debugger_logger_stream : public base_logger_stream
 public:
     /**
         @brief debugger_logger_stream object constructor
+        @param eMinFlushVerbosity - the minimum verbosity level at which flush will be called
     **/
-    debugger_logger_stream();
+    debugger_logger_stream(verbosity eMinFlushVerbosity = verbosity::error);
 
     debugger_logger_stream(debugger_logger_stream&&) noexcept = default;
 
 private:
     // base_logger_stream
     //
-    void flush() override;
-    void do_log(const category& category, verbosity eVerbosity, string_view svMessage) override;
+    virtual void do_log(const category& category, verbosity eVerbosity, string_view svMessage) override;
+    virtual void do_flush() override;
 };
 
 } // namespace qx

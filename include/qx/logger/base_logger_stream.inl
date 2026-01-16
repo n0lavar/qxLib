@@ -12,10 +12,10 @@ QX_SET_FILE_CATEGORY(CatLogger);
 namespace qx
 {
 
-inline base_logger_stream::base_logger_stream(bool bProtectLog, bool bAlwaysFlush)
-    : m_pMutex(std::make_unique<std::mutex>())
-    , m_bProtectLog(bProtectLog)
-    , m_bAlwaysFlush(bAlwaysFlush)
+inline base_logger_stream::base_logger_stream(const config& streamConfig)
+    : m_pMutex(std::make_unique<std::recursive_mutex>())
+    , m_bProtectLog(streamConfig.bProtectLog)
+    , m_eMinFlushVerbosity(streamConfig.eMinFlushVerbosity)
 {
 }
 
@@ -27,8 +27,22 @@ inline void base_logger_stream::log(const category& category, verbosity eVerbosi
         m_pMutex->lock();
 
     do_log(category, eVerbosity, svMessage);
-    if (m_bAlwaysFlush)
+
+    if (eVerbosity >= m_eMinFlushVerbosity)
         flush();
+
+    if (m_bProtectLog)
+        m_pMutex->unlock();
+}
+
+inline void base_logger_stream::flush()
+{
+    QX_PERF_SCOPE("Flush");
+
+    if (m_bProtectLog)
+        m_pMutex->lock();
+
+    do_flush();
 
     if (m_bProtectLog)
         m_pMutex->unlock();

@@ -7,4 +7,4 @@ runs:
       shell: cmd
       working-directory: build
       run: |
-        ctest --output-on-failure -j %NUMBER_OF_PROCESSORS%
+        ctest --output-on-failure -j %NUMBER_OF_PROCESSORS% -V

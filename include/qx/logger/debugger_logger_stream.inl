@@ -10,11 +10,8 @@
 namespace qx
 {
 
-inline debugger_logger_stream::debugger_logger_stream() : base_logger_stream(true)
-{
-}
-
-inline void debugger_logger_stream::flush()
+inline debugger_logger_stream::debugger_logger_stream(verbosity eMinFlushVerbosity)
+    : base_logger_stream({ .bProtectLog = false, .eMinFlushVerbosity = eMinFlushVerbosity })
 {
 }
 
@@ -28,6 +25,10 @@ inline void debugger_logger_stream::do_log(const category& category, verbosity e
         OutputDebugStringW(sMessage.c_str());
     }
 #endif
+}
+
+inline void debugger_logger_stream::do_flush()
+{
 }
 
 } // namespace qx

@@ -10,18 +10,20 @@
 namespace qx
 {
 
-inline cout_logger_stream::cout_logger_stream(cout_logger_config config)
-    : base_logger_stream(config.bAlwaysFlush)
-    , m_bUsingColors(config.bUseColors)
+inline cout_logger_stream::cout_logger_stream(std::optional<config> optStreamConfig)
+    : base_logger_stream(optStreamConfig ? *optStreamConfig : config())
+    , m_bUsingColors(optStreamConfig ? optStreamConfig->bUseColors : config().bUseColors)
 {
-    if (config.bDisableStdioSync)
+    const config streamConfig = optStreamConfig ? *optStreamConfig : config();
+
+    if (streamConfig.bDisableStdioSync)
     {
         // Optimization
         // Don't synchronize to the standard C streams after each input/output operation
         std::ios_base::sync_with_stdio(false);
     }
 
-    if (config.bUntieCin)
+    if (streamConfig.bUntieCin)
     {
         // This unties cin from cout.
         // Tied streams ensure that one stream is flushed automatically
@@ -31,17 +33,8 @@ inline cout_logger_stream::cout_logger_stream(cout_logger_config config)
     }
 }
 
-inline void cout_logger_stream::flush()
-{
-    QX_PERF_SCOPE(CatLogger, "Flush to cout");
-
-    std::wcout << std::flush;
-}
-
 inline void cout_logger_stream::do_log(const category& category, verbosity eVerbosity, string_view svMessage)
 {
-    QX_PERF_SCOPE(CatLogger, "Log to cout");
-
     // allocation
     wstring sWideMessage = to_wstring(svMessage);
 
@@ -117,6 +110,12 @@ inline void cout_logger_stream::do_log(const category& category, verbosity eVerb
         outputStream << sWideMessage;
     }
 }
+
+inline void cout_logger_stream::do_flush()
+{
+    std::wcout << std::flush;
+}
+
 
 inline void cout_logger_stream::set_using_colors(bool bUsingColors) noexcept
 {

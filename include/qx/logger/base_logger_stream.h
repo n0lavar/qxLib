@@ -31,21 +31,25 @@ namespace qx
 class base_logger_stream
 {
 public:
+    struct config
+    {
+        // if it's required to protect log with a mutex
+        bool bProtectLog = true;
+
+        // the minimum verbosity level at which flush will be called
+        verbosity eMinFlushVerbosity = verbosity::error;
+    };
+
+public:
     /**
         @brief base_logger_stream object constructor
-        @param bProtectLog  - if it's required to protect log with a mutex
-        @param bAlwaysFlush - if it's required to flush after every output, decreases performance
+        @param streamConfig - logger configuration
     **/
-    base_logger_stream(bool bProtectLog = true, bool bAlwaysFlush = false);
+    base_logger_stream(const config& streamConfig);
 
     base_logger_stream(base_logger_stream&&) noexcept = default;
 
     virtual ~base_logger_stream() = default;
-
-    /**
-        @brief Flush stream
-    **/
-    virtual void flush() = 0;
 
     /**
         @brief  Output to stream
@@ -56,6 +60,11 @@ public:
     **/
     void log(const category& category, verbosity eVerbosity, string_view svMessage);
 
+    /**
+        @brief Flush the stream
+    **/
+    void flush();
+
 private:
     /**
         @brief Proceed stream logging
@@ -65,10 +74,15 @@ private:
     **/
     virtual void do_log(const category& category, verbosity eVerbosity, string_view svMessage) = 0;
 
+    /**
+        @brief Flush the stream
+    **/
+    virtual void do_flush() = 0;
+
 private:
-    std::unique_ptr<std::mutex> m_pMutex;
-    bool                        m_bProtectLog  = true;
-    bool                        m_bAlwaysFlush = false;
+    std::unique_ptr<std::recursive_mutex> m_pMutex;
+    bool                                  m_bProtectLog        = true;
+    verbosity                             m_eMinFlushVerbosity = verbosity::error;
 };
 
 } // namespace qx

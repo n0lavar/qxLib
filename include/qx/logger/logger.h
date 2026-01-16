@@ -15,6 +15,8 @@
 #include <qx/patterns/singleton.h>
 #include <qx/sbo/sbo_poly.h>
 
+#include <shared_mutex>
+
 #ifndef _QX_LOG_C
     // __FUNCTION__ isn't a char array on linux, so we need to convert it
     #define _QX_LOG_C(verbosityCheckKeyword, category, eVerbosity, ...)        \
@@ -80,8 +82,46 @@ public:
 #endif
         >;
 
+    struct category_data
+    {
+        using format_function = std::function<string(
+            const category& category,
+            verbosity       eVerbosity,
+            string_view     svFile,
+            string_view     svFunction,
+            int             nLine,
+            string          sMessage)>;
+
+        verbosity       eRuntimeVerbosity = verbosity::very_verbose;
+        format_function formatFunction;
+    };
+
+    using category_data_map = std::unordered_map<string_view, category_data>;
+
 public:
     virtual ~logger() noexcept = default;
+
+    /**
+        @brief  Add an output stream to the logger
+        @tparam stream_t - stream type, derived from base_logger_stream
+        @param  stream   - stream object
+    **/
+    template<sbo_poly_assignable_c<base_logger_stream> stream_t>
+    void add_stream(stream_t stream) noexcept;
+
+    /**
+        @brief Add custom rules for category
+        @param category - category to register
+        @param data     - category data
+    **/
+    void register_category(const category& category, category_data data) noexcept;
+
+    /**
+        @brief Add custom rules for category
+        @param svCategoryName - category name, must stay valid while the logger is alive (category existence is not checked)
+        @param data           - category data
+    **/
+    void register_category(string_view svCategoryName, category_data data) noexcept;
 
     /**
         @brief   Log to all streams
@@ -107,36 +147,35 @@ public:
     virtual void flush();
 
     /**
-        @brief  Add an output stream to the logger
-        @tparam stream_t - stream type, derived from base_logger_stream
-        @param  stream   - stream object
-    **/
-    template<sbo_poly_assignable_c<base_logger_stream> stream_t>
-    void add_stream(stream_t stream) noexcept;
-
-    /**
         @brief Reset logger and clear all streams
     **/
     virtual void reset() noexcept;
 
     /**
-        @brief   Returns true if any of streams will accept this message
+        @brief   Returns true if a log with given category and verbosity will be logged
         @details Typically you don't want to use it
                  It may be useful with async logging to avoid unnecessary formatting and queueing
         @param   category   - code category
         @param   eVerbosity - message verbosity
-        @param   svFile     - file name string
-        @param   svFunction - function name string
-        @retval             - true if any of streams will accept this message
+        @retval             - true if a log with given category and verbosity will be logged
     **/
-    bool will_any_stream_accept(
+    bool log_required(const category& category, verbosity eVerbosity) const noexcept;
+
+private:
+    static string default_formatter(
         const category& category,
         verbosity       eVerbosity,
         string_view     svFile,
-        cstring_view    svFunction) const noexcept;
+        string_view     svFunction,
+        int             nLine,
+        string          sMessage) noexcept;
 
 private:
+    QX_PERF_SHARED_MUTEX(m_StreamsMutex);
     std::vector<logger_sbo> m_Streams;
+
+    QX_PERF_SHARED_MUTEX(m_RegisteredCategoriesMutex);
+    category_data_map m_RegisteredCategories;
 };
 
 /**
