@@ -20,7 +20,7 @@ var searchData=
   ['convert_5fstring_5fliteral_1326',['convert_string_literal',['../string__converters_8h.html#a06220f14639f405c16d3cdcc1af79570',1,'qx']]],
   ['convert_5fto_5fstring_1327',['convert_to_string',['../string_8h.html#ae7bef0fda2664f97b0454290be619fd6',1,'qx']]],
   ['copy_1328',['copy',['../classqx_1_1basic__string.html#a483943f155ef6b77d8b10985c5b78246',1,'qx::basic_string']]],
-  ['cout_5flogger_5fstream_1329',['cout_logger_stream',['../classqx_1_1cout__logger__stream.html#a041e7ac66dd5be8892e46bf9e0c6f74b',1,'qx::cout_logger_stream']]],
+  ['cout_5flogger_5fstream_1329',['cout_logger_stream',['../classqx_1_1cout__logger__stream.html#a610dc27b35e3d3c1d9edcc7a23924e7b',1,'qx::cout_logger_stream']]],
   ['crbegin_1330',['crbegin',['../classqx_1_1subject.html#af884daad1a45b5902b0e4d467a529b53',1,'qx::subject']]],
   ['create_1331',['create',['../classqx_1_1class__id.html#a1736fdae179584b4124595a5da3f93df',1,'qx::class_id']]],
   ['create_5fcircle_1332',['create_circle',['../geom_8h.html#abce1be1adaae488363bd738a845a1474',1,'qx']]],
