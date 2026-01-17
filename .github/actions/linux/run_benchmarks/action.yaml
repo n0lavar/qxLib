@@ -1,0 +1,25 @@
+name: Run all benchmarks
+description: Finds and runs all *.bench.exe in the project
+
+runs:
+  using: composite
+  steps:
+    - name: Run *.bench files
+      shell: bash
+      run: |
+        set -e
+
+        mapfile -t BENCHES < <(find . -type f -name "*.bench" -perm -111)
+
+        if [ "${#BENCHES[@]}" -eq 0 ]; then
+          echo "No *.bench executables found."
+          exit 0
+        fi
+
+        echo "Found ${#BENCHES[@]} benchmark(s):"
+        printf ' - %s\n' "${BENCHES[@]}"
+
+        for b in "${BENCHES[@]}"; do
+          echo "Running $b"
+          "$b"
+        done

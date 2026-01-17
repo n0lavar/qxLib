@@ -1,0 +1,25 @@
+name: Run all benchmarks
+description: Finds and runs all *.bench.exe in the project
+
+runs:
+  using: composite
+  steps:
+    - name: Run *.bench.exe files
+      shell: pwsh
+      run: |
+        $ErrorActionPreference = "Stop"
+
+        $benches = Get-ChildItem -Recurse -File -Filter "*.bench.exe"
+
+        if (-not $benches -or $benches.Count -eq 0) {
+          Write-Host "No *.bench.exe found."
+          exit 0
+        }
+
+        Write-Host "Found $($benches.Count) benchmark(s):"
+        $benches | ForEach-Object { Write-Host " - $($_.FullName)" }
+
+        foreach ($b in $benches) {
+          Write-Host "Running $($b.FullName)"
+          & $b.FullName
+        }

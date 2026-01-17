@@ -13,6 +13,7 @@ macro(add_benchmarks
         # from list of files we'll create benchmarks name.bench.cpp -> name
         foreach(_file ${BENCHMARKS_SRC_FILES})
             get_filename_component(_target ${_file} NAME_WE)
+            set(_target "${_target}.bench")
             
             add_executable("${_target}" ${_file} ${FILES_NATVIS})
 

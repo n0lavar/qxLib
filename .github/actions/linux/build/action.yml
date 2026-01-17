@@ -20,8 +20,7 @@ runs:
           .. \
           -DCMAKE_CXX_FLAGS="${{ inputs.cxx_flags }}" \
           -DCMAKE_EXE_LINKER_FLAGS="${{ inputs.cxx_linker_flags }}" \
-          -DCMAKE_BUILD_TYPE=${{ inputs.build_type }} \
           -DBOOST_ROOT=${{ inputs.BOOST_ROOT }} \
           -DGENERATE_TESTS=1 \
           -DGENERATE_BENCHMARKS=1
-        cmake --build . -j $(nproc)
+        cmake --build . --config ${{ inputs.build_type }} -j $(nproc)

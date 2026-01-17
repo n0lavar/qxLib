@@ -23,3 +23,4 @@ jobs:
           build_type: Release
           BOOST_ROOT: ${{ steps.install_dependencies.outputs.BOOST_ROOT }}
       - uses: ./.github/actions/windows/run_tests
+      - uses: ./.github/actions/windows/run_benchmarks

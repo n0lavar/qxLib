@@ -28,3 +28,4 @@ jobs:
           build_type: Release
           BOOST_ROOT: ${{ steps.install_dependencies.outputs.BOOST_ROOT }}
       - uses: ./.github/actions/linux/run_tests
+      - uses: ./.github/actions/linux/run_benchmarks
