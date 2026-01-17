@@ -159,7 +159,7 @@ BENCHMARK_TEMPLATE_INSTANTIATE_F(logger_stream_fixture, Test, traits::mapping_de
 BENCHMARK_TEMPLATE_INSTANTIATE_F(logger_stream_fixture, Test, traits::mapping)->Arg(5000);
 
 BENCHMARK_TEMPLATE_INSTANTIATE_F(logger_stream_fixture, Test, traits::ostream_default_buffer)->Arg(10000);
-BENCHMARK_TEMPLATE_INSTANTIATE_F(logger_stream_fixture, Test, traits::ostream)->Arg(20000);
+BENCHMARK_TEMPLATE_INSTANTIATE_F(logger_stream_fixture, Test, traits::ostream)->Arg(10000);
 BENCHMARK_TEMPLATE_INSTANTIATE_F(logger_stream_fixture, Test, traits::fopen_default_buffer)->Arg(10000);
 BENCHMARK_TEMPLATE_INSTANTIATE_F(logger_stream_fixture, Test, traits::fopen)->Arg(10000);
 BENCHMARK_TEMPLATE_INSTANTIATE_F(logger_stream_fixture, Test, traits::mapping_default_initial_size)->Arg(10000);
