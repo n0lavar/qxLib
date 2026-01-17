@@ -1,10 +1,6 @@
 function(add_compile_options_for_configs _target _configs _options)
     foreach(config IN LISTS _configs)
         foreach(option IN LISTS _options)
-            message(${_target})
-            message(${config})
-            message(${option})
-
             target_compile_options(${_target} PRIVATE
                 $<$<CONFIG:${config}>:${option}>
             )

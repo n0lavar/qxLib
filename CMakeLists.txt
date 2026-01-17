@@ -14,6 +14,7 @@ set(CMAKE_PREFIX_PATH ${CMAKE_PREFIX_PATH} "${EXTERNAL_FOLDER}")
 include(cmake/set_target_options.cmake)
 include(cmake/set_test_options.cmake)
 include(cmake/add_tests.cmake)
+include(cmake/add_benchmarks.cmake)
 
 
 # ================================================================
@@ -33,17 +34,19 @@ source_group(
 # ================================================================
 # Setup
 
-find_package(Boost 1.79)
-find_package(GTest MODULE)
 find_package(Threads REQUIRED)
+
+find_package(Boost 1.79)
 find_package(GLM)
+
+find_package(GTest MODULE)
+find_package(benchmark PATHS ../external/benchmark/build ../benchmark/build)
 
 add_library(qxLib ${FILES_HEADERS} ${FILES_SOURCES} ${FILES_INLINES} ${FILES_NATVIS})
 
 macro(qx_setup_test_target _target)
     target_include_directories(${_target} PRIVATE
         ${GTEST_INCLUDE_DIR}
-        ${GLEW_INCLUDE_DIRS}
         ${GLM_INCLUDE_DIRS}
         "${CMAKE_CURRENT_LIST_DIR}/include/"
         "${CMAKE_CURRENT_LIST_DIR}/tests/"
@@ -63,6 +66,11 @@ add_tests(
     "qxLibTests" 
     "${PROJECT_SOURCE_DIR}/tests/*.gtest.cpp"
     qx_setup_test_target
+)
+
+add_benchmarks(
+    "qxLibBenchmarks" 
+    "${PROJECT_SOURCE_DIR}/benchmarks/*.bench.cpp"
 )
 
 if (CMAKE_SOURCE_DIR STREQUAL CMAKE_CURRENT_SOURCE_DIR)

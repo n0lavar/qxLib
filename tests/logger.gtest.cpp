@@ -16,6 +16,7 @@
 #include <qx/logger/cout_logger_stream.h>
 #include <qx/logger/debugger_logger_stream.h>
 #include <qx/logger/file_logger_stream_fopen.h>
+#include <qx/logger/file_logger_stream_mapping.h>
 #include <qx/logger/file_logger_stream_ofstream.h>
 
 #include <filesystem>
@@ -60,6 +61,7 @@ static_assert(qx::sbo_poly_fittable_types_v<
               qx::cout_logger_stream,
               qx::file_logger_stream_ofstream,
               qx::file_logger_stream_fopen,
+              qx::file_logger_stream_mapping,
               qx::debugger_logger_stream>);
 
 QX_PUSH_SUPPRESS_MSVC_WARNINGS(4866 5233);

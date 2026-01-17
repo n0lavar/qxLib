@@ -13,7 +13,16 @@ outputs:
 runs:
   using: composite
   steps:
-    - name: Install dependencies
+    - name: Install glm
+      shell: bash
+      run: |
+        if [ "$RUNNER_OS" = "Linux" ]; then
+          sudo apt-get install libglm-dev;
+        elif [ "$RUNNER_OS" = "macOS" ]; then
+          brew install glm;
+        fi
+
+    - name: Install gtest
       shell: bash
       # build gtest manually because the apt-get version is built with an old c++ version
       # and fails to compile with -fkeep-inline-functions
@@ -21,20 +30,38 @@ runs:
         if [ "$RUNNER_OS" = "Linux" ]; then
           sudo apt-get remove libgtest-dev
           sudo apt-get install cmake git build-essential
+
+          pushd ..
           git clone https://github.com/google/googletest.git
           cd googletest
           mkdir build && cd build
           cmake .. -DCMAKE_CXX_STANDARD=20 -DCMAKE_CXX_STANDARD_REQUIRED=ON
           make -j$(nproc)
           sudo make install
-
-          sudo apt-get install libglm-dev;
+          popd
         elif [ "$RUNNER_OS" = "macOS" ]; then
           brew install googletest;
-          brew install glm;
         fi
+  
     - name: Install boost
       uses: MarkusJx/install-boost@main
       id: install_boost
       with:
         boost_version: 1.81.0
+
+      # build benchmark manually because the apt-get version is built with an old c++ version
+      # and fails to compile when using some new features
+    - name: Install google benchmark
+      shell: bash
+      run: |
+        sudo apt-get remove libbenchmark-dev
+        sudo apt-get install cmake git build-essential
+
+        pushd ..
+        git clone https://github.com/google/benchmark.git
+        cd benchmark
+        mkdir build && cd build
+        cmake .. -DCMAKE_CXX_STANDARD=20 -DCMAKE_CXX_STANDARD_REQUIRED=ON -DBENCHMARK_ENABLE_GTEST_TESTS=OFF
+        make -j$(nproc)
+        sudo make install
+        popd

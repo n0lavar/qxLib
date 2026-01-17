@@ -9,6 +9,7 @@
 #pragma once
 
 #include <qx/category.h>
+#include <qx/containers/string/string_converters.h>
 #include <qx/internal/perf_scope.h>
 #include <qx/verbosity.h>
 

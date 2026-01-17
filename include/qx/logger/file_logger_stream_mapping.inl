@@ -42,7 +42,7 @@ inline file_logger_stream_mapping::file_logger_stream_mapping(
     m_nSize = static_cast<size_t>(sz.QuadPart);
 #else
     const long ps  = ::sysconf(_SC_PAGESIZE);
-    m_nGranularity = ps > 0 ? static_cast<uint64_t>(ps) : 4096ull;
+    m_nGranularity = ps > 0 ? static_cast<size_t>(ps) : 4096ull;
 
     int flags = O_RDWR | O_CREAT;
     if (streamConfig.eLogFilePolicy == log_file_policy::clear_then_uppend)
@@ -56,7 +56,7 @@ inline file_logger_stream_mapping::file_logger_stream_mapping(
     if (::fstat(m_Fd, &st) != 0)
         return;
 
-    m_nSize = static_cast<uint64_t>(st.st_size);
+    m_nSize = static_cast<size_t>(st.st_size);
 #endif
 
     const size_t nDefaultStartSize = initialMapSize ? convert(initialMapSize).to(units::data::bytes) : m_nGranularity;
@@ -165,7 +165,7 @@ inline void file_logger_stream_mapping::do_flush()
 #endif
 }
 
-inline bool file_logger_stream_mapping::remap_to_capacity(size_t newCap)
+inline bool file_logger_stream_mapping::remap_to_capacity(size_t nNewCapacity)
 {
     if (m_pData)
     {
@@ -187,35 +187,35 @@ inline bool file_logger_stream_mapping::remap_to_capacity(size_t newCap)
 
 #if QX_WIN
     LARGE_INTEGER li {};
-    li.QuadPart = static_cast<LONGLONG>(newCap);
+    li.QuadPart = static_cast<LONGLONG>(nNewCapacity);
     if (!SetFilePointerEx(m_hFile, li, nullptr, FILE_BEGIN))
         return false;
     if (!SetEndOfFile(m_hFile))
         return false;
 #else
-    if (::ftruncate(m_Fd, static_cast<off_t>(newCap)) != 0)
+    if (::ftruncate(m_Fd, static_cast<off_t>(nNewCapacity)) != 0)
         return false;
 #endif
 
 #if QX_WIN
-    DWORD hi = static_cast<DWORD>((newCap >> 32) & 0xFFFFFFFFu);
-    DWORD lo = static_cast<DWORD>(newCap & 0xFFFFFFFFu);
+    DWORD hi = static_cast<DWORD>((nNewCapacity >> 32) & 0xFFFFFFFFu);
+    DWORD lo = static_cast<DWORD>(nNewCapacity & 0xFFFFFFFFu);
 
     m_hMap = CreateFileMappingW(m_hFile, nullptr, PAGE_READWRITE, hi, lo, nullptr);
     if (!m_hMap)
         return false;
 
-    void* p = MapViewOfFile(m_hMap, FILE_MAP_ALL_ACCESS, 0, 0, newCap);
+    void* p = MapViewOfFile(m_hMap, FILE_MAP_ALL_ACCESS, 0, 0, nNewCapacity);
     if (!p)
         return false;
 #else
-    void* p = ::mmap(nullptr, static_cast<size_t>(newCap), PROT_READ | PROT_WRITE, MAP_SHARED, m_Fd, 0);
+    void* p = ::mmap(nullptr, static_cast<size_t>(nNewCapacity), PROT_READ | PROT_WRITE, MAP_SHARED, m_Fd, 0);
     if (p == MAP_FAILED)
         return false;
 #endif
 
     m_pData     = static_cast<std::byte*>(p);
-    m_nCapacity = newCap;
+    m_nCapacity = nNewCapacity;
 
     return true;
 }
@@ -235,13 +235,13 @@ inline bool file_logger_stream_mapping::ensure_capacity(size_t nAdditionalBytes)
     return remap_to_capacity(nNewCapacity);
 }
 
-inline size_t file_logger_stream_mapping::align_up_u64(size_t v, size_t a)
+inline size_t file_logger_stream_mapping::align_up_u64(size_t nValue, size_t nAlignment)
 {
-    if (a == 0)
-        return v;
+    if (nAlignment == 0)
+        return nValue;
 
-    size_t r = v % a;
-    return r ? (v + (a - r)) : v;
+    const size_t nResult = nValue % nAlignment;
+    return nResult ? (nValue + (nAlignment - nResult)) : nValue;
 }
 
 } // namespace qx

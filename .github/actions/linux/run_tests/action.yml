@@ -7,4 +7,4 @@ runs:
       shell: bash
       working-directory: build
       run: |
-        ctest --output-on-failure -j $(nproc) -V
+        ctest --output-on-failure -j $(nproc)

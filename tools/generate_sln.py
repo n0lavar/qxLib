@@ -47,7 +47,7 @@ def create_parser():
     parser.add_argument("--build_folder", default="../build")
     parser.add_argument("--cmake_generator", default="Visual Studio 17 2022")
     parser.add_argument("--arch", default="x64")
-    parser.add_argument("--cmake_flags", default="-DGENERATE_TESTS=1 -DTEST_DEBUG_BREAKS=1")
+    parser.add_argument("--cmake_flags", default="-DGENERATE_TESTS=1 -DTEST_DEBUG_BREAKS=1 -DGENERATE_BENCHMARKS=1")
     parser.add_argument("--cpp_compiler_flags", default="")
     return parser
 
