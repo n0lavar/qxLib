@@ -113,7 +113,7 @@ $(function() {
 <div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    m_nSize = <span class="keyword">static_cast&lt;</span><span class="keywordtype">size_t</span><span class="keyword">&gt;</span>(sz.QuadPart);</div>
 <div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="preprocessor">#else</span></div>
 <div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    <span class="keyword">const</span> <span class="keywordtype">long</span> ps  = ::sysconf(_SC_PAGESIZE);</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    m_nGranularity = ps &gt; 0 ? <span class="keyword">static_cast&lt;</span>uint64_t<span class="keyword">&gt;</span>(ps) : 4096ull;</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    m_nGranularity = ps &gt; 0 ? <span class="keyword">static_cast&lt;</span><span class="keywordtype">size_t</span><span class="keyword">&gt;</span>(ps) : 4096ull;</div>
 <div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160; </div>
 <div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    <span class="keywordtype">int</span> <a class="code" href="classqx_1_1flags.html">flags</a> = O_RDWR | O_CREAT;</div>
 <div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    <span class="keywordflow">if</span> (streamConfig.eLogFilePolicy == log_file_policy::clear_then_uppend)</div>
@@ -127,7 +127,7 @@ $(function() {
 <div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    <span class="keywordflow">if</span> (::fstat(m_Fd, &amp;st) != 0)</div>
 <div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;        <span class="keywordflow">return</span>;</div>
 <div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160; </div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    m_nSize = <span class="keyword">static_cast&lt;</span>uint64_t<span class="keyword">&gt;</span>(st.st_size);</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    m_nSize = <span class="keyword">static_cast&lt;</span><span class="keywordtype">size_t</span><span class="keyword">&gt;</span>(st.st_size);</div>
 <div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;<span class="preprocessor">#endif</span></div>
 <div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160; </div>
 <div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    <span class="keyword">const</span> <span class="keywordtype">size_t</span> nDefaultStartSize = initialMapSize ? <a class="code" href="classqx_1_1convert.html">convert</a>(initialMapSize).to(units::data::bytes) : m_nGranularity;</div>
@@ -236,7 +236,7 @@ $(function() {
 <div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;<span class="preprocessor">#endif</span></div>
 <div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;}</div>
 <div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160; </div>
-<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;<span class="keyword">inline</span> <span class="keywordtype">bool</span> file_logger_stream_mapping::remap_to_capacity(<span class="keywordtype">size_t</span> newCap)</div>
+<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;<span class="keyword">inline</span> <span class="keywordtype">bool</span> file_logger_stream_mapping::remap_to_capacity(<span class="keywordtype">size_t</span> nNewCapacity)</div>
 <div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;{</div>
 <div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;    <span class="keywordflow">if</span> (m_pData)</div>
 <div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;    {</div>
@@ -258,25 +258,25 @@ $(function() {
 <div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160; </div>
 <div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;<span class="preprocessor">#if QX_WIN</span></div>
 <div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;    LARGE_INTEGER li {};</div>
-<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;    li.QuadPart = <span class="keyword">static_cast&lt;</span>LONGLONG<span class="keyword">&gt;</span>(newCap);</div>
+<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;    li.QuadPart = <span class="keyword">static_cast&lt;</span>LONGLONG<span class="keyword">&gt;</span>(nNewCapacity);</div>
 <div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;    <span class="keywordflow">if</span> (!SetFilePointerEx(m_hFile, li, <span class="keyword">nullptr</span>, FILE_BEGIN))</div>
 <div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;        <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
 <div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;    <span class="keywordflow">if</span> (!SetEndOfFile(m_hFile))</div>
 <div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;        <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
 <div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;<span class="preprocessor">#else</span></div>
-<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;    <span class="keywordflow">if</span> (::ftruncate(m_Fd, <span class="keyword">static_cast&lt;</span>off_t<span class="keyword">&gt;</span>(newCap)) != 0)</div>
+<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;    <span class="keywordflow">if</span> (::ftruncate(m_Fd, <span class="keyword">static_cast&lt;</span>off_t<span class="keyword">&gt;</span>(nNewCapacity)) != 0)</div>
 <div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;        <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
 <div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;<span class="preprocessor">#endif</span></div>
 <div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160; </div>
 <div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160;<span class="preprocessor">#if QX_WIN</span></div>
-<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160;    DWORD hi = <span class="keyword">static_cast&lt;</span>DWORD<span class="keyword">&gt;</span>((newCap &gt;&gt; 32) &amp; 0xFFFFFFFFu);</div>
-<div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160;    DWORD lo = <span class="keyword">static_cast&lt;</span>DWORD<span class="keyword">&gt;</span>(newCap &amp; 0xFFFFFFFFu);</div>
+<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160;    DWORD hi = <span class="keyword">static_cast&lt;</span>DWORD<span class="keyword">&gt;</span>((nNewCapacity &gt;&gt; 32) &amp; 0xFFFFFFFFu);</div>
+<div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160;    DWORD lo = <span class="keyword">static_cast&lt;</span>DWORD<span class="keyword">&gt;</span>(nNewCapacity &amp; 0xFFFFFFFFu);</div>
 <div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160; </div>
 <div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;    m_hMap = CreateFileMappingW(m_hFile, <span class="keyword">nullptr</span>, PAGE_READWRITE, hi, lo, <span class="keyword">nullptr</span>);</div>
 <div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;    <span class="keywordflow">if</span> (!m_hMap)</div>
 <div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160;        <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
 <div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160; </div>
-<div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160;    <span class="keywordtype">void</span>* p = MapViewOfFile(m_hMap, FILE_MAP_ALL_ACCESS, 0, 0, newCap);</div>
+<div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160;    <span class="keywordtype">void</span>* p = MapViewOfFile(m_hMap, FILE_MAP_ALL_ACCESS, 0, 0, nNewCapacity);</div>
 <div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160;    <span class="keywordflow">if</span> (!p)</div>
 <div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160;        <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
 <div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160;<span class="preprocessor">#else</span></div>
@@ -286,7 +286,7 @@ $(function() {
 <div class="line"><a name="l00215"></a><span class="lineno">  215</span>&#160;<span class="preprocessor">#endif</span></div>
 <div class="line"><a name="l00216"></a><span class="lineno">  216</span>&#160; </div>
 <div class="line"><a name="l00217"></a><span class="lineno">  217</span>&#160;    m_pData     = <span class="keyword">static_cast&lt;</span>std::byte*<span class="keyword">&gt;</span>(p);</div>
-<div class="line"><a name="l00218"></a><span class="lineno">  218</span>&#160;    m_nCapacity = newCap;</div>
+<div class="line"><a name="l00218"></a><span class="lineno">  218</span>&#160;    m_nCapacity = nNewCapacity;</div>
 <div class="line"><a name="l00219"></a><span class="lineno">  219</span>&#160; </div>
 <div class="line"><a name="l00220"></a><span class="lineno">  220</span>&#160;    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
 <div class="line"><a name="l00221"></a><span class="lineno">  221</span>&#160;}</div>
@@ -306,13 +306,13 @@ $(function() {
 <div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160;    <span class="keywordflow">return</span> remap_to_capacity(nNewCapacity);</div>
 <div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160;}</div>
 <div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160; </div>
-<div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160;<span class="keyword">inline</span> <span class="keywordtype">size_t</span> file_logger_stream_mapping::align_up_u64(<span class="keywordtype">size_t</span> v, <span class="keywordtype">size_t</span> a)</div>
+<div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160;<span class="keyword">inline</span> <span class="keywordtype">size_t</span> file_logger_stream_mapping::align_up_u64(<span class="keywordtype">size_t</span> nValue, <span class="keywordtype">size_t</span> nAlignment)</div>
 <div class="line"><a name="l00239"></a><span class="lineno">  239</span>&#160;{</div>
-<div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160;    <span class="keywordflow">if</span> (a == 0)</div>
-<div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160;        <span class="keywordflow">return</span> v;</div>
+<div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160;    <span class="keywordflow">if</span> (nAlignment == 0)</div>
+<div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160;        <span class="keywordflow">return</span> nValue;</div>
 <div class="line"><a name="l00242"></a><span class="lineno">  242</span>&#160; </div>
-<div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160;    <span class="keywordtype">size_t</span> r = v % a;</div>
-<div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160;    <span class="keywordflow">return</span> r ? (v + (a - r)) : v;</div>
+<div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160;    <span class="keyword">const</span> <span class="keywordtype">size_t</span> nResult = nValue % nAlignment;</div>
+<div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160;    <span class="keywordflow">return</span> nResult ? (nValue + (nAlignment - nResult)) : nValue;</div>
 <div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160;}</div>
 <div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160; </div>
 <div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160;} <span class="comment">// namespace qx</span></div>
@@ -320,7 +320,7 @@ $(function() {
 <div class="ttc" id="aclassqx_1_1base__file__logger__stream_html_a3653fbef4fe90d78a39dd87f538e1b2e"><div class="ttname"><a href="classqx_1_1base__file__logger__stream.html#a3653fbef4fe90d78a39dd87f538e1b2e">qx::base_file_logger_stream::create_folder_and_get_log_file_path</a></div><div class="ttdeci">static std::filesystem::path create_folder_and_get_log_file_path(log_file_policy eLogFilePolicy, string_view svFileName)</div><div class="ttdoc">Create a folder (if required) and get log file path.</div><div class="ttdef"><b>Definition:</b> <a href="base__file__logger__stream_8inl_source.html#l00040">base_file_logger_stream.inl:40</a></div></div>
 <div class="ttc" id="aclassqx_1_1category_html"><div class="ttname"><a href="classqx_1_1category.html">qx::category</a></div><div class="ttdoc">A category is a class that identifies a particular piece of code. This code can be located in differe...</div><div class="ttdef"><b>Definition:</b> <a href="category_8h_source.html#l00058">category.h:59</a></div></div>
 <div class="ttc" id="aclassqx_1_1convert_html"><div class="ttname"><a href="classqx_1_1convert.html">qx::convert</a></div><div class="ttdoc">A conversion class.</div><div class="ttdef"><b>Definition:</b> <a href="base_8h_source.html#l00077">base.h:77</a></div></div>
-<div class="ttc" id="aclassqx_1_1file__logger__stream__mapping_html"><div class="ttname"><a href="classqx_1_1file__logger__stream__mapping.html">qx::file_logger_stream_mapping</a></div><div class="ttdoc">Memory-mapped file based logger stream (fast append)</div><div class="ttdef"><b>Definition:</b> <a href="file__logger__stream__mapping_8h_source.html#l00033">file_logger_stream_mapping.h:34</a></div></div>
+<div class="ttc" id="aclassqx_1_1file__logger__stream__mapping_html"><div class="ttname"><a href="classqx_1_1file__logger__stream__mapping.html">qx::file_logger_stream_mapping</a></div><div class="ttdoc">High-performance file logger based on memory-mapped I/O.</div><div class="ttdef"><b>Definition:</b> <a href="file__logger__stream__mapping_8h_source.html#l00038">file_logger_stream_mapping.h:39</a></div></div>
 <div class="ttc" id="aclassqx_1_1file__logger__stream__mapping_html_a04d7eb9b1256f19594541594d11d94e4"><div class="ttname"><a href="classqx_1_1file__logger__stream__mapping.html#a04d7eb9b1256f19594541594d11d94e4">qx::file_logger_stream_mapping::do_log</a></div><div class="ttdeci">virtual void do_log(const category &amp;category, verbosity eVerbosity, string_view svMessage) override</div><div class="ttdoc">Proceed stream logging.</div><div class="ttdef"><b>Definition:</b> <a href="file__logger__stream__mapping_8inl_source.html#l00140">file_logger_stream_mapping.inl:140</a></div></div>
 <div class="ttc" id="aclassqx_1_1file__logger__stream__mapping_html_a691fb12240c1e9a808732f0820a8bf05"><div class="ttname"><a href="classqx_1_1file__logger__stream__mapping.html#a691fb12240c1e9a808732f0820a8bf05">qx::file_logger_stream_mapping::file_logger_stream_mapping</a></div><div class="ttdeci">file_logger_stream_mapping(const config &amp;streamConfig=config(), unit&lt; size_t, units::data &gt; initialMapSize={ 1, units::data::mebibytes })</div><div class="ttdoc">file_logger_stream_mapping object constructor</div><div class="ttdef"><b>Definition:</b> <a href="file__logger__stream__mapping_8inl_source.html#l00013">file_logger_stream_mapping.inl:13</a></div></div>
 <div class="ttc" id="aclassqx_1_1file__logger__stream__mapping_html_ab693295cb7495035170347d7fcad64b3"><div class="ttname"><a href="classqx_1_1file__logger__stream__mapping.html#ab693295cb7495035170347d7fcad64b3">qx::file_logger_stream_mapping::do_flush</a></div><div class="ttdeci">virtual void do_flush() override</div><div class="ttdoc">Flush the stream.</div><div class="ttdef"><b>Definition:</b> <a href="file__logger__stream__mapping_8inl_source.html#l00150">file_logger_stream_mapping.inl:150</a></div></div>

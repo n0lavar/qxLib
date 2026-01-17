@@ -73,7 +73,7 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p>Memory-mapped file based logger stream (fast append)  
+<p>High-performance file logger based on memory-mapped I/O.  
  <a href="classqx_1_1file__logger__stream__mapping.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="file__logger__stream__mapping_8h_source.html">file_logger_stream_mapping.h</a>&gt;</code></p>
@@ -91,7 +91,7 @@ Inheritance diagram for qx::file_logger_stream_mapping:</div>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a691fb12240c1e9a808732f0820a8bf05"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1file__logger__stream__mapping.html#a691fb12240c1e9a808732f0820a8bf05">file_logger_stream_mapping</a> (const <a class="el" href="structqx_1_1base__file__logger__stream_1_1config.html">config</a> &amp;streamConfig=<a class="el" href="structqx_1_1base__file__logger__stream_1_1config.html">config</a>(), <a class="el" href="structqx_1_1unit.html">unit</a>&lt; size_t, units::data &gt; initialMapSize={ 1, units::data::mebibytes })</td></tr>
-<tr class="memdesc:a691fb12240c1e9a808732f0820a8bf05"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classqx_1_1file__logger__stream__mapping.html" title="Memory-mapped file based logger stream (fast append)">file_logger_stream_mapping</a> object constructor  <a href="classqx_1_1file__logger__stream__mapping.html#a691fb12240c1e9a808732f0820a8bf05">More...</a><br /></td></tr>
+<tr class="memdesc:a691fb12240c1e9a808732f0820a8bf05"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classqx_1_1file__logger__stream__mapping.html" title="High-performance file logger based on memory-mapped I/O.">file_logger_stream_mapping</a> object constructor  <a href="classqx_1_1file__logger__stream__mapping.html#a691fb12240c1e9a808732f0820a8bf05">More...</a><br /></td></tr>
 <tr class="separator:a691fb12240c1e9a808732f0820a8bf05"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a04d7eb9b1256f19594541594d11d94e4"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1file__logger__stream__mapping.html#a04d7eb9b1256f19594541594d11d94e4">do_log</a> (const <a class="el" href="classqx_1_1category.html">category</a> &amp;<a class="el" href="classqx_1_1category.html">category</a>, verbosity eVerbosity, string_view svMessage) override</td></tr>
 <tr class="memdesc:a04d7eb9b1256f19594541594d11d94e4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Proceed stream logging.  <a href="classqx_1_1file__logger__stream__mapping.html#a04d7eb9b1256f19594541594d11d94e4">More...</a><br /></td></tr>
@@ -124,11 +124,11 @@ Additional Inherited Members</h2></td></tr>
 <tr class="separator:a3653fbef4fe90d78a39dd87f538e1b2e inherit pro_static_methods_classqx_1_1base__file__logger__stream"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Memory-mapped file based logger stream (fast append) </p>
-<dl class="section author"><dt>Author</dt><dd>Khrapov </dd></dl>
+<div class="textblock"><p>High-performance file logger based on memory-mapped I/O. </p>
+<p>This logger implementation writes log data directly into a memory-mapped file region (mmap / CreateFileMapping). Instead of using traditional buffered I/O (fopen / WriteFile), the file is mapped into the process address space and written via simple memory copies. </p><dl class="section author"><dt>Author</dt><dd>Khrapov </dd></dl>
 <dl class="section date"><dt>Date</dt><dd>15.01.2026 </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="file__logger__stream__mapping_8h_source.html#l00033">33</a> of file <a class="el" href="file__logger__stream__mapping_8h_source.html">file_logger_stream_mapping.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="file__logger__stream__mapping_8h_source.html#l00038">38</a> of file <a class="el" href="file__logger__stream__mapping_8h_source.html">file_logger_stream_mapping.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a691fb12240c1e9a808732f0820a8bf05"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a691fb12240c1e9a808732f0820a8bf05">&#9670;&nbsp;</a></span>file_logger_stream_mapping()</h2>
@@ -164,7 +164,7 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p><a class="el" href="classqx_1_1file__logger__stream__mapping.html" title="Memory-mapped file based logger stream (fast append)">file_logger_stream_mapping</a> object constructor </p>
+<p><a class="el" href="classqx_1_1file__logger__stream__mapping.html" title="High-performance file logger based on memory-mapped I/O.">file_logger_stream_mapping</a> object constructor </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">streamConfig</td><td>- file logger configuration </td></tr>
