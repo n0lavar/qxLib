@@ -18,6 +18,11 @@
 #include <shared_mutex>
 
 /**
+    @page logger_readme logger
+    @include README.md
+*/
+
+/**
     @brief Log with category
     @param category   - category to be used to manage output
     @param eVerbosity - message verbosity
