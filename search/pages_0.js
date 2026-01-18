@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['todo_20list_1730',['Todo List',['../todo.html',1,'']]]
+  ['qx_3a_3alogger_1731',['qx::logger',['../md_include_qx_logger__r_e_a_d_m_e.html',1,'']]]
 ];
