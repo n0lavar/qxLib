@@ -135,6 +135,7 @@ protected:
     {
         std::filesystem::remove(m_sLogFilePath.data());
         m_pLogger = std::make_unique<qx::logger>();
+        m_pLogger->reset();
 
         // qx::cout_logger_stream consoleLoggerStream;
         qx::fwrite_logger_stream consoleLoggerStream;

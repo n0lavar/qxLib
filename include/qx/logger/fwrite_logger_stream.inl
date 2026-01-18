@@ -17,8 +17,8 @@ inline fwrite_logger_stream::fwrite_logger_stream(const config& streamConfig)
 
 inline void fwrite_logger_stream::do_flush()
 {
-    std::fflush(stdout);
-    std::fflush(stderr);
+    fflush(stdout);
+    fflush(stderr);
 }
 
 inline void fwrite_logger_stream::cout_colorized(verbosity eVerbosity, string_view svMessage, const color& rangeColor)
@@ -26,14 +26,14 @@ inline void fwrite_logger_stream::cout_colorized(verbosity eVerbosity, string_vi
     FILE* output = eVerbosity < verbosity::error ? stdout : stderr;
 
     terminal_color::font(rangeColor).write(output);
-    std::fwrite(svMessage.data(), sizeof(char_type), svMessage.size(), output);
+    fwrite(svMessage.data(), sizeof(char_type), svMessage.size(), output);
     terminal_color::reset().write(output);
 }
 
 inline void fwrite_logger_stream::cout_common(verbosity eVerbosity, string_view svMessage)
 {
     FILE* output = eVerbosity < verbosity::error ? stdout : stderr;
-    std::fwrite(svMessage.data(), sizeof(char_type), svMessage.size(), output);
+    fwrite(svMessage.data(), sizeof(char_type), svMessage.size(), output);
 }
 
 } // namespace qx

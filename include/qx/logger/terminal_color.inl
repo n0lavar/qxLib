@@ -58,7 +58,7 @@ constexpr terminal_color terminal_color::reset() noexcept
     return terminal_color { type::reset };
 }
 
-void terminal_color::write(FILE* pStream) const
+inline void terminal_color::write(FILE* pStream) const
 {
     switch (m_eType)
     {

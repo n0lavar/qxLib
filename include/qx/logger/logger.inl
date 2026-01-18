@@ -10,6 +10,11 @@
 namespace qx
 {
 
+inline logger::logger()
+{
+    add_stream(fwrite_logger_stream());
+}
+
 template<sbo_poly_assignable_c<base_logger_stream> stream_t>
 inline void logger::add_stream(stream_t stream) noexcept
 {

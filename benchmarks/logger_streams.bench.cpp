@@ -157,13 +157,11 @@ template<class setup_function_t>
 class logger_stream_fixture : public benchmark::Fixture
 {
 public:
-    size_t m_nStrings = 0;
-
     virtual void SetUp(::benchmark::State& state) override
     {
-        m_nStrings = state.range(0);
+        m_RandomStrings = generate_strings(state.range(0), 0);
 
-        m_RandomStrings = generate_strings(m_nStrings, 0);
+        qx::logger_singleton::get_instance().get_logger().reset();
         setup_function_t::set_up();
 
         // temporarily disable console output so it doesn't interfere with the benchmark results
@@ -183,8 +181,6 @@ public:
 
         fflush(stdout);
         fflush(stderr);
-        std::cout.flush();
-        std::cerr.flush();
 
         __dup2(__fileno(m_pOldStdout), __fileno(stdout));
         fclose(m_pOldStdout);

@@ -9,7 +9,7 @@
 #pragma once
 
 #include <qx/containers/string/string_converters.h>
-#include <qx/logger/base_logger_stream.h>
+#include <qx/logger/fwrite_logger_stream.h>
 #include <qx/logger/time_string.h>
 #include <qx/macros/details/macro_user_message.h>
 #include <qx/patterns/singleton.h>
@@ -83,6 +83,7 @@ public:
     using logger_string_pool = string_pool<>;
 
 public:
+    logger();
     virtual ~logger() noexcept = default;
 
     /**
