@@ -18,6 +18,7 @@
 #include <qx/logger/file_logger_stream_fopen.h>
 #include <qx/logger/file_logger_stream_mapping.h>
 #include <qx/logger/file_logger_stream_ofstream.h>
+#include <qx/logger/fwrite_logger_stream.h>
 
 #include <filesystem>
 #include <regex>
@@ -59,6 +60,7 @@ static_assert(!qx::log_acceptable_args_c<int, float, const forbidden_type[10]>);
 static_assert(qx::sbo_poly_fittable_types_v<
               qx::logger::logger_sbo,
               qx::cout_logger_stream,
+              qx::fwrite_logger_stream,
               qx::file_logger_stream_ofstream,
               qx::file_logger_stream_fopen,
               qx::file_logger_stream_mapping,
@@ -134,7 +136,8 @@ protected:
         std::filesystem::remove(m_sLogFilePath.data());
         m_pLogger = std::make_unique<qx::logger>();
 
-        qx::cout_logger_stream consoleLoggerStream;
+        // qx::cout_logger_stream consoleLoggerStream;
+        qx::fwrite_logger_stream consoleLoggerStream;
         //consoleLoggerStream.deregister_unit(qx::base_logger_stream::svDefaultUnit);
         //consoleLoggerStream.register_unit(traits_t::GetUnit(), { qx::verbosity::log });
 

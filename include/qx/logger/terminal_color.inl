@@ -58,12 +58,22 @@ constexpr terminal_color terminal_color::reset() noexcept
     return terminal_color { type::reset };
 }
 
-constexpr terminal_color::terminal_color(const color& inColor, type eType) noexcept : m_Color(inColor), m_eType(eType)
+void terminal_color::write(FILE* pStream) const
 {
-}
+    switch (m_eType)
+    {
+    case terminal_color::type::font:
+        std::fprintf(pStream, "\033[38;2;%d;%d;%dm", m_Color.r_dec(), m_Color.g_dec(), m_Color.b_dec());
+        break;
 
-constexpr terminal_color::terminal_color(type eType) noexcept : m_eType(eType)
-{
+    case terminal_color::type::back:
+        std::fprintf(pStream, "\033[48;2;%d;%d;%dm", m_Color.r_dec(), m_Color.g_dec(), m_Color.b_dec());
+        break;
+
+    case terminal_color::type::reset:
+        std::fprintf(pStream, "\033[0m");
+        break;
+    }
 }
 
 inline void terminal_color::test_colors()
@@ -356,6 +366,14 @@ inline void terminal_color::test_colors()
     cout << font(color::black()) << back(color::yellow_green()) << "yellow_green" << reset() << endl;
 
     cout << reset();
+}
+
+constexpr terminal_color::terminal_color(const color& inColor, type eType) noexcept : m_Color(inColor), m_eType(eType)
+{
+}
+
+constexpr terminal_color::terminal_color(type eType) noexcept : m_eType(eType)
+{
 }
 
 } // namespace qx

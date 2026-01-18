@@ -17,26 +17,6 @@
 
 #include <shared_mutex>
 
-#ifndef _QX_LOG_C
-    // __FUNCTION__ isn't a char array on linux, so we need to convert it
-    #define _QX_LOG_C(verbosityCheckKeyword, category, eVerbosity, ...)                \
-        do                                                                             \
-        {                                                                              \
-            verbosityCheckKeyword const auto& _category = category;                    \
-            if verbosityCheckKeyword (eVerbosity >= _category.get_verbosity())         \
-            {                                                                          \
-                qx::logger& _logger = qx::get_logger();                                \
-                _logger.log(                                                           \
-                    _category,                                                         \
-                    eVerbosity,                                                        \
-                    QX_SHORT_FILE,                                                     \
-                    qx::convert_string_literal<qx::char_type, __FUNCTION__>(),         \
-                    QX_LINE,                                                           \
-                    _QX_MACRO_USER_MESSAGE(_logger._get_string_pool(), __VA_ARGS__)); \
-            }                                                                          \
-        } while (false)
-#endif
-
 /**
     @brief Log with category
     @param category   - category to be used to manage output
@@ -99,7 +79,7 @@ public:
         format_function formatFunction;
     };
 
-    using category_data_map   = std::unordered_map<string_view, category_data>;
+    using category_data_map  = std::unordered_map<string_view, category_data>;
     using logger_string_pool = string_pool<>;
 
 public:
@@ -138,11 +118,11 @@ public:
         @param   message    - message string
     **/
     virtual void log(
-        const category&           category,
-        verbosity                 eVerbosity,
-        string_view               svFile,
-        string_view               svFunction,
-        int                       nLine,
+        const category&          category,
+        verbosity                eVerbosity,
+        string_view              svFile,
+        string_view              svFunction,
+        int                      nLine,
         logger_string_pool::item message);
 
     /**
@@ -220,5 +200,25 @@ inline logger& get_logger()
 }
 
 } // namespace qx
+
+#ifndef _QX_LOG_C
+// __FUNCTION__ isn't a char array on linux, so we need to convert it
+    #define _QX_LOG_C(verbosityCheckKeyword, category, eVerbosity, ...)               \
+        do                                                                            \
+        {                                                                             \
+            verbosityCheckKeyword const auto& _category = category;                   \
+            if verbosityCheckKeyword (eVerbosity >= _category.get_verbosity())        \
+            {                                                                         \
+                qx::logger& _logger = qx::get_logger();                               \
+                _logger.log(                                                          \
+                    _category,                                                        \
+                    eVerbosity,                                                       \
+                    QX_SHORT_FILE,                                                    \
+                    qx::convert_string_literal<qx::char_type, __FUNCTION__>(),        \
+                    QX_LINE,                                                          \
+                    _QX_MACRO_USER_MESSAGE(_logger._get_string_pool(), __VA_ARGS__)); \
+            }                                                                         \
+        } while (false)
+#endif
 
 #include <qx/logger/logger.inl>

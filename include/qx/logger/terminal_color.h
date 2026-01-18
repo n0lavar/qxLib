@@ -11,6 +11,7 @@
 #include <qx/containers/string/string.h>
 #include <qx/render/color.h>
 
+#include <cstdio>
 #include <iostream>
 
 namespace qx
@@ -76,6 +77,12 @@ public:
         @retval  - terminal_color instance to pass to the ostream
     **/
     static constexpr terminal_color reset() noexcept;
+
+    /**
+        @brief Write terminal color to the specified stream
+        @param pStream - stream (std::stdout or std::stderr)
+    **/
+    void write(FILE* pStream) const;
 
     /**
         @brief Output colors available in qx::color to test if terminal color work

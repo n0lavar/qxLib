@@ -14,8 +14,24 @@
 #include <qx/logger/file_logger_stream_fopen.h>
 #include <qx/logger/file_logger_stream_mapping.h>
 #include <qx/logger/file_logger_stream_ofstream.h>
+#include <qx/logger/fwrite_logger_stream.h>
 #include <qx/logger/logger.h>
 
+#if QX_WIN
+    #include <io.h>
+    #define __dup    _dup
+    #define __dup2   _dup2
+    #define __fileno _fileno
+    #define __fdopen _fdopen
+#else
+    #include <unistd.h>
+    #define __dup    dup
+    #define __dup2   dup2
+    #define __fileno fileno
+    #define __fdopen fdopen
+#endif
+
+#include <cstdio>
 #include <random>
 
 BENCHMARK_MAIN();
@@ -111,6 +127,30 @@ struct mapping
     }
 };
 
+struct cout
+{
+    static void set_up()
+    {
+        qx::logger_singleton::get_instance().get_logger().add_stream(qx::cout_logger_stream());
+    }
+};
+
+struct fwrite
+{
+    static void set_up()
+    {
+        qx::logger_singleton::get_instance().get_logger().add_stream(qx::fwrite_logger_stream());
+    }
+};
+
+struct debugger
+{
+    static void set_up()
+    {
+        qx::logger_singleton::get_instance().get_logger().add_stream(qx::debugger_logger_stream());
+    }
+};
+
 } // namespace traits
 
 template<class setup_function_t>
@@ -125,63 +165,106 @@ public:
 
         m_RandomStrings = generate_strings(m_nStrings, 0);
         setup_function_t::set_up();
+
+        // temporarily disable console output so it doesn't interfere with the benchmark results
+        m_pOldStdout = __fdopen(__dup(__fileno(stdout)), "w");
+        m_pOldStderr = __fdopen(__dup(__fileno(stderr)), "w");
+
+        QX_DISABLE_MSVC_WARNINGS(4996);
+        freopen("NUL", "w", stdout);
+        freopen("NUL", "w", stderr);
+        QX_RESTORE_MSVC_WARNINGS(4996);
     }
 
     virtual void TearDown(::benchmark::State& state) override
     {
         qx::logger_singleton::get_instance().get_logger().reset();
         std::filesystem::remove((qx::string(k_svLogFileName) + QXT(".log")).data());
+
+        fflush(stdout);
+        fflush(stderr);
+        std::cout.flush();
+        std::cerr.flush();
+
+        __dup2(__fileno(m_pOldStdout), __fileno(stdout));
+        fclose(m_pOldStdout);
+        m_pOldStdout = nullptr;
+
+        __dup2(__fileno(m_pOldStderr), __fileno(stderr));
+        fclose(m_pOldStderr);
+        m_pOldStderr = nullptr;
     }
 
 protected:
     std::vector<qx::string> m_RandomStrings;
+
+    FILE* m_pOldStdout = nullptr;
+    FILE* m_pOldStderr = nullptr;
 };
 
-BENCHMARK_TEMPLATE_METHOD_F(logger_stream_fixture, Test)(benchmark::State& st)
+BENCHMARK_TEMPLATE_METHOD_F(logger_stream_fixture, bench)(benchmark::State& st)
 {
     for (auto _ : st)
         for (qx::string_view svMessage : this->m_RandomStrings)
             QX_LOG(qx::verbosity::log, svMessage);
 }
 
-BENCHMARK_TEMPLATE_INSTANTIATE_F(logger_stream_fixture, Test, traits::ostream_default_buffer)->Arg(1000);
-BENCHMARK_TEMPLATE_INSTANTIATE_F(logger_stream_fixture, Test, traits::ostream)->Arg(1000);
-BENCHMARK_TEMPLATE_INSTANTIATE_F(logger_stream_fixture, Test, traits::fopen_default_buffer)->Arg(1000);
-BENCHMARK_TEMPLATE_INSTANTIATE_F(logger_stream_fixture, Test, traits::fopen)->Arg(1000);
-BENCHMARK_TEMPLATE_INSTANTIATE_F(logger_stream_fixture, Test, traits::mapping_default_initial_size)->Arg(1000);
-BENCHMARK_TEMPLATE_INSTANTIATE_F(logger_stream_fixture, Test, traits::mapping)->Arg(1000);
+BENCHMARK_TEMPLATE_INSTANTIATE_F(logger_stream_fixture, bench, traits::debugger)->Arg(1000);
+BENCHMARK_TEMPLATE_INSTANTIATE_F(logger_stream_fixture, bench, traits::cout)->Arg(1000);
+BENCHMARK_TEMPLATE_INSTANTIATE_F(logger_stream_fixture, bench, traits::fwrite)->Arg(1000);
+BENCHMARK_TEMPLATE_INSTANTIATE_F(logger_stream_fixture, bench, traits::ostream_default_buffer)->Arg(1000);
+BENCHMARK_TEMPLATE_INSTANTIATE_F(logger_stream_fixture, bench, traits::ostream)->Arg(1000);
+BENCHMARK_TEMPLATE_INSTANTIATE_F(logger_stream_fixture, bench, traits::fopen_default_buffer)->Arg(1000);
+BENCHMARK_TEMPLATE_INSTANTIATE_F(logger_stream_fixture, bench, traits::fopen)->Arg(1000);
+BENCHMARK_TEMPLATE_INSTANTIATE_F(logger_stream_fixture, bench, traits::mapping_default_initial_size)->Arg(1000);
+BENCHMARK_TEMPLATE_INSTANTIATE_F(logger_stream_fixture, bench, traits::mapping)->Arg(1000);
 
-BENCHMARK_TEMPLATE_INSTANTIATE_F(logger_stream_fixture, Test, traits::ostream_default_buffer)->Arg(5000);
-BENCHMARK_TEMPLATE_INSTANTIATE_F(logger_stream_fixture, Test, traits::ostream)->Arg(5000);
-BENCHMARK_TEMPLATE_INSTANTIATE_F(logger_stream_fixture, Test, traits::fopen_default_buffer)->Arg(5000);
-BENCHMARK_TEMPLATE_INSTANTIATE_F(logger_stream_fixture, Test, traits::fopen)->Arg(5000);
-BENCHMARK_TEMPLATE_INSTANTIATE_F(logger_stream_fixture, Test, traits::mapping_default_initial_size)->Arg(5000);
-BENCHMARK_TEMPLATE_INSTANTIATE_F(logger_stream_fixture, Test, traits::mapping)->Arg(5000);
+BENCHMARK_TEMPLATE_INSTANTIATE_F(logger_stream_fixture, bench, traits::debugger)->Arg(5000);
+BENCHMARK_TEMPLATE_INSTANTIATE_F(logger_stream_fixture, bench, traits::cout)->Arg(5000);
+BENCHMARK_TEMPLATE_INSTANTIATE_F(logger_stream_fixture, bench, traits::fwrite)->Arg(5000);
+BENCHMARK_TEMPLATE_INSTANTIATE_F(logger_stream_fixture, bench, traits::ostream_default_buffer)->Arg(5000);
+BENCHMARK_TEMPLATE_INSTANTIATE_F(logger_stream_fixture, bench, traits::ostream)->Arg(5000);
+BENCHMARK_TEMPLATE_INSTANTIATE_F(logger_stream_fixture, bench, traits::fopen_default_buffer)->Arg(5000);
+BENCHMARK_TEMPLATE_INSTANTIATE_F(logger_stream_fixture, bench, traits::fopen)->Arg(5000);
+BENCHMARK_TEMPLATE_INSTANTIATE_F(logger_stream_fixture, bench, traits::mapping_default_initial_size)->Arg(5000);
+BENCHMARK_TEMPLATE_INSTANTIATE_F(logger_stream_fixture, bench, traits::mapping)->Arg(5000);
 
-BENCHMARK_TEMPLATE_INSTANTIATE_F(logger_stream_fixture, Test, traits::ostream_default_buffer)->Arg(10000);
-BENCHMARK_TEMPLATE_INSTANTIATE_F(logger_stream_fixture, Test, traits::ostream)->Arg(10000);
-BENCHMARK_TEMPLATE_INSTANTIATE_F(logger_stream_fixture, Test, traits::fopen_default_buffer)->Arg(10000);
-BENCHMARK_TEMPLATE_INSTANTIATE_F(logger_stream_fixture, Test, traits::fopen)->Arg(10000);
-BENCHMARK_TEMPLATE_INSTANTIATE_F(logger_stream_fixture, Test, traits::mapping_default_initial_size)->Arg(10000);
-BENCHMARK_TEMPLATE_INSTANTIATE_F(logger_stream_fixture, Test, traits::mapping)->Arg(10000);
+BENCHMARK_TEMPLATE_INSTANTIATE_F(logger_stream_fixture, bench, traits::debugger)->Arg(10000);
+BENCHMARK_TEMPLATE_INSTANTIATE_F(logger_stream_fixture, bench, traits::cout)->Arg(10000);
+BENCHMARK_TEMPLATE_INSTANTIATE_F(logger_stream_fixture, bench, traits::fwrite)->Arg(10000);
+BENCHMARK_TEMPLATE_INSTANTIATE_F(logger_stream_fixture, bench, traits::ostream_default_buffer)->Arg(10000);
+BENCHMARK_TEMPLATE_INSTANTIATE_F(logger_stream_fixture, bench, traits::ostream)->Arg(10000);
+BENCHMARK_TEMPLATE_INSTANTIATE_F(logger_stream_fixture, bench, traits::fopen_default_buffer)->Arg(10000);
+BENCHMARK_TEMPLATE_INSTANTIATE_F(logger_stream_fixture, bench, traits::fopen)->Arg(10000);
+BENCHMARK_TEMPLATE_INSTANTIATE_F(logger_stream_fixture, bench, traits::mapping_default_initial_size)->Arg(10000);
+BENCHMARK_TEMPLATE_INSTANTIATE_F(logger_stream_fixture, bench, traits::mapping)->Arg(10000);
 
-BENCHMARK_TEMPLATE_INSTANTIATE_F(logger_stream_fixture, Test, traits::ostream_default_buffer)->Arg(20000);
-BENCHMARK_TEMPLATE_INSTANTIATE_F(logger_stream_fixture, Test, traits::ostream)->Arg(20000);
-BENCHMARK_TEMPLATE_INSTANTIATE_F(logger_stream_fixture, Test, traits::fopen_default_buffer)->Arg(20000);
-BENCHMARK_TEMPLATE_INSTANTIATE_F(logger_stream_fixture, Test, traits::fopen)->Arg(20000);
-BENCHMARK_TEMPLATE_INSTANTIATE_F(logger_stream_fixture, Test, traits::mapping_default_initial_size)->Arg(20000);
-BENCHMARK_TEMPLATE_INSTANTIATE_F(logger_stream_fixture, Test, traits::mapping)->Arg(20000);
+BENCHMARK_TEMPLATE_INSTANTIATE_F(logger_stream_fixture, bench, traits::debugger)->Arg(20000);
+BENCHMARK_TEMPLATE_INSTANTIATE_F(logger_stream_fixture, bench, traits::cout)->Arg(20000);
+BENCHMARK_TEMPLATE_INSTANTIATE_F(logger_stream_fixture, bench, traits::fwrite)->Arg(20000);
+BENCHMARK_TEMPLATE_INSTANTIATE_F(logger_stream_fixture, bench, traits::ostream_default_buffer)->Arg(20000);
+BENCHMARK_TEMPLATE_INSTANTIATE_F(logger_stream_fixture, bench, traits::ostream)->Arg(20000);
+BENCHMARK_TEMPLATE_INSTANTIATE_F(logger_stream_fixture, bench, traits::fopen_default_buffer)->Arg(20000);
+BENCHMARK_TEMPLATE_INSTANTIATE_F(logger_stream_fixture, bench, traits::fopen)->Arg(20000);
+BENCHMARK_TEMPLATE_INSTANTIATE_F(logger_stream_fixture, bench, traits::mapping_default_initial_size)->Arg(20000);
+BENCHMARK_TEMPLATE_INSTANTIATE_F(logger_stream_fixture, bench, traits::mapping)->Arg(20000);
 
-BENCHMARK_TEMPLATE_INSTANTIATE_F(logger_stream_fixture, Test, traits::ostream_default_buffer)->Arg(40000);
-BENCHMARK_TEMPLATE_INSTANTIATE_F(logger_stream_fixture, Test, traits::ostream)->Arg(40000);
-BENCHMARK_TEMPLATE_INSTANTIATE_F(logger_stream_fixture, Test, traits::fopen_default_buffer)->Arg(40000);
-BENCHMARK_TEMPLATE_INSTANTIATE_F(logger_stream_fixture, Test, traits::fopen)->Arg(40000);
-BENCHMARK_TEMPLATE_INSTANTIATE_F(logger_stream_fixture, Test, traits::mapping_default_initial_size)->Arg(40000);
-BENCHMARK_TEMPLATE_INSTANTIATE_F(logger_stream_fixture, Test, traits::mapping)->Arg(40000);
+BENCHMARK_TEMPLATE_INSTANTIATE_F(logger_stream_fixture, bench, traits::debugger)->Arg(40000);
+BENCHMARK_TEMPLATE_INSTANTIATE_F(logger_stream_fixture, bench, traits::cout)->Arg(40000);
+BENCHMARK_TEMPLATE_INSTANTIATE_F(logger_stream_fixture, bench, traits::fwrite)->Arg(40000);
+BENCHMARK_TEMPLATE_INSTANTIATE_F(logger_stream_fixture, bench, traits::ostream_default_buffer)->Arg(40000);
+BENCHMARK_TEMPLATE_INSTANTIATE_F(logger_stream_fixture, bench, traits::ostream)->Arg(40000);
+BENCHMARK_TEMPLATE_INSTANTIATE_F(logger_stream_fixture, bench, traits::fopen_default_buffer)->Arg(40000);
+BENCHMARK_TEMPLATE_INSTANTIATE_F(logger_stream_fixture, bench, traits::fopen)->Arg(40000);
+BENCHMARK_TEMPLATE_INSTANTIATE_F(logger_stream_fixture, bench, traits::mapping_default_initial_size)->Arg(40000);
+BENCHMARK_TEMPLATE_INSTANTIATE_F(logger_stream_fixture, bench, traits::mapping)->Arg(40000);
 
-BENCHMARK_TEMPLATE_INSTANTIATE_F(logger_stream_fixture, Test, traits::ostream_default_buffer)->Arg(80000);
-BENCHMARK_TEMPLATE_INSTANTIATE_F(logger_stream_fixture, Test, traits::ostream)->Arg(80000);
-BENCHMARK_TEMPLATE_INSTANTIATE_F(logger_stream_fixture, Test, traits::fopen_default_buffer)->Arg(80000);
-BENCHMARK_TEMPLATE_INSTANTIATE_F(logger_stream_fixture, Test, traits::fopen)->Arg(80000);
-BENCHMARK_TEMPLATE_INSTANTIATE_F(logger_stream_fixture, Test, traits::mapping_default_initial_size)->Arg(80000);
-BENCHMARK_TEMPLATE_INSTANTIATE_F(logger_stream_fixture, Test, traits::mapping)->Arg(80000);
+BENCHMARK_TEMPLATE_INSTANTIATE_F(logger_stream_fixture, bench, traits::debugger)->Arg(80000);
+BENCHMARK_TEMPLATE_INSTANTIATE_F(logger_stream_fixture, bench, traits::cout)->Arg(80000);
+BENCHMARK_TEMPLATE_INSTANTIATE_F(logger_stream_fixture, bench, traits::fwrite)->Arg(80000);
+BENCHMARK_TEMPLATE_INSTANTIATE_F(logger_stream_fixture, bench, traits::ostream_default_buffer)->Arg(80000);
+BENCHMARK_TEMPLATE_INSTANTIATE_F(logger_stream_fixture, bench, traits::ostream)->Arg(80000);
+BENCHMARK_TEMPLATE_INSTANTIATE_F(logger_stream_fixture, bench, traits::fopen_default_buffer)->Arg(80000);
+BENCHMARK_TEMPLATE_INSTANTIATE_F(logger_stream_fixture, bench, traits::fopen)->Arg(80000);
+BENCHMARK_TEMPLATE_INSTANTIATE_F(logger_stream_fixture, bench, traits::mapping_default_initial_size)->Arg(80000);
+BENCHMARK_TEMPLATE_INSTANTIATE_F(logger_stream_fixture, bench, traits::mapping)->Arg(80000);

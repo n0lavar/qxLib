@@ -9,8 +9,7 @@
 #pragma once
 
 #include <qx/containers/string/string_converters.h>
-#include <qx/logger/base_logger_stream.h>
-#include <qx/logger/terminal_color.h>
+#include <qx/logger/base_standard_streams_stream.h>
 
 #include <iostream>
 
@@ -20,18 +19,16 @@ namespace qx
 /**
 
     @class   cout_logger_stream
-    @brief   Logger stream for std::cout output
+    @brief   Logger stream based on std::cout output
     @author  Khrapov
     @date    28.07.2021
 
 **/
-class cout_logger_stream : public base_logger_stream
+class cout_logger_stream : public base_standard_streams_stream
 {
 public:
-    struct config : base_logger_stream::config
+    struct config : base_standard_streams_stream::config
     {
-        bool bUseColors = true;
-
         // don't synchronize to the standard C streams after each input/output operation
         bool bDisableStdioSync = true;
 
@@ -48,19 +45,14 @@ public:
 
     cout_logger_stream(cout_logger_stream&&) noexcept = default;
 
+
     // base_logger_stream
     //
-    virtual void do_log(const category& category, verbosity eVerbosity, string_view svMessage) override;
     virtual void do_flush() override;
 
-    /**
-        @brief Set whether cout output should be colored
-        @param bUsingColors - true if cout output should be colored
-    **/
-    void set_using_colors(bool bUsingColors) noexcept;
-
 private:
-    bool m_bUsingColors = true;
+    virtual void cout_colorized(verbosity eVerbosity, string_view svMessage, const color& rangeColor) override;
+    virtual void cout_common(verbosity eVerbosity, string_view svMessage) override;
 };
 
 } // namespace qx

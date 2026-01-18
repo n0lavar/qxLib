@@ -11,8 +11,7 @@ namespace qx
 {
 
 inline cout_logger_stream::cout_logger_stream(std::optional<config> optStreamConfig)
-    : base_logger_stream(optStreamConfig ? *optStreamConfig : config())
-    , m_bUsingColors(optStreamConfig ? optStreamConfig->bUseColors : config().bUseColors)
+    : base_standard_streams_stream(optStreamConfig ? *optStreamConfig : config())
 {
     const config streamConfig = optStreamConfig ? *optStreamConfig : config();
 
@@ -33,93 +32,30 @@ inline cout_logger_stream::cout_logger_stream(std::optional<config> optStreamCon
     }
 }
 
-inline void cout_logger_stream::do_log(const category& category, verbosity eVerbosity, string_view svMessage)
-{
-    // allocation
-    wstring sWideMessage = to_wstring(svMessage);
-
-    std::wostream& outputStream = eVerbosity < verbosity::error ? std::wcout : std::wcerr;
-
-    if (m_bUsingColors)
-    {
-        color lineColor = color::white();
-        switch (eVerbosity)
-        {
-        case verbosity::very_verbose:
-        case verbosity::verbose:
-            lineColor = color::gray();
-            break;
-
-        case verbosity::log:
-            lineColor = color::white();
-            break;
-
-        case verbosity::important:
-            lineColor = color::khaki();
-            break;
-
-        case verbosity::warning:
-            lineColor = color::orange();
-            break;
-
-        case verbosity::error:
-            lineColor = color::crimson();
-            break;
-
-        case verbosity::critical:
-            lineColor = color::dark_red();
-            break;
-        }
-
-        auto cout_colorized = [&outputStream, &sWideMessage](size_t nStart, size_t nEnd, const color& rangeColor)
-        {
-            outputStream << terminal_color::font(rangeColor)
-                         << qx::wstring_view { sWideMessage.data() + nStart, nEnd - nStart } << terminal_color::reset();
-        };
-
-        struct logger_color_range
-        {
-            std::pair<size_t, size_t> range { 0, 0 };
-            color                     rangeColor = color::white();
-        };
-
-        // currently only one color range (category name) is supported
-        // loop is left, so it can be extended later if needed
-        std::array<logger_color_range, 1> colors;
-        size_t                            colorsCount = 0;
-
-        if (auto nPos = svMessage.find(category.get_name()); nPos != string::npos)
-        {
-            colors[0]   = { .range = { nPos, nPos + category.get_name().size() }, .rangeColor = category.get_color() };
-            colorsCount = 1;
-        }
-
-        cout_colorized(0, colorsCount == 0 ? sWideMessage.size() : colors.front().range.first, lineColor);
-
-        for (size_t i = 0; i < colorsCount; ++i)
-        {
-            cout_colorized(colors[i].range.first, colors[i].range.second, colors[i].rangeColor);
-            cout_colorized(
-                colors[i].range.second,
-                i + 1 < colorsCount ? colors[i + 1].range.first : sWideMessage.size(),
-                lineColor);
-        }
-    }
-    else
-    {
-        outputStream << sWideMessage;
-    }
-}
-
 inline void cout_logger_stream::do_flush()
 {
+    std::wcerr << std::flush;
     std::wcout << std::flush;
 }
 
-
-inline void cout_logger_stream::set_using_colors(bool bUsingColors) noexcept
+inline void cout_logger_stream::cout_colorized(verbosity eVerbosity, string_view svMessage, const color& rangeColor)
 {
-    m_bUsingColors = bUsingColors;
+    std::wostream& outputStream = eVerbosity < verbosity::error ? std::wcout : std::wcerr;
+
+    // possible allocation when qx::char_type != wchar_t
+    auto sWideMessage = to_wstring(svMessage);
+
+    outputStream << terminal_color::font(rangeColor) << sWideMessage << terminal_color::reset();
+}
+
+inline void cout_logger_stream::cout_common(verbosity eVerbosity, string_view svMessage)
+{
+    std::wostream& outputStream = eVerbosity < verbosity::error ? std::wcout : std::wcerr;
+
+    // possible allocation when qx::char_type != wchar_t
+    auto sWideMessage = to_wstring(svMessage);
+
+    outputStream << sWideMessage;
 }
 
 } // namespace qx
