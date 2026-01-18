@@ -96,9 +96,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a0bce4c36d3ed33a8cbc848afc9715890"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1logger.html#a0bce4c36d3ed33a8cbc848afc9715890">register_category</a> (string_view svCategoryName, <a class="el" href="structqx_1_1logger_1_1category__data.html">category_data</a> data) noexcept</td></tr>
 <tr class="memdesc:a0bce4c36d3ed33a8cbc848afc9715890"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add custom rules for category.  <a href="classqx_1_1logger.html#a0bce4c36d3ed33a8cbc848afc9715890">More...</a><br /></td></tr>
 <tr class="separator:a0bce4c36d3ed33a8cbc848afc9715890"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a19ec9acfbce5ff9ae477bb75edd70b51"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1logger.html#a19ec9acfbce5ff9ae477bb75edd70b51">log</a> (const <a class="el" href="classqx_1_1category.html">category</a> &amp;<a class="el" href="classqx_1_1category.html">category</a>, verbosity eVerbosity, string_view svFile, string_view svFunction, int nLine, <a class="el" href="classqx_1_1basic__string.html">string</a> sMessage)</td></tr>
-<tr class="memdesc:a19ec9acfbce5ff9ae477bb75edd70b51"><td class="mdescLeft">&#160;</td><td class="mdescRight">Log to all streams.  <a href="classqx_1_1logger.html#a19ec9acfbce5ff9ae477bb75edd70b51">More...</a><br /></td></tr>
-<tr class="separator:a19ec9acfbce5ff9ae477bb75edd70b51"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acccb9bc0c555460f09fd445fbd73297c"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1logger.html#acccb9bc0c555460f09fd445fbd73297c">log</a> (const <a class="el" href="classqx_1_1category.html">category</a> &amp;<a class="el" href="classqx_1_1category.html">category</a>, verbosity eVerbosity, string_view svFile, string_view svFunction, int nLine, <a class="el" href="structqx_1_1string__pool_1_1item.html">logger_string_pool::item</a> message)</td></tr>
+<tr class="memdesc:acccb9bc0c555460f09fd445fbd73297c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Log to all streams.  <a href="classqx_1_1logger.html#acccb9bc0c555460f09fd445fbd73297c">More...</a><br /></td></tr>
+<tr class="separator:acccb9bc0c555460f09fd445fbd73297c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af975c6169624a47a72ae8995161e140f"><td class="memItemLeft" align="right" valign="top"><a id="af975c6169624a47a72ae8995161e140f"></a>
 virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1logger.html#af975c6169624a47a72ae8995161e140f">flush</a> ()</td></tr>
 <tr class="memdesc:af975c6169624a47a72ae8995161e140f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Flush all streams. <br /></td></tr>
@@ -116,7 +116,7 @@ virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hr
 <dl class="section author"><dt>Author</dt><dd>Khrapov </dd></dl>
 <dl class="section date"><dt>Date</dt><dd>10.01.2020 </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="logger_8h_source.html#l00073">73</a> of file <a class="el" href="logger_8h_source.html">logger.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="logger_8h_source.html#l00074">74</a> of file <a class="el" href="logger_8h_source.html">logger.h</a>.</p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="a4e45ab9c399be9eb0761171f441ab5ea"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a4e45ab9c399be9eb0761171f441ab5ea">&#9670;&nbsp;</a></span>add_stream()</h2>
@@ -162,8 +162,8 @@ template&lt;sbo_poly_assignable_c&lt; base_logger_stream &gt; stream_t&gt; </div
 
 </div>
 </div>
-<a id="a19ec9acfbce5ff9ae477bb75edd70b51"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a19ec9acfbce5ff9ae477bb75edd70b51">&#9670;&nbsp;</a></span>log()</h2>
+<a id="acccb9bc0c555460f09fd445fbd73297c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acccb9bc0c555460f09fd445fbd73297c">&#9670;&nbsp;</a></span>log()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -204,8 +204,8 @@ template&lt;sbo_poly_assignable_c&lt; base_logger_stream &gt; stream_t&gt; </div
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="classqx_1_1basic__string.html">string</a>&#160;</td>
-          <td class="paramname"><em>sMessage</em>&#160;</td>
+          <td class="paramtype"><a class="el" href="structqx_1_1string__pool_1_1item.html">logger_string_pool::item</a>&#160;</td>
+          <td class="paramname"><em>message</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -229,7 +229,7 @@ template&lt;sbo_poly_assignable_c&lt; base_logger_stream &gt; stream_t&gt; </div
     <tr><td class="paramname">svFile</td><td>- file name string </td></tr>
     <tr><td class="paramname">svFunction</td><td>- function name string </td></tr>
     <tr><td class="paramname">nLine</td><td>- code line number </td></tr>
-    <tr><td class="paramname">sMessage</td><td>- message string </td></tr>
+    <tr><td class="paramname">message</td><td>- message string </td></tr>
   </table>
   </dd>
 </dl>
@@ -287,7 +287,7 @@ template&lt;sbo_poly_assignable_c&lt; base_logger_stream &gt; stream_t&gt; </div
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="logger_8inl_source.html#l00074">74</a> of file <a class="el" href="logger_8inl_source.html">logger.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="logger_8inl_source.html#l00077">77</a> of file <a class="el" href="logger_8inl_source.html">logger.inl</a>.</p>
 
 </div>
 </div>
