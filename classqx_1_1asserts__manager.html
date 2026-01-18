@@ -95,9 +95,9 @@ Classes</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a08869bae71e313c5d540f9cd434d11fa"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1asserts__manager.html#a08869bae71e313c5d540f9cd434d11fa">do_assert</a> (string_view svCondition, const <a class="el" href="classqx_1_1category.html">category</a> &amp;<a class="el" href="classqx_1_1category.html">category</a>, assert_type eAssertType, string_view svUserMessage, string_view svFunction, string_view svFile, <a class="el" href="typedefs_8h.html#aec4a1429cc91fb7ff41599b263c348cc">i32</a> nLine)</td></tr>
-<tr class="memdesc:a08869bae71e313c5d540f9cd434d11fa"><td class="mdescLeft">&#160;</td><td class="mdescRight">An entry point for all assertions.  <a href="classqx_1_1asserts__manager.html#a08869bae71e313c5d540f9cd434d11fa">More...</a><br /></td></tr>
-<tr class="separator:a08869bae71e313c5d540f9cd434d11fa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aad840c19a39b338793d471d9188e5f66"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1asserts__manager.html#aad840c19a39b338793d471d9188e5f66">do_assert</a> (string_view svCondition, const <a class="el" href="classqx_1_1category.html">category</a> &amp;<a class="el" href="classqx_1_1category.html">category</a>, assert_type eAssertType, <a class="el" href="classqx_1_1basic__string.html">string</a> sUserMessage, string_view svFunction, string_view svFile, <a class="el" href="typedefs_8h.html#aec4a1429cc91fb7ff41599b263c348cc">i32</a> nLine)</td></tr>
+<tr class="memdesc:aad840c19a39b338793d471d9188e5f66"><td class="mdescLeft">&#160;</td><td class="mdescRight">An entry point for all assertions.  <a href="classqx_1_1asserts__manager.html#aad840c19a39b338793d471d9188e5f66">More...</a><br /></td></tr>
+<tr class="separator:aad840c19a39b338793d471d9188e5f66"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5f1a8aca0cc458f9843d7a606734f9e4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1asserts__manager.html#a5f1a8aca0cc458f9843d7a606734f9e4">exit</a> (const <a class="el" href="classqx_1_1category.html">category</a> &amp;<a class="el" href="classqx_1_1category.html">category</a>, assert_type eAssertType)</td></tr>
 <tr class="memdesc:a5f1a8aca0cc458f9843d7a606734f9e4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Called in fatal assertions to exit the application.  <a href="classqx_1_1asserts__manager.html#a5f1a8aca0cc458f9843d7a606734f9e4">More...</a><br /></td></tr>
 <tr class="separator:a5f1a8aca0cc458f9843d7a606734f9e4"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -115,8 +115,8 @@ Public Member Functions</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="asserts__manager_8h_source.html#l00035">35</a> of file <a class="el" href="asserts__manager_8h_source.html">asserts_manager.h</a>.</p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
-<a id="a08869bae71e313c5d540f9cd434d11fa"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a08869bae71e313c5d540f9cd434d11fa">&#9670;&nbsp;</a></span>do_assert()</h2>
+<a id="aad840c19a39b338793d471d9188e5f66"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aad840c19a39b338793d471d9188e5f66">&#9670;&nbsp;</a></span>do_assert()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -145,8 +145,8 @@ Public Member Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">string_view&#160;</td>
-          <td class="paramname"><em>svUserMessage</em>, </td>
+          <td class="paramtype"><a class="el" href="classqx_1_1basic__string.html">string</a>&#160;</td>
+          <td class="paramname"><em>sUserMessage</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -185,7 +185,7 @@ Public Member Functions</h2></td></tr>
     <tr><td class="paramname">svCondition</td><td>- a string representation of the condition </td></tr>
     <tr><td class="paramname">category</td><td>- a category of the assertion (file wide or manually specified) </td></tr>
     <tr><td class="paramname">eAssertType</td><td>- an assertion type </td></tr>
-    <tr><td class="paramname">svUserMessage</td><td>- formatted user message, if specified </td></tr>
+    <tr><td class="paramname">sUserMessage</td><td>- formatted user message, if specified </td></tr>
     <tr><td class="paramname">svFunction</td><td>- assert location function </td></tr>
     <tr><td class="paramname">svFile</td><td>- assert location file </td></tr>
     <tr><td class="paramname">nLine</td><td>- assert location line number </td></tr>

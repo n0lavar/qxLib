@@ -100,14 +100,14 @@ $(function() {
 <div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;}</div>
 <div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160; </div>
 <div class="line"><a name="l00031"></a><span class="lineno"><a class="line" href="classqx_1_1logger.html#acccb9bc0c555460f09fd445fbd73297c">   31</a></span>&#160;<span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="classqx_1_1logger.html#acccb9bc0c555460f09fd445fbd73297c">logger::log</a>(</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    <span class="keyword">const</span> <a class="code" href="classqx_1_1category.html">category</a>&amp;           <a class="code" href="classqx_1_1category.html">category</a>,</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    verbosity                 eVerbosity,</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    string_view               svFile,</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    string_view               svFunction,</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    <span class="keywordtype">int</span>                       nLine,</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    <span class="keyword">const</span> <a class="code" href="classqx_1_1category.html">category</a>&amp;          <a class="code" href="classqx_1_1category.html">category</a>,</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    verbosity                eVerbosity,</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    string_view              svFile,</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    string_view              svFunction,</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    <span class="keywordtype">int</span>                      nLine,</div>
 <div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    <a class="code" href="structqx_1_1string__pool_1_1item.html">logger_string_pool::item</a> message)</div>
 <div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;{</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    <span class="keywordtype">string</span> sMessage   = std::move(message.string);</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    <span class="keywordtype">string</span> sMessage   = std::move(message.sValue);</div>
 <div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    <span class="keywordtype">bool</span>   bFormatted = <span class="keyword">false</span>;</div>
 <div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    {</div>
 <div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;        std::shared_lock _(m_RegisteredCategoriesMutex);</div>
@@ -129,7 +129,7 @@ $(function() {
 <div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;            stream-&gt;log(<a class="code" href="classqx_1_1category.html">category</a>, eVerbosity, sMessage);</div>
 <div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    }</div>
 <div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160; </div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    m_StringsPool.<a class="code" href="classqx_1_1string__pool.html#a77e562e27880407a5d3076b38cd8d8a5">release</a>(std::move(sMessage), message.nIndex);</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    m_StringsPool.<a class="code" href="classqx_1_1string__pool.html#a8b86796be2c2ef7a806969f6e851cff8">release</a>(std::move(sMessage), message.nIndex);</div>
 <div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;}</div>
 <div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160; </div>
 <div class="line"><a name="l00064"></a><span class="lineno"><a class="line" href="classqx_1_1logger.html#af975c6169624a47a72ae8995161e140f">   64</a></span>&#160;<span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="classqx_1_1logger.html#af975c6169624a47a72ae8995161e140f">logger::flush</a>()</div>
@@ -274,7 +274,7 @@ $(function() {
 <div class="ttc" id="aclassqx_1_1logger_html_acccb9bc0c555460f09fd445fbd73297c"><div class="ttname"><a href="classqx_1_1logger.html#acccb9bc0c555460f09fd445fbd73297c">qx::logger::log</a></div><div class="ttdeci">virtual void log(const category &amp;category, verbosity eVerbosity, string_view svFile, string_view svFunction, int nLine, logger_string_pool::item message)</div><div class="ttdoc">Log to all streams.</div><div class="ttdef"><b>Definition:</b> <a href="logger_8inl_source.html#l00031">logger.inl:31</a></div></div>
 <div class="ttc" id="aclassqx_1_1logger_html_af975c6169624a47a72ae8995161e140f"><div class="ttname"><a href="classqx_1_1logger.html#af975c6169624a47a72ae8995161e140f">qx::logger::flush</a></div><div class="ttdeci">virtual void flush()</div><div class="ttdoc">Flush all streams.</div><div class="ttdef"><b>Definition:</b> <a href="logger_8inl_source.html#l00064">logger.inl:64</a></div></div>
 <div class="ttc" id="aclassqx_1_1string__pool_html"><div class="ttname"><a href="classqx_1_1string__pool.html">qx::string_pool</a></div><div class="ttdoc">Fixed-size atomic string pool.</div><div class="ttdef"><b>Definition:</b> <a href="string__pool_8h_source.html#l00033">string_pool.h:34</a></div></div>
-<div class="ttc" id="aclassqx_1_1string__pool_html_a77e562e27880407a5d3076b38cd8d8a5"><div class="ttname"><a href="classqx_1_1string__pool.html#a77e562e27880407a5d3076b38cd8d8a5">qx::string_pool::release</a></div><div class="ttdeci">void release(string string, int nIndex)</div><div class="ttdoc">Return a string back to the pool.</div><div class="ttdef"><b>Definition:</b> <a href="string__pool_8inl_source.html#l00058">string_pool.inl:58</a></div></div>
+<div class="ttc" id="aclassqx_1_1string__pool_html_a8b86796be2c2ef7a806969f6e851cff8"><div class="ttname"><a href="classqx_1_1string__pool.html#a8b86796be2c2ef7a806969f6e851cff8">qx::string_pool::release</a></div><div class="ttdeci">void release(string sValue, int nIndex)</div><div class="ttdoc">Return a string back to the pool.</div><div class="ttdef"><b>Definition:</b> <a href="string__pool_8inl_source.html#l00058">string_pool.inl:58</a></div></div>
 <div class="ttc" id="astructqx_1_1logger_1_1category__data_html"><div class="ttname"><a href="structqx_1_1logger_1_1category__data.html">qx::logger::category_data</a></div><div class="ttdef"><b>Definition:</b> <a href="logger_8h_source.html#l00086">logger.h:87</a></div></div>
 <div class="ttc" id="astructqx_1_1string__pool_1_1item_html"><div class="ttname"><a href="structqx_1_1string__pool_1_1item.html">qx::string_pool::item</a></div><div class="ttdef"><b>Definition:</b> <a href="string__pool_8h_source.html#l00042">string_pool.h:43</a></div></div>
 <div class="ttc" id="atime__string_8h_html_a1e9a026c4e490acdc5dc5ce870888628"><div class="ttname"><a href="time__string_8h.html#a1e9a026c4e490acdc5dc5ce870888628">qx::append_time_string</a></div><div class="ttdeci">void append_time_string(out_it_t it, char_type chDateDelimiter, char_type chTimeDelimiter) noexcept</div><div class="ttdoc">Format time string to the buffer.</div><div class="ttdef"><b>Definition:</b> <a href="time__string_8h_source.html#l00027">time_string.h:27</a></div></div>

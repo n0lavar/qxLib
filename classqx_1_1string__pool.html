@@ -89,9 +89,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a87f8ea24bf5b483346b7ace1242e4209"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structqx_1_1string__pool_1_1item.html">item</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1string__pool.html#a87f8ea24bf5b483346b7ace1242e4209">acquire</a> ()</td></tr>
 <tr class="memdesc:a87f8ea24bf5b483346b7ace1242e4209"><td class="mdescLeft">&#160;</td><td class="mdescRight">Acquire a string from the pool.  <a href="classqx_1_1string__pool.html#a87f8ea24bf5b483346b7ace1242e4209">More...</a><br /></td></tr>
 <tr class="separator:a87f8ea24bf5b483346b7ace1242e4209"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a77e562e27880407a5d3076b38cd8d8a5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1string__pool.html#a77e562e27880407a5d3076b38cd8d8a5">release</a> (<a class="el" href="classqx_1_1basic__string.html">string</a> <a class="el" href="classqx_1_1basic__string.html">string</a>, int nIndex)</td></tr>
-<tr class="memdesc:a77e562e27880407a5d3076b38cd8d8a5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return a string back to the pool.  <a href="classqx_1_1string__pool.html#a77e562e27880407a5d3076b38cd8d8a5">More...</a><br /></td></tr>
-<tr class="separator:a77e562e27880407a5d3076b38cd8d8a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8b86796be2c2ef7a806969f6e851cff8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1string__pool.html#a8b86796be2c2ef7a806969f6e851cff8">release</a> (<a class="el" href="classqx_1_1basic__string.html">string</a> sValue, int nIndex)</td></tr>
+<tr class="memdesc:a8b86796be2c2ef7a806969f6e851cff8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return a string back to the pool.  <a href="classqx_1_1string__pool.html#a8b86796be2c2ef7a806969f6e851cff8">More...</a><br /></td></tr>
+<tr class="separator:a8b86796be2c2ef7a806969f6e851cff8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><h3>template&lt;size_t nSize = 32&gt;<br />
@@ -135,8 +135,8 @@ template&lt;size_t nSize&gt; </div>
 
 </div>
 </div>
-<a id="a77e562e27880407a5d3076b38cd8d8a5"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a77e562e27880407a5d3076b38cd8d8a5">&#9670;&nbsp;</a></span>release()</h2>
+<a id="a8b86796be2c2ef7a806969f6e851cff8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8b86796be2c2ef7a806969f6e851cff8">&#9670;&nbsp;</a></span>release()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -147,7 +147,7 @@ template&lt;size_t nSize&gt; </div>
           <td class="memname">void <a class="el" href="classqx_1_1string__pool.html">qx::string_pool</a>&lt; nSize &gt;::release </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="classqx_1_1basic__string.html">string</a>&#160;</td>
-          <td class="paramname"><em>string</em>, </td>
+          <td class="paramname"><em>sValue</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -166,7 +166,7 @@ template&lt;size_t nSize&gt; </div>
 <p>Return a string back to the pool. </p>
 <p>If nIndex == nFreeString, it is ignored. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">string</td><td>- a string that does not necessarily have to be from this pool </td></tr>
+    <tr><td class="paramname">sValue</td><td>- a string that does not necessarily have to be from this pool </td></tr>
     <tr><td class="paramname">nIndex</td><td>- an index of previously acquired string </td></tr>
   </table>
   </dd>
