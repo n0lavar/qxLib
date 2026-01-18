@@ -36,6 +36,9 @@ function(set_target_options _target)
             # exceptions support
             /EHsc 
 
+            # MSVC requires it for __VA_OPT__, despite being C++20 feature
+            /Zc:preprocessor
+
             # enable all warnings and treat them as errors
             /Wall /WX
             # ignore all MSVC headers warnings

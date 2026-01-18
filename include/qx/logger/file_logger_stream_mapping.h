@@ -122,7 +122,7 @@ private:
 private:
 #if QX_WIN
     HANDLE m_hFile = INVALID_HANDLE_VALUE;
-    HANDLE m_hMap  = INVALID_HANDLE_VALUE;
+    HANDLE m_hMap  = nullptr;
 #else
     int m_Fd = -1;
 #endif

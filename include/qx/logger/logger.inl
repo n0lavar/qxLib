@@ -29,14 +29,15 @@ inline void logger::register_category(string_view svCategoryName, category_data 
 }
 
 inline void logger::log(
-    const category& category,
-    verbosity       eVerbosity,
-    string_view     svFile,
-    string_view     svFunction,
-    int             nLine,
-    string          sMessage)
+    const category&          category,
+    verbosity                eVerbosity,
+    string_view              svFile,
+    string_view              svFunction,
+    int                      nLine,
+    logger_string_pool::item message)
 {
-    bool bFormatted = false;
+    string sMessage   = std::move(message.sValue);
+    bool   bFormatted = false;
     {
         std::shared_lock _(m_RegisteredCategoriesMutex);
         if (auto itRegisteredCategory = m_RegisteredCategories.find(category.get_name());
@@ -56,6 +57,8 @@ inline void logger::log(
         for (auto& stream : m_Streams)
             stream->log(category, eVerbosity, sMessage);
     }
+
+    m_StringsPool.release(std::move(sMessage), message.nIndex);
 }
 
 inline void logger::flush()
@@ -84,6 +87,11 @@ inline bool logger::log_required(const category& category, verbosity eVerbosity)
 
     // compile time check is in macros
     return true;
+}
+
+inline logger::logger_string_pool* logger::_get_string_pool() noexcept
+{
+    return &m_StringsPool;
 }
 
 inline string logger::default_formatter(

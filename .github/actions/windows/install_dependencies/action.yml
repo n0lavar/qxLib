@@ -40,6 +40,8 @@ runs:
           .. ^
           -DCMAKE_CXX_FLAGS="${{ inputs.cxx_flags }}" ^
           -DCMAKE_EXE_LINKER_FLAGS="${{ inputs.cxx_linker_flags }}" ^
+          -DCMAKE_CXX_STANDARD=20 ^
+          -DCMAKE_CXX_STANDARD_REQUIRED=ON ^
           -DCMAKE_MSVC_RUNTIME_LIBRARY="${{ inputs.msvc_runtime_library }}"
         cmake --build . --config ${{ inputs.build_type }} -j %NUMBER_OF_PROCESSORS%
 
@@ -65,6 +67,8 @@ runs:
           .. ^
           -DCMAKE_CXX_FLAGS="${{ inputs.cxx_flags }} /EHsc" ^
           -DCMAKE_EXE_LINKER_FLAGS="${{ inputs.cxx_linker_flags }}" ^
+          -DCMAKE_CXX_STANDARD=20 ^
+          -DCMAKE_CXX_STANDARD_REQUIRED=ON ^
           -DCMAKE_MSVC_RUNTIME_LIBRARY="${{ inputs.msvc_runtime_library }}" ^
           -DBENCHMARK_ENABLE_GTEST_TESTS=OFF
         cmake --build . --config ${{ inputs.build_type }} -j %NUMBER_OF_PROCESSORS%

@@ -24,12 +24,28 @@ namespace qx
 {
 
 /**
+    @brief convert cstring to wstring
+    @param out        - output wchar_t string
+    @param stringView - char string view
+    @param locale     - locale to use
+**/
+void to_wstring(wstring& out, cstring_view stringView, const std::locale& locale = std::locale());
+
+/**
     @brief  convert cstring to wstring
     @param  stringView - char string view
     @param  locale     - locale to use
     @retval            - wchar_t string
 **/
-wstring to_wstring(cstring_view stringView, const std::locale& locale = std::locale());
+[[nodiscard]] wstring to_wstring(cstring_view stringView, const std::locale& locale = std::locale());
+
+/**
+    @brief Convert wstring to wstring
+    @param out        - output wchar_t string
+    @param stringView - wchar_t string view
+    @param locale     - locale to use
+**/
+void to_wstring(wstring& out, wstring_view stringView, const std::locale& locale = std::locale());
 
 /**
     @brief  Convert wstring to wstring (stub)
@@ -37,7 +53,16 @@ wstring to_wstring(cstring_view stringView, const std::locale& locale = std::loc
     @param  locale     - locale to use
     @retval            - wchar_t string
 **/
-wstring_view to_wstring(wstring_view stringView, const std::locale& locale = std::locale());
+[[nodiscard]] wstring_view to_wstring(wstring_view stringView, const std::locale& locale = std::locale());
+
+/**
+    @brief   Convert wstring to cstring
+    @details '?' is a default character
+    @param   out        - output char string
+    @param   stringView - wchar_t string view
+    @param   locale     - locale to use
+**/
+void to_cstring(cstring& out, wstring_view stringView, const std::locale& locale = std::locale());
 
 /**
     @brief   Convert wstring to cstring
@@ -46,7 +71,15 @@ wstring_view to_wstring(wstring_view stringView, const std::locale& locale = std
     @param   locale     - locale to use
     @retval             - char string
 **/
-cstring to_cstring(wstring_view stringView, const std::locale& locale = std::locale());
+[[nodiscard]] cstring to_cstring(wstring_view stringView, const std::locale& locale = std::locale());
+
+/**
+    @brief Convert string to string
+    @param out        - output char string
+    @param stringView - char string view
+    @param locale     - locale to use
+**/
+void to_cstring(cstring& out, cstring_view stringView, const std::locale& locale = std::locale());
 
 /**
     @brief  Convert string to string (stub)
@@ -54,30 +87,53 @@ cstring to_cstring(wstring_view stringView, const std::locale& locale = std::loc
     @param  locale     - locale to use
     @retval            - char string
 **/
-cstring_view to_cstring(cstring_view stringView, const std::locale& locale = std::locale());
+[[nodiscard]] cstring_view to_cstring(cstring_view stringView, const std::locale& locale = std::locale());
+
+/**
+    @brief Convert a char string to common string type
+    @param out        - output common string
+    @param stringView - char string
+    @param locale     - locale to use
+**/
+void to_string(string& out, cstring_view stringView, const std::locale& locale = std::locale());
 
 /**
     @brief  Convert a char string to common string type
     @param  stringView - char string
     @param  locale     - locale to use
-    @retval            - common string type
+    @retval            - common string
 **/
-string to_string(cstring_view stringView, const std::locale& locale = std::locale());
+[[nodiscard]] string to_string(cstring_view stringView, const std::locale& locale = std::locale());
+
+/**
+    @brief Convert a wchar_t string to common string type
+    @param out        - output common string
+    @param stringView - wchar_t string
+    @param locale     - locale to use
+**/
+void to_string(string& out, wstring_view stringView, const std::locale& locale = std::locale());
 
 /**
     @brief  Convert a wchar_t string to common string type
     @param  stringView - wchar_t string
     @param  locale     - locale to use
-    @retval            - common string type
+    @retval            - common string
 **/
-string to_string(wstring_view stringView, const std::locale& locale = std::locale());
+[[nodiscard]] string to_string(wstring_view stringView, const std::locale& locale = std::locale());
+
+/**
+    @brief Convert const char* representing UTF8 to wstring
+    @param out     - output wchar_t string
+    @param pszUtf8 - UTF8 string
+**/
+void utf8_to_string(string& out, cstring_view pszUtf8);
 
 /**
     @brief  Convert const char* representing UTF8 to wstring
     @param  pszUtf8 - UTF8 string
-    @retval         - wstring value
+    @retval         - wchar_t string
 **/
-string utf8_to_string(cstring_view pszUtf8);
+[[nodiscard]] string utf8_to_string(cstring_view pszUtf8);
 
 /**
     @brief  Convert a constexpr string literal to the wider or equal char type string view

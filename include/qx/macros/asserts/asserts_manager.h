@@ -78,7 +78,7 @@ public:
         @param  svCondition   - a string representation of the condition
         @param  category      - a category of the assertion (file wide or manually specified)
         @param  eAssertType   - an assertion type
-        @param  svUserMessage - formatted user message, if specified
+        @param  sUserMessage  - formatted user message, if specified
         @param  svFunction    - assert location function
         @param  svFile        - assert location file
         @param  nLine         - assert location line number
@@ -88,7 +88,7 @@ public:
         string_view     svCondition,
         const category& category,
         assert_type     eAssertType,
-        string_view     svUserMessage,
+        string          sUserMessage,
         string_view     svFunction,
         string_view     svFile,
         i32             nLine);
@@ -133,20 +133,20 @@ private:
     #define QX_DEBUG_BREAK() _QX_DEBUG_BREAK()
 #endif
 
-#define _QX_COMMON_ASSERT(condition, category, assert_type, after_debug_break, result_t, ...) \
-    static_cast<result_t>(                                                                    \
-        qx::predicates::is_valid(condition)                                                   \
-        || (qx::asserts_manager::get_instance().do_assert(                                    \
-                QXT(#condition),                                                              \
-                category,                                                                     \
-                assert_type,                                                                  \
-                _QX_MACRO_USER_MESSAGE(__VA_ARGS__),                                          \
-                qx::to_string(__FUNCTION__),                                                  \
-                QXT(__FILE__),                                                                \
-                QX_LINE)                                                                      \
-                ? QX_DEBUG_BREAK()                                                            \
-                : (void)0,                                                                    \
-            after_debug_break(category, assert_type),                                         \
+#define _QX_COMMON_ASSERT(condition, category, assert_type, after_debug_break, result_t, ...)           \
+    static_cast<result_t>(                                                                              \
+        qx::predicates::is_valid(condition)                                                             \
+        || (qx::asserts_manager::get_instance().do_assert(                                              \
+                QXT(#condition),                                                                        \
+                category,                                                                               \
+                assert_type,                                                                            \
+                _QX_MACRO_USER_MESSAGE(static_cast<qx::string_pool<>*>(nullptr), ##__VA_ARGS__).sValue, \
+                qx::convert_string_literal<qx::char_type, __FUNCTION__>(),                              \
+                QXT(__FILE__),                                                                          \
+                QX_LINE)                                                                                \
+                ? QX_DEBUG_BREAK()                                                                      \
+                : (void)0,                                                                              \
+            after_debug_break(category, assert_type),                                                   \
             false))
 
 #ifndef _QX_ASSERT_AFTER_DEBUG_BREAK_FATAL

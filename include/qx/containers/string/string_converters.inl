@@ -12,17 +12,27 @@ QX_SET_FILE_CATEGORY(CatQxConverters);
 namespace qx
 {
 
-inline wstring to_wstring(cstring_view stringView, const std::locale& locale)
+inline void to_wstring(wstring& out, cstring_view stringView, const std::locale& locale)
 {
     QX_PERF_SCOPE();
 
-    std::vector<wchar_t> buf(stringView.size());
+    out.assign(stringView.size(), L'\0');
     std::use_facet<std::ctype<wchar_t>>(locale).widen(
         stringView.data(),
         stringView.data() + stringView.size(),
-        buf.data());
+        out.data());
+}
 
-    return wstring(buf.data(), buf.size());
+inline wstring to_wstring(cstring_view stringView, const std::locale& locale)
+{
+    wstring result;
+    to_wstring(result, stringView, locale);
+    return result;
+}
+
+inline void to_wstring(wstring& out, wstring_view stringView, const std::locale& locale)
+{
+    out = stringView;
 }
 
 inline wstring_view to_wstring(wstring_view stringView, const std::locale& locale)
@@ -30,19 +40,39 @@ inline wstring_view to_wstring(wstring_view stringView, const std::locale& local
     return stringView;
 }
 
-inline cstring to_cstring(wstring_view stringView, const std::locale& locale)
+inline void to_cstring(cstring& out, wstring_view stringView, const std::locale& locale)
 {
     QX_PERF_SCOPE();
 
-    std::vector<char> buf(stringView.size());
+    out.assign(stringView.size(), '\0');
     std::use_facet<std::ctype<wchar_t>>(locale)
-        .narrow(stringView.data(), stringView.data() + stringView.size(), '?', buf.data());
-    return cstring(buf.data(), buf.size());
+        .narrow(stringView.data(), stringView.data() + stringView.size(), '?', out.data());
+}
+
+inline cstring to_cstring(wstring_view stringView, const std::locale& locale)
+{
+    cstring result;
+    to_cstring(result, stringView, locale);
+    return result;
+}
+
+inline void to_cstring(cstring& out, cstring_view stringView, const std::locale& locale)
+{
+    out = stringView;
 }
 
 inline cstring_view to_cstring(cstring_view stringView, const std::locale& locale)
 {
     return stringView;
+}
+
+inline void to_string(string& out, cstring_view stringView, const std::locale& locale)
+{
+#ifdef QX_CONF_USE_CHAR
+    out = stringView;
+#elif defined(QX_CONF_USE_WCHAR)
+    to_wstring(out, stringView, locale);
+#endif
 }
 
 inline string to_string(cstring_view stringView, const std::locale& locale)
@@ -51,6 +81,15 @@ inline string to_string(cstring_view stringView, const std::locale& locale)
     return stringView;
 #elif defined(QX_CONF_USE_WCHAR)
     return to_wstring(stringView, locale);
+#endif
+}
+
+inline void to_string(string& out, wstring_view stringView, const std::locale& locale)
+{
+#ifdef QX_CONF_USE_CHAR
+    to_cstring(out, stringView, locale);
+#elif defined(QX_CONF_USE_WCHAR)
+    out = stringView;
 #endif
 }
 
@@ -63,7 +102,7 @@ inline string to_string(wstring_view stringView, const std::locale& locale)
 #endif
 }
 
-inline string utf8_to_string(cstring_view pszUtf8)
+inline void utf8_to_string(string& out, cstring_view pszUtf8)
 {
     QX_PERF_SCOPE();
 
@@ -72,19 +111,25 @@ inline string utf8_to_string(cstring_view pszUtf8)
 
     // much faster on windows
     const int nLength = MultiByteToWideChar(CP_UTF8, 0, pszUtf8.data(), static_cast<int>(pszUtf8.size()), nullptr, 0);
-    string    sRet(nLength, QXT('\n'));
-    MultiByteToWideChar(CP_UTF8, 0, pszUtf8.data(), static_cast<int>(pszUtf8.size()), sRet.data(), nLength);
-    return sRet;
+    out.assign(nLength, L'\n');
+    MultiByteToWideChar(CP_UTF8, 0, pszUtf8.data(), static_cast<int>(pszUtf8.size()), out.data(), nLength);
 
     #else
 
     QX_PUSH_SUPPRESS_ALL_WARNINGS();
     std::wstring_convert<std::codecvt_utf8_utf16<wchar_t>> converter;
-    return converter.from_bytes(pszUtf8.data(), pszUtf8.data() + pszUtf8.size());
+    out = converter.from_bytes(pszUtf8.data(), pszUtf8.data() + pszUtf8.size());
     QX_POP_SUPPRESS_WARNINGS();
 
     #endif
 #endif
+}
+
+inline string utf8_to_string(cstring_view pszUtf8)
+{
+    string sResult;
+    utf8_to_string(sResult, pszUtf8);
+    return sResult;
 }
 
 namespace details

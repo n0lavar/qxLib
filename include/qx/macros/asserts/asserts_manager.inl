@@ -14,21 +14,21 @@ inline bool asserts_manager::do_assert(
     string_view     svCondition,
     const category& category,
     assert_type     eAssertType,
-    string_view     svUserMessage,
+    string          sUserMessage,
     string_view     svFunction,
     string_view     svFile,
     i32             nLine)
 {
     if (m_Config.bLogAssertion)
     {
-        QX_LOG_REF(category, m_Config.getVerbosity(eAssertType), "[{}] {}", svCondition, svUserMessage);
+        QX_LOG_REF(category, m_Config.getVerbosity(eAssertType), "[{}] {}", svCondition, sUserMessage);
 
         // the error must present when debug break is called
         get_logger().flush();
     }
 
     if (m_Config.onAssertion)
-        m_Config.onAssertion(svCondition, category, eAssertType, svUserMessage, svFunction, svFile, nLine);
+        m_Config.onAssertion(svCondition, category, eAssertType, sUserMessage, svFunction, svFile, nLine);
 
 #if QX_WIN
     return ::IsDebuggerPresent();

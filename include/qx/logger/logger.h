@@ -19,20 +19,21 @@
 
 #ifndef _QX_LOG_C
     // __FUNCTION__ isn't a char array on linux, so we need to convert it
-    #define _QX_LOG_C(verbosityCheckKeyword, category, eVerbosity, ...)        \
-        do                                                                     \
-        {                                                                      \
-            verbosityCheckKeyword const auto& _category = category;            \
-            if verbosityCheckKeyword (eVerbosity >= _category.get_verbosity()) \
-            {                                                                  \
-                qx::get_logger().log(                                          \
-                    _category,                                                 \
-                    eVerbosity,                                                \
-                    QX_SHORT_FILE,                                             \
-                    qx::convert_string_literal<qx::char_type, __FUNCTION__>(), \
-                    QX_LINE,                                                   \
-                    _QX_MACRO_USER_MESSAGE(__VA_ARGS__));                      \
-            }                                                                  \
+    #define _QX_LOG_C(verbosityCheckKeyword, category, eVerbosity, ...)                \
+        do                                                                             \
+        {                                                                              \
+            verbosityCheckKeyword const auto& _category = category;                    \
+            if verbosityCheckKeyword (eVerbosity >= _category.get_verbosity())         \
+            {                                                                          \
+                qx::logger& _logger = qx::get_logger();                                \
+                _logger.log(                                                           \
+                    _category,                                                         \
+                    eVerbosity,                                                        \
+                    QX_SHORT_FILE,                                                     \
+                    qx::convert_string_literal<qx::char_type, __FUNCTION__>(),         \
+                    QX_LINE,                                                           \
+                    _QX_MACRO_USER_MESSAGE(_logger._get_string_pool(), __VA_ARGS__)); \
+            }                                                                          \
         } while (false)
 #endif
 
@@ -84,6 +85,8 @@ public:
 
     struct category_data
     {
+        // For best performance, do not allocate anything in this function and return the modified sMessage object.
+        // See default_formatter for an example.
         using format_function = std::function<string(
             const category& category,
             verbosity       eVerbosity,
@@ -96,7 +99,8 @@ public:
         format_function formatFunction;
     };
 
-    using category_data_map = std::unordered_map<string_view, category_data>;
+    using category_data_map   = std::unordered_map<string_view, category_data>;
+    using logger_string_pool = string_pool<>;
 
 public:
     virtual ~logger() noexcept = default;
@@ -131,15 +135,15 @@ public:
         @param   svFile     - file name string
         @param   svFunction - function name string
         @param   nLine      - code line number
-        @param   sMessage   - message string
+        @param   message    - message string
     **/
     virtual void log(
-        const category& category,
-        verbosity       eVerbosity,
-        string_view     svFile,
-        string_view     svFunction,
-        int             nLine,
-        string          sMessage);
+        const category&           category,
+        verbosity                 eVerbosity,
+        string_view               svFile,
+        string_view               svFunction,
+        int                       nLine,
+        logger_string_pool::item message);
 
     /**
         @brief Flush all streams
@@ -161,6 +165,9 @@ public:
     **/
     bool log_required(const category& category, verbosity eVerbosity) const noexcept;
 
+    // only for internal usage in macros
+    logger_string_pool* _get_string_pool() noexcept;
+
 private:
     static string default_formatter(
         const category& category,
@@ -176,6 +183,8 @@ private:
 
     QX_PERF_SHARED_MUTEX(m_RegisteredCategoriesMutex);
     category_data_map m_RegisteredCategories;
+
+    logger_string_pool m_StringsPool;
 };
 
 /**

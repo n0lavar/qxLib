@@ -281,7 +281,7 @@ TYPED_TEST_SUITE(TestLogger, implementations_type);
         traceFile,                                                 \
         qx::convert_string_literal<qx::char_type, __FUNCTION__>(), \
         __LINE__,                                                  \
-        qx::string::static_format(QXT(format), ##__VA_ARGS__))
+        { qx::string::static_format(QXT(format), ##__VA_ARGS__), qx::logger::logger_string_pool::nFreeString })
 
 #define TEST_LOG_WARNING(traceFile, format, ...)                   \
     myLogger.log(                                                  \
@@ -290,7 +290,7 @@ TYPED_TEST_SUITE(TestLogger, implementations_type);
         traceFile,                                                 \
         qx::convert_string_literal<qx::char_type, __FUNCTION__>(), \
         __LINE__,                                                  \
-        qx::string::static_format(QXT(format), ##__VA_ARGS__))
+        { qx::string::static_format(QXT(format), ##__VA_ARGS__), qx::logger::logger_string_pool::nFreeString })
 
 #define TEST_LOG_CATEGORY(traceFile, _category, format, ...)       \
     myLogger.log(                                                  \
@@ -299,7 +299,7 @@ TYPED_TEST_SUITE(TestLogger, implementations_type);
         traceFile,                                                 \
         qx::convert_string_literal<qx::char_type, __FUNCTION__>(), \
         __LINE__,                                                  \
-        qx::string::static_format(QXT(format), ##__VA_ARGS__))
+        { qx::string::static_format(QXT(format), ##__VA_ARGS__), qx::logger::logger_string_pool::nFreeString })
 
 #define TEST_LOG_ERROR(traceFile, format, ...)                     \
     myLogger.log(                                                  \
@@ -308,16 +308,17 @@ TYPED_TEST_SUITE(TestLogger, implementations_type);
         traceFile,                                                 \
         qx::convert_string_literal<qx::char_type, __FUNCTION__>(), \
         __LINE__,                                                  \
-        qx::string::static_format(QXT(format), ##__VA_ARGS__))
+        { qx::string::static_format(QXT(format), ##__VA_ARGS__), qx::logger::logger_string_pool::nFreeString })
 
-#define TEST_LOG_ASSERT(traceFile, expr, format, ...)              \
-    myLogger.log(                                                  \
-        CatDefault,                                                \
-        qx::verbosity::critical,                                   \
-        traceFile,                                                 \
-        qx::convert_string_literal<qx::char_type, __FUNCTION__>(), \
-        __LINE__,                                                  \
-        qx::string::static_format(QXT("[{}] ") QXT(format), QXT(#expr), ##__VA_ARGS__))
+#define TEST_LOG_ASSERT(traceFile, expr, format, ...)                                     \
+    myLogger.log(                                                                         \
+        CatDefault,                                                                       \
+        qx::verbosity::critical,                                                          \
+        traceFile,                                                                        \
+        qx::convert_string_literal<qx::char_type, __FUNCTION__>(),                        \
+        __LINE__,                                                                         \
+        { qx::string::static_format(QXT("[{}] ") QXT(format), QXT(#expr), ##__VA_ARGS__), \
+          qx::logger::logger_string_pool::nFreeString })
 
 #define TEST_LOGGER(traceFile, _category)                                 \
     TEST_LOG(traceFile, "Start test");                                    \

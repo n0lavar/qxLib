@@ -2248,7 +2248,7 @@ template<class char_t, class traits_t>
 inline bool basic_string<char_t, traits_t>::_resize(size_type nSymbols, sbo_resize_type eType) noexcept
 {
     const bool bRet = m_Data.resize(
-        (nSymbols + 1) * sizeof(value_type), // + null terminator
+        (nSymbols > 0 ? nSymbols + 1 : 0) * sizeof(value_type), // + null terminator
         traits_t::align() * sizeof(value_type),
         eType,
         true);
@@ -2632,8 +2632,8 @@ inline typename basic_string<char_t, traits_t>::pointer basic_string<char_t, tra
 template<class char_t, class traits_t>
 inline typename basic_string<char_t, traits_t>::reference basic_string<char_t, traits_t>::at(size_type nIndex)
 {
-    if (nIndex >= size())
-        throw std::out_of_range("invalid string position");
+    // if (nIndex >= size())
+    //     throw std::out_of_range("invalid string position");
 
     return data()[nIndex];
 }

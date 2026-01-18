@@ -9,6 +9,7 @@
 #pragma once
 
 #include <qx/containers/string/string_converters.h>
+#include <qx/containers/string/string_pool.h>
 
 namespace qx
 {
@@ -19,29 +20,49 @@ concept log_acceptable_args_c = (sizeof...(args_t) > 0 && format_acceptable_args
 namespace details
 {
 
-inline string format_macro_user_message()
+template<size_t nStringsPoolSize>
+inline string_pool<nStringsPoolSize>::item format_macro_user_message(string_pool<nStringsPoolSize>* pStringsPool)
 {
-    return QXT("");
+    return { QXT(""), string_pool<nStringsPoolSize>::nFreeString };
 }
 
-inline string format_macro_user_message(const char* pszUserMessage)
+template<size_t nStringsPoolSize>
+inline string_pool<nStringsPoolSize>::item format_macro_user_message(
+    string_pool<nStringsPoolSize>* pStringsPool,
+    const char*                    pszUserMessage)
 {
-    return to_string(pszUserMessage);
+    typename string_pool<nStringsPoolSize>::item message =
+        pStringsPool
+            ? pStringsPool->acquire()
+            : typename string_pool<nStringsPoolSize>::item { string(), string_pool<nStringsPoolSize>::nFreeString };
+
+    to_string(message.sValue, pszUserMessage);
+    return message;
 }
 
-inline string format_macro_user_message(string sUserMessage)
+template<size_t nStringsPoolSize>
+inline string_pool<nStringsPoolSize>::item format_macro_user_message(
+    string_pool<nStringsPoolSize>* pStringsPool,
+    string                         sUserMessage)
 {
-    return sUserMessage;
+    return { std::move(sUserMessage), string_pool<nStringsPoolSize>::nFreeString };
 }
 
-template<class first_arg_t, class... rest_args_t>
+template<size_t nStringsPoolSize, class first_arg_t, class... rest_args_t>
     requires(log_acceptable_args_c<first_arg_t, rest_args_t...>)
-string format_macro_user_message(
+string_pool<nStringsPoolSize>::item format_macro_user_message(
+    string_pool<nStringsPoolSize>*                                 pStringsPool,
     const format_string_strong_checks<first_arg_t, rest_args_t...> sFormat,
     first_arg_t&&                                                  firstArg,
     rest_args_t&&... restArgs)
 {
-    return string::static_format(sFormat, std::forward<first_arg_t>(firstArg), std::forward<rest_args_t>(restArgs)...);
+    typename string_pool<nStringsPoolSize>::item message =
+        pStringsPool
+            ? pStringsPool->acquire()
+            : typename string_pool<nStringsPoolSize>::item { string(), string_pool<nStringsPoolSize>::nFreeString };
+
+    message.sValue.format(sFormat, std::forward<first_arg_t>(firstArg), std::forward<rest_args_t>(restArgs)...);
+    return message;
 }
 
 } // namespace details
@@ -84,6 +105,6 @@ string format_macro_user_message(
 #define _QX_MACRO_USER_MESSAGE_32(a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14, a15, a16, a17, a18, a19, a20, a21, a22, a23, a24, a25, a26, a27, a28, a29, a30, a31, a32) QXT(a1), a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14, a15, a16, a17, a18, a19, a20, a21, a22, a23, a24, a25, a26, a27, a28, a29, a30, a31, a32
 // clang-format on
 
-#define _QX_MACRO_USER_MESSAGE(...)         \
-    qx::details::format_macro_user_message( \
-        QX_EXPAND(QX_APPEND_VA_ARG_COUNT(_QX_MACRO_USER_MESSAGE_, __VA_ARGS__)(__VA_ARGS__)))
+#define _QX_MACRO_USER_MESSAGE(stringsPool, ...)                                 \
+    qx::details::format_macro_user_message(stringsPool __VA_OPT__(, ) QX_EXPAND( \
+        QX_APPEND_VA_ARG_COUNT(_QX_MACRO_USER_MESSAGE_, __VA_ARGS__)(__VA_ARGS__)))
