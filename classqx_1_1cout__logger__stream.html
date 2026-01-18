@@ -74,7 +74,7 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p>Logger stream for std::cout output.  
+<p>Logger stream based on std::cout output.  
  <a href="classqx_1_1cout__logger__stream.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="cout__logger__stream_8h_source.html">cout_logger_stream.h</a>&gt;</code></p>
@@ -84,7 +84,8 @@ Inheritance diagram for qx::cout_logger_stream:</div>
  <div class="center">
   <img src="classqx_1_1cout__logger__stream.png" usemap="#qx::cout_5Flogger_5Fstream_map" alt=""/>
   <map id="qx::cout_5Flogger_5Fstream_map" name="qx::cout_5Flogger_5Fstream_map">
-<area href="classqx_1_1base__logger__stream.html" title="Base class for logger streams." alt="qx::base_logger_stream" shape="rect" coords="0,0,144,24"/>
+<area href="classqx_1_1base__standard__streams__stream.html" title="A base class for logger streams based on standard streams." alt="qx::base_standard_streams_stream" shape="rect" coords="0,56,207,80"/>
+<area href="classqx_1_1base__logger__stream.html" title="Base class for logger streams." alt="qx::base_logger_stream" shape="rect" coords="0,0,207,24"/>
   </map>
 </div></div>
 <table class="memberdecls">
@@ -96,18 +97,19 @@ Classes</h2></td></tr>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a610dc27b35e3d3c1d9edcc7a23924e7b"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1cout__logger__stream.html#a610dc27b35e3d3c1d9edcc7a23924e7b">cout_logger_stream</a> (std::optional&lt; <a class="el" href="structqx_1_1cout__logger__stream_1_1config.html">config</a> &gt; optStreamConfig={})</td></tr>
-<tr class="memdesc:a610dc27b35e3d3c1d9edcc7a23924e7b"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classqx_1_1cout__logger__stream.html" title="Logger stream for std::cout output.">cout_logger_stream</a> object constructor  <a href="classqx_1_1cout__logger__stream.html#a610dc27b35e3d3c1d9edcc7a23924e7b">More...</a><br /></td></tr>
+<tr class="memdesc:a610dc27b35e3d3c1d9edcc7a23924e7b"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classqx_1_1cout__logger__stream.html" title="Logger stream based on std::cout output.">cout_logger_stream</a> object constructor  <a href="classqx_1_1cout__logger__stream.html#a610dc27b35e3d3c1d9edcc7a23924e7b">More...</a><br /></td></tr>
 <tr class="separator:a610dc27b35e3d3c1d9edcc7a23924e7b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0f54e49c89c29b58180a55145c77dd88"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1cout__logger__stream.html#a0f54e49c89c29b58180a55145c77dd88">do_log</a> (const <a class="el" href="classqx_1_1category.html">category</a> &amp;<a class="el" href="classqx_1_1category.html">category</a>, verbosity eVerbosity, string_view svMessage) override</td></tr>
-<tr class="memdesc:a0f54e49c89c29b58180a55145c77dd88"><td class="mdescLeft">&#160;</td><td class="mdescRight">Proceed stream logging.  <a href="classqx_1_1cout__logger__stream.html#a0f54e49c89c29b58180a55145c77dd88">More...</a><br /></td></tr>
-<tr class="separator:a0f54e49c89c29b58180a55145c77dd88"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aba66827e83bbdf6a49c81593bcbf4c32"><td class="memItemLeft" align="right" valign="top"><a id="aba66827e83bbdf6a49c81593bcbf4c32"></a>
 virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1cout__logger__stream.html#aba66827e83bbdf6a49c81593bcbf4c32">do_flush</a> () override</td></tr>
 <tr class="memdesc:aba66827e83bbdf6a49c81593bcbf4c32"><td class="mdescLeft">&#160;</td><td class="mdescRight">Flush the stream. <br /></td></tr>
 <tr class="separator:aba66827e83bbdf6a49c81593bcbf4c32"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aae380a8ac0a4667d36572fd75694305c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1cout__logger__stream.html#aae380a8ac0a4667d36572fd75694305c">set_using_colors</a> (bool bUsingColors) noexcept</td></tr>
-<tr class="memdesc:aae380a8ac0a4667d36572fd75694305c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set whether cout output should be colored.  <a href="classqx_1_1cout__logger__stream.html#aae380a8ac0a4667d36572fd75694305c">More...</a><br /></td></tr>
-<tr class="separator:aae380a8ac0a4667d36572fd75694305c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_classqx_1_1base__standard__streams__stream"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classqx_1_1base__standard__streams__stream')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classqx_1_1base__standard__streams__stream.html">qx::base_standard_streams_stream</a></td></tr>
+<tr class="memitem:aaf76c931c13b0538f38fee2fbf01234b inherit pub_methods_classqx_1_1base__standard__streams__stream"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1base__standard__streams__stream.html#aaf76c931c13b0538f38fee2fbf01234b">base_standard_streams_stream</a> (const <a class="el" href="structqx_1_1base__standard__streams__stream_1_1config.html">config</a> &amp;streamConfig)</td></tr>
+<tr class="memdesc:aaf76c931c13b0538f38fee2fbf01234b inherit pub_methods_classqx_1_1base__standard__streams__stream"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classqx_1_1base__standard__streams__stream.html" title="A base class for logger streams based on standard streams.">base_standard_streams_stream</a> object constructor  <a href="classqx_1_1base__standard__streams__stream.html#aaf76c931c13b0538f38fee2fbf01234b">More...</a><br /></td></tr>
+<tr class="separator:aaf76c931c13b0538f38fee2fbf01234b inherit pub_methods_classqx_1_1base__standard__streams__stream"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae39add75058819356c42e53e17c5e339 inherit pub_methods_classqx_1_1base__standard__streams__stream"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1base__standard__streams__stream.html#ae39add75058819356c42e53e17c5e339">do_log</a> (const <a class="el" href="classqx_1_1category.html">category</a> &amp;<a class="el" href="classqx_1_1category.html">category</a>, verbosity eVerbosity, string_view svMessage) override</td></tr>
+<tr class="memdesc:ae39add75058819356c42e53e17c5e339 inherit pub_methods_classqx_1_1base__standard__streams__stream"><td class="mdescLeft">&#160;</td><td class="mdescRight">Proceed stream logging.  <a href="classqx_1_1base__standard__streams__stream.html#ae39add75058819356c42e53e17c5e339">More...</a><br /></td></tr>
+<tr class="separator:ae39add75058819356c42e53e17c5e339 inherit pub_methods_classqx_1_1base__standard__streams__stream"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_classqx_1_1base__logger__stream"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classqx_1_1base__logger__stream')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classqx_1_1base__logger__stream.html">qx::base_logger_stream</a></td></tr>
 <tr class="memitem:adb44cac4a04ec638c00d9eaf185fa0bf inherit pub_methods_classqx_1_1base__logger__stream"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1base__logger__stream.html#adb44cac4a04ec638c00d9eaf185fa0bf">base_logger_stream</a> (const <a class="el" href="structqx_1_1base__logger__stream_1_1config.html">config</a> &amp;streamConfig)</td></tr>
 <tr class="memdesc:adb44cac4a04ec638c00d9eaf185fa0bf inherit pub_methods_classqx_1_1base__logger__stream"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classqx_1_1base__logger__stream.html" title="Base class for logger streams.">base_logger_stream</a> object constructor  <a href="classqx_1_1base__logger__stream.html#adb44cac4a04ec638c00d9eaf185fa0bf">More...</a><br /></td></tr>
@@ -121,11 +123,11 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 <tr class="separator:abe1ebfaa9fb68d7a7d2624766f608f6b inherit pub_methods_classqx_1_1base__logger__stream"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Logger stream for std::cout output. </p>
+<div class="textblock"><p>Logger stream based on std::cout output. </p>
 <dl class="section author"><dt>Author</dt><dd>Khrapov </dd></dl>
 <dl class="section date"><dt>Date</dt><dd>28.07.2021 </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="cout__logger__stream_8h_source.html#l00028">28</a> of file <a class="el" href="cout__logger__stream_8h_source.html">cout_logger_stream.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="cout__logger__stream_8h_source.html#l00027">27</a> of file <a class="el" href="cout__logger__stream_8h_source.html">cout_logger_stream.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a610dc27b35e3d3c1d9edcc7a23924e7b"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a610dc27b35e3d3c1d9edcc7a23924e7b">&#9670;&nbsp;</a></span>cout_logger_stream()</h2>
@@ -151,7 +153,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 </table>
 </div><div class="memdoc">
 
-<p><a class="el" href="classqx_1_1cout__logger__stream.html" title="Logger stream for std::cout output.">cout_logger_stream</a> object constructor </p>
+<p><a class="el" href="classqx_1_1cout__logger__stream.html" title="Logger stream based on std::cout output.">cout_logger_stream</a> object constructor </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">optStreamConfig</td><td>- logger stream configuration </td></tr>
@@ -160,99 +162,6 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 </dl>
 
 <p class="definition">Definition at line <a class="el" href="cout__logger__stream_8inl_source.html#l00013">13</a> of file <a class="el" href="cout__logger__stream_8inl_source.html">cout_logger_stream.inl</a>.</p>
-
-</div>
-</div>
-<h2 class="groupheader">Member Function Documentation</h2>
-<a id="a0f54e49c89c29b58180a55145c77dd88"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0f54e49c89c29b58180a55145c77dd88">&#9670;&nbsp;</a></span>do_log()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void qx::cout_logger_stream::do_log </td>
-          <td>(</td>
-          <td class="paramtype">const <a class="el" href="classqx_1_1category.html">category</a> &amp;&#160;</td>
-          <td class="paramname"><em>category</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">verbosity&#160;</td>
-          <td class="paramname"><em>eVerbosity</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">string_view&#160;</td>
-          <td class="paramname"><em>svMessage</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Proceed stream logging. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">eVerbosity</td><td>- this message verbosity </td></tr>
-    <tr><td class="paramname">category</td><td>- code category </td></tr>
-    <tr><td class="paramname">svMessage</td><td>- message string </td></tr>
-  </table>
-  </dd>
-</dl>
-
-<p>Implements <a class="el" href="classqx_1_1base__logger__stream.html">qx::base_logger_stream</a>.</p>
-
-<p class="definition">Definition at line <a class="el" href="cout__logger__stream_8inl_source.html#l00036">36</a> of file <a class="el" href="cout__logger__stream_8inl_source.html">cout_logger_stream.inl</a>.</p>
-
-</div>
-</div>
-<a id="aae380a8ac0a4667d36572fd75694305c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aae380a8ac0a4667d36572fd75694305c">&#9670;&nbsp;</a></span>set_using_colors()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void qx::cout_logger_stream::set_using_colors </td>
-          <td>(</td>
-          <td class="paramtype">bool&#160;</td>
-          <td class="paramname"><em>bUsingColors</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Set whether cout output should be colored. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">bUsingColors</td><td>- true if cout output should be colored </td></tr>
-  </table>
-  </dd>
-</dl>
-
-<p class="definition">Definition at line <a class="el" href="cout__logger__stream_8inl_source.html#l00120">120</a> of file <a class="el" href="cout__logger__stream_8inl_source.html">cout_logger_stream.inl</a>.</p>
 
 </div>
 </div>
