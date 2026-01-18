@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['qx_3a_3alogger_1731',['qx::logger',['../md_include_qx_logger__r_e_a_d_m_e.html',1,'']]]
+  ['logger_1731',['logger',['../logger_readme.html',1,'']]]
 ];
