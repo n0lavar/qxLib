@@ -36,7 +36,7 @@ inline file_logger_stream_ofstream::file_logger_stream_ofstream(
     }
 
     QX_DISABLE_MSVC_WARNINGS(4996);
-    m_File.imbue(std::locale(std::locale(), new std::codecvt_utf8<char_type>));
+    m_File.imbue(std::locale(std::locale(), new std::codecvt_utf16<char_type, 0x10ffff, std::little_endian>));
     QX_RESTORE_MSVC_WARNINGS(4996);
 }
 

@@ -40,7 +40,7 @@ public:
         log_file_policy eLogFilePolicy = log_file_policy::append;
 
         // log file name
-        string_view svFileName = QXT("application");
+        string_view svFileName = QXT("qx_app.log");
     };
 
 public:

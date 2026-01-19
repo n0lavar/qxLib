@@ -121,7 +121,7 @@ public:
         @param   svFile     - file name string
         @param   svFunction - function name string
         @param   nLine      - code line number
-        @param   message    - message string
+        @param   message    - user message string
     **/
     virtual void log(
         const category&          category,
@@ -154,7 +154,17 @@ public:
     // only for internal usage in macros
     logger_string_pool* _get_string_pool() noexcept;
 
-private:
+protected:
+    /**
+        @brief  The default log line formatter
+        @param  category   - code category
+        @param  eVerbosity - message verbosity
+        @param  svFile     - file name string
+        @param  svFunction - function name string
+        @param  nLine      - code line number
+        @param  sMessage   - user message string
+        @retval            - the formatted log line (the same object as sMessage)
+    **/
     static string default_formatter(
         const category& category,
         verbosity       eVerbosity,
@@ -162,6 +172,13 @@ private:
         string_view     svFunction,
         int             nLine,
         string          sMessage) noexcept;
+
+    /**
+        @brief  Get verbosity prefix
+        @param  eVerbosity - message verbosity
+        @retval            - verbosity prefix
+    **/
+    static constexpr string_view get_verbosity_prefix(verbosity eVerbosity) noexcept;
 
 private:
     QX_PERF_SHARED_MUTEX(m_StreamsMutex);

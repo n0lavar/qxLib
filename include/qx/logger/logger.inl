@@ -108,94 +108,75 @@ inline string logger::default_formatter(
     string          sMessage) noexcept
 {
     // avoid extra allocation, insert prefix inplace
-    constexpr size_t nVerbositySize = 4;
-    constexpr size_t nTimeSize      = 19;
 
-    const string_view svCategory    = category.get_name();
-    const size_t      nCategorySize = !svCategory.empty() ? svCategory.size() + 2 : 0;
+    const string_view svVerbosityPrefix = get_verbosity_prefix(eVerbosity);
+    const string_view svCategory        = category.get_name();
+    const bool        bAddCategory      = !svCategory.empty() && svCategory != CatDefault.get_name();
 
-    constexpr auto get_num_digits = [](int nValue)
-    {
-        int nDigits = 0;
-        int x       = qx::abs(nValue);
-
-        do
-        {
-            nDigits++;
-            x /= 10;
-        } while (x != 0);
-
-        return nDigits;
-    };
-
-    const size_t nLocationSize = svFile.size() + 2 + svFunction.size() + 2 + get_num_digits(nLine) + 2;
-    const size_t nPrefixSize   = nVerbositySize + nTimeSize + 2 + nCategorySize + nLocationSize;
+    constexpr size_t nTimeSize     = 19;
+    const size_t     nCategorySize = bAddCategory ? svCategory.size() + 2 : 0;
+    const size_t     nPrefixSize   = svVerbosityPrefix.size() + nTimeSize + 2 + nCategorySize;
 
     sMessage.insert(0, QXT("\0"), nPrefixSize);
     size_t nPos = 0;
 
-    const char_type* pszVerbosity = nullptr;
-    switch (eVerbosity)
-    {
-    case verbosity::very_verbose:
-        pszVerbosity = QXT("[W][");
-        break;
-
-    case verbosity::verbose:
-        pszVerbosity = QXT("[V][");
-        break;
-
-    case verbosity::important:
-        pszVerbosity = QXT("[I][");
-        break;
-
-    case verbosity::warning:
-        pszVerbosity = QXT("[W][");
-        break;
-
-    case verbosity::error:
-        pszVerbosity = QXT("[E][");
-        break;
-
-    case verbosity::critical:
-        pszVerbosity = QXT("[C][");
-        break;
-
-    default:
-        pszVerbosity = QXT("   [");
-        break;
-    }
-    if (pszVerbosity)
-    {
-        std::memcpy(sMessage.data() + nPos, pszVerbosity, nVerbositySize * sizeof(string::value_type));
-        nPos += nVerbositySize;
-    }
+    std::memcpy(
+        sMessage.data() + nPos,
+        svVerbosityPrefix.data(),
+        svVerbosityPrefix.size() * sizeof(string_view::value_type));
+    nPos += svVerbosityPrefix.size();
 
     append_time_string(sMessage.data() + nPos, QXT('.'), QXT(':'));
     nPos += nTimeSize;
 
-    std::memcpy(sMessage.data() + nPos, QXT("]["), 2 * sizeof(string::value_type));
-    nPos += 2;
+    std::memcpy(sMessage.data() + nPos, QXT("]"), 1 * sizeof(string::value_type));
+    nPos += 1;
 
-    if (!svCategory.empty())
+    if (bAddCategory)
     {
+        std::memcpy(sMessage.data() + nPos, QXT("["), 1 * sizeof(string::value_type));
+        nPos += 1;
+
         std::memcpy(sMessage.data() + nPos, svCategory.data(), svCategory.size() * sizeof(string::value_type));
         nPos += svCategory.size();
 
-        std::memcpy(sMessage.data() + nPos, QXT("]["), 2 * sizeof(string::value_type));
-        nPos += 2;
+        std::memcpy(sMessage.data() + nPos, QXT("]"), 1 * sizeof(string::value_type));
+        nPos += 1;
     }
 
-    string_traits::format_traits<char_type, string_traits::usings_traits<char_type>>::format_to(
-        sMessage.data() + nPos,
-        QXT("{}::{}::{}] "),
-        svFile,
-        svFunction,
-        nLine);
+    std::memcpy(sMessage.data() + nPos, QXT(" "), 1 * sizeof(string::value_type));
+    nPos += 1;
 
     sMessage += QXT('\n');
 
     return sMessage;
+}
+
+constexpr string_view logger::get_verbosity_prefix(verbosity eVerbosity) noexcept
+{
+    switch (eVerbosity)
+    {
+    case verbosity::very_verbose:
+        return QXT("[VV][");
+
+    case verbosity::verbose:
+        return QXT("[V][");
+
+    case verbosity::important:
+        return QXT("[I][");
+
+    case verbosity::warning:
+        return QXT("[W][");
+
+    case verbosity::error:
+        return QXT("[E][");
+
+    case verbosity::critical:
+        return QXT("[C][");
+
+    default:
+        return QXT("   [");
+    }
 }
 
 } // namespace qx

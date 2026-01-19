@@ -36,7 +36,7 @@
 
 BENCHMARK_MAIN();
 
-constexpr qx::string_view k_svLogFileName = QXT("logger_benchmark");
+constexpr qx::string_view k_svLogFileName = QXT("logger_benchmark.log");
 
 static std::vector<qx::string> generate_strings(size_t nCount, uint32_t nSeed)
 {
@@ -177,7 +177,7 @@ public:
     virtual void TearDown(::benchmark::State& state) override
     {
         qx::logger_singleton::get_instance().get_logger().reset();
-        std::filesystem::remove((qx::string(k_svLogFileName) + QXT(".log")).data());
+        std::filesystem::remove(k_svLogFileName);
 
         fflush(stdout);
         fflush(stderr);

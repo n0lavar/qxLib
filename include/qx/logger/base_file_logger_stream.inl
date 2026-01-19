@@ -46,14 +46,17 @@ inline std::filesystem::path base_file_logger_stream::create_folder_and_get_log_
     {
         string sTime;
         append_time_string(sTime.begin(), QXT('-'), QXT('-'));
-        sLogFile += QXT('_');
-        sLogFile += sTime;
+
+        size_t nInsetPos = sLogFile.rfind(QXT(".log"));
+        if (nInsetPos == string::npos)
+            nInsetPos = sLogFile.size();
+
+        sLogFile.insert(nInsetPos, QXT('_'));
+        sLogFile.insert(nInsetPos + 1, sTime);
     }
 
-    sLogFile += QXT(".log");
-
-    const wstring               sWideLogFile = to_wstring(sLogFile);
-    const std::filesystem::path path(sWideLogFile.c_str());
+    const wstring         sWideLogFile = to_wstring(sLogFile);
+    std::filesystem::path path(sWideLogFile.c_str());
     if (path.has_parent_path() && !std::filesystem::exists(path.parent_path()))
     {
         if (!std::filesystem::create_directory(path.parent_path()))

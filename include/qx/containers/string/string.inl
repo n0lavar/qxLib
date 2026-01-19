@@ -92,18 +92,9 @@ template<class char_t, class traits_t>
 template<class fwd_it_t>
 inline void basic_string<char_t, traits_t>::assign(fwd_it_t itFirst, fwd_it_t itLast) noexcept
 {
-    if (_resize(std::distance(itFirst, itLast)))
-    {
-        fwd_it_t itOther = itFirst;
-        iterator itThis  = begin();
-
-        while (itOther != itLast)
-        {
-            *itThis = *itOther;
-            ++itThis;
-            ++itOther;
-        }
-    }
+    clear();
+    for (fwd_it_t it = itFirst; it != itLast; ++it)
+        push_back(*it);
 }
 
 template<class char_t, class traits_t>
