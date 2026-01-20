@@ -17,16 +17,11 @@ inline cout_logger_stream::cout_logger_stream(std::optional<config> optStreamCon
 
     if (streamConfig.bDisableStdioSync)
     {
-        // Optimization
-        // Don't synchronize to the standard C streams after each input/output operation
         std::ios_base::sync_with_stdio(false);
     }
 
     if (streamConfig.bUntieCin)
     {
-        // This unties cin from cout.
-        // Tied streams ensure that one stream is flushed automatically
-        // before each I/O operation on the other stream
         std::wcin.tie(nullptr);
         std::wcout.tie(nullptr);
     }
@@ -34,28 +29,22 @@ inline cout_logger_stream::cout_logger_stream(std::optional<config> optStreamCon
 
 inline void cout_logger_stream::do_flush()
 {
-    std::wcerr << std::flush;
-    std::wcout << std::flush;
+    details::get_cout<char_type>::get() << std::flush;
+    details::get_cerr<char_type>::get() << std::flush;
 }
 
 inline void cout_logger_stream::cout_colorized(verbosity eVerbosity, string_view svMessage, const color& rangeColor)
 {
-    std::wostream& outputStream = eVerbosity < verbosity::error ? std::wcout : std::wcerr;
-
-    // possible allocation when qx::char_type != wchar_t
-    auto sWideMessage = to_wstring(svMessage);
-
-    outputStream << terminal_color::font(rangeColor) << sWideMessage << terminal_color::reset();
+    auto& outputStream =
+        eVerbosity < verbosity::error ? details::get_cout<char_type>::get() : details::get_cerr<char_type>::get();
+    outputStream << terminal_color::font(rangeColor) << svMessage << terminal_color::reset();
 }
 
 inline void cout_logger_stream::cout_common(verbosity eVerbosity, string_view svMessage)
 {
-    std::wostream& outputStream = eVerbosity < verbosity::error ? std::wcout : std::wcerr;
-
-    // possible allocation when qx::char_type != wchar_t
-    auto sWideMessage = to_wstring(svMessage);
-
-    outputStream << sWideMessage;
+    auto& outputStream =
+        eVerbosity < verbosity::error ? details::get_cout<char_type>::get() : details::get_cerr<char_type>::get();
+    outputStream << svMessage;
 }
 
 } // namespace qx

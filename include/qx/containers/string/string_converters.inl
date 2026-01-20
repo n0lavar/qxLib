@@ -68,7 +68,7 @@ inline cstring_view to_cstring(cstring_view stringView, const std::locale& local
 
 inline void to_string(string& out, cstring_view stringView, const std::locale& locale)
 {
-#ifdef QX_CONF_USE_CHAR
+#if QX_CONF_USE_CHAR
     out = stringView;
 #elif defined(QX_CONF_USE_WCHAR)
     to_wstring(out, stringView, locale);
@@ -77,7 +77,7 @@ inline void to_string(string& out, cstring_view stringView, const std::locale& l
 
 inline string to_string(cstring_view stringView, const std::locale& locale)
 {
-#ifdef QX_CONF_USE_CHAR
+#if QX_CONF_USE_CHAR
     return stringView;
 #elif defined(QX_CONF_USE_WCHAR)
     return to_wstring(stringView, locale);
@@ -86,7 +86,7 @@ inline string to_string(cstring_view stringView, const std::locale& locale)
 
 inline void to_string(string& out, wstring_view stringView, const std::locale& locale)
 {
-#ifdef QX_CONF_USE_CHAR
+#if QX_CONF_USE_CHAR
     to_cstring(out, stringView, locale);
 #elif defined(QX_CONF_USE_WCHAR)
     out = stringView;
@@ -95,7 +95,7 @@ inline void to_string(string& out, wstring_view stringView, const std::locale& l
 
 inline string to_string(wstring_view stringView, const std::locale& locale)
 {
-#ifdef QX_CONF_USE_CHAR
+#if QX_CONF_USE_CHAR
     return to_cstring(stringView, locale);
 #elif defined(QX_CONF_USE_WCHAR)
     return stringView;
@@ -106,7 +106,7 @@ inline void utf8_to_string(string& out, cstring_view pszUtf8)
 {
     QX_PERF_SCOPE();
 
-#ifdef QX_CONF_USE_WCHAR
+#if QX_CONF_USE_WCHAR
     #if QX_WIN
 
     // much faster on windows

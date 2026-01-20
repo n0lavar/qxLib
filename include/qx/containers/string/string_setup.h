@@ -13,8 +13,13 @@
 
 #define QX_ALL_CHAR_TYPES char, wchar_t
 
-#if !defined(QX_CONF_USE_CHAR) && !defined(QX_CONF_USE_WCHAR)
-    #define QX_CONF_USE_WCHAR
+#ifdef QX_CONF_USE_CHAR
+    #define QX_CONF_USE_WCHAR !QX_CONF_USE_CHAR
+#elif defined(QX_CONF_USE_WCHAR)
+    #define QX_CONF_USE_CHAR !QX_CONF_USE_WCHAR
+#elif !defined(QX_CONF_USE_CHAR) && !defined(QX_CONF_USE_WCHAR)
+    #define QX_CONF_USE_CHAR  0
+    #define QX_CONF_USE_WCHAR 1
 #endif
 
 namespace qx::details
@@ -25,12 +30,12 @@ using all_char_types = std::tuple<QX_ALL_CHAR_TYPES>;
 }
 
 
-#ifdef QX_CONF_USE_CHAR
+#if QX_CONF_USE_CHAR
 
     #define QX_CHAR_TYPE char
     #define _QXT(quote)  quote
 
-#elif defined(QX_CONF_USE_WCHAR)
+#elif QX_CONF_USE_WCHAR
 
     #define QX_CHAR_TYPE wchar_t
     #define _QXT(quote)  L##quote

@@ -11,8 +11,6 @@
 #include <qx/containers/string/string_converters.h>
 #include <qx/logger/base_standard_streams_stream.h>
 
-#include <iostream>
-
 namespace qx
 {
 
@@ -20,6 +18,7 @@ namespace qx
 
     @class   cout_logger_stream
     @brief   Logger stream based on std::cout output
+    @details On Linux, output is always `UTF8` (aka char) even with qx::char_type == wchar_t.
     @author  Khrapov
     @date    28.07.2021
 
@@ -29,11 +28,14 @@ class cout_logger_stream : public base_standard_streams_stream
 public:
     struct config : base_standard_streams_stream::config
     {
-        // don't synchronize to the standard C streams after each input/output operation
-        bool bDisableStdioSync = true;
+        // Optimization: Don't synchronize to the standard C streams after each input/output operation.
+        // Be careful, as it changes the global setting. You'll need to revert it manually if needed.
+        bool bDisableStdioSync = false;
 
-        // untie cin from cout
-        bool bUntieCin = true;
+        // Optimization: Untie cin from cout.
+        // Tied streams ensure that one stream is flushed automatically before each I/O operation on the other stream.
+        // Be careful, as it changes the global setting. You'll need to revert it manually if needed.
+        bool bUntieCin = false;
     };
 
 public:

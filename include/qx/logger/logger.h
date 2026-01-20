@@ -89,7 +89,7 @@ public:
 
 public:
     logger();
-    virtual ~logger() noexcept = default;
+    virtual ~logger() noexcept;
 
     /**
         @brief  Add an output stream to the logger

@@ -13,6 +13,7 @@
 #include <qx/internal/perf_scope.h>
 #include <qx/verbosity.h>
 
+#include <iostream>
 #include <memory>
 #include <mutex>
 

@@ -15,6 +15,11 @@ inline logger::logger()
     add_stream(fwrite_logger_stream());
 }
 
+inline logger::~logger() noexcept
+{
+    logger::flush();
+}
+
 template<sbo_poly_assignable_c<base_logger_stream> stream_t>
 inline void logger::add_stream(stream_t stream) noexcept
 {
@@ -75,6 +80,8 @@ inline void logger::flush()
 
 inline void logger::reset() noexcept
 {
+    flush();
+
     std::unique_lock _(m_StreamsMutex);
     m_Streams.clear();
 }

@@ -53,7 +53,7 @@ struct base_file
 {
     static void set_up()
     {
-        EXPECT_TRUE(!std::filesystem::exists(k_svLogFileName));
+        EXPECT_FALSE(std::filesystem::exists(k_svLogFileName));
     }
 
     static qx::string get_content()
@@ -62,10 +62,16 @@ struct base_file
         qx::logger_singleton::get_instance().get_logger().reset();
 
         EXPECT_TRUE(std::filesystem::exists(k_svLogFileName));
-        std::basic_ifstream<qx::char_type> file(qx::string(k_svLogFileName).c_str());
-        QX_DISABLE_MSVC_WARNINGS(4996);
-        file.imbue(std::locale(file.getloc(), new std::codecvt_utf16<wchar_t, 0x10ffff, std::little_endian>));
-        QX_RESTORE_MSVC_WARNINGS(4996);
+
+        const std::filesystem::path        path(k_svLogFileName);
+        std::basic_ifstream<qx::char_type> file(path, std::ios::binary);
+
+        if constexpr (std::is_same_v<qx::char_type, wchar_t>)
+        {
+            QX_DISABLE_MSVC_WARNINGS(4996);
+            file.imbue(std::locale(file.getloc(), new std::codecvt_utf16<qx::char_type, 0x10ffff, std::little_endian>));
+            QX_RESTORE_MSVC_WARNINGS(4996);
+        }
 
         return { std::istreambuf_iterator<qx::char_type>(file), std::istreambuf_iterator<qx::char_type>() };
     }
@@ -142,287 +148,149 @@ struct mapping : base_file
 struct base_cout
 {
     // Saved original file descriptors for stdout/stderr
-    static inline int s_old_out = -1;
-    static inline int s_old_err = -1;
+    static inline int s_nOldOutDescriptor = -1;
+    static inline int s_nOldErrDescriptor = -1;
+
+    static inline int s_nReadPipe  = -1;
+    static inline int s_nWritePipe = -1;
 
 #if QX_WIN
-    // Windows uses two separate ints for pipe ends
-    static inline int s_pipe_r = -1;
-    static inline int s_pipe_w = -1;
-
     // Previous text modes (used when wchar_t is active)
-    static inline int s_old_mode_out = -1;
-    static inline int s_old_mode_err = -1;
+    static inline int s_nOldOutMode = -1;
+    static inline int s_nOldErrMode = -1;
 #else
-    // POSIX pipe: [0] = read end, [1] = write end
-    static inline int s_pipefd[2] = { -1, -1 };
+    static inline bool s_bCharOutput = false;
 #endif
-
-    static inline bool s_active = false;
 
     // Redirect stdout and stderr into a single pipe
     static void set_up()
     {
-        if (s_active)
-            throw std::runtime_error("base_cout capture already active");
-
         std::fflush(stdout);
         std::fflush(stderr);
 
         // Save original stdout/stderr descriptors
-        s_old_out = __dup(__fileno(stdout));
-        s_old_err = __dup(__fileno(stderr));
-        if (s_old_out < 0 || s_old_err < 0)
-            throw std::runtime_error("dup failed");
+        s_nOldOutDescriptor = __dup(__fileno(stdout));
+        ASSERT_GE(s_nOldOutDescriptor, 0);
+        s_nOldErrDescriptor = __dup(__fileno(stderr));
+        ASSERT_GE(s_nOldErrDescriptor, 0);
 
+        int fds[2];
 #if QX_WIN
         // Create binary pipe (no CR/LF or encoding conversion)
-        int fds[2];
-        if (__pipe(fds, 1 << 16, _O_BINARY) != 0)
-            throw std::runtime_error("_pipe failed");
-
-        s_pipe_r = fds[0];
-        s_pipe_w = fds[1];
+        ASSERT_EQ(__pipe(fds, 1 << 16, _O_BINARY), 0);
+#else
+        // Create POSIX pipe
+        ASSERT_EQ(::pipe(fds), 0);
+#endif
+        s_nReadPipe  = fds[0];
+        s_nWritePipe = fds[1];
 
         // Redirect both stdout and stderr to the same pipe
-        if (__dup2(s_pipe_w, __fileno(stdout)) != 0)
-            throw std::runtime_error("dup2 stdout failed");
-        if (__dup2(s_pipe_w, __fileno(stderr)) != 0)
-            throw std::runtime_error("dup2 stderr failed");
+#if QX_WIN
+        ASSERT_EQ(__dup2(s_nWritePipe, __fileno(stdout)), 0);
+        ASSERT_EQ(__dup2(s_nWritePipe, __fileno(stderr)), 0);
+#else
+        ASSERT_NE(__dup2(s_nWritePipe, STDOUT_FILENO), -1);
+        ASSERT_NE(__dup2(s_nWritePipe, STDERR_FILENO), -1);
+#endif
 
+#if QX_WIN
         // If wchar_t is used, switch CRT to UTF-16 text mode
         if constexpr (std::is_same_v<qx::char_type, wchar_t>)
         {
-            s_old_mode_out = _setmode(__fileno(stdout), _O_U16TEXT);
-            s_old_mode_err = _setmode(__fileno(stderr), _O_U16TEXT);
+            s_nOldOutMode = _setmode(__fileno(stdout), _O_U16TEXT);
+            s_nOldErrMode = _setmode(__fileno(stderr), _O_U16TEXT);
         }
-#else
-        // Create POSIX pipe
-        if (::pipe(s_pipefd) != 0)
-            throw std::runtime_error("pipe failed");
-
-        // Redirect both stdout and stderr to the same pipe
-        if (__dup2(s_pipefd[1], STDOUT_FILENO) < 0)
-            throw std::runtime_error("dup2 stdout failed");
-        if (__dup2(s_pipefd[1], STDERR_FILENO) < 0)
-            throw std::runtime_error("dup2 stderr failed");
 #endif
-
-        s_active = true;
     }
 
     // Restore stdout/stderr and return captured output
     static qx::string get_content()
     {
-        if (!s_active)
-            return {};
-
-        std::fflush(stdout);
-        std::fflush(stderr);
-
 #if QX_WIN
         // Restore previous text mode if wchar_t was used
         if constexpr (std::is_same_v<qx::char_type, wchar_t>)
         {
-            if (s_old_mode_out != -1)
-                _setmode(__fileno(stdout), s_old_mode_out);
-            if (s_old_mode_err != -1)
-                _setmode(__fileno(stderr), s_old_mode_err);
+            if (s_nOldOutMode != -1)
+                _setmode(__fileno(stdout), s_nOldOutMode);
+            if (s_nOldErrMode != -1)
+                _setmode(__fileno(stderr), s_nOldErrMode);
         }
+#endif
 
         // Restore original stdout/stderr
-        __dup2(s_old_out, __fileno(stdout));
-        __dup2(s_old_err, __fileno(stderr));
-        __close(s_old_out);
-        s_old_out = -1;
-        __close(s_old_err);
-        s_old_err = -1;
+        __dup2(s_nOldOutDescriptor, __fileno(stdout));
+        __dup2(s_nOldErrDescriptor, __fileno(stderr));
+        __close(s_nOldOutDescriptor);
+        s_nOldOutDescriptor = -1;
+        __close(s_nOldErrDescriptor);
+        s_nOldErrDescriptor = -1;
 
         // Close write end so read end receives EOF
-        __close(s_pipe_w);
-        s_pipe_w = -1;
+        __close(s_nWritePipe);
+        s_nWritePipe = -1;
 
         // Read all captured bytes
-        qx::string bytes;
-        bytes.reserve(4096);
-
-        char buf[16 * 1024];
+        qx::string             sContent;
+        std::array<char, 1024> buffer;
         while (true)
         {
-            int n = __read(s_pipe_r, buf, (int)sizeof(buf));
+            int n = __read(s_nReadPipe, buffer.data(), static_cast<unsigned int>(buffer.size()));
             if (n > 0)
             {
+#if QX_WIN
+                QX_PUSH_SUPPRESS_MSVC_WARNINGS(4244);
                 if constexpr (std::is_same_v<qx::char_type, char>)
                 {
-                    bytes.append(buf, buf + n);
+                    sContent.append(buffer.data(), buffer.data() + n);
                 }
                 else
                 {
-                    for (int i = 0; i < n; i += 2)
-                    {
-                        bytes.push_back(*reinterpret_cast<wchar_t*>(&buf[i]));
-                    }
+                    for (int i = 0; i < n; i += sizeof(qx::char_type))
+                        sContent.push_back(*reinterpret_cast<qx::char_type*>(&buffer[i]));
                 }
-            }
-            else
-            {
-                break;
-            }
-        }
-
-        __close(s_pipe_r);
-        s_pipe_r = -1;
-        s_active = false;
-
-        // Convert to qx::string
-        if constexpr (std::is_same_v<qx::char_type, char>)
-        {
-            return bytes;
-        }
-        else
-        {
-            // UTF-16 wchar_t stream (Windows + _O_U16TEXT)
-            if (bytes.size() % sizeof(wchar_t) == 0)
-            {
-                const wchar_t* p = reinterpret_cast<const wchar_t*>(bytes.data());
-                size_t         n = bytes.size() / sizeof(wchar_t);
-                return qx::string(p, p + n);
-            }
-
-            // Fallback: byte-wise widening
-            qx::string w;
-            w.reserve(bytes.size());
-            for (qx::char_type ch : bytes)
-                w.push_back(ch);
-            return w;
-        }
-
+                QX_POP_SUPPRESS_WARNINGS();
 #else
-        // Restore original stdout/stderr
-        __dup2(s_old_out, STDOUT_FILENO);
-        __dup2(s_old_err, STDERR_FILENO);
-        __close(s_old_out);
-        s_old_out = -1;
-        __close(s_old_err);
-        s_old_err = -1;
-
-        // Close write end to signal EOF
-        __close(s_pipefd[1]);
-        s_pipefd[1] = -1;
-
-        // Read all captured bytes
-        qx::string bytes;
-        bytes.reserve(4096);
-
-        char buf[16 * 1024];
-        for (;;)
-        {
-            ssize_t n = __read(s_pipefd[0], buf, sizeof(buf));
-            if (n > 0)
-                bytes.append(buf, buf + (size_t)n);
-            else
-                break;
-        }
-
-        __close(s_pipefd[0]);
-        s_pipefd[0] = -1;
-        s_active    = false;
-
-        if constexpr (std::is_same_v<qx::char_type, char>)
-        {
-            return bytes;
-        }
-        else
-        {
-            // On POSIX, wide output is usually already multibyte
-            qx::string w;
-            w.reserve(bytes.size());
-            for (unsigned char ch : bytes)
-                w.push_back((wchar_t)ch);
-            return w;
-        }
+                if (s_bCharOutput)
+                {
+                    for (int i = 0; i < n; ++i)
+                        sContent.append(static_cast<qx::char_type>(buffer[i]));
+                }
+                else
+                {
+                    for (int i = 0; i < n; i += sizeof(qx::char_type))
+                        sContent.push_back(*reinterpret_cast<qx::char_type*>(&buffer[i]));
+                }
 #endif
+            }
+            else
+            {
+                break;
+            }
+        }
+
+        __close(s_nReadPipe);
+        s_nReadPipe = -1;
+
+        return sContent;
     }
 
-    // Safety cleanup if a test exits early
     static void tear_down()
     {
-        if (!s_active)
-            return;
-
-        std::fflush(stdout);
-        std::fflush(stderr);
-
-#if QX_WIN
-        if constexpr (std::is_same_v<qx::char_type, wchar_t>)
-        {
-            if (s_old_mode_out != -1)
-                _setmode(__fileno(stdout), s_old_mode_out);
-            if (s_old_mode_err != -1)
-                _setmode(__fileno(stderr), s_old_mode_err);
-        }
-
-        if (s_old_out != -1)
-        {
-            __dup2(s_old_out, __fileno(stdout));
-            __close(s_old_out);
-            s_old_out = -1;
-        }
-
-        if (s_old_err != -1)
-        {
-            __dup2(s_old_err, __fileno(stderr));
-            __close(s_old_err);
-            s_old_err = -1;
-        }
-
-        if (s_pipe_w != -1)
-        {
-            __close(s_pipe_w);
-            s_pipe_w = -1;
-        }
-        if (s_pipe_r != -1)
-        {
-            __close(s_pipe_r);
-            s_pipe_r = -1;
-        }
-#else
-        if (s_old_out != -1)
-        {
-            __dup2(s_old_out, STDOUT_FILENO);
-            __close(s_old_out);
-            s_old_out = -1;
-        }
-
-        if (s_old_err != -1)
-        {
-            __dup2(s_old_err, STDERR_FILENO);
-            __close(s_old_err);
-            s_old_err = -1;
-        }
-
-        if (s_pipefd[1] != -1)
-        {
-            __close(s_pipefd[1]);
-            s_pipefd[1] = -1;
-        }
-        if (s_pipefd[0] != -1)
-        {
-            __close(s_pipefd[0]);
-            s_pipefd[0] = -1;
-        }
-#endif
-
-        s_active = false;
     }
 };
 struct cout : base_cout
 {
     static void set_up()
     {
+        // On POSIX, cout outputs always use char
+#if !QX_WIN
+        s_bCharOutput = true;
+#endif
+
         base_cout::set_up();
         qx::logger_singleton::get_instance().get_logger().add_stream(
-            qx::cout_logger_stream(qx::cout_logger_stream::config { { .bUseColors = false } }));
+            qx::cout_logger_stream(qx::cout_logger_stream::config { { .bUseColors = false }, false, false }));
     }
 };
 
@@ -430,6 +298,10 @@ struct fwrite : base_cout
 {
     static void set_up()
     {
+#if !QX_WIN
+        s_bCharOutput = false;
+#endif
+
         base_cout::set_up();
         qx::logger_singleton::get_instance().get_logger().add_stream(
             qx::fwrite_logger_stream(qx::fwrite_logger_stream::config { .bUseColors = false }));
@@ -459,6 +331,8 @@ protected:
     }
     virtual void TearDown() override
     {
+        qx::get_logger().flush();
+
         const qx::string                   sContent = traits_t::get_content();
         const std::vector<qx::string_view> lines    = sContent.split(QXT('\n'));
         auto                               it       = lines.begin();
@@ -543,8 +417,8 @@ private:
         std::match_results<qx::string::const_pointer> match;
         auto                                          regex = std::basic_regex(sPattern.data());
         EXPECT_TRUE(std::regex_search(std::basic_string(svLine).c_str(), match, regex))
-            << "regex: " << qx::to_cstring(sPattern).c_str() << std::endl
-            << "line:  " << qx::to_cstring(svLine).c_str() << std::endl;
+            << "regex: " << qx::to_cstring(sPattern) << std::endl
+            << "line:  " << qx::to_cstring(svLine) << std::endl;
     }
 };
 
@@ -554,16 +428,16 @@ TYPED_TEST(logger_test, main)
 {
     // file category
     QX_LOG(qx::verbosity::log, "Hello world");
-    QX_LOG(qx::verbosity::log, "Hello {}", TEXT("world"));
-    QX_LOG(qx::verbosity::log, "The {} is {}", TEXT("answer"), 42);
+    QX_LOG(qx::verbosity::log, "Hello {}", QXT("world"));
+    QX_LOG(qx::verbosity::log, "The {} is {}", QXT("answer"), 42);
 
     // manual category
     QX_LOG_C(CatLoggerTest, qx::verbosity::log, "Hello world");
-    QX_LOG_C(CatLoggerTest, qx::verbosity::log, "Hello {}", TEXT("world"));
-    QX_LOG_C(CatLoggerTest, qx::verbosity::log, "The {} is {}", TEXT("answer"), 42);
+    QX_LOG_C(CatLoggerTest, qx::verbosity::log, "Hello {}", QXT("world"));
+    QX_LOG_C(CatLoggerTest, qx::verbosity::log, "The {} is {}", QXT("answer"), 42);
 
     // manual default category ([CatDefault] must not appear)
     QX_LOG_C(CatDefault, qx::verbosity::log, "Hello world");
-    QX_LOG_C(CatDefault, qx::verbosity::log, "Hello {}", TEXT("world"));
-    QX_LOG_C(CatDefault, qx::verbosity::log, "The {} is {}", TEXT("answer"), 42);
+    QX_LOG_C(CatDefault, qx::verbosity::log, "Hello {}", QXT("world"));
+    QX_LOG_C(CatDefault, qx::verbosity::log, "The {} is {}", QXT("answer"), 42);
 }
