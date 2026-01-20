@@ -84,92 +84,93 @@ $(function() {
 <div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="perf__scope_8h.html">qx/internal/perf_scope.h</a>&gt;</span></div>
 <div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="verbosity_8h.html">qx/verbosity.h</a>&gt;</span></div>
 <div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160; </div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="preprocessor">#include &lt;memory&gt;</span></div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="preprocessor">#include &lt;mutex&gt;</span></div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160; </div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<a class="code" href="category_8h.html#abdf761e9200c7013ddfee39ea8d39e78">QX_DEFINE_CATEGORY</a>(CatLogger, qx::color::dark_turquoise());</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160; </div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="keyword">namespace </span>qx</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;{</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="comment">/**</span></div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="comment">    @class   base_logger_stream</span></div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="comment">    @brief   Base class for logger streams</span></div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="comment">    @author  Khrapov</span></div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="comment">    @date    28.07.2021</span></div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="comment">**/</span></div>
-<div class="line"><a name="l00032"></a><span class="lineno"><a class="line" href="classqx_1_1base__logger__stream.html">   32</a></span>&#160;<span class="keyword">class </span><a class="code" href="classqx_1_1base__logger__stream.html">base_logger_stream</a></div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;{</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00035"></a><span class="lineno"><a class="line" href="structqx_1_1base__logger__stream_1_1config.html">   35</a></span>&#160;    <span class="keyword">struct </span><a class="code" href="structqx_1_1base__logger__stream_1_1config.html">config</a></div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    {</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;        <span class="comment">// if it&#39;s required to protect log with a mutex</span></div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;        <span class="keywordtype">bool</span> bProtectLog = <span class="keyword">true</span>;</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160; </div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;        <span class="comment">// the minimum verbosity level at which flush will be called</span></div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;        verbosity eMinFlushVerbosity = verbosity::error;</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    };</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160; </div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="keyword">public</span>:<span class="comment"></span></div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="comment">    /**</span></div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="comment">        @brief base_logger_stream object constructor</span></div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="comment">        @param streamConfig - logger configuration</span></div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="comment">    **/</span></div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    <a class="code" href="classqx_1_1base__logger__stream.html#adb44cac4a04ec638c00d9eaf185fa0bf">base_logger_stream</a>(<span class="keyword">const</span> <a class="code" href="structqx_1_1base__logger__stream_1_1config.html">config</a>&amp; streamConfig);</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160; </div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    <a class="code" href="classqx_1_1base__logger__stream.html#adb44cac4a04ec638c00d9eaf185fa0bf">base_logger_stream</a>(<a class="code" href="classqx_1_1base__logger__stream.html">base_logger_stream</a>&amp;&amp;) noexcept = default;</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160; </div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    virtual ~<a class="code" href="classqx_1_1base__logger__stream.html">base_logger_stream</a>() = default;</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="comment">    /**</span></div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;<span class="comment">        @brief  Output to stream</span></div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;<span class="comment">        @tparam char_t     - char type, typically char or wchar_t</span></div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;<span class="comment">        @param  category   - code category</span></div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;<span class="comment">        @param  eVerbosity   message verbosity</span></div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;<span class="comment">        @param  svMessage  - formatted log line</span></div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;<span class="comment">    **/</span></div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classqx_1_1base__logger__stream.html#a17c1b1553f1ae9dd529916745843221f">log</a>(const <a class="code" href="classqx_1_1category.html">category</a>&amp; <a class="code" href="classqx_1_1category.html">category</a>, verbosity eVerbosity, string_view svMessage);</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;<span class="comment">    /**</span></div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;<span class="comment">        @brief Flush the stream</span></div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;<span class="comment">    **/</span></div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classqx_1_1base__logger__stream.html#abe1ebfaa9fb68d7a7d2624766f608f6b">flush</a>();</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160; </div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;private:<span class="comment"></span></div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;<span class="comment">    /**</span></div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;<span class="comment">        @brief Proceed stream logging</span></div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;<span class="comment">        @param eVerbosity - this message verbosity</span></div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;<span class="comment">        @param category   - code category</span></div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;<span class="comment">        @param svMessage  - message string</span></div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;<span class="comment">    **/</span></div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    virtual <span class="keywordtype">void</span> do_log(const <a class="code" href="classqx_1_1category.html">category</a>&amp; <a class="code" href="classqx_1_1category.html">category</a>, verbosity eVerbosity, string_view svMessage) = 0;</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;<span class="comment">    /**</span></div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;<span class="comment">        @brief Flush the stream</span></div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;<span class="comment">    **/</span></div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;    virtual <span class="keywordtype">void</span> do_flush() = 0;</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160; </div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;private:</div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;    std::unique_ptr&lt;std::recursive_mutex&gt; m_pMutex;</div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;    <span class="keywordtype">bool</span>                                  m_bProtectLog        = true;</div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;    verbosity                             m_eMinFlushVerbosity = verbosity::error;</div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;};</div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160; </div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;} <span class="comment">// namespace qx</span></div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160; </div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;<span class="preprocessor">#include &lt;qx/logger/base_logger_stream.inl&gt;</span></div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="preprocessor">#include &lt;iostream&gt;</span></div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="preprocessor">#include &lt;memory&gt;</span></div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="preprocessor">#include &lt;mutex&gt;</span></div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160; </div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<a class="code" href="category_8h.html#abdf761e9200c7013ddfee39ea8d39e78">QX_DEFINE_CATEGORY</a>(CatLogger, qx::color::dark_turquoise());</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160; </div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="keyword">namespace </span>qx</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;{</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="comment">/**</span></div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="comment">    @class   base_logger_stream</span></div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="comment">    @brief   Base class for logger streams</span></div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="comment">    @author  Khrapov</span></div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="comment">    @date    28.07.2021</span></div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="comment">**/</span></div>
+<div class="line"><a name="l00033"></a><span class="lineno"><a class="line" href="classqx_1_1base__logger__stream.html">   33</a></span>&#160;<span class="keyword">class </span><a class="code" href="classqx_1_1base__logger__stream.html">base_logger_stream</a></div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;{</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00036"></a><span class="lineno"><a class="line" href="structqx_1_1base__logger__stream_1_1config.html">   36</a></span>&#160;    <span class="keyword">struct </span><a class="code" href="structqx_1_1base__logger__stream_1_1config.html">config</a></div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    {</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;        <span class="comment">// if it&#39;s required to protect log with a mutex</span></div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;        <span class="keywordtype">bool</span> bProtectLog = <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160; </div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;        <span class="comment">// the minimum verbosity level at which flush will be called</span></div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;        verbosity eMinFlushVerbosity = verbosity::error;</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    };</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160; </div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="keyword">public</span>:<span class="comment"></span></div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="comment">    /**</span></div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="comment">        @brief base_logger_stream object constructor</span></div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="comment">        @param streamConfig - logger configuration</span></div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="comment">    **/</span></div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    <a class="code" href="classqx_1_1base__logger__stream.html#adb44cac4a04ec638c00d9eaf185fa0bf">base_logger_stream</a>(<span class="keyword">const</span> <a class="code" href="structqx_1_1base__logger__stream_1_1config.html">config</a>&amp; streamConfig);</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160; </div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    <a class="code" href="classqx_1_1base__logger__stream.html#adb44cac4a04ec638c00d9eaf185fa0bf">base_logger_stream</a>(<a class="code" href="classqx_1_1base__logger__stream.html">base_logger_stream</a>&amp;&amp;) noexcept = default;</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160; </div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    virtual ~<a class="code" href="classqx_1_1base__logger__stream.html">base_logger_stream</a>() = default;</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;<span class="comment">    /**</span></div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;<span class="comment">        @brief  Output to stream</span></div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;<span class="comment">        @tparam char_t     - char type, typically char or wchar_t</span></div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;<span class="comment">        @param  category   - code category</span></div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;<span class="comment">        @param  eVerbosity   message verbosity</span></div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;<span class="comment">        @param  svMessage  - formatted log line</span></div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;<span class="comment">    **/</span></div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classqx_1_1base__logger__stream.html#a17c1b1553f1ae9dd529916745843221f">log</a>(const <a class="code" href="classqx_1_1category.html">category</a>&amp; <a class="code" href="classqx_1_1category.html">category</a>, verbosity eVerbosity, string_view svMessage);</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;<span class="comment">    /**</span></div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;<span class="comment">        @brief Flush the stream</span></div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;<span class="comment">    **/</span></div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classqx_1_1base__logger__stream.html#abe1ebfaa9fb68d7a7d2624766f608f6b">flush</a>();</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160; </div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;private:<span class="comment"></span></div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;<span class="comment">    /**</span></div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;<span class="comment">        @brief Proceed stream logging</span></div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;<span class="comment">        @param eVerbosity - this message verbosity</span></div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;<span class="comment">        @param category   - code category</span></div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;<span class="comment">        @param svMessage  - message string</span></div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;<span class="comment">    **/</span></div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;    virtual <span class="keywordtype">void</span> do_log(const <a class="code" href="classqx_1_1category.html">category</a>&amp; <a class="code" href="classqx_1_1category.html">category</a>, verbosity eVerbosity, string_view svMessage) = 0;</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;<span class="comment">    /**</span></div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;<span class="comment">        @brief Flush the stream</span></div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;<span class="comment">    **/</span></div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;    virtual <span class="keywordtype">void</span> do_flush() = 0;</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160; </div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;private:</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;    std::unique_ptr&lt;std::recursive_mutex&gt; m_pMutex;</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;    <span class="keywordtype">bool</span>                                  m_bProtectLog        = true;</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;    verbosity                             m_eMinFlushVerbosity = verbosity::error;</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;};</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160; </div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;} <span class="comment">// namespace qx</span></div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160; </div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;<span class="preprocessor">#include &lt;qx/logger/base_logger_stream.inl&gt;</span></div>
 <div class="ttc" id="acategory_8h_html"><div class="ttname"><a href="category_8h.html">category.h</a></div></div>
 <div class="ttc" id="acategory_8h_html_abdf761e9200c7013ddfee39ea8d39e78"><div class="ttname"><a href="category_8h.html#abdf761e9200c7013ddfee39ea8d39e78">QX_DEFINE_CATEGORY</a></div><div class="ttdeci">#define QX_DEFINE_CATEGORY(name,...)</div><div class="ttdoc">Define a category.</div><div class="ttdef"><b>Definition:</b> <a href="category_8h_source.html#l00021">category.h:21</a></div></div>
-<div class="ttc" id="aclassqx_1_1base__logger__stream_html"><div class="ttname"><a href="classqx_1_1base__logger__stream.html">qx::base_logger_stream</a></div><div class="ttdoc">Base class for logger streams.</div><div class="ttdef"><b>Definition:</b> <a href="base__logger__stream_8h_source.html#l00032">base_logger_stream.h:33</a></div></div>
-<div class="ttc" id="aclassqx_1_1base__logger__stream_html_a17c1b1553f1ae9dd529916745843221f"><div class="ttname"><a href="classqx_1_1base__logger__stream.html#a17c1b1553f1ae9dd529916745843221f">qx::base_logger_stream::log</a></div><div class="ttdeci">void log(const category &amp;category, verbosity eVerbosity, string_view svMessage)</div><div class="ttdoc">Output to stream.</div><div class="ttdef"><b>Definition:</b> <a href="base__logger__stream_8inl_source.html#l00022">base_logger_stream.inl:22</a></div></div>
-<div class="ttc" id="aclassqx_1_1base__logger__stream_html_abe1ebfaa9fb68d7a7d2624766f608f6b"><div class="ttname"><a href="classqx_1_1base__logger__stream.html#abe1ebfaa9fb68d7a7d2624766f608f6b">qx::base_logger_stream::flush</a></div><div class="ttdeci">void flush()</div><div class="ttdoc">Flush the stream.</div><div class="ttdef"><b>Definition:</b> <a href="base__logger__stream_8inl_source.html#l00038">base_logger_stream.inl:38</a></div></div>
-<div class="ttc" id="aclassqx_1_1base__logger__stream_html_adb44cac4a04ec638c00d9eaf185fa0bf"><div class="ttname"><a href="classqx_1_1base__logger__stream.html#adb44cac4a04ec638c00d9eaf185fa0bf">qx::base_logger_stream::base_logger_stream</a></div><div class="ttdeci">base_logger_stream(const config &amp;streamConfig)</div><div class="ttdoc">base_logger_stream object constructor</div><div class="ttdef"><b>Definition:</b> <a href="base__logger__stream_8inl_source.html#l00015">base_logger_stream.inl:15</a></div></div>
+<div class="ttc" id="aclassqx_1_1base__logger__stream_html"><div class="ttname"><a href="classqx_1_1base__logger__stream.html">qx::base_logger_stream</a></div><div class="ttdoc">Base class for logger streams.</div><div class="ttdef"><b>Definition:</b> <a href="base__logger__stream_8h_source.html#l00033">base_logger_stream.h:34</a></div></div>
+<div class="ttc" id="aclassqx_1_1base__logger__stream_html_a17c1b1553f1ae9dd529916745843221f"><div class="ttname"><a href="classqx_1_1base__logger__stream.html#a17c1b1553f1ae9dd529916745843221f">qx::base_logger_stream::log</a></div><div class="ttdeci">void log(const category &amp;category, verbosity eVerbosity, string_view svMessage)</div><div class="ttdoc">Output to stream.</div><div class="ttdef"><b>Definition:</b> <a href="base__logger__stream_8inl_source.html#l00063">base_logger_stream.inl:63</a></div></div>
+<div class="ttc" id="aclassqx_1_1base__logger__stream_html_abe1ebfaa9fb68d7a7d2624766f608f6b"><div class="ttname"><a href="classqx_1_1base__logger__stream.html#abe1ebfaa9fb68d7a7d2624766f608f6b">qx::base_logger_stream::flush</a></div><div class="ttdeci">void flush()</div><div class="ttdoc">Flush the stream.</div><div class="ttdef"><b>Definition:</b> <a href="base__logger__stream_8inl_source.html#l00079">base_logger_stream.inl:79</a></div></div>
+<div class="ttc" id="aclassqx_1_1base__logger__stream_html_adb44cac4a04ec638c00d9eaf185fa0bf"><div class="ttname"><a href="classqx_1_1base__logger__stream.html#adb44cac4a04ec638c00d9eaf185fa0bf">qx::base_logger_stream::base_logger_stream</a></div><div class="ttdeci">base_logger_stream(const config &amp;streamConfig)</div><div class="ttdoc">base_logger_stream object constructor</div><div class="ttdef"><b>Definition:</b> <a href="base__logger__stream_8inl_source.html#l00056">base_logger_stream.inl:56</a></div></div>
 <div class="ttc" id="aclassqx_1_1category_html"><div class="ttname"><a href="classqx_1_1category.html">qx::category</a></div><div class="ttdoc">A category is a class that identifies a particular piece of code. This code can be located in differe...</div><div class="ttdef"><b>Definition:</b> <a href="category_8h_source.html#l00058">category.h:59</a></div></div>
 <div class="ttc" id="aperf__scope_8h_html"><div class="ttname"><a href="perf__scope_8h.html">perf_scope.h</a></div><div class="ttdoc">Contains perf scope macros for profiler (for internal usage only, but user may override them)</div></div>
 <div class="ttc" id="astring__converters_8h_html"><div class="ttname"><a href="string__converters_8h.html">string_converters.h</a></div></div>
-<div class="ttc" id="astructqx_1_1base__logger__stream_1_1config_html"><div class="ttname"><a href="structqx_1_1base__logger__stream_1_1config.html">qx::base_logger_stream::config</a></div><div class="ttdef"><b>Definition:</b> <a href="base__logger__stream_8h_source.html#l00035">base_logger_stream.h:36</a></div></div>
+<div class="ttc" id="astructqx_1_1base__logger__stream_1_1config_html"><div class="ttname"><a href="structqx_1_1base__logger__stream_1_1config.html">qx::base_logger_stream::config</a></div><div class="ttdef"><b>Definition:</b> <a href="base__logger__stream_8h_source.html#l00036">base_logger_stream.h:37</a></div></div>
 <div class="ttc" id="averbosity_8h_html"><div class="ttname"><a href="verbosity_8h.html">verbosity.h</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->

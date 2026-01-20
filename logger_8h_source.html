@@ -192,7 +192,7 @@ $(function() {
 <div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;<span class="comment">        @param   svFile     - file name string</span></div>
 <div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;<span class="comment">        @param   svFunction - function name string</span></div>
 <div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;<span class="comment">        @param   nLine      - code line number</span></div>
-<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;<span class="comment">        @param   message    - message string</span></div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;<span class="comment">        @param   message    - user message string</span></div>
 <div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;<span class="comment">    **/</span></div>
 <div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;    virtual <span class="keywordtype">void</span> <a class="code" href="classqx_1_1logger.html#acccb9bc0c555460f09fd445fbd73297c">log</a>(</div>
 <div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;        const <a class="code" href="classqx_1_1category.html">category</a>&amp;          <a class="code" href="classqx_1_1category.html">category</a>,</div>
@@ -225,96 +225,115 @@ $(function() {
 <div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;    <span class="comment">// only for internal usage in macros</span></div>
 <div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;    <a class="code" href="classqx_1_1string__pool.html">logger_string_pool</a>* _get_string_pool() noexcept;</div>
 <div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160; </div>
-<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;private:</div>
-<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;    static <span class="keywordtype">string</span> default_formatter(</div>
-<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;        const <a class="code" href="classqx_1_1category.html">category</a>&amp; <a class="code" href="classqx_1_1category.html">category</a>,</div>
-<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;        verbosity       eVerbosity,</div>
-<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;        string_view     svFile,</div>
-<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;        string_view     svFunction,</div>
-<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;        <span class="keywordtype">int</span>             nLine,</div>
-<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;        <span class="keywordtype">string</span>          sMessage) noexcept;</div>
-<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160; </div>
-<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;private:</div>
-<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;    QX_PERF_SHARED_MUTEX(m_StreamsMutex);</div>
-<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;    std::vector&lt;<a class="code" href="classqx_1_1sbo__poly.html">logger_sbo</a>&gt; m_Streams;</div>
-<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160; </div>
-<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;    QX_PERF_SHARED_MUTEX(m_RegisteredCategoriesMutex);</div>
-<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;    category_data_map m_RegisteredCategories;</div>
-<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160; </div>
-<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;    <a class="code" href="classqx_1_1string__pool.html">logger_string_pool</a> m_StringsPool;</div>
-<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;};</div>
+<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;protected:<span class="comment"></span></div>
+<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;<span class="comment">    /**</span></div>
+<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;<span class="comment">        @brief  The default log line formatter</span></div>
+<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;<span class="comment">        @param  category   - code category</span></div>
+<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;<span class="comment">        @param  eVerbosity - message verbosity</span></div>
+<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;<span class="comment">        @param  svFile     - file name string</span></div>
+<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;<span class="comment">        @param  svFunction - function name string</span></div>
+<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;<span class="comment">        @param  nLine      - code line number</span></div>
+<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;<span class="comment">        @param  sMessage   - user message string</span></div>
+<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;<span class="comment">        @retval            - the formatted log line (the same object as sMessage)</span></div>
+<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;<span class="comment">    **/</span></div>
+<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;    static <span class="keywordtype">string</span> <a class="code" href="classqx_1_1logger.html#af690a98ac1f4e82d8a60d4e06d1bb23a">default_formatter</a>(</div>
+<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;        const <a class="code" href="classqx_1_1category.html">category</a>&amp; <a class="code" href="classqx_1_1category.html">category</a>,</div>
+<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;        verbosity       eVerbosity,</div>
+<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;        string_view     svFile,</div>
+<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;        string_view     svFunction,</div>
+<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;        <span class="keywordtype">int</span>             nLine,</div>
+<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;        <span class="keywordtype">string</span>          sMessage) noexcept;</div>
 <div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;<span class="comment">/**</span></div>
-<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;<span class="comment">    @class   logger_singleton</span></div>
-<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;<span class="comment">    @brief   Default logger instance</span></div>
-<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;<span class="comment">    @author  Khrapov</span></div>
-<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;<span class="comment">    @date    19.08.2021</span></div>
-<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;<span class="comment">**/</span></div>
-<div class="line"><a name="l00184"></a><span class="lineno"><a class="line" href="classqx_1_1logger__singleton.html">  184</a></span>&#160;class <a class="code" href="classqx_1_1logger__singleton.html">logger_singleton</a> final : public <a class="code" href="classsingleton.html">singleton</a>&lt;<a class="code" href="classqx_1_1logger__singleton.html">logger_singleton</a>&gt;</div>
-<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;{</div>
-<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;    <a class="code" href="classqx_1_1logger.html">logger</a>&amp; <a class="code" href="logger_8h.html#a57c8f2c69cad4de504fbaf3e9b582855">get_logger</a>()</div>
-<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;    {</div>
-<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;        <span class="keywordflow">return</span> m_Logger;</div>
-<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;    }</div>
-<div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160; </div>
-<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;    <a class="code" href="classqx_1_1logger.html">logger</a> m_Logger;</div>
-<div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;};</div>
-<div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160; </div>
-<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;<span class="comment">// Change this variable to override the logger instance used in QX_LOG macros</span></div>
-<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;<span class="keyword">inline</span> <a class="code" href="classqx_1_1logger.html">logger</a>* g_pGlobalLogger = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160;<span class="comment">/**</span></div>
-<div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160;<span class="comment">    @brief  Get the logger instance used in QX_LOG macros</span></div>
-<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160;<span class="comment">    @retval  - logger instance</span></div>
-<div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160;<span class="comment">**/</span></div>
-<div class="line"><a name="l00203"></a><span class="lineno"><a class="line" href="logger_8h.html#a57c8f2c69cad4de504fbaf3e9b582855">  203</a></span>&#160;<span class="keyword">inline</span> <a class="code" href="classqx_1_1logger.html">logger</a>&amp; <a class="code" href="logger_8h.html#a57c8f2c69cad4de504fbaf3e9b582855">get_logger</a>()</div>
-<div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;{</div>
-<div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;    <span class="keywordflow">return</span> g_pGlobalLogger ? *g_pGlobalLogger : logger_singleton::get_instance().get_logger();</div>
-<div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160;}</div>
-<div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160; </div>
-<div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160;} <span class="comment">// namespace qx</span></div>
-<div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160; </div>
-<div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160;<span class="preprocessor">#ifndef _QX_LOG_C</span></div>
-<div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160;<span class="comment">// __FUNCTION__ isn&#39;t a char array on linux, so we need to convert it</span></div>
-<div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160;<span class="preprocessor">    #define _QX_LOG_C(verbosityCheckKeyword, category, eVerbosity, ...)               \</span></div>
-<div class="line"><a name="l00213"></a><span class="lineno">  213</span>&#160;<span class="preprocessor">        do                                                                            \</span></div>
-<div class="line"><a name="l00214"></a><span class="lineno">  214</span>&#160;<span class="preprocessor">        {                                                                             \</span></div>
-<div class="line"><a name="l00215"></a><span class="lineno">  215</span>&#160;<span class="preprocessor">            verbosityCheckKeyword const auto&amp; _category = category;                   \</span></div>
-<div class="line"><a name="l00216"></a><span class="lineno">  216</span>&#160;<span class="preprocessor">            if verbosityCheckKeyword (eVerbosity &gt;= _category.get_verbosity())        \</span></div>
-<div class="line"><a name="l00217"></a><span class="lineno">  217</span>&#160;<span class="preprocessor">            {                                                                         \</span></div>
-<div class="line"><a name="l00218"></a><span class="lineno">  218</span>&#160;<span class="preprocessor">                qx::logger&amp; _logger = qx::get_logger();                               \</span></div>
-<div class="line"><a name="l00219"></a><span class="lineno">  219</span>&#160;<span class="preprocessor">                _logger.log(                                                          \</span></div>
-<div class="line"><a name="l00220"></a><span class="lineno">  220</span>&#160;<span class="preprocessor">                    _category,                                                        \</span></div>
-<div class="line"><a name="l00221"></a><span class="lineno">  221</span>&#160;<span class="preprocessor">                    eVerbosity,                                                       \</span></div>
-<div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160;<span class="preprocessor">                    QX_SHORT_FILE,                                                    \</span></div>
-<div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160;<span class="preprocessor">                    qx::convert_string_literal&lt;qx::char_type, __FUNCTION__&gt;(),        \</span></div>
-<div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160;<span class="preprocessor">                    QX_LINE,                                                          \</span></div>
-<div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160;<span class="preprocessor">                    _QX_MACRO_USER_MESSAGE(_logger._get_string_pool(), __VA_ARGS__)); \</span></div>
-<div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160;<span class="preprocessor">            }                                                                         \</span></div>
-<div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160;<span class="preprocessor">        } while (false)</span></div>
-<div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160; </div>
-<div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="logger_8inl.html">qx/logger/logger.inl</a>&gt;</span></div>
-<div class="ttc" id="aclassqx_1_1base__logger__stream_html"><div class="ttname"><a href="classqx_1_1base__logger__stream.html">qx::base_logger_stream</a></div><div class="ttdoc">Base class for logger streams.</div><div class="ttdef"><b>Definition:</b> <a href="base__logger__stream_8h_source.html#l00032">base_logger_stream.h:33</a></div></div>
+<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;<span class="comment">    /**</span></div>
+<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;<span class="comment">        @brief  Get verbosity prefix</span></div>
+<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;<span class="comment">        @param  eVerbosity - message verbosity</span></div>
+<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;<span class="comment">        @retval            - verbosity prefix</span></div>
+<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;<span class="comment">    **/</span></div>
+<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;    static constexpr string_view <a class="code" href="classqx_1_1logger.html#ae6f200f9cfd8e6bab815459165c0f4b4">get_verbosity_prefix</a>(verbosity eVerbosity) noexcept;</div>
+<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160; </div>
+<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;private:</div>
+<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;    QX_PERF_SHARED_MUTEX(m_StreamsMutex);</div>
+<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;    std::vector&lt;<a class="code" href="classqx_1_1sbo__poly.html">logger_sbo</a>&gt; m_Streams;</div>
+<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160; </div>
+<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;    QX_PERF_SHARED_MUTEX(m_RegisteredCategoriesMutex);</div>
+<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;    category_data_map m_RegisteredCategories;</div>
+<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160; </div>
+<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;    <a class="code" href="classqx_1_1string__pool.html">logger_string_pool</a> m_StringsPool;</div>
+<div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;};</div>
+<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;<span class="comment">/**</span></div>
+<div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;<span class="comment">    @class   logger_singleton</span></div>
+<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;<span class="comment">    @brief   Default logger instance</span></div>
+<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;<span class="comment">    @author  Khrapov</span></div>
+<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;<span class="comment">    @date    19.08.2021</span></div>
+<div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160;<span class="comment">**/</span></div>
+<div class="line"><a name="l00201"></a><span class="lineno"><a class="line" href="classqx_1_1logger__singleton.html">  201</a></span>&#160;class <a class="code" href="classqx_1_1logger__singleton.html">logger_singleton</a> final : public <a class="code" href="classsingleton.html">singleton</a>&lt;<a class="code" href="classqx_1_1logger__singleton.html">logger_singleton</a>&gt;</div>
+<div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160;{</div>
+<div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;    <a class="code" href="classqx_1_1logger.html">logger</a>&amp; <a class="code" href="logger_8h.html#a57c8f2c69cad4de504fbaf3e9b582855">get_logger</a>()</div>
+<div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;    {</div>
+<div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160;        <span class="keywordflow">return</span> m_Logger;</div>
+<div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160;    }</div>
+<div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160; </div>
+<div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160;    <a class="code" href="classqx_1_1logger.html">logger</a> m_Logger;</div>
+<div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160;};</div>
+<div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160; </div>
+<div class="line"><a name="l00213"></a><span class="lineno">  213</span>&#160;<span class="comment">// Change this variable to override the logger instance used in QX_LOG macros</span></div>
+<div class="line"><a name="l00214"></a><span class="lineno">  214</span>&#160;<span class="keyword">inline</span> <a class="code" href="classqx_1_1logger.html">logger</a>* g_pGlobalLogger = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00215"></a><span class="lineno">  215</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00216"></a><span class="lineno">  216</span>&#160;<span class="comment">/**</span></div>
+<div class="line"><a name="l00217"></a><span class="lineno">  217</span>&#160;<span class="comment">    @brief  Get the logger instance used in QX_LOG macros</span></div>
+<div class="line"><a name="l00218"></a><span class="lineno">  218</span>&#160;<span class="comment">    @retval  - logger instance</span></div>
+<div class="line"><a name="l00219"></a><span class="lineno">  219</span>&#160;<span class="comment">**/</span></div>
+<div class="line"><a name="l00220"></a><span class="lineno"><a class="line" href="logger_8h.html#a57c8f2c69cad4de504fbaf3e9b582855">  220</a></span>&#160;<span class="keyword">inline</span> <a class="code" href="classqx_1_1logger.html">logger</a>&amp; <a class="code" href="logger_8h.html#a57c8f2c69cad4de504fbaf3e9b582855">get_logger</a>()</div>
+<div class="line"><a name="l00221"></a><span class="lineno">  221</span>&#160;{</div>
+<div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160;    <span class="keywordflow">return</span> g_pGlobalLogger ? *g_pGlobalLogger : logger_singleton::get_instance().get_logger();</div>
+<div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160;}</div>
+<div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160; </div>
+<div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160;} <span class="comment">// namespace qx</span></div>
+<div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160; </div>
+<div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160;<span class="preprocessor">#ifndef _QX_LOG_C</span></div>
+<div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160;<span class="comment">// __FUNCTION__ isn&#39;t a char array on linux, so we need to convert it</span></div>
+<div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160;<span class="preprocessor">    #define _QX_LOG_C(verbosityCheckKeyword, category, eVerbosity, ...)               \</span></div>
+<div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160;<span class="preprocessor">        do                                                                            \</span></div>
+<div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160;<span class="preprocessor">        {                                                                             \</span></div>
+<div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160;<span class="preprocessor">            verbosityCheckKeyword const auto&amp; _category = category;                   \</span></div>
+<div class="line"><a name="l00233"></a><span class="lineno">  233</span>&#160;<span class="preprocessor">            if verbosityCheckKeyword (eVerbosity &gt;= _category.get_verbosity())        \</span></div>
+<div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160;<span class="preprocessor">            {                                                                         \</span></div>
+<div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160;<span class="preprocessor">                qx::logger&amp; _logger = qx::get_logger();                               \</span></div>
+<div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160;<span class="preprocessor">                _logger.log(                                                          \</span></div>
+<div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;<span class="preprocessor">                    _category,                                                        \</span></div>
+<div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160;<span class="preprocessor">                    eVerbosity,                                                       \</span></div>
+<div class="line"><a name="l00239"></a><span class="lineno">  239</span>&#160;<span class="preprocessor">                    QX_SHORT_FILE,                                                    \</span></div>
+<div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160;<span class="preprocessor">                    qx::convert_string_literal&lt;qx::char_type, __FUNCTION__&gt;(),        \</span></div>
+<div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160;<span class="preprocessor">                    QX_LINE,                                                          \</span></div>
+<div class="line"><a name="l00242"></a><span class="lineno">  242</span>&#160;<span class="preprocessor">                    _QX_MACRO_USER_MESSAGE(_logger._get_string_pool(), __VA_ARGS__)); \</span></div>
+<div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160;<span class="preprocessor">            }                                                                         \</span></div>
+<div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160;<span class="preprocessor">        } while (false)</span></div>
+<div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160; </div>
+<div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="logger_8inl.html">qx/logger/logger.inl</a>&gt;</span></div>
+<div class="ttc" id="aclassqx_1_1base__logger__stream_html"><div class="ttname"><a href="classqx_1_1base__logger__stream.html">qx::base_logger_stream</a></div><div class="ttdoc">Base class for logger streams.</div><div class="ttdef"><b>Definition:</b> <a href="base__logger__stream_8h_source.html#l00033">base_logger_stream.h:34</a></div></div>
 <div class="ttc" id="aclassqx_1_1basic__string_html"><div class="ttname"><a href="classqx_1_1basic__string.html">qx::basic_string&lt; char_type &gt;</a></div></div>
 <div class="ttc" id="aclassqx_1_1category_html"><div class="ttname"><a href="classqx_1_1category.html">qx::category</a></div><div class="ttdoc">A category is a class that identifies a particular piece of code. This code can be located in differe...</div><div class="ttdef"><b>Definition:</b> <a href="category_8h_source.html#l00058">category.h:59</a></div></div>
-<div class="ttc" id="aclassqx_1_1logger__singleton_html"><div class="ttname"><a href="classqx_1_1logger__singleton.html">qx::logger_singleton</a></div><div class="ttdoc">Default logger instance.</div><div class="ttdef"><b>Definition:</b> <a href="logger_8h_source.html#l00184">logger.h:185</a></div></div>
+<div class="ttc" id="aclassqx_1_1logger__singleton_html"><div class="ttname"><a href="classqx_1_1logger__singleton.html">qx::logger_singleton</a></div><div class="ttdoc">Default logger instance.</div><div class="ttdef"><b>Definition:</b> <a href="logger_8h_source.html#l00201">logger.h:202</a></div></div>
 <div class="ttc" id="aclassqx_1_1logger_html"><div class="ttname"><a href="classqx_1_1logger.html">qx::logger</a></div><div class="ttdoc">Logger class.</div><div class="ttdef"><b>Definition:</b> <a href="logger_8h_source.html#l00059">logger.h:60</a></div></div>
 <div class="ttc" id="aclassqx_1_1logger_html_a4df9d51d6a1447c3dc08d9d90925a963"><div class="ttname"><a href="classqx_1_1logger.html#a4df9d51d6a1447c3dc08d9d90925a963">qx::logger::log_required</a></div><div class="ttdeci">bool log_required(const category &amp;category, verbosity eVerbosity) const noexcept</div><div class="ttdoc">Returns true if a log with given category and verbosity will be logged.</div><div class="ttdef"><b>Definition:</b> <a href="logger_8inl_source.html#l00082">logger.inl:82</a></div></div>
 <div class="ttc" id="aclassqx_1_1logger_html_a4e45ab9c399be9eb0761171f441ab5ea"><div class="ttname"><a href="classqx_1_1logger.html#a4e45ab9c399be9eb0761171f441ab5ea">qx::logger::add_stream</a></div><div class="ttdeci">void add_stream(stream_t stream) noexcept</div><div class="ttdoc">Add an output stream to the logger.</div><div class="ttdef"><b>Definition:</b> <a href="logger_8inl_source.html#l00019">logger.inl:19</a></div></div>
 <div class="ttc" id="aclassqx_1_1logger_html_a69bf50445c759b9fdb1fde85b4796d16"><div class="ttname"><a href="classqx_1_1logger.html#a69bf50445c759b9fdb1fde85b4796d16">qx::logger::register_category</a></div><div class="ttdeci">void register_category(const category &amp;category, category_data data) noexcept</div><div class="ttdoc">Add custom rules for category.</div><div class="ttdef"><b>Definition:</b> <a href="logger_8inl_source.html#l00025">logger.inl:25</a></div></div>
 <div class="ttc" id="aclassqx_1_1logger_html_acbd37fc0636753a6061a745ca1ab8f9e"><div class="ttname"><a href="classqx_1_1logger.html#acbd37fc0636753a6061a745ca1ab8f9e">qx::logger::reset</a></div><div class="ttdeci">virtual void reset() noexcept</div><div class="ttdoc">Reset logger and clear all streams.</div><div class="ttdef"><b>Definition:</b> <a href="logger_8inl_source.html#l00076">logger.inl:76</a></div></div>
 <div class="ttc" id="aclassqx_1_1logger_html_acccb9bc0c555460f09fd445fbd73297c"><div class="ttname"><a href="classqx_1_1logger.html#acccb9bc0c555460f09fd445fbd73297c">qx::logger::log</a></div><div class="ttdeci">virtual void log(const category &amp;category, verbosity eVerbosity, string_view svFile, string_view svFunction, int nLine, logger_string_pool::item message)</div><div class="ttdoc">Log to all streams.</div><div class="ttdef"><b>Definition:</b> <a href="logger_8inl_source.html#l00036">logger.inl:36</a></div></div>
+<div class="ttc" id="aclassqx_1_1logger_html_ae6f200f9cfd8e6bab815459165c0f4b4"><div class="ttname"><a href="classqx_1_1logger.html#ae6f200f9cfd8e6bab815459165c0f4b4">qx::logger::get_verbosity_prefix</a></div><div class="ttdeci">static constexpr string_view get_verbosity_prefix(verbosity eVerbosity) noexcept</div><div class="ttdoc">Get verbosity prefix.</div><div class="ttdef"><b>Definition:</b> <a href="logger_8inl_source.html#l00155">logger.inl:155</a></div></div>
+<div class="ttc" id="aclassqx_1_1logger_html_af690a98ac1f4e82d8a60d4e06d1bb23a"><div class="ttname"><a href="classqx_1_1logger.html#af690a98ac1f4e82d8a60d4e06d1bb23a">qx::logger::default_formatter</a></div><div class="ttdeci">static string default_formatter(const category &amp;category, verbosity eVerbosity, string_view svFile, string_view svFunction, int nLine, string sMessage) noexcept</div><div class="ttdoc">The default log line formatter.</div><div class="ttdef"><b>Definition:</b> <a href="logger_8inl_source.html#l00102">logger.inl:102</a></div></div>
 <div class="ttc" id="aclassqx_1_1logger_html_af975c6169624a47a72ae8995161e140f"><div class="ttname"><a href="classqx_1_1logger.html#af975c6169624a47a72ae8995161e140f">qx::logger::flush</a></div><div class="ttdeci">virtual void flush()</div><div class="ttdoc">Flush all streams.</div><div class="ttdef"><b>Definition:</b> <a href="logger_8inl_source.html#l00069">logger.inl:69</a></div></div>
 <div class="ttc" id="aclassqx_1_1sbo__poly_html"><div class="ttname"><a href="classqx_1_1sbo__poly.html">qx::sbo_poly</a></div><div class="ttdoc">Small Buffer Object for polymorphic classes.</div><div class="ttdef"><b>Definition:</b> <a href="sbo__poly_8h_source.html#l00057">sbo_poly.h:58</a></div></div>
 <div class="ttc" id="aclassqx_1_1string__pool_html"><div class="ttname"><a href="classqx_1_1string__pool.html">qx::string_pool</a></div><div class="ttdoc">Fixed-size atomic string pool.</div><div class="ttdef"><b>Definition:</b> <a href="string__pool_8h_source.html#l00033">string_pool.h:34</a></div></div>
 <div class="ttc" id="aclasssingleton_html"><div class="ttname"><a href="classsingleton.html">singleton</a></div><div class="ttdoc">Inherit the necessary singleton class from this.</div></div>
 <div class="ttc" id="afwrite__logger__stream_8h_html"><div class="ttname"><a href="fwrite__logger__stream_8h.html">fwrite_logger_stream.h</a></div></div>
-<div class="ttc" id="alogger_8h_html_a57c8f2c69cad4de504fbaf3e9b582855"><div class="ttname"><a href="logger_8h.html#a57c8f2c69cad4de504fbaf3e9b582855">qx::get_logger</a></div><div class="ttdeci">logger &amp; get_logger()</div><div class="ttdoc">Get the logger instance used in QX_LOG macros.</div><div class="ttdef"><b>Definition:</b> <a href="logger_8h_source.html#l00203">logger.h:203</a></div></div>
+<div class="ttc" id="alogger_8h_html_a57c8f2c69cad4de504fbaf3e9b582855"><div class="ttname"><a href="logger_8h.html#a57c8f2c69cad4de504fbaf3e9b582855">qx::get_logger</a></div><div class="ttdeci">logger &amp; get_logger()</div><div class="ttdoc">Get the logger instance used in QX_LOG macros.</div><div class="ttdef"><b>Definition:</b> <a href="logger_8h_source.html#l00220">logger.h:220</a></div></div>
 <div class="ttc" id="alogger_8inl_html"><div class="ttname"><a href="logger_8inl.html">logger.inl</a></div></div>
 <div class="ttc" id="amacro__user__message_8h_html"><div class="ttname"><a href="macro__user__message_8h.html">macro_user_message.h</a></div></div>
 <div class="ttc" id="asbo__poly_8h_html"><div class="ttname"><a href="sbo__poly_8h.html">sbo_poly.h</a></div></div>
