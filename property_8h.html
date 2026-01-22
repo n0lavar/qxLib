@@ -88,8 +88,6 @@ Macros</h2></td></tr>
 <tr class="memitem:ab7df8347aae1170395eb411079402037"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="property_8h.html#ab7df8347aae1170395eb411079402037">QX_PROPERTY</a>(type,  name, ...)</td></tr>
 <tr class="memdesc:ab7df8347aae1170395eb411079402037"><td class="mdescLeft">&#160;</td><td class="mdescRight">A set of data member, getter and setter.  <a href="property_8h.html#ab7df8347aae1170395eb411079402037">More...</a><br /></td></tr>
 <tr class="separator:ab7df8347aae1170395eb411079402037"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aeb5905f18c62f26a1626ea7471b0f53f"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="property_8h.html#aeb5905f18c62f26a1626ea7471b0f53f">QX_PROPERTY_BUILDER</a>(type,  name, ...)</td></tr>
-<tr class="separator:aeb5905f18c62f26a1626ea7471b0f53f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><dl class="section author"><dt>Author</dt><dd>Khrapov </dd></dl>
@@ -233,60 +231,6 @@ Macros</h2></td></tr>
 </dl>
 
 <p class="definition">Definition at line <a class="el" href="property_8h_source.html#l00052">52</a> of file <a class="el" href="property_8h_source.html">property.h</a>.</p>
-
-</div>
-</div>
-<a id="aeb5905f18c62f26a1626ea7471b0f53f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aeb5905f18c62f26a1626ea7471b0f53f">&#9670;&nbsp;</a></span>QX_PROPERTY_BUILDER</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define QX_PROPERTY_BUILDER</td>
-          <td>(</td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname">type, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname">name, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname"><em>...</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<b>Value:</b><div class="fragment"><div class="line"><span class="keyword">public</span>:                                      \</div>
-<div class="line">    QX_GETTER(type, name);                   \</div>
-<div class="line">    auto&amp; set_##name(type value) noexcept    \</div>
-<div class="line">    {                                        \</div>
-<div class="line">        m_##name = std::move(m_##name);      \</div>
-<div class="line">        return *<span class="keyword">this</span>;                        \</div>
-<div class="line">    }                                        \</div>
-<div class="line">                                             \</div>
-<div class="line">private:                                     \</div>
-<div class="line">    type m_##name = type(__VA_ARGS__)</div>
-</div><!-- fragment --><dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">type</td><td>- </td></tr>
-    <tr><td class="paramname">name</td><td>- </td></tr>
-    <tr><td class="paramname">...</td><td>- </td></tr>
-  </table>
-  </dd>
-</dl>
-
-<p class="definition">Definition at line <a class="el" href="property_8h_source.html#l00066">66</a> of file <a class="el" href="property_8h_source.html">property.h</a>.</p>
 
 </div>
 </div>
