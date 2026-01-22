@@ -53,6 +53,8 @@ public:
     virtual void do_flush() override;
 
 private:
+    // base_standard_streams_stream
+    //
     virtual void cout_colorized(verbosity eVerbosity, string_view svMessage, const color& rangeColor) override;
     virtual void cout_common(verbosity eVerbosity, string_view svMessage) override;
 };

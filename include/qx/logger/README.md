@@ -16,31 +16,31 @@ Features:
   You can add multiple streams to your logger, including ones provided by the library (output to standard output, to a file, and to the debug window in your IDE) or custom ones. You can also override the global logger used by `QX_LOG` with your own implementation.
 - Per-category settings: filtering and formatting:  
   Messages can be filtered on two levels: using compile-time or runtime verbosity.  
-  - The first parameter is specified in each category using `set_verbosity()` (default value is `qx::verbosity::log`) and allows filtering a message before the program even runs. By setting the `QX_CONF_COMPILE_TIME_VERBOSITY` macro to `qx::verbosity::none`, you can completely remove all logging traces from the program, including string literals.
+  - The first parameter is specified in each category using `set_verbosity()` (default value is `qx::verbosity::log`) and allows filtering a message before the program even runs. By setting the `QX_CONF_COMPILE_TIME_VERBOSITY` macro to `qx::verbosity::none`, you can completely remove all logging traces from the program, including string literals;
   - Runtime verbosity can be set using `qx::logger::register_category` and is checked during execution. This is convenient for adjusting logging levels via a config. Here you can also set other settings for messages of a specific category, for example a custom formatting function.
 - Logging levels:  
   ```
   enum class verbosity
   {
-      very_verbose, // very frequently repeated messages, for example, on every update
-      verbose,      // messages you don't want to be displayed by default
-      log,          // default level
-      important,    // same as log but highlighted if possible
-      warning,      // not yet an error, but something to look out for
-      error,        // an error after which it is possible to continue the program
-      critical,     // an error that makes it impossible to continue the program
-      none,         // message is not displayed
+      detailed,  // very frequently repeated messages, for example, on every update
+      verbose,   // messages you don't want to be displayed by default
+      log,       // default level
+      important, // same as log but highlighted if possible
+      warning,   // not yet an error, but something to look out for
+      error,     // an error after which it is possible to continue the program
+      critical,  // an error that makes it impossible to continue the program
+      none,      // message is not displayed
   };
   ```
 - Performance:  
   A lot of attention is paid to system performance.
     - Allocations:  
-      - The logger uses a pool of preallocated strings for messages; allocation only occurs if there are not enough strings
-      - During logging, neither the logger nor its streams (provided by the library) allocate memory
-      - User callbacks also have an option to avoid allocations
-    - Using small buffer object optimization for polymorphic objects (`qx::sbo_poly`), all streams are stored cache-locally in a single `std::vector`, even though they are different objects
-    - Streams implement memory mapping for the file logger and `fwrite` output for standard output. While on Linux all streams have roughly the same performance, on MSVC these approaches significantly improve performance compared to `ofstream` and `cout` streams.
-    - mutexes
+      - The logger uses a pool of preallocated strings for messages; allocation only occurs if there are not enough strings;
+      - During logging, neither the logger nor its streams (provided by the library) allocate memory;
+      - User callbacks also have an option to avoid allocations.
+    - Using small buffer object optimization for polymorphic objects (`qx::sbo_poly`), all streams are stored cache-locally in a single `std::vector`, even though they are different objects;
+    - Streams implement memory mapping for the file logger and `fwrite` output for standard output. While on Linux all streams have roughly the same performance, on MSVC these approaches significantly improve performance compared to `ofstream` and `cout` streams;
+    - By default, the logger and all streams are thread-safe. If you are sure that you do not need the overhead (for example, you only have one stream or you send all logging to a separate stream), you can slightly improve performance by turning off synchronisation using the bProtectLog flag.
 
 ## Usage
 
@@ -56,7 +56,7 @@ This will create a default logger with a standard output stream and print the me
 
 You can add new streams, for example to output to the IDE debug window or to a file.
 ```
-qx::logger& logger = qx::logger_singleton::get_instance().get_logger();
+qx::logger& logger = qx::get_logger();
 logger.add_stream(qx::debugger_logger_stream());
 logger.add_stream(qx::file_logger_stream_mapping());
 ```
@@ -244,4 +244,4 @@ The macro allows several important things:
 ### Why doesn't the library include separate threading, asynchronicity, etc. for the logger?
 
 Although this could significantly improve performance, I believe that every system should do only one thing, but do it well. Creating new threads or implementing your own asynchronous system is not what I want to focus on. The library is generally intended for use in various game engines, and they usually already have these systems.  
-The best solution in this case is to inherit from `qx::logger` as shown in the "Custom logger" section and override the `log` method. In my stress test (enabling all logs at `very_verbose` during multithreaded loading), I managed to reduce the total logger runtime from 44.17 seconds to 15.01 for 299731 log lines by moving everything except string formatting to a single thread.
+The best solution in this case is to inherit from `qx::logger` as shown in the "Custom logger" section and override the `log` method. In my stress test (enabling all logs at `detailed` during multithreaded loading), I managed to reduce the total logger runtime from 44.17 seconds to 15.01 for 299731 log lines by moving everything except string formatting to a single thread.
