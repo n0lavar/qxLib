@@ -79,35 +79,35 @@ $(function() {
 <li>Per-category settings: filtering and formatting: <br  />
  Messages can be filtered on two levels: using compile-time or runtime verbosity. <br  />
 <ul>
-<li>The first parameter is specified in each category using <code>set_verbosity()</code> (default value is <code>qx::verbosity::log</code>) and allows filtering a message before the program even runs. By setting the <code>QX_CONF_COMPILE_TIME_VERBOSITY</code> macro to <code>qx::verbosity::none</code>, you can completely remove all logging traces from the program, including string literals.</li>
+<li>The first parameter is specified in each category using <code>set_verbosity()</code> (default value is <code>qx::verbosity::log</code>) and allows filtering a message before the program even runs. By setting the <code>QX_CONF_COMPILE_TIME_VERBOSITY</code> macro to <code>qx::verbosity::none</code>, you can completely remove all logging traces from the program, including string literals;</li>
 <li>Runtime verbosity can be set using <code><a class="el" href="classqx_1_1logger.html#a69bf50445c759b9fdb1fde85b4796d16" title="Add custom rules for category.">qx::logger::register_category</a></code> and is checked during execution. This is convenient for adjusting logging levels via a config. Here you can also set other settings for messages of a specific category, for example a custom formatting function.</li>
 </ul>
 </li>
 <li>Logging levels: <br  />
  <div class="fragment"><div class="line">enum class verbosity</div>
 <div class="line">{</div>
-<div class="line">    very_verbose, // very frequently repeated messages, for example, on every update</div>
-<div class="line">    verbose,      // messages you don&#39;t want to be displayed by default</div>
-<div class="line">    log,          // default level</div>
-<div class="line">    important,    // same as log but highlighted if possible</div>
-<div class="line">    warning,      // not yet an error, but something to look out for</div>
-<div class="line">    error,        // an error after which it is possible to continue the program</div>
-<div class="line">    critical,     // an error that makes it impossible to continue the program</div>
-<div class="line">    none,         // message is not displayed</div>
+<div class="line">    detailed,  // very frequently repeated messages, for example, on every update</div>
+<div class="line">    verbose,   // messages you don&#39;t want to be displayed by default</div>
+<div class="line">    log,       // default level</div>
+<div class="line">    important, // same as log but highlighted if possible</div>
+<div class="line">    warning,   // not yet an error, but something to look out for</div>
+<div class="line">    error,     // an error after which it is possible to continue the program</div>
+<div class="line">    critical,  // an error that makes it impossible to continue the program</div>
+<div class="line">    none,      // message is not displayed</div>
 <div class="line">};</div>
 </div><!-- fragment --></li>
 <li>Performance: <br  />
  A lot of attention is paid to system performance.<ul>
 <li>Allocations: <br  />
 <ul>
-<li>The logger uses a pool of preallocated strings for messages; allocation only occurs if there are not enough strings</li>
-<li>During logging, neither the logger nor its streams (provided by the library) allocate memory</li>
-<li>User callbacks also have an option to avoid allocations</li>
+<li>The logger uses a pool of preallocated strings for messages; allocation only occurs if there are not enough strings;</li>
+<li>During logging, neither the logger nor its streams (provided by the library) allocate memory;</li>
+<li>User callbacks also have an option to avoid allocations.</li>
 </ul>
 </li>
-<li>Using small buffer object optimization for polymorphic objects (<code><a class="el" href="classqx_1_1sbo__poly.html" title="Small Buffer Object for polymorphic classes.">qx::sbo_poly</a></code>), all streams are stored cache-locally in a single <code>std::vector</code>, even though they are different objects</li>
-<li>Streams implement memory mapping for the file logger and <code>fwrite</code> output for standard output. While on Linux all streams have roughly the same performance, on MSVC these approaches significantly improve performance compared to <code>ofstream</code> and <code>cout</code> streams.</li>
-<li>mutexes</li>
+<li>Using small buffer object optimization for polymorphic objects (<code><a class="el" href="classqx_1_1sbo__poly.html" title="Small Buffer Object for polymorphic classes.">qx::sbo_poly</a></code>), all streams are stored cache-locally in a single <code>std::vector</code>, even though they are different objects;</li>
+<li>Streams implement memory mapping for the file logger and <code>fwrite</code> output for standard output. While on Linux all streams have roughly the same performance, on MSVC these approaches significantly improve performance compared to <code>ofstream</code> and <code>cout</code> streams;</li>
+<li>By default, the logger and all streams are thread-safe. If you are sure that you do not need the overhead (for example, you only have one stream or you send all logging to a separate stream), you can slightly improve performance by turning off synchronisation using the bProtectLog flag.</li>
 </ul>
 </li>
 </ul>
@@ -119,7 +119,7 @@ Usage</h1>
 </div><!-- fragment --><p> This will create a default logger with a standard output stream and print the message to it.</p>
 <h2><a class="anchor" id="autotoc_md2"></a>
 Custom streams</h2>
-<p>You can add new streams, for example to output to the IDE debug window or to a file. </p><div class="fragment"><div class="line">qx::logger&amp; logger = qx::logger_singleton::get_instance().get_logger();</div>
+<p>You can add new streams, for example to output to the IDE debug window or to a file. </p><div class="fragment"><div class="line">qx::logger&amp; logger = qx::get_logger();</div>
 <div class="line">logger.add_stream(qx::debugger_logger_stream());</div>
 <div class="line">logger.add_stream(qx::file_logger_stream_mapping());</div>
 </div><!-- fragment --><p> Or implement your own stream and add it the same way: </p><div class="fragment"><div class="line">class my_logger_stream : public qx::base_logger_stream</div>
@@ -171,7 +171,7 @@ Why a macro?</h2>
 <h2><a class="anchor" id="autotoc_md11"></a>
 Why doesn't the library include separate threading, asynchronicity, etc. for the logger?</h2>
 <p>Although this could significantly improve performance, I believe that every system should do only one thing, but do it well. Creating new threads or implementing your own asynchronous system is not what I want to focus on. The library is generally intended for use in various game engines, and they usually already have these systems. <br  />
- The best solution in this case is to inherit from <code><a class="el" href="classqx_1_1logger.html" title="Logger class.">qx::logger</a></code> as shown in the "Custom logger" section and override the <code>log</code> method. In my stress test (enabling all logs at <code>very_verbose</code> during multithreaded loading), I managed to reduce the total logger runtime from 44.17 seconds to 15.01 for 299731 log lines by moving everything except string formatting to a single thread. </p>
+ The best solution in this case is to inherit from <code><a class="el" href="classqx_1_1logger.html" title="Logger class.">qx::logger</a></code> as shown in the "Custom logger" section and override the <code>log</code> method. In my stress test (enabling all logs at <code>detailed</code> during multithreaded loading), I managed to reduce the total logger runtime from 44.17 seconds to 15.01 for 299731 log lines by moving everything except string formatting to a single thread. </p>
 </div></div><!-- contents -->
 </div><!-- PageDoc -->
 <!-- start footer part -->

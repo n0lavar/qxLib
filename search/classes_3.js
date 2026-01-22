@@ -1,8 +1,8 @@
 var searchData=
 [
-  ['debugger_5flogger_5fstream_938',['debugger_logger_stream',['../classqx_1_1debugger__logger__stream.html',1,'qx']]],
-  ['default_5fgeneric_5fspan_5ftraits_939',['default_generic_span_traits',['../structqx_1_1default__generic__span__traits.html',1,'qx']]],
-  ['delegate_940',['delegate',['../classqx_1_1delegate.html',1,'qx']]],
-  ['delegate_3c_20return_5ft_2c_20void_20_3e_941',['delegate&lt; return_t, void &gt;',['../classqx_1_1delegate_3_01return__t_00_01void_01_4.html',1,'qx']]],
-  ['destruction_5fcallback_942',['destruction_callback',['../classqx_1_1destruction__callback.html',1,'qx']]]
+  ['debugger_5flogger_5fstream_939',['debugger_logger_stream',['../classqx_1_1debugger__logger__stream.html',1,'qx']]],
+  ['default_5fgeneric_5fspan_5ftraits_940',['default_generic_span_traits',['../structqx_1_1default__generic__span__traits.html',1,'qx']]],
+  ['delegate_941',['delegate',['../classqx_1_1delegate.html',1,'qx']]],
+  ['delegate_3c_20return_5ft_2c_20void_20_3e_942',['delegate&lt; return_t, void &gt;',['../classqx_1_1delegate_3_01return__t_00_01void_01_4.html',1,'qx']]],
+  ['destruction_5fcallback_943',['destruction_callback',['../classqx_1_1destruction__callback.html',1,'qx']]]
 ];
