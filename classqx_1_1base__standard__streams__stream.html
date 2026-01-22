@@ -68,6 +68,7 @@ $(function() {
   <div class="summary">
 <a href="#nested-classes">Classes</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pro-methods">Protected Member Functions</a> &#124;
 <a href="classqx_1_1base__standard__streams__stream-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">qx::base_standard_streams_stream Class Reference<span class="mlabels"><span class="mlabel">abstract</span></span></div>  </div>
@@ -114,6 +115,12 @@ Public Member Functions</h2></td></tr>
 void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1base__logger__stream.html#abe1ebfaa9fb68d7a7d2624766f608f6b">flush</a> ()</td></tr>
 <tr class="memdesc:abe1ebfaa9fb68d7a7d2624766f608f6b inherit pub_methods_classqx_1_1base__logger__stream"><td class="mdescLeft">&#160;</td><td class="mdescRight">Flush the stream. <br /></td></tr>
 <tr class="separator:abe1ebfaa9fb68d7a7d2624766f608f6b inherit pub_methods_classqx_1_1base__logger__stream"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
+Protected Member Functions</h2></td></tr>
+<tr class="memitem:a8643f960f2d61dfe54dc6ef1116dc848"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1base__standard__streams__stream.html#a8643f960f2d61dfe54dc6ef1116dc848">check_previous_message</a> (verbosity eCurrentMessageVerbosity)</td></tr>
+<tr class="memdesc:a8643f960f2d61dfe54dc6ef1116dc848"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check the previous message type and flush if needed.  <a href="classqx_1_1base__standard__streams__stream.html#a8643f960f2d61dfe54dc6ef1116dc848">More...</a><br /></td></tr>
+<tr class="separator:a8643f960f2d61dfe54dc6ef1116dc848"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>A base class for logger streams based on standard streams. </p>
@@ -159,6 +166,42 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
+<a id="a8643f960f2d61dfe54dc6ef1116dc848"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8643f960f2d61dfe54dc6ef1116dc848">&#9670;&nbsp;</a></span>check_previous_message()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void qx::base_standard_streams_stream::check_previous_message </td>
+          <td>(</td>
+          <td class="paramtype">verbosity&#160;</td>
+          <td class="paramname"><em>eCurrentMessageVerbosity</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Check the previous message type and flush if needed. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">eCurrentMessageVerbosity</td><td>- current message verbosity </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="base__standard__streams__stream_8inl_source.html#l00095">95</a> of file <a class="el" href="base__standard__streams__stream_8inl_source.html">base_standard_streams_stream.inl</a>.</p>
+
+</div>
+</div>
 <a id="ae39add75058819356c42e53e17c5e339"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ae39add75058819356c42e53e17c5e339">&#9670;&nbsp;</a></span>do_log()</h2>
 
@@ -211,7 +254,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 
 <p>Implements <a class="el" href="classqx_1_1base__logger__stream.html">qx::base_logger_stream</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="base__standard__streams__stream_8inl_source.html#l00019">19</a> of file <a class="el" href="base__standard__streams__stream_8inl_source.html">base_standard_streams_stream.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="base__standard__streams__stream_8inl_source.html#l00020">20</a> of file <a class="el" href="base__standard__streams__stream_8inl_source.html">base_standard_streams_stream.inl</a>.</p>
 
 </div>
 </div>

@@ -84,93 +84,110 @@ $(function() {
 <div class="line"><a name="l00013"></a><span class="lineno"><a class="line" href="classqx_1_1base__standard__streams__stream.html#aaf76c931c13b0538f38fee2fbf01234b">   13</a></span>&#160;<span class="keyword">inline</span> <a class="code" href="classqx_1_1base__standard__streams__stream.html#aaf76c931c13b0538f38fee2fbf01234b">base_standard_streams_stream::base_standard_streams_stream</a>(<span class="keyword">const</span> <a class="code" href="structqx_1_1base__standard__streams__stream_1_1config.html">config</a>&amp; streamConfig)</div>
 <div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;    : <a class="code" href="classqx_1_1base__logger__stream.html">base_logger_stream</a>(streamConfig)</div>
 <div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;    , m_bUsingColors(streamConfig.bUseColors)</div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;{</div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;}</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160; </div>
-<div class="line"><a name="l00019"></a><span class="lineno"><a class="line" href="classqx_1_1base__standard__streams__stream.html#ae39add75058819356c42e53e17c5e339">   19</a></span>&#160;<span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="classqx_1_1base__standard__streams__stream.html#ae39add75058819356c42e53e17c5e339">base_standard_streams_stream::do_log</a>(<span class="keyword">const</span> <a class="code" href="classqx_1_1category.html">category</a>&amp; <a class="code" href="classqx_1_1category.html">category</a>, verbosity eVerbosity, string_view svMessage)</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;{</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    <span class="keywordflow">if</span> (m_bUsingColors)</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    {</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;        <a class="code" href="classqx_1_1color.html">color</a> lineColor = color::white();</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;        <span class="keywordflow">switch</span> (eVerbosity)</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;        {</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;        <span class="keywordflow">case</span> verbosity::very_verbose:</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;        <span class="keywordflow">case</span> verbosity::verbose:</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;            lineColor = color::gray();</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;            <span class="keywordflow">break</span>;</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160; </div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;        <span class="keywordflow">case</span> verbosity::log:</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;            lineColor = color::white();</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;            <span class="keywordflow">break</span>;</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160; </div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;        <span class="keywordflow">case</span> verbosity::important:</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;            lineColor = color::khaki();</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;            <span class="keywordflow">break</span>;</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160; </div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;        <span class="keywordflow">case</span> verbosity::warning:</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;            lineColor = color::orange();</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;            <span class="keywordflow">break</span>;</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160; </div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;        <span class="keywordflow">case</span> verbosity::error:</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;            lineColor = color::crimson();</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;            <span class="keywordflow">break</span>;</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160; </div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;        <span class="keywordflow">case</span> verbosity::critical:</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;            lineColor = color::dark_red();</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;            <span class="keywordflow">break</span>;</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;        }</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160; </div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;        <span class="keyword">struct </span>logger_color_range</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;        {</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;            std::pair&lt;size_t, size_t&gt; range { 0, 0 };</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;            <a class="code" href="classqx_1_1color.html">color</a>                     rangeColor = color::white();</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;        };</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160; </div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;        <span class="comment">// currently only one color range (category name) is supported</span></div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;        <span class="comment">// loop is left, so it can be extended later if needed</span></div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;        std::array&lt;logger_color_range, 1&gt; colors;</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;        <span class="keywordtype">size_t</span>                            colorsCount = 0;</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160; </div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;        <span class="keywordflow">if</span> (<span class="keyword">auto</span> nPos = svMessage.find(<a class="code" href="classqx_1_1category.html">category</a>.<a class="code" href="classqx_1_1category.html#a0b2b93e7b142f4a34cf90ceaa304177f">get_name</a>()); nPos != string::npos)</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;        {</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;            colors[0]   = { .range = { nPos, nPos + <a class="code" href="classqx_1_1category.html">category</a>.<a class="code" href="classqx_1_1category.html#a0b2b93e7b142f4a34cf90ceaa304177f">get_name</a>().size() }, .rangeColor = <a class="code" href="classqx_1_1category.html">category</a>.<a class="code" href="classqx_1_1category.html#a45f05eea5cdc8a8030b3233748bbcef2">get_color</a>() };</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;            colorsCount = 1;</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;        }</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160; </div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;        cout_colorized(</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;            eVerbosity,</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;            string_view(svMessage.data(), colorsCount == 0 ? svMessage.size() : colors.front().range.first),</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;            lineColor);</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160; </div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;        <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = 0; i &lt; colorsCount; ++i)</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;        {</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;            cout_colorized(</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;                eVerbosity,</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;                string_view(svMessage.data() + colors[i].range.first, colors[i].range.second - colors[i].range.first),</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;                colors[i].rangeColor);</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;            cout_colorized(</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;                eVerbosity,</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;                string_view(</div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;                    svMessage.data() + colors[i].range.second,</div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;                    (i + 1 &lt; colorsCount ? colors[i + 1].range.first : svMessage.size()) - colors[i].range.second),</div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;                lineColor);</div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;        }</div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;    }</div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;    <span class="keywordflow">else</span></div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;    {</div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;        cout_common(eVerbosity, svMessage);</div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;    }</div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;}</div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160; </div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;} <span class="comment">// namespace qx</span></div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;    , m_bSyncUsualAndErrorMessages(streamConfig.bSyncUsualAndErrorMessages)</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;{</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;}</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160; </div>
+<div class="line"><a name="l00020"></a><span class="lineno"><a class="line" href="classqx_1_1base__standard__streams__stream.html#ae39add75058819356c42e53e17c5e339">   20</a></span>&#160;<span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="classqx_1_1base__standard__streams__stream.html#ae39add75058819356c42e53e17c5e339">base_standard_streams_stream::do_log</a>(<span class="keyword">const</span> <a class="code" href="classqx_1_1category.html">category</a>&amp; <a class="code" href="classqx_1_1category.html">category</a>, verbosity eVerbosity, string_view svMessage)</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;{</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    <span class="keywordflow">if</span> (m_bUsingColors)</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    {</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;        <a class="code" href="classqx_1_1color.html">color</a> lineColor = color::white();</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;        <span class="keywordflow">switch</span> (eVerbosity)</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;        {</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;        <span class="keywordflow">case</span> verbosity::detailed:</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;        <span class="keywordflow">case</span> verbosity::verbose:</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;            lineColor = color::gray();</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;            <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160; </div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;        <span class="keywordflow">case</span> verbosity::log:</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;            lineColor = color::white();</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;            <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160; </div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;        <span class="keywordflow">case</span> verbosity::important:</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;            lineColor = color::khaki();</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;            <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160; </div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;        <span class="keywordflow">case</span> verbosity::warning:</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;            lineColor = color::orange();</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;            <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160; </div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;        <span class="keywordflow">case</span> verbosity::error:</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;            lineColor = color::crimson();</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;            <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160; </div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;        <span class="keywordflow">case</span> verbosity::critical:</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;            lineColor = color::dark_red();</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;            <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;        }</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160; </div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;        <span class="keyword">struct </span>logger_color_range</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;        {</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;            std::pair&lt;size_t, size_t&gt; range { 0, 0 };</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;            <a class="code" href="classqx_1_1color.html">color</a>                     rangeColor = color::white();</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;        };</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160; </div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;        <span class="comment">// currently only one color range (category name) is supported</span></div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;        <span class="comment">// loop is left, so it can be extended later if needed</span></div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;        std::array&lt;logger_color_range, 1&gt; colors;</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;        <span class="keywordtype">size_t</span>                            colorsCount = 0;</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160; </div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;        <span class="keywordflow">if</span> (<span class="keyword">auto</span> nPos = svMessage.find(<a class="code" href="classqx_1_1category.html">category</a>.<a class="code" href="classqx_1_1category.html#a0b2b93e7b142f4a34cf90ceaa304177f">get_name</a>()); nPos != string::npos)</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;        {</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;            colors[0]   = { .range = { nPos, nPos + <a class="code" href="classqx_1_1category.html">category</a>.<a class="code" href="classqx_1_1category.html#a0b2b93e7b142f4a34cf90ceaa304177f">get_name</a>().size() }, .rangeColor = <a class="code" href="classqx_1_1category.html">category</a>.<a class="code" href="classqx_1_1category.html#a45f05eea5cdc8a8030b3233748bbcef2">get_color</a>() };</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;            colorsCount = 1;</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;        }</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160; </div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;        cout_colorized(</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;            eVerbosity,</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;            string_view(svMessage.data(), colorsCount == 0 ? svMessage.size() : colors.front().range.first),</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;            lineColor);</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160; </div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;        <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = 0; i &lt; colorsCount; ++i)</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;        {</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;            cout_colorized(</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;                eVerbosity,</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;                string_view(svMessage.data() + colors[i].range.first, colors[i].range.second - colors[i].range.first),</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;                colors[i].rangeColor);</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;            cout_colorized(</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;                eVerbosity,</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;                string_view(</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;                    svMessage.data() + colors[i].range.second,</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;                    (i + 1 &lt; colorsCount ? colors[i + 1].range.first : svMessage.size()) - colors[i].range.second),</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;                lineColor);</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;        }</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;    }</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;    <span class="keywordflow">else</span></div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;    {</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;        cout_common(eVerbosity, svMessage);</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;    }</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;}</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160; </div>
+<div class="line"><a name="l00095"></a><span class="lineno"><a class="line" href="classqx_1_1base__standard__streams__stream.html#a8643f960f2d61dfe54dc6ef1116dc848">   95</a></span>&#160;<span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="classqx_1_1base__standard__streams__stream.html#a8643f960f2d61dfe54dc6ef1116dc848">base_standard_streams_stream::check_previous_message</a>(verbosity eCurrentMessageVerbosity)</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;{</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;    <span class="keywordflow">if</span> (m_bSyncUsualAndErrorMessages)</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;    {</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;        <span class="keyword">const</span> <span class="keywordtype">bool</span> bCurrentMessageIsError = <a class="code" href="verbosity_8h.html#a28dfb43562e6585f8aeead2c4bf3bcb2">is_error</a>(eCurrentMessageVerbosity);</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160; </div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;        <span class="keywordflow">if</span> (bCurrentMessageIsError != m_bPrevMessageWasError)</div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;            <a class="code" href="classqx_1_1base__logger__stream.html#abe1ebfaa9fb68d7a7d2624766f608f6b">flush</a>();</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160; </div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;        m_bPrevMessageWasError = bCurrentMessageIsError;</div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;    }</div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;}</div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160; </div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;} <span class="comment">// namespace qx</span></div>
 <div class="ttc" id="aclassqx_1_1base__logger__stream_html"><div class="ttname"><a href="classqx_1_1base__logger__stream.html">qx::base_logger_stream</a></div><div class="ttdoc">Base class for logger streams.</div><div class="ttdef"><b>Definition:</b> <a href="base__logger__stream_8h_source.html#l00033">base_logger_stream.h:34</a></div></div>
+<div class="ttc" id="aclassqx_1_1base__logger__stream_html_abe1ebfaa9fb68d7a7d2624766f608f6b"><div class="ttname"><a href="classqx_1_1base__logger__stream.html#abe1ebfaa9fb68d7a7d2624766f608f6b">qx::base_logger_stream::flush</a></div><div class="ttdeci">void flush()</div><div class="ttdoc">Flush the stream.</div><div class="ttdef"><b>Definition:</b> <a href="base__logger__stream_8inl_source.html#l00079">base_logger_stream.inl:79</a></div></div>
+<div class="ttc" id="aclassqx_1_1base__standard__streams__stream_html_a8643f960f2d61dfe54dc6ef1116dc848"><div class="ttname"><a href="classqx_1_1base__standard__streams__stream.html#a8643f960f2d61dfe54dc6ef1116dc848">qx::base_standard_streams_stream::check_previous_message</a></div><div class="ttdeci">void check_previous_message(verbosity eCurrentMessageVerbosity)</div><div class="ttdoc">Check the previous message type and flush if needed.</div><div class="ttdef"><b>Definition:</b> <a href="base__standard__streams__stream_8inl_source.html#l00095">base_standard_streams_stream.inl:95</a></div></div>
 <div class="ttc" id="aclassqx_1_1base__standard__streams__stream_html_aaf76c931c13b0538f38fee2fbf01234b"><div class="ttname"><a href="classqx_1_1base__standard__streams__stream.html#aaf76c931c13b0538f38fee2fbf01234b">qx::base_standard_streams_stream::base_standard_streams_stream</a></div><div class="ttdeci">base_standard_streams_stream(const config &amp;streamConfig)</div><div class="ttdoc">base_standard_streams_stream object constructor</div><div class="ttdef"><b>Definition:</b> <a href="base__standard__streams__stream_8inl_source.html#l00013">base_standard_streams_stream.inl:13</a></div></div>
-<div class="ttc" id="aclassqx_1_1base__standard__streams__stream_html_ae39add75058819356c42e53e17c5e339"><div class="ttname"><a href="classqx_1_1base__standard__streams__stream.html#ae39add75058819356c42e53e17c5e339">qx::base_standard_streams_stream::do_log</a></div><div class="ttdeci">virtual void do_log(const category &amp;category, verbosity eVerbosity, string_view svMessage) override</div><div class="ttdoc">Proceed stream logging.</div><div class="ttdef"><b>Definition:</b> <a href="base__standard__streams__stream_8inl_source.html#l00019">base_standard_streams_stream.inl:19</a></div></div>
+<div class="ttc" id="aclassqx_1_1base__standard__streams__stream_html_ae39add75058819356c42e53e17c5e339"><div class="ttname"><a href="classqx_1_1base__standard__streams__stream.html#ae39add75058819356c42e53e17c5e339">qx::base_standard_streams_stream::do_log</a></div><div class="ttdeci">virtual void do_log(const category &amp;category, verbosity eVerbosity, string_view svMessage) override</div><div class="ttdoc">Proceed stream logging.</div><div class="ttdef"><b>Definition:</b> <a href="base__standard__streams__stream_8inl_source.html#l00020">base_standard_streams_stream.inl:20</a></div></div>
 <div class="ttc" id="aclassqx_1_1category_html"><div class="ttname"><a href="classqx_1_1category.html">qx::category</a></div><div class="ttdoc">A category is a class that identifies a particular piece of code. This code can be located in differe...</div><div class="ttdef"><b>Definition:</b> <a href="category_8h_source.html#l00058">category.h:59</a></div></div>
 <div class="ttc" id="aclassqx_1_1category_html_a0b2b93e7b142f4a34cf90ceaa304177f"><div class="ttname"><a href="classqx_1_1category.html#a0b2b93e7b142f4a34cf90ceaa304177f">qx::category::get_name</a></div><div class="ttdeci">constexpr string_view get_name() const noexcept</div><div class="ttdoc">Get category name.</div><div class="ttdef"><b>Definition:</b> <a href="category_8inl_source.html#l00026">category.inl:26</a></div></div>
 <div class="ttc" id="aclassqx_1_1category_html_a45f05eea5cdc8a8030b3233748bbcef2"><div class="ttname"><a href="classqx_1_1category.html#a45f05eea5cdc8a8030b3233748bbcef2">qx::category::get_color</a></div><div class="ttdeci">constexpr const color &amp; get_color() const noexcept</div><div class="ttdoc">Get category color.</div><div class="ttdef"><b>Definition:</b> <a href="category_8inl_source.html#l00031">category.inl:31</a></div></div>
 <div class="ttc" id="aclassqx_1_1color_html"><div class="ttname"><a href="classqx_1_1color.html">qx::color</a></div><div class="ttdoc">RGBA color.</div><div class="ttdef"><b>Definition:</b> <a href="color_8h_source.html#l00192">color.h:193</a></div></div>
 <div class="ttc" id="astructqx_1_1base__standard__streams__stream_1_1config_html"><div class="ttname"><a href="structqx_1_1base__standard__streams__stream_1_1config.html">qx::base_standard_streams_stream::config</a></div><div class="ttdef"><b>Definition:</b> <a href="base__standard__streams__stream_8h_source.html#l00028">base_standard_streams_stream.h:29</a></div></div>
+<div class="ttc" id="averbosity_8h_html_a28dfb43562e6585f8aeead2c4bf3bcb2"><div class="ttname"><a href="verbosity_8h.html#a28dfb43562e6585f8aeead2c4bf3bcb2">qx::is_error</a></div><div class="ttdeci">bool is_error(verbosity eVerbosity) noexcept</div><div class="ttdoc">Check if the verbosity level is an error.</div><div class="ttdef"><b>Definition:</b> <a href="verbosity_8h_source.html#l00035">verbosity.h:35</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
