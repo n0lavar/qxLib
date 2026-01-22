@@ -23,8 +23,9 @@ inline void fwrite_logger_stream::do_flush()
 
 inline void fwrite_logger_stream::cout_colorized(verbosity eVerbosity, string_view svMessage, const color& rangeColor)
 {
-    FILE* output = eVerbosity < verbosity::error ? stdout : stderr;
+    check_previous_message(eVerbosity);
 
+    FILE* output = !is_error(eVerbosity) ? stdout : stderr;
     terminal_color::font(rangeColor).write(output);
     fwrite(svMessage.data(), sizeof(char_type), svMessage.size(), output);
     terminal_color::reset().write(output);
@@ -32,7 +33,9 @@ inline void fwrite_logger_stream::cout_colorized(verbosity eVerbosity, string_vi
 
 inline void fwrite_logger_stream::cout_common(verbosity eVerbosity, string_view svMessage)
 {
-    FILE* output = eVerbosity < verbosity::error ? stdout : stderr;
+    check_previous_message(eVerbosity);
+
+    FILE* output = !is_error(eVerbosity) ? stdout : stderr;
     fwrite(svMessage.data(), sizeof(char_type), svMessage.size(), output);
 }
 

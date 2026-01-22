@@ -35,15 +35,19 @@ inline void cout_logger_stream::do_flush()
 
 inline void cout_logger_stream::cout_colorized(verbosity eVerbosity, string_view svMessage, const color& rangeColor)
 {
+    check_previous_message(eVerbosity);
+
     auto& outputStream =
-        eVerbosity < verbosity::error ? details::get_cout<char_type>::get() : details::get_cerr<char_type>::get();
+        !is_error(eVerbosity) ? details::get_cout<char_type>::get() : details::get_cerr<char_type>::get();
     outputStream << terminal_color::font(rangeColor) << svMessage << terminal_color::reset();
 }
 
 inline void cout_logger_stream::cout_common(verbosity eVerbosity, string_view svMessage)
 {
+    check_previous_message(eVerbosity);
+
     auto& outputStream =
-        eVerbosity < verbosity::error ? details::get_cout<char_type>::get() : details::get_cerr<char_type>::get();
+        !is_error(eVerbosity) ? details::get_cout<char_type>::get() : details::get_cerr<char_type>::get();
     outputStream << svMessage;
 }
 

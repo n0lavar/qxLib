@@ -80,7 +80,7 @@ public:
             int             nLine,
             string          sMessage)>;
 
-        verbosity       eRuntimeVerbosity = verbosity::very_verbose;
+        verbosity       eRuntimeVerbosity = verbosity::detailed;
         format_function formatFunction;
     };
 

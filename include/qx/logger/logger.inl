@@ -163,8 +163,8 @@ constexpr string_view logger::get_verbosity_prefix(verbosity eVerbosity) noexcep
 {
     switch (eVerbosity)
     {
-    case verbosity::very_verbose:
-        return QXT("[VV][");
+    case verbosity::detailed:
+        return QXT("[D][");
 
     case verbosity::verbose:
         return QXT("[V][");

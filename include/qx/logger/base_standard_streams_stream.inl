@@ -13,6 +13,7 @@ namespace qx
 inline base_standard_streams_stream::base_standard_streams_stream(const config& streamConfig)
     : base_logger_stream(streamConfig)
     , m_bUsingColors(streamConfig.bUseColors)
+    , m_bSyncUsualAndErrorMessages(streamConfig.bSyncUsualAndErrorMessages)
 {
 }
 
@@ -23,7 +24,7 @@ inline void base_standard_streams_stream::do_log(const category& category, verbo
         color lineColor = color::white();
         switch (eVerbosity)
         {
-        case verbosity::very_verbose:
+        case verbosity::detailed:
         case verbosity::verbose:
             lineColor = color::gray();
             break;
@@ -88,6 +89,19 @@ inline void base_standard_streams_stream::do_log(const category& category, verbo
     else
     {
         cout_common(eVerbosity, svMessage);
+    }
+}
+
+inline void base_standard_streams_stream::check_previous_message(verbosity eCurrentMessageVerbosity)
+{
+    if (m_bSyncUsualAndErrorMessages)
+    {
+        const bool bCurrentMessageIsError = is_error(eCurrentMessageVerbosity);
+
+        if (bCurrentMessageIsError != m_bPrevMessageWasError)
+            flush();
+
+        m_bPrevMessageWasError = bCurrentMessageIsError;
     }
 }
 

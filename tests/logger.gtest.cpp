@@ -290,7 +290,7 @@ struct cout : base_cout
 
         base_cout::set_up();
         qx::logger_singleton::get_instance().get_logger().add_stream(
-            qx::cout_logger_stream(qx::cout_logger_stream::config { { .bUseColors = false }, false, false }));
+            qx::cout_logger_stream(qx::cout_logger_stream::config { {}, false, false }));
     }
 };
 
@@ -304,7 +304,7 @@ struct fwrite : base_cout
 
         base_cout::set_up();
         qx::logger_singleton::get_instance().get_logger().add_stream(
-            qx::fwrite_logger_stream(qx::fwrite_logger_stream::config { .bUseColors = false }));
+            qx::fwrite_logger_stream(qx::fwrite_logger_stream::config()));
     }
 };
 
@@ -335,26 +335,11 @@ protected:
 
         const qx::string                   sContent = traits_t::get_content();
         const std::vector<qx::string_view> lines    = sContent.split(QXT('\n'));
-        auto                               it       = lines.begin();
-
-        check_line(*it++, qx::verbosity::log, CatLoggerTestFileWide, QXT("Hello world"));
-        check_line(*it++, qx::verbosity::log, CatLoggerTestFileWide, QXT("Hello world"));
-        check_line(*it++, qx::verbosity::log, CatLoggerTestFileWide, QXT("The answer is 42"));
-
-        check_line(*it++, qx::verbosity::log, CatLoggerTest, QXT("Hello world"));
-        check_line(*it++, qx::verbosity::log, CatLoggerTest, QXT("Hello world"));
-        check_line(*it++, qx::verbosity::log, CatLoggerTest, QXT("The answer is 42"));
-
-        check_line(*it++, qx::verbosity::log, CatDefault, QXT("Hello world"));
-        check_line(*it++, qx::verbosity::log, CatDefault, QXT("Hello world"));
-        check_line(*it++, qx::verbosity::log, CatDefault, QXT("The answer is 42"));
-
-        EXPECT_EQ(it, lines.end());
-
+        m_CheckContent(lines);
         traits_t::tear_down();
     }
 
-private:
+protected:
     static void check_line(
         qx::string_view     svLine,
         qx::verbosity       eVerbosity,
@@ -366,8 +351,8 @@ private:
         // verbosity
         switch (eVerbosity)
         {
-        case qx::verbosity::very_verbose:
-            sPattern += QXT("\\[VV\\]");
+        case qx::verbosity::detailed:
+            sPattern += QXT("\\[D\\]");
             break;
 
         case qx::verbosity::verbose:
@@ -420,24 +405,74 @@ private:
             << "regex: " << qx::to_cstring(sPattern) << std::endl
             << "line:  " << qx::to_cstring(svLine) << std::endl;
     }
+
+protected:
+    std::function<void(std::span<const qx::string_view> lines)> m_CheckContent;
 };
 
 TYPED_TEST_SUITE(logger_test, implementations_type);
 
-TYPED_TEST(logger_test, main)
+TYPED_TEST(logger_test, categories)
 {
     // file category
-    QX_LOG(qx::verbosity::log, "Hello world");
+    QX_LOG(qx::verbosity::log, "Categories check 1");
+
+    // manual category
+    QX_LOG_C(CatLoggerTest, qx::verbosity::log, "Categories check 2");
+
+    // manual default category ([CatDefault] must not appear)
+    QX_LOG_C(CatDefault, qx::verbosity::log, "Categories check 3");
+
+    this->m_CheckContent = [](std::span<const qx::string_view> lines)
+    {
+        auto it = lines.begin();
+
+        TestFixture::check_line(*it++, qx::verbosity::log, CatLoggerTestFileWide, QXT("Categories check 1"));
+        TestFixture::check_line(*it++, qx::verbosity::log, CatLoggerTest, QXT("Categories check 2"));
+        TestFixture::check_line(*it++, qx::verbosity::log, CatDefault, QXT("Categories check 3"));
+
+        EXPECT_EQ(it, lines.end());
+    };
+}
+
+TYPED_TEST(logger_test, verbosity)
+{
+    QX_LOG(qx::verbosity::detailed, "Verbosity check 1");
+    QX_LOG(qx::verbosity::verbose, "Verbosity check 2");
+    QX_LOG(qx::verbosity::log, "Verbosity check 3");
+    QX_LOG(qx::verbosity::important, "Verbosity check 4");
+    QX_LOG(qx::verbosity::warning, "Verbosity check 5");
+    QX_LOG(qx::verbosity::error, "Verbosity check 6");
+    QX_LOG(qx::verbosity::critical, "Verbosity check 7");
+
+    this->m_CheckContent = [](std::span<const qx::string_view> lines)
+    {
+        auto it = lines.begin();
+
+        TestFixture::check_line(*it++, qx::verbosity::detailed, CatLoggerTestFileWide, QXT("Verbosity check 1"));
+        TestFixture::check_line(*it++, qx::verbosity::verbose, CatLoggerTestFileWide, QXT("Verbosity check 2"));
+        TestFixture::check_line(*it++, qx::verbosity::log, CatLoggerTestFileWide, QXT("Verbosity check 3"));
+        TestFixture::check_line(*it++, qx::verbosity::important, CatLoggerTestFileWide, QXT("Verbosity check 4"));
+        TestFixture::check_line(*it++, qx::verbosity::warning, CatLoggerTestFileWide, QXT("Verbosity check 5"));
+        TestFixture::check_line(*it++, qx::verbosity::error, CatLoggerTestFileWide, QXT("Verbosity check 6"));
+        TestFixture::check_line(*it++, qx::verbosity::critical, CatLoggerTestFileWide, QXT("Verbosity check 7"));
+
+        EXPECT_EQ(it, lines.end());
+    };
+}
+
+TYPED_TEST(logger_test, formatting)
+{
     QX_LOG(qx::verbosity::log, "Hello {}", QXT("world"));
     QX_LOG(qx::verbosity::log, "The {} is {}", QXT("answer"), 42);
 
-    // manual category
-    QX_LOG_C(CatLoggerTest, qx::verbosity::log, "Hello world");
-    QX_LOG_C(CatLoggerTest, qx::verbosity::log, "Hello {}", QXT("world"));
-    QX_LOG_C(CatLoggerTest, qx::verbosity::log, "The {} is {}", QXT("answer"), 42);
+    this->m_CheckContent = [](std::span<const qx::string_view> lines)
+    {
+        auto it = lines.begin();
 
-    // manual default category ([CatDefault] must not appear)
-    QX_LOG_C(CatDefault, qx::verbosity::log, "Hello world");
-    QX_LOG_C(CatDefault, qx::verbosity::log, "Hello {}", QXT("world"));
-    QX_LOG_C(CatDefault, qx::verbosity::log, "The {} is {}", QXT("answer"), 42);
+        TestFixture::check_line(*it++, qx::verbosity::log, CatLoggerTestFileWide, QXT("Hello world"));
+        TestFixture::check_line(*it++, qx::verbosity::log, CatLoggerTestFileWide, QXT("The answer is 42"));
+
+        EXPECT_EQ(it, lines.end());
+    };
 }

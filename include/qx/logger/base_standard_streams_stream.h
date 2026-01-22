@@ -27,7 +27,16 @@ class base_standard_streams_stream : public base_logger_stream
 public:
     struct config : base_logger_stream::config
     {
-        bool bUseColors = true;
+        // Is it necessary to insert colour tags to highlight certain parts of messages?
+        // For example, each category has its own colour.
+        // Consoles can understand these tags, but they may be unnecessary when outputting to another location.
+        bool bUseColors = false;
+
+        //Should the order of normal messages and errors be synchronised?
+        //These two types of messages go to different standard streams, and in general,
+        //preserving the order is not guaranteed.
+        //This option flushes the stream if the previous message was of a different type.
+        bool bSyncUsualAndErrorMessages = true;
     };
 
 public:
@@ -42,6 +51,13 @@ public:
     // base_logger_stream
     //
     virtual void do_log(const category& category, verbosity eVerbosity, string_view svMessage) override;
+
+protected:
+    /**
+        @brief Check the previous message type and flush if needed
+        @param eCurrentMessageVerbosity - current message verbosity
+    **/
+    void check_previous_message(verbosity eCurrentMessageVerbosity);
 
 private:
     /**
@@ -60,7 +76,9 @@ private:
     virtual void cout_common(verbosity eVerbosity, string_view svMessage) = 0;
 
 private:
-    bool m_bUsingColors = true;
+    bool m_bUsingColors               = false;
+    bool m_bSyncUsualAndErrorMessages = true;
+    bool m_bPrevMessageWasError       = false;
 };
 
 } // namespace qx
