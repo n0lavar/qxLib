@@ -43,7 +43,7 @@ public:
         @brief cout_logger_stream object constructor
         @param optStreamConfig - logger stream configuration
     **/
-    cout_logger_stream(std::optional<config> optStreamConfig = {});
+    cout_logger_stream(std::optional<config> optStreamConfig = {}) noexcept;
 
     cout_logger_stream(cout_logger_stream&&) noexcept = default;
 

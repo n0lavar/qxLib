@@ -10,7 +10,7 @@
 namespace qx
 {
 
-inline base_standard_streams_stream::base_standard_streams_stream(const config& streamConfig)
+inline base_standard_streams_stream::base_standard_streams_stream(const config& streamConfig) noexcept
     : base_logger_stream(streamConfig)
     , m_bUsingColors(streamConfig.bUseColors)
     , m_bSyncUsualAndErrorMessages(streamConfig.bSyncUsualAndErrorMessages)

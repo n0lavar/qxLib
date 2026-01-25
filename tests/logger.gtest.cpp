@@ -46,6 +46,12 @@ QX_SET_FILE_CATEGORY(CatLoggerTestFileWide);
 
 constexpr qx::string_view k_svLogFileName = QXT("logger_test.log");
 
+QX_CALL_BEFORE_MAIN = []()
+{
+    if (std::filesystem::exists(k_svLogFileName))
+        std::filesystem::remove(k_svLogFileName);
+};
+
 namespace traits
 {
 
@@ -326,7 +332,8 @@ class logger_test : public ::testing::Test
 protected:
     virtual void SetUp() override
     {
-        qx::logger_singleton::get_instance().get_logger().reset();
+        qx::get_logger().reset();
+        qx::get_logger().register_category(CatLoggerTestFileWide, { .eRuntimeVerbosity = qx::verbosity::detailed });
         traits_t::set_up();
     }
     virtual void TearDown() override

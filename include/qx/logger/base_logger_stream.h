@@ -47,11 +47,11 @@ public:
         @brief base_logger_stream object constructor
         @param streamConfig - logger configuration
     **/
-    base_logger_stream(const config& streamConfig);
+    base_logger_stream(const config& streamConfig) noexcept;
 
     base_logger_stream(base_logger_stream&&) noexcept = default;
 
-    virtual ~base_logger_stream() = default;
+    virtual ~base_logger_stream() noexcept = default;
 
     /**
         @brief  Output to stream

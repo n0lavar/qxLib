@@ -16,6 +16,7 @@
     #include <fcntl.h>
     #include <sys/mman.h>
     #include <sys/stat.h>
+    #include <time.h>
     #include <unistd.h>
 #endif
 
@@ -31,6 +32,12 @@ namespace qx
              Instead of using traditional buffered I/O (fopen / WriteFile),
              the file is mapped into the process address space and written
              via simple memory copies.
+
+             UTF-8 LE (char) or UTF-16 LE (wchar_t).
+
+             While the file is open for writing, a sequence of NUL characters appears at the end of the file.
+             This is expected and follows the logic of how memory-mapped files work.
+             These characters will be truncated when the object is destroyed, usually when an application is closed.
     @author  Khrapov
     @date    15.01.2026
 
@@ -45,11 +52,11 @@ public:
     **/
     file_logger_stream_mapping(
         const config&             streamConfig   = config(),
-        unit<size_t, units::data> initialMapSize = { 1, units::data::mebibytes });
+        unit<size_t, units::data> initialMapSize = { 1, units::data::mebibytes }) noexcept;
 
     file_logger_stream_mapping(file_logger_stream_mapping&& other) noexcept;
 
-    virtual ~file_logger_stream_mapping() override;
+    virtual ~file_logger_stream_mapping() noexcept override;
 
     // base_logger_stream
     //
@@ -80,7 +87,7 @@ private:
         @param  nNewCapacity - new capacity in bytes (must be >= current size)
         @retval              - true - remapping succeeded  
     **/
-    bool remap_to_capacity(size_t nNewCapacity);
+    bool remap_to_capacity(size_t nNewCapacity) noexcept;
 
     /**
         @brief Ensure that mapped file has enough space for additional data.
@@ -95,7 +102,7 @@ private:
         @param  nAdditionalBytes - Number of bytes that need to be written
         @retval                  - true - enough space is available or remapping succeeded  
     **/
-    bool ensure_capacity(size_t nAdditionalBytes);
+    bool ensure_capacity(size_t nAdditionalBytes) noexcept;
 
     /**
         @brief Align value up to the nearest multiple of alignment.
@@ -117,7 +124,7 @@ private:
         @param  nAlignment - alignment / granularity / page size
         @retval            - aligned value >= value
     **/
-    static size_t align_up_u64(size_t nValue, size_t nAlignment);
+    static size_t align_up_u64(size_t nValue, size_t nAlignment) noexcept;
 
 private:
 #if QX_WIN

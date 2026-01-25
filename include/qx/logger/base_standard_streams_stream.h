@@ -44,7 +44,7 @@ public:
         @brief base_standard_streams_stream object constructor
         @param streamConfig - logger stream configuration
     **/
-    base_standard_streams_stream(const config& streamConfig);
+    base_standard_streams_stream(const config& streamConfig) noexcept;
 
     base_standard_streams_stream(base_standard_streams_stream&&) noexcept = default;
 

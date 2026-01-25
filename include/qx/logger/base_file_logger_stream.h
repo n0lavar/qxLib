@@ -48,7 +48,7 @@ public:
         @brief file_logger_stream object constructor
         @param streamConfig - file logger configuration
     **/
-    base_file_logger_stream(const config& streamConfig);
+    base_file_logger_stream(const config& streamConfig) noexcept;
     base_file_logger_stream(base_file_logger_stream&&) noexcept = default;
 
 protected:
@@ -60,7 +60,7 @@ protected:
     **/
     static std::filesystem::path create_folder_and_get_log_file_path(
         log_file_policy eLogFilePolicy,
-        string_view     svFileName);
+        string_view     svFileName) noexcept;
 };
 
 } // namespace qx

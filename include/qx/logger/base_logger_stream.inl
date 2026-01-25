@@ -18,7 +18,7 @@ namespace details
 template<class char_t /* = char */>
 struct get_cerr
 {
-    static auto& get()
+    static auto& get() noexcept
     {
         return std::cerr;
     }
@@ -27,7 +27,7 @@ struct get_cerr
 template<>
 struct get_cerr</* class char_t = */ wchar_t>
 {
-    static auto& get()
+    static auto& get() noexcept
     {
         return std::wcerr;
     }
@@ -36,7 +36,7 @@ struct get_cerr</* class char_t = */ wchar_t>
 template<class char_t /* = char */>
 struct get_cout
 {
-    static auto& get()
+    static auto& get() noexcept
     {
         return std::cout;
     }
@@ -45,7 +45,7 @@ struct get_cout
 template<>
 struct get_cout</* class char_t = */ wchar_t>
 {
-    static auto& get()
+    static auto& get() noexcept
     {
         return std::wcout;
     }
@@ -53,7 +53,7 @@ struct get_cout</* class char_t = */ wchar_t>
 
 } // namespace details
 
-inline base_logger_stream::base_logger_stream(const config& streamConfig)
+inline base_logger_stream::base_logger_stream(const config& streamConfig) noexcept
     : m_pMutex(std::make_unique<std::recursive_mutex>())
     , m_bProtectLog(streamConfig.bProtectLog)
     , m_eMinFlushVerbosity(streamConfig.eMinFlushVerbosity)

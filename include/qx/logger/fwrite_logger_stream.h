@@ -30,7 +30,7 @@ public:
         @brief fwrite_logger_stream object constructor
         @param streamConfig - logger stream configuration
     **/
-    fwrite_logger_stream(const config& streamConfig = config());
+    fwrite_logger_stream(const config& streamConfig = config()) noexcept;
 
     fwrite_logger_stream(fwrite_logger_stream&&) noexcept = default;
 

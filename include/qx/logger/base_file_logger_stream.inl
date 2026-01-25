@@ -10,13 +10,14 @@
 namespace qx
 {
 
-inline base_file_logger_stream::base_file_logger_stream(const config& streamConfig) : base_logger_stream(streamConfig)
+inline base_file_logger_stream::base_file_logger_stream(const config& streamConfig) noexcept
+    : base_logger_stream(streamConfig)
 {
 }
 
 inline std::filesystem::path base_file_logger_stream::create_folder_and_get_log_file_path(
     log_file_policy eLogFilePolicy,
-    string_view     svFileName)
+    string_view     svFileName) noexcept
 {
     string sLogFile = svFileName;
     if (eLogFilePolicy == log_file_policy::time_name)

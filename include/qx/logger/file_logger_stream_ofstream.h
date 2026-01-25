@@ -20,6 +20,7 @@ namespace qx
 
     @class   file_logger_stream_ofstream
     @brief   std::ofstream based file logger stream
+    @details UTF-8 LE (char) or UTF-16 LE (wchar_t)
     @author  Khrapov
     @date    14.01.2026
 
@@ -36,7 +37,7 @@ public:
     **/
     file_logger_stream_ofstream(
         const config&             streamConfig = config(),
-        unit<size_t, units::data> bufferSize   = { 8192 * sizeof(char_type), units::data::bytes });
+        unit<size_t, units::data> bufferSize   = { 8192 * sizeof(char_type), units::data::bytes }) noexcept;
     file_logger_stream_ofstream(file_logger_stream_ofstream&&) noexcept = default;
 
     virtual ~file_logger_stream_ofstream() override;

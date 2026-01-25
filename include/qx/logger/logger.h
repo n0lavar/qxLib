@@ -88,7 +88,7 @@ public:
     using logger_string_pool = string_pool<>;
 
 public:
-    logger();
+    logger() noexcept;
     virtual ~logger() noexcept;
 
     /**
@@ -201,7 +201,7 @@ private:
 class logger_singleton final : public singleton<logger_singleton>
 {
 public:
-    logger& get_logger()
+    logger& get_logger() noexcept
     {
         return m_Logger;
     }
@@ -217,7 +217,7 @@ inline logger* g_pGlobalLogger = nullptr;
     @brief  Get the logger instance used in QX_LOG macros
     @retval  - logger instance
 **/
-inline logger& get_logger()
+inline logger& get_logger() noexcept
 {
     return g_pGlobalLogger ? *g_pGlobalLogger : logger_singleton::get_instance().get_logger();
 }

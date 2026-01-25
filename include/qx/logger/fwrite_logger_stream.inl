@@ -10,7 +10,7 @@
 namespace qx
 {
 
-inline fwrite_logger_stream::fwrite_logger_stream(const config& streamConfig)
+inline fwrite_logger_stream::fwrite_logger_stream(const config& streamConfig) noexcept
     : base_standard_streams_stream(streamConfig)
 {
 }

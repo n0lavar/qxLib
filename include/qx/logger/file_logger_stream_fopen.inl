@@ -12,7 +12,7 @@ namespace qx
 
 inline file_logger_stream_fopen::file_logger_stream_fopen(
     const config&             streamConfig,
-    unit<size_t, units::data> bufferSize)
+    unit<size_t, units::data> bufferSize) noexcept
     : base_file_logger_stream(streamConfig)
 {
     std::ios_base::sync_with_stdio(false);

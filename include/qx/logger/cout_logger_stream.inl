@@ -10,7 +10,7 @@
 namespace qx
 {
 
-inline cout_logger_stream::cout_logger_stream(std::optional<config> optStreamConfig)
+inline cout_logger_stream::cout_logger_stream(std::optional<config> optStreamConfig) noexcept
     : base_standard_streams_stream(optStreamConfig ? *optStreamConfig : config())
 {
     const config streamConfig = optStreamConfig ? *optStreamConfig : config();

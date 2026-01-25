@@ -12,7 +12,7 @@ namespace qx
 
 inline file_logger_stream_ofstream::file_logger_stream_ofstream(
     const config&             streamConfig,
-    unit<size_t, units::data> bufferSize)
+    unit<size_t, units::data> bufferSize) noexcept
     : base_file_logger_stream(streamConfig)
 {
     const std::filesystem::path path =

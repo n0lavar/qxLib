@@ -12,7 +12,7 @@ namespace qx
 
 inline file_logger_stream_mapping::file_logger_stream_mapping(
     const config&             streamConfig,
-    unit<size_t, units::data> initialMapSize)
+    unit<size_t, units::data> initialMapSize) noexcept
     : base_file_logger_stream(streamConfig)
 {
     const std::filesystem::path path =
@@ -81,7 +81,7 @@ inline file_logger_stream_mapping::file_logger_stream_mapping(file_logger_stream
     std::swap(m_nGranularity, other.m_nGranularity);
 }
 
-inline file_logger_stream_mapping::~file_logger_stream_mapping()
+inline file_logger_stream_mapping::~file_logger_stream_mapping() noexcept
 {
 #if QX_WIN
     if (m_hFile == INVALID_HANDLE_VALUE)
@@ -174,20 +174,43 @@ inline void file_logger_stream_mapping::do_flush()
     if (!m_pData || m_nSize == 0)
         return;
 
+    // flush memory mapped data to the file
 #if QX_WIN
     if (!FlushViewOfFile(m_pData, m_nSize))
         return;
-
-    if (m_hFile != INVALID_HANDLE_VALUE)
-        FlushFileBuffers(m_hFile);
 #else
     ::msync(m_pData, static_cast<size_t>(m_nSize), MS_SYNC);
+#endif
+
+#if QX_WIN
+    if (m_hFile != INVALID_HANDLE_VALUE)
+#else
     if (m_Fd >= 0)
+#endif
+    {
+        // update the file on disc
+#if QX_WIN
+        FlushFileBuffers(m_hFile);
+#else
         ::fsync(m_Fd);
 #endif
+
+        // notify the OS that file changed (makes editors such as VS Code to reload it)
+#if QX_WIN
+        FILETIME ft;
+        GetSystemTimeAsFileTime(&ft);
+        SetFileTime(m_hFile, nullptr, nullptr, &ft);
+#else
+        struct timespec ts[2];
+        clock_gettime(CLOCK_REALTIME, &ts[0]);
+        ts[1] = ts[0];
+
+        futimens(m_Fd, ts);
+#endif
+    }
 }
 
-inline bool file_logger_stream_mapping::remap_to_capacity(size_t nNewCapacity)
+inline bool file_logger_stream_mapping::remap_to_capacity(size_t nNewCapacity) noexcept
 {
     if (m_pData)
     {
@@ -242,7 +265,7 @@ inline bool file_logger_stream_mapping::remap_to_capacity(size_t nNewCapacity)
     return true;
 }
 
-inline bool file_logger_stream_mapping::ensure_capacity(size_t nAdditionalBytes)
+inline bool file_logger_stream_mapping::ensure_capacity(size_t nAdditionalBytes) noexcept
 {
     if (m_nSize + nAdditionalBytes <= m_nCapacity)
         return true;
@@ -257,7 +280,7 @@ inline bool file_logger_stream_mapping::ensure_capacity(size_t nAdditionalBytes)
     return remap_to_capacity(nNewCapacity);
 }
 
-inline size_t file_logger_stream_mapping::align_up_u64(size_t nValue, size_t nAlignment)
+inline size_t file_logger_stream_mapping::align_up_u64(size_t nValue, size_t nAlignment) noexcept
 {
     if (nAlignment == 0)
         return nValue;
