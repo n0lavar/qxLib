@@ -92,9 +92,16 @@ template<class char_t, class traits_t>
 template<class fwd_it_t>
 inline void basic_string<char_t, traits_t>::assign(fwd_it_t itFirst, fwd_it_t itLast) noexcept
 {
-    clear();
+    // some iterators may be one-pass only, so we can't calculate distance first
+    size_t nPos = 0;
     for (fwd_it_t it = itFirst; it != itLast; ++it)
-        push_back(*it);
+    {
+        _resize(nPos + 1, sbo_resize_type::reserve);
+        (*this)[nPos] = *it;
+        ++nPos;
+    }
+
+    _resize(nPos, sbo_resize_type::common);
 }
 
 template<class char_t, class traits_t>

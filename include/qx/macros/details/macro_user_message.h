@@ -48,6 +48,13 @@ inline string_pool<nStringsPoolSize>::item format_macro_user_message(
     return { std::move(sUserMessage), string_pool<nStringsPoolSize>::nFreeString };
 }
 
+#if !QX_CONF_USE_CHAR
+template<size_t nStringsPoolSize, size_t nStringLiteralSize>
+string_pool<nStringsPoolSize>::item format_macro_user_message(
+    string_pool<nStringsPoolSize>* pStringsPool,
+    const char_type (&)[nStringLiteralSize]) = delete;
+#endif
+
 template<size_t nStringsPoolSize, class first_arg_t, class... rest_args_t>
     requires(log_acceptable_args_c<first_arg_t, rest_args_t...>)
 string_pool<nStringsPoolSize>::item format_macro_user_message(
