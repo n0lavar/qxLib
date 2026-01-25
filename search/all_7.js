@@ -27,7 +27,7 @@ var searchData=
   ['get_5ffraction_324',['get_fraction',['../classqx_1_1base__easing__sequence.html#a74778fb4700bbda22d9f4fe1c0be1ffc',1,'qx::base_easing_sequence::get_fraction()'],['../classqx_1_1base__easing__element.html#ab1db8083fb7ac6b023a459d1d8570910',1,'qx::base_easing_element::get_fraction()']]],
   ['get_5fhash_325',['get_hash',['../hash_8h.html#a16720e0a9f752edc6efd3be88ce3a848',1,'qx']]],
   ['get_5finheritance_5fsequence_326',['get_inheritance_sequence',['../structqx_1_1details_1_1get__inheritance__sequence.html',1,'qx::details']]],
-  ['get_5flogger_327',['get_logger',['../logger_8h.html#a57c8f2c69cad4de504fbaf3e9b582855',1,'qx']]],
+  ['get_5flogger_327',['get_logger',['../logger_8h.html#a3feb5ccf05cba22a551d6e4523139448',1,'qx']]],
   ['get_5fmoving_5faverage_5fexp_5fweights_328',['get_moving_average_exp_weights',['../moving__average_8h.html#aad98af413f8a5bec6733a1c0560a14c9',1,'qx']]],
   ['get_5fmoving_5faverage_5flinear_5fweights_329',['get_moving_average_linear_weights',['../moving__average_8h.html#aafcd27954378738a4df732eb2c5704c4',1,'qx']]],
   ['get_5fmoving_5faverage_5fsimple_5fweights_330',['get_moving_average_simple_weights',['../moving__average_8h.html#aada43078b79dc6e196f944105ac62eda',1,'qx']]],

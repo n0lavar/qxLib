@@ -1,13 +1,13 @@
 var searchData=
 [
   ['file_5fcategory_245',['file_category',['../structqx_1_1details_1_1file__category.html',1,'qx::details']]],
-  ['file_5flogger_5fstream_5ffopen_246',['file_logger_stream_fopen',['../classqx_1_1file__logger__stream__fopen.html#a2d0601df866c88e7840230c06e565a62',1,'qx::file_logger_stream_fopen::file_logger_stream_fopen()'],['../classqx_1_1file__logger__stream__fopen.html',1,'qx::file_logger_stream_fopen']]],
+  ['file_5flogger_5fstream_5ffopen_246',['file_logger_stream_fopen',['../classqx_1_1file__logger__stream__fopen.html#ab697059edfed5787d8f33d536c5a1364',1,'qx::file_logger_stream_fopen::file_logger_stream_fopen()'],['../classqx_1_1file__logger__stream__fopen.html',1,'qx::file_logger_stream_fopen']]],
   ['file_5flogger_5fstream_5ffopen_2eh_247',['file_logger_stream_fopen.h',['../file__logger__stream__fopen_8h.html',1,'']]],
   ['file_5flogger_5fstream_5ffopen_2einl_248',['file_logger_stream_fopen.inl',['../file__logger__stream__fopen_8inl.html',1,'']]],
-  ['file_5flogger_5fstream_5fmapping_249',['file_logger_stream_mapping',['../classqx_1_1file__logger__stream__mapping.html#a691fb12240c1e9a808732f0820a8bf05',1,'qx::file_logger_stream_mapping::file_logger_stream_mapping()'],['../classqx_1_1file__logger__stream__mapping.html',1,'qx::file_logger_stream_mapping']]],
+  ['file_5flogger_5fstream_5fmapping_249',['file_logger_stream_mapping',['../classqx_1_1file__logger__stream__mapping.html#afb9d4a80e5cf7038f8886d45121146b8',1,'qx::file_logger_stream_mapping::file_logger_stream_mapping()'],['../classqx_1_1file__logger__stream__mapping.html',1,'qx::file_logger_stream_mapping']]],
   ['file_5flogger_5fstream_5fmapping_2eh_250',['file_logger_stream_mapping.h',['../file__logger__stream__mapping_8h.html',1,'']]],
   ['file_5flogger_5fstream_5fmapping_2einl_251',['file_logger_stream_mapping.inl',['../file__logger__stream__mapping_8inl.html',1,'']]],
-  ['file_5flogger_5fstream_5fofstream_252',['file_logger_stream_ofstream',['../classqx_1_1file__logger__stream__ofstream.html#a13205f86a582bcb5a0da8ecdf4dca5d9',1,'qx::file_logger_stream_ofstream::file_logger_stream_ofstream()'],['../classqx_1_1file__logger__stream__ofstream.html',1,'qx::file_logger_stream_ofstream']]],
+  ['file_5flogger_5fstream_5fofstream_252',['file_logger_stream_ofstream',['../classqx_1_1file__logger__stream__ofstream.html#a2cec1adc5cb898139b17ba1cc96f83fc',1,'qx::file_logger_stream_ofstream::file_logger_stream_ofstream()'],['../classqx_1_1file__logger__stream__ofstream.html',1,'qx::file_logger_stream_ofstream']]],
   ['file_5flogger_5fstream_5fofstream_2eh_253',['file_logger_stream_ofstream.h',['../file__logger__stream__ofstream_8h.html',1,'']]],
   ['file_5flogger_5fstream_5fofstream_2einl_254',['file_logger_stream_ofstream.inl',['../file__logger__stream__ofstream_8inl.html',1,'']]],
   ['fill_255',['fill',['../classqx_1_1triangular__vector.html#ac7bb753ff1def1f417f2949a6910a473',1,'qx::triangular_vector::fill()'],['../classqx_1_1vector2d.html#aa60b273ed0891f814e2648732884838e',1,'qx::vector2d::fill()']]],
@@ -52,7 +52,7 @@ var searchData=
   ['from_294',['from',['../classqx_1_1basic__string.html#a57c5c62e70ffe5416859584f5ea2e059',1,'qx::basic_string']]],
   ['from_5fstring_295',['from_string',['../classqx_1_1color.html#a318805eba93a07abe904b37ae29fd531',1,'qx::color']]],
   ['front_296',['front',['../classqx_1_1basic__string.html#adeff5dc2f311ee6e6c91f3c4342dc1b2',1,'qx::basic_string']]],
-  ['fwrite_5flogger_5fstream_297',['fwrite_logger_stream',['../classqx_1_1fwrite__logger__stream.html#a8cb446af8780cbc38ebfafe761a94e1f',1,'qx::fwrite_logger_stream::fwrite_logger_stream()'],['../classqx_1_1fwrite__logger__stream.html',1,'qx::fwrite_logger_stream']]],
+  ['fwrite_5flogger_5fstream_297',['fwrite_logger_stream',['../classqx_1_1fwrite__logger__stream.html#ae175cb6c002992cc342628e28b5a25e4',1,'qx::fwrite_logger_stream::fwrite_logger_stream()'],['../classqx_1_1fwrite__logger__stream.html',1,'qx::fwrite_logger_stream']]],
   ['fwrite_5flogger_5fstream_2eh_298',['fwrite_logger_stream.h',['../fwrite__logger__stream_8h.html',1,'']]],
   ['fwrite_5flogger_5fstream_2einl_299',['fwrite_logger_stream.inl',['../fwrite__logger__stream_8inl.html',1,'']]]
 ];
