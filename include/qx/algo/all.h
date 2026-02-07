@@ -9,6 +9,7 @@
 #pragma once
 
 #include <qx/algo/add.h>
+#include <qx/algo/all_of_equal.h>
 #include <qx/algo/contains.h>
 #include <qx/algo/equal.h>
 #include <qx/algo/iterate.h>
