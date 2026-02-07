@@ -22,8 +22,8 @@ inline cout_logger_stream::cout_logger_stream(std::optional<config> optStreamCon
 
     if (streamConfig.bUntieCin)
     {
-        std::wcin.tie(nullptr);
-        std::wcout.tie(nullptr);
+        details::get_cout<char_type>::get().tie(nullptr);
+        details::get_cerr<char_type>::get().tie(nullptr);
     }
 }
 

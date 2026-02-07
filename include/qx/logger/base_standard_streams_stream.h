@@ -32,10 +32,10 @@ public:
         // Consoles can understand these tags, but they may be unnecessary when outputting to another location.
         bool bUseColors = false;
 
-        //Should the order of normal messages and errors be synchronised?
-        //These two types of messages go to different standard streams, and in general,
-        //preserving the order is not guaranteed.
-        //This option flushes the stream if the previous message was of a different type.
+        // Should the order of normal messages and errors be synchronised?
+        // These two types of messages go to different standard streams, and in general,
+        // preserving the order is not guaranteed.
+        // This option flushes the stream if the previous message was of a different type.
         bool bSyncUsualAndErrorMessages = true;
     };
 
