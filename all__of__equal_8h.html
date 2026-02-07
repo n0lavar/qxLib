@@ -79,11 +79,11 @@ $(function() {
 Functions</h2></td></tr>
 <tr class="memitem:a37042b2118983d5f81a618955aaec977"><td class="memTemplParams" colspan="2">template&lt;class fwd_it_t , class predicate_t &gt; </td></tr>
 <tr class="memitem:a37042b2118983d5f81a618955aaec977"><td class="memTemplItemLeft" align="right" valign="top">bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="all__of__equal_8h.html#a37042b2118983d5f81a618955aaec977">qx::all_of_equal</a> (fwd_it_t itBegin, fwd_it_t itEnd, const predicate_t &amp;predicate)</td></tr>
-<tr class="memdesc:a37042b2118983d5f81a618955aaec977"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns true if the predicate yields the same boolean value for all elements in the range [itBegin, itEnd). That is, either the predicate is true for every element or false for every element; otherwise returns false.  <a href="all__of__equal_8h.html#a37042b2118983d5f81a618955aaec977">More...</a><br /></td></tr>
+<tr class="memdesc:a37042b2118983d5f81a618955aaec977"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns true if the predicate yields the same value for all elements in the range [itBegin, itEnd).  <a href="all__of__equal_8h.html#a37042b2118983d5f81a618955aaec977">More...</a><br /></td></tr>
 <tr class="separator:a37042b2118983d5f81a618955aaec977"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a57ed65fb8faac6035450f69801441af0"><td class="memTemplParams" colspan="2">template&lt;class container_t , class predicate_t &gt; </td></tr>
 <tr class="memitem:a57ed65fb8faac6035450f69801441af0"><td class="memTemplItemLeft" align="right" valign="top">bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="all__of__equal_8h.html#a57ed65fb8faac6035450f69801441af0">qx::all_of_equal</a> (const container_t &amp;container, const predicate_t &amp;predicate)</td></tr>
-<tr class="memdesc:a57ed65fb8faac6035450f69801441af0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns true if the predicate yields the same boolean value for all elements in the range [itBegin, itEnd). That is, either the predicate is true for every element or false for every element; otherwise returns false.  <a href="all__of__equal_8h.html#a57ed65fb8faac6035450f69801441af0">More...</a><br /></td></tr>
+<tr class="memdesc:a57ed65fb8faac6035450f69801441af0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns true if the predicate yields the same value for all elements in the range [itBegin, itEnd).  <a href="all__of__equal_8h.html#a57ed65fb8faac6035450f69801441af0">More...</a><br /></td></tr>
 <tr class="separator:a57ed65fb8faac6035450f69801441af0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
@@ -121,7 +121,7 @@ template&lt;class container_t , class predicate_t &gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p>Returns true if the predicate yields the same boolean value for all elements in the range [itBegin, itEnd). That is, either the predicate is true for every element or false for every element; otherwise returns false. </p>
+<p>Returns true if the predicate yields the same value for all elements in the range [itBegin, itEnd). </p>
 <p>This implements a logical biconditional (logical equivalence) over the range: predicate(x1) &lt;-&gt; predicate(x2) &lt;-&gt; ... &lt;-&gt; predicate(xn) </p><dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
     <tr><td class="paramname">container_t</td><td>- container type </td></tr>
@@ -138,12 +138,12 @@ template&lt;class container_t , class predicate_t &gt; </div>
 </dl>
 <dl class="retval"><dt>Return values</dt><dd>
   <table class="retval">
-    <tr><td class="paramname">-</td><td>true if the predicate yields the same boolean value for all elements in the range, otherwise false </td></tr>
+    <tr><td class="paramname">-</td><td>true if the predicate yields the same value for all elements in the range, otherwise false </td></tr>
   </table>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="all__of__equal_8h_source.html#l00058">58</a> of file <a class="el" href="all__of__equal_8h_source.html">all_of_equal.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="all__of__equal_8h_source.html#l00054">54</a> of file <a class="el" href="all__of__equal_8h_source.html">all_of_equal.h</a>.</p>
 
 </div>
 </div>
@@ -181,7 +181,7 @@ template&lt;class fwd_it_t , class predicate_t &gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p>Returns true if the predicate yields the same boolean value for all elements in the range [itBegin, itEnd). That is, either the predicate is true for every element or false for every element; otherwise returns false. </p>
+<p>Returns true if the predicate yields the same value for all elements in the range [itBegin, itEnd). </p>
 <p>This implements a logical biconditional (logical equivalence) over the range: predicate(x1) &lt;-&gt; predicate(x2) &lt;-&gt; ... &lt;-&gt; predicate(xn) </p><dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
     <tr><td class="paramname">fwd_it_t</td><td>- forward iterator type </td></tr>
@@ -199,12 +199,12 @@ template&lt;class fwd_it_t , class predicate_t &gt; </div>
 </dl>
 <dl class="retval"><dt>Return values</dt><dd>
   <table class="retval">
-    <tr><td class="paramname">-</td><td>true if the predicate yields the same boolean value for all elements in the range, otherwise false </td></tr>
+    <tr><td class="paramname">-</td><td>true if the predicate yields the same value for all elements in the range, otherwise false </td></tr>
   </table>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="all__of__equal_8h_source.html#l00030">30</a> of file <a class="el" href="all__of__equal_8h_source.html">all_of_equal.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="all__of__equal_8h_source.html#l00028">28</a> of file <a class="el" href="all__of__equal_8h_source.html">all_of_equal.h</a>.</p>
 
 </div>
 </div>
