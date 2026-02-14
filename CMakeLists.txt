@@ -12,7 +12,6 @@ endif()
 set(CMAKE_PREFIX_PATH ${CMAKE_PREFIX_PATH} "${EXTERNAL_FOLDER}")
 
 include(cmake/set_target_options.cmake)
-include(cmake/set_test_options.cmake)
 include(cmake/add_tests.cmake)
 include(cmake/add_benchmarks.cmake)
 

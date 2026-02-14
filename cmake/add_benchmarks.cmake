@@ -1,10 +1,22 @@
+macro(set_benchmark_options _target)
+    if(CMAKE_CXX_COMPILER_ID STREQUAL "Clang" OR CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
+        target_link_libraries(${_target} PRIVATE
+            -pthread
+            -lstdc++fs
+        )
+    elseif(CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
+        target_compile_options(${_target} PRIVATE
+            /bigobj
+        )
+    endif()
+endmacro()
+
 macro(add_benchmarks
     # a folder in VS where this benchmark should be placed
     _ide_folder
     # benchmark cpps search pattern
     _glob_recurse_pattern
 )
-
     option(GENERATE_BENCHMARKS "Generate benchmarks projects? Enabling this requires benchmark" OFF)
 
     if (${GENERATE_BENCHMARKS})
@@ -28,8 +40,8 @@ macro(add_benchmarks
             )
 
             set_target_options(${_target})
-            set_test_options(${_target})
-                target_link_libraries(${_target} PRIVATE
+            set_benchmark_options(${_target})
+            target_link_libraries(${_target} PRIVATE
                 ${BENCHMARK_LIBRARIES}
             )
 
@@ -44,5 +56,4 @@ macro(add_benchmarks
             )
         endforeach()
     endif()
-
 endmacro()
