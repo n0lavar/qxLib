@@ -96,43 +96,45 @@ $(function() {
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="comment">**/</span></div>
 <div class="line"><a name="l00026"></a><span class="lineno"><a class="line" href="classqx_1_1cout__logger__stream.html">   26</a></span>&#160;<span class="keyword">class </span><a class="code" href="classqx_1_1cout__logger__stream.html">cout_logger_stream</a> : <span class="keyword">public</span> <a class="code" href="classqx_1_1base__standard__streams__stream.html">base_standard_streams_stream</a></div>
 <div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;{</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00029"></a><span class="lineno"><a class="line" href="structqx_1_1cout__logger__stream_1_1config.html">   29</a></span>&#160;    <span class="keyword">struct </span><a class="code" href="structqx_1_1cout__logger__stream_1_1config.html">config</a> : <a class="code" href="structqx_1_1base__standard__streams__stream_1_1config.html">base_standard_streams_stream::config</a></div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    {</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;        <span class="comment">// Optimization: Don&#39;t synchronize to the standard C streams after each input/output operation.</span></div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;        <span class="comment">// Be careful, as it changes the global setting. You&#39;ll need to revert it manually if needed.</span></div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;        <span class="keywordtype">bool</span> bDisableStdioSync = <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160; </div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;        <span class="comment">// Optimization: Untie cin from cout.</span></div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;        <span class="comment">// Tied streams ensure that one stream is flushed automatically before each I/O operation on the other stream.</span></div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;        <span class="comment">// Be careful, as it changes the global setting. You&#39;ll need to revert it manually if needed.</span></div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;        <span class="keywordtype">bool</span> bUntieCin = <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    };</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160; </div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="keyword">public</span>:<span class="comment"></span></div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="comment">    /**</span></div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="comment">        @brief cout_logger_stream object constructor</span></div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="comment">        @param optStreamConfig - logger stream configuration</span></div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="comment">    **/</span></div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    <a class="code" href="classqx_1_1cout__logger__stream.html#a9c38fcfd7f34f7d8559ba344539118ba">cout_logger_stream</a>(std::optional&lt;config&gt; optStreamConfig = {}) noexcept;</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160; </div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    <a class="code" href="classqx_1_1cout__logger__stream.html#a9c38fcfd7f34f7d8559ba344539118ba">cout_logger_stream</a>(<a class="code" href="classqx_1_1cout__logger__stream.html">cout_logger_stream</a>&amp;&amp;) noexcept = default;</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    QX_RTTI_CLASS(<a class="code" href="classqx_1_1cout__logger__stream.html">cout_logger_stream</a>, <a class="code" href="classqx_1_1base__standard__streams__stream.html">base_standard_streams_stream</a>);</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160; </div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00031"></a><span class="lineno"><a class="line" href="structqx_1_1cout__logger__stream_1_1config.html">   31</a></span>&#160;    <span class="keyword">struct </span><a class="code" href="structqx_1_1cout__logger__stream_1_1config.html">config</a> : <a class="code" href="structqx_1_1base__standard__streams__stream_1_1config.html">base_standard_streams_stream::config</a></div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    {</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;        <span class="comment">// Optimization: Don&#39;t synchronize to the standard C streams after each input/output operation.</span></div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;        <span class="comment">// Be careful, as it changes the global setting. You&#39;ll need to revert it manually if needed.</span></div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;        <span class="keywordtype">bool</span> bDisableStdioSync = <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160; </div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;        <span class="comment">// Optimization: Untie cin from cout.</span></div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;        <span class="comment">// Tied streams ensure that one stream is flushed automatically before each I/O operation on the other stream.</span></div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;        <span class="comment">// Be careful, as it changes the global setting. You&#39;ll need to revert it manually if needed.</span></div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;        <span class="keywordtype">bool</span> bUntieCin = <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    };</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160; </div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="keyword">public</span>:<span class="comment"></span></div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="comment">    /**</span></div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="comment">        @brief cout_logger_stream object constructor</span></div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="comment">        @param optStreamConfig - logger stream configuration</span></div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="comment">    **/</span></div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    <a class="code" href="classqx_1_1cout__logger__stream.html#a9c38fcfd7f34f7d8559ba344539118ba">cout_logger_stream</a>(std::optional&lt;config&gt; optStreamConfig = {}) noexcept;</div>
 <div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160; </div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160; </div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    <span class="comment">// base_logger_stream</span></div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    <span class="comment">//</span></div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    virtual <span class="keywordtype">void</span> <a class="code" href="classqx_1_1cout__logger__stream.html#aba66827e83bbdf6a49c81593bcbf4c32">do_flush</a>() override;</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160; </div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;private:</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    <span class="comment">// base_standard_streams_stream</span></div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    <span class="comment">//</span></div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    virtual <span class="keywordtype">void</span> cout_colorized(verbosity eVerbosity, string_view svMessage, const <a class="code" href="classqx_1_1color.html">color</a>&amp; rangeColor) override;</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    virtual <span class="keywordtype">void</span> cout_common(verbosity eVerbosity, string_view svMessage) override;</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;};</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160; </div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;} <span class="comment">// namespace qx</span></div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    <a class="code" href="classqx_1_1cout__logger__stream.html#a9c38fcfd7f34f7d8559ba344539118ba">cout_logger_stream</a>(<a class="code" href="classqx_1_1cout__logger__stream.html">cout_logger_stream</a>&amp;&amp;) noexcept = default;</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160; </div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160; </div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    <span class="comment">// base_logger_stream</span></div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    <span class="comment">//</span></div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    virtual <span class="keywordtype">void</span> <a class="code" href="classqx_1_1cout__logger__stream.html#aba66827e83bbdf6a49c81593bcbf4c32">do_flush</a>() override;</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160; </div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;private:</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    <span class="comment">// base_standard_streams_stream</span></div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    <span class="comment">//</span></div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    virtual <span class="keywordtype">void</span> cout_colorized(verbosity eVerbosity, string_view svMessage, const <a class="code" href="classqx_1_1color.html">color</a>&amp; rangeColor) override;</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    virtual <span class="keywordtype">void</span> cout_common(verbosity eVerbosity, string_view svMessage) override;</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;};</div>
 <div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160; </div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;<span class="preprocessor">#include &lt;qx/logger/cout_logger_stream.inl&gt;</span></div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;} <span class="comment">// namespace qx</span></div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160; </div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;<span class="preprocessor">#include &lt;qx/logger/cout_logger_stream.inl&gt;</span></div>
 <div class="ttc" id="abase__standard__streams__stream_8h_html"><div class="ttname"><a href="base__standard__streams__stream_8h.html">base_standard_streams_stream.h</a></div></div>
 <div class="ttc" id="aclassqx_1_1base__standard__streams__stream_html"><div class="ttname"><a href="classqx_1_1base__standard__streams__stream.html">qx::base_standard_streams_stream</a></div><div class="ttdoc">A base class for logger streams based on standard streams.</div><div class="ttdef"><b>Definition:</b> <a href="base__standard__streams__stream_8h_source.html#l00025">base_standard_streams_stream.h:26</a></div></div>
 <div class="ttc" id="aclassqx_1_1color_html"><div class="ttname"><a href="classqx_1_1color.html">qx::color</a></div><div class="ttdoc">RGBA color.</div><div class="ttdef"><b>Definition:</b> <a href="color_8h_source.html#l00192">color.h:193</a></div></div>
@@ -140,8 +142,8 @@ $(function() {
 <div class="ttc" id="aclassqx_1_1cout__logger__stream_html_a9c38fcfd7f34f7d8559ba344539118ba"><div class="ttname"><a href="classqx_1_1cout__logger__stream.html#a9c38fcfd7f34f7d8559ba344539118ba">qx::cout_logger_stream::cout_logger_stream</a></div><div class="ttdeci">cout_logger_stream(std::optional&lt; config &gt; optStreamConfig={}) noexcept</div><div class="ttdoc">cout_logger_stream object constructor</div><div class="ttdef"><b>Definition:</b> <a href="cout__logger__stream_8inl_source.html#l00013">cout_logger_stream.inl:13</a></div></div>
 <div class="ttc" id="aclassqx_1_1cout__logger__stream_html_aba66827e83bbdf6a49c81593bcbf4c32"><div class="ttname"><a href="classqx_1_1cout__logger__stream.html#aba66827e83bbdf6a49c81593bcbf4c32">qx::cout_logger_stream::do_flush</a></div><div class="ttdeci">virtual void do_flush() override</div><div class="ttdoc">Flush the stream.</div><div class="ttdef"><b>Definition:</b> <a href="cout__logger__stream_8inl_source.html#l00030">cout_logger_stream.inl:30</a></div></div>
 <div class="ttc" id="astring__converters_8h_html"><div class="ttname"><a href="string__converters_8h.html">string_converters.h</a></div></div>
-<div class="ttc" id="astructqx_1_1base__standard__streams__stream_1_1config_html"><div class="ttname"><a href="structqx_1_1base__standard__streams__stream_1_1config.html">qx::base_standard_streams_stream::config</a></div><div class="ttdef"><b>Definition:</b> <a href="base__standard__streams__stream_8h_source.html#l00028">base_standard_streams_stream.h:29</a></div></div>
-<div class="ttc" id="astructqx_1_1cout__logger__stream_1_1config_html"><div class="ttname"><a href="structqx_1_1cout__logger__stream_1_1config.html">qx::cout_logger_stream::config</a></div><div class="ttdef"><b>Definition:</b> <a href="cout__logger__stream_8h_source.html#l00029">cout_logger_stream.h:30</a></div></div>
+<div class="ttc" id="astructqx_1_1base__standard__streams__stream_1_1config_html"><div class="ttname"><a href="structqx_1_1base__standard__streams__stream_1_1config.html">qx::base_standard_streams_stream::config</a></div><div class="ttdef"><b>Definition:</b> <a href="base__standard__streams__stream_8h_source.html#l00030">base_standard_streams_stream.h:31</a></div></div>
+<div class="ttc" id="astructqx_1_1cout__logger__stream_1_1config_html"><div class="ttname"><a href="structqx_1_1cout__logger__stream_1_1config.html">qx::cout_logger_stream::config</a></div><div class="ttdef"><b>Definition:</b> <a href="cout__logger__stream_8h_source.html#l00031">cout_logger_stream.h:32</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

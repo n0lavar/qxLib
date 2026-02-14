@@ -82,10 +82,14 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:ab9f7ebfb1083b6d78aaac30ee3534f22"><td class="memTemplParams" colspan="2">template&lt;callable_c&lt; return_t, args_t... &gt; callable_t&gt; </td></tr>
-<tr class="memitem:ab9f7ebfb1083b6d78aaac30ee3534f22"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classqx_1_1time__ordered__priority__key.html">delegate_token_type</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classqx_1_1base__delegate.html#ab9f7ebfb1083b6d78aaac30ee3534f22">add_free</a> (callable_t callable, <a class="el" href="priority_8h.html#a596815b7b01439344e1858a12743c8ec">priority</a> ePriority=priority::normal) noexcept</td></tr>
-<tr class="memdesc:ab9f7ebfb1083b6d78aaac30ee3534f22"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add a callable without any protection.  <a href="classqx_1_1base__delegate.html#ab9f7ebfb1083b6d78aaac30ee3534f22">More...</a><br /></td></tr>
-<tr class="separator:ab9f7ebfb1083b6d78aaac30ee3534f22"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3b321c13a2c9ce368a4ca00db6fae2a4"><td class="memTemplParams" colspan="2">template&lt;callable_c&lt; return_t, args_t... &gt; callable_t&gt; </td></tr>
+<tr class="memitem:a3b321c13a2c9ce368a4ca00db6fae2a4"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classqx_1_1time__ordered__priority__key.html">delegate_token_type</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classqx_1_1base__delegate.html#a3b321c13a2c9ce368a4ca00db6fae2a4">add_token</a> (callable_t callable, <a class="el" href="priority_8h.html#a596815b7b01439344e1858a12743c8ec">priority</a> ePriority=priority::normal) noexcept</td></tr>
+<tr class="memdesc:a3b321c13a2c9ce368a4ca00db6fae2a4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add a callable using a token with manual unsubscribing.  <a href="classqx_1_1base__delegate.html#a3b321c13a2c9ce368a4ca00db6fae2a4">More...</a><br /></td></tr>
+<tr class="separator:a3b321c13a2c9ce368a4ca00db6fae2a4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a745cf3732ab2284ba396a6b92a524ea3"><td class="memTemplParams" colspan="2">template&lt;class object_t &gt; </td></tr>
+<tr class="memitem:a745cf3732ab2284ba396a6b92a524ea3"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classqx_1_1time__ordered__priority__key.html">delegate_token_type</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classqx_1_1base__delegate.html#a745cf3732ab2284ba396a6b92a524ea3">add_token</a> (object_t &amp;object, return_t(object_t::*pMethod)(args_t...), <a class="el" href="priority_8h.html#a596815b7b01439344e1858a12743c8ec">priority</a> ePriority=priority::normal) noexcept</td></tr>
+<tr class="memdesc:a745cf3732ab2284ba396a6b92a524ea3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add a callable using a token with manual unsubscribing.  <a href="classqx_1_1base__delegate.html#a745cf3732ab2284ba396a6b92a524ea3">More...</a><br /></td></tr>
+<tr class="separator:a745cf3732ab2284ba396a6b92a524ea3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a74e1dd09550b6fe2f5ce23a7f69ed2a7"><td class="memTemplParams" colspan="2">template&lt;callable_c&lt; return_t, args_t... &gt; callable_t&gt; </td></tr>
 <tr class="memitem:a74e1dd09550b6fe2f5ce23a7f69ed2a7"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classqx_1_1destruction__callback.html">destruction_callback</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classqx_1_1base__delegate.html#a74e1dd09550b6fe2f5ce23a7f69ed2a7">add_destruction_callback</a> (callable_t callable, <a class="el" href="priority_8h.html#a596815b7b01439344e1858a12743c8ec">priority</a> ePriority=priority::normal) noexcept</td></tr>
 <tr class="memdesc:a74e1dd09550b6fe2f5ce23a7f69ed2a7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add a callable that will be removed from the delegate when its destruction callback is destroyed.  <a href="classqx_1_1base__delegate.html#a74e1dd09550b6fe2f5ce23a7f69ed2a7">More...</a><br /></td></tr>
@@ -212,7 +216,7 @@ template&lt;callable_c&lt; return_t, args_t... &gt; callable_t&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="delegate_8inl_source.html#l00088">88</a> of file <a class="el" href="delegate_8inl_source.html">delegate.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="delegate_8inl_source.html#l00103">103</a> of file <a class="el" href="delegate_8inl_source.html">delegate.inl</a>.</p>
 
 </div>
 </div>
@@ -282,12 +286,12 @@ template&lt;class object_t &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="delegate_8inl_source.html#l00097">97</a> of file <a class="el" href="delegate_8inl_source.html">delegate.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="delegate_8inl_source.html#l00112">112</a> of file <a class="el" href="delegate_8inl_source.html">delegate.inl</a>.</p>
 
 </div>
 </div>
-<a id="ab9f7ebfb1083b6d78aaac30ee3534f22"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab9f7ebfb1083b6d78aaac30ee3534f22">&#9670;&nbsp;</a></span>add_free()</h2>
+<a id="a3b321c13a2c9ce368a4ca00db6fae2a4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3b321c13a2c9ce368a4ca00db6fae2a4">&#9670;&nbsp;</a></span>add_token() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -300,7 +304,7 @@ template&lt;callable_c&lt; return_t, args_t... &gt; callable_t&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classqx_1_1time__ordered__priority__key.html">delegate_token_type</a> <a class="el" href="classqx_1_1base__delegate.html">qx::base_delegate</a>&lt; derived_t, return_t, args_t &gt;::add_free </td>
+          <td class="memname"><a class="el" href="classqx_1_1time__ordered__priority__key.html">delegate_token_type</a> <a class="el" href="classqx_1_1base__delegate.html">qx::base_delegate</a>&lt; derived_t, return_t, args_t &gt;::add_token </td>
           <td>(</td>
           <td class="paramtype">callable_t&#160;</td>
           <td class="paramname"><em>callable</em>, </td>
@@ -324,8 +328,8 @@ template&lt;callable_c&lt; return_t, args_t... &gt; callable_t&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Add a callable without any protection. </p>
-<dl class="section warning"><dt>Warning</dt><dd>If you capture <code>this</code> in the lambda passed and the object becomes invalid, it'll crash. Consider add_destruction_callback or add_weak in this case. </dd></dl>
+<p>Add a callable using a token with manual unsubscribing. </p>
+<dl class="section warning"><dt>Warning</dt><dd>If you capture <code>this</code> in the lambda passed and the object becomes invalid, it'll crash. You must unsubscribe manually using <a class="el" href="classqx_1_1base__delegate.html#a0fc4da1b2e48491e76b3c9dd0a863e02" title="Remove a callable using its token.">remove()</a> Consider using add_destruction_callback or add_weak. </dd></dl>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
     <tr><td class="paramname">callable_t</td><td>- any callable type: lambda, function, static method pointer, ect </td></tr>
@@ -347,6 +351,77 @@ template&lt;callable_c&lt; return_t, args_t... &gt; callable_t&gt; </div>
 </dl>
 
 <p class="definition">Definition at line <a class="el" href="delegate_8inl_source.html#l00077">77</a> of file <a class="el" href="delegate_8inl_source.html">delegate.inl</a>.</p>
+
+</div>
+</div>
+<a id="a745cf3732ab2284ba396a6b92a524ea3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a745cf3732ab2284ba396a6b92a524ea3">&#9670;&nbsp;</a></span>add_token() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class derived_t , delegate_return_c return_t, class... args_t&gt; </div>
+<div class="memtemplate">
+template&lt;class object_t &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classqx_1_1time__ordered__priority__key.html">delegate_token_type</a> <a class="el" href="classqx_1_1base__delegate.html">qx::base_delegate</a>&lt; derived_t, return_t, args_t &gt;::add_token </td>
+          <td>(</td>
+          <td class="paramtype">object_t &amp;&#160;</td>
+          <td class="paramname"><em>object</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">return_t(object_t::*)(args_t...)&#160;</td>
+          <td class="paramname"><em>pMethod</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="priority_8h.html#a596815b7b01439344e1858a12743c8ec">priority</a>&#160;</td>
+          <td class="paramname"><em>ePriority</em> = <code>priority::normal</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Add a callable using a token with manual unsubscribing. </p>
+<dl class="section warning"><dt>Warning</dt><dd>If you capture <code>this</code> in the lambda passed and the object becomes invalid, it'll crash. You must unsubscribe manually using <a class="el" href="classqx_1_1base__delegate.html#a0fc4da1b2e48491e76b3c9dd0a863e02" title="Remove a callable using its token.">remove()</a> Consider using add_destruction_callback or add_weak. </dd></dl>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">object_t</td><td>- object type </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">object</td><td>- object reference </td></tr>
+    <tr><td class="paramname">pMethod</td><td>- object's method pointer </td></tr>
+    <tr><td class="paramname">ePriority</td><td>- callable priority. Callables will be called in order of priority, from highest to lowest, and in the order they were added. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Return values</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">-</td><td>a token that can be used to remove this callable from the delegate </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="delegate_8inl_source.html#l00088">88</a> of file <a class="el" href="delegate_8inl_source.html">delegate.inl</a>.</p>
 
 </div>
 </div>
@@ -417,7 +492,7 @@ template&lt;class object_t , callable_c&lt; return_t, args_t... &gt; callable_t&
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="delegate_8inl_source.html#l00130">130</a> of file <a class="el" href="delegate_8inl_source.html">delegate.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="delegate_8inl_source.html#l00145">145</a> of file <a class="el" href="delegate_8inl_source.html">delegate.inl</a>.</p>
 
 </div>
 </div>
@@ -487,7 +562,7 @@ template&lt;class object_t &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="delegate_8inl_source.html#l00112">112</a> of file <a class="el" href="delegate_8inl_source.html">delegate.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="delegate_8inl_source.html#l00127">127</a> of file <a class="el" href="delegate_8inl_source.html">delegate.inl</a>.</p>
 
 </div>
 </div>
@@ -522,7 +597,7 @@ template&lt;class... creation_args_t&gt; </div>
 <p>Create a singlecast delegate. </p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
-    <tr><td class="paramname">creation_args_t</td><td>- any arguments that can be used in add_weak or add_free </td></tr>
+    <tr><td class="paramname">creation_args_t</td><td>- any arguments that can be used in add_weak or add_token </td></tr>
   </table>
   </dd>
 </dl>
@@ -603,7 +678,7 @@ template&lt;class invoke_single_t , class invoke_multiple_t &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="delegate_8inl_source.html#l00160">160</a> of file <a class="el" href="delegate_8inl_source.html">delegate.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="delegate_8inl_source.html#l00175">175</a> of file <a class="el" href="delegate_8inl_source.html">delegate.inl</a>.</p>
 
 </div>
 </div>
@@ -647,7 +722,7 @@ template&lt;class derived_t , delegate_return_c return_t, class... args_t&gt; </
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="delegate_8inl_source.html#l00147">147</a> of file <a class="el" href="delegate_8inl_source.html">delegate.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="delegate_8inl_source.html#l00162">162</a> of file <a class="el" href="delegate_8inl_source.html">delegate.inl</a>.</p>
 
 </div>
 </div>

@@ -127,51 +127,59 @@ $(function() {
 <div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    }</div>
 <div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;}</div>
 <div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160; </div>
-<div class="line"><a name="l00059"></a><span class="lineno"><a class="line" href="classqx_1_1file__logger__stream__fopen.html#a1541623e1791e2c922d1b17872ab0272">   59</a></span>&#160;<span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="classqx_1_1file__logger__stream__fopen.html#a1541623e1791e2c922d1b17872ab0272">file_logger_stream_fopen::do_log</a>(<span class="keyword">const</span> <a class="code" href="classqx_1_1category.html">category</a>&amp; <a class="code" href="classqx_1_1category.html">category</a>, verbosity eVerbosity, string_view svMessage)</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;{</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    <span class="keywordflow">if</span> (m_pFile)</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    {</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;<span class="preprocessor">#if QX_WIN || QX_CONF_USE_CHAR</span></div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;        std::fwrite(svMessage.data(), <span class="keyword">sizeof</span>(char_type), svMessage.size(), m_pFile);</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;<span class="preprocessor">#else</span></div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;        std::array&lt;char16_t, 2048&gt; chunk;</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160; </div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;        <span class="keyword">const</span> char_type* pData           = svMessage.data();</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;        <span class="keywordtype">size_t</span>           nCharsRemaining = svMessage.size();</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160; </div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;        <span class="keywordflow">while</span> (nCharsRemaining &gt; 0)</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;        {</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;            <span class="keywordtype">size_t</span> nCharsToTake = std::min(nCharsRemaining, chunk.size());</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;            <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = 0; i &lt; nCharsToTake; ++i)</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;            {</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;                chunk[i] = <span class="keyword">static_cast&lt;</span>char16_t<span class="keyword">&gt;</span>(<span class="keyword">static_cast&lt;</span>char16_t<span class="keyword">&gt;</span>(pData[i]) &amp; 0xFFFFu);</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;            }</div>
+<div class="line"><a name="l00059"></a><span class="lineno"><a class="line" href="classqx_1_1file__logger__stream__fopen.html#aaab41f5f3239599f503c02139b6b9450">   59</a></span>&#160;<span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="classqx_1_1file__logger__stream__fopen.html#aaab41f5f3239599f503c02139b6b9450">file_logger_stream_fopen::do_log</a>(</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    <span class="keyword">const</span> <a class="code" href="classqx_1_1category.html">category</a>&amp;                       <a class="code" href="classqx_1_1category.html">category</a>,</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    verbosity                             eVerbosity,</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    std::thread::id                       threadId,</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    std::chrono::system_clock::time_point messageTime,</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    string_view                           svFile,</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    string_view                           svFunction,</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    <span class="keywordtype">int</span>                                   nLine,</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    string_view                           svMessage)</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;{</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    <span class="keywordflow">if</span> (m_pFile)</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;    {</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;<span class="preprocessor">#if QX_WIN || QX_CONF_USE_CHAR</span></div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;        std::fwrite(svMessage.data(), <span class="keyword">sizeof</span>(char_type), svMessage.size(), m_pFile);</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;<span class="preprocessor">#else</span></div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;        std::array&lt;char16_t, 2048&gt; chunk;</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160; </div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;        <span class="keyword">const</span> char_type* pData           = svMessage.data();</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;        <span class="keywordtype">size_t</span>           nCharsRemaining = svMessage.size();</div>
 <div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160; </div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;            std::fwrite(chunk.data(), <span class="keyword">sizeof</span>(char16_t), nCharsToTake, m_pFile);</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160; </div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;            pData += nCharsToTake;</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;            nCharsRemaining -= nCharsToTake;</div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;        }</div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;    }</div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;}</div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160; </div>
-<div class="line"><a name="l00088"></a><span class="lineno"><a class="line" href="classqx_1_1file__logger__stream__fopen.html#a44754680500708e4de1991533ee6a597">   88</a></span>&#160;<span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="classqx_1_1file__logger__stream__fopen.html#a44754680500708e4de1991533ee6a597">file_logger_stream_fopen::do_flush</a>()</div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;{</div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;    <span class="keywordflow">if</span> (m_pFile)</div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;        std::fflush(m_pFile);</div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;}</div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160; </div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;} <span class="comment">// namespace qx</span></div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;        <span class="keywordflow">while</span> (nCharsRemaining &gt; 0)</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;        {</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;            <span class="keywordtype">size_t</span> nCharsToTake = std::min(nCharsRemaining, chunk.size());</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;            <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = 0; i &lt; nCharsToTake; ++i)</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;            {</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;                chunk[i] = <span class="keyword">static_cast&lt;</span>char16_t<span class="keyword">&gt;</span>(<span class="keyword">static_cast&lt;</span>char16_t<span class="keyword">&gt;</span>(pData[i]) &amp; 0xFFFFu);</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;            }</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160; </div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;            std::fwrite(chunk.data(), <span class="keyword">sizeof</span>(char16_t), nCharsToTake, m_pFile);</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160; </div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;            pData += nCharsToTake;</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;            nCharsRemaining -= nCharsToTake;</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;        }</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;    }</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;}</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160; </div>
+<div class="line"><a name="l00096"></a><span class="lineno"><a class="line" href="classqx_1_1file__logger__stream__fopen.html#a44754680500708e4de1991533ee6a597">   96</a></span>&#160;<span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="classqx_1_1file__logger__stream__fopen.html#a44754680500708e4de1991533ee6a597">file_logger_stream_fopen::do_flush</a>()</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;{</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;    <span class="keywordflow">if</span> (m_pFile)</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;        std::fflush(m_pFile);</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;}</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160; </div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;} <span class="comment">// namespace qx</span></div>
 <div class="ttc" id="aclassqx_1_1base__file__logger__stream_html"><div class="ttname"><a href="classqx_1_1base__file__logger__stream.html">qx::base_file_logger_stream</a></div><div class="ttdoc">Base class for all file logger streams.</div><div class="ttdef"><b>Definition:</b> <a href="base__file__logger__stream_8h_source.html#l00034">base_file_logger_stream.h:35</a></div></div>
 <div class="ttc" id="aclassqx_1_1category_html"><div class="ttname"><a href="classqx_1_1category.html">qx::category</a></div><div class="ttdoc">A category is a class that identifies a particular piece of code. This code can be located in differe...</div><div class="ttdef"><b>Definition:</b> <a href="category_8h_source.html#l00058">category.h:59</a></div></div>
 <div class="ttc" id="aclassqx_1_1convert_html"><div class="ttname"><a href="classqx_1_1convert.html">qx::convert</a></div><div class="ttdoc">A conversion class.</div><div class="ttdef"><b>Definition:</b> <a href="base_8h_source.html#l00077">base.h:77</a></div></div>
 <div class="ttc" id="aclassqx_1_1file__logger__stream__fopen_html"><div class="ttname"><a href="classqx_1_1file__logger__stream__fopen.html">qx::file_logger_stream_fopen</a></div><div class="ttdoc">FILE* based file logger stream.</div><div class="ttdef"><b>Definition:</b> <a href="file__logger__stream__fopen_8h_source.html#l00028">file_logger_stream_fopen.h:29</a></div></div>
-<div class="ttc" id="aclassqx_1_1file__logger__stream__fopen_html_a1541623e1791e2c922d1b17872ab0272"><div class="ttname"><a href="classqx_1_1file__logger__stream__fopen.html#a1541623e1791e2c922d1b17872ab0272">qx::file_logger_stream_fopen::do_log</a></div><div class="ttdeci">virtual void do_log(const category &amp;category, verbosity eVerbosity, string_view svMessage) override</div><div class="ttdoc">Proceed stream logging.</div><div class="ttdef"><b>Definition:</b> <a href="file__logger__stream__fopen_8inl_source.html#l00059">file_logger_stream_fopen.inl:59</a></div></div>
-<div class="ttc" id="aclassqx_1_1file__logger__stream__fopen_html_a44754680500708e4de1991533ee6a597"><div class="ttname"><a href="classqx_1_1file__logger__stream__fopen.html#a44754680500708e4de1991533ee6a597">qx::file_logger_stream_fopen::do_flush</a></div><div class="ttdeci">virtual void do_flush() override</div><div class="ttdoc">Flush the stream.</div><div class="ttdef"><b>Definition:</b> <a href="file__logger__stream__fopen_8inl_source.html#l00088">file_logger_stream_fopen.inl:88</a></div></div>
+<div class="ttc" id="aclassqx_1_1file__logger__stream__fopen_html_a44754680500708e4de1991533ee6a597"><div class="ttname"><a href="classqx_1_1file__logger__stream__fopen.html#a44754680500708e4de1991533ee6a597">qx::file_logger_stream_fopen::do_flush</a></div><div class="ttdeci">virtual void do_flush() override</div><div class="ttdoc">Flush the stream.</div><div class="ttdef"><b>Definition:</b> <a href="file__logger__stream__fopen_8inl_source.html#l00096">file_logger_stream_fopen.inl:96</a></div></div>
+<div class="ttc" id="aclassqx_1_1file__logger__stream__fopen_html_aaab41f5f3239599f503c02139b6b9450"><div class="ttname"><a href="classqx_1_1file__logger__stream__fopen.html#aaab41f5f3239599f503c02139b6b9450">qx::file_logger_stream_fopen::do_log</a></div><div class="ttdeci">virtual void do_log(const category &amp;category, verbosity eVerbosity, std::thread::id threadId, std::chrono::system_clock::time_point messageTime, string_view svFile, string_view svFunction, int nLine, string_view svMessage) override</div><div class="ttdoc">Proceed stream logging.</div><div class="ttdef"><b>Definition:</b> <a href="file__logger__stream__fopen_8inl_source.html#l00059">file_logger_stream_fopen.inl:59</a></div></div>
 <div class="ttc" id="aclassqx_1_1file__logger__stream__fopen_html_ab697059edfed5787d8f33d536c5a1364"><div class="ttname"><a href="classqx_1_1file__logger__stream__fopen.html#ab697059edfed5787d8f33d536c5a1364">qx::file_logger_stream_fopen::file_logger_stream_fopen</a></div><div class="ttdeci">file_logger_stream_fopen(const config &amp;streamConfig=config(), unit&lt; size_t, units::data &gt; bufferSize={ 8192 *sizeof(char_type), units::data::bytes }) noexcept</div><div class="ttdoc">file_logger_stream_fopen object constructor</div><div class="ttdef"><b>Definition:</b> <a href="file__logger__stream__fopen_8inl_source.html#l00013">file_logger_stream_fopen.inl:13</a></div></div>
 <div class="ttc" id="astring__converters_8h_html_a26e646b1bb0c6774a11bf22b296e81ef"><div class="ttname"><a href="string__converters_8h.html#a26e646b1bb0c6774a11bf22b296e81ef">qx::to_string</a></div><div class="ttdeci">void to_string(string &amp;out, cstring_view stringView, const std::locale &amp;locale=std::locale())</div><div class="ttdoc">Convert a char string to common string type.</div><div class="ttdef"><b>Definition:</b> <a href="string__converters_8inl_source.html#l00069">string_converters.inl:69</a></div></div>
-<div class="ttc" id="astructqx_1_1base__file__logger__stream_1_1config_html"><div class="ttname"><a href="structqx_1_1base__file__logger__stream_1_1config.html">qx::base_file_logger_stream::config</a></div><div class="ttdef"><b>Definition:</b> <a href="base__file__logger__stream_8h_source.html#l00037">base_file_logger_stream.h:38</a></div></div>
+<div class="ttc" id="astructqx_1_1base__file__logger__stream_1_1config_html"><div class="ttname"><a href="structqx_1_1base__file__logger__stream_1_1config.html">qx::base_file_logger_stream::config</a></div><div class="ttdef"><b>Definition:</b> <a href="base__file__logger__stream_8h_source.html#l00039">base_file_logger_stream.h:40</a></div></div>
 <div class="ttc" id="astructqx_1_1details_1_1get__cerr_html"><div class="ttname"><a href="structqx_1_1details_1_1get__cerr.html">qx::details::get_cerr</a></div><div class="ttdef"><b>Definition:</b> <a href="base__logger__stream_8inl_source.html#l00019">base_logger_stream.inl:20</a></div></div>
 <div class="ttc" id="astructqx_1_1unit_html"><div class="ttname"><a href="structqx_1_1unit.html">qx::unit</a></div><div class="ttdef"><b>Definition:</b> <a href="base_8h_source.html#l00051">base.h:52</a></div></div>
 </div><!-- fragment --></div><!-- contents -->

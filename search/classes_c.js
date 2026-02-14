@@ -1,6 +1,7 @@
 var searchData=
 [
-  ['permutations_1031',['permutations',['../structqx_1_1tuple__utils_1_1permutations.html',1,'qx::tuple_utils']]],
-  ['prepend_5fto_5fall_1032',['prepend_to_all',['../structqx_1_1tuple__utils_1_1cartesian__product__details_1_1prepend__to__all.html',1,'qx::tuple_utils::cartesian_product_details']]],
-  ['prepend_5fto_5fall_3c_20prefix_5ft_2c_20std_3a_3atuple_3c_20rest_5ftypes_5ft_2e_2e_2e_20_3e_20_3e_1033',['prepend_to_all&lt; prefix_t, std::tuple&lt; rest_types_t... &gt; &gt;',['../structqx_1_1tuple__utils_1_1cartesian__product__details_1_1prepend__to__all_3_01prefix__t_00_01s72be4c6f3174f4f200dd9e94df30339a.html',1,'qx::tuple_utils::cartesian_product_details']]]
+  ['observer_5ftoken_5fdata_1049',['observer_token_data',['../classqx_1_1observer__token__data.html',1,'qx']]],
+  ['overload_5ffunctions_5fsmart_5fptr_5fref_5fadapter_1050',['overload_functions_smart_ptr_ref_adapter',['../classqx_1_1details_1_1overload__functions__smart__ptr__ref__adapter.html',1,'qx::details']]],
+  ['overload_5ffunctions_5fsmart_5fptr_5fref_5fadapter_3c_20std_3a_3ashared_5fptr_2c_20t_2c_20args_5ft_2e_2e_2e_20_3e_1051',['overload_functions_smart_ptr_ref_adapter&lt; std::shared_ptr, T, args_t... &gt;',['../classqx_1_1details_1_1overload__functions__smart__ptr__ref__adapter.html',1,'qx::details']]],
+  ['overload_5ffunctions_5fsmart_5fptr_5fref_5fadapter_3c_20std_3a_3aunique_5fptr_2c_20t_2c_20args_5ft_2e_2e_2e_20_3e_1052',['overload_functions_smart_ptr_ref_adapter&lt; std::unique_ptr, T, args_t... &gt;',['../classqx_1_1details_1_1overload__functions__smart__ptr__ref__adapter.html',1,'qx::details']]]
 ];

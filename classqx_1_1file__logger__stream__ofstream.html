@@ -83,8 +83,10 @@ Inheritance diagram for qx::file_logger_stream_ofstream:</div>
  <div class="center">
   <img src="classqx_1_1file__logger__stream__ofstream.png" usemap="#qx::file_5Flogger_5Fstream_5Fofstream_map" alt=""/>
   <map id="qx::file_5Flogger_5Fstream_5Fofstream_map" name="qx::file_5Flogger_5Fstream_5Fofstream_map">
-<area href="classqx_1_1base__file__logger__stream.html" title="Base class for all file logger streams." alt="qx::base_file_logger_stream" shape="rect" coords="0,56,189,80"/>
-<area href="classqx_1_1base__logger__stream.html" title="Base class for logger streams." alt="qx::base_logger_stream" shape="rect" coords="0,0,189,24"/>
+<area href="classqx_1_1base__file__logger__stream.html" title="Base class for all file logger streams." alt="qx::base_file_logger_stream" shape="rect" coords="0,168,189,192"/>
+<area href="classqx_1_1base__logger__stream.html" title="Base class for logger streams." alt="qx::base_logger_stream" shape="rect" coords="0,112,189,136"/>
+<area href="classqx_1_1rtti__root.html" title="RTTI root class." alt="qx::rtti_root&lt; naming_strategy_t &gt;" shape="rect" coords="0,56,189,80"/>
+<area href="classqx_1_1rtti__pure__base.html" alt="qx::rtti_pure_base" shape="rect" coords="0,0,189,24"/>
   </map>
 </div></div>
 <table class="memberdecls">
@@ -93,9 +95,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a2cec1adc5cb898139b17ba1cc96f83fc"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1file__logger__stream__ofstream.html#a2cec1adc5cb898139b17ba1cc96f83fc">file_logger_stream_ofstream</a> (const <a class="el" href="structqx_1_1base__file__logger__stream_1_1config.html">config</a> &amp;streamConfig=<a class="el" href="structqx_1_1base__file__logger__stream_1_1config.html">config</a>(), <a class="el" href="structqx_1_1unit.html">unit</a>&lt; size_t, units::data &gt; bufferSize={ 8192 *sizeof(char_type), units::data::bytes }) noexcept</td></tr>
 <tr class="memdesc:a2cec1adc5cb898139b17ba1cc96f83fc"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classqx_1_1file__logger__stream__ofstream.html" title="std::ofstream based file logger stream">file_logger_stream_ofstream</a> object constructor  <a href="classqx_1_1file__logger__stream__ofstream.html#a2cec1adc5cb898139b17ba1cc96f83fc">More...</a><br /></td></tr>
 <tr class="separator:a2cec1adc5cb898139b17ba1cc96f83fc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0ae51463faed654e856a86db5a541a79"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1file__logger__stream__ofstream.html#a0ae51463faed654e856a86db5a541a79">do_log</a> (const <a class="el" href="classqx_1_1category.html">category</a> &amp;<a class="el" href="classqx_1_1category.html">category</a>, verbosity eVerbosity, string_view svMessage) override</td></tr>
-<tr class="memdesc:a0ae51463faed654e856a86db5a541a79"><td class="mdescLeft">&#160;</td><td class="mdescRight">Proceed stream logging.  <a href="classqx_1_1file__logger__stream__ofstream.html#a0ae51463faed654e856a86db5a541a79">More...</a><br /></td></tr>
-<tr class="separator:a0ae51463faed654e856a86db5a541a79"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af28dbc57787eb589b440d7966e819ed8"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1file__logger__stream__ofstream.html#af28dbc57787eb589b440d7966e819ed8">do_log</a> (const <a class="el" href="classqx_1_1category.html">category</a> &amp;<a class="el" href="classqx_1_1category.html">category</a>, verbosity eVerbosity, std::thread::id threadId, std::chrono::system_clock::time_point messageTime, string_view svFile, string_view svFunction, int nLine, string_view svMessage) override</td></tr>
+<tr class="memdesc:af28dbc57787eb589b440d7966e819ed8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Proceed stream logging.  <a href="classqx_1_1file__logger__stream__ofstream.html#af28dbc57787eb589b440d7966e819ed8">More...</a><br /></td></tr>
+<tr class="separator:af28dbc57787eb589b440d7966e819ed8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a348a154b2fe2dc897dede65ba2ef1610"><td class="memItemLeft" align="right" valign="top"><a id="a348a154b2fe2dc897dede65ba2ef1610"></a>
 virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1file__logger__stream__ofstream.html#a348a154b2fe2dc897dede65ba2ef1610">do_flush</a> () override</td></tr>
 <tr class="memdesc:a348a154b2fe2dc897dede65ba2ef1610"><td class="mdescLeft">&#160;</td><td class="mdescRight">Flush the stream. <br /></td></tr>
@@ -108,13 +110,16 @@ virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hr
 <tr class="memitem:acf3969720605254845d066bcb9faddeb inherit pub_methods_classqx_1_1base__logger__stream"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1base__logger__stream.html#acf3969720605254845d066bcb9faddeb">base_logger_stream</a> (const <a class="el" href="structqx_1_1base__logger__stream_1_1config.html">config</a> &amp;streamConfig) noexcept</td></tr>
 <tr class="memdesc:acf3969720605254845d066bcb9faddeb inherit pub_methods_classqx_1_1base__logger__stream"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classqx_1_1base__logger__stream.html" title="Base class for logger streams.">base_logger_stream</a> object constructor  <a href="classqx_1_1base__logger__stream.html#acf3969720605254845d066bcb9faddeb">More...</a><br /></td></tr>
 <tr class="separator:acf3969720605254845d066bcb9faddeb inherit pub_methods_classqx_1_1base__logger__stream"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a17c1b1553f1ae9dd529916745843221f inherit pub_methods_classqx_1_1base__logger__stream"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1base__logger__stream.html#a17c1b1553f1ae9dd529916745843221f">log</a> (const <a class="el" href="classqx_1_1category.html">category</a> &amp;<a class="el" href="classqx_1_1category.html">category</a>, verbosity eVerbosity, string_view svMessage)</td></tr>
-<tr class="memdesc:a17c1b1553f1ae9dd529916745843221f inherit pub_methods_classqx_1_1base__logger__stream"><td class="mdescLeft">&#160;</td><td class="mdescRight">Output to stream.  <a href="classqx_1_1base__logger__stream.html#a17c1b1553f1ae9dd529916745843221f">More...</a><br /></td></tr>
-<tr class="separator:a17c1b1553f1ae9dd529916745843221f inherit pub_methods_classqx_1_1base__logger__stream"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aae7796b4f64ac842ffa1a0a0832f56e0 inherit pub_methods_classqx_1_1base__logger__stream"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1base__logger__stream.html#aae7796b4f64ac842ffa1a0a0832f56e0">log</a> (const <a class="el" href="classqx_1_1category.html">category</a> &amp;<a class="el" href="classqx_1_1category.html">category</a>, verbosity eVerbosity, std::thread::id threadId, std::chrono::system_clock::time_point messageTime, string_view svFile, string_view svFunction, int nLine, string_view svMessage)</td></tr>
+<tr class="memdesc:aae7796b4f64ac842ffa1a0a0832f56e0 inherit pub_methods_classqx_1_1base__logger__stream"><td class="mdescLeft">&#160;</td><td class="mdescRight">Output to stream.  <a href="classqx_1_1base__logger__stream.html#aae7796b4f64ac842ffa1a0a0832f56e0">More...</a><br /></td></tr>
+<tr class="separator:aae7796b4f64ac842ffa1a0a0832f56e0 inherit pub_methods_classqx_1_1base__logger__stream"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abe1ebfaa9fb68d7a7d2624766f608f6b inherit pub_methods_classqx_1_1base__logger__stream"><td class="memItemLeft" align="right" valign="top"><a id="abe1ebfaa9fb68d7a7d2624766f608f6b"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1base__logger__stream.html#abe1ebfaa9fb68d7a7d2624766f608f6b">flush</a> ()</td></tr>
 <tr class="memdesc:abe1ebfaa9fb68d7a7d2624766f608f6b inherit pub_methods_classqx_1_1base__logger__stream"><td class="mdescLeft">&#160;</td><td class="mdescRight">Flush the stream. <br /></td></tr>
 <tr class="separator:abe1ebfaa9fb68d7a7d2624766f608f6b inherit pub_methods_classqx_1_1base__logger__stream"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4b7766c935d598de4999b98709c214cb inherit pub_methods_classqx_1_1base__logger__stream"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1base__logger__stream.html#a4b7766c935d598de4999b98709c214cb">log_unconditionally_required</a> (const <a class="el" href="classqx_1_1category.html">category</a> &amp;<a class="el" href="classqx_1_1category.html">category</a>, verbosity eVerbosity, std::thread::id threadId, std::chrono::system_clock::time_point messageTime, string_view svFile, string_view svFunction, int nLine) const noexcept</td></tr>
+<tr class="memdesc:a4b7766c935d598de4999b98709c214cb inherit pub_methods_classqx_1_1base__logger__stream"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns true if this message should be processed by this stream even if the logger filters did not pass it.  <a href="classqx_1_1base__logger__stream.html#a4b7766c935d598de4999b98709c214cb">More...</a><br /></td></tr>
+<tr class="separator:a4b7766c935d598de4999b98709c214cb inherit pub_methods_classqx_1_1base__logger__stream"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="inherited"></a>
 Additional Inherited Members</h2></td></tr>
@@ -178,8 +183,8 @@ Additional Inherited Members</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="a0ae51463faed654e856a86db5a541a79"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0ae51463faed654e856a86db5a541a79">&#9670;&nbsp;</a></span>do_log()</h2>
+<a id="af28dbc57787eb589b440d7966e819ed8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af28dbc57787eb589b440d7966e819ed8">&#9670;&nbsp;</a></span>do_log()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -198,6 +203,36 @@ Additional Inherited Members</h2></td></tr>
           <td></td>
           <td class="paramtype">verbosity&#160;</td>
           <td class="paramname"><em>eVerbosity</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::thread::id&#160;</td>
+          <td class="paramname"><em>threadId</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::chrono::system_clock::time_point&#160;</td>
+          <td class="paramname"><em>messageTime</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">string_view&#160;</td>
+          <td class="paramname"><em>svFile</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">string_view&#160;</td>
+          <td class="paramname"><em>svFunction</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>nLine</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -221,8 +256,13 @@ Additional Inherited Members</h2></td></tr>
 <p>Proceed stream logging. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">eVerbosity</td><td>- this message verbosity </td></tr>
     <tr><td class="paramname">category</td><td>- code category </td></tr>
+    <tr><td class="paramname">eVerbosity</td><td>- this message verbosity </td></tr>
+    <tr><td class="paramname">threadId</td><td>- thread where the log is called </td></tr>
+    <tr><td class="paramname">messageTime</td><td>- message creation time </td></tr>
+    <tr><td class="paramname">svFile</td><td>- file name string </td></tr>
+    <tr><td class="paramname">svFunction</td><td>- function name string </td></tr>
+    <tr><td class="paramname">nLine</td><td>- code line number </td></tr>
     <tr><td class="paramname">svMessage</td><td>- message string </td></tr>
   </table>
   </dd>

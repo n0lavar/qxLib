@@ -68,7 +68,6 @@ $(function() {
   <div class="summary">
 <a href="#nested-classes">Classes</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
-<a href="#pro-static-methods">Static Protected Member Functions</a> &#124;
 <a href="classqx_1_1logger-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">qx::logger Class Reference</div>  </div>
@@ -91,15 +90,33 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a4e45ab9c399be9eb0761171f441ab5ea"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classqx_1_1logger.html#a4e45ab9c399be9eb0761171f441ab5ea">add_stream</a> (stream_t stream) noexcept</td></tr>
 <tr class="memdesc:a4e45ab9c399be9eb0761171f441ab5ea"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add an output stream to the logger.  <a href="classqx_1_1logger.html#a4e45ab9c399be9eb0761171f441ab5ea">More...</a><br /></td></tr>
 <tr class="separator:a4e45ab9c399be9eb0761171f441ab5ea"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a76c4dfc81cf06ba1d9a708ed38c46b8a"><td class="memTemplParams" colspan="2">template&lt;sbo_poly_assignable_c&lt; base_logger_stream &gt; stream_t&gt; </td></tr>
+<tr class="memitem:a76c4dfc81cf06ba1d9a708ed38c46b8a"><td class="memTemplItemLeft" align="right" valign="top">stream_t *&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classqx_1_1logger.html#a76c4dfc81cf06ba1d9a708ed38c46b8a">get_stream</a> () noexcept</td></tr>
+<tr class="memdesc:a76c4dfc81cf06ba1d9a708ed38c46b8a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the first occurrence of a stream of the given type.  <a href="classqx_1_1logger.html#a76c4dfc81cf06ba1d9a708ed38c46b8a">More...</a><br /></td></tr>
+<tr class="separator:a76c4dfc81cf06ba1d9a708ed38c46b8a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3cf7fd0c5791f386dff8e43da791bd6d"><td class="memTemplParams" colspan="2">template&lt;sbo_poly_assignable_c&lt; base_logger_stream &gt; stream_t&gt; </td></tr>
+<tr class="memitem:a3cf7fd0c5791f386dff8e43da791bd6d"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classqx_1_1logger.html#a3cf7fd0c5791f386dff8e43da791bd6d">get_streams</a> () noexcept</td></tr>
+<tr class="memdesc:a3cf7fd0c5791f386dff8e43da791bd6d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get all the streams of the given type.  <a href="classqx_1_1logger.html#a3cf7fd0c5791f386dff8e43da791bd6d">More...</a><br /></td></tr>
+<tr class="separator:a3cf7fd0c5791f386dff8e43da791bd6d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6f416f9521b5b01842bafc7aa9898faf"><td class="memItemLeft" align="right" valign="top">std::shared_mutex &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1logger.html#a6f416f9521b5b01842bafc7aa9898faf">get_streams_mutex</a> () noexcept</td></tr>
+<tr class="memdesc:a6f416f9521b5b01842bafc7aa9898faf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get streams mutex.  <a href="classqx_1_1logger.html#a6f416f9521b5b01842bafc7aa9898faf">More...</a><br /></td></tr>
+<tr class="separator:a6f416f9521b5b01842bafc7aa9898faf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a29752b59ca7b4475107fd3b9e4894ceb"><td class="memTemplParams" colspan="2">template&lt;sbo_poly_assignable_c&lt; base_logger_stream &gt; stream_t&gt; </td></tr>
+<tr class="memitem:a29752b59ca7b4475107fd3b9e4894ceb"><td class="memTemplItemLeft" align="right" valign="top">size_t&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classqx_1_1logger.html#a29752b59ca7b4475107fd3b9e4894ceb">remove_streams</a> () noexcept</td></tr>
+<tr class="memdesc:a29752b59ca7b4475107fd3b9e4894ceb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Remove all the streams of the given type.  <a href="classqx_1_1logger.html#a29752b59ca7b4475107fd3b9e4894ceb">More...</a><br /></td></tr>
+<tr class="separator:a29752b59ca7b4475107fd3b9e4894ceb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a69bf50445c759b9fdb1fde85b4796d16"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1logger.html#a69bf50445c759b9fdb1fde85b4796d16">register_category</a> (const <a class="el" href="classqx_1_1category.html">category</a> &amp;<a class="el" href="classqx_1_1category.html">category</a>, <a class="el" href="structqx_1_1logger_1_1category__data.html">category_data</a> data) noexcept</td></tr>
 <tr class="memdesc:a69bf50445c759b9fdb1fde85b4796d16"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add custom rules for category.  <a href="classqx_1_1logger.html#a69bf50445c759b9fdb1fde85b4796d16">More...</a><br /></td></tr>
 <tr class="separator:a69bf50445c759b9fdb1fde85b4796d16"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0bce4c36d3ed33a8cbc848afc9715890"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1logger.html#a0bce4c36d3ed33a8cbc848afc9715890">register_category</a> (string_view svCategoryName, <a class="el" href="structqx_1_1logger_1_1category__data.html">category_data</a> data) noexcept</td></tr>
 <tr class="memdesc:a0bce4c36d3ed33a8cbc848afc9715890"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add custom rules for category.  <a href="classqx_1_1logger.html#a0bce4c36d3ed33a8cbc848afc9715890">More...</a><br /></td></tr>
 <tr class="separator:a0bce4c36d3ed33a8cbc848afc9715890"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acccb9bc0c555460f09fd445fbd73297c"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1logger.html#acccb9bc0c555460f09fd445fbd73297c">log</a> (const <a class="el" href="classqx_1_1category.html">category</a> &amp;<a class="el" href="classqx_1_1category.html">category</a>, verbosity eVerbosity, string_view svFile, string_view svFunction, int nLine, <a class="el" href="structqx_1_1string__pool_1_1item.html">logger_string_pool::item</a> message)</td></tr>
-<tr class="memdesc:acccb9bc0c555460f09fd445fbd73297c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Log to all streams.  <a href="classqx_1_1logger.html#acccb9bc0c555460f09fd445fbd73297c">More...</a><br /></td></tr>
-<tr class="separator:acccb9bc0c555460f09fd445fbd73297c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aea5aaac2a4c792d209e33907e65d5409"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1logger.html#aea5aaac2a4c792d209e33907e65d5409">set_default_formatter</a> (format_function_pointer pFormatter) noexcept</td></tr>
+<tr class="memdesc:aea5aaac2a4c792d209e33907e65d5409"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set a function that will be used as the default formatter in case no formatter found in categories registered.  <a href="classqx_1_1logger.html#aea5aaac2a4c792d209e33907e65d5409">More...</a><br /></td></tr>
+<tr class="separator:aea5aaac2a4c792d209e33907e65d5409"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2871501909b03b5a1da3c52236742023"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1logger.html#a2871501909b03b5a1da3c52236742023">log</a> (const <a class="el" href="classqx_1_1category.html">category</a> &amp;<a class="el" href="classqx_1_1category.html">category</a>, verbosity eVerbosity, std::thread::id threadId, std::chrono::system_clock::time_point messageTime, string_view svFile, string_view svFunction, int nLine, <a class="el" href="structqx_1_1string__pool_1_1item.html">logger_string_pool::item</a> message)</td></tr>
+<tr class="memdesc:a2871501909b03b5a1da3c52236742023"><td class="mdescLeft">&#160;</td><td class="mdescRight">Log to all streams.  <a href="classqx_1_1logger.html#a2871501909b03b5a1da3c52236742023">More...</a><br /></td></tr>
+<tr class="separator:a2871501909b03b5a1da3c52236742023"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af975c6169624a47a72ae8995161e140f"><td class="memItemLeft" align="right" valign="top"><a id="af975c6169624a47a72ae8995161e140f"></a>
 virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1logger.html#af975c6169624a47a72ae8995161e140f">flush</a> ()</td></tr>
 <tr class="memdesc:af975c6169624a47a72ae8995161e140f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Flush all streams. <br /></td></tr>
@@ -108,25 +125,16 @@ virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hr
 virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1logger.html#acbd37fc0636753a6061a745ca1ab8f9e">reset</a> () noexcept</td></tr>
 <tr class="memdesc:acbd37fc0636753a6061a745ca1ab8f9e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reset logger and clear all streams. <br /></td></tr>
 <tr class="separator:acbd37fc0636753a6061a745ca1ab8f9e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4df9d51d6a1447c3dc08d9d90925a963"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1logger.html#a4df9d51d6a1447c3dc08d9d90925a963">log_required</a> (const <a class="el" href="classqx_1_1category.html">category</a> &amp;<a class="el" href="classqx_1_1category.html">category</a>, verbosity eVerbosity) const noexcept</td></tr>
-<tr class="memdesc:a4df9d51d6a1447c3dc08d9d90925a963"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns true if a log with given category and verbosity will be logged.  <a href="classqx_1_1logger.html#a4df9d51d6a1447c3dc08d9d90925a963">More...</a><br /></td></tr>
-<tr class="separator:a4df9d51d6a1447c3dc08d9d90925a963"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-static-methods"></a>
-Static Protected Member Functions</h2></td></tr>
-<tr class="memitem:af690a98ac1f4e82d8a60d4e06d1bb23a"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classqx_1_1basic__string.html">string</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1logger.html#af690a98ac1f4e82d8a60d4e06d1bb23a">default_formatter</a> (const <a class="el" href="classqx_1_1category.html">category</a> &amp;<a class="el" href="classqx_1_1category.html">category</a>, verbosity eVerbosity, string_view svFile, string_view svFunction, int nLine, <a class="el" href="classqx_1_1basic__string.html">string</a> sMessage) noexcept</td></tr>
-<tr class="memdesc:af690a98ac1f4e82d8a60d4e06d1bb23a"><td class="mdescLeft">&#160;</td><td class="mdescRight">The default log line formatter.  <a href="classqx_1_1logger.html#af690a98ac1f4e82d8a60d4e06d1bb23a">More...</a><br /></td></tr>
-<tr class="separator:af690a98ac1f4e82d8a60d4e06d1bb23a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae6f200f9cfd8e6bab815459165c0f4b4"><td class="memItemLeft" align="right" valign="top">static constexpr string_view&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1logger.html#ae6f200f9cfd8e6bab815459165c0f4b4">get_verbosity_prefix</a> (verbosity eVerbosity) noexcept</td></tr>
-<tr class="memdesc:ae6f200f9cfd8e6bab815459165c0f4b4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get verbosity prefix.  <a href="classqx_1_1logger.html#ae6f200f9cfd8e6bab815459165c0f4b4">More...</a><br /></td></tr>
-<tr class="separator:ae6f200f9cfd8e6bab815459165c0f4b4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a45ab92c9b200105e9e484d29a226daa4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classqx_1_1flags.html">flags</a>&lt; message_necessity_type &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1logger.html#a45ab92c9b200105e9e484d29a226daa4">get_message_necessity_type</a> (const <a class="el" href="classqx_1_1category.html">category</a> &amp;<a class="el" href="classqx_1_1category.html">category</a>, verbosity eVerbosity, std::thread::id threadId, std::chrono::system_clock::time_point messageTime, string_view svFile, string_view svFunction, int nLine) const noexcept</td></tr>
+<tr class="memdesc:a45ab92c9b200105e9e484d29a226daa4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if this message will go somewhere.  <a href="classqx_1_1logger.html#a45ab92c9b200105e9e484d29a226daa4">More...</a><br /></td></tr>
+<tr class="separator:a45ab92c9b200105e9e484d29a226daa4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Logger class. </p>
 <dl class="section author"><dt>Author</dt><dd>Khrapov </dd></dl>
 <dl class="section date"><dt>Date</dt><dd>10.01.2020 </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="logger_8h_source.html#l00059">59</a> of file <a class="el" href="logger_8h_source.html">logger.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="logger_8h_source.html#l00061">61</a> of file <a class="el" href="logger_8h_source.html">logger.h</a>.</p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="a4e45ab9c399be9eb0761171f441ab5ea"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a4e45ab9c399be9eb0761171f441ab5ea">&#9670;&nbsp;</a></span>add_stream()</h2>
@@ -168,12 +176,12 @@ template&lt;sbo_poly_assignable_c&lt; base_logger_stream &gt; stream_t&gt; </div
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="logger_8inl_source.html#l00024">24</a> of file <a class="el" href="logger_8inl_source.html">logger.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="logger_8inl_source.html#l00035">35</a> of file <a class="el" href="logger_8inl_source.html">logger.inl</a>.</p>
 
 </div>
 </div>
-<a id="af690a98ac1f4e82d8a60d4e06d1bb23a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af690a98ac1f4e82d8a60d4e06d1bb23a">&#9670;&nbsp;</a></span>default_formatter()</h2>
+<a id="a45ab92c9b200105e9e484d29a226daa4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a45ab92c9b200105e9e484d29a226daa4">&#9670;&nbsp;</a></span>get_message_necessity_type()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -182,7 +190,7 @@ template&lt;sbo_poly_assignable_c&lt; base_logger_stream &gt; stream_t&gt; </div
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classqx_1_1basic__string.html">string</a> qx::logger::default_formatter </td>
+          <td class="memname"><a class="el" href="classqx_1_1flags.html">flags</a>&lt; logger::message_necessity_type &gt; qx::logger::get_message_necessity_type </td>
           <td>(</td>
           <td class="paramtype">const <a class="el" href="classqx_1_1category.html">category</a> &amp;&#160;</td>
           <td class="paramname"><em>category</em>, </td>
@@ -192,6 +200,18 @@ template&lt;sbo_poly_assignable_c&lt; base_logger_stream &gt; stream_t&gt; </div
           <td></td>
           <td class="paramtype">verbosity&#160;</td>
           <td class="paramname"><em>eVerbosity</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::thread::id&#160;</td>
+          <td class="paramname"><em>threadId</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::chrono::system_clock::time_point&#160;</td>
+          <td class="paramname"><em>messageTime</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -209,52 +229,129 @@ template&lt;sbo_poly_assignable_c&lt; base_logger_stream &gt; stream_t&gt; </div
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>nLine</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="classqx_1_1basic__string.html">string</a>&#160;</td>
-          <td class="paramname"><em>sMessage</em>&#160;</td>
+          <td class="paramname"><em>nLine</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
           <td>)</td>
-          <td></td><td></td>
+          <td></td><td> const</td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span><span class="mlabel">protected</span><span class="mlabel">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p>The default log line formatter. </p>
-<dl class="params"><dt>Parameters</dt><dd>
+<p>Check if this message will go somewhere. </p>
+<p>Typically you don't want to use it. It may be useful with async logging to avoid unnecessary formatting and queueing. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">category</td><td>- code category </td></tr>
     <tr><td class="paramname">eVerbosity</td><td>- message verbosity </td></tr>
+    <tr><td class="paramname">threadId</td><td>- thread where the log is called </td></tr>
+    <tr><td class="paramname">messageTime</td><td>- message creation time </td></tr>
     <tr><td class="paramname">svFile</td><td>- file name string </td></tr>
     <tr><td class="paramname">svFunction</td><td>- function name string </td></tr>
     <tr><td class="paramname">nLine</td><td>- code line number </td></tr>
-    <tr><td class="paramname">sMessage</td><td>- user message string </td></tr>
   </table>
   </dd>
 </dl>
 <dl class="retval"><dt>Return values</dt><dd>
   <table class="retval">
-    <tr><td class="paramname">-</td><td>the formatted log line (the same object as sMessage) </td></tr>
+    <tr><td class="paramname">-</td><td>get message necessity type </td></tr>
   </table>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="logger_8inl_source.html#l00116">116</a> of file <a class="el" href="logger_8inl_source.html">logger.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="logger_8inl_source.html#l00187">187</a> of file <a class="el" href="logger_8inl_source.html">logger.inl</a>.</p>
 
 </div>
 </div>
-<a id="ae6f200f9cfd8e6bab815459165c0f4b4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae6f200f9cfd8e6bab815459165c0f4b4">&#9670;&nbsp;</a></span>get_verbosity_prefix()</h2>
+<a id="a76c4dfc81cf06ba1d9a708ed38c46b8a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a76c4dfc81cf06ba1d9a708ed38c46b8a">&#9670;&nbsp;</a></span>get_stream()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;sbo_poly_assignable_c&lt; base_logger_stream &gt; stream_t&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">stream_t * qx::logger::get_stream</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Get the first occurrence of a stream of the given type. </p>
+<dl class="section warning"><dt>Warning</dt><dd>This must be protected with <a class="el" href="classqx_1_1logger.html#a6f416f9521b5b01842bafc7aa9898faf" title="Get streams mutex.">get_streams_mutex()</a> shared lock </dd></dl>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">stream_t</td><td>- stream type to search for </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Return values</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">-</td><td>stream pointer or nullptr if no stream found </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="logger_8inl_source.html#l00042">42</a> of file <a class="el" href="logger_8inl_source.html">logger.inl</a>.</p>
+
+</div>
+</div>
+<a id="a3cf7fd0c5791f386dff8e43da791bd6d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3cf7fd0c5791f386dff8e43da791bd6d">&#9670;&nbsp;</a></span>get_streams()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;sbo_poly_assignable_c&lt; base_logger_stream &gt; stream_t&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">auto qx::logger::get_streams</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Get all the streams of the given type. </p>
+<dl class="section warning"><dt>Warning</dt><dd>This must be protected with <a class="el" href="classqx_1_1logger.html#a6f416f9521b5b01842bafc7aa9898faf" title="Get streams mutex.">get_streams_mutex()</a> shared lock </dd></dl>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">stream_t</td><td>- stream type to search for </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Return values</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">-</td><td>streams view </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="logger_8inl_source.html#l00049">49</a> of file <a class="el" href="logger_8inl_source.html">logger.inl</a>.</p>
+
+</div>
+</div>
+<a id="a6f416f9521b5b01842bafc7aa9898faf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6f416f9521b5b01842bafc7aa9898faf">&#9670;&nbsp;</a></span>get_streams_mutex()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -263,40 +360,33 @@ template&lt;sbo_poly_assignable_c&lt; base_logger_stream &gt; stream_t&gt; </div
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">constexpr string_view qx::logger::get_verbosity_prefix </td>
+          <td class="memname">std::shared_mutex &amp; qx::logger::get_streams_mutex </td>
           <td>(</td>
-          <td class="paramtype">verbosity&#160;</td>
-          <td class="paramname"><em>eVerbosity</em></td><td>)</td>
+          <td class="paramname"></td><td>)</td>
           <td></td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">constexpr</span><span class="mlabel">protected</span><span class="mlabel">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p>Get verbosity prefix. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">eVerbosity</td><td>- message verbosity </td></tr>
-  </table>
-  </dd>
-</dl>
+<p>Get streams mutex. </p>
 <dl class="retval"><dt>Return values</dt><dd>
   <table class="retval">
-    <tr><td class="paramname">-</td><td>verbosity prefix </td></tr>
+    <tr><td class="paramname">-</td><td>streams mutex </td></tr>
   </table>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="logger_8inl_source.html#l00169">169</a> of file <a class="el" href="logger_8inl_source.html">logger.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="logger_8inl_source.html#l00059">59</a> of file <a class="el" href="logger_8inl_source.html">logger.inl</a>.</p>
 
 </div>
 </div>
-<a id="acccb9bc0c555460f09fd445fbd73297c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#acccb9bc0c555460f09fd445fbd73297c">&#9670;&nbsp;</a></span>log()</h2>
+<a id="a2871501909b03b5a1da3c52236742023"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2871501909b03b5a1da3c52236742023">&#9670;&nbsp;</a></span>log()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -315,6 +405,18 @@ template&lt;sbo_poly_assignable_c&lt; base_logger_stream &gt; stream_t&gt; </div
           <td></td>
           <td class="paramtype">verbosity&#160;</td>
           <td class="paramname"><em>eVerbosity</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::thread::id&#160;</td>
+          <td class="paramname"><em>threadId</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::chrono::system_clock::time_point&#160;</td>
+          <td class="paramname"><em>messageTime</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -359,6 +461,8 @@ template&lt;sbo_poly_assignable_c&lt; base_logger_stream &gt; stream_t&gt; </div
   <table class="params">
     <tr><td class="paramname">category</td><td>- code category </td></tr>
     <tr><td class="paramname">eVerbosity</td><td>- message verbosity </td></tr>
+    <tr><td class="paramname">threadId</td><td>- thread where the log is called </td></tr>
+    <tr><td class="paramname">messageTime</td><td>- message creation time </td></tr>
     <tr><td class="paramname">svFile</td><td>- file name string </td></tr>
     <tr><td class="paramname">svFunction</td><td>- function name string </td></tr>
     <tr><td class="paramname">nLine</td><td>- code line number </td></tr>
@@ -367,60 +471,7 @@ template&lt;sbo_poly_assignable_c&lt; base_logger_stream &gt; stream_t&gt; </div
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="logger_8inl_source.html#l00041">41</a> of file <a class="el" href="logger_8inl_source.html">logger.inl</a>.</p>
-
-</div>
-</div>
-<a id="a4df9d51d6a1447c3dc08d9d90925a963"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4df9d51d6a1447c3dc08d9d90925a963">&#9670;&nbsp;</a></span>log_required()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool qx::logger::log_required </td>
-          <td>(</td>
-          <td class="paramtype">const <a class="el" href="classqx_1_1category.html">category</a> &amp;&#160;</td>
-          <td class="paramname"><em>category</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">verbosity&#160;</td>
-          <td class="paramname"><em>eVerbosity</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td> const</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Returns true if a log with given category and verbosity will be logged. </p>
-<p>Typically you don't want to use it It may be useful with async logging to avoid unnecessary formatting and queueing </p><dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">category</td><td>- code category </td></tr>
-    <tr><td class="paramname">eVerbosity</td><td>- message verbosity </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="retval"><dt>Return values</dt><dd>
-  <table class="retval">
-    <tr><td class="paramname">-</td><td>true if a log with given category and verbosity will be logged </td></tr>
-  </table>
-  </dd>
-</dl>
-
-<p class="definition">Definition at line <a class="el" href="logger_8inl_source.html#l00097">97</a> of file <a class="el" href="logger_8inl_source.html">logger.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="logger_8inl_source.html#l00087">87</a> of file <a class="el" href="logger_8inl_source.html">logger.inl</a>.</p>
 
 </div>
 </div>
@@ -467,7 +518,7 @@ template&lt;sbo_poly_assignable_c&lt; base_logger_stream &gt; stream_t&gt; </div
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="logger_8inl_source.html#l00030">30</a> of file <a class="el" href="logger_8inl_source.html">logger.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="logger_8inl_source.html#l00071">71</a> of file <a class="el" href="logger_8inl_source.html">logger.inl</a>.</p>
 
 </div>
 </div>
@@ -514,7 +565,83 @@ template&lt;sbo_poly_assignable_c&lt; base_logger_stream &gt; stream_t&gt; </div
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="logger_8inl_source.html#l00035">35</a> of file <a class="el" href="logger_8inl_source.html">logger.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="logger_8inl_source.html#l00076">76</a> of file <a class="el" href="logger_8inl_source.html">logger.inl</a>.</p>
+
+</div>
+</div>
+<a id="a29752b59ca7b4475107fd3b9e4894ceb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a29752b59ca7b4475107fd3b9e4894ceb">&#9670;&nbsp;</a></span>remove_streams()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;sbo_poly_assignable_c&lt; base_logger_stream &gt; stream_t&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t qx::logger::remove_streams</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Remove all the streams of the given type. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">stream_t</td><td>- stream type to search for </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Return values</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">-</td><td>number of streams removed </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="logger_8inl_source.html#l00065">65</a> of file <a class="el" href="logger_8inl_source.html">logger.inl</a>.</p>
+
+</div>
+</div>
+<a id="aea5aaac2a4c792d209e33907e65d5409"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aea5aaac2a4c792d209e33907e65d5409">&#9670;&nbsp;</a></span>set_default_formatter()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void qx::logger::set_default_formatter </td>
+          <td>(</td>
+          <td class="paramtype">format_function_pointer&#160;</td>
+          <td class="paramname"><em>pFormatter</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Set a function that will be used as the default formatter in case no formatter found in categories registered. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">pFormatter</td><td>- default formatter </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="logger_8inl_source.html#l00082">82</a> of file <a class="el" href="logger_8inl_source.html">logger.inl</a>.</p>
 
 </div>
 </div>

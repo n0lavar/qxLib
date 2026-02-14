@@ -1,6 +1,29 @@
 var searchData=
 [
-  ['join_1013',['join',['../structqx_1_1tuple__utils_1_1join.html',1,'qx::tuple_utils']]],
-  ['join_3c_20std_3a_3atuple_3c_20first_5fpack_5ft_2e_2e_2e_20_3e_2c_20second_5ft_2c_20optional_5fargs_5ft_2e_2e_2e_20_3e_1014',['join&lt; std::tuple&lt; first_pack_t... &gt;, second_t, optional_args_t... &gt;',['../structqx_1_1tuple__utils_1_1join_3_01std_1_1tuple_3_01first__pack__t_8_8_8_01_4_00_01second__t_0b01677e0319719671cbcf3676b5d4049.html',1,'qx::tuple_utils']]],
-  ['join_3c_20std_3a_3atuple_3c_20first_5fpack_5ft_2e_2e_2e_20_3e_2c_20std_3a_3atuple_3c_20second_5fpack_5ft_2e_2e_2e_20_3e_20_3e_1015',['join&lt; std::tuple&lt; first_pack_t... &gt;, std::tuple&lt; second_pack_t... &gt; &gt;',['../structqx_1_1tuple__utils_1_1join_3_01std_1_1tuple_3_01first__pack__t_8_8_8_01_4_00_01std_1_1tupl14f012bcfe14b987df2efc681548b782.html',1,'qx::tuple_utils']]]
+  ['index_1009',['index',['../structqx_1_1tuple__utils_1_1index.html',1,'qx::tuple_utils']]],
+  ['index_3c_20std_3a_3atuple_3c_20t_2c_20args_5ft_2e_2e_2e_20_3e_2c_20t_20_3e_1010',['index&lt; std::tuple&lt; T, args_t... &gt;, T &gt;',['../structqx_1_1tuple__utils_1_1index_3_01std_1_1tuple_3_01_t_00_01args__t_8_8_8_01_4_00_01_t_01_4.html',1,'qx::tuple_utils']]],
+  ['index_3c_20std_3a_3atuple_3c_20u_2c_20args_5ft_2e_2e_2e_20_3e_2c_20t_20_3e_1011',['index&lt; std::tuple&lt; U, args_t... &gt;, T &gt;',['../structqx_1_1tuple__utils_1_1index_3_01std_1_1tuple_3_01_u_00_01args__t_8_8_8_01_4_00_01_t_01_4.html',1,'qx::tuple_utils']]],
+  ['invoker_1012',['invoker',['../classqx_1_1details_1_1invoker.html',1,'qx::details']]],
+  ['is_5farray_5fof_5ft_1013',['is_array_of_t',['../structqx_1_1is__array__of__t.html',1,'qx']]],
+  ['is_5farray_5fof_5ft_3c_20const_20t_28_26_29_5bn_5d_2c_20t_20_3e_1014',['is_array_of_t&lt; const T(&amp;)[N], T &gt;',['../structqx_1_1is__array__of__t_3_01const_01_t_07_6_08_0f_n_0e_00_01_t_01_4.html',1,'qx']]],
+  ['is_5farray_5fof_5ft_3c_20const_20t_5b_5d_2c_20t_20_3e_1015',['is_array_of_t&lt; const T[], T &gt;',['../structqx_1_1is__array__of__t_3_01const_01_t_0f_0e_00_01_t_01_4.html',1,'qx']]],
+  ['is_5farray_5fof_5ft_3c_20const_20t_5bn_5d_2c_20t_20_3e_1016',['is_array_of_t&lt; const T[N], T &gt;',['../structqx_1_1is__array__of__t_3_01const_01_t_0f_n_0e_00_01_t_01_4.html',1,'qx']]],
+  ['is_5farray_5fof_5ft_3c_20const_20volatile_20t_28_26_29_5bn_5d_2c_20t_20_3e_1017',['is_array_of_t&lt; const volatile T(&amp;)[N], T &gt;',['../structqx_1_1is__array__of__t_3_01const_01volatile_01_t_07_6_08_0f_n_0e_00_01_t_01_4.html',1,'qx']]],
+  ['is_5farray_5fof_5ft_3c_20const_20volatile_20t_5b_5d_2c_20t_20_3e_1018',['is_array_of_t&lt; const volatile T[], T &gt;',['../structqx_1_1is__array__of__t_3_01const_01volatile_01_t_0f_0e_00_01_t_01_4.html',1,'qx']]],
+  ['is_5farray_5fof_5ft_3c_20const_20volatile_20t_5bn_5d_2c_20t_20_3e_1019',['is_array_of_t&lt; const volatile T[N], T &gt;',['../structqx_1_1is__array__of__t_3_01const_01volatile_01_t_0f_n_0e_00_01_t_01_4.html',1,'qx']]],
+  ['is_5farray_5fof_5ft_3c_20t_28_26_29_5bn_5d_2c_20t_20_3e_1020',['is_array_of_t&lt; T(&amp;)[N], T &gt;',['../structqx_1_1is__array__of__t_3_01_t_07_6_08_0f_n_0e_00_01_t_01_4.html',1,'qx']]],
+  ['is_5farray_5fof_5ft_3c_20t_5b_5d_2c_20t_20_3e_1021',['is_array_of_t&lt; T[], T &gt;',['../structqx_1_1is__array__of__t_3_01_t_0f_0e_00_01_t_01_4.html',1,'qx']]],
+  ['is_5farray_5fof_5ft_3c_20t_5bn_5d_2c_20t_20_3e_1022',['is_array_of_t&lt; T[N], T &gt;',['../structqx_1_1is__array__of__t_3_01_t_0f_n_0e_00_01_t_01_4.html',1,'qx']]],
+  ['is_5farray_5fof_5ft_3c_20volatile_20t_28_26_29_5bn_5d_2c_20t_20_3e_1023',['is_array_of_t&lt; volatile T(&amp;)[N], T &gt;',['../structqx_1_1is__array__of__t_3_01volatile_01_t_07_6_08_0f_n_0e_00_01_t_01_4.html',1,'qx']]],
+  ['is_5farray_5fof_5ft_3c_20volatile_20t_5b_5d_2c_20t_20_3e_1024',['is_array_of_t&lt; volatile T[], T &gt;',['../structqx_1_1is__array__of__t_3_01volatile_01_t_0f_0e_00_01_t_01_4.html',1,'qx']]],
+  ['is_5farray_5fof_5ft_3c_20volatile_20t_5bn_5d_2c_20t_20_3e_1025',['is_array_of_t&lt; volatile T[N], T &gt;',['../structqx_1_1is__array__of__t_3_01volatile_01_t_0f_n_0e_00_01_t_01_4.html',1,'qx']]],
+  ['is_5fin_5fvariant_1026',['is_in_variant',['../structqx_1_1details_1_1is__in__variant.html',1,'qx::details']]],
+  ['is_5fin_5fvariant_3c_20t_2c_20std_3a_3avariant_3c_20args_5ft_2e_2e_2e_20_3e_20_3e_1027',['is_in_variant&lt; T, std::variant&lt; args_t... &gt; &gt;',['../structqx_1_1details_1_1is__in__variant_3_01_t_00_01std_1_1variant_3_01args__t_8_8_8_01_4_01_4.html',1,'qx::details']]],
+  ['is_5fspecialization_5fof_1028',['is_specialization_of',['../structqx_1_1is__specialization__of.html',1,'qx']]],
+  ['is_5fspecialization_5fof_3c_20reference_5ft_3c_20args_5ft_2e_2e_2e_20_3e_2c_20reference_5ft_20_3e_1029',['is_specialization_of&lt; reference_t&lt; args_t... &gt;, reference_t &gt;',['../structqx_1_1is__specialization__of_3_01reference__t_3_01args__t_8_8_8_01_4_00_01reference__t_01_4.html',1,'qx']]],
+  ['item_1030',['item',['../structqx_1_1string__pool_1_1item.html',1,'qx::string_pool']]],
+  ['iterator_1031',['iterator',['../classqx_1_1generic__span_1_1iterator.html',1,'qx::generic_span&lt; T, traits_t &gt;::iterator'],['../classqx_1_1iterator.html',1,'qx::iterator&lt; container_t, derived_t &gt;']]],
+  ['iterator_5fvalue_1032',['iterator_value',['../structqx_1_1iterator__value.html',1,'qx']]],
+  ['iterator_5fvalue_3c_20t_2c_20std_3a_3aenable_5fif_5ft_3c_20is_5fiterator_3c_20t_20_3e_20_3e_20_3e_1033',['iterator_value&lt; T, std::enable_if_t&lt; is_iterator&lt; T &gt; &gt; &gt;',['../structqx_1_1iterator__value_3_01_t_00_01std_1_1enable__if__t_3_01is__iterator_3_01_t_01_4_01_4_01_4.html',1,'qx']]],
+  ['iterator_5fvalue_3c_20t_2c_20std_3a_3aenable_5fif_5ft_3c_20std_3a_3ais_5fpointer_5fv_3c_20t_20_3e_20_3e_20_3e_1034',['iterator_value&lt; T, std::enable_if_t&lt; std::is_pointer_v&lt; T &gt; &gt; &gt;',['../structqx_1_1iterator__value_3_01_t_00_01std_1_1enable__if__t_3_01std_1_1is__pointer__v_3_01_t_01_4_01_4_01_4.html',1,'qx']]]
 ];

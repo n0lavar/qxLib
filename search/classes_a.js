@@ -1,7 +1,10 @@
 var searchData=
 [
-  ['merge_5ftuples_1023',['merge_tuples',['../structqx_1_1tuple__utils_1_1permutations__details_1_1merge__tuples.html',1,'qx::tuple_utils::permutations_details']]],
-  ['merge_5ftuples_3c_20std_3a_3atuple_3c_20args_5f1_5ft_2e_2e_2e_20_3e_2c_20std_3a_3atuple_3c_20args_5f2_5ft_2e_2e_2e_20_3e_2c_20args_5frest_5ft_2e_2e_2e_20_3e_1024',['merge_tuples&lt; std::tuple&lt; args_1_t... &gt;, std::tuple&lt; args_2_t... &gt;, args_rest_t... &gt;',['../structqx_1_1tuple__utils_1_1permutations__details_1_1merge__tuples_3_01std_1_1tuple_3_01args__1_ed3ded2eec8c27596f2d49497ec3a6aa.html',1,'qx::tuple_utils::permutations_details']]],
-  ['merge_5ftuples_3c_20std_3a_3atuple_3c_20args_5ft_2e_2e_2e_20_3e_20_3e_1025',['merge_tuples&lt; std::tuple&lt; args_t... &gt; &gt;',['../structqx_1_1tuple__utils_1_1permutations__details_1_1merge__tuples_3_01std_1_1tuple_3_01args__t_8_8_8_01_4_01_4.html',1,'qx::tuple_utils::permutations_details']]],
-  ['moving_5faverage_1026',['moving_average',['../classqx_1_1moving__average.html',1,'qx']]]
+  ['length_5ftraits_1038',['length_traits',['../structqx_1_1string__traits_1_1length__traits.html',1,'qx::string_traits']]],
+  ['length_5ftraits_3c_20char_2c_20usings_5fchar_5ftraits_5ft_20_3e_1039',['length_traits&lt; char, usings_char_traits_t &gt;',['../structqx_1_1string__traits_1_1length__traits_3_01char_00_01usings__char__traits__t_01_4.html',1,'qx::string_traits']]],
+  ['length_5ftraits_3c_20wchar_5ft_2c_20usings_5fchar_5ftraits_5ft_20_3e_1040',['length_traits&lt; wchar_t, usings_char_traits_t &gt;',['../structqx_1_1string__traits_1_1length__traits_3_01wchar__t_00_01usings__char__traits__t_01_4.html',1,'qx::string_traits']]],
+  ['link_1041',['link',['../classqx_1_1link.html',1,'qx']]],
+  ['lock_5fptr_1042',['lock_ptr',['../classqx_1_1link_1_1lock__ptr.html',1,'qx::link']]],
+  ['logger_1043',['logger',['../classqx_1_1logger.html',1,'qx']]],
+  ['logger_5fsingleton_1044',['logger_singleton',['../classqx_1_1logger__singleton.html',1,'qx']]]
 ];

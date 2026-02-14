@@ -1,10 +1,6 @@
 var searchData=
 [
-  ['length_5ftraits_1016',['length_traits',['../structqx_1_1string__traits_1_1length__traits.html',1,'qx::string_traits']]],
-  ['length_5ftraits_3c_20char_2c_20usings_5fchar_5ftraits_5ft_20_3e_1017',['length_traits&lt; char, usings_char_traits_t &gt;',['../structqx_1_1string__traits_1_1length__traits_3_01char_00_01usings__char__traits__t_01_4.html',1,'qx::string_traits']]],
-  ['length_5ftraits_3c_20wchar_5ft_2c_20usings_5fchar_5ftraits_5ft_20_3e_1018',['length_traits&lt; wchar_t, usings_char_traits_t &gt;',['../structqx_1_1string__traits_1_1length__traits_3_01wchar__t_00_01usings__char__traits__t_01_4.html',1,'qx::string_traits']]],
-  ['link_1019',['link',['../classqx_1_1link.html',1,'qx']]],
-  ['lock_5fptr_1020',['lock_ptr',['../classqx_1_1link_1_1lock__ptr.html',1,'qx::link']]],
-  ['logger_1021',['logger',['../classqx_1_1logger.html',1,'qx']]],
-  ['logger_5fsingleton_1022',['logger_singleton',['../classqx_1_1logger__singleton.html',1,'qx']]]
+  ['join_1035',['join',['../structqx_1_1tuple__utils_1_1join.html',1,'qx::tuple_utils']]],
+  ['join_3c_20std_3a_3atuple_3c_20first_5fpack_5ft_2e_2e_2e_20_3e_2c_20second_5ft_2c_20optional_5fargs_5ft_2e_2e_2e_20_3e_1036',['join&lt; std::tuple&lt; first_pack_t... &gt;, second_t, optional_args_t... &gt;',['../structqx_1_1tuple__utils_1_1join_3_01std_1_1tuple_3_01first__pack__t_8_8_8_01_4_00_01second__t_0b01677e0319719671cbcf3676b5d4049.html',1,'qx::tuple_utils']]],
+  ['join_3c_20std_3a_3atuple_3c_20first_5fpack_5ft_2e_2e_2e_20_3e_2c_20std_3a_3atuple_3c_20second_5fpack_5ft_2e_2e_2e_20_3e_20_3e_1037',['join&lt; std::tuple&lt; first_pack_t... &gt;, std::tuple&lt; second_pack_t... &gt; &gt;',['../structqx_1_1tuple__utils_1_1join_3_01std_1_1tuple_3_01first__pack__t_8_8_8_01_4_00_01std_1_1tupl14f012bcfe14b987df2efc681548b782.html',1,'qx::tuple_utils']]]
 ];

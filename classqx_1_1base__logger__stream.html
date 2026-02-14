@@ -84,14 +84,17 @@ Inheritance diagram for qx::base_logger_stream:</div>
  <div class="center">
   <img src="classqx_1_1base__logger__stream.png" usemap="#qx::base_5Flogger_5Fstream_map" alt=""/>
   <map id="qx::base_5Flogger_5Fstream_map" name="qx::base_5Flogger_5Fstream_map">
-<area href="classqx_1_1base__file__logger__stream.html" title="Base class for all file logger streams." alt="qx::base_file_logger_stream" shape="rect" coords="217,56,424,80"/>
-<area href="classqx_1_1base__standard__streams__stream.html" title="A base class for logger streams based on standard streams." alt="qx::base_standard_streams_stream" shape="rect" coords="759,56,966,80"/>
-<area href="classqx_1_1debugger__logger__stream.html" title="Logger stream for a debugger output (VS: output window)" alt="qx::debugger_logger_stream" shape="rect" coords="976,56,1183,80"/>
-<area href="classqx_1_1file__logger__stream__fopen.html" title="FILE* based file logger stream." alt="qx::file_logger_stream_fopen" shape="rect" coords="0,112,207,136"/>
-<area href="classqx_1_1file__logger__stream__mapping.html" title="High-performance file logger based on memory-mapped I/O." alt="qx::file_logger_stream_mapping" shape="rect" coords="217,112,424,136"/>
-<area href="classqx_1_1file__logger__stream__ofstream.html" title="std::ofstream based file logger stream" alt="qx::file_logger_stream_ofstream" shape="rect" coords="434,112,641,136"/>
-<area href="classqx_1_1cout__logger__stream.html" title="Logger stream based on std::cout output." alt="qx::cout_logger_stream" shape="rect" coords="651,112,858,136"/>
-<area href="classqx_1_1fwrite__logger__stream.html" title="Logger stream based on std::fwrite output." alt="qx::fwrite_logger_stream" shape="rect" coords="868,112,1075,136"/>
+<area href="classqx_1_1rtti__root.html" title="RTTI root class." alt="qx::rtti_root&lt; naming_strategy_t &gt;" shape="rect" coords="868,56,1075,80"/>
+<area href="classqx_1_1rtti__pure__base.html" alt="qx::rtti_pure_base" shape="rect" coords="868,0,1075,24"/>
+<area href="classqx_1_1base__file__logger__stream.html" title="Base class for all file logger streams." alt="qx::base_file_logger_stream" shape="rect" coords="217,168,424,192"/>
+<area href="classqx_1_1base__standard__streams__stream.html" title="A base class for logger streams based on standard streams." alt="qx::base_standard_streams_stream" shape="rect" coords="759,168,966,192"/>
+<area href="classqx_1_1debugger__logger__stream.html" title="Logger stream for a debugger output (VS: output window)" alt="qx::debugger_logger_stream" shape="rect" coords="976,168,1183,192"/>
+<area href="classqx_1_1error__context__stream.html" title="A stream that allows capturing all messages and redirecting them to error contexts." alt="qx::error_context_stream" shape="rect" coords="1193,168,1400,192"/>
+<area href="classqx_1_1file__logger__stream__fopen.html" title="FILE* based file logger stream." alt="qx::file_logger_stream_fopen" shape="rect" coords="0,224,207,248"/>
+<area href="classqx_1_1file__logger__stream__mapping.html" title="High-performance file logger based on memory-mapped I/O." alt="qx::file_logger_stream_mapping" shape="rect" coords="217,224,424,248"/>
+<area href="classqx_1_1file__logger__stream__ofstream.html" title="std::ofstream based file logger stream" alt="qx::file_logger_stream_ofstream" shape="rect" coords="434,224,641,248"/>
+<area href="classqx_1_1cout__logger__stream.html" title="Logger stream based on std::cout output." alt="qx::cout_logger_stream" shape="rect" coords="651,224,858,248"/>
+<area href="classqx_1_1fwrite__logger__stream.html" title="Logger stream based on std::fwrite output." alt="qx::fwrite_logger_stream" shape="rect" coords="868,224,1075,248"/>
   </map>
 </div></div>
 <table class="memberdecls">
@@ -105,20 +108,23 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:acf3969720605254845d066bcb9faddeb"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1base__logger__stream.html#acf3969720605254845d066bcb9faddeb">base_logger_stream</a> (const <a class="el" href="structqx_1_1base__logger__stream_1_1config.html">config</a> &amp;streamConfig) noexcept</td></tr>
 <tr class="memdesc:acf3969720605254845d066bcb9faddeb"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classqx_1_1base__logger__stream.html" title="Base class for logger streams.">base_logger_stream</a> object constructor  <a href="classqx_1_1base__logger__stream.html#acf3969720605254845d066bcb9faddeb">More...</a><br /></td></tr>
 <tr class="separator:acf3969720605254845d066bcb9faddeb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a17c1b1553f1ae9dd529916745843221f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1base__logger__stream.html#a17c1b1553f1ae9dd529916745843221f">log</a> (const <a class="el" href="classqx_1_1category.html">category</a> &amp;<a class="el" href="classqx_1_1category.html">category</a>, verbosity eVerbosity, string_view svMessage)</td></tr>
-<tr class="memdesc:a17c1b1553f1ae9dd529916745843221f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Output to stream.  <a href="classqx_1_1base__logger__stream.html#a17c1b1553f1ae9dd529916745843221f">More...</a><br /></td></tr>
-<tr class="separator:a17c1b1553f1ae9dd529916745843221f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aae7796b4f64ac842ffa1a0a0832f56e0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1base__logger__stream.html#aae7796b4f64ac842ffa1a0a0832f56e0">log</a> (const <a class="el" href="classqx_1_1category.html">category</a> &amp;<a class="el" href="classqx_1_1category.html">category</a>, verbosity eVerbosity, std::thread::id threadId, std::chrono::system_clock::time_point messageTime, string_view svFile, string_view svFunction, int nLine, string_view svMessage)</td></tr>
+<tr class="memdesc:aae7796b4f64ac842ffa1a0a0832f56e0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Output to stream.  <a href="classqx_1_1base__logger__stream.html#aae7796b4f64ac842ffa1a0a0832f56e0">More...</a><br /></td></tr>
+<tr class="separator:aae7796b4f64ac842ffa1a0a0832f56e0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abe1ebfaa9fb68d7a7d2624766f608f6b"><td class="memItemLeft" align="right" valign="top"><a id="abe1ebfaa9fb68d7a7d2624766f608f6b"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1base__logger__stream.html#abe1ebfaa9fb68d7a7d2624766f608f6b">flush</a> ()</td></tr>
 <tr class="memdesc:abe1ebfaa9fb68d7a7d2624766f608f6b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Flush the stream. <br /></td></tr>
 <tr class="separator:abe1ebfaa9fb68d7a7d2624766f608f6b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4b7766c935d598de4999b98709c214cb"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1base__logger__stream.html#a4b7766c935d598de4999b98709c214cb">log_unconditionally_required</a> (const <a class="el" href="classqx_1_1category.html">category</a> &amp;<a class="el" href="classqx_1_1category.html">category</a>, verbosity eVerbosity, std::thread::id threadId, std::chrono::system_clock::time_point messageTime, string_view svFile, string_view svFunction, int nLine) const noexcept</td></tr>
+<tr class="memdesc:a4b7766c935d598de4999b98709c214cb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns true if this message should be processed by this stream even if the logger filters did not pass it.  <a href="classqx_1_1base__logger__stream.html#a4b7766c935d598de4999b98709c214cb">More...</a><br /></td></tr>
+<tr class="separator:a4b7766c935d598de4999b98709c214cb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Base class for logger streams. </p>
 <dl class="section author"><dt>Author</dt><dd>Khrapov </dd></dl>
 <dl class="section date"><dt>Date</dt><dd>28.07.2021 </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="base__logger__stream_8h_source.html#l00033">33</a> of file <a class="el" href="base__logger__stream_8h_source.html">base_logger_stream.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="base__logger__stream_8h_source.html#l00035">35</a> of file <a class="el" href="base__logger__stream_8h_source.html">base_logger_stream.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="acf3969720605254845d066bcb9faddeb"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#acf3969720605254845d066bcb9faddeb">&#9670;&nbsp;</a></span>base_logger_stream()</h2>
@@ -157,8 +163,8 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="a17c1b1553f1ae9dd529916745843221f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a17c1b1553f1ae9dd529916745843221f">&#9670;&nbsp;</a></span>log()</h2>
+<a id="aae7796b4f64ac842ffa1a0a0832f56e0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aae7796b4f64ac842ffa1a0a0832f56e0">&#9670;&nbsp;</a></span>log()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -177,6 +183,36 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
           <td></td>
           <td class="paramtype">verbosity&#160;</td>
           <td class="paramname"><em>eVerbosity</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::thread::id&#160;</td>
+          <td class="paramname"><em>threadId</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::chrono::system_clock::time_point&#160;</td>
+          <td class="paramname"><em>messageTime</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">string_view&#160;</td>
+          <td class="paramname"><em>svFile</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">string_view&#160;</td>
+          <td class="paramname"><em>svFunction</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>nLine</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -207,13 +243,106 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">category</td><td>- code category </td></tr>
-    <tr><td class="paramname">eVerbosity</td><td>message verbosity </td></tr>
+    <tr><td class="paramname">eVerbosity</td><td>- message verbosity </td></tr>
+    <tr><td class="paramname">threadId</td><td>- thread where the log is called </td></tr>
+    <tr><td class="paramname">messageTime</td><td>- message creation time </td></tr>
+    <tr><td class="paramname">svFile</td><td>- file name string </td></tr>
+    <tr><td class="paramname">svFunction</td><td>- function name string </td></tr>
+    <tr><td class="paramname">nLine</td><td>- code line number </td></tr>
     <tr><td class="paramname">svMessage</td><td>- formatted log line </td></tr>
   </table>
   </dd>
 </dl>
 
 <p class="definition">Definition at line <a class="el" href="base__logger__stream_8inl_source.html#l00063">63</a> of file <a class="el" href="base__logger__stream_8inl_source.html">base_logger_stream.inl</a>.</p>
+
+</div>
+</div>
+<a id="a4b7766c935d598de4999b98709c214cb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4b7766c935d598de4999b98709c214cb">&#9670;&nbsp;</a></span>log_unconditionally_required()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool qx::base_logger_stream::log_unconditionally_required </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classqx_1_1category.html">category</a> &amp;&#160;</td>
+          <td class="paramname"><em>category</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">verbosity&#160;</td>
+          <td class="paramname"><em>eVerbosity</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::thread::id&#160;</td>
+          <td class="paramname"><em>threadId</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::chrono::system_clock::time_point&#160;</td>
+          <td class="paramname"><em>messageTime</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">string_view&#160;</td>
+          <td class="paramname"><em>svFile</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">string_view&#160;</td>
+          <td class="paramname"><em>svFunction</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>nLine</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Returns true if this message should be processed by this stream even if the logger filters did not pass it. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">category</td><td>- code category </td></tr>
+    <tr><td class="paramname">eVerbosity</td><td>- message verbosity </td></tr>
+    <tr><td class="paramname">threadId</td><td>- thread where the log is called </td></tr>
+    <tr><td class="paramname">messageTime</td><td>- message creation time </td></tr>
+    <tr><td class="paramname">svFile</td><td>- file name string </td></tr>
+    <tr><td class="paramname">svFunction</td><td>- function name string </td></tr>
+    <tr><td class="paramname">nLine</td><td>- code line number </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Return values</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">-</td><td>true is this message is unconditionally required by this stream </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="base__logger__stream_8inl_source.html#l00100">100</a> of file <a class="el" href="base__logger__stream_8inl_source.html">base_logger_stream.inl</a>.</p>
 
 </div>
 </div>
