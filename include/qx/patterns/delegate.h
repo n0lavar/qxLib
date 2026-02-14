@@ -70,7 +70,7 @@ public:
 
     /**
         @brief  Create a singlecast delegate
-        @tparam creation_args_t - any arguments that can be used in add_weak or add_free
+        @tparam creation_args_t - any arguments that can be used in add_weak or add_token
         @param  args            - template parameter pack
         @retval                 - created delegate
     **/
@@ -78,9 +78,10 @@ public:
     static derived_t create_singlecast(creation_args_t... args) noexcept;
 
     /**
-        @brief   Add a callable without any protection
+        @brief   Add a callable using a token with manual unsubscribing.
         @warning If you capture `this` in the lambda passed and the object becomes invalid, it'll crash.
-                 Consider add_destruction_callback or add_weak in this case.
+                 You must unsubscribe manually using remove()
+                 Consider using add_destruction_callback or add_weak.
         @tparam  callable_t - any callable type: lambda, function, static method pointer, ect
         @param   callable   - callable object
         @param   ePriority  - callable priority. Callables will be called in order of priority,
@@ -88,7 +89,25 @@ public:
         @retval             - a token that can be used to remove this callable from the delegate
     **/
     template<callable_c<return_t, args_t...> callable_t>
-    [[maybe_unused]] delegate_token_type add_free(callable_t callable, priority ePriority = priority::normal) noexcept;
+    [[maybe_unused]] delegate_token_type add_token(callable_t callable, priority ePriority = priority::normal) noexcept;
+
+    /**
+        @brief   Add a callable using a token with manual unsubscribing.
+        @warning If you capture `this` in the lambda passed and the object becomes invalid, it'll crash.
+                 You must unsubscribe manually using remove()
+                 Consider using add_destruction_callback or add_weak.
+        @tparam  object_t  - object type
+        @param   object    - object reference
+        @param   pMethod   - object's method pointer
+        @param   ePriority - callable priority. Callables will be called in order of priority,
+                             from highest to lowest, and in the order they were added.
+        @retval            - a token that can be used to remove this callable from the delegate
+    **/
+    template<class object_t>
+    [[maybe_unused]] delegate_token_type add_token(
+        object_t& object,
+        return_t (object_t::*pMethod)(args_t...),
+        priority ePriority = priority::normal) noexcept;
 
     /**
         @brief  Add a callable that will be removed from the delegate when its destruction callback is destroyed

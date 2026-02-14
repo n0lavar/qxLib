@@ -64,8 +64,8 @@ derived_t base_delegate<derived_t, return_t, args_t...>::create_singlecast(creat
     derived_t delegate;
     if constexpr (requires(derived_t d) { d.add_weak(args...); })
         delegate.add_weak(args...);
-    if constexpr (requires(derived_t d) { d.add_free(args...); })
-        delegate.add_free(args...);
+    if constexpr (requires(derived_t d) { d.add_token(args...); })
+        delegate.add_token(args...);
     else
         QX_STATIC_ASSERT_NO_INSTANTIATION("No overload that takes these args");
 
@@ -74,13 +74,28 @@ derived_t base_delegate<derived_t, return_t, args_t...>::create_singlecast(creat
 
 template<class derived_t, delegate_return_c return_t, class... args_t>
 template<callable_c<return_t, args_t...> callable_t>
-delegate_token_type base_delegate<derived_t, return_t, args_t...>::add_free(
+delegate_token_type base_delegate<derived_t, return_t, args_t...>::add_token(
     callable_t callable,
     priority   ePriority) noexcept
 {
     time_ordered_priority_key key(ePriority);
     m_Functions.emplace(key, std::move(callable));
     return key;
+}
+
+template<class derived_t, delegate_return_c return_t, class... args_t>
+template<class object_t>
+delegate_token_type base_delegate<derived_t, return_t, args_t...>::add_token(
+    object_t& object,
+    return_t (object_t::*pMethod)(args_t...),
+    priority ePriority) noexcept
+{
+    return add_token(
+        [pMethod, &object](args_t... args)
+        {
+            return (object.*pMethod)(std::forward<args_t>(args)...);
+        },
+        ePriority);
 }
 
 template<class derived_t, delegate_return_c return_t, class... args_t>

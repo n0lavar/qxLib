@@ -439,40 +439,47 @@ protected:
 
 
 
-// ---------------------------------------------------- free fixture ---------------------------------------------------
+// --------------------------------------------------- token fixture ---------------------------------------------------
 
 template<class traits_t>
-class delegate_free_fixture : public delegate_base_fixture<traits_t>
+class delegate_token_fixture : public delegate_base_fixture<traits_t>
 {
 };
 
-TYPED_TEST_SUITE(delegate_free_fixture, implementations_type);
+TYPED_TEST_SUITE(delegate_token_fixture, implementations_type);
 
-TYPED_TEST(delegate_free_fixture, free_lambda)
+TYPED_TEST(delegate_token_fixture, token_lambda)
 {
     this->m_optCallableType = callable_type::lambda;
-    this->m_Delegate.add_free(get_lambda<
-                              typename TypeParam::get_get_result_type,
-                              typename TypeParam::return_type,
-                              typename TypeParam::args_tuple_type>::value);
+    this->m_Delegate.add_token(get_lambda<
+                               typename TypeParam::get_get_result_type,
+                               typename TypeParam::return_type,
+                               typename TypeParam::args_tuple_type>::value);
 }
 
-TYPED_TEST(delegate_free_fixture, free_function)
+TYPED_TEST(delegate_token_fixture, token_function)
 {
     this->m_optCallableType = callable_type::function;
-    this->m_Delegate.add_free(get_function<
-                              typename TypeParam::get_get_result_type,
-                              typename TypeParam::return_type,
-                              typename TypeParam::args_tuple_type>::value);
+    this->m_Delegate.add_token(get_function<
+                               typename TypeParam::get_get_result_type,
+                               typename TypeParam::return_type,
+                               typename TypeParam::args_tuple_type>::value);
 }
 
-TYPED_TEST(delegate_free_fixture, free_static_method)
+TYPED_TEST(delegate_token_fixture, token_static_method)
 {
     this->m_optCallableType = callable_type::static_method;
-    this->m_Delegate.add_free(get_static_method<
-                              typename TypeParam::get_get_result_type,
-                              typename TypeParam::return_type,
-                              typename TypeParam::args_tuple_type>::value);
+    this->m_Delegate.add_token(get_static_method<
+                               typename TypeParam::get_get_result_type,
+                               typename TypeParam::return_type,
+                               typename TypeParam::args_tuple_type>::value);
+}
+
+TYPED_TEST(delegate_token_fixture, token_method)
+{
+    this->m_optCallableType = callable_type::method;
+    typename TypeParam::method_component_type component;
+    this->m_Delegate.add_token(component, &TypeParam::method_component_type::callback);
 }
 
 
@@ -608,9 +615,9 @@ protected:
 protected:
     void SetUp() override
     {
-        m_Token1 = m_Delegate.add_free(get_lambda<get_get_result_type, sum_pipe, args_tuple_type>::value);
-        m_Token2 = m_Delegate.add_free(get_function<get_get_result_type, sum_pipe, args_tuple_type>::value);
-        m_Token3 = m_Delegate.add_free(get_static_method<get_get_result_type, sum_pipe, args_tuple_type>::value);
+        m_Token1 = m_Delegate.add_token(get_lambda<get_get_result_type, sum_pipe, args_tuple_type>::value);
+        m_Token2 = m_Delegate.add_token(get_function<get_get_result_type, sum_pipe, args_tuple_type>::value);
+        m_Token3 = m_Delegate.add_token(get_static_method<get_get_result_type, sum_pipe, args_tuple_type>::value);
     }
 
 protected:
@@ -722,14 +729,14 @@ TEST_F(delegate_common_tests_fixture, clear)
 
 TEST_F(delegate_common_tests_fixture, priority)
 {
-    m_Delegate.add_free(get_static_method<get_get_result_type, sum_pipe, args_tuple_type>::value, qx::priority::high);
-    m_Delegate.add_free(get_lambda<get_get_result_type, sum_pipe, args_tuple_type>::value, qx::priority::very_high);
-    m_Delegate.add_free(get_function<get_get_result_type, sum_pipe, args_tuple_type>::value, qx::priority::low);
-    m_Delegate.add_free(
+    m_Delegate.add_token(get_static_method<get_get_result_type, sum_pipe, args_tuple_type>::value, qx::priority::high);
+    m_Delegate.add_token(get_lambda<get_get_result_type, sum_pipe, args_tuple_type>::value, qx::priority::very_high);
+    m_Delegate.add_token(get_function<get_get_result_type, sum_pipe, args_tuple_type>::value, qx::priority::low);
+    m_Delegate.add_token(
         get_static_method<get_get_result_type, sum_pipe, args_tuple_type>::value,
         qx::priority::very_low);
-    m_Delegate.add_free(get_lambda<get_get_result_type, sum_pipe, args_tuple_type>::value, qx::priority::low);
-    m_Delegate.add_free(get_function<get_get_result_type, sum_pipe, args_tuple_type>::value, qx::priority::high);
+    m_Delegate.add_token(get_lambda<get_get_result_type, sum_pipe, args_tuple_type>::value, qx::priority::low);
+    m_Delegate.add_token(get_function<get_get_result_type, sum_pipe, args_tuple_type>::value, qx::priority::high);
 
     m_Delegate.execute(5, QXT("1"));
 
