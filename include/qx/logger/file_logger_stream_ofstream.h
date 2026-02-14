@@ -27,6 +27,8 @@ namespace qx
 **/
 class file_logger_stream_ofstream : public base_file_logger_stream
 {
+    QX_RTTI_CLASS(file_logger_stream_ofstream, base_file_logger_stream);
+
 public:
     /**
         @brief file_logger_stream_ofstream object constructor
@@ -44,7 +46,15 @@ public:
 
     // base_logger_stream
     //
-    virtual void do_log(const category& category, verbosity eVerbosity, string_view svMessage) override;
+    virtual void do_log(
+        const category&                       category,
+        verbosity                             eVerbosity,
+        std::thread::id                       threadId,
+        std::chrono::system_clock::time_point messageTime,
+        string_view                           svFile,
+        string_view                           svFunction,
+        int                                   nLine,
+        string_view                           svMessage) override;
     virtual void do_flush() override;
 
 private:

@@ -25,6 +25,10 @@ inline bool asserts_manager::do_assert(
 
         // the error must present when debug break is called
         get_logger().flush();
+
+        std::shared_lock _(get_logger().get_streams_mutex());
+        if (auto* pStream = get_logger().get_stream<error_context_stream>())
+            pStream->on_error();
     }
 
     if (m_Config.onAssertion)

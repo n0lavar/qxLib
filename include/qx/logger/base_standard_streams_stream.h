@@ -24,6 +24,8 @@ namespace qx
 **/
 class base_standard_streams_stream : public base_logger_stream
 {
+    QX_RTTI_CLASS(base_standard_streams_stream, base_logger_stream);
+
 public:
     struct config : base_logger_stream::config
     {
@@ -50,7 +52,15 @@ public:
 
     // base_logger_stream
     //
-    virtual void do_log(const category& category, verbosity eVerbosity, string_view svMessage) override;
+    virtual void do_log(
+        const category&                       category,
+        verbosity                             eVerbosity,
+        std::thread::id                       threadId,
+        std::chrono::system_clock::time_point messageTime,
+        string_view                           svFile,
+        string_view                           svFunction,
+        int                                   nLine,
+        string_view                           svMessage) override;
 
 protected:
     /**

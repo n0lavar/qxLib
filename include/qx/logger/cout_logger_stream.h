@@ -25,6 +25,8 @@ namespace qx
 **/
 class cout_logger_stream : public base_standard_streams_stream
 {
+    QX_RTTI_CLASS(cout_logger_stream, base_standard_streams_stream);
+
 public:
     struct config : base_standard_streams_stream::config
     {

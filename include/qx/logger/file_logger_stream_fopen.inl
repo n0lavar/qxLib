@@ -56,7 +56,15 @@ inline file_logger_stream_fopen::~file_logger_stream_fopen()
     }
 }
 
-inline void file_logger_stream_fopen::do_log(const category& category, verbosity eVerbosity, string_view svMessage)
+inline void file_logger_stream_fopen::do_log(
+    const category&                       category,
+    verbosity                             eVerbosity,
+    std::thread::id                       threadId,
+    std::chrono::system_clock::time_point messageTime,
+    string_view                           svFile,
+    string_view                           svFunction,
+    int                                   nLine,
+    string_view                           svMessage)
 {
     if (m_pFile)
     {

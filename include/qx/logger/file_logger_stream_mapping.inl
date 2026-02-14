@@ -137,7 +137,15 @@ inline file_logger_stream_mapping::~file_logger_stream_mapping() noexcept
     m_nSize     = 0;
 }
 
-inline void file_logger_stream_mapping::do_log(const category& category, verbosity eVerbosity, string_view svMessage)
+inline void file_logger_stream_mapping::do_log(
+    const category&                       category,
+    verbosity                             eVerbosity,
+    std::thread::id                       threadId,
+    std::chrono::system_clock::time_point messageTime,
+    string_view                           svFile,
+    string_view                           svFunction,
+    int                                   nLine,
+    string_view                           svMessage)
 {
     const size_t nRequiredSize = svMessage.size() * std::min(sizeof(char_type), sizeof(char16_t));
     if (!ensure_capacity(nRequiredSize))

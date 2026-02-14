@@ -50,7 +50,15 @@ inline file_logger_stream_ofstream::~file_logger_stream_ofstream()
         m_File << std::flush;
 }
 
-inline void file_logger_stream_ofstream::do_log(const category& category, verbosity eVerbosity, string_view svMessage)
+inline void file_logger_stream_ofstream::do_log(
+    const category&                       category,
+    verbosity                             eVerbosity,
+    std::thread::id                       threadId,
+    std::chrono::system_clock::time_point messageTime,
+    string_view                           svFile,
+    string_view                           svFunction,
+    int                                   nLine,
+    string_view                           svMessage)
 {
     if (m_File)
         m_File.write(svMessage.data(), svMessage.size());

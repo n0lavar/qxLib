@@ -139,13 +139,16 @@ namespace filters
 {
 
 template<class T>
-constexpr auto rtti()
+constexpr auto is_derived_from = [](const auto& value)
 {
-    return [](const auto& value)
-    {
-        return value.template is_derived_from<T>();
-    };
-}
+    return value.template is_derived_from<T>();
+};
+
+template<class T>
+constexpr auto is = [](const auto& value)
+{
+    return value.template is<T>();
+};
 
 } // namespace filters
 

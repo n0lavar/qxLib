@@ -28,6 +28,8 @@ namespace qx
 **/
 class debugger_logger_stream : public base_logger_stream
 {
+    QX_RTTI_CLASS(debugger_logger_stream, base_logger_stream);
+
 public:
     /**
         @brief debugger_logger_stream object constructor
@@ -40,7 +42,15 @@ public:
 private:
     // base_logger_stream
     //
-    virtual void do_log(const category& category, verbosity eVerbosity, string_view svMessage) override;
+    virtual void do_log(
+        const category&                       category,
+        verbosity                             eVerbosity,
+        std::thread::id                       threadId,
+        std::chrono::system_clock::time_point messageTime,
+        string_view                           svFile,
+        string_view                           svFunction,
+        int                                   nLine,
+        string_view                           svMessage) override;
     virtual void do_flush() override;
 };
 

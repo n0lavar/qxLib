@@ -9,7 +9,7 @@
 #pragma once
 
 #include <qx/logger/base_logger_stream.h>
-#include <qx/logger/time_string.h>
+#include <qx/logger/logger_formatters.h>
 
 #include <filesystem>
 
@@ -33,6 +33,8 @@ enum class log_file_policy
 **/
 class base_file_logger_stream : public base_logger_stream
 {
+    QX_RTTI_CLASS(base_file_logger_stream, base_logger_stream);
+
 public:
     struct config : base_logger_stream::config
     {

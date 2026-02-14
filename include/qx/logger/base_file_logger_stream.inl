@@ -23,7 +23,7 @@ inline std::filesystem::path base_file_logger_stream::create_folder_and_get_log_
     if (eLogFilePolicy == log_file_policy::time_name)
     {
         string sTime;
-        append_time_string(sTime.begin(), QXT('-'), QXT('-'));
+        append_time_string(sTime.begin(), QXT('-'), QXT('-'), std::chrono::system_clock::now());
 
         size_t nInsetPos = sLogFile.rfind(QXT(".log"));
         if (nInsetPos == string::npos)

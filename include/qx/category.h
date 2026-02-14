@@ -120,7 +120,7 @@ namespace qx::details
 template<size_t nHash>
 struct file_category
 {
-    static constexpr const qx::category& get() noexcept
+    static constexpr const category& get() noexcept
     {
         return CatDefault;
     }

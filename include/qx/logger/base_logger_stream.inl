@@ -60,14 +60,22 @@ inline base_logger_stream::base_logger_stream(const config& streamConfig) noexce
 {
 }
 
-inline void base_logger_stream::log(const category& category, verbosity eVerbosity, string_view svMessage)
+inline void base_logger_stream::log(
+    const category&                       category,
+    verbosity                             eVerbosity,
+    std::thread::id                       threadId,
+    std::chrono::system_clock::time_point messageTime,
+    string_view                           svFile,
+    string_view                           svFunction,
+    int                                   nLine,
+    string_view                           svMessage)
 {
     QX_PERF_SCOPE("Log");
 
     if (m_bProtectLog)
         m_pMutex->lock();
 
-    do_log(category, eVerbosity, svMessage);
+    do_log(category, eVerbosity, threadId, messageTime, svFile, svFunction, nLine, svMessage);
 
     if (eVerbosity >= m_eMinFlushVerbosity)
         flush();
@@ -87,6 +95,18 @@ inline void base_logger_stream::flush()
 
     if (m_bProtectLog)
         m_pMutex->unlock();
+}
+
+inline bool base_logger_stream::log_unconditionally_required(
+    const category&                       category,
+    verbosity                             eVerbosity,
+    std::thread::id                       threadId,
+    std::chrono::system_clock::time_point messageTime,
+    string_view                           svFile,
+    string_view                           svFunction,
+    int                                   nLine) const noexcept
+{
+    return false;
 }
 
 } // namespace qx

@@ -15,7 +15,15 @@ inline debugger_logger_stream::debugger_logger_stream(verbosity eMinFlushVerbosi
 {
 }
 
-inline void debugger_logger_stream::do_log(const category& category, verbosity eVerbosity, string_view svMessage)
+inline void debugger_logger_stream::do_log(
+    const category&                       category,
+    verbosity                             eVerbosity,
+    std::thread::id                       threadId,
+    std::chrono::system_clock::time_point messageTime,
+    string_view                           svFile,
+    string_view                           svFunction,
+    int                                   nLine,
+    string_view                           svMessage)
 {
 #if QX_WIN
     if (IsDebuggerPresent())

@@ -10,6 +10,7 @@
 
 #include <qx/algo/predicates.h>
 #include <qx/logger/logger.h>
+#include <qx/macros/asserts/error_context_stream.h>
 #include <qx/macros/details/macro_user_message.h>
 #include <qx/windows.h>
 
@@ -133,20 +134,20 @@ private:
     #define QX_DEBUG_BREAK() _QX_DEBUG_BREAK()
 #endif
 
-#define _QX_COMMON_ASSERT(condition, category, assert_type, after_debug_break, result_t, ...)           \
-    static_cast<result_t>(                                                                              \
-        qx::predicates::is_valid(condition)                                                             \
-        || (qx::asserts_manager::get_instance().do_assert(                                              \
-                QXT(#condition),                                                                        \
-                category,                                                                               \
-                assert_type,                                                                            \
-                _QX_MACRO_USER_MESSAGE(static_cast<qx::string_pool<>*>(nullptr), ##__VA_ARGS__).sValue, \
-                qx::convert_string_literal<qx::char_type, __FUNCTION__>(),                              \
-                QXT(__FILE__),                                                                          \
-                QX_LINE)                                                                                \
-                ? QX_DEBUG_BREAK()                                                                      \
-                : (void)0,                                                                              \
-            after_debug_break(category, assert_type),                                                   \
+#define _QX_COMMON_ASSERT(condition, category, assert_type, after_debug_break, result_t, ...)                      \
+    static_cast<result_t>(                                                                                         \
+        qx::predicates::is_valid(condition)                                                                        \
+        || (qx::asserts_manager::get_instance().do_assert(                                                         \
+                QXT(#condition),                                                                                   \
+                category,                                                                                          \
+                assert_type,                                                                                       \
+                std::move(_QX_MACRO_USER_MESSAGE(static_cast<qx::string_pool<>*>(nullptr), ##__VA_ARGS__).sValue), \
+                qx::convert_string_literal<qx::char_type, __FUNCTION__>(),                                         \
+                QXT(__FILE__),                                                                                     \
+                QX_LINE)                                                                                           \
+                ? QX_DEBUG_BREAK()                                                                                 \
+                : (void)0,                                                                                         \
+            after_debug_break(category, assert_type),                                                              \
             false))
 
 #ifndef _QX_ASSERT_AFTER_DEBUG_BREAK_FATAL

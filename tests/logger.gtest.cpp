@@ -10,13 +10,19 @@
 
 //V_EXCLUDE_PATH *logger.gtest.cpp
 
+#define QX_DEBUG_BREAK() (void)0
+
 #include <qx/logger/logger.h>
 
 #include <qx/logger/cout_logger_stream.h>
+#include <qx/logger/debugger_logger_stream.h>
 #include <qx/logger/file_logger_stream_fopen.h>
 #include <qx/logger/file_logger_stream_mapping.h>
 #include <qx/logger/file_logger_stream_ofstream.h>
 #include <qx/logger/fwrite_logger_stream.h>
+#include <qx/macros/asserts/asserts.h>
+#include <qx/macros/asserts/error_context.h>
+#include <qx/macros/asserts/error_context_stream.h>
 
 #include <filesystem>
 #include <regex>
@@ -41,10 +47,22 @@
 #endif
 
 QX_DEFINE_CATEGORY(CatLoggerTest);
+QX_DEFINE_CATEGORY(CatLoggerTestLogVerbosity);
 QX_DEFINE_CATEGORY(CatLoggerTestFileWide);
+QX_DEFINE_CATEGORY(CatErrorContextTest);
 QX_SET_FILE_CATEGORY(CatLoggerTestFileWide);
 
-constexpr qx::string_view k_svLogFileName = QXT("logger_test.log");
+static_assert(qx::sbo_poly_fittable_types_v<
+              qx::logger::logger_sbo,
+              qx::cout_logger_stream,
+              qx::file_logger_stream_fopen,
+              qx::file_logger_stream_mapping,
+              qx::file_logger_stream_ofstream,
+              qx::fwrite_logger_stream,
+              qx::debugger_logger_stream,
+              qx::error_context_stream>);
+
+constexpr qx::string_view k_svLogFileName = QXT("logger_output_test.log");
 
 QX_CALL_BEFORE_MAIN = []()
 {
@@ -55,7 +73,12 @@ QX_CALL_BEFORE_MAIN = []()
 namespace traits
 {
 
-struct base_file
+struct base_traits
+{
+    static constexpr bool bResetTestOnStart = true;
+};
+
+struct base_file : base_traits
 {
     static void set_up()
     {
@@ -151,7 +174,7 @@ struct mapping : base_file
     }
 };
 
-struct base_cout
+struct base_cout : base_traits
 {
     // Saved original file descriptors for stdout/stderr
     static inline int s_nOldOutDescriptor = -1;
@@ -285,6 +308,7 @@ struct base_cout
     {
     }
 };
+
 struct cout : base_cout
 {
     static void set_up()
@@ -314,6 +338,21 @@ struct fwrite : base_cout
     }
 };
 
+struct default_constructed : base_cout
+{
+    static constexpr bool bResetTestOnStart = false;
+
+    static void set_up()
+    {
+#if !QX_WIN
+        s_bCharOutput = false;
+#endif
+
+        base_cout::set_up();
+        // default constructed logger should have fwrite_logger_stream inside and be ready to be used
+    }
+};
+
 } // namespace traits
 
 using implementations_type = ::testing::Types<
@@ -324,15 +363,18 @@ using implementations_type = ::testing::Types<
     traits::mapping_default_initial_size,
     traits::mapping,
     traits::cout,
-    traits::fwrite>;
+    traits::fwrite,
+    traits::default_constructed>;
 
 template<class traits_t>
-class logger_test : public ::testing::Test
+class logger_output_test : public ::testing::Test
 {
 protected:
     virtual void SetUp() override
     {
-        qx::get_logger().reset();
+        if constexpr (traits_t::bResetTestOnStart)
+            qx::get_logger().reset();
+
         qx::get_logger().register_category(CatLoggerTestFileWide, { .eRuntimeVerbosity = qx::verbosity::detailed });
         traits_t::set_up();
     }
@@ -340,9 +382,14 @@ protected:
     {
         qx::get_logger().flush();
 
-        const qx::string                   sContent = traits_t::get_content();
-        const std::vector<qx::string_view> lines    = sContent.split(QXT('\n'));
+        const qx::string             sContent = traits_t::get_content();
+        std::vector<qx::string_view> lines    = sContent.split(QXT('\n'));
+        for (qx::string_view& svLine : lines)
+            if (svLine.ends_with(QXT('\r')))
+                svLine.remove_suffix(1);
+
         m_CheckContent(lines);
+
         traits_t::tear_down();
     }
 
@@ -417,9 +464,9 @@ protected:
     std::function<void(std::span<const qx::string_view> lines)> m_CheckContent;
 };
 
-TYPED_TEST_SUITE(logger_test, implementations_type);
+TYPED_TEST_SUITE(logger_output_test, implementations_type);
 
-TYPED_TEST(logger_test, categories)
+TYPED_TEST(logger_output_test, categories)
 {
     // file category
     QX_LOG(qx::verbosity::log, "Categories check 1");
@@ -442,8 +489,10 @@ TYPED_TEST(logger_test, categories)
     };
 }
 
-TYPED_TEST(logger_test, verbosity)
+TYPED_TEST(logger_output_test, verbosity)
 {
+    qx::get_logger().register_category(CatLoggerTestLogVerbosity, { .eRuntimeVerbosity = qx::verbosity::log });
+
     QX_LOG(qx::verbosity::detailed, "Verbosity check 1");
     QX_LOG(qx::verbosity::verbose, "Verbosity check 2");
     QX_LOG(qx::verbosity::log, "Verbosity check 3");
@@ -451,6 +500,14 @@ TYPED_TEST(logger_test, verbosity)
     QX_LOG(qx::verbosity::warning, "Verbosity check 5");
     QX_LOG(qx::verbosity::error, "Verbosity check 6");
     QX_LOG(qx::verbosity::critical, "Verbosity check 7");
+
+    QX_LOG_C(CatLoggerTestLogVerbosity, qx::verbosity::detailed, "Verbosity check 8");
+    QX_LOG_C(CatLoggerTestLogVerbosity, qx::verbosity::verbose, "Verbosity check 9");
+    QX_LOG_C(CatLoggerTestLogVerbosity, qx::verbosity::log, "Verbosity check 10");
+    QX_LOG_C(CatLoggerTestLogVerbosity, qx::verbosity::important, "Verbosity check 11");
+    QX_LOG_C(CatLoggerTestLogVerbosity, qx::verbosity::warning, "Verbosity check 12");
+    QX_LOG_C(CatLoggerTestLogVerbosity, qx::verbosity::error, "Verbosity check 13");
+    QX_LOG_C(CatLoggerTestLogVerbosity, qx::verbosity::critical, "Verbosity check 14");
 
     this->m_CheckContent = [](std::span<const qx::string_view> lines)
     {
@@ -464,11 +521,17 @@ TYPED_TEST(logger_test, verbosity)
         TestFixture::check_line(*it++, qx::verbosity::error, CatLoggerTestFileWide, QXT("Verbosity check 6"));
         TestFixture::check_line(*it++, qx::verbosity::critical, CatLoggerTestFileWide, QXT("Verbosity check 7"));
 
+        TestFixture::check_line(*it++, qx::verbosity::log, CatLoggerTestLogVerbosity, QXT("Verbosity check 10"));
+        TestFixture::check_line(*it++, qx::verbosity::important, CatLoggerTestLogVerbosity, QXT("Verbosity check 11"));
+        TestFixture::check_line(*it++, qx::verbosity::warning, CatLoggerTestLogVerbosity, QXT("Verbosity check 12"));
+        TestFixture::check_line(*it++, qx::verbosity::error, CatLoggerTestLogVerbosity, QXT("Verbosity check 13"));
+        TestFixture::check_line(*it++, qx::verbosity::critical, CatLoggerTestLogVerbosity, QXT("Verbosity check 14"));
+
         EXPECT_EQ(it, lines.end());
     };
 }
 
-TYPED_TEST(logger_test, formatting)
+TYPED_TEST(logger_output_test, formatting)
 {
     QX_LOG(qx::verbosity::log, "Hello {}", QXT("world"));
     QX_LOG(qx::verbosity::log, "The {} is {}", QXT("answer"), 42);
@@ -482,4 +545,79 @@ TYPED_TEST(logger_test, formatting)
 
         EXPECT_EQ(it, lines.end());
     };
+}
+
+TYPED_TEST(logger_output_test, error_context)
+{
+    auto& logger = qx::get_logger();
+    logger.add_stream(qx::error_context_stream());
+    logger.register_category(CatErrorContextTest, { .eRuntimeVerbosity = qx::verbosity::log });
+
+    qx::error_context _(qx::verbosity::detailed);
+
+    QX_LOG_C(CatErrorContextTest, qx::verbosity::detailed, "Check 1");
+    QX_LOG_C(CatErrorContextTest, qx::verbosity::verbose, "Check 2");
+    QX_LOG_C(CatErrorContextTest, qx::verbosity::log, "Check 3");
+    QX_LOG_C(CatErrorContextTest, qx::verbosity::important, "Check 4");
+    QX_LOG_C(CatErrorContextTest, qx::verbosity::warning, "Check 5");
+    QX_LOG_C(CatErrorContextTest, qx::verbosity::error, "Check 6");
+    QX_LOG_C(CatErrorContextTest, qx::verbosity::critical, "Check 7");
+
+    QX_EXPECT_C(false, CatErrorContextTest);
+
+    this->m_CheckContent = [](std::span<const qx::string_view> lines)
+    {
+        auto it = lines.begin();
+
+        TestFixture::check_line(*it++, qx::verbosity::log, CatErrorContextTest, QXT("Check 3"));
+        TestFixture::check_line(*it++, qx::verbosity::important, CatErrorContextTest, QXT("Check 4"));
+        TestFixture::check_line(*it++, qx::verbosity::warning, CatErrorContextTest, QXT("Check 5"));
+        TestFixture::check_line(*it++, qx::verbosity::error, CatErrorContextTest, QXT("Check 6"));
+        TestFixture::check_line(*it++, qx::verbosity::critical, CatErrorContextTest, QXT("Check 7"));
+        TestFixture::check_line(*it++, qx::verbosity::error, CatErrorContextTest, QXT("\\[false\\] "));
+        TestFixture::check_line(*it++, qx::verbosity::log, CatDefault, QXT(""));
+        EXPECT_EQ(*it++, QXT("Error context start"));
+        TestFixture::check_line(*it++, qx::verbosity::detailed, CatErrorContextTest, QXT("Check 1"));
+        TestFixture::check_line(*it++, qx::verbosity::verbose, CatErrorContextTest, QXT("Check 2"));
+        TestFixture::check_line(*it++, qx::verbosity::log, CatErrorContextTest, QXT("Check 3"));
+        TestFixture::check_line(*it++, qx::verbosity::important, CatErrorContextTest, QXT("Check 4"));
+        TestFixture::check_line(*it++, qx::verbosity::warning, CatErrorContextTest, QXT("Check 5"));
+        TestFixture::check_line(*it++, qx::verbosity::error, CatErrorContextTest, QXT("Check 6"));
+        TestFixture::check_line(*it++, qx::verbosity::critical, CatErrorContextTest, QXT("Check 7"));
+        TestFixture::check_line(*it++, qx::verbosity::error, CatErrorContextTest, QXT("\\[false\\] "));
+        EXPECT_EQ(*it++, QXT("Error context end"));
+
+        EXPECT_EQ(it, lines.end());
+    };
+}
+
+TEST(logger_test, streams)
+{
+    auto& logger = qx::get_logger();
+    logger.reset();
+
+    qx::cout_logger_stream* pStream = logger.get_stream<qx::cout_logger_stream>();
+    EXPECT_FALSE(pStream);
+
+    logger.add_stream(qx::cout_logger_stream());
+    pStream = logger.get_stream<qx::cout_logger_stream>();
+    EXPECT_TRUE(pStream);
+
+    logger.add_stream(qx::cout_logger_stream());
+    pStream = logger.get_stream<qx::cout_logger_stream>();
+    EXPECT_TRUE(pStream);
+    auto streams = logger.get_streams<qx::cout_logger_stream>();
+    EXPECT_EQ(std::distance(streams.begin(), streams.end()), 2);
+
+    logger.remove_streams<qx::fwrite_logger_stream>();
+    pStream = logger.get_stream<qx::cout_logger_stream>();
+    EXPECT_TRUE(pStream);
+    streams = logger.get_streams<qx::cout_logger_stream>();
+    EXPECT_EQ(std::distance(streams.begin(), streams.end()), 2);
+
+    logger.remove_streams<qx::cout_logger_stream>();
+    pStream = logger.get_stream<qx::cout_logger_stream>();
+    EXPECT_FALSE(pStream);
+    streams = logger.get_streams<qx::cout_logger_stream>();
+    EXPECT_EQ(std::distance(streams.begin(), streams.end()), 0);
 }

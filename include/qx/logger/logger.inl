@@ -10,6 +10,17 @@
 namespace qx
 {
 
+namespace details
+{
+
+template<sbo_poly_assignable_c<base_logger_stream> stream_t>
+static constexpr auto logger_stream_filter = [](const logger::logger_sbo& stream)
+{
+    return stream->is<stream_t>();
+};
+
+} // namespace details
+
 inline logger::logger() noexcept
 {
     add_stream(fwrite_logger_stream());
@@ -27,6 +38,36 @@ inline void logger::add_stream(stream_t stream) noexcept
     m_Streams.emplace_back(std::move(stream));
 }
 
+template<sbo_poly_assignable_c<base_logger_stream> stream_t>
+inline stream_t* logger::get_stream() noexcept
+{
+    auto it = std::ranges::find_if(m_Streams, details::logger_stream_filter<stream_t>);
+    return it != m_Streams.end() ? static_cast<stream_t*>(&it->get()) : nullptr;
+}
+
+template<sbo_poly_assignable_c<base_logger_stream> stream_t>
+inline auto logger::get_streams() noexcept
+{
+    return m_Streams | std::views::filter(details::logger_stream_filter<stream_t>)
+           | std::views::transform(
+               [](logger_sbo& stream)
+               {
+                   return static_cast<stream_t*>(&stream.get());
+               });
+}
+
+inline std::shared_mutex& logger::get_streams_mutex() noexcept
+{
+    return m_StreamsMutex;
+}
+
+template<sbo_poly_assignable_c<base_logger_stream> stream_t>
+inline size_t logger::remove_streams() noexcept
+{
+    std::unique_lock _(m_StreamsMutex);
+    return std::erase_if(m_Streams, details::logger_stream_filter<stream_t>);
+}
+
 inline void logger::register_category(const category& category, category_data data) noexcept
 {
     register_category(category.get_name(), std::move(data));
@@ -38,17 +79,26 @@ inline void logger::register_category(string_view svCategoryName, category_data 
     m_RegisteredCategories.emplace(svCategoryName, std::move(data));
 }
 
+inline void logger::set_default_formatter(format_function_pointer pFormatter) noexcept
+{
+    m_DefaultFormatFunction = pFormatter;
+}
+
 inline void logger::log(
-    const category&          category,
-    verbosity                eVerbosity,
-    string_view              svFile,
-    string_view              svFunction,
-    int                      nLine,
-    logger_string_pool::item message)
+    const category&                       category,
+    verbosity                             eVerbosity,
+    std::thread::id                       threadId,
+    std::chrono::system_clock::time_point messageTime,
+    string_view                           svFile,
+    string_view                           svFunction,
+    int                                   nLine,
+    logger_string_pool::item              message)
 {
     string sMessage = std::move(message.sValue);
 
-    if (log_required(category, eVerbosity))
+    const flags<message_necessity_type> eMessageNecessity =
+        get_message_necessity_type(category, eVerbosity, threadId, messageTime, svFile, svFunction, nLine);
+    if (eMessageNecessity != message_necessity_type::not_required)
     {
         bool bFormatted = false;
         {
@@ -59,20 +109,51 @@ inline void logger::log(
                 const category_data& data = itRegisteredCategory->second;
                 if (data.formatFunction)
                 {
-                    sMessage =
-                        data.formatFunction(category, eVerbosity, svFile, svFunction, nLine, std::move(sMessage));
+                    sMessage = data.formatFunction(
+                        category,
+                        eVerbosity,
+                        threadId,
+                        messageTime,
+                        svFile,
+                        svFunction,
+                        nLine,
+                        std::move(sMessage));
+
                     bFormatted = true;
                 }
             }
         }
 
         if (!bFormatted)
-            sMessage = default_formatter(category, eVerbosity, svFile, svFunction, nLine, std::move(sMessage));
+        {
+            sMessage = m_DefaultFormatFunction.load()(
+                category,
+                eVerbosity,
+                threadId,
+                messageTime,
+                svFile,
+                svFunction,
+                nLine,
+                std::move(sMessage));
+        }
 
         {
             std::shared_lock _(m_StreamsMutex);
             for (auto& stream : m_Streams)
-                stream->log(category, eVerbosity, sMessage);
+            {
+                if (eMessageNecessity != message_necessity_type::one_of_streams_requires
+                    || stream->log_unconditionally_required(
+                        category,
+                        eVerbosity,
+                        threadId,
+                        messageTime,
+                        svFile,
+                        svFunction,
+                        nLine))
+                {
+                    stream->log(category, eVerbosity, threadId, messageTime, svFile, svFunction, nLine, sMessage);
+                }
+            }
         }
     }
 
@@ -90,107 +171,68 @@ inline void logger::reset() noexcept
 {
     flush();
 
-    std::unique_lock _(m_StreamsMutex);
-    m_Streams.clear();
-}
-
-inline bool logger::log_required(const category& category, verbosity eVerbosity) const noexcept
-{
-    std::shared_lock _(m_RegisteredCategoriesMutex);
-
-    if (auto itRegisteredCategory = m_RegisteredCategories.find(category.get_name());
-        itRegisteredCategory != m_RegisteredCategories.end())
     {
-        const category_data& data = itRegisteredCategory->second;
-        return eVerbosity >= data.eRuntimeVerbosity;
+        std::unique_lock _(m_StreamsMutex);
+        m_Streams.clear();
     }
 
-    return eVerbosity >= verbosity::log;
+    {
+        std::unique_lock _(m_RegisteredCategoriesMutex);
+        m_RegisteredCategories.clear();
+    }
+
+    m_DefaultFormatFunction = format_message_qx;
+}
+
+inline flags<logger::message_necessity_type> logger::get_message_necessity_type(
+    const category&                       category,
+    verbosity                             eVerbosity,
+    std::thread::id                       threadId,
+    std::chrono::system_clock::time_point messageTime,
+    string_view                           svFile,
+    string_view                           svFunction,
+    int                                   nLine) const noexcept
+{
+    flags<message_necessity_type> eMessageNecessity;
+    {
+        std::shared_lock _(m_StreamsMutex);
+        const bool       bSomeStreamRequires = std::ranges::any_of(
+            m_Streams,
+            [&category, eVerbosity, threadId, messageTime, svFile, svFunction, nLine](const auto& stream)
+            {
+                return stream->log_unconditionally_required(
+                    category,
+                    eVerbosity,
+                    threadId,
+                    messageTime,
+                    svFile,
+                    svFunction,
+                    nLine);
+            });
+        if (bSomeStreamRequires)
+            eMessageNecessity |= message_necessity_type::one_of_streams_requires;
+    }
+
+    {
+        std::shared_lock _(m_RegisteredCategoriesMutex);
+        if (auto itRegisteredCategory = m_RegisteredCategories.find(category.get_name());
+            itRegisteredCategory != m_RegisteredCategories.end())
+        {
+            const category_data& data = itRegisteredCategory->second;
+            if (eVerbosity >= data.eRuntimeVerbosity)
+                eMessageNecessity |= message_necessity_type::category_verbosity;
+        }
+    }
+
+    if (eVerbosity >= verbosity::log)
+        eMessageNecessity |= message_necessity_type::default_verbosity;
+
+    return eMessageNecessity;
 }
 
 inline logger::logger_string_pool* logger::_get_string_pool() noexcept
 {
     return &m_StringsPool;
-}
-
-inline string logger::default_formatter(
-    const category& category,
-    verbosity       eVerbosity,
-    string_view     svFile,
-    string_view     svFunction,
-    int             nLine,
-    string          sMessage) noexcept
-{
-    // avoid extra allocation, insert prefix inplace
-
-    const string_view svVerbosityPrefix = get_verbosity_prefix(eVerbosity);
-    const string_view svCategory        = category.get_name();
-    const bool        bAddCategory      = !svCategory.empty() && svCategory != CatDefault.get_name();
-
-    constexpr size_t nTimeSize     = 19;
-    const size_t     nCategorySize = bAddCategory ? svCategory.size() + 2 : 0;
-    const size_t     nPrefixSize   = svVerbosityPrefix.size() + nTimeSize + 2 + nCategorySize;
-
-    sMessage.insert(0, QXT("\0"), nPrefixSize);
-    size_t nPos = 0;
-
-    std::memcpy(
-        sMessage.data() + nPos,
-        svVerbosityPrefix.data(),
-        svVerbosityPrefix.size() * sizeof(string_view::value_type));
-    nPos += svVerbosityPrefix.size();
-
-    append_time_string(sMessage.data() + nPos, QXT('.'), QXT(':'));
-    nPos += nTimeSize;
-
-    sMessage[nPos] = QXT(']');
-    nPos += 1;
-
-    if (bAddCategory)
-    {
-        sMessage[nPos] = QXT('[');
-        nPos += 1;
-
-        std::memcpy(sMessage.data() + nPos, svCategory.data(), svCategory.size() * sizeof(string::value_type));
-        nPos += svCategory.size();
-
-        sMessage[nPos] = QXT(']');
-        nPos += 1;
-    }
-
-    sMessage[nPos] = QXT(' ');
-    nPos += 1;
-
-    sMessage += QXT('\n');
-
-    return sMessage;
-}
-
-constexpr string_view logger::get_verbosity_prefix(verbosity eVerbosity) noexcept
-{
-    switch (eVerbosity)
-    {
-    case verbosity::detailed:
-        return QXT("[D][");
-
-    case verbosity::verbose:
-        return QXT("[V][");
-
-    case verbosity::important:
-        return QXT("[I][");
-
-    case verbosity::warning:
-        return QXT("[W][");
-
-    case verbosity::error:
-        return QXT("[E][");
-
-    case verbosity::critical:
-        return QXT("[C][");
-
-    default:
-        return QXT("   [");
-    }
 }
 
 } // namespace qx
