@@ -25,6 +25,8 @@ namespace qx
 **/
 class fwrite_logger_stream : public base_standard_streams_stream
 {
+    QX_RTTI_CLASS(fwrite_logger_stream, base_standard_streams_stream);
+
 public:
     /**
         @brief fwrite_logger_stream object constructor
