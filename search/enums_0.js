@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['log_5ffile_5fpolicy_1710',['log_file_policy',['../base__file__logger__stream_8h.html#aaab6d2d26ae57b1521451921e1273220',1,'qx']]]
+  ['log_5ffile_5fpolicy_1695',['log_file_policy',['../base__file__logger__stream_8h.html#aaab6d2d26ae57b1521451921e1273220',1,'qx']]]
 ];
