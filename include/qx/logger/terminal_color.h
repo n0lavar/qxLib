@@ -79,9 +79,11 @@ public:
     static constexpr terminal_color reset() noexcept;
 
     /**
-        @brief Write terminal color to the specified stream
-        @param pStream - stream (std::stdout or std::stderr)
-    **/
+        @brief  Write terminal color to the specified stream
+        @tparam char_t  - char type
+        @param  pStream - stream (std::stdout or std::stderr)
+        **/
+    template<class char_t>
     void write(FILE* pStream) const;
 
     /**

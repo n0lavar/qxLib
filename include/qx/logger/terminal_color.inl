@@ -58,20 +58,41 @@ constexpr terminal_color terminal_color::reset() noexcept
     return terminal_color { type::reset };
 }
 
+template<class char_t>
 inline void terminal_color::write(FILE* pStream) const
 {
+    auto fprintf_wrapper = []<class... args_t>(args_t&&... args)
+    {
+        QX_PUSH_SUPPRESS_MSVC_WARNINGS(4774);
+        if constexpr (std::is_same_v<char_t, char>)
+            std::fprintf(std::forward<args_t>(args)...);
+        else
+            std::fwprintf(std::forward<args_t>(args)...);
+        QX_POP_SUPPRESS_WARNINGS();
+    };
+
     switch (m_eType)
     {
-    case terminal_color::type::font:
-        std::fprintf(pStream, "\033[38;2;%d;%d;%dm", m_Color.r_dec(), m_Color.g_dec(), m_Color.b_dec());
+    case type::font:
+        fprintf_wrapper(
+            pStream,
+            QX_STR_PREFIX(char_t, "\033[38;2;%d;%d;%dm"),
+            m_Color.r_dec(),
+            m_Color.g_dec(),
+            m_Color.b_dec());
         break;
 
-    case terminal_color::type::back:
-        std::fprintf(pStream, "\033[48;2;%d;%d;%dm", m_Color.r_dec(), m_Color.g_dec(), m_Color.b_dec());
+    case type::back:
+        fprintf_wrapper(
+            pStream,
+            QX_STR_PREFIX(char_t, "\033[48;2;%d;%d;%dm"),
+            m_Color.r_dec(),
+            m_Color.g_dec(),
+            m_Color.b_dec());
         break;
 
-    case terminal_color::type::reset:
-        std::fprintf(pStream, "\033[0m");
+    case type::reset:
+        fprintf_wrapper(pStream, QX_STR_PREFIX(char_t, "\033[0m"));
         break;
     }
 }

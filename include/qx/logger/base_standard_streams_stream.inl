@@ -60,39 +60,43 @@ inline void base_standard_streams_stream::do_log(
 
         struct logger_color_range
         {
-            std::pair<size_t, size_t> range { 0, 0 };
-            color                     rangeColor = color::white();
+            string_view svPart;
+            color       partColor = color::white();
         };
 
-        // currently only one color range (category name) is supported
-        // loop is left, so it can be extended later if needed
-        std::array<logger_color_range, 1> colors;
-        size_t                            colorsCount = 0;
+        std::array<logger_color_range, 16> colors;
+        size_t                             nColorsCount = 0;
 
-        if (auto nPos = svMessage.find(category.get_name()); nPos != string::npos)
+        if (const size_t nPos = svMessage.find(category.get_name()); nPos != string::npos)
         {
-            colors[0]   = { .range = { nPos, nPos + category.get_name().size() }, .rangeColor = category.get_color() };
-            colorsCount = 1;
+            colors[0] = { .svPart = { svMessage.begin(), svMessage.begin() + nPos }, .partColor = lineColor };
+            ++nColorsCount;
+
+            colors[1] = { .svPart = { svMessage.begin() + nPos, svMessage.begin() + nPos + category.get_name().size() },
+                          .partColor = category.get_color() };
+            ++nColorsCount;
+
+            // exclude \n
+            colors[2] = { .svPart    = { svMessage.begin() + nPos + category.get_name().size(),
+                                         svMessage.begin() + svMessage.size() - 1 },
+                          .partColor = lineColor };
+            ++nColorsCount;
+        }
+        else
+        {
+            // exclude \n
+            colors[0] = { .svPart    = { svMessage.begin(), svMessage.begin() + svMessage.size() - 1 },
+                          .partColor = lineColor };
+            ++nColorsCount;
         }
 
-        cout_colorized(
-            eVerbosity,
-            string_view(svMessage.data(), colorsCount == 0 ? svMessage.size() : colors.front().range.first),
-            lineColor);
-
-        for (size_t i = 0; i < colorsCount; ++i)
+        for (size_t i = 0; i < nColorsCount; ++i)
         {
-            cout_colorized(
-                eVerbosity,
-                string_view(svMessage.data() + colors[i].range.first, colors[i].range.second - colors[i].range.first),
-                colors[i].rangeColor);
-            cout_colorized(
-                eVerbosity,
-                string_view(
-                    svMessage.data() + colors[i].range.second,
-                    (i + 1 < colorsCount ? colors[i + 1].range.first : svMessage.size()) - colors[i].range.second),
-                lineColor);
+            cout_colorized(eVerbosity, colors[i].svPart, colors[i].partColor);
         }
+
+        // cout \n
+        cout_common(eVerbosity, { &svMessage.back(), 1 });
     }
     else
     {

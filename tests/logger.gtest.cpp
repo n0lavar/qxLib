@@ -76,6 +76,11 @@ namespace traits
 struct base_traits
 {
     static constexpr bool bResetTestOnStart = true;
+
+    static qx::string get_color_regex(bool bOptional = false)
+    {
+        return {};
+    }
 };
 
 struct base_file : base_traits
@@ -338,6 +343,50 @@ struct fwrite : base_cout
     }
 };
 
+struct cout_colors : base_cout
+{
+    static qx::string get_color_regex(bool bOptional = false)
+    {
+        return qx::string(QXT("(\x1B(?:[@-Z\\-_]|\\[[0-?]*[ -\\/]*[@-~]))")) + (bOptional ? QXT("?") : QXT(""));
+    }
+
+    static void set_up()
+    {
+        // On POSIX, cout outputs always use char
+#if !QX_WIN
+        s_bCharOutput = true;
+#endif
+
+        base_cout::set_up();
+        qx::logger_singleton::get_instance().get_logger().add_stream(
+            qx::cout_logger_stream(qx::cout_logger_stream::config { { .bUseColors = true }, false, false }));
+    }
+};
+
+struct fwrite_colors : base_cout
+{
+    static qx::string get_color_regex(bool bOptional = false)
+    {
+#if QX_WIN
+        return qx::string(QXT("(\x1B(?:[@-Z\\-_]|\\[[0-?]*[ -\\/]*[@-~]))")) + (bOptional ? QXT("?") : QXT(""));
+#else
+        // linux (?) doesn't capture colors in fwrite stream
+        return {};
+#endif
+    }
+
+    static void set_up()
+    {
+#if !QX_WIN
+        s_bCharOutput = false;
+#endif
+
+        base_cout::set_up();
+        qx::logger_singleton::get_instance().get_logger().add_stream(
+            qx::fwrite_logger_stream(qx::fwrite_logger_stream::config({ .bUseColors = true })));
+    }
+};
+
 struct default_constructed : base_cout
 {
     static constexpr bool bResetTestOnStart = false;
@@ -356,6 +405,7 @@ struct default_constructed : base_cout
 } // namespace traits
 
 using implementations_type = ::testing::Types<
+    traits::default_constructed,
     traits::ostream_default_buffer,
     traits::ostream,
     traits::fopen_default_buffer,
@@ -364,7 +414,8 @@ using implementations_type = ::testing::Types<
     traits::mapping,
     traits::cout,
     traits::fwrite,
-    traits::default_constructed>;
+    traits::cout_colors,
+    traits::fwrite_colors>;
 
 template<class traits_t>
 class logger_output_test : public ::testing::Test
@@ -378,6 +429,7 @@ protected:
         qx::get_logger().register_category(CatLoggerTestFileWide, { .eRuntimeVerbosity = qx::verbosity::detailed });
         traits_t::set_up();
     }
+
     virtual void TearDown() override
     {
         qx::get_logger().flush();
@@ -398,9 +450,10 @@ protected:
         qx::string_view     svLine,
         qx::verbosity       eVerbosity,
         const qx::category& category,
-        qx::string_view     svMessage)
+        qx::string_view     svMessage,
+        bool                bOptionalColor = false)
     {
-        qx::string sPattern;
+        qx::string sPattern = traits_t::get_color_regex(bOptionalColor); // line color
 
         // verbosity
         switch (eVerbosity)
@@ -445,13 +498,18 @@ protected:
         if (category != CatDefault)
         {
             sPattern += QXT("\\[");
+            sPattern += traits_t::get_color_regex(bOptionalColor); // reset
+            sPattern += traits_t::get_color_regex(bOptionalColor); // category color
             sPattern += category.get_name();
+            sPattern += traits_t::get_color_regex(bOptionalColor); // reset
+            sPattern += traits_t::get_color_regex(bOptionalColor); // line color
             sPattern += QXT("\\]");
         }
 
         // message
         sPattern += QXT(" ");
         sPattern += svMessage;
+        sPattern += traits_t::get_color_regex(true); // reset (can be absent in multiline log messages)
 
         std::match_results<qx::string::const_pointer> match;
         auto                                          regex = std::basic_regex(sPattern.data());
@@ -577,15 +635,15 @@ TYPED_TEST(logger_output_test, error_context)
         TestFixture::check_line(*it++, qx::verbosity::error, CatErrorContextTest, QXT("\\[false\\] "));
         TestFixture::check_line(*it++, qx::verbosity::log, CatDefault, QXT(""));
         EXPECT_EQ(*it++, QXT("Error context start"));
-        TestFixture::check_line(*it++, qx::verbosity::detailed, CatErrorContextTest, QXT("Check 1"));
-        TestFixture::check_line(*it++, qx::verbosity::verbose, CatErrorContextTest, QXT("Check 2"));
-        TestFixture::check_line(*it++, qx::verbosity::log, CatErrorContextTest, QXT("Check 3"));
-        TestFixture::check_line(*it++, qx::verbosity::important, CatErrorContextTest, QXT("Check 4"));
-        TestFixture::check_line(*it++, qx::verbosity::warning, CatErrorContextTest, QXT("Check 5"));
-        TestFixture::check_line(*it++, qx::verbosity::error, CatErrorContextTest, QXT("Check 6"));
-        TestFixture::check_line(*it++, qx::verbosity::critical, CatErrorContextTest, QXT("Check 7"));
-        TestFixture::check_line(*it++, qx::verbosity::error, CatErrorContextTest, QXT("\\[false\\] "));
-        EXPECT_EQ(*it++, QXT("Error context end"));
+        TestFixture::check_line(*it++, qx::verbosity::detailed, CatErrorContextTest, QXT("Check 1"), true);
+        TestFixture::check_line(*it++, qx::verbosity::verbose, CatErrorContextTest, QXT("Check 2"), true);
+        TestFixture::check_line(*it++, qx::verbosity::log, CatErrorContextTest, QXT("Check 3"), true);
+        TestFixture::check_line(*it++, qx::verbosity::important, CatErrorContextTest, QXT("Check 4"), true);
+        TestFixture::check_line(*it++, qx::verbosity::warning, CatErrorContextTest, QXT("Check 5"), true);
+        TestFixture::check_line(*it++, qx::verbosity::error, CatErrorContextTest, QXT("Check 6"), true);
+        TestFixture::check_line(*it++, qx::verbosity::critical, CatErrorContextTest, QXT("Check 7"), true);
+        TestFixture::check_line(*it++, qx::verbosity::error, CatErrorContextTest, QXT("\\[false\\] "), true);
+        EXPECT_TRUE((it++)->starts_with(QXT("Error context end"))); // could have a color mark at the end
 
         EXPECT_EQ(it, lines.end());
     };
@@ -620,4 +678,11 @@ TEST(logger_test, streams)
     EXPECT_FALSE(pStream);
     streams = logger.get_streams<qx::cout_logger_stream>();
     EXPECT_EQ(std::distance(streams.begin(), streams.end()), 0);
+}
+
+TEST(logger_test, terminal_colors)
+{
+    // just output all the colors so we can visually see that it works
+    // (and improve tests coverage)
+    qx::terminal_color::test_colors();
 }

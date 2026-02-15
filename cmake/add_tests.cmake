@@ -57,7 +57,7 @@ macro(add_tests
             add_test(${_target} ${_target})
             set_target_properties (${_target} PROPERTIES 
                 FOLDER "${_ide_folder}"
-                VS_DEBUGGER_COMMAND_ARGUMENTS "$<$<BOOL:${TEST_DEBUG_BREAKS}>:--gtest_break_on_failure>"
+                VS_DEBUGGER_COMMAND_ARGUMENTS "$<$<BOOL:${TEST_DEBUG_BREAKS}>:--gtest_break_on_failure> --gtest_catch_exceptions=0"
             )
         endforeach()
     endif()
