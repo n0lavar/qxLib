@@ -46,3 +46,7 @@ qxLib is available under the MIT License. See LICENSE.txt.
 
 qxLib was mainly written and is maintained by Nick Khrapov  
 (nick.khrapov@gmail.com). See the git commit log for other authors.
+
+## SAST Tools
+
+[PVS-Studio](https://pvs-studio.com/en/pvs-studio/?utm_source=website&utm_medium=github&utm_campaign=open_source) - static analyzer for C, C++, C#, and Java code.
