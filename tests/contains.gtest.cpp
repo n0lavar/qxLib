@@ -8,11 +8,11 @@
 **/
 #include <common.h>
 
-//V_EXCLUDE_PATH *contains.gtest.cpp
-
 #include <qx/algo/contains.h>
 
 #include <array>
+
+//V_EXCLUDE_PATH *.gtest.cpp
 
 TEST(contains, contains)
 {

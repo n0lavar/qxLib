@@ -8,14 +8,14 @@
 **/
 #include <common.h>
 
-//V_EXCLUDE_PATH *threads_shared.cpp
-
 #include <qx/smart_ptr/threads_shared.h>
 
 #include <chrono>
 #include <list>
 #include <random>
 #include <thread>
+
+//V_EXCLUDE_PATH *.gtest.cpp
 
 struct STestStruct
 {

@@ -8,8 +8,6 @@
 **/
 #include <common.h>
 
-//V_EXCLUDE_PATH *add.gtest.cpp
-
 #include <qx/algo/add.h>
 
 #include <deque>

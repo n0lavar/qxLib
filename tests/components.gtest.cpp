@@ -10,13 +10,13 @@
 
 #include <common.h>
 
-//V_EXCLUDE_PATH *components.gtest.cpp
-
 #include <qx/containers/components.h>
 
 #include <algorithm>
 #include <array>
 #include <string>
+
+//V_EXCLUDE_PATH *.gtest.cpp
 
 class ABaseTestComponent : public qx::rtti_root<>
 {

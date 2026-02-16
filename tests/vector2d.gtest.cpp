@@ -8,12 +8,12 @@
 **/
 #include <common.h>
 
-//V_EXCLUDE_PATH *vector2d.gtest.cpp
-
 #include <qx/containers/vector2d.h>
 
 #include <algorithm>
 #include <array>
+
+//V_EXCLUDE_PATH *.gtest.cpp
 
 TEST(TestQxVector2d, constructing)
 {

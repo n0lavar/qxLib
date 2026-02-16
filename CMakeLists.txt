@@ -15,6 +15,7 @@ include(cmake/set_target_options.cmake)
 include(cmake/add_tests.cmake)
 include(cmake/add_benchmarks.cmake)
 
+set_source_files_properties(.pvsconfig PROPERTIES HEADER_FILE_ONLY TRUE)
 
 # ================================================================
 # Collect sources
@@ -23,10 +24,11 @@ file(GLOB_RECURSE FILES_HEADERS ${CMAKE_CURRENT_SOURCE_DIR}/include/qx/*.h)
 file(GLOB_RECURSE FILES_SOURCES ${CMAKE_CURRENT_SOURCE_DIR}/include/qx/*.cpp)
 file(GLOB_RECURSE FILES_INLINES ${CMAKE_CURRENT_SOURCE_DIR}/include/qx/*.inl)
 file(GLOB_RECURSE FILES_NATVIS  ${CMAKE_CURRENT_SOURCE_DIR}/include/qx/*.natvis)
+set(PVSCONFIG_FILE "${CMAKE_CURRENT_SOURCE_DIR}/include/qx/.pvsconfig")
 
 source_group(
     TREE ${CMAKE_CURRENT_SOURCE_DIR}/include/qx
-    FILES ${FILES_HEADERS} ${FILES_SOURCES} ${FILES_INLINES} ${FILES_NATVIS}
+    FILES ${FILES_HEADERS} ${FILES_SOURCES} ${FILES_INLINES} ${FILES_NATVIS} ${PVSCONFIG_FILE}
 )
 
 
@@ -41,7 +43,7 @@ find_package(GLM)
 find_package(GTest MODULE)
 find_package(benchmark PATHS ../external/benchmark/build ../benchmark/build)
 
-add_library(qxLib ${FILES_HEADERS} ${FILES_SOURCES} ${FILES_INLINES} ${FILES_NATVIS})
+add_library(qxLib ${FILES_HEADERS} ${FILES_SOURCES} ${FILES_INLINES} ${FILES_NATVIS} ${PVSCONFIG_FILE})
 
 macro(qx_setup_test_target _target)
     target_include_directories(${_target} PRIVATE

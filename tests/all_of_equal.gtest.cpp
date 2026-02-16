@@ -8,8 +8,6 @@
 **/
 #include <common.h>
 
-//V_EXCLUDE_PATH *all_of_equal.gtest.cpp
-
 #include <qx/algo/all_of_equal.h>
 
 TEST(all_of_equal, main)

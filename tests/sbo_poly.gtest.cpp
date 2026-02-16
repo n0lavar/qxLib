@@ -8,9 +8,9 @@
 **/
 #include <common.h>
 
-//V_EXCLUDE_PATH *sbo_poly.gtest.cpp
-
 #include <qx/sbo/sbo_poly.h>
+
+//V_EXCLUDE_PATH *.gtest.cpp
 
 static int k_nObjectsCounter             = 0;
 static int k_nDerivedSmallObjectsCounter = 0;

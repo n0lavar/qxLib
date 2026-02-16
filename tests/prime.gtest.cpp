@@ -8,9 +8,9 @@
 **/
 #include <common.h>
 
-//V_EXCLUDE_PATH *prime.gtest.cpp
-
 #include <qx/math/prime.h>
+
+//V_EXCLUDE_PATH *.gtest.cpp
 
 TEST(prime, find_prime_factors)
 {

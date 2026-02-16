@@ -10,8 +10,6 @@
 
 #include <qx/math/float_compare.h>
 
-//V_EXCLUDE_PATH *float_compare.gtest.cpp
-
 // ----------------------------- qx::epsilon_equal -----------------------------
 
 static_assert(qx::epsilon_equal(0.5, 0.41, 0.1));

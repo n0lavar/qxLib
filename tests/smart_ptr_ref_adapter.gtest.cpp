@@ -11,8 +11,6 @@
 #include <qx/smart_ptr/shared_ref.h>
 #include <qx/smart_ptr/unique_ref.h>
 
-//V_EXCLUDE_PATH *smart_ptr_ref_adapter.gtest.cpp
-
 class test_class
 {
 public:

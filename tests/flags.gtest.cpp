@@ -1,8 +1,8 @@
 #include <common.h>
 
-//V_EXCLUDE_PATH *flags.gtest.cpp
-
 #include <qx/containers/flags.h>
+
+//V_EXCLUDE_PATH *.gtest.cpp
 
 enum class EFlags
 {

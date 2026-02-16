@@ -8,8 +8,6 @@
 **/
 #include <common.h>
 
-//V_EXCLUDE_PATH *unique_objects_pool.gtest.cpp
-
 #include <qx/containers/unique_objects_pool.h>
 #include <string>
 

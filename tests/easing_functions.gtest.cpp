@@ -8,10 +8,10 @@
 **/
 #include <common.h>
 
-//V_EXCLUDE_PATH *easing_functions.gtest.cpp
-
 #include <qx/easing/easing_functions.h>
 #include <qx/math/float_compare.h>
+
+//V_EXCLUDE_PATH *.gtest.cpp
 
 template<class T>
 class TestEasingFunctions : public ::testing::Test

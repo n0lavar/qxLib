@@ -8,8 +8,6 @@
 **/
 #include <common.h>
 
-//V_EXCLUDE_PATH *iterate_several_containers.gtest.cpp
-
 #include <qx/algo/iterate_several_containers.h>
 
 #include <array>

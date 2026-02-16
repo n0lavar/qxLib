@@ -7,8 +7,6 @@
 
 **/
 
-//V_EXCLUDE_PATH *is_array_of_t.gtest.cpp
-
 #include <qx/meta/is_array_of_t.h>
 
 #include <string>

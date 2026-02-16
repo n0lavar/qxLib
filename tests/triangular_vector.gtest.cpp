@@ -8,11 +8,10 @@
 **/
 #include <common.h>
 
-//V_EXCLUDE_PATH *triangular_vector.gtest.cpp
-
 #include <qx/containers/triangular_vector.h>
 #include <algorithm>
 
+//V_EXCLUDE_PATH *.gtest.cpp
 
 TEST(TestQxTriangularVector, constructing)
 {

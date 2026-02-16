@@ -8,8 +8,6 @@
 **/
 #include <common.h>
 
-//V_EXCLUDE_PATH *sbo_bytes.gtest.cpp
-
 #include <qx/sbo/sbo_bytes.h>
 
 

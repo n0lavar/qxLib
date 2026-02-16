@@ -8,14 +8,14 @@
 **/
 #include <common.h>
 
-//V_EXCLUDE_PATH *rtti.gtest.cpp
-
 #include <qx/containers/string/string_utils.h>
 #include <qx/rtti/rtti.h>
 #include <qx/rtti/rtti_cast.h>
 
 #include <memory>
 #include <source_location>
+
+//V_EXCLUDE_PATH *.gtest.cpp
 
 class CRttiBase : public qx::rtti_root<>
 {

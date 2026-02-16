@@ -8,11 +8,11 @@
 **/
 #include <common.h>
 
-//V_EXCLUDE_PATH *state.gtest.cpp
-
 #include <qx/state.h>
 
 #include <unordered_map>
+
+//V_EXCLUDE_PATH *.gtest.cpp
 
 class CNonZeroInt
 {

@@ -8,8 +8,6 @@
 **/
 #include <common.h>
 
-//V_EXCLUDE_PATH *concepts.gtest.cpp
-
 #include <qx/meta/concepts.h>
 
 #include <deque>

@@ -8,12 +8,12 @@
 **/
 #include <common.h>
 
-//V_EXCLUDE_PATH *observer.gtest.cpp
-
 #include <qx/patterns/observer.h>
 
 #include <memory>
 #include <string>
+
+//V_EXCLUDE_PATH *.gtest.cpp
 
 class TestObserver
 {

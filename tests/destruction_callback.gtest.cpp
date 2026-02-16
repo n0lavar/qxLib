@@ -9,8 +9,6 @@
 
 #include <common.h>
 
-//V_EXCLUDE_PATH *destruction_callback.gtest.cpp
-
 #include <qx/destruction_callback.h>
 
 TEST(destruction_callback, main)

@@ -8,9 +8,9 @@
 **/
 #include <common.h>
 
-//V_EXCLUDE_PATH *typedefs.gtest.cpp
-
 #include <qx/typedefs.h>
+
+//V_EXCLUDE_PATH *.gtest.cpp
 
 static_assert(sizeof(u8) == 1);
 static_assert(sizeof(u16) == 2);

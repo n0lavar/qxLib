@@ -8,8 +8,6 @@
 **/
 #include <common.h>
 
-//V_EXCLUDE_PATH *string_converters.gtest.cpp
-
 #include <qx/containers/string/string_converters.h>
 
 TEST(string_converters, to_wstring)

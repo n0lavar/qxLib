@@ -8,10 +8,10 @@
 **/
 #include <common.h>
 
-//V_EXCLUDE_PATH *units_data.gtest.cpp
-
 #include <qx/containers/string/string.h>
 #include <qx/math/units/data.h>
+
+//V_EXCLUDE_PATH *.gtest.cpp
 
 template<class value_t>
 class test_convert_integral : public ::testing::Test
@@ -759,19 +759,13 @@ TEST(data, from_string)
 {
     expect_equal(*qx::unit_from_string<int, qx::units::data>(QXT("128b")), qx::unit(128, qx::units::data::bits));
 
-    expect_equal(
-        *qx::unit_from_string<int, qx::units::data>(QXT("20KiB")),
-        qx::unit(20, qx::units::data::kibibytes));
+    expect_equal(*qx::unit_from_string<int, qx::units::data>(QXT("20KiB")), qx::unit(20, qx::units::data::kibibytes));
 
-    expect_equal(
-        *qx::unit_from_string<int, qx::units::data>(QXT("666PiB")),
-        qx::unit(666, qx::units::data::pebibytes));
+    expect_equal(*qx::unit_from_string<int, qx::units::data>(QXT("666PiB")), qx::unit(666, qx::units::data::pebibytes));
 
     expect_equal(
         *qx::unit_from_string<int, qx::units::data>(QXT("1000MB")),
         qx::unit(1000, qx::units::data::megabytes));
 
-    expect_equal(
-        *qx::unit_from_string<int, qx::units::data>(QXT("2828nib")),
-        qx::unit(2828, qx::units::data::nibbles));
+    expect_equal(*qx::unit_from_string<int, qx::units::data>(QXT("2828nib")), qx::unit(2828, qx::units::data::nibbles));
 }

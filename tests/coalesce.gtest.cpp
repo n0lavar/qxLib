@@ -8,9 +8,9 @@
 **/
 #include <common.h>
 
-//V_EXCLUDE_PATH *coalesce.gtest.cpp
-
 #include <qx/coalesce.h>
+
+//V_EXCLUDE_PATH *.gtest.cpp
 
 TEST(coalesce, return_t)
 {

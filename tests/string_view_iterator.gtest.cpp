@@ -8,8 +8,6 @@
 **/
 #include <common.h>
 
-//V_EXCLUDE_PATH *string_view_iterator.gtest.cpp
-
 #include <qx/containers/string/string_utils.h>
 #include <qx/containers/string/string_view_view.h>
 

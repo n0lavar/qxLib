@@ -13,8 +13,6 @@
 
 #include <array>
 
-//V_EXCLUDE_PATH *type_strings.gtest.cpp
-
 TEST(type_strings, main)
 {
     {

@@ -8,8 +8,6 @@
 **/
 #include <common.h>
 
-//V_EXCLUDE_PATH *newtons_method.gtest.cpp
-
 #include <qx/math/newtons_method.h>
 
 TEST(newtons_method, newtons_method)

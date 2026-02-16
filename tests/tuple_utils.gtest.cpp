@@ -8,8 +8,6 @@
 **/
 #include <common.h>
 
-//V_EXCLUDE_PATH *tuple_utils.gtest.cpp
-
 #include <qx/meta/tuple_utils.h>
 
 using TTuple0 = std::tuple<>;

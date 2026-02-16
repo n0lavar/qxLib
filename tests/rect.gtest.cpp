@@ -8,8 +8,6 @@
 **/
 #include <common.h>
 
-//V_EXCLUDE_PATH *rect.gtest.cpp
-
 #include <qx/render/rect.h>
 
 template<class vector_t>

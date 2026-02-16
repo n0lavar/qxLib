@@ -8,8 +8,6 @@
 **/
 #include <common.h>
 
-//V_EXCLUDE_PATH *interpolation.gtest.cpp
-
 #include <qx/math/interpolation.h>
 
 TEST(interpolation, linear_interpolation)

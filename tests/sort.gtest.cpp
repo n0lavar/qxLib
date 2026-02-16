@@ -8,13 +8,12 @@
 **/
 #include <common.h>
 
-//V_EXCLUDE_PATH *sort.gtest.cpp
-
 #include <qx/algo/sort.h>
 #include <array>
 #include <limits>
 #include <random>
 
+//V_EXCLUDE_PATH *.gtest.cpp
 
 #undef INT_MAX
 #undef INT_MIN

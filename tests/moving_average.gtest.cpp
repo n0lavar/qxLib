@@ -8,8 +8,6 @@
 **/
 #include <common.h>
 
-//V_EXCLUDE_PATH *moving_average.gtest.cpp
-
 #include <qx/math/float_compare.h>
 #include <qx/stat/moving_average.h>
 

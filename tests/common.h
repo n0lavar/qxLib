@@ -12,7 +12,6 @@
 #include <qx/containers/string/string.h>
 #include <qx/macros/suppress_warnings.h>
 #include <qx/math/float_compare.h>
-#include <qx/pvs_config.h>
 
 QX_PUSH_SUPPRESS_ALL_WARNINGS();
 #include <gtest/gtest.h>

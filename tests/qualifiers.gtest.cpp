@@ -10,8 +10,6 @@
 
 #include <qx/meta/qualifiers.h>
 
-//V_EXCLUDE_PATH *qualifiers.gtest.cpp
-
 // clang-format off
 static_assert(std::is_same_v<qx::copy_qualifiers_t<               int,  float>,                float>);
 static_assert(std::is_same_v<qx::copy_qualifiers_t<const          int,  float>, const          float>);

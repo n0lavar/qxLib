@@ -14,7 +14,7 @@
 
 #include <numeric>
 
-//V_EXCLUDE_PATH *double_dispatch_matrix.gtest.cpp
+//V_EXCLUDE_PATH *.gtest.cpp
 
 class storage : public qx::rtti_root<>
 {

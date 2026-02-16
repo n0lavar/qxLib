@@ -8,14 +8,14 @@
 **/
 #include <common.h>
 
-//V_EXCLUDE_PATH *macros.gtest.cpp
-
 #include <qx/containers/string/string_utils.h>
 #include <qx/macros/apply.h>
 #include <qx/macros/common.h>
 #include <qx/macros/static_assert.h>
 
 #include <map>
+
+//V_EXCLUDE_PATH *.gtest.cpp
 
 // --------------------------------------------------- QX_EMPTY_MACRO --------------------------------------------------
 

@@ -1,0 +1,14 @@
+
+//V_EXCLUDE_PATH *\googletest\*
+//V_EXCLUDE_PATH *\benchmark\*
+//V_EXCLUDE_PATH *\glm\*
+
+//-V::MISRA
+//-V::AUTOSAR
+//-V::OWASP
+
+# Memsize type is used in the struct/class.
+//-V122
+
+# Memsize type is used in the union.
+//-V117

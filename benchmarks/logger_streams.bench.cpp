@@ -34,6 +34,8 @@
 #include <cstdio>
 #include <random>
 
+//V_EXCLUDE_PATH *.bench.cpp
+
 BENCHMARK_MAIN();
 
 constexpr qx::string_view k_svLogFileName = QXT("logger_benchmark.log");

@@ -9,8 +9,6 @@
 
 #include <common.h>
 
-//V_EXCLUDE_PATH *generic_span.gtest.cpp
-
 #include <qx/patterns/generic_span.h>
 
 #include <deque>

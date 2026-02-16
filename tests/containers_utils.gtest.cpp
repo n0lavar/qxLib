@@ -8,11 +8,11 @@
 **/
 #include <common.h>
 
-//V_EXCLUDE_PATH *containers_utils.gtest.cpp
-
 #include <qx/containers/utils.h>
 
 #include <list>
+
+//V_EXCLUDE_PATH *.gtest.cpp
 
 //-------------------------------- qx::destruct --------------------------------
 

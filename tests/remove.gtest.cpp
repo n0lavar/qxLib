@@ -8,12 +8,12 @@
 **/
 #include <common.h>
 
-//V_EXCLUDE_PATH *remove.gtest.cpp
-
 #include <qx/algo/remove.h>
 #include <qx/math/common.h>
 
 #include <vector>
+
+//V_EXCLUDE_PATH *.gtest.cpp
 
 TEST(remove, remove_if_i)
 {

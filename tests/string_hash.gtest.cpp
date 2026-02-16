@@ -8,8 +8,6 @@
 **/
 #include <common.h>
 
-//V_EXCLUDE_PATH *string_hash.gtest.cpp
-
 #include <qx/containers/string/string.h>
 #include <qx/containers/string/string_hash.h>
 #include <qx/macros/static_assert.h>

@@ -8,8 +8,6 @@
 **/
 #include <common.h>
 
-//V_EXCLUDE_PATH *logger.gtest.cpp
-
 #define QX_DEBUG_BREAK() (void)0
 
 #include <qx/logger/logger.h>
@@ -45,6 +43,8 @@
     #define __read   read
     #define __fileno fileno
 #endif
+
+//V_EXCLUDE_PATH *.gtest.cpp
 
 QX_DEFINE_CATEGORY(CatLoggerTest);
 QX_DEFINE_CATEGORY(CatLoggerTestLogVerbosity);
@@ -121,10 +121,9 @@ struct ostream_default_buffer : base_file
     static void set_up()
     {
         base_file::set_up();
-        qx::logger_singleton::get_instance().get_logger().add_stream(
-            qx::file_logger_stream_ofstream(
-                { .eLogFilePolicy = qx::log_file_policy::clear_then_uppend, .svFileName = k_svLogFileName },
-                qx::unit<size_t, qx::units::data> { 0, qx::units::data::bytes }));
+        qx::logger_singleton::get_instance().get_logger().add_stream(qx::file_logger_stream_ofstream(
+            { .eLogFilePolicy = qx::log_file_policy::clear_then_uppend, .svFileName = k_svLogFileName },
+            qx::unit<size_t, qx::units::data> { 0, qx::units::data::bytes }));
     }
 };
 
@@ -133,9 +132,8 @@ struct ostream : base_file
     static void set_up()
     {
         base_file::set_up();
-        qx::logger_singleton::get_instance().get_logger().add_stream(
-            qx::file_logger_stream_ofstream(
-                { .eLogFilePolicy = qx::log_file_policy::clear_then_uppend, .svFileName = k_svLogFileName }));
+        qx::logger_singleton::get_instance().get_logger().add_stream(qx::file_logger_stream_ofstream(
+            { .eLogFilePolicy = qx::log_file_policy::clear_then_uppend, .svFileName = k_svLogFileName }));
     }
 };
 
@@ -144,10 +142,9 @@ struct fopen_default_buffer : base_file
     static void set_up()
     {
         base_file::set_up();
-        qx::logger_singleton::get_instance().get_logger().add_stream(
-            qx::file_logger_stream_fopen(
-                { .eLogFilePolicy = qx::log_file_policy::clear_then_uppend, .svFileName = k_svLogFileName },
-                qx::unit<size_t, qx::units::data> { 0, qx::units::data::bytes }));
+        qx::logger_singleton::get_instance().get_logger().add_stream(qx::file_logger_stream_fopen(
+            { .eLogFilePolicy = qx::log_file_policy::clear_then_uppend, .svFileName = k_svLogFileName },
+            qx::unit<size_t, qx::units::data> { 0, qx::units::data::bytes }));
     }
 };
 
@@ -156,9 +153,8 @@ struct fopen : base_file
     static void set_up()
     {
         base_file::set_up();
-        qx::logger_singleton::get_instance().get_logger().add_stream(
-            qx::file_logger_stream_fopen(
-                { .eLogFilePolicy = qx::log_file_policy::clear_then_uppend, .svFileName = k_svLogFileName }));
+        qx::logger_singleton::get_instance().get_logger().add_stream(qx::file_logger_stream_fopen(
+            { .eLogFilePolicy = qx::log_file_policy::clear_then_uppend, .svFileName = k_svLogFileName }));
     }
 };
 
@@ -167,10 +163,9 @@ struct mapping_default_initial_size : base_file
     static void set_up()
     {
         base_file::set_up();
-        qx::logger_singleton::get_instance().get_logger().add_stream(
-            qx::file_logger_stream_mapping(
-                { .eLogFilePolicy = qx::log_file_policy::clear_then_uppend, .svFileName = k_svLogFileName },
-                qx::unit<size_t, qx::units::data> { 0, qx::units::data::bytes }));
+        qx::logger_singleton::get_instance().get_logger().add_stream(qx::file_logger_stream_mapping(
+            { .eLogFilePolicy = qx::log_file_policy::clear_then_uppend, .svFileName = k_svLogFileName },
+            qx::unit<size_t, qx::units::data> { 0, qx::units::data::bytes }));
     }
 };
 
@@ -179,9 +174,8 @@ struct mapping : base_file
     static void set_up()
     {
         base_file::set_up();
-        qx::logger_singleton::get_instance().get_logger().add_stream(
-            qx::file_logger_stream_mapping(
-                { .eLogFilePolicy = qx::log_file_policy::clear_then_uppend, .svFileName = k_svLogFileName }));
+        qx::logger_singleton::get_instance().get_logger().add_stream(qx::file_logger_stream_mapping(
+            { .eLogFilePolicy = qx::log_file_policy::clear_then_uppend, .svFileName = k_svLogFileName }));
     }
 };
 

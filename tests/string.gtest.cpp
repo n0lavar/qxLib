@@ -8,8 +8,6 @@
 **/
 #include <common.h>
 
-//V_EXCLUDE_PATH *string.gtest.cpp
-
 #include <qx/containers/string/string.h>
 #include <qx/containers/string/string_view.h>
 #include <qx/macros/static_assert.h>
@@ -18,6 +16,8 @@
 
 #include <list>
 #include <unordered_map>
+
+//V_EXCLUDE_PATH *.gtest.cpp
 
 QX_PUSH_SUPPRESS_MSVC_WARNINGS(5233);
 

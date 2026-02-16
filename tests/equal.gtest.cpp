@@ -16,7 +16,7 @@
 #include <unordered_set>
 #include <vector>
 
-//V_EXCLUDE_PATH *equal.gtest.cpp
+//V_EXCLUDE_PATH *.gtest.cpp
 
 template<class T, template<class...> class original_container_t, template<class...> class rotated_container_t>
 void TestContainerWithAdapter()

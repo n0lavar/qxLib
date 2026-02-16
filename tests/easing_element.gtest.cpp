@@ -8,9 +8,9 @@
 **/
 #include <common.h>
 
-//V_EXCLUDE_PATH *easing_element.gtest.cpp
-
 #include <qx/easing/easing_element.h>
+
+//V_EXCLUDE_PATH *.gtest.cpp
 
 #define TYPE typename TypeParam::type
 

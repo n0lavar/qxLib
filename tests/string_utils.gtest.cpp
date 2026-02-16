@@ -8,10 +8,10 @@
 **/
 #include <common.h>
 
-//V_EXCLUDE_PATH *string_utils.gtest.cpp
-
 #include <qx/containers/string/string_utils.h>
 #include <qx/macros/static_assert.h>
+
+//V_EXCLUDE_PATH *.gtest.cpp
 
 //--------------------------------- qx::strlen ---------------------------------
 

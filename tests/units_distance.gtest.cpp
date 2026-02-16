@@ -8,8 +8,6 @@
 **/
 #include <common.h>
 
-//V_EXCLUDE_PATH *units_distance.gtest.cpp
-
 #include <qx/math/units/distance.h>
 
 template<class value_t>
@@ -733,15 +731,11 @@ TEST(units_distance, from_string)
     expect_equal(
         *qx::unit_from_string<int, qx::units::distance>(QXT("42li")),
         qx::unit(42, qx::units::distance::links));
-    expect_equal(
-        *qx::unit_from_string<int, qx::units::distance>(QXT("42ft")),
-        qx::unit(42, qx::units::distance::feet));
+    expect_equal(*qx::unit_from_string<int, qx::units::distance>(QXT("42ft")), qx::unit(42, qx::units::distance::feet));
     expect_equal(
         *qx::unit_from_string<int, qx::units::distance>(QXT("42yd")),
         qx::unit(42, qx::units::distance::yards));
-    expect_equal(
-        *qx::unit_from_string<int, qx::units::distance>(QXT("42rd")),
-        qx::unit(42, qx::units::distance::rods));
+    expect_equal(*qx::unit_from_string<int, qx::units::distance>(QXT("42rd")), qx::unit(42, qx::units::distance::rods));
     expect_equal(
         *qx::unit_from_string<int, qx::units::distance>(QXT("42ch")),
         qx::unit(42, qx::units::distance::chains));

@@ -9,10 +9,10 @@
 
 #include <common.h>
 
-//V_EXCLUDE_PATH *color.gtest.cpp
-
 #include <qx/math/between.h>
 #include <qx/render/color.h>
+
+//V_EXCLUDE_PATH *.gtest.cpp
 
 template<class... Args>
 void TestColor(const qx::color& color, int r = -1, int g = -1, int b = -1, const Args&... args)
@@ -80,9 +80,8 @@ void TestColor(const qx::color& color, int r = -1, int g = -1, int b = -1, const
     // EXPECT_EQ(qx::color(hex), color);
 }
 
-#define EXPAND_ARGS(snakeName, pascalName, hashName, name0x, name0xXX, r, g, b)                                     \
-    qx::color::snakeName(), r, g, b, QXT(#snakeName), QXT(#pascalName), QXT(hashName), QXT(name0x), \
-        QXT(name0xXX)
+#define EXPAND_ARGS(snakeName, pascalName, hashName, name0x, name0xXX, r, g, b) \
+    qx::color::snakeName(), r, g, b, QXT(#snakeName), QXT(#pascalName), QXT(hashName), QXT(name0x), QXT(name0xXX)
 
 TEST(color, colors)
 {

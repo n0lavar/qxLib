@@ -8,8 +8,6 @@
 **/
 #include <common.h>
 
-//V_EXCLUDE_PATH *type_traits.gtest.cpp
-
 #include <qx/meta/type_traits.h>
 
 #include <deque>
@@ -20,6 +18,8 @@
 #include <unordered_set>
 #include <variant>
 #include <vector>
+
+//V_EXCLUDE_PATH *.gtest.cpp
 
 //--------------------------------- same_variadic_args ---------------------------------
 

@@ -8,10 +8,10 @@
 **/
 #include <common.h>
 
-//V_EXCLUDE_PATH *easing_sequence.gtest.cpp
-
 #include <qx/easing/easing_sequence.h>
 #include <qx/math/float_compare.h>
+
+//V_EXCLUDE_PATH *.gtest.cpp
 
 #define TYPE typename TypeParam::type
 

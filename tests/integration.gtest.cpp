@@ -8,8 +8,6 @@
 **/
 #include <common.h>
 
-//V_EXCLUDE_PATH *integration.gtest.cpp
-
 #include <qx/math/integration.h>
 
 const auto func_x = [](double x) -> double

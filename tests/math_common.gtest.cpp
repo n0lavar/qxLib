@@ -8,11 +8,11 @@
 **/
 #include <common.h>
 
-//V_EXCLUDE_PATH *math_common.gtest.cpp
-
 #include <qx/macros/static_assert.h>
 #include <qx/math/between.h>
 #include <qx/math/common.h>
+
+//V_EXCLUDE_PATH *.gtest.cpp
 
 // ---------------------------------- qx::abs ----------------------------------
 

@@ -8,13 +8,13 @@
 **/
 #include <common.h>
 
-//V_EXCLUDE_PATH *assert.gtest.cpp
-
 #define QX_DEBUG_BREAK() (void)0
 
 #include <qx/logger/cout_logger_stream.h>
 #include <qx/macros/asserts/asserts.h>
 #include <qx/macros/asserts/predicates.h>
+
+//V_EXCLUDE_PATH *.gtest.cpp
 
 QX_SET_FILE_CATEGORY(CatDefault);
 

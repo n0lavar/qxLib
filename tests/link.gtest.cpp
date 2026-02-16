@@ -9,8 +9,6 @@
 
 #include <common.h>
 
-//V_EXCLUDE_PATH *link.gtest.cpp
-
 #include <qx/smart_ptr/link.h>
 
 struct STest

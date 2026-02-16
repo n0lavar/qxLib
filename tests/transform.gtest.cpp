@@ -8,8 +8,6 @@
 **/
 #include <common.h>
 
-//V_EXCLUDE_PATH *transform.gtest.cpp
-
 #include <qx/algo/transform.h>
 #include <qx/containers/string/string.h>
 

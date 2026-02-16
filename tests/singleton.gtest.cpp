@@ -8,9 +8,9 @@
 **/
 #include <common.h>
 
-//V_EXCLUDE_PATH *singleton.gtest.cpp
-
 #include <qx/patterns/singleton.h>
+
+//V_EXCLUDE_PATH *.gtest.cpp
 
 static std::vector<int>* g_pTestNumbers = nullptr;
 

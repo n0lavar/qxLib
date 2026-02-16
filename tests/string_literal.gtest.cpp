@@ -8,8 +8,6 @@
 **/
 #include <common.h>
 
-//V_EXCLUDE_PATH *string_literal.gtest.cpp
-
 #include <qx/containers/string/string_literal.h>
 #include <qx/containers/string/string_utils.h>
 

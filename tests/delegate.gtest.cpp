@@ -8,14 +8,14 @@
 **/
 #include <common.h>
 
-//V_EXCLUDE_PATH *delegate.gtest.cpp
-
 #include <qx/patterns/delegate.h>
 
 #include <qx/containers/string/string.h>
 #include <qx/meta/type_strings.h>
 
 #include <span>
+
+//V_EXCLUDE_PATH *.gtest.cpp
 
 struct sum_pipe
 {

@@ -8,11 +8,11 @@
 **/
 #include <common.h>
 
-//V_EXCLUDE_PATH *iterate.gtest.cpp
-
 #include <qx/algo/iterate.h>
 
 #include <vector>
+
+//V_EXCLUDE_PATH *.gtest.cpp
 
 struct MyStruct
 {
