@@ -171,7 +171,7 @@ struct execute_generator;
 template<>
 struct execute_generator<void, void>
 {
-    static void execute(qx::delegate<void, void>& delegate, size_t)
+    static void execute(qx::delegate<void()>& delegate, size_t)
     {
         delegate.execute();
     }
@@ -180,7 +180,7 @@ struct execute_generator<void, void>
 template<>
 struct execute_generator<void, size_t>
 {
-    static void execute(qx::delegate<void, size_t>& delegate, size_t nBroadcast)
+    static void execute(qx::delegate<void(size_t)>& delegate, size_t nBroadcast)
     {
         delegate.execute(get_next_value(nBroadcast));
     }
@@ -189,7 +189,7 @@ struct execute_generator<void, size_t>
 template<>
 struct execute_generator<void, size_t, const qx::string&>
 {
-    static void execute(qx::delegate<void, size_t, const qx::string&>& delegate, size_t nBroadcast)
+    static void execute(qx::delegate<void(size_t, const qx::string&)>& delegate, size_t nBroadcast)
     {
         size_t nNextValue = get_next_value(nBroadcast);
         delegate.execute(nNextValue, qx::string::static_from(nNextValue));
@@ -199,7 +199,7 @@ struct execute_generator<void, size_t, const qx::string&>
 template<>
 struct execute_generator<sum_pipe, void>
 {
-    static sum_pipe execute(qx::delegate<sum_pipe, void>& delegate, size_t)
+    static sum_pipe execute(qx::delegate<sum_pipe()>& delegate, size_t)
     {
         return delegate.execute();
     }
@@ -208,7 +208,7 @@ struct execute_generator<sum_pipe, void>
 template<>
 struct execute_generator<sum_pipe, size_t>
 {
-    static sum_pipe execute(qx::delegate<sum_pipe, size_t>& delegate, size_t nBroadcast)
+    static sum_pipe execute(qx::delegate<sum_pipe(size_t)>& delegate, size_t nBroadcast)
     {
         return delegate.execute(get_next_value(nBroadcast));
     }
@@ -217,7 +217,7 @@ struct execute_generator<sum_pipe, size_t>
 template<>
 struct execute_generator<sum_pipe, size_t, const qx::string&>
 {
-    static sum_pipe execute(qx::delegate<sum_pipe, size_t, const qx::string&>& delegate, size_t nBroadcast)
+    static sum_pipe execute(qx::delegate<sum_pipe(size_t, const qx::string&)>& delegate, size_t nBroadcast)
     {
         size_t nNextValue = get_next_value(nBroadcast);
         return delegate.execute(nNextValue, qx::string::static_from(nNextValue));
@@ -291,7 +291,7 @@ struct delegate_fixture_traits
 {
     using return_type         = return_t;
     using args_tuple_type     = std::tuple<args_t...>;
-    using delegate_type       = qx::delegate<return_t, args_t...>;
+    using delegate_type       = qx::delegate<return_t(args_t...)>;
     using get_get_result_type = get_get_result<return_t, args_t...>;
     using method_component_type =
         method_component<get_get_result_type, return_type, std::tuple<typename replace_void<args_t>::type...>>;
@@ -609,7 +609,7 @@ class delegate_common_tests_fixture : public ::testing::Test
 protected:
     using return_type         = sum_pipe;
     using args_tuple_type     = std::tuple<size_t, const qx::string&>;
-    using delegate_type       = qx::delegate<sum_pipe, size_t, const qx::string&>;
+    using delegate_type       = qx::delegate<sum_pipe(size_t, const qx::string&)>;
     using get_get_result_type = get_get_result<sum_pipe, size_t, const qx::string&>;
 
 protected:
@@ -754,8 +754,8 @@ TEST_F(delegate_common_tests_fixture, priority)
 
 TEST(delegate, singlecast)
 {
-    qx::delegate<sum_pipe, size_t, const qx::string&> delegate =
-        qx::delegate<sum_pipe, size_t, const qx::string&>::create_singlecast(
+    qx::delegate<sum_pipe(size_t, const qx::string&)> delegate =
+        qx::delegate<sum_pipe(size_t, const qx::string&)>::create_singlecast(
             [](size_t, const qx::string&)
             {
                 return sum_pipe();

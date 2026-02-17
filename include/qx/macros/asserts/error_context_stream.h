@@ -34,9 +34,9 @@ class error_context_stream : public base_logger_stream
     QX_MOVABLE(error_context_stream);
 
 public:
-    using on_message_delegate_t      = delegate<void, verbosity, string_view>;
+    using on_message_delegate_t      = delegate<void(verbosity, string_view)>;
     using on_message_delegates_map_t = std::unordered_map<std::thread::id, on_message_delegate_t>;
-    using on_error_delegate          = delegate<void, void>;
+    using on_error_delegate          = delegate<void()>;
 
 public:
     error_context_stream() noexcept;

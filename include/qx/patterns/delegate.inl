@@ -251,7 +251,7 @@ destruction_callback base_delegate<derived_t, return_t, args_t...>::add_destruct
 
 template<delegate_return_c return_t, class... args_t>
     requires(sizeof...(args_t) > 0 && (!std::is_void_v<args_t> && ...))
-return_t delegate<return_t, args_t...>::execute(args_t... args) const noexcept
+return_t delegate<return_t(args_t...)>::execute(args_t... args) const noexcept
 {
     return this->execute_internal(
         [&args...](const typename super_type::function_type& function)
@@ -265,7 +265,7 @@ return_t delegate<return_t, args_t...>::execute(args_t... args) const noexcept
 }
 
 template<delegate_return_c return_t>
-return_t delegate<return_t, void>::execute() const noexcept
+return_t delegate<return_t(void)>::execute() const noexcept
 {
     return this->execute_internal(
         [](const typename super_type::function_type& function)

@@ -221,13 +221,13 @@ private:
     std::shared_ptr<bool> m_pDelegateAliveMarker = std::make_shared<bool>(true);
 };
 
-template<delegate_return_c return_t = void, class... args_t>
+template<class signature_t>
 class delegate;
 
 // @copydoc base_delegate
 template<delegate_return_c return_t, class... args_t>
     requires(sizeof...(args_t) > 0 && (!std::is_void_v<args_t> && ...))
-class delegate<return_t, args_t...> final : public base_delegate<delegate<return_t, args_t...>, return_t, args_t...>
+class delegate<return_t(args_t...)> final : public base_delegate<delegate<return_t(args_t...)>, return_t, args_t...>
 {
     using super_type = base_delegate<delegate, return_t, args_t...>;
 
@@ -242,7 +242,7 @@ public:
 
 // @copydoc base_delegate
 template<delegate_return_c return_t>
-class delegate<return_t, void> final : public base_delegate<delegate<return_t, void>, return_t>
+class delegate<return_t()> final : public base_delegate<delegate<return_t()>, return_t>
 {
     using super_type = base_delegate<delegate, return_t>;
 
