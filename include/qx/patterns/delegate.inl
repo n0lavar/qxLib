@@ -248,6 +248,10 @@ destruction_callback base_delegate<derived_t, return_t, args_t...>::add_destruct
     function_type             value) noexcept
 {
     m_Functions.emplace(key, std::move(value));
+
+    if (!m_pDelegateAliveMarker)
+        m_pDelegateAliveMarker = std::make_shared<bool>(true);
+
     return [this, key, pDelegateAliveMarker = std::weak_ptr(m_pDelegateAliveMarker)]()
     {
         if (!pDelegateAliveMarker.expired())

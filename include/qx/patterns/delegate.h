@@ -235,7 +235,7 @@ private:
     container_type m_Functions;
 
     // in case a delegate was destroyed before a destruction callback
-    std::shared_ptr<bool> m_pDelegateAliveMarker = std::make_shared<bool>(true);
+    std::shared_ptr<bool> m_pDelegateAliveMarker;
 };
 
 } // namespace details
