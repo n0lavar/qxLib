@@ -8,33 +8,30 @@
 **/
 #pragma once
 
-#include <functional>
-#include <map>
-#include <memory>
-
 #include <qx/destruction_callback.h>
 #include <qx/macros/static_assert.h>
 #include <qx/meta/concepts.h>
 #include <qx/priority.h>
 
+#include <concepts>
+#include <functional>
+#include <map>
+#include <memory>
+
 namespace qx
 {
 
-// default constructed pipe element must not change the state of a pipe
 template<class T>
-concept delegate_pipe_c = std::is_default_constructible_v<T> && !std::is_arithmetic_v<T> && requires(T t) {
+concept delegate_pipe_c = std::default_initializable<T> && requires(T t) {
     { t | t } -> std::convertible_to<T>;
 };
-
-template<class T>
-concept delegate_return_c = std::is_void_v<T> || delegate_pipe_c<T>;
 
 using delegate_token_type = time_ordered_priority_key;
 
 /**
 
-    @class   base_delegate
-    @brief   Single or multicast delegate. Use the qx::delegate<> class in your code.
+    @class   delegate
+    @brief   Single or multicast delegate.
     @details For a singlecast version:
              1. Create with qx::delegate<...>::create_singlecast(...)
              2. Call delegate.execute(...)
@@ -42,14 +39,34 @@ using delegate_token_type = time_ordered_priority_key;
              1. Default construct
              2. All various callbacks with delegate.add_xxx(...)
              2. Call delegate.execute(...)
-    @tparam  derived_t - CRTP derived class type
-    @tparam  return_t  - the exact type that all the passed callables and execute() should return
-    @tparam  args_t    - the exact type that all the passed callables and execute() should take
+    @tparam  signature_t - std::function-like signature of the delegate. For example: void(size_t, const qx::string&).
+                           Is the result type satisfies qx::delegate_pipe_c,
+                           the result of each callable will be piped into the next one,
+                           and the final result will be returned by execute().
+                           Otherwise, the result of the last callable will be returned by execute(),
+                           and the results of the previous callables will be ignored.
     @author  Khrapov
     @date    4.07.2025
 
 **/
-template<class derived_t, delegate_return_c return_t, class... args_t>
+template<class signature_t>
+class delegate;
+
+namespace details
+{
+
+/**
+
+    @class   base_delegate
+    @brief   Base delegate type
+    @tparam  derived_t - CRTP derived class type
+    @tparam  return_t  - the exact type that all the passed callables and execute() should return
+    @tparam  args_t    - the exact type that all the passed callables and execute() should take
+    @author  Khrapov
+    @date    17.02.2026
+
+**/
+template<class derived_t, class return_t, class... args_t>
 class base_delegate
 {
     friend derived_t;
@@ -221,15 +238,15 @@ private:
     std::shared_ptr<bool> m_pDelegateAliveMarker = std::make_shared<bool>(true);
 };
 
-template<class signature_t>
-class delegate;
+} // namespace details
 
-// @copydoc base_delegate
-template<delegate_return_c return_t, class... args_t>
+// @copydoc delegate
+template<class return_t, class... args_t>
     requires(sizeof...(args_t) > 0 && (!std::is_void_v<args_t> && ...))
-class delegate<return_t(args_t...)> final : public base_delegate<delegate<return_t(args_t...)>, return_t, args_t...>
+class delegate<return_t(args_t...)> final
+    : public details::base_delegate<delegate<return_t(args_t...)>, return_t, args_t...>
 {
-    using super_type = base_delegate<delegate, return_t, args_t...>;
+    using super_type = details::base_delegate<delegate, return_t, args_t...>;
 
 public:
     /**
@@ -240,11 +257,11 @@ public:
     return_t execute(args_t... args) const noexcept;
 };
 
-// @copydoc base_delegate
-template<delegate_return_c return_t>
-class delegate<return_t()> final : public base_delegate<delegate<return_t()>, return_t>
+// @copydoc delegate
+template<class return_t>
+class delegate<return_t()> final : public details::base_delegate<delegate<return_t()>, return_t>
 {
-    using super_type = base_delegate<delegate, return_t>;
+    using super_type = details::base_delegate<delegate, return_t>;
 
 public:
     /**

@@ -30,6 +30,14 @@ struct sum_pipe
     qx::string sData;
 };
 
+struct not_a_pipe
+{
+    bool operator==(const not_a_pipe&) const = default;
+
+    size_t     nData = 0;
+    qx::string sData;
+};
+
 enum class callable_type
 {
     lambda,
@@ -45,10 +53,10 @@ static std::vector<callable_type> g_Tracker;
 
 // ----------------------------------------------------- callables -----------------------------------------------------
 
-template<class get_get_result_t, qx::delegate_return_c return_t, class args_tuple_t>
+template<class get_get_result_t, class return_t, class args_tuple_t>
 struct get_lambda;
 
-template<class get_get_result_t, qx::delegate_return_c return_t>
+template<class get_get_result_t, class return_t>
 struct get_lambda<get_get_result_t, return_t, std::tuple<void>>
 {
     static constexpr auto value = []()
@@ -58,7 +66,7 @@ struct get_lambda<get_get_result_t, return_t, std::tuple<void>>
     };
 };
 
-template<class get_get_result_t, qx::delegate_return_c return_t, class... args_t>
+template<class get_get_result_t, class return_t, class... args_t>
 struct get_lambda<get_get_result_t, return_t, std::tuple<args_t...>>
 {
     static constexpr auto value = [](args_t... args)
@@ -71,23 +79,23 @@ struct get_lambda<get_get_result_t, return_t, std::tuple<args_t...>>
 
 
 
-template<class get_get_result_t, qx::delegate_return_c return_t, class... args_t>
+template<class get_get_result_t, class return_t, class... args_t>
 static return_t function(args_t... args)
 {
     g_Tracker.push_back(callable_type::function);
     return get_get_result_t::value(args...);
 }
 
-template<class get_get_result_t, qx::delegate_return_c return_t, class args_tuple_t>
+template<class get_get_result_t, class return_t, class args_tuple_t>
 struct get_function;
 
-template<class get_get_result_t, qx::delegate_return_c return_t, class... args_t>
+template<class get_get_result_t, class return_t, class... args_t>
 struct get_function<get_get_result_t, return_t, std::tuple<args_t...>>
 {
     static constexpr auto value = function<get_get_result_t, return_t, args_t...>;
 };
 
-template<class get_get_result_t, qx::delegate_return_c return_t>
+template<class get_get_result_t, class return_t>
 struct get_function<get_get_result_t, return_t, std::tuple<void>>
 {
     static constexpr auto value = function<get_get_result_t, return_t>;
@@ -96,7 +104,7 @@ struct get_function<get_get_result_t, return_t, std::tuple<void>>
 
 
 
-template<class get_get_result_t, qx::delegate_return_c return_t, class... args_t>
+template<class get_get_result_t, class return_t, class... args_t>
 class static_method_component
 {
 public:
@@ -107,7 +115,7 @@ public:
     }
 };
 
-template<class get_get_result_t, qx::delegate_return_c return_t>
+template<class get_get_result_t, class return_t>
 class static_method_component<get_get_result_t, return_t, void>
 {
 public:
@@ -118,10 +126,10 @@ public:
     }
 };
 
-template<class get_get_result_t, qx::delegate_return_c return_t, class args_tuple_t>
+template<class get_get_result_t, class return_t, class args_tuple_t>
 struct get_static_method;
 
-template<class get_get_result_t, qx::delegate_return_c return_t, class... args_t>
+template<class get_get_result_t, class return_t, class... args_t>
 struct get_static_method<get_get_result_t, return_t, std::tuple<args_t...>>
 {
     static constexpr auto value = static_method_component<get_get_result_t, return_t, args_t...>::callback;
@@ -130,10 +138,10 @@ struct get_static_method<get_get_result_t, return_t, std::tuple<args_t...>>
 
 
 
-template<class get_get_result_t, qx::delegate_return_c return_t, class args_tuple_t>
+template<class get_get_result_t, class return_t, class args_tuple_t>
 class method_component;
 
-template<class get_get_result_t, qx::delegate_return_c return_t, class... args_t>
+template<class get_get_result_t, class return_t, class... args_t>
 class method_component<get_get_result_t, return_t, std::tuple<args_t...>>
 {
 public:
@@ -144,7 +152,7 @@ public:
     }
 };
 
-template<class get_get_result_t, qx::delegate_return_c return_t>
+template<class get_get_result_t, class return_t>
 class method_component<get_get_result_t, return_t, std::tuple<std::type_identity<void>>>
 {
 public:
@@ -165,7 +173,7 @@ static size_t get_next_value(size_t nValue)
     return (nValue + 1) * 2;
 }
 
-template<qx::delegate_return_c return_t, class... args_t>
+template<class return_t, class... args_t>
 struct execute_generator;
 
 template<>
@@ -196,28 +204,28 @@ struct execute_generator<void, size_t, const qx::string&>
     }
 };
 
-template<>
-struct execute_generator<sum_pipe, void>
+template<class return_t>
+struct execute_generator<return_t, void>
 {
-    static sum_pipe execute(qx::delegate<sum_pipe()>& delegate, size_t)
+    static return_t execute(qx::delegate<return_t()>& delegate, size_t)
     {
         return delegate.execute();
     }
 };
 
-template<>
-struct execute_generator<sum_pipe, size_t>
+template<class return_t>
+struct execute_generator<return_t, size_t>
 {
-    static sum_pipe execute(qx::delegate<sum_pipe(size_t)>& delegate, size_t nBroadcast)
+    static return_t execute(qx::delegate<return_t(size_t)>& delegate, size_t nBroadcast)
     {
         return delegate.execute(get_next_value(nBroadcast));
     }
 };
 
-template<>
-struct execute_generator<sum_pipe, size_t, const qx::string&>
+template<class return_t>
+struct execute_generator<return_t, size_t, const qx::string&>
 {
-    static sum_pipe execute(qx::delegate<sum_pipe(size_t, const qx::string&)>& delegate, size_t nBroadcast)
+    static return_t execute(qx::delegate<return_t(size_t, const qx::string&)>& delegate, size_t nBroadcast)
     {
         size_t nNextValue = get_next_value(nBroadcast);
         return delegate.execute(nNextValue, qx::string::static_from(nNextValue));
@@ -226,18 +234,10 @@ struct execute_generator<sum_pipe, size_t, const qx::string&>
 
 
 
-
 // --------------------------------------------- callable result generator ---------------------------------------------
 
-template<qx::delegate_return_c return_t, class... args_t>
-struct get_get_result
-{
-    static sum_pipe call(args_t... args)
-    {
-        return sum_pipe { args... };
-    }
-    static constexpr auto value = &call;
-};
+template<class return_t, class... args_t>
+struct get_get_result;
 
 template<>
 struct get_get_result<void, void>
@@ -257,8 +257,8 @@ struct get_get_result<void, args_t...>
     static constexpr auto value = &call;
 };
 
-template<qx::delegate_return_c return_t>
-struct get_get_result<return_t, void>
+template<>
+struct get_get_result<sum_pipe, void>
 {
     static sum_pipe call()
     {
@@ -267,6 +267,36 @@ struct get_get_result<return_t, void>
     static constexpr auto value = &call;
 };
 
+template<class... args_t>
+struct get_get_result<sum_pipe, args_t...>
+{
+    static sum_pipe call(args_t... args)
+    {
+        return sum_pipe { args... };
+    }
+    static constexpr auto value = &call;
+};
+
+
+template<>
+struct get_get_result<not_a_pipe, void>
+{
+    static not_a_pipe call()
+    {
+        return not_a_pipe {};
+    }
+    static constexpr auto value = &call;
+};
+
+template<class... args_t>
+struct get_get_result<not_a_pipe, args_t...>
+{
+    static not_a_pipe call(args_t... args)
+    {
+        return not_a_pipe { args... };
+    }
+    static constexpr auto value = &call;
+};
 
 
 
@@ -286,12 +316,24 @@ struct replace_void<void>
     using type = std::type_identity<void>;
 };
 
-template<qx::delegate_return_c return_t, class... args_t>
+template<class T, class... args_t>
+struct get_delegate_type
+{
+    using type = qx::delegate<T(args_t...)>;
+};
+
+template<class T>
+struct get_delegate_type<T, void>
+{
+    using type = qx::delegate<T()>;
+};
+
+template<class return_t, class... args_t>
 struct delegate_fixture_traits
 {
     using return_type         = return_t;
     using args_tuple_type     = std::tuple<args_t...>;
-    using delegate_type       = qx::delegate<return_t(args_t...)>;
+    using delegate_type       = get_delegate_type<return_t, args_t...>::type;
     using get_get_result_type = get_get_result<return_t, args_t...>;
     using method_component_type =
         method_component<get_get_result_type, return_type, std::tuple<typename replace_void<args_t>::type...>>;
@@ -304,7 +346,10 @@ using implementations_type = ::testing::Types<
     delegate_fixture_traits<void, size_t, const qx::string&>,
     delegate_fixture_traits<sum_pipe, void>,
     delegate_fixture_traits<sum_pipe, size_t>,
-    delegate_fixture_traits<sum_pipe, size_t, const qx::string&>>;
+    delegate_fixture_traits<sum_pipe, size_t, const qx::string&>,
+    delegate_fixture_traits<not_a_pipe, void>,
+    delegate_fixture_traits<not_a_pipe, size_t>,
+    delegate_fixture_traits<not_a_pipe, size_t, const qx::string&>>;
 
 template<class traits_t>
 class delegate_base_fixture : public ::testing::Test
@@ -347,20 +392,20 @@ protected:
     {
         size_t nBroadcast = 0;
 
-        sum_pipe result1 = traits_t::execute_generator::execute(m_Delegate, nBroadcast++);
-        EXPECT_EQ(result1, sum_pipe());
+        typename traits_t::return_type result1 = traits_t::execute_generator::execute(m_Delegate, nBroadcast++);
+        EXPECT_EQ(result1, typename traits_t::return_type());
         EXPECT_EQ(g_Tracker.size(), bExpectFilled ? 1 : 0);
         if (bExpectFilled)
             EXPECT_EQ(g_Tracker.back(), *m_optCallableType);
 
-        sum_pipe result2 = traits_t::execute_generator::execute(m_Delegate, nBroadcast++);
-        EXPECT_EQ(result2, sum_pipe());
+        typename traits_t::return_type result2 = traits_t::execute_generator::execute(m_Delegate, nBroadcast++);
+        EXPECT_EQ(result2, typename traits_t::return_type());
         EXPECT_EQ(g_Tracker.size(), bExpectFilled ? 2 : 0);
         if (bExpectFilled)
             EXPECT_EQ(g_Tracker.back(), *m_optCallableType);
 
-        sum_pipe result3 = traits_t::execute_generator::execute(m_Delegate, nBroadcast++);
-        EXPECT_EQ(result3, sum_pipe());
+        typename traits_t::return_type result3 = traits_t::execute_generator::execute(m_Delegate, nBroadcast++);
+        EXPECT_EQ(result3, typename traits_t::return_type());
         EXPECT_EQ(g_Tracker.size(), bExpectFilled ? 3 : 0);
         if (bExpectFilled)
             EXPECT_EQ(g_Tracker.back(), *m_optCallableType);
@@ -376,21 +421,21 @@ protected:
     {
         size_t nBroadcast = 0;
 
-        sum_pipe result1 = traits_t::execute_generator::execute(m_Delegate, nBroadcast++);
+        typename traits_t::return_type result1 = traits_t::execute_generator::execute(m_Delegate, nBroadcast++);
         EXPECT_EQ(result1.nData, bExpectFilled ? 2 : 0);
         EXPECT_EQ(result1.sData, QXT(""));
         EXPECT_EQ(g_Tracker.size(), bExpectFilled ? 1 : 0);
         if (bExpectFilled)
             EXPECT_EQ(g_Tracker.back(), *m_optCallableType);
 
-        sum_pipe result2 = traits_t::execute_generator::execute(m_Delegate, nBroadcast++);
+        typename traits_t::return_type result2 = traits_t::execute_generator::execute(m_Delegate, nBroadcast++);
         EXPECT_EQ(result2.nData, bExpectFilled ? 4 : 0);
         EXPECT_EQ(result2.sData, QXT(""));
         EXPECT_EQ(g_Tracker.size(), bExpectFilled ? 2 : 0);
         if (bExpectFilled)
             EXPECT_EQ(g_Tracker.back(), *m_optCallableType);
 
-        sum_pipe result3 = traits_t::execute_generator::execute(m_Delegate, nBroadcast++);
+        typename traits_t::return_type result3 = traits_t::execute_generator::execute(m_Delegate, nBroadcast++);
         EXPECT_EQ(result3.nData, bExpectFilled ? 6 : 0);
         EXPECT_EQ(result3.sData, QXT(""));
         EXPECT_EQ(g_Tracker.size(), bExpectFilled ? 3 : 0);
@@ -407,21 +452,21 @@ protected:
     {
         size_t nBroadcast = 0;
 
-        sum_pipe result1 = traits_t::execute_generator::execute(m_Delegate, nBroadcast++);
+        typename traits_t::return_type result1 = traits_t::execute_generator::execute(m_Delegate, nBroadcast++);
         EXPECT_EQ(result1.nData, bExpectFilled ? 2 : 0);
         EXPECT_EQ(result1.sData, bExpectFilled ? QXT("2") : QXT(""));
         EXPECT_EQ(g_Tracker.size(), bExpectFilled ? 1 : 0);
         if (bExpectFilled)
             EXPECT_EQ(g_Tracker.back(), *m_optCallableType);
 
-        sum_pipe result2 = traits_t::execute_generator::execute(m_Delegate, nBroadcast++);
+        typename traits_t::return_type result2 = traits_t::execute_generator::execute(m_Delegate, nBroadcast++);
         EXPECT_EQ(result2.nData, bExpectFilled ? 4 : 0);
         EXPECT_EQ(result2.sData, bExpectFilled ? QXT("4") : QXT(""));
         EXPECT_EQ(g_Tracker.size(), bExpectFilled ? 2 : 0);
         if (bExpectFilled)
             EXPECT_EQ(g_Tracker.back(), *m_optCallableType);
 
-        sum_pipe result3 = traits_t::execute_generator::execute(m_Delegate, nBroadcast++);
+        typename traits_t::return_type result3 = traits_t::execute_generator::execute(m_Delegate, nBroadcast++);
         EXPECT_EQ(result3.nData, bExpectFilled ? 6 : 0);
         EXPECT_EQ(result3.sData, bExpectFilled ? QXT("6") : QXT(""));
         EXPECT_EQ(g_Tracker.size(), bExpectFilled ? 3 : 0);
@@ -760,4 +805,26 @@ TEST(delegate, singlecast)
             {
                 return sum_pipe();
             });
+}
+
+// ----------------------------------------------- non-pipe result check -----------------------------------------------
+
+TEST(delegate, non_pipe_result)
+{
+    qx::delegate<not_a_pipe(size_t, const qx::string&)> delegate;
+
+    delegate.add_token(
+        [](size_t nData, const qx::string& sData)
+        {
+            return not_a_pipe { nData, sData };
+        });
+    delegate.add_token(
+        [](size_t nData, const qx::string& sData)
+        {
+            return not_a_pipe { nData + 1, sData + sData };
+        });
+
+    not_a_pipe result = delegate.execute(0, QXT("0"));
+    EXPECT_EQ(result.nData, 1);
+    EXPECT_EQ(result.sData, QXT("00"));
 }
