@@ -319,45 +319,49 @@ $(function() {
 <div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160;    function_type             value) noexcept</div>
 <div class="line"><a name="l00249"></a><span class="lineno">  249</span>&#160;{</div>
 <div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160;    m_Functions.emplace(key, std::move(value));</div>
-<div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160;    <span class="keywordflow">return</span> [<span class="keyword">this</span>, key, pDelegateAliveMarker = std::weak_ptr(m_pDelegateAliveMarker)]()</div>
-<div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160;    {</div>
-<div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160;        <span class="keywordflow">if</span> (!pDelegateAliveMarker.expired())</div>
-<div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160;            remove(key);</div>
-<div class="line"><a name="l00255"></a><span class="lineno">  255</span>&#160;    };</div>
-<div class="line"><a name="l00256"></a><span class="lineno">  256</span>&#160;}</div>
-<div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160; </div>
-<div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160;} <span class="comment">// namespace details</span></div>
-<div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160; </div>
-<div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class </span>return_t, <span class="keyword">class</span>... args_t&gt;</div>
-<div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160;    <a class="code" href="coalesce_8h.html#af141b284fe289dd9243ddad3f90ddb19">requires</a>(<span class="keyword">sizeof</span>...(args_t) &gt; 0 &amp;&amp; (!std::is_void_v&lt;args_t&gt; &amp;&amp; ...))</div>
-<div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160;return_t delegate&lt;return_t(args_t...)&gt;::execute(args_t... args) const noexcept</div>
-<div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160;{</div>
-<div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160;    <span class="keywordflow">return</span> this-&gt;execute_internal(</div>
-<div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160;        [&amp;args...](<span class="keyword">const</span> <span class="keyword">typename</span> super_type::function_type&amp; <span class="keyword">function</span>)</div>
-<div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160;        {</div>
-<div class="line"><a name="l00267"></a><span class="lineno">  267</span>&#160;            return function(std::forward&lt;args_t&gt;(args)...);</div>
-<div class="line"><a name="l00268"></a><span class="lineno">  268</span>&#160;        },</div>
+<div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160; </div>
+<div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160;    <span class="keywordflow">if</span> (!m_pDelegateAliveMarker)</div>
+<div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160;        m_pDelegateAliveMarker = std::make_shared&lt;bool&gt;(<span class="keyword">true</span>);</div>
+<div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160; </div>
+<div class="line"><a name="l00255"></a><span class="lineno">  255</span>&#160;    <span class="keywordflow">return</span> [<span class="keyword">this</span>, key, pDelegateAliveMarker = std::weak_ptr(m_pDelegateAliveMarker)]()</div>
+<div class="line"><a name="l00256"></a><span class="lineno">  256</span>&#160;    {</div>
+<div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160;        <span class="keywordflow">if</span> (!pDelegateAliveMarker.expired())</div>
+<div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160;            remove(key);</div>
+<div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160;    };</div>
+<div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160;}</div>
+<div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160; </div>
+<div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160;} <span class="comment">// namespace details</span></div>
+<div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160; </div>
+<div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class </span>return_t, <span class="keyword">class</span>... args_t&gt;</div>
+<div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160;    <a class="code" href="coalesce_8h.html#af141b284fe289dd9243ddad3f90ddb19">requires</a>(<span class="keyword">sizeof</span>...(args_t) &gt; 0 &amp;&amp; (!std::is_void_v&lt;args_t&gt; &amp;&amp; ...))</div>
+<div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160;return_t delegate&lt;return_t(args_t...)&gt;::execute(args_t... args) const noexcept</div>
+<div class="line"><a name="l00267"></a><span class="lineno">  267</span>&#160;{</div>
+<div class="line"><a name="l00268"></a><span class="lineno">  268</span>&#160;    <span class="keywordflow">return</span> this-&gt;execute_internal(</div>
 <div class="line"><a name="l00269"></a><span class="lineno">  269</span>&#160;        [&amp;args...](<span class="keyword">const</span> <span class="keyword">typename</span> super_type::function_type&amp; <span class="keyword">function</span>)</div>
 <div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160;        {</div>
-<div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160;            return function(args...);</div>
-<div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160;        });</div>
-<div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160;}</div>
-<div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160; </div>
-<div class="line"><a name="l00275"></a><span class="lineno">  275</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> return_t&gt;</div>
-<div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160;return_t delegate&lt;return_t(<span class="keywordtype">void</span>)&gt;::execute() const noexcept</div>
-<div class="line"><a name="l00277"></a><span class="lineno">  277</span>&#160;{</div>
-<div class="line"><a name="l00278"></a><span class="lineno">  278</span>&#160;    <span class="keywordflow">return</span> this-&gt;execute_internal(</div>
-<div class="line"><a name="l00279"></a><span class="lineno">  279</span>&#160;        [](<span class="keyword">const</span> <span class="keyword">typename</span> super_type::function_type&amp; <span class="keyword">function</span>)</div>
-<div class="line"><a name="l00280"></a><span class="lineno">  280</span>&#160;        {</div>
-<div class="line"><a name="l00281"></a><span class="lineno">  281</span>&#160;            <span class="keywordflow">return</span> <span class="keyword">function</span>();</div>
-<div class="line"><a name="l00282"></a><span class="lineno">  282</span>&#160;        },</div>
+<div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160;            return function(std::forward&lt;args_t&gt;(args)...);</div>
+<div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160;        },</div>
+<div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160;        [&amp;args...](<span class="keyword">const</span> <span class="keyword">typename</span> super_type::function_type&amp; <span class="keyword">function</span>)</div>
+<div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160;        {</div>
+<div class="line"><a name="l00275"></a><span class="lineno">  275</span>&#160;            return function(args...);</div>
+<div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160;        });</div>
+<div class="line"><a name="l00277"></a><span class="lineno">  277</span>&#160;}</div>
+<div class="line"><a name="l00278"></a><span class="lineno">  278</span>&#160; </div>
+<div class="line"><a name="l00279"></a><span class="lineno">  279</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> return_t&gt;</div>
+<div class="line"><a name="l00280"></a><span class="lineno">  280</span>&#160;return_t delegate&lt;return_t(<span class="keywordtype">void</span>)&gt;::execute() const noexcept</div>
+<div class="line"><a name="l00281"></a><span class="lineno">  281</span>&#160;{</div>
+<div class="line"><a name="l00282"></a><span class="lineno">  282</span>&#160;    <span class="keywordflow">return</span> this-&gt;execute_internal(</div>
 <div class="line"><a name="l00283"></a><span class="lineno">  283</span>&#160;        [](<span class="keyword">const</span> <span class="keyword">typename</span> super_type::function_type&amp; <span class="keyword">function</span>)</div>
 <div class="line"><a name="l00284"></a><span class="lineno">  284</span>&#160;        {</div>
 <div class="line"><a name="l00285"></a><span class="lineno">  285</span>&#160;            <span class="keywordflow">return</span> <span class="keyword">function</span>();</div>
-<div class="line"><a name="l00286"></a><span class="lineno">  286</span>&#160;        });</div>
-<div class="line"><a name="l00287"></a><span class="lineno">  287</span>&#160;}</div>
-<div class="line"><a name="l00288"></a><span class="lineno">  288</span>&#160; </div>
-<div class="line"><a name="l00289"></a><span class="lineno">  289</span>&#160;} <span class="comment">// namespace qx</span></div>
+<div class="line"><a name="l00286"></a><span class="lineno">  286</span>&#160;        },</div>
+<div class="line"><a name="l00287"></a><span class="lineno">  287</span>&#160;        [](<span class="keyword">const</span> <span class="keyword">typename</span> super_type::function_type&amp; <span class="keyword">function</span>)</div>
+<div class="line"><a name="l00288"></a><span class="lineno">  288</span>&#160;        {</div>
+<div class="line"><a name="l00289"></a><span class="lineno">  289</span>&#160;            <span class="keywordflow">return</span> <span class="keyword">function</span>();</div>
+<div class="line"><a name="l00290"></a><span class="lineno">  290</span>&#160;        });</div>
+<div class="line"><a name="l00291"></a><span class="lineno">  291</span>&#160;}</div>
+<div class="line"><a name="l00292"></a><span class="lineno">  292</span>&#160; </div>
+<div class="line"><a name="l00293"></a><span class="lineno">  293</span>&#160;} <span class="comment">// namespace qx</span></div>
 <div class="ttc" id="aclassqx_1_1delegate_html"><div class="ttname"><a href="classqx_1_1delegate.html">qx::delegate</a></div><div class="ttdoc">Single or multicast delegate.</div><div class="ttdef"><b>Definition:</b> <a href="delegate_8h_source.html#l00053">delegate.h:53</a></div></div>
 <div class="ttc" id="aclassqx_1_1destruction__callback_html"><div class="ttname"><a href="classqx_1_1destruction__callback.html">qx::destruction_callback</a></div><div class="ttdoc">Class for RAII: functor passed in constructor will be called in destructor.</div><div class="ttdef"><b>Definition:</b> <a href="destruction__callback_8h_source.html#l00024">destruction_callback.h:25</a></div></div>
 <div class="ttc" id="aclassqx_1_1details_1_1base__delegate_html"><div class="ttname"><a href="classqx_1_1details_1_1base__delegate.html">qx::details::base_delegate</a></div><div class="ttdoc">Base delegate type.</div><div class="ttdef"><b>Definition:</b> <a href="delegate_8h_source.html#l00070">delegate.h:71</a></div></div>
