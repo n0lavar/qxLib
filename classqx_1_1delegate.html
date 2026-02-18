@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>qxLib: qx::delegate&lt; return_t, args_t &gt; Class Template Reference</title>
+<title>qxLib: qx::delegate&lt; signature_t &gt; Class Template Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -66,15 +66,40 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="headertitle">
-<div class="title">qx::delegate&lt; return_t, args_t &gt; Class Template Reference</div>  </div>
+<div class="title">qx::delegate&lt; signature_t &gt; Class Template Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>Single or multicast delegate.  
+ <a href="classqx_1_1delegate.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="delegate_8h_source.html">delegate.h</a>&gt;</code></p>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><h3>template&lt;delegate_return_c return_t = void, class... args_t&gt;<br />
-class qx::delegate&lt; return_t, args_t &gt;</h3>
+<div class="textblock"><h3>template&lt;class signature_t&gt;<br />
+class qx::delegate&lt; signature_t &gt;</h3>
 
+<p>Single or multicast delegate. </p>
+<p>For a singlecast version:</p><ol type="1">
+<li>Create with qx::delegate&lt;...&gt;::create_singlecast(...)</li>
+<li>Call delegate.execute(...) For a multicast version:</li>
+</ol>
+<ol type="1">
+<li>Default construct</li>
+<li>All various callbacks with delegate.add_xxx(...)</li>
+</ol>
+<ol type="1">
+<li>Call delegate.execute(...) <dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">signature_t</td><td>- std::function-like signature of the delegate. For example: void(size_t, const qx::string&amp;). Is the result type satisfies delegate_pipe_c, the result of each callable will be piped into the next one, and the final result will be returned by execute(). Otherwise, the result of the last callable will be returned by execute(), and the results of the previous callables will be ignored. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section author"><dt>Author</dt><dd>Khrapov </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>4.07.2025 </dd></dl>
+</li>
+</ol>
 
-<p class="definition">Definition at line <a class="el" href="delegate_8h_source.html#l00225">225</a> of file <a class="el" href="delegate_8h_source.html">delegate.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="delegate_8h_source.html#l00053">53</a> of file <a class="el" href="delegate_8h_source.html">delegate.h</a>.</p>
 </div><hr/>The documentation for this class was generated from the following file:<ul>
 <li>include/qx/patterns/<a class="el" href="delegate_8h_source.html">delegate.h</a></li>
 </ul>

@@ -11,7 +11,7 @@ var searchData=
   ['delegate_201',['delegate',['../classqx_1_1delegate.html',1,'qx']]],
   ['delegate_2eh_202',['delegate.h',['../delegate_8h.html',1,'']]],
   ['delegate_2einl_203',['delegate.inl',['../delegate_8inl.html',1,'']]],
-  ['delegate_3c_20return_5ft_2c_20void_20_3e_204',['delegate&lt; return_t, void &gt;',['../classqx_1_1delegate_3_01return__t_00_01void_01_4.html',1,'qx']]],
+  ['delegate_3c_20return_5ft_28_29_3e_204',['delegate&lt; return_t()&gt;',['../classqx_1_1delegate_3_01return__t_07_08_4.html',1,'qx']]],
   ['destruct_205',['destruct',['../utils_8h.html#a0708d6ca8dda3583a2d00c60c6d87141',1,'qx']]],
   ['destruction_5fcallback_206',['destruction_callback',['../classqx_1_1destruction__callback.html#a4af78fd8d202ae38d78f558fb14d3f3c',1,'qx::destruction_callback::destruction_callback()'],['../classqx_1_1destruction__callback.html',1,'qx::destruction_callback']]],
   ['destruction_5fcallback_2eh_207',['destruction_callback.h',['../destruction__callback_8h.html',1,'']]],
