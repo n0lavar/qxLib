@@ -90,7 +90,7 @@ class qx::delegate&lt; signature_t &gt;</h3>
 <ol type="1">
 <li>Call delegate.execute(...) <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
-    <tr><td class="paramname">signature_t</td><td>- std::function-like signature of the delegate. For example: void(size_t, const qx::string&amp;). Is the result type satisfies delegate_pipe_c, the result of each callable will be piped into the next one, and the final result will be returned by execute(). Otherwise, the result of the last callable will be returned by execute(), and the results of the previous callables will be ignored. </td></tr>
+    <tr><td class="paramname">signature_t</td><td>- std::function-like signature of the delegate. For example: void(size_t, const qx::string&amp;). Is the result type satisfies qx::delegate_pipe_c, the result of each callable will be piped into the next one, and the final result will be returned by execute(). Otherwise, the result of the last callable will be returned by execute(), and the results of the previous callables will be ignored. </td></tr>
   </table>
   </dd>
 </dl>
