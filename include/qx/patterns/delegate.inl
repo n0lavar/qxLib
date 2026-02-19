@@ -42,7 +42,7 @@ private:
 template<class derived_t, class return_t, class... args_t>
 base_delegate<derived_t, return_t, args_t...>::base_delegate(base_delegate&& other) noexcept
 {
-    std::swap(m_Functions, other.m_Functions);
+    std::swap(m_optFunctions, other.m_optFunctions);
     std::swap(m_pDelegateAliveMarker, other.m_pDelegateAliveMarker);
 }
 
@@ -50,7 +50,7 @@ template<class derived_t, class return_t, class... args_t>
 typename base_delegate<derived_t, return_t, args_t...>::base_delegate& base_delegate<derived_t, return_t, args_t...>::
     operator=(base_delegate&& other) noexcept
 {
-    std::swap(m_Functions, other.m_Functions);
+    std::swap(m_optFunctions, other.m_optFunctions);
     std::swap(m_pDelegateAliveMarker, other.m_pDelegateAliveMarker);
     return *this;
 }
@@ -77,7 +77,8 @@ delegate_token_type base_delegate<derived_t, return_t, args_t...>::add_token(
     priority   ePriority) noexcept
 {
     time_ordered_priority_key key(ePriority);
-    m_Functions.emplace(key, std::move(callable));
+    // SSO depends on the size of the input callable
+    add_function(key, std::move(callable));
     return key;
 }
 
@@ -89,6 +90,7 @@ delegate_token_type base_delegate<derived_t, return_t, args_t...>::add_token(
     priority ePriority) noexcept
 {
     return add_token(
+        // 2 pointers, SOO on all compilers
         [pMethod, &object](args_t... args)
         {
             return (object.*pMethod)(std::forward<args_t>(args)...);
@@ -102,6 +104,7 @@ destruction_callback base_delegate<derived_t, return_t, args_t...>::add_destruct
     callable_t callable,
     priority   ePriority) noexcept
 {
+    // SSO depends on the size of the input callable
     return add_destruction_callback(time_ordered_priority_key(ePriority), function_type(std::move(callable)));
 }
 
@@ -114,28 +117,11 @@ destruction_callback base_delegate<derived_t, return_t, args_t...>::add_destruct
 {
     return add_destruction_callback(
         time_ordered_priority_key(ePriority),
+        // 2 pointers, SOO on all compilers
         [&object, pMethod](args_t... args)
         {
             return (object.*pMethod)(std::forward<args_t>(args)...);
         });
-}
-
-template<class derived_t, class return_t, class... args_t>
-template<class object_t>
-delegate_token_type base_delegate<derived_t, return_t, args_t...>::add_weak(
-    std::weak_ptr<object_t> pWeakObject,
-    return_t (object_t::*pMethod)(args_t...),
-    priority ePriority) noexcept
-{
-    time_ordered_priority_key key(ePriority);
-    add_weak(
-        key,
-        std::move(pWeakObject),
-        [pMethod](object_t* pObject, args_t... args)
-        {
-            return (pObject->*pMethod)(std::forward<args_t>(args)...);
-        });
-    return key;
 }
 
 template<class derived_t, class return_t, class... args_t>
@@ -149,6 +135,7 @@ delegate_token_type base_delegate<derived_t, return_t, args_t...>::add_weak(
     add_weak(
         key,
         std::move(pWeakObject),
+        // SSO depends on the size of the input callable
         [callable_ = std::move(callable)](object_t*, args_t... args)
         {
             return callable_(std::forward<args_t>(args)...);
@@ -157,15 +144,59 @@ delegate_token_type base_delegate<derived_t, return_t, args_t...>::add_weak(
 }
 
 template<class derived_t, class return_t, class... args_t>
+template<class object_t>
+delegate_token_type base_delegate<derived_t, return_t, args_t...>::add_weak(
+    std::weak_ptr<object_t> pWeakObject,
+    return_t (object_t::*pMethod)(args_t...),
+    priority ePriority) noexcept
+{
+    time_ordered_priority_key key(ePriority);
+    add_weak(
+        key,
+        std::move(pWeakObject),
+        // 1 pointer, SOO on all compilers
+        [pMethod](object_t* pObject, args_t... args)
+        {
+            return (pObject->*pMethod)(std::forward<args_t>(args)...);
+        });
+    return key;
+}
+
+template<class derived_t, class return_t, class... args_t>
 bool base_delegate<derived_t, return_t, args_t...>::remove(delegate_token_type token) noexcept
 {
-    return m_Functions.erase(token) == 1;
+    return m_optFunctions
+           && std::visit(
+               [this, token]<class T>(T& value)
+               {
+                   if constexpr (std::is_same_v<T, single_value_type>)
+                   {
+                       if (value.first == token)
+                       {
+                           m_optFunctions.reset();
+                           return true;
+                       }
+                       else
+                       {
+                           return false;
+                       }
+                   }
+                   else if constexpr (std::is_same_v<T, container_type>)
+                   {
+                       return value.erase(token) == 1;
+                   }
+                   else
+                   {
+                       return false;
+                   }
+               },
+               *m_optFunctions);
 }
 
 template<class derived_t, class return_t, class... args_t>
 void base_delegate<derived_t, return_t, args_t...>::clear() noexcept
 {
-    m_Functions.clear();
+    m_optFunctions.reset();
 }
 
 template<class derived_t, class return_t, class... args_t>
@@ -174,48 +205,58 @@ return_t base_delegate<derived_t, return_t, args_t...>::execute_internal(
     const invoke_single_t&   invokeSingle,
     const invoke_multiple_t& invokeMultiple) const noexcept
 {
-    if (m_Functions.empty())
+    if (!m_optFunctions)
     {
         if constexpr (std::is_void_v<return_t>)
             return;
         else
-            return return_t();
+            return return_t {};
     }
 
     // modifying during iteration protection
-    thread_local container_type tempFunctions;
-    tempFunctions = m_Functions;
+    thread_local variant_type tempFunctions;
+    tempFunctions = *m_optFunctions;
 
-    details::invoker<return_t, function_type, invoke_single_t>   invokerSingle(invokeSingle);
-    details::invoker<return_t, function_type, invoke_multiple_t> invokerMultiple(invokeMultiple);
-    details::base_invoker<return_t, function_type>*              invoker = nullptr;
-    if (tempFunctions.size() == 1)
-        invoker = &invokerSingle;
-    else
-        invoker = &invokerMultiple;
-
-    if constexpr (std::is_void_v<return_t>)
+    if (std::holds_alternative<single_value_type>(tempFunctions))
     {
-        for (const auto& [_, function] : tempFunctions)
-            invoker->invoke(function);
-
-        return;
-    }
-    else if constexpr (delegate_pipe_c<return_t>)
-    {
-        return_t result {};
-        for (const auto& [_, function] : tempFunctions)
-            result = result | invoker->invoke(function);
-
-        return result;
+        const auto& [_, function] = std::get<single_value_type>(tempFunctions);
+        return invokeSingle(function);
     }
     else
     {
-        return_t result {};
-        for (const auto& [_, function] : tempFunctions)
-            result = invoker->invoke(function);
+        const container_type& container = std::get<container_type>(tempFunctions);
 
-        return result;
+        invoker<return_t, function_type, invoke_single_t>   invokerSingle(invokeSingle);
+        invoker<return_t, function_type, invoke_multiple_t> invokerMultiple(invokeMultiple);
+        base_invoker<return_t, function_type>*              invoker = nullptr;
+        if (container.size() == 1)
+            invoker = &invokerSingle;
+        else
+            invoker = &invokerMultiple;
+
+        if constexpr (std::is_void_v<return_t>)
+        {
+            for (const auto& [_, function] : container)
+                invoker->invoke(function);
+
+            return;
+        }
+        else if constexpr (delegate_pipe_c<return_t>)
+        {
+            return_t result {};
+            for (const auto& [_, function] : container)
+                result = result | invoker->invoke(function);
+
+            return result;
+        }
+        else
+        {
+            return_t result {};
+            for (const auto& [_, function] : container)
+                result = invoker->invoke(function);
+
+            return result;
+        }
     }
 }
 
@@ -226,7 +267,7 @@ void base_delegate<derived_t, return_t, args_t...>::add_weak(
     std::weak_ptr<object_t>   pWeakObject,
     callable_t                callable) noexcept
 {
-    m_Functions.emplace(
+    add_function(
         key,
         [this, key, pWeakObject, callable_ = std::move(callable)](args_t... args)
         {
@@ -247,7 +288,7 @@ destruction_callback base_delegate<derived_t, return_t, args_t...>::add_destruct
     time_ordered_priority_key key,
     function_type             value) noexcept
 {
-    m_Functions.emplace(key, std::move(value));
+    add_function(key, std::move(value));
 
     if (!m_pDelegateAliveMarker)
         m_pDelegateAliveMarker = std::make_shared<bool>(true);
@@ -257,6 +298,29 @@ destruction_callback base_delegate<derived_t, return_t, args_t...>::add_destruct
         if (!pDelegateAliveMarker.expired())
             remove(key);
     };
+}
+
+template<class derived_t, class return_t, class... args_t>
+void base_delegate<derived_t, return_t, args_t...>::add_function(
+    time_ordered_priority_key key,
+    function_type             function) noexcept
+{
+    if (!m_optFunctions)
+    {
+        m_optFunctions = variant_type(single_value_type(key, std::move(function)));
+    }
+    else if (std::holds_alternative<single_value_type>(*m_optFunctions))
+    {
+        single_value_type first = std::get<single_value_type>(std::move(*m_optFunctions));
+        container_type    container;
+        container.emplace(first.first, std::move(first.second));
+        container.emplace(key, std::move(function));
+        m_optFunctions = std::move(container);
+    }
+    else
+    {
+        std::get<container_type>(*m_optFunctions).emplace(key, std::move(function));
+    }
 }
 
 } // namespace details

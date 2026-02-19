@@ -794,8 +794,7 @@ TEST_F(delegate_common_tests_fixture, priority)
 
 
 
-
-// ------------------------------------------------ singlecast delegates -----------------------------------------------
+// ---------------------------------------------------- other tests ----------------------------------------------------
 
 TEST(delegate, singlecast)
 {
@@ -806,8 +805,6 @@ TEST(delegate, singlecast)
                 return sum_pipe();
             });
 }
-
-// ----------------------------------------------- non-pipe result check -----------------------------------------------
 
 TEST(delegate, non_pipe_result)
 {
@@ -827,4 +824,40 @@ TEST(delegate, non_pipe_result)
     not_a_pipe result = delegate.execute(0, QXT("0"));
     EXPECT_EQ(result.nData, 1);
     EXPECT_EQ(result.sData, QXT("00"));
+}
+
+TEST(delegate, small_object_optimization)
+{
+    qx::delegate<int()> delegate;
+    EXPECT_EQ(delegate.execute(), 0);
+
+    qx::delegate_token_type token1 = delegate.add_token(
+        []()
+        {
+            return 1;
+        });
+    EXPECT_EQ(delegate.execute(), 1);
+
+    qx::delegate_token_type token2 = delegate.add_token(
+        []()
+        {
+            return 2;
+        });
+    EXPECT_EQ(delegate.execute(), 3);
+
+    qx::delegate_token_type token3 = delegate.add_token(
+        []()
+        {
+            return 4;
+        });
+    EXPECT_EQ(delegate.execute(), 7);
+
+    delegate.remove(token3);
+    EXPECT_EQ(delegate.execute(), 3);
+
+    delegate.remove(token2);
+    EXPECT_EQ(delegate.execute(), 1);
+
+    delegate.remove(token1);
+    EXPECT_EQ(delegate.execute(), 0);
 }
