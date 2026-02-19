@@ -13,8 +13,8 @@
 #include <qx/logger/fwrite_logger_stream.h>
 #include <qx/logger/logger_formatters.h>
 #include <qx/macros/details/macro_user_message.h>
+#include <qx/memory/sbo_poly.h>
 #include <qx/patterns/singleton.h>
-#include <qx/sbo/sbo_poly.h>
 
 #include <ranges>
 #include <shared_mutex>

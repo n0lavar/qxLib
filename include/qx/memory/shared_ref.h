@@ -8,7 +8,7 @@
 **/
 #pragma once
 
-#include <qx/smart_ptr/smart_ptr_ref_adapter.h>
+#include <qx/memory/smart_ptr_ref_adapter.h>
 
 namespace qx
 {
@@ -72,4 +72,4 @@ public:
 
 } // namespace qx
 
-#include <qx/smart_ptr/shared_ref.inl>
+#include <qx/memory/shared_ref.inl>

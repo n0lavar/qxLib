@@ -202,4 +202,4 @@ private:
 
 } // namespace qx
 
-#include <qx/smart_ptr/link.inl>
+#include <qx/memory/link.inl>

@@ -8,7 +8,7 @@
 **/
 #include <common.h>
 
-#include <qx/smart_ptr/threads_shared.h>
+#include <qx/memory/threads_shared.h>
 
 #include <chrono>
 #include <list>

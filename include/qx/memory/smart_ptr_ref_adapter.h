@@ -95,4 +95,4 @@ void swap(
 
 } // namespace std
 
-#include <qx/smart_ptr/smart_ptr_ref_adapter.inl>
+#include <qx/memory/smart_ptr_ref_adapter.inl>

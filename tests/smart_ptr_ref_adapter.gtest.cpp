@@ -8,8 +8,8 @@
 **/
 #include <common.h>
 
-#include <qx/smart_ptr/shared_ref.h>
-#include <qx/smart_ptr/unique_ref.h>
+#include <qx/memory/shared_ref.h>
+#include <qx/memory/unique_ref.h>
 
 class test_class
 {

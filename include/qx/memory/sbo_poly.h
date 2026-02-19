@@ -8,7 +8,7 @@
 **/
 #pragma once
 
-#include <qx/sbo/sbo_bytes.h>
+#include <qx/memory/sbo_bytes.h>
 
 #include <type_traits>
 
@@ -123,4 +123,4 @@ private:
 
 } // namespace qx
 
-#include <qx/sbo/sbo_poly.inl>
+#include <qx/memory/sbo_poly.inl>

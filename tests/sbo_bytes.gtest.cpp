@@ -8,7 +8,7 @@
 **/
 #include <common.h>
 
-#include <qx/sbo/sbo_bytes.h>
+#include <qx/memory/sbo_bytes.h>
 
 
 

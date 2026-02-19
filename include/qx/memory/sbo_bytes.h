@@ -115,4 +115,4 @@ private:
 
 } // namespace qx
 
-#include <qx/sbo/sbo_bytes.inl>
+#include <qx/memory/sbo_bytes.inl>

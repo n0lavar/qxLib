@@ -9,7 +9,7 @@
 
 #include <common.h>
 
-#include <qx/smart_ptr/link.h>
+#include <qx/memory/link.h>
 
 struct STest
 {

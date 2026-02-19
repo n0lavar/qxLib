@@ -8,7 +8,7 @@
 **/
 #include <common.h>
 
-#include <qx/sbo/sbo_poly.h>
+#include <qx/memory/sbo_poly.h>
 
 //V_EXCLUDE_PATH *.gtest.cpp
 

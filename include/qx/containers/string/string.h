@@ -12,8 +12,8 @@
 #include <qx/containers/string/format_string.h>
 #include <qx/containers/string/string_hash.h>
 #include <qx/macros/static_assert.h>
+#include <qx/memory/sbo_bytes.h>
 #include <qx/meta/type_traits.h>
-#include <qx/sbo/sbo_bytes.h>
 
 #include <iostream>
 #include <optional>

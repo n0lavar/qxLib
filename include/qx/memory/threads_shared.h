@@ -162,4 +162,4 @@ inline bool try_lock_synchronization_primitive(synchronization_primitive_t* pSP)
 
 } // namespace qx
 
-#include <qx/smart_ptr/threads_shared.inl>
+#include <qx/memory/threads_shared.inl>

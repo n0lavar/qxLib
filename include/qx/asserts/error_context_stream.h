@@ -10,9 +10,9 @@
 
 #include <qx/algo/contains.h>
 #include <qx/logger/base_logger_stream.h>
+#include <qx/memory/threads_shared.h>
+#include <qx/memory/unique_ref.h>
 #include <qx/patterns/delegate.h>
-#include <qx/smart_ptr/threads_shared.h>
-#include <qx/smart_ptr/unique_ref.h>
 
 #include <unordered_map>
 
