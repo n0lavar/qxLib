@@ -80,26 +80,27 @@ class qx::delegate&lt; signature_t &gt;</h3>
 
 <p>Single or multicast delegate. </p>
 <p>For a singlecast version:</p><ol type="1">
-<li>Create with qx::delegate&lt;...&gt;::create_singlecast(...)</li>
-<li>Call delegate.execute(...) For a multicast version:</li>
+<li>Create with qx::delegate&lt;...&gt;::create_singlecast(...);</li>
+<li>Call delegate.execute(...).</li>
+</ol>
+<p>For a multicast version:</p><ol type="1">
+<li>Default construct;</li>
+<li>All various callbacks with delegate.add_xxx(...);</li>
 </ol>
 <ol type="1">
-<li>Default construct</li>
-<li>All various callbacks with delegate.add_xxx(...)</li>
+<li>Call delegate.execute(...).</li>
 </ol>
-<ol type="1">
-<li>Call delegate.execute(...) <dl class="tparams"><dt>Template Parameters</dt><dd>
+<p>If a delegate has only one function inside (i.e. singlecast delegate), it's stored inplace without a container allocation. If a function is small enough (token overload with max 2 bytes captured, object + method pointer overload, weak overload with 1 byte max captured), there will be no allocations at all. The destruction callback overloads require 1 allocation for the alive marker (1 per delegate), because they need to unsubscribe safely.</p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
-    <tr><td class="paramname">signature_t</td><td>- std::function-like signature of the delegate. For example: void(size_t, const qx::string&amp;). Is the result type satisfies qx::delegate_pipe_c, the result of each callable will be piped into the next one, and the final result will be returned by execute(). Otherwise, the result of the last callable will be returned by execute(), and the results of the previous callables will be ignored. </td></tr>
+    <tr><td class="paramname">signature_t</td><td>- std::function-like signature of the delegate. For example: void(size_t, const qx::string&amp;). If the result type satisfies qx::delegate_pipe_c, the result of each callable will be piped into the next one, and the final result will be returned by execute(). Otherwise, the result of the last callable will be returned by execute(), and the results of the previous callables will be ignored. </td></tr>
   </table>
   </dd>
 </dl>
 <dl class="section author"><dt>Author</dt><dd>Khrapov </dd></dl>
 <dl class="section date"><dt>Date</dt><dd>4.07.2025 </dd></dl>
-</li>
-</ol>
 
-<p class="definition">Definition at line <a class="el" href="delegate_8h_source.html#l00053">53</a> of file <a class="el" href="delegate_8h_source.html">delegate.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="delegate_8h_source.html#l00066">66</a> of file <a class="el" href="delegate_8h_source.html">delegate.h</a>.</p>
 </div><hr/>The documentation for this class was generated from the following file:<ul>
 <li>include/qx/patterns/<a class="el" href="delegate_8h_source.html">delegate.h</a></li>
 </ul>
