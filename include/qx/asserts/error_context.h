@@ -8,8 +8,8 @@
 **/
 #pragma once
 
+#include <qx/asserts/error_context_stream.h>
 #include <qx/logger/logger.h>
-#include <qx/macros/asserts/error_context_stream.h>
 
 namespace qx
 {
@@ -70,4 +70,4 @@ private:
 
 } // namespace qx
 
-#include <qx/macros/asserts/error_context.inl>
+#include <qx/asserts/error_context.inl>

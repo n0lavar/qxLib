@@ -17,9 +17,19 @@
 **/
 #pragma once
 
-#include <qx/macros/asserts/asserts_manager.h>
+#include <qx/asserts/asserts_manager.h>
 
-#include <qx/macros/asserts/asserts.inl>
+#include <qx/asserts/asserts.inl>
+
+/**
+    @brief Use this as a condition in any macro above to indicate that this part of your code must never be executed
+**/
+#define QX_NO_ENTRY !"No entry"
+
+/**
+    @brief Use this as a condition in any macro above to indicate that this part of your code is not ready yet
+**/
+#define QX_NOT_IMPLEMENTED !"Not implemented"
 
 /**
     @brief   Verifies that the condition is true

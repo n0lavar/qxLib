@@ -10,9 +10,8 @@
 
 #define QX_DEBUG_BREAK() (void)0
 
+#include <qx/asserts/asserts.h>
 #include <qx/logger/cout_logger_stream.h>
-#include <qx/macros/asserts/asserts.h>
-#include <qx/macros/asserts/predicates.h>
 
 //V_EXCLUDE_PATH *.gtest.cpp
 

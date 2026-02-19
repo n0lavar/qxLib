@@ -12,15 +12,15 @@
 
 #include <qx/logger/logger.h>
 
+#include <qx/asserts/asserts.h>
+#include <qx/asserts/error_context.h>
+#include <qx/asserts/error_context_stream.h>
 #include <qx/logger/cout_logger_stream.h>
 #include <qx/logger/debugger_logger_stream.h>
 #include <qx/logger/file_logger_stream_fopen.h>
 #include <qx/logger/file_logger_stream_mapping.h>
 #include <qx/logger/file_logger_stream_ofstream.h>
 #include <qx/logger/fwrite_logger_stream.h>
-#include <qx/macros/asserts/asserts.h>
-#include <qx/macros/asserts/error_context.h>
-#include <qx/macros/asserts/error_context_stream.h>
 
 #include <filesystem>
 #include <regex>

@@ -9,8 +9,8 @@
 #pragma once
 
 #include <qx/algo/predicates.h>
+#include <qx/asserts/error_context_stream.h>
 #include <qx/logger/logger.h>
-#include <qx/macros/asserts/error_context_stream.h>
 #include <qx/macros/details/macro_user_message.h>
 #include <qx/windows.h>
 
@@ -163,4 +163,4 @@ private:
     #define QX_WITH_DEBUG_ASSERTS QX_WITH_DEBUG_INFO
 #endif
 
-#include <qx/macros/asserts/asserts_manager.inl>
+#include <qx/asserts/asserts_manager.inl>

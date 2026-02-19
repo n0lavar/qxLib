@@ -92,4 +92,4 @@ private:
 
 } // namespace qx
 
-#include <qx/macros/asserts/error_context_stream.inl>
+#include <qx/asserts/error_context_stream.inl>
