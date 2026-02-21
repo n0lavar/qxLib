@@ -58,7 +58,7 @@ inline void error_context_stream::do_log(
     string_view                           svMessage)
 {
     error_context_stream_data& data = *m_Data;
-    if (!contains(*data.disabledThreads.lock(), std::this_thread::get_id()))
+    if (!contains(*data.disabledThreads.lock(), threadId))
         (*data.onMessages.lock())[threadId].execute(eVerbosity, svMessage);
 }
 
