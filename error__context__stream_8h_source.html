@@ -107,7 +107,7 @@ $(function() {
 <div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="keyword">public</span>:</div>
 <div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    <span class="keyword">using</span> <a class="code" href="classqx_1_1delegate.html">on_message_delegate_t</a>      = <a class="code" href="classqx_1_1delegate.html">delegate</a>&lt;void(verbosity, string_view)&gt;;</div>
 <div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    <span class="keyword">using</span> on_message_delegates_map_t = std::unordered_map&lt;std::thread::id, on_message_delegate_t&gt;;</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    <span class="keyword">using</span> <a class="code" href="classqx_1_1delegate.html">on_error_delegate</a>          = <a class="code" href="classqx_1_1delegate.html">delegate</a>&lt;void()&gt;;</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    <span class="keyword">using</span> <a class="code" href="classqx_1_1delegate.html">on_error_delegate</a>          = <a class="code" href="classqx_1_1delegate.html">delegate</a>&lt;void(std::thread::id)&gt;;</div>
 <div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160; </div>
 <div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="keyword">public</span>:</div>
 <div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    <a class="code" href="classqx_1_1error__context__stream.html">error_context_stream</a>() noexcept;</div>
@@ -126,44 +126,45 @@ $(function() {
 <div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="comment"></span> </div>
 <div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;<span class="comment">    /**</span></div>
 <div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;<span class="comment">        @brief Emit error event for all listeners</span></div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;<span class="comment">    **/</span></div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classqx_1_1error__context__stream.html#aebbf2e7daccd4026d43b375669ffa6a5">on_error</a>() noexcept;</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160; </div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    <span class="comment">// base_logger_stream</span></div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    <span class="comment">//</span></div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">bool</span> log_unconditionally_required(</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;        <span class="keyword">const</span> <a class="code" href="classqx_1_1category.html">category</a>&amp;                       <a class="code" href="classqx_1_1category.html">category</a>,</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;        verbosity                             eVerbosity,</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;        std::thread::id                       threadId,</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;        std::chrono::system_clock::time_point messageTime,</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;        string_view                           svFile,</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;        string_view                           svFunction,</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;        <span class="keywordtype">int</span>                                   nLine) <span class="keyword">const</span> noexcept <span class="keyword">override</span>;</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    <span class="keywordtype">void</span> do_log(</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;        <span class="keyword">const</span> <a class="code" href="classqx_1_1category.html">category</a>&amp;                       <a class="code" href="classqx_1_1category.html">category</a>,</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;        verbosity                             eVerbosity,</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;        std::thread::id                       threadId,</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;        std::chrono::system_clock::time_point messageTime,</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;        string_view                           svFile,</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;        string_view                           svFunction,</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;        <span class="keywordtype">int</span>                                   nLine,</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;        string_view                           svMessage) <span class="keyword">override</span>;</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;    <span class="keywordtype">void</span> do_flush() <span class="keyword">override</span>;</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160; </div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;    <span class="keyword">struct </span>error_context_stream_data</div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;    {</div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;        <a class="code" href="classqx_1_1threads__shared.html">threads_shared&lt;on_message_delegates_map_t&gt;</a>   onMessages;</div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;        <a class="code" href="classqx_1_1threads__shared.html">threads_shared&lt;on_error_delegate&gt;</a>            onError;</div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;        <a class="code" href="classqx_1_1threads__shared.html">threads_shared&lt;std::vector&lt;std::thread::id&gt;</a>&gt; disabledThreads;</div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;    };</div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;    <a class="code" href="classqx_1_1details_1_1smart__ptr__ref__adapter.html">unique_ref&lt;error_context_stream_data&gt;</a> m_Data;</div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;};</div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160; </div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;} <span class="comment">// namespace qx</span></div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160; </div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="error__context__stream_8inl.html">qx/asserts/error_context_stream.inl</a>&gt;</span></div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;<span class="comment">        @param errorThreadId - the thread where error occured</span></div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;<span class="comment">    **/</span></div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classqx_1_1error__context__stream.html#a9d3d3d990aa868e751f6f46da3eff4b0">on_error</a>(std::thread::id errorThreadId) noexcept;</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160; </div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    <span class="comment">// base_logger_stream</span></div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    <span class="comment">//</span></div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">bool</span> log_unconditionally_required(</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;        <span class="keyword">const</span> <a class="code" href="classqx_1_1category.html">category</a>&amp;                       <a class="code" href="classqx_1_1category.html">category</a>,</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;        verbosity                             eVerbosity,</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;        std::thread::id                       threadId,</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;        std::chrono::system_clock::time_point messageTime,</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;        string_view                           svFile,</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;        string_view                           svFunction,</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;        <span class="keywordtype">int</span>                                   nLine) <span class="keyword">const</span> noexcept <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;    <span class="keywordtype">void</span> do_log(</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;        <span class="keyword">const</span> <a class="code" href="classqx_1_1category.html">category</a>&amp;                       <a class="code" href="classqx_1_1category.html">category</a>,</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;        verbosity                             eVerbosity,</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;        std::thread::id                       threadId,</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;        std::chrono::system_clock::time_point messageTime,</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;        string_view                           svFile,</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;        string_view                           svFunction,</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;        <span class="keywordtype">int</span>                                   nLine,</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;        string_view                           svMessage) <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;    <span class="keywordtype">void</span> do_flush() <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160; </div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;    <span class="keyword">struct </span>error_context_stream_data</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;    {</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;        <a class="code" href="classqx_1_1threads__shared.html">threads_shared&lt;on_message_delegates_map_t&gt;</a>   onMessages;</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;        <a class="code" href="classqx_1_1threads__shared.html">threads_shared&lt;on_error_delegate&gt;</a>            onError;</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;        <a class="code" href="classqx_1_1threads__shared.html">threads_shared&lt;std::vector&lt;std::thread::id&gt;</a>&gt; disabledThreads;</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;    };</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;    <a class="code" href="classqx_1_1details_1_1smart__ptr__ref__adapter.html">unique_ref&lt;error_context_stream_data&gt;</a> m_Data;</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;};</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160; </div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;} <span class="comment">// namespace qx</span></div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160; </div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="error__context__stream_8inl.html">qx/asserts/error_context_stream.inl</a>&gt;</span></div>
 <div class="ttc" id="abase__logger__stream_8h_html"><div class="ttname"><a href="base__logger__stream_8h.html">base_logger_stream.h</a></div></div>
 <div class="ttc" id="aclassqx_1_1base__logger__stream_html"><div class="ttname"><a href="classqx_1_1base__logger__stream.html">qx::base_logger_stream</a></div><div class="ttdoc">Base class for logger streams.</div><div class="ttdef"><b>Definition:</b> <a href="base__logger__stream_8h_source.html#l00036">base_logger_stream.h:37</a></div></div>
 <div class="ttc" id="aclassqx_1_1category_html"><div class="ttname"><a href="classqx_1_1category.html">qx::category</a></div><div class="ttdoc">A category is a class that identifies a particular piece of code. This code can be located in differe...</div><div class="ttdef"><b>Definition:</b> <a href="category_8h_source.html#l00058">category.h:59</a></div></div>
@@ -171,8 +172,8 @@ $(function() {
 <div class="ttc" id="aclassqx_1_1details_1_1smart__ptr__ref__adapter_html"><div class="ttname"><a href="classqx_1_1details_1_1smart__ptr__ref__adapter.html">qx::details::smart_ptr_ref_adapter</a></div><div class="ttdef"><b>Definition:</b> <a href="smart__ptr__ref__adapter_8h_source.html#l00072">smart_ptr_ref_adapter.h:72</a></div></div>
 <div class="ttc" id="aclassqx_1_1error__context__stream_html"><div class="ttname"><a href="classqx_1_1error__context__stream.html">qx::error_context_stream</a></div><div class="ttdoc">A stream that allows capturing all messages and redirecting them to error contexts.</div><div class="ttdef"><b>Definition:</b> <a href="error__context__stream_8h_source.html#l00030">error_context_stream.h:31</a></div></div>
 <div class="ttc" id="aclassqx_1_1error__context__stream_html_a06c1187a5978bddc50fd2da688786df6"><div class="ttname"><a href="classqx_1_1error__context__stream.html#a06c1187a5978bddc50fd2da688786df6">qx::error_context_stream::get_on_messages</a></div><div class="ttdeci">threads_shared&lt; on_message_delegates_map_t &gt; &amp; get_on_messages() noexcept</div><div class="ttdoc">Get on messages delegate.</div><div class="ttdef"><b>Definition:</b> <a href="error__context__stream_8inl_source.html#l00019">error_context_stream.inl:20</a></div></div>
+<div class="ttc" id="aclassqx_1_1error__context__stream_html_a9d3d3d990aa868e751f6f46da3eff4b0"><div class="ttname"><a href="classqx_1_1error__context__stream.html#a9d3d3d990aa868e751f6f46da3eff4b0">qx::error_context_stream::on_error</a></div><div class="ttdeci">void on_error(std::thread::id errorThreadId) noexcept</div><div class="ttdoc">Emit error event for all listeners.</div><div class="ttdef"><b>Definition:</b> <a href="error__context__stream_8inl_source.html#l00030">error_context_stream.inl:30</a></div></div>
 <div class="ttc" id="aclassqx_1_1error__context__stream_html_ae7570b855ecd57311c248202a551d3f8"><div class="ttname"><a href="classqx_1_1error__context__stream.html#ae7570b855ecd57311c248202a551d3f8">qx::error_context_stream::get_on_error</a></div><div class="ttdeci">threads_shared&lt; on_error_delegate &gt; &amp; get_on_error() noexcept</div><div class="ttdoc">Get on error delegate.</div><div class="ttdef"><b>Definition:</b> <a href="error__context__stream_8inl_source.html#l00025">error_context_stream.inl:25</a></div></div>
-<div class="ttc" id="aclassqx_1_1error__context__stream_html_aebbf2e7daccd4026d43b375669ffa6a5"><div class="ttname"><a href="classqx_1_1error__context__stream.html#aebbf2e7daccd4026d43b375669ffa6a5">qx::error_context_stream::on_error</a></div><div class="ttdeci">void on_error() noexcept</div><div class="ttdoc">Emit error event for all listeners.</div><div class="ttdef"><b>Definition:</b> <a href="error__context__stream_8inl_source.html#l00030">error_context_stream.inl:30</a></div></div>
 <div class="ttc" id="aclassqx_1_1threads__shared_html"><div class="ttname"><a href="classqx_1_1threads__shared.html">qx::threads_shared&lt; on_message_delegates_map_t &gt;</a></div></div>
 <div class="ttc" id="acontains_8h_html"><div class="ttname"><a href="contains_8h.html">contains.h</a></div></div>
 <div class="ttc" id="adelegate_8h_html"><div class="ttname"><a href="delegate_8h.html">delegate.h</a></div></div>

@@ -94,55 +94,58 @@ $(function() {
 <div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="comment">    @details Requires qx::error_context_stream to be added to the logger to work.</span></div>
 <div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="comment">             Does not display anything if there were no log messages.</span></div>
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="comment">             Otherwise, it displays the header, all messages, and then the footer for visual differentiation.</span></div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="comment">    @warning Does not support fibres and coroutines (thread switching)</span></div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="comment">    @author  Khrapov</span></div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="comment">    @date    10.02.2026</span></div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="comment">**/</span></div>
-<div class="line"><a name="l00031"></a><span class="lineno"><a class="line" href="classqx_1_1error__context.html">   31</a></span>&#160;<span class="keyword">class </span><a class="code" href="classqx_1_1error__context.html">error_context</a></div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;{</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    QX_NONCOPYMOVABLE(<a class="code" href="classqx_1_1error__context.html">error_context</a>);</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160; </div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="keyword">public</span>:<span class="comment"></span></div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="comment">    /**</span></div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="comment">        @brief error_context object constructor</span></div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="comment">        @param eMinCaptureVerbosity - minimum verbosity of messages this context should capture</span></div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="comment">        @param svHeader             - a header to add when there is at lease one message</span></div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="comment">        @param svFooter             - a footer to add when there is at lease one message</span></div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="comment">    **/</span></div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    <a class="code" href="classqx_1_1error__context.html#a55712970318e3aef7f18481ef4fd9176">error_context</a>(</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;        verbosity   eMinCaptureVerbosity,</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;        string_view svHeader = QXT(<span class="stringliteral">&quot;Error context start&quot;</span>),</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;        string_view svFooter = QXT(<span class="stringliteral">&quot;Error context end&quot;</span>)) noexcept;</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160; </div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    ~<a class="code" href="classqx_1_1error__context.html">error_context</a>() noexcept;</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160; </div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="keyword">private</span>:<span class="comment"></span></div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="comment">    /**</span></div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="comment">        @brief Message capturing event</span></div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<span class="comment">        @param eVerbosity - message verbosity</span></div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<span class="comment">        @param svMessage  - message text</span></div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;<span class="comment">    **/</span></div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    <span class="keywordtype">void</span> on_message(verbosity eVerbosity, string_view svMessage) noexcept;</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;<span class="comment">    /**</span></div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;<span class="comment">        @brief Error occured event</span></div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;<span class="comment">    **/</span></div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    <span class="keywordtype">void</span> on_error() noexcept;</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160; </div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    string_view         m_svHeader;</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    string_view         m_svFooter;</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    <span class="keywordtype">string</span>              m_sMessages;</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    verbosity           m_eMinCatchVerbosity;</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    <a class="code" href="classqx_1_1time__ordered__priority__key.html">delegate_token_type</a> m_OnMessagesToken;</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;    <a class="code" href="classqx_1_1time__ordered__priority__key.html">delegate_token_type</a> m_OnErrorToken;</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;};</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160; </div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;} <span class="comment">// namespace qx</span></div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160; </div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="error__context_8inl.html">qx/asserts/error_context.inl</a>&gt;</span></div>
-<div class="ttc" id="aclassqx_1_1error__context_html"><div class="ttname"><a href="classqx_1_1error__context.html">qx::error_context</a></div><div class="ttdoc">Collects all log messages in the scope of its lifetime and outputs them when any assertion is trigger...</div><div class="ttdef"><b>Definition:</b> <a href="error__context_8h_source.html#l00031">error_context.h:32</a></div></div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="comment">             Doesn&#39;t catch constexpr verbosity erased messages.</span></div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="comment">    @warning Does not support fibres and coroutines (thread switching)</span></div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="comment">    @author  Khrapov</span></div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="comment">    @date    10.02.2026</span></div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="comment">**/</span></div>
+<div class="line"><a name="l00032"></a><span class="lineno"><a class="line" href="classqx_1_1error__context.html">   32</a></span>&#160;<span class="keyword">class </span><a class="code" href="classqx_1_1error__context.html">error_context</a></div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;{</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    QX_NONCOPYMOVABLE(<a class="code" href="classqx_1_1error__context.html">error_context</a>);</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160; </div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="keyword">public</span>:<span class="comment"></span></div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="comment">    /**</span></div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="comment">        @brief error_context object constructor</span></div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="comment">        @param eMinCaptureVerbosity - minimum verbosity of messages this context should capture</span></div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="comment">        @param svHeader             - a header to add when there is at least one message</span></div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="comment">        @param svFooter             - a footer to add when there is at least one message</span></div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="comment">    **/</span></div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    <a class="code" href="classqx_1_1error__context.html#a55712970318e3aef7f18481ef4fd9176">error_context</a>(</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;        verbosity   eMinCaptureVerbosity,</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;        string_view svHeader = QXT(<span class="stringliteral">&quot;Error context start&quot;</span>),</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;        string_view svFooter = QXT(<span class="stringliteral">&quot;Error context end&quot;</span>)) noexcept;</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160; </div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    ~<a class="code" href="classqx_1_1error__context.html">error_context</a>() noexcept;</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160; </div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="keyword">private</span>:<span class="comment"></span></div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="comment">    /**</span></div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<span class="comment">        @brief Message capturing event</span></div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<span class="comment">        @param eVerbosity - message verbosity</span></div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;<span class="comment">        @param svMessage  - message text</span></div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="comment">    **/</span></div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    <span class="keywordtype">void</span> on_message(verbosity eVerbosity, string_view svMessage) noexcept;</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;<span class="comment">    /**</span></div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;<span class="comment">        @brief Error occured event</span></div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;<span class="comment">        @param errorThreadId - the thread where error occured</span></div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;<span class="comment">    **/</span></div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    <span class="keywordtype">void</span> on_error(std::thread::id errorThreadId) noexcept;</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160; </div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    string_view           m_svHeader;</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    string_view           m_svFooter;</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    <span class="keywordtype">string</span>                m_sMessages;</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;    verbosity             m_eMinCatchVerbosity;</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    <span class="keyword">const</span> std::thread::id m_ThreadId = std::this_thread::get_id();</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;    <a class="code" href="classqx_1_1time__ordered__priority__key.html">delegate_token_type</a>   m_OnMessagesToken;</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;    <a class="code" href="classqx_1_1time__ordered__priority__key.html">delegate_token_type</a>   m_OnErrorToken;</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;};</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160; </div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;} <span class="comment">// namespace qx</span></div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160; </div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="error__context_8inl.html">qx/asserts/error_context.inl</a>&gt;</span></div>
+<div class="ttc" id="aclassqx_1_1error__context_html"><div class="ttname"><a href="classqx_1_1error__context.html">qx::error_context</a></div><div class="ttdoc">Collects all log messages in the scope of its lifetime and outputs them when any assertion is trigger...</div><div class="ttdef"><b>Definition:</b> <a href="error__context_8h_source.html#l00032">error_context.h:33</a></div></div>
 <div class="ttc" id="aclassqx_1_1error__context_html_a55712970318e3aef7f18481ef4fd9176"><div class="ttname"><a href="classqx_1_1error__context.html#a55712970318e3aef7f18481ef4fd9176">qx::error_context::error_context</a></div><div class="ttdeci">error_context(verbosity eMinCaptureVerbosity, string_view svHeader=QXT(&quot;Error context start&quot;), string_view svFooter=QXT(&quot;Error context end&quot;)) noexcept</div><div class="ttdoc">error_context object constructor</div><div class="ttdef"><b>Definition:</b> <a href="error__context_8inl_source.html#l00013">error_context.inl:13</a></div></div>
 <div class="ttc" id="aclassqx_1_1time__ordered__priority__key_html"><div class="ttname"><a href="classqx_1_1time__ordered__priority__key.html">qx::time_ordered_priority_key</a></div><div class="ttdoc">A class that can be used as a key in ordered containers so that items are ordered in descending order...</div><div class="ttdef"><b>Definition:</b> <a href="priority_8h_source.html#l00046">priority.h:47</a></div></div>
 <div class="ttc" id="aerror__context_8inl_html"><div class="ttname"><a href="error__context_8inl.html">error_context.inl</a></div></div>

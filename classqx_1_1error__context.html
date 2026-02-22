@@ -86,11 +86,11 @@ Public Member Functions</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Collects all log messages in the scope of its lifetime and outputs them when any assertion is triggered. Particularly useful in multithreaded context where many threads write simultaneously, allowing seeing a clear thread output. </p>
-<p>Requires <a class="el" href="classqx_1_1error__context__stream.html" title="A stream that allows capturing all messages and redirecting them to error contexts.">qx::error_context_stream</a> to be added to the logger to work. Does not display anything if there were no log messages. Otherwise, it displays the header, all messages, and then the footer for visual differentiation. </p><dl class="section warning"><dt>Warning</dt><dd>Does not support fibres and coroutines (thread switching) </dd></dl>
+<p>Requires <a class="el" href="classqx_1_1error__context__stream.html" title="A stream that allows capturing all messages and redirecting them to error contexts.">qx::error_context_stream</a> to be added to the logger to work. Does not display anything if there were no log messages. Otherwise, it displays the header, all messages, and then the footer for visual differentiation. Doesn't catch constexpr verbosity erased messages. </p><dl class="section warning"><dt>Warning</dt><dd>Does not support fibres and coroutines (thread switching) </dd></dl>
 <dl class="section author"><dt>Author</dt><dd>Khrapov </dd></dl>
 <dl class="section date"><dt>Date</dt><dd>10.02.2026 </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="error__context_8h_source.html#l00031">31</a> of file <a class="el" href="error__context_8h_source.html">error_context.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="error__context_8h_source.html#l00032">32</a> of file <a class="el" href="error__context_8h_source.html">error_context.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a55712970318e3aef7f18481ef4fd9176"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a55712970318e3aef7f18481ef4fd9176">&#9670;&nbsp;</a></span>error_context()</h2>
@@ -136,8 +136,8 @@ Public Member Functions</h2></td></tr>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">eMinCaptureVerbosity</td><td>- minimum verbosity of messages this context should capture </td></tr>
-    <tr><td class="paramname">svHeader</td><td>- a header to add when there is at lease one message </td></tr>
-    <tr><td class="paramname">svFooter</td><td>- a footer to add when there is at lease one message </td></tr>
+    <tr><td class="paramname">svHeader</td><td>- a header to add when there is at least one message </td></tr>
+    <tr><td class="paramname">svFooter</td><td>- a footer to add when there is at least one message </td></tr>
   </table>
   </dd>
 </dl>
