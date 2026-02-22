@@ -28,7 +28,7 @@ inline bool asserts_manager::do_assert(
 
         std::shared_lock _(get_logger().get_streams_mutex());
         if (auto* pStream = get_logger().get_stream<error_context_stream>())
-            pStream->on_error();
+            pStream->on_error(std::this_thread::get_id());
     }
 
     if (m_Config.onAssertion)

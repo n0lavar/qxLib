@@ -43,16 +43,10 @@ inline void error_context::on_message(verbosity eVerbosity, string_view svMessag
         m_sMessages += svMessage;
 }
 
-inline void error_context::on_error() noexcept
+inline void error_context::on_error(std::thread::id errorThreadId) noexcept
 {
-    if (!m_sMessages.empty())
-    {
-        m_sMessages.insert(0, QXT('\n'));
-        m_sMessages.insert(0, m_svHeader);
-        m_sMessages.insert(0, QXT('\n'));
-        m_sMessages += m_svFooter;
-        QX_LOG(qx::verbosity::log, m_sMessages);
-    }
+    if (m_ThreadId == errorThreadId && !m_sMessages.empty())
+        QX_LOG(qx::verbosity::log, "\n{}\n{}{}", m_svHeader, m_sMessages, m_svFooter);
 }
 
 } // namespace qx

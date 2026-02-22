@@ -27,12 +27,12 @@ inline threads_shared<error_context_stream::on_error_delegate>& error_context_st
     return m_Data->onError;
 }
 
-inline void error_context_stream::on_error() noexcept
+inline void error_context_stream::on_error(std::thread::id errorThreadId) noexcept
 {
     error_context_stream_data& data = *m_Data;
-    data.disabledThreads.lock()->push_back(std::this_thread::get_id());
-    data.onError.lock()->execute();
-    std::erase(*data.disabledThreads.lock(), std::this_thread::get_id());
+    data.disabledThreads.lock()->push_back(errorThreadId);
+    data.onError.lock()->execute(errorThreadId);
+    std::erase(*data.disabledThreads.lock(), errorThreadId);
 }
 
 inline bool error_context_stream::log_unconditionally_required(

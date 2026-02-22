@@ -23,6 +23,7 @@ namespace qx
     @details Requires qx::error_context_stream to be added to the logger to work.
              Does not display anything if there were no log messages.
              Otherwise, it displays the header, all messages, and then the footer for visual differentiation.
+             Doesn't catch constexpr verbosity erased messages.
     @warning Does not support fibres and coroutines (thread switching)
     @author  Khrapov
     @date    10.02.2026
@@ -36,8 +37,8 @@ public:
     /**
         @brief error_context object constructor
         @param eMinCaptureVerbosity - minimum verbosity of messages this context should capture
-        @param svHeader             - a header to add when there is at lease one message
-        @param svFooter             - a footer to add when there is at lease one message
+        @param svHeader             - a header to add when there is at least one message
+        @param svFooter             - a footer to add when there is at least one message
     **/
     error_context(
         verbosity   eMinCaptureVerbosity,
@@ -56,16 +57,18 @@ private:
 
     /**
         @brief Error occured event
+        @param errorThreadId - the thread where error occured
     **/
-    void on_error() noexcept;
+    void on_error(std::thread::id errorThreadId) noexcept;
 
 private:
-    string_view         m_svHeader;
-    string_view         m_svFooter;
-    string              m_sMessages;
-    verbosity           m_eMinCatchVerbosity;
-    delegate_token_type m_OnMessagesToken;
-    delegate_token_type m_OnErrorToken;
+    string_view           m_svHeader;
+    string_view           m_svFooter;
+    string                m_sMessages;
+    verbosity             m_eMinCatchVerbosity;
+    const std::thread::id m_ThreadId = std::this_thread::get_id();
+    delegate_token_type   m_OnMessagesToken;
+    delegate_token_type   m_OnErrorToken;
 };
 
 } // namespace qx

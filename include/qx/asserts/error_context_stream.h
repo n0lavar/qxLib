@@ -36,7 +36,7 @@ class error_context_stream : public base_logger_stream
 public:
     using on_message_delegate_t      = delegate<void(verbosity, string_view)>;
     using on_message_delegates_map_t = std::unordered_map<std::thread::id, on_message_delegate_t>;
-    using on_error_delegate          = delegate<void()>;
+    using on_error_delegate          = delegate<void(std::thread::id)>;
 
 public:
     error_context_stream() noexcept;
@@ -55,8 +55,9 @@ public:
 
     /**
         @brief Emit error event for all listeners
+        @param errorThreadId - the thread where error occured
     **/
-    void on_error() noexcept;
+    void on_error(std::thread::id errorThreadId) noexcept;
 
 private:
     // base_logger_stream
