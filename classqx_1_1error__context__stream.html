@@ -95,9 +95,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a06c1187a5978bddc50fd2da688786df6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classqx_1_1threads__shared.html">threads_shared</a>&lt; on_message_delegates_map_t &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1error__context__stream.html#a06c1187a5978bddc50fd2da688786df6">get_on_messages</a> () noexcept</td></tr>
 <tr class="memdesc:a06c1187a5978bddc50fd2da688786df6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get on messages delegate.  <a href="classqx_1_1error__context__stream.html#a06c1187a5978bddc50fd2da688786df6">More...</a><br /></td></tr>
 <tr class="separator:a06c1187a5978bddc50fd2da688786df6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae7570b855ecd57311c248202a551d3f8"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classqx_1_1threads__shared.html">threads_shared</a>&lt; <a class="el" href="classqx_1_1delegate.html">on_error_delegate</a> &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1error__context__stream.html#ae7570b855ecd57311c248202a551d3f8">get_on_error</a> () noexcept</td></tr>
-<tr class="memdesc:ae7570b855ecd57311c248202a551d3f8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get on error delegate.  <a href="classqx_1_1error__context__stream.html#ae7570b855ecd57311c248202a551d3f8">More...</a><br /></td></tr>
-<tr class="separator:ae7570b855ecd57311c248202a551d3f8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abb79edd13577228b288d3bee03cd2bd7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classqx_1_1threads__shared.html">threads_shared</a>&lt; <a class="el" href="classqx_1_1delegate.html">on_error_delegate</a>, std::recursive_mutex &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1error__context__stream.html#abb79edd13577228b288d3bee03cd2bd7">get_on_error</a> () noexcept</td></tr>
+<tr class="memdesc:abb79edd13577228b288d3bee03cd2bd7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get on error delegate.  <a href="classqx_1_1error__context__stream.html#abb79edd13577228b288d3bee03cd2bd7">More...</a><br /></td></tr>
+<tr class="separator:abb79edd13577228b288d3bee03cd2bd7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9d3d3d990aa868e751f6f46da3eff4b0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1error__context__stream.html#a9d3d3d990aa868e751f6f46da3eff4b0">on_error</a> (std::thread::id errorThreadId) noexcept</td></tr>
 <tr class="memdesc:a9d3d3d990aa868e751f6f46da3eff4b0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Emit error event for all listeners.  <a href="classqx_1_1error__context__stream.html#a9d3d3d990aa868e751f6f46da3eff4b0">More...</a><br /></td></tr>
 <tr class="separator:a9d3d3d990aa868e751f6f46da3eff4b0"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -120,8 +120,8 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 
 <p class="definition">Definition at line <a class="el" href="error__context__stream_8h_source.html#l00030">30</a> of file <a class="el" href="error__context__stream_8h_source.html">error_context_stream.h</a>.</p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
-<a id="ae7570b855ecd57311c248202a551d3f8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae7570b855ecd57311c248202a551d3f8">&#9670;&nbsp;</a></span>get_on_error()</h2>
+<a id="abb79edd13577228b288d3bee03cd2bd7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abb79edd13577228b288d3bee03cd2bd7">&#9670;&nbsp;</a></span>get_on_error()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -130,7 +130,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classqx_1_1threads__shared.html">threads_shared</a>&lt; <a class="el" href="classqx_1_1delegate.html">error_context_stream::on_error_delegate</a> &gt; &amp; qx::error_context_stream::get_on_error </td>
+          <td class="memname"><a class="el" href="classqx_1_1threads__shared.html">threads_shared</a>&lt; <a class="el" href="classqx_1_1delegate.html">error_context_stream::on_error_delegate</a>, std::recursive_mutex &gt; &amp; qx::error_context_stream::get_on_error </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -222,7 +222,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="error__context__stream_8inl_source.html#l00030">30</a> of file <a class="el" href="error__context__stream_8inl_source.html">error_context_stream.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="error__context__stream_8inl_source.html#l00031">31</a> of file <a class="el" href="error__context__stream_8inl_source.html">error_context_stream.inl</a>.</p>
 
 </div>
 </div>

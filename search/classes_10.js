@@ -6,7 +6,7 @@ var searchData=
   ['test_5fchar_5ftraits_3c_20wchar_5ft_2c_20usings_5fchar_5ftraits_5ft_20_3e_1111',['test_char_traits&lt; wchar_t, usings_char_traits_t &gt;',['../structqx_1_1string__traits_1_1test__char__traits_3_01wchar__t_00_01usings__char__traits__t_01_4.html',1,'qx::string_traits']]],
   ['threads_5fshared_1112',['threads_shared',['../classqx_1_1threads__shared.html',1,'qx']]],
   ['threads_5fshared_3c_20on_5fmessage_5fdelegates_5fmap_5ft_20_3e_1113',['threads_shared&lt; on_message_delegates_map_t &gt;',['../classqx_1_1threads__shared.html',1,'qx']]],
-  ['threads_5fshared_3c_20qx_3a_3adelegate_20_3e_1114',['threads_shared&lt; qx::delegate &gt;',['../classqx_1_1threads__shared.html',1,'qx']]],
+  ['threads_5fshared_3c_20qx_3a_3adelegate_2c_20std_3a_3arecursive_5fmutex_20_3e_1114',['threads_shared&lt; qx::delegate, std::recursive_mutex &gt;',['../classqx_1_1threads__shared.html',1,'qx']]],
   ['threads_5fshared_3c_20std_3a_3avector_3c_20std_3a_3athread_3a_3aid_20_3e_20_3e_1115',['threads_shared&lt; std::vector&lt; std::thread::id &gt; &gt;',['../classqx_1_1threads__shared.html',1,'qx']]],
   ['time_5fordered_5fpriority_5fkey_1116',['time_ordered_priority_key',['../classqx_1_1time__ordered__priority__key.html',1,'qx']]],
   ['token_1117',['token',['../classqx_1_1unique__objects__pool_1_1token.html',1,'qx::unique_objects_pool']]],

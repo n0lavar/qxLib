@@ -35,7 +35,7 @@ var searchData=
   ['get_5fname_334',['get_name',['../classqx_1_1type__strings.html#a67fcba098d991e6513fdbcf91f6ef0b1',1,'qx::type_strings::get_name()'],['../classqx_1_1category.html#a0b2b93e7b142f4a34cf90ceaa304177f',1,'qx::category::get_name()']]],
   ['get_5fnum_5fentries_335',['get_num_entries',['../classqx_1_1moving__average.html#a21a2e82dbb4ce2fd748fb2d97738f932',1,'qx::moving_average']]],
   ['get_5fnum_5fobservers_336',['get_num_observers',['../classqx_1_1subject.html#a8ff686586fdc96d469fd6de3ec50dc62',1,'qx::subject']]],
-  ['get_5fon_5ferror_337',['get_on_error',['../classqx_1_1error__context__stream.html#ae7570b855ecd57311c248202a551d3f8',1,'qx::error_context_stream']]],
+  ['get_5fon_5ferror_337',['get_on_error',['../classqx_1_1error__context__stream.html#abb79edd13577228b288d3bee03cd2bd7',1,'qx::error_context_stream']]],
   ['get_5fon_5fmessages_338',['get_on_messages',['../classqx_1_1error__context__stream.html#a06c1187a5978bddc50fd2da688786df6',1,'qx::error_context_stream']]],
   ['get_5for_5fcreate_339',['get_or_create',['../classqx_1_1unique__objects__pool.html#a8f8aeebe0e0000629ffeff39309379ed',1,'qx::unique_objects_pool']]],
   ['get_5fpriority_340',['get_priority',['../classqx_1_1time__ordered__priority__key.html#aa4a73762b126171d624166b7e888c7e8',1,'qx::time_ordered_priority_key']]],

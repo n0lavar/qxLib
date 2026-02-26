@@ -133,11 +133,11 @@ $(function() {
 <div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    <span class="keywordtype">void</span> on_error(std::thread::id errorThreadId) noexcept;</div>
 <div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160; </div>
 <div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    string_view           m_svHeader;</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    string_view           m_svFooter;</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    <span class="keywordtype">string</span>                m_sMessages;</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;    verbosity             m_eMinCatchVerbosity;</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    <span class="keyword">const</span> std::thread::id m_ThreadId = std::this_thread::get_id();</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    <span class="keyword">const</span> string_view     m_svHeader;</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    <span class="keyword">const</span> string_view     m_svFooter;</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    <span class="keyword">const</span> verbosity       m_eMinCatchVerbosity;</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;    <span class="keyword">const</span> std::thread::id m_ThreadId = std::this_thread::get_id();</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    <span class="keywordtype">string</span>                m_sMessages;</div>
 <div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;    <a class="code" href="classqx_1_1time__ordered__priority__key.html">delegate_token_type</a>   m_OnMessagesToken;</div>
 <div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;    <a class="code" href="classqx_1_1time__ordered__priority__key.html">delegate_token_type</a>   m_OnErrorToken;</div>
 <div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;};</div>

@@ -11,7 +11,7 @@ var searchData=
   ['threads_5fshared_2eh_778',['threads_shared.h',['../threads__shared_8h.html',1,'']]],
   ['threads_5fshared_2einl_779',['threads_shared.inl',['../threads__shared_8inl.html',1,'']]],
   ['threads_5fshared_3c_20on_5fmessage_5fdelegates_5fmap_5ft_20_3e_780',['threads_shared&lt; on_message_delegates_map_t &gt;',['../classqx_1_1threads__shared.html',1,'qx']]],
-  ['threads_5fshared_3c_20qx_3a_3adelegate_20_3e_781',['threads_shared&lt; qx::delegate &gt;',['../classqx_1_1threads__shared.html',1,'qx']]],
+  ['threads_5fshared_3c_20qx_3a_3adelegate_2c_20std_3a_3arecursive_5fmutex_20_3e_781',['threads_shared&lt; qx::delegate, std::recursive_mutex &gt;',['../classqx_1_1threads__shared.html',1,'qx']]],
   ['threads_5fshared_3c_20std_3a_3avector_3c_20std_3a_3athread_3a_3aid_20_3e_20_3e_782',['threads_shared&lt; std::vector&lt; std::thread::id &gt; &gt;',['../classqx_1_1threads__shared.html',1,'qx']]],
   ['time_5fname_783',['time_name',['../base__file__logger__stream_8h.html#aaab6d2d26ae57b1521451921e1273220a941d28bbdfbc0fd385176cb153bf336c',1,'qx']]],
   ['time_5fordered_5fpriority_5fkey_784',['time_ordered_priority_key',['../classqx_1_1time__ordered__priority__key.html',1,'qx::time_ordered_priority_key'],['../classqx_1_1time__ordered__priority__key.html#a0c6090bcd581bcef64a3d32789bfbe5b',1,'qx::time_ordered_priority_key::time_ordered_priority_key()']]],
