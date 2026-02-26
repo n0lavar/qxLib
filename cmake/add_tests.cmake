@@ -51,7 +51,7 @@ macro(add_tests
         foreach(_test_file ${TEST_SRC_FILES})
             get_filename_component(_target ${_test_file} NAME_WE)
             set(_target "${_target}.gtest")
-            add_executable("${_target}" ${_test_file} "${_tests_main_cpp}" ${FILES_NATVIS} ${PVSCONFIG_FILE})
+            add_executable("${_target}" ${_test_file} "${_tests_main_cpp}" ${PVSCONFIG_FILE})
             cmake_language(CALL ${_setup_test_target} ${_target})
             set_test_options(${_target})
             add_test(${_target} ${_target})

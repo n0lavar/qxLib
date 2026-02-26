@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AutoVisualizer xmlns="http://schemas.microsoft.com/vstudio/debugger/natvis/2010">
+
+	<Type Name="qx::sbo_bytes&lt;*&gt;">
+		<DisplayString Condition="m_nAllocatedSize==0">inlined, size={m_nSize}B, capacity={nBufferSize}B</DisplayString>
+		<DisplayString Condition="m_nAllocatedSize!=0">heap, size={m_nSize}B, capacity={m_nAllocatedSize}B</DisplayString>
+
+		<Expand>
+			<Item Name="[inlined]">m_nAllocatedSize==0</Item>
+			<Item Name="[size]">m_nSize</Item>
+			<Item Name="[capacity]">(m_nAllocatedSize==0) ? (unsigned long long)nBufferSize : (unsigned long long)m_nAllocatedSize</Item>
+		</Expand>
+	</Type>
+
+</AutoVisualizer>

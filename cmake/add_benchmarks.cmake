@@ -27,7 +27,7 @@ macro(add_benchmarks
             get_filename_component(_target ${_file} NAME_WE)
             set(_target "${_target}.bench")
             
-            add_executable("${_target}" ${_file} ${FILES_NATVIS}  ${PVSCONFIG_FILE})
+            add_executable("${_target}" ${_file} ${PVSCONFIG_FILE})
 
             target_include_directories(${_target} PRIVATE
                 ${BENCHMARK_INCLUDE_DIR}
