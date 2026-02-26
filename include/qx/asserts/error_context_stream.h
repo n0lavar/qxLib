@@ -51,7 +51,7 @@ public:
         @brief  Get on error delegate
         @retval  - on error delegate
     **/
-    threads_shared<on_error_delegate>& get_on_error() noexcept;
+    threads_shared<on_error_delegate, std::recursive_mutex>& get_on_error() noexcept;
 
     /**
         @brief Emit error event for all listeners
@@ -84,9 +84,9 @@ private:
 private:
     struct error_context_stream_data
     {
-        threads_shared<on_message_delegates_map_t>   onMessages;
-        threads_shared<on_error_delegate>            onError;
-        threads_shared<std::vector<std::thread::id>> disabledThreads;
+        threads_shared<on_message_delegates_map_t>              onMessages;
+        threads_shared<on_error_delegate, std::recursive_mutex> onError;
+        threads_shared<std::vector<std::thread::id>>            disabledThreads;
     };
     unique_ref<error_context_stream_data> m_Data;
 };

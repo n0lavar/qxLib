@@ -213,6 +213,18 @@ public:
     **/
     void clear() noexcept;
 
+    /**
+        @brief  Get the number of functions bound to this delegate
+        @retval  - the number of functions bound to this delegate
+    **/
+    size_t size() const noexcept;
+
+    /**
+        @brief  Check if this delegate is empty
+        @retval  - true if this delegate is empty
+    **/
+    bool empty() const noexcept;
+
 protected:
     /**
         @brief  Execute all callables

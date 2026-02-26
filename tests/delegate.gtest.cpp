@@ -826,10 +826,12 @@ TEST(delegate, non_pipe_result)
     EXPECT_EQ(result.sData, QXT("00"));
 }
 
-TEST(delegate, small_object_optimization)
+TEST(delegate, small_object_optimization_and_size)
 {
     qx::delegate<int()> delegate;
     EXPECT_EQ(delegate.execute(), 0);
+    EXPECT_TRUE(delegate.empty());
+    EXPECT_EQ(delegate.size(), 0);
 
     qx::delegate_token_type token1 = delegate.add_token(
         []()
@@ -837,6 +839,8 @@ TEST(delegate, small_object_optimization)
             return 1;
         });
     EXPECT_EQ(delegate.execute(), 1);
+    EXPECT_FALSE(delegate.empty());
+    EXPECT_EQ(delegate.size(), 1);
 
     qx::delegate_token_type token2 = delegate.add_token(
         []()
@@ -844,6 +848,8 @@ TEST(delegate, small_object_optimization)
             return 2;
         });
     EXPECT_EQ(delegate.execute(), 3);
+    EXPECT_FALSE(delegate.empty());
+    EXPECT_EQ(delegate.size(), 2);
 
     qx::delegate_token_type token3 = delegate.add_token(
         []()
@@ -851,13 +857,21 @@ TEST(delegate, small_object_optimization)
             return 4;
         });
     EXPECT_EQ(delegate.execute(), 7);
+    EXPECT_FALSE(delegate.empty());
+    EXPECT_EQ(delegate.size(), 3);
 
     delegate.remove(token3);
     EXPECT_EQ(delegate.execute(), 3);
+    EXPECT_FALSE(delegate.empty());
+    EXPECT_EQ(delegate.size(), 2);
 
     delegate.remove(token2);
     EXPECT_EQ(delegate.execute(), 1);
+    EXPECT_FALSE(delegate.empty());
+    EXPECT_EQ(delegate.size(), 1);
 
     delegate.remove(token1);
     EXPECT_EQ(delegate.execute(), 0);
+    EXPECT_TRUE(delegate.empty());
+    EXPECT_EQ(delegate.size(), 0);
 }

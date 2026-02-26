@@ -187,6 +187,7 @@ bool base_delegate<derived_t, return_t, args_t...>::remove(delegate_token_type t
                    }
                    else
                    {
+                       QX_STATIC_ASSERT_NO_INSTANTIATION("Invalid type");
                        return false;
                    }
                },
@@ -197,6 +198,38 @@ template<class derived_t, class return_t, class... args_t>
 void base_delegate<derived_t, return_t, args_t...>::clear() noexcept
 {
     m_optFunctions.reset();
+}
+
+template<class derived_t, class return_t, class... args_t>
+size_t base_delegate<derived_t, return_t, args_t...>::size() const noexcept
+{
+    if (!m_optFunctions)
+        return 0;
+
+    return std::visit(
+        []<class T>(const T& value) -> size_t
+        {
+            if constexpr (std::is_same_v<T, single_value_type>)
+            {
+                return 1;
+            }
+            else if constexpr (std::is_same_v<T, container_type>)
+            {
+                return value.size();
+            }
+            else
+            {
+                QX_STATIC_ASSERT_NO_INSTANTIATION("Invalid type");
+                return 0;
+            }
+        },
+        *m_optFunctions);
+}
+
+template<class derived_t, class return_t, class... args_t>
+bool base_delegate<derived_t, return_t, args_t...>::empty() const noexcept
+{
+    return size() == 0;
 }
 
 template<class derived_t, class return_t, class... args_t>

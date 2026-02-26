@@ -62,11 +62,11 @@ private:
     void on_error(std::thread::id errorThreadId) noexcept;
 
 private:
-    string_view           m_svHeader;
-    string_view           m_svFooter;
-    string                m_sMessages;
-    verbosity             m_eMinCatchVerbosity;
+    const string_view     m_svHeader;
+    const string_view     m_svFooter;
+    const verbosity       m_eMinCatchVerbosity;
     const std::thread::id m_ThreadId = std::this_thread::get_id();
+    string                m_sMessages;
     delegate_token_type   m_OnMessagesToken;
     delegate_token_type   m_OnErrorToken;
 };

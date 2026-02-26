@@ -22,7 +22,8 @@ inline threads_shared<error_context_stream::on_message_delegates_map_t>& error_c
     return m_Data->onMessages;
 }
 
-inline threads_shared<error_context_stream::on_error_delegate>& error_context_stream::get_on_error() noexcept
+inline threads_shared<error_context_stream::on_error_delegate, std::recursive_mutex>& error_context_stream::
+    get_on_error() noexcept
 {
     return m_Data->onError;
 }
@@ -44,7 +45,7 @@ inline bool error_context_stream::log_unconditionally_required(
     string_view                           svFunction,
     int                                   nLine) const noexcept
 {
-    return true;
+    return m_Data.get().onMessages.lock()->contains(threadId);
 }
 
 inline void error_context_stream::do_log(
