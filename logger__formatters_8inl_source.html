@@ -90,7 +90,7 @@ $(function() {
 <div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;{</div>
 <div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    <span class="keyword">auto</span> timeSeconds = floor&lt;std::chrono::seconds&gt;(time);</div>
 <div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160; </div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    <a class="code" href="structqx_1_1string__traits_1_1format__traits.html">string_traits::format_traits&lt;char_type, string_traits::usings_traits&lt;char_type&gt;</a>&gt;::format_to(</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    std::format_to(</div>
 <div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;        it,</div>
 <div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;        QXT(<span class="stringliteral">&quot;{:%d}{}{:%m}{}{:%Y}_{:%H}{}{:%M}{}{:%S}&quot;</span>),</div>
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;        timeSeconds,</div>
@@ -194,7 +194,6 @@ $(function() {
 <div class="ttc" id="alogger__formatters_8h_html_a281d30a0d7981edefcc5b4d32c857958"><div class="ttname"><a href="logger__formatters_8h.html#a281d30a0d7981edefcc5b4d32c857958">qx::append_time_string</a></div><div class="ttdeci">void append_time_string(out_it_t it, char_type chDateDelimiter, char_type chTimeDelimiter, std::chrono::system_clock::time_point time) noexcept</div><div class="ttdoc">Format time string to the buffer.</div><div class="ttdef"><b>Definition:</b> <a href="logger__formatters_8inl_source.html#l00014">logger_formatters.inl:14</a></div></div>
 <div class="ttc" id="alogger__formatters_8h_html_a6b1ebe23183a9bd9ceb5ba2a0b33d0e4"><div class="ttname"><a href="logger__formatters_8h.html#a6b1ebe23183a9bd9ceb5ba2a0b33d0e4">qx::format_message_qx</a></div><div class="ttdeci">string format_message_qx(const category &amp;category, verbosity eVerbosity, std::thread::id threadId, std::chrono::system_clock::time_point messageTime, string_view svFile, string_view svFunction, int nLine, string sMessage) noexcept</div><div class="ttdef"><b>Definition:</b> <a href="logger__formatters_8inl_source.html#l00064">logger_formatters.inl:64</a></div></div>
 <div class="ttc" id="alogger__formatters_8h_html_aeda5fed5bbbdf1d1ad33c5b17e997474"><div class="ttname"><a href="logger__formatters_8h.html#aeda5fed5bbbdf1d1ad33c5b17e997474">qx::get_verbosity_prefix</a></div><div class="ttdeci">constexpr string_view get_verbosity_prefix(verbosity eVerbosity) noexcept</div><div class="ttdoc">Get verbosity prefix.</div><div class="ttdef"><b>Definition:</b> <a href="logger__formatters_8inl_source.html#l00037">logger_formatters.inl:37</a></div></div>
-<div class="ttc" id="astructqx_1_1string__traits_1_1format__traits_html"><div class="ttname"><a href="structqx_1_1string__traits_1_1format__traits.html">qx::string_traits::format_traits</a></div><div class="ttdef"><b>Definition:</b> <a href="string__traits_8h_source.html#l00353">string_traits.h:353</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

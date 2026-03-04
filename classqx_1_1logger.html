@@ -114,9 +114,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:aea5aaac2a4c792d209e33907e65d5409"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1logger.html#aea5aaac2a4c792d209e33907e65d5409">set_default_formatter</a> (format_function_pointer pFormatter) noexcept</td></tr>
 <tr class="memdesc:aea5aaac2a4c792d209e33907e65d5409"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set a function that will be used as the default formatter in case no formatter found in categories registered.  <a href="classqx_1_1logger.html#aea5aaac2a4c792d209e33907e65d5409">More...</a><br /></td></tr>
 <tr class="separator:aea5aaac2a4c792d209e33907e65d5409"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2871501909b03b5a1da3c52236742023"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1logger.html#a2871501909b03b5a1da3c52236742023">log</a> (const <a class="el" href="classqx_1_1category.html">category</a> &amp;<a class="el" href="classqx_1_1category.html">category</a>, verbosity eVerbosity, std::thread::id threadId, std::chrono::system_clock::time_point messageTime, string_view svFile, string_view svFunction, int nLine, <a class="el" href="structqx_1_1string__pool_1_1item.html">logger_string_pool::item</a> message)</td></tr>
-<tr class="memdesc:a2871501909b03b5a1da3c52236742023"><td class="mdescLeft">&#160;</td><td class="mdescRight">Log to all streams.  <a href="classqx_1_1logger.html#a2871501909b03b5a1da3c52236742023">More...</a><br /></td></tr>
-<tr class="separator:a2871501909b03b5a1da3c52236742023"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8c4de37c0788147d909d31ffa156e507"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1logger.html#a8c4de37c0788147d909d31ffa156e507">log_macro</a> (const <a class="el" href="classqx_1_1category.html">category</a> &amp;<a class="el" href="classqx_1_1category.html">category</a>, verbosity eVerbosity, std::thread::id threadId, std::chrono::system_clock::time_point messageTime, string_view svFile, string_view svFunction, int nLine, <a class="el" href="structqx_1_1string__pool_1_1item.html">logger_string_pool::item</a> message)</td></tr>
+<tr class="memdesc:a8c4de37c0788147d909d31ffa156e507"><td class="mdescLeft">&#160;</td><td class="mdescRight">Main log function: log to all streams. For macro and internal usage.  <a href="classqx_1_1logger.html#a8c4de37c0788147d909d31ffa156e507">More...</a><br /></td></tr>
+<tr class="separator:a8c4de37c0788147d909d31ffa156e507"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af975c6169624a47a72ae8995161e140f"><td class="memItemLeft" align="right" valign="top"><a id="af975c6169624a47a72ae8995161e140f"></a>
 virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1logger.html#af975c6169624a47a72ae8995161e140f">flush</a> ()</td></tr>
 <tr class="memdesc:af975c6169624a47a72ae8995161e140f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Flush all streams. <br /></td></tr>
@@ -385,8 +385,8 @@ template&lt;sbo_poly_assignable_c&lt; base_logger_stream &gt; stream_t&gt; </div
 
 </div>
 </div>
-<a id="a2871501909b03b5a1da3c52236742023"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2871501909b03b5a1da3c52236742023">&#9670;&nbsp;</a></span>log()</h2>
+<a id="a8c4de37c0788147d909d31ffa156e507"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8c4de37c0788147d909d31ffa156e507">&#9670;&nbsp;</a></span>log_macro()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -395,7 +395,7 @@ template&lt;sbo_poly_assignable_c&lt; base_logger_stream &gt; stream_t&gt; </div
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void qx::logger::log </td>
+          <td class="memname">void qx::logger::log_macro </td>
           <td>(</td>
           <td class="paramtype">const <a class="el" href="classqx_1_1category.html">category</a> &amp;&#160;</td>
           <td class="paramname"><em>category</em>, </td>
@@ -455,7 +455,7 @@ template&lt;sbo_poly_assignable_c&lt; base_logger_stream &gt; stream_t&gt; </div
 </table>
 </div><div class="memdoc">
 
-<p>Log to all streams. </p>
+<p>Main log function: log to all streams. For macro and internal usage. </p>
 <dl class="section warning"><dt>Warning</dt><dd>All input args must be ready for async work (i.e. be stable) </dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
