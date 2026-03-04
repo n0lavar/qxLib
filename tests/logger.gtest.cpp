@@ -62,12 +62,15 @@ static_assert(qx::sbo_poly_fittable_types_v<
               qx::debugger_logger_stream,
               qx::error_context_stream>);
 
-constexpr qx::string_view k_svLogFileName = QXT("logger_output_test.log");
+constexpr qx::string_view k_svLogsDirectory = QXT("./");
+constexpr qx::string_view k_svFilePrefix    = QXT("logger_output_test");
+constexpr qx::string_view k_svFileExtension = QXT(".log");
+const qx::string          k_sLogFileName    = qx::string(k_svLogsDirectory) + k_svFilePrefix + k_svFileExtension;
 
 QX_CALL_BEFORE_MAIN = []()
 {
-    if (std::filesystem::exists(k_svLogFileName))
-        std::filesystem::remove(k_svLogFileName);
+    if (std::filesystem::exists(k_sLogFileName.c_str()))
+        std::filesystem::remove(k_sLogFileName.c_str());
 };
 
 namespace traits
@@ -87,7 +90,7 @@ struct base_file : base_traits
 {
     static void set_up()
     {
-        EXPECT_FALSE(std::filesystem::exists(k_svLogFileName));
+        EXPECT_FALSE(std::filesystem::exists(k_sLogFileName.c_str()));
     }
 
     static qx::string get_content()
@@ -95,9 +98,9 @@ struct base_file : base_traits
         qx::logger_singleton::get_instance().get_logger().flush();
         qx::logger_singleton::get_instance().get_logger().reset();
 
-        EXPECT_TRUE(std::filesystem::exists(k_svLogFileName));
+        EXPECT_TRUE(std::filesystem::exists(k_sLogFileName.c_str()));
 
-        const std::filesystem::path        path(k_svLogFileName);
+        const std::filesystem::path        path(k_sLogFileName.c_str());
         std::basic_ifstream<qx::char_type> file(path, std::ios::binary);
 
         if constexpr (std::is_same_v<qx::char_type, wchar_t>)
@@ -112,7 +115,7 @@ struct base_file : base_traits
 
     static void tear_down()
     {
-        std::filesystem::remove(k_svLogFileName);
+        std::filesystem::remove(k_sLogFileName.c_str());
     }
 };
 
@@ -122,7 +125,10 @@ struct ostream_default_buffer : base_file
     {
         base_file::set_up();
         qx::logger_singleton::get_instance().get_logger().add_stream(qx::file_logger_stream_ofstream(
-            { .eLogFilePolicy = qx::log_file_policy::clear_then_uppend, .svFileName = k_svLogFileName },
+            { .eLogFilePolicy  = qx::log_file_policy::clear_then_uppend,
+              .svLogsDirectory = k_svLogsDirectory,
+              .svFilePrefix    = k_svFilePrefix,
+              .svFileExtension = k_svFileExtension },
             qx::unit<size_t, qx::units::data> { 0, qx::units::data::bytes }));
     }
 };
@@ -132,8 +138,11 @@ struct ostream : base_file
     static void set_up()
     {
         base_file::set_up();
-        qx::logger_singleton::get_instance().get_logger().add_stream(qx::file_logger_stream_ofstream(
-            { .eLogFilePolicy = qx::log_file_policy::clear_then_uppend, .svFileName = k_svLogFileName }));
+        qx::logger_singleton::get_instance().get_logger().add_stream(
+            qx::file_logger_stream_ofstream({ .eLogFilePolicy  = qx::log_file_policy::clear_then_uppend,
+                                              .svLogsDirectory = k_svLogsDirectory,
+                                              .svFilePrefix    = k_svFilePrefix,
+                                              .svFileExtension = k_svFileExtension }));
     }
 };
 
@@ -143,7 +152,10 @@ struct fopen_default_buffer : base_file
     {
         base_file::set_up();
         qx::logger_singleton::get_instance().get_logger().add_stream(qx::file_logger_stream_fopen(
-            { .eLogFilePolicy = qx::log_file_policy::clear_then_uppend, .svFileName = k_svLogFileName },
+            { .eLogFilePolicy  = qx::log_file_policy::clear_then_uppend,
+              .svLogsDirectory = k_svLogsDirectory,
+              .svFilePrefix    = k_svFilePrefix,
+              .svFileExtension = k_svFileExtension },
             qx::unit<size_t, qx::units::data> { 0, qx::units::data::bytes }));
     }
 };
@@ -153,8 +165,11 @@ struct fopen : base_file
     static void set_up()
     {
         base_file::set_up();
-        qx::logger_singleton::get_instance().get_logger().add_stream(qx::file_logger_stream_fopen(
-            { .eLogFilePolicy = qx::log_file_policy::clear_then_uppend, .svFileName = k_svLogFileName }));
+        qx::logger_singleton::get_instance().get_logger().add_stream(
+            qx::file_logger_stream_fopen({ .eLogFilePolicy  = qx::log_file_policy::clear_then_uppend,
+                                           .svLogsDirectory = k_svLogsDirectory,
+                                           .svFilePrefix    = k_svFilePrefix,
+                                           .svFileExtension = k_svFileExtension }));
     }
 };
 
@@ -164,7 +179,10 @@ struct mapping_default_initial_size : base_file
     {
         base_file::set_up();
         qx::logger_singleton::get_instance().get_logger().add_stream(qx::file_logger_stream_mapping(
-            { .eLogFilePolicy = qx::log_file_policy::clear_then_uppend, .svFileName = k_svLogFileName },
+            { .eLogFilePolicy  = qx::log_file_policy::clear_then_uppend,
+              .svLogsDirectory = k_svLogsDirectory,
+              .svFilePrefix    = k_svFilePrefix,
+              .svFileExtension = k_svFileExtension },
             qx::unit<size_t, qx::units::data> { 0, qx::units::data::bytes }));
     }
 };
@@ -174,8 +192,11 @@ struct mapping : base_file
     static void set_up()
     {
         base_file::set_up();
-        qx::logger_singleton::get_instance().get_logger().add_stream(qx::file_logger_stream_mapping(
-            { .eLogFilePolicy = qx::log_file_policy::clear_then_uppend, .svFileName = k_svLogFileName }));
+        qx::logger_singleton::get_instance().get_logger().add_stream(
+            qx::file_logger_stream_mapping({ .eLogFilePolicy  = qx::log_file_policy::clear_then_uppend,
+                                             .svLogsDirectory = k_svLogsDirectory,
+                                             .svFilePrefix    = k_svFilePrefix,
+                                             .svFileExtension = k_svFileExtension }));
     }
 };
 
@@ -607,7 +628,7 @@ TYPED_TEST(logger_output_test, formatting)
 
 TYPED_TEST(logger_output_test, error_context)
 {
-    auto& logger = qx::get_logger();
+    qx::logger& logger = qx::get_logger();
     logger.add_stream(qx::error_context_stream());
     logger.register_category(CatErrorContextTest, { .eRuntimeVerbosity = qx::verbosity::log });
 
@@ -651,7 +672,7 @@ TYPED_TEST(logger_output_test, error_context)
 
 TEST(logger_test, streams)
 {
-    auto& logger = qx::get_logger();
+    qx::logger& logger = qx::get_logger();
     logger.reset();
 
     qx::cout_logger_stream* pStream = logger.get_stream<qx::cout_logger_stream>();
@@ -678,6 +699,107 @@ TEST(logger_test, streams)
     EXPECT_FALSE(pStream);
     streams = logger.get_streams<qx::cout_logger_stream>();
     EXPECT_EQ(std::distance(streams.begin(), streams.end()), 0);
+}
+
+TEST(logger_test, rotation)
+{
+    static constexpr auto formatter = [](const qx::category&                   category,
+                                         qx::verbosity                         eVerbosity,
+                                         std::thread::id                       threadId,
+                                         std::chrono::system_clock::time_point messageTime,
+                                         qx::string_view                       svFile,
+                                         qx::string_view                       svFunction,
+                                         int                                   nLine,
+                                         qx::string                            sMessage)
+    {
+        return sMessage;
+    };
+
+    auto reset_logger = []()
+    {
+        qx::logger& logger = qx::get_logger();
+        logger.reset();
+        logger.set_default_formatter(formatter);
+        logger.add_stream(qx::file_logger_stream_mapping({ .eLogFilePolicy  = qx::log_file_policy::time_name,
+                                                           .nMaxLogFiles    = 3,
+                                                           .svLogsDirectory = k_svLogsDirectory,
+                                                           .svFilePrefix    = k_svFilePrefix,
+                                                           .svFileExtension = k_svFileExtension }));
+    };
+
+    auto check_log_files = [](std::span<const qx::string_view> messages)
+    {
+        qx::logger& logger = qx::get_logger();
+        logger.reset();
+
+        std::vector<std::filesystem::directory_entry> logFiles;
+        for (const std::filesystem::directory_entry& entry : std::filesystem::directory_iterator(k_svLogsDirectory)
+                                                                 | std::views::filter(
+                                                                     [](const std::filesystem::directory_entry& entry)
+                                                                     {
+                                                                         return entry.path().extension()
+                                                                                == k_svFileExtension;
+                                                                     }))
+        {
+            const std::wstring sFilename = entry.path().filename().wstring();
+            if (sFilename.starts_with(k_svFilePrefix))
+                logFiles.push_back(entry);
+        }
+
+        std::ranges::sort(
+            logFiles,
+            [](const std::filesystem::directory_entry& left, const std::filesystem::directory_entry& right)
+            {
+                return std::filesystem::last_write_time(left) < std::filesystem::last_write_time(right);
+            });
+
+        std::vector<qx::string> contents;
+        for (const std::filesystem::directory_entry& directoryEntry : logFiles)
+        {
+            std::basic_ifstream<qx::char_type> file(directoryEntry.path());
+            if (!file.is_open())
+                continue;
+
+            std::istreambuf_iterator<qx::char_type> itBegin = file;
+            contents.emplace_back(1, *itBegin);
+        }
+
+        EXPECT_TRUE(std::ranges::equal(
+            messages,
+            contents,
+            [](const qx::string_view& left, const qx::string& right)
+            {
+                return left == right;
+            }));
+    };
+
+    for (const auto& entry : std::filesystem::directory_iterator(k_svLogsDirectory))
+        if (entry.path().extension() == k_svFileExtension)
+            std::filesystem::remove(entry.path());
+
+    reset_logger();
+    QX_LOG(qx::verbosity::log, "0");
+    check_log_files({ { { QXT("0") } } });
+    std::this_thread::sleep_for(std::chrono::seconds(1));
+
+    reset_logger();
+    QX_LOG(qx::verbosity::log, "1");
+    check_log_files({ { { QXT("0") }, { QXT("1") } } });
+    std::this_thread::sleep_for(std::chrono::seconds(1));
+
+    reset_logger();
+    QX_LOG(qx::verbosity::log, "2");
+    check_log_files({ { { QXT("0") }, { QXT("1") }, { QXT("2") } } });
+    std::this_thread::sleep_for(std::chrono::seconds(1));
+
+    reset_logger();
+    QX_LOG(qx::verbosity::log, "3");
+    check_log_files({ { { QXT("1") }, { QXT("2") }, { QXT("3") } } });
+    std::this_thread::sleep_for(std::chrono::seconds(1));
+
+    reset_logger();
+    QX_LOG(qx::verbosity::log, "4");
+    check_log_files({ { { QXT("2") }, { QXT("3") }, { QXT("4") } } });
 }
 
 TEST(logger_test, terminal_colors)

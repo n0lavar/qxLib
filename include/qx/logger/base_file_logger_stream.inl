@@ -15,35 +15,69 @@ inline base_file_logger_stream::base_file_logger_stream(const config& streamConf
 {
 }
 
-inline std::filesystem::path base_file_logger_stream::create_folder_and_get_log_file_path(
-    log_file_policy eLogFilePolicy,
-    string_view     svFileName) noexcept
+inline std::filesystem::path base_file_logger_stream::prepare_folder_and_get_log_file_path(
+    const config& config) noexcept
 {
-    string sLogFile = svFileName;
-    if (eLogFilePolicy == log_file_policy::time_name)
+    // make sure the destination directory exists
+    std::filesystem::path logDirPath = config.svLogsDirectory;
+    if (!std::filesystem::exists(logDirPath))
     {
-        string sTime;
-        append_time_string(sTime.begin(), QXT('-'), QXT('-'), std::chrono::system_clock::now());
-
-        size_t nInsetPos = sLogFile.rfind(QXT(".log"));
-        if (nInsetPos == string::npos)
-            nInsetPos = sLogFile.size();
-
-        sLogFile.insert(nInsetPos, QXT('_'));
-        sLogFile.insert(nInsetPos + 1, sTime);
-    }
-
-    std::filesystem::path path(sLogFile.c_str());
-    if (path.has_parent_path() && !std::filesystem::exists(path.parent_path()))
-    {
-        if (!std::filesystem::create_directory(path.parent_path()))
+        if (!std::filesystem::create_directory(logDirPath))
         {
-            details::get_cerr<char_type>::get() << QXT("Can't create output folder ") << sLogFile;
+            details::get_cerr<char_type>::get() << QXT("Can't create output folder ") << logDirPath;
             return std::filesystem::path();
         }
     }
 
-    return path;
+    // rotate logs
+    if (config.eLogFilePolicy == log_file_policy::time_name && config.nMaxLogFiles > 0)
+    {
+        std::vector<std::filesystem::directory_entry> logFiles;
+        for (const std::filesystem::directory_entry& entry :
+             std::filesystem::directory_iterator(logDirPath)
+                 | std::views::filter(
+                     [&config](const std::filesystem::directory_entry& entry)
+                     {
+                         return entry.path().extension() == config.svFileExtension;
+                     }))
+        {
+            const std::wstring sFilename = entry.path().filename().wstring();
+            if (sFilename.starts_with(config.svFilePrefix))
+                logFiles.push_back(entry);
+        }
+
+        if (logFiles.size() > config.nMaxLogFiles - 1)
+        {
+            std::ranges::sort(
+                logFiles,
+                [](const std::filesystem::directory_entry& left, const std::filesystem::directory_entry& right)
+                {
+                    return std::filesystem::last_write_time(left) > std::filesystem::last_write_time(right);
+                });
+
+            for (size_t i = config.nMaxLogFiles - 1; i < logFiles.size(); ++i)
+                std::filesystem::remove(logFiles[i]);
+        }
+    }
+
+    // construct the log name
+    string sLogFile = config.svLogsDirectory;
+    if (!config.svLogsDirectory.empty() && !config.svLogsDirectory.ends_with(QXT('/'))
+        && !config.svLogsDirectory.ends_with(QXT('\\')))
+    {
+        sLogFile += QXT('/');
+    }
+    sLogFile += config.svFilePrefix;
+
+    if (config.eLogFilePolicy == log_file_policy::time_name)
+    {
+        sLogFile += QXT('_');
+        append_time_string(std::back_inserter(sLogFile), QXT('-'), QXT('-'), std::chrono::system_clock::now());
+    }
+
+    sLogFile += config.svFileExtension;
+
+    return sLogFile.c_str();
 }
 
 } // namespace qx

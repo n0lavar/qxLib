@@ -166,7 +166,7 @@ public:
     void set_default_formatter(format_function_pointer pFormatter) noexcept;
 
     /**
-        @brief   Log to all streams
+        @brief   Main log function: log to all streams. For macro and internal usage.
         @warning All input args must be ready for async work (i.e. be stable)
         @param   category    - code category
         @param   eVerbosity  - message verbosity
@@ -177,7 +177,7 @@ public:
         @param   nLine       - code line number
         @param   message     - user message string
     **/
-    virtual void log(
+    virtual void log_macro(
         const category&                       category,
         verbosity                             eVerbosity,
         std::thread::id                       threadId,
@@ -280,7 +280,7 @@ inline logger& get_logger() noexcept
             if verbosityCheckKeyword (eVerbosity >= _category.get_verbosity())        \
             {                                                                         \
                 qx::logger& _logger = qx::get_logger();                               \
-                _logger.log(                                                          \
+                _logger.log_macro(                                                    \
                     _category,                                                        \
                     eVerbosity,                                                       \
                     std::this_thread::get_id(),                                       \

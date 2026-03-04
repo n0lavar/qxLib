@@ -38,11 +38,11 @@ class base_file_logger_stream : public base_logger_stream
 public:
     struct config : base_logger_stream::config
     {
-        // policy to use
-        log_file_policy eLogFilePolicy = log_file_policy::append;
-
-        // log file name
-        string_view svFileName = QXT("qx_app.log");
+        log_file_policy eLogFilePolicy  = log_file_policy::append;
+        size_t          nMaxLogFiles    = 0; // number of log files to keep if using time_name policy (logs rotation)
+        string_view     svLogsDirectory = QXT("./"); // current working directory
+        string_view     svFilePrefix    = QXT("qx_app");
+        string_view     svFileExtension = QXT(".log");
     };
 
 public:
@@ -56,13 +56,10 @@ public:
 protected:
     /**
         @brief  Create a folder (if required) and get log file path
-        @param  eLogFilePolicy - policy to use
-        @param  svFileName     - log file name
-        @retval                - log file path, empty path on error
+        @param  config - file logger configuration
+        @retval        - log file path, empty path on error
     **/
-    static std::filesystem::path create_folder_and_get_log_file_path(
-        log_file_policy eLogFilePolicy,
-        string_view     svFileName) noexcept;
+    std::filesystem::path prepare_folder_and_get_log_file_path(const config& config) noexcept;
 };
 
 } // namespace qx

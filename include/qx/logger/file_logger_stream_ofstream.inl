@@ -15,8 +15,8 @@ inline file_logger_stream_ofstream::file_logger_stream_ofstream(
     unit<size_t, units::data> bufferSize) noexcept
     : base_file_logger_stream(streamConfig)
 {
-    const std::filesystem::path path =
-        create_folder_and_get_log_file_path(streamConfig.eLogFilePolicy, streamConfig.svFileName);
+    const std::filesystem::path path = prepare_folder_and_get_log_file_path(streamConfig);
+
     m_File = std::basic_ofstream<char_type>(
         path,
         std::ios_base::binary

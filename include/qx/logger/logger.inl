@@ -84,7 +84,7 @@ inline void logger::set_default_formatter(format_function_pointer pFormatter) no
     m_DefaultFormatFunction = pFormatter;
 }
 
-inline void logger::log(
+inline void logger::log_macro(
     const category&                       category,
     verbosity                             eVerbosity,
     std::thread::id                       threadId,

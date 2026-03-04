@@ -379,7 +379,7 @@ constexpr std::size_t strlen(const value_t* psz)
     while (*psz != QX_CHAR_PREFIX(value_t, '\0'))
     {
         ++psz;
-        nLen++;
+        ++nLen;
     }
 
     return nLen;

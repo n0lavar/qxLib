@@ -15,8 +15,7 @@ inline file_logger_stream_mapping::file_logger_stream_mapping(
     unit<size_t, units::data> initialMapSize) noexcept
     : base_file_logger_stream(streamConfig)
 {
-    const std::filesystem::path path =
-        create_folder_and_get_log_file_path(streamConfig.eLogFilePolicy, streamConfig.svFileName);
+    const std::filesystem::path path = prepare_folder_and_get_log_file_path(streamConfig);
 
 #if QX_WIN
     SYSTEM_INFO si {};

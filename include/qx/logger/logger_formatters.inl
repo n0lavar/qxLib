@@ -19,7 +19,7 @@ inline void append_time_string(
 {
     auto timeSeconds = floor<std::chrono::seconds>(time);
 
-    string_traits::format_traits<char_type, string_traits::usings_traits<char_type>>::format_to(
+    std::format_to(
         it,
         QXT("{:%d}{}{:%m}{}{:%Y}_{:%H}{}{:%M}{}{:%S}"),
         timeSeconds,
