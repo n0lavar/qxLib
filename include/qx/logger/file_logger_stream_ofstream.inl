@@ -20,7 +20,7 @@ inline file_logger_stream_ofstream::file_logger_stream_ofstream(
     m_File = std::basic_ofstream<char_type>(
         path,
         std::ios_base::binary
-            | (streamConfig.eLogFilePolicy == log_file_policy::clear_then_uppend ? std::ios_base::trunc
+            | (streamConfig.eLogFilePolicy == log_file_policy::clear_then_upend ? std::ios_base::trunc
                                                                                  : std::ios_base::app));
 
     if (!m_File)

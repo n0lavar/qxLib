@@ -125,7 +125,7 @@ struct ostream_default_buffer : base_file
     {
         base_file::set_up();
         qx::logger_singleton::get_instance().get_logger().add_stream(qx::file_logger_stream_ofstream(
-            { .eLogFilePolicy  = qx::log_file_policy::clear_then_uppend,
+            { .eLogFilePolicy  = qx::log_file_policy::clear_then_upend,
               .svLogsDirectory = k_svLogsDirectory,
               .svFilePrefix    = k_svFilePrefix,
               .svFileExtension = k_svFileExtension },
@@ -139,7 +139,7 @@ struct ostream : base_file
     {
         base_file::set_up();
         qx::logger_singleton::get_instance().get_logger().add_stream(
-            qx::file_logger_stream_ofstream({ .eLogFilePolicy  = qx::log_file_policy::clear_then_uppend,
+            qx::file_logger_stream_ofstream({ .eLogFilePolicy  = qx::log_file_policy::clear_then_upend,
                                               .svLogsDirectory = k_svLogsDirectory,
                                               .svFilePrefix    = k_svFilePrefix,
                                               .svFileExtension = k_svFileExtension }));
@@ -152,7 +152,7 @@ struct fopen_default_buffer : base_file
     {
         base_file::set_up();
         qx::logger_singleton::get_instance().get_logger().add_stream(qx::file_logger_stream_fopen(
-            { .eLogFilePolicy  = qx::log_file_policy::clear_then_uppend,
+            { .eLogFilePolicy  = qx::log_file_policy::clear_then_upend,
               .svLogsDirectory = k_svLogsDirectory,
               .svFilePrefix    = k_svFilePrefix,
               .svFileExtension = k_svFileExtension },
@@ -166,7 +166,7 @@ struct fopen : base_file
     {
         base_file::set_up();
         qx::logger_singleton::get_instance().get_logger().add_stream(
-            qx::file_logger_stream_fopen({ .eLogFilePolicy  = qx::log_file_policy::clear_then_uppend,
+            qx::file_logger_stream_fopen({ .eLogFilePolicy  = qx::log_file_policy::clear_then_upend,
                                            .svLogsDirectory = k_svLogsDirectory,
                                            .svFilePrefix    = k_svFilePrefix,
                                            .svFileExtension = k_svFileExtension }));
@@ -179,7 +179,7 @@ struct mapping_default_initial_size : base_file
     {
         base_file::set_up();
         qx::logger_singleton::get_instance().get_logger().add_stream(qx::file_logger_stream_mapping(
-            { .eLogFilePolicy  = qx::log_file_policy::clear_then_uppend,
+            { .eLogFilePolicy  = qx::log_file_policy::clear_then_upend,
               .svLogsDirectory = k_svLogsDirectory,
               .svFilePrefix    = k_svFilePrefix,
               .svFileExtension = k_svFileExtension },
@@ -193,7 +193,7 @@ struct mapping : base_file
     {
         base_file::set_up();
         qx::logger_singleton::get_instance().get_logger().add_stream(
-            qx::file_logger_stream_mapping({ .eLogFilePolicy  = qx::log_file_policy::clear_then_uppend,
+            qx::file_logger_stream_mapping({ .eLogFilePolicy  = qx::log_file_policy::clear_then_upend,
                                              .svLogsDirectory = k_svLogsDirectory,
                                              .svFilePrefix    = k_svFilePrefix,
                                              .svFileExtension = k_svFileExtension }));
@@ -701,7 +701,7 @@ TEST(logger_test, streams)
     EXPECT_EQ(std::distance(streams.begin(), streams.end()), 0);
 }
 
-TEST(logger_test, rotation)
+void test_rotation(qx::log_file_policy eLogFilePolicy)
 {
     static constexpr auto formatter = [](const qx::category&                   category,
                                          qx::verbosity                         eVerbosity,
@@ -715,19 +715,19 @@ TEST(logger_test, rotation)
         return sMessage;
     };
 
-    auto reset_logger = []()
+    auto reset_logger = [eLogFilePolicy]()
     {
         qx::logger& logger = qx::get_logger();
         logger.reset();
         logger.set_default_formatter(formatter);
-        logger.add_stream(qx::file_logger_stream_mapping({ .eLogFilePolicy  = qx::log_file_policy::time_name,
+        logger.add_stream(qx::file_logger_stream_mapping({ .eLogFilePolicy  = eLogFilePolicy,
                                                            .nMaxLogFiles    = 3,
                                                            .svLogsDirectory = k_svLogsDirectory,
                                                            .svFilePrefix    = k_svFilePrefix,
                                                            .svFileExtension = k_svFileExtension }));
     };
 
-    auto check_log_files = [](std::span<const qx::string_view> messages)
+    auto check_log_files = [eLogFilePolicy](std::span<const qx::string_view> messages)
     {
         qx::logger& logger = qx::get_logger();
         logger.reset();
@@ -754,11 +754,16 @@ TEST(logger_test, rotation)
             });
 
         std::vector<qx::string> contents;
-        for (const std::filesystem::directory_entry& directoryEntry : logFiles)
+        for (size_t i = 0; i < logFiles.size(); ++i)
         {
-            std::basic_ifstream<qx::char_type> file(directoryEntry.path());
-            if (!file.is_open())
-                continue;
+            std::basic_ifstream<qx::char_type> file(logFiles[i].path());
+            ASSERT_TRUE(file.is_open());
+
+            if (i == logFiles.size() - 1 && eLogFilePolicy == qx::log_file_policy::time_name_keep_current)
+            {
+                qx::string sFileName = logFiles[i].path().filename().string<qx::char_type>();
+                EXPECT_EQ(sFileName, qx::string(k_svFilePrefix) + k_svFileExtension);
+            }
 
             std::istreambuf_iterator<qx::char_type> itBegin = file;
             contents.emplace_back(1, *itBegin);
@@ -800,6 +805,16 @@ TEST(logger_test, rotation)
     reset_logger();
     QX_LOG(qx::verbosity::log, "4");
     check_log_files({ { { QXT("2") }, { QXT("3") }, { QXT("4") } } });
+}
+
+TEST(logger_test, rotation_time_name)
+{
+    test_rotation(qx::log_file_policy::time_name);
+}
+
+TEST(logger_test, rotation_time_name_keep_current)
+{
+    test_rotation(qx::log_file_policy::time_name_keep_current);
 }
 
 TEST(logger_test, terminal_colors)

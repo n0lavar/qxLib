@@ -18,9 +18,10 @@ namespace qx
 
 enum class log_file_policy
 {
-    append,            //!< append all
-    clear_then_uppend, //!< clear file at start, then append
-    time_name,         //!< create new file with time name
+    append,                 //!< append all
+    clear_then_upend,       //!< clear file at start, then append
+    time_name,              //!< create new file with creation time name
+    time_name_keep_current, //!< the current file name: svFilePrefix, old ones: svFilePrefix_last_modification_time
 };
 
 /**

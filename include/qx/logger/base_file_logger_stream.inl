@@ -29,9 +29,44 @@ inline std::filesystem::path base_file_logger_stream::prepare_folder_and_get_log
         }
     }
 
-    // rotate logs
-    if (config.eLogFilePolicy == log_file_policy::time_name && config.nMaxLogFiles > 0)
+    // construct the log name
+    string sLogFile = config.svLogsDirectory;
+    if (!config.svLogsDirectory.empty() && !config.svLogsDirectory.ends_with(QXT('/'))
+        && !config.svLogsDirectory.ends_with(QXT('\\')))
     {
+        sLogFile += QXT('/');
+    }
+    sLogFile += config.svFilePrefix;
+
+    if (config.eLogFilePolicy == log_file_policy::time_name)
+    {
+        sLogFile += QXT('_');
+        append_time_string(std::back_inserter(sLogFile), QXT('-'), QXT('-'), std::chrono::system_clock::now());
+    }
+
+    sLogFile += config.svFileExtension;
+
+
+    // rotate logs
+    if ((config.eLogFilePolicy == log_file_policy::time_name
+         || config.eLogFilePolicy == log_file_policy::time_name_keep_current)
+        && config.nMaxLogFiles > 0)
+    {
+        if (config.eLogFilePolicy == log_file_policy::time_name_keep_current
+            && std::filesystem::exists(sLogFile.c_str()))
+        {
+            std::filesystem::file_time_type lastWriteTimeFileClock = std::filesystem::last_write_time(sLogFile.c_str());
+            auto lastWriteTimeSystemClock = std::chrono::clock_cast<std::chrono::system_clock>(lastWriteTimeFileClock);
+
+            string sNewFileName = sLogFile;
+            sNewFileName.remove_suffix(config.svFileExtension);
+            sNewFileName += QXT('_');
+            append_time_string(std::back_inserter(sNewFileName), QXT('-'), QXT('-'), lastWriteTimeSystemClock);
+            sNewFileName += config.svFileExtension;
+
+            std::filesystem::rename(sLogFile.c_str(), sNewFileName.c_str());
+        }
+
         std::vector<std::filesystem::directory_entry> logFiles;
         for (const std::filesystem::directory_entry& entry :
              std::filesystem::directory_iterator(logDirPath)
@@ -59,23 +94,6 @@ inline std::filesystem::path base_file_logger_stream::prepare_folder_and_get_log
                 std::filesystem::remove(logFiles[i]);
         }
     }
-
-    // construct the log name
-    string sLogFile = config.svLogsDirectory;
-    if (!config.svLogsDirectory.empty() && !config.svLogsDirectory.ends_with(QXT('/'))
-        && !config.svLogsDirectory.ends_with(QXT('\\')))
-    {
-        sLogFile += QXT('/');
-    }
-    sLogFile += config.svFilePrefix;
-
-    if (config.eLogFilePolicy == log_file_policy::time_name)
-    {
-        sLogFile += QXT('_');
-        append_time_string(std::back_inserter(sLogFile), QXT('-'), QXT('-'), std::chrono::system_clock::now());
-    }
-
-    sLogFile += config.svFileExtension;
 
     return sLogFile.c_str();
 }

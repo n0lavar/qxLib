@@ -27,7 +27,7 @@ inline file_logger_stream_mapping::file_logger_stream_mapping(
         GENERIC_READ | GENERIC_WRITE,
         FILE_SHARE_READ,
         nullptr,
-        streamConfig.eLogFilePolicy == log_file_policy::clear_then_uppend ? CREATE_ALWAYS : OPEN_ALWAYS,
+        streamConfig.eLogFilePolicy == log_file_policy::clear_then_upend ? CREATE_ALWAYS : OPEN_ALWAYS,
         FILE_ATTRIBUTE_NORMAL,
         nullptr);
 
@@ -44,7 +44,7 @@ inline file_logger_stream_mapping::file_logger_stream_mapping(
     m_nGranularity = ps > 0 ? static_cast<size_t>(ps) : 4096ull;
 
     int flags = O_RDWR | O_CREAT;
-    if (streamConfig.eLogFilePolicy == log_file_policy::clear_then_uppend)
+    if (streamConfig.eLogFilePolicy == log_file_policy::clear_then_upend)
         flags |= O_TRUNC;
 
     m_Fd = ::open(path.c_str(), flags, 0644);

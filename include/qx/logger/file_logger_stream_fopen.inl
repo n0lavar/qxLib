@@ -22,7 +22,7 @@ inline file_logger_stream_fopen::file_logger_stream_fopen(
     QX_DISABLE_MSVC_WARNINGS(4996);
     m_pFile = std::fopen(
         path.generic_string().c_str(),
-        streamConfig.eLogFilePolicy == log_file_policy::clear_then_uppend ? "wb" : "ab");
+        streamConfig.eLogFilePolicy == log_file_policy::clear_then_upend ? "wb" : "ab");
     if (!m_pFile)
     {
         string sLastError = to_string(std::strerror(errno));
