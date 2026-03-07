@@ -100,64 +100,83 @@ $(function() {
 <div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;        }</div>
 <div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    }</div>
 <div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160; </div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    <span class="comment">// rotate logs</span></div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    <span class="keywordflow">if</span> (<a class="code" href="structqx_1_1base__file__logger__stream_1_1config.html">config</a>.eLogFilePolicy == log_file_policy::time_name &amp;&amp; <a class="code" href="structqx_1_1base__file__logger__stream_1_1config.html">config</a>.nMaxLogFiles &gt; 0)</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    {</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;        std::vector&lt;std::filesystem::directory_entry&gt; logFiles;</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;        <span class="keywordflow">for</span> (<span class="keyword">const</span> std::filesystem::directory_entry&amp; entry :</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;             std::filesystem::directory_iterator(logDirPath)</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;                 | std::views::filter(</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;                     [&amp;<a class="code" href="structqx_1_1base__file__logger__stream_1_1config.html">config</a>](<span class="keyword">const</span> std::filesystem::directory_entry&amp; entry)</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;                     {</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;                         <span class="keywordflow">return</span> entry.path().extension() == <a class="code" href="structqx_1_1base__file__logger__stream_1_1config.html">config</a>.svFileExtension;</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;                     }))</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;        {</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;            <span class="keyword">const</span> std::wstring sFilename = entry.path().filename().wstring();</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;            <span class="keywordflow">if</span> (sFilename.starts_with(<a class="code" href="structqx_1_1base__file__logger__stream_1_1config.html">config</a>.svFilePrefix))</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;                logFiles.push_back(entry);</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;        }</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    <span class="comment">// construct the log name</span></div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    <span class="keywordtype">string</span> sLogFile = <a class="code" href="structqx_1_1base__file__logger__stream_1_1config.html">config</a>.svLogsDirectory;</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    <span class="keywordflow">if</span> (!<a class="code" href="structqx_1_1base__file__logger__stream_1_1config.html">config</a>.svLogsDirectory.empty() &amp;&amp; !<a class="code" href="structqx_1_1base__file__logger__stream_1_1config.html">config</a>.svLogsDirectory.ends_with(QXT(<span class="charliteral">&#39;/&#39;</span>))</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;        &amp;&amp; !<a class="code" href="structqx_1_1base__file__logger__stream_1_1config.html">config</a>.svLogsDirectory.ends_with(QXT(<span class="charliteral">&#39;\\&#39;</span>)))</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    {</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;        sLogFile += QXT(<span class="charliteral">&#39;/&#39;</span>);</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    }</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    sLogFile += <a class="code" href="structqx_1_1base__file__logger__stream_1_1config.html">config</a>.svFilePrefix;</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160; </div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    <span class="keywordflow">if</span> (<a class="code" href="structqx_1_1base__file__logger__stream_1_1config.html">config</a>.eLogFilePolicy == log_file_policy::time_name)</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    {</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;        sLogFile += QXT(<span class="charliteral">&#39;_&#39;</span>);</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;        <a class="code" href="logger__formatters_8h.html#a281d30a0d7981edefcc5b4d32c857958">append_time_string</a>(std::back_inserter(sLogFile), QXT(<span class="charliteral">&#39;-&#39;</span>), QXT(<span class="charliteral">&#39;-&#39;</span>), std::chrono::system_clock::now());</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    }</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160; </div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    sLogFile += <a class="code" href="structqx_1_1base__file__logger__stream_1_1config.html">config</a>.svFileExtension;</div>
 <div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160; </div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;        <span class="keywordflow">if</span> (logFiles.size() &gt; <a class="code" href="structqx_1_1base__file__logger__stream_1_1config.html">config</a>.nMaxLogFiles - 1)</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;        {</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;            std::ranges::sort(</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;                logFiles,</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;                [](<span class="keyword">const</span> std::filesystem::directory_entry&amp; left, <span class="keyword">const</span> std::filesystem::directory_entry&amp; right)</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;                {</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;                    <span class="keywordflow">return</span> std::filesystem::last_write_time(left) &gt; std::filesystem::last_write_time(right);</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;                });</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160; </div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;            <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = <a class="code" href="structqx_1_1base__file__logger__stream_1_1config.html">config</a>.nMaxLogFiles - 1; i &lt; logFiles.size(); ++i)</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;                std::filesystem::remove(logFiles[i]);</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;        }</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    }</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160; </div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    <span class="comment">// construct the log name</span></div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    <span class="keywordtype">string</span> sLogFile = <a class="code" href="structqx_1_1base__file__logger__stream_1_1config.html">config</a>.svLogsDirectory;</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    <span class="keywordflow">if</span> (!<a class="code" href="structqx_1_1base__file__logger__stream_1_1config.html">config</a>.svLogsDirectory.empty() &amp;&amp; !<a class="code" href="structqx_1_1base__file__logger__stream_1_1config.html">config</a>.svLogsDirectory.ends_with(QXT(<span class="charliteral">&#39;/&#39;</span>))</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;        &amp;&amp; !<a class="code" href="structqx_1_1base__file__logger__stream_1_1config.html">config</a>.svLogsDirectory.ends_with(QXT(<span class="charliteral">&#39;\\&#39;</span>)))</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    {</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;        sLogFile += QXT(<span class="charliteral">&#39;/&#39;</span>);</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    }</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;    sLogFile += <a class="code" href="structqx_1_1base__file__logger__stream_1_1config.html">config</a>.svFilePrefix;</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160; </div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    <span class="keywordflow">if</span> (<a class="code" href="structqx_1_1base__file__logger__stream_1_1config.html">config</a>.eLogFilePolicy == log_file_policy::time_name)</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;    {</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;        sLogFile += QXT(<span class="charliteral">&#39;_&#39;</span>);</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;        <a class="code" href="logger__formatters_8h.html#a281d30a0d7981edefcc5b4d32c857958">append_time_string</a>(std::back_inserter(sLogFile), QXT(<span class="charliteral">&#39;-&#39;</span>), QXT(<span class="charliteral">&#39;-&#39;</span>), std::chrono::system_clock::now());</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    }</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160; </div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;    sLogFile += <a class="code" href="structqx_1_1base__file__logger__stream_1_1config.html">config</a>.svFileExtension;</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160; </div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;    <span class="keywordflow">return</span> sLogFile.<a class="code" href="classqx_1_1basic__string.html#ac98fc25780d542fd98864eb544752b2a">c_str</a>();</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;}</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160; </div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;} <span class="comment">// namespace qx</span></div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160; </div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    <span class="comment">// rotate logs</span></div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    <span class="keywordflow">if</span> ((<a class="code" href="structqx_1_1base__file__logger__stream_1_1config.html">config</a>.eLogFilePolicy == log_file_policy::time_name</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;         || <a class="code" href="structqx_1_1base__file__logger__stream_1_1config.html">config</a>.eLogFilePolicy == log_file_policy::time_name_keep_current)</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;        &amp;&amp; <a class="code" href="structqx_1_1base__file__logger__stream_1_1config.html">config</a>.nMaxLogFiles &gt; 0)</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    {</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;        <span class="keywordflow">if</span> (<a class="code" href="structqx_1_1base__file__logger__stream_1_1config.html">config</a>.eLogFilePolicy == log_file_policy::time_name_keep_current</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;            &amp;&amp; std::filesystem::exists(sLogFile.<a class="code" href="classqx_1_1basic__string.html#ac98fc25780d542fd98864eb544752b2a">c_str</a>()))</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;        {</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;            std::filesystem::file_time_type lastWriteTimeFileClock = std::filesystem::last_write_time(sLogFile.<a class="code" href="classqx_1_1basic__string.html#ac98fc25780d542fd98864eb544752b2a">c_str</a>());</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;            <span class="keyword">auto</span> lastWriteTimeSystemClock = std::chrono::clock_cast&lt;std::chrono::system_clock&gt;(lastWriteTimeFileClock);</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160; </div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;            <span class="keywordtype">string</span> sNewFileName = sLogFile;</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;            sNewFileName.<a class="code" href="classqx_1_1basic__string.html#ac8272715a6f5c4eca6a9e41811b8916a">remove_suffix</a>(<a class="code" href="structqx_1_1base__file__logger__stream_1_1config.html">config</a>.svFileExtension);</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;            sNewFileName += QXT(<span class="charliteral">&#39;_&#39;</span>);</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;            <a class="code" href="logger__formatters_8h.html#a281d30a0d7981edefcc5b4d32c857958">append_time_string</a>(std::back_inserter(sNewFileName), QXT(<span class="charliteral">&#39;-&#39;</span>), QXT(<span class="charliteral">&#39;-&#39;</span>), lastWriteTimeSystemClock);</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;            sNewFileName += <a class="code" href="structqx_1_1base__file__logger__stream_1_1config.html">config</a>.svFileExtension;</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160; </div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;            std::filesystem::rename(sLogFile.<a class="code" href="classqx_1_1basic__string.html#ac98fc25780d542fd98864eb544752b2a">c_str</a>(), sNewFileName.<a class="code" href="classqx_1_1basic__string.html#ac98fc25780d542fd98864eb544752b2a">c_str</a>());</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;        }</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160; </div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;        std::vector&lt;std::filesystem::directory_entry&gt; logFiles;</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;        <span class="keywordflow">for</span> (<span class="keyword">const</span> std::filesystem::directory_entry&amp; entry :</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;             std::filesystem::directory_iterator(logDirPath)</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;                 | std::views::filter(</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;                     [&amp;<a class="code" href="structqx_1_1base__file__logger__stream_1_1config.html">config</a>](<span class="keyword">const</span> std::filesystem::directory_entry&amp; entry)</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;                     {</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;                         <span class="keywordflow">return</span> entry.path().extension() == <a class="code" href="structqx_1_1base__file__logger__stream_1_1config.html">config</a>.svFileExtension;</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;                     }))</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;        {</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;            <span class="keyword">const</span> std::wstring sFilename = entry.path().filename().wstring();</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;            <span class="keywordflow">if</span> (sFilename.starts_with(<a class="code" href="structqx_1_1base__file__logger__stream_1_1config.html">config</a>.svFilePrefix))</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;                logFiles.push_back(entry);</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;        }</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160; </div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;        <span class="keywordflow">if</span> (logFiles.size() &gt; <a class="code" href="structqx_1_1base__file__logger__stream_1_1config.html">config</a>.nMaxLogFiles - 1)</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;        {</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;            std::ranges::sort(</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;                logFiles,</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;                [](<span class="keyword">const</span> std::filesystem::directory_entry&amp; left, <span class="keyword">const</span> std::filesystem::directory_entry&amp; right)</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;                {</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;                    <span class="keywordflow">return</span> std::filesystem::last_write_time(left) &gt; std::filesystem::last_write_time(right);</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;                });</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160; </div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;            <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = <a class="code" href="structqx_1_1base__file__logger__stream_1_1config.html">config</a>.nMaxLogFiles - 1; i &lt; logFiles.size(); ++i)</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;                std::filesystem::remove(logFiles[i]);</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;        }</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;    }</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160; </div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;    <span class="keywordflow">return</span> sLogFile.<a class="code" href="classqx_1_1basic__string.html#ac98fc25780d542fd98864eb544752b2a">c_str</a>();</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;}</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160; </div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;} <span class="comment">// namespace qx</span></div>
 <div class="ttc" id="aclassqx_1_1base__file__logger__stream_html_a37f9725900891811472add5bbf1f9d59"><div class="ttname"><a href="classqx_1_1base__file__logger__stream.html#a37f9725900891811472add5bbf1f9d59">qx::base_file_logger_stream::base_file_logger_stream</a></div><div class="ttdeci">base_file_logger_stream(const config &amp;streamConfig) noexcept</div><div class="ttdoc">file_logger_stream object constructor</div><div class="ttdef"><b>Definition:</b> <a href="base__file__logger__stream_8inl_source.html#l00013">base_file_logger_stream.inl:13</a></div></div>
 <div class="ttc" id="aclassqx_1_1base__file__logger__stream_html_afe294906f69a8ece35b638c8a29d05cb"><div class="ttname"><a href="classqx_1_1base__file__logger__stream.html#afe294906f69a8ece35b638c8a29d05cb">qx::base_file_logger_stream::prepare_folder_and_get_log_file_path</a></div><div class="ttdeci">std::filesystem::path prepare_folder_and_get_log_file_path(const config &amp;config) noexcept</div><div class="ttdoc">Create a folder (if required) and get log file path.</div><div class="ttdef"><b>Definition:</b> <a href="base__file__logger__stream_8inl_source.html#l00018">base_file_logger_stream.inl:18</a></div></div>
 <div class="ttc" id="aclassqx_1_1base__logger__stream_html"><div class="ttname"><a href="classqx_1_1base__logger__stream.html">qx::base_logger_stream</a></div><div class="ttdoc">Base class for logger streams.</div><div class="ttdef"><b>Definition:</b> <a href="base__logger__stream_8h_source.html#l00036">base_logger_stream.h:37</a></div></div>
+<div class="ttc" id="aclassqx_1_1basic__string_html_ac8272715a6f5c4eca6a9e41811b8916a"><div class="ttname"><a href="classqx_1_1basic__string.html#ac8272715a6f5c4eca6a9e41811b8916a">qx::basic_string::remove_suffix</a></div><div class="ttdeci">bool remove_suffix(value_type chSymbol) noexcept</div><div class="ttdoc">Remove string suffix if matches.</div><div class="ttdef"><b>Definition:</b> <a href="string_8inl_source.html#l01029">string.inl:1029</a></div></div>
 <div class="ttc" id="aclassqx_1_1basic__string_html_ac98fc25780d542fd98864eb544752b2a"><div class="ttname"><a href="classqx_1_1basic__string.html#ac98fc25780d542fd98864eb544752b2a">qx::basic_string::c_str</a></div><div class="ttdeci">const_pointer c_str() const noexcept</div><div class="ttdoc">Get pointer to string zero terminated.</div><div class="ttdef"><b>Definition:</b> <a href="string_8inl_source.html#l00244">string.inl:244</a></div></div>
 <div class="ttc" id="alogger__formatters_8h_html_a281d30a0d7981edefcc5b4d32c857958"><div class="ttname"><a href="logger__formatters_8h.html#a281d30a0d7981edefcc5b4d32c857958">qx::append_time_string</a></div><div class="ttdeci">void append_time_string(out_it_t it, char_type chDateDelimiter, char_type chTimeDelimiter, std::chrono::system_clock::time_point time) noexcept</div><div class="ttdoc">Format time string to the buffer.</div><div class="ttdef"><b>Definition:</b> <a href="logger__formatters_8inl_source.html#l00014">logger_formatters.inl:14</a></div></div>
-<div class="ttc" id="astructqx_1_1base__file__logger__stream_1_1config_html"><div class="ttname"><a href="structqx_1_1base__file__logger__stream_1_1config.html">qx::base_file_logger_stream::config</a></div><div class="ttdef"><b>Definition:</b> <a href="base__file__logger__stream_8h_source.html#l00039">base_file_logger_stream.h:40</a></div></div>
+<div class="ttc" id="astructqx_1_1base__file__logger__stream_1_1config_html"><div class="ttname"><a href="structqx_1_1base__file__logger__stream_1_1config.html">qx::base_file_logger_stream::config</a></div><div class="ttdef"><b>Definition:</b> <a href="base__file__logger__stream_8h_source.html#l00040">base_file_logger_stream.h:41</a></div></div>
 <div class="ttc" id="astructqx_1_1details_1_1get__cerr_html"><div class="ttname"><a href="structqx_1_1details_1_1get__cerr.html">qx::details::get_cerr</a></div><div class="ttdef"><b>Definition:</b> <a href="base__logger__stream_8inl_source.html#l00019">base_logger_stream.inl:20</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
