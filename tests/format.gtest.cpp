@@ -17,7 +17,7 @@ class test_format : public ::testing::Test
 {
 };
 
-using implementations_type = ::testing::Types<char, wchar_t>;
+using implementations_type = ::testing::Types<QX_ALL_CHAR_TYPES>;
 
 TYPED_TEST_SUITE(test_format, implementations_type);
 

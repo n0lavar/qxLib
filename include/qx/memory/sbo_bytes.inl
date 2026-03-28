@@ -97,7 +97,7 @@ bool sbo_bytes<traits_t>::resize(
             if (bSmallAtStart)
             {
                 buff       = m_Buffer;
-                nStartSize = m_nSize;
+                nStartSize = std::min(nSizeToAllocate, nBufferSize);
             }
 
             if (void* pNewBlock = std::realloc(bSmallAtStart ? nullptr : m_pData, nSizeToAllocate))
@@ -105,7 +105,7 @@ bool sbo_bytes<traits_t>::resize(
                 m_nAllocatedSize = nSizeToAllocate;
                 m_pData          = static_cast<std::byte*>(pNewBlock);
 
-                if (bMemmove && bSmallAtStart && m_nSize > 0)
+                if (bMemmove && nStartSize > 0)
                     std::memmove(m_pData, buff.data(), nStartSize);
             }
             else

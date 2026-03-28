@@ -741,7 +741,7 @@ void test_rotation(qx::log_file_policy eLogFilePolicy)
                                                                                 == k_svFileExtension;
                                                                      }))
         {
-            const std::wstring sFilename = entry.path().filename().wstring();
+            const std::basic_string<qx::char_type> sFilename = entry.path().filename().generic_string<qx::char_type>();
             if (sFilename.starts_with(k_svFilePrefix))
                 logFiles.push_back(entry);
         }

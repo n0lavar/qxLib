@@ -76,7 +76,7 @@ inline std::filesystem::path base_file_logger_stream::prepare_folder_and_get_log
                          return entry.path().extension() == config.svFileExtension;
                      }))
         {
-            const std::wstring sFilename = entry.path().filename().wstring();
+            const std::basic_string<char_type> sFilename = entry.path().filename().generic_string<char_type>();
             if (sFilename.starts_with(config.svFilePrefix))
                 logFiles.push_back(entry);
         }
