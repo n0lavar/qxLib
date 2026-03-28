@@ -64,8 +64,8 @@ Or implement your own stream and add it the same way:
 ```
 class my_logger_stream : public qx::base_logger_stream
 {
+    virtual void do_log(...) override;
     virtual void do_flush() override;
-    virtual void do_log(const category& category, verbosity eVerbosity, string_view svMessage) override;
 };
 logger.add_stream(my_logger_stream());
 ```
