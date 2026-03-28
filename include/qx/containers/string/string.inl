@@ -118,7 +118,7 @@ void basic_string<char_t, traits_t>::format(
     const format_string_type<std::type_identity_t<args_t>...> sFormat,
     args_t&&... args)
 {
-    vformat(sFormat.get(), std::forward<args_t>(args)...);
+    vformat(string_view(sFormat.get().data(), sFormat.get().size()), std::forward<args_t>(args)...);
 }
 
 template<class char_t, class traits_t>
@@ -128,7 +128,7 @@ basic_string<char_t, traits_t> basic_string<char_t, traits_t>::static_format(
     const format_string_type<std::type_identity_t<args_t>...> sFormat,
     args_t&&... args)
 {
-    return static_vformat(sFormat.get(), std::forward<args_t>(args)...);
+    return static_vformat(string_view(sFormat.get().data(), sFormat.get().size()), std::forward<args_t>(args)...);
 }
 
 template<class char_t, class traits_t>
@@ -138,7 +138,7 @@ void basic_string<char_t, traits_t>::append_format(
     const format_string_type<std::type_identity_t<args_t>...> sFormat,
     args_t&&... args)
 {
-    append_vformat(sFormat.get(), std::forward<args_t>(args)...);
+    append_vformat(string_view(sFormat.get().data(), sFormat.get().size()), std::forward<args_t>(args)...);
 }
 
 template<class char_t, class traits_t>
@@ -2642,14 +2642,8 @@ inline void basic_string<char_t, traits_t>::clear() noexcept
 } // namespace qx
 
 
-
-// -------------------------------------------------------- hash -------------------------------------------------------
-
-namespace std
-{
-
 template<class char_t, class traits_t>
-struct hash<qx::basic_string<char_t, traits_t>>
+struct std::hash<qx::basic_string<char_t, traits_t>>
 {
     size_t operator()(const qx::basic_string<char_t, traits_t>& str) const noexcept
     {
@@ -2657,7 +2651,8 @@ struct hash<qx::basic_string<char_t, traits_t>>
     }
 };
 
-// -------------------------------------------------------- swap -------------------------------------------------------
+namespace std
+{
 
 template<class char_t, class traits_t>
 void swap(qx::basic_string<char_t, traits_t>& lhs, qx::basic_string<char_t, traits_t>& rhs) noexcept
@@ -2665,10 +2660,10 @@ void swap(qx::basic_string<char_t, traits_t>& lhs, qx::basic_string<char_t, trai
     lhs.swap(rhs);
 }
 
-// ----------------------------------------------------- formatter -----------------------------------------------------
+} // namespace std
 
 template<class char_t, class traits_t>
-struct formatter<qx::basic_string<char_t, traits_t>, char_t> : qx::basic_formatter<char_t>
+struct QX_FMT_NS::formatter<qx::basic_string<char_t, traits_t>, char_t> : qx::basic_formatter<char_t>
 {
     template<class format_context_type>
     constexpr auto format(const qx::basic_string<char_t, traits_t>& value, format_context_type& ctx) const
@@ -2677,7 +2672,6 @@ struct formatter<qx::basic_string<char_t, traits_t>, char_t> : qx::basic_formatt
     }
 };
 
-} // namespace std
 
 
 // ------------------------------------------- istream / ostream overloading -------------------------------------------

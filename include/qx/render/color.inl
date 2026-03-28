@@ -425,7 +425,7 @@ constexpr void color::assign_component_checked(float& pComponent, float fValue) 
 } // namespace qx
 
 template<class char_t>
-struct std::formatter<qx::color, char_t>
+struct QX_FMT_NS::formatter<qx::color, char_t>
 {
     template<class format_parse_context_t>
     constexpr auto parse(format_parse_context_t& ctx)
@@ -470,7 +470,7 @@ struct std::formatter<qx::color, char_t>
         }
 
         if (it != ctx.end() && *it != QX_CHAR_PREFIX(char_t, '}'))
-            throw std::format_error("unknown spec");
+            throw QX_FMT_NS::format_error("unknown spec");
 
         return it;
     }

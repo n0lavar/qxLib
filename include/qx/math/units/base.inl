@@ -42,7 +42,7 @@ struct unit_formatter : basic_formatter<char_t>
 } // namespace qx
 
 template<qx::arithmetic_c T, qx::unit_enum_c unit_t, class char_t>
-struct std::formatter<qx::unit<T, unit_t>, char_t>
+struct QX_FMT_NS::formatter<qx::unit<T, unit_t>, char_t>
 {
     template<class format_parse_context_t>
     constexpr auto parse(format_parse_context_t& context) noexcept;
@@ -51,7 +51,7 @@ struct std::formatter<qx::unit<T, unit_t>, char_t>
     constexpr auto format(const qx::unit<T, unit_t>& unit, format_context_type_t& ctx) const noexcept;
 
 private:
-    std::formatter<T, char_t> valueFormatter;
+    QX_FMT_NS::formatter<T, char_t> valueFormatter;
 };
 
 template<qx::arithmetic_c T, qx::unit_enum_c unit_t>
@@ -206,7 +206,7 @@ constexpr std::optional<qx::basic_string_view<char_t>> qx::get_unit_suffix(unit_
 
 template<qx::arithmetic_c T, qx::unit_enum_c unit_t, class char_t>
 template<class format_parse_context_t>
-constexpr auto std::formatter<qx::unit<T, unit_t>, char_t>::parse(format_parse_context_t& context) noexcept
+constexpr auto QX_FMT_NS::formatter<qx::unit<T, unit_t>, char_t>::parse(format_parse_context_t& context) noexcept
 {
     return valueFormatter.parse(context);
 }
@@ -214,12 +214,12 @@ constexpr auto std::formatter<qx::unit<T, unit_t>, char_t>::parse(format_parse_c
 
 template<qx::arithmetic_c T, qx::unit_enum_c unit_t, class char_t>
 template<class format_context_type_t>
-constexpr auto std::formatter<qx::unit<T, unit_t>, char_t>::format(
+constexpr auto QX_FMT_NS::formatter<qx::unit<T, unit_t>, char_t>::format(
     const qx::unit<T, unit_t>& unit,
     format_context_type_t&     ctx) const noexcept
 {
     auto outIt = valueFormatter.format(unit.value, ctx);
-    return std::format_to(outIt, QX_STR_PREFIX(char_t, "{}"), unit.type);
+    return QX_FMT_NS::format_to(outIt, QX_STR_PREFIX(char_t, "{}"), unit.type);
 }
 
 template<qx::unit_enum_c unit_t, class char_t>

@@ -68,7 +68,10 @@ string_pool<nStringsPoolSize>::item format_macro_user_message(
             ? pStringsPool->acquire()
             : typename string_pool<nStringsPoolSize>::item { string(), string_pool<nStringsPoolSize>::nFreeString };
 
-    message.sValue.format(sFormat, std::forward<first_arg_t>(firstArg), std::forward<rest_args_t>(restArgs)...);
+    message.sValue.vformat(
+        string_view(sFormat.get().data(), sFormat.get().size()),
+        std::forward<first_arg_t>(firstArg),
+        std::forward<rest_args_t>(restArgs)...);
     return message;
 }
 

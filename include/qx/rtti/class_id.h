@@ -105,11 +105,11 @@ struct std::hash<qx::class_id>
 };
 
 template<class char_t>
-struct std::formatter<qx::class_id, char_t> : qx::basic_formatter<char_t>
+struct QX_FMT_NS::formatter<qx::class_id, char_t> : qx::basic_formatter<char_t>
 {
     template<class FormatContextType>
     constexpr auto format(const qx::class_id& id, FormatContextType& ctx) const
     {
-        return std::format_to(ctx.out(), QX_STR_PREFIX(char_t, "{}"), id.get_class_name());
+        return QX_FMT_NS::format_to(ctx.out(), QX_STR_PREFIX(char_t, "{}"), id.get_class_name());
     }
 };

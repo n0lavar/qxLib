@@ -342,7 +342,7 @@ template<class value_t, class usings_char_traits_t>
 struct format_string_traits
 {
     template<class... args_t>
-    using format_string = std::basic_format_string<value_t, args_t...>;
+    using format_string = QX_FMT_NS::basic_format_string<value_t, args_t...>;
 };
 
 
@@ -372,7 +372,7 @@ struct format_traits<char, usings_char_traits_t>
         typename usings_char_traits_t::string_view_type svFormat,
         args_t&&... args)
     {
-        std::vformat_to(itOutput, svFormat, std::make_format_args(args...));
+        QX_FMT_NS::vformat_to(itOutput, svFormat, QX_FMT_NS::make_format_args(args...));
     }
 };
 
@@ -396,7 +396,7 @@ struct format_traits<wchar_t, usings_char_traits_t>
         typename usings_char_traits_t::string_view_type svFormat,
         args_t&&... args)
     {
-        std::vformat_to(itOutput, svFormat, std::make_wformat_args(args...));
+        QX_FMT_NS::vformat_to(itOutput, svFormat, QX_FMT_NS::make_wformat_args(args...));
     }
 };
 

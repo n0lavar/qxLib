@@ -308,6 +308,7 @@ constexpr qx::unit<T, qx::units::distance> qx::convert<T, qx::units::distance>::
 }
 
 template<class char_t>
-struct std::formatter<qx::units::distance, char_t> : qx::units::details::unit_formatter<qx::units::distance, char_t>
+struct QX_FMT_NS::formatter<qx::units::distance, char_t>
+    : qx::units::details::unit_formatter<qx::units::distance, char_t>
 {
 };

@@ -18,14 +18,14 @@ namespace qx
 
 /**
     @struct  basic_format_string_strong_checks
-    @brief   std::basic_format_string wrapper that performs additional compile time checks
+    @brief   QX_FMT_NS::basic_format_string wrapper that performs additional compile time checks
     @details Checks braces balance and matching pairs of braces to the number of arguments
              in exchange for some format features, such as nested replacement fields 
     @tparam  char_t - char type
     @tparam  args_t - template parameter pack type
 **/
 template<class char_t, class... args_t>
-struct basic_format_string_strong_checks : public std::basic_format_string<char_t, args_t...>
+struct basic_format_string_strong_checks : public QX_FMT_NS::basic_format_string<char_t, args_t...>
 {
     /**
         @brief  basic_format_string object constructor
@@ -65,7 +65,7 @@ struct basic_formatter
         auto it = ctx.begin();
 
         if (it != ctx.end() && *it != QX_CHAR_PREFIX(char_t, '}'))
-            throw std::format_error("unknown spec");
+            throw QX_FMT_NS::format_error("unknown spec");
 
         return it;
     }
@@ -92,7 +92,7 @@ struct short_info_formatter
         }
 
         if (it != ctx.end() && *it != QX_CHAR_PREFIX(char_t, '}'))
-            throw std::format_error("unknown spec");
+            throw QX_FMT_NS::format_error("unknown spec");
 
         return it;
     }

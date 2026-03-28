@@ -32,6 +32,7 @@ macro(add_benchmarks
             target_include_directories(${_target} PRIVATE
                 ${BENCHMARK_INCLUDE_DIR}
                 ${GLM_INCLUDE_DIRS}
+                ${FMT_INCLUDE_DIRS}
                "${CMAKE_CURRENT_LIST_DIR}/include/"
             )
 

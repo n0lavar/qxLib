@@ -9,6 +9,7 @@
 #pragma once
 
 #include <qx/macros/config.h>
+#include <qx/macros/suppress_warnings.h>
 #include <qx/meta/tuple_utils.h>
 
 #define QX_ALL_CHAR_TYPES char, wchar_t
@@ -59,3 +60,19 @@ using char_type            = QX_CHAR_TYPE;
 using forbidden_char_types = tuple_utils::remove_t<details::all_char_types, std::tuple<char_type>>;
 
 } // namespace qx
+
+#if !defined(QX_CONF_FORCE_STD_FORMAT) && __has_include("fmt/format.h")
+
+QX_PUSH_SUPPRESS_ALL_WARNINGS();
+    #define FMT_UNICODE     0
+    #define FMT_HEADER_ONLY 1
+    #include "fmt/format.h"
+    #include "fmt/xchar.h"
+QX_POP_SUPPRESS_WARNINGS();
+    #define QX_FMT_NS fmt
+#else
+
+    #include <format>
+    #define QX_FMT_NS std
+
+#endif

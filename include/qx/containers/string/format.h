@@ -22,9 +22,11 @@ namespace qx
 **/
 template<class... args_t>
     requires format_acceptable_args_c<char, args_t...>
-cstring format(const std::format_string<std::type_identity_t<args_t>...> sFormat, args_t&&... args)
+cstring format(const QX_FMT_NS::format_string<std::type_identity_t<args_t>...> sFormat, args_t&&... args)
 {
-    return cstring::static_format(sFormat, std::forward<args_t>(args)...);
+    return cstring::static_vformat(
+        cstring_view(sFormat.get().data(), sFormat.get().size()),
+        std::forward<args_t>(args)...);
 }
 
 /**
@@ -36,9 +38,11 @@ cstring format(const std::format_string<std::type_identity_t<args_t>...> sFormat
 **/
 template<class... args_t>
     requires format_acceptable_args_c<wchar_t, args_t...>
-wstring format(const std::wformat_string<std::type_identity_t<args_t>...> sFormat, args_t&&... args)
+wstring format(const QX_FMT_NS::wformat_string<std::type_identity_t<args_t>...> sFormat, args_t&&... args)
 {
-    return wstring::static_format(sFormat, std::forward<args_t>(args)...);
+    return wstring::static_vformat(
+        wstring_view(sFormat.get().data(), sFormat.get().size()),
+        std::forward<args_t>(args)...);
 }
 
 /**

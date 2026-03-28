@@ -39,6 +39,7 @@ find_package(Threads REQUIRED)
 
 find_package(Boost 1.79)
 find_package(GLM)
+find_package(FMT)
 
 find_package(GTest MODULE)
 find_package(benchmark PATHS ../external/benchmark/build ../benchmark/build)
@@ -49,6 +50,7 @@ macro(qx_setup_test_target _target)
     target_include_directories(${_target} PRIVATE
         ${GTEST_INCLUDE_DIR}
         ${GLM_INCLUDE_DIRS}
+        ${FMT_INCLUDE_DIRS}
         "${CMAKE_CURRENT_LIST_DIR}/include/"
         "${CMAKE_CURRENT_LIST_DIR}/tests/"
     )
