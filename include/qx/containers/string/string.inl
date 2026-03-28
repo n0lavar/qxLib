@@ -2491,12 +2491,6 @@ inline typename basic_string<char_t, traits_t>::const_pointer basic_string<char_
     }
 }
 
-template<class T, class char_t, class traits_t>
-basic_string<char_t, traits_t> convert_to_string(const T& value)
-{
-    return basic_string<char_t, traits_t>::static_format(QX_STR_PREFIX(char_t, "{}"), value);
-}
-
 template<class char_t, class traits_t>
 basic_string<char_t, traits_t> operator+(
     const basic_string<char_t, traits_t>& lhs,

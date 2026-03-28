@@ -8,6 +8,7 @@
 **/
 #include <common.h>
 
+#include <qx/containers/string/format.h>
 #include <qx/containers/string/string.h>
 #include <qx/math/units/data.h>
 

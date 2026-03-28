@@ -8,6 +8,7 @@
 **/
 #include <common.h>
 
+#include <qx/containers/string/format.h>
 #include <qx/math/units/distance.h>
 
 template<class value_t>

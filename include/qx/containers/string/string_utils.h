@@ -193,19 +193,13 @@ constexpr int strcmp(const value_t* pszLeft, const value_t* pszRight)
 namespace details
 {
 
-template<class value_t>
-constexpr const value_t* choose_str_prefix(const char*, const wchar_t*) noexcept;
-
-template<>
-constexpr const char* choose_str_prefix<char>(const char* c, const wchar_t*) noexcept
+template<class value_t, size_t N>
+constexpr const auto& choose_str_prefix(const char (&c)[N], const wchar_t (&w)[N]) noexcept
 {
-    return c;
-}
-
-template<>
-constexpr const wchar_t* choose_str_prefix<wchar_t>(const char*, const wchar_t* w) noexcept
-{
-    return w;
+    if constexpr (std::is_same_v<value_t, char>)
+        return c;
+    else
+        return w;
 }
 
 template<class value_t>

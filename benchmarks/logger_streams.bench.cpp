@@ -6,7 +6,7 @@
     @copyright © Nick Khrapov, 2026. All right reserved.
 
 **/
-#include <benchmark/benchmark.h>
+#include "benchmark/benchmark.h"
 
 #include <qx/logger/base_file_logger_stream.h>
 #include <qx/logger/cout_logger_stream.h>
