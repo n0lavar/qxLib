@@ -60,7 +60,7 @@ var searchData=
   ['convert_3c_20t_2c_20qx_3a_3aunits_3a_3adata_20_3e_156',['convert&lt; T, qx::units::data &gt;',['../classqx_1_1convert_3_01_t_00_01qx_1_1units_1_1data_01_4.html',1,'qx']]],
   ['convert_3c_20t_2c_20qx_3a_3aunits_3a_3adistance_20_3e_157',['convert&lt; T, qx::units::distance &gt;',['../classqx_1_1convert_3_01_t_00_01qx_1_1units_1_1distance_01_4.html',1,'qx']]],
   ['convert_5fstring_5fliteral_158',['convert_string_literal',['../string__converters_8h.html#a06220f14639f405c16d3cdcc1af79570',1,'qx']]],
-  ['convert_5fto_5fstring_159',['convert_to_string',['../string_8h.html#ae7bef0fda2664f97b0454290be619fd6',1,'qx']]],
+  ['convert_5fto_5fstring_159',['convert_to_string',['../format_8h.html#a83bdf23a7de35207cbe9b50a9b918051',1,'qx']]],
   ['copy_160',['copy',['../classqx_1_1basic__string.html#a483943f155ef6b77d8b10985c5b78246',1,'qx::basic_string']]],
   ['copy_5fqualifiers_161',['copy_qualifiers',['../structqx_1_1copy__qualifiers.html',1,'qx']]],
   ['copy_5fqualifiers_3c_20const_20test_5ft_2c_20target_5ft_20_3e_162',['copy_qualifiers&lt; const test_t, target_t &gt;',['../structqx_1_1copy__qualifiers_3_01const_01test__t_00_01target__t_01_4.html',1,'qx']]],

@@ -1807,25 +1807,14 @@ $(function() {
 <div class="line"><a name="l01736"></a><span class="lineno"> 1736</span>&#160;private:</div>
 <div class="line"><a name="l01737"></a><span class="lineno"> 1737</span>&#160;    <a class="code" href="classqx_1_1sbo__bytes.html">sbo_bytes</a>&lt;details::string_sbo_traits&lt;traits_t&gt;&gt; m_Data;</div>
 <div class="line"><a name="l01738"></a><span class="lineno"> 1738</span>&#160;};</div>
-<div class="line"><a name="l01739"></a><span class="lineno"> 1739</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l01740"></a><span class="lineno"> 1740</span>&#160;<span class="comment">/**</span></div>
-<div class="line"><a name="l01741"></a><span class="lineno"> 1741</span>&#160;<span class="comment">    @brief  Converts any type that has a std::formatter overload to qx::basic_string</span></div>
-<div class="line"><a name="l01742"></a><span class="lineno"> 1742</span>&#160;<span class="comment">    @tparam T        - object type</span></div>
-<div class="line"><a name="l01743"></a><span class="lineno"> 1743</span>&#160;<span class="comment">    @tparam char_t   - char type (char, wchar_t, etc)</span></div>
-<div class="line"><a name="l01744"></a><span class="lineno"> 1744</span>&#160;<span class="comment">    @tparam traits_t - char traits. \see string_traits.h</span></div>
-<div class="line"><a name="l01745"></a><span class="lineno"> 1745</span>&#160;<span class="comment">    @param  value    - object to convert</span></div>
-<div class="line"><a name="l01746"></a><span class="lineno"> 1746</span>&#160;<span class="comment">    @retval          - qx::basic_string</span></div>
-<div class="line"><a name="l01747"></a><span class="lineno"> 1747</span>&#160;<span class="comment">**/</span></div>
-<div class="line"><a name="l01748"></a><span class="lineno"> 1748</span>&#160;template&lt;class T, class char_t = char_type, class traits_t = string_traits::traits&lt;char_t&gt;&gt;</div>
-<div class="line"><a name="l01749"></a><span class="lineno"> 1749</span>&#160;<a class="code" href="classqx_1_1basic__string.html">basic_string</a>&lt;char_t, traits_t&gt; convert_to_string(const T&amp; value);</div>
-<div class="line"><a name="l01750"></a><span class="lineno"> 1750</span>&#160; </div>
-<div class="line"><a name="l01751"></a><span class="lineno"> 1751</span>&#160;using <a class="code" href="classqx_1_1basic__string.html">cstring</a> = <a class="code" href="classqx_1_1basic__string.html">basic_string</a>&lt;<span class="keywordtype">char</span>&gt;;</div>
-<div class="line"><a name="l01752"></a><span class="lineno"> 1752</span>&#160;using <a class="code" href="classqx_1_1basic__string.html">wstring</a> = <a class="code" href="classqx_1_1basic__string.html">basic_string</a>&lt;<span class="keywordtype">wchar_t</span>&gt;;</div>
-<div class="line"><a name="l01753"></a><span class="lineno"> 1753</span>&#160;using <span class="keywordtype">string</span>  = <a class="code" href="classqx_1_1basic__string.html">basic_string</a>&lt;char_type&gt;;</div>
-<div class="line"><a name="l01754"></a><span class="lineno"> 1754</span>&#160; </div>
-<div class="line"><a name="l01755"></a><span class="lineno"> 1755</span>&#160;} <span class="comment">// namespace qx</span></div>
-<div class="line"><a name="l01756"></a><span class="lineno"> 1756</span>&#160; </div>
-<div class="line"><a name="l01757"></a><span class="lineno"> 1757</span>&#160;<span class="preprocessor">#include &lt;qx/containers/string/string.inl&gt;</span></div>
+<div class="line"><a name="l01739"></a><span class="lineno"> 1739</span>&#160; </div>
+<div class="line"><a name="l01740"></a><span class="lineno"> 1740</span>&#160;using <a class="code" href="classqx_1_1basic__string.html">cstring</a> = <a class="code" href="classqx_1_1basic__string.html">basic_string</a>&lt;<span class="keywordtype">char</span>&gt;;</div>
+<div class="line"><a name="l01741"></a><span class="lineno"> 1741</span>&#160;using <a class="code" href="classqx_1_1basic__string.html">wstring</a> = <a class="code" href="classqx_1_1basic__string.html">basic_string</a>&lt;<span class="keywordtype">wchar_t</span>&gt;;</div>
+<div class="line"><a name="l01742"></a><span class="lineno"> 1742</span>&#160;using <span class="keywordtype">string</span>  = <a class="code" href="classqx_1_1basic__string.html">basic_string</a>&lt;char_type&gt;;</div>
+<div class="line"><a name="l01743"></a><span class="lineno"> 1743</span>&#160; </div>
+<div class="line"><a name="l01744"></a><span class="lineno"> 1744</span>&#160;} <span class="comment">// namespace qx</span></div>
+<div class="line"><a name="l01745"></a><span class="lineno"> 1745</span>&#160; </div>
+<div class="line"><a name="l01746"></a><span class="lineno"> 1746</span>&#160;<span class="preprocessor">#include &lt;qx/containers/string/string.inl&gt;</span></div>
 <div class="ttc" id="aclassqx_1_1basic__string_html"><div class="ttname"><a href="classqx_1_1basic__string.html">qx::basic_string</a></div><div class="ttdoc">String class.</div><div class="ttdef"><b>Definition:</b> <a href="string_8h_source.html#l00076">string.h:77</a></div></div>
 <div class="ttc" id="aclassqx_1_1basic__string_html_a02be4528e498e62b53a24465f637631b"><div class="ttname"><a href="classqx_1_1basic__string.html#a02be4528e498e62b53a24465f637631b">qx::basic_string::push_back</a></div><div class="ttdeci">void push_back(value_type chSymbol) noexcept</div><div class="ttdoc">Insert char in the end of the string.</div><div class="ttdef"><b>Definition:</b> <a href="string_8inl_source.html#l00553">string.inl:553</a></div></div>
 <div class="ttc" id="aclassqx_1_1basic__string_html_a0836a282c29940103131ee8e7c323ef6"><div class="ttname"><a href="classqx_1_1basic__string.html#a0836a282c29940103131ee8e7c323ef6">qx::basic_string::erase</a></div><div class="ttdeci">void erase(iterator itFirst, iterator itLast) noexcept</div><div class="ttdoc">Erase substring.</div><div class="ttdef"><b>Definition:</b> <a href="string_8inl_source.html#l00565">string.inl:565</a></div></div>

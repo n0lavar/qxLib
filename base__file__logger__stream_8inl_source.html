@@ -147,7 +147,7 @@ $(function() {
 <div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;                         <span class="keywordflow">return</span> entry.path().extension() == <a class="code" href="structqx_1_1base__file__logger__stream_1_1config.html">config</a>.svFileExtension;</div>
 <div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;                     }))</div>
 <div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;        {</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;            <span class="keyword">const</span> std::wstring sFilename = entry.path().filename().wstring();</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;            <span class="keyword">const</span> std::basic_string&lt;char_type&gt; sFilename = entry.path().filename().generic_string&lt;char_type&gt;();</div>
 <div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;            <span class="keywordflow">if</span> (sFilename.starts_with(<a class="code" href="structqx_1_1base__file__logger__stream_1_1config.html">config</a>.svFilePrefix))</div>
 <div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;                logFiles.push_back(entry);</div>
 <div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;        }</div>

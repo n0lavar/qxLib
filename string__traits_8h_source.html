@@ -413,7 +413,7 @@ $(function() {
 <div class="line"><a name="l00342"></a><span class="lineno"><a class="line" href="structqx_1_1string__traits_1_1format__string__traits.html">  342</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structqx_1_1string__traits_1_1format__string__traits.html">format_string_traits</a></div>
 <div class="line"><a name="l00343"></a><span class="lineno">  343</span>&#160;{</div>
 <div class="line"><a name="l00344"></a><span class="lineno">  344</span>&#160;    <span class="keyword">template</span>&lt;<span class="keyword">class</span>... args_t&gt;</div>
-<div class="line"><a name="l00345"></a><span class="lineno">  345</span>&#160;    <span class="keyword">using</span> format_string = std::basic_format_string&lt;value_t, args_t...&gt;;</div>
+<div class="line"><a name="l00345"></a><span class="lineno">  345</span>&#160;    <span class="keyword">using</span> format_string = QX_FMT_NS::basic_format_string&lt;value_t, args_t...&gt;;</div>
 <div class="line"><a name="l00346"></a><span class="lineno">  346</span>&#160;};</div>
 <div class="line"><a name="l00347"></a><span class="lineno">  347</span>&#160; </div>
 <div class="line"><a name="l00348"></a><span class="lineno">  348</span>&#160; </div>
@@ -443,7 +443,7 @@ $(function() {
 <div class="line"><a name="l00372"></a><span class="lineno">  372</span>&#160;        <span class="keyword">typename</span> usings_char_traits_t::string_view_type svFormat,</div>
 <div class="line"><a name="l00373"></a><span class="lineno">  373</span>&#160;        args_t&amp;&amp;... args)</div>
 <div class="line"><a name="l00374"></a><span class="lineno">  374</span>&#160;    {</div>
-<div class="line"><a name="l00375"></a><span class="lineno">  375</span>&#160;        std::vformat_to(itOutput, svFormat, std::make_format_args(args...));</div>
+<div class="line"><a name="l00375"></a><span class="lineno">  375</span>&#160;        QX_FMT_NS::vformat_to(itOutput, svFormat, QX_FMT_NS::make_format_args(args...));</div>
 <div class="line"><a name="l00376"></a><span class="lineno">  376</span>&#160;    }</div>
 <div class="line"><a name="l00377"></a><span class="lineno">  377</span>&#160;};</div>
 <div class="line"><a name="l00378"></a><span class="lineno">  378</span>&#160; </div>
@@ -467,7 +467,7 @@ $(function() {
 <div class="line"><a name="l00396"></a><span class="lineno">  396</span>&#160;        <span class="keyword">typename</span> usings_char_traits_t::string_view_type svFormat,</div>
 <div class="line"><a name="l00397"></a><span class="lineno">  397</span>&#160;        args_t&amp;&amp;... args)</div>
 <div class="line"><a name="l00398"></a><span class="lineno">  398</span>&#160;    {</div>
-<div class="line"><a name="l00399"></a><span class="lineno">  399</span>&#160;        std::vformat_to(itOutput, svFormat, std::make_wformat_args(args...));</div>
+<div class="line"><a name="l00399"></a><span class="lineno">  399</span>&#160;        QX_FMT_NS::vformat_to(itOutput, svFormat, QX_FMT_NS::make_wformat_args(args...));</div>
 <div class="line"><a name="l00400"></a><span class="lineno">  400</span>&#160;    }</div>
 <div class="line"><a name="l00401"></a><span class="lineno">  401</span>&#160;};</div>
 <div class="line"><a name="l00402"></a><span class="lineno">  402</span>&#160; </div>
@@ -496,8 +496,8 @@ $(function() {
 <div class="ttc" id="aconfig_8h_html"><div class="ttname"><a href="config_8h.html">config.h</a></div></div>
 <div class="ttc" id="astring__utils_8h_html"><div class="ttname"><a href="string__utils_8h.html">string_utils.h</a></div></div>
 <div class="ttc" id="astring__utils_8h_html_a3d321a74f68c1be9613ca451a464ec53"><div class="ttname"><a href="string__utils_8h.html#a3d321a74f68c1be9613ca451a464ec53">qx::djb2a_hash</a></div><div class="ttdeci">constexpr size_t djb2a_hash(const value_t *pszStr, size_t nSeed, size_t nLen)</div><div class="ttdoc">djb2a hash</div><div class="ttdef"><b>Definition:</b> <a href="string__utils_8h_source.html#l00026">string_utils.h:26</a></div></div>
-<div class="ttc" id="astring__utils_8h_html_a57911e62bb82593665bf09e4ea834904"><div class="ttname"><a href="string__utils_8h.html#a57911e62bb82593665bf09e4ea834904">QX_CHAR_PREFIX</a></div><div class="ttdeci">#define QX_CHAR_PREFIX(value_t, ch)</div><div class="ttdoc">Chose witch of prefixes add to char : L or none.</div><div class="ttdef"><b>Definition:</b> <a href="string__utils_8h_source.html#l00261">string_utils.h:261</a></div></div>
-<div class="ttc" id="astring__utils_8h_html_aa1f7d3648d28dcef62c0db015730218d"><div class="ttname"><a href="string__utils_8h.html#aa1f7d3648d28dcef62c0db015730218d">qx::strlen</a></div><div class="ttdeci">constexpr std::size_t strlen(const value_t *psz)</div><div class="ttdoc">Naive but constexpr string length algorithm, for runtime prefer std::strlen as there are may be a lot...</div><div class="ttdef"><b>Definition:</b> <a href="string__utils_8h_source.html#l00373">string_utils.h:373</a></div></div>
+<div class="ttc" id="astring__utils_8h_html_a57911e62bb82593665bf09e4ea834904"><div class="ttname"><a href="string__utils_8h.html#a57911e62bb82593665bf09e4ea834904">QX_CHAR_PREFIX</a></div><div class="ttdeci">#define QX_CHAR_PREFIX(value_t, ch)</div><div class="ttdoc">Chose witch of prefixes add to char : L or none.</div><div class="ttdef"><b>Definition:</b> <a href="string__utils_8h_source.html#l00255">string_utils.h:255</a></div></div>
+<div class="ttc" id="astring__utils_8h_html_aa1f7d3648d28dcef62c0db015730218d"><div class="ttname"><a href="string__utils_8h.html#aa1f7d3648d28dcef62c0db015730218d">qx::strlen</a></div><div class="ttdeci">constexpr std::size_t strlen(const value_t *psz)</div><div class="ttdoc">Naive but constexpr string length algorithm, for runtime prefer std::strlen as there are may be a lot...</div><div class="ttdef"><b>Definition:</b> <a href="string__utils_8h_source.html#l00367">string_utils.h:367</a></div></div>
 <div class="ttc" id="astring__view_8h_html"><div class="ttname"><a href="string__view_8h.html">string_view.h</a></div></div>
 <div class="ttc" id="astructqx_1_1string__traits_1_1allocation__traits_html"><div class="ttname"><a href="structqx_1_1string__traits_1_1allocation__traits.html">qx::string_traits::allocation_traits</a></div><div class="ttdef"><b>Definition:</b> <a href="string__traits_8h_source.html#l00067">string_traits.h:67</a></div></div>
 <div class="ttc" id="astructqx_1_1string__traits_1_1base__test__char__traits_html"><div class="ttname"><a href="structqx_1_1string__traits_1_1base__test__char__traits.html">qx::string_traits::base_test_char_traits</a></div><div class="ttdef"><b>Definition:</b> <a href="string__traits_8h_source.html#l00187">string_traits.h:188</a></div></div>

@@ -124,8 +124,8 @@ Custom streams</h2>
 <div class="line">logger.add_stream(qx::file_logger_stream_mapping());</div>
 </div><!-- fragment --><p> Or implement your own stream and add it the same way: </p><div class="fragment"><div class="line">class my_logger_stream : public qx::base_logger_stream</div>
 <div class="line">{</div>
+<div class="line">    virtual void do_log(...) override;</div>
 <div class="line">    virtual void do_flush() override;</div>
-<div class="line">    virtual void do_log(const category&amp; category, verbosity eVerbosity, string_view svMessage) override;</div>
 <div class="line">};</div>
 <div class="line">logger.add_stream(my_logger_stream());</div>
 </div><!-- fragment --><h2><a class="anchor" id="autotoc_md3"></a>

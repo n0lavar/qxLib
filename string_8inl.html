@@ -66,8 +66,7 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="summary">
-<a href="#nested-classes">Classes</a> &#124;
-<a href="#func-members">Functions</a>  </div>
+<a href="#nested-classes">Classes</a>  </div>
   <div class="headertitle">
 <div class="title">string.inl File Reference</div>  </div>
 </div><!--header-->
@@ -79,15 +78,8 @@ $(function() {
 Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structstd_1_1hash_3_01qx_1_1basic__string_3_01char__t_00_01traits__t_01_4_01_4.html">std::hash&lt; qx::basic_string&lt; char_t, traits_t &gt; &gt;</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structstd_1_1formatter_3_01qx_1_1basic__string_3_01char__t_00_01traits__t_01_4_00_01char__t_01_4.html">std::formatter&lt; qx::basic_string&lt; char_t, traits_t &gt;, char_t &gt;</a></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_q_x___f_m_t___n_s_1_1formatter_3_01qx_1_1basic__string_3_01char__t_00_01traits__t_01_4_00_01char__t_01_4.html">QX_FMT_NS::formatter&lt; qx::basic_string&lt; char_t, traits_t &gt;, char_t &gt;</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
-Functions</h2></td></tr>
-<tr class="memitem:ae7bef0fda2664f97b0454290be619fd6"><td class="memTemplParams" colspan="2">template&lt;class T , class char_t  = char_type, class traits_t  = string_traits::traits&lt;char_t&gt;&gt; </td></tr>
-<tr class="memitem:ae7bef0fda2664f97b0454290be619fd6"><td class="memTemplItemLeft" align="right" valign="top">basic_string&lt; char_t, traits_t &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="string_8h.html#ae7bef0fda2664f97b0454290be619fd6">qx::convert_to_string</a> (const T &amp;value)</td></tr>
-<tr class="memdesc:ae7bef0fda2664f97b0454290be619fd6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Converts any type that has a std::formatter overload to <a class="el" href="classqx_1_1basic__string.html" title="String class.">qx::basic_string</a>.  <a href="string_8h.html#ae7bef0fda2664f97b0454290be619fd6">More...</a><br /></td></tr>
-<tr class="separator:ae7bef0fda2664f97b0454290be619fd6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><dl class="section author"><dt>Author</dt><dd>Khrapov </dd></dl>
@@ -95,53 +87,7 @@ Functions</h2></td></tr>
 <dl class="section copyright"><dt>Copyright</dt><dd>© Nick Khrapov, 2021. All right reserved. </dd></dl>
 
 <p class="definition">Definition in file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
-</div><h2 class="groupheader">Function Documentation</h2>
-<a id="ae7bef0fda2664f97b0454290be619fd6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae7bef0fda2664f97b0454290be619fd6">&#9670;&nbsp;</a></span>convert_to_string()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class T , class char_t  = char_type, class traits_t  = string_traits::traits&lt;char_t&gt;&gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">basic_string&lt; char_t, traits_t &gt; qx::convert_to_string </td>
-          <td>(</td>
-          <td class="paramtype">const T &amp;&#160;</td>
-          <td class="paramname"><em>value</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Converts any type that has a std::formatter overload to <a class="el" href="classqx_1_1basic__string.html" title="String class.">qx::basic_string</a>. </p>
-<dl class="tparams"><dt>Template Parameters</dt><dd>
-  <table class="tparams">
-    <tr><td class="paramname">T</td><td>- object type </td></tr>
-    <tr><td class="paramname">char_t</td><td>- char type (char, wchar_t, etc) </td></tr>
-    <tr><td class="paramname">traits_t</td><td>- char traits. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section see"><dt>See also</dt><dd><a class="el" href="string__traits_8h.html">string_traits.h</a> </dd></dl>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">value</td><td>- object to convert </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="retval"><dt>Return values</dt><dd>
-  <table class="retval">
-    <tr><td class="paramname">-</td><td><a class="el" href="classqx_1_1basic__string.html" title="String class.">qx::basic_string</a> </td></tr>
-  </table>
-  </dd>
-</dl>
-
-<p class="definition">Definition at line <a class="el" href="string_8inl_source.html#l02495">2495</a> of file <a class="el" href="string_8inl_source.html">string.inl</a>.</p>
-
-</div>
-</div>
-</div><!-- contents -->
+</div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
