@@ -270,18 +270,19 @@ $(function() {
 <div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160;}</div>
 <div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160; </div>
 <div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> traits_t&gt;</div>
-<div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160;<a class="code" href="macros_2common_8h.html#a784c3871b6a50b1e040a68d7bf525d1c">QX_FORCE_INLINE</a> <span class="keywordtype">size_t</span> sbo_bytes&lt;traits_t&gt;::get_new_size(size_type nRequestedSize) <span class="keyword">const</span> noexcept</div>
-<div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160;{</div>
-<div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;    <span class="keyword">const</span> <span class="keywordtype">size_t</span> nCapacity       = capacity();</div>
-<div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;    <span class="keyword">const</span> <span class="keywordtype">size_t</span> nAdvancedGrowth = traits_type::growth_strategy(nCapacity);</div>
-<div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160;    <span class="keywordtype">size_t</span>       nNewSize        = nRequestedSize;</div>
-<div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160;    <span class="keywordflow">if</span> (nCapacity &lt; nRequestedSize &amp;&amp; nRequestedSize &lt; nAdvancedGrowth)</div>
-<div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160;        nNewSize = nAdvancedGrowth;</div>
-<div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160; </div>
-<div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160;    <span class="keywordflow">return</span> nNewSize;</div>
-<div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160;}</div>
-<div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160; </div>
-<div class="line"><a name="l00213"></a><span class="lineno">  213</span>&#160;} <span class="comment">// namespace qx</span></div>
+<div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160;<a class="code" href="macros_2common_8h.html#a784c3871b6a50b1e040a68d7bf525d1c">QX_FORCE_INLINE</a> sbo_bytes&lt;traits_t&gt;::size_type sbo_bytes&lt;traits_t&gt;::get_new_size(</div>
+<div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160;    size_type nRequestedSize) <span class="keyword">const</span> noexcept</div>
+<div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;{</div>
+<div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;    <span class="keyword">const</span> <span class="keywordtype">size_t</span> nCapacity       = capacity();</div>
+<div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160;    <span class="keyword">const</span> <span class="keywordtype">size_t</span> nAdvancedGrowth = traits_type::growth_strategy(nCapacity);</div>
+<div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160;    <span class="keywordtype">size_t</span>       nNewSize        = nRequestedSize;</div>
+<div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160;    <span class="keywordflow">if</span> (nCapacity &lt; nRequestedSize &amp;&amp; nRequestedSize &lt; nAdvancedGrowth)</div>
+<div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160;        nNewSize = nAdvancedGrowth;</div>
+<div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160; </div>
+<div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160;    <span class="keywordflow">return</span> nNewSize;</div>
+<div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160;}</div>
+<div class="line"><a name="l00213"></a><span class="lineno">  213</span>&#160; </div>
+<div class="line"><a name="l00214"></a><span class="lineno">  214</span>&#160;} <span class="comment">// namespace qx</span></div>
 <div class="ttc" id="aclassqx_1_1sbo__bytes_html"><div class="ttname"><a href="classqx_1_1sbo__bytes.html">qx::sbo_bytes</a></div><div class="ttdoc">A type erased small buffer object that works with raw data.</div><div class="ttdef"><b>Definition:</b> <a href="sbo__bytes_8h_source.html#l00029">sbo_bytes.h:30</a></div></div>
 <div class="ttc" id="aclassqx_1_1sbo__bytes_html_a062df17ad3bf2603f41528b3586d22f2"><div class="ttname"><a href="classqx_1_1sbo__bytes.html#a062df17ad3bf2603f41528b3586d22f2">qx::sbo_bytes::capacity</a></div><div class="ttdeci">QX_FORCE_INLINE size_type capacity() const noexcept</div><div class="ttdoc">Get SBO capacity (bytes)</div><div class="ttdef"><b>Definition:</b> <a href="sbo__bytes_8inl_source.html#l00143">sbo_bytes.inl:143</a></div></div>
 <div class="ttc" id="aclassqx_1_1sbo__bytes_html_a4eb162af797cc68841049ca572b03895"><div class="ttname"><a href="classqx_1_1sbo__bytes.html#a4eb162af797cc68841049ca572b03895">qx::sbo_bytes::is_small</a></div><div class="ttdeci">QX_FORCE_INLINE bool is_small() const noexcept</div><div class="ttdoc">Is the SBO small and fits into the local buffer.</div><div class="ttdef"><b>Definition:</b> <a href="sbo__bytes_8inl_source.html#l00149">sbo_bytes.inl:149</a></div></div>
