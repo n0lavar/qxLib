@@ -429,48 +429,52 @@ $(function() {
 <div class="line"><a name="l00358"></a><span class="lineno">  358</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> usings_<span class="keywordtype">char</span>_traits_t&gt;</div>
 <div class="line"><a name="l00359"></a><span class="lineno"><a class="line" href="structqx_1_1string__traits_1_1format__traits_3_01wchar__t_00_01usings__char__traits__t_01_4.html">  359</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structqx_1_1string__traits_1_1format__traits.html">format_traits</a>&lt;wchar_t, usings_char_traits_t&gt;</div>
 <div class="line"><a name="l00360"></a><span class="lineno">  360</span>&#160;{</div>
-<div class="line"><a name="l00361"></a><span class="lineno">  361</span>&#160;    <span class="keyword">static</span> constexpr <span class="keyword">typename</span> usings_char_traits_t::size_type nMemoryBufferSize = 512;</div>
-<div class="line"><a name="l00362"></a><span class="lineno">  362</span>&#160; </div>
-<div class="line"><a name="l00363"></a><span class="lineno">  363</span>&#160;    <span class="keyword">template</span>&lt;<span class="keyword">class</span>... args_t&gt;</div>
-<div class="line"><a name="l00364"></a><span class="lineno">  364</span>&#160;    <span class="keyword">static</span> <span class="keyword">auto</span> make_format_args(args_t&amp;... args)</div>
-<div class="line"><a name="l00365"></a><span class="lineno">  365</span>&#160;    {</div>
-<div class="line"><a name="l00366"></a><span class="lineno">  366</span>&#160;        <span class="keywordflow">return</span> QX_FMT_NS::make_wformat_args(args...);</div>
-<div class="line"><a name="l00367"></a><span class="lineno">  367</span>&#160;    }</div>
-<div class="line"><a name="l00368"></a><span class="lineno">  368</span>&#160; </div>
-<div class="line"><a name="l00369"></a><span class="lineno">  369</span>&#160;    <span class="keyword">template</span>&lt;<span class="keyword">class</span>... args_t&gt;</div>
-<div class="line"><a name="l00370"></a><span class="lineno">  370</span>&#160;    <span class="keyword">static</span> <span class="keywordtype">int</span> sscanf(</div>
-<div class="line"><a name="l00371"></a><span class="lineno">  371</span>&#160;        <span class="keyword">typename</span> usings_char_traits_t::const_pointer pszString,</div>
-<div class="line"><a name="l00372"></a><span class="lineno">  372</span>&#160;        <span class="keyword">typename</span> usings_char_traits_t::const_pointer pszFormat,</div>
-<div class="line"><a name="l00373"></a><span class="lineno">  373</span>&#160;        args_t&amp;&amp;... args) noexcept</div>
-<div class="line"><a name="l00374"></a><span class="lineno">  374</span>&#160;    {</div>
-<div class="line"><a name="l00375"></a><span class="lineno">  375</span>&#160;        QX_PUSH_SUPPRESS_ALL_WARNINGS();</div>
-<div class="line"><a name="l00376"></a><span class="lineno">  376</span>&#160;        <span class="keywordflow">return</span> std::swscanf(pszString, pszFormat, std::forward&lt;args_t&gt;(args)...);</div>
-<div class="line"><a name="l00377"></a><span class="lineno">  377</span>&#160;        QX_POP_SUPPRESS_WARNINGS();</div>
-<div class="line"><a name="l00378"></a><span class="lineno">  378</span>&#160;    }</div>
-<div class="line"><a name="l00379"></a><span class="lineno">  379</span>&#160;};</div>
-<div class="line"><a name="l00380"></a><span class="lineno">  380</span>&#160; </div>
-<div class="line"><a name="l00381"></a><span class="lineno">  381</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span>... args_t&gt;</div>
-<div class="line"><a name="l00382"></a><span class="lineno"><a class="line" href="structqx_1_1string__traits_1_1constructor.html">  382</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structqx_1_1string__traits_1_1constructor.html">constructor</a> : <span class="keyword">public</span> args_t...</div>
-<div class="line"><a name="l00383"></a><span class="lineno">  383</span>&#160;{</div>
-<div class="line"><a name="l00384"></a><span class="lineno">  384</span>&#160;};</div>
-<div class="line"><a name="l00385"></a><span class="lineno">  385</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00386"></a><span class="lineno">  386</span>&#160;<span class="comment">/**</span></div>
-<div class="line"><a name="l00387"></a><span class="lineno">  387</span>&#160;<span class="comment">    @brief Common string traits type. User may use it with user-defined traits to override the required behaviour.</span></div>
-<div class="line"><a name="l00388"></a><span class="lineno">  388</span>&#160;<span class="comment">    @tparam value_t - char type</span></div>
-<div class="line"><a name="l00389"></a><span class="lineno">  389</span>&#160;<span class="comment">**/</span></div>
-<div class="line"><a name="l00390"></a><span class="lineno">  390</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> value_t&gt;</div>
-<div class="line"><a name="l00391"></a><span class="lineno"><a class="line" href="string__traits_8h.html#aba75295416d82c4641e5d88c9e53a98b">  391</a></span>&#160;<span class="keyword">using</span> <a class="code" href="structqx_1_1string__traits_1_1constructor.html">traits</a> = <a class="code" href="structqx_1_1string__traits_1_1constructor.html">constructor</a>&lt;</div>
-<div class="line"><a name="l00392"></a><span class="lineno">  392</span>&#160;    <a class="code" href="structqx_1_1string__traits_1_1usings__traits.html">usings_traits&lt;value_t&gt;</a>,</div>
-<div class="line"><a name="l00393"></a><span class="lineno">  393</span>&#160;    <a class="code" href="structqx_1_1string__traits_1_1hash__traits.html">hash_traits&lt;value_t, usings_traits&lt;value_t&gt;</a>&gt;,</div>
-<div class="line"><a name="l00394"></a><span class="lineno">  394</span>&#160;    <a class="code" href="structqx_1_1string__traits_1_1allocation__traits.html">allocation_traits&lt;value_t, usings_traits&lt;value_t&gt;</a>&gt;,</div>
-<div class="line"><a name="l00395"></a><span class="lineno">  395</span>&#160;    <a class="code" href="structqx_1_1string__traits_1_1test__char__traits.html">test_char_traits&lt;value_t, usings_traits&lt;value_t&gt;</a>&gt;,</div>
-<div class="line"><a name="l00396"></a><span class="lineno">  396</span>&#160;    <a class="code" href="structqx_1_1string__traits_1_1transform__char__traits.html">transform_char_traits&lt;value_t, usings_traits&lt;value_t&gt;</a>&gt;,</div>
-<div class="line"><a name="l00397"></a><span class="lineno">  397</span>&#160;    <a class="code" href="structqx_1_1string__traits_1_1length__traits.html">length_traits&lt;value_t, usings_traits&lt;value_t&gt;</a>&gt;,</div>
-<div class="line"><a name="l00398"></a><span class="lineno">  398</span>&#160;    <a class="code" href="structqx_1_1string__traits_1_1compare__traits.html">compare_traits&lt;value_t, usings_traits&lt;value_t&gt;</a>&gt;,</div>
-<div class="line"><a name="l00399"></a><span class="lineno">  399</span>&#160;    <a class="code" href="structqx_1_1string__traits_1_1format__string__traits.html">format_string_traits&lt;value_t, usings_traits&lt;value_t&gt;</a>&gt;,</div>
-<div class="line"><a name="l00400"></a><span class="lineno">  400</span>&#160;    <a class="code" href="structqx_1_1string__traits_1_1format__traits.html">format_traits&lt;value_t, usings_traits&lt;value_t&gt;</a>&gt;&gt;;</div>
-<div class="line"><a name="l00401"></a><span class="lineno">  401</span>&#160; </div>
-<div class="line"><a name="l00402"></a><span class="lineno">  402</span>&#160;} <span class="comment">// namespace qx::string_traits</span></div>
+<div class="line"><a name="l00361"></a><span class="lineno">  361</span>&#160;<span class="preprocessor">#if QX_WIN</span></div>
+<div class="line"><a name="l00362"></a><span class="lineno">  362</span>&#160;    <span class="keyword">static</span> constexpr <span class="keyword">typename</span> usings_char_traits_t::size_type nMemoryBufferSize = 512;</div>
+<div class="line"><a name="l00363"></a><span class="lineno">  363</span>&#160;<span class="preprocessor">#else</span></div>
+<div class="line"><a name="l00364"></a><span class="lineno">  364</span>&#160;    <span class="keyword">static</span> constexpr <span class="keyword">typename</span> usings_char_traits_t::size_type nMemoryBufferSize = 256;</div>
+<div class="line"><a name="l00365"></a><span class="lineno">  365</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00366"></a><span class="lineno">  366</span>&#160; </div>
+<div class="line"><a name="l00367"></a><span class="lineno">  367</span>&#160;    <span class="keyword">template</span>&lt;<span class="keyword">class</span>... args_t&gt;</div>
+<div class="line"><a name="l00368"></a><span class="lineno">  368</span>&#160;    <span class="keyword">static</span> <span class="keyword">auto</span> make_format_args(args_t&amp;... args)</div>
+<div class="line"><a name="l00369"></a><span class="lineno">  369</span>&#160;    {</div>
+<div class="line"><a name="l00370"></a><span class="lineno">  370</span>&#160;        <span class="keywordflow">return</span> QX_FMT_NS::make_wformat_args(args...);</div>
+<div class="line"><a name="l00371"></a><span class="lineno">  371</span>&#160;    }</div>
+<div class="line"><a name="l00372"></a><span class="lineno">  372</span>&#160; </div>
+<div class="line"><a name="l00373"></a><span class="lineno">  373</span>&#160;    <span class="keyword">template</span>&lt;<span class="keyword">class</span>... args_t&gt;</div>
+<div class="line"><a name="l00374"></a><span class="lineno">  374</span>&#160;    <span class="keyword">static</span> <span class="keywordtype">int</span> sscanf(</div>
+<div class="line"><a name="l00375"></a><span class="lineno">  375</span>&#160;        <span class="keyword">typename</span> usings_char_traits_t::const_pointer pszString,</div>
+<div class="line"><a name="l00376"></a><span class="lineno">  376</span>&#160;        <span class="keyword">typename</span> usings_char_traits_t::const_pointer pszFormat,</div>
+<div class="line"><a name="l00377"></a><span class="lineno">  377</span>&#160;        args_t&amp;&amp;... args) noexcept</div>
+<div class="line"><a name="l00378"></a><span class="lineno">  378</span>&#160;    {</div>
+<div class="line"><a name="l00379"></a><span class="lineno">  379</span>&#160;        QX_PUSH_SUPPRESS_ALL_WARNINGS();</div>
+<div class="line"><a name="l00380"></a><span class="lineno">  380</span>&#160;        <span class="keywordflow">return</span> std::swscanf(pszString, pszFormat, std::forward&lt;args_t&gt;(args)...);</div>
+<div class="line"><a name="l00381"></a><span class="lineno">  381</span>&#160;        QX_POP_SUPPRESS_WARNINGS();</div>
+<div class="line"><a name="l00382"></a><span class="lineno">  382</span>&#160;    }</div>
+<div class="line"><a name="l00383"></a><span class="lineno">  383</span>&#160;};</div>
+<div class="line"><a name="l00384"></a><span class="lineno">  384</span>&#160; </div>
+<div class="line"><a name="l00385"></a><span class="lineno">  385</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span>... args_t&gt;</div>
+<div class="line"><a name="l00386"></a><span class="lineno"><a class="line" href="structqx_1_1string__traits_1_1constructor.html">  386</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structqx_1_1string__traits_1_1constructor.html">constructor</a> : <span class="keyword">public</span> args_t...</div>
+<div class="line"><a name="l00387"></a><span class="lineno">  387</span>&#160;{</div>
+<div class="line"><a name="l00388"></a><span class="lineno">  388</span>&#160;};</div>
+<div class="line"><a name="l00389"></a><span class="lineno">  389</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00390"></a><span class="lineno">  390</span>&#160;<span class="comment">/**</span></div>
+<div class="line"><a name="l00391"></a><span class="lineno">  391</span>&#160;<span class="comment">    @brief Common string traits type. User may use it with user-defined traits to override the required behaviour.</span></div>
+<div class="line"><a name="l00392"></a><span class="lineno">  392</span>&#160;<span class="comment">    @tparam value_t - char type</span></div>
+<div class="line"><a name="l00393"></a><span class="lineno">  393</span>&#160;<span class="comment">**/</span></div>
+<div class="line"><a name="l00394"></a><span class="lineno">  394</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> value_t&gt;</div>
+<div class="line"><a name="l00395"></a><span class="lineno"><a class="line" href="string__traits_8h.html#aba75295416d82c4641e5d88c9e53a98b">  395</a></span>&#160;<span class="keyword">using</span> <a class="code" href="structqx_1_1string__traits_1_1constructor.html">traits</a> = <a class="code" href="structqx_1_1string__traits_1_1constructor.html">constructor</a>&lt;</div>
+<div class="line"><a name="l00396"></a><span class="lineno">  396</span>&#160;    <a class="code" href="structqx_1_1string__traits_1_1usings__traits.html">usings_traits&lt;value_t&gt;</a>,</div>
+<div class="line"><a name="l00397"></a><span class="lineno">  397</span>&#160;    <a class="code" href="structqx_1_1string__traits_1_1hash__traits.html">hash_traits&lt;value_t, usings_traits&lt;value_t&gt;</a>&gt;,</div>
+<div class="line"><a name="l00398"></a><span class="lineno">  398</span>&#160;    <a class="code" href="structqx_1_1string__traits_1_1allocation__traits.html">allocation_traits&lt;value_t, usings_traits&lt;value_t&gt;</a>&gt;,</div>
+<div class="line"><a name="l00399"></a><span class="lineno">  399</span>&#160;    <a class="code" href="structqx_1_1string__traits_1_1test__char__traits.html">test_char_traits&lt;value_t, usings_traits&lt;value_t&gt;</a>&gt;,</div>
+<div class="line"><a name="l00400"></a><span class="lineno">  400</span>&#160;    <a class="code" href="structqx_1_1string__traits_1_1transform__char__traits.html">transform_char_traits&lt;value_t, usings_traits&lt;value_t&gt;</a>&gt;,</div>
+<div class="line"><a name="l00401"></a><span class="lineno">  401</span>&#160;    <a class="code" href="structqx_1_1string__traits_1_1length__traits.html">length_traits&lt;value_t, usings_traits&lt;value_t&gt;</a>&gt;,</div>
+<div class="line"><a name="l00402"></a><span class="lineno">  402</span>&#160;    <a class="code" href="structqx_1_1string__traits_1_1compare__traits.html">compare_traits&lt;value_t, usings_traits&lt;value_t&gt;</a>&gt;,</div>
+<div class="line"><a name="l00403"></a><span class="lineno">  403</span>&#160;    <a class="code" href="structqx_1_1string__traits_1_1format__string__traits.html">format_string_traits&lt;value_t, usings_traits&lt;value_t&gt;</a>&gt;,</div>
+<div class="line"><a name="l00404"></a><span class="lineno">  404</span>&#160;    <a class="code" href="structqx_1_1string__traits_1_1format__traits.html">format_traits&lt;value_t, usings_traits&lt;value_t&gt;</a>&gt;&gt;;</div>
+<div class="line"><a name="l00405"></a><span class="lineno">  405</span>&#160; </div>
+<div class="line"><a name="l00406"></a><span class="lineno">  406</span>&#160;} <span class="comment">// namespace qx::string_traits</span></div>
 <div class="ttc" id="aconfig_8h_html"><div class="ttname"><a href="config_8h.html">config.h</a></div></div>
 <div class="ttc" id="astatic__assert_8h_html"><div class="ttname"><a href="static__assert_8h.html">static_assert.h</a></div><div class="ttdoc">Static assert macros.</div></div>
 <div class="ttc" id="astring__utils_8h_html"><div class="ttname"><a href="string__utils_8h.html">string_utils.h</a></div></div>
@@ -482,7 +486,7 @@ $(function() {
 <div class="ttc" id="astructqx_1_1string__traits_1_1base__test__char__traits_html"><div class="ttname"><a href="structqx_1_1string__traits_1_1base__test__char__traits.html">qx::string_traits::base_test_char_traits</a></div><div class="ttdef"><b>Definition:</b> <a href="string__traits_8h_source.html#l00167">string_traits.h:168</a></div></div>
 <div class="ttc" id="astructqx_1_1string__traits_1_1big__string__allocation__traits_html"><div class="ttname"><a href="structqx_1_1string__traits_1_1big__string__allocation__traits.html">qx::string_traits::big_string_allocation_traits</a></div><div class="ttdef"><b>Definition:</b> <a href="string__traits_8h_source.html#l00132">string_traits.h:132</a></div></div>
 <div class="ttc" id="astructqx_1_1string__traits_1_1compare__traits_html"><div class="ttname"><a href="structqx_1_1string__traits_1_1compare__traits.html">qx::string_traits::compare_traits</a></div><div class="ttdef"><b>Definition:</b> <a href="string__traits_8h_source.html#l00277">string_traits.h:277</a></div></div>
-<div class="ttc" id="astructqx_1_1string__traits_1_1constructor_html"><div class="ttname"><a href="structqx_1_1string__traits_1_1constructor.html">qx::string_traits::constructor</a></div><div class="ttdef"><b>Definition:</b> <a href="string__traits_8h_source.html#l00382">string_traits.h:383</a></div></div>
+<div class="ttc" id="astructqx_1_1string__traits_1_1constructor_html"><div class="ttname"><a href="structqx_1_1string__traits_1_1constructor.html">qx::string_traits::constructor</a></div><div class="ttdef"><b>Definition:</b> <a href="string__traits_8h_source.html#l00386">string_traits.h:387</a></div></div>
 <div class="ttc" id="astructqx_1_1string__traits_1_1format__string__traits_html"><div class="ttname"><a href="structqx_1_1string__traits_1_1format__string__traits.html">qx::string_traits::format_string_traits</a></div><div class="ttdef"><b>Definition:</b> <a href="string__traits_8h_source.html#l00322">string_traits.h:323</a></div></div>
 <div class="ttc" id="astructqx_1_1string__traits_1_1format__traits_html"><div class="ttname"><a href="structqx_1_1string__traits_1_1format__traits.html">qx::string_traits::format_traits</a></div><div class="ttdef"><b>Definition:</b> <a href="string__traits_8h_source.html#l00333">string_traits.h:333</a></div></div>
 <div class="ttc" id="astructqx_1_1string__traits_1_1hash__traits_html"><div class="ttname"><a href="structqx_1_1string__traits_1_1hash__traits.html">qx::string_traits::hash_traits</a></div><div class="ttdef"><b>Definition:</b> <a href="string__traits_8h_source.html#l00046">string_traits.h:47</a></div></div>
