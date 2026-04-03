@@ -40,7 +40,7 @@ var searchData=
   ['is_5fodd_405',['is_odd',['../math_2common_8h.html#a8662f96933a20e0a8c713191c9e58b2a',1,'qx']]],
   ['is_5fpaused_406',['is_paused',['../classqx_1_1base__easing__element.html#a9b2c027dbf20b5034eda36b1dfc03091',1,'qx::base_easing_element::is_paused()'],['../classqx_1_1base__easing__sequence.html#a71e62d78845bd7f1fe82f791423dce8d',1,'qx::base_easing_sequence::is_paused()']]],
   ['is_5fprime_407',['is_prime',['../prime_8h.html#a243df841a58008f0213397f4259ebf4c',1,'qx::is_prime(size_t nValue)'],['../prime_8h.html#a78654ada0326f9de3611df0dd6cfea86',1,'qx::is_prime(size_t nValue, double fProbability)']]],
-  ['is_5fsmall_408',['is_small',['../classqx_1_1sbo__bytes.html#adbc1d9b357270724282dde54593c2dc7',1,'qx::sbo_bytes']]],
+  ['is_5fsmall_408',['is_small',['../classqx_1_1sbo__bytes.html#a4eb162af797cc68841049ca572b03895',1,'qx::sbo_bytes']]],
   ['is_5fspecialization_5fof_409',['is_specialization_of',['../structqx_1_1is__specialization__of.html',1,'qx']]],
   ['is_5fspecialization_5fof_3c_20reference_5ft_3c_20args_5ft_2e_2e_2e_20_3e_2c_20reference_5ft_20_3e_410',['is_specialization_of&lt; reference_t&lt; args_t... &gt;, reference_t &gt;',['../structqx_1_1is__specialization__of_3_01reference__t_3_01args__t_8_8_8_01_4_00_01reference__t_01_4.html',1,'qx']]],
   ['is_5fstarted_411',['is_started',['../classqx_1_1base__easing__element.html#ad37173e80ff615187420271377541a82',1,'qx::base_easing_element::is_started()'],['../classqx_1_1base__easing__sequence.html#a18be4aff9cd7c1b9a7afac40b4259cd2',1,'qx::base_easing_sequence::is_started()']]],

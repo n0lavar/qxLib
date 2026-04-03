@@ -2,7 +2,7 @@ var searchData=
 [
   ['c_5fstr_99',['c_str',['../classqx_1_1basic__string.html#ac98fc25780d542fd98864eb544752b2a',1,'qx::basic_string']]],
   ['call_5fbefore_5fmain_5finvoker_100',['call_before_main_invoker',['../classqx_1_1details_1_1call__before__main__invoker.html',1,'qx::details']]],
-  ['capacity_101',['capacity',['../classqx_1_1sbo__bytes.html#aa05535ae19a99e8196605399d0578dd4',1,'qx::sbo_bytes::capacity()'],['../classqx_1_1vector2d.html#a6733864ce8df4b2ec569da511d3f1bc9',1,'qx::vector2d::capacity()'],['../classqx_1_1triangular__vector.html#a5fa4897574c455eeba1c9566987401c0',1,'qx::triangular_vector::capacity()'],['../classqx_1_1basic__string.html#a4665fcee3e89b23d8d149022af4e32d7',1,'qx::basic_string::capacity()']]],
+  ['capacity_101',['capacity',['../classqx_1_1sbo__bytes.html#a062df17ad3bf2603f41528b3586d22f2',1,'qx::sbo_bytes::capacity()'],['../classqx_1_1vector2d.html#a6733864ce8df4b2ec569da511d3f1bc9',1,'qx::vector2d::capacity()'],['../classqx_1_1triangular__vector.html#a5fa4897574c455eeba1c9566987401c0',1,'qx::triangular_vector::capacity()'],['../classqx_1_1basic__string.html#a4665fcee3e89b23d8d149022af4e32d7',1,'qx::basic_string::capacity()']]],
   ['cartesian_5fproduct_102',['cartesian_product',['../structqx_1_1tuple__utils_1_1cartesian__product.html',1,'qx::tuple_utils']]],
   ['cartesian_5fproduct_3c_20first_5finput_5ftuple_5ft_2c_20rest_5finput_5ftuples_5ft_2e_2e_2e_20_3e_103',['cartesian_product&lt; first_input_tuple_t, rest_input_tuples_t... &gt;',['../structqx_1_1tuple__utils_1_1cartesian__product_3_01first__input__tuple__t_00_01rest__input__tuples__t_8_8_8_01_4.html',1,'qx::tuple_utils']]],
   ['cartesian_5fproduct_3c_3e_104',['cartesian_product&lt;&gt;',['../structqx_1_1tuple__utils_1_1cartesian__product_3_4.html',1,'qx::tuple_utils']]],
@@ -60,7 +60,7 @@ var searchData=
   ['convert_3c_20t_2c_20qx_3a_3aunits_3a_3adata_20_3e_156',['convert&lt; T, qx::units::data &gt;',['../classqx_1_1convert_3_01_t_00_01qx_1_1units_1_1data_01_4.html',1,'qx']]],
   ['convert_3c_20t_2c_20qx_3a_3aunits_3a_3adistance_20_3e_157',['convert&lt; T, qx::units::distance &gt;',['../classqx_1_1convert_3_01_t_00_01qx_1_1units_1_1distance_01_4.html',1,'qx']]],
   ['convert_5fstring_5fliteral_158',['convert_string_literal',['../string__converters_8h.html#a06220f14639f405c16d3cdcc1af79570',1,'qx']]],
-  ['convert_5fto_5fstring_159',['convert_to_string',['../format_8h.html#a83bdf23a7de35207cbe9b50a9b918051',1,'qx']]],
+  ['convert_5fto_5fstring_159',['convert_to_string',['../format_8h.html#a4a4076d7b9069eb51f1784d3fbe6eee3',1,'qx']]],
   ['copy_160',['copy',['../classqx_1_1basic__string.html#a483943f155ef6b77d8b10985c5b78246',1,'qx::basic_string']]],
   ['copy_5fqualifiers_161',['copy_qualifiers',['../structqx_1_1copy__qualifiers.html',1,'qx']]],
   ['copy_5fqualifiers_3c_20const_20test_5ft_2c_20target_5ft_20_3e_162',['copy_qualifiers&lt; const test_t, target_t &gt;',['../structqx_1_1copy__qualifiers_3_01const_01test__t_00_01target__t_01_4.html',1,'qx']]],

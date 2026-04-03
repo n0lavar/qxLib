@@ -34,7 +34,7 @@ var searchData=
   ['float_5fcompare_2einl_276',['float_compare.inl',['../float__compare_8inl.html',1,'']]],
   ['flush_277',['flush',['../classqx_1_1base__logger__stream.html#abe1ebfaa9fb68d7a7d2624766f608f6b',1,'qx::base_logger_stream::flush()'],['../classqx_1_1logger.html#af975c6169624a47a72ae8995161e140f',1,'qx::logger::flush()']]],
   ['font_278',['font',['../classqx_1_1terminal__color.html#a892a9091e6b4763aee54f6e83b7eafde',1,'qx::terminal_color']]],
-  ['format_279',['format',['../classqx_1_1basic__string.html#ac16dd8878ade020cf2212878e7f3eb15',1,'qx::basic_string::format()'],['../format_8h.html#a288eec757ee70209cf3e9aae52b72581',1,'qx::format(const QX_FMT_NS::format_string&lt; std::type_identity_t&lt; args_t &gt;... &gt; sFormat, args_t &amp;&amp;... args)'],['../format_8h.html#a31f531e8c366e5de137d7cdefd9a4a23',1,'qx::format(const QX_FMT_NS::wformat_string&lt; std::type_identity_t&lt; args_t &gt;... &gt; sFormat, args_t &amp;&amp;... args)']]],
+  ['format_279',['format',['../classqx_1_1basic__string.html#afe84983548448e34a2855f38ca658856',1,'qx::basic_string::format()'],['../format_8h.html#a2c6052b284ab2f897ee27ed97a6b7c4d',1,'qx::format(const QX_FMT_NS::format_string&lt; std::type_identity_t&lt; args_t &gt;... &gt; sFormat, args_t &amp;&amp;... args) noexcept'],['../format_8h.html#a5110626012a79afef19003a59c8eb470',1,'qx::format(const QX_FMT_NS::wformat_string&lt; std::type_identity_t&lt; args_t &gt;... &gt; sFormat, args_t &amp;&amp;... args) noexcept']]],
   ['format_2eh_280',['format.h',['../format_8h.html',1,'']]],
   ['format_5fmessage_5fqx_281',['format_message_qx',['../logger__formatters_8h.html#a6b1ebe23183a9bd9ceb5ba2a0b33d0e4',1,'qx']]],
   ['format_5fstring_2eh_282',['format_string.h',['../format__string_8h.html',1,'']]],

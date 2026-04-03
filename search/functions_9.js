@@ -14,7 +14,7 @@ var searchData=
   ['is_5fodd_1500',['is_odd',['../math_2common_8h.html#a8662f96933a20e0a8c713191c9e58b2a',1,'qx']]],
   ['is_5fpaused_1501',['is_paused',['../classqx_1_1base__easing__sequence.html#a71e62d78845bd7f1fe82f791423dce8d',1,'qx::base_easing_sequence::is_paused()'],['../classqx_1_1base__easing__element.html#a9b2c027dbf20b5034eda36b1dfc03091',1,'qx::base_easing_element::is_paused()']]],
   ['is_5fprime_1502',['is_prime',['../prime_8h.html#a78654ada0326f9de3611df0dd6cfea86',1,'qx::is_prime(size_t nValue, double fProbability)'],['../prime_8h.html#a243df841a58008f0213397f4259ebf4c',1,'qx::is_prime(size_t nValue)']]],
-  ['is_5fsmall_1503',['is_small',['../classqx_1_1sbo__bytes.html#adbc1d9b357270724282dde54593c2dc7',1,'qx::sbo_bytes']]],
+  ['is_5fsmall_1503',['is_small',['../classqx_1_1sbo__bytes.html#a4eb162af797cc68841049ca572b03895',1,'qx::sbo_bytes']]],
   ['is_5fstarted_1504',['is_started',['../classqx_1_1base__easing__sequence.html#a18be4aff9cd7c1b9a7afac40b4259cd2',1,'qx::base_easing_sequence::is_started()'],['../classqx_1_1base__easing__element.html#ad37173e80ff615187420271377541a82',1,'qx::base_easing_element::is_started()']]],
   ['is_5ftriandles_1505',['is_triandles',['../draw__mode_8h.html#a0002d9ed898b5b8040584766a3b6efb7',1,'qx']]],
   ['is_5fvalid_1506',['is_valid',['../classqx_1_1unique__objects__pool_1_1token.html#adafea5135522c6856b4d2c211e341336',1,'qx::unique_objects_pool::token']]],
