@@ -36,6 +36,12 @@ struct string_sbo_traits
     static constexpr size_type nSBOSize =
         sizeof(typename string_traits_t::value_type) * string_traits_t::small_string_size();
     static constexpr bool bShrinkToFitWhenSmall = string_traits_t::shrink_to_fit_when_small();
+    static constexpr bool bPreserveContents     = true;
+
+    static constexpr size_type growth_strategy(size_type nOldCapacity) noexcept
+    {
+        return nOldCapacity + nOldCapacity / 2;
+    }
 
     static_assert(
         (nSBOSize & (nSBOSize - 1)) == 0,
@@ -89,7 +95,7 @@ public:
     using const_reference = typename traits_type::const_reference;
     using difference_type = typename traits_type::difference_type;
     using size_type       = typename traits_type::size_type;
-    using string_view     = std::basic_string_view<value_type>;
+    using string_view     = basic_string_view<value_type>;
     using sstream_type    = std::basic_stringstream<value_type>;
     using views           = std::vector<string_view>;
     template<class... args_t>
@@ -209,7 +215,7 @@ public:
     **/
     template<class... args_t>
         requires format_acceptable_args_c<char_t, args_t...>
-    void format(const format_string_type<std::type_identity_t<args_t>...> sFormat, args_t&&... args);
+    void format(const format_string_type<std::type_identity_t<args_t>...> sFormat, args_t&&... args) noexcept;
 
     /**
         @brief   Create a string by formatting it with the format string and the args
@@ -223,7 +229,7 @@ public:
         requires format_acceptable_args_c<char_t, args_t...>
     static basic_string static_format(
         const format_string_type<std::type_identity_t<args_t>...> sFormat,
-        args_t&&... args);
+        args_t&&... args) noexcept;
 
     /**
         @brief   Append the formatted string to the current one
@@ -234,7 +240,7 @@ public:
     **/
     template<class... args_t>
         requires format_acceptable_args_c<char_t, args_t...>
-    void append_format(const format_string_type<std::type_identity_t<args_t>...> sFormat, args_t&&... args);
+    void append_format(const format_string_type<std::type_identity_t<args_t>...> sFormat, args_t&&... args) noexcept;
 
     /**
         @brief   Clear the string and format it with the format string and the args
@@ -1605,10 +1611,9 @@ private:
         @brief   Resize string
         @details If new size is smaller, string will be truncated
         @param   nSymbols - new size
-        @param   eType    - resize type
         @retval           - true if memory alloc is successful
     **/
-    bool _resize(size_type nSymbols, sbo_resize_type eType = sbo_resize_type::common) noexcept;
+    bool _resize(size_type nSymbols) noexcept;
 
     /**
         @brief  Common algorithm for trimming string to the left

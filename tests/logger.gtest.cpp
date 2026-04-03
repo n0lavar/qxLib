@@ -65,12 +65,16 @@ static_assert(qx::sbo_poly_fittable_types_v<
 constexpr qx::string_view k_svLogsDirectory = QXT("./");
 constexpr qx::string_view k_svFilePrefix    = QXT("logger_output_test");
 constexpr qx::string_view k_svFileExtension = QXT(".log");
-const qx::string          k_sLogFileName    = qx::string(k_svLogsDirectory) + k_svFilePrefix + k_svFileExtension;
+const qx::string&         get_log_file_name()
+{
+    static auto sLogFileName = qx::string(k_svLogsDirectory) + k_svFilePrefix + k_svFileExtension;
+    return sLogFileName;
+}
 
 QX_CALL_BEFORE_MAIN = []()
 {
-    if (std::filesystem::exists(k_sLogFileName.c_str()))
-        std::filesystem::remove(k_sLogFileName.c_str());
+    if (std::filesystem::exists(get_log_file_name().c_str()))
+        std::filesystem::remove(get_log_file_name().c_str());
 };
 
 namespace traits
@@ -90,7 +94,7 @@ struct base_file : base_traits
 {
     static void set_up()
     {
-        EXPECT_FALSE(std::filesystem::exists(k_sLogFileName.c_str()));
+        EXPECT_FALSE(std::filesystem::exists(get_log_file_name().c_str()));
     }
 
     static qx::string get_content()
@@ -98,9 +102,9 @@ struct base_file : base_traits
         qx::logger_singleton::get_instance().get_logger().flush();
         qx::logger_singleton::get_instance().get_logger().reset();
 
-        EXPECT_TRUE(std::filesystem::exists(k_sLogFileName.c_str()));
+        EXPECT_TRUE(std::filesystem::exists(get_log_file_name().c_str()));
 
-        const std::filesystem::path        path(k_sLogFileName.c_str());
+        const std::filesystem::path        path(get_log_file_name().c_str());
         std::basic_ifstream<qx::char_type> file(path, std::ios::binary);
 
         if constexpr (std::is_same_v<qx::char_type, wchar_t>)
@@ -115,7 +119,7 @@ struct base_file : base_traits
 
     static void tear_down()
     {
-        std::filesystem::remove(k_sLogFileName.c_str());
+        std::filesystem::remove(get_log_file_name().c_str());
     }
 };
 

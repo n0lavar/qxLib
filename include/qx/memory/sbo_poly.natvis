@@ -2,11 +2,11 @@
 <AutoVisualizer xmlns="http://schemas.microsoft.com/vstudio/debugger/natvis/2010">
 
 	<Type Name="qx::sbo_poly&lt;*,*&gt;">
-		<DisplayString Condition="m_Data.m_nAllocatedSize==0">inlined, size={m_Data.m_nSize}, capacity={m_Data.nBufferSize}B, obj={*((const $T1*)((m_Deleter!=nullptr) ? (const void*)m_Data.m_Buffer._Elems : (const void*)0))}</DisplayString>
-		<DisplayString Condition="m_Data.m_nAllocatedSize!=0">heap, size={m_Data.m_nSize}, capacity={m_Data.nBufferSize}B, obj={*((const $T1*)((m_Deleter!=nullptr) ? (const void*)m_Data.m_pData : (const void*)0))}</DisplayString>
+		<DisplayString Condition="m_Data.m_nAllocatedSize==0">inlined, size={m_Data.m_nSize}, capacity={m_Data.nBufferSize}B, obj={*((const $T1*)((m_Deleter!=nullptr) ? (const void*)m_Data.m_Data.buffer._Elems : (const void*)0))}</DisplayString>
+		<DisplayString Condition="m_Data.m_nAllocatedSize!=0">heap, size={m_Data.m_nSize}, capacity={m_Data.nBufferSize}B, obj={*((const $T1*)((m_Deleter!=nullptr) ? (const void*)m_Data.m_Data.pData : (const void*)0))}</DisplayString>
 
 		<Expand>
-			<Item Name="object" Condition="m_Deleter!=nullptr">*((const $T1*)((m_Data.m_nAllocatedSize==0) ? (void*)m_Data.m_Buffer._Elems : (void*)m_Data.m_pData))</Item>
+			<Item Name="object" Condition="m_Deleter!=nullptr">*((const $T1*)((m_Data.m_nAllocatedSize==0) ? (void*)m_Data.m_Data.buffer._Elems : (void*)m_Data.m_Data.pData))</Item>
 			<Item Name="[inlined]">m_Data.m_nAllocatedSize==0</Item>
 			<Item Name="[size]">m_Data.m_nSize</Item>
 			<Item Name="[capacity]">(m_Data.m_nAllocatedSize==0) ? (unsigned long long)m_Data.nBufferSize : (unsigned long long)m_Data.m_nAllocatedSize</Item>

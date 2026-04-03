@@ -35,20 +35,23 @@ static constexpr auto k_BigBytesBlock1   = get_bytes<40, 2>();
 static constexpr auto k_BigBytesBlock2   = get_bytes<45, 3>();
 
 
-template<size_t nSBOSize_, bool bShrinkToFitWhenSmall_, size_t nAlignment_>
+template<size_t nSBOSize_, bool bShrinkToFitWhenSmall_>
 struct test_sbo_bytes_traits
 {
     using size_type                                  = size_t;
     static constexpr size_type nSBOSize              = nSBOSize_;
     static constexpr bool      bShrinkToFitWhenSmall = bShrinkToFitWhenSmall_;
-    static constexpr size_type nAlignment            = nAlignment_;
+    static constexpr bool      bPreserveContents     = true;
+    static constexpr size_type growth_strategy(size_type nOldCapacity) noexcept
+    {
+        return nOldCapacity + nOldCapacity / 2;
+    }
 };
 
-static void set_block(auto& SBO, const auto& block, size_t nAlignment)
+static void set_block(auto& SBO, const auto& block)
 {
-    SBO.resize(block.size(), nAlignment, qx::sbo_resize_type::common, true);
+    SBO.resize(block.size());
     EXPECT_EQ(SBO.size(), block.size());
-    EXPECT_EQ(SBO.capacity() % nAlignment, 0);
 }
 
 static void check_block(auto& SBO, const auto& block)
@@ -66,14 +69,13 @@ protected:
 protected:
     void set_and_check_block(const auto& block)
     {
-        set_block(m_SBO, block, traits_t::nAlignment);
+        set_block(m_SBO, block);
         check_block(m_SBO, block);
     }
 
     void test_small() const
     {
-        if constexpr (traits_t::nAlignment <= sbo_type::nBufferSize)
-            EXPECT_TRUE(this->m_SBO.is_small());
+        EXPECT_TRUE(this->m_SBO.is_small());
     }
 
     void test_big() const
@@ -85,17 +87,8 @@ protected:
     sbo_type m_SBO;
 };
 
-using implementations_type = ::testing::Types<
-    test_sbo_bytes_traits<k_nSBOSize, true, 4>,
-    test_sbo_bytes_traits<k_nSBOSize, true, 8>,
-    test_sbo_bytes_traits<k_nSBOSize, true, 16>,
-    test_sbo_bytes_traits<k_nSBOSize, true, 32>,
-    test_sbo_bytes_traits<k_nSBOSize, true, 64>,
-    test_sbo_bytes_traits<k_nSBOSize, false, 4>,
-    test_sbo_bytes_traits<k_nSBOSize, false, 8>,
-    test_sbo_bytes_traits<k_nSBOSize, false, 16>,
-    test_sbo_bytes_traits<k_nSBOSize, false, 32>,
-    test_sbo_bytes_traits<k_nSBOSize, false, 64>>;
+using implementations_type =
+    ::testing::Types<test_sbo_bytes_traits<k_nSBOSize, true>, test_sbo_bytes_traits<k_nSBOSize, false>>;
 
 TYPED_TEST_SUITE(test_sbo_bytes_resize, implementations_type);
 
@@ -156,19 +149,19 @@ TYPED_TEST(test_sbo_bytes_resize, shrink_to_fit)
     this->set_and_check_block(k_BigBytesBlock1);
     this->set_and_check_block(k_SmallBytesBlock1);
 
-    this->m_SBO.resize(this->m_SBO.size(), TypeParam::nAlignment, qx::sbo_resize_type::shrink_to_fit, true);
+    this->m_SBO.shrink_to_fit();
     this->test_small();
 }
 
-using sbo_bytes_move = qx::sbo_bytes<test_sbo_bytes_traits<k_nSBOSize, false, 8>>;
+using sbo_bytes_move = qx::sbo_bytes<test_sbo_bytes_traits<k_nSBOSize, false>>;
 
 TEST(test_sbo_bytes_move, small_to_small)
 {
     sbo_bytes_move from;
-    set_block(from, k_SmallBytesBlock1, 8);
+    set_block(from, k_SmallBytesBlock1);
 
     sbo_bytes_move to;
-    set_block(to, k_SmallBytesBlock2, 8);
+    set_block(to, k_SmallBytesBlock2);
 
     to = std::move(from);
     check_block(to, k_SmallBytesBlock1);
@@ -177,10 +170,10 @@ TEST(test_sbo_bytes_move, small_to_small)
 TEST(test_sbo_bytes_move, big_to_small)
 {
     sbo_bytes_move from;
-    set_block(from, k_BigBytesBlock1, 8);
+    set_block(from, k_BigBytesBlock1);
 
     sbo_bytes_move to;
-    set_block(to, k_SmallBytesBlock2, 8);
+    set_block(to, k_SmallBytesBlock2);
 
     to = std::move(from);
     check_block(to, k_BigBytesBlock1);
@@ -189,10 +182,10 @@ TEST(test_sbo_bytes_move, big_to_small)
 TEST(test_sbo_bytes_move, small_to_big)
 {
     sbo_bytes_move from;
-    set_block(from, k_SmallBytesBlock1, 8);
+    set_block(from, k_SmallBytesBlock1);
 
     sbo_bytes_move to;
-    set_block(to, k_BigBytesBlock1, 8);
+    set_block(to, k_BigBytesBlock1);
 
     to = std::move(from);
     check_block(to, k_SmallBytesBlock1);
@@ -201,10 +194,10 @@ TEST(test_sbo_bytes_move, small_to_big)
 TEST(test_sbo_bytes_move, big_to_big)
 {
     sbo_bytes_move from;
-    set_block(from, k_BigBytesBlock1, 8);
+    set_block(from, k_BigBytesBlock1);
 
     sbo_bytes_move to;
-    set_block(to, k_BigBytesBlock2, 8);
+    set_block(to, k_BigBytesBlock2);
 
     to = std::move(from);
     check_block(to, k_BigBytesBlock1);

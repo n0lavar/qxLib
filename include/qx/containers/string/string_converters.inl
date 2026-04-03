@@ -68,67 +68,79 @@ inline cstring_view to_cstring(cstring_view stringView, const std::locale& local
 
 inline void to_string(string& out, cstring_view stringView, const std::locale& locale)
 {
-#if QX_CONF_USE_CHAR
+#if QX_CONF_CHAR == QX_CHAR_T_CHAR
     out = stringView;
-#elif QX_CONF_USE_WCHAR
+#elif QX_CONF_CHAR == QX_CHAR_T_WCHAR_T
     to_wstring(out, stringView, locale);
+#else
+    #error Unsupported char type
 #endif
 }
 
 inline string to_string(cstring_view stringView, const std::locale& locale)
 {
-#if QX_CONF_USE_CHAR
+#if QX_CONF_CHAR == QX_CHAR_T_CHAR
     return stringView;
-#elif QX_CONF_USE_WCHAR
+#elif QX_CONF_CHAR == QX_CHAR_T_WCHAR_T
     return to_wstring(stringView, locale);
+#else
+    #error Unsupported char type
 #endif
 }
 
 inline void to_string(string& out, wstring_view stringView, const std::locale& locale)
 {
-#if QX_CONF_USE_CHAR
+#if QX_CONF_CHAR == QX_CHAR_T_CHAR
     to_cstring(out, stringView, locale);
-#elif QX_CONF_USE_WCHAR
+#elif QX_CONF_CHAR == QX_CHAR_T_WCHAR_T
     out = stringView;
+#else
+    #error Unsupported char type
 #endif
 }
 
 inline string to_string(wstring_view stringView, const std::locale& locale)
 {
-#if QX_CONF_USE_CHAR
+#if QX_CONF_CHAR == QX_CHAR_T_CHAR
     return to_cstring(stringView, locale);
-#elif QX_CONF_USE_WCHAR
+#elif QX_CONF_CHAR == QX_CHAR_T_WCHAR_T
     return stringView;
+#else
+    #error Unsupported char type
 #endif
 }
 
-inline void utf8_to_string(string& out, cstring_view pszUtf8)
+inline void utf8_to_string(string& out, cstring_view utf8)
 {
     QX_PERF_SCOPE();
 
-#if QX_CONF_USE_WCHAR
+#if QX_CONF_CHAR == QX_CHAR_T_CHAR
+    out = utf8;
+#elif QX_CONF_CHAR == QX_CHAR_T_WCHAR_T
     #if QX_WIN
 
     // much faster on windows
-    const int nLength = MultiByteToWideChar(CP_UTF8, 0, pszUtf8.data(), static_cast<int>(pszUtf8.size()), nullptr, 0);
+    const int nLength = MultiByteToWideChar(CP_UTF8, 0, utf8.data(), static_cast<int>(utf8.size()), nullptr, 0);
     out.assign(nLength, L'\n');
-    MultiByteToWideChar(CP_UTF8, 0, pszUtf8.data(), static_cast<int>(pszUtf8.size()), out.data(), nLength);
+    MultiByteToWideChar(CP_UTF8, 0, utf8.data(), static_cast<int>(utf8.size()), out.data(), nLength);
 
     #else
 
     QX_PUSH_SUPPRESS_ALL_WARNINGS();
     std::wstring_convert<std::codecvt_utf8_utf16<wchar_t>> converter;
-    out = converter.from_bytes(pszUtf8.data(), pszUtf8.data() + pszUtf8.size());
+    out = converter.from_bytes(utf8.data(), utf8.data() + utf8.size());
     QX_POP_SUPPRESS_WARNINGS();
 
     #endif
+#else
+    #error Unsupported char type
 #endif
 }
 
-inline string utf8_to_string(cstring_view pszUtf8)
+inline string utf8_to_string(cstring_view utf8)
 {
     string sResult;
-    utf8_to_string(sResult, pszUtf8);
+    utf8_to_string(sResult, utf8);
     return sResult;
 }
 
@@ -156,7 +168,8 @@ struct char_array_helper
 template<class char_t, string_literal array>
 constexpr basic_string_view<char_t> convert_string_literal()
 {
-    return basic_string_view<char_t>(details::char_array_helper<char_t, array>::char_array.data());
+    constexpr auto& chars = details::char_array_helper<char_t, array>::char_array;
+    return basic_string_view<char_t>(chars.data(), chars.size() - 1);
 }
 
 } // namespace qx

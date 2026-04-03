@@ -101,12 +101,6 @@ static void check_capacity(size_t nPrevCapacity, size_t nCapacity)
     const size_t nPrevSmallStringSize = capacity_to_small_string_size<ValueType>(nPrevCapacity);
     const size_t nSmallStringSize     = capacity_to_small_string_size<ValueType>(nCapacity);
 
-    if (nPrevSmallStringSize != nSmallStringBytes)
-        EXPECT_EQ((nPrevCapacity + 1) % TypeParam::align(), 0);
-
-    if (nSmallStringSize != nSmallStringBytes)
-        EXPECT_EQ((nCapacity + 1) % TypeParam::align(), 0);
-
     EXPECT_GE(nPrevSmallStringSize, nSmallStringBytes);
     EXPECT_GE(nSmallStringSize, nSmallStringBytes);
 

@@ -11,13 +11,13 @@
 #include <qx/containers/string/string_utils.h>
 #include <qx/containers/string/string_view.h>
 #include <qx/macros/config.h>
+#include <qx/macros/static_assert.h>
 #include <qx/macros/suppress_warnings.h>
 
 #include <cctype>
 #include <cstdarg>
 #include <cstring>
 #include <cwctype>
-#include <format>
 #include <sstream>
 
 namespace qx::string_traits
@@ -69,11 +69,6 @@ struct allocation_traits;
 template<class usings_char_traits_t>
 struct allocation_traits<char, usings_char_traits_t>
 {
-    static constexpr typename usings_char_traits_t::size_type align() noexcept
-    {
-        return 16;
-    }
-
     static constexpr typename usings_char_traits_t::size_type small_string_size() noexcept
     {
         return 64;
@@ -88,11 +83,6 @@ struct allocation_traits<char, usings_char_traits_t>
 template<class usings_char_traits_t>
 struct allocation_traits<wchar_t, usings_char_traits_t>
 {
-    static constexpr typename usings_char_traits_t::size_type align() noexcept
-    {
-        return 16;
-    }
-
     static constexpr typename usings_char_traits_t::size_type small_string_size() noexcept
     {
 #if QX_MSVC
@@ -144,11 +134,6 @@ struct big_string_allocation_traits;
 template<class usings_char_traits_t>
 struct big_string_allocation_traits<char, usings_char_traits_t> : public allocation_traits<char, usings_char_traits_t>
 {
-    static constexpr typename usings_char_traits_t::size_type align() noexcept
-    {
-        return 128;
-    }
-
     static constexpr typename usings_char_traits_t::size_type small_string_size() noexcept
     {
         return 256;
@@ -159,11 +144,6 @@ template<class usings_char_traits_t>
 struct big_string_allocation_traits<wchar_t, usings_char_traits_t>
     : public allocation_traits<wchar_t, usings_char_traits_t>
 {
-    static constexpr typename usings_char_traits_t::size_type align() noexcept
-    {
-        return 128;
-    }
-
     static constexpr typename usings_char_traits_t::size_type small_string_size() noexcept
     {
 #if QX_MSVC
@@ -355,6 +335,14 @@ struct format_traits;
 template<class usings_char_traits_t>
 struct format_traits<char, usings_char_traits_t>
 {
+    static constexpr typename usings_char_traits_t::size_type nMemoryBufferSize = 1024;
+
+    template<class... args_t>
+    static auto make_format_args(args_t&... args)
+    {
+        return QX_FMT_NS::make_format_args(args...);
+    }
+
     template<class... args_t>
     static int sscanf(
         typename usings_char_traits_t::const_pointer pszString,
@@ -365,20 +353,24 @@ struct format_traits<char, usings_char_traits_t>
         return std::sscanf(pszString, pszFormat, std::forward<args_t>(args)...);
         QX_POP_SUPPRESS_WARNINGS();
     }
-
-    template<class output_it_t, class... args_t>
-    static void format_to(
-        output_it_t                                     itOutput,
-        typename usings_char_traits_t::string_view_type svFormat,
-        args_t&&... args)
-    {
-        QX_FMT_NS::vformat_to(itOutput, svFormat, QX_FMT_NS::make_format_args(args...));
-    }
 };
 
 template<class usings_char_traits_t>
 struct format_traits<wchar_t, usings_char_traits_t>
 {
+    static constexpr typename usings_char_traits_t::size_type nMemoryBufferSize =
+#if QX_WIN
+        512;
+#else
+        256;
+#endif
+
+    template<class... args_t>
+    static auto make_format_args(args_t&... args)
+    {
+        return QX_FMT_NS::make_wformat_args(args...);
+    }
+
     template<class... args_t>
     static int sscanf(
         typename usings_char_traits_t::const_pointer pszString,
@@ -388,15 +380,6 @@ struct format_traits<wchar_t, usings_char_traits_t>
         QX_PUSH_SUPPRESS_ALL_WARNINGS();
         return std::swscanf(pszString, pszFormat, std::forward<args_t>(args)...);
         QX_POP_SUPPRESS_WARNINGS();
-    }
-
-    template<class output_it_t, class... args_t>
-    static void format_to(
-        output_it_t                                     itOutput,
-        typename usings_char_traits_t::string_view_type svFormat,
-        args_t&&... args)
-    {
-        QX_FMT_NS::vformat_to(itOutput, svFormat, QX_FMT_NS::make_wformat_args(args...));
     }
 };
 

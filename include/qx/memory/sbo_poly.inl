@@ -96,12 +96,12 @@ void sbo_poly<base_t, nSBOSize_>::assign(derived_t object) noexcept
     if (m_Data.size() > 0)
         get().~base_t();
 
-    m_Data.resize(sizeof(derived_t), std::alignment_of_v<derived_t>, sbo_resize_type::common, false);
+    m_Data.resize(sizeof(derived_t));
     new (m_Data.data()) derived_t(std::move(object));
 
     m_Assigner = [](sbo_bytes_type& from, sbo_bytes_type& to)
     {
-        to.resize(sizeof(derived_t), std::alignment_of_v<derived_t>, sbo_resize_type::common, false);
+        to.resize(sizeof(derived_t));
         new (to.data()) derived_t(std::move(*reinterpret_cast<derived_t*>(from.data())));
     };
 

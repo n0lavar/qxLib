@@ -50,6 +50,9 @@ macro(add_benchmarks
                 target_compile_options(${_target} PRIVATE
                     /wd4266
                 )
+                target_compile_options(${_target} PRIVATE
+                    $<$<CONFIG:RelWithDebInfo>:/Ob2>
+                )
             endif()
 
             set_target_properties (${_target} PROPERTIES 

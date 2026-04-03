@@ -62,6 +62,11 @@ class sbo_poly
         static_assert(nSBOSize_ > sizeof(void*));
         static constexpr size_type nSBOSize              = nSBOSize_ - 2 * sizeof(void*);
         static constexpr bool      bShrinkToFitWhenSmall = true;
+        static constexpr bool      bPreserveContents     = false;
+        static constexpr size_type growth_strategy(size_type nOldCapacity) noexcept
+        {
+            return nOldCapacity;
+        }
     };
 
 public:

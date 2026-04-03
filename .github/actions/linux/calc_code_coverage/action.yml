@@ -13,7 +13,7 @@ runs:
     - name: Generate coverage report
       shell: bash
       working-directory: build
-      run: ./lcov-1.15/bin/lcov --gcov-tool gcov-13 --directory . --capture --output-file coverage.info
+      run: ./lcov-1.15/bin/lcov --gcov-tool gcov-15 --directory . --capture --output-file coverage.info
 
     - name: Upload coverage to Codecov
       uses: codecov/codecov-action@v4

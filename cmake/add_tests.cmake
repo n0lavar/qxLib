@@ -5,6 +5,7 @@ macro(set_test_options _target)
             -pthread 
             -lstdc++fs
         )
+
     elseif(${CMAKE_CXX_COMPILER_ID} STREQUAL GNU)    
         
         target_link_options(${_target} PRIVATE 
@@ -19,13 +20,15 @@ macro(set_test_options _target)
             -pthread 
 			-lstdc++fs
         )
+
     elseif(${CMAKE_CXX_COMPILER_ID} STREQUAL MSVC)
     
         target_compile_options(${_target} PRIVATE
             /bigobj
         )
+
     endif()
-            
+     
     target_link_libraries(${_target} PRIVATE
         ${GTEST_LIBRARIES}
     )

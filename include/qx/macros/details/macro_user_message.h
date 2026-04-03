@@ -48,7 +48,7 @@ inline string_pool<nStringsPoolSize>::item format_macro_user_message(
     return { std::move(sUserMessage), string_pool<nStringsPoolSize>::nFreeString };
 }
 
-#if !QX_CONF_USE_CHAR
+#if QX_CONF_CHAR != QX_CHAR_T_CHAR
 template<size_t nStringsPoolSize, size_t nStringLiteralSize>
 string_pool<nStringsPoolSize>::item format_macro_user_message(
     string_pool<nStringsPoolSize>* pStringsPool,

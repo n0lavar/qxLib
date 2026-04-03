@@ -1,10 +1,58 @@
 name: Run tests
+description: Run tests with sanitizers enabled
 
 runs:
   using: composite
   steps:
+    - name: Enable core dumps
+      shell: bash
+      working-directory: build
+      run: |
+        set -u
+        ulimit -c unlimited || true
+        if command -v sudo >/dev/null 2>&1; then
+          echo '/tmp/core.%e.%p' | sudo tee /proc/sys/kernel/core_pattern >/dev/null || true
+        fi
+
     - name: Run tests
       shell: bash
       working-directory: build
       run: |
-        ctest --output-on-failure -j $(nproc)
+        set +e
+
+        ctest --output-on-failure 2>&1 | tee ctest.log
+        ctest_exit=${PIPESTATUS[0]}
+
+        ctest --rerun-failed -VV 2>&1 | tee ctest-rerun-failed.log
+        rerun_exit=${PIPESTATUS[0]}
+
+        echo "ctest_exit=$ctest_exit" >> "$GITHUB_ENV"
+        echo "rerun_exit=$rerun_exit" >> "$GITHUB_ENV"
+
+        if [ "$ctest_exit" -ne 0 ] || [ "$rerun_exit" -ne 0 ]; then
+          exit 1
+        fi
+
+    - name: Dump core backtrace
+      if: failure()
+      shell: bash
+      working-directory: build
+      run: |
+        set +e
+
+        echo "=== Core files ==="
+        find . -type f -name 'core*' -print 2>/dev/null || true
+        find /tmp -maxdepth 1 -type f -name 'core*' -print 2>/dev/null || true
+
+        echo "=== Failed tests from CTest log ==="
+        grep -nE 'The following tests FAILED|SEGFAULT|Exception: SegFault|FAILED' \
+          ctest.log ctest-rerun-failed.log 2>/dev/null || true
+
+        if command -v gdb >/dev/null 2>&1; then
+          for core in $(find . -type f -name 'core*' 2>/dev/null; find /tmp -maxdepth 1 -type f -name 'core*' 2>/dev/null); do
+            echo "=== Backtrace for $core ==="
+            gdb -batch -ex "bt" -c "$core" || true
+          done
+        else
+          echo "gdb is not installed"
+        fi
