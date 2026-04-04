@@ -36,8 +36,13 @@ Required:
 + C++20
 
 Optional:
+
+The library doesn't install these dependencies, only tries to find existing ones.
 + glm (/render, /math)
 + boost (qx::unique_objects_pool)
++ fmt (qx::string formatting. by default it uses std::format, but fmt is way faster)
++ googletest (if you want to run tests)
++ google benchmark (if you want to run benchmarks)
   
 ## License
 

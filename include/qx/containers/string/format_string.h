@@ -11,8 +11,6 @@
 #include <qx/containers/string/string_utils.h>
 #include <qx/containers/string/string_view.h>
 
-#include <format>
-
 namespace qx
 {
 

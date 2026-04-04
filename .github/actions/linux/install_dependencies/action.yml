@@ -84,3 +84,10 @@ runs:
         make -j$(nproc)
         sudo make install
         popd
+
+    - name: Install fmt
+      shell: bash
+      run: |
+        pushd ..
+        git clone https://github.com/fmtlib/fmt.git
+        popd

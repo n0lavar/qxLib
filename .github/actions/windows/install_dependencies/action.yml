@@ -74,3 +74,13 @@ runs:
         cmake --build . --config ${{ inputs.build_type }} -j %NUMBER_OF_PROCESSORS%
 
         popd
+
+    - name: Install fmt
+      shell: cmd
+      run: |
+        cd
+        pushd ..
+
+        git clone https://github.com/fmtlib/fmt.git
+
+        popd
