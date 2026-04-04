@@ -112,13 +112,13 @@ $(function() {
 <div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    <span class="keywordtype">bool</span> bRet = <span class="keyword">true</span>;</div>
 <div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    <span class="keywordflow">if</span> (nRequestedSize &gt; capacity())</div>
 <div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    {</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;        bRet = resize_to_big(get_new_size(nRequestedSize));</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;        bRet = reallocate_to_big(get_new_size(nRequestedSize));</div>
 <div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    }</div>
 <div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    <span class="keywordflow">else</span></div>
 <div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    {</div>
 <div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;        <span class="keywordflow">if</span> constexpr (bShrinkToFitWhenSmall)</div>
 <div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;            <span class="keywordflow">if</span> (!is_small() &amp;&amp; nRequestedSize &lt;= nBufferSize)</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;                resize_to_small(nRequestedSize);</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;                reallocate_to_small(nRequestedSize);</div>
 <div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    }</div>
 <div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160; </div>
 <div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    <span class="keywordflow">if</span> (bRet) [[likely]]</div>
@@ -129,56 +129,56 @@ $(function() {
 <div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160; </div>
 <div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> traits_t&gt;</div>
 <div class="line"><a name="l00060"></a><span class="lineno"><a class="line" href="classqx_1_1sbo__bytes.html#a5a302424555a68876b664d841f6a3a72">   60</a></span>&#160;<span class="keywordtype">bool</span> <a class="code" href="classqx_1_1sbo__bytes.html#a5a302424555a68876b664d841f6a3a72">sbo_bytes&lt;traits_t&gt;::reserve</a>(size_type nRequestedSize) noexcept</div>
-<div class="line"><a name="l00061"></a><span class="lineno"><a class="line" href="classqx_1_1sbo__bytes.html#aca55fee225e41671122c2267ceb2d217">   61</a></span>&#160;{</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    <span class="keywordflow">if</span> (nRequestedSize &lt;= capacity())</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;{</div>
+<div class="line"><a name="l00062"></a><span class="lineno"><a class="line" href="classqx_1_1sbo__bytes.html#aca55fee225e41671122c2267ceb2d217">   62</a></span>&#160;    <span class="keywordflow">if</span> (nRequestedSize &lt;= capacity())</div>
 <div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;        <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
 <div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160; </div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    <span class="keywordflow">return</span> resize_to_big(get_new_size(nRequestedSize));</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    <span class="keywordflow">return</span> reallocate_to_big(get_new_size(nRequestedSize));</div>
 <div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;}</div>
 <div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160; </div>
-<div class="line"><a name="l00068"></a><span class="lineno"><a class="line" href="classqx_1_1sbo__bytes.html#a5a302424555a68876b664d841f6a3a72">   68</a></span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> traits_t&gt;</div>
-<div class="line"><a name="l00069"></a><span class="lineno"><a class="line" href="classqx_1_1sbo__bytes.html#a6e1f132c7f60eb9faad8471512066ce1">   69</a></span>&#160;<span class="keywordtype">bool</span> <a class="code" href="classqx_1_1sbo__bytes.html#a6e1f132c7f60eb9faad8471512066ce1">sbo_bytes&lt;traits_t&gt;::shrink_to_fit</a>() noexcept</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> traits_t&gt;</div>
+<div class="line"><a name="l00069"></a><span class="lineno"><a class="line" href="classqx_1_1sbo__bytes.html#a5a302424555a68876b664d841f6a3a72">   69</a></span>&#160;<span class="keywordtype">bool</span> <a class="code" href="classqx_1_1sbo__bytes.html#a6e1f132c7f60eb9faad8471512066ce1">sbo_bytes&lt;traits_t&gt;::shrink_to_fit</a>() noexcept</div>
 <div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;{</div>
 <div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;    <span class="keywordflow">if</span> (m_nSize &lt;= nBufferSize)</div>
 <div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    {</div>
 <div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;        <span class="keywordflow">if</span> (!is_small())</div>
-<div class="line"><a name="l00074"></a><span class="lineno"><a class="line" href="classqx_1_1sbo__bytes.html#a6e1f132c7f60eb9faad8471512066ce1">   74</a></span>&#160;            resize_to_small(m_nSize);</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160; </div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;            reallocate_to_small(m_nSize);</div>
+<div class="line"><a name="l00075"></a><span class="lineno"><a class="line" href="classqx_1_1sbo__bytes.html#a6e1f132c7f60eb9faad8471512066ce1">   75</a></span>&#160; </div>
 <div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;        <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
 <div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;    }</div>
 <div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;    <span class="keywordflow">else</span></div>
-<div class="line"><a name="l00079"></a><span class="lineno"><a class="line" href="classqx_1_1sbo__bytes.html#a8bd6317cc38b445a18967a1c4c243daf">   79</a></span>&#160;    {</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;        <span class="keywordflow">return</span> resize_to_big(m_nSize);</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;    {</div>
+<div class="line"><a name="l00080"></a><span class="lineno"><a class="line" href="classqx_1_1sbo__bytes.html#a8bd6317cc38b445a18967a1c4c243daf">   80</a></span>&#160;        <span class="keywordflow">return</span> reallocate_to_big(m_nSize);</div>
 <div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;    }</div>
 <div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;}</div>
 <div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160; </div>
 <div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> traits_t&gt;</div>
-<div class="line"><a name="l00085"></a><span class="lineno"><a class="line" href="classqx_1_1sbo__bytes.html#ab2c835acd050f60167188550eb4b9d08">   85</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classqx_1_1sbo__bytes.html#a8bd6317cc38b445a18967a1c4c243daf">sbo_bytes&lt;traits_t&gt;::free</a>() noexcept</div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;{</div>
+<div class="line"><a name="l00085"></a><span class="lineno"><a class="line" href="classqx_1_1sbo__bytes.html#a8bd6317cc38b445a18967a1c4c243daf">   85</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classqx_1_1sbo__bytes.html#a8bd6317cc38b445a18967a1c4c243daf">sbo_bytes&lt;traits_t&gt;::free</a>() noexcept</div>
+<div class="line"><a name="l00086"></a><span class="lineno"><a class="line" href="classqx_1_1sbo__bytes.html#ab2c835acd050f60167188550eb4b9d08">   86</a></span>&#160;{</div>
 <div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;    <span class="keywordflow">if</span> (!is_small())</div>
 <div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;    {</div>
 <div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;        std::free(m_Data.pData);</div>
 <div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;        m_Data.buffer = buffer_type();</div>
-<div class="line"><a name="l00091"></a><span class="lineno"><a class="line" href="classqx_1_1sbo__bytes.html#a7730d4644b5303bd7afbc3255012e2f8">   91</a></span>&#160;    }</div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160; </div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;    }</div>
+<div class="line"><a name="l00092"></a><span class="lineno"><a class="line" href="classqx_1_1sbo__bytes.html#a7730d4644b5303bd7afbc3255012e2f8">   92</a></span>&#160; </div>
 <div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;    m_nAllocatedSize = 0;</div>
 <div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;}</div>
 <div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160; </div>
 <div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> traits_t&gt;</div>
 <div class="line"><a name="l00097"></a><span class="lineno"><a class="line" href="classqx_1_1sbo__bytes.html#ab2c835acd050f60167188550eb4b9d08">   97</a></span>&#160;<a class="code" href="macros_2common_8h.html#a784c3871b6a50b1e040a68d7bf525d1c">QX_FORCE_INLINE</a> std::byte* <a class="code" href="classqx_1_1sbo__bytes.html#ab2c835acd050f60167188550eb4b9d08">sbo_bytes&lt;traits_t&gt;::data</a>() noexcept</div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;{</div>
+<div class="line"><a name="l00098"></a><span class="lineno"><a class="line" href="classqx_1_1sbo__bytes.html#abf8b66458edbbf26ba0d8df6b030d9e4">   98</a></span>&#160;{</div>
 <div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;    <span class="keywordflow">if</span> (is_small())</div>
 <div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;        <span class="keywordflow">return</span> m_Data.buffer.data();</div>
 <div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;    <span class="keywordflow">else</span></div>
 <div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;        <span class="keywordflow">return</span> m_Data.pData;</div>
-<div class="line"><a name="l00103"></a><span class="lineno"><a class="line" href="classqx_1_1sbo__bytes.html#a062df17ad3bf2603f41528b3586d22f2">  103</a></span>&#160;}</div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160; </div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;}</div>
+<div class="line"><a name="l00104"></a><span class="lineno"><a class="line" href="classqx_1_1sbo__bytes.html#a062df17ad3bf2603f41528b3586d22f2">  104</a></span>&#160; </div>
 <div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> traits_t&gt;</div>
 <div class="line"><a name="l00106"></a><span class="lineno"><a class="line" href="classqx_1_1sbo__bytes.html#a7730d4644b5303bd7afbc3255012e2f8">  106</a></span>&#160;<a class="code" href="macros_2common_8h.html#a784c3871b6a50b1e040a68d7bf525d1c">QX_FORCE_INLINE</a> <span class="keyword">const</span> std::byte* <a class="code" href="classqx_1_1sbo__bytes.html#ab2c835acd050f60167188550eb4b9d08">sbo_bytes&lt;traits_t&gt;::data</a>() const noexcept</div>
 <div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;{</div>
 <div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="macros_2common_8h.html#a8571a186f383a0af7a487a27de39f144">QX_CONST_CAST_THIS</a>()-&gt;data();</div>
-<div class="line"><a name="l00109"></a><span class="lineno"><a class="line" href="classqx_1_1sbo__bytes.html#a4eb162af797cc68841049ca572b03895">  109</a></span>&#160;}</div>
-<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160; </div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;}</div>
+<div class="line"><a name="l00110"></a><span class="lineno"><a class="line" href="classqx_1_1sbo__bytes.html#a4eb162af797cc68841049ca572b03895">  110</a></span>&#160; </div>
 <div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> traits_t&gt;</div>
 <div class="line"><a name="l00112"></a><span class="lineno"><a class="line" href="classqx_1_1sbo__bytes.html#abf8b66458edbbf26ba0d8df6b030d9e4">  112</a></span>&#160;<a class="code" href="macros_2common_8h.html#a784c3871b6a50b1e040a68d7bf525d1c">QX_FORCE_INLINE</a> <span class="keyword">typename</span> sbo_bytes&lt;traits_t&gt;::size_type <a class="code" href="classqx_1_1sbo__bytes.html#abf8b66458edbbf26ba0d8df6b030d9e4">sbo_bytes&lt;traits_t&gt;::size</a>() const noexcept</div>
 <div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;{</div>
@@ -198,7 +198,7 @@ $(function() {
 <div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;}</div>
 <div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160; </div>
 <div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> traits_t&gt;</div>
-<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;<span class="keywordtype">bool</span> <a class="code" href="classqx_1_1sbo__bytes.html">sbo_bytes&lt;traits_t&gt;::resize_to_big</a>(size_type nNewSize) noexcept</div>
+<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;<span class="keywordtype">bool</span> <a class="code" href="classqx_1_1sbo__bytes.html">sbo_bytes&lt;traits_t&gt;::reallocate_to_big</a>(size_type nNewSize) noexcept</div>
 <div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;{</div>
 <div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;    <span class="keyword">const</span> <span class="keywordtype">bool</span> bSmallAtStart = is_small();</div>
 <div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160; </div>
@@ -219,7 +219,7 @@ $(function() {
 <div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;}</div>
 <div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160; </div>
 <div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> traits_t&gt;</div>
-<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;<span class="keywordtype">void</span> sbo_bytes&lt;traits_t&gt;::resize_to_small(size_type nNewSize) noexcept</div>
+<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;<span class="keywordtype">void</span> sbo_bytes&lt;traits_t&gt;::reallocate_to_small(size_type nNewSize) noexcept</div>
 <div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;{</div>
 <div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;    <span class="keywordflow">if</span> constexpr (bPreserveContents)</div>
 <div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;    {</div>
