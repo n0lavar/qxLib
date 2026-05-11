@@ -32,7 +32,7 @@ enum class verbosity
     @param  eVerbosity - verbosity level to check
     @retval            - true if the verbosity level is error or critical, false otherwise
 **/
-inline bool is_error(verbosity eVerbosity) noexcept
+constexpr bool is_error(verbosity eVerbosity) noexcept
 {
     return eVerbosity == verbosity::error || eVerbosity == verbosity::critical;
 }

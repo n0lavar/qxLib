@@ -54,12 +54,12 @@ constexpr bool sbo_poly_fittable_types_v = sbo_poly_fittable_types<sbo_poly_t, a
 
 **/
 template<class base_t, size_t nSBOSize_>
+    requires(nSBOSize_ > 2 * sizeof(void*))
 class sbo_poly
 {
     struct sbo_poly_traits
     {
-        using size_type = size_t;
-        static_assert(nSBOSize_ > sizeof(void*));
+        using size_type                                  = size_t;
         static constexpr size_type nSBOSize              = nSBOSize_ - 2 * sizeof(void*);
         static constexpr bool      bShrinkToFitWhenSmall = true;
         static constexpr bool      bPreserveContents     = false;

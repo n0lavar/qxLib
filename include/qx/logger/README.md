@@ -237,6 +237,7 @@ While on Linux all compilers (and standard libraries) give roughly the same resu
 ### Why a macro?
 
 The macro allows several important things:
+- Do not calculate format arguments in case we don't need to output this message;
 - Automatically extract the file category;
 - Compare the passed verbosity and the category verbosity in a `constexpr` context;
 - Convert ``__FUNCTION__`` to `qx::string_view` even on Linux (where it is not a char array and cannot be simply wrapped in `QXT()`)

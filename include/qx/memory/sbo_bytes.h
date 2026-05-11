@@ -12,6 +12,7 @@
 #include <cstddef>
 
 #include <qx/macros/common.h>
+#include <qx/macros/static_assert.h>
 
 namespace qx
 {

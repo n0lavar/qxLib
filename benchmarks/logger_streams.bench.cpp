@@ -85,7 +85,7 @@ struct ostream_default_buffer
               .svLogsDirectory = k_svLogsDirectory,
               .svFilePrefix    = k_svFilePrefix,
               .svFileExtension = k_svFileExtension },
-            qx::unit<size_t, qx::units::data> { 0, qx::units::data::bytes }));
+            qx::unit(static_cast<size_t>(0), qx::units::data::bytes)));
     }
 };
 
@@ -110,7 +110,7 @@ struct fopen_default_buffer
               .svLogsDirectory = k_svLogsDirectory,
               .svFilePrefix    = k_svFilePrefix,
               .svFileExtension = k_svFileExtension },
-            qx::unit<size_t, qx::units::data> { 0, qx::units::data::bytes }));
+            qx::unit(static_cast<size_t>(0), qx::units::data::bytes)));
     }
 };
 
@@ -135,7 +135,7 @@ struct mapping_default_initial_size
               .svLogsDirectory = k_svLogsDirectory,
               .svFilePrefix    = k_svFilePrefix,
               .svFileExtension = k_svFileExtension },
-            qx::unit<size_t, qx::units::data> { 0, qx::units::data::bytes }));
+            qx::unit(static_cast<size_t>(0), qx::units::data::bytes)));
     }
 };
 

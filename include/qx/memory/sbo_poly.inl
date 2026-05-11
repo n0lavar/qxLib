@@ -11,6 +11,7 @@ namespace qx
 {
 
 template<class base_t, size_t nSBOSize_>
+    requires(nSBOSize_ > 2 * sizeof(void*))
 template<sbo_poly_assignable_c<base_t> derived_t>
 sbo_poly<base_t, nSBOSize_>::sbo_poly(derived_t object) noexcept
 {
@@ -18,12 +19,14 @@ sbo_poly<base_t, nSBOSize_>::sbo_poly(derived_t object) noexcept
 }
 
 template<class base_t, size_t nSBOSize_>
+    requires(nSBOSize_ > 2 * sizeof(void*))
 sbo_poly<base_t, nSBOSize_>::sbo_poly(sbo_poly&& other) noexcept
 {
     *this = std::move(other);
 }
 
 template<class base_t, size_t nSBOSize_>
+    requires(nSBOSize_ > 2 * sizeof(void*))
 sbo_poly<base_t, nSBOSize_>::~sbo_poly() noexcept
 {
     // may be empty if an object was moved
@@ -32,6 +35,7 @@ sbo_poly<base_t, nSBOSize_>::~sbo_poly() noexcept
 }
 
 template<class base_t, size_t nSBOSize_>
+    requires(nSBOSize_ > 2 * sizeof(void*))
 template<sbo_poly_assignable_c<base_t> derived_t>
 sbo_poly<base_t, nSBOSize_>& sbo_poly<base_t, nSBOSize_>::operator=(derived_t object) noexcept
 {
@@ -40,6 +44,7 @@ sbo_poly<base_t, nSBOSize_>& sbo_poly<base_t, nSBOSize_>::operator=(derived_t ob
 }
 
 template<class base_t, size_t nSBOSize_>
+    requires(nSBOSize_ > 2 * sizeof(void*))
 sbo_poly<base_t, nSBOSize_>& sbo_poly<base_t, nSBOSize_>::operator=(sbo_poly&& other) noexcept
 {
     if (!m_Data.is_small() && !other.m_Data.is_small())
@@ -90,6 +95,7 @@ sbo_poly<base_t, nSBOSize_>& sbo_poly<base_t, nSBOSize_>::operator=(sbo_poly&& o
 }
 
 template<class base_t, size_t nSBOSize_>
+    requires(nSBOSize_ > 2 * sizeof(void*))
 template<sbo_poly_assignable_c<base_t> derived_t>
 void sbo_poly<base_t, nSBOSize_>::assign(derived_t object) noexcept
 {
@@ -112,24 +118,28 @@ void sbo_poly<base_t, nSBOSize_>::assign(derived_t object) noexcept
 }
 
 template<class base_t, size_t nSBOSize_>
+    requires(nSBOSize_ > 2 * sizeof(void*))
 base_t* sbo_poly<base_t, nSBOSize_>::operator->() noexcept
 {
     return &get();
 }
 
 template<class base_t, size_t nSBOSize_>
+    requires(nSBOSize_ > 2 * sizeof(void*))
 const base_t* sbo_poly<base_t, nSBOSize_>::operator->() const noexcept
 {
     return &get();
 }
 
 template<class base_t, size_t nSBOSize_>
+    requires(nSBOSize_ > 2 * sizeof(void*))
 base_t& sbo_poly<base_t, nSBOSize_>::get() noexcept
 {
     return *reinterpret_cast<base_t*>(m_Data.data());
 }
 
 template<class base_t, size_t nSBOSize_>
+    requires(nSBOSize_ > 2 * sizeof(void*))
 const base_t& sbo_poly<base_t, nSBOSize_>::get() const noexcept
 {
     return QX_CONST_CAST_THIS()->get();

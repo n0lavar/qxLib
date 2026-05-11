@@ -50,11 +50,11 @@ concept unit_enum_c = enumeration_c<T> && requires { units::traits<T>(); };
 template<arithmetic_c T, unit_enum_c unit_t>
 struct unit
 {
-    T      value;
-    unit_t type;
-
     constexpr      operator T() const noexcept;
     constexpr bool operator==(const unit<T, unit_t>& other) const noexcept;
+
+    T      value;
+    unit_t type;
 };
 
 /**
