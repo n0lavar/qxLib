@@ -66,7 +66,8 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="summary">
-<a href="#nested-classes">Classes</a>  </div>
+<a href="#nested-classes">Classes</a> &#124;
+<a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
 <div class="title">sbo_poly.h File Reference</div>  </div>
 </div><!--header-->
@@ -83,9 +84,12 @@ Classes</h2></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structqx_1_1sbo__poly__fittable__types.html">qx::sbo_poly_fittable_types&lt; sbo_poly_t, args_t &gt;</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1sbo__poly.html">qx::sbo_poly&lt; base_t, nSBOSize_ &gt;</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Small Buffer Object for polymorphic classes.  <a href="classqx_1_1sbo__poly.html#details">More...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:adf45d0abc21e1cab6f955ecbe10b488b"><td class="memTemplParams" colspan="2">template&lt;class base_t , size_t nSBOSize_&gt; </td></tr>
+<tr class="memitem:adf45d0abc21e1cab6f955ecbe10b488b"><td class="memTemplItemLeft" align="right" valign="top">&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="sbo__poly_8h.html#adf45d0abc21e1cab6f955ecbe10b488b">qx::requires</a> (nSBOSize_ &gt; 2 *sizeof(void *)) class <a class="el" href="classsbo__poly.html">sbo_poly</a></td></tr>
+<tr class="separator:adf45d0abc21e1cab6f955ecbe10b488b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><dl class="section author"><dt>Author</dt><dd>Khrapov </dd></dl>
@@ -93,7 +97,94 @@ Classes</h2></td></tr>
 <dl class="section copyright"><dt>Copyright</dt><dd>© Nick Khrapov, 2025. All right reserved. </dd></dl>
 
 <p class="definition">Definition in file <a class="el" href="sbo__poly_8h_source.html">sbo_poly.h</a>.</p>
-</div></div><!-- contents -->
+</div><h2 class="groupheader">Function Documentation</h2>
+<a id="adf45d0abc21e1cab6f955ecbe10b488b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adf45d0abc21e1cab6f955ecbe10b488b">&#9670;&nbsp;</a></span>requires()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class base_t , size_t nSBOSize_&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">qx::requires </td>
+          <td>(</td>
+          <td class="paramtype">nSBOSize_&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">2 *&#160;</td>
+          <td class="paramname"><em>sizeof</em>void *&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p><a class="el" href="classsbo__poly.html" title="Small Buffer Object for polymorphic classes.">sbo_poly</a> object constructor </p><dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">derived_t</td><td>- type inherited from base_t </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">object</td><td>- an object to store</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>operator= </p><dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">derived_t</td><td>- type inherited from base_t </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">object</td><td>- an object to store </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Return values</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">-</td><td>this object reference</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>Assign a new object to this SBO </p><dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">derived_t</td><td>- type inherited from base_t </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">object</td><td>- an object to store</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>Get object reference. Always valid. </p><dl class="retval"><dt>Return values</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">-</td><td>object reference</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>Get object reference. Always valid. </p><dl class="retval"><dt>Return values</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">-</td><td>object reference</td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="sbo__poly_8h_source.html#l00057">57</a> of file <a class="el" href="sbo__poly_8h_source.html">sbo_poly.h</a>.</p>
+
+</div>
+</div>
+</div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
