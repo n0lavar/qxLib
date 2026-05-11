@@ -121,11 +121,11 @@ $(function() {
 <div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="keyword">template</span>&lt;arithmetic_c T, unit_enum_c unit_t&gt;</div>
 <div class="line"><a name="l00051"></a><span class="lineno"><a class="line" href="structqx_1_1unit.html">   51</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structqx_1_1unit.html">unit</a></div>
 <div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;{</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    T      value;</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    unit_t type;</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    constexpr      <span class="keyword">operator</span> T() <span class="keyword">const</span> noexcept;</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    constexpr <span class="keywordtype">bool</span> operator==(<span class="keyword">const</span> <a class="code" href="structqx_1_1unit.html">unit&lt;T, unit_t&gt;</a>&amp; other) <span class="keyword">const</span> noexcept;</div>
 <div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160; </div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    constexpr      <span class="keyword">operator</span> T() <span class="keyword">const</span> noexcept;</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    constexpr <span class="keywordtype">bool</span> operator==(<span class="keyword">const</span> <a class="code" href="structqx_1_1unit.html">unit&lt;T, unit_t&gt;</a>&amp; other) <span class="keyword">const</span> noexcept;</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    T      value;</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    unit_t type;</div>
 <div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;};</div>
 <div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;<span class="comment"></span> </div>
 <div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;<span class="comment">/**</span></div>
