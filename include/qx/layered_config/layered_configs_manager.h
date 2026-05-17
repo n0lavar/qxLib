@@ -78,6 +78,7 @@ public:
     /**
         @brief   Parse command line arguments, environment variables, and default values.
         @details Should be called after set_args() and before get()/set() of any variable.
+                 You can call it multiple times during the app lifetime, for example, to load variables from different DLLs.
         @retval  - true all required variables are present and have valid values
     **/
     bool parse() noexcept;
