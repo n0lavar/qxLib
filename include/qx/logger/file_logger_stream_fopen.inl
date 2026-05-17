@@ -19,7 +19,6 @@ inline file_logger_stream_fopen::file_logger_stream_fopen(
 
     std::ios_base::sync_with_stdio(false);
 
-    QX_DISABLE_MSVC_WARNINGS(4996);
     m_pFile = std::fopen(
         path.generic_string().c_str(),
         streamConfig.eLogFilePolicy == log_file_policy::clear_then_upend ? "wb" : "ab");
@@ -29,7 +28,6 @@ inline file_logger_stream_fopen::file_logger_stream_fopen(
         details::get_cerr<char_type>::get() << QXT("Can't open log file: ") << path << QXT(", error: ") << sLastError;
         return;
     }
-    QX_RESTORE_MSVC_WARNINGS(4996);
 
     if (bufferSize.value > 0)
     {

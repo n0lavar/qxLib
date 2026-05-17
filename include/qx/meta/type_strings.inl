@@ -26,6 +26,72 @@ constexpr typename type_strings<T, char_t>::string_view_type type_strings<T, cha
 template<class T, class char_t>
 constexpr typename type_strings<T, char_t>::string_view_type type_strings<T, char_t>::create_signature()
 {
+    // Make an output for built-in types compiler independent.
+    // Note: this won't work for complied types (for example, std::array<int, 5>)
+
+    if constexpr (std::is_same_v<T, void>)
+        return "void";
+
+    else if constexpr (std::is_same_v<T, bool>)
+        return "bool";
+
+    else if constexpr (std::is_same_v<T, char>)
+        return "char";
+
+    else if constexpr (std::is_same_v<T, signed char>)
+        return "signed char";
+
+    else if constexpr (std::is_same_v<T, unsigned char>)
+        return "unsigned char";
+
+    else if constexpr (std::is_same_v<T, wchar_t>)
+        return "wchar_t";
+
+    else if constexpr (std::is_same_v<T, char8_t>)
+        return "char8_t";
+
+    else if constexpr (std::is_same_v<T, char16_t>)
+        return "char16_t";
+
+    else if constexpr (std::is_same_v<T, char32_t>)
+        return "char32_t";
+
+    else if constexpr (std::is_same_v<T, std::int8_t>)
+        return "int8_t";
+
+    else if constexpr (std::is_same_v<T, std::uint8_t>)
+        return "uint8_t";
+
+    else if constexpr (std::is_same_v<T, std::int16_t>)
+        return "int16_t";
+
+    else if constexpr (std::is_same_v<T, std::uint16_t>)
+        return "uint16_t";
+
+    else if constexpr (std::is_same_v<T, std::int32_t>)
+        return "int32_t";
+
+    else if constexpr (std::is_same_v<T, std::uint32_t>)
+        return "uint32_t";
+
+    else if constexpr (std::is_same_v<T, std::int64_t>)
+        return "int64_t";
+
+    else if constexpr (std::is_same_v<T, std::uint64_t>)
+        return "uint64_t";
+
+    else if constexpr (std::is_same_v<T, float>)
+        return "float";
+
+    else if constexpr (std::is_same_v<T, double>)
+        return "double";
+
+    else if constexpr (std::is_same_v<T, long double>)
+        return "long double";
+
+    else if constexpr (std::is_same_v<T, std::nullptr_t>)
+        return "nullptr_t";
+
     constexpr string_view_type svFunctionSignature = create_full_signature();
 
 #if QX_MSVC

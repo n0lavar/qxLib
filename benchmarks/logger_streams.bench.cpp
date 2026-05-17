@@ -192,10 +192,8 @@ public:
         m_pOldStdout = __fdopen(__dup(__fileno(stdout)), "w");
         m_pOldStderr = __fdopen(__dup(__fileno(stderr)), "w");
 
-        QX_DISABLE_MSVC_WARNINGS(4996);
         freopen("NUL", "w", stdout);
         freopen("NUL", "w", stderr);
-        QX_RESTORE_MSVC_WARNINGS(4996);
     }
 
     virtual void TearDown(::benchmark::State& state) override

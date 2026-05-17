@@ -17,8 +17,8 @@ TEST(type_strings, main)
 {
     {
         using type_strings = qx::type_strings<int, char>;
-        EXPECT_EQ(type_strings::get_name(), "int") << type_strings::get_name();
-        EXPECT_EQ(type_strings::get_signature(), "int") << type_strings::get_signature();
+        EXPECT_EQ(type_strings::get_name(), "int32_t") << type_strings::get_name();
+        EXPECT_EQ(type_strings::get_signature(), "int32_t") << type_strings::get_signature();
         EXPECT_EQ(type_strings::get_template_parameters().size(), 0);
     }
 

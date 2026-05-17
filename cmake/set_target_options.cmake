@@ -78,6 +78,7 @@ function(set_target_options _target)
 
         # disable the following warnings for the Debug configuration
         set(NON_DEBUG_WARNINGS
+            /wd4189 # 'variable' : local variable is initialized but not referenced			
             /wd4505 # 'function' : unreferenced local function has been removed
             /wd5233 # explicit lambda capture 'identifier' is not used
         )
@@ -88,6 +89,10 @@ function(set_target_options _target)
             $<$<CONFIG:Debug>: /INCREMENTAL>
             "/ignore:4098" # defaultlib 'library' conflicts with use of other libs; use /NODEFAULTLIB:library
             "/ignore:4099" # PDB 'filename' was not found with 'object/library' or at 'path'; linking object as if no debug info
+        )
+
+        target_compile_definitions(${_target} PRIVATE
+            _CRT_SECURE_NO_WARNINGS
         )
         
     endif()
