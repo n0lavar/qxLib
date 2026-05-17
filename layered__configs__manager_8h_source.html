@@ -149,60 +149,61 @@ $(function() {
 <div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;<span class="comment">    /**</span></div>
 <div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;<span class="comment">        @brief   Parse command line arguments, environment variables, and default values.</span></div>
 <div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;<span class="comment">        @details Should be called after set_args() and before get()/set() of any variable.</span></div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;<span class="comment">        @retval  - true all required variables are present and have valid values</span></div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;<span class="comment">    **/</span></div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="classqx_1_1layered__configs__manager.html#ad71135b1830d83b89e11c6a36252258c">parse</a>() noexcept;</div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;<span class="comment">    /**</span></div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;<span class="comment">        @brief  Get variable value by runtime name.</span></div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;<span class="comment">        @tparam T             - type of variable</span></div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;<span class="comment">        @param  svRuntimeName - runtime name of variable</span></div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;<span class="comment">        @retval               - optional with variable value if it is present, has valid value and correct type</span></div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;<span class="comment">    **/</span></div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;    <span class="keyword">template</span>&lt;<span class="keyword">class</span> T&gt;</div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;    std::optional&lt;T&gt; <a class="code" href="classqx_1_1layered__configs__manager.html#a9fd1751bf5efe5a619509a0ce8c80c44">get</a>(cstring_view svRuntimeName) <span class="keyword">const</span> noexcept;</div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;<span class="comment">    /**</span></div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;<span class="comment">        @brief  Set variable value by runtime name. Only set if the variable type matches.</span></div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;<span class="comment">        @tparam T             - type of variable</span></div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;<span class="comment">        @param  svRuntimeName - runtime name of variable</span></div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;<span class="comment">        @param  value         - new variable value</span></div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;<span class="comment">        @retval               - true if the value was set successfully</span></div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;<span class="comment">    **/</span></div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;    <span class="keyword">template</span>&lt;<span class="keyword">class</span> T&gt;</div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="classqx_1_1layered__configs__manager.html#adb3641af3325fe582779f59c415e11a2">set</a>(cstring_view svRuntimeName, T value) noexcept;</div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;<span class="comment">    /**</span></div>
-<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;<span class="comment">        @brief Clear all variables and command line arguments. You should call parse() after that to set variables again.</span></div>
-<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;<span class="comment">    **/</span></div>
-<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classqx_1_1layered__configs__manager.html#a7c0808eb07db404a7e3d6195b57a6f95">reset</a>() noexcept;</div>
-<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160; </div>
-<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;<span class="keyword">private</span>:<span class="comment"></span></div>
-<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;<span class="comment">    /**</span></div>
-<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;<span class="comment">        @brief  Add a variable to the manager. Called from variable builders</span></div>
-<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;<span class="comment">        @tparam T             - type of variable</span></div>
-<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;<span class="comment">        @param  svRuntimeName - runtime name of variable</span></div>
-<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;<span class="comment">        @param  data          - information about variable</span></div>
-<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;<span class="comment">        @param  defaultValue  - default variable value</span></div>
-<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;<span class="comment">    **/</span></div>
-<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;    <span class="keyword">template</span>&lt;<span class="keyword">class</span> T&gt;</div>
-<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;    <span class="keywordtype">void</span> add_variable(</div>
-<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;        cstring_view                                 svRuntimeName,</div>
-<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;        <span class="keyword">const</span> <a class="code" href="structqx_1_1details_1_1layered__config__variable__data.html">details::layered_config_variable_data</a>&amp; data,</div>
-<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;        T                                            defaultValue) noexcept;</div>
-<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160; </div>
-<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;    <a class="code" href="classqx_1_1basic__string.html">cstring</a>                m_sAppDescription;</div>
-<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;    std::span&lt;char* const&gt; m_Args;</div>
-<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160; </div>
-<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;    std::unordered_map&lt;cstring_view, details::layered_config_variable_data&gt; m_VariableData;</div>
-<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;    std::unordered_map&lt;cstring_view, std::any&gt;                              m_DefaultVariables;</div>
-<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;    std::unordered_map&lt;cstring_view, std::any&gt;                              m_Variables;</div>
-<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;};</div>
-<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160; </div>
-<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;} <span class="comment">// namespace qx</span></div>
-<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160; </div>
-<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="layered__configs__manager_8inl.html">qx/layered_config/layered_configs_manager.inl</a>&gt;</span></div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;<span class="comment">                 You can call it multiple times during the app lifetime, for example, to load variables from different DLLs.</span></div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;<span class="comment">        @retval  - true all required variables are present and have valid values</span></div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;<span class="comment">    **/</span></div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="classqx_1_1layered__configs__manager.html#ad71135b1830d83b89e11c6a36252258c">parse</a>() noexcept;</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;<span class="comment">    /**</span></div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;<span class="comment">        @brief  Get variable value by runtime name.</span></div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;<span class="comment">        @tparam T             - type of variable</span></div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;<span class="comment">        @param  svRuntimeName - runtime name of variable</span></div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;<span class="comment">        @retval               - optional with variable value if it is present, has valid value and correct type</span></div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;<span class="comment">    **/</span></div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;    <span class="keyword">template</span>&lt;<span class="keyword">class</span> T&gt;</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;    std::optional&lt;T&gt; <a class="code" href="classqx_1_1layered__configs__manager.html#a9fd1751bf5efe5a619509a0ce8c80c44">get</a>(cstring_view svRuntimeName) <span class="keyword">const</span> noexcept;</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;<span class="comment">    /**</span></div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;<span class="comment">        @brief  Set variable value by runtime name. Only set if the variable type matches.</span></div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;<span class="comment">        @tparam T             - type of variable</span></div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;<span class="comment">        @param  svRuntimeName - runtime name of variable</span></div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;<span class="comment">        @param  value         - new variable value</span></div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;<span class="comment">        @retval               - true if the value was set successfully</span></div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;<span class="comment">    **/</span></div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;    <span class="keyword">template</span>&lt;<span class="keyword">class</span> T&gt;</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="classqx_1_1layered__configs__manager.html#adb3641af3325fe582779f59c415e11a2">set</a>(cstring_view svRuntimeName, T value) noexcept;</div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;<span class="comment">    /**</span></div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;<span class="comment">        @brief Clear all variables and command line arguments. You should call parse() after that to set variables again.</span></div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;<span class="comment">    **/</span></div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classqx_1_1layered__configs__manager.html#a7c0808eb07db404a7e3d6195b57a6f95">reset</a>() noexcept;</div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160; </div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;<span class="keyword">private</span>:<span class="comment"></span></div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;<span class="comment">    /**</span></div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;<span class="comment">        @brief  Add a variable to the manager. Called from variable builders</span></div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;<span class="comment">        @tparam T             - type of variable</span></div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;<span class="comment">        @param  svRuntimeName - runtime name of variable</span></div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;<span class="comment">        @param  data          - information about variable</span></div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;<span class="comment">        @param  defaultValue  - default variable value</span></div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;<span class="comment">    **/</span></div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;    <span class="keyword">template</span>&lt;<span class="keyword">class</span> T&gt;</div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;    <span class="keywordtype">void</span> add_variable(</div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;        cstring_view                                 svRuntimeName,</div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;        <span class="keyword">const</span> <a class="code" href="structqx_1_1details_1_1layered__config__variable__data.html">details::layered_config_variable_data</a>&amp; data,</div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;        T                                            defaultValue) noexcept;</div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160; </div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;    <a class="code" href="classqx_1_1basic__string.html">cstring</a>                m_sAppDescription;</div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;    std::span&lt;char* const&gt; m_Args;</div>
+<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160; </div>
+<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;    std::unordered_map&lt;cstring_view, details::layered_config_variable_data&gt; m_VariableData;</div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;    std::unordered_map&lt;cstring_view, std::any&gt;                              m_DefaultVariables;</div>
+<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;    std::unordered_map&lt;cstring_view, std::any&gt;                              m_Variables;</div>
+<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;};</div>
+<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160; </div>
+<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;} <span class="comment">// namespace qx</span></div>
+<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160; </div>
+<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="layered__configs__manager_8inl.html">qx/layered_config/layered_configs_manager.inl</a>&gt;</span></div>
 <div class="ttc" id="aclassqx_1_1basic__string_html"><div class="ttname"><a href="classqx_1_1basic__string.html">qx::basic_string&lt; char &gt;</a></div></div>
 <div class="ttc" id="aclassqx_1_1layered__config__variable__builder_html"><div class="ttname"><a href="classqx_1_1layered__config__variable__builder.html">qx::layered_config_variable_builder</a></div><div class="ttdoc">A builder for creating layered_config_variable instances.</div><div class="ttdef"><b>Definition:</b> <a href="layered__config__variable_8h_source.html#l00068">layered_config_variable.h:69</a></div></div>
 <div class="ttc" id="aclassqx_1_1layered__configs__manager_html"><div class="ttname"><a href="classqx_1_1layered__configs__manager.html">qx::layered_configs_manager</a></div><div class="ttdoc">A singleton that manages layered configuration variables.</div><div class="ttdef"><b>Definition:</b> <a href="layered__configs__manager_8h_source.html#l00051">layered_configs_manager.h:52</a></div></div>

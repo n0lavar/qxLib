@@ -195,7 +195,7 @@ template&lt;class T &gt; </div>
 </div><div class="memdoc">
 
 <p>Parse command line arguments, environment variables, and default values. </p>
-<p>Should be called after <a class="el" href="classqx_1_1layered__configs__manager.html#ae20970c389ba665db76bc599778757c2" title="Set command line arguments.">set_args()</a> and before <a class="el" href="classqx_1_1layered__configs__manager.html#a9fd1751bf5efe5a619509a0ce8c80c44" title="Get variable value by runtime name.">get()</a>/set() of any variable. </p><dl class="retval"><dt>Return values</dt><dd>
+<p>Should be called after <a class="el" href="classqx_1_1layered__configs__manager.html#ae20970c389ba665db76bc599778757c2" title="Set command line arguments.">set_args()</a> and before <a class="el" href="classqx_1_1layered__configs__manager.html#a9fd1751bf5efe5a619509a0ce8c80c44" title="Get variable value by runtime name.">get()</a>/set() of any variable. You can call it multiple times during the app lifetime, for example, to load variables from different DLLs. </p><dl class="retval"><dt>Return values</dt><dd>
   <table class="retval">
     <tr><td class="paramname">-</td><td>true all required variables are present and have valid values </td></tr>
   </table>
