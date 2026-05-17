@@ -359,14 +359,14 @@ $(function() {
 <div class="line"><a name="l00288"></a><span class="lineno"><a class="line" href="classqx_1_1layered__configs__manager.html#adb3641af3325fe582779f59c415e11a2">  288</a></span>&#160;<span class="keyword">inline</span> <span class="keywordtype">bool</span> <a class="code" href="classqx_1_1layered__configs__manager.html#adb3641af3325fe582779f59c415e11a2">layered_configs_manager::set</a>(cstring_view svRuntimeName, T value) noexcept</div>
 <div class="line"><a name="l00289"></a><span class="lineno">  289</span>&#160;{</div>
 <div class="line"><a name="l00290"></a><span class="lineno">  290</span>&#160;    <span class="comment">// set a value only if types match</span></div>
-<div class="line"><a name="l00291"></a><span class="lineno">  291</span>&#160;    <span class="keyword">auto</span> it = m_DefaultVariables.find(svRuntimeName);</div>
+<div class="line"><a name="l00291"></a><span class="lineno">  291</span>&#160;    <span class="keyword">const</span> <span class="keyword">auto</span> it = m_DefaultVariables.find(svRuntimeName);</div>
 <div class="line"><a name="l00292"></a><span class="lineno">  292</span>&#160;    <span class="keywordflow">if</span> (it == m_DefaultVariables.end())</div>
 <div class="line"><a name="l00293"></a><span class="lineno">  293</span>&#160;        <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
 <div class="line"><a name="l00294"></a><span class="lineno">  294</span>&#160; </div>
 <div class="line"><a name="l00295"></a><span class="lineno">  295</span>&#160;    <span class="keywordflow">if</span> (!std::any_cast&lt;<span class="keyword">typename</span> details::layered_config_variable_type&lt;T&gt;::type&gt;(&amp;it-&gt;second))</div>
 <div class="line"><a name="l00296"></a><span class="lineno">  296</span>&#160;        <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
 <div class="line"><a name="l00297"></a><span class="lineno">  297</span>&#160; </div>
-<div class="line"><a name="l00298"></a><span class="lineno">  298</span>&#160;    m_Variables[svRuntimeName] = <span class="keyword">typename</span> details::layered_config_variable_type&lt;T&gt;::type(value);</div>
+<div class="line"><a name="l00298"></a><span class="lineno">  298</span>&#160;    m_Variables[svRuntimeName] = <span class="keyword">typename</span> details::layered_config_variable_type&lt;T&gt;::type(std::move(value));</div>
 <div class="line"><a name="l00299"></a><span class="lineno">  299</span>&#160;    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
 <div class="line"><a name="l00300"></a><span class="lineno">  300</span>&#160;}</div>
 <div class="line"><a name="l00301"></a><span class="lineno">  301</span>&#160; </div>
