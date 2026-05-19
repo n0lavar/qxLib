@@ -13,11 +13,17 @@
 #include <qx/asserts/asserts.h>
 #include <qx/logger/cout_logger_stream.h>
 
+#include <string>
+
 //V_EXCLUDE_PATH *.gtest.cpp
 
 QX_SET_FILE_CATEGORY(CatDefault);
 
 QX_DEFINE_CATEGORY(CatAssertsTests, qx::color::white());
+
+static_assert(qx::details::trim_assert_expression(QXT(" nValue\t")) == QXT("nValue"));
+static_assert(qx::details::split_assert_arguments(QXT("qx::assert_equal(nValue, 42)")).first == QXT("nValue"));
+static_assert(qx::details::split_assert_arguments(QXT("qx::assert_equal(nValue, 42)")).second == QXT("42"));
 
 class assert_exit_tests_fixture : public ::testing::Test
 {
@@ -355,3 +361,224 @@ TEST_ON_ASSERTION_RETURN(QX_EXPECT_RETURN_T(false, 1, "msg {}", 41),            
 TEST_ON_ASSERTION_RETURN(QX_EXPECT_RETURN_CT(false, CatAssertsTests, 1),                 false,       CatAssertsTests, qx::assert_type::expect, "");
 TEST_ON_ASSERTION_RETURN(QX_EXPECT_RETURN_CT(false, CatAssertsTests, 1, "msg {}", 41),   false,       CatAssertsTests, qx::assert_type::expect, "msg 41");
 // clang-format on
+
+class assert_compare_tests_fixture : public ::testing::Test
+{
+protected:
+    void SetUp() override
+    {
+        auto config          = qx::asserts_manager::get_instance().get_config();
+        config.bLogAssertion = false;
+        config.onAssertion   = [this](
+                                 qx::string_view svCondition,
+                                 const qx::category&,
+                                 qx::assert_type,
+                                 qx::string_view,
+                                 qx::string_view,
+                                 qx::string_view,
+                                 i32)
+        {
+            m_sCondition = svCondition;
+        };
+
+        qx::asserts_manager::get_instance().set_config(std::move(config));
+    }
+
+    void TearDown() override
+    {
+        qx::asserts_manager::get_instance().set_config(qx::asserts_manager::config());
+    }
+
+    void expect_condition(qx::string_view svExpectedCondition)
+    {
+        EXPECT_EQ(m_sCondition, svExpectedCondition);
+    }
+
+private:
+    qx::string m_sCondition;
+};
+
+TEST_F(assert_compare_tests_fixture, lvalue_rvalue)
+{
+    constexpr int nValue = 41;
+
+    EXPECT_FALSE(QX_EXPECT(qx::assert_equal(nValue, 42)));
+    expect_condition(QXT("Condition failed: nValue [41] == 42"));
+
+    EXPECT_FALSE(QX_EXPECT(qx::assert_not_equal(nValue, 41)));
+    expect_condition(QXT("Condition failed: nValue [41] != 41"));
+
+    EXPECT_FALSE(QX_EXPECT(qx::assert_less(nValue, 40)));
+    expect_condition(QXT("Condition failed: nValue [41] < 40"));
+
+    EXPECT_FALSE(QX_EXPECT(qx::assert_less_equal(nValue, 40)));
+    expect_condition(QXT("Condition failed: nValue [41] <= 40"));
+
+    EXPECT_FALSE(QX_EXPECT(qx::assert_greater(nValue, 42)));
+    expect_condition(QXT("Condition failed: nValue [41] > 42"));
+
+    EXPECT_FALSE(QX_EXPECT(qx::assert_greater_equal(nValue, 42)));
+    expect_condition(QXT("Condition failed: nValue [41] >= 42"));
+}
+
+TEST_F(assert_compare_tests_fixture, lvalue_lvalue)
+{
+    constexpr int nValue = 41;
+    constexpr int nOther = 42;
+    constexpr int nSame  = 41;
+
+    EXPECT_FALSE(QX_EXPECT(qx::assert_equal(nValue, nOther)));
+    expect_condition(QXT("Condition failed: nValue [41] == nOther [42]"));
+
+    EXPECT_FALSE(QX_EXPECT(qx::assert_not_equal(nValue, nSame)));
+    expect_condition(QXT("Condition failed: nValue [41] != nSame [41]"));
+
+    EXPECT_FALSE(QX_EXPECT(qx::assert_less(nOther, nValue)));
+    expect_condition(QXT("Condition failed: nOther [42] < nValue [41]"));
+
+    EXPECT_FALSE(QX_EXPECT(qx::assert_less_equal(nOther, nValue)));
+    expect_condition(QXT("Condition failed: nOther [42] <= nValue [41]"));
+
+    EXPECT_FALSE(QX_EXPECT(qx::assert_greater(nValue, nOther)));
+    expect_condition(QXT("Condition failed: nValue [41] > nOther [42]"));
+
+    EXPECT_FALSE(QX_EXPECT(qx::assert_greater_equal(nValue, nOther)));
+    expect_condition(QXT("Condition failed: nValue [41] >= nOther [42]"));
+}
+
+TEST_F(assert_compare_tests_fixture, rvalue_lvalue)
+{
+    constexpr int nValue = 41;
+
+    EXPECT_FALSE(QX_EXPECT(qx::assert_equal(42, nValue)));
+    expect_condition(QXT("Condition failed: 42 == nValue [41]"));
+
+    EXPECT_FALSE(QX_EXPECT(qx::assert_not_equal(41, nValue)));
+    expect_condition(QXT("Condition failed: 41 != nValue [41]"));
+
+    EXPECT_FALSE(QX_EXPECT(qx::assert_less(42, nValue)));
+    expect_condition(QXT("Condition failed: 42 < nValue [41]"));
+
+    EXPECT_FALSE(QX_EXPECT(qx::assert_less_equal(42, nValue)));
+    expect_condition(QXT("Condition failed: 42 <= nValue [41]"));
+
+    EXPECT_FALSE(QX_EXPECT(qx::assert_greater(40, nValue)));
+    expect_condition(QXT("Condition failed: 40 > nValue [41]"));
+
+    EXPECT_FALSE(QX_EXPECT(qx::assert_greater_equal(40, nValue)));
+    expect_condition(QXT("Condition failed: 40 >= nValue [41]"));
+}
+
+TEST_F(assert_compare_tests_fixture, rvalue_rvalue)
+{
+    EXPECT_FALSE(QX_EXPECT(qx::assert_equal(41, 42)));
+    expect_condition(QXT("Condition failed: 41 == 42"));
+
+    EXPECT_FALSE(QX_EXPECT(qx::assert_not_equal(41, 41)));
+    expect_condition(QXT("Condition failed: 41 != 41"));
+
+    EXPECT_FALSE(QX_EXPECT(qx::assert_less(41, 40)));
+    expect_condition(QXT("Condition failed: 41 < 40"));
+
+    EXPECT_FALSE(QX_EXPECT(qx::assert_less_equal(41, 40)));
+    expect_condition(QXT("Condition failed: 41 <= 40"));
+
+    EXPECT_FALSE(QX_EXPECT(qx::assert_greater(41, 42)));
+    expect_condition(QXT("Condition failed: 41 > 42"));
+
+    EXPECT_FALSE(QX_EXPECT(qx::assert_greater_equal(41, 42)));
+    expect_condition(QXT("Condition failed: 41 >= 42"));
+}
+
+TEST_F(assert_compare_tests_fixture, string_lvalue_rvalue)
+{
+    const qx::string sValue = QXT("b");
+
+    EXPECT_FALSE(QX_EXPECT(qx::assert_equal(sValue, qx::string(QXT("c")))));
+    expect_condition(QXT("Condition failed: sValue [b] == c"));
+
+    EXPECT_FALSE(QX_EXPECT(qx::assert_not_equal(sValue, qx::string(QXT("b")))));
+    expect_condition(QXT("Condition failed: sValue [b] != b"));
+
+    EXPECT_FALSE(QX_EXPECT(qx::assert_less(sValue, qx::string(QXT("a")))));
+    expect_condition(QXT("Condition failed: sValue [b] < a"));
+
+    EXPECT_FALSE(QX_EXPECT(qx::assert_less_equal(sValue, qx::string(QXT("a")))));
+    expect_condition(QXT("Condition failed: sValue [b] <= a"));
+
+    EXPECT_FALSE(QX_EXPECT(qx::assert_greater(sValue, qx::string(QXT("c")))));
+    expect_condition(QXT("Condition failed: sValue [b] > c"));
+
+    EXPECT_FALSE(QX_EXPECT(qx::assert_greater_equal(sValue, qx::string(QXT("c")))));
+    expect_condition(QXT("Condition failed: sValue [b] >= c"));
+}
+
+TEST_F(assert_compare_tests_fixture, string_lvalue_lvalue)
+{
+    const qx::string sValue = QXT("b");
+    const qx::string sOther = QXT("c");
+    const qx::string sSame  = QXT("b");
+    const qx::string sLess  = QXT("a");
+
+    EXPECT_FALSE(QX_EXPECT(qx::assert_equal(sValue, sOther)));
+    expect_condition(QXT("Condition failed: sValue [b] == sOther [c]"));
+
+    EXPECT_FALSE(QX_EXPECT(qx::assert_not_equal(sValue, sSame)));
+    expect_condition(QXT("Condition failed: sValue [b] != sSame [b]"));
+
+    EXPECT_FALSE(QX_EXPECT(qx::assert_less(sValue, sLess)));
+    expect_condition(QXT("Condition failed: sValue [b] < sLess [a]"));
+
+    EXPECT_FALSE(QX_EXPECT(qx::assert_less_equal(sValue, sLess)));
+    expect_condition(QXT("Condition failed: sValue [b] <= sLess [a]"));
+
+    EXPECT_FALSE(QX_EXPECT(qx::assert_greater(sValue, sOther)));
+    expect_condition(QXT("Condition failed: sValue [b] > sOther [c]"));
+
+    EXPECT_FALSE(QX_EXPECT(qx::assert_greater_equal(sValue, sOther)));
+    expect_condition(QXT("Condition failed: sValue [b] >= sOther [c]"));
+}
+
+TEST_F(assert_compare_tests_fixture, string_rvalue_lvalue)
+{
+    const qx::string sValue = QXT("b");
+
+    EXPECT_FALSE(QX_EXPECT(qx::assert_equal(qx::string(QXT("c")), sValue)));
+    expect_condition(QXT("Condition failed: c == sValue [b]"));
+
+    EXPECT_FALSE(QX_EXPECT(qx::assert_not_equal(qx::string(QXT("b")), sValue)));
+    expect_condition(QXT("Condition failed: b != sValue [b]"));
+
+    EXPECT_FALSE(QX_EXPECT(qx::assert_less(qx::string(QXT("c")), sValue)));
+    expect_condition(QXT("Condition failed: c < sValue [b]"));
+
+    EXPECT_FALSE(QX_EXPECT(qx::assert_less_equal(qx::string(QXT("c")), sValue)));
+    expect_condition(QXT("Condition failed: c <= sValue [b]"));
+
+    EXPECT_FALSE(QX_EXPECT(qx::assert_greater(qx::string(QXT("a")), sValue)));
+    expect_condition(QXT("Condition failed: a > sValue [b]"));
+
+    EXPECT_FALSE(QX_EXPECT(qx::assert_greater_equal(qx::string(QXT("a")), sValue)));
+    expect_condition(QXT("Condition failed: a >= sValue [b]"));
+}
+
+TEST_F(assert_compare_tests_fixture, string_rvalue_rvalue)
+{
+    EXPECT_FALSE(QX_EXPECT(qx::assert_equal(qx::string(QXT("b")), qx::string(QXT("c")))));
+    expect_condition(QXT("Condition failed: b == c"));
+
+    EXPECT_FALSE(QX_EXPECT(qx::assert_not_equal(qx::string(QXT("b")), qx::string(QXT("b")))));
+    expect_condition(QXT("Condition failed: b != b"));
+
+    EXPECT_FALSE(QX_EXPECT(qx::assert_less(qx::string(QXT("b")), qx::string(QXT("a")))));
+    expect_condition(QXT("Condition failed: b < a"));
+
+    EXPECT_FALSE(QX_EXPECT(qx::assert_less_equal(qx::string(QXT("b")), qx::string(QXT("a")))));
+    expect_condition(QXT("Condition failed: b <= a"));
+
+    EXPECT_FALSE(QX_EXPECT(qx::assert_greater(qx::string(QXT("b")), qx::string(QXT("c")))));
+    expect_condition(QXT("Condition failed: b > c"));
+
+    EXPECT_FALSE(QX_EXPECT(qx::assert_greater_equal(qx::string(QXT("b")), qx::string(QXT("c")))));
+    expect_condition(QXT("Condition failed: b >= c"));
+}

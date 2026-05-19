@@ -9,6 +9,7 @@
 #pragma once
 
 #include <qx/algo/predicates.h>
+#include <qx/asserts/assert_compare.h>
 #include <qx/asserts/error_context_stream.h>
 #include <qx/logger/logger.h>
 #include <qx/macros/details/macro_user_message.h>
@@ -138,7 +139,7 @@ private:
     static_cast<result_t>(                                                                                         \
         qx::predicates::is_valid(condition)                                                                        \
         || (qx::asserts_manager::get_instance().do_assert(                                                         \
-                QXT(#condition),                                                                                   \
+                qx::details::get_assert_condition_string(QXT(#condition), condition),                              \
                 category,                                                                                          \
                 assert_type,                                                                                       \
                 std::move(_QX_MACRO_USER_MESSAGE(static_cast<qx::string_pool<>*>(nullptr), ##__VA_ARGS__).sValue), \

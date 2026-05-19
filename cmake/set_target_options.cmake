@@ -78,11 +78,12 @@ function(set_target_options _target)
 
         # disable the following warnings for the Debug configuration
         set(NON_DEBUG_WARNINGS
+            /wd4127 # conditional expression is constant			
             /wd4189 # 'variable' : local variable is initialized but not referenced			
             /wd4505 # 'function' : unreferenced local function has been removed
             /wd5233 # explicit lambda capture 'identifier' is not used
         )
-        add_compile_options_for_configs(${_target} "Debug" "${NON_DEBUG_WARNINGS}")
+        add_compile_options_for_configs(${_target} "Debug;RelWithDebInfo" "${NON_DEBUG_WARNINGS}")
         
         target_link_options(${_target} PRIVATE 
             $<$<CONFIG:Release>: /NODEFAULTLIB:LIBCMTD>
