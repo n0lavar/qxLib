@@ -1,6 +1,7 @@
 var searchData=
 [
-  ['newtons_5fmethod_1611',['newtons_method',['../newtons__method_8h.html#a3c06385a0d9462f922ade663bb54d7ba',1,'qx']]],
-  ['normalize_5funit_1612',['normalize_unit',['../base_8h.html#a536d2f7694801a8f968114e769729270',1,'qx::normalize_unit(unit&lt; T, unit_t &gt; unit) noexcept'],['../base_8h.html#ab5c85b32fc13cfc5455f878eeece72b8',1,'qx::normalize_unit(T value, unit_t eInitialType) noexcept']]],
+  ['newtons_5fmethod_1610',['newtons_method',['../newtons__method_8h.html#a3c06385a0d9462f922ade663bb54d7ba',1,'qx']]],
+  ['normalize_5funit_1611',['normalize_unit',['../base_8h.html#a536d2f7694801a8f968114e769729270',1,'qx::normalize_unit(unit&lt; T, unit_t &gt; unit) noexcept'],['../base_8h.html#ab5c85b32fc13cfc5455f878eeece72b8',1,'qx::normalize_unit(T value, unit_t eInitialType) noexcept']]],
+  ['not_5fequal_1612',['not_equal',['../assert__compare_8h.html#a5a46e3106d4028fd36f85ded80b153d4',1,'qx::assert_operators']]],
   ['notify_1613',['notify',['../classqx_1_1subject.html#acaa4f354b33930beff8b791d89d449e8',1,'qx::subject']]]
 ];
