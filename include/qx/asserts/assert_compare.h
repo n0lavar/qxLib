@@ -10,6 +10,7 @@
 
 #include <qx/algo/predicates.h>
 #include <qx/containers/string/format.h>
+#include <qx/containers/string/string_literal.h>
 
 #include <functional>
 #include <type_traits>

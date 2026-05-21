@@ -13,7 +13,10 @@
 #include <qx/asserts/asserts.h>
 #include <qx/logger/cout_logger_stream.h>
 
+#include <array>
+#include <sstream>
 #include <string>
+#include <utility>
 
 //V_EXCLUDE_PATH *.gtest.cpp
 
@@ -24,6 +27,16 @@ QX_DEFINE_CATEGORY(CatAssertsTests, qx::color::white());
 static_assert(qx::details::trim_assert_expression(QXT(" nValue\t")) == QXT("nValue"));
 static_assert(qx::details::split_assert_arguments(QXT("qx::assert_equal(nValue, 42)")).first == QXT("nValue"));
 static_assert(qx::details::split_assert_arguments(QXT("qx::assert_equal(nValue, 42)")).second == QXT("42"));
+static_assert(qx::details::split_assert_arguments(QXT("qx::assert_equal(foo(a, b), 42)")).first == QXT("foo(a, b)"));
+static_assert(
+    qx::details::split_assert_arguments(QXT("qx::assert_equal(value<std::pair<int, int>>(), 42)")).first
+    == QXT("value<std::pair<int, int>>()"));
+static_assert(
+    qx::details::split_assert_arguments(QXT("qx::assert_equal(values[index(a, b)], 42)")).first
+    == QXT("values[index(a, b)]"));
+static_assert(qx::details::split_assert_arguments(QXT("qx::assert_equal(\"a, b\", 42)")).first == QXT("\"a, b\""));
+static_assert(qx::details::split_assert_arguments(QXT("qx::assert_equal(',', 42)")).first == QXT("','"));
+static_assert(qx::details::split_assert_arguments(QXT("qx::assert_equal((a, b), 42)")).first == QXT("(a, b)"));
 
 class assert_exit_tests_fixture : public ::testing::Test
 {
@@ -490,6 +503,101 @@ TEST_F(assert_compare_tests_fixture, rvalue_rvalue)
     expect_condition(QXT("Condition failed: 41 >= 42"));
 }
 
+constexpr int assert_compare_add(int nLeft, int nRight) noexcept
+{
+    return nLeft + nRight;
+}
+
+template<class T>
+constexpr int assert_compare_value() noexcept
+{
+    return 42;
+}
+
+constexpr size_t assert_compare_index(size_t nLeft, size_t nRight) noexcept
+{
+    return nLeft + nRight;
+}
+
+template<class char_t>
+constexpr int assert_compare_length(const char_t* pszValue) noexcept
+{
+    int nLength = 0;
+    while (pszValue[nLength])
+        ++nLength;
+    return nLength;
+}
+
+template<class char_t>
+constexpr int assert_compare_char(char_t chValue) noexcept
+{
+    return chValue == ',' ? 42 : 0;
+}
+
+TEST_F(assert_compare_tests_fixture, parser_function_call)
+{
+    EXPECT_FALSE(QX_EXPECT(qx::assert_equal(assert_compare_add(20, 22), 43)));
+    expect_condition(QXT("Condition failed: assert_compare_add(20, 22) [42] == 43"));
+}
+
+TEST_F(assert_compare_tests_fixture, parser_template_id)
+{
+    EXPECT_FALSE(QX_EXPECT(qx::assert_equal(assert_compare_value<std::pair<int, int>>(), 43)));
+    expect_condition(QXT("Condition failed: assert_compare_value<std::pair<int, int>>() [42] == 43"));
+}
+
+TEST_F(assert_compare_tests_fixture, parser_subscript)
+{
+    constexpr std::array<int, 2> values = { 0, 42 };
+
+    EXPECT_FALSE(QX_EXPECT(qx::assert_equal(values[assert_compare_index(0, 1)], 43)));
+    expect_condition(QXT("Condition failed: values[assert_compare_index(0, 1)] [42] == 43"));
+}
+
+TEST_F(assert_compare_tests_fixture, parser_string_literal)
+{
+    EXPECT_FALSE(QX_EXPECT(qx::assert_equal(assert_compare_length("a, b"), 5)));
+    expect_condition(QXT("Condition failed: assert_compare_length(\"a, b\") [4] == 5"));
+}
+
+TEST_F(assert_compare_tests_fixture, parser_char_literal)
+{
+    EXPECT_FALSE(QX_EXPECT(qx::assert_equal(assert_compare_char(','), 43)));
+    expect_condition(QXT("Condition failed: assert_compare_char(',') [42] == 43"));
+}
+
+TEST_F(assert_compare_tests_fixture, parser_comma_operator)
+{
+    constexpr int nValue = 42;
+
+    EXPECT_FALSE(QX_EXPECT(qx::assert_equal((assert_compare_add(0, 0), nValue), 43)));
+    expect_condition(QXT("Condition failed: (assert_compare_add(0, 0), nValue) [42] == 43"));
+}
+
+TEST_F(assert_compare_tests_fixture, parser_brace_init)
+{
+    EXPECT_FALSE(
+        QX_EXPECT(qx::assert_equal(std::pair<int, int> { 20, 22 }.first + std::pair<int, int> { 20, 22 }.second, 43)));
+    expect_condition(QXT(
+        "Condition failed: std::pair<int, int> { 20, 22 }.first + std::pair<int, int> { 20, 22 }.second [42] == 43"));
+}
+TEST_F(assert_compare_tests_fixture, streamoff_expression)
+{
+    std::stringstream inputFile;
+    inputFile.str("0123456789012345678901234567890123456789");
+    inputFile.seekg(20);
+
+    constexpr std::streamoff nRowSize  = 22;
+    constexpr std::streamoff nFileSize = 43;
+
+    EXPECT_FALSE(QX_EXPECT(qx::assert_equal(
+        static_cast<std::streamoff>(inputFile.tellg()) + nRowSize,
+        static_cast<std::streamoff>(nFileSize))));
+    expect_condition(
+        QXT("Condition failed: static_cast<std::streamoff>(inputFile.tellg()) + nRowSize [42] == "
+            "static_cast<std::streamoff>(nFileSize) [43]"));
+}
+
 TEST_F(assert_compare_tests_fixture, string_lvalue_rvalue)
 {
     const qx::string sValue = QXT("b");
@@ -581,4 +689,18 @@ TEST_F(assert_compare_tests_fixture, string_rvalue_rvalue)
 
     EXPECT_FALSE(QX_EXPECT(qx::assert_greater_equal(qx::string(QXT("b")), qx::string(QXT("c")))));
     expect_condition(QXT("Condition failed: b >= c"));
+}
+TEST_F(assert_compare_tests_fixture, std_string)
+{
+    const std::basic_string<qx::char_type> sValue = QXT("b");
+    const std::basic_string<qx::char_type> sOther = QXT("c");
+
+    EXPECT_FALSE(QX_EXPECT(qx::assert_equal(sValue, sOther)));
+    expect_condition(QXT("Condition failed: sValue [b] == sOther [c]"));
+
+    EXPECT_FALSE(QX_EXPECT(qx::assert_equal(sValue, std::basic_string<qx::char_type>(QXT("c")))));
+    expect_condition(QXT("Condition failed: sValue [b] == c"));
+
+    EXPECT_FALSE(QX_EXPECT(qx::assert_less(sOther, sValue)));
+    expect_condition(QXT("Condition failed: sOther [c] < sValue [b]"));
 }
