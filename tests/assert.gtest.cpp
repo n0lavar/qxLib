@@ -25,18 +25,18 @@ QX_SET_FILE_CATEGORY(CatDefault);
 QX_DEFINE_CATEGORY(CatAssertsTests, qx::color::white());
 
 static_assert(qx::details::trim_assert_expression(QXT(" nValue\t")) == QXT("nValue"));
-static_assert(qx::details::split_assert_arguments(QXT("qx::assert_equal(nValue, 42)")).first == QXT("nValue"));
-static_assert(qx::details::split_assert_arguments(QXT("qx::assert_equal(nValue, 42)")).second == QXT("42"));
-static_assert(qx::details::split_assert_arguments(QXT("qx::assert_equal(foo(a, b), 42)")).first == QXT("foo(a, b)"));
+static_assert(qx::details::split_assert_arguments(QXT("qx::assert_eq(nValue, 42)")).first == QXT("nValue"));
+static_assert(qx::details::split_assert_arguments(QXT("qx::assert_eq(nValue, 42)")).second == QXT("42"));
+static_assert(qx::details::split_assert_arguments(QXT("qx::assert_eq(foo(a, b), 42)")).first == QXT("foo(a, b)"));
 static_assert(
-    qx::details::split_assert_arguments(QXT("qx::assert_equal(value<std::pair<int, int>>(), 42)")).first
+    qx::details::split_assert_arguments(QXT("qx::assert_eq(value<std::pair<int, int>>(), 42)")).first
     == QXT("value<std::pair<int, int>>()"));
 static_assert(
-    qx::details::split_assert_arguments(QXT("qx::assert_equal(values[index(a, b)], 42)")).first
+    qx::details::split_assert_arguments(QXT("qx::assert_eq(values[index(a, b)], 42)")).first
     == QXT("values[index(a, b)]"));
-static_assert(qx::details::split_assert_arguments(QXT("qx::assert_equal(\"a, b\", 42)")).first == QXT("\"a, b\""));
-static_assert(qx::details::split_assert_arguments(QXT("qx::assert_equal(',', 42)")).first == QXT("','"));
-static_assert(qx::details::split_assert_arguments(QXT("qx::assert_equal((a, b), 42)")).first == QXT("(a, b)"));
+static_assert(qx::details::split_assert_arguments(QXT("qx::assert_eq(\"a, b\", 42)")).first == QXT("\"a, b\""));
+static_assert(qx::details::split_assert_arguments(QXT("qx::assert_eq(',', 42)")).first == QXT("','"));
+static_assert(qx::details::split_assert_arguments(QXT("qx::assert_eq((a, b), 42)")).first == QXT("(a, b)"));
 
 class assert_exit_tests_fixture : public ::testing::Test
 {
@@ -415,23 +415,23 @@ TEST_F(assert_compare_tests_fixture, lvalue_rvalue)
 {
     constexpr int nValue = 41;
 
-    EXPECT_FALSE(QX_EXPECT(qx::assert_equal(nValue, 42)));
-    expect_condition(QXT("Condition failed: nValue [41] == 42"));
+    EXPECT_FALSE(QX_EXPECT(qx::assert_eq(nValue, 42)));
+    expect_condition(QXT("nValue [41] == 42"));
 
-    EXPECT_FALSE(QX_EXPECT(qx::assert_not_equal(nValue, 41)));
-    expect_condition(QXT("Condition failed: nValue [41] != 41"));
+    EXPECT_FALSE(QX_EXPECT(qx::assert_ne(nValue, 41)));
+    expect_condition(QXT("nValue [41] != 41"));
 
-    EXPECT_FALSE(QX_EXPECT(qx::assert_less(nValue, 40)));
-    expect_condition(QXT("Condition failed: nValue [41] < 40"));
+    EXPECT_FALSE(QX_EXPECT(qx::assert_lt(nValue, 40)));
+    expect_condition(QXT("nValue [41] < 40"));
 
-    EXPECT_FALSE(QX_EXPECT(qx::assert_less_equal(nValue, 40)));
-    expect_condition(QXT("Condition failed: nValue [41] <= 40"));
+    EXPECT_FALSE(QX_EXPECT(qx::assert_le(nValue, 40)));
+    expect_condition(QXT("nValue [41] <= 40"));
 
-    EXPECT_FALSE(QX_EXPECT(qx::assert_greater(nValue, 42)));
-    expect_condition(QXT("Condition failed: nValue [41] > 42"));
+    EXPECT_FALSE(QX_EXPECT(qx::assert_gt(nValue, 42)));
+    expect_condition(QXT("nValue [41] > 42"));
 
-    EXPECT_FALSE(QX_EXPECT(qx::assert_greater_equal(nValue, 42)));
-    expect_condition(QXT("Condition failed: nValue [41] >= 42"));
+    EXPECT_FALSE(QX_EXPECT(qx::assert_ge(nValue, 42)));
+    expect_condition(QXT("nValue [41] >= 42"));
 }
 
 TEST_F(assert_compare_tests_fixture, lvalue_lvalue)
@@ -440,67 +440,67 @@ TEST_F(assert_compare_tests_fixture, lvalue_lvalue)
     constexpr int nOther = 42;
     constexpr int nSame  = 41;
 
-    EXPECT_FALSE(QX_EXPECT(qx::assert_equal(nValue, nOther)));
-    expect_condition(QXT("Condition failed: nValue [41] == nOther [42]"));
+    EXPECT_FALSE(QX_EXPECT(qx::assert_eq(nValue, nOther)));
+    expect_condition(QXT("nValue [41] == nOther [42]"));
 
-    EXPECT_FALSE(QX_EXPECT(qx::assert_not_equal(nValue, nSame)));
-    expect_condition(QXT("Condition failed: nValue [41] != nSame [41]"));
+    EXPECT_FALSE(QX_EXPECT(qx::assert_ne(nValue, nSame)));
+    expect_condition(QXT("nValue [41] != nSame [41]"));
 
-    EXPECT_FALSE(QX_EXPECT(qx::assert_less(nOther, nValue)));
-    expect_condition(QXT("Condition failed: nOther [42] < nValue [41]"));
+    EXPECT_FALSE(QX_EXPECT(qx::assert_lt(nOther, nValue)));
+    expect_condition(QXT("nOther [42] < nValue [41]"));
 
-    EXPECT_FALSE(QX_EXPECT(qx::assert_less_equal(nOther, nValue)));
-    expect_condition(QXT("Condition failed: nOther [42] <= nValue [41]"));
+    EXPECT_FALSE(QX_EXPECT(qx::assert_le(nOther, nValue)));
+    expect_condition(QXT("nOther [42] <= nValue [41]"));
 
-    EXPECT_FALSE(QX_EXPECT(qx::assert_greater(nValue, nOther)));
-    expect_condition(QXT("Condition failed: nValue [41] > nOther [42]"));
+    EXPECT_FALSE(QX_EXPECT(qx::assert_gt(nValue, nOther)));
+    expect_condition(QXT("nValue [41] > nOther [42]"));
 
-    EXPECT_FALSE(QX_EXPECT(qx::assert_greater_equal(nValue, nOther)));
-    expect_condition(QXT("Condition failed: nValue [41] >= nOther [42]"));
+    EXPECT_FALSE(QX_EXPECT(qx::assert_ge(nValue, nOther)));
+    expect_condition(QXT("nValue [41] >= nOther [42]"));
 }
 
 TEST_F(assert_compare_tests_fixture, rvalue_lvalue)
 {
     constexpr int nValue = 41;
 
-    EXPECT_FALSE(QX_EXPECT(qx::assert_equal(42, nValue)));
-    expect_condition(QXT("Condition failed: 42 == nValue [41]"));
+    EXPECT_FALSE(QX_EXPECT(qx::assert_eq(42, nValue)));
+    expect_condition(QXT("42 == nValue [41]"));
 
-    EXPECT_FALSE(QX_EXPECT(qx::assert_not_equal(41, nValue)));
-    expect_condition(QXT("Condition failed: 41 != nValue [41]"));
+    EXPECT_FALSE(QX_EXPECT(qx::assert_ne(41, nValue)));
+    expect_condition(QXT("41 != nValue [41]"));
 
-    EXPECT_FALSE(QX_EXPECT(qx::assert_less(42, nValue)));
-    expect_condition(QXT("Condition failed: 42 < nValue [41]"));
+    EXPECT_FALSE(QX_EXPECT(qx::assert_lt(42, nValue)));
+    expect_condition(QXT("42 < nValue [41]"));
 
-    EXPECT_FALSE(QX_EXPECT(qx::assert_less_equal(42, nValue)));
-    expect_condition(QXT("Condition failed: 42 <= nValue [41]"));
+    EXPECT_FALSE(QX_EXPECT(qx::assert_le(42, nValue)));
+    expect_condition(QXT("42 <= nValue [41]"));
 
-    EXPECT_FALSE(QX_EXPECT(qx::assert_greater(40, nValue)));
-    expect_condition(QXT("Condition failed: 40 > nValue [41]"));
+    EXPECT_FALSE(QX_EXPECT(qx::assert_gt(40, nValue)));
+    expect_condition(QXT("40 > nValue [41]"));
 
-    EXPECT_FALSE(QX_EXPECT(qx::assert_greater_equal(40, nValue)));
-    expect_condition(QXT("Condition failed: 40 >= nValue [41]"));
+    EXPECT_FALSE(QX_EXPECT(qx::assert_ge(40, nValue)));
+    expect_condition(QXT("40 >= nValue [41]"));
 }
 
 TEST_F(assert_compare_tests_fixture, rvalue_rvalue)
 {
-    EXPECT_FALSE(QX_EXPECT(qx::assert_equal(41, 42)));
-    expect_condition(QXT("Condition failed: 41 == 42"));
+    EXPECT_FALSE(QX_EXPECT(qx::assert_eq(41, 42)));
+    expect_condition(QXT("41 == 42"));
 
-    EXPECT_FALSE(QX_EXPECT(qx::assert_not_equal(41, 41)));
-    expect_condition(QXT("Condition failed: 41 != 41"));
+    EXPECT_FALSE(QX_EXPECT(qx::assert_ne(41, 41)));
+    expect_condition(QXT("41 != 41"));
 
-    EXPECT_FALSE(QX_EXPECT(qx::assert_less(41, 40)));
-    expect_condition(QXT("Condition failed: 41 < 40"));
+    EXPECT_FALSE(QX_EXPECT(qx::assert_lt(41, 40)));
+    expect_condition(QXT("41 < 40"));
 
-    EXPECT_FALSE(QX_EXPECT(qx::assert_less_equal(41, 40)));
-    expect_condition(QXT("Condition failed: 41 <= 40"));
+    EXPECT_FALSE(QX_EXPECT(qx::assert_le(41, 40)));
+    expect_condition(QXT("41 <= 40"));
 
-    EXPECT_FALSE(QX_EXPECT(qx::assert_greater(41, 42)));
-    expect_condition(QXT("Condition failed: 41 > 42"));
+    EXPECT_FALSE(QX_EXPECT(qx::assert_gt(41, 42)));
+    expect_condition(QXT("41 > 42"));
 
-    EXPECT_FALSE(QX_EXPECT(qx::assert_greater_equal(41, 42)));
-    expect_condition(QXT("Condition failed: 41 >= 42"));
+    EXPECT_FALSE(QX_EXPECT(qx::assert_ge(41, 42)));
+    expect_condition(QXT("41 >= 42"));
 }
 
 constexpr int assert_compare_add(int nLeft, int nRight) noexcept
@@ -536,50 +536,49 @@ constexpr int assert_compare_char(char_t chValue) noexcept
 
 TEST_F(assert_compare_tests_fixture, parser_function_call)
 {
-    EXPECT_FALSE(QX_EXPECT(qx::assert_equal(assert_compare_add(20, 22), 43)));
-    expect_condition(QXT("Condition failed: assert_compare_add(20, 22) [42] == 43"));
+    EXPECT_FALSE(QX_EXPECT(qx::assert_eq(assert_compare_add(20, 22), 43)));
+    expect_condition(QXT("assert_compare_add(20, 22) [42] == 43"));
 }
 
 TEST_F(assert_compare_tests_fixture, parser_template_id)
 {
-    EXPECT_FALSE(QX_EXPECT(qx::assert_equal(assert_compare_value<std::pair<int, int>>(), 43)));
-    expect_condition(QXT("Condition failed: assert_compare_value<std::pair<int, int>>() [42] == 43"));
+    EXPECT_FALSE(QX_EXPECT(qx::assert_eq(assert_compare_value<std::pair<int, int>>(), 43)));
+    expect_condition(QXT("assert_compare_value<std::pair<int, int>>() [42] == 43"));
 }
 
 TEST_F(assert_compare_tests_fixture, parser_subscript)
 {
     constexpr std::array<int, 2> values = { 0, 42 };
 
-    EXPECT_FALSE(QX_EXPECT(qx::assert_equal(values[assert_compare_index(0, 1)], 43)));
-    expect_condition(QXT("Condition failed: values[assert_compare_index(0, 1)] [42] == 43"));
+    EXPECT_FALSE(QX_EXPECT(qx::assert_eq(values[assert_compare_index(0, 1)], 43)));
+    expect_condition(QXT("values[assert_compare_index(0, 1)] [42] == 43"));
 }
 
 TEST_F(assert_compare_tests_fixture, parser_string_literal)
 {
-    EXPECT_FALSE(QX_EXPECT(qx::assert_equal(assert_compare_length("a, b"), 5)));
-    expect_condition(QXT("Condition failed: assert_compare_length(\"a, b\") [4] == 5"));
+    EXPECT_FALSE(QX_EXPECT(qx::assert_eq(assert_compare_length("a, b"), 5)));
+    expect_condition(QXT("assert_compare_length(\"a, b\") [4] == 5"));
 }
 
 TEST_F(assert_compare_tests_fixture, parser_char_literal)
 {
-    EXPECT_FALSE(QX_EXPECT(qx::assert_equal(assert_compare_char(','), 43)));
-    expect_condition(QXT("Condition failed: assert_compare_char(',') [42] == 43"));
+    EXPECT_FALSE(QX_EXPECT(qx::assert_eq(assert_compare_char(','), 43)));
+    expect_condition(QXT("assert_compare_char(',') [42] == 43"));
 }
 
 TEST_F(assert_compare_tests_fixture, parser_comma_operator)
 {
     constexpr int nValue = 42;
 
-    EXPECT_FALSE(QX_EXPECT(qx::assert_equal((assert_compare_add(0, 0), nValue), 43)));
-    expect_condition(QXT("Condition failed: (assert_compare_add(0, 0), nValue) [42] == 43"));
+    EXPECT_FALSE(QX_EXPECT(qx::assert_eq((assert_compare_add(0, 0), nValue), 43)));
+    expect_condition(QXT("(assert_compare_add(0, 0), nValue) [42] == 43"));
 }
 
 TEST_F(assert_compare_tests_fixture, parser_brace_init)
 {
     EXPECT_FALSE(
-        QX_EXPECT(qx::assert_equal(std::pair<int, int> { 20, 22 }.first + std::pair<int, int> { 20, 22 }.second, 43)));
-    expect_condition(QXT(
-        "Condition failed: std::pair<int, int> { 20, 22 }.first + std::pair<int, int> { 20, 22 }.second [42] == 43"));
+        QX_EXPECT(qx::assert_eq(std::pair<int, int> { 20, 22 }.first + std::pair<int, int> { 20, 22 }.second, 43)));
+    expect_condition(QXT("std::pair<int, int> { 20, 22 }.first + std::pair<int, int> { 20, 22 }.second [42] == 43"));
 }
 TEST_F(assert_compare_tests_fixture, streamoff_expression)
 {
@@ -590,11 +589,11 @@ TEST_F(assert_compare_tests_fixture, streamoff_expression)
     constexpr std::streamoff nRowSize  = 22;
     constexpr std::streamoff nFileSize = 43;
 
-    EXPECT_FALSE(QX_EXPECT(qx::assert_equal(
+    EXPECT_FALSE(QX_EXPECT(qx::assert_eq(
         static_cast<std::streamoff>(inputFile.tellg()) + nRowSize,
         static_cast<std::streamoff>(nFileSize))));
     expect_condition(
-        QXT("Condition failed: static_cast<std::streamoff>(inputFile.tellg()) + nRowSize [42] == "
+        QXT("static_cast<std::streamoff>(inputFile.tellg()) + nRowSize [42] == "
             "static_cast<std::streamoff>(nFileSize) [43]"));
 }
 
@@ -602,23 +601,23 @@ TEST_F(assert_compare_tests_fixture, string_lvalue_rvalue)
 {
     const qx::string sValue = QXT("b");
 
-    EXPECT_FALSE(QX_EXPECT(qx::assert_equal(sValue, qx::string(QXT("c")))));
-    expect_condition(QXT("Condition failed: sValue [b] == c"));
+    EXPECT_FALSE(QX_EXPECT(qx::assert_eq(sValue, qx::string(QXT("c")))));
+    expect_condition(QXT("sValue [b] == c"));
 
-    EXPECT_FALSE(QX_EXPECT(qx::assert_not_equal(sValue, qx::string(QXT("b")))));
-    expect_condition(QXT("Condition failed: sValue [b] != b"));
+    EXPECT_FALSE(QX_EXPECT(qx::assert_ne(sValue, qx::string(QXT("b")))));
+    expect_condition(QXT("sValue [b] != b"));
 
-    EXPECT_FALSE(QX_EXPECT(qx::assert_less(sValue, qx::string(QXT("a")))));
-    expect_condition(QXT("Condition failed: sValue [b] < a"));
+    EXPECT_FALSE(QX_EXPECT(qx::assert_lt(sValue, qx::string(QXT("a")))));
+    expect_condition(QXT("sValue [b] < a"));
 
-    EXPECT_FALSE(QX_EXPECT(qx::assert_less_equal(sValue, qx::string(QXT("a")))));
-    expect_condition(QXT("Condition failed: sValue [b] <= a"));
+    EXPECT_FALSE(QX_EXPECT(qx::assert_le(sValue, qx::string(QXT("a")))));
+    expect_condition(QXT("sValue [b] <= a"));
 
-    EXPECT_FALSE(QX_EXPECT(qx::assert_greater(sValue, qx::string(QXT("c")))));
-    expect_condition(QXT("Condition failed: sValue [b] > c"));
+    EXPECT_FALSE(QX_EXPECT(qx::assert_gt(sValue, qx::string(QXT("c")))));
+    expect_condition(QXT("sValue [b] > c"));
 
-    EXPECT_FALSE(QX_EXPECT(qx::assert_greater_equal(sValue, qx::string(QXT("c")))));
-    expect_condition(QXT("Condition failed: sValue [b] >= c"));
+    EXPECT_FALSE(QX_EXPECT(qx::assert_ge(sValue, qx::string(QXT("c")))));
+    expect_condition(QXT("sValue [b] >= c"));
 }
 
 TEST_F(assert_compare_tests_fixture, string_lvalue_lvalue)
@@ -628,79 +627,80 @@ TEST_F(assert_compare_tests_fixture, string_lvalue_lvalue)
     const qx::string sSame  = QXT("b");
     const qx::string sLess  = QXT("a");
 
-    EXPECT_FALSE(QX_EXPECT(qx::assert_equal(sValue, sOther)));
-    expect_condition(QXT("Condition failed: sValue [b] == sOther [c]"));
+    EXPECT_FALSE(QX_EXPECT(qx::assert_eq(sValue, sOther)));
+    expect_condition(QXT("sValue [b] == sOther [c]"));
 
-    EXPECT_FALSE(QX_EXPECT(qx::assert_not_equal(sValue, sSame)));
-    expect_condition(QXT("Condition failed: sValue [b] != sSame [b]"));
+    EXPECT_FALSE(QX_EXPECT(qx::assert_ne(sValue, sSame)));
+    expect_condition(QXT("sValue [b] != sSame [b]"));
 
-    EXPECT_FALSE(QX_EXPECT(qx::assert_less(sValue, sLess)));
-    expect_condition(QXT("Condition failed: sValue [b] < sLess [a]"));
+    EXPECT_FALSE(QX_EXPECT(qx::assert_lt(sValue, sLess)));
+    expect_condition(QXT("sValue [b] < sLess [a]"));
 
-    EXPECT_FALSE(QX_EXPECT(qx::assert_less_equal(sValue, sLess)));
-    expect_condition(QXT("Condition failed: sValue [b] <= sLess [a]"));
+    EXPECT_FALSE(QX_EXPECT(qx::assert_le(sValue, sLess)));
+    expect_condition(QXT("sValue [b] <= sLess [a]"));
 
-    EXPECT_FALSE(QX_EXPECT(qx::assert_greater(sValue, sOther)));
-    expect_condition(QXT("Condition failed: sValue [b] > sOther [c]"));
+    EXPECT_FALSE(QX_EXPECT(qx::assert_gt(sValue, sOther)));
+    expect_condition(QXT("sValue [b] > sOther [c]"));
 
-    EXPECT_FALSE(QX_EXPECT(qx::assert_greater_equal(sValue, sOther)));
-    expect_condition(QXT("Condition failed: sValue [b] >= sOther [c]"));
+    EXPECT_FALSE(QX_EXPECT(qx::assert_ge(sValue, sOther)));
+    expect_condition(QXT("sValue [b] >= sOther [c]"));
 }
 
 TEST_F(assert_compare_tests_fixture, string_rvalue_lvalue)
 {
     const qx::string sValue = QXT("b");
 
-    EXPECT_FALSE(QX_EXPECT(qx::assert_equal(qx::string(QXT("c")), sValue)));
-    expect_condition(QXT("Condition failed: c == sValue [b]"));
+    EXPECT_FALSE(QX_EXPECT(qx::assert_eq(qx::string(QXT("c")), sValue)));
+    expect_condition(QXT("c == sValue [b]"));
 
-    EXPECT_FALSE(QX_EXPECT(qx::assert_not_equal(qx::string(QXT("b")), sValue)));
-    expect_condition(QXT("Condition failed: b != sValue [b]"));
+    EXPECT_FALSE(QX_EXPECT(qx::assert_ne(qx::string(QXT("b")), sValue)));
+    expect_condition(QXT("b != sValue [b]"));
 
-    EXPECT_FALSE(QX_EXPECT(qx::assert_less(qx::string(QXT("c")), sValue)));
-    expect_condition(QXT("Condition failed: c < sValue [b]"));
+    EXPECT_FALSE(QX_EXPECT(qx::assert_lt(qx::string(QXT("c")), sValue)));
+    expect_condition(QXT("c < sValue [b]"));
 
-    EXPECT_FALSE(QX_EXPECT(qx::assert_less_equal(qx::string(QXT("c")), sValue)));
-    expect_condition(QXT("Condition failed: c <= sValue [b]"));
+    EXPECT_FALSE(QX_EXPECT(qx::assert_le(qx::string(QXT("c")), sValue)));
+    expect_condition(QXT("c <= sValue [b]"));
 
-    EXPECT_FALSE(QX_EXPECT(qx::assert_greater(qx::string(QXT("a")), sValue)));
-    expect_condition(QXT("Condition failed: a > sValue [b]"));
+    EXPECT_FALSE(QX_EXPECT(qx::assert_gt(qx::string(QXT("a")), sValue)));
+    expect_condition(QXT("a > sValue [b]"));
 
-    EXPECT_FALSE(QX_EXPECT(qx::assert_greater_equal(qx::string(QXT("a")), sValue)));
-    expect_condition(QXT("Condition failed: a >= sValue [b]"));
+    EXPECT_FALSE(QX_EXPECT(qx::assert_ge(qx::string(QXT("a")), sValue)));
+    expect_condition(QXT("a >= sValue [b]"));
 }
 
 TEST_F(assert_compare_tests_fixture, string_rvalue_rvalue)
 {
-    EXPECT_FALSE(QX_EXPECT(qx::assert_equal(qx::string(QXT("b")), qx::string(QXT("c")))));
-    expect_condition(QXT("Condition failed: b == c"));
+    EXPECT_FALSE(QX_EXPECT(qx::assert_eq(qx::string(QXT("b")), qx::string(QXT("c")))));
+    expect_condition(QXT("b == c"));
 
-    EXPECT_FALSE(QX_EXPECT(qx::assert_not_equal(qx::string(QXT("b")), qx::string(QXT("b")))));
-    expect_condition(QXT("Condition failed: b != b"));
+    EXPECT_FALSE(QX_EXPECT(qx::assert_ne(qx::string(QXT("b")), qx::string(QXT("b")))));
+    expect_condition(QXT("b != b"));
 
-    EXPECT_FALSE(QX_EXPECT(qx::assert_less(qx::string(QXT("b")), qx::string(QXT("a")))));
-    expect_condition(QXT("Condition failed: b < a"));
+    EXPECT_FALSE(QX_EXPECT(qx::assert_lt(qx::string(QXT("b")), qx::string(QXT("a")))));
+    expect_condition(QXT("b < a"));
 
-    EXPECT_FALSE(QX_EXPECT(qx::assert_less_equal(qx::string(QXT("b")), qx::string(QXT("a")))));
-    expect_condition(QXT("Condition failed: b <= a"));
+    EXPECT_FALSE(QX_EXPECT(qx::assert_le(qx::string(QXT("b")), qx::string(QXT("a")))));
+    expect_condition(QXT("b <= a"));
 
-    EXPECT_FALSE(QX_EXPECT(qx::assert_greater(qx::string(QXT("b")), qx::string(QXT("c")))));
-    expect_condition(QXT("Condition failed: b > c"));
+    EXPECT_FALSE(QX_EXPECT(qx::assert_gt(qx::string(QXT("b")), qx::string(QXT("c")))));
+    expect_condition(QXT("b > c"));
 
-    EXPECT_FALSE(QX_EXPECT(qx::assert_greater_equal(qx::string(QXT("b")), qx::string(QXT("c")))));
-    expect_condition(QXT("Condition failed: b >= c"));
+    EXPECT_FALSE(QX_EXPECT(qx::assert_ge(qx::string(QXT("b")), qx::string(QXT("c")))));
+    expect_condition(QXT("b >= c"));
 }
+
 TEST_F(assert_compare_tests_fixture, std_string)
 {
     const std::basic_string<qx::char_type> sValue = QXT("b");
     const std::basic_string<qx::char_type> sOther = QXT("c");
 
-    EXPECT_FALSE(QX_EXPECT(qx::assert_equal(sValue, sOther)));
-    expect_condition(QXT("Condition failed: sValue [b] == sOther [c]"));
+    EXPECT_FALSE(QX_EXPECT(qx::assert_eq(sValue, sOther)));
+    expect_condition(QXT("sValue [b] == sOther [c]"));
 
-    EXPECT_FALSE(QX_EXPECT(qx::assert_equal(sValue, std::basic_string<qx::char_type>(QXT("c")))));
-    expect_condition(QXT("Condition failed: sValue [b] == c"));
+    EXPECT_FALSE(QX_EXPECT(qx::assert_eq(sValue, std::basic_string<qx::char_type>(QXT("c")))));
+    expect_condition(QXT("sValue [b] == c"));
 
-    EXPECT_FALSE(QX_EXPECT(qx::assert_less(sOther, sValue)));
-    expect_condition(QXT("Condition failed: sOther [c] < sValue [b]"));
+    EXPECT_FALSE(QX_EXPECT(qx::assert_lt(sOther, sValue)));
+    expect_condition(QXT("sOther [c] < sValue [b]"));
 }

@@ -19,6 +19,9 @@
 namespace qx
 {
 
+namespace details
+{
+
 /**
 
     @class   assert_comparison
@@ -67,84 +70,119 @@ public:
     **/
     constexpr const auto& right() const noexcept;
 
-    /**
-        @brief  Create assertion condition text with operand values.
-        @param  svCondition - original condition expression string
-        @retval             - condition text for assertion diagnostics
-    **/
-    string make_assert_condition_string(string_view svCondition) const noexcept;
-
 private:
     left_t  m_Left;
     right_t m_Right;
 };
 
+} // namespace details
+
 template<class left_t, class right_t, class operation_t>
-struct predicates::validator<assert_comparison<left_t, right_t, operation_t>>
+struct predicates::validator<details::assert_comparison<left_t, right_t, operation_t>>
 {
-    static constexpr bool is_valid(const assert_comparison<left_t, right_t, operation_t>& value) noexcept(
+    static constexpr bool is_valid(const details::assert_comparison<left_t, right_t, operation_t>& value) noexcept(
         noexcept(value.result()));
 };
 
 /**
-    @brief  Compare two values for equality and preserve values for assertion diagnostics.
-    @param  left  - left operand
-    @param  right - right operand
-    @retval       - assertion comparison object
+    @brief   Compare two values for equality and preserve values for assertion diagnostics.
+    @details When used in macro assertions, this allows you to see both the names and values of variables
+    @param   left  - left operand
+    @param   right - right operand
+    @retval        - assertion comparison object
+
+    @code
+    QX_EXPECT(qx::assert_eq(nValue, nOther)); // "nValue [41] == nOther [42]"
+    @endcode 
 **/
 template<class left_t, class right_t>
-constexpr auto assert_equal(left_t&& left, right_t&& right) noexcept(noexcept(
-    assert_comparison<left_t, right_t, std::equal_to<>>(std::forward<left_t>(left), std::forward<right_t>(right))));
+constexpr auto assert_eq(left_t&& left, right_t&& right) noexcept(
+    noexcept(details::assert_comparison<left_t, right_t, std::equal_to<>>(
+        std::forward<left_t>(left),
+        std::forward<right_t>(right))));
 
 /**
-    @brief  Compare two values for inequality and preserve values for assertion diagnostics.
-    @param  left  - left operand
-    @param  right - right operand
-    @retval       - assertion comparison object
+    @brief   Compare two values for inequality and preserve values for assertion diagnostics.
+    @details When used in macro assertions, this allows you to see both the names and values of variables
+    @param   left  - left operand
+    @param   right - right operand
+    @retval        - assertion comparison object
+
+    @code
+    QX_EXPECT(qx::assert_ne(nValue, nSame); // "nValue [41] != nSame [41]"
+    @endcode 
 **/
 template<class left_t, class right_t>
-constexpr auto assert_not_equal(left_t&& left, right_t&& right) noexcept(noexcept(
-    assert_comparison<left_t, right_t, std::not_equal_to<>>(std::forward<left_t>(left), std::forward<right_t>(right))));
+constexpr auto assert_ne(left_t&& left, right_t&& right) noexcept(
+    noexcept(details::assert_comparison<left_t, right_t, std::not_equal_to<>>(
+        std::forward<left_t>(left),
+        std::forward<right_t>(right))));
 
 /**
-    @brief  Compare whether left value is less than right value and preserve values for assertion diagnostics.
-    @param  left  - left operand
-    @param  right - right operand
-    @retval       - assertion comparison object
+    @brief   Compare whether left value is less than right value and preserve values for assertion diagnostics.
+    @details When used in macro assertions, this allows you to see both the names and values of variables
+    @param   left  - left operand
+    @param   right - right operand
+    @retval        - assertion comparison object
+
+    @code
+    QX_EXPECT(qx::assert_lt(nOther, nValue)); // "nOther [42] < nValue [41]"
+    @endcode 
 **/
 template<class left_t, class right_t>
-constexpr auto assert_less(left_t&& left, right_t&& right) noexcept(noexcept(
-    assert_comparison<left_t, right_t, std::less<>>(std::forward<left_t>(left), std::forward<right_t>(right))));
+constexpr auto assert_lt(left_t&& left, right_t&& right) noexcept(
+    noexcept(details::assert_comparison<left_t, right_t, std::less<>>(
+        std::forward<left_t>(left),
+        std::forward<right_t>(right))));
 
 /**
-    @brief  Compare whether left value is less than or equal to right value and preserve values for assertion diagnostics.
-    @param  left  - left operand
-    @param  right - right operand
-    @retval       - assertion comparison object
+    @brief   Compare whether left value is less than or equal to right value and preserve values for assertion diagnostics.
+    @details When used in macro assertions, this allows you to see both the names and values of variables
+    @param   left  - left operand
+    @param   right - right operand
+    @retval        - assertion comparison object
+
+    @code
+    QX_EXPECT(qx::assert_le(nOther, nValue)); // "nOther [42] <= nValue [41]"
+    @endcode 
 **/
 template<class left_t, class right_t>
-constexpr auto assert_less_equal(left_t&& left, right_t&& right) noexcept(noexcept(
-    assert_comparison<left_t, right_t, std::less_equal<>>(std::forward<left_t>(left), std::forward<right_t>(right))));
+constexpr auto assert_le(left_t&& left, right_t&& right) noexcept(
+    noexcept(details::assert_comparison<left_t, right_t, std::less_equal<>>(
+        std::forward<left_t>(left),
+        std::forward<right_t>(right))));
 
 /**
-    @brief  Compare whether left value is greater than right value and preserve values for assertion diagnostics.
-    @param  left  - left operand
-    @param  right - right operand
-    @retval       - assertion comparison object
+    @brief   Compare whether left value is greater than right value and preserve values for assertion diagnostics.
+    @details When used in macro assertions, this allows you to see both the names and values of variables
+    @param   left  - left operand
+    @param   right - right operand
+    @retval        - assertion comparison object
+
+    @code
+    QX_EXPECT(qx::assert_gt(nValue, nOther)); // "nValue [41] > nOther [42]"
+    @endcode 
 **/
 template<class left_t, class right_t>
-constexpr auto assert_greater(left_t&& left, right_t&& right) noexcept(noexcept(
-    assert_comparison<left_t, right_t, std::greater<>>(std::forward<left_t>(left), std::forward<right_t>(right))));
+constexpr auto assert_gt(left_t&& left, right_t&& right) noexcept(
+    noexcept(details::assert_comparison<left_t, right_t, std::greater<>>(
+        std::forward<left_t>(left),
+        std::forward<right_t>(right))));
 
 /**
-    @brief  Compare whether left value is greater than or equal to right value and preserve values for assertion diagnostics.
-    @param  left  - left operand
-    @param  right - right operand
-    @retval       - assertion comparison object
+    @brief   Compare whether left value is greater than or equal to right value and preserve values for assertion diagnostics.
+    @details When used in macro assertions, this allows you to see both the names and values of variables
+    @param   left  - left operand
+    @param   right - right operand
+    @retval        - assertion comparison object
+
+    @code
+    QX_EXPECT(qx::assert_ge(nValue, nOther)); // "nValue [41] >= nOther [42]"
+    @endcode 
 **/
 template<class left_t, class right_t>
-constexpr auto assert_greater_equal(left_t&& left, right_t&& right) noexcept(
-    noexcept(assert_comparison<left_t, right_t, std::greater_equal<>>(
+constexpr auto assert_ge(left_t&& left, right_t&& right) noexcept(
+    noexcept(details::assert_comparison<left_t, right_t, std::greater_equal<>>(
         std::forward<left_t>(left),
         std::forward<right_t>(right))));
 

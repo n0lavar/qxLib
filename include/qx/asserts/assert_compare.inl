@@ -371,13 +371,11 @@ inline string get_assert_condition_string(const assert_comparison<left_t, right_
     constexpr auto svRightExpression = split.second;
 
     return qx::format(
-        QXT("Condition failed: {} {} {}"),
+        QXT("{} {} {}"),
         make_assert_operand_string<std::is_lvalue_reference_v<left_t>>(svLeftExpression, condition.left()),
         assert_operation_symbol<operation_t>::symbol(),
         make_assert_operand_string<std::is_lvalue_reference_v<right_t>>(svRightExpression, condition.right()));
 }
-
-} // namespace details
 
 template<class left_t, class right_t, class operation_t>
 constexpr assert_comparison<left_t, right_t, operation_t>::assert_comparison(left_t&& left, right_t&& right) noexcept(
@@ -412,74 +410,77 @@ constexpr const auto& assert_comparison<left_t, right_t, operation_t>::right() c
     return m_Right;
 }
 
-template<class left_t, class right_t, class operation_t>
-inline string assert_comparison<left_t, right_t, operation_t>::make_assert_condition_string(
-    string_view svCondition) const noexcept
-{
-    const auto [svLeftExpression, svRightExpression] = details::split_assert_arguments(svCondition);
-
-    return qx::format(
-        QXT("Condition failed: {} {} {}"),
-        details::make_assert_operand_string<std::is_lvalue_reference_v<left_t>>(svLeftExpression, left()),
-        details::assert_operation_symbol<operation_t>::symbol(),
-        details::make_assert_operand_string<std::is_lvalue_reference_v<right_t>>(svRightExpression, right()));
-}
-
-template<class left_t, class right_t>
-constexpr auto assert_equal(left_t&& left, right_t&& right) noexcept(noexcept(
-    assert_comparison<left_t, right_t, std::equal_to<>>(std::forward<left_t>(left), std::forward<right_t>(right))))
-{
-    return assert_comparison<left_t, right_t, std::equal_to<>>(
-        std::forward<left_t>(left),
-        std::forward<right_t>(right));
-}
-
-template<class left_t, class right_t>
-constexpr auto assert_not_equal(left_t&& left, right_t&& right) noexcept(noexcept(
-    assert_comparison<left_t, right_t, std::not_equal_to<>>(std::forward<left_t>(left), std::forward<right_t>(right))))
-{
-    return assert_comparison<left_t, right_t, std::not_equal_to<>>(
-        std::forward<left_t>(left),
-        std::forward<right_t>(right));
-}
-
-template<class left_t, class right_t>
-constexpr auto assert_less(left_t&& left, right_t&& right) noexcept(
-    noexcept(assert_comparison<left_t, right_t, std::less<>>(std::forward<left_t>(left), std::forward<right_t>(right))))
-{
-    return assert_comparison<left_t, right_t, std::less<>>(std::forward<left_t>(left), std::forward<right_t>(right));
-}
-
-template<class left_t, class right_t>
-constexpr auto assert_less_equal(left_t&& left, right_t&& right) noexcept(noexcept(
-    assert_comparison<left_t, right_t, std::less_equal<>>(std::forward<left_t>(left), std::forward<right_t>(right))))
-{
-    return assert_comparison<left_t, right_t, std::less_equal<>>(
-        std::forward<left_t>(left),
-        std::forward<right_t>(right));
-}
-
-template<class left_t, class right_t>
-constexpr auto assert_greater(left_t&& left, right_t&& right) noexcept(noexcept(
-    assert_comparison<left_t, right_t, std::greater<>>(std::forward<left_t>(left), std::forward<right_t>(right))))
-{
-    return assert_comparison<left_t, right_t, std::greater<>>(std::forward<left_t>(left), std::forward<right_t>(right));
-}
-
-template<class left_t, class right_t>
-constexpr auto assert_greater_equal(left_t&& left, right_t&& right) noexcept(noexcept(
-    assert_comparison<left_t, right_t, std::greater_equal<>>(std::forward<left_t>(left), std::forward<right_t>(right))))
-{
-    return assert_comparison<left_t, right_t, std::greater_equal<>>(
-        std::forward<left_t>(left),
-        std::forward<right_t>(right));
-}
+} // namespace details
 
 template<class left_t, class right_t, class operation_t>
-constexpr bool predicates::validator<assert_comparison<left_t, right_t, operation_t>>::is_valid(
-    const assert_comparison<left_t, right_t, operation_t>& value) noexcept(noexcept(value.result()))
+constexpr bool predicates::validator<details::assert_comparison<left_t, right_t, operation_t>>::is_valid(
+    const details::assert_comparison<left_t, right_t, operation_t>& value) noexcept(noexcept(value.result()))
 {
     return value.result();
+}
+
+template<class left_t, class right_t>
+constexpr auto assert_eq(left_t&& left, right_t&& right) noexcept(
+    noexcept(details::assert_comparison<left_t, right_t, std::equal_to<>>(
+        std::forward<left_t>(left),
+        std::forward<right_t>(right))))
+{
+    return details::assert_comparison<left_t, right_t, std::equal_to<>>(
+        std::forward<left_t>(left),
+        std::forward<right_t>(right));
+}
+
+template<class left_t, class right_t>
+constexpr auto assert_ne(left_t&& left, right_t&& right) noexcept(
+    noexcept(details::assert_comparison<left_t, right_t, std::not_equal_to<>>(
+        std::forward<left_t>(left),
+        std::forward<right_t>(right))))
+{
+    return details::assert_comparison<left_t, right_t, std::not_equal_to<>>(
+        std::forward<left_t>(left),
+        std::forward<right_t>(right));
+}
+
+template<class left_t, class right_t>
+constexpr auto assert_lt(left_t&& left, right_t&& right) noexcept(noexcept(
+    details::assert_comparison<left_t, right_t, std::less<>>(std::forward<left_t>(left), std::forward<right_t>(right))))
+{
+    return details::assert_comparison<left_t, right_t, std::less<>>(
+        std::forward<left_t>(left),
+        std::forward<right_t>(right));
+}
+
+template<class left_t, class right_t>
+constexpr auto assert_le(left_t&& left, right_t&& right) noexcept(
+    noexcept(details::assert_comparison<left_t, right_t, std::less_equal<>>(
+        std::forward<left_t>(left),
+        std::forward<right_t>(right))))
+{
+    return details::assert_comparison<left_t, right_t, std::less_equal<>>(
+        std::forward<left_t>(left),
+        std::forward<right_t>(right));
+}
+
+template<class left_t, class right_t>
+constexpr auto assert_gt(left_t&& left, right_t&& right) noexcept(
+    noexcept(details::assert_comparison<left_t, right_t, std::greater<>>(
+        std::forward<left_t>(left),
+        std::forward<right_t>(right))))
+{
+    return details::assert_comparison<left_t, right_t, std::greater<>>(
+        std::forward<left_t>(left),
+        std::forward<right_t>(right));
+}
+
+template<class left_t, class right_t>
+constexpr auto assert_ge(left_t&& left, right_t&& right) noexcept(
+    noexcept(details::assert_comparison<left_t, right_t, std::greater_equal<>>(
+        std::forward<left_t>(left),
+        std::forward<right_t>(right))))
+{
+    return details::assert_comparison<left_t, right_t, std::greater_equal<>>(
+        std::forward<left_t>(left),
+        std::forward<right_t>(right));
 }
 
 } // namespace qx
